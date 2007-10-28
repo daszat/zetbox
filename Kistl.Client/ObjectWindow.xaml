@@ -1,0 +1,16 @@
+﻿<Window x:Class="Kistl.Client.ObjectWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="ObjectWindow" Height="331" Width="381"
+    Loaded="Window_Loaded">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Save" Click="MenuItem_Click_Save" />
+                <MenuItem Header="Close" Click="MenuItem_Click_Close" />
+            </MenuItem>
+        </Menu>
+        <StackPanel Name="data">
+        </StackPanel>
+    </DockPanel>
+</Window>

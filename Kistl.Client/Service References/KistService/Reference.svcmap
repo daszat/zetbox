@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="79456343-703d-4a90-93d2-d12382f4e892" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6666/KistlService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="KistlService1.xsd" MetadataType="Schema" ID="02a57a8a-f1a1-4d2c-b9ad-ed82cebd9026" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd1" />
+    <MetadataFile FileName="KistlService.wsdl" MetadataType="Wsdl" ID="ada39adb-d1be-4a9d-b5f5-9e0a73db269f" SourceId="1" SourceUrl="http://localhost:6666/KistlService?wsdl" />
+    <MetadataFile FileName="KistlService.disco" MetadataType="Disco" ID="dc9004bc-fb53-41ff-9185-22a9234c0fdb" SourceId="1" SourceUrl="http://localhost:6666/KistlService?disco" />
+    <MetadataFile FileName="KistlService2.xsd" MetadataType="Schema" ID="8f84ce3b-4dd5-4649-90b3-5d7b332d87d9" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

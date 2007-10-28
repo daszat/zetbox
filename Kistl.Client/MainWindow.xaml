@@ -1,0 +1,16 @@
+﻿<Window x:Class="Kistl.Client.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:my="clr-namespace:Kistl.Client.Controls"
+    Title="Window1" Height="300" Width="300">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" />
+            </MenuItem>
+        </Menu>
+        <my:ObjectList x:Name="lst" 
+            SourceServerObjectType="Kistl.App.Projekte.ProjektServer, Kistl.App.Projekte"
+            SourceClientObjectType="Kistl.App.Projekte.ProjektClient, Kistl.App.Projekte"/>
+    </DockPanel>
+</Window>
