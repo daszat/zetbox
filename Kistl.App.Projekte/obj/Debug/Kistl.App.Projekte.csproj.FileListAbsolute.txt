@@ -1,7 +1,0 @@
-D:\Programmierung\Kistl\Kistl.App.Projekte\obj\Debug\ResolveAssemblyReference.cache
-D:\Programmierung\Kistl\Kistl.App.Projekte\bin\Debug\Kistl.App.Projekte.dll
-D:\Programmierung\Kistl\Kistl.App.Projekte\bin\Debug\Kistl.App.Projekte.pdb
-D:\Programmierung\Kistl\Kistl.App.Projekte\bin\Debug\Kistl.API.dll
-D:\Programmierung\Kistl\Kistl.App.Projekte\bin\Debug\Kistl.API.pdb
-D:\Programmierung\Kistl\Kistl.App.Projekte\obj\Debug\Kistl.App.Projekte.dll
-D:\Programmierung\Kistl\Kistl.App.Projekte\obj\Debug\Kistl.App.Projekte.pdb
