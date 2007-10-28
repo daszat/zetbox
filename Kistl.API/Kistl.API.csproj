@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Helper.cs" />
     <Compile Include="IClientObject.cs" />
+    <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
     <Compile Include="IKistlService.cs" />
     <Compile Include="IServerObject.cs" />

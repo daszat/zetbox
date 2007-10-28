@@ -32,7 +32,7 @@ namespace Kistl.Client.Controls
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                IClientObject client = ClientObjectHelper.GetClientObject(SourceClientObjectType);
+                IClientObject client = Helper.GetClientObject(SourceClientObjectType);
                 if (string.IsNullOrEmpty(PropertyName))
                 {
                     DestinationClientObjectType = SourceClientObjectType;

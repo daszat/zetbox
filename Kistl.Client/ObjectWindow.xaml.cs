@@ -38,7 +38,7 @@ namespace Kistl.Client
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                client = ClientObjectHelper.GetClientObject(ClientObjectType);
+                client = Helper.GetClientObject(ClientObjectType);
                 obj = client.GetObjectFromXML(App.Service.GetObject(ServerObjectType, ObjectID));
 
                 foreach (System.Reflection.PropertyInfo p in obj.GetType().GetProperties())

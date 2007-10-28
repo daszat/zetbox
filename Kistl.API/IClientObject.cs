@@ -6,25 +6,34 @@ using System.Collections;
 
 namespace Kistl.API
 {
+    public interface IClientObjectFactory
+    {
+        IClientObject GetClientObject();
+    }
+
     public interface IClientObject
     {
         IEnumerable GetArrayFromXML(string xml);
         IDataObject GetObjectFromXML(string xml);
     }
 
-    public class ClientObjectHelper
+    public delegate void ClientObjectHandler<T>(T obj) where T : class, IDataObject, new();
+
+    public class ClientObject<T> : IClientObject where T : class, IDataObject, new()
     {
-        public static IClientObject GetClientObject(string type)
+        public IEnumerable GetArrayFromXML(string xml)
         {
-            if (string.IsNullOrEmpty(type)) throw new ArgumentException("Type is empty");
+            IEnumerable result = xml.FromXmlString<List<T>>();
+            foreach(T obj in result)
+            {
+                // TODO: To be continued
+            }
+            return result;
+        }
 
-            Type t = Type.GetType(type);
-            if (t == null) throw new ApplicationException("Invalid Type");
-
-            IClientObject obj = Activator.CreateInstance(t) as IClientObject;
-            if (obj == null) throw new ApplicationException("Cannot create instance");
-
-            return obj;
+        public IDataObject GetObjectFromXML(string xml)
+        {
+            return xml.FromXmlString<T>();
         }
     }
 }

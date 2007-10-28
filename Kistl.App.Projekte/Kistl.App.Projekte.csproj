@@ -54,9 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Projekt.cs" />
+    <Compile Include="CustomClientActions.cs" />
+    <Compile Include="CustomClientActions.Designer.cs" />
+    <Compile Include="CustomServerActions.Designer.cs" />
+    <Compile Include="CustomServerActions.cs" />
+    <Compile Include="Projekt.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Task.cs" />
+    <Compile Include="Task.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

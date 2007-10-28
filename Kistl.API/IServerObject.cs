@@ -10,6 +10,11 @@ using System.Reflection;
 
 namespace Kistl.API
 {
+    public interface IServerObjectFactory
+    {
+        IServerObject GetServerObject();
+    }
+
     public interface IServerObject
     {
         string GetList(DataContext ctx);
@@ -18,27 +23,31 @@ namespace Kistl.API
         void SetObject(DataContext ctx, string xml);
     }
 
-    public class ServerObjectHelper
+    public delegate void ServerObjectHandler<T>(DataContext ctx, T obj) where T : class, IDataObject, new();
+
+    public class ServerObject<T> : IServerObject where T : class, IDataObject, new()
     {
-        public static List<T> GetList<T>(DataContext ctx) where T : class, IDataObject
+        public string GetList(DataContext ctx)
         {
             var result = from a in ctx.GetTable<T>()
                          select a;
 
-            return result.ToList<T>();
+            List<T> list = result.ToList<T>();
+            return list.ToXmlString();
         }
 
-        public static IEnumerable GetListOf<T>(DataContext ctx, int ID, string property) where T : class, IDataObject
+        public string GetListOf(DataContext ctx, int ID, string property)
         {
-            T obj = GetObject<T>(ctx, ID);
+            T obj = GetObjectInstance(ctx, ID);
 
             PropertyInfo pi = typeof(T).GetProperty(property);
             if (pi == null) throw new ArgumentException("Property does not exist");
 
-            return pi.GetValue(obj, null) as IEnumerable;
+            IEnumerable list = pi.GetValue(obj, null) as IEnumerable;
+            return list.ToXmlString();
         }
 
-        public static T GetObject<T>(DataContext ctx, int ID) where T : class, IDataObject
+        public T GetObjectInstance(DataContext ctx, int ID)
         {
             var result = from a in ctx.GetTable<T>()
                          where a.ID == ID
@@ -46,10 +55,25 @@ namespace Kistl.API
             return result.Single<T>();
         }
 
-        public static void SetObject<T>(DataContext ctx, T obj) where T : class, IDataObject
+        public string GetObject(DataContext ctx, int ID)
         {
+            T obj = GetObjectInstance(ctx, ID);
+            return obj.ToXmlString();
+        }
+
+        public event ServerObjectHandler<T> OnPreSetObject = null;
+        public event ServerObjectHandler<T> OnPostSetObject = null;
+
+        public void SetObject(DataContext ctx, string xml)
+        {
+            T obj = xml.FromXmlString<T>();
+
+            if (OnPreSetObject != null) OnPreSetObject(ctx, obj);
+
             ctx.GetTable<T>().Attach(obj, true);
             ctx.SubmitChanges();
+
+            if (OnPostSetObject != null) OnPostSetObject(ctx, obj);
         }
     }
 }

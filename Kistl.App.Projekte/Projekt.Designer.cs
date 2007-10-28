@@ -11,6 +11,9 @@ using Kistl.API;
 
 namespace Kistl.App.Projekte
 {
+    /// <summary>
+    /// Autogeneriert
+    /// </summary>
     [Table(Name="Projekte")]
     public class Projekt : API.IDataObject
     {
@@ -38,50 +41,50 @@ namespace Kistl.App.Projekte
             }
         }
 
+        public event ToStringHandler<Projekt> OnToString = null;
+
         public override string ToString()
         {
-            return Name;
-        }
-    }
-    
-    public class ProjektServer : API.IServerObject
-    {
-        public string GetList(DataContext ctx)
-        {
-            return ServerObjectHelper.GetList<Projekt>(ctx).ToXmlString();
-        }
-
-        public string GetListOf(DataContext ctx, int ID, string property)
-        {
-            return ServerObjectHelper.GetListOf<Projekt>(ctx, ID, property).ToXmlString();
-        }
-
-        public string GetObject(DataContext ctx, int ID)
-        {
-            return ServerObjectHelper.GetObject<Projekt>(ctx, ID).ToXmlString();
-        }
-
-        public void SetObject(DataContext ctx, string xml)
-        {
-            ServerObjectHelper.SetObject<Projekt>(ctx, xml.FromXmlString<Projekt>());
+            if (OnToString != null)
+            {
+                ToStringEventArgs e = new ToStringEventArgs();
+                OnToString(this, e);
+                return e.Result;
+            }
+            return base.ToString();
         }
     }
 
-    public class ProjektClient : API.IClientObject
+    /// <summary>
+    /// Autogeneriert
+    /// </summary>
+    public class ProjektServer : API.IServerObjectFactory
     {
-        public IEnumerable GetArrayFromXML(string xml)
+        public IServerObject GetServerObject()
         {
-            return xml.FromXmlString<List<Kistl.App.Projekte.Projekt>>();
+            return new API.ServerObject<Projekt>();
         }
+    }
 
+    /// <summary>
+    /// Autogeneriert
+    /// </summary>
+    public class ProjektClient : API.IClientObjectFactory
+    {
+        public IClientObject GetClientObject()
+        {
+            return new ProjektClientImpl();
+        }
+    }
+
+    /// <summary>
+    /// Autogeneriert, um die angehängten Listen zu bekommen
+    /// </summary>
+    public class ProjektClientImpl : ClientObject<Projekt>
+    {
         public IEnumerable GetArrayOfTasksFromXML(string xml)
         {
-            return xml.FromXmlString<List<Kistl.App.Projekte.Task>>();
-        }
-
-        public IDataObject GetObjectFromXML(string xml)
-        {
-            return xml.FromXmlString<Kistl.App.Projekte.Projekt>();
+            return xml.FromXmlString<List<Task>>();
         }
     }
 }

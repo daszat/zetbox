@@ -10,19 +10,6 @@ namespace Kistl.Server
 {
     public class KistlService : API.IKistlService
     {
-        private API.IServerObject GetServerObject(string type)
-        {
-            if (string.IsNullOrEmpty(type)) throw new ArgumentException("Type is empty");
-            
-            Type t = Type.GetType(type);
-            if (t == null) throw new ApplicationException("Invalid Type");
-
-            API.IServerObject obj = Activator.CreateInstance(t) as API.IServerObject;
-            if (obj == null) throw new ApplicationException("Cannot create instance");
-
-            return obj;
-        }
-
         private DataContext GetDataContext()
         {
             return new System.Data.Linq.DataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
@@ -32,7 +19,7 @@ namespace Kistl.Server
         {
             try
             {
-                return GetServerObject(type).GetList(GetDataContext());
+                return Helper.GetServerObject(type).GetList(GetDataContext());
             }
             catch (Exception ex)
             {
@@ -45,7 +32,7 @@ namespace Kistl.Server
         {
             try
             {
-                return GetServerObject(type).GetListOf(GetDataContext(), ID, property);
+                return Helper.GetServerObject(type).GetListOf(GetDataContext(), ID, property);
             }
             catch (Exception ex)
             {
@@ -58,7 +45,7 @@ namespace Kistl.Server
         {
             try
             {
-                return GetServerObject(type).GetObject(GetDataContext(), ID);
+                return Helper.GetServerObject(type).GetObject(GetDataContext(), ID);
             }
             catch (Exception ex)
             {
@@ -71,7 +58,7 @@ namespace Kistl.Server
         {
             try
             {
-                GetServerObject(type).SetObject(GetDataContext(), obj);
+                Helper.GetServerObject(type).SetObject(GetDataContext(), obj);
             }
             catch (Exception ex)
             {

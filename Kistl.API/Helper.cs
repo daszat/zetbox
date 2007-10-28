@@ -24,4 +24,11 @@ namespace Kistl.API
             return (T)xml.Deserialize(sr);
         }
     }
+
+    public class ToStringEventArgs
+    {
+        public string Result { get; set; }
+    }
+
+    public delegate void ToStringHandler<T>(T obj, ToStringEventArgs e) where T : class, IDataObject, new();
 }
