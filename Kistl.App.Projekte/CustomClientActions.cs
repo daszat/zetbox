@@ -17,5 +17,10 @@ namespace Kistl.App.Projekte
             e.Result = string.Format("{0} [{1}] ({2} - {3})",
                 obj.Name, obj.Aufwand, obj.DatumVon.ToShortDateString(), obj.DatumBis.ToShortDateString());
         }
+
+        void ObjectClass_OnToString(Base.ObjectClass obj, Kistl.API.ToStringEventArgs e)
+        {
+            e.Result = obj.ClassName;
+        }
     }
 }

@@ -7,6 +7,11 @@ using System.Xml.Serialization;
 
 namespace Kistl.API
 {
+    public class Helper
+    {
+        public const int INVALIDID = -1;
+    }
+
     public static class ExtensionHelpers
     {
         public static string ToXmlString(this object obj)

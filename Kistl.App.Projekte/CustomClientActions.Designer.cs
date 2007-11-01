@@ -37,6 +37,12 @@ namespace Kistl.App.Projekte
                 Task impl = obj as Task;
                 impl.OnToString += new Kistl.API.ToStringHandler<Task>(Task_OnToString);
             }
+
+            if (obj is App.Base.ObjectClass)
+            {
+                App.Base.ObjectClass impl = obj as App.Base.ObjectClass;
+                impl.OnToString +=new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectClass>(ObjectClass_OnToString);
+            }
         }
     }
 }

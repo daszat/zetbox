@@ -15,12 +15,13 @@ namespace Kistl.App.Projekte
     /// Autogeneriert
     /// </summary>
     [Table(Name="Projekte")]
-    public class Projekt : API.IDataObject
+    public class Projekt : API.BaseDataObject
     {
-        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-        public int ID { get; set; }
+        private int _ID = Helper.INVALIDID;
+        [Column(IsDbGenerated = true, IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never, Storage = "_ID")]
+        public override int ID { get { return _ID; } set { _ID = value; } }
 
-        [Column(UpdateCheck=UpdateCheck.Never)]
+        [Column(UpdateCheck = UpdateCheck.Never)]
         public string Name { get; set; }
 
         private EntitySet<Task> _Tasks = new EntitySet<Task>();
@@ -58,33 +59,20 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// Autogeneriert
     /// </summary>
-    public class ProjektServer : API.IServerObjectFactory
+    public class ProjektServer : API.ServerObject<Projekt>
     {
-        public IServerObject GetServerObject()
-        {
-            return new API.ServerObject<Projekt>();
-        }
-    }
-
-    /// <summary>
-    /// Autogeneriert
-    /// </summary>
-    public class ProjektClient : API.IClientObjectFactory
-    {
-        public IClientObject GetClientObject()
-        {
-            return new ProjektClientImpl();
-        }
     }
 
     /// <summary>
     /// Autogeneriert, um die angehängten Listen zu bekommen
     /// </summary>
-    public class ProjektClientImpl : ClientObject<Projekt>
+    public class ProjektClient : ClientObject<Projekt>
     {
         public IEnumerable GetArrayOfTasksFromXML(string xml)
         {
-            return xml.FromXmlString<List<Task>>();
+            IEnumerable result = xml.FromXmlString<List<Task>>();
+            AttachClientEvents(result);
+            return result;
         }
     }
 }

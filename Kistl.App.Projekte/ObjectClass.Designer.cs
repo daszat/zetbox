@@ -1,38 +1,39 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Data.Linq.Mapping;
-using System.Collections;
 using System.Data.Linq;
+using System.Data.Linq.Mapping;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using Kistl.API;
 
-namespace Kistl.App.Projekte
+namespace Kistl.App.Base
 {
     /// <summary>
     /// Autogeneriert
     /// </summary>
-    [Table(Name = "Tasks")]
-    public class Task : BaseDataObject
+    [Table(Name = "ObjectClasses")]
+    public class ObjectClass : API.BaseDataObject
     {
         private int _ID = Helper.INVALIDID;
         [Column(IsDbGenerated = true, IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never, Storage = "_ID")]
         public override int ID { get { return _ID; } set { _ID = value; } }
 
         [Column(UpdateCheck = UpdateCheck.Never)]
-        public string Name { get; set; }
-        [Column(UpdateCheck = UpdateCheck.Never)]
-        public DateTime DatumVon { get; set; }
-        [Column(UpdateCheck = UpdateCheck.Never)]
-        public DateTime DatumBis { get; set; }
-        [Column(UpdateCheck = UpdateCheck.Never)]
-        public double Aufwand { get; set; }
+        public string ClassName { get; set; }
 
         [Column(UpdateCheck = UpdateCheck.Never)]
-        public int fk_Projekt { get; set; }
+        public string ServerObject { get; set; }
+        
+        [Column(UpdateCheck = UpdateCheck.Never)]
+        public string ClientObject { get; set; }
 
+        [Column(UpdateCheck = UpdateCheck.Never)]
+        public string DataObject { get; set; }
 
-        public event ToStringHandler<Task> OnToString = null;
+        public event ToStringHandler<ObjectClass> OnToString = null;
 
         public override string ToString()
         {
@@ -49,15 +50,14 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// Autogeneriert
     /// </summary>
-    public class TaskServer : API.ServerObject<Task>
+    public class ObjectClassServer : API.ServerObject<ObjectClass>
     {
     }
 
     /// <summary>
-    /// Autogeneriert, um die angehängten Listen zu bekommen
+    /// Autogeneriert
     /// </summary>
-    public class TaskClient : ClientObject<Task>
+    public class ObjectClassClient : ClientObject<ObjectClass>
     {
     }
-
 }

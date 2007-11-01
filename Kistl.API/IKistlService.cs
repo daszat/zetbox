@@ -21,7 +21,7 @@ namespace Kistl.API
         string GetObject(string type, int ID);
         
         [OperationContract]
-        void SetObject(string type, string obj);
+        string SetObject(string type, string obj);
 
         [OperationContract]
         string HelloWorld(string name);

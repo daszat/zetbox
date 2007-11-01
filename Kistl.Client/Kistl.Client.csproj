@@ -102,6 +102,7 @@
       <DependentUpon>ObjectList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="ObjectBroker.cs" />
     <Compile Include="ObjectWindow.xaml.cs">
       <DependentUpon>ObjectWindow.xaml</DependentUpon>
     </Compile>

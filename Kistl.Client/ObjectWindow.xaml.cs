@@ -33,38 +33,64 @@ namespace Kistl.Client
         private IClientObject client = null;
         private Kistl.API.IDataObject obj = null;
 
+        private void Bind()
+        {
+            data.DataContext = obj;
+
+            // TODO: Aus Metadaten holen
+            foreach (System.Reflection.PropertyInfo p in obj.GetType().GetProperties())
+            {
+                if (p.PropertyType.GetInterface("System.Collections.ICollection") != null)
+                {
+                    // TODO: Naja, das könnte besser sein
+                    Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
+                    lst.SourceServerObjectType = this.ServerObjectType;
+                    lst.SourceClientObjectType = this.ClientObjectType;
+                    lst.DestinationServerObjectType = ((API.ServerObjectAttribute)p.GetCustomAttributes(typeof(API.ServerObjectAttribute), true)[0]).FullName;
+                    lst.DestinationClientObjectType = ((API.ClientObjectAttribute)p.GetCustomAttributes(typeof(API.ClientObjectAttribute), true)[0]).FullName;
+                    lst.ObjectID = this.ObjectID;
+                    lst.PropertyName = p.Name;
+
+                    data.Children.Add(lst);
+                }
+                else
+                {
+                    Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
+                    txt.Label = p.Name;
+
+                    // Set Binding
+                    Binding b = new Binding();
+                    b.Path = new PropertyPath(p.Name);
+                    b.Mode = BindingMode.TwoWay;
+                    b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                    txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
+                    
+                    txt.PropertyInfo = p;
+
+                    data.Children.Add(txt);
+                }
+            }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                client = Helper.GetClientObject(ClientObjectType);
-                obj = client.GetObjectFromXML(App.Service.GetObject(ServerObjectType, ObjectID));
+                this.Title = ClientObjectType;
 
-                foreach (System.Reflection.PropertyInfo p in obj.GetType().GetProperties())
+                client = ObjectBroker.GetClientObject(ClientObjectType);
+
+                if (ObjectID != API.Helper.INVALIDID)
                 {
-                    if (p.PropertyType.GetInterface("System.Collections.ICollection") != null)
-                    {
-                        Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
-                        lst.SourceServerObjectType = this.ServerObjectType;
-                        lst.SourceClientObjectType = this.ClientObjectType;
-                        lst.DestinationServerObjectType = ((API.ServerObjectAttribute)p.GetCustomAttributes(typeof(API.ServerObjectAttribute), true)[0]).FullName;
-                        lst.DestinationClientObjectType = ((API.ClientObjectAttribute)p.GetCustomAttributes(typeof(API.ClientObjectAttribute), true)[0]).FullName;
-                        lst.ObjectID = this.ObjectID;
-                        lst.PropertyName = p.Name;
-
-                        data.Children.Add(lst);
-                    }
-                    else
-                    {
-                        Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
-                        txt.Label = p.Name;
-                        txt.Value = p.GetValue(obj, null);
-                        txt.PropertyInfo = p;
-
-                        data.Children.Add(txt);
-                    }
+                    obj = client.GetObjectFromXML(App.Service.GetObject(ServerObjectType, ObjectID));
                 }
+                else
+                {
+                    obj = client.CreateNew();
+                }
+
+                Bind();
             }
             catch (Exception ex)
             {
@@ -76,16 +102,13 @@ namespace Kistl.Client
         {
             try
             {
-                foreach (object ctrl in data.Children)
-                {
-                    Controls.EditSimpleProperty txt = ctrl as Controls.EditSimpleProperty;
-                    if (txt != null)
-                    {
-                        txt.PropertyInfo.SetValue(obj, txt.Value, null);
-                    }
-                }
-
-                App.Service.SetObject(ServerObjectType, obj.ToXmlString());
+                string result = App.Service.SetObject(ServerObjectType, obj.ToXmlString());
+                obj = client.GetObjectFromXML(result);
+                // ReBind
+                data.DataContext = obj;
+                // Das muss sein, weil die Properties keine DependencyProperties sind
+                // Nutzt aber nix, da ich ein neues Objekt zurück bekommen habe *grrr*
+                //obj.NotifyChange(); 
             }
             catch (Exception ex)
             {

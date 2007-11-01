@@ -25,7 +25,7 @@ namespace Kistl.Client.KistService {
         string GetObject(string type, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetObject", ReplyAction="http://tempuri.org/IKistlService/SetObjectResponse")]
-        void SetObject(string type, string obj);
+        string SetObject(string type, string obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/HelloWorld", ReplyAction="http://tempuri.org/IKistlService/HelloWorldResponse")]
         string HelloWorld(string name);
@@ -70,8 +70,8 @@ namespace Kistl.Client.KistService {
             return base.Channel.GetObject(type, ID);
         }
         
-        public void SetObject(string type, string obj) {
-            base.Channel.SetObject(type, obj);
+        public string SetObject(string type, string obj) {
+            return base.Channel.SetObject(type, obj);
         }
         
         public string HelloWorld(string name) {

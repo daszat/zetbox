@@ -3,6 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" MinWidth="150" x:Name="EditCtrl">
     <DockPanel >
         <Label DockPanel.Dock="Left" Width="100" Content="{Binding ElementName=EditCtrl, Path=Label}" />
-        <TextBox Text="{Binding  ElementName=EditCtrl, Path=Value}" />
+        <TextBox Text="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
     </DockPanel>
 </UserControl>

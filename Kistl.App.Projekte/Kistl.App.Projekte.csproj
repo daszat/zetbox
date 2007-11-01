@@ -58,6 +58,7 @@
     <Compile Include="CustomClientActions.Designer.cs" />
     <Compile Include="CustomServerActions.Designer.cs" />
     <Compile Include="CustomServerActions.cs" />
+    <Compile Include="ObjectClass.Designer.cs" />
     <Compile Include="Projekt.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task.Designer.cs" />

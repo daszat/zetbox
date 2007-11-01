@@ -19,7 +19,7 @@ namespace Kistl.Server
         {
             try
             {
-                return Helper.GetServerObject(type).GetList(GetDataContext());
+                return ObjectBroker.GetServerObject(type).GetList(GetDataContext());
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace Kistl.Server
         {
             try
             {
-                return Helper.GetServerObject(type).GetListOf(GetDataContext(), ID, property);
+                return ObjectBroker.GetServerObject(type).GetListOf(GetDataContext(), ID, property);
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace Kistl.Server
         {
             try
             {
-                return Helper.GetServerObject(type).GetObject(GetDataContext(), ID);
+                return ObjectBroker.GetServerObject(type).GetObject(GetDataContext(), ID);
             }
             catch (Exception ex)
             {
@@ -54,11 +54,11 @@ namespace Kistl.Server
             }
         }
 
-        public void SetObject(string type, string obj)
+        public string SetObject(string type, string obj)
         {
             try
             {
-                Helper.GetServerObject(type).SetObject(GetDataContext(), obj);
+                return ObjectBroker.GetServerObject(type).SetObject(GetDataContext(), obj);
             }
             catch (Exception ex)
             {

@@ -6,11 +6,15 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Exit" />
+                <MenuItem Header="Exit" Name="menu_Exit" Click="menu_Exit_Click" />
             </MenuItem>
+            <ComboBox 
+                Name="cbObjectTypes" 
+                SelectionChanged="ComboBox_SelectionChanged"
+                ItemsSource="{Binding}" MinWidth="100" />
         </Menu>
         <my:ObjectList x:Name="lst" 
-            SourceServerObjectType="Kistl.App.Projekte.ProjektServer, Kistl.App.Projekte"
-            SourceClientObjectType="Kistl.App.Projekte.ProjektClient, Kistl.App.Projekte"/>
+            SourceServerObjectType="Kistl.App.Base.ObjectClassServer, Kistl.App.Projekte"
+            SourceClientObjectType="Kistl.App.Base.ObjectClassClient, Kistl.App.Projekte"/>
     </DockPanel>
 </Window>

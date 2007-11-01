@@ -3,8 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     MinHeight="100" MinWidth="200"
     Loaded="ObjectList_Loaded">
-    <Grid>
+    <StackPanel>
+        <ToolBar>
+            <Button Name="btnNew" Click="btnNew_Click">New</Button>
+            <Button Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+        </ToolBar>
         <ListView x:Name="lst" ItemsSource="{Binding}" 
             MouseDoubleClick="lst_MouseDoubleClick" />
-    </Grid>
+    </StackPanel>
 </UserControl>

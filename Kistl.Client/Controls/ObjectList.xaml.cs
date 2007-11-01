@@ -27,12 +27,12 @@ namespace Kistl.Client.Controls
             InitializeComponent();
         }
 
-        void ObjectList_Loaded(object sender, RoutedEventArgs e)
+        public void Bind()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                IClientObject client = Helper.GetClientObject(SourceClientObjectType);
+                IClientObject client = ObjectBroker.GetClientObject(SourceClientObjectType);
                 if (string.IsNullOrEmpty(PropertyName))
                 {
                     DestinationClientObjectType = SourceClientObjectType;
@@ -41,11 +41,14 @@ namespace Kistl.Client.Controls
                 }
                 else
                 {
-                    MethodInfo mi = client.GetType().GetMethod("GetArrayOf" + PropertyName + "FromXML");
-                    if (mi != null)
+                    if (ObjectID != API.Helper.INVALIDID)
                     {
-                        string xml = App.Service.GetListOf(SourceServerObjectType, ObjectID, PropertyName);
-                        this.DataContext = mi.Invoke(client, new object[] {xml});
+                        MethodInfo mi = client.GetType().GetMethod("GetArrayOf" + PropertyName + "FromXML");
+                        if (mi != null)
+                        {
+                            string xml = App.Service.GetListOf(SourceServerObjectType, ObjectID, PropertyName);
+                            this.DataContext = mi.Invoke(client, new object[] { xml });
+                        }
                     }
                 }
             }
@@ -53,6 +56,11 @@ namespace Kistl.Client.Controls
             {
                 Helper.HandleError(ex);
             }
+        }
+
+        void ObjectList_Loaded(object sender, RoutedEventArgs e)
+        {
+            Bind();
         }
 
         public string SourceServerObjectType { get; set; }
@@ -79,6 +87,28 @@ namespace Kistl.Client.Controls
             {
                 Helper.HandleError(ex);
             }
+        }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ObjectWindow wnd = new ObjectWindow();
+                wnd.ServerObjectType = this.DestinationServerObjectType;
+                wnd.ClientObjectType = this.DestinationClientObjectType;
+                wnd.ObjectID = API.Helper.INVALIDID;
+
+                wnd.Show();
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            Bind();
         }
     }
 }
