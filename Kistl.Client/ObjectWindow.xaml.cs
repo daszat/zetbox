@@ -77,10 +77,13 @@ namespace Kistl.Client
                 }
                 else
                 {
+                    // Neues Bearbeitungscontrol erzeugen
                     Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
-                    txt.Label = p.Name;
 
-                    // Set Binding
+                    // Bezeichnung setzen
+                    txt.Label = p.Name; 
+
+                    // Set Binding, damit werden Änderungen automatisch übernommen.
                     Binding b = new Binding();
                     b.Path = new PropertyPath(p.Name);
                     b.Mode = BindingMode.TwoWay;

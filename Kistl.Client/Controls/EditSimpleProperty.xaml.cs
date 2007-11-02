@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace Kistl.Client.Controls
 {
     /// <summary>
-    /// Interaction logic for EditSimpleProperty.xaml
+    /// Zeigt eine einfache Eigenschaft zum Bearbeiten an
     /// </summary>
     public partial class EditSimpleProperty : UserControl
     {
@@ -26,6 +26,9 @@ namespace Kistl.Client.Controls
             Value = "Value";
         }
 
+        /// <summary>
+        /// Bezeichnung der Eigenschaft
+        /// </summary>
         public string Label
         {
             get { return (string)GetValue(LabelProperty); }
@@ -36,6 +39,9 @@ namespace Kistl.Client.Controls
         public static readonly DependencyProperty LabelProperty =
             DependencyProperty.Register("Label", typeof(string), typeof(EditSimpleProperty));
 
+        /// <summary>
+        /// Wert der Eigenschaft
+        /// </summary>
         public object Value
         {
             get { return (object)GetValue(ValueProperty); }

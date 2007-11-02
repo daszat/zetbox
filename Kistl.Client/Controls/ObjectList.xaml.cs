@@ -18,10 +18,9 @@ using System.Reflection;
 namespace Kistl.Client.Controls
 {
     /// <summary>
-    /// Interaction logic for ObjectList.xaml
     /// Zeigt eine Liste von Objekten an.
     /// Sie kann _alle_ Instanzen einer Klasse anzeigen &
-    /// alle Instanzen einer Eigenschaft eines Objektes
+    /// alle Instanzen einer Eigenschaft eines Objektes.
     /// </summary>
     public partial class ObjectList : UserControl
     {
@@ -30,25 +29,40 @@ namespace Kistl.Client.Controls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Binden der Liste, kann auch mehrmals ausgelöst werden & von extern.
+        /// </summary>
         public void Bind()
         {
+            // Desingmode? -> raus
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
+                // Client BL holen
                 IClientObject client = ObjectBrokerClient.GetClientObject(SourceClientObjectType);
+
                 if (string.IsNullOrEmpty(PropertyName))
                 {
+                    // Wenn PropertyName nicht gesetzt ist, dann mein man die Liste _aller_
+                    // Objekte einer Klasse
+                    // Destination ist dann gleich Source
                     DestinationClientObjectType = SourceClientObjectType;
                     DestinationServerObjectType = SourceServerObjectType;
+
+                    // Liste vom Server holen & den DataContext setzen.
                     this.DataContext = client.GetArrayFromXML(App.Service.GetList(SourceServerObjectType));
                 }
                 else
                 {
+                    // Wenn PropertyName gesetzt ist, dann meint man die Liste von Objekten
+                    // zu einem Objekt
                     if (ObjectID != API.Helper.INVALIDID)
                     {
+                        // Client Methode holen
                         MethodInfo mi = client.GetType().GetMethod("GetArrayOf" + PropertyName + "FromXML");
                         if (mi != null)
                         {
+                            // Liste vom Server holen & den DataContext setzen.
                             string xml = App.Service.GetListOf(SourceServerObjectType, ObjectID, PropertyName);
                             this.DataContext = mi.Invoke(client, new object[] { xml });
                         }
@@ -66,14 +80,46 @@ namespace Kistl.Client.Controls
             Bind();
         }
 
+        /// <summary>
+        /// Server BL Typ auf dem alle Serveroperationen laufen
+        /// </summary>
         public string SourceServerObjectType { get; set; }
+        
+        /// <summary>
+        /// Client BL Typ auf dem alle Clientoperationen laufen
+        /// </summary>
         public string SourceClientObjectType { get; set; }
+
+        /// <summary>
+        /// Server BL Typ, falls eine Liste einer Property angezeigt werden soll.
+        /// Dient nur der Übergabe an ein neues Fenster, welches beim Doppel-Klick
+        /// bzw. "New" geöffnet wird.
+        /// </summary>
         public string DestinationServerObjectType { get; set; }
+
+        /// <summary>
+        /// Client BL Typ, falls eine Liste einer Property angezeigt werden soll.
+        /// Dient nur der Übergabe an ein neues Fenster, welches beim Doppel-Klick
+        /// bzw. "New" geöffnet wird.
+        /// </summary>
         public string DestinationClientObjectType { get; set; }
 
+        /// <summary>
+        /// ObjektID
+        /// </summary>
         public int ObjectID { get; set; }
+
+        /// <summary>
+        /// Property des Objektes, dessen Liste dargestellt werden soll.
+        /// ObjektID & Destination*ObjectType müssen auch ausgefüllt sein!
+        /// </summary>
         public string PropertyName { get; set; }
 
+        /// <summary>
+        /// DoppelKlick -> öffnet das Objekt in einem neuen Fenster
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lst_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
@@ -92,6 +138,11 @@ namespace Kistl.Client.Controls
             }
         }
 
+        /// <summary>
+        /// Erzeugt ein neues Objekt in einem neuen Fenster
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -109,6 +160,11 @@ namespace Kistl.Client.Controls
             }
         }
 
+        /// <summary>
+        /// Liste neu Laden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             Bind();
