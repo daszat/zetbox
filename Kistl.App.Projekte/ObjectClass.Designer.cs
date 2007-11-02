@@ -13,6 +13,7 @@ namespace Kistl.App.Base
 {
     /// <summary>
     /// Autogeneriert
+    /// Daten-Objekt Definition
     /// </summary>
     [Table(Name = "ObjectClasses")]
     public class ObjectClass : API.BaseDataObject
@@ -49,6 +50,7 @@ namespace Kistl.App.Base
 
     /// <summary>
     /// Autogeneriert
+    /// Server BL Implementierung.
     /// </summary>
     public class ObjectClassServer : API.ServerObject<ObjectClass>
     {
@@ -56,6 +58,7 @@ namespace Kistl.App.Base
 
     /// <summary>
     /// Autogeneriert
+    /// Client BL Implementierung.
     /// </summary>
     public class ObjectClassClient : ClientObject<ObjectClass>
     {

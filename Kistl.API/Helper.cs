@@ -7,13 +7,24 @@ using System.Xml.Serialization;
 
 namespace Kistl.API
 {
+    /// <summary>
+    /// Globale Helpermethoden
+    /// </summary>
     public class Helper
     {
         public const int INVALIDID = -1;
     }
 
+    /// <summary>
+    /// C# Extensions
+    /// </summary>
     public static class ExtensionHelpers
     {
+        /// <summary>
+        /// Objekt in einen XML String umwandeln
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static string ToXmlString(this object obj)
         {
             XmlSerializer xml = new XmlSerializer(obj.GetType());
@@ -22,6 +33,12 @@ namespace Kistl.API
             return sb.ToString();
         }
 
+        /// <summary>
+        /// XML String in Objekt umwandeln
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlStr"></param>
+        /// <returns></returns>
         public static T FromXmlString<T>(this string xmlStr) where T : new()
         {
             System.IO.StringReader sr = new System.IO.StringReader(xmlStr);
@@ -29,11 +46,4 @@ namespace Kistl.API
             return (T)xml.Deserialize(sr);
         }
     }
-
-    public class ToStringEventArgs
-    {
-        public string Result { get; set; }
-    }
-
-    public delegate void ToStringHandler<T>(T obj, ToStringEventArgs e) where T : class, IDataObject, new();
 }

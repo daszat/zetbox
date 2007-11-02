@@ -8,13 +8,28 @@ using System.Xml;
 
 namespace Kistl.Server
 {
+    /// <summary>
+    /// Implementierung des KistServices
+    /// </summary>
     public class KistlService : API.IKistlService
     {
+        /// <summary>
+        /// Datacontext zurückgeben
+        /// TODO: Das hat da eigentlich gar nix zu suchen!
+        /// </summary>
+        /// <returns></returns>
         private static DataContext GetDataContext()
         {
             return new System.Data.Linq.DataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
         }
 
+        /// <summary>
+        /// Implementierung der GetList Methode
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// delegiert den Aufruf weiter
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public string GetList(string type)
         {
             try
@@ -28,6 +43,15 @@ namespace Kistl.Server
             }
         }
 
+        /// <summary>
+        /// Implementierung der GetListOf Methode
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// delegiert den Aufruf weiter
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="ID"></param>
+        /// <param name="property"></param>
+        /// <returns></returns>
         public string GetListOf(string type, int ID, string property)
         {
             try
@@ -41,6 +65,14 @@ namespace Kistl.Server
             }
         }
 
+        /// <summary>
+        /// Implementierung der GetObject Methode
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// delegiert den Aufruf weiter
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public string GetObject(string type, int ID)
         {
             try
@@ -54,6 +86,14 @@ namespace Kistl.Server
             }
         }
 
+        /// <summary>
+        /// Implementierung der SetObject Methode
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// delegiert den Aufruf weiter
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public string SetObject(string type, string obj)
         {
             try
@@ -67,6 +107,11 @@ namespace Kistl.Server
             }
         }
 
+        /// <summary>
+        /// Implementierung der HelloWorld Methode
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public string HelloWorld(string name)
         {
             try

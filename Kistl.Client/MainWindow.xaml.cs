@@ -17,12 +17,16 @@ using System.ComponentModel;
 
 namespace Kistl.Client
 {
+    /// <summary>
+    /// Hauptfenster der KistApplikation
+    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
 
+            // DesingMode? -> raus
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
             try
@@ -33,6 +37,7 @@ namespace Kistl.Client
                 //Kistl.App.Base.ObjectClassClient client = (Kistl.App.Base.ObjectClassClient)ObjectBrokerClient.GetClientObject(typeof(Kistl.App.Base.ObjectClassClient).AssemblyQualifiedName);
 
                 // Hat sich quasi schon erledigt (siehe oben)
+                // Hole eine Liste aller ObjectClasses Objekte & zeige sie in der DropDown an
                 Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
                 this.DataContext = client.GetArrayFromXML(App.Service.GetList("Kistl.App.Base.ObjectClassServer, Kistl.App.Projekte"));
             }
@@ -42,11 +47,21 @@ namespace Kistl.Client
             }
         }
 
+        /// <summary>
+        /// Und auf wieder sehen!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void menu_Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// DropDown Liste hat sich geändert -> Objektliste im unteren Bereich aktualisieren
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -54,6 +69,8 @@ namespace Kistl.Client
                 Kistl.App.Base.ObjectClass objClass = cbObjectTypes.SelectedItem as Kistl.App.Base.ObjectClass;
                 if (objClass != null)
                 {
+                    // Neue Objekttypen setzen & neu Binden
+                    // TODO: Man sollte gleich das ObjektClass Objekt übergeben.
                     lst.SourceServerObjectType = objClass.ServerObject;
                     lst.SourceClientObjectType= objClass.ClientObject;
                     lst.Bind();

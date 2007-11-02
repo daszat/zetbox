@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Kistl.Server
 {
+    /// <summary>
+    /// Implementierung des Serverseitigen ObjectBrokers
+    /// </summary>
     internal class ObjectBrokerServer : API.IObjectBroker
     {
         /// <summary>
@@ -28,6 +31,7 @@ namespace Kistl.Server
         #region IObjectBroker Members
 
         /// <summary>
+        /// Attach lt. Metadaten
         /// Und damit kann man dann auch security machen :-)
         /// </summary>
         /// <param name="obj"></param>
@@ -38,11 +42,19 @@ namespace Kistl.Server
             actions.Attach(obj);
         }
 
+        /// <summary>
+        /// TODO: evtl. doch entfernen :-)
+        /// </summary>
+        /// <param name="obj"></param>
         public void AttachEvents(Kistl.API.IClientObject obj)
         {
             throw new InvalidOperationException("Wrong Object broker - I'm a Server Object Broker");
         }
 
+        /// <summary>
+        /// Attach lt. Metadaten
+        /// </summary>
+        /// <param name="obj"></param>
         public void AttachEvents(Kistl.API.IServerObject obj)
         {
             // TODO: Lt. Metadaten dynamisch laden

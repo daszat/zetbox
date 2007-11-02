@@ -6,7 +6,10 @@ using Kistl.API;
 
 namespace Kistl.Client
 {
-    public class ObjectBrokerClient : API.IObjectBroker
+    /// <summary>
+    /// Implementierung des Clientseitigen ObjectBrokers
+    /// </summary>
+    internal class ObjectBrokerClient : API.IObjectBroker
     {
         /// <summary>
         /// Helper Function for generic access
@@ -28,6 +31,10 @@ namespace Kistl.Client
 
         #region IObjectBroker Members
 
+        /// <summary>
+        /// Attach lt. Metadaten
+        /// </summary>
+        /// <param name="obj"></param>
         public void AttachEvents(IDataObject obj)
         {
             // TODO: lt. Metadaten
@@ -35,6 +42,10 @@ namespace Kistl.Client
             actions.Attach(obj);
         }
 
+        /// <summary>
+        /// Attach lt. Metadaten
+        /// </summary>
+        /// <param name="obj"></param>
         public void AttachEvents(IClientObject obj)
         {
             // TODO: Lt. Metadaten dynamisch laden
@@ -42,6 +53,10 @@ namespace Kistl.Client
             customActions.Attach(obj);
         }
 
+        /// <summary>
+        /// TODO: evtl. doch entfernen :-)
+        /// </summary>
+        /// <param name="obj"></param>
         public void AttachEvents(IServerObject obj)
         {
             throw new InvalidOperationException("Wrong Object broker - I'm a Client Object Broker");

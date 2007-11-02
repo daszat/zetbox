@@ -7,6 +7,9 @@ using System.Threading;
 
 namespace Kistl.Server
 {
+    /// <summary>
+    /// Hauptprogramm
+    /// </summary>
     public class Program
     {
         static Server server = new Server();
@@ -21,12 +24,30 @@ namespace Kistl.Server
         }
     }
 
+    /// <summary>
+    /// Serversteuerung
+    /// </summary>
     public class Server : MarshalByRefObject
     {
+        /// <summary>
+        /// WCF Service Host
+        /// </summary>
         private ServiceHost host = null;
+
+        /// <summary>
+        /// WCF Service Thread
+        /// </summary>
         private Thread serviceThread = null;
+
+        /// <summary>
+        /// Nur zum signalisieren des Serverstarts.
+        /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
+        /// <summary>
+        /// Server starten, Methode blockiert bis zum Serverstart. 
+        /// Nach 20 sec. wird der start jedoch beendet.
+        /// </summary>
         public void StartServer()
         {
             API.ObjectBrokerFactory.Init(new ObjectBrokerServer());
@@ -40,11 +61,18 @@ namespace Kistl.Server
             }
         }
 
+        /// <summary>
+        /// Stopped den Server
+        /// </summary>
         public void StopServer()
         {
             host.Close();
         }
 
+        /// <summary>
+        /// Führt den eigentlichen WCF Host start asynchron durch und 
+        /// wartet bis er wieder gestopped wird.
+        /// </summary>
         private void RunWCFServer()
         {
             Console.WriteLine("Starting Server...");

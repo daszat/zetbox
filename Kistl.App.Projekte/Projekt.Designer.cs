@@ -13,6 +13,7 @@ namespace Kistl.App.Projekte
 {
     /// <summary>
     /// Autogeneriert
+    /// Daten-Objekt Definition
     /// </summary>
     [Table(Name="Projekte")]
     public class Projekt : API.BaseDataObject
@@ -58,20 +59,26 @@ namespace Kistl.App.Projekte
 
     /// <summary>
     /// Autogeneriert
+    /// Server BL Implementierung.
     /// </summary>
     public class ProjektServer : API.ServerObject<Projekt>
     {
     }
 
     /// <summary>
-    /// Autogeneriert, um die angehängten Listen zu bekommen
+    /// Autogeneriert
+    /// Client BL Implementierung.
     /// </summary>
     public class ProjektClient : ClientObject<Projekt>
     {
+        /// <summary>
+        /// Autogeneriert, um die angehängten Listen zu bekommen
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
         public IEnumerable GetArrayOfTasksFromXML(string xml)
         {
             IEnumerable result = xml.FromXmlString<List<Task>>();
-            //AttachClientEvents(result);
             return result;
         }
     }

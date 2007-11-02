@@ -6,6 +6,11 @@ using System.Linq.Expressions;
 
 namespace Kistl.API
 {
+    /// <summary>
+    /// Linq Extensions. Aus dem Indischen Netz gefladert. 
+    /// Könnte als Demo für Parameter Suchen herhalten.
+    /// Und ich hab nüsse Ahnung, wie das funktioniert.
+    /// </summary>
     public static class LinqExtensions
     {
         public static IQueryable<T> AddEqualityCondition<T, V>(this IQueryable<T> queryable,

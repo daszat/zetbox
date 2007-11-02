@@ -26,8 +26,17 @@ namespace Kistl.Client
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Server BL Typ des Objektes, das angezeigt wird.
+        /// </summary>
         public string ServerObjectType { get; set; }
+        /// <summary>
+        /// Client BL Typ des Objektes, das angezeigt wird.
+        /// </summary>
         public string ClientObjectType { get; set; }
+        /// <summary>
+        /// ObjektID
+        /// </summary>
         public int ObjectID { get; set; }
 
         private IClientObject client = null;
@@ -46,8 +55,11 @@ namespace Kistl.Client
                     Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
                     lst.SourceServerObjectType = this.ServerObjectType;
                     lst.SourceClientObjectType = this.ClientObjectType;
+
+                    // TODO: aus Metadaten auslesen
                     lst.DestinationServerObjectType = ((API.ServerObjectAttribute)p.GetCustomAttributes(typeof(API.ServerObjectAttribute), true)[0]).FullName;
                     lst.DestinationClientObjectType = ((API.ClientObjectAttribute)p.GetCustomAttributes(typeof(API.ClientObjectAttribute), true)[0]).FullName;
+
                     lst.ObjectID = this.ObjectID;
                     lst.PropertyName = p.Name;
 

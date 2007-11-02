@@ -11,6 +11,7 @@ namespace Kistl.App.Projekte
 {
     /// <summary>
     /// Autogeneriert
+    /// Daten-Objekt Definition
     /// </summary>
     [Table(Name = "Tasks")]
     public class Task : BaseDataObject
@@ -48,13 +49,15 @@ namespace Kistl.App.Projekte
 
     /// <summary>
     /// Autogeneriert
+    /// Server BL Implementierung.
     /// </summary>
     public class TaskServer : API.ServerObject<Task>
     {
     }
 
     /// <summary>
-    /// Autogeneriert, um die angehängten Listen zu bekommen
+    /// Autogeneriert
+    /// Client BL Implementierung.
     /// </summary>
     public class TaskClient : ClientObject<Task>
     {
