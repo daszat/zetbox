@@ -96,13 +96,18 @@ namespace Kistl.Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Im Designer? -> raus
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
                 this.Title = ClientObjectType;
 
+                // Client BL holen
                 client = ObjectBrokerClient.GetClientObject(ClientObjectType);
 
+                // Je nachdem, Objekt vom Server holen oder mittels BL erzeugen
+                // TODO: Das holen solte auch in die BL rein & Typisiert werden.
+                // allerdings brauchts dann zwei Methodenarten: Die generischen & typisierten
                 if (ObjectID != API.Helper.INVALIDID)
                 {
                     obj = client.GetObjectFromXML(App.Service.GetObject(ServerObjectType, ObjectID));
@@ -112,6 +117,7 @@ namespace Kistl.Client
                     obj = client.CreateNew();
                 }
 
+                // Einmalig Binden & WPF Controls erzeugen
                 Bind();
             }
             catch (Exception ex)
@@ -120,17 +126,24 @@ namespace Kistl.Client
             }
         }
 
+        /// <summary>
+        /// Objekt speichern
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
         {
             try
             {
+                // Objekt zum Server schicken & dann wieder auspacken
                 string result = App.Service.SetObject(ServerObjectType, obj.ToXmlString());
                 obj = client.GetObjectFromXML(result);
                 // ReBind
                 data.DataContext = obj;
                 // Das muss sein, weil die Properties keine DependencyProperties sind
                 // Nutzt aber nix, da ich ein neues Objekt zurück bekommen habe *grrr*
-                //obj.NotifyChange(); 
+                // einfach den Datakontext neu setzen (siehe oben)
+                // obj.NotifyChange(); 
             }
             catch (Exception ex)
             {
@@ -138,6 +151,11 @@ namespace Kistl.Client
             }
         }
 
+        /// <summary>
+        /// Auf Wiedersehen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
         {
             this.Close();

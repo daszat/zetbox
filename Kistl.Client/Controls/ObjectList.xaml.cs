@@ -19,6 +19,9 @@ namespace Kistl.Client.Controls
 {
     /// <summary>
     /// Interaction logic for ObjectList.xaml
+    /// Zeigt eine Liste von Objekten an.
+    /// Sie kann _alle_ Instanzen einer Klasse anzeigen &
+    /// alle Instanzen einer Eigenschaft eines Objektes
     /// </summary>
     public partial class ObjectList : UserControl
     {
