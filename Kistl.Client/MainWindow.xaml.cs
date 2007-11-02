@@ -30,7 +30,10 @@ namespace Kistl.Client
                 // TODO: Das muss einfacher gehen!
                 // Es muss über den blöden ObjectBroker gehen, weil 
                 // sonst die Custom Actions nicht angehängt werden (zur Zeit)
-                Kistl.App.Base.ObjectClassClient client = (Kistl.App.Base.ObjectClassClient)ObjectBroker.GetClientObject(typeof(Kistl.App.Base.ObjectClassClient).AssemblyQualifiedName);
+                //Kistl.App.Base.ObjectClassClient client = (Kistl.App.Base.ObjectClassClient)ObjectBrokerClient.GetClientObject(typeof(Kistl.App.Base.ObjectClassClient).AssemblyQualifiedName);
+
+                // Hat sich quasi schon erledigt (siehe oben)
+                Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
                 this.DataContext = client.GetArrayFromXML(App.Service.GetList("Kistl.App.Base.ObjectClassServer, Kistl.App.Projekte"));
             }
             catch (Exception ex)

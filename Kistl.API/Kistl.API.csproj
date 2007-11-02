@@ -56,6 +56,7 @@
     <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
     <Compile Include="IKistlService.cs" />
+    <Compile Include="IObjectBroker.cs" />
     <Compile Include="IServerObject.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

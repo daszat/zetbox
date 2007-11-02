@@ -6,8 +6,13 @@ using Kistl.API;
 
 namespace Kistl.Client
 {
-    public class ObjectBroker
+    public class ObjectBrokerClient : API.IObjectBroker
     {
+        /// <summary>
+        /// Helper Function for generic access
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static IClientObject GetClientObject(string type)
         {
             if (string.IsNullOrEmpty(type)) throw new ArgumentException("Type is empty");
@@ -18,11 +23,30 @@ namespace Kistl.Client
             IClientObject obj = Activator.CreateInstance(t) as IClientObject;
             if (obj == null) throw new ApplicationException("Cannot create instance");
 
-            // TODO: Lt. Metadaten dynamisch laden
-            Kistl.API.ICustomClientActions customActions = new Kistl.App.Projekte.CustomClientActions();
-            customActions.Attach(obj);
-
             return obj;
         }
+
+        #region IObjectBroker Members
+
+        public void AttachEvents(IDataObject obj)
+        {
+            // TODO: lt. Metadaten
+            API.ICustomClientActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomClientActions, Kistl.App.Projekte")) as API.ICustomClientActions;
+            actions.Attach(obj);
+        }
+
+        public void AttachEvents(IClientObject obj)
+        {
+            // TODO: Lt. Metadaten dynamisch laden
+            API.ICustomClientActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomClientActions, Kistl.App.Projekte")) as API.ICustomClientActions;
+            customActions.Attach(obj);
+        }
+
+        public void AttachEvents(IServerObject obj)
+        {
+            throw new InvalidOperationException("Wrong Object broker - I'm a Client Object Broker");
+        }
+
+        #endregion
     }
 }

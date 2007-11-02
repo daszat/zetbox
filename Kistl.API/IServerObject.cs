@@ -22,6 +22,11 @@ namespace Kistl.API
 
     public class ServerObject<T> : IServerObject where T : class, IDataObject, new()
     {
+        public ServerObject()
+        {
+            API.ObjectBrokerFactory.Current.AttachEvents(this);
+        }
+
         public string GetList(DataContext ctx)
         {
             var result = from a in ctx.GetTable<T>()

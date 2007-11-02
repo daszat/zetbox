@@ -10,7 +10,7 @@ namespace Kistl.Server
 {
     public class KistlService : API.IKistlService
     {
-        private DataContext GetDataContext()
+        private static DataContext GetDataContext()
         {
             return new System.Data.Linq.DataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
         }
@@ -19,7 +19,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBroker.GetServerObject(type).GetList(GetDataContext());
+                return ObjectBrokerServer.GetServerObject(type).GetList(GetDataContext());
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBroker.GetServerObject(type).GetListOf(GetDataContext(), ID, property);
+                return ObjectBrokerServer.GetServerObject(type).GetListOf(GetDataContext(), ID, property);
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBroker.GetServerObject(type).GetObject(GetDataContext(), ID);
+                return ObjectBrokerServer.GetServerObject(type).GetObject(GetDataContext(), ID);
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBroker.GetServerObject(type).SetObject(GetDataContext(), obj);
+                return ObjectBrokerServer.GetServerObject(type).SetObject(GetDataContext(), obj);
             }
             catch (Exception ex)
             {

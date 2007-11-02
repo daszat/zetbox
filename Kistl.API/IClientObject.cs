@@ -17,48 +17,40 @@ namespace Kistl.API
 
     public class ClientObject<T> : IClientObject where T : class, IDataObject, new()
     {
-        /// <summary>
-        /// Adds Eventhandler
-        /// </summary>
-        /// <param name="obj"></param>
-        protected void AttachClientEvents(IDataObject obj)
+        public ClientObject()
         {
-            // TODO: lt. Metadaten
-            API.ICustomClientActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomClientActions, Kistl.App.Projekte")) as API.ICustomClientActions;
-            actions.Attach(obj);
+            API.ObjectBrokerFactory.Current.AttachEvents(this);
         }
 
         /// <summary>
-        /// Adds Evenhandler
+        /// Generic Helper Method
         /// </summary>
-        /// <param name="list"></param>
-        protected void AttachClientEvents(IEnumerable list)
-        {
-            foreach (IDataObject obj in list)
-            {
-                // Add Eventhandler
-                AttachClientEvents(obj);
-            }
-        }
-
+        /// <param name="xml"></param>
+        /// <returns></returns>
         public IEnumerable GetArrayFromXML(string xml)
         {
             IEnumerable result = xml.FromXmlString<List<T>>();
-            AttachClientEvents(result);
             return result;
         }
 
+        /// <summary>
+        /// Generic Helper Method
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
         public IDataObject GetObjectFromXML(string xml)
         {
             T obj = xml.FromXmlString<T>();
-            AttachClientEvents(obj);
             return obj;
         }
 
+        /// <summary>
+        /// Generic Helper Method
+        /// </summary>
+        /// <returns></returns>
         public IDataObject CreateNew()
         {
             T obj = new T();
-            AttachClientEvents(obj);
             return obj;
         }
     }

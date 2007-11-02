@@ -9,30 +9,43 @@ namespace Kistl.Server
 {
     public class Program
     {
-        static ServiceHost host = null;
-        static Thread serviceThread = null;
+        static Server server = new Server();
 
         static void Main(string[] args)
         {
-            StartServer();
+            server.StartServer();
             Console.WriteLine("Server started, press the anykey");
             Console.ReadLine();
 
-            host.Close();
+            server.StopServer();
         }
+    }
 
-        public static void StartServer()
+    public class Server : MarshalByRefObject
+    {
+        private ServiceHost host = null;
+        private Thread serviceThread = null;
+        private AutoResetEvent serverStarted = new AutoResetEvent(false);
+
+        public void StartServer()
         {
-            serviceThread = new Thread(new ThreadStart(RunWCFServer));
+            API.ObjectBrokerFactory.Init(new ObjectBrokerServer());
+
+            serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
             serviceThread.Start();
+
+            if (!serverStarted.WaitOne(20 * 1000, false))
+            {
+                throw new ApplicationException("Server did not started within 20 sec.");
+            }
         }
 
-        public static void StopServer()
+        public void StopServer()
         {
             host.Close();
         }
 
-        public static void RunWCFServer()
+        private void RunWCFServer()
         {
             Console.WriteLine("Starting Server...");
 
@@ -44,18 +57,22 @@ namespace Kistl.Server
 
             host.Open();
 
+            serverStarted.Set();
+
+            Console.WriteLine("Server started");
+
             while (host.State == CommunicationState.Opened)
             {
                 Thread.Sleep(100);
             }
         }
 
-        static void host_Faulted(object sender, EventArgs e)
+        private void host_Faulted(object sender, EventArgs e)
         {
             Console.WriteLine("Host faulted");
         }
 
-        static void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
+        private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
         {
             Console.WriteLine("UnknownMessageReceived: {0}", e.Message.ToString());
         }

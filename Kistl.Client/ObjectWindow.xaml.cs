@@ -79,7 +79,7 @@ namespace Kistl.Client
             {
                 this.Title = ClientObjectType;
 
-                client = ObjectBroker.GetClientObject(ClientObjectType);
+                client = ObjectBrokerClient.GetClientObject(ClientObjectType);
 
                 if (ObjectID != API.Helper.INVALIDID)
                 {

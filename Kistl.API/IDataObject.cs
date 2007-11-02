@@ -15,6 +15,11 @@ namespace Kistl.API
 
     public abstract class BaseDataObject : IDataObject, INotifyPropertyChanged
     {
+        public BaseDataObject()
+        {
+            API.ObjectBrokerFactory.Current.AttachEvents(this);
+        }
+
         #region IDataObject Members
 
         public abstract int ID { get; set; }

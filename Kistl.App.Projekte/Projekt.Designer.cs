@@ -71,7 +71,7 @@ namespace Kistl.App.Projekte
         public IEnumerable GetArrayOfTasksFromXML(string xml)
         {
             IEnumerable result = xml.FromXmlString<List<Task>>();
-            AttachClientEvents(result);
+            //AttachClientEvents(result);
             return result;
         }
     }
