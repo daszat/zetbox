@@ -50,7 +50,7 @@ namespace Kistl.Client
         {
             // TODO: Lt. Metadaten dynamisch laden
             API.ICustomClientActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomClientActions, Kistl.App.Projekte")) as API.ICustomClientActions;
-            customActions.Attach(obj);
+            actions.Attach(obj);
         }
 
         /// <summary>

@@ -39,9 +39,19 @@ namespace Kistl.Client
         /// </summary>
         public int ObjectID { get; set; }
 
+        /// <summary>
+        /// Client BL Objekt instanz
+        /// </summary>
         private IClientObject client = null;
+
+        /// <summary>
+        /// Datenobjekt, das angezeigt wird.
+        /// </summary>
         private Kistl.API.IDataObject obj = null;
 
+        /// <summary>
+        /// Objekt _einmalig_ binden - das erzeugt "nur" die WPF Controls
+        /// </summary>
         private void Bind()
         {
             data.DataContext = obj;
