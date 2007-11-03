@@ -55,8 +55,15 @@ namespace Kistl.Server
             // Zunächst sicherheitshabler die Objektdatenklassen erzeugen 
             // Das ist nur ein Testeinsprungspunkt
 
-            DataObjectGenerator g = new DataObjectGenerator();
-            g.Generate(Helper.GetDataContext(), @"c:\temp\KistlCodeGen");
+            try
+            {
+                DataObjectGenerator g = new DataObjectGenerator();
+                g.Generate(Helper.GetDataContext(), @"c:\temp\KistlCodeGen");
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex);
+            }
 
             serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
             serviceThread.Start();

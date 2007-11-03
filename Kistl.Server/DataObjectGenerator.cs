@@ -9,6 +9,7 @@ using System.CodeDom.Compiler;
 using Kistl.App.Base;
 using System.IO;
 using System.Reflection;
+using System.Collections;
 
 namespace Kistl.Server
 {
@@ -46,8 +47,11 @@ namespace Kistl.Server
             ns.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
             ns.Imports.Add(new CodeNamespaceImport("System.Linq"));
             ns.Imports.Add(new CodeNamespaceImport("System.Text"));
+            ns.Imports.Add(new CodeNamespaceImport("System.Data.Linq"));
             ns.Imports.Add(new CodeNamespaceImport("System.Data.Linq.Mapping"));
             ns.Imports.Add(new CodeNamespaceImport("System.Collections"));
+            ns.Imports.Add(new CodeNamespaceImport("System.Xml"));
+            ns.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API"));
 
             // Create Class
@@ -65,6 +69,9 @@ namespace Kistl.Server
 
             // Create Properties
             GenerateProperties(objClass, c);
+
+            // Create DataObject Default Methods
+            GenerateDefaultMethods(objClass, c);
 
             // Create ServerBL
             GenerateServerBL(objClass, ns);
@@ -107,7 +114,7 @@ namespace Kistl.Server
                 new CodeAttributeArgument("IsPrimaryKey",
                     new CodePrimitiveExpression(true)), 
                 new CodeAttributeArgument("UpdateCheck",
-                    new CodeSnippetExpression("UpdateCheck.Never")), // TODO: Das ist c# Spezifisch
+                    new CodeSnippetExpression("UpdateCheck.Never")), // TODO: Das ist C# spezifisch
                 new CodeAttributeArgument("Storage",
                     new CodePrimitiveExpression("_ID")) ));
 
@@ -115,8 +122,97 @@ namespace Kistl.Server
             p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_ID"), new CodePropertySetValueReferenceExpression()));
         }
 
+        private void GenerateDefaultMethods(ObjectClass objClass, CodeTypeDeclaration c)
+        {
+            // Create Delegate
+            CodeMemberEvent e = new CodeMemberEvent();
+            c.Members.Add(e);
+
+            e.Attributes = MemberAttributes.Public;
+            e.Type = new CodeTypeReference("ToStringHandler", new CodeTypeReference(objClass.ClassName));
+            e.Name = "OnToString";
+
+            // Create ToString
+            CodeMemberMethod m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Name = "ToString";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(string));
+            m.Statements.Add(new CodeSnippetExpression(@"if (OnToString != null)
+            {
+                ToStringEventArgs e = new ToStringEventArgs();
+                OnToString(this, e);
+                return e.Result;
+            }
+            return base.ToString()"));// TODO: Das ist C# spezifisch
+        }
+
         private void GenerateProperties(ObjectClass objClass, CodeTypeDeclaration c)
         {
+            foreach (ObjectProperty prop in objClass.Properties)
+            {
+                if (string.IsNullOrEmpty(prop.AssociationClass))
+                {
+                    // Simple Property
+                    CodeMemberField f = new CodeMemberField(prop.DataType, "_" + prop.PropertyName);
+                    c.Members.Add(f);
+
+                    CodeMemberProperty p = new CodeMemberProperty();
+                    c.Members.Add(p);
+
+                    p.Name = prop.PropertyName;
+                    p.HasGet = true;
+                    p.HasSet = true;
+                    p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                    p.Type = new CodeTypeReference(Type.GetType(prop.DataType, true, true));
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration("Column",
+                        new CodeAttributeArgument("UpdateCheck",
+                            new CodeSnippetExpression("UpdateCheck.Never")), // TODO: Das ist C# spezifisch
+                    new CodeAttributeArgument("Storage",
+                        new CodePrimitiveExpression("_" + prop.PropertyName))));
+
+                    p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
+                    p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+                }
+                else
+                {
+                    // Association
+                    // TODO: Das ist eigentlich falsch herum, das sollte generiert werden,
+                    // wenn bei der referenzierenden Klasse ein FK eingetragen wurde.
+                    // Das sind quasi "AutoProperties"
+                    CodeMemberField f = new CodeMemberField(
+                        new CodeTypeReference("EntitySet", new CodeTypeReference(prop.DataType)), "_" + prop.PropertyName);
+                    f.InitExpression = new CodeObjectCreateExpression(new CodeTypeReference("EntitySet", new CodeTypeReference(prop.DataType)));
+                    c.Members.Add(f);
+
+                    CodeMemberProperty p = new CodeMemberProperty();
+                    c.Members.Add(p);
+
+                    p.Name = prop.PropertyName;
+                    p.HasGet = true;
+                    p.HasSet = true;
+                    p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                    p.Type = new CodeTypeReference("EntitySet", new CodeTypeReference(prop.DataType));
+
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration("Association",
+                        new CodeAttributeArgument("Storage",
+                            new CodePrimitiveExpression("_" + prop.PropertyName)),
+                        new CodeAttributeArgument("OtherKey",
+                            new CodePrimitiveExpression("fk_" + objClass.ClassName)) ));
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration("ServerObject",
+                        new CodeAttributeArgument("FullName",
+                            new CodePrimitiveExpression(prop.DataType + "Server, Kistl.App.Projekte"))));
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration("ClientObject",
+                        new CodeAttributeArgument("FullName",
+                            new CodePrimitiveExpression(prop.DataType + "Client, Kistl.App.Projekte"))));
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+
+
+                    p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
+                    p.SetStatements.Add(new CodeMethodInvokeExpression(new CodeSnippetExpression("_" + prop.PropertyName), "Assign", new CodePropertySetValueReferenceExpression()));
+
+                }
+            }
         }
 
         private void GenerateServerBL(ObjectClass objClass, CodeNamespace ns)
@@ -135,6 +231,33 @@ namespace Kistl.Server
             c.IsClass = true;
             c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
             c.BaseTypes.Add(new CodeTypeReference("ClientObject", new CodeTypeReference(objClass.ClassName)));
+
+            // Create GetListOf Methods
+            foreach (ObjectProperty prop in objClass.Properties)
+            {
+                if (!string.IsNullOrEmpty(prop.AssociationClass))
+                {
+                    CodeMemberMethod m = new CodeMemberMethod();
+                    c.Members.Add(m);
+                    m.Comments.Add(new CodeCommentStatement("Autogeneriert, um die gebundenen Listen zu bekommen"));
+
+                    m.Name = "GetArrayOf" + prop.PropertyName + "FromXML";
+                    m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                    m.ReturnType = new CodeTypeReference(typeof(IEnumerable));
+                    m.Parameters.Add(new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(string)), "xml"));
+                    m.Statements.Add(new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeMethodReferenceExpression(
+                                new CodeVariableReferenceExpression("xml"), 
+                                "FromXmlString", 
+                                new CodeTypeReference[] 
+                                    {
+                                        new CodeTypeReference("List", new CodeTypeReference(prop.DataType))
+                                    }), 
+                                new CodeExpression[0])));
+                }
+            }
         }
 
     }

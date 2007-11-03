@@ -14,7 +14,7 @@ create table ObjectProperties (
 	[ID] int identity(1,1) not null,
 	[fk_ObjectClass] int not null,
 	[PropertyName] nvarchar(50) not null,
-	[DataType] nvarchar(20) not null,
+	[DataType] nvarchar(150) not null,
 	[AssociationClass] nvarchar(50) null
 	CONSTRAINT [PK_ObjectProperties] PRIMARY KEY CLUSTERED 
 	(
