@@ -43,6 +43,12 @@ namespace Kistl.App.Projekte
                 App.Base.ObjectClass impl = obj as App.Base.ObjectClass;
                 impl.OnToString +=new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectClass>(ObjectClass_OnToString);
             }
+
+            if (obj is App.Base.ObjectProperty)
+            {
+                App.Base.ObjectProperty impl = obj as App.Base.ObjectProperty;
+                impl.OnToString += new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectProperty>(ObjectProperty_OnToString);
+            }
         }
     }
 }

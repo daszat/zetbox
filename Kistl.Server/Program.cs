@@ -52,6 +52,12 @@ namespace Kistl.Server
         {
             API.ObjectBrokerFactory.Init(new ObjectBrokerServer());
 
+            // Zunächst sicherheitshabler die Objektdatenklassen erzeugen 
+            // Das ist nur ein Testeinsprungspunkt
+
+            DataObjectGenerator g = new DataObjectGenerator();
+            g.Generate(Helper.GetDataContext(), @"c:\temp\KistlCodeGen");
+
             serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
             serviceThread.Start();
 

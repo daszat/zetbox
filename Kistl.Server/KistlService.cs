@@ -14,16 +14,6 @@ namespace Kistl.Server
     public class KistlService : API.IKistlService
     {
         /// <summary>
-        /// Datacontext zurückgeben
-        /// TODO: Das hat da eigentlich gar nix zu suchen!
-        /// </summary>
-        /// <returns></returns>
-        private static DataContext GetDataContext()
-        {
-            return new System.Data.Linq.DataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
-        }
-
-        /// <summary>
         /// Implementierung der GetList Methode
         /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
         /// delegiert den Aufruf weiter
@@ -34,7 +24,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).GetList(GetDataContext());
+                return ObjectBrokerServer.GetServerObject(type).GetList(Helper.GetDataContext());
             }
             catch (Exception ex)
             {
@@ -56,7 +46,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).GetListOf(GetDataContext(), ID, property);
+                return ObjectBrokerServer.GetServerObject(type).GetListOf(Helper.GetDataContext(), ID, property);
             }
             catch (Exception ex)
             {
@@ -77,7 +67,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).GetObject(GetDataContext(), ID);
+                return ObjectBrokerServer.GetServerObject(type).GetObject(Helper.GetDataContext(), ID);
             }
             catch (Exception ex)
             {
@@ -98,7 +88,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).SetObject(GetDataContext(), obj);
+                return ObjectBrokerServer.GetServerObject(type).SetObject(Helper.GetDataContext(), obj);
             }
             catch (Exception ex)
             {

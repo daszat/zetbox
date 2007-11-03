@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataObjectGenerator.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ObjectBroker.cs" />
     <Compile Include="Program.cs" />

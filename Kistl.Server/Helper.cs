@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Linq;
 using System.Text;
 
 namespace Kistl.Server
@@ -17,6 +18,16 @@ namespace Kistl.Server
         public static void HandleError(Exception ex)
         {
             Console.WriteLine(ex.ToString());
+        }
+
+        /// <summary>
+        /// Datacontext zurückgeben
+        /// TODO: Das hat da eigentlich gar nix zu suchen!
+        /// </summary>
+        /// <returns></returns>
+        internal static DataContext GetDataContext()
+        {
+            return new DataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Kistl.App.Projekte
     /// Daten-Objekt Definition
     /// </summary>
     [Table(Name = "Tasks")]
-    public class Task : BaseDataObject
+    public sealed class Task : BaseDataObject
     {
         private int _ID = Helper.INVALIDID;
         [Column(IsDbGenerated = true, IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never, Storage = "_ID")]
@@ -51,7 +51,7 @@ namespace Kistl.App.Projekte
     /// Autogeneriert
     /// Server BL Implementierung.
     /// </summary>
-    public class TaskServer : API.ServerObject<Task>
+    public class TaskServer : ServerObject<Task>
     {
     }
 

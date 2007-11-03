@@ -26,6 +26,12 @@ namespace Kistl.App.Base
         public string ClassName { get; set; }
 
         [Column(UpdateCheck = UpdateCheck.Never)]
+        public string Namespace { get; set; }
+
+        [Column(UpdateCheck = UpdateCheck.Never)]
+        public string TableName { get; set; }
+
+        [Column(UpdateCheck = UpdateCheck.Never)]
         public string ServerObject { get; set; }
         
         [Column(UpdateCheck = UpdateCheck.Never)]
@@ -33,6 +39,24 @@ namespace Kistl.App.Base
 
         [Column(UpdateCheck = UpdateCheck.Never)]
         public string DataObject { get; set; }
+
+        private EntitySet<ObjectProperty> _Properties = new EntitySet<ObjectProperty>();
+
+        [Association(Storage = "_Properties", OtherKey = "fk_ObjectClass")]
+        [ServerObject(FullName = "Kistl.App.Base.ObjectPropertyServer, Kistl.App.Projekte")]
+        [ClientObject(FullName = "Kistl.App.Base.ObjectPropertyClient, Kistl.App.Projekte")]
+        [XmlIgnore] // Das verschwinded dann bald!
+        public EntitySet<ObjectProperty> Properties
+        {
+            get
+            {
+                return _Properties;
+            }
+            set
+            {
+                _Properties.Assign(value);
+            }
+        }
 
         public event ToStringHandler<ObjectClass> OnToString = null;
 
@@ -52,7 +76,7 @@ namespace Kistl.App.Base
     /// Autogeneriert
     /// Server BL Implementierung.
     /// </summary>
-    public class ObjectClassServer : API.ServerObject<ObjectClass>
+    public class ObjectClassServer : ServerObject<ObjectClass>
     {
     }
 
@@ -62,5 +86,14 @@ namespace Kistl.App.Base
     /// </summary>
     public class ObjectClassClient : ClientObject<ObjectClass>
     {
+        /// <summary>
+        /// Autogeneriert, um die angehängten Listen zu bekommen
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
+        public IEnumerable GetArrayOfPropertiesFromXML(string xml)
+        {
+            return xml.FromXmlString<List<ObjectProperty>>();
+        }
     }
 }

@@ -78,8 +78,7 @@ namespace Kistl.App.Projekte
         /// <returns></returns>
         public IEnumerable GetArrayOfTasksFromXML(string xml)
         {
-            IEnumerable result = xml.FromXmlString<List<Task>>();
-            return result;
+            return xml.FromXmlString<List<Task>>();
         }
     }
 }

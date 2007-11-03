@@ -40,5 +40,15 @@ namespace Kistl.App.Projekte
         {
             e.Result = obj.ClassName;
         }
+
+        /// <summary>
+        /// ToString Event überschreiben
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="e"></param>
+        void ObjectProperty_OnToString(Base.ObjectProperty obj, Kistl.API.ToStringEventArgs e)
+        {
+            e.Result = string.Format("{0} {1}", obj.DataType, obj.PropertyName);
+        }
     }
 }
