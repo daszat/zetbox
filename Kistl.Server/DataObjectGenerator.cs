@@ -151,7 +151,7 @@ namespace Kistl.Server
         {
             foreach (ObjectProperty prop in objClass.Properties)
             {
-                if (string.IsNullOrEmpty(prop.AssociationClass))
+                if (!prop.IsList)
                 {
                     // Simple Property
                     CodeMemberField f = new CodeMemberField(prop.DataType, "_" + prop.PropertyName);
@@ -174,7 +174,7 @@ namespace Kistl.Server
                     p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
                     p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
                 }
-                else
+                else if (prop.IsList && prop.IsAssociation)
                 {
                     // Association
                     // TODO: Das ist eigentlich falsch herum, das sollte generiert werden,
@@ -198,7 +198,7 @@ namespace Kistl.Server
                         new CodeAttributeArgument("Storage",
                             new CodePrimitiveExpression("_" + prop.PropertyName)),
                         new CodeAttributeArgument("OtherKey",
-                            new CodePrimitiveExpression("fk_" + objClass.ClassName)) ));
+                            new CodePrimitiveExpression("fk_" + objClass.ClassName))));
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("ServerObject",
                         new CodeAttributeArgument("FullName",
                             new CodePrimitiveExpression(prop.DataType + "Server, Kistl.App.Projekte"))));
@@ -211,6 +211,11 @@ namespace Kistl.Server
                     p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
                     p.SetStatements.Add(new CodeMethodInvokeExpression(new CodeSnippetExpression("_" + prop.PropertyName), "Assign", new CodePropertySetValueReferenceExpression()));
 
+                }
+                else
+                {
+                    // not supported yet
+                    // just ignore it for now
                 }
             }
         }
@@ -235,7 +240,7 @@ namespace Kistl.Server
             // Create GetListOf Methods
             foreach (ObjectProperty prop in objClass.Properties)
             {
-                if (!string.IsNullOrEmpty(prop.AssociationClass))
+                if (prop.IsList)
                 {
                     CodeMemberMethod m = new CodeMemberMethod();
                     c.Members.Add(m);

@@ -14,18 +14,31 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Data.Linq;
     using System.Data.Linq.Mapping;
     using System.Collections;
+    using System.Xml;
+    using System.Xml.Serialization;
     using Kistl.API;
-
-
-    [Table(Name = "ObjectProperties")]
+    
+    
+    [Table(Name="ObjectProperties")]
     public sealed class ObjectProperty : BaseDataObject
     {
-
+        
         private int _ID = Helper.INVALIDID;
-
-        [Column(IsDbGenerated = true, IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never, Storage = "_ID")]
+        
+        private int _fk_ObjectClass;
+        
+        private string _PropertyName;
+        
+        private string _DataType;
+        
+        private bool _IsList;
+        
+        private bool _IsAssociation;
+        
+        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
         public override int ID
         {
             get
@@ -37,18 +50,74 @@ namespace Kistl.App.Base
                 _ID = value;
             }
         }
-
-        [Column(UpdateCheck = UpdateCheck.Never)]
-        public int fk_ObjectClass { get; set; }
-        [Column(UpdateCheck = UpdateCheck.Never)]
-        public string PropertyName { get; set; }
-        [Column(UpdateCheck = UpdateCheck.Never)]
-        public string DataType { get; set; }
-        [Column(UpdateCheck = UpdateCheck.Never)]
-        public string AssociationClass { get; set; }
-
-        public event ToStringHandler<ObjectProperty> OnToString = null;
-
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_ObjectClass")]
+        public int fk_ObjectClass
+        {
+            get
+            {
+                return _fk_ObjectClass;
+            }
+            set
+            {
+                _fk_ObjectClass = value;
+            }
+        }
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_PropertyName")]
+        public string PropertyName
+        {
+            get
+            {
+                return _PropertyName;
+            }
+            set
+            {
+                _PropertyName = value;
+            }
+        }
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DataType")]
+        public string DataType
+        {
+            get
+            {
+                return _DataType;
+            }
+            set
+            {
+                _DataType = value;
+            }
+        }
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsList")]
+        public bool IsList
+        {
+            get
+            {
+                return _IsList;
+            }
+            set
+            {
+                _IsList = value;
+            }
+        }
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsAssociation")]
+        public bool IsAssociation
+        {
+            get
+            {
+                return _IsAssociation;
+            }
+            set
+            {
+                _IsAssociation = value;
+            }
+        }
+        
+        public event ToStringHandler<ObjectProperty> OnToString;
+        
         public override string ToString()
         {
             if (OnToString != null)
@@ -60,11 +129,11 @@ namespace Kistl.App.Base
             return base.ToString();
         }
     }
-
+    
     public sealed class ObjectPropertyServer : ServerObject<ObjectProperty>
     {
     }
-
+    
     public sealed class ObjectPropertyClient : ClientObject<ObjectProperty>
     {
     }

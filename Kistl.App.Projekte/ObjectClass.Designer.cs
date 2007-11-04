@@ -20,29 +20,29 @@ namespace Kistl.App.Base
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-
-
-    [Table(Name = "ObjectClasses")]
+    
+    
+    [Table(Name="ObjectClasses")]
     public sealed class ObjectClass : BaseDataObject
     {
-
+        
         private int _ID = Helper.INVALIDID;
-
+        
         private string _ClassName;
-
+        
         private string _Namespace;
-
+        
         private string _TableName;
-
+        
         private string _ServerObject;
-
+        
         private string _ClientObject;
-
+        
         private string _DataObject;
-
+        
         private EntitySet<Kistl.App.Base.ObjectProperty> _Properties = new EntitySet<Kistl.App.Base.ObjectProperty>();
-
-        [Column(IsDbGenerated = true, IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never, Storage = "_ID")]
+        
+        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
         public override int ID
         {
             get
@@ -54,8 +54,8 @@ namespace Kistl.App.Base
                 _ID = value;
             }
         }
-
-        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_ClassName")]
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_ClassName")]
         public string ClassName
         {
             get
@@ -67,8 +67,8 @@ namespace Kistl.App.Base
                 _ClassName = value;
             }
         }
-
-        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_Namespace")]
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_Namespace")]
         public string Namespace
         {
             get
@@ -80,8 +80,8 @@ namespace Kistl.App.Base
                 _Namespace = value;
             }
         }
-
-        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_TableName")]
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_TableName")]
         public string TableName
         {
             get
@@ -93,8 +93,8 @@ namespace Kistl.App.Base
                 _TableName = value;
             }
         }
-
-        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_ServerObject")]
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_ServerObject")]
         public string ServerObject
         {
             get
@@ -106,8 +106,8 @@ namespace Kistl.App.Base
                 _ServerObject = value;
             }
         }
-
-        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_ClientObject")]
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_ClientObject")]
         public string ClientObject
         {
             get
@@ -119,8 +119,8 @@ namespace Kistl.App.Base
                 _ClientObject = value;
             }
         }
-
-        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_DataObject")]
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DataObject")]
         public string DataObject
         {
             get
@@ -132,10 +132,10 @@ namespace Kistl.App.Base
                 _DataObject = value;
             }
         }
-
-        [Association(Storage = "_Properties", OtherKey = "fk_ObjectClass")]
-        [ServerObject(FullName = "Kistl.App.Base.ObjectPropertyServer, Kistl.App.Projekte")]
-        [ClientObject(FullName = "Kistl.App.Base.ObjectPropertyClient, Kistl.App.Projekte")]
+        
+        [Association(Storage="_Properties", OtherKey="fk_ObjectClass")]
+        [ServerObject(FullName="Kistl.App.Base.ObjectPropertyServer, Kistl.App.Projekte")]
+        [ClientObject(FullName="Kistl.App.Base.ObjectPropertyClient, Kistl.App.Projekte")]
         [XmlIgnore()]
         public EntitySet<Kistl.App.Base.ObjectProperty> Properties
         {
@@ -148,9 +148,9 @@ namespace Kistl.App.Base
                 _Properties.Assign(value);
             }
         }
-
+        
         public event ToStringHandler<ObjectClass> OnToString;
-
+        
         public override string ToString()
         {
             if (OnToString != null)
@@ -162,14 +162,14 @@ namespace Kistl.App.Base
             return base.ToString();
         }
     }
-
+    
     public sealed class ObjectClassServer : ServerObject<ObjectClass>
     {
     }
-
+    
     public sealed class ObjectClassClient : ClientObject<ObjectClass>
     {
-
+        
         // Autogeneriert, um die gebundenen Listen zu bekommen
         public System.Collections.IEnumerable GetArrayOfPropertiesFromXML(string xml)
         {
