@@ -15,28 +15,28 @@ namespace Kistl.API
         public override void SubmitChanges(System.Data.Linq.ConflictMode failureMode)
         {
             ChangeSet c = this.GetChangeSet();
-            List<IDataObject> commitList = new List<IDataObject>();
+            List<IDataObject> saveList = new List<IDataObject>();
 
             foreach(IDataObject obj in c.AddedEntities)
             {
-                commitList.Add(obj);
+                saveList.Add(obj);
             }
 
             foreach (IDataObject obj in c.ModifiedEntities)
             {
-                commitList.Add(obj);
+                saveList.Add(obj);
             }
 
-            foreach (IDataObject obj in commitList)
+            foreach (IDataObject obj in saveList)
             {
-                obj.NotifyPreCommit(this);
+                obj.NotifyPreSave(this);
             }
 
             base.SubmitChanges(failureMode);
 
-            foreach (IDataObject obj in commitList)
+            foreach (IDataObject obj in saveList)
             {
-                obj.NotifyPostCommit(this);
+                obj.NotifyPostSave(this);
             }
 
         }

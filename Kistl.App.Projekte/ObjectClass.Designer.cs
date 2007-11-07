@@ -149,8 +149,8 @@ namespace Kistl.App.Base
             }
         }
 
-        public event ServerObjectHandler<ObjectClass> OnPreCommit = null;
-        public event ServerObjectHandler<ObjectClass> OnPostCommit = null;
+        public event ServerObjectHandler<ObjectClass> OnPreSave = null;
+        public event ServerObjectHandler<ObjectClass> OnPostSave = null;
         public event ToStringHandler<ObjectClass> OnToString;
         
         public override string ToString()
@@ -164,14 +164,14 @@ namespace Kistl.App.Base
             return base.ToString();
         }
 
-        public override void NotifyPreCommit(KistlDataContext ctx)
+        public override void NotifyPreSave(KistlDataContext ctx)
         {
-            if (OnPreCommit != null) OnPreCommit(ctx, this);
+            if (OnPreSave != null) OnPreSave(ctx, this);
         }
 
-        public override void NotifyPostCommit(KistlDataContext ctx)
+        public override void NotifyPostSave(KistlDataContext ctx)
         {
-            if (OnPostCommit != null) OnPostCommit(ctx, this);
+            if (OnPostSave != null) OnPostSave(ctx, this);
         }
 
     }

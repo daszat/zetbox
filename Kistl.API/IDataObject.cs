@@ -21,8 +21,8 @@ namespace Kistl.API
         /// </summary>
         void NotifyChange();
 
-        void NotifyPreCommit(KistlDataContext ctx);
-        void NotifyPostCommit(KistlDataContext ctx);
+        void NotifyPreSave(KistlDataContext ctx);
+        void NotifyPostSave(KistlDataContext ctx);
     }
 
     /// <summary>
@@ -69,8 +69,8 @@ namespace Kistl.API
         /// </summary>
         public abstract int ID { get; set; }
 
-        public abstract void NotifyPreCommit(KistlDataContext ctx);
-        public abstract void NotifyPostCommit(KistlDataContext ctx);
+        public abstract void NotifyPreSave(KistlDataContext ctx);
+        public abstract void NotifyPostSave(KistlDataContext ctx);
 
         #endregion
 
