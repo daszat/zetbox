@@ -49,14 +49,6 @@ namespace Kistl.API
     }
 
     /// <summary>
-    /// Handler für Server Custom Events. TODO: Außer SetObject hat's noch niemand implementiert.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="ctx"></param>
-    /// <param name="obj"></param>
-    public delegate void ServerObjectHandler<T>(KistlDataContext ctx, T obj) where T : class, IDataObject, new();
-
-    /// <summary>
     /// Basis Objekt für Server BL. Implementiert Linq to SQL.
     /// TODO: Für die Custom Actions ist das noch nicht gut genug typisiert. 
     /// Es reicht einmal für den generischen Teil.
@@ -69,7 +61,6 @@ namespace Kistl.API
         /// </summary>
         public ServerObject()
         {
-            API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
         /// <summary>
@@ -132,9 +123,6 @@ namespace Kistl.API
             return obj.ToXmlString();
         }
 
-        public event ServerObjectHandler<T> OnPreSetObject = null;
-        public event ServerObjectHandler<T> OnPostSetObject = null;
-
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
@@ -145,8 +133,6 @@ namespace Kistl.API
         {
             T obj = xml.FromXmlString<T>();
 
-            if (OnPreSetObject != null) OnPreSetObject(ctx, obj);
-
             if (obj.ID != API.Helper.INVALIDID)
             {
                 ctx.GetTable<T>().Attach(obj, true);
@@ -156,8 +142,6 @@ namespace Kistl.API
                 ctx.GetTable<T>().Add(obj);
             }
             ctx.SubmitChanges();
-
-            if (OnPostSetObject != null) OnPostSetObject(ctx, obj);
 
             return obj.ToXmlString();
         }

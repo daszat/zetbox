@@ -32,6 +32,8 @@ namespace Kistl.App.Projekte
         [Column(UpdateCheck = UpdateCheck.Never)]
         public int fk_Projekt { get; set; }
 
+        public event ServerObjectHandler<Task> OnPreCommit = null;
+        public event ServerObjectHandler<Task> OnPostCommit = null;
 
         public event ToStringHandler<Task> OnToString = null;
 
@@ -44,6 +46,16 @@ namespace Kistl.App.Projekte
                 return e.Result;
             }
             return base.ToString();
+        }
+
+        public override void NotifyPreCommit(KistlDataContext ctx)
+        {
+            if (OnPreCommit != null) OnPreCommit(ctx, this);
+        }
+
+        public override void NotifyPostCommit(KistlDataContext ctx)
+        {
+            if (OnPostCommit != null) OnPostCommit(ctx, this);
         }
     }
 

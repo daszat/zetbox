@@ -12,18 +12,6 @@ namespace Kistl.App.Projekte
     /// </summary>
     public partial class CustomClientActions : API.ICustomClientActions
     {
-        public void Attach(Kistl.API.IClientObject client)
-        {
-            if (client is API.ClientObject<Projekt>)
-            {
-                API.ClientObject<Projekt> impl = client as API.ClientObject<Projekt>;
-            }
-            if (client is API.ClientObject<Task>)
-            {
-                API.ClientObject<Task> impl = client as API.ClientObject<Task>;
-            }
-        }
-
         public void Attach(Kistl.API.IDataObject obj)
         {
             if (obj is Projekt)

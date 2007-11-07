@@ -115,7 +115,9 @@ namespace Kistl.App.Base
                 _IsAssociation = value;
             }
         }
-        
+
+        public event ServerObjectHandler<ObjectProperty> OnPreCommit = null;
+        public event ServerObjectHandler<ObjectProperty> OnPostCommit = null;
         public event ToStringHandler<ObjectProperty> OnToString;
         
         public override string ToString()
@@ -128,6 +130,17 @@ namespace Kistl.App.Base
             }
             return base.ToString();
         }
+
+        public override void NotifyPreCommit(KistlDataContext ctx)
+        {
+            if (OnPreCommit != null) OnPreCommit(ctx, this);
+        }
+
+        public override void NotifyPostCommit(KistlDataContext ctx)
+        {
+            if (OnPostCommit != null) OnPostCommit(ctx, this);
+        }
+
     }
     
     public sealed class ObjectPropertyServer : ServerObject<ObjectProperty>

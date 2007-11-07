@@ -20,6 +20,9 @@ namespace Kistl.API
         /// Zum Melden, dass sich das Datenobjekt geänder hat.
         /// </summary>
         void NotifyChange();
+
+        void NotifyPreCommit(KistlDataContext ctx);
+        void NotifyPostCommit(KistlDataContext ctx);
     }
 
     /// <summary>
@@ -37,6 +40,14 @@ namespace Kistl.API
     /// <param name="obj"></param>
     /// <param name="e"></param>
     public delegate void ToStringHandler<T>(T obj, ToStringEventArgs e) where T : class, IDataObject, new();
+
+    /// <summary>
+    /// Handler für Server Custom Events. TODO: Außer SetObject hat's noch niemand implementiert.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="ctx"></param>
+    /// <param name="obj"></param>
+    public delegate void ServerObjectHandler<T>(KistlDataContext ctx, T obj) where T : class, IDataObject, new();
 
     /// <summary>
     /// Basis Datenobjekt. Attached sich automatisch an den ObjectBroker zur Verteilung der Events
@@ -57,6 +68,9 @@ namespace Kistl.API
         /// Jeder hat eine ID
         /// </summary>
         public abstract int ID { get; set; }
+
+        public abstract void NotifyPreCommit(KistlDataContext ctx);
+        public abstract void NotifyPostCommit(KistlDataContext ctx);
 
         #endregion
 

@@ -148,7 +148,9 @@ namespace Kistl.App.Base
                 _Properties.Assign(value);
             }
         }
-        
+
+        public event ServerObjectHandler<ObjectClass> OnPreCommit = null;
+        public event ServerObjectHandler<ObjectClass> OnPostCommit = null;
         public event ToStringHandler<ObjectClass> OnToString;
         
         public override string ToString()
@@ -161,6 +163,17 @@ namespace Kistl.App.Base
             }
             return base.ToString();
         }
+
+        public override void NotifyPreCommit(KistlDataContext ctx)
+        {
+            if (OnPreCommit != null) OnPreCommit(ctx, this);
+        }
+
+        public override void NotifyPostCommit(KistlDataContext ctx)
+        {
+            if (OnPostCommit != null) OnPostCommit(ctx, this);
+        }
+
     }
     
     public sealed class ObjectClassServer : ServerObject<ObjectClass>

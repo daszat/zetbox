@@ -12,7 +12,6 @@ namespace Kistl.API
     /// </summary>
     public interface ICustomServerActions
     {
-        void Attach(IServerObject server);
         void Attach(IDataObject obj);
     }
 
@@ -23,7 +22,6 @@ namespace Kistl.API
     /// </summary>
     public interface ICustomClientActions
     {
-        void Attach(IClientObject client);
         void Attach(IDataObject obj);
     }
 
@@ -35,8 +33,6 @@ namespace Kistl.API
     public interface ICustomActionsManager
     {
         void AttachEvents(IDataObject obj);
-        void AttachEvents(IClientObject obj);
-        void AttachEvents(IServerObject obj);
     }
 
     /// <summary>

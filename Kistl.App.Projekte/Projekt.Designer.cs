@@ -43,6 +43,8 @@ namespace Kistl.App.Projekte
             }
         }
 
+        public event ServerObjectHandler<Projekt> OnPreCommit = null;
+        public event ServerObjectHandler<Projekt> OnPostCommit = null;
         public event ToStringHandler<Projekt> OnToString = null;
 
         public override string ToString()
@@ -55,6 +57,17 @@ namespace Kistl.App.Projekte
             }
             return base.ToString();
         }
+
+        public override void NotifyPreCommit(KistlDataContext ctx)
+        {
+            if (OnPreCommit != null) OnPreCommit(ctx, this);
+        }
+
+        public override void NotifyPostCommit(KistlDataContext ctx)
+        {
+            if (OnPostCommit != null) OnPostCommit(ctx, this);
+        }
+
     }
 
     /// <summary>
