@@ -49,7 +49,7 @@ namespace Kistl.API
         /// </summary>
         public BaseDataObject()
         {
-            API.ObjectBrokerFactory.Current.AttachEvents(this);
+            API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
         #region IDataObject Members

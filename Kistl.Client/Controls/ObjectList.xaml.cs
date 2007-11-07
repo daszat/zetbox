@@ -39,7 +39,7 @@ namespace Kistl.Client.Controls
             try
             {
                 // Client BL holen
-                IClientObject client = ObjectBrokerClient.GetClientObject(SourceClientObjectType);
+                IClientObject client = Helper.GetClientObject(SourceClientObjectType);
 
                 if (string.IsNullOrEmpty(PropertyName))
                 {

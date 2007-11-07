@@ -16,7 +16,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="obj"></param>
-        void Projekt_OnPreSetObject(System.Data.Linq.DataContext ctx, Projekt obj)
+        void Projekt_OnPreSetObject(Kistl.API.KistlDataContext ctx, Projekt obj)
         {
             obj.Name += "_action";
         }
@@ -26,7 +26,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="obj"></param>
-        void Task_OnPreSetObject(System.Data.Linq.DataContext ctx, Task obj)
+        void Task_OnPreSetObject(Kistl.API.KistlDataContext ctx, Task obj)
         {
             if (obj.Aufwand < 0) throw new ApplicationException("Ungültiger Aufwand");
             if (obj.DatumBis < obj.DatumVon) throw new ApplicationException("Falsches Zeitalter");

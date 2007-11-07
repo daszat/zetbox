@@ -106,7 +106,7 @@ namespace Kistl.Client
                 this.Title = ClientObjectType;
 
                 // Client BL holen
-                client = ObjectBrokerClient.GetClientObject(ClientObjectType);
+                client = Helper.GetClientObject(ClientObjectType);
 
                 // Je nachdem, Objekt vom Server holen oder mittels BL erzeugen
                 // TODO: Das holen solte auch in die BL rein & Typisiert werden.

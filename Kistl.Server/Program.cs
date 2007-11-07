@@ -50,7 +50,7 @@ namespace Kistl.Server
         /// </summary>
         public void StartServer()
         {
-            API.ObjectBrokerFactory.Init(new ObjectBrokerServer());
+            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
 
             // Zunächst sicherheitshabler die Objektdatenklassen erzeugen 
             // Das ist nur ein Testeinsprungspunkt

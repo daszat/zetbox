@@ -20,7 +20,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        string GetList(DataContext ctx);
+        string GetList(KistlDataContext ctx);
 
         /// <summary>
         /// Implementiert den GetListOf Befehl.
@@ -29,7 +29,7 @@ namespace Kistl.API
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        string GetListOf(DataContext ctx, int ID, string property);
+        string GetListOf(KistlDataContext ctx, int ID, string property);
 
         /// <summary>
         /// Implementiert den GetObject Befehl.
@@ -37,7 +37,7 @@ namespace Kistl.API
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        string GetObject(DataContext ctx, int ID);
+        string GetObject(KistlDataContext ctx, int ID);
 
         /// <summary>
         /// Implementiert den SetObject Befehl.
@@ -45,7 +45,7 @@ namespace Kistl.API
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        string SetObject(DataContext ctx, string xml);
+        string SetObject(KistlDataContext ctx, string xml);
     }
 
     /// <summary>
@@ -54,7 +54,7 @@ namespace Kistl.API
     /// <typeparam name="T"></typeparam>
     /// <param name="ctx"></param>
     /// <param name="obj"></param>
-    public delegate void ServerObjectHandler<T>(DataContext ctx, T obj) where T : class, IDataObject, new();
+    public delegate void ServerObjectHandler<T>(KistlDataContext ctx, T obj) where T : class, IDataObject, new();
 
     /// <summary>
     /// Basis Objekt für Server BL. Implementiert Linq to SQL.
@@ -69,7 +69,7 @@ namespace Kistl.API
         /// </summary>
         public ServerObject()
         {
-            API.ObjectBrokerFactory.Current.AttachEvents(this);
+            API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public string GetList(DataContext ctx)
+        public string GetList(KistlDataContext ctx)
         {
             var result = from a in ctx.GetTable<T>()
                          select a;
@@ -93,7 +93,7 @@ namespace Kistl.API
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        public string GetListOf(DataContext ctx, int ID, string property)
+        public string GetListOf(KistlDataContext ctx, int ID, string property)
         {
             if (ID == API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
             T obj = GetObjectInstance(ctx, ID);
@@ -112,7 +112,7 @@ namespace Kistl.API
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public T GetObjectInstance(DataContext ctx, int ID)
+        public T GetObjectInstance(KistlDataContext ctx, int ID)
         {
             var result = from a in ctx.GetTable<T>()
                          where a.ID == ID
@@ -126,7 +126,7 @@ namespace Kistl.API
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public string GetObject(DataContext ctx, int ID)
+        public string GetObject(KistlDataContext ctx, int ID)
         {
             T obj = GetObjectInstance(ctx, ID);
             return obj.ToXmlString();
@@ -141,7 +141,7 @@ namespace Kistl.API
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public string SetObject(DataContext ctx, string xml)
+        public string SetObject(KistlDataContext ctx, string xml)
         {
             T obj = xml.FromXmlString<T>();
 

@@ -53,7 +53,7 @@ namespace Kistl.API
         /// </summary>
         public ClientObject()
         {
-            API.ObjectBrokerFactory.Current.AttachEvents(this);
+            API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
         /// <summary>

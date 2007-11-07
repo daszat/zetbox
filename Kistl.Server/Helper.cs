@@ -25,9 +25,10 @@ namespace Kistl.Server
         /// TODO: Das hat da eigentlich gar nix zu suchen!
         /// </summary>
         /// <returns></returns>
-        internal static DataContext GetDataContext()
+        internal static Kistl.API.KistlDataContext GetDataContext()
         {
-            return new DataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
+            return new Kistl.API.KistlDataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
         }
+
     }
 }

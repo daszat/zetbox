@@ -17,7 +17,7 @@ namespace Kistl.Client
         /// </summary>
         public App()
         {
-            API.ObjectBrokerFactory.Init(new ObjectBrokerClient());
+            API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
 
             this.Startup += new StartupEventHandler(App_Startup);
             this.Exit += new ExitEventHandler(App_Exit);

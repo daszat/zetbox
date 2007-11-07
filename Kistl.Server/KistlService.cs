@@ -14,6 +14,24 @@ namespace Kistl.Server
     public class KistlService : API.IKistlService
     {
         /// <summary>
+        /// Helper Method for generic object access
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private static API.IServerObject GetServerObject(string type)
+        {
+            if (string.IsNullOrEmpty(type)) throw new ArgumentException("Type is empty");
+
+            Type t = Type.GetType(type);
+            if (t == null) throw new ApplicationException("Invalid Type");
+
+            API.IServerObject obj = Activator.CreateInstance(t) as API.IServerObject;
+            if (obj == null) throw new ApplicationException("Cannot create instance");
+
+            return obj;
+        }
+
+        /// <summary>
         /// Implementierung der GetList Methode
         /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
         /// delegiert den Aufruf weiter
@@ -24,7 +42,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).GetList(Helper.GetDataContext());
+                return GetServerObject(type).GetList(Helper.GetDataContext());
             }
             catch (Exception ex)
             {
@@ -46,7 +64,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).GetListOf(Helper.GetDataContext(), ID, property);
+                return GetServerObject(type).GetListOf(Helper.GetDataContext(), ID, property);
             }
             catch (Exception ex)
             {
@@ -67,7 +85,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).GetObject(Helper.GetDataContext(), ID);
+                return GetServerObject(type).GetObject(Helper.GetDataContext(), ID);
             }
             catch (Exception ex)
             {
@@ -88,7 +106,7 @@ namespace Kistl.Server
         {
             try
             {
-                return ObjectBrokerServer.GetServerObject(type).SetObject(Helper.GetDataContext(), obj);
+                return GetServerObject(type).SetObject(Helper.GetDataContext(), obj);
             }
             catch (Exception ex)
             {

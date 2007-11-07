@@ -16,9 +16,9 @@ namespace Kistl.Server
     public class DataObjectGenerator
     {
         private string path = "";
-        private DataContext ctx = null;
+        private Kistl.API.KistlDataContext ctx = null;
 
-        public void Generate(DataContext ctx, string path)
+        public void Generate(Kistl.API.KistlDataContext ctx, string path)
         {
             this.path = path + (path.EndsWith("\\") ? "" : "\\");
             Directory.CreateDirectory(path);
