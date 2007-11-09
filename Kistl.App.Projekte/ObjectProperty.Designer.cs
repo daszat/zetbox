@@ -20,25 +20,25 @@ namespace Kistl.App.Base
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    
-    
-    [Table(Name="ObjectProperties")]
+
+
+    [Table(Name = "ObjectProperties")]
     public sealed class ObjectProperty : BaseDataObject
     {
-        
+
         private int _ID = Helper.INVALIDID;
-        
+
         private int _fk_ObjectClass;
-        
+
         private string _PropertyName;
-        
+
         private string _DataType;
-        
+
         private bool _IsList;
-        
+
         private bool _IsAssociation;
-        
-        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
+
+        [Column(IsDbGenerated = true, IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never, Storage = "_ID")]
         public override int ID
         {
             get
@@ -50,8 +50,8 @@ namespace Kistl.App.Base
                 _ID = value;
             }
         }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_ObjectClass")]
+
+        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_fk_ObjectClass")]
         public int fk_ObjectClass
         {
             get
@@ -63,8 +63,8 @@ namespace Kistl.App.Base
                 _fk_ObjectClass = value;
             }
         }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_PropertyName")]
+
+        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_PropertyName")]
         public string PropertyName
         {
             get
@@ -76,8 +76,8 @@ namespace Kistl.App.Base
                 _PropertyName = value;
             }
         }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DataType")]
+
+        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_DataType")]
         public string DataType
         {
             get
@@ -89,8 +89,8 @@ namespace Kistl.App.Base
                 _DataType = value;
             }
         }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsList")]
+
+        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_IsList")]
         public bool IsList
         {
             get
@@ -102,8 +102,8 @@ namespace Kistl.App.Base
                 _IsList = value;
             }
         }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsAssociation")]
+
+        [Column(UpdateCheck = UpdateCheck.Never, Storage = "_IsAssociation")]
         public bool IsAssociation
         {
             get
@@ -116,10 +116,12 @@ namespace Kistl.App.Base
             }
         }
 
-        public event ServerObjectHandler<ObjectProperty> OnPreSave = null;
-        public event ServerObjectHandler<ObjectProperty> OnPostSave = null;
         public event ToStringHandler<ObjectProperty> OnToString;
-        
+
+        public event ObjectEventHandler<ObjectProperty> OnPreSave;
+
+        public event ObjectEventHandler<ObjectProperty> OnPostSave;
+
         public override string ToString()
         {
             if (OnToString != null)
@@ -140,13 +142,12 @@ namespace Kistl.App.Base
         {
             if (OnPostSave != null) OnPostSave(ctx, this);
         }
-
     }
-    
+
     public sealed class ObjectPropertyServer : ServerObject<ObjectProperty>
     {
     }
-    
+
     public sealed class ObjectPropertyClient : ClientObject<ObjectProperty>
     {
     }

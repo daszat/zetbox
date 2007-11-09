@@ -47,7 +47,7 @@ namespace Kistl.API
     /// <typeparam name="T"></typeparam>
     /// <param name="ctx"></param>
     /// <param name="obj"></param>
-    public delegate void ServerObjectHandler<T>(KistlDataContext ctx, T obj) where T : class, IDataObject, new();
+    public delegate void ObjectEventHandler<T>(KistlDataContext ctx, T obj) where T : class, IDataObject, new();
 
     /// <summary>
     /// Basis Datenobjekt. Attached sich automatisch an den ObjectBroker zur Verteilung der Events

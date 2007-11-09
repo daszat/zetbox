@@ -124,7 +124,7 @@ namespace Kistl.Server
 
         private void GenerateDefaultMethods(ObjectClass objClass, CodeTypeDeclaration c)
         {
-            // Create Delegate
+            // Create ToString Delegate
             CodeMemberEvent e = new CodeMemberEvent();
             c.Members.Add(e);
 
@@ -132,7 +132,23 @@ namespace Kistl.Server
             e.Type = new CodeTypeReference("ToStringHandler", new CodeTypeReference(objClass.ClassName));
             e.Name = "OnToString";
 
-            // Create ToString
+            // Create PreSave Delegate
+            e = new CodeMemberEvent();
+            c.Members.Add(e);
+
+            e.Attributes = MemberAttributes.Public;
+            e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(objClass.ClassName));
+            e.Name = "OnPreSave";
+
+            // Create PostSave Delegate
+            e = new CodeMemberEvent();
+            c.Members.Add(e);
+
+            e.Attributes = MemberAttributes.Public;
+            e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(objClass.ClassName));
+            e.Name = "OnPostSave";
+
+            // Create ToString Method
             CodeMemberMethod m = new CodeMemberMethod();
             c.Members.Add(m);
             m.Name = "ToString";
@@ -145,6 +161,25 @@ namespace Kistl.Server
                 return e.Result;
             }
             return base.ToString()"));// TODO: Das ist C# spezifisch
+
+            // Create NotifyPreSave Method
+            m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Name = "NotifyPreSave";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression("KistlDataContext", "ctx"));
+            m.Statements.Add(new CodeSnippetExpression(@"if (OnPreSave != null) OnPreSave(ctx, this)"));// TODO: Das ist C# spezifisch
+
+            // Create NotifyPostSave Method
+            m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Name = "NotifyPostSave";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression("KistlDataContext", "ctx"));
+            m.Statements.Add(new CodeSnippetExpression(@"if (OnPostSave != null) OnPostSave(ctx, this)"));// TODO: Das ist C# spezifisch
+
         }
 
         private void GenerateProperties(ObjectClass objClass, CodeTypeDeclaration c)

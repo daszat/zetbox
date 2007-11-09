@@ -43,8 +43,8 @@ namespace Kistl.App.Projekte
             }
         }
 
-        public event ServerObjectHandler<Projekt> OnPreSave = null;
-        public event ServerObjectHandler<Projekt> OnPostSave = null;
+        public event ObjectEventHandler<Projekt> OnPreSave = null;
+        public event ObjectEventHandler<Projekt> OnPostSave = null;
         public event ToStringHandler<Projekt> OnToString = null;
 
         public override string ToString()

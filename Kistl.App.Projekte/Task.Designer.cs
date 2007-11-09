@@ -32,8 +32,8 @@ namespace Kistl.App.Projekte
         [Column(UpdateCheck = UpdateCheck.Never)]
         public int fk_Projekt { get; set; }
 
-        public event ServerObjectHandler<Task> OnPreSave = null;
-        public event ServerObjectHandler<Task> OnPostSave = null;
+        public event ObjectEventHandler<Task> OnPreSave = null;
+        public event ObjectEventHandler<Task> OnPostSave = null;
 
         public event ToStringHandler<Task> OnToString = null;
 

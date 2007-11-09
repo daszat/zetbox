@@ -149,8 +149,8 @@ namespace Kistl.App.Base
             }
         }
 
-        public event ServerObjectHandler<ObjectClass> OnPreSave = null;
-        public event ServerObjectHandler<ObjectClass> OnPostSave = null;
+        public event ObjectEventHandler<ObjectClass> OnPreSave = null;
+        public event ObjectEventHandler<ObjectClass> OnPostSave = null;
         public event ToStringHandler<ObjectClass> OnToString;
         
         public override string ToString()
