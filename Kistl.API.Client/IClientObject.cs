@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using Kistl.API;
 
-namespace Kistl.API
+namespace Kistl.API.Client
 {
     /// <summary>
     /// Interface für das Client BL Objekt.

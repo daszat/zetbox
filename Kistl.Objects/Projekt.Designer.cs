@@ -28,8 +28,7 @@ namespace Kistl.App.Projekte
         private EntitySet<Task> _Tasks = new EntitySet<Task>();
 
         [Association(Storage = "_Tasks", OtherKey = "fk_Projekt")]
-        [ServerObject(FullName = "Kistl.App.Projekte.TaskServer, Kistl.App.Projekte")]
-        [ClientObject(FullName = "Kistl.App.Projekte.TaskClient, Kistl.App.Projekte")]
+        [DataObject(Namespace = "Kistl.App.Projekte", Classname = "Task")]
         [XmlIgnore]
         public EntitySet<Task> Tasks
         {
@@ -58,40 +57,15 @@ namespace Kistl.App.Projekte
             return base.ToString();
         }
 
-        public override void NotifyPreSave(KistlDataContext ctx)
+        public override void NotifyPreSave()
         {
-            if (OnPreSave != null) OnPreSave(ctx, this);
+            if (OnPreSave != null) OnPreSave(this);
         }
 
-        public override void NotifyPostSave(KistlDataContext ctx)
+        public override void NotifyPostSave()
         {
-            if (OnPostSave != null) OnPostSave(ctx, this);
+            if (OnPostSave != null) OnPostSave(this);
         }
 
-    }
-
-    /// <summary>
-    /// Autogeneriert
-    /// Server BL Implementierung.
-    /// </summary>
-    public class ProjektServer : API.ServerObject<Projekt>
-    {
-    }
-
-    /// <summary>
-    /// Autogeneriert
-    /// Client BL Implementierung.
-    /// </summary>
-    public class ProjektClient : ClientObject<Projekt>
-    {
-        /// <summary>
-        /// Autogeneriert, um die angehängten Listen zu bekommen
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <returns></returns>
-        public IEnumerable GetArrayOfTasksFromXML(string xml)
-        {
-            return xml.FromXmlString<List<Task>>();
-        }
     }
 }

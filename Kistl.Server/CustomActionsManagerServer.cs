@@ -20,7 +20,7 @@ namespace Kistl.Server
         public void AttachEvents(Kistl.API.IDataObject obj)
         {
             // TODO: lt. Metadaten
-            API.ICustomServerActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomServerActions, Kistl.App.Projekte")) as API.ICustomServerActions;
+            API.Server.ICustomServerActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomServerActions, Kistl.App.Projekte.Server")) as API.Server.ICustomServerActions;
             actions.Attach(obj);
         }
         #endregion

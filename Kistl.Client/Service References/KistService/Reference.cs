@@ -16,16 +16,16 @@ namespace Kistl.Client.KistService {
     public interface IKistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetList", ReplyAction="http://tempuri.org/IKistlService/GetListResponse")]
-        string GetList(string type);
+        string GetList(Kistl.API.ObjectType type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetListOf", ReplyAction="http://tempuri.org/IKistlService/GetListOfResponse")]
-        string GetListOf(string type, int ID, string property);
+        string GetListOf(Kistl.API.ObjectType type, int ID, string property);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetObject", ReplyAction="http://tempuri.org/IKistlService/GetObjectResponse")]
-        string GetObject(string type, int ID);
+        string GetObject(Kistl.API.ObjectType type, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetObject", ReplyAction="http://tempuri.org/IKistlService/SetObjectResponse")]
-        string SetObject(string type, string obj);
+        string SetObject(Kistl.API.ObjectType type, string obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/HelloWorld", ReplyAction="http://tempuri.org/IKistlService/HelloWorldResponse")]
         string HelloWorld(string name);
@@ -58,19 +58,19 @@ namespace Kistl.Client.KistService {
                 base(binding, remoteAddress) {
         }
         
-        public string GetList(string type) {
+        public string GetList(Kistl.API.ObjectType type) {
             return base.Channel.GetList(type);
         }
         
-        public string GetListOf(string type, int ID, string property) {
+        public string GetListOf(Kistl.API.ObjectType type, int ID, string property) {
             return base.Channel.GetListOf(type, ID, property);
         }
         
-        public string GetObject(string type, int ID) {
+        public string GetObject(Kistl.API.ObjectType type, int ID) {
             return base.Channel.GetObject(type, ID);
         }
         
-        public string SetObject(string type, string obj) {
+        public string SetObject(Kistl.API.ObjectType type, string obj) {
             return base.Channel.SetObject(type, obj);
         }
         

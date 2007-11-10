@@ -21,8 +21,8 @@ namespace Kistl.API
         /// </summary>
         void NotifyChange();
 
-        void NotifyPreSave(KistlDataContext ctx);
-        void NotifyPostSave(KistlDataContext ctx);
+        void NotifyPreSave();
+        void NotifyPostSave();
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ namespace Kistl.API
     /// <typeparam name="T"></typeparam>
     /// <param name="ctx"></param>
     /// <param name="obj"></param>
-    public delegate void ObjectEventHandler<T>(KistlDataContext ctx, T obj) where T : class, IDataObject, new();
+    public delegate void ObjectEventHandler<T>(T obj) where T : class, IDataObject, new();
 
     /// <summary>
     /// Basis Datenobjekt. Attached sich automatisch an den ObjectBroker zur Verteilung der Events
@@ -69,8 +69,8 @@ namespace Kistl.API
         /// </summary>
         public abstract int ID { get; set; }
 
-        public abstract void NotifyPreSave(KistlDataContext ctx);
-        public abstract void NotifyPostSave(KistlDataContext ctx);
+        public abstract void NotifyPreSave();
+        public abstract void NotifyPostSave();
 
         #endregion
 
@@ -96,16 +96,17 @@ namespace Kistl.API
     /// <summary>
     /// Krücke für die Prototypeimplementiertung. Wird später in den Objekt-Metadaten hinterlegt
     /// </summary>
-    public class ServerObjectAttribute : Attribute
+    public class DataObjectAttribute : Attribute
     {
-        public string FullName { get; set; }
-    }
+        public string Namespace { get; set; }
+        public string Classname { get; set; }
 
-    /// <summary>
-    /// Krücke für die Prototypeimplementiertung. Wird später in den Objekt-Metadaten hinterlegt
-    /// </summary>
-    public class ClientObjectAttribute : Attribute
-    {
-        public string FullName { get; set; }
+        public ObjectType ObjType
+        {
+            get
+            {
+                return new ObjectType(Namespace, Classname);
+            }
+        }
     }
 }

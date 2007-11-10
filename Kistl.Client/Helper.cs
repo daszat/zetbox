@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.API;
+using Kistl.API.Client;
 
 namespace Kistl.Client
 {
@@ -25,11 +26,12 @@ namespace Kistl.Client
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static IClientObject GetClientObject(string type)
+        public static IClientObject GetClientObject(ObjectType type)
         {
-            if (string.IsNullOrEmpty(type)) throw new ArgumentException("Type is empty");
+            if (type == null) throw new ArgumentException("Type is null");
+            if (string.IsNullOrEmpty(type.FullNameClientObject)) throw new ArgumentException("Type is empty");
 
-            Type t = Type.GetType(type);
+            Type t = Type.GetType(type.FullNameClientObject);
             if (t == null) throw new ApplicationException("Invalid Type " + type);
 
             IClientObject obj = Activator.CreateInstance(t) as IClientObject;

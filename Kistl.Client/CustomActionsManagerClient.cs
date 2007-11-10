@@ -20,7 +20,7 @@ namespace Kistl.Client
         public void AttachEvents(IDataObject obj)
         {
             // TODO: lt. Metadaten
-            API.ICustomClientActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomClientActions, Kistl.App.Projekte")) as API.ICustomClientActions;
+            API.Client.ICustomClientActions actions = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomClientActions, Kistl.App.Projekte.Client")) as API.Client.ICustomClientActions;
             actions.Attach(obj);
         }
 

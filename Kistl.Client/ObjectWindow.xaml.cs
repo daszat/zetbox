@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.API;
 using System.ComponentModel;
+using Kistl.API.Client;
 
 namespace Kistl.Client
 {
@@ -27,13 +28,9 @@ namespace Kistl.Client
         }
 
         /// <summary>
-        /// Server BL Typ des Objektes, das angezeigt wird.
+        /// Typ des Objektes, das angezeigt wird.
         /// </summary>
-        public string ServerObjectType { get; set; }
-        /// <summary>
-        /// Client BL Typ des Objektes, das angezeigt wird.
-        /// </summary>
-        public string ClientObjectType { get; set; }
+        public ObjectType ObjectType { get; set; }
         /// <summary>
         /// ObjektID
         /// </summary>
@@ -63,12 +60,10 @@ namespace Kistl.Client
                 {
                     // TODO: Naja, das könnte besser sein
                     Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
-                    lst.SourceServerObjectType = this.ServerObjectType;
-                    lst.SourceClientObjectType = this.ClientObjectType;
+                    lst.SourceObjectType = this.ObjectType;
 
                     // TODO: aus Metadaten auslesen
-                    lst.DestinationServerObjectType = ((API.ServerObjectAttribute)p.GetCustomAttributes(typeof(API.ServerObjectAttribute), true)[0]).FullName;
-                    lst.DestinationClientObjectType = ((API.ClientObjectAttribute)p.GetCustomAttributes(typeof(API.ClientObjectAttribute), true)[0]).FullName;
+                    lst.DestinationObjectType = ((API.DataObjectAttribute)p.GetCustomAttributes(typeof(API.DataObjectAttribute), true)[0]).ObjType;
 
                     lst.ObjectID = this.ObjectID;
                     lst.PropertyName = p.Name;
@@ -103,17 +98,17 @@ namespace Kistl.Client
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                this.Title = ClientObjectType;
+                this.Title = ObjectType.ToString();
 
                 // Client BL holen
-                client = Helper.GetClientObject(ClientObjectType);
+                client = Helper.GetClientObject(ObjectType);
 
                 // Je nachdem, Objekt vom Server holen oder mittels BL erzeugen
                 // TODO: Das holen solte auch in die BL rein & Typisiert werden.
                 // allerdings brauchts dann zwei Methodenarten: Die generischen & typisierten
                 if (ObjectID != API.Helper.INVALIDID)
                 {
-                    obj = client.GetObjectFromXML(App.Service.GetObject(ServerObjectType, ObjectID));
+                    obj = client.GetObjectFromXML(App.Service.GetObject(ObjectType, ObjectID));
                 }
                 else
                 {
@@ -139,7 +134,7 @@ namespace Kistl.Client
             try
             {
                 // Objekt zum Server schicken & dann wieder auspacken
-                string result = App.Service.SetObject(ServerObjectType, obj.ToXmlString());
+                string result = App.Service.SetObject(ObjectType, obj.ToXmlString());
                 obj = client.GetObjectFromXML(result);
                 // ReBind
                 data.DataContext = obj;

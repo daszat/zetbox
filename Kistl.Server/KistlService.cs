@@ -5,27 +5,30 @@ using System.Linq;
 using System.Text;
 using System.Data.Linq;
 using System.Xml;
+using Kistl.API.Server;
+using Kistl.API;
 
 namespace Kistl.Server
 {
     /// <summary>
     /// Implementierung des KistServices
     /// </summary>
-    public class KistlService : API.IKistlService
+    public class KistlService : IKistlService
     {
         /// <summary>
         /// Helper Method for generic object access
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static API.IServerObject GetServerObject(string type)
+        private static IServerObject GetServerObject(ObjectType type)
         {
-            if (string.IsNullOrEmpty(type)) throw new ArgumentException("Type is empty");
+            if (type == null) throw new ArgumentException("Type is null");
+            if (string.IsNullOrEmpty(type.FullNameServerObject)) throw new ArgumentException("Type is empty");
 
-            Type t = Type.GetType(type);
+            Type t = Type.GetType(type.FullNameServerObject);
             if (t == null) throw new ApplicationException("Invalid Type");
 
-            API.IServerObject obj = Activator.CreateInstance(t) as API.IServerObject;
+            IServerObject obj = Activator.CreateInstance(t) as IServerObject;
             if (obj == null) throw new ApplicationException("Cannot create instance");
 
             return obj;
@@ -38,11 +41,14 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public string GetList(string type)
+        public string GetList(ObjectType type)
         {
             try
             {
-                return GetServerObject(type).GetList(Helper.GetDataContext());
+                using (KistlDataContext ctx = KistlDataContext.InitSession())
+                {
+                    return GetServerObject(type).GetList();
+                }
             }
             catch (Exception ex)
             {
@@ -60,11 +66,14 @@ namespace Kistl.Server
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        public string GetListOf(string type, int ID, string property)
+        public string GetListOf(ObjectType type, int ID, string property)
         {
             try
             {
-                return GetServerObject(type).GetListOf(Helper.GetDataContext(), ID, property);
+                using (KistlDataContext ctx = KistlDataContext.InitSession())
+                {
+                    return GetServerObject(type).GetListOf(ID, property);
+                }
             }
             catch (Exception ex)
             {
@@ -81,11 +90,14 @@ namespace Kistl.Server
         /// <param name="type"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public string GetObject(string type, int ID)
+        public string GetObject(ObjectType type, int ID)
         {
             try
             {
-                return GetServerObject(type).GetObject(Helper.GetDataContext(), ID);
+                using (KistlDataContext ctx = KistlDataContext.InitSession())
+                {
+                    return GetServerObject(type).GetObject(ID);
+                }
             }
             catch (Exception ex)
             {
@@ -102,11 +114,14 @@ namespace Kistl.Server
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public string SetObject(string type, string obj)
+        public string SetObject(ObjectType type, string obj)
         {
             try
             {
-                return GetServerObject(type).SetObject(Helper.GetDataContext(), obj);
+                using (KistlDataContext ctx = KistlDataContext.InitSession())
+                {
+                    return GetServerObject(type).SetObject(obj);
+                }
             }
             catch (Exception ex)
             {

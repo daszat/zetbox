@@ -20,7 +20,7 @@ namespace Kistl.API
         /// <param name="type">ServerBL Typ als AssemblyQualifiedName</param>
         /// <returns>XML</returns>
         [OperationContract]
-        string GetList(string type);
+        string GetList(ObjectType type);
 
         /// <summary>
         /// Liste aller Objekte eines Objektes "ID" im Property "property".
@@ -30,7 +30,7 @@ namespace Kistl.API
         /// <param name="property">Die Eigenschaft, welches die Liste enthält.</param>
         /// <returns>XML</returns>
         [OperationContract]
-        string GetListOf(string type, int ID, string property);
+        string GetListOf(ObjectType type, int ID, string property);
 
         /// <summary>
         /// Gibt ein Objekt zurück
@@ -39,7 +39,7 @@ namespace Kistl.API
         /// <param name="ID">ID des Objektes</param>
         /// <returns>XML</returns>
         [OperationContract]
-        string GetObject(string type, int ID);
+        string GetObject(ObjectType type, int ID);
         
         /// <summary>
         /// Update/Insert eines Objektes. Gibt das geänderte Objekt wieder zurück.
@@ -48,7 +48,7 @@ namespace Kistl.API
         /// <param name="obj">Das zu ändernde Objekt als XML</param>
         /// <returns>XML</returns>
         [OperationContract]
-        string SetObject(string type, string obj);
+        string SetObject(ObjectType type, string obj);
 
         /// <summary>
         /// Hello World.

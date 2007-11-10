@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.App.Projekte")]
+[assembly: AssemblyTitle("Kistl.API.Server")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Money Inc.")]
-[assembly: AssemblyProduct("Kistl.App.Projekte")]
-[assembly: AssemblyCopyright("Copyright © Money Inc. 2007")]
+[assembly: AssemblyCompany("Kilst")]
+[assembly: AssemblyProduct("Kistl.API.Server")]
+[assembly: AssemblyCopyright("Copyright © Kilst 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1ccf4042-7b7a-40e8-b9c1-0428dc9f2e75")]
+[assembly: Guid("6762e37f-8487-4fb7-b2d7-954aab9e4019")]
 
 // Version information for an assembly consists of the following four values:
 //

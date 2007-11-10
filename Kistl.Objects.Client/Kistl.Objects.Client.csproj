@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.20706</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B7C4FDBB-E8CD-4F48-8842-EB8EADF61E96}</ProjectGuid>
+    <ProjectGuid>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.App.Projekte</RootNamespace>
-    <AssemblyName>Kistl.App.Projekte</AssemblyName>
+    <RootNamespace>Kistl.Objects.Client</RootNamespace>
+    <AssemblyName>Kistl.Objects.Client</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,12 +38,6 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Runtime.Serialization">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -54,23 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomClientActions.cs" />
-    <Compile Include="CustomClientActions.Designer.cs" />
-    <Compile Include="CustomServerActions.Designer.cs" />
-    <Compile Include="CustomServerActions.cs" />
-    <Compile Include="ObjectClass.Designer.cs" />
-    <Compile Include="ObjectProperty.Designer.cs" />
-    <Compile Include="Projekt.Designer.cs" />
+    <Compile Include="ObjectClass.Client.Designer.cs" />
+    <Compile Include="ObjectProperty.Client.Designer.cs" />
+    <Compile Include="Projekt.Client.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Task.Designer.cs" />
+    <Compile Include="Task.Client.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
+      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
+      <Name>Kistl.API.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{7BF67789-F65D-43B5-A0D8-A298E504C448}</Project>
+      <Name>Kistl.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -51,6 +51,12 @@ namespace Kistl.Server
         public void StartServer()
         {
             API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
+            
+            Kistl.App.Base.ObjectClassServer s = new Kistl.App.Base.ObjectClassServer();
+            Console.WriteLine(s.ToString()); // Einfach nur damit das verdammte Teil referenziert & kopiert wird
+
+            Kistl.App.Projekte.CustomServerActions sa = new Kistl.App.Projekte.CustomServerActions();
+            Console.WriteLine(sa.ToString()); // Trick 17, siehe oben
 
             // Zunächst sicherheitshabler die Objektdatenklassen erzeugen 
             // Das ist nur ein Testeinsprungspunkt
@@ -58,7 +64,10 @@ namespace Kistl.Server
             try
             {
                 DataObjectGenerator g = new DataObjectGenerator();
-                g.Generate(Helper.GetDataContext(), @"c:\temp\KistlCodeGen");
+                using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+                {
+                    g.Generate(ctx, @"c:\temp\KistlCodeGen");
+                }
             }
             catch (Exception ex)
             {

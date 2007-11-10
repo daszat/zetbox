@@ -34,12 +34,6 @@ namespace Kistl.App.Base
         
         private string _TableName;
         
-        private string _ServerObject;
-        
-        private string _ClientObject;
-        
-        private string _DataObject;
-        
         private EntitySet<Kistl.App.Base.ObjectProperty> _Properties = new EntitySet<Kistl.App.Base.ObjectProperty>();
         
         [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
@@ -93,49 +87,9 @@ namespace Kistl.App.Base
                 _TableName = value;
             }
         }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_ServerObject")]
-        public string ServerObject
-        {
-            get
-            {
-                return _ServerObject;
-            }
-            set
-            {
-                _ServerObject = value;
-            }
-        }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_ClientObject")]
-        public string ClientObject
-        {
-            get
-            {
-                return _ClientObject;
-            }
-            set
-            {
-                _ClientObject = value;
-            }
-        }
-        
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DataObject")]
-        public string DataObject
-        {
-            get
-            {
-                return _DataObject;
-            }
-            set
-            {
-                _DataObject = value;
-            }
-        }
-        
+                
         [Association(Storage="_Properties", OtherKey="fk_ObjectClass")]
-        [ServerObject(FullName="Kistl.App.Base.ObjectPropertyServer, Kistl.App.Projekte")]
-        [ClientObject(FullName="Kistl.App.Base.ObjectPropertyClient, Kistl.App.Projekte")]
+        [DataObject(Namespace="Kistl.App.Base", Classname = "ObjectProperty")]
         [XmlIgnore()]
         public EntitySet<Kistl.App.Base.ObjectProperty> Properties
         {
@@ -164,29 +118,15 @@ namespace Kistl.App.Base
             return base.ToString();
         }
 
-        public override void NotifyPreSave(KistlDataContext ctx)
+        public override void NotifyPreSave()
         {
-            if (OnPreSave != null) OnPreSave(ctx, this);
+            if (OnPreSave != null) OnPreSave(this);
         }
 
-        public override void NotifyPostSave(KistlDataContext ctx)
+        public override void NotifyPostSave()
         {
-            if (OnPostSave != null) OnPostSave(ctx, this);
+            if (OnPostSave != null) OnPostSave(this);
         }
 
-    }
-    
-    public sealed class ObjectClassServer : ServerObject<ObjectClass>
-    {
-    }
-    
-    public sealed class ObjectClassClient : ClientObject<ObjectClass>
-    {
-        
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public System.Collections.IEnumerable GetArrayOfPropertiesFromXML(string xml)
-        {
-            return xml.FromXmlString<List<Kistl.App.Base.ObjectProperty>>();
-        }
     }
 }

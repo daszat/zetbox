@@ -8,7 +8,7 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// Implementierung durch den Entwickler der Custom Actions für den Client
     /// </summary>
-    public partial class CustomClientActions : API.ICustomClientActions
+    public partial class CustomClientActions : API.Client.ICustomClientActions
     {
         /// <summary>
         /// ToString Event überschreiben

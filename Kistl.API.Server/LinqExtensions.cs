@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace Kistl.API
+namespace Kistl.API.Server
 {
     /// <summary>
     /// Linq Extensions. Aus dem Indischen Netz gefladert. 

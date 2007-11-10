@@ -48,31 +48,14 @@ namespace Kistl.App.Projekte
             return base.ToString();
         }
 
-        public override void NotifyPreSave(KistlDataContext ctx)
+        public override void NotifyPreSave()
         {
-            if (OnPreSave != null) OnPreSave(ctx, this);
+            if (OnPreSave != null) OnPreSave(this);
         }
 
-        public override void NotifyPostSave(KistlDataContext ctx)
+        public override void NotifyPostSave()
         {
-            if (OnPostSave != null) OnPostSave(ctx, this);
+            if (OnPostSave != null) OnPostSave(this);
         }
     }
-
-    /// <summary>
-    /// Autogeneriert
-    /// Server BL Implementierung.
-    /// </summary>
-    public class TaskServer : ServerObject<Task>
-    {
-    }
-
-    /// <summary>
-    /// Autogeneriert
-    /// Client BL Implementierung.
-    /// </summary>
-    public class TaskClient : ClientObject<Task>
-    {
-    }
-
 }

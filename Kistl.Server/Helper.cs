@@ -19,16 +19,5 @@ namespace Kistl.Server
         {
             Console.WriteLine(ex.ToString());
         }
-
-        /// <summary>
-        /// Datacontext zurückgeben
-        /// TODO: Das hat da eigentlich gar nix zu suchen!
-        /// </summary>
-        /// <returns></returns>
-        internal static Kistl.API.KistlDataContext GetDataContext()
-        {
-            return new Kistl.API.KistlDataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
-        }
-
     }
 }

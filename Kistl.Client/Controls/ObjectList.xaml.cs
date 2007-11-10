@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Kistl.API;
 using System.ComponentModel;
 using System.Reflection;
+using Kistl.API.Client;
 
 namespace Kistl.Client.Controls
 {
@@ -39,18 +40,17 @@ namespace Kistl.Client.Controls
             try
             {
                 // Client BL holen
-                IClientObject client = Helper.GetClientObject(SourceClientObjectType);
+                IClientObject client = Helper.GetClientObject(SourceObjectType);
 
                 if (string.IsNullOrEmpty(PropertyName))
                 {
                     // Wenn PropertyName nicht gesetzt ist, dann mein man die Liste _aller_
                     // Objekte einer Klasse
                     // Destination ist dann gleich Source
-                    DestinationClientObjectType = SourceClientObjectType;
-                    DestinationServerObjectType = SourceServerObjectType;
+                    DestinationObjectType = SourceObjectType;
 
                     // Liste vom Server holen & den DataContext setzen.
-                    this.DataContext = client.GetArrayFromXML(App.Service.GetList(SourceServerObjectType));
+                    this.DataContext = client.GetArrayFromXML(App.Service.GetList(SourceObjectType));
                 }
                 else
                 {
@@ -63,7 +63,7 @@ namespace Kistl.Client.Controls
                         if (mi != null)
                         {
                             // Liste vom Server holen & den DataContext setzen.
-                            string xml = App.Service.GetListOf(SourceServerObjectType, ObjectID, PropertyName);
+                            string xml = App.Service.GetListOf(SourceObjectType, ObjectID, PropertyName);
                             this.DataContext = mi.Invoke(client, new object[] { xml });
                         }
                     }
@@ -81,28 +81,16 @@ namespace Kistl.Client.Controls
         }
 
         /// <summary>
-        /// Server BL Typ auf dem alle Serveroperationen laufen
+        /// ObjectType des Quellobjektes
         /// </summary>
-        public string SourceServerObjectType { get; set; }
+        public ObjectType SourceObjectType { get; set; }
         
         /// <summary>
-        /// Client BL Typ auf dem alle Clientoperationen laufen
-        /// </summary>
-        public string SourceClientObjectType { get; set; }
-
-        /// <summary>
-        /// Server BL Typ, falls eine Liste einer Property angezeigt werden soll.
+        /// Objecttype des Zielobjektes, falls eine Liste einer Property angezeigt werden soll.
         /// Dient nur der Übergabe an ein neues Fenster, welches beim Doppel-Klick
         /// bzw. "New" geöffnet wird.
         /// </summary>
-        public string DestinationServerObjectType { get; set; }
-
-        /// <summary>
-        /// Client BL Typ, falls eine Liste einer Property angezeigt werden soll.
-        /// Dient nur der Übergabe an ein neues Fenster, welches beim Doppel-Klick
-        /// bzw. "New" geöffnet wird.
-        /// </summary>
-        public string DestinationClientObjectType { get; set; }
+        public ObjectType DestinationObjectType { get; set; }
 
         /// <summary>
         /// ObjektID
@@ -126,8 +114,7 @@ namespace Kistl.Client.Controls
             {
                 API.IDataObject obj = lst.SelectedItem as API.IDataObject;
                 ObjectWindow wnd = new ObjectWindow();
-                wnd.ServerObjectType = this.DestinationServerObjectType;
-                wnd.ClientObjectType = this.DestinationClientObjectType;
+                wnd.ObjectType = this.DestinationObjectType;
                 wnd.ObjectID = obj.ID;
 
                 wnd.Show();
@@ -148,8 +135,7 @@ namespace Kistl.Client.Controls
             try
             {
                 ObjectWindow wnd = new ObjectWindow();
-                wnd.ServerObjectType = this.DestinationServerObjectType;
-                wnd.ClientObjectType = this.DestinationClientObjectType;
+                wnd.ObjectType = this.DestinationObjectType;
                 wnd.ObjectID = API.Helper.INVALIDID;
 
                 wnd.Show();

@@ -10,7 +10,7 @@ namespace Kistl.App.Projekte
     /// fremde Objekte zu erweitern.
     /// Autogeneriet lt. Metadaten
     /// </summary>
-    public partial class CustomServerActions : API.ICustomServerActions
+    public partial class CustomServerActions : API.Server.ICustomServerActions
     {
         public void Attach(Kistl.API.IDataObject obj)
         {

@@ -31,6 +31,8 @@ namespace Kistl.Client
 
             try
             {
+                lst.SourceObjectType = new ObjectType("Kistl.App.Base", "ObjectClass");
+
                 // TODO: Das muss einfacher gehen!
                 // Es muss über den blöden ObjectBroker gehen, weil 
                 // sonst die Custom Actions nicht angehängt werden (zur Zeit)
@@ -39,7 +41,7 @@ namespace Kistl.Client
                 // Hat sich quasi schon erledigt (siehe oben)
                 // Hole eine Liste aller ObjectClasses Objekte & zeige sie in der DropDown an
                 Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
-                this.DataContext = client.GetArrayFromXML(App.Service.GetList("Kistl.App.Base.ObjectClassServer, Kistl.App.Projekte"));
+                this.DataContext = client.GetArrayFromXML(App.Service.GetList(new ObjectType("Kistl.App.Base", "ObjectClass")));
             }
             catch (Exception ex)
             {
@@ -71,8 +73,7 @@ namespace Kistl.Client
                 {
                     // Neue Objekttypen setzen & neu Binden
                     // TODO: Man sollte gleich das ObjektClass Objekt übergeben.
-                    lst.SourceServerObjectType = objClass.ServerObject;
-                    lst.SourceClientObjectType= objClass.ClientObject;
+                    lst.SourceObjectType = new ObjectType(objClass.Namespace, objClass.ClassName);
                     lst.Bind();
                 }
             }
