@@ -50,23 +50,13 @@ namespace Kistl.Client.Controls
                     DestinationObjectType = SourceObjectType;
 
                     // Liste vom Server holen & den DataContext setzen.
-                    this.DataContext = client.GetArrayFromXML(App.Service.GetList(SourceObjectType));
+                    this.DataContext = client.GetListGeneric();
                 }
                 else
                 {
                     // Wenn PropertyName gesetzt ist, dann meint man die Liste von Objekten
                     // zu einem Objekt
-                    if (ObjectID != API.Helper.INVALIDID)
-                    {
-                        // Client Methode holen
-                        MethodInfo mi = client.GetType().GetMethod("GetArrayOf" + PropertyName + "FromXML");
-                        if (mi != null)
-                        {
-                            // Liste vom Server holen & den DataContext setzen.
-                            string xml = App.Service.GetListOf(SourceObjectType, ObjectID, PropertyName);
-                            this.DataContext = mi.Invoke(client, new object[] { xml });
-                        }
-                    }
+                    this.DataContext = client.GetListOfGeneric(ObjectID, PropertyName);
                 }
             }
             catch (Exception ex)

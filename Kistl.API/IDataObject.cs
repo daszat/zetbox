@@ -92,21 +92,4 @@ namespace Kistl.API
             }
         }
     }
-
-    /// <summary>
-    /// Krücke für die Prototypeimplementiertung. Wird später in den Objekt-Metadaten hinterlegt
-    /// </summary>
-    public class DataObjectAttribute : Attribute
-    {
-        public string Namespace { get; set; }
-        public string Classname { get; set; }
-
-        public ObjectType ObjType
-        {
-            get
-            {
-                return new ObjectType(Namespace, Classname);
-            }
-        }
-    }
 }

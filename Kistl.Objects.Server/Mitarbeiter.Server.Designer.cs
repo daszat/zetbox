@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Base
+namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
@@ -20,16 +20,10 @@ namespace Kistl.App.Base
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using Kistl.API.Client;
+    using Kistl.API.Server;
     
     
-    public sealed class ObjectClassClient : ClientObject<ObjectClass>
+    public sealed class MitarbeiterServer : ServerObject<Mitarbeiter>
     {
-        
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.ObjectProperty> GetListOfProperties(int ID)
-        {
-            return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<List<Kistl.App.Base.ObjectProperty>>();
-        }
     }
 }

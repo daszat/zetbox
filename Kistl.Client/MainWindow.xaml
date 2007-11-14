@@ -2,17 +2,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:my="clr-namespace:Kistl.Client.Controls"
-    Title="Window1" Height="300" Width="300">
+    Title="Kistl Main Window" Height="480" Width="640">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Exit" Name="menu_Exit" Click="menu_Exit_Click" />
             </MenuItem>
-            <ComboBox 
+        </Menu>
+        <StackPanel>
+            <ComboBox HorizontalAlignment="Right"
                 Name="cbObjectTypes" 
                 SelectionChanged="ComboBox_SelectionChanged"
-                ItemsSource="{Binding}" MinWidth="100" />
-        </Menu>
-        <my:ObjectList x:Name="lst" />
+                ItemsSource="{Binding}" Width="150" />
+            <my:ObjectList x:Name="lst" />
+        </StackPanel>
     </DockPanel>
 </Window>

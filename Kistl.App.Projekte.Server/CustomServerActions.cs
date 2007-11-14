@@ -18,7 +18,12 @@ namespace Kistl.App.Projekte
         /// <param name="obj"></param>
         void Projekt_OnPreSetObject(Projekt obj)
         {
-            obj.Name += "_action";
+            obj.Name += obj.Tasks.Sum(t => t.Aufwand).ToString();
+
+            /*
+            var result = (from t in Kistl.API.Server.KistlDataContext.Current.GetTable<Task>()
+                          where t.fk_Projekt == obj.ID
+                          select t.Aufwand);//.Sum();*/
         }
 
         /// <summary>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace Kistl.API
 {
@@ -12,6 +13,16 @@ namespace Kistl.API
         {
             Namespace = "";
             Classname = "";
+        }
+
+        public ObjectType(string type)
+        {
+            Namespace = "";
+            Classname = "";
+
+            string[] segments = type.Split('.');
+            Classname = segments.Last();
+            Namespace = string.Join(".", segments.Take(segments.Length-1).ToArray());
         }
 
         public ObjectType(string @namespace, string classname)

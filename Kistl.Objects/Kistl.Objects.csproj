@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mitarbeiter.Designer.cs" />
     <Compile Include="ObjectClass.Designer.cs" />
     <Compile Include="ObjectProperty.Designer.cs" />
     <Compile Include="Projekt.Designer.cs" />

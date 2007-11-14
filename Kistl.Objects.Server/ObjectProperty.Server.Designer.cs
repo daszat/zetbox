@@ -21,7 +21,8 @@ namespace Kistl.App.Base
     using System.Xml.Serialization;
     using Kistl.API;
     using Kistl.API.Server;
-
+    
+    
     public sealed class ObjectPropertyServer : ServerObject<ObjectProperty>
     {
     }

@@ -22,21 +22,15 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
-    [Table(Name="Tasks")]
-    public sealed class Task : BaseDataObject
+    [Table(Name="Mitarbeiter")]
+    public sealed class Mitarbeiter : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;
         
         private string _Name;
         
-        private System.DateTime _DatumVon;
-        
-        private System.DateTime _DatumBis;
-        
-        private double _Aufwand;
-        
-        private int _fk_Projekt;
+        private EntitySet<Kistl.App.Projekte.Projekt> _Projekte = new EntitySet<Kistl.App.Projekte.Projekt>();
         
         [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
         public override int ID
@@ -64,63 +58,25 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DatumVon")]
-        public System.DateTime DatumVon
+        [Association(Storage="_Projekte", OtherKey="fk_Mitarbeiter")]
+        [XmlIgnore()]
+        public EntitySet<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {
-                return _DatumVon;
+                return _Projekte;
             }
             set
             {
-                _DatumVon = value;
+                _Projekte.Assign(value);
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DatumBis")]
-        public System.DateTime DatumBis
-        {
-            get
-            {
-                return _DatumBis;
-            }
-            set
-            {
-                _DatumBis = value;
-            }
-        }
+        public event ToStringHandler<Mitarbeiter> OnToString;
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_Aufwand")]
-        public double Aufwand
-        {
-            get
-            {
-                return _Aufwand;
-            }
-            set
-            {
-                _Aufwand = value;
-            }
-        }
+        public event ObjectEventHandler<Mitarbeiter> OnPreSave;
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_Projekt")]
-        public int fk_Projekt
-        {
-            get
-            {
-                return _fk_Projekt;
-            }
-            set
-            {
-                _fk_Projekt = value;
-            }
-        }
-        
-        public event ToStringHandler<Task> OnToString;
-        
-        public event ObjectEventHandler<Task> OnPreSave;
-        
-        public event ObjectEventHandler<Task> OnPostSave;
+        public event ObjectEventHandler<Mitarbeiter> OnPostSave;
         
         public override string ToString()
         {

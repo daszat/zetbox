@@ -46,6 +46,25 @@ namespace Kistl.Client
         /// </summary>
         private Kistl.API.IDataObject obj = null;
 
+        private void BindDefaultProperties()
+        {
+            // Object ID anzeigen - die kommt ja nicht mehr vor...
+            // Neues Bearbeitungscontrol erzeugen
+            Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
+
+            // Bezeichnung setzen
+            txt.Label = "ID";
+            txt.IsReadOnly = true;
+
+            // Set Binding, damit werden Änderungen automatisch übernommen.
+            Binding b = new Binding("ID");
+            b.Mode = BindingMode.OneWay;
+            b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
+
+            data.Children.Add(txt);
+        }
+
         /// <summary>
         /// Objekt _einmalig_ binden - das erzeugt "nur" die WPF Controls
         /// </summary>
@@ -53,20 +72,24 @@ namespace Kistl.Client
         {
             data.DataContext = obj;
 
-            // TODO: Aus Metadaten holen
-            foreach (System.Reflection.PropertyInfo p in obj.GetType().GetProperties())
+            Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
+            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.Single(o => o.Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
+
+            BindDefaultProperties();
+
+            // Aus Metadaten holen
+            foreach (Kistl.App.Base.ObjectProperty p in objClassClient.GetListOfProperties(objClass.ID))
             {
-                if (p.PropertyType.GetInterface("System.Collections.ICollection") != null)
+                if (p.IsList && p.IsAssociation)
                 {
-                    // TODO: Naja, das könnte besser sein
                     Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
                     lst.SourceObjectType = this.ObjectType;
 
-                    // TODO: aus Metadaten auslesen
-                    lst.DestinationObjectType = ((API.DataObjectAttribute)p.GetCustomAttributes(typeof(API.DataObjectAttribute), true)[0]).ObjType;
+                    // aus Metadaten auslesen
+                    lst.DestinationObjectType = new ObjectType(p.DataType);
 
                     lst.ObjectID = this.ObjectID;
-                    lst.PropertyName = p.Name;
+                    lst.PropertyName = p.PropertyName;
 
                     data.Children.Add(lst);
                 }
@@ -76,17 +99,14 @@ namespace Kistl.Client
                     Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
 
                     // Bezeichnung setzen
-                    txt.Label = p.Name; 
+                    txt.Label = p.PropertyName; 
 
                     // Set Binding, damit werden Änderungen automatisch übernommen.
-                    Binding b = new Binding();
-                    b.Path = new PropertyPath(p.Name);
+                    Binding b = new Binding(p.PropertyName);
                     b.Mode = BindingMode.TwoWay;
                     b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                     txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
                     
-                    txt.PropertyInfo = p;
-
                     data.Children.Add(txt);
                 }
             }
@@ -108,11 +128,11 @@ namespace Kistl.Client
                 // allerdings brauchts dann zwei Methodenarten: Die generischen & typisierten
                 if (ObjectID != API.Helper.INVALIDID)
                 {
-                    obj = client.GetObjectFromXML(App.Service.GetObject(ObjectType, ObjectID));
+                    obj = client.GetObjectGeneric(ObjectID);
                 }
                 else
                 {
-                    obj = client.CreateNew();
+                    obj = client.CreateNewGeneric();
                 }
 
                 // Einmalig Binden & WPF Controls erzeugen
@@ -134,8 +154,7 @@ namespace Kistl.Client
             try
             {
                 // Objekt zum Server schicken & dann wieder auspacken
-                string result = App.Service.SetObject(ObjectType, obj.ToXmlString());
-                obj = client.GetObjectFromXML(result);
+                obj = client.SetObjectGeneric(obj);
                 // ReBind
                 data.DataContext = obj;
                 // Das muss sein, weil die Properties keine DependencyProperties sind

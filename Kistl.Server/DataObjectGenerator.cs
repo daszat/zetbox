@@ -21,7 +21,6 @@ namespace Kistl.Server
         public void Generate(Kistl.API.Server.KistlDataContext ctx, string path)
         {
             this.path = path + (path.EndsWith("\\") ? "" : "\\");
-            Directory.CreateDirectory(path);
             this.ctx = ctx;
 
             var objClassList = from c in ctx.GetTable<ObjectClass>()
@@ -30,19 +29,14 @@ namespace Kistl.Server
 
             foreach (ObjectClass objClass in objClassList)
             {
-                GenerateClass(objClass);
+                GenerateObjects(objClass);
+                GenerateObjectsClient(objClass);
+                GenerateObjectsServer(objClass);
             }
         }
 
-        private void GenerateClass(ObjectClass objClass)
+        private void AddDefaultNamespaces(CodeNamespace ns)
         {
-            CodeCompileUnit code = new CodeCompileUnit();
-            
-            // Create Namespace
-            CodeNamespace ns = new CodeNamespace(objClass.Namespace);
-            code.Namespaces.Add(ns);
-
-            // Add using Statements
             ns.Imports.Add(new CodeNamespaceImport("System"));
             ns.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
             ns.Imports.Add(new CodeNamespaceImport("System.Linq"));
@@ -53,6 +47,52 @@ namespace Kistl.Server
             ns.Imports.Add(new CodeNamespaceImport("System.Xml"));
             ns.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API"));
+        }
+
+        private void GenerateObjectsClient(ObjectClass objClass)
+        {
+            CodeCompileUnit code = new CodeCompileUnit();
+
+            // Create Namespace
+            CodeNamespace ns = new CodeNamespace(objClass.Namespace);
+            code.Namespaces.Add(ns);
+
+            AddDefaultNamespaces(ns);
+            ns.Imports.Add(new CodeNamespaceImport("Kistl.API.Client"));
+
+            GenerateClientAccessLayer(objClass, ns);
+
+            // Generate the code & save
+            SaveFile(code, path + @"Kistl.Objects.Client\" + objClass.ClassName + ".Client.Designer.cs");
+        }
+
+        private void GenerateObjectsServer(ObjectClass objClass)
+        {
+            CodeCompileUnit code = new CodeCompileUnit();
+
+            // Create Namespace
+            CodeNamespace ns = new CodeNamespace(objClass.Namespace);
+            code.Namespaces.Add(ns);
+
+            AddDefaultNamespaces(ns);
+            ns.Imports.Add(new CodeNamespaceImport("Kistl.API.Server"));
+
+            GenerateServerAccessLayer(objClass, ns);
+
+            // Generate the code & save
+            SaveFile(code, path + @"Kistl.Objects.Server\" + objClass.ClassName + ".Server.Designer.cs");
+        }
+
+        private void GenerateObjects(ObjectClass objClass)
+        {
+            CodeCompileUnit code = new CodeCompileUnit();
+            
+            // Create Namespace
+            CodeNamespace ns = new CodeNamespace(objClass.Namespace);
+            code.Namespaces.Add(ns);
+
+            // Add using Statements
+            AddDefaultNamespaces(ns);
 
             // Create Class
             CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName);
@@ -73,14 +113,14 @@ namespace Kistl.Server
             // Create DataObject Default Methods
             GenerateDefaultMethods(objClass, c);
 
-            // Create ServerBL
-            GenerateServerBL(objClass, ns);
-
-            // Create ClientBL
-            GenerateClientBL(objClass, ns);
-
             // Generate the code & save
-            string fileName = path + objClass.ClassName + ".Designer.cs";
+            SaveFile(code, path + @"Kistl.Objects\" + objClass.ClassName + ".Designer.cs");
+        }
+
+        private void SaveFile(CodeCompileUnit code, string fileName)
+        {            
+            string path = Path.GetDirectoryName(fileName);
+            Directory.CreateDirectory(path);
 
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CodeGeneratorOptions options = new CodeGeneratorOptions();
@@ -90,7 +130,6 @@ namespace Kistl.Server
                 provider.GenerateCodeFromCompileUnit(
                     code, sourceWriter, options);
             }
-
         }
 
         private void GenerateDefaultProperties(ObjectClass objClass, CodeTypeDeclaration c)
@@ -168,8 +207,7 @@ namespace Kistl.Server
             m.Name = "NotifyPreSave";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression("KistlDataContext", "ctx"));
-            m.Statements.Add(new CodeSnippetExpression(@"if (OnPreSave != null) OnPreSave(ctx, this)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression(@"if (OnPreSave != null) OnPreSave(this)"));// TODO: Das ist C# spezifisch
 
             // Create NotifyPostSave Method
             m = new CodeMemberMethod();
@@ -177,8 +215,7 @@ namespace Kistl.Server
             m.Name = "NotifyPostSave";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression("KistlDataContext", "ctx"));
-            m.Statements.Add(new CodeSnippetExpression(@"if (OnPostSave != null) OnPostSave(ctx, this)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression(@"if (OnPostSave != null) OnPostSave(this)"));// TODO: Das ist C# spezifisch
 
         }
 
@@ -234,12 +271,6 @@ namespace Kistl.Server
                             new CodePrimitiveExpression("_" + prop.PropertyName)),
                         new CodeAttributeArgument("OtherKey",
                             new CodePrimitiveExpression("fk_" + objClass.ClassName))));
-                    p.CustomAttributes.Add(new CodeAttributeDeclaration("ServerObject",
-                        new CodeAttributeArgument("FullName",
-                            new CodePrimitiveExpression(prop.DataType + "Server, Kistl.App.Projekte"))));
-                    p.CustomAttributes.Add(new CodeAttributeDeclaration("ClientObject",
-                        new CodeAttributeArgument("FullName",
-                            new CodePrimitiveExpression(prop.DataType + "Client, Kistl.App.Projekte"))));
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
 
@@ -255,7 +286,7 @@ namespace Kistl.Server
             }
         }
 
-        private void GenerateServerBL(ObjectClass objClass, CodeNamespace ns)
+        private void GenerateServerAccessLayer(ObjectClass objClass, CodeNamespace ns)
         {
             CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Server");
             ns.Types.Add(c);
@@ -264,7 +295,7 @@ namespace Kistl.Server
             c.BaseTypes.Add(new CodeTypeReference("ServerObject", new CodeTypeReference(objClass.ClassName)));
         }
 
-        private void GenerateClientBL(ObjectClass objClass, CodeNamespace ns)
+        private void GenerateClientAccessLayer(ObjectClass objClass, CodeNamespace ns)
         {
             CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Client");
             ns.Types.Add(c);
@@ -281,15 +312,23 @@ namespace Kistl.Server
                     c.Members.Add(m);
                     m.Comments.Add(new CodeCommentStatement("Autogeneriert, um die gebundenen Listen zu bekommen"));
 
-                    m.Name = "GetArrayOf" + prop.PropertyName + "FromXML";
+                    m.Name = "GetListOf" + prop.PropertyName;
                     m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                    m.ReturnType = new CodeTypeReference(typeof(IEnumerable));
+                    m.ReturnType = new CodeTypeReference("List", new CodeTypeReference(prop.DataType));
                     m.Parameters.Add(new CodeParameterDeclarationExpression(
-                        new CodeTypeReference(typeof(string)), "xml"));
+                        new CodeTypeReference(typeof(int)), "ID"));
                     m.Statements.Add(new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
                             new CodeMethodReferenceExpression(
-                                new CodeVariableReferenceExpression("xml"), 
+                                new CodeMethodInvokeExpression(
+                                    new CodeMethodReferenceExpression(
+                                        new CodeVariableReferenceExpression("Proxy.Service"), // TODO: Das ist C# spezifisch
+                                        "GetListOf"),
+                                        new CodeExpression[] {
+                                            new CodeSnippetExpression("Type"),
+                                            new CodeSnippetExpression("ID"),
+                                            new CodePrimitiveExpression(prop.PropertyName),
+                                        }),
                                 "FromXmlString", 
                                 new CodeTypeReference[] 
                                     {

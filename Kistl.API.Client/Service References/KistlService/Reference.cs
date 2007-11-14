@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.KistService {
+namespace Kistl.API.Client.KistlService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KistService.IKistlService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KistlService.IKistlService")]
     public interface IKistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetList", ReplyAction="http://tempuri.org/IKistlService/GetListResponse")]
@@ -32,12 +32,12 @@ namespace Kistl.Client.KistService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface IKistlServiceChannel : Kistl.Client.KistService.IKistlService, System.ServiceModel.IClientChannel {
+    public interface IKistlServiceChannel : Kistl.API.Client.KistlService.IKistlService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class KistlServiceClient : System.ServiceModel.ClientBase<Kistl.Client.KistService.IKistlService>, Kistl.Client.KistService.IKistlService {
+    public partial class KistlServiceClient : System.ServiceModel.ClientBase<Kistl.API.Client.KistlService.IKistlService>, Kistl.API.Client.KistlService.IKistlService {
         
         public KistlServiceClient() {
         }

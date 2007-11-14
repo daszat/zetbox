@@ -38,6 +38,9 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mitarbeiter.Client.Designer.cs" />
     <Compile Include="ObjectClass.Client.Designer.cs" />
     <Compile Include="ObjectProperty.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />

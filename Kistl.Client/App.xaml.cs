@@ -59,22 +59,5 @@ namespace Kistl.Client
             server = (Kistl.Server.Server)domain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
             server.StartServer();
         }
-
-        /// <summary>
-        /// WCF Proxy für das KistService instanzieren.
-        /// Konfiguration lt. app.config File
-        /// </summary>
-        private static KistService.KistlServiceClient service = new Kistl.Client.KistService.KistlServiceClient();
-
-        /// <summary>
-        /// WCF Proxy für das KistService
-        /// </summary>
-        public static KistService.KistlServiceClient Service
-        {
-            get
-            {
-                return service;
-            }
-        }
     }
 }

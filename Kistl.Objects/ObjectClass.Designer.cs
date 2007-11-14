@@ -87,9 +87,8 @@ namespace Kistl.App.Base
                 _TableName = value;
             }
         }
-                
+        
         [Association(Storage="_Properties", OtherKey="fk_ObjectClass")]
-        [DataObject(Namespace="Kistl.App.Base", Classname = "ObjectProperty")]
         [XmlIgnore()]
         public EntitySet<Kistl.App.Base.ObjectProperty> Properties
         {
@@ -102,10 +101,12 @@ namespace Kistl.App.Base
                 _Properties.Assign(value);
             }
         }
-
-        public event ObjectEventHandler<ObjectClass> OnPreSave = null;
-        public event ObjectEventHandler<ObjectClass> OnPostSave = null;
+        
         public event ToStringHandler<ObjectClass> OnToString;
+        
+        public event ObjectEventHandler<ObjectClass> OnPreSave;
+        
+        public event ObjectEventHandler<ObjectClass> OnPostSave;
         
         public override string ToString()
         {
@@ -117,16 +118,15 @@ namespace Kistl.App.Base
             }
             return base.ToString();
         }
-
+        
         public override void NotifyPreSave()
         {
             if (OnPreSave != null) OnPreSave(this);
         }
-
+        
         public override void NotifyPostSave()
         {
             if (OnPostSave != null) OnPostSave(this);
         }
-
     }
 }

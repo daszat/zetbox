@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using Kistl.API;
+using System.Reflection;
 
 namespace Kistl.API.Client
 {
@@ -13,25 +14,36 @@ namespace Kistl.API.Client
     public interface IClientObject
     {
         /// <summary>
-        /// XML in typisiertes Objektarray umwandeln.
-        /// Wird von der GUI benötigt.
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <returns></returns>
-        IEnumerable GetArrayFromXML(string xml);
-        /// <summary>
-        /// XML in typisiertes Objekt umwandeln
-        /// Wird von der GUI benötigt.
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <returns></returns>
-        IDataObject GetObjectFromXML(string xml);
-        /// <summary>
         /// Neues Objekt erzeugen
         /// Wird von der GUI benötigt.
         /// </summary>
         /// <returns></returns>
-        IDataObject CreateNew();
+        IDataObject CreateNewGeneric();
+        /// <summary>
+        /// Objekt holen
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        IDataObject GetObjectGeneric(int ID);
+        /// <summary>
+        /// List holen
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        IEnumerable GetListGeneric();
+        /// <summary>
+        /// List holen
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        IEnumerable GetListOfGeneric(int ID, string propName);
+        /// <summary>
+        /// Objekt speichern
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        IDataObject SetObjectGeneric(IDataObject obj);
     }
 
     /// <summary>
@@ -54,41 +66,94 @@ namespace Kistl.API.Client
         /// </summary>
         public ClientObject()
         {
+            // TODO: Add to cache
+            _type = new ObjectType(typeof(T).Namespace, typeof(T).Name);
         }
 
-        /// <summary>
-        /// XML in typisiertes Objektarray umwandeln.
-        /// Wird von der GUI benötigt.
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <returns></returns>
-        public IEnumerable GetArrayFromXML(string xml)
+        protected ObjectType _type = null;
+
+        public ObjectType Type
         {
-            IEnumerable result = xml.FromXmlString<List<T>>();
-            return result;
+            get
+            {
+                return _type;
+            }
         }
 
-        /// <summary>
-        /// XML in typisiertes Objekt umwandeln
-        /// Wird von der GUI benötigt.
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <returns></returns>
-        public IDataObject GetObjectFromXML(string xml)
-        {
-            T obj = xml.FromXmlString<T>();
-            return obj;
-        }
-
+        #region IClientObject Members
         /// <summary>
         /// Neues Objekt erzeugen
         /// Wird von der GUI benötigt.
         /// </summary>
         /// <returns></returns>
-        public IDataObject CreateNew()
+        public IDataObject CreateNewGeneric()
         {
             T obj = new T();
             return obj;
         }
+
+        public IDataObject GetObjectGeneric(int ID)
+        {
+            return Proxy.Service.GetObject(Type, ID).FromXmlString<T>();
+        }
+
+        public IEnumerable GetListGeneric()
+        {
+            return Proxy.Service.GetList(Type).FromXmlString<List<T>>();
+        }
+
+        public IEnumerable GetListOfGeneric(int ID, string propName)
+        {
+            if (ID == Helper.INVALIDID) return null;
+            // Client Methode holen
+            // TODO: Cachen!
+            MethodInfo mi = this.GetType().GetMethod("GetListOf" + propName);
+            if (mi != null)
+            {
+                // Liste vom Server holen & den DataContext setzen.
+                //string xml = Proxy.Service.GetListOf(Type, ID, propName);
+                return mi.Invoke(this, new object[] { ID }) as IEnumerable;
+            }
+            else
+            {
+                throw new ApplicationException("Property " + propName + " not found");
+            }
+        }
+
+        public IDataObject SetObjectGeneric(IDataObject obj)
+        {
+            string result = Proxy.Service.SetObject(Type, obj.ToXmlString());
+            return result.FromXmlString<T>();
+        }
+        #endregion
+
+        #region Typed Acces members
+        /// <summary>
+        /// Neues Objekt erzeugen
+        /// Wird von der GUI benötigt.
+        /// </summary>
+        /// <returns></returns>
+        public T CreateNew()
+        {
+            T obj = new T();
+            return obj;
+        }
+
+        public T GetObject(int ID)
+        {
+            return Proxy.Service.GetObject(Type, ID).FromXmlString<T>();
+        }
+
+        public List<T> GetList()
+        {
+            return Proxy.Service.GetList(Type).FromXmlString<List<T>>();
+        }
+
+        public T SetObject(T obj)
+        {
+            string result = Proxy.Service.SetObject(Type, obj.ToXmlString());
+            return result.FromXmlString<T>();
+        }        
+        #endregion
     }
 }

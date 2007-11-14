@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Kistl.Client.ObjectWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="ObjectWindow" Height="331" Width="381"
+    Title="ObjectWindow" Height="480" Width="640"
     Loaded="Window_Loaded">
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">

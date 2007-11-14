@@ -39,5 +39,21 @@ namespace Kistl.Client
 
             return obj;
         }
+
+        private static List<Kistl.App.Base.ObjectClass> _ObjectClasses = null;
+
+        public static List<Kistl.App.Base.ObjectClass> ObjectClasses
+        {
+            get
+            {
+                if (_ObjectClasses == null)
+                {
+                    Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
+                    _ObjectClasses = client.GetList();
+                }
+
+                return _ObjectClasses;
+            }
+        }
     }
 }

@@ -21,7 +21,8 @@ namespace Kistl.App.Base
     using System.Xml.Serialization;
     using Kistl.API;
     using Kistl.API.Client;
-
+    
+    
     public sealed class ObjectPropertyClient : ClientObject<ObjectProperty>
     {
     }

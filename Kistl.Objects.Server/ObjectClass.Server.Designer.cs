@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API;
     using Kistl.API.Server;
     
+    
     public sealed class ObjectClassServer : ServerObject<ObjectClass>
     {
     }

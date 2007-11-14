@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="23b3117f-acac-4d3d-aa62-0c852d5715f6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6666/KistlService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="KistlService.xsd" MetadataType="Schema" ID="37984299-f1d6-4031-a32e-7e4c2ea3bd9e" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd2" />
+    <MetadataFile FileName="KistlService.wsdl" MetadataType="Wsdl" ID="13e0c8d3-36a8-4886-b622-e84ed36b501d" SourceId="1" SourceUrl="http://localhost:6666/KistlService?wsdl" />
+    <MetadataFile FileName="KistlService.disco" MetadataType="Disco" ID="ff9d8c96-0032-421d-95e1-34d444517d20" SourceId="1" SourceUrl="http://localhost:6666/KistlService?disco" />
+    <MetadataFile FileName="KistlService1.xsd" MetadataType="Schema" ID="5fad6955-f400-4868-bf31-ab184cb66069" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd1" />
+    <MetadataFile FileName="KistlService2.xsd" MetadataType="Schema" ID="18508f25-70a3-4688-89a7-2d6da40dbe59" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
