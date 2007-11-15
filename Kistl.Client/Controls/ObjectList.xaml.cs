@@ -128,7 +128,16 @@ namespace Kistl.Client.Controls
                 wnd.ObjectType = this.DestinationObjectType;
                 wnd.ObjectID = API.Helper.INVALIDID;
 
-                wnd.Show();
+                wnd.SourceObjectID = this.ObjectID;
+                wnd.SourceObjectType = this.SourceObjectType;
+
+                wnd.ShowDialog();
+
+                if (wnd.ObjectID != API.Helper.INVALIDID)
+                {
+                    // ReBind
+                    Bind();
+                }
             }
             catch (Exception ex)
             {

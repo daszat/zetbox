@@ -20,6 +20,12 @@ namespace Kistl.App.Projekte
                 impl.OnToString += new Kistl.API.ToStringHandler<Projekt>(Projekt_OnToString);
             }
 
+            if (obj is Mitarbeiter)
+            {
+                Mitarbeiter impl = obj as Mitarbeiter;
+                impl.OnToString += new Kistl.API.ToStringHandler<Mitarbeiter>(Mitarbeiter_OnToString);
+            }
+
             if (obj is Task)
             {
                 Task impl = obj as Task;

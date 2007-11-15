@@ -30,13 +30,15 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private System.DateTime _DatumVon;
+        private System.Nullable<System.DateTime> _DatumVon;
         
-        private System.DateTime _DatumBis;
+        private System.Nullable<System.DateTime> _DatumBis;
         
-        private double _Aufwand;
+        private System.Nullable<double> _Aufwand;
         
-        private int _fk_Projekt;
+        private System.Nullable<int> _fk_Projekt;
+        
+        private EntityRef<Kistl.App.Projekte.Projekt> _Projekt = new EntityRef<Kistl.App.Projekte.Projekt>();
         
         [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
         public override int ID
@@ -65,7 +67,7 @@ namespace Kistl.App.Projekte
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_DatumVon")]
-        public System.DateTime DatumVon
+        public System.Nullable<System.DateTime> DatumVon
         {
             get
             {
@@ -78,7 +80,7 @@ namespace Kistl.App.Projekte
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_DatumBis")]
-        public System.DateTime DatumBis
+        public System.Nullable<System.DateTime> DatumBis
         {
             get
             {
@@ -91,7 +93,7 @@ namespace Kistl.App.Projekte
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_Aufwand")]
-        public double Aufwand
+        public System.Nullable<double> Aufwand
         {
             get
             {
@@ -104,7 +106,7 @@ namespace Kistl.App.Projekte
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_Projekt")]
-        public int fk_Projekt
+        public System.Nullable<int> fk_Projekt
         {
             get
             {
@@ -113,6 +115,20 @@ namespace Kistl.App.Projekte
             set
             {
                 _fk_Projekt = value;
+            }
+        }
+        
+        [Association(Storage="_Projekt", ThisKey="fk_Projekt")]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                return _Projekt.Entity;
+            }
+            set
+            {
+                _Projekt.Entity = value;
             }
         }
         

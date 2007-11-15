@@ -32,7 +32,11 @@ namespace Kistl.App.Projekte
         
         private EntitySet<Kistl.App.Projekte.Task> _Tasks = new EntitySet<Kistl.App.Projekte.Task>();
         
-        private int _fk_Mitarbeiter;
+        private System.Nullable<int> _fk_Mitarbeiter;
+        
+        private EntityRef<Kistl.App.Projekte.Mitarbeiter> _Mitarbeiter = new EntityRef<Kistl.App.Projekte.Mitarbeiter>();
+        
+        private System.Nullable<double> _AufwandGes;
         
         [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
         public override int ID
@@ -75,7 +79,7 @@ namespace Kistl.App.Projekte
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_Mitarbeiter")]
-        public int fk_Mitarbeiter
+        public System.Nullable<int> fk_Mitarbeiter
         {
             get
             {
@@ -84,6 +88,33 @@ namespace Kistl.App.Projekte
             set
             {
                 _fk_Mitarbeiter = value;
+            }
+        }
+        
+        [Association(Storage="_Mitarbeiter", ThisKey="fk_Mitarbeiter")]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
+        {
+            get
+            {
+                return _Mitarbeiter.Entity;
+            }
+            set
+            {
+                _Mitarbeiter.Entity = value;
+            }
+        }
+        
+        [Column(UpdateCheck=UpdateCheck.Never, Storage="_AufwandGes")]
+        public System.Nullable<double> AufwandGes
+        {
+            get
+            {
+                return _AufwandGes;
+            }
+            set
+            {
+                _AufwandGes = value;
             }
         }
         

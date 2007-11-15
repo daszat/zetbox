@@ -18,12 +18,11 @@ namespace Kistl.App.Projekte
         /// <param name="obj"></param>
         void Projekt_OnPreSetObject(Projekt obj)
         {
-            obj.Name += obj.Tasks.Sum(t => t.Aufwand).ToString();
+            obj.AufwandGes = obj.Tasks.Sum(t => t.Aufwand);
 
-            /*
-            var result = (from t in Kistl.API.Server.KistlDataContext.Current.GetTable<Task>()
+            /*var result = (from t in Kistl.API.Server.KistlDataContext.Current.GetTable<Task>()
                           where t.fk_Projekt == obj.ID
-                          select t.Aufwand);//.Sum();*/
+                          select t).Sum(s => s.Aufwand);*/
         }
 
         /// <summary>
@@ -54,8 +53,16 @@ namespace Kistl.App.Projekte
         /// <param name="e"></param>
         void Task_OnToString(Task obj, Kistl.API.ToStringEventArgs e)
         {
-            e.Result = string.Format("{0} [{1}] ({2} - {3})",
-                obj.Name, obj.Aufwand, obj.DatumVon.ToShortDateString(), obj.DatumBis.ToShortDateString());
+            if (obj.DatumVon.HasValue && obj.DatumBis.HasValue)
+            {
+                e.Result = string.Format("{0} [{1}] ({2} - {3})",
+                    obj.Name, obj.Aufwand, obj.DatumVon.Value.ToShortDateString(), obj.DatumBis.Value.ToShortDateString());
+            }
+            else
+            {
+                e.Result = string.Format("{0} [{1}]",
+                    obj.Name, obj.Aufwand);
+            }
         }
     }
 }

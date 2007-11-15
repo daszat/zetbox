@@ -35,6 +35,22 @@ namespace Kistl.Server
             }
         }
 
+        #region Save / Helper
+        private void SaveFile(CodeCompileUnit code, string fileName)
+        {
+            string path = Path.GetDirectoryName(fileName);
+            Directory.CreateDirectory(path);
+
+            CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
+            CodeGeneratorOptions options = new CodeGeneratorOptions();
+            options.BracingStyle = "C";
+            using (StreamWriter sourceWriter = new StreamWriter(fileName))
+            {
+                provider.GenerateCodeFromCompileUnit(
+                    code, sourceWriter, options);
+            }
+        }
+
         private void AddDefaultNamespaces(CodeNamespace ns)
         {
             ns.Imports.Add(new CodeNamespaceImport("System"));
@@ -48,7 +64,9 @@ namespace Kistl.Server
             ns.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API"));
         }
+        #endregion
 
+        #region GenerateObjectsClient/Server
         private void GenerateObjectsClient(ObjectClass objClass)
         {
             CodeCompileUnit code = new CodeCompileUnit();
@@ -83,6 +101,62 @@ namespace Kistl.Server
             SaveFile(code, path + @"Kistl.Objects.Server\" + objClass.ClassName + ".Server.Designer.cs");
         }
 
+        private void GenerateServerAccessLayer(ObjectClass objClass, CodeNamespace ns)
+        {
+            CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Server");
+            ns.Types.Add(c);
+            c.IsClass = true;
+            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
+            c.BaseTypes.Add(new CodeTypeReference("ServerObject", new CodeTypeReference(objClass.ClassName)));
+        }
+
+        private void GenerateClientAccessLayer(ObjectClass objClass, CodeNamespace ns)
+        {
+            CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Client");
+            ns.Types.Add(c);
+            c.IsClass = true;
+            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
+            c.BaseTypes.Add(new CodeTypeReference("ClientObject", new CodeTypeReference(objClass.ClassName)));
+
+            // Create GetListOf Methods
+            foreach (ObjectProperty prop in objClass.Properties)
+            {
+                if (prop.IsList.Value)
+                {
+                    CodeMemberMethod m = new CodeMemberMethod();
+                    c.Members.Add(m);
+                    m.Comments.Add(new CodeCommentStatement("Autogeneriert, um die gebundenen Listen zu bekommen"));
+
+                    m.Name = "GetListOf" + prop.PropertyName;
+                    m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                    m.ReturnType = new CodeTypeReference("List", new CodeTypeReference(prop.DataType));
+                    m.Parameters.Add(new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(int)), "ID"));
+                    m.Statements.Add(new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeMethodReferenceExpression(
+                                new CodeMethodInvokeExpression(
+                                    new CodeMethodReferenceExpression(
+                                        new CodeVariableReferenceExpression("Proxy.Service"), // TODO: Das ist C# spezifisch
+                                        "GetListOf"),
+                                        new CodeExpression[] {
+                                            new CodeSnippetExpression("Type"),
+                                            new CodeSnippetExpression("ID"),
+                                            new CodePrimitiveExpression(prop.PropertyName),
+                                        }),
+                                "FromXmlString",
+                                new CodeTypeReference[] 
+                                    {
+                                        new CodeTypeReference("List", new CodeTypeReference(prop.DataType))
+                                    }),
+                                new CodeExpression[0])));
+                }
+            }
+        }
+
+        #endregion
+
+        #region Generate Data Objects
         private void GenerateObjects(ObjectClass objClass)
         {
             CodeCompileUnit code = new CodeCompileUnit();
@@ -117,21 +191,7 @@ namespace Kistl.Server
             SaveFile(code, path + @"Kistl.Objects\" + objClass.ClassName + ".Designer.cs");
         }
 
-        private void SaveFile(CodeCompileUnit code, string fileName)
-        {            
-            string path = Path.GetDirectoryName(fileName);
-            Directory.CreateDirectory(path);
-
-            CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
-            CodeGeneratorOptions options = new CodeGeneratorOptions();
-            options.BracingStyle = "C";
-            using (StreamWriter sourceWriter = new StreamWriter(fileName))
-            {
-                provider.GenerateCodeFromCompileUnit(
-                    code, sourceWriter, options);
-            }
-        }
-
+        #region GenerateDefaultProperties
         private void GenerateDefaultProperties(ObjectClass objClass, CodeTypeDeclaration c)
         {
             // Create ID member
@@ -160,7 +220,9 @@ namespace Kistl.Server
             p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_ID")));
             p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_ID"), new CodePropertySetValueReferenceExpression()));
         }
+        #endregion
 
+        #region GenerateDefaultMethods
         private void GenerateDefaultMethods(ObjectClass objClass, CodeTypeDeclaration c)
         {
             // Create ToString Delegate
@@ -218,15 +280,35 @@ namespace Kistl.Server
             m.Statements.Add(new CodeSnippetExpression(@"if (OnPostSave != null) OnPostSave(this)"));// TODO: Das ist C# spezifisch
 
         }
+        #endregion
 
+        #region GenerateProperties
         private void GenerateProperties(ObjectClass objClass, CodeTypeDeclaration c)
         {
             foreach (ObjectProperty prop in objClass.Properties)
             {
-                if (!prop.IsList)
+                if (!prop.IsList.Value)
                 {
                     // Simple Property
-                    CodeMemberField f = new CodeMemberField(prop.DataType, "_" + prop.PropertyName);
+                    CodeMemberField f = null;
+                    if (prop.IsAssociation.Value)
+                    {
+                        f = new CodeMemberField(typeof(int?), "_" + prop.PropertyName);
+                    }
+                    else
+                    {
+                        CodeTypeReference ctr = null;
+                        if (Type.GetType(prop.DataType).IsValueType)
+                        {
+                            ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.DataType));
+                        }
+                        else
+                        {
+                            ctr = new CodeTypeReference(prop.DataType);
+                        }
+                        f = new CodeMemberField(ctr, 
+                            "_" + prop.PropertyName);
+                    }
                     c.Members.Add(f);
 
                     CodeMemberProperty p = new CodeMemberProperty();
@@ -236,7 +318,14 @@ namespace Kistl.Server
                     p.HasGet = true;
                     p.HasSet = true;
                     p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                    p.Type = new CodeTypeReference(Type.GetType(prop.DataType, true, true));
+                    if (prop.IsAssociation.Value)
+                    {
+                        p.Type = new CodeTypeReference(typeof(int?));
+                    }
+                    else
+                    {
+                        p.Type = f.Type;
+                    }
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("Column",
                         new CodeAttributeArgument("UpdateCheck",
                             new CodeSnippetExpression("UpdateCheck.Never")), // TODO: Das ist C# spezifisch
@@ -245,8 +334,38 @@ namespace Kistl.Server
 
                     p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
                     p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+
+                    if (prop.IsAssociation.Value)
+                    {
+                        // "Rückwäretspointer"
+                        string associationPropName = prop.PropertyName.Replace("fk_", "");
+                        f = new CodeMemberField(
+                            new CodeTypeReference("EntityRef", new CodeTypeReference(prop.DataType)), "_" + associationPropName);
+                        f.InitExpression = new CodeObjectCreateExpression(new CodeTypeReference("EntityRef", new CodeTypeReference(prop.DataType)));
+                        c.Members.Add(f);
+
+                        p = new CodeMemberProperty();
+                        c.Members.Add(p);
+
+                        p.Name = associationPropName;
+                        p.HasGet = true;
+                        p.HasSet = true;
+                        p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                        p.Type = new CodeTypeReference(prop.DataType);
+
+                        p.CustomAttributes.Add(new CodeAttributeDeclaration("Association",
+                            new CodeAttributeArgument("Storage",
+                                new CodePrimitiveExpression("_" + associationPropName)),
+                            new CodeAttributeArgument("ThisKey",
+                                new CodePrimitiveExpression("fk_" + associationPropName))));
+                        p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+
+
+                        p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + associationPropName + ".Entity")));
+                        p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + associationPropName + ".Entity"), new CodePropertySetValueReferenceExpression()));
+                    }
                 }
-                else if (prop.IsList && prop.IsAssociation)
+                else if (prop.IsList.Value && prop.IsAssociation.Value)
                 {
                     // Association
                     // TODO: Das ist eigentlich falsch herum, das sollte generiert werden,
@@ -285,59 +404,8 @@ namespace Kistl.Server
                 }
             }
         }
-
-        private void GenerateServerAccessLayer(ObjectClass objClass, CodeNamespace ns)
-        {
-            CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Server");
-            ns.Types.Add(c);
-            c.IsClass = true;
-            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
-            c.BaseTypes.Add(new CodeTypeReference("ServerObject", new CodeTypeReference(objClass.ClassName)));
-        }
-
-        private void GenerateClientAccessLayer(ObjectClass objClass, CodeNamespace ns)
-        {
-            CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Client");
-            ns.Types.Add(c);
-            c.IsClass = true;
-            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
-            c.BaseTypes.Add(new CodeTypeReference("ClientObject", new CodeTypeReference(objClass.ClassName)));
-
-            // Create GetListOf Methods
-            foreach (ObjectProperty prop in objClass.Properties)
-            {
-                if (prop.IsList)
-                {
-                    CodeMemberMethod m = new CodeMemberMethod();
-                    c.Members.Add(m);
-                    m.Comments.Add(new CodeCommentStatement("Autogeneriert, um die gebundenen Listen zu bekommen"));
-
-                    m.Name = "GetListOf" + prop.PropertyName;
-                    m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                    m.ReturnType = new CodeTypeReference("List", new CodeTypeReference(prop.DataType));
-                    m.Parameters.Add(new CodeParameterDeclarationExpression(
-                        new CodeTypeReference(typeof(int)), "ID"));
-                    m.Statements.Add(new CodeMethodReturnStatement(
-                        new CodeMethodInvokeExpression(
-                            new CodeMethodReferenceExpression(
-                                new CodeMethodInvokeExpression(
-                                    new CodeMethodReferenceExpression(
-                                        new CodeVariableReferenceExpression("Proxy.Service"), // TODO: Das ist C# spezifisch
-                                        "GetListOf"),
-                                        new CodeExpression[] {
-                                            new CodeSnippetExpression("Type"),
-                                            new CodeSnippetExpression("ID"),
-                                            new CodePrimitiveExpression(prop.PropertyName),
-                                        }),
-                                "FromXmlString", 
-                                new CodeTypeReference[] 
-                                    {
-                                        new CodeTypeReference("List", new CodeTypeReference(prop.DataType))
-                                    }), 
-                                new CodeExpression[0])));
-                }
-            }
-        }
-
+        #endregion
+        
+        #endregion
     }
 }

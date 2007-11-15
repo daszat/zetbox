@@ -52,8 +52,6 @@ namespace Kistl.Client.Controls
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(object), typeof(EditSimpleProperty));
 
-
-
         public bool IsReadOnly
         {
             get { return (bool)GetValue(IsReadOnlyProperty); }

@@ -31,6 +31,17 @@ namespace Kistl.API
             this.Classname = classname;
         }
 
+        public override bool Equals(object obj)
+        {
+            ObjectType b = obj as ObjectType;
+            if (b == null) return false;
+            return this.Namespace == b.Namespace && this.Classname == b.Classname;
+        }
+
+        public override int GetHashCode()
+        {
+            return (Namespace + Classname).GetHashCode();
+        }
 
         public string Namespace { get; set; }
         public string Classname { get; set; }

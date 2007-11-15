@@ -32,9 +32,17 @@ namespace Kistl.Client
         /// </summary>
         public ObjectType ObjectType { get; set; }
         /// <summary>
+        /// Typ des Objektes, welches dieses Objekt geöffnet hat.
+        /// </summary>
+        public ObjectType SourceObjectType { get; set; }
+        /// <summary>
         /// ObjektID
         /// </summary>
         public int ObjectID { get; set; }
+        /// <summary>
+        /// ObjectID jenes Objektes, welches dieses Objekt geöffent hat.
+        /// </summary>
+        public int SourceObjectID { get; set; }
 
         /// <summary>
         /// Client BL Objekt instanz
@@ -80,7 +88,7 @@ namespace Kistl.Client
             // Aus Metadaten holen
             foreach (Kistl.App.Base.ObjectProperty p in objClassClient.GetListOfProperties(objClass.ID))
             {
-                if (p.IsList && p.IsAssociation)
+                if (p.IsList.Value && p.IsAssociation.Value)
                 {
                     Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
                     lst.SourceObjectType = this.ObjectType;
@@ -93,22 +101,67 @@ namespace Kistl.Client
 
                     data.Children.Add(lst);
                 }
+                else if (!p.IsList.Value && p.IsAssociation.Value)
+                {
+                    Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
+                    pointer.Label = p.PropertyName;
+                    // TODO: Das stiftet noch Verwirrung!
+                    pointer.ObjectType = new ObjectType(p.DataType);
+
+                    // Set Binding, damit werden Änderungen automatisch übernommen.
+                    Binding b = new Binding(p.PropertyName);
+                    b.Mode = BindingMode.TwoWay;
+                    b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                    b.NotifyOnSourceUpdated = true;
+                    b.NotifyOnTargetUpdated = true;
+                    pointer.SetBinding(Controls.EditPointerProperty.ValueProperty, b);
+
+                    data.Children.Add(pointer);
+
+                    // fk setzten, falls vorhanden
+                    if (SourceObjectID != API.Helper.INVALIDID)
+                    {
+                        if (pointer.ObjectType.Equals(SourceObjectType))
+                        {
+                            obj.GetType().GetProperty(p.PropertyName).SetValue(obj, SourceObjectID, new object[] {});
+                        }
+                    }
+                }
+                else if (p.IsList.Value && !p.IsAssociation.Value)
+                {
+                    // Reine Listen werden noch nicht unterstützt
+                }
                 else
                 {
                     // Neues Bearbeitungscontrol erzeugen
                     Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
 
                     // Bezeichnung setzen
-                    txt.Label = p.PropertyName; 
+                    txt.Label = p.PropertyName;
 
                     // Set Binding, damit werden Änderungen automatisch übernommen.
                     Binding b = new Binding(p.PropertyName);
                     b.Mode = BindingMode.TwoWay;
                     b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                    b.NotifyOnSourceUpdated = true;
+                    b.NotifyOnTargetUpdated = true;
                     txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
-                    
+
                     data.Children.Add(txt);
                 }
+            }
+        }
+
+        private bool IsObjectDirty = false;
+        private void SetTitle()
+        {
+            if (IsObjectDirty && !this.Title.StartsWith("*"))
+            {
+                this.Title = "* " + ObjectType.ToString();
+            }
+            else if (!IsObjectDirty)
+            {
+                this.Title = ObjectType.ToString();
             }
         }
 
@@ -118,7 +171,7 @@ namespace Kistl.Client
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                this.Title = ObjectType.ToString();
+                SetTitle();
 
                 // Client BL holen
                 client = Helper.GetClientObject(ObjectType);
@@ -155,12 +208,16 @@ namespace Kistl.Client
             {
                 // Objekt zum Server schicken & dann wieder auspacken
                 obj = client.SetObjectGeneric(obj);
+                ObjectID = obj.ID;
                 // ReBind
                 data.DataContext = obj;
                 // Das muss sein, weil die Properties keine DependencyProperties sind
                 // Nutzt aber nix, da ich ein neues Objekt zurück bekommen habe *grrr*
                 // einfach den Datakontext neu setzen (siehe oben)
                 // obj.NotifyChange(); 
+
+                IsObjectDirty = false;
+                SetTitle();
             }
             catch (Exception ex)
             {
@@ -176,6 +233,18 @@ namespace Kistl.Client
         private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            try
+            {
+                IsObjectDirty = true;
+                SetTitle();
+            }
+            catch
+            {
+            }
         }
     }
 }

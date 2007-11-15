@@ -28,15 +28,17 @@ namespace Kistl.App.Base
         
         private int _ID = Helper.INVALIDID;
         
-        private int _fk_ObjectClass;
+        private System.Nullable<int> _fk_ObjectClass;
+        
+        private EntityRef<Kistl.App.Base.ObjectClass> _ObjectClass = new EntityRef<Kistl.App.Base.ObjectClass>();
         
         private string _PropertyName;
         
         private string _DataType;
         
-        private bool _IsList;
+        private System.Nullable<bool> _IsList;
         
-        private bool _IsAssociation;
+        private System.Nullable<bool> _IsAssociation;
         
         [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
         public override int ID
@@ -52,7 +54,7 @@ namespace Kistl.App.Base
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_ObjectClass")]
-        public int fk_ObjectClass
+        public System.Nullable<int> fk_ObjectClass
         {
             get
             {
@@ -61,6 +63,20 @@ namespace Kistl.App.Base
             set
             {
                 _fk_ObjectClass = value;
+            }
+        }
+        
+        [Association(Storage="_ObjectClass", ThisKey="fk_ObjectClass")]
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectClass ObjectClass
+        {
+            get
+            {
+                return _ObjectClass.Entity;
+            }
+            set
+            {
+                _ObjectClass.Entity = value;
             }
         }
         
@@ -91,7 +107,7 @@ namespace Kistl.App.Base
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsList")]
-        public bool IsList
+        public System.Nullable<bool> IsList
         {
             get
             {
@@ -104,7 +120,7 @@ namespace Kistl.App.Base
         }
         
         [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsAssociation")]
-        public bool IsAssociation
+        public System.Nullable<bool> IsAssociation
         {
             get
             {
