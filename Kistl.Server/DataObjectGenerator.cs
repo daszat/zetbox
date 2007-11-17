@@ -20,6 +20,7 @@ namespace Kistl.Server
 
         public void Generate(Kistl.API.Server.KistlDataContext ctx, string path)
         {
+            Console.WriteLine("Generating Objects...");
             this.path = path + (path.EndsWith("\\") ? "" : "\\");
             this.ctx = ctx;
 
@@ -33,6 +34,7 @@ namespace Kistl.Server
                 GenerateObjectsClient(objClass);
                 GenerateObjectsServer(objClass);
             }
+            Console.WriteLine("...finished!");
         }
 
         #region Save / Helper
