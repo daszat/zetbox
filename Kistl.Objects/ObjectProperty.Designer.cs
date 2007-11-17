@@ -8,29 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectProperty_ObjectClass", "ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "ObjectProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectProperty))]
+
 namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
     
     
-    [Table(Name="ObjectProperties")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectProperty")]
     public sealed class ObjectProperty : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;
-        
-        private System.Nullable<int> _fk_ObjectClass;
-        
-        private EntityRef<Kistl.App.Base.ObjectClass> _ObjectClass = new EntityRef<Kistl.App.Base.ObjectClass>();
         
         private string _PropertyName;
         
@@ -40,7 +38,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<bool> _IsAssociation;
         
-        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
             get
@@ -53,34 +51,21 @@ namespace Kistl.App.Base
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_ObjectClass")]
-        public System.Nullable<int> fk_ObjectClass
-        {
-            get
-            {
-                return _fk_ObjectClass;
-            }
-            set
-            {
-                _fk_ObjectClass = value;
-            }
-        }
-        
-        [Association(Storage="_ObjectClass", ThisKey="fk_ObjectClass")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectProperty_ObjectClass", "ObjectClass")]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectClass ObjectClass
         {
             get
             {
-                return _ObjectClass.Entity;
+                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectProperty_ObjectClass", "ObjectClass").Value;
             }
             set
             {
-                _ObjectClass.Entity = value;
+                ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectProperty_ObjectClass", "ObjectClass").Value = value;
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_PropertyName")]
+        [EdmScalarPropertyAttribute()]
         public string PropertyName
         {
             get
@@ -93,7 +78,7 @@ namespace Kistl.App.Base
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DataType")]
+        [EdmScalarPropertyAttribute()]
         public string DataType
         {
             get
@@ -106,7 +91,7 @@ namespace Kistl.App.Base
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsList")]
+        [EdmScalarPropertyAttribute()]
         public System.Nullable<bool> IsList
         {
             get
@@ -119,7 +104,7 @@ namespace Kistl.App.Base
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_IsAssociation")]
+        [EdmScalarPropertyAttribute()]
         public System.Nullable<bool> IsAssociation
         {
             get

@@ -14,15 +14,15 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
     
     
-    [Table(Name="ObjectClasses")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectClass")]
     public sealed class ObjectClass : BaseDataObject
     {
         
@@ -34,9 +34,7 @@ namespace Kistl.App.Base
         
         private string _TableName;
         
-        private EntitySet<Kistl.App.Base.ObjectProperty> _Properties = new EntitySet<Kistl.App.Base.ObjectProperty>();
-        
-        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
             get
@@ -49,7 +47,7 @@ namespace Kistl.App.Base
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_ClassName")]
+        [EdmScalarPropertyAttribute()]
         public string ClassName
         {
             get
@@ -62,7 +60,7 @@ namespace Kistl.App.Base
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_Namespace")]
+        [EdmScalarPropertyAttribute()]
         public string Namespace
         {
             get
@@ -75,7 +73,7 @@ namespace Kistl.App.Base
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_TableName")]
+        [EdmScalarPropertyAttribute()]
         public string TableName
         {
             get
@@ -88,17 +86,16 @@ namespace Kistl.App.Base
             }
         }
         
-        [Association(Storage="_Properties", OtherKey="fk_ObjectClass")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectProperty_ObjectClass", "ObjectProperty")]
         [XmlIgnore()]
-        public EntitySet<Kistl.App.Base.ObjectProperty> Properties
+        public EntityCollection<Kistl.App.Base.ObjectProperty> Properties
         {
             get
             {
-                return _Properties;
+                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectProperty>("Model.FK_ObjectProperty_ObjectClass", "ObjectProperty");
             }
             set
             {
-                _Properties.Assign(value);
             }
         }
         

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+  <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="ObjectClass">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
+        <MappingFragment StoreEntitySet="ObjectClass">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="Namespace" ColumnName="Namespace" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekt">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt)">
+        <MappingFragment StoreEntitySet="Projekt">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Task)">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
+          <ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
+          <ScalarProperty Name="Aufwand" ColumnName="Aufwand" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectProperty">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectProperty)">
+        <MappingFragment StoreEntitySet="ObjectProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mitarbeiter">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
+        <MappingFragment StoreEntitySet="Mitarbeiter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_ObjectProperty_ObjectClass" TypeName="Model.FK_ObjectProperty_ObjectClass" StoreEntitySet="ObjectProperty">
+      <EndProperty Name="ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
+      </EndProperty>
+      <EndProperty Name="ObjectProperty">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Task_Projekt" TypeName="Model.FK_Task_Projekt" StoreEntitySet="Task">
+      <EndProperty Name="Projekt">
+        <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
+      </EndProperty>
+      <EndProperty Name="Task">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Projekt" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Projekt_Mitarbeiter" TypeName="Model.FK_Projekt_Mitarbeiter" StoreEntitySet="Projekt">
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
+      </EndProperty>
+      <EndProperty Name="Projekt">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

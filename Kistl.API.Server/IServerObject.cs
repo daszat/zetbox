@@ -136,11 +136,11 @@ namespace Kistl.API.Server
 
             if (obj.ID != API.Helper.INVALIDID)
             {
-                KistlDataContext.Current.GetTable<T>().Attach(obj, true);
+                //KistlDataContext.Current.Attach(obj);
             }
             else
             {
-                KistlDataContext.Current.GetTable<T>().Add(obj);
+                KistlDataContext.Current.AddObject(typeof(T).Name, obj);
             }
             KistlDataContext.Current.SubmitChanges();
 

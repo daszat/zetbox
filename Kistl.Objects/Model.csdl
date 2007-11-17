@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="Entities">
+    <EntitySet Name="ObjectClass" EntityType="Model.ObjectClass" />
+    <EntitySet Name="Projekt" EntityType="Model.Projekt" />
+    <EntitySet Name="Task" EntityType="Model.Task" />
+    <EntitySet Name="ObjectProperty" EntityType="Model.ObjectProperty" />
+    <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
+    <AssociationSet Name="FK_ObjectProperty_ObjectClass" Association="Model.FK_ObjectProperty_ObjectClass">
+      <End Role="ObjectClass" EntitySet="ObjectClass" />
+      <End Role="ObjectProperty" EntitySet="ObjectProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Projekt" Association="Model.FK_Task_Projekt">
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projekt_Mitarbeiter" Association="Model.FK_Projekt_Mitarbeiter">
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="Projekt" EntitySet="Projekt" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ObjectClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ClassName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="Namespace" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="TableName" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="Properties" Relationship="Model.FK_ObjectProperty_ObjectClass" FromRole="ObjectClass" ToRole="ObjectProperty" />
+  </EntityType>
+  <EntityType Name="Projekt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="Tasks" Relationship="Model.FK_Task_Projekt" FromRole="Projekt" ToRole="Task" />
+    <NavigationProperty Name="Mitarbeiter" Relationship="Model.FK_Projekt_Mitarbeiter" FromRole="Projekt" ToRole="Mitarbeiter" />
+    <Property Name="AufwandGes" Type="Double" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="DatumVon" Type="DateTime" Nullable="true" />
+    <Property Name="DatumBis" Type="DateTime" Nullable="true" />
+    <Property Name="Aufwand" Type="Double" Nullable="true" />
+    <NavigationProperty Name="Projekt" Relationship="Model.FK_Task_Projekt" FromRole="Task" ToRole="Projekt" />
+  </EntityType>
+  <EntityType Name="ObjectProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_ObjectProperty_ObjectClass" FromRole="ObjectProperty" ToRole="ObjectClass" />
+    <Property Name="PropertyName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="DataType" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="IsList" Type="Boolean" Nullable="true" />
+    <Property Name="IsAssociation" Type="Boolean" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Mitarbeiter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="Projekte" Relationship="Model.FK_Projekt_Mitarbeiter" FromRole="Mitarbeiter" ToRole="Projekt" />
+  </EntityType>
+  <Association Name="FK_ObjectProperty_ObjectClass">
+    <End Role="ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+    <End Role="ObjectProperty" Type="Model.ObjectProperty" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Task_Projekt">
+    <End Role="Projekt" Type="Model.Projekt" Multiplicity="0..1" />
+    <End Role="Task" Type="Model.Task" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Projekt_Mitarbeiter">
+    <End Role="Mitarbeiter" Type="Model.Mitarbeiter" Multiplicity="0..1" />
+    <End Role="Projekt" Type="Model.Projekt" Multiplicity="*" />
+  </Association>
+</Schema>

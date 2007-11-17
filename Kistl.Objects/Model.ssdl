@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+  <EntityContainer Name="dbo">
+    <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses" />
+    <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Table="Projekte" />
+    <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks" />
+    <EntitySet Name="ObjectProperty" EntityType="Model.Store.ObjectProperty" Table="ObjectProperties" />
+    <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Table="Mitarbeiter" />
+    <AssociationSet Name="FK_ObjectProperty_ObjectClass" Association="Model.Store.FK_ObjectProperty_ObjectClass">
+      <End Role="ObjectClass" EntitySet="ObjectClass" />
+      <End Role="ObjectProperty" EntitySet="ObjectProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Projekt" Association="Model.Store.FK_Task_Projekt">
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projekt_Mitarbeiter" Association="Model.Store.FK_Projekt_Mitarbeiter">
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="Projekt" EntitySet="Projekt" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ObjectClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="TableName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Projekt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+    <Property Name="AufwandGes" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="DatumVon" Type="datetime" Nullable="true" />
+    <Property Name="DatumBis" Type="datetime" Nullable="true" />
+    <Property Name="Aufwand" Type="float" Nullable="true" />
+    <Property Name="fk_Projekt" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ObjectProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
+    <Property Name="PropertyName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="DataType" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="IsList" Type="bit" Nullable="true" />
+    <Property Name="IsAssociation" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Mitarbeiter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_ObjectProperty_ObjectClass">
+    <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="ObjectProperty" Type="Model.Store.ObjectProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ObjectProperty">
+        <PropertyRef Name="fk_ObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Projekt">
+    <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
+    <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projekt">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="fk_Projekt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Projekt_Mitarbeiter">
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mitarbeiter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Projekt">
+        <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -16,11 +16,48 @@ namespace Kistl.Server
 
         static void Main(string[] args)
         {
-            server.StartServer();
-            Console.WriteLine("Server started, press the anykey");
-            Console.ReadLine();
+            if (args.Length > 0)
+            {
+                if (args[0].Contains("generate"))
+                {
+                    try
+                    {
+                        Console.WriteLine("Generating Code...");
 
-            server.StopServer();
+                        // Start Server
+                        API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
+
+                        DataObjectGenerator g = new DataObjectGenerator();
+                        EntityFrameworkModelGenerator gEF = new EntityFrameworkModelGenerator();
+                        using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+                        {
+                            g.Generate(ctx, Helper.CodeGenPath);
+                            gEF.Generate(ctx, Helper.CodeGenPath);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Helper.HandleError(ex);
+                    }
+
+                    Console.WriteLine("Generation Code finished!");
+                }
+                else
+                {
+                    Console.WriteLine("Usage: Kistl.Server [options]");
+                    Console.WriteLine("  With no options: Starts the server");
+                    Console.WriteLine("  -generate: Generates Objects & EF-Model");
+                    Console.WriteLine("  -?: Displays this help");
+                }
+            }
+            else
+            {
+                server.StartServer();
+                Console.WriteLine("Server started, press the anykey");
+                Console.ReadLine();
+
+                server.StopServer();
+            }
         }
     }
 
@@ -57,22 +94,6 @@ namespace Kistl.Server
 
             Kistl.App.Projekte.CustomServerActions sa = new Kistl.App.Projekte.CustomServerActions();
             Console.WriteLine(sa.ToString()); // Trick 17, siehe oben
-
-            // Zunächst sicherheitshabler die Objektdatenklassen erzeugen 
-            // Das ist nur ein Testeinsprungspunkt
-
-            try
-            {
-                DataObjectGenerator g = new DataObjectGenerator();
-                using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
-                {
-                    g.Generate(ctx, @"c:\temp\KistlCodeGen");
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex);
-            }
 
             serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
             serviceThread.Start();

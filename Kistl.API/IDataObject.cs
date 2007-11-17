@@ -53,7 +53,7 @@ namespace Kistl.API
     /// Basis Datenobjekt. Attached sich automatisch an den ObjectBroker zur Verteilung der Events
     /// TODO: Besseren Namen für den ObjectBroker finden - bin mir nicht sicher, ob der Name passt.
     /// </summary>
-    public abstract class BaseDataObject : IDataObject, INotifyPropertyChanged
+    public abstract class BaseDataObject : System.Data.Objects.DataClasses.EntityObject, IDataObject
     {
         /// <summary>
         /// Attach to Events
@@ -74,22 +74,12 @@ namespace Kistl.API
 
         #endregion
 
-        #region INotifyPropertyChanged Members
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
         /// <summary>
         /// Zum Melden, dass sich das Datenobjekt geänder hat.
         /// </summary>
         public void NotifyChange()
         {
-            if (PropertyChanged != null)
-            {
-                System.ComponentModel.PropertyChangedEventArgs e = new System.ComponentModel.PropertyChangedEventArgs(null);
-                PropertyChanged(this, e);
-            }
+            ReportPropertyChanged(null);
         }
     }
 }

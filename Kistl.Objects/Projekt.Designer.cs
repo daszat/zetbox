@@ -8,21 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Projekt_Mitarbeiter", "Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter), "Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Projekt))]
+
 namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
     
     
-    [Table(Name="Projekte")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Projekt")]
     public sealed class Projekt : BaseDataObject
     {
         
@@ -30,15 +32,9 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private EntitySet<Kistl.App.Projekte.Task> _Tasks = new EntitySet<Kistl.App.Projekte.Task>();
-        
-        private System.Nullable<int> _fk_Mitarbeiter;
-        
-        private EntityRef<Kistl.App.Projekte.Mitarbeiter> _Mitarbeiter = new EntityRef<Kistl.App.Projekte.Mitarbeiter>();
-        
         private System.Nullable<double> _AufwandGes;
         
-        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
             get
@@ -51,7 +47,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_Name")]
+        [EdmScalarPropertyAttribute()]
         public string Name
         {
             get
@@ -64,48 +60,34 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Association(Storage="_Tasks", OtherKey="fk_Projekt")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "Task")]
         [XmlIgnore()]
-        public EntitySet<Kistl.App.Projekte.Task> Tasks
+        public EntityCollection<Kistl.App.Projekte.Task> Tasks
         {
             get
             {
-                return _Tasks;
+                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Task>("Model.FK_Task_Projekt", "Task");
             }
             set
             {
-                _Tasks.Assign(value);
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_Mitarbeiter")]
-        public System.Nullable<int> fk_Mitarbeiter
-        {
-            get
-            {
-                return _fk_Mitarbeiter;
-            }
-            set
-            {
-                _fk_Mitarbeiter = value;
-            }
-        }
-        
-        [Association(Storage="_Mitarbeiter", ThisKey="fk_Mitarbeiter")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_Mitarbeiter", "Mitarbeiter")]
         [XmlIgnore()]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get
             {
-                return _Mitarbeiter.Entity;
+                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Projekt_Mitarbeiter", "Mitarbeiter").Value;
             }
             set
             {
-                _Mitarbeiter.Entity = value;
+                ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Projekt_Mitarbeiter", "Mitarbeiter").Value = value;
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_AufwandGes")]
+        [EdmScalarPropertyAttribute()]
         public System.Nullable<double> AufwandGes
         {
             get

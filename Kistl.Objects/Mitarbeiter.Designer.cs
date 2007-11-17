@@ -14,15 +14,15 @@ namespace Kistl.App.Projekte
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
     
     
-    [Table(Name="Mitarbeiter")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Mitarbeiter")]
     public sealed class Mitarbeiter : BaseDataObject
     {
         
@@ -30,9 +30,7 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private EntitySet<Kistl.App.Projekte.Projekt> _Projekte = new EntitySet<Kistl.App.Projekte.Projekt>();
-        
-        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
             get
@@ -45,7 +43,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_Name")]
+        [EdmScalarPropertyAttribute()]
         public string Name
         {
             get
@@ -58,17 +56,16 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Association(Storage="_Projekte", OtherKey="fk_Mitarbeiter")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_Mitarbeiter", "Projekt")]
         [XmlIgnore()]
-        public EntitySet<Kistl.App.Projekte.Projekt> Projekte
+        public EntityCollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {
-                return _Projekte;
+                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt>("Model.FK_Projekt_Mitarbeiter", "Projekt");
             }
             set
             {
-                _Projekte.Assign(value);
             }
         }
         

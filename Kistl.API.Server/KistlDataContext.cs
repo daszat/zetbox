@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.Linq;
+using System.Data.Objects;
+
+[assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
 namespace Kistl.API.Server
 {
-    public class KistlDataContext : System.Data.Linq.DataContext, IDisposable
+    public class KistlDataContext : ObjectContext, IDisposable
     {
         [ThreadStatic]
         private static KistlDataContext _Current = null;
@@ -24,7 +26,7 @@ namespace Kistl.API.Server
 
         public static KistlDataContext InitSession()
         {
-            _Current = new KistlDataContext("Data Source=localhost\\sqlexpress; Initial Catalog=Kistl;Integrated Security=true");
+            _Current = new KistlDataContext();
             return _Current;
         }
 
@@ -39,13 +41,28 @@ namespace Kistl.API.Server
         #endregion
 
 
-        private KistlDataContext(string fileorconnectionstring) : base(fileorconnectionstring)
+        private KistlDataContext() :
+            base("name=KistlContext", "Entities")
         {
         }
 
-        public override void SubmitChanges(System.Data.Linq.ConflictMode failureMode)
+        private Dictionary<Type, object> _table = new Dictionary<Type, object>();
+
+        public ObjectQuery<T> GetTable<T>()
         {
-            ChangeSet c = this.GetChangeSet();
+            Type t = typeof(T);
+            if (!_table.ContainsKey(t))
+            {
+                _table[t] = this.CreateQuery<T>("[" + t.Name + "]");
+            }
+
+            return _table[t] as ObjectQuery<T>;
+
+        }
+
+        public void SubmitChanges()
+        {
+            /*ChangeSet c = this.ObjectStateManager.GetChangeSet();
             List<IDataObject> saveList = new List<IDataObject>();
 
             foreach(IDataObject obj in c.AddedEntities)
@@ -61,17 +78,16 @@ namespace Kistl.API.Server
             foreach (IDataObject obj in saveList)
             {
                 obj.NotifyPreSave();
-            }
+            }*/
 
-            base.SubmitChanges(failureMode);
+            base.SaveChanges();
 
+            /*
             foreach (IDataObject obj in saveList)
             {
                 obj.NotifyPostSave();
-            }
+            }*/
 
         }
     }
-
-    
 }

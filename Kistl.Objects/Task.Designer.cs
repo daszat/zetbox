@@ -8,21 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Task_Projekt", "Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Projekt), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Task))]
+
 namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
     
     
-    [Table(Name="Tasks")]
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Task")]
     public sealed class Task : BaseDataObject
     {
         
@@ -36,11 +38,7 @@ namespace Kistl.App.Projekte
         
         private System.Nullable<double> _Aufwand;
         
-        private System.Nullable<int> _fk_Projekt;
-        
-        private EntityRef<Kistl.App.Projekte.Projekt> _Projekt = new EntityRef<Kistl.App.Projekte.Projekt>();
-        
-        [Column(IsDbGenerated=true, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never, Storage="_ID")]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
             get
@@ -53,7 +51,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_Name")]
+        [EdmScalarPropertyAttribute()]
         public string Name
         {
             get
@@ -66,7 +64,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DatumVon")]
+        [EdmScalarPropertyAttribute()]
         public System.Nullable<System.DateTime> DatumVon
         {
             get
@@ -79,7 +77,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_DatumBis")]
+        [EdmScalarPropertyAttribute()]
         public System.Nullable<System.DateTime> DatumBis
         {
             get
@@ -92,7 +90,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_Aufwand")]
+        [EdmScalarPropertyAttribute()]
         public System.Nullable<double> Aufwand
         {
             get
@@ -105,30 +103,17 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [Column(UpdateCheck=UpdateCheck.Never, Storage="_fk_Projekt")]
-        public System.Nullable<int> fk_Projekt
-        {
-            get
-            {
-                return _fk_Projekt;
-            }
-            set
-            {
-                _fk_Projekt = value;
-            }
-        }
-        
-        [Association(Storage="_Projekt", ThisKey="fk_Projekt")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "Projekt")]
         [XmlIgnore()]
         public Kistl.App.Projekte.Projekt Projekt
         {
             get
             {
-                return _Projekt.Entity;
+                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "Projekt").Value;
             }
             set
             {
-                _Projekt.Entity = value;
+                ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "Projekt").Value = value;
             }
         }
         

@@ -36,6 +36,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -55,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjectGenerator.cs" />
+    <Compile Include="EntityFrameworkModelGenerator.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="CustomActionsManagerServer.cs" />
     <Compile Include="Program.cs" />

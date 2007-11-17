@@ -19,5 +19,13 @@ namespace Kistl.Server
         {
             Console.WriteLine(ex.ToString());
         }
+
+        public static string CodeGenPath
+        {
+            get
+            {
+                return @"c:\temp\KistlCodeGen";
+            }
+        }
     }
 }

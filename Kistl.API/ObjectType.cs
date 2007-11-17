@@ -46,6 +46,14 @@ namespace Kistl.API
         public string Namespace { get; set; }
         public string Classname { get; set; }
 
+        public string NameDataObject
+        {
+            get
+            {
+                return string.Format("{0}.{1}", Namespace, Classname);
+            }
+        }
+
         public string FullNameDataObject
         {
             get

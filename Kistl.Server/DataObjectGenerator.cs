@@ -10,6 +10,7 @@ using Kistl.App.Base;
 using System.IO;
 using System.Reflection;
 using System.Collections;
+using Kistl.API;
 
 namespace Kistl.Server
 {
@@ -59,8 +60,8 @@ namespace Kistl.Server
             ns.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
             ns.Imports.Add(new CodeNamespaceImport("System.Linq"));
             ns.Imports.Add(new CodeNamespaceImport("System.Text"));
-            ns.Imports.Add(new CodeNamespaceImport("System.Data.Linq"));
-            ns.Imports.Add(new CodeNamespaceImport("System.Data.Linq.Mapping"));
+            ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects"));
+            ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects.DataClasses"));
             ns.Imports.Add(new CodeNamespaceImport("System.Collections"));
             ns.Imports.Add(new CodeNamespaceImport("System.Xml"));
             ns.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
@@ -162,6 +163,8 @@ namespace Kistl.Server
         private void GenerateObjects(ObjectClass objClass)
         {
             CodeCompileUnit code = new CodeCompileUnit();
+
+            GenerateEdmRelationshipAttribute(objClass, code);
             
             // Create Namespace
             CodeNamespace ns = new CodeNamespace(objClass.Namespace);
@@ -176,9 +179,11 @@ namespace Kistl.Server
             c.IsClass = true;
             c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
             c.BaseTypes.Add("BaseDataObject");
-            c.CustomAttributes.Add(new CodeAttributeDeclaration("Table", 
+            c.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
+                new CodeAttributeArgument("NamespaceName", 
+                    new CodePrimitiveExpression("Model")),
                 new CodeAttributeArgument("Name", 
-                    new CodePrimitiveExpression(objClass.TableName))));
+                    new CodePrimitiveExpression(objClass.ClassName)) ));
 
             // Create Default Properties
             GenerateDefaultProperties(objClass, c);
@@ -192,6 +197,41 @@ namespace Kistl.Server
             // Generate the code & save
             SaveFile(code, path + @"Kistl.Objects\" + objClass.ClassName + ".Designer.cs");
         }
+
+        #region GenerateEdmRelationshipAttribute
+        private void GenerateEdmRelationshipAttribute(ObjectClass objClass, CodeCompileUnit code)
+        {
+            var props = from p in objClass.Properties
+                        where p.IsAssociation.Value && !p.IsList.Value
+                        select p;
+
+            foreach (ObjectProperty prop in props)
+            {
+                string associationPropName = prop.PropertyName.Replace("fk_", "");
+                ObjectType otherType = new ObjectType(prop.DataType);
+                string assocName = "FK_" + objClass.ClassName + "_" + otherType.Classname;
+
+                code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression("Model")),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(assocName)),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(otherType.Classname)),
+                new CodeAttributeArgument(
+                    new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
+                new CodeAttributeArgument(
+                    new CodeTypeOfExpression(prop.DataType)),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(prop.ObjectClass.ClassName)),
+                new CodeAttributeArgument(
+                    new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
+                new CodeAttributeArgument(
+                    new CodeTypeOfExpression(prop.ObjectClass.Namespace + "." + prop.ObjectClass.ClassName))
+                    ));
+            }
+        }
+        #endregion
 
         #region GenerateDefaultProperties
         private void GenerateDefaultProperties(ObjectClass objClass, CodeTypeDeclaration c)
@@ -209,15 +249,11 @@ namespace Kistl.Server
             p.HasSet = true;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             p.Type = new CodeTypeReference(typeof(int));
-            p.CustomAttributes.Add(new CodeAttributeDeclaration("Column",
-                new CodeAttributeArgument("IsDbGenerated",
-                    new CodePrimitiveExpression(true)), 
-                new CodeAttributeArgument("IsPrimaryKey",
-                    new CodePrimitiveExpression(true)), 
-                new CodeAttributeArgument("UpdateCheck",
-                    new CodeSnippetExpression("UpdateCheck.Never")), // TODO: Das ist C# spezifisch
-                new CodeAttributeArgument("Storage",
-                    new CodePrimitiveExpression("_ID")) ));
+            p.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute",
+                new CodeAttributeArgument("EntityKeyProperty",
+                    new CodePrimitiveExpression(true)),
+                new CodeAttributeArgument("IsNullable",
+                    new CodePrimitiveExpression(false)) ));
 
             p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_ID")));
             p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_ID"), new CodePropertySetValueReferenceExpression()));
@@ -289,28 +325,22 @@ namespace Kistl.Server
         {
             foreach (ObjectProperty prop in objClass.Properties)
             {
-                if (!prop.IsList.Value)
+                if (!prop.IsList.Value && !prop.IsAssociation.Value)
                 {
                     // Simple Property
                     CodeMemberField f = null;
-                    if (prop.IsAssociation.Value)
+                    CodeTypeReference ctr = null;
+                    if (Type.GetType(prop.DataType).IsValueType)
                     {
-                        f = new CodeMemberField(typeof(int?), "_" + prop.PropertyName);
+                        ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.DataType));
                     }
                     else
                     {
-                        CodeTypeReference ctr = null;
-                        if (Type.GetType(prop.DataType).IsValueType)
-                        {
-                            ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.DataType));
-                        }
-                        else
-                        {
-                            ctr = new CodeTypeReference(prop.DataType);
-                        }
-                        f = new CodeMemberField(ctr, 
-                            "_" + prop.PropertyName);
+                        ctr = new CodeTypeReference(prop.DataType);
                     }
+                    f = new CodeMemberField(ctr, 
+                        "_" + prop.PropertyName);
+
                     c.Members.Add(f);
 
                     CodeMemberProperty p = new CodeMemberProperty();
@@ -320,52 +350,41 @@ namespace Kistl.Server
                     p.HasGet = true;
                     p.HasSet = true;
                     p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                    if (prop.IsAssociation.Value)
-                    {
-                        p.Type = new CodeTypeReference(typeof(int?));
-                    }
-                    else
-                    {
-                        p.Type = f.Type;
-                    }
-                    p.CustomAttributes.Add(new CodeAttributeDeclaration("Column",
-                        new CodeAttributeArgument("UpdateCheck",
-                            new CodeSnippetExpression("UpdateCheck.Never")), // TODO: Das ist C# spezifisch
-                    new CodeAttributeArgument("Storage",
-                        new CodePrimitiveExpression("_" + prop.PropertyName))));
+                    p.Type = f.Type;
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
 
                     p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
                     p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+                }
+                else if (!prop.IsList.Value && prop.IsAssociation.Value)
+                {
+                    // "Rückwäretspointer"
+                    string associationPropName = prop.PropertyName.Replace("fk_", "");
 
-                    if (prop.IsAssociation.Value)
-                    {
-                        // "Rückwäretspointer"
-                        string associationPropName = prop.PropertyName.Replace("fk_", "");
-                        f = new CodeMemberField(
-                            new CodeTypeReference("EntityRef", new CodeTypeReference(prop.DataType)), "_" + associationPropName);
-                        f.InitExpression = new CodeObjectCreateExpression(new CodeTypeReference("EntityRef", new CodeTypeReference(prop.DataType)));
-                        c.Members.Add(f);
+                    CodeMemberProperty p = new CodeMemberProperty();
+                    c.Members.Add(p);
 
-                        p = new CodeMemberProperty();
-                        c.Members.Add(p);
+                    p.Name = associationPropName;
+                    p.HasGet = true;
+                    p.HasSet = true;
+                    p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                    p.Type = new CodeTypeReference(prop.DataType);
 
-                        p.Name = associationPropName;
-                        p.HasGet = true;
-                        p.HasSet = true;
-                        p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                        p.Type = new CodeTypeReference(prop.DataType);
+                    ObjectType otherType = new ObjectType(prop.DataType);
+                    string assocName = "FK_" + objClass.ClassName + "_" + otherType.Classname;
 
-                        p.CustomAttributes.Add(new CodeAttributeDeclaration("Association",
-                            new CodeAttributeArgument("Storage",
-                                new CodePrimitiveExpression("_" + associationPropName)),
-                            new CodeAttributeArgument("ThisKey",
-                                new CodePrimitiveExpression("fk_" + associationPropName))));
-                        p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration(
+                        "EdmRelationshipNavigationPropertyAttribute",
+                        new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
+                        new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
+                        new CodeAttributeArgument(new CodePrimitiveExpression(otherType.Classname))));
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
 
-                        p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + associationPropName + ".Entity")));
-                        p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + associationPropName + ".Entity"), new CodePropertySetValueReferenceExpression()));
-                    }
+                    p.GetStatements.Add(new CodeMethodReturnStatement(
+                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\").Value")));
+                    p.SetStatements.Add(new CodeAssignStatement(
+                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\").Value"), new CodePropertySetValueReferenceExpression()));
                 }
                 else if (prop.IsList.Value && prop.IsAssociation.Value)
                 {
@@ -373,11 +392,6 @@ namespace Kistl.Server
                     // TODO: Das ist eigentlich falsch herum, das sollte generiert werden,
                     // wenn bei der referenzierenden Klasse ein FK eingetragen wurde.
                     // Das sind quasi "AutoProperties"
-                    CodeMemberField f = new CodeMemberField(
-                        new CodeTypeReference("EntitySet", new CodeTypeReference(prop.DataType)), "_" + prop.PropertyName);
-                    f.InitExpression = new CodeObjectCreateExpression(new CodeTypeReference("EntitySet", new CodeTypeReference(prop.DataType)));
-                    c.Members.Add(f);
-
                     CodeMemberProperty p = new CodeMemberProperty();
                     c.Members.Add(p);
 
@@ -385,18 +399,21 @@ namespace Kistl.Server
                     p.HasGet = true;
                     p.HasSet = true;
                     p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                    p.Type = new CodeTypeReference("EntitySet", new CodeTypeReference(prop.DataType));
+                    p.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(prop.DataType));
 
-                    p.CustomAttributes.Add(new CodeAttributeDeclaration("Association",
-                        new CodeAttributeArgument("Storage",
-                            new CodePrimitiveExpression("_" + prop.PropertyName)),
-                        new CodeAttributeArgument("OtherKey",
-                            new CodePrimitiveExpression("fk_" + objClass.ClassName))));
+                    ObjectType otherType = new ObjectType(prop.DataType);
+                    string assocName = "FK_" + otherType.Classname + "_" + objClass.ClassName;
+
+                    p.CustomAttributes.Add(new CodeAttributeDeclaration(
+                        "EdmRelationshipNavigationPropertyAttribute",
+                        new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
+                        new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
+                        new CodeAttributeArgument(new CodePrimitiveExpression(otherType.Classname))));
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
 
-                    p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
-                    p.SetStatements.Add(new CodeMethodInvokeExpression(new CodeSnippetExpression("_" + prop.PropertyName), "Assign", new CodePropertySetValueReferenceExpression()));
+                    p.GetStatements.Add(new CodeMethodReturnStatement(
+                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\")")));
 
                 }
                 else
