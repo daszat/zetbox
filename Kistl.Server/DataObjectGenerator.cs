@@ -358,7 +358,7 @@ namespace Kistl.Server
                 }
                 else if (!prop.IsList.Value && prop.IsAssociation.Value)
                 {
-                    // "Rückwäretspointer"
+                    // "Rückwäretspointer" zum Vater Objekt
                     string associationPropName = prop.PropertyName.Replace("fk_", "");
 
                     CodeMemberProperty p = new CodeMemberProperty();
@@ -381,8 +381,14 @@ namespace Kistl.Server
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
 
-                    p.GetStatements.Add(new CodeMethodReturnStatement(
-                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\").Value")));
+                    p.GetStatements.Add(
+                        new CodeSnippetExpression(
+                            string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""{2}"");
+                if (!r.IsLoaded) r.Load(); 
+                return r.Value", prop.DataType, assocName, otherType.Classname)));
+                    
+                    //new CodeMethodReturnStatement(
+//                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\").Value")));
                     p.SetStatements.Add(new CodeAssignStatement(
                         new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\").Value"), new CodePropertySetValueReferenceExpression()));
                 }
@@ -412,8 +418,11 @@ namespace Kistl.Server
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
 
-                    p.GetStatements.Add(new CodeMethodReturnStatement(
-                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\")")));
+                    p.GetStatements.Add(
+                        new CodeSnippetExpression(
+                            string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""{2}"");
+                if (!c.IsLoaded) c.Load(); 
+                return c", prop.DataType, assocName, otherType.Classname)));
 
                 }
                 else

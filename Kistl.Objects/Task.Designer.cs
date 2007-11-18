@@ -109,7 +109,9 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "Projekt").Value;
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "Projekt");
+                if (!r.IsLoaded) r.Load(); 
+                return r.Value;
             }
             set
             {

@@ -6,8 +6,12 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Data;
 using System.Data.Linq;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Xml;
 using System.Reflection;
+using System.ComponentModel;
+using System.Data.Metadata.Edm;
 
 namespace Kistl.API.Server
 {
@@ -94,7 +98,17 @@ namespace Kistl.API.Server
             PropertyInfo pi = typeof(T).GetProperty(property);
             if (pi == null) throw new ArgumentException("Property does not exist");
 
-            IEnumerable list = pi.GetValue(obj, null) as IEnumerable;
+            // die Properties liefern eine EntityCollection<> zurück
+            // diese lässt sich nicht XML serialisieren
+            // daher -> umwandeln in eine List<>
+            // Zuerst rausfinden, um welchen Typ es sich handelt
+            // danach die List<> erzeugen & im Konstruktor die EntityCollection<> übergeben
+            // -> fertig!
+            // TODO: Rausfinden ob das langsam ist & wenn ja, dann Cachen!
+            Type[] innerTypes = pi.PropertyType.GetGenericArguments();
+            Type tList = typeof(List<>).MakeGenericType(innerTypes);
+            object list = Activator.CreateInstance(tList, pi.GetValue(obj, null));
+
             return list.ToXmlString();
         }
 
@@ -109,7 +123,7 @@ namespace Kistl.API.Server
             var result = from a in KistlDataContext.Current.GetTable<T>()
                          where a.ID == ID
                          select a;
-            return result.Single<T>();
+            return result.First<T>();
         }
 
         /// <summary>
@@ -136,7 +150,8 @@ namespace Kistl.API.Server
 
             if (obj.ID != API.Helper.INVALIDID)
             {
-                //KistlDataContext.Current.Attach(obj);
+                KistlDataContext.Current.AttachTo(typeof(T).Name, obj);
+                MarkEveryPropertyAsModified(obj);
             }
             else
             {
@@ -145,6 +160,18 @@ namespace Kistl.API.Server
             KistlDataContext.Current.SubmitChanges();
 
             return obj.ToXmlString();
+        }
+
+        private void MarkEveryPropertyAsModified(IDataObject obj)
+        {
+            ObjectStateEntry stateEntry = KistlDataContext.Current.ObjectStateManager.GetObjectStateEntry(obj);
+            MetadataWorkspace workspace = KistlDataContext.Current.MetadataWorkspace;
+            EntityType entityType = workspace.GetItem<EntityType>("Model." + obj.GetType().Name, DataSpace.CSpace);
+
+            foreach (EdmProperty property in entityType.Properties)
+            {
+                stateEntry.SetModifiedProperty(property.Name);
+            }
         }
     }
 }

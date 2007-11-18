@@ -60,34 +60,48 @@ namespace Kistl.API.Server
 
         }
 
-        public void SubmitChanges()
+        /// <summary>
+        /// Überschreiben, damit ich meine eigene Feuerlogik einbauen kann
+        /// & hoffen, dass die Microsofties das bald als virtuel markieren
+        /// </summary>
+        /// <returns></returns>
+        public new int SaveChanges()
         {
-            /*ChangeSet c = this.ObjectStateManager.GetChangeSet();
+            return SubmitChanges();
+        }
+
+        /// <summary>
+        /// Überschreiben, damit ich meine eigene Feuerlogik einbauen kann
+        /// & hoffen, dass die Microsofties das bald als virtuel markieren
+        /// </summary>
+        /// <returns></returns>
+        public new int SaveChanges(bool acceptChanges)
+        {
+            return SubmitChanges();
+        }
+
+        public int SubmitChanges()
+        {
+            
             List<IDataObject> saveList = new List<IDataObject>();
-
-            foreach(IDataObject obj in c.AddedEntities)
-            {
-                saveList.Add(obj);
-            }
-
-            foreach (IDataObject obj in c.ModifiedEntities)
-            {
-                saveList.Add(obj);
-            }
+            this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
+                .ToList().ForEach(e => saveList.Add(e.Entity as IDataObject));
+            this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified)
+                .ToList().ForEach(e => saveList.Add(e.Entity as IDataObject));
 
             foreach (IDataObject obj in saveList)
             {
                 obj.NotifyPreSave();
-            }*/
+            }
 
-            base.SaveChanges();
+            int result = base.SaveChanges();
 
-            /*
             foreach (IDataObject obj in saveList)
             {
                 obj.NotifyPostSave();
-            }*/
+            }
 
+            return result;
         }
     }
 }

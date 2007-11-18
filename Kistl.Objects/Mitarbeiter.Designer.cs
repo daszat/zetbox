@@ -62,7 +62,9 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt>("Model.FK_Projekt_Mitarbeiter", "Projekt");
+                EntityCollection<Kistl.App.Projekte.Projekt> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt>("Model.FK_Projekt_Mitarbeiter", "Projekt");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
             }
             set
             {

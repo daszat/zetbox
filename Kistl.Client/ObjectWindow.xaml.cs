@@ -81,7 +81,7 @@ namespace Kistl.Client
             data.DataContext = obj;
 
             Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
-            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.Single(o => o.Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
+            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.First(o => o.Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
 
             BindDefaultProperties();
 

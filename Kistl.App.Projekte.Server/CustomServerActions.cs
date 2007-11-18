@@ -18,7 +18,10 @@ namespace Kistl.App.Projekte
         /// <param name="obj"></param>
         void Projekt_OnPreSetObject(Projekt obj)
         {
-            obj.AufwandGes = obj.Tasks.Sum(t => t.Aufwand);
+            if (obj.EntityState == System.Data.EntityState.Modified)
+            {
+                obj.AufwandGes = obj.Tasks.Sum(t => t.Aufwand);
+            }
 
             /*var result = (from t in Kistl.API.Server.KistlDataContext.Current.GetTable<Task>()
                           where t.fk_Projekt == obj.ID

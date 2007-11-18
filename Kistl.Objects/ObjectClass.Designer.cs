@@ -92,7 +92,9 @@ namespace Kistl.App.Base
         {
             get
             {
-                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectProperty>("Model.FK_ObjectProperty_ObjectClass", "ObjectProperty");
+                EntityCollection<Kistl.App.Base.ObjectProperty> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectProperty>("Model.FK_ObjectProperty_ObjectClass", "ObjectProperty");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
             }
             set
             {

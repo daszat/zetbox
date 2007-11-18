@@ -56,7 +56,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                this.ReportPropertyChanging("Name");
                 _Name = value;
+                this.ReportPropertyChanged("Name");
             }
         }
         
@@ -66,7 +68,9 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Task>("Model.FK_Task_Projekt", "Task");
+                EntityCollection<Kistl.App.Projekte.Task> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Task>("Model.FK_Task_Projekt", "Task");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
             }
             set
             {
@@ -79,7 +83,9 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Projekt_Mitarbeiter", "Mitarbeiter").Value;
+                EntityReference<Kistl.App.Projekte.Mitarbeiter> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Projekt_Mitarbeiter", "Mitarbeiter");
+                if (!r.IsLoaded) r.Load(); 
+                return r.Value;
             }
             set
             {
