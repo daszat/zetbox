@@ -38,6 +38,8 @@ namespace Kistl.App.Projekte
         
         private System.Nullable<double> _Aufwand;
         
+        private int _fk_Projekt = Helper.INVALIDID;
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -115,7 +117,25 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "Projekt").Value = value;
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "Projekt");
+                if (!r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Projekt
+        {
+            get
+            {
+                if (_fk_Projekt == Helper.INVALIDID && Projekt != null)
+                {
+                    _fk_Projekt = Projekt.ID;
+                }
+                return _fk_Projekt;
+            }
+            set
+            {
+                _fk_Projekt = value;
             }
         }
         

@@ -16,25 +16,6 @@ namespace Kistl.Server
     public class KistlService : IKistlService
     {
         /// <summary>
-        /// Helper Method for generic object access
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private static IServerObject GetServerObject(ObjectType type)
-        {
-            if (type == null) throw new ArgumentException("Type is null");
-            if (string.IsNullOrEmpty(type.FullNameServerObject)) throw new ArgumentException("Type is empty");
-
-            Type t = Type.GetType(type.FullNameServerObject);
-            if (t == null) throw new ApplicationException("Invalid Type");
-
-            IServerObject obj = Activator.CreateInstance(t) as IServerObject;
-            if (obj == null) throw new ApplicationException("Cannot create instance");
-
-            return obj;
-        }
-
-        /// <summary>
         /// Implementierung der GetList Methode
         /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
         /// delegiert den Aufruf weiter
@@ -47,7 +28,7 @@ namespace Kistl.Server
             {
                 using (KistlDataContext ctx = KistlDataContext.InitSession())
                 {
-                    return GetServerObject(type).GetList();
+                    return ServerObjectFactory.GetServerObject(type).GetList();
                 }
             }
             catch (Exception ex)
@@ -72,7 +53,7 @@ namespace Kistl.Server
             {
                 using (KistlDataContext ctx = KistlDataContext.InitSession())
                 {
-                    return GetServerObject(type).GetListOf(ID, property);
+                    return ServerObjectFactory.GetServerObject(type).GetListOf(ID, property);
                 }
             }
             catch (Exception ex)
@@ -96,7 +77,7 @@ namespace Kistl.Server
             {
                 using (KistlDataContext ctx = KistlDataContext.InitSession())
                 {
-                    return GetServerObject(type).GetObject(ID);
+                    return ServerObjectFactory.GetServerObject(type).GetObject(ID);
                 }
             }
             catch (Exception ex)
@@ -120,7 +101,7 @@ namespace Kistl.Server
             {
                 using (KistlDataContext ctx = KistlDataContext.InitSession())
                 {
-                    return GetServerObject(type).SetObject(obj);
+                    return ServerObjectFactory.GetServerObject(type).SetObject(obj);
                 }
             }
             catch (Exception ex)

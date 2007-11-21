@@ -30,6 +30,8 @@ namespace Kistl.App.Base
         
         private int _ID = Helper.INVALIDID;
         
+        private int _fk_ObjectClass = Helper.INVALIDID;
+        
         private string _PropertyName;
         
         private string _DataType;
@@ -63,7 +65,25 @@ namespace Kistl.App.Base
             }
             set
             {
-                ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectProperty_ObjectClass", "ObjectClass").Value = value;
+                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectProperty_ObjectClass", "ObjectClass");
+                if (!r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_ObjectClass
+        {
+            get
+            {
+                if (_fk_ObjectClass == Helper.INVALIDID && ObjectClass != null)
+                {
+                    _fk_ObjectClass = ObjectClass.ID;
+                }
+                return _fk_ObjectClass;
+            }
+            set
+            {
+                _fk_ObjectClass = value;
             }
         }
         

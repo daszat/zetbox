@@ -32,6 +32,8 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
+        private int _fk_Mitarbeiter = Helper.INVALIDID;
+        
         private System.Nullable<double> _AufwandGes;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
@@ -56,9 +58,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                this.ReportPropertyChanging("Name");
                 _Name = value;
-                this.ReportPropertyChanged("Name");
             }
         }
         
@@ -89,7 +89,25 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Projekt_Mitarbeiter", "Mitarbeiter").Value = value;
+                EntityReference<Kistl.App.Projekte.Mitarbeiter> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Projekt_Mitarbeiter", "Mitarbeiter");
+                if (!r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Mitarbeiter
+        {
+            get
+            {
+                if (_fk_Mitarbeiter == Helper.INVALIDID && Mitarbeiter != null)
+                {
+                    _fk_Mitarbeiter = Mitarbeiter.ID;
+                }
+                return _fk_Mitarbeiter;
+            }
+            set
+            {
+                _fk_Mitarbeiter = value;
             }
         }
         

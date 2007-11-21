@@ -19,20 +19,6 @@ namespace Kistl.Server
             this.path = path + (path.EndsWith("\\") ? "" : "\\");
             this.ctx = ctx;
 
-            /*
-            var namespaces = (from c in ctx.GetTable<ObjectClass>()
-                             select c.Namespace).Distinct();
-
-            IQueryable<ObjectClass> objClassList = null;
-
-            foreach (string ns in namespaces)
-            {
-                objClassList = from c in ctx.GetTable<ObjectClass>()
-                                where c.Namespace == ns
-                                select c;
-
-            }*/
-
             IQueryable<ObjectClass> objClassList = from c in ctx.GetTable<ObjectClass>()
                                               select c;
             GenerateSSDL(objClassList);

@@ -386,11 +386,34 @@ namespace Kistl.Server
                             string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""{2}"");
                 if (!r.IsLoaded) r.Load(); 
                 return r.Value", prop.DataType, assocName, otherType.Classname)));
-                    
-                    //new CodeMethodReturnStatement(
-//                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\").Value")));
-                    p.SetStatements.Add(new CodeAssignStatement(
-                        new CodeSnippetExpression("((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<" + prop.DataType + ">(\"Model." + assocName + "\", \"" + otherType.Classname + "\").Value"), new CodePropertySetValueReferenceExpression()));
+
+                    p.SetStatements.Add(
+                        new CodeSnippetExpression(
+                            string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""{2}"");
+                if (!r.IsLoaded) r.Load(); 
+                r.Value = value", prop.DataType, assocName, otherType.Classname)));
+
+                    // Serializer fk_ Field und Property
+                    CodeMemberField f = new CodeMemberField(typeof(int), "_" + prop.PropertyName);
+                    f.InitExpression = new CodeSnippetExpression("Helper.INVALIDID"); // TODO: Das ist c# Spezifisch
+                    c.Members.Add(f);
+
+                    p = new CodeMemberProperty();
+                    c.Members.Add(p);
+                    p.Name = prop.PropertyName;
+                    p.HasGet = true;
+                    p.HasSet = true;
+                    p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+                    p.Type = new CodeTypeReference(typeof(int));
+
+                    p.GetStatements.Add(
+                        new CodeSnippetExpression(
+                            string.Format(@"if (_fk_{0} == Helper.INVALIDID && {0} != null)
+                {{
+                    _fk_{0} = {0}.ID;
+                }}
+                return _fk_{0}", associationPropName)));
+                    p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
                 }
                 else if (prop.IsList.Value && prop.IsAssociation.Value)
                 {

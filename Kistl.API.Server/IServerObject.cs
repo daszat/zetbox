@@ -45,6 +45,13 @@ namespace Kistl.API.Server
         string GetObject(int ID);
 
         /// <summary>
+        /// Läd generisch eine Instanz
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        IDataObject GetObjectInstanceGeneric(int ID);
+
+        /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
         /// <param name="ctx"></param>
@@ -52,6 +59,29 @@ namespace Kistl.API.Server
         /// <returns></returns>
         string SetObject(string xml);
     }
+
+    public class ServerObjectFactory
+    {
+        /// <summary>
+        /// Helper Method for generic object access
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static IServerObject GetServerObject(ObjectType type)
+        {
+            if (type == null) throw new ArgumentException("Type is null");
+            if (string.IsNullOrEmpty(type.FullNameServerObject)) throw new ArgumentException("Type is empty");
+
+            Type t = Type.GetType(type.FullNameServerObject);
+            if (t == null) throw new ApplicationException("Invalid Type");
+
+            IServerObject obj = Activator.CreateInstance(t) as IServerObject;
+            if (obj == null) throw new ApplicationException("Cannot create instance");
+
+            return obj;
+        }
+    }
+
 
     /// <summary>
     /// Basis Objekt für Server BL. Implementiert Linq to SQL.
@@ -127,6 +157,17 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
+        /// Gibt eine typisierte Objektinstanz zurück.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public IDataObject GetObjectInstanceGeneric(int ID)
+        {
+            return GetObjectInstance(ID);
+        }
+
+        /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
         /// <param name="ctx"></param>
@@ -152,6 +193,25 @@ namespace Kistl.API.Server
             {
                 KistlDataContext.Current.AttachTo(typeof(T).Name, obj);
                 MarkEveryPropertyAsModified(obj);
+
+                // Update Relationships
+                // TODO: Bad hack, weil EF keine Releasion serialisieren kann
+                foreach (PropertyInfo pi in typeof(T).GetProperties())
+                {
+                    if (pi.GetCustomAttributes(typeof(EdmRelationshipNavigationPropertyAttribute), true).Length > 0)
+                    {
+                        // Bingo!
+                        PropertyInfo pifk = typeof(T).GetProperty("fk_" + pi.Name);
+                        if (pifk != null)
+                        {
+                            int fk = (int)pifk.GetValue(obj, null);
+
+                            IServerObject so = ServerObjectFactory.GetServerObject(new ObjectType(pi.PropertyType.FullName));
+                            IDataObject other = so.GetObjectInstanceGeneric(fk);
+                            pi.SetValue(obj, other, null);
+                        }
+                    }
+                }
             }
             else
             {

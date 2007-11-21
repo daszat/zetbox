@@ -85,9 +85,9 @@ namespace Kistl.API.Server
             
             List<IDataObject> saveList = new List<IDataObject>();
             this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
-                .ToList().ForEach(e => saveList.Add(e.Entity as IDataObject));
+                .ToList().ForEach(e => { if (e.Entity is IDataObject) saveList.Add(e.Entity as IDataObject); });
             this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified)
-                .ToList().ForEach(e => saveList.Add(e.Entity as IDataObject));
+                .ToList().ForEach(e => { if(e.Entity is IDataObject) saveList.Add(e.Entity as IDataObject); });
 
             foreach (IDataObject obj in saveList)
             {
