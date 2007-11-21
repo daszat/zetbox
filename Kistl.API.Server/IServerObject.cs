@@ -135,11 +135,16 @@ namespace Kistl.API.Server
             // danach die List<> erzeugen & im Konstruktor die EntityCollection<> übergeben
             // -> fertig!
             // TODO: Rausfinden ob das langsam ist & wenn ja, dann Cachen!
-            Type[] innerTypes = pi.PropertyType.GetGenericArguments();
-            Type tList = typeof(List<>).MakeGenericType(innerTypes);
-            object list = Activator.CreateInstance(tList, pi.GetValue(obj, null));
+            // Type[] innerTypes = pi.PropertyType.GetGenericArguments();
+            // Type tList = typeof(List<>).MakeGenericType(innerTypes);
+            // object list = Activator.CreateInstance(tList, pi.GetValue(obj, null));
 
-            return list.ToXmlString();
+            // return list.ToXmlString();
+
+            ObjectCollection result = new ObjectCollection();
+            IEnumerable v = (IEnumerable)pi.GetValue(obj, null);
+            result.Objects.AddRange(v.OfType<BaseDataObject>());
+            return result.ToXmlString();
         }
 
         /// <summary>

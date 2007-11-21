@@ -54,11 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseProperty.Client.Designer.cs" />
     <Compile Include="Mitarbeiter.Client.Designer.cs" />
     <Compile Include="ObjectClass.Client.Designer.cs" />
-    <Compile Include="ObjectProperty.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.Client.Designer.cs" />
     <Compile Include="Task.Client.Designer.cs" />
   </ItemGroup>
   <ItemGroup>

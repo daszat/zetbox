@@ -38,10 +38,10 @@ namespace Kistl.App.Projekte
                 impl.OnToString +=new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectClass>(ObjectClass_OnToString);
             }
 
-            if (obj is App.Base.ObjectProperty)
+            if (obj is App.Base.BaseProperty)
             {
-                App.Base.ObjectProperty impl = obj as App.Base.ObjectProperty;
-                impl.OnToString += new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectProperty>(ObjectProperty_OnToString);
+                App.Base.BaseProperty impl = obj as App.Base.BaseProperty;
+                impl.OnToString += new Kistl.API.ToStringHandler<Kistl.App.Base.BaseProperty>(BaseProperty_OnToString);
             }
         }
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Projekte
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Server;
     
     
-    public sealed class TaskServer : ServerObject<Task>
+    public sealed class BasePropertyServer : ServerObject<BaseProperty>
     {
     }
 }

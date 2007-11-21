@@ -23,7 +23,7 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Mitarbeiter")]
-    public sealed class Mitarbeiter : BaseDataObject
+    public class Mitarbeiter : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;

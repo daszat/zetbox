@@ -50,8 +50,7 @@ namespace Kistl.API
     public delegate void ObjectEventHandler<T>(T obj) where T : class, IDataObject, new();
 
     /// <summary>
-    /// Basis Datenobjekt. Attached sich automatisch an den ObjectBroker zur Verteilung der Events
-    /// TODO: Besseren Namen für den ObjectBroker finden - bin mir nicht sicher, ob der Name passt.
+    /// Basis Datenobjekt. Attached sich automatisch an den CustomActionsManager zur Verteilung der Events
     /// </summary>
     public abstract class BaseDataObject : System.Data.Objects.DataClasses.EntityObject, IDataObject
     {

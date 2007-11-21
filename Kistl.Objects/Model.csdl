@@ -4,11 +4,11 @@
     <EntitySet Name="ObjectClass" EntityType="Model.ObjectClass" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
     <EntitySet Name="Task" EntityType="Model.Task" />
-    <EntitySet Name="ObjectProperty" EntityType="Model.ObjectProperty" />
+    <EntitySet Name="BaseProperty" EntityType="Model.BaseProperty" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
-    <AssociationSet Name="FK_ObjectProperty_ObjectClass" Association="Model.FK_ObjectProperty_ObjectClass">
+    <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
-      <End Role="B_ObjectProperty" EntitySet="ObjectProperty" />
+      <End Role="B_BaseProperty" EntitySet="BaseProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_Projekt" Association="Model.FK_Task_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -31,8 +31,9 @@
     <Property Name="ClassName" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="Namespace" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="TableName" Type="String" MaxLength="200" Nullable="true" />
-    <NavigationProperty Name="Properties" Relationship="Model.FK_ObjectProperty_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectProperty" />
+    <NavigationProperty Name="Properties" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="A_ObjectClass" ToRole="B_BaseProperty" />
     <NavigationProperty Name="BaseObjectClass" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="B_ObjectClass" ToRole="A_ObjectClass" />
+    <NavigationProperty Name="SubClasses" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -55,12 +56,12 @@
     <Property Name="Aufwand" Type="Double" Nullable="true" />
     <NavigationProperty Name="Projekt" Relationship="Model.FK_Task_Projekt" FromRole="B_Task" ToRole="A_Projekt" />
   </EntityType>
-  <EntityType Name="ObjectProperty">
+  <EntityType Name="BaseProperty">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_ObjectProperty_ObjectClass" FromRole="B_ObjectProperty" ToRole="A_ObjectClass" />
+    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="B_BaseProperty" ToRole="A_ObjectClass" />
     <Property Name="PropertyName" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="DataType" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="IsList" Type="Boolean" Nullable="true" />
@@ -74,9 +75,12 @@
     <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="Projekte" Relationship="Model.FK_Projekt_Mitarbeiter" FromRole="A_Mitarbeiter" ToRole="B_Projekt" />
   </EntityType>
-  <Association Name="FK_ObjectProperty_ObjectClass">
+  <EntityType Name="Property" BaseType="Model.BaseProperty">
+    <Property Name="IsNullable" Type="Boolean" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
-    <End Role="B_ObjectProperty" Type="Model.ObjectProperty" Multiplicity="*" />
+    <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />
   </Association>
   <Association Name="FK_Task_Projekt">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />

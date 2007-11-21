@@ -64,7 +64,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void ObjectProperty_OnToString(Base.ObjectProperty obj, Kistl.API.ToStringEventArgs e)
+        void BaseProperty_OnToString(Base.BaseProperty obj, Kistl.API.ToStringEventArgs e)
         {
             e.Result = string.Format("{0} {1}", obj.DataType, obj.PropertyName);
         }

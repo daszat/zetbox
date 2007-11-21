@@ -31,14 +31,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ObjectProperty">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectProperty)">
-        <MappingFragment StoreEntitySet="ObjectProperty">
+    <EntitySetMapping Name="BaseProperty">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseProperty)">
+        <MappingFragment StoreEntitySet="BaseProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
           <ScalarProperty Name="DataType" ColumnName="DataType" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
+        <MappingFragment StoreEntitySet="Property">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -50,11 +56,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="FK_ObjectProperty_ObjectClass" TypeName="Model.FK_ObjectProperty_ObjectClass" StoreEntitySet="ObjectProperty">
+    <AssociationSetMapping Name="FK_BaseProperty_ObjectClass" TypeName="Model.FK_BaseProperty_ObjectClass" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
       </EndProperty>
-      <EndProperty Name="B_ObjectProperty">
+      <EndProperty Name="B_BaseProperty">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_ObjectClass" IsNull="false" />

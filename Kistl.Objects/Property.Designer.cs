@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Projekte
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
@@ -20,10 +20,25 @@ namespace Kistl.App.Projekte
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using Kistl.API.Server;
     
     
-    public sealed class TaskServer : ServerObject<Task>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Property")]
+    public class Property : Kistl.App.Base.BaseProperty
     {
+        
+        private System.Nullable<bool> _IsNullable;
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<bool> IsNullable
+        {
+            get
+            {
+                return _IsNullable;
+            }
+            set
+            {
+                _IsNullable = value;
+            }
+        }
     }
 }

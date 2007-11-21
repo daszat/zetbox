@@ -4,11 +4,12 @@
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses" />
     <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Table="Projekte" />
     <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks" />
-    <EntitySet Name="ObjectProperty" EntityType="Model.Store.ObjectProperty" Table="ObjectProperties" />
+    <EntitySet Name="BaseProperty" EntityType="Model.Store.BaseProperty" Table="BaseProperties" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Table="Mitarbeiter" />
-    <AssociationSet Name="FK_ObjectProperty_ObjectClass" Association="Model.Store.FK_ObjectProperty_ObjectClass">
+    <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties" />
+    <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
-      <End Role="B_ObjectProperty" EntitySet="ObjectProperty" />
+      <End Role="B_BaseProperty" EntitySet="BaseProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_Projekt" Association="Model.Store.FK_Task_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -53,7 +54,7 @@
     <Property Name="Aufwand" Type="float" Nullable="true" />
     <Property Name="fk_Projekt" Type="int" Nullable="true" />
   </EntityType>
-  <EntityType Name="ObjectProperty">
+  <EntityType Name="BaseProperty">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -71,14 +72,21 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
-  <Association Name="FK_ObjectProperty_ObjectClass">
+  <EntityType Name="Property">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="IsNullable" Type="bit" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="B_ObjectProperty" Type="Model.Store.ObjectProperty" Multiplicity="*" />
+    <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="A_ObjectClass">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_ObjectProperty">
+      <Dependent Role="B_BaseProperty">
         <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>

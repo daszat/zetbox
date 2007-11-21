@@ -28,6 +28,10 @@ namespace Kistl.Server
             var objClassList = from c in ctx.GetTable<ObjectClass>()
                                select c;
 
+            File.Delete(path + @"Kistl.Objects\*.cs");
+            File.Delete(path + @"Kistl.Objects.Client\*.cs");
+            File.Delete(path + @"Kistl.Objects.Server\*.cs");
+
 
             foreach (ObjectClass objClass in objClassList)
             {
@@ -122,7 +126,7 @@ namespace Kistl.Server
             c.BaseTypes.Add(new CodeTypeReference("ClientObject", new CodeTypeReference(objClass.ClassName)));
 
             // Create GetListOf Methods
-            foreach (ObjectProperty prop in objClass.Properties)
+            foreach (BaseProperty prop in objClass.Properties)
             {
                 if (prop.IsList.Value)
                 {
@@ -148,11 +152,8 @@ namespace Kistl.Server
                                             new CodePrimitiveExpression(prop.PropertyName),
                                         }),
                                 "FromXmlString",
-                                new CodeTypeReference[] 
-                                    {
-                                        new CodeTypeReference("List", new CodeTypeReference(prop.DataType))
-                                    }),
-                                new CodeExpression[0])));
+                                new CodeTypeReference("ObjectCollection") ),
+                                new CodeExpression[0]))); // TODO: To be continued .ToList<Kistl.App.Base.BaseProperty>(); fehlt noch
                 }
             }
         }
@@ -177,22 +178,35 @@ namespace Kistl.Server
             CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName);
             ns.Types.Add(c);
             c.IsClass = true;
-            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
-            c.BaseTypes.Add("BaseDataObject");
+            c.TypeAttributes = TypeAttributes.Public;
+            if (objClass.BaseObjectClass != null)
+            {
+                c.BaseTypes.Add(objClass.BaseObjectClass.Namespace + "." + objClass.BaseObjectClass.ClassName);
+            }
+            else
+            {
+                c.BaseTypes.Add("BaseDataObject");
+            }
             c.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                 new CodeAttributeArgument("NamespaceName", 
                     new CodePrimitiveExpression("Model")),
                 new CodeAttributeArgument("Name", 
                     new CodePrimitiveExpression(objClass.ClassName)) ));
 
-            // Create Default Properties
-            GenerateDefaultProperties(objClass, c);
+            if (objClass.BaseObjectClass == null)
+            {
+                // Create Default Properties
+                GenerateDefaultProperties(objClass, c);
+            }
 
             // Create Properties
             GenerateProperties(objClass, c);
 
-            // Create DataObject Default Methods
-            GenerateDefaultMethods(objClass, c);
+            if (objClass.BaseObjectClass == null)
+            {
+                // Create DataObject Default Methods
+                GenerateDefaultMethods(objClass, c);
+            }
 
             // Generate the code & save
             SaveFile(code, path + @"Kistl.Objects\" + objClass.ClassName + ".Designer.cs");
@@ -205,7 +219,7 @@ namespace Kistl.Server
                         where p.IsAssociation.Value && !p.IsList.Value
                         select p;
 
-            foreach (ObjectProperty prop in props)
+            foreach (BaseProperty prop in props)
             {
                 string associationPropName = prop.PropertyName.Replace("fk_", "");
                 ObjectType otherType = new ObjectType(prop.DataType);
@@ -323,7 +337,7 @@ namespace Kistl.Server
         #region GenerateProperties
         private void GenerateProperties(ObjectClass objClass, CodeTypeDeclaration c)
         {
-            foreach (ObjectProperty prop in objClass.Properties)
+            foreach (BaseProperty prop in objClass.Properties)
             {
                 if (!prop.IsList.Value && !prop.IsAssociation.Value)
                 {
@@ -384,7 +398,7 @@ namespace Kistl.Server
                     p.GetStatements.Add(
                         new CodeSnippetExpression(
                             string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
-                if (!r.IsLoaded) r.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value", prop.DataType, assocName, otherType.Classname)));
 
                     p.SetStatements.Add(
@@ -408,7 +422,7 @@ namespace Kistl.Server
 
                     p.GetStatements.Add(
                         new CodeSnippetExpression(
-                            string.Format(@"if (_fk_{0} == Helper.INVALIDID && {0} != null)
+                            string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_{0} == Helper.INVALIDID && {0} != null)
                 {{
                     _fk_{0} = {0}.ID;
                 }}

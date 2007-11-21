@@ -86,7 +86,7 @@ namespace Kistl.Client
             BindDefaultProperties();
 
             // Aus Metadaten holen
-            foreach (Kistl.App.Base.ObjectProperty p in objClassClient.GetListOfProperties(objClass.ID))
+            foreach (Kistl.App.Base.BaseProperty p in objClassClient.GetListOfProperties(objClass.ID))
             {
                 if (p.IsList.Value && p.IsAssociation.Value)
                 {

@@ -26,9 +26,9 @@ go
 INSERT INTO [ObjectClasses] ([ClassName], [ServerObject], [ClientObject],
 			[DataObject], [Namespace], [TableName])
      VALUES
-           ('ObjectProperty'
-           ,'Kistl.App.Base.ObjectPropertyServer, Kistl.App.Projekte'
-           ,'Kistl.App.Base.ObjectPropertyClient, Kistl.App.Projekte'
-           ,'Kistl.App.Base.ObjectProperty, Kistl.App.Projekte'
+           ('BaseProperty'
+           ,'Kistl.App.Base.BasePropertyServer, Kistl.App.Projekte'
+           ,'Kistl.App.Base.BasePropertyClient, Kistl.App.Projekte'
+           ,'Kistl.App.Base.BaseProperty, Kistl.App.Projekte'
            ,'Kistl.App.Base'
            ,'ObjectProperties')

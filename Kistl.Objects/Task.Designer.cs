@@ -25,7 +25,7 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Task")]
-    public sealed class Task : BaseDataObject
+    public class Task : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;
@@ -112,7 +112,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "A_Projekt");
-                if (!r.IsLoaded) r.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
@@ -127,7 +127,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (_fk_Projekt == Helper.INVALIDID && Projekt != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
                 {
                     _fk_Projekt = Projekt.ID;
                 }

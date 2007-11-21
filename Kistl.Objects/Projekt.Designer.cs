@@ -25,7 +25,7 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Projekt")]
-    public sealed class Projekt : BaseDataObject
+    public class Projekt : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;
@@ -81,7 +81,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Projekt_Mitarbeiter", "A_Mitarbeiter");
-                if (!r.IsLoaded) r.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
@@ -96,7 +96,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (_fk_Mitarbeiter == Helper.INVALIDID && Mitarbeiter != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Mitarbeiter == Helper.INVALIDID && Mitarbeiter != null)
                 {
                     _fk_Mitarbeiter = Mitarbeiter.ID;
                 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectProperty_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_ObjectProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectProperty))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty))]
 
 namespace Kistl.App.Base
 {
@@ -24,8 +24,8 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectProperty")]
-    public sealed class ObjectProperty : BaseDataObject
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="BaseProperty")]
+    public class BaseProperty : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;
@@ -53,19 +53,19 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectProperty_ObjectClass", "A_ObjectClass")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ObjectClass", "A_ObjectClass")]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectClass ObjectClass
         {
             get
             {
-                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectProperty_ObjectClass", "A_ObjectClass");
-                if (!r.IsLoaded) r.Load(); 
+                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_BaseProperty_ObjectClass", "A_ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectProperty_ObjectClass", "A_ObjectClass");
+                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_BaseProperty_ObjectClass", "A_ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = value;
             }
@@ -75,7 +75,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (_fk_ObjectClass == Helper.INVALIDID && ObjectClass != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_ObjectClass == Helper.INVALIDID && ObjectClass != null)
                 {
                     _fk_ObjectClass = ObjectClass.ID;
                 }
@@ -139,11 +139,11 @@ namespace Kistl.App.Base
             }
         }
         
-        public event ToStringHandler<ObjectProperty> OnToString;
+        public event ToStringHandler<BaseProperty> OnToString;
         
-        public event ObjectEventHandler<ObjectProperty> OnPreSave;
+        public event ObjectEventHandler<BaseProperty> OnPreSave;
         
-        public event ObjectEventHandler<ObjectProperty> OnPostSave;
+        public event ObjectEventHandler<BaseProperty> OnPostSave;
         
         public override string ToString()
         {

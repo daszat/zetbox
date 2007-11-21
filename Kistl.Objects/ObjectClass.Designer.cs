@@ -25,7 +25,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectClass")]
-    public sealed class ObjectClass : BaseDataObject
+    public class ObjectClass : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;
@@ -90,13 +90,13 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectProperty_ObjectClass", "B_ObjectProperty")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ObjectClass", "B_BaseProperty")]
         [XmlIgnore()]
-        public EntityCollection<Kistl.App.Base.ObjectProperty> Properties
+        public EntityCollection<Kistl.App.Base.BaseProperty> Properties
         {
             get
             {
-                EntityCollection<Kistl.App.Base.ObjectProperty> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectProperty>("Model.FK_ObjectProperty_ObjectClass", "B_ObjectProperty");
+                EntityCollection<Kistl.App.Base.BaseProperty> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.BaseProperty>("Model.FK_BaseProperty_ObjectClass", "B_BaseProperty");
                 if (!c.IsLoaded) c.Load(); 
                 return c;
             }
@@ -109,7 +109,7 @@ namespace Kistl.App.Base
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectClass_ObjectClass", "A_ObjectClass");
-                if (!r.IsLoaded) r.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
@@ -124,7 +124,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (_fk_BaseObjectClass == Helper.INVALIDID && BaseObjectClass != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_BaseObjectClass == Helper.INVALIDID && BaseObjectClass != null)
                 {
                     _fk_BaseObjectClass = BaseObjectClass.ID;
                 }
@@ -133,6 +133,18 @@ namespace Kistl.App.Base
             set
             {
                 _fk_BaseObjectClass = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ObjectClass", "B_ObjectClass")]
+        [XmlIgnore()]
+        public EntityCollection<Kistl.App.Base.ObjectClass> SubClasses
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.ObjectClass> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectClass>("Model.FK_ObjectClass_ObjectClass", "B_ObjectClass");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
             }
         }
         

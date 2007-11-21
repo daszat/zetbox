@@ -14,8 +14,8 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
@@ -25,11 +25,16 @@ namespace Kistl.App.Base
     
     public sealed class ObjectClassClient : ClientObject<ObjectClass>
     {
+        // Autogeneriert, um die gebundenen Listen zu bekommen
+        public List<Kistl.App.Base.BaseProperty> GetListOfProperties(int ID)
+        {
+            return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<ObjectCollection>().ToList<Kistl.App.Base.BaseProperty>();
+        }
         
         // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.ObjectProperty> GetListOfProperties(int ID)
+        public List<Kistl.App.Base.ObjectClass> GetListOfSubClasses(int ID)
         {
-            return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<List<Kistl.App.Base.ObjectProperty>>();
+            return Proxy.Service.GetListOf(Type, ID, "SubClasses").FromXmlString<ObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
         }
     }
 }

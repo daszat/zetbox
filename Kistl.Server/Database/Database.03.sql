@@ -88,10 +88,10 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID ( '[dbo].[sp_CheckObjectProperty]', 'P' ) IS NOT NULL 
-    DROP PROCEDURE [dbo].[sp_CheckObjectProperty];
+IF OBJECT_ID ( '[dbo].[sp_CheckBaseProperty]', 'P' ) IS NOT NULL 
+    DROP PROCEDURE [dbo].[sp_CheckBaseProperty];
 GO
-CREATE procedure [dbo].[sp_CheckObjectProperty]
+CREATE procedure [dbo].[sp_CheckBaseProperty]
 	(@namespace nvarchar(100)
 	,@classname nvarchar(50)
 	,@propertyname nvarchar(50)
@@ -276,22 +276,22 @@ END
 
 /******************* Check Content of ObjectClass *******************/
 exec sp_CheckObjectClass N'Kistl.App.Base', N'ObjectClass', N'ObjectClasses'
-exec sp_CheckObjectClass N'Kistl.App.Base', N'ObjectProperty', N'ObjectProperties'
+exec sp_CheckObjectClass N'Kistl.App.Base', N'BaseProperty', N'ObjectProperties'
 
-/******************* Check Content of ObjectProperty *******************/
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectClass', N'ClassName', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectClass', N'ServerObject', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectClass', N'ClientObject', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectClass', N'DataObject', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectClass', N'Namespace', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectClass', N'TableName', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectClass', N'Properties', N'Kistl.App.Base.ObjectProperty', 1, 1
+/******************* Check Content of BaseProperty *******************/
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'ObjectClass', N'ClassName', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'ObjectClass', N'ServerObject', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'ObjectClass', N'ClientObject', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'ObjectClass', N'DataObject', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'ObjectClass', N'Namespace', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'ObjectClass', N'TableName', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'ObjectClass', N'Properties', N'Kistl.App.Base.BaseProperty', 1, 1
 
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectProperty', N'fk_ObjectClass', N'System.Int32', 0, 1
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectProperty', N'PropertyName', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectProperty', N'DataType', N'System.String', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectProperty', N'IsList', N'System.Boolean', 0, 0
-exec sp_CheckObjectProperty N'Kistl.App.Base', N'ObjectProperty', N'IsAssociation', N'System.Boolean', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'BaseProperty', N'fk_ObjectClass', N'System.Int32', 0, 1
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'BaseProperty', N'PropertyName', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'BaseProperty', N'DataType', N'System.String', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'BaseProperty', N'IsList', N'System.Boolean', 0, 0
+exec sp_CheckBaseProperty N'Kistl.App.Base', N'BaseProperty', N'IsAssociation', N'System.Boolean', 0, 0
 
 GO
 
