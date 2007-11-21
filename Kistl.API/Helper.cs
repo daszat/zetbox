@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Collections;
 
 namespace Kistl.API
 {
@@ -44,6 +45,15 @@ namespace Kistl.API
             System.IO.StringReader sr = new System.IO.StringReader(xmlStr);
             XmlSerializer xml = new XmlSerializer(typeof(T));
             return (T)xml.Deserialize(sr);
+        }
+
+        public static bool In(this Enum e, params object[] p)
+        {
+            foreach (object v in p)
+            {
+                if (e.Equals(v)) return true;
+            }
+            return false;
         }
     }
 }

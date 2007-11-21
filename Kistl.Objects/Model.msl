@@ -51,31 +51,40 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="FK_ObjectProperty_ObjectClass" TypeName="Model.FK_ObjectProperty_ObjectClass" StoreEntitySet="ObjectProperty">
-      <EndProperty Name="ObjectClass">
+      <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
       </EndProperty>
-      <EndProperty Name="ObjectProperty">
+      <EndProperty Name="B_ObjectProperty">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_ObjectClass" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Task_Projekt" TypeName="Model.FK_Task_Projekt" StoreEntitySet="Task">
-      <EndProperty Name="Projekt">
+      <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
       </EndProperty>
-      <EndProperty Name="Task">
+      <EndProperty Name="B_Task">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_Mitarbeiter" TypeName="Model.FK_Projekt_Mitarbeiter" StoreEntitySet="Projekt">
-      <EndProperty Name="Mitarbeiter">
+      <EndProperty Name="A_Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
       </EndProperty>
-      <EndProperty Name="Projekt">
+      <EndProperty Name="B_Projekt">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ObjectClass_ObjectClass" TypeName="Model.FK_ObjectClass_ObjectClass" StoreEntitySet="ObjectClass">
+      <EndProperty Name="A_ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_BaseObjectClass" />
+      </EndProperty>
+      <EndProperty Name="B_ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_BaseObjectClass" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

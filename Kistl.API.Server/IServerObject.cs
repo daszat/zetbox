@@ -193,33 +193,40 @@ namespace Kistl.API.Server
             {
                 KistlDataContext.Current.AttachTo(typeof(T).Name, obj);
                 MarkEveryPropertyAsModified(obj);
-
-                // Update Relationships
-                // TODO: Bad hack, weil EF keine Releasion serialisieren kann
-                foreach (PropertyInfo pi in typeof(T).GetProperties())
-                {
-                    if (pi.GetCustomAttributes(typeof(EdmRelationshipNavigationPropertyAttribute), true).Length > 0)
-                    {
-                        // Bingo!
-                        PropertyInfo pifk = typeof(T).GetProperty("fk_" + pi.Name);
-                        if (pifk != null)
-                        {
-                            int fk = (int)pifk.GetValue(obj, null);
-
-                            IServerObject so = ServerObjectFactory.GetServerObject(new ObjectType(pi.PropertyType.FullName));
-                            IDataObject other = so.GetObjectInstanceGeneric(fk);
-                            pi.SetValue(obj, other, null);
-                        }
-                    }
-                }
             }
             else
             {
                 KistlDataContext.Current.AddObject(typeof(T).Name, obj);
             }
+            UpdateRelationships(obj);
             KistlDataContext.Current.SubmitChanges();
 
             return obj.ToXmlString();
+        }
+
+        /// <summary>
+        /// Update Relationships
+        /// TODO: Bad hack, weil EF keine Releasion serialisieren kann
+        /// </summary>
+        /// <param name="obj"></param>
+        private void UpdateRelationships(T obj)
+        {
+            foreach (PropertyInfo pi in typeof(T).GetProperties())
+            {
+                if (pi.GetCustomAttributes(typeof(EdmRelationshipNavigationPropertyAttribute), true).Length > 0)
+                {
+                    // Bingo!
+                    PropertyInfo pifk = typeof(T).GetProperty("fk_" + pi.Name);
+                    if (pifk != null)
+                    {
+                        int fk = (int)pifk.GetValue(obj, null);
+
+                        IServerObject so = ServerObjectFactory.GetServerObject(new ObjectType(pi.PropertyType.FullName));
+                        IDataObject other = so.GetObjectInstanceGeneric(fk);
+                        pi.SetValue(obj, other, null);
+                    }
+                }
+            }
         }
 
         private void MarkEveryPropertyAsModified(IDataObject obj)

@@ -56,18 +56,15 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_Mitarbeiter", "Projekt")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_Mitarbeiter", "B_Projekt")]
         [XmlIgnore()]
         public EntityCollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {
-                EntityCollection<Kistl.App.Projekte.Projekt> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt>("Model.FK_Projekt_Mitarbeiter", "Projekt");
+                EntityCollection<Kistl.App.Projekte.Projekt> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt>("Model.FK_Projekt_Mitarbeiter", "B_Projekt");
                 if (!c.IsLoaded) c.Load(); 
                 return c;
-            }
-            set
-            {
             }
         }
         

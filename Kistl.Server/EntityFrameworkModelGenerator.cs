@@ -73,12 +73,12 @@ namespace Kistl.Server
                     xml.WriteAttributeString("Association", "Model.Store." + assocName);
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", otherType.Classname);
+                    xml.WriteAttributeString("Role", "A_" + otherType.Classname);
                     xml.WriteAttributeString("EntitySet", otherType.Classname);
                     xml.WriteEndElement(); // </End>
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteAttributeString("EntitySet", prop.ObjectClass.ClassName);
                     xml.WriteEndElement(); // </End>
 
@@ -132,13 +132,13 @@ namespace Kistl.Server
                     xml.WriteAttributeString("Name", assocName);
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", otherType.Classname);
+                    xml.WriteAttributeString("Role", "A_" + otherType.Classname);
                     xml.WriteAttributeString("Type", "Model.Store." + otherType.Classname);
                     xml.WriteAttributeString("Multiplicity", "0..1");
                     xml.WriteEndElement(); // </End>
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteAttributeString("Type", "Model.Store." + prop.ObjectClass.ClassName);
                     xml.WriteAttributeString("Multiplicity", "*");
                     xml.WriteEndElement(); // </End>
@@ -146,14 +146,14 @@ namespace Kistl.Server
                     xml.WriteStartElement("ReferentialConstraint");
 
                     xml.WriteStartElement("Principal");
-                    xml.WriteAttributeString("Role", otherType.Classname);
+                    xml.WriteAttributeString("Role", "A_" + otherType.Classname);
                     xml.WriteStartElement("PropertyRef");
                     xml.WriteAttributeString("Name", "ID");
                     xml.WriteEndElement(); // </PropertyRef>
                     xml.WriteEndElement(); // </Principal>
 
                     xml.WriteStartElement("Dependent");
-                    xml.WriteAttributeString("Role", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteStartElement("PropertyRef");
                     xml.WriteAttributeString("Name", prop.PropertyName);
                     xml.WriteEndElement(); // </PropertyRef>
@@ -213,12 +213,12 @@ namespace Kistl.Server
                     xml.WriteAttributeString("Association", "Model." + assocName);
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", otherType.Classname);
+                    xml.WriteAttributeString("Role", "A_" + otherType.Classname);
                     xml.WriteAttributeString("EntitySet", otherType.Classname);
                     xml.WriteEndElement(); // </End>
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteAttributeString("EntitySet", prop.ObjectClass.ClassName);
                     xml.WriteEndElement(); // </End>
 
@@ -253,8 +253,8 @@ namespace Kistl.Server
                             ObjectType otherType = new ObjectType(p.DataType);
                             string assocName = "FK_" + otherType.Classname + "_" + p.ObjectClass.ClassName;
                             xml.WriteAttributeString("Relationship", "Model." + assocName);
-                            xml.WriteAttributeString("FromRole", obj.ClassName);
-                            xml.WriteAttributeString("ToRole", otherType.Classname);
+                            xml.WriteAttributeString("FromRole", "A_" + obj.ClassName);
+                            xml.WriteAttributeString("ToRole", "B_" + otherType.Classname);
                             xml.WriteEndElement(); // </NavigationProperty>
                         }
                         else if (!p.IsList.Value && p.IsAssociation.Value)
@@ -264,8 +264,8 @@ namespace Kistl.Server
                             ObjectType otherType = new ObjectType(p.DataType);
                             string assocName = "FK_" + p.ObjectClass.ClassName + "_" + otherType.Classname;
                             xml.WriteAttributeString("Relationship", "Model." + assocName);
-                            xml.WriteAttributeString("FromRole", obj.ClassName);
-                            xml.WriteAttributeString("ToRole", otherType.Classname);
+                            xml.WriteAttributeString("FromRole", "B_" + obj.ClassName);
+                            xml.WriteAttributeString("ToRole", "A_" + otherType.Classname);
                             xml.WriteEndElement(); // </NavigationProperty>
                         }
                         else if (!p.IsList.Value && !p.IsAssociation.Value)
@@ -293,13 +293,13 @@ namespace Kistl.Server
                     xml.WriteAttributeString("Name", assocName);
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", otherType.Classname);
+                    xml.WriteAttributeString("Role", "A_" + otherType.Classname);
                     xml.WriteAttributeString("Type", "Model." + otherType.Classname);
                     xml.WriteAttributeString("Multiplicity", "0..1");
                     xml.WriteEndElement(); // </End>
 
                     xml.WriteStartElement("End");
-                    xml.WriteAttributeString("Role", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteAttributeString("Type", "Model." + prop.ObjectClass.ClassName);
                     xml.WriteAttributeString("Multiplicity", "*");
                     xml.WriteEndElement(); // </End>
@@ -380,7 +380,7 @@ namespace Kistl.Server
                     xml.WriteAttributeString("StoreEntitySet", prop.ObjectClass.ClassName);
 
                     xml.WriteStartElement("EndProperty");
-                    xml.WriteAttributeString("Name", otherType.Classname);
+                    xml.WriteAttributeString("Name", "A_" + otherType.Classname);
                     xml.WriteStartElement("ScalarProperty");
                     xml.WriteAttributeString("Name", "ID");
                     xml.WriteAttributeString("ColumnName", prop.PropertyName);
@@ -388,7 +388,7 @@ namespace Kistl.Server
                     xml.WriteEndElement(); // </EndProperty>
 
                     xml.WriteStartElement("EndProperty");
-                    xml.WriteAttributeString("Name", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Name", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteStartElement("ScalarProperty");
                     xml.WriteAttributeString("Name", "ID");
                     xml.WriteAttributeString("ColumnName", "ID");

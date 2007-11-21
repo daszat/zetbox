@@ -7,16 +7,20 @@
     <EntitySet Name="ObjectProperty" EntityType="Model.Store.ObjectProperty" Table="ObjectProperties" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Table="Mitarbeiter" />
     <AssociationSet Name="FK_ObjectProperty_ObjectClass" Association="Model.Store.FK_ObjectProperty_ObjectClass">
-      <End Role="ObjectClass" EntitySet="ObjectClass" />
-      <End Role="ObjectProperty" EntitySet="ObjectProperty" />
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_ObjectProperty" EntitySet="ObjectProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_Projekt" Association="Model.Store.FK_Task_Projekt">
-      <End Role="Projekt" EntitySet="Projekt" />
-      <End Role="Task" EntitySet="Task" />
+      <End Role="A_Projekt" EntitySet="Projekt" />
+      <End Role="B_Task" EntitySet="Task" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_Mitarbeiter" Association="Model.Store.FK_Projekt_Mitarbeiter">
-      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="B_Projekt" EntitySet="Projekt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_ObjectClass" Association="Model.Store.FK_ObjectClass_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -27,6 +31,7 @@
     <Property Name="ClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="TableName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_BaseObjectClass" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -67,38 +72,50 @@
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <Association Name="FK_ObjectProperty_ObjectClass">
-    <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="ObjectProperty" Type="Model.Store.ObjectProperty" Multiplicity="*" />
+    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_ObjectProperty" Type="Model.Store.ObjectProperty" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ObjectClass">
+      <Principal Role="A_ObjectClass">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ObjectProperty">
+      <Dependent Role="B_ObjectProperty">
         <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Task_Projekt">
-    <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
-    <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
+    <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
+    <End Role="B_Task" Type="Model.Store.Task" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Projekt">
+      <Principal Role="A_Projekt">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Task">
+      <Dependent Role="B_Task">
         <PropertyRef Name="fk_Projekt" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Projekt_Mitarbeiter">
-    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
+    <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <End Role="B_Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Mitarbeiter">
+      <Principal Role="A_Mitarbeiter">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Projekt">
+      <Dependent Role="B_Projekt">
         <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectClass_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectClass">
+        <PropertyRef Name="fk_BaseObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

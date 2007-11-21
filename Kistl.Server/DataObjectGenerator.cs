@@ -217,13 +217,13 @@ namespace Kistl.Server
                 new CodeAttributeArgument(
                     new CodePrimitiveExpression(assocName)),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression(otherType.Classname)),
+                    new CodePrimitiveExpression("A_" + otherType.Classname)),
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
                 new CodeAttributeArgument(
                     new CodeTypeOfExpression(prop.DataType)),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression(prop.ObjectClass.ClassName)),
+                    new CodePrimitiveExpression("B_" + prop.ObjectClass.ClassName)),
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
                 new CodeAttributeArgument(
@@ -377,20 +377,20 @@ namespace Kistl.Server
                         "EdmRelationshipNavigationPropertyAttribute",
                         new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
                         new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
-                        new CodeAttributeArgument(new CodePrimitiveExpression(otherType.Classname))));
+                        new CodeAttributeArgument(new CodePrimitiveExpression("A_" + otherType.Classname))));
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
 
                     p.GetStatements.Add(
                         new CodeSnippetExpression(
-                            string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""{2}"");
+                            string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (!r.IsLoaded) r.Load(); 
                 return r.Value", prop.DataType, assocName, otherType.Classname)));
 
                     p.SetStatements.Add(
                         new CodeSnippetExpression(
-                            string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""{2}"");
-                if (!r.IsLoaded) r.Load(); 
+                            string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = value", prop.DataType, assocName, otherType.Classname)));
 
                     // Serializer fk_ Field und Property
@@ -426,7 +426,7 @@ namespace Kistl.Server
 
                     p.Name = prop.PropertyName;
                     p.HasGet = true;
-                    p.HasSet = true;
+                    p.HasSet = false;
                     p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
                     p.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(prop.DataType));
 
@@ -437,13 +437,13 @@ namespace Kistl.Server
                         "EdmRelationshipNavigationPropertyAttribute",
                         new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
                         new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
-                        new CodeAttributeArgument(new CodePrimitiveExpression(otherType.Classname))));
+                        new CodeAttributeArgument(new CodePrimitiveExpression("B_" + otherType.Classname))));
                     p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
 
                     p.GetStatements.Add(
                         new CodeSnippetExpression(
-                            string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""{2}"");
+                            string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
                 if (!c.IsLoaded) c.Load(); 
                 return c", prop.DataType, assocName, otherType.Classname)));
 
