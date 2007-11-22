@@ -15,7 +15,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void Projekt_OnToString(Projekt obj, Kistl.API.ToStringEventArgs e)
+        void Projekt_OnToString(Projekt obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
         }
@@ -25,7 +25,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void Mitarbeiter_OnToString(Mitarbeiter obj, Kistl.API.ToStringEventArgs e)
+        void Mitarbeiter_OnToString(Mitarbeiter obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
         }
@@ -35,7 +35,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void Task_OnToString(Task obj, Kistl.API.ToStringEventArgs e)
+        void Task_OnToString(Task obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             if (obj.DatumVon.HasValue && obj.DatumBis.HasValue)
             {
@@ -54,19 +54,29 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void ObjectClass_OnToString(Base.ObjectClass obj, Kistl.API.ToStringEventArgs e)
+        void ObjectClass_OnToString(Base.ObjectClass obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Namespace + "." + obj.ClassName;
         }
 
-        /// <summary>
-        /// ToString Event überschreiben
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="e"></param>
-        void BaseProperty_OnToString(Base.BaseProperty obj, Kistl.API.ToStringEventArgs e)
+        void impl_OnGetDataType_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = string.Format("{0} {1}", obj.DataType, obj.PropertyName);
+            e.Result = obj.DataType;
+        }
+
+        void impl_OnGetDataType_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "string";
+        }
+
+        void BaseProperty_OnToString(Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = string.Format("{0} {1}", obj.GetDataType(), obj.PropertyName);
+        }
+
+        void imp_OnToString_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.MethodName;
         }
     }
 }

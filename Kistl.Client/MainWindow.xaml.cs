@@ -19,7 +19,7 @@ using Kistl.API.Client;
 namespace Kistl.Client
 {
     /// <summary>
-    /// Hauptfenster der KistApplikation
+    /// Hauptfenster der KistlApplikation
     /// </summary>
     public partial class MainWindow : Window
     {

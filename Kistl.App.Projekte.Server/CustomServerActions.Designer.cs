@@ -17,15 +17,15 @@ namespace Kistl.App.Projekte
             if (obj is Projekt)
             {
                 Projekt impl = obj as Projekt;
-                impl.OnToString += new Kistl.API.ToStringHandler<Projekt>(Projekt_OnToString);
-                impl.OnPreSave += new Kistl.API.ObjectEventHandler<Projekt>(Projekt_OnPreSetObject);
+                impl.OnToString_Projekt += new Kistl.API.ToStringHandler<Projekt>(Projekt_OnToString);
+                impl.OnPreSave_Projekt += new Kistl.API.ObjectEventHandler<Projekt>(Projekt_OnPreSetObject);
             }
 
             if (obj is Task)
             {
                 Task impl = obj as Task;
-                impl.OnToString += new Kistl.API.ToStringHandler<Task>(Task_OnToString);
-                impl.OnPreSave += new Kistl.API.ObjectEventHandler<Task>(Task_OnPreSetObject);
+                impl.OnToString_Task += new Kistl.API.ToStringHandler<Task>(Task_OnToString);
+                impl.OnPreSave_Task += new Kistl.API.ObjectEventHandler<Task>(Task_OnPreSetObject);
             }
         }
     }

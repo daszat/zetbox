@@ -25,5 +25,60 @@ namespace Kistl.App.Base
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ValueTypeProperty")]
     public class ValueTypeProperty : Kistl.App.Base.Property
     {
+        
+        public event ToStringHandler<ValueTypeProperty> OnToString_ValueTypeProperty;
+        
+        public event ObjectEventHandler<ValueTypeProperty> OnPreSave_ValueTypeProperty;
+        
+        public event ObjectEventHandler<ValueTypeProperty> OnPostSave_ValueTypeProperty;
+        
+        public event GetDatabaseType_Handler<ValueTypeProperty> OnGetDatabaseType_ValueTypeProperty;
+        
+        public event GetDataType_Handler<ValueTypeProperty> OnGetDataType_ValueTypeProperty;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_ValueTypeProperty != null)
+            {
+                OnToString_ValueTypeProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_ValueTypeProperty != null) OnPreSave_ValueTypeProperty(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_ValueTypeProperty != null) OnPostSave_ValueTypeProperty(this);
+        }
+        
+        public override string GetDatabaseType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDatabaseType();
+            if (OnGetDatabaseType_ValueTypeProperty != null)
+            {
+                OnGetDatabaseType_ValueTypeProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_ValueTypeProperty != null)
+            {
+                OnGetDataType_ValueTypeProperty(this, e);
+            }
+            return e.Result;
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void Projekt_OnToString(Projekt obj, Kistl.API.ToStringEventArgs e)
+        void Projekt_OnToString(Projekt obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
         }
@@ -54,7 +54,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void Task_OnToString(Task obj, Kistl.API.ToStringEventArgs e)
+        void Task_OnToString(Task obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             if (obj.DatumVon.HasValue && obj.DatumBis.HasValue)
             {

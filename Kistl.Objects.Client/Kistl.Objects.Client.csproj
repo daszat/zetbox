@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseProperty.Client.Designer.cs" />
+    <Compile Include="Method.Client.Designer.cs" />
     <Compile Include="Mitarbeiter.Client.Designer.cs" />
     <Compile Include="ObjectClass.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />

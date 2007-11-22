@@ -6,6 +6,7 @@
     <EntitySet Name="Task" EntityType="Model.Task" />
     <EntitySet Name="BaseProperty" EntityType="Model.BaseProperty" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
+    <EntitySet Name="Method" EntityType="Model.Method" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -22,6 +23,10 @@
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_Method_ObjectClass" Association="Model.FK_Method_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_Method" EntitySet="Method" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -34,6 +39,7 @@
     <NavigationProperty Name="Properties" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="A_ObjectClass" ToRole="B_BaseProperty" />
     <NavigationProperty Name="BaseObjectClass" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="B_ObjectClass" ToRole="A_ObjectClass" />
     <NavigationProperty Name="SubClasses" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
+    <NavigationProperty Name="Methods" Relationship="Model.FK_Method_ObjectClass" FromRole="A_ObjectClass" ToRole="B_Method" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -82,6 +88,14 @@
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty">
     <Property Name="Length" Type="Int32" Nullable="true" />
   </EntityType>
+  <EntityType Name="Method">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_Method_ObjectClass" FromRole="B_Method" ToRole="A_ObjectClass" />
+    <Property Name="MethodName" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />
@@ -97,5 +111,9 @@
   <Association Name="FK_ObjectClass_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_ObjectClass" Type="Model.ObjectClass" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Method_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_Method" Type="Model.Method" Multiplicity="*" />
   </Association>
 </Schema>

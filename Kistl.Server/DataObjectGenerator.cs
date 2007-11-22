@@ -260,11 +260,11 @@ namespace Kistl.Server
             // Create Properties
             GenerateProperties(objClass, c);
 
-            if (objClass.BaseObjectClass == null)
-            {
-                // Create DataObject Default Methods
-                GenerateDefaultMethods(objClass, c);
-            }
+            // Create DataObject Default Methods
+            GenerateDefaultMethods(objClass, c);
+
+            // Create DataObject Methods
+            GenerateMethods(objClass, c);
 
             // Generate the code & save
             SaveFile(code, path + @"Kistl.Objects\" + objClass.ClassName + ".Designer.cs");
@@ -332,6 +332,80 @@ namespace Kistl.Server
         }
         #endregion
 
+        #region GenerateMethods
+        private void GenerateMethods(ObjectClass objClass, CodeTypeDeclaration c)
+        {
+            ObjectClass baseObjClass = objClass;
+            while (objClass != null)
+            {
+                foreach (Method method in objClass.Methods)
+                {
+                    if (objClass == baseObjClass)
+                    {
+                        // Create Delegate
+                        // HACK!!! Die TypeParameter scheinen nicht zu funktionieren
+                        CodeTypeDelegate d = new CodeTypeDelegate(method.MethodName + "_Handler<T>");
+
+                        c.Members.Add(d);
+                        d.Attributes = MemberAttributes.Public;
+
+                        // HACK!!! Die TypeParameter scheinen nicht zu funktionieren
+                        CodeTypeParameter ct = new CodeTypeParameter("T");
+                        ct.Constraints.Add(new CodeTypeReference("IDataObject"));
+                        d.TypeParameters.Add(ct);
+                        // HACK!!! Die TypeParameter scheinen nicht zu funktionieren
+
+
+                        d.Parameters.Add(new CodeParameterDeclarationExpression("T", "obj"));
+                        d.Parameters.Add(new CodeParameterDeclarationExpression(
+                            new CodeTypeReference("MethodReturnEventArgs", new CodeTypeReference(typeof(string))),
+                            "e"));
+                    }
+
+                    // Create event
+                    CodeMemberEvent e = new CodeMemberEvent();
+                    c.Members.Add(e);
+
+                    e.Attributes = MemberAttributes.Public;
+                    e.Type = new CodeTypeReference(method.MethodName + "_Handler",
+                        new CodeTypeReference(baseObjClass.ClassName));
+                    e.Name = "On" + method.MethodName + "_" + baseObjClass.ClassName;
+
+                    // Create Method
+                    CodeMemberMethod m = new CodeMemberMethod();
+                    c.Members.Add(m);
+                    m.Name = method.MethodName;
+                    m.Attributes = (objClass == baseObjClass) ? (MemberAttributes.Public) : (MemberAttributes.Public | MemberAttributes.Override);
+                    m.ReturnType = new CodeTypeReference(typeof(string));
+
+                    if (objClass == baseObjClass)
+                    {
+                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            if (On{1}_{0} != null)
+            {{
+                On{1}_{0}(this, e);
+            }}
+            return e.Result", baseObjClass.ClassName, method.MethodName)));// TODO: Das ist C# spezifisch
+                    }
+                    else
+                    {
+                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.{1}();
+            if (On{1}_{0} != null)
+            {{
+                On{1}_{0}(this, e);
+            }}
+            return e.Result", baseObjClass.ClassName, method.MethodName)));// TODO: Das ist C# spezifisch
+                    }
+                }
+
+                // Nächster bitte
+                objClass = objClass.BaseObjectClass;
+            }
+
+        }
+        #endregion
+
         #region GenerateDefaultMethods
         private void GenerateDefaultMethods(ObjectClass objClass, CodeTypeDeclaration c)
         {
@@ -341,7 +415,7 @@ namespace Kistl.Server
 
             e.Attributes = MemberAttributes.Public;
             e.Type = new CodeTypeReference("ToStringHandler", new CodeTypeReference(objClass.ClassName));
-            e.Name = "OnToString";
+            e.Name = "OnToString_" + objClass.ClassName;
 
             // Create PreSave Delegate
             e = new CodeMemberEvent();
@@ -349,7 +423,7 @@ namespace Kistl.Server
 
             e.Attributes = MemberAttributes.Public;
             e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(objClass.ClassName));
-            e.Name = "OnPreSave";
+            e.Name = "OnPreSave_" + objClass.ClassName;
 
             // Create PostSave Delegate
             e = new CodeMemberEvent();
@@ -357,7 +431,7 @@ namespace Kistl.Server
 
             e.Attributes = MemberAttributes.Public;
             e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(objClass.ClassName));
-            e.Name = "OnPostSave";
+            e.Name = "OnPostSave_" + objClass.ClassName;
 
             // Create ToString Method
             CodeMemberMethod m = new CodeMemberMethod();
@@ -365,13 +439,13 @@ namespace Kistl.Server
             m.Name = "ToString";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(string));
-            m.Statements.Add(new CodeSnippetExpression(@"if (OnToString != null)
-            {
-                ToStringEventArgs e = new ToStringEventArgs();
-                OnToString(this, e);
-                return e.Result;
-            }
-            return base.ToString()"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_{0} != null)
+            {{
+                OnToString_{0}(this, e);
+            }}
+            return e.Result", objClass.ClassName)));// TODO: Das ist C# spezifisch
 
             // Create NotifyPreSave Method
             m = new CodeMemberMethod();
@@ -379,7 +453,8 @@ namespace Kistl.Server
             m.Name = "NotifyPreSave";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
-            m.Statements.Add(new CodeSnippetExpression(@"if (OnPreSave != null) OnPreSave(this)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPreSave();
+            if (OnPreSave_{0} != null) OnPreSave_{0}(this)", objClass.ClassName)));// TODO: Das ist C# spezifisch
 
             // Create NotifyPostSave Method
             m = new CodeMemberMethod();
@@ -387,10 +462,12 @@ namespace Kistl.Server
             m.Name = "NotifyPostSave";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
-            m.Statements.Add(new CodeSnippetExpression(@"if (OnPostSave != null) OnPostSave(this)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPostSave();
+            if (OnPostSave_{0} != null) OnPostSave_{0}(this)",objClass.ClassName)));// TODO: Das ist C# spezifisch
 
         }
         #endregion
+
 
         #region GenerateProperties
         private void GenerateProperties(ObjectClass objClass, CodeTypeDeclaration c)

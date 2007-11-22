@@ -68,31 +68,33 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public event ToStringHandler<Mitarbeiter> OnToString;
+        public event ToStringHandler<Mitarbeiter> OnToString_Mitarbeiter;
         
-        public event ObjectEventHandler<Mitarbeiter> OnPreSave;
+        public event ObjectEventHandler<Mitarbeiter> OnPreSave_Mitarbeiter;
         
-        public event ObjectEventHandler<Mitarbeiter> OnPostSave;
+        public event ObjectEventHandler<Mitarbeiter> OnPostSave_Mitarbeiter;
         
         public override string ToString()
         {
-            if (OnToString != null)
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Mitarbeiter != null)
             {
-                ToStringEventArgs e = new ToStringEventArgs();
-                OnToString(this, e);
-                return e.Result;
+                OnToString_Mitarbeiter(this, e);
             }
-            return base.ToString();
+            return e.Result;
         }
         
         public override void NotifyPreSave()
         {
-            if (OnPreSave != null) OnPreSave(this);
+            base.NotifyPreSave();
+            if (OnPreSave_Mitarbeiter != null) OnPreSave_Mitarbeiter(this);
         }
         
         public override void NotifyPostSave()
         {
-            if (OnPostSave != null) OnPostSave(this);
+            base.NotifyPostSave();
+            if (OnPostSave_Mitarbeiter != null) OnPostSave_Mitarbeiter(this);
         }
     }
 }

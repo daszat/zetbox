@@ -37,5 +37,11 @@ namespace Kistl.App.Base
         {
             return Proxy.Service.GetListOf(Type, ID, "SubClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
         }
+        
+        // Autogeneriert, um die gebundenen Listen zu bekommen
+        public List<Kistl.App.Base.Method> GetListOfMethods(int ID)
+        {
+            return Proxy.Service.GetListOf(Type, ID, "Methods").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.Method>();
+        }
     }
 }

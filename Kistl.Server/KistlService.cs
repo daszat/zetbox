@@ -11,7 +11,7 @@ using Kistl.API;
 namespace Kistl.Server
 {
     /// <summary>
-    /// Implementierung des KistServices
+    /// Implementierung des KistlServices
     /// </summary>
     public class KistlService : IKistlService
     {

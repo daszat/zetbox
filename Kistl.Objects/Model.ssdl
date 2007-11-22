@@ -9,6 +9,7 @@
     <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties" />
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties" />
     <EntitySet Name="StringProperty" EntityType="Model.Store.StringProperty" Table="StringProperties" />
+    <EntitySet Name="Method" EntityType="Model.Store.Method" Table="Methods" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -24,6 +25,10 @@
     <AssociationSet Name="FK_ObjectClass_ObjectClass" Association="Model.Store.FK_ObjectClass_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Method_ObjectClass" Association="Model.Store.FK_Method_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_Method" EntitySet="Method" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -94,6 +99,14 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Length" Type="int" Nullable="true" />
   </EntityType>
+  <EntityType Name="Method">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
+    <Property Name="MethodName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
@@ -139,6 +152,18 @@
       </Principal>
       <Dependent Role="B_ObjectClass">
         <PropertyRef Name="fk_BaseObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Method_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_Method" Type="Model.Store.Method" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Method">
+        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

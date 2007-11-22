@@ -139,31 +139,47 @@ namespace Kistl.App.Base
             }
         }
         
-        public event ToStringHandler<BaseProperty> OnToString;
+        public event ToStringHandler<BaseProperty> OnToString_BaseProperty;
         
-        public event ObjectEventHandler<BaseProperty> OnPreSave;
+        public event ObjectEventHandler<BaseProperty> OnPreSave_BaseProperty;
         
-        public event ObjectEventHandler<BaseProperty> OnPostSave;
+        public event ObjectEventHandler<BaseProperty> OnPostSave_BaseProperty;
+        
+        public event GetDataType_Handler<BaseProperty> OnGetDataType_BaseProperty;
         
         public override string ToString()
         {
-            if (OnToString != null)
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_BaseProperty != null)
             {
-                ToStringEventArgs e = new ToStringEventArgs();
-                OnToString(this, e);
-                return e.Result;
+                OnToString_BaseProperty(this, e);
             }
-            return base.ToString();
+            return e.Result;
         }
         
         public override void NotifyPreSave()
         {
-            if (OnPreSave != null) OnPreSave(this);
+            base.NotifyPreSave();
+            if (OnPreSave_BaseProperty != null) OnPreSave_BaseProperty(this);
         }
         
         public override void NotifyPostSave()
         {
-            if (OnPostSave != null) OnPostSave(this);
+            base.NotifyPostSave();
+            if (OnPostSave_BaseProperty != null) OnPostSave_BaseProperty(this);
         }
+        
+        public virtual string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            if (OnGetDataType_BaseProperty != null)
+            {
+                OnGetDataType_BaseProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
 }

@@ -121,31 +121,33 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public event ToStringHandler<Projekt> OnToString;
+        public event ToStringHandler<Projekt> OnToString_Projekt;
         
-        public event ObjectEventHandler<Projekt> OnPreSave;
+        public event ObjectEventHandler<Projekt> OnPreSave_Projekt;
         
-        public event ObjectEventHandler<Projekt> OnPostSave;
+        public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
         
         public override string ToString()
         {
-            if (OnToString != null)
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Projekt != null)
             {
-                ToStringEventArgs e = new ToStringEventArgs();
-                OnToString(this, e);
-                return e.Result;
+                OnToString_Projekt(this, e);
             }
-            return base.ToString();
+            return e.Result;
         }
         
         public override void NotifyPreSave()
         {
-            if (OnPreSave != null) OnPreSave(this);
+            base.NotifyPreSave();
+            if (OnPreSave_Projekt != null) OnPreSave_Projekt(this);
         }
         
         public override void NotifyPostSave()
         {
-            if (OnPostSave != null) OnPostSave(this);
+            base.NotifyPostSave();
+            if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
         }
     }
 }

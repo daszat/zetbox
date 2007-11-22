@@ -28,9 +28,9 @@ namespace Kistl.API
     /// <summary>
     /// Argumente für ToString Event
     /// </summary>
-    public class ToStringEventArgs
+    public class MethodReturnEventArgs<T>
     {
-        public string Result { get; set; }
+        public T Result { get; set; }
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ namespace Kistl.API
     /// <typeparam name="T"></typeparam>
     /// <param name="obj"></param>
     /// <param name="e"></param>
-    public delegate void ToStringHandler<T>(T obj, ToStringEventArgs e) where T : class, IDataObject, new();
+    public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e) where T : class, IDataObject, new();
 
     /// <summary>
     /// Handler für Server Custom Events. TODO: Außer SetObject hat's noch niemand implementiert.
@@ -68,8 +68,8 @@ namespace Kistl.API
         /// </summary>
         public abstract int ID { get; set; }
 
-        public abstract void NotifyPreSave();
-        public abstract void NotifyPostSave();
+        public virtual void NotifyPreSave() {}
+        public virtual void NotifyPostSave() {}
 
         #endregion
 

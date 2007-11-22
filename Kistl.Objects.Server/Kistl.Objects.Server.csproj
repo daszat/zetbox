@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseProperty.Server.Designer.cs" />
+    <Compile Include="Method.Server.Designer.cs" />
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="ObjectClass.Server.Designer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />

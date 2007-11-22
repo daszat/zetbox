@@ -8,13 +8,13 @@ namespace Kistl.API.Client
     public class Proxy
     {
         /// <summary>
-        /// WCF Proxy für das KistService instanzieren.
+        /// WCF Proxy für das KistlService instanzieren.
         /// Konfiguration lt. app.config File
         /// </summary>
         private static KistlService.KistlServiceClient service = new KistlService.KistlServiceClient();
 
         /// <summary>
-        /// WCF Proxy für das KistService
+        /// WCF Proxy für das KistlService
         /// </summary>
         public static KistlService.KistlServiceClient Service
         {

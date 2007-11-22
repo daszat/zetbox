@@ -148,31 +148,45 @@ namespace Kistl.App.Base
             }
         }
         
-        public event ToStringHandler<ObjectClass> OnToString;
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_ObjectClass", "B_Method")]
+        [XmlIgnore()]
+        public EntityCollection<Kistl.App.Base.Method> Methods
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.Method> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Method>("Model.FK_Method_ObjectClass", "B_Method");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
         
-        public event ObjectEventHandler<ObjectClass> OnPreSave;
+        public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
-        public event ObjectEventHandler<ObjectClass> OnPostSave;
+        public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
+        
+        public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
         
         public override string ToString()
         {
-            if (OnToString != null)
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_ObjectClass != null)
             {
-                ToStringEventArgs e = new ToStringEventArgs();
-                OnToString(this, e);
-                return e.Result;
+                OnToString_ObjectClass(this, e);
             }
-            return base.ToString();
+            return e.Result;
         }
         
         public override void NotifyPreSave()
         {
-            if (OnPreSave != null) OnPreSave(this);
+            base.NotifyPreSave();
+            if (OnPreSave_ObjectClass != null) OnPreSave_ObjectClass(this);
         }
         
         public override void NotifyPostSave()
         {
-            if (OnPostSave != null) OnPostSave(this);
+            base.NotifyPostSave();
+            if (OnPostSave_ObjectClass != null) OnPostSave_ObjectClass(this);
         }
     }
 }

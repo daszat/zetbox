@@ -40,5 +40,61 @@ namespace Kistl.App.Base
                 _IsNullable = value;
             }
         }
+        
+        public event ToStringHandler<Property> OnToString_Property;
+        
+        public event ObjectEventHandler<Property> OnPreSave_Property;
+        
+        public event ObjectEventHandler<Property> OnPostSave_Property;
+        
+        public event GetDatabaseType_Handler<Property> OnGetDatabaseType_Property;
+        
+        public event GetDataType_Handler<Property> OnGetDataType_Property;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Property != null)
+            {
+                OnToString_Property(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Property != null) OnPreSave_Property(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Property != null) OnPostSave_Property(this);
+        }
+        
+        public virtual string GetDatabaseType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            if (OnGetDatabaseType_Property != null)
+            {
+                OnGetDatabaseType_Property(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_Property != null)
+            {
+                OnGetDataType_Property(this, e);
+            }
+            return e.Result;
+        }
+        
+        public delegate void GetDatabaseType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
 }

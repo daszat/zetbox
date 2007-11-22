@@ -35,6 +35,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Property), ElementName="Property")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ValueTypeProperty), ElementName="ValueTypeProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.StringProperty), ElementName="StringProperty")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.Method), ElementName="Method")]
         public List<BaseDataObject> Objects = new List<BaseDataObject>();
         
         public List<T> ToList<T>()
@@ -57,6 +58,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.Property), ElementName="Property")]
         [XmlElement(Type=typeof(Kistl.App.Base.ValueTypeProperty), ElementName="ValueTypeProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.StringProperty), ElementName="StringProperty")]
+        [XmlElement(Type=typeof(Kistl.App.Base.Method), ElementName="Method")]
         public BaseDataObject Object;
     }
 }
