@@ -1,9 +1,9 @@
 ﻿<UserControl x:Class="Kistl.Client.Controls.EditPointerProperty"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    MinWidth="250" x:Name="PointerCtrl" Loaded="PointerCtrl_Loaded">
+    MinWidth="400" x:Name="PointerCtrl" Loaded="PointerCtrl_Loaded">
     <DockPanel >
-        <Label DockPanel.Dock="Left" Width="100" Content="{Binding ElementName=PointerCtrl, Path=Label}" />
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=PointerCtrl, Path=Label}" />
         <Button Name="btnNew" Click="btnNew_Click">New</Button>
         <Button Name="btnOpen" Click="btnOpen_Click">Open</Button>
         <ComboBox Name="cbValues" 

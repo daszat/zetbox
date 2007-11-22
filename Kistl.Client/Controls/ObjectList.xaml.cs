@@ -143,8 +143,30 @@ namespace Kistl.Client.Controls
         {
             try
             {
+                ObjectType resultObjectType = this.DestinationObjectType;
+
+                Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
+                Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.First(o => o.Namespace == DestinationObjectType.Namespace && o.ClassName == DestinationObjectType.Classname);
+
+                if (client.GetListOfSubClasses(objClass.ID).Count > 0)
+                {
+                    // TODO: Das ist noch nicht ganz konstistent
+                    Dialogs.ChooseObjectClass dlg = new Kistl.Client.Dialogs.ChooseObjectClass();
+                    dlg.BaseObjectClass = objClass;
+
+                    if (dlg.ShowDialog() == true)
+                    {
+                        resultObjectType = new ObjectType(dlg.ResultObjectClass.Namespace, dlg.ResultObjectClass.ClassName);
+                    }
+                    else
+                    {
+                        // Do nothing
+                        return;
+                    }
+                }
+
                 ObjectWindow wnd = new ObjectWindow();
-                wnd.ObjectType = this.DestinationObjectType;
+                wnd.ObjectType = resultObjectType;
                 wnd.ObjectID = API.Helper.INVALIDID;
 
                 wnd.SourceObjectID = this.ObjectID;

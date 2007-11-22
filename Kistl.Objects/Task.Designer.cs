@@ -53,6 +53,14 @@ namespace Kistl.App.Projekte
             }
         }
         
+        public override string EntitySetName
+        {
+            get
+            {
+                return "Task";
+            }
+        }
+        
         [EdmScalarPropertyAttribute()]
         public string Name
         {

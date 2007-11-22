@@ -51,10 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackReferenceProperty.Designer.cs" />
     <Compile Include="BaseProperty.Designer.cs" />
+    <Compile Include="BoolProperty.Designer.cs" />
+    <Compile Include="DateTimeProperty.Designer.cs" />
+    <Compile Include="DoubleProperty.Designer.cs" />
+    <Compile Include="IntProperty.Designer.cs" />
     <Compile Include="Method.Designer.cs" />
     <Compile Include="Mitarbeiter.Designer.cs" />
     <Compile Include="ObjectClass.Designer.cs" />
+    <Compile Include="ObjectReferenceProperty.Designer.cs" />
     <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Projekt.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

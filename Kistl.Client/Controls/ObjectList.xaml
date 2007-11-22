@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="Kistl.Client.Controls.ObjectList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    MinWidth="300"
+    MinWidth="400"
     Loaded="ObjectList_Loaded"
     x:Name="ListCtrl">
     <DockPanel>
-        <Label DockPanel.Dock="Left" Width="100" Content="{Binding ElementName=ListCtrl, Path=Label}" x:Name="lbLabel" />
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=ListCtrl, Path=Label}" x:Name="lbLabel" />
         <StackPanel>
             <ToolBar>
                 <Button Name="btnNew" Click="btnNew_Click">New</Button>

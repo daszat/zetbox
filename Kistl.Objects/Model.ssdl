@@ -10,6 +10,12 @@
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties" />
     <EntitySet Name="StringProperty" EntityType="Model.Store.StringProperty" Table="StringProperties" />
     <EntitySet Name="Method" EntityType="Model.Store.Method" Table="Methods" />
+    <EntitySet Name="IntProperty" EntityType="Model.Store.IntProperty" Table="IntProperties" />
+    <EntitySet Name="BoolProperty" EntityType="Model.Store.BoolProperty" Table="BoolProperties" />
+    <EntitySet Name="DoubleProperty" EntityType="Model.Store.DoubleProperty" Table="DoubleProperties" />
+    <EntitySet Name="ObjectReferenceProperty" EntityType="Model.Store.ObjectReferenceProperty" Table="ObjectReferenceProperties" />
+    <EntitySet Name="DateTimeProperty" EntityType="Model.Store.DateTimeProperty" Table="DateTimeProperties" />
+    <EntitySet Name="BackReferenceProperty" EntityType="Model.Store.BackReferenceProperty" Table="BackReferenceProperties" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -106,6 +112,46 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="MethodName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="IntProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BoolProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DoubleProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectReferenceProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_ObjectClassType" Type="int" Nullable="true" />
+    <Property Name="ObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="DateTimeProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BackReferenceProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ReferenceObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ReferencePropertyName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />

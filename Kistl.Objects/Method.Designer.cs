@@ -47,6 +47,14 @@ namespace Kistl.App.Base
             }
         }
         
+        public override string EntitySetName
+        {
+            get
+            {
+                return "Method";
+            }
+        }
+        
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_ObjectClass", "A_ObjectClass")]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectClass ObjectClass

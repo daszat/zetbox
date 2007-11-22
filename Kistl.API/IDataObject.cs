@@ -16,6 +16,12 @@ namespace Kistl.API
         /// Jeder hat eine ID
         /// </summary>
         int ID { get; set; }
+
+        /// <summary>
+        /// Der EntitySetName der Basisklasse
+        /// </summary>
+        string EntitySetName { get; }
+
         /// <summary>
         /// Zum Melden, dass sich das Datenobjekt geänder hat.
         /// </summary>
@@ -60,6 +66,17 @@ namespace Kistl.API
         public BaseDataObject()
         {
             API.CustomActionsManagerFactory.Current.AttachEvents(this);
+            _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
+        }
+
+        protected ObjectType _type = null;
+
+        public ObjectType Type
+        {
+            get
+            {
+                return _type;
+            }
         }
 
         #region IDataObject Members
@@ -67,6 +84,8 @@ namespace Kistl.API
         /// Jeder hat eine ID
         /// </summary>
         public abstract int ID { get; set; }
+
+        public abstract string EntitySetName { get; }
 
         public virtual void NotifyPreSave() {}
         public virtual void NotifyPostSave() {}

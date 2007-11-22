@@ -96,6 +96,18 @@
     <NavigationProperty Name="ObjectClass" Relationship="Model.FK_Method_ObjectClass" FromRole="B_Method" ToRole="A_ObjectClass" />
     <Property Name="MethodName" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty" />
+  <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
+  <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty" />
+  <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
+    <Property Name="fk_ObjectClassType" Type="Int32" Nullable="true" />
+    <Property Name="ObjectClassName" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" />
+  <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty">
+    <Property Name="ReferenceObjectClassName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="ReferencePropertyName" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />

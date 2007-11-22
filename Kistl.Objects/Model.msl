@@ -58,6 +58,40 @@
           <ScalarProperty Name="Length" ColumnName="Length" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntProperty)">
+        <MappingFragment StoreEntitySet="IntProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolProperty)">
+        <MappingFragment StoreEntitySet="BoolProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleProperty)">
+        <MappingFragment StoreEntitySet="DoubleProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeProperty)">
+        <MappingFragment StoreEntitySet="DateTimeProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
+        <MappingFragment StoreEntitySet="ObjectReferenceProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="fk_ObjectClassType" ColumnName="fk_ObjectClassType" />
+          <ScalarProperty Name="ObjectClassName" ColumnName="ObjectClassName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
+        <MappingFragment StoreEntitySet="BackReferenceProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ReferenceObjectClassName" ColumnName="ReferenceObjectClassName" />
+          <ScalarProperty Name="ReferencePropertyName" ColumnName="ReferencePropertyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Mitarbeiter">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">

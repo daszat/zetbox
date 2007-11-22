@@ -329,6 +329,16 @@ namespace Kistl.Server
 
             p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_ID")));
             p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_ID"), new CodePropertySetValueReferenceExpression()));
+
+            p = new CodeMemberProperty();
+            c.Members.Add(p);
+
+            p.Name = "EntitySetName";
+            p.HasGet = true;
+            p.HasSet = false;
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            p.Type = new CodeTypeReference(typeof(string));
+            p.GetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(objClass.ClassName)));
         }
         #endregion
 
@@ -479,7 +489,8 @@ namespace Kistl.Server
                     // Simple Property
                     CodeMemberField f = null;
                     CodeTypeReference ctr = null;
-                    if (Type.GetType(prop.DataType).IsValueType)
+                    Type t = Type.GetType(prop.DataType);
+                    if (t != null && t.IsValueType)
                     {
                         ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.DataType));
                     }

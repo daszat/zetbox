@@ -36,6 +36,12 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ValueTypeProperty), ElementName="ValueTypeProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.StringProperty), ElementName="StringProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Method), ElementName="Method")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.IntProperty), ElementName="IntProperty")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.BoolProperty), ElementName="BoolProperty")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.DoubleProperty), ElementName="DoubleProperty")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectReferenceProperty), ElementName="ObjectReferenceProperty")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.DateTimeProperty), ElementName="DateTimeProperty")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
         public List<BaseDataObject> Objects = new List<BaseDataObject>();
         
         public List<T> ToList<T>()
@@ -59,6 +65,12 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.ValueTypeProperty), ElementName="ValueTypeProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.StringProperty), ElementName="StringProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.Method), ElementName="Method")]
+        [XmlElement(Type=typeof(Kistl.App.Base.IntProperty), ElementName="IntProperty")]
+        [XmlElement(Type=typeof(Kistl.App.Base.BoolProperty), ElementName="BoolProperty")]
+        [XmlElement(Type=typeof(Kistl.App.Base.DoubleProperty), ElementName="DoubleProperty")]
+        [XmlElement(Type=typeof(Kistl.App.Base.ObjectReferenceProperty), ElementName="ObjectReferenceProperty")]
+        [XmlElement(Type=typeof(Kistl.App.Base.DateTimeProperty), ElementName="DateTimeProperty")]
+        [XmlElement(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
         public BaseDataObject Object;
     }
 }

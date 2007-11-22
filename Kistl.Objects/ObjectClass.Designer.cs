@@ -51,6 +51,14 @@ namespace Kistl.App.Base
             }
         }
         
+        public override string EntitySetName
+        {
+            get
+            {
+                return "ObjectClass";
+            }
+        }
+        
         [EdmScalarPropertyAttribute()]
         public string ClassName
         {

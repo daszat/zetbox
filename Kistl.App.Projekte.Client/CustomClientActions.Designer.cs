@@ -38,10 +38,16 @@ namespace Kistl.App.Projekte
                 impl.OnToString_ObjectClass +=new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectClass>(ObjectClass_OnToString);
             }
 
+            if (obj is App.Base.Method)
+            {
+                App.Base.Method impl = obj as App.Base.Method;
+                impl.OnToString_Method += new Kistl.API.ToStringHandler<Kistl.App.Base.Method>(imp_OnToString_Method);
+            }
+
             if (obj is App.Base.BaseProperty)
             {
                 App.Base.BaseProperty impl = obj as App.Base.BaseProperty;
-                impl.OnToString_BaseProperty += new Kistl.API.ToStringHandler<Kistl.App.Base.BaseProperty>(BaseProperty_OnToString);
+                impl.OnToString_BaseProperty += new Kistl.API.ToStringHandler<Kistl.App.Base.BaseProperty>(impl_OnToString_BaseProperty);
                 impl.OnGetDataType_BaseProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.BaseProperty>(impl_OnGetDataType_BaseProperty);
             }
 
@@ -51,10 +57,34 @@ namespace Kistl.App.Projekte
                 impl.OnGetDataType_StringProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.StringProperty>(impl_OnGetDataType_StringProperty);
             }
 
-            if (obj is App.Base.Method)
+            if (obj is App.Base.IntProperty)
             {
-                App.Base.Method impl = obj as App.Base.Method;
-                impl.OnToString_Method += new Kistl.API.ToStringHandler<Kistl.App.Base.Method>(imp_OnToString_Method);
+                App.Base.IntProperty impl = obj as App.Base.IntProperty;
+                impl.OnGetDataType_IntProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.IntProperty>(impl_OnGetDataType_IntProperty);
+            }
+
+            if (obj is App.Base.BoolProperty)
+            {
+                App.Base.BoolProperty impl = obj as App.Base.BoolProperty;
+                impl.OnGetDataType_BoolProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.BoolProperty>(impl_OnGetDataType_BoolProperty);
+            }
+
+            if (obj is App.Base.DoubleProperty)
+            {
+                App.Base.DoubleProperty impl = obj as App.Base.DoubleProperty;
+                impl.OnGetDataType_DoubleProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.DoubleProperty>(impl_OnGetDataType_DoubleProperty);
+            }
+
+            if (obj is App.Base.DateTimeProperty)
+            {
+                App.Base.DateTimeProperty impl = obj as App.Base.DateTimeProperty;
+                impl.OnGetDataType_DateTimeProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.DateTimeProperty>(impl_OnGetDataType_DateTimeProperty);
+            }
+
+            if (obj is App.Base.ObjectReferenceProperty)
+            {
+                App.Base.ObjectReferenceProperty impl = obj as App.Base.ObjectReferenceProperty;
+                impl.OnGetDataType_ObjectReferenceProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.ObjectReferenceProperty>(impl_OnGetDataType_ObjectReferenceProperty);
             }
         }
     }

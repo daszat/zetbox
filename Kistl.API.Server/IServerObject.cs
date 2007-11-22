@@ -97,6 +97,17 @@ namespace Kistl.API.Server
         /// </summary>
         public ServerObject()
         {
+            _type = new ObjectType(typeof(T).Namespace, typeof(T).Name);
+        }
+
+        protected ObjectType _type = null;
+
+        public ObjectType Type
+        {
+            get
+            {
+                return _type;
+            }
         }
 
         /// <summary>
@@ -199,12 +210,12 @@ namespace Kistl.API.Server
 
             if (obj.ID != API.Helper.INVALIDID)
             {
-                KistlDataContext.Current.AttachTo(typeof(T).Name, obj);
+                KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
                 MarkEveryPropertyAsModified(obj);
             }
             else
             {
-                KistlDataContext.Current.AddObject(typeof(T).Name, obj);
+                KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
             }
             UpdateRelationships(obj);
             KistlDataContext.Current.SubmitChanges();

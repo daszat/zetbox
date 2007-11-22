@@ -85,6 +85,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\ChooseObjectClass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,6 +115,9 @@
     </Compile>
     <Compile Include="Controls\ObjectList.xaml.cs">
       <DependentUpon>ObjectList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ChooseObjectClass.xaml.cs">
+      <DependentUpon>ChooseObjectClass.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
