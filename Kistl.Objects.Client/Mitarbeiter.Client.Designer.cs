@@ -29,7 +29,7 @@ namespace Kistl.App.Projekte
         // Autogeneriert, um die gebundenen Listen zu bekommen
         public List<Kistl.App.Projekte.Projekt> GetListOfProjekte(int ID)
         {
-            return Proxy.Service.GetListOf(Type, ID, "Projekte").FromXmlString<List<Kistl.App.Projekte.Projekt>>();
+            return Proxy.Service.GetListOf(Type, ID, "Projekte").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Projekte.Projekt>();
         }
     }
 }

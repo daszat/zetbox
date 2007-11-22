@@ -20,22 +20,10 @@ namespace Kistl.App.Base
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using Kistl.API.Client;
+    using Kistl.API.Server;
     
     
-    public sealed class ObjectClassClient : ClientObject<ObjectClass>
+    public sealed class ValueTypePropertyServer : ServerObject<ValueTypeProperty>
     {
-        
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.BaseProperty> GetListOfProperties(int ID)
-        {
-            return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.BaseProperty>();
-        }
-        
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.ObjectClass> GetListOfSubClasses(int ID)
-        {
-            return Proxy.Service.GetListOf(Type, ID, "SubClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
-        }
     }
 }

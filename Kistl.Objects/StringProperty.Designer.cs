@@ -20,22 +20,25 @@ namespace Kistl.App.Base
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using Kistl.API.Client;
     
     
-    public sealed class ObjectClassClient : ClientObject<ObjectClass>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="StringProperty")]
+    public class StringProperty : Kistl.App.Base.ValueTypeProperty
     {
         
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.BaseProperty> GetListOfProperties(int ID)
-        {
-            return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.BaseProperty>();
-        }
+        private System.Nullable<int> _Length;
         
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.ObjectClass> GetListOfSubClasses(int ID)
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<int> Length
         {
-            return Proxy.Service.GetListOf(Type, ID, "SubClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
+            get
+            {
+                return _Length;
+            }
+            set
+            {
+                _Length = value;
+            }
         }
     }
 }

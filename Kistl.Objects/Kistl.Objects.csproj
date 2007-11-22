@@ -54,11 +54,13 @@
     <Compile Include="BaseProperty.Designer.cs" />
     <Compile Include="Mitarbeiter.Designer.cs" />
     <Compile Include="ObjectClass.Designer.cs" />
-    <Compile Include="ObjectCollection.cs" />
+    <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Projekt.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property.Designer.cs" />
+    <Compile Include="StringProperty.Designer.cs" />
     <Compile Include="Task.Designer.cs" />
+    <Compile Include="ValueTypeProperty.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">

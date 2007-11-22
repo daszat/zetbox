@@ -7,6 +7,8 @@
     <EntitySet Name="BaseProperty" EntityType="Model.Store.BaseProperty" Table="BaseProperties" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Table="Mitarbeiter" />
     <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties" />
+    <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties" />
+    <EntitySet Name="StringProperty" EntityType="Model.Store.StringProperty" Table="StringProperties" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -78,6 +80,19 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="IsNullable" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ValueTypeProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StringProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />

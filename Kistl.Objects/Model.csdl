@@ -78,6 +78,10 @@
   <EntityType Name="Property" BaseType="Model.BaseProperty">
     <Property Name="IsNullable" Type="Boolean" Nullable="true" />
   </EntityType>
+  <EntityType Name="ValueTypeProperty" BaseType="Model.Property" />
+  <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty">
+    <Property Name="Length" Type="Int32" Nullable="true" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />

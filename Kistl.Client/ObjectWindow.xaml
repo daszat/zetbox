@@ -8,7 +8,14 @@
             <Button Click="MenuItem_Click_Save">Save</Button>
             <Button Click="MenuItem_Click_Close" >Close</Button>
         </ToolBar>
-        <StackPanel Name="data">
-        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="data">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type DockPanel}">
+                        <Setter Property="Margin" Value="5,5,5,0" />
+                    </Style>
+                </StackPanel.Resources>
+            </StackPanel>
+        </ScrollViewer>
     </DockPanel>
 </Window>

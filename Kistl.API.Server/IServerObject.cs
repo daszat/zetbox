@@ -67,6 +67,7 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
+        [System.Diagnostics.DebuggerStepThrough]
         public static IServerObject GetServerObject(ObjectType type)
         {
             if (type == null) throw new ArgumentException("Type is null");
@@ -89,7 +90,7 @@ namespace Kistl.API.Server
     /// Es reicht einmal für den generischen Teil.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ServerObject<T> : IServerObject where T : class, IDataObject, new()
+    public class ServerObject<T> : IServerObject where T : BaseDataObject, IDataObject, new()
     {
         /// <summary>
         /// Events registrieren
@@ -108,7 +109,8 @@ namespace Kistl.API.Server
             var result = from a in KistlDataContext.Current.GetTable<T>()
                          select a;
 
-            List<T> list = result.ToList<T>();
+            XMLObjectCollection list = new XMLObjectCollection();
+            list.Objects.AddRange(result.ToList().OfType<BaseDataObject>());
             return list.ToXmlString();
         }
 
@@ -141,7 +143,7 @@ namespace Kistl.API.Server
 
             // return list.ToXmlString();
 
-            ObjectCollection result = new ObjectCollection();
+            XMLObjectCollection result = new XMLObjectCollection();
             IEnumerable v = (IEnumerable)pi.GetValue(obj, null);
             result.Objects.AddRange(v.OfType<BaseDataObject>());
             return result.ToXmlString();
@@ -180,8 +182,9 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public string GetObject(int ID)
         {
-            T obj = GetObjectInstance(ID);
-            return obj.ToXmlString();
+            XMLObject result = new XMLObject();
+            result.Object = (BaseDataObject)GetObjectInstance(ID);
+            return result.ToXmlString();
         }
 
         /// <summary>
@@ -192,7 +195,7 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public string SetObject(string xml)
         {
-            T obj = xml.FromXmlString<T>();
+            T obj = xml.FromXmlString<XMLObject>().Object as T;
 
             if (obj.ID != API.Helper.INVALIDID)
             {
@@ -206,7 +209,9 @@ namespace Kistl.API.Server
             UpdateRelationships(obj);
             KistlDataContext.Current.SubmitChanges();
 
-            return obj.ToXmlString();
+            XMLObject result = new XMLObject();
+            result.Object = obj;
+            return result.ToXmlString();
         }
 
         /// <summary>

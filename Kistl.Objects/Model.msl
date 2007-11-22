@@ -47,6 +47,17 @@
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypeProperty)">
+        <MappingFragment StoreEntitySet="ValueTypeProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringProperty)">
+        <MappingFragment StoreEntitySet="StringProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Mitarbeiter">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">

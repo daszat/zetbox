@@ -56,7 +56,7 @@ namespace Kistl.App.Projekte
         /// <param name="e"></param>
         void ObjectClass_OnToString(Base.ObjectClass obj, Kistl.API.ToStringEventArgs e)
         {
-            e.Result = obj.ClassName;
+            e.Result = obj.Namespace + "." + obj.ClassName;
         }
 
         /// <summary>

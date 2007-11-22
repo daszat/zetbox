@@ -15,6 +15,13 @@ namespace Kistl.API
             Classname = "";
         }
 
+        public ObjectType(IDataObject obj)
+        {
+            Type t = obj.GetType();
+            Namespace = t.Namespace;
+            Classname = t.Name;
+        }
+
         public ObjectType(string type)
         {
             Namespace = "";

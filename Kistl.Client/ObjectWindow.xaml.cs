@@ -73,6 +73,30 @@ namespace Kistl.Client
             data.Children.Add(txt);
         }
 
+        private List<Kistl.App.Base.ObjectClass> GetObjectHierarchie()
+        {
+            Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
+
+            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.First(o => o.Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
+            List<Kistl.App.Base.ObjectClass> objClasses = new List<Kistl.App.Base.ObjectClass>();
+            while (objClass != null)
+            {
+                objClasses.Add(objClass);
+
+                if (objClass.fk_BaseObjectClass == API.Helper.INVALIDID)
+                {
+                    objClass = null;
+                }
+                else
+                {
+                    objClass = Helper.ObjectClasses.First(o => o.ID == objClass.fk_BaseObjectClass);
+                }
+            }
+
+            objClasses.Reverse();
+            return objClasses;
+        }
+
         /// <summary>
         /// Objekt _einmalig_ binden - das erzeugt "nur" die WPF Controls
         /// </summary>
@@ -80,75 +104,80 @@ namespace Kistl.Client
         {
             data.DataContext = obj;
 
-            Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
-            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.First(o => o.Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
-
             BindDefaultProperties();
-
-            // Aus Metadaten holen
-            foreach (Kistl.App.Base.BaseProperty p in objClassClient.GetListOfProperties(objClass.ID))
+            
+            // Objektklassenhierarchie holen
+            Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
+            foreach (Kistl.App.Base.ObjectClass objClass in GetObjectHierarchie())
             {
-                if (p.IsList.Value && p.IsAssociation.Value)
+                #region Binden
+                // Aus Metadaten holen
+                foreach (Kistl.App.Base.BaseProperty p in objClassClient.GetListOfProperties(objClass.ID))
                 {
-                    Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
-                    lst.SourceObjectType = this.ObjectType;
-
-                    // aus Metadaten auslesen
-                    lst.DestinationObjectType = new ObjectType(p.DataType);
-
-                    lst.ObjectID = this.ObjectID;
-                    lst.PropertyName = p.PropertyName;
-
-                    data.Children.Add(lst);
-                }
-                else if (!p.IsList.Value && p.IsAssociation.Value)
-                {
-                    Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
-                    pointer.Label = p.PropertyName;
-                    // TODO: Das stiftet noch Verwirrung!
-                    pointer.ObjectType = new ObjectType(p.DataType);
-
-                    // Set Binding, damit werden Änderungen automatisch übernommen.
-                    Binding b = new Binding(p.PropertyName);
-                    b.Mode = BindingMode.TwoWay;
-                    b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                    b.NotifyOnSourceUpdated = true;
-                    b.NotifyOnTargetUpdated = true;
-                    pointer.SetBinding(Controls.EditPointerProperty.ValueProperty, b);
-
-                    data.Children.Add(pointer);
-
-                    // fk setzten, falls vorhanden
-                    if (SourceObjectID != API.Helper.INVALIDID)
+                    if (p.IsList.Value && p.IsAssociation.Value)
                     {
-                        if (pointer.ObjectType.Equals(SourceObjectType))
+                        Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
+                        lst.SourceObjectType = this.ObjectType;
+                        lst.Label = p.PropertyName;
+
+                        // aus Metadaten auslesen
+                        lst.DestinationObjectType = new ObjectType(p.DataType);
+
+                        lst.ObjectID = this.ObjectID;
+                        lst.PropertyName = p.PropertyName;
+
+                        data.Children.Add(lst);
+                    }
+                    else if (!p.IsList.Value && p.IsAssociation.Value)
+                    {
+                        Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
+                        pointer.Label = p.PropertyName;
+                        // TODO: Das stiftet noch Verwirrung!
+                        pointer.ObjectType = new ObjectType(p.DataType);
+
+                        // Set Binding, damit werden Änderungen automatisch übernommen.
+                        Binding b = new Binding(p.PropertyName);
+                        b.Mode = BindingMode.TwoWay;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        b.NotifyOnTargetUpdated = true;
+                        pointer.SetBinding(Controls.EditPointerProperty.ValueProperty, b);
+
+                        data.Children.Add(pointer);
+
+                        // fk setzten, falls vorhanden
+                        if (SourceObjectID != API.Helper.INVALIDID)
                         {
-                            obj.GetType().GetProperty(p.PropertyName).SetValue(obj, SourceObjectID, new object[] {});
+                            if (pointer.ObjectType.Equals(SourceObjectType))
+                            {
+                                obj.GetType().GetProperty(p.PropertyName).SetValue(obj, SourceObjectID, new object[] { });
+                            }
                         }
                     }
-                }
-                else if (p.IsList.Value && !p.IsAssociation.Value)
-                {
-                    // Reine Listen werden noch nicht unterstützt
-                }
-                else
-                {
-                    // Neues Bearbeitungscontrol erzeugen
-                    Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
+                    else if (p.IsList.Value && !p.IsAssociation.Value)
+                    {
+                        // Reine Listen werden noch nicht unterstützt
+                    }
+                    else
+                    {
+                        // Neues Bearbeitungscontrol erzeugen
+                        Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
 
-                    // Bezeichnung setzen
-                    txt.Label = p.PropertyName;
+                        // Bezeichnung setzen
+                        txt.Label = p.PropertyName;
 
-                    // Set Binding, damit werden Änderungen automatisch übernommen.
-                    Binding b = new Binding(p.PropertyName);
-                    b.Mode = BindingMode.TwoWay;
-                    b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                    b.NotifyOnSourceUpdated = true;
-                    b.NotifyOnTargetUpdated = true;
-                    txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
+                        // Set Binding, damit werden Änderungen automatisch übernommen.
+                        Binding b = new Binding(p.PropertyName);
+                        b.Mode = BindingMode.TwoWay;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        b.NotifyOnTargetUpdated = true;
+                        txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
 
-                    data.Children.Add(txt);
+                        data.Children.Add(txt);
+                    }
                 }
+                #endregion
             }
         }
 
@@ -171,8 +200,6 @@ namespace Kistl.Client
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                SetTitle();
-
                 // Client BL holen
                 client = Helper.GetClientObject(ObjectType);
 
@@ -187,6 +214,12 @@ namespace Kistl.Client
                 {
                     obj = client.CreateNewGeneric();
                 }
+
+                // Objekttype anpassen
+                ObjectType = new ObjectType(obj);
+
+                // Fensternamen setzen
+                SetTitle();
 
                 // Einmalig Binden & WPF Controls erzeugen
                 Bind();

@@ -68,6 +68,11 @@ namespace Kistl.Client.Controls
         void ObjectList_Loaded(object sender, RoutedEventArgs e)
         {
             Bind();
+
+            if (string.IsNullOrEmpty(Label))
+            {
+                lbLabel.Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
@@ -92,6 +97,20 @@ namespace Kistl.Client.Controls
         /// ObjektID & Destination*ObjectType müssen auch ausgefüllt sein!
         /// </summary>
         public string PropertyName { get; set; }
+
+        /// <summary>
+        /// Bezeichnung der Liste, wenn leer, dann wird's auch nicht angezeigt
+        /// </summary>
+        public string Label
+        {
+            get { return (string)GetValue(LabelProperty); }
+            set { SetValue(LabelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LabelProperty =
+            DependencyProperty.Register("Label", typeof(string), typeof(ObjectList));
+
 
         /// <summary>
         /// DoppelKlick -> öffnet das Objekt in einem neuen Fenster

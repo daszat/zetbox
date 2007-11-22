@@ -28,10 +28,8 @@ namespace Kistl.Server
             var objClassList = from c in ctx.GetTable<ObjectClass>()
                                select c;
 
-            File.Delete(path + @"Kistl.Objects\*.cs");
-            File.Delete(path + @"Kistl.Objects.Client\*.cs");
-            File.Delete(path + @"Kistl.Objects.Server\*.cs");
-
+            Directory.GetFiles(this.path, "*.cs", SearchOption.AllDirectories).
+                ToList().ForEach(f => File.Delete(f));
 
             foreach (ObjectClass objClass in objClassList)
             {
@@ -39,6 +37,9 @@ namespace Kistl.Server
                 GenerateObjectsClient(objClass);
                 GenerateObjectsServer(objClass);
             }
+
+            GenerateObjectSerializer(objClassList);
+
             Console.WriteLine("...finished!");
         }
 
@@ -70,6 +71,75 @@ namespace Kistl.Server
             ns.Imports.Add(new CodeNamespaceImport("System.Xml"));
             ns.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API"));
+        }
+        #endregion
+
+        #region GenerateObjectSerializer
+        private void GenerateObjectSerializer(IQueryable<ObjectClass> objClassList)
+        {
+            CodeCompileUnit code = new CodeCompileUnit();
+
+            // Create Namespace
+            CodeNamespace ns = new CodeNamespace("Kistl.API");
+            code.Namespaces.Add(ns);
+
+            AddDefaultNamespaces(ns);
+
+            // XMLObjectCollection
+            CodeTypeDeclaration c = new CodeTypeDeclaration("XMLObjectCollection");
+            ns.Types.Add(c);
+            c.IsClass = true;
+            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
+            c.CustomAttributes.Add(new CodeAttributeDeclaration("Serializable"));
+            c.CustomAttributes.Add(new CodeAttributeDeclaration("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("ObjectCollection"))));
+
+            CodeMemberField f = new CodeMemberField(new CodeTypeReference("List", new CodeTypeReference("BaseDataObject")), "Objects");
+            c.Members.Add(f);
+            f.Attributes = MemberAttributes.Public;
+            f.InitExpression = new CodeObjectCreateExpression(
+                new CodeTypeReference("List", new CodeTypeReference("BaseDataObject")));
+            foreach (ObjectClass objClass in objClassList)
+            {
+                f.CustomAttributes.Add(
+                    new CodeAttributeDeclaration("XmlArrayItem", 
+                        new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Namespace + "." + objClass.ClassName)),
+                        new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(objClass.ClassName))
+                    ));
+            }
+
+            CodeMemberMethod m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            m.Name = "ToList";
+            m.ReturnType = new CodeTypeReference("List", new CodeTypeReference("T"));
+            CodeTypeParameter ct = new CodeTypeParameter("T");
+            ct.Constraints.Add("IDataObject");
+            m.TypeParameters.Add(ct);
+            m.Statements.Add(new CodeSnippetExpression(@"return new List<T>(Objects.OfType<T>())"));
+
+            // XMLObject
+            c = new CodeTypeDeclaration("XMLObject");
+            ns.Types.Add(c);
+            c.IsClass = true;
+            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
+            c.CustomAttributes.Add(new CodeAttributeDeclaration("Serializable"));
+            c.CustomAttributes.Add(new CodeAttributeDeclaration("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("Object"))));
+
+            f = new CodeMemberField(new CodeTypeReference("BaseDataObject"), "Object");
+            c.Members.Add(f);
+            f.Attributes = MemberAttributes.Public;
+            foreach (ObjectClass objClass in objClassList)
+            {
+                f.CustomAttributes.Add(
+                    new CodeAttributeDeclaration("XmlElement",
+                        new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Namespace + "." + objClass.ClassName)),
+                        new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(objClass.ClassName))
+                    ));
+            }
+
+
+            // Generate the code & save
+            SaveFile(code, path + @"Kistl.Objects\ObjectSerializer.cs");
         }
         #endregion
 
@@ -139,21 +209,9 @@ namespace Kistl.Server
                     m.ReturnType = new CodeTypeReference("List", new CodeTypeReference(prop.DataType));
                     m.Parameters.Add(new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(int)), "ID"));
-                    m.Statements.Add(new CodeMethodReturnStatement(
-                        new CodeMethodInvokeExpression(
-                            new CodeMethodReferenceExpression(
-                                new CodeMethodInvokeExpression(
-                                    new CodeMethodReferenceExpression(
-                                        new CodeVariableReferenceExpression("Proxy.Service"), // TODO: Das ist C# spezifisch
-                                        "GetListOf"),
-                                        new CodeExpression[] {
-                                            new CodeSnippetExpression("Type"),
-                                            new CodeSnippetExpression("ID"),
-                                            new CodePrimitiveExpression(prop.PropertyName),
-                                        }),
-                                "FromXmlString",
-                                new CodeTypeReference("ObjectCollection") ),
-                                new CodeExpression[0]))); // TODO: To be continued .ToList<Kistl.App.Base.BaseProperty>(); fehlt noch
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(
+                        @"return Proxy.Service.GetListOf(Type, ID, ""{0}"").FromXmlString<XMLObjectCollection>().ToList<{1}>()",
+                        prop.PropertyName, prop.DataType)));
                 }
             }
         }

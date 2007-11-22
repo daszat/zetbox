@@ -206,6 +206,10 @@ namespace Kistl.Server
             xml.WriteEndElement(); // </MappingFragment>
 
             xml.WriteEndElement(); // </EntityTypeMapping>
+
+            // Und rekursiv runter...
+            obj.SubClasses.ToList().ForEach(
+                subObj => AddEntityTypeMapping(xml, subObj));
         }
 
         public void GenerateMSL(IQueryable<ObjectClass> objClassList)
@@ -228,14 +232,13 @@ namespace Kistl.Server
 
                 foreach (ObjectClass obj in objClassList)
                 {
+                    // Nur für Basisobjekte
                     if (obj.BaseObjectClass != null) continue;
 
                     xml.WriteStartElement("EntitySetMapping");
                     xml.WriteAttributeString("Name", obj.ClassName);
 
                     AddEntityTypeMapping(xml, obj);
-                    obj.SubClasses.ToList().ForEach(
-                        subObj => AddEntityTypeMapping(xml, subObj));
 
                     xml.WriteEndElement(); // </EntitySetMapping>
                 }
