@@ -30,6 +30,12 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
+        private System.Nullable<System.DateTime> _Geburtstag;
+        
+        private string _SVNr;
+        
+        private string _TelefonNummer;
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -73,6 +79,45 @@ namespace Kistl.App.Projekte
                 EntityCollection<Kistl.App.Projekte.Projekt> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt>("Model.FK_Projekt_Mitarbeiter", "B_Projekt");
                 if (!c.IsLoaded) c.Load(); 
                 return c;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<System.DateTime> Geburtstag
+        {
+            get
+            {
+                return _Geburtstag;
+            }
+            set
+            {
+                _Geburtstag = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public string SVNr
+        {
+            get
+            {
+                return _SVNr;
+            }
+            set
+            {
+                _SVNr = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public string TelefonNummer
+        {
+            get
+            {
+                return _TelefonNummer;
+            }
+            set
+            {
+                _TelefonNummer = value;
             }
         }
         

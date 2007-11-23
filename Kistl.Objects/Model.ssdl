@@ -75,6 +75,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -82,6 +83,9 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Geburtstag" Type="datetime" Nullable="true" />
+    <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
+    <Property Name="TelefonNummer" Type="nvarchar" MaxLength="50" Nullable="true" />
   </EntityType>
   <EntityType Name="Property">
     <Key>

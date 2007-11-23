@@ -1,9 +1,12 @@
 ﻿<UserControl x:Class="Kistl.Client.Controls.EditSimpleProperty"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" MinWidth="400" x:Name="EditCtrl">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+    MinWidth="400" x:Name="EditCtrl">
     <DockPanel >
         <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=Label}" />
-        <TextBox Text="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
-                 IsReadOnly="{Binding  ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}" />
+        <kevin:InfoTextBox Text="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                 IsReadOnly="{Binding  ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                 TextBoxInfo="{Binding  ElementName=EditCtrl, Path=ToolTip, UpdateSourceTrigger=PropertyChanged}"/>
     </DockPanel>
 </UserControl>

@@ -119,6 +119,7 @@ namespace Kistl.Client
                         Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
                         lst.SourceObjectType = this.ObjectType;
                         lst.Label = p.PropertyName;
+                        lst.ToolTip = p.AltText;
 
                         // aus Metadaten auslesen
                         lst.DestinationObjectType = new ObjectType(p.GetDataType());
@@ -132,6 +133,8 @@ namespace Kistl.Client
                     {
                         Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
                         pointer.Label = p.PropertyName;
+                        pointer.ToolTip = p.AltText;
+
                         // TODO: Das stiftet noch Verwirrung!
                         pointer.ObjectType = new ObjectType(p.GetDataType());
 
@@ -154,6 +157,44 @@ namespace Kistl.Client
                             }
                         }
                     }
+                    else if (p is Kistl.App.Base.BoolProperty)
+                    {
+                        // Neues Bearbeitungscontrol erzeugen
+                        Controls.EditBoolProperty boolCtrl = new Controls.EditBoolProperty();
+
+                        // Bezeichnung setzen
+                        boolCtrl.Label = p.PropertyName;
+                        boolCtrl.ToolTip = p.AltText;
+
+                        // Set Binding, damit werden Änderungen automatisch übernommen.
+                        Binding b = new Binding(p.PropertyName);
+                        b.Mode = BindingMode.TwoWay;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        b.NotifyOnTargetUpdated = true;
+                        boolCtrl.SetBinding(Controls.EditBoolProperty.ValueProperty, b);
+
+                        data.Children.Add(boolCtrl);
+                    }
+                    else if (p is Kistl.App.Base.DateTimeProperty)
+                    {
+                        // Neues Bearbeitungscontrol erzeugen
+                        Controls.EditDateTimeProperty dtCtrl = new Controls.EditDateTimeProperty();
+
+                        // Bezeichnung setzen
+                        dtCtrl.Label = p.PropertyName;
+                        dtCtrl.ToolTip = p.AltText;
+
+                        // Set Binding, damit werden Änderungen automatisch übernommen.
+                        Binding b = new Binding(p.PropertyName);
+                        b.Mode = BindingMode.TwoWay;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        b.NotifyOnTargetUpdated = true;
+                        dtCtrl.SetBinding(Controls.EditDateTimeProperty.ValueProperty, b);
+
+                        data.Children.Add(dtCtrl);
+                    }
                     else
                     {
                         // Neues Bearbeitungscontrol erzeugen
@@ -161,6 +202,7 @@ namespace Kistl.Client
 
                         // Bezeichnung setzen
                         txt.Label = p.PropertyName;
+                        txt.ToolTip = p.AltText;
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
                         Binding b = new Binding(p.PropertyName);

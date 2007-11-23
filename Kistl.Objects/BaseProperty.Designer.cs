@@ -34,6 +34,8 @@ namespace Kistl.App.Base
         
         private string _PropertyName;
         
+        private string _AltText;
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -99,6 +101,19 @@ namespace Kistl.App.Base
             set
             {
                 _PropertyName = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public string AltText
+        {
+            get
+            {
+                return _AltText;
+            }
+            set
+            {
+                _AltText = value;
             }
         }
         

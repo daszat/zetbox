@@ -36,6 +36,7 @@
         <MappingFragment StoreEntitySet="BaseProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+          <ScalarProperty Name="AltText" ColumnName="AltText" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
@@ -95,6 +96,9 @@
         <MappingFragment StoreEntitySet="Mitarbeiter">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
+          <ScalarProperty Name="SVNr" ColumnName="SVNr" />
+          <ScalarProperty Name="TelefonNummer" ColumnName="TelefonNummer" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

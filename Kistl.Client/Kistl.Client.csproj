@@ -73,6 +73,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\EditDateTimeProperty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EditBoolProperty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\EditPointerProperty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +115,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
+      <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditBoolProperty.xaml.cs">
+      <DependentUpon>EditBoolProperty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EditPointerProperty.xaml.cs">
       <DependentUpon>EditPointerProperty.xaml</DependentUpon>
     </Compile>
@@ -177,6 +191,10 @@
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
       <Name>Kistl.Server</Name>
       <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
+      <Project>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</Project>
+      <Name>WPFSamplesLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
