@@ -59,15 +59,13 @@ namespace Kistl.Server
 
                 var assocProperties = from p in ctx.GetTable<BaseProperty>()
                                       from o in objClassList
-                                      where p.ObjectClass.ID == o.ID
-                                            && p.IsAssociation.Value
-                                            && !p.IsList.Value
+                                      where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
                                       select p;
 
                 foreach (BaseProperty prop in assocProperties)
                 {
                     xml.WriteStartElement("AssociationSet");
-                    ObjectType otherType = new ObjectType(prop.DataType);
+                    ObjectType otherType = new ObjectType(prop.GetDataType());
                     string assocName = "FK_" + prop.ObjectClass.ClassName + "_" + otherType.Classname;
                     xml.WriteAttributeString("Name", assocName);
                     xml.WriteAttributeString("Association", "Model." + assocName);
@@ -113,36 +111,36 @@ namespace Kistl.Server
 
                     foreach (BaseProperty p in obj.Properties)
                     {
-                        if (p.IsList.Value && p.IsAssociation.Value)
+                        if (p is BackReferenceProperty)
                         {
                             xml.WriteStartElement("NavigationProperty");
                             xml.WriteAttributeString("Name", p.PropertyName);
-                            ObjectType otherType = new ObjectType(p.DataType);
+                            ObjectType otherType = new ObjectType(p.GetDataType());
                             string assocName = "FK_" + otherType.Classname + "_" + p.ObjectClass.ClassName;
                             xml.WriteAttributeString("Relationship", "Model." + assocName);
                             xml.WriteAttributeString("FromRole", "A_" + obj.ClassName);
                             xml.WriteAttributeString("ToRole", "B_" + otherType.Classname);
                             xml.WriteEndElement(); // </NavigationProperty>
                         }
-                        else if (!p.IsList.Value && p.IsAssociation.Value)
+                        else if (p is ObjectReferenceProperty)
                         {
                             xml.WriteStartElement("NavigationProperty");
                             xml.WriteAttributeString("Name", p.PropertyName.Replace("fk_", ""));
-                            ObjectType otherType = new ObjectType(p.DataType);
+                            ObjectType otherType = new ObjectType(p.GetDataType());
                             string assocName = "FK_" + p.ObjectClass.ClassName + "_" + otherType.Classname;
                             xml.WriteAttributeString("Relationship", "Model." + assocName);
                             xml.WriteAttributeString("FromRole", "B_" + obj.ClassName);
                             xml.WriteAttributeString("ToRole", "A_" + otherType.Classname);
                             xml.WriteEndElement(); // </NavigationProperty>
                         }
-                        else if (!p.IsList.Value && !p.IsAssociation.Value)
+                        else if (p is ValueTypeProperty)
                         {
                             xml.WriteStartElement("Property");
                             xml.WriteAttributeString("Name", p.PropertyName);
-                            xml.WriteAttributeString("Type", Type.GetType(p.DataType).Name);
-                            if (p.DataType == "System.String")
+                            xml.WriteAttributeString("Type", Type.GetType(p.GetDataType()).Name);
+                            if (p is StringProperty)
                             {
-                                xml.WriteAttributeString("MaxLength", "200");
+                                xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
                             }
                             xml.WriteAttributeString("Nullable", "true");
                             xml.WriteEndElement(); // </Property>
@@ -155,7 +153,7 @@ namespace Kistl.Server
                 foreach (BaseProperty prop in assocProperties)
                 {
                     xml.WriteStartElement("Association");
-                    ObjectType otherType = new ObjectType(prop.DataType);
+                    ObjectType otherType = new ObjectType(prop.GetDataType());
                     string assocName = "FK_" + prop.ObjectClass.ClassName + "_" + otherType.Classname;
                     xml.WriteAttributeString("Name", assocName);
 
@@ -193,10 +191,8 @@ namespace Kistl.Server
             xml.WriteAttributeString("ColumnName", "ID");
             xml.WriteEndElement(); // </ScalarProperty>
 
-            foreach (BaseProperty p in obj.Properties)
+            foreach (BaseProperty p in obj.Properties.OfType<ValueTypeProperty>())
             {
-                if (p.IsList.Value || p.IsAssociation.Value) continue;
-
                 xml.WriteStartElement("ScalarProperty");
                 xml.WriteAttributeString("Name", p.PropertyName);
                 xml.WriteAttributeString("ColumnName", p.PropertyName);
@@ -245,15 +241,13 @@ namespace Kistl.Server
 
                 var assocProperties = from p in ctx.GetTable<BaseProperty>()
                                       from o in objClassList
-                                      where p.ObjectClass.ID == o.ID
-                                            && p.IsAssociation.Value
-                                            && !p.IsList.Value
+                                      where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
                                       select p;
 
                 foreach (BaseProperty prop in assocProperties)
                 {
                     xml.WriteStartElement("AssociationSetMapping");
-                    ObjectType otherType = new ObjectType(prop.DataType);
+                    ObjectType otherType = new ObjectType(prop.GetDataType());
                     string assocName = "FK_" + prop.ObjectClass.ClassName + "_" + otherType.Classname;
                     xml.WriteAttributeString("Name", assocName);
                     xml.WriteAttributeString("TypeName", "Model." + assocName);
@@ -322,15 +316,13 @@ namespace Kistl.Server
 
                 var assocProperties = from p in ctx.GetTable<BaseProperty>()
                                       from o in objClassList
-                                      where p.ObjectClass.ID == o.ID
-                                            && p.IsAssociation.Value
-                                            && !p.IsList.Value
+                                      where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
                                       select p;
 
                 foreach (BaseProperty prop in assocProperties)
                 {
                     xml.WriteStartElement("AssociationSet");
-                    ObjectType otherType = new ObjectType(prop.DataType);
+                    ObjectType otherType = new ObjectType(prop.GetDataType());
                     string assocName = "FK_" + prop.ObjectClass.ClassName + "_" + otherType.Classname;
                     xml.WriteAttributeString("Name", assocName);
                     xml.WriteAttributeString("Association", "Model.Store." + assocName);
@@ -372,16 +364,14 @@ namespace Kistl.Server
                     }
                     xml.WriteEndElement(); // </Property>
 
-                    foreach (BaseProperty p in obj.Properties)
+                    foreach (BaseProperty p in obj.Properties.OfType<Property>())
                     {
-                        if (p.IsList.Value) continue;
-
                         xml.WriteStartElement("Property");
                         xml.WriteAttributeString("Name", p.PropertyName);
-                        xml.WriteAttributeString("Type", p.IsAssociation.Value ? "int" : GetDBType(p.DataType));
-                        if (p.DataType == "System.String")
+                        xml.WriteAttributeString("Type", p is ObjectReferenceProperty ? "int" : GetDBType(p.GetDataType()));
+                        if (p is StringProperty)
                         {
-                            xml.WriteAttributeString("MaxLength", "200");
+                            xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
                         }
                         xml.WriteAttributeString("Nullable", "true");
                         xml.WriteEndElement(); // </Property>
@@ -393,7 +383,7 @@ namespace Kistl.Server
                 foreach (BaseProperty prop in assocProperties)
                 {
                     xml.WriteStartElement("Association");
-                    ObjectType otherType = new ObjectType(prop.DataType);
+                    ObjectType otherType = new ObjectType(prop.GetDataType());
                     string assocName = "FK_" + prop.ObjectClass.ClassName + "_" + otherType.Classname;
                     xml.WriteAttributeString("Name", assocName);
 

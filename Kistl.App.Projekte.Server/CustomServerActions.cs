@@ -10,6 +10,7 @@ namespace Kistl.App.Projekte
     /// </summary>
     public partial class CustomServerActions : API.Server.ICustomServerActions
     {
+        #region Projekte
         /// <summary>
         /// PreSave für Projekte, beim Projektnamen "_action" hinzufügen.
         /// Sinnlos, aber ganz lustig
@@ -67,5 +68,72 @@ namespace Kistl.App.Projekte
                     obj.Name, obj.Aufwand);
             }
         }
+        #endregion
+
+        #region Method
+        void imp_OnToString_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.MethodName;
+        }
+        #endregion
+
+        #region ObjectClass
+        /// <summary>
+        /// ToString Event überschreiben
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="e"></param>
+        void ObjectClass_OnToString(Base.ObjectClass obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Namespace + "." + obj.ClassName;
+        }
+        #endregion
+
+        #region Properties
+        void impl_OnToString_BaseProperty(Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = string.Format("{0} {1}", obj.GetDataType(), obj.PropertyName);
+        }
+
+        void impl_OnGetDataType_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "<Invalid Datatype, please implement BaseProperty.GetDataType()>";
+        }
+
+        void impl_OnGetDataType_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.String";
+        }
+
+        void impl_OnGetDataType_DoubleProperty(Kistl.App.Base.DoubleProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Double";
+        }
+
+        void impl_OnGetDataType_BoolProperty(Kistl.App.Base.BoolProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Boolean";
+        }
+
+        void impl_OnGetDataType_IntProperty(Kistl.App.Base.IntProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Int32";
+        }
+
+        void impl_OnGetDataType_DateTimeProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.DateTime";
+        }
+
+        void impl_OnGetDataType_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.ReferenceObjectClassName;
+        }
+
+        void impl_OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.ReferenceObjectClassName;
+        }
+        #endregion
     }
 }

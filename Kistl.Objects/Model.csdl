@@ -7,6 +7,7 @@
     <EntitySet Name="BaseProperty" EntityType="Model.BaseProperty" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
     <EntitySet Name="Method" EntityType="Model.Method" />
+    <EntitySet Name="ObjectForDeletedProperties" EntityType="Model.ObjectForDeletedProperties" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -33,9 +34,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="ClassName" Type="String" MaxLength="200" Nullable="true" />
-    <Property Name="Namespace" Type="String" MaxLength="200" Nullable="true" />
-    <Property Name="TableName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="ClassName" Type="String" MaxLength="51" Nullable="true" />
+    <Property Name="Namespace" Type="String" MaxLength="100" Nullable="true" />
+    <Property Name="TableName" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Properties" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="A_ObjectClass" ToRole="B_BaseProperty" />
     <NavigationProperty Name="BaseObjectClass" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="B_ObjectClass" ToRole="A_ObjectClass" />
     <NavigationProperty Name="SubClasses" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
@@ -46,7 +47,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Tasks" Relationship="Model.FK_Task_Projekt" FromRole="A_Projekt" ToRole="B_Task" />
     <NavigationProperty Name="Mitarbeiter" Relationship="Model.FK_Projekt_Mitarbeiter" FromRole="B_Projekt" ToRole="A_Mitarbeiter" />
     <Property Name="AufwandGes" Type="Double" Nullable="true" />
@@ -56,7 +57,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="DatumVon" Type="DateTime" Nullable="true" />
     <Property Name="DatumBis" Type="DateTime" Nullable="true" />
     <Property Name="Aufwand" Type="Double" Nullable="true" />
@@ -68,20 +69,18 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectClass" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="B_BaseProperty" ToRole="A_ObjectClass" />
-    <Property Name="PropertyName" Type="String" MaxLength="200" Nullable="true" />
-    <Property Name="DataType" Type="String" MaxLength="200" Nullable="true" />
-    <Property Name="IsList" Type="Boolean" Nullable="true" />
-    <Property Name="IsAssociation" Type="Boolean" Nullable="true" />
+    <Property Name="PropertyName" Type="String" MaxLength="100" Nullable="true" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Projekte" Relationship="Model.FK_Projekt_Mitarbeiter" FromRole="A_Mitarbeiter" ToRole="B_Projekt" />
   </EntityType>
   <EntityType Name="Property" BaseType="Model.BaseProperty">
+    <Property Name="IsList" Type="Boolean" Nullable="true" />
     <Property Name="IsNullable" Type="Boolean" Nullable="true" />
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" />
@@ -94,19 +93,26 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectClass" Relationship="Model.FK_Method_ObjectClass" FromRole="B_Method" ToRole="A_ObjectClass" />
-    <Property Name="MethodName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="MethodName" Type="String" MaxLength="100" Nullable="true" />
   </EntityType>
   <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
-    <Property Name="fk_ObjectClassType" Type="Int32" Nullable="true" />
-    <Property Name="ObjectClassName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="ReferenceObjectClassName" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty">
     <Property Name="ReferenceObjectClassName" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="ReferencePropertyName" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ObjectForDeletedProperties">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DataType" Type="String" MaxLength="100" Nullable="true" />
+    <Property Name="IsAssociation" Type="Boolean" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />

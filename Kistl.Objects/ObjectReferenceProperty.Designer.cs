@@ -26,33 +26,18 @@ namespace Kistl.App.Base
     public class ObjectReferenceProperty : Kistl.App.Base.Property
     {
         
-        private System.Nullable<int> _fk_ObjectClassType;
-        
-        private string _ObjectClassName;
+        private string _ReferenceObjectClassName;
         
         [EdmScalarPropertyAttribute()]
-        public System.Nullable<int> fk_ObjectClassType
+        public string ReferenceObjectClassName
         {
             get
             {
-                return _fk_ObjectClassType;
+                return _ReferenceObjectClassName;
             }
             set
             {
-                _fk_ObjectClassType = value;
-            }
-        }
-        
-        [EdmScalarPropertyAttribute()]
-        public string ObjectClassName
-        {
-            get
-            {
-                return _ObjectClassName;
-            }
-            set
-            {
-                _ObjectClassName = value;
+                _ReferenceObjectClassName = value;
             }
         }
         

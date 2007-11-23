@@ -26,7 +26,22 @@ namespace Kistl.App.Base
     public class Property : Kistl.App.Base.BaseProperty
     {
         
+        private System.Nullable<bool> _IsList;
+        
         private System.Nullable<bool> _IsNullable;
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<bool> IsList
+        {
+            get
+            {
+                return _IsList;
+            }
+            set
+            {
+                _IsList = value;
+            }
+        }
         
         [EdmScalarPropertyAttribute()]
         public System.Nullable<bool> IsNullable

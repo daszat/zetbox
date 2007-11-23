@@ -60,6 +60,7 @@
     <Compile Include="Method.Designer.cs" />
     <Compile Include="Mitarbeiter.Designer.cs" />
     <Compile Include="ObjectClass.Designer.cs" />
+    <Compile Include="ObjectForDeletedProperties.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Designer.cs" />
     <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Projekt.Designer.cs" />

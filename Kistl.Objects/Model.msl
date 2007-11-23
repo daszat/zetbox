@@ -36,14 +36,12 @@
         <MappingFragment StoreEntitySet="BaseProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
-          <ScalarProperty Name="DataType" ColumnName="DataType" />
-          <ScalarProperty Name="IsList" ColumnName="IsList" />
-          <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
         <MappingFragment StoreEntitySet="Property">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -81,8 +79,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
         <MappingFragment StoreEntitySet="ObjectReferenceProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="fk_ObjectClassType" ColumnName="fk_ObjectClassType" />
-          <ScalarProperty Name="ObjectClassName" ColumnName="ObjectClassName" />
+          <ScalarProperty Name="ReferenceObjectClassName" ColumnName="ReferenceObjectClassName" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
@@ -106,6 +103,15 @@
         <MappingFragment StoreEntitySet="Method">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectForDeletedProperties">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectForDeletedProperties)">
+        <MappingFragment StoreEntitySet="ObjectForDeletedProperties">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

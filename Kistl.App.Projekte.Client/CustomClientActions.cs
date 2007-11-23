@@ -76,39 +76,54 @@ namespace Kistl.App.Projekte
             e.Result = string.Format("{0} {1}", obj.GetDataType(), obj.PropertyName);
         }
 
+        void impl_OnToString_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "* " + e.Result;
+        }
+
+        void impl_OnToString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "-> " + e.Result;
+        }
+
         void impl_OnGetDataType_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.DataType;
+            e.Result = "<Invalid Datatype, please implement BaseProperty.GetDataType()>";
         }
 
         void impl_OnGetDataType_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = "string";
+            e.Result = "System.String";
         }
 
         void impl_OnGetDataType_DoubleProperty(Kistl.App.Base.DoubleProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = "double";
+            e.Result = "System.Double";
         }
 
         void impl_OnGetDataType_BoolProperty(Kistl.App.Base.BoolProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = "bool";
+            e.Result = "System.Boolean";
         }
 
         void impl_OnGetDataType_IntProperty(Kistl.App.Base.IntProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = "int";
+            e.Result = "System.Int32";
         }
 
         void impl_OnGetDataType_DateTimeProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = "datetime";
+            e.Result = "System.DateTime";
         }
 
         void impl_OnGetDataType_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = " -> " + obj.DataType;
+            e.Result = obj.ReferenceObjectClassName;
+        }
+
+        void impl_OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.ReferenceObjectClassName;
         }
         #endregion
     }

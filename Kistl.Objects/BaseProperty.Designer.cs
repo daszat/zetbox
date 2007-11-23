@@ -34,12 +34,6 @@ namespace Kistl.App.Base
         
         private string _PropertyName;
         
-        private string _DataType;
-        
-        private System.Nullable<bool> _IsList;
-        
-        private System.Nullable<bool> _IsAssociation;
-        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -105,45 +99,6 @@ namespace Kistl.App.Base
             set
             {
                 _PropertyName = value;
-            }
-        }
-        
-        [EdmScalarPropertyAttribute()]
-        public string DataType
-        {
-            get
-            {
-                return _DataType;
-            }
-            set
-            {
-                _DataType = value;
-            }
-        }
-        
-        [EdmScalarPropertyAttribute()]
-        public System.Nullable<bool> IsList
-        {
-            get
-            {
-                return _IsList;
-            }
-            set
-            {
-                _IsList = value;
-            }
-        }
-        
-        [EdmScalarPropertyAttribute()]
-        public System.Nullable<bool> IsAssociation
-        {
-            get
-            {
-                return _IsAssociation;
-            }
-            set
-            {
-                _IsAssociation = value;
             }
         }
         

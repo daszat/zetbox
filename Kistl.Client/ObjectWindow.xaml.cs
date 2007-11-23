@@ -114,26 +114,26 @@ namespace Kistl.Client
                 // Aus Metadaten holen
                 foreach (Kistl.App.Base.BaseProperty p in objClassClient.GetListOfProperties(objClass.ID))
                 {
-                    if (p.IsList.Value && p.IsAssociation.Value)
+                    if (p is Kistl.App.Base.BackReferenceProperty)
                     {
                         Controls.ObjectList lst = new Kistl.Client.Controls.ObjectList();
                         lst.SourceObjectType = this.ObjectType;
                         lst.Label = p.PropertyName;
 
                         // aus Metadaten auslesen
-                        lst.DestinationObjectType = new ObjectType(p.DataType);
+                        lst.DestinationObjectType = new ObjectType(p.GetDataType());
 
                         lst.ObjectID = this.ObjectID;
                         lst.PropertyName = p.PropertyName;
 
                         data.Children.Add(lst);
                     }
-                    else if (!p.IsList.Value && p.IsAssociation.Value)
+                    else if (p is Kistl.App.Base.ObjectReferenceProperty)
                     {
                         Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
                         pointer.Label = p.PropertyName;
                         // TODO: Das stiftet noch Verwirrung!
-                        pointer.ObjectType = new ObjectType(p.DataType);
+                        pointer.ObjectType = new ObjectType(p.GetDataType());
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
                         Binding b = new Binding(p.PropertyName);
@@ -153,10 +153,6 @@ namespace Kistl.Client
                                 obj.GetType().GetProperty(p.PropertyName).SetValue(obj, SourceObjectID, new object[] { });
                             }
                         }
-                    }
-                    else if (p.IsList.Value && !p.IsAssociation.Value)
-                    {
-                        // Reine Listen werden noch nicht unterstützt
                     }
                     else
                     {

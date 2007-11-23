@@ -85,6 +85,14 @@ namespace Kistl.App.Projekte
             {
                 App.Base.ObjectReferenceProperty impl = obj as App.Base.ObjectReferenceProperty;
                 impl.OnGetDataType_ObjectReferenceProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.ObjectReferenceProperty>(impl_OnGetDataType_ObjectReferenceProperty);
+                impl.OnToString_ObjectReferenceProperty += new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectReferenceProperty>(impl_OnToString_ObjectReferenceProperty);
+            }
+            
+            if (obj is App.Base.BackReferenceProperty)
+            {
+                App.Base.BackReferenceProperty impl = obj as App.Base.BackReferenceProperty;
+                impl.OnGetDataType_BackReferenceProperty += new Kistl.App.Base.BaseProperty.GetDataType_Handler<Kistl.App.Base.BackReferenceProperty>(impl_OnGetDataType_BackReferenceProperty);
+                impl.OnToString_BackReferenceProperty += new Kistl.API.ToStringHandler<Kistl.App.Base.BackReferenceProperty>(impl_OnToString_BackReferenceProperty);
             }
         }
     }

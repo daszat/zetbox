@@ -63,6 +63,7 @@
     <Compile Include="Method.Client.Designer.cs" />
     <Compile Include="Mitarbeiter.Client.Designer.cs" />
     <Compile Include="ObjectClass.Client.Designer.cs" />
+    <Compile Include="ObjectForDeletedProperties.Client.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
