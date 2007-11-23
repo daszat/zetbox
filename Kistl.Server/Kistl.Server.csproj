@@ -97,6 +97,7 @@
     <None Include="Database\Database.01.sql" />
     <None Include="Database\Database.02.sql" />
     <None Include="Database\Database.03.sql" />
+    <None Include="Database\Database.05.sql" />
     <None Include="obj\Database.03.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

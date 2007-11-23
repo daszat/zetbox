@@ -25,6 +25,20 @@ namespace Kistl.Client.Controls
     /// </summary>
     public partial class ObjectList : UserControl
     {
+
+        static ObjectList()
+        {
+            SelectionChangedEvent = EventManager.RegisterRoutedEvent("SelectionChanged", RoutingStrategy.Bubble,
+                            typeof(SelectionChangedEventHandler), typeof(ObjectList));
+        }
+
+        public static RoutedEvent SelectionChangedEvent;
+        public event SelectionChangedEventHandler SelectionChanged
+        {
+            add { AddHandler(SelectionChangedEvent, value); }
+            remove { RemoveHandler(SelectionChangedEvent, value); }
+        }        
+        
         public ObjectList()
         {
             InitializeComponent();
@@ -194,6 +208,13 @@ namespace Kistl.Client.Controls
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             Bind();
+        }
+
+        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectionChangedEventArgs args = new SelectionChangedEventArgs(
+                SelectionChangedEvent, e.RemovedItems, e.AddedItems);
+            RaiseEvent(args);
         }
     }
 }

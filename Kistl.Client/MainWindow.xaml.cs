@@ -23,6 +23,15 @@ namespace Kistl.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        static MainWindow()
+        {
+            ChangeCenter = new RoutedUICommand("Change Center", "ChangeCenter", typeof(MainWindow));
+
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(ChangeCenter,
+                new ExecutedRoutedEventHandler(ExecuteChangeCenter),
+                new CanExecuteRoutedEventHandler(CanExecuteChangeCenter)));
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +52,33 @@ namespace Kistl.Client
                 Helper.HandleError(ex);
             }
         }
+
+
+        private static void ExecuteChangeCenter(object sender, ExecutedRoutedEventArgs e)
+        {
+            ObjNode theThing = (ObjNode)e.Parameter;
+
+            ((MainWindow)sender).InstanceChangeCenter(theThing);
+        }
+
+        private void InstanceChangeCenter(ObjNode thing)
+        {
+            try
+            {
+                graph.CenterObject = thing;
+            }
+            catch
+            {
+            }
+        }
+
+        private static void CanExecuteChangeCenter(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+
+        public static readonly RoutedUICommand ChangeCenter;
 
         /// <summary>
         /// Und auf wieder sehen!
@@ -77,5 +113,86 @@ namespace Kistl.Client
                 Helper.HandleError(ex);
             }
         }
+
+        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                InstanceChangeCenter(null);
+                InstanceChangeCenter(new ObjNode((BaseDataObject)e.AddedItems[0]));
+            }
+        }
+    }
+
+    internal class NodeTemplateSelector : DataTemplateSelector
+    {
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        {
+            ObjNode n = item as ObjNode;
+            BaseDataObject obj = n.Item;
+            // return (DataTemplate)((FrameworkElement)container).FindResource("specialTemplate");
+            return (DataTemplate)((FrameworkElement)container).FindResource("nodeTemplate");
+        }
+    }
+
+    internal class ObjNode : DependencyObject
+    {
+        public ObjNode(Kistl.API.BaseDataObject obj)
+        {
+            Item = obj;
+        }
+
+        public List<ObjNode> SubItems
+        {
+            get 
+            {
+                List<ObjNode> result = new List<ObjNode>();
+
+                try
+                {
+                    Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.
+                        First(o => o.Namespace == Item.Type.Namespace && o.ClassName == Item.Type.Classname);
+
+                    IClientObject client = Helper.GetClientObject(Item.Type);
+                    Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
+
+                    List<Kistl.App.Base.BaseProperty> properties = objClassClient.GetListOfProperties(objClass.ID);
+
+                    foreach (Kistl.App.Base.BackReferenceProperty p in properties.OfType<Kistl.App.Base.BackReferenceProperty>())
+                    {
+                        client.GetListOfGeneric(Item.ID, p.PropertyName).
+                            OfType<BaseDataObject>().ToList().ForEach(o => result.Add(new ObjNode(o)));
+                    }
+
+                    foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
+                    {
+                        IClientObject pClient = Helper.GetClientObject(new ObjectType(p.ReferenceObjectClassName));
+                        BaseDataObject item = (BaseDataObject)pClient.GetObjectGeneric((int)Item.
+                            GetType().GetProperty(p.PropertyName).GetValue(Item, null));
+                        if (item != null)
+                        {
+                            // Kann überraschenderweise null sein
+                            result.Add(new ObjNode(item));
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                }
+
+                return result;
+            }
+        }
+
+        public Kistl.API.BaseDataObject Item
+        {
+            get { return (Kistl.API.BaseDataObject)GetValue(ItemProperty); }
+            set { SetValue(ItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Item.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemProperty =
+            DependencyProperty.Register("Item", typeof(Kistl.API.BaseDataObject), typeof(ObjNode));
     }
 }
