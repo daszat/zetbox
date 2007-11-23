@@ -1,0 +1,93 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</ProjectGuid>
+    <AssemblyName>WPFSamplesLib</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <OutputType>library</OutputType>
+    <!-- Most people will use Publish dialog in Visual Studio to increment this -->
+    <RootNamespace>Microsoft.Samples.KMoore.WPFSamples</RootNamespace>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BlockBar\BlockBar.cs" />
+    <Compile Include="BlockBar\CircleBlockBar.cs" />
+    <Compile Include="BlockBar\RectBlockBar.cs" />
+    <Compile Include="DatePicker\DatePicker.cs" />
+    <Compile Include="DatePicker\DateTimeValueConverter.cs" />
+    <Compile Include="DatePicker\DatePickerHelper.cs" />
+    <Compile Include="DatePicker\InvalidEntryEventArgs.cs" />
+    <Compile Include="ListPager\ListBase.cs" />
+    <Compile Include="ListPager\ListPager.cs" />
+    <Compile Include="ListPager\UIListPager.cs" />
+    <Compile Include="MonthCalendar\CalendarDataGenerator.cs" />
+    <Compile Include="MonthCalendar\CalendarDate.cs" />
+    <Compile Include="MonthCalendar\Converters.cs" />
+    <Compile Include="MonthCalendar\DateSelectionChangedEventArgs.cs" />
+    <Compile Include="MonthCalendar\MonthCalendarHelper.cs" />
+    <Compile Include="MonthCalendar\MonthCalendar.cs" />
+    <Compile Include="MonthCalendar\MonthCalendarContainer.cs" />
+    <Compile Include="MonthCalendar\MonthCalendarDayHeaderWeekNumber.cs" />
+    <Compile Include="MonthCalendar\MonthCalendarItem.cs" />
+    <Compile Include="MonthCalendar\MonthCalendarTitle.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NumericUpDown\NumericUpDown.cs" />
+    <Compile Include="InfoTextBox\InfoTextBox.cs" />
+    <Compile Include="ColorPicker\ColorPicker.cs" />
+    <Compile Include="TreeViewHelperClasses\TreeViewDataItem.cs" />
+    <Compile Include="TreeViewHelperClasses\TreeViewHelper.cs" />
+    <Compile Include="Graph\Graph.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Luna.NormalColor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\ColorPicker.generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\DateControls.generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
