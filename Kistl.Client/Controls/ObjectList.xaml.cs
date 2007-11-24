@@ -54,7 +54,7 @@ namespace Kistl.Client.Controls
             try
             {
                 // Client BL holen
-                IClientObject client = Helper.GetClientObject(SourceObjectType);
+                IClientObject client = ClientObjectFactory.GetClientObject(SourceObjectType);
 
                 if (string.IsNullOrEmpty(PropertyName))
                 {
@@ -160,7 +160,7 @@ namespace Kistl.Client.Controls
                 ObjectType resultObjectType = this.DestinationObjectType;
 
                 Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
-                Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.First(o => o.Namespace == DestinationObjectType.Namespace && o.ClassName == DestinationObjectType.Classname);
+                Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[DestinationObjectType]; //.First(o => o.GetObject<Kistl.App.Base.Module>("Module").Namespace == DestinationObjectType.Namespace && o.ClassName == DestinationObjectType.Classname);
 
                 if (client.GetListOfSubClasses(objClass.ID).Count > 0)
                 {
@@ -170,7 +170,7 @@ namespace Kistl.Client.Controls
 
                     if (dlg.ShowDialog() == true)
                     {
-                        resultObjectType = new ObjectType(dlg.ResultObjectClass.Namespace, dlg.ResultObjectClass.ClassName);
+                        resultObjectType = new ObjectType(dlg.ResultObjectClass.GetObject<Kistl.App.Base.Module>("Module").Namespace, dlg.ResultObjectClass.ClassName);
                     }
                     else
                     {

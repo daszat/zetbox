@@ -20,10 +20,10 @@ namespace Kistl.App.Base
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using Kistl.API.Client;
+    using Kistl.API.Server;
     
     
-    public sealed class ObjectForDeletedPropertiesClient : ClientObject<ObjectForDeletedProperties>
+    public sealed class ModuleServer : ServerObject<Module>
     {
     }
 }

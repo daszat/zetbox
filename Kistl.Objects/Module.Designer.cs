@@ -22,17 +22,15 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectForDeletedProperties")]
-    public class ObjectForDeletedProperties : BaseDataObject
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Module")]
+    public class Module : BaseDataObject
     {
         
         private int _ID = Helper.INVALIDID;
         
         private string _Namespace;
         
-        private string _DataType;
-        
-        private System.Nullable<bool> _IsAssociation;
+        private string _ModuleName;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -51,7 +49,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return "ObjectForDeletedProperties";
+                return "Module";
             }
         }
         
@@ -69,44 +67,43 @@ namespace Kistl.App.Base
         }
         
         [EdmScalarPropertyAttribute()]
-        public string DataType
+        public string ModuleName
         {
             get
             {
-                return _DataType;
+                return _ModuleName;
             }
             set
             {
-                _DataType = value;
+                _ModuleName = value;
             }
         }
         
-        [EdmScalarPropertyAttribute()]
-        public System.Nullable<bool> IsAssociation
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_Module", "B_ObjectClass")]
+        [XmlIgnore()]
+        public EntityCollection<Kistl.App.Base.ObjectClass> ObjectClasses
         {
             get
             {
-                return _IsAssociation;
-            }
-            set
-            {
-                _IsAssociation = value;
+                EntityCollection<Kistl.App.Base.ObjectClass> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectClass>("Model.FK_ObjectClass_Module", "B_ObjectClass");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
             }
         }
         
-        public event ToStringHandler<ObjectForDeletedProperties> OnToString_ObjectForDeletedProperties;
+        public event ToStringHandler<Module> OnToString_Module;
         
-        public event ObjectEventHandler<ObjectForDeletedProperties> OnPreSave_ObjectForDeletedProperties;
+        public event ObjectEventHandler<Module> OnPreSave_Module;
         
-        public event ObjectEventHandler<ObjectForDeletedProperties> OnPostSave_ObjectForDeletedProperties;
+        public event ObjectEventHandler<Module> OnPostSave_Module;
         
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_ObjectForDeletedProperties != null)
+            if (OnToString_Module != null)
             {
-                OnToString_ObjectForDeletedProperties(this, e);
+                OnToString_Module(this, e);
             }
             return e.Result;
         }
@@ -114,13 +111,13 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ObjectForDeletedProperties != null) OnPreSave_ObjectForDeletedProperties(this);
+            if (OnPreSave_Module != null) OnPreSave_Module(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ObjectForDeletedProperties != null) OnPostSave_ObjectForDeletedProperties(this);
+            if (OnPostSave_Module != null) OnPostSave_Module(this);
         }
     }
 }

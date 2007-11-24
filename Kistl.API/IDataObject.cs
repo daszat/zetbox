@@ -23,6 +23,12 @@ namespace Kistl.API
         string EntitySetName { get; }
 
         /// <summary>
+        /// Typ des Objectes
+        /// </summary>
+        ObjectType Type { get; }
+
+
+        /// <summary>
         /// Zum Melden, dass sich das Datenobjekt geänder hat.
         /// </summary>
         void NotifyChange();

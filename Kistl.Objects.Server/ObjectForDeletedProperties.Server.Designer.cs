@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Delete
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;

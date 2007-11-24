@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.App.Base;
+using Kistl.API.Client;
 
 namespace Kistl.App.Projekte
 {
@@ -58,15 +60,25 @@ namespace Kistl.App.Projekte
         }
         #endregion
 
+        #region Module
+        void impl_OnToString_Module(Kistl.App.Base.Module obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.ModuleName;
+        }
+        #endregion
+
         #region ObjectClass
         /// <summary>
         /// ToString Event überschreiben
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        void ObjectClass_OnToString(Base.ObjectClass obj, Kistl.API.MethodReturnEventArgs<string> e)
+        void ObjectClass_OnToString(ObjectClass obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Namespace + "." + obj.ClassName;
+            //Kistl.App.Base.ModuleClient mClient = new Kistl.App.Base.ModuleClient();
+            //Kistl.App.Base.Module m = mClient.GetObject(obj.fk_Module);
+            //e.Result = m.Namespace + "." + obj.ClassName;
+            e.Result = obj.GetObject<Module>("Module").Namespace + "." + obj.ClassName;
         }
         #endregion
 

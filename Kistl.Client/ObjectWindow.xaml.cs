@@ -77,7 +77,7 @@ namespace Kistl.Client
         {
             Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
 
-            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.First(o => o.Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
+            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[ObjectType]; //.First(o => o.GetObject<Kistl.App.Base.Module>("Module").Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
             List<Kistl.App.Base.ObjectClass> objClasses = new List<Kistl.App.Base.ObjectClass>();
             while (objClass != null)
             {
@@ -89,7 +89,7 @@ namespace Kistl.Client
                 }
                 else
                 {
-                    objClass = Helper.ObjectClasses.First(o => o.ID == objClass.fk_BaseObjectClass);
+                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
                 }
             }
 
@@ -239,7 +239,7 @@ namespace Kistl.Client
             try
             {
                 // Client BL holen
-                client = Helper.GetClientObject(ObjectType);
+                client = ClientObjectFactory.GetClientObject(ObjectType);
 
                 // Je nachdem, Objekt vom Server holen oder mittels BL erzeugen
                 // TODO: Das holen solte auch in die BL rein & Typisiert werden.

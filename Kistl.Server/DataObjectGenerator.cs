@@ -101,8 +101,8 @@ namespace Kistl.Server
             foreach (ObjectClass objClass in objClassList)
             {
                 f.CustomAttributes.Add(
-                    new CodeAttributeDeclaration("XmlArrayItem", 
-                        new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Namespace + "." + objClass.ClassName)),
+                    new CodeAttributeDeclaration("XmlArrayItem",
+                        new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Module.Namespace + "." + objClass.ClassName)),
                         new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(objClass.ClassName))
                     ));
             }
@@ -132,7 +132,7 @@ namespace Kistl.Server
             {
                 f.CustomAttributes.Add(
                     new CodeAttributeDeclaration("XmlElement",
-                        new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Namespace + "." + objClass.ClassName)),
+                        new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Module.Namespace + "." + objClass.ClassName)),
                         new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(objClass.ClassName))
                     ));
             }
@@ -149,7 +149,7 @@ namespace Kistl.Server
             CodeCompileUnit code = new CodeCompileUnit();
 
             // Create Namespace
-            CodeNamespace ns = new CodeNamespace(objClass.Namespace);
+            CodeNamespace ns = new CodeNamespace(objClass.Module.Namespace);
             code.Namespaces.Add(ns);
 
             AddDefaultNamespaces(ns);
@@ -166,7 +166,7 @@ namespace Kistl.Server
             CodeCompileUnit code = new CodeCompileUnit();
 
             // Create Namespace
-            CodeNamespace ns = new CodeNamespace(objClass.Namespace);
+            CodeNamespace ns = new CodeNamespace(objClass.Module.Namespace);
             code.Namespaces.Add(ns);
 
             AddDefaultNamespaces(ns);
@@ -223,7 +223,7 @@ namespace Kistl.Server
             GenerateEdmRelationshipAttribute(objClass, code);
             
             // Create Namespace
-            CodeNamespace ns = new CodeNamespace(objClass.Namespace);
+            CodeNamespace ns = new CodeNamespace(objClass.Module.Namespace);
             code.Namespaces.Add(ns);
 
             // Add using Statements
@@ -236,7 +236,7 @@ namespace Kistl.Server
             c.TypeAttributes = TypeAttributes.Public;
             if (objClass.BaseObjectClass != null)
             {
-                c.BaseTypes.Add(objClass.BaseObjectClass.Namespace + "." + objClass.BaseObjectClass.ClassName);
+                c.BaseTypes.Add(objClass.BaseObjectClass.Module.Namespace + "." + objClass.BaseObjectClass.ClassName);
             }
             else
             {
@@ -294,7 +294,7 @@ namespace Kistl.Server
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
                 new CodeAttributeArgument(
-                    new CodeTypeOfExpression(prop.ObjectClass.Namespace + "." + prop.ObjectClass.ClassName))
+                    new CodeTypeOfExpression(prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName))
                     ));
             }
         }
@@ -523,7 +523,7 @@ namespace Kistl.Server
         private void GenerateObjectReferenceProperty(ObjectClass objClass, ObjectReferenceProperty prop, CodeTypeDeclaration c)
         {
             // Check if Datatype exits
-            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
+            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}", 
                     prop.GetDataType(), objClass.ClassName, prop.PropertyName));
 
@@ -589,7 +589,7 @@ namespace Kistl.Server
         private void GenerateBackReferenceProperty(ObjectClass objClass, BackReferenceProperty prop, CodeTypeDeclaration c)
         {
             // Check if Datatype exits
-            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
+            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on BackReferenceProperty {1}.{2}",
                     prop.GetDataType(), objClass.ClassName, prop.PropertyName));
 

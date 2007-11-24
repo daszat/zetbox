@@ -45,7 +45,7 @@ namespace Kistl.Client
                 Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
                 lst.SourceObjectType = client.Type;
 
-                this.DataContext = Helper.ObjectClasses;
+                this.DataContext = Helper.ObjectClasses.Values;
             }
             catch (Exception ex)
             {
@@ -65,6 +65,7 @@ namespace Kistl.Client
         {
             try
             {
+                graph.CenterObject = null;
                 graph.CenterObject = thing;
             }
             catch
@@ -104,7 +105,7 @@ namespace Kistl.Client
                 {
                     // Neue Objekttypen setzen & neu Binden
                     // TODO: Man sollte gleich das ObjektClass Objekt übergeben.
-                    lst.SourceObjectType = new ObjectType(objClass.Namespace, objClass.ClassName);
+                    lst.SourceObjectType = new ObjectType(objClass.GetObject<Kistl.App.Base.Module>("Module").Namespace, objClass.ClassName);
                     lst.Bind();
                 }
             }
@@ -118,8 +119,7 @@ namespace Kistl.Client
         {
             if (e.AddedItems.Count > 0)
             {
-                InstanceChangeCenter(null);
-                InstanceChangeCenter(new ObjNode((BaseDataObject)e.AddedItems[0]));
+                InstanceChangeCenter(new ObjNode((BaseDataObject)e.AddedItems[0], true));
             }
         }
     }
@@ -130,17 +130,22 @@ namespace Kistl.Client
         {
             ObjNode n = item as ObjNode;
             BaseDataObject obj = n.Item;
-            // return (DataTemplate)((FrameworkElement)container).FindResource("specialTemplate");
-            return (DataTemplate)((FrameworkElement)container).FindResource("nodeTemplate");
+            if(n.IsCenter)
+                return (DataTemplate)((FrameworkElement)container).FindResource("specialTemplate");
+            else
+                return (DataTemplate)((FrameworkElement)container).FindResource("nodeTemplate");
         }
     }
 
     internal class ObjNode : DependencyObject
     {
-        public ObjNode(Kistl.API.BaseDataObject obj)
+        public ObjNode(Kistl.API.BaseDataObject obj, bool isCenter)
         {
+            IsCenter = isCenter;
             Item = obj;
         }
+
+        public bool IsCenter { get; set; }
 
         public List<ObjNode> SubItems
         {
@@ -150,10 +155,9 @@ namespace Kistl.Client
 
                 try
                 {
-                    Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses.
-                        First(o => o.Namespace == Item.Type.Namespace && o.ClassName == Item.Type.Classname);
+                    Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[Item.Type];
 
-                    IClientObject client = Helper.GetClientObject(Item.Type);
+                    IClientObject client = ClientObjectFactory.GetClientObject(Item.Type);
                     Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
 
                     List<Kistl.App.Base.BaseProperty> properties = objClassClient.GetListOfProperties(objClass.ID);
@@ -161,18 +165,18 @@ namespace Kistl.Client
                     foreach (Kistl.App.Base.BackReferenceProperty p in properties.OfType<Kistl.App.Base.BackReferenceProperty>())
                     {
                         client.GetListOfGeneric(Item.ID, p.PropertyName).
-                            OfType<BaseDataObject>().ToList().ForEach(o => result.Add(new ObjNode(o)));
+                            OfType<BaseDataObject>().ToList().ForEach(o => result.Add(new ObjNode(o, false)));
                     }
 
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
                     {
-                        IClientObject pClient = Helper.GetClientObject(new ObjectType(p.ReferenceObjectClassName));
+                        IClientObject pClient = ClientObjectFactory.GetClientObject(new ObjectType(p.ReferenceObjectClassName));
                         BaseDataObject item = (BaseDataObject)pClient.GetObjectGeneric((int)Item.
                             GetType().GetProperty(p.PropertyName).GetValue(Item, null));
                         if (item != null)
                         {
                             // Kann überraschenderweise null sein
-                            result.Add(new ObjNode(item));
+                            result.Add(new ObjNode(item, false));
                         }
                     }
                 }

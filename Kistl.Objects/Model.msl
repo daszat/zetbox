@@ -6,7 +6,6 @@
         <MappingFragment StoreEntitySet="ObjectClass">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-          <ScalarProperty Name="Namespace" ColumnName="Namespace" />
           <ScalarProperty Name="TableName" ColumnName="TableName" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -114,8 +113,18 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectForDeletedProperties)">
         <MappingFragment StoreEntitySet="ObjectForDeletedProperties">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Namespace" ColumnName="Namespace" />
           <ScalarProperty Name="DataType" ColumnName="DataType" />
           <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Module">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
+        <MappingFragment StoreEntitySet="Module">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Namespace" ColumnName="Namespace" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -163,6 +172,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_ObjectClass" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ObjectClass_Module" TypeName="Model.FK_ObjectClass_Module" StoreEntitySet="ObjectClass">
+      <EndProperty Name="A_Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module" />
+      </EndProperty>
+      <EndProperty Name="B_ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

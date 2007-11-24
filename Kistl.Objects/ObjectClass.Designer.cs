@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass))]
 
 namespace Kistl.App.Base
 {
@@ -32,11 +33,11 @@ namespace Kistl.App.Base
         
         private string _ClassName;
         
-        private string _Namespace;
-        
         private string _TableName;
         
         private int _fk_BaseObjectClass = Helper.INVALIDID;
+        
+        private int _fk_Module = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -69,19 +70,6 @@ namespace Kistl.App.Base
             set
             {
                 _ClassName = value;
-            }
-        }
-        
-        [EdmScalarPropertyAttribute()]
-        public string Namespace
-        {
-            get
-            {
-                return _Namespace;
-            }
-            set
-            {
-                _Namespace = value;
             }
         }
         
@@ -165,6 +153,40 @@ namespace Kistl.App.Base
                 EntityCollection<Kistl.App.Base.Method> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Method>("Model.FK_Method_ObjectClass", "B_Method");
                 if (!c.IsLoaded) c.Load(); 
                 return c;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_Module", "A_Module")]
+        [XmlIgnore()]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_ObjectClass_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_ObjectClass_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Module
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Module == Helper.INVALIDID && Module != null)
+                {
+                    _fk_Module = Module.ID;
+                }
+                return _fk_Module;
+            }
+            set
+            {
+                _fk_Module = value;
             }
         }
         

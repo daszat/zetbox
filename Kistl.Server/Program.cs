@@ -18,14 +18,16 @@ namespace Kistl.Server
         {
             if (args.Length > 0)
             {
-                if (args[0].Contains("generate"))
+                try
                 {
-                    try
-                    {
-                        Console.WriteLine("Generating Code...");
+                    // Start Server
+                    API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
 
-                        // Start Server
-                        API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
+                    bool actiondone = false;
+                    if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("generate"))))
+                    {
+                        actiondone = true;
+                        Console.WriteLine("Generating Code...");
 
                         DataObjectGenerator g = new DataObjectGenerator();
                         EntityFrameworkModelGenerator gEF = new EntityFrameworkModelGenerator();
@@ -34,20 +36,30 @@ namespace Kistl.Server
                             g.Generate(ctx, Helper.CodeGenPath);
                             gEF.Generate(ctx, Helper.CodeGenPath);
                         }
+                        Console.WriteLine("Generation Code finished!");
                     }
-                    catch (Exception ex)
+                    if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("database"))))
                     {
-                        Helper.HandleError(ex);
+                        actiondone = true;
+                        DatabaseGenerator g = new DatabaseGenerator();
+                        using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+                        {
+                            g.Generate(ctx);
+                        }
                     }
 
-                    Console.WriteLine("Generation Code finished!");
+                    if(!actiondone)
+                    {
+                        Console.WriteLine("Usage: Kistl.Server [options]");
+                        Console.WriteLine("  With no options: Starts the server");
+                        Console.WriteLine("  -generate: Generates Objects & EF-Model");
+                        Console.WriteLine("  -database: Updates the Database");
+                        Console.WriteLine("  -?: Displays this help");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Usage: Kistl.Server [options]");
-                    Console.WriteLine("  With no options: Starts the server");
-                    Console.WriteLine("  -generate: Generates Objects & EF-Model");
-                    Console.WriteLine("  -?: Displays this help");
+                    Helper.HandleError(ex);
                 }
             }
             else

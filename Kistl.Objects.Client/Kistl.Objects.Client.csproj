@@ -62,6 +62,7 @@
     <Compile Include="IntProperty.Client.Designer.cs" />
     <Compile Include="Method.Client.Designer.cs" />
     <Compile Include="Mitarbeiter.Client.Designer.cs" />
+    <Compile Include="Module.Client.Designer.cs" />
     <Compile Include="ObjectClass.Client.Designer.cs" />
     <Compile Include="ObjectForDeletedProperties.Client.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Client.Designer.cs" />

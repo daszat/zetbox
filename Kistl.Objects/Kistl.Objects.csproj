@@ -59,6 +59,7 @@
     <Compile Include="IntProperty.Designer.cs" />
     <Compile Include="Method.Designer.cs" />
     <Compile Include="Mitarbeiter.Designer.cs" />
+    <Compile Include="Module.Designer.cs" />
     <Compile Include="ObjectClass.Designer.cs" />
     <Compile Include="ObjectForDeletedProperties.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Designer.cs" />

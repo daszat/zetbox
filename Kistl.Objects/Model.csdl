@@ -8,6 +8,7 @@
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="ObjectForDeletedProperties" EntityType="Model.ObjectForDeletedProperties" />
+    <EntitySet Name="Module" EntityType="Model.Module" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -28,6 +29,10 @@
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_Method" EntitySet="Method" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_Module" Association="Model.FK_ObjectClass_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -35,12 +40,12 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ClassName" Type="String" MaxLength="51" Nullable="true" />
-    <Property Name="Namespace" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="TableName" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Properties" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="A_ObjectClass" ToRole="B_BaseProperty" />
     <NavigationProperty Name="BaseObjectClass" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="B_ObjectClass" ToRole="A_ObjectClass" />
     <NavigationProperty Name="SubClasses" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
     <NavigationProperty Name="Methods" Relationship="Model.FK_Method_ObjectClass" FromRole="A_ObjectClass" ToRole="B_Method" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_ObjectClass_Module" FromRole="B_ObjectClass" ToRole="A_Module" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -115,8 +120,18 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Namespace" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="DataType" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="IsAssociation" Type="Boolean" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Namespace" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="ModuleName" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="ObjectClasses" Relationship="Model.FK_ObjectClass_Module" FromRole="A_Module" ToRole="B_ObjectClass" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
@@ -137,5 +152,9 @@
   <Association Name="FK_Method_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_Method" Type="Model.Method" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ObjectClass_Module">
+    <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
+    <End Role="B_ObjectClass" Type="Model.ObjectClass" Multiplicity="*" />
   </Association>
 </Schema>

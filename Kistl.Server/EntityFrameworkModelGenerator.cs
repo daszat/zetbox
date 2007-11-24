@@ -368,7 +368,7 @@ namespace Kistl.Server
                     {
                         xml.WriteStartElement("Property");
                         xml.WriteAttributeString("Name", p.PropertyName);
-                        xml.WriteAttributeString("Type", p is ObjectReferenceProperty ? "int" : GetDBType(p.GetDataType()));
+                        xml.WriteAttributeString("Type", p is ObjectReferenceProperty ? "int" : Helper.GetDBType(p.GetDataType()));
                         if (p is StringProperty)
                         {
                             xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
@@ -422,29 +422,6 @@ namespace Kistl.Server
 
                 xml.WriteEndElement(); // </Schema>
             }
-        }
-        #endregion
-
-        #region GetDBType
-        private string GetDBType(string clrType)
-        {
-            Type t = Type.GetType(clrType, false, false);
-
-            // TODO: Lang lebe der Pfusch!
-            if (t == null) return "unknown"; 
-
-            // TODO: Get from Metadata
-            if(t == typeof(int))
-                return "int";
-            if(t == typeof(string))
-                return "nvarchar";
-            if(t == typeof(double))
-                return "float";
-            if(t == typeof(bool))
-                return "bit";
-            if (t == typeof(DateTime))
-                return "datetime";
-            return "unknown";
         }
         #endregion
     }

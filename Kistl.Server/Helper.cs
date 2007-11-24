@@ -27,5 +27,28 @@ namespace Kistl.Server
                 return @"c:\temp\KistlCodeGen";
             }
         }
+
+        #region GetDBType
+        public static string GetDBType(string clrType)
+        {
+            Type t = Type.GetType(clrType, false, false);
+
+            // TODO: Lang lebe der Pfusch!
+            if (t == null) return "unknown";
+
+            // TODO: Get from Metadata
+            if (t == typeof(int))
+                return "int";
+            if (t == typeof(string))
+                return "nvarchar";
+            if (t == typeof(double))
+                return "float";
+            if (t == typeof(bool))
+                return "bit";
+            if (t == typeof(DateTime))
+                return "datetime";
+            return "unknown";
+        }
+        #endregion
     }
 }

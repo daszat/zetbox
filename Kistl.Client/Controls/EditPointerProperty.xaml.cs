@@ -58,7 +58,7 @@ namespace Kistl.Client.Controls
 
         private void LoadList()
         {
-            IClientObject client = Helper.GetClientObject(ObjectType);
+            IClientObject client = ClientObjectFactory.GetClientObject(ObjectType);
             cbValues.ItemsSource = client.GetListGeneric();
         }
 

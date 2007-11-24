@@ -53,6 +53,30 @@ namespace Kistl.API.Client
     /// <param name="obj"></param>
     public delegate void ClientObjectHandler<T>(T obj) where T : class, IDataObject, new();
 
+
+    public class ClientObjectFactory
+    {
+        /// <summary>
+        /// Helper Function for generic access
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static IClientObject GetClientObject(ObjectType type)
+        {
+            if (type == null) throw new ArgumentException("Type is null");
+            if (string.IsNullOrEmpty(type.FullNameClientObject)) throw new ArgumentException("Type is empty");
+
+            Type t = Type.GetType(type.FullNameClientObject);
+            if (t == null) throw new ApplicationException("Invalid Type " + type);
+
+            IClientObject obj = Activator.CreateInstance(t) as IClientObject;
+            if (obj == null) throw new ApplicationException("Cannot create instance");
+
+            return obj;
+        }
+    }
+
+
     /// <summary>
     /// Basis Client BL implementierung. Erzeugt und verwaltet typisierte Objekte.
     /// TODO: Die Servicemethoden ebenfalls implementieren (Service über ein Kontext-Objekt holen)

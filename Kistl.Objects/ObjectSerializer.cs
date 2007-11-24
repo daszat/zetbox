@@ -42,7 +42,8 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectReferenceProperty), ElementName="ObjectReferenceProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.DateTimeProperty), ElementName="DateTimeProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
-        [XmlArrayItem(Type=typeof(Kistl.App.Delete.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
         public List<BaseDataObject> Objects = new List<BaseDataObject>();
         
         public List<T> ToList<T>()
@@ -72,7 +73,8 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectReferenceProperty), ElementName="ObjectReferenceProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.DateTimeProperty), ElementName="DateTimeProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
-        [XmlElement(Type=typeof(Kistl.App.Delete.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
+        [XmlElement(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
+        [XmlElement(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
         public BaseDataObject Object;
     }
 }

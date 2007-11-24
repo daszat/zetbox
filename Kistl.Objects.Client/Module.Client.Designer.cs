@@ -23,7 +23,13 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class ObjectForDeletedPropertiesClient : ClientObject<ObjectForDeletedProperties>
+    public sealed class ModuleClient : ClientObject<Module>
     {
+        
+        // Autogeneriert, um die gebundenen Listen zu bekommen
+        public List<Kistl.App.Base.ObjectClass> GetListOfObjectClasses(int ID)
+        {
+            return Proxy.Service.GetListOf(Type, ID, "ObjectClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
+        }
     }
 }
