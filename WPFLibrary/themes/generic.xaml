@@ -8,6 +8,7 @@
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="/WPFSamplesLib;component/Themes/ColorPicker.generic.xaml" />
     <ResourceDictionary Source="/WPFSamplesLib;component/Themes/DateControls.generic.xaml" />
+    <ResourceDictionary Source="/WPFSamplesLib;component/Themes/Zap.Generic.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
   <!--

@@ -337,7 +337,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
         // Using a DependencyProperty as the backing store for LinePen.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LinePenProperty =
             DependencyProperty.Register("LinePen", typeof(Pen), typeof(Graph), new PropertyMetadata(GetPen()));
-        
+
         private static Pen GetPen()
         {
             if (DefaultPen == null)
@@ -537,7 +537,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
         }
 
         private static bool updateGraphCP(GraphContentPresenter graphContentPresenter, Vector forceVector,
-        double coefficientOfDampening, double frameRate, Point parentCenter)
+                            double coefficientOfDampening, double frameRate, Point parentCenter)
         {
             bool parentCenterChanged = (graphContentPresenter.ParentCenter != parentCenter);
             if (parentCenterChanged)
@@ -579,6 +579,8 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
         private void KillGCP(GraphContentPresenter gcp, bool isCenter)
         {
             Debug.Assert(VisualTreeHelper.GetParent(gcp) == this);
+
+            this.InvalidateVisual();
 
             _fadingGCPs.Add(_fadingGCPsNextKey, gcp);
             _fadingGCPListValid = false;
@@ -708,7 +710,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
                     if (newCenterPresenter == null)
                     {
                         _centerObjectPresenter = GetGraphContentPresenter(CenterObject,
-                            _nodeTemplateBinding, _nodeTemplateSelectorBinding
+                            _nodeTemplateBinding, _nodeTemplateSelectorBinding, false
                             );
                         this.AddVisualChild(_centerObjectPresenter);
                     }
@@ -747,7 +749,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
                     if (newChildren[i] == null)
                     {
                         GraphContentPresenter gcp = GetGraphContentPresenter(_nodesInUse[i],
-                            _nodeTemplateBinding, _nodeTemplateSelectorBinding);
+                            _nodeTemplateBinding, _nodeTemplateSelectorBinding, true);
                         this.AddVisualChild(gcp);
                         newChildren[i] = gcp;
                     }
@@ -878,7 +880,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
                 if (newNodes[i] == null)
                 {
                     newNodes[i] = GetGraphContentPresenter(nodes[i],
-                        _nodeTemplateBinding, _nodeTemplateSelectorBinding);
+                        _nodeTemplateBinding, _nodeTemplateSelectorBinding, true);
                     this.AddVisualChild(newNodes[i]);
                 }
             }
@@ -905,7 +907,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
         {
             Debug.Assert(_centerObjectPresenter == null);
 
-            _centerObjectPresenter = GetGraphContentPresenter(newCenter, _nodeTemplateBinding, _nodeTemplateSelectorBinding);
+            _centerObjectPresenter = GetGraphContentPresenter(newCenter, _nodeTemplateBinding, _nodeTemplateSelectorBinding, false);
             this.AddVisualChild(_centerObjectPresenter);
 
             _isChildCountValid = false;
@@ -919,8 +921,8 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
                 return (IList)GetValue(NodesProperty);
             }
         }
-        private static readonly DependencyProperty NodesProperty = DependencyProperty.Register(
-            "Nodes", typeof(IList), typeof(Graph), getNodesPropertyMetadata());
+        private static readonly DependencyProperty NodesProperty = DependencyProperty.Register (
+            "Nodes", typeof( IList), typeof(Graph), getNodesPropertyMetadata());
 
         private static PropertyMetadata getNodesPropertyMetadata()
         {
@@ -948,9 +950,10 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
             _nodeCollectionChanged = true;
         }
 
-        private GraphContentPresenter GetGraphContentPresenter(object content, BindingBase nodeTemplateBinding, BindingBase nodeTemplateSelectorBinding)
+        private GraphContentPresenter GetGraphContentPresenter(object content, BindingBase nodeTemplateBinding,
+            BindingBase nodeTemplateSelectorBinding, bool offsetCenter)
         {
-            GraphContentPresenter gcp = new GraphContentPresenter(content, nodeTemplateBinding, nodeTemplateSelectorBinding);
+            GraphContentPresenter gcp = new GraphContentPresenter(content, nodeTemplateBinding, nodeTemplateSelectorBinding, offsetCenter);
 
             _needsMeasure.Add(gcp);
             _needsArrange.Add(gcp);
@@ -1019,7 +1022,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
         {
 
             public GraphContentPresenter(object content,
-            BindingBase nodeTemplateBinding, BindingBase nodeTemplateSelectorBinding)
+            BindingBase nodeTemplateBinding, BindingBase nodeTemplateSelectorBinding, bool offsetCenter)
                 : base()
             {
                 base.Content = content;
@@ -1030,7 +1033,14 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
 
 
                 ScaleTransform = new ScaleTransform();
-                _translateTransform = new TranslateTransform();
+                if (offsetCenter)
+                {
+                    _translateTransform = new TranslateTransform(Rnd.NextDouble() - .5, Rnd.NextDouble() - .5);
+                }
+                else
+                {
+                    _translateTransform = new TranslateTransform();
+                }
 
                 TransformGroup tg = new TransformGroup();
                 tg.Children.Add(ScaleTransform);
@@ -1264,8 +1274,8 @@ namespace Microsoft.Samples.KMoore.WPFSamples.Graph
 
         private static readonly Vector VerticalVector = new Vector(0, 1);
         private static readonly Vector HorizontalVector = new Vector(1, 0);
-        private static readonly Duration HideDuration = new Duration(new TimeSpan(0, 0, 1));
-        private static readonly Duration ShowDuration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
+        private static readonly Duration HideDuration = new Duration (new TimeSpan(0, 0, 1));
+        private static readonly Duration ShowDuration = new Duration (new TimeSpan( 0, 0, 0, 0, 500));
 
         private static readonly TimeSpan MaxSettleTime = new TimeSpan(0, 0, 8);
 

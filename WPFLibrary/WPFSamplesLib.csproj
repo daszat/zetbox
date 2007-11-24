@@ -66,6 +66,10 @@
     <Compile Include="TreeViewHelperClasses\TreeViewDataItem.cs" />
     <Compile Include="TreeViewHelperClasses\TreeViewHelper.cs" />
     <Compile Include="Graph\Graph.cs" />
+    <Compile Include="Zap\ZapDecorator.cs" />
+    <Compile Include="Zap\ZapItemsControl.cs" />
+    <Compile Include="Zap\ZapPanel.cs" />
+    <Compile Include="Zap\ZapScroller.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\generic.xaml">
@@ -85,6 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\DateControls.generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Zap.Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
