@@ -242,8 +242,6 @@ namespace Kistl.Client
                 client = ClientObjectFactory.GetClientObject(ObjectType);
 
                 // Je nachdem, Objekt vom Server holen oder mittels BL erzeugen
-                // TODO: Das holen solte auch in die BL rein & Typisiert werden.
-                // allerdings brauchts dann zwei Methodenarten: Die generischen & typisierten
                 if (ObjectID != API.Helper.INVALIDID)
                 {
                     obj = client.GetObjectGeneric(ObjectID);

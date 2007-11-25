@@ -9,16 +9,14 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.API;
 
-namespace Kistl.Server
+namespace Kistl.Server.Generators.SQLServer
 {
     /// <summary>
     /// Erzeugt die SQL Server Datenbank
     /// Das Objektmodell hat keine Ahnung von der Datenbank, 
     /// also keine GetTableName, GetColumnName etc. Funktionen.
-    /// TODO: Das muss etwas generischer mit Interfaces aufgebaut werden, damit
-    /// man auch andere Datenbanken unterstützen kann
     /// </summary>
-    public class DatabaseGenerator
+    public class SQLServerDatabaseGenerator : IDatabaseGenerator
     {
         private SqlConnection db = null;
         private SqlTransaction tx = null;
@@ -146,7 +144,7 @@ namespace Kistl.Server
             }
             else
             {
-                sb.Append(Helper.GetDBType(p.GetDataType()));
+                sb.Append(SQLServerHelper.GetDBType(p.GetDataType()));
             }
 
             if (p is StringProperty)

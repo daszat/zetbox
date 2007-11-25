@@ -57,9 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseGenerator.cs" />
-    <Compile Include="DataObjectGenerator.cs" />
-    <Compile Include="EntityFrameworkModelGenerator.cs" />
+    <Compile Include="Generators\DatabaseGenerator.cs" />
+    <Compile Include="Generators\Exceptions.cs" />
+    <Compile Include="Generators\MappingGenerator.cs" />
+    <Compile Include="Generators\DataObjectGenerator.cs" />
+    <Compile Include="Generators\SQLServer\SQLServerDatabaseGenerator.cs" />
+    <Compile Include="Generators\SQLServer\SQLServerDataObjectGenerator.cs" />
+    <Compile Include="Generators\SQLServer\SQLServerEntityFrameworkModelGenerator.cs" />
+    <Compile Include="Generators\SQLServer\SQLServerHelper.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="CustomActionsManagerServer.cs" />
     <Compile Include="Program.cs" />

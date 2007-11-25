@@ -12,18 +12,18 @@ using System.Reflection;
 using System.Collections;
 using Kistl.API;
 
-namespace Kistl.Server
+namespace Kistl.Server.Generators.SQLServer
 {
-    public class DataObjectGenerator
+    public class SQLServerDataObjectGenerator : IDataObjectGenerator
     {
         private string path = "";
         private Kistl.API.Server.KistlDataContext ctx = null;
 
         public void Generate(Kistl.API.Server.KistlDataContext ctx, string path)
         {
+            this.ctx = ctx;
             Console.WriteLine("Generating Objects...");
             this.path = path + (path.EndsWith("\\") ? "" : "\\");
-            this.ctx = ctx;
 
             var objClassList = from c in ctx.GetTable<ObjectClass>()
                                select c;

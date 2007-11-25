@@ -35,22 +35,6 @@ namespace Kistl.Client
         public MainWindow()
         {
             InitializeComponent();
-
-            // DesingMode? -> raus
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-
-            try
-            {
-                // Hole eine Liste aller ObjectClasses Objekte & zeige sie in der DropDown an
-                Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
-                lst.SourceObjectType = client.Type;
-
-                this.DataContext = Helper.ObjectClasses.Values;
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex);
-            }
         }
 
 
@@ -120,6 +104,35 @@ namespace Kistl.Client
             if (e.AddedItems.Count > 0)
             {
                 InstanceChangeCenter(new ObjNode((BaseDataObject)e.AddedItems[0], true));
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // DesingMode? -> raus
+                if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+                SplashScreen.SetInfo("Loading Objects");
+                try
+                {
+                    // Hole eine Liste aller ObjectClasses Objekte & zeige sie in der DropDown an
+                    Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
+                    lst.SourceObjectType = client.Type;
+
+                    this.DataContext = Helper.ObjectClasses.Values;
+                }
+                catch (Exception ex)
+                {
+                    Helper.HandleError(ex);
+                }
+
+                SplashScreen.HideSplashScreen();
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex);
             }
         }
     }

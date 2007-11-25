@@ -5,9 +5,9 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.API;
 
-namespace Kistl.Server
+namespace Kistl.Server.Generators.SQLServer
 {
-    public class EntityFrameworkModelGenerator
+    public class SQLServerEntityFrameworkModelGenerator : IMappingGenerator
     {
         private string path = "";
         private Kistl.API.Server.KistlDataContext ctx = null;
@@ -368,7 +368,7 @@ namespace Kistl.Server
                     {
                         xml.WriteStartElement("Property");
                         xml.WriteAttributeString("Name", p.PropertyName);
-                        xml.WriteAttributeString("Type", p is ObjectReferenceProperty ? "int" : Helper.GetDBType(p.GetDataType()));
+                        xml.WriteAttributeString("Type", p is ObjectReferenceProperty ? "int" : SQLServerHelper.GetDBType(p.GetDataType()));
                         if (p is StringProperty)
                         {
                             xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());

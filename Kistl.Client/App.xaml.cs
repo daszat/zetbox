@@ -17,6 +17,7 @@ namespace Kistl.Client
         /// </summary>
         public App()
         {
+            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 3);
             API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
 
             this.Startup += new StartupEventHandler(App_Startup);
@@ -52,6 +53,7 @@ namespace Kistl.Client
         /// <param name="e"></param>
         void App_Startup(object sender, StartupEventArgs e)
         {
+            SplashScreen.SetInfo("Starting Server");
             // Create a new AppDomain for the Server!
             // Damit trennt man den Server schön brav vom Client & kann 
             // ObjectBrokerFactory.Init zwei mal aufrufen :-)

@@ -85,9 +85,10 @@ namespace Kistl.API.Server
 
 
     /// <summary>
-    /// Basis Objekt für Server BL. Implementiert Linq to SQL.
-    /// TODO: Für die Custom Actions ist das noch nicht gut genug typisiert. 
-    /// Es reicht einmal für den generischen Teil.
+    /// Basis Objekt für die generische Server BL. Implementiert Linq
+    /// Das ist nur für den generischen Teil gedacht, alle anderen Custom Actions
+    /// können mit Linq auf den Context direkt zugreifen, da die Actions am Objekt & am Context
+    /// selbst implementiert sind
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ServerObject<T> : IServerObject where T : BaseDataObject, IDataObject, new()
@@ -140,19 +141,6 @@ namespace Kistl.API.Server
 
             PropertyInfo pi = typeof(T).GetProperty(property);
             if (pi == null) throw new ArgumentException("Property does not exist");
-
-            // die Properties liefern eine EntityCollection<> zurück
-            // diese lässt sich nicht XML serialisieren
-            // daher -> umwandeln in eine List<>
-            // Zuerst rausfinden, um welchen Typ es sich handelt
-            // danach die List<> erzeugen & im Konstruktor die EntityCollection<> übergeben
-            // -> fertig!
-            // TODO: Rausfinden ob das langsam ist & wenn ja, dann Cachen!
-            // Type[] innerTypes = pi.PropertyType.GetGenericArguments();
-            // Type tList = typeof(List<>).MakeGenericType(innerTypes);
-            // object list = Activator.CreateInstance(tList, pi.GetValue(obj, null));
-
-            // return list.ToXmlString();
 
             XMLObjectCollection result = new XMLObjectCollection();
             IEnumerable v = (IEnumerable)pi.GetValue(obj, null);

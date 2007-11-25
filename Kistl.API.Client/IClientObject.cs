@@ -79,8 +79,6 @@ namespace Kistl.API.Client
 
     /// <summary>
     /// Basis Client BL implementierung. Erzeugt und verwaltet typisierte Objekte.
-    /// TODO: Die Servicemethoden ebenfalls implementieren (Service über ein Kontext-Objekt holen)
-    /// Damit erhält man typisierte Service Calls.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ClientObject<T> : IClientObject where T : BaseDataObject, IDataObject, new()

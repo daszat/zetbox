@@ -4,7 +4,7 @@
     xmlns:my="clr-namespace:Kistl.Client.Controls"
     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.Graph;assembly=WPFSamplesLib"
     xmlns:local="clr-namespace:Kistl.Client"
-    Title="Kistl Main Window" Height="480" Width="640">
+    Title="Kistl Main Window" Height="480" Width="640" Loaded="Window_Loaded">
     <Window.Resources>
         <local:NodeTemplateSelector x:Key="nodeTemplateSelector" />
     </Window.Resources>

@@ -48,7 +48,12 @@ namespace Kistl.API.Server
 
         private Dictionary<Type, object> _table = new Dictionary<Type, object>();
 
-        public ObjectQuery<T> GetTable<T>()
+        /// <summary>
+        /// Return IQueryable to make it possible to use alternative LINQ Provider
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IQueryable<T> GetTable<T>()
         {
             Type t = typeof(T);
             if (!_table.ContainsKey(t))

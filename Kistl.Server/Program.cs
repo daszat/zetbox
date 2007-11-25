@@ -29,22 +29,22 @@ namespace Kistl.Server
                         actiondone = true;
                         Console.WriteLine("Generating Code...");
 
-                        DataObjectGenerator g = new DataObjectGenerator();
-                        EntityFrameworkModelGenerator gEF = new EntityFrameworkModelGenerator();
+                        Generators.IDataObjectGenerator gDataObjects = Generators.DataObjectGeneratorFactory.GetGenerator();
+                        Generators.IMappingGenerator gMapping = Generators.MappingGeneratorFactory.GetGenerator();
                         using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
                         {
-                            g.Generate(ctx, Helper.CodeGenPath);
-                            gEF.Generate(ctx, Helper.CodeGenPath);
+                            gDataObjects.Generate(ctx, Helper.CodeGenPath);
+                            gMapping.Generate(ctx, Helper.CodeGenPath);
                         }
                         Console.WriteLine("Generation Code finished!");
                     }
                     if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("database"))))
                     {
                         actiondone = true;
-                        DatabaseGenerator g = new DatabaseGenerator();
+                        Generators.IDatabaseGenerator gDatabase = Generators.DatabaseGeneratorFactory.GetGenerator();
                         using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
                         {
-                            g.Generate(ctx);
+                            gDatabase.Generate(ctx);
                         }
                     }
 
