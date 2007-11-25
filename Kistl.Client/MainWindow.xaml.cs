@@ -169,11 +169,16 @@ namespace Kistl.Client
                 try
                 {
                     Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[Item.Type];
+                    List<Kistl.App.Base.BaseProperty> properties = new List<Kistl.App.Base.BaseProperty>();
 
                     IClientObject client = ClientObjectFactory.GetClientObject(Item.Type);
                     Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
 
-                    List<Kistl.App.Base.BaseProperty> properties = objClassClient.GetListOfProperties(objClass.ID);
+                    while (objClass != null)
+                    {
+                        properties.AddRange(objClassClient.GetListOfProperties(objClass.ID));
+                        objClass = objClass.GetObject<Kistl.App.Base.ObjectClass>("BaseObjectClass");
+                    }
 
                     foreach (Kistl.App.Base.BackReferenceProperty p in properties.OfType<Kistl.App.Base.BackReferenceProperty>())
                     {

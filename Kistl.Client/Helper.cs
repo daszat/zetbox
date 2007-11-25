@@ -30,8 +30,12 @@ namespace Kistl.Client
                 if (_ObjectClasses == null)
                 {
                     _ObjectClasses = new Dictionary<ObjectType,Kistl.App.Base.ObjectClass>();
-                    Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
-                    client.GetList().ForEach(o => _ObjectClasses.Add(new ObjectType(o.GetObject<Kistl.App.Base.Module>("Module").Namespace, o.ClassName), o));
+                    Kistl.App.Base.ObjectClassClient clientObjectClasses = new Kistl.App.Base.ObjectClassClient();
+                    Kistl.App.Base.ModuleClient clientModules = new Kistl.App.Base.ModuleClient();
+                    Dictionary<int, Kistl.App.Base.Module> modules = new Dictionary<int, Kistl.App.Base.Module>();
+                    clientModules.GetList().ForEach(m => modules[m.ID] = m);
+                    clientObjectClasses.GetList().ForEach(o => _ObjectClasses.Add(
+                        new ObjectType(modules[o.fk_Module].Namespace, o.ClassName), o));
                 }
 
                 return _ObjectClasses;
