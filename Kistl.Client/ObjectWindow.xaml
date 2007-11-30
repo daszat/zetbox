@@ -1,6 +1,7 @@
 ﻿<Window x:Class="Kistl.Client.ObjectWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:client="clr-namespace:Kistl.Client"
     Title="ObjectWindow" Height="480" Width="640"
     Loaded="Window_Loaded" SourceUpdated="Window_SourceUpdated" >
     <DockPanel>
@@ -15,6 +16,9 @@
                         <Setter Property="Margin" Value="5,5,5,0" />
                     </Style>
                 </StackPanel.Resources>
+                <client:UndoManager.SharedUndoScope>
+                    <client:UndoManager />
+                </client:UndoManager.SharedUndoScope>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>
