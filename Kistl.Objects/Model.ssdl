@@ -75,11 +75,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Projekt" Type="int" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="DatumVon" Type="datetime" Nullable="true" />
     <Property Name="DatumBis" Type="datetime" Nullable="true" />
     <Property Name="Aufwand" Type="float" Nullable="true" />
-    <Property Name="fk_Projekt" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="BaseProperty">
     <Key>
@@ -165,8 +165,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="ReferenceObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="ReferencePropertyName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="fk_ReferenceProperty" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="ObjectForDeletedProperties">
@@ -178,6 +176,7 @@
     <Property Name="DataType" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="IsAssociation" Type="bit" Nullable="true" />
     <Property Name="ReferenceObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ReferencePropertyName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Module">
     <Key>

@@ -70,11 +70,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Projekt" Relationship="Model.FK_Task_Projekt" FromRole="B_Task" ToRole="A_Projekt" />
     <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="DatumVon" Type="DateTime" Nullable="true" />
     <Property Name="DatumBis" Type="DateTime" Nullable="true" />
     <Property Name="Aufwand" Type="Double" Nullable="true" />
-    <NavigationProperty Name="Projekt" Relationship="Model.FK_Task_Projekt" FromRole="B_Task" ToRole="A_Projekt" />
   </EntityType>
   <EntityType Name="BaseProperty">
     <Key>
@@ -120,8 +120,6 @@
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty">
-    <Property Name="ReferenceObjectClassName" Type="String" MaxLength="200" Nullable="true" />
-    <Property Name="ReferencePropertyName" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="ReferenceProperty" Relationship="Model.FK_BackReferenceProperty_ObjectReferenceProperty" FromRole="B_BackReferenceProperty" ToRole="A_ObjectReferenceProperty" />
   </EntityType>
   <EntityType Name="ObjectForDeletedProperties">
@@ -133,6 +131,7 @@
     <Property Name="DataType" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="IsAssociation" Type="Boolean" Nullable="true" />
     <Property Name="ReferenceObjectClassName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="ReferencePropertyName" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Module">
     <Key>

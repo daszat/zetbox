@@ -28,37 +28,7 @@ namespace Kistl.App.Base
     public class BackReferenceProperty : Kistl.App.Base.BaseProperty
     {
         
-        private string _ReferenceObjectClassName;
-        
-        private string _ReferencePropertyName;
-        
         private int _fk_ReferenceProperty = Helper.INVALIDID;
-        
-        [EdmScalarPropertyAttribute()]
-        public string ReferenceObjectClassName
-        {
-            get
-            {
-                return _ReferenceObjectClassName;
-            }
-            set
-            {
-                _ReferenceObjectClassName = value;
-            }
-        }
-        
-        [EdmScalarPropertyAttribute()]
-        public string ReferencePropertyName
-        {
-            get
-            {
-                return _ReferencePropertyName;
-            }
-            set
-            {
-                _ReferencePropertyName = value;
-            }
-        }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty", "A_ObjectReferenceProperty")]
         [XmlIgnore()]

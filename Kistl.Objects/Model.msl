@@ -84,8 +84,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
         <MappingFragment StoreEntitySet="BackReferenceProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ReferenceObjectClassName" ColumnName="ReferenceObjectClassName" />
-          <ScalarProperty Name="ReferencePropertyName" ColumnName="ReferencePropertyName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,6 +114,7 @@
           <ScalarProperty Name="DataType" ColumnName="DataType" />
           <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
           <ScalarProperty Name="ReferenceObjectClassName" ColumnName="ReferenceObjectClassName" />
+          <ScalarProperty Name="ReferencePropertyName" ColumnName="ReferencePropertyName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

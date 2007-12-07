@@ -135,7 +135,6 @@ namespace Kistl.Client
                         pointer.Label = p.PropertyName;
                         pointer.ToolTip = p.AltText;
 
-                        // TODO: Das stiftet noch Verwirrung!
                         pointer.ObjectType = new ObjectType(p.GetDataType());
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.

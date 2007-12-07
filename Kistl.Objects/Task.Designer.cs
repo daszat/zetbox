@@ -30,6 +30,8 @@ namespace Kistl.App.Projekte
         
         private int _ID = Helper.INVALIDID;
         
+        private int _fk_Projekt = Helper.INVALIDID;
+        
         private string _Name;
         
         private System.Nullable<System.DateTime> _DatumVon;
@@ -37,8 +39,6 @@ namespace Kistl.App.Projekte
         private System.Nullable<System.DateTime> _DatumBis;
         
         private System.Nullable<double> _Aufwand;
-        
-        private int _fk_Projekt = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -58,6 +58,40 @@ namespace Kistl.App.Projekte
             get
             {
                 return "Task";
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "A_Projekt")]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Projekt
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
+                {
+                    _fk_Projekt = Projekt.ID;
+                }
+                return _fk_Projekt;
+            }
+            set
+            {
+                _fk_Projekt = value;
             }
         }
         
@@ -110,40 +144,6 @@ namespace Kistl.App.Projekte
             set
             {
                 _Aufwand = value;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "A_Projekt")]
-        [XmlIgnore()]
-        public Kistl.App.Projekte.Projekt Projekt
-        {
-            get
-            {
-                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "A_Projekt");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "A_Projekt");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
-            }
-        }
-        
-        public int fk_Projekt
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
-                {
-                    _fk_Projekt = Projekt.ID;
-                }
-                return _fk_Projekt;
-            }
-            set
-            {
-                _fk_Projekt = value;
             }
         }
         

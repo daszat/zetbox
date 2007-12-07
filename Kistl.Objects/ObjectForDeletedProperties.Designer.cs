@@ -36,6 +36,9 @@ namespace Kistl.App.Base
         
         private string _ReferenceObjectClassName;
         
+       
+        private string _ReferencePropertyName;
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -106,6 +109,20 @@ namespace Kistl.App.Base
             set
             {
                 _ReferenceObjectClassName = value;
+            }
+        }
+        
+       
+        [EdmScalarPropertyAttribute()]
+        public string ReferencePropertyName
+        {
+            get
+            {
+                return _ReferencePropertyName;
+            }
+            set
+            {
+                _ReferencePropertyName = value;
             }
         }
         
