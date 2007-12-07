@@ -116,6 +116,7 @@ namespace Kistl.API.Client
 
         public IDataObject GetObjectGeneric(int ID)
         {
+            if (ID == Helper.INVALIDID) return null;
             return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLObject>().Object;
         }
 
@@ -164,6 +165,7 @@ namespace Kistl.API.Client
 
         public T GetObject(int ID)
         {
+            if (ID == Helper.INVALIDID) return null;
             return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLObject>().Object as T;
         }
 

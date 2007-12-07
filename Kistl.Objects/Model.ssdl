@@ -42,12 +42,16 @@
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass" Association="Model.Store.FK_ObjectReferenceProperty_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="true" />
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="fk_BaseObjectClass" Type="int" Nullable="true" />
@@ -57,7 +61,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
     <Property Name="AufwandGes" Type="float" Nullable="true" />
@@ -66,7 +70,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="DatumVon" Type="datetime" Nullable="true" />
     <Property Name="DatumBis" Type="datetime" Nullable="true" />
@@ -77,7 +81,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
@@ -86,7 +90,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Geburtstag" Type="datetime" Nullable="true" />
     <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
@@ -117,7 +121,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
@@ -144,7 +148,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="ReferenceObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_ReferenceObjectClass" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="DateTimeProperty">
     <Key>
@@ -164,16 +168,17 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Namespace" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="DataType" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="IsAssociation" Type="bit" Nullable="true" />
+    <Property Name="ReferenceObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Module">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="identity" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
@@ -246,6 +251,18 @@
       </Principal>
       <Dependent Role="B_ObjectClass">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectReferenceProperty_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectReferenceProperty">
+        <PropertyRef Name="fk_ReferenceObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

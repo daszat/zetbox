@@ -160,6 +160,9 @@ namespace Kistl.Client
 
         public bool IsCenter { get; set; }
 
+        [System.Diagnostics.DebuggerHidden]
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public List<ObjNode> SubItems
         {
             get 
@@ -188,7 +191,7 @@ namespace Kistl.Client
 
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
                     {
-                        IClientObject pClient = ClientObjectFactory.GetClientObject(new ObjectType(p.ReferenceObjectClassName));
+                        IClientObject pClient = ClientObjectFactory.GetClientObject(new ObjectType(p.GetDataType()));
                         BaseDataObject item = (BaseDataObject)pClient.GetObjectGeneric((int)Item.
                             GetType().GetProperty(p.PropertyName).GetValue(Item, null));
                         if (item != null)

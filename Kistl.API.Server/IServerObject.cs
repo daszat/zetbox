@@ -220,12 +220,13 @@ namespace Kistl.API.Server
         /// <param name="obj"></param>
         private void UpdateRelationships(T obj)
         {
-            foreach (PropertyInfo pi in typeof(T).GetProperties())
+            Type type = obj.GetType();
+            foreach (PropertyInfo pi in type.GetProperties())
             {
                 if (pi.GetCustomAttributes(typeof(EdmRelationshipNavigationPropertyAttribute), true).Length > 0)
                 {
                     // Bingo!
-                    PropertyInfo pifk = typeof(T).GetProperty("fk_" + pi.Name);
+                    PropertyInfo pifk = type.GetProperty("fk_" + pi.Name);
                     if (pifk != null)
                     {
                         int fk = (int)pifk.GetValue(obj, null);
@@ -238,9 +239,14 @@ namespace Kistl.API.Server
             }
         }
 
-        private void MarkEveryPropertyAsModified(IDataObject obj)
+        /// <summary>
+        /// TODO: Bad Hack!
+        /// Es gibt angeblich jetzt eine bessere MEthode
+        /// </summary>
+        /// <param name="obj"></param>
+        private void MarkEveryPropertyAsModified(BaseDataObject obj)
         {
-            ObjectStateEntry stateEntry = KistlDataContext.Current.ObjectStateManager.GetObjectStateEntry(obj);
+            ObjectStateEntry stateEntry = KistlDataContext.Current.ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
             MetadataWorkspace workspace = KistlDataContext.Current.MetadataWorkspace;
             EntityType entityType = workspace.GetItem<EntityType>("Model." + obj.GetType().Name, DataSpace.CSpace);
 

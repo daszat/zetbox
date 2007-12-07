@@ -130,7 +130,8 @@ namespace Kistl.App.Projekte
 
         void impl_OnGetDataType_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ReferenceObjectClassName;
+            ObjectClass objClass = obj.GetObject<ObjectClass>("ReferenceObjectClass");
+            e.Result = objClass.GetObject<Module>("Module").Namespace + "." + objClass.ClassName; //ReferenceObjectClassName;
         }
 
         void impl_OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)

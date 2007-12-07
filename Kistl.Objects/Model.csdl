@@ -33,6 +33,10 @@
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass" Association="Model.FK_ObjectReferenceProperty_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_ObjectReferenceProperty" EntitySet="BaseProperty" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -108,7 +112,7 @@
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
-    <Property Name="ReferenceObjectClassName" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="ReferenceObjectClass" Relationship="Model.FK_ObjectReferenceProperty_ObjectClass" FromRole="B_ObjectReferenceProperty" ToRole="A_ObjectClass" />
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty">
@@ -123,6 +127,7 @@
     <Property Name="Namespace" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="DataType" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="IsAssociation" Type="Boolean" Nullable="true" />
+    <Property Name="ReferenceObjectClassName" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Module">
     <Key>
@@ -156,5 +161,9 @@
   <Association Name="FK_ObjectClass_Module">
     <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
     <End Role="B_ObjectClass" Type="Model.ObjectClass" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ObjectReferenceProperty_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_ObjectReferenceProperty" Type="Model.ObjectReferenceProperty" Multiplicity="*" />
   </Association>
 </Schema>

@@ -29,7 +29,18 @@ namespace Kistl.Server.Generators.SQLServer
         }
 
         #region GenerateCSDL
-        public void GenerateCSDL(IQueryable<ObjectClass> objClassList)
+
+        private ObjectClass GetRootClass(ObjectClass c)
+        {
+            while (c.BaseObjectClass != null)
+            {
+                c = c.BaseObjectClass;
+            }
+
+            return c;
+        }
+
+        private void GenerateCSDL(IQueryable<ObjectClass> objClassList)
         {
             using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects\Model.csdl", Encoding.UTF8))
             {
@@ -72,12 +83,12 @@ namespace Kistl.Server.Generators.SQLServer
 
                     xml.WriteStartElement("End");
                     xml.WriteAttributeString("Role", "A_" + otherType.Classname);
-                    xml.WriteAttributeString("EntitySet", otherType.Classname);
+                    xml.WriteAttributeString("EntitySet", GetRootClass(objClassList.First(c => otherType.Classname == c.ClassName)).ClassName);
                     xml.WriteEndElement(); // </End>
 
                     xml.WriteStartElement("End");
                     xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
-                    xml.WriteAttributeString("EntitySet", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("EntitySet", GetRootClass(prop.ObjectClass).ClassName);
                     xml.WriteEndElement(); // </End>
 
                     xml.WriteEndElement(); // </AssociationSet>
@@ -360,7 +371,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteAttributeString("Nullable", "false");
                     if (obj.BaseObjectClass == null)
                     {
-                        xml.WriteAttributeString("StoreGeneratedPattern", "identity");
+                        xml.WriteAttributeString("StoreGeneratedPattern", "Identity");
                     }
                     xml.WriteEndElement(); // </Property>
 

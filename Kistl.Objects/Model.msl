@@ -79,7 +79,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
         <MappingFragment StoreEntitySet="ObjectReferenceProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ReferenceObjectClassName" ColumnName="ReferenceObjectClassName" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
@@ -116,6 +115,7 @@
           <ScalarProperty Name="Namespace" ColumnName="Namespace" />
           <ScalarProperty Name="DataType" ColumnName="DataType" />
           <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
+          <ScalarProperty Name="ReferenceObjectClassName" ColumnName="ReferenceObjectClassName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -181,6 +181,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ObjectReferenceProperty_ObjectClass" TypeName="Model.FK_ObjectReferenceProperty_ObjectClass" StoreEntitySet="ObjectReferenceProperty">
+      <EndProperty Name="A_ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ReferenceObjectClass" />
+      </EndProperty>
+      <EndProperty Name="B_ObjectReferenceProperty">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_ReferenceObjectClass" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
