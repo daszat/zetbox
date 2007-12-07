@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty), "B_BackReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BackReferenceProperty))]
+
 namespace Kistl.App.Base
 {
     using System;
@@ -29,6 +31,8 @@ namespace Kistl.App.Base
         private string _ReferenceObjectClassName;
         
         private string _ReferencePropertyName;
+        
+        private int _fk_ReferenceProperty = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute()]
         public string ReferenceObjectClassName
@@ -53,6 +57,40 @@ namespace Kistl.App.Base
             set
             {
                 _ReferencePropertyName = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty", "A_ObjectReferenceProperty")]
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.ObjectReferenceProperty> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty>("Model.FK_BackReferenceProperty_ObjectReferenceProperty", "A_ObjectReferenceProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.ObjectReferenceProperty> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty>("Model.FK_BackReferenceProperty_ObjectReferenceProperty", "A_ObjectReferenceProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_ReferenceProperty
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_ReferenceProperty == Helper.INVALIDID && ReferenceProperty != null)
+                {
+                    _fk_ReferenceProperty = ReferenceProperty.ID;
+                }
+                return _fk_ReferenceProperty;
+            }
+            set
+            {
+                _fk_ReferenceProperty = value;
             }
         }
         

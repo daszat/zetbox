@@ -132,7 +132,7 @@ namespace Kistl.App.Projekte
 
         void impl_OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ReferenceObjectClassName;
+            e.Result = obj.ReferenceProperty.ObjectClass.Module.Namespace + "." + obj.ReferenceProperty.ObjectClass.ClassName;
         }
         #endregion
     }

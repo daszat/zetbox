@@ -85,7 +85,10 @@ namespace Kistl.App.Projekte
         #region Properties
         void impl_OnToString_BaseProperty(Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = string.Format("{0} {1}", obj.GetDataType(), obj.PropertyName);
+            e.Result = string.Format("{0} {1}.{2}", 
+                obj.GetDataType(), 
+                obj.GetObject<ObjectClass>("ObjectClass").ClassName, 
+                obj.PropertyName);
         }
 
         void impl_OnToString_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -131,12 +134,13 @@ namespace Kistl.App.Projekte
         void impl_OnGetDataType_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             ObjectClass objClass = obj.GetObject<ObjectClass>("ReferenceObjectClass");
-            e.Result = objClass.GetObject<Module>("Module").Namespace + "." + objClass.ClassName; //ReferenceObjectClassName;
+            e.Result = objClass.GetObject<Module>("Module").Namespace + "." + objClass.ClassName;
         }
 
         void impl_OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ReferenceObjectClassName;
+            ObjectClass objClass = obj.GetObject<ObjectReferenceProperty>("ReferenceProperty").GetObject<ObjectClass>("ObjectClass");
+            e.Result = objClass.GetObject<Module>("Module").Namespace + "." + objClass.ClassName;
         }
         #endregion
     }

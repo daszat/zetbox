@@ -48,6 +48,16 @@ namespace Kistl.API.Server
 
         private Dictionary<Type, object> _table = new Dictionary<Type, object>();
 
+        private Type GetRootType(Type t)
+        {
+            while (t != null && t.BaseType != typeof(BaseDataObject))
+            {
+                t = t.BaseType;
+            }
+
+            return t;
+        }
+
         /// <summary>
         /// Return IQueryable to make it possible to use alternative LINQ Provider
         /// </summary>
@@ -55,13 +65,13 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public IQueryable<T> GetTable<T>()
         {
-            Type t = typeof(T);
+            Type t = GetRootType(typeof(T));
             if (!_table.ContainsKey(t))
             {
                 _table[t] = this.CreateQuery<T>("[" + t.Name + "]");
             }
 
-            return _table[t] as ObjectQuery<T>;
+            return (_table[t] as ObjectQuery<T>).OfType<T>();
 
         }
 

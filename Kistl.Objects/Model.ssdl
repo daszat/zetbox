@@ -46,6 +46,10 @@
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
+    <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty" Association="Model.Store.FK_BackReferenceProperty_ObjectReferenceProperty">
+      <End Role="A_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
+      <End Role="B_BackReferenceProperty" EntitySet="BackReferenceProperty" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -163,6 +167,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="ReferenceObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ReferencePropertyName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_ReferenceProperty" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="ObjectForDeletedProperties">
     <Key>
@@ -263,6 +268,18 @@
       </Principal>
       <Dependent Role="B_ObjectReferenceProperty">
         <PropertyRef Name="fk_ReferenceObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty">
+    <End Role="A_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="B_BackReferenceProperty" Type="Model.Store.BackReferenceProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectReferenceProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_BackReferenceProperty">
+        <PropertyRef Name="fk_ReferenceProperty" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

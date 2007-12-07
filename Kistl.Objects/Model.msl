@@ -191,5 +191,14 @@
       </EndProperty>
       <Condition ColumnName="fk_ReferenceObjectClass" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_BackReferenceProperty_ObjectReferenceProperty" TypeName="Model.FK_BackReferenceProperty_ObjectReferenceProperty" StoreEntitySet="BackReferenceProperty">
+      <EndProperty Name="A_ObjectReferenceProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_ReferenceProperty" />
+      </EndProperty>
+      <EndProperty Name="B_BackReferenceProperty">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_ReferenceProperty" IsNull="false" />
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
