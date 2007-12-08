@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Kistl.Server
 {
@@ -65,8 +66,8 @@ namespace Kistl.Server
             else
             {
                 server.StartServer();
-                Console.WriteLine("Server started, press the anykey");
-                Console.ReadLine();
+                Console.WriteLine("Server started, press the anykey to exit");
+                Console.ReadKey();
 
                 server.StopServer();
             }
@@ -99,6 +100,7 @@ namespace Kistl.Server
         /// </summary>
         public void StartServer()
         {
+            Trace.TraceInformation("Starting Server");
             API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
             
             Kistl.App.Base.ObjectClassServer s = new Kistl.App.Base.ObjectClassServer();
@@ -114,6 +116,7 @@ namespace Kistl.Server
             {
                 throw new ApplicationException("Server did not started within 20 sec.");
             }
+            Trace.TraceInformation("Server started");
         }
 
         /// <summary>
@@ -121,7 +124,9 @@ namespace Kistl.Server
         /// </summary>
         public void StopServer()
         {
+            Trace.TraceInformation("Stopping Server");
             host.Close();
+            Trace.TraceInformation("Server stopped");
         }
 
         /// <summary>
@@ -130,7 +135,7 @@ namespace Kistl.Server
         /// </summary>
         private void RunWCFServer()
         {
-            Console.WriteLine("Starting Server...");
+            Trace.TraceInformation("Starting WCF Server...");
 
             Uri uri = new Uri("http://localhost:6666/KistlService");
 
@@ -142,7 +147,7 @@ namespace Kistl.Server
 
             serverStarted.Set();
 
-            Console.WriteLine("Server started");
+            Trace.TraceInformation("WCF Server started");
 
             while (host.State == CommunicationState.Opened)
             {
@@ -152,12 +157,12 @@ namespace Kistl.Server
 
         private void host_Faulted(object sender, EventArgs e)
         {
-            Console.WriteLine("Host faulted");
+            Trace.TraceWarning("Host faulted");
         }
 
         private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
         {
-            Console.WriteLine("UnknownMessageReceived: {0}", e.Message.ToString());
+            Trace.TraceWarning("UnknownMessageReceived: {0}", e.Message.ToString());
         }
     }
 }

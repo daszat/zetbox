@@ -101,9 +101,12 @@ namespace Kistl.Client
 
         private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count > 0)
+            using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                InstanceChangeCenter(new ObjNode((BaseDataObject)e.AddedItems[0], true));
+                if (e.AddedItems.Count > 0)
+                {
+                    InstanceChangeCenter(new ObjNode((BaseDataObject)e.AddedItems[0], true));
+                }
             }
         }
 

@@ -18,7 +18,6 @@ namespace Kistl.Server
         public static void HandleError(Exception ex)
         {
             Console.WriteLine(ex.ToString());
-            System.Diagnostics.Debug.WriteLine(ex.ToString());
             System.Diagnostics.Trace.TraceError(ex.ToString());
         }
 
