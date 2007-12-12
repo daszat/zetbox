@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         
         public event GetDataType_Handler<DateTimeProperty> OnGetDataType_DateTimeProperty;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

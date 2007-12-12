@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections;
+using System.Reflection;
 
 namespace Kistl.API
 {
@@ -56,6 +57,20 @@ namespace Kistl.API
             return false;
         }
 
+        public static T GetPropertyValue<T>(this object obj, string propName)
+        {
+            if (obj == null) return default(T);
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            return (T)pi.GetValue(obj, null);
+        }
 
+        public static void ForEach<T>(this IEnumerable lst, Action<T> action)
+        {
+            foreach(T obj in lst)
+            {
+                action(obj);
+            }
+        }
     }
 }

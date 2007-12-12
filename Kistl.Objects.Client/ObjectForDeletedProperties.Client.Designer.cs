@@ -116,6 +116,7 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<ObjectForDeletedProperties> OnPostSave_ObjectForDeletedProperties;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

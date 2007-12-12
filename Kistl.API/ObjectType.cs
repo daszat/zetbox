@@ -22,6 +22,16 @@ namespace Kistl.API
             Classname = t.Name;
         }
 
+        public ObjectType(Type type)
+        {
+            Namespace = "";
+            Classname = "";
+
+            string[] segments = type.FullName.Split('.');
+            Classname = segments.Last();
+            Namespace = string.Join(".", segments.Take(segments.Length - 1).ToArray());
+        }
+
         public ObjectType(string type)
         {
             Namespace = "";

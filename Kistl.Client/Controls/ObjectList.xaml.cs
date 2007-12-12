@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,23 +55,25 @@ namespace Kistl.Client.Controls
             try
             {
                 // Client BL holen
-                IClientObject client = ClientObjectFactory.GetClientObject(SourceObjectType);
-
-                if (string.IsNullOrEmpty(PropertyName))
+                using (KistlContext ctx = new KistlContext())
                 {
-                    // Wenn PropertyName nicht gesetzt ist, dann mein man die Liste _aller_
-                    // Objekte einer Klasse
-                    // Destination ist dann gleich Source
-                    DestinationObjectType = SourceObjectType;
+                    if (string.IsNullOrEmpty(PropertyName))
+                    {
+                        // Wenn PropertyName nicht gesetzt ist, dann mein man die Liste _aller_
+                        // Objekte einer Klasse
+                        // Destination ist dann gleich Source
+                        DestinationObjectType = SourceObjectType;
 
-                    // Liste vom Server holen & den DataContext setzen.
-                    this.DataContext = client.GetListGeneric();
-                }
-                else
-                {
-                    // Wenn PropertyName gesetzt ist, dann meint man die Liste von Objekten
-                    // zu einem Objekt
-                    this.DataContext = client.GetListOfGeneric(ObjectID, PropertyName);
+                        // Liste vom Server holen & den DataContext setzen.
+                        this.DataContext = ctx.GetQuery(SourceObjectType).ToList();
+                    }
+                    else
+                    {
+                        // Wenn PropertyName gesetzt ist, dann meint man die Liste von Objekten
+                        // zu einem Objekt
+                        BaseClientDataObject obj = ctx.GetQuery(SourceObjectType).Single(o => o.ID == ObjectID);
+                        this.DataContext = obj.GetPropertyValue<IEnumerable>(PropertyName);
+                    }
                 }
             }
             catch (Exception ex)
@@ -159,11 +162,9 @@ namespace Kistl.Client.Controls
             {
                 ObjectType resultObjectType = this.DestinationObjectType;
 
-                Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
-                Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[DestinationObjectType]; //.First(o => o.GetObject<Kistl.App.Base.Module>("Module").Namespace == DestinationObjectType.Namespace && o.ClassName == DestinationObjectType.Classname);
+                Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[DestinationObjectType];
 
-                //if (client.GetListOfSubClasses(objClass.ID).Count > 0)
-                if(objClass.SubClasses.Count > 0)
+                if (objClass.SubClasses.Count > 0)
                 {
                     // TODO: Das ist noch nicht ganz konstistent
                     Dialogs.ChooseObjectClass dlg = new Kistl.Client.Dialogs.ChooseObjectClass();

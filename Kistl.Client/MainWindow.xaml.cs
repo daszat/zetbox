@@ -15,6 +15,7 @@ using System.Xml.Serialization;
 using Kistl.API;
 using System.ComponentModel;
 using Kistl.API.Client;
+using System.Collections;
 
 namespace Kistl.Client
 {
@@ -121,9 +122,7 @@ namespace Kistl.Client
                 try
                 {
                     // Hole eine Liste aller ObjectClasses Objekte & zeige sie in der DropDown an
-                    Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
-                    lst.SourceObjectType = client.Type;
-
+                    lst.SourceObjectType = new ObjectType(typeof(Kistl.App.Base.ObjectClass));
                     this.DataContext = Helper.ObjectClasses.Values;
                 }
                 catch (Exception ex)
@@ -177,8 +176,6 @@ namespace Kistl.Client
                     Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[Item.Type];
                     List<Kistl.App.Base.BaseProperty> properties = new List<Kistl.App.Base.BaseProperty>();
 
-                    IClientObject client = ClientObjectFactory.GetClientObject(Item.Type);
-
                     while (objClass != null)
                     {
                         properties.AddRange(objClass.Properties);
@@ -187,14 +184,13 @@ namespace Kistl.Client
 
                     foreach (Kistl.App.Base.BackReferenceProperty p in properties.OfType<Kistl.App.Base.BackReferenceProperty>())
                     {
-                        client.GetListOfGeneric(Item.ID, p.PropertyName).
-                            OfType<BaseClientDataObject>().ToList().ForEach(o => result.Add(new ObjNode(o, false)));
+                        Item.GetPropertyValue<IEnumerable>(p.PropertyName)
+                            .ForEach<BaseClientDataObject>(o => result.Add(new ObjNode(o, false)));
                     }
 
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
                     {
-                        BaseClientDataObject item = (BaseClientDataObject)Item.
-                            GetType().GetProperty(p.PropertyName.Replace("fk_", "")).GetValue(Item, null);
+                        BaseClientDataObject item = Item.GetPropertyValue<BaseClientDataObject>(p.PropertyName.Replace("fk_", ""));
                         if (item != null)
                         {
                             // Kann überraschenderweise null sein

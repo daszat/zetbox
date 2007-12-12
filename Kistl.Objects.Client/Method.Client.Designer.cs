@@ -44,12 +44,13 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectClass ObjectClass
         {
             get
             {
-                return this.GetObject<Kistl.App.Base.ObjectClass>(fk_ObjectClass);
+                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_ObjectClass);
             }
             set
             {
@@ -87,6 +88,7 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<Method> OnPostSave_Method;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

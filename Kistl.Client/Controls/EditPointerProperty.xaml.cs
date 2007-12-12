@@ -58,8 +58,10 @@ namespace Kistl.Client.Controls
 
         private void LoadList()
         {
-            IClientObject client = ClientObjectFactory.GetClientObject(ObjectType);
-            cbValues.ItemsSource = client.GetListGeneric();
+            using (KistlContext ctx = new KistlContext())
+            {
+                cbValues.ItemsSource = ctx.GetQuery(ObjectType).ToList();
+            }
         }
 
         private void PointerCtrl_Loaded(object sender, RoutedEventArgs e)

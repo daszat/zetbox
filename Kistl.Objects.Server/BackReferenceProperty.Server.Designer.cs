@@ -73,6 +73,7 @@ namespace Kistl.App.Base
         
         public event GetDataType_Handler<BackReferenceProperty> OnGetDataType_BackReferenceProperty;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

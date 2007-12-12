@@ -512,6 +512,7 @@ namespace Kistl.Server.Generators.SQLServer
             // Create ToString Method
             CodeMemberMethod m = new CodeMemberMethod();
             c.Members.Add(m);
+            m.CustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Diagnostics.DebuggerHidden")));
             m.Name = "ToString";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(string));
@@ -782,6 +783,7 @@ namespace Kistl.Server.Generators.SQLServer
             c.Members.Add(p);
 
             p.Name = associationPropName;
+            p.CustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Diagnostics.DebuggerHidden")));
             p.HasGet = true;
             p.HasSet = true;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
@@ -795,7 +797,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             p.GetStatements.Add(
                 new CodeSnippetExpression(
-                    string.Format(@"return this.GetObject<{0}>({1})", prop.GetDataType(), prop.PropertyName)));
+                    string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == {1})", prop.GetDataType(), prop.PropertyName)));
 
             p.SetStatements.Add(
                 new CodeSnippetExpression(
@@ -833,6 +835,7 @@ namespace Kistl.Server.Generators.SQLServer
             c.Members.Add(p);
 
             p.Name = prop.PropertyName;
+            p.CustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Diagnostics.DebuggerHidden")));
             p.HasGet = true;
             p.HasSet = false;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Final;

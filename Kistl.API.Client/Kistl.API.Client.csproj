@@ -63,6 +63,9 @@
     <Compile Include="Helper.cs" />
     <Compile Include="IClientObject.cs" />
     <Compile Include="ICustomActionsClient.cs" />
+    <Compile Include="LinqToKistl\KistlContext.cs" />
+    <Compile Include="LinqToKistl\KistlContextQuery.cs" />
+    <Compile Include="LinqToKistl\KistlContextProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy.cs" />
     <Compile Include="Service References\KistlService\Reference.cs">

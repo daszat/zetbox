@@ -68,6 +68,7 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Base.ObjectClass> ObjectClasses
         {
@@ -83,6 +84,7 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<Module> OnPostSave_Module;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

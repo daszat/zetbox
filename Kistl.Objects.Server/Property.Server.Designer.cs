@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         
         public event GetDataType_Handler<Property> OnGetDataType_Property;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

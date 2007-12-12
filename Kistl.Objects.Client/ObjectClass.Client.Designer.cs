@@ -72,21 +72,25 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Base.BaseProperty> Properties
         {
             get
             {
+                //return Context
+                // Das muss jetzt auch über den Kontext gehen - aber erst morgen
                 return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.BaseProperty>();
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectClass BaseObjectClass
         {
             get
             {
-                return this.GetObject<Kistl.App.Base.ObjectClass>(fk_BaseObjectClass);
+                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_BaseObjectClass);
             }
             set
             {
@@ -106,6 +110,7 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Base.ObjectClass> SubClasses
         {
@@ -115,6 +120,7 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Base.Method> Methods
         {
@@ -124,12 +130,13 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Base.Module Module
         {
             get
             {
-                return this.GetObject<Kistl.App.Base.Module>(fk_Module);
+                return Context.GetQuery<Kistl.App.Base.Module>().Single(o => o.ID == fk_Module);
             }
             set
             {
@@ -155,6 +162,7 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

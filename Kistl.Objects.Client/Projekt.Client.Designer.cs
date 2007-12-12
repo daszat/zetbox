@@ -58,6 +58,7 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Projekte.Task> Tasks
         {
@@ -67,12 +68,13 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get
             {
-                return this.GetObject<Kistl.App.Projekte.Mitarbeiter>(fk_Mitarbeiter);
+                return Context.GetQuery<Kistl.App.Projekte.Mitarbeiter>().Single(o => o.ID == fk_Mitarbeiter);
             }
             set
             {
@@ -110,6 +112,7 @@ namespace Kistl.App.Projekte
         
         public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

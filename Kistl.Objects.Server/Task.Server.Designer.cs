@@ -154,6 +154,7 @@ namespace Kistl.App.Projekte
         
         public event ObjectEventHandler<Task> OnPostSave_Task;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

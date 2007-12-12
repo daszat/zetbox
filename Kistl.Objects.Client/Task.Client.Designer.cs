@@ -50,12 +50,13 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Projekte.Projekt Projekt
         {
             get
             {
-                return this.GetObject<Kistl.App.Projekte.Projekt>(fk_Projekt);
+                return Context.GetQuery<Kistl.App.Projekte.Projekt>().Single(o => o.ID == fk_Projekt);
             }
             set
             {
@@ -129,6 +130,7 @@ namespace Kistl.App.Projekte
         
         public event ObjectEventHandler<Task> OnPostSave_Task;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

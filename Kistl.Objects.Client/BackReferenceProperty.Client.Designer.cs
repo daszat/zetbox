@@ -28,12 +28,13 @@ namespace Kistl.App.Base
         
         private int _fk_ReferenceProperty = Helper.INVALIDID;
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {
             get
             {
-                return this.GetObject<Kistl.App.Base.ObjectReferenceProperty>(fk_ReferenceProperty);
+                return Context.GetQuery<Kistl.App.Base.ObjectReferenceProperty>().Single(o => o.ID == fk_ReferenceProperty);
             }
             set
             {
@@ -61,6 +62,7 @@ namespace Kistl.App.Base
         
         public event GetDataType_Handler<BackReferenceProperty> OnGetDataType_BackReferenceProperty;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

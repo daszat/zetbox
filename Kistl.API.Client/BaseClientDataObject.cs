@@ -23,6 +23,7 @@ namespace Kistl.API.Client
             }
         }
 
+        public KistlContext Context { get; set; }
 
         #region IDataObject Members
 

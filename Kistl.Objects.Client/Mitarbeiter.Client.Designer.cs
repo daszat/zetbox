@@ -60,6 +60,7 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Projekte.Projekt> Projekte
         {
@@ -111,6 +112,7 @@ namespace Kistl.App.Projekte
         
         public event ObjectEventHandler<Mitarbeiter> OnPostSave_Mitarbeiter;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

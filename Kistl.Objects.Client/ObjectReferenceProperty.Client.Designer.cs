@@ -28,12 +28,13 @@ namespace Kistl.App.Base
         
         private int _fk_ReferenceObjectClass = Helper.INVALIDID;
         
+        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectClass ReferenceObjectClass
         {
             get
             {
-                return this.GetObject<Kistl.App.Base.ObjectClass>(fk_ReferenceObjectClass);
+                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_ReferenceObjectClass);
             }
             set
             {
@@ -61,6 +62,7 @@ namespace Kistl.App.Base
         
         public event GetDataType_Handler<ObjectReferenceProperty> OnGetDataType_ObjectReferenceProperty;
         
+        [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
