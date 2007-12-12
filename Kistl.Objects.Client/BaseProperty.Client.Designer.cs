@@ -23,7 +23,123 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class BasePropertyClient : ClientObject<BaseProperty>
+    public class BaseProperty : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_ObjectClass = Helper.INVALIDID;
+        
+        private string _PropertyName;
+        
+        private string _AltText;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectClass ObjectClass
+        {
+            get
+            {
+                return this.GetObject<Kistl.App.Base.ObjectClass>(fk_ObjectClass);
+            }
+            set
+            {
+                _fk_ObjectClass = value.ID;
+            }
+        }
+        
+        public int fk_ObjectClass
+        {
+            get
+            {
+                return _fk_ObjectClass;
+            }
+            set
+            {
+                _fk_ObjectClass = value;
+            }
+        }
+        
+        public string PropertyName
+        {
+            get
+            {
+                return _PropertyName;
+            }
+            set
+            {
+                _PropertyName = value;
+            }
+        }
+        
+        public string AltText
+        {
+            get
+            {
+                return _AltText;
+            }
+            set
+            {
+                _AltText = value;
+            }
+        }
+        
+        public event ToStringHandler<BaseProperty> OnToString_BaseProperty;
+        
+        public event ObjectEventHandler<BaseProperty> OnPreSave_BaseProperty;
+        
+        public event ObjectEventHandler<BaseProperty> OnPostSave_BaseProperty;
+        
+        public event GetDataType_Handler<BaseProperty> OnGetDataType_BaseProperty;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_BaseProperty != null)
+            {
+                OnToString_BaseProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_BaseProperty != null) OnPreSave_BaseProperty(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_BaseProperty != null) OnPostSave_BaseProperty(this);
+        }
+        
+        public virtual string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            if (OnGetDataType_BaseProperty != null)
+            {
+                OnGetDataType_BaseProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+    }
+    
+    public sealed class BasePropertyClient : ClientObject<BaseProperty, XMLObjectCollection, XMLObject>
     {
     }
 }

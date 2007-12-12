@@ -23,7 +23,91 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class ModuleClient : ClientObject<Module>
+    public class Module : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private string _Namespace;
+        
+        private string _ModuleName;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        public string Namespace
+        {
+            get
+            {
+                return _Namespace;
+            }
+            set
+            {
+                _Namespace = value;
+            }
+        }
+        
+        public string ModuleName
+        {
+            get
+            {
+                return _ModuleName;
+            }
+            set
+            {
+                _ModuleName = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Base.ObjectClass> ObjectClasses
+        {
+            get
+            {
+                return Proxy.Service.GetListOf(Type, ID, "ObjectClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
+            }
+        }
+        
+        public event ToStringHandler<Module> OnToString_Module;
+        
+        public event ObjectEventHandler<Module> OnPreSave_Module;
+        
+        public event ObjectEventHandler<Module> OnPostSave_Module;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Module != null)
+            {
+                OnToString_Module(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Module != null) OnPreSave_Module(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Module != null) OnPostSave_Module(this);
+        }
+    }
+    
+    public sealed class ModuleClient : ClientObject<Module, XMLObjectCollection, XMLObject>
     {
         
         // Autogeneriert, um die gebundenen Listen zu bekommen

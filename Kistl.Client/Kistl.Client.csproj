@@ -195,10 +195,6 @@
       <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
       <Name>Kistl.Objects.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
-      <Project>{7BF67789-F65D-43B5-A0D8-A298E504C448}</Project>
-      <Name>Kistl.Objects</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
       <Name>Kistl.Server</Name>

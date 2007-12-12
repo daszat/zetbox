@@ -23,7 +23,163 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class ObjectClassClient : ClientObject<ObjectClass>
+    public class ObjectClass : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private string _ClassName;
+        
+        private string _TableName;
+        
+        private int _fk_BaseObjectClass = Helper.INVALIDID;
+        
+        private int _fk_Module = Helper.INVALIDID;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        public string ClassName
+        {
+            get
+            {
+                return _ClassName;
+            }
+            set
+            {
+                _ClassName = value;
+            }
+        }
+        
+        public string TableName
+        {
+            get
+            {
+                return _TableName;
+            }
+            set
+            {
+                _TableName = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Base.BaseProperty> Properties
+        {
+            get
+            {
+                return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.BaseProperty>();
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectClass BaseObjectClass
+        {
+            get
+            {
+                return this.GetObject<Kistl.App.Base.ObjectClass>(fk_BaseObjectClass);
+            }
+            set
+            {
+                _fk_BaseObjectClass = value.ID;
+            }
+        }
+        
+        public int fk_BaseObjectClass
+        {
+            get
+            {
+                return _fk_BaseObjectClass;
+            }
+            set
+            {
+                _fk_BaseObjectClass = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Base.ObjectClass> SubClasses
+        {
+            get
+            {
+                return Proxy.Service.GetListOf(Type, ID, "SubClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Base.Method> Methods
+        {
+            get
+            {
+                return Proxy.Service.GetListOf(Type, ID, "Methods").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.Method>();
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return this.GetObject<Kistl.App.Base.Module>(fk_Module);
+            }
+            set
+            {
+                _fk_Module = value.ID;
+            }
+        }
+        
+        public int fk_Module
+        {
+            get
+            {
+                return _fk_Module;
+            }
+            set
+            {
+                _fk_Module = value;
+            }
+        }
+        
+        public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
+        
+        public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
+        
+        public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_ObjectClass != null)
+            {
+                OnToString_ObjectClass(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_ObjectClass != null) OnPreSave_ObjectClass(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_ObjectClass != null) OnPostSave_ObjectClass(this);
+        }
+    }
+    
+    public sealed class ObjectClassClient : ClientObject<ObjectClass, XMLObjectCollection, XMLObject>
     {
         
         // Autogeneriert, um die gebundenen Listen zu bekommen

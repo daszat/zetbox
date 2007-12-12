@@ -23,7 +23,95 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class MethodClient : ClientObject<Method>
+    public class Method : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_ObjectClass = Helper.INVALIDID;
+        
+        private string _MethodName;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectClass ObjectClass
+        {
+            get
+            {
+                return this.GetObject<Kistl.App.Base.ObjectClass>(fk_ObjectClass);
+            }
+            set
+            {
+                _fk_ObjectClass = value.ID;
+            }
+        }
+        
+        public int fk_ObjectClass
+        {
+            get
+            {
+                return _fk_ObjectClass;
+            }
+            set
+            {
+                _fk_ObjectClass = value;
+            }
+        }
+        
+        public string MethodName
+        {
+            get
+            {
+                return _MethodName;
+            }
+            set
+            {
+                _MethodName = value;
+            }
+        }
+        
+        public event ToStringHandler<Method> OnToString_Method;
+        
+        public event ObjectEventHandler<Method> OnPreSave_Method;
+        
+        public event ObjectEventHandler<Method> OnPostSave_Method;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Method != null)
+            {
+                OnToString_Method(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Method != null) OnPreSave_Method(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Method != null) OnPostSave_Method(this);
+        }
+    }
+    
+    public sealed class MethodClient : ClientObject<Method, XMLObjectCollection, XMLObject>
     {
     }
 }

@@ -23,7 +23,54 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
-    public sealed class DoublePropertyServer : ServerObject<DoubleProperty>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="DoubleProperty")]
+    public class DoubleProperty : Kistl.App.Base.ValueTypeProperty
+    {
+        
+        public event ToStringHandler<DoubleProperty> OnToString_DoubleProperty;
+        
+        public event ObjectEventHandler<DoubleProperty> OnPreSave_DoubleProperty;
+        
+        public event ObjectEventHandler<DoubleProperty> OnPostSave_DoubleProperty;
+        
+        public event GetDataType_Handler<DoubleProperty> OnGetDataType_DoubleProperty;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_DoubleProperty != null)
+            {
+                OnToString_DoubleProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_DoubleProperty != null) OnPreSave_DoubleProperty(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_DoubleProperty != null) OnPostSave_DoubleProperty(this);
+        }
+        
+        public override string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_DoubleProperty != null)
+            {
+                OnGetDataType_DoubleProperty(this, e);
+            }
+            return e.Result;
+        }
+    }
+    
+    public sealed class DoublePropertyServer : ServerObject<DoubleProperty, XMLObjectCollection, XMLObject>
     {
     }
 }

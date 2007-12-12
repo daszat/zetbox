@@ -50,7 +50,7 @@ namespace Kistl.API.Server
 
         private Type GetRootType(Type t)
         {
-            while (t != null && t.BaseType != typeof(BaseDataObject))
+            while (t != null && t.BaseType != typeof(BaseServerDataObject))
             {
                 t = t.BaseType;
             }

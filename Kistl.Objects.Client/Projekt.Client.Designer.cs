@@ -23,7 +23,118 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public sealed class ProjektClient : ClientObject<Projekt>
+    public class Projekt : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private string _Name;
+        
+        private int _fk_Mitarbeiter = Helper.INVALIDID;
+        
+        private System.Nullable<double> _AufwandGes;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Projekte.Task> Tasks
+        {
+            get
+            {
+                return Proxy.Service.GetListOf(Type, ID, "Tasks").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Projekte.Task>();
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
+        {
+            get
+            {
+                return this.GetObject<Kistl.App.Projekte.Mitarbeiter>(fk_Mitarbeiter);
+            }
+            set
+            {
+                _fk_Mitarbeiter = value.ID;
+            }
+        }
+        
+        public int fk_Mitarbeiter
+        {
+            get
+            {
+                return _fk_Mitarbeiter;
+            }
+            set
+            {
+                _fk_Mitarbeiter = value;
+            }
+        }
+        
+        public System.Nullable<double> AufwandGes
+        {
+            get
+            {
+                return _AufwandGes;
+            }
+            set
+            {
+                _AufwandGes = value;
+            }
+        }
+        
+        public event ToStringHandler<Projekt> OnToString_Projekt;
+        
+        public event ObjectEventHandler<Projekt> OnPreSave_Projekt;
+        
+        public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Projekt != null)
+            {
+                OnToString_Projekt(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Projekt != null) OnPreSave_Projekt(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
+        }
+    }
+    
+    public sealed class ProjektClient : ClientObject<Projekt, XMLObjectCollection, XMLObject>
     {
         
         // Autogeneriert, um die gebundenen Listen zu bekommen

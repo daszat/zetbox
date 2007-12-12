@@ -62,6 +62,9 @@ namespace Kistl.Server
                 {
                     Helper.HandleError(ex);
                 }
+
+                Console.WriteLine("Hit the anykey to exit");
+                Console.ReadKey();
             }
             else
             {

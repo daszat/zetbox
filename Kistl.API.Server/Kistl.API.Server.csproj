@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{08902397-B9CA-43DA-8C8D-27DCEC097611}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="ICustomActionsServer.cs" />
     <Compile Include="IServerObject.cs" />
     <Compile Include="KistlDataContext.cs" />
@@ -61,10 +62,6 @@
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
-      <Project>{7BF67789-F65D-43B5-A0D8-A298E504C448}</Project>
-      <Name>Kistl.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

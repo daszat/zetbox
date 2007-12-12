@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Client", "Kistl.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Server", "Kistl.API.Server\Kistl.API.Server.csproj", "{08902397-B9CA-43DA-8C8D-27DCEC097611}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects", "Kistl.Objects\Kistl.Objects.csproj", "{7BF67789-F65D-43B5-A0D8-A298E504C448}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Server", "Kistl.Objects.Server\Kistl.Objects.Server.csproj", "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Client", "Kistl.Objects.Client\Kistl.Objects.Client.csproj", "{80F37FB5-66C6-45F2-9E2A-F787B141D66C}"
@@ -49,10 +47,6 @@ Global
 		{08902397-B9CA-43DA-8C8D-27DCEC097611}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08902397-B9CA-43DA-8C8D-27DCEC097611}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08902397-B9CA-43DA-8C8D-27DCEC097611}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7BF67789-F65D-43B5-A0D8-A298E504C448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BF67789-F65D-43B5-A0D8-A298E504C448}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BF67789-F65D-43B5-A0D8-A298E504C448}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BF67789-F65D-43B5-A0D8-A298E504C448}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}.Release|Any CPU.ActiveCfg = Release|Any CPU

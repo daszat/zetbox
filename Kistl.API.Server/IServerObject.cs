@@ -91,7 +91,10 @@ namespace Kistl.API.Server
     /// selbst implementiert sind
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ServerObject<T> : IServerObject where T : BaseDataObject, IDataObject, new()
+    public class ServerObject<T, XMLCOLLECTION, XMLOBJECT> : IServerObject 
+        where T : BaseServerDataObject, IDataObject, new()
+        where XMLCOLLECTION: IXmlObjectCollection, new()
+        where XMLOBJECT : IXmlObject, new()
     {
         /// <summary>
         /// Events registrieren
@@ -121,8 +124,8 @@ namespace Kistl.API.Server
             var result = from a in KistlDataContext.Current.GetTable<T>()
                          select a;
 
-            XMLObjectCollection list = new XMLObjectCollection();
-            list.Objects.AddRange(result.ToList().OfType<BaseDataObject>());
+            XMLCOLLECTION list = new XMLCOLLECTION();
+            list.Objects.AddRange(result.ToList().OfType<object>());
             return list.ToXmlString();
         }
 
@@ -142,9 +145,9 @@ namespace Kistl.API.Server
             PropertyInfo pi = typeof(T).GetProperty(property);
             if (pi == null) throw new ArgumentException("Property does not exist");
 
-            XMLObjectCollection result = new XMLObjectCollection();
+            XMLCOLLECTION result = new XMLCOLLECTION();
             IEnumerable v = (IEnumerable)pi.GetValue(obj, null);
-            result.Objects.AddRange(v.OfType<BaseDataObject>());
+            result.Objects.AddRange(v.OfType<object>());
             return result.ToXmlString();
         }
 
@@ -159,7 +162,7 @@ namespace Kistl.API.Server
             var result = from a in KistlDataContext.Current.GetTable<T>()
                          where a.ID == ID
                          select a;
-            return result.First<T>();
+            return result.FirstOrDefault<T>();
         }
 
         /// <summary>
@@ -181,8 +184,8 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public string GetObject(int ID)
         {
-            XMLObject result = new XMLObject();
-            result.Object = (BaseDataObject)GetObjectInstance(ID);
+            XMLOBJECT result = new XMLOBJECT();
+            result.Object = (BaseServerDataObject)GetObjectInstance(ID);
             return result.ToXmlString();
         }
 
@@ -194,7 +197,7 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public string SetObject(string xml)
         {
-            T obj = xml.FromXmlString<XMLObject>().Object as T;
+            T obj = xml.FromXmlString<XMLOBJECT>().Object as T;
 
             if (obj.ID != API.Helper.INVALIDID)
             {
@@ -208,7 +211,7 @@ namespace Kistl.API.Server
             UpdateRelationships(obj);
             KistlDataContext.Current.SubmitChanges();
 
-            XMLObject result = new XMLObject();
+            XMLOBJECT result = new XMLOBJECT();
             result.Object = obj;
             return result.ToXmlString();
         }
@@ -244,7 +247,7 @@ namespace Kistl.API.Server
         /// Es gibt angeblich jetzt eine bessere MEthode
         /// </summary>
         /// <param name="obj"></param>
-        private void MarkEveryPropertyAsModified(BaseDataObject obj)
+        private void MarkEveryPropertyAsModified(BaseServerDataObject obj)
         {
             ObjectStateEntry stateEntry = KistlDataContext.Current.ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
             MetadataWorkspace workspace = KistlDataContext.Current.MetadataWorkspace;

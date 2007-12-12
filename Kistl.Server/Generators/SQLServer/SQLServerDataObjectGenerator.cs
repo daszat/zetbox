@@ -33,12 +33,12 @@ namespace Kistl.Server.Generators.SQLServer
 
             foreach (ObjectClass objClass in objClassList)
             {
-                GenerateObjects(objClass);
                 GenerateObjectsClient(objClass);
                 GenerateObjectsServer(objClass);
             }
 
-            GenerateObjectSerializer(objClassList);
+            GenerateObjectSerializer(ClientServerEnum.Server, objClassList);
+            GenerateObjectSerializer(ClientServerEnum.Client, objClassList);
 
             Console.WriteLine("...finished!");
         }
@@ -75,7 +75,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateObjectSerializer
-        private void GenerateObjectSerializer(IQueryable<ObjectClass> objClassList)
+        private void GenerateObjectSerializer(ClientServerEnum clientServer, IQueryable<ObjectClass> objClassList)
         {
             CodeCompileUnit code = new CodeCompileUnit();
 
@@ -89,18 +89,28 @@ namespace Kistl.Server.Generators.SQLServer
             CodeTypeDeclaration c = new CodeTypeDeclaration("XMLObjectCollection");
             ns.Types.Add(c);
             c.IsClass = true;
+            c.BaseTypes.Add(new CodeTypeReference("IXmlObjectCollection"));
             c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
             c.CustomAttributes.Add(new CodeAttributeDeclaration("Serializable"));
             c.CustomAttributes.Add(new CodeAttributeDeclaration("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("ObjectCollection"))));
 
-            CodeMemberField f = new CodeMemberField(new CodeTypeReference("List", new CodeTypeReference("BaseDataObject")), "Objects");
+            CodeMemberField f = new CodeMemberField(new CodeTypeReference("List", new CodeTypeReference("Object")), "_Objects");
             c.Members.Add(f);
-            f.Attributes = MemberAttributes.Public;
+            f.Attributes = MemberAttributes.Private;
             f.InitExpression = new CodeObjectCreateExpression(
-                new CodeTypeReference("List", new CodeTypeReference("BaseDataObject")));
+                new CodeTypeReference("List", new CodeTypeReference("Object")));
+
+            CodeMemberProperty p = new CodeMemberProperty();
+            c.Members.Add(p);
+            p.Name = "Objects";
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            p.HasGet = true;
+            p.HasSet = false;
+            p.Type = f.Type;
+            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("_Objects")));
             foreach (ObjectClass objClass in objClassList)
             {
-                f.CustomAttributes.Add(
+                p.CustomAttributes.Add(
                     new CodeAttributeDeclaration("XmlArrayItem",
                         new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Module.Namespace + "." + objClass.ClassName)),
                         new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(objClass.ClassName))
@@ -119,18 +129,29 @@ namespace Kistl.Server.Generators.SQLServer
 
             // XMLObject
             c = new CodeTypeDeclaration("XMLObject");
+            c.BaseTypes.Add(new CodeTypeReference("IXmlObject"));
             ns.Types.Add(c);
             c.IsClass = true;
             c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
             c.CustomAttributes.Add(new CodeAttributeDeclaration("Serializable"));
             c.CustomAttributes.Add(new CodeAttributeDeclaration("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("Object"))));
 
-            f = new CodeMemberField(new CodeTypeReference("BaseDataObject"), "Object");
+            f = new CodeMemberField(new CodeTypeReference("Object"), "_Object");
             c.Members.Add(f);
-            f.Attributes = MemberAttributes.Public;
+            f.Attributes = MemberAttributes.Private;
+
+            p = new CodeMemberProperty();
+            c.Members.Add(p);
+            p.Name = "Object";
+            p.Type = new CodeTypeReference("Object");
+            p.HasGet = true;
+            p.HasSet = true;
+            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("_Object")));
+            p.SetStatements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("_Object"), new CodePropertySetValueReferenceExpression()));
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
             foreach (ObjectClass objClass in objClassList)
             {
-                f.CustomAttributes.Add(
+                p.CustomAttributes.Add(
                     new CodeAttributeDeclaration("XmlElement",
                         new CodeAttributeArgument("Type", new CodeTypeOfExpression(objClass.Module.Namespace + "." + objClass.ClassName)),
                         new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(objClass.ClassName))
@@ -139,7 +160,7 @@ namespace Kistl.Server.Generators.SQLServer
 
 
             // Generate the code & save
-            SaveFile(code, path + @"Kistl.Objects\ObjectSerializer.cs");
+            SaveFile(code, path + string.Format(@"Kistl.Objects.{0}\ObjectSerializer.cs", clientServer));
         }
         #endregion
 
@@ -155,6 +176,7 @@ namespace Kistl.Server.Generators.SQLServer
             AddDefaultNamespaces(ns);
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API.Client"));
 
+            GenerateClientDataObjects(code, ns, objClass);
             GenerateClientAccessLayer(objClass, ns);
 
             // Generate the code & save
@@ -172,6 +194,7 @@ namespace Kistl.Server.Generators.SQLServer
             AddDefaultNamespaces(ns);
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API.Server"));
 
+            GenerateServerDataObjects(code, ns, objClass);
             GenerateServerAccessLayer(objClass, ns);
 
             // Generate the code & save
@@ -184,7 +207,10 @@ namespace Kistl.Server.Generators.SQLServer
             ns.Types.Add(c);
             c.IsClass = true;
             c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
-            c.BaseTypes.Add(new CodeTypeReference("ServerObject", new CodeTypeReference(objClass.ClassName)));
+            c.BaseTypes.Add(new CodeTypeReference("ServerObject", 
+                new CodeTypeReference(objClass.ClassName), 
+                new CodeTypeReference("XMLObjectCollection"), 
+                new CodeTypeReference("XMLObject")));
         }
 
         private void GenerateClientAccessLayer(ObjectClass objClass, CodeNamespace ns)
@@ -193,7 +219,10 @@ namespace Kistl.Server.Generators.SQLServer
             ns.Types.Add(c);
             c.IsClass = true;
             c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
-            c.BaseTypes.Add(new CodeTypeReference("ClientObject", new CodeTypeReference(objClass.ClassName)));
+            c.BaseTypes.Add(new CodeTypeReference("ClientObject", 
+                new CodeTypeReference(objClass.ClassName),
+                new CodeTypeReference("XMLObjectCollection"),
+                new CodeTypeReference("XMLObject")));
 
             // Create GetListOf Methods
             foreach (BackReferenceProperty prop in objClass.Properties.OfType<BackReferenceProperty>())
@@ -215,20 +244,11 @@ namespace Kistl.Server.Generators.SQLServer
 
         #endregion
 
-        #region Generate Data Objects
-        private void GenerateObjects(ObjectClass objClass)
+        #region Generate Client/Server Data Objects
+        private void GenerateServerDataObjects(CodeCompileUnit code, CodeNamespace ns, ObjectClass objClass)
         {
-            CodeCompileUnit code = new CodeCompileUnit();
-
             GenerateEdmRelationshipAttribute(objClass, code);
             
-            // Create Namespace
-            CodeNamespace ns = new CodeNamespace(objClass.Module.Namespace);
-            code.Namespaces.Add(ns);
-
-            // Add using Statements
-            AddDefaultNamespaces(ns);
-
             // Create Class
             CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName);
             ns.Types.Add(c);
@@ -240,7 +260,7 @@ namespace Kistl.Server.Generators.SQLServer
             }
             else
             {
-                c.BaseTypes.Add("BaseDataObject");
+                c.BaseTypes.Add("BaseServerDataObject");
             }
             c.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                 new CodeAttributeArgument("NamespaceName", 
@@ -251,20 +271,49 @@ namespace Kistl.Server.Generators.SQLServer
             if (objClass.BaseObjectClass == null)
             {
                 // Create Default Properties
-                GenerateDefaultProperties(objClass, c);
+                GenerateServerDefaultProperties(objClass, c);
             }
 
             // Create Properties
-            GenerateProperties(objClass, c);
+            GenerateServerProperties(objClass, c);
 
             // Create DataObject Default Methods
             GenerateDefaultMethods(objClass, c);
 
             // Create DataObject Methods
             GenerateMethods(objClass, c);
+        }
 
-            // Generate the code & save
-            SaveFile(code, path + @"Kistl.Objects\" + objClass.ClassName + ".Designer.cs");
+        private void GenerateClientDataObjects(CodeCompileUnit code, CodeNamespace ns, ObjectClass objClass)
+        {
+            // Create Class
+            CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName);
+            ns.Types.Add(c);
+            c.IsClass = true;
+            c.TypeAttributes = TypeAttributes.Public;
+            if (objClass.BaseObjectClass != null)
+            {
+                c.BaseTypes.Add(objClass.BaseObjectClass.Module.Namespace + "." + objClass.BaseObjectClass.ClassName);
+            }
+            else
+            {
+                c.BaseTypes.Add("BaseClientDataObject");
+            }
+
+            if (objClass.BaseObjectClass == null)
+            {
+                // Create Default Properties
+                GenerateClientDefaultProperties(objClass, c);
+            }
+
+            // Create Properties
+            GenerateClientProperties(objClass, c);
+
+            // Create DataObject Default Methods
+            GenerateDefaultMethods(objClass, c);
+
+            // Create DataObject Methods
+            GenerateMethods(objClass, c);
         }
 
         #region GenerateEdmRelationshipAttribute
@@ -300,8 +349,8 @@ namespace Kistl.Server.Generators.SQLServer
         }
         #endregion
 
-        #region GenerateDefaultProperties
-        private void GenerateDefaultProperties(ObjectClass objClass, CodeTypeDeclaration c)
+        #region GenerateServerDefaultProperties
+        private void GenerateServerDefaultProperties(ObjectClass objClass, CodeTypeDeclaration c)
         {
             // Create ID member
             CodeMemberField f = new CodeMemberField(typeof(int), "_ID");
@@ -334,6 +383,28 @@ namespace Kistl.Server.Generators.SQLServer
             p.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             p.Type = new CodeTypeReference(typeof(string));
             p.GetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(objClass.ClassName)));
+        }
+        #endregion
+
+        #region GenerateClientDefaultProperties
+        private void GenerateClientDefaultProperties(ObjectClass objClass, CodeTypeDeclaration c)
+        {
+            // Create ID member
+            CodeMemberField f = new CodeMemberField(typeof(int), "_ID");
+            f.InitExpression = new CodeSnippetExpression("Helper.INVALIDID"); // TODO: Das ist c# Spezifisch
+            c.Members.Add(f);
+
+            CodeMemberProperty p = new CodeMemberProperty();
+            c.Members.Add(p);
+
+            p.Name = "ID";
+            p.HasGet = true;
+            p.HasSet = true;
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            p.Type = new CodeTypeReference(typeof(int));
+
+            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_ID")));
+            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_ID"), new CodePropertySetValueReferenceExpression()));
         }
         #endregion
 
@@ -473,10 +544,10 @@ namespace Kistl.Server.Generators.SQLServer
         }
         #endregion
 
-        #region GenerateProperties
+        #region GenerateServerProperties
 
         #region GenerateValueTypeProperty
-        private void GenerateValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c)
+        private void GenerateServerValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c)
         {
             CodeMemberField f = null;
             CodeTypeReference ctr = null;
@@ -520,7 +591,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateObjectReferenceProperty
-        private void GenerateObjectReferenceProperty(ObjectClass objClass, ObjectReferenceProperty prop, CodeTypeDeclaration c)
+        private void GenerateServerObjectReferenceProperty(ObjectClass objClass, ObjectReferenceProperty prop, CodeTypeDeclaration c)
         {
             // Check if Datatype exits
             if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
@@ -586,7 +657,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateBackReferenceProperty
-        private void GenerateBackReferenceProperty(ObjectClass objClass, BackReferenceProperty prop, CodeTypeDeclaration c)
+        private void GenerateServerBackReferenceProperty(ObjectClass objClass, BackReferenceProperty prop, CodeTypeDeclaration c)
         {
             // Check if Datatype exits
             if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
@@ -621,26 +692,26 @@ namespace Kistl.Server.Generators.SQLServer
         }
         #endregion
 
-        private void GenerateProperties(ObjectClass objClass, CodeTypeDeclaration c)
+        private void GenerateServerProperties(ObjectClass objClass, CodeTypeDeclaration c)
         {
             foreach (BaseProperty baseProp in objClass.Properties)
             {
                 if (baseProp is ValueTypeProperty)
                 {
                     // Simple Property
-                    GenerateValueTypeProperty(objClass, (ValueTypeProperty)baseProp, c);
+                    GenerateServerValueTypeProperty(objClass, (ValueTypeProperty)baseProp, c);
                 }
                 else if (baseProp is ObjectReferenceProperty)
                 {
                     // "pointer" zum Vater Objekt
-                    GenerateObjectReferenceProperty(objClass, (ObjectReferenceProperty)baseProp, c);
+                    GenerateServerObjectReferenceProperty(objClass, (ObjectReferenceProperty)baseProp, c);
                 }
                 else if (baseProp is BackReferenceProperty)
                 {
                     // TODO: Das ist eigentlich falsch herum, das sollte generiert werden,
                     // wenn bei der referenzierenden Klasse ein FK eingetragen wurde.
                     // Das sind quasi "AutoProperties"
-                    GenerateBackReferenceProperty(objClass, (BackReferenceProperty)baseProp, c);
+                    GenerateServerBackReferenceProperty(objClass, (BackReferenceProperty)baseProp, c);
                 }
                 else
                 {
@@ -651,7 +722,165 @@ namespace Kistl.Server.Generators.SQLServer
             }
         }
         #endregion
-        
+
+        #region GenerateClientProperties
+
+        #region GenerateValueTypeProperty
+        private void GenerateClientValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c)
+        {
+            CodeMemberField f = null;
+            CodeTypeReference ctr = null;
+
+            if (string.IsNullOrEmpty(prop.GetDataType())) throw new ApplicationException(
+                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
+                     objClass.ClassName, prop.PropertyName, prop.GetDataType()));
+
+            Type t = Type.GetType(prop.GetDataType());
+            if (t == null) throw new ApplicationException(
+                 string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
+                     objClass.ClassName, prop.PropertyName, prop.GetDataType()));
+
+            if (t.IsValueType)
+            {
+                ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.GetDataType()));
+            }
+            else
+            {
+                // String etc.
+                ctr = new CodeTypeReference(prop.GetDataType());
+            }
+            f = new CodeMemberField(ctr,
+                "_" + prop.PropertyName);
+
+            c.Members.Add(f);
+
+            CodeMemberProperty p = new CodeMemberProperty();
+            c.Members.Add(p);
+
+            p.Name = prop.PropertyName;
+            p.HasGet = true;
+            p.HasSet = true;
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            p.Type = f.Type;
+
+            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
+            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+        }
+        #endregion
+
+        #region GenerateObjectReferenceProperty
+        private void GenerateClientObjectReferenceProperty(ObjectClass objClass, ObjectReferenceProperty prop, CodeTypeDeclaration c)
+        {
+            // Check if Datatype exits
+            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
+                throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
+                    prop.GetDataType(), objClass.ClassName, prop.PropertyName));
+
+            string associationPropName = prop.PropertyName.Replace("fk_", "");
+
+            CodeMemberProperty p = new CodeMemberProperty();
+            c.Members.Add(p);
+
+            p.Name = associationPropName;
+            p.HasGet = true;
+            p.HasSet = true;
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            p.Type = new CodeTypeReference(prop.GetDataType());
+
+            ObjectType otherType = new ObjectType(prop.GetDataType());
+            string assocName = "FK_" + objClass.ClassName + "_" + otherType.Classname;
+
+            p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+
+
+            p.GetStatements.Add(
+                new CodeSnippetExpression(
+                    string.Format(@"return this.GetObject<{0}>({1})", prop.GetDataType(), prop.PropertyName)));
+
+            p.SetStatements.Add(
+                new CodeSnippetExpression(
+                    string.Format(@"_{0} = value.ID", prop.PropertyName)));
+
+            // Serializer fk_ Field und Property
+            CodeMemberField f = new CodeMemberField(typeof(int), "_" + prop.PropertyName);
+            f.InitExpression = new CodeSnippetExpression("Helper.INVALIDID"); // TODO: Das ist c# Spezifisch
+            c.Members.Add(f);
+
+            p = new CodeMemberProperty();
+            c.Members.Add(p);
+            p.Name = prop.PropertyName;
+            p.HasGet = true;
+            p.HasSet = true;
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            p.Type = new CodeTypeReference(typeof(int));
+
+            p.GetStatements.Add(
+                new CodeSnippetExpression(
+                    string.Format(@"return _fk_{0}", associationPropName)));
+            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+        }
+        #endregion
+
+        #region GenerateBackReferenceProperty
+        private void GenerateClientBackReferenceProperty(ObjectClass objClass, BackReferenceProperty prop, CodeTypeDeclaration c)
+        {
+            // Check if Datatype exits
+            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
+                throw new ApplicationException(string.Format("ObjectReference {0} not found on BackReferenceProperty {1}.{2}",
+                    prop.GetDataType(), objClass.ClassName, prop.PropertyName));
+
+            CodeMemberProperty p = new CodeMemberProperty();
+            c.Members.Add(p);
+
+            p.Name = prop.PropertyName;
+            p.HasGet = true;
+            p.HasSet = false;
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            p.Type = new CodeTypeReference("List", new CodeTypeReference(prop.GetDataType()));
+
+            ObjectType otherType = new ObjectType(prop.GetDataType());
+            string assocName = "FK_" + otherType.Classname + "_" + objClass.ClassName;
+
+            p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+
+            p.GetStatements.Add(
+                new CodeSnippetExpression(string.Format(
+                    @"return Proxy.Service.GetListOf(Type, ID, ""{0}"").FromXmlString<XMLObjectCollection>().ToList<{1}>()",
+                prop.PropertyName, prop.GetDataType())));
+        }
+        #endregion
+
+        private void GenerateClientProperties(ObjectClass objClass, CodeTypeDeclaration c)
+        {
+            foreach (BaseProperty baseProp in objClass.Properties)
+            {
+                if (baseProp is ValueTypeProperty)
+                {
+                    // Simple Property
+                    GenerateClientValueTypeProperty(objClass, (ValueTypeProperty)baseProp, c);
+                }
+                else if (baseProp is ObjectReferenceProperty)
+                {
+                    // "pointer" zum Vater Objekt
+                    GenerateClientObjectReferenceProperty(objClass, (ObjectReferenceProperty)baseProp, c);
+                }
+                else if (baseProp is BackReferenceProperty)
+                {
+                    // TODO: Das ist eigentlich falsch herum, das sollte generiert werden,
+                    // wenn bei der referenzierenden Klasse ein FK eingetragen wurde.
+                    // Das sind quasi "AutoProperties"
+                    GenerateClientBackReferenceProperty(objClass, (BackReferenceProperty)baseProp, c);
+                }
+                else
+                {
+                    // not supported yet
+                    // just ignore it for now
+                    throw new ApplicationException("Unknonw Propertytype " + baseProp.GetType().Name);
+                }
+            }
+        }
+        #endregion
+
         #endregion
     }
 }

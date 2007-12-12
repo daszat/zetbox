@@ -100,11 +100,6 @@
       <Name>Kistl.Objects.Server</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
-      <Project>{7BF67789-F65D-43B5-A0D8-A298E504C448}</Project>
-      <Name>Kistl.Objects</Name>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

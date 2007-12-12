@@ -23,7 +23,53 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class BoolPropertyClient : ClientObject<BoolProperty>
+    public class BoolProperty : Kistl.App.Base.ValueTypeProperty
+    {
+        
+        public event ToStringHandler<BoolProperty> OnToString_BoolProperty;
+        
+        public event ObjectEventHandler<BoolProperty> OnPreSave_BoolProperty;
+        
+        public event ObjectEventHandler<BoolProperty> OnPostSave_BoolProperty;
+        
+        public event GetDataType_Handler<BoolProperty> OnGetDataType_BoolProperty;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_BoolProperty != null)
+            {
+                OnToString_BoolProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_BoolProperty != null) OnPreSave_BoolProperty(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_BoolProperty != null) OnPostSave_BoolProperty(this);
+        }
+        
+        public override string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_BoolProperty != null)
+            {
+                OnGetDataType_BoolProperty(this, e);
+            }
+            return e.Result;
+        }
+    }
+    
+    public sealed class BoolPropertyClient : ClientObject<BoolProperty, XMLObjectCollection, XMLObject>
     {
     }
 }

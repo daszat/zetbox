@@ -23,7 +23,119 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public sealed class MitarbeiterClient : ClientObject<Mitarbeiter>
+    public class Mitarbeiter : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private string _Name;
+        
+        private System.Nullable<System.DateTime> _Geburtstag;
+        
+        private string _SVNr;
+        
+        private string _TelefonNummer;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Projekte.Projekt> Projekte
+        {
+            get
+            {
+                return Proxy.Service.GetListOf(Type, ID, "Projekte").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Projekte.Projekt>();
+            }
+        }
+        
+        public System.Nullable<System.DateTime> Geburtstag
+        {
+            get
+            {
+                return _Geburtstag;
+            }
+            set
+            {
+                _Geburtstag = value;
+            }
+        }
+        
+        public string SVNr
+        {
+            get
+            {
+                return _SVNr;
+            }
+            set
+            {
+                _SVNr = value;
+            }
+        }
+        
+        public string TelefonNummer
+        {
+            get
+            {
+                return _TelefonNummer;
+            }
+            set
+            {
+                _TelefonNummer = value;
+            }
+        }
+        
+        public event ToStringHandler<Mitarbeiter> OnToString_Mitarbeiter;
+        
+        public event ObjectEventHandler<Mitarbeiter> OnPreSave_Mitarbeiter;
+        
+        public event ObjectEventHandler<Mitarbeiter> OnPostSave_Mitarbeiter;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Mitarbeiter != null)
+            {
+                OnToString_Mitarbeiter(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Mitarbeiter != null) OnPreSave_Mitarbeiter(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Mitarbeiter != null) OnPostSave_Mitarbeiter(this);
+        }
+    }
+    
+    public sealed class MitarbeiterClient : ClientObject<Mitarbeiter, XMLObjectCollection, XMLObject>
     {
         
         // Autogeneriert, um die gebundenen Listen zu bekommen

@@ -162,7 +162,8 @@ namespace Kistl.Client.Controls
                 Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
                 Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[DestinationObjectType]; //.First(o => o.GetObject<Kistl.App.Base.Module>("Module").Namespace == DestinationObjectType.Namespace && o.ClassName == DestinationObjectType.Classname);
 
-                if (client.GetListOfSubClasses(objClass.ID).Count > 0)
+                //if (client.GetListOfSubClasses(objClass.ID).Count > 0)
+                if(objClass.SubClasses.Count > 0)
                 {
                     // TODO: Das ist noch nicht ganz konstistent
                     Dialogs.ChooseObjectClass dlg = new Kistl.Client.Dialogs.ChooseObjectClass();
@@ -170,7 +171,7 @@ namespace Kistl.Client.Controls
 
                     if (dlg.ShowDialog() == true)
                     {
-                        resultObjectType = new ObjectType(dlg.ResultObjectClass.GetObject<Kistl.App.Base.Module>("Module").Namespace, dlg.ResultObjectClass.ClassName);
+                        resultObjectType = new ObjectType(dlg.ResultObjectClass.Module.Namespace, dlg.ResultObjectClass.ClassName);
                     }
                     else
                     {

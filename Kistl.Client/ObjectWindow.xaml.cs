@@ -107,12 +107,13 @@ namespace Kistl.Client
             BindDefaultProperties();
             
             // Objektklassenhierarchie holen
-            Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
+            //Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
             foreach (Kistl.App.Base.ObjectClass objClass in GetObjectHierarchie())
             {
                 #region Binden
                 // Aus Metadaten holen
-                foreach (Kistl.App.Base.BaseProperty p in objClassClient.GetListOfProperties(objClass.ID))
+                foreach (Kistl.App.Base.BaseProperty p in objClass.Properties)
+                //foreach (Kistl.App.Base.BaseProperty p in objClassClient.GetListOfProperties(objClass.ID))
                 {
                     if (p is Kistl.App.Base.BackReferenceProperty)
                     {

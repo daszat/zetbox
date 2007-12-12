@@ -42,7 +42,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         private void GenerateCSDL(IQueryable<ObjectClass> objClassList)
         {
-            using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects\Model.csdl", Encoding.UTF8))
+            using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects.Server\Model.csdl", Encoding.UTF8))
             {
                 xml.Indentation = 2;
                 xml.IndentChar = ' ';
@@ -221,7 +221,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         public void GenerateMSL(IQueryable<ObjectClass> objClassList)
         {
-            using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects\Model.msl", Encoding.UTF8))
+            using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects.Server\Model.msl", Encoding.UTF8))
             {
                 xml.Indentation = 2;
                 xml.IndentChar = ' ';
@@ -299,7 +299,7 @@ namespace Kistl.Server.Generators.SQLServer
         #region GenerateSSDL
         public void GenerateSSDL(IQueryable<ObjectClass> objClassList)
         {
-            using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects\Model.ssdl", Encoding.UTF8))
+            using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects.Server\Model.ssdl", Encoding.UTF8))
             {
                 xml.Indentation = 2;
                 xml.IndentChar = ' ';

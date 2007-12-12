@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Task_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Projekt), "B_Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Task))]
+
 namespace Kistl.App.Projekte
 {
     using System;
@@ -23,7 +25,160 @@ namespace Kistl.App.Projekte
     using Kistl.API.Server;
     
     
-    public sealed class TaskServer : ServerObject<Task>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Task")]
+    public class Task : BaseServerDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_Projekt = Helper.INVALIDID;
+        
+        private string _Name;
+        
+        private System.Nullable<System.DateTime> _DatumVon;
+        
+        private System.Nullable<System.DateTime> _DatumBis;
+        
+        private System.Nullable<double> _Aufwand;
+        
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        public override string EntitySetName
+        {
+            get
+            {
+                return "Task";
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "A_Projekt")]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Task_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Projekt
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
+                {
+                    _fk_Projekt = Projekt.ID;
+                }
+                return _fk_Projekt;
+            }
+            set
+            {
+                _fk_Projekt = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<System.DateTime> DatumVon
+        {
+            get
+            {
+                return _DatumVon;
+            }
+            set
+            {
+                _DatumVon = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<System.DateTime> DatumBis
+        {
+            get
+            {
+                return _DatumBis;
+            }
+            set
+            {
+                _DatumBis = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<double> Aufwand
+        {
+            get
+            {
+                return _Aufwand;
+            }
+            set
+            {
+                _Aufwand = value;
+            }
+        }
+        
+        public event ToStringHandler<Task> OnToString_Task;
+        
+        public event ObjectEventHandler<Task> OnPreSave_Task;
+        
+        public event ObjectEventHandler<Task> OnPostSave_Task;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Task != null)
+            {
+                OnToString_Task(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Task != null) OnPreSave_Task(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Task != null) OnPostSave_Task(this);
+        }
+    }
+    
+    public sealed class TaskServer : ServerObject<Task, XMLObjectCollection, XMLObject>
     {
     }
 }

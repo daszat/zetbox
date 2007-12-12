@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Kistl.Server.Generators
 {
+    public enum ClientServerEnum
+    {
+        Client,
+        Server,
+    }
+
     public interface IDataObjectGenerator
     {
         void Generate(Kistl.API.Server.KistlDataContext ctx, string path);

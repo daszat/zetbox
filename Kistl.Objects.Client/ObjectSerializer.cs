@@ -24,8 +24,10 @@ namespace Kistl.API
     
     [Serializable()]
     [XmlRoot(ElementName="ObjectCollection")]
-    public sealed class XMLObjectCollection
+    public sealed class XMLObjectCollection : IXmlObjectCollection
     {
+        
+        private List<Object> _Objects = new List<Object>();
         
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectClass), ElementName="ObjectClass")]
         [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Projekt), ElementName="Projekt")]
@@ -44,7 +46,13 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
-        public List<BaseDataObject> Objects = new List<BaseDataObject>();
+        public List<Object> Objects
+        {
+            get
+            {
+                return _Objects;
+            }
+        }
         
         public List<T> ToList<T>()
             where T : IDataObject
@@ -55,8 +63,10 @@ namespace Kistl.API
     
     [Serializable()]
     [XmlRoot(ElementName="Object")]
-    public sealed class XMLObject
+    public sealed class XMLObject : IXmlObject
     {
+        
+        private Object _Object;
         
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectClass), ElementName="ObjectClass")]
         [XmlElement(Type=typeof(Kistl.App.Projekte.Projekt), ElementName="Projekt")]
@@ -75,6 +85,16 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlElement(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
-        public BaseDataObject Object;
+        public Object Object
+        {
+            get
+            {
+                return _Object;
+            }
+            set
+            {
+                _Object = value;
+            }
+        }
     }
 }

@@ -82,8 +82,9 @@ namespace Kistl.Client.Dialogs
         {
             objectClasses.Add(objClass);
 
-            Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
-            foreach (Kistl.App.Base.ObjectClass sub in client.GetListOfSubClasses(objClass.ID))
+            //Kistl.App.Base.ObjectClassClient client = new Kistl.App.Base.ObjectClassClient();
+            //foreach (Kistl.App.Base.ObjectClass sub in client.GetListOfSubClasses(objClass.ID))
+            foreach (Kistl.App.Base.ObjectClass sub in objClass.SubClasses)
             {
                 AddObjectClasses(sub, objectClasses);
             }

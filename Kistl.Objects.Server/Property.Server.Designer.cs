@@ -23,7 +23,84 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
-    public sealed class PropertyServer : ServerObject<Property>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Property")]
+    public class Property : Kistl.App.Base.BaseProperty
+    {
+        
+        private System.Nullable<bool> _IsList;
+        
+        private System.Nullable<bool> _IsNullable;
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<bool> IsList
+        {
+            get
+            {
+                return _IsList;
+            }
+            set
+            {
+                _IsList = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<bool> IsNullable
+        {
+            get
+            {
+                return _IsNullable;
+            }
+            set
+            {
+                _IsNullable = value;
+            }
+        }
+        
+        public event ToStringHandler<Property> OnToString_Property;
+        
+        public event ObjectEventHandler<Property> OnPreSave_Property;
+        
+        public event ObjectEventHandler<Property> OnPostSave_Property;
+        
+        public event GetDataType_Handler<Property> OnGetDataType_Property;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Property != null)
+            {
+                OnToString_Property(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Property != null) OnPreSave_Property(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Property != null) OnPostSave_Property(this);
+        }
+        
+        public override string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_Property != null)
+            {
+                OnGetDataType_Property(this, e);
+            }
+            return e.Result;
+        }
+    }
+    
+    public sealed class PropertyServer : ServerObject<Property, XMLObjectCollection, XMLObject>
     {
     }
 }

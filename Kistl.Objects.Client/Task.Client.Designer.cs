@@ -23,7 +23,137 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public sealed class TaskClient : ClientObject<Task>
+    public class Task : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_Projekt = Helper.INVALIDID;
+        
+        private string _Name;
+        
+        private System.Nullable<System.DateTime> _DatumVon;
+        
+        private System.Nullable<System.DateTime> _DatumBis;
+        
+        private System.Nullable<double> _Aufwand;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                return this.GetObject<Kistl.App.Projekte.Projekt>(fk_Projekt);
+            }
+            set
+            {
+                _fk_Projekt = value.ID;
+            }
+        }
+        
+        public int fk_Projekt
+        {
+            get
+            {
+                return _fk_Projekt;
+            }
+            set
+            {
+                _fk_Projekt = value;
+            }
+        }
+        
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+            }
+        }
+        
+        public System.Nullable<System.DateTime> DatumVon
+        {
+            get
+            {
+                return _DatumVon;
+            }
+            set
+            {
+                _DatumVon = value;
+            }
+        }
+        
+        public System.Nullable<System.DateTime> DatumBis
+        {
+            get
+            {
+                return _DatumBis;
+            }
+            set
+            {
+                _DatumBis = value;
+            }
+        }
+        
+        public System.Nullable<double> Aufwand
+        {
+            get
+            {
+                return _Aufwand;
+            }
+            set
+            {
+                _Aufwand = value;
+            }
+        }
+        
+        public event ToStringHandler<Task> OnToString_Task;
+        
+        public event ObjectEventHandler<Task> OnPreSave_Task;
+        
+        public event ObjectEventHandler<Task> OnPostSave_Task;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_Task != null)
+            {
+                OnToString_Task(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_Task != null) OnPreSave_Task(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_Task != null) OnPostSave_Task(this);
+        }
+    }
+    
+    public sealed class TaskClient : ClientObject<Task, XMLObjectCollection, XMLObject>
     {
     }
 }

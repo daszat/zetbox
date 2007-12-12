@@ -23,7 +23,124 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class ObjectForDeletedPropertiesClient : ClientObject<ObjectForDeletedProperties>
+    public class ObjectForDeletedProperties : BaseClientDataObject
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private string _Namespace;
+        
+        private string _DataType;
+        
+        private System.Nullable<bool> _IsAssociation;
+        
+        private string _ReferenceObjectClassName;
+        
+        private string _ReferencePropertyName;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        public string Namespace
+        {
+            get
+            {
+                return _Namespace;
+            }
+            set
+            {
+                _Namespace = value;
+            }
+        }
+        
+        public string DataType
+        {
+            get
+            {
+                return _DataType;
+            }
+            set
+            {
+                _DataType = value;
+            }
+        }
+        
+        public System.Nullable<bool> IsAssociation
+        {
+            get
+            {
+                return _IsAssociation;
+            }
+            set
+            {
+                _IsAssociation = value;
+            }
+        }
+        
+        public string ReferenceObjectClassName
+        {
+            get
+            {
+                return _ReferenceObjectClassName;
+            }
+            set
+            {
+                _ReferenceObjectClassName = value;
+            }
+        }
+        
+        public string ReferencePropertyName
+        {
+            get
+            {
+                return _ReferencePropertyName;
+            }
+            set
+            {
+                _ReferencePropertyName = value;
+            }
+        }
+        
+        public event ToStringHandler<ObjectForDeletedProperties> OnToString_ObjectForDeletedProperties;
+        
+        public event ObjectEventHandler<ObjectForDeletedProperties> OnPreSave_ObjectForDeletedProperties;
+        
+        public event ObjectEventHandler<ObjectForDeletedProperties> OnPostSave_ObjectForDeletedProperties;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_ObjectForDeletedProperties != null)
+            {
+                OnToString_ObjectForDeletedProperties(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_ObjectForDeletedProperties != null) OnPreSave_ObjectForDeletedProperties(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_ObjectForDeletedProperties != null) OnPostSave_ObjectForDeletedProperties(this);
+        }
+    }
+    
+    public sealed class ObjectForDeletedPropertiesClient : ClientObject<ObjectForDeletedProperties, XMLObjectCollection, XMLObject>
     {
     }
 }

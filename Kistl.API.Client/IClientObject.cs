@@ -81,7 +81,10 @@ namespace Kistl.API.Client
     /// Basis Client BL implementierung. Erzeugt und verwaltet typisierte Objekte.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ClientObject<T> : IClientObject where T : BaseDataObject, IDataObject, new()
+    public class ClientObject<T, XMLCOLLECTION, XMLOBJECT> : IClientObject 
+        where T : BaseClientDataObject, IDataObject, new()
+        where XMLCOLLECTION : IXmlObjectCollection, new()
+        where XMLOBJECT : IXmlObject, new()
     {
         /// <summary>
         /// Events registrieren
@@ -117,12 +120,12 @@ namespace Kistl.API.Client
         public IDataObject GetObjectGeneric(int ID)
         {
             if (ID == Helper.INVALIDID) return null;
-            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLObject>().Object;
+            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLOBJECT>().Object as IDataObject;
         }
 
         public IEnumerable GetListGeneric()
         {
-            return Proxy.Service.GetList(Type).FromXmlString<XMLObjectCollection>().Objects;
+            return Proxy.Service.GetList(Type).FromXmlString<XMLCOLLECTION>().Objects;
         }
 
         public IEnumerable GetListOfGeneric(int ID, string propName)
@@ -145,9 +148,9 @@ namespace Kistl.API.Client
 
         public IDataObject SetObjectGeneric(IDataObject obj)
         {
-            XMLObject xml = new XMLObject();
-            xml.Object = (BaseDataObject)obj;
-            return Proxy.Service.SetObject(Type, xml.ToXmlString()).FromXmlString<XMLObject>().Object;
+            XMLOBJECT xml = new XMLOBJECT();
+            xml.Object = (BaseClientDataObject)obj;
+            return Proxy.Service.SetObject(Type, xml.ToXmlString()).FromXmlString<XMLOBJECT>().Object as IDataObject;
         }
         #endregion
 
@@ -166,20 +169,20 @@ namespace Kistl.API.Client
         public T GetObject(int ID)
         {
             if (ID == Helper.INVALIDID) return null;
-            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLObject>().Object as T;
+            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLOBJECT>().Object as T;
         }
 
         public List<T> GetList()
         {
-            return Proxy.Service.GetList(Type).FromXmlString<XMLObjectCollection>().ToList<T>();
+            return Proxy.Service.GetList(Type).FromXmlString<XMLCOLLECTION>().Objects.OfType<T>().ToList();
         }
 
         public T SetObject(T obj)
         {
-            XMLObject xml = new XMLObject();
+            XMLOBJECT xml = new XMLOBJECT();
             xml.Object = obj;
             string result = Proxy.Service.SetObject(Type, xml.ToXmlString());
-            return result.FromXmlString<XMLObject>().Object as T;
+            return result.FromXmlString<XMLOBJECT>().Object as T;
         }        
         #endregion
     }

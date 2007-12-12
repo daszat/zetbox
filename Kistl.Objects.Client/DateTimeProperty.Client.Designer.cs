@@ -23,7 +23,53 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public sealed class DateTimePropertyClient : ClientObject<DateTimeProperty>
+    public class DateTimeProperty : Kistl.App.Base.ValueTypeProperty
+    {
+        
+        public event ToStringHandler<DateTimeProperty> OnToString_DateTimeProperty;
+        
+        public event ObjectEventHandler<DateTimeProperty> OnPreSave_DateTimeProperty;
+        
+        public event ObjectEventHandler<DateTimeProperty> OnPostSave_DateTimeProperty;
+        
+        public event GetDataType_Handler<DateTimeProperty> OnGetDataType_DateTimeProperty;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_DateTimeProperty != null)
+            {
+                OnToString_DateTimeProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_DateTimeProperty != null) OnPreSave_DateTimeProperty(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_DateTimeProperty != null) OnPostSave_DateTimeProperty(this);
+        }
+        
+        public override string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_DateTimeProperty != null)
+            {
+                OnGetDataType_DateTimeProperty(this, e);
+            }
+            return e.Result;
+        }
+    }
+    
+    public sealed class DateTimePropertyClient : ClientObject<DateTimeProperty, XMLObjectCollection, XMLObject>
     {
     }
 }

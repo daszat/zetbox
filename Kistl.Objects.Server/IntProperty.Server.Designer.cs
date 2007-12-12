@@ -23,7 +23,54 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
-    public sealed class IntPropertyServer : ServerObject<IntProperty>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntProperty")]
+    public class IntProperty : Kistl.App.Base.ValueTypeProperty
+    {
+        
+        public event ToStringHandler<IntProperty> OnToString_IntProperty;
+        
+        public event ObjectEventHandler<IntProperty> OnPreSave_IntProperty;
+        
+        public event ObjectEventHandler<IntProperty> OnPostSave_IntProperty;
+        
+        public event GetDataType_Handler<IntProperty> OnGetDataType_IntProperty;
+        
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_IntProperty != null)
+            {
+                OnToString_IntProperty(this, e);
+            }
+            return e.Result;
+        }
+        
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_IntProperty != null) OnPreSave_IntProperty(this);
+        }
+        
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_IntProperty != null) OnPostSave_IntProperty(this);
+        }
+        
+        public override string GetDataType()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_IntProperty != null)
+            {
+                OnGetDataType_IntProperty(this, e);
+            }
+            return e.Result;
+        }
+    }
+    
+    public sealed class IntPropertyServer : ServerObject<IntProperty, XMLObjectCollection, XMLObject>
     {
     }
 }
