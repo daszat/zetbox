@@ -23,7 +23,18 @@ namespace Kistl.API.Client
             }
         }
 
-        public KistlContext Context { get; set; }
+        private KistlContext _context;
+        public KistlContext Context { get { return _context; } }
+        internal void AttachToContext(KistlContext ctx)
+        {
+            _context = ctx;
+        }
+
+        internal void DetachFromContext(KistlContext ctx)
+        {
+            if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
+            _context = null;
+        }
 
         #region IDataObject Members
 

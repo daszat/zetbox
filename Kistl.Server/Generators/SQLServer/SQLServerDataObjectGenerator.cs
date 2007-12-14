@@ -848,7 +848,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             p.GetStatements.Add(
                 new CodeSnippetExpression(string.Format(
-                    @"return Proxy.Service.GetListOf(Type, ID, ""{0}"").FromXmlString<XMLObjectCollection>().ToList<{1}>()",
+                    @"return Context.GetListOf<{1}>(this, ""{0}"")",
                 prop.PropertyName, prop.GetDataType())));
         }
         #endregion

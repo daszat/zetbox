@@ -21,6 +21,14 @@ namespace Kistl.API.Client
             _type = type;
         }
 
+        internal List<T> GetListOf(int ID, string propertyName)
+        {
+            IClientObject client = ClientObjectFactory.GetClientObject(_type);
+            List<T> result = client.GetListOfGeneric(ID, propertyName).OfType<T>().ToList();
+            result.ForEach(r => _context.Attach(r as BaseClientDataObject));
+            return result;
+        }
+
         #region IQueryProvider Members
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression e)
@@ -50,15 +58,15 @@ namespace Kistl.API.Client
             if (SearchType == SearchTypeEnum.GetList)
             {
                 List<T> result = client.GetListGeneric().OfType<T>().ToList();
-                result.ForEach(r => (r as BaseClientDataObject).Context = _context);
+                result.ForEach(r => _context.Attach(r as BaseClientDataObject));
                 return result;
             }
             else
             {
                 if (ID != Helper.INVALIDID)
                 {
-                    T result = (T)client.GetObjectGeneric(ID);
-                    (result as BaseClientDataObject).Context = _context;
+                    T result = (T)(IDataObject)client.GetObjectGeneric(ID);
+                    _context.Attach(result as BaseClientDataObject);
                     return result;
                 }
             }

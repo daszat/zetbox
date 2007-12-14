@@ -18,13 +18,13 @@ namespace Kistl.API.Client
         /// Wird von der GUI benötigt.
         /// </summary>
         /// <returns></returns>
-        IDataObject CreateNewGeneric();
+        BaseClientDataObject CreateNewGeneric();
         /// <summary>
         /// Objekt holen
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        IDataObject GetObjectGeneric(int ID);
+        BaseClientDataObject GetObjectGeneric(int ID);
         /// <summary>
         /// List holen
         /// </summary>
@@ -43,7 +43,7 @@ namespace Kistl.API.Client
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        IDataObject SetObjectGeneric(IDataObject obj);
+        BaseClientDataObject SetObjectGeneric(IDataObject obj);
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ namespace Kistl.API.Client
         public ClientObject()
         {
             // TODO: Add to cache
-            _type = new ObjectType(typeof(T).Namespace, typeof(T).Name);
+            _type = new ObjectType(typeof(T));
         }
 
         protected ObjectType _type = null;
@@ -111,16 +111,16 @@ namespace Kistl.API.Client
         /// Wird von der GUI benötigt.
         /// </summary>
         /// <returns></returns>
-        public IDataObject CreateNewGeneric()
+        public BaseClientDataObject CreateNewGeneric()
         {
             T obj = new T();
             return obj;
         }
 
-        public IDataObject GetObjectGeneric(int ID)
+        public BaseClientDataObject GetObjectGeneric(int ID)
         {
             if (ID == Helper.INVALIDID) return null;
-            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLOBJECT>().Object as IDataObject;
+            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
         }
 
         public IEnumerable GetListGeneric()
@@ -146,11 +146,11 @@ namespace Kistl.API.Client
             }
         }
 
-        public IDataObject SetObjectGeneric(IDataObject obj)
+        public BaseClientDataObject SetObjectGeneric(IDataObject obj)
         {
             XMLOBJECT xml = new XMLOBJECT();
             xml.Object = (BaseClientDataObject)obj;
-            return Proxy.Service.SetObject(Type, xml.ToXmlString()).FromXmlString<XMLOBJECT>().Object as IDataObject;
+            return Proxy.Service.SetObject(Type, xml.ToXmlString()).FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
         }
         #endregion
 

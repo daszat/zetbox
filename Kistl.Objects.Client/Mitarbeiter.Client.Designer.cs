@@ -66,7 +66,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return Proxy.Service.GetListOf(Type, ID, "Projekte").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Projekte.Projekt>();
+                return Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte");
             }
         }
         

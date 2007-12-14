@@ -74,7 +74,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Proxy.Service.GetListOf(Type, ID, "ObjectClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
+                return Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "ObjectClasses");
             }
         }
         

@@ -78,9 +78,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                //return Context
-                // Das muss jetzt auch über den Kontext gehen - aber erst morgen
-                return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.BaseProperty>();
+                return Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
             }
         }
         
@@ -116,7 +114,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Proxy.Service.GetListOf(Type, ID, "SubClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
+                return Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses");
             }
         }
         
@@ -126,7 +124,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Proxy.Service.GetListOf(Type, ID, "Methods").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.Method>();
+                return Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
             }
         }
         
