@@ -141,7 +141,7 @@ namespace Kistl.App.Base
         public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
     
-    public sealed class BasePropertyClient : ClientObject<BaseProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class BasePropertyClient : ClientObject<BaseProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

@@ -155,7 +155,7 @@ namespace Kistl.App.Projekte
         }
     }
     
-    public sealed class TaskClient : ClientObject<Task, XMLObjectCollection, XMLObject>
+    /*public sealed class TaskClient : ClientObject<Task, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

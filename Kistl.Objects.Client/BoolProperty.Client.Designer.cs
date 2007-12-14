@@ -70,7 +70,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class BoolPropertyClient : ClientObject<BoolProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class BoolPropertyClient : ClientObject<BoolProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

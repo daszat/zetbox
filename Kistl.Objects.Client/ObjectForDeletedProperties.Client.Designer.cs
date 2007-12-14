@@ -141,7 +141,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class ObjectForDeletedPropertiesClient : ClientObject<ObjectForDeletedProperties, XMLObjectCollection, XMLObject>
+    /*public sealed clasnt : ClientObject<ObjectForDeletedProperties, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

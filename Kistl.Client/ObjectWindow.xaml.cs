@@ -47,12 +47,12 @@ namespace Kistl.Client
         /// <summary>
         /// Client BL Objekt instanz
         /// </summary>
-        private IClientObject client = null;
+        private KistlContext ctx = null;
 
         /// <summary>
         /// Datenobjekt, das angezeigt wird.
         /// </summary>
-        private Kistl.API.IDataObject obj = null;
+        private Kistl.API.Client.BaseClientDataObject obj = null;
 
         private void BindDefaultProperties()
         {
@@ -75,8 +75,6 @@ namespace Kistl.Client
 
         private List<Kistl.App.Base.ObjectClass> GetObjectHierarchie()
         {
-            Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
-
             Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[ObjectType]; //.First(o => o.GetObject<Kistl.App.Base.Module>("Module").Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
             List<Kistl.App.Base.ObjectClass> objClasses = new List<Kistl.App.Base.ObjectClass>();
             while (objClass != null)
@@ -239,8 +237,12 @@ namespace Kistl.Client
             try
             {
                 // Client BL holen
-                client = ClientObjectFactory.GetClientObject(ObjectType);
+                //client = ClientObjectFactory.GetClientObject(ObjectType);
+                ctx = new KistlContext();
 
+                obj = ctx.GetQuery(ObjectType).SingleOrDefault(o => o.ID == ObjectID);
+
+                /*
                 // Je nachdem, Objekt vom Server holen oder mittels BL erzeugen
                 if (ObjectID != API.Helper.INVALIDID)
                 {
@@ -250,6 +252,7 @@ namespace Kistl.Client
                 {
                     obj = client.CreateNewGeneric();
                 }
+                 * */
 
                 // Objekttype anpassen
                 ObjectType = new ObjectType(obj);
@@ -276,7 +279,8 @@ namespace Kistl.Client
             try
             {
                 // Objekt zum Server schicken & dann wieder auspacken
-                obj = client.SetObjectGeneric(obj);
+                // obj = client.SetObjectGeneric(obj);
+                obj = ctx.SubmitChanges(obj);
                 ObjectID = obj.ID;
                 // ReBind
                 data.DataContext = obj;

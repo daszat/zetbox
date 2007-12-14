@@ -84,7 +84,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class StringPropertyClient : ClientObject<StringProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class StringPropertyClient : ClientObject<StringProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

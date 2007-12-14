@@ -70,7 +70,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class IntPropertyClient : ClientObject<IntProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class IntPropertyClient : ClientObject<IntProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

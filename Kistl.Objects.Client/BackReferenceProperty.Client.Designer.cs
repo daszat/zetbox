@@ -98,7 +98,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class BackReferencePropertyClient : ClientObject<BackReferenceProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class BackReferencePropertyClient : ClientObject<BackReferenceProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

@@ -70,7 +70,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class ValueTypePropertyClient : ClientObject<ValueTypeProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class ValueTypePropertyClient : ClientObject<ValueTypeProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

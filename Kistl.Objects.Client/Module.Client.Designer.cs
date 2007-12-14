@@ -109,6 +109,7 @@ namespace Kistl.App.Base
         }
     }
     
+    /*
     public sealed class ModuleClient : ClientObject<Module, XMLObjectCollection, XMLObject>
     {
         
@@ -118,4 +119,5 @@ namespace Kistl.App.Base
             return Proxy.Service.GetListOf(Type, ID, "ObjectClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
         }
     }
+     * */
 }

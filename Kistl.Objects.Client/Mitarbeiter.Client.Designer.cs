@@ -137,7 +137,7 @@ namespace Kistl.App.Projekte
         }
     }
     
-    public sealed class MitarbeiterClient : ClientObject<Mitarbeiter, XMLObjectCollection, XMLObject>
+/*    public sealed class MitarbeiterClient : ClientObject<Mitarbeiter, XMLObjectCollection, XMLObject>
     {
         
         // Autogeneriert, um die gebundenen Listen zu bekommen
@@ -146,4 +146,5 @@ namespace Kistl.App.Projekte
             return Proxy.Service.GetListOf(Type, ID, "Projekte").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Projekte.Projekt>();
         }
     }
+ * */
 }

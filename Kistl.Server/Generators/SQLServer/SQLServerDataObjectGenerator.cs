@@ -177,7 +177,7 @@ namespace Kistl.Server.Generators.SQLServer
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API.Client"));
 
             GenerateClientDataObjects(code, ns, objClass);
-            GenerateClientAccessLayer(objClass, ns);
+            // GenerateClientAccessLayer(objClass, ns);
 
             // Generate the code & save
             SaveFile(code, path + @"Kistl.Objects.Client\" + objClass.ClassName + ".Client.Designer.cs");
@@ -213,6 +213,7 @@ namespace Kistl.Server.Generators.SQLServer
                 new CodeTypeReference("XMLObject")));
         }
 
+        /*
         private void GenerateClientAccessLayer(ObjectClass objClass, CodeNamespace ns)
         {
             CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Client");
@@ -241,6 +242,7 @@ namespace Kistl.Server.Generators.SQLServer
                     prop.PropertyName, prop.GetDataType())));
             }
         }
+         * */
 
         #endregion
 

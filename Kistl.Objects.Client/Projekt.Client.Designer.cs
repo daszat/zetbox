@@ -137,6 +137,7 @@ namespace Kistl.App.Projekte
         }
     }
     
+    /*
     public sealed class ProjektClient : ClientObject<Projekt, XMLObjectCollection, XMLObject>
     {
         
@@ -146,4 +147,5 @@ namespace Kistl.App.Projekte
             return Proxy.Service.GetListOf(Type, ID, "Tasks").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Projekte.Task>();
         }
     }
+     * */
 }

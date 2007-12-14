@@ -70,7 +70,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class DateTimePropertyClient : ClientObject<DateTimeProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class DateTimePropertyClient : ClientObject<DateTimeProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

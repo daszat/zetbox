@@ -11,39 +11,33 @@ namespace Kistl.API.Client
     /// <summary>
     /// Interface für das Client BL Objekt.
     /// </summary>
-    public interface IClientObject
+    internal interface IClientObject
     {
-        /// <summary>
-        /// Neues Objekt erzeugen
-        /// Wird von der GUI benötigt.
-        /// </summary>
-        /// <returns></returns>
-        BaseClientDataObject CreateNewGeneric();
         /// <summary>
         /// Objekt holen
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        BaseClientDataObject GetObjectGeneric(int ID);
+        BaseClientDataObject GetObject(ObjectType type, int ID);
         /// <summary>
         /// List holen
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        IEnumerable GetListGeneric();
+        IEnumerable GetList(ObjectType type);
         /// <summary>
         /// List holen
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        IEnumerable GetListOfGeneric(int ID, string propName);
+        IEnumerable GetListOf(ObjectType type, int ID, string propName);
         /// <summary>
         /// Objekt speichern
         /// </summary>
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        BaseClientDataObject SetObjectGeneric(IDataObject obj);
+        BaseClientDataObject SetObject(ObjectType type, IDataObject obj);
     }
 
     /// <summary>
@@ -54,22 +48,41 @@ namespace Kistl.API.Client
     public delegate void ClientObjectHandler<T>(T obj) where T : class, IDataObject, new();
 
 
-    public class ClientObjectFactory
+    internal class ClientObjectFactory
     {
         /// <summary>
         /// Helper Function for generic access
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static IClientObject GetClientObject(ObjectType type)
+        public static IClientObject GetClientObject()
+        {
+            Type t = typeof(ClientObject<,>);
+            Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Client");
+            Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Client");
+
+            Type result = t.MakeGenericType(xmlCollection, xmlObj);
+
+            IClientObject obj = Activator.CreateInstance(result) as IClientObject;
+            if (obj == null) throw new ApplicationException("Cannot create instance");
+
+            return obj;
+        }
+
+        /// <summary>
+        /// Helper Function for generic access
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static BaseClientDataObject GetObject(ObjectType type)
         {
             if (type == null) throw new ArgumentException("Type is null");
             if (string.IsNullOrEmpty(type.FullNameClientObject)) throw new ArgumentException("Type is empty");
 
-            Type t = Type.GetType(type.FullNameClientObject);
+            Type t = Type.GetType(type.FullNameDataObject);
             if (t == null) throw new ApplicationException("Invalid Type " + type);
 
-            IClientObject obj = Activator.CreateInstance(t) as IClientObject;
+            BaseClientDataObject obj = Activator.CreateInstance(t) as BaseClientDataObject;
             if (obj == null) throw new ApplicationException("Cannot create instance");
 
             return obj;
@@ -81,109 +94,37 @@ namespace Kistl.API.Client
     /// Basis Client BL implementierung. Erzeugt und verwaltet typisierte Objekte.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ClientObject<T, XMLCOLLECTION, XMLOBJECT> : IClientObject 
-        where T : BaseClientDataObject, IDataObject, new()
+    internal class ClientObject<XMLCOLLECTION, XMLOBJECT> : IClientObject 
         where XMLCOLLECTION : IXmlObjectCollection, new()
         where XMLOBJECT : IXmlObject, new()
     {
-        /// <summary>
-        /// Events registrieren
-        /// </summary>
         public ClientObject()
         {
-            // TODO: Add to cache
-            _type = new ObjectType(typeof(T));
-        }
-
-        protected ObjectType _type = null;
-
-        public ObjectType Type
-        {
-            get
-            {
-                return _type;
-            }
         }
 
         #region IClientObject Members
-        /// <summary>
-        /// Neues Objekt erzeugen
-        /// Wird von der GUI benötigt.
-        /// </summary>
-        /// <returns></returns>
-        public BaseClientDataObject CreateNewGeneric()
-        {
-            T obj = new T();
-            return obj;
-        }
-
-        public BaseClientDataObject GetObjectGeneric(int ID)
+        public BaseClientDataObject GetObject(ObjectType type, int ID)
         {
             if (ID == Helper.INVALIDID) return null;
-            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
+            return Proxy.Service.GetObject(type, ID).FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
         }
 
-        public IEnumerable GetListGeneric()
+        public IEnumerable GetList(ObjectType type)
         {
-            return Proxy.Service.GetList(Type).FromXmlString<XMLCOLLECTION>().Objects;
+            return Proxy.Service.GetList(type).FromXmlString<XMLCOLLECTION>().Objects;
         }
 
-        public IEnumerable GetListOfGeneric(int ID, string propName)
+        public IEnumerable GetListOf(ObjectType type, int ID, string propName)
         {
-            if (ID == Helper.INVALIDID) return null;
-            // Client Methode holen
-            // TODO: Cachen!
-            MethodInfo mi = this.GetType().GetMethod("GetListOf" + propName);
-            if (mi != null)
-            {
-                // Liste vom Server holen & den DataContext setzen.
-                //string xml = Proxy.Service.GetListOf(Type, ID, propName);
-                return mi.Invoke(this, new object[] { ID }) as IEnumerable;
-            }
-            else
-            {
-                throw new ApplicationException("Property " + propName + " not found");
-            }
+            return Proxy.Service.GetListOf(type, ID, propName).FromXmlString<XMLCOLLECTION>().Objects;
         }
 
-        public BaseClientDataObject SetObjectGeneric(IDataObject obj)
+        public BaseClientDataObject SetObject(ObjectType type, IDataObject obj)
         {
             XMLOBJECT xml = new XMLOBJECT();
             xml.Object = (BaseClientDataObject)obj;
-            return Proxy.Service.SetObject(Type, xml.ToXmlString()).FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
+            return Proxy.Service.SetObject(type, xml.ToXmlString()).FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
         }
-        #endregion
-
-        #region Typed Acces members
-        /// <summary>
-        /// Neues Objekt erzeugen
-        /// Wird von der GUI benötigt.
-        /// </summary>
-        /// <returns></returns>
-        public T CreateNew()
-        {
-            T obj = new T();
-            return obj;
-        }
-
-        public T GetObject(int ID)
-        {
-            if (ID == Helper.INVALIDID) return null;
-            return Proxy.Service.GetObject(Type, ID).FromXmlString<XMLOBJECT>().Object as T;
-        }
-
-        public List<T> GetList()
-        {
-            return Proxy.Service.GetList(Type).FromXmlString<XMLCOLLECTION>().Objects.OfType<T>().ToList();
-        }
-
-        public T SetObject(T obj)
-        {
-            XMLOBJECT xml = new XMLOBJECT();
-            xml.Object = obj;
-            string result = Proxy.Service.SetObject(Type, xml.ToXmlString());
-            return result.FromXmlString<XMLOBJECT>().Object as T;
-        }        
         #endregion
     }
 }

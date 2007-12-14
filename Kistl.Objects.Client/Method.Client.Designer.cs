@@ -113,7 +113,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class MethodClient : ClientObject<Method, XMLObjectCollection, XMLObject>
+    /*public sealed class MethodClient : ClientObject<Method, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

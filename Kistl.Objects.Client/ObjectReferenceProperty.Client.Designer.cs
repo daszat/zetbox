@@ -98,7 +98,7 @@ namespace Kistl.App.Base
         }
     }
     
-    public sealed class ObjectReferencePropertyClient : ClientObject<ObjectReferenceProperty, XMLObjectCollection, XMLObject>
+    /*public sealed class ObjectReferencePropertyClient : ClientObject<ObjectReferenceProperty, XMLObjectCollection, XMLObject>
     {
-    }
+    }*/
 }

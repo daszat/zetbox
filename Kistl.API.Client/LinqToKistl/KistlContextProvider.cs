@@ -23,8 +23,8 @@ namespace Kistl.API.Client
 
         internal List<T> GetListOf(int ID, string propertyName)
         {
-            IClientObject client = ClientObjectFactory.GetClientObject(_type);
-            List<T> result = client.GetListOfGeneric(ID, propertyName).OfType<T>().ToList();
+            IClientObject client = ClientObjectFactory.GetClientObject();
+            List<T> result = client.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
             result.ForEach(r => _context.Attach(r as BaseClientDataObject));
             return result;
         }
@@ -50,22 +50,34 @@ namespace Kistl.API.Client
 
         public object Execute(Expression e)
         {
-            //System.Diagnostics.Trace.WriteLine(string.Format("Execute {0}", e.ToString()));
             Visit(e);
 
-            IClientObject client = ClientObjectFactory.GetClientObject(_type);
+            IClientObject client = ClientObjectFactory.GetClientObject();
 
             if (SearchType == SearchTypeEnum.GetList)
             {
-                List<T> result = client.GetListGeneric().OfType<T>().ToList();
+                List<T> result = client.GetList(_type).OfType<T>().ToList();
                 result.ForEach(r => _context.Attach(r as BaseClientDataObject));
                 return result;
+            }
+            else if(SearchType == SearchTypeEnum.GetObjectOrNew)
+            {
+                if (ID != Helper.INVALIDID)
+                {
+                    T result = (T)(IDataObject)client.GetObject(_type, ID);
+                    if (result != null)
+                    {
+                        _context.Attach(result as BaseClientDataObject);
+                        return result;
+                    }
+                }
+                return (T)(IDataObject)_context.Create(typeof(T));
             }
             else
             {
                 if (ID != Helper.INVALIDID)
                 {
-                    T result = (T)(IDataObject)client.GetObjectGeneric(ID);
+                    T result = (T)(IDataObject)client.GetObject(_type, ID);
                     _context.Attach(result as BaseClientDataObject);
                     return result;
                 }
@@ -83,6 +95,7 @@ namespace Kistl.API.Client
         private enum SearchTypeEnum
         {
             GetObject,
+            GetObjectOrNew,
             GetList,
         }
 
@@ -180,6 +193,11 @@ namespace Kistl.API.Client
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Single")
             {
                 SearchType = SearchTypeEnum.GetObject;
+                this.Visit(m.Arguments[1]);
+            }
+            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "SingleOrDefault")
+            {
+                SearchType = SearchTypeEnum.GetObjectOrNew;
                 this.Visit(m.Arguments[1]);
             }
             else

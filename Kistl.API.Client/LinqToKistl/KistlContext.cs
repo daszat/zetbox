@@ -38,10 +38,14 @@ namespace Kistl.API.Client
             return obj;
         }
 
+        public BaseClientDataObject Create(Type type)
+        {
+            return Create(new ObjectType(type));
+        }
+
         public BaseClientDataObject Create(ObjectType type)
         {
-            IClientObject client = ClientObjectFactory.GetClientObject(type);
-            BaseClientDataObject obj = client.CreateNewGeneric();
+            BaseClientDataObject obj = ClientObjectFactory.GetObject(type);
             Attach(obj);
             return obj;
         }
@@ -54,6 +58,12 @@ namespace Kistl.API.Client
         public void Dettach(BaseClientDataObject obj)
         {
             obj.DetachFromContext(this);
+        }
+
+        public BaseClientDataObject SubmitChanges(BaseClientDataObject obj)
+        {
+            IClientObject client = ClientObjectFactory.GetClientObject();
+            return client.SetObject(obj.Type, obj);
         }
 
         #region IDisposable Members
