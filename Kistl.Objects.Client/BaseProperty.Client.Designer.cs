@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BaseProperty : BaseClientDataObject
+    public class BaseProperty : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -128,6 +128,21 @@ namespace Kistl.App.Base
             if (OnPostSave_BaseProperty != null) OnPostSave_BaseProperty(this);
         }
         
+        public override object Clone()
+        {
+            BaseProperty obj = new BaseProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(BaseProperty obj)
+        {
+            base.CopyTo(obj);
+            obj.fk_ObjectClass = this.fk_ObjectClass;
+            obj.PropertyName = this.PropertyName;
+            obj.AltText = this.AltText;
+        }
+        
         public virtual string GetDataType()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -140,8 +155,4 @@ namespace Kistl.App.Base
         
         public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
-    
-    /*public sealed class BasePropertyClient : ClientObject<BaseProperty, XMLObjectCollection, XMLObject>
-    {
-    }*/
 }

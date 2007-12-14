@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace Kistl.API.Client
 {
-    public abstract class BaseClientDataObject : IDataObject
+    public abstract class BaseClientDataObject : IDataObject, ICloneable, INotifyPropertyChanged
     {
         public BaseClientDataObject()
         {
             API.CustomActionsManagerFactory.Current.AttachEvents(this);
-            _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
+            _type = new ObjectType(this.GetType());
         }
 
         protected ObjectType _type = null;
@@ -46,10 +47,28 @@ namespace Kistl.API.Client
         #endregion
 
         /// <summary>
-        /// Zum Melden, dass sich das Datenobjekt geänder hat.
+        /// Zum Melden, dass sich das Datenobjekt geändert hat.
         /// </summary>
         public void NotifyChange()
         {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
         }
+
+        public void CopyTo(BaseClientDataObject obj)
+        {
+            obj.ID = this.ID;
+        }
+
+        public virtual object Clone()
+        {
+            return null;
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
     }
 }

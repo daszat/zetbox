@@ -264,6 +264,7 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 c.BaseTypes.Add("BaseServerDataObject");
             }
+            c.BaseTypes.Add("ICloneable");
             c.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                 new CodeAttributeArgument("NamespaceName", 
                     new CodePrimitiveExpression("Model")),
@@ -301,6 +302,7 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 c.BaseTypes.Add("BaseClientDataObject");
             }
+            c.BaseTypes.Add("ICloneable");
 
             if (objClass.BaseObjectClass == null)
             {
@@ -544,6 +546,40 @@ namespace Kistl.Server.Generators.SQLServer
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPostSave();
             if (OnPostSave_{0} != null) OnPostSave_{0}(this)",objClass.ClassName)));// TODO: Das ist C# spezifisch
 
+            // Create Clone Method
+            m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Name = "Clone";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(object));
+            m.Statements.Add(new CodeSnippetExpression(string.Format(@"{0} obj = new {0}();
+            CopyTo(obj);
+            return obj", objClass.ClassName)));// TODO: Das ist C# spezifisch
+
+            // Create CopyTo Method
+            m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Name = "CopyTo";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(objClass.ClassName), "obj"));
+            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
+
+            foreach (BaseProperty p in objClass.Properties)
+            {
+                if (p is ValueTypeProperty)
+                {
+                    m.Statements.Add(new CodeAssignStatement(
+                        new CodeFieldReferenceExpression(new CodeVariableReferenceExpression("obj"), p.PropertyName),
+                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), p.PropertyName)));
+                }
+                else if (p is ObjectReferenceProperty)
+                {
+                    m.Statements.Add(new CodeAssignStatement(
+                        new CodeFieldReferenceExpression(new CodeVariableReferenceExpression("obj"), p.PropertyName),
+                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), p.PropertyName)));
+                }
+            }
         }
         #endregion
 

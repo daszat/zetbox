@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="StringProperty")]
-    public class StringProperty : Kistl.App.Base.ValueTypeProperty
+    public class StringProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
         private System.Nullable<int> _Length;
@@ -72,6 +72,19 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_StringProperty != null) OnPostSave_StringProperty(this);
+        }
+        
+        public override object Clone()
+        {
+            StringProperty obj = new StringProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(StringProperty obj)
+        {
+            base.CopyTo(obj);
+            obj.Length = this.Length;
         }
         
         public override string GetDataType()

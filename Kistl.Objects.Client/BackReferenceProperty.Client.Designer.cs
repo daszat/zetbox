@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BackReferenceProperty : Kistl.App.Base.BaseProperty
+    public class BackReferenceProperty : Kistl.App.Base.BaseProperty, ICloneable
     {
         
         private int _fk_ReferenceProperty = Helper.INVALIDID;
@@ -86,6 +86,19 @@ namespace Kistl.App.Base
             if (OnPostSave_BackReferenceProperty != null) OnPostSave_BackReferenceProperty(this);
         }
         
+        public override object Clone()
+        {
+            BackReferenceProperty obj = new BackReferenceProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(BackReferenceProperty obj)
+        {
+            base.CopyTo(obj);
+            obj.fk_ReferenceProperty = this.fk_ReferenceProperty;
+        }
+        
         public override string GetDataType()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -97,8 +110,4 @@ namespace Kistl.App.Base
             return e.Result;
         }
     }
-    
-    /*public sealed class BackReferencePropertyClient : ClientObject<BackReferenceProperty, XMLObjectCollection, XMLObject>
-    {
-    }*/
 }

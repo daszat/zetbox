@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class ObjectClass : BaseClientDataObject
+    public class ObjectClass : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -183,29 +183,21 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_ObjectClass != null) OnPostSave_ObjectClass(this);
         }
-    }
-    
-    /*
-    public sealed class ObjectClassClient : ClientObject<ObjectClass, XMLObjectCollection, XMLObject>
-    {
         
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.BaseProperty> GetListOfProperties(int ID)
+        public override object Clone()
         {
-            return Proxy.Service.GetListOf(Type, ID, "Properties").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.BaseProperty>();
+            ObjectClass obj = new ObjectClass();
+            CopyTo(obj);
+            return obj;
         }
         
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.ObjectClass> GetListOfSubClasses(int ID)
+        public void CopyTo(ObjectClass obj)
         {
-            return Proxy.Service.GetListOf(Type, ID, "SubClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
-        }
-        
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.Method> GetListOfMethods(int ID)
-        {
-            return Proxy.Service.GetListOf(Type, ID, "Methods").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.Method>();
+            base.CopyTo(obj);
+            obj.ClassName = this.ClassName;
+            obj.TableName = this.TableName;
+            obj.fk_BaseObjectClass = this.fk_BaseObjectClass;
+            obj.fk_Module = this.fk_Module;
         }
     }
-     * */
 }

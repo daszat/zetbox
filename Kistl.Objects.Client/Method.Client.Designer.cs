@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Method : BaseClientDataObject
+    public class Method : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -111,9 +111,19 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Method != null) OnPostSave_Method(this);
         }
+        
+        public override object Clone()
+        {
+            Method obj = new Method();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(Method obj)
+        {
+            base.CopyTo(obj);
+            obj.fk_ObjectClass = this.fk_ObjectClass;
+            obj.MethodName = this.MethodName;
+        }
     }
-    
-    /*public sealed class MethodClient : ClientObject<Method, XMLObjectCollection, XMLObject>
-    {
-    }*/
 }

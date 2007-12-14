@@ -279,15 +279,11 @@ namespace Kistl.Client
             try
             {
                 // Objekt zum Server schicken & dann wieder auspacken
-                // obj = client.SetObjectGeneric(obj);
-                obj = ctx.SubmitChanges(obj);
+                ctx.SubmitChanges();
                 ObjectID = obj.ID;
                 // ReBind
-                data.DataContext = obj;
-                // Das muss sein, weil die Properties keine DependencyProperties sind
-                // Nutzt aber nix, da ich ein neues Objekt zurück bekommen habe *grrr*
-                // einfach den Datakontext neu setzen (siehe oben)
-                // obj.NotifyChange(); 
+                // Das muss sein, weil die Properties (noch) keine DependencyProperties sind
+                obj.NotifyChange(); 
 
                 IsObjectDirty = false;
                 SetTitle();

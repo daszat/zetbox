@@ -9,6 +9,8 @@ namespace Kistl.API.Client
 {
     public class KistlContext : IDisposable
     {
+        private List<BaseClientDataObject> _objects = new List<BaseClientDataObject>();
+
         public KistlContextQuery<BaseClientDataObject> GetQuery(ObjectType type)
         {
             return new KistlContextQuery<BaseClientDataObject>(this, type);
@@ -52,18 +54,26 @@ namespace Kistl.API.Client
 
         public void Attach(BaseClientDataObject obj)
         {
+            if (_objects.Contains(obj)) throw new InvalidOperationException("Object is already attached to this context");
+            _objects.Add(obj);
             obj.AttachToContext(this);
         }
 
         public void Dettach(BaseClientDataObject obj)
         {
+            if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
+            _objects.Remove(obj);
             obj.DetachFromContext(this);
         }
 
-        public BaseClientDataObject SubmitChanges(BaseClientDataObject obj)
+        public void SubmitChanges()
         {
             IClientObject client = ClientObjectFactory.GetClientObject();
-            return client.SetObject(obj.Type, obj);
+            foreach (BaseClientDataObject obj in _objects)
+            {
+                BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
+                newobj.CopyTo(obj);
+            }
         }
 
         #region IDisposable Members

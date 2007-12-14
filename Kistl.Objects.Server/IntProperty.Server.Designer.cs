@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntProperty")]
-    public class IntProperty : Kistl.App.Base.ValueTypeProperty
+    public class IntProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
         public event ToStringHandler<IntProperty> OnToString_IntProperty;
@@ -57,6 +57,18 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_IntProperty != null) OnPostSave_IntProperty(this);
+        }
+        
+        public override object Clone()
+        {
+            IntProperty obj = new IntProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(IntProperty obj)
+        {
+            base.CopyTo(obj);
         }
         
         public override string GetDataType()

@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="DateTimeProperty")]
-    public class DateTimeProperty : Kistl.App.Base.ValueTypeProperty
+    public class DateTimeProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
         public event ToStringHandler<DateTimeProperty> OnToString_DateTimeProperty;
@@ -57,6 +57,18 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_DateTimeProperty != null) OnPostSave_DateTimeProperty(this);
+        }
+        
+        public override object Clone()
+        {
+            DateTimeProperty obj = new DateTimeProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(DateTimeProperty obj)
+        {
+            base.CopyTo(obj);
         }
         
         public override string GetDataType()

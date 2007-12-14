@@ -26,7 +26,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BackReferenceProperty")]
-    public class BackReferenceProperty : Kistl.App.Base.BaseProperty
+    public class BackReferenceProperty : Kistl.App.Base.BaseProperty, ICloneable
     {
         
         private int _fk_ReferenceProperty = Helper.INVALIDID;
@@ -95,6 +95,19 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_BackReferenceProperty != null) OnPostSave_BackReferenceProperty(this);
+        }
+        
+        public override object Clone()
+        {
+            BackReferenceProperty obj = new BackReferenceProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(BackReferenceProperty obj)
+        {
+            base.CopyTo(obj);
+            obj.fk_ReferenceProperty = this.fk_ReferenceProperty;
         }
         
         public override string GetDataType()

@@ -27,7 +27,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectClass")]
-    public class ObjectClass : BaseServerDataObject
+    public class ObjectClass : BaseServerDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -219,6 +219,22 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_ObjectClass != null) OnPostSave_ObjectClass(this);
+        }
+        
+        public override object Clone()
+        {
+            ObjectClass obj = new ObjectClass();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(ObjectClass obj)
+        {
+            base.CopyTo(obj);
+            obj.ClassName = this.ClassName;
+            obj.TableName = this.TableName;
+            obj.fk_BaseObjectClass = this.fk_BaseObjectClass;
+            obj.fk_Module = this.fk_Module;
         }
     }
     

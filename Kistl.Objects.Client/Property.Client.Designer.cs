@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Property : Kistl.App.Base.BaseProperty
+    public class Property : Kistl.App.Base.BaseProperty, ICloneable
     {
         
         private System.Nullable<bool> _IsList;
@@ -86,6 +86,20 @@ namespace Kistl.App.Base
             if (OnPostSave_Property != null) OnPostSave_Property(this);
         }
         
+        public override object Clone()
+        {
+            Property obj = new Property();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(Property obj)
+        {
+            base.CopyTo(obj);
+            obj.IsList = this.IsList;
+            obj.IsNullable = this.IsNullable;
+        }
+        
         public override string GetDataType()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -97,8 +111,4 @@ namespace Kistl.App.Base
             return e.Result;
         }
     }
-    
-    /*public sealed class PropertyClient : ClientObject<Property, XMLObjectCollection, XMLObject>
-    {
-    }*/
 }

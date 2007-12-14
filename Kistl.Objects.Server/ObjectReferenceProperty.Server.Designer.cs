@@ -26,7 +26,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectReferenceProperty")]
-    public class ObjectReferenceProperty : Kistl.App.Base.Property
+    public class ObjectReferenceProperty : Kistl.App.Base.Property, ICloneable
     {
         
         private int _fk_ReferenceObjectClass = Helper.INVALIDID;
@@ -95,6 +95,19 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_ObjectReferenceProperty != null) OnPostSave_ObjectReferenceProperty(this);
+        }
+        
+        public override object Clone()
+        {
+            ObjectReferenceProperty obj = new ObjectReferenceProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(ObjectReferenceProperty obj)
+        {
+            base.CopyTo(obj);
+            obj.fk_ReferenceObjectClass = this.fk_ReferenceObjectClass;
         }
         
         public override string GetDataType()

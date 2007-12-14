@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Module : BaseClientDataObject
+    public class Module : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -107,17 +107,19 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Module != null) OnPostSave_Module(this);
         }
-    }
-    
-    /*
-    public sealed class ModuleClient : ClientObject<Module, XMLObjectCollection, XMLObject>
-    {
         
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Base.ObjectClass> GetListOfObjectClasses(int ID)
+        public override object Clone()
         {
-            return Proxy.Service.GetListOf(Type, ID, "ObjectClasses").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Base.ObjectClass>();
+            Module obj = new Module();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(Module obj)
+        {
+            base.CopyTo(obj);
+            obj.Namespace = this.Namespace;
+            obj.ModuleName = this.ModuleName;
         }
     }
-     * */
 }

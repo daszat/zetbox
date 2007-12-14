@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Property")]
-    public class Property : Kistl.App.Base.BaseProperty
+    public class Property : Kistl.App.Base.BaseProperty, ICloneable
     {
         
         private System.Nullable<bool> _IsList;
@@ -87,6 +87,20 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_Property != null) OnPostSave_Property(this);
+        }
+        
+        public override object Clone()
+        {
+            Property obj = new Property();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(Property obj)
+        {
+            base.CopyTo(obj);
+            obj.IsList = this.IsList;
+            obj.IsNullable = this.IsNullable;
         }
         
         public override string GetDataType()

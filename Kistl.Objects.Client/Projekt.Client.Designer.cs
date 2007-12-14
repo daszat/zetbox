@@ -23,7 +23,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class Projekt : BaseClientDataObject
+    public class Projekt : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -135,17 +135,20 @@ namespace Kistl.App.Projekte
             base.NotifyPostSave();
             if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
         }
-    }
-    
-    /*
-    public sealed class ProjektClient : ClientObject<Projekt, XMLObjectCollection, XMLObject>
-    {
         
-        // Autogeneriert, um die gebundenen Listen zu bekommen
-        public List<Kistl.App.Projekte.Task> GetListOfTasks(int ID)
+        public override object Clone()
         {
-            return Proxy.Service.GetListOf(Type, ID, "Tasks").FromXmlString<XMLObjectCollection>().ToList<Kistl.App.Projekte.Task>();
+            Projekt obj = new Projekt();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(Projekt obj)
+        {
+            base.CopyTo(obj);
+            obj.Name = this.Name;
+            obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
+            obj.AufwandGes = this.AufwandGes;
         }
     }
-     * */
 }

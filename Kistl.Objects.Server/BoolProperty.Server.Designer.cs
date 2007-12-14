@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BoolProperty")]
-    public class BoolProperty : Kistl.App.Base.ValueTypeProperty
+    public class BoolProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
         public event ToStringHandler<BoolProperty> OnToString_BoolProperty;
@@ -57,6 +57,18 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_BoolProperty != null) OnPostSave_BoolProperty(this);
+        }
+        
+        public override object Clone()
+        {
+            BoolProperty obj = new BoolProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(BoolProperty obj)
+        {
+            base.CopyTo(obj);
         }
         
         public override string GetDataType()

@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectForDeletedProperties")]
-    public class ObjectForDeletedProperties : BaseServerDataObject
+    public class ObjectForDeletedProperties : BaseServerDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -153,6 +153,23 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_ObjectForDeletedProperties != null) OnPostSave_ObjectForDeletedProperties(this);
+        }
+        
+        public override object Clone()
+        {
+            ObjectForDeletedProperties obj = new ObjectForDeletedProperties();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(ObjectForDeletedProperties obj)
+        {
+            base.CopyTo(obj);
+            obj.Namespace = this.Namespace;
+            obj.DataType = this.DataType;
+            obj.IsAssociation = this.IsAssociation;
+            obj.ReferenceObjectClassName = this.ReferenceObjectClassName;
+            obj.ReferencePropertyName = this.ReferencePropertyName;
         }
     }
     

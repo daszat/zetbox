@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class IntProperty : Kistl.App.Base.ValueTypeProperty
+    public class IntProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
         public event ToStringHandler<IntProperty> OnToString_IntProperty;
@@ -58,6 +58,18 @@ namespace Kistl.App.Base
             if (OnPostSave_IntProperty != null) OnPostSave_IntProperty(this);
         }
         
+        public override object Clone()
+        {
+            IntProperty obj = new IntProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(IntProperty obj)
+        {
+            base.CopyTo(obj);
+        }
+        
         public override string GetDataType()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -69,8 +81,4 @@ namespace Kistl.App.Base
             return e.Result;
         }
     }
-    
-    /*public sealed class IntPropertyClient : ClientObject<IntProperty, XMLObjectCollection, XMLObject>
-    {
-    }*/
 }

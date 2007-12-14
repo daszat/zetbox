@@ -10,7 +10,7 @@ namespace Kistl.API.Server
     /// <summary>
     /// Basis Datenobjekt. Attached sich automatisch an den CustomActionsManager zur Verteilung der Events
     /// </summary>
-    public abstract class BaseServerDataObject : System.Data.Objects.DataClasses.EntityObject, IDataObject
+    public abstract class BaseServerDataObject : System.Data.Objects.DataClasses.EntityObject, IDataObject, ICloneable
     {
         /// <summary>
         /// Attach to Events
@@ -50,6 +50,16 @@ namespace Kistl.API.Server
         public void NotifyChange()
         {
             ReportPropertyChanged(null);
+        }
+
+        public void CopyTo(BaseServerDataObject obj)
+        {
+            obj.ID = this.ID;
+        }
+
+        public virtual object Clone()
+        {
+            return null;
         }
     }
 }

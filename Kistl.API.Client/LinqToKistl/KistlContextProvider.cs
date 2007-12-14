@@ -71,7 +71,7 @@ namespace Kistl.API.Client
                         return result;
                     }
                 }
-                return (T)(IDataObject)_context.Create(typeof(T));
+                return (T)(IDataObject)_context.Create(_type);
             }
             else
             {

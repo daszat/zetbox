@@ -26,7 +26,7 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Projekt")]
-    public class Projekt : BaseServerDataObject
+    public class Projekt : BaseServerDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -158,6 +158,21 @@ namespace Kistl.App.Projekte
         {
             base.NotifyPostSave();
             if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
+        }
+        
+        public override object Clone()
+        {
+            Projekt obj = new Projekt();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(Projekt obj)
+        {
+            base.CopyTo(obj);
+            obj.Name = this.Name;
+            obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
+            obj.AufwandGes = this.AufwandGes;
         }
     }
     

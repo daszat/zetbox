@@ -71,11 +71,19 @@ namespace Kistl.API
             }
         }
 
-        public string FullNameDataObject
+        public string FullNameClientDataObject
         {
             get
             {
-                return string.Format("{0}.{1}, Kistl.Objects", Namespace, Classname);
+                return string.Format("{0}.{1}, Kistl.Objects.Client", Namespace, Classname);
+            }
+        }
+
+        public string FullNameServerDataObject
+        {
+            get
+            {
+                return string.Format("{0}.{1}, Kistl.Objects.Server", Namespace, Classname);
             }
         }
 
@@ -87,17 +95,9 @@ namespace Kistl.API
             }
         }
 
-        public string FullNameClientObject
-        {
-            get
-            {
-                return string.Format("{0}.{1}Client, Kistl.Objects.Client", Namespace, Classname);
-            }
-        }
-
         public override string ToString()
         {
-            return FullNameDataObject;
+            return NameDataObject;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Method")]
-    public class Method : BaseServerDataObject
+    public class Method : BaseServerDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
@@ -131,6 +131,20 @@ namespace Kistl.App.Base
         {
             base.NotifyPostSave();
             if (OnPostSave_Method != null) OnPostSave_Method(this);
+        }
+        
+        public override object Clone()
+        {
+            Method obj = new Method();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(Method obj)
+        {
+            base.CopyTo(obj);
+            obj.fk_ObjectClass = this.fk_ObjectClass;
+            obj.MethodName = this.MethodName;
         }
     }
     

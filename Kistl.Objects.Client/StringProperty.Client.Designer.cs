@@ -23,7 +23,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class StringProperty : Kistl.App.Base.ValueTypeProperty
+    public class StringProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
         private System.Nullable<int> _Length;
@@ -72,6 +72,19 @@ namespace Kistl.App.Base
             if (OnPostSave_StringProperty != null) OnPostSave_StringProperty(this);
         }
         
+        public override object Clone()
+        {
+            StringProperty obj = new StringProperty();
+            CopyTo(obj);
+            return obj;
+        }
+        
+        public void CopyTo(StringProperty obj)
+        {
+            base.CopyTo(obj);
+            obj.Length = this.Length;
+        }
+        
         public override string GetDataType()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -83,8 +96,4 @@ namespace Kistl.App.Base
             return e.Result;
         }
     }
-    
-    /*public sealed class StringPropertyClient : ClientObject<StringProperty, XMLObjectCollection, XMLObject>
-    {
-    }*/
 }
