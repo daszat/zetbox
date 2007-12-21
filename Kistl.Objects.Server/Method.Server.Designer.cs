@@ -147,8 +147,4 @@ namespace Kistl.App.Base
             obj.MethodName = this.MethodName;
         }
     }
-    
-    public sealed class MethodServer : ServerObject<Method, XMLObjectCollection, XMLObject>
-    {
-    }
 }

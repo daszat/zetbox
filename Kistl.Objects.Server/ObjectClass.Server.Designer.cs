@@ -106,7 +106,7 @@ namespace Kistl.App.Base
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectClass_ObjectClass", "A_ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
                 return r.Value;
             }
             set
@@ -236,9 +236,5 @@ namespace Kistl.App.Base
             obj.fk_BaseObjectClass = this.fk_BaseObjectClass;
             obj.fk_Module = this.fk_Module;
         }
-    }
-    
-    public sealed class ObjectClassServer : ServerObject<ObjectClass, XMLObjectCollection, XMLObject>
-    {
     }
 }

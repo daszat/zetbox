@@ -36,6 +36,9 @@ namespace Kistl.Server
                         {
                             gDataObjects.Generate(ctx, Helper.CodeGenPath);
                             gMapping.Generate(ctx, Helper.CodeGenPath);
+
+                            // Microsoft.CSharp.CSharpCodeProvider p = new Microsoft.CSharp.CSharpCodeProvider();
+                            // p.CompileAssemblyFromDom();
                         }
                         Console.WriteLine("Generation Code finished!");
                     }
@@ -106,8 +109,8 @@ namespace Kistl.Server
             Trace.TraceInformation("Starting Server");
             API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
             
-            Kistl.App.Base.ObjectClassServer s = new Kistl.App.Base.ObjectClassServer();
-            Console.WriteLine(s.ToString()); // Einfach nur damit das verdammte Teil referenziert & kopiert wird
+            Kistl.App.Base.ObjectClass s = new Kistl.App.Base.ObjectClass();
+            Console.WriteLine(s.ClassName ?? "Empty"); // Einfach nur damit das verdammte Teil referenziert & kopiert wird
 
             Kistl.App.Projekte.CustomServerActions sa = new Kistl.App.Projekte.CustomServerActions();
             Console.WriteLine(sa.ToString()); // Trick 17, siehe oben

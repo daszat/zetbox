@@ -23,10 +23,6 @@ namespace Kistl.App.Projekte
             {
                 obj.AufwandGes = obj.Tasks.Sum(t => t.Aufwand);
             }
-
-            /*var result = (from t in Kistl.API.Server.KistlDataContext.Current.GetTable<Task>()
-                          where t.fk_Projekt == obj.ID
-                          select t).Sum(s => s.Aufwand);*/
         }
 
         /// <summary>

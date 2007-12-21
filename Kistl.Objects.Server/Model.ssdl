@@ -18,6 +18,7 @@
     <EntitySet Name="BackReferenceProperty" EntityType="Model.Store.BackReferenceProperty" Table="BackReferenceProperties" />
     <EntitySet Name="ObjectForDeletedProperties" EntityType="Model.Store.ObjectForDeletedProperties" Table="ObjectForDeletedProperties" />
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules" />
+    <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -50,6 +51,10 @@
       <End Role="A_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
       <End Role="B_BackReferenceProperty" EntitySet="BackReferenceProperty" />
     </AssociationSet>
+    <AssociationSet Name="FK_Auftrag_Mitarbeiter" Association="Model.Store.FK_Auftrag_Mitarbeiter">
+      <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="B_Auftrag" EntitySet="Auftrag" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -69,6 +74,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
     <Property Name="AufwandGes" Type="float" Nullable="true" />
+    <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -186,6 +192,13 @@
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="Auftrag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
@@ -279,6 +292,18 @@
       </Principal>
       <Dependent Role="B_BackReferenceProperty">
         <PropertyRef Name="fk_ReferenceProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Auftrag_Mitarbeiter">
+    <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <End Role="B_Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Mitarbeiter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Auftrag">
+        <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

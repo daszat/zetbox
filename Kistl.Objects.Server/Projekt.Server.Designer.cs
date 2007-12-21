@@ -37,6 +37,8 @@ namespace Kistl.App.Projekte
         
         private System.Nullable<double> _AufwandGes;
         
+        private string _Kundenname;
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -130,6 +132,19 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public string Kundenname
+        {
+            get
+            {
+                return _Kundenname;
+            }
+            set
+            {
+                _Kundenname = value;
+            }
+        }
+        
         public event ToStringHandler<Projekt> OnToString_Projekt;
         
         public event ObjectEventHandler<Projekt> OnPreSave_Projekt;
@@ -173,10 +188,7 @@ namespace Kistl.App.Projekte
             obj.Name = this.Name;
             obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
             obj.AufwandGes = this.AufwandGes;
+            obj.Kundenname = this.Kundenname;
         }
-    }
-    
-    public sealed class ProjektServer : ServerObject<Projekt, XMLObjectCollection, XMLObject>
-    {
     }
 }

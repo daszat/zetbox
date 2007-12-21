@@ -67,19 +67,26 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        [System.Diagnostics.DebuggerStepThrough]
+        // [System.Diagnostics.DebuggerStepThrough]
         public static IServerObject GetServerObject(ObjectType type)
         {
             if (type == null) throw new ArgumentException("Type is null");
-            if (string.IsNullOrEmpty(type.FullNameServerObject)) throw new ArgumentException("Type is empty");
+            if (string.IsNullOrEmpty(type.FullNameServerDataObject)) throw new ArgumentException("Type is empty");
 
-            Type t = Type.GetType(type.FullNameServerObject);
-            if (t == null) throw new ApplicationException("Invalid Type");
+            Type objType = Type.GetType(type.FullNameServerDataObject);
+            if (objType == null) throw new ApplicationException("Invalid Type");
 
-            IServerObject obj = Activator.CreateInstance(t) as IServerObject;
+            Type t = typeof(ServerObject<,,>);
+            Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Server");
+            Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Server");
+
+            Type result = t.MakeGenericType(objType, xmlCollection, xmlObj);
+
+            IServerObject obj = Activator.CreateInstance(result) as IServerObject;
             if (obj == null) throw new ApplicationException("Cannot create instance");
 
             return obj;
+
         }
     }
 

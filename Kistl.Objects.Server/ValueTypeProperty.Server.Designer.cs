@@ -82,8 +82,4 @@ namespace Kistl.App.Base
             return e.Result;
         }
     }
-    
-    public sealed class ValueTypePropertyServer : ServerObject<ValueTypeProperty, XMLObjectCollection, XMLObject>
-    {
-    }
 }

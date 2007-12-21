@@ -172,8 +172,4 @@ namespace Kistl.App.Base
             obj.ReferencePropertyName = this.ReferencePropertyName;
         }
     }
-    
-    public sealed class ObjectForDeletedPropertiesServer : ServerObject<ObjectForDeletedProperties, XMLObjectCollection, XMLObject>
-    {
-    }
 }

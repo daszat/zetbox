@@ -45,16 +45,20 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 db = _db;
                 db.Open();
-                using (SqlTransaction _tx = db.BeginTransaction())
+                // TODO: Transaktionen können jetzt nicht verwendet werden
+                // weil das EF einen Bug beim Laden von Referenzen hat.
+                // Wenn eine Referenz null ist, dann wird das Flag IsLoaded niemals auf True gesetzt
+                // was zu einem Leseversuch in der Datenbank führt.
+                //using (SqlTransaction _tx = db.BeginTransaction())
                 {
-                    tx = _tx;
+                    //tx = _tx;
 
                     foreach (ObjectClass objClass in objClassList)
                     {
                         GenerateTable(objClass);
                     }
 
-                    tx.Commit();
+                    //tx.Commit();
                     // tx.Rollback();
                 }
             }

@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag))]
+
 namespace Kistl.App.Projekte
 {
     using System;
@@ -20,22 +22,18 @@ namespace Kistl.App.Projekte
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using Kistl.API.Client;
+    using Kistl.API.Server;
     
     
-    public class Projekt : BaseClientDataObject, ICloneable
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Auftrag")]
+    public class Auftrag : BaseServerDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
         
-        private string _Name;
-        
         private int _fk_Mitarbeiter = Helper.INVALIDID;
         
-        private System.Nullable<double> _AufwandGes;
-        
-        private string _Kundenname;
-        
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
             get
@@ -48,39 +46,29 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public string Name
+        public override string EntitySetName
         {
             get
             {
-                return _Name;
-            }
-            set
-            {
-                _Name = value;
+                return "Auftrag";
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
-        [XmlIgnore()]
-        public List<Kistl.App.Projekte.Task> Tasks
-        {
-            get
-            {
-                return Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
-            }
-        }
-        
-        [System.Diagnostics.DebuggerHidden()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Mitarbeiter", "A_Mitarbeiter")]
         [XmlIgnore()]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get
             {
-                return Context.GetQuery<Kistl.App.Projekte.Mitarbeiter>().Single(o => o.ID == fk_Mitarbeiter);
+                EntityReference<Kistl.App.Projekte.Mitarbeiter> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Auftrag_Mitarbeiter", "A_Mitarbeiter");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
             }
             set
             {
-                _fk_Mitarbeiter = value.ID;
+                EntityReference<Kistl.App.Projekte.Mitarbeiter> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Auftrag_Mitarbeiter", "A_Mitarbeiter");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
             }
         }
         
@@ -88,6 +76,10 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Mitarbeiter == Helper.INVALIDID && Mitarbeiter != null)
+                {
+                    _fk_Mitarbeiter = Mitarbeiter.ID;
+                }
                 return _fk_Mitarbeiter;
             }
             set
@@ -96,44 +88,20 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<double> AufwandGes
-        {
-            get
-            {
-                return _AufwandGes;
-            }
-            set
-            {
-                _AufwandGes = value;
-            }
-        }
+        public event ToStringHandler<Auftrag> OnToString_Auftrag;
         
-        public string Kundenname
-        {
-            get
-            {
-                return _Kundenname;
-            }
-            set
-            {
-                _Kundenname = value;
-            }
-        }
+        public event ObjectEventHandler<Auftrag> OnPreSave_Auftrag;
         
-        public event ToStringHandler<Projekt> OnToString_Projekt;
-        
-        public event ObjectEventHandler<Projekt> OnPreSave_Projekt;
-        
-        public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
+        public event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Projekt != null)
+            if (OnToString_Auftrag != null)
             {
-                OnToString_Projekt(this, e);
+                OnToString_Auftrag(this, e);
             }
             return e.Result;
         }
@@ -141,29 +109,26 @@ namespace Kistl.App.Projekte
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Projekt != null) OnPreSave_Projekt(this);
+            if (OnPreSave_Auftrag != null) OnPreSave_Auftrag(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
+            if (OnPostSave_Auftrag != null) OnPostSave_Auftrag(this);
         }
         
         public override object Clone()
         {
-            Projekt obj = new Projekt();
+            Auftrag obj = new Auftrag();
             CopyTo(obj);
             return obj;
         }
         
-        public void CopyTo(Projekt obj)
+        public void CopyTo(Auftrag obj)
         {
             base.CopyTo(obj);
-            obj.Name = this.Name;
             obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
-            obj.AufwandGes = this.AufwandGes;
-            obj.Kundenname = this.Kundenname;
         }
     }
 }

@@ -16,6 +16,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
+          <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -127,6 +128,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Auftrag">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Auftrag)">
+        <MappingFragment StoreEntitySet="Auftrag">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="FK_BaseProperty_ObjectClass" TypeName="Model.FK_BaseProperty_ObjectClass" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
@@ -198,6 +206,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_ReferenceProperty" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Auftrag_Mitarbeiter" TypeName="Model.FK_Auftrag_Mitarbeiter" StoreEntitySet="Auftrag">
+      <EndProperty Name="A_Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
+      </EndProperty>
+      <EndProperty Name="B_Auftrag">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -195,8 +195,4 @@ namespace Kistl.App.Projekte
             obj.Aufwand = this.Aufwand;
         }
     }
-    
-    public sealed class TaskServer : ServerObject<Task, XMLObjectCollection, XMLObject>
-    {
-    }
 }

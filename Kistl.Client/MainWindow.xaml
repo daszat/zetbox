@@ -15,7 +15,13 @@
                 <MenuItem Header="Exit" Name="menu_Exit" Click="menu_Exit_Click" />
             </MenuItem>
         </Menu>
+        <Slider Name="WorkspaceSlider" DockPanel.Dock="Bottom" Value="1.0" Minimum="0.5" Maximum="3.0" />
         <DockPanel>
+            <DockPanel.RenderTransform>
+                <ScaleTransform 
+                    ScaleX="{Binding ElementName=WorkspaceSlider, Path=Value}" 
+                    ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value}" />
+            </DockPanel.RenderTransform>
             <DockPanel DockPanel.Dock="Left" Width="250">
                 <ComboBox 
                 DockPanel.Dock="Top"

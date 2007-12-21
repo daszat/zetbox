@@ -168,8 +168,4 @@ namespace Kistl.App.Projekte
             obj.TelefonNummer = this.TelefonNummer;
         }
     }
-    
-    public sealed class MitarbeiterServer : ServerObject<Mitarbeiter, XMLObjectCollection, XMLObject>
-    {
-    }
 }

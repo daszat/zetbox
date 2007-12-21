@@ -195,12 +195,13 @@ namespace Kistl.Server.Generators.SQLServer
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API.Server"));
 
             GenerateServerDataObjects(code, ns, objClass);
-            GenerateServerAccessLayer(objClass, ns);
+            // GenerateServerAccessLayer(objClass, ns);
 
             // Generate the code & save
             SaveFile(code, path + @"Kistl.Objects.Server\" + objClass.ClassName + ".Server.Designer.cs");
         }
 
+        /*
         private void GenerateServerAccessLayer(ObjectClass objClass, CodeNamespace ns)
         {
             CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName + "Server");
@@ -212,6 +213,7 @@ namespace Kistl.Server.Generators.SQLServer
                 new CodeTypeReference("XMLObjectCollection"), 
                 new CodeTypeReference("XMLObject")));
         }
+         * */
 
         /*
         private void GenerateClientAccessLayer(ObjectClass objClass, CodeNamespace ns)

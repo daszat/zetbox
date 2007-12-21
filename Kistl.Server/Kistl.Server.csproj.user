@@ -3,7 +3,7 @@
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartArguments>-generate</StartArguments>
+    <StartArguments>-generate -database</StartArguments>
     <StartWorkingDirectory>D:\Programmierung\Kistl\Kistl.Server\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

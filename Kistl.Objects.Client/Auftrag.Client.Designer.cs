@@ -23,18 +23,12 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class Projekt : BaseClientDataObject, ICloneable
+    public class Auftrag : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
         
-        private string _Name;
-        
         private int _fk_Mitarbeiter = Helper.INVALIDID;
-        
-        private System.Nullable<double> _AufwandGes;
-        
-        private string _Kundenname;
         
         public override int ID
         {
@@ -45,28 +39,6 @@ namespace Kistl.App.Projekte
             set
             {
                 _ID = value;
-            }
-        }
-        
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                _Name = value;
-            }
-        }
-        
-        [System.Diagnostics.DebuggerHidden()]
-        [XmlIgnore()]
-        public List<Kistl.App.Projekte.Task> Tasks
-        {
-            get
-            {
-                return Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
             }
         }
         
@@ -96,44 +68,20 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<double> AufwandGes
-        {
-            get
-            {
-                return _AufwandGes;
-            }
-            set
-            {
-                _AufwandGes = value;
-            }
-        }
+        public event ToStringHandler<Auftrag> OnToString_Auftrag;
         
-        public string Kundenname
-        {
-            get
-            {
-                return _Kundenname;
-            }
-            set
-            {
-                _Kundenname = value;
-            }
-        }
+        public event ObjectEventHandler<Auftrag> OnPreSave_Auftrag;
         
-        public event ToStringHandler<Projekt> OnToString_Projekt;
-        
-        public event ObjectEventHandler<Projekt> OnPreSave_Projekt;
-        
-        public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
+        public event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Projekt != null)
+            if (OnToString_Auftrag != null)
             {
-                OnToString_Projekt(this, e);
+                OnToString_Auftrag(this, e);
             }
             return e.Result;
         }
@@ -141,29 +89,26 @@ namespace Kistl.App.Projekte
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Projekt != null) OnPreSave_Projekt(this);
+            if (OnPreSave_Auftrag != null) OnPreSave_Auftrag(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
+            if (OnPostSave_Auftrag != null) OnPostSave_Auftrag(this);
         }
         
         public override object Clone()
         {
-            Projekt obj = new Projekt();
+            Auftrag obj = new Auftrag();
             CopyTo(obj);
             return obj;
         }
         
-        public void CopyTo(Projekt obj)
+        public void CopyTo(Auftrag obj)
         {
             base.CopyTo(obj);
-            obj.Name = this.Name;
             obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
-            obj.AufwandGes = this.AufwandGes;
-            obj.Kundenname = this.Kundenname;
         }
     }
 }

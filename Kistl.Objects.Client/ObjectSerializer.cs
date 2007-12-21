@@ -46,6 +46,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Auftrag), ElementName="Auftrag")]
         public List<Object> Objects
         {
             get
@@ -85,6 +86,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlElement(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
+        [XmlElement(Type=typeof(Kistl.App.Projekte.Auftrag), ElementName="Auftrag")]
         public Object Object
         {
             get

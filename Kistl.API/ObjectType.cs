@@ -87,14 +87,6 @@ namespace Kistl.API
             }
         }
 
-        public string FullNameServerObject
-        {
-            get
-            {
-                return string.Format("{0}.{1}Server, Kistl.Objects.Server", Namespace, Classname);
-            }
-        }
-
         public override string ToString()
         {
             return NameDataObject;

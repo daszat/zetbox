@@ -9,6 +9,7 @@
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="ObjectForDeletedProperties" EntityType="Model.ObjectForDeletedProperties" />
     <EntitySet Name="Module" EntityType="Model.Module" />
+    <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -41,6 +42,10 @@
       <End Role="A_ObjectReferenceProperty" EntitySet="BaseProperty" />
       <End Role="B_BackReferenceProperty" EntitySet="BaseProperty" />
     </AssociationSet>
+    <AssociationSet Name="FK_Auftrag_Mitarbeiter" Association="Model.FK_Auftrag_Mitarbeiter">
+      <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="B_Auftrag" EntitySet="Auftrag" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -64,6 +69,7 @@
     <NavigationProperty Name="Tasks" Relationship="Model.FK_Task_Projekt" FromRole="A_Projekt" ToRole="B_Task" />
     <NavigationProperty Name="Mitarbeiter" Relationship="Model.FK_Projekt_Mitarbeiter" FromRole="B_Projekt" ToRole="A_Mitarbeiter" />
     <Property Name="AufwandGes" Type="Double" Nullable="true" />
+    <Property Name="Kundenname" Type="String" MaxLength="100" Nullable="true" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -142,6 +148,13 @@
     <Property Name="ModuleName" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="ObjectClasses" Relationship="Model.FK_ObjectClass_Module" FromRole="A_Module" ToRole="B_ObjectClass" />
   </EntityType>
+  <EntityType Name="Auftrag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Mitarbeiter" Relationship="Model.FK_Auftrag_Mitarbeiter" FromRole="B_Auftrag" ToRole="A_Mitarbeiter" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />
@@ -173,5 +186,9 @@
   <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty">
     <End Role="A_ObjectReferenceProperty" Type="Model.ObjectReferenceProperty" Multiplicity="0..1" />
     <End Role="B_BackReferenceProperty" Type="Model.BackReferenceProperty" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Auftrag_Mitarbeiter">
+    <End Role="A_Mitarbeiter" Type="Model.Mitarbeiter" Multiplicity="0..1" />
+    <End Role="B_Auftrag" Type="Model.Auftrag" Multiplicity="*" />
   </Association>
 </Schema>

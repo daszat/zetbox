@@ -136,8 +136,4 @@ namespace Kistl.App.Base
             obj.ModuleName = this.ModuleName;
         }
     }
-    
-    public sealed class ModuleServer : ServerObject<Module, XMLObjectCollection, XMLObject>
-    {
-    }
 }

@@ -121,8 +121,4 @@ namespace Kistl.App.Base
             return e.Result;
         }
     }
-    
-    public sealed class BackReferencePropertyServer : ServerObject<BackReferenceProperty, XMLObjectCollection, XMLObject>
-    {
-    }
 }

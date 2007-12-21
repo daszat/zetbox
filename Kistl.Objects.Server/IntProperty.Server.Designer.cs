@@ -82,8 +82,4 @@ namespace Kistl.App.Base
             return e.Result;
         }
     }
-    
-    public sealed class IntPropertyServer : ServerObject<IntProperty, XMLObjectCollection, XMLObject>
-    {
-    }
 }
