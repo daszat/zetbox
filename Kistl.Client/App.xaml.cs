@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Diagnostics;
 
 namespace Kistl.Client
 {
@@ -20,9 +21,44 @@ namespace Kistl.Client
             SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 3);
             API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
 
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+
             this.Startup += new StartupEventHandler(App_Startup);
             this.Exit += new ExitEventHandler(App_Exit);
         }
+
+        #region AssemblyResolve
+        System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            // XML Serializers -> just ignore it...
+            if (args.Name.ToLower().Contains(".xmlserializers")) return null;
+
+            Trace.TraceInformation("Resolving Assembly {0}", args.Name);
+            System.Reflection.Assembly result = null;
+
+            try
+            {
+                result = System.Reflection.Assembly.LoadFrom(Helper.AssemblyPath + args.Name);
+            }
+            catch { }
+
+            if (result == null)
+            {
+                // Try to load a .dll
+                try
+                {
+                    result = System.Reflection.Assembly.LoadFrom(Helper.AssemblyPath + args.Name + ".dll");
+                }
+                catch { }
+            }
+            if (result == null)
+            {
+                Trace.TraceWarning("Unable to load Assembly {0}", args.Name);
+            }
+
+            return result;
+        }
+        #endregion
 
         /// <summary>
         /// Programmende -> Server stoppen

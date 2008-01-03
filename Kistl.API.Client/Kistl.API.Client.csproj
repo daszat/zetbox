@@ -113,4 +113,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy /y $(TargetDir)$(TargetName).dll C:\temp\KistlCodeGen\bin
+copy /y $(TargetDir)$(TargetName).pdb C:\temp\KistlCodeGen\bin</PostBuildEvent>
+  </PropertyGroup>
 </Project>

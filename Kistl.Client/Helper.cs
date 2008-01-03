@@ -21,6 +21,17 @@ namespace Kistl.Client
             System.Windows.MessageBox.Show(ex.ToString());
         }
 
+        /// <summary>
+        /// Hardcoded yet
+        /// </summary>
+        public static string AssemblyPath
+        {
+            get
+            {
+                return @"C:\temp\KistlCodeGen\bin\";
+            }
+        }
+
         private static Dictionary<ObjectType, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
 
         public static Dictionary<ObjectType, Kistl.App.Base.ObjectClass> ObjectClasses

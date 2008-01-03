@@ -27,7 +27,6 @@ namespace Kistl.Server.Generators.SQLServer
         public void Generate(Kistl.API.Server.KistlDataContext ctx)
         {
             this.ctx = ctx;
-            Console.WriteLine("Generating Database...");
 
             // Preload all ObjectClasses and Properties to avoid Deadlocks
             objClassList = (from c in ctx.GetTable<ObjectClass>()
@@ -38,7 +37,7 @@ namespace Kistl.Server.Generators.SQLServer
             objClassList.ForEach(o => { var tmp = o.BaseObjectClass; });
 
 
-            Console.WriteLine("Checking {0} Tables with {1} Properties",
+            System.Diagnostics.Trace.TraceInformation("Checking {0} Tables with {1} Properties",
                 objClassList.Count(), propList.Count);
 
             using (SqlConnection _db = new SqlConnection(Properties.Settings.Default.KistlDatabase))
@@ -62,8 +61,6 @@ namespace Kistl.Server.Generators.SQLServer
                     // tx.Rollback();
                 }
             }
-
-            Console.WriteLine("...finished!");
         }
 
         private void GenerateTable(ObjectClass objClass)
@@ -73,7 +70,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             if ((bool)cmd.ExecuteScalar())
             {
-                Console.WriteLine("Checking Table " + objClass.TableName);
+                System.Diagnostics.Trace.TraceInformation("Checking Table " + objClass.TableName);
                 foreach (Property p in objClass.Properties.OfType<Property>())
                 {
                     // BackReferenceProperties sind uninteressant, diese ergeben sich
@@ -83,7 +80,7 @@ namespace Kistl.Server.Generators.SQLServer
                     cmd.Parameters.AddWithValue("@c", p.PropertyName);
 
                     bool columnExists = (bool)cmd.ExecuteScalar();
-                    Console.WriteLine("  " + (columnExists ? "Checking" : "Creating") + " Column " + objClass.TableName + "." + p.PropertyName);
+                    System.Diagnostics.Trace.TraceInformation("  " + (columnExists ? "Checking" : "Creating") + " Column " + objClass.TableName + "." + p.PropertyName);
 
                     cmd = new SqlCommand("", db, tx);
                     StringBuilder sb = new StringBuilder();
@@ -92,14 +89,14 @@ namespace Kistl.Server.Generators.SQLServer
 
                     sb.Append(GetColumnStmt(p));
 
-                    Console.WriteLine("    " + sb.ToString());
+                    System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
                     cmd.CommandText = sb.ToString();
                     cmd.ExecuteNonQuery();
                 }
             }
             else
             {
-                Console.WriteLine("Creating Table " + objClass.TableName);
+                System.Diagnostics.Trace.TraceInformation("Creating Table " + objClass.TableName);
 
                 cmd = new SqlCommand("", db, tx);
                 StringBuilder sb = new StringBuilder();
@@ -124,7 +121,7 @@ namespace Kistl.Server.Generators.SQLServer
                 sb.AppendLine();
                 sb.Append(")");
 
-                Console.WriteLine("  " + sb.ToString());
+                System.Diagnostics.Trace.TraceInformation("  " + sb.ToString());
                 cmd.CommandText = sb.ToString();
                 cmd.ExecuteNonQuery();
             }

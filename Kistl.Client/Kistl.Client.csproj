@@ -187,10 +187,6 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.App.Projekte.Client\Kistl.App.Projekte.Client.csproj">
-      <Project>{379A67E8-388E-47B6-A591-5D4C05DAFBDB}</Project>
-      <Name>Kistl.App.Projekte.Client</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kistl.Objects.Client\Kistl.Objects.Client.csproj">
       <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
       <Name>Kistl.Objects.Client</Name>
@@ -198,7 +194,6 @@
     <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
       <Name>Kistl.Server</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
       <Project>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</Project>
@@ -213,4 +208,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

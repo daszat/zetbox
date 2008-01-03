@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -63,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Generators\DatabaseGenerator.cs" />
     <Compile Include="Generators\Exceptions.cs" />
+    <Compile Include="Generators\Generator.cs" />
     <Compile Include="Generators\MappingGenerator.cs" />
     <Compile Include="Generators\DataObjectGenerator.cs" />
     <Compile Include="Generators\SQLServer\SQLServerDatabaseGenerator.cs" />
@@ -91,14 +93,9 @@
       <Name>Kistl.API</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.App.Projekte.Server\Kistl.App.Projekte.Server.csproj">
-      <Project>{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}</Project>
-      <Name>Kistl.App.Projekte.Server</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kistl.Objects.Server\Kistl.Objects.Server.csproj">
       <Project>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</Project>
       <Name>Kistl.Objects.Server</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -122,4 +119,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

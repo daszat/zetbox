@@ -14,7 +14,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         public void Generate(Kistl.API.Server.KistlDataContext ctx, string path)
         {
-            Console.WriteLine("Generating EF-Model...");
+            System.Diagnostics.Trace.TraceInformation("Generating EF-Model...");
 
             this.path = path + (path.EndsWith("\\") ? "" : "\\");
             this.ctx = ctx;
@@ -25,7 +25,7 @@ namespace Kistl.Server.Generators.SQLServer
             GenerateMSL(objClassList);
             GenerateSSDL(objClassList);
 
-            Console.WriteLine("...finished!");
+            System.Diagnostics.Trace.TraceInformation("...finished!");
         }
 
         #region GenerateCSDL

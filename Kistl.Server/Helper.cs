@@ -17,7 +17,6 @@ namespace Kistl.Server
         /// <param name="ex">Expeption to handle</param>
         public static void HandleError(Exception ex)
         {
-            Console.WriteLine(ex.ToString());
             System.Diagnostics.Trace.TraceError(ex.ToString());
         }
 

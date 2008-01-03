@@ -28,28 +28,12 @@ namespace Kistl.Server
                     if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("generate"))))
                     {
                         actiondone = true;
-                        Console.WriteLine("Generating Code...");
-
-                        Generators.IDataObjectGenerator gDataObjects = Generators.DataObjectGeneratorFactory.GetGenerator();
-                        Generators.IMappingGenerator gMapping = Generators.MappingGeneratorFactory.GetGenerator();
-                        using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
-                        {
-                            gDataObjects.Generate(ctx, Helper.CodeGenPath);
-                            gMapping.Generate(ctx, Helper.CodeGenPath);
-
-                            // Microsoft.CSharp.CSharpCodeProvider p = new Microsoft.CSharp.CSharpCodeProvider();
-                            // p.CompileAssemblyFromDom();
-                        }
-                        Console.WriteLine("Generation Code finished!");
+                        server.GenerateCode();
                     }
                     if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("database"))))
                     {
                         actiondone = true;
-                        Generators.IDatabaseGenerator gDatabase = Generators.DatabaseGeneratorFactory.GetGenerator();
-                        using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
-                        {
-                            gDatabase.Generate(ctx);
-                        }
+                        server.GenerateDatabase();
                     }
 
                     if(!actiondone)
@@ -101,6 +85,54 @@ namespace Kistl.Server
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
         /// <summary>
+        /// Constructor
+        /// </summary>
+        public Server()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+        }
+
+        #region AssemblyResolve
+        /// <summary>
+        /// TODO: Das muss geändert werden. 
+        /// Siehe http://blogs.msdn.com/suzcook/archive/2003/05/29/57143.aspx
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            // XML Serializers -> just ignore it...
+            if (args.Name.ToLower().Contains(".xmlserializers")) return null;
+
+            Trace.TraceInformation("Resolving Assembly {0}", args.Name);
+            System.Reflection.Assembly result = null;
+
+            try
+            {
+                result = System.Reflection.Assembly.LoadFrom(Helper.CodeGenPath + @"\bin\" + args.Name);
+            }
+            catch { }
+
+            if (result == null)
+            {
+                // Try to load a .dll
+                try
+                {
+                    result = System.Reflection.Assembly.LoadFrom(Helper.CodeGenPath + @"\bin\" + args.Name + ".dll");
+                }
+                catch { }
+            }
+            if (result == null)
+            {
+                Trace.TraceWarning("Unable to load Assembly {0}", args.Name);
+            }
+
+            return result;
+        }
+        #endregion
+
+        /// <summary>
         /// Server starten, Methode blockiert bis zum Serverstart. 
         /// Nach 20 sec. wird der start jedoch beendet.
         /// </summary>
@@ -108,13 +140,10 @@ namespace Kistl.Server
         {
             Trace.TraceInformation("Starting Server");
             API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
+
+            // Preload Kistl.Objects.Server.dll so the Mapping Resources will be loaded
+            Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
             
-            Kistl.App.Base.ObjectClass s = new Kistl.App.Base.ObjectClass();
-            Console.WriteLine(s.ClassName ?? "Empty"); // Einfach nur damit das verdammte Teil referenziert & kopiert wird
-
-            Kistl.App.Projekte.CustomServerActions sa = new Kistl.App.Projekte.CustomServerActions();
-            Console.WriteLine(sa.ToString()); // Trick 17, siehe oben
-
             serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
             serviceThread.Start();
 
@@ -169,6 +198,26 @@ namespace Kistl.Server
         private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
         {
             Trace.TraceWarning("UnknownMessageReceived: {0}", e.Message.ToString());
+        }
+
+        internal void GenerateCode()
+        {
+            Trace.TraceInformation("Generating Code...");
+            Generators.Generator.GenerateCode();
+            Trace.TraceInformation("Generating Code finished!");
+        }
+
+        internal void GenerateDatabase()
+        {
+            Trace.TraceInformation("Generating Database...");
+            Generators.Generator.GenerateDatabase();
+            Trace.TraceInformation("Generating Database finished!");
+        }
+
+        internal void GenerateAll()
+        {
+            GenerateCode();
+            GenerateDatabase();
         }
     }
 }
