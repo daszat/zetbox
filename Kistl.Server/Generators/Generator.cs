@@ -10,16 +10,19 @@ namespace Kistl.Server.Generators
     {
         public static void GenerateCode()
         {
-            IDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
-            IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
-            using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                gDataObjects.Generate(ctx, Helper.CodeGenPath);
-                gMapping.Generate(ctx, Helper.CodeGenPath);
+                IDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
+                IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
+                using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+                {
+                    gDataObjects.Generate(ctx, Helper.CodeGenPath);
+                    gMapping.Generate(ctx, Helper.CodeGenPath);
 
-                // Compile Code
-                Compile(ClientServerEnum.Server);
-                Compile(ClientServerEnum.Client);
+                    // Compile Code
+                    Compile(ClientServerEnum.Server);
+                    Compile(ClientServerEnum.Client);
+                }
             }
         }
 
@@ -46,6 +49,13 @@ namespace Kistl.Server.Generators
                     "System.Xml.dll",
                     "System.Xml.Linq.dll",
                 });
+            
+            if (type == ClientServerEnum.Server)
+            {
+                options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.csdl");
+                options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.msl");
+                options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.ssdl");
+            }
 
             CompilerResults result = p.CompileAssemblyFromFile(options,
                 System.IO.Directory.GetFiles(Helper.CodeGenPath + @"\Kistl.Objects." + type + @"\", "*.cs"));
@@ -58,10 +68,13 @@ namespace Kistl.Server.Generators
 
         public static void GenerateDatabase()
         {
-            Generators.IDatabaseGenerator gDatabase = Generators.DatabaseGeneratorFactory.GetGenerator();
-            using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                gDatabase.Generate(ctx);
+                Generators.IDatabaseGenerator gDatabase = Generators.DatabaseGeneratorFactory.GetGenerator();
+                using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+                {
+                    gDatabase.Generate(ctx);
+                }
             }
         }
 

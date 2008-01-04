@@ -22,7 +22,6 @@ namespace Kistl.Server.Generators.SQLServer
         public void Generate(Kistl.API.Server.KistlDataContext ctx, string path)
         {
             this.ctx = ctx;
-            System.Diagnostics.Trace.TraceInformation("Generating Objects...");
             this.path = path + (path.EndsWith("\\") ? "" : "\\");
 
             var objClassList = from c in ctx.GetTable<ObjectClass>()
@@ -40,7 +39,8 @@ namespace Kistl.Server.Generators.SQLServer
             GenerateObjectSerializer(ClientServerEnum.Server, objClassList);
             GenerateObjectSerializer(ClientServerEnum.Client, objClassList);
 
-            System.Diagnostics.Trace.TraceInformation("...finished!");
+            GenerateAssemblyInfo(ClientServerEnum.Server);
+            GenerateAssemblyInfo(ClientServerEnum.Client);
         }
 
         #region Save / Helper
@@ -71,6 +71,50 @@ namespace Kistl.Server.Generators.SQLServer
             ns.Imports.Add(new CodeNamespaceImport("System.Xml"));
             ns.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API"));
+        }
+        #endregion
+
+        #region GenerateAssemblyInfo
+        private void GenerateAssemblyInfo(ClientServerEnum clientServer)
+        {
+            CodeCompileUnit code = new CodeCompileUnit();
+
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(System.Reflection.AssemblyTitleAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression(string.Format("Kistl.Objects.{0}", clientServer)))));
+
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(System.Reflection.AssemblyCompanyAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression("dasz.at"))));
+
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(System.Reflection.AssemblyProductAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression("Kistl"))));
+
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(System.Reflection.AssemblyCopyrightAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression("Copyright © dasz.at 2008"))));
+
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(System.Runtime.InteropServices.ComVisibleAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression(false))));
+
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(System.Reflection.AssemblyVersionAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression("1.0.0.0"))));
+
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(System.Reflection.AssemblyFileVersionAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression("1.0.0.0"))));
+
+            if (clientServer == ClientServerEnum.Server)
+            {
+                code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                    new CodeTypeReference(typeof(System.Data.Objects.DataClasses.EdmSchemaAttribute))));
+            }
+
+            // Generate the code & save
+            SaveFile(code, path + string.Format(@"Kistl.Objects.{0}\AssemblyInfo.cs", clientServer));
         }
         #endregion
 
@@ -157,7 +201,6 @@ namespace Kistl.Server.Generators.SQLServer
                         new CodeAttributeArgument("ElementName", new CodePrimitiveExpression(objClass.ClassName))
                     ));
             }
-
 
             // Generate the code & save
             SaveFile(code, path + string.Format(@"Kistl.Objects.{0}\ObjectSerializer.cs", clientServer));

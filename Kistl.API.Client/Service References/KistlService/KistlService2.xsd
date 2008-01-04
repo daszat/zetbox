@@ -61,6 +61,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Generate">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GenerateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="HelloWorld">
     <xs:complexType>
       <xs:sequence>

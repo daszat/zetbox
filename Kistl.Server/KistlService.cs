@@ -125,6 +125,18 @@ namespace Kistl.Server
         }
 
         /// <summary>
+        /// Implements the Generate Method
+        /// </summary>
+        public void Generate()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                Generators.Generator.GenerateCode();
+                Generators.Generator.GenerateDatabase();
+            }
+        }
+
+        /// <summary>
         /// Implementierung der HelloWorld Methode
         /// </summary>
         /// <param name="name"></param>

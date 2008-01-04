@@ -57,9 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\KistlConfig.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
+    <Compile Include="IKistlAppDomain.cs" />
     <Compile Include="IKistlService.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Configuration\schema0.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\SampleConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

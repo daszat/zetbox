@@ -137,6 +137,18 @@ namespace Kistl.Client
                 Helper.HandleError(ex);
             }
         }
+
+        private void menu_Generate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Proxy.Service.Generate();
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex);
+            }
+        }
     }
 
     internal class NodeTemplateSelector : DataTemplateSelector

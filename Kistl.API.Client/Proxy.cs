@@ -47,13 +47,7 @@ namespace Kistl.API.Client
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
             {
-                string result = CacheController<string>.Current.Get(type, ID);
-                if (string.IsNullOrEmpty(result))
-                {
-                    result = service.GetObject(type, ID);
-                    CacheController<string>.Current.Set(type, ID, result);
-                }
-                return result;
+                return service.GetObject(type, ID);
             }
         }
 
@@ -61,8 +55,15 @@ namespace Kistl.API.Client
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
             {
-                CacheController<string>.Current.Clear();
                 return service.SetObject(type, obj);
+            }
+        }
+
+        public void Generate()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                service.Generate();
             }
         }
 

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <Address></Address>
+  <ConfigName>Arthur's Server Configuration</ConfigName>
+  <Server StartServer="true">
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+  </Server>
+  <Client StartClient="false" />
+  <SourceFileLocation>
+    <string>D:\Programmierung\Kistl\Kistl.Server\bin\Debug</string>
+    <string>D:\Programmierung\Kistl\Kistl.Client\bin\Debug</string>
+    <string>D:\Programmierung\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
+    <string>D:\Programmierung\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
+    <!--  
+      Wenn das auskommentiert ist, 
+      dann wird die (hoffentlich funktionierende) Objects-DLL des Projektes genommen. 
+    -->
+    <!--<string>C:\temp\KistlCodeGen\bin</string>-->
+  </SourceFileLocation>
+</KistlConfig>

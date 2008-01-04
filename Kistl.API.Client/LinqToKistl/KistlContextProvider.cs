@@ -60,26 +60,29 @@ namespace Kistl.API.Client
                 result.ForEach(r => _context.Attach(r as BaseClientDataObject));
                 return result;
             }
-            else if(SearchType == SearchTypeEnum.GetObjectOrNew)
-            {
-                if (ID != Helper.INVALIDID)
-                {
-                    T result = (T)(IDataObject)client.GetObject(_type, ID);
-                    if (result != null)
-                    {
-                        _context.Attach(result as BaseClientDataObject);
-                        return result;
-                    }
-                }
-                return (T)(IDataObject)_context.Create(_type);
-            }
             else
             {
                 if (ID != Helper.INVALIDID)
                 {
-                    T result = (T)(IDataObject)client.GetObject(_type, ID);
+                    T result = (T)(IDataObject)CacheController<BaseClientDataObject>.Current.Get(_type, ID);
+                    if (result == null)
+                    {
+                        result = (T)(IDataObject)client.GetObject(_type, ID);
+                        if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
+
+                        CacheController<BaseClientDataObject>.Current.Set(_type, ID, 
+                            (BaseClientDataObject)(result as BaseClientDataObject).Clone());
+                    }
+                    else
+                    {
+                        result = (T)(result as BaseClientDataObject).Clone();
+                    }
                     _context.Attach(result as BaseClientDataObject);
                     return result;
+                }    
+                else if(SearchType == SearchTypeEnum.GetObjectOrNew)
+                {
+                    return (T)(IDataObject)_context.Create(_type);
                 }
             }
 

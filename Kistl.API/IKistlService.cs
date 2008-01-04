@@ -51,6 +51,12 @@ namespace Kistl.API
         string SetObject(ObjectType type, string obj);
 
         /// <summary>
+        /// Generates Objects & Database. Throws a Exception if failed.
+        /// </summary>
+        [OperationContract]
+        void Generate();
+
+        /// <summary>
         /// Hello World.
         /// </summary>
         /// <param name="name">Ein Name</param>

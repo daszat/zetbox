@@ -6,6 +6,7 @@ using System.CodeDom.Compiler;
 
 namespace Kistl.Server.Generators
 {
+    [Serializable]
     public class DBTypeNotFoundException : Exception
     {
         public DBTypeNotFoundException()
@@ -34,6 +35,7 @@ namespace Kistl.Server.Generators
         }
     }
 
+    [Serializable]
     public class CompilerException : Exception
     {
         private StringBuilder msg = new StringBuilder();

@@ -54,6 +54,7 @@ namespace Kistl.API.Client
 
         public void Attach(BaseClientDataObject obj)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
             if (_objects.Contains(obj)) throw new InvalidOperationException("Object is already attached to this context");
             _objects.Add(obj);
             obj.AttachToContext(this);
@@ -61,6 +62,7 @@ namespace Kistl.API.Client
 
         public void Dettach(BaseClientDataObject obj)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
             if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
             _objects.Remove(obj);
             obj.DetachFromContext(this);
@@ -68,11 +70,16 @@ namespace Kistl.API.Client
 
         public void SubmitChanges()
         {
+            // TODO: Add a better Cache Refresh Strategie
+            CacheController<BaseClientDataObject>.Current.Clear();
+
             IClientObject client = ClientObjectFactory.GetClientObject();
             foreach (BaseClientDataObject obj in _objects)
             {
                 BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
                 newobj.CopyTo(obj);
+
+                CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID, obj);
             }
         }
 
