@@ -136,7 +136,7 @@ namespace Kistl.Server.Generators.SQLServer
                         else if (p is ObjectReferenceProperty)
                         {
                             xml.WriteStartElement("NavigationProperty");
-                            xml.WriteAttributeString("Name", p.PropertyName.Replace("fk_", ""));
+                            xml.WriteAttributeString("Name", p.PropertyName);
                             ObjectType otherType = new ObjectType(p.GetDataType());
                             string assocName = "FK_" + p.ObjectClass.ClassName + "_" + otherType.Classname;
                             xml.WriteAttributeString("Relationship", "Model." + assocName);
@@ -268,7 +268,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteAttributeString("Name", "A_" + otherType.Classname);
                     xml.WriteStartElement("ScalarProperty");
                     xml.WriteAttributeString("Name", "ID");
-                    xml.WriteAttributeString("ColumnName", prop.PropertyName);
+                    xml.WriteAttributeString("ColumnName", "fk_" + prop.PropertyName);
                     xml.WriteEndElement(); // </ScalarProperty>
                     xml.WriteEndElement(); // </EndProperty>
 
@@ -281,7 +281,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </EndProperty>
 
                     xml.WriteStartElement("Condition");
-                    xml.WriteAttributeString("ColumnName", prop.PropertyName);
+                    xml.WriteAttributeString("ColumnName", "fk_" + prop.PropertyName);
                     xml.WriteAttributeString("IsNull", "false");
                     xml.WriteEndElement(); // </Condition>
 
@@ -378,7 +378,14 @@ namespace Kistl.Server.Generators.SQLServer
                     foreach (BaseProperty p in obj.Properties.OfType<Property>())
                     {
                         xml.WriteStartElement("Property");
-                        xml.WriteAttributeString("Name", p.PropertyName);
+                        if (p is ObjectReferenceProperty)
+                        {
+                            xml.WriteAttributeString("Name", "fk_" + p.PropertyName);
+                        }
+                        else
+                        {
+                            xml.WriteAttributeString("Name", p.PropertyName);
+                        }
                         xml.WriteAttributeString("Type", p is ObjectReferenceProperty ? "int" : SQLServerHelper.GetDBType(p.GetDataType()));
                         if (p is StringProperty)
                         {
@@ -422,7 +429,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteStartElement("Dependent");
                     xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteStartElement("PropertyRef");
-                    xml.WriteAttributeString("Name", prop.PropertyName);
+                    xml.WriteAttributeString("Name", "fk_" + prop.PropertyName);
                     xml.WriteEndElement(); // </PropertyRef>
                     xml.WriteEndElement(); // </Dependent>
 

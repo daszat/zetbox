@@ -328,12 +328,12 @@ namespace Kistl.Server.Generators.SQLServer
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
                     prop.GetDataType(), objClass.ClassName, prop.PropertyName));
 
-            string associationPropName = prop.PropertyName.Replace("fk_", "");
+            // string associationPropName = prop.PropertyName.Replace("fk_", "");
 
             CodeMemberProperty p = new CodeMemberProperty();
             c.Members.Add(p);
 
-            p.Name = associationPropName;
+            p.Name = prop.PropertyName;
             p.CustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Diagnostics.DebuggerHidden")));
             p.HasGet = true;
             p.HasSet = true;
@@ -348,20 +348,20 @@ namespace Kistl.Server.Generators.SQLServer
 
             p.GetStatements.Add(
                 new CodeSnippetExpression(
-                    string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == {1})", prop.GetDataType(), prop.PropertyName)));
+                    string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_{1})", prop.GetDataType(), prop.PropertyName)));
 
             p.SetStatements.Add(
                 new CodeSnippetExpression(
-                    string.Format(@"_{0} = value.ID", prop.PropertyName)));
+                    string.Format(@"_fk_{0} = value.ID", prop.PropertyName)));
 
             // Serializer fk_ Field und Property
-            CodeMemberField f = new CodeMemberField(typeof(int), "_" + prop.PropertyName);
+            CodeMemberField f = new CodeMemberField(typeof(int), "_fk_" + prop.PropertyName);
             f.InitExpression = new CodeSnippetExpression("Helper.INVALIDID"); // TODO: Das ist c# Spezifisch
             c.Members.Add(f);
 
             p = new CodeMemberProperty();
             c.Members.Add(p);
-            p.Name = prop.PropertyName;
+            p.Name = "fk_" + prop.PropertyName;
             p.HasGet = true;
             p.HasSet = true;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
@@ -369,8 +369,8 @@ namespace Kistl.Server.Generators.SQLServer
 
             p.GetStatements.Add(
                 new CodeSnippetExpression(
-                    string.Format(@"return _fk_{0}", associationPropName)));
-            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+                    string.Format(@"return _fk_{0}", prop.PropertyName)));
+            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
         }
         #endregion
 
@@ -497,7 +497,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             foreach (ObjectReferenceProperty prop in props)
             {
-                string associationPropName = prop.PropertyName.Replace("fk_", "");
+                // string associationPropName = prop.PropertyName.Replace("fk_", "");
                 ObjectType otherType = new ObjectType(prop.GetDataType());
                 string assocName = "FK_" + objClass.ClassName + "_" + otherType.Classname;
 
@@ -614,12 +614,12 @@ namespace Kistl.Server.Generators.SQLServer
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
                     prop.GetDataType(), objClass.ClassName, prop.PropertyName));
 
-            string associationPropName = prop.PropertyName.Replace("fk_", "");
+            // string associationPropName = prop.PropertyName.Replace("fk_", "");
 
             CodeMemberProperty p = new CodeMemberProperty();
             c.Members.Add(p);
 
-            p.Name = associationPropName;
+            p.Name = prop.PropertyName;
             p.HasGet = true;
             p.HasSet = true;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
@@ -649,13 +649,13 @@ namespace Kistl.Server.Generators.SQLServer
                 r.Value = value", prop.GetDataType(), assocName, otherType.Classname)));
 
             // Serializer fk_ Field und Property
-            CodeMemberField f = new CodeMemberField(typeof(int), "_" + prop.PropertyName);
+            CodeMemberField f = new CodeMemberField(typeof(int), "_fk_" + prop.PropertyName);
             f.InitExpression = new CodeSnippetExpression("Helper.INVALIDID"); // TODO: Das ist c# Spezifisch
             c.Members.Add(f);
 
             p = new CodeMemberProperty();
             c.Members.Add(p);
-            p.Name = prop.PropertyName;
+            p.Name = "fk_" + prop.PropertyName;
             p.HasGet = true;
             p.HasSet = true;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
@@ -667,8 +667,8 @@ namespace Kistl.Server.Generators.SQLServer
                 {{
                     _fk_{0} = {0}.ID;
                 }}
-                return _fk_{0}", associationPropName)));
-            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+                return _fk_{0}", prop.PropertyName)));
+            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
         }
         #endregion
 
@@ -907,8 +907,8 @@ namespace Kistl.Server.Generators.SQLServer
                 else if (p is ObjectReferenceProperty)
                 {
                     m.Statements.Add(new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(new CodeVariableReferenceExpression("obj"), p.PropertyName),
-                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), p.PropertyName)));
+                        new CodeFieldReferenceExpression(new CodeVariableReferenceExpression("obj"), "fk_" + p.PropertyName),
+                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "fk_" + p.PropertyName)));
                 }
             }
         }

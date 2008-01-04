@@ -202,7 +202,7 @@ namespace Kistl.Client
 
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
                     {
-                        BaseClientDataObject item = Item.GetPropertyValue<BaseClientDataObject>(p.PropertyName.Replace("fk_", ""));
+                        BaseClientDataObject item = Item.GetPropertyValue<BaseClientDataObject>(p.PropertyName);
                         if (item != null)
                         {
                             // Kann überraschenderweise null sein

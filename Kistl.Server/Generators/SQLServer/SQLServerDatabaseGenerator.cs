@@ -77,7 +77,14 @@ namespace Kistl.Server.Generators.SQLServer
 
                     cmd = new SqlCommand("select dbo.fn_ColumnExists(@t, @c)", db, tx);
                     cmd.Parameters.AddWithValue("@t", objClass.TableName);
-                    cmd.Parameters.AddWithValue("@c", p.PropertyName);
+                    if (p is ObjectReferenceProperty)
+                    {
+                        cmd.Parameters.AddWithValue("@c", "fk_" + p.PropertyName);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@c", p.PropertyName);
+                    }
 
                     bool columnExists = (bool)cmd.ExecuteScalar();
                     System.Diagnostics.Trace.TraceInformation("  " + (columnExists ? "Checking" : "Creating") + " Column " + objClass.TableName + "." + p.PropertyName);
@@ -138,13 +145,14 @@ namespace Kistl.Server.Generators.SQLServer
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendFormat(" [{0}] ", p.PropertyName);
             if (p is ObjectReferenceProperty)
             {
+                sb.AppendFormat(" [fk_{0}] ", p.PropertyName);
                 sb.Append("int");
             }
             else
             {
+                sb.AppendFormat(" [{0}] ", p.PropertyName);
                 sb.Append(SQLServerHelper.GetDBType(p.GetDataType()));
             }
 

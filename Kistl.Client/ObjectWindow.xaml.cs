@@ -137,7 +137,7 @@ namespace Kistl.Client
                         pointer.ObjectType = new ObjectType(p.GetDataType());
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
-                        Binding b = new Binding(p.PropertyName);
+                        Binding b = new Binding("fk_" + p.PropertyName);
                         b.Mode = BindingMode.TwoWay;
                         b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                         b.NotifyOnSourceUpdated = true;
@@ -151,7 +151,7 @@ namespace Kistl.Client
                         {
                             if (pointer.ObjectType.Equals(SourceObjectType))
                             {
-                                obj.GetType().GetProperty(p.PropertyName).SetValue(obj, SourceObjectID, new object[] { });
+                                obj.GetType().GetProperty("fk_" + p.PropertyName).SetValue(obj, SourceObjectID, new object[] { });
                             }
                         }
                     }
