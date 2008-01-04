@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Auftrag.Server.Designer.cs" />
     <Compile Include="BackReferenceProperty.Server.Designer.cs" />
     <Compile Include="BaseProperty.Server.Designer.cs" />
@@ -66,7 +67,6 @@
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
     <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
@@ -86,6 +86,9 @@
     <EmbeddedResource Include="Model.csdl" />
     <EmbeddedResource Include="Model.msl" />
     <EmbeddedResource Include="Model.ssdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
