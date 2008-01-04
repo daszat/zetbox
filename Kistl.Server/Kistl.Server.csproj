@@ -106,6 +106,9 @@
     <None Include="Database\Database.02.sql" />
     <None Include="Database\Database.03.sql" />
     <None Include="Database\Database.05.sql" />
+    <None Include="Database\Database.06.sql" />
+    <None Include="Database\Database.07.sql" />
+    <None Include="Database\Database.08.sql" />
     <None Include="obj\Database.03.sql" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

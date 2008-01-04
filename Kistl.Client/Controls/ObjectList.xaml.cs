@@ -107,7 +107,17 @@ namespace Kistl.Client.Controls
         /// <summary>
         /// ObjektID
         /// </summary>
-        public int ObjectID { get; set; }
+        public int ObjectID
+        {
+            get { return (int)GetValue(ObjectIDProperty); }
+            set { SetValue(ObjectIDProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ObjectID.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ObjectIDProperty =
+            DependencyProperty.Register("ObjectID", typeof(int), typeof(ObjectList));
+
+
 
         /// <summary>
         /// Property des Objektes, dessen Liste dargestellt werden soll.

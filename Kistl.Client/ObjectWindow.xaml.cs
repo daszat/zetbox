@@ -105,7 +105,6 @@ namespace Kistl.Client
             BindDefaultProperties();
             
             // Objektklassenhierarchie holen
-            //Kistl.App.Base.ObjectClassClient objClassClient = new Kistl.App.Base.ObjectClassClient();
             foreach (Kistl.App.Base.ObjectClass objClass in GetObjectHierarchie())
             {
                 #region Binden
@@ -123,7 +122,14 @@ namespace Kistl.Client
                         // aus Metadaten auslesen
                         lst.DestinationObjectType = new ObjectType(p.GetDataType());
 
-                        lst.ObjectID = this.ObjectID;
+                        Binding b = new Binding("ID");
+                        b.Mode = BindingMode.TwoWay;
+                        b.Source = obj;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        lst.SetBinding(Controls.ObjectList.ObjectIDProperty, b);
+
+                        //lst.ObjectID = this.ObjectID;
                         lst.PropertyName = p.PropertyName;
 
                         data.Children.Add(lst);
@@ -237,22 +243,8 @@ namespace Kistl.Client
             try
             {
                 // Client BL holen
-                //client = ClientObjectFactory.GetClientObject(ObjectType);
                 ctx = new KistlContext();
-
                 obj = ctx.GetQuery(ObjectType).SingleOrDefault(o => o.ID == ObjectID);
-
-                /*
-                // Je nachdem, Objekt vom Server holen oder mittels BL erzeugen
-                if (ObjectID != API.Helper.INVALIDID)
-                {
-                    obj = client.GetObjectGeneric(ObjectID);
-                }
-                else
-                {
-                    obj = client.CreateNewGeneric();
-                }
-                 * */
 
                 // Objekttype anpassen
                 ObjectType = new ObjectType(obj);
