@@ -6,7 +6,7 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kistl.Client</RootNamespace>
     <AssemblyName>Kistl.Client</AssemblyName>
@@ -74,6 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
     <Page Include="Controls\EditDateTimeProperty.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +120,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
@@ -184,11 +191,15 @@
     <ProjectReference Include="..\Kistl.Objects.Client\Kistl.Objects.Client.csproj">
       <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
       <Name>Kistl.Objects.Client</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
       <Project>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</Project>
       <Name>WPFSamplesLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ConfigArthur.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

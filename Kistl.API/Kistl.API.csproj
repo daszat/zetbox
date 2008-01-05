@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIInit.cs" />
+    <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Configuration\KistlConfig.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ICustomActions.cs" />

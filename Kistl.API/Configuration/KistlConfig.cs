@@ -9,8 +9,46 @@ using System.IO;
 namespace Kistl.API.Configuration
 {
     [XmlRoot("KistlConfig", Namespace="http://dasz.at/Kistl/")]
-    public class KistlConfig
+    public class KistlConfig : MarshalByRefObject
     {
+        private static KistlConfig _Current = null;
+        public static KistlConfig Current
+        {
+            get
+            {
+                if (_Current == null) throw new InvalidOperationException("Configuration was not setuped yet");
+                return _Current;
+            }
+        }
+
+        internal static bool IsInitialized
+        {
+            get
+            {
+                return _Current != null;
+            }
+        }
+
+        /// <summary>
+        /// Inits the config
+        /// </summary>
+        /// <param name="config">Path to the Config File. May be null or empty. Then DefaultConfig.xml is loaded</param>
+        internal static void Init(string file)
+        {
+            if (!string.IsNullOrEmpty(file))
+            {
+                _Current = FromFile(file);
+            }
+            else
+            {
+                // Try to load default config
+                _Current = FromFile("DefaultConfig.xml");
+            }
+        }
+
+        [XmlIgnore]
+        public string ConfigFilePath { get; set; }
+
         [XmlElement(IsNullable = false)]
         public string ConfigName { get; set; }
 
@@ -91,7 +129,9 @@ namespace Kistl.API.Configuration
         {
             using (XmlTextReader r = new XmlTextReader(filename))
             {
-                return (KistlConfig)xml.Deserialize(r);
+                KistlConfig result = (KistlConfig)xml.Deserialize(r);
+                result.ConfigFilePath = filename;
+                return result;
             }
         }
     }

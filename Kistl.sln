@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.App.Projekte.Server",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFSamplesLib", "WPFLibrary\WPFSamplesLib.csproj", "{E4BBC94F-B837-4668-A127-E36E6DE012F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl", "Kistl\Kistl.csproj", "{12CEE140-DAC8-42C7-A362-A12E5B2E1839}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,10 +67,6 @@ Global
 		{E4BBC94F-B837-4668-A127-E36E6DE012F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4BBC94F-B837-4668-A127-E36E6DE012F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4BBC94F-B837-4668-A127-E36E6DE012F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12CEE140-DAC8-42C7-A362-A12E5B2E1839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12CEE140-DAC8-42C7-A362-A12E5B2E1839}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12CEE140-DAC8-42C7-A362-A12E5B2E1839}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12CEE140-DAC8-42C7-A362-A12E5B2E1839}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,6 +15,35 @@ namespace Kistl.API
     public class Helper
     {
         public const int INVALIDID = -1;
+
+        public static string GetLegalPathName(string path)
+        {
+            System.IO.Path.GetInvalidPathChars().ToList().ForEach(c => path = path.Replace(c, '_'));
+
+            return path;
+        }
+
+        private static string _WorkingFolder;
+        public static string WorkingFolder
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_WorkingFolder))
+                {
+                    _WorkingFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                    _WorkingFolder += _WorkingFolder.EndsWith(@"\") ? "" : @"\";
+
+                    _WorkingFolder += @"dasz\Kistl\"
+                        + Helper.GetLegalPathName(Configuration.KistlConfig.Current.ConfigName)
+                        + @"\"
+                        + Helper.GetLegalPathName(AppDomain.CurrentDomain.FriendlyName)
+                        + @"\";
+
+                    System.IO.Directory.CreateDirectory(_WorkingFolder);
+                }
+                return _WorkingFolder;
+            }
+        }
     }
 
     /// <summary>

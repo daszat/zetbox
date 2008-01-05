@@ -10,30 +10,44 @@ namespace Kistl.Client
     {
         public Client()
         {
+            API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
         }
 
-        Application app = new Application();
-        
+        /// <summary>
+        /// Das KistService
+        /// </summary>
+        private Kistl.API.IKistlAppDomain server = null;
+
+        /// <summary>
+        /// AppDomain, in der das KistService rennt.
+        /// </summary>
+        private AppDomain domain = null;
+
         #region IKistlAppDomain Members
 
         public void Start()
         {
-            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 3);
-            API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
-
-            MainWindow wnd = new MainWindow();
-            wnd.Closed += new EventHandler(wnd_Closed);
-            
-            app.Run(wnd);
-        }
-
-        void wnd_Closed(object sender, EventArgs e)
-        {
-            app.Shutdown();
+            if (Kistl.API.Configuration.KistlConfig.Current.Server.StartServer)
+            {
+                SplashScreen.SetInfo("Starting Server");
+                // Create a new AppDomain for the Server!
+                // Damit trennt man den Server schön brav vom Client & kann 
+                // CustomActionsManagerFactory.Init zwei mal aufrufen :-)
+                domain = AppDomain.CreateDomain("ServerAppDomain");
+                Kistl.API.APIInit initServer = (Kistl.API.APIInit)domain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
+                initServer.Init(Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
+                server = (Kistl.API.IKistlAppDomain)domain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
+                server.Start();
+            }
         }
 
         public void Stop()
         {
+            if (server != null)
+            {
+                server.Stop();
+                server = null;
+            }
         }
 
         #endregion

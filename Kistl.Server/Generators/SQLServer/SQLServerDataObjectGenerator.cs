@@ -232,6 +232,13 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 c.BaseTypes.Add("BaseClientDataObject");
             }
+
+            /*if (objClass.Module.Namespace == "Kistl.App.Base")
+            {
+                // Interface hinzufügen
+                c.BaseTypes.Add("I" + objClass.ClassName);
+            }*/
+
             c.BaseTypes.Add("ICloneable");
 
             if (objClass.BaseObjectClass == null)
@@ -465,6 +472,13 @@ namespace Kistl.Server.Generators.SQLServer
                 c.BaseTypes.Add("BaseServerDataObject");
             }
             c.BaseTypes.Add("ICloneable");
+
+            /*if (objClass.Module.Namespace == "Kistl.App.Base")
+            {
+                // Interface hinzufügen
+                c.BaseTypes.Add("I" + objClass.ClassName);
+            }*/
+
             c.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                 new CodeAttributeArgument("NamespaceName",
                     new CodePrimitiveExpression("Model")),

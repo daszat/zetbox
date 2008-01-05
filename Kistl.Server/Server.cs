@@ -5,6 +5,7 @@ using System.Text;
 using System.ServiceModel;
 using System.Threading;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace Kistl.Server
 {
@@ -33,6 +34,12 @@ namespace Kistl.Server
         /// </summary>
         public Server()
         {
+            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
+
+            // Preload Kistl.Objects.Server.dll so the Mapping Resources will be loaded
+            // Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
+            Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            Kistl.API.AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects.Server");
         }
 
         /// <summary>
@@ -42,10 +49,6 @@ namespace Kistl.Server
         public void Start()
         {
             Trace.TraceInformation("Starting Server");
-            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
-
-            // Preload Kistl.Objects.Server.dll so the Mapping Resources will be loaded
-            Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
 
             serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
             serviceThread.Start();
@@ -101,6 +104,26 @@ namespace Kistl.Server
         private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
         {
             Trace.TraceWarning("UnknownMessageReceived: {0}", e.Message.ToString());
+        }
+
+        internal void GenerateCode()
+        {
+            Trace.TraceInformation("Generating Code...");
+            Generators.Generator.GenerateCode();
+            Trace.TraceInformation("Generating Code finished!");
+        }
+
+        internal void GenerateDatabase()
+        {
+            Trace.TraceInformation("Generating Database...");
+            Generators.Generator.GenerateDatabase();
+            Trace.TraceInformation("Generating Database finished!");
+        }
+
+        internal void GenerateAll()
+        {
+            GenerateCode();
+            GenerateDatabase();
         }
     }
 }
