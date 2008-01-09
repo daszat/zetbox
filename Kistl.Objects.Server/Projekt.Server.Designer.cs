@@ -145,6 +145,30 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kostentraeger_Projekt", "B_Kostentraeger")]
+        [XmlIgnore()]
+        public EntityCollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Zeiterfassung.Kostentraeger> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Zeiterfassung.Kostentraeger>("Model.FK_Kostentraeger_Projekt", "B_Kostentraeger");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Projekt", "B_Auftrag")]
+        [XmlIgnore()]
+        public EntityCollection<Kistl.App.Projekte.Auftrag> Auftraege
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Projekte.Auftrag> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Auftrag>("Model.FK_Auftrag_Projekt", "B_Auftrag");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
         public event ToStringHandler<Projekt> OnToString_Projekt;
         
         public event ObjectEventHandler<Projekt> OnPreSave_Projekt;

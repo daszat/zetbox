@@ -50,7 +50,6 @@ namespace Kistl.Client
         {
             try
             {
-                graph.CenterObject = null;
                 graph.CenterObject = thing;
             }
             catch
@@ -107,6 +106,17 @@ namespace Kistl.Client
                 if (e.AddedItems.Count > 0)
                 {
                     InstanceChangeCenter(new ObjNode((BaseClientDataObject)e.AddedItems[0], true));
+                }
+            }
+        }
+
+        private void DesktopTreeView_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<BaseClientDataObject> e)
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                if (e.NewValue != null)
+                {
+                    InstanceChangeCenter(new ObjNode(e.NewValue, true));
                 }
             }
         }

@@ -32,6 +32,19 @@ namespace Kistl.App.Projekte
                 impl.OnToString_Task += new Kistl.API.ToStringHandler<Task>(Task_OnToString);
             }
 
+            if (obj is Kunde)
+            {
+                Kunde impl = obj as Kunde;
+                impl.OnToString_Kunde += new Kistl.API.ToStringHandler<Kunde>(impl_OnToString_Kunde);
+            }
+
+            if (obj is Auftrag)
+            {
+                Auftrag impl = obj as Auftrag;
+                impl.OnToString_Auftrag += new Kistl.API.ToStringHandler<Auftrag>(impl_OnToString_Auftrag);
+                impl.OnRechnungErstellen_Auftrag += new Auftrag.RechnungErstellen_Handler<Auftrag>(impl_OnRechnungErstellen_Auftrag);
+            }
+
             if (obj is App.Base.ObjectClass)
             {
                 App.Base.ObjectClass impl = obj as App.Base.ObjectClass;
@@ -99,6 +112,30 @@ namespace Kistl.App.Projekte
             {
                 App.Base.Module impl = obj as App.Base.Module;
                 impl.OnToString_Module += new Kistl.API.ToStringHandler<Kistl.App.Base.Module>(impl_OnToString_Module);
+            }
+
+            if (obj is App.Zeiterfassung.Zeitkonto)
+            {
+                App.Zeiterfassung.Zeitkonto impl = obj as App.Zeiterfassung.Zeitkonto;
+                impl.OnToString_Zeitkonto += new Kistl.API.ToStringHandler<Kistl.App.Zeiterfassung.Zeitkonto>(impl_OnToString_Zeitkonto);
+            }
+
+            if (obj is App.Zeiterfassung.Kostenstelle)
+            {
+                App.Zeiterfassung.Kostenstelle impl = obj as App.Zeiterfassung.Kostenstelle;
+                impl.OnToString_Kostenstelle += new Kistl.API.ToStringHandler<Kistl.App.Zeiterfassung.Kostenstelle>(impl_OnToString_Kostenstelle);
+            }
+
+            if (obj is App.Zeiterfassung.Kostentraeger)
+            {
+                App.Zeiterfassung.Kostentraeger impl = obj as App.Zeiterfassung.Kostentraeger;
+                impl.OnToString_Kostentraeger += new Kistl.API.ToStringHandler<Kistl.App.Zeiterfassung.Kostentraeger>(impl_OnToString_Kostentraeger);
+            }
+
+            if (obj is App.Zeiterfassung.Taetigkeit)
+            {
+                App.Zeiterfassung.Taetigkeit impl = obj as App.Zeiterfassung.Taetigkeit;
+                impl.OnToString_Taetigkeit += new Kistl.API.ToStringHandler<Kistl.App.Zeiterfassung.Taetigkeit>(impl_OnToString_Taetigkeit);
             }
         }
     }

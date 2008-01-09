@@ -25,15 +25,22 @@
                     ScaleX="{Binding ElementName=WorkspaceSlider, Path=Value}" 
                     ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value}" />
             </DockPanel.RenderTransform>
-            <DockPanel DockPanel.Dock="Left" Width="250">
-                <ComboBox 
-                DockPanel.Dock="Top"
-                HorizontalAlignment="Right"
-                Name="cbObjectTypes" 
-                SelectionChanged="ComboBox_SelectionChanged"
-                ItemsSource="{Binding}" Width="150" />
-                <my:ObjectList x:Name="lst" SelectionChanged="lst_SelectionChanged" />
-            </DockPanel>
+            <TabControl DockPanel.Dock="Left" Width="250">
+                <TabItem Header="Tree">
+                    <my:DesktopTreeView SelectionChanged="DesktopTreeView_SelectionChanged" />
+                </TabItem>
+                <TabItem Header="List">
+                    <DockPanel>
+                        <ComboBox 
+                            DockPanel.Dock="Top"
+                            HorizontalAlignment="Right"
+                            Name="cbObjectTypes" 
+                            SelectionChanged="ComboBox_SelectionChanged"
+                            ItemsSource="{Binding}" Width="150" />
+                        <my:ObjectList x:Name="lst" SelectionChanged="lst_SelectionChanged" />
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
             <kevin:Graph x:Name="graph"
                          CoefficientOfDampening="0.7"                         FrameRate="0.3"
                          NodesBindingPath="SubItems"

@@ -8,7 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Projekt), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Kunde", "A_Kunde", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Kunde), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag))]
 
 namespace Kistl.App.Projekte
 {
@@ -31,7 +33,15 @@ namespace Kistl.App.Projekte
         
         private int _ID = Helper.INVALIDID;
         
+        private int _fk_Projekt = Helper.INVALIDID;
+        
         private int _fk_Mitarbeiter = Helper.INVALIDID;
+        
+        private string _Auftragsname;
+        
+        private int _fk_Kunde = Helper.INVALIDID;
+        
+        private System.Nullable<double> _Auftragswert;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -51,6 +61,40 @@ namespace Kistl.App.Projekte
             get
             {
                 return "Auftrag";
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Projekt", "A_Projekt")]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Auftrag_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt>("Model.FK_Auftrag_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Projekt
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
+                {
+                    _fk_Projekt = Projekt.ID;
+                }
+                return _fk_Projekt;
+            }
+            set
+            {
+                _fk_Projekt = value;
             }
         }
         
@@ -88,11 +132,73 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public string Auftragsname
+        {
+            get
+            {
+                return _Auftragsname;
+            }
+            set
+            {
+                _Auftragsname = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Kunde", "A_Kunde")]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Kunde Kunde
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde>("Model.FK_Auftrag_Kunde", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde>("Model.FK_Auftrag_Kunde", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Kunde
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Kunde == Helper.INVALIDID && Kunde != null)
+                {
+                    _fk_Kunde = Kunde.ID;
+                }
+                return _fk_Kunde;
+            }
+            set
+            {
+                _fk_Kunde = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<double> Auftragswert
+        {
+            get
+            {
+                return _Auftragswert;
+            }
+            set
+            {
+                _Auftragswert = value;
+            }
+        }
+        
         public event ToStringHandler<Auftrag> OnToString_Auftrag;
         
         public event ObjectEventHandler<Auftrag> OnPreSave_Auftrag;
         
         public event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
+        
+        public event RechnungErstellen_Handler<Auftrag> OnRechnungErstellen_Auftrag;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -128,7 +234,23 @@ namespace Kistl.App.Projekte
         public void CopyTo(Auftrag obj)
         {
             base.CopyTo(obj);
+            obj.fk_Projekt = this.fk_Projekt;
             obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
+            obj.Auftragsname = this.Auftragsname;
+            obj.fk_Kunde = this.fk_Kunde;
+            obj.Auftragswert = this.Auftragswert;
         }
+        
+        public virtual string RechnungErstellen()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            if (OnRechnungErstellen_Auftrag != null)
+            {
+                OnRechnungErstellen_Auftrag(this, e);
+            }
+            return e.Result;
+        }
+        
+        public delegate void RechnungErstellen_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
 }

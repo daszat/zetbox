@@ -62,6 +62,9 @@
     <Compile Include="DateTimeProperty.Client.Designer.cs" />
     <Compile Include="DoubleProperty.Client.Designer.cs" />
     <Compile Include="IntProperty.Client.Designer.cs" />
+    <Compile Include="Kostenstelle.Client.Designer.cs" />
+    <Compile Include="Kostentraeger.Client.Designer.cs" />
+    <Compile Include="Kunde.Client.Designer.cs" />
     <Compile Include="Method.Client.Designer.cs" />
     <Compile Include="Mitarbeiter.Client.Designer.cs" />
     <Compile Include="Module.Client.Designer.cs" />
@@ -72,8 +75,10 @@
     <Compile Include="Projekt.Client.Designer.cs" />
     <Compile Include="Property.Client.Designer.cs" />
     <Compile Include="StringProperty.Client.Designer.cs" />
+    <Compile Include="Taetigkeit.Client.Designer.cs" />
     <Compile Include="Task.Client.Designer.cs" />
     <Compile Include="ValueTypeProperty.Client.Designer.cs" />
+    <Compile Include="Zeitkonto.Client.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">

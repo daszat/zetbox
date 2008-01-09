@@ -176,7 +176,7 @@ namespace Kistl.Client.Controls
 
                 if (objClass.SubClasses.Count > 0)
                 {
-                    // TODO: Das ist noch nicht ganz konstistent
+                    // TODO: Das ist noch nicht ganz konsistent
                     Dialogs.ChooseObjectClass dlg = new Kistl.Client.Dialogs.ChooseObjectClass();
                     dlg.BaseObjectClass = objClass;
 

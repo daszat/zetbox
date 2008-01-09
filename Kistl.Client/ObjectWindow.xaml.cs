@@ -103,14 +103,18 @@ namespace Kistl.Client
             data.DataContext = obj;
 
             BindDefaultProperties();
+
+            List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
             
             // Objektklassenhierarchie holen
             foreach (Kistl.App.Base.ObjectClass objClass in GetObjectHierarchie())
             {
+                // Get Actions, late we'll bind them to our Menu
+                methods.AddRange(objClass.Methods);
+
                 #region Binden
                 // Aus Metadaten holen
                 foreach (Kistl.App.Base.BaseProperty p in objClass.Properties)
-                //foreach (Kistl.App.Base.BaseProperty p in objClassClient.GetListOfProperties(objClass.ID))
                 {
                     if (p is Kistl.App.Base.BackReferenceProperty)
                     {
@@ -221,6 +225,9 @@ namespace Kistl.Client
                 }
                 #endregion
             }
+
+            // Bind Actions to Menu
+            mnuActions.ItemsSource = methods;
         }
 
         private bool IsObjectDirty = false;
@@ -305,6 +312,27 @@ namespace Kistl.Client
             }
             catch
             {
+            }
+        }
+
+        private void mnuActions_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (((MenuItem)e.OriginalSource).Header is Kistl.App.Base.Method)
+                {
+                    Kistl.App.Base.Method m = (Kistl.App.Base.Method)((MenuItem)e.OriginalSource).Header;
+                    System.Reflection.MethodInfo mi = obj.GetType().GetMethod(m.MethodName);
+                    if (mi != null)
+                    {
+                        // TODO: Nur Parameterlose Methoden zulassen!
+                        mi.Invoke(obj, new object[] { });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex);
             }
         }
     }

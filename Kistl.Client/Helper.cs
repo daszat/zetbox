@@ -47,14 +47,31 @@ namespace Kistl.Client
                         #endregion
 
                         _ObjectClasses = new Dictionary<ObjectType, Kistl.App.Base.ObjectClass>();
-                        Dictionary<int, Kistl.App.Base.Module> modules = new Dictionary<int, Kistl.App.Base.Module>();
-                        ctx.GetQuery<Kistl.App.Base.Module>().ToList().ForEach(m => modules[m.ID] = m);
                         ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().ForEach(o => _ObjectClasses.Add(
-                            new ObjectType(modules[o.fk_Module].Namespace, o.ClassName), o));
+                            new ObjectType(o.Module.Namespace, o.ClassName), o));
                     }
                 }
 
                 return _ObjectClasses;
+            }
+        }
+
+        private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
+
+        public static Dictionary<string, Kistl.App.Base.Module> Modules
+        {
+            get
+            {
+                if (_Modules == null)
+                {
+                    using (KistlContext ctx = new KistlContext())
+                    {
+                        _Modules = new Dictionary<string, Kistl.App.Base.Module>();
+                        ctx.GetQuery<Kistl.App.Base.Module>().ToList().ForEach(m => _Modules.Add(m.ModuleName, m));
+                    }
+                }
+
+                return _Modules;
             }
         }
     }

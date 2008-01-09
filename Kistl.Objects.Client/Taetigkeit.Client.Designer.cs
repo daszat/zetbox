@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Projekte
+namespace Kistl.App.Zeiterfassung
 {
     using System;
     using System.Collections.Generic;
@@ -23,18 +23,18 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class Projekt : BaseClientDataObject, ICloneable
+    public class Taetigkeit : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
         
-        private string _Name;
+        private int _fk_Zeitkonto = Helper.INVALIDID;
         
         private int _fk_Mitarbeiter = Helper.INVALIDID;
         
-        private System.Nullable<double> _AufwandGes;
+        private System.Nullable<System.DateTime> _Datum;
         
-        private string _Kundenname;
+        private System.Nullable<double> _Dauer;
         
         public override int ID
         {
@@ -48,25 +48,29 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public string Name
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Zeiterfassung.Zeitkonto Zeitkonto
         {
             get
             {
-                return _Name;
+                return Context.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>().Single(o => o.ID == fk_Zeitkonto);
             }
             set
             {
-                _Name = value;
+                _fk_Zeitkonto = value.ID;
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
-        [XmlIgnore()]
-        public List<Kistl.App.Projekte.Task> Tasks
+        public int fk_Zeitkonto
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
+                return _fk_Zeitkonto;
+            }
+            set
+            {
+                _fk_Zeitkonto = value;
             }
         }
         
@@ -96,64 +100,44 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<double> AufwandGes
+        public System.Nullable<System.DateTime> Datum
         {
             get
             {
-                return _AufwandGes;
+                return _Datum;
             }
             set
             {
-                _AufwandGes = value;
+                _Datum = value;
             }
         }
         
-        public string Kundenname
+        public System.Nullable<double> Dauer
         {
             get
             {
-                return _Kundenname;
+                return _Dauer;
             }
             set
             {
-                _Kundenname = value;
+                _Dauer = value;
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
-        [XmlIgnore()]
-        public List<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
-        {
-            get
-            {
-                return Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger");
-            }
-        }
+        public event ToStringHandler<Taetigkeit> OnToString_Taetigkeit;
         
-        [System.Diagnostics.DebuggerHidden()]
-        [XmlIgnore()]
-        public List<Kistl.App.Projekte.Auftrag> Auftraege
-        {
-            get
-            {
-                return Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
-            }
-        }
+        public event ObjectEventHandler<Taetigkeit> OnPreSave_Taetigkeit;
         
-        public event ToStringHandler<Projekt> OnToString_Projekt;
-        
-        public event ObjectEventHandler<Projekt> OnPreSave_Projekt;
-        
-        public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
+        public event ObjectEventHandler<Taetigkeit> OnPostSave_Taetigkeit;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Projekt != null)
+            if (OnToString_Taetigkeit != null)
             {
-                OnToString_Projekt(this, e);
+                OnToString_Taetigkeit(this, e);
             }
             return e.Result;
         }
@@ -161,29 +145,29 @@ namespace Kistl.App.Projekte
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Projekt != null) OnPreSave_Projekt(this);
+            if (OnPreSave_Taetigkeit != null) OnPreSave_Taetigkeit(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
+            if (OnPostSave_Taetigkeit != null) OnPostSave_Taetigkeit(this);
         }
         
         public override object Clone()
         {
-            Projekt obj = new Projekt();
+            Taetigkeit obj = new Taetigkeit();
             CopyTo(obj);
             return obj;
         }
         
-        public void CopyTo(Projekt obj)
+        public void CopyTo(Taetigkeit obj)
         {
             base.CopyTo(obj);
-            obj.Name = this.Name;
+            obj.fk_Zeitkonto = this.fk_Zeitkonto;
             obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
-            obj.AufwandGes = this.AufwandGes;
-            obj.Kundenname = this.Kundenname;
+            obj.Datum = this.Datum;
+            obj.Dauer = this.Dauer;
         }
     }
 }

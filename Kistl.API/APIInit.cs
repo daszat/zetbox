@@ -17,6 +17,7 @@ namespace Kistl.API
         {
             Configuration.KistlConfig.Init(configFile);
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Kistl.API.AssemblyLoader.AssemblyResolve);
+            AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(Kistl.API.AssemblyLoader.AssemblyResolve);
         }
     }
 }

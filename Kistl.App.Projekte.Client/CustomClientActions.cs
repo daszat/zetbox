@@ -51,6 +51,21 @@ namespace Kistl.App.Projekte
                     obj.Name, obj.Aufwand);
             }
         }
+
+        void impl_OnRechnungErstellen_Auftrag(Auftrag obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            System.Windows.Forms.MessageBox.Show("Rechung erstellt, Word öffnet sich gleich.");
+        }
+
+        void impl_OnToString_Auftrag(Auftrag obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Auftragsname;
+        }
+
+        void impl_OnToString_Kunde(Kunde obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Kundenname;
+        }
         #endregion
 
         #region Method
@@ -142,6 +157,27 @@ namespace Kistl.App.Projekte
         {
             ObjectClass objClass = obj.ReferenceProperty.ObjectClass;
             e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+        }
+        #endregion
+
+        #region Zeiterfassung
+        void impl_OnToString_Taetigkeit(Kistl.App.Zeiterfassung.Taetigkeit obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Zeitkonto + ": " + obj.Datum.Value.ToShortDateString() + ", " + obj.Dauer.Value + "h";
+        }
+
+        void impl_OnToString_Kostentraeger(Kistl.App.Zeiterfassung.Kostentraeger obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            // Do nothing
+        }
+
+        void impl_OnToString_Zeitkonto(Kistl.App.Zeiterfassung.Zeitkonto obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Kontoname;
+        }
+
+        void impl_OnToString_Kostenstelle(Kistl.App.Zeiterfassung.Kostenstelle obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
         }
         #endregion
     }

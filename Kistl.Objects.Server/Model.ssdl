@@ -19,6 +19,11 @@
     <EntitySet Name="ObjectForDeletedProperties" EntityType="Model.Store.ObjectForDeletedProperties" Table="ObjectForDeletedProperties" />
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules" />
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege" />
+    <EntitySet Name="Zeitkonto" EntityType="Model.Store.Zeitkonto" Table="Zeitkonten" />
+    <EntitySet Name="Kostenstelle" EntityType="Model.Store.Kostenstelle" Table="Kostenstellen" />
+    <EntitySet Name="Kostentraeger" EntityType="Model.Store.Kostentraeger" Table="Kostentraeger" />
+    <EntitySet Name="Taetigkeit" EntityType="Model.Store.Taetigkeit" Table="Taetigkeiten" />
+    <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -53,6 +58,26 @@
     </AssociationSet>
     <AssociationSet Name="FK_Auftrag_Mitarbeiter" Association="Model.Store.FK_Auftrag_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="B_Auftrag" EntitySet="Auftrag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Auftrag_Projekt" Association="Model.Store.FK_Auftrag_Projekt">
+      <End Role="A_Projekt" EntitySet="Projekt" />
+      <End Role="B_Auftrag" EntitySet="Auftrag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kostentraeger_Projekt" Association="Model.Store.FK_Kostentraeger_Projekt">
+      <End Role="A_Projekt" EntitySet="Projekt" />
+      <End Role="B_Kostentraeger" EntitySet="Kostentraeger" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Taetigkeit_Mitarbeiter" Association="Model.Store.FK_Taetigkeit_Mitarbeiter">
+      <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Taetigkeit_Zeitkonto" Association="Model.Store.FK_Taetigkeit_Zeitkonto">
+      <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
+      <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Auftrag_Kunde" Association="Model.Store.FK_Auftrag_Kunde">
+      <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_Auftrag" EntitySet="Auftrag" />
     </AssociationSet>
   </EntityContainer>
@@ -197,7 +222,52 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Projekt" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+    <Property Name="Auftragsname" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_Kunde" Type="int" Nullable="true" />
+    <Property Name="Auftragswert" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Zeitkonto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Kontoname" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Kostenstelle">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kostentraeger">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Projekt" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Taetigkeit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Zeitkonto" Type="int" Nullable="true" />
+    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+    <Property Name="Datum" Type="datetime" Nullable="true" />
+    <Property Name="Dauer" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Kunde">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="true" />
+    <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
@@ -304,6 +374,66 @@
       </Principal>
       <Dependent Role="B_Auftrag">
         <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Auftrag_Projekt">
+    <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
+    <End Role="B_Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Projekt">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Auftrag">
+        <PropertyRef Name="fk_Projekt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kostentraeger_Projekt">
+    <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
+    <End Role="B_Kostentraeger" Type="Model.Store.Kostentraeger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Projekt">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Kostentraeger">
+        <PropertyRef Name="fk_Projekt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Taetigkeit_Mitarbeiter">
+    <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <End Role="B_Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Mitarbeiter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Taetigkeit">
+        <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Taetigkeit_Zeitkonto">
+    <End Role="A_Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="0..1" />
+    <End Role="B_Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Zeitkonto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Taetigkeit">
+        <PropertyRef Name="fk_Zeitkonto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Auftrag_Kunde">
+    <End Role="A_Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
+    <End Role="B_Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Kunde">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Auftrag">
+        <PropertyRef Name="fk_Kunde" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

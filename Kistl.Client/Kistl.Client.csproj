@@ -78,6 +78,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\DesktopTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EditDateTimeProperty.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,6 +128,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client.cs" />
+    <Compile Include="Controls\DesktopTreeView.xaml.cs">
+      <DependentUpon>DesktopTreeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
       <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>

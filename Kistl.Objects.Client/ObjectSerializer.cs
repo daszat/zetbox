@@ -47,6 +47,11 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
         [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Auftrag), ElementName="Auftrag")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Zeitkonto), ElementName="Zeitkonto")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Kostenstelle), ElementName="Kostenstelle")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Kostentraeger), ElementName="Kostentraeger")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Taetigkeit), ElementName="Taetigkeit")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
         public List<Object> Objects
         {
             get
@@ -87,6 +92,11 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlElement(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
         [XmlElement(Type=typeof(Kistl.App.Projekte.Auftrag), ElementName="Auftrag")]
+        [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Zeitkonto), ElementName="Zeitkonto")]
+        [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Kostenstelle), ElementName="Kostenstelle")]
+        [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Kostentraeger), ElementName="Kostentraeger")]
+        [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Taetigkeit), ElementName="Taetigkeit")]
+        [XmlElement(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
         public Object Object
         {
             get

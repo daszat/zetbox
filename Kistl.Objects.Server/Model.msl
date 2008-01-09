@@ -132,6 +132,47 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Auftrag)">
         <MappingFragment StoreEntitySet="Auftrag">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Auftragsname" ColumnName="Auftragsname" />
+          <ScalarProperty Name="Auftragswert" ColumnName="Auftragswert" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zeitkonto">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Zeitkonto)">
+        <MappingFragment StoreEntitySet="Zeitkonto">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Kontoname" ColumnName="Kontoname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kostenstelle)">
+        <MappingFragment StoreEntitySet="Kostenstelle">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kostentraeger)">
+        <MappingFragment StoreEntitySet="Kostentraeger">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taetigkeit">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Taetigkeit)">
+        <MappingFragment StoreEntitySet="Taetigkeit">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Dauer" ColumnName="Dauer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kunde">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
+        <MappingFragment StoreEntitySet="Kunde">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+          <ScalarProperty Name="Ort" ColumnName="Ort" />
+          <ScalarProperty Name="Land" ColumnName="Land" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -215,6 +256,51 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Auftrag_Projekt" TypeName="Model.FK_Auftrag_Projekt" StoreEntitySet="Auftrag">
+      <EndProperty Name="A_Projekt">
+        <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
+      </EndProperty>
+      <EndProperty Name="B_Auftrag">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Projekt" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Kostentraeger_Projekt" TypeName="Model.FK_Kostentraeger_Projekt" StoreEntitySet="Kostentraeger">
+      <EndProperty Name="A_Projekt">
+        <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
+      </EndProperty>
+      <EndProperty Name="B_Kostentraeger">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Projekt" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Taetigkeit_Mitarbeiter" TypeName="Model.FK_Taetigkeit_Mitarbeiter" StoreEntitySet="Taetigkeit">
+      <EndProperty Name="A_Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
+      </EndProperty>
+      <EndProperty Name="B_Taetigkeit">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Taetigkeit_Zeitkonto" TypeName="Model.FK_Taetigkeit_Zeitkonto" StoreEntitySet="Taetigkeit">
+      <EndProperty Name="A_Zeitkonto">
+        <ScalarProperty Name="ID" ColumnName="fk_Zeitkonto" />
+      </EndProperty>
+      <EndProperty Name="B_Taetigkeit">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Zeitkonto" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Auftrag_Kunde" TypeName="Model.FK_Auftrag_Kunde" StoreEntitySet="Auftrag">
+      <EndProperty Name="A_Kunde">
+        <ScalarProperty Name="ID" ColumnName="fk_Kunde" />
+      </EndProperty>
+      <EndProperty Name="B_Auftrag">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Kunde" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

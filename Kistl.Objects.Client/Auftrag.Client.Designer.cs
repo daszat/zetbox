@@ -28,7 +28,15 @@ namespace Kistl.App.Projekte
         
         private int _ID = Helper.INVALIDID;
         
+        private int _fk_Projekt = Helper.INVALIDID;
+        
         private int _fk_Mitarbeiter = Helper.INVALIDID;
+        
+        private string _Auftragsname;
+        
+        private int _fk_Kunde = Helper.INVALIDID;
+        
+        private System.Nullable<double> _Auftragswert;
         
         public override int ID
         {
@@ -39,6 +47,32 @@ namespace Kistl.App.Projekte
             set
             {
                 _ID = value;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Projekte.Projekt>().Single(o => o.ID == fk_Projekt);
+            }
+            set
+            {
+                _fk_Projekt = value.ID;
+            }
+        }
+        
+        public int fk_Projekt
+        {
+            get
+            {
+                return _fk_Projekt;
+            }
+            set
+            {
+                _fk_Projekt = value;
             }
         }
         
@@ -68,11 +102,63 @@ namespace Kistl.App.Projekte
             }
         }
         
+        public string Auftragsname
+        {
+            get
+            {
+                return _Auftragsname;
+            }
+            set
+            {
+                _Auftragsname = value;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Kunde Kunde
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Projekte.Kunde>().Single(o => o.ID == fk_Kunde);
+            }
+            set
+            {
+                _fk_Kunde = value.ID;
+            }
+        }
+        
+        public int fk_Kunde
+        {
+            get
+            {
+                return _fk_Kunde;
+            }
+            set
+            {
+                _fk_Kunde = value;
+            }
+        }
+        
+        public System.Nullable<double> Auftragswert
+        {
+            get
+            {
+                return _Auftragswert;
+            }
+            set
+            {
+                _Auftragswert = value;
+            }
+        }
+        
         public event ToStringHandler<Auftrag> OnToString_Auftrag;
         
         public event ObjectEventHandler<Auftrag> OnPreSave_Auftrag;
         
         public event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
+        
+        public event RechnungErstellen_Handler<Auftrag> OnRechnungErstellen_Auftrag;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -108,7 +194,23 @@ namespace Kistl.App.Projekte
         public void CopyTo(Auftrag obj)
         {
             base.CopyTo(obj);
+            obj.fk_Projekt = this.fk_Projekt;
             obj.fk_Mitarbeiter = this.fk_Mitarbeiter;
+            obj.Auftragsname = this.Auftragsname;
+            obj.fk_Kunde = this.fk_Kunde;
+            obj.Auftragswert = this.Auftragswert;
         }
+        
+        public virtual string RechnungErstellen()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            if (OnRechnungErstellen_Auftrag != null)
+            {
+                OnRechnungErstellen_Auftrag(this, e);
+            }
+            return e.Result;
+        }
+        
+        public delegate void RechnungErstellen_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
 }
