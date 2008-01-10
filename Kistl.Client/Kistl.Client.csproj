@@ -131,6 +131,7 @@
     <Compile Include="Controls\DesktopTreeView.xaml.cs">
       <DependentUpon>DesktopTreeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
       <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>

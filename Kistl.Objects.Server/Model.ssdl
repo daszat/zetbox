@@ -16,7 +16,6 @@
     <EntitySet Name="ObjectReferenceProperty" EntityType="Model.Store.ObjectReferenceProperty" Table="ObjectReferenceProperties" />
     <EntitySet Name="DateTimeProperty" EntityType="Model.Store.DateTimeProperty" Table="DateTimeProperties" />
     <EntitySet Name="BackReferenceProperty" EntityType="Model.Store.BackReferenceProperty" Table="BackReferenceProperties" />
-    <EntitySet Name="ObjectForDeletedProperties" EntityType="Model.Store.ObjectForDeletedProperties" Table="ObjectForDeletedProperties" />
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules" />
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege" />
     <EntitySet Name="Zeitkonto" EntityType="Model.Store.Zeitkonto" Table="Zeitkonten" />
@@ -24,6 +23,7 @@
     <EntitySet Name="Kostentraeger" EntityType="Model.Store.Kostentraeger" Table="Kostentraeger" />
     <EntitySet Name="Taetigkeit" EntityType="Model.Store.Taetigkeit" Table="Taetigkeiten" />
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden" />
+    <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -80,6 +80,10 @@
       <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_Auftrag" EntitySet="Auftrag" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_Icon" Association="Model.Store.FK_ObjectClass_Icon">
+      <End Role="A_Icon" EntitySet="Icon" />
+      <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -90,6 +94,7 @@
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="fk_BaseObjectClass" Type="int" Nullable="true" />
     <Property Name="fk_Module" Type="int" Nullable="true" />
+    <Property Name="fk_DefaultIcon" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -198,17 +203,6 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_ReferenceProperty" Type="int" Nullable="true" />
   </EntityType>
-  <EntityType Name="ObjectForDeletedProperties">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Namespace" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="DataType" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="IsAssociation" Type="bit" Nullable="true" />
-    <Property Name="ReferenceObjectClassName" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="ReferencePropertyName" Type="nvarchar" MaxLength="200" Nullable="true" />
-  </EntityType>
   <EntityType Name="Module">
     <Key>
       <PropertyRef Name="ID" />
@@ -268,6 +262,13 @@
     <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="true" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Icon">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
@@ -434,6 +435,18 @@
       </Principal>
       <Dependent Role="B_Auftrag">
         <PropertyRef Name="fk_Kunde" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectClass_Icon">
+    <End Role="A_Icon" Type="Model.Store.Icon" Multiplicity="0..1" />
+    <End Role="B_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Icon">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectClass">
+        <PropertyRef Name="fk_DefaultIcon" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

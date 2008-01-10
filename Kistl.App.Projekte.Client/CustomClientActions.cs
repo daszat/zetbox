@@ -89,7 +89,7 @@ namespace Kistl.App.Projekte
             xml.ToFile(@"c:\temp\Rechnung.xml");
 
             string tmpFile = Path.GetTempFileName().Replace(".tmp", ".docx");
-            File.Copy(@"c:\temp\Rechnung.docx", tmpFile, true);
+            File.Copy(Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore + @"\Rechnung.docx", tmpFile, true);
 
             using (WordHelper word = new WordHelper(tmpFile))
             {
@@ -114,6 +114,13 @@ namespace Kistl.App.Projekte
         void impl_OnToString_Kunde(Kunde obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Kundenname;
+        }
+        #endregion
+
+        #region GUI
+        void impl_OnToString_Icon(Kistl.App.GUI.Icon obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.IconFile;
         }
         #endregion
 

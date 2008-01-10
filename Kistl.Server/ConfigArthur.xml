@@ -4,8 +4,11 @@
   <ConfigName>Arthur's Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Server\</DocumentStore>
   </Server>
-  <Client StartClient="true" />
+  <Client StartClient="true">
+    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
+  </Client>
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin</string>
     <string>D:\Programmierung\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>

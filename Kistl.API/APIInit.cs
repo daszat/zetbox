@@ -16,6 +16,10 @@ namespace Kistl.API
         public void Init(string configFile)
         {
             Configuration.KistlConfig.Init(configFile);
+
+            // Delete Assemblies
+            System.IO.Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Kistl.API.AssemblyLoader.AssemblyResolve);
             AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(Kistl.API.AssemblyLoader.AssemblyResolve);
         }

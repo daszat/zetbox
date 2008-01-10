@@ -14,6 +14,12 @@ namespace Kistl.App.Projekte
     {
         public void Attach(Kistl.API.IDataObject obj)
         {
+            if (obj is Kistl.App.GUI.Icon)
+            {
+                Kistl.App.GUI.Icon impl = obj as Kistl.App.GUI.Icon;
+                impl.OnToString_Icon += new Kistl.API.ToStringHandler<Kistl.App.GUI.Icon>(impl_OnToString_Icon);
+            }
+
             if (obj is Projekt)
             {
                 Projekt impl = obj as Projekt;

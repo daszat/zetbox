@@ -10,6 +10,7 @@
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_Icon", "A_Icon", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Icon), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass))]
 
 namespace Kistl.App.Base
 {
@@ -39,6 +40,8 @@ namespace Kistl.App.Base
         private int _fk_BaseObjectClass = Helper.INVALIDID;
         
         private int _fk_Module = Helper.INVALIDID;
+        
+        private int _fk_DefaultIcon = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -191,6 +194,40 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_Icon", "A_Icon")]
+        [XmlIgnore()]
+        public Kistl.App.GUI.Icon DefaultIcon
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.Icon> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon>("Model.FK_ObjectClass_Icon", "A_Icon");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.Icon> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon>("Model.FK_ObjectClass_Icon", "A_Icon");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_DefaultIcon
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_DefaultIcon == Helper.INVALIDID && DefaultIcon != null)
+                {
+                    _fk_DefaultIcon = DefaultIcon.ID;
+                }
+                return _fk_DefaultIcon;
+            }
+            set
+            {
+                _fk_DefaultIcon = value;
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -235,6 +272,7 @@ namespace Kistl.App.Base
             obj.TableName = this.TableName;
             obj.fk_BaseObjectClass = this.fk_BaseObjectClass;
             obj.fk_Module = this.fk_Module;
+            obj.fk_DefaultIcon = this.fk_DefaultIcon;
         }
     }
 }

@@ -36,6 +36,8 @@ namespace Kistl.App.Base
         
         private int _fk_Module = Helper.INVALIDID;
         
+        private int _fk_DefaultIcon = Helper.INVALIDID;
+        
         public override int ID
         {
             get
@@ -154,6 +156,32 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.GUI.Icon DefaultIcon
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.GUI.Icon>().Single(o => o.ID == fk_DefaultIcon);
+            }
+            set
+            {
+                _fk_DefaultIcon = value.ID;
+            }
+        }
+        
+        public int fk_DefaultIcon
+        {
+            get
+            {
+                return _fk_DefaultIcon;
+            }
+            set
+            {
+                _fk_DefaultIcon = value;
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -198,6 +226,7 @@ namespace Kistl.App.Base
             obj.TableName = this.TableName;
             obj.fk_BaseObjectClass = this.fk_BaseObjectClass;
             obj.fk_Module = this.fk_Module;
+            obj.fk_DefaultIcon = this.fk_DefaultIcon;
         }
     }
 }

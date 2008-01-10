@@ -61,6 +61,7 @@
     <Compile Include="BoolProperty.Client.Designer.cs" />
     <Compile Include="DateTimeProperty.Client.Designer.cs" />
     <Compile Include="DoubleProperty.Client.Designer.cs" />
+    <Compile Include="Icon.Client.Designer.cs" />
     <Compile Include="IntProperty.Client.Designer.cs" />
     <Compile Include="Kostenstelle.Client.Designer.cs" />
     <Compile Include="Kostentraeger.Client.Designer.cs" />
@@ -69,7 +70,6 @@
     <Compile Include="Mitarbeiter.Client.Designer.cs" />
     <Compile Include="Module.Client.Designer.cs" />
     <Compile Include="ObjectClass.Client.Designer.cs" />
-    <Compile Include="ObjectForDeletedProperties.Client.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Client.Designer.cs" />
     <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />

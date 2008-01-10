@@ -58,6 +58,7 @@
     <Compile Include="BoolProperty.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
     <Compile Include="DoubleProperty.Server.Designer.cs" />
+    <Compile Include="Icon.Server.Designer.cs" />
     <Compile Include="IntProperty.Server.Designer.cs" />
     <Compile Include="Kostenstelle.Server.Designer.cs" />
     <Compile Include="Kostentraeger.Server.Designer.cs" />
@@ -66,7 +67,6 @@
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="Module.Server.Designer.cs" />
     <Compile Include="ObjectClass.Server.Designer.cs" />
-    <Compile Include="ObjectForDeletedProperties.Server.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
     <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />

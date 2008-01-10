@@ -72,7 +72,6 @@ namespace Kistl.API.Server
             }
 
             return (_table[t] as ObjectQuery<T>).OfType<T>();
-
         }
 
         /// <summary>

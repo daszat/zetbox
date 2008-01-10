@@ -45,7 +45,15 @@ namespace Kistl.Client
         {
             if (server != null)
             {
-                server.Stop();
+                try
+                {
+                    server.Stop();
+                }
+                catch(Exception ex)
+                {
+                    System.Diagnostics.Trace.TraceError(ex.ToString());
+                    // TODO: Do Something!
+                }
                 server = null;
             }
         }

@@ -74,9 +74,6 @@
       <Name>Kistl.Objects.Client</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Rechnung.docx" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -86,6 +83,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy /y $(ProjectDir)\Rechnung.docx C:\temp\</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

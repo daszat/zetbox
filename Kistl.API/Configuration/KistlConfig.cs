@@ -71,12 +71,18 @@ namespace Kistl.API.Configuration
 
             [XmlElement(IsNullable = false)]
             public string ConnectionString {get; set;}
+
+            [XmlElement(IsNullable = false)]
+            public string DocumentStore { get; set; }
         }
 
         public class ClientConfig
         {
             [XmlAttribute]
             public bool StartClient { get; set; }
+
+            [XmlElement(IsNullable = false)]
+            public string DocumentStore { get; set; }
         }
 
         /// <summary>

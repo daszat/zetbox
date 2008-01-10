@@ -21,8 +21,33 @@ namespace Kistl.API.Server
             _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
         }
 
-        protected ObjectType _type = null;
+        private DataObjectState _ObjectState = DataObjectState.Unmodified;
+        public DataObjectState ObjectState
+        {
+            get
+            {
+                // Calc Objectstate
+                if (_ObjectState != DataObjectState.Deleted)
+                {
+                    if (ID == Helper.INVALIDID)
+                    {
+                        _ObjectState = DataObjectState.New;
+                    }
+                    else if(_ObjectState == DataObjectState.New)
+                    {
+                        _ObjectState = DataObjectState.Unmodified;
+                    }
+                }
+                return _ObjectState;
+            }
+            set
+            {
+                // Objectstate from Serializer oder Methodcall
+                _ObjectState = value;
+            }
+        }
 
+        protected ObjectType _type = null;
         public ObjectType Type
         {
             get
@@ -45,7 +70,7 @@ namespace Kistl.API.Server
         #endregion
 
         /// <summary>
-        /// Zum Melden, dass sich das Datenobjekt geänder hat.
+        /// Zum Melden, dass sich das Datenobjekt geändert hat.
         /// </summary>
         public void NotifyChange()
         {

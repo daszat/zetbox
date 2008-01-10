@@ -206,16 +206,26 @@ namespace Kistl.API.Server
         {
             T obj = xml.FromXmlString<XMLOBJECT>().Object as T;
 
-            if (obj.ID != API.Helper.INVALIDID)
+            if (obj.ObjectState == DataObjectState.Deleted)
             {
                 KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
-                MarkEveryPropertyAsModified(obj);
+                KistlDataContext.Current.DeleteObject(obj);
             }
             else
             {
-                KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
+                if (obj.ObjectState == DataObjectState.New)
+                {
+                    KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
+                }
+                else
+                {
+                    KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
+                    MarkEveryPropertyAsModified(obj);
+                }
+
+                UpdateRelationships(obj);
             }
-            UpdateRelationships(obj);
+
             KistlDataContext.Current.SubmitChanges();
 
             XMLOBJECT result = new XMLOBJECT();
@@ -225,7 +235,7 @@ namespace Kistl.API.Server
 
         /// <summary>
         /// Update Relationships
-        /// TODO: Bad hack, weil EF keine Releasion serialisieren kann
+        /// TODO: Bad hack, weil EF keine Relationen serialisieren kann
         /// </summary>
         /// <param name="obj"></param>
         private void UpdateRelationships(T obj)

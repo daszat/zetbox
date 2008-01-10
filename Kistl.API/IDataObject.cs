@@ -7,6 +7,14 @@ using System.Data.Linq.Mapping;
 
 namespace Kistl.API
 {
+    public enum DataObjectState
+    {
+        New,
+        Modified,
+        Unmodified,
+        Deleted,
+    }
+
     /// <summary>
     /// Datenobjekt Interface
     /// </summary>
@@ -21,6 +29,8 @@ namespace Kistl.API
         /// Typ des Objectes
         /// </summary>
         ObjectType Type { get; }
+
+        DataObjectState ObjectState { get; set; }
 
         /// <summary>
         /// Zum Melden, dass sich das Datenobjekt geänder hat.

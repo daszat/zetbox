@@ -24,6 +24,32 @@ namespace Kistl.API.Client
             }
         }
 
+        private DataObjectState _ObjectState = DataObjectState.Unmodified;
+        public DataObjectState ObjectState 
+        {
+            get
+            {
+                // Calc Objectstate
+                if (_ObjectState != DataObjectState.Deleted)
+                {
+                    if (ID == Helper.INVALIDID)
+                    {
+                        _ObjectState = DataObjectState.New;
+                    }
+                    else if (_ObjectState == DataObjectState.New)
+                    {
+                        _ObjectState = DataObjectState.Unmodified;
+                    }
+                }
+                return _ObjectState;
+            }
+            set
+            {
+                // Objectstate from Serializer oder Methodcall
+                _ObjectState = value;
+            }
+        }
+
         private KistlContext _context;
         public KistlContext Context { get { return _context; } }
         internal void AttachToContext(KistlContext ctx)

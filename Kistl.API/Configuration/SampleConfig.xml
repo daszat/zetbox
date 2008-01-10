@@ -2,10 +2,13 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <Address></Address>
   <ConfigName>Sample Configuration</ConfigName>
-  <Server>
+  <Server StartServer="true">
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <DocumentStore>c:\temp\</DocumentStore>
   </Server>
-  <Client />
+  <Client StartClient="true">
+    <DocumentStore>c:\temp\</DocumentStore>
+  </Client>
   <SourceFileLocation>
     <string></string>
   </SourceFileLocation>

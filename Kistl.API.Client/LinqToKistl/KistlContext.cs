@@ -74,13 +74,30 @@ namespace Kistl.API.Client
             CacheController<BaseClientDataObject>.Current.Clear();
 
             IClientObject client = ClientObjectFactory.GetClientObject();
+            List<BaseClientDataObject> objectsToDetach = new List<BaseClientDataObject>();
             foreach (BaseClientDataObject obj in _objects)
             {
-                BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
-                newobj.CopyTo(obj);
+                if (obj.ObjectState == DataObjectState.Deleted)
+                {
+                    client.SetObject(obj.Type, obj);
+                    objectsToDetach.Add(obj);
+                }
+                else
+                {
+                    BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
+                    newobj.CopyTo(obj);
+                }
 
                 CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID, obj);
             }
+
+            objectsToDetach.ForEach(obj => this.Dettach(obj));
+        }
+
+        public void DeleteObject(BaseClientDataObject obj)
+        {
+            if (obj.Context != this) throw new ArgumentException("The Object does not belong to the current Context", "obj");
+            obj.ObjectState = DataObjectState.Deleted;
         }
 
         #region IDisposable Members

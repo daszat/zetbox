@@ -107,18 +107,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ObjectForDeletedProperties">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectForDeletedProperties)">
-        <MappingFragment StoreEntitySet="ObjectForDeletedProperties">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Namespace" ColumnName="Namespace" />
-          <ScalarProperty Name="DataType" ColumnName="DataType" />
-          <ScalarProperty Name="IsAssociation" ColumnName="IsAssociation" />
-          <ScalarProperty Name="ReferenceObjectClassName" ColumnName="ReferenceObjectClassName" />
-          <ScalarProperty Name="ReferencePropertyName" ColumnName="ReferencePropertyName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Module">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
         <MappingFragment StoreEntitySet="Module">
@@ -173,6 +161,14 @@
           <ScalarProperty Name="PLZ" ColumnName="PLZ" />
           <ScalarProperty Name="Ort" ColumnName="Ort" />
           <ScalarProperty Name="Land" ColumnName="Land" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Icon">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Icon)">
+        <MappingFragment StoreEntitySet="Icon">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IconFile" ColumnName="IconFile" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -301,6 +297,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ObjectClass_Icon" TypeName="Model.FK_ObjectClass_Icon" StoreEntitySet="ObjectClass">
+      <EndProperty Name="A_Icon">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultIcon" />
+      </EndProperty>
+      <EndProperty Name="B_ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultIcon" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

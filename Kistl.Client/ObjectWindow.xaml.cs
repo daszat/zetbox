@@ -294,6 +294,30 @@ namespace Kistl.Client
         }
 
         /// <summary>
+        /// Delete this object
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Click_Delete(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Are you sure that you want to delete this Object?", 
+                    "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    ctx.DeleteObject(obj);
+                    ctx.SubmitChanges();
+
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex);
+            }
+        }
+
+        /// <summary>
         /// Auf Wiedersehen
         /// </summary>
         /// <param name="sender"></param>

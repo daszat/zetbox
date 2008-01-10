@@ -44,7 +44,6 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectReferenceProperty), ElementName="ObjectReferenceProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.DateTimeProperty), ElementName="DateTimeProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
-        [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
         [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Auftrag), ElementName="Auftrag")]
         [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Zeitkonto), ElementName="Zeitkonto")]
@@ -52,6 +51,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Kostentraeger), ElementName="Kostentraeger")]
         [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Taetigkeit), ElementName="Taetigkeit")]
         [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
+        [XmlArrayItem(Type=typeof(Kistl.App.GUI.Icon), ElementName="Icon")]
         public List<Object> Objects
         {
             get
@@ -89,7 +89,6 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectReferenceProperty), ElementName="ObjectReferenceProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.DateTimeProperty), ElementName="DateTimeProperty")]
         [XmlElement(Type=typeof(Kistl.App.Base.BackReferenceProperty), ElementName="BackReferenceProperty")]
-        [XmlElement(Type=typeof(Kistl.App.Base.ObjectForDeletedProperties), ElementName="ObjectForDeletedProperties")]
         [XmlElement(Type=typeof(Kistl.App.Base.Module), ElementName="Module")]
         [XmlElement(Type=typeof(Kistl.App.Projekte.Auftrag), ElementName="Auftrag")]
         [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Zeitkonto), ElementName="Zeitkonto")]
@@ -97,6 +96,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Kostentraeger), ElementName="Kostentraeger")]
         [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Taetigkeit), ElementName="Taetigkeit")]
         [XmlElement(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
+        [XmlElement(Type=typeof(Kistl.App.GUI.Icon), ElementName="Icon")]
         public Object Object
         {
             get
