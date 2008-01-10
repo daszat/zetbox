@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -111,6 +111,8 @@
     <None Include="Database\Database.06.sql" />
     <None Include="Database\Database.07.sql" />
     <None Include="Database\Database.08.sql" />
+    <None Include="Database\Database.09.sql" />
+    <None Include="Database\Database.10.sql" />
     <None Include="obj\Database.03.sql" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

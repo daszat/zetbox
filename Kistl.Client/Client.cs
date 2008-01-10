@@ -21,7 +21,7 @@ namespace Kistl.Client
         /// <summary>
         /// AppDomain, in der das KistService rennt.
         /// </summary>
-        private AppDomain domain = null;
+        private AppDomain serverDomain = null;
 
         #region IKistlAppDomain Members
 
@@ -33,10 +33,10 @@ namespace Kistl.Client
                 // Create a new AppDomain for the Server!
                 // Damit trennt man den Server schön brav vom Client & kann 
                 // CustomActionsManagerFactory.Init zwei mal aufrufen :-)
-                domain = AppDomain.CreateDomain("ServerAppDomain");
-                Kistl.API.APIInit initServer = (Kistl.API.APIInit)domain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
+                serverDomain = AppDomain.CreateDomain("ServerAppDomain");
+                Kistl.API.APIInit initServer = (Kistl.API.APIInit)serverDomain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
                 initServer.Init(Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
-                server = (Kistl.API.IKistlAppDomain)domain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
+                server = (Kistl.API.IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
                 server.Start();
             }
         }
@@ -52,7 +52,8 @@ namespace Kistl.Client
                 catch(Exception ex)
                 {
                     System.Diagnostics.Trace.TraceError(ex.ToString());
-                    // TODO: Do Something!
+                    // TODO: Bad Hack, Do Something!
+                    AppDomain.Unload(serverDomain);
                 }
                 server = null;
             }

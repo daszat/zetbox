@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Diagnostics;
+using System.Windows.Markup;
+using System.Globalization;
 
 namespace Kistl.Client
 {
@@ -14,6 +16,19 @@ namespace Kistl.Client
     public partial class App : Application
     {
         Client client;
+
+        /// <summary>
+        /// The magic lines
+        /// </summary>
+        static App()
+        {
+            FrameworkElement.LanguageProperty.OverrideMetadata(
+                typeof(FrameworkElement),
+                new FrameworkPropertyMetadata(
+                    XmlLanguage.GetLanguage(
+                        CultureInfo.CurrentCulture.IetfLanguageTag)));
+        }
+
 
         /// <summary>
         /// Hochfahren der Applikation

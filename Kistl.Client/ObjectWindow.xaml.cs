@@ -100,7 +100,7 @@ namespace Kistl.Client
         /// </summary>
         private void Bind()
         {
-            data.DataContext = obj;
+            DataContext = obj;
 
             BindDefaultProperties();
 

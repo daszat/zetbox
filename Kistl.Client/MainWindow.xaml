@@ -19,13 +19,17 @@
             </MenuItem>
         </Menu>
         <Slider Name="WorkspaceSlider" DockPanel.Dock="Bottom" Value="1.0" Minimum="0.5" Maximum="3.0" />
-        <DockPanel>
-            <DockPanel.RenderTransform>
+        <Grid>
+            <Grid.LayoutTransform>
                 <ScaleTransform 
                     ScaleX="{Binding ElementName=WorkspaceSlider, Path=Value}" 
                     ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value}" />
-            </DockPanel.RenderTransform>
-            <TabControl DockPanel.Dock="Left" Width="250">
+            </Grid.LayoutTransform>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TabControl Grid.Column="0">
                 <TabItem Header="Tree">
                     <my:DesktopTreeView SelectionChanged="DesktopTreeView_SelectionChanged" />
                 </TabItem>
@@ -36,12 +40,23 @@
                             HorizontalAlignment="Right"
                             Name="cbObjectTypes" 
                             SelectionChanged="ComboBox_SelectionChanged"
-                            ItemsSource="{Binding}" Width="150" />
+                            ItemsSource="{Binding}" Width="150">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                                        <TextBlock Margin="2,0,0,0" Text="{Binding}" />                        
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                         <my:ObjectList x:Name="lst" SelectionChanged="lst_SelectionChanged" />
                     </DockPanel>
                 </TabItem>
             </TabControl>
-            <kevin:Graph x:Name="graph"
+            <GridSplitter ResizeDirection="Columns" Width="5" />
+            <kevin:Graph Grid.Column="1"
+                         x:Name="graph"
                          CoefficientOfDampening="0.7"                         FrameRate="0.3"
                          NodesBindingPath="SubItems"
                          NodeTemplateSelector="{StaticResource nodeTemplateSelector}">
@@ -69,17 +84,23 @@
 
                     <DataTemplate x:Key="nodeTemplate" >
                         <Button Background="BurlyWood" Command="{x:Static local:MainWindow.ChangeCenter}" CommandParameter="{Binding }" Padding="10">
-                            <TextBlock Text="{Binding Path=Item}" FontSize="16"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Path=Item, Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                                <TextBlock Text="{Binding Path=Item}" FontSize="16"/>
+                            </StackPanel>
                         </Button>
                     </DataTemplate>
 
                     <DataTemplate x:Key="specialTemplate" >
                         <Button Background="Red" Command="{x:Static local:MainWindow.ChangeCenter}" CommandParameter="{Binding }" Padding="10">
-                            <TextBlock Text="{Binding Path=Item}" FontSize="16"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Path=Item, Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                                <TextBlock Text="{Binding Path=Item}" FontSize="16"/>
+                            </StackPanel>
                         </Button>
                     </DataTemplate>
                 </kevin:Graph.Resources>
             </kevin:Graph>
-        </DockPanel>
+        </Grid>
     </DockPanel>
 </Window>
