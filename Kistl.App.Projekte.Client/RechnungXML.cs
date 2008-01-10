@@ -6,21 +6,26 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Kistl.App.Projekte.Client
+namespace Kistl.App.Projekte
 {
     [XmlRoot("Rechnung", Namespace = "http://dasz.at/Kistl/Dokumente/Rechnung/")]
     public class RechnungXML
     {
-        public Kistl.App.Projekte.Auftrag Auftrag { get; set; }
-        public Kistl.App.Projekte.Kunde Kunde { get; set; }
+        public string Kundenname { get; set; }
+        public string Auftrag { get; set; }
+        public string Adresse { get; set; }
+        public string PLZ { get; set; }
+        public string Ort { get; set; }
+        public string Land { get; set; }
 
         public string Umsatz { get; set; }
-        public string GetDauer { get; set; }
+        public string GesDauer { get; set; }
 
         public class RechnungZeitEntry
         {
-            public Kistl.App.Zeiterfassung.Taetigkeit Taetigkeit { get; set; }
-            public Kistl.App.Zeiterfassung.Zeitkonto Zeitkonto { get; set; }
+            public string Datum { get; set; }
+            public string Zeitkonto { get; set; }
+            public string Dauer { get; set; }
         }
 
         public List<RechnungZeitEntry> ZeitEntries { get; set; }
@@ -47,8 +52,9 @@ namespace Kistl.App.Projekte.Client
         /// <param name="s"></param>
         public void ToFile(string filename)
         {
-            using (XmlTextWriter w = new XmlTextWriter(filename, Encoding.Default))
+            using (XmlTextWriter w = new XmlTextWriter(filename, Encoding.Unicode))
             {
+                w.Formatting = Formatting.Indented;
                 xml.Serialize(w, this);
             }
         }

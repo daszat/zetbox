@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Kistl.App.Base;
 using Kistl.API.Client;
+using System.Xml;
+using System.IO;
 
 namespace Kistl.App.Projekte
 {
@@ -54,7 +56,54 @@ namespace Kistl.App.Projekte
 
         void impl_OnRechnungErstellen_Auftrag(Auftrag obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            System.Windows.Forms.MessageBox.Show("Rechung erstellt, Word öffnet sich gleich.");
+            RechnungXML xml = new RechnungXML();
+
+            xml.Kundenname = obj.Kunde.Kundenname;
+            xml.Adresse = obj.Kunde.Adresse;
+            xml.Ort = obj.Kunde.Ort;
+            xml.PLZ = obj.Kunde.PLZ;
+            xml.Land = obj.Kunde.Land;
+
+            xml.Auftrag = obj.Auftragsname;
+            xml.Umsatz = obj.Auftragswert.Value.ToString("n2");
+
+            xml.GesDauer = obj.Projekt.Kostentraeger.Sum(k => k.Taetigkeiten.Sum(t => t.Dauer)).Value.ToString("n1");
+
+            xml.ZeitEntries = new List<RechnungXML.RechnungZeitEntry>();
+            foreach (Kistl.App.Zeiterfassung.Zeitkonto z in obj.Projekt.Kostentraeger)
+            {
+                foreach (Kistl.App.Zeiterfassung.Taetigkeit t in z.Taetigkeiten)
+                {
+                    xml.ZeitEntries.Add(new RechnungXML.RechnungZeitEntry() 
+                        { 
+                            Datum = t.Datum.Value.ToShortDateString(), 
+                            Dauer = t.Dauer.Value.ToString("n1"), 
+                            Zeitkonto = z.Kontoname 
+                        });
+                }
+            }
+
+            xml.ZeitEntries = xml.ZeitEntries.OrderBy(ze => ze.Datum).ToList();
+
+            // TODO: For Debugging only
+            xml.ToFile(@"c:\temp\Rechnung.xml");
+
+            string tmpFile = Path.GetTempFileName().Replace(".tmp", ".docx");
+            File.Copy(@"c:\temp\Rechnung.docx", tmpFile, true);
+
+            using (WordHelper word = new WordHelper(tmpFile))
+            {
+                XmlDocument doc = new XmlDocument();
+                MemoryStream ms = new MemoryStream();
+                xml.ToStream(ms);
+                ms.Seek(0, SeekOrigin.Begin);
+                doc.Load(ms);
+
+                word.ApplyCustomXml(doc);
+                word.AddTableEntries<RechnungXML.RechnungZeitEntry>(xml.ZeitEntries, "Datum", "/ns0:Rechnung[1]/ns0:ZeitEntries[1]/ns0:RechnungZeitEntry[{0}]");
+            }
+
+            System.Diagnostics.Process.Start(tmpFile);
         }
 
         void impl_OnToString_Auftrag(Auftrag obj, Kistl.API.MethodReturnEventArgs<string> e)
