@@ -14,5 +14,4 @@ namespace Kistl.API.Server
     {
         void Attach(IDataObject obj);
     }
-
 }

@@ -52,6 +52,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.Taetigkeit), ElementName="Taetigkeit")]
         [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
         [XmlArrayItem(Type=typeof(Kistl.App.GUI.Icon), ElementName="Icon")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.Assembly), ElementName="Assembly")]
         public List<Object> Objects
         {
             get
@@ -97,6 +98,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.Taetigkeit), ElementName="Taetigkeit")]
         [XmlElement(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
         [XmlElement(Type=typeof(Kistl.App.GUI.Icon), ElementName="Icon")]
+        [XmlElement(Type=typeof(Kistl.App.Base.Assembly), ElementName="Assembly")]
         public Object Object
         {
             get

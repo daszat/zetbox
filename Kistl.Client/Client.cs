@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using Kistl.API.Client;
 
 namespace Kistl.Client
 {
@@ -10,7 +11,6 @@ namespace Kistl.Client
     {
         public Client()
         {
-            API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
         }
 
         /// <summary>
@@ -39,6 +39,8 @@ namespace Kistl.Client
                 server = (Kistl.API.IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
                 server.Start();
             }
+
+            API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
         }
 
         public void Stop()

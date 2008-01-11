@@ -67,7 +67,6 @@ namespace Kistl.Client.Controls
         {
             Kistl.API.Client.BaseClientDataObject DataObject { get; }
             void RefreshChildren();
-            // string IconPath { get; }
         }
 
         public class ModuleNode : INode
@@ -104,20 +103,6 @@ namespace Kistl.Client.Controls
             public void RefreshChildren()
             {
             }
-
-
-            /*public string IconPath
-            {
-                get 
-                {
-                    if (Helper.ObjectClasses[Module.Type].DefaultIcon != null)
-                        return Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore 
-                            + @"\GUI.Icons\" 
-                            + Helper.ObjectClasses[Module.Type].DefaultIcon.IconFile;
-                    else
-                        return "";
-                }
-            }*/
 
             #endregion
         }
@@ -159,20 +144,6 @@ namespace Kistl.Client.Controls
                 ObjectClass.Context.GetQuery(new Kistl.API.ObjectType(ObjectClass.Module.Namespace, ObjectClass.ClassName)).ToList()
                     .ForEach(i => _InstancesNodes.Add(new InstanceNode(i)));
             }
-
-            /*public string IconPath
-            {
-                get
-                {
-                    if (ObjectClass.DefaultIcon != null)
-                        return Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
-                            + @"\GUI.Icons\"
-                            + ObjectClass.DefaultIcon.IconFile;
-                    else
-                        return "";
-                }
-            }*/
-
             #endregion
         }
 
@@ -195,20 +166,6 @@ namespace Kistl.Client.Controls
             public void RefreshChildren()
             {
             }
-
-            /*public string IconPath
-            {
-                get
-                {
-                    if (Helper.ObjectClasses[Object.Type].DefaultIcon != null)
-                        return Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
-                            + @"\GUI.Icons\"
-                            + Helper.ObjectClasses[Object.Type].DefaultIcon.IconFile;
-                    else
-                        return "";
-                }
-            }*/
-
             #endregion
         }
         #endregion
@@ -281,6 +238,8 @@ namespace Kistl.Client.Controls
         {
             try
             {
+                if (treeView.SelectedItem == null) return;
+
                 INode n = treeView.SelectedItem as INode;
                 ObjectWindow wnd = new ObjectWindow();
                 wnd.ObjectType = n.DataObject.Type;

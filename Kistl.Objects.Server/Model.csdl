@@ -13,6 +13,7 @@
     <EntitySet Name="Taetigkeit" EntityType="Model.Taetigkeit" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
+    <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -72,6 +73,10 @@
     <AssociationSet Name="FK_ObjectClass_Icon" Association="Model.FK_ObjectClass_Icon">
       <End Role="A_Icon" EntitySet="Icon" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assembly_Module" Association="Model.FK_Assembly_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_Assembly" EntitySet="Assembly" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -218,6 +223,14 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="IconFile" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="Assembly">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_Assembly_Module" FromRole="B_Assembly" ToRole="A_Module" />
+    <Property Name="AssemblyName" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />
@@ -277,5 +290,9 @@
   <Association Name="FK_ObjectClass_Icon">
     <End Role="A_Icon" Type="Model.Icon" Multiplicity="0..1" />
     <End Role="B_ObjectClass" Type="Model.ObjectClass" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Assembly_Module">
+    <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
+    <End Role="B_Assembly" Type="Model.Assembly" Multiplicity="*" />
   </Association>
 </Schema>

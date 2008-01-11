@@ -132,6 +132,7 @@
       <DependentUpon>DesktopTreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
       <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>
@@ -152,7 +153,6 @@
       <DependentUpon>ChooseObjectClass.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
-    <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="ObjectWindow.xaml.cs">
       <DependentUpon>ObjectWindow.xaml</DependentUpon>
     </Compile>

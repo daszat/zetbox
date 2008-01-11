@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Threading;
 using System.Diagnostics;
 using System.Reflection;
+using Kistl.API.Server;
 
 namespace Kistl.Server
 {
@@ -34,12 +35,12 @@ namespace Kistl.Server
         /// </summary>
         public Server()
         {
-            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
-
             // Preload Kistl.Objects.Server.dll so the Mapping Resources will be loaded
             // Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
             Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
             Kistl.API.AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects.Server");
+
+            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
         }
 
         /// <summary>

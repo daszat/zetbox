@@ -13,6 +13,8 @@ namespace Kistl.API
     public interface ICustomActionsManager
     {
         void AttachEvents(IDataObject obj);
+        void DetachEvents(IDataObject obj);
+        void Init();
     }
 
     /// <summary>
@@ -30,6 +32,7 @@ namespace Kistl.API
         {
             if (_manager != null) throw new InvalidOperationException("ICustomActionsManager.Init() was called twice");
             _manager = manager;
+            _manager.Init();
         }
 
         /// <summary>

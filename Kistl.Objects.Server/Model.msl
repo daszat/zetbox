@@ -172,6 +172,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Assembly">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
+        <MappingFragment StoreEntitySet="Assembly">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="FK_BaseProperty_ObjectClass" TypeName="Model.FK_BaseProperty_ObjectClass" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
@@ -306,6 +314,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_DefaultIcon" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Assembly_Module" TypeName="Model.FK_Assembly_Module" StoreEntitySet="Assembly">
+      <EndProperty Name="A_Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module" />
+      </EndProperty>
+      <EndProperty Name="B_Assembly">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

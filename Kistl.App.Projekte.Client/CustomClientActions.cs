@@ -138,6 +138,13 @@ namespace Kistl.App.Projekte
         }
         #endregion
 
+        #region Assembly
+        void impl_OnToString_Assembly(Kistl.App.Base.Assembly obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.AssemblyName;
+        }
+        #endregion
+
         #region ObjectClass
         /// <summary>
         /// ToString Event überschreiben

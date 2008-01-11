@@ -120,6 +120,12 @@ namespace Kistl.App.Projekte
                 impl.OnToString_Module += new Kistl.API.ToStringHandler<Kistl.App.Base.Module>(impl_OnToString_Module);
             }
 
+            if (obj is App.Base.Assembly)
+            {
+                App.Base.Assembly impl = obj as App.Base.Assembly;
+                impl.OnToString_Assembly += new Kistl.API.ToStringHandler<Kistl.App.Base.Assembly>(impl_OnToString_Assembly);
+            }
+
             if (obj is App.Zeiterfassung.Zeitkonto)
             {
                 App.Zeiterfassung.Zeitkonto impl = obj as App.Zeiterfassung.Zeitkonto;

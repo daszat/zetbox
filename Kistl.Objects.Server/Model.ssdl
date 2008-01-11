@@ -24,6 +24,7 @@
     <EntitySet Name="Taetigkeit" EntityType="Model.Store.Taetigkeit" Table="Taetigkeiten" />
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden" />
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons" />
+    <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -83,6 +84,10 @@
     <AssociationSet Name="FK_ObjectClass_Icon" Association="Model.Store.FK_ObjectClass_Icon">
       <End Role="A_Icon" EntitySet="Icon" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assembly_Module" Association="Model.Store.FK_Assembly_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_Assembly" EntitySet="Assembly" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -270,6 +275,14 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="Assembly">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" Nullable="true" />
+    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
@@ -447,6 +460,18 @@
       </Principal>
       <Dependent Role="B_ObjectClass">
         <PropertyRef Name="fk_DefaultIcon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Assembly_Module">
+    <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="B_Assembly" Type="Model.Store.Assembly" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Assembly">
+        <PropertyRef Name="fk_Module" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

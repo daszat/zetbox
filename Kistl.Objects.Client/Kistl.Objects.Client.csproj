@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assembly.Client.Designer.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Auftrag.Client.Designer.cs" />
     <Compile Include="BackReferenceProperty.Client.Designer.cs" />
