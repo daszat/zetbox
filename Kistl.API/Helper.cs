@@ -6,6 +6,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Collections;
 using System.Reflection;
+using TraceClient;
 
 namespace Kistl.API
 {
@@ -58,10 +59,13 @@ namespace Kistl.API
         /// <returns></returns>
         public static string ToXmlString(this object obj)
         {
-            XmlSerializer xml = new XmlSerializer(obj.GetType());
-            StringBuilder sb = new StringBuilder();
-            xml.Serialize(new System.IO.StringWriter(sb), obj);
-            return sb.ToString();
+            using (TraceHelper.TraceMethodCall())
+            {
+                XmlSerializer xml = new XmlSerializer(obj.GetType());
+                StringBuilder sb = new StringBuilder();
+                xml.Serialize(new System.IO.StringWriter(sb), obj);
+                return sb.ToString();
+            }
         }
 
         /// <summary>
@@ -72,9 +76,12 @@ namespace Kistl.API
         /// <returns></returns>
         public static T FromXmlString<T>(this string xmlStr) where T : new()
         {
-            System.IO.StringReader sr = new System.IO.StringReader(xmlStr);
-            XmlSerializer xml = new XmlSerializer(typeof(T));
-            return (T)xml.Deserialize(sr);
+            using (TraceHelper.TraceMethodCall("Size = {0}", xmlStr.Length))
+            {
+                System.IO.StringReader sr = new System.IO.StringReader(xmlStr);
+                XmlSerializer xml = new XmlSerializer(typeof(T));
+                return (T)xml.Deserialize(sr);
+            }
         }
 
         public static bool In(this Enum e, params object[] p)

@@ -49,16 +49,16 @@ namespace Kistl.Server
         /// </summary>
         public void Start()
         {
-            Trace.TraceInformation("Starting Server");
-
-            serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
-            serviceThread.Start();
-
-            if (!serverStarted.WaitOne(20 * 1000, false))
+            using (TraceClient.TraceHelper.TraceMethodCall("Starting Server"))
             {
-                throw new ApplicationException("Server did not started within 20 sec.");
+                serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
+                serviceThread.Start();
+
+                if (!serverStarted.WaitOne(20 * 1000, false))
+                {
+                    throw new ApplicationException("Server did not started within 20 sec.");
+                }
             }
-            Trace.TraceInformation("Server started");
         }
 
         /// <summary>
@@ -77,23 +77,24 @@ namespace Kistl.Server
         /// </summary>
         private void RunWCFServer()
         {
-            Trace.TraceInformation("Starting WCF Server...");
-
-            Uri uri = new Uri("http://localhost:6666/KistlService");
-
-            host = new ServiceHost(typeof(Kistl.Server.KistlService), uri);
-            host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-            host.Faulted += new EventHandler(host_Faulted);
-
-            host.Open();
-
-            serverStarted.Set();
-
-            Trace.TraceInformation("WCF Server started");
-
-            while (host.State == CommunicationState.Opened)
+            using (TraceClient.TraceHelper.TraceMethodCall("Starting WCF Server"))
             {
-                Thread.Sleep(100);
+                Uri uri = new Uri("http://localhost:6666/KistlService");
+
+                host = new ServiceHost(typeof(Kistl.Server.KistlService), uri);
+                host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
+                host.Faulted += new EventHandler(host_Faulted);
+
+                host.Open();
+
+                serverStarted.Set();
+
+                Trace.TraceInformation("WCF Server started");
+
+                while (host.State == CommunicationState.Opened)
+                {
+                    Thread.Sleep(100);
+                }
             }
         }
 
@@ -109,16 +110,12 @@ namespace Kistl.Server
 
         internal void GenerateCode()
         {
-            Trace.TraceInformation("Generating Code...");
             Generators.Generator.GenerateCode();
-            Trace.TraceInformation("Generating Code finished!");
         }
 
         internal void GenerateDatabase()
         {
-            Trace.TraceInformation("Generating Database...");
             Generators.Generator.GenerateDatabase();
-            Trace.TraceInformation("Generating Database finished!");
         }
 
         internal void GenerateAll()

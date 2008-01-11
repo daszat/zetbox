@@ -58,7 +58,7 @@ namespace Kistl.Client
         /// <param name="e"></param>
         void App_Startup(object sender, StartupEventArgs e)
         {
-            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 3);
+            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 6);
 
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             if (e.Args.Length > 0 && !e.Args[0].StartsWith("-"))

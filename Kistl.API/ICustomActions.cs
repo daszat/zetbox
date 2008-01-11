@@ -38,9 +38,12 @@ namespace Kistl.API
         /// <param name="broker">Broker</param>
         public static void Init(ICustomActionsManager manager)
         {
-            if (_manager != null) throw new InvalidOperationException("ICustomActionsManager.Init() was called twice");
-            _manager = manager;
-            _manager.Init();
+            using (TraceClient.TraceHelper.TraceMethodCall("CustomActionsManagerFactory of {0}", manager.GetType().Name))
+            {
+                if (_manager != null) throw new InvalidOperationException("ICustomActionsManager.Init() was called twice");
+                _manager = manager;
+                _manager.Init();
+            }
         }
 
         /// <summary>

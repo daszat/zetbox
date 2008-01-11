@@ -27,20 +27,29 @@ namespace Kistl.Client
 
         public void Start()
         {
-            if (Kistl.API.Configuration.KistlConfig.Current.Server.StartServer)
+            using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
-                SplashScreen.SetInfo("Starting Server");
-                // Create a new AppDomain for the Server!
-                // Damit trennt man den Server schön brav vom Client & kann 
-                // CustomActionsManagerFactory.Init zwei mal aufrufen :-)
-                serverDomain = AppDomain.CreateDomain("ServerAppDomain");
-                Kistl.API.APIInit initServer = (Kistl.API.APIInit)serverDomain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
-                initServer.Init(Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
-                server = (Kistl.API.IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
-                server.Start();
-            }
+                if (Kistl.API.Configuration.KistlConfig.Current.Server.StartServer)
+                {
+                    // Create a new AppDomain for the Server!
+                    // Damit trennt man den Server schön brav vom Client & kann 
+                    // CustomActionsManagerFactory.Init zwei mal aufrufen :-)
+                    serverDomain = AppDomain.CreateDomain("ServerAppDomain");
 
-            API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
+                    SplashScreen.SetInfo("Setting up Server");
+                    Kistl.API.APIInit initServer = (Kistl.API.APIInit)serverDomain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
+                    initServer.Init(Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
+
+                    SplashScreen.SetInfo("Starting Server");
+                    server = (Kistl.API.IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
+
+                    SplashScreen.SetInfo("Starting WCF Server");
+                    server.Start();
+                }
+
+                SplashScreen.SetInfo("Setting up Client");
+                API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
+            }
         }
 
         public void Stop()
