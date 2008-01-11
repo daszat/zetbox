@@ -7,7 +7,7 @@ using Kistl.API.Server;
 namespace Kistl.Server
 {
     /// <summary>
-    /// Implementierung des Serverseitigen ObjectBrokers
+    /// Implementierung des Serverseitigen CustomActionsManager
     /// </summary>
     internal class CustomActionsManagerServer : API.ICustomActionsManager
     {
@@ -18,22 +18,14 @@ namespace Kistl.Server
 
         /// <summary>
         /// Attach using Metadata
+        /// Detaching is done through the Garbage Collector
+        /// see Unsubscribing at http://msdn2.microsoft.com/en-us/library/ms366768.aspx
         /// Und damit kann man dann auch security machen :-)
         /// </summary>
         /// <param name="obj"></param>
         public void AttachEvents(Kistl.API.IDataObject obj)
         {
-            // TODO: lt. Metadaten
-            // API.Server.ICustomServerActions actions_tmp = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomServerActions, Kistl.App.Projekte.Server")) as API.Server.ICustomServerActions;
-            // actions_tmp.Attach(obj);
-
-            // TODO: Handle Detach
             actions.ForEach(a => a.Attach(obj));
-        }
-
-        public void DetachEvents(Kistl.API.IDataObject obj)
-        {
-            throw new NotImplementedException();
         }
 
         public void Init()

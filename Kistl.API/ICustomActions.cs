@@ -12,13 +12,21 @@ namespace Kistl.API
     /// </summary>
     public interface ICustomActionsManager
     {
+        /// <summary>
+        /// Should Attach using Metadata
+        /// Detaching is done through the Garbage Collector
+        /// see Unsubscribing at http://msdn2.microsoft.com/en-us/library/ms366768.aspx
+        /// </summary>
+        /// <param name="obj"></param>
         void AttachEvents(IDataObject obj);
-        void DetachEvents(IDataObject obj);
+        /// <summary>
+        /// Should load Metadata, create an Instance and save
+        /// </summary>
         void Init();
     }
 
     /// <summary>
-    /// Verwaltet ein ObjectBroker Objekt. Muss vom Client bzw. Server initialisiert werden.
+    /// Verwaltet ein CustomActionsManager Objekt. Muss vom Client bzw. Server initialisiert werden.
     /// </summary>
     public class CustomActionsManagerFactory
     {
@@ -36,7 +44,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Gibt den aktuellen Broker zurück
+        /// Gibt den aktuellen CustomActionsManager zurück
         /// </summary>
         public static ICustomActionsManager Current
         {

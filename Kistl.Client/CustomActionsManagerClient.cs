@@ -8,7 +8,7 @@ using Kistl.API.Client;
 namespace Kistl.Client
 {
     /// <summary>
-    /// Implementierung des Clientseitigen ObjectBrokers
+    /// Implementierung des Clientseitigen CustomActionsManager
     /// </summary>
     internal class CustomActionsManagerClient : API.ICustomActionsManager
     {
@@ -19,20 +19,13 @@ namespace Kistl.Client
 
         /// <summary>
         /// Attach using Metadata
+        /// Detaching is done through the Garbage Collector
+        /// see Unsubscribing at http://msdn2.microsoft.com/en-us/library/ms366768.aspx
         /// </summary>
         /// <param name="obj"></param>
         public void AttachEvents(IDataObject obj)
         {
-            // ICustomClientActions actions_tmp = Activator.CreateInstance(Type.GetType("Kistl.App.Projekte.CustomClientActions, Kistl.App.Projekte.Client")) as ICustomClientActions;
-            // actions_tmp.Attach(obj);
-
-            // TODO: Handle Detach
             actions.ForEach(a => a.Attach(obj));
-        }
-
-        public void DetachEvents(IDataObject obj)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
