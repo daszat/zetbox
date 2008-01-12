@@ -110,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MainWindowCtrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ObjectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +137,9 @@
     </Compile>
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
+    <Compile Include="MainWindowCtrl.xaml.cs">
+      <DependentUpon>MainWindowCtrl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
       <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>

@@ -16,9 +16,13 @@ namespace Kistl.Client.Converter
             {
                 Kistl.App.Base.ObjectClass objClass = (Kistl.App.Base.ObjectClass)value;
                 if (objClass.DefaultIcon != null)
-                    return Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
+                {
+                    string result = Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
                         + @"\GUI.Icons\"
                         + objClass.DefaultIcon.IconFile;
+                    result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
+                    return result;
+                }
                 else
                     return "";
             }
