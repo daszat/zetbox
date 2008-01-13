@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <Address></Address>
+  <ConfigName>Presenter Configuration</ConfigName>
+  <Server StartServer="true">
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <DocumentStore>Kistl\DocumentStore\Server</DocumentStore>
+  </Server>
+  <Client StartClient="true">
+    <DocumentStore>Kistl\DocumentStore\Client</DocumentStore>
+  </Client>
+  <SourceFileLocation>
+    <string>Kistl</string>
+  </SourceFileLocation>
+</KistlConfig>
