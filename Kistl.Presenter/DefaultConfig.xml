@@ -3,6 +3,7 @@
   <Address></Address>
   <ConfigName>Presenter Configuration</ConfigName>
   <Server StartServer="true">
+    <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>Kistl\DocumentStore\Server</DocumentStore>
   </Server>

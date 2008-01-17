@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Objects;
+using Kistl.API.Configuration;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
@@ -12,6 +13,7 @@ namespace Kistl.API.Server
     {
         [ThreadStatic]
         private static KistlDataContext _Current = null;
+        private static string connectionString = "";
 
         public static KistlDataContext Current
         {
@@ -26,7 +28,18 @@ namespace Kistl.API.Server
 
         public static KistlDataContext InitSession()
         {
-            _Current = new KistlDataContext();
+            // Build connectionString
+            // metadata=res://*;provider=System.Data.SqlClient;provider connection string='Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;'
+            if(string.IsNullOrEmpty(connectionString))
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("metadata=res://*;");
+                sb.AppendFormat("provider={0};", KistlConfig.Current.Server.DatabaseProvider);
+                sb.AppendFormat("provider connection string='{0}'", KistlConfig.Current.Server.ConnectionString);
+
+                connectionString = sb.ToString();
+            }
+            _Current = new KistlDataContext(connectionString);
             return _Current;
         }
 
@@ -41,8 +54,8 @@ namespace Kistl.API.Server
         #endregion
 
 
-        private KistlDataContext() :
-            base("name=KistlContext", "Entities")
+        private KistlDataContext(string connectionString) :
+            base(connectionString, "Entities")
         {
         }
 

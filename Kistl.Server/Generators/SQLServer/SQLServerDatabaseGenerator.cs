@@ -40,7 +40,7 @@ namespace Kistl.Server.Generators.SQLServer
             System.Diagnostics.Trace.TraceInformation("Checking {0} Tables with {1} Properties",
                 objClassList.Count(), propList.Count);
 
-            using (SqlConnection _db = new SqlConnection(Properties.Settings.Default.KistlDatabase))
+            using (SqlConnection _db = new SqlConnection(Kistl.API.Configuration.KistlConfig.Current.Server.ConnectionString))
             {
                 db = _db;
                 db.Open();

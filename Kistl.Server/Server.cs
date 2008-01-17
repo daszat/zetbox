@@ -39,8 +39,6 @@ namespace Kistl.Server
             // Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
             Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
             Kistl.API.AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects.Server");
-
-            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
         }
 
         /// <summary>
@@ -49,6 +47,8 @@ namespace Kistl.Server
         /// </summary>
         public void Start()
         {
+            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
+
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Server"))
             {
                 serviceThread = new Thread(new ThreadStart(this.RunWCFServer));

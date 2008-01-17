@@ -30,11 +30,17 @@ namespace Kistl.Client.Converter
             {
                 BaseClientDataObject obj = (BaseClientDataObject)value;
                 if (Helper.ObjectClasses[obj.Type].DefaultIcon != null)
-                    return Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
+                {
+                    string result = Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
                         + @"\GUI.Icons\"
                         + Helper.ObjectClasses[obj.Type].DefaultIcon.IconFile;
+                    result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
+                    return result;
+                }
                 else
+                {
                     return "";
+                }
             }
 
             return "";

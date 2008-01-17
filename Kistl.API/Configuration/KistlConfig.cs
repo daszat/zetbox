@@ -8,10 +8,17 @@ using System.IO;
 
 namespace Kistl.API.Configuration
 {
+    /// <summary>
+    /// Configuration of Kistl
+    /// </summary>
     [XmlRoot("KistlConfig", Namespace="http://dasz.at/Kistl/")]
     public class KistlConfig : MarshalByRefObject
     {
         private static KistlConfig _Current = null;
+
+        /// <summary>
+        /// Current Configuration
+        /// </summary>
         public static KistlConfig Current
         {
             get
@@ -21,6 +28,9 @@ namespace Kistl.API.Configuration
             }
         }
 
+        /// <summary>
+        /// Checks, if config is initialized yet
+        /// </summary>
         internal static bool IsInitialized
         {
             get
@@ -70,6 +80,9 @@ namespace Kistl.API.Configuration
             public bool StartServer { get; set; }
 
             [XmlElement(IsNullable = false)]
+            public string DatabaseProvider { get; set; }
+
+            [XmlElement(IsNullable = false)]
             public string ConnectionString {get; set;}
 
             [XmlElement(IsNullable = false)]
@@ -93,7 +106,7 @@ namespace Kistl.API.Configuration
         /// <summary>
         /// Serialize this Object to a Stream
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="s">Stream</param>
         public void ToStream(Stream s)
         {
             xml.Serialize(s, this);
@@ -102,7 +115,7 @@ namespace Kistl.API.Configuration
         /// <summary>
         /// Serialize this Object to a File
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="s">configuration file w/ or w/o path</param>
         public void ToFile(string filename)
         {
             using (XmlTextWriter w = new XmlTextWriter(filename, Encoding.Default))
@@ -112,25 +125,30 @@ namespace Kistl.API.Configuration
         }
 
         /// <summary>
-        /// Deserialize a TraceMessage from a Stream
+        /// Deserialize from a Stream
         /// </summary>
         /// <param name="s">Stream with XML</param>
-        /// <returns>TraceMessage</returns>
+        /// <returns>Current Configuration</returns>
         public static KistlConfig FromStream(Stream s)
         {
             return (KistlConfig)xml.Deserialize(s);
         }
 
         /// <summary>
-        /// Deserialize a TraceMessage from a TextReader
+        /// Deserialize from a TextReader
         /// </summary>
         /// <param name="s">Stream with XML</param>
-        /// <returns>TraceMessage</returns>
+        /// <returns>Current Configuration</returns>
         public static KistlConfig FromStream(TextReader s)
         {
             return (KistlConfig)xml.Deserialize(s);
         }
 
+        /// <summary>
+        /// Deserialize from a TextReader
+        /// </summary>
+        /// <param name="filename">configuration file w/ or w/o path</param>
+        /// <returns>Current Configuration</returns>
         public static KistlConfig FromFile(string filename)
         {
             using (XmlTextReader r = new XmlTextReader(filename))

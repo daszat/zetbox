@@ -3,6 +3,7 @@
   <Address></Address>
   <ConfigName>Arthur's Configuration</ConfigName>
   <Server StartServer="true">
+    <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Server\</DocumentStore>
   </Server>
