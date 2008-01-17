@@ -1,8 +1,18 @@
 ﻿<Page x:Class="WPFPresenter.Slides._03Slide"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="3rd Slide">
-    <Grid>
-        
-    </Grid>
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Inhalt" Width="640" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <StackPanel>
+        <ctrl:Listing Text="Idee" />
+        <ctrl:Listing Text="Produkte" />
+        <ctrl:Listing Text="Konkurenz" />
+        <ctrl:Listing Text="Open Source" />
+        <ctrl:Listing Text="Marketing" />
+        <ctrl:Listing Text="Zeitplan" />
+        <ctrl:Listing Text="Finanzplan" />
+    </StackPanel>
 </Page>

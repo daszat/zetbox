@@ -1,0 +1,24 @@
+﻿<Page x:Class="WPFPresenter.Slides._06Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Produkte" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="425*" />
+            <ColumnDefinition Width="575" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Plattform" />
+            <ctrl:Listing Text="Module" />
+            <ctrl:Listing Text="Applikationen" />
+            <ctrl:Listing Text="Individualentwicklungen" />
+            <ctrl:Listing Text="Schulungen" />
+            <ctrl:Listing Text="Support" />
+        </StackPanel>
+        <Image Grid.Column="1" Source="/WPFPresenter;component/Slides/06Image01.png" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

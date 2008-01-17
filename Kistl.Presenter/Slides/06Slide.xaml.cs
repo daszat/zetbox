@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace WPFPresenter.Slides
 {
     /// <summary>
-    /// Interaction logic for _00Title.xaml
+    /// Interaction logic for _06Slide.xaml
     /// </summary>
-    public partial class _00Title : Page
+    public partial class _06Slide : Page
     {
-        public _00Title()
+        public _06Slide()
         {
             InitializeComponent();
         }

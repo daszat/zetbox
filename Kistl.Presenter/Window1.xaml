@@ -6,8 +6,13 @@
 	x:Class="WPFPresenter.Window1"
 	x:Name="Window"
 	Title="Window1"
-	Width="800" Height="600" ResizeMode="NoResize" WindowState="Maximized" WindowStyle="None" 
-	KeyDown="Window_KeyDown" PreviewMouseMove="Window_PreviewMouseMove" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown">
+	Width="800" Height="600" 
+    ResizeMode="NoResize" 
+    WindowState="Maximized" 
+    WindowStyle="None"
+    KeyDown="Window_KeyDown" 
+    PreviewMouseMove="Window_PreviewMouseMove" 
+    PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown">
 
     <Window.Resources>
         <WPFPresenter:Presentation x:Key="presentation"/>
@@ -155,7 +160,7 @@
                     <!-- Title -->
                     <TextBlock VerticalAlignment="Top" Height="84" FontFamily="Calibri" FontSize="65" FontWeight="Bold" Text="{Binding Path=Content.Title, ElementName=Frame, Mode=Default}" TextAlignment="Center" TextWrapping="Wrap"/>
 				    <!-- Content of the slide -->
-				    <Frame Width="1000" Height="600" Source="{Binding Path=CurrentSlide, Source={StaticResource presentation}}" x:Name="Frame" NavigationUIVisibility="Hidden" Background="{x:Null}" Focusable="False"/>
+				    <Frame Width="1000" Height="600" Source="{Binding Path=CurrentSlide, Source={StaticResource presentation}}" x:Name="Frame" NavigationUIVisibility="Hidden" Background="{x:Null}" Focusable="False" Margin="0,20,0,0"/>
 			    </StackPanel>
             </Grid>
         </Viewbox>

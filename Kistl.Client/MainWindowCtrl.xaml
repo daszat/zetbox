@@ -4,7 +4,7 @@
     xmlns:my="clr-namespace:Kistl.Client.Controls"
     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.Graph;assembly=WPFSamplesLib"
     xmlns:local="clr-namespace:Kistl.Client"
-    Height="480" Width="640" Loaded="Window_Loaded">
+    MinHeight="480" MinWidth="640" Loaded="Window_Loaded">
     <UserControl.Resources>
         <local:NodeTemplateSelector x:Key="nodeTemplateSelector" />
     </UserControl.Resources>

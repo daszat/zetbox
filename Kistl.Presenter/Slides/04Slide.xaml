@@ -1,0 +1,23 @@
+﻿<Page x:Class="WPFPresenter.Slides._04Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Idee" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="425*" />
+            <ColumnDefinition Width="575" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Vielzahl an Frameworks -> eine Plattform" />
+            <ctrl:Listing Text="Datenbank" />
+            <ctrl:Listing Text="Grafische Oberfläche" />
+            <ctrl:Listing Text="Grundmodule -> Applikationen" />
+            <ctrl:Listing Text="-> rasche &amp; kostengünstige Implementierung von Businessapplikationen" />
+        </StackPanel>
+        <Image Grid.Column="1" Source="/WPFPresenter;component/Slides/04Image01.png" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

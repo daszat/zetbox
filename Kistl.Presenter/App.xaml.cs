@@ -23,7 +23,13 @@ namespace WPFPresenter
 
         void App_Exit(object sender, ExitEventArgs e)
         {
-            client.Stop();            
+            try
+            {
+                client.Stop();
+            }
+            catch
+            {
+            }
         }
 
         public static bool KistlStarted = false;

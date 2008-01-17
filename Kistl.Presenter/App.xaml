@@ -4,10 +4,11 @@
     xmlns:converter="clr-namespace:Kistl.Client.Converter;assembly=Kistl.Client"
     StartupUri="Window1.xaml">
     <Application.Resources>
-         
-    	<SolidColorBrush x:Key="MouseClickEffectColor" Color="#FFFFFFFF"/>
-		<SolidColorBrush x:Key="OrangeClick" Color="#FFE6BF38"/>
+
+        <SolidColorBrush x:Key="MouseClickEffectColor" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="OrangeClick" Color="#FFE6BF38"/>
 
         <converter:IconConverter x:Key="IconConverter" />
+ 
     </Application.Resources>
 </Application>

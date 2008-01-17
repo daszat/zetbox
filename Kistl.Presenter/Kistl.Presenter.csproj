@@ -91,7 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Slides\00Title.xaml">
+    <Page Include="Controls\Listing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,7 +103,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Slides\04Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\05Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Slides\03Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SlideStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\06Slide.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,6 +137,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Listing.xaml.cs">
+      <DependentUpon>Listing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -135,20 +154,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Slides\00Title.xaml.cs">
-      <DependentUpon>00Title.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Slides\01Slide.xaml.cs">
       <DependentUpon>01Slide.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Slides\02Slide.xaml.cs">
       <DependentUpon>02Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\04Slide.xaml.cs">
+      <DependentUpon>04Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\05Slide.xaml.cs">
+      <DependentUpon>05Slide.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Slides\03Slide.xaml.cs">
       <DependentUpon>03Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\06Slide.xaml.cs">
+      <DependentUpon>06Slide.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -195,6 +219,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\04Image01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\06Image01.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Kistl\DocumentStore\Client\" />

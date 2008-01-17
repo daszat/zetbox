@@ -1,12 +1,19 @@
 ﻿<Page x:Class="WPFPresenter.Slides._02Slide"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:kistl="clr-namespace:Kistl.Client;assembly=Kistl.Client"
-    Title="So schaut es aus" Width="1000" Height="600">
-    <Grid Name="RootPanel">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Name="WaitPanel">
-            <TextBlock >Das Programm startet gerade</TextBlock>
-        </StackPanel>
-        <!-- <kistl:MainWindowCtrl /> -->
-    </Grid>
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Wir sind" Width="640" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <StackPanel>
+        <ctrl:Listing Text="DI David Schmitt" />
+        <ctrl:Listing Text="DI (FH) Arthur Zaczek" />
+
+        <ctrl:Listing Text="Softwareentwickler" Margin="0,40,0,0" />
+        <ctrl:Listing Text="Lange Projekterfahrung" />
+        <ctrl:Listing Text="Motiviert" />
+
+        <ctrl:Listing Text="http://dasz.at"  Margin="0,40,0,0" />
+    </StackPanel>
 </Page>
