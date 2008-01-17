@@ -7,8 +7,8 @@
 	<Grid x:Name="LayoutRoot">
 
         <!-- Here was the Background -->
-		<TextBlock HorizontalAlignment="Center" Margin="0,123,0,0" VerticalAlignment="Top" Height="113" FontSize="72" FontWeight="Bold" Text="Willkommen bei Kistl" TextAlignment="Center" TextWrapping="Wrap"/>
-		<TextBlock Margin="499,0,150.213,170" VerticalAlignment="Bottom" Height="65" FontSize="36" Text="dasz.at" TextAlignment="Right" TextWrapping="Wrap"/>
+		<TextBlock HorizontalAlignment="Center" Margin="0,123,0,0" VerticalAlignment="Top" Height="113" FontSize="72" FontWeight="Bold" Text="open acta agilia" TextAlignment="Center" TextWrapping="Wrap"/>
+		<TextBlock Margin="94,0,150.213,170" VerticalAlignment="Bottom" Height="65" FontSize="36" Text="Wir schreiben benutzbare Software" TextAlignment="Right" TextWrapping="Wrap"/>
 		<TextBlock Margin="280,0,150.213,127" VerticalAlignment="Bottom" Height="63" FontSize="36" Text="David Schmitt &amp; Arthur Zaczek" TextAlignment="Right" TextWrapping="Wrap"/>
 		<Path Fill="{x:Null}" Stretch="Fill" Stroke="#FFEA6830" StrokeThickness="3" HorizontalAlignment="Right" Margin="0,251.5,125.5,123.5" Width="311" Data="M875,253 L875,477 565,477"/>
 		<Path Fill="{x:Null}" Stretch="Fill" Stroke="#FFEA6830" StrokeThickness="3" Width="309" Data="M872.98701,253 L872.98701,477 565,477" HorizontalAlignment="Right" Margin="0,259.5,117.5,115.5"/>

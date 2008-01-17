@@ -3,7 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:kistl="clr-namespace:Kistl.Client;assembly=Kistl.Client"
     Title="So schaut es aus" Width="1000" Height="600">
-    <Grid>
-        <kistl:MainWindowCtrl />
+    <Grid Name="RootPanel">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Name="WaitPanel">
+            <TextBlock >Das Programm startet gerade</TextBlock>
+        </StackPanel>
+        <!-- <kistl:MainWindowCtrl /> -->
     </Grid>
 </Page>

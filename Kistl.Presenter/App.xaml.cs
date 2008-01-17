@@ -26,16 +26,25 @@ namespace WPFPresenter
             client.Stop();            
         }
 
-        void App_Startup(object sender, StartupEventArgs e)
+        public static bool KistlStarted = false;
+
+        private void StartKistl(object state)
         {
-            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 6);
+            // SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 6);
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             init.Init();
 
             client = new Client();
             client.Start();
 
-            SplashScreen.HideSplashScreen();
+            // SplashScreen.HideSplashScreen();
+
+            KistlStarted = true;
+        }
+
+        void App_Startup(object sender, StartupEventArgs e)
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(StartKistl));
         }
     }
 }
