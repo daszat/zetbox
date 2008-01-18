@@ -1,0 +1,179 @@
+﻿<Page x:Class="WPFPresenter.Slides._16Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Finanzplan" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <StackPanel>
+            <Grid Width="800" HorizontalAlignment="Right">
+                <Grid.Resources>
+                    <ResourceDictionary Source="../TableStyles.xaml" />
+                </Grid.Resources>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock>G &amp; V</TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="0"  Style="{StaticResource TableHeader}">
+                    <TextBlock TextAlignment="Right">2008</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock TextAlignment="Right">2009</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock TextAlignment="Right">2010</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock TextAlignment="Right">2011</TextBlock>
+                </Border>
+
+                <Border Grid.Column="0" Grid.Row="1">
+                    <TextBlock TextAlignment="Left">Umsatz</TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="1">
+                    <TextBlock TextAlignment="Right">6.720</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="1">
+                    <TextBlock TextAlignment="Right">93.872</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="1">
+                    <TextBlock TextAlignment="Right">174.392</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="1">
+                    <TextBlock TextAlignment="Right">283.420</TextBlock>
+                </Border>
+
+                <Border Grid.Column="0" Grid.Row="2">
+                    <TextBlock TextAlignment="Left">Betriebsergebnis</TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="2">
+                    <TextBlock TextAlignment="Right" Foreground="Red">-23.081</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="2">
+                    <TextBlock TextAlignment="Right">37.295</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="2">
+                    <TextBlock TextAlignment="Right">14.071</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="2">
+                    <TextBlock TextAlignment="Right">34.151</TextBlock>
+                </Border>
+            </Grid>
+            <Grid Width="970" HorizontalAlignment="Right" Margin="0,40,0,0">
+                <Grid.Resources>
+                    <ResourceDictionary Source="../TableStyles.xaml" />
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Column="0" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock>Liquiditätsplanung </TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource TableHeader}">
+                <TextBlock TextAlignment="Right">2008</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock TextAlignment="Right">2009</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock TextAlignment="Right">2010</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="0" Style="{StaticResource TableHeader}">
+                    <TextBlock TextAlignment="Right">2011</TextBlock>
+                </Border>
+
+                <Border Grid.Column="0" Grid.Row="1">
+                    <TextBlock TextAlignment="Left">Cash-Flow betrieblicher Bereich</TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="1">
+                    <TextBlock TextAlignment="Right" Foreground="Red">-24.794</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="1">
+                    <TextBlock TextAlignment="Right">38.850</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="1">
+                    <TextBlock TextAlignment="Right">16.641</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="1">
+                    <TextBlock TextAlignment="Right">26.415</TextBlock>
+                </Border>
+
+                <Border Grid.Column="0" Grid.Row="2">
+                    <TextBlock TextAlignment="Left">Darlehen/Eigenkapital</TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="2">
+                    <TextBlock TextAlignment="Right">6.000</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="2">
+                    <TextBlock TextAlignment="Right">-</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="2">
+                    <TextBlock TextAlignment="Right">-</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="2">
+                    <TextBlock TextAlignment="Right">-</TextBlock>
+                </Border>
+
+                <Border Grid.Column="0" Grid.Row="3">
+                    <TextBlock TextAlignment="Left">Überschuss/Bedarf</TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="3">
+                    <TextBlock TextAlignment="Right" Foreground="Red">-18.794</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="3">
+                    <TextBlock TextAlignment="Right">37.612</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="3">
+                    <TextBlock TextAlignment="Right">15.030</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="3">
+                    <TextBlock TextAlignment="Right">16.584</TextBlock>
+                </Border>
+
+                <Border Grid.Column="0" Grid.Row="4">
+                    <TextBlock TextAlignment="Left" TextWrapping="Wrap">Bankguthaben/kurzfristiger Finanzbedarf (kum.)</TextBlock>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="4">
+                    <TextBlock TextAlignment="Right" Foreground="Red">-18.794</TextBlock>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="4">
+                    <TextBlock TextAlignment="Right">18.818</TextBlock>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="4">
+                    <TextBlock TextAlignment="Right">33.848</TextBlock>
+                </Border>
+                <Border Grid.Column="4" Grid.Row="4">
+                    <TextBlock TextAlignment="Right">50.432</TextBlock>
+                </Border>
+
+            </Grid>
+            <ctrl:Listing Text="Finanzbedarf: ca. 20.000 EUR" Margin="0,40,0,0"/>
+        </StackPanel>
+    </Grid>
+</Page>

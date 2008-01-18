@@ -123,6 +123,58 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Slides\07Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\08Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\09Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\10Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\11Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\12Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\13Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\14Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\15Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\16Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\17Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Slides\18Slide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TableStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -173,6 +225,42 @@
     </Compile>
     <Compile Include="Slides\06Slide.xaml.cs">
       <DependentUpon>06Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\07Slide.xaml.cs">
+      <DependentUpon>07Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\08Slide.xaml.cs">
+      <DependentUpon>08Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\09Slide.xaml.cs">
+      <DependentUpon>09Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\10Slide.xaml.cs">
+      <DependentUpon>10Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\11Slide.xaml.cs">
+      <DependentUpon>11Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\12Slide.xaml.cs">
+      <DependentUpon>12Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\13Slide.xaml.cs">
+      <DependentUpon>13Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\14Slide.xaml.cs">
+      <DependentUpon>14Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\15Slide.xaml.cs">
+      <DependentUpon>15Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\16Slide.xaml.cs">
+      <DependentUpon>16Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\17Slide.xaml.cs">
+      <DependentUpon>17Slide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Slides\18Slide.xaml.cs">
+      <DependentUpon>18Slide.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -225,6 +313,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slides\06Image01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\07Image01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\08Image01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\09Image01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\12Image01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\14Image01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slides\15Image01.png" />
+    <Resource Include="Slides\15Image02.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Kistl\DocumentStore\Client\" />

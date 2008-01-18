@@ -29,6 +29,7 @@ namespace WPFPresenter
             }
             catch
             {
+                // Pech gehabt
             }
         }
 
@@ -36,16 +37,20 @@ namespace WPFPresenter
 
         private void StartKistl(object state)
         {
-            // SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 6);
-            Kistl.API.APIInit init = new Kistl.API.APIInit();
-            init.Init();
+            try
+            {
+                Kistl.API.APIInit init = new Kistl.API.APIInit();
+                init.Init();
 
-            client = new Client();
-            client.Start();
+                client = new Client();
+                client.Start();
 
-            // SplashScreen.HideSplashScreen();
-
-            KistlStarted = true;
+                KistlStarted = true;
+            }
+            catch
+            {
+                // Pech gehabt
+            }
         }
 
         void App_Startup(object sender, StartupEventArgs e)

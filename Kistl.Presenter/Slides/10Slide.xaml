@@ -1,0 +1,27 @@
+﻿<Page x:Class="WPFPresenter.Slides._10Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Konkurenz" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="SugarCRM" />
+            <ctrl:Listing Text="Reine CRM Software" Indention="1" />
+            <ctrl:Listing Text="TinyERP" />
+            <ctrl:Listing Text="Schwächen bei Usability" Indention="1" />
+            <ctrl:Listing Text="FileMaker" />
+            <ctrl:Listing Text="Primär einfache Einzelplatzapplikationen" Indention="1" />
+            <ctrl:Listing Text="Fabasoft Components" />
+            <ctrl:Listing Text="E-Gov." Indention="1" />
+            <ctrl:Listing Text="Microsoft Access" />
+            <ctrl:Listing Text="Primär einfache Einzelplatzapplikationen" Indention="1" />
+        </StackPanel>
+    </Grid>
+</Page>

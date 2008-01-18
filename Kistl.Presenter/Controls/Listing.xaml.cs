@@ -24,6 +24,16 @@ namespace WPFPresenter.Controls
             InitializeComponent();
         }
 
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if (e.Property == IndentionProperty)
+            {
+                this.Margin = new Thickness(Indention * 60, 0, 0, 0);
+            }
+        }
+
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
@@ -34,5 +44,14 @@ namespace WPFPresenter.Controls
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(string), typeof(Listing));
 
+        public int Indention
+        {
+            get { return (int)GetValue(IndentionProperty); }
+            set { SetValue(IndentionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Indention.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IndentionProperty =
+            DependencyProperty.Register("Indention", typeof(int), typeof(Listing), new UIPropertyMetadata(0));
     }
 }

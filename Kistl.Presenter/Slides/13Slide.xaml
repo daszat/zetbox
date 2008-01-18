@@ -1,0 +1,26 @@
+﻿<Page x:Class="WPFPresenter.Slides._13Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Marketing" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Plattform ist Open Source" />
+            <ctrl:Listing Text="Breite Community aus Entwicklern &amp; Entscheidern" Indention="1" />
+            <ctrl:Listing Text="Veröffentlichung von Artikel" />
+            <ctrl:Listing Text="Bekanntmachung" Indention="1" />
+            <ctrl:Listing Text="http://www.codeproject.com" Indention="1" />
+            <ctrl:Listing Text="Gute Dokumentation/Homepage" />
+            <ctrl:Listing Text="Akzeptanz der Community" Indention="1" />
+            <ctrl:Listing Text="Popularität &amp; Entwicklergemeinde bilden ein Vertriebsnetz" />
+            <ctrl:Listing Text="Referenzen" Indention="1" />
+        </StackPanel>
+    </Grid>
+</Page>

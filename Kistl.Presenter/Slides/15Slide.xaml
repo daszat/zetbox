@@ -1,0 +1,17 @@
+﻿<Page x:Class="WPFPresenter.Slides._15Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Zeitplan" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700*" />
+            <ColumnDefinition Width="300" />
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="/WPFPresenter;component/Slides/15Image01.png" VerticalAlignment="Center"/>
+        <Image Grid.Column="1" Source="/WPFPresenter;component/Slides/15Image02.png" VerticalAlignment="Center"/>
+    </Grid>
+</Page>

@@ -1,0 +1,20 @@
+﻿<Page x:Class="WPFPresenter.Slides._17Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Ohne Förderungen?" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="990*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Wir machen das Projekt auf alle Fälle"/>
+            <ctrl:Listing Text="Im ersten Jahr wird es keine größeren Ausgaben geben" Margin="0,40,0,0" />
+            <ctrl:Listing Text="Die Entwicklung passiert langsamer" />
+        </StackPanel>
+    </Grid>
+</Page>

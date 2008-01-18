@@ -1,0 +1,24 @@
+﻿<Page x:Class="WPFPresenter.Slides._09Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Produkte - Applikationen" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500*" />
+            <ColumnDefinition Width="500" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Plattform + Module = Applikation" />
+            <ctrl:Listing Text="CRM" Indention="1" />
+            <ctrl:Listing Text="Berichtswesen" Indention="1" />
+            <ctrl:Listing Text="Dokumentenverwaltung" Indention="1" />
+            <ctrl:Listing Text="Zielgruppen" Margin="0,40,0,0" />
+            <ctrl:Listing Text="Kleine bis mittlere Unternehmen" Indention="1" />
+        </StackPanel>
+        <Image Grid.Column="1" Source="/WPFPresenter;component/Slides/09Image01.png" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

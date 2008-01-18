@@ -1,0 +1,28 @@
+﻿<Page x:Class="WPFPresenter.Slides._08Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Produkte - Module" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="659*" />
+            <ColumnDefinition Width="341" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Abbildung von Standardaufgaben" />
+            <ctrl:Listing Text="Mail (Outlook, Mailserver)" Indention="1" />
+            <ctrl:Listing Text="Volltextsuche in Dokumenten" Indention="1" />
+            <ctrl:Listing Text="Sharepointserveranbindung" Indention="1" />
+            <ctrl:Listing Text="„Halbfertige“ Applikationen" />
+            <ctrl:Listing Text="Leistungserfassung" Indention="1" />
+            <ctrl:Listing Text="Projektplanung" Indention="1" />
+            <ctrl:Listing Text="Zielgruppen" Margin="0,40,0,0" />
+            <ctrl:Listing Text="Entwickler, Softwaredienstleister" Indention="1" />
+            <ctrl:Listing Text="Mittlere bis große Unternehmen" Indention="1" />
+        </StackPanel>
+        <Image Grid.Column="1" Source="/WPFPresenter;component/Slides/08Image01.png" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

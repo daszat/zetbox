@@ -1,0 +1,28 @@
+﻿<Page x:Class="WPFPresenter.Slides._07Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Produkte - Plattform" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="659*" />
+            <ColumnDefinition Width="341" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Open Source" />
+            <ctrl:Listing Text="Grundinfrastruktur für Applikationen" />
+            <ctrl:Listing Text="Datenbank" Indention="1" />
+            <ctrl:Listing Text="GUI" Indention="1" />
+            <ctrl:Listing Text="Security" Indention="1" />
+            <ctrl:Listing Text="Basis für Individualprogrammierungen" />
+            <ctrl:Listing Text="Zielgruppen" Margin="0,40,0,0" />
+            <ctrl:Listing Text="Entwickler" Indention="1" />
+            <ctrl:Listing Text="Softwaredienstleister" Indention="1" />
+            <ctrl:Listing Text="Große Unternehmen" Indention="1" />
+        </StackPanel>
+        <Image Source="/WPFPresenter;component/Slides/07Image01.png" VerticalAlignment="Top"  Grid.Column="2" />
+    </Grid>
+</Page>

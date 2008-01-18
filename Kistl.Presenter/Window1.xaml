@@ -160,7 +160,7 @@
                     <!-- Title -->
                     <TextBlock VerticalAlignment="Top" Height="84" FontFamily="Calibri" FontSize="65" FontWeight="Bold" Text="{Binding Path=Content.Title, ElementName=Frame, Mode=Default}" TextAlignment="Center" TextWrapping="Wrap"/>
 				    <!-- Content of the slide -->
-				    <Frame Width="1000" Height="600" Source="{Binding Path=CurrentSlide, Source={StaticResource presentation}}" x:Name="Frame" NavigationUIVisibility="Hidden" Background="{x:Null}" Focusable="False" Margin="0,20,0,0"/>
+				    <Frame Width="1000" Height="600" Source="{Binding Path=CurrentSlide, Source={StaticResource presentation}}" x:Name="Frame" NavigationUIVisibility="Hidden" Background="{x:Null}" Focusable="False" Margin="60,20,60,0"/>
 			    </StackPanel>
             </Grid>
         </Viewbox>

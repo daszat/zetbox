@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     MinHeight="30" MinWidth="50" Name="ListingCtrl">
     <DockPanel VerticalAlignment="Top">
-        <Ellipse Width="20" Height="20" Fill="#FF628FC2" VerticalAlignment="Top" Margin="0,16,20,0" />
+        <Ellipse Width="15" Height="15" Fill="#FF628FC2" VerticalAlignment="Top" Margin="0,18,20,0" />
         <TextBlock TextWrapping="Wrap" Text="{Binding ElementName=ListingCtrl, Path=Text}" VerticalAlignment="Top" />
     </DockPanel>
 </UserControl>

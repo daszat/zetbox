@@ -1,0 +1,25 @@
+﻿<Page x:Class="WPFPresenter.Slides._11Slide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    Title="Open Source" Width="1000" Height="600">
+    <Page.Resources>
+        <ResourceDictionary Source="../SlideStyles.xaml" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <ctrl:Listing Text="Verbreitung der Applikationsplattform" />
+            <ctrl:Listing Text="= „Marketing“, Netzwerkeffekt" Indention="1" />
+            <ctrl:Listing Text="Erfolgsfaktoren" />
+            <ctrl:Listing Text="Ein gutes Projekt (Produkt)" Indention="1" />
+            <ctrl:Listing Text="Gute Dokumentation" Indention="1" />
+            <ctrl:Listing Text="Aktive Pflege und Wartung" Indention="1" />
+            <ctrl:Listing Text="Regelmäßige Weiterentwicklung" Indention="1" />
+            <ctrl:Listing Text="Ein guter Webauftritt um an Informationen zu kommen" Indention="1" />
+        </StackPanel>
+    </Grid>
+</Page>
