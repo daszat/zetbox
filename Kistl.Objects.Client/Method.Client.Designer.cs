@@ -32,6 +32,8 @@ namespace Kistl.App.Base
         
         private string _MethodName;
         
+        private int _fk_Module = Helper.INVALIDID;
+        
         public override int ID
         {
             get
@@ -82,6 +84,32 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Base.Module>().Single(o => o.ID == fk_Module);
+            }
+            set
+            {
+                _fk_Module = value.ID;
+            }
+        }
+        
+        public int fk_Module
+        {
+            get
+            {
+                return _fk_Module;
+            }
+            set
+            {
+                _fk_Module = value;
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -124,6 +152,7 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
             obj.fk_ObjectClass = this.fk_ObjectClass;
             obj.MethodName = this.MethodName;
+            obj.fk_Module = this.fk_Module;
         }
     }
 }

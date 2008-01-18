@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Method_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Method))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Method_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module), "B_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Method))]
 
 namespace Kistl.App.Base
 {
@@ -34,6 +35,8 @@ namespace Kistl.App.Base
         private int _fk_ObjectClass = Helper.INVALIDID;
         
         private string _MethodName;
+        
+        private int _fk_Module = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -103,6 +106,40 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_Module", "A_Module")]
+        [XmlIgnore()]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_Method_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_Method_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Module
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Module == Helper.INVALIDID && Module != null)
+                {
+                    _fk_Module = Module.ID;
+                }
+                return _fk_Module;
+            }
+            set
+            {
+                _fk_Module = value;
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -145,6 +182,7 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
             obj.fk_ObjectClass = this.fk_ObjectClass;
             obj.MethodName = this.MethodName;
+            obj.fk_Module = this.fk_Module;
         }
     }
 }

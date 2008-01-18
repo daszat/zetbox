@@ -83,6 +83,41 @@ namespace Kistl.App.Projekte
         {
             e.Result = obj.Module.Namespace + "." + obj.ClassName;
         }
+
+        void impl_OnPreSave_ObjectClass(Kistl.App.Base.ObjectClass obj)
+        {
+            // Only for BaseClasses
+            if (obj.BaseObjectClass == null)
+            {
+                Kistl.App.Base.Method m;
+                m = obj.Methods.SingleOrDefault(i => i.MethodName == "ToString" && i.Module == obj.Module);
+                if (m == null)
+                {
+                    m = new Kistl.App.Base.Method();
+                    m.MethodName = "ToString";
+                    m.Module = obj.Module;
+                    obj.Methods.Add(m);
+                }
+
+                m = obj.Methods.SingleOrDefault(i => i.MethodName == "OnPreSave" && i.Module == obj.Module);
+                if (m == null)
+                {
+                    m = new Kistl.App.Base.Method();
+                    m.MethodName = "OnPreSave";
+                    m.Module = obj.Module;
+                    obj.Methods.Add(m);
+                }
+
+                m = obj.Methods.SingleOrDefault(i => i.MethodName == "OnPostSave" && i.Module == obj.Module);
+                if (m == null)
+                {
+                    m = new Kistl.App.Base.Method();
+                    m.MethodName = "OnPostSave";
+                    m.Module = obj.Module;
+                    obj.Methods.Add(m);
+                }
+            }
+        }
         #endregion
 
         #region Properties

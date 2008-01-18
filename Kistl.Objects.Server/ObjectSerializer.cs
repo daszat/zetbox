@@ -53,6 +53,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
         [XmlArrayItem(Type=typeof(Kistl.App.GUI.Icon), ElementName="Icon")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Assembly), ElementName="Assembly")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.MethodInvocation), ElementName="MethodInvocation")]
         public List<Object> Objects
         {
             get
@@ -99,6 +100,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Projekte.Kunde), ElementName="Kunde")]
         [XmlElement(Type=typeof(Kistl.App.GUI.Icon), ElementName="Icon")]
         [XmlElement(Type=typeof(Kistl.App.Base.Assembly), ElementName="Assembly")]
+        [XmlElement(Type=typeof(Kistl.App.Base.MethodInvocation), ElementName="MethodInvocation")]
         public Object Object
         {
             get

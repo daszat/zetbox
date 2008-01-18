@@ -14,6 +14,7 @@
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
+    <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -78,6 +79,30 @@
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_Assembly" EntitySet="Assembly" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseProperty_Module" Association="Model.FK_BaseProperty_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_BaseProperty" EntitySet="BaseProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Method_Module" Association="Model.FK_Method_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_Method" EntitySet="Method" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_Method" Association="Model.FK_MethodInvocation_Method">
+      <End Role="A_Method" EntitySet="Method" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_Assembly" Association="Model.FK_MethodInvocation_Assembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_Module" Association="Model.FK_MethodInvocation_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.FK_MethodInvocation_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -125,6 +150,7 @@
     <NavigationProperty Name="ObjectClass" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="B_BaseProperty" ToRole="A_ObjectClass" />
     <Property Name="PropertyName" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_BaseProperty_Module" FromRole="B_BaseProperty" ToRole="A_Module" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -152,6 +178,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectClass" Relationship="Model.FK_Method_ObjectClass" FromRole="B_Method" ToRole="A_ObjectClass" />
     <Property Name="MethodName" Type="String" MaxLength="100" Nullable="true" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_Method_Module" FromRole="B_Method" ToRole="A_Module" />
   </EntityType>
   <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
@@ -231,6 +258,18 @@
     <NavigationProperty Name="Module" Relationship="Model.FK_Assembly_Module" FromRole="B_Assembly" ToRole="A_Module" />
     <Property Name="AssemblyName" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="MethodInvocation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Method" Relationship="Model.FK_MethodInvocation_Method" FromRole="B_MethodInvocation" ToRole="A_Method" />
+    <NavigationProperty Name="Assembly" Relationship="Model.FK_MethodInvocation_Assembly" FromRole="B_MethodInvocation" ToRole="A_Assembly" />
+    <Property Name="FullTypeName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="MemberName" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_MethodInvocation_Module" FromRole="B_MethodInvocation" ToRole="A_Module" />
+    <NavigationProperty Name="InvokeOnObjectClass" Relationship="Model.FK_MethodInvocation_ObjectClass" FromRole="B_MethodInvocation" ToRole="A_ObjectClass" />
+  </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />
@@ -294,5 +333,29 @@
   <Association Name="FK_Assembly_Module">
     <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
     <End Role="B_Assembly" Type="Model.Assembly" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_BaseProperty_Module">
+    <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
+    <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Method_Module">
+    <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
+    <End Role="B_Method" Type="Model.Method" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_MethodInvocation_Method">
+    <End Role="A_Method" Type="Model.Method" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_MethodInvocation_Assembly">
+    <End Role="A_Assembly" Type="Model.Assembly" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_MethodInvocation_Module">
+    <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_MethodInvocation_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
   </Association>
 </Schema>

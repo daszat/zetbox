@@ -765,6 +765,18 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 foreach (Method method in objClass.Methods)
                 {
+                    // TODO: Das ist nicht ganz sauber
+                    // Sobald man aber Parameter angeben kann, wird hoffentlich besser
+                    // Default Methods, do not generate
+                    if(method.Module.ModuleName == "KistlBase")
+                    {
+                        if(    method.MethodName == "ToString"
+                            || method.MethodName == "OnPreSave"
+                            || method.MethodName == "OnPostSave"
+                        )
+                            continue;
+                    }
+
                     if (objClass == baseObjClass)
                     {
                         // Create Delegate

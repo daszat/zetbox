@@ -69,6 +69,7 @@
     <Compile Include="Kostentraeger.Client.Designer.cs" />
     <Compile Include="Kunde.Client.Designer.cs" />
     <Compile Include="Method.Client.Designer.cs" />
+    <Compile Include="MethodInvocation.Client.Designer.cs" />
     <Compile Include="Mitarbeiter.Client.Designer.cs" />
     <Compile Include="Module.Client.Designer.cs" />
     <Compile Include="ObjectClass.Client.Designer.cs" />

@@ -23,18 +23,22 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BaseProperty : BaseClientDataObject, ICloneable
+    public class MethodInvocation : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
         
-        private int _fk_ObjectClass = Helper.INVALIDID;
+        private int _fk_Method = Helper.INVALIDID;
         
-        private string _PropertyName;
+        private int _fk_Assembly = Helper.INVALIDID;
         
-        private string _AltText;
+        private string _FullTypeName;
+        
+        private string _MemberName;
         
         private int _fk_Module = Helper.INVALIDID;
+        
+        private int _fk_InvokeOnObjectClass = Helper.INVALIDID;
         
         public override int ID
         {
@@ -50,51 +54,77 @@ namespace Kistl.App.Base
         
         [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
-        public Kistl.App.Base.ObjectClass ObjectClass
+        public Kistl.App.Base.Method Method
         {
             get
             {
-                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_ObjectClass);
+                return Context.GetQuery<Kistl.App.Base.Method>().Single(o => o.ID == fk_Method);
             }
             set
             {
-                _fk_ObjectClass = value.ID;
+                _fk_Method = value.ID;
             }
         }
         
-        public int fk_ObjectClass
+        public int fk_Method
         {
             get
             {
-                return _fk_ObjectClass;
+                return _fk_Method;
             }
             set
             {
-                _fk_ObjectClass = value;
+                _fk_Method = value;
             }
         }
         
-        public string PropertyName
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Base.Assembly Assembly
         {
             get
             {
-                return _PropertyName;
+                return Context.GetQuery<Kistl.App.Base.Assembly>().Single(o => o.ID == fk_Assembly);
             }
             set
             {
-                _PropertyName = value;
+                _fk_Assembly = value.ID;
             }
         }
         
-        public string AltText
+        public int fk_Assembly
         {
             get
             {
-                return _AltText;
+                return _fk_Assembly;
             }
             set
             {
-                _AltText = value;
+                _fk_Assembly = value;
+            }
+        }
+        
+        public string FullTypeName
+        {
+            get
+            {
+                return _FullTypeName;
+            }
+            set
+            {
+                _FullTypeName = value;
+            }
+        }
+        
+        public string MemberName
+        {
+            get
+            {
+                return _MemberName;
+            }
+            set
+            {
+                _MemberName = value;
             }
         }
         
@@ -124,22 +154,46 @@ namespace Kistl.App.Base
             }
         }
         
-        public event ToStringHandler<BaseProperty> OnToString_BaseProperty;
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectClass InvokeOnObjectClass
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_InvokeOnObjectClass);
+            }
+            set
+            {
+                _fk_InvokeOnObjectClass = value.ID;
+            }
+        }
         
-        public event ObjectEventHandler<BaseProperty> OnPreSave_BaseProperty;
+        public int fk_InvokeOnObjectClass
+        {
+            get
+            {
+                return _fk_InvokeOnObjectClass;
+            }
+            set
+            {
+                _fk_InvokeOnObjectClass = value;
+            }
+        }
         
-        public event ObjectEventHandler<BaseProperty> OnPostSave_BaseProperty;
+        public event ToStringHandler<MethodInvocation> OnToString_MethodInvocation;
         
-        public event GetDataType_Handler<BaseProperty> OnGetDataType_BaseProperty;
+        public event ObjectEventHandler<MethodInvocation> OnPreSave_MethodInvocation;
+        
+        public event ObjectEventHandler<MethodInvocation> OnPostSave_MethodInvocation;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_BaseProperty != null)
+            if (OnToString_MethodInvocation != null)
             {
-                OnToString_BaseProperty(this, e);
+                OnToString_MethodInvocation(this, e);
             }
             return e.Result;
         }
@@ -147,41 +201,31 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_BaseProperty != null) OnPreSave_BaseProperty(this);
+            if (OnPreSave_MethodInvocation != null) OnPreSave_MethodInvocation(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_BaseProperty != null) OnPostSave_BaseProperty(this);
+            if (OnPostSave_MethodInvocation != null) OnPostSave_MethodInvocation(this);
         }
         
         public override object Clone()
         {
-            BaseProperty obj = new BaseProperty();
+            MethodInvocation obj = new MethodInvocation();
             CopyTo(obj);
             return obj;
         }
         
-        public void CopyTo(BaseProperty obj)
+        public void CopyTo(MethodInvocation obj)
         {
             base.CopyTo(obj);
-            obj.fk_ObjectClass = this.fk_ObjectClass;
-            obj.PropertyName = this.PropertyName;
-            obj.AltText = this.AltText;
+            obj.fk_Method = this.fk_Method;
+            obj.fk_Assembly = this.fk_Assembly;
+            obj.FullTypeName = this.FullTypeName;
+            obj.MemberName = this.MemberName;
             obj.fk_Module = this.fk_Module;
+            obj.fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
         }
-        
-        public virtual string GetDataType()
-        {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
-            if (OnGetDataType_BaseProperty != null)
-            {
-                OnGetDataType_BaseProperty(this, e);
-            }
-            return e.Result;
-        }
-        
-        public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
 }

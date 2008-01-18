@@ -25,6 +25,7 @@
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden" />
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons" />
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies" />
+    <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -89,6 +90,30 @@
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_Assembly" EntitySet="Assembly" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseProperty_Module" Association="Model.Store.FK_BaseProperty_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_BaseProperty" EntitySet="BaseProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Method_Module" Association="Model.Store.FK_Method_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_Method" EntitySet="Method" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_Method" Association="Model.Store.FK_MethodInvocation_Method">
+      <End Role="A_Method" EntitySet="Method" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_Assembly" Association="Model.Store.FK_MethodInvocation_Assembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_Module" Association="Model.Store.FK_MethodInvocation_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.Store.FK_MethodInvocation_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
     <Key>
@@ -130,6 +155,7 @@
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_Module" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -169,6 +195,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="fk_Module" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="IntProperty">
     <Key>
@@ -282,6 +309,18 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Module" Type="int" Nullable="true" />
     <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MethodInvocation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Method" Type="int" Nullable="true" />
+    <Property Name="fk_Assembly" Type="int" Nullable="true" />
+    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_Module" Type="int" Nullable="true" />
+    <Property Name="fk_InvokeOnObjectClass" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
@@ -472,6 +511,78 @@
       </Principal>
       <Dependent Role="B_Assembly">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaseProperty_Module">
+    <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_BaseProperty">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Method_Module">
+    <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="B_Method" Type="Model.Store.Method" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Method">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MethodInvocation_Method">
+    <End Role="A_Method" Type="Model.Store.Method" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Method">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_MethodInvocation">
+        <PropertyRef Name="fk_Method" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MethodInvocation_Assembly">
+    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Assembly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_MethodInvocation">
+        <PropertyRef Name="fk_Assembly" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MethodInvocation_Module">
+    <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_MethodInvocation">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MethodInvocation_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_MethodInvocation">
+        <PropertyRef Name="fk_InvokeOnObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

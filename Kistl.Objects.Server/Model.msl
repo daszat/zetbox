@@ -180,6 +180,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MethodInvocation">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocation)">
+        <MappingFragment StoreEntitySet="MethodInvocation">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
+          <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="FK_BaseProperty_ObjectClass" TypeName="Model.FK_BaseProperty_ObjectClass" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
@@ -323,6 +332,60 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_BaseProperty_Module" TypeName="Model.FK_BaseProperty_Module" StoreEntitySet="BaseProperty">
+      <EndProperty Name="A_Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module" />
+      </EndProperty>
+      <EndProperty Name="B_BaseProperty">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Method_Module" TypeName="Model.FK_Method_Module" StoreEntitySet="Method">
+      <EndProperty Name="A_Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module" />
+      </EndProperty>
+      <EndProperty Name="B_Method">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_MethodInvocation_Method" TypeName="Model.FK_MethodInvocation_Method" StoreEntitySet="MethodInvocation">
+      <EndProperty Name="A_Method">
+        <ScalarProperty Name="ID" ColumnName="fk_Method" />
+      </EndProperty>
+      <EndProperty Name="B_MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Method" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_MethodInvocation_Assembly" TypeName="Model.FK_MethodInvocation_Assembly" StoreEntitySet="MethodInvocation">
+      <EndProperty Name="A_Assembly">
+        <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
+      </EndProperty>
+      <EndProperty Name="B_MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Assembly" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_MethodInvocation_Module" TypeName="Model.FK_MethodInvocation_Module" StoreEntitySet="MethodInvocation">
+      <EndProperty Name="A_Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module" />
+      </EndProperty>
+      <EndProperty Name="B_MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_MethodInvocation_ObjectClass" TypeName="Model.FK_MethodInvocation_ObjectClass" StoreEntitySet="MethodInvocation">
+      <EndProperty Name="A_ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_InvokeOnObjectClass" />
+      </EndProperty>
+      <EndProperty Name="B_MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

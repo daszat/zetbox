@@ -32,6 +32,7 @@ namespace Kistl.App.Projekte
             {
                 App.Base.ObjectClass impl = obj as App.Base.ObjectClass;
                 impl.OnToString_ObjectClass += new Kistl.API.ToStringHandler<Kistl.App.Base.ObjectClass>(ObjectClass_OnToString);
+                impl.OnPreSave_ObjectClass += new Kistl.API.ObjectEventHandler<Kistl.App.Base.ObjectClass>(impl_OnPreSave_ObjectClass);
             }
 
             if (obj is App.Base.Method)
