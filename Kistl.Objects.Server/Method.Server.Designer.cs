@@ -140,6 +140,18 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Method", "B_MethodInvocation")]
+        [XmlIgnore()]
+        public EntityCollection<Kistl.App.Base.MethodInvocation> MethodIvokations
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.MethodInvocation> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.MethodInvocation>("Model.FK_MethodInvocation_Method", "B_MethodInvocation");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;

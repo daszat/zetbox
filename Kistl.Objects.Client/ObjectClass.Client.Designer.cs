@@ -182,6 +182,16 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public List<Kistl.App.Base.MethodInvocation> MethodIvokations
+        {
+            get
+            {
+                return Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;

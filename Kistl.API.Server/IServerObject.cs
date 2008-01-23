@@ -70,23 +70,25 @@ namespace Kistl.API.Server
         // [System.Diagnostics.DebuggerStepThrough]
         public static IServerObject GetServerObject(ObjectType type)
         {
-            if (type == null) throw new ArgumentException("Type is null");
-            if (string.IsNullOrEmpty(type.FullNameServerDataObject)) throw new ArgumentException("Type is empty");
+            using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
+            {
+                if (type == null) throw new ArgumentException("Type is null");
+                if (string.IsNullOrEmpty(type.FullNameServerDataObject)) throw new ArgumentException("Type is empty");
 
-            Type objType = Type.GetType(type.FullNameServerDataObject);
-            if (objType == null) throw new ApplicationException("Invalid Type");
+                Type objType = Type.GetType(type.FullNameServerDataObject);
+                if (objType == null) throw new ApplicationException("Invalid Type");
 
-            Type t = typeof(ServerObject<,,>);
-            Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Server");
-            Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Server");
+                Type t = typeof(ServerObject<,,>);
+                Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Server");
+                Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Server");
 
-            Type result = t.MakeGenericType(objType, xmlCollection, xmlObj);
+                Type result = t.MakeGenericType(objType, xmlCollection, xmlObj);
 
-            IServerObject obj = Activator.CreateInstance(result) as IServerObject;
-            if (obj == null) throw new ApplicationException("Cannot create instance");
+                IServerObject obj = Activator.CreateInstance(result) as IServerObject;
+                if (obj == null) throw new ApplicationException("Cannot create instance");
 
-            return obj;
-
+                return obj;
+            }
         }
     }
 
@@ -128,12 +130,15 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public string GetList()
         {
-            var result = from a in KistlDataContext.Current.GetTable<T>()
-                         select a;
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                var result = from a in KistlDataContext.Current.GetTable<T>()
+                             select a;
 
-            XMLCOLLECTION list = new XMLCOLLECTION();
-            list.Objects.AddRange(result.ToList().OfType<object>());
-            return list.ToXmlString();
+                XMLCOLLECTION list = new XMLCOLLECTION();
+                list.Objects.AddRange(result.ToList().OfType<object>());
+                return list.ToXmlString();
+            }
         }
 
         /// <summary>
@@ -145,17 +150,20 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public string GetListOf(int ID, string property)
         {
-            if (ID == API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
-            T obj = GetObjectInstance(ID);
-            if (obj == null) throw new ApplicationException("Object not found");
+            using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}, Property = {1}", ID, property)))
+            {
+                if (ID == API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
+                T obj = GetObjectInstance(ID);
+                if (obj == null) throw new ApplicationException("Object not found");
 
-            PropertyInfo pi = typeof(T).GetProperty(property);
-            if (pi == null) throw new ArgumentException("Property does not exist");
+                PropertyInfo pi = typeof(T).GetProperty(property);
+                if (pi == null) throw new ArgumentException("Property does not exist");
 
-            XMLCOLLECTION result = new XMLCOLLECTION();
-            IEnumerable v = (IEnumerable)pi.GetValue(obj, null);
-            result.Objects.AddRange(v.OfType<object>());
-            return result.ToXmlString();
+                XMLCOLLECTION result = new XMLCOLLECTION();
+                IEnumerable v = (IEnumerable)pi.GetValue(obj, null);
+                result.Objects.AddRange(v.OfType<object>());
+                return result.ToXmlString();
+            }
         }
 
         /// <summary>
@@ -166,10 +174,13 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public T GetObjectInstance(int ID)
         {
-            var result = from a in KistlDataContext.Current.GetTable<T>()
-                         where a.ID == ID
-                         select a;
-            return result.FirstOrDefault<T>();
+            using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
+            {
+                var result = from a in KistlDataContext.Current.GetTable<T>()
+                             where a.ID == ID
+                             select a;
+                return result.FirstOrDefault<T>();
+            }
         }
 
         /// <summary>
@@ -204,33 +215,36 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public string SetObject(string xml)
         {
-            T obj = xml.FromXmlString<XMLOBJECT>().Object as T;
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                T obj = xml.FromXmlString<XMLOBJECT>().Object as T;
 
-            if (obj.ObjectState == DataObjectState.Deleted)
-            {
-                KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
-                KistlDataContext.Current.DeleteObject(obj);
-            }
-            else
-            {
-                if (obj.ObjectState == DataObjectState.New)
+                if (obj.ObjectState == DataObjectState.Deleted)
                 {
-                    KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
+                    KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
+                    KistlDataContext.Current.DeleteObject(obj);
                 }
                 else
                 {
-                    KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
-                    MarkEveryPropertyAsModified(obj);
+                    if (obj.ObjectState == DataObjectState.New)
+                    {
+                        KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
+                    }
+                    else
+                    {
+                        KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
+                        MarkEveryPropertyAsModified(obj);
+                    }
+
+                    UpdateRelationships(obj);
                 }
 
-                UpdateRelationships(obj);
+                KistlDataContext.Current.SubmitChanges();
+
+                XMLOBJECT result = new XMLOBJECT();
+                result.Object = obj;
+                return result.ToXmlString();
             }
-
-            KistlDataContext.Current.SubmitChanges();
-
-            XMLOBJECT result = new XMLOBJECT();
-            result.Object = obj;
-            return result.ToXmlString();
         }
 
         /// <summary>

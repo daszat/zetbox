@@ -309,18 +309,19 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Module" Type="int" Nullable="true" />
     <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="IsClientAssembly" Type="bit" Nullable="true" />
   </EntityType>
   <EntityType Name="MethodInvocation">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_InvokeOnObjectClass" Type="int" Nullable="true" />
+    <Property Name="fk_Module" Type="int" Nullable="true" />
     <Property Name="fk_Method" Type="int" Nullable="true" />
     <Property Name="fk_Assembly" Type="int" Nullable="true" />
     <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="fk_Module" Type="int" Nullable="true" />
-    <Property Name="fk_InvokeOnObjectClass" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />

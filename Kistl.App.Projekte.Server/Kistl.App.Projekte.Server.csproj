@@ -51,10 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomServerActions.cs" />
-    <Compile Include="CustomServerActions.Designer.cs">
-      <DependentUpon>CustomServerActions.cs</DependentUpon>
-    </Compile>
+    <Compile Include="CustomServerActions_KistlBase.cs" />
+    <Compile Include="CustomServerActions_Projekte.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

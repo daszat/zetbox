@@ -32,6 +32,8 @@ namespace Kistl.App.Base
         
         private string _AssemblyName;
         
+        private bool _IsClientAssembly;
+        
         public override int ID
         {
             get
@@ -82,6 +84,18 @@ namespace Kistl.App.Base
             }
         }
         
+        public bool IsClientAssembly
+        {
+            get
+            {
+                return _IsClientAssembly;
+            }
+            set
+            {
+                _IsClientAssembly = value;
+            }
+        }
+        
         public event ToStringHandler<Assembly> OnToString_Assembly;
         
         public event ObjectEventHandler<Assembly> OnPreSave_Assembly;
@@ -124,6 +138,7 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
             obj.fk_Module = this.fk_Module;
             obj.AssemblyName = this.AssemblyName;
+            obj.IsClientAssembly = this.IsClientAssembly;
         }
     }
 }

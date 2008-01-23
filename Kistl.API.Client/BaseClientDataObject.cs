@@ -10,8 +10,8 @@ namespace Kistl.API.Client
     {
         public BaseClientDataObject()
         {
-            API.CustomActionsManagerFactory.Current.AttachEvents(this);
             _type = new ObjectType(this.GetType());
+            API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
         protected ObjectType _type = null;

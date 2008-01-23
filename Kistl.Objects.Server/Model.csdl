@@ -117,6 +117,7 @@
     <NavigationProperty Name="Methods" Relationship="Model.FK_Method_ObjectClass" FromRole="A_ObjectClass" ToRole="B_Method" />
     <NavigationProperty Name="Module" Relationship="Model.FK_ObjectClass_Module" FromRole="B_ObjectClass" ToRole="A_Module" />
     <NavigationProperty Name="DefaultIcon" Relationship="Model.FK_ObjectClass_Icon" FromRole="B_ObjectClass" ToRole="A_Icon" />
+    <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_ObjectClass" FromRole="A_ObjectClass" ToRole="B_MethodInvocation" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -179,6 +180,7 @@
     <NavigationProperty Name="ObjectClass" Relationship="Model.FK_Method_ObjectClass" FromRole="B_Method" ToRole="A_ObjectClass" />
     <Property Name="MethodName" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Module" Relationship="Model.FK_Method_Module" FromRole="B_Method" ToRole="A_Module" />
+    <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_Method" FromRole="A_Method" ToRole="B_MethodInvocation" />
   </EntityType>
   <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
@@ -198,6 +200,7 @@
     <Property Name="Namespace" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="ModuleName" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="ObjectClasses" Relationship="Model.FK_ObjectClass_Module" FromRole="A_Module" ToRole="B_ObjectClass" />
+    <NavigationProperty Name="Assemblies" Relationship="Model.FK_Assembly_Module" FromRole="A_Module" ToRole="B_Assembly" />
   </EntityType>
   <EntityType Name="Auftrag">
     <Key>
@@ -257,18 +260,19 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Module" Relationship="Model.FK_Assembly_Module" FromRole="B_Assembly" ToRole="A_Module" />
     <Property Name="AssemblyName" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="IsClientAssembly" Type="Boolean" Nullable="true" />
   </EntityType>
   <EntityType Name="MethodInvocation">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InvokeOnObjectClass" Relationship="Model.FK_MethodInvocation_ObjectClass" FromRole="B_MethodInvocation" ToRole="A_ObjectClass" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_MethodInvocation_Module" FromRole="B_MethodInvocation" ToRole="A_Module" />
     <NavigationProperty Name="Method" Relationship="Model.FK_MethodInvocation_Method" FromRole="B_MethodInvocation" ToRole="A_Method" />
     <NavigationProperty Name="Assembly" Relationship="Model.FK_MethodInvocation_Assembly" FromRole="B_MethodInvocation" ToRole="A_Assembly" />
     <Property Name="FullTypeName" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="String" MaxLength="200" Nullable="true" />
-    <NavigationProperty Name="Module" Relationship="Model.FK_MethodInvocation_Module" FromRole="B_MethodInvocation" ToRole="A_Module" />
-    <NavigationProperty Name="InvokeOnObjectClass" Relationship="Model.FK_MethodInvocation_ObjectClass" FromRole="B_MethodInvocation" ToRole="A_ObjectClass" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />

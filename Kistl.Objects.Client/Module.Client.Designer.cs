@@ -78,6 +78,16 @@ namespace Kistl.App.Base
             }
         }
         
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public List<Kistl.App.Base.Assembly> Assemblies
+        {
+            get
+            {
+                return Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
+            }
+        }
+        
         public event ToStringHandler<Module> OnToString_Module;
         
         public event ObjectEventHandler<Module> OnPreSave_Module;

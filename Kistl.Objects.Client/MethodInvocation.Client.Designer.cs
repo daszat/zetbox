@@ -28,6 +28,10 @@ namespace Kistl.App.Base
         
         private int _ID = Helper.INVALIDID;
         
+        private int _fk_InvokeOnObjectClass = Helper.INVALIDID;
+        
+        private int _fk_Module = Helper.INVALIDID;
+        
         private int _fk_Method = Helper.INVALIDID;
         
         private int _fk_Assembly = Helper.INVALIDID;
@@ -35,10 +39,6 @@ namespace Kistl.App.Base
         private string _FullTypeName;
         
         private string _MemberName;
-        
-        private int _fk_Module = Helper.INVALIDID;
-        
-        private int _fk_InvokeOnObjectClass = Helper.INVALIDID;
         
         public override int ID
         {
@@ -49,6 +49,58 @@ namespace Kistl.App.Base
             set
             {
                 _ID = value;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectClass InvokeOnObjectClass
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_InvokeOnObjectClass);
+            }
+            set
+            {
+                _fk_InvokeOnObjectClass = value.ID;
+            }
+        }
+        
+        public int fk_InvokeOnObjectClass
+        {
+            get
+            {
+                return _fk_InvokeOnObjectClass;
+            }
+            set
+            {
+                _fk_InvokeOnObjectClass = value;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerHidden()]
+        [XmlIgnore()]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Base.Module>().Single(o => o.ID == fk_Module);
+            }
+            set
+            {
+                _fk_Module = value.ID;
+            }
+        }
+        
+        public int fk_Module
+        {
+            get
+            {
+                return _fk_Module;
+            }
+            set
+            {
+                _fk_Module = value;
             }
         }
         
@@ -128,58 +180,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
-        [XmlIgnore()]
-        public Kistl.App.Base.Module Module
-        {
-            get
-            {
-                return Context.GetQuery<Kistl.App.Base.Module>().Single(o => o.ID == fk_Module);
-            }
-            set
-            {
-                _fk_Module = value.ID;
-            }
-        }
-        
-        public int fk_Module
-        {
-            get
-            {
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
-        
-        [System.Diagnostics.DebuggerHidden()]
-        [XmlIgnore()]
-        public Kistl.App.Base.ObjectClass InvokeOnObjectClass
-        {
-            get
-            {
-                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_InvokeOnObjectClass);
-            }
-            set
-            {
-                _fk_InvokeOnObjectClass = value.ID;
-            }
-        }
-        
-        public int fk_InvokeOnObjectClass
-        {
-            get
-            {
-                return _fk_InvokeOnObjectClass;
-            }
-            set
-            {
-                _fk_InvokeOnObjectClass = value;
-            }
-        }
-        
         public event ToStringHandler<MethodInvocation> OnToString_MethodInvocation;
         
         public event ObjectEventHandler<MethodInvocation> OnPreSave_MethodInvocation;
@@ -220,12 +220,12 @@ namespace Kistl.App.Base
         public void CopyTo(MethodInvocation obj)
         {
             base.CopyTo(obj);
+            obj.fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
+            obj.fk_Module = this.fk_Module;
             obj.fk_Method = this.fk_Method;
             obj.fk_Assembly = this.fk_Assembly;
             obj.FullTypeName = this.FullTypeName;
             obj.MemberName = this.MemberName;
-            obj.fk_Module = this.fk_Module;
-            obj.fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
         }
     }
 }

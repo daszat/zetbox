@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
 
 namespace Kistl.App.Base
 {
@@ -34,6 +34,10 @@ namespace Kistl.App.Base
         
         private int _ID = Helper.INVALIDID;
         
+        private int _fk_InvokeOnObjectClass = Helper.INVALIDID;
+        
+        private int _fk_Module = Helper.INVALIDID;
+        
         private int _fk_Method = Helper.INVALIDID;
         
         private int _fk_Assembly = Helper.INVALIDID;
@@ -41,10 +45,6 @@ namespace Kistl.App.Base
         private string _FullTypeName;
         
         private string _MemberName;
-        
-        private int _fk_Module = Helper.INVALIDID;
-        
-        private int _fk_InvokeOnObjectClass = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -64,6 +64,74 @@ namespace Kistl.App.Base
             get
             {
                 return "MethodInvocation";
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_ObjectClass", "A_ObjectClass")]
+        [XmlIgnore()]
+        public Kistl.App.Base.ObjectClass InvokeOnObjectClass
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_MethodInvocation_ObjectClass", "A_ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_MethodInvocation_ObjectClass", "A_ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_InvokeOnObjectClass
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_InvokeOnObjectClass == Helper.INVALIDID && InvokeOnObjectClass != null)
+                {
+                    _fk_InvokeOnObjectClass = InvokeOnObjectClass.ID;
+                }
+                return _fk_InvokeOnObjectClass;
+            }
+            set
+            {
+                _fk_InvokeOnObjectClass = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Module", "A_Module")]
+        [XmlIgnore()]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_MethodInvocation_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_MethodInvocation_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Module
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Module == Helper.INVALIDID && Module != null)
+                {
+                    _fk_Module = Module.ID;
+                }
+                return _fk_Module;
+            }
+            set
+            {
+                _fk_Module = value;
             }
         }
         
@@ -161,74 +229,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Module", "A_Module")]
-        [XmlIgnore()]
-        public Kistl.App.Base.Module Module
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_MethodInvocation_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_MethodInvocation_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
-            }
-        }
-        
-        public int fk_Module
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Module == Helper.INVALIDID && Module != null)
-                {
-                    _fk_Module = Module.ID;
-                }
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_ObjectClass", "A_ObjectClass")]
-        [XmlIgnore()]
-        public Kistl.App.Base.ObjectClass InvokeOnObjectClass
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_MethodInvocation_ObjectClass", "A_ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_MethodInvocation_ObjectClass", "A_ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
-            }
-        }
-        
-        public int fk_InvokeOnObjectClass
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_InvokeOnObjectClass == Helper.INVALIDID && InvokeOnObjectClass != null)
-                {
-                    _fk_InvokeOnObjectClass = InvokeOnObjectClass.ID;
-                }
-                return _fk_InvokeOnObjectClass;
-            }
-            set
-            {
-                _fk_InvokeOnObjectClass = value;
-            }
-        }
-        
         public event ToStringHandler<MethodInvocation> OnToString_MethodInvocation;
         
         public event ObjectEventHandler<MethodInvocation> OnPreSave_MethodInvocation;
@@ -269,12 +269,12 @@ namespace Kistl.App.Base
         public void CopyTo(MethodInvocation obj)
         {
             base.CopyTo(obj);
+            obj.fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
+            obj.fk_Module = this.fk_Module;
             obj.fk_Method = this.fk_Method;
             obj.fk_Assembly = this.fk_Assembly;
             obj.FullTypeName = this.FullTypeName;
             obj.MemberName = this.MemberName;
-            obj.fk_Module = this.fk_Module;
-            obj.fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
         }
     }
 }

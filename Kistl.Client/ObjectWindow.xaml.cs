@@ -73,28 +73,6 @@ namespace Kistl.Client
             data.Children.Add(txt);
         }
 
-        private List<Kistl.App.Base.ObjectClass> GetObjectHierarchie()
-        {
-            Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[ObjectType]; //.First(o => o.GetObject<Kistl.App.Base.Module>("Module").Namespace == ObjectType.Namespace && o.ClassName == ObjectType.Classname);
-            List<Kistl.App.Base.ObjectClass> objClasses = new List<Kistl.App.Base.ObjectClass>();
-            while (objClass != null)
-            {
-                objClasses.Add(objClass);
-
-                if (objClass.fk_BaseObjectClass == API.Helper.INVALIDID)
-                {
-                    objClass = null;
-                }
-                else
-                {
-                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
-                }
-            }
-
-            objClasses.Reverse();
-            return objClasses;
-        }
-
         /// <summary>
         /// Objekt _einmalig_ binden - das erzeugt "nur" die WPF Controls
         /// </summary>
@@ -107,7 +85,7 @@ namespace Kistl.Client
             List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
             
             // Objektklassenhierarchie holen
-            foreach (Kistl.App.Base.ObjectClass objClass in GetObjectHierarchie())
+            foreach (Kistl.App.Base.ObjectClass objClass in Helper.GetObjectHierarchie(ObjectType))
             {
                 // Get Actions, late we'll bind them to our Menu
                 methods.AddRange(objClass.Methods);

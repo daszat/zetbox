@@ -299,7 +299,7 @@ namespace Kistl.Server.Generators.SQLServer
                  string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
                      objClass.ClassName, prop.PropertyName, prop.GetDataType()));
 
-            if (t.IsValueType)
+            if (t.IsValueType && prop.IsNullable)
             {
                 ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.GetDataType()));
             }
@@ -473,12 +473,6 @@ namespace Kistl.Server.Generators.SQLServer
             }
             c.BaseTypes.Add("ICloneable");
 
-            /*if (objClass.Module.Namespace == "Kistl.App.Base")
-            {
-                // Interface hinzufügen
-                c.BaseTypes.Add("I" + objClass.ClassName);
-            }*/
-
             c.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                 new CodeAttributeArgument("NamespaceName",
                     new CodePrimitiveExpression("Model")),
@@ -591,13 +585,12 @@ namespace Kistl.Server.Generators.SQLServer
                  string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
                      objClass.ClassName, prop.PropertyName, prop.GetDataType()));
 
-            if (t.IsValueType)
+            if (t.IsValueType && prop.IsNullable)
             {
                 ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.GetDataType()));
             }
             else
             {
-                // String etc.
                 ctr = new CodeTypeReference(prop.GetDataType());
             }
             f = new CodeMemberField(ctr,
@@ -771,8 +764,8 @@ namespace Kistl.Server.Generators.SQLServer
                     if(method.Module.ModuleName == "KistlBase")
                     {
                         if(    method.MethodName == "ToString"
-                            || method.MethodName == "OnPreSave"
-                            || method.MethodName == "OnPostSave"
+                            || method.MethodName == "PreSave"
+                            || method.MethodName == "PostSave"
                         )
                             continue;
                     }

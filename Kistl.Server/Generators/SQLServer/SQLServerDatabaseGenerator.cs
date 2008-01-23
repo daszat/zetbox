@@ -161,7 +161,7 @@ namespace Kistl.Server.Generators.SQLServer
                 sb.AppendFormat(" ({0})", ((StringProperty)p).Length);
             }
 
-            sb.AppendFormat(p.IsNullable.HasValue && p.IsNullable.Value ? " NULL " : " NOT NULL ");
+            sb.AppendFormat(p.IsNullable ? " NULL " : " NOT NULL ");
 
             return sb.ToString();
         }

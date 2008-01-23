@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.App.Base;
+using System.Reflection;
 
 namespace Kistl.Client
 {
@@ -12,10 +14,22 @@ namespace Kistl.Client
     /// </summary>
     internal class CustomActionsManagerClient : API.ICustomActionsManager
     {
+        private class InvokeInfo
+        {
+            public MethodInfo CLRMethod {get; set;}
+            public object Instance { get; set; }
+            public EventInfo CLREvent { get; set; }
+        }
+
         /// <summary>
         /// List of Custom Actions
         /// </summary>
-        private List<ICustomClientActions> actions = new List<ICustomClientActions>();
+        private Dictionary<ObjectType, List<InvokeInfo>> customAction = new Dictionary<ObjectType, List<InvokeInfo>>();
+
+        /// <summary>
+        /// Indicates that initializing is done
+        /// </summary>
+        private bool initialized = false;
 
         /// <summary>
         /// Attach using Metadata
@@ -25,7 +39,17 @@ namespace Kistl.Client
         /// <param name="obj"></param>
         public void AttachEvents(IDataObject obj)
         {
-            actions.ForEach(a => a.Attach(obj));
+            if (!initialized) return;
+
+            // New Method
+            if (customAction.ContainsKey(obj.Type))
+            {
+                foreach (InvokeInfo ii in customAction[obj.Type])
+                {
+                    ii.CLREvent.AddEventHandler(obj, Delegate.CreateDelegate(
+                        ii.CLREvent.EventHandlerType, ii.Instance, ii.CLRMethod));
+                }
+            }
         }
 
         /// <summary>
@@ -34,31 +58,55 @@ namespace Kistl.Client
         /// </summary>
         public void Init()
         {
-            using (KistlContext ctx = new KistlContext())
+            try
             {
-                var assemblies = ctx.GetQuery<Kistl.App.Base.Assembly>();
-                foreach (Kistl.App.Base.Assembly a in assemblies)
+                using (KistlContext ctx = new KistlContext())
                 {
-                    try
+                    foreach (ObjectClass baseObjClass in Helper.ObjectClasses.Values)
                     {
-                        foreach (Type t in System.Reflection.Assembly.Load(a.AssemblyName).GetTypes())
+                        ObjectType objType = new ObjectType(baseObjClass.Module.Namespace, baseObjClass.ClassName);
+                        foreach (ObjectClass objClass in Helper.GetObjectHierarchie(baseObjClass))
                         {
-                            if (t.GetInterfaces().Count(i => i == typeof(ICustomClientActions)) > 0)
+                            foreach (MethodInvocation mi in objClass.MethodIvokations)
                             {
-                                actions.Add((ICustomClientActions)Activator.CreateInstance(t));
+                                try
+                                {
+                                    if (!mi.Assembly.IsClientAssembly) continue;
+
+                                    Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
+                                    if (t == null) continue;
+
+                                    MethodInfo clrMethod = t.GetMethod(mi.MemberName);
+                                    if (clrMethod == null) continue;
+
+                                    EventInfo ei = Type.GetType(objType.FullNameClientDataObject).GetEvent(
+                                        "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
+
+                                    if (ei == null) continue;
+
+                                    InvokeInfo ii = new InvokeInfo();
+                                    ii.CLRMethod = clrMethod;
+                                    ii.Instance = Activator.CreateInstance(t);
+                                    ii.CLREvent = ei;
+
+                                    if (!customAction.ContainsKey(objType))
+                                    {
+                                        customAction.Add(objType, new List<InvokeInfo>());
+                                    }
+                                    customAction[objType].Add(ii);
+                                }
+                                catch (Exception ex)
+                                {
+                                    System.Diagnostics.Trace.TraceError(ex.ToString());
+                                }
                             }
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Helper.HandleError(ex);
-                    }
                 }
-
-                if (actions.Count == 0)
-                {
-                    throw new InvalidOperationException("No Custom Actions found");
-                }
+            }
+            finally
+            {
+                initialized = true;
             }
         }
     }

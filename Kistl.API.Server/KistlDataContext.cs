@@ -21,6 +21,7 @@ namespace Kistl.API.Server
             {
                 if (_Current == null)
                 {
+                    throw new InvalidOperationException("No Session");
                 }
                 return _Current;
             }
@@ -28,9 +29,16 @@ namespace Kistl.API.Server
 
         public static KistlDataContext InitSession()
         {
+            if (_Current != null) throw new InvalidOperationException("Session already set");
+            _Current = GetContext();
+            return _Current;
+        }
+
+        public static KistlDataContext GetContext()
+        {
             // Build connectionString
             // metadata=res://*;provider=System.Data.SqlClient;provider connection string='Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;'
-            if(string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connectionString))
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("metadata=res://*;");
@@ -39,14 +47,14 @@ namespace Kistl.API.Server
 
                 connectionString = sb.ToString();
             }
-            _Current = new KistlDataContext(connectionString);
-            return _Current;
+            return new KistlDataContext(connectionString);
         }
 
         #region IDisposable Members
 
         void IDisposable.Dispose()
         {
+            if(_Current != null) _Current.Dispose();
             base.Dispose();
             _Current = null;
         }
@@ -109,12 +117,12 @@ namespace Kistl.API.Server
 
         public int SubmitChanges()
         {
-            
+
             List<IDataObject> saveList = new List<IDataObject>();
             this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
                 .ToList().ForEach(e => { if (e.Entity is IDataObject) saveList.Add(e.Entity as IDataObject); });
             this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified)
-                .ToList().ForEach(e => { if(e.Entity is IDataObject) saveList.Add(e.Entity as IDataObject); });
+                .ToList().ForEach(e => { if (e.Entity is IDataObject) saveList.Add(e.Entity as IDataObject); });
 
             foreach (IDataObject obj in saveList)
             {

@@ -27,12 +27,12 @@ namespace Kistl.App.Base
     public class Property : Kistl.App.Base.BaseProperty, ICloneable
     {
         
-        private System.Nullable<bool> _IsList;
+        private bool _IsList;
         
-        private System.Nullable<bool> _IsNullable;
+        private bool _IsNullable;
         
         [EdmScalarPropertyAttribute()]
-        public System.Nullable<bool> IsList
+        public bool IsList
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Kistl.App.Base
         }
         
         [EdmScalarPropertyAttribute()]
-        public System.Nullable<bool> IsNullable
+        public bool IsNullable
         {
             get
             {

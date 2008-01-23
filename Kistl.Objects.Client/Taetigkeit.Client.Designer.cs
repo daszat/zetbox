@@ -32,9 +32,9 @@ namespace Kistl.App.Zeiterfassung
         
         private int _fk_Mitarbeiter = Helper.INVALIDID;
         
-        private System.Nullable<System.DateTime> _Datum;
+        private System.DateTime _Datum;
         
-        private System.Nullable<double> _Dauer;
+        private double _Dauer;
         
         public override int ID
         {
@@ -100,7 +100,7 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        public System.Nullable<System.DateTime> Datum
+        public System.DateTime Datum
         {
             get
             {
@@ -112,7 +112,7 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        public System.Nullable<double> Dauer
+        public double Dauer
         {
             get
             {

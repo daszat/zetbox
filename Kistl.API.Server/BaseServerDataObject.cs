@@ -17,8 +17,8 @@ namespace Kistl.API.Server
         /// </summary>
         public BaseServerDataObject()
         {
-            API.CustomActionsManagerFactory.Current.AttachEvents(this);
             _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
+            API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
         private DataObjectState _ObjectState = DataObjectState.Unmodified;

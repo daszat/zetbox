@@ -74,5 +74,54 @@ namespace Kistl.Client
                 return _Modules;
             }
         }
+
+        public static List<Kistl.App.Base.ObjectClass> GetObjectHierarchie(Kistl.App.Base.ObjectClass objClass)
+        {
+            return GetObjectHierarchie(new ObjectType(objClass.Module.Namespace, objClass.ClassName));
+        }
+
+        public static List<Kistl.App.Base.ObjectClass> GetObjectHierarchie(ObjectType type)
+        {
+            Kistl.App.Base.ObjectClass objClass = ObjectClasses[type];
+            List<Kistl.App.Base.ObjectClass> result = new List<Kistl.App.Base.ObjectClass>();
+            while (objClass != null)
+            {
+                result.Add(objClass);
+
+                if (objClass.fk_BaseObjectClass == API.Helper.INVALIDID)
+                {
+                    objClass = null;
+                }
+                else
+                {
+                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
+                }
+            }
+
+            result.Reverse();
+            return result;
+        }
+
+        public static List<ObjectType> GetTypeHierarchie(ObjectType type)
+        {
+            Kistl.App.Base.ObjectClass objClass = ObjectClasses[type];
+            List<ObjectType> result = new List<ObjectType>();
+            while (objClass != null)
+            {
+                result.Add(new ObjectType(objClass.Module.Namespace, objClass.ClassName));
+
+                if (objClass.fk_BaseObjectClass == API.Helper.INVALIDID)
+                {
+                    objClass = null;
+                }
+                else
+                {
+                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
+                }
+            }
+
+            result.Reverse();
+            return result;
+        }
     }
 }

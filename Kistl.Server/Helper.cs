@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Linq;
 using System.Text;
+using Kistl.API;
+using Kistl.App.Base;
+using Kistl.API.Server;
 
 namespace Kistl.Server
 {
@@ -30,6 +33,19 @@ namespace Kistl.Server
             {
                 return @"c:\temp\KistlCodeGen";
             }
+        }
+
+        public static List<ObjectClass> GetObjectHierarchie(KistlDataContext ctx, ObjectClass objClass)
+        {
+            List<ObjectClass> result = new List<ObjectClass>();
+            while (objClass != null)
+            {
+                result.Add(objClass);
+                objClass = objClass.BaseObjectClass;
+            }
+
+            result.Reverse();
+            return result;
         }
     }
 }

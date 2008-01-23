@@ -36,9 +36,9 @@ namespace Kistl.App.Zeiterfassung
         
         private int _fk_Mitarbeiter = Helper.INVALIDID;
         
-        private System.Nullable<System.DateTime> _Datum;
+        private System.DateTime _Datum;
         
-        private System.Nullable<double> _Dauer;
+        private double _Dauer;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -130,7 +130,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [EdmScalarPropertyAttribute()]
-        public System.Nullable<System.DateTime> Datum
+        public System.DateTime Datum
         {
             get
             {
@@ -143,7 +143,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [EdmScalarPropertyAttribute()]
-        public System.Nullable<double> Dauer
+        public double Dauer
         {
             get
             {

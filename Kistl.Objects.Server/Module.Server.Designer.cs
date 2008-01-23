@@ -92,6 +92,18 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Assembly_Module", "B_Assembly")]
+        [XmlIgnore()]
+        public EntityCollection<Kistl.App.Base.Assembly> Assemblies
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.Assembly> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Assembly>("Model.FK_Assembly_Module", "B_Assembly");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
         public event ToStringHandler<Module> OnToString_Module;
         
         public event ObjectEventHandler<Module> OnPreSave_Module;

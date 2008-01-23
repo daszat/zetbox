@@ -63,7 +63,6 @@
     <Compile Include="CacheController.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="IClientObject.cs" />
-    <Compile Include="ICustomActionsClient.cs" />
     <Compile Include="LinqToKistl\KistlContext.cs" />
     <Compile Include="LinqToKistl\KistlContextQuery.cs" />
     <Compile Include="LinqToKistl\KistlContextProvider.cs" />
