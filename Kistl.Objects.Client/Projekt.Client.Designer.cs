@@ -30,11 +30,17 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
+        private List<Kistl.App.Projekte.Task> _Tasks;
+        
         private int _fk_Mitarbeiter = Helper.INVALIDID;
         
         private System.Nullable<double> _AufwandGes;
         
         private string _Kundenname;
+        
+        private List<Kistl.App.Zeiterfassung.Kostentraeger> _Kostentraeger;
+        
+        private List<Kistl.App.Projekte.Auftrag> _Auftraege;
         
         public override int ID
         {
@@ -66,7 +72,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
+                if(_Tasks == null) _Tasks = Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
+                return _Tasks;
             }
         }
         
@@ -126,7 +133,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger");
+                if(_Kostentraeger == null) _Kostentraeger = Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger");
+                return _Kostentraeger;
             }
         }
         
@@ -136,7 +144,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
+                if(_Auftraege == null) _Auftraege = Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
+                return _Auftraege;
             }
         }
         

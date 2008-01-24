@@ -61,7 +61,7 @@ namespace Kistl.API.Client
             Key k = new Key(type, ID);
             if (_cache.ContainsKey(k))
             {
-                Trace.WriteLine(string.Format("Cachehit {0} [{1}]", type, ID));
+                Trace.WriteLineIf(TraceClient.TraceHelper.TraceLevel.TraceVerbose, string.Format("Cachehit {0} [{1}]", type, ID));
                 return _cache[k];
             }
             else

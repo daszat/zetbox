@@ -233,12 +233,6 @@ namespace Kistl.Server.Generators.SQLServer
                 c.BaseTypes.Add("BaseClientDataObject");
             }
 
-            /*if (objClass.Module.Namespace == "Kistl.App.Base")
-            {
-                // Interface hinzufügen
-                c.BaseTypes.Add("I" + objClass.ClassName);
-            }*/
-
             c.BaseTypes.Add("ICloneable");
 
             if (objClass.BaseObjectClass == null)
@@ -389,6 +383,13 @@ namespace Kistl.Server.Generators.SQLServer
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on BackReferenceProperty {1}.{2}",
                     prop.GetDataType(), objClass.ClassName, prop.PropertyName));
 
+            CodeTypeReference ctr = new CodeTypeReference("List", new CodeTypeReference(prop.GetDataType()));
+
+            CodeMemberField f = new CodeMemberField(ctr,
+                "_" + prop.PropertyName);
+
+            c.Members.Add(f);
+
             CodeMemberProperty p = new CodeMemberProperty();
             c.Members.Add(p);
 
@@ -397,16 +398,14 @@ namespace Kistl.Server.Generators.SQLServer
             p.HasGet = true;
             p.HasSet = false;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            p.Type = new CodeTypeReference("List", new CodeTypeReference(prop.GetDataType()));
-
-            ObjectType otherType = new ObjectType(prop.GetDataType());
-            string assocName = "FK_" + otherType.Classname + "_" + objClass.ClassName;
+            p.Type = ctr;
 
             p.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
             p.GetStatements.Add(
                 new CodeSnippetExpression(string.Format(
-                    @"return Context.GetListOf<{1}>(this, ""{0}"")",
+                    @"if(_{0} == null) _{0} = Context.GetListOf<{1}>(this, ""{0}"");
+                return _{0}",
                 prop.PropertyName, prop.GetDataType())));
         }
         #endregion

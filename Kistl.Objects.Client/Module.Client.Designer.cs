@@ -32,6 +32,10 @@ namespace Kistl.App.Base
         
         private string _ModuleName;
         
+        private List<Kistl.App.Base.ObjectClass> _ObjectClasses;
+        
+        private List<Kistl.App.Base.Assembly> _Assemblies;
+        
         public override int ID
         {
             get
@@ -74,7 +78,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "ObjectClasses");
+                if(_ObjectClasses == null) _ObjectClasses = Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "ObjectClasses");
+                return _ObjectClasses;
             }
         }
         
@@ -84,7 +89,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
+                if(_Assemblies == null) _Assemblies = Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
+                return _Assemblies;
             }
         }
         

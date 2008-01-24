@@ -57,7 +57,12 @@ namespace Kistl.API.Client
             if (SearchType == SearchTypeEnum.GetList)
             {
                 List<T> result = client.GetList(_type).OfType<T>().ToList();
-                result.ForEach(r => _context.Attach(r as BaseClientDataObject));
+                foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
+                {
+                    _context.Attach(obj);
+                    CacheController<BaseClientDataObject>.Current.Set(_type, obj.ID,
+                       (BaseClientDataObject)obj.Clone());
+                }
                 return result;
             }
             else

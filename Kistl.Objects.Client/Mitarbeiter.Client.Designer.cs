@@ -30,6 +30,8 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
+        private List<Kistl.App.Projekte.Projekt> _Projekte;
+        
         private System.Nullable<System.DateTime> _Geburtstag;
         
         private string _SVNr;
@@ -66,7 +68,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte");
+                if(_Projekte == null) _Projekte = Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte");
+                return _Projekte;
             }
         }
         

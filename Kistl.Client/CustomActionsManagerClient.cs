@@ -60,46 +60,85 @@ namespace Kistl.Client
         {
             try
             {
-                using (KistlContext ctx = new KistlContext())
+                using (TraceClient.TraceHelper.TraceMethodCall())
                 {
-                    foreach (ObjectClass baseObjClass in Helper.ObjectClasses.Values)
+                    using (KistlContext ctx = new KistlContext())
                     {
-                        ObjectType objType = new ObjectType(baseObjClass.Module.Namespace, baseObjClass.ClassName);
-                        foreach (ObjectClass objClass in Helper.GetObjectHierarchie(baseObjClass))
+                        /// Prepare Methods
+                        List<Method> mList = ctx.GetQuery<Method>().ToList();
+
+                        /// Prepare Assemblies
+                        List<Kistl.App.Base.Assembly> aList = ctx.GetQuery<Kistl.App.Base.Assembly>().ToList();
+
+                        /// Prepare MethodInvokations
+                        Dictionary<int, List<MethodInvocation>> miDict = new Dictionary<int, List<MethodInvocation>>();
+                        foreach (MethodInvocation mi in ctx.GetQuery<MethodInvocation>())
                         {
-                            foreach (MethodInvocation mi in objClass.MethodIvokations)
+                            if (!miDict.ContainsKey(mi.fk_InvokeOnObjectClass)) miDict[mi.fk_InvokeOnObjectClass] = new List<MethodInvocation>();
+                            miDict[mi.fk_InvokeOnObjectClass].Add(mi);
+                        }
+
+                        StringBuilder warnings = new StringBuilder();
+
+                        foreach (ObjectClass baseObjClass in Helper.ObjectClasses.Values)
+                        {
+                            ObjectType objType = new ObjectType(baseObjClass.Module.Namespace, baseObjClass.ClassName);
+                            foreach (ObjectClass objClass in Helper.GetObjectHierarchie(baseObjClass))
                             {
-                                try
+                                if (!miDict.ContainsKey(objClass.ID)) continue;
+
+                                // foreach (MethodInvocation mi in objClass.MethodIvokations)
+                                foreach (MethodInvocation mi in miDict[objClass.ID])
                                 {
-                                    if (!mi.Assembly.IsClientAssembly) continue;
-
-                                    Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
-                                    if (t == null) continue;
-
-                                    MethodInfo clrMethod = t.GetMethod(mi.MemberName);
-                                    if (clrMethod == null) continue;
-
-                                    EventInfo ei = Type.GetType(objType.FullNameClientDataObject).GetEvent(
-                                        "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
-
-                                    if (ei == null) continue;
-
-                                    InvokeInfo ii = new InvokeInfo();
-                                    ii.CLRMethod = clrMethod;
-                                    ii.Instance = Activator.CreateInstance(t);
-                                    ii.CLREvent = ei;
-
-                                    if (!customAction.ContainsKey(objType))
+                                    try
                                     {
-                                        customAction.Add(objType, new List<InvokeInfo>());
+                                        if (!mi.Assembly.IsClientAssembly) continue;
+
+                                        Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
+                                        if (t == null)
+                                        {
+                                            warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.FullTypeName, mi.Assembly.AssemblyName));
+                                            continue;
+                                        }
+
+                                        MethodInfo clrMethod = t.GetMethod(mi.MemberName);
+                                        if (clrMethod == null)
+                                        {
+                                            warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", mi.MemberName));
+                                            continue;
+                                        }
+
+                                        EventInfo ei = Type.GetType(objType.FullNameClientDataObject).GetEvent(
+                                            "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
+
+                                        if (ei == null)
+                                        {
+                                            warnings.AppendLine(string.Format("Warning: CLR Event On{0}_{1} not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
+                                            continue;
+                                        }
+
+                                        InvokeInfo ii = new InvokeInfo();
+                                        ii.CLRMethod = clrMethod;
+                                        ii.Instance = Activator.CreateInstance(t);
+                                        ii.CLREvent = ei;
+
+                                        if (!customAction.ContainsKey(objType))
+                                        {
+                                            customAction.Add(objType, new List<InvokeInfo>());
+                                        }
+                                        customAction[objType].Add(ii);
                                     }
-                                    customAction[objType].Add(ii);
-                                }
-                                catch (Exception ex)
-                                {
-                                    System.Diagnostics.Trace.TraceError(ex.ToString());
+                                    catch (Exception ex)
+                                    {
+                                        System.Diagnostics.Trace.TraceError(ex.ToString());
+                                    }
                                 }
                             }
+                        }
+
+                        if (warnings.Length > 0)
+                        {
+                            System.Windows.MessageBox.Show(warnings.ToString());
                         }
                     }
                 }
@@ -107,6 +146,8 @@ namespace Kistl.Client
             finally
             {
                 initialized = true;
+                // Clean up Helper Caches
+                Helper.CleanCaches();
             }
         }
     }

@@ -30,6 +30,8 @@ namespace Kistl.App.Zeiterfassung
         
         private string _Kontoname;
         
+        private List<Kistl.App.Zeiterfassung.Taetigkeit> _Taetigkeiten;
+        
         public override int ID
         {
             get
@@ -60,7 +62,8 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten");
+                if(_Taetigkeiten == null) _Taetigkeiten = Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten");
+                return _Taetigkeiten;
             }
         }
         

@@ -32,11 +32,19 @@ namespace Kistl.App.Base
         
         private string _TableName;
         
+        private List<Kistl.App.Base.BaseProperty> _Properties;
+        
         private int _fk_BaseObjectClass = Helper.INVALIDID;
+        
+        private List<Kistl.App.Base.ObjectClass> _SubClasses;
+        
+        private List<Kistl.App.Base.Method> _Methods;
         
         private int _fk_Module = Helper.INVALIDID;
         
         private int _fk_DefaultIcon = Helper.INVALIDID;
+        
+        private List<Kistl.App.Base.MethodInvocation> _MethodIvokations;
         
         public override int ID
         {
@@ -80,7 +88,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
+                if(_Properties == null) _Properties = Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
+                return _Properties;
             }
         }
         
@@ -116,7 +125,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses");
+                if(_SubClasses == null) _SubClasses = Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses");
+                return _SubClasses;
             }
         }
         
@@ -126,7 +136,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
+                if(_Methods == null) _Methods = Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
+                return _Methods;
             }
         }
         
@@ -188,7 +199,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+                if(_MethodIvokations == null) _MethodIvokations = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+                return _MethodIvokations;
             }
         }
         

@@ -34,6 +34,8 @@ namespace Kistl.App.Base
         
         private int _fk_Module = Helper.INVALIDID;
         
+        private List<Kistl.App.Base.MethodInvocation> _MethodIvokations;
+        
         public override int ID
         {
             get
@@ -116,7 +118,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                return Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+                if(_MethodIvokations == null) _MethodIvokations = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+                return _MethodIvokations;
             }
         }
         
