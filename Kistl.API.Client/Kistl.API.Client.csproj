@@ -100,6 +100,7 @@
     <None Include="Service References\KistlService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\KistlService\KistlService3.xsd" />
     <None Include="Service References\KistlService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

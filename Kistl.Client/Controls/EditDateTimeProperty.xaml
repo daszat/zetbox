@@ -6,6 +6,7 @@
     <DockPanel >
         <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=Label}" />
         <kevin:DatePicker Value="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
-                          IsReadOnly="{Binding  ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}" />
+                          IsReadOnly="{Binding  ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                          CanEdit="True"/>
     </DockPanel>
 </UserControl>

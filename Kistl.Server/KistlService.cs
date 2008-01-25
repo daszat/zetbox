@@ -8,11 +8,14 @@ using System.Xml;
 using Kistl.API.Server;
 using Kistl.API;
 using System.Diagnostics;
+using System.ServiceModel.Dispatcher;
+using System.ServiceModel;
 
 namespace Kistl.Server
 {
     /// <summary>
     /// Implementierung des KistlServices
+    /// Error are handled by the KistlServiceErrorHandler
     /// </summary>
     public class KistlService : IKistlService
     {
@@ -25,20 +28,21 @@ namespace Kistl.Server
         /// <returns></returns>
         public string GetList(ObjectType type)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
+            try
             {
-                try
+                using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
                         return ServerObjectFactory.GetServerObject(type).GetList();
                     }
                 }
-                catch (Exception ex)
-                {
-                    Helper.HandleError(ex);
-                    throw new Exception(ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
             }
         }
 
@@ -53,20 +57,21 @@ namespace Kistl.Server
         /// <returns></returns>
         public string GetListOf(ObjectType type, int ID, string property)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
+            try
             {
-                try
+                using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
                         return ServerObjectFactory.GetServerObject(type).GetListOf(ID, property);
                     }
                 }
-                catch (Exception ex)
-                {
-                    Helper.HandleError(ex);
-                    throw new Exception(ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
             }
         }
 
@@ -80,20 +85,21 @@ namespace Kistl.Server
         /// <returns></returns>
         public string GetObject(ObjectType type, int ID)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
+            try
             {
-                try
+                using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
                         return ServerObjectFactory.GetServerObject(type).GetObject(ID);
                     }
                 }
-                catch (Exception ex)
-                {
-                    Helper.HandleError(ex);
-                    throw new Exception(ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
             }
         }
 
@@ -107,20 +113,21 @@ namespace Kistl.Server
         /// <returns></returns>
         public string SetObject(ObjectType type, string obj)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
+            try
             {
-                try
+                using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
                         return ServerObjectFactory.GetServerObject(type).SetObject(obj);
                     }
                 }
-                catch (Exception ex)
-                {
-                    Helper.HandleError(ex);
-                    throw new Exception(ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
             }
         }
 
@@ -129,10 +136,17 @@ namespace Kistl.Server
         /// </summary>
         public void Generate()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            try
             {
-                Generators.Generator.GenerateCode();
-                Generators.Generator.GenerateDatabase();
+                using (TraceClient.TraceHelper.TraceMethodCall())
+                {
+                    Generators.Generator.GenerateCode();
+                    Generators.Generator.GenerateDatabase();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
             }
         }
 
@@ -143,17 +157,18 @@ namespace Kistl.Server
         /// <returns></returns>
         public string HelloWorld(string name)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall(name))
+            try
             {
-                try
+                using (TraceClient.TraceHelper.TraceMethodCall(name))
                 {
                     return "Hello " + name;
                 }
-                catch (Exception ex)
-                {
-                    Helper.HandleError(ex);
-                    throw new Exception(ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
             }
         }
     }

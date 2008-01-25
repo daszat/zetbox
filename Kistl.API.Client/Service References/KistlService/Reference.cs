@@ -16,21 +16,27 @@ namespace Kistl.API.Client.KistlService {
     public interface IKistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetList", ReplyAction="http://tempuri.org/IKistlService/GetListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/GetListApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         string GetList(Kistl.API.ObjectType type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetListOf", ReplyAction="http://tempuri.org/IKistlService/GetListOfResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/GetListOfApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         string GetListOf(Kistl.API.ObjectType type, int ID, string property);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetObject", ReplyAction="http://tempuri.org/IKistlService/GetObjectResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/GetObjectApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         string GetObject(Kistl.API.ObjectType type, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetObject", ReplyAction="http://tempuri.org/IKistlService/SetObjectResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/SetObjectApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         string SetObject(Kistl.API.ObjectType type, string obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/Generate", ReplyAction="http://tempuri.org/IKistlService/GenerateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/GenerateApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         void Generate();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/HelloWorld", ReplyAction="http://tempuri.org/IKistlService/HelloWorldResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/HelloWorldApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         string HelloWorld(string name);
     }
     

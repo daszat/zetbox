@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
+using System.ServiceModel;
 
 namespace Kistl.Client
 {
@@ -18,7 +19,18 @@ namespace Kistl.Client
         /// <param name="ex"></param>
         public static void HandleError(Exception ex)
         {
-            System.Windows.MessageBox.Show(ex.ToString());
+            if (ex is FaultException<ApplicationException>)
+            {
+                System.Windows.MessageBox.Show((ex as ApplicationException).Message);
+            }
+            else if (ex is FaultException)
+            {
+                System.Windows.MessageBox.Show((ex as FaultException).Message);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+            }
         }
 
         private static Dictionary<ObjectType, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
