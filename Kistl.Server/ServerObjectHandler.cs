@@ -18,14 +18,14 @@ namespace Kistl.API.Server
     /// <summary>
     /// Interface für das Server BL Objekt.
     /// </summary>
-    public interface IServerObject
+    internal interface IServerObjectHandler
     {
         /// <summary>
         /// Implementiert den GetList Befehl.
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        string GetList();
+        IEnumerable GetList();
 
         /// <summary>
         /// Implementiert den GetListOf Befehl.
@@ -34,7 +34,7 @@ namespace Kistl.API.Server
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        string GetListOf(int ID, string property);
+        IEnumerable GetListOf(int ID, string property);
 
         /// <summary>
         /// Implementiert den GetObject Befehl.
@@ -42,14 +42,14 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        string GetObject(int ID);
+        BaseServerDataObject GetObject(int ID);
 
         /// <summary>
         /// Läd generisch eine Instanz
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        IDataObject GetObjectInstanceGeneric(int ID);
+        // BaseServerDataObject GetObjectInstanceGeneric(int ID);
 
         /// <summary>
         /// Implementiert den SetObject Befehl.
@@ -57,10 +57,13 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        string SetObject(string xml);
+        BaseServerDataObject SetObject(BaseServerDataObject xml);
     }
 
-    public class ServerObjectFactory
+    /// <summary>
+    /// TODO: Objekte verwaltuen & Serialisierung trennen!!!
+    /// </summary>
+    internal class ServerObjectHandlerFactory
     {
         /// <summary>
         /// Helper Method for generic object access
@@ -68,7 +71,7 @@ namespace Kistl.API.Server
         /// <param name="type"></param>
         /// <returns></returns>
         // [System.Diagnostics.DebuggerStepThrough]
-        public static IServerObject GetServerObject(ObjectType type)
+        public static IServerObjectHandler GetServerObjectHandler(ObjectType type)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
@@ -78,13 +81,10 @@ namespace Kistl.API.Server
                 Type objType = Type.GetType(type.FullNameServerDataObject);
                 if (objType == null) throw new ApplicationException("Invalid Type");
 
-                Type t = typeof(ServerObject<,,>);
-                Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Server");
-                Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Server");
+                Type t = typeof(ServerObjectHandler<>);
+                Type result = t.MakeGenericType(objType);
 
-                Type result = t.MakeGenericType(objType, xmlCollection, xmlObj);
-
-                IServerObject obj = Activator.CreateInstance(result) as IServerObject;
+                IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
                 if (obj == null) throw new ApplicationException("Cannot create instance");
 
                 return obj;
@@ -100,27 +100,14 @@ namespace Kistl.API.Server
     /// selbst implementiert sind
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ServerObject<T, XMLCOLLECTION, XMLOBJECT> : IServerObject 
+    internal class ServerObjectHandler<T> : IServerObjectHandler 
         where T : BaseServerDataObject, IDataObject, new()
-        where XMLCOLLECTION: IXmlObjectCollection, new()
-        where XMLOBJECT : IXmlObject, new()
     {
         /// <summary>
         /// Events registrieren
         /// </summary>
-        public ServerObject()
+        public ServerObjectHandler()
         {
-            _type = new ObjectType(typeof(T).Namespace, typeof(T).Name);
-        }
-
-        protected ObjectType _type = null;
-
-        public ObjectType Type
-        {
-            get
-            {
-                return _type;
-            }
         }
 
         /// <summary>
@@ -128,16 +115,17 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public string GetList()
+        public IEnumerable GetList()
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
                 var result = from a in KistlDataContext.Current.GetTable<T>()
                              select a;
 
-                XMLCOLLECTION list = new XMLCOLLECTION();
-                list.Objects.AddRange(result.ToList().OfType<object>());
-                return list.ToXmlString();
+                // XMLCOLLECTION list = new XMLCOLLECTION();
+                // list.Objects.AddRange(result.ToList().OfType<object>());
+                // return list.ToXmlString();
+                return result;
             }
         }
 
@@ -148,7 +136,7 @@ namespace Kistl.API.Server
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        public string GetListOf(int ID, string property)
+        public IEnumerable GetListOf(int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}, Property = {1}", ID, property)))
             {
@@ -159,10 +147,11 @@ namespace Kistl.API.Server
                 PropertyInfo pi = typeof(T).GetProperty(property);
                 if (pi == null) throw new ArgumentException("Property does not exist");
 
-                XMLCOLLECTION result = new XMLCOLLECTION();
                 IEnumerable v = (IEnumerable)pi.GetValue(obj, null);
+                /* XMLCOLLECTION result = new XMLCOLLECTION();
                 result.Objects.AddRange(v.OfType<object>());
-                return result.ToXmlString();
+                return result.ToXmlString();*/
+                return v;
             }
         }
 
@@ -172,7 +161,7 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public T GetObjectInstance(int ID)
+        private T GetObjectInstance(int ID)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
             {
@@ -189,10 +178,10 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public IDataObject GetObjectInstanceGeneric(int ID)
+        /*public BaseServerDataObject GetObjectInstanceGeneric(int ID)
         {
             return GetObjectInstance(ID);
-        }
+        }*/
 
         /// <summary>
         /// Implementiert den GetObject Befehl.
@@ -200,11 +189,12 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public string GetObject(int ID)
+        public BaseServerDataObject GetObject(int ID)
         {
-            XMLOBJECT result = new XMLOBJECT();
-            result.Object = (BaseServerDataObject)GetObjectInstance(ID);
-            return result.ToXmlString();
+            //XMLOBJECT result = new XMLOBJECT();
+            //result.Object = (BaseServerDataObject)GetObjectInstance(ID);
+            //return result.ToXmlString();
+            return GetObjectInstance(ID);
         }
 
         /// <summary>
@@ -213,11 +203,11 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public string SetObject(string xml)
+        public BaseServerDataObject SetObject(BaseServerDataObject obj)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                T obj = xml.FromXmlString<XMLOBJECT>().Object as T;
+                //T obj = xml.FromXmlString<XMLOBJECT>().Object as T;
 
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
@@ -236,14 +226,15 @@ namespace Kistl.API.Server
                         MarkEveryPropertyAsModified(obj);
                     }
 
-                    UpdateRelationships(obj);
+                    UpdateRelationships(obj as T);
                 }
 
                 KistlDataContext.Current.SubmitChanges();
 
-                XMLOBJECT result = new XMLOBJECT();
-                result.Object = obj;
-                return result.ToXmlString();
+                //XMLOBJECT result = new XMLOBJECT();
+                //result.Object = obj;
+                //return result.ToXmlString();
+                return obj;
             }
         }
 
@@ -265,8 +256,8 @@ namespace Kistl.API.Server
                     {
                         int fk = (int)pifk.GetValue(obj, null);
 
-                        IServerObject so = ServerObjectFactory.GetServerObject(new ObjectType(pi.PropertyType.FullName));
-                        IDataObject other = so.GetObjectInstanceGeneric(fk);
+                        IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(new ObjectType(pi.PropertyType.FullName));
+                        IDataObject other = so.GetObject(fk);
                         pi.SetValue(obj, other, null);
                     }
                 }

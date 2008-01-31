@@ -23,8 +23,9 @@ namespace Kistl.API.Client
 
         internal List<T> GetListOf(int ID, string propertyName)
         {
-            IClientObject client = ClientObjectFactory.GetClientObject();
-            List<T> result = client.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
+            //IClientObject client = ClientObjectFactory.GetClientObject();
+            //List<T> result = client.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
+            List<T> result = Proxy.Current.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
             result.ForEach(r => _context.Attach(r as BaseClientDataObject));
             return result;
         }
@@ -52,11 +53,12 @@ namespace Kistl.API.Client
         {
             Visit(e);
 
-            IClientObject client = ClientObjectFactory.GetClientObject();
+            // IClientObject client = ClientObjectFactory.GetClientObject();
 
             if (SearchType == SearchTypeEnum.GetList)
             {
-                List<T> result = client.GetList(_type).OfType<T>().ToList();
+                //List<T> result = client.GetList(_type).OfType<T>().ToList();
+                List<T> result = Proxy.Current.GetList(_type).OfType<T>().ToList();
                 foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
                 {
                     _context.Attach(obj);
@@ -67,12 +69,12 @@ namespace Kistl.API.Client
             }
             else
             {
-                if (ID != Helper.INVALIDID)
+                if (ID != API.Helper.INVALIDID)
                 {
                     T result = (T)(IDataObject)CacheController<BaseClientDataObject>.Current.Get(_type, ID);
                     if (result == null)
                     {
-                        result = (T)(IDataObject)client.GetObject(_type, ID);
+                        result = (T)(IDataObject)Proxy.Current.GetObject(_type, ID);
                         if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
 
                         CacheController<BaseClientDataObject>.Current.Set(_type, ID, 
@@ -99,7 +101,7 @@ namespace Kistl.API.Client
         #region Parameter
         
         private List<Expression> _filter = new List<Expression>();
-        private int ID = Helper.INVALIDID;
+        private int ID = API.Helper.INVALIDID;
         private enum SearchTypeEnum
         {
             GetObject,

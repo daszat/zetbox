@@ -86,5 +86,21 @@ namespace Kistl.API.Server
         {
             return null;
         }
+
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+            Type.ToBinary(sw);
+            ID.ToBinary(sw);
+        }
+
+        public virtual void FromStream(System.IO.BinaryReader sr)
+        {
+            ObjectType t = new ObjectType();
+            t = t.FromBinary(sr);
+
+            if (!Type.Equals(t))
+                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", Type, t));
+            ID = ID.FromBinary(sr);
+        }
     }
 }

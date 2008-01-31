@@ -22,11 +22,19 @@ namespace Kistl.Client
         /// </summary>
         static App()
         {
-            FrameworkElement.LanguageProperty.OverrideMetadata(
-                typeof(FrameworkElement),
-                new FrameworkPropertyMetadata(
-                    XmlLanguage.GetLanguage(
-                        CultureInfo.CurrentCulture.IetfLanguageTag)));
+            try
+            {
+                FrameworkElement.LanguageProperty.OverrideMetadata(
+                    typeof(FrameworkElement),
+                    new FrameworkPropertyMetadata(
+                        XmlLanguage.GetLanguage(
+                            CultureInfo.CurrentCulture.IetfLanguageTag)));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                throw new Exception(ex.Message, ex);
+            }
         }
 
 

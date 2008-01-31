@@ -153,7 +153,7 @@ namespace Kistl.Client
             try
             {
                 SplashScreen.ShowSplashScreen("Generating Objects and Database", "This may take several seconds", 1);
-                Proxy.Service.Generate();
+                Proxy.Current.Generate();
             }
             catch (Exception ex)
             {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="002470e1-07bd-4167-8f7b-6a10db0c7ef5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6666/KistlServiceStreams" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="KistlServiceStreams.xsd" MetadataType="Schema" ID="4d3912c1-ad2e-4109-b138-8689d14684c4" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?xsd=xsd0" />
+    <MetadataFile FileName="KistlServiceStreams1.xsd" MetadataType="Schema" ID="e6a5fcf2-667b-4735-9003-37cddd4dcef0" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?xsd=xsd1" />
+    <MetadataFile FileName="KistlServiceStreams.disco" MetadataType="Disco" ID="3e98ec21-625a-4b32-ab3f-bed9d685dbd9" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?disco" />
+    <MetadataFile FileName="KistlServiceStreams.wsdl" MetadataType="Wsdl" ID="87029544-ac9f-4c38-bd5c-5256655c533b" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?wsdl" />
+    <MetadataFile FileName="KistlServiceStreams2.xsd" MetadataType="Schema" ID="4791c145-b59e-4c71-a03a-38669ccb929f" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?xsd=xsd2" />
+    <MetadataFile FileName="KistlServiceStreams3.xsd" MetadataType="Schema" ID="adf5024f-148e-4e38-a5cf-96011542228d" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

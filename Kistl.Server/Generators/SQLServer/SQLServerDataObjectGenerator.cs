@@ -250,6 +250,9 @@ namespace Kistl.Server.Generators.SQLServer
             // Create DataObject Methods
             GenerateMethods(objClass, c);
 
+            // Create DataObject StreamingMethods
+            GenerateStreamMethods(objClass, c, ClientServerEnum.Client);
+
             // Generate the code & save
             SaveFile(code, path + @"Kistl.Objects.Client\" + objClass.ClassName + ".Client.Designer.cs");
         }
@@ -492,6 +495,9 @@ namespace Kistl.Server.Generators.SQLServer
 
             // Create DataObject Methods
             GenerateMethods(objClass, c);
+
+            // Create DataObject StreamingMethods
+            GenerateStreamMethods(objClass, c, ClientServerEnum.Server);
 
             // Generate the code & save
             SaveFile(code, path + @"Kistl.Objects.Server\" + objClass.ClassName + ".Server.Designer.cs");
@@ -927,6 +933,52 @@ namespace Kistl.Server.Generators.SQLServer
                     m.Statements.Add(new CodeAssignStatement(
                         new CodeFieldReferenceExpression(new CodeVariableReferenceExpression("obj"), "fk_" + p.PropertyName),
                         new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "fk_" + p.PropertyName)));
+                }
+            }
+        }
+        #endregion
+
+        #region GenerateStreamMethods
+        private void GenerateStreamMethods(ObjectClass objClass, CodeTypeDeclaration c, ClientServerEnum clientserver)
+        {
+            // Create ToStream Method
+            CodeMemberMethod m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Name = "ToStream";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
+            m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));// TODO: Das ist C# spezifisch
+
+            foreach (BaseProperty p in objClass.Properties)
+            {
+                if (p is ValueTypeProperty)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.{0}.ToBinary(sw)", p.PropertyName)));
+                }
+                else if (p is ObjectReferenceProperty)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.fk_{0}.ToBinary(sw)", p.PropertyName)));
+                }
+            }
+
+            m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Name = "FromStream";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));// TODO: Das ist C# spezifisch
+
+            foreach (BaseProperty p in objClass.Properties)
+            {
+                if (p is ValueTypeProperty)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.{0} = this.{0}.FromBinary(sr)", p.PropertyName)));
+                }
+                else if (p is ObjectReferenceProperty)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.fk_{0} = this.fk_{0}.FromBinary(sr)", p.PropertyName)));
                 }
             }
         }

@@ -47,7 +47,7 @@ namespace Kistl.API.Client
 
         public BaseClientDataObject Create(ObjectType type)
         {
-            BaseClientDataObject obj = ClientObjectFactory.GetObject(type);
+            BaseClientDataObject obj = ClientHelper.NewBaseClientDataObject(type);
             Attach(obj);
             return obj;
         }
@@ -73,18 +73,20 @@ namespace Kistl.API.Client
             // TODO: Add a better Cache Refresh Strategie
             CacheController<BaseClientDataObject>.Current.Clear();
 
-            IClientObject client = ClientObjectFactory.GetClientObject();
+            // IClientObject client = ClientObjectFactory.GetClientObject();
             List<BaseClientDataObject> objectsToDetach = new List<BaseClientDataObject>();
             foreach (BaseClientDataObject obj in _objects)
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
-                    client.SetObject(obj.Type, obj);
+                    // client.SetObject(obj.Type, obj);
+                    Proxy.Current.SetObject(obj.Type, obj);
                     objectsToDetach.Add(obj);
                 }
                 else
                 {
-                    BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
+                    // BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
+                    BaseClientDataObject newobj = Proxy.Current.SetObject(obj.Type, obj);
                     newobj.CopyTo(obj);
                 }
 

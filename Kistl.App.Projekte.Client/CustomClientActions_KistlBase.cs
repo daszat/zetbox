@@ -28,7 +28,8 @@ namespace Kistl.App.Base
         /// <param name="e"></param>
         public void OnToString_MethodInvokation(MethodInvocation obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.InvokeOnObjectClass.ClassName + "." + obj.Method.MethodName;
+            e.Result = (obj.Assembly.IsClientAssembly ? "[Client] " : "[Server] ") 
+                + obj.InvokeOnObjectClass.ClassName + "." + obj.Method.MethodName;
         }
 
         public void OnToString_BaseProperty(Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)

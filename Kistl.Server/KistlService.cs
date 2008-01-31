@@ -19,6 +19,60 @@ namespace Kistl.Server
     /// </summary>
     public class KistlService : IKistlService
     {
+        #region XmlSerializer
+        private interface IXmlSerializer
+        {
+            string XmlFromList(IEnumerable lst);
+            string XmlFromObject(BaseServerDataObject obj);
+            BaseServerDataObject ObjectFromXml(string xml);
+        }
+
+        private class XmlSerializer<XMLCOLLECTION, XMLOBJECT> : IXmlSerializer
+            where XMLCOLLECTION : IXmlObjectCollection, new()
+            where XMLOBJECT : IXmlObject, new()
+        {
+            public string XmlFromList(IEnumerable lst)
+            {
+                XMLCOLLECTION list = new XMLCOLLECTION();
+                list.Objects.AddRange(lst.OfType<object>());
+                return list.ToXmlString();
+            }
+
+            public string XmlFromObject(BaseServerDataObject obj)
+            {
+                XMLOBJECT result = new XMLOBJECT();
+                result.Object = obj;
+                return result.ToXmlString();
+            }
+
+            public BaseServerDataObject ObjectFromXml(string xml)
+            {
+                return xml.FromXmlString<XMLOBJECT>().Object as BaseServerDataObject;
+            }
+        }
+
+        private static IXmlSerializer _CurrentSerializer = null;
+        private static IXmlSerializer CurrentSerializer
+        {
+            get
+            {
+                if (_CurrentSerializer == null)
+                {
+                    Type t = typeof(XmlSerializer<,>);
+                    Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Server");
+                    Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Server");
+
+                    Type result = t.MakeGenericType(xmlCollection, xmlObj);
+
+                    _CurrentSerializer = Activator.CreateInstance(result) as IXmlSerializer;
+                    if (_CurrentSerializer == null) throw new ApplicationException("Cannot create instance of KistlService.XmlSerializer");
+                }
+
+                return _CurrentSerializer;
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Implementierung der GetList Methode
         /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
@@ -34,7 +88,8 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        return ServerObjectFactory.GetServerObject(type).GetList();
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetList();
+                        return CurrentSerializer.XmlFromList(lst);
                     }
                 }
             }
@@ -63,7 +118,8 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        return ServerObjectFactory.GetServerObject(type).GetListOf(ID, property);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetListOf(ID, property);
+                        return CurrentSerializer.XmlFromList(lst);
                     }
                 }
             }
@@ -91,7 +147,8 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        return ServerObjectFactory.GetServerObject(type).GetObject(ID);
+                        BaseServerDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetObject(ID);
+                        return CurrentSerializer.XmlFromObject(obj);
                     }
                 }
             }
@@ -111,7 +168,7 @@ namespace Kistl.Server
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public string SetObject(ObjectType type, string obj)
+        public string SetObject(ObjectType type, string xml)
         {
             try
             {
@@ -119,7 +176,9 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        return ServerObjectFactory.GetServerObject(type).SetObject(obj);
+                        BaseServerDataObject obj = CurrentSerializer.ObjectFromXml(xml);
+                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).SetObject(obj);
+                        return CurrentSerializer.XmlFromObject(obj);
                     }
                 }
             }

@@ -5,9 +5,74 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using System.Xml;
+using System.Runtime.Serialization;
 
 namespace Kistl.API
 {
+    public class KistlServiceStreamsMessage
+    {
+        public ObjectType Type {get; set;}
+        public int ID { get; set; }
+        public string Property { get; set; }
+
+        public KistlServiceStreamsMessage()
+        {
+        }
+
+        public KistlServiceStreamsMessage(System.IO.Stream msg)
+        {
+            FromStream(msg);
+        }
+
+        public void ToStream(System.IO.Stream msg)
+        {
+            System.IO.BinaryWriter sw = new System.IO.BinaryWriter(msg);
+
+            sw.Write(Type.Namespace);
+            sw.Write(Type.Classname);
+            sw.Write(ID);
+            sw.Write(Property ?? "");
+        }
+
+        public System.IO.MemoryStream ToStream()
+        {
+            System.IO.MemoryStream s = new System.IO.MemoryStream();
+            ToStream(s);
+            return s;
+        }
+
+        public void FromStream(System.IO.Stream msg)
+        {
+            System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
+
+            Type = new ObjectType();
+            Type.Namespace = sr.ReadString();
+            Type.Classname = sr.ReadString();
+            ID = sr.ReadInt32();
+            Property = sr.ReadString();
+        }
+    }
+
+    [ServiceContract]
+    public interface IKistlServiceStreams
+    {
+        [OperationContract]
+        [FaultContract(typeof(ApplicationException))]
+        System.IO.MemoryStream GetObject(System.IO.MemoryStream msg);
+
+        [OperationContract]
+        [FaultContract(typeof(ApplicationException))]
+        System.IO.MemoryStream SetObject(System.IO.MemoryStream msg);
+
+        [OperationContract]
+        [FaultContract(typeof(ApplicationException))]
+        System.IO.MemoryStream GetList(System.IO.MemoryStream msg);
+
+        [OperationContract]
+        [FaultContract(typeof(ApplicationException))]
+        System.IO.MemoryStream GetListOf(System.IO.MemoryStream msg);
+    }
+
     /// <summary>
     /// Servicekontrakt für das Kistl Service
     /// </summary>

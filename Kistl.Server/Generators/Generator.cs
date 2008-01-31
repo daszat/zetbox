@@ -36,7 +36,7 @@ namespace Kistl.Server.Generators
             options.OutputAssembly = Helper.CodeGenPath + @"\bin\Kistl.Objects." + type + ".dll";
             options.IncludeDebugInformation = true;
             options.GenerateExecutable = false;
-            options.TreatWarningsAsErrors = true;
+            options.TreatWarningsAsErrors = false; // true in Production!!!
             options.ReferencedAssemblies.AddRange(new string[] {
                     Helper.CodeGenPath + @"\bin\Kistl.API.dll",
                     Helper.CodeGenPath + @"\bin\Kistl.API." + type + ".dll",

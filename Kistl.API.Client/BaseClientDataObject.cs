@@ -32,7 +32,7 @@ namespace Kistl.API.Client
                 // Calc Objectstate
                 if (_ObjectState != DataObjectState.Deleted)
                 {
-                    if (ID == Helper.INVALIDID)
+                    if (ID == API.Helper.INVALIDID)
                     {
                         _ObjectState = DataObjectState.New;
                     }
@@ -96,5 +96,22 @@ namespace Kistl.API.Client
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+            Type.ToBinary(sw);
+            ID.ToBinary(sw);
+        }
+
+        public virtual void FromStream(System.IO.BinaryReader sr)
+        {
+            ObjectType t = new ObjectType();
+            t = t.FromBinary(sr);
+
+            if (!Type.Equals(t))
+                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", Type, t));
+
+            ID = ID.FromBinary(sr);
+        }
     }
 }

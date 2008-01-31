@@ -3,7 +3,7 @@
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartArguments>ConfigArthur.xml -generate -database</StartArguments>
+    <StartArguments>ConfigArthur.xml</StartArguments>
     <StartWorkingDirectory>D:\Programmierung\Kistl\Kistl.Server\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>
