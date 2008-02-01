@@ -122,6 +122,8 @@
     <None Include="Database\Database.11.sql" />
     <None Include="Database\Database.12.sql" />
     <None Include="Database\Database.13.sql" />
+    <None Include="Database\Database.14.sql" />
+    <None Include="Database\Database.15.sql" />
     <None Include="obj\Database.03.sql" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
