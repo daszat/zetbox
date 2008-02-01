@@ -7,7 +7,7 @@ using Kistl.API.Client;
 
 namespace Kistl.API.Client
 {
-    public class KistlContext : IDisposable
+    public class KistlContext : IKistlContext, IDisposable
     {
         private List<BaseClientDataObject> _objects = new List<BaseClientDataObject>();
 
@@ -47,25 +47,27 @@ namespace Kistl.API.Client
 
         public BaseClientDataObject Create(ObjectType type)
         {
-            BaseClientDataObject obj = ClientHelper.NewBaseClientDataObject(type);
+            BaseClientDataObject obj = (BaseClientDataObject)type.NewDataObject();
             Attach(obj);
             return obj;
         }
 
-        public void Attach(BaseClientDataObject obj)
+        public void Attach(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            if (_objects.Contains(obj)) throw new InvalidOperationException("Object is already attached to this context");
-            _objects.Add(obj);
-            obj.AttachToContext(this);
+            BaseClientDataObject clientObj = (BaseClientDataObject)obj;
+            if (_objects.Contains(clientObj)) throw new InvalidOperationException("Object is already attached to this context");
+            _objects.Add(clientObj);
+            clientObj.AttachToContext(this);
         }
 
-        public void Dettach(BaseClientDataObject obj)
+        public void Dettach(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
-            _objects.Remove(obj);
-            obj.DetachFromContext(this);
+            BaseClientDataObject clientObj = (BaseClientDataObject)obj;
+            if (!_objects.Contains(clientObj)) throw new InvalidOperationException("This Object does not belong to this context");
+            _objects.Remove(clientObj);
+            clientObj.DetachFromContext(this);
         }
 
         public void SubmitChanges()
@@ -80,13 +82,13 @@ namespace Kistl.API.Client
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
                     // client.SetObject(obj.Type, obj);
-                    Proxy.Current.SetObject(obj.Type, obj);
+                    Proxy.Current.SetObject(this, obj.Type, obj);
                     objectsToDetach.Add(obj);
                 }
                 else
                 {
                     // BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
-                    BaseClientDataObject newobj = Proxy.Current.SetObject(obj.Type, obj);
+                    BaseClientDataObject newobj = Proxy.Current.SetObject(this, obj.Type, obj);
                     newobj.CopyTo(obj);
                 }
 

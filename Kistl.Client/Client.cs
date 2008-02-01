@@ -11,6 +11,7 @@ namespace Kistl.Client
     {
         public Client()
         {
+            Kistl.API.ObjectType.AsClient();
         }
 
         /// <summary>

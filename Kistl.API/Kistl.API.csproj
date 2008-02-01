@@ -63,11 +63,13 @@
   <ItemGroup>
     <Compile Include="APIInit.cs" />
     <Compile Include="AssemblyLoader.cs" />
+    <Compile Include="BinarySerializer.cs" />
     <Compile Include="Configuration\KistlConfig.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
     <Compile Include="IKistlAppDomain.cs" />
+    <Compile Include="IKistlContext.cs" />
     <Compile Include="IKistlService.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

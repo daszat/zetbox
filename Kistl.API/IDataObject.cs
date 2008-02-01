@@ -39,6 +39,9 @@ namespace Kistl.API
 
         void NotifyPreSave();
         void NotifyPostSave();
+
+        void ToStream(System.IO.BinaryWriter sw);
+        void FromStream(IKistlContext ctx, System.IO.BinaryReader sr);
     }
 
     public interface IXmlObjectCollection

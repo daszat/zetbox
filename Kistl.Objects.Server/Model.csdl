@@ -191,6 +191,7 @@
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty">
     <NavigationProperty Name="ReferenceProperty" Relationship="Model.FK_BackReferenceProperty_ObjectReferenceProperty" FromRole="B_BackReferenceProperty" ToRole="A_ObjectReferenceProperty" />
+    <Property Name="PreFetchToClient" Type="Boolean" Nullable="true" />
   </EntityType>
   <EntityType Name="Module">
     <Key>

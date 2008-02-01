@@ -36,6 +36,7 @@ namespace Kistl.Server
         /// </summary>
         public Server()
         {
+            Kistl.API.ObjectType.AsServer();
             // Preload Kistl.Objects.Server.dll so the Mapping Resources will be loaded
             // Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
             Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
@@ -94,13 +95,13 @@ namespace Kistl.Server
                 hostStreams.Open();
 
                 serverStarted.Set();
+            }
 
-                Trace.TraceInformation("WCF Server started");
+            Trace.TraceInformation("WCF Server started");
 
-                while (host.State == CommunicationState.Opened)
-                {
-                    Thread.Sleep(100);
-                }
+            while (host.State == CommunicationState.Opened)
+            {
+                Thread.Sleep(100);
             }
         }
 

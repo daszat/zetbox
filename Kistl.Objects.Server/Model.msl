@@ -85,6 +85,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
         <MappingFragment StoreEntitySet="BackReferenceProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PreFetchToClient" ColumnName="PreFetchToClient" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

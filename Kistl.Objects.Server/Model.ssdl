@@ -234,6 +234,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_ReferenceProperty" Type="int" Nullable="true" />
+    <Property Name="PreFetchToClient" Type="bit" Nullable="true" />
   </EntityType>
   <EntityType Name="Module">
     <Key>

@@ -23,10 +23,10 @@ namespace Kistl.API.Client
 
         internal List<T> GetListOf(int ID, string propertyName)
         {
-            //IClientObject client = ClientObjectFactory.GetClientObject();
-            //List<T> result = client.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
-            List<T> result = Proxy.Current.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
-            result.ForEach(r => _context.Attach(r as BaseClientDataObject));
+            List<T> result = Proxy.Current.GetListOf(_context, _type, ID, propertyName).OfType<T>().ToList();
+            //result.ForEach(r => _context.Attach(r as BaseClientDataObject));
+            result.ForEach<BaseClientDataObject>(r => CacheController<BaseClientDataObject>.Current.Set(r.Type, r.ID,
+                        (BaseClientDataObject)(r).Clone()) );
             return result;
         }
 
@@ -53,17 +53,14 @@ namespace Kistl.API.Client
         {
             Visit(e);
 
-            // IClientObject client = ClientObjectFactory.GetClientObject();
-
             if (SearchType == SearchTypeEnum.GetList)
             {
-                //List<T> result = client.GetList(_type).OfType<T>().ToList();
-                List<T> result = Proxy.Current.GetList(_type).OfType<T>().ToList();
+                List<T> result = Proxy.Current.GetList(_context, _type).OfType<T>().ToList();
                 foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
                 {
-                    _context.Attach(obj);
-                    CacheController<BaseClientDataObject>.Current.Set(_type, obj.ID,
-                       (BaseClientDataObject)obj.Clone());
+                    CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
+                        (BaseClientDataObject)(obj).Clone());
+                    //    _context.Attach(obj);
                 }
                 return result;
             }
@@ -74,17 +71,16 @@ namespace Kistl.API.Client
                     T result = (T)(IDataObject)CacheController<BaseClientDataObject>.Current.Get(_type, ID);
                     if (result == null)
                     {
-                        result = (T)(IDataObject)Proxy.Current.GetObject(_type, ID);
+                        result = (T)(IDataObject)Proxy.Current.GetObject(_context, _type, ID);
                         if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
-
-                        CacheController<BaseClientDataObject>.Current.Set(_type, ID, 
+                        CacheController<BaseClientDataObject>.Current.Set(_type, ID,
                             (BaseClientDataObject)(result as BaseClientDataObject).Clone());
                     }
                     else
                     {
                         result = (T)(result as BaseClientDataObject).Clone();
-                    }
-                    _context.Attach(result as BaseClientDataObject);
+                        _context.Attach(result as BaseClientDataObject);
+                    }                    
                     return result;
                 }    
                 else if(SearchType == SearchTypeEnum.GetObjectOrNew)

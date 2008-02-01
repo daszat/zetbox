@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Kistl.API.Client
 {
-    internal class CacheController<T>
+    internal class CacheController<T> where T : ICloneable
     {
         private static CacheController<T> _current = new CacheController<T>();
         public static CacheController<T> Current

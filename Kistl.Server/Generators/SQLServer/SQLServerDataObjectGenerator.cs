@@ -954,11 +954,17 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 if (p is ValueTypeProperty)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.{0}.ToBinary(sw)", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
                 }
                 else if (p is ObjectReferenceProperty)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.fk_{0}.ToBinary(sw)", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.fk_{0}, sw)", p.PropertyName)));
+                }
+                else if (p is BackReferenceProperty 
+                    && clientserver == ClientServerEnum.Server 
+                    && ((BackReferenceProperty)p).PreFetchToClient)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}.OfType<IDataObject>(), sw)", p.PropertyName)));
                 }
             }
 
@@ -967,18 +973,25 @@ namespace Kistl.Server.Generators.SQLServer
             m.Name = "FromStream";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
-            m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));// TODO: Das ist C# spezifisch
 
             foreach (BaseProperty p in objClass.Properties)
             {
                 if (p is ValueTypeProperty)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.{0} = this.{0}.FromBinary(sr)", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));
                 }
                 else if (p is ObjectReferenceProperty)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("this.fk_{0} = this.fk_{0}.FromBinary(sr)", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName)));
+                }
+                else if (p is BackReferenceProperty
+                    && clientserver == ClientServerEnum.Client
+                    && ((BackReferenceProperty)p).PreFetchToClient)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr, ctx)", p.PropertyName)));
                 }
             }
         }

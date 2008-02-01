@@ -9,7 +9,7 @@ using Kistl.API.Configuration;
 
 namespace Kistl.API.Server
 {
-    public class KistlDataContext : ObjectContext, IDisposable
+    public class KistlDataContext : ObjectContext, IKistlContext, IDisposable
     {
         [ThreadStatic]
         private static KistlDataContext _Current = null;
@@ -138,5 +138,19 @@ namespace Kistl.API.Server
 
             return result;
         }
+
+        #region IKistlContext Members
+
+        public void Attach(IDataObject obj)
+        {
+            // Do nothing yet
+        }
+
+        public void Dettach(IDataObject obj)
+        {
+            // Do nothing yet
+        }
+
+        #endregion
     }
 }

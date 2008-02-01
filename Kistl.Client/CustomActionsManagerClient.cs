@@ -70,14 +70,6 @@ namespace Kistl.Client
                         /// Prepare Assemblies
                         List<Kistl.App.Base.Assembly> aList = ctx.GetQuery<Kistl.App.Base.Assembly>().ToList();
 
-                        /// Prepare MethodInvokations
-                        Dictionary<int, List<MethodInvocation>> miDict = new Dictionary<int, List<MethodInvocation>>();
-                        foreach (MethodInvocation mi in ctx.GetQuery<MethodInvocation>())
-                        {
-                            if (!miDict.ContainsKey(mi.fk_InvokeOnObjectClass)) miDict[mi.fk_InvokeOnObjectClass] = new List<MethodInvocation>();
-                            miDict[mi.fk_InvokeOnObjectClass].Add(mi);
-                        }
-
                         StringBuilder warnings = new StringBuilder();
 
                         foreach (ObjectClass baseObjClass in Helper.ObjectClasses.Values)
@@ -85,10 +77,7 @@ namespace Kistl.Client
                             ObjectType objType = new ObjectType(baseObjClass.Module.Namespace, baseObjClass.ClassName);
                             foreach (ObjectClass objClass in Helper.GetObjectHierarchie(baseObjClass))
                             {
-                                if (!miDict.ContainsKey(objClass.ID)) continue;
-
-                                // foreach (MethodInvocation mi in objClass.MethodIvokations)
-                                foreach (MethodInvocation mi in miDict[objClass.ID])
+                                foreach (MethodInvocation mi in objClass.MethodIvokations)
                                 {
                                     try
                                     {
@@ -130,7 +119,8 @@ namespace Kistl.Client
                                     }
                                     catch (Exception ex)
                                     {
-                                        System.Diagnostics.Trace.TraceError(ex.ToString());
+                                        Helper.HandleError(ex);
+                                        return;
                                     }
                                 }
                             }
