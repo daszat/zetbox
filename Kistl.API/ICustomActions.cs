@@ -28,7 +28,7 @@ namespace Kistl.API
     /// <summary>
     /// Verwaltet ein CustomActionsManager Objekt. Muss vom Client bzw. Server initialisiert werden.
     /// </summary>
-    public class CustomActionsManagerFactory
+    public sealed class CustomActionsManagerFactory
     {
         private static ICustomActionsManager _manager = null;
 
@@ -57,6 +57,11 @@ namespace Kistl.API
                 return _manager;
             }
         }
+
+        /// <summary>
+        /// prevent this class from being instantiated
+        /// </summary>
+        private CustomActionsManagerFactory() { }
     }
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Data.Linq.Mapping;
+using System.Globalization;
 
 namespace Kistl.API.Server
 {
@@ -15,7 +16,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Attach to Events
         /// </summary>
-        public BaseServerDataObject()
+        protected BaseServerDataObject()
         {
             _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
             API.CustomActionsManagerFactory.Current.AttachEvents(this);
@@ -47,7 +48,7 @@ namespace Kistl.API.Server
             }
         }
 
-        protected ObjectType _type = null;
+        private ObjectType _type = null;
         public ObjectType Type
         {
             get
@@ -77,9 +78,11 @@ namespace Kistl.API.Server
             ReportPropertyChanged(null);
         }
 
-        public void CopyTo(BaseServerDataObject obj)
+        public void CopyTo(BaseServerDataObject target)
         {
-            obj.ID = this.ID;
+            if (target == null)
+                throw new ArgumentException("CopyTo target is null");
+            target.ID = this.ID;
         }
 
         public virtual object Clone()
@@ -95,9 +98,15 @@ namespace Kistl.API.Server
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
+            if (ctx == null)
+                throw new ArgumentException("null Context passed");
+            if (sr == null)
+                throw new ArgumentException("no BinaryReader passed");
+
             ObjectType t;
             BinarySerializer.FromBinary(out t, sr);
 
+            // TODO: improve Error reporting
             if (!Type.Equals(t))
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", Type, t));
 

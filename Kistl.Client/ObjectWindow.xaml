@@ -15,26 +15,26 @@
                     ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value}" />
             </DockPanel.LayoutTransform>
             <ToolBar DockPanel.Dock="Top">
-            <Button Click="MenuItem_Click_Save">Save</Button>
-            <Button Click="MenuItem_Click_Close" >Close</Button>
-            <Button Click="MenuItem_Click_Delete" >Delete</Button>
-            <Menu>
-                <MenuItem Header="Actions" Name="mnuActions" Click="mnuActions_Click">
-                </MenuItem>
-            </Menu>
-        </ToolBar>
+                <Button Click="MenuItem_Click_Save">Save</Button>
+                <Button Click="MenuItem_Click_Close" >Close</Button>
+                <Button Click="MenuItem_Click_Delete" >Delete</Button>
+                <Menu>
+                    <MenuItem Header="Actions" Name="mnuActions" Click="mnuActions_Click">
+                    </MenuItem>
+                </Menu>
+            </ToolBar>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Name="data">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type DockPanel}">
-                        <Setter Property="Margin" Value="5,5,5,0" />
-                    </Style>
-                </StackPanel.Resources>
-                <client:UndoManager.SharedUndoScope>
-                    <client:UndoManager />
-                </client:UndoManager.SharedUndoScope>
-            </StackPanel>
-        </ScrollViewer>
-        </DockPanel>        
+                <StackPanel Name="data">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type DockPanel}">
+                            <Setter Property="Margin" Value="5,5,5,0" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <client:UndoManager.SharedUndoScope>
+                        <client:UndoManager />
+                    </client:UndoManager.SharedUndoScope>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
     </DockPanel>
 </Window>

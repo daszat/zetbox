@@ -16,11 +16,16 @@ namespace Kistl.Server.Generators
         void Generate(Kistl.API.Server.KistlDataContext ctx, string path);
     }
 
-    public class DataObjectGeneratorFactory
+    public sealed class DataObjectGeneratorFactory
     {
         public static IDataObjectGenerator GetGenerator()
         {
             return new SQLServer.SQLServerDataObjectGenerator();
         }
+
+        /// <summary>
+        /// prevent this class from being instantiated
+        /// </summary>
+        private DataObjectGeneratorFactory() { }
     }
 }

@@ -92,7 +92,6 @@ namespace Kistl.API.Server
         }
     }
 
-
     /// <summary>
     /// Basis Objekt für die generische Server BL. Implementiert Linq
     /// Das ist nur für den generischen Teil gedacht, alle anderen Custom Actions
@@ -161,7 +160,7 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        private T GetObjectInstance(int ID)
+        private static T GetObjectInstance(int ID)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
             {
@@ -243,7 +242,7 @@ namespace Kistl.API.Server
         /// TODO: Bad hack, weil EF keine Relationen serialisieren kann
         /// </summary>
         /// <param name="obj"></param>
-        private void UpdateRelationships(T obj)
+        private static void UpdateRelationships(T obj)
         {
             Type type = obj.GetType();
             foreach (PropertyInfo pi in type.GetProperties())
@@ -269,7 +268,7 @@ namespace Kistl.API.Server
         /// Es gibt angeblich jetzt eine bessere MEthode
         /// </summary>
         /// <param name="obj"></param>
-        private void MarkEveryPropertyAsModified(BaseServerDataObject obj)
+        private static void MarkEveryPropertyAsModified(BaseServerDataObject obj)
         {
             ObjectStateEntry stateEntry = KistlDataContext.Current.ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
             MetadataWorkspace workspace = KistlDataContext.Current.MetadataWorkspace;

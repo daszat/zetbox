@@ -51,10 +51,10 @@ namespace Kistl.API.Server
         }
 
         #region IDisposable Members
-
+        // Special code to dispose of ThreadStatic instance
         void IDisposable.Dispose()
         {
-            if(_Current != null) _Current.Dispose();
+            if (_Current != null) _Current.Dispose();
             base.Dispose();
             _Current = null;
         }

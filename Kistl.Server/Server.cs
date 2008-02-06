@@ -13,7 +13,7 @@ namespace Kistl.Server
     /// <summary>
     /// Serversteuerung
     /// </summary>
-    public class Server : MarshalByRefObject, Kistl.API.IKistlAppDomain
+    public class Server : MarshalByRefObject, Kistl.API.IKistlAppDomain, IDisposable
     {
         /// <summary>
         /// WCF Service Host
@@ -130,5 +130,39 @@ namespace Kistl.Server
             GenerateCode();
             GenerateDatabase();
         }
+
+        #region IDisposable Members
+        // implement Dispose Pattern after 
+        // http://msdn2.microsoft.com/en-us/library/ms244737.aspx
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (host != null)
+                {
+                    host.Close();
+                    host = null;
+                }
+                if (hostStreams != null)
+                {
+                    hostStreams.Close();
+                    hostStreams = null;
+                }
+
+                if (serverStarted != null)
+                {
+                    serverStarted.Close();
+                    serverStarted = null;
+                }
+            }
+        }
+
+        #endregion
     }
 }

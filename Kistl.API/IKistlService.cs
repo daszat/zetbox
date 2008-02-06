@@ -117,7 +117,7 @@ namespace Kistl.API
         /// <returns>XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
-        string SetObject(ObjectType type, string obj);
+        string SetObject(ObjectType type, string xmlObj);
 
         /// <summary>
         /// Generates Objects & Database. Throws a Exception if failed.

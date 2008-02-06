@@ -168,7 +168,7 @@ namespace Kistl.Server
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public string SetObject(ObjectType type, string xml)
+        public string SetObject(ObjectType type, string xmlObj)
         {
             try
             {
@@ -176,7 +176,7 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        BaseServerDataObject obj = CurrentSerializer.ObjectFromXml(xml);
+                        BaseServerDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
                         obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).SetObject(obj);
                         return CurrentSerializer.XmlFromObject(obj);
                     }

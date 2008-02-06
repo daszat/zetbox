@@ -181,6 +181,32 @@ namespace Kistl.Client
 
                         data.Children.Add(dtCtrl);
                     }
+                    else if (p is Kistl.App.Base.StringProperty)
+                    {
+                        Kistl.App.Base.StringProperty prop = (Kistl.App.Base.StringProperty)p;
+                        // var s = prop.GetGUIRepresentation();
+                        string s = "<TextBox/>";
+                        // data.Children.Add(s)
+                        // TODO: since s is a String and no Control, we create it here manually:
+                        {
+                            // Neues Bearbeitungscontrol erzeugen
+                            Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
+
+                            // Bezeichnung setzen
+                            txt.Label = p.PropertyName;
+                            txt.ToolTip = p.AltText;
+
+                            // Set Binding, damit werden Änderungen automatisch übernommen.
+                            Binding b = new Binding(p.PropertyName);
+                            b.Mode = BindingMode.TwoWay;
+                            b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                            b.NotifyOnSourceUpdated = true;
+                            b.NotifyOnTargetUpdated = true;
+                            txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
+
+                            data.Children.Add(txt);
+                        }
+                    }
                     else
                     {
                         // Neues Bearbeitungscontrol erzeugen

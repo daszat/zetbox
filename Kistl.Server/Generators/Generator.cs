@@ -6,7 +6,7 @@ using System.CodeDom.Compiler;
 
 namespace Kistl.Server.Generators
 {
-    public class Generator
+    public sealed class Generator
     {
         public static void GenerateCode()
         {
@@ -83,5 +83,10 @@ namespace Kistl.Server.Generators
             GenerateCode();
             GenerateDatabase();
         }
+
+        /// <summary>
+        /// prevent this class from being instatiated
+        /// </summary>
+        private Generator() { }
     }
 }

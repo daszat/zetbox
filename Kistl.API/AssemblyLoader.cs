@@ -36,7 +36,7 @@ namespace Kistl.API
         /// <param name="sender"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
+        internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (!Configuration.KistlConfig.IsInitialized) return null;
             Console.WriteLine("Resolving Assembly {0}", args.Name);

@@ -13,7 +13,7 @@ namespace Kistl.API
     /// <summary>
     /// Globale Helpermethoden
     /// </summary>
-    public class Helper
+    public sealed class Helper
     {
         public const int INVALIDID = -1;
 
@@ -45,6 +45,10 @@ namespace Kistl.API
                 return _WorkingFolder;
             }
         }
+        /// <summary>
+        /// prevent this class from being instantiated
+        /// </summary>
+        private Helper() { }
     }
 
     /// <summary>

@@ -14,8 +14,7 @@ namespace Kistl.API.Client
             API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
-        protected ObjectType _type = null;
-
+        private ObjectType _type = null;
         public ObjectType Type
         {
             get

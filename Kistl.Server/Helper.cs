@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Data.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.API.Server;
 using System.ServiceModel;
+using Kistl.API.Server;
+using Kistl.App.Base;
 
 namespace Kistl.Server
 {
     /// <summary>
     /// Server Helper
     /// </summary>
-    public class Helper
+    public sealed class Helper
     {
 
         public static void HandleError(Exception ex)
@@ -61,7 +57,7 @@ namespace Kistl.Server
             }
         }
 
-        public static List<ObjectClass> GetObjectHierarchie(KistlDataContext ctx, ObjectClass objClass)
+        public static ICollection<ObjectClass> GetObjectHierarchie(KistlDataContext ctx, ObjectClass objClass)
         {
             List<ObjectClass> result = new List<ObjectClass>();
             while (objClass != null)
@@ -73,5 +69,10 @@ namespace Kistl.Server
             result.Reverse();
             return result;
         }
+
+        /// <summary>
+        /// prevent this class from being instantiated
+        /// </summary>
+        private Helper() { }
     }
 }

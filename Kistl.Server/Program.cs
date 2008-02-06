@@ -11,7 +11,7 @@ namespace Kistl.Server
     /// <summary>
     /// Hauptprogramm
     /// </summary>
-    public class Program
+    public sealed class Program
     {
         static void Main(string[] args)
         {
@@ -63,5 +63,10 @@ namespace Kistl.Server
 
             server.Stop();
         }
+
+        /// <summary>
+        /// prevent this class from being instantiated
+        /// </summary>
+        private Program() { }
     }
 }

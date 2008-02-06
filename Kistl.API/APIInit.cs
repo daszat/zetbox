@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security.Permissions;
 
 namespace Kistl.API
 {
@@ -14,6 +15,7 @@ namespace Kistl.API
         /// <summary>
         /// Uses the default configuration DefaultConfig.xml in the current directory
         /// </summary>
+        [SecurityPermission(SecurityAction.Demand, ControlAppDomain = true)]
         public void Init()
         {
             Init("");
@@ -23,6 +25,7 @@ namespace Kistl.API
         /// Uses the given configuration file
         /// </summary>
         /// <param name="configFile">configuration file w/ or w/o path</param>
+        [SecurityPermission(SecurityAction.LinkDemand, ControlAppDomain=true)]
         public void Init(string configFile)
         {
             // Load Configuration

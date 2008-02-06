@@ -10,11 +10,16 @@ namespace Kistl.Server.Generators
         void Generate(Kistl.API.Server.KistlDataContext ctx);
     }
 
-    public class DatabaseGeneratorFactory
+    public sealed class DatabaseGeneratorFactory
     {
         public static IDatabaseGenerator GetGenerator()
         {
             return new SQLServer.SQLServerDatabaseGenerator();
         }
+
+        /// <summary>
+        /// prevent this class from being instatiated
+        /// </summary>
+        private DatabaseGeneratorFactory() { }
     }
 }

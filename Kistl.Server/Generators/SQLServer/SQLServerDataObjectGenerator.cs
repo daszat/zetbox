@@ -107,6 +107,10 @@ namespace Kistl.Server.Generators.SQLServer
                 new CodeTypeReference(typeof(System.Reflection.AssemblyFileVersionAttribute)),
                 new CodeAttributeArgument(new CodePrimitiveExpression("1.0.0.0"))));
 
+            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(CLSCompliantAttribute)),
+                new CodeAttributeArgument(new CodePrimitiveExpression(true))));
+
             if (clientServer == ClientServerEnum.Server)
             {
                 code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
@@ -289,7 +293,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (string.IsNullOrEmpty(prop.GetDataType())) throw new ApplicationException(
                  string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
-                     objClass.ClassName, prop.PropertyName, prop.GetDataType()));
+                     objClass.ClassName, prop.PropertyName));
 
             Type t = Type.GetType(prop.GetDataType());
             if (t == null) throw new ApplicationException(
@@ -583,7 +587,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (string.IsNullOrEmpty(prop.GetDataType())) throw new ApplicationException(
                  string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
-                     objClass.ClassName, prop.PropertyName, prop.GetDataType()));
+                     objClass.ClassName, prop.PropertyName));
 
             Type t = Type.GetType(prop.GetDataType());
             if (t == null) throw new ApplicationException(
