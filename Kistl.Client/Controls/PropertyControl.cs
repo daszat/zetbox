@@ -13,7 +13,7 @@ namespace Kistl.Client.Controls
     public class PropertyControl : UserControl
     {
         /// <summary>
-        /// Bezeichnung der Eigenschaft
+        /// A descriptive Label for this Property
         /// </summary>
         public string Label
         {
@@ -26,7 +26,7 @@ namespace Kistl.Client.Controls
             DependencyProperty.Register("Label", typeof(string), typeof(EditSimpleProperty));
 
         /// <summary>
-        /// Wert der Eigenschaft
+        /// The actual Value of this Property
         /// </summary>
         public object Value
         {
@@ -38,6 +38,9 @@ namespace Kistl.Client.Controls
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(object), typeof(EditSimpleProperty));
 
+        /// <summary>
+        /// Only display the Value, but do not allow to modify it
+        /// </summary>
         public bool IsReadOnly
         {
             get { return (bool)GetValue(IsReadOnlyProperty); }

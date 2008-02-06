@@ -3,6 +3,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -53,3 +54,9 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+
+// The Common Language Specification (CLS) defines naming restrictions, data types,
+// and rules to which assemblies must conform if they are to be used across programming
+// languages. This assembly should be compatible even if it is probably not useful.
+[assembly: CLSCompliant(true)]

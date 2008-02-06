@@ -22,11 +22,6 @@
  </ProjectOptions>
  <Targets>
   <AssemblyReferenceDirectories>
-   <Directory>$(ProjectDir)/../Kistl.API.Server/obj/Release/</Directory>
-   <Directory>$(ProjectDir)/../Kistl.API/obj/Release/</Directory>
-   <Directory>$(ProjectDir)/../Kistl.Objects.Server/obj/Release/</Directory>
-   <Directory>$(ProjectDir)/../Tracing/</Directory>
-   <Directory>$(ProjectDir)/obj/Release/</Directory>
    <Directory>$(ProjectDir)/Tracing/</Directory>
    <Directory>$(ProjectDir)/WPFLibrary/obj/Release/</Directory>
   </AssemblyReferenceDirectories>
@@ -6199,13 +6194,6 @@
    <Target Name="$(ProjectDir)/Kistl.API.Client/obj/Release/Kistl.API.Client.dll">
     <Modules>
      <Module Name="kistl.api.client.dll">
-      <Messages>
-       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2008-02-06 13:24:29Z">
-        <Issue Name="NoAttr">
-         <Item>Kistl.API.Client</Item>
-        </Issue>
-       </Message>
-      </Messages>
       <Namespaces>
        <Namespace Name="Kistl.API.Client">
         <Types>
@@ -7322,13 +7310,6 @@
    <Target Name="$(ProjectDir)/Kistl.App.Projekte.Client/obj/Release/Kistl.App.Projekte.Client.dll">
     <Modules>
      <Module Name="kistl.app.projekte.client.dll">
-      <Messages>
-       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2008-02-06 13:24:29Z">
-        <Issue Name="NoAttr">
-         <Item>Kistl.App.Projekte.Client</Item>
-        </Issue>
-       </Message>
-      </Messages>
       <Namespaces>
        <Namespace Name="Kistl.App.Base">
         <Types>
@@ -8134,13 +8115,6 @@
    <Target Name="$(ProjectDir)/Kistl.App.Projekte.Server/obj/Release/Kistl.App.Projekte.Server.dll">
     <Modules>
      <Module Name="kistl.app.projekte.server.dll">
-      <Messages>
-       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2008-02-06 13:24:29Z">
-        <Issue Name="NoAttr">
-         <Item>Kistl.App.Projekte.Server</Item>
-        </Issue>
-       </Message>
-      </Messages>
       <Namespaces>
        <Namespace Name="Kistl.App.Base">
         <Types>
@@ -8417,13 +8391,6 @@
    <Target Name="$(ProjectDir)/Kistl.Client/obj/Release/Kistl.Client.exe">
     <Modules>
      <Module Name="kistl.client.exe">
-      <Messages>
-       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2008-02-06 13:24:29Z">
-        <Issue Name="NoAttr">
-         <Item>Kistl.Client</Item>
-        </Issue>
-       </Message>
-      </Messages>
       <Namespaces>
        <Namespace Name="Kistl.Client">
         <Types>
@@ -16338,9 +16305,6 @@
    </Rule>
    <Rule TypeName="InterfaceMethodsShouldBeCallableByChildTypes" Category="Microsoft.Design" CheckId="CA1033">
     <Resolution Name="Default">Make '{0}' sealed (a breaking change if this class has previously shipped), implement the method non-explicitly, or implement a new method that exposes the functionality of '{1}' and is visible to derived classes.</Resolution>
-   </Rule>
-   <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
-    <Resolution Name="NoAttr">'{0}' should be marked with CLSCompliantAttribute and its value should be true.</Resolution>
    </Rule>
    <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
     <Resolution Name="Default">The 'this' parameter (or 'Me' in VB) of {0} is never used. Mark the member as static (or Shared in VB) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
