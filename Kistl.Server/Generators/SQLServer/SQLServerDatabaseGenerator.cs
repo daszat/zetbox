@@ -68,6 +68,7 @@ namespace Kistl.Server.Generators.SQLServer
             SqlCommand cmd = new SqlCommand("select dbo.fn_TableExists(@t)", db, tx);
             cmd.Parameters.AddWithValue("@t", objClass.TableName);
 
+            #region Create/Update Table
             if ((bool)cmd.ExecuteScalar())
             {
                 System.Diagnostics.Trace.TraceInformation("Checking Table " + objClass.TableName);
@@ -75,30 +76,33 @@ namespace Kistl.Server.Generators.SQLServer
                 {
                     // BackReferenceProperties sind uninteressant, diese ergeben sich
 
-                    cmd = new SqlCommand("select dbo.fn_ColumnExists(@t, @c)", db, tx);
-                    cmd.Parameters.AddWithValue("@t", objClass.TableName);
-                    if (p is ObjectReferenceProperty)
+                    if (!p.IsList)
                     {
-                        cmd.Parameters.AddWithValue("@c", "fk_" + p.PropertyName);
+                        cmd = new SqlCommand("select dbo.fn_ColumnExists(@t, @c)", db, tx);
+                        cmd.Parameters.AddWithValue("@t", objClass.TableName);
+                        if (p is ObjectReferenceProperty)
+                        {
+                            cmd.Parameters.AddWithValue("@c", "fk_" + p.PropertyName);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@c", p.PropertyName);
+                        }
+
+                        bool columnExists = (bool)cmd.ExecuteScalar();
+                        System.Diagnostics.Trace.TraceInformation("  " + (columnExists ? "Checking" : "Creating") + " Column " + objClass.TableName + "." + p.PropertyName);
+
+                        cmd = new SqlCommand("", db, tx);
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendFormat("alter table [{0}] ", objClass.TableName);
+                        sb.Append(columnExists ? " alter column " : " add ");
+
+                        sb.Append(GetColumnStmt(p));
+
+                        System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
+                        cmd.CommandText = sb.ToString();
+                        cmd.ExecuteNonQuery();
                     }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@c", p.PropertyName);
-                    }
-
-                    bool columnExists = (bool)cmd.ExecuteScalar();
-                    System.Diagnostics.Trace.TraceInformation("  " + (columnExists ? "Checking" : "Creating") + " Column " + objClass.TableName + "." + p.PropertyName);
-
-                    cmd = new SqlCommand("", db, tx);
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendFormat("alter table [{0}] ", objClass.TableName);
-                    sb.Append(columnExists ? " alter column " : " add ");
-
-                    sb.Append(GetColumnStmt(p));
-
-                    System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
-                    cmd.CommandText = sb.ToString();
-                    cmd.ExecuteNonQuery();
                 }
             }
             else
@@ -120,8 +124,11 @@ namespace Kistl.Server.Generators.SQLServer
                 foreach (Property p in objClass.Properties.OfType<Property>())
                 {
                     // BackReferenceProperties sind uninteressant, diese ergeben sich
-                    sb.Append(GetColumnStmt(p));
-                    sb.AppendLine(",");
+                    if (!p.IsList)
+                    {
+                        sb.Append(GetColumnStmt(p));
+                        sb.AppendLine(",");
+                    }
                 }
 
                 sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", objClass.ClassName);
@@ -132,6 +139,56 @@ namespace Kistl.Server.Generators.SQLServer
                 cmd.CommandText = sb.ToString();
                 cmd.ExecuteNonQuery();
             }
+            #endregion
+
+            #region Create/Update List Properties
+            foreach (Property p in objClass.Properties.OfType<Property>())
+            {
+                if (p.IsList)
+                {
+                    string tblName = p.ObjectClass.TableName + "_" + p.PropertyName + "Collection";
+                    cmd = new SqlCommand("select dbo.fn_TableExists(@t)", db, tx);
+                    cmd.Parameters.AddWithValue("@t", tblName);
+
+                    if ((bool)cmd.ExecuteScalar())
+                    {
+                        System.Diagnostics.Trace.TraceInformation("Checking Table " + tblName);
+
+                        cmd = new SqlCommand("", db, tx);
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendFormat("alter table [{0}] alter column ", tblName);
+
+                        sb.Append(GetColumnStmt(p));
+
+                        System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
+                        cmd.CommandText = sb.ToString();
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        System.Diagnostics.Trace.TraceInformation("Creating Table " + tblName);
+
+                        cmd = new SqlCommand("", db, tx);
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendFormat("create table [{0}] ( ", tblName);
+                        sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
+
+                        sb.AppendLine(string.Format("[fk_{0}] [int] NOT NULL, ", p.ObjectClass.ClassName));
+
+                        sb.Append(GetColumnStmt(p));
+                        sb.AppendLine(",");
+
+                        sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", tblName);
+                        sb.AppendLine();
+                        sb.Append(")");
+
+                        System.Diagnostics.Trace.TraceInformation("  " + sb.ToString());
+                        cmd.CommandText = sb.ToString();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            #endregion
         }
 
         /// <summary>

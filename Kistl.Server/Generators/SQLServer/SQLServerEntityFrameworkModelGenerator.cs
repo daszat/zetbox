@@ -527,7 +527,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteStartElement("EntitySet");
                     xml.WriteAttributeString("Name", otherType.Classname);
                     xml.WriteAttributeString("EntityType", "Model.Store." + otherType.Classname);
-                    xml.WriteAttributeString("Table", prop.ObjectClass.ClassName + "_" + prop.PropertyName + "Collection");
+                    xml.WriteAttributeString("Table", prop.ObjectClass.TableName + "_" + prop.PropertyName + "Collection");
                     xml.WriteEndElement(); // </EntitySet>
                 }
 
