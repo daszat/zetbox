@@ -29,7 +29,7 @@ namespace Kistl.API.Client.KistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetObject", ReplyAction="http://tempuri.org/IKistlService/SetObjectResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/SetObjectApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        string SetObject(Kistl.API.ObjectType type, string obj);
+        string SetObject(Kistl.API.ObjectType type, string xmlObj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/Generate", ReplyAction="http://tempuri.org/IKistlService/GenerateResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlService/GenerateApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
@@ -79,8 +79,8 @@ namespace Kistl.API.Client.KistlService {
             return base.Channel.GetObject(type, ID);
         }
         
-        public string SetObject(Kistl.API.ObjectType type, string obj) {
-            return base.Channel.SetObject(type, obj);
+        public string SetObject(Kistl.API.ObjectType type, string xmlObj) {
+            return base.Channel.SetObject(type, xmlObj);
         }
         
         public void Generate() {

@@ -68,6 +68,24 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </EntitySet>
                 }
 
+                var assocPropertiesList = from p in ctx.GetTable<Property>()
+                                          from o in objClassList
+                                          where p.ObjectClass.ID == o.ID && p.IsList
+                                          select p;
+
+                foreach (BaseProperty prop in assocPropertiesList)
+                {
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    xml.WriteStartElement("EntitySet");
+                    xml.WriteAttributeString("Name", otherType.Classname);
+                    xml.WriteAttributeString("EntityType", "Model." + otherType.Classname);
+                    xml.WriteEndElement(); // </EntitySet>
+                }
+
+
+                #region Relations
                 var assocProperties = from p in ctx.GetTable<BaseProperty>()
                                       from o in objClassList
                                       where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
@@ -93,9 +111,37 @@ namespace Kistl.Server.Generators.SQLServer
 
                     xml.WriteEndElement(); // </AssociationSet>
                 }
+                #endregion
+
+                #region List Properties Relations
+
+                foreach (BaseProperty prop in assocPropertiesList)
+                {
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    xml.WriteStartElement("AssociationSet");
+                    string assocName = "FK_" + otherType.Classname + "_" + prop.ObjectClass.ClassName;
+                    xml.WriteAttributeString("Name", assocName);
+                    xml.WriteAttributeString("Association", "Model." + assocName);
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "A_" + prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("EntitySet", GetRootClass(prop.ObjectClass).ClassName);
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "B_" + otherType.Classname);
+                    xml.WriteAttributeString("EntitySet", otherType.Classname);
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteEndElement(); // </AssociationSet>
+                }
+                #endregion
 
                 xml.WriteEndElement(); // </EntityContainer>
 
+                #region EntityType for Objects
                 foreach (ObjectClass obj in objClassList)
                 {
                     xml.WriteStartElement("EntityType");
@@ -160,7 +206,50 @@ namespace Kistl.Server.Generators.SQLServer
 
                     xml.WriteEndElement(); // </EntityType>
                 }
+                #endregion
 
+                #region EntityType for List Properties
+                foreach (BaseProperty prop in assocPropertiesList)
+                {
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    xml.WriteStartElement("EntityType");
+                    xml.WriteAttributeString("Name", otherType.Classname);
+
+                    xml.WriteStartElement("Key");
+                    xml.WriteStartElement("PropertyRef");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteEndElement(); // </PropertyRef>
+                    xml.WriteEndElement(); // </Key>
+
+                    xml.WriteStartElement("Property");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteAttributeString("Type", "Int32");
+                    xml.WriteAttributeString("Nullable", "false");
+                    xml.WriteEndElement(); // </Property>
+
+                    if (prop is ObjectReferenceProperty)
+                    {
+                    }
+                    else if (prop is ValueTypeProperty)
+                    {
+                        xml.WriteStartElement("Property");
+                        xml.WriteAttributeString("Name", prop.PropertyName);
+                        xml.WriteAttributeString("Type", Type.GetType(prop.GetDataType()).Name);
+                        if (prop is StringProperty)
+                        {
+                            xml.WriteAttributeString("MaxLength", ((StringProperty)prop).Length.ToString());
+                        }
+                        xml.WriteAttributeString("Nullable", "true");
+                        xml.WriteEndElement(); // </Property>
+                    }
+
+                    xml.WriteEndElement(); // </EntityType>
+                }
+                #endregion
+
+                #region Association of Object Relations
                 foreach (BaseProperty prop in assocProperties)
                 {
                     xml.WriteStartElement("Association");
@@ -182,6 +271,33 @@ namespace Kistl.Server.Generators.SQLServer
 
                     xml.WriteEndElement(); // </AssociationSet>
                 }
+                #endregion
+
+                #region Association of Property List Relations
+                foreach (BaseProperty prop in assocPropertiesList)
+                {
+                    xml.WriteStartElement("Association");
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    string assocName = "FK_" + otherType.Classname + "_" + prop.ObjectClass.ClassName;
+                    xml.WriteAttributeString("Name", assocName);
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "A_" + prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Type", "Model." + prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Multiplicity", "0..1");
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "B_" + otherType.Classname);
+                    xml.WriteAttributeString("Type", "Model." + otherType.Classname);
+                    xml.WriteAttributeString("Multiplicity", "*");
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteEndElement(); // </AssociationSet>
+                }
+                #endregion
 
                 xml.WriteEndElement(); // </Schema>
             }
@@ -250,6 +366,43 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </EntitySetMapping>
                 }
 
+                var assocPropertiesList = from p in ctx.GetTable<Property>()
+                                          from o in objClassList
+                                          where p.ObjectClass.ID == o.ID && p.IsList
+                                          select p;
+
+                foreach (BaseProperty prop in assocPropertiesList)
+                {
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    xml.WriteStartElement("EntitySetMapping");
+                    xml.WriteAttributeString("Name", otherType.Classname);
+
+                    xml.WriteStartElement("EntityTypeMapping");
+                    xml.WriteAttributeString("TypeName", "IsTypeOf(Model." + otherType.Classname + ")");
+
+                    xml.WriteStartElement("MappingFragment");
+                    xml.WriteAttributeString("StoreEntitySet", otherType.Classname);
+
+                    xml.WriteStartElement("ScalarProperty");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteAttributeString("ColumnName", "ID");
+                    xml.WriteEndElement(); // </ScalarProperty>
+
+                    xml.WriteStartElement("ScalarProperty");
+                    xml.WriteAttributeString("Name", prop.PropertyName);
+                    xml.WriteAttributeString("ColumnName", prop.PropertyName);
+                    xml.WriteEndElement(); // </ScalarProperty>
+
+                    xml.WriteEndElement(); // </MappingFragment>
+
+                    xml.WriteEndElement(); // </EntityTypeMapping>
+                    
+
+                    xml.WriteEndElement(); // </EntitySetMapping>
+                }
+
                 var assocProperties = from p in ctx.GetTable<BaseProperty>()
                                       from o in objClassList
                                       where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
@@ -282,6 +435,42 @@ namespace Kistl.Server.Generators.SQLServer
 
                     xml.WriteStartElement("Condition");
                     xml.WriteAttributeString("ColumnName", "fk_" + prop.PropertyName);
+                    xml.WriteAttributeString("IsNull", "false");
+                    xml.WriteEndElement(); // </Condition>
+
+
+                    xml.WriteEndElement(); // </AssociationSet>
+                }
+
+                foreach (BaseProperty prop in assocPropertiesList)
+                {
+                    xml.WriteStartElement("AssociationSetMapping");
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    string assocName = "FK_" + otherType.Classname + "_" + prop.ObjectClass.ClassName;
+                    xml.WriteAttributeString("Name", assocName);
+                    xml.WriteAttributeString("TypeName", "Model." + assocName);
+                    xml.WriteAttributeString("StoreEntitySet", otherType.Classname);
+
+                    xml.WriteStartElement("EndProperty");
+                    xml.WriteAttributeString("Name", "A_" + prop.ObjectClass.ClassName);
+                    xml.WriteStartElement("ScalarProperty");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteAttributeString("ColumnName", "fk_" + prop.ObjectClass.ClassName);
+                    xml.WriteEndElement(); // </ScalarProperty>
+                    xml.WriteEndElement(); // </EndProperty>
+
+                    xml.WriteStartElement("EndProperty");
+                    xml.WriteAttributeString("Name", "B_" + otherType.Classname);
+                    xml.WriteStartElement("ScalarProperty");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteAttributeString("ColumnName", "ID");
+                    xml.WriteEndElement(); // </ScalarProperty>
+                    xml.WriteEndElement(); // </EndProperty>
+
+                    xml.WriteStartElement("Condition");
+                    xml.WriteAttributeString("ColumnName", "fk_" + prop.ObjectClass.ClassName);
                     xml.WriteAttributeString("IsNull", "false");
                     xml.WriteEndElement(); // </Condition>
 
@@ -325,6 +514,24 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </EntitySet>
                 }
 
+                var assocPropertiesList = from p in ctx.GetTable<Property>()
+                                          from o in objClassList
+                                          where p.ObjectClass.ID == o.ID && p.IsList
+                                          select p;
+
+                foreach (Property prop in assocPropertiesList)
+                {
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    xml.WriteStartElement("EntitySet");
+                    xml.WriteAttributeString("Name", otherType.Classname);
+                    xml.WriteAttributeString("EntityType", "Model.Store." + otherType.Classname);
+                    xml.WriteAttributeString("Table", prop.ObjectClass.ClassName + "_" + prop.PropertyName + "Collection");
+                    xml.WriteEndElement(); // </EntitySet>
+                }
+
+
                 var assocProperties = from p in ctx.GetTable<BaseProperty>()
                                       from o in objClassList
                                       where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
@@ -351,6 +558,28 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </AssociationSet>
                 }
 
+                foreach (Property prop in assocPropertiesList)
+                {
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    xml.WriteStartElement("AssociationSet");
+                    string assocName = "FK_" + otherType.Classname + "_" + prop.ObjectClass.ClassName;
+                    xml.WriteAttributeString("Name", assocName);
+                    xml.WriteAttributeString("Association", "Model.Store." + assocName);
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "A_" + prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("EntitySet", prop.ObjectClass.ClassName);
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "B_" + otherType.Classname);
+                    xml.WriteAttributeString("EntitySet", otherType.Classname);
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteEndElement(); // </AssociationSet>
+                }
 
                 xml.WriteEndElement(); // </EntityContainer>
 
@@ -398,6 +627,53 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </EntityType>
                 }
 
+                foreach (Property prop in assocPropertiesList)
+                {
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    xml.WriteStartElement("EntityType");
+                    xml.WriteAttributeString("Name", otherType.Classname);
+
+                    xml.WriteStartElement("Key");
+                    xml.WriteStartElement("PropertyRef");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteEndElement(); // </PropertyRef>
+                    xml.WriteEndElement(); // </Key>
+
+                    xml.WriteStartElement("Property");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteAttributeString("Type", "int");
+                    xml.WriteAttributeString("Nullable", "false");
+                    xml.WriteAttributeString("StoreGeneratedPattern", "Identity");
+                    xml.WriteEndElement(); // </Property>
+
+                    xml.WriteStartElement("Property");
+                    xml.WriteAttributeString("Name", "fk_" + prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Type", "int");
+                    xml.WriteAttributeString("Nullable", "true");
+                    xml.WriteEndElement(); // </Property>
+
+                    xml.WriteStartElement("Property");
+                    if (prop is ObjectReferenceProperty)
+                    {
+                        xml.WriteAttributeString("Name", "fk_" + prop.PropertyName);
+                    }
+                    else
+                    {
+                        xml.WriteAttributeString("Name", prop.PropertyName);
+                    }
+                    xml.WriteAttributeString("Type", prop is ObjectReferenceProperty ? "int" : SQLServerHelper.GetDBType(prop.GetDataType()));
+                    if (prop is StringProperty)
+                    {
+                        xml.WriteAttributeString("MaxLength", ((StringProperty)prop).Length.ToString());
+                    }
+                    xml.WriteAttributeString("Nullable", "true");
+                    xml.WriteEndElement(); // </Property>
+
+                    xml.WriteEndElement(); // </EntityType>
+                }
+
                 foreach (BaseProperty prop in assocProperties)
                 {
                     xml.WriteStartElement("Association");
@@ -430,6 +706,48 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteAttributeString("Role", "B_" + prop.ObjectClass.ClassName);
                     xml.WriteStartElement("PropertyRef");
                     xml.WriteAttributeString("Name", "fk_" + prop.PropertyName);
+                    xml.WriteEndElement(); // </PropertyRef>
+                    xml.WriteEndElement(); // </Dependent>
+
+                    xml.WriteEndElement(); // </ReferentialConstraint>
+
+                    xml.WriteEndElement(); // </AssociationSet>
+                }
+
+                foreach (BaseProperty prop in assocPropertiesList)
+                {
+                    xml.WriteStartElement("Association");
+                    ObjectType otherType = new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+
+                    string assocName = "FK_" + otherType.Classname + "_" + prop.ObjectClass.ClassName;
+                    xml.WriteAttributeString("Name", assocName);
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "A_" + prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Type", "Model.Store." + prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Multiplicity", "0..1");
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteStartElement("End");
+                    xml.WriteAttributeString("Role", "B_" + otherType.Classname);
+                    xml.WriteAttributeString("Type", "Model.Store." + otherType.Classname);
+                    xml.WriteAttributeString("Multiplicity", "*");
+                    xml.WriteEndElement(); // </End>
+
+                    xml.WriteStartElement("ReferentialConstraint");
+
+                    xml.WriteStartElement("Principal");
+                    xml.WriteAttributeString("Role", "A_" + prop.ObjectClass.ClassName);
+                    xml.WriteStartElement("PropertyRef");
+                    xml.WriteAttributeString("Name", "ID");
+                    xml.WriteEndElement(); // </PropertyRef>
+                    xml.WriteEndElement(); // </Principal>
+
+                    xml.WriteStartElement("Dependent");
+                    xml.WriteAttributeString("Role", "B_" + otherType.Classname);
+                    xml.WriteStartElement("PropertyRef");
+                    xml.WriteAttributeString("Name", "fk_" + prop.ObjectClass.ClassName);
                     xml.WriteEndElement(); // </PropertyRef>
                     xml.WriteEndElement(); // </Dependent>
 

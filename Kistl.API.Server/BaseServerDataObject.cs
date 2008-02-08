@@ -114,7 +114,12 @@ namespace Kistl.API.Server
             BinarySerializer.FromBinary(out tmpID, sr);
             ID = tmpID;
 
-            ctx.Attach(this);
+            if (ctx != null) ctx.Attach(this);
         }
+    }
+
+    public abstract class BaseServerCollectionEntry : System.Data.Objects.DataClasses.EntityObject, ICollectionEntry
+    {
+        public abstract int ID { get; set; }
     }
 }

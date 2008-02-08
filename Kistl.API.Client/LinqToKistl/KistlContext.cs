@@ -75,20 +75,20 @@ namespace Kistl.API.Client
             // TODO: Add a better Cache Refresh Strategie
             CacheController<BaseClientDataObject>.Current.Clear();
 
-            // IClientObject client = ClientObjectFactory.GetClientObject();
             List<BaseClientDataObject> objectsToDetach = new List<BaseClientDataObject>();
             foreach (BaseClientDataObject obj in _objects)
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
-                    // client.SetObject(obj.Type, obj);
                     Proxy.Current.SetObject(this, obj.Type, obj);
                     objectsToDetach.Add(obj);
                 }
                 else
                 {
-                    // BaseClientDataObject newobj = client.SetObject(obj.Type, obj);
-                    BaseClientDataObject newobj = Proxy.Current.SetObject(this, obj.Type, obj);
+                    // Do not attach to context -> first Param is null
+                    BaseClientDataObject newobj = Proxy.Current.SetObject(null, obj.Type, obj);
+                    // TODO: Ich depp rufe da nur die Basisklasse auf
+                    // Umwandeln in eine virtuelle Funktione!!!!
                     newobj.CopyTo(obj);
                 }
 

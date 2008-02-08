@@ -69,12 +69,23 @@ namespace Kistl.API
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
         }
 
-        public static void ToBinary(IEnumerable<IDataObject> val, System.IO.BinaryWriter sw)
+        public static void ToBinary<T>(IEnumerable<T> val, System.IO.BinaryWriter sw) where T : IDataObject
         {
             foreach (IDataObject obj in val)
             {
                 ToBinary(true, sw);
                 obj.ToStream(sw);
+            }
+
+            ToBinary(false, sw);
+        }
+
+        public static void ToBinary<T>(ICollection<T> val, System.IO.BinaryWriter sw) where T : ICollectionEntry
+        {
+            foreach (ICollectionEntry obj in val)
+            {
+                ToBinary(true, sw);
+                // obj.ToStream(sw);
             }
 
             ToBinary(false, sw);
@@ -163,6 +174,25 @@ namespace Kistl.API
 
                 IDataObject obj = objType.NewDataObject();
                 obj.FromStream(ctx, sr);
+
+                val.Add((T)obj);
+            }
+        }
+
+        public static void FromBinary<T>(out ICollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
+        {
+            val = new List<T>();
+            FromBinary<T>(val, sr);
+        }
+
+        public static void FromBinary<T>(ICollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
+        {
+            if (val == null) throw new ArgumentNullException("val");
+
+            while (sr.ReadBoolean())
+            {
+                T obj = new T();
+                // obj.FromStream(ctx, sr);
 
                 val.Add((T)obj);
             }

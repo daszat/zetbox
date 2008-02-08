@@ -44,6 +44,14 @@ namespace Kistl.API
         void FromStream(IKistlContext ctx, System.IO.BinaryReader sr);
     }
 
+    public interface ICollectionEntry
+    {
+        /// <summary>
+        /// Jeder hat eine ID
+        /// </summary>
+        int ID { get; set; }
+    }
+
     public interface IXmlObjectCollection
     {
         List<object> Objects { get; }

@@ -40,6 +40,11 @@ namespace Kistl.App.Base
                 obj.PropertyName);
         }
 
+        public void OnToString_Property(Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            if(obj.IsList) e.Result += " [0..n]";
+        }
+
         public void OnToString_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.ObjectClass.Module.Namespace + "." +

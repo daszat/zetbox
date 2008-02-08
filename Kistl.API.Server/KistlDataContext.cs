@@ -86,13 +86,13 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public IQueryable<T> GetTable<T>()
         {
-            Type t = GetRootType(typeof(T));
-            if (!_table.ContainsKey(t))
+            if (!_table.ContainsKey(typeof(T)))
             {
-                _table[t] = this.CreateQuery<T>("[" + t.Name + "]");
+                Type t = GetRootType(typeof(T));
+                _table[typeof(T)] = this.CreateQuery<T>("[" + t.Name + "]");
             }
 
-            return (_table[t] as ObjectQuery<T>).OfType<T>();
+            return ((ObjectQuery<T>)_table[typeof(T)]).OfType<T>();
         }
 
         /// <summary>

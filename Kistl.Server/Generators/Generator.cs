@@ -6,13 +6,19 @@ using System.CodeDom.Compiler;
 
 namespace Kistl.Server.Generators
 {
+    public enum ClientServerEnum
+    {
+        Client,
+        Server,
+    }
+
     public sealed class Generator
     {
         public static void GenerateCode()
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                IDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
+                BaseDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
                 IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
                 using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
                 {

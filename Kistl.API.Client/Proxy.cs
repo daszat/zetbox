@@ -40,14 +40,14 @@ namespace Kistl.API.Client
             public BaseClientDataObject ObjectFromXml(IKistlContext ctx, string xml)
             {
                 BaseClientDataObject obj = xml.FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
-                ctx.Attach(obj);
+                if(ctx != null) ctx.Attach(obj);
                 return obj;
             }
 
             public IEnumerable ListFromXml(IKistlContext ctx, string xml)
             {
                 IEnumerable result = xml.FromXmlString<XMLCOLLECTION>().Objects;
-                result.ForEach<IDataObject>(o => ctx.Attach(o));
+                if (ctx != null) result.ForEach<IDataObject>(o => ctx.Attach(o));
                 return result;
             }
         }

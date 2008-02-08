@@ -114,7 +114,13 @@ namespace Kistl.API.Client
             BinarySerializer.FromBinary(out tmpID, sr);
             ID = tmpID;
 
-            ctx.Attach(this);
+            if (ctx != null) ctx.Attach(this);
         }
     }
+
+    public abstract class BaseClientCollectionEntry : ICollectionEntry
+    {
+        public abstract int ID { get; set; }
+    }
+
 }
