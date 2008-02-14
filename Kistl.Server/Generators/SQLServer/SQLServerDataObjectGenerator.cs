@@ -124,6 +124,8 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (clientServer == ClientServerEnum.Server)
             {
+                p.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
+
                 code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
                 new CodeAttributeArgument(
                     new CodePrimitiveExpression("Model")),

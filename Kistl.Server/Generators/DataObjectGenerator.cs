@@ -466,6 +466,30 @@ namespace Kistl.Server.Generators
 
             GenerateProperties_ValueTypeProperty_Collection(clientServer, code, objClass, prop, c, collectionClass, f, p,
                 navigationProperty, otherType, assocName);
+
+            #region Generate Stream Methods
+            // Create ToStream Method
+            CodeMemberMethod m = new CodeMemberMethod();
+            collectionClass.Members.Add(m);
+            m.Name = "ToStream";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
+            m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));// TODO: Das ist C# spezifisch
+
+            m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", prop.PropertyName)));
+ 
+            m = new CodeMemberMethod();
+            collectionClass.Members.Add(m);
+            m.Name = "FromStream";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));// TODO: Das ist C# spezifisch
+
+            m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", prop.PropertyName)));
+            #endregion
         }
         #endregion
 
@@ -827,7 +851,10 @@ namespace Kistl.Server.Generators
             {
                 if (p is Property && ((Property)p).IsList)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(this.{0}, sr)", p.PropertyName)));
+                    if(clientServer == ClientServerEnum.Client)
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));
+                    else
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(this.{0}, sr)", p.PropertyName)));
                 }
                 else if (p is ValueTypeProperty)
                 {

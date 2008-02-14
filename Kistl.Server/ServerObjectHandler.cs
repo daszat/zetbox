@@ -117,7 +117,7 @@ namespace Kistl.API.Server
         public IEnumerable GetList()
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
-            {
+            {                
                 var result = from a in KistlDataContext.Current.GetTable<T>()
                              select a;
 

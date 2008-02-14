@@ -50,6 +50,9 @@ namespace Kistl.API
         /// Jeder hat eine ID
         /// </summary>
         int ID { get; set; }
+
+        void ToStream(System.IO.BinaryWriter sw);
+        void FromStream(IKistlContext ctx, System.IO.BinaryReader sr);
     }
 
     public interface IXmlObjectCollection

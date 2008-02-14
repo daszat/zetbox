@@ -99,9 +99,9 @@ namespace Kistl.API.Server
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
             if (ctx == null)
-                throw new ArgumentException("null Context passed");
+                throw new ArgumentNullException("null Context passed");
             if (sr == null)
-                throw new ArgumentException("no BinaryReader passed");
+                throw new ArgumentNullException("no BinaryReader passed");
 
             ObjectType t;
             BinarySerializer.FromBinary(out t, sr);
@@ -121,5 +121,23 @@ namespace Kistl.API.Server
     public abstract class BaseServerCollectionEntry : System.Data.Objects.DataClasses.EntityObject, ICollectionEntry
     {
         public abstract int ID { get; set; }
+
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+            BinarySerializer.ToBinary(ID, sw);
+        }
+
+        public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("no BinaryReader passed");
+
+            ObjectType t;
+            BinarySerializer.FromBinary(out t, sr);
+
+            int tmpID;
+            BinarySerializer.FromBinary(out tmpID, sr);
+            ID = tmpID;
+        }
     }
 }

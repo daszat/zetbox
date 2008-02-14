@@ -121,6 +121,18 @@ namespace Kistl.API.Client
     public abstract class BaseClientCollectionEntry : ICollectionEntry
     {
         public abstract int ID { get; set; }
+
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+            BinarySerializer.ToBinary(ID, sw);
+        }
+
+        public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        {
+            int tmpID;
+            BinarySerializer.FromBinary(out tmpID, sr);
+            ID = tmpID;
+        }
     }
 
 }

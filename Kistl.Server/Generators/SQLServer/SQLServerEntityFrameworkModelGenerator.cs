@@ -179,7 +179,7 @@ namespace Kistl.Server.Generators.SQLServer
                             xml.WriteAttributeString("ToRole", "B_" + otherType.Classname);
                             xml.WriteEndElement(); // </NavigationProperty>
                         }
-                        else if (p is ObjectReferenceProperty)
+                        else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
                         {
                             xml.WriteStartElement("NavigationProperty");
                             xml.WriteAttributeString("Name", p.PropertyName);
@@ -190,7 +190,11 @@ namespace Kistl.Server.Generators.SQLServer
                             xml.WriteAttributeString("ToRole", "A_" + otherType.Classname);
                             xml.WriteEndElement(); // </NavigationProperty>
                         }
-                        else if (p is ValueTypeProperty)
+                        else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
+                        {
+                            throw new NotSupportedException("Lists of ObjectReferences are not supported yet");
+                        }
+                        else if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
                         {
                             xml.WriteStartElement("Property");
                             xml.WriteAttributeString("Name", p.PropertyName);
@@ -201,6 +205,18 @@ namespace Kistl.Server.Generators.SQLServer
                             }
                             xml.WriteAttributeString("Nullable", "true");
                             xml.WriteEndElement(); // </Property>
+                        }
+                        else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList)
+                        {
+                            xml.WriteStartElement("NavigationProperty");
+                            xml.WriteAttributeString("Name", p.PropertyName);
+                            ObjectType otherType = new ObjectType(obj.Module.Namespace,
+                                obj.ClassName + "_" + p.PropertyName + "CollectionEntry");
+                            string assocName = "FK_" + otherType.Classname + "_" + p.ObjectClass.ClassName;
+                            xml.WriteAttributeString("Relationship", "Model." + assocName);
+                            xml.WriteAttributeString("FromRole", "A_" + obj.ClassName);
+                            xml.WriteAttributeString("ToRole", "B_" + otherType.Classname);
+                            xml.WriteEndElement(); // </NavigationProperty>
                         }
                     }
 
@@ -318,7 +334,7 @@ namespace Kistl.Server.Generators.SQLServer
             xml.WriteAttributeString("ColumnName", "ID");
             xml.WriteEndElement(); // </ScalarProperty>
 
-            foreach (BaseProperty p in obj.Properties.OfType<ValueTypeProperty>())
+            foreach (ValueTypeProperty p in obj.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList == false))
             {
                 xml.WriteStartElement("ScalarProperty");
                 xml.WriteAttributeString("Name", p.PropertyName);

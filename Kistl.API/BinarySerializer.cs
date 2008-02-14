@@ -85,7 +85,7 @@ namespace Kistl.API
             foreach (ICollectionEntry obj in val)
             {
                 ToBinary(true, sw);
-                // obj.ToStream(sw);
+                obj.ToStream(sw);
             }
 
             ToBinary(false, sw);
@@ -179,7 +179,7 @@ namespace Kistl.API
             }
         }
 
-        public static void FromBinary<T>(out ICollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
+        public static void FromBinary<T>(out List<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
         {
             val = new List<T>();
             FromBinary<T>(val, sr);
@@ -192,7 +192,7 @@ namespace Kistl.API
             while (sr.ReadBoolean())
             {
                 T obj = new T();
-                // obj.FromStream(ctx, sr);
+                obj.FromStream(null, sr);
 
                 val.Add((T)obj);
             }
