@@ -14,12 +14,12 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Client;
     
     
@@ -30,7 +30,6 @@ namespace Kistl.App.Base
         
         private bool _PreFetchToClient;
         
-        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {

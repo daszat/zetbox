@@ -18,12 +18,12 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Server;
     
     
@@ -90,8 +90,8 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ObjectClass", "B_BaseProperty")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ObjectClass", "B_BaseProperty")]
         public EntityCollection<Kistl.App.Base.BaseProperty> Properties
         {
             get
@@ -102,8 +102,8 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ObjectClass", "A_ObjectClass")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ObjectClass", "A_ObjectClass")]
         public Kistl.App.Base.ObjectClass BaseObjectClass
         {
             get
@@ -136,8 +136,8 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ObjectClass", "B_ObjectClass")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ObjectClass", "B_ObjectClass")]
         public EntityCollection<Kistl.App.Base.ObjectClass> SubClasses
         {
             get
@@ -148,8 +148,8 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_ObjectClass", "B_Method")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_ObjectClass", "B_Method")]
         public EntityCollection<Kistl.App.Base.Method> Methods
         {
             get
@@ -160,8 +160,8 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_Module", "A_Module")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_Module", "A_Module")]
         public Kistl.App.Base.Module Module
         {
             get
@@ -194,8 +194,8 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_Icon", "A_Icon")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_Icon", "A_Icon")]
         public Kistl.App.GUI.Icon DefaultIcon
         {
             get
@@ -228,8 +228,8 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_ObjectClass", "B_MethodInvocation")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_ObjectClass", "B_MethodInvocation")]
         public EntityCollection<Kistl.App.Base.MethodInvocation> MethodIvokations
         {
             get

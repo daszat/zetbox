@@ -16,12 +16,12 @@ namespace Kistl.App.Projekte
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Server;
     
     
@@ -73,8 +73,8 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "B_Task")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "B_Task")]
         public EntityCollection<Kistl.App.Projekte.Task> Tasks
         {
             get
@@ -85,8 +85,8 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_Mitarbeiter", "A_Mitarbeiter")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_Mitarbeiter", "A_Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get
@@ -145,8 +145,8 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kostentraeger_Projekt", "B_Kostentraeger")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kostentraeger_Projekt", "B_Kostentraeger")]
         public EntityCollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
         {
             get
@@ -157,8 +157,8 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Projekt", "B_Auftrag")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Projekt", "B_Auftrag")]
         public EntityCollection<Kistl.App.Projekte.Auftrag> Auftraege
         {
             get

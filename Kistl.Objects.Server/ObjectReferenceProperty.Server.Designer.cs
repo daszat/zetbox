@@ -16,12 +16,12 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Server;
     
     
@@ -31,8 +31,8 @@ namespace Kistl.App.Base
         
         private int _fk_ReferenceObjectClass = Helper.INVALIDID;
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass", "A_ObjectClass")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass", "A_ObjectClass")]
         public Kistl.App.Base.ObjectClass ReferenceObjectClass
         {
             get

@@ -17,12 +17,12 @@ namespace Kistl.App.Zeiterfassung
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Server;
     
     
@@ -61,8 +61,8 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Taetigkeit_Zeitkonto", "A_Zeitkonto")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Taetigkeit_Zeitkonto", "A_Zeitkonto")]
         public Kistl.App.Zeiterfassung.Zeitkonto Zeitkonto
         {
             get
@@ -95,8 +95,8 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Taetigkeit_Mitarbeiter", "A_Mitarbeiter")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Taetigkeit_Mitarbeiter", "A_Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get

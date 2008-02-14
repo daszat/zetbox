@@ -17,39 +17,11 @@ namespace Kistl.Client.Controls
     /// <summary>
     /// Zeigt eine Bool Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditBoolProperty : UserControl
+    public partial class EditBoolProperty : PropertyControl
     {
         public EditBoolProperty()
         {
             InitializeComponent();
-            Label = "Label";
-            Value = false;
         }
-
-        /// <summary>
-        /// Bezeichnung der Eigenschaft
-        /// </summary>
-        public string Label
-        {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(EditBoolProperty));
-
-        /// <summary>
-        /// Wert der Eigenschaft
-        /// </summary>
-        public bool? Value
-        {
-            get { return (bool?)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(bool?), typeof(EditBoolProperty));
     }
 }

@@ -46,6 +46,7 @@ namespace Kistl.Client
             {
                 foreach (InvokeInfo ii in customAction[obj.Type])
                 {
+                    // TODO: Fix Case 316
                     ii.CLREvent.AddEventHandler(obj, Delegate.CreateDelegate(
                         ii.CLREvent.EventHandlerType, ii.Instance, ii.CLRMethod));
                 }

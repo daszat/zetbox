@@ -17,49 +17,11 @@ namespace Kistl.Client.Controls
     /// <summary>
     /// Zeigt eine einfache Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditDateTimeProperty : UserControl
+    public partial class EditDateTimeProperty : PropertyControl
     {
         public EditDateTimeProperty()
         {
             InitializeComponent();
-            Label = "Label";
-            Value = "Value";
         }
-
-        /// <summary>
-        /// Bezeichnung der Eigenschaft
-        /// </summary>
-        public string Label
-        {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(EditDateTimeProperty));
-
-        /// <summary>
-        /// Wert der Eigenschaft
-        /// </summary>
-        public object Value
-        {
-            get { return (object)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(object), typeof(EditDateTimeProperty));
-
-        public bool IsReadOnly
-        {
-            get { return (bool)GetValue(IsReadOnlyProperty); }
-            set { SetValue(IsReadOnlyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ReadOnly.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsReadOnlyProperty =
-            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(EditDateTimeProperty));
     }
 }

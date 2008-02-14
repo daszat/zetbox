@@ -147,71 +147,13 @@ namespace Kistl.Client
                             }
                         }
                     }
-                    else if (p is Kistl.App.Base.BoolProperty)
-                    {
-                        // Neues Bearbeitungscontrol erzeugen
-                        Controls.EditBoolProperty boolCtrl = new Controls.EditBoolProperty();
-
-                        // Bezeichnung setzen
-                        boolCtrl.Label = p.PropertyName;
-                        boolCtrl.ToolTip = p.AltText;
-
-                        // Set Binding, damit werden Änderungen automatisch übernommen.
-                        Binding b = new Binding(p.PropertyName);
-                        b.Mode = BindingMode.TwoWay;
-                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                        b.NotifyOnSourceUpdated = true;
-                        b.NotifyOnTargetUpdated = true;
-                        boolCtrl.SetBinding(Controls.EditBoolProperty.ValueProperty, b);
-
-                        data.Children.Add(boolCtrl);
-                    }
-                    else if (p is Kistl.App.Base.DateTimeProperty)
-                    {
-                        // Neues Bearbeitungscontrol erzeugen
-                        Controls.EditDateTimeProperty dtCtrl = new Controls.EditDateTimeProperty();
-
-                        // Bezeichnung setzen
-                        dtCtrl.Label = p.PropertyName;
-                        dtCtrl.ToolTip = p.AltText;
-
-                        // Set Binding, damit werden Änderungen automatisch übernommen.
-                        Binding b = new Binding(p.PropertyName);
-                        b.Mode = BindingMode.TwoWay;
-                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                        b.NotifyOnSourceUpdated = true;
-                        b.NotifyOnTargetUpdated = true;
-                        dtCtrl.SetBinding(Controls.EditDateTimeProperty.ValueProperty, b);
-
-                        data.Children.Add(dtCtrl);
-                    }
-                    else if (p is Kistl.App.Base.StringProperty)
-                    {
-                        PropertyControl txt = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader( p.GetGUIRepresentation())));
-                        // Bezeichnung setzen
-                        // TODO: sollte auch gebunden werden
-                        txt.Label = p.PropertyName;
-                        txt.ToolTip = p.AltText;
-
-                        // Set Binding, damit werden Änderungen automatisch übernommen.
-                        Binding b = new Binding(p.PropertyName);
-                        b.Mode = BindingMode.TwoWay;
-                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                        b.NotifyOnSourceUpdated = true;
-                        b.NotifyOnTargetUpdated = true;
-                        txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
-
-                        data.Children.Add(txt);
-
-                    }
                     else
                     {
-                        // Neues Bearbeitungscontrol erzeugen
-                        Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
-
+                        PropertyControl control = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader( p.GetGUIRepresentation())));
                         // Bezeichnung setzen
-                        txt.Label = p.PropertyName;
-                        txt.ToolTip = p.AltText;
+                        // TODO: sollte auch gebunden werden
+                        control.Label = p.PropertyName;
+                        control.ToolTip = p.AltText;
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
                         Binding b = new Binding(p.PropertyName);
@@ -219,9 +161,9 @@ namespace Kistl.Client
                         b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                         b.NotifyOnSourceUpdated = true;
                         b.NotifyOnTargetUpdated = true;
-                        txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
+                        control.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
 
-                        data.Children.Add(txt);
+                        data.Children.Add(control);
                     }
                 }
                 #endregion

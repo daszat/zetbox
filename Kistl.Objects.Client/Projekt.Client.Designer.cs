@@ -14,12 +14,12 @@ namespace Kistl.App.Projekte
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Client;
     
     
@@ -66,7 +66,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Projekte.Task> Tasks
         {
@@ -77,7 +76,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
@@ -127,7 +125,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
         {
@@ -138,7 +135,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public List<Kistl.App.Projekte.Auftrag> Auftraege
         {

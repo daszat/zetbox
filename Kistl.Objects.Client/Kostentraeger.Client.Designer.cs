@@ -14,12 +14,12 @@ namespace Kistl.App.Zeiterfassung
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Client;
     
     
@@ -28,7 +28,6 @@ namespace Kistl.App.Zeiterfassung
         
         private int _fk_Projekt = Helper.INVALIDID;
         
-        [System.Diagnostics.DebuggerHidden()]
         [XmlIgnore()]
         public Kistl.App.Projekte.Projekt Projekt
         {

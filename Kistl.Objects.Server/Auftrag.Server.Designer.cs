@@ -18,12 +18,12 @@ namespace Kistl.App.Projekte
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.Collections;
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Kistl.API.Server;
     
     
@@ -64,8 +64,8 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Projekt", "A_Projekt")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Projekt", "A_Projekt")]
         public Kistl.App.Projekte.Projekt Projekt
         {
             get
@@ -98,8 +98,8 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Mitarbeiter", "A_Mitarbeiter")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Mitarbeiter", "A_Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get
@@ -145,8 +145,8 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Kunde", "A_Kunde")]
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Kunde", "A_Kunde")]
         public Kistl.App.Projekte.Kunde Kunde
         {
             get
