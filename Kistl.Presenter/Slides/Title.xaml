@@ -1,7 +1,7 @@
-﻿<Page x:Class="WPFPresenter.Slides._01Slide"
+﻿<Page
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
+    xmlns:ctrl="clr-namespace:WPFPresenter.Controls;assembly=WPFPresenter"
 	FlowDirection="LeftToRight"
 	Width="1000" Height="600">
 

@@ -29,11 +29,13 @@ namespace WPFPresenter
             this.InitializeComponent();
             presentation = (Presentation)this.FindResource("presentation");
 
+#if DEBUG
             // When restarting this app, it will start the slide show in the last edited XAML page.
             // Made simpler by Arthur
             presentation.CurrentSlide = (from s in presentation.Slides
                                          select new { slide = s, dateLastWritten = File.GetLastWriteTime(s) })
                                         .OrderByDescending(r => r.dateLastWritten).First().slide;
+#endif
 
             // Initializes timer that causes the mouse cursor to disappear after 5 seconds.
             timer = new DispatcherTimer();
@@ -59,12 +61,12 @@ namespace WPFPresenter
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == Key.Left)
+            if (e.Key == Key.Left || e.Key == Key.PageUp || e.Key == Key.Up)
             {
                 presentation.GoBack();
                 e.Handled = true;
             }
-            else if (e.Key == Key.Right)
+            else if (e.Key == Key.Right || e.Key == Key.PageDown || e.Key == Key.Down)
             {
                 presentation.GoNext();
                 e.Handled = true;

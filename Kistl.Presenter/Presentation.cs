@@ -4,24 +4,68 @@ using System.Text;
 using System.Linq;
 using System.ComponentModel;
 using System.Windows.Controls;
+using System.Collections;
+using System.Resources;
+using System.Reflection;
 
 namespace WPFPresenter
 {
     public class Presentation : INotifyPropertyChanged
     {
+        public const string SlidesFile = @"Slides\Slides.txt";
         private List<string> slides = new List<string>();
         private int currentIndex = 0;
 
         public Presentation()
         {
-            foreach (Type t in this.GetType().Assembly.GetTypes())
+            if (System.IO.File.Exists(SlidesFile))
+            {
+                using (System.IO.StreamReader sr = new System.IO.StreamReader(SlidesFile))
+                {
+                    while (!sr.EndOfStream)
+                        slides.Add(sr.ReadLine());
+                }
+            }
+
+            List<string> slidesInAssembly = new List<string>();
+
+            Assembly asm = Assembly.GetExecutingAssembly();
+            using (ResourceReader reader = new ResourceReader(asm.GetManifestResourceStream(asm.GetName().Name + ".g.resources"))) 
+            { 
+                foreach (DictionaryEntry entry in reader) 
+                {
+                    if (entry.Key is string)
+                    {
+                        string s = ((string)entry.Key);
+                        if (s.StartsWith("slides/") && s.EndsWith(".baml"))
+                        {
+                            slidesInAssembly.Add(s.Replace(".baml", ".xaml"));
+                        }
+                    }
+                } 
+            }
+
+            /*foreach (Type t in this.GetType().Assembly.GetTypes())
             {
                 if (t.Namespace == "WPFPresenter.Slides" && t.IsSubclassOf(typeof(Page)))
                 {
-                    slides.Add(@"Slides\" + t.Name.Substring(1) + ".xaml");
+                    string s = @"Slides\" + t.Name.Substring(1) + ".xaml";
+                    slidesInAssembly.Add(s);
                 }
+            }*/
 
-                slides.Sort();
+            slidesInAssembly.Sort();
+
+            slidesInAssembly.ForEach(s => { if (!slides.Contains(s)) slides.Add(s); });
+
+            foreach (string s in slides.ToArray())
+            {
+                if (!slidesInAssembly.Contains(s)) slides.Remove(s);
+            }
+
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(SlidesFile))
+            {
+                slides.ForEach(f => sw.WriteLine(f));
             }
         }
 

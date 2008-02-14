@@ -1,4 +1,4 @@
-﻿<Page x:Class="WPFPresenter.Slides._02Slide"
+﻿<Page 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ctrl="clr-namespace:WPFPresenter.Controls"
