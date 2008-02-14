@@ -187,9 +187,7 @@ namespace Kistl.Client
                     }
                     else if (p is Kistl.App.Base.StringProperty)
                     {
-                        Kistl.App.Base.StringProperty prop = (Kistl.App.Base.StringProperty)p;
-
-                        PropertyControl txt = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader( prop.GetGUIRepresentation())));
+                        PropertyControl txt = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader( p.GetGUIRepresentation())));
                         // Bezeichnung setzen
                         // TODO: sollte auch gebunden werden
                         txt.Label = p.PropertyName;

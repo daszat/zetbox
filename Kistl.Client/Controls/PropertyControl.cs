@@ -23,7 +23,7 @@ namespace Kistl.Client.Controls
 
         // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(EditSimpleProperty));
+            DependencyProperty.Register("Label", typeof(string), typeof(PropertyControl));
 
         /// <summary>
         /// The actual Value of this Property
@@ -36,7 +36,7 @@ namespace Kistl.Client.Controls
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(object), typeof(EditSimpleProperty));
+            DependencyProperty.Register("Value", typeof(object), typeof(PropertyControl));
 
         /// <summary>
         /// Only display the Value, but do not allow to modify it
