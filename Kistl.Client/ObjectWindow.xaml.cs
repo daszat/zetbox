@@ -14,6 +14,10 @@ using System.Windows.Shapes;
 using Kistl.API;
 using System.ComponentModel;
 using Kistl.API.Client;
+using System.Windows.Markup;
+using System.Xml;
+using Kistl.Client.Controls;
+using System.IO;
 
 namespace Kistl.Client
 {
@@ -83,7 +87,7 @@ namespace Kistl.Client
             BindDefaultProperties();
 
             List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
-            
+
             // Objektklassenhierarchie holen
             foreach (Kistl.App.Base.ObjectClass objClass in Helper.GetObjectHierarchie(ObjectType))
             {
@@ -184,28 +188,23 @@ namespace Kistl.Client
                     else if (p is Kistl.App.Base.StringProperty)
                     {
                         Kistl.App.Base.StringProperty prop = (Kistl.App.Base.StringProperty)p;
-                        // var s = prop.GetGUIRepresentation();
-                        string s = "<TextBox/>";
-                        // data.Children.Add(s)
-                        // TODO: since s is a String and no Control, we create it here manually:
-                        {
-                            // Neues Bearbeitungscontrol erzeugen
-                            Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
 
-                            // Bezeichnung setzen
-                            txt.Label = p.PropertyName;
-                            txt.ToolTip = p.AltText;
+                        PropertyControl txt = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader( prop.GetGUIRepresentation())));
+                        // Bezeichnung setzen
+                        // TODO: sollte auch gebunden werden
+                        txt.Label = p.PropertyName;
+                        txt.ToolTip = p.AltText;
 
-                            // Set Binding, damit werden Änderungen automatisch übernommen.
-                            Binding b = new Binding(p.PropertyName);
-                            b.Mode = BindingMode.TwoWay;
-                            b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                            b.NotifyOnSourceUpdated = true;
-                            b.NotifyOnTargetUpdated = true;
-                            txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
+                        // Set Binding, damit werden Änderungen automatisch übernommen.
+                        Binding b = new Binding(p.PropertyName);
+                        b.Mode = BindingMode.TwoWay;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        b.NotifyOnTargetUpdated = true;
+                        txt.SetBinding(Controls.EditSimpleProperty.ValueProperty, b);
 
-                            data.Children.Add(txt);
-                        }
+                        data.Children.Add(txt);
+
                     }
                     else
                     {
@@ -286,7 +285,7 @@ namespace Kistl.Client
                 ObjectID = obj.ID;
                 // ReBind
                 // Das muss sein, weil die Properties (noch) keine DependencyProperties sind
-                obj.NotifyChange(); 
+                obj.NotifyChange();
 
                 IsObjectDirty = false;
                 SetTitle();
@@ -306,7 +305,7 @@ namespace Kistl.Client
         {
             try
             {
-                if (MessageBox.Show("Are you sure that you want to delete this Object?", 
+                if (MessageBox.Show("Are you sure that you want to delete this Object?",
                     "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     ctx.DeleteObject(obj);

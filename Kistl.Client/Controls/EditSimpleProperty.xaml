@@ -1,9 +1,10 @@
-﻿<app:PropertyControl x:Class="Kistl.Client.Controls.EditSimpleProperty"
+﻿<app:PropertyControl 
+    x:Class="Kistl.Client.Controls.EditSimpleProperty"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
     xmlns:app="clr-namespace:Kistl.Client.Controls"
-    MinWidth="400" x:Name="EditCtrl">
+    MinWidth="400" x:Name="EditCtrl" Label="Label" Value = "Value">
     <DockPanel >
         <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=Label}" />
         <kevin:InfoTextBox Text="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 

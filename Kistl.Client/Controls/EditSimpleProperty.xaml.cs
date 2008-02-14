@@ -23,8 +23,6 @@ namespace Kistl.Client.Controls
         public EditSimpleProperty()
         {
             InitializeComponent();
-            Label = "Label";
-            Value = "Value";
         }
 
     }

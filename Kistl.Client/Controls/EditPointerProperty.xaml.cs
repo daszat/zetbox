@@ -19,42 +19,21 @@ namespace Kistl.Client.Controls
     /// <summary>
     /// Interaction logic for EditPointerProperty.xaml
     /// </summary>
-    public partial class EditPointerProperty : UserControl
+    public partial class EditPointerProperty : PropertyControl
     {
         public EditPointerProperty()
         {
             InitializeComponent();
-            Label = "Label";
             Value = API.Helper.INVALIDID;
         }
 
         public ObjectType ObjectType { get; set; }
 
-        /// <summary>
-        /// Bezeichnung der Eigenschaft
-        /// </summary>
-        public string Label
+        public int TargetID
         {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
+            get { return (int)Value; }
+            set { Value = value; }
         }
-
-        // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(EditPointerProperty));
-
-        /// <summary>
-        /// Wert der Eigenschaft
-        /// </summary>
-        public int Value
-        {
-            get { return (int)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(int), typeof(EditPointerProperty));
 
         private void LoadList()
         {
@@ -104,7 +83,7 @@ namespace Kistl.Client.Controls
             {
                 ObjectWindow wnd = new ObjectWindow();
                 wnd.ObjectType = this.ObjectType;
-                wnd.ObjectID = this.Value;
+                wnd.ObjectID = this.TargetID;
 
                 wnd.Show();
             }
