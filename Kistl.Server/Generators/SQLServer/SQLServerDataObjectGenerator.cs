@@ -165,6 +165,26 @@ namespace Kistl.Server.Generators.SQLServer
                         string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
                 if (!c.IsLoaded) c.Load(); 
                 return c", collectionClass.Name, assocName, otherType.Classname)));
+
+                // BackNavigation Property
+                /*backNavigationProperty.CustomAttributes.Add(new CodeAttributeDeclaration(
+                    "EdmRelationshipNavigationPropertyAttribute",
+                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
+                    new CodeAttributeArgument(new CodePrimitiveExpression("A_" + c.Name))));
+
+
+                backNavigationProperty.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value", c.Name, assocName, c.Name)));
+
+                backNavigationProperty.SetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value", c.Name, assocName, c.Name)));*/
             }
         }
 

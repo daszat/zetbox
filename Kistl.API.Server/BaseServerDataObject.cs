@@ -73,15 +73,23 @@ namespace Kistl.API.Server
         /// <summary>
         /// Zum Melden, dass sich das Datenobjekt geändert hat.
         /// </summary>
-        public void NotifyChange()
+        public virtual void NotifyChange()
         {
-            ReportPropertyChanged(null);
         }
 
-        public void CopyTo(BaseServerDataObject target)
+        public virtual void NotifyPropertyChanging(string property)
         {
-            if (target == null)
-                throw new ArgumentException("CopyTo target is null");
+            base.ReportPropertyChanging(property);
+        }
+
+        public virtual void NotifyPropertyChanged(string property)
+        {
+            base.ReportPropertyChanged(property);
+        }
+
+        public virtual void CopyTo(IDataObject target)
+        {
+            if (target == null) throw new ArgumentNullException();
             target.ID = this.ID;
         }
 
@@ -92,16 +100,16 @@ namespace Kistl.API.Server
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException();
+
             BinarySerializer.ToBinary(Type, sw);
             BinarySerializer.ToBinary(ID, sw);
         }
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
-            if (ctx == null)
-                throw new ArgumentNullException("null Context passed");
-            if (sr == null)
-                throw new ArgumentNullException("no BinaryReader passed");
+            if (ctx == null) throw new ArgumentNullException();
+            if (sr == null) throw new ArgumentNullException();
 
             ObjectType t;
             BinarySerializer.FromBinary(out t, sr);
@@ -118,26 +126,45 @@ namespace Kistl.API.Server
         }
     }
 
-    public abstract class BaseServerCollectionEntry : System.Data.Objects.DataClasses.EntityObject, ICollectionEntry
+    public abstract class BaseServerCollectionEntry : System.Data.Objects.DataClasses.EntityObject, ICollectionEntry, ICloneable
     {
         public abstract int ID { get; set; }
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException();
             BinarySerializer.ToBinary(ID, sw);
         }
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
-            if (sr == null)
-                throw new ArgumentNullException("no BinaryReader passed");
-
-            ObjectType t;
-            BinarySerializer.FromBinary(out t, sr);
+            if (sr == null) throw new ArgumentNullException();
 
             int tmpID;
             BinarySerializer.FromBinary(out tmpID, sr);
             ID = tmpID;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        public virtual void CopyTo(ICollectionEntry obj)
+        {
+            NotifyPropertyChanging("ID");
+            obj.ID = this.ID;
+            NotifyPropertyChanged("ID");
+        }
+
+        public virtual void NotifyPropertyChanging(string property)
+        {
+            base.ReportPropertyChanging(property);
+        }
+
+        public virtual void NotifyPropertyChanged(string property)
+        {
+            base.ReportPropertyChanged(property);
         }
     }
 }

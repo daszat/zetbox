@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using System.IO;
 
 namespace Kistl.API.Client
 {
@@ -207,9 +208,38 @@ namespace Kistl.API.Client
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
             {
+#if USE_STREAMS
+                // Serialize
+                KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
+                msg.Type = type;
+
+                MemoryStream ms = new MemoryStream();
+                msg.ToStream(ms);
+
+                BinaryWriter sw = new BinaryWriter(ms);
+                obj.ToStream(sw);
+
+                // Set Operation
+                System.IO.MemoryStream s = serviceStreams.SetObject(ms);
+
+                // Deserialize
+                System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
+
+                ObjectType objType;
+                BinarySerializer.FromBinary(out objType, sr);
+
+                s.Seek(0, System.IO.SeekOrigin.Begin);
+
+                obj = (BaseClientDataObject)objType.NewDataObject();
+                obj.FromStream(ctx, sr);
+
+                return obj;
+
+#else
                 string xml = CurrentSerializer.XmlFromObject(obj);
                 xml = service.SetObject(type, xml);
                 return CurrentSerializer.ObjectFromXml(ctx, xml);
+#endif
             }
         }
 

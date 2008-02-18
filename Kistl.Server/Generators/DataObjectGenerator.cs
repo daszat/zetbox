@@ -377,7 +377,7 @@ namespace Kistl.Server.Generators
 
         #region GenerateValueTypeProperty_Collection
         protected virtual void GenerateProperties_ValueTypeProperty_Collection(ClientServerEnum clientServer, CodeCompileUnit code, ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c,
-            CodeTypeDeclaration collectionClass, CodeMemberField f, CodeMemberProperty p, 
+            CodeTypeDeclaration collectionClass, CodeMemberField f, CodeMemberProperty p,
             CodeMemberProperty navigationProperty, ObjectType otherType, string assocName)
         {
         }
@@ -420,22 +420,21 @@ namespace Kistl.Server.Generators
             {
                 ctr = new CodeTypeReference(prop.GetDataType());
             }
-            CodeMemberField f = new CodeMemberField(ctr,
-                "_" + prop.PropertyName);
+            CodeMemberField f = new CodeMemberField(ctr, "_Value");
 
             collectionClass.Members.Add(f);
 
             CodeMemberProperty p = new CodeMemberProperty();
             collectionClass.Members.Add(p);
 
-            p.Name = prop.PropertyName;
+            p.Name = "Value";
             p.HasGet = true;
             p.HasSet = true;
             p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
             p.Type = f.Type;
 
-            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
-            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_Value")));
+            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_Value"), new CodePropertySetValueReferenceExpression()));
 
             // Create NavigationProperty
             CodeMemberProperty navigationProperty = new CodeMemberProperty();
@@ -443,22 +442,25 @@ namespace Kistl.Server.Generators
 
             navigationProperty.Name = prop.PropertyName;
             navigationProperty.HasGet = true;
-            navigationProperty.HasSet = false;
             navigationProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 
             if (clientServer == ClientServerEnum.Client)
             {
+                navigationProperty.HasSet = true;
                 navigationProperty.Type = new CodeTypeReference("List", new CodeTypeReference(collectionClass.Name));
 
                 navigationProperty.GetStatements.Add(
-                    new CodeSnippetExpression(string.Format(
-                        @"return _{0}",
-                    prop.PropertyName, prop.GetDataType())));
+                    new CodeSnippetExpression(string.Format(@"return _{0}", prop.PropertyName)));
+                navigationProperty.SetStatements.Add(
+                    new CodeSnippetExpression(string.Format(@"_{0} = value", prop.PropertyName)));
 
-                CodeMemberField pf = new CodeMemberField(navigationProperty.Type,
-                    "_" + prop.PropertyName);
+                CodeMemberField pf = new CodeMemberField(navigationProperty.Type, string.Format(@"_{0}", prop.PropertyName));
 
                 c.Members.Add(pf);
+            }
+            else
+            {
+                navigationProperty.HasSet = false;
             }
 
             string assocName = "FK_" + collectionClass.Name + "_" + objClass.ClassName;
@@ -477,7 +479,7 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
             m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));// TODO: Das ist C# spezifisch
 
-            m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", prop.PropertyName)));
+            m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.Value, sw)"));
  
             m = new CodeMemberMethod();
             collectionClass.Members.Add(m);
@@ -488,7 +490,19 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
             m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));// TODO: Das ist C# spezifisch
 
-            m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", prop.PropertyName)));
+            m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._Value, sr)"));
+
+            m = new CodeMemberMethod();
+            collectionClass.Members.Add(m);
+            m.Name = "CopyTo";
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            m.ReturnType = new CodeTypeReference(typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
+            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
+
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanging(\"Value\")", collectionClass.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._Value = this._Value", collectionClass.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanged(\"Value\")", collectionClass.Name)));
             #endregion
         }
         #endregion
@@ -700,24 +714,34 @@ namespace Kistl.Server.Generators
             m = new CodeMemberMethod();
             c.Members.Add(m);
             m.Name = "CopyTo";
-            m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(objClass.ClassName), "obj"));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(IDataObject)), "obj"));
             m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
 
-            foreach (BaseProperty p in objClass.Properties)
+            foreach (Property p in objClass.Properties.OfType<Property>())
             {
+                string stmt = "";
+
                 if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
                 {
-                    m.Statements.Add(new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(new CodeVariableReferenceExpression("obj"), p.PropertyName),
-                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), p.PropertyName)));
+                    stmt = string.Format("(({1})obj).{0} = this.{0}", p.PropertyName, objClass.ClassName);
+                }
+                    // TODO: Geht z.Z. nur für den Client!!!!
+                else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList && clientServer == ClientServerEnum.Client)
+                {
+                    stmt = string.Format("(({1})obj)._{0} = this.{0}.Clone()", p.PropertyName, objClass.ClassName);
                 }
                 else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
                 {
-                    m.Statements.Add(new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(new CodeVariableReferenceExpression("obj"), "fk_" + p.PropertyName),
-                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "fk_" + p.PropertyName)));
+                    stmt = string.Format("(({1})obj).fk_{0} = this.fk_{0}", p.PropertyName, objClass.ClassName);
+                }
+
+                if (!string.IsNullOrEmpty(stmt))
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("(({1})obj).NotifyPropertyChanging(\"{0}\")", p.PropertyName, objClass.ClassName)));
+                    m.Statements.Add(new CodeSnippetExpression(stmt));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("(({1})obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, objClass.ClassName)));
                 }
             }
         }
@@ -852,9 +876,9 @@ namespace Kistl.Server.Generators
                 if (p is Property && ((Property)p).IsList)
                 {
                     if(clientServer == ClientServerEnum.Client)
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx)", p.PropertyName)));
                     else
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(this.{0}, sr)", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr, ctx)", p.PropertyName)));
                 }
                 else if (p is ValueTypeProperty)
                 {

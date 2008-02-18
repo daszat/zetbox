@@ -24,7 +24,6 @@ namespace Kistl.API.Client
         internal List<T> GetListOf(int ID, string propertyName)
         {
             List<T> result = Proxy.Current.GetListOf(_context, _type, ID, propertyName).OfType<T>().ToList();
-            //result.ForEach(r => _context.Attach(r as BaseClientDataObject));
             result.ForEach<BaseClientDataObject>(r => CacheController<BaseClientDataObject>.Current.Set(r.Type, r.ID,
                         (BaseClientDataObject)(r).Clone()) );
             return result;

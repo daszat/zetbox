@@ -147,6 +147,25 @@ namespace Kistl.Client
                             }
                         }
                     }
+                    else if (p is Kistl.App.Base.ValueTypeProperty && ((Kistl.App.Base.ValueTypeProperty)p).IsList)
+                    {
+                        Controls.EditSimplePropertyList list = new EditSimplePropertyList();
+
+                        // Bezeichnung setzen
+                        // TODO: sollte auch gebunden werden
+                        list.Label = p.PropertyName;
+                        list.ToolTip = p.AltText;
+
+                        // Set Binding, damit werden Änderungen automatisch übernommen.
+                        Binding b = new Binding(p.PropertyName);
+                        b.Mode = BindingMode.TwoWay;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        b.NotifyOnTargetUpdated = true;
+                        list.SetBinding(Controls.EditSimplePropertyList.ValueProperty, b);
+
+                        data.Children.Add(list);
+                    }
                     else
                     {
                         PropertyControl control = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader( p.GetGUIRepresentation())));

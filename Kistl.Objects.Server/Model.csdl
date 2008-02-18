@@ -15,6 +15,7 @@
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
+    <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -102,6 +103,10 @@
     <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.FK_MethodInvocation_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kunde_EMailsCollectionEntry_Kunde" Association="Model.FK_Kunde_EMailsCollectionEntry_Kunde">
+      <End Role="A_Kunde" EntitySet="Kunde" />
+      <End Role="B_Kunde_EMailsCollectionEntry" EntitySet="Kunde_EMailsCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -246,6 +251,7 @@
     <Property Name="PLZ" Type="String" MaxLength="10" Nullable="true" />
     <Property Name="Ort" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="Land" Type="String" MaxLength="50" Nullable="true" />
+    <NavigationProperty Name="EMails" Relationship="Model.FK_Kunde_EMailsCollectionEntry_Kunde" FromRole="A_Kunde" ToRole="B_Kunde_EMailsCollectionEntry" />
   </EntityType>
   <EntityType Name="Icon">
     <Key>
@@ -274,6 +280,13 @@
     <NavigationProperty Name="Assembly" Relationship="Model.FK_MethodInvocation_Assembly" FromRole="B_MethodInvocation" ToRole="A_Assembly" />
     <Property Name="FullTypeName" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Kunde_EMailsCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
@@ -362,5 +375,9 @@
   <Association Name="FK_MethodInvocation_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Kunde_EMailsCollectionEntry_Kunde">
+    <End Role="A_Kunde" Type="Model.Kunde" Multiplicity="0..1" />
+    <End Role="B_Kunde_EMailsCollectionEntry" Type="Model.Kunde_EMailsCollectionEntry" Multiplicity="*" />
   </Association>
 </Schema>

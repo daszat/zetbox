@@ -191,6 +191,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Kunde_EMailsCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde_EMailsCollectionEntry)">
+        <MappingFragment StoreEntitySet="Kunde_EMailsCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Value" ColumnName="EMails" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="FK_BaseProperty_ObjectClass" TypeName="Model.FK_BaseProperty_ObjectClass" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
@@ -388,6 +396,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Kunde_EMailsCollectionEntry_Kunde" TypeName="Model.FK_Kunde_EMailsCollectionEntry_Kunde" StoreEntitySet="Kunde_EMailsCollectionEntry">
+      <EndProperty Name="A_Kunde">
+        <ScalarProperty Name="ID" ColumnName="fk_Kunde" />
+      </EndProperty>
+      <EndProperty Name="B_Kunde_EMailsCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Kunde" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

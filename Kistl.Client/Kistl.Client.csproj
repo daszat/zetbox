@@ -98,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\EditSimplePropertyList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ObjectList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -138,6 +142,9 @@
     <Compile Include="Client.cs" />
     <Compile Include="Controls\DesktopTreeView.xaml.cs">
       <DependentUpon>DesktopTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditSimplePropertyList.xaml.cs">
+      <DependentUpon>EditSimplePropertyList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PropertyControl.cs" />
     <Compile Include="Converter\IconConverter.cs" />

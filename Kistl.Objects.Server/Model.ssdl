@@ -26,6 +26,7 @@
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons" />
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies" />
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations" />
+    <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -113,6 +114,10 @@
     <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.Store.FK_MethodInvocation_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kunde_EMailsCollectionEntry_Kunde" Association="Model.Store.FK_Kunde_EMailsCollectionEntry_Kunde">
+      <End Role="A_Kunde" EntitySet="Kunde" />
+      <End Role="B_Kunde_EMailsCollectionEntry" EntitySet="Kunde_EMailsCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -295,6 +300,7 @@
     <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="true" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="EMails" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Icon">
     <Key>
@@ -323,6 +329,14 @@
     <Property Name="fk_Assembly" Type="int" Nullable="true" />
     <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Kunde_EMailsCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Kunde" Type="int" Nullable="true" />
+    <Property Name="EMails" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
@@ -585,6 +599,18 @@
       </Principal>
       <Dependent Role="B_MethodInvocation">
         <PropertyRef Name="fk_InvokeOnObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kunde_EMailsCollectionEntry_Kunde">
+    <End Role="A_Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
+    <End Role="B_Kunde_EMailsCollectionEntry" Type="Model.Store.Kunde_EMailsCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Kunde">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Kunde_EMailsCollectionEntry">
+        <PropertyRef Name="fk_Kunde" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

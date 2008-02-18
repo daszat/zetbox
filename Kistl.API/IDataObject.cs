@@ -40,8 +40,13 @@ namespace Kistl.API
         void NotifyPreSave();
         void NotifyPostSave();
 
+        void NotifyPropertyChanging(string property);
+        void NotifyPropertyChanged(string property);
+
         void ToStream(System.IO.BinaryWriter sw);
         void FromStream(IKistlContext ctx, System.IO.BinaryReader sr);
+
+        void CopyTo(IDataObject obj);
     }
 
     public interface ICollectionEntry
@@ -53,6 +58,11 @@ namespace Kistl.API
 
         void ToStream(System.IO.BinaryWriter sw);
         void FromStream(IKistlContext ctx, System.IO.BinaryReader sr);
+
+        void CopyTo(ICollectionEntry obj);
+
+        void NotifyPropertyChanging(string property);
+        void NotifyPropertyChanged(string property);
     }
 
     public interface IXmlObjectCollection

@@ -117,7 +117,6 @@ namespace Kistl.API.Server
 
         public int SubmitChanges()
         {
-
             List<IDataObject> saveList = new List<IDataObject>();
             this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
                 .ToList().ForEach(e => { if (e.Entity is IDataObject) saveList.Add(e.Entity as IDataObject); });
@@ -141,16 +140,43 @@ namespace Kistl.API.Server
 
         #region IKistlContext Members
 
-        public void Attach(IDataObject obj)
+        public void Attach(IDataObject o)
         {
-            // Do nothing yet
+            BaseServerDataObject obj = (BaseServerDataObject)o;
+            if (obj.ObjectState == DataObjectState.New)
+            {
+                this.AddObject(obj.EntitySetName, obj);
+            }
+            else
+            {
+                this.AttachTo(obj.EntitySetName, obj);
+            }
         }
 
-        public void Dettach(IDataObject obj)
+        public void Dettach(IDataObject o)
         {
-            // Do nothing yet
+            throw new NotSupportedException();
         }
 
+        public void Delete(IDataObject obj)
+        {
+            this.DeleteObject(obj);
+        }
+
+        public void Attach(ICollectionEntry e)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Dettach(ICollectionEntry e)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Delete(ICollectionEntry e)
+        {
+            this.DeleteObject(e);
+        }
         #endregion
     }
 }

@@ -206,22 +206,20 @@ namespace Kistl.API.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                //T obj = xml.FromXmlString<XMLOBJECT>().Object as T;
-
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
-                    KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
+                    //KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
                     KistlDataContext.Current.DeleteObject(obj);
                 }
                 else
                 {
                     if (obj.ObjectState == DataObjectState.New)
                     {
-                        KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
+                        //KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
                     }
                     else
                     {
-                        KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
+                        //KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
                         MarkEveryPropertyAsModified(obj);
                     }
 
@@ -230,9 +228,6 @@ namespace Kistl.API.Server
 
                 KistlDataContext.Current.SubmitChanges();
 
-                //XMLOBJECT result = new XMLOBJECT();
-                //result.Object = obj;
-                //return result.ToXmlString();
                 return obj;
             }
         }

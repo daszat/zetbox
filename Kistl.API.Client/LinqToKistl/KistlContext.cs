@@ -70,6 +70,26 @@ namespace Kistl.API.Client
             clientObj.DetachFromContext(this);
         }
 
+        public void Delete(IDataObject obj)
+        {
+            obj.ObjectState = DataObjectState.Deleted;
+        }
+
+        public void Attach(ICollectionEntry e)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Dettach(ICollectionEntry e)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Delete(ICollectionEntry e)
+        {
+            throw new NotSupportedException();
+        }
+
         public void SubmitChanges()
         {
             // TODO: Add a better Cache Refresh Strategie
@@ -87,8 +107,6 @@ namespace Kistl.API.Client
                 {
                     // Do not attach to context -> first Param is null
                     BaseClientDataObject newobj = Proxy.Current.SetObject(null, obj.Type, obj);
-                    // TODO: Ich depp rufe da nur die Basisklasse auf
-                    // Umwandeln in eine virtuelle Funktione!!!!
                     newobj.CopyTo(obj);
                 }
 

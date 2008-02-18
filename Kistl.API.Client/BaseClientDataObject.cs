@@ -74,13 +74,23 @@ namespace Kistl.API.Client
         /// <summary>
         /// Zum Melden, dass sich das Datenobjekt geändert hat.
         /// </summary>
-        public void NotifyChange()
+        public virtual void NotifyChange()
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
         }
 
-        public void CopyTo(BaseClientDataObject obj)
+        public virtual void NotifyPropertyChanging(string property)
+        {
+        }
+
+        public virtual void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
+        public virtual void CopyTo(IDataObject obj)
         {
             obj.ID = this.ID;
         }
@@ -118,20 +128,41 @@ namespace Kistl.API.Client
         }
     }
 
-    public abstract class BaseClientCollectionEntry : ICollectionEntry
+    public abstract class BaseClientCollectionEntry : ICollectionEntry, ICloneable
     {
         public abstract int ID { get; set; }
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException();
             BinarySerializer.ToBinary(ID, sw);
         }
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException();
+
             int tmpID;
             BinarySerializer.FromBinary(out tmpID, sr);
             ID = tmpID;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        public virtual void CopyTo(ICollectionEntry obj)
+        {
+            obj.ID = this.ID;
+        }
+
+        public virtual void NotifyPropertyChanging(string property)
+        {
+        }
+
+        public virtual void NotifyPropertyChanged(string property)
+        {
         }
     }
 

@@ -179,22 +179,41 @@ namespace Kistl.API
             }
         }
 
-        public static void FromBinary<T>(out List<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
+        public static void FromBinaryCollectionEntries<T>(out List<T> val, System.IO.BinaryReader sr, IKistlContext ctx) where T : ICollectionEntry, new()
         {
             val = new List<T>();
-            FromBinary<T>(val, sr);
+            FromBinaryCollectionEntries<T>(val, sr, ctx);
         }
 
-        public static void FromBinary<T>(ICollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
+        public static void FromBinaryCollectionEntries<T>(ICollection<T> val, System.IO.BinaryReader sr, IKistlContext ctx) where T : ICollectionEntry, new()
         {
             if (val == null) throw new ArgumentNullException("val");
 
+            List<T> tmpList = new List<T>();
             while (sr.ReadBoolean())
             {
                 T obj = new T();
                 obj.FromStream(null, sr);
 
-                val.Add((T)obj);
+                tmpList.Add(obj);
+
+                T objInCollection = val.FirstOrDefault(i => i.ID == obj.ID);
+                if (objInCollection != null)
+                {
+                    obj.CopyTo(objInCollection);
+                }
+                else
+                {
+                    val.Add((T)obj);
+                }
+            }
+
+            foreach (T obj in val.ToArray())
+            {
+                if (tmpList.FirstOrDefault(i => i.ID == obj.ID) == null)
+                {
+                    ctx.Delete(obj);
+                }
             }
         }
         #endregion

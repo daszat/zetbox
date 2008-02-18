@@ -245,13 +245,21 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteAttributeString("Nullable", "false");
                     xml.WriteEndElement(); // </Property>
 
+                    /*xml.WriteStartElement("NavigationProperty");
+                    xml.WriteAttributeString("Name", prop.ObjectClass.ClassName);
+                    xml.WriteAttributeString("Relationship", string.Format(@"Model.FK_{0}_{1}", otherType.Classname, prop.ObjectClass.ClassName));
+                    xml.WriteAttributeString("FromRole", "B_" + otherType.Classname);
+                    xml.WriteAttributeString("ToRole", "A_" + prop.ObjectClass.ClassName);
+                    xml.WriteEndElement(); // </Property>
+                     */
+
                     if (prop is ObjectReferenceProperty)
                     {
                     }
                     else if (prop is ValueTypeProperty)
                     {
                         xml.WriteStartElement("Property");
-                        xml.WriteAttributeString("Name", prop.PropertyName);
+                        xml.WriteAttributeString("Name", "Value");
                         xml.WriteAttributeString("Type", Type.GetType(prop.GetDataType()).Name);
                         if (prop is StringProperty)
                         {
@@ -407,7 +415,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </ScalarProperty>
 
                     xml.WriteStartElement("ScalarProperty");
-                    xml.WriteAttributeString("Name", prop.PropertyName);
+                    xml.WriteAttributeString("Name", "Value");
                     xml.WriteAttributeString("ColumnName", prop.PropertyName);
                     xml.WriteEndElement(); // </ScalarProperty>
 

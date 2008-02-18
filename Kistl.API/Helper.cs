@@ -112,5 +112,14 @@ namespace Kistl.API
                 action(obj);
             }
         }
+
+        public static List<T> Clone<T>(this List<T> lst) where T : ICloneable
+        {
+            List<T> result = new List<T>(lst.Capacity);
+
+            lst.ForEach(item => result.Add((T)item.Clone()));
+
+            return result;
+        }
     }
 }
