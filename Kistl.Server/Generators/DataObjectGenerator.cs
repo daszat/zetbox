@@ -354,6 +354,7 @@ namespace Kistl.Server.Generators
             {
                 ctr = new CodeTypeReference(prop.GetDataType());
             }
+
             CodeMemberField f = new CodeMemberField(ctr,
                 "_" + prop.PropertyName);
 
