@@ -17,11 +17,43 @@ namespace Kistl.Server.Generators
     public class BaseDataObjectGenerator
     {
         private string codeBasePath = "";
-        protected Kistl.API.Server.KistlDataContext ctx = null;
+
+        public class Current
+        {
+            public Kistl.API.Server.KistlDataContext ctx;
+
+            public ClientServerEnum clientServer;
+            public CodeCompileUnit code;
+            public CodeNamespace code_namespace;
+            public CodeTypeDeclaration code_class;
+            public CodeMemberField code_field;
+            public CodeMemberProperty code_property;
+
+            public ObjectClass objClass;
+            public BaseProperty property;
+
+            public Current Clone()
+            {
+                Current result = new Current();
+
+                result.ctx = this.ctx;
+
+                result.clientServer = this.clientServer;
+                result.code = this.code;
+                result.code_namespace = this.code_namespace;
+                result.code_class = this.code_class;
+                result.code_field = this.code_field;
+                result.code_property = this.code_property;
+
+                result.objClass = this.objClass;
+                result.property = this.property;
+
+                return result;
+            }
+        }
 
         public virtual void Generate(Kistl.API.Server.KistlDataContext ctx, string codeBasePath)
         {
-            this.ctx = ctx;
             this.codeBasePath = codeBasePath + (codeBasePath.EndsWith("\\") ? "" : "\\");
             Directory.CreateDirectory(codeBasePath);
 
@@ -33,8 +65,8 @@ namespace Kistl.Server.Generators
 
             foreach (ObjectClass objClass in objClassList)
             {
-                GenerateObjects(ClientServerEnum.Client, objClass);
-                GenerateObjects(ClientServerEnum.Server, objClass);
+                GenerateObjectsInternal(new Current() { ctx = ctx, clientServer = ClientServerEnum.Client, objClass = objClass });
+                GenerateObjectsInternal(new Current() { ctx = ctx, clientServer = ClientServerEnum.Server, objClass = objClass });
             }
 
             GenerateObjectSerializer(ClientServerEnum.Server, objClassList);
@@ -71,6 +103,216 @@ namespace Kistl.Server.Generators
             ns.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API"));
         }
+
+        #region CreateField
+        protected CodeMemberField CreateField(CodeTypeDeclaration c, Type type, string name)
+        {
+            return CreateField(c, new CodeTypeReference(type), name, null);
+        }
+
+        protected CodeMemberField CreateField(CodeTypeDeclaration c, string type, string name)
+        {
+            return CreateField(c, new CodeTypeReference(type), name, null);
+        }
+
+        protected CodeMemberField CreateField(CodeTypeDeclaration c, CodeTypeReference type, string name)
+        {
+            return CreateField(c, type, name, null);
+        }
+
+        protected CodeMemberField CreateField(CodeTypeDeclaration c, Type type, string name, string initExpression)
+        {
+            return CreateField(c, new CodeTypeReference(type), name, new CodeSnippetExpression(initExpression));
+        }
+
+        protected CodeMemberField CreateField(CodeTypeDeclaration c, string type, string name, string initExpression)
+        {
+            return CreateField(c, new CodeTypeReference(type), name, new CodeSnippetExpression(initExpression));
+        }
+
+        protected virtual CodeMemberField CreateField(CodeTypeDeclaration c, CodeTypeReference type, string name, CodeExpression initExpression)
+        {
+            CodeMemberField f = new CodeMemberField(type, name);
+            c.Members.Add(f);
+            f.Attributes = MemberAttributes.Private;
+            if (initExpression != null)
+            {
+                f.InitExpression = initExpression;
+            }
+            return f;
+        }
+        #endregion
+
+        #region CreateProperty
+        /// <summary>
+        /// Creates a Property with a Set and Get Accessor and adds it to the given Class
+        /// </summary>
+        /// <param name="c">Class, where the Property will be added</param>
+        /// <param name="type">Type of the Property</param>
+        /// <param name="name">Name of the Property</param>
+        /// <returns>Returns a CodeMemberProperty Type</returns>
+        protected CodeMemberProperty CreateProperty(CodeTypeDeclaration c, Type type, string name)
+        {
+            return CreateProperty(c, new CodeTypeReference(type), name, true);
+        }
+
+        /// <summary>
+        /// Creates a Property with a Set and Get Accessor and adds it to the given Class
+        /// </summary>
+        /// <param name="c">Class, where the Property will be added</param>
+        /// <param name="type">Type of the Property</param>
+        /// <param name="name">Name of the Property</param>
+        /// <returns>Returns a CodeMemberProperty Type</returns>
+        protected CodeMemberProperty CreateProperty(CodeTypeDeclaration c, string type, string name)
+        {
+            return CreateProperty(c, new CodeTypeReference(type), name, true);
+        }
+
+        /// <summary>
+        /// Creates a Property with a Set and Get Accessor and adds it to the given Class
+        /// </summary>
+        /// <param name="c">Class, where the Property will be added</param>
+        /// <param name="type">Type of the Property</param>
+        /// <param name="name">Name of the Property</param>
+        /// <returns>Returns a CodeMemberProperty Type</returns>
+        protected CodeMemberProperty CreateProperty(CodeTypeDeclaration c, CodeTypeReference type, string name)
+        {
+            return CreateProperty(c, type, name, true);
+        }
+
+        /// <summary>
+        /// Creates a Property with a Set and Get Accessor and adds it to the given Class
+        /// </summary>
+        /// <param name="c">Class, where the Property will be added</param>
+        /// <param name="type">Type of the Property</param>
+        /// <param name="name">Name of the Property</param>
+        /// <param name="hasSet">true if the Property should have a Set Accessor</param>
+        /// <returns>Returns a CodeMemberProperty Type</returns>
+        protected CodeMemberProperty CreateProperty(CodeTypeDeclaration c, Type type, string name, bool hasSet)
+        {
+            return CreateProperty(c, new CodeTypeReference(type), name, hasSet);
+        }
+
+        /// <summary>
+        /// Creates a Property with a Set and Get Accessor and adds it to the given Class
+        /// </summary>
+        /// <param name="c">Class, where the Property will be added</param>
+        /// <param name="type">Type of the Property</param>
+        /// <param name="name">Name of the Property</param>
+        /// <param name="hasSet">true if the Property should have a Set Accessor</param>
+        /// <returns>Returns a CodeMemberProperty Type</returns>
+        protected CodeMemberProperty CreateProperty(CodeTypeDeclaration c, string type, string name, bool hasSet)
+        {
+            return CreateProperty(c, new CodeTypeReference(type), name, hasSet);
+        }
+
+        /// <summary>
+        /// Creates a Property with a Set and Get Accessor and adds it to the given Class.
+        /// This is the implementation. Derive from it, if you want to change something.
+        /// </summary>
+        /// <param name="c">Class, where the Property will be added</param>
+        /// <param name="type">Type of the Property</param>
+        /// <param name="name">Name of the Property</param>
+        /// <param name="hasSet">true if the Property should have a Set Accessor</param>
+        /// <returns>Returns a CodeMemberProperty Type</returns>
+        protected virtual CodeMemberProperty CreateProperty(CodeTypeDeclaration c, CodeTypeReference type, string name, bool hasSet)
+        {
+            CodeMemberProperty p = new CodeMemberProperty();
+            c.Members.Add(p);
+            p.Type = type;
+            p.Name = name;
+            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            p.HasGet = true;
+            p.HasSet = hasSet;
+            return p;
+        }
+        #endregion
+
+        #region CreateClass
+        protected CodeTypeDeclaration CreateClass(CodeNamespace ns, string name, params string[] baseClasses)
+        {
+            List<CodeTypeReference> baseClassesList = new List<CodeTypeReference>();
+            baseClasses.ForEach<string>(b => baseClassesList.Add(new CodeTypeReference(b)));
+            return CreateClass(ns, name, TypeAttributes.Public, baseClassesList.ToArray());
+        }
+
+        protected CodeTypeDeclaration CreateSealedClass(CodeNamespace ns, string name, params string[] baseClasses)
+        {
+            List<CodeTypeReference> baseClassesList = new List<CodeTypeReference>();
+            baseClasses.ForEach<string>(b => baseClassesList.Add(new CodeTypeReference(b)));
+            return CreateClass(ns, name, TypeAttributes.Public | TypeAttributes.Sealed, baseClassesList.ToArray());
+        }
+
+        protected virtual CodeTypeDeclaration CreateClass(CodeNamespace ns, string name, 
+            TypeAttributes typeAttributes, params CodeTypeReference[] baseClasses)
+        {
+            CodeTypeDeclaration c = new CodeTypeDeclaration(name);
+            ns.Types.Add(c);
+            c.IsClass = true;
+            c.TypeAttributes = typeAttributes;
+            baseClasses.ForEach<CodeTypeReference>(b => c.BaseTypes.Add(b));
+            return c;
+        }
+
+        #endregion
+
+        #region CreateMethod
+        protected CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, string returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Final);
+        }
+
+        protected CodeMemberMethod CreateVirtualMethod(CodeTypeDeclaration c, string name, string returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public);
+        }
+
+        protected CodeMemberMethod CreateOverrideMethod(CodeTypeDeclaration c, string name, string returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Override);
+        }
+
+        protected CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, Type returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Final);
+        }
+
+        protected CodeMemberMethod CreateVirtualMethod(CodeTypeDeclaration c, string name, Type returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public);
+        }
+
+        protected CodeMemberMethod CreateOverrideMethod(CodeTypeDeclaration c, string name, Type returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Override);
+        }
+
+        protected virtual CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, CodeTypeReference returnType, MemberAttributes memberAttributes)
+        {
+            CodeMemberMethod m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Attributes = memberAttributes;
+            m.Name = name;
+            m.ReturnType = returnType;
+            return m;
+        }
+        #endregion
+
+        #region CreateNamespace
+        protected CodeNamespace CreateNamespace(CodeCompileUnit code, string name)
+        {
+            return CreateNamespace(code, name, true);
+        }
+
+        protected virtual CodeNamespace CreateNamespace(CodeCompileUnit code, string name, bool addDefaultNamespaces)
+        {
+            CodeNamespace ns = new CodeNamespace(name);
+            code.Namespaces.Add(ns);
+            if (addDefaultNamespaces) AddDefaultNamespaces(ns);
+
+            return ns;
+        }
+        #endregion
 
         #endregion
 
@@ -127,34 +369,18 @@ namespace Kistl.Server.Generators
             CodeCompileUnit code = new CodeCompileUnit();
 
             // Create Namespace
-            CodeNamespace ns = new CodeNamespace("Kistl.API");
-            code.Namespaces.Add(ns);
-
-            AddDefaultNamespaces(ns);
+            CodeNamespace ns = CreateNamespace(code, "Kistl.API");
+            
 
             // XMLObjectCollection
-            CodeTypeDeclaration c = new CodeTypeDeclaration("XMLObjectCollection");
-            ns.Types.Add(c);
-            c.IsClass = true;
-            c.BaseTypes.Add(new CodeTypeReference("IXmlObjectCollection"));
-            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
+            CodeTypeDeclaration c = CreateSealedClass(ns, "XMLObjectCollection", "IXmlObjectCollection");
             c.CustomAttributes.Add(new CodeAttributeDeclaration("Serializable"));
             c.CustomAttributes.Add(new CodeAttributeDeclaration("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("ObjectCollection"))));
 
-            CodeMemberField f = new CodeMemberField(new CodeTypeReference("List", new CodeTypeReference("Object")), "_Objects");
-            c.Members.Add(f);
-            f.Attributes = MemberAttributes.Private;
-            f.InitExpression = new CodeObjectCreateExpression(
-                new CodeTypeReference("List", new CodeTypeReference("Object")));
+            CodeMemberField f = CreateField(c, "List<Object>", "_Objects", "new List<Object>()");
 
-            CodeMemberProperty p = new CodeMemberProperty();
-            c.Members.Add(p);
-            p.Name = "Objects";
-            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            p.HasGet = true;
-            p.HasSet = false;
-            p.Type = f.Type;
-            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("_Objects")));
+            CodeMemberProperty p = CreateProperty(c, f.Type, "Objects", false);
+            p.GetStatements.Add(new CodeSnippetExpression("return _Objects"));
             foreach (ObjectClass objClass in objClassList)
             {
                 p.CustomAttributes.Add(
@@ -164,38 +390,23 @@ namespace Kistl.Server.Generators
                     ));
             }
 
-            CodeMemberMethod m = new CodeMemberMethod();
-            c.Members.Add(m);
-            m.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            m.Name = "ToList";
-            m.ReturnType = new CodeTypeReference("List", new CodeTypeReference("T"));
+            CodeMemberMethod m = CreateMethod(c, "ToList", "List<T>");
             CodeTypeParameter ct = new CodeTypeParameter("T");
             ct.Constraints.Add("IDataObject");
             m.TypeParameters.Add(ct);
+            
             m.Statements.Add(new CodeSnippetExpression(@"return new List<T>(Objects.OfType<T>())"));
 
             // XMLObject
-            c = new CodeTypeDeclaration("XMLObject");
-            c.BaseTypes.Add(new CodeTypeReference("IXmlObject"));
-            ns.Types.Add(c);
-            c.IsClass = true;
-            c.TypeAttributes = TypeAttributes.Public | TypeAttributes.Sealed;
+            c = CreateSealedClass(ns, "XMLObject", "IXmlObject");
             c.CustomAttributes.Add(new CodeAttributeDeclaration("Serializable"));
             c.CustomAttributes.Add(new CodeAttributeDeclaration("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("Object"))));
 
-            f = new CodeMemberField(new CodeTypeReference("Object"), "_Object");
-            c.Members.Add(f);
-            f.Attributes = MemberAttributes.Private;
+            f = CreateField(c, "Object", "_Object");
 
-            p = new CodeMemberProperty();
-            c.Members.Add(p);
-            p.Name = "Object";
-            p.Type = new CodeTypeReference("Object");
-            p.HasGet = true;
-            p.HasSet = true;
-            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("_Object")));
-            p.SetStatements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("_Object"), new CodePropertySetValueReferenceExpression()));
-            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+            p = CreateProperty(c, "Object", "Object");
+            p.GetStatements.Add(new CodeSnippetExpression(" return _Object"));
+            p.SetStatements.Add(new CodeSnippetExpression("_Object = value"));
             foreach (ObjectClass objClass in objClassList)
             {
                 p.CustomAttributes.Add(
@@ -211,425 +422,294 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateObjects
-        protected virtual void GenerateObjects(ClientServerEnum clientServer, ObjectClass objClass,
-            CodeCompileUnit code, CodeNamespace n, CodeTypeDeclaration c)
+        protected virtual void GenerateObjects(Current current)
         {
         }
 
-        private void GenerateObjects(ClientServerEnum clientServer, ObjectClass objClass)
+        private void GenerateObjectsInternal(Current current)
         {
-            CodeCompileUnit code = new CodeCompileUnit();
+            current.code = new CodeCompileUnit();
 
             // Create Namespace
-            CodeNamespace ns = new CodeNamespace(objClass.Module.Namespace);
-            code.Namespaces.Add(ns);
-
-            AddDefaultNamespaces(ns);
-            ns.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", clientServer)));
+            current.code_namespace = CreateNamespace(current.code, current.objClass.Module.Namespace);
+            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.clientServer)));
 
             // Create Class
-            CodeTypeDeclaration c = new CodeTypeDeclaration(objClass.ClassName);
-            ns.Types.Add(c);
-            c.IsClass = true;
-            c.TypeAttributes = TypeAttributes.Public;
-            if (objClass.BaseObjectClass != null)
-            {
-                c.BaseTypes.Add(objClass.BaseObjectClass.Module.Namespace + "." + objClass.BaseObjectClass.ClassName);
-            }
-            else
-            {
-                c.BaseTypes.Add(string.Format("Base{0}DataObject", clientServer));
-            }
-            c.BaseTypes.Add("ICloneable");
+            current.code_class = CreateClass(current.code_namespace, current.objClass.ClassName,
+                current.objClass.BaseObjectClass != null
+                    ? current.objClass.BaseObjectClass.Module.Namespace + "." + current.objClass.BaseObjectClass.ClassName
+                    : string.Format("Base{0}DataObject", current.clientServer),
+                "ICloneable");
 
-            GenerateObjects(clientServer, objClass, code, ns, c);
+            GenerateObjects(current);
 
-            if (objClass.BaseObjectClass == null)
+            if (current.objClass.BaseObjectClass == null)
             {
                 // Create Default Properties
-                GenerateDefaultProperties(clientServer, objClass, c);
+                GenerateDefaultPropertiesInternal(current.Clone());
             }
 
             // Create Properties
-            GenerateProperties(clientServer, code, objClass, c, ns);
+            GeneratePropertiesInternal(current.Clone());
 
             // Create DataObject Default Methods
-            GenerateDefaultMethods(clientServer, objClass, c);
+            GenerateDefaultMethodsInternal(current.Clone());
 
             // Create DataObject Methods
-            GenerateMethods(clientServer, objClass, c);
+            GenerateMethodsInternal(current.Clone());
 
             // Create DataObject StreamingMethods
-            GenerateStreamMethods(clientServer, objClass, c);
+            GenerateStreamMethodsInternal(current.Clone());
 
             // Generate the code & save
-            SaveFile(code, "Kistl.Objects." + clientServer + @"\" + objClass.ClassName + "." + clientServer + ".Designer.cs");
+            SaveFile(current.code, "Kistl.Objects." + current.clientServer + @"\" + current.objClass.ClassName + "." + current.clientServer + ".Designer.cs");
         }
         #endregion
 
         #region GenerateDefaultProperties
-        protected virtual void GenerateDefaultProperty_ID(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c,
-            CodeMemberField f, CodeMemberProperty p)
+        protected virtual void GenerateDefaultProperty_ID(Current current)
         {
         }
 
-        private void GenerateDefaultProperty_ID(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c)
+        private void GenerateDefaultProperty_IDInternal(Current current)
         {
             // Create ID member
-            CodeMemberField f = new CodeMemberField(typeof(int), "_ID");
-            f.InitExpression = new CodeSnippetExpression("Helper.INVALIDID"); // TODO: Das ist c# Spezifisch
-            c.Members.Add(f);
+            current.code_field = CreateField(current.code_class, typeof(int), "_ID", "Helper.INVALIDID");
 
-            CodeMemberProperty p = new CodeMemberProperty();
-            c.Members.Add(p);
+            current.code_property = CreateProperty(current.code_class, typeof(int), "ID");
+            current.code_property.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            current.code_property.GetStatements.Add(new CodeSnippetExpression("return _ID"));
+            current.code_property.SetStatements.Add(new CodeSnippetExpression("_ID = value"));
 
-            p.Name = "ID";
-            p.HasGet = true;
-            p.HasSet = true;
-            p.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            p.Type = new CodeTypeReference(typeof(int));
-
-            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_ID")));
-            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_ID"), new CodePropertySetValueReferenceExpression()));
-
-            GenerateDefaultProperty_ID(clientServer, objClass, c, f, p);
+            GenerateDefaultProperty_ID(current);
         }
 
-        protected virtual void GenerateDefaultProperty_EntitySetName(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c,
-            CodeMemberProperty p)
+        protected virtual void GenerateDefaultProperty_EntitySetName(Current current)
         {
         }
 
-        private void GenerateDefaultProperty_EntitySetName(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c)
+        private void GenerateDefaultProperty_EntitySetNameInternal(Current current)
         {
-            CodeMemberProperty p = new CodeMemberProperty();
-            c.Members.Add(p);
+            current.code_property = CreateProperty(current.code_class, typeof(string), "EntitySetName", false);
+            current.code_property.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+            current.code_property.GetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(current.objClass.ClassName)));
 
-            p.Name = "EntitySetName";
-            p.HasGet = true;
-            p.HasSet = false;
-            p.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            p.Type = new CodeTypeReference(typeof(string));
-            p.GetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(objClass.ClassName)));
-
-            GenerateDefaultProperty_EntitySetName(clientServer, objClass, c, p);
+            GenerateDefaultProperty_EntitySetName(current);
         }
         
-        protected virtual void GenerateDefaultProperties(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c)
+        protected virtual void GenerateDefaultPropertiesInternal(Current current)
         {
-            GenerateDefaultProperty_ID(clientServer, objClass, c);
+            GenerateDefaultProperty_IDInternal(current.Clone());
 
-            if (clientServer == ClientServerEnum.Server)
+            if (current.clientServer == ClientServerEnum.Server)
             {
-                GenerateDefaultProperty_EntitySetName(clientServer, objClass, c);
+                GenerateDefaultProperty_EntitySetNameInternal(current.Clone());
             }
         }
         #endregion
 
         #region GenerateProperties
+        
         #region GenerateValueTypeProperty
-        protected virtual void GenerateProperties_ValueTypeProperty(ClientServerEnum clientServer, ObjectClass objClass, ValueTypeProperty prop,
-            CodeTypeDeclaration c, CodeMemberField f, CodeMemberProperty p)
+        protected virtual void GenerateProperties_ValueTypeProperty(Current current)
         {
         }
 
-        private void GenerateProperties_ValueTypeProperty(ClientServerEnum clientServer, ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c)
+        private void GenerateProperties_ValueTypePropertyInternal(Current current)
         {
-            if (string.IsNullOrEmpty(prop.GetDataType())) throw new ApplicationException(
+            if (string.IsNullOrEmpty(current.property.GetDataType())) throw new ApplicationException(
                  string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
-                     objClass.ClassName, prop.PropertyName));
+                     current.objClass.ClassName, current.property.PropertyName));
 
-            Type t = Type.GetType(prop.GetDataType());
+            Type t = Type.GetType(current.property.GetDataType());
             if (t == null) throw new ApplicationException(
                  string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
-                     objClass.ClassName, prop.PropertyName, prop.GetDataType()));
+                     current.objClass.ClassName, current.property.PropertyName, current.property.GetDataType()));
 
-            CodeTypeReference ctr = null;
+            current.code_field = CreateField(current.code_class, current.property.GetDataType() + ((t.IsValueType && ((ValueTypeProperty)current.property).IsNullable) ? "?" : ""),
+                "_" + current.property.PropertyName);
 
-            if (t.IsValueType && prop.IsNullable)
-            {
-                ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.GetDataType()));
-            }
-            else
-            {
-                ctr = new CodeTypeReference(prop.GetDataType());
-            }
+            current.code_property = CreateProperty(current.code_class, current.code_field.Type, current.property.PropertyName);
 
-            CodeMemberField f = new CodeMemberField(ctr,
-                "_" + prop.PropertyName);
+            current.code_property.GetStatements.Add(new CodeSnippetExpression("return " + current.code_field.Name));
+            current.code_property.SetStatements.Add(new CodeSnippetExpression(current.code_field.Name + " = value"));
 
-            c.Members.Add(f);
-
-            CodeMemberProperty p = new CodeMemberProperty();
-            c.Members.Add(p);
-
-            p.Name = prop.PropertyName;
-            p.HasGet = true;
-            p.HasSet = true;
-            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            p.Type = f.Type;
-
-            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_" + prop.PropertyName)));
-            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
-
-            GenerateProperties_ValueTypeProperty(clientServer, objClass, prop, c, f, p);
+            GenerateProperties_ValueTypeProperty(current);
         }
         #endregion
 
         #region GenerateValueTypeProperty_Collection
-        protected virtual void GenerateProperties_ValueTypeProperty_Collection(ClientServerEnum clientServer, CodeCompileUnit code, ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c,
-            CodeTypeDeclaration collectionClass, CodeMemberField f, CodeMemberProperty p,
-            CodeMemberProperty navigationProperty, ObjectType otherType, string assocName)
+        protected virtual void GenerateProperties_ValueTypeProperty_Collection(Current current, Current collectionClass)
         {
         }
 
-        private void GenerateProperties_ValueTypeProperty_Collection(ClientServerEnum clientServer, CodeCompileUnit code, ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c, CodeNamespace ns)
+        private void GenerateProperties_ValueTypeProperty_CollectionInternal(Current current)
         {
-            if (string.IsNullOrEmpty(prop.GetDataType())) throw new ApplicationException(
+            if (string.IsNullOrEmpty(current.property.GetDataType())) throw new ApplicationException(
                  string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
-                     objClass.ClassName, prop.PropertyName));
+                     current.objClass.ClassName, current.property.PropertyName));
 
-            Type t = Type.GetType(prop.GetDataType());
+            Type t = Type.GetType(current.property.GetDataType());
             if (t == null) throw new ApplicationException(
                  string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
-                     objClass.ClassName, prop.PropertyName, prop.GetDataType()));
+                     current.objClass.ClassName, current.property.PropertyName, current.property.GetDataType()));
 
-            CodeTypeDeclaration collectionClass = new CodeTypeDeclaration(objClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
-            ns.Types.Add(collectionClass);
-            collectionClass.IsClass = true;
-            collectionClass.TypeAttributes = TypeAttributes.Public;
-            if (clientServer == ClientServerEnum.Client)
-            {
-                collectionClass.BaseTypes.Add("Kistl.API.Client.BaseClientCollectionEntry");
-            }
-            else
-            {
-                collectionClass.BaseTypes.Add("Kistl.API.Server.BaseServerCollectionEntry");
-            }
+            Current collectionClass = current.Clone();
 
+            collectionClass.code_class = CreateClass(collectionClass.code_namespace, current.objClass.ClassName + "_" + current.property.PropertyName + "CollectionEntry",
+                string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.clientServer));
+            
             // Create ID
-            GenerateDefaultProperty_ID(clientServer, objClass, collectionClass);
+            GenerateDefaultProperty_IDInternal(collectionClass.Clone());
 
             // Create Property
-            CodeTypeReference ctr = null;
+            collectionClass.code_field = CreateField(collectionClass.code_class,
+               current.property.GetDataType() + ((t.IsValueType && ((ValueTypeProperty)current.property).IsNullable) ? "?" : ""), "_Value");
 
-            if (t.IsValueType && prop.IsNullable)
+            collectionClass.code_property = CreateProperty(collectionClass.code_class, collectionClass.code_field.Type, "Value");
+
+            collectionClass.code_property.GetStatements.Add(new CodeSnippetExpression("return _Value"));
+            collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression("_Value = value"));
+
+            // Create NavigationProperty Class -> Collectionclass
+            current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName);
+
+            if (current.clientServer == ClientServerEnum.Client)
             {
-                ctr = new CodeTypeReference("System.Nullable", new CodeTypeReference(prop.GetDataType()));
+                current.code_property.Type = new CodeTypeReference(string.Format("List<{0}>", collectionClass.code_class.Name));
+
+                current.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
+                current.code_property.SetStatements.Add(
+                    new CodeSnippetExpression(string.Format(@"_{0} = value", current.property.PropertyName)));
+
+                current.code_field = CreateField(current.code_class, current.code_property.Type, string.Format(@"_{0}", current.property.PropertyName));
             }
             else
             {
-                ctr = new CodeTypeReference(prop.GetDataType());
-            }
-            CodeMemberField f = new CodeMemberField(ctr, "_Value");
-
-            collectionClass.Members.Add(f);
-
-            CodeMemberProperty p = new CodeMemberProperty();
-            collectionClass.Members.Add(p);
-
-            p.Name = "Value";
-            p.HasGet = true;
-            p.HasSet = true;
-            p.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            p.Type = f.Type;
-
-            p.GetStatements.Add(new CodeMethodReturnStatement(new CodeSnippetExpression("_Value")));
-            p.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_Value"), new CodePropertySetValueReferenceExpression()));
-
-            // Create NavigationProperty
-            CodeMemberProperty navigationProperty = new CodeMemberProperty();
-            c.Members.Add(navigationProperty);
-
-            navigationProperty.Name = prop.PropertyName;
-            navigationProperty.HasGet = true;
-            navigationProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-
-            if (clientServer == ClientServerEnum.Client)
-            {
-                navigationProperty.HasSet = true;
-                navigationProperty.Type = new CodeTypeReference("List", new CodeTypeReference(collectionClass.Name));
-
-                navigationProperty.GetStatements.Add(
-                    new CodeSnippetExpression(string.Format(@"return _{0}", prop.PropertyName)));
-                navigationProperty.SetStatements.Add(
-                    new CodeSnippetExpression(string.Format(@"_{0} = value", prop.PropertyName)));
-
-                CodeMemberField pf = new CodeMemberField(navigationProperty.Type, string.Format(@"_{0}", prop.PropertyName));
-
-                c.Members.Add(pf);
-            }
-            else
-            {
-                navigationProperty.HasSet = false;
+                current.code_property.HasSet = false;
             }
 
-            string assocName = "FK_" + collectionClass.Name + "_" + objClass.ClassName;
-            ObjectType otherType = new ObjectType(ns.Name, collectionClass.Name);
+            GenerateProperties_ValueTypeProperty_Collection(current, collectionClass);
+            GenerateProperties_ValueTypeProperty_Collection_StreamMethods(collectionClass);
+        }
 
-            GenerateProperties_ValueTypeProperty_Collection(clientServer, code, objClass, prop, c, collectionClass, f, p,
-                navigationProperty, otherType, assocName);
-
-            #region Generate Stream Methods
+        #region GenerateProperties_ValueTypeProperty_Collection_StreamMethods
+        private void GenerateProperties_ValueTypeProperty_Collection_StreamMethods(Current current)
+        {
             // Create ToStream Method
-            CodeMemberMethod m = new CodeMemberMethod();
-            collectionClass.Members.Add(m);
-            m.Name = "ToStream";
-            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            m.ReturnType = new CodeTypeReference(typeof(void));
+            CodeMemberMethod m = CreateOverrideMethod(current.code_class, "ToStream", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
-            m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));// TODO: Das ist C# spezifisch
 
+            m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.Value, sw)"));
- 
-            m = new CodeMemberMethod();
-            collectionClass.Members.Add(m);
-            m.Name = "FromStream";
-            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            m.ReturnType = new CodeTypeReference(typeof(void));
+
+            m = CreateOverrideMethod(current.code_class, "FromStream", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
-            m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));// TODO: Das ist C# spezifisch
 
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._Value, sr)"));
 
-            m = new CodeMemberMethod();
-            collectionClass.Members.Add(m);
-            m.Name = "CopyTo";
-            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            m.ReturnType = new CodeTypeReference(typeof(void));
+            m = CreateOverrideMethod(current.code_class, "CopyTo", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
-            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
 
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanging(\"Value\")", collectionClass.Name)));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._Value = this._Value", collectionClass.Name)));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanged(\"Value\")", collectionClass.Name)));
-            #endregion
+            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanging(\"Value\")", current.code_class.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._Value = this._Value", current.code_class.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanged(\"Value\")", current.code_class.Name)));
         }
         #endregion
 
+        #endregion
+
         #region GenerateProperties_ObjectReferenceProperty
-        protected virtual void GenerateProperties_ObjectReferenceProperty(ClientServerEnum clientServer, ObjectClass objClass, ObjectReferenceProperty prop,
-            CodeTypeDeclaration c, CodeMemberProperty navigationProperty,
-            CodeMemberField serializerField, CodeMemberProperty serializerProperty, ObjectType otherType, string assocName)
+        protected virtual void GenerateProperties_ObjectReferenceProperty(Current current, Current serializer)
         {
         }
 
-        private void GenerateProperties_ObjectReferenceProperty(ClientServerEnum clientServer, ObjectClass objClass, ObjectReferenceProperty prop, CodeTypeDeclaration c)
+        private void GenerateProperties_ObjectReferencePropertyInternal(Current current)
         {
             // Check if Datatype exits
-            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
+            if (current.ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
-                    prop.GetDataType(), objClass.ClassName, prop.PropertyName));
+                    current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
 
-            CodeMemberProperty navigationProperty = new CodeMemberProperty();
-            c.Members.Add(navigationProperty);
+            current.code_property = CreateProperty(current.code_class, current.property.GetDataType(), current.property.PropertyName);
+            current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
-            navigationProperty.Name = prop.PropertyName;
-            navigationProperty.HasGet = true;
-            navigationProperty.HasSet = true;
-            navigationProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            navigationProperty.Type = new CodeTypeReference(prop.GetDataType());
-
-            navigationProperty.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
-
-            ObjectType otherType = new ObjectType(prop.GetDataType());
-            string assocName = "FK_" + objClass.ClassName + "_" + otherType.Classname;
+            // ObjectType otherType = new ObjectType(prop.GetDataType());
+            Current serializer = current.Clone();
 
             // Serializer fk_ Field und Property
-            CodeMemberField serializerField = new CodeMemberField(typeof(int), "_fk_" + prop.PropertyName);
-            serializerField.InitExpression = new CodeSnippetExpression("Helper.INVALIDID"); // TODO: Das ist c# Spezifisch
-            c.Members.Add(serializerField);
+            serializer.code_field = CreateField(current.code_class, typeof(int), "_fk_" + current.property.PropertyName, "Helper.INVALIDID");
+            serializer.code_property = CreateProperty(current.code_class, typeof(int), "fk_" + current.property.PropertyName);
 
-            CodeMemberProperty serializerProperty = new CodeMemberProperty();
-            c.Members.Add(serializerProperty);
-            serializerProperty.Name = "fk_" + prop.PropertyName;
-            serializerProperty.HasGet = true;
-            serializerProperty.HasSet = true;
-            serializerProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            serializerProperty.Type = new CodeTypeReference(typeof(int));
-
-            GenerateProperties_ObjectReferenceProperty(clientServer, objClass, prop, c, 
-                navigationProperty, serializerField, serializerProperty, otherType, assocName);
+            GenerateProperties_ObjectReferenceProperty(current, serializer);
         }
         #endregion
 
         #region GenerateProperties_ObjectReferenceProperty_Collection
-        protected virtual void GenerateProperties_ObjectReferenceProperty_Collection(ClientServerEnum clientServer, ObjectClass objClass, ObjectReferenceProperty prop,
-            CodeTypeDeclaration c, CodeMemberProperty navigationProperty,
-            CodeMemberField serializerField, CodeMemberProperty serializerProperty, ObjectType otherType, string assocName)
+        protected virtual void GenerateProperties_ObjectReferenceProperty_Collection(Current current)
         {
         }
 
-        private void GenerateProperties_ObjectReferenceProperty_Collection(ClientServerEnum clientServer, ObjectClass objClass, ObjectReferenceProperty prop, CodeTypeDeclaration c)
+        private void GenerateProperties_ObjectReferenceProperty_CollectionInternal(Current current)
         {
-            //GenerateProperties_ObjectReferenceProperty_Collection(clientServer, objClass, prop, c,
-            //    navigationProperty, serializerField, serializerProperty, otherType, assocName);
+            GenerateProperties_ObjectReferenceProperty_Collection(current);
         }
         #endregion
 
         #region GenerateProperties_BackReferenceProperty
-        protected virtual void GenerateProperties_BackReferenceProperty(ClientServerEnum clientServer, ObjectClass objClass, BackReferenceProperty prop,
-            CodeTypeDeclaration c, CodeMemberProperty navigationProperty,
-            ObjectType otherType, string assocName)
+        protected virtual void GenerateProperties_BackReferenceProperty(Current current)
         {
         }
 
-        private void GenerateProperties_BackReferenceProperty(ClientServerEnum clientServer, ObjectClass objClass, BackReferenceProperty prop, CodeTypeDeclaration c)
+        private void GenerateProperties_BackReferencePropertyInternal(Current current)
         {
             // Check if Datatype exits
-            if (ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == prop.GetDataType()) == null)
+            if (current.ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on BackReferenceProperty {1}.{2}",
-                    prop.GetDataType(), objClass.ClassName, prop.PropertyName));
+                    current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
 
-            CodeMemberProperty navigationProperty = new CodeMemberProperty();
-            c.Members.Add(navigationProperty);
+            current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName, false);
+            current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
-            navigationProperty.Name = prop.PropertyName;
-            navigationProperty.HasGet = true;
-            navigationProperty.HasSet = false;
-            navigationProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-
-            navigationProperty.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
-
-            ObjectType otherType = new ObjectType(prop.GetDataType());
-            string assocName = "FK_" + otherType.Classname + "_" + objClass.ClassName;
-
-            GenerateProperties_BackReferenceProperty(clientServer, objClass, prop, c,
-                navigationProperty, otherType, assocName);
+            GenerateProperties_BackReferenceProperty(current);
         }
         #endregion
 
-        protected virtual void GenerateProperties(ClientServerEnum clientServer, CodeCompileUnit code, ObjectClass objClass, CodeTypeDeclaration c, CodeNamespace ns)
+        private void GeneratePropertiesInternal(Current current)
         {
-            foreach (BaseProperty baseProp in objClass.Properties)
+            foreach (BaseProperty baseProp in current.objClass.Properties)
             {
+                current.property = baseProp;
                 if (baseProp is ValueTypeProperty && ((ValueTypeProperty)baseProp).IsList)
                 {
                     // Simple Property Collection
-                    GenerateProperties_ValueTypeProperty_Collection(clientServer, code, objClass, (ValueTypeProperty)baseProp, c, ns);
+                    GenerateProperties_ValueTypeProperty_CollectionInternal(current.Clone());
                 }
                 else if (baseProp is ValueTypeProperty)
                 {
                     // Simple Property
-                    GenerateProperties_ValueTypeProperty(clientServer, objClass, (ValueTypeProperty)baseProp, c);
+                    GenerateProperties_ValueTypePropertyInternal(current.Clone());
                 }
                 else if (baseProp is ObjectReferenceProperty && ((ObjectReferenceProperty)baseProp).IsList)
                 {
                     // "pointer" Objekt Collection
-                    GenerateProperties_ObjectReferenceProperty_Collection(clientServer, objClass, (ObjectReferenceProperty)baseProp, c);
+                    GenerateProperties_ObjectReferenceProperty_CollectionInternal(current.Clone());
                 }
                 else if (baseProp is ObjectReferenceProperty)
                 {
                     // "pointer" Objekt
-                    GenerateProperties_ObjectReferenceProperty(clientServer, objClass, (ObjectReferenceProperty)baseProp, c);
+                    GenerateProperties_ObjectReferencePropertyInternal(current.Clone());
                 }
                 else if (baseProp is BackReferenceProperty)
                 {
                     // TODO: Das ist eigentlich falsch herum, das sollte generiert werden,
                     // wenn bei der referenzierenden Klasse ein FK eingetragen wurde.
                     // Das sind quasi "AutoProperties"
-                    GenerateProperties_BackReferenceProperty(clientServer, objClass, (BackReferenceProperty)baseProp, c);
+                    GenerateProperties_BackReferencePropertyInternal(current.Clone());
                 }
                 else
                 {
@@ -642,35 +722,35 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateDefaultMethods
-        protected virtual void GenerateDefaultMethods(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c)
+        private void GenerateDefaultMethodsInternal(Current current)
         {
             // Create ToString Delegate
             CodeMemberEvent e = new CodeMemberEvent();
-            c.Members.Add(e);
+            current.code_class.Members.Add(e);
 
             e.Attributes = MemberAttributes.Public;
-            e.Type = new CodeTypeReference("ToStringHandler", new CodeTypeReference(objClass.ClassName));
-            e.Name = "OnToString_" + objClass.ClassName;
+            e.Type = new CodeTypeReference("ToStringHandler", new CodeTypeReference(current.objClass.ClassName));
+            e.Name = "OnToString_" + current.objClass.ClassName;
 
             // Create PreSave Delegate
             e = new CodeMemberEvent();
-            c.Members.Add(e);
+            current.code_class.Members.Add(e);
 
             e.Attributes = MemberAttributes.Public;
-            e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(objClass.ClassName));
-            e.Name = "OnPreSave_" + objClass.ClassName;
+            e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(current.objClass.ClassName));
+            e.Name = "OnPreSave_" + current.objClass.ClassName;
 
             // Create PostSave Delegate
             e = new CodeMemberEvent();
-            c.Members.Add(e);
+            current.code_class.Members.Add(e);
 
             e.Attributes = MemberAttributes.Public;
-            e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(objClass.ClassName));
-            e.Name = "OnPostSave_" + objClass.ClassName;
+            e.Type = new CodeTypeReference("ObjectEventHandler", new CodeTypeReference(current.objClass.ClassName));
+            e.Name = "OnPostSave_" + current.objClass.ClassName;
 
             // Create ToString Method
             CodeMemberMethod m = new CodeMemberMethod();
-            c.Members.Add(m);
+            current.code_class.Members.Add(m);
             m.CustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Diagnostics.DebuggerHidden")));
             m.Name = "ToString";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
@@ -681,77 +761,78 @@ namespace Kistl.Server.Generators
             {{
                 OnToString_{0}(this, e);
             }}
-            return e.Result", objClass.ClassName)));// TODO: Das ist C# spezifisch
+            return e.Result", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
 
             // Create NotifyPreSave Method
             m = new CodeMemberMethod();
-            c.Members.Add(m);
+            current.code_class.Members.Add(m);
             m.Name = "NotifyPreSave";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPreSave();
-            if (OnPreSave_{0} != null) OnPreSave_{0}(this)", objClass.ClassName)));// TODO: Das ist C# spezifisch
+            if (OnPreSave_{0} != null) OnPreSave_{0}(this)", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
 
             // Create NotifyPostSave Method
             m = new CodeMemberMethod();
-            c.Members.Add(m);
+            current.code_class.Members.Add(m);
             m.Name = "NotifyPostSave";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPostSave();
-            if (OnPostSave_{0} != null) OnPostSave_{0}(this)", objClass.ClassName)));// TODO: Das ist C# spezifisch
+            if (OnPostSave_{0} != null) OnPostSave_{0}(this)", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
 
             // Create Clone Method
             m = new CodeMemberMethod();
-            c.Members.Add(m);
+            current.code_class.Members.Add(m);
             m.Name = "Clone";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(object));
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"{0} obj = new {0}();
             CopyTo(obj);
-            return obj", objClass.ClassName)));// TODO: Das ist C# spezifisch
+            return obj", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
 
             // Create CopyTo Method
             m = new CodeMemberMethod();
-            c.Members.Add(m);
+            current.code_class.Members.Add(m);
             m.Name = "CopyTo";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(IDataObject)), "obj"));
             m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
 
-            foreach (Property p in objClass.Properties.OfType<Property>())
+            foreach (Property p in current.objClass.Properties.OfType<Property>())
             {
                 string stmt = "";
 
                 if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
                 {
-                    stmt = string.Format("(({1})obj).{0} = this.{0}", p.PropertyName, objClass.ClassName);
+                    stmt = string.Format("(({1})obj).{0} = this.{0}", p.PropertyName, current.objClass.ClassName);
                 }
                     // TODO: Geht z.Z. nur für den Client!!!!
-                else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList && clientServer == ClientServerEnum.Client)
+                else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
                 {
-                    stmt = string.Format("(({1})obj)._{0} = this.{0}.Clone()", p.PropertyName, objClass.ClassName);
+                    stmt = string.Format("(({1})obj)._{0} = this.{0}.Clone()", p.PropertyName, current.objClass.ClassName);
                 }
                 else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
                 {
-                    stmt = string.Format("(({1})obj).fk_{0} = this.fk_{0}", p.PropertyName, objClass.ClassName);
+                    stmt = string.Format("(({1})obj).fk_{0} = this.fk_{0}", p.PropertyName, current.objClass.ClassName);
                 }
 
                 if (!string.IsNullOrEmpty(stmt))
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("(({1})obj).NotifyPropertyChanging(\"{0}\")", p.PropertyName, objClass.ClassName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("(({1})obj).NotifyPropertyChanging(\"{0}\")", p.PropertyName, current.objClass.ClassName)));
                     m.Statements.Add(new CodeSnippetExpression(stmt));
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("(({1})obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, objClass.ClassName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("(({1})obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, current.objClass.ClassName)));
                 }
             }
         }
         #endregion
 
         #region GenerateMethods
-        protected virtual void GenerateMethods(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c)
+        private void GenerateMethodsInternal(Current current)
         {
-            ObjectClass baseObjClass = objClass;
+            ObjectClass baseObjClass = current.objClass;
+            ObjectClass objClass = current.objClass;
             while (objClass != null)
             {
                 foreach (Method method in objClass.Methods)
@@ -774,7 +855,7 @@ namespace Kistl.Server.Generators
                         // HACK!!! Die TypeParameter scheinen nicht zu funktionieren
                         CodeTypeDelegate d = new CodeTypeDelegate(method.MethodName + "_Handler<T>");
 
-                        c.Members.Add(d);
+                        current.code_class.Members.Add(d);
                         d.Attributes = MemberAttributes.Public;
 
                         // HACK!!! Die TypeParameter scheinen nicht zu funktionieren
@@ -792,7 +873,7 @@ namespace Kistl.Server.Generators
 
                     // Create event
                     CodeMemberEvent e = new CodeMemberEvent();
-                    c.Members.Add(e);
+                    current.code_class.Members.Add(e);
 
                     e.Attributes = MemberAttributes.Public;
                     e.Type = new CodeTypeReference(method.MethodName + "_Handler",
@@ -801,7 +882,7 @@ namespace Kistl.Server.Generators
 
                     // Create Method
                     CodeMemberMethod m = new CodeMemberMethod();
-                    c.Members.Add(m);
+                    current.code_class.Members.Add(m);
                     m.Name = method.MethodName;
                     m.Attributes = (objClass == baseObjClass) ? (MemberAttributes.Public) : (MemberAttributes.Public | MemberAttributes.Override);
                     m.ReturnType = new CodeTypeReference(typeof(string));
@@ -834,18 +915,18 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateStreamMethods
-        protected virtual void GenerateStreamMethods(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c)
+        private void GenerateStreamMethodsInternal(Current current)
         {
             // Create ToStream Method
             CodeMemberMethod m = new CodeMemberMethod();
-            c.Members.Add(m);
+            current.code_class.Members.Add(m);
             m.Name = "ToStream";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
             m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));// TODO: Das ist C# spezifisch
 
-            foreach (BaseProperty p in objClass.Properties)
+            foreach (BaseProperty p in current.objClass.Properties)
             {
                 if (p is ValueTypeProperty)
                 {
@@ -856,7 +937,7 @@ namespace Kistl.Server.Generators
                     m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.fk_{0}, sw)", p.PropertyName)));
                 }
                 else if (p is BackReferenceProperty
-                    && clientServer == ClientServerEnum.Server
+                    && current.clientServer == ClientServerEnum.Server
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
                     m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}.OfType<IDataObject>(), sw)", p.PropertyName)));
@@ -864,7 +945,7 @@ namespace Kistl.Server.Generators
             }
 
             m = new CodeMemberMethod();
-            c.Members.Add(m);
+            current.code_class.Members.Add(m);
             m.Name = "FromStream";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
@@ -872,11 +953,11 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
             m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));// TODO: Das ist C# spezifisch
 
-            foreach (BaseProperty p in objClass.Properties)
+            foreach (BaseProperty p in current.objClass.Properties)
             {
                 if (p is Property && ((Property)p).IsList)
                 {
-                    if(clientServer == ClientServerEnum.Client)
+                    if (current.clientServer == ClientServerEnum.Client)
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx)", p.PropertyName)));
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr, ctx)", p.PropertyName)));
@@ -890,7 +971,7 @@ namespace Kistl.Server.Generators
                     m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName)));
                 }
                 else if (p is BackReferenceProperty
-                    && clientServer == ClientServerEnum.Client
+                    && current.clientServer == ClientServerEnum.Client
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
                     m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr, ctx)", p.PropertyName)));

@@ -41,7 +41,7 @@ namespace Kistl.App.Projekte
         
         private int _fk_Kunde = Helper.INVALIDID;
         
-        private System.Nullable<double> _Auftragswert;
+        private System.Double? _Auftragswert;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -180,7 +180,7 @@ namespace Kistl.App.Projekte
         }
         
         [EdmScalarPropertyAttribute()]
-        public System.Nullable<double> Auftragswert
+        public System.Double? Auftragswert
         {
             get
             {

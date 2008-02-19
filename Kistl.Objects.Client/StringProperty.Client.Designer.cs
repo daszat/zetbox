@@ -26,9 +26,9 @@ namespace Kistl.App.Base
     public class StringProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
-        private System.Nullable<int> _Length;
+        private System.Int32? _Length;
         
-        public System.Nullable<int> Length
+        public System.Int32? Length
         {
             get
             {

@@ -39,19 +39,19 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateObjects
-        protected override void GenerateObjects(ClientServerEnum clientServer, ObjectClass objClass, CodeCompileUnit code, CodeNamespace n, CodeTypeDeclaration c)
+        protected override void GenerateObjects(Current current)
         {
-            base.GenerateObjects(clientServer, objClass, code, n, c);
+            base.GenerateObjects(current);
 
-            if (clientServer == ClientServerEnum.Server)
+            if (current.clientServer == ClientServerEnum.Server)
             {
-                GenerateEdmRelationshipAttribute(objClass, code);
+                GenerateEdmRelationshipAttribute(current.objClass, current.code);
 
-                c.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
+                current.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName",
                         new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name",
-                        new CodePrimitiveExpression(objClass.ClassName))));
+                        new CodePrimitiveExpression(current.objClass.ClassName))));
             }
         }
         #endregion
@@ -90,13 +90,13 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateServerDefaultProperties
 
-        protected override void GenerateDefaultProperty_ID(ClientServerEnum clientServer, ObjectClass objClass, CodeTypeDeclaration c, CodeMemberField f, CodeMemberProperty p)
+        protected override void GenerateDefaultProperty_ID(Current current)
         {
-            base.GenerateDefaultProperty_ID(clientServer, objClass, c, f, p);
+            base.GenerateDefaultProperty_ID(current);
 
-            if (clientServer == ClientServerEnum.Server)
+            if (current.clientServer == ClientServerEnum.Server)
             {
-                p.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute",
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute",
                     new CodeAttributeArgument("EntityKeyProperty",
                         new CodePrimitiveExpression(true)),
                     new CodeAttributeArgument("IsNullable",
@@ -107,140 +107,119 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateValueTypeProperty
-        protected override void GenerateProperties_ValueTypeProperty(ClientServerEnum clientServer, ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c, CodeMemberField f, CodeMemberProperty p)
+        protected override void GenerateProperties_ValueTypeProperty(Current current)
         {
-            base.GenerateProperties_ValueTypeProperty(clientServer, objClass, prop, c, f, p);
+            base.GenerateProperties_ValueTypeProperty(current);
 
-            if (clientServer == ClientServerEnum.Server)
+            if (current.clientServer == ClientServerEnum.Server)
             {
-                p.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
             }
         }
         #endregion
 
-        protected override void GenerateProperties_ValueTypeProperty_Collection(ClientServerEnum clientServer, CodeCompileUnit code, ObjectClass objClass, ValueTypeProperty prop, CodeTypeDeclaration c, CodeTypeDeclaration collectionClass, CodeMemberField f, CodeMemberProperty p, CodeMemberProperty navigationProperty, ObjectType otherType, string assocName)
+        protected override void GenerateProperties_ValueTypeProperty_Collection(Current current, Current collectionClass)
         {
-            base.GenerateProperties_ValueTypeProperty_Collection(clientServer, code, objClass, prop, c, collectionClass, f, p, navigationProperty, otherType, assocName);
+            base.GenerateProperties_ValueTypeProperty_Collection(current, collectionClass);
 
-            if (clientServer == ClientServerEnum.Server)
+            if (current.clientServer == ClientServerEnum.Server)
             {
-                p.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
+                collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
 
-                code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
+                current.code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
                 new CodeAttributeArgument(
                     new CodePrimitiveExpression("Model")),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression(assocName)),
+                    new CodePrimitiveExpression(Generator.GetAssociationName(current.code_class, collectionClass.code_class))),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression("A_" + prop.ObjectClass.ClassName)),
+                    new CodePrimitiveExpression("A_" + current.property.ObjectClass.ClassName)),
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
                 new CodeAttributeArgument(
-                    new CodeTypeOfExpression(prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName)),
+                    new CodeTypeOfExpression(current.property.ObjectClass.Module.Namespace + "." + current.property.ObjectClass.ClassName)),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression("B_" + otherType.Classname)),
+                    new CodePrimitiveExpression("B_" + collectionClass.code_class.Name)),
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
                 new CodeAttributeArgument(
-                    new CodeTypeOfExpression(otherType.Namespace + "." + otherType.Classname))
+                    new CodeTypeOfExpression(collectionClass.code_namespace.Name + "." + collectionClass.code_class.Name))
                     ));
 
-                collectionClass.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
+                collectionClass.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName",
                         new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name",
-                        new CodePrimitiveExpression(collectionClass.Name))));
+                        new CodePrimitiveExpression(collectionClass.code_class.Name))));
 
-                navigationProperty.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionClass.Name));
+                current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionClass.code_class.Name));
 
-                navigationProperty.CustomAttributes.Add(new CodeAttributeDeclaration(
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
                     "EdmRelationshipNavigationPropertyAttribute",
                     new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
-                    new CodeAttributeArgument(new CodePrimitiveExpression("B_" + otherType.Classname))));
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.code_class, collectionClass.code_class))),
+                    new CodeAttributeArgument(new CodePrimitiveExpression("B_" + collectionClass.code_class.Name))));
 
 
-                navigationProperty.GetStatements.Add(
+                current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
                 if (!c.IsLoaded) c.Load(); 
-                return c", collectionClass.Name, assocName, otherType.Classname)));
-
-                // BackNavigation Property
-                /*backNavigationProperty.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
-                    new CodeAttributeArgument(new CodePrimitiveExpression("A_" + c.Name))));
-
-
-                backNavigationProperty.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", c.Name, assocName, c.Name)));
-
-                backNavigationProperty.SetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", c.Name, assocName, c.Name)));*/
+                return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_class, collectionClass.code_class), collectionClass.code_class.Name)));
             }
         }
 
         #region GenerateObjectReferenceProperty
 
-        protected override void GenerateProperties_ObjectReferenceProperty(ClientServerEnum clientServer, ObjectClass objClass, ObjectReferenceProperty prop,
-            CodeTypeDeclaration c, CodeMemberProperty navigationProperty, CodeMemberField serializerField,
-            CodeMemberProperty serializerProperty, ObjectType otherType, string assocName)
+        protected override void GenerateProperties_ObjectReferenceProperty(Current current, Current serializer)
         {
-            base.GenerateProperties_ObjectReferenceProperty(clientServer, objClass, prop, c, 
-                navigationProperty, serializerField, serializerProperty, otherType, assocName);
+            base.GenerateProperties_ObjectReferenceProperty(current, serializer);
 
-            if (clientServer == ClientServerEnum.Client)
+            if (current.clientServer == ClientServerEnum.Client)
             {
-                navigationProperty.GetStatements.Add(
+                current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_{1})", prop.GetDataType(), prop.PropertyName)));
+                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_{1})", current.property.GetDataType(), current.property.PropertyName)));
 
-                navigationProperty.SetStatements.Add(
+                current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"_fk_{0} = value.ID", prop.PropertyName)));
+                        string.Format(@"_fk_{0} = value.ID", current.property.PropertyName)));
 
-                serializerProperty.GetStatements.Add(
+                serializer.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"return _fk_{0}", prop.PropertyName)));
-                serializerProperty.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+                        string.Format(@"return _fk_{0}", current.property.PropertyName)));
+                serializer.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + current.property.PropertyName), new CodePropertySetValueReferenceExpression()));
             }
             else
             {
-                navigationProperty.CustomAttributes.Add(new CodeAttributeDeclaration(
+                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
+
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
                     "EdmRelationshipNavigationPropertyAttribute",
                     new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
-                    new CodeAttributeArgument(new CodePrimitiveExpression("A_" + otherType.Classname))));
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(objRefProp.ReferenceObjectClass.ClassName, current.objClass.ClassName))),
+                    new CodeAttributeArgument(new CodePrimitiveExpression("A_" + objRefProp.ReferenceObjectClass.ClassName))));
 
 
-                navigationProperty.GetStatements.Add(
+                current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", prop.GetDataType(), assocName, otherType.Classname)));
+                return r.Value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass.ClassName, current.objClass.ClassName), objRefProp.ReferenceObjectClass.ClassName)));
 
-                navigationProperty.SetStatements.Add(
+                current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", prop.GetDataType(), assocName, otherType.Classname)));
+                r.Value = value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass.ClassName, current.objClass.ClassName), objRefProp.ReferenceObjectClass.ClassName)));
 
-                serializerProperty.GetStatements.Add(
+                serializer.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_{0} == Helper.INVALIDID && {0} != null)
                 {{
                     _fk_{0} = {0}.ID;
                 }}
-                return _fk_{0}", prop.PropertyName)));
-                serializerProperty.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + prop.PropertyName), new CodePropertySetValueReferenceExpression()));
+                return _fk_{0}", current.property.PropertyName)));
+                serializer.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + current.property.PropertyName), new CodePropertySetValueReferenceExpression()));
             }
         }
 
@@ -248,41 +227,43 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateBackReferenceProperty
 
-        protected override void GenerateProperties_BackReferenceProperty(ClientServerEnum clientServer, ObjectClass objClass, BackReferenceProperty prop, CodeTypeDeclaration c, CodeMemberProperty navigationProperty, ObjectType otherType, string assocName)
+        protected override void GenerateProperties_BackReferenceProperty(Current current)
         {
-            base.GenerateProperties_BackReferenceProperty(clientServer, objClass, prop, c, navigationProperty, otherType, assocName);
+            base.GenerateProperties_BackReferenceProperty(current);
 
-            if (clientServer == ClientServerEnum.Client)
+            BackReferenceProperty backRefProp = (BackReferenceProperty)current.property;
+
+            if (current.clientServer == ClientServerEnum.Client)
             {
-                navigationProperty.Type = new CodeTypeReference("List", new CodeTypeReference(prop.GetDataType()));
+                current.code_property.Type = new CodeTypeReference("List", new CodeTypeReference(current.property.GetDataType()));
 
-                navigationProperty.GetStatements.Add(
+                current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(
                         @"if(_{0} == null) _{0} = Context.GetListOf<{1}>(this, ""{0}"");
                 return _{0}",
-                    prop.PropertyName, prop.GetDataType())));
+                    current.property.PropertyName, current.property.GetDataType())));
 
-                CodeMemberField f = new CodeMemberField(navigationProperty.Type,
-                    "_" + prop.PropertyName);
+                CodeMemberField f = new CodeMemberField(current.code_property.Type,
+                    "_" + current.property.PropertyName);
 
-                c.Members.Add(f);
+                current.code_class.Members.Add(f);
             }
             else
             {
-                navigationProperty.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(prop.GetDataType()));
+                current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(current.property.GetDataType()));
 
-                navigationProperty.CustomAttributes.Add(new CodeAttributeDeclaration(
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
                     "EdmRelationshipNavigationPropertyAttribute",
                     new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(assocName)),
-                    new CodeAttributeArgument(new CodePrimitiveExpression("B_" + otherType.Classname))));
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.objClass.ClassName, backRefProp.ReferenceProperty.ObjectClass.ClassName))),
+                    new CodeAttributeArgument(new CodePrimitiveExpression("B_" + backRefProp.ReferenceProperty.ObjectClass.ClassName))));
 
 
-                navigationProperty.GetStatements.Add(
+                current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
                 if (!c.IsLoaded) c.Load(); 
-                return c", prop.GetDataType(), assocName, otherType.Classname)));
+                return c", current.property.GetDataType(), Generator.GetAssociationName(current.objClass.ClassName, backRefProp.ReferenceProperty.ObjectClass.ClassName), backRefProp.ReferenceProperty.ObjectClass.ClassName)));
             }
         }
 

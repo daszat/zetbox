@@ -32,7 +32,7 @@ namespace Kistl.App.Projekte
         
         private List<Kistl.App.Projekte.Projekt> _Projekte;
         
-        private System.Nullable<System.DateTime> _Geburtstag;
+        private System.DateTime? _Geburtstag;
         
         private string _SVNr;
         
@@ -72,7 +72,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<System.DateTime> Geburtstag
+        public System.DateTime? Geburtstag
         {
             get
             {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.CodeDom.Compiler;
+using Kistl.API;
+using System.CodeDom;
 
 namespace Kistl.Server.Generators
 {
@@ -94,5 +96,20 @@ namespace Kistl.Server.Generators
         /// prevent this class from being instatiated
         /// </summary>
         private Generator() { }
+
+        public static string GetAssociationName(string parentClass, string childClass)
+        {
+            return "FK_" + childClass + "_" + parentClass;
+        }
+
+        public static string GetAssociationName(ObjectType parentClass, ObjectType childClass)
+        {
+            return GetAssociationName(parentClass.Classname, childClass.Classname);
+        }
+
+        public static string GetAssociationName(CodeTypeDeclaration parentClass, CodeTypeDeclaration childClass)
+        {
+            return GetAssociationName(parentClass.Name, childClass.Name);
+        }
     }
 }

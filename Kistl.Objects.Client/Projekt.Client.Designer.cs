@@ -34,7 +34,7 @@ namespace Kistl.App.Projekte
         
         private int _fk_Mitarbeiter = Helper.INVALIDID;
         
-        private System.Nullable<double> _AufwandGes;
+        private System.Double? _AufwandGes;
         
         private string _Kundenname;
         
@@ -101,7 +101,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<double> AufwandGes
+        public System.Double? AufwandGes
         {
             get
             {

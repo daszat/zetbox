@@ -32,11 +32,11 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private System.Nullable<System.DateTime> _DatumVon;
+        private System.DateTime? _DatumVon;
         
-        private System.Nullable<System.DateTime> _DatumBis;
+        private System.DateTime? _DatumBis;
         
-        private System.Nullable<double> _Aufwand;
+        private System.Double? _Aufwand;
         
         public override int ID
         {
@@ -87,7 +87,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<System.DateTime> DatumVon
+        public System.DateTime? DatumVon
         {
             get
             {
@@ -99,7 +99,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<System.DateTime> DatumBis
+        public System.DateTime? DatumBis
         {
             get
             {
@@ -111,7 +111,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<double> Aufwand
+        public System.Double? Aufwand
         {
             get
             {

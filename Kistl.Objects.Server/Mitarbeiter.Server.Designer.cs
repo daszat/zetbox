@@ -31,7 +31,7 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private System.Nullable<System.DateTime> _Geburtstag;
+        private System.DateTime? _Geburtstag;
         
         private string _SVNr;
         
@@ -84,7 +84,7 @@ namespace Kistl.App.Projekte
         }
         
         [EdmScalarPropertyAttribute()]
-        public System.Nullable<System.DateTime> Geburtstag
+        public System.DateTime? Geburtstag
         {
             get
             {

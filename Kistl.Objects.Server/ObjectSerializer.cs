@@ -105,7 +105,7 @@ namespace Kistl.API
         {
             get
             {
-                return _Object;
+                 return _Object;
             }
             set
             {

@@ -36,7 +36,7 @@ namespace Kistl.App.Projekte
         
         private int _fk_Kunde = Helper.INVALIDID;
         
-        private System.Nullable<double> _Auftragswert;
+        private System.Double? _Auftragswert;
         
         public override int ID
         {
@@ -137,7 +137,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public System.Nullable<double> Auftragswert
+        public System.Double? Auftragswert
         {
             get
             {
