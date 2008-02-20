@@ -57,8 +57,7 @@ namespace Kistl.Server.Generators
             this.codeBasePath = codeBasePath + (codeBasePath.EndsWith("\\") ? "" : "\\");
             Directory.CreateDirectory(codeBasePath);
 
-            var objClassList = from c in ctx.GetTable<ObjectClass>()
-                               select c;
+            var objClassList = Generator.GetObjectClassList(ctx);
 
             Directory.GetFiles(this.codeBasePath, "*.cs", SearchOption.AllDirectories).
                 ToList().ForEach(f => File.Delete(f));
@@ -556,7 +555,7 @@ namespace Kistl.Server.Generators
 
             Current collectionClass = current.Clone();
 
-            collectionClass.code_class = CreateClass(collectionClass.code_namespace, current.objClass.ClassName + "_" + current.property.PropertyName + "CollectionEntry",
+            collectionClass.code_class = CreateClass(collectionClass.code_namespace, Generator.GetPropertyCollectionObjectType((Property)current.property).Classname,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.clientServer));
             
             // Create ID

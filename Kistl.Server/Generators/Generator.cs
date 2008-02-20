@@ -5,6 +5,7 @@ using System.Text;
 using System.CodeDom.Compiler;
 using Kistl.API;
 using System.CodeDom;
+using Kistl.App.Base;
 
 namespace Kistl.Server.Generators
 {
@@ -97,7 +98,8 @@ namespace Kistl.Server.Generators
         /// </summary>
         private Generator() { }
 
-        public static string GetAssociationName(string parentClass, string childClass)
+        #region GetAssociationName
+        private static string GetAssociationName(string parentClass, string childClass)
         {
             return "FK_" + childClass + "_" + parentClass;
         }
@@ -107,9 +109,121 @@ namespace Kistl.Server.Generators
             return GetAssociationName(parentClass.Classname, childClass.Classname);
         }
 
-        public static string GetAssociationName(CodeTypeDeclaration parentClass, CodeTypeDeclaration childClass)
+        public static string GetAssociationName(ObjectType parentClass, ObjectClass childClass)
+        {
+            return GetAssociationName(parentClass.Classname, childClass.ClassName);
+        }
+
+        public static string GetAssociationName(ObjectClass parentClass, ObjectType childClass)
+        {
+            return GetAssociationName(parentClass.ClassName, childClass.Classname);
+        }
+
+        public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass)
+        {
+            return GetAssociationName(parentClass.ClassName, childClass.ClassName);
+        }
+
+        public static string GetAssociationName(CodeNamespace parentNamespace, CodeTypeDeclaration parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass)
         {
             return GetAssociationName(parentClass.Name, childClass.Name);
         }
+        #endregion 
+
+        #region GetAssociationParentRoleName
+        private static string GetAssociationParentRoleName(string obj)
+        {
+            return "A_" + obj;
+        }
+
+        public static string GetAssociationParentRoleName(ObjectType obj)
+        {
+            return GetAssociationParentRoleName(obj.Classname);
+        }
+
+        public static string GetAssociationParentRoleName(ObjectClass obj)
+        {
+            return GetAssociationParentRoleName(obj.ClassName);
+        }
+
+        public static string GetAssociationParentRoleName(CodeNamespace ns, CodeTypeDeclaration c)
+        {
+            return GetAssociationParentRoleName(c.Name);
+        }
+        #endregion
+
+        #region GetAssociationChildRoleName
+        private static string GetAssociationChildRoleName(string obj)
+        {
+            return "B_" + obj;
+        }
+
+        public static string GetAssociationChildRoleName(ObjectType obj)
+        {
+            return GetAssociationChildRoleName(obj.Classname);
+        }
+
+        public static string GetAssociationChildRoleName(ObjectClass obj)
+        {
+            return GetAssociationChildRoleName(obj.ClassName);
+        }
+
+        public static string GetAssociationChildRoleName(CodeNamespace ns, CodeTypeDeclaration c)
+        {
+            return GetAssociationChildRoleName(c.Name);
+        }
+        #endregion
+
+        #region GetPropertyCollectionObjectType
+        public static ObjectType GetPropertyCollectionObjectType(Property prop)
+        {
+            return new ObjectType(prop.ObjectClass.Module.Namespace,
+                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
+        }
+        #endregion
+
+        #region GetDatabaseTableName
+        public static string GetDatabaseTableName(ObjectClass objClass)
+        {
+            return objClass.TableName;
+        }
+
+        public static string GetDatabaseTableName(Property prop)
+        {
+            if (!prop.IsList) throw new ArgumentException("Property must be a List Property", "prop");
+            return prop.ObjectClass.TableName + "_" + prop.PropertyName + "Collection";
+        }
+        #endregion
+
+        #region GetLists
+        public static IQueryable<ObjectClass> GetObjectClassList(Kistl.API.Server.KistlDataContext ctx)
+        {
+            return from c in ctx.GetTable<ObjectClass>()
+                   select c;
+        }
+
+        public static IQueryable<Property> GetCollectionProperties(Kistl.API.Server.KistlDataContext ctx)
+        {
+            // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
+            // It's a Beta Version - so what!
+            var objClasses = GetObjectClassList(ctx);
+            return from p in ctx.GetTable<Property>()
+                   from o in objClasses
+                   where p.ObjectClass.ID == o.ID && p.IsList && p is Property
+                   select p;
+        }
+
+        public static IQueryable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.Server.KistlDataContext ctx)
+        {
+            // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
+            // It's a Beta Version - so what!
+            var objClasses = GetObjectClassList(ctx);
+            return from p in ctx.GetTable<ObjectReferenceProperty>()
+                   from o in objClasses
+                   where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
+                   select p;
+        }
+        #endregion
     }
+
 }
