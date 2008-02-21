@@ -26,6 +26,7 @@
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons" />
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies" />
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations" />
+    <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
@@ -35,9 +36,9 @@
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Task" EntitySet="Task" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_Mitarbeiter" Association="Model.Store.FK_Projekt_Mitarbeiter">
+    <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
-      <End Role="B_Projekt" EntitySet="Projekt" />
+      <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_ObjectClass" Association="Model.Store.FK_ObjectClass_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
@@ -114,6 +115,10 @@
     <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.Store.FK_MethodInvocation_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
+      <End Role="A_Projekt" EntitySet="Projekt" />
+      <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Kunde_EMailsCollectionEntry_Kunde" Association="Model.Store.FK_Kunde_EMailsCollectionEntry_Kunde">
       <End Role="A_Kunde" EntitySet="Kunde" />
@@ -330,6 +335,14 @@
     <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="Projekt_MitarbeiterCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Projekt" Type="int" Nullable="true" />
+    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+  </EntityType>
   <EntityType Name="Kunde_EMailsCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -362,14 +375,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Projekt_Mitarbeiter">
+  <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter">
     <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <End Role="B_Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
+    <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Store.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="A_Mitarbeiter">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_Projekt">
+      <Dependent Role="B_Projekt_MitarbeiterCollectionEntry">
         <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
@@ -599,6 +612,18 @@
       </Principal>
       <Dependent Role="B_MethodInvocation">
         <PropertyRef Name="fk_InvokeOnObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt">
+    <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
+    <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Store.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Projekt">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Projekt_MitarbeiterCollectionEntry">
+        <PropertyRef Name="fk_Projekt" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

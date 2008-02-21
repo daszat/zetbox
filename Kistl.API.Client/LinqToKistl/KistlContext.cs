@@ -77,12 +77,16 @@ namespace Kistl.API.Client
 
         public void Attach(ICollectionEntry e)
         {
-            throw new NotSupportedException();
+            if (e == null) throw new ArgumentNullException("obj");
+            BaseClientCollectionEntry entryObj = (BaseClientCollectionEntry)e;
+            entryObj.AttachToContext(this);
         }
 
         public void Dettach(ICollectionEntry e)
         {
-            throw new NotSupportedException();
+            if (e == null) throw new ArgumentNullException("obj");
+            BaseClientCollectionEntry entryObj = (BaseClientCollectionEntry)e;
+            entryObj.DetachFromContext(this);
         }
 
         public void Delete(ICollectionEntry e)

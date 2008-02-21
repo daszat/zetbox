@@ -27,7 +27,15 @@ namespace Kistl.Client.Controls
             Value = API.Helper.INVALIDID;
         }
 
-        public ObjectType ObjectType { get; set; }
+        public ObjectType ObjectType
+        {
+            get { return (ObjectType)GetValue(ObjectTypeProperty); }
+            set { SetValue(ObjectTypeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ObjectTypeProperty =
+            DependencyProperty.Register("ObjectType", typeof(ObjectType), typeof(EditPointerProperty));
 
         public int TargetID
         {

@@ -120,7 +120,7 @@ namespace Kistl.Client
 
                         data.Children.Add(lst);
                     }
-                    else if (p is Kistl.App.Base.ObjectReferenceProperty)
+                    else if (p is Kistl.App.Base.ObjectReferenceProperty && !((Kistl.App.Base.ObjectReferenceProperty)p).IsList)
                     {
                         Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
                         pointer.Label = p.PropertyName;
@@ -147,6 +147,24 @@ namespace Kistl.Client
                             }
                         }
                     }
+                    else if (p is Kistl.App.Base.ObjectReferenceProperty && ((Kistl.App.Base.ObjectReferenceProperty)p).IsList)
+                    {
+                        Controls.EditPointerPropertyList pointerList = new Kistl.Client.Controls.EditPointerPropertyList();
+                        pointerList.Label = p.PropertyName;
+                        pointerList.ToolTip = p.AltText;
+
+                        pointerList.ObjectType = new ObjectType(p.GetDataType());
+
+                        // Set Binding, damit werden Änderungen automatisch übernommen.
+                        Binding b = new Binding(p.PropertyName);
+                        b.Mode = BindingMode.TwoWay;
+                        b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                        b.NotifyOnSourceUpdated = true;
+                        b.NotifyOnTargetUpdated = true;
+                        pointerList.SetBinding(Controls.EditPointerPropertyList.ValueProperty, b);
+
+                        data.Children.Add(pointerList);
+                    }
                     else if (p is Kistl.App.Base.ValueTypeProperty && ((Kistl.App.Base.ValueTypeProperty)p).IsList)
                     {
                         Controls.EditSimplePropertyList list = new EditSimplePropertyList();
@@ -168,7 +186,7 @@ namespace Kistl.Client
                     }
                     else
                     {
-                        PropertyControl control = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader( p.GetGUIRepresentation())));
+                        PropertyControl control = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader(p.GetGUIRepresentation())));
                         // Bezeichnung setzen
                         // TODO: sollte auch gebunden werden
                         control.Label = p.PropertyName;

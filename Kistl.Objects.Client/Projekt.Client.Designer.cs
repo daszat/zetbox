@@ -32,7 +32,7 @@ namespace Kistl.App.Projekte
         
         private List<Kistl.App.Projekte.Task> _Tasks;
         
-        private int _fk_Mitarbeiter = Helper.INVALIDID;
+        private List<Projekt_MitarbeiterCollectionEntry> _Mitarbeiter;
         
         private System.Double? _AufwandGes;
         
@@ -76,28 +76,15 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [XmlIgnore()]
-        public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
+        public List<Projekt_MitarbeiterCollectionEntry> Mitarbeiter
         {
             get
             {
-                return Context.GetQuery<Kistl.App.Projekte.Mitarbeiter>().Single(o => o.ID == fk_Mitarbeiter);
+                return _Mitarbeiter;
             }
             set
             {
-                _fk_Mitarbeiter = value.ID;
-            }
-        }
-        
-        public int fk_Mitarbeiter
-        {
-            get
-            {
-                return _fk_Mitarbeiter;
-            }
-            set
-            {
-                _fk_Mitarbeiter = value;
+                _Mitarbeiter = value;
             }
         }
         
@@ -189,7 +176,7 @@ namespace Kistl.App.Projekte
             ((Projekt)obj).Name = this.Name;
             ((Projekt)obj).NotifyPropertyChanged("Name");
             ((Projekt)obj).NotifyPropertyChanging("Mitarbeiter");
-            ((Projekt)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
+            ((Projekt)obj)._Mitarbeiter = this.Mitarbeiter.Clone();
             ((Projekt)obj).NotifyPropertyChanged("Mitarbeiter");
             ((Projekt)obj).NotifyPropertyChanging("AufwandGes");
             ((Projekt)obj).AufwandGes = this.AufwandGes;
@@ -203,7 +190,7 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.Name, sw);
-            BinarySerializer.ToBinary(this.fk_Mitarbeiter, sw);
+            BinarySerializer.ToBinary(this.Mitarbeiter, sw);
             BinarySerializer.ToBinary(this.AufwandGes, sw);
             BinarySerializer.ToBinary(this.Kundenname, sw);
         }
@@ -212,9 +199,74 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._Name, sr);
-            BinarySerializer.FromBinary(out this._fk_Mitarbeiter, sr);
+            BinarySerializer.FromBinaryCollectionEntries(out this._Mitarbeiter, sr, ctx);
             BinarySerializer.FromBinary(out this._AufwandGes, sr);
             BinarySerializer.FromBinary(out this._Kundenname, sr);
+        }
+    }
+    
+    public class Projekt_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_Value = Helper.INVALIDID;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Mitarbeiter Value
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Projekte.Mitarbeiter>().Single(o => o.ID == fk_Value);
+            }
+            set
+            {
+                _fk_Value = value.ID;
+            }
+        }
+        
+        public int fk_Value
+        {
+            get
+            {
+                return _fk_Value;
+            }
+            set
+            {
+                _fk_Value = value;
+            }
+        }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this._fk_Value, sw);
+        }
+        
+        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        {
+            base.FromStream(ctx, sr);
+            BinarySerializer.FromBinary(out this._fk_Value, sr);
+        }
+        
+        public override void CopyTo(Kistl.API.ICollectionEntry obj)
+        {
+            base.CopyTo(obj);
+            ((Projekt_MitarbeiterCollectionEntry)obj).NotifyPropertyChanging("Value");
+            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Value = this._fk_Value;
+            ((Projekt_MitarbeiterCollectionEntry)obj).NotifyPropertyChanged("Value");
         }
     }
 }

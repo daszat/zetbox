@@ -123,7 +123,6 @@ namespace Kistl.Server.Generators.SQLServer
 
                 foreach (Property p in objClass.Properties.OfType<Property>())
                 {
-                    // BackReferenceProperties sind uninteressant, diese ergeben sich
                     if (!p.IsList)
                     {
                         sb.Append(GetColumnStmt(p));
@@ -142,49 +141,46 @@ namespace Kistl.Server.Generators.SQLServer
             #endregion
 
             #region Create/Update List Properties
-            foreach (Property p in objClass.Properties.OfType<Property>())
+            foreach (Property p in objClass.Properties.OfType<Property>().Where(p => p.IsList))
             {
-                if (p.IsList)
+                cmd = new SqlCommand("select dbo.fn_TableExists(@t)", db, tx);
+                cmd.Parameters.AddWithValue("@t", Generator.GetDatabaseTableName(p));
+
+                if ((bool)cmd.ExecuteScalar())
                 {
-                    cmd = new SqlCommand("select dbo.fn_TableExists(@t)", db, tx);
-                    cmd.Parameters.AddWithValue("@t", Generator.GetDatabaseTableName(p));
+                    System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(p));
 
-                    if ((bool)cmd.ExecuteScalar())
-                    {
-                        System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(p));
+                    cmd = new SqlCommand("", db, tx);
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendFormat("alter table [{0}] alter column ", Generator.GetDatabaseTableName(p));
 
-                        cmd = new SqlCommand("", db, tx);
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendFormat("alter table [{0}] alter column ", Generator.GetDatabaseTableName(p));
+                    sb.Append(GetColumnStmt(p));
 
-                        sb.Append(GetColumnStmt(p));
+                    System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
+                    cmd.CommandText = sb.ToString();
+                    cmd.ExecuteNonQuery();
+                }
+                else
+                {
+                    System.Diagnostics.Trace.TraceInformation("Creating Table " + Generator.GetDatabaseTableName(p));
 
-                        System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
-                        cmd.CommandText = sb.ToString();
-                        cmd.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        System.Diagnostics.Trace.TraceInformation("Creating Table " + Generator.GetDatabaseTableName(p));
+                    cmd = new SqlCommand("", db, tx);
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendFormat("create table [{0}] ( ", Generator.GetDatabaseTableName(p));
+                    sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
 
-                        cmd = new SqlCommand("", db, tx);
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendFormat("create table [{0}] ( ", Generator.GetDatabaseTableName(p));
-                        sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
+                    sb.AppendLine(string.Format("[fk_{0}] [int] NOT NULL, ", p.ObjectClass.ClassName));
 
-                        sb.AppendLine(string.Format("[fk_{0}] [int] NOT NULL, ", p.ObjectClass.ClassName));
+                    sb.Append(GetColumnStmt(p));
+                    sb.AppendLine(",");
 
-                        sb.Append(GetColumnStmt(p));
-                        sb.AppendLine(",");
+                    sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", Generator.GetDatabaseTableName(p));
+                    sb.AppendLine();
+                    sb.Append(")");
 
-                        sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", Generator.GetDatabaseTableName(p));
-                        sb.AppendLine();
-                        sb.Append(")");
-
-                        System.Diagnostics.Trace.TraceInformation("  " + sb.ToString());
-                        cmd.CommandText = sb.ToString();
-                        cmd.ExecuteNonQuery();
-                    }
+                    System.Diagnostics.Trace.TraceInformation("  " + sb.ToString());
+                    cmd.CommandText = sb.ToString();
+                    cmd.ExecuteNonQuery();
                 }
             }
             #endregion

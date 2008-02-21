@@ -145,6 +145,8 @@ namespace Kistl.API.Client
             int tmpID;
             BinarySerializer.FromBinary(out tmpID, sr);
             ID = tmpID;
+
+            if (ctx != null) ctx.Attach(this);
         }
 
         public object Clone()
@@ -163,6 +165,19 @@ namespace Kistl.API.Client
 
         public virtual void NotifyPropertyChanged(string property)
         {
+        }
+
+        private KistlContext _context;
+        public KistlContext Context { get { return _context; } }
+        internal void AttachToContext(KistlContext ctx)
+        {
+            _context = ctx;
+        }
+
+        internal void DetachFromContext(KistlContext ctx)
+        {
+            if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
+            _context = null;
         }
     }
 

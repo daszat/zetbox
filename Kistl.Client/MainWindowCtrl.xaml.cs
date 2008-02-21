@@ -212,7 +212,7 @@ namespace Kistl.Client
                             .ForEach<BaseClientDataObject>(o => result.Add(new ObjNode(o, false)));
                     }
 
-                    foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
+                    foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>().Where(p => !p.IsList))
                     {
                         BaseClientDataObject item = Item.GetPropertyValue<BaseClientDataObject>(p.PropertyName);
                         if (item != null)

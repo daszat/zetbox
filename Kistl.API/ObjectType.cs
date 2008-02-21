@@ -81,7 +81,10 @@ namespace Kistl.API
         {
             get
             {
-                return string.Format("{0}.{1}", Namespace, Classname);
+                if (string.IsNullOrEmpty(Namespace) && string.IsNullOrEmpty(Classname))
+                    return "";
+                else
+                    return string.Format("{0}.{1}", Namespace, Classname);
             }
         }
 
@@ -89,7 +92,10 @@ namespace Kistl.API
         {
             get
             {
-                return string.Format("{0}.{1}, Kistl.Objects.Client", Namespace, Classname);
+                if (string.IsNullOrEmpty(Namespace) && string.IsNullOrEmpty(Classname))
+                    return "";
+                else
+                    return string.Format("{0}.{1}, Kistl.Objects.Client", Namespace, Classname);
             }
         }
 
@@ -97,7 +103,10 @@ namespace Kistl.API
         {
             get
             {
-                return string.Format("{0}.{1}, Kistl.Objects.Server", Namespace, Classname);
+                if (string.IsNullOrEmpty(Namespace) && string.IsNullOrEmpty(Classname))
+                    return "";
+                else
+                    return string.Format("{0}.{1}, Kistl.Objects.Server", Namespace, Classname);
             }
         }
 

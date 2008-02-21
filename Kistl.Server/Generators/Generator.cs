@@ -128,6 +128,11 @@ namespace Kistl.Server.Generators
         {
             return GetAssociationName(parentClass.Name, childClass.Name);
         }
+
+        public static string GetAssociationName(ObjectClass parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass)
+        {
+            return GetAssociationName(parentClass.ClassName, childClass.Name);
+        }
         #endregion 
 
         #region GetAssociationParentRoleName
@@ -222,6 +227,32 @@ namespace Kistl.Server.Generators
                    from o in objClasses
                    where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
                    select p;
+        }
+        #endregion
+
+        #region GetAssociationChildType
+        public static ObjectType GetAssociationChildType(Property prop)
+        {
+            if (!prop.IsList)
+            {
+                return new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+            }
+            else
+            {
+                return Generator.GetPropertyCollectionObjectType(prop);
+            }
+        }
+
+        public static ObjectType GetAssociationChildType(BackReferenceProperty prop)
+        {
+            if (!prop.ReferenceProperty.IsList)
+            {
+                return new ObjectType(prop.GetDataType());
+            }
+            else
+            {
+                return Generator.GetPropertyCollectionObjectType(prop.ReferenceProperty);
+            }
         }
         #endregion
     }

@@ -191,6 +191,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
+        <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Kunde_EMailsCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde_EMailsCollectionEntry)">
         <MappingFragment StoreEntitySet="Kunde_EMailsCollectionEntry">
@@ -217,11 +224,11 @@
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Projekt_Mitarbeiter" TypeName="Model.FK_Projekt_Mitarbeiter" StoreEntitySet="Projekt">
+    <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
       </EndProperty>
-      <EndProperty Name="B_Projekt">
+      <EndProperty Name="B_Projekt_MitarbeiterCollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
@@ -396,6 +403,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
+      <EndProperty Name="A_Projekt">
+        <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
+      </EndProperty>
+      <EndProperty Name="B_Projekt_MitarbeiterCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Projekt" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Kunde_EMailsCollectionEntry_Kunde" TypeName="Model.FK_Kunde_EMailsCollectionEntry_Kunde" StoreEntitySet="Kunde_EMailsCollectionEntry">
       <EndProperty Name="A_Kunde">

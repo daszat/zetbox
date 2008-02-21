@@ -63,25 +63,26 @@ namespace Kistl.Server.Generators.SQLServer
 
             foreach (ObjectReferenceProperty prop in props)
             {
-                ObjectType otherType = new ObjectType(prop.GetDataType());
+                ObjectType parentType = new ObjectType(prop.GetDataType());
+                ObjectType childType = Generator.GetAssociationChildType(prop);
 
                 code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
                 new CodeAttributeArgument(
                     new CodePrimitiveExpression("Model")),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression(Generator.GetAssociationName(otherType, objClass))),
+                    new CodePrimitiveExpression(Generator.GetAssociationName(parentType, childType))),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(otherType))),
+                    new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(parentType))),
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
                 new CodeAttributeArgument(
-                    new CodeTypeOfExpression(prop.GetDataType())),
+                    new CodeTypeOfExpression(parentType.NameDataObject)),
                 new CodeAttributeArgument(
-                    new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(prop.ObjectClass))),
+                    new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType))),
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
                 new CodeAttributeArgument(
-                    new CodeTypeOfExpression(prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName))
+                    new CodeTypeOfExpression(childType.NameDataObject))
                     ));
             }
         }
@@ -117,6 +118,105 @@ namespace Kistl.Server.Generators.SQLServer
         }
         #endregion
 
+        #region GenerateProperties_ObjectReferenceProperty_Collection
+        protected override void GenerateProperties_ObjectReferenceProperty_Collection(Current current, Current collectionClass, Current serializer)
+        {
+            base.GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializer);
+
+            if (current.clientServer == ClientServerEnum.Server)
+            {
+                // Assembly Code Relation
+                current.code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression("Model")),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class))),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(current.property.ObjectClass))),
+                new CodeAttributeArgument(
+                    new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
+                new CodeAttributeArgument(
+                    new CodeTypeOfExpression(current.property.ObjectClass.Module.Namespace + "." + current.property.ObjectClass.ClassName)),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class))),
+                new CodeAttributeArgument(
+                    new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
+                new CodeAttributeArgument(
+                    new CodeTypeOfExpression(collectionClass.code_namespace.Name + "." + collectionClass.code_class.Name))
+                    ));
+
+                // ParentClass
+                current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionClass.code_class.Name));
+
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
+                    "EdmRelationshipNavigationPropertyAttribute",
+                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class))),
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class)))));
+
+
+                current.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
+                if (!c.IsLoaded) c.Load(); 
+                return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class), collectionClass.code_class.Name)));
+
+                // Collection Class
+                collectionClass.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
+                    new CodeAttributeArgument("NamespaceName",
+                        new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument("Name",
+                        new CodePrimitiveExpression(collectionClass.code_class.Name))));
+
+                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
+
+                collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
+                    "EdmRelationshipNavigationPropertyAttribute",
+                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class))),
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass)))));
+                
+                collectionClass.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class), objRefProp.ReferenceObjectClass.ClassName)));
+
+                collectionClass.code_property.SetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class), objRefProp.ReferenceObjectClass.ClassName)));
+
+                // Serializer
+                serializer.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Value == Helper.INVALIDID && Value != null)
+                {{
+                    _fk_Value = Value.ID;
+                }}
+                return _fk_Value", current.property.PropertyName)));
+                serializer.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_Value"), new CodePropertySetValueReferenceExpression()));
+            }
+            else
+            {
+                collectionClass.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", current.property.GetDataType(), current.property.PropertyName)));
+
+                collectionClass.code_property.SetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"_fk_Value = value.ID", current.property.PropertyName)));
+
+                serializer.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"return _fk_Value", current.property.PropertyName)));
+                serializer.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_Value"), new CodePropertySetValueReferenceExpression()));
+            }
+        }
+        #endregion
+
+        #region GenerateProperties_ValueTypeProperty_Collection
         protected override void GenerateProperties_ValueTypeProperty_Collection(Current current, Current collectionClass)
         {
             base.GenerateProperties_ValueTypeProperty_Collection(current, collectionClass);
@@ -166,6 +266,7 @@ namespace Kistl.Server.Generators.SQLServer
                 return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class), collectionClass.code_class.Name)));
             }
         }
+        #endregion
 
         #region GenerateObjectReferenceProperty
 
@@ -231,16 +332,17 @@ namespace Kistl.Server.Generators.SQLServer
             base.GenerateProperties_BackReferenceProperty(current);
 
             BackReferenceProperty backRefProp = (BackReferenceProperty)current.property;
+            ObjectType childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference("List", new CodeTypeReference(current.property.GetDataType()));
+                current.code_property.Type = new CodeTypeReference("List", new CodeTypeReference(childType.NameDataObject));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(
                         @"if(_{0} == null) _{0} = Context.GetListOf<{1}>(this, ""{0}"");
                 return _{0}",
-                    current.property.PropertyName, current.property.GetDataType())));
+                    current.property.PropertyName, childType.NameDataObject)));
 
                 CodeMemberField f = new CodeMemberField(current.code_property.Type,
                     "_" + current.property.PropertyName);
@@ -249,20 +351,21 @@ namespace Kistl.Server.Generators.SQLServer
             }
             else
             {
-                current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(current.property.GetDataType()));
-
+                current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));
                 current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
                     "EdmRelationshipNavigationPropertyAttribute",
                     new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.objClass, backRefProp.ReferenceProperty.ObjectClass))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(backRefProp.ReferenceProperty.ObjectClass)))));
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.objClass, childType))),
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType)))));
 
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
+                        string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""{2}"");
                 if (!c.IsLoaded) c.Load(); 
-                return c", current.property.GetDataType(), Generator.GetAssociationName(current.objClass, backRefProp.ReferenceProperty.ObjectClass), backRefProp.ReferenceProperty.ObjectClass.ClassName)));
+                return c", childType.NameDataObject, 
+                         Generator.GetAssociationName(current.objClass, childType), 
+                         Generator.GetAssociationChildRoleName(childType))));
             }
         }
 

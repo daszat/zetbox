@@ -30,7 +30,7 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private List<Kistl.App.Projekte.Projekt> _Projekte;
+        private List<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry> _Projekte;
         
         private System.DateTime? _Geburtstag;
         
@@ -63,11 +63,11 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Projekte.Projekt> Projekte
+        public List<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry> Projekte
         {
             get
             {
-                if(_Projekte == null) _Projekte = Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte");
+                if(_Projekte == null) _Projekte = Context.GetListOf<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry>(this, "Projekte");
                 return _Projekte;
             }
         }
