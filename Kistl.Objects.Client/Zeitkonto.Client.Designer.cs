@@ -111,6 +111,11 @@ namespace Kistl.App.Zeiterfassung
             ((Zeitkonto)obj).NotifyPropertyChanged("Kontoname");
         }
         
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);

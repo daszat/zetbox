@@ -111,12 +111,15 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((BackReferenceProperty)obj).NotifyPropertyChanging("ReferenceProperty");
             ((BackReferenceProperty)obj).fk_ReferenceProperty = this.fk_ReferenceProperty;
-            ((BackReferenceProperty)obj).NotifyPropertyChanged("ReferenceProperty");
             ((BackReferenceProperty)obj).NotifyPropertyChanging("PreFetchToClient");
             ((BackReferenceProperty)obj).PreFetchToClient = this.PreFetchToClient;
             ((BackReferenceProperty)obj).NotifyPropertyChanged("PreFetchToClient");
+        }
+        
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
         }
         
         public override string GetDataType()

@@ -38,7 +38,7 @@ namespace Kistl.App.Projekte
         
         private string _Land;
         
-        private List<Kunde_EMailsCollectionEntry> _EMails;
+        private List<Kunde_EMailsCollectionEntry> _EMails = new List<Kunde_EMailsCollectionEntry>();
         
         public override int ID
         {
@@ -182,6 +182,12 @@ namespace Kistl.App.Projekte
             ((Kunde)obj).NotifyPropertyChanging("EMails");
             ((Kunde)obj)._EMails = this.EMails.Clone();
             ((Kunde)obj).NotifyPropertyChanged("EMails");
+        }
+        
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+            _EMails.ForEach(i => i.AttachToContext(ctx));;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

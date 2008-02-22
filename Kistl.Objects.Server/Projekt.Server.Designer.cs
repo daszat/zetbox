@@ -273,7 +273,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this._fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -285,9 +285,7 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.ICollectionEntry obj)
         {
             base.CopyTo(obj);
-            ((Projekt_MitarbeiterCollectionEntry)obj).NotifyPropertyChanging("Value");
-            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Value = this._fk_Value;
-            ((Projekt_MitarbeiterCollectionEntry)obj).NotifyPropertyChanged("Value");
+            ((Projekt_MitarbeiterCollectionEntry)obj).fk_Value = this.fk_Value;
         }
     }
 }

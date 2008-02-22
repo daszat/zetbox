@@ -72,6 +72,11 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
         }
         
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+        }
+        
         public override string GetDataType()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

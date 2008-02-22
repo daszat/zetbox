@@ -234,18 +234,12 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Auftrag)obj).NotifyPropertyChanging("Projekt");
             ((Auftrag)obj).fk_Projekt = this.fk_Projekt;
-            ((Auftrag)obj).NotifyPropertyChanged("Projekt");
-            ((Auftrag)obj).NotifyPropertyChanging("Mitarbeiter");
             ((Auftrag)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
-            ((Auftrag)obj).NotifyPropertyChanged("Mitarbeiter");
             ((Auftrag)obj).NotifyPropertyChanging("Auftragsname");
             ((Auftrag)obj).Auftragsname = this.Auftragsname;
             ((Auftrag)obj).NotifyPropertyChanged("Auftragsname");
-            ((Auftrag)obj).NotifyPropertyChanging("Kunde");
             ((Auftrag)obj).fk_Kunde = this.fk_Kunde;
-            ((Auftrag)obj).NotifyPropertyChanged("Kunde");
             ((Auftrag)obj).NotifyPropertyChanging("Auftragswert");
             ((Auftrag)obj).Auftragswert = this.Auftragswert;
             ((Auftrag)obj).NotifyPropertyChanged("Auftragswert");

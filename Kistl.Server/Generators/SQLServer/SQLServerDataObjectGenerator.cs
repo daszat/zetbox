@@ -332,10 +332,10 @@ namespace Kistl.Server.Generators.SQLServer
             base.GenerateProperties_BackReferenceProperty(current);
 
             BackReferenceProperty backRefProp = (BackReferenceProperty)current.property;
-            ObjectType childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
 
             if (current.clientServer == ClientServerEnum.Client)
             {
+                ObjectType childType = new ObjectType(current.property.GetDataType());
                 current.code_property.Type = new CodeTypeReference("List", new CodeTypeReference(childType.NameDataObject));
 
                 current.code_property.GetStatements.Add(
@@ -351,6 +351,8 @@ namespace Kistl.Server.Generators.SQLServer
             }
             else
             {
+                ObjectType childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
+
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));
                 current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
                     "EdmRelationshipNavigationPropertyAttribute",

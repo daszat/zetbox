@@ -68,6 +68,11 @@ namespace Kistl.App.Zeiterfassung
             base.CopyTo(obj);
         }
         
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);

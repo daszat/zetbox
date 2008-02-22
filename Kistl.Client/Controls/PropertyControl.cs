@@ -51,5 +51,16 @@ namespace Kistl.Client.Controls
         public static readonly DependencyProperty IsReadOnlyProperty =
             DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(PropertyControl), new UIPropertyMetadata(false));
 
+
+
+        public Kistl.API.Client.KistlContext Context
+        {
+            get { return (Kistl.API.Client.KistlContext)GetValue(ContextProperty); }
+            set { SetValue(ContextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Context.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContextProperty =
+            DependencyProperty.Register("Context", typeof(Kistl.API.Client.KistlContext), typeof(PropertyControl));
     }
 }

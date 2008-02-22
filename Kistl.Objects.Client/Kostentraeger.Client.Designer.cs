@@ -93,9 +93,12 @@ namespace Kistl.App.Zeiterfassung
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Kostentraeger)obj).NotifyPropertyChanging("Projekt");
             ((Kostentraeger)obj).fk_Projekt = this.fk_Projekt;
-            ((Kostentraeger)obj).NotifyPropertyChanged("Projekt");
+        }
+        
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

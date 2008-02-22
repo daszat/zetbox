@@ -269,18 +269,10 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((MethodInvocation)obj).NotifyPropertyChanging("InvokeOnObjectClass");
             ((MethodInvocation)obj).fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
-            ((MethodInvocation)obj).NotifyPropertyChanged("InvokeOnObjectClass");
-            ((MethodInvocation)obj).NotifyPropertyChanging("Module");
             ((MethodInvocation)obj).fk_Module = this.fk_Module;
-            ((MethodInvocation)obj).NotifyPropertyChanged("Module");
-            ((MethodInvocation)obj).NotifyPropertyChanging("Method");
             ((MethodInvocation)obj).fk_Method = this.fk_Method;
-            ((MethodInvocation)obj).NotifyPropertyChanged("Method");
-            ((MethodInvocation)obj).NotifyPropertyChanging("Assembly");
             ((MethodInvocation)obj).fk_Assembly = this.fk_Assembly;
-            ((MethodInvocation)obj).NotifyPropertyChanged("Assembly");
             ((MethodInvocation)obj).NotifyPropertyChanging("FullTypeName");
             ((MethodInvocation)obj).FullTypeName = this.FullTypeName;
             ((MethodInvocation)obj).NotifyPropertyChanged("FullTypeName");

@@ -9,12 +9,13 @@
     Label="Label"
     >
     <DockPanel >
-        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=PointerCtrl, Path=Label}" />
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=PointerCtrl, Path=Label}" Visibility="{Binding ElementName=PointerCtrl, Path=ShowLabel}" />
         <Button Name="btnNew" Click="btnNew_Click">New</Button>
         <Button Name="btnOpen" Click="btnOpen_Click">Open</Button>
         <ComboBox Name="cbValues" 
-                  SelectedValue="{Binding ElementName=PointerCtrl, Path=Value}"
-                  SelectedValuePath="ID">
+                  SelectedValue="{Binding ElementName=PointerCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValuePath="ID"
+                  SelectionChanged="cbValues_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

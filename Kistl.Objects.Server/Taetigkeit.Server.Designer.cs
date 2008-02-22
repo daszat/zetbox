@@ -195,12 +195,8 @@ namespace Kistl.App.Zeiterfassung
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Taetigkeit)obj).NotifyPropertyChanging("Zeitkonto");
             ((Taetigkeit)obj).fk_Zeitkonto = this.fk_Zeitkonto;
-            ((Taetigkeit)obj).NotifyPropertyChanged("Zeitkonto");
-            ((Taetigkeit)obj).NotifyPropertyChanging("Mitarbeiter");
             ((Taetigkeit)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
-            ((Taetigkeit)obj).NotifyPropertyChanged("Mitarbeiter");
             ((Taetigkeit)obj).NotifyPropertyChanging("Datum");
             ((Taetigkeit)obj).Datum = this.Datum;
             ((Taetigkeit)obj).NotifyPropertyChanged("Datum");

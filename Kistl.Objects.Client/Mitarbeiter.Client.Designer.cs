@@ -30,7 +30,7 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private List<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry> _Projekte;
+        private List<Kistl.App.Projekte.Projekt> _Projekte;
         
         private System.DateTime? _Geburtstag;
         
@@ -63,11 +63,11 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry> Projekte
+        public List<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {
-                if(_Projekte == null) _Projekte = Context.GetListOf<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry>(this, "Projekte");
+                if(_Projekte == null) _Projekte = Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte");
                 return _Projekte;
             }
         }
@@ -160,6 +160,11 @@ namespace Kistl.App.Projekte
             ((Mitarbeiter)obj).NotifyPropertyChanging("TelefonNummer");
             ((Mitarbeiter)obj).TelefonNummer = this.TelefonNummer;
             ((Mitarbeiter)obj).NotifyPropertyChanged("TelefonNummer");
+        }
+        
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

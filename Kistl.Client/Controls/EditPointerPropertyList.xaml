@@ -17,8 +17,10 @@
                         <DockPanel HorizontalAlignment="Stretch">
                             <Button DockPanel.Dock="Left" Name="btnDelete" Click="btnDelete_Click" 
                                     CommandParameter="{Binding Path=ID}">Delete</Button>
-                            <app:EditPointerProperty Label="" Value="{Binding Path=Value}" 
-                                                     ObjectType="{Binding ElementName=ListCtrl, Path=ObjectType}" />
+                            <app:EditPointerProperty Label="" Value="{Binding Path=fk_Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                     ObjectType="{Binding ElementName=ListCtrl, Path=ObjectType}"
+                                                     Context="{Binding ElementName=ListCtrl, Path=Context}"
+                                                     ShowLabel="Collapsed"/>
                         </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

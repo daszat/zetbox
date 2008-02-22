@@ -286,15 +286,9 @@ namespace Kistl.App.Base
             ((ObjectClass)obj).NotifyPropertyChanging("TableName");
             ((ObjectClass)obj).TableName = this.TableName;
             ((ObjectClass)obj).NotifyPropertyChanged("TableName");
-            ((ObjectClass)obj).NotifyPropertyChanging("BaseObjectClass");
             ((ObjectClass)obj).fk_BaseObjectClass = this.fk_BaseObjectClass;
-            ((ObjectClass)obj).NotifyPropertyChanged("BaseObjectClass");
-            ((ObjectClass)obj).NotifyPropertyChanging("Module");
             ((ObjectClass)obj).fk_Module = this.fk_Module;
-            ((ObjectClass)obj).NotifyPropertyChanged("Module");
-            ((ObjectClass)obj).NotifyPropertyChanging("DefaultIcon");
             ((ObjectClass)obj).fk_DefaultIcon = this.fk_DefaultIcon;
-            ((ObjectClass)obj).NotifyPropertyChanged("DefaultIcon");
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

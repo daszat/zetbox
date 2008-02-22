@@ -105,6 +105,13 @@ namespace Kistl.API
             return (T)pi.GetValue(obj, null);
         }
 
+        public static void SetPropertyValue<T>(this object obj, string propName, T val)
+        {
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            pi.SetValue(obj, val, null);
+        }
+
         public static void ForEach<T>(this IEnumerable lst, Action<T> action)
         {
             foreach(T obj in lst)

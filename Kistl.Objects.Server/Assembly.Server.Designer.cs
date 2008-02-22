@@ -158,9 +158,7 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Assembly)obj).NotifyPropertyChanging("Module");
             ((Assembly)obj).fk_Module = this.fk_Module;
-            ((Assembly)obj).NotifyPropertyChanged("Module");
             ((Assembly)obj).NotifyPropertyChanging("AssemblyName");
             ((Assembly)obj).AssemblyName = this.AssemblyName;
             ((Assembly)obj).NotifyPropertyChanged("AssemblyName");

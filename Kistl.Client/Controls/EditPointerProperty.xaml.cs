@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.API.Client;
 using Kistl.API;
+using System.ComponentModel;
 
 namespace Kistl.Client.Controls
 {
@@ -24,7 +25,6 @@ namespace Kistl.Client.Controls
         public EditPointerProperty()
         {
             InitializeComponent();
-            Value = API.Helper.INVALIDID;
         }
 
         public ObjectType ObjectType
@@ -37,6 +37,17 @@ namespace Kistl.Client.Controls
         public static readonly DependencyProperty ObjectTypeProperty =
             DependencyProperty.Register("ObjectType", typeof(ObjectType), typeof(EditPointerProperty));
 
+        public Visibility ShowLabel
+        {
+            get { return (Visibility)GetValue(ShowLabelProperty); }
+            set { SetValue(ShowLabelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowLabel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowLabelProperty =
+            DependencyProperty.Register("ShowLabel", typeof(Visibility), typeof(EditPointerProperty), new UIPropertyMetadata(Visibility.Visible));
+
+
         public int TargetID
         {
             get { return (int)Value; }
@@ -45,14 +56,12 @@ namespace Kistl.Client.Controls
 
         private void LoadList()
         {
-            using (KistlContext ctx = new KistlContext())
-            {
-                cbValues.ItemsSource = ctx.GetQuery(ObjectType).ToList();
-            }
+            cbValues.ItemsSource = Context.GetQuery(ObjectType).ToList();
         }
 
         private void PointerCtrl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
                 LoadList();
@@ -99,6 +108,11 @@ namespace Kistl.Client.Controls
             {
                 Helper.HandleError(ex);
             }
+        }
+
+        private void cbValues_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
     }

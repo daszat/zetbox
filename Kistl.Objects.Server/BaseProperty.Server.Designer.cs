@@ -199,18 +199,14 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((BaseProperty)obj).NotifyPropertyChanging("ObjectClass");
             ((BaseProperty)obj).fk_ObjectClass = this.fk_ObjectClass;
-            ((BaseProperty)obj).NotifyPropertyChanged("ObjectClass");
             ((BaseProperty)obj).NotifyPropertyChanging("PropertyName");
             ((BaseProperty)obj).PropertyName = this.PropertyName;
             ((BaseProperty)obj).NotifyPropertyChanged("PropertyName");
             ((BaseProperty)obj).NotifyPropertyChanging("AltText");
             ((BaseProperty)obj).AltText = this.AltText;
             ((BaseProperty)obj).NotifyPropertyChanged("AltText");
-            ((BaseProperty)obj).NotifyPropertyChanging("Module");
             ((BaseProperty)obj).fk_Module = this.fk_Module;
-            ((BaseProperty)obj).NotifyPropertyChanged("Module");
         }
         
         public virtual string GetDataType()

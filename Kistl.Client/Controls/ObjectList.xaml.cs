@@ -38,7 +38,18 @@ namespace Kistl.Client.Controls
         {
             add { AddHandler(SelectionChangedEvent, value); }
             remove { RemoveHandler(SelectionChangedEvent, value); }
-        }        
+        }
+
+        public Kistl.API.Client.KistlContext Context
+        {
+            get { return (Kistl.API.Client.KistlContext)GetValue(ContextProperty); }
+            set { SetValue(ContextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Context.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContextProperty =
+            DependencyProperty.Register("Context", typeof(Kistl.API.Client.KistlContext), typeof(ObjectList));
+
         
         public ObjectList()
         {

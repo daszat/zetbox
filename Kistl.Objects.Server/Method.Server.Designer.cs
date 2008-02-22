@@ -192,15 +192,11 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Method)obj).NotifyPropertyChanging("ObjectClass");
             ((Method)obj).fk_ObjectClass = this.fk_ObjectClass;
-            ((Method)obj).NotifyPropertyChanged("ObjectClass");
             ((Method)obj).NotifyPropertyChanging("MethodName");
             ((Method)obj).MethodName = this.MethodName;
             ((Method)obj).NotifyPropertyChanged("MethodName");
-            ((Method)obj).NotifyPropertyChanging("Module");
             ((Method)obj).fk_Module = this.fk_Module;
-            ((Method)obj).NotifyPropertyChanged("Module");
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

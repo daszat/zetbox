@@ -143,14 +143,34 @@ namespace Kistl.API.Server
                 T obj = GetObjectInstance(ID);
                 if (obj == null) throw new ApplicationException("Object not found");
 
-                PropertyInfo pi = typeof(T).GetProperty(property);
-                if (pi == null) throw new ArgumentException("Property does not exist");
+                IEnumerable list = (IEnumerable)obj.GetPropertyValue <IEnumerable>(property);
 
-                IEnumerable v = (IEnumerable)pi.GetValue(obj, null);
-                /* XMLCOLLECTION result = new XMLCOLLECTION();
-                result.Objects.AddRange(v.OfType<object>());
-                return result.ToXmlString();*/
-                return v;
+                // If ObjectReferenc is a List -> convert data
+                ObjectType objType = obj.Type;
+                using (KistlDataContext ctx = KistlDataContext.GetContext())
+                {
+                    Kistl.App.Base.ObjectClass objClass = ctx.GetTable<Kistl.App.Base.ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
+                    while (objClass != null)
+                    {
+                        Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
+                        if (prop != null)
+                        {
+                            if (prop.ReferenceProperty.IsList)
+                            {
+                                List<IDataObject> result = new List<IDataObject>();
+                                foreach (ICollectionEntry ce in list)
+                                {
+                                    throw new NotImplementedException("Lieber Arthur, bitte implementiere eine Parent Navigation Property auf Listenobjekten von ObjectReference Typen!");
+                                    result.Add(ce.GetPropertyValue<IDataObject>("Parent"));
+                                }
+                                return result;
+                            }
+                        }
+                        objClass = objClass.BaseObjectClass;
+                    }
+                }
+
+                return list;
             }
         }
 
@@ -208,18 +228,12 @@ namespace Kistl.API.Server
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
-                    //KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
                     KistlDataContext.Current.DeleteObject(obj);
                 }
                 else
                 {
-                    if (obj.ObjectState == DataObjectState.New)
+                    if (obj.ObjectState != DataObjectState.New)
                     {
-                        //KistlDataContext.Current.AddObject(obj.EntitySetName, obj);
-                    }
-                    else
-                    {
-                        //KistlDataContext.Current.AttachTo(obj.EntitySetName, obj);
                         MarkEveryPropertyAsModified(obj);
                     }
 
@@ -239,6 +253,40 @@ namespace Kistl.API.Server
         /// <param name="obj"></param>
         private static void UpdateRelationships(T obj)
         {
+            ObjectType objType = obj.Type;
+            using (KistlDataContext ctx = KistlDataContext.GetContext())
+            {
+                Kistl.App.Base.ObjectClass objClass = ctx.GetTable<Kistl.App.Base.ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
+                while(objClass != null)
+                {
+                    foreach (Kistl.App.Base.ObjectReferenceProperty p in objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
+                    {
+                        if (!p.IsList)
+                        {
+                            int fk = obj.GetPropertyValue<int>("fk_" + p.PropertyName);
+
+                            IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(new ObjectType(p.GetDataType()));
+                            IDataObject other = so.GetObject(fk);
+                            obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
+                        }
+                        else
+                        {
+                            // Liste
+                            foreach (BaseServerCollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
+                            {
+                                int fk = ce.GetPropertyValue<int>("fk_Value");
+
+                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(new ObjectType(p.GetDataType()));
+                                IDataObject other = so.GetObject(fk);
+                                ce.SetPropertyValue<IDataObject>("Value", other);
+                            }
+                        }
+                    }
+
+                    objClass = objClass.BaseObjectClass;
+                }
+            }
+            /*
             Type type = obj.GetType();
             foreach (PropertyInfo pi in type.GetProperties())
             {
@@ -256,6 +304,7 @@ namespace Kistl.API.Server
                     }
                 }
             }
+             * */
         }
 
         /// <summary>

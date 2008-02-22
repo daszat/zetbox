@@ -97,9 +97,12 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((ObjectReferenceProperty)obj).NotifyPropertyChanging("ReferenceObjectClass");
             ((ObjectReferenceProperty)obj).fk_ReferenceObjectClass = this.fk_ReferenceObjectClass;
-            ((ObjectReferenceProperty)obj).NotifyPropertyChanged("ReferenceObjectClass");
+        }
+        
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
         }
         
         public override string GetDataType()

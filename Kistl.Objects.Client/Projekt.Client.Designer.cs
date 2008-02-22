@@ -32,7 +32,7 @@ namespace Kistl.App.Projekte
         
         private List<Kistl.App.Projekte.Task> _Tasks;
         
-        private List<Projekt_MitarbeiterCollectionEntry> _Mitarbeiter;
+        private List<Projekt_MitarbeiterCollectionEntry> _Mitarbeiter = new List<Projekt_MitarbeiterCollectionEntry>();
         
         private System.Double? _AufwandGes;
         
@@ -175,15 +175,19 @@ namespace Kistl.App.Projekte
             ((Projekt)obj).NotifyPropertyChanging("Name");
             ((Projekt)obj).Name = this.Name;
             ((Projekt)obj).NotifyPropertyChanged("Name");
-            ((Projekt)obj).NotifyPropertyChanging("Mitarbeiter");
             ((Projekt)obj)._Mitarbeiter = this.Mitarbeiter.Clone();
-            ((Projekt)obj).NotifyPropertyChanged("Mitarbeiter");
             ((Projekt)obj).NotifyPropertyChanging("AufwandGes");
             ((Projekt)obj).AufwandGes = this.AufwandGes;
             ((Projekt)obj).NotifyPropertyChanged("AufwandGes");
             ((Projekt)obj).NotifyPropertyChanging("Kundenname");
             ((Projekt)obj).Kundenname = this.Kundenname;
             ((Projekt)obj).NotifyPropertyChanged("Kundenname");
+        }
+        
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+            _Mitarbeiter.ForEach(i => i.AttachToContext(ctx));;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -252,7 +256,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this._fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -264,9 +268,7 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.ICollectionEntry obj)
         {
             base.CopyTo(obj);
-            ((Projekt_MitarbeiterCollectionEntry)obj).NotifyPropertyChanging("Value");
-            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Value = this._fk_Value;
-            ((Projekt_MitarbeiterCollectionEntry)obj).NotifyPropertyChanged("Value");
+            ((Projekt_MitarbeiterCollectionEntry)obj).fk_Value = this.fk_Value;
         }
     }
 }

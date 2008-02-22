@@ -106,6 +106,11 @@ namespace Kistl.App.Base
             ((Property)obj).NotifyPropertyChanged("IsNullable");
         }
         
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+        }
+        
         public override string GetDataType()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();

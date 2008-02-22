@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace Kistl.API.Client
 {
@@ -51,12 +52,12 @@ namespace Kistl.API.Client
 
         private KistlContext _context;
         public KistlContext Context { get { return _context; } }
-        internal void AttachToContext(KistlContext ctx)
+        public virtual void AttachToContext(KistlContext ctx)
         {
             _context = ctx;
         }
 
-        internal void DetachFromContext(KistlContext ctx)
+        public virtual void DetachFromContext(KistlContext ctx)
         {
             if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
             _context = null;
@@ -169,12 +170,12 @@ namespace Kistl.API.Client
 
         private KistlContext _context;
         public KistlContext Context { get { return _context; } }
-        internal void AttachToContext(KistlContext ctx)
+        public virtual void AttachToContext(KistlContext ctx)
         {
             _context = ctx;
         }
 
-        internal void DetachFromContext(KistlContext ctx)
+        public virtual void DetachFromContext(KistlContext ctx)
         {
             if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
             _context = null;

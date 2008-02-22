@@ -54,9 +54,11 @@ namespace Kistl.API.Server
         // Special code to dispose of ThreadStatic instance
         void IDisposable.Dispose()
         {
-            if (_Current != null) _Current.Dispose();
             base.Dispose();
-            _Current = null;
+            if (_Current == this)
+            {
+                _Current = null;
+            }
         }
 
         #endregion

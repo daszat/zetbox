@@ -28,13 +28,6 @@ namespace Kistl.Client.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex);
-            }
         }
 
         public ObjectType ObjectType
@@ -51,12 +44,13 @@ namespace Kistl.Client.Controls
         {
             try
             {
-                IList c = (IList)Value;
-                Type[] types = c.GetType().GetGenericArguments();
+                IList collection = (IList)Value;
+                Type[] types = collection.GetType().GetGenericArguments();
                 if (types.Length != 1) throw new InvalidOperationException("IList has more then one generic Parameter?");
 
-                object v = Activator.CreateInstance(types[0]);
-                c.Add(v);
+                ICollectionEntry ce = (ICollectionEntry)Activator.CreateInstance(types[0]);
+                Context.Attach(ce);
+                collection.Add(ce);
                 lst.Items.Refresh();
             }
             catch (Exception ex)

@@ -193,11 +193,11 @@ namespace Kistl.API
             while (sr.ReadBoolean())
             {
                 T obj = new T();
-                obj.FromStream(null, sr);
+                obj.FromStream(ctx, sr);
 
                 tmpList.Add(obj);
 
-                T objInCollection = val.FirstOrDefault(i => i.ID == obj.ID);
+                T objInCollection = val.FirstOrDefault(i => obj.ID != Helper.INVALIDID && i.ID == obj.ID);
                 if (objInCollection != null)
                 {
                     obj.CopyTo(objInCollection);

@@ -140,6 +140,11 @@ namespace Kistl.App.Base
             ((Module)obj).NotifyPropertyChanged("ModuleName");
         }
         
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);

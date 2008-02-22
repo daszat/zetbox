@@ -67,6 +67,7 @@ namespace Kistl.Client
             // Bezeichnung setzen
             txt.Label = "ID";
             txt.IsReadOnly = true;
+            txt.Context = this.ctx;
 
             // Set Binding, damit werden Änderungen automatisch übernommen.
             Binding b = new Binding("ID");
@@ -104,6 +105,7 @@ namespace Kistl.Client
                         lst.SourceObjectType = this.ObjectType;
                         lst.Label = p.PropertyName;
                         lst.ToolTip = p.AltText;
+                        lst.Context = this.ctx;
 
                         // aus Metadaten auslesen
                         lst.DestinationObjectType = new ObjectType(p.GetDataType());
@@ -125,6 +127,7 @@ namespace Kistl.Client
                         Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
                         pointer.Label = p.PropertyName;
                         pointer.ToolTip = p.AltText;
+                        pointer.Context = this.ctx;
 
                         pointer.ObjectType = new ObjectType(p.GetDataType());
 
@@ -152,6 +155,7 @@ namespace Kistl.Client
                         Controls.EditPointerPropertyList pointerList = new Kistl.Client.Controls.EditPointerPropertyList();
                         pointerList.Label = p.PropertyName;
                         pointerList.ToolTip = p.AltText;
+                        pointerList.Context = this.ctx;
 
                         pointerList.ObjectType = new ObjectType(p.GetDataType());
 
@@ -173,6 +177,7 @@ namespace Kistl.Client
                         // TODO: sollte auch gebunden werden
                         list.Label = p.PropertyName;
                         list.ToolTip = p.AltText;
+                        list.Context = this.ctx;
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
                         Binding b = new Binding(p.PropertyName);
@@ -191,6 +196,7 @@ namespace Kistl.Client
                         // TODO: sollte auch gebunden werden
                         control.Label = p.PropertyName;
                         control.ToolTip = p.AltText;
+                        control.Context = this.ctx;
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
                         Binding b = new Binding(p.PropertyName);

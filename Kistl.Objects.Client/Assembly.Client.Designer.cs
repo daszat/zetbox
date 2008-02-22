@@ -135,15 +135,18 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Assembly)obj).NotifyPropertyChanging("Module");
             ((Assembly)obj).fk_Module = this.fk_Module;
-            ((Assembly)obj).NotifyPropertyChanged("Module");
             ((Assembly)obj).NotifyPropertyChanging("AssemblyName");
             ((Assembly)obj).AssemblyName = this.AssemblyName;
             ((Assembly)obj).NotifyPropertyChanged("AssemblyName");
             ((Assembly)obj).NotifyPropertyChanging("IsClientAssembly");
             ((Assembly)obj).IsClientAssembly = this.IsClientAssembly;
             ((Assembly)obj).NotifyPropertyChanged("IsClientAssembly");
+        }
+        
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
