@@ -235,7 +235,7 @@ namespace Kistl.Server.Generators
         {
             if (!prop.IsList)
             {
-                return new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                return prop.ObjectClass.GetObjectType(); //new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
             }
             else
             {

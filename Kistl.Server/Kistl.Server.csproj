@@ -126,7 +126,7 @@
     <None Include="Database\Database.15.sql" />
     <None Include="Database\Database.16.sql" />
     <None Include="Database\Database.17.sql" />
-    <None Include="obj\Database.03.sql" />
+    <None Include="Database\Database.18.sql" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -138,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

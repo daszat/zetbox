@@ -55,7 +55,7 @@ namespace Kistl.Client
 
         public void Stop()
         {
-            if (server != null)
+            if (server != null && !serverDomain.IsFinalizingForUnload())
             {
                 try
                 {
@@ -64,10 +64,13 @@ namespace Kistl.Client
                 catch(Exception ex)
                 {
                     System.Diagnostics.Trace.TraceError(ex.ToString());
-                    // TODO: Bad Hack, Do Something!
-                    AppDomain.Unload(serverDomain);
                 }
                 server = null;
+            }
+
+            if (!serverDomain.IsFinalizingForUnload())
+            {
+                AppDomain.Unload(serverDomain);
             }
         }
 

@@ -538,7 +538,8 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateValueTypeProperty_Collection
-        protected virtual void GenerateProperties_ValueTypeProperty_Collection(Current current, Current collectionClass)
+        protected virtual void GenerateProperties_ValueTypeProperty_Collection(Current current,
+            Current collectionClass, Current parent, Current serializerParent)
         {
         }
 
@@ -570,6 +571,18 @@ namespace Kistl.Server.Generators
             collectionClass.code_property.GetStatements.Add(new CodeSnippetExpression("return _Value"));
             collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression("_Value = value"));
 
+            // Create Parent
+            Current parent = collectionClass.Clone();
+            parent.code_property = CreateProperty(collectionClass.code_class, current.code_class.Name, "Parent");
+            parent.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+
+            // Create SerializerParent
+            Current serializerParent = collectionClass.Clone();
+
+            // Serializer Parent fk_ Field und Property
+            serializerParent.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Parent", "Helper.INVALIDID");
+            serializerParent.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Parent");
+
             // Create NavigationProperty Class -> Collectionclass
             current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName);
 
@@ -590,12 +603,13 @@ namespace Kistl.Server.Generators
                 current.code_property.HasSet = false;
             }
 
-            GenerateProperties_ValueTypeProperty_Collection(current, collectionClass);
-            GenerateProperties_ValueTypeProperty_Collection_StreamMethods(collectionClass);
+            GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent);
+            GenerateProperties_ValueTypeProperty_Collection_StreamMethods(collectionClass, parent, serializerParent);
         }
 
         #region GenerateProperties_ValueTypeProperty_Collection_StreamMethods
-        private void GenerateProperties_ValueTypeProperty_Collection_StreamMethods(Current current)
+        private void GenerateProperties_ValueTypeProperty_Collection_StreamMethods(Current current, 
+            Current parent, Current serializerParent)
         {
             // Create ToStream Method
             CodeMemberMethod m = CreateOverrideMethod(current.code_class, "ToStream", typeof(void));
@@ -603,6 +617,7 @@ namespace Kistl.Server.Generators
 
             m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.Value, sw)"));
+            m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)"));
 
             m = CreateOverrideMethod(current.code_class, "FromStream", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
@@ -610,14 +625,16 @@ namespace Kistl.Server.Generators
 
             m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._Value, sr)"));
+            m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)"));
 
             m = CreateOverrideMethod(current.code_class, "CopyTo", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
-            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
             m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanging(\"Value\")", current.code_class.Name)));
             m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._Value = this._Value", current.code_class.Name)));
             m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanged(\"Value\")", current.code_class.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Parent = this._fk_Parent", current.code_class.Name)));
         }
         #endregion
 
@@ -638,7 +655,6 @@ namespace Kistl.Server.Generators
             current.code_property = CreateProperty(current.code_class, current.property.GetDataType(), current.property.PropertyName);
             current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
-            // ObjectType otherType = new ObjectType(prop.GetDataType());
             Current serializer = current.Clone();
 
             // Serializer fk_ Field und Property
@@ -650,7 +666,8 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateProperties_ObjectReferenceProperty_Collection
-        protected virtual void GenerateProperties_ObjectReferenceProperty_Collection(Current current, Current collectionClass, Current serializer)
+        protected virtual void GenerateProperties_ObjectReferenceProperty_Collection(Current current, Current collectionClass,
+            Current serializerValue, Current parent, Current serializerParent)
         {
         }
 
@@ -673,14 +690,28 @@ namespace Kistl.Server.Generators
             // Create ID
             GenerateDefaultProperty_IDInternal(collectionClass.Clone());
 
+            // Create Value
             collectionClass.code_property = CreateProperty(collectionClass.code_class, collectionClass.property.GetDataType(), "Value");
             collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
-            Current serializer = collectionClass.Clone();
+            // Create Parent
+            Current parent = collectionClass.Clone();
+            parent.code_property = CreateProperty(collectionClass.code_class, current.code_class.Name, "Parent");
+            parent.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+
+            // Create SerializerValue
+            Current serializerValue = collectionClass.Clone();
 
             // Serializer fk_ Field und Property
-            serializer.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Value", "Helper.INVALIDID");
-            serializer.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Value");
+            serializerValue.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Value", "Helper.INVALIDID");
+            serializerValue.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Value");
+
+            // Create SerializerParent
+            Current serializerParent = collectionClass.Clone();
+
+            // Serializer Parent fk_ Field und Property
+            serializerParent.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Parent", "Helper.INVALIDID");
+            serializerParent.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Parent");
 
             // Create NavigationProperty Class -> Collectionclass
             current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName);
@@ -702,12 +733,13 @@ namespace Kistl.Server.Generators
                 current.code_property.HasSet = false;
             }
 
-            GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializer);
-            GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(collectionClass, serializer);
+            GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializerValue, parent, serializerParent);
+            GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(collectionClass, serializerValue, parent, serializerParent);
         }
 
         #region GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods
-        private void GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(Current current, Current serializer)
+        private void GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(Current current, 
+            Current serializerValue, Current parent, Current serializerParent)
         {
             // Create ToStream Method
             CodeMemberMethod m = CreateOverrideMethod(current.code_class, "ToStream", typeof(void));
@@ -715,6 +747,7 @@ namespace Kistl.Server.Generators
 
             m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Value, sw)"));
+            m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)"));
 
             m = CreateOverrideMethod(current.code_class, "FromStream", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
@@ -722,12 +755,14 @@ namespace Kistl.Server.Generators
 
             m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Value, sr)"));
+            m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)"));
 
             m = CreateOverrideMethod(current.code_class, "CopyTo", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
-            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
             m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).fk_Value = this.fk_Value", current.code_class.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).fk_Parent = this.fk_Parent", current.code_class.Name)));
         }
 
         #endregion

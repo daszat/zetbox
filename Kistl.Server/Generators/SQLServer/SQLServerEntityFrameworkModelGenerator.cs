@@ -111,7 +111,7 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 xml.WriteStartElement("Association");
 
-                ObjectType parentType = new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                ObjectType parentType = prop.ObjectClass.GetObjectType(); // new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 ObjectType childType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
@@ -172,10 +172,12 @@ namespace Kistl.Server.Generators.SQLServer
         {
             foreach (Property prop in listProperties)
             {
-                ObjectType otherType = Generator.GetPropertyCollectionObjectType(prop);
+                ObjectType collectionType = Generator.GetPropertyCollectionObjectType(prop);
+                ObjectType parentType;
+                ObjectType childType;
 
                 xml.WriteStartElement("EntityType");
-                xml.WriteAttributeString("Name", otherType.Classname);
+                xml.WriteAttributeString("Name", collectionType.Classname);
 
                 xml.WriteStartElement("Key");
                 xml.WriteStartElement("PropertyRef");
@@ -183,19 +185,21 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteEndElement(); // </PropertyRef>
                 xml.WriteEndElement(); // </Key>
 
+                // ID
                 xml.WriteStartElement("Property");
                 xml.WriteAttributeString("Name", "ID");
                 xml.WriteAttributeString("Type", "Int32");
                 xml.WriteAttributeString("Nullable", "false");
                 xml.WriteEndElement(); // </Property>
 
+                // Value
                 if (prop is ObjectReferenceProperty)
                 {
                     // ObjectReferenceProperty
                     xml.WriteStartElement("NavigationProperty");
                     xml.WriteAttributeString("Name", "Value");
-                    ObjectType parentType = new ObjectType(prop.GetDataType());
-                    ObjectType childType = Generator.GetAssociationChildType((ObjectReferenceProperty)prop);
+                    parentType = new ObjectType(prop.GetDataType());
+                    childType = collectionType;
                     xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
                     xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                     xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
@@ -213,6 +217,16 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteAttributeString("Nullable", "true");
                     xml.WriteEndElement(); // </Property>
                 }
+
+                // Parent
+                xml.WriteStartElement("NavigationProperty");
+                xml.WriteAttributeString("Name", "Parent");
+                parentType = prop.ObjectClass.GetObjectType(); //new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                childType = collectionType;
+                xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
+                xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
+                xml.WriteEndElement(); // </NavigationProperty>
 
                 xml.WriteEndElement(); // </EntityType>
             }
@@ -368,7 +382,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             foreach (Property prop in listProperties)
             {
-                ObjectType parentType = new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                ObjectType parentType = prop.ObjectClass.GetObjectType(); //new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 ObjectType childType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteStartElement("AssociationSet");
@@ -469,7 +483,7 @@ namespace Kistl.Server.Generators.SQLServer
             foreach (Property prop in listProperties)
             {
                 xml.WriteStartElement("AssociationSetMapping");
-                ObjectType parentType = new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                ObjectType parentType = prop.ObjectClass.GetObjectType(); // new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 ObjectType childType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
@@ -647,7 +661,7 @@ namespace Kistl.Server.Generators.SQLServer
             foreach (Property prop in listProperties)
             {
                 xml.WriteStartElement("Association");
-                ObjectType parentType = new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                ObjectType parentType = prop.ObjectClass.GetObjectType(); // new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 ObjectType childType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
@@ -846,7 +860,7 @@ namespace Kistl.Server.Generators.SQLServer
         {
             foreach (Property prop in listProperties)
             {
-                ObjectType parentType = new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                ObjectType parentType = prop.ObjectClass.GetObjectType(); // new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 ObjectType childType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteStartElement("AssociationSet");

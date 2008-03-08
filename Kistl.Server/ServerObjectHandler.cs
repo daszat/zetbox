@@ -12,8 +12,10 @@ using System.Xml;
 using System.Reflection;
 using System.ComponentModel;
 using System.Data.Metadata.Edm;
+using Kistl.API;
+using Kistl.API.Server;
 
-namespace Kistl.API.Server
+namespace Kistl.Server
 {
     /// <summary>
     /// Interface für das Server BL Objekt.
@@ -141,36 +143,26 @@ namespace Kistl.API.Server
             {
                 if (ID == API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
                 T obj = GetObjectInstance(ID);
-                if (obj == null) throw new ApplicationException("Object not found");
+                if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
                 IEnumerable list = (IEnumerable)obj.GetPropertyValue <IEnumerable>(property);
 
-                // If ObjectReferenc is a List -> convert data
-                ObjectType objType = obj.Type;
                 using (KistlDataContext ctx = KistlDataContext.GetContext())
                 {
-                    Kistl.App.Base.ObjectClass objClass = ctx.GetTable<Kistl.App.Base.ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
-                    while (objClass != null)
+                    // If ObjectReferenc is a List -> convert data
+                    Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.Type.GetObjectClass(ctx)
+                        .GetProperty(ctx, property);
+                    if (prop.ReferenceProperty.IsList)
                     {
-                        Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
-                        if (prop != null)
-                        {
-                            if (prop.ReferenceProperty.IsList)
-                            {
-                                List<IDataObject> result = new List<IDataObject>();
-                                foreach (ICollectionEntry ce in list)
-                                {
-                                    throw new NotImplementedException("Lieber Arthur, bitte implementiere eine Parent Navigation Property auf Listenobjekten von ObjectReference Typen!");
-                                    result.Add(ce.GetPropertyValue<IDataObject>("Parent"));
-                                }
-                                return result;
-                            }
-                        }
-                        objClass = objClass.BaseObjectClass;
+                        List<IDataObject> result = new List<IDataObject>();
+                        list.ForEach<ICollectionEntry>(ce => result.Add(ce.GetPropertyValue<IDataObject>("Parent")));
+                        return result;
+                    }
+                    else
+                    {
+                        return list;
                     }
                 }
-
-                return list;
             }
         }
 
@@ -192,17 +184,6 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Gibt eine typisierte Objektinstanz zurück.
-        /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        /*public BaseServerDataObject GetObjectInstanceGeneric(int ID)
-        {
-            return GetObjectInstance(ID);
-        }*/
-
-        /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
         /// <param name="ctx"></param>
@@ -210,9 +191,6 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public BaseServerDataObject GetObject(int ID)
         {
-            //XMLOBJECT result = new XMLOBJECT();
-            //result.Object = (BaseServerDataObject)GetObjectInstance(ID);
-            //return result.ToXmlString();
             return GetObjectInstance(ID);
         }
 
@@ -286,25 +264,6 @@ namespace Kistl.API.Server
                     objClass = objClass.BaseObjectClass;
                 }
             }
-            /*
-            Type type = obj.GetType();
-            foreach (PropertyInfo pi in type.GetProperties())
-            {
-                if (pi.GetCustomAttributes(typeof(EdmRelationshipNavigationPropertyAttribute), true).Length > 0)
-                {
-                    // Bingo!
-                    PropertyInfo pifk = type.GetProperty("fk_" + pi.Name);
-                    if (pifk != null)
-                    {
-                        int fk = (int)pifk.GetValue(obj, null);
-
-                        IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(new ObjectType(pi.PropertyType.FullName));
-                        IDataObject other = so.GetObject(fk);
-                        pi.SetValue(obj, other, null);
-                    }
-                }
-            }
-             * */
         }
 
         /// <summary>

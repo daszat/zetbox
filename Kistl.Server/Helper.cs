@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Linq;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.API;
 
 namespace Kistl.Server
 {
@@ -57,7 +59,18 @@ namespace Kistl.Server
             }
         }
 
-        public static ICollection<ObjectClass> GetObjectHierarchie(KistlDataContext ctx, ObjectClass objClass)
+        /// <summary>
+        /// prevent this class from being instantiated
+        /// </summary>
+        private Helper() { }
+    }
+
+    /// <summary>
+    /// C# Extensions
+    /// </summary>
+    public static class ExtensionHelpers
+    {
+        public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass, KistlDataContext ctx)
         {
             List<ObjectClass> result = new List<ObjectClass>();
             while (objClass != null)
@@ -70,9 +83,30 @@ namespace Kistl.Server
             return result;
         }
 
-        /// <summary>
-        /// prevent this class from being instantiated
-        /// </summary>
-        private Helper() { }
+        public static ObjectType GetObjectType(this ObjectClass objClass)
+        {
+            return new ObjectType(objClass.Module.Namespace, objClass.ClassName);
+        }
+
+        public static ObjectClass GetObjectClass(this ObjectType objType, KistlDataContext ctx)
+        {
+            return ctx.GetTable<ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
+        }
+
+        public static BaseProperty GetProperty(this ObjectClass c, KistlDataContext ctx, string property)
+        {
+            ObjectClass objClass = c;
+            while (objClass != null)
+            {
+                BaseProperty prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
+                if (prop != null)
+                {
+                    return prop;
+                }
+                objClass = objClass.BaseObjectClass;
+            }
+
+            return null;
+        }
     }
 }
