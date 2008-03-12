@@ -12,6 +12,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -57,7 +58,9 @@ namespace Kistl.App.Base
             }
             set
             {
+                NotifyPropertyChanging("ObjectClass"); 
                 _fk_ObjectClass = value.ID;
+                NotifyPropertyChanged("ObjectClass"); ;
             }
         }
         
@@ -69,7 +72,9 @@ namespace Kistl.App.Base
             }
             set
             {
+                NotifyPropertyChanging("ObjectClass"); 
                 _fk_ObjectClass = value;
+                NotifyPropertyChanged("ObjectClass"); ;
             }
         }
         
@@ -81,7 +86,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _PropertyName = value;
+                NotifyPropertyChanging("PropertyName"); 
+                _PropertyName = value; 
+                NotifyPropertyChanged("PropertyName");;
             }
         }
         
@@ -93,7 +100,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _AltText = value;
+                NotifyPropertyChanging("AltText"); 
+                _AltText = value; 
+                NotifyPropertyChanged("AltText");;
             }
         }
         
@@ -106,7 +115,9 @@ namespace Kistl.App.Base
             }
             set
             {
+                NotifyPropertyChanging("Module"); 
                 _fk_Module = value.ID;
+                NotifyPropertyChanged("Module"); ;
             }
         }
         
@@ -118,7 +129,9 @@ namespace Kistl.App.Base
             }
             set
             {
+                NotifyPropertyChanging("Module"); 
                 _fk_Module = value;
+                NotifyPropertyChanged("Module"); ;
             }
         }
         
@@ -166,14 +179,10 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((BaseProperty)obj).fk_ObjectClass = this.fk_ObjectClass;
-            ((BaseProperty)obj).NotifyPropertyChanging("PropertyName");
-            ((BaseProperty)obj).PropertyName = this.PropertyName;
-            ((BaseProperty)obj).NotifyPropertyChanged("PropertyName");
-            ((BaseProperty)obj).NotifyPropertyChanging("AltText");
-            ((BaseProperty)obj).AltText = this.AltText;
-            ((BaseProperty)obj).NotifyPropertyChanged("AltText");
-            ((BaseProperty)obj).fk_Module = this.fk_Module;
+            ((BaseProperty)obj)._fk_ObjectClass = this._fk_ObjectClass;
+            ((BaseProperty)obj)._PropertyName = this._PropertyName;
+            ((BaseProperty)obj)._AltText = this._AltText;
+            ((BaseProperty)obj)._fk_Module = this._fk_Module;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -205,8 +214,8 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_ObjectClass, sw);
-            BinarySerializer.ToBinary(this.PropertyName, sw);
-            BinarySerializer.ToBinary(this.AltText, sw);
+            BinarySerializer.ToBinary(this._PropertyName, sw);
+            BinarySerializer.ToBinary(this._AltText, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
         }
         

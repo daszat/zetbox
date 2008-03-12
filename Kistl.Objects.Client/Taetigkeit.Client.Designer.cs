@@ -12,6 +12,7 @@ namespace Kistl.App.Zeiterfassung
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -57,7 +58,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                NotifyPropertyChanging("Zeitkonto"); 
                 _fk_Zeitkonto = value.ID;
+                NotifyPropertyChanged("Zeitkonto"); ;
             }
         }
         
@@ -69,7 +72,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                NotifyPropertyChanging("Zeitkonto"); 
                 _fk_Zeitkonto = value;
+                NotifyPropertyChanged("Zeitkonto"); ;
             }
         }
         
@@ -82,7 +87,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                NotifyPropertyChanging("Mitarbeiter"); 
                 _fk_Mitarbeiter = value.ID;
+                NotifyPropertyChanged("Mitarbeiter"); ;
             }
         }
         
@@ -94,7 +101,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                NotifyPropertyChanging("Mitarbeiter"); 
                 _fk_Mitarbeiter = value;
+                NotifyPropertyChanged("Mitarbeiter"); ;
             }
         }
         
@@ -106,7 +115,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                _Datum = value;
+                NotifyPropertyChanging("Datum"); 
+                _Datum = value; 
+                NotifyPropertyChanged("Datum");;
             }
         }
         
@@ -118,7 +129,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                _Dauer = value;
+                NotifyPropertyChanging("Dauer"); 
+                _Dauer = value; 
+                NotifyPropertyChanged("Dauer");;
             }
         }
         
@@ -162,14 +175,10 @@ namespace Kistl.App.Zeiterfassung
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Taetigkeit)obj).fk_Zeitkonto = this.fk_Zeitkonto;
-            ((Taetigkeit)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
-            ((Taetigkeit)obj).NotifyPropertyChanging("Datum");
-            ((Taetigkeit)obj).Datum = this.Datum;
-            ((Taetigkeit)obj).NotifyPropertyChanged("Datum");
-            ((Taetigkeit)obj).NotifyPropertyChanging("Dauer");
-            ((Taetigkeit)obj).Dauer = this.Dauer;
-            ((Taetigkeit)obj).NotifyPropertyChanged("Dauer");
+            ((Taetigkeit)obj)._fk_Zeitkonto = this._fk_Zeitkonto;
+            ((Taetigkeit)obj)._fk_Mitarbeiter = this._fk_Mitarbeiter;
+            ((Taetigkeit)obj)._Datum = this._Datum;
+            ((Taetigkeit)obj)._Dauer = this._Dauer;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -182,8 +191,8 @@ namespace Kistl.App.Zeiterfassung
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Zeitkonto, sw);
             BinarySerializer.ToBinary(this.fk_Mitarbeiter, sw);
-            BinarySerializer.ToBinary(this.Datum, sw);
-            BinarySerializer.ToBinary(this.Dauer, sw);
+            BinarySerializer.ToBinary(this._Datum, sw);
+            BinarySerializer.ToBinary(this._Dauer, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

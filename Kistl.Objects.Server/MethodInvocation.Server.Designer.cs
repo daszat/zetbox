@@ -17,6 +17,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -212,7 +213,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _FullTypeName = value;
+                NotifyPropertyChanging("FullTypeName"); 
+                _FullTypeName = value; 
+                NotifyPropertyChanged("FullTypeName");;
             }
         }
         
@@ -225,7 +228,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _MemberName = value;
+                NotifyPropertyChanging("MemberName"); 
+                _MemberName = value; 
+                NotifyPropertyChanged("MemberName");;
             }
         }
         
@@ -269,16 +274,12 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((MethodInvocation)obj).fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
-            ((MethodInvocation)obj).fk_Module = this.fk_Module;
-            ((MethodInvocation)obj).fk_Method = this.fk_Method;
-            ((MethodInvocation)obj).fk_Assembly = this.fk_Assembly;
-            ((MethodInvocation)obj).NotifyPropertyChanging("FullTypeName");
-            ((MethodInvocation)obj).FullTypeName = this.FullTypeName;
-            ((MethodInvocation)obj).NotifyPropertyChanged("FullTypeName");
-            ((MethodInvocation)obj).NotifyPropertyChanging("MemberName");
-            ((MethodInvocation)obj).MemberName = this.MemberName;
-            ((MethodInvocation)obj).NotifyPropertyChanged("MemberName");
+            ((MethodInvocation)obj)._fk_InvokeOnObjectClass = this._fk_InvokeOnObjectClass;
+            ((MethodInvocation)obj)._fk_Module = this._fk_Module;
+            ((MethodInvocation)obj)._fk_Method = this._fk_Method;
+            ((MethodInvocation)obj)._fk_Assembly = this._fk_Assembly;
+            ((MethodInvocation)obj)._FullTypeName = this._FullTypeName;
+            ((MethodInvocation)obj)._MemberName = this._MemberName;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -288,8 +289,8 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
             BinarySerializer.ToBinary(this.fk_Assembly, sw);
-            BinarySerializer.ToBinary(this.FullTypeName, sw);
-            BinarySerializer.ToBinary(this.MemberName, sw);
+            BinarySerializer.ToBinary(this._FullTypeName, sw);
+            BinarySerializer.ToBinary(this._MemberName, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

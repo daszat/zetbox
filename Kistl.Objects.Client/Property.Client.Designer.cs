@@ -12,6 +12,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -38,7 +39,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _IsList = value;
+                NotifyPropertyChanging("IsList"); 
+                _IsList = value; 
+                NotifyPropertyChanged("IsList");;
             }
         }
         
@@ -50,7 +53,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _IsNullable = value;
+                NotifyPropertyChanging("IsNullable"); 
+                _IsNullable = value; 
+                NotifyPropertyChanged("IsNullable");;
             }
         }
         
@@ -98,12 +103,8 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Property)obj).NotifyPropertyChanging("IsList");
-            ((Property)obj).IsList = this.IsList;
-            ((Property)obj).NotifyPropertyChanged("IsList");
-            ((Property)obj).NotifyPropertyChanging("IsNullable");
-            ((Property)obj).IsNullable = this.IsNullable;
-            ((Property)obj).NotifyPropertyChanged("IsNullable");
+            ((Property)obj)._IsList = this._IsList;
+            ((Property)obj)._IsNullable = this._IsNullable;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -136,8 +137,8 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.IsList, sw);
-            BinarySerializer.ToBinary(this.IsNullable, sw);
+            BinarySerializer.ToBinary(this._IsList, sw);
+            BinarySerializer.ToBinary(this._IsNullable, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

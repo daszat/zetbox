@@ -17,6 +17,7 @@
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
+    <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -105,6 +106,10 @@
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
+    <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
+      <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -112,6 +117,10 @@
     <AssociationSet Name="FK_Kunde_EMailsCollectionEntry_Kunde" Association="Model.FK_Kunde_EMailsCollectionEntry_Kunde">
       <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_Kunde_EMailsCollectionEntry" EntitySet="Kunde_EMailsCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" Association="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto">
+      <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
+      <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -231,6 +240,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Kontoname" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="Taetigkeiten" Relationship="Model.FK_Taetigkeit_Zeitkonto" FromRole="A_Zeitkonto" ToRole="B_Taetigkeit" />
+    <NavigationProperty Name="Mitarbeiter" Relationship="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" FromRole="A_Zeitkonto" ToRole="B_Zeitkonto_MitarbeiterCollectionEntry" />
   </EntityType>
   <EntityType Name="Kostenstelle" BaseType="Model.Zeitkonto" />
   <EntityType Name="Kostentraeger" BaseType="Model.Zeitkonto">
@@ -292,6 +302,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Value" Relationship="Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter" FromRole="B_Projekt_MitarbeiterCollectionEntry" ToRole="A_Mitarbeiter" />
+    <NavigationProperty Name="Parent" Relationship="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" FromRole="B_Projekt_MitarbeiterCollectionEntry" ToRole="A_Projekt" />
   </EntityType>
   <EntityType Name="Kunde_EMailsCollectionEntry">
     <Key>
@@ -299,6 +310,15 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Value" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="Parent" Relationship="Model.FK_Kunde_EMailsCollectionEntry_Kunde" FromRole="B_Kunde_EMailsCollectionEntry" ToRole="A_Kunde" />
+  </EntityType>
+  <EntityType Name="Zeitkonto_MitarbeiterCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Value" Relationship="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" FromRole="B_Zeitkonto_MitarbeiterCollectionEntry" ToRole="A_Mitarbeiter" />
+    <NavigationProperty Name="Parent" Relationship="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" FromRole="B_Zeitkonto_MitarbeiterCollectionEntry" ToRole="A_Zeitkonto" />
   </EntityType>
   <Association Name="FK_BaseProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
@@ -388,6 +408,10 @@
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
   </Association>
+  <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
+    <End Role="A_Mitarbeiter" Type="Model.Mitarbeiter" Multiplicity="0..1" />
+    <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" Type="Model.Zeitkonto_MitarbeiterCollectionEntry" Multiplicity="*" />
+  </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />
     <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
@@ -395,5 +419,9 @@
   <Association Name="FK_Kunde_EMailsCollectionEntry_Kunde">
     <End Role="A_Kunde" Type="Model.Kunde" Multiplicity="0..1" />
     <End Role="B_Kunde_EMailsCollectionEntry" Type="Model.Kunde_EMailsCollectionEntry" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto">
+    <End Role="A_Zeitkonto" Type="Model.Zeitkonto" Multiplicity="0..1" />
+    <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" Type="Model.Zeitkonto_MitarbeiterCollectionEntry" Multiplicity="*" />
   </Association>
 </Schema>

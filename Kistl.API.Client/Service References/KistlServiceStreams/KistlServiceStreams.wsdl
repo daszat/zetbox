@@ -3,9 +3,9 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
       <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IKistlServiceStreams_GetObject_InputMessage">
@@ -14,17 +14,11 @@
   <wsdl:message name="IKistlServiceStreams_GetObject_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetObjectResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlServiceStreams_GetObject_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:ApplicationException" />
-  </wsdl:message>
   <wsdl:message name="IKistlServiceStreams_SetObject_InputMessage">
     <wsdl:part name="parameters" element="tns:SetObject" />
   </wsdl:message>
   <wsdl:message name="IKistlServiceStreams_SetObject_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetObjectResponse" />
-  </wsdl:message>
-  <wsdl:message name="IKistlServiceStreams_SetObject_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:ApplicationException" />
   </wsdl:message>
   <wsdl:message name="IKistlServiceStreams_GetList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetList" />
@@ -32,38 +26,28 @@
   <wsdl:message name="IKistlServiceStreams_GetList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetListResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlServiceStreams_GetList_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:ApplicationException" />
-  </wsdl:message>
   <wsdl:message name="IKistlServiceStreams_GetListOf_InputMessage">
     <wsdl:part name="parameters" element="tns:GetListOf" />
   </wsdl:message>
   <wsdl:message name="IKistlServiceStreams_GetListOf_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetListOfResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlServiceStreams_GetListOf_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:ApplicationException" />
-  </wsdl:message>
   <wsdl:portType name="IKistlServiceStreams">
     <wsdl:operation name="GetObject">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetObject" message="tns:IKistlServiceStreams_GetObject_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetObjectResponse" message="tns:IKistlServiceStreams_GetObject_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetObjectApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlServiceStreams_GetObject_ApplicationExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetObject">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/SetObject" message="tns:IKistlServiceStreams_SetObject_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/SetObjectResponse" message="tns:IKistlServiceStreams_SetObject_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlServiceStreams/SetObjectApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlServiceStreams_SetObject_ApplicationExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetList">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetList" message="tns:IKistlServiceStreams_GetList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetListResponse" message="tns:IKistlServiceStreams_GetList_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetListApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlServiceStreams_GetList_ApplicationExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetListOf">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetListOf" message="tns:IKistlServiceStreams_GetListOf_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetListOfResponse" message="tns:IKistlServiceStreams_GetListOf_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetListOfApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlServiceStreams_GetListOf_ApplicationExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="KistlServiceStreamsEndpoint" type="tns:IKistlServiceStreams">
@@ -76,9 +60,6 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap:fault use="literal" name="ApplicationExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SetObject">
       <soap:operation soapAction="http://tempuri.org/IKistlServiceStreams/SetObject" style="document" />
@@ -88,9 +69,6 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap:fault use="literal" name="ApplicationExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetList">
       <soap:operation soapAction="http://tempuri.org/IKistlServiceStreams/GetList" style="document" />
@@ -100,9 +78,6 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap:fault use="literal" name="ApplicationExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetListOf">
       <soap:operation soapAction="http://tempuri.org/IKistlServiceStreams/GetListOf" style="document" />
@@ -112,9 +87,6 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap:fault use="literal" name="ApplicationExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="KistlServiceStreams">

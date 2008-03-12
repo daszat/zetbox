@@ -12,6 +12,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -63,7 +64,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _Namespace = value;
+                NotifyPropertyChanging("Namespace"); 
+                _Namespace = value; 
+                NotifyPropertyChanged("Namespace");;
             }
         }
         
@@ -76,7 +79,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _ModuleName = value;
+                NotifyPropertyChanging("ModuleName"); 
+                _ModuleName = value; 
+                NotifyPropertyChanged("ModuleName");;
             }
         }
         
@@ -144,19 +149,15 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Module)obj).NotifyPropertyChanging("Namespace");
-            ((Module)obj).Namespace = this.Namespace;
-            ((Module)obj).NotifyPropertyChanged("Namespace");
-            ((Module)obj).NotifyPropertyChanging("ModuleName");
-            ((Module)obj).ModuleName = this.ModuleName;
-            ((Module)obj).NotifyPropertyChanged("ModuleName");
+            ((Module)obj)._Namespace = this._Namespace;
+            ((Module)obj)._ModuleName = this._ModuleName;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Namespace, sw);
-            BinarySerializer.ToBinary(this.ModuleName, sw);
+            BinarySerializer.ToBinary(this._Namespace, sw);
+            BinarySerializer.ToBinary(this._ModuleName, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

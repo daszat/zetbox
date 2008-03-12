@@ -15,6 +15,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -102,7 +103,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _MethodName = value;
+                NotifyPropertyChanging("MethodName"); 
+                _MethodName = value; 
+                NotifyPropertyChanged("MethodName");;
             }
         }
         
@@ -192,18 +195,16 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Method)obj).fk_ObjectClass = this.fk_ObjectClass;
-            ((Method)obj).NotifyPropertyChanging("MethodName");
-            ((Method)obj).MethodName = this.MethodName;
-            ((Method)obj).NotifyPropertyChanged("MethodName");
-            ((Method)obj).fk_Module = this.fk_Module;
+            ((Method)obj)._fk_ObjectClass = this._fk_ObjectClass;
+            ((Method)obj)._MethodName = this._MethodName;
+            ((Method)obj)._fk_Module = this._fk_Module;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_ObjectClass, sw);
-            BinarySerializer.ToBinary(this.MethodName, sw);
+            BinarySerializer.ToBinary(this._MethodName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
         }
         

@@ -12,6 +12,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -38,7 +39,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _Length = value;
+                NotifyPropertyChanging("Length"); 
+                _Length = value; 
+                NotifyPropertyChanged("Length");;
             }
         }
         
@@ -86,9 +89,7 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((StringProperty)obj).NotifyPropertyChanging("Length");
-            ((StringProperty)obj).Length = this.Length;
-            ((StringProperty)obj).NotifyPropertyChanged("Length");
+            ((StringProperty)obj)._Length = this._Length;
         }
         
         public override string GetDataType()
@@ -116,7 +117,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Length, sw);
+            BinarySerializer.ToBinary(this._Length, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

@@ -15,6 +15,7 @@ namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -68,7 +69,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Name = value;
+                NotifyPropertyChanging("Name"); 
+                _Name = value; 
+                NotifyPropertyChanged("Name");;
             }
         }
         
@@ -104,7 +107,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _AufwandGes = value;
+                NotifyPropertyChanging("AufwandGes"); 
+                _AufwandGes = value; 
+                NotifyPropertyChanged("AufwandGes");;
             }
         }
         
@@ -117,7 +122,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Kundenname = value;
+                NotifyPropertyChanging("Kundenname"); 
+                _Kundenname = value; 
+                NotifyPropertyChanged("Kundenname");;
             }
         }
         
@@ -185,24 +192,18 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Projekt)obj).NotifyPropertyChanging("Name");
-            ((Projekt)obj).Name = this.Name;
-            ((Projekt)obj).NotifyPropertyChanged("Name");
-            ((Projekt)obj).NotifyPropertyChanging("AufwandGes");
-            ((Projekt)obj).AufwandGes = this.AufwandGes;
-            ((Projekt)obj).NotifyPropertyChanged("AufwandGes");
-            ((Projekt)obj).NotifyPropertyChanging("Kundenname");
-            ((Projekt)obj).Kundenname = this.Kundenname;
-            ((Projekt)obj).NotifyPropertyChanged("Kundenname");
+            ((Projekt)obj)._Name = this._Name;
+            ((Projekt)obj)._AufwandGes = this._AufwandGes;
+            ((Projekt)obj)._Kundenname = this._Kundenname;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Name, sw);
+            BinarySerializer.ToBinary(this._Name, sw);
             BinarySerializer.ToBinary(this.Mitarbeiter, sw);
-            BinarySerializer.ToBinary(this.AufwandGes, sw);
-            BinarySerializer.ToBinary(this.Kundenname, sw);
+            BinarySerializer.ToBinary(this._AufwandGes, sw);
+            BinarySerializer.ToBinary(this._Kundenname, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -222,6 +223,8 @@ namespace Kistl.App.Projekte
         private int _ID = Helper.INVALIDID;
         
         private int _fk_Value = Helper.INVALIDID;
+        
+        private int _fk_Parent = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -254,6 +257,24 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_MitarbeiterCollectionEntry_Projekt", "A_Projekt")]
+        public Projekt Parent
+        {
+            get
+            {
+                EntityReference<Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Projekt>("Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Projekt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Projekt>("Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt", "A_Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
         public int fk_Value
         {
             get
@@ -270,22 +291,41 @@ namespace Kistl.App.Projekte
             }
         }
         
+        public int fk_Parent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Parent == Helper.INVALIDID && Parent != null)
+                {
+                    _fk_Parent = Parent.ID;
+                }
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._fk_Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
         }
         
         public override void CopyTo(Kistl.API.ICollectionEntry obj)
         {
             base.CopyTo(obj);
             ((Projekt_MitarbeiterCollectionEntry)obj).fk_Value = this.fk_Value;
+            ((Projekt_MitarbeiterCollectionEntry)obj).fk_Parent = this.fk_Parent;
         }
     }
 }

@@ -8,10 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter), "B_Zeitkonto_MitarbeiterCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto", "A_Zeitkonto", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.Zeitkonto), "B_Zeitkonto_MitarbeiterCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry))]
+
 namespace Kistl.App.Zeiterfassung
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -61,7 +65,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                _Kontoname = value;
+                NotifyPropertyChanging("Kontoname"); 
+                _Kontoname = value; 
+                NotifyPropertyChanged("Kontoname");;
             }
         }
         
@@ -72,6 +78,17 @@ namespace Kistl.App.Zeiterfassung
             get
             {
                 EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Zeiterfassung.Taetigkeit>("Model.FK_Taetigkeit_Zeitkonto", "B_Taetigkeit");
+                if (!c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto", "B_Zeitkonto_MitarbeiterCollectionEntry")]
+        public EntityCollection<Zeitkonto_MitarbeiterCollectionEntry> Mitarbeiter
+        {
+            get
+            {
+                EntityCollection<Zeitkonto_MitarbeiterCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Zeitkonto_MitarbeiterCollectionEntry>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto", "B_Zeitkonto_MitarbeiterCollectionEntry");
                 if (!c.IsLoaded) c.Load(); 
                 return c;
             }
@@ -117,21 +134,134 @@ namespace Kistl.App.Zeiterfassung
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Zeitkonto)obj).NotifyPropertyChanging("Kontoname");
-            ((Zeitkonto)obj).Kontoname = this.Kontoname;
-            ((Zeitkonto)obj).NotifyPropertyChanged("Kontoname");
+            ((Zeitkonto)obj)._Kontoname = this._Kontoname;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Kontoname, sw);
+            BinarySerializer.ToBinary(this._Kontoname, sw);
+            BinarySerializer.ToBinary(this.Mitarbeiter, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
+            BinarySerializer.FromBinaryCollectionEntries(this.Mitarbeiter, sr, ctx);
+        }
+    }
+    
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Zeitkonto_MitarbeiterCollectionEntry")]
+    public class Zeitkonto_MitarbeiterCollectionEntry : Kistl.API.Server.BaseServerCollectionEntry
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_Value = Helper.INVALIDID;
+        
+        private int _fk_Parent = Helper.INVALIDID;
+        
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter", "A_Mitarbeiter")]
+        public Kistl.App.Projekte.Mitarbeiter Value
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.Mitarbeiter> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter", "A_Mitarbeiter");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.Mitarbeiter> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter", "A_Mitarbeiter");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto", "A_Zeitkonto")]
+        public Zeitkonto Parent
+        {
+            get
+            {
+                EntityReference<Zeitkonto> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zeitkonto>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto", "A_Zeitkonto");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Zeitkonto> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zeitkonto>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto", "A_Zeitkonto");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Value
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Value == Helper.INVALIDID && Value != null)
+                {
+                    _fk_Value = Value.ID;
+                }
+                return _fk_Value;
+            }
+            set
+            {
+                _fk_Value = value;
+            }
+        }
+        
+        public int fk_Parent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Parent == Helper.INVALIDID && Parent != null)
+                {
+                    _fk_Parent = Parent.ID;
+                }
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
+        }
+        
+        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        {
+            base.FromStream(ctx, sr);
+            BinarySerializer.FromBinary(out this._fk_Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+        }
+        
+        public override void CopyTo(Kistl.API.ICollectionEntry obj)
+        {
+            base.CopyTo(obj);
+            ((Zeitkonto_MitarbeiterCollectionEntry)obj).fk_Value = this.fk_Value;
+            ((Zeitkonto_MitarbeiterCollectionEntry)obj).fk_Parent = this.fk_Parent;
         }
     }
 }

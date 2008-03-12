@@ -12,6 +12,7 @@ namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -58,7 +59,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Name = value;
+                NotifyPropertyChanging("Name"); 
+                _Name = value; 
+                NotifyPropertyChanged("Name");;
             }
         }
         
@@ -80,7 +83,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Geburtstag = value;
+                NotifyPropertyChanging("Geburtstag"); 
+                _Geburtstag = value; 
+                NotifyPropertyChanged("Geburtstag");;
             }
         }
         
@@ -92,7 +97,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _SVNr = value;
+                NotifyPropertyChanging("SVNr"); 
+                _SVNr = value; 
+                NotifyPropertyChanged("SVNr");;
             }
         }
         
@@ -104,7 +111,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _TelefonNummer = value;
+                NotifyPropertyChanging("TelefonNummer"); 
+                _TelefonNummer = value; 
+                NotifyPropertyChanged("TelefonNummer");;
             }
         }
         
@@ -148,18 +157,10 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Mitarbeiter)obj).NotifyPropertyChanging("Name");
-            ((Mitarbeiter)obj).Name = this.Name;
-            ((Mitarbeiter)obj).NotifyPropertyChanged("Name");
-            ((Mitarbeiter)obj).NotifyPropertyChanging("Geburtstag");
-            ((Mitarbeiter)obj).Geburtstag = this.Geburtstag;
-            ((Mitarbeiter)obj).NotifyPropertyChanged("Geburtstag");
-            ((Mitarbeiter)obj).NotifyPropertyChanging("SVNr");
-            ((Mitarbeiter)obj).SVNr = this.SVNr;
-            ((Mitarbeiter)obj).NotifyPropertyChanged("SVNr");
-            ((Mitarbeiter)obj).NotifyPropertyChanging("TelefonNummer");
-            ((Mitarbeiter)obj).TelefonNummer = this.TelefonNummer;
-            ((Mitarbeiter)obj).NotifyPropertyChanged("TelefonNummer");
+            ((Mitarbeiter)obj)._Name = this._Name;
+            ((Mitarbeiter)obj)._Geburtstag = this._Geburtstag;
+            ((Mitarbeiter)obj)._SVNr = this._SVNr;
+            ((Mitarbeiter)obj)._TelefonNummer = this._TelefonNummer;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -170,10 +171,10 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Name, sw);
-            BinarySerializer.ToBinary(this.Geburtstag, sw);
-            BinarySerializer.ToBinary(this.SVNr, sw);
-            BinarySerializer.ToBinary(this.TelefonNummer, sw);
+            BinarySerializer.ToBinary(this._Name, sw);
+            BinarySerializer.ToBinary(this._Geburtstag, sw);
+            BinarySerializer.ToBinary(this._SVNr, sw);
+            BinarySerializer.ToBinary(this._TelefonNummer, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

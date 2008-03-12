@@ -320,22 +320,7 @@ namespace Kistl.Server.Generators.SQLServer
         {
             base.GenerateProperties_ObjectReferenceProperty(current, serializer);
 
-            if (current.clientServer == ClientServerEnum.Client)
-            {
-                current.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_{1})", current.property.GetDataType(), current.property.PropertyName)));
-
-                current.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"_fk_{0} = value.ID", current.property.PropertyName)));
-
-                serializer.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"return _fk_{0}", current.property.PropertyName)));
-                serializer.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + current.property.PropertyName), new CodePropertySetValueReferenceExpression()));
-            }
-            else
+            if (current.clientServer == ClientServerEnum.Server)
             {
                 ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
 

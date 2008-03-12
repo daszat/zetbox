@@ -830,7 +830,7 @@ namespace Kistl.Server.Generators.SQLServer
                 }
                 xml.WriteEndElement(); // </Property>
 
-                foreach (BaseProperty p in obj.Properties.OfType<Property>())
+                foreach (Property p in obj.Properties.OfType<Property>().Where(p => p.IsList == false))
                 {
                     xml.WriteStartElement("Property");
                     if (p is ObjectReferenceProperty)

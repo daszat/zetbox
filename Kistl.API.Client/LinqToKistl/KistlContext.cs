@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
+using System.Collections.ObjectModel;
 
 namespace Kistl.API.Client
 {
@@ -94,30 +95,38 @@ namespace Kistl.API.Client
             throw new NotSupportedException();
         }
 
-        public void SubmitChanges()
+        public int SubmitChanges()
         {
             // TODO: Add a better Cache Refresh Strategie
             CacheController<BaseClientDataObject>.Current.Clear();
 
             List<BaseClientDataObject> objectsToDetach = new List<BaseClientDataObject>();
+            int objectsSubmittedCount = 0;
             foreach (BaseClientDataObject obj in _objects)
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
+                    objectsSubmittedCount++;
                     Proxy.Current.SetObject(this, obj.Type, obj);
                     objectsToDetach.Add(obj);
                 }
-                else
+                else if (obj.ObjectState == DataObjectState.Modified)
                 {
+                    objectsSubmittedCount++;
                     // Do not attach to context -> first Param is null
                     BaseClientDataObject newobj = Proxy.Current.SetObject(null, obj.Type, obj);
                     newobj.CopyTo(obj);
+
+                    // Set to unmodified
+                    obj.ObjectState = DataObjectState.Unmodified;
                 }
 
                 CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID, obj);
             }
 
             objectsToDetach.ForEach(obj => this.Dettach(obj));
+
+            return objectsSubmittedCount;
         }
 
         public void DeleteObject(BaseClientDataObject obj)

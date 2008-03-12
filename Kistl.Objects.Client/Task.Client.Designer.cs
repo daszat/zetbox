@@ -12,6 +12,7 @@ namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -59,7 +60,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Projekt"); 
                 _fk_Projekt = value.ID;
+                NotifyPropertyChanged("Projekt"); ;
             }
         }
         
@@ -71,7 +74,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Projekt"); 
                 _fk_Projekt = value;
+                NotifyPropertyChanged("Projekt"); ;
             }
         }
         
@@ -83,7 +88,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Name = value;
+                NotifyPropertyChanging("Name"); 
+                _Name = value; 
+                NotifyPropertyChanged("Name");;
             }
         }
         
@@ -95,7 +102,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _DatumVon = value;
+                NotifyPropertyChanging("DatumVon"); 
+                _DatumVon = value; 
+                NotifyPropertyChanged("DatumVon");;
             }
         }
         
@@ -107,7 +116,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _DatumBis = value;
+                NotifyPropertyChanging("DatumBis"); 
+                _DatumBis = value; 
+                NotifyPropertyChanged("DatumBis");;
             }
         }
         
@@ -119,7 +130,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Aufwand = value;
+                NotifyPropertyChanging("Aufwand"); 
+                _Aufwand = value; 
+                NotifyPropertyChanged("Aufwand");;
             }
         }
         
@@ -163,19 +176,11 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Task)obj).fk_Projekt = this.fk_Projekt;
-            ((Task)obj).NotifyPropertyChanging("Name");
-            ((Task)obj).Name = this.Name;
-            ((Task)obj).NotifyPropertyChanged("Name");
-            ((Task)obj).NotifyPropertyChanging("DatumVon");
-            ((Task)obj).DatumVon = this.DatumVon;
-            ((Task)obj).NotifyPropertyChanged("DatumVon");
-            ((Task)obj).NotifyPropertyChanging("DatumBis");
-            ((Task)obj).DatumBis = this.DatumBis;
-            ((Task)obj).NotifyPropertyChanged("DatumBis");
-            ((Task)obj).NotifyPropertyChanging("Aufwand");
-            ((Task)obj).Aufwand = this.Aufwand;
-            ((Task)obj).NotifyPropertyChanged("Aufwand");
+            ((Task)obj)._fk_Projekt = this._fk_Projekt;
+            ((Task)obj)._Name = this._Name;
+            ((Task)obj)._DatumVon = this._DatumVon;
+            ((Task)obj)._DatumBis = this._DatumBis;
+            ((Task)obj)._Aufwand = this._Aufwand;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -187,10 +192,10 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Projekt, sw);
-            BinarySerializer.ToBinary(this.Name, sw);
-            BinarySerializer.ToBinary(this.DatumVon, sw);
-            BinarySerializer.ToBinary(this.DatumBis, sw);
-            BinarySerializer.ToBinary(this.Aufwand, sw);
+            BinarySerializer.ToBinary(this._Name, sw);
+            BinarySerializer.ToBinary(this._DatumVon, sw);
+            BinarySerializer.ToBinary(this._DatumBis, sw);
+            BinarySerializer.ToBinary(this._Aufwand, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

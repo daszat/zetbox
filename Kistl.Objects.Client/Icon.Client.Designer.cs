@@ -12,6 +12,7 @@ namespace Kistl.App.GUI
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -50,7 +51,9 @@ namespace Kistl.App.GUI
             }
             set
             {
-                _IconFile = value;
+                NotifyPropertyChanging("IconFile"); 
+                _IconFile = value; 
+                NotifyPropertyChanged("IconFile");;
             }
         }
         
@@ -94,9 +97,7 @@ namespace Kistl.App.GUI
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Icon)obj).NotifyPropertyChanging("IconFile");
-            ((Icon)obj).IconFile = this.IconFile;
-            ((Icon)obj).NotifyPropertyChanged("IconFile");
+            ((Icon)obj)._IconFile = this._IconFile;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -107,7 +108,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.IconFile, sw);
+            BinarySerializer.ToBinary(this._IconFile, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

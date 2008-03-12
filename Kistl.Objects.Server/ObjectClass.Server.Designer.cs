@@ -16,6 +16,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -73,7 +74,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _ClassName = value;
+                NotifyPropertyChanging("ClassName"); 
+                _ClassName = value; 
+                NotifyPropertyChanged("ClassName");;
             }
         }
         
@@ -86,7 +89,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _TableName = value;
+                NotifyPropertyChanging("TableName"); 
+                _TableName = value; 
+                NotifyPropertyChanged("TableName");;
             }
         }
         
@@ -280,22 +285,18 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((ObjectClass)obj).NotifyPropertyChanging("ClassName");
-            ((ObjectClass)obj).ClassName = this.ClassName;
-            ((ObjectClass)obj).NotifyPropertyChanged("ClassName");
-            ((ObjectClass)obj).NotifyPropertyChanging("TableName");
-            ((ObjectClass)obj).TableName = this.TableName;
-            ((ObjectClass)obj).NotifyPropertyChanged("TableName");
-            ((ObjectClass)obj).fk_BaseObjectClass = this.fk_BaseObjectClass;
-            ((ObjectClass)obj).fk_Module = this.fk_Module;
-            ((ObjectClass)obj).fk_DefaultIcon = this.fk_DefaultIcon;
+            ((ObjectClass)obj)._ClassName = this._ClassName;
+            ((ObjectClass)obj)._TableName = this._TableName;
+            ((ObjectClass)obj)._fk_BaseObjectClass = this._fk_BaseObjectClass;
+            ((ObjectClass)obj)._fk_Module = this._fk_Module;
+            ((ObjectClass)obj)._fk_DefaultIcon = this._fk_DefaultIcon;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.ClassName, sw);
-            BinarySerializer.ToBinary(this.TableName, sw);
+            BinarySerializer.ToBinary(this._ClassName, sw);
+            BinarySerializer.ToBinary(this._TableName, sw);
             BinarySerializer.ToBinary(this.Properties.OfType<IDataObject>(), sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
             BinarySerializer.ToBinary(this.Methods.OfType<IDataObject>(), sw);

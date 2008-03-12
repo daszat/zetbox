@@ -14,6 +14,7 @@ namespace Kistl.App.Zeiterfassung
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -105,7 +106,7 @@ namespace Kistl.App.Zeiterfassung
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Kostentraeger)obj).fk_Projekt = this.fk_Projekt;
+            ((Kostentraeger)obj)._fk_Projekt = this._fk_Projekt;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

@@ -216,14 +216,13 @@ namespace Kistl.Client
             mnuActions.ItemsSource = methods;
         }
 
-        private bool IsObjectDirty = false;
         private void SetTitle()
         {
-            if (IsObjectDirty && !this.Title.StartsWith("*"))
+            if (obj.ObjectState != DataObjectState.Unmodified && !this.Title.StartsWith("*"))
             {
                 this.Title = "* " + ObjectType.ToString();
             }
-            else if (!IsObjectDirty)
+            else if (obj.ObjectState == DataObjectState.Unmodified)
             {
                 this.Title = ObjectType.ToString();
             }
@@ -263,14 +262,18 @@ namespace Kistl.Client
         {
             try
             {
+                // TODO: Hack, bis die Notifications immer & überall funktionieren
+                if(obj.ObjectState == DataObjectState.Unmodified)
+                    obj.ObjectState = DataObjectState.Modified;
+
                 // Objekt zum Server schicken & dann wieder auspacken
                 ctx.SubmitChanges();
                 ObjectID = obj.ID;
                 // ReBind
-                // Das muss sein, weil die Properties (noch) keine DependencyProperties sind
+                // Das muss sein, weil sich ja Properties geändert haben könnten
+                // außerdem wird beim Kopieren kein Change gefeuert
                 obj.NotifyChange();
 
-                IsObjectDirty = false;
                 SetTitle();
             }
             catch (Exception ex)
@@ -317,7 +320,6 @@ namespace Kistl.Client
         {
             try
             {
-                IsObjectDirty = true;
                 SetTitle();
             }
             catch

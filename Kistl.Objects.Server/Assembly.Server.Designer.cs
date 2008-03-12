@@ -14,6 +14,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -101,7 +102,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _AssemblyName = value;
+                NotifyPropertyChanging("AssemblyName"); 
+                _AssemblyName = value; 
+                NotifyPropertyChanged("AssemblyName");;
             }
         }
         
@@ -114,7 +117,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _IsClientAssembly = value;
+                NotifyPropertyChanging("IsClientAssembly"); 
+                _IsClientAssembly = value; 
+                NotifyPropertyChanged("IsClientAssembly");;
             }
         }
         
@@ -158,21 +163,17 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Assembly)obj).fk_Module = this.fk_Module;
-            ((Assembly)obj).NotifyPropertyChanging("AssemblyName");
-            ((Assembly)obj).AssemblyName = this.AssemblyName;
-            ((Assembly)obj).NotifyPropertyChanged("AssemblyName");
-            ((Assembly)obj).NotifyPropertyChanging("IsClientAssembly");
-            ((Assembly)obj).IsClientAssembly = this.IsClientAssembly;
-            ((Assembly)obj).NotifyPropertyChanged("IsClientAssembly");
+            ((Assembly)obj)._fk_Module = this._fk_Module;
+            ((Assembly)obj)._AssemblyName = this._AssemblyName;
+            ((Assembly)obj)._IsClientAssembly = this._IsClientAssembly;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
-            BinarySerializer.ToBinary(this.AssemblyName, sw);
-            BinarySerializer.ToBinary(this.IsClientAssembly, sw);
+            BinarySerializer.ToBinary(this._AssemblyName, sw);
+            BinarySerializer.ToBinary(this._IsClientAssembly, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

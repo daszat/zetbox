@@ -12,6 +12,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -37,7 +38,9 @@ namespace Kistl.App.Base
             }
             set
             {
+                NotifyPropertyChanging("ReferenceObjectClass"); 
                 _fk_ReferenceObjectClass = value.ID;
+                NotifyPropertyChanged("ReferenceObjectClass"); ;
             }
         }
         
@@ -49,7 +52,9 @@ namespace Kistl.App.Base
             }
             set
             {
+                NotifyPropertyChanging("ReferenceObjectClass"); 
                 _fk_ReferenceObjectClass = value;
+                NotifyPropertyChanged("ReferenceObjectClass"); ;
             }
         }
         
@@ -97,7 +102,7 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((ObjectReferenceProperty)obj).fk_ReferenceObjectClass = this.fk_ReferenceObjectClass;
+            ((ObjectReferenceProperty)obj)._fk_ReferenceObjectClass = this._fk_ReferenceObjectClass;
         }
         
         public override void AttachToContext(KistlContext ctx)

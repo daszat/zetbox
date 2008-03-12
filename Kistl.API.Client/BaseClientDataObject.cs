@@ -72,25 +72,6 @@ namespace Kistl.API.Client
 
         #endregion
 
-        /// <summary>
-        /// Zum Melden, dass sich das Datenobjekt geändert hat.
-        /// </summary>
-        public virtual void NotifyChange()
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
-        }
-
-        public virtual void NotifyPropertyChanging(string property)
-        {
-        }
-
-        public virtual void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
         public virtual void CopyTo(IDataObject obj)
         {
             obj.ID = this.ID;
@@ -101,10 +82,39 @@ namespace Kistl.API.Client
             return null;
         }
 
-        #region INotifyPropertyChanged Members
+        #region NotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Object has been changed
+        /// </summary>
+        public virtual void NotifyChange()
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
+        }
+
+        /// <summary>
+        /// Property is beeing changing
+        /// </summary>
+        /// <param name="property"></param>
+        public virtual void NotifyPropertyChanging(string property)
+        {
+        }
+
+        /// <summary>
+        /// Property has been changed
+        /// </summary>
+        /// <param name="property"></param>
+        public virtual void NotifyPropertyChanged(string property)
+        {
+            if (this.ObjectState == DataObjectState.Unmodified)
+                this.ObjectState = DataObjectState.Modified;
+
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
         #endregion
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
@@ -129,7 +139,7 @@ namespace Kistl.API.Client
         }
     }
 
-    public abstract class BaseClientCollectionEntry : ICollectionEntry, ICloneable
+    public abstract class BaseClientCollectionEntry : ICollectionEntry, ICloneable, INotifyPropertyChanged
     {
         public abstract int ID { get; set; }
 
@@ -160,14 +170,6 @@ namespace Kistl.API.Client
             obj.ID = this.ID;
         }
 
-        public virtual void NotifyPropertyChanging(string property)
-        {
-        }
-
-        public virtual void NotifyPropertyChanged(string property)
-        {
-        }
-
         private KistlContext _context;
         public KistlContext Context { get { return _context; } }
         public virtual void AttachToContext(KistlContext ctx)
@@ -180,6 +182,38 @@ namespace Kistl.API.Client
             if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
             _context = null;
         }
+
+        #region NotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Object has been changed
+        /// </summary>
+        public virtual void NotifyChange()
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
+        }
+
+        /// <summary>
+        /// Property is beeing changing
+        /// </summary>
+        /// <param name="property"></param>
+        public virtual void NotifyPropertyChanging(string property)
+        {
+        }
+
+        /// <summary>
+        /// Property has been changed
+        /// </summary>
+        /// <param name="property"></param>
+        public virtual void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+        #endregion
     }
 
 }

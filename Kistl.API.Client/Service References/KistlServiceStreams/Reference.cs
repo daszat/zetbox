@@ -16,19 +16,15 @@ namespace Kistl.API.Client.KistlServiceStreams {
     public interface IKistlServiceStreams {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/GetObject", ReplyAction="http://tempuri.org/IKistlServiceStreams/GetObjectResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlServiceStreams/GetObjectApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.MemoryStream GetObject(System.IO.MemoryStream msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/SetObject", ReplyAction="http://tempuri.org/IKistlServiceStreams/SetObjectResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlServiceStreams/SetObjectApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.MemoryStream SetObject(System.IO.MemoryStream msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/GetList", ReplyAction="http://tempuri.org/IKistlServiceStreams/GetListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlServiceStreams/GetListApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.MemoryStream GetList(System.IO.MemoryStream msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/GetListOf", ReplyAction="http://tempuri.org/IKistlServiceStreams/GetListOfResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.ApplicationException), Action="http://tempuri.org/IKistlServiceStreams/GetListOfApplicationExceptionFault", Name="ApplicationException", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.MemoryStream GetListOf(System.IO.MemoryStream msg);
     }
     

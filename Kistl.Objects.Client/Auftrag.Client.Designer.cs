@@ -12,6 +12,7 @@ namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -59,7 +60,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Projekt"); 
                 _fk_Projekt = value.ID;
+                NotifyPropertyChanged("Projekt"); ;
             }
         }
         
@@ -71,7 +74,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Projekt"); 
                 _fk_Projekt = value;
+                NotifyPropertyChanged("Projekt"); ;
             }
         }
         
@@ -84,7 +89,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Mitarbeiter"); 
                 _fk_Mitarbeiter = value.ID;
+                NotifyPropertyChanged("Mitarbeiter"); ;
             }
         }
         
@@ -96,7 +103,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Mitarbeiter"); 
                 _fk_Mitarbeiter = value;
+                NotifyPropertyChanged("Mitarbeiter"); ;
             }
         }
         
@@ -108,7 +117,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Auftragsname = value;
+                NotifyPropertyChanging("Auftragsname"); 
+                _Auftragsname = value; 
+                NotifyPropertyChanged("Auftragsname");;
             }
         }
         
@@ -121,7 +132,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Kunde"); 
                 _fk_Kunde = value.ID;
+                NotifyPropertyChanged("Kunde"); ;
             }
         }
         
@@ -133,7 +146,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                NotifyPropertyChanging("Kunde"); 
                 _fk_Kunde = value;
+                NotifyPropertyChanged("Kunde"); ;
             }
         }
         
@@ -145,7 +160,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Auftragswert = value;
+                NotifyPropertyChanging("Auftragswert"); 
+                _Auftragswert = value; 
+                NotifyPropertyChanged("Auftragswert");;
             }
         }
         
@@ -191,15 +208,11 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Auftrag)obj).fk_Projekt = this.fk_Projekt;
-            ((Auftrag)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
-            ((Auftrag)obj).NotifyPropertyChanging("Auftragsname");
-            ((Auftrag)obj).Auftragsname = this.Auftragsname;
-            ((Auftrag)obj).NotifyPropertyChanged("Auftragsname");
-            ((Auftrag)obj).fk_Kunde = this.fk_Kunde;
-            ((Auftrag)obj).NotifyPropertyChanging("Auftragswert");
-            ((Auftrag)obj).Auftragswert = this.Auftragswert;
-            ((Auftrag)obj).NotifyPropertyChanged("Auftragswert");
+            ((Auftrag)obj)._fk_Projekt = this._fk_Projekt;
+            ((Auftrag)obj)._fk_Mitarbeiter = this._fk_Mitarbeiter;
+            ((Auftrag)obj)._Auftragsname = this._Auftragsname;
+            ((Auftrag)obj)._fk_Kunde = this._fk_Kunde;
+            ((Auftrag)obj)._Auftragswert = this._Auftragswert;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -222,9 +235,9 @@ namespace Kistl.App.Projekte
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Projekt, sw);
             BinarySerializer.ToBinary(this.fk_Mitarbeiter, sw);
-            BinarySerializer.ToBinary(this.Auftragsname, sw);
+            BinarySerializer.ToBinary(this._Auftragsname, sw);
             BinarySerializer.ToBinary(this.fk_Kunde, sw);
-            BinarySerializer.ToBinary(this.Auftragswert, sw);
+            BinarySerializer.ToBinary(this._Auftragswert, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

@@ -12,6 +12,7 @@ namespace Kistl.App.Zeiterfassung
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -31,6 +32,8 @@ namespace Kistl.App.Zeiterfassung
         private string _Kontoname;
         
         private List<Kistl.App.Zeiterfassung.Taetigkeit> _Taetigkeiten;
+        
+        private ObservableCollection<Zeitkonto_MitarbeiterCollectionEntry> _Mitarbeiter = new ObservableCollection<Zeitkonto_MitarbeiterCollectionEntry>();
         
         public override int ID
         {
@@ -52,7 +55,9 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                _Kontoname = value;
+                NotifyPropertyChanging("Kontoname"); 
+                _Kontoname = value; 
+                NotifyPropertyChanged("Kontoname");;
             }
         }
         
@@ -64,6 +69,27 @@ namespace Kistl.App.Zeiterfassung
                 if(_Taetigkeiten == null) _Taetigkeiten = Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten");
                 return _Taetigkeiten;
             }
+        }
+        
+        public ObservableCollection<Zeitkonto_MitarbeiterCollectionEntry> Mitarbeiter
+        {
+            get
+            {
+                // TODO
+                _Mitarbeiter.CollectionChanged -= _Mitarbeiter_CollectionChanged;
+                _Mitarbeiter.CollectionChanged += _Mitarbeiter_CollectionChanged;
+                return _Mitarbeiter;
+            }
+            set
+            {
+                _Mitarbeiter = value;
+            }
+        }
+
+        // TODO
+        void _Mitarbeiter_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged("Mitarbeiter");
         }
         
         public event ToStringHandler<Zeitkonto> OnToString_Zeitkonto;
@@ -106,26 +132,128 @@ namespace Kistl.App.Zeiterfassung
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Zeitkonto)obj).NotifyPropertyChanging("Kontoname");
-            ((Zeitkonto)obj).Kontoname = this.Kontoname;
-            ((Zeitkonto)obj).NotifyPropertyChanged("Kontoname");
+            ((Zeitkonto)obj)._Kontoname = this._Kontoname;
+            ((Zeitkonto)obj)._Mitarbeiter = this._Mitarbeiter.Clone();
         }
         
         public override void AttachToContext(KistlContext ctx)
         {
             base.AttachToContext(ctx);
+            _Mitarbeiter.ForEach(i => i.AttachToContext(ctx));;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Kontoname, sw);
+            BinarySerializer.ToBinary(this._Kontoname, sw);
+            BinarySerializer.ToBinary(this.Mitarbeiter, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
+            BinarySerializer.FromBinaryCollectionEntries(out this._Mitarbeiter, sr, ctx);
+        }
+    }
+    
+    public class Zeitkonto_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_Value = Helper.INVALIDID;
+        
+        private int _fk_Parent = Helper.INVALIDID;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Projekte.Mitarbeiter Value
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Projekte.Mitarbeiter>().Single(o => o.ID == fk_Value);
+            }
+            set
+            {
+                // TODO
+                base.NotifyPropertyChanging("Value");
+                _fk_Value = value.ID;
+                base.NotifyPropertyChanged("Value");
+            }
+        }
+        
+        [XmlIgnore()]
+        public Zeitkonto Parent
+        {
+            get
+            {
+                return Context.GetQuery<Zeitkonto>().Single(o => o.ID == fk_Parent);
+            }
+            set
+            {
+                _fk_Parent = value.ID;
+            }
+        }
+        
+        public int fk_Value
+        {
+            get
+            {
+                return _fk_Value;
+            }
+            set
+            {
+                // TODO
+                base.NotifyPropertyChanging("Value");
+                _fk_Value = value;
+                base.NotifyPropertyChanged("Value");
+            }
+        }
+        
+        public int fk_Parent
+        {
+            get
+            {
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
+        }
+        
+        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        {
+            base.FromStream(ctx, sr);
+            BinarySerializer.FromBinary(out this._fk_Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+        }
+        
+        public override void CopyTo(Kistl.API.ICollectionEntry obj)
+        {
+            base.CopyTo(obj);
+            // TODO
+            ((Zeitkonto_MitarbeiterCollectionEntry)obj)._fk_Value = this.fk_Value;
+            ((Zeitkonto_MitarbeiterCollectionEntry)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

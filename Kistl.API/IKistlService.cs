@@ -6,6 +6,7 @@ using System.Text;
 using System.ServiceModel;
 using System.Xml;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Kistl.API
 {
@@ -57,19 +58,15 @@ namespace Kistl.API
     public interface IKistlServiceStreams
     {
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
         System.IO.MemoryStream GetObject(System.IO.MemoryStream msg);
 
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
         System.IO.MemoryStream SetObject(System.IO.MemoryStream msg);
 
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
         System.IO.MemoryStream GetList(System.IO.MemoryStream msg);
 
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
         System.IO.MemoryStream GetListOf(System.IO.MemoryStream msg);
     }
 

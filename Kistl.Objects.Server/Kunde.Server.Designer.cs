@@ -14,6 +14,7 @@ namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -71,7 +72,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Kundenname = value;
+                NotifyPropertyChanging("Kundenname"); 
+                _Kundenname = value; 
+                NotifyPropertyChanged("Kundenname");;
             }
         }
         
@@ -84,7 +87,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Adresse = value;
+                NotifyPropertyChanging("Adresse"); 
+                _Adresse = value; 
+                NotifyPropertyChanged("Adresse");;
             }
         }
         
@@ -97,7 +102,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _PLZ = value;
+                NotifyPropertyChanging("PLZ"); 
+                _PLZ = value; 
+                NotifyPropertyChanged("PLZ");;
             }
         }
         
@@ -110,7 +117,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Ort = value;
+                NotifyPropertyChanging("Ort"); 
+                _Ort = value; 
+                NotifyPropertyChanged("Ort");;
             }
         }
         
@@ -123,7 +132,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                _Land = value;
+                NotifyPropertyChanging("Land"); 
+                _Land = value; 
+                NotifyPropertyChanged("Land");;
             }
         }
         
@@ -178,31 +189,21 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Kunde)obj).NotifyPropertyChanging("Kundenname");
-            ((Kunde)obj).Kundenname = this.Kundenname;
-            ((Kunde)obj).NotifyPropertyChanged("Kundenname");
-            ((Kunde)obj).NotifyPropertyChanging("Adresse");
-            ((Kunde)obj).Adresse = this.Adresse;
-            ((Kunde)obj).NotifyPropertyChanged("Adresse");
-            ((Kunde)obj).NotifyPropertyChanging("PLZ");
-            ((Kunde)obj).PLZ = this.PLZ;
-            ((Kunde)obj).NotifyPropertyChanged("PLZ");
-            ((Kunde)obj).NotifyPropertyChanging("Ort");
-            ((Kunde)obj).Ort = this.Ort;
-            ((Kunde)obj).NotifyPropertyChanged("Ort");
-            ((Kunde)obj).NotifyPropertyChanging("Land");
-            ((Kunde)obj).Land = this.Land;
-            ((Kunde)obj).NotifyPropertyChanged("Land");
+            ((Kunde)obj)._Kundenname = this._Kundenname;
+            ((Kunde)obj)._Adresse = this._Adresse;
+            ((Kunde)obj)._PLZ = this._PLZ;
+            ((Kunde)obj)._Ort = this._Ort;
+            ((Kunde)obj)._Land = this._Land;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Kundenname, sw);
-            BinarySerializer.ToBinary(this.Adresse, sw);
-            BinarySerializer.ToBinary(this.PLZ, sw);
-            BinarySerializer.ToBinary(this.Ort, sw);
-            BinarySerializer.ToBinary(this.Land, sw);
+            BinarySerializer.ToBinary(this._Kundenname, sw);
+            BinarySerializer.ToBinary(this._Adresse, sw);
+            BinarySerializer.ToBinary(this._PLZ, sw);
+            BinarySerializer.ToBinary(this._Ort, sw);
+            BinarySerializer.ToBinary(this._Land, sw);
             BinarySerializer.ToBinary(this.EMails, sw);
         }
         
@@ -225,6 +226,8 @@ namespace Kistl.App.Projekte
         private int _ID = Helper.INVALIDID;
         
         private string _Value;
+        
+        private int _fk_Parent = Helper.INVALIDID;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -252,24 +255,59 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kunde_EMailsCollectionEntry_Kunde", "A_Kunde")]
+        public Kunde Parent
+        {
+            get
+            {
+                EntityReference<Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kunde>("Model.FK_Kunde_EMailsCollectionEntry_Kunde", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kunde>("Model.FK_Kunde_EMailsCollectionEntry_Kunde", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Parent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Parent == Helper.INVALIDID && Parent != null)
+                {
+                    _fk_Parent = Parent.ID;
+                }
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
         }
         
         public override void CopyTo(Kistl.API.ICollectionEntry obj)
         {
             base.CopyTo(obj);
-            ((Kunde_EMailsCollectionEntry)obj).NotifyPropertyChanging("Value");
             ((Kunde_EMailsCollectionEntry)obj)._Value = this._Value;
-            ((Kunde_EMailsCollectionEntry)obj).NotifyPropertyChanged("Value");
+            ((Kunde_EMailsCollectionEntry)obj)._fk_Parent = this._fk_Parent;
         }
     }
 }

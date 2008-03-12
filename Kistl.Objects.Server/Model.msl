@@ -206,6 +206,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Zeitkonto_MitarbeiterCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Zeitkonto_MitarbeiterCollectionEntry)">
+        <MappingFragment StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="FK_BaseProperty_ObjectClass" TypeName="Model.FK_BaseProperty_ObjectClass" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
@@ -404,6 +411,15 @@
       </EndProperty>
       <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" TypeName="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
+      <EndProperty Name="A_Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
+      </EndProperty>
+      <EndProperty Name="B_Zeitkonto_MitarbeiterCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
+    </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
@@ -421,6 +437,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" TypeName="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
+      <EndProperty Name="A_Zeitkonto">
+        <ScalarProperty Name="ID" ColumnName="fk_Zeitkonto" />
+      </EndProperty>
+      <EndProperty Name="B_Zeitkonto_MitarbeiterCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Zeitkonto" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

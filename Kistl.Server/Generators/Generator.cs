@@ -57,6 +57,7 @@ namespace Kistl.Server.Generators
                     "System.Data.Linq.dll",
                     "System.Xml.dll",
                     "System.Xml.Linq.dll",
+                    "WindowsBase.dll",
                 });
             
             if (type == ClientServerEnum.Server)

@@ -14,6 +14,7 @@ namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Collections;
@@ -76,7 +77,9 @@ namespace Kistl.App.Base
             }
             set
             {
-                _PreFetchToClient = value;
+                NotifyPropertyChanging("PreFetchToClient"); 
+                _PreFetchToClient = value; 
+                NotifyPropertyChanged("PreFetchToClient");;
             }
         }
         
@@ -124,10 +127,8 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((BackReferenceProperty)obj).fk_ReferenceProperty = this.fk_ReferenceProperty;
-            ((BackReferenceProperty)obj).NotifyPropertyChanging("PreFetchToClient");
-            ((BackReferenceProperty)obj).PreFetchToClient = this.PreFetchToClient;
-            ((BackReferenceProperty)obj).NotifyPropertyChanged("PreFetchToClient");
+            ((BackReferenceProperty)obj)._fk_ReferenceProperty = this._fk_ReferenceProperty;
+            ((BackReferenceProperty)obj)._PreFetchToClient = this._PreFetchToClient;
         }
         
         public override string GetDataType()
@@ -156,7 +157,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_ReferenceProperty, sw);
-            BinarySerializer.ToBinary(this.PreFetchToClient, sw);
+            BinarySerializer.ToBinary(this._PreFetchToClient, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
