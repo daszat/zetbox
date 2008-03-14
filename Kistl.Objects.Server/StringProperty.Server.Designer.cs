@@ -30,6 +30,10 @@ namespace Kistl.App.Base
         
         private System.Int32? _Length;
         
+        public StringProperty()
+        {
+        }
+        
         [EdmScalarPropertyAttribute()]
         public System.Int32? Length
         {

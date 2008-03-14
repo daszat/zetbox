@@ -82,6 +82,7 @@
     <Compile Include="Property.Client.Designer.cs" />
     <Compile Include="StringProperty.Client.Designer.cs" />
     <Compile Include="Taetigkeit.Client.Designer.cs" />
+    <Compile Include="TaetigkeitsArt.Client.Designer.cs" />
     <Compile Include="Task.Client.Designer.cs" />
     <Compile Include="ValueTypeProperty.Client.Designer.cs" />
     <Compile Include="Zeitkonto.Client.Designer.cs" />

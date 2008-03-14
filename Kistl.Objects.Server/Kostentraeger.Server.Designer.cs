@@ -32,6 +32,10 @@ namespace Kistl.App.Zeiterfassung
         
         private int _fk_Projekt = Helper.INVALIDID;
         
+        public Kostentraeger()
+        {
+        }
+        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kostentraeger_Projekt", "A_Projekt")]
         public Kistl.App.Projekte.Projekt Projekt

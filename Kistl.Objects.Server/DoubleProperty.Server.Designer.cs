@@ -28,6 +28,10 @@ namespace Kistl.App.Base
     public class DoubleProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
+        public DoubleProperty()
+        {
+        }
+        
         public event ToStringHandler<DoubleProperty> OnToString_DoubleProperty;
         
         public event ObjectEventHandler<DoubleProperty> OnPreSave_DoubleProperty;

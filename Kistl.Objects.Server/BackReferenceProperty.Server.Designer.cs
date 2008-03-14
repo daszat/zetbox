@@ -34,6 +34,10 @@ namespace Kistl.App.Base
         
         private bool _PreFetchToClient;
         
+        public BackReferenceProperty()
+        {
+        }
+        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty", "A_ObjectReferenceProperty")]
         public Kistl.App.Base.ObjectReferenceProperty ReferenceProperty

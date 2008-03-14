@@ -28,6 +28,10 @@ namespace Kistl.App.Base
     public class ValueTypeProperty : Kistl.App.Base.Property, ICloneable
     {
         
+        public ValueTypeProperty()
+        {
+        }
+        
         public event ToStringHandler<ValueTypeProperty> OnToString_ValueTypeProperty;
         
         public event ObjectEventHandler<ValueTypeProperty> OnPreSave_ValueTypeProperty;

@@ -39,6 +39,10 @@ namespace Kistl.App.Base
         
         private int _fk_Module = Helper.INVALIDID;
         
+        public Method()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -150,7 +154,7 @@ namespace Kistl.App.Base
             get
             {
                 EntityCollection<Kistl.App.Base.MethodInvocation> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.MethodInvocation>("Model.FK_MethodInvocation_Method", "B_MethodInvocation");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }

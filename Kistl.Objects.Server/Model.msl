@@ -131,6 +131,8 @@
         <MappingFragment StoreEntitySet="Zeitkonto">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Kontoname" ColumnName="Kontoname" />
+          <ScalarProperty Name="MaxStunden" ColumnName="MaxStunden" />
+          <ScalarProperty Name="AktuelleStunden" ColumnName="AktuelleStunden" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kostenstelle)">
@@ -188,6 +190,14 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
           <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaetigkeitsArt">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TaetigkeitsArt)">
+        <MappingFragment StoreEntitySet="TaetigkeitsArt">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -419,6 +429,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Taetigkeit_TaetigkeitsArt" TypeName="Model.FK_Taetigkeit_TaetigkeitsArt" StoreEntitySet="Taetigkeit">
+      <EndProperty Name="A_TaetigkeitsArt">
+        <ScalarProperty Name="ID" ColumnName="fk_TaetigkeitsArt" />
+      </EndProperty>
+      <EndProperty Name="B_Taetigkeit">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_TaetigkeitsArt" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">

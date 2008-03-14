@@ -37,6 +37,8 @@ namespace Kistl.App.Zeiterfassung
         
         private double _Dauer;
         
+        private int _fk_TaetigkeitsArt = Helper.INVALIDID;
+        
         public Taetigkeit()
         {
         }
@@ -139,6 +141,35 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
+        [XmlIgnore()]
+        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Zeiterfassung.TaetigkeitsArt>().Single(o => o.ID == fk_TaetigkeitsArt);
+            }
+            set
+            {
+                NotifyPropertyChanging("TaetigkeitsArt"); 
+                _fk_TaetigkeitsArt = value.ID;
+                NotifyPropertyChanged("TaetigkeitsArt"); ;
+            }
+        }
+        
+        public int fk_TaetigkeitsArt
+        {
+            get
+            {
+                return _fk_TaetigkeitsArt;
+            }
+            set
+            {
+                NotifyPropertyChanging("TaetigkeitsArt"); 
+                _fk_TaetigkeitsArt = value;
+                NotifyPropertyChanged("TaetigkeitsArt"); ;
+            }
+        }
+        
         public event ToStringHandler<Taetigkeit> OnToString_Taetigkeit;
         
         public event ObjectEventHandler<Taetigkeit> OnPreSave_Taetigkeit;
@@ -183,6 +214,7 @@ namespace Kistl.App.Zeiterfassung
             ((Taetigkeit)obj)._fk_Mitarbeiter = this._fk_Mitarbeiter;
             ((Taetigkeit)obj)._Datum = this._Datum;
             ((Taetigkeit)obj)._Dauer = this._Dauer;
+            ((Taetigkeit)obj)._fk_TaetigkeitsArt = this._fk_TaetigkeitsArt;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -197,6 +229,7 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.ToBinary(this.fk_Mitarbeiter, sw);
             BinarySerializer.ToBinary(this._Datum, sw);
             BinarySerializer.ToBinary(this._Dauer, sw);
+            BinarySerializer.ToBinary(this.fk_TaetigkeitsArt, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -206,6 +239,7 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.FromBinary(out this._fk_Mitarbeiter, sr);
             BinarySerializer.FromBinary(out this._Datum, sr);
             BinarySerializer.FromBinary(out this._Dauer, sr);
+            BinarySerializer.FromBinary(out this._fk_TaetigkeitsArt, sr);
         }
     }
 }

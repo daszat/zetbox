@@ -41,6 +41,10 @@ namespace Kistl.App.Base
         
         private int _fk_Module = Helper.INVALIDID;
         
+        public BaseProperty()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {

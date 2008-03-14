@@ -32,6 +32,10 @@ namespace Kistl.App.Base
         
         private bool _IsNullable;
         
+        public Property()
+        {
+        }
+        
         [EdmScalarPropertyAttribute()]
         public bool IsList
         {

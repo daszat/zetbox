@@ -148,7 +148,7 @@ namespace Kistl.Server.Generators.SQLServer
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class), collectionClass.code_class.Name)));
 
                 // Collection Class
@@ -250,7 +250,7 @@ namespace Kistl.Server.Generators.SQLServer
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class), collectionClass.code_class.Name)));
 
                 // Collection.Serializer.Parent
@@ -285,7 +285,7 @@ namespace Kistl.Server.Generators.SQLServer
         }
         #endregion
 
-        #region GenerateObjectReferenceProperty
+        #region GenerateProperties_ObjectReferenceProperty
 
         protected override void GenerateProperties_ObjectReferenceProperty(Current current, Current serializer)
         {
@@ -327,7 +327,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         #endregion
 
-        #region GenerateBackReferenceProperty
+        #region GenerateProperties_BackReferenceProperty
 
         protected override void GenerateProperties_BackReferenceProperty(Current current)
         {
@@ -335,23 +335,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             BackReferenceProperty backRefProp = (BackReferenceProperty)current.property;
 
-            if (current.clientServer == ClientServerEnum.Client)
-            {
-                ObjectType childType = new ObjectType(current.property.GetDataType());
-                current.code_property.Type = new CodeTypeReference("List", new CodeTypeReference(childType.NameDataObject));
-
-                current.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(string.Format(
-                        @"if(_{0} == null) _{0} = Context.GetListOf<{1}>(this, ""{0}"");
-                return _{0}",
-                    current.property.PropertyName, childType.NameDataObject)));
-
-                CodeMemberField f = new CodeMemberField(current.code_property.Type,
-                    "_" + current.property.PropertyName);
-
-                current.code_class.Members.Add(f);
-            }
-            else
+            if (current.clientServer == ClientServerEnum.Server)
             {
                 ObjectType childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
 
@@ -366,7 +350,7 @@ namespace Kistl.Server.Generators.SQLServer
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""{2}"");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", childType.NameDataObject, 
                          Generator.GetAssociationName(current.objClass, childType), 
                          Generator.GetAssociationChildRoleName(childType))));

@@ -32,6 +32,10 @@ namespace Kistl.App.Base
         
         private int _fk_ReferenceObjectClass = Helper.INVALIDID;
         
+        public ObjectReferenceProperty()
+        {
+        }
+        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass", "A_ObjectClass")]
         public Kistl.App.Base.ObjectClass ReferenceObjectClass

@@ -42,6 +42,10 @@ namespace Kistl.App.Projekte
         
         private string _Land;
         
+        public Kunde()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -144,7 +148,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityCollection<Kunde_EMailsCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kunde_EMailsCollectionEntry>("Model.FK_Kunde_EMailsCollectionEntry_Kunde", "B_Kunde_EMailsCollectionEntry");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }

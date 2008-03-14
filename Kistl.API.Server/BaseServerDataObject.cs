@@ -30,11 +30,11 @@ namespace Kistl.API.Server
                 // Calc Objectstate
                 if (_ObjectState != DataObjectState.Deleted)
                 {
-                    if (ID == Helper.INVALIDID)
+                    if (ID == API.Helper.INVALIDID)
                     {
                         _ObjectState = DataObjectState.New;
                     }
-                    else if(_ObjectState == DataObjectState.New)
+                    else if (_ObjectState == DataObjectState.New)
                     {
                         _ObjectState = DataObjectState.Unmodified;
                     }
@@ -104,6 +104,7 @@ namespace Kistl.API.Server
 
             BinarySerializer.ToBinary(Type, sw);
             BinarySerializer.ToBinary(ID, sw);
+            BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
@@ -118,9 +119,12 @@ namespace Kistl.API.Server
             if (!Type.Equals(t))
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", Type, t));
 
-            int tmpID;
-            BinarySerializer.FromBinary(out tmpID, sr);
-            ID = tmpID;
+            int tmp;
+            BinarySerializer.FromBinary(out tmp, sr);
+            ID = tmp;
+
+            BinarySerializer.FromBinary(out tmp, sr);
+            ObjectState = (DataObjectState)tmp;
 
             if (ctx != null) ctx.Attach(this);
         }

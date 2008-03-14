@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CustomServerActions_KistlBase.cs" />
     <Compile Include="CustomServerActions_Projekte.cs" />
+    <Compile Include="CustomServerActions_Zeiterfassung.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

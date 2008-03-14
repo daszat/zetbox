@@ -15,7 +15,7 @@ namespace Kistl.App.Base
             {
                 Kistl.App.Base.Module kistlModule = KistlDataContext.Current.GetTable<Kistl.App.Base.Module>().First(md => md.ModuleName == "KistlBase");
                 Kistl.App.Base.Method m;
-                m = obj.Methods.SingleOrDefault(i => i.MethodName == "ToString" && i.Module == obj.Module);
+                m = obj.Methods.SingleOrDefault(i => i.MethodName == "ToString" && i.Module == kistlModule);
                 if (m == null)
                 {
                     m = new Kistl.App.Base.Method();
@@ -24,7 +24,7 @@ namespace Kistl.App.Base
                     obj.Methods.Add(m);
                 }
 
-                m = obj.Methods.SingleOrDefault(i => i.MethodName == "PreSave" && i.Module == obj.Module);
+                m = obj.Methods.SingleOrDefault(i => i.MethodName == "PreSave" && i.Module == kistlModule);
                 if (m == null)
                 {
                     m = new Kistl.App.Base.Method();
@@ -33,7 +33,7 @@ namespace Kistl.App.Base
                     obj.Methods.Add(m);
                 }
 
-                m = obj.Methods.SingleOrDefault(i => i.MethodName == "PostSave" && i.Module == obj.Module);
+                m = obj.Methods.SingleOrDefault(i => i.MethodName == "PostSave" && i.Module == kistlModule);
                 if (m == null)
                 {
                     m = new Kistl.App.Base.Method();

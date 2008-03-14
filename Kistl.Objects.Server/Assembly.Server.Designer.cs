@@ -38,6 +38,10 @@ namespace Kistl.App.Base
         
         private bool _IsClientAssembly;
         
+        public Assembly()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {

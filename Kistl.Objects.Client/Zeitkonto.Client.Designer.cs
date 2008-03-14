@@ -35,6 +35,10 @@ namespace Kistl.App.Zeiterfassung
         
         private NotifyingObservableCollection<Zeitkonto_MitarbeiterCollectionEntry> _Mitarbeiter;
         
+        private System.Double? _MaxStunden;
+        
+        private System.Double? _AktuelleStunden;
+        
         public Zeitkonto()
         {
             _Mitarbeiter = new NotifyingObservableCollection<Zeitkonto_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
@@ -84,6 +88,34 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
+        public System.Double? MaxStunden
+        {
+            get
+            {
+                return _MaxStunden;
+            }
+            set
+            {
+                NotifyPropertyChanging("MaxStunden"); 
+                _MaxStunden = value; 
+                NotifyPropertyChanged("MaxStunden");;
+            }
+        }
+        
+        public System.Double? AktuelleStunden
+        {
+            get
+            {
+                return _AktuelleStunden;
+            }
+            set
+            {
+                NotifyPropertyChanging("AktuelleStunden"); 
+                _AktuelleStunden = value; 
+                NotifyPropertyChanged("AktuelleStunden");;
+            }
+        }
+        
         public event ToStringHandler<Zeitkonto> OnToString_Zeitkonto;
         
         public event ObjectEventHandler<Zeitkonto> OnPreSave_Zeitkonto;
@@ -126,6 +158,8 @@ namespace Kistl.App.Zeiterfassung
             base.CopyTo(obj);
             ((Zeitkonto)obj)._Kontoname = this._Kontoname;
             ((Zeitkonto)obj)._Mitarbeiter = this._Mitarbeiter.Clone(obj);
+            ((Zeitkonto)obj)._MaxStunden = this._MaxStunden;
+            ((Zeitkonto)obj)._AktuelleStunden = this._AktuelleStunden;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -139,6 +173,8 @@ namespace Kistl.App.Zeiterfassung
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Kontoname, sw);
             BinarySerializer.ToBinary(this.Mitarbeiter, sw);
+            BinarySerializer.ToBinary(this._MaxStunden, sw);
+            BinarySerializer.ToBinary(this._AktuelleStunden, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -146,6 +182,8 @@ namespace Kistl.App.Zeiterfassung
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
             BinarySerializer.FromBinaryCollectionEntries(out this._Mitarbeiter, sr, ctx, this, "Mitarbeiter");
+            BinarySerializer.FromBinary(out this._MaxStunden, sr);
+            BinarySerializer.FromBinary(out this._AktuelleStunden, sr);
         }
     }
     

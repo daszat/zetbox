@@ -159,6 +159,7 @@ namespace Kistl.Client.Controls
         {
             try
             {
+                if (lst.SelectedItem == null) return;
                 API.IDataObject obj = lst.SelectedItem as API.IDataObject;
                 ObjectWindow wnd = new ObjectWindow();
                 wnd.ObjectType = this.DestinationObjectType;

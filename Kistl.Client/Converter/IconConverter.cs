@@ -10,6 +10,15 @@ namespace Kistl.Client.Converter
     [ValueConversion(typeof(BaseClientDataObject), typeof(string))]
     public class IconConverter : IValueConverter
     {
+        private string GetIconPath(string name)
+        {
+            string result = Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
+                + @"\GUI.Icons\"
+                + name;
+            result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
+            return result;
+        }
+
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value is Kistl.App.Base.ObjectClass)
@@ -17,25 +26,22 @@ namespace Kistl.Client.Converter
                 Kistl.App.Base.ObjectClass objClass = (Kistl.App.Base.ObjectClass)value;
                 if (objClass.DefaultIcon != null)
                 {
-                    string result = Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
-                        + @"\GUI.Icons\"
-                        + objClass.DefaultIcon.IconFile;
-                    result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
-                    return result;
+                    return GetIconPath(objClass.DefaultIcon.IconFile);
                 }
                 else
                     return "";
+            }
+            else if (value is Kistl.App.GUI.Icon)
+            {
+                Kistl.App.GUI.Icon obj = (Kistl.App.GUI.Icon)value;
+                return GetIconPath(obj.IconFile);
             }
             else if (value is BaseClientDataObject)
             {
                 BaseClientDataObject obj = (BaseClientDataObject)value;
                 if (Helper.ObjectClasses[obj.Type].DefaultIcon != null)
                 {
-                    string result = Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
-                        + @"\GUI.Icons\"
-                        + Helper.ObjectClasses[obj.Type].DefaultIcon.IconFile;
-                    result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
-                    return result;
+                    return GetIconPath(Helper.ObjectClasses[obj.Type].DefaultIcon.IconFile);
                 }
                 else
                 {

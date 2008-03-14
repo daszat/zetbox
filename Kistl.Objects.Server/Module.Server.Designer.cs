@@ -34,6 +34,10 @@ namespace Kistl.App.Base
         
         private string _ModuleName;
         
+        public Module()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -92,7 +96,7 @@ namespace Kistl.App.Base
             get
             {
                 EntityCollection<Kistl.App.Base.ObjectClass> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectClass>("Model.FK_ObjectClass_Module", "B_ObjectClass");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }
@@ -104,7 +108,7 @@ namespace Kistl.App.Base
             get
             {
                 EntityCollection<Kistl.App.Base.Assembly> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Assembly>("Model.FK_Assembly_Module", "B_Assembly");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }

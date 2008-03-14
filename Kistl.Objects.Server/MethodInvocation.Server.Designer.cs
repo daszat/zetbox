@@ -47,6 +47,10 @@ namespace Kistl.App.Base
         
         private string _MemberName;
         
+        public MethodInvocation()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {

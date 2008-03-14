@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Base
+namespace Kistl.App.Zeiterfassung
 {
     using System;
     using System.Collections.Generic;
@@ -24,32 +24,68 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntProperty")]
-    public class IntProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="TaetigkeitsArt")]
+    public class TaetigkeitsArt : BaseServerDataObject, ICloneable
     {
         
-        public IntProperty()
+        private int _ID = Helper.INVALIDID;
+        
+        private string _Name;
+        
+        public TaetigkeitsArt()
         {
         }
         
-        public event ToStringHandler<IntProperty> OnToString_IntProperty;
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
         
-        public event ObjectEventHandler<IntProperty> OnPreSave_IntProperty;
+        public override string EntitySetName
+        {
+            get
+            {
+                return "TaetigkeitsArt";
+            }
+        }
         
-        public event ObjectEventHandler<IntProperty> OnPostSave_IntProperty;
+        [EdmScalarPropertyAttribute()]
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                NotifyPropertyChanging("Name"); 
+                _Name = value; 
+                NotifyPropertyChanged("Name");;
+            }
+        }
         
-        public event GetDataType_Handler<IntProperty> OnGetDataType_IntProperty;
+        public event ToStringHandler<TaetigkeitsArt> OnToString_TaetigkeitsArt;
         
-        public event GetGUIRepresentation_Handler<IntProperty> OnGetGUIRepresentation_IntProperty;
+        public event ObjectEventHandler<TaetigkeitsArt> OnPreSave_TaetigkeitsArt;
+        
+        public event ObjectEventHandler<TaetigkeitsArt> OnPostSave_TaetigkeitsArt;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_IntProperty != null)
+            if (OnToString_TaetigkeitsArt != null)
             {
-                OnToString_IntProperty(this, e);
+                OnToString_TaetigkeitsArt(this, e);
             }
             return e.Result;
         }
@@ -57,18 +93,18 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IntProperty != null) OnPreSave_IntProperty(this);
+            if (OnPreSave_TaetigkeitsArt != null) OnPreSave_TaetigkeitsArt(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IntProperty != null) OnPostSave_IntProperty(this);
+            if (OnPostSave_TaetigkeitsArt != null) OnPostSave_TaetigkeitsArt(this);
         }
         
         public override object Clone()
         {
-            IntProperty obj = new IntProperty();
+            TaetigkeitsArt obj = new TaetigkeitsArt();
             CopyTo(obj);
             return obj;
         }
@@ -76,38 +112,19 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-        }
-        
-        public override string GetDataType()
-        {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_IntProperty != null)
-            {
-                OnGetDataType_IntProperty(this, e);
-            }
-            return e.Result;
-        }
-        
-        public override string GetGUIRepresentation()
-        {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
-            e.Result = base.GetGUIRepresentation();
-            if (OnGetGUIRepresentation_IntProperty != null)
-            {
-                OnGetGUIRepresentation_IntProperty(this, e);
-            }
-            return e.Result;
+            ((TaetigkeitsArt)obj)._Name = this._Name;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
+            BinarySerializer.ToBinary(this._Name, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
+            BinarySerializer.FromBinary(out this._Name, sr);
         }
     }
 }

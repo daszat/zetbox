@@ -38,6 +38,10 @@ namespace Kistl.App.Projekte
         
         private string _TelefonNummer;
         
+        public Mitarbeiter()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -81,7 +85,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry>("Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter", "B_Projekt_MitarbeiterCollectionEntry");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }

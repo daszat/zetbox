@@ -32,6 +32,10 @@ namespace Kistl.App.GUI
         
         private string _IconFile;
         
+        public Icon()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {

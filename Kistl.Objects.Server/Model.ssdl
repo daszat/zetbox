@@ -26,6 +26,7 @@
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons" />
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies" />
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations" />
+    <EntitySet Name="TaetigkeitsArt" EntityType="Model.Store.TaetigkeitsArt" Table="TaetigkeitsArten" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -120,6 +121,10 @@
     <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.Store.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt" Association="Model.Store.FK_Taetigkeit_TaetigkeitsArt">
+      <End Role="A_TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
+      <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -279,6 +284,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Kontoname" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="MaxStunden" Type="float" Nullable="true" />
+    <Property Name="AktuelleStunden" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="Kostenstelle">
     <Key>
@@ -302,6 +309,7 @@
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
     <Property Name="Datum" Type="datetime" Nullable="true" />
     <Property Name="Dauer" Type="float" Nullable="true" />
+    <Property Name="fk_TaetigkeitsArt" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>
@@ -341,6 +349,13 @@
     <Property Name="fk_Assembly" Type="int" Nullable="true" />
     <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TaetigkeitsArt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -639,6 +654,18 @@
       </Principal>
       <Dependent Role="B_Zeitkonto_MitarbeiterCollectionEntry">
         <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Taetigkeit_TaetigkeitsArt">
+    <End Role="A_TaetigkeitsArt" Type="Model.Store.TaetigkeitsArt" Multiplicity="0..1" />
+    <End Role="B_Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TaetigkeitsArt">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Taetigkeit">
+        <PropertyRef Name="fk_TaetigkeitsArt" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

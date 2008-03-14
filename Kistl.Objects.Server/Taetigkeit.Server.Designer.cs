@@ -10,6 +10,7 @@
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Taetigkeit_Zeitkonto", "A_Zeitkonto", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.Zeitkonto), "B_Taetigkeit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Taetigkeit))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Taetigkeit_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter), "B_Taetigkeit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Taetigkeit))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Taetigkeit_TaetigkeitsArt", "A_TaetigkeitsArt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.TaetigkeitsArt), "B_Taetigkeit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Taetigkeit))]
 
 namespace Kistl.App.Zeiterfassung
 {
@@ -40,6 +41,12 @@ namespace Kistl.App.Zeiterfassung
         private System.DateTime _Datum;
         
         private double _Dauer;
+        
+        private int _fk_TaetigkeitsArt = Helper.INVALIDID;
+        
+        public Taetigkeit()
+        {
+        }
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -160,6 +167,40 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Taetigkeit_TaetigkeitsArt", "A_TaetigkeitsArt")]
+        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
+        {
+            get
+            {
+                EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt>("Model.FK_Taetigkeit_TaetigkeitsArt", "A_TaetigkeitsArt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt>("Model.FK_Taetigkeit_TaetigkeitsArt", "A_TaetigkeitsArt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_TaetigkeitsArt
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_TaetigkeitsArt == Helper.INVALIDID && TaetigkeitsArt != null)
+                {
+                    _fk_TaetigkeitsArt = TaetigkeitsArt.ID;
+                }
+                return _fk_TaetigkeitsArt;
+            }
+            set
+            {
+                _fk_TaetigkeitsArt = value;
+            }
+        }
+        
         public event ToStringHandler<Taetigkeit> OnToString_Taetigkeit;
         
         public event ObjectEventHandler<Taetigkeit> OnPreSave_Taetigkeit;
@@ -204,6 +245,7 @@ namespace Kistl.App.Zeiterfassung
             ((Taetigkeit)obj)._fk_Mitarbeiter = this._fk_Mitarbeiter;
             ((Taetigkeit)obj)._Datum = this._Datum;
             ((Taetigkeit)obj)._Dauer = this._Dauer;
+            ((Taetigkeit)obj)._fk_TaetigkeitsArt = this._fk_TaetigkeitsArt;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -213,6 +255,7 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.ToBinary(this.fk_Mitarbeiter, sw);
             BinarySerializer.ToBinary(this._Datum, sw);
             BinarySerializer.ToBinary(this._Dauer, sw);
+            BinarySerializer.ToBinary(this.fk_TaetigkeitsArt, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -222,6 +265,7 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.FromBinary(out this._fk_Mitarbeiter, sr);
             BinarySerializer.FromBinary(out this._Datum, sr);
             BinarySerializer.FromBinary(out this._Dauer, sr);
+            BinarySerializer.FromBinary(out this._fk_TaetigkeitsArt, sr);
         }
     }
 }

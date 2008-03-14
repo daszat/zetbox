@@ -107,13 +107,16 @@ namespace Kistl.API.Client
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
                     objectsSubmittedCount++;
-                    Proxy.Current.SetObject(this, obj.Type, obj);
+                    // Do not attach to context -> first Param is null
+                    // Object was deleted, even remove that Object
+                    Proxy.Current.SetObject(null, obj.Type, obj);
                     objectsToDetach.Add(obj);
                 }
                 else if (obj.ObjectState.In(DataObjectState.Modified, DataObjectState.New))
                 {
                     objectsSubmittedCount++;
                     // Do not attach to context -> first Param is null
+                    // Object is temporary and will bie copied
                     BaseClientDataObject newobj = Proxy.Current.SetObject(null, obj.Type, obj);
                     newobj.CopyTo(obj);
 

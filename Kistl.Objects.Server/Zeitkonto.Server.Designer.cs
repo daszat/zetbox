@@ -35,6 +35,14 @@ namespace Kistl.App.Zeiterfassung
         
         private string _Kontoname;
         
+        private System.Double? _MaxStunden;
+        
+        private System.Double? _AktuelleStunden;
+        
+        public Zeitkonto()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -78,7 +86,7 @@ namespace Kistl.App.Zeiterfassung
             get
             {
                 EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Zeiterfassung.Taetigkeit>("Model.FK_Taetigkeit_Zeitkonto", "B_Taetigkeit");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }
@@ -89,8 +97,38 @@ namespace Kistl.App.Zeiterfassung
             get
             {
                 EntityCollection<Zeitkonto_MitarbeiterCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Zeitkonto_MitarbeiterCollectionEntry>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto", "B_Zeitkonto_MitarbeiterCollectionEntry");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Double? MaxStunden
+        {
+            get
+            {
+                return _MaxStunden;
+            }
+            set
+            {
+                NotifyPropertyChanging("MaxStunden"); 
+                _MaxStunden = value; 
+                NotifyPropertyChanged("MaxStunden");;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Double? AktuelleStunden
+        {
+            get
+            {
+                return _AktuelleStunden;
+            }
+            set
+            {
+                NotifyPropertyChanging("AktuelleStunden"); 
+                _AktuelleStunden = value; 
+                NotifyPropertyChanged("AktuelleStunden");;
             }
         }
         
@@ -135,6 +173,8 @@ namespace Kistl.App.Zeiterfassung
         {
             base.CopyTo(obj);
             ((Zeitkonto)obj)._Kontoname = this._Kontoname;
+            ((Zeitkonto)obj)._MaxStunden = this._MaxStunden;
+            ((Zeitkonto)obj)._AktuelleStunden = this._AktuelleStunden;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -142,6 +182,8 @@ namespace Kistl.App.Zeiterfassung
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Kontoname, sw);
             BinarySerializer.ToBinary(this.Mitarbeiter, sw);
+            BinarySerializer.ToBinary(this._MaxStunden, sw);
+            BinarySerializer.ToBinary(this._AktuelleStunden, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -149,6 +191,8 @@ namespace Kistl.App.Zeiterfassung
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.Mitarbeiter, sr, ctx);
+            BinarySerializer.FromBinary(out this._MaxStunden, sr);
+            BinarySerializer.FromBinary(out this._AktuelleStunden, sr);
         }
     }
     

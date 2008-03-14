@@ -122,6 +122,7 @@ namespace Kistl.API.Client
         {
             BinarySerializer.ToBinary(Type, sw);
             BinarySerializer.ToBinary(ID, sw);
+            BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
@@ -132,9 +133,12 @@ namespace Kistl.API.Client
             if (!Type.Equals(t))
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", Type, t));
 
-            int tmpID;
-            BinarySerializer.FromBinary(out tmpID, sr);
-            ID = tmpID;
+            int tmp;
+            BinarySerializer.FromBinary(out tmp, sr);
+            ID = tmp;
+
+            BinarySerializer.FromBinary(out tmp, sr);
+            ObjectState = (DataObjectState)tmp;
 
             if (ctx != null) ctx.Attach(this);
         }

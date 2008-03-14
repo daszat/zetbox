@@ -44,6 +44,10 @@ namespace Kistl.App.Projekte
         
         private System.Double? _Auftragswert;
         
+        public Auftrag()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {

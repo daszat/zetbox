@@ -263,10 +263,6 @@ namespace Kistl.Client
         {
             try
             {
-                // TODO: Hack, bis die Notifications immer & überall funktionieren
-                // if(obj.ObjectState == DataObjectState.Unmodified)
-                //    obj.ObjectState = DataObjectState.Modified;
-
                 // Objekt zum Server schicken & dann wieder auspacken
                 int count = ctx.SubmitChanges();
                 ObjectID = obj.ID;

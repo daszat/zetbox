@@ -39,6 +39,10 @@ namespace Kistl.App.Projekte
         
         private string _Kundenname;
         
+        public Projekt()
+        {
+        }
+        
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -82,7 +86,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityCollection<Kistl.App.Projekte.Task> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Task>("Model.FK_Task_Projekt", "B_Task");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }
@@ -93,7 +97,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityCollection<Projekt_MitarbeiterCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Projekt_MitarbeiterCollectionEntry>("Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt", "B_Projekt_MitarbeiterCollectionEntry");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }
@@ -135,7 +139,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityCollection<Kistl.App.Zeiterfassung.Kostentraeger> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Zeiterfassung.Kostentraeger>("Model.FK_Kostentraeger_Projekt", "B_Kostentraeger");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }
@@ -147,7 +151,7 @@ namespace Kistl.App.Projekte
             get
             {
                 EntityCollection<Kistl.App.Projekte.Auftrag> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Auftrag>("Model.FK_Auftrag_Projekt", "B_Auftrag");
-                if (!c.IsLoaded) c.Load(); 
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }

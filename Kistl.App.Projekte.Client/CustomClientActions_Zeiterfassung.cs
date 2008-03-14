@@ -26,5 +26,10 @@ namespace Kistl.App.Zeiterfassung
         {
             // Do nothing
         }
+
+        public void OnToString_TaetigkeitsArt(Kistl.App.Zeiterfassung.TaetigkeitsArt obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Name;
+        }
     }
 }

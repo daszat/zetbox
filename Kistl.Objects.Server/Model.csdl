@@ -15,6 +15,7 @@
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
+    <EntitySet Name="TaetigkeitsArt" EntityType="Model.TaetigkeitsArt" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -109,6 +110,10 @@
     <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt" Association="Model.FK_Taetigkeit_TaetigkeitsArt">
+      <End Role="A_TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
+      <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -241,6 +246,8 @@
     <Property Name="Kontoname" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="Taetigkeiten" Relationship="Model.FK_Taetigkeit_Zeitkonto" FromRole="A_Zeitkonto" ToRole="B_Taetigkeit" />
     <NavigationProperty Name="Mitarbeiter" Relationship="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" FromRole="A_Zeitkonto" ToRole="B_Zeitkonto_MitarbeiterCollectionEntry" />
+    <Property Name="MaxStunden" Type="Double" Nullable="true" />
+    <Property Name="AktuelleStunden" Type="Double" Nullable="true" />
   </EntityType>
   <EntityType Name="Kostenstelle" BaseType="Model.Zeitkonto" />
   <EntityType Name="Kostentraeger" BaseType="Model.Zeitkonto">
@@ -255,6 +262,7 @@
     <NavigationProperty Name="Mitarbeiter" Relationship="Model.FK_Taetigkeit_Mitarbeiter" FromRole="B_Taetigkeit" ToRole="A_Mitarbeiter" />
     <Property Name="Datum" Type="DateTime" Nullable="true" />
     <Property Name="Dauer" Type="Double" Nullable="true" />
+    <NavigationProperty Name="TaetigkeitsArt" Relationship="Model.FK_Taetigkeit_TaetigkeitsArt" FromRole="B_Taetigkeit" ToRole="A_TaetigkeitsArt" />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>
@@ -295,6 +303,13 @@
     <NavigationProperty Name="Assembly" Relationship="Model.FK_MethodInvocation_Assembly" FromRole="B_MethodInvocation" ToRole="A_Assembly" />
     <Property Name="FullTypeName" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TaetigkeitsArt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -411,6 +426,10 @@
   <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
     <End Role="A_Mitarbeiter" Type="Model.Mitarbeiter" Multiplicity="0..1" />
     <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" Type="Model.Zeitkonto_MitarbeiterCollectionEntry" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Taetigkeit_TaetigkeitsArt">
+    <End Role="A_TaetigkeitsArt" Type="Model.TaetigkeitsArt" Multiplicity="0..1" />
+    <End Role="B_Taetigkeit" Type="Model.Taetigkeit" Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />
