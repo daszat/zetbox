@@ -27,6 +27,10 @@ namespace Kistl.App.Base
     public class BoolProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
+        public BoolProperty()
+        {
+        }
+        
         public event ToStringHandler<BoolProperty> OnToString_BoolProperty;
         
         public event ObjectEventHandler<BoolProperty> OnPreSave_BoolProperty;

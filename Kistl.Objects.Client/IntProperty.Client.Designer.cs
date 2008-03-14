@@ -27,6 +27,10 @@ namespace Kistl.App.Base
     public class IntProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
+        public IntProperty()
+        {
+        }
+        
         public event ToStringHandler<IntProperty> OnToString_IntProperty;
         
         public event ObjectEventHandler<IntProperty> OnPreSave_IntProperty;

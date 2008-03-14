@@ -27,6 +27,10 @@ namespace Kistl.App.Base
     public class DateTimeProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
+        public DateTimeProperty()
+        {
+        }
+        
         public event ToStringHandler<DateTimeProperty> OnToString_DateTimeProperty;
         
         public event ObjectEventHandler<DateTimeProperty> OnPreSave_DateTimeProperty;

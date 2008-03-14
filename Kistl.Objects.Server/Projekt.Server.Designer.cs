@@ -324,8 +324,8 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.ICollectionEntry obj)
         {
             base.CopyTo(obj);
-            ((Projekt_MitarbeiterCollectionEntry)obj).fk_Value = this.fk_Value;
-            ((Projekt_MitarbeiterCollectionEntry)obj).fk_Parent = this.fk_Parent;
+            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Value = this.fk_Value;
+            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

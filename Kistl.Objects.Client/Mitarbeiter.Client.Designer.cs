@@ -39,6 +39,10 @@ namespace Kistl.App.Projekte
         
         private string _TelefonNummer;
         
+        public Mitarbeiter()
+        {
+        }
+        
         public override int ID
         {
             get

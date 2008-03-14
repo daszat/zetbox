@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Kistl.API
 {
@@ -189,6 +190,12 @@ namespace Kistl.API
         public static void FromBinaryCollectionEntries<T>(out ObservableCollection<T> val, System.IO.BinaryReader sr, IKistlContext ctx) where T : ICollectionEntry, new()
         {
             val = new ObservableCollection<T>();
+            FromBinaryCollectionEntries<T>(val, sr, ctx);
+        }
+
+        public static void FromBinaryCollectionEntries<T>(out NotifyingObservableCollection<T> val, System.IO.BinaryReader sr, IKistlContext ctx, IDataObject parent, string propertyName) where T : ICollectionEntry, INotifyPropertyChanged, new()
+        {
+            val = new NotifyingObservableCollection<T>(parent, propertyName);
             FromBinaryCollectionEntries<T>(val, sr, ctx);
         }
 

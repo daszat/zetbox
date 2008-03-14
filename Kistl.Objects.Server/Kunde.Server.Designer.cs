@@ -251,7 +251,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                base.NotifyPropertyChanging("Value");
                 _Value = value;
+                base.NotifyPropertyChanged("Value");;
             }
         }
         

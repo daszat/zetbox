@@ -27,6 +27,10 @@ namespace Kistl.App.Zeiterfassung
     public class Kostenstelle : Kistl.App.Zeiterfassung.Zeitkonto, ICloneable
     {
         
+        public Kostenstelle()
+        {
+        }
+        
         public event ToStringHandler<Kostenstelle> OnToString_Kostenstelle;
         
         public event ObjectEventHandler<Kostenstelle> OnPreSave_Kostenstelle;

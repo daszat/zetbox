@@ -35,6 +35,10 @@ namespace Kistl.App.Base
         
         private bool _IsClientAssembly;
         
+        public Assembly()
+        {
+        }
+        
         public override int ID
         {
             get

@@ -31,6 +31,10 @@ namespace Kistl.App.Base
         
         private bool _PreFetchToClient;
         
+        public BackReferenceProperty()
+        {
+        }
+        
         [XmlIgnore()]
         public Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {

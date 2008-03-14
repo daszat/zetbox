@@ -37,6 +37,10 @@ namespace Kistl.App.Base
         
         private List<Kistl.App.Base.MethodInvocation> _MethodIvokations;
         
+        public Method()
+        {
+        }
+        
         public override int ID
         {
             get

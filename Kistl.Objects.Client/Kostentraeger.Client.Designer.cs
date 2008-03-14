@@ -29,6 +29,10 @@ namespace Kistl.App.Zeiterfassung
         
         private int _fk_Projekt = Helper.INVALIDID;
         
+        public Kostentraeger()
+        {
+        }
+        
         [XmlIgnore()]
         public Kistl.App.Projekte.Projekt Projekt
         {

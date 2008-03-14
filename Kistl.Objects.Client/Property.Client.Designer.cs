@@ -31,6 +31,10 @@ namespace Kistl.App.Base
         
         private bool _IsNullable;
         
+        public Property()
+        {
+        }
+        
         public bool IsList
         {
             get

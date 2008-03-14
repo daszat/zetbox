@@ -227,14 +227,14 @@ namespace Kistl.Server
         /// <summary>
         /// Update Relationships
         /// TODO: Bad hack, weil EF keine Relationen serialisieren kann
+        /// Note: Change Tracking is "enabled" by setting every Reference
         /// </summary>
         /// <param name="obj"></param>
         private static void UpdateRelationships(T obj)
         {
-            ObjectType objType = obj.Type;
             using (KistlDataContext ctx = KistlDataContext.GetContext())
             {
-                Kistl.App.Base.ObjectClass objClass = ctx.GetTable<Kistl.App.Base.ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
+                Kistl.App.Base.ObjectClass objClass = obj.Type.GetObjectClass(ctx); 
                 while(objClass != null)
                 {
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
@@ -271,7 +271,7 @@ namespace Kistl.Server
         /// Es gibt angeblich jetzt eine bessere MEthode
         /// </summary>
         /// <param name="obj"></param>
-        private static void MarkEveryPropertyAsModified(BaseServerDataObject obj)
+        private static void MarkEveryPropertyAsModified(EntityObject obj)
         {
             ObjectStateEntry stateEntry = KistlDataContext.Current.ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
             MetadataWorkspace workspace = KistlDataContext.Current.MetadataWorkspace;
@@ -280,6 +280,25 @@ namespace Kistl.Server
             foreach (EdmProperty property in entityType.Properties)
             {
                 stateEntry.SetModifiedProperty(property.Name);
+            }
+
+            if (obj is BaseServerDataObject)
+            {
+                using (KistlDataContext ctx = KistlDataContext.GetContext())
+                {
+                    Kistl.App.Base.ObjectClass objClass = (obj as BaseServerDataObject).Type.GetObjectClass(ctx);
+                    while (objClass != null)
+                    {
+                        foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))
+                        {
+                            foreach (BaseServerCollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
+                            {
+                                MarkEveryPropertyAsModified(ce);
+                            }
+                        }
+                        objClass = objClass.BaseObjectClass;
+                    }
+                }
             }
         }
     }

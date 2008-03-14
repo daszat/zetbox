@@ -20,17 +20,18 @@ namespace Kistl.Server.Generators
 
         public class Current
         {
-            public Kistl.API.Server.KistlDataContext ctx;
+            public Kistl.API.Server.KistlDataContext ctx { get; set; }
 
-            public ClientServerEnum clientServer;
-            public CodeCompileUnit code;
-            public CodeNamespace code_namespace;
-            public CodeTypeDeclaration code_class;
-            public CodeMemberField code_field;
-            public CodeMemberProperty code_property;
+            public ClientServerEnum clientServer { get; set; }
+            public CodeCompileUnit code { get; set; }
+            public CodeNamespace code_namespace { get; set; }
+            public CodeTypeDeclaration code_class { get; set; }
+            public CodeConstructor code_constructor { get; set; }
+            public CodeMemberField code_field { get; set; }
+            public CodeMemberProperty code_property { get; set; }
 
-            public ObjectClass objClass;
-            public BaseProperty property;
+            public ObjectClass objClass { get; set; }
+            public BaseProperty property { get; set; }
 
             public Current Clone()
             {
@@ -42,6 +43,7 @@ namespace Kistl.Server.Generators
                 result.code = this.code;
                 result.code_namespace = this.code_namespace;
                 result.code_class = this.code_class;
+                result.code_constructor = this.code_constructor;
                 result.code_field = this.code_field;
                 result.code_property = this.code_property;
 
@@ -256,6 +258,16 @@ namespace Kistl.Server.Generators
 
         #endregion
 
+        #region CreateConstructor
+        protected virtual CodeConstructor CreateConstructor(CodeTypeDeclaration c)
+        {
+            CodeConstructor ctor = new CodeConstructor();
+            c.Members.Add(ctor);
+            ctor.Attributes = MemberAttributes.Public;
+            return ctor;
+        }
+        #endregion
+
         #region CreateMethod
         protected CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, string returnType)
         {
@@ -441,6 +453,12 @@ namespace Kistl.Server.Generators
                     : string.Format("Base{0}DataObject", current.clientServer),
                 "ICloneable");
 
+            // Constructor
+            if (current.clientServer == ClientServerEnum.Client)
+            {
+                current.code_constructor = CreateConstructor(current.code_class);
+            }
+
             GenerateObjects(current);
 
             if (current.objClass.BaseObjectClass == null)
@@ -574,7 +592,9 @@ namespace Kistl.Server.Generators
             collectionClass.code_property = CreateProperty(collectionClass.code_class, collectionClass.code_field.Type, "Value");
 
             collectionClass.code_property.GetStatements.Add(new CodeSnippetExpression("return _Value"));
-            collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression("_Value = value"));
+            collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"base.NotifyPropertyChanging(""Value"");
+                _Value = value;
+                base.NotifyPropertyChanged(""Value"");"));
 
             // Create Parent
             Current parent = collectionClass.Clone();
@@ -589,23 +609,38 @@ namespace Kistl.Server.Generators
             serializerParent.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Parent");
 
             // Create NavigationProperty Class -> Collectionclass
-            current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName);
+            current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName, false);
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("ObservableCollection<{0}>", collectionClass.code_class.Name));
+                current.code_property.Type = new CodeTypeReference(string.Format("NotifyingObservableCollection<{0}>", collectionClass.code_class.Name));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
-                current.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(string.Format(@"_{0} = value", current.property.PropertyName)));
+                //current.code_property.SetStatements.Add(
+                //    new CodeSnippetExpression(string.Format(@"_{0} = value", current.property.PropertyName)));
 
                 current.code_field = CreateField(current.code_class, current.code_property.Type, string.Format(@"_{0}", current.property.PropertyName));
-                current.code_field.InitExpression = new CodeSnippetExpression(string.Format("new ObservableCollection<{0}>()", collectionClass.code_class.Name));
+                // current.code_field.InitExpression = new CodeSnippetExpression(string.Format("new ObservableCollection<{0}>()", collectionClass.code_class.Name));
+
+                current.code_constructor.Statements.Add(new CodeSnippetExpression(
+                    string.Format(@"_{0} = new NotifyingObservableCollection<{1}>(this, ""{0}"")",
+                        current.property.PropertyName, collectionClass.code_class.Name)));
             }
-            else
+            //else
+            //{
+            //    current.code_property.HasSet = false;
+            //}
+
+            if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.HasSet = false;
+                parent.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName)));
+                parent.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Parent = value.ID"));
+
+                serializerParent.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Parent"));
+                serializerParent.code_property.SetStatements.Add(new CodeSnippetExpression("_fk_Parent = value"));
             }
 
             GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent);
@@ -636,9 +671,7 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
             m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
-            //m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanging(\"Value\")", current.code_class.Name)));
             m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._Value = this._Value", current.code_class.Name)));
-            //m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).NotifyPropertyChanged(\"Value\")", current.code_class.Name)));
             m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Parent = this._fk_Parent", current.code_class.Name)));
         }
         #endregion
@@ -741,23 +774,51 @@ namespace Kistl.Server.Generators
             serializerParent.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Parent");
 
             // Create NavigationProperty Class -> Collectionclass
-            current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName);
+            current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName, false);
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("ObservableCollection<{0}>", collectionClass.code_class.Name));
+                current.code_property.Type = new CodeTypeReference(string.Format("NotifyingObservableCollection<{0}>", collectionClass.code_class.Name));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
-                current.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(string.Format(@"_{0} = value", current.property.PropertyName)));
+                //current.code_property.SetStatements.Add(
+                //    new CodeSnippetExpression(string.Format(@"_{0} = value", current.property.PropertyName)));
 
                 current.code_field = CreateField(current.code_class, current.code_property.Type, string.Format(@"_{0}", current.property.PropertyName));
-                current.code_field.InitExpression = new CodeSnippetExpression(string.Format("new ObservableCollection<{0}>()", collectionClass.code_class.Name));
+                //current.code_field.InitExpression = new CodeSnippetExpression(string.Format("new ObservableCollection<{0}>()", collectionClass.code_class.Name));
+
+                current.code_constructor.Statements.Add(new CodeSnippetExpression(
+                    string.Format(@"_{0} = new NotifyingObservableCollection<{1}>(this, ""{0}"")",
+                        current.property.PropertyName, collectionClass.code_class.Name)));
             }
-            else
+            //else
+            //{
+            //    current.code_property.HasSet = false;
+            //}
+
+            // Get/Set for client
+            if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.HasSet = false;
+                collectionClass.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", current.property.GetDataType())));
+                collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"base.NotifyPropertyChanging(""Value"");
+                _fk_Value = value.ID;
+                base.NotifyPropertyChanged(""Value"")"));
+
+                parent.code_property.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName)));
+                parent.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Parent = value.ID"));
+
+                serializerValue.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Value"));
+                serializerValue.code_property.SetStatements.Add(new CodeSnippetExpression(@"base.NotifyPropertyChanging(""Value"");
+                _fk_Value = value;
+                base.NotifyPropertyChanged(""Value"")"));
+
+                serializerParent.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Parent"));
+                serializerParent.code_property.SetStatements.Add(new CodeSnippetExpression("_fk_Parent = value"));
             }
 
             GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializerValue, parent, serializerParent);
@@ -788,8 +849,8 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
             m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).fk_Value = this.fk_Value", current.code_class.Name)));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj).fk_Parent = this.fk_Parent", current.code_class.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Value = this.fk_Value", current.code_class.Name)));
+            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Parent = this.fk_Parent", current.code_class.Name)));
         }
 
         #endregion
@@ -947,7 +1008,7 @@ namespace Kistl.Server.Generators
                     // TODO: Geht z.Z. nur für den Client!!!!
                 else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
                 {
-                    stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone()", p.PropertyName, current.objClass.ClassName);
+                    stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone(obj)", p.PropertyName, current.objClass.ClassName);
                 }
                 else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
                 {
@@ -956,7 +1017,7 @@ namespace Kistl.Server.Generators
                 // TODO: Geht z.Z. nur für den Client!!!!
                 else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
                 {
-                    stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone()", p.PropertyName, current.objClass.ClassName);
+                    stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone(obj)", p.PropertyName, current.objClass.ClassName);
                 }
 
                 if (!string.IsNullOrEmpty(stmt))
@@ -1125,7 +1186,7 @@ namespace Kistl.Server.Generators
                 if (p is Property && ((Property)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx)", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx, this, \"{0}\")", p.PropertyName)));
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr, ctx)", p.PropertyName)));
                 }
@@ -1140,7 +1201,7 @@ namespace Kistl.Server.Generators
                 else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx)", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx, this, \"{0}\")", p.PropertyName)));
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr, ctx)", p.PropertyName)));
                 }

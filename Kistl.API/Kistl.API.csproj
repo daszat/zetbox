@@ -74,6 +74,7 @@
     <Compile Include="IKistlAppDomain.cs" />
     <Compile Include="IKistlContext.cs" />
     <Compile Include="IKistlService.cs" />
+    <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -260,8 +260,8 @@ namespace Kistl.App.Zeiterfassung
         public override void CopyTo(Kistl.API.ICollectionEntry obj)
         {
             base.CopyTo(obj);
-            ((Zeitkonto_MitarbeiterCollectionEntry)obj).fk_Value = this.fk_Value;
-            ((Zeitkonto_MitarbeiterCollectionEntry)obj).fk_Parent = this.fk_Parent;
+            ((Zeitkonto_MitarbeiterCollectionEntry)obj)._fk_Value = this.fk_Value;
+            ((Zeitkonto_MitarbeiterCollectionEntry)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

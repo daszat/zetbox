@@ -217,24 +217,6 @@ namespace Kistl.Server.Generators.SQLServer
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class), current.objClass.ClassName)));
             }
-            else
-            {
-                collectionClass.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", current.property.GetDataType())));
-                collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Value = value.ID"));
-
-                parent.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName)));
-                parent.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Parent = value.ID"));
-
-                serializerValue.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Value"));
-                serializerValue.code_property.SetStatements.Add(new CodeSnippetExpression("_fk_Value = value"));
-
-                serializerParent.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Parent"));
-                serializerParent.code_property.SetStatements.Add(new CodeSnippetExpression("_fk_Parent = value"));
-            }
         }
         #endregion
 
@@ -299,17 +281,6 @@ namespace Kistl.Server.Generators.SQLServer
                         string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class), current.objClass.ClassName)));
-            }
-            else
-            {
-
-                parent.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName)));
-                parent.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Parent = value.ID"));
-
-                serializerParent.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Parent"));
-                serializerParent.code_property.SetStatements.Add(new CodeSnippetExpression("_fk_Parent = value"));
             }
         }
         #endregion

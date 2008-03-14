@@ -37,6 +37,10 @@ namespace Kistl.App.Base
         
         private List<Kistl.App.Base.Assembly> _Assemblies;
         
+        public Module()
+        {
+        }
+        
         public override int ID
         {
             get

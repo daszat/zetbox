@@ -8,6 +8,7 @@ using System.Collections;
 using System.Reflection;
 using TraceClient;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Kistl.API
 {
@@ -133,6 +134,15 @@ namespace Kistl.API
         public static ObservableCollection<T> Clone<T>(this ObservableCollection<T> lst) where T : ICloneable
         {
             ObservableCollection<T> result = new ObservableCollection<T>();
+
+            lst.ForEach<T>(item => result.Add((T)item.Clone()));
+
+            return result;
+        }
+
+        public static NotifyingObservableCollection<T> Clone<T>(this NotifyingObservableCollection<T> lst, IDataObject newParent) where T : ICloneable, INotifyPropertyChanged
+        {
+            NotifyingObservableCollection<T> result = new NotifyingObservableCollection<T>(newParent, lst.PropertyName);
 
             lst.ForEach<T>(item => result.Add((T)item.Clone()));
 

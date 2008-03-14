@@ -11,7 +11,7 @@
             <ToolBar DockPanel.Dock="Top">
                 <Button Name="btnNew" Click="btnNew_Click">New</Button>
             </ToolBar>
-            <ListView x:Name="lst" ItemsSource="{Binding ElementName=ListCtrl, Path=Value}" MinHeight="150">
+            <ListView x:Name="lst" ItemsSource="{Binding ElementName=ListCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" MinHeight="150">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel HorizontalAlignment="Stretch">

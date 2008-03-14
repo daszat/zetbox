@@ -39,6 +39,10 @@ namespace Kistl.App.Projekte
         
         private System.Double? _Aufwand;
         
+        public Task()
+        {
+        }
+        
         public override int ID
         {
             get

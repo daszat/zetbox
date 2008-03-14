@@ -29,6 +29,10 @@ namespace Kistl.App.Base
         
         private int _fk_ReferenceObjectClass = Helper.INVALIDID;
         
+        public ObjectReferenceProperty()
+        {
+        }
+        
         [XmlIgnore()]
         public Kistl.App.Base.ObjectClass ReferenceObjectClass
         {

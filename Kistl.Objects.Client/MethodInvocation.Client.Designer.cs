@@ -41,6 +41,10 @@ namespace Kistl.App.Base
         
         private string _MemberName;
         
+        public MethodInvocation()
+        {
+        }
+        
         public override int ID
         {
             get

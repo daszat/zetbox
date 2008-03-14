@@ -37,6 +37,10 @@ namespace Kistl.App.Zeiterfassung
         
         private double _Dauer;
         
+        public Taetigkeit()
+        {
+        }
+        
         public override int ID
         {
             get

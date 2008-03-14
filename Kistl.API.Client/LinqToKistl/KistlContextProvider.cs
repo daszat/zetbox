@@ -24,8 +24,14 @@ namespace Kistl.API.Client
         internal List<T> GetListOf(int ID, string propertyName)
         {
             List<T> result = Proxy.Current.GetListOf(_context, _type, ID, propertyName).OfType<T>().ToList();
-            result.ForEach<BaseClientDataObject>(r => CacheController<BaseClientDataObject>.Current.Set(r.Type, r.ID,
-                        (BaseClientDataObject)(r).Clone()) );
+            foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
+            {
+                CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
+                    (BaseClientDataObject)(obj).Clone());
+                // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
+                obj.ObjectState = DataObjectState.Unmodified;
+            }
+
             return result;
         }
 
@@ -59,7 +65,8 @@ namespace Kistl.API.Client
                 {
                     CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
                         (BaseClientDataObject)(obj).Clone());
-                    //    _context.Attach(obj);
+                    // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
+                    obj.ObjectState = DataObjectState.Unmodified;
                 }
                 return result;
             }
@@ -79,7 +86,9 @@ namespace Kistl.API.Client
                     {
                         result = (T)(result as BaseClientDataObject).Clone();
                         _context.Attach(result as BaseClientDataObject);
-                    }                    
+                    }
+                    // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
+                    (result as BaseClientDataObject).ObjectState = DataObjectState.Unmodified;
                     return result;
                 }    
                 else if(SearchType == SearchTypeEnum.GetObjectOrNew)

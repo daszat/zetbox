@@ -37,6 +37,10 @@ namespace Kistl.App.Base
         
         private int _fk_Module = Helper.INVALIDID;
         
+        public BaseProperty()
+        {
+        }
+        
         public override int ID
         {
             get

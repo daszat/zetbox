@@ -39,6 +39,10 @@ namespace Kistl.App.Projekte
         
         private System.Double? _Auftragswert;
         
+        public Auftrag()
+        {
+        }
+        
         public override int ID
         {
             get

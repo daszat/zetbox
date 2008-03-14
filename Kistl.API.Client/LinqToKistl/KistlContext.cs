@@ -110,7 +110,7 @@ namespace Kistl.API.Client
                     Proxy.Current.SetObject(this, obj.Type, obj);
                     objectsToDetach.Add(obj);
                 }
-                else if (obj.ObjectState == DataObjectState.Modified)
+                else if (obj.ObjectState.In(DataObjectState.Modified, DataObjectState.New))
                 {
                     objectsSubmittedCount++;
                     // Do not attach to context -> first Param is null

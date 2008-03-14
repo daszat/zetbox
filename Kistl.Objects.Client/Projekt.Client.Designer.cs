@@ -33,7 +33,7 @@ namespace Kistl.App.Projekte
         
         private List<Kistl.App.Projekte.Task> _Tasks;
         
-        private ObservableCollection<Projekt_MitarbeiterCollectionEntry> _Mitarbeiter = new ObservableCollection<Projekt_MitarbeiterCollectionEntry>();
+        private NotifyingObservableCollection<Projekt_MitarbeiterCollectionEntry> _Mitarbeiter;
         
         private System.Double? _AufwandGes;
         
@@ -42,6 +42,11 @@ namespace Kistl.App.Projekte
         private List<Kistl.App.Zeiterfassung.Kostentraeger> _Kostentraeger;
         
         private List<Kistl.App.Projekte.Auftrag> _Auftraege;
+        
+        public Projekt()
+        {
+            _Mitarbeiter = new NotifyingObservableCollection<Projekt_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
+        }
         
         public override int ID
         {
@@ -79,15 +84,11 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public ObservableCollection<Projekt_MitarbeiterCollectionEntry> Mitarbeiter
+        public NotifyingObservableCollection<Projekt_MitarbeiterCollectionEntry> Mitarbeiter
         {
             get
             {
                 return _Mitarbeiter;
-            }
-            set
-            {
-                _Mitarbeiter = value;
             }
         }
         
@@ -180,7 +181,7 @@ namespace Kistl.App.Projekte
         {
             base.CopyTo(obj);
             ((Projekt)obj)._Name = this._Name;
-            ((Projekt)obj)._Mitarbeiter = this._Mitarbeiter.Clone();
+            ((Projekt)obj)._Mitarbeiter = this._Mitarbeiter.Clone(obj);
             ((Projekt)obj)._AufwandGes = this._AufwandGes;
             ((Projekt)obj)._Kundenname = this._Kundenname;
         }
@@ -204,7 +205,7 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._Name, sr);
-            BinarySerializer.FromBinaryCollectionEntries(out this._Mitarbeiter, sr, ctx);
+            BinarySerializer.FromBinaryCollectionEntries(out this._Mitarbeiter, sr, ctx, this, "Mitarbeiter");
             BinarySerializer.FromBinary(out this._AufwandGes, sr);
             BinarySerializer.FromBinary(out this._Kundenname, sr);
         }
@@ -240,7 +241,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                base.NotifyPropertyChanging("Value");
                 _fk_Value = value.ID;
+                base.NotifyPropertyChanged("Value");
             }
         }
         
@@ -265,7 +268,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                base.NotifyPropertyChanging("Value");
                 _fk_Value = value;
+                base.NotifyPropertyChanged("Value");
             }
         }
         
@@ -298,8 +303,8 @@ namespace Kistl.App.Projekte
         public override void CopyTo(Kistl.API.ICollectionEntry obj)
         {
             base.CopyTo(obj);
-            ((Projekt_MitarbeiterCollectionEntry)obj).fk_Value = this.fk_Value;
-            ((Projekt_MitarbeiterCollectionEntry)obj).fk_Parent = this.fk_Parent;
+            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Value = this.fk_Value;
+            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

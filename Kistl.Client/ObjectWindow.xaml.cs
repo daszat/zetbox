@@ -161,7 +161,7 @@ namespace Kistl.Client
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
                         Binding b = new Binding(p.PropertyName);
-                        b.Mode = BindingMode.TwoWay;
+                        b.Mode = BindingMode.OneWay; //BindingMode.TwoWay;
                         b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                         b.NotifyOnSourceUpdated = true;
                         b.NotifyOnTargetUpdated = true;
@@ -181,7 +181,7 @@ namespace Kistl.Client
 
                         // Set Binding, damit werden Änderungen automatisch übernommen.
                         Binding b = new Binding(p.PropertyName);
-                        b.Mode = BindingMode.TwoWay;
+                        b.Mode = BindingMode.OneWay;
                         b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                         b.NotifyOnSourceUpdated = true;
                         b.NotifyOnTargetUpdated = true;
@@ -237,6 +237,7 @@ namespace Kistl.Client
                 // Client BL holen
                 ctx = new KistlContext();
                 obj = ctx.GetQuery(ObjectType).SingleOrDefault(o => o.ID == ObjectID);
+                obj.PropertyChanged += new PropertyChangedEventHandler(obj_PropertyChanged);
 
                 // Objekttype anpassen
                 ObjectType = new ObjectType(obj);
@@ -263,11 +264,11 @@ namespace Kistl.Client
             try
             {
                 // TODO: Hack, bis die Notifications immer & überall funktionieren
-                if(obj.ObjectState == DataObjectState.Unmodified)
-                    obj.ObjectState = DataObjectState.Modified;
+                // if(obj.ObjectState == DataObjectState.Unmodified)
+                //    obj.ObjectState = DataObjectState.Modified;
 
                 // Objekt zum Server schicken & dann wieder auspacken
-                ctx.SubmitChanges();
+                int count = ctx.SubmitChanges();
                 ObjectID = obj.ID;
                 // ReBind
                 // Das muss sein, weil sich ja Properties geändert haben könnten
@@ -275,6 +276,8 @@ namespace Kistl.Client
                 obj.NotifyChange();
 
                 SetTitle();
+
+                MessageBox.Show(string.Format("{0} Item(s) submitted", count), "Save", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -316,7 +319,7 @@ namespace Kistl.Client
             this.Close();
         }
 
-        private void Window_SourceUpdated(object sender, DataTransferEventArgs e)
+        void obj_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             try
             {
@@ -326,6 +329,7 @@ namespace Kistl.Client
             {
             }
         }
+
 
         private void mnuActions_Click(object sender, RoutedEventArgs e)
         {

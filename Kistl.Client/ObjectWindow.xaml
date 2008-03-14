@@ -4,7 +4,7 @@
     xmlns:converter="clr-namespace:Kistl.Client.Converter"
     xmlns:client="clr-namespace:Kistl.Client"
     Title="ObjectWindow" Height="480" Width="640"
-    Loaded="Window_Loaded" SourceUpdated="Window_SourceUpdated"
+    Loaded="Window_Loaded"
     Icon="{Binding Converter={StaticResource IconConverter}}">
     <DockPanel>
         <Slider Name="WorkspaceSlider" DockPanel.Dock="Bottom" Value="1.0" Minimum="0.5" Maximum="3.0" />

@@ -39,7 +39,12 @@ namespace Kistl.App.Projekte
         
         private string _Land;
         
-        private ObservableCollection<Kunde_EMailsCollectionEntry> _EMails = new ObservableCollection<Kunde_EMailsCollectionEntry>();
+        private NotifyingObservableCollection<Kunde_EMailsCollectionEntry> _EMails;
+        
+        public Kunde()
+        {
+            _EMails = new NotifyingObservableCollection<Kunde_EMailsCollectionEntry>(this, "EMails");
+        }
         
         public override int ID
         {
@@ -123,15 +128,11 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public ObservableCollection<Kunde_EMailsCollectionEntry> EMails
+        public NotifyingObservableCollection<Kunde_EMailsCollectionEntry> EMails
         {
             get
             {
                 return _EMails;
-            }
-            set
-            {
-                _EMails = value;
             }
         }
         
@@ -180,7 +181,7 @@ namespace Kistl.App.Projekte
             ((Kunde)obj)._PLZ = this._PLZ;
             ((Kunde)obj)._Ort = this._Ort;
             ((Kunde)obj)._Land = this._Land;
-            ((Kunde)obj)._EMails = this._EMails.Clone();
+            ((Kunde)obj)._EMails = this._EMails.Clone(obj);
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -208,7 +209,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._PLZ, sr);
             BinarySerializer.FromBinary(out this._Ort, sr);
             BinarySerializer.FromBinary(out this._Land, sr);
-            BinarySerializer.FromBinaryCollectionEntries(out this._EMails, sr, ctx);
+            BinarySerializer.FromBinaryCollectionEntries(out this._EMails, sr, ctx, this, "EMails");
         }
     }
     
@@ -241,7 +242,9 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                base.NotifyPropertyChanging("Value");
                 _Value = value;
+                base.NotifyPropertyChanged("Value");;
             }
         }
         

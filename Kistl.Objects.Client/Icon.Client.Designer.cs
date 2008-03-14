@@ -31,6 +31,10 @@ namespace Kistl.App.GUI
         
         private string _IconFile;
         
+        public Icon()
+        {
+        }
+        
         public override int ID
         {
             get
