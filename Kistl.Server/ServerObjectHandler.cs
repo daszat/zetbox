@@ -44,14 +44,7 @@ namespace Kistl.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        BaseServerDataObject GetObject(int ID);
-
-        /// <summary>
-        /// Läd generisch eine Instanz
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        // BaseServerDataObject GetObjectInstanceGeneric(int ID);
+        IDataObject GetObject(int ID);
 
         /// <summary>
         /// Implementiert den SetObject Befehl.
@@ -59,7 +52,7 @@ namespace Kistl.Server
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        BaseServerDataObject SetObject(BaseServerDataObject xml);
+        IDataObject SetObject(IDataObject xml);
     }
 
     /// <summary>
@@ -101,8 +94,8 @@ namespace Kistl.Server
     /// selbst implementiert sind
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class ServerObjectHandler<T> : IServerObjectHandler 
-        where T : BaseServerDataObject, IDataObject, new()
+    internal class ServerObjectHandler<T> : IServerObjectHandler
+        where T : class, IDataObject, new()
     {
         /// <summary>
         /// Events registrieren
@@ -122,10 +115,6 @@ namespace Kistl.Server
             {                
                 var result = from a in KistlDataContext.Current.GetTable<T>()
                              select a;
-
-                // XMLCOLLECTION list = new XMLCOLLECTION();
-                // list.Objects.AddRange(result.ToList().OfType<object>());
-                // return list.ToXmlString();
                 return result;
             }
         }
@@ -189,7 +178,7 @@ namespace Kistl.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public BaseServerDataObject GetObject(int ID)
+        public IDataObject GetObject(int ID)
         {
             return GetObjectInstance(ID);
         }
@@ -200,7 +189,7 @@ namespace Kistl.Server
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public BaseServerDataObject SetObject(BaseServerDataObject obj)
+        public IDataObject SetObject(IDataObject obj)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
@@ -212,7 +201,7 @@ namespace Kistl.Server
                 {
                     if (obj.ObjectState != DataObjectState.New)
                     {
-                        MarkEveryPropertyAsModified(obj);
+                        MarkEveryPropertyAsModified(obj as EntityObject);
                     }
 
                     UpdateRelationships(obj as T);
@@ -250,7 +239,7 @@ namespace Kistl.Server
                         else
                         {
                             // Liste
-                            foreach (BaseServerCollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
+                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
                             {
                                 int fk = ce.GetPropertyValue<int>("fk_Value");
 
@@ -282,18 +271,18 @@ namespace Kistl.Server
                 stateEntry.SetModifiedProperty(property.Name);
             }
 
-            if (obj is BaseServerDataObject)
+            if (obj is IDataObject)
             {
                 using (KistlDataContext ctx = KistlDataContext.GetContext())
                 {
-                    Kistl.App.Base.ObjectClass objClass = (obj as BaseServerDataObject).Type.GetObjectClass(ctx);
+                    Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).Type.GetObjectClass(ctx);
                     while (objClass != null)
                     {
                         foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))
                         {
-                            foreach (BaseServerCollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
+                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
                             {
-                                MarkEveryPropertyAsModified(ce);
+                                MarkEveryPropertyAsModified(ce as EntityObject);
                             }
                         }
                         objClass = objClass.BaseObjectClass;

@@ -26,7 +26,7 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        BaseServerDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetObject(m.ID);
+                        IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetObject(m.ID);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
 
@@ -67,7 +67,7 @@ namespace Kistl.Server
                         obj.FromStream(ctx, sr);
 
                         // Set Operation
-                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(objType).SetObject((BaseServerDataObject)obj);
+                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(objType).SetObject(obj);
 
                         // Serialize back
                         MemoryStream result = new MemoryStream();
@@ -101,7 +101,7 @@ namespace Kistl.Server
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetList();
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
-                        foreach (BaseServerDataObject obj in lst)
+                        foreach (IDataObject obj in lst)
                         {
                             obj.ToStream(sw);
                         }
@@ -132,7 +132,7 @@ namespace Kistl.Server
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetListOf(m.ID, m.Property);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
-                        foreach (BaseServerDataObject obj in lst)
+                        foreach (IDataObject obj in lst)
                         {
                             obj.ToStream(sw);
                         }

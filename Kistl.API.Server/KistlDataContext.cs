@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Objects;
 using Kistl.API.Configuration;
+using System.Data.Objects.DataClasses;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 

@@ -6,36 +6,37 @@ using System.Text;
 namespace Kistl.API
 {
     /// <summary>
-    /// Das ist noch gemischt - sollte aber bald getrennt werden.
-    /// Client & Server implementieren jeweils einen ObjektBroker, der allen Objekten
-    /// Events attachen kann (Custom Actions).
+    /// Interface for a Custom Action Manager. Every Client and Server host must provide a Custom Action Manager.
     /// </summary>
     public interface ICustomActionsManager
     {
         /// <summary>
-        /// Should Attach using Metadata
-        /// Detaching is done through the Garbage Collector
+        /// Should Attach using Metadata.
+        /// Detaching is done through the Garbage Collector.
         /// see Unsubscribing at http://msdn2.microsoft.com/en-us/library/ms366768.aspx
         /// </summary>
         /// <param name="obj"></param>
         void AttachEvents(IDataObject obj);
         /// <summary>
-        /// Should load Metadata, create an Instance and save
+        /// Should load Metadata, create an Instance and cache Metadata for future use.
         /// </summary>
         void Init();
     }
 
     /// <summary>
-    /// Verwaltet ein CustomActionsManager Objekt. Muss vom Client bzw. Server initialisiert werden.
+    /// CustomActionsManager Factory/Singelton. Must be initialied by a Server and Client Host.
     /// </summary>
     public sealed class CustomActionsManagerFactory
     {
+        /// <summary>
+        /// Singelton for ICustomActionsManager.
+        /// </summary>
         private static ICustomActionsManager _manager = null;
 
         /// <summary>
-        /// Inititalisierung des Custom Actions Manager.
+        /// Initializes a Custom Actions Manager. Throws a InvalidOperationException if invoked twice.
         /// </summary>
-        /// <param name="broker">Broker</param>
+        /// <param name="manager">A Custom Actions Manager Implementation</param>
         public static void Init(ICustomActionsManager manager)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("CustomActionsManagerFactory of {0}", manager.GetType().Name))
@@ -47,7 +48,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Gibt den aktuellen CustomActionsManager zurück
+        /// Current CustomActionsManager. Throws a InvalidOperationException if Init() was not called.
         /// </summary>
         public static ICustomActionsManager Current
         {

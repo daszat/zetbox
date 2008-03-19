@@ -23,8 +23,8 @@ namespace Kistl.Server
         private interface IXmlSerializer
         {
             string XmlFromList(IEnumerable lst);
-            string XmlFromObject(BaseServerDataObject obj);
-            BaseServerDataObject ObjectFromXml(string xml);
+            string XmlFromObject(IDataObject obj);
+            IDataObject ObjectFromXml(string xml);
         }
 
         private class XmlSerializer<XMLCOLLECTION, XMLOBJECT> : IXmlSerializer
@@ -38,16 +38,16 @@ namespace Kistl.Server
                 return list.ToXmlString();
             }
 
-            public string XmlFromObject(BaseServerDataObject obj)
+            public string XmlFromObject(IDataObject obj)
             {
                 XMLOBJECT result = new XMLOBJECT();
                 result.Object = obj;
                 return result.ToXmlString();
             }
 
-            public BaseServerDataObject ObjectFromXml(string xml)
+            public IDataObject ObjectFromXml(string xml)
             {
-                return xml.FromXmlString<XMLOBJECT>().Object as BaseServerDataObject;
+                return xml.FromXmlString<XMLOBJECT>().Object as IDataObject;
             }
         }
 
@@ -154,7 +154,7 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        BaseServerDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetObject(ID);
+                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetObject(ID);
                         return CurrentSerializer.XmlFromObject(obj);
                     }
                 }
@@ -186,7 +186,7 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        BaseServerDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
+                        IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
                         obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).SetObject(obj);
                         return CurrentSerializer.XmlFromObject(obj);
                     }
