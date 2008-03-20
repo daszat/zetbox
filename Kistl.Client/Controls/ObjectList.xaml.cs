@@ -78,7 +78,7 @@ namespace Kistl.Client.Controls
                         // Liste vom Server holen & den DataContext setzen.
                         this.DataContext = ctx.GetQuery(SourceObjectType).ToList();
                     }
-                    else
+                    else if(ObjectID != Kistl.API.Helper.INVALIDID)
                     {
                         // Wenn PropertyName gesetzt ist, dann meint man die Liste von Objekten
                         // zu einem Objekt
