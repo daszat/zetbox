@@ -10,6 +10,11 @@ namespace Kistl.App.Base
     {
         public void OnPreSave_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
+            if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.ClassName))
+            {
+                throw new ApplicationException(string.Format("ClassName {0} has some illegal chars", obj.ClassName));
+            }
+
             // Only for BaseClasses
             if (obj.BaseObjectClass == null)
             {
@@ -41,6 +46,30 @@ namespace Kistl.App.Base
                     m.Module = kistlModule;
                     obj.Methods.Add(m);
                 }
+            }
+        }
+
+        public void OnPreSave_BaseParameter(Kistl.App.Base.BaseParameter obj)
+        {
+            if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.ParameterName))
+            {
+                throw new ApplicationException(string.Format("ParameterName {0} has some illegal chars", obj.ParameterName));
+            }
+
+            if (obj.Method.Parameter.Count(p => p.IsReturnParameter) > 1)
+            {
+                throw new ApplicationException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter", 
+                    obj.Method.ObjectClass.Module.Namespace,
+                    obj.Method.ObjectClass.ClassName,
+                    obj.Method.MethodName));
+            }
+        }
+
+        public void OnPreSave_Method(Kistl.App.Base.Method obj)
+        {
+            if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.MethodName))
+            {
+                throw new ApplicationException(string.Format("MethodName {0} has some illegal chars", obj.MethodName));
             }
         }
 

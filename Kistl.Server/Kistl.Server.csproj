@@ -133,6 +133,7 @@
     <None Include="Database\Database.19.sql" />
     <None Include="Database\Database.20.sql" />
     <None Include="Database\Database.21.sql" />
+    <None Include="Database\Database.22.sql" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
