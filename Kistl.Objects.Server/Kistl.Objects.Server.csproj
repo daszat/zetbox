@@ -60,6 +60,7 @@
     <Compile Include="BackReferenceProperty.Server.Designer.cs" />
     <Compile Include="BaseProperty.Server.Designer.cs" />
     <Compile Include="BoolProperty.Server.Designer.cs" />
+    <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
     <Compile Include="DoubleProperty.Server.Designer.cs" />
     <Compile Include="Icon.Server.Designer.cs" />

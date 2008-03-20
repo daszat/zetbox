@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
   <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
-    <EntitySetMapping Name="ObjectClass">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
-        <MappingFragment StoreEntitySet="ObjectClass">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-          <ScalarProperty Name="TableName" ColumnName="TableName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Projekt">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt)">
         <MappingFragment StoreEntitySet="Projekt">
@@ -201,6 +192,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DataType">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataType)">
+        <MappingFragment StoreEntitySet="DataType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
+        <MappingFragment StoreEntitySet="ObjectClass">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -268,11 +273,11 @@
       </EndProperty>
       <Condition ColumnName="fk_ObjectClass" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ObjectClass_Module" TypeName="Model.FK_ObjectClass_Module" StoreEntitySet="ObjectClass">
+    <AssociationSetMapping Name="FK_DataType_Module" TypeName="Model.FK_DataType_Module" StoreEntitySet="DataType">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
       </EndProperty>
-      <EndProperty Name="B_ObjectClass">
+      <EndProperty Name="B_DataType">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
@@ -349,11 +354,11 @@
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ObjectClass_Icon" TypeName="Model.FK_ObjectClass_Icon" StoreEntitySet="ObjectClass">
+    <AssociationSetMapping Name="FK_DataType_Icon" TypeName="Model.FK_DataType_Icon" StoreEntitySet="DataType">
       <EndProperty Name="A_Icon">
         <ScalarProperty Name="ID" ColumnName="fk_DefaultIcon" />
       </EndProperty>
-      <EndProperty Name="B_ObjectClass">
+      <EndProperty Name="B_DataType">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_DefaultIcon" IsNull="false" />

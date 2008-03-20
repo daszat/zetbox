@@ -24,18 +24,18 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Assembly : BaseClientDataObject, ICloneable
+    public class DataType : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
         
         private int _fk_Module = Helper.INVALIDID;
         
-        private string _AssemblyName;
+        private string _ClassName;
         
-        private bool _IsClientAssembly;
+        private int _fk_DefaultIcon = Helper.INVALIDID;
         
-        public Assembly()
+        public DataType()
         {
         }
         
@@ -80,48 +80,63 @@ namespace Kistl.App.Base
             }
         }
         
-        public string AssemblyName
+        public string ClassName
         {
             get
             {
-                return _AssemblyName;
+                return _ClassName;
             }
             set
             {
-                NotifyPropertyChanging("AssemblyName"); 
-                _AssemblyName = value; 
-                NotifyPropertyChanged("AssemblyName");;
+                NotifyPropertyChanging("ClassName"); 
+                _ClassName = value; 
+                NotifyPropertyChanged("ClassName");;
             }
         }
         
-        public bool IsClientAssembly
+        [XmlIgnore()]
+        public Kistl.App.GUI.Icon DefaultIcon
         {
             get
             {
-                return _IsClientAssembly;
+                return Context.GetQuery<Kistl.App.GUI.Icon>().Single(o => o.ID == fk_DefaultIcon);
             }
             set
             {
-                NotifyPropertyChanging("IsClientAssembly"); 
-                _IsClientAssembly = value; 
-                NotifyPropertyChanged("IsClientAssembly");;
+                NotifyPropertyChanging("DefaultIcon"); 
+                _fk_DefaultIcon = value.ID;
+                NotifyPropertyChanged("DefaultIcon"); ;
             }
         }
         
-        public event ToStringHandler<Assembly> OnToString_Assembly;
+        public int fk_DefaultIcon
+        {
+            get
+            {
+                return _fk_DefaultIcon;
+            }
+            set
+            {
+                NotifyPropertyChanging("DefaultIcon"); 
+                _fk_DefaultIcon = value;
+                NotifyPropertyChanged("DefaultIcon"); ;
+            }
+        }
         
-        public event ObjectEventHandler<Assembly> OnPreSave_Assembly;
+        public event ToStringHandler<DataType> OnToString_DataType;
         
-        public event ObjectEventHandler<Assembly> OnPostSave_Assembly;
+        public event ObjectEventHandler<DataType> OnPreSave_DataType;
+        
+        public event ObjectEventHandler<DataType> OnPostSave_DataType;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Assembly != null)
+            if (OnToString_DataType != null)
             {
-                OnToString_Assembly(this, e);
+                OnToString_DataType(this, e);
             }
             return e.Result;
         }
@@ -129,18 +144,18 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Assembly != null) OnPreSave_Assembly(this);
+            if (OnPreSave_DataType != null) OnPreSave_DataType(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Assembly != null) OnPostSave_Assembly(this);
+            if (OnPostSave_DataType != null) OnPostSave_DataType(this);
         }
         
         public override object Clone()
         {
-            Assembly obj = new Assembly();
+            DataType obj = new DataType();
             CopyTo(obj);
             return obj;
         }
@@ -148,9 +163,9 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Assembly)obj)._fk_Module = this._fk_Module;
-            ((Assembly)obj)._AssemblyName = this._AssemblyName;
-            ((Assembly)obj)._IsClientAssembly = this._IsClientAssembly;
+            ((DataType)obj)._fk_Module = this._fk_Module;
+            ((DataType)obj)._ClassName = this._ClassName;
+            ((DataType)obj)._fk_DefaultIcon = this._fk_DefaultIcon;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -162,16 +177,16 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
-            BinarySerializer.ToBinary(this._AssemblyName, sw);
-            BinarySerializer.ToBinary(this._IsClientAssembly, sw);
+            BinarySerializer.ToBinary(this._ClassName, sw);
+            BinarySerializer.ToBinary(this.fk_DefaultIcon, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
-            BinarySerializer.FromBinary(out this._AssemblyName, sr);
-            BinarySerializer.FromBinary(out this._IsClientAssembly, sr);
+            BinarySerializer.FromBinary(out this._ClassName, sr);
+            BinarySerializer.FromBinary(out this._fk_DefaultIcon, sr);
         }
     }
 }

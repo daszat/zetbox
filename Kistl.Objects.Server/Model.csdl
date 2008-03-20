@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
   <EntityContainer Name="Entities">
-    <EntitySet Name="ObjectClass" EntityType="Model.ObjectClass" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
     <EntitySet Name="Task" EntityType="Model.Task" />
     <EntitySet Name="BaseProperty" EntityType="Model.BaseProperty" />
@@ -16,11 +15,12 @@
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
     <EntitySet Name="TaetigkeitsArt" EntityType="Model.TaetigkeitsArt" />
+    <EntitySet Name="DataType" EntityType="Model.DataType" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
     <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="A_ObjectClass" EntitySet="DataType" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_Projekt" Association="Model.FK_Task_Projekt">
@@ -32,19 +32,19 @@
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_ObjectClass" Association="Model.FK_ObjectClass_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
-      <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="A_ObjectClass" EntitySet="DataType" />
+      <End Role="B_ObjectClass" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_ObjectClass" Association="Model.FK_Method_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="A_ObjectClass" EntitySet="DataType" />
       <End Role="B_Method" EntitySet="Method" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_Module" Association="Model.FK_ObjectClass_Module">
+    <AssociationSet Name="FK_DataType_Module" Association="Model.FK_DataType_Module">
       <End Role="A_Module" EntitySet="Module" />
-      <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_DataType" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass" Association="Model.FK_ObjectReferenceProperty_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="A_ObjectClass" EntitySet="DataType" />
       <End Role="B_ObjectReferenceProperty" EntitySet="BaseProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty" Association="Model.FK_BackReferenceProperty_ObjectReferenceProperty">
@@ -75,9 +75,9 @@
       <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_Auftrag" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_Icon" Association="Model.FK_ObjectClass_Icon">
+    <AssociationSet Name="FK_DataType_Icon" Association="Model.FK_DataType_Icon">
       <End Role="A_Icon" EntitySet="Icon" />
-      <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_DataType" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Assembly_Module" Association="Model.FK_Assembly_Module">
       <End Role="A_Module" EntitySet="Module" />
@@ -104,7 +104,7 @@
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.FK_MethodInvocation_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="A_ObjectClass" EntitySet="DataType" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
@@ -128,19 +128,12 @@
       <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="ObjectClass">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="ClassName" Type="String" MaxLength="51" Nullable="true" />
+  <EntityType Name="ObjectClass" BaseType="Model.DataType">
     <Property Name="TableName" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Properties" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="A_ObjectClass" ToRole="B_BaseProperty" />
     <NavigationProperty Name="BaseObjectClass" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="B_ObjectClass" ToRole="A_ObjectClass" />
     <NavigationProperty Name="SubClasses" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
     <NavigationProperty Name="Methods" Relationship="Model.FK_Method_ObjectClass" FromRole="A_ObjectClass" ToRole="B_Method" />
-    <NavigationProperty Name="Module" Relationship="Model.FK_ObjectClass_Module" FromRole="B_ObjectClass" ToRole="A_Module" />
-    <NavigationProperty Name="DefaultIcon" Relationship="Model.FK_ObjectClass_Icon" FromRole="B_ObjectClass" ToRole="A_Icon" />
     <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_ObjectClass" FromRole="A_ObjectClass" ToRole="B_MethodInvocation" />
   </EntityType>
   <EntityType Name="Projekt">
@@ -224,7 +217,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Namespace" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="ModuleName" Type="String" MaxLength="200" Nullable="true" />
-    <NavigationProperty Name="ObjectClasses" Relationship="Model.FK_ObjectClass_Module" FromRole="A_Module" ToRole="B_ObjectClass" />
+    <NavigationProperty Name="DataTypes" Relationship="Model.FK_DataType_Module" FromRole="A_Module" ToRole="B_DataType" />
     <NavigationProperty Name="Assemblies" Relationship="Model.FK_Assembly_Module" FromRole="A_Module" ToRole="B_Assembly" />
   </EntityType>
   <EntityType Name="Auftrag">
@@ -311,6 +304,15 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="DataType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_DataType_Module" FromRole="B_DataType" ToRole="A_Module" />
+    <Property Name="ClassName" Type="String" MaxLength="51" Nullable="true" />
+    <NavigationProperty Name="DefaultIcon" Relationship="Model.FK_DataType_Icon" FromRole="B_DataType" ToRole="A_Icon" />
+  </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -355,9 +357,9 @@
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_Method" Type="Model.Method" Multiplicity="*" />
   </Association>
-  <Association Name="FK_ObjectClass_Module">
+  <Association Name="FK_DataType_Module">
     <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
-    <End Role="B_ObjectClass" Type="Model.ObjectClass" Multiplicity="*" />
+    <End Role="B_DataType" Type="Model.DataType" Multiplicity="*" />
   </Association>
   <Association Name="FK_ObjectReferenceProperty_ObjectClass">
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
@@ -391,9 +393,9 @@
     <End Role="A_Kunde" Type="Model.Kunde" Multiplicity="0..1" />
     <End Role="B_Auftrag" Type="Model.Auftrag" Multiplicity="*" />
   </Association>
-  <Association Name="FK_ObjectClass_Icon">
+  <Association Name="FK_DataType_Icon">
     <End Role="A_Icon" Type="Model.Icon" Multiplicity="0..1" />
-    <End Role="B_ObjectClass" Type="Model.ObjectClass" Multiplicity="*" />
+    <End Role="B_DataType" Type="Model.DataType" Multiplicity="*" />
   </Association>
   <Association Name="FK_Assembly_Module">
     <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />

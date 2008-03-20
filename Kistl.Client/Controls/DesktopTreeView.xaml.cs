@@ -86,7 +86,7 @@ namespace Kistl.Client.Controls
                     if (_ObjectClassedNodes == null)
                     {
                         _ObjectClassedNodes = new ObservableCollection<ObjectClassNode>();
-                        Module.ObjectClasses.ForEach(o => _ObjectClassedNodes.Add(new ObjectClassNode(o)));
+                        Module.DataTypes.ForEach(o => _ObjectClassedNodes.Add(new ObjectClassNode(o)));
                     }
 
                     return _ObjectClassedNodes;
@@ -109,9 +109,9 @@ namespace Kistl.Client.Controls
 
         public class ObjectClassNode : INode
         {
-            public Kistl.App.Base.ObjectClass ObjectClass { get; set; }
-            
-            public ObjectClassNode(Kistl.App.Base.ObjectClass o)
+            public Kistl.App.Base.DataType ObjectClass { get; set; }
+
+            public ObjectClassNode(Kistl.App.Base.DataType o)
             {
                 ObjectClass = o;
             }
