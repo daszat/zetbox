@@ -337,13 +337,14 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.clientServer == ClientServerEnum.Server)
             {
+                ObjectType parentType = current.objClass.GetObjectType();
                 ObjectType childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
 
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));
                 current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
                     "EdmRelationshipNavigationPropertyAttribute",
                     new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.objClass, childType))),
+                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(parentType, childType))),
                     new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType)))));
 
 
@@ -351,8 +352,8 @@ namespace Kistl.Server.Generators.SQLServer
                     new CodeSnippetExpression(
                         string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c", childType.NameDataObject, 
-                         Generator.GetAssociationName(current.objClass, childType), 
+                return c", childType.NameDataObject,
+                         Generator.GetAssociationName(parentType, childType), 
                          Generator.GetAssociationChildRoleName(childType))));
             }
         }

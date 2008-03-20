@@ -110,7 +110,7 @@ namespace Kistl.Server.Generators
             return GetAssociationName(parentClass.Classname, childClass.Classname);
         }
 
-        public static string GetAssociationName(ObjectType parentClass, ObjectClass childClass)
+        /*public static string GetAssociationName(ObjectType parentClass, ObjectClass childClass)
         {
             return GetAssociationName(parentClass.Classname, childClass.ClassName);
         }
@@ -118,7 +118,7 @@ namespace Kistl.Server.Generators
         public static string GetAssociationName(ObjectClass parentClass, ObjectType childClass)
         {
             return GetAssociationName(parentClass.ClassName, childClass.Classname);
-        }
+        }*/
 
         public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass)
         {
