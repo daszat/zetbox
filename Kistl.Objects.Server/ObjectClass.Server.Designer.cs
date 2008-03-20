@@ -54,18 +54,6 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ObjectClass", "B_BaseProperty")]
-        public EntityCollection<Kistl.App.Base.BaseProperty> Properties
-        {
-            get
-            {
-                EntityCollection<Kistl.App.Base.BaseProperty> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.BaseProperty>("Model.FK_BaseProperty_ObjectClass", "B_BaseProperty");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c;
-            }
-        }
-        
-        [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ObjectClass", "A_ObjectClass")]
         public Kistl.App.Base.ObjectClass BaseObjectClass
         {
@@ -106,30 +94,6 @@ namespace Kistl.App.Base
             get
             {
                 EntityCollection<Kistl.App.Base.ObjectClass> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.ObjectClass>("Model.FK_ObjectClass_ObjectClass", "B_ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c;
-            }
-        }
-        
-        [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_ObjectClass", "B_Method")]
-        public EntityCollection<Kistl.App.Base.Method> Methods
-        {
-            get
-            {
-                EntityCollection<Kistl.App.Base.Method> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Method>("Model.FK_Method_ObjectClass", "B_Method");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c;
-            }
-        }
-        
-        [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_ObjectClass", "B_MethodInvocation")]
-        public EntityCollection<Kistl.App.Base.MethodInvocation> MethodIvokations
-        {
-            get
-            {
-                EntityCollection<Kistl.App.Base.MethodInvocation> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.MethodInvocation>("Model.FK_MethodInvocation_ObjectClass", "B_MethodInvocation");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
@@ -183,10 +147,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._TableName, sw);
-            BinarySerializer.ToBinary(this.Properties.OfType<IDataObject>(), sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
-            BinarySerializer.ToBinary(this.Methods.OfType<IDataObject>(), sw);
-            BinarySerializer.ToBinary(this.MethodIvokations.OfType<IDataObject>(), sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

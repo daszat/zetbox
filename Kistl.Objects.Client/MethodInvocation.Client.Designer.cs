@@ -29,8 +29,6 @@ namespace Kistl.App.Base
         
         private int _ID = Helper.INVALIDID;
         
-        private int _fk_InvokeOnObjectClass = Helper.INVALIDID;
-        
         private int _fk_Module = Helper.INVALIDID;
         
         private int _fk_Method = Helper.INVALIDID;
@@ -40,6 +38,8 @@ namespace Kistl.App.Base
         private string _FullTypeName;
         
         private string _MemberName;
+        
+        private int _fk_InvokeOnObjectClass = Helper.INVALIDID;
         
         public MethodInvocation()
         {
@@ -54,35 +54,6 @@ namespace Kistl.App.Base
             set
             {
                 _ID = value;
-            }
-        }
-        
-        [XmlIgnore()]
-        public Kistl.App.Base.ObjectClass InvokeOnObjectClass
-        {
-            get
-            {
-                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_InvokeOnObjectClass);
-            }
-            set
-            {
-                NotifyPropertyChanging("InvokeOnObjectClass"); 
-                _fk_InvokeOnObjectClass = value.ID;
-                NotifyPropertyChanged("InvokeOnObjectClass"); ;
-            }
-        }
-        
-        public int fk_InvokeOnObjectClass
-        {
-            get
-            {
-                return _fk_InvokeOnObjectClass;
-            }
-            set
-            {
-                NotifyPropertyChanging("InvokeOnObjectClass"); 
-                _fk_InvokeOnObjectClass = value;
-                NotifyPropertyChanged("InvokeOnObjectClass"); ;
             }
         }
         
@@ -201,6 +172,35 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        public Kistl.App.Base.DataType InvokeOnObjectClass
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Base.DataType>().Single(o => o.ID == fk_InvokeOnObjectClass);
+            }
+            set
+            {
+                NotifyPropertyChanging("InvokeOnObjectClass"); 
+                _fk_InvokeOnObjectClass = value.ID;
+                NotifyPropertyChanged("InvokeOnObjectClass"); ;
+            }
+        }
+        
+        public int fk_InvokeOnObjectClass
+        {
+            get
+            {
+                return _fk_InvokeOnObjectClass;
+            }
+            set
+            {
+                NotifyPropertyChanging("InvokeOnObjectClass"); 
+                _fk_InvokeOnObjectClass = value;
+                NotifyPropertyChanged("InvokeOnObjectClass"); ;
+            }
+        }
+        
         public event ToStringHandler<MethodInvocation> OnToString_MethodInvocation;
         
         public event ObjectEventHandler<MethodInvocation> OnPreSave_MethodInvocation;
@@ -241,12 +241,12 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((MethodInvocation)obj)._fk_InvokeOnObjectClass = this._fk_InvokeOnObjectClass;
             ((MethodInvocation)obj)._fk_Module = this._fk_Module;
             ((MethodInvocation)obj)._fk_Method = this._fk_Method;
             ((MethodInvocation)obj)._fk_Assembly = this._fk_Assembly;
             ((MethodInvocation)obj)._FullTypeName = this._FullTypeName;
             ((MethodInvocation)obj)._MemberName = this._MemberName;
+            ((MethodInvocation)obj)._fk_InvokeOnObjectClass = this._fk_InvokeOnObjectClass;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -257,23 +257,23 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.fk_InvokeOnObjectClass, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
             BinarySerializer.ToBinary(this.fk_Assembly, sw);
             BinarySerializer.ToBinary(this._FullTypeName, sw);
             BinarySerializer.ToBinary(this._MemberName, sw);
+            BinarySerializer.ToBinary(this.fk_InvokeOnObjectClass, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
-            BinarySerializer.FromBinary(out this._fk_InvokeOnObjectClass, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._fk_Method, sr);
             BinarySerializer.FromBinary(out this._fk_Assembly, sr);
             BinarySerializer.FromBinary(out this._FullTypeName, sr);
             BinarySerializer.FromBinary(out this._MemberName, sr);
+            BinarySerializer.FromBinary(out this._fk_InvokeOnObjectClass, sr);
         }
     }
 }

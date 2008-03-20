@@ -396,7 +396,7 @@ namespace Kistl.Server.Generators.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("EntitySet", GetRootClass(prop.ObjectClass).ClassName);
+                xml.WriteAttributeString("EntitySet", GetRootClass((ObjectClass)prop.ObjectClass).ClassName);
                 xml.WriteEndElement(); // </End>
 
                 // Child

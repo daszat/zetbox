@@ -33,7 +33,13 @@ namespace Kistl.App.Base
         
         private string _ClassName;
         
+        private List<Kistl.App.Base.BaseProperty> _Properties;
+        
+        private List<Kistl.App.Base.Method> _Methods;
+        
         private int _fk_DefaultIcon = Helper.INVALIDID;
+        
+        private List<Kistl.App.Base.MethodInvocation> _MethodIvokations;
         
         public DataType()
         {
@@ -95,6 +101,26 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        public List<Kistl.App.Base.BaseProperty> Properties
+        {
+            get
+            {
+                if(_Properties == null) _Properties = Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
+                return _Properties;
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Base.Method> Methods
+        {
+            get
+            {
+                if(_Methods == null) _Methods = Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
+                return _Methods;
+            }
+        }
+        
+        [XmlIgnore()]
         public Kistl.App.GUI.Icon DefaultIcon
         {
             get
@@ -120,6 +146,16 @@ namespace Kistl.App.Base
                 NotifyPropertyChanging("DefaultIcon"); 
                 _fk_DefaultIcon = value;
                 NotifyPropertyChanged("DefaultIcon"); ;
+            }
+        }
+        
+        [XmlIgnore()]
+        public List<Kistl.App.Base.MethodInvocation> MethodIvokations
+        {
+            get
+            {
+                if(_MethodIvokations == null) _MethodIvokations = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+                return _MethodIvokations;
             }
         }
         
@@ -186,7 +222,10 @@ namespace Kistl.App.Base
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._ClassName, sr);
+            BinarySerializer.FromBinary(out this._Properties, sr, ctx);
+            BinarySerializer.FromBinary(out this._Methods, sr, ctx);
             BinarySerializer.FromBinary(out this._fk_DefaultIcon, sr);
+            BinarySerializer.FromBinary(out this._MethodIvokations, sr, ctx);
         }
     }
 }

@@ -31,8 +31,8 @@
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
-    <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.Store.FK_BaseProperty_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+    <AssociationSet Name="FK_BaseProperty_DataType" Association="Model.Store.FK_BaseProperty_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_Projekt" Association="Model.Store.FK_Task_Projekt">
@@ -47,8 +47,8 @@
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_ObjectClass" Association="Model.Store.FK_Method_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+    <AssociationSet Name="FK_Method_DataType" Association="Model.Store.FK_Method_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Method" EntitySet="Method" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_Module" Association="Model.Store.FK_DataType_Module">
@@ -115,8 +115,8 @@
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.Store.FK_MethodInvocation_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+    <AssociationSet Name="FK_MethodInvocation_DataType" Association="Model.Store.FK_MethodInvocation_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.Store.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
@@ -341,12 +341,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_InvokeOnObjectClass" Type="int" Nullable="true" />
     <Property Name="fk_Module" Type="int" Nullable="true" />
     <Property Name="fk_Method" Type="int" Nullable="true" />
     <Property Name="fk_Assembly" Type="int" Nullable="true" />
     <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_InvokeOnObjectClass" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="TaetigkeitsArt">
     <Key>
@@ -388,11 +388,11 @@
     <Property Name="fk_Zeitkonto" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
   </EntityType>
-  <Association Name="FK_BaseProperty_ObjectClass">
-    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+  <Association Name="FK_BaseProperty_DataType">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="A_ObjectClass">
+      <Principal Role="A_DataType">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_BaseProperty">
@@ -436,11 +436,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Method_ObjectClass">
-    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+  <Association Name="FK_Method_DataType">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_Method" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="A_ObjectClass">
+      <Principal Role="A_DataType">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_Method">
@@ -640,11 +640,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MethodInvocation_ObjectClass">
-    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+  <Association Name="FK_MethodInvocation_DataType">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="A_ObjectClass">
+      <Principal Role="A_DataType">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_MethodInvocation">

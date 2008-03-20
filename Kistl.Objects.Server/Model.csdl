@@ -19,8 +19,8 @@
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
-    <AssociationSet Name="FK_BaseProperty_ObjectClass" Association="Model.FK_BaseProperty_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="DataType" />
+    <AssociationSet Name="FK_BaseProperty_DataType" Association="Model.FK_BaseProperty_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_Projekt" Association="Model.FK_Task_Projekt">
@@ -35,8 +35,8 @@
       <End Role="A_ObjectClass" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_ObjectClass" Association="Model.FK_Method_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="DataType" />
+    <AssociationSet Name="FK_Method_DataType" Association="Model.FK_Method_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Method" EntitySet="Method" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_Module" Association="Model.FK_DataType_Module">
@@ -103,8 +103,8 @@
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_ObjectClass" Association="Model.FK_MethodInvocation_ObjectClass">
-      <End Role="A_ObjectClass" EntitySet="DataType" />
+    <AssociationSet Name="FK_MethodInvocation_DataType" Association="Model.FK_MethodInvocation_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
@@ -130,11 +130,8 @@
   </EntityContainer>
   <EntityType Name="ObjectClass" BaseType="Model.DataType">
     <Property Name="TableName" Type="String" MaxLength="100" Nullable="true" />
-    <NavigationProperty Name="Properties" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="A_ObjectClass" ToRole="B_BaseProperty" />
     <NavigationProperty Name="BaseObjectClass" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="B_ObjectClass" ToRole="A_ObjectClass" />
     <NavigationProperty Name="SubClasses" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
-    <NavigationProperty Name="Methods" Relationship="Model.FK_Method_ObjectClass" FromRole="A_ObjectClass" ToRole="B_Method" />
-    <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_ObjectClass" FromRole="A_ObjectClass" ToRole="B_MethodInvocation" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -165,7 +162,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_BaseProperty_ObjectClass" FromRole="B_BaseProperty" ToRole="A_ObjectClass" />
+    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_BaseProperty_DataType" FromRole="B_BaseProperty" ToRole="A_DataType" />
     <Property Name="PropertyName" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="Module" Relationship="Model.FK_BaseProperty_Module" FromRole="B_BaseProperty" ToRole="A_Module" />
@@ -194,7 +191,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_Method_ObjectClass" FromRole="B_Method" ToRole="A_ObjectClass" />
+    <NavigationProperty Name="ObjectClass" Relationship="Model.FK_Method_DataType" FromRole="B_Method" ToRole="A_DataType" />
     <Property Name="MethodName" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Module" Relationship="Model.FK_Method_Module" FromRole="B_Method" ToRole="A_Module" />
     <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_Method" FromRole="A_Method" ToRole="B_MethodInvocation" />
@@ -290,12 +287,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="InvokeOnObjectClass" Relationship="Model.FK_MethodInvocation_ObjectClass" FromRole="B_MethodInvocation" ToRole="A_ObjectClass" />
     <NavigationProperty Name="Module" Relationship="Model.FK_MethodInvocation_Module" FromRole="B_MethodInvocation" ToRole="A_Module" />
     <NavigationProperty Name="Method" Relationship="Model.FK_MethodInvocation_Method" FromRole="B_MethodInvocation" ToRole="A_Method" />
     <NavigationProperty Name="Assembly" Relationship="Model.FK_MethodInvocation_Assembly" FromRole="B_MethodInvocation" ToRole="A_Assembly" />
     <Property Name="FullTypeName" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="MemberName" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="InvokeOnObjectClass" Relationship="Model.FK_MethodInvocation_DataType" FromRole="B_MethodInvocation" ToRole="A_DataType" />
   </EntityType>
   <EntityType Name="TaetigkeitsArt">
     <Key>
@@ -311,7 +308,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Module" Relationship="Model.FK_DataType_Module" FromRole="B_DataType" ToRole="A_Module" />
     <Property Name="ClassName" Type="String" MaxLength="51" Nullable="true" />
+    <NavigationProperty Name="Properties" Relationship="Model.FK_BaseProperty_DataType" FromRole="A_DataType" ToRole="B_BaseProperty" />
+    <NavigationProperty Name="Methods" Relationship="Model.FK_Method_DataType" FromRole="A_DataType" ToRole="B_Method" />
     <NavigationProperty Name="DefaultIcon" Relationship="Model.FK_DataType_Icon" FromRole="B_DataType" ToRole="A_Icon" />
+    <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_DataType" FromRole="A_DataType" ToRole="B_MethodInvocation" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -337,8 +337,8 @@
     <NavigationProperty Name="Value" Relationship="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" FromRole="B_Zeitkonto_MitarbeiterCollectionEntry" ToRole="A_Mitarbeiter" />
     <NavigationProperty Name="Parent" Relationship="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" FromRole="B_Zeitkonto_MitarbeiterCollectionEntry" ToRole="A_Zeitkonto" />
   </EntityType>
-  <Association Name="FK_BaseProperty_ObjectClass">
-    <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+  <Association Name="FK_BaseProperty_DataType">
+    <End Role="A_DataType" Type="Model.DataType" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.BaseProperty" Multiplicity="*" />
   </Association>
   <Association Name="FK_Task_Projekt">
@@ -353,8 +353,8 @@
     <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
     <End Role="B_ObjectClass" Type="Model.ObjectClass" Multiplicity="*" />
   </Association>
-  <Association Name="FK_Method_ObjectClass">
-    <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+  <Association Name="FK_Method_DataType">
+    <End Role="A_DataType" Type="Model.DataType" Multiplicity="0..1" />
     <End Role="B_Method" Type="Model.Method" Multiplicity="*" />
   </Association>
   <Association Name="FK_DataType_Module">
@@ -421,8 +421,8 @@
     <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
   </Association>
-  <Association Name="FK_MethodInvocation_ObjectClass">
-    <End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+  <Association Name="FK_MethodInvocation_DataType">
+    <End Role="A_DataType" Type="Model.DataType" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
   </Association>
   <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">

@@ -86,7 +86,7 @@ namespace Kistl.App.Base
 
         public void OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            ObjectClass objClass = obj.ReferenceProperty.ObjectClass;
+            DataType objClass = obj.ReferenceProperty.ObjectClass;
             e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
         }
 

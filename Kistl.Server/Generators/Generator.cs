@@ -147,7 +147,7 @@ namespace Kistl.Server.Generators
             return GetAssociationParentRoleName(obj.Classname);
         }
 
-        public static string GetAssociationParentRoleName(ObjectClass obj)
+        public static string GetAssociationParentRoleName(DataType obj)
         {
             return GetAssociationParentRoleName(obj.ClassName);
         }
@@ -197,7 +197,7 @@ namespace Kistl.Server.Generators
         public static string GetDatabaseTableName(Property prop)
         {
             if (!prop.IsList) throw new ArgumentException("Property must be a List Property", "prop");
-            return prop.ObjectClass.TableName + "_" + prop.PropertyName + "Collection";
+            return ((ObjectClass)prop.ObjectClass).TableName + "_" + prop.PropertyName + "Collection";
         }
         #endregion
 

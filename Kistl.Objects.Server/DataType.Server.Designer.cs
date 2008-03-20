@@ -114,6 +114,30 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_DataType", "B_BaseProperty")]
+        public EntityCollection<Kistl.App.Base.BaseProperty> Properties
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.BaseProperty> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.BaseProperty>("Model.FK_BaseProperty_DataType", "B_BaseProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_DataType", "B_Method")]
+        public EntityCollection<Kistl.App.Base.Method> Methods
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.Method> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Method>("Model.FK_Method_DataType", "B_Method");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
+        [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DataType_Icon", "A_Icon")]
         public Kistl.App.GUI.Icon DefaultIcon
         {
@@ -144,6 +168,18 @@ namespace Kistl.App.Base
             set
             {
                 _fk_DefaultIcon = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_DataType", "B_MethodInvocation")]
+        public EntityCollection<Kistl.App.Base.MethodInvocation> MethodIvokations
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.MethodInvocation> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.MethodInvocation>("Model.FK_MethodInvocation_DataType", "B_MethodInvocation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
             }
         }
         
@@ -197,7 +233,10 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._ClassName, sw);
+            BinarySerializer.ToBinary(this.Properties.OfType<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this.Methods.OfType<IDataObject>(), sw);
             BinarySerializer.ToBinary(this.fk_DefaultIcon, sw);
+            BinarySerializer.ToBinary(this.MethodIvokations.OfType<IDataObject>(), sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

@@ -83,7 +83,7 @@ namespace Kistl.Server
             return result;
         }
 
-        public static ObjectType GetObjectType(this ObjectClass objClass)
+        public static ObjectType GetObjectType(this DataType objClass)
         {
             return new ObjectType(objClass.Module.Namespace, objClass.ClassName);
         }

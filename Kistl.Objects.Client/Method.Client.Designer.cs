@@ -54,11 +54,11 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public Kistl.App.Base.ObjectClass ObjectClass
+        public Kistl.App.Base.DataType ObjectClass
         {
             get
             {
-                return Context.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == fk_ObjectClass);
+                return Context.GetQuery<Kistl.App.Base.DataType>().Single(o => o.ID == fk_ObjectClass);
             }
             set
             {

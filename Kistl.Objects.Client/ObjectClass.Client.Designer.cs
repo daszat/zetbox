@@ -29,15 +29,9 @@ namespace Kistl.App.Base
         
         private string _TableName;
         
-        private List<Kistl.App.Base.BaseProperty> _Properties;
-        
         private int _fk_BaseObjectClass = Helper.INVALIDID;
         
         private List<Kistl.App.Base.ObjectClass> _SubClasses;
-        
-        private List<Kistl.App.Base.Method> _Methods;
-        
-        private List<Kistl.App.Base.MethodInvocation> _MethodIvokations;
         
         public ObjectClass()
         {
@@ -54,16 +48,6 @@ namespace Kistl.App.Base
                 NotifyPropertyChanging("TableName"); 
                 _TableName = value; 
                 NotifyPropertyChanged("TableName");;
-            }
-        }
-        
-        [XmlIgnore()]
-        public List<Kistl.App.Base.BaseProperty> Properties
-        {
-            get
-            {
-                if(_Properties == null) _Properties = Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
-                return _Properties;
             }
         }
         
@@ -103,26 +87,6 @@ namespace Kistl.App.Base
             {
                 if(_SubClasses == null) _SubClasses = Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses");
                 return _SubClasses;
-            }
-        }
-        
-        [XmlIgnore()]
-        public List<Kistl.App.Base.Method> Methods
-        {
-            get
-            {
-                if(_Methods == null) _Methods = Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
-                return _Methods;
-            }
-        }
-        
-        [XmlIgnore()]
-        public List<Kistl.App.Base.MethodInvocation> MethodIvokations
-        {
-            get
-            {
-                if(_MethodIvokations == null) _MethodIvokations = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
-                return _MethodIvokations;
             }
         }
         
@@ -186,10 +150,7 @@ namespace Kistl.App.Base
         {
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._TableName, sr);
-            BinarySerializer.FromBinary(out this._Properties, sr, ctx);
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
-            BinarySerializer.FromBinary(out this._Methods, sr, ctx);
-            BinarySerializer.FromBinary(out this._MethodIvokations, sr, ctx);
         }
     }
 }

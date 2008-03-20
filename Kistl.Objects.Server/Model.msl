@@ -228,8 +228,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="FK_BaseProperty_ObjectClass" TypeName="Model.FK_BaseProperty_ObjectClass" StoreEntitySet="BaseProperty">
-      <EndProperty Name="A_ObjectClass">
+    <AssociationSetMapping Name="FK_BaseProperty_DataType" TypeName="Model.FK_BaseProperty_DataType" StoreEntitySet="BaseProperty">
+      <EndProperty Name="A_DataType">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
       </EndProperty>
       <EndProperty Name="B_BaseProperty">
@@ -264,8 +264,8 @@
       </EndProperty>
       <Condition ColumnName="fk_BaseObjectClass" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Method_ObjectClass" TypeName="Model.FK_Method_ObjectClass" StoreEntitySet="Method">
-      <EndProperty Name="A_ObjectClass">
+    <AssociationSetMapping Name="FK_Method_DataType" TypeName="Model.FK_Method_DataType" StoreEntitySet="Method">
+      <EndProperty Name="A_DataType">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
       </EndProperty>
       <EndProperty Name="B_Method">
@@ -417,8 +417,8 @@
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_MethodInvocation_ObjectClass" TypeName="Model.FK_MethodInvocation_ObjectClass" StoreEntitySet="MethodInvocation">
-      <EndProperty Name="A_ObjectClass">
+    <AssociationSetMapping Name="FK_MethodInvocation_DataType" TypeName="Model.FK_MethodInvocation_DataType" StoreEntitySet="MethodInvocation">
+      <EndProperty Name="A_DataType">
         <ScalarProperty Name="ID" ColumnName="fk_InvokeOnObjectClass" />
       </EndProperty>
       <EndProperty Name="B_MethodInvocation">
