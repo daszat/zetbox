@@ -60,7 +60,7 @@ namespace Kistl.App.Projekte
             e.Result = obj.Kundenname;
         }
 
-        public void OnRechnungErstellen_Auftrag(Auftrag obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnRechnungErstellen_Auftrag(Auftrag obj)
         {
             RechnungXML xml = new RechnungXML();
 

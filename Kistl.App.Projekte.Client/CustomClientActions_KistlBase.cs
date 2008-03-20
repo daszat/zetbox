@@ -70,6 +70,14 @@ namespace Kistl.App.Base
         {
             e.Result = "-> " + e.Result;
         }
+
+        public void OnToString_BaseParameter(Kistl.App.Base.BaseParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = string.Format("{0}{1} {2}",
+                obj.IsReturnParameter ? "[Return] " : "",
+                obj.GetDataType(),
+                obj.ParameterName);
+        }
         #endregion
 
         #region GetDataType
@@ -113,6 +121,42 @@ namespace Kistl.App.Base
         public void OnGetDataType_DateTimeProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "System.DateTime";
+        }
+
+        // Parameter
+        public void OnGetDataType_StringParameter(Kistl.App.Base.StringParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.String";
+        }
+
+        public void OnGetDataType_DoubleParameter(Kistl.App.Base.DoubleParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Double";
+        }
+
+        public void OnGetDataType_BoolParameter(Kistl.App.Base.BoolParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Boolean";
+        }
+
+        public void OnGetDataType_IntParameter(Kistl.App.Base.IntParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Int32";
+        }
+
+        public void OnGetDataType_DateTimeParameter(Kistl.App.Base.DateTimeParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.DateTime";
+        }
+
+        public void OnGetDataType_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.DataType.Module.Namespace + "." + obj.DataType.ClassName;
+        }
+
+        public void OnGetDataType_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.FullTypeName;
         }
         #endregion
     }

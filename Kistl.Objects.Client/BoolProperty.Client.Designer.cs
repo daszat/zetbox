@@ -84,23 +84,23 @@ namespace Kistl.App.Base
         
         public override string GetDataType()
         {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetDataType();
             if (OnGetDataType_BoolProperty != null)
             {
                 OnGetDataType_BoolProperty(this, e);
-            }
+            };
             return e.Result;
         }
         
         public override string GetGUIRepresentation()
         {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetGUIRepresentation();
             if (OnGetGUIRepresentation_BoolProperty != null)
             {
                 OnGetGUIRepresentation_BoolProperty(this, e);
-            }
+            };
             return e.Result;
         }
         

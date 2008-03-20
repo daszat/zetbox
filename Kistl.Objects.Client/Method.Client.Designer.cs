@@ -37,6 +37,8 @@ namespace Kistl.App.Base
         
         private List<Kistl.App.Base.MethodInvocation> _MethodIvokations;
         
+        private List<Kistl.App.Base.BaseParameter> _Parameter;
+        
         public Method()
         {
         }
@@ -135,6 +137,16 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        public List<Kistl.App.Base.BaseParameter> Parameter
+        {
+            get
+            {
+                if(_Parameter == null) _Parameter = Context.GetListOf<Kistl.App.Base.BaseParameter>(this, "Parameter");
+                return _Parameter;
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -199,6 +211,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_ObjectClass, sr);
             BinarySerializer.FromBinary(out this._MethodName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
+            BinarySerializer.FromBinary(out this._Parameter, sr, ctx);
         }
     }
 }

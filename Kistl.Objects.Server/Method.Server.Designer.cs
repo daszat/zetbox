@@ -159,6 +159,18 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseParameter_Method", "B_BaseParameter")]
+        public EntityCollection<Kistl.App.Base.BaseParameter> Parameter
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.BaseParameter> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.BaseParameter>("Model.FK_BaseParameter_Method", "B_BaseParameter");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -210,6 +222,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_ObjectClass, sw);
             BinarySerializer.ToBinary(this._MethodName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
+            BinarySerializer.ToBinary(this.Parameter.OfType<IDataObject>(), sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)

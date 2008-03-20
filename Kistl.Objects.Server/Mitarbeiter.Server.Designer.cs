@@ -141,6 +141,8 @@ namespace Kistl.App.Projekte
         
         public event ObjectEventHandler<Mitarbeiter> OnPostSave_Mitarbeiter;
         
+        public event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -181,6 +183,16 @@ namespace Kistl.App.Projekte
             ((Mitarbeiter)obj)._TelefonNummer = this._TelefonNummer;
         }
         
+        public virtual System.DateTime TestMethodForParameter(string TestString, int TestInt, double TestDouble, bool TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter)
+        {
+            MethodReturnEventArgs<System.DateTime> e = new MethodReturnEventArgs<System.DateTime>();
+            if (OnTestMethodForParameter_Mitarbeiter != null)
+            {
+                OnTestMethodForParameter_Mitarbeiter(this, e, TestString, TestInt, TestDouble, TestBool, TestDateTime, TestObjectParameter, TestCLRObjectParameter);
+            };
+            return e.Result;
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -198,5 +210,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._SVNr, sr);
             BinarySerializer.FromBinary(out this._TelefonNummer, sr);
         }
+        
+        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<System.DateTime> e, string TestString, int TestInt, double TestDouble, bool TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter);
     }
 }

@@ -24,20 +24,22 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BaseProperty : BaseClientDataObject, ICloneable
+    public class BaseParameter : BaseClientDataObject, ICloneable
     {
         
         private int _ID = Helper.INVALIDID;
         
-        private int _fk_ObjectClass = Helper.INVALIDID;
+        private int _fk_Method = Helper.INVALIDID;
         
-        private string _PropertyName;
-        
-        private string _AltText;
+        private string _ParameterName;
         
         private int _fk_Module = Helper.INVALIDID;
         
-        public BaseProperty()
+        private bool _IsList;
+        
+        private bool _IsReturnParameter;
+        
+        public BaseParameter()
         {
         }
         
@@ -54,59 +56,45 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public Kistl.App.Base.DataType ObjectClass
+        public Kistl.App.Base.Method Method
         {
             get
             {
-                return Context.GetQuery<Kistl.App.Base.DataType>().Single(o => o.ID == fk_ObjectClass);
+                return Context.GetQuery<Kistl.App.Base.Method>().Single(o => o.ID == fk_Method);
             }
             set
             {
-                NotifyPropertyChanging("ObjectClass"); 
-                _fk_ObjectClass = value.ID;
-                NotifyPropertyChanged("ObjectClass"); ;
+                NotifyPropertyChanging("Method"); 
+                _fk_Method = value.ID;
+                NotifyPropertyChanged("Method"); ;
             }
         }
         
-        public int fk_ObjectClass
+        public int fk_Method
         {
             get
             {
-                return _fk_ObjectClass;
+                return _fk_Method;
             }
             set
             {
-                NotifyPropertyChanging("ObjectClass"); 
-                _fk_ObjectClass = value;
-                NotifyPropertyChanged("ObjectClass"); ;
+                NotifyPropertyChanging("Method"); 
+                _fk_Method = value;
+                NotifyPropertyChanged("Method"); ;
             }
         }
         
-        public string PropertyName
+        public string ParameterName
         {
             get
             {
-                return _PropertyName;
+                return _ParameterName;
             }
             set
             {
-                NotifyPropertyChanging("PropertyName"); 
-                _PropertyName = value; 
-                NotifyPropertyChanged("PropertyName");;
-            }
-        }
-        
-        public string AltText
-        {
-            get
-            {
-                return _AltText;
-            }
-            set
-            {
-                NotifyPropertyChanging("AltText"); 
-                _AltText = value; 
-                NotifyPropertyChanged("AltText");;
+                NotifyPropertyChanging("ParameterName"); 
+                _ParameterName = value; 
+                NotifyPropertyChanged("ParameterName");;
             }
         }
         
@@ -139,24 +127,50 @@ namespace Kistl.App.Base
             }
         }
         
-        public event ToStringHandler<BaseProperty> OnToString_BaseProperty;
+        public bool IsList
+        {
+            get
+            {
+                return _IsList;
+            }
+            set
+            {
+                NotifyPropertyChanging("IsList"); 
+                _IsList = value; 
+                NotifyPropertyChanged("IsList");;
+            }
+        }
         
-        public event ObjectEventHandler<BaseProperty> OnPreSave_BaseProperty;
+        public bool IsReturnParameter
+        {
+            get
+            {
+                return _IsReturnParameter;
+            }
+            set
+            {
+                NotifyPropertyChanging("IsReturnParameter"); 
+                _IsReturnParameter = value; 
+                NotifyPropertyChanged("IsReturnParameter");;
+            }
+        }
         
-        public event ObjectEventHandler<BaseProperty> OnPostSave_BaseProperty;
+        public event ToStringHandler<BaseParameter> OnToString_BaseParameter;
         
-        public event GetDataType_Handler<BaseProperty> OnGetDataType_BaseProperty;
+        public event ObjectEventHandler<BaseParameter> OnPreSave_BaseParameter;
         
-        public event GetGUIRepresentation_Handler<BaseProperty> OnGetGUIRepresentation_BaseProperty;
+        public event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
+        
+        public event GetDataType_Handler<BaseParameter> OnGetDataType_BaseParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_BaseProperty != null)
+            if (OnToString_BaseParameter != null)
             {
-                OnToString_BaseProperty(this, e);
+                OnToString_BaseParameter(this, e);
             }
             return e.Result;
         }
@@ -164,18 +178,18 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_BaseProperty != null) OnPreSave_BaseProperty(this);
+            if (OnPreSave_BaseParameter != null) OnPreSave_BaseParameter(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_BaseProperty != null) OnPostSave_BaseProperty(this);
+            if (OnPostSave_BaseParameter != null) OnPostSave_BaseParameter(this);
         }
         
         public override object Clone()
         {
-            BaseProperty obj = new BaseProperty();
+            BaseParameter obj = new BaseParameter();
             CopyTo(obj);
             return obj;
         }
@@ -183,10 +197,11 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((BaseProperty)obj)._fk_ObjectClass = this._fk_ObjectClass;
-            ((BaseProperty)obj)._PropertyName = this._PropertyName;
-            ((BaseProperty)obj)._AltText = this._AltText;
-            ((BaseProperty)obj)._fk_Module = this._fk_Module;
+            ((BaseParameter)obj)._fk_Method = this._fk_Method;
+            ((BaseParameter)obj)._ParameterName = this._ParameterName;
+            ((BaseParameter)obj)._fk_Module = this._fk_Module;
+            ((BaseParameter)obj)._IsList = this._IsList;
+            ((BaseParameter)obj)._IsReturnParameter = this._IsReturnParameter;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -197,19 +212,9 @@ namespace Kistl.App.Base
         public virtual string GetDataType()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            if (OnGetDataType_BaseProperty != null)
+            if (OnGetDataType_BaseParameter != null)
             {
-                OnGetDataType_BaseProperty(this, e);
-            };
-            return e.Result;
-        }
-        
-        public virtual string GetGUIRepresentation()
-        {
-            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            if (OnGetGUIRepresentation_BaseProperty != null)
-            {
-                OnGetGUIRepresentation_BaseProperty(this, e);
+                OnGetDataType_BaseParameter(this, e);
             };
             return e.Result;
         }
@@ -217,23 +222,23 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.fk_ObjectClass, sw);
-            BinarySerializer.ToBinary(this._PropertyName, sw);
-            BinarySerializer.ToBinary(this._AltText, sw);
+            BinarySerializer.ToBinary(this.fk_Method, sw);
+            BinarySerializer.ToBinary(this._ParameterName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
+            BinarySerializer.ToBinary(this._IsList, sw);
+            BinarySerializer.ToBinary(this._IsReturnParameter, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
-            BinarySerializer.FromBinary(out this._fk_ObjectClass, sr);
-            BinarySerializer.FromBinary(out this._PropertyName, sr);
-            BinarySerializer.FromBinary(out this._AltText, sr);
+            BinarySerializer.FromBinary(out this._fk_Method, sr);
+            BinarySerializer.FromBinary(out this._ParameterName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
+            BinarySerializer.FromBinary(out this._IsList, sr);
+            BinarySerializer.FromBinary(out this._IsReturnParameter, sr);
         }
         
         public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
-        
-        public delegate void GetGUIRepresentation_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
 }

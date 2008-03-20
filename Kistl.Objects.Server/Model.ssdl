@@ -28,6 +28,14 @@
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations" />
     <EntitySet Name="TaetigkeitsArt" EntityType="Model.Store.TaetigkeitsArt" Table="TaetigkeitsArten" />
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes" />
+    <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters" />
+    <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters" />
+    <EntitySet Name="IntParameter" EntityType="Model.Store.IntParameter" Table="IntParameters" />
+    <EntitySet Name="DoubleParameter" EntityType="Model.Store.DoubleParameter" Table="DoubleParameters" />
+    <EntitySet Name="BoolParameter" EntityType="Model.Store.BoolParameter" Table="BoolParameters" />
+    <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters" />
+    <EntitySet Name="ObjectParameter" EntityType="Model.Store.ObjectParameter" Table="ObjectParameters" />
+    <EntitySet Name="CLRObjectParameter" EntityType="Model.Store.CLRObjectParameter" Table="CLRObjectParameters" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -126,6 +134,22 @@
     <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt" Association="Model.Store.FK_Taetigkeit_TaetigkeitsArt">
       <End Role="A_TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
       <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_Method" Association="Model.Store.FK_BaseParameter_Method">
+      <End Role="A_Method" EntitySet="Method" />
+      <End Role="B_BaseParameter" EntitySet="BaseParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_Module" Association="Model.Store.FK_BaseParameter_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_BaseParameter" EntitySet="BaseParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectParameter_DataType" Association="Model.Store.FK_ObjectParameter_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
+      <End Role="B_ObjectParameter" EntitySet="ObjectParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLRObjectParameter_Assembly" Association="Model.Store.FK_CLRObjectParameter_Assembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -363,6 +387,62 @@
     <Property Name="fk_Module" Type="int" Nullable="true" />
     <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="true" />
     <Property Name="fk_DefaultIcon" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="BaseParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Method" Type="int" Nullable="true" />
+    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="fk_Module" Type="int" Nullable="true" />
+    <Property Name="IsList" Type="bit" Nullable="true" />
+    <Property Name="IsReturnParameter" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="StringParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IntParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DoubleParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BoolParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DateTimeParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_DataType" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CLRObjectParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Assembly" Type="int" Nullable="true" />
+    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -673,6 +753,54 @@
       </Principal>
       <Dependent Role="B_Taetigkeit">
         <PropertyRef Name="fk_TaetigkeitsArt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaseParameter_Method">
+    <End Role="A_Method" Type="Model.Store.Method" Multiplicity="0..1" />
+    <End Role="B_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Method">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_BaseParameter">
+        <PropertyRef Name="fk_Method" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaseParameter_Module">
+    <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="B_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_BaseParameter">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectParameter_DataType">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
+    <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_DataType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectParameter">
+        <PropertyRef Name="fk_DataType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLRObjectParameter_Assembly">
+    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
+    <End Role="B_CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Assembly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_CLRObjectParameter">
+        <PropertyRef Name="fk_Assembly" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

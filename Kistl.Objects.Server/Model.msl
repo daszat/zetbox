@@ -206,6 +206,52 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BaseParameter">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
+        <MappingFragment StoreEntitySet="BaseParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameter)">
+        <MappingFragment StoreEntitySet="StringParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntParameter)">
+        <MappingFragment StoreEntitySet="IntParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleParameter)">
+        <MappingFragment StoreEntitySet="DoubleParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameter)">
+        <MappingFragment StoreEntitySet="BoolParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeParameter)">
+        <MappingFragment StoreEntitySet="DateTimeParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectParameter)">
+        <MappingFragment StoreEntitySet="ObjectParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameter)">
+        <MappingFragment StoreEntitySet="CLRObjectParameter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -443,6 +489,42 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_TaetigkeitsArt" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_BaseParameter_Method" TypeName="Model.FK_BaseParameter_Method" StoreEntitySet="BaseParameter">
+      <EndProperty Name="A_Method">
+        <ScalarProperty Name="ID" ColumnName="fk_Method" />
+      </EndProperty>
+      <EndProperty Name="B_BaseParameter">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Method" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_BaseParameter_Module" TypeName="Model.FK_BaseParameter_Module" StoreEntitySet="BaseParameter">
+      <EndProperty Name="A_Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module" />
+      </EndProperty>
+      <EndProperty Name="B_BaseParameter">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ObjectParameter_DataType" TypeName="Model.FK_ObjectParameter_DataType" StoreEntitySet="ObjectParameter">
+      <EndProperty Name="A_DataType">
+        <ScalarProperty Name="ID" ColumnName="fk_DataType" />
+      </EndProperty>
+      <EndProperty Name="B_ObjectParameter">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_DataType" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_CLRObjectParameter_Assembly" TypeName="Model.FK_CLRObjectParameter_Assembly" StoreEntitySet="CLRObjectParameter">
+      <EndProperty Name="A_Assembly">
+        <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
+      </EndProperty>
+      <EndProperty Name="B_CLRObjectParameter">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Assembly" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">

@@ -133,23 +133,23 @@ namespace Kistl.App.Base
         
         public override string GetDataType()
         {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetDataType();
             if (OnGetDataType_BackReferenceProperty != null)
             {
                 OnGetDataType_BackReferenceProperty(this, e);
-            }
+            };
             return e.Result;
         }
         
         public override string GetGUIRepresentation()
         {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetGUIRepresentation();
             if (OnGetGUIRepresentation_BackReferenceProperty != null)
             {
                 OnGetGUIRepresentation_BackReferenceProperty(this, e);
-            }
+            };
             return e.Result;
         }
         

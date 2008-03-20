@@ -224,14 +224,12 @@ namespace Kistl.App.Projekte
             base.AttachToContext(ctx);
         }
         
-        public virtual string RechnungErstellen()
+        public virtual void RechnungErstellen()
         {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             if (OnRechnungErstellen_Auftrag != null)
             {
-                OnRechnungErstellen_Auftrag(this, e);
-            }
-            return e.Result;
+                OnRechnungErstellen_Auftrag(this);
+            };
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -254,6 +252,6 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._Auftragswert, sr);
         }
         
-        public delegate void RechnungErstellen_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        public delegate void RechnungErstellen_Handler<T>(T obj);
     }
 }

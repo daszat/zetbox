@@ -24,63 +24,76 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Property : Kistl.App.Base.BaseProperty, ICloneable
+    public class CLRObjectParameter : Kistl.App.Base.BaseParameter, ICloneable
     {
         
-        private bool _IsList;
+        private int _fk_Assembly = Helper.INVALIDID;
         
-        private bool _IsNullable;
+        private string _FullTypeName;
         
-        public Property()
+        public CLRObjectParameter()
         {
         }
         
-        public bool IsList
-        {
-            get
-            {
-                return _IsList;
-            }
-            set
-            {
-                NotifyPropertyChanging("IsList"); 
-                _IsList = value; 
-                NotifyPropertyChanged("IsList");;
-            }
-        }
-        
-        public bool IsNullable
+        [XmlIgnore()]
+        public Kistl.App.Base.Assembly Assembly
         {
             get
             {
-                return _IsNullable;
+                return Context.GetQuery<Kistl.App.Base.Assembly>().Single(o => o.ID == fk_Assembly);
             }
             set
             {
-                NotifyPropertyChanging("IsNullable"); 
-                _IsNullable = value; 
-                NotifyPropertyChanged("IsNullable");;
+                NotifyPropertyChanging("Assembly"); 
+                _fk_Assembly = value.ID;
+                NotifyPropertyChanged("Assembly"); ;
             }
         }
         
-        public event ToStringHandler<Property> OnToString_Property;
+        public int fk_Assembly
+        {
+            get
+            {
+                return _fk_Assembly;
+            }
+            set
+            {
+                NotifyPropertyChanging("Assembly"); 
+                _fk_Assembly = value;
+                NotifyPropertyChanged("Assembly"); ;
+            }
+        }
         
-        public event ObjectEventHandler<Property> OnPreSave_Property;
+        public string FullTypeName
+        {
+            get
+            {
+                return _FullTypeName;
+            }
+            set
+            {
+                NotifyPropertyChanging("FullTypeName"); 
+                _FullTypeName = value; 
+                NotifyPropertyChanged("FullTypeName");;
+            }
+        }
         
-        public event ObjectEventHandler<Property> OnPostSave_Property;
+        public event ToStringHandler<CLRObjectParameter> OnToString_CLRObjectParameter;
         
-        public event GetDataType_Handler<Property> OnGetDataType_Property;
+        public event ObjectEventHandler<CLRObjectParameter> OnPreSave_CLRObjectParameter;
         
-        public event GetGUIRepresentation_Handler<Property> OnGetGUIRepresentation_Property;
+        public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
+        
+        public event GetDataType_Handler<CLRObjectParameter> OnGetDataType_CLRObjectParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Property != null)
+            if (OnToString_CLRObjectParameter != null)
             {
-                OnToString_Property(this, e);
+                OnToString_CLRObjectParameter(this, e);
             }
             return e.Result;
         }
@@ -88,18 +101,18 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Property != null) OnPreSave_Property(this);
+            if (OnPreSave_CLRObjectParameter != null) OnPreSave_CLRObjectParameter(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Property != null) OnPostSave_Property(this);
+            if (OnPostSave_CLRObjectParameter != null) OnPostSave_CLRObjectParameter(this);
         }
         
         public override object Clone()
         {
-            Property obj = new Property();
+            CLRObjectParameter obj = new CLRObjectParameter();
             CopyTo(obj);
             return obj;
         }
@@ -107,8 +120,8 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Property)obj)._IsList = this._IsList;
-            ((Property)obj)._IsNullable = this._IsNullable;
+            ((CLRObjectParameter)obj)._fk_Assembly = this._fk_Assembly;
+            ((CLRObjectParameter)obj)._FullTypeName = this._FullTypeName;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -120,20 +133,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetDataType();
-            if (OnGetDataType_Property != null)
+            if (OnGetDataType_CLRObjectParameter != null)
             {
-                OnGetDataType_Property(this, e);
-            };
-            return e.Result;
-        }
-        
-        public override string GetGUIRepresentation()
-        {
-            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetGUIRepresentation();
-            if (OnGetGUIRepresentation_Property != null)
-            {
-                OnGetGUIRepresentation_Property(this, e);
+                OnGetDataType_CLRObjectParameter(this, e);
             };
             return e.Result;
         }
@@ -141,15 +143,15 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this._IsList, sw);
-            BinarySerializer.ToBinary(this._IsNullable, sw);
+            BinarySerializer.ToBinary(this.fk_Assembly, sw);
+            BinarySerializer.ToBinary(this._FullTypeName, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
-            BinarySerializer.FromBinary(out this._IsList, sr);
-            BinarySerializer.FromBinary(out this._IsNullable, sr);
+            BinarySerializer.FromBinary(out this._fk_Assembly, sr);
+            BinarySerializer.FromBinary(out this._FullTypeName, sr);
         }
     }
 }

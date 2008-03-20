@@ -84,6 +84,42 @@ namespace Kistl.App.Base
         {
             e.Result = obj.ReferenceProperty.ObjectClass.Module.Namespace + "." + obj.ReferenceProperty.ObjectClass.ClassName;
         }
+
+        // Parameter
+        public void OnGetDataType_StringParameter(Kistl.App.Base.StringParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.String";
+        }
+
+        public void OnGetDataType_DoubleParameter(Kistl.App.Base.DoubleParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Double";
+        }
+
+        public void OnGetDataType_BoolParameter(Kistl.App.Base.BoolParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Boolean";
+        }
+
+        public void OnGetDataType_IntParameter(Kistl.App.Base.IntParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Int32";
+        }
+
+        public void OnGetDataType_DateTimeParameter(Kistl.App.Base.DateTimeParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.DateTime";
+        }
+
+        public void OnGetDataType_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.DataType.Module.Namespace + "." + obj.DataType.ClassName;
+        }
+
+        public void OnGetDataType_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.FullTypeName;
+        }
         #endregion
     }
 }

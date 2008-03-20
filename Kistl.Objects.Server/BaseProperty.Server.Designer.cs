@@ -216,21 +216,21 @@ namespace Kistl.App.Base
         
         public virtual string GetDataType()
         {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             if (OnGetDataType_BaseProperty != null)
             {
                 OnGetDataType_BaseProperty(this, e);
-            }
+            };
             return e.Result;
         }
         
         public virtual string GetGUIRepresentation()
         {
-            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             if (OnGetGUIRepresentation_BaseProperty != null)
             {
                 OnGetGUIRepresentation_BaseProperty(this, e);
-            }
+            };
             return e.Result;
         }
         

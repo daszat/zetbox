@@ -24,63 +24,60 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Property : Kistl.App.Base.BaseProperty, ICloneable
+    public class ObjectParameter : Kistl.App.Base.BaseParameter, ICloneable
     {
         
-        private bool _IsList;
+        private int _fk_DataType = Helper.INVALIDID;
         
-        private bool _IsNullable;
-        
-        public Property()
+        public ObjectParameter()
         {
         }
         
-        public bool IsList
-        {
-            get
-            {
-                return _IsList;
-            }
-            set
-            {
-                NotifyPropertyChanging("IsList"); 
-                _IsList = value; 
-                NotifyPropertyChanged("IsList");;
-            }
-        }
-        
-        public bool IsNullable
+        [XmlIgnore()]
+        public Kistl.App.Base.DataType DataType
         {
             get
             {
-                return _IsNullable;
+                return Context.GetQuery<Kistl.App.Base.DataType>().Single(o => o.ID == fk_DataType);
             }
             set
             {
-                NotifyPropertyChanging("IsNullable"); 
-                _IsNullable = value; 
-                NotifyPropertyChanged("IsNullable");;
+                NotifyPropertyChanging("DataType"); 
+                _fk_DataType = value.ID;
+                NotifyPropertyChanged("DataType"); ;
             }
         }
         
-        public event ToStringHandler<Property> OnToString_Property;
+        public int fk_DataType
+        {
+            get
+            {
+                return _fk_DataType;
+            }
+            set
+            {
+                NotifyPropertyChanging("DataType"); 
+                _fk_DataType = value;
+                NotifyPropertyChanged("DataType"); ;
+            }
+        }
         
-        public event ObjectEventHandler<Property> OnPreSave_Property;
+        public event ToStringHandler<ObjectParameter> OnToString_ObjectParameter;
         
-        public event ObjectEventHandler<Property> OnPostSave_Property;
+        public event ObjectEventHandler<ObjectParameter> OnPreSave_ObjectParameter;
         
-        public event GetDataType_Handler<Property> OnGetDataType_Property;
+        public event ObjectEventHandler<ObjectParameter> OnPostSave_ObjectParameter;
         
-        public event GetGUIRepresentation_Handler<Property> OnGetGUIRepresentation_Property;
+        public event GetDataType_Handler<ObjectParameter> OnGetDataType_ObjectParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Property != null)
+            if (OnToString_ObjectParameter != null)
             {
-                OnToString_Property(this, e);
+                OnToString_ObjectParameter(this, e);
             }
             return e.Result;
         }
@@ -88,18 +85,18 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Property != null) OnPreSave_Property(this);
+            if (OnPreSave_ObjectParameter != null) OnPreSave_ObjectParameter(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Property != null) OnPostSave_Property(this);
+            if (OnPostSave_ObjectParameter != null) OnPostSave_ObjectParameter(this);
         }
         
         public override object Clone()
         {
-            Property obj = new Property();
+            ObjectParameter obj = new ObjectParameter();
             CopyTo(obj);
             return obj;
         }
@@ -107,8 +104,7 @@ namespace Kistl.App.Base
         public override void CopyTo(Kistl.API.IDataObject obj)
         {
             base.CopyTo(obj);
-            ((Property)obj)._IsList = this._IsList;
-            ((Property)obj)._IsNullable = this._IsNullable;
+            ((ObjectParameter)obj)._fk_DataType = this._fk_DataType;
         }
         
         public override void AttachToContext(KistlContext ctx)
@@ -120,20 +116,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetDataType();
-            if (OnGetDataType_Property != null)
+            if (OnGetDataType_ObjectParameter != null)
             {
-                OnGetDataType_Property(this, e);
-            };
-            return e.Result;
-        }
-        
-        public override string GetGUIRepresentation()
-        {
-            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetGUIRepresentation();
-            if (OnGetGUIRepresentation_Property != null)
-            {
-                OnGetGUIRepresentation_Property(this, e);
+                OnGetDataType_ObjectParameter(this, e);
             };
             return e.Result;
         }
@@ -141,15 +126,13 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this._IsList, sw);
-            BinarySerializer.ToBinary(this._IsNullable, sw);
+            BinarySerializer.ToBinary(this.fk_DataType, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
         {
             base.FromStream(ctx, sr);
-            BinarySerializer.FromBinary(out this._IsList, sr);
-            BinarySerializer.FromBinary(out this._IsNullable, sr);
+            BinarySerializer.FromBinary(out this._fk_DataType, sr);
         }
     }
 }

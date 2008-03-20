@@ -21,35 +21,32 @@ namespace Kistl.App.Base
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
-    using Kistl.API.Server;
+    using Kistl.API.Client;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="BoolProperty")]
-    public class BoolProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
+    public class BoolParameter : Kistl.App.Base.BaseParameter, ICloneable
     {
         
-        public BoolProperty()
+        public BoolParameter()
         {
         }
         
-        public event ToStringHandler<BoolProperty> OnToString_BoolProperty;
+        public event ToStringHandler<BoolParameter> OnToString_BoolParameter;
         
-        public event ObjectEventHandler<BoolProperty> OnPreSave_BoolProperty;
+        public event ObjectEventHandler<BoolParameter> OnPreSave_BoolParameter;
         
-        public event ObjectEventHandler<BoolProperty> OnPostSave_BoolProperty;
+        public event ObjectEventHandler<BoolParameter> OnPostSave_BoolParameter;
         
-        public event GetDataType_Handler<BoolProperty> OnGetDataType_BoolProperty;
-        
-        public event GetGUIRepresentation_Handler<BoolProperty> OnGetGUIRepresentation_BoolProperty;
+        public event GetDataType_Handler<BoolParameter> OnGetDataType_BoolParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_BoolProperty != null)
+            if (OnToString_BoolParameter != null)
             {
-                OnToString_BoolProperty(this, e);
+                OnToString_BoolParameter(this, e);
             }
             return e.Result;
         }
@@ -57,18 +54,18 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_BoolProperty != null) OnPreSave_BoolProperty(this);
+            if (OnPreSave_BoolParameter != null) OnPreSave_BoolParameter(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_BoolProperty != null) OnPostSave_BoolProperty(this);
+            if (OnPostSave_BoolParameter != null) OnPostSave_BoolParameter(this);
         }
         
         public override object Clone()
         {
-            BoolProperty obj = new BoolProperty();
+            BoolParameter obj = new BoolParameter();
             CopyTo(obj);
             return obj;
         }
@@ -78,24 +75,18 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
         }
         
+        public override void AttachToContext(KistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+        }
+        
         public override string GetDataType()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetDataType();
-            if (OnGetDataType_BoolProperty != null)
+            if (OnGetDataType_BoolParameter != null)
             {
-                OnGetDataType_BoolProperty(this, e);
-            };
-            return e.Result;
-        }
-        
-        public override string GetGUIRepresentation()
-        {
-            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetGUIRepresentation();
-            if (OnGetGUIRepresentation_BoolProperty != null)
-            {
-                OnGetGUIRepresentation_BoolProperty(this, e);
+                OnGetDataType_BoolParameter(this, e);
             };
             return e.Result;
         }

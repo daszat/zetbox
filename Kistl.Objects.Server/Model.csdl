@@ -16,6 +16,7 @@
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
     <EntitySet Name="TaetigkeitsArt" EntityType="Model.TaetigkeitsArt" />
     <EntitySet Name="DataType" EntityType="Model.DataType" />
+    <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -115,6 +116,22 @@
       <End Role="A_TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
       <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_Method" Association="Model.FK_BaseParameter_Method">
+      <End Role="A_Method" EntitySet="Method" />
+      <End Role="B_BaseParameter" EntitySet="BaseParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_Module" Association="Model.FK_BaseParameter_Module">
+      <End Role="A_Module" EntitySet="Module" />
+      <End Role="B_BaseParameter" EntitySet="BaseParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectParameter_DataType" Association="Model.FK_ObjectParameter_DataType">
+      <End Role="A_DataType" EntitySet="DataType" />
+      <End Role="B_ObjectParameter" EntitySet="BaseParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLRObjectParameter_Assembly" Association="Model.FK_CLRObjectParameter_Assembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_CLRObjectParameter" EntitySet="BaseParameter" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -195,6 +212,7 @@
     <Property Name="MethodName" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Module" Relationship="Model.FK_Method_Module" FromRole="B_Method" ToRole="A_Module" />
     <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_Method" FromRole="A_Method" ToRole="B_MethodInvocation" />
+    <NavigationProperty Name="Parameter" Relationship="Model.FK_BaseParameter_Method" FromRole="A_Method" ToRole="B_BaseParameter" />
   </EntityType>
   <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
@@ -312,6 +330,29 @@
     <NavigationProperty Name="Methods" Relationship="Model.FK_Method_DataType" FromRole="A_DataType" ToRole="B_Method" />
     <NavigationProperty Name="DefaultIcon" Relationship="Model.FK_DataType_Icon" FromRole="B_DataType" ToRole="A_Icon" />
     <NavigationProperty Name="MethodIvokations" Relationship="Model.FK_MethodInvocation_DataType" FromRole="A_DataType" ToRole="B_MethodInvocation" />
+  </EntityType>
+  <EntityType Name="BaseParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Method" Relationship="Model.FK_BaseParameter_Method" FromRole="B_BaseParameter" ToRole="A_Method" />
+    <Property Name="ParameterName" Type="String" MaxLength="100" Nullable="true" />
+    <NavigationProperty Name="Module" Relationship="Model.FK_BaseParameter_Module" FromRole="B_BaseParameter" ToRole="A_Module" />
+    <Property Name="IsList" Type="Boolean" Nullable="true" />
+    <Property Name="IsReturnParameter" Type="Boolean" Nullable="true" />
+  </EntityType>
+  <EntityType Name="StringParameter" BaseType="Model.BaseParameter" />
+  <EntityType Name="IntParameter" BaseType="Model.BaseParameter" />
+  <EntityType Name="DoubleParameter" BaseType="Model.BaseParameter" />
+  <EntityType Name="BoolParameter" BaseType="Model.BaseParameter" />
+  <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter" />
+  <EntityType Name="ObjectParameter" BaseType="Model.BaseParameter">
+    <NavigationProperty Name="DataType" Relationship="Model.FK_ObjectParameter_DataType" FromRole="B_ObjectParameter" ToRole="A_DataType" />
+  </EntityType>
+  <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter">
+    <NavigationProperty Name="Assembly" Relationship="Model.FK_CLRObjectParameter_Assembly" FromRole="B_CLRObjectParameter" ToRole="A_Assembly" />
+    <Property Name="FullTypeName" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -432,6 +473,22 @@
   <Association Name="FK_Taetigkeit_TaetigkeitsArt">
     <End Role="A_TaetigkeitsArt" Type="Model.TaetigkeitsArt" Multiplicity="0..1" />
     <End Role="B_Taetigkeit" Type="Model.Taetigkeit" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_BaseParameter_Method">
+    <End Role="A_Method" Type="Model.Method" Multiplicity="0..1" />
+    <End Role="B_BaseParameter" Type="Model.BaseParameter" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_BaseParameter_Module">
+    <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
+    <End Role="B_BaseParameter" Type="Model.BaseParameter" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ObjectParameter_DataType">
+    <End Role="A_DataType" Type="Model.DataType" Multiplicity="0..1" />
+    <End Role="B_ObjectParameter" Type="Model.ObjectParameter" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_CLRObjectParameter_Assembly">
+    <End Role="A_Assembly" Type="Model.Assembly" Multiplicity="0..1" />
+    <End Role="B_CLRObjectParameter" Type="Model.CLRObjectParameter" Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />

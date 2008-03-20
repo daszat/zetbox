@@ -1055,8 +1055,7 @@ namespace Kistl.Server.Generators
             {
                 foreach (Method method in objClass.Methods)
                 {
-                    // TODO: Das ist nicht ganz sauber
-                    // Sobald man aber Parameter angeben kann, wird hoffentlich besser
+                    // TODO: I dont know if there's another way
                     // Default Methods, do not generate
                     if (method.Module.ModuleName == "KistlBase")
                     {
@@ -1066,6 +1065,8 @@ namespace Kistl.Server.Generators
                         )
                             continue;
                     }
+
+                    BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
 
                     if (objClass == baseObjClass)
                     {
@@ -1084,9 +1085,19 @@ namespace Kistl.Server.Generators
 
 
                         d.Parameters.Add(new CodeParameterDeclarationExpression("T", "obj"));
-                        d.Parameters.Add(new CodeParameterDeclarationExpression(
-                            new CodeTypeReference("MethodReturnEventArgs", new CodeTypeReference(typeof(string))),
-                            "e"));
+
+                        if (returnParam != null)
+                        {
+                            d.Parameters.Add(new CodeParameterDeclarationExpression(
+                                new CodeTypeReference("MethodReturnEventArgs", new CodeTypeReference(returnParam.GetDataType())),
+                                "e"));
+                        }
+
+                        foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
+                        {
+                            d.Parameters.Add(new CodeParameterDeclarationExpression(
+                                new CodeTypeReference(param.GetDataType()), param.ParameterName));
+                        }
                     }
 
                     // Create event
@@ -1103,26 +1114,50 @@ namespace Kistl.Server.Generators
                     current.code_class.Members.Add(m);
                     m.Name = method.MethodName;
                     m.Attributes = (objClass == baseObjClass) ? (MemberAttributes.Public) : (MemberAttributes.Public | MemberAttributes.Override);
-                    m.ReturnType = new CodeTypeReference(typeof(string));
 
-                    if (objClass == baseObjClass)
+                    if (returnParam != null)
                     {
-                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
-            if (On{1}_{0} != null)
-            {{
-                On{1}_{0}(this, e);
-            }}
-            return e.Result", baseObjClass.ClassName, method.MethodName)));// TODO: Das ist C# spezifisch
+                        m.ReturnType = new CodeTypeReference(returnParam.GetDataType());
                     }
                     else
                     {
-                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
-            e.Result = base.{1}();
-            if (On{1}_{0} != null)
+                        m.ReturnType = new CodeTypeReference(typeof(void));
+                    }
+
+                    // Add Parameter
+                    StringBuilder methodCallParameter = new StringBuilder();
+                    foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
+                    {
+                        m.Parameters.Add(new CodeParameterDeclarationExpression(
+                            new CodeTypeReference(param.GetDataType()), param.ParameterName));
+                        methodCallParameter.AppendFormat(", {0}", param.ParameterName);
+                    }
+
+                    if (returnParam != null)
+                    {
+                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<{0}> e = new MethodReturnEventArgs<{0}>()", returnParam.GetDataType())));
+                    }
+
+                    if (objClass != baseObjClass)
+                    {
+                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"{2}base.{0}({1})", 
+                            method.MethodName, 
+                            methodCallParameter.ToString(),
+                            returnParam != null ? "e.Result = " : "")));
+                    }
+
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if (On{1}_{0} != null)
             {{
-                On{1}_{0}(this, e);
-            }}
-            return e.Result", baseObjClass.ClassName, method.MethodName)));// TODO: Das ist C# spezifisch
+                On{1}_{0}(this{2}{3});
+            }}", 
+               baseObjClass.ClassName, 
+               method.MethodName, 
+               returnParam != null ? ", e" : "",
+               methodCallParameter.ToString())));
+
+                    if (returnParam != null)
+                    {
+                        m.Statements.Add(new CodeSnippetExpression("return e.Result"));
                     }
                 }
 

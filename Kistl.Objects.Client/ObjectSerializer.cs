@@ -57,6 +57,14 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.MethodInvocation), ElementName="MethodInvocation")]
         [XmlArrayItem(Type=typeof(Kistl.App.Zeiterfassung.TaetigkeitsArt), ElementName="TaetigkeitsArt")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.DataType), ElementName="DataType")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.BaseParameter), ElementName="BaseParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.StringParameter), ElementName="StringParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.IntParameter), ElementName="IntParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.DoubleParameter), ElementName="DoubleParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.BoolParameter), ElementName="BoolParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.DateTimeParameter), ElementName="DateTimeParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectParameter), ElementName="ObjectParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.CLRObjectParameter), ElementName="CLRObjectParameter")]
         public List<Object> Objects
         {
             get
@@ -106,6 +114,14 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.MethodInvocation), ElementName="MethodInvocation")]
         [XmlElement(Type=typeof(Kistl.App.Zeiterfassung.TaetigkeitsArt), ElementName="TaetigkeitsArt")]
         [XmlElement(Type=typeof(Kistl.App.Base.DataType), ElementName="DataType")]
+        [XmlElement(Type=typeof(Kistl.App.Base.BaseParameter), ElementName="BaseParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.StringParameter), ElementName="StringParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.IntParameter), ElementName="IntParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.DoubleParameter), ElementName="DoubleParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.BoolParameter), ElementName="BoolParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.DateTimeParameter), ElementName="DateTimeParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.ObjectParameter), ElementName="ObjectParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.CLRObjectParameter), ElementName="CLRObjectParameter")]
         public Object Object
         {
             get
