@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Kistl.API
 {
@@ -165,6 +166,20 @@ namespace Kistl.API
             }
 
             ToBinary(false, sw);
+        }
+
+        public static void ToBinary(SerializableExpression e, System.IO.BinaryWriter sw)
+        {
+            if (e != null)
+            {
+                sw.Write(true);
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(sw.BaseStream, e);
+            }
+            else
+            {
+                sw.Write(false);
+            }
         }
         #endregion
 
@@ -387,6 +402,16 @@ namespace Kistl.API
                 {
                     ctx.Delete(obj);
                 }
+            }
+        }
+
+        public static void FromBinary(out SerializableExpression e, System.IO.BinaryReader sr)
+        {
+            e = null;
+            if (sr.ReadBoolean())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                e = (SerializableExpression)bf.Deserialize(sr.BaseStream);
             }
         }
         #endregion

@@ -27,7 +27,7 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        IEnumerable GetList();
+        IEnumerable GetList(Expression filter);
 
         /// <summary>
         /// Implementiert den GetListOf Befehl.
@@ -109,12 +109,20 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public IEnumerable GetList()
+        public IEnumerable GetList(Expression filter)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {                
                 var result = from a in KistlDataContext.Current.GetTable<T>()
                              select a;
+
+                if (filter != null)
+                {
+                    result = result.Provider.CreateQuery<T>(
+                        Expression.Call(typeof(Queryable), "Where", 
+                        new Type[] { result.ElementType }, result.Expression, filter));
+                }
+
                 return result;
             }
         }

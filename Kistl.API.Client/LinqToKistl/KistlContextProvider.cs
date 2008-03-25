@@ -60,7 +60,7 @@ namespace Kistl.API.Client
 
             if (SearchType == SearchTypeEnum.GetList)
             {
-                List<T> result = Proxy.Current.GetList(_context, _type).OfType<T>().ToList();
+                List<T> result = Proxy.Current.GetList(_context, _type, _filter).OfType<T>().ToList();
                 foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
                 {
                     CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
@@ -104,7 +104,6 @@ namespace Kistl.API.Client
 
         #region Parameter
         
-        private List<Expression> _filter = new List<Expression>();
         private int ID = API.Helper.INVALIDID;
         private enum SearchTypeEnum
         {
@@ -114,6 +113,8 @@ namespace Kistl.API.Client
         }
 
         private SearchTypeEnum SearchType = SearchTypeEnum.GetList;
+        private Expression _filter = null;
+        private bool setFilter = false;
 
         #endregion
         
@@ -123,6 +124,8 @@ namespace Kistl.API.Client
             // System.Diagnostics.Trace.WriteLine(string.Format("Visiting {0}", e.ToString()));
             switch (e.NodeType)
             {
+                case ExpressionType.Or:
+                case ExpressionType.OrElse:
                 case ExpressionType.And:
                 case ExpressionType.AndAlso:
                     Visit((e as BinaryExpression).Left);
@@ -131,9 +134,6 @@ namespace Kistl.API.Client
                 case ExpressionType.Equal:
                     VisitEqual(e as BinaryExpression);
                     break;
-                case ExpressionType.LessThan:
-                    VisitLessThan(e as BinaryExpression);
-                    break;
                 case ExpressionType.Call:
                     VisitMethodCall(e as MethodCallExpression);
                     break;
@@ -141,7 +141,19 @@ namespace Kistl.API.Client
                     Visit((e as UnaryExpression).Operand);
                     break;
                 case ExpressionType.Lambda:
-                    Visit((e as LambdaExpression).Body);
+                    {
+                        if (setFilter && _filter == null)
+                        {
+                            _filter = e;
+                        }
+                        Visit((e as LambdaExpression).Body);
+                        break;
+                    }
+                case ExpressionType.LessThan:
+                case ExpressionType.LessThanOrEqual:
+                case ExpressionType.GreaterThan:
+                case ExpressionType.GreaterThanOrEqual:
+                    // Do nothing
                     break;
                 case ExpressionType.Constant:
                     // Do nothing -> This is a "select all" Expression
@@ -160,15 +172,6 @@ namespace Kistl.API.Client
             {
                 ID = GetExpressionValue<int>(e.Right);
             }
-            else
-            {
-                _filter.Add(e);
-            }
-        }
-
-        private void VisitLessThan(BinaryExpression e)
-        {
-            _filter.Add(e);
         }
 
         private TYPE GetExpressionValue<TYPE>(Expression e)
@@ -198,6 +201,8 @@ namespace Kistl.API.Client
         {
             if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Where")
             {
+                // Start filter here but visit first LambdaExpresseion
+                setFilter = true;
                 this.Visit(m.Arguments[1]);
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Select")
@@ -216,7 +221,25 @@ namespace Kistl.API.Client
             }
             else
             {
-                throw new NotSupportedException(string.Format("The method '{0}' is not supported", m.Method.Name));
+                if (setFilter)
+                {
+                    // OK, lets loop through all Methods, Server will reject illegal Method Calls
+                    foreach (var a in m.Arguments)
+                    {
+                        this.Visit(a);
+                    }
+                }
+                else
+                {
+                    // It is OK to check that here, becaue GetList will only take a Lambda Expression as an argument
+                    // and does _always_ a SELECT.
+                    // Method Calls must be implemented here explicit & send explicit to the Server. 
+                    // So there is no aggregation hole at this point. 
+                    // The only thing that is possible is to do a count on Member Collections, which might be higher
+                    // than the returned Objects in that collection (because of Security). 
+                    // Sum on the other hand is not possible. This will be checked by the Expression Serializer/Deserializer
+                    throw new NotSupportedException(string.Format("Method Call '{0}' is only supported in a WHERE clause", m.Method.Name));
+                }
             }
         }
 

@@ -87,6 +87,25 @@ namespace Kistl.Client
                         {
                             _Modules = new Dictionary<string, Kistl.App.Base.Module>();
                             ctx.GetQuery<Kistl.App.Base.Module>().ToList().ForEach(m => _Modules.Add(m.ModuleName, m));
+
+                            // Test!! Legal
+                            var test = from m in ctx.GetQuery<Kistl.App.Base.Module>()
+                                       where m.ModuleName.StartsWith("K") && m.Namespace.Length > 1 
+                                       && m.ModuleName == "Kistl" && m.ModuleName.EndsWith("l")
+                                       select m;
+                            foreach (var t in test)
+                            {
+                                System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", t.ModuleName));
+                            }
+
+                            // Test!! Illegal? 
+                            var test2 = from m in ctx.GetQuery<Kistl.App.Base.Module>()
+                                        where m.Assemblies.Sum(a => a.AssemblyName.Length) > 0
+                                        select m;
+                            foreach (var t in test2)
+                            {
+                                System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", t.ModuleName));
+                            }
                         }
                     }
                 }

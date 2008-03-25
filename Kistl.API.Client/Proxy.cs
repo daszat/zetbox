@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using System.IO;
+using System.Linq.Expressions;
 
 namespace Kistl.API.Client
 {
@@ -107,13 +108,15 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable GetList(IKistlContext ctx, ObjectType type)
+        public IEnumerable GetList(IKistlContext ctx, ObjectType type, Expression filter)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
                 msg.Type = type;
+                msg.Filter = filter != null ? SerializableExpression.FromExpression(filter, SerializableType.SerializeDirection.ClientToServer) : null;
+
                 System.IO.MemoryStream s = serviceStreams.GetList(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 

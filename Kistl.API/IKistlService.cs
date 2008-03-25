@@ -7,6 +7,8 @@ using System.ServiceModel;
 using System.Xml;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using System.Linq.Expressions;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Kistl.API
 {
@@ -15,6 +17,8 @@ namespace Kistl.API
         public ObjectType Type {get; set;}
         public int ID { get; set; }
         public string Property { get; set; }
+
+        public SerializableExpression Filter { get; set; }
 
         public KistlServiceStreamsMessage()
         {
@@ -33,6 +37,7 @@ namespace Kistl.API
             sw.Write(Type.Classname);
             sw.Write(ID);
             sw.Write(Property ?? "");
+            BinarySerializer.ToBinary(Filter, sw);
         }
 
         public System.IO.MemoryStream ToStream()
@@ -51,6 +56,10 @@ namespace Kistl.API
             Type.Classname = sr.ReadString();
             ID = sr.ReadInt32();
             Property = sr.ReadString();
+
+            SerializableExpression tmp;
+            BinarySerializer.FromBinary(out tmp, sr);
+            Filter = tmp;
         }
     }
 

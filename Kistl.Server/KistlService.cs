@@ -88,7 +88,8 @@ namespace Kistl.Server
                 {
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetList();
+                        // TODO: Add filter to Interface!!
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetList(null);
                         return CurrentSerializer.XmlFromList(lst);
                     }
                 }
