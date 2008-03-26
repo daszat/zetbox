@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Kistl.API
 {
-    #region SerializableType
+    #region Type
     [Serializable]
     public class SerializableType
     {
@@ -20,8 +20,28 @@ namespace Kistl.API
 
         public SerializableType(Type type, SerializeDirection direction)
         {
-            TypeName = type.FullName;
-            AssemblyQualifiedName = type.AssemblyQualifiedName;
+            _GenericTypeParameter = new List<SerializableType>();
+
+            if (type.IsGenericParameter)
+            {
+                throw new NotSupportedException("Generic Parameter cannot be serialized");
+            }
+            if (type.IsGenericType)
+            {
+                Type genericType = type.GetGenericTypeDefinition();
+                TypeName = genericType.FullName;
+                AssemblyQualifiedName = genericType.AssemblyQualifiedName;
+
+                type.GetGenericArguments().ForEach<Type>(t => _GenericTypeParameter.Add(new SerializableType(t, direction)));
+            }
+            else
+            {
+                TypeName = type.FullName;
+                AssemblyQualifiedName = type.AssemblyQualifiedName;
+            }
+
+            // This is null if the Typ is e.g. a Generic Parameter - not supported
+            if (string.IsNullOrEmpty(AssemblyQualifiedName)) throw new NotSupportedException("AssemblyQualifiedName must not be null or empty - maybe this Type is a Generic Parameter or something similar.");
 
             switch (direction)
             {
@@ -32,9 +52,6 @@ namespace Kistl.API
                     AssemblyQualifiedName = AssemblyQualifiedName.Replace(".Server", ".Client");
                     break;
             }
-
-            _GenericTypeParameter = new List<SerializableType>();
-            type.GetGenericArguments().ForEach<Type>(t => _GenericTypeParameter.Add(new SerializableType(t, direction)));
         }
 
         public string TypeName { get; set; }
@@ -49,36 +66,31 @@ namespace Kistl.API
             }
         }
 
-        public Type Type
+        public Type GetSerializedType()
         {
-            get
+            Type result;
+            if (_GenericTypeParameter.Count > 0)
             {
-                Type result;
-                if (_GenericTypeParameter.Count > 0)
-                {
-                    Type[] g = new Type[_GenericTypeParameter.Count + 1];
-                    g[0] = Type.GetType(AssemblyQualifiedName);
-                    int i = 0;
-                    _GenericTypeParameter.ForEach(t => g[++i] = t.Type);
-                    result = Type.MakeGenericType(g);
-                }
-                else
-                {
-                    result = Type.GetType(AssemblyQualifiedName, true);
-                }
-
-                if (result == null)
-                {
-                    throw new InvalidOperationException(string.Format("Unable to create Type {0}{1}",
-                        TypeName,
-                        _GenericTypeParameter.Count > 0 ? "<Generic>" : ""));
-                }
-                return result;
+                Type type = Type.GetType(AssemblyQualifiedName);
+                result = type.MakeGenericType(_GenericTypeParameter.Select(t => t.GetSerializedType()).ToArray());
             }
+            else
+            {
+                result = Type.GetType(AssemblyQualifiedName, true);
+            }
+
+            if (result == null)
+            {
+                throw new InvalidOperationException(string.Format("Unable to create Type {0}{1}",
+                    TypeName,
+                    _GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", _GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : ""));
+            }
+            return result;
         }
     }
     #endregion
 
+    #region Expression
     [Serializable]
     public abstract class SerializableExpression
     {
@@ -111,12 +123,11 @@ namespace Kistl.API
         }
 
         private SerializableType _Type;
-
         public Type Type
         {
             get
             {
-                return _Type.Type;
+                return _Type.GetSerializedType();
             }
         }
 
@@ -185,7 +196,9 @@ namespace Kistl.API
 
         internal abstract Expression ToExpressionInternal(SerializationContext ctx);
     }
+    #endregion
 
+    #region CompoundExpression
     [Serializable]
     public abstract class SerializableCompoundExpression : SerializableExpression
     {
@@ -209,7 +222,9 @@ namespace Kistl.API
             }
         }
     }
+    #endregion
 
+    #region BinaryExpression
     [Serializable]
     public class SerializableBinaryExpression : SerializableCompoundExpression
     {
@@ -225,7 +240,9 @@ namespace Kistl.API
             return Expression.MakeBinary(NodeType, Children[0].ToExpressionInternal(ctx), Children[1].ToExpressionInternal(ctx));
         }
     }
+    #endregion
 
+    #region UnaryExpression
     [Serializable]
     public class SerializableUnaryExpression : SerializableCompoundExpression
     {
@@ -240,7 +257,9 @@ namespace Kistl.API
             return Expression.MakeUnary(NodeType, Children[0].ToExpressionInternal(ctx), Type);
         }
     }
+    #endregion
 
+    #region ConstantExpression
     [Serializable]
     public class SerializableConstantExpression : SerializableExpression
     {
@@ -268,7 +287,9 @@ namespace Kistl.API
             }
         }
     }
+    #endregion
 
+    #region MemberExpression
     [Serializable]
     public class SerializableMemberExpression : SerializableCompoundExpression
     {
@@ -293,7 +314,9 @@ namespace Kistl.API
             }
         }
     }
+    #endregion
 
+    #region MethodCallExpression
     [Serializable]
     public class SerializableMethodCallExpression : SerializableCompoundExpression
     {
@@ -301,7 +324,11 @@ namespace Kistl.API
             : base(e, ctx)
         {            
             if(e.Object != null) _objectExpression = SerializableExpression.FromExpression(e.Object, ctx);
-            _method = e.Method;
+
+            _MethodName = e.Method.Name;
+            _Type = new SerializableType(e.Method.DeclaringType, ctx.Direction);
+            _ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(p.ParameterType, ctx.Direction)).ToList();
+            _GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(p, ctx.Direction)).ToList();
 
             if (e.Arguments != null)
             {
@@ -312,15 +339,102 @@ namespace Kistl.API
             }
         }
 
-        // TODO: MethodInfo muss selbst serialisiert werden, 
-        // da es leider, leider Methoden gibt, die KistlObjekte als GenericsArguments verwenden...
-        private MethodInfo _method;
-        public MethodInfo Method
+        private string _MethodName;
+        public string MethodName
         {
             get
             {
-                return _method;
+                return _MethodName;
             }
+        }
+
+        private List<SerializableType> _ParameterTypes;
+        public List<SerializableType> ParameterTypes
+        {
+            get
+            {
+                return _ParameterTypes;
+            }
+        }
+
+        private List<SerializableType> _GenericArguments;
+        public List<SerializableType> GenericArguments
+        {
+            get
+            {
+                return _GenericArguments;
+            }
+        }
+
+        private SerializableType _Type;
+        public Type MethodType
+        {
+            get
+            {
+                return _Type.GetSerializedType();
+            }
+        }
+
+        #region FindGenericMethod
+        private static MethodInfo FindGenericMethod(Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
+        {
+            if (parameterTypes == null)
+            {
+                MethodInfo mi = type.GetMethod(methodName);
+                if (mi == null) return null;
+                return mi.MakeGenericMethod(typeArguments);
+            }
+            else
+            {
+                MethodInfo[] methods = type.GetMethods();
+                foreach (MethodInfo method in methods)
+                {
+                    if (method.Name == methodName)
+                    {
+                        MethodInfo mi = method.MakeGenericMethod(typeArguments);
+                        ParameterInfo[] parameters = mi.GetParameters();
+
+                        if (parameters.Length == parameterTypes.Length)
+                        {
+                            bool paramSame = true;
+                            for (int i = 0; i < parameters.Length; i++)
+                            {
+                                if (parameters[i].ParameterType != parameterTypes[i])
+                                {
+                                    paramSame = false;
+                                    break;
+                                }
+                            }
+
+                            if(paramSame) return mi;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+        #endregion
+
+        public MethodInfo GetMethodInfo()
+        {
+            MethodInfo mi;
+            if (_GenericArguments != null && _GenericArguments.Count > 0)
+            {
+                mi = FindGenericMethod(MethodType, _MethodName,
+                        _GenericArguments.Select(p => p.GetSerializedType()).ToArray(),
+                        _ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
+            }
+            else
+            {
+                mi = MethodType.GetMethod(_MethodName, _ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
+            }
+
+            if (mi == null)
+            {
+                throw new MissingMethodException(MethodType.FullName, _MethodName);
+            }
+            return mi;
         }
 
         private SerializableExpression _objectExpression;
@@ -335,11 +449,14 @@ namespace Kistl.API
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
             return Expression.Call(
-                _objectExpression == null ? null : _objectExpression.ToExpressionInternal(ctx), _method,
+                _objectExpression == null ? null : _objectExpression.ToExpressionInternal(ctx), 
+                GetMethodInfo(),
                 Children.Select(e => e.ToExpressionInternal(ctx)));
         }
     }
+    #endregion 
 
+    #region LambdaExpression
     [Serializable]
     public class SerializableLambdaExpression : SerializableCompoundExpression
     {
@@ -347,9 +464,7 @@ namespace Kistl.API
             : base(e, ctx)
         {
             Children.Add(SerializableExpression.FromExpression(e.Body, ctx));
-
-            foreach (Expression p in e.Parameters)
-                Children.Add(SerializableExpression.FromExpression(p, ctx));
+            Children.AddRange(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx)));
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -361,7 +476,9 @@ namespace Kistl.API
             return Expression.Lambda(Children[0].ToExpressionInternal(ctx), parameters.ToArray());
         }
     }
+    #endregion
 
+    #region ParameterExpression
     [Serializable]
     public class SerializableParameterExpression : SerializableExpression
     {
@@ -392,4 +509,5 @@ namespace Kistl.API
             }
         }
     }
+    #endregion
 }

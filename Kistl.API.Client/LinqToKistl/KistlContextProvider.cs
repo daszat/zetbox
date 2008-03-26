@@ -144,7 +144,7 @@ namespace Kistl.API.Client
                     {
                         if (setFilter && _filter == null)
                         {
-                            _filter = e;
+                            //_filter = e;
                         }
                         Visit((e as LambdaExpression).Body);
                         break;
@@ -203,6 +203,10 @@ namespace Kistl.API.Client
             {
                 // Start filter here but visit first LambdaExpresseion
                 setFilter = true;
+                if (_filter == null)
+                {
+                    _filter = m.Arguments[1];
+                }
                 this.Visit(m.Arguments[1]);
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Select")

@@ -90,8 +90,11 @@ namespace Kistl.Client
 
                             // Test!! Legal
                             var test = from m in ctx.GetQuery<Kistl.App.Base.Module>()
-                                       where m.ModuleName.StartsWith("K") && m.Namespace.Length > 1 
-                                       && m.ModuleName == "Kistl" && m.ModuleName.EndsWith("l")
+                                       where 
+                                           m.ModuleName.StartsWith("K") 
+                                           && m.Namespace.Length > 1 
+                                           && m.ModuleName == "KistlBase" 
+                                           //&& m.ModuleName.EndsWith("l")
                                        select m;
                             foreach (var t in test)
                             {
@@ -106,6 +109,18 @@ namespace Kistl.Client
                             {
                                 System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", t.ModuleName));
                             }
+
+                            // Test!! Illegal? 
+                            // TODO: new DateTime is missing.... implement NewExpression
+                            DateTime dt = DateTime.Parse("1.1.1978");
+                            var test3 = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
+                                        where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > dt).Count() > 0
+                                        select z;
+                            foreach (var z in test3)
+                            {
+                                System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", z.Kontoname));
+                            }
+
                         }
                     }
                 }
