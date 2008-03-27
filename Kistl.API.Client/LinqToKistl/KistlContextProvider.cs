@@ -10,10 +10,22 @@ using System.Reflection;
 
 namespace Kistl.API.Client
 {
-    internal class KistlContextProvider<T> : IQueryProvider
+    internal class KistlContextProvider<T> : ExpressionTreeVisitor, IQueryProvider
     {
         private ObjectType _type;
         private KistlContext _context;
+
+        private int ID = API.Helper.INVALIDID;
+        private enum SearchTypeEnum
+        {
+            Unknown,
+            GetObject,
+            GetObjectOrNew,
+            GetList,
+        }
+
+        private SearchTypeEnum SearchType = SearchTypeEnum.Unknown;
+        private Expression _filter = null;
 
         internal KistlContextProvider(KistlContext ctx, ObjectType type)
         {
@@ -56,184 +68,106 @@ namespace Kistl.API.Client
 
         public object Execute(Expression e)
         {
+            // Find SearchType
             Visit(e);
 
-            if (SearchType == SearchTypeEnum.GetList)
+            switch(SearchType)
             {
-                List<T> result = Proxy.Current.GetList(_context, _type, _filter).OfType<T>().ToList();
-                foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
-                {
-                    CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
-                        (BaseClientDataObject)(obj).Clone());
-                    // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
-                    obj.ObjectState = DataObjectState.Unmodified;
-                }
-                return result;
+                case SearchTypeEnum.GetList:
+                    return GetListCall(e);
+                case SearchTypeEnum.GetObject:
+                    return GetObjectCall(e);
+                case SearchTypeEnum.GetObjectOrNew:
+                    return GetObjectOrNewCall(e);
+                default:
+                    throw new InvalidOperationException("Search Type could not be determinated");
+            }
+        }
+
+        private object GetListCall(Expression e)
+        {
+            List<T> result = Proxy.Current.GetList(_context, _type, _filter).OfType<T>().ToList();
+            foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
+            {
+                CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
+                    (BaseClientDataObject)(obj).Clone());
+                // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
+                obj.ObjectState = DataObjectState.Unmodified;
+            }
+            return result;
+        }
+
+        private object GetObjectCall(Expression e)
+        {
+            T result = (T)(IDataObject)CacheController<BaseClientDataObject>.Current.Get(_type, ID);
+            if (result == null)
+            {
+                result = (T)(IDataObject)Proxy.Current.GetObject(_context, _type, ID);
+                if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
+                CacheController<BaseClientDataObject>.Current.Set(_type, ID,
+                    (BaseClientDataObject)(result as BaseClientDataObject).Clone());
             }
             else
             {
-                if (ID != API.Helper.INVALIDID)
-                {
-                    T result = (T)(IDataObject)CacheController<BaseClientDataObject>.Current.Get(_type, ID);
-                    if (result == null)
-                    {
-                        result = (T)(IDataObject)Proxy.Current.GetObject(_context, _type, ID);
-                        if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
-                        CacheController<BaseClientDataObject>.Current.Set(_type, ID,
-                            (BaseClientDataObject)(result as BaseClientDataObject).Clone());
-                    }
-                    else
-                    {
-                        result = (T)(result as BaseClientDataObject).Clone();
-                        _context.Attach(result as BaseClientDataObject);
-                    }
-                    // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
-                    (result as BaseClientDataObject).ObjectState = DataObjectState.Unmodified;
-                    return result;
-                }    
-                else if(SearchType == SearchTypeEnum.GetObjectOrNew)
-                {
-                    return (T)(IDataObject)_context.Create(_type);
-                }
+                result = (T)(result as BaseClientDataObject).Clone();
+                _context.Attach(result as BaseClientDataObject);
             }
-
-            return null;
+            // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
+            (result as BaseClientDataObject).ObjectState = DataObjectState.Unmodified;
+            return result;
         }
 
-        #endregion
-
-        #region Parameter
-        
-        private int ID = API.Helper.INVALIDID;
-        private enum SearchTypeEnum
+        private object GetObjectOrNewCall(Expression e)
         {
-            GetObject,
-            GetObjectOrNew,
-            GetList,
-        }
-
-        private SearchTypeEnum SearchType = SearchTypeEnum.GetList;
-        private Expression _filter = null;
-        private bool setFilter = false;
-
-        #endregion
-        
-        #region Visits
-        private void Visit(Expression e)
-        {
-            // System.Diagnostics.Trace.WriteLine(string.Format("Visiting {0}", e.ToString()));
-            switch (e.NodeType)
+            if (ID != API.Helper.INVALIDID)
             {
-                case ExpressionType.Or:
-                case ExpressionType.OrElse:
-                case ExpressionType.And:
-                case ExpressionType.AndAlso:
-                    Visit((e as BinaryExpression).Left);
-                    Visit((e as BinaryExpression).Right);
-                    break;
-                case ExpressionType.Equal:
-                    VisitEqual(e as BinaryExpression);
-                    break;
-                case ExpressionType.Call:
-                    VisitMethodCall(e as MethodCallExpression);
-                    break;
-                case ExpressionType.Quote:
-                    Visit((e as UnaryExpression).Operand);
-                    break;
-                case ExpressionType.Lambda:
-                    {
-                        if (setFilter && _filter == null)
-                        {
-                            //_filter = e;
-                        }
-                        Visit((e as LambdaExpression).Body);
-                        break;
-                    }
-                case ExpressionType.LessThan:
-                case ExpressionType.LessThanOrEqual:
-                case ExpressionType.GreaterThan:
-                case ExpressionType.GreaterThanOrEqual:
-                    // Do nothing
-                    break;
-                case ExpressionType.Constant:
-                    // Do nothing -> This is a "select all" Expression
-                    break;
-                default:
-                    string exmsg = string.Format("Visit: Nodetype {0} is not supported: {1}", e.NodeType, e.ToString());
-                    System.Diagnostics.Trace.WriteLine(exmsg);
-                    throw new NotSupportedException(exmsg);
+                return GetObjectCall(e);
+            }
+            else
+            {
+                return (T)(IDataObject)_context.Create(_type);
             }
         }
 
-        private void VisitEqual(BinaryExpression e)
+        #endregion
+
+        #region Visits
+        protected override void VisitBinary(BinaryExpression b)
         {
-            MemberExpression m = (MemberExpression)e.Left;
+            MemberExpression m = (MemberExpression)b.Left;
             if (m.Member.DeclaringType == typeof(BaseClientDataObject) && m.Member.Name == "ID")
             {
-                ID = GetExpressionValue<int>(e.Right);
+                ID = b.Right.GetExpressionValue<int>();
             }
+
+            base.VisitBinary(b);
         }
 
-        private TYPE GetExpressionValue<TYPE>(Expression e)
-        {
-            if (e is ConstantExpression)
-            {
-                return (TYPE)(e as ConstantExpression).Value;
-            }
-            else if (e is MemberExpression)
-            {
-                MemberExpression me = e as MemberExpression;
-
-                if(me.Member is PropertyInfo)
-                    return (TYPE)(me.Member as PropertyInfo).GetValue((me.Expression as ConstantExpression).Value, null);
-                else if(me.Member is FieldInfo)
-                    return (TYPE)(me.Member as FieldInfo).GetValue((me.Expression as ConstantExpression).Value);
-                else
-                    throw new NotSupportedException(string.Format("Member of MemberExpression is not supported: {0}", e.ToString()));
-            }
-            else
-            {
-                throw new NotSupportedException(string.Format("Unable to get Value, Expression is not supported: {0}", e.ToString()));
-            }
-        }
-
-        private void VisitMethodCall(MethodCallExpression m)
+        protected override void VisitMethodCall(MethodCallExpression m)
         {
             if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Where")
             {
-                // Start filter here but visit first LambdaExpresseion
-                setFilter = true;
+                // Save filter
                 if (_filter == null)
                 {
                     _filter = m.Arguments[1];
                 }
-                this.Visit(m.Arguments[1]);
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Select")
             {
-                // No projection supportet, just finish
+                // No projection supportet, just ignore
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Single")
             {
                 SearchType = SearchTypeEnum.GetObject;
-                this.Visit(m.Arguments[1]);
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "SingleOrDefault")
             {
                 SearchType = SearchTypeEnum.GetObjectOrNew;
-                this.Visit(m.Arguments[1]);
             }
             else
             {
-                if (setFilter)
-                {
-                    // OK, lets loop through all Methods, Server will reject illegal Method Calls
-                    foreach (var a in m.Arguments)
-                    {
-                        this.Visit(a);
-                    }
-                }
-                else
+                if (_filter == null)
                 {
                     // It is OK to check that here, becaue GetList will only take a Lambda Expression as an argument
                     // and does _always_ a SELECT.
@@ -245,8 +179,9 @@ namespace Kistl.API.Client
                     throw new NotSupportedException(string.Format("Method Call '{0}' is only supported in a WHERE clause", m.Method.Name));
                 }
             }
-        }
 
+            base.VisitMethodCall(m);
+        }
         #endregion
     }
 }

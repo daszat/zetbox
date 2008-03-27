@@ -57,9 +57,8 @@ namespace Kistl.Client
                         // Prefetch Modules
                         using (KistlContext ctx = new KistlContext())
                         {
-                            _ObjectClasses = new Dictionary<ObjectType, Kistl.App.Base.ObjectClass>();
-                            ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().ForEach(o => _ObjectClasses.Add(
-                                new ObjectType(o.Module.Namespace, o.ClassName), o));
+                            _ObjectClasses = ctx.GetQuery<Kistl.App.Base.ObjectClass>()
+                                .ToDictionary(o => new ObjectType(o.Module.Namespace, o.ClassName));
                         }
                     }
                 }
@@ -85,8 +84,7 @@ namespace Kistl.Client
                     {
                         using (KistlContext ctx = new KistlContext())
                         {
-                            _Modules = new Dictionary<string, Kistl.App.Base.Module>();
-                            ctx.GetQuery<Kistl.App.Base.Module>().ToList().ForEach(m => _Modules.Add(m.ModuleName, m));
+                            _Modules = ctx.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
 
                             // Test!! Legal
                             var test = from m in ctx.GetQuery<Kistl.App.Base.Module>()
@@ -94,7 +92,7 @@ namespace Kistl.Client
                                            m.ModuleName.StartsWith("K") 
                                            && m.Namespace.Length > 1 
                                            && m.ModuleName == "KistlBase" 
-                                           //&& m.ModuleName.EndsWith("l")
+                                           && m.ModuleName.EndsWith("e")
                                        select m;
                             foreach (var t in test)
                             {
@@ -110,11 +108,9 @@ namespace Kistl.Client
                                 System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", t.ModuleName));
                             }
 
-                            // Test!! Illegal? 
-                            // TODO: new DateTime is missing.... implement NewExpression
-                            DateTime dt = DateTime.Parse("1.1.1978");
+                            // Test!! Illegal!!
                             var test3 = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
-                                        where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > dt).Count() > 0
+                                        where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
                                         select z;
                             foreach (var z in test3)
                             {

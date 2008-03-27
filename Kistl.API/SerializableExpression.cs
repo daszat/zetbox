@@ -183,6 +183,9 @@ namespace Kistl.API
             if (e is ParameterExpression)
                 return new SerializableParameterExpression((ParameterExpression)e, ctx);
 
+            if (e is NewExpression)
+                return new SerializableNewExpression((NewExpression)e, ctx);
+
             throw new NotSupportedException(string.Format("Nodetype {0} is not supported: {1}", e.NodeType, e.ToString()));
         }
 
@@ -332,10 +335,7 @@ namespace Kistl.API
 
             if (e.Arguments != null)
             {
-                foreach (Expression ce in e.Arguments)
-                {
-                    Children.Add(SerializableExpression.FromExpression(ce, ctx));
-                }
+                Children = e.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx)).ToList();
             }
         }
 
@@ -510,4 +510,40 @@ namespace Kistl.API
         }
     }
     #endregion
+
+    #region NewExpression
+    [Serializable]
+    public class SerializableNewExpression : SerializableCompoundExpression
+    {
+        private ConstructorInfo constructor;
+        private List<MemberInfo> members;
+
+        internal SerializableNewExpression(NewExpression source, SerializationContext ctx)
+            : base(source, ctx)
+        {
+            constructor = source.Constructor;
+            if(source.Members != null)
+            {
+                members = source.Members.ToList();
+            }
+
+            Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx)).ToList();
+        }
+
+        internal override Expression ToExpressionInternal(SerializationContext ctx)
+        {
+            List<Expression> arguments = Children.Select(a => a.ToExpressionInternal(ctx)).ToList();
+
+            if (members != null)
+            {
+                return Expression.New(constructor, arguments, members.ToArray());
+            }
+            else
+            {
+                return Expression.New(constructor, arguments);
+            }
+        }
+    }
+    #endregion
+
 }

@@ -118,9 +118,7 @@ namespace Kistl.Server
 
                 if (filter != null)
                 {
-                    result = result.Provider.CreateQuery<T>(
-                        Expression.Call(typeof(Queryable), "Where", 
-                        new Type[] { result.ElementType }, result.Expression, filter));
+                    result = result.AddFilter<T>(filter);
                 }
 
                 return result;
