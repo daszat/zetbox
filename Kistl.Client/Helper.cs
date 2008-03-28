@@ -87,7 +87,7 @@ namespace Kistl.Client
                             _Modules = ctx.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
 
                             // Test!! Legal
-                            var test = from m in ctx.GetQuery<Kistl.App.Base.Module>()
+                            /*var test = from m in ctx.GetQuery<Kistl.App.Base.Module>()
                                        where 
                                            m.ModuleName.StartsWith("K") 
                                            && m.Namespace.Length > 1 
@@ -100,7 +100,7 @@ namespace Kistl.Client
                             }
 
                             // Test!! Illegal!!!
-                            /*var test2 = from m in ctx.GetQuery<Kistl.App.Base.Module>()
+                            var test2 = from m in ctx.GetQuery<Kistl.App.Base.Module>()
                                         where m.Assemblies.Sum(a => a.AssemblyName.Length) > 0
                                         select m;
                             foreach (var t in test2)

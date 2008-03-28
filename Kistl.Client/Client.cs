@@ -35,7 +35,12 @@ namespace Kistl.Client
                     // Create a new AppDomain for the Server!
                     // Damit trennt man den Server schön brav vom Client & kann 
                     // CustomActionsManagerFactory.Init zwei mal aufrufen :-)
-                    serverDomain = AppDomain.CreateDomain("ServerAppDomain");
+                    System.Diagnostics.Trace.WriteLine("CurrentAppDomain path = " + AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+                    serverDomain = AppDomain.CreateDomain("ServerAppDomain", 
+                        AppDomain.CurrentDomain.Evidence, 
+                        AppDomain.CurrentDomain.SetupInformation);
+
+                    System.Diagnostics.Trace.WriteLine("ServerAppDomain path = " + serverDomain.SetupInformation.ApplicationBase);
 
                     SplashScreen.SetInfo("Setting up Server");
                     Kistl.API.APIInit initServer = (Kistl.API.APIInit)serverDomain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
