@@ -10,21 +10,33 @@ using System.Reflection;
 
 namespace Kistl.API.Client
 {
+    /// <summary>
+    /// Provider for Kistl Linq Provider
+    /// </summary>
+    /// <typeparam name="T">Objecttype to search</typeparam>
     internal class KistlContextProvider<T> : ExpressionTreeVisitor, IQueryProvider
     {
         private ObjectType _type;
         private KistlContext _context;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private int ID = API.Helper.INVALIDID;
         private enum SearchTypeEnum
         {
-            Unknown,
             GetObject,
             GetObjectOrNew,
             GetList,
         }
 
-        private SearchTypeEnum SearchType = SearchTypeEnum.Unknown;
+        /// <summary>
+        /// Searchtype, default is GetList.
+        /// </summary>
+        private SearchTypeEnum SearchType = SearchTypeEnum.GetList;
+        /// <summary>
+        /// Filter Expression for GetList SearchType.
+        /// </summary>
         private Expression _filter = null;
 
         internal KistlContextProvider(KistlContext ctx, ObjectType type)
@@ -97,8 +109,15 @@ namespace Kistl.API.Client
             return result;
         }
 
+        /// <summary>
+        /// Performs a GetObjectCall. if ID is -1 null will be returned.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>A Object or null, if ID is -1 or an Expeption, if the Object was not found.</returns>
         private object GetObjectCall(Expression e)
         {
+            if (ID == Helper.INVALIDID) return null;
+
             T result = (T)(IDataObject)CacheController<BaseClientDataObject>.Current.Get(_type, ID);
             if (result == null)
             {
@@ -134,10 +153,13 @@ namespace Kistl.API.Client
         #region Visits
         protected override void VisitBinary(BinaryExpression b)
         {
-            MemberExpression m = (MemberExpression)b.Left;
-            if (m.Member.DeclaringType == typeof(BaseClientDataObject) && m.Member.Name == "ID")
+            if (b.Left is MemberExpression)
             {
-                ID = b.Right.GetExpressionValue<int>();
+                MemberExpression m = (MemberExpression)b.Left;
+                if (m.Member.DeclaringType == typeof(BaseClientDataObject) && m.Member.Name == "ID")
+                {
+                    ID = b.Right.GetExpressionValue<int>();
+                }
             }
 
             base.VisitBinary(b);

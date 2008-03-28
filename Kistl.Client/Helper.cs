@@ -99,24 +99,23 @@ namespace Kistl.Client
                                 System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", t.ModuleName));
                             }
 
-                            // Test!! Illegal? 
-                            var test2 = from m in ctx.GetQuery<Kistl.App.Base.Module>()
+                            // Test!! Illegal!!!
+                            /*var test2 = from m in ctx.GetQuery<Kistl.App.Base.Module>()
                                         where m.Assemblies.Sum(a => a.AssemblyName.Length) > 0
                                         select m;
                             foreach (var t in test2)
                             {
                                 System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", t.ModuleName));
-                            }
+                            }*/
 
                             // Test!! Illegal!!
-                            var test3 = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
+                            /*var test3 = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
                                         where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
                                         select z;
                             foreach (var z in test3)
                             {
                                 System.Diagnostics.Debug.WriteLine(string.Format("TestFetch: {0}", z.Kontoname));
-                            }
-
+                            }*/
                         }
                     }
                 }

@@ -29,7 +29,8 @@ namespace Kistl.Server
                         IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetObject(m.ID);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
-
+                        
+                        // TODO: Das kann NULL sein!!!
                         obj.ToStream(sw);
 
                         result.Seek(0, SeekOrigin.Begin);

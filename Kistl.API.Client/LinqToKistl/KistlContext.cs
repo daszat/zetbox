@@ -22,16 +22,15 @@ namespace Kistl.API.Client
             return new KistlContextQuery<T>(this, new ObjectType(typeof(T)));
         }
 
+        public List<T> GetListOf<T>(BaseClientDataObject obj, string propertyName)
+        {
+            return this.GetListOf<T>(obj.Type, obj.ID, propertyName);
+        }
+
         public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName)
         {
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
             return ((KistlContextProvider<T>)query.Provider).GetListOf(ID, propertyName);
-        }
-
-        public List<T> GetListOf<T>(BaseClientDataObject obj, string propertyName)
-        {
-            KistlContextQuery<T> query = new KistlContextQuery<T>(this, obj.Type);
-            return ((KistlContextProvider<T>)query.Provider).GetListOf(obj.ID, propertyName);
         }
 
         public T Create<T>() where T : BaseClientDataObject, new()
