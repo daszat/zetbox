@@ -16,6 +16,7 @@
             </MenuItem>
             <MenuItem Header="Admin">
                 <MenuItem Header="Generate Code and Database" Name="menu_Generate" Click="menu_Generate_Click" />
+                <MenuItem Header="Test Templates" Name="menu_Template" Click="menu_Template_Click" />
             </MenuItem>
         </Menu>
         <Slider Name="WorkspaceSlider" DockPanel.Dock="Bottom" Value="1.0" Minimum="0.5" Maximum="3.0" />

@@ -161,6 +161,18 @@ namespace Kistl.Client
             }
             SplashScreen.HideSplashScreen();
         }
+
+        private void menu_Template_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new Kistl.GUI.Renderer.WPF.WPFWindow();
+
+            KistlContext ctx = new KistlContext();
+
+            var q = ctx.GetQuery<Kistl.App.Projekte.Task>();
+            var task9 = (from t in q where t.ID == 9 select t).Single();
+
+            win.Show(ctx, task9);
+        }
     }
 
     internal class NodeTemplateSelector : DataTemplateSelector

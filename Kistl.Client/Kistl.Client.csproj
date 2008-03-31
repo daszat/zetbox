@@ -130,6 +130,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Renderer.WPF\WPFWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +165,14 @@
     </Compile>
     <Compile Include="ObjectControl.xaml.cs">
       <DependentUpon>ObjectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\Container.cs" />
+    <Compile Include="Renderer.WPF\Control.cs" />
+    <Compile Include="Renderer.WPF\ControlImplementation.cs" />
+    <Compile Include="Renderer.WPF\Template.cs" />
+    <Compile Include="Renderer.WPF\Visual.cs" />
+    <Compile Include="Renderer.WPF\WPFWindow.xaml.cs">
+      <DependentUpon>WPFWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
