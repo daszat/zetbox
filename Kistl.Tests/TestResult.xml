@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit" total="6" failures="0" not-run="0" date="2008-03-29" time="14:51:04">
+  <environment nunit-version="2.4.6.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit" success="True" time="21.700" asserts="0">
+    <results>
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\bin\debug\..\Debug\Kistl.Tests.dll" success="True" time="21.700" asserts="0">
+        <results>
+          <test-suite name="Kistl" success="True" time="21.700" asserts="0">
+            <results>
+              <test-suite name="Tests" success="True" time="21.700" asserts="0">
+                <results>
+                  <test-suite name="IntegrationTests" success="True" time="21.700" asserts="0">
+                    <results>
+                      <test-suite name="LinqToKistlTests" success="True" time="1.825" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetList" executed="True" success="True" time="0.250" asserts="1" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterIllegal" executed="True" success="True" time="0.281" asserts="0" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterLegal" executed="True" success="True" time="0.094" asserts="1" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetObject" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.NewObject" executed="True" success="True" time="0.967" asserts="6" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.SetObject" executed="True" success="True" time="0.218" asserts="3" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

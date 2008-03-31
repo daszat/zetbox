@@ -65,6 +65,11 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.DateTimeParameter), ElementName="DateTimeParameter")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectParameter), ElementName="ObjectParameter")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.CLRObjectParameter), ElementName="CLRObjectParameter")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.Interface), ElementName="Interface")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.Enumeration), ElementName="Enumeration")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.EnumerationEntry), ElementName="EnumerationEntry")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.EnumerationProperty), ElementName="EnumerationProperty")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Test.TestObjClass), ElementName="TestObjClass")]
         public List<Object> Objects
         {
             get
@@ -122,6 +127,11 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.DateTimeParameter), ElementName="DateTimeParameter")]
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectParameter), ElementName="ObjectParameter")]
         [XmlElement(Type=typeof(Kistl.App.Base.CLRObjectParameter), ElementName="CLRObjectParameter")]
+        [XmlElement(Type=typeof(Kistl.App.Base.Interface), ElementName="Interface")]
+        [XmlElement(Type=typeof(Kistl.App.Base.Enumeration), ElementName="Enumeration")]
+        [XmlElement(Type=typeof(Kistl.App.Base.EnumerationEntry), ElementName="EnumerationEntry")]
+        [XmlElement(Type=typeof(Kistl.App.Base.EnumerationProperty), ElementName="EnumerationProperty")]
+        [XmlElement(Type=typeof(Kistl.App.Test.TestObjClass), ElementName="TestObjClass")]
         public Object Object
         {
             get

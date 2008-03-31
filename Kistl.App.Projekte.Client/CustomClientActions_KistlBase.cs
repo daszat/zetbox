@@ -16,7 +16,7 @@ namespace Kistl.App.Base
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_ObjectClass(ObjectClass obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_DataType(DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Module.Namespace + "." + obj.ClassName;
         }
@@ -121,6 +121,11 @@ namespace Kistl.App.Base
         public void OnGetDataType_DateTimeProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "System.DateTime";
+        }
+
+        public void OnGetDataType_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
         }
 
         // Parameter

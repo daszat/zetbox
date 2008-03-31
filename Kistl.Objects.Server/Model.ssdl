@@ -36,9 +36,15 @@
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters" />
     <EntitySet Name="ObjectParameter" EntityType="Model.Store.ObjectParameter" Table="ObjectParameters" />
     <EntitySet Name="CLRObjectParameter" EntityType="Model.Store.CLRObjectParameter" Table="CLRObjectParameters" />
+    <EntitySet Name="Interface" EntityType="Model.Store.Interface" Table="Interfaces" />
+    <EntitySet Name="Enumeration" EntityType="Model.Store.Enumeration" Table="Enumerations" />
+    <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries" />
+    <EntitySet Name="EnumerationProperty" EntityType="Model.Store.EnumerationProperty" Table="EnumerationProperties" />
+    <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
+    <EntitySet Name="ObjectClass_ImplementsInterfacesCollectionEntry" EntityType="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Table="ObjectClasses_ImplementsInterfacesCollection" />
     <AssociationSet Name="FK_BaseProperty_DataType" Association="Model.Store.FK_BaseProperty_DataType">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -151,6 +157,22 @@
       <End Role="A_Assembly" EntitySet="Assembly" />
       <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
     </AssociationSet>
+    <AssociationSet Name="FK_EnumerationEntry_Enumeration" Association="Model.Store.FK_EnumerationEntry_Enumeration">
+      <End Role="A_Enumeration" EntitySet="Enumeration" />
+      <End Role="B_EnumerationEntry" EntitySet="EnumerationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnumerationProperty_Enumeration" Association="Model.Store.FK_EnumerationProperty_Enumeration">
+      <End Role="A_Enumeration" EntitySet="Enumeration" />
+      <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface" Association="Model.Store.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface">
+      <End Role="A_Interface" EntitySet="Interface" />
+      <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" EntitySet="ObjectClass_ImplementsInterfacesCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestObjClass_Kunde" Association="Model.Store.FK_TestObjClass_Kunde">
+      <End Role="A_Kunde" EntitySet="Kunde" />
+      <End Role="B_TestObjClass" EntitySet="TestObjClass" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -162,6 +184,10 @@
     <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" Association="Model.Store.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto">
       <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
       <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass" Association="Model.Store.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass">
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" EntitySet="ObjectClass_ImplementsInterfacesCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -444,6 +470,43 @@
     <Property Name="fk_Assembly" Type="int" Nullable="true" />
     <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="Interface">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Enumeration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnumerationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Enumeration" Type="int" Nullable="true" />
+    <Property Name="EnumerationEntryName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="EnumValue" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EnumerationProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Enumeration" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TestObjClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="TestEnumProp" Type="int" Nullable="true" />
+    <Property Name="fk_ObjectProp" Type="int" Nullable="true" />
+  </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -467,6 +530,14 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Zeitkonto" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ObjectClass_ImplementsInterfacesCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
+    <Property Name="fk_ImplementsInterfaces" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_BaseProperty_DataType">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
@@ -804,6 +875,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EnumerationEntry_Enumeration">
+    <End Role="A_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
+    <End Role="B_EnumerationEntry" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Enumeration">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_EnumerationEntry">
+        <PropertyRef Name="fk_Enumeration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnumerationProperty_Enumeration">
+    <End Role="A_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
+    <End Role="B_EnumerationProperty" Type="Model.Store.EnumerationProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Enumeration">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_EnumerationProperty">
+        <PropertyRef Name="fk_Enumeration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface">
+    <End Role="A_Interface" Type="Model.Store.Interface" Multiplicity="0..1" />
+    <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" Type="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Interface">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectClass_ImplementsInterfacesCollectionEntry">
+        <PropertyRef Name="fk_ImplementsInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestObjClass_Kunde">
+    <End Role="A_Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
+    <End Role="B_TestObjClass" Type="Model.Store.TestObjClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Kunde">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_TestObjClass">
+        <PropertyRef Name="fk_ObjectProp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt">
     <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Store.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
@@ -837,6 +956,18 @@
       </Principal>
       <Dependent Role="B_Zeitkonto_MitarbeiterCollectionEntry">
         <PropertyRef Name="fk_Zeitkonto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass">
+    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" Type="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectClass_ImplementsInterfacesCollectionEntry">
+        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -33,8 +33,11 @@ namespace Kistl.App.Base
         
         private List<Kistl.App.Base.ObjectClass> _SubClasses;
         
+        private NotifyingObservableCollection<ObjectClass_ImplementsInterfacesCollectionEntry> _ImplementsInterfaces;
+        
         public ObjectClass()
         {
+            _ImplementsInterfaces = new NotifyingObservableCollection<ObjectClass_ImplementsInterfacesCollectionEntry>(this, "ImplementsInterfaces");
         }
         
         public string TableName
@@ -90,6 +93,14 @@ namespace Kistl.App.Base
             }
         }
         
+        public NotifyingObservableCollection<ObjectClass_ImplementsInterfacesCollectionEntry> ImplementsInterfaces
+        {
+            get
+            {
+                return _ImplementsInterfaces;
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -132,11 +143,13 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
             ((ObjectClass)obj)._TableName = this._TableName;
             ((ObjectClass)obj)._fk_BaseObjectClass = this._fk_BaseObjectClass;
+            ((ObjectClass)obj)._ImplementsInterfaces = this._ImplementsInterfaces.Clone(obj);
         }
         
         public override void AttachToContext(KistlContext ctx)
         {
             base.AttachToContext(ctx);
+            _ImplementsInterfaces.ForEach(i => i.AttachToContext(ctx));;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -144,6 +157,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._TableName, sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
+            BinarySerializer.ToBinary(this.ImplementsInterfaces, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -151,6 +165,104 @@ namespace Kistl.App.Base
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._TableName, sr);
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
+            BinarySerializer.FromBinaryCollectionEntries(out this._ImplementsInterfaces, sr, ctx, this, "ImplementsInterfaces");
+        }
+    }
+    
+    public class ObjectClass_ImplementsInterfacesCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_Value = Helper.INVALIDID;
+        
+        private int _fk_Parent = Helper.INVALIDID;
+        
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Interface Value
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.Base.Interface>().Single(o => o.ID == fk_Value);
+            }
+            set
+            {
+                base.NotifyPropertyChanging("Value");
+                _fk_Value = value.ID;
+                base.NotifyPropertyChanged("Value");
+            }
+        }
+        
+        [XmlIgnore()]
+        public ObjectClass Parent
+        {
+            get
+            {
+                return Context.GetQuery<ObjectClass>().Single(o => o.ID == fk_Parent);
+            }
+            set
+            {
+                _fk_Parent = value.ID;
+            }
+        }
+        
+        public int fk_Value
+        {
+            get
+            {
+                return _fk_Value;
+            }
+            set
+            {
+                base.NotifyPropertyChanging("Value");
+                _fk_Value = value;
+                base.NotifyPropertyChanged("Value");
+            }
+        }
+        
+        public int fk_Parent
+        {
+            get
+            {
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
+        }
+        
+        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        {
+            base.FromStream(ctx, sr);
+            BinarySerializer.FromBinary(out this._fk_Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+        }
+        
+        public override void CopyTo(Kistl.API.ICollectionEntry obj)
+        {
+            base.CopyTo(obj);
+            ((ObjectClass_ImplementsInterfacesCollectionEntry)obj)._fk_Value = this.fk_Value;
+            ((ObjectClass_ImplementsInterfacesCollectionEntry)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

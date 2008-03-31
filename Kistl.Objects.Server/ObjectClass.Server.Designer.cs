@@ -9,6 +9,8 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface", "A_Interface", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Interface), "B_ObjectClass_ImplementsInterfacesCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_ObjectClass_ImplementsInterfacesCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry))]
 
 namespace Kistl.App.Base
 {
@@ -99,6 +101,17 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass", "B_ObjectClass_ImplementsInterfacesCollectionEntry")]
+        public EntityCollection<ObjectClass_ImplementsInterfacesCollectionEntry> ImplementsInterfaces
+        {
+            get
+            {
+                EntityCollection<ObjectClass_ImplementsInterfacesCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<ObjectClass_ImplementsInterfacesCollectionEntry>("Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass", "B_ObjectClass_ImplementsInterfacesCollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -148,6 +161,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._TableName, sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
+            BinarySerializer.ToBinary(this.ImplementsInterfaces, sw);
         }
         
         public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
@@ -155,6 +169,120 @@ namespace Kistl.App.Base
             base.FromStream(ctx, sr);
             BinarySerializer.FromBinary(out this._TableName, sr);
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
+            BinarySerializer.FromBinaryCollectionEntries(this.ImplementsInterfaces, sr, ctx);
+        }
+    }
+    
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectClass_ImplementsInterfacesCollectionEntry")]
+    public class ObjectClass_ImplementsInterfacesCollectionEntry : Kistl.API.Server.BaseServerCollectionEntry
+    {
+        
+        private int _ID = Helper.INVALIDID;
+        
+        private int _fk_Value = Helper.INVALIDID;
+        
+        private int _fk_Parent = Helper.INVALIDID;
+        
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface", "A_Interface")]
+        public Kistl.App.Base.Interface Value
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Interface> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Interface>("Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface", "A_Interface");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Interface> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Interface>("Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface", "A_Interface");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass", "A_ObjectClass")]
+        public ObjectClass Parent
+        {
+            get
+            {
+                EntityReference<ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ObjectClass>("Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass", "A_ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ObjectClass>("Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass", "A_ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value;
+            }
+        }
+        
+        public int fk_Value
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Value == Helper.INVALIDID && Value != null)
+                {
+                    _fk_Value = Value.ID;
+                }
+                return _fk_Value;
+            }
+            set
+            {
+                _fk_Value = value;
+            }
+        }
+        
+        public int fk_Parent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Parent == Helper.INVALIDID && Parent != null)
+                {
+                    _fk_Parent = Parent.ID;
+                }
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
+        }
+        
+        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        {
+            base.FromStream(ctx, sr);
+            BinarySerializer.FromBinary(out this._fk_Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+        }
+        
+        public override void CopyTo(Kistl.API.ICollectionEntry obj)
+        {
+            base.CopyTo(obj);
+            ((ObjectClass_ImplementsInterfacesCollectionEntry)obj)._fk_Value = this.fk_Value;
+            ((ObjectClass_ImplementsInterfacesCollectionEntry)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

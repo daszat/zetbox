@@ -104,6 +104,13 @@ namespace Kistl.App.Base
             e.Result = "System.DateTime";
         }
 
+        public void OnGetDataType_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            // TODO: Change this back to Enum, when Interfaces for DataObjects are implemented
+            // e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
+            e.Result = "System.Int32";
+        }
+
         public void OnGetDataType_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.ReferenceObjectClass.Module.Namespace + "." + obj.ReferenceObjectClass.ClassName;

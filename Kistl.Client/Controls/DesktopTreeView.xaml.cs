@@ -140,9 +140,20 @@ namespace Kistl.Client.Controls
 
             public void RefreshChildren()
             {
-                _InstancesNodes.Clear();
-                ObjectClass.Context.GetQuery(new Kistl.API.ObjectType(ObjectClass.Module.Namespace, ObjectClass.ClassName)).ToList()
-                    .ForEach(i => _InstancesNodes.Add(new InstanceNode(i)));
+                try
+                {
+                    Mouse.OverrideCursor = Cursors.Wait;
+                    _InstancesNodes.Clear();
+                    if (ObjectClass is Kistl.App.Base.ObjectClass)
+                    {
+                        ObjectClass.Context.GetQuery(new Kistl.API.ObjectType(ObjectClass.Module.Namespace, ObjectClass.ClassName)).ToList()
+                            .ForEach(i => _InstancesNodes.Add(new InstanceNode(i)));
+                    }
+                }
+                finally
+                {
+                    Mouse.OverrideCursor = Cursors.Arrow;
+                }
             }
             #endregion
         }
@@ -175,41 +186,51 @@ namespace Kistl.Client.Controls
             try
             {
                 if (treeView.SelectedItem == null) return;
-                if (!(treeView.SelectedItem is ObjectClassNode)) return;
 
-                ObjectClassNode n = (ObjectClassNode)treeView.SelectedItem;
-
-                ObjectType resultObjectType = new ObjectType(n.ObjectClass.Module.Namespace, n.ObjectClass.ClassName);
-
-                Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[resultObjectType];
-
-                if (objClass.SubClasses.Count > 0)
+                ObjectType resultObjectType = null;
+                INode n = null;
+                if (treeView.SelectedItem is ObjectClassNode)
                 {
-                    // TODO: Das ist noch nicht ganz konsistent
-                    Dialogs.ChooseObjectClass dlg = new Kistl.Client.Dialogs.ChooseObjectClass();
-                    dlg.BaseObjectClass = objClass;
+                    n = (ObjectClassNode)treeView.SelectedItem;
+                    resultObjectType = new ObjectType(((ObjectClassNode)n).ObjectClass.Module.Namespace, ((ObjectClassNode)n).ObjectClass.ClassName);
+                    Kistl.App.Base.ObjectClass objClass = Helper.ObjectClasses[resultObjectType];
 
-                    if (dlg.ShowDialog() == true)
+                    if (objClass.SubClasses.Count > 0)
                     {
-                        resultObjectType = new ObjectType(dlg.ResultObjectClass.Module.Namespace, dlg.ResultObjectClass.ClassName);
-                    }
-                    else
-                    {
-                        // Do nothing
-                        return;
+                        // TODO: Das ist noch nicht ganz konsistent
+                        Dialogs.ChooseObjectClass dlg = new Kistl.Client.Dialogs.ChooseObjectClass();
+                        dlg.BaseObjectClass = objClass;
+
+                        if (dlg.ShowDialog() == true)
+                        {
+                            resultObjectType = new ObjectType(dlg.ResultObjectClass.Module.Namespace, dlg.ResultObjectClass.ClassName);
+                        }
+                        else
+                        {
+                            // Do nothing
+                            return;
+                        }
                     }
                 }
-
-                ObjectWindow wnd = new ObjectWindow();
-                wnd.ObjectType = resultObjectType;
-                wnd.ObjectID = API.Helper.INVALIDID;
-
-                wnd.ShowDialog();
-
-                if (wnd.ObjectID != API.Helper.INVALIDID)
+                else if (treeView.SelectedItem is ModuleNode)
                 {
-                    // ReBind
-                    n.RefreshChildren();
+                    n = (ModuleNode)treeView.SelectedItem;
+                    resultObjectType = new ObjectType("Kistl.App.Base", "ObjectClass");
+                }
+
+                if (resultObjectType != null && n != null)
+                {
+                    ObjectWindow wnd = new ObjectWindow();
+                    wnd.ObjectType = resultObjectType;
+                    wnd.ObjectID = API.Helper.INVALIDID;
+
+                    wnd.ShowDialog();
+
+                    if (wnd.ObjectID != API.Helper.INVALIDID)
+                    {
+                        // ReBind
+                        n.RefreshChildren();
+                    }
                 }
             }
             catch (Exception ex)

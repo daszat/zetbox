@@ -302,7 +302,7 @@ namespace Kistl.Server.Generators.SQLServer
                         // ValueTypeProperty
                         xml.WriteStartElement("Property");
                         xml.WriteAttributeString("Name", p.PropertyName);
-                        xml.WriteAttributeString("Type", Type.GetType(p.GetDataType()).Name);
+                        xml.WriteAttributeString("Type", p is EnumerationProperty ? "Int32" : Type.GetType(p.GetDataType()).Name);
                         if (p is StringProperty)
                         {
                             xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
@@ -797,7 +797,7 @@ namespace Kistl.Server.Generators.SQLServer
                 {
                     xml.WriteAttributeString("Name", prop.PropertyName);
                 }
-                xml.WriteAttributeString("Type", prop is ObjectReferenceProperty ? "int" : SQLServerHelper.GetDBType(prop.GetDataType()));
+                xml.WriteAttributeString("Type", SQLServerHelper.GetDBType(prop));
                 if (prop is StringProperty)
                 {
                     xml.WriteAttributeString("MaxLength", ((StringProperty)prop).Length.ToString());
@@ -845,7 +845,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         xml.WriteAttributeString("Name", p.PropertyName);
                     }
-                    xml.WriteAttributeString("Type", p is ObjectReferenceProperty ? "int" : SQLServerHelper.GetDBType(p.GetDataType()));
+                    xml.WriteAttributeString("Type", SQLServerHelper.GetDBType(p));
                     if (p is StringProperty)
                     {
                         xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());

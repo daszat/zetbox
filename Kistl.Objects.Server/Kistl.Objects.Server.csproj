@@ -68,9 +68,14 @@
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
     <Compile Include="DoubleParameter.Server.Designer.cs" />
     <Compile Include="DoubleProperty.Server.Designer.cs" />
+    <Compile Include="Enumeration.Server.Designer.cs" />
+    <Compile Include="EnumerationEntry.Server.Designer.cs" />
+    <Compile Include="EnumerationProperty.Server.Designer.cs" />
     <Compile Include="Icon.Server.Designer.cs" />
+    <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />
     <Compile Include="IntProperty.Server.Designer.cs" />
+    <Compile Include="ITestInterface.Server.Designer.cs" />
     <Compile Include="Kostenstelle.Server.Designer.cs" />
     <Compile Include="Kostentraeger.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />
@@ -89,6 +94,8 @@
     <Compile Include="Taetigkeit.Server.Designer.cs" />
     <Compile Include="TaetigkeitsArt.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
+    <Compile Include="TestEnum.Server.Designer.cs" />
+    <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="Zeitkonto.Server.Designer.cs" />
   </ItemGroup>

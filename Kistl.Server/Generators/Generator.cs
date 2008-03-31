@@ -110,16 +110,6 @@ namespace Kistl.Server.Generators
             return GetAssociationName(parentClass.Classname, childClass.Classname);
         }
 
-        /*public static string GetAssociationName(ObjectType parentClass, ObjectClass childClass)
-        {
-            return GetAssociationName(parentClass.Classname, childClass.ClassName);
-        }
-
-        public static string GetAssociationName(ObjectClass parentClass, ObjectType childClass)
-        {
-            return GetAssociationName(parentClass.ClassName, childClass.Classname);
-        }*/
-
         public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass)
         {
             return GetAssociationName(parentClass.ClassName, childClass.ClassName);
@@ -206,6 +196,18 @@ namespace Kistl.Server.Generators
         {
             return from c in ctx.GetTable<ObjectClass>()
                    select c;
+        }
+
+        public static IQueryable<Interface> GetInterfaceList(Kistl.API.Server.KistlDataContext ctx)
+        {
+            return from i in ctx.GetTable<Interface>()
+                   select i;
+        }
+
+        public static IQueryable<Enumeration> GetEnumList(Kistl.API.Server.KistlDataContext ctx)
+        {
+            return from e in ctx.GetTable<Enumeration>()
+                   select e;
         }
 
         public static IQueryable<Property> GetCollectionProperties(Kistl.API.Server.KistlDataContext ctx)

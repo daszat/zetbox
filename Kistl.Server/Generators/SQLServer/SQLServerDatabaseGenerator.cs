@@ -200,13 +200,13 @@ namespace Kistl.Server.Generators.SQLServer
             if (p is ObjectReferenceProperty)
             {
                 sb.AppendFormat(" [fk_{0}] ", p.PropertyName);
-                sb.Append("int");
             }
             else
             {
                 sb.AppendFormat(" [{0}] ", p.PropertyName);
-                sb.Append(SQLServerHelper.GetDBType(p.GetDataType()));
             }
+
+            sb.Append(SQLServerHelper.GetDBType(p));
 
             if (p is StringProperty)
             {

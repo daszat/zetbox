@@ -13,6 +13,37 @@ namespace Kistl.API
     /// </summary>
     public class BinarySerializer
     {
+#if DEBUG
+        private void SyntaxTest()
+        {
+            System.IO.BinaryWriter sw = new System.IO.BinaryWriter(new System.IO.MemoryStream());
+            System.IO.BinaryReader sr= new System.IO.BinaryReader(new System.IO.MemoryStream());
+            int i = 0;
+            bool b = true;
+            string s = "string";
+            Kistl.API.DataObjectState e = DataObjectState.Unmodified;
+            Kistl.API.DataObjectState? en = DataObjectState.Unmodified;
+
+            ToBinary(i, sw);
+            ToBinary(b, sw);
+            ToBinary(s, sw);
+            ToBinary(e, sw);
+            ToBinary(en, sw);
+
+            FromBinary(out i, sr);
+            FromBinary(out b, sr);
+            FromBinary(out s, sr);
+
+            Enum tmp;
+
+            FromBinary(out tmp, sr);
+            e = (Kistl.API.DataObjectState)tmp;
+
+            FromBinary(out tmp, sr);
+            en = (Kistl.API.DataObjectState?)tmp;
+        }
+#endif
+
         #region ToBinary
         /// <summary>
         /// Serialize a bool
@@ -42,6 +73,16 @@ namespace Kistl.API
         public static void ToBinary(int val, System.IO.BinaryWriter sw)
         {
             sw.Write(val);
+        }
+
+        /// <summary>
+        /// Serialize a Enum
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToBinary(Enum val, System.IO.BinaryWriter sw)
+        {
+            if (val != null) { sw.Write(true); sw.Write(Convert.ToInt32(val)); } else sw.Write(false);
         }
 
         /// <summary>
@@ -213,6 +254,17 @@ namespace Kistl.API
         {
             val = sr.ReadInt32();
         }
+
+        /// <summary>
+        /// Deserialize a Enum
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromBinary(out Enum val, System.IO.BinaryReader sr)
+        {
+            val = sr.ReadBoolean() ? (Enum)(object)sr.ReadInt32() : null;
+        }
+
 
         /// <summary>
         /// Deserialize a float

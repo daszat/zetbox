@@ -68,6 +68,11 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationProperty)">
+        <MappingFragment StoreEntitySet="EnumerationProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
         <MappingFragment StoreEntitySet="ObjectReferenceProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -205,6 +210,16 @@
           <ScalarProperty Name="TableName" ColumnName="TableName" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">
+        <MappingFragment StoreEntitySet="Interface">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Enumeration)">
+        <MappingFragment StoreEntitySet="Enumeration">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BaseParameter">
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
@@ -252,6 +267,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EnumerationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntry)">
+        <MappingFragment StoreEntitySet="EnumerationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EnumerationEntryName" ColumnName="EnumerationEntryName" />
+          <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestObjClass">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClass)">
+        <MappingFragment StoreEntitySet="TestObjClass">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StringProp" ColumnName="StringProp" />
+          <ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -270,6 +303,13 @@
     <EntitySetMapping Name="Zeitkonto_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Zeitkonto_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectClass_ImplementsInterfacesCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass_ImplementsInterfacesCollectionEntry)">
+        <MappingFragment StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -526,6 +566,42 @@
       </EndProperty>
       <Condition ColumnName="fk_Assembly" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_EnumerationEntry_Enumeration" TypeName="Model.FK_EnumerationEntry_Enumeration" StoreEntitySet="EnumerationEntry">
+      <EndProperty Name="A_Enumeration">
+        <ScalarProperty Name="ID" ColumnName="fk_Enumeration" />
+      </EndProperty>
+      <EndProperty Name="B_EnumerationEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Enumeration" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_EnumerationProperty_Enumeration" TypeName="Model.FK_EnumerationProperty_Enumeration" StoreEntitySet="EnumerationProperty">
+      <EndProperty Name="A_Enumeration">
+        <ScalarProperty Name="ID" ColumnName="fk_Enumeration" />
+      </EndProperty>
+      <EndProperty Name="B_EnumerationProperty">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Enumeration" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface" TypeName="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface" StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
+      <EndProperty Name="A_Interface">
+        <ScalarProperty Name="ID" ColumnName="fk_ImplementsInterfaces" />
+      </EndProperty>
+      <EndProperty Name="B_ObjectClass_ImplementsInterfacesCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_ImplementsInterfaces" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_TestObjClass_Kunde" TypeName="Model.FK_TestObjClass_Kunde" StoreEntitySet="TestObjClass">
+      <EndProperty Name="A_Kunde">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectProp" />
+      </EndProperty>
+      <EndProperty Name="B_TestObjClass">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectProp" IsNull="false" />
+    </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
@@ -552,6 +628,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Zeitkonto" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass" TypeName="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass" StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
+      <EndProperty Name="A_ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
+      </EndProperty>
+      <EndProperty Name="B_ObjectClass_ImplementsInterfacesCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

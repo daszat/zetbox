@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateObjects
-        protected override void GenerateObjects(Current current)
+        protected override void GenerateObjects(CurrentObjectClass current)
         {
             base.GenerateObjects(current);
 
@@ -95,7 +95,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateServerDefaultProperties
 
-        protected override void GenerateDefaultProperty_ID(Current current)
+        protected override void GenerateDefaultProperty_ID(CurrentObjectClass current)
         {
             base.GenerateDefaultProperty_ID(current);
 
@@ -112,7 +112,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateValueTypeProperty
-        protected override void GenerateProperties_ValueTypeProperty(Current current)
+        protected override void GenerateProperties_ValueTypeProperty(CurrentObjectClass current)
         {
             base.GenerateProperties_ValueTypeProperty(current);
 
@@ -124,7 +124,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateProperties_ObjectReferenceProperty_Collection
-        protected override void GenerateProperties_ObjectReferenceProperty_Collection(Current current, Current collectionClass, Current serializerValue, Current parent, Current serializerParent)
+        protected override void GenerateProperties_ObjectReferenceProperty_Collection(CurrentObjectClass current, CurrentObjectClass collectionClass, CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent)
         {
             base.GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializerValue, parent, serializerParent);
 
@@ -221,7 +221,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateProperties_ValueTypeProperty_Collection
-        protected override void GenerateProperties_ValueTypeProperty_Collection(Current current, Current collectionClass, Current parent, Current serializerParent)
+        protected override void GenerateProperties_ValueTypeProperty_Collection(CurrentObjectClass current, CurrentObjectClass collectionClass, CurrentObjectClass parent, CurrentObjectClass serializerParent)
         {
             base.GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent);
 
@@ -287,7 +287,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateProperties_ObjectReferenceProperty
 
-        protected override void GenerateProperties_ObjectReferenceProperty(Current current, Current serializer)
+        protected override void GenerateProperties_ObjectReferenceProperty(CurrentObjectClass current, CurrentObjectClass serializer)
         {
             base.GenerateProperties_ObjectReferenceProperty(current, serializer);
 
@@ -329,7 +329,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateProperties_BackReferenceProperty
 
-        protected override void GenerateProperties_BackReferenceProperty(Current current)
+        protected override void GenerateProperties_BackReferenceProperty(CurrentObjectClass current)
         {
             base.GenerateProperties_BackReferenceProperty(current);
 
