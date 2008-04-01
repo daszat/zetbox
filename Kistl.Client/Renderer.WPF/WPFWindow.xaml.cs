@@ -1,24 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
-using Kistl.API.Client;
 using System.Windows.Markup;
 using System.Xml;
-using Kistl.Client.Controls;
-using System.IO;
-using Kistl.Client;
 
+using Kistl.API.Client;
+using Kistl.Client;
+using Kistl.Client.Controls;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -359,7 +353,9 @@ namespace Kistl.GUI.Renderer.WPF
             this.ObjectType = task.Type;
             this.ObjectID = task.ID;
 
+            // should come from DataType
             var template = TaskEditTemplate.Create();
+            // validity check
             if (template.Usage != TemplateUsage.EditControl)
             {
                 throw new ArgumentException(
@@ -369,11 +365,21 @@ namespace Kistl.GUI.Renderer.WPF
                     ));
             }
 
+            var panel = new StackPanel();
+            foreach (var visual in template.VisualTree.Children)
+            {
+                var impl = visual.GetImplementationInfo(Platform.WPF);
+                var widget = CreateWidget(impl);
+                
+                panel.Children.Add(widget);
+            }
+
+            // testing
             var frame = new GroupBox()
             {
-                Header = template.DisplayName
-                //,  Content = RenderTree(template.VisualTree)
-
+                Header = template.DisplayName,
+                Margin = new Thickness(5, 5, 5, 5),
+                Content = panel
             };
 
             this.Content = frame;
@@ -381,34 +387,10 @@ namespace Kistl.GUI.Renderer.WPF
             this.Show();
         }
 
-#if TODO // GUI Rendern
-        private ContentControl RenderTree(Container container)
+        private static System.Windows.Controls.Control CreateWidget(ControlImplementation impl)
         {
-            var control = CreateContainer(container.Control);
-            control.Content = (from c in container.Children select Render(c));
-            return control;
+            Type controlType = Type.GetType(String.Format("{0}, {1}", impl.ClassName, impl.AssemblyName), true);
+            return (System.Windows.Controls.Control)Activator.CreateInstance(controlType);
         }
-
-        private Control Render(Visual v)
-        {
-
-            return Create(v.Control);
-        }
-
-        private ContentControl CreateContainer(Control control)
-        {
-            if (control.Name == "list")
-            {
-                return new GroupBox();
-            }
-
-            return new Label() { Content = control.Description };
-        }
-
-        private Control CreateControl(Control control)
-        {
-            return new TextBox() { Text = control.Description };
-        }
-#endif
     }
 }

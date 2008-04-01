@@ -167,7 +167,6 @@
       <DependentUpon>ObjectControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\Container.cs" />
-    <Compile Include="Renderer.WPF\Control.cs" />
     <Compile Include="Renderer.WPF\ControlImplementation.cs" />
     <Compile Include="Renderer.WPF\Template.cs" />
     <Compile Include="Renderer.WPF\Visual.cs" />

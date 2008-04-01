@@ -11,6 +11,5 @@ namespace Kistl.GUI
     public class Container : Visual
     {
         public IList<Visual> Children { get; set; }
-
     }
 }

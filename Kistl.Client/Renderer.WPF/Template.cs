@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Kistl.App.Projekte;
+
 using Kistl.App.Base;
 using Kistl.Client;
 
@@ -32,20 +30,16 @@ namespace Kistl.GUI
 
     public class TaskEditTemplate : Template
     {
-        private static void AddToList(IList<Visual> visuals, IList<BaseProperty> properties, string propertyName,
+        private static Visual CreateVisual(IList<BaseProperty> properties, string propertyName,
             string controlName, string controlDescription)
         {
             var property = (from p in properties where p.PropertyName == propertyName select p).Single();
-            visuals.Add(
-                new Visual()
-                {
-                    Property = property,
-                    Control = new Control()
-                    {
-                        Name = controlName,
-                        Description = controlDescription
-                    }
-                });
+            return new Visual()
+            {
+                Property = property,
+                Name = controlName,
+                Description = controlDescription
+            };
         }
         public static Template Create()
         {
@@ -54,24 +48,24 @@ namespace Kistl.GUI
             // var visuals = (from p in tTask.Properties select new Visual()).ToList();
             List<Visual> visuals = new List<Visual>();
 
-            /*
+            /* the ID property is not declared in the metadata
              * AddToList(visuals, tTask.Properties, "ID", 
              *   "id", "this control displays an id");
              */
 
-            AddToList(visuals, tTask.Properties, "Projekt",
-                "fk", "this control displays the referenced Object");
-            
-            AddToList(visuals, tTask.Properties, "Name",
-                "string", "this control displays a string");
+            visuals.Add(CreateVisual(tTask.Properties, "Projekt",
+                "fk", "this control displays the referenced Object"));
 
-            AddToList(visuals, tTask.Properties, "DatumVon",
-                "date", "this control displays a date");
-            AddToList(visuals, tTask.Properties, "DatumBis",
-                "date", "this control displays a date");
+            visuals.Add(CreateVisual(tTask.Properties, "Name",
+                "string", "this control displays a string"));
 
-            AddToList(visuals, tTask.Properties, "Aufwand",
-                "number", "this control displays a number");
+            visuals.Add(CreateVisual(tTask.Properties, "DatumVon",
+                "date", "this control displays a date"));
+            visuals.Add(CreateVisual(tTask.Properties, "DatumBis",
+                "date", "this control displays a date"));
+
+            visuals.Add(CreateVisual(tTask.Properties, "Aufwand",
+                "number", "this control displays a number"));
 
             return new TaskEditTemplate()
             {
@@ -80,11 +74,8 @@ namespace Kistl.GUI
                 Class = tTask,
                 VisualTree = new Container()
                 {
-                    Control = new Control()
-                    {
-                        Name = "list",
-                        Description = "a simple list of the contained visuals"
-                    },
+                    Name = "group",
+                    Description = "a simple list of the contained visuals",
                     // Property = ???
                     Children = visuals
                 }
