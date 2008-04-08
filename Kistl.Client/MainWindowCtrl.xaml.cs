@@ -169,9 +169,9 @@ namespace Kistl.Client
             KistlContext ctx = new KistlContext();
 
             var q = ctx.GetQuery<Kistl.App.Projekte.Task>();
-            var task9 = (from t in q where t.ID == 9 select t).Single();
+            var task8 = (from t in q where t.ID == 8 select t).Single();
 
-            win.Show(ctx, task9);
+            win.Show(ctx, task8);
         }
     }
 

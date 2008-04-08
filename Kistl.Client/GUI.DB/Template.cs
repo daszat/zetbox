@@ -4,7 +4,7 @@ using System.Linq;
 using Kistl.App.Base;
 using Kistl.Client;
 
-namespace Kistl.GUI
+namespace Kistl.GUI.DB
 {
     /// <summary>
     /// The abstract entity representing a visualisation of a object
@@ -64,8 +64,8 @@ namespace Kistl.GUI
             visuals.Add(CreateVisual(tTask.Properties, "DatumBis",
                 "date", "this control displays a date"));
 
-            visuals.Add(CreateVisual(tTask.Properties, "Aufwand",
-                "number", "this control displays a number"));
+            // visuals.Add(CreateVisual(tTask.Properties, "Aufwand",
+            //    "number", "this control displays a number"));
 
             return new TaskEditTemplate()
             {
@@ -76,7 +76,7 @@ namespace Kistl.GUI
                 {
                     Name = "group",
                     Description = "a simple list of the contained visuals",
-                    // Property = ???
+                    // Property = ID ???
                     Children = visuals
                 }
             };

@@ -5,11 +5,11 @@
     xmlns:app="clr-namespace:Kistl.Client.Controls"
     MinWidth="400"
     x:Name="EditCtrl"
-    Label="Label"
+    ShortLabel="Label"
     Value="false"
     >
     <DockPanel>
-        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=Label}" />
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
         <CheckBox IsChecked="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
                   IsEnabled="{Binding  ElementName=EditCtrl, Path=IsEnabled, UpdateSourceTrigger=PropertyChanged}"
                   Content="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 

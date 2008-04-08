@@ -6,7 +6,7 @@
     Loaded="UserControl_Loaded"
     x:Name="ListCtrl">
     <DockPanel>
-        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=ListCtrl, Path=Label}" x:Name="lbLabel" />
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=ListCtrl, Path=ShortLabel}" x:Name="lbLabel" />
         <DockPanel>
             <ToolBar DockPanel.Dock="Top">
                 <Button Name="btnNew" Click="btnNew_Click">New</Button>
@@ -17,7 +17,7 @@
                         <DockPanel HorizontalAlignment="Stretch">
                             <Button DockPanel.Dock="Left" Name="btnDelete" Click="btnDelete_Click" 
                                     CommandParameter="{Binding Path=ID}">Delete</Button>
-                            <app:EditPointerProperty Label="" Value="{Binding Path=fk_Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            <app:EditPointerProperty ShortLabel="" Value="{Binding Path=fk_Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                      ObjectType="{Binding ElementName=ListCtrl, Path=ObjectType}"
                                                      Context="{Binding ElementName=ListCtrl, Path=Context}"
                                                      ShowLabel="Collapsed"/>

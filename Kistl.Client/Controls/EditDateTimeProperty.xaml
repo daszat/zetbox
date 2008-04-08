@@ -6,13 +6,15 @@
     xmlns:app="clr-namespace:Kistl.Client.Controls"
     MinWidth="400" 
     x:Name="EditCtrl"
-    Label="Label"
+    ShortLabel="Label"
     Value="2008-01-01"
     >
-    <DockPanel >
-        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=Label}" />
-        <kevin:DatePicker Value="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
-                          IsReadOnly="{Binding  ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+    <DockPanel
+        ToolTip="{Binding ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"
+        >
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
+        <kevin:DatePicker Value="{Binding ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                          IsReadOnly="{Binding ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
                           CanEdit="True"/>
     </DockPanel>
 </app:PropertyControl>

@@ -142,6 +142,7 @@ namespace Kistl.API.Client
 
             if (ctx != null) ctx.Attach(this);
         }
+
     }
 
     public abstract class BaseClientCollectionEntry : ICollectionEntry, ICloneable, INotifyPropertyChanged

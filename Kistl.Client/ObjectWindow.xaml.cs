@@ -65,7 +65,7 @@ namespace Kistl.Client
             Controls.EditSimpleProperty txt = new Controls.EditSimpleProperty();
 
             // Bezeichnung setzen
-            txt.Label = "ID";
+            txt.ShortLabel = "ID";
             txt.IsReadOnly = true;
             txt.Context = this.ctx;
 
@@ -125,7 +125,7 @@ namespace Kistl.Client
                     else if (p is Kistl.App.Base.ObjectReferenceProperty && !((Kistl.App.Base.ObjectReferenceProperty)p).IsList)
                     {
                         Controls.EditPointerProperty pointer = new Kistl.Client.Controls.EditPointerProperty();
-                        pointer.Label = p.PropertyName;
+                        pointer.ShortLabel = p.PropertyName;
                         pointer.ToolTip = p.AltText;
                         pointer.Context = this.ctx;
 
@@ -153,7 +153,7 @@ namespace Kistl.Client
                     else if (p is Kistl.App.Base.ObjectReferenceProperty && ((Kistl.App.Base.ObjectReferenceProperty)p).IsList)
                     {
                         Controls.EditPointerPropertyList pointerList = new Kistl.Client.Controls.EditPointerPropertyList();
-                        pointerList.Label = p.PropertyName;
+                        pointerList.ShortLabel = p.PropertyName;
                         pointerList.ToolTip = p.AltText;
                         pointerList.Context = this.ctx;
 
@@ -175,7 +175,7 @@ namespace Kistl.Client
 
                         // Bezeichnung setzen
                         // TODO: sollte auch gebunden werden
-                        list.Label = p.PropertyName;
+                        list.ShortLabel = p.PropertyName;
                         list.ToolTip = p.AltText;
                         list.Context = this.ctx;
 
@@ -194,7 +194,7 @@ namespace Kistl.Client
                         PropertyControl control = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader(p.GetGUIRepresentation())));
                         // Bezeichnung setzen
                         // TODO: sollte auch gebunden werden
-                        control.Label = p.PropertyName;
+                        control.ShortLabel = p.PropertyName;
                         control.ToolTip = p.AltText;
                         control.Context = this.ctx;
 

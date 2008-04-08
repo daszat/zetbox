@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,14 @@ using System.Windows.Shapes;
 using Kistl.API.Client;
 using Kistl.API;
 using System.ComponentModel;
+using Kistl.GUI;
 
 namespace Kistl.Client.Controls
 {
     /// <summary>
     /// Interaction logic for EditPointerProperty.xaml
     /// </summary>
-    public partial class EditPointerProperty : PropertyControl
+    public partial class EditPointerProperty : PropertyControl, IPointerControl
     {
         public EditPointerProperty()
         {
@@ -35,7 +37,23 @@ namespace Kistl.Client.Controls
 
         // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
-            DependencyProperty.Register("ObjectType", typeof(ObjectType), typeof(EditPointerProperty));
+            DependencyProperty.Register("ObjectType",
+                typeof(ObjectType), typeof(EditPointerProperty),
+                new PropertyMetadata(null));
+
+
+
+        public IEnumerable ItemsSource
+        {
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(EditPointerProperty));
+
+
 
         public Visibility ShowLabel
         {
@@ -54,28 +72,11 @@ namespace Kistl.Client.Controls
             set { Value = value; }
         }
 
-        private void LoadList()
-        {
-            cbValues.ItemsSource = Context.GetQuery(ObjectType).ToList();
-        }
-
-        private void PointerCtrl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            try
-            {
-                LoadList();
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex);
-            }
-        }
-
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+#if false
                 ObjectWindow wnd = new ObjectWindow();
                 wnd.ObjectType = this.ObjectType;
                 wnd.ObjectID = API.Helper.INVALIDID;
@@ -87,6 +88,7 @@ namespace Kistl.Client.Controls
                     LoadList();
                     this.Value = wnd.ObjectID;
                 }
+#endif
             }
             catch (Exception ex)
             {
@@ -115,5 +117,37 @@ namespace Kistl.Client.Controls
 
         }
 
+
+        #region IPointerControl Members
+
+        // these two already exist correctly:
+        // ObjectType IPointerControl.ObjectType { get; set; }
+        // int IPointerControl.TargetID { get; set; }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == ValueProperty)
+            {
+                OnTargetIDChanged(e);
+            }
+        }
+
+        protected virtual void OnTargetIDChanged(DependencyPropertyChangedEventArgs e)
+        {
+            if (_TargetIDChanged != null)
+            {
+                _TargetIDChanged(this, new EventArgs());
+            }
+        }
+
+        private event EventHandler _TargetIDChanged;
+        event EventHandler IPointerControl.TargetIDChanged
+        {
+            add { _TargetIDChanged += value; }
+            remove { _TargetIDChanged -= value; }
+        }
+
+        #endregion
     }
 }

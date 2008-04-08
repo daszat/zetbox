@@ -4,26 +4,47 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Kistl.GUI;
 
 namespace Kistl.Client.Controls
 {
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
     /// </summary>
-    public class PropertyControl : UserControl
+    public class PropertyControl : UserControl, IBasicControl
     {
         /// <summary>
         /// A descriptive Label for this Property
         /// </summary>
-        public string Label
+        public string ShortLabel
         {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
+            get { return (string)GetValue(ShortLabelProperty); }
+            set { SetValue(ShortLabelProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(PropertyControl));
+        public static readonly DependencyProperty ShortLabelProperty =
+            DependencyProperty.Register("ShortLabel", typeof(string), typeof(PropertyControl), new PropertyMetadata("short label"));
+
+        public string Description
+        {
+            get { return (string)GetValue(DescriptionProperty); }
+            set { SetValue(DescriptionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Description.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DescriptionProperty =
+            DependencyProperty.Register("Description", typeof(string), typeof(PropertyControl), new PropertyMetadata("long text (lore ipsum etc)"));
+
+        public FieldSize Size
+        {
+            get { return (FieldSize)GetValue(SizeProperty); }
+            set { SetValue(SizeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SizeProperty =
+            DependencyProperty.Register("Size", typeof(FieldSize), typeof(PropertyControl), new UIPropertyMetadata(FieldSize.Full));
 
         /// <summary>
         /// The actual Value of this Property
@@ -50,8 +71,6 @@ namespace Kistl.Client.Controls
         // Using a DependencyProperty as the backing store for IsReadOnly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsReadOnlyProperty =
             DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(PropertyControl), new UIPropertyMetadata(false));
-
-
 
         public Kistl.API.Client.KistlContext Context
         {

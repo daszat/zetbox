@@ -13,6 +13,8 @@ using System.Xml;
 using Kistl.API.Client;
 using Kistl.Client;
 using Kistl.Client.Controls;
+using Kistl.GUI.DB;
+using Kistl.App.Base;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -60,7 +62,7 @@ namespace Kistl.GUI.Renderer.WPF
             EditSimpleProperty txt = new EditSimpleProperty();
 
             // Bezeichnung setzen
-            txt.Label = "ID";
+            txt.ShortLabel = "ID";
             txt.IsReadOnly = true;
             txt.Context = this.ctx;
 
@@ -120,7 +122,7 @@ namespace Kistl.GUI.Renderer.WPF
                     else if (p is Kistl.App.Base.ObjectReferenceProperty && !((Kistl.App.Base.ObjectReferenceProperty)p).IsList)
                     {
                         EditPointerProperty pointer = new EditPointerProperty();
-                        pointer.Label = p.PropertyName;
+                        pointer.ShortLabel = p.PropertyName;
                         pointer.ToolTip = p.AltText;
                         pointer.Context = this.ctx;
 
@@ -148,7 +150,7 @@ namespace Kistl.GUI.Renderer.WPF
                     else if (p is Kistl.App.Base.ObjectReferenceProperty && ((Kistl.App.Base.ObjectReferenceProperty)p).IsList)
                     {
                         EditPointerPropertyList pointerList = new EditPointerPropertyList();
-                        pointerList.Label = p.PropertyName;
+                        pointerList.ShortLabel = p.PropertyName;
                         pointerList.ToolTip = p.AltText;
                         pointerList.Context = this.ctx;
 
@@ -170,7 +172,7 @@ namespace Kistl.GUI.Renderer.WPF
 
                         // Bezeichnung setzen
                         // TODO: sollte auch gebunden werden
-                        list.Label = p.PropertyName;
+                        list.ShortLabel = p.PropertyName;
                         list.ToolTip = p.AltText;
                         list.Context = this.ctx;
 
@@ -189,7 +191,7 @@ namespace Kistl.GUI.Renderer.WPF
                         PropertyControl control = (PropertyControl)XamlReader.Load(XmlReader.Create(new StringReader(p.GetGUIRepresentation())));
                         // Bezeichnung setzen
                         // TODO: sollte auch gebunden werden
-                        control.Label = p.PropertyName;
+                        control.ShortLabel = p.PropertyName;
                         control.ToolTip = p.AltText;
                         control.Context = this.ctx;
 
@@ -222,6 +224,19 @@ namespace Kistl.GUI.Renderer.WPF
                 this.Title = ObjectType.ToString();
             }
         }
+        private void LoadObject() {
+            // Client BL holen
+            ctx = new KistlContext();
+            obj = ctx.GetQuery(ObjectType).SingleOrDefault(o => o.ID == ObjectID);
+            obj.PropertyChanged += new PropertyChangedEventHandler(obj_PropertyChanged);
+
+            // Objekttype anpassen
+            ObjectType = new Kistl.API.ObjectType(obj);
+
+            // Fensternamen setzen
+            SetTitle();
+
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -229,16 +244,7 @@ namespace Kistl.GUI.Renderer.WPF
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             try
             {
-                // Client BL holen
-                ctx = new KistlContext();
-                obj = ctx.GetQuery(ObjectType).SingleOrDefault(o => o.ID == ObjectID);
-                obj.PropertyChanged += new PropertyChangedEventHandler(obj_PropertyChanged);
-
-                // Objekttype anpassen
-                ObjectType = new Kistl.API.ObjectType(obj);
-
-                // Fensternamen setzen
-                SetTitle();
+                LoadObject();
 
                 // Einmalig Binden & WPF Controls erzeugen
                 Bind();
@@ -353,8 +359,10 @@ namespace Kistl.GUI.Renderer.WPF
             this.ObjectType = task.Type;
             this.ObjectID = task.ID;
 
+            LoadObject();
+
             // should come from DataType
-            var template = TaskEditTemplate.Create();
+            var template = Kistl.GUI.DB.KistlGUIContext.FindTaskTemplate();
             // validity check
             if (template.Usage != TemplateUsage.EditControl)
             {
@@ -368,10 +376,13 @@ namespace Kistl.GUI.Renderer.WPF
             var panel = new StackPanel();
             foreach (var visual in template.VisualTree.Children)
             {
-                var impl = visual.GetImplementationInfo(Platform.WPF);
-                var widget = CreateWidget(impl);
+                var cInfo = KistlGUIContext.FindControlInfo(Platform.WPF, visual);
+                var pInfo = KistlGUIContext.FindPresenterInfo(visual, cInfo);
+
+                var widget = KistlGUIContext.CreateControl(cInfo);
+                var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
                 
-                panel.Children.Add(widget);
+                panel.Children.Add((Control)widget);
             }
 
             // testing
@@ -385,12 +396,6 @@ namespace Kistl.GUI.Renderer.WPF
             this.Content = frame;
 
             this.Show();
-        }
-
-        private static System.Windows.Controls.Control CreateWidget(ControlImplementation impl)
-        {
-            Type controlType = Type.GetType(String.Format("{0}, {1}", impl.ClassName, impl.AssemblyName), true);
-            return (System.Windows.Controls.Control)Activator.CreateInstance(controlType);
         }
     }
 }

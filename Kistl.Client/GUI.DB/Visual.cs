@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.App.Base;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI
 {
@@ -15,7 +16,7 @@ namespace Kistl.GUI
         public BaseProperty Property { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-
+#if false
         public ControlImplementation GetImplementationInfo(Platform p)
         {
             return (from ci in ControlImplementation.Implementations
@@ -23,5 +24,6 @@ namespace Kistl.GUI
                         && ci.Platform == p
                     select ci).Single();
         }
+#endif
     }
 }
