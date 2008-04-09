@@ -7,9 +7,9 @@
         <ResourceDictionary Source="../SlideStyles.xaml" />
     </Page.Resources>
     <StackPanel>
-        <ctrl:Listing Text="Idee" />
+        <ctrl:Listing Text="Vorher/Nachher" />
         <ctrl:Listing Text="Produkte" />
-        <ctrl:Listing Text="Konkurenz" />
+        <ctrl:Listing Text="Konkurrenz" />
         <ctrl:Listing Text="Open Source" />
         <ctrl:Listing Text="Marketing" />
         <ctrl:Listing Text="Zeitplan" />
