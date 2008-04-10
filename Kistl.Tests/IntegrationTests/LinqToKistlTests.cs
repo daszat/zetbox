@@ -33,6 +33,16 @@ namespace Kistl.Tests.IntegrationTests
         }
 
         [Test]
+        public void GetListWithTop10()
+        {
+            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            {
+                var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Take(10).ToList();
+                Assert.That(list.Count, Is.EqualTo(10));
+            }
+        }
+
+        [Test]
         public void SetObject()
         {
             double aufwand;

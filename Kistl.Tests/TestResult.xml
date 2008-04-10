@@ -1,26 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit" total="6" failures="0" not-run="0" date="2008-03-29" time="14:51:04">
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit" total="7" failures="1" not-run="0" date="2008-04-10" time="15:07:36">
   <environment nunit-version="2.4.6.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
   <culture-info current-culture="de-AT" current-uiculture="en-US" />
-  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit" success="True" time="21.700" asserts="0">
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit" success="False" time="23.353" asserts="0">
     <results>
-      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\bin\debug\..\Debug\Kistl.Tests.dll" success="True" time="21.700" asserts="0">
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\bin\debug\..\Debug\Kistl.Tests.dll" success="False" time="23.353" asserts="0">
         <results>
-          <test-suite name="Kistl" success="True" time="21.700" asserts="0">
+          <test-suite name="Kistl" success="False" time="23.353" asserts="0">
             <results>
-              <test-suite name="Tests" success="True" time="21.700" asserts="0">
+              <test-suite name="Tests" success="False" time="23.353" asserts="0">
                 <results>
-                  <test-suite name="IntegrationTests" success="True" time="21.700" asserts="0">
+                  <test-suite name="IntegrationTests" success="False" time="23.353" asserts="0">
                     <results>
-                      <test-suite name="LinqToKistlTests" success="True" time="1.825" asserts="0">
+                      <test-suite name="LinqToKistlTests" success="False" time="2.309" asserts="0">
                         <results>
-                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetList" executed="True" success="True" time="0.250" asserts="1" />
-                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterIllegal" executed="True" success="True" time="0.281" asserts="0" />
-                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterLegal" executed="True" success="True" time="0.094" asserts="1" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetList" executed="True" success="True" time="0.281" asserts="1" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterIllegal" executed="True" success="True" time="0.374" asserts="0" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterLegal" executed="True" success="True" time="0.140" asserts="1" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithTop10" executed="True" success="False" time="0.062" asserts="0">
+                            <failure>
+                              <message><![CDATA[System.NotSupportedException : Method Call 'Take' is only supported in a WHERE clause]]></message>
+                              <stack-trace><![CDATA[at Kistl.API.Client.KistlContextProvider`1.VisitMethodCall(MethodCallExpression m) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:line 201
+at Kistl.API.ExpressionTreeVisitor.Visit(Expression e) in D:\Programmierung\Kistl\Kistl.API\ExpressionTreeVisitor.cs:line 84
+at Kistl.API.Client.KistlContextProvider`1.Execute(Expression e) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:line 84
+at Kistl.API.Client.KistlContextProvider`1.Execute[TResult](Expression e) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:line 78
+at Kistl.API.Client.KistlContextQuery`1.GetEnumerator() in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContextQuery.cs:line 46
+at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+at Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithTop10() in D:\Programmierung\Kistl\Kistl.Tests\IntegrationTests\LinqToKistlTests.cs:line 40
+]]></stack-trace>
+                            </failure>
+                          </test-case>
                           <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.GetObject" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.NewObject" executed="True" success="True" time="0.967" asserts="6" />
-                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.SetObject" executed="True" success="True" time="0.218" asserts="3" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.NewObject" executed="True" success="True" time="1.154" asserts="6" />
+                          <test-case name="Kistl.Tests.IntegrationTests.LinqToKistlTests.SetObject" executed="True" success="True" time="0.250" asserts="3" />
                         </results>
                       </test-suite>
                     </results>

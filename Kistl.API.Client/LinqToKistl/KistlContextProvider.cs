@@ -177,7 +177,11 @@ namespace Kistl.API.Client
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Select")
             {
-                // No projection supportet, just ignore
+                // It's OK
+            }
+            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Take")
+            {
+                // It's OK
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Single")
             {
