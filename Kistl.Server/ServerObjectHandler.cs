@@ -27,7 +27,7 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        IEnumerable GetList(Expression filter);
+        IEnumerable GetList(int maxListCount, Expression filter, Expression orderBy);
 
         /// <summary>
         /// Implementiert den GetListOf Befehl.
@@ -109,10 +109,15 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public IEnumerable GetList(Expression filter)
+        public IEnumerable GetList(int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
-            {                
+            {
+                if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
+                {
+                    maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
+                }
+
                 var result = from a in KistlDataContext.Current.GetTable<T>()
                              select a;
 
@@ -121,7 +126,12 @@ namespace Kistl.Server
                     result = result.AddFilter<T>(filter);
                 }
 
-                return result;
+                if (orderBy != null)
+                {
+                    result = result.AddOrderBy<T>(orderBy);
+                }
+
+                return result.Take(maxListCount);
             }
         }
 

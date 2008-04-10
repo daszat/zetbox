@@ -80,7 +80,7 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public string GetList(ObjectType type)
+        public string GetList(ObjectType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy)
         {
             try
             {
@@ -89,7 +89,10 @@ namespace Kistl.Server
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
                         // TODO: Add filter to Interface!!
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetList(null);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type)
+                            .GetList(maxListCount, 
+                            filter != null ? filter.ToExpression() : null, 
+                            orderBy != null ? orderBy.ToExpression() : null);
                         return CurrentSerializer.XmlFromList(lst);
                     }
                 }

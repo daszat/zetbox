@@ -100,7 +100,9 @@ namespace Kistl.Server
                     using (KistlDataContext ctx = KistlDataContext.InitSession())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type)
-                            .GetList(m.Filter != null ? m.Filter.ToExpression() : null);
+                            .GetList(m.MaxListCount,
+                                m.Filter != null ? m.Filter.ToExpression() : null,
+                                m.OrderBy != null ? m.OrderBy.ToExpression() : null);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
                         foreach (IDataObject obj in lst)

@@ -16,13 +16,28 @@ namespace Kistl.API.Client
     /// <typeparam name="T">Objecttype to search</typeparam>
     internal class KistlContextProvider<T> : ExpressionTreeVisitor, IQueryProvider
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private ObjectType _type;
+        /// <summary>
+        /// 
+        /// </summary>
         private KistlContext _context;
 
         /// <summary>
         /// 
         /// </summary>
+        private int _maxListCount = API.Helper.MAXLISTCOUNT;
+        /// <summary>
+        /// 
+        /// </summary>
         private int ID = API.Helper.INVALIDID;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         private enum SearchTypeEnum
         {
             GetObject,
@@ -38,6 +53,10 @@ namespace Kistl.API.Client
         /// Filter Expression for GetList SearchType.
         /// </summary>
         private Expression _filter = null;
+        /// <summary>
+        /// OrderBy Expression for GetList SearchType.
+        /// </summary>
+        private Expression _orderBy = null;
 
         internal KistlContextProvider(KistlContext ctx, ObjectType type)
         {
@@ -98,7 +117,7 @@ namespace Kistl.API.Client
 
         private object GetListCall(Expression e)
         {
-            List<T> result = Proxy.Current.GetList(_context, _type, _filter).OfType<T>().ToList();
+            List<T> result = Proxy.Current.GetList(_context, _type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
             foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
             {
                 CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
@@ -175,13 +194,21 @@ namespace Kistl.API.Client
                     _filter = m.Arguments[1];
                 }
             }
+            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "OrderBy")
+            {
+                // Save orderby
+                if (_orderBy == null)
+                {
+                    _orderBy = m.Arguments[1];
+                }
+            }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Select")
             {
                 // It's OK
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Take")
             {
-                // It's OK
+                _maxListCount = m.Arguments[1].GetExpressionValue<int>();
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Single")
             {

@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Kistl.API.Client
 {
-    public class KistlContextQuery<T> : IQueryable<T>
+    public class KistlContextQuery<T> : IOrderedQueryable<T>
     {
         private Expression _expression = null;
         private KistlContextProvider<T> _provider = null;

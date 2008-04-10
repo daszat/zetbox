@@ -108,14 +108,16 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable GetList(IKistlContext ctx, ObjectType type, Expression filter)
+        public IEnumerable GetList(IKistlContext ctx, ObjectType type, int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
                 msg.Type = type;
+                msg.MaxListCount = maxListCount;
                 msg.Filter = filter != null ? SerializableExpression.FromExpression(filter, SerializableType.SerializeDirection.ClientToServer) : null;
+                msg.OrderBy = orderBy != null ? SerializableExpression.FromExpression(orderBy, SerializableType.SerializeDirection.ClientToServer) : null;
 
                 System.IO.MemoryStream s = serviceStreams.GetList(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);

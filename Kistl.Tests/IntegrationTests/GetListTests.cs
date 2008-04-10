@@ -10,18 +10,8 @@ using Kistl.Client;
 namespace Kistl.Tests.IntegrationTests
 {
     [TestFixture]
-    public class LinqToKistlTests
+    public class GetListTests
     {
-        [Test]
-        public void GetObject()
-        {
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
-            {
-                var obj = ctx.GetQuery < Kistl.App.Base.ObjectClass>().Single(o => o.ID == 2);
-                Assert.That(obj.ID, Is.EqualTo(2));
-            }
-        }
-
         [Test]
         public void GetList()
         {
@@ -43,65 +33,26 @@ namespace Kistl.Tests.IntegrationTests
         }
 
         [Test]
-        public void SetObject()
+        public void GetListWithOrderBy()
         {
-            double aufwand;
-            int ID;
             using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
             {
-                var list = ctx.GetQuery<Kistl.App.Projekte.Task>().ToList();
+                var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.ClassName).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
-                var obj = list[0];
+                List<Kistl.App.Base.ObjectClass> result = list.ToList();
+                List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.ClassName).ToList();
 
-                ID = obj.ID;
-                aufwand = (obj.Aufwand ?? 0.0) + 1.0;
-
-                obj.Aufwand = aufwand;
-
-                ctx.SubmitChanges();
-            }
-
-            using (Kistl.API.Client.KistlContext checkctx = new Kistl.API.Client.KistlContext())
-            {
-                var obj = checkctx.GetQuery<Kistl.App.Projekte.Task>().Single(o => o.ID == ID);
-                Assert.That(obj, Is.Not.Null);
-                Assert.That(obj.Aufwand, Is.EqualTo(aufwand));
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i].ID != sorted[i].ID)
+                    {
+                        Assert.Fail("List was not sorted");
+                        break;
+                    }
+                }
             }
         }
-        
-        [Test]
-        public void NewObject()
-        {
-            int ID;
-            double aufwand;
-            DateTime datum;
-            Kistl.App.Projekte.Projekt p;
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
-            {
-                p = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()[0];
-                var obj = ctx.Create<Kistl.App.Projekte.Task>();
 
-                obj.Name = "NUnit Test Task";
-                obj.Aufwand = aufwand = 1.0;
-                obj.DatumVon = datum = DateTime.Now;
-                obj.DatumBis = datum.AddDays(1);
-                obj.Projekt = p;
-
-                ctx.SubmitChanges();
-                ID = obj.ID;
-                Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
-            }
-
-            using (Kistl.API.Client.KistlContext checkctx = new Kistl.API.Client.KistlContext())
-            {
-                var obj = checkctx.GetQuery<Kistl.App.Projekte.Task>().Single(o => o.ID == ID);
-                Assert.That(obj, Is.Not.Null);
-                Assert.That(obj.Aufwand, Is.EqualTo(aufwand));
-                Assert.That(obj.DatumVon, Is.EqualTo(datum));
-                Assert.That(obj.DatumBis, Is.EqualTo(datum.AddDays(1)));
-                Assert.That(obj.Projekt.ID, Is.EqualTo(p.ID));
-            }
-        }
 
         [Test]
         public void GetListWithParameterLegal()

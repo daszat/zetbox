@@ -18,10 +18,13 @@ namespace Kistl.API
         public int ID { get; set; }
         public string Property { get; set; }
 
+        public int MaxListCount { get; set; }
         public SerializableExpression Filter { get; set; }
+        public SerializableExpression OrderBy { get; set; }
 
         public KistlServiceStreamsMessage()
         {
+            MaxListCount = Helper.MAXLISTCOUNT;
         }
 
         public KistlServiceStreamsMessage(System.IO.Stream msg)
@@ -37,7 +40,10 @@ namespace Kistl.API
             sw.Write(Type.Classname);
             sw.Write(ID);
             sw.Write(Property ?? "");
+
+            sw.Write(MaxListCount);
             BinarySerializer.ToBinary(Filter, sw);
+            BinarySerializer.ToBinary(OrderBy, sw);
         }
 
         public System.IO.MemoryStream ToStream()
@@ -57,9 +63,13 @@ namespace Kistl.API
             ID = sr.ReadInt32();
             Property = sr.ReadString();
 
+            MaxListCount = sr.ReadInt32();
             SerializableExpression tmp;
             BinarySerializer.FromBinary(out tmp, sr);
             Filter = tmp;
+
+            BinarySerializer.FromBinary(out tmp, sr);
+            OrderBy = tmp;
         }
     }
 
@@ -92,7 +102,7 @@ namespace Kistl.API
         /// <returns>XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
-        string GetList(ObjectType type);
+        string GetList(ObjectType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy);
 
         /// <summary>
         /// Liste aller Objekte eines Objektes "ID" im Property "property".

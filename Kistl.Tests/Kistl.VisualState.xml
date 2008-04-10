@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1000]D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit</TopNode>
-  <SelectedNode>[0-1005]Kistl.Tests.IntegrationTests.LinqToKistlTests.SetObject</SelectedNode>
+  <SelectedNode>[0-1001]Kistl.Tests.IntegrationTests.SetUp</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]D:\Programmierung\Kistl\Kistl.Tests\Kistl.nunit" Expanded="true">
       <Nodes>
-        <Node UniqueName="[0-1009]D:\Programmierung\Kistl\Kistl.Tests\bin\debug\..\Debug\Kistl.Tests.dll" Expanded="true">
+        <Node UniqueName="[0-1012]D:\Programmierung\Kistl\Kistl.Tests\bin\debug\..\Debug\Kistl.Tests.dll" Expanded="true">
           <Nodes>
-            <Node UniqueName="[0-1010]Kistl" Expanded="true">
+            <Node UniqueName="[0-1013]Kistl" Expanded="true">
               <Nodes>
-                <Node UniqueName="[0-1011]Kistl.Tests" Expanded="true">
+                <Node UniqueName="[0-1014]Kistl.Tests" Expanded="true">
                   <Nodes>
                     <Node UniqueName="[0-1001]Kistl.Tests.IntegrationTests.SetUp" Expanded="true">
                       <Nodes>
-                        <Node UniqueName="[0-1002]Kistl.Tests.IntegrationTests.LinqToKistlTests" Expanded="true">
+                        <Node UniqueName="[0-1002]Kistl.Tests.IntegrationTests.GetListTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1004]Kistl.Tests.IntegrationTests.LinqToKistlTests.GetList" />
-                            <Node UniqueName="[0-1008]Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterIllegal" />
-                            <Node UniqueName="[0-1007]Kistl.Tests.IntegrationTests.LinqToKistlTests.GetListWithParameterLegal" />
-                            <Node UniqueName="[0-1003]Kistl.Tests.IntegrationTests.LinqToKistlTests.GetObject" />
-                            <Node UniqueName="[0-1006]Kistl.Tests.IntegrationTests.LinqToKistlTests.NewObject" />
-                            <Node UniqueName="[0-1005]Kistl.Tests.IntegrationTests.LinqToKistlTests.SetObject" />
+                            <Node UniqueName="[0-1003]Kistl.Tests.IntegrationTests.GetListTests.GetList" />
+                            <Node UniqueName="[0-1005]Kistl.Tests.IntegrationTests.GetListTests.GetListWithOrderBy" />
+                            <Node UniqueName="[0-1007]Kistl.Tests.IntegrationTests.GetListTests.GetListWithParameterIllegal" />
+                            <Node UniqueName="[0-1006]Kistl.Tests.IntegrationTests.GetListTests.GetListWithParameterLegal" />
+                            <Node UniqueName="[0-1004]Kistl.Tests.IntegrationTests.GetListTests.GetListWithTop10" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1008]Kistl.Tests.IntegrationTests.ObjectTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1009]Kistl.Tests.IntegrationTests.ObjectTests.GetObject" />
+                            <Node UniqueName="[0-1011]Kistl.Tests.IntegrationTests.ObjectTests.NewObject" />
+                            <Node UniqueName="[0-1010]Kistl.Tests.IntegrationTests.ObjectTests.SetObject" />
                           </Nodes>
                         </Node>
                       </Nodes>

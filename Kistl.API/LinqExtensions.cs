@@ -8,8 +8,7 @@ using System.Reflection;
 namespace Kistl.API
 {
     /// <summary>
-    /// Linq Extensions. Aus dem Indischen Netz gefladert. 
-    /// Könnte als Demo für Parameter Suchen herhalten.
+    /// Linq Extensions.
     /// </summary>
     public static class LinqExtensions
     {
@@ -43,6 +42,28 @@ namespace Kistl.API
             return queryable.Provider.CreateQuery<T>(
                 Expression.Call(typeof(Queryable), "Where",
                 new Type[] { queryable.ElementType }, queryable.Expression, filter));
+        }
+
+        public static IQueryable<T> AddOrderBy<T>(this IQueryable<T> queryable, Expression orderBy)
+        {
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (orderBy == null) throw new ArgumentNullException("orderBy");
+
+            Type type = null;
+
+            try
+            {
+                type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
+                return queryable.Provider.CreateQuery<T>(
+                    Expression.Call(typeof(Queryable), "OrderBy",
+                    new Type[] { queryable.ElementType, type },
+                    queryable.Expression, orderBy));
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(string.Format("{0}\nNodeType: {1}\nType: {2}\nGenericArgument[0][1]: {3}",
+                    ex.Message, orderBy.NodeType, orderBy.Type, type));
+            }
         }
 
         public static TYPE GetExpressionValue<TYPE>(this Expression e)

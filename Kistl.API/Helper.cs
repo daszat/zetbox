@@ -23,6 +23,11 @@ namespace Kistl.API
         public const int INVALIDID = -1;
 
         /// <summary>
+        /// Constant for MAx List Count. Value is 500.
+        /// </summary>
+        public const int MAXLISTCOUNT = 500;
+
+        /// <summary>
         /// Replaces all illigal Path Characters with an '_' char.
         /// </summary>
         /// <param name="path"></param>

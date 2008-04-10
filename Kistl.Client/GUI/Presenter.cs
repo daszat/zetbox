@@ -144,7 +144,7 @@ namespace Kistl.GUI
         {
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
-            Control.ObjectType = Property.ReferenceObjectClass.;
+            Control.ObjectType = Property.ReferenceObjectClass.Type;
             Control.ItemsSource = Object.Context.GetQuery(Object.Type).ToList();
             Control.TargetID = Object.GetPropertyValue(Property);
             // Control.Size = Preferences.PreferredSize;
