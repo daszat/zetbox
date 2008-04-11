@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Kistl.APITests.nunit" total="27" failures="1" not-run="0" date="2008-04-11" time="18:47:37">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\API.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Kistl.APITests.nunit" success="False" time="1.099" asserts="0">
+    <results>
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\bin\debug\..\Debug\API.Tests.dll" success="False" time="1.096" asserts="0">
+        <results>
+          <test-suite name="API" success="False" time="1.090" asserts="0">
+            <results>
+              <test-suite name="Tests" success="False" time="1.075" asserts="0">
+                <results>
+                  <test-suite name="Tests" success="False" time="0.370" asserts="0">
+                    <results>
+                      <test-suite name="APIInitTest" success="True" time="0.023" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.APIInitTest.SecondInitFail" executed="True" success="True" time="0.012" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="AssemblyLoaderTests" success="True" time="0.062" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.AssemblyResolve" executed="True" success="True" time="0.019" asserts="0" />
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.Load" executed="True" success="True" time="0.035" asserts="1" />
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.ReflectionOnlyLoadFrom" executed="True" success="True" time="0.007" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests" success="False" time="0.281" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Bool" executed="True" success="True" time="0.007" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.BoolNull" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.BoolNullValue" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.DateTime" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.DateTimeNull" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Double" executed="True" success="True" time="0.004" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.DoubleNull" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.DoubleNullValue" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Enum" executed="True" success="False" time="0.054" asserts="0">
+                            <failure>
+                              <message><![CDATA[System.InvalidCastException : Unable to cast object of type 'System.Int32' to type 'System.Enum'.]]></message>
+                              <stack-trace><![CDATA[at Kistl.API.BinarySerializer.FromBinary(Enum& val, BinaryReader sr) in D:\Programmierung\Kistl\Kistl.API\BinarySerializer.cs:line 235
+at API.Tests.Tests.BinarySerializerTests.Enum() in D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Tests\BinarySerializerTests.cs:line 157
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Float" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.FloatNull" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.FloatNullValue" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ICollectionEntry" executed="True" success="True" time="0.066" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ObservableCollection_ICollectionEntry" executed="True" success="True" time="0.060" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.IEnumerable_IDataObject" executed="True" success="True" time="0.034" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Int" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.IntNull" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.IntNullValue" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.ObjectType" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.ObjectTypeNull" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.SerializableExpression" executed="True" success="True" time="0.029" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.String" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.StringNull" executed="True" success="True" time="0.001" asserts="1" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

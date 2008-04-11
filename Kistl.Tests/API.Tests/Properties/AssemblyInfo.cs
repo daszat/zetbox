@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.Tests")]
+[assembly: AssemblyTitle("API.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kilst")]
-[assembly: AssemblyProduct("Kistl.Tests")]
+[assembly: AssemblyProduct("API.Tests")]
 [assembly: AssemblyCopyright("Copyright © Kilst 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("27603ce5-fd96-4bbc-afe5-5df7aa2b1134")]
+[assembly: Guid("d47f0df9-1099-47f2-a433-ebc9bee639d3")]
 
 // Version information for an assembly consists of the following four values:
 //

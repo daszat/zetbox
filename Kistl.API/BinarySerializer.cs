@@ -13,37 +13,6 @@ namespace Kistl.API
     /// </summary>
     public class BinarySerializer
     {
-#if DEBUG
-        private void SyntaxTest()
-        {
-            System.IO.BinaryWriter sw = new System.IO.BinaryWriter(new System.IO.MemoryStream());
-            System.IO.BinaryReader sr= new System.IO.BinaryReader(new System.IO.MemoryStream());
-            int i = 0;
-            bool b = true;
-            string s = "string";
-            Kistl.API.DataObjectState e = DataObjectState.Unmodified;
-            Kistl.API.DataObjectState? en = DataObjectState.Unmodified;
-
-            ToBinary(i, sw);
-            ToBinary(b, sw);
-            ToBinary(s, sw);
-            ToBinary(e, sw);
-            ToBinary(en, sw);
-
-            FromBinary(out i, sr);
-            FromBinary(out b, sr);
-            FromBinary(out s, sr);
-
-            Enum tmp;
-
-            FromBinary(out tmp, sr);
-            e = (Kistl.API.DataObjectState)tmp;
-
-            FromBinary(out tmp, sr);
-            en = (Kistl.API.DataObjectState?)tmp;
-        }
-#endif
-
         #region ToBinary
         /// <summary>
         /// Serialize a bool

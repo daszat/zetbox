@@ -28,9 +28,8 @@ namespace Kistl.API
     {
         public static bool IsLegal(this Expression e)
         {
-            CheckLegalExpression chk = new CheckLegalExpression();
-            chk.Visit(e);
-            return chk.IsLegal;
+            List<IllegalExpression> tmp;
+            return IsLegal(e, out tmp);
         }
 
         public static bool IsLegal(this Expression e, out List<IllegalExpression> list)
