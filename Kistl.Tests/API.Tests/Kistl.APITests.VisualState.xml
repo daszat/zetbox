@@ -6,13 +6,13 @@
   <Nodes>
     <Node UniqueName="[0-1000]D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Kistl.APITests.nunit" Expanded="true">
       <Nodes>
-        <Node UniqueName="[0-1032]D:\Programmierung\Kistl\Kistl.Tests\API.Tests\bin\debug\..\Debug\API.Tests.dll" Expanded="true">
+        <Node UniqueName="[0-1048]D:\Programmierung\Kistl\Kistl.Tests\API.Tests\bin\debug\..\Debug\API.Tests.dll" Expanded="true">
           <Nodes>
-            <Node UniqueName="[0-1033]API" Expanded="true">
+            <Node UniqueName="[0-1049]API" Expanded="true">
               <Nodes>
                 <Node UniqueName="[0-1031]API.Tests.SetUp" Expanded="true">
                   <Nodes>
-                    <Node UniqueName="[0-1035]API.Tests.Tests" Expanded="true">
+                    <Node UniqueName="[0-1051]API.Tests.Tests" Expanded="true">
                       <Nodes>
                         <Node UniqueName="[0-1029]API.Tests.Tests.APIInitTest" Expanded="true">
                           <Nodes>
@@ -51,6 +51,28 @@
                             <Node UniqueName="[0-1024]API.Tests.Tests.BinarySerializerTests.SerializableExpression" />
                             <Node UniqueName="[0-1017]API.Tests.Tests.BinarySerializerTests.String" />
                             <Node UniqueName="[0-1018]API.Tests.Tests.BinarySerializerTests.StringNull" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1032]API.Tests.Tests.ExpressionFilterTest" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1034]API.Tests.Tests.ExpressionFilterTest.IllegalExpression" />
+                            <Node UniqueName="[0-1033]API.Tests.Tests.ExpressionFilterTest.LegalExpression" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1035]API.Tests.Tests.ExtensionHelpersTest" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1045]API.Tests.Tests.ExtensionHelpersTest.Clone_List" />
+                            <Node UniqueName="[0-1047]API.Tests.Tests.ExtensionHelpersTest.Clone_NotifyingObservableCollection" />
+                            <Node UniqueName="[0-1046]API.Tests.Tests.ExtensionHelpersTest.Clone_ObservableCollection" />
+                            <Node UniqueName="[0-1043]API.Tests.Tests.ExtensionHelpersTest.ForEach_IEnumerable" />
+                            <Node UniqueName="[0-1044]API.Tests.Tests.ExtensionHelpersTest.ForEach_ObservableCollection" />
+                            <Node UniqueName="[0-1039]API.Tests.Tests.ExtensionHelpersTest.GetPropertyValue" />
+                            <Node UniqueName="[0-1041]API.Tests.Tests.ExtensionHelpersTest.GetPropertyValue_InvalidPropertyName" />
+                            <Node UniqueName="[0-1037]API.Tests.Tests.ExtensionHelpersTest.In" />
+                            <Node UniqueName="[0-1038]API.Tests.Tests.ExtensionHelpersTest.InFalse" />
+                            <Node UniqueName="[0-1040]API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue" />
+                            <Node UniqueName="[0-1042]API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue_InvalidPropertyName" />
+                            <Node UniqueName="[0-1036]API.Tests.Tests.ExtensionHelpersTest.XmlString" />
                           </Nodes>
                         </Node>
                       </Nodes>

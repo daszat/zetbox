@@ -352,15 +352,25 @@ namespace API.Tests.Tests
         {
             SetUp();
 
-            Expression e = LambdaExpression.Constant(1);
+            TestQuery<XMLObject> ctx = new TestQuery<XMLObject>();
+            var list = from o in ctx
+                       where o.IntProperty == 1
+                       && o.IntProperty != 2
+                       && o.IntProperty > 3
+                       && o.IntProperty == ms.Length
+                       && (o.StringProperty.StartsWith("test")
+                            || o.StringProperty == "test")
+                       && !o.BoolProperty
+                       select new { o.IntProperty, o.BoolProperty };
 
             SerializableExpression toval, fromval;
-            toval = Kistl.API.SerializableExpression.FromExpression(e, SerializableType.SerializeDirection.ClientToServer);
+            toval = Kistl.API.SerializableExpression.FromExpression(list.Expression, SerializableType.SerializeDirection.ClientToServer);
             BinarySerializer.ToBinary(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             BinarySerializer.FromBinary(out fromval, sr);
             Assert.That(fromval.NodeType, Is.EqualTo(toval.NodeType));
+            Assert.That(list.Expression.NodeType, Is.EqualTo(fromval.ToExpression().NodeType));
         }
     }
 }
