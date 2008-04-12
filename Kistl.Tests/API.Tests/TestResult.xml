@@ -1,76 +1,87 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Kistl.APITests.nunit" total="41" failures="1" not-run="0" date="2008-04-11" time="20:41:23">
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Kistl.APITests.nunit" total="81" failures="2" not-run="0" date="2008-04-12" time="18:02:03">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\API.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
   <culture-info current-culture="de-AT" current-uiculture="en-US" />
-  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Kistl.APITests.nunit" success="False" time="1.574" asserts="0">
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Kistl.APITests.nunit" success="False" time="1.792" asserts="0">
     <results>
-      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\bin\debug\..\Debug\API.Tests.dll" success="False" time="1.571" asserts="0">
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Tests\bin\debug\..\Debug\API.Tests.dll" success="False" time="1.773" asserts="0">
         <results>
-          <test-suite name="API" success="False" time="1.571" asserts="0">
+          <test-suite name="API" success="False" time="1.741" asserts="0">
             <results>
-              <test-suite name="Tests" success="False" time="1.560" asserts="0">
+              <test-suite name="Tests" success="False" time="1.731" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="False" time="0.859" asserts="0">
+                  <test-suite name="Tests" success="False" time="1.091" asserts="0">
                     <results>
-                      <test-suite name="APIInitTest" success="True" time="0.018" asserts="0">
+                      <test-suite name="APIInitTest" success="True" time="0.022" asserts="0">
                         <results>
-                          <test-case name="API.Tests.Tests.APIInitTest.SecondInitFail" executed="True" success="True" time="0.011" asserts="0" />
+                          <test-case name="API.Tests.Tests.APIInitTest.SecondInitFail" executed="True" success="True" time="0.014" asserts="0" />
                         </results>
                       </test-suite>
-                      <test-suite name="AssemblyLoaderTests" success="True" time="0.056" asserts="0">
+                      <test-suite name="AssemblyLoaderTests" success="True" time="0.051" asserts="0">
                         <results>
-                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.AssemblyResolve" executed="True" success="True" time="0.019" asserts="0" />
-                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.Load" executed="True" success="True" time="0.029" asserts="1" />
-                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.ReflectionOnlyLoadFrom" executed="True" success="True" time="0.006" asserts="1" />
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.AssemblyResolve" executed="True" success="True" time="0.017" asserts="0" />
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.Load" executed="True" success="True" time="0.027" asserts="1" />
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.ReflectionOnlyLoadFrom" executed="True" success="True" time="0.007" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="BinarySerializerTests" success="False" time="0.406" asserts="0">
+                      <test-suite name="BinarySerializerTests" success="False" time="0.335" asserts="0">
                         <results>
                           <test-case name="API.Tests.Tests.BinarySerializerTests.Bool" executed="True" success="True" time="0.006" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.BoolNull" executed="True" success="True" time="0.001" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.BoolNullValue" executed="True" success="True" time="0.001" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.DateTime" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.DateTimeNull" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.DateTimeNull" executed="True" success="True" time="0.002" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.Double" executed="True" success="True" time="0.003" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.DoubleNull" executed="True" success="True" time="0.001" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.DoubleNullValue" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.Enum" executed="True" success="False" time="0.055" asserts="0">
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Enum" executed="True" success="False" time="0.006" asserts="0">
                             <failure>
                               <message><![CDATA[System.InvalidCastException : Unable to cast object of type 'System.Int32' to type 'System.Enum'.]]></message>
                               <stack-trace><![CDATA[at Kistl.API.BinarySerializer.FromBinary(Enum& val, BinaryReader sr) in D:\Programmierung\Kistl\Kistl.API\BinarySerializer.cs:line 235
-at API.Tests.Tests.BinarySerializerTests.Enum() in D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Tests\BinarySerializerTests.cs:line 157
+at API.Tests.Tests.BinarySerializerTests.Enum() in D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Tests\BinarySerializerTests.cs:line 139
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.Float" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.FloatNull" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Float" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.FloatNull" executed="True" success="True" time="0.001" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.FloatNullValue" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ICollectionEntry" executed="True" success="True" time="0.061" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ObservableCollection_ICollectionEntry" executed="True" success="True" time="0.055" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.IEnumerable_IDataObject" executed="True" success="True" time="0.033" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.Int" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ICollectionEntry" executed="True" success="True" time="0.023" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ObservableCollection_ICollectionEntry" executed="True" success="True" time="0.067" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.IEnumerable_IDataObject" executed="True" success="True" time="0.027" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Int" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.IntNull" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.IntNullValue" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.IntNullValue" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.ObjectType" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.ObjectTypeNull" executed="True" success="True" time="0.002" asserts="0" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.SerializableExpression" executed="True" success="True" time="0.163" asserts="2" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.ObjectTypeNull" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.SerializableExpression" executed="True" success="True" time="0.175" asserts="2" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.String" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.StringNull" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.StringNull" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ExpressionFilterTest" success="True" time="0.022" asserts="0">
+                      <test-suite name="CustomActionsManagerFactoryTests" success="True" time="0.002" asserts="0">
                         <results>
-                          <test-case name="API.Tests.Tests.ExpressionFilterTest.IllegalExpression" executed="True" success="True" time="0.018" asserts="1" />
+                          <test-case name="API.Tests.Tests.CustomActionsManagerFactoryTests.Init_Fail" executed="True" success="True" time="0.002" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ExpressionFilterTest" success="True" time="0.028" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.ExpressionFilterTest.IllegalExpression" executed="True" success="True" time="0.022" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExpressionFilterTest.IllegalExpressionClass_UnknownToString" executed="True" success="True" time="0.001" asserts="0" />
                           <test-case name="API.Tests.Tests.ExpressionFilterTest.LegalExpression" executed="True" success="True" time="0.003" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ExtensionHelpersTest" success="True" time="0.340" asserts="0">
+                      <test-suite name="ExpressionTreeVisitorTests" success="True" time="0.094" asserts="0">
                         <results>
-                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_List" executed="True" success="True" time="0.009" asserts="1" />
-                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_NotifyingObservableCollection" executed="True" success="True" time="0.020" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExpressionTreeVisitorTests.Visit" executed="True" success="True" time="0.093" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ExtensionHelpersTest" success="True" time="0.320" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_List" executed="True" success="True" time="0.008" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_NotifyingObservableCollection" executed="True" success="True" time="0.021" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_ObservableCollection" executed="True" success="True" time="0.008" asserts="1" />
-                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.ForEach_IEnumerable" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.ForEach_IEnumerable" executed="True" success="True" time="0.001" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.ForEach_ObservableCollection" executed="True" success="True" time="0.006" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.GetPropertyValue" executed="True" success="True" time="0.004" asserts="3" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.GetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
@@ -78,7 +89,78 @@ at API.Tests.Tests.BinarySerializerTests.Enum() in D:\Programmierung\Kistl\Kistl
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.InFalse" executed="True" success="True" time="0.001" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue" executed="True" success="True" time="0.003" asserts="3" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.XmlString" executed="True" success="True" time="0.278" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.XmlString" executed="True" success="True" time="0.254" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="KistlConfigTests" success="True" time="0.022" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.KistlConfigTests.Current" executed="True" success="True" time="0.002" asserts="3" />
+                          <test-case name="API.Tests.Tests.KistlConfigTests.FromStream" executed="True" success="True" time="0.004" asserts="9" />
+                          <test-case name="API.Tests.Tests.KistlConfigTests.FromTextReader" executed="True" success="True" time="0.001" asserts="9" />
+                          <test-case name="API.Tests.Tests.KistlConfigTests.ToFile" executed="True" success="True" time="0.012" asserts="2" />
+                          <test-case name="API.Tests.Tests.KistlConfigTests.ToStream" executed="True" success="True" time="0.001" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="KistlServiceStreamsMessageTests" success="True" time="0.005" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.KistlServiceStreamsMessageTests.Stream" executed="True" success="True" time="0.005" asserts="3" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="LinqExtensionsTests" success="False" time="0.157" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition" executed="True" success="True" time="0.079" asserts="1" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidProperty" executed="True" success="True" time="0.002" asserts="0" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidType" executed="True" success="True" time="0.011" asserts="0" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddFilter" executed="True" success="True" time="0.022" asserts="1" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddFilter_IllegalExpression" executed="True" success="True" time="0.002" asserts="0" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddOrderBy" executed="True" success="False" time="0.008" asserts="0">
+                            <failure>
+                              <message><![CDATA[System.InvalidOperationException : Index was outside the bounds of the array.
+NodeType: Lambda
+Type: System.Func`2[API.Tests.TestDataObject,System.String]
+GenericArgument[0][1]: ]]></message>
+                              <stack-trace><![CDATA[at Kistl.API.LinqExtensions.AddOrderBy[T](IQueryable`1 queryable, Expression orderBy) in D:\Programmierung\Kistl\Kistl.API\LinqExtensions.cs:line 69
+at API.Tests.Tests.LinqExtensionsTests.AddOrderBy() in D:\Programmierung\Kistl\Kistl.Tests\API.Tests\Tests\LinqExtensionsTests.cs:line 71
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddOrderBy_WithQuote" executed="True" success="True" time="0.018" asserts="2" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_Constant" executed="True" success="True" time="0.003" asserts="1" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_LambdaExpression" executed="True" success="True" time="0.004" asserts="0" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Field" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Property" executed="True" success="True" time="0.001" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="NotifyingObservableCollectionTests" success="True" time="0.007" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.NotifyingObservableCollectionTests.Event" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.NotifyingObservableCollectionTests.List" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.NotifyingObservableCollectionTests.SetItem" executed="True" success="True" time="0.003" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ObjectTypeTests" success="True" time="0.017" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.Constructor_Empty" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.Constructor_IDataObject" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.Constructor_Namespace_Classname" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.Constructor_String" executed="True" success="True" time="0.002" asserts="2" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.Constructor_Type" executed="True" success="True" time="0.000" asserts="2" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.HashCode" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.InitAssembly" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.InitFail" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.InitString" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.NewDataObject" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.NewDataObject_Empty" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.NewDataObject_TypeNotFound" executed="True" success="True" time="0.002" asserts="0" />
+                          <test-case name="API.Tests.Tests.ObjectTypeTests.NewDataObject_TypeNotIDataObject" executed="True" success="True" time="0.001" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="SerializableExpressionTests" success="True" time="0.007" asserts="0">
+                        <results>
+                          <test-case name="API.Tests.Tests.SerializableExpressionTests.FromExpression_Null" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="API.Tests.Tests.SerializableExpressionTests.SerializableType_InvalidType" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="API.Tests.Tests.SerializableExpressionTests.SerializableType_InvalidType_Generic" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="API.Tests.Tests.SerializableExpressionTests.SerializableType_Valid" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
                     </results>

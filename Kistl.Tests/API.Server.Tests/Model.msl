@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+  <EntityContainerMapping StorageEntityContainer="App" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="TestObjClass">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClass)">
+        <MappingFragment StoreEntitySet="TestObjClass">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StringProp" ColumnName="StringProp" />
+          <ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

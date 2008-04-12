@@ -71,9 +71,9 @@ namespace Kistl.Server
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
                 if (type == null) throw new ArgumentException("Type is null");
-                if (string.IsNullOrEmpty(type.FullNameServerDataObject)) throw new ArgumentException("Type is empty");
+                if (string.IsNullOrEmpty(type.FullNameDataObject)) throw new ArgumentException("Type is empty");
 
-                Type objType = Type.GetType(type.FullNameServerDataObject);
+                Type objType = Type.GetType(type.FullNameDataObject);
                 if (objType == null) throw new ApplicationException("Invalid Type");
 
                 Type t = typeof(ServerObjectHandler<>);

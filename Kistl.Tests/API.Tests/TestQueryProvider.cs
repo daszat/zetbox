@@ -22,18 +22,28 @@ namespace API.Tests
 
         public TestQuery(TestQueryProvider<T> provider, Expression e)
         {
+            if (provider == null) throw new ArgumentNullException("provider");
+            if (e == null) throw new ArgumentNullException("e");
             _expression = e;
             _provider = provider;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return null;
+            IEnumerable<T> result = (IEnumerable<T>)_provider.Execute<List<T>>(this._expression);
+            if (result != null)
+                return result.GetEnumerator();
+            else
+                return null;
         }
 
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return null;
+            IEnumerable result = ((IEnumerable)_provider.Execute(this._expression));
+            if (result != null)
+                return result.GetEnumerator();
+            else
+                return null;
         }
 
         public Type ElementType
@@ -53,28 +63,52 @@ namespace API.Tests
     }
 
     [Serializable]
-    public class TestQueryProvider<T> : IQueryProvider
+    public class TestQueryProvider<T> : Kistl.API.ExpressionTreeVisitor, IQueryProvider
     {
         #region IQueryProvider Members
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return new TestQuery<TElement>(this as TestQueryProvider<TElement>, expression);
+            if (expression == null) throw new ArgumentNullException("expression");
+            return new TestQuery<TElement>(new TestQueryProvider<TElement>(), expression);
         }
 
         public IQueryable CreateQuery(Expression expression)
         {
+            if (expression == null) throw new ArgumentNullException("expression");
             return new TestQuery<T>(this, expression);
         }
 
         public TResult Execute<TResult>(Expression expression)
         {
-            return default(TResult);
+            if (expression == null) throw new ArgumentNullException("expression");
+            try
+            {
+                return (TResult)(this as IQueryProvider).Execute(expression);
+            }
+            catch
+            {
+                return default(TResult);
+            }
         }
 
         public object Execute(Expression expression)
         {
-            return null;
+            if (expression == null) throw new ArgumentNullException("expression");
+
+            this.Visit(expression);
+
+            List<TestDataObject> result = new List<TestDataObject>();
+            result.Add(new TestDataObject() { ID = 1, StringProperty = "First", IntProperty = 10, BoolProperty = true, TestField="test" });
+            result.Add(new TestDataObject() { ID = 2, StringProperty = "Second", IntProperty = 20, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObject() { ID = 3, StringProperty = "Third", IntProperty = 30, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObject() { ID = 4, StringProperty = "Fourth", IntProperty = 40, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObject() { ID = 5, StringProperty = "Fith", IntProperty = 50, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObject() { ID = 6, StringProperty = "Sixth", IntProperty = 60, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObject() { ID = 7, StringProperty = "Seventh", IntProperty = 70, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObject() { ID = 8, StringProperty = "Eightth", IntProperty = 80, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObject() { ID = 9, StringProperty = "Nineth", IntProperty = 90, BoolProperty = true, TestField = "test" });
+            return result;
         }
 
         #endregion

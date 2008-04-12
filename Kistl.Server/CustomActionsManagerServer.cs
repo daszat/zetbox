@@ -77,7 +77,7 @@ namespace Kistl.Server
                                     System.Diagnostics.Debug.Assert(clrMethod != null, string.Format("CLR Method '{0}' not found", mi.MemberName));
                                     if (clrMethod == null) continue;
 
-                                    EventInfo ei = Type.GetType(objType.FullNameServerDataObject).GetEvent(
+                                    EventInfo ei = Type.GetType(objType.FullNameDataObject).GetEvent(
                                         "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
                                     System.Diagnostics.Debug.Assert(ei != null, string.Format("Event 'On{0}_{1}' not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
                                     if (ei == null) continue;

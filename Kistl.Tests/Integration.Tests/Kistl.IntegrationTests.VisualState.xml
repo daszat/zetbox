@@ -10,24 +10,24 @@
           <Nodes>
             <Node UniqueName="[0-1013]Integration" Expanded="true">
               <Nodes>
-                <Node UniqueName="[0-1014]Integration.Tests" Expanded="true">
+                <Node UniqueName="[0-1001]Integration.Tests.SetUp" Expanded="true">
                   <Nodes>
-                    <Node UniqueName="[0-1007]Integration.Tests.Tests.SetUp" Expanded="true">
+                    <Node UniqueName="[0-1015]Integration.Tests.Tests" Expanded="true">
                       <Nodes>
-                        <Node UniqueName="[0-1001]Integration.Tests.Tests.GetListTests" Expanded="true">
+                        <Node UniqueName="[0-1006]Integration.Tests.Tests.GetListTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1002]Integration.Tests.Tests.GetListTests.GetList" />
-                            <Node UniqueName="[0-1004]Integration.Tests.Tests.GetListTests.GetListWithOrderBy" />
-                            <Node UniqueName="[0-1006]Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" />
-                            <Node UniqueName="[0-1005]Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" />
-                            <Node UniqueName="[0-1003]Integration.Tests.Tests.GetListTests.GetListWithTop10" />
+                            <Node UniqueName="[0-1007]Integration.Tests.Tests.GetListTests.GetList" />
+                            <Node UniqueName="[0-1009]Integration.Tests.Tests.GetListTests.GetListWithOrderBy" />
+                            <Node UniqueName="[0-1011]Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" />
+                            <Node UniqueName="[0-1010]Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" />
+                            <Node UniqueName="[0-1008]Integration.Tests.Tests.GetListTests.GetListWithTop10" />
                           </Nodes>
                         </Node>
-                        <Node UniqueName="[0-1008]Integration.Tests.Tests.ObjectTests" Expanded="true">
+                        <Node UniqueName="[0-1002]Integration.Tests.Tests.ObjectTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1009]Integration.Tests.Tests.ObjectTests.GetObject" />
-                            <Node UniqueName="[0-1011]Integration.Tests.Tests.ObjectTests.NewObject" />
-                            <Node UniqueName="[0-1010]Integration.Tests.Tests.ObjectTests.SetObject" />
+                            <Node UniqueName="[0-1003]Integration.Tests.Tests.ObjectTests.GetObject" />
+                            <Node UniqueName="[0-1005]Integration.Tests.Tests.ObjectTests.NewObject" />
+                            <Node UniqueName="[0-1004]Integration.Tests.Tests.ObjectTests.SetObject" />
                           </Nodes>
                         </Node>
                       </Nodes>

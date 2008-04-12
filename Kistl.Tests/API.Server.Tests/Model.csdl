@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="Entities">
+    <EntitySet Name="TestObjClass" EntityType="Model.TestObjClass" />
+  </EntityContainer>
+  <EntityType Name="TestObjClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="StringProp" Type="String" MaxLength="200" Nullable="true" />
+    <Property Name="TestEnumProp" Type="Int32" Nullable="true" />
+  </EntityType>
+</Schema>

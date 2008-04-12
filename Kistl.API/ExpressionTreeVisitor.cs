@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace Kistl.API
 {
+    [Serializable]
     public class ExpressionTreeVisitor
     {
         public virtual void Visit(Expression e)

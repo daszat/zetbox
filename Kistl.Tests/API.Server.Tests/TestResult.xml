@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\API.Server.Tests\Kistl.API.ServerTests.nunit" total="15" failures="0" not-run="0" date="2008-04-12" time="20:34:44">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\API.Server.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Server.Tests\Kistl.API.ServerTests.nunit" success="True" time="10.071" asserts="0">
+    <results>
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Server.Tests\bin\debug\..\Debug\API.Server.Tests.dll" success="True" time="10.056" asserts="0">
+        <results>
+          <test-suite name="API" success="True" time="10.055" asserts="0">
+            <results>
+              <test-suite name="Server" success="True" time="10.055" asserts="0">
+                <results>
+                  <test-suite name="Tests" success="True" time="10.036" asserts="0">
+                    <results>
+                      <test-suite name="Tests" success="True" time="9.320" asserts="0">
+                        <results>
+                          <test-suite name="KistlDataContextTests" success="True" time="9.318" asserts="0">
+                            <results>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_ICollectionEntry" executed="True" success="True" time="6.350" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="True" time="0.144" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.085" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Delete_IDataObject" executed="True" success="True" time="0.181" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_ICollectionEntry" executed="True" success="True" time="0.166" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="True" time="0.103" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetContext" executed="True" success="True" time="0.102" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetTable" executed="True" success="True" time="0.140" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.InitSession" executed="True" success="True" time="0.085" asserts="2" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.InitSessionTwice" executed="True" success="True" time="0.089" asserts="2" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.NoSession" executed="True" success="True" time="0.083" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.SelectSomeData" executed="True" success="True" time="0.154" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SaveChanges" executed="True" success="True" time="1.045" asserts="4" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SaveChanges_Accept" executed="True" success="True" time="0.332" asserts="4" />
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="True" time="0.224" asserts="4" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

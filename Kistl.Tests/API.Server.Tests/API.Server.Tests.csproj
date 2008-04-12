@@ -5,15 +5,28 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</ProjectGuid>
+    <ProjectGuid>{980874F0-D9C1-4EDB-8143-AD51C1E2666E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>API.Tests</RootNamespace>
-    <AssemblyName>API.Tests</AssemblyName>
+    <RootNamespace>API.Server.Tests</RootNamespace>
+    <AssemblyName>API.Server.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,7 +48,11 @@
   <ItemGroup>
     <Reference Include="Kistl.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.API\bin\Debug\Kistl.API.dll</HintPath>
+      <HintPath>..\..\Kistl.API.Server\bin\Debug\Kistl.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Kistl.API.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Kistl.API.Server\bin\Debug\Kistl.API.Server.dll</HintPath>
     </Reference>
     <Reference Include="nunit.core, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="nunit.core.extensions, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
@@ -45,8 +62,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -61,38 +78,53 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
-    <Compile Include="TestCollectionEntry.cs" />
-    <Compile Include="TestEnum.cs" />
-    <Compile Include="TestQueryProvider.cs" />
-    <Compile Include="Tests\APIInitTest.cs" />
-    <Compile Include="Tests\AssemblyLoaderTests.cs" />
-    <Compile Include="Tests\BinarySerializerTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomActionsManagerAPITest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
-    <Compile Include="Tests\CustomActionsManagerFactoryTests.cs" />
-    <Compile Include="Tests\ExpressionTreeVisitorTests.cs" />
-    <Compile Include="Tests\KistlConfigTests.cs" />
-    <Compile Include="Tests\KistlServiceStreamsMessageTests.cs" />
-    <Compile Include="Tests\ExpressionFilterTest.cs" />
-    <Compile Include="Tests\ExtensionHelpersTest.cs" />
-    <Compile Include="TestDataObject.cs" />
-    <Compile Include="Tests\LinqExtensionsTests.cs" />
-    <Compile Include="Tests\NotifyingObservableCollectionTests.cs" />
-    <Compile Include="Tests\ObjectTypeTests.cs" />
-    <Compile Include="Tests\SerializableExpressionTests.cs" />
+    <Compile Include="TestCollectionEntry.cs" />
+    <Compile Include="TestObjClass.cs" />
+    <Compile Include="Tests\KistlDataContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Kistl.APITests.nunit" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Database1.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DefaultConfig.xml" />
-    <Content Include="Kistl.APITests.PartCoverReport.xml" />
-    <Content Include="Kistl.APITests.PartCoverSettings.xml" />
-    <Content Include="Kistl.APITests.VisualState.xml" />
+    <Content Include="Kistl.API.ServerTests.PartCoverSettings.xml" />
     <Content Include="TestResult.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.API.ServerTests.nunit" />
+    <EmbeddedResource Include="Model.csdl" />
+    <EmbeddedResource Include="Model.msl" />
+    <EmbeddedResource Include="Model.ssdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,7 +12,7 @@ namespace Kistl.Client
     {
         public Client()
         {
-            Kistl.API.ObjectType.AsClient();
+            Kistl.API.ObjectType.Init("Kistl.Objects.Client");
         }
 
         /// <summary>

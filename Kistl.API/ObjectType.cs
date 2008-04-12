@@ -3,23 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
+using System.Reflection;
 
 namespace Kistl.API
 {
+    /// TODO: DllIndependentType ???
     [Serializable]
     public class ObjectType
     {
-        private static bool _asClient = false;
-        private static bool _asServer = false;
-
-        public static void AsClient()
+        private static string _AssemblyName;
+        public static string AssemblyName
         {
-            _asClient = true;
+            get
+            {
+                if(string.IsNullOrEmpty(_AssemblyName)) throw new InvalidOperationException("AssemblyName is empty. Missing Init call!");
+                return _AssemblyName;
+            }
         }
 
-        public static void AsServer()
+        public static void Init(string assemblyName)
         {
-            _asServer = true;
+            if (string.IsNullOrEmpty(assemblyName)) throw new ArgumentException("assemblyName cannot be null or empty");
+            _AssemblyName = assemblyName;
+        }
+
+        public static void Init(Assembly assembly)
+        {
+            Init(assembly.FullName);
         }
 
         public ObjectType()
@@ -88,25 +98,14 @@ namespace Kistl.API
             }
         }
 
-        public string FullNameClientDataObject
+        public string FullNameDataObject
         {
             get
             {
                 if (string.IsNullOrEmpty(Namespace) && string.IsNullOrEmpty(Classname))
                     return "";
                 else
-                    return string.Format("{0}.{1}, Kistl.Objects.Client", Namespace, Classname);
-            }
-        }
-
-        public string FullNameServerDataObject
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Namespace) && string.IsNullOrEmpty(Classname))
-                    return "";
-                else
-                    return string.Format("{0}.{1}, Kistl.Objects.Server", Namespace, Classname);
+                    return string.Format("{0}.{1}, {2}", Namespace, Classname, AssemblyName);
             }
         }
 
@@ -124,15 +123,11 @@ namespace Kistl.API
         {
             if (string.IsNullOrEmpty(this.NameDataObject)) throw new ArgumentException("Type is empty");
 
-            Type t;
-            if (_asClient) t = Type.GetType(this.FullNameClientDataObject);
-            else if (_asServer) t = Type.GetType(this.FullNameServerDataObject);
-            else throw new InvalidOperationException("ObjectType not set to Server or Client Object Type. Pleas call AsServer() or AsClient() during startup phase.");
-
-            if (t == null) throw new ApplicationException("Invalid Type " + this.ToString());
+            Type t = Type.GetType(this.FullNameDataObject);
+            if (t == null) throw new TypeLoadException("Invalid Type " + this.ToString());
 
             IDataObject obj = Activator.CreateInstance(t) as IDataObject;
-            if (obj == null) throw new ApplicationException("Cannot create instance");
+            if (obj == null) throw new InvalidOperationException("Cannot create instance");
 
             return obj;
         }

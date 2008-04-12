@@ -3,4 +3,5 @@
   <TargetWorkDir>D:\Programmierung\Kistl\Kistl.Tests\API.Tests</TargetWorkDir>
   <TargetArgs>Kistl.APITests.nunit</TargetArgs>
   <Rule>+[Kistl.API]*</Rule>
+  <Rule>-[Kistl.API]Kistl.API.MethodReturnEventArgs*</Rule>
 </PartCoverSettings>

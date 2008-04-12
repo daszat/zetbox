@@ -15,13 +15,15 @@ namespace Kistl.API
         public static IQueryable<T> AddEqualityCondition<T, V>(this IQueryable<T> queryable,
             string propertyName, V propertyValue)
         {
+            PropertyInfo pi = typeof(T).GetProperty(propertyName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propertyName", "Property not found");
             ParameterExpression pe = Expression.Parameter(typeof(T), "p");
 
             IQueryable<T> x = queryable.Where<T>(
               Expression.Lambda<Func<T, bool>>(
                 Expression.Equal(Expression.Property(
                   pe,
-                  typeof(T).GetProperty(propertyName)),
+                  pi),
                   Expression.Constant(propertyValue, typeof(V)),
                   false,
                   typeof(T).GetMethod("op_Equality")),

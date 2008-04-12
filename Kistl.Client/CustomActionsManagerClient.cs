@@ -98,7 +98,7 @@ namespace Kistl.Client
                                             continue;
                                         }
 
-                                        EventInfo ei = Type.GetType(objType.FullNameClientDataObject).GetEvent(
+                                        EventInfo ei = Type.GetType(objType.FullNameDataObject).GetEvent(
                                             "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
 
                                         if (ei == null)

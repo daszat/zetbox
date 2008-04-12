@@ -75,12 +75,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Kistl.Tests.IntegrationTests.nunit" />
+    <None Include="Kistl.IntegrationTests.nunit" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultConfig.xml" />
-    <Content Include="Integration.Tests.PartCoverReport.xml" />
-    <Content Include="Integration.Tests.PartCoverSettings.xml" />
+    <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />
+    <Content Include="Kistl.IntegrationTests.VisualState.xml" />
+    <Content Include="TestResult.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

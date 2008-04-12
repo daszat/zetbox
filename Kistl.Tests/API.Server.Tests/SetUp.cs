@@ -6,7 +6,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace API.Tests
+namespace API.Server.Tests
 {
     [SetUpFixture]
     public class SetUp
@@ -19,7 +19,8 @@ namespace API.Tests
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             init.Init(@"..\..\DefaultConfig.xml");
 
-            Kistl.API.ObjectType.Init("API.Tests");
+            Kistl.API.ObjectType.Init("API.Server.Tests");
+
             Kistl.API.CustomActionsManagerFactory.Init(new CustomActionsManagerAPITest());
 
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");

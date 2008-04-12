@@ -46,5 +46,13 @@ namespace API.Tests.Tests
 
             Assert.That(result, Is.False);
         }
+
+        [Test]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void IllegalExpressionClass_UnknownToString()
+        {
+            IllegalExpression e = new IllegalExpression();
+            e.ToString();
+        }
     }
 }

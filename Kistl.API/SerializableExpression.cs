@@ -20,7 +20,7 @@ namespace Kistl.API
 
         public SerializableType(Type type, SerializeDirection direction)
         {
-            _GenericTypeParameter = new List<SerializableType>();
+            GenericTypeParameter = new List<SerializableType>();
 
             if (type.IsGenericParameter)
             {
@@ -32,7 +32,7 @@ namespace Kistl.API
                 TypeName = genericType.FullName;
                 AssemblyQualifiedName = genericType.AssemblyQualifiedName;
 
-                type.GetGenericArguments().ForEach<Type>(t => _GenericTypeParameter.Add(new SerializableType(t, direction)));
+                type.GetGenericArguments().ForEach<Type>(t => GenericTypeParameter.Add(new SerializableType(t, direction)));
             }
             else
             {
@@ -57,33 +57,26 @@ namespace Kistl.API
         public string TypeName { get; set; }
         public string AssemblyQualifiedName { get; set; }
 
-        private List<SerializableType> _GenericTypeParameter;
-        public List<SerializableType> GenericTypeParameter
-        {
-            get
-            {
-                return _GenericTypeParameter;
-            }
-        }
+        public List<SerializableType> GenericTypeParameter {get; private set;}
 
         public Type GetSerializedType()
         {
-            Type result;
-            if (_GenericTypeParameter.Count > 0)
+            Type result = null;
+            if (GenericTypeParameter.Count > 0)
             {
                 Type type = Type.GetType(AssemblyQualifiedName);
-                result = type.MakeGenericType(_GenericTypeParameter.Select(t => t.GetSerializedType()).ToArray());
+                if(type != null) result = type.MakeGenericType(GenericTypeParameter.Select(t => t.GetSerializedType()).ToArray());
             }
             else
             {
-                result = Type.GetType(AssemblyQualifiedName, true);
+                result = Type.GetType(AssemblyQualifiedName);
             }
 
             if (result == null)
             {
                 throw new InvalidOperationException(string.Format("Unable to create Type {0}{1}",
                     TypeName,
-                    _GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", _GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : ""));
+                    GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : ""));
             }
             return result;
         }
@@ -269,26 +262,15 @@ namespace Kistl.API
         internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx)
             : base(e, ctx)
         {
-            _value = e.Value;
+            Value = e.Value;
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            return Expression.Constant(_value, Type);
+            return Expression.Constant(Value, Type);
         }
 
-        private object _value;
-        public object Value
-        {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                this._value = value;
-            }
-        }
+        public object Value { get; set; }
     }
     #endregion
 
@@ -299,23 +281,16 @@ namespace Kistl.API
         internal SerializableMemberExpression(MemberExpression e, SerializationContext ctx)
             : base(e, ctx)
         {
-            _memberName = e.Member.Name;
+            MemberName = e.Member.Name;
             Children.Add(SerializableExpression.FromExpression(e.Expression, ctx));
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            return MemberExpression.PropertyOrField(Children[0].ToExpressionInternal(ctx), _memberName);
+            return MemberExpression.PropertyOrField(Children[0].ToExpressionInternal(ctx), MemberName);
         }
 
-        private string _memberName;
-        public string MemberName
-        {
-            get
-            {
-                return _memberName;
-            }
-        }
+        public string MemberName { get; private set; }
     }
     #endregion
 
@@ -326,12 +301,12 @@ namespace Kistl.API
         internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx)
             : base(e, ctx)
         {            
-            if(e.Object != null) _objectExpression = SerializableExpression.FromExpression(e.Object, ctx);
+            if(e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
 
-            _MethodName = e.Method.Name;
+            MethodName = e.Method.Name;
             _Type = new SerializableType(e.Method.DeclaringType, ctx.Direction);
-            _ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(p.ParameterType, ctx.Direction)).ToList();
-            _GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(p, ctx.Direction)).ToList();
+            ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(p.ParameterType, ctx.Direction)).ToList();
+            GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(p, ctx.Direction)).ToList();
 
             if (e.Arguments != null)
             {
@@ -339,32 +314,11 @@ namespace Kistl.API
             }
         }
 
-        private string _MethodName;
-        public string MethodName
-        {
-            get
-            {
-                return _MethodName;
-            }
-        }
+        public string MethodName {get; private set; }
 
-        private List<SerializableType> _ParameterTypes;
-        public List<SerializableType> ParameterTypes
-        {
-            get
-            {
-                return _ParameterTypes;
-            }
-        }
+        public List<SerializableType> ParameterTypes { get; private set; }
 
-        private List<SerializableType> _GenericArguments;
-        public List<SerializableType> GenericArguments
-        {
-            get
-            {
-                return _GenericArguments;
-            }
-        }
+        public List<SerializableType> GenericArguments {get; private set; }
 
         private SerializableType _Type;
         public Type MethodType
@@ -419,37 +373,30 @@ namespace Kistl.API
         public MethodInfo GetMethodInfo()
         {
             MethodInfo mi;
-            if (_GenericArguments != null && _GenericArguments.Count > 0)
+            if (GenericArguments != null && GenericArguments.Count > 0)
             {
-                mi = FindGenericMethod(MethodType, _MethodName,
-                        _GenericArguments.Select(p => p.GetSerializedType()).ToArray(),
-                        _ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
+                mi = FindGenericMethod(MethodType, MethodName,
+                        GenericArguments.Select(p => p.GetSerializedType()).ToArray(),
+                        ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
             }
             else
             {
-                mi = MethodType.GetMethod(_MethodName, _ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
+                mi = MethodType.GetMethod(MethodName, ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
             }
 
             if (mi == null)
             {
-                throw new MissingMethodException(MethodType.FullName, _MethodName);
+                throw new MissingMethodException(MethodType.FullName, MethodName);
             }
             return mi;
         }
 
-        private SerializableExpression _objectExpression;
-        public SerializableExpression ObjectExpression
-        {
-            get
-            {
-                return _objectExpression;
-            }
-        }
+        public SerializableExpression ObjectExpression { get; private set; }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
             return Expression.Call(
-                _objectExpression == null ? null : _objectExpression.ToExpressionInternal(ctx), 
+                ObjectExpression == null ? null : ObjectExpression.ToExpressionInternal(ctx), 
                 GetMethodInfo(),
                 Children.Select(e => e.ToExpressionInternal(ctx)));
         }

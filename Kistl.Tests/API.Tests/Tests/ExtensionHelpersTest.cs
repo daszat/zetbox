@@ -15,19 +15,19 @@ namespace API.Tests.Tests
     [TestFixture]
     public class ExtensionHelpersTest
     {
-        XMLObject obj;
+        TestDataObject obj;
 
         [SetUp]
         public void SetUp()
         {
-            obj = new XMLObject() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
+            obj = new TestDataObject() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
         }
 
         [Test]
         public void XmlString()
         {
             string xml = obj.ToXmlString();
-            XMLObject result = xml.FromXmlString<XMLObject>();
+            TestDataObject result = xml.FromXmlString<TestDataObject>();
 
             Assert.That(result, Is.EqualTo(obj));
         }
@@ -115,31 +115,31 @@ namespace API.Tests.Tests
         [Test]
         public void Clone_List()
         {
-            List<XMLObject> list = new List<XMLObject>();
-            list.Add(new XMLObject() { IntProperty = 1 });
-            list.Add(new XMLObject() { IntProperty = 2 });
-            List<XMLObject> result = list.Clone();
+            List<TestDataObject> list = new List<TestDataObject>();
+            list.Add(new TestDataObject() { IntProperty = 1 });
+            list.Add(new TestDataObject() { IntProperty = 2 });
+            List<TestDataObject> result = list.Clone();
             Assert.That(result, Is.EqualTo(list));
         }
 
         [Test]
         public void Clone_ObservableCollection()
         {
-            ObservableCollection<XMLObject> list = new ObservableCollection<XMLObject>();
-            list.Add(new XMLObject() { IntProperty = 1 });
-            list.Add(new XMLObject() { IntProperty = 2 });
-            ObservableCollection<XMLObject> result = list.Clone();
+            ObservableCollection<TestDataObject> list = new ObservableCollection<TestDataObject>();
+            list.Add(new TestDataObject() { IntProperty = 1 });
+            list.Add(new TestDataObject() { IntProperty = 2 });
+            ObservableCollection<TestDataObject> result = list.Clone();
             Assert.That(result, Is.EqualTo(list));
         }
 
         [Test]
         public void Clone_NotifyingObservableCollection()
         {
-            Kistl.App.Test.TestObjClass dataObj = new Kistl.App.Test.TestObjClass();
-            NotifyingObservableCollection<XMLObject> list = new NotifyingObservableCollection<XMLObject>(dataObj, "");
-            list.Add(new XMLObject() { IntProperty = 1 });
-            list.Add(new XMLObject() { IntProperty = 2 });
-            NotifyingObservableCollection<XMLObject> result = list.Clone(dataObj);
+            TestDataObject dataObj = new TestDataObject();
+            NotifyingObservableCollection<TestDataObject> list = new NotifyingObservableCollection<TestDataObject>(dataObj, "");
+            list.Add(new TestDataObject() { IntProperty = 1 });
+            list.Add(new TestDataObject() { IntProperty = 2 });
+            NotifyingObservableCollection<TestDataObject> result = list.Clone(dataObj);
             Assert.That(result, Is.EqualTo(list));
         }
     }
