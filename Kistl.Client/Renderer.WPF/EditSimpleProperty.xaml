@@ -1,0 +1,16 @@
+﻿<app:PropertyControl 
+    x:Class="Kistl.GUI.Renderer.WPF.EditSimpleProperty"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+    xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
+    MinWidth="400" x:Name="EditCtrl" ShortLabel="Label" Description="This is a simple string. Please enter a value." Value="Value">
+    <DockPanel 
+        ToolTip="{Binding  ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"
+        >
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
+        <kevin:InfoTextBox Text="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                 IsReadOnly="{Binding  ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                 TextBoxInfo="{Binding  ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"/>
+    </DockPanel>
+</app:PropertyControl>

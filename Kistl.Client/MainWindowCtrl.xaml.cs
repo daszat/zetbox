@@ -82,6 +82,9 @@ namespace Kistl.Client
         /// <param name="e"></param>
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // TODO!
+            MessageBox.Show("not yet implemented");
+#if false
             try
             {
                 Kistl.App.Base.ObjectClass objClass = cbObjectTypes.SelectedItem as Kistl.App.Base.ObjectClass;
@@ -97,6 +100,7 @@ namespace Kistl.Client
             {
                 Helper.HandleError(ex);
             }
+#endif
         }
 
         private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -132,8 +136,8 @@ namespace Kistl.Client
                 try
                 {
                     // Hole eine Liste aller ObjectClasses Objekte & zeige sie in der DropDown an
-                    lst.SourceObjectType = new ObjectType(typeof(Kistl.App.Base.ObjectClass));
-                    this.DataContext = Helper.ObjectClasses.Values;
+                    // lst.SourceObjectType = new ObjectType(typeof(Kistl.App.Base.ObjectClass));
+                    // this.DataContext = Helper.ObjectClasses.Values;
                 }
                 catch (Exception ex)
                 {
@@ -162,17 +166,6 @@ namespace Kistl.Client
             SplashScreen.HideSplashScreen();
         }
 
-        private void menu_Template_Click(object sender, RoutedEventArgs e)
-        {
-            var win = new Kistl.GUI.Renderer.WPF.WPFWindow();
-
-            KistlContext ctx = new KistlContext();
-
-            var q = ctx.GetQuery<Kistl.App.Projekte.Task>();
-            var task8 = (from t in q where t.ID == 8 select t).Single();
-
-            win.Show(ctx, task8);
-        }
     }
 
     internal class NodeTemplateSelector : DataTemplateSelector
@@ -181,7 +174,7 @@ namespace Kistl.Client
         {
             ObjNode n = item as ObjNode;
             BaseClientDataObject obj = n.Item;
-            if(n.IsCenter)
+            if (n.IsCenter)
                 return (DataTemplate)((FrameworkElement)container).FindResource("specialTemplate");
             else
                 return (DataTemplate)((FrameworkElement)container).FindResource("nodeTemplate");
@@ -203,7 +196,7 @@ namespace Kistl.Client
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public List<ObjNode> SubItems
         {
-            get 
+            get
             {
                 List<ObjNode> result = new List<ObjNode>();
 
@@ -234,7 +227,7 @@ namespace Kistl.Client
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
                 }

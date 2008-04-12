@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Kistl.Client
 {
-    class UndoManager
+    public class UndoManager
     {
 
         Stack<UndoOperation> undoStack = new Stack<UndoOperation>();

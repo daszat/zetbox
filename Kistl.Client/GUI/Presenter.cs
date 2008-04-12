@@ -6,41 +6,10 @@ using Kistl.App.Base;
 using Kistl.API;
 using Kistl.API.Client;
 using System.Collections;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI
 {
-    public static class ExtensionHelper
-    {
-        public static string GetPropertyValue(this BaseClientDataObject obj, StringProperty prop)
-        {
-            return obj.GetPropertyValue<string>(prop.PropertyName);
-        }
-
-        public static void SetPropertyValue(this BaseClientDataObject obj, StringProperty prop, string value)
-        {
-            obj.SetPropertyValue<string>(prop.PropertyName, value);
-        }
-
-        public static DateTime? GetPropertyValue(this BaseClientDataObject obj, DateTimeProperty prop)
-        {
-            return obj.GetPropertyValue<DateTime?>(prop.PropertyName);
-        }
-
-        public static void SetPropertyValue(this BaseClientDataObject obj, DateTimeProperty prop, DateTime? value)
-        {
-            obj.SetPropertyValue<DateTime?>(prop.PropertyName, value);
-        }
-
-        public static int GetPropertyValue(this BaseClientDataObject obj, ObjectReferenceProperty prop)
-        {
-            return obj.GetPropertyValue<int>("fk_" + prop.PropertyName);
-        }
-
-        public static void SetPropertyValue(this BaseClientDataObject obj, ObjectReferenceProperty prop, int value)
-        {
-            obj.SetPropertyValue<int>("fk_" + prop.PropertyName, value);
-        }
-    }
 
     public abstract class Presenter
     {
@@ -79,6 +48,80 @@ namespace Kistl.GUI
 
         private IBasicControl _Control;
         public IBasicControl Control { get { return _Control; } }
+
+    }
+
+    public class ObjectPresenter : Presenter
+    {
+        public ObjectPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = Object.Type.Classname;
+            Control.Description = Object.Type.Classname;
+            Control.Value = Object;
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+
+
+        }
+
+        // fixup locally used types
+        public new IObjectControl Control { get { return (IObjectControl)base.Control; } }
+
+    }
+
+    public class IntPresenter : Presenter
+    {
+        public IntPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = Property.PropertyName;
+            Control.Description = Property.AltText;
+            Control.Value = Object.GetPropertyValue(Property);
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+
+            Control.UserInput += new EventHandler(Control_UserInput);
+        }
+
+        private void Control_UserInput(object sender, EventArgs e)
+        {
+            Object.SetPropertyValue(Property, Control.Value);
+        }
+
+        // localize type-unsafety
+        public IntProperty Property { get { return (IntProperty)Preferences.Property; } }
+        // fixup locally used types
+        public new IIntControl Control { get { return (IIntControl)base.Control; } }
+
+    }
+
+    public class DoublePresenter : Presenter
+    {
+        public DoublePresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = Property.PropertyName;
+            Control.Description = Property.AltText;
+            Control.Value = Object.GetPropertyValue(Property);
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+
+            Control.UserInput += new EventHandler(Control_UserInput);
+        }
+
+        private void Control_UserInput(object sender, EventArgs e)
+        {
+            Object.SetPropertyValue(Property, Control.Value);
+        }
+
+        // localize type-unsafety
+        public DoubleProperty Property { get { return (DoubleProperty)Preferences.Property; } }
+        // fixup locally used types
+        public new IDoubleControl Control { get { return (IDoubleControl)base.Control; } }
 
     }
 
@@ -165,6 +208,26 @@ namespace Kistl.GUI
 
     }
 
+    public class BackReferencePresenter : Presenter
+    {
+        public BackReferencePresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = Property.PropertyName;
+            Control.Description = Property.AltText;
+            Control.ItemsSource = Object.GetPropertyValue<IEnumerable>(Property.PropertyName);
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+        }
+
+        // localize type-unsafety
+        public BackReferenceProperty Property { get { return (BackReferenceProperty)Preferences.Property; } }
+        // fixup locally used types
+        public new IListControl Control { get { return (IListControl)base.Control; } }
+
+    }
+
     public class GroupPresenter : Presenter
     {
         public GroupPresenter() { }
@@ -197,20 +260,96 @@ namespace Kistl.GUI
         event /*UserInput<string>*/EventHandler UserInput;
     }
 
+    public interface IIntControl : IBasicControl
+    {
+        int Value { get; set; }
+        event /*UserInput<int>*/EventHandler UserInput;
+    }
+
+    public interface IDoubleControl : IBasicControl
+    {
+        double Value { get; set; }
+        event /*UserInput<double>*/EventHandler UserInput;
+    }
+
     public interface IDateTimeControl : IBasicControl
     {
         DateTime? Value { get; set; }
         event /*UserInput<DateTime>*/EventHandler UserInput;
     }
 
-    public interface IPointerControl : IBasicControl
+    public interface IListControl : IBasicControl
+    {
+        IEnumerable ItemsSource { get; set; }
+    }
+
+    public interface IPointerControl : IListControl
     {
         /// <summary>
-        /// The ObjectType of the Target
+        /// The ObjectType of the listed Objects
         /// </summary>
         ObjectType ObjectType { get; set; }
-        IEnumerable ItemsSource { get; set; } 
         int TargetID { get; set; }
         event /*UserInput<int>*/EventHandler UserInput;
     }
+
+    public interface IObjectControl : IBasicControl
+    {
+        BaseClientDataObject Value { get; set; }
+        event /*UserInput<BaseClientDataObject>*/EventHandler UserInput;
+    }
+
+    public static class ExtensionHelper
+    {
+        public static string GetPropertyValue(this IDataObject obj, StringProperty prop)
+        {
+            return obj.GetPropertyValue<string>(prop.PropertyName);
+        }
+
+        public static void SetPropertyValue(this IDataObject obj, StringProperty prop, string value)
+        {
+            obj.SetPropertyValue<string>(prop.PropertyName, value);
+        }
+
+        public static double GetPropertyValue(this IDataObject obj, DoubleProperty prop)
+        {
+            return obj.GetPropertyValue<double>(prop.PropertyName);
+        }
+
+        public static void SetPropertyValue(this IDataObject obj, DoubleProperty prop, double value)
+        {
+            obj.SetPropertyValue<double>(prop.PropertyName, value);
+        }
+
+        public static int GetPropertyValue(this IDataObject obj, IntProperty prop)
+        {
+            return obj.GetPropertyValue<int>(prop.PropertyName);
+        }
+
+        public static void SetPropertyValue(this IDataObject obj, IntProperty prop, int value)
+        {
+            obj.SetPropertyValue<int>(prop.PropertyName, value);
+        }
+
+        public static DateTime? GetPropertyValue(this IDataObject obj, DateTimeProperty prop)
+        {
+            return obj.GetPropertyValue<DateTime?>(prop.PropertyName);
+        }
+
+        public static void SetPropertyValue(this IDataObject obj, DateTimeProperty prop, DateTime? value)
+        {
+            obj.SetPropertyValue<DateTime?>(prop.PropertyName, value);
+        }
+
+        public static int GetPropertyValue(this IDataObject obj, ObjectReferenceProperty prop)
+        {
+            return obj.GetPropertyValue<int>("fk_" + prop.PropertyName);
+        }
+
+        public static void SetPropertyValue(this IDataObject obj, ObjectReferenceProperty prop, int value)
+        {
+            obj.SetPropertyValue<int>("fk_" + prop.PropertyName, value);
+        }
+    }
+
 }

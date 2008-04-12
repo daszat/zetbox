@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using Kistl.App.Base;
 using Kistl.Client;
+using Kistl.API;
 
 namespace Kistl.GUI.DB
 {
@@ -14,7 +16,167 @@ namespace Kistl.GUI.DB
         public string DisplayName { get; set; }
         public TemplateUsage Usage { get; set; }
         public Visual VisualTree { get; set; }
-        public ObjectClass Class { get; set; }
+        public ObjectType Type { get; set; }
+
+        public static Template[] List = new[] {
+            // TaskEditTemplate.Create(),
+            DefaultTemplate(new Kistl.API.ObjectType("Kistl.App.Projekte", "Projekt")),
+            DefaultTemplate(new Kistl.API.ObjectType("Kistl.App.Projekte", "Task"))
+                                        };
+
+        private static Template DefaultTemplate(ObjectType objectType)
+        {
+            Template result = new Template()
+            {
+                DisplayName = objectType.Classname,
+                Usage = TemplateUsage.EditControl,
+                Type = objectType
+            };
+            result.VisualTree = new Visual()
+            {
+                Name = "object",
+                Description = "top level visual to display a object",
+                Children = new List<Visual>()
+            };
+            ObjectClass klass = Kistl.Client.Helper.ObjectClasses[result.Type];
+            foreach (var p in klass.Properties)
+            {
+                result.VisualTree.Children.Add(CreateDefaultVisual(p));
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Part of a Visitor&lt;BaseProperty&gt; pattern to create a Visual for a given BaseProperty
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private static Visual CreateDefaultVisual(BaseProperty p)
+        {
+            if (p is BackReferenceProperty)
+            {
+                return CreateVisual((BackReferenceProperty)p);
+            }
+            else if (p is BoolProperty)
+            {
+                return CreateVisual((BoolProperty)p);
+            }
+            else if (p is DateTimeProperty)
+            {
+                return CreateVisual((DateTimeProperty)p);
+            }
+            else if (p is DoubleProperty)
+            {
+                return CreateVisual((DoubleProperty)p);
+            }
+            else if (p is EnumerationProperty)
+            {
+                return CreateVisual((EnumerationProperty)p);
+            }
+            else if (p is IntProperty)
+            {
+                return CreateVisual((IntProperty)p);
+            }
+            else if (p is ObjectReferenceProperty)
+            {
+                return CreateVisual((ObjectReferenceProperty)p);
+            }
+            else if (p is StringProperty)
+            {
+                return CreateVisual((StringProperty)p);
+            }
+            else if (p is ValueTypeProperty)
+            {
+                return CreateVisual((ValueTypeProperty)p);
+            }
+            else
+            {
+                throw new InvalidCastException(
+                    String.Format("Found unknown Property Type, when trying to create Default Visual: {0}",
+                        p.Type));
+            }
+        }
+
+        private static Visual CreateVisual(ValueTypeProperty valueTypeProperty)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Visual CreateVisual(StringProperty stringProperty)
+        {
+            return new Visual()
+            {
+                Name = "string",
+                Description = "this control displays a string",
+                Property = stringProperty
+            };
+        }
+
+        private static Visual CreateVisual(ObjectReferenceProperty objectReferenceProperty)
+        {
+            return new Visual()
+            {
+                Name = "fk",
+                Description = "this control displays a foreign key reference",
+                Property = objectReferenceProperty
+            };
+        }
+
+        private static Visual CreateVisual(IntProperty intProperty)
+        {
+            return new Visual()
+            {
+                Name = "int",
+                Description = "this control displays a integer",
+                Property = intProperty
+            };
+        }
+
+        private static Visual CreateVisual(EnumerationProperty enumerationProperty)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Visual CreateVisual(DoubleProperty doubleProperty)
+        {
+            return new Visual()
+            {
+                Name = "double",
+                Description = "this control displays a double",
+                Property = doubleProperty
+            };
+        }
+
+        private static Visual CreateVisual(DateTimeProperty dateTimeProperty)
+        {
+            return new Visual()
+            {
+                Name = "date",
+                Description = "this control displays a date and time",
+                Property = dateTimeProperty
+            };
+        }
+
+        private static Visual CreateVisual(BoolProperty boolProperty)
+        {
+            return new Visual()
+            {
+                Name = "bool",
+                Description = "this control displays a boolean",
+                Property = boolProperty
+            };
+        }
+
+        private static Visual CreateVisual(BackReferenceProperty backReferenceProperty)
+        {
+            return new Visual()
+            {
+                Name = "list",
+                Description = "this control displays a list of objects referencing this via a given relation",
+                Property = backReferenceProperty
+            };
+        }
+
     }
 
     /// <summary>
@@ -44,7 +206,7 @@ namespace Kistl.GUI.DB
         public static Template Create()
         {
             Kistl.API.ObjectType taskObjectType = new Kistl.API.ObjectType("Kistl.App.Projekte", "Task");
-            ObjectClass tTask = Helper.ObjectClasses[taskObjectType];
+            ObjectClass tTask = Kistl.Client.Helper.ObjectClasses[taskObjectType];
             // var visuals = (from p in tTask.Properties select new Visual()).ToList();
             List<Visual> visuals = new List<Visual>();
 
@@ -71,7 +233,7 @@ namespace Kistl.GUI.DB
             {
                 DisplayName = "TaskEditTemplate",
                 Usage = TemplateUsage.EditControl,
-                Class = tTask,
+                Type = taskObjectType,
                 VisualTree = new Visual()
                 {
                     Name = "group",

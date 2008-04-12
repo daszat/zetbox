@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 using Kistl.API.Client;
+using Kistl.API;
 
 namespace Kistl.Client.Converter
 {
-    [ValueConversion(typeof(BaseClientDataObject), typeof(string))]
+    [ValueConversion(typeof(IDataObject), typeof(string))]
     public class IconConverter : IValueConverter
     {
         private string GetIconPath(string name)
@@ -36,9 +37,9 @@ namespace Kistl.Client.Converter
                 Kistl.App.GUI.Icon obj = (Kistl.App.GUI.Icon)value;
                 return GetIconPath(obj.IconFile);
             }
-            else if (value is BaseClientDataObject)
+            else if (value is IDataObject)
             {
-                BaseClientDataObject obj = (BaseClientDataObject)value;
+                IDataObject obj = (IDataObject)value;
                 if (Helper.ObjectClasses[obj.Type].DefaultIcon != null)
                 {
                     return GetIconPath(Helper.ObjectClasses[obj.Type].DefaultIcon.IconFile);

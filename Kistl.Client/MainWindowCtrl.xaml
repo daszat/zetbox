@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Kistl.Client.MainWindowCtrl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:my="clr-namespace:Kistl.Client.Controls"
+    xmlns:my="clr-namespace:Kistl.GUI.Renderer.WPF"
     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.Graph;assembly=WPFSamplesLib"
     xmlns:local="clr-namespace:Kistl.Client"
     MinHeight="480" MinWidth="640" Loaded="Window_Loaded">
@@ -16,7 +16,6 @@
             </MenuItem>
             <MenuItem Header="Admin">
                 <MenuItem Header="Generate Code and Database" Name="menu_Generate" Click="menu_Generate_Click" />
-                <MenuItem Header="Test Templates" Name="menu_Template" Click="menu_Template_Click" />
             </MenuItem>
         </Menu>
         <Slider Name="WorkspaceSlider" DockPanel.Dock="Bottom" Value="1.0" Minimum="0.5" Maximum="3.0" />

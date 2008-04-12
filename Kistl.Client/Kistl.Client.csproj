@@ -78,35 +78,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\EditPointerPropertyList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DesktopTreeView.xaml">
+    <Page Include="Renderer.WPF\EditDoubleProperty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EditDateTimeProperty.xaml">
+    <Page Include="Renderer.WPF\EditPointerPropertyList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\EditBoolProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\EditPointerProperty.xaml">
+    <Page Include="Renderer.WPF\DesktopTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EditSimpleProperty.xaml">
+    <Page Include="Renderer.WPF\EditDateTimeProperty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Renderer.WPF\EditBoolProperty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Renderer.WPF\EditPointerProperty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EditSimplePropertyList.xaml">
+    <Page Include="Renderer.WPF\EditSimpleProperty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ObjectList.xaml">
+    <Page Include="Renderer.WPF\EditSimplePropertyList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,7 +126,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ObjectWindow.xaml">
+    <Page Include="Renderer.WPF\ObjectList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Renderer.WPF\EditIntProperty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,21 +152,27 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client.cs" />
-    <Compile Include="Controls\EditPointerPropertyList.xaml.cs">
+    <Compile Include="Converter\Converters.cs" />
+    <Compile Include="Renderer.WPF\EditDoubleProperty.xaml.cs">
+      <DependentUpon>EditDoubleProperty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\EditPointerPropertyList.xaml.cs">
       <DependentUpon>EditPointerPropertyList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DesktopTreeView.xaml.cs">
+    <Compile Include="Renderer.WPF\DesktopTreeView.xaml.cs">
       <DependentUpon>DesktopTreeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditSimplePropertyList.xaml.cs">
+    <Compile Include="Renderer.WPF\EditSimplePropertyList.xaml.cs">
       <DependentUpon>EditSimplePropertyList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GroupBoxWrapper.cs" />
-    <Compile Include="Controls\PropertyControl.cs" />
+    <Compile Include="Renderer.WPF\GroupBoxWrapper.cs" />
+    <Compile Include="Renderer.WPF\PropertyControl.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GUI.DB\KistlGUIContext.cs" />
+    <Compile Include="GUI\ApplicationPresenter.cs" />
     <Compile Include="GUI\Presenter.cs" />
+    <Compile Include="GUI\Renderer.BasicRenderer.cs" />
     <Compile Include="MainWindowCtrl.xaml.cs">
       <DependentUpon>MainWindowCtrl.xaml</DependentUpon>
     </Compile>
@@ -171,32 +181,33 @@
     </Compile>
     <Compile Include="GUI.DB\Template.cs" />
     <Compile Include="GUI.DB\Visual.cs" />
+    <Compile Include="Renderer.WPF\ObjectList.xaml.cs">
+      <DependentUpon>ObjectList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\Renderer.cs" />
+    <Compile Include="Renderer.WPF\EditIntProperty.xaml.cs">
+      <DependentUpon>EditIntProperty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Renderer.WPF\WPFWindow.xaml.cs">
       <DependentUpon>WPFWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
-    <Compile Include="Controls\EditDateTimeProperty.xaml.cs">
+    <Compile Include="Renderer.WPF\EditDateTimeProperty.xaml.cs">
       <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditBoolProperty.xaml.cs">
+    <Compile Include="Renderer.WPF\EditBoolProperty.xaml.cs">
       <DependentUpon>EditBoolProperty.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditPointerProperty.xaml.cs">
+    <Compile Include="Renderer.WPF\EditPointerProperty.xaml.cs">
       <DependentUpon>EditPointerProperty.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditSimpleProperty.xaml.cs">
+    <Compile Include="Renderer.WPF\EditSimpleProperty.xaml.cs">
       <DependentUpon>EditSimpleProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ObjectList.xaml.cs">
-      <DependentUpon>ObjectList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ChooseObjectClass.xaml.cs">
       <DependentUpon>ChooseObjectClass.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
-    <Compile Include="ObjectWindow.xaml.cs">
-      <DependentUpon>ObjectWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

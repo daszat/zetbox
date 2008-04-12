@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.App.Base;
+
+using Kistl.API;
 using Kistl.API.Client;
-using Kistl.Client.Controls;
+using Kistl.App.Base;
 
 namespace Kistl.GUI.DB
 {
@@ -39,9 +40,17 @@ namespace Kistl.GUI.DB
         public static Presenter CreatePresenter(PresenterInfo info, BaseClientDataObject obj, Visual v, IBasicControl ctrl)
         {
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
-            Presenter result = (Presenter) Activator.CreateInstance(controlType);
+            Presenter result = (Presenter)Activator.CreateInstance(controlType);
             result.InitializeComponent(obj, v, ctrl);
             return result;
+        }
+
+        public static Template FindTemplate(this IDataObject obj, TemplateUsage templateUsage)
+        {
+            return (from t in Template.List
+                    where t.Type.Equals(obj.Type)
+                        && t.Usage == templateUsage
+                    select t).Single();
         }
     }
 
@@ -65,23 +74,39 @@ namespace Kistl.GUI.DB
             new ControlInfo() { Platform = Platform.WPF, Control = "group",
                 Container = true,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
-                ClassName = "Kistl.Client.Controls.GroupBoxWrapper" },
-            new ControlInfo() { Platform = Platform.WPF,Control = "fk",
+                ClassName = "Kistl.GUI.Renderer.WPF.GroupBoxWrapper" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "fk",
                 Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
-                ClassName = "Kistl.Client.Controls.EditPointerProperty" },
-            new ControlInfo() { Platform = Platform.WPF,Control = "string",
+                ClassName = "Kistl.GUI.Renderer.WPF.EditPointerProperty" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "string",
                 Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
-                ClassName = "Kistl.Client.Controls.EditSimpleProperty" },
-            new ControlInfo() { Platform = Platform.WPF,Control = "date",
+                ClassName = "Kistl.GUI.Renderer.WPF.EditSimpleProperty" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "date",
                 Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
-                ClassName = "Kistl.Client.Controls.EditDateTimeProperty" },
-            new ControlInfo() { Platform = Platform.WPF,Control = "number",
+                ClassName = "Kistl.GUI.Renderer.WPF.EditDateTimeProperty" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "int",
                 Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
-                ClassName = "Kistl.Client.Controls.EditSimpleProperty" },
+                ClassName = "Kistl.GUI.Renderer.WPF.EditIntProperty" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "double",
+                Container = false,
+                AssemblyName = "Kistl.Client, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.EditDoubleProperty" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "main",
+                Container = false,
+                AssemblyName = "Kistl.Client, Version=1.0.0.0",
+                ClassName = "Kistl.Client.MainWindow" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "object",
+                Container = true,
+                AssemblyName = "Kistl.Client, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.WPFWindow" },
+            new ControlInfo() { Platform = Platform.WPF, Control = "list",
+                Container = false,
+                AssemblyName = "Kistl.Client, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.ObjectList" },
         };
     }
 
@@ -99,8 +124,18 @@ namespace Kistl.GUI.DB
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.PointerPresenter" },
             new PresenterInfo() { Control = "string",
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.StringPresenter" },
+            new PresenterInfo() { Control = "int",
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.IntPresenter" },
+            new PresenterInfo() { Control = "double",
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DoublePresenter" },
             new PresenterInfo() { Control = "date",
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DateTimePresenter" }
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DateTimePresenter" },
+            new PresenterInfo() { Control = "main",
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ApplicationPresenter" },
+            new PresenterInfo() { Control = "object",
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectPresenter" },
+            new PresenterInfo() { Control = "list",
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BackReferencePresenter" },
         };
 
     }
