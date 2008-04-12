@@ -94,10 +94,10 @@ namespace Kistl.GUI
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
 
-            Control.ValueChanged += new EventHandler(Control_ValueChanged);
+            Control.UserInput += new EventHandler(Control_UserInput);
         }
 
-        private void Control_ValueChanged(object sender, EventArgs e)
+        private void Control_UserInput(object sender, EventArgs e)
         {
             Object.SetPropertyValue(Property, Control.Value);
         }
@@ -121,10 +121,10 @@ namespace Kistl.GUI
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
 
-            Control.ValueChanged += new EventHandler(Control_ValueChanged);
+            Control.UserInput += new EventHandler(Control_UserInput);
         }
 
-        private void Control_ValueChanged(object sender, EventArgs e)
+        private void Control_UserInput(object sender, EventArgs e)
         {
             Object.SetPropertyValue(Property, Control.Value);
         }
@@ -150,7 +150,7 @@ namespace Kistl.GUI
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
 
-            Control.TargetIDChanged += new EventHandler(Control_TargetIDChanged);
+            Control.UserInput += new EventHandler(Control_TargetIDChanged);
         }
 
         private void Control_TargetIDChanged(object sender, EventArgs e)
@@ -194,13 +194,13 @@ namespace Kistl.GUI
     public interface IStringControl : IBasicControl
     {
         string Value { get; set; }
-        event /*StringValueChanged*/EventHandler ValueChanged;
+        event /*UserInput<string>*/EventHandler UserInput;
     }
 
     public interface IDateTimeControl : IBasicControl
     {
         DateTime? Value { get; set; }
-        event /*DateTimeValueChanged*/EventHandler ValueChanged;
+        event /*UserInput<DateTime>*/EventHandler UserInput;
     }
 
     public interface IPointerControl : IBasicControl
@@ -211,6 +211,6 @@ namespace Kistl.GUI
         ObjectType ObjectType { get; set; }
         IEnumerable ItemsSource { get; set; } 
         int TargetID { get; set; }
-        event /*DateTimeValueChanged*/EventHandler TargetIDChanged;
+        event /*UserInput<int>*/EventHandler UserInput;
     }
 }

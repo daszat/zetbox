@@ -142,7 +142,7 @@ namespace Kistl.Client.Controls
         }
 
         private event EventHandler _TargetIDChanged;
-        event EventHandler IPointerControl.TargetIDChanged
+        event EventHandler IPointerControl.UserInput
         {
             add { _TargetIDChanged += value; }
             remove { _TargetIDChanged -= value; }

@@ -47,23 +47,23 @@ namespace Kistl.Client.Controls
             base.OnPropertyChanged(e);
             if (e.Property == ValueProperty)
             {
-                OnValueChanged(e);
+                OnUserInput(e);
             }
         }
 
-        protected virtual void OnValueChanged(DependencyPropertyChangedEventArgs e)
+        protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (_ValueChanged != null)
+            if (_UserInput != null)
             {
-                _ValueChanged(this, new EventArgs());
+                _UserInput(this, new EventArgs());
             }
         }
 
-        private event EventHandler _ValueChanged;
-        event EventHandler IStringControl.ValueChanged
+        private event EventHandler _UserInput;
+        event EventHandler IStringControl.UserInput
         {
-            add { _ValueChanged += value; }
-            remove { _ValueChanged -= value; }
+            add { _UserInput += value; }
+            remove { _UserInput -= value; }
         }
 
 
