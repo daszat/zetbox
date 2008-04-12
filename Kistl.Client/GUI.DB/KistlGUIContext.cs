@@ -53,23 +53,33 @@ namespace Kistl.GUI.DB
         public Platform Platform { get; set; }
         public string AssemblyName { get; set; }
         public string ClassName { get; set; }
+        public bool Container { get; set; }
 
         public static ControlInfo[] Implementations = new[] {
             new ControlInfo() { Platform = Platform.ASPNET, Control = "group",
+                Container = true,
+                AssemblyName = "blah", ClassName = "foo" },
+            new ControlInfo() { Platform = Platform.ASPNET, Control = "string",
+                Container = false,
                 AssemblyName = "blah", ClassName = "foo" },
             new ControlInfo() { Platform = Platform.WPF, Control = "group",
-                AssemblyName = "PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
-                ClassName = "System.Windows.Controls.GroupBox" },
+                Container = true,
+                AssemblyName = "Kistl.Client, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Controls.GroupBoxWrapper" },
             new ControlInfo() { Platform = Platform.WPF,Control = "fk",
+                Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Controls.EditPointerProperty" },
             new ControlInfo() { Platform = Platform.WPF,Control = "string",
+                Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Controls.EditSimpleProperty" },
             new ControlInfo() { Platform = Platform.WPF,Control = "date",
+                Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Controls.EditDateTimeProperty" },
             new ControlInfo() { Platform = Platform.WPF,Control = "number",
+                Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Controls.EditSimpleProperty" },
         };
@@ -83,6 +93,8 @@ namespace Kistl.GUI.DB
         public string ClassName { get; set; }
 
         public static PresenterInfo[] Implementations = new[] {
+            new PresenterInfo() { Control = "group",
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.GroupPresenter" },
             new PresenterInfo() { Control = "fk",
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.PointerPresenter" },
             new PresenterInfo() { Control = "string",
@@ -98,4 +110,5 @@ namespace Kistl.GUI.DB
         WPF,
         ASPNET
     }
+
 }

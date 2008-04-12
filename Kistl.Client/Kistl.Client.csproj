@@ -157,6 +157,7 @@
     <Compile Include="Controls\EditSimplePropertyList.xaml.cs">
       <DependentUpon>EditSimplePropertyList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GroupBoxWrapper.cs" />
     <Compile Include="Controls\PropertyControl.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
@@ -168,7 +169,6 @@
     <Compile Include="ObjectControl.xaml.cs">
       <DependentUpon>ObjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI.DB\Container.cs" />
     <Compile Include="GUI.DB\Template.cs" />
     <Compile Include="GUI.DB\Visual.cs" />
     <Compile Include="Renderer.WPF\WPFWindow.xaml.cs">

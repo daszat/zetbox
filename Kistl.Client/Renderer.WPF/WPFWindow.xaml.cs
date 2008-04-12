@@ -373,29 +373,52 @@ namespace Kistl.GUI.Renderer.WPF
                     ));
             }
 
-            var panel = new StackPanel();
-            foreach (var visual in template.VisualTree.Children)
-            {
-                var cInfo = KistlGUIContext.FindControlInfo(Platform.WPF, visual);
-                var pInfo = KistlGUIContext.FindPresenterInfo(visual, cInfo);
-
-                var widget = KistlGUIContext.CreateControl(cInfo);
-                var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
-                
-                panel.Children.Add((Control)widget);
-            }
-
             // testing
-            var frame = new GroupBox()
-            {
-                Header = template.DisplayName,
-                Margin = new Thickness(5, 5, 5, 5),
-                Content = panel
-            };
-
+            var frame = CreateControl(template.VisualTree);
+        
             this.Content = frame;
 
             this.Show();
         }
+
+        private Control CreateControl(Visual visual)
+        {
+            var cInfo = KistlGUIContext.FindControlInfo(Platform.WPF, visual);
+            var pInfo = KistlGUIContext.FindPresenterInfo(visual, cInfo);
+
+            var widget = KistlGUIContext.CreateControl(cInfo);
+            var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
+
+            if (cInfo.Container)
+            {
+                var childWidgets = from c in visual.Children select (Control)CreateControl(c);
+                return Setup((ContentControl)widget, childWidgets.ToList());
+            }
+            else
+            {
+                // TODO: Assert(visual.Children == null || visual.Children.Count == 0);
+                return Setup((Control)widget);
+            }
+        }
+
+        #region WPF.Renderer Methods
+
+        private Control Setup(Control control)
+        {
+            return (Control) control;
+        }
+
+        private ContentControl Setup(ContentControl widget, IList<Control> list)
+        {
+            StackPanel p = new StackPanel();
+            foreach (var c in list)
+            {
+                p.Children.Add(c);
+            }
+            widget.Content = p;
+            return widget;
+        }
+        #endregion
+
     }
 }

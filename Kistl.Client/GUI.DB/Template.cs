@@ -13,7 +13,7 @@ namespace Kistl.GUI.DB
     {
         public string DisplayName { get; set; }
         public TemplateUsage Usage { get; set; }
-        public Container VisualTree { get; set; }
+        public Visual VisualTree { get; set; }
         public ObjectClass Class { get; set; }
     }
 
@@ -72,7 +72,7 @@ namespace Kistl.GUI.DB
                 DisplayName = "TaskEditTemplate",
                 Usage = TemplateUsage.EditControl,
                 Class = tTask,
-                VisualTree = new Container()
+                VisualTree = new Visual()
                 {
                     Name = "group",
                     Description = "a simple list of the contained visuals",

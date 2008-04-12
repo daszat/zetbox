@@ -144,8 +144,8 @@ namespace Kistl.GUI
         {
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
-            Control.ObjectType = Property.ReferenceObjectClass.Type;
-            Control.ItemsSource = Object.Context.GetQuery(Object.Type).ToList();
+            Control.ObjectType = new Kistl.API.ObjectType(Property.GetDataType());
+            Control.ItemsSource = Object.Context.GetQuery(Control.ObjectType).ToList();
             Control.TargetID = Object.GetPropertyValue(Property);
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
@@ -163,6 +163,16 @@ namespace Kistl.GUI
         // fixup locally used types
         public new IPointerControl Control { get { return (IPointerControl)base.Control; } }
 
+    }
+
+    public class GroupPresenter : Presenter
+    {
+        public GroupPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = String.Format("{0} {1}", Object.Type.Classname, Object.ID);
+        }
     }
 
     public enum FieldSize
