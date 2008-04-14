@@ -58,7 +58,7 @@ namespace Kistl.Server
             try{
                 using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
-                    foreach (ObjectClass baseObjClass in ctx.GetTable<ObjectClass>())
+                    foreach (ObjectClass baseObjClass in ctx.GetQuery<ObjectClass>())
                     {
                         ObjectType objType = baseObjClass.GetObjectType();
                         foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie(ctx))

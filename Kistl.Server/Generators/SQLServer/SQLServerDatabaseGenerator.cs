@@ -29,7 +29,7 @@ namespace Kistl.Server.Generators.SQLServer
             this.ctx = ctx;
 
             // Preload all ObjectClasses and Properties to avoid Deadlocks
-            objClassList = (from c in ctx.GetTable<ObjectClass>()
+            objClassList = (from c in ctx.GetQuery<ObjectClass>()
                             select c).ToList();
             // Preload Properties
             objClassList.ForEach(o => propList.AddRange(o.Properties.ToList()));

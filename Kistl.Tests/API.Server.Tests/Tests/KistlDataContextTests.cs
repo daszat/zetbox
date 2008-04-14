@@ -18,7 +18,7 @@ namespace API.Server.Tests.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                var result = ctx.GetTable<TestObjClass>();
+                var result = ctx.GetQuery<TestObjClass>();
                 var list = result.ToList();
 
                 list[0].StringProp = "First";
@@ -72,12 +72,56 @@ namespace API.Server.Tests.Tests
         }
 
         [Test]
-        public void GetTable()
+        public void GetQuery()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                var result = ctx.GetTable<TestObjClass>();
+                var result = ctx.GetQuery<TestObjClass>();
                 Assert.That(result, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void GetQuery_ObjType()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                var result = ctx.GetQuery(new ObjectType(typeof(TestObjClass)));
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void GetListOf()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == 1);
+                var result = ctx.GetListOf<TestObjClass_TestNameCollectionEntry>(obj, "TestNames");
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.EqualTo(2));
+            }
+        }
+
+        [Test]
+        public void GetListOf_ObjType()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                var result = ctx.GetListOf<TestObjClass_TestNameCollectionEntry>(new ObjectType(typeof(TestObjClass)), 1, "TestNames");
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.EqualTo(2));
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetListOf_WrongPropertyName()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == 1);
+                var result = ctx.GetListOf<TestObjClass_TestNameCollectionEntry>(obj, "NotAProperty");
             }
         }
 
@@ -86,14 +130,27 @@ namespace API.Server.Tests.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                var result = ctx.GetTable<TestObjClass>();
+                var result = ctx.GetQuery<TestObjClass>();
                 Assert.That(result.ToList().Count, Is.EqualTo(2));
+            }
+        }
+
+        [Test]
+        public void SelectSomeData_Collection()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                var result = ctx.GetQuery<TestObjClass>();
+                Assert.That(result.ToList().Count, Is.EqualTo(2));
+
+                Assert.That(result.ToList()[0].TestNames.Count, Is.EqualTo(2));
+                Assert.That(result.ToList()[1].TestNames.Count, Is.EqualTo(2));
             }
         }
 
         private void ChangeData(IKistlContext ctx)
         {
-            TestObjClass obj = ctx.GetTable<TestObjClass>().Where(o => o.ID == 1).First();
+            TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.StringProp, Is.EqualTo("First"));
 
@@ -102,7 +159,7 @@ namespace API.Server.Tests.Tests
 
         private void CheckData(IKistlContext ctx)
         {
-            TestObjClass obj = ctx.GetTable<TestObjClass>().Where(o => o.ID == 1).First();
+            TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.StringProp, Is.EqualTo("Test"));
         }
@@ -163,17 +220,51 @@ namespace API.Server.Tests.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                TestCollectionEntry obj = new TestCollectionEntry();
+                TestObjClass_TestNameCollectionEntry obj = new TestObjClass_TestNameCollectionEntry();
                 ctx.Attach(obj);
             }
         }
+
+        [Test]
+        public void Create_Generic()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass newObj = ctx.Create<TestObjClass>();
+                Assert.That(newObj, Is.Not.Null);
+                Assert.That(newObj.Context, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void Create_Type()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass newObj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
+                Assert.That(newObj, Is.Not.Null);
+                Assert.That(newObj.Context, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void Create_ObjectType()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass newObj = ctx.Create(new ObjectType(typeof(TestObjClass))) as TestObjClass;
+                Assert.That(newObj, Is.Not.Null);
+                Assert.That(newObj.Context, Is.Not.Null);
+            }
+        }
+
 
         [Test]
         public void Delete_IDataObject()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                var result = ctx.GetTable<TestObjClass>();
+                var result = ctx.GetQuery<TestObjClass>();
                 Assert.That(result.ToList().Count, Is.EqualTo(2));
 
                 result.ForEach<TestObjClass>(
@@ -182,8 +273,24 @@ namespace API.Server.Tests.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
-        public void Detach_IDataObject()
+        public void Delete_ICollectionEntry()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                var result = ctx.GetQuery<TestObjClass>();
+                Assert.That(result.ToList().Count, Is.EqualTo(2));
+
+                foreach (TestObjClass obj in result)
+                {
+                    obj.TestNames.ToList().ForEach<TestObjClass_TestNameCollectionEntry>(c => ctx.Delete(c));
+                    Assert.That(obj.TestNames.Count, Is.EqualTo(0));
+                }
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Detach_IDataObject_Failed()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
@@ -192,12 +299,24 @@ namespace API.Server.Tests.Tests
         }
 
         [Test]
+        public void Detach_IDataObject()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass obj = ctx.GetQuery<TestObjClass>().First();
+                ctx.Detach(obj);
+                Assert.That(obj.Context, Is.Null);
+            }
+        }
+
+
+        [Test]
         [ExpectedException(typeof(NotSupportedException))]
         public void Detach_ICollectionEntry()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                TestCollectionEntry obj = new TestCollectionEntry();
+                TestObjClass_TestNameCollectionEntry obj = new TestObjClass_TestNameCollectionEntry();
                 ctx.Detach(obj);
             }
         }

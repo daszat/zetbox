@@ -42,9 +42,9 @@ namespace Kistl.API
         /// <param name="obj">ICollectionEntry</param>
         void Delete(ICollectionEntry e);
 
-        IQueryable<T> GetTable<T>() where T : IDataObject;
         IQueryable<T> GetQuery<T>() where T : IDataObject;
         IQueryable<IDataObject> GetQuery(ObjectType type);
+        
         List<T> GetListOf<T>(IDataObject obj, string propertyName);
         List<T> GetListOf<T>(ObjectType type, int ID, string propertyName);
 

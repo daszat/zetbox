@@ -7,6 +7,8 @@ using Kistl.API;
 using Kistl.API.Server;
 using System.Data.Objects.DataClasses;
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(API.Server.Tests.TestObjClass), "B_TestObjClass_TestNameCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(API.Server.Tests.TestObjClass_TestNameCollectionEntry))]
+
 namespace API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass")]
@@ -71,6 +73,17 @@ namespace API.Server.Tests
                 NotifyPropertyChanging("TestEnumProp");
                 _TestEnumProp = value;
                 NotifyPropertyChanged("TestEnumProp"); ;
+            }
+        }
+
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "B_TestObjClass_TestNameCollectionEntry")]
+        public EntityCollection<TestObjClass_TestNameCollectionEntry> TestNames
+        {
+            get
+            {
+                EntityCollection<TestObjClass_TestNameCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<TestObjClass_TestNameCollectionEntry>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "B_TestObjClass_TestNameCollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load();
+                return c;
             }
         }
 

@@ -18,7 +18,7 @@ namespace Kistl.App.Base
             // Only for BaseClasses
             if (obj.BaseObjectClass == null)
             {
-                Kistl.App.Base.Module kistlModule = KistlDataContext.Current.GetTable<Kistl.App.Base.Module>().First(md => md.ModuleName == "KistlBase");
+                Kistl.App.Base.Module kistlModule = KistlDataContext.Current.GetQuery<Kistl.App.Base.Module>().First(md => md.ModuleName == "KistlBase");
                 Kistl.App.Base.Method m;
                 m = obj.Methods.SingleOrDefault(i => i.MethodName == "ToString" && i.Module == kistlModule);
                 if (m == null)

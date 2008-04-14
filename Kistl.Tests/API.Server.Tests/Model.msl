@@ -10,5 +10,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TestObjClass_TestNameCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClass_TestNameCollectionEntry)">
+        <MappingFragment StoreEntitySet="TestObjClass_TestNameCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Value" ColumnName="TestName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_TestObjClass_TestNameCollectionEntry_TestObjClass" TypeName="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" StoreEntitySet="TestObjClass_TestNameCollectionEntry">
+      <EndProperty Name="A_TestObjClass">
+        <ScalarProperty Name="ID" ColumnName="fk_Parent" />
+      </EndProperty>
+      <EndProperty Name="B_TestObjClass_TestNameCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Parent" IsNull="false" />
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

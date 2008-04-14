@@ -71,7 +71,7 @@ namespace Kistl.Server
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
                 if (type == null) throw new ArgumentException("Type is null");
-                if (string.IsNullOrEmpty(type.FullNameDataObject)) throw new ArgumentException("Type is empty");
+                if (string.IsNullOrEmpty(type.FullNameDataObject)) throw new ArgumentNullException("type", "Type is empty");
 
                 Type objType = Type.GetType(type.FullNameDataObject);
                 if (objType == null) throw new ApplicationException("Invalid Type");
@@ -118,7 +118,7 @@ namespace Kistl.Server
                     maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
                 }
 
-                var result = from a in KistlDataContext.Current.GetTable<T>()
+                var result = from a in KistlDataContext.Current.GetQuery<T>()
                              select a;
 
                 if (filter != null)
@@ -181,7 +181,7 @@ namespace Kistl.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
             {
-                var result = from a in KistlDataContext.Current.GetTable<T>()
+                var result = from a in KistlDataContext.Current.GetQuery<T>()
                              where a.ID == ID
                              select a;
                 return result.FirstOrDefault<T>();

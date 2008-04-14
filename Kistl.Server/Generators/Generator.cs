@@ -194,19 +194,19 @@ namespace Kistl.Server.Generators
         #region GetLists
         public static IQueryable<ObjectClass> GetObjectClassList(Kistl.API.IKistlContext ctx)
         {
-            return from c in ctx.GetTable<ObjectClass>()
+            return from c in ctx.GetQuery<ObjectClass>()
                    select c;
         }
 
         public static IQueryable<Interface> GetInterfaceList(Kistl.API.IKistlContext ctx)
         {
-            return from i in ctx.GetTable<Interface>()
+            return from i in ctx.GetQuery<Interface>()
                    select i;
         }
 
         public static IQueryable<Enumeration> GetEnumList(Kistl.API.IKistlContext ctx)
         {
-            return from e in ctx.GetTable<Enumeration>()
+            return from e in ctx.GetQuery<Enumeration>()
                    select e;
         }
 
@@ -215,7 +215,7 @@ namespace Kistl.Server.Generators
             // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
             // It's a Beta Version - so what!
             var objClasses = GetObjectClassList(ctx);
-            return from p in ctx.GetTable<Property>()
+            return from p in ctx.GetQuery<Property>()
                    from o in objClasses
                    where p.ObjectClass.ID == o.ID && p.IsList && p is Property
                    select p;
@@ -226,7 +226,7 @@ namespace Kistl.Server.Generators
             // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
             // It's a Beta Version - so what!
             var objClasses = GetObjectClassList(ctx);
-            return from p in ctx.GetTable<ObjectReferenceProperty>()
+            return from p in ctx.GetQuery<ObjectReferenceProperty>()
                    from o in objClasses
                    where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
                    select p;

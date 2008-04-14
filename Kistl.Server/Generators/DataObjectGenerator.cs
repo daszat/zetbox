@@ -872,7 +872,7 @@ namespace Kistl.Server.Generators
         private void GenerateProperties_ObjectReferencePropertyInternal(CurrentObjectClass current)
         {
             // Check if Datatype exits
-            if (current.ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
+            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
                     current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
 
@@ -927,7 +927,7 @@ namespace Kistl.Server.Generators
                      current.objClass.ClassName, current.property.PropertyName));
 
             // Check if Datatype exits
-            if (current.ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
+            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
                     current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
 
@@ -1047,7 +1047,7 @@ namespace Kistl.Server.Generators
         private void GenerateProperties_BackReferencePropertyInternal(CurrentObjectClass current)
         {
             // Check if Datatype exits
-            if (current.ctx.GetTable<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
+            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on BackReferenceProperty {1}.{2}",
                     current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
 

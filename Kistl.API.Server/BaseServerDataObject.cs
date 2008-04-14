@@ -75,6 +75,7 @@ namespace Kistl.API.Server
         /// </summary>
         public virtual void NotifyChange()
         {
+            throw new NotImplementedException();
         }
 
         public virtual void NotifyPropertyChanging(string property)
@@ -126,24 +127,20 @@ namespace Kistl.API.Server
             BinarySerializer.FromBinary(out tmp, sr);
             ObjectState = (DataObjectState)tmp;
 
-            if (ctx != null) ctx.Attach(this);
+            ctx.Attach(this);
         }
 
-        public IKistlContext Context 
+        private IKistlContext _context;
+        public IKistlContext Context { get { return _context; } }
+        public virtual void AttachToContext(IKistlContext ctx)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-        public void AttachToContext(IKistlContext ctx)
-        {
-            throw new NotImplementedException();
+            _context = ctx;
         }
 
-        public void DetachFromContext(IKistlContext ctx)
+        public virtual void DetachFromContext(IKistlContext ctx)
         {
-            throw new NotImplementedException();
+            if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
+            _context = null;
         }
     }
 
@@ -159,7 +156,8 @@ namespace Kistl.API.Server
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
-            if (sr == null) throw new ArgumentNullException();
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (sr == null) throw new ArgumentNullException("sr");
 
             int tmpID;
             BinarySerializer.FromBinary(out tmpID, sr);
@@ -173,6 +171,8 @@ namespace Kistl.API.Server
 
         public virtual void CopyTo(ICollectionEntry obj)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
+
             NotifyPropertyChanging("ID");
             obj.ID = this.ID;
             NotifyPropertyChanged("ID");

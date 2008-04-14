@@ -90,7 +90,7 @@ namespace Kistl.Server
 
         public static ObjectClass GetObjectClass(this ObjectType objType, Kistl.API.IKistlContext ctx)
         {
-            return ctx.GetTable<ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
+            return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
         }
 
         public static BaseProperty GetProperty(this ObjectClass c, Kistl.API.IKistlContext ctx, string property)

@@ -2,6 +2,11 @@
 <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
   <EntityContainer Name="Entities">
     <EntitySet Name="TestObjClass" EntityType="Model.TestObjClass" />
+    <EntitySet Name="TestObjClass_TestNameCollectionEntry" EntityType="Model.TestObjClass_TestNameCollectionEntry" />
+    <AssociationSet Name="FK_TestObjClass_TestNameCollectionEntry_TestObjClass" Association="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass">
+      <End Role="A_TestObjClass" EntitySet="TestObjClass" />
+      <End Role="B_TestObjClass_TestNameCollectionEntry" EntitySet="TestObjClass_TestNameCollectionEntry" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TestObjClass">
     <Key>
@@ -10,5 +15,18 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="StringProp" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="TestEnumProp" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="TestNames" Relationship="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" FromRole="A_TestObjClass" ToRole="B_TestObjClass_TestNameCollectionEntry" />
   </EntityType>
+  <EntityType Name="TestObjClass_TestNameCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="200" Nullable="true" />
+    <NavigationProperty Name="Parent" Relationship="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" FromRole="B_TestObjClass_TestNameCollectionEntry" ToRole="A_TestObjClass" />
+  </EntityType>
+  <Association Name="FK_TestObjClass_TestNameCollectionEntry_TestObjClass">
+    <End Role="A_TestObjClass" Type="Model.TestObjClass" Multiplicity="0..1" />
+    <End Role="B_TestObjClass_TestNameCollectionEntry" Type="Model.TestObjClass_TestNameCollectionEntry" Multiplicity="*" />
+  </Association>
 </Schema>
