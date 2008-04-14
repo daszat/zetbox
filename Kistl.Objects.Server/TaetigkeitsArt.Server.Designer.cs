@@ -49,14 +49,6 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "TaetigkeitsArt";
-            }
-        }
-        
         [EdmScalarPropertyAttribute()]
         public string Name
         {

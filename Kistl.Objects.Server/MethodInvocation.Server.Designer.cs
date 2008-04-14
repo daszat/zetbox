@@ -64,14 +64,6 @@ namespace Kistl.App.Base
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "MethodInvocation";
-            }
-        }
-        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Module", "A_Module")]
         public Kistl.App.Base.Module Module

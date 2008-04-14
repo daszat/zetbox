@@ -15,7 +15,7 @@ namespace Kistl.Server.Generators
         Server,
     }
 
-    public sealed class Generator
+    public static class Generator
     {
         public static void GenerateCode()
         {
@@ -93,11 +93,6 @@ namespace Kistl.Server.Generators
             GenerateCode();
             GenerateDatabase();
         }
-
-        /// <summary>
-        /// prevent this class from being instatiated
-        /// </summary>
-        private Generator() { }
 
         #region GetAssociationName
         private static string GetAssociationName(string parentClass, string childClass)

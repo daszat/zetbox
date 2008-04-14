@@ -61,14 +61,6 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "Taetigkeit";
-            }
-        }
-        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Taetigkeit_Zeitkonto", "A_Zeitkonto")]
         public Kistl.App.Zeiterfassung.Zeitkonto Zeitkonto

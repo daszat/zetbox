@@ -55,14 +55,6 @@ namespace Kistl.App.Base
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "Assembly";
-            }
-        }
-        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Assembly_Module", "A_Module")]
         public Kistl.App.Base.Module Module

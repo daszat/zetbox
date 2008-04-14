@@ -10,16 +10,11 @@ namespace Kistl.Server.Generators
         void Generate(Kistl.API.IKistlContext ctx, string path);
     }
 
-    public sealed class MappingGeneratorFactory
+    public static class MappingGeneratorFactory
     {
         public static IMappingGenerator GetGenerator()
         {
             return new SQLServer.SQLServerEntityFrameworkModelGenerator();
         }
-
-        /// <summary>
-        /// prevent this class from being instantiated
-        /// </summary>
-        private MappingGeneratorFactory() { }
     }
 }

@@ -55,14 +55,6 @@ namespace Kistl.App.Test
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "TestObjClass";
-            }
-        }
-        
         [EdmScalarPropertyAttribute()]
         public string StringProp
         {

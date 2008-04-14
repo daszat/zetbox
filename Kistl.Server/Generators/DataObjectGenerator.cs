@@ -682,27 +682,9 @@ namespace Kistl.Server.Generators
             GenerateDefaultProperty_ID(current);
         }
 
-        protected virtual void GenerateDefaultProperty_EntitySetName(CurrentObjectClass current)
-        {
-        }
-
-        private void GenerateDefaultProperty_EntitySetNameInternal(CurrentObjectClass current)
-        {
-            current.code_property = CreateProperty(current.code_class, typeof(string), "EntitySetName", false);
-            current.code_property.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            current.code_property.GetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(current.objClass.ClassName)));
-
-            GenerateDefaultProperty_EntitySetName(current);
-        }
-        
         protected virtual void GenerateDefaultPropertiesInternal(CurrentObjectClass current)
         {
             GenerateDefaultProperty_IDInternal((CurrentObjectClass)current.Clone());
-
-            if (current.clientServer == ClientServerEnum.Server)
-            {
-                GenerateDefaultProperty_EntitySetNameInternal((CurrentObjectClass)current.Clone());
-            }
         }
         #endregion
 
@@ -1448,16 +1430,11 @@ namespace Kistl.Server.Generators
         #endregion
     }
 
-    public sealed class DataObjectGeneratorFactory
+    public static class DataObjectGeneratorFactory
     {
         public static BaseDataObjectGenerator GetGenerator()
         {
             return new SQLServer.SQLServerDataObjectGenerator();
         }
-
-        /// <summary>
-        /// prevent this class from being instantiated
-        /// </summary>
-        private DataObjectGeneratorFactory() { }
     }
 }

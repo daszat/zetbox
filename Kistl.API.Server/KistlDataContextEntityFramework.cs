@@ -31,7 +31,7 @@ namespace Kistl.API.Server
             return connectionString;
         }
 
-        /// For Clearing Session
+        /// For Clean Up Session
         void IDisposable.Dispose()
         {
             base.Dispose();
@@ -56,6 +56,12 @@ namespace Kistl.API.Server
             return t;
         }
 
+        private string GetEntityName(Type type)
+        {
+            Type rootType = GetRootType(type);
+            return rootType.Name;
+        }
+
         /// <summary>
         /// Return IQueryable to make it possible to use alternative LINQ Provider
         /// </summary>
@@ -67,8 +73,7 @@ namespace Kistl.API.Server
 
             if (!_table.ContainsKey(type))
             {
-                Type rootType = GetRootType(type);
-                _table[type] = this.CreateQuery<T>("[" + rootType.Name + "]");
+                _table[type] = this.CreateQuery<T>("[" + GetEntityName(type) + "]");
             }
             return ((ObjectQuery<T>)_table[type]).OfType<T>();
         }
@@ -76,9 +81,7 @@ namespace Kistl.API.Server
         public IQueryable<IDataObject> GetQuery(ObjectType objType)
         {
             Type type = Type.GetType(objType.FullNameDataObject);
-            Type rootType = GetRootType(type);
-            
-            return this.CreateQuery<IDataObject>("[" + rootType.Name + "]");
+            return this.CreateQuery<IDataObject>("[" + GetEntityName(type) + "]");
         }
 
         public List<T> GetListOf<T>(IDataObject obj, string propertyName)
@@ -109,25 +112,25 @@ namespace Kistl.API.Server
             return result;
         }
 
-        public void Attach(IDataObject o)
+        public void Attach(IDataObject obj)
         {
-            BaseServerDataObject obj = (BaseServerDataObject)o;
+            string entityName = GetEntityName(obj.GetType());
             if (obj.ObjectState == DataObjectState.New)
             {
-                base.AddObject(obj.EntitySetName, obj);
+                base.AddObject(entityName, obj);
             }
             else
             {
-                base.AttachTo(obj.EntitySetName, obj);
+                base.AttachTo(entityName, obj);
             }
 
-            o.AttachToContext(this);
+            obj.AttachToContext(this);
         }
 
-        public void Detach(IDataObject o)
+        public void Detach(IDataObject obj)
         {
-            base.Detach(o);
-            o.DetachFromContext(this);
+            base.Detach(obj);
+            obj.DetachFromContext(this);
         }
 
         public void Delete(IDataObject obj)

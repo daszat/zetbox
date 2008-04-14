@@ -55,14 +55,6 @@ namespace Kistl.App.Base
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "EnumerationEntry";
-            }
-        }
-        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EnumerationEntry_Enumeration", "A_Enumeration")]
         public Kistl.App.Base.Enumeration Enumeration

@@ -77,12 +77,6 @@ namespace API.Server.Tests.Tests
         }
 
         [Test]
-        public void EntitySetName()
-        {
-            Assert.That(obj.EntitySetName, Is.EqualTo("TestObjClass"));
-        }
-
-        [Test]
         [ExpectedException(typeof(NotImplementedException))]
         public void NotifyChange()
         {

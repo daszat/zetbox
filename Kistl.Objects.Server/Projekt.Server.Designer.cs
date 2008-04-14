@@ -56,14 +56,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "Projekt";
-            }
-        }
-        
         [EdmScalarPropertyAttribute()]
         public string Name
         {

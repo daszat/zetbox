@@ -59,14 +59,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "Task";
-            }
-        }
-        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt", "A_Projekt")]
         public Kistl.App.Projekte.Projekt Projekt

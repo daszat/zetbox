@@ -57,8 +57,6 @@ namespace Kistl.API.Server
             }
         }
 
-        public abstract string EntitySetName { get; }
-
         #region IDataObject Members
         /// <summary>
         /// Jeder hat eine ID

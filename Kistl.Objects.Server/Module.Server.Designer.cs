@@ -51,14 +51,6 @@ namespace Kistl.App.Base
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "Module";
-            }
-        }
-        
         [EdmScalarPropertyAttribute()]
         public string Namespace
         {

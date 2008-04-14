@@ -1,32 +1,73 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Projekte\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" total="8" failures="0" not-run="0" date="2008-04-14" time="14:31:33">
-  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\Projekte\Kistl\Kistl.Tests\Integration.Tests" machine-name="MONEY" user="David" user-domain="MONEY" />
-  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="C:\Projekte\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" success="True" time="66.219" asserts="0">
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" total="16" failures="1" not-run="0" date="2008-04-14" time="19:27:52">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" success="False" time="36.339" asserts="0">
     <results>
-      <test-suite name="C:\Projekte\Kistl\Kistl.Tests\Integration.Tests\bin\debug\..\Debug\Integration.Tests.dll" success="True" time="66.203" asserts="0">
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\bin\debug\..\Debug\Integration.Tests.dll" success="False" time="36.324" asserts="0">
         <results>
-          <test-suite name="Integration" success="True" time="66.203" asserts="0">
+          <test-suite name="Integration" success="False" time="36.313" asserts="0">
             <results>
-              <test-suite name="Tests" success="True" time="66.188" asserts="0">
+              <test-suite name="Tests" success="False" time="36.301" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="True" time="7.484" asserts="0">
+                  <test-suite name="Tests" success="False" time="9.809" asserts="0">
                     <results>
-                      <test-suite name="GetListTests" success="True" time="4.359" asserts="0">
+                      <test-suite name="GeneratorTests" success="True" time="4.827" asserts="0">
                         <results>
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetList" executed="True" success="True" time="1.109" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="1.406" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.656" asserts="0" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.781" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithTop10" executed="True" success="True" time="0.359" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GeneratorTests.Generate" executed="True" success="True" time="4.821" asserts="0" />
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectTests" success="True" time="3.125" asserts="0">
+                      <test-suite name="GetListTests" success="True" time="1.458" asserts="0">
                         <results>
-                          <test-case name="Integration.Tests.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.016" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.NewObject" executed="True" success="True" time="2.484" asserts="6" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.625" asserts="3" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetList" executed="True" success="True" time="0.548" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.486" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.221" asserts="0" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.077" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithTop10" executed="True" success="True" time="0.123" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="InheritanceTests" success="True" time="2.009" asserts="0">
+                        <results>
+                          <test-case name="Integration.Tests.Tests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="0.751" asserts="3" />
+                          <test-case name="Integration.Tests.Tests.InheritanceTests.UpdateInheritedObject" executed="True" success="True" time="1.257" asserts="4" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ListPropetiesTests" success="False" time="0.428" asserts="0">
+                        <results>
+                          <test-case name="Integration.Tests.Tests.ListPropetiesTests.AddStringListPropertyContent" executed="True" success="False" time="0.201" asserts="1">
+                            <failure>
+                              <message><![CDATA[System.ServiceModel.FaultException : Calls to SetModifiedProperty are only valid when the ObjectStateEntry State is Modified or Unchanged.]]></message>
+                              <stack-trace><![CDATA[
+Server stack trace:
+at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]:
+at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+at Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams.SetObject(MemoryStream msg)
+at Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient.SetObject(MemoryStream msg) in D:\Programmierung\Kistl\Kistl.API.Client\Service References\KistlServiceStreams\Reference.cs:line 64
+at Kistl.API.Client.Proxy.SetObject(IKistlContext ctx, ObjectType type, IDataObject obj) in D:\Programmierung\Kistl\Kistl.API.Client\Proxy.cs:line 249
+at Kistl.API.Client.KistlContextImpl.SubmitChanges() in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:line 144
+at Integration.Tests.Tests.ListPropetiesTests.AddStringListPropertyContent() in D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Tests\ListPropetiesTests.cs:line 77
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Integration.Tests.Tests.ListPropetiesTests.GetPointerListPropertyContent" executed="True" success="True" time="0.198" asserts="17" />
+                          <test-case name="Integration.Tests.Tests.ListPropetiesTests.GetStringListPropertyContent" executed="True" success="True" time="0.020" asserts="5" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ObjectTests" success="True" time="1.073" asserts="0">
+                        <results>
+                          <test-case name="Integration.Tests.Tests.ObjectTests.GetListOf" executed="True" success="True" time="0.418" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.220" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.038" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.ObjectTests.NewObject" executed="True" success="True" time="0.274" asserts="4" />
+                          <test-case name="Integration.Tests.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.122" asserts="3" />
                         </results>
                       </test-suite>
                     </results>

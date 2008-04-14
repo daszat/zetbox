@@ -6,12 +6,19 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client;
+using Kistl.API.Client;
 
 namespace Integration.Tests.Tests
 {
     [TestFixture]
     public class GetListTests
     {
+        [SetUp]
+        public void SetUp()
+        {
+            CacheController<Kistl.API.IDataObject>.Current.Clear();
+        }
+
         [Test]
         public void GetList()
         {

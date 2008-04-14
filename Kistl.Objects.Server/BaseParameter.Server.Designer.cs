@@ -60,14 +60,6 @@ namespace Kistl.App.Base
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "BaseParameter";
-            }
-        }
-        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseParameter_Method", "A_Method")]
         public Kistl.App.Base.Method Method

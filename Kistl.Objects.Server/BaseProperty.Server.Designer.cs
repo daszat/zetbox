@@ -58,14 +58,6 @@ namespace Kistl.App.Base
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "BaseProperty";
-            }
-        }
-        
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_DataType", "A_DataType")]
         public Kistl.App.Base.DataType ObjectClass

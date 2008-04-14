@@ -58,7 +58,7 @@ namespace Kistl.Server
     /// <summary>
     /// TODO: Objekte verwaltuen & Serialisierung trennen!!!
     /// </summary>
-    internal class ServerObjectHandlerFactory
+    internal static class ServerObjectHandlerFactory
     {
         /// <summary>
         /// Helper Method for generic object access

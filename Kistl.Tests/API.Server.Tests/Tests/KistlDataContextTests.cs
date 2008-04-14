@@ -72,6 +72,19 @@ namespace API.Server.Tests.Tests
         }
 
         [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CleanUpSession()
+        {
+            Assert.That(KistlDataContext.Current, Is.Null);
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                Assert.That(ctx, Is.Not.Null);
+                Assert.That(KistlDataContext.Current, Is.Not.Null);
+            }
+            Assert.That(KistlDataContext.Current, Is.Null);
+        }
+
+        [Test]
         public void GetQuery()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())

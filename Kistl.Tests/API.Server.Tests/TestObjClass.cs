@@ -38,14 +38,6 @@ namespace API.Server.Tests
             }
         }
 
-        public override string EntitySetName
-        {
-            get
-            {
-                return "TestObjClass";
-            }
-        }
-
         [EdmScalarPropertyAttribute()]
         public string StringProp
         {

@@ -55,14 +55,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "Mitarbeiter";
-            }
-        }
-        
         [EdmScalarPropertyAttribute()]
         public string Name
         {

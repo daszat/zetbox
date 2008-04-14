@@ -49,14 +49,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        public override string EntitySetName
-        {
-            get
-            {
-                return "Icon";
-            }
-        }
-        
         [EdmScalarPropertyAttribute()]
         public string IconFile
         {
