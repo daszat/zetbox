@@ -28,7 +28,7 @@ namespace Kistl.GUI.Renderer
         public CONTROL CreateControl(Kistl.API.IDataObject obj, Visual visual)
         {
             var cInfo = KistlGUIContext.FindControlInfo(Toolkit.WPF, visual);
-            var pInfo = KistlGUIContext.FindPresenterInfo(visual, cInfo);
+            var pInfo = KistlGUIContext.FindPresenterInfo(visual);
 
             var widget = KistlGUIContext.CreateControl(cInfo);
             var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);

@@ -24,7 +24,7 @@ namespace Kistl.GUI.DB
                     select ci).Single();
         }
 
-        public static PresenterInfo FindPresenterInfo(Visual visual, ControlInfo info)
+        public static PresenterInfo FindPresenterInfo(Visual visual)
         {
             return (from pi in PresenterInfo.Implementations
                     where pi.Control == visual.Name
@@ -152,7 +152,8 @@ namespace Kistl.GUI.DB
     public enum Toolkit
     {
         WPF,
-        ASPNET
+        ASPNET,
+        TEST
     }
 
 }

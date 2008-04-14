@@ -35,9 +35,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Kistl.API\bin\Debug\Kistl.API.dll</HintPath>
     </Reference>
+    <Reference Include="Kistl.API.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Kistl.Objects.Client\bin\Debug\Kistl.API.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Kistl.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Kistl.Client\obj\Debug\Kistl.Client.exe</HintPath>
+    </Reference>
+    <Reference Include="Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Kistl.Objects.Client\bin\Debug\Kistl.Objects.Client.dll</HintPath>
     </Reference>
     <Reference Include="nunit.core, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="nunit.core.extensions, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
@@ -57,14 +65,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\TestControl.cs" />
+    <Compile Include="Mocks\TestControl.cs" />
     <Compile Include="CustomActionsManagerAPITest.cs" />
+    <Compile Include="Mocks\TestObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="Tests\GuiDbTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.ClientTests.nunit" />
+    <Content Include="DefaultConfig.xml" />
+    <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.Client.Tests.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Kistl.Client.Tests.nunit" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

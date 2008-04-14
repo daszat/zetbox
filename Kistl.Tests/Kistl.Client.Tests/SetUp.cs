@@ -6,7 +6,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.GUI.DB;
-using Kistl.Client.Controls;
+using Kistl.Client.Mocks;
 
 namespace Kistl.Client.Tests
 {
@@ -28,7 +28,7 @@ namespace Kistl.Client.Tests
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
 
 
-            ControlInfo.Implementations.Add(TestControl.Info);
+            ControlInfo.Implementations.Add(TestStringControl.Info);
             
         }
     }
