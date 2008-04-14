@@ -29,8 +29,22 @@ namespace Kistl.GUI.Renderer.WPF
 
         double? IDoubleControl.Value
         {
-            get { return (double?)base.Value; }
-            set { base.Value = value; }
+            get
+            {
+                if (base.Value == null || base.Value.ToString().Length == 0)
+                    return null;
+
+                double result;
+                if (double.TryParse(base.Value.ToString(), out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set { base.Value = String.Format("{0}", value); }
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

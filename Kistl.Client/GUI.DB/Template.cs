@@ -18,13 +18,7 @@ namespace Kistl.GUI.DB
         public Visual VisualTree { get; set; }
         public ObjectType Type { get; set; }
 
-        public static Template[] List = new[] {
-            // TaskEditTemplate.Create(),
-            DefaultTemplate(new Kistl.API.ObjectType("Kistl.App.Projekte", "Projekt")),
-            DefaultTemplate(new Kistl.API.ObjectType("Kistl.App.Projekte", "Task"))
-                                        };
-
-        private static Template DefaultTemplate(ObjectType objectType)
+        public static Template DefaultTemplate(ObjectType objectType)
         {
             Template result = new Template()
             {

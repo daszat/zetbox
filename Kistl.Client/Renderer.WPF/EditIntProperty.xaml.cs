@@ -29,8 +29,22 @@ namespace Kistl.GUI.Renderer.WPF
 
         int? IIntControl.Value
         {
-            get { return (int?)base.Value; }
-            set { base.Value = value; }
+            get
+            {
+                if (base.Value == null || base.Value.ToString().Length == 0)
+                    return null;
+
+                int result;
+                if (int.TryParse(base.Value.ToString(), out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set { base.Value = String.Format("{0}", value); }
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

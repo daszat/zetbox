@@ -47,10 +47,7 @@ namespace Kistl.GUI.DB
 
         public static Template FindTemplate(this IDataObject obj, TemplateUsage templateUsage)
         {
-            return (from t in Template.List
-                    where t.Type.Equals(obj.Type)
-                        && t.Usage == templateUsage
-                    select t).Single();
+            return Template.DefaultTemplate(obj.Type);
         }
     }
 
@@ -108,7 +105,7 @@ namespace Kistl.GUI.DB
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.WPFWindow" },
             new ControlInfo() { Platform = Platform.WPF, Control = "objectlist",
-                Container = true,
+                Container = false,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.ObjectList" },
             new ControlInfo() { Platform = Platform.WPF, Control = "list",

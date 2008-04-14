@@ -272,7 +272,7 @@ namespace Kistl.GUI
         {
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
-            Control.Value = Object.GetPropertyValue<IList<IDataObject>>(Property.PropertyName);
+            Control.Value = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).OfType<IDataObject>().ToList();
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
         }
@@ -432,7 +432,7 @@ namespace Kistl.GUI
 
         public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, ObjectReferenceProperty prop)
         {
-            return obj.GetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName);
+            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).OfType<IDataObject>().ToList();
         }
 
         public static void SetList(this IDataObject obj, ObjectReferenceProperty prop, IList<Kistl.API.IDataObject> value)

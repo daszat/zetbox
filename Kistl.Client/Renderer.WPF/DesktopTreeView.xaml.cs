@@ -162,11 +162,12 @@ namespace Kistl.GUI.Renderer.WPF
 
         public class InstanceNode : INode
         {
+            // public BaseClientDataObject Object { get; set; }
             public Kistl.API.IDataObject Object { get; set; }
 
             public InstanceNode(Kistl.API.IDataObject obj)
             {
-                Object = obj;
+                Object = (BaseClientDataObject)obj;
             }
 
             #region INode Members
