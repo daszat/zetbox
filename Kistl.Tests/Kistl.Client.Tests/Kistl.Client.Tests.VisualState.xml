@@ -6,20 +6,27 @@
   <Nodes>
     <Node UniqueName="[0-1000]C:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" Expanded="true">
       <Nodes>
-        <Node UniqueName="[0-1007]C:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\bin\debug\..\Debug\Kistl.Client.Tests.dll" Expanded="true">
+        <Node UniqueName="[0-1014]C:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\bin\debug\..\Debug\Kistl.Client.Tests.dll" Expanded="true">
           <Nodes>
-            <Node UniqueName="[0-1008]Kistl" Expanded="true">
+            <Node UniqueName="[0-1015]Kistl" Expanded="true">
               <Nodes>
-                <Node UniqueName="[0-1009]Kistl.Client" Expanded="true">
+                <Node UniqueName="[0-1016]Kistl.Client" Expanded="true">
                   <Nodes>
-                    <Node UniqueName="[0-1006]Kistl.Client.Tests.SetUp" Expanded="true">
+                    <Node UniqueName="[0-1013]Kistl.Client.Tests.SetUp" Expanded="true">
                       <Nodes>
                         <Node UniqueName="[0-1001]Kistl.Client.Tests.GuiDbTests" Expanded="true">
                           <Nodes>
+                            <Node UniqueName="[0-1004]Kistl.Client.Tests.GuiDbTests.CreateControl" />
                             <Node UniqueName="[0-1005]Kistl.Client.Tests.GuiDbTests.CreatePresenter" />
-                            <Node UniqueName="[0-1004]Kistl.Client.Tests.GuiDbTests.CreateWidget" />
+                            <Node UniqueName="[0-1006]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoInfo" />
+                            <Node UniqueName="[0-1007]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoObject" />
+                            <Node UniqueName="[0-1008]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoVisual" />
+                            <Node UniqueName="[0-1009]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoWidget" />
                             <Node UniqueName="[0-1002]Kistl.Client.Tests.GuiDbTests.FindControlInfo" />
                             <Node UniqueName="[0-1003]Kistl.Client.Tests.GuiDbTests.FindPresenterInfo" />
+                            <Node UniqueName="[0-1010]Kistl.Client.Tests.GuiDbTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1011]Kistl.Client.Tests.GuiDbTests.HandleNoUserInputInvalid" />
+                            <Node UniqueName="[0-1012]Kistl.Client.Tests.GuiDbTests.HandleUserInput" />
                           </Nodes>
                         </Node>
                       </Nodes>

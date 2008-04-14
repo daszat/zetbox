@@ -65,6 +65,10 @@ namespace Kistl.GUI.Renderer.WPF
             remove { _UserInput -= value; }
         }
 
+        void IStringControl.FlagValidity(bool valid)
+        {
+            Panel.Background = valid ? Brushes.White : Brushes.Red;
+        }
 
         #endregion
 

@@ -14,6 +14,26 @@ namespace Kistl.Client.Tests.Mocks
             = new StringProperty()
             {
                 PropertyName = "TestString",
+                IsNullable = true
+            };
+
+        private string _TestStringNotNull = "";
+        public string TestStringNotNull
+        {
+            get { return _TestStringNotNull; }
+            set
+            {
+                // Actually, validation should be done by generated class
+                if (value == null) 
+                    throw new NullReferenceException("TestStringNotNull may not be null");
+                _TestStringNotNull = value;
+            }
+        }
+        public readonly static StringProperty TestStringNotNullProperty
+            = new StringProperty()
+            {
+                PropertyName = "TestStringNotNull",
+                IsNullable = false
             };
 
         #region IDataObject Members

@@ -139,7 +139,15 @@ namespace Kistl.GUI
 
         private void Control_UserInput(object sender, EventArgs e)
         {
-            Object.SetPropertyValue(Property, Control.Value);
+            if (!Property.IsNullable && Control.Value == null)
+            {
+                Control.FlagValidity(false);
+            }
+            else
+            {
+                Control.FlagValidity(true);
+                Object.SetPropertyValue(Property, Control.Value);
+            }
         }
 
         // localize type-unsafety
@@ -250,7 +258,7 @@ namespace Kistl.GUI
 
         private void Control_UserInput(object sender, EventArgs e)
         {
-            IList < Kistl.API.IDataObject > list =  Object.GetList(Property);
+            IList<Kistl.API.IDataObject> list = Object.GetList(Property);
             list.Clear();
             foreach (var i in Control.Value)
             {
@@ -314,6 +322,7 @@ namespace Kistl.GUI
     {
         string Value { get; set; }
         event /*UserInput<string>*/EventHandler UserInput;
+        void FlagValidity(bool valid);
     }
 
     public interface IIntControl : IBasicControl

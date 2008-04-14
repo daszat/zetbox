@@ -17,46 +17,114 @@ namespace Kistl.Client.Tests
     public class GuiDbTests
     {
 
-        protected Visual CreateVisual()
+        private TestObject obj;
+        private Visual visual;
+        private ControlInfo cInfo;
+        private PresenterInfo pInfo;
+        private TestStringControl widget;
+        private StringPresenter presenter;
+
+        protected void Init()
         {
-            return new Visual() { Name = TestStringControl.Info.Control, Property = TestObject.TestStringProperty };
+            Init(TestStringControl.Info, TestObject.TestStringProperty);
+        }
+
+        protected void Init(ControlInfo ci, BaseProperty bp)
+        {
+            visual = new Visual() { Name = ci.Control, Property = bp };
+            cInfo = KistlGUIContext.FindControlInfo(Toolkit.TEST, visual);
+            pInfo = KistlGUIContext.FindPresenterInfo(visual);
+            widget = (TestStringControl)KistlGUIContext.CreateControl(cInfo);
+            presenter = (StringPresenter)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
+        }
+
+
+        [SetUp]
+        public void SetUp()
+        {
+            obj = new TestObject();
         }
 
         [Test]
         public void FindControlInfo()
         {
-            var cInfo = KistlGUIContext.FindControlInfo(TestStringControl.Info.Platform, CreateVisual());
+            Init();
             Assert.That(cInfo.Equals(TestStringControl.Info));
         }
 
         [Test]
         public void FindPresenterInfo()
         {
-            var cInfo = KistlGUIContext.FindControlInfo(TestStringControl.Info.Platform, CreateVisual());
-            var pInfo = KistlGUIContext.FindPresenterInfo(new Visual() { Name = TestStringControl.Info.Control });
+            Init();
             Assert.That(pInfo.Control == TestStringControl.Info.Control);
         }
 
         [Test]
-        public void CreateWidget()
+        public void CreateControl()
         {
-            var cInfo = KistlGUIContext.FindControlInfo(TestStringControl.Info.Platform, CreateVisual());
-            var widget = KistlGUIContext.CreateControl(cInfo);
-            Assert.That(widget is TestStringControl);
+            Init();
+            Assert.That(widget, Is.Not.Null);
+            Assert.That(widget.HasValidValue, Is.True);
         }
 
         [Test]
         public void CreatePresenter()
         {
-            var visual = CreateVisual();
-            var cInfo = KistlGUIContext.FindControlInfo(Toolkit.TEST, visual);
-            var pInfo = KistlGUIContext.FindPresenterInfo(visual);
-
-            var widget = KistlGUIContext.CreateControl(cInfo);
-            var presenter = KistlGUIContext.CreatePresenter(pInfo, new TestObject(), visual, widget); 
-            
-            Assert.That(widget, Is.InstanceOfType(typeof(TestStringControl)));
-            Assert.That(presenter, Is.InstanceOfType(typeof(StringPresenter)));
+            Init();
+            Assert.That(presenter, Is.Not.Null);
         }
+
+        [Test]
+        public void CreatePresenterFailNoInfo()
+        {
+            KistlGUIContext.CreatePresenter(null, obj, visual, widget);
+        }
+
+        [Test]
+        public void CreatePresenterFailNoObject()
+        {
+            KistlGUIContext.CreatePresenter(pInfo, null, visual, widget);
+        }
+
+        [Test]
+        public void CreatePresenterFailNoVisual()
+        {
+            KistlGUIContext.CreatePresenter(pInfo, obj, null, widget);
+        }
+
+        [Test]
+        public void CreatePresenterFailNoWidget()
+        {
+            KistlGUIContext.CreatePresenter(pInfo, obj, visual, null);
+        }
+
+        [Test]
+        public void HandleNoUserInput()
+        {
+            Init(TestStringControl.Info, TestObject.TestStringProperty);
+            widget.SimulateUserInput(null);
+            Assert.That(obj.TestString, Is.Null);
+            Assert.That(widget.HasValidValue, Is.True);
+        }
+
+        [Test]
+        public void HandleNoUserInputInvalid()
+        {
+            Init(TestStringControl.Info, TestObject.TestStringNotNullProperty);
+            widget.SimulateUserInput(null);
+            Assert.That(obj.TestStringNotNull, Is.Not.Null);
+            Assert.That(widget.HasValidValue, Is.False);
+        }
+
+        [Test]
+        public void HandleUserInput()
+        {
+            Init(TestStringControl.Info, TestObject.TestStringProperty);
+            string newStringValue = "new Value";
+            widget.SimulateUserInput(newStringValue);
+            Assert.That(obj.TestString, Is.EqualTo(newStringValue));
+            Assert.That(widget.HasValidValue, Is.True);
+        }
+
     }
 }

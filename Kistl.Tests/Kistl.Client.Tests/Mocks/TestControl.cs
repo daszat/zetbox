@@ -14,6 +14,7 @@ namespace Kistl.Client.Mocks
             Description = "TestControl Description";
             ShortLabel = "TC ShortLabel";
             Size = FieldSize.Full;
+            HasValidValue = true;
         }
 
         public readonly static ControlInfo Info
@@ -40,7 +41,20 @@ namespace Kistl.Client.Mocks
         public event EventHandler UserInput;
         public string Value { get; set; }
 
+        public bool HasValidValue { get; set; }
+        void IStringControl.FlagValidity(bool valid)
+        {
+            HasValidValue = valid;
+        }
+
         #endregion
+
+        internal void SimulateUserInput(string newStringValue)
+        {
+            Value = newStringValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
     }
 
 }
