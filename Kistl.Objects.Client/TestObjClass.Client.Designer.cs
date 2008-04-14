@@ -155,7 +155,7 @@ namespace Kistl.App.Test
             ((TestObjClass)obj)._fk_ObjectProp = this._fk_ObjectProp;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

@@ -104,7 +104,7 @@ namespace Kistl.App.GUI
             ((Icon)obj)._IconFile = this._IconFile;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

@@ -1227,7 +1227,7 @@ namespace Kistl.Server.Generators
             {
                 // Create AttachToContext Method
                 m = CreateOverrideMethod(current.code_class, "AttachToContext", typeof(void));
-                m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference("KistlContext"), "ctx"));
+                m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference("IKistlContext"), "ctx"));
 
                 m.Statements.Add(new CodeSnippetExpression("base.AttachToContext(ctx)"));
 

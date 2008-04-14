@@ -73,7 +73,7 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

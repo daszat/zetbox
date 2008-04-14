@@ -184,7 +184,7 @@ namespace Kistl.App.Projekte
             ((Kunde)obj)._EMails = this._EMails.Clone(obj);
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
             _EMails.ForEach(i => i.AttachToContext(ctx));;

@@ -16,10 +16,10 @@ namespace Kistl.API
         /// <param name="obj">IDataObject</param>
         void Attach(IDataObject obj);
         /// <summary>
-        /// Dettach an IDataObject.
+        /// Detach an IDataObject.
         /// </summary>
         /// <param name="obj">IDataObject</param>
-        void Dettach(IDataObject obj);
+        void Detach(IDataObject obj);
         /// <summary>
         /// Delete an IDataObject.
         /// </summary>
@@ -35,11 +35,18 @@ namespace Kistl.API
         /// Dettach an ICollectionEntry.
         /// </summary>
         /// <param name="obj">ICollectionEntry</param>
-        void Dettach(ICollectionEntry e);
+        void Detach(ICollectionEntry e);
         /// <summary>
         /// Delete an ICollectionEntry.
         /// </summary>
         /// <param name="obj">ICollectionEntry</param>
         void Delete(ICollectionEntry e);
+
+        IQueryable<T> GetQuery<T>() where T : IDataObject;
+        IQueryable<IDataObject> GetQuery(ObjectType type);
+        List<T> GetListOf<T>(IDataObject obj, string propertyName);
+        List<T> GetListOf<T>(ObjectType type, int ID, string propertyName);
+
+        int SubmitChanges();
     }
 }

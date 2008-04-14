@@ -17,7 +17,7 @@ namespace Kistl.GUI.Renderer
         /// Show the specified object to the User
         /// </summary>
         /// <param name="obj"></param>
-        public abstract void ShowObject(BaseClientDataObject obj);
+        public abstract void ShowObject(Kistl.API.IDataObject obj);
 
         /// <summary>
         /// Create a Control for the given visual, showing the object
@@ -25,7 +25,7 @@ namespace Kistl.GUI.Renderer
         /// <param name="obj"></param>
         /// <param name="visual"></param>
         /// <returns></returns>
-        public CONTROL CreateControl(BaseClientDataObject obj, Visual visual)
+        public CONTROL CreateControl(Kistl.API.IDataObject obj, Visual visual)
         {
             var cInfo = KistlGUIContext.FindControlInfo(Platform.WPF, visual);
             var pInfo = KistlGUIContext.FindPresenterInfo(visual, cInfo);

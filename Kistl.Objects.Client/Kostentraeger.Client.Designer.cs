@@ -105,7 +105,7 @@ namespace Kistl.App.Zeiterfassung
             ((Kostentraeger)obj)._fk_Projekt = this._fk_Projekt;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

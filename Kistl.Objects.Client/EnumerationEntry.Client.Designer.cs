@@ -153,7 +153,7 @@ namespace Kistl.App.Base
             ((EnumerationEntry)obj)._EnumValue = this._EnumValue;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

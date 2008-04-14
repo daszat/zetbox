@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             ((Property)obj)._IsNullable = this._IsNullable;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

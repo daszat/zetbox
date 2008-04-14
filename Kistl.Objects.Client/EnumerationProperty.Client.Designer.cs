@@ -109,7 +109,7 @@ namespace Kistl.App.Base
             ((EnumerationProperty)obj)._fk_Enumeration = this._fk_Enumeration;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

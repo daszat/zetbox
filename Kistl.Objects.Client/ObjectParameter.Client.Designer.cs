@@ -107,7 +107,7 @@ namespace Kistl.App.Base
             ((ObjectParameter)obj)._fk_DataType = this._fk_DataType;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

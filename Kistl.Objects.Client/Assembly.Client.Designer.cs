@@ -153,7 +153,7 @@ namespace Kistl.App.Base
             ((Assembly)obj)._IsClientAssembly = this._IsClientAssembly;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

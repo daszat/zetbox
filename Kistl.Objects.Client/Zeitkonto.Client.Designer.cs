@@ -162,7 +162,7 @@ namespace Kistl.App.Zeiterfassung
             ((Zeitkonto)obj)._AktuelleStunden = this._AktuelleStunden;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
             _Mitarbeiter.ForEach(i => i.AttachToContext(ctx));;

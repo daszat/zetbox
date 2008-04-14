@@ -124,7 +124,7 @@ namespace Kistl.App.Base
             ((CLRObjectParameter)obj)._FullTypeName = this._FullTypeName;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

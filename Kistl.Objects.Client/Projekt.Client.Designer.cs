@@ -186,7 +186,7 @@ namespace Kistl.App.Projekte
             ((Projekt)obj)._Kundenname = this._Kundenname;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
             _Mitarbeiter.ForEach(i => i.AttachToContext(ctx));;

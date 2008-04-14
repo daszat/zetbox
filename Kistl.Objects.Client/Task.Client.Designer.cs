@@ -187,7 +187,7 @@ namespace Kistl.App.Projekte
             ((Task)obj)._Aufwand = this._Aufwand;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

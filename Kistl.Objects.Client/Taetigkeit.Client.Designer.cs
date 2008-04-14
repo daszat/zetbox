@@ -217,7 +217,7 @@ namespace Kistl.App.Zeiterfassung
             ((Taetigkeit)obj)._fk_TaetigkeitsArt = this._fk_TaetigkeitsArt;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

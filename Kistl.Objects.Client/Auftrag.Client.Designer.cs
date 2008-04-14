@@ -219,7 +219,7 @@ namespace Kistl.App.Projekte
             ((Auftrag)obj)._Auftragswert = this._Auftragswert;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

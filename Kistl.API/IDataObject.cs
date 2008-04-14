@@ -33,7 +33,7 @@ namespace Kistl.API
     /// <summary>
     /// DataObject Interface
     /// </summary>
-    public interface IDataObject
+    public interface IDataObject : INotifyPropertyChanged
     {
         /// <summary>
         /// Every Object has at least an ID
@@ -92,6 +92,11 @@ namespace Kistl.API
         /// </summary>
         /// <param name="obj">Object to copy Content to.</param>
         void CopyTo(IDataObject obj);
+
+        IKistlContext Context { get; }
+        void AttachToContext(IKistlContext ctx);
+
+        void DetachFromContext(IKistlContext ctx);
     }
 
     /// <summary>

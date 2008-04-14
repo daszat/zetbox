@@ -98,6 +98,27 @@ namespace Kistl.API.Server
             return ((ObjectQuery<T>)_table[typeof(T)]).OfType<T>();
         }
 
+        public IQueryable<T> GetQuery<T>() where T : IDataObject
+        {
+            return GetTable<T>();
+        }
+
+        public IQueryable<IDataObject> GetQuery(ObjectType type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
+
         /// <summary>
         /// Überschreiben, damit ich meine eigene Feuerlogik einbauen kann
         /// & hoffen, dass die Microsofties das bald als virtuel markieren
@@ -156,7 +177,7 @@ namespace Kistl.API.Server
             }
         }
 
-        public void Dettach(IDataObject o)
+        public void Detach(IDataObject o)
         {
             throw new NotSupportedException();
         }
@@ -171,7 +192,7 @@ namespace Kistl.API.Server
             throw new NotSupportedException();
         }
 
-        public void Dettach(ICollectionEntry e)
+        public void Detach(ICollectionEntry e)
         {
             throw new NotSupportedException();
         }

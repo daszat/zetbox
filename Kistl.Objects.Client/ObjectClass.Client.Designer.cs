@@ -146,7 +146,7 @@ namespace Kistl.App.Base
             ((ObjectClass)obj)._ImplementsInterfaces = this._ImplementsInterfaces.Clone(obj);
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
             _ImplementsInterfaces.ForEach(i => i.AttachToContext(ctx));;

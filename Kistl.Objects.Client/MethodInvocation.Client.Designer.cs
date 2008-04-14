@@ -249,7 +249,7 @@ namespace Kistl.App.Base
             ((MethodInvocation)obj)._fk_InvokeOnObjectClass = this._fk_InvokeOnObjectClass;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

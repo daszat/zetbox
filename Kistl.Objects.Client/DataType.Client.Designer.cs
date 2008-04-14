@@ -204,7 +204,7 @@ namespace Kistl.App.Base
             ((DataType)obj)._fk_DefaultIcon = this._fk_DefaultIcon;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

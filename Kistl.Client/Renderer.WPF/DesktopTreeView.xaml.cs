@@ -67,7 +67,7 @@ namespace Kistl.GUI.Renderer.WPF
         #region Nodes
         public interface INode
         {
-            Kistl.API.Client.BaseClientDataObject DataObject { get; }
+            Kistl.API.IDataObject DataObject { get; }
             void RefreshChildren();
         }
 
@@ -97,7 +97,7 @@ namespace Kistl.GUI.Renderer.WPF
 
             #region INode Members
 
-            public Kistl.API.Client.BaseClientDataObject DataObject
+            public Kistl.API.IDataObject DataObject
             {
                 get { return Module; }
             }
@@ -135,7 +135,7 @@ namespace Kistl.GUI.Renderer.WPF
 
             #region INode Members
 
-            public Kistl.API.Client.BaseClientDataObject DataObject
+            public Kistl.API.IDataObject DataObject
             {
                 get { return ObjectClass; }
             }
@@ -162,16 +162,16 @@ namespace Kistl.GUI.Renderer.WPF
 
         public class InstanceNode : INode
         {
-            public Kistl.API.Client.BaseClientDataObject Object { get; set; }
+            public Kistl.API.IDataObject Object { get; set; }
 
-            public InstanceNode(Kistl.API.Client.BaseClientDataObject obj)
+            public InstanceNode(Kistl.API.IDataObject obj)
             {
                 Object = obj;
             }
 
             #region INode Members
 
-            public Kistl.API.Client.BaseClientDataObject DataObject
+            public Kistl.API.IDataObject DataObject
             {
                 get { return Object; }
             }
@@ -241,8 +241,8 @@ namespace Kistl.GUI.Renderer.WPF
         {
             if (e.NewValue is INode)
             {
-                RoutedPropertyChangedEventArgs<Kistl.API.Client.BaseClientDataObject> args =
-                    new RoutedPropertyChangedEventArgs<Kistl.API.Client.BaseClientDataObject>(
+                RoutedPropertyChangedEventArgs<Kistl.API.IDataObject> args =
+                    new RoutedPropertyChangedEventArgs<Kistl.API.IDataObject>(
                        null, ((INode)e.NewValue).DataObject, SelectionChangedEvent);
                 RaiseEvent(args);
             }

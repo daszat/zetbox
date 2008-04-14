@@ -192,7 +192,7 @@ namespace Kistl.App.Base
             ((Method)obj)._fk_Module = this._fk_Module;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

@@ -51,14 +51,14 @@ namespace Kistl.API.Client
             }
         }
 
-        private KistlContext _context;
-        public KistlContext Context { get { return _context; } }
-        public virtual void AttachToContext(KistlContext ctx)
+        private IKistlContext _context;
+        public IKistlContext Context { get { return _context; } }
+        public virtual void AttachToContext(IKistlContext ctx)
         {
             _context = ctx;
         }
 
-        public virtual void DetachFromContext(KistlContext ctx)
+        public virtual void DetachFromContext(IKistlContext ctx)
         {
             if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
             _context = null;
@@ -176,14 +176,14 @@ namespace Kistl.API.Client
             obj.ID = this.ID;
         }
 
-        private KistlContext _context;
-        public KistlContext Context { get { return _context; } }
-        public virtual void AttachToContext(KistlContext ctx)
+        private IKistlContext _context;
+        public IKistlContext Context { get { return _context; } }
+        public virtual void AttachToContext(IKistlContext ctx)
         {
             _context = ctx;
         }
 
-        public virtual void DetachFromContext(KistlContext ctx)
+        public virtual void DetachFromContext(IKistlContext ctx)
         {
             if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
             _context = null;

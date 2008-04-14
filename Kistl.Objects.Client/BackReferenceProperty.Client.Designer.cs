@@ -126,7 +126,7 @@ namespace Kistl.App.Base
             ((BackReferenceProperty)obj)._PreFetchToClient = this._PreFetchToClient;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

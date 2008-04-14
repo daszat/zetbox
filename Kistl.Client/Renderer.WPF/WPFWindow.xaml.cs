@@ -39,7 +39,7 @@ namespace Kistl.GUI.Renderer.WPF
         /// <summary>
         /// Datenobjekt, das angezeigt wird.
         /// </summary>
-        private BaseClientDataObject _obj = null;
+        private Kistl.API.IDataObject _obj = null;
 
         private void SetTitle()
         {
@@ -91,7 +91,7 @@ namespace Kistl.GUI.Renderer.WPF
                 if (MessageBox.Show("Are you sure that you want to delete this Object?",
                     "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    _obj.Context.DeleteObject(_obj);
+                    _obj.Context.Delete(_obj);
                     _obj.Context.SubmitChanges();
 
                     this.Close();
@@ -146,7 +146,7 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
-        internal void Show(KistlContext kistlContext, BaseClientDataObject obj)
+        internal void Show(KistlContext kistlContext, Kistl.API.IDataObject obj)
         {
             ((IObjectControl)this).Value = obj;
 
@@ -162,7 +162,7 @@ namespace Kistl.GUI.Renderer.WPF
         #region IObjectControl Members
 
         private PropertyChangedEventHandler _ObjChanged;
-        BaseClientDataObject IObjectControl.Value
+        Kistl.API.IDataObject IObjectControl.Value
         {
             get { return _obj; }
             set

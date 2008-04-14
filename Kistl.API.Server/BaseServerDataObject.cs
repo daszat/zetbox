@@ -128,6 +128,23 @@ namespace Kistl.API.Server
 
             if (ctx != null) ctx.Attach(this);
         }
+
+        public IKistlContext Context 
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        public void AttachToContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DetachFromContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public abstract class BaseServerCollectionEntry : System.Data.Objects.DataClasses.EntityObject, ICollectionEntry, ICloneable

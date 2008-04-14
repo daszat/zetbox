@@ -94,7 +94,7 @@ namespace Kistl.App.Base
             ((StringProperty)obj)._Length = this._Length;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

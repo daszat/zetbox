@@ -42,7 +42,7 @@ namespace Kistl.GUI.Renderer.WPF
             return widget;
         }
 
-        public override void ShowObject(BaseClientDataObject obj)
+        public override void ShowObject(Kistl.API.IDataObject obj)
         {
             var template = obj.FindTemplate(TemplateUsage.EditControl);
             var widget = (System.Windows.Window)Renderer.WPF.CreateControl(obj, template.VisualTree);

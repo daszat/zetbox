@@ -51,7 +51,7 @@ namespace Kistl.Client
         /// <summary>
         /// Datenobjekt, das angezeigt wird.
         /// </summary>
-        private Kistl.API.Client.BaseClientDataObject obj = null;
+        private Kistl.API.IDataObject obj = null;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

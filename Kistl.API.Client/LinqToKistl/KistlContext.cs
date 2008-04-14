@@ -12,17 +12,27 @@ namespace Kistl.API.Client
     {
         private List<BaseClientDataObject> _objects = new List<BaseClientDataObject>();
 
-        public KistlContextQuery<BaseClientDataObject> GetQuery(ObjectType type)
+        /*public KistlContextQuery<BaseClientDataObject> GetQuery(ObjectType type)
         {
             return new KistlContextQuery<BaseClientDataObject>(this, type);
+        }*/
+
+        public IQueryable<IDataObject> GetQuery(ObjectType type)
+        {
+            return new KistlContextQuery<IDataObject>(this, type);
         }
 
-        public KistlContextQuery<T> GetQuery<T>() where T : BaseClientDataObject
+        /*public KistlContextQuery<T> GetQuery<T>() where T : IDataObject
+        {
+            return new KistlContextQuery<T>(this, new ObjectType(typeof(T)));
+        }*/
+
+        public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
             return new KistlContextQuery<T>(this, new ObjectType(typeof(T)));
         }
 
-        public List<T> GetListOf<T>(BaseClientDataObject obj, string propertyName)
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName)
         {
             return this.GetListOf<T>(obj.Type, obj.ID, propertyName);
         }
@@ -61,7 +71,7 @@ namespace Kistl.API.Client
             clientObj.AttachToContext(this);
         }
 
-        public void Dettach(IDataObject obj)
+        public void Detach(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             BaseClientDataObject clientObj = (BaseClientDataObject)obj;
@@ -72,6 +82,7 @@ namespace Kistl.API.Client
 
         public void Delete(IDataObject obj)
         {
+            if (obj.Context != this) throw new ArgumentException("The Object does not belong to the current Context", "obj");
             obj.ObjectState = DataObjectState.Deleted;
         }
 
@@ -82,7 +93,7 @@ namespace Kistl.API.Client
             entryObj.AttachToContext(this);
         }
 
-        public void Dettach(ICollectionEntry e)
+        public void Detach(ICollectionEntry e)
         {
             if (e == null) throw new ArgumentNullException("obj");
             BaseClientCollectionEntry entryObj = (BaseClientCollectionEntry)e;
@@ -126,15 +137,9 @@ namespace Kistl.API.Client
                 CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID, obj);
             }
 
-            objectsToDetach.ForEach(obj => this.Dettach(obj));
+            objectsToDetach.ForEach(obj => this.Detach(obj));
 
             return objectsSubmittedCount;
-        }
-
-        public void DeleteObject(BaseClientDataObject obj)
-        {
-            if (obj.Context != this) throw new ArgumentException("The Object does not belong to the current Context", "obj");
-            obj.ObjectState = DataObjectState.Deleted;
         }
 
         #region IDisposable Members

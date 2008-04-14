@@ -104,7 +104,7 @@ namespace Kistl.App.Zeiterfassung
             ((TaetigkeitsArt)obj)._Name = this._Name;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }

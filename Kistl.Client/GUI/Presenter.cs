@@ -17,7 +17,7 @@ namespace Kistl.GUI
         /// This method initializes the PropertyPresenter.
         /// MUST be called before any other operation
         /// </summary>
-        public void InitializeComponent(BaseClientDataObject obj, Visual v, IBasicControl ctrl)
+        public void InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
         {
             if (obj == null)
                 throw new ArgumentNullException("null object can't be presented");
@@ -40,8 +40,8 @@ namespace Kistl.GUI
         /// </summary>
         protected abstract void InitializeComponent();
 
-        private BaseClientDataObject _Object;
-        public BaseClientDataObject Object { get { return _Object; } }
+        private Kistl.API.IDataObject _Object;
+        public Kistl.API.IDataObject Object { get { return _Object; } }
 
         private Visual _Preferences;
         public Visual Preferences { get { return _Preferences; } }
@@ -325,8 +325,8 @@ namespace Kistl.GUI
 
     public interface IObjectControl : IBasicControl
     {
-        BaseClientDataObject Value { get; set; }
-        event /*UserInput<BaseClientDataObject>*/EventHandler UserInput;
+        Kistl.API.IDataObject Value { get; set; }
+        event /*UserInput<Kistl.API.IDataObject>*/EventHandler UserInput;
     }
 
     public static class ExtensionHelper

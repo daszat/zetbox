@@ -109,12 +109,12 @@ namespace Kistl.Client
             {
                 if (e.AddedItems.Count > 0)
                 {
-                    InstanceChangeCenter(new ObjNode((BaseClientDataObject)e.AddedItems[0], true));
+                    InstanceChangeCenter(new ObjNode((Kistl.API.IDataObject)e.AddedItems[0], true));
                 }
             }
         }
 
-        private void DesktopTreeView_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<BaseClientDataObject> e)
+        private void DesktopTreeView_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<Kistl.API.IDataObject> e)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
@@ -173,7 +173,7 @@ namespace Kistl.Client
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             ObjNode n = item as ObjNode;
-            BaseClientDataObject obj = n.Item;
+            Kistl.API.IDataObject obj = n.Item;
             if (n.IsCenter)
                 return (DataTemplate)((FrameworkElement)container).FindResource("specialTemplate");
             else
@@ -183,7 +183,7 @@ namespace Kistl.Client
 
     internal class ObjNode : DependencyObject
     {
-        public ObjNode(BaseClientDataObject obj, bool isCenter)
+        public ObjNode(Kistl.API.IDataObject obj, bool isCenter)
         {
             IsCenter = isCenter;
             Item = obj;
@@ -214,12 +214,12 @@ namespace Kistl.Client
                     foreach (Kistl.App.Base.BackReferenceProperty p in properties.OfType<Kistl.App.Base.BackReferenceProperty>())
                     {
                         Item.GetPropertyValue<IEnumerable>(p.PropertyName)
-                            .ForEach<BaseClientDataObject>(o => result.Add(new ObjNode(o, false)));
+                            .ForEach<Kistl.API.IDataObject>(o => result.Add(new ObjNode(o, false)));
                     }
 
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>().Where(p => !p.IsList))
                     {
-                        BaseClientDataObject item = Item.GetPropertyValue<BaseClientDataObject>(p.PropertyName);
+                        Kistl.API.IDataObject item = Item.GetPropertyValue<Kistl.API.IDataObject>(p.PropertyName);
                         if (item != null)
                         {
                             // Kann überraschenderweise null sein
@@ -236,14 +236,14 @@ namespace Kistl.Client
             }
         }
 
-        public BaseClientDataObject Item
+        public Kistl.API.IDataObject Item
         {
-            get { return (BaseClientDataObject)GetValue(ItemProperty); }
+            get { return (Kistl.API.IDataObject)GetValue(ItemProperty); }
             set { SetValue(ItemProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Item.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemProperty =
-            DependencyProperty.Register("Item", typeof(BaseClientDataObject), typeof(ObjNode));
+            DependencyProperty.Register("Item", typeof(Kistl.API.IDataObject), typeof(ObjNode));
     }
 }

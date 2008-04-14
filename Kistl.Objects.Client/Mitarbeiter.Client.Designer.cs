@@ -169,7 +169,7 @@ namespace Kistl.App.Projekte
             ((Mitarbeiter)obj)._TelefonNummer = this._TelefonNummer;
         }
         
-        public override void AttachToContext(KistlContext ctx)
+        public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
         }
