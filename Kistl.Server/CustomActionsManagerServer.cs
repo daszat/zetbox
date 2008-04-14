@@ -56,7 +56,7 @@ namespace Kistl.Server
         public void Init()
         {
             try{
-                using (KistlDataContext ctx = KistlDataContext.GetContext())
+                using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
                     foreach (ObjectClass baseObjClass in ctx.GetTable<ObjectClass>())
                     {

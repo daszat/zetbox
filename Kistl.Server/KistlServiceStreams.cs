@@ -24,7 +24,7 @@ namespace Kistl.Server
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
                 using (TraceClient.TraceHelper.TraceMethodCall(m.Type.ToString()))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetObject(m.ID);
                         MemoryStream result = new MemoryStream();
@@ -54,7 +54,7 @@ namespace Kistl.Server
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
                 using (TraceClient.TraceHelper.TraceMethodCall(m.Type.ToString()))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         // Deserialize
                         long pos = msg.Position;
@@ -97,7 +97,7 @@ namespace Kistl.Server
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
                 using (TraceClient.TraceHelper.TraceMethodCall(m.Type.ToString()))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type)
                             .GetList(m.MaxListCount,
@@ -131,7 +131,7 @@ namespace Kistl.Server
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
                 using (TraceClient.TraceHelper.TraceMethodCall(m.Type.ToString()))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetListOf(m.ID, m.Property);
                         MemoryStream result = new MemoryStream();

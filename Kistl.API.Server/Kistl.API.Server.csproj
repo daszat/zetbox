@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="KistlDataContext.cs" />
+    <Compile Include="KistlDataContextEntityFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

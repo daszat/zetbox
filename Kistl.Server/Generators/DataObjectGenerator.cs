@@ -20,7 +20,7 @@ namespace Kistl.Server.Generators
 
         public abstract class CurrentBase : ICloneable
         {
-            public Kistl.API.Server.KistlDataContext ctx { get; set; }
+            public Kistl.API.IKistlContext ctx { get; set; }
 
             public ClientServerEnum clientServer { get; set; }
             public CodeCompileUnit code { get; set; }
@@ -105,7 +105,7 @@ namespace Kistl.Server.Generators
         }
 
 
-        public virtual void Generate(Kistl.API.Server.KistlDataContext ctx, string codeBasePath)
+        public virtual void Generate(Kistl.API.IKistlContext ctx, string codeBasePath)
         {
             this.codeBasePath = codeBasePath + (codeBasePath.EndsWith("\\") ? "" : "\\");
             Directory.CreateDirectory(codeBasePath);

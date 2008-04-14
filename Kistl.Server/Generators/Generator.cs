@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators
             {
                 BaseDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
                 IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
-                using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+                using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
                 {
                     gDataObjects.Generate(ctx, Helper.CodeGenPath);
                     gMapping.Generate(ctx, Helper.CodeGenPath);
@@ -81,7 +81,7 @@ namespace Kistl.Server.Generators
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
                 Generators.IDatabaseGenerator gDatabase = Generators.DatabaseGeneratorFactory.GetGenerator();
-                using (Kistl.API.Server.KistlDataContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+                using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
                 {
                     gDatabase.Generate(ctx);
                 }
@@ -192,25 +192,25 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GetLists
-        public static IQueryable<ObjectClass> GetObjectClassList(Kistl.API.Server.KistlDataContext ctx)
+        public static IQueryable<ObjectClass> GetObjectClassList(Kistl.API.IKistlContext ctx)
         {
             return from c in ctx.GetTable<ObjectClass>()
                    select c;
         }
 
-        public static IQueryable<Interface> GetInterfaceList(Kistl.API.Server.KistlDataContext ctx)
+        public static IQueryable<Interface> GetInterfaceList(Kistl.API.IKistlContext ctx)
         {
             return from i in ctx.GetTable<Interface>()
                    select i;
         }
 
-        public static IQueryable<Enumeration> GetEnumList(Kistl.API.Server.KistlDataContext ctx)
+        public static IQueryable<Enumeration> GetEnumList(Kistl.API.IKistlContext ctx)
         {
             return from e in ctx.GetTable<Enumeration>()
                    select e;
         }
 
-        public static IQueryable<Property> GetCollectionProperties(Kistl.API.Server.KistlDataContext ctx)
+        public static IQueryable<Property> GetCollectionProperties(Kistl.API.IKistlContext ctx)
         {
             // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
             // It's a Beta Version - so what!
@@ -221,7 +221,7 @@ namespace Kistl.Server.Generators
                    select p;
         }
 
-        public static IQueryable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.Server.KistlDataContext ctx)
+        public static IQueryable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.IKistlContext ctx)
         {
             // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
             // It's a Beta Version - so what!

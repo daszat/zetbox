@@ -10,9 +10,9 @@ namespace Kistl.Server.Generators.SQLServer
     public class SQLServerEntityFrameworkModelGenerator : IMappingGenerator
     {
         private string path = "";
-        private Kistl.API.Server.KistlDataContext ctx = null;
+        private Kistl.API.IKistlContext ctx = null;
 
-        public void Generate(Kistl.API.Server.KistlDataContext ctx, string path)
+        public void Generate(Kistl.API.IKistlContext ctx, string path)
         {
             System.Diagnostics.Trace.TraceInformation("Generating EF-Model...");
 

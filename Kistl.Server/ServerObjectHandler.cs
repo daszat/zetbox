@@ -152,7 +152,7 @@ namespace Kistl.Server
 
                 IEnumerable list = (IEnumerable)obj.GetPropertyValue <IEnumerable>(property);
 
-                using (KistlDataContext ctx = KistlDataContext.GetContext())
+                using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
                     // If ObjectReferenc is a List -> convert data
                     Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.Type.GetObjectClass(ctx)
@@ -211,7 +211,7 @@ namespace Kistl.Server
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
-                    KistlDataContext.Current.DeleteObject(obj);
+                    KistlDataContext.Current.Delete(obj);
                 }
                 else
                 {
@@ -237,7 +237,7 @@ namespace Kistl.Server
         /// <param name="obj"></param>
         private static void UpdateRelationships(T obj)
         {
-            using (KistlDataContext ctx = KistlDataContext.GetContext())
+            using (IKistlContext ctx = KistlDataContext.GetContext())
             {
                 Kistl.App.Base.ObjectClass objClass = obj.Type.GetObjectClass(ctx); 
                 while(objClass != null)
@@ -278,8 +278,9 @@ namespace Kistl.Server
         /// <param name="obj"></param>
         private static void MarkEveryPropertyAsModified(EntityObject obj)
         {
-            ObjectStateEntry stateEntry = KistlDataContext.Current.ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
-            MetadataWorkspace workspace = KistlDataContext.Current.MetadataWorkspace;
+            // TODO: Bad Hack!!
+            ObjectStateEntry stateEntry = ((KistlDataContextEntityFramework)KistlDataContext.Current).ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
+            MetadataWorkspace workspace = ((KistlDataContextEntityFramework)KistlDataContext.Current).MetadataWorkspace;
             EntityType entityType = workspace.GetItem<EntityType>("Model." + obj.GetType().Name, DataSpace.CSpace);
 
             foreach (EdmProperty property in entityType.Properties)
@@ -289,7 +290,7 @@ namespace Kistl.Server
 
             if (obj is IDataObject)
             {
-                using (KistlDataContext ctx = KistlDataContext.GetContext())
+                using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
                     Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).Type.GetObjectClass(ctx);
                     while (objClass != null)

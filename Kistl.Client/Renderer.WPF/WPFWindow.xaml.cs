@@ -13,6 +13,7 @@ using System.Xml;
 using Kistl.API.Client;
 using Kistl.GUI.DB;
 using Kistl.Client;
+using Kistl.API;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -99,7 +100,7 @@ namespace Kistl.GUI.Renderer.WPF
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex);
+                Client.Helper.HandleError(ex);
             }
         }
 
@@ -142,11 +143,11 @@ namespace Kistl.GUI.Renderer.WPF
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex);
+                Client.Helper.HandleError(ex);
             }
         }
 
-        internal void Show(KistlContext kistlContext, Kistl.API.IDataObject obj)
+        internal void Show(IKistlContext kistlContext, Kistl.API.IDataObject obj)
         {
             ((IObjectControl)this).Value = obj;
 

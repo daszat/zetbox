@@ -63,7 +63,7 @@ namespace Kistl.Client
             {
                 using (TraceClient.TraceHelper.TraceMethodCall())
                 {
-                    using (KistlContext ctx = new KistlContext())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         /// Prepare Methods
                         List<Method> mList = ctx.GetQuery<Method>().ToList();

@@ -108,5 +108,23 @@ namespace API.Tests
         public void NotifyPropertyChanging(string property)
         {
         }
+
+        public IKistlContext Context
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        public void AttachToContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DetachFromContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

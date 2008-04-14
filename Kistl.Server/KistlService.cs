@@ -86,7 +86,7 @@ namespace Kistl.Server
             {
                 using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         // TODO: Add filter to Interface!!
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type)
@@ -124,7 +124,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetListOf(ID, property);
                         return CurrentSerializer.XmlFromList(lst);
@@ -156,7 +156,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetObject(ID);
                         return CurrentSerializer.XmlFromObject(obj);
@@ -188,7 +188,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
                 {
-                    using (KistlDataContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
                         obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).SetObject(obj);

@@ -20,11 +20,11 @@ namespace Kistl.Server.Generators.SQLServer
     {
         private SqlConnection db = null;
         private SqlTransaction tx = null;
-        private Kistl.API.Server.KistlDataContext ctx = null;
+        private Kistl.API.IKistlContext ctx = null;
         private List<ObjectClass> objClassList = new List<ObjectClass>();
         private List<BaseProperty> propList = new List<BaseProperty>();
 
-        public void Generate(Kistl.API.Server.KistlDataContext ctx)
+        public void Generate(Kistl.API.IKistlContext ctx)
         {
             this.ctx = ctx;
 

@@ -8,13 +8,26 @@ using System.Collections.ObjectModel;
 
 namespace Kistl.API.Client
 {
-    public class KistlContext : IKistlContext, IDisposable
+    public static class KistlContext
+    {
+        public static IKistlContext GetContext()
+        {
+            return new KistlContextImpl();
+        }
+    }
+
+    internal class KistlContextImpl : IKistlContext, IDisposable
     {
         private List<Kistl.API.IDataObject> _objects = new List<Kistl.API.IDataObject>();
 
         public IQueryable<IDataObject> GetQuery(ObjectType type)
         {
             return new KistlContextQuery<IDataObject>(this, type);
+        }
+
+        public IQueryable<T> GetTable<T>() where T : IDataObject
+        {
+            return GetQuery<T>();
         }
 
         public IQueryable<T> GetQuery<T>() where T : IDataObject

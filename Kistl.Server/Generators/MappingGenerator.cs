@@ -7,7 +7,7 @@ namespace Kistl.Server.Generators
 {
     public interface IMappingGenerator
     {
-        void Generate(Kistl.API.Server.KistlDataContext ctx, string path);
+        void Generate(Kistl.API.IKistlContext ctx, string path);
     }
 
     public sealed class MappingGeneratorFactory

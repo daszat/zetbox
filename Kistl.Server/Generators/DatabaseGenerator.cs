@@ -7,7 +7,7 @@ namespace Kistl.Server.Generators
 {
     public interface IDatabaseGenerator
     {
-        void Generate(Kistl.API.Server.KistlDataContext ctx);
+        void Generate(Kistl.API.IKistlContext ctx);
     }
 
     public sealed class DatabaseGeneratorFactory

@@ -47,7 +47,7 @@ namespace Kistl.Client
         /// <summary>
         /// Client BL Objekt instanz
         /// </summary>
-        private KistlContext ctx = null;
+        private IKistlContext ctx = null;
         /// <summary>
         /// Datenobjekt, das angezeigt wird.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Kistl.Client
             try
             {
                 // Client BL holen
-                ctx = new KistlContext();
+                ctx = KistlContext.GetContext();
                 obj = ctx.GetQuery(ObjectType).SingleOrDefault(o => o.ID == ObjectID);
 
                 // Objekttype anpassen

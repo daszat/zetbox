@@ -15,7 +15,7 @@ namespace Integration.Tests.Tests
         [Test]
         public void GetList()
         {
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -25,7 +25,7 @@ namespace Integration.Tests.Tests
         [Test]
         public void GetListWithTop10()
         {
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Take(10).ToList();
                 Assert.That(list.Count, Is.EqualTo(10));
@@ -35,7 +35,7 @@ namespace Integration.Tests.Tests
         [Test]
         public void GetListWithOrderBy()
         {
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.ClassName).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -57,7 +57,7 @@ namespace Integration.Tests.Tests
         [Test]
         public void GetListWithParameterLegal()
         {
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var test = (from m in ctx.GetQuery<Kistl.App.Base.Module>()
                            where
@@ -78,7 +78,7 @@ namespace Integration.Tests.Tests
         [ExpectedException(typeof(System.ServiceModel.FaultException))]
         public void GetListWithParameterIllegal()
         {
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
                             where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0

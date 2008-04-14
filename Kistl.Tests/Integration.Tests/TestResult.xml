@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" total="8" failures="0" not-run="0" date="2008-04-12" time="18:05:09">
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" total="8" failures="0" not-run="0" date="2008-04-14" time="12:31:25">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
   <culture-info current-culture="de-AT" current-uiculture="en-US" />
-  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" success="True" time="28.603" asserts="0">
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" success="True" time="26.972" asserts="0">
     <results>
-      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\bin\debug\..\Debug\Integration.Tests.dll" success="True" time="28.601" asserts="0">
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\bin\debug\..\Debug\Integration.Tests.dll" success="True" time="26.972" asserts="0">
         <results>
-          <test-suite name="Integration" success="True" time="28.601" asserts="0">
+          <test-suite name="Integration" success="True" time="26.957" asserts="0">
             <results>
-              <test-suite name="Tests" success="True" time="28.589" asserts="0">
+              <test-suite name="Tests" success="True" time="26.941" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="True" time="2.574" asserts="0">
+                  <test-suite name="Tests" success="True" time="2.855" asserts="0">
                     <results>
-                      <test-suite name="GetListTests" success="True" time="1.315" asserts="0">
+                      <test-suite name="GetListTests" success="True" time="1.404" asserts="0">
                         <results>
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetList" executed="True" success="True" time="0.378" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.488" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.222" asserts="0" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.084" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithTop10" executed="True" success="True" time="0.128" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetList" executed="True" success="True" time="0.328" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.515" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.296" asserts="0" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.125" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithTop10" executed="True" success="True" time="0.125" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectTests" success="True" time="1.250" asserts="0">
+                      <test-suite name="ObjectTests" success="True" time="1.451" asserts="0">
                         <results>
-                          <test-case name="Integration.Tests.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.002" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.NewObject" executed="True" success="True" time="0.982" asserts="6" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.264" asserts="3" />
+                          <test-case name="Integration.Tests.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Integration.Tests.Tests.ObjectTests.NewObject" executed="True" success="True" time="1.201" asserts="6" />
+                          <test-case name="Integration.Tests.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.250" asserts="3" />
                         </results>
                       </test-suite>
                     </results>

@@ -15,7 +15,7 @@ namespace API.Server.Tests.Tests
         [SetUp]
         public void SetUp()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 var result = ctx.GetTable<TestObjClass>();
                 var list = result.ToList();
@@ -40,7 +40,7 @@ namespace API.Server.Tests.Tests
         [Test]
         public void InitSession()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 Assert.That(ctx, Is.Not.Null);
                 Assert.That(KistlDataContext.Current, Is.Not.Null);
@@ -51,11 +51,11 @@ namespace API.Server.Tests.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void InitSessionTwice()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 Assert.That(ctx, Is.Not.Null);
                 Assert.That(KistlDataContext.Current, Is.Not.Null);
-                using (KistlDataContext ctx2 = KistlDataContext.InitSession())
+                using (IKistlContext ctx2 = KistlDataContext.InitSession())
                 {
                     Assert.That(ctx2, Is.Not.Null);
                     Assert.That(KistlDataContext.Current, Is.Not.Null);
@@ -73,7 +73,7 @@ namespace API.Server.Tests.Tests
         [Test]
         public void GetTable()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 var result = ctx.GetTable<TestObjClass>();
                 Assert.That(result, Is.Not.Null);
@@ -83,14 +83,14 @@ namespace API.Server.Tests.Tests
         [Test]
         public void SelectSomeData()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 var result = ctx.GetTable<TestObjClass>();
                 Assert.That(result.ToList().Count, Is.EqualTo(2));
             }
         }
 
-        private void ChangeData(KistlDataContext ctx)
+        private void ChangeData(IKistlContext ctx)
         {
             TestObjClass obj = ctx.GetTable<TestObjClass>().Where(o => o.ID == 1).First();
             Assert.That(obj, Is.Not.Null);
@@ -99,7 +99,7 @@ namespace API.Server.Tests.Tests
             obj.StringProp = "Test";
         }
 
-        private void CheckData(KistlDataContext ctx)
+        private void CheckData(IKistlContext ctx)
         {
             TestObjClass obj = ctx.GetTable<TestObjClass>().Where(o => o.ID == 1).First();
             Assert.That(obj, Is.Not.Null);
@@ -109,13 +109,13 @@ namespace API.Server.Tests.Tests
         [Test]
         public void UpdateSomeData_SubmitChanges()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 ChangeData(ctx);
                 ctx.SubmitChanges();
             }
 
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 CheckData(ctx);
             }
@@ -124,28 +124,13 @@ namespace API.Server.Tests.Tests
         [Test]
         public void UpdateSomeData_SaveChanges()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 ChangeData(ctx);
-                ctx.SaveChanges();
+                ctx.SubmitChanges();
             }
 
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
-            {
-                CheckData(ctx);
-            }
-        }
-
-        [Test]
-        public void UpdateSomeData_SaveChanges_Accept()
-        {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
-            {
-                ChangeData(ctx);
-                ctx.SaveChanges(true);
-            }
-
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 CheckData(ctx);
             }
@@ -154,7 +139,7 @@ namespace API.Server.Tests.Tests
         [Test]
         public void Attach_IDataObject_New()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 TestObjClass obj = new TestObjClass();
                 ctx.Attach(obj);
@@ -164,7 +149,7 @@ namespace API.Server.Tests.Tests
         [Test]
         public void Attach_IDataObject_Existing()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 TestObjClass obj = new TestObjClass() { ID = 3 };
                 ctx.Attach(obj);
@@ -175,7 +160,7 @@ namespace API.Server.Tests.Tests
         [ExpectedException(typeof(NotSupportedException))]
         public void Attach_ICollectionEntry()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 TestCollectionEntry obj = new TestCollectionEntry();
                 ctx.Attach(obj);
@@ -185,7 +170,7 @@ namespace API.Server.Tests.Tests
         [Test]
         public void Delete_IDataObject()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 var result = ctx.GetTable<TestObjClass>();
                 Assert.That(result.ToList().Count, Is.EqualTo(2));
@@ -199,9 +184,9 @@ namespace API.Server.Tests.Tests
         [ExpectedException(typeof(NotSupportedException))]
         public void Detach_IDataObject()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                ctx.Dettach(new TestObjClass());
+                ctx.Detach(new TestObjClass());
             }
         }
 
@@ -209,10 +194,10 @@ namespace API.Server.Tests.Tests
         [ExpectedException(typeof(NotSupportedException))]
         public void Detach_ICollectionEntry()
         {
-            using (KistlDataContext ctx = KistlDataContext.InitSession())
+            using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 TestCollectionEntry obj = new TestCollectionEntry();
-                ctx.Dettach(obj);
+                ctx.Detach(obj);
             }
         }
 

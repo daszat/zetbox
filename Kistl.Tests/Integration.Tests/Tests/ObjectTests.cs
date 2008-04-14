@@ -15,7 +15,7 @@ namespace Integration.Tests.Tests
         [Test]
         public void GetObject()
         {
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == 2);
                 Assert.That(obj.ID, Is.EqualTo(2));
@@ -27,7 +27,7 @@ namespace Integration.Tests.Tests
         {
             double aufwand;
             int ID;
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Projekte.Task>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -41,7 +41,7 @@ namespace Integration.Tests.Tests
                 ctx.SubmitChanges();
             }
 
-            using (Kistl.API.Client.KistlContext checkctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext checkctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var obj = checkctx.GetQuery<Kistl.App.Projekte.Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);
@@ -56,7 +56,7 @@ namespace Integration.Tests.Tests
             double aufwand;
             DateTime datum;
             Kistl.App.Projekte.Projekt p;
-            using (Kistl.API.Client.KistlContext ctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 p = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()[0];
                 var obj = ctx.Create<Kistl.App.Projekte.Task>();
@@ -72,7 +72,7 @@ namespace Integration.Tests.Tests
                 Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
             }
 
-            using (Kistl.API.Client.KistlContext checkctx = new Kistl.API.Client.KistlContext())
+            using (Kistl.API.IKistlContext checkctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var obj = checkctx.GetQuery<Kistl.App.Projekte.Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);

@@ -23,7 +23,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// 
         /// </summary>
-        private KistlContext _context;
+        private IKistlContext _context;
 
         /// <summary>
         /// 
@@ -58,7 +58,7 @@ namespace Kistl.API.Client
         /// </summary>
         private Expression _orderBy = null;
 
-        internal KistlContextProvider(KistlContext ctx, ObjectType type)
+        internal KistlContextProvider(IKistlContext ctx, ObjectType type)
         {
             _context = ctx;
             _type = type;

@@ -70,7 +70,7 @@ namespace Kistl.Server
     /// </summary>
     public static class ExtensionHelpers
     {
-        public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass, KistlDataContext ctx)
+        public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass, Kistl.API.IKistlContext ctx)
         {
             List<ObjectClass> result = new List<ObjectClass>();
             while (objClass != null)
@@ -88,12 +88,12 @@ namespace Kistl.Server
             return new ObjectType(objClass.Module.Namespace, objClass.ClassName);
         }
 
-        public static ObjectClass GetObjectClass(this ObjectType objType, KistlDataContext ctx)
+        public static ObjectClass GetObjectClass(this ObjectType objType, Kistl.API.IKistlContext ctx)
         {
             return ctx.GetTable<ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
         }
 
-        public static BaseProperty GetProperty(this ObjectClass c, KistlDataContext ctx, string property)
+        public static BaseProperty GetProperty(this ObjectClass c, Kistl.API.IKistlContext ctx, string property)
         {
             ObjectClass objClass = c;
             while (objClass != null)

@@ -8,7 +8,7 @@ namespace Kistl.API
     /// <summary>
     /// Interface for a LinqToNNN Context.
     /// </summary>
-    public interface IKistlContext
+    public interface IKistlContext : IDisposable
     {
         /// <summary>
         /// Attach an IDataObject.
@@ -42,11 +42,16 @@ namespace Kistl.API
         /// <param name="obj">ICollectionEntry</param>
         void Delete(ICollectionEntry e);
 
+        IQueryable<T> GetTable<T>() where T : IDataObject;
         IQueryable<T> GetQuery<T>() where T : IDataObject;
         IQueryable<IDataObject> GetQuery(ObjectType type);
         List<T> GetListOf<T>(IDataObject obj, string propertyName);
         List<T> GetListOf<T>(ObjectType type, int ID, string propertyName);
 
         int SubmitChanges();
+
+        Kistl.API.IDataObject Create(Type type);
+        Kistl.API.IDataObject Create(ObjectType type);
+        T Create<T>() where T : IDataObject, new();
     }
 }

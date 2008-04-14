@@ -55,7 +55,7 @@ namespace Kistl.Client
                     using (TraceClient.TraceHelper.TraceMethodCall("Getting Object Classes"))
                     {
                         // Prefetch Modules
-                        using (KistlContext ctx = new KistlContext())
+                        using (IKistlContext ctx = KistlContext.GetContext())
                         {
                             _ObjectClasses = ctx.GetQuery<Kistl.App.Base.ObjectClass>()
                                 .ToDictionary(o => new ObjectType(o.Module.Namespace, o.ClassName));
@@ -82,7 +82,7 @@ namespace Kistl.Client
                 {
                     using (TraceClient.TraceHelper.TraceMethodCall("Getting Modules"))
                     {
-                        using (KistlContext ctx = new KistlContext())
+                        using (IKistlContext ctx = KistlContext.GetContext())
                         {
                             _Modules = ctx.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
                         }
