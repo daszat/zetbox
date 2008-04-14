@@ -172,10 +172,13 @@ namespace Kistl.API.Client
         #region Visits
         protected override void VisitBinary(BinaryExpression b)
         {
+            // detect "ID == const" expressions to create GetObject Call
+            // TODO: This is not symmetrical and fails to detect "const == ID" expressions
+            // that needs improved logic!
             if (b.Left is MemberExpression)
             {
                 MemberExpression m = (MemberExpression)b.Left;
-                if (m.Member.DeclaringType == typeof(Kistl.API.IDataObject) && m.Member.Name == "ID")
+                if (typeof(Kistl.API.IDataObject).IsAssignableFrom(m.Member.DeclaringType) && m.Member.Name == "ID")
                 {
                     ID = b.Right.GetExpressionValue<int>();
                 }
@@ -222,7 +225,7 @@ namespace Kistl.API.Client
             {
                 if (_filter == null)
                 {
-                    // It is OK to check that here, becaue GetList will only take a Lambda Expression as an argument
+                    // It is OK to check that here, because GetList will only take a Lambda Expression as an argument
                     // and does _always_ a SELECT.
                     // Method Calls must be implemented here explicit & send explicit to the Server. 
                     // So there is no aggregation hole at this point. 

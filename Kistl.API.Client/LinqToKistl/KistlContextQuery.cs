@@ -19,9 +19,6 @@ namespace Kistl.API.Client
         #region Constructor
         internal KistlContextQuery(KistlContext ctx, ObjectType type)
         {
-            if (!typeof(T).IsSubclassOf(typeof(Kistl.API.IDataObject)) && typeof(T) != typeof(Kistl.API.IDataObject)) 
-                throw new InvalidOperationException("Only valid for Kistl Objects");
-
             _type = type;
             _context = ctx;
             _expression = System.Linq.Expressions.Expression.Constant(this);
@@ -30,9 +27,6 @@ namespace Kistl.API.Client
 
         internal KistlContextQuery(KistlContext ctx, ObjectType type, KistlContextProvider<T> provider, Expression expression)
         {
-            if (!typeof(T).IsSubclassOf(typeof(Kistl.API.IDataObject)) && typeof(T) != typeof(Kistl.API.IDataObject)) 
-                throw new InvalidOperationException("Only valid for Kistl Objects");
-
             _type = type;
             _context = ctx;
             _expression = expression;
