@@ -114,12 +114,24 @@ namespace Kistl.GUI.DB
 
         private static Visual CreateVisual(ObjectReferenceProperty objectReferenceProperty)
         {
-            return new Visual()
+            if (objectReferenceProperty.IsList)
             {
-                Name = "fk",
-                Description = "this control displays a foreign key reference",
-                Property = objectReferenceProperty
-            };
+                return new Visual()
+                {
+                    Name = "objectlist",
+                    Description = "display a list of objects",
+                    Property = objectReferenceProperty
+                };
+            }
+            else
+            {
+                return new Visual()
+                {
+                    Name = "fk",
+                    Description = "this control displays a foreign key reference",
+                    Property = objectReferenceProperty
+                };
+            }
         }
 
         private static Visual CreateVisual(IntProperty intProperty)
