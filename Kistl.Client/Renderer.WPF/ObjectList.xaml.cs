@@ -22,7 +22,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// Sie kann _alle_ Instanzen einer Klasse anzeigen &
     /// alle Instanzen einer Eigenschaft eines Objektes.
     /// </summary>
-    public partial class ObjectList : PropertyControl, IListControl
+    public partial class ObjectList : PropertyControl, IObjectListControl
     {
 
         static ObjectList()
@@ -60,20 +60,37 @@ namespace Kistl.GUI.Renderer.WPF
             RaiseEvent(args);
         }
 
-        #region IListControl Members
+        #region IObjectListControl Members
 
-        public IEnumerable ItemsSource
+        IList<Kistl.API.IDataObject> IObjectListControl.Value
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            get
+            {
+                return (IList<Kistl.API.IDataObject>)lst.ItemsSource;
+            }
+            set
+            {
+                lst.ItemsSource = value;
+            }
         }
 
-        // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ObjectList));
+        // TODO: has to be called when editing lst.ItemsSource
+        protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
+        {
+            if (_UserInput != null)
+            {
+                _UserInput(this, new EventArgs());
+            }
+        }
+
+        private event EventHandler _UserInput;
+        event EventHandler IObjectListControl.UserInput
+        {
+            add { _UserInput += value; }
+            remove { _UserInput -= value; }
+        }
 
         #endregion
-
 
     }
 }

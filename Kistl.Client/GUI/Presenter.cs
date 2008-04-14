@@ -232,6 +232,38 @@ namespace Kistl.GUI
 
     }
 
+    public class ObjectListPresenter : Presenter
+    {
+        public ObjectListPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = Property.PropertyName;
+            Control.Description = Property.AltText;
+            // Control.ObjectType = new Kistl.API.ObjectType(Property.GetDataType());
+            Control.Value = Object.GetList(Property);
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+
+            Control.UserInput += new EventHandler(Control_UserInput);
+        }
+
+        private void Control_UserInput(object sender, EventArgs e)
+        {
+            IList < Kistl.API.IDataObject > list =  Object.GetList(Property);
+            list.Clear();
+            foreach (var i in Control.Value)
+            {
+                list.Add(i);
+            }
+        }
+
+        // localize type-unsafety
+        public ObjectReferenceProperty Property { get { return (ObjectReferenceProperty)Preferences.Property; } }
+        // fixup locally used types
+        public new IObjectListControl Control { get { return (IObjectListControl)base.Control; } }
+    }
+
     public class BackReferencePresenter : Presenter
     {
         public BackReferencePresenter() { }
@@ -240,7 +272,7 @@ namespace Kistl.GUI
         {
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
-            Control.ItemsSource = Object.GetPropertyValue<IEnumerable>(Property.PropertyName);
+            Control.Value = Object.GetPropertyValue<IList<IDataObject>>(Property.PropertyName);
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
         }
@@ -248,7 +280,7 @@ namespace Kistl.GUI
         // localize type-unsafety
         public BackReferenceProperty Property { get { return (BackReferenceProperty)Preferences.Property; } }
         // fixup locally used types
-        public new IListControl Control { get { return (IListControl)base.Control; } }
+        public new IObjectListControl Control { get { return (IObjectListControl)base.Control; } }
 
     }
 
@@ -308,12 +340,12 @@ namespace Kistl.GUI
         event /*UserInput<bool>*/EventHandler UserInput;
     }
 
-    public interface IListControl : IBasicControl
+    public interface ISelectControl : IBasicControl
     {
         IEnumerable ItemsSource { get; set; }
     }
 
-    public interface IPointerControl : IListControl
+    public interface IPointerControl : ISelectControl
     {
         /// <summary>
         /// The ObjectType of the listed Objects
@@ -328,6 +360,13 @@ namespace Kistl.GUI
         Kistl.API.IDataObject Value { get; set; }
         event /*UserInput<Kistl.API.IDataObject>*/EventHandler UserInput;
     }
+
+    public interface IObjectListControl : IBasicControl
+    {
+        IList<Kistl.API.IDataObject> Value { get; set; }
+        event /*UserInput<IList<Kistl.API.IDataObject>>*/EventHandler UserInput;
+    }
+
 
     public static class ExtensionHelper
     {
@@ -389,6 +428,16 @@ namespace Kistl.GUI
         public static void SetPropertyValue(this IDataObject obj, ObjectReferenceProperty prop, int value)
         {
             obj.SetPropertyValue<int>("fk_" + prop.PropertyName, value);
+        }
+
+        public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, ObjectReferenceProperty prop)
+        {
+            return obj.GetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName);
+        }
+
+        public static void SetList(this IDataObject obj, ObjectReferenceProperty prop, IList<Kistl.API.IDataObject> value)
+        {
+            obj.SetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName, value);
         }
     }
 

@@ -17,9 +17,9 @@
             </ToolBar>
             <ListView
                 x:Name="lst"
-                ItemsSource="{Binding ElementName=ListCtrl, Path=ItemsSource}"
                 MinHeight="150">
                 <!-- 
+                ItemsSource="{Binding ElementName=ListCtrl, Path=ItemsSource}"
                       MouseDoubleClick="lst_MouseDoubleClick"  
                       SelectionChanged="lst_SelectionChanged"
                       -->
