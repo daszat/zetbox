@@ -6,7 +6,7 @@ using System.Text;
 namespace Kistl.API
 {
     /// <summary>
-    /// App Domain Interface for Client & Server Hosts.
+    /// App Domain Interface for Client &amp; Server Hosts.
     /// </summary>
     public interface IKistlAppDomain
     {
