@@ -67,10 +67,10 @@ namespace Kistl.API.Client
         internal List<T> GetListOf(int ID, string propertyName)
         {
             List<T> result = Proxy.Current.GetListOf(_context, _type, ID, propertyName).OfType<T>().ToList();
-            foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
+            foreach (Kistl.API.IDataObject obj in result.OfType<Kistl.API.IDataObject>())
             {
-                CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
-                    (BaseClientDataObject)(obj).Clone());
+                CacheController<Kistl.API.IDataObject>.Current.Set(obj.Type, obj.ID,
+                    (Kistl.API.IDataObject)(obj).Clone());
                 // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
                 obj.ObjectState = DataObjectState.Unmodified;
             }
@@ -118,10 +118,10 @@ namespace Kistl.API.Client
         private object GetListCall(Expression e)
         {
             List<T> result = Proxy.Current.GetList(_context, _type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
-            foreach (BaseClientDataObject obj in result.OfType<BaseClientDataObject>())
+            foreach (Kistl.API.IDataObject obj in result.OfType<Kistl.API.IDataObject>())
             {
-                CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID,
-                    (BaseClientDataObject)(obj).Clone());
+                CacheController<Kistl.API.IDataObject>.Current.Set(obj.Type, obj.ID,
+                    (Kistl.API.IDataObject)(obj).Clone());
                 // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
                 obj.ObjectState = DataObjectState.Unmodified;
             }
@@ -137,21 +137,21 @@ namespace Kistl.API.Client
         {
             if (ID == Helper.INVALIDID) return null;
 
-            T result = (T)(IDataObject)CacheController<BaseClientDataObject>.Current.Get(_type, ID);
+            T result = (T)(IDataObject)CacheController<Kistl.API.IDataObject>.Current.Get(_type, ID);
             if (result == null)
             {
                 result = (T)(IDataObject)Proxy.Current.GetObject(_context, _type, ID);
                 if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
-                CacheController<BaseClientDataObject>.Current.Set(_type, ID,
-                    (BaseClientDataObject)(result as BaseClientDataObject).Clone());
+                CacheController<Kistl.API.IDataObject>.Current.Set(_type, ID,
+                    (Kistl.API.IDataObject)(result as Kistl.API.IDataObject).Clone());
             }
             else
             {
-                result = (T)(result as BaseClientDataObject).Clone();
-                _context.Attach(result as BaseClientDataObject);
+                result = (T)(result as Kistl.API.IDataObject).Clone();
+                _context.Attach(result as Kistl.API.IDataObject);
             }
             // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
-            (result as BaseClientDataObject).ObjectState = DataObjectState.Unmodified;
+            (result as Kistl.API.IDataObject).ObjectState = DataObjectState.Unmodified;
             return result;
         }
 
@@ -175,7 +175,7 @@ namespace Kistl.API.Client
             if (b.Left is MemberExpression)
             {
                 MemberExpression m = (MemberExpression)b.Left;
-                if (m.Member.DeclaringType == typeof(BaseClientDataObject) && m.Member.Name == "ID")
+                if (m.Member.DeclaringType == typeof(Kistl.API.IDataObject) && m.Member.Name == "ID")
                 {
                     ID = b.Right.GetExpressionValue<int>();
                 }

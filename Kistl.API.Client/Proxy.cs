@@ -16,8 +16,8 @@ namespace Kistl.API.Client
         private interface IXmlSerializer
         {
             string XmlFromList(IEnumerable lst);
-            string XmlFromObject(BaseClientDataObject obj);
-            BaseClientDataObject ObjectFromXml(IKistlContext ctx, string xml);
+            string XmlFromObject(Kistl.API.IDataObject obj);
+            Kistl.API.IDataObject ObjectFromXml(IKistlContext ctx, string xml);
             IEnumerable ListFromXml(IKistlContext ctx, string xml);
         }
 
@@ -32,16 +32,16 @@ namespace Kistl.API.Client
                 return list.ToXmlString();
             }
 
-            public string XmlFromObject(BaseClientDataObject obj)
+            public string XmlFromObject(Kistl.API.IDataObject obj)
             {
                 XMLOBJECT result = new XMLOBJECT();
                 result.Object = obj;
                 return result.ToXmlString();
             }
 
-            public BaseClientDataObject ObjectFromXml(IKistlContext ctx, string xml)
+            public Kistl.API.IDataObject ObjectFromXml(IKistlContext ctx, string xml)
             {
-                BaseClientDataObject obj = xml.FromXmlString<XMLOBJECT>().Object as BaseClientDataObject;
+                Kistl.API.IDataObject obj = xml.FromXmlString<XMLOBJECT>().Object as Kistl.API.IDataObject;
                 if(ctx != null) ctx.Attach(obj);
                 return obj;
             }
@@ -122,7 +122,7 @@ namespace Kistl.API.Client
                 System.IO.MemoryStream s = serviceStreams.GetList(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
-                List<BaseClientDataObject> result = new List<BaseClientDataObject>();
+                List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
 
                 while (s.Position < s.Length)
                 {
@@ -135,7 +135,7 @@ namespace Kistl.API.Client
                     IDataObject obj = objType.NewDataObject();
                     obj.FromStream(ctx, sr);
 
-                    result.Add((BaseClientDataObject)obj);
+                    result.Add((Kistl.API.IDataObject)obj);
                 }
 
                 return result;
@@ -158,7 +158,7 @@ namespace Kistl.API.Client
                 System.IO.MemoryStream s = serviceStreams.GetListOf(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
-                List<BaseClientDataObject> result = new List<BaseClientDataObject>();
+                List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
 
                 while (s.Position < s.Length)
                 {
@@ -171,7 +171,7 @@ namespace Kistl.API.Client
                     IDataObject obj = objType.NewDataObject();
                     obj.FromStream(ctx, sr);
 
-                    result.Add((BaseClientDataObject)obj);
+                    result.Add((Kistl.API.IDataObject)obj);
                 }
 
                 return result;
@@ -182,7 +182,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public BaseClientDataObject GetObject(IKistlContext ctx, ObjectType type, int ID)
+        public Kistl.API.IDataObject GetObject(IKistlContext ctx, ObjectType type, int ID)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
             {
@@ -201,7 +201,7 @@ namespace Kistl.API.Client
                 IDataObject obj = objType.NewDataObject();
                 obj.FromStream(ctx, sr);
 
-                return (BaseClientDataObject)obj;
+                return (Kistl.API.IDataObject)obj;
 #else
                 string xml = service.GetObject(type, ID);
                 return CurrentSerializer.ObjectFromXml(ctx, xml);
@@ -209,7 +209,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public BaseClientDataObject SetObject(IKistlContext ctx, ObjectType type, BaseClientDataObject obj)
+        public Kistl.API.IDataObject SetObject(IKistlContext ctx, ObjectType type, Kistl.API.IDataObject obj)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
             {
@@ -235,7 +235,7 @@ namespace Kistl.API.Client
 
                 s.Seek(0, System.IO.SeekOrigin.Begin);
 
-                obj = (BaseClientDataObject)objType.NewDataObject();
+                obj = objType.NewDataObject();
                 obj.FromStream(ctx, sr);
 
                 return obj;

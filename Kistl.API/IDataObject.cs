@@ -33,7 +33,7 @@ namespace Kistl.API
     /// <summary>
     /// DataObject Interface
     /// </summary>
-    public interface IDataObject : INotifyPropertyChanged
+    public interface IDataObject : INotifyPropertyChanged, ICloneable
     {
         /// <summary>
         /// Every Object has at least an ID

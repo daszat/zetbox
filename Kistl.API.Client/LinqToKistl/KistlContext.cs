@@ -10,22 +10,12 @@ namespace Kistl.API.Client
 {
     public class KistlContext : IKistlContext, IDisposable
     {
-        private List<BaseClientDataObject> _objects = new List<BaseClientDataObject>();
-
-        /*public KistlContextQuery<BaseClientDataObject> GetQuery(ObjectType type)
-        {
-            return new KistlContextQuery<BaseClientDataObject>(this, type);
-        }*/
+        private List<Kistl.API.IDataObject> _objects = new List<Kistl.API.IDataObject>();
 
         public IQueryable<IDataObject> GetQuery(ObjectType type)
         {
             return new KistlContextQuery<IDataObject>(this, type);
         }
-
-        /*public KistlContextQuery<T> GetQuery<T>() where T : IDataObject
-        {
-            return new KistlContextQuery<T>(this, new ObjectType(typeof(T)));
-        }*/
 
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
@@ -43,21 +33,21 @@ namespace Kistl.API.Client
             return ((KistlContextProvider<T>)query.Provider).GetListOf(ID, propertyName);
         }
 
-        public T Create<T>() where T : BaseClientDataObject, new()
+        public T Create<T>() where T : Kistl.API.IDataObject, new()
         {
             T obj = new T();
             Attach(obj);
             return obj;
         }
 
-        public BaseClientDataObject Create(Type type)
+        public Kistl.API.IDataObject Create(Type type)
         {
             return Create(new ObjectType(type));
         }
 
-        public BaseClientDataObject Create(ObjectType type)
+        public Kistl.API.IDataObject Create(ObjectType type)
         {
-            BaseClientDataObject obj = (BaseClientDataObject)type.NewDataObject();
+            Kistl.API.IDataObject obj = type.NewDataObject();
             Attach(obj);
             return obj;
         }
@@ -65,19 +55,17 @@ namespace Kistl.API.Client
         public void Attach(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            BaseClientDataObject clientObj = (BaseClientDataObject)obj;
-            if (_objects.Contains(clientObj)) throw new InvalidOperationException("Object is already attached to this context");
-            _objects.Add(clientObj);
-            clientObj.AttachToContext(this);
+            if (_objects.Contains(obj)) throw new InvalidOperationException("Object is already attached to this context");
+            _objects.Add(obj);
+            obj.AttachToContext(this);
         }
 
         public void Detach(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            BaseClientDataObject clientObj = (BaseClientDataObject)obj;
-            if (!_objects.Contains(clientObj)) throw new InvalidOperationException("This Object does not belong to this context");
-            _objects.Remove(clientObj);
-            clientObj.DetachFromContext(this);
+            if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
+            _objects.Remove(obj);
+            obj.DetachFromContext(this);
         }
 
         public void Delete(IDataObject obj)
@@ -108,11 +96,11 @@ namespace Kistl.API.Client
         public int SubmitChanges()
         {
             // TODO: Add a better Cache Refresh Strategie
-            CacheController<BaseClientDataObject>.Current.Clear();
+            CacheController<Kistl.API.IDataObject>.Current.Clear();
 
-            List<BaseClientDataObject> objectsToDetach = new List<BaseClientDataObject>();
+            List<Kistl.API.IDataObject> objectsToDetach = new List<Kistl.API.IDataObject>();
             int objectsSubmittedCount = 0;
-            foreach (BaseClientDataObject obj in _objects)
+            foreach (Kistl.API.IDataObject obj in _objects)
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
@@ -127,14 +115,14 @@ namespace Kistl.API.Client
                     objectsSubmittedCount++;
                     // Do not attach to context -> first Param is null
                     // Object is temporary and will bie copied
-                    BaseClientDataObject newobj = Proxy.Current.SetObject(null, obj.Type, obj);
+                    Kistl.API.IDataObject newobj = Proxy.Current.SetObject(null, obj.Type, obj);
                     newobj.CopyTo(obj);
 
                     // Set to unmodified
                     obj.ObjectState = DataObjectState.Unmodified;
                 }
 
-                CacheController<BaseClientDataObject>.Current.Set(obj.Type, obj.ID, obj);
+                CacheController<Kistl.API.IDataObject>.Current.Set(obj.Type, obj.ID, obj);
             }
 
             objectsToDetach.ForEach(obj => this.Detach(obj));

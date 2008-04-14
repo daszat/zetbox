@@ -26,11 +26,11 @@ namespace Kistl.GUI.Renderer.WPF
         static DesktopTreeView()
         {
             SelectionChangedEvent = EventManager.RegisterRoutedEvent("SelectionChanged", RoutingStrategy.Bubble,
-                            typeof(RoutedPropertyChangedEventHandler<BaseClientDataObject>), typeof(DesktopTreeView));
+                            typeof(RoutedPropertyChangedEventHandler<Kistl.API.IDataObject>), typeof(DesktopTreeView));
         }
 
         public static RoutedEvent SelectionChangedEvent;
-        public event RoutedPropertyChangedEventHandler<BaseClientDataObject> SelectionChanged
+        public event RoutedPropertyChangedEventHandler<Kistl.API.IDataObject> SelectionChanged
         {
             add { AddHandler(SelectionChangedEvent, value); }
             remove { RemoveHandler(SelectionChangedEvent, value); }
@@ -222,7 +222,7 @@ namespace Kistl.GUI.Renderer.WPF
 
                 if (resultObjectType != null && n != null)
                 {
-                    Renderer.WPF.ShowObject((BaseClientDataObject)resultObjectType.NewDataObject());
+                    Renderer.WPF.ShowObject((Kistl.API.IDataObject)resultObjectType.NewDataObject());
                     n.RefreshChildren();
                 }
             }
