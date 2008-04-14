@@ -27,20 +27,34 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IDoubleControl Members
 
-        public double Value
+        double? IDoubleControl.Value
         {
-            get { return (double)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get { return (double?)base.Value; }
+            set { base.Value = value; }
         }
 
-        // Using a DependencyProperty as the backing store for DoubleValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(double), typeof(EditDoubleProperty));
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == ValueProperty)
+            {
+                OnUserInput(e);
+            }
+        }
 
+        protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
+        {
+            if (_UserInput != null)
+            {
+                _UserInput(this, new EventArgs());
+            }
+        }
+
+        private event EventHandler _UserInput;
         event EventHandler IDoubleControl.UserInput
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add { _UserInput += value; }
+            remove { _UserInput -= value; }
         }
 
         #endregion

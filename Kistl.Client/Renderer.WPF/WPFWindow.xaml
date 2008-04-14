@@ -1,19 +1,29 @@
-﻿<Window x:Class="Kistl.GUI.Renderer.WPF.WPFWindow"
+﻿<Window
+    x:Class="Kistl.GUI.Renderer.WPF.WPFWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:Kistl.Client.Converter"
     xmlns:client="clr-namespace:Kistl.Client"
     Title="ObjectWindow" Height="480" Width="640"
-    Icon="{Binding Converter={StaticResource IconConverter}}">
-    <Window.ContentTemplate>
-        <DataTemplate>
-            <DockPanel>
+    Icon="{Binding Converter={StaticResource IconConverter}}"
+    Background="White"
+    >
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <DockPanel
+                Margin="2,2,2,2"
+                Background="White"
+                >
                 <Slider Name="WorkspaceSlider" DockPanel.Dock="Bottom" Value="1.0" Minimum="0.5" Maximum="3.0" />
-                <DockPanel>
+                <DockPanel
+                    Margin="2,2,2,2"
+                    Background="White"
+                    >
                     <DockPanel.LayoutTransform>
                         <ScaleTransform 
-                    ScaleX="{Binding ElementName=WorkspaceSlider, Path=Value}" 
-                    ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value}" />
+                            ScaleX="{Binding ElementName=WorkspaceSlider, Path=Value}" 
+                            ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value}"
+                            />
                     </DockPanel.LayoutTransform>
                     <ToolBar DockPanel.Dock="Top">
                         <Button Click="MenuItem_Click_Save">Save</Button>
@@ -24,7 +34,11 @@
                             </MenuItem>
                         </Menu>
                     </ToolBar>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" x:Name="ViewPort">
+                    <ScrollViewer
+                        VerticalScrollBarVisibility="Auto" 
+                        Margin="5,5,5,5"
+                        Background="White"
+                        >
                         <ContentPresenter />
                         <client:UndoManager.SharedUndoScope>
                             <client:UndoManager />
@@ -32,6 +46,6 @@
                     </ScrollViewer>
                 </DockPanel>
             </DockPanel>
-        </DataTemplate>
-    </Window.ContentTemplate>
+        </ControlTemplate>
+    </Window.Template>
 </Window>

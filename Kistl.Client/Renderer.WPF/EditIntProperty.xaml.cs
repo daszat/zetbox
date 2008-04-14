@@ -27,22 +27,34 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IIntControl Members
 
-
-
-        public int Value
+        int? IIntControl.Value
         {
-            get { return (int)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get { return (int?)base.Value; }
+            set { base.Value = value; }
         }
 
-        // Using a DependencyProperty as the backing store for IntValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(int), typeof(EditIntProperty));
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == ValueProperty)
+            {
+                OnUserInput(e);
+            }
+        }
 
+        protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
+        {
+            if (_UserInput != null)
+            {
+                _UserInput(this, new EventArgs());
+            }
+        }
+
+        private event EventHandler _UserInput;
         event EventHandler IIntControl.UserInput
         {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
+            add { _UserInput += value; }
+            remove { _UserInput -= value; }
         }
 
         #endregion

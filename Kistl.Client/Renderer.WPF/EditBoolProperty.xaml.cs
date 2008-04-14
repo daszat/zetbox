@@ -17,11 +17,46 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Zeigt eine Bool Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditBoolProperty : PropertyControl
+    public partial class EditBoolProperty : PropertyControl, IBoolControl
     {
         public EditBoolProperty()
         {
             InitializeComponent();
         }
+
+        #region IBoolControl Members
+
+        bool? IBoolControl.Value
+        {
+            get { return (bool?)base.Value; }
+            set { base.Value = value; }
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == ValueProperty)
+            {
+                OnUserInput(e);
+            }
+        }
+
+        protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
+        {
+            if (_UserInput != null)
+            {
+                _UserInput(this, new EventArgs());
+            }
+        }
+
+        private event EventHandler _UserInput;
+        event EventHandler IBoolControl.UserInput
+        {
+            add { _UserInput += value; }
+            remove { _UserInput -= value; }
+        }
+
+        #endregion
+
     }
 }

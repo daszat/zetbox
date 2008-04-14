@@ -62,13 +62,10 @@ namespace Kistl.GUI
             Control.Value = Object;
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
-
-
         }
 
         // fixup locally used types
         public new IObjectControl Control { get { return (IObjectControl)base.Control; } }
-
     }
 
     public class IntPresenter : Presenter
@@ -179,6 +176,33 @@ namespace Kistl.GUI
 
     }
 
+    public class BoolPresenter : Presenter
+    {
+        public BoolPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = Property.PropertyName;
+            Control.Description = Property.AltText;
+            Control.Value = Object.GetPropertyValue(Property);
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+
+            Control.UserInput += new EventHandler(Control_UserInput);
+        }
+
+        private void Control_UserInput(object sender, EventArgs e)
+        {
+            Object.SetPropertyValue(Property, Control.Value);
+        }
+
+        // localize type-unsafety
+        public BoolProperty Property { get { return (BoolProperty)Preferences.Property; } }
+        // fixup locally used types
+        public new IBoolControl Control { get { return (IBoolControl)base.Control; } }
+
+    }
+
     public class PointerPresenter : Presenter
     {
         public PointerPresenter() { }
@@ -262,13 +286,13 @@ namespace Kistl.GUI
 
     public interface IIntControl : IBasicControl
     {
-        int Value { get; set; }
+        int? Value { get; set; }
         event /*UserInput<int>*/EventHandler UserInput;
     }
 
     public interface IDoubleControl : IBasicControl
     {
-        double Value { get; set; }
+        double? Value { get; set; }
         event /*UserInput<double>*/EventHandler UserInput;
     }
 
@@ -276,6 +300,12 @@ namespace Kistl.GUI
     {
         DateTime? Value { get; set; }
         event /*UserInput<DateTime>*/EventHandler UserInput;
+    }
+
+    public interface IBoolControl : IBasicControl
+    {
+        bool? Value { get; set; }
+        event /*UserInput<bool>*/EventHandler UserInput;
     }
 
     public interface IListControl : IBasicControl
@@ -311,24 +341,24 @@ namespace Kistl.GUI
             obj.SetPropertyValue<string>(prop.PropertyName, value);
         }
 
-        public static double GetPropertyValue(this IDataObject obj, DoubleProperty prop)
+        public static double? GetPropertyValue(this IDataObject obj, DoubleProperty prop)
         {
-            return obj.GetPropertyValue<double>(prop.PropertyName);
+            return obj.GetPropertyValue<double?>(prop.PropertyName);
         }
 
-        public static void SetPropertyValue(this IDataObject obj, DoubleProperty prop, double value)
+        public static void SetPropertyValue(this IDataObject obj, DoubleProperty prop, double? value)
         {
-            obj.SetPropertyValue<double>(prop.PropertyName, value);
+            obj.SetPropertyValue<double?>(prop.PropertyName, value);
         }
 
-        public static int GetPropertyValue(this IDataObject obj, IntProperty prop)
+        public static int? GetPropertyValue(this IDataObject obj, IntProperty prop)
         {
-            return obj.GetPropertyValue<int>(prop.PropertyName);
+            return obj.GetPropertyValue<int?>(prop.PropertyName);
         }
 
-        public static void SetPropertyValue(this IDataObject obj, IntProperty prop, int value)
+        public static void SetPropertyValue(this IDataObject obj, IntProperty prop, int? value)
         {
-            obj.SetPropertyValue<int>(prop.PropertyName, value);
+            obj.SetPropertyValue<int?>(prop.PropertyName, value);
         }
 
         public static DateTime? GetPropertyValue(this IDataObject obj, DateTimeProperty prop)
@@ -339,6 +369,16 @@ namespace Kistl.GUI
         public static void SetPropertyValue(this IDataObject obj, DateTimeProperty prop, DateTime? value)
         {
             obj.SetPropertyValue<DateTime?>(prop.PropertyName, value);
+        }
+
+        public static bool? GetPropertyValue(this IDataObject obj, BoolProperty prop)
+        {
+            return obj.GetPropertyValue<bool?>(prop.PropertyName);
+        }
+
+        public static void SetPropertyValue(this IDataObject obj, BoolProperty prop, bool? value)
+        {
+            obj.SetPropertyValue<bool?>(prop.PropertyName, value);
         }
 
         public static int GetPropertyValue(this IDataObject obj, ObjectReferenceProperty prop)
