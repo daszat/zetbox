@@ -78,7 +78,7 @@ namespace Kistl.Client
                 server = null;
             }
 
-            if (!serverDomain.IsFinalizingForUnload())
+            if (serverDomain != null && !serverDomain.IsFinalizingForUnload())
             {
                 AppDomain.Unload(serverDomain);
             }
