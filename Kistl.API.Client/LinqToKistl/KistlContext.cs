@@ -147,6 +147,7 @@ namespace Kistl.API.Client
 
         public void Dispose()
         {
+            GC.SuppressFinalize(this);
         }
 
         #endregion

@@ -36,6 +36,7 @@ namespace Kistl.API.Server
         {
             base.Dispose();
             KistlDataContext.ClearSession(this);
+            GC.SuppressFinalize(this);
         }
 
 

@@ -54,6 +54,8 @@ namespace Kistl.App.Projekte
 
             fs = null;
             pckg = null;
+
+            GC.SuppressFinalize(this);
         }
 
         #endregion
