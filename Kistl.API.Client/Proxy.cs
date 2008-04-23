@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace Kistl.API.Client
 {
-    public class Proxy
+    public class Proxy: IDisposable
     {
         #region XmlSerializer
         private interface IXmlSerializer
@@ -263,5 +263,25 @@ namespace Kistl.API.Client
                 return service.HelloWorld(name);
             }
         }
+
+        #region IDisposable Members
+
+        // as required on http://msdn2.microsoft.com/en-gb/ms182172.aspx
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // dispose managed resources
+                service.Close();
+            }
+            // free native resources
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

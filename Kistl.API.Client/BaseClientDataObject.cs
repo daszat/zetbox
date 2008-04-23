@@ -151,13 +151,13 @@ namespace Kistl.API.Client
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
-            if (sw == null) throw new ArgumentNullException();
+            if (sw == null) throw new ArgumentNullException("sw");
             BinarySerializer.ToBinary(ID, sw);
         }
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
-            if (sr == null) throw new ArgumentNullException();
+            if (sr == null) throw new ArgumentNullException("sr");
 
             int tmpID;
             BinarySerializer.FromBinary(out tmpID, sr);

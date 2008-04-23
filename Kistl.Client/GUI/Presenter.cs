@@ -20,13 +20,13 @@ namespace Kistl.GUI
         public void InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
         {
             if (obj == null)
-                throw new ArgumentNullException("object==null cannot be presented");
+                throw new ArgumentNullException("obj", "obj==null cannot be presented");
 
             if (v == null)
-                throw new ArgumentNullException("object without visual cannot be presented");
+                throw new ArgumentNullException("v", "object without visual cannot be presented");
 
             if (ctrl == null)
-                throw new ArgumentNullException("visual without control cannot be presented");
+                throw new ArgumentNullException("ctrl", "visual without control cannot be presented");
 
             _Object = obj;
             _Preferences = v;

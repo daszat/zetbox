@@ -39,7 +39,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.BlockBarSample
         {
             if (targetSize.IsEmpty)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("targetSize", "targetSize should not be empty");
             }
             if (blockCount < 1)
             {

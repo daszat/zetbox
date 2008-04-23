@@ -88,7 +88,7 @@ namespace Kistl.API.Server
 
         public virtual void CopyTo(IDataObject target)
         {
-            if (target == null) throw new ArgumentNullException();
+            if (target == null) throw new ArgumentNullException("target");
             target.ID = this.ID;
         }
 
@@ -99,7 +99,7 @@ namespace Kistl.API.Server
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
-            if (sw == null) throw new ArgumentNullException();
+            if (sw == null) throw new ArgumentNullException("sw");
 
             BinarySerializer.ToBinary(Type, sw);
             BinarySerializer.ToBinary(ID, sw);
@@ -108,8 +108,8 @@ namespace Kistl.API.Server
 
         public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
         {
-            if (ctx == null) throw new ArgumentNullException();
-            if (sr == null) throw new ArgumentNullException();
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (sr == null) throw new ArgumentNullException("sr");
 
             ObjectType t;
             BinarySerializer.FromBinary(out t, sr);
@@ -148,7 +148,7 @@ namespace Kistl.API.Server
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
-            if (sw == null) throw new ArgumentNullException();
+            if (sw == null) throw new ArgumentNullException("sw", "No BinaryWriter specified");
             BinarySerializer.ToBinary(ID, sw);
         }
 
