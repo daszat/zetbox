@@ -75,24 +75,28 @@ namespace Kistl.Client.Tests
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoInfo()
         {
             KistlGUIContext.CreatePresenter(null, obj, visual, widget);
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoObject()
         {
             KistlGUIContext.CreatePresenter(pInfo, null, visual, widget);
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoVisual()
         {
             KistlGUIContext.CreatePresenter(pInfo, obj, null, widget);
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoWidget()
         {
             KistlGUIContext.CreatePresenter(pInfo, obj, visual, null);

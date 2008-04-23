@@ -39,6 +39,9 @@ namespace Kistl.GUI.DB
 
         public static Presenter CreatePresenter(PresenterInfo info, Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
         {
+            if (info == null)
+                throw new ArgumentNullException("info");
+
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
             Presenter result = (Presenter)Activator.CreateInstance(controlType);
             result.InitializeComponent(obj, v, ctrl);
