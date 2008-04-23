@@ -10,7 +10,7 @@ namespace Kistl.API.Client
 {
     public abstract class BaseClientDataObject : IDataObject, ICloneable, INotifyPropertyChanged
     {
-        public BaseClientDataObject()
+        protected BaseClientDataObject()
         {
             _type = new ObjectType(this.GetType());
             API.CustomActionsManagerFactory.Current.AttachEvents(this);
