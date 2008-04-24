@@ -85,7 +85,15 @@ namespace Kistl.GUI
 
         private void Control_UserInput(object sender, EventArgs e)
         {
-            Object.SetPropertyValue(Property, Control.Value);
+            if (!Property.IsNullable && Control.Value == null)
+            {
+                Control.FlagValidity(false);
+            }
+            else
+            {
+                Control.FlagValidity(true);
+                Object.SetPropertyValue(Property, Control.Value);
+            }
         }
 
         // localize type-unsafety
@@ -329,6 +337,7 @@ namespace Kistl.GUI
     {
         int? Value { get; set; }
         event /*UserInput<int>*/EventHandler UserInput;
+        void FlagValidity(bool valid);
     }
 
     public interface IDoubleControl : IBasicControl

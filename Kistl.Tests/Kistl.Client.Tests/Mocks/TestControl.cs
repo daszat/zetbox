@@ -11,8 +11,8 @@ namespace Kistl.Client.Mocks
     {
         public TestStringControl()
         {
-            Description = "TestControl Description";
-            ShortLabel = "TC ShortLabel";
+            Description = "TestStringControl Description";
+            ShortLabel = "TSC ShortLabel";
             Size = FieldSize.Full;
             HasValidValue = true;
         }
@@ -42,7 +42,7 @@ namespace Kistl.Client.Mocks
         public string Value { get; set; }
 
         public bool HasValidValue { get; set; }
-        void IStringControl.FlagValidity(bool valid)
+        public void FlagValidity(bool valid)
         {
             HasValidValue = valid;
         }
@@ -57,4 +57,53 @@ namespace Kistl.Client.Mocks
         }
     }
 
+    public class TestIntControl : IIntControl
+    {
+        public TestIntControl()
+        {
+            Description = "TestIntControl Description";
+            ShortLabel = "TIC ShortLabel";
+            Size = FieldSize.Full;
+            HasValidValue = true;
+        }
+
+        public readonly static ControlInfo Info
+            = new ControlInfo()
+            {
+                Platform = Toolkit.TEST,
+                Control = "int",
+                Container = false,
+                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Mocks.TestIntControl"
+            };
+
+
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+        #region IIntControl Members
+
+        public event EventHandler UserInput;
+        public int? Value { get; set; }
+
+        public bool HasValidValue { get; set; }
+        public void FlagValidity(bool valid)
+        {
+            HasValidValue = valid;
+        }
+
+        #endregion
+
+        internal void SimulateUserInput(int? newIntValue)
+        {
+            Value = newIntValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
+    }
 }

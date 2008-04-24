@@ -8,7 +8,7 @@
     <ProjectGuid>{DB3D33DD-F5A0-4589-9033-D1193909EE97}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Client.Tests</RootNamespace>
+    <RootNamespace>Kistl.Client</RootNamespace>
     <AssemblyName>Kistl.Client.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -71,6 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="Tests\GuiDbTests.cs" />
+    <Compile Include="Tests\IntPresenterTests.cs" />
+    <Compile Include="Tests\PresenterTest.cs" />
+    <Compile Include="Tests\StringPresenterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultConfig.xml" />

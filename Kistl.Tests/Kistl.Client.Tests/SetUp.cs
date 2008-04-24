@@ -28,6 +28,7 @@ namespace Kistl.Client.Tests
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
 
             ControlInfo.Implementations.Add(TestStringControl.Info);
+            ControlInfo.Implementations.Add(TestIntControl.Info);
             
         }
     }

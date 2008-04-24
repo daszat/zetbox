@@ -5,10 +5,12 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 
-namespace Kistl.Client.Tests.Mocks
+namespace Kistl.Client.Mocks
 {
     public class TestObject : IDataObject
     {
+        #region String Properties
+
         public string TestString { get; set; }
         public readonly static StringProperty TestStringProperty
             = new StringProperty()
@@ -35,6 +37,26 @@ namespace Kistl.Client.Tests.Mocks
                 PropertyName = "TestStringNotNull",
                 IsNullable = false
             };
+        #endregion
+
+        #region Int Properties
+
+        public int? TestInt { get; set; }
+        public readonly static IntProperty TestIntProperty
+            = new IntProperty()
+            {
+                PropertyName = "TestInt",
+                IsNullable = true
+            };
+
+        public int TestIntNotNull { get; set; }
+        public readonly static IntProperty TestIntNotNullProperty
+            = new IntProperty()
+            {
+                PropertyName = "TestIntNotNull",
+                IsNullable = false
+            };
+        #endregion
 
         #region IDataObject Members
 
