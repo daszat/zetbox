@@ -11,7 +11,7 @@ using Kistl.GUI;
 namespace Kistl.Client.Tests
 {
     [TestFixture]
-    public class IntPresenterTests : PresenterTest<TestIntControl, IntPresenter>
+    public class BoolPresenterTests : PresenterTest<TestBoolControl, BoolPresenter>
     {
         protected void AssertWidgetHasValidValue()
         {
@@ -21,43 +21,56 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleNoUserInput()
         {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
-            Assert.That(obj.TestInt, Is.Null, "IntProperty should default to null");
+            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
+            Assert.That(obj.TestBool, Is.Null, "BoolProperty should default to null");
             AssertWidgetHasValidValue();
         }
 
         [Test]
         public void HandleNullUserInput()
         {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
+            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
             AssertWidgetHasValidValue();
             widget.SimulateUserInput(null);
-            Assert.That(obj.TestInt, Is.Null);
+            Assert.That(obj.TestBool, Is.Null);
             AssertWidgetHasValidValue();
         }
 
         [Test]
         public void HandleNullUserInputInvalid()
         {
-            Init(TestIntControl.Info, TestObject.TestIntNotNullProperty);
+            Init(TestBoolControl.Info, TestObject.TestBoolNotNullProperty);
             AssertWidgetHasValidValue();
             widget.SimulateUserInput(null);
             // Input has to be rejected
-            Assert.That(obj.TestIntNotNull, Is.Not.Null, "property value shouldn't be null");
+            Assert.That(obj.TestBoolNotNull, Is.Not.Null, "property value shouldn't be null");
             // widget has to be flagged as invalid
             Assert.That(widget.HasValidValue, Is.False, "widget should have been flagged as invalid");
         }
 
         [Test]
-        public void HandleUserInput()
+        public void HandleTrueUserInput()
         {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
+            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
             AssertWidgetHasValidValue();
 
-            int newIntValue = 10;
-            widget.SimulateUserInput(newIntValue);
-            
-            Assert.That(obj.TestInt, Is.EqualTo(newIntValue));
+            bool newBoolValue = true;
+            widget.SimulateUserInput(newBoolValue);
+
+            Assert.That(obj.TestBool, Is.EqualTo(newBoolValue));
+            AssertWidgetHasValidValue();
+        }
+
+        [Test]
+        public void HandleFalseUserInput()
+        {
+            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
+            AssertWidgetHasValidValue();
+
+            bool newBoolValue = false;
+            widget.SimulateUserInput(newBoolValue);
+
+            Assert.That(obj.TestBool, Is.EqualTo(newBoolValue));
             AssertWidgetHasValidValue();
         }
 

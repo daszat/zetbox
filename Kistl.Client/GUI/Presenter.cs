@@ -182,7 +182,15 @@ namespace Kistl.GUI
 
         private void Control_UserInput(object sender, EventArgs e)
         {
-            Object.SetPropertyValue(Property, Control.Value);
+            if (!Property.IsNullable && Control.Value == null)
+            {
+                Control.FlagValidity(false);
+            }
+            else
+            {
+                Control.FlagValidity(true);
+                Object.SetPropertyValue(Property, Control.Value);
+            }
         }
 
         // localize type-unsafety
@@ -209,7 +217,15 @@ namespace Kistl.GUI
 
         private void Control_UserInput(object sender, EventArgs e)
         {
-            Object.SetPropertyValue(Property, Control.Value);
+            if (!Property.IsNullable && Control.Value == null)
+            {
+                Control.FlagValidity(false);
+            }
+            else
+            {
+                Control.FlagValidity(true);
+                Object.SetPropertyValue(Property, Control.Value);
+            }
         }
 
         // localize type-unsafety
@@ -350,12 +366,14 @@ namespace Kistl.GUI
     {
         DateTime? Value { get; set; }
         event /*UserInput<DateTime>*/EventHandler UserInput;
+        void FlagValidity(bool valid);
     }
 
     public interface IBoolControl : IBasicControl
     {
         bool? Value { get; set; }
         event /*UserInput<bool>*/EventHandler UserInput;
+        void FlagValidity(bool valid);
     }
 
     public interface ISelectControl : IBasicControl

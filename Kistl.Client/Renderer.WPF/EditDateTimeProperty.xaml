@@ -10,6 +10,7 @@
     Value="2008-01-01"
     >
     <DockPanel
+        x:Name="Panel"
         ToolTip="{Binding ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"
         >
         <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />

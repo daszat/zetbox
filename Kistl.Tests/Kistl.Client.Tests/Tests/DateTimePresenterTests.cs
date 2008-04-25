@@ -11,7 +11,7 @@ using Kistl.GUI;
 namespace Kistl.Client.Tests
 {
     [TestFixture]
-    public class IntPresenterTests : PresenterTest<TestIntControl, IntPresenter>
+    public class DateTimePresenterTests : PresenterTest<TestDateTimeControl, DateTimePresenter>
     {
         protected void AssertWidgetHasValidValue()
         {
@@ -21,29 +21,29 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleNoUserInput()
         {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
-            Assert.That(obj.TestInt, Is.Null, "IntProperty should default to null");
+            Init(TestDateTimeControl.Info, TestObject.TestDateTimeProperty);
+            Assert.That(obj.TestDateTime, Is.Null, "DateTimeProperty should default to null");
             AssertWidgetHasValidValue();
         }
 
         [Test]
         public void HandleNullUserInput()
         {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
+            Init(TestDateTimeControl.Info, TestObject.TestDateTimeProperty);
             AssertWidgetHasValidValue();
             widget.SimulateUserInput(null);
-            Assert.That(obj.TestInt, Is.Null);
+            Assert.That(obj.TestDateTime, Is.Null);
             AssertWidgetHasValidValue();
         }
 
         [Test]
         public void HandleNullUserInputInvalid()
         {
-            Init(TestIntControl.Info, TestObject.TestIntNotNullProperty);
+            Init(TestDateTimeControl.Info, TestObject.TestDateTimeNotNullProperty);
             AssertWidgetHasValidValue();
             widget.SimulateUserInput(null);
             // Input has to be rejected
-            Assert.That(obj.TestIntNotNull, Is.Not.Null, "property value shouldn't be null");
+            Assert.That(obj.TestDateTimeNotNull, Is.Not.Null, "property value shouldn't be null");
             // widget has to be flagged as invalid
             Assert.That(widget.HasValidValue, Is.False, "widget should have been flagged as invalid");
         }
@@ -51,13 +51,13 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleUserInput()
         {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
+            Init(TestDateTimeControl.Info, TestObject.TestDateTimeProperty);
             AssertWidgetHasValidValue();
 
-            int newIntValue = 10;
-            widget.SimulateUserInput(newIntValue);
+            DateTime newDateTimeValue = DateTime.Now;
+            widget.SimulateUserInput(newDateTimeValue);
             
-            Assert.That(obj.TestInt, Is.EqualTo(newIntValue));
+            Assert.That(obj.TestDateTime, Is.EqualTo(newDateTimeValue));
             AssertWidgetHasValidValue();
         }
 

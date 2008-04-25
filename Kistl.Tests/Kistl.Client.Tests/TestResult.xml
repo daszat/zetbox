@@ -1,44 +1,66 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="16" failures="0" not-run="0" date="2008-04-24" time="19:21:06">
+<test-results name="E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="26" failures="0" not-run="0" date="2008-04-25" time="15:36:11">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 6.0.6000.0" platform="Win32NT" cwd="E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="True" time="0.742" asserts="0">
+  <test-suite name="E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="True" time="0.842" asserts="0">
     <results>
-      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\bin\debug\..\Debug\Kistl.Client.Tests.dll" success="True" time="0.738" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\bin\debug\..\Debug\Kistl.Client.Tests.dll" success="True" time="0.836" asserts="0">
         <results>
-          <test-suite name="Kistl" success="True" time="0.736" asserts="0">
+          <test-suite name="Kistl" success="True" time="0.831" asserts="0">
             <results>
-              <test-suite name="Client" success="True" time="0.734" asserts="0">
+              <test-suite name="Client" success="True" time="0.828" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="True" time="0.726" asserts="0">
+                  <test-suite name="Tests" success="True" time="0.819" asserts="0">
                     <results>
-                      <test-suite name="GuiDbTests" success="True" time="0.166" asserts="0">
+                      <test-suite name="BackReferencePresenterTests" success="True" time="0.123" asserts="0">
                         <results>
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreateControl" executed="True" success="True" time="0.151" asserts="2" />
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenter" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoInfo" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoObject" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoVisual" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoWidget" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.FindControlInfo" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="Kistl.Client.Tests.GuiDbTests.FindPresenterInfo" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="Kistl.Client.Tests.BackReferencePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.119" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite name="IntPresenterTests" success="True" time="0.009" asserts="0">
+                      <test-suite name="BoolPresenterTests" success="True" time="0.014" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleFalseUserInput" executed="True" success="True" time="0.005" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleNullUserInputInvalid" executed="True" success="True" time="0.002" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleTrueUserInput" executed="True" success="True" time="0.001" asserts="3" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="DateTimePresenterTests" success="True" time="0.009" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.003" asserts="2" />
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleNullUserInputInvalid" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleUserInput" executed="True" success="True" time="0.001" asserts="3" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="GuiDbTests" success="True" time="0.017" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreateControl" executed="True" success="True" time="0.002" asserts="2" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenter" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoInfo" executed="True" success="True" time="0.002" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoObject" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoVisual" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoWidget" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.FindControlInfo" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.FindPresenterInfo" executed="True" success="True" time="0.000" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="IntPresenterTests" success="True" time="0.010" asserts="0">
                         <results>
                           <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.003" asserts="2" />
-                          <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.003" asserts="3" />
-                          <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNullUserInputInvalid" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.002" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNullUserInputInvalid" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleUserInput" executed="True" success="True" time="0.002" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="StringPresenterTests" success="True" time="0.004" asserts="0">
+                      <test-suite name="StringPresenterTests" success="True" time="0.009" asserts="0">
                         <results>
-                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="2" />
-                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="3" />
-                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNullUserInputInvalid" executed="True" success="True" time="0.000" asserts="3" />
-                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.002" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNullUserInputInvalid" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleUserInput" executed="True" success="True" time="0.002" asserts="3" />
                         </results>
                       </test-suite>
                     </results>

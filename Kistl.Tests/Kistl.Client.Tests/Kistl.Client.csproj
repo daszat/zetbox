@@ -70,6 +70,9 @@
     <Compile Include="Mocks\TestObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
+    <Compile Include="Tests\BackReferencePresenterTests.cs" />
+    <Compile Include="Tests\BoolPresenterTests.cs" />
+    <Compile Include="Tests\DateTimePresenterTests.cs" />
     <Compile Include="Tests\GuiDbTests.cs" />
     <Compile Include="Tests\IntPresenterTests.cs" />
     <Compile Include="Tests\PresenterTest.cs" />

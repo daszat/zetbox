@@ -15,7 +15,7 @@ namespace Kistl.Client.Tests
     {
         protected void AssertWidgetHasValidValue()
         {
-            Assert.That(widget.HasValidValue, Is.True);
+            Assert.That(widget.HasValidValue, Is.True, "the widget should be in a valid state after this operation");
         }
 
         [Test]
@@ -43,9 +43,9 @@ namespace Kistl.Client.Tests
             AssertWidgetHasValidValue();
             widget.SimulateUserInput(null);
             // Input has to be rejected
-            Assert.That(obj.TestStringNotNull, Is.Not.Null);
+            Assert.That(obj.TestStringNotNull, Is.Not.Null, "property value shouldn't be null");
             // widget has to be flagged as invalid
-            Assert.That(widget.HasValidValue, Is.False);
+            Assert.That(widget.HasValidValue, Is.False, "widget should have been flagged as invalid");
         }
 
         [Test]

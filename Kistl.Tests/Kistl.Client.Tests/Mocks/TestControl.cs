@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using Kistl.GUI.DB;
 using Kistl.GUI;
+using Kistl.API;
 
 namespace Kistl.Client.Mocks
 {
-    public class TestStringControl : IStringControl
+    public class TestBackReferenceControl : IObjectListControl
     {
-        public TestStringControl()
+        public TestBackReferenceControl()
         {
-            Description = "TestStringControl Description";
-            ShortLabel = "TSC ShortLabel";
+            Description = "TestBackReferenceControl Description";
+            ShortLabel = "TBRC ShortLabel";
             Size = FieldSize.Full;
             HasValidValue = true;
         }
@@ -21,10 +22,10 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = "string",
+                Control = "list",
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
-                ClassName = "Kistl.Client.Mocks.TestStringControl"
+                ClassName = "Kistl.Client.Mocks.TestBackReferenceControl"
             };
 
 
@@ -36,10 +37,10 @@ namespace Kistl.Client.Mocks
 
         #endregion
 
-        #region IStringControl Members
+        #region IBackReferenceControl Members
 
         public event EventHandler UserInput;
-        public string Value { get; set; }
+        public IList<IDataObject> Value { get; set; }
 
         public bool HasValidValue { get; set; }
         public void FlagValidity(bool valid)
@@ -49,9 +50,103 @@ namespace Kistl.Client.Mocks
 
         #endregion
 
-        internal void SimulateUserInput(string newStringValue)
+    }
+
+    public class TestBoolControl : IBoolControl
+    {
+        public TestBoolControl()
         {
-            Value = newStringValue;
+            Description = "TestBoolControl Description";
+            ShortLabel = "TBC ShortLabel";
+            Size = FieldSize.Full;
+            HasValidValue = true;
+        }
+
+        public readonly static ControlInfo Info
+            = new ControlInfo()
+            {
+                Platform = Toolkit.TEST,
+                Control = "bool",
+                Container = false,
+                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Mocks.TestBoolControl"
+            };
+
+
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+        #region IBoolControl Members
+
+        public event EventHandler UserInput;
+        public bool? Value { get; set; }
+
+        public bool HasValidValue { get; set; }
+        public void FlagValidity(bool valid)
+        {
+            HasValidValue = valid;
+        }
+
+        #endregion
+
+        internal void SimulateUserInput(bool? newBoolValue)
+        {
+            Value = newBoolValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
+    }
+
+    public class TestDateTimeControl : IDateTimeControl
+    {
+        public TestDateTimeControl()
+        {
+            Description = "TestDateTimeControl Description";
+            ShortLabel = "TBC ShortLabel";
+            Size = FieldSize.Full;
+            HasValidValue = true;
+        }
+
+        public readonly static ControlInfo Info
+            = new ControlInfo()
+            {
+                Platform = Toolkit.TEST,
+                Control = "date",
+                Container = false,
+                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Mocks.TestDateTimeControl"
+            };
+
+
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+        #region IDateTimeControl Members
+
+        public event EventHandler UserInput;
+        public DateTime? Value { get; set; }
+
+        public bool HasValidValue { get; set; }
+        public void FlagValidity(bool valid)
+        {
+            HasValidValue = valid;
+        }
+
+        #endregion
+
+        internal void SimulateUserInput(DateTime? newDateTimeValue)
+        {
+            Value = newDateTimeValue;
             if (UserInput != null)
                 UserInput(this, new EventArgs());
         }
@@ -106,4 +201,55 @@ namespace Kistl.Client.Mocks
                 UserInput(this, new EventArgs());
         }
     }
+
+    public class TestStringControl : IStringControl
+    {
+        public TestStringControl()
+        {
+            Description = "TestStringControl Description";
+            ShortLabel = "TSC ShortLabel";
+            Size = FieldSize.Full;
+            HasValidValue = true;
+        }
+
+        public readonly static ControlInfo Info
+            = new ControlInfo()
+            {
+                Platform = Toolkit.TEST,
+                Control = "string",
+                Container = false,
+                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Mocks.TestStringControl"
+            };
+
+
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+        #region IStringControl Members
+
+        public event EventHandler UserInput;
+        public string Value { get; set; }
+
+        public bool HasValidValue { get; set; }
+        public void FlagValidity(bool valid)
+        {
+            HasValidValue = valid;
+        }
+
+        #endregion
+
+        internal void SimulateUserInput(string newStringValue)
+        {
+            Value = newStringValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
+    }
+
 }

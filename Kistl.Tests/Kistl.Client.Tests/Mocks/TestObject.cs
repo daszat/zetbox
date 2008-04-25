@@ -9,32 +9,57 @@ namespace Kistl.Client.Mocks
 {
     public class TestObject : IDataObject
     {
-        #region String Properties
+        public TestObject()
+        {
+            TestBackReference = new List<IDataObject>();
+        }
 
-        public string TestString { get; set; }
-        public readonly static StringProperty TestStringProperty
-            = new StringProperty()
+        #region BackReference Properties
+
+        public List<IDataObject> TestBackReference { get; set; }
+        public readonly static BackReferenceProperty TestBackReferenceProperty
+            = new BackReferenceProperty()
             {
-                PropertyName = "TestString",
+                PropertyName = "TestBackReference",
+            };
+
+        #endregion
+
+        #region Bool Properties
+
+        public bool? TestBool { get; set; }
+        public readonly static BoolProperty TestBoolProperty
+            = new BoolProperty()
+            {
+                PropertyName = "TestBool",
                 IsNullable = true
             };
 
-        private string _TestStringNotNull = "";
-        public string TestStringNotNull
-        {
-            get { return _TestStringNotNull; }
-            set
+        public bool TestBoolNotNull { get; set; }
+        public readonly static BoolProperty TestBoolNotNullProperty
+            = new BoolProperty()
             {
-                // Actually, validation should be done by generated class
-                if (value == null) 
-                    throw new NullReferenceException("TestStringNotNull may not be null");
-                _TestStringNotNull = value;
-            }
-        }
-        public readonly static StringProperty TestStringNotNullProperty
-            = new StringProperty()
+                PropertyName = "TestBoolNotNull",
+                IsNullable = false
+            };
+        #endregion
+
+        #region DateTime Properties
+
+        public DateTime? TestDateTime { get; set; }
+        public readonly static DateTimeProperty TestDateTimeProperty
+            = new DateTimeProperty()
             {
-                PropertyName = "TestStringNotNull",
+                PropertyName = "TestDateTime",
+                IsNullable = true
+            };
+
+        private DateTime _TestDateTimeNotNull = DateTime.Now;
+        public DateTime TestDateTimeNotNull { get; set; }
+        public readonly static DateTimeProperty TestDateTimeNotNullProperty
+            = new DateTimeProperty()
+            {
+                PropertyName = "TestDateTimeNotNull",
                 IsNullable = false
             };
         #endregion
@@ -54,6 +79,36 @@ namespace Kistl.Client.Mocks
             = new IntProperty()
             {
                 PropertyName = "TestIntNotNull",
+                IsNullable = false
+            };
+        #endregion
+
+        #region String Properties
+
+        public string TestString { get; set; }
+        public readonly static StringProperty TestStringProperty
+            = new StringProperty()
+            {
+                PropertyName = "TestString",
+                IsNullable = true
+            };
+
+        private string _TestStringNotNull = "";
+        public string TestStringNotNull
+        {
+            get { return _TestStringNotNull; }
+            set
+            {
+                // Actually, validation should be done by generated class
+                if (value == null)
+                    throw new NullReferenceException("TestStringNotNull may not be null");
+                _TestStringNotNull = value;
+            }
+        }
+        public readonly static StringProperty TestStringNotNullProperty
+            = new StringProperty()
+            {
+                PropertyName = "TestStringNotNull",
                 IsNullable = false
             };
         #endregion
