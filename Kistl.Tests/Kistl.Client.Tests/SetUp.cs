@@ -28,9 +28,9 @@ namespace Kistl.Client.Tests
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
 
             ControlInfo.Implementations.Add(TestBackReferenceControl.Info);
-            ControlInfo.Implementations.Add(TestNullableBoolControl.Info);
             ControlInfo.Implementations.Add(TestBoolControl.Info);
             ControlInfo.Implementations.Add(TestDateTimeControl.Info);
+            ControlInfo.Implementations.Add(TestDoubleControl.Info);
             ControlInfo.Implementations.Add(TestIntControl.Info);
             ControlInfo.Implementations.Add(TestStringControl.Info);
             

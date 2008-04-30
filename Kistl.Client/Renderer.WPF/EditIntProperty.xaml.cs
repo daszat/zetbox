@@ -17,7 +17,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Zeigt eine einfache Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditIntProperty : PropertyControl, IIntControl
+    public partial class EditIntProperty : PropertyControl, IValueControl<int?>
     {
 
         public EditIntProperty()

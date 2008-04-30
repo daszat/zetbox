@@ -17,7 +17,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Zeigt eine Bool Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditBoolProperty : PropertyControl, IBoolControl
+    public partial class EditBoolProperty : PropertyControl, IValueControl<bool?>
     {
         public EditBoolProperty()
         {
@@ -58,11 +58,6 @@ namespace Kistl.GUI.Renderer.WPF
         }
 
         public event EventHandler UserInput;
-
-        public void FlagValidity(bool valid)
-        {
-            Panel.Background = valid ? Brushes.White : Brushes.Red;
-        }
 
         #endregion
 

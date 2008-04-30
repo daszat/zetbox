@@ -11,55 +11,56 @@ using Kistl.GUI;
 namespace Kistl.Client.Tests
 {
     [TestFixture]
-    public class StringPresenterTests : PresenterTest<TestStringControl, StringPresenter>
+    public class StringPresenterTests : ReferencePresenterTests<string, TestStringControl, StringPresenter>
     {
-        protected void AssertWidgetHasValidValue()
-        {
-            Assert.That(widget.IsValidValue, Is.True, "the widget should be in a valid state after this operation");
-        }
-
-        [Test]
-        public void HandleNoUserInput()
+        [SetUp]
+        public void InitControls()
         {
             Init(TestStringControl.Info, TestObject.TestStringProperty);
-            Assert.That(obj.TestString, Is.Null);
-            AssertWidgetHasValidValue();
         }
 
-        [Test]
-        public void HandleNullUserInput()
-        {
-            Init(TestStringControl.Info, TestObject.TestStringProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            Assert.That(obj.TestString, Is.Null);
-            AssertWidgetHasValidValue();
-        }
+        protected override string GetObjectValue() { return obj.TestString; }
+        protected override string GetWidgetValue() { return widget.Value; }
+        protected override void SetObjectValue(string v) { obj.TestString = v; }
+        protected override void UserInput(string v) { widget.SimulateUserInput(v); }
 
-        [Test]
-        public void HandleNullUserInputInvalid()
+        protected void HandleUserInput(string newStringValue)
         {
-            Init(TestStringControl.Info, TestObject.TestStringNotNullProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            // Input has to be rejected
-            Assert.That(obj.TestStringNotNull, Is.Not.Null, "property value shouldn't be null");
-            // widget has to be flagged as invalid
-            Assert.That(widget.IsValidValue, Is.False, "widget should have been flagged as invalid");
-        }
-
-        [Test]
-        public void HandleUserInput()
-        {
-            Init(TestStringControl.Info, TestObject.TestStringProperty);
             AssertWidgetHasValidValue();
 
-            string newStringValue = "new Value";
             widget.SimulateUserInput(newStringValue);
-            
+
             Assert.That(obj.TestString, Is.EqualTo(newStringValue));
             AssertWidgetHasValidValue();
         }
 
+        [Test]
+        public void HandleEmptyString()
+        {
+            HandleUserInput("");
+        }
+
+        [Test]
+        public void HandleNumbers()
+        {
+            foreach (string s in new[] { "00012346789", "0", "0.0", "0.1", "0.002", "10.0e100", "0x120" })
+            {
+                HandleUserInput(s);
+            }
+        }
+
+        [Test]
+        public void HandleStrings()
+        {
+            foreach (string s in new[] { "...", "<xss>", "!'\"§!$§%&/(){}&amp;", "normal string",
+                "very long string: very long string: very long string: very long string: very long string: very long string: " +
+                "very long string: very long string: very long string: very long string: very long string: very long string: " +
+                "very long string: very long string: very long string: very long string: very long string: very long string: " +
+                "very long string: very long string: very long string: very long string: very long string: very long string"
+            })
+            {
+                HandleUserInput(s);
+            }
+        }
     }
 }

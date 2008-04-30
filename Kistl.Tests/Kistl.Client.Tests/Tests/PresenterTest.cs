@@ -61,7 +61,6 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleNullUserInput()
         {
-            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
             AssertWidgetHasValidValue();
             UserInput(null);
             Assert.That(obj.TestBool, Is.Null);
@@ -69,40 +68,8 @@ namespace Kistl.Client.Tests
         }
     }
 
-    public abstract class ValuePresenterTests<TYPE, CONTROL, PRESENTER> : PresenterTest<CONTROL, PRESENTER>
-        where TYPE : struct
-        where CONTROL : IValueControl<TYPE>
-        where PRESENTER : Presenter
-    {
-
-        protected virtual void AssertWidgetHasValidValue()
-        {
-            Assert.That(widget.IsValidValue, Is.True, "the widget should be in a valid state after this operation");
-            Assert.That(GetWidgetValue(), Is.EqualTo(GetObjectValue()), "the widget should have the same value as the object");
-        }
-
-        protected virtual void AssertWidgetHasInvalidValue()
-        {
-            Assert.That(widget.IsValidValue, Is.False, "the widget should be in a invalid state after this operation");
-            Assert.That(GetWidgetValue(), Is.Not.EqualTo(GetObjectValue()), "the widget should not have the same value as the object, because it is invalid");
-        }
-
-        protected abstract TYPE GetObjectValue();
-        protected abstract TYPE GetWidgetValue();
-        protected abstract void SetObjectValue(TYPE v);
-        protected abstract void UserInput(TYPE v);
-
-        [Test]
-        public void HandleNoUserInput()
-        {
-            Assert.That(GetObjectValue(), Is.Not.Null, String.Format("{0} should default to a value", visual.Property));
-            AssertWidgetHasValidValue();
-        }
-
-    }
-
     public abstract class ReferencePresenterTests<TYPE, CONTROL, PRESENTER> : PresenterTest<CONTROL, PRESENTER>
-        where TYPE : class, new()
+        where TYPE : class
         where CONTROL : IValueControl<TYPE>
         where PRESENTER : Presenter
     {
@@ -135,7 +102,6 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleNullUserInput()
         {
-            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
             AssertWidgetHasValidValue();
             UserInput(null);
             Assert.That(obj.TestBool, Is.Null);

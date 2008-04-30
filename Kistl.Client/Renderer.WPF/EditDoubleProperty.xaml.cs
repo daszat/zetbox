@@ -17,7 +17,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Zeigt eine einfache Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditDoubleProperty : PropertyControl, IDoubleControl
+    public partial class EditDoubleProperty : PropertyControl, IValueControl<double?>
     {
 
         public EditDoubleProperty()

@@ -11,55 +11,44 @@ using Kistl.GUI;
 namespace Kistl.Client.Tests
 {
     [TestFixture]
-    public class IntPresenterTests : PresenterTest<TestIntControl, IntPresenter>
+    public class IntPresenterTests : NullablePresenterTests<int, TestIntControl, IntPresenter>
     {
-        protected void AssertWidgetHasValidValue()
-        {
-            Assert.That(widget.HasValidValue, Is.True, "the widget should be in a valid state after this operation");
-        }
-
-        [Test]
-        public void HandleNoUserInput()
+        [SetUp]
+        public void InitControls()
         {
             Init(TestIntControl.Info, TestObject.TestIntProperty);
-            Assert.That(obj.TestInt, Is.Null, "IntProperty should default to null");
-            AssertWidgetHasValidValue();
         }
 
-        [Test]
-        public void HandleNullUserInput()
-        {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            Assert.That(obj.TestInt, Is.Null);
-            AssertWidgetHasValidValue();
-        }
+        protected override int? GetObjectValue() { return obj.TestInt; }
+        protected override int? GetWidgetValue() { return widget.Value; }
+        protected override void SetObjectValue(int? v) { obj.TestInt = v; }
+        protected override void UserInput(int? v) { widget.SimulateUserInput(v); }
 
-        [Test]
-        public void HandleNullUserInputInvalid()
+        protected void HandleUserInput(int newIntValue)
         {
-            Init(TestIntControl.Info, TestObject.TestIntNotNullProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            // Input has to be rejected
-            Assert.That(obj.TestIntNotNull, Is.Not.Null, "property value shouldn't be null");
-            // widget has to be flagged as invalid
-            Assert.That(widget.HasValidValue, Is.False, "widget should have been flagged as invalid");
-        }
-
-        [Test]
-        public void HandleUserInput()
-        {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
             AssertWidgetHasValidValue();
 
-            int newIntValue = 10;
             widget.SimulateUserInput(newIntValue);
-            
+
             Assert.That(obj.TestInt, Is.EqualTo(newIntValue));
             AssertWidgetHasValidValue();
         }
 
+
+        [Test]
+        public void HandleValues()
+        {
+            foreach (int i in new[] {
+                Int16.MinValue, Int16.MaxValue,
+                Int32.MinValue, Int32.MaxValue,
+                Int16.MinValue + 1, Int16.MaxValue + 1,
+                Int16.MinValue - 1, Int16.MaxValue - 1,
+                Int32.MinValue + 1, Int32.MaxValue - 1,
+                0, +1, -1, 100, 123, 200, 6000
+            })
+            {
+                HandleUserInput(i);
+            }
+        }
     }
 }

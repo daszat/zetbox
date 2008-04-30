@@ -11,55 +11,47 @@ using Kistl.GUI;
 namespace Kistl.Client.Tests
 {
     [TestFixture]
-    public class DateTimePresenterTests : PresenterTest<TestDateTimeControl, DateTimePresenter>
+    public class DateTimePresenterTests : NullablePresenterTests<DateTime, TestDateTimeControl, DateTimePresenter>
     {
-        protected void AssertWidgetHasValidValue()
-        {
-            Assert.That(widget.HasValidValue, Is.True, "the widget should be in a valid state after this operation");
-        }
-
-        [Test]
-        public void HandleNoUserInput()
+        [SetUp]
+        public void InitControls()
         {
             Init(TestDateTimeControl.Info, TestObject.TestDateTimeProperty);
-            Assert.That(obj.TestDateTime, Is.Null, "DateTimeProperty should default to null");
-            AssertWidgetHasValidValue();
         }
 
-        [Test]
-        public void HandleNullUserInput()
-        {
-            Init(TestDateTimeControl.Info, TestObject.TestDateTimeProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            Assert.That(obj.TestDateTime, Is.Null);
-            AssertWidgetHasValidValue();
-        }
+        protected override DateTime? GetObjectValue() { return obj.TestDateTime; }
+        protected override DateTime? GetWidgetValue() { return widget.Value; }
+        protected override void SetObjectValue(DateTime? v) { obj.TestDateTime = v; }
+        protected override void UserInput(DateTime? v) { widget.SimulateUserInput(v); }
 
-        [Test]
-        public void HandleNullUserInputInvalid()
+        protected void HandleUserInput(DateTime newDateTimeValue)
         {
-            Init(TestDateTimeControl.Info, TestObject.TestDateTimeNotNullProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            // Input has to be rejected
-            Assert.That(obj.TestDateTimeNotNull, Is.Not.Null, "property value shouldn't be null");
-            // widget has to be flagged as invalid
-            Assert.That(widget.HasValidValue, Is.False, "widget should have been flagged as invalid");
-        }
-
-        [Test]
-        public void HandleUserInput()
-        {
-            Init(TestDateTimeControl.Info, TestObject.TestDateTimeProperty);
             AssertWidgetHasValidValue();
 
-            DateTime newDateTimeValue = DateTime.Now;
             widget.SimulateUserInput(newDateTimeValue);
-            
+
             Assert.That(obj.TestDateTime, Is.EqualTo(newDateTimeValue));
             AssertWidgetHasValidValue();
         }
+
+        [Test]
+        public void HandleExtrema()
+        {
+            foreach (DateTime d in new[] { DateTime.MinValue, DateTime.MaxValue, DateTime.Now, DateTime.Today })
+            {
+                HandleUserInput(d);
+            }
+        }
+
+        [Test]
+        public void HandleConstant()
+        {
+            foreach (string s in new[] { "2008-01-01 11:11", "11:11", "2008-01-01" })
+            {
+                HandleUserInput(DateTime.Parse(s, System.Globalization.CultureInfo.InvariantCulture));
+            }
+        }
+
 
     }
 }

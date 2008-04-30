@@ -73,6 +73,7 @@
     <Compile Include="Tests\BackReferencePresenterTests.cs" />
     <Compile Include="Tests\BoolPresenterTests.cs" />
     <Compile Include="Tests\DateTimePresenterTests.cs" />
+    <Compile Include="Tests\DoublePresenterTests.cs" />
     <Compile Include="Tests\GuiDbTests.cs" />
     <Compile Include="Tests\IntPresenterTests.cs" />
     <Compile Include="Tests\PresenterTest.cs" />

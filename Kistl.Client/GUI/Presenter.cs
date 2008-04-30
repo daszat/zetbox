@@ -51,6 +51,54 @@ namespace Kistl.GUI
 
     }
 
+    public class DefaultPresenter<TYPE, PROPERTY> : Presenter
+        where PROPERTY : Property
+    {
+        public DefaultPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = Property.PropertyName;
+            Control.Description = Property.AltText;
+            Control.Value = Object.GetPropertyValue<TYPE>(Property.PropertyName);
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+
+            Control.UserInput += new EventHandler(Control_UserInput);
+        }
+
+        private void Control_UserInput(object sender, EventArgs e)
+        {
+            Control.IsValidValue = (Property.IsNullable || Control.Value != null);
+            if (Control.IsValidValue)
+            {
+                Object.SetPropertyValue<TYPE>(Property.PropertyName, Control.Value);
+            }
+        }
+
+        // localize type-unsafety
+        public PROPERTY Property { get { return (PROPERTY)Preferences.Property; } }
+        // fixup locally used types
+        public new IValueControl<TYPE> Control { get { return (IValueControl<TYPE>)base.Control; } }
+
+    }
+
+    public class BoolPresenter : DefaultPresenter<bool?, BoolProperty> { }
+    public class DateTimePresenter : DefaultPresenter<DateTime?, DateTimeProperty> { }
+    public class DoublePresenter : DefaultPresenter<double?, DoubleProperty> { }
+    public class IntPresenter : DefaultPresenter<int?, IntProperty> { }
+    public class StringPresenter : DefaultPresenter<string, StringProperty> { }
+
+    public class GroupPresenter : Presenter
+    {
+        public GroupPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = String.Format("{0} {1}", Object.Type.Classname, Object.ID);
+        }
+    }
+
     public class ObjectPresenter : Presenter
     {
         public ObjectPresenter() { }
@@ -66,165 +114,6 @@ namespace Kistl.GUI
 
         // fixup locally used types
         public new IObjectControl Control { get { return (IObjectControl)base.Control; } }
-    }
-
-    public class IntPresenter : Presenter
-    {
-        public IntPresenter() { }
-
-        protected override void InitializeComponent()
-        {
-            Control.ShortLabel = Property.PropertyName;
-            Control.Description = Property.AltText;
-            Control.Value = Object.GetPropertyValue(Property);
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
-
-            Control.UserInput += new EventHandler(Control_UserInput);
-        }
-
-        private void Control_UserInput(object sender, EventArgs e)
-        {
-            if (!Property.IsNullable && Control.Value == null)
-            {
-                Control.FlagValidity(false);
-            }
-            else
-            {
-                Control.FlagValidity(true);
-                Object.SetPropertyValue(Property, Control.Value);
-            }
-        }
-
-        // localize type-unsafety
-        public IntProperty Property { get { return (IntProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IIntControl Control { get { return (IIntControl)base.Control; } }
-
-    }
-
-    public class DoublePresenter : Presenter
-    {
-        public DoublePresenter() { }
-
-        protected override void InitializeComponent()
-        {
-            Control.ShortLabel = Property.PropertyName;
-            Control.Description = Property.AltText;
-            Control.Value = Object.GetPropertyValue(Property);
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
-
-            Control.UserInput += new EventHandler(Control_UserInput);
-        }
-
-        private void Control_UserInput(object sender, EventArgs e)
-        {
-            Object.SetPropertyValue(Property, Control.Value);
-        }
-
-        // localize type-unsafety
-        public DoubleProperty Property { get { return (DoubleProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IDoubleControl Control { get { return (IDoubleControl)base.Control; } }
-
-    }
-
-    public class StringPresenter : Presenter
-    {
-        public StringPresenter() { }
-
-        protected override void InitializeComponent()
-        {
-            Control.ShortLabel = Property.PropertyName;
-            Control.Description = Property.AltText;
-            Control.Value = Object.GetPropertyValue(Property);
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
-
-            Control.UserInput += new EventHandler(Control_UserInput);
-        }
-
-        private void Control_UserInput(object sender, EventArgs e)
-        {
-            Control.IsValidValue = Property.IsNullable && Control.Value == null;
-            if (Control.IsValidValue)
-            {
-                Object.SetPropertyValue(Property, Control.Value);
-            }
-        }
-
-        // localize type-unsafety
-        public StringProperty Property { get { return (StringProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IValueControl<string> Control { get { return (IValueControl<string>)base.Control; } }
-
-    }
-
-    public class DateTimePresenter : Presenter
-    {
-        public DateTimePresenter() { }
-
-        protected override void InitializeComponent()
-        {
-            Control.ShortLabel = Property.PropertyName;
-            Control.Description = Property.AltText;
-            Control.Value = Object.GetPropertyValue(Property);
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
-
-            Control.UserInput += new EventHandler(Control_UserInput);
-        }
-
-        private void Control_UserInput(object sender, EventArgs e)
-        {
-            if (!Property.IsNullable && Control.Value == null)
-            {
-                Control.FlagValidity(false);
-            }
-            else
-            {
-                Control.FlagValidity(true);
-                Object.SetPropertyValue(Property, Control.Value);
-            }
-        }
-
-        // localize type-unsafety
-        public DateTimeProperty Property { get { return (DateTimeProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IDateTimeControl Control { get { return (IDateTimeControl)base.Control; } }
-
-    }
-
-    public class BoolPresenter : Presenter
-    {
-        public BoolPresenter() { }
-
-        protected override void InitializeComponent()
-        {
-            Control.ShortLabel = Property.PropertyName;
-            Control.Description = Property.AltText;
-            Control.Value = Object.GetPropertyValue(Property);
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
-
-            Control.UserInput += new EventHandler(Control_UserInput);
-        }
-
-        private void Control_UserInput(object sender, EventArgs e)
-        {
-            Control.IsValidValue = Property.IsNullable && Control.Value == null;
-            if (Control.IsValidValue)
-            {
-                Object.SetPropertyValue(Property, Control.Value);
-            }
-        }
-
-        // localize type-unsafety
-        public BoolProperty Property { get { return (BoolProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IValueControl<bool?> Control { get { return (IValueControl<bool?>)base.Control; } }
-
     }
 
     public class PointerPresenter : Presenter
@@ -308,16 +197,6 @@ namespace Kistl.GUI
 
     }
 
-    public class GroupPresenter : Presenter
-    {
-        public GroupPresenter() { }
-
-        protected override void InitializeComponent()
-        {
-            Control.ShortLabel = String.Format("{0} {1}", Object.Type.Classname, Object.ID);
-        }
-    }
-
     public enum FieldSize
     {
         OneThird,
@@ -352,33 +231,6 @@ namespace Kistl.GUI
         /// fetch the Value and do Validity checks.
         /// </summary>
         event /*UserInput<TYPE>*/EventHandler UserInput;
-    }
-
-    public interface IIntControl : IBasicControl
-    {
-        int? Value { get; set; }
-        event /*UserInput<int>*/EventHandler UserInput;
-        void FlagValidity(bool valid);
-    }
-
-    public interface IDoubleControl : IBasicControl
-    {
-        double? Value { get; set; }
-        event /*UserInput<double>*/EventHandler UserInput;
-    }
-
-    public interface IDateTimeControl : IBasicControl
-    {
-        DateTime? Value { get; set; }
-        event /*UserInput<DateTime>*/EventHandler UserInput;
-        void FlagValidity(bool valid);
-    }
-
-    public interface IBoolControl : IBasicControl
-    {
-        bool? Value { get; set; }
-        event /*UserInput<bool>*/EventHandler UserInput;
-        void FlagValidity(bool valid);
     }
 
     public interface ISelectControl : IBasicControl

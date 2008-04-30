@@ -18,7 +18,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Zeigt eine einfache Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditDateTimeProperty : PropertyControl, IDateTimeControl
+    public partial class EditDateTimeProperty : PropertyControl, IValueControl<DateTime?>
     {
         public EditDateTimeProperty()
         {
