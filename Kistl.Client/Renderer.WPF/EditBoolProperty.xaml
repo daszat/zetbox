@@ -6,7 +6,6 @@
     MinWidth="400"
     x:Name="EditCtrl"
     ShortLabel="Label"
-    Value="false"
     >
     <DockPanel
         x:Name="Panel"

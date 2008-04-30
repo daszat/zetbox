@@ -52,14 +52,60 @@ namespace Kistl.Client.Mocks
 
     }
 
-    public class TestBoolControl : IBoolControl
+    public class TestNullableBoolControl : IValueControl<bool?>
+    {
+        public TestNullableBoolControl()
+        {
+            Description = "TestNullableBoolControl Description";
+            ShortLabel = "TNBC ShortLabel";
+            Size = FieldSize.Full;
+            IsValidValue = true;
+        }
+
+        public readonly static ControlInfo Info
+            = new ControlInfo()
+            {
+                Platform = Toolkit.TEST,
+                Control = "bool",
+                Container = false,
+                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Mocks.TestNullableBoolControl"
+            };
+
+
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+        #region IBoolControl Members
+
+        public event EventHandler UserInput;
+        public bool? Value { get; set; }
+        public bool IsValidValue { get; set; }
+
+        #endregion
+
+        internal void SimulateUserInput(bool? newBoolValue)
+        {
+            Value = newBoolValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
+    }
+
+    // TODO: actually, this should use a NotNullConstraint instead
+    public class TestBoolControl : IValueControl<bool>
     {
         public TestBoolControl()
         {
             Description = "TestBoolControl Description";
             ShortLabel = "TBC ShortLabel";
             Size = FieldSize.Full;
-            HasValidValue = true;
+            IsValidValue = true;
         }
 
         public readonly static ControlInfo Info
@@ -84,17 +130,12 @@ namespace Kistl.Client.Mocks
         #region IBoolControl Members
 
         public event EventHandler UserInput;
-        public bool? Value { get; set; }
-
-        public bool HasValidValue { get; set; }
-        public void FlagValidity(bool valid)
-        {
-            HasValidValue = valid;
-        }
+        public bool Value { get; set; }
+        public bool IsValidValue { get; set; }
 
         #endregion
 
-        internal void SimulateUserInput(bool? newBoolValue)
+        internal void SimulateUserInput(bool newBoolValue)
         {
             Value = newBoolValue;
             if (UserInput != null)
@@ -202,14 +243,14 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestStringControl : IStringControl
+    public class TestStringControl : IValueControl<string>
     {
         public TestStringControl()
         {
             Description = "TestStringControl Description";
             ShortLabel = "TSC ShortLabel";
             Size = FieldSize.Full;
-            HasValidValue = true;
+            IsValidValue = true;
         }
 
         public readonly static ControlInfo Info
@@ -235,12 +276,7 @@ namespace Kistl.Client.Mocks
 
         public event EventHandler UserInput;
         public string Value { get; set; }
-
-        public bool HasValidValue { get; set; }
-        public void FlagValidity(bool valid)
-        {
-            HasValidValue = valid;
-        }
+        public bool IsValidValue { get; set; }
 
         #endregion
 

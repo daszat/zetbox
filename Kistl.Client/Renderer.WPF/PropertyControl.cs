@@ -13,6 +13,8 @@ namespace Kistl.GUI.Renderer.WPF
     /// </summary>
     public class PropertyControl : UserControl, IBasicControl
     {
+        #region IBasicControl Members
+
         /// <summary>
         /// A descriptive Label for this Property
         /// </summary>
@@ -46,18 +48,20 @@ namespace Kistl.GUI.Renderer.WPF
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register("Size", typeof(FieldSize), typeof(PropertyControl), new UIPropertyMetadata(FieldSize.Full));
 
-        /// <summary>
-        /// The actual Value of this Property
-        /// </summary>
-        public object Value
+        #endregion
+
+        #region further infrastructure
+
+        public bool IsValidValue
         {
-            get { return (object)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get { return (bool)GetValue(IsValueValidProperty); }
+            set { SetValue(IsValueValidProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(object), typeof(PropertyControl));
+        // Using a DependencyProperty as the backing store for IsValueValid.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsValueValidProperty =
+            DependencyProperty.Register("IsValueValid", typeof(bool), typeof(PropertyControl), new PropertyMetadata(true));
+
 
         /// <summary>
         /// Only display the Value, but do not allow to modify it
@@ -81,5 +85,7 @@ namespace Kistl.GUI.Renderer.WPF
         // Using a DependencyProperty as the backing store for Context.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ContextProperty =
             DependencyProperty.Register("Context", typeof(Kistl.API.IKistlContext), typeof(PropertyControl));
+
+        #endregion
     }
 }

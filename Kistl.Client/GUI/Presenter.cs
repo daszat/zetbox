@@ -147,13 +147,9 @@ namespace Kistl.GUI
 
         private void Control_UserInput(object sender, EventArgs e)
         {
-            if (!Property.IsNullable && Control.Value == null)
+            Control.IsValidValue = Property.IsNullable && Control.Value == null;
+            if (Control.IsValidValue)
             {
-                Control.FlagValidity(false);
-            }
-            else
-            {
-                Control.FlagValidity(true);
                 Object.SetPropertyValue(Property, Control.Value);
             }
         }
@@ -161,7 +157,7 @@ namespace Kistl.GUI
         // localize type-unsafety
         public StringProperty Property { get { return (StringProperty)Preferences.Property; } }
         // fixup locally used types
-        public new IStringControl Control { get { return (IStringControl)base.Control; } }
+        public new IValueControl<string> Control { get { return (IValueControl<string>)base.Control; } }
 
     }
 
@@ -217,13 +213,9 @@ namespace Kistl.GUI
 
         private void Control_UserInput(object sender, EventArgs e)
         {
-            if (!Property.IsNullable && Control.Value == null)
+            Control.IsValidValue = Property.IsNullable && Control.Value == null;
+            if (Control.IsValidValue)
             {
-                Control.FlagValidity(false);
-            }
-            else
-            {
-                Control.FlagValidity(true);
                 Object.SetPropertyValue(Property, Control.Value);
             }
         }
@@ -231,7 +223,7 @@ namespace Kistl.GUI
         // localize type-unsafety
         public BoolProperty Property { get { return (BoolProperty)Preferences.Property; } }
         // fixup locally used types
-        public new IBoolControl Control { get { return (IBoolControl)base.Control; } }
+        public new IValueControl<bool?> Control { get { return (IValueControl<bool?>)base.Control; } }
 
     }
 
@@ -342,11 +334,24 @@ namespace Kistl.GUI
         FieldSize Size { get; set; }
     }
 
-    public interface IStringControl : IBasicControl
+    public interface IValueControl<TYPE> : IBasicControl
     {
-        string Value { get; set; }
-        event /*UserInput<string>*/EventHandler UserInput;
-        void FlagValidity(bool valid);
+        /// <summary>
+        /// The actually displayed value
+        /// </summary>
+        TYPE Value { get; set; }
+
+        /// <summary>
+        /// Whether the displayed value is valid. This is set by the Presenter, 
+        /// when Value changes.
+        /// </summary>
+        bool IsValidValue { get; set; }
+
+        /// <summary>
+        /// This event is triggered after UserInput. The Presenter will then 
+        /// fetch the Value and do Validity checks.
+        /// </summary>
+        event /*UserInput<TYPE>*/EventHandler UserInput;
     }
 
     public interface IIntControl : IBasicControl

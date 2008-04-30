@@ -19,7 +19,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Zeigt eine einfache Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditSimpleProperty : PropertyControl, IStringControl
+    public partial class EditSimpleProperty : PropertyControl, IValueControl<string>
     {
 
         public EditSimpleProperty()
@@ -29,17 +29,28 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IStringControl Members
 
-        string IStringControl.Value
+        /// <summary>
+        /// The actual Value of this Property
+        /// </summary>
+        public string Value
         {
-            get
-            {
-                return this.Value.ToString();
-            }
-            set
-            {
-                this.Value = value;
-            }
+            get { return (string)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(string), typeof(EditSimpleProperty));
+
+        public event EventHandler UserInput;
+
+
+        public void FlagValidity(bool valid)
+        {
+            Panel.Background = valid ? Brushes.White : Brushes.Red;
+        }
+
+        #endregion
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -52,25 +63,11 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (_UserInput != null)
+            if (UserInput != null)
             {
-                _UserInput(this, new EventArgs());
+                UserInput(this, new EventArgs());
             }
         }
-
-        private event EventHandler _UserInput;
-        event EventHandler IStringControl.UserInput
-        {
-            add { _UserInput += value; }
-            remove { _UserInput -= value; }
-        }
-
-        public void FlagValidity(bool valid)
-        {
-            Panel.Background = valid ? Brushes.White : Brushes.Red;
-        }
-
-        #endregion
 
     }
 }

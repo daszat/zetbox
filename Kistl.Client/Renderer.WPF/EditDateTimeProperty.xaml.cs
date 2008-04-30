@@ -36,33 +36,30 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (_UserInput != null)
+            if (UserInput != null)
             {
-                _UserInput(this, new EventArgs());
+                UserInput(this, new EventArgs());
             }
         }
 
 
         #region IDateTimeControl Members
 
-        DateTime? IDateTimeControl.Value
+        /// <summary>
+        /// The actual Value of this Property
+        /// </summary>
+        public DateTime? Value
         {
-            get
-            {
-                return (DateTime?)this.Value;
-            }
-            set
-            {
-                this.Value = value;
-            }
+            get { return (DateTime?)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
 
-        private event EventHandler _UserInput;
-        event EventHandler IDateTimeControl.UserInput
-        {
-            add { _UserInput += value; }
-            remove { _UserInput -= value; }
-        }
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(DateTime?), typeof(EditDateTimeProperty));
+
+
+        public event EventHandler UserInput;
 
         public void FlagValidity(bool valid)
         {

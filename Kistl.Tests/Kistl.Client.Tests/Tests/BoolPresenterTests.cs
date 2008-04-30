@@ -11,47 +11,22 @@ using Kistl.GUI;
 namespace Kistl.Client.Tests
 {
     [TestFixture]
-    public class BoolPresenterTests : PresenterTest<TestBoolControl, BoolPresenter>
+    public class BoolPresenterTests : ValuePresenterTests<bool, TestBoolControl, BoolPresenter>
     {
-        protected void AssertWidgetHasValidValue()
-        {
-            Assert.That(widget.HasValidValue, Is.True, "the widget should be in a valid state after this operation");
-        }
-
-        [Test]
-        public void HandleNoUserInput()
-        {
-            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
-            Assert.That(obj.TestBool, Is.Null, "BoolProperty should default to null");
-            AssertWidgetHasValidValue();
-        }
-
-        [Test]
-        public void HandleNullUserInput()
-        {
-            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            Assert.That(obj.TestBool, Is.Null);
-            AssertWidgetHasValidValue();
-        }
-
-        [Test]
-        public void HandleNullUserInputInvalid()
+        [SetUp]
+        public void InitControls()
         {
             Init(TestBoolControl.Info, TestObject.TestBoolNotNullProperty);
-            AssertWidgetHasValidValue();
-            widget.SimulateUserInput(null);
-            // Input has to be rejected
-            Assert.That(obj.TestBoolNotNull, Is.Not.Null, "property value shouldn't be null");
-            // widget has to be flagged as invalid
-            Assert.That(widget.HasValidValue, Is.False, "widget should have been flagged as invalid");
         }
+
+        protected override bool GetObjectValue() { return obj.TestBoolNotNull; }
+        protected override bool GetWidgetValue() { return widget.Value; }
+        protected override void SetObjectValue(bool v) { obj.TestBoolNotNull = v; }
+        protected override void UserInput(bool v) { widget.SimulateUserInput(v); }
 
         [Test]
         public void HandleTrueUserInput()
         {
-            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
             AssertWidgetHasValidValue();
 
             bool newBoolValue = true;
@@ -64,7 +39,6 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleFalseUserInput()
         {
-            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
             AssertWidgetHasValidValue();
 
             bool newBoolValue = false;
@@ -73,6 +47,48 @@ namespace Kistl.Client.Tests
             Assert.That(obj.TestBool, Is.EqualTo(newBoolValue));
             AssertWidgetHasValidValue();
         }
+
+    }
+
+    [TestFixture]
+    public class NullableBoolPresenterTests : NullablePresenterTests<bool, TestNullableBoolControl, BoolPresenter>
+    {
+
+        [SetUp]
+        public void InitControls()
+        {
+            Init(TestNullableBoolControl.Info, TestObject.TestBoolProperty);
+        }
+
+        protected override bool? GetObjectValue() { return obj.TestBool; }
+        protected override bool? GetWidgetValue() { return widget.Value; }
+        protected override void SetObjectValue(bool? v) { obj.TestBool = v; }
+        protected override void UserInput(bool? v) { widget.SimulateUserInput(v); }
+
+        [Test]
+        public void HandleTrueUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            bool newBoolValue = true;
+            widget.SimulateUserInput(newBoolValue);
+            
+            Assert.That(obj.TestBool, Is.EqualTo(newBoolValue));
+            AssertWidgetHasValidValue();
+        }
+
+        [Test]
+        public void HandleFalseUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            bool newBoolValue = false;
+            widget.SimulateUserInput(newBoolValue);
+            
+            Assert.That(obj.TestBool, Is.EqualTo(newBoolValue));
+            AssertWidgetHasValidValue();
+        }
+
 
     }
 }

@@ -26,11 +26,19 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IBoolControl Members
 
-        bool? IBoolControl.Value
+        /// <summary>
+        /// The actual Value of this Property
+        /// </summary>
+        public bool? Value
         {
-            get { return (bool?)base.Value; }
-            set { base.Value = value; }
+            get { return (bool?)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(bool?), typeof(EditBoolProperty));
+
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -43,18 +51,13 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (_UserInput != null)
+            if (UserInput != null)
             {
-                _UserInput(this, new EventArgs());
+                UserInput(this, new EventArgs());
             }
         }
 
-        private event EventHandler _UserInput;
-        event EventHandler IBoolControl.UserInput
-        {
-            add { _UserInput += value; }
-            remove { _UserInput -= value; }
-        }
+        public event EventHandler UserInput;
 
         public void FlagValidity(bool valid)
         {

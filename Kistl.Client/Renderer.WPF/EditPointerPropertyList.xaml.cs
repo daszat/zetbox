@@ -40,15 +40,28 @@ namespace Kistl.GUI.Renderer.WPF
         public static readonly DependencyProperty ObjectTypeProperty =
             DependencyProperty.Register("ObjectType", typeof(ObjectType), typeof(EditPointerPropertyList));
 
+        /// <summary>
+        /// The actual Value of this Property
+        /// </summary>
+        public IList Value
+        {
+            get { return (IList)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(IList), typeof(EditPointerPropertyList));
+
+
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                IList collection = (IList)Value;
-                Type[] types = collection.GetType().GetGenericArguments();
-                if (types.Length != 1) throw new InvalidOperationException("IList has more then one generic Parameter?");
+                IList collection = Value;
+                Type type = collection.GetType().GetGenericArguments().Single();
 
-                ICollectionEntry ce = (ICollectionEntry)Activator.CreateInstance(types[0]);
+                ICollectionEntry ce = (ICollectionEntry)Activator.CreateInstance(type);
                 Context.Attach(ce);
                 collection.Add(ce);
                 lst.Items.Refresh();

@@ -29,20 +29,6 @@ namespace Kistl.GUI.Renderer.WPF
             InitializeComponent();
         }
 
-        public ObjectType ObjectType
-        {
-            get { return (ObjectType)GetValue(ObjectTypeProperty); }
-            set { SetValue(ObjectTypeProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ObjectTypeProperty =
-            DependencyProperty.Register("ObjectType",
-                typeof(ObjectType), typeof(EditPointerProperty),
-                new PropertyMetadata(null));
-
-
-
         public IEnumerable ItemsSource
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
@@ -64,13 +50,6 @@ namespace Kistl.GUI.Renderer.WPF
         // Using a DependencyProperty as the backing store for ShowLabel.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowLabelProperty =
             DependencyProperty.Register("ShowLabel", typeof(Visibility), typeof(EditPointerProperty), new UIPropertyMetadata(Visibility.Visible));
-
-
-        public int TargetID
-        {
-            get { return (int)Value; }
-            set { Value = value; }
-        }
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
@@ -123,8 +102,38 @@ namespace Kistl.GUI.Renderer.WPF
         #region IPointerControl Members
 
         // these two already exist correctly:
-        // ObjectType IPointerControl.ObjectType { get; set; }
-        // int IPointerControl.TargetID { get; set; }
+        public ObjectType ObjectType
+        {
+            get { return (ObjectType)GetValue(ObjectTypeProperty); }
+            set { SetValue(ObjectTypeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ObjectTypeProperty =
+            DependencyProperty.Register("ObjectType",
+                typeof(ObjectType), typeof(EditPointerProperty),
+                new PropertyMetadata(null));
+
+
+        public int TargetID
+        {
+            get { return (int)Value; }
+            set { Value = value; }
+        }
+
+        /// <summary>
+        /// The actual Value of this Property
+        /// </summary>
+        public int Value
+        {
+            get { return (int)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(int), typeof(EditPointerProperty));
+
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {

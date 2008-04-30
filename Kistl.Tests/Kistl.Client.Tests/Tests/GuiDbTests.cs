@@ -40,7 +40,7 @@ namespace Kistl.Client.Tests
         {
             Init();
             Assert.That(widget, Is.Not.Null);
-            Assert.That(widget.HasValidValue, Is.True);
+            Assert.That(widget.IsValidValue, Is.True);
         }
 
         [Test]

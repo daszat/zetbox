@@ -37,15 +37,28 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
+        /// <summary>
+        /// The actual Value of this Property
+        /// </summary>
+        public IList Value
+        {
+            get { return (IList)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(IList), typeof(EditSimplePropertyList));
+
+
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                IList c = (IList)Value;
-                Type[] types = c.GetType().GetGenericArguments();
-                if (types.Length != 1) throw new InvalidOperationException("IList has more then one generic Parameter?");
+                IList c = Value;
+                Type type = c.GetType().GetGenericArguments().Single();
 
-                object v = Activator.CreateInstance(types[0]);
+                object v = Activator.CreateInstance(type);
                 c.Add(v);
                 lst.Items.Refresh();
             }
@@ -62,7 +75,7 @@ namespace Kistl.GUI.Renderer.WPF
                 Button btn = (Button)sender;
                 int ID = (int)btn.CommandParameter;
 
-                IList c = (IList)Value;
+                IList c = Value;
                 foreach (ICollectionEntry entry in c)
                 {
                     if (entry.ID == ID)

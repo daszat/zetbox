@@ -8,7 +8,6 @@
     x:Name="EditCtrl"
     ShortLabel="Label"
     Description="This is a simple string. Please enter a value."
-    Value="Value"
     >
     <DockPanel 
         x:Name="Panel"
@@ -21,4 +20,12 @@
             TextBoxInfo="{Binding ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"
             />
     </DockPanel>
+    <app:PropertyControl.Triggers>
+        <DataTrigger Binding="{Binding ElementName=EditCtrl, Path=IsValidValue}" Value="True">
+            <Setter TargetName="Panel" Property="DockPanel.Background" Value="White"/>
+        </DataTrigger>
+        <DataTrigger Binding="{Binding ElementName=EditCtrl, Path=IsValidValue}" Value="False">
+            <Setter TargetName="Panel" Property="DockPanel.Background" Value="Red"/>
+        </DataTrigger>
+    </app:PropertyControl.Triggers>
 </app:PropertyControl>

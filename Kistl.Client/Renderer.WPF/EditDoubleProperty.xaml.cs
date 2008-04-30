@@ -27,25 +27,18 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IDoubleControl Members
 
-        double? IDoubleControl.Value
+        /// <summary>
+        /// The actual Value of this Property
+        /// </summary>
+        public double? Value
         {
-            get
-            {
-                if (base.Value == null || base.Value.ToString().Length == 0)
-                    return null;
-
-                double result;
-                if (double.TryParse(base.Value.ToString(), out result))
-                {
-                    return result;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            set { base.Value = String.Format("{0}", value); }
+            get { return (double?)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(double?), typeof(EditDoubleProperty));
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -58,18 +51,13 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (_UserInput != null)
+            if (UserInput != null)
             {
-                _UserInput(this, new EventArgs());
+                UserInput(this, new EventArgs());
             }
         }
 
-        private event EventHandler _UserInput;
-        event EventHandler IDoubleControl.UserInput
-        {
-            add { _UserInput += value; }
-            remove { _UserInput -= value; }
-        }
+        public event EventHandler UserInput;
 
         #endregion
 
