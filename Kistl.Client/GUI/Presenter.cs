@@ -89,6 +89,9 @@ namespace Kistl.GUI
     public class IntPresenter : DefaultPresenter<int?, IntProperty> { }
     public class StringPresenter : DefaultPresenter<string, StringProperty> { }
 
+    /// <summary>
+    /// Handles a widget for a group of property
+    /// </summary>
     public class GroupPresenter : Presenter
     {
         public GroupPresenter() { }
@@ -99,6 +102,9 @@ namespace Kistl.GUI
         }
     }
 
+    /// <summary>
+    /// Handles the top-level widget for an object
+    /// </summary>
     public class ObjectPresenter : Presenter
     {
         public ObjectPresenter() { }
@@ -260,7 +266,9 @@ namespace Kistl.GUI
         event /*UserInput<IList<Kistl.API.IDataObject>>*/EventHandler UserInput;
     }
 
-
+    /// <summary>
+    /// Some extension functions to help with accessing the Objects
+    /// </summary>
     public static class ExtensionHelper
     {
         public static string GetPropertyValue(this IDataObject obj, StringProperty prop)
