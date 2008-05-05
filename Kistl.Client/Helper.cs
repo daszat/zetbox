@@ -19,17 +19,18 @@ namespace Kistl.Client
         /// <param name="ex"></param>
         public static void HandleError(Exception ex)
         {
+            //TODO: put exception into DB
             if (ex is FaultException<ApplicationException>)
             {
-                //TODO: System.Windows.MessageBox.Show((ex as ApplicationException).Message);
+                Manager.Renderer.ShowMessage((ex as ApplicationException).Message);
             }
             else if (ex is FaultException)
             {
-                //TODO: System.Windows.MessageBox.Show((ex as FaultException).Message);
+                Manager.Renderer.ShowMessage((ex as FaultException).Message);
             }
             else
             {
-                //TODO: System.Windows.MessageBox.Show(ex.ToString());
+                Manager.Renderer.ShowMessage(ex.ToString());
             }
         }
 

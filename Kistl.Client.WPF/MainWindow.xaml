@@ -1,0 +1,9 @@
+﻿<Window x:Class="Kistl.Client.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Kistl.Client.WPF"
+    Title="Kistl Main Window" MinHeight="550" MinWidth="780">
+    <DockPanel>
+        <local:MainWindowCtrl />
+    </DockPanel>
+</Window>

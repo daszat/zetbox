@@ -9,15 +9,35 @@ using Kistl.API.Client;
 
 namespace Kistl.GUI.Renderer
 {
-    public abstract class BasicRenderer<CONTROL, PROPERTY, CONTAINER>
+    public interface IRenderer
+    {
+        /// <summary>
+        /// Show a message to the user
+        /// </summary>
+        /// <param name="message"></param>
+        void ShowMessage(string message);
+
+        /// <summary>
+        /// Shows the given object to the user
+        /// </summary>
+        /// <param name="obj"></param>
+        void ShowObject(IDataObject obj);
+
+        /// <summary>
+        /// Create a control corresponding to the visual for this object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="visual"></param>
+        /// <returns></returns>
+        object CreateControl(IDataObject obj, Visual visual);
+    }
+
+    public abstract class BasicRenderer<CONTROL, PROPERTY, CONTAINER> : IRenderer
         where PROPERTY : CONTROL
         where CONTAINER : CONTROL
     {
-        /// <summary>
-        /// Show the specified object to the User
-        /// </summary>
-        /// <param name="obj"></param>
-        public abstract void ShowObject(Kistl.API.IDataObject obj);
+        public abstract void ShowMessage(string msg);
+        public abstract void ShowObject(IDataObject obj);
 
         /// <summary>
         /// Create a Control for the given visual, showing the object
@@ -25,7 +45,7 @@ namespace Kistl.GUI.Renderer
         /// <param name="obj"></param>
         /// <param name="visual"></param>
         /// <returns></returns>
-        public CONTROL CreateControl(Kistl.API.IDataObject obj, Visual visual)
+        public object CreateControl(IDataObject obj, Visual visual)
         {
             var cInfo = KistlGUIContext.FindControlInfo(Toolkit.WPF, visual);
             var pInfo = KistlGUIContext.FindPresenterInfo(visual);

@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
+using Kistl.GUI.Renderer;
 
 namespace Kistl.GUI.DB
 {
@@ -18,8 +19,13 @@ namespace Kistl.GUI.DB
 
         public static ControlInfo FindControlInfo(Toolkit platform, Visual visual)
         {
+            return FindControlInfo(platform, visual.Name);
+        }
+
+        private static ControlInfo FindControlInfo(Toolkit platform, string name)
+        {
             return (from ci in ControlInfo.Implementations
-                    where ci.Control == visual.Name
+                    where ci.Control == name
                         && ci.Platform == platform
                     select ci).Single();
         }
@@ -35,6 +41,13 @@ namespace Kistl.GUI.DB
         {
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
             return (IBasicControl)Activator.CreateInstance(controlType);
+        }
+
+        public static IRenderer CreateRenderer(Toolkit platform)
+        {
+            var info = FindControlInfo(platform, "renderer");
+            Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
+            return (IRenderer)Activator.CreateInstance(controlType);
         }
 
         public static Presenter CreatePresenter(PresenterInfo info, Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
@@ -65,12 +78,21 @@ namespace Kistl.GUI.DB
         public bool Container { get; set; }
 
         public static IList<ControlInfo> Implementations = new List<ControlInfo>(new[] {
+            // Test Controls
             new ControlInfo() { Platform = Toolkit.ASPNET, Control = "group",
                 Container = true,
                 AssemblyName = "blah", ClassName = "foo" },
             new ControlInfo() { Platform = Toolkit.ASPNET, Control = "string",
                 Container = false,
                 AssemblyName = "blah", ClassName = "foo" },
+
+            // The actual Renderer for WPF
+            new ControlInfo() { Platform = Toolkit.WPF, Control = "renderer",
+                Container = true,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.Renderer" },
+
+            // other WPF Controls
             new ControlInfo() { Platform = Toolkit.WPF, Control = "group",
                 Container = true,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",

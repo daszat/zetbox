@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.DesktopTreeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Kistl.Client.WPF"
+    MinHeight="300" MinWidth="200" Loaded="UserControl_Loaded">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Name="btnNew" Click="btnNew_Click">New</Button>
+            <Button Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+        </ToolBar>
+        <TreeView Name="treeView" ItemsSource="{Binding}" 
+                  SelectedItemChanged="treeView_SelectedItemChanged"
+                  MouseDoubleClick="treeView_MouseDoubleClick">
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="New" Click="btnNew_Click" />
+                    <MenuItem Header="Refresh" Name="ctxmnu_Refresh" Click="ctxmnu_Refresh_Click" />
+                </ContextMenu>
+            </TreeView.ContextMenu>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=ObjectClassedNodes}">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Modules -->
+                        <Image Source="{Binding Path=Module, Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                        <TextBlock Margin="2,0,0,0" Text="{Binding Path=Module}" />
+                    </StackPanel>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=InstancesNodes}">
+                            <!-- ObjectClasses -->
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Path=ObjectClass, Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                                <TextBlock Margin="2,0,0,0" Text="{Binding Path=ObjectClass.ClassName}" />
+                            </StackPanel>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <HierarchicalDataTemplate>
+                                    <!-- Instance -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding Path=Object, Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                                        <TextBlock Margin="2,0,0,0" Text="{Binding Path=Object}" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </DockPanel>
+</UserControl>
