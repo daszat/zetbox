@@ -17,7 +17,7 @@
                         <DockPanel HorizontalAlignment="Stretch">
                             <Button DockPanel.Dock="Left" Name="btnDelete" Click="btnDelete_Click" 
                                     CommandParameter="{Binding Path=ID}">Delete</Button>
-                            <TextBox Margin="2,0,0,0" Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Margin="2,0,0,0" Text="{Binding Path=Value}" />
                         </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

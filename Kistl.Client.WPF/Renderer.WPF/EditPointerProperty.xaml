@@ -13,7 +13,7 @@
         <Button Name="btnOpen" Click="btnOpen_Click">Open</Button>
         <ComboBox Name="cbValues" 
                   ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource}"
-                  SelectedValue="{Binding ElementName=PointerCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValue="{Binding ElementName=PointerCtrl, Path=Value}"
                   SelectedValuePath="ID"
                   SelectionChanged="cbValues_SelectionChanged"
                   >

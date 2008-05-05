@@ -54,13 +54,13 @@ namespace Kistl.GUI.Renderer.WPF
 
         public bool IsValidValue
         {
-            get { return (bool)GetValue(IsValueValidProperty); }
-            set { SetValue(IsValueValidProperty, value); }
+            get { return (bool)GetValue(IsValidValueProperty); }
+            set { SetValue(IsValidValueProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsValueValid.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsValueValidProperty =
-            DependencyProperty.Register("IsValueValid", typeof(bool), typeof(PropertyControl), new PropertyMetadata(true));
+        // Using a DependencyProperty as the backing store for IsValidValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsValidValueProperty =
+            DependencyProperty.Register("IsValidValue", typeof(bool), typeof(PropertyControl), new PropertyMetadata(true));
 
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for IsReadOnly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsReadOnlyProperty =
-            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(PropertyControl), new UIPropertyMetadata(false));
+            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(PropertyControl), new PropertyMetadata(false));
 
         public Kistl.API.IKistlContext Context
         {

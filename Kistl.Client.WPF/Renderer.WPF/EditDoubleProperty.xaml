@@ -8,11 +8,11 @@
     MinWidth="400"
     >
     <DockPanel 
-        ToolTip="{Binding  ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"
+        ToolTip="{Binding  ElementName=EditCtrl, Path=Description}"
         >
         <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
-        <kevin:InfoTextBox Text="{Binding ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
-                 IsReadOnly="{Binding ElementName=EditCtrl, Path=IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
-                 TextBoxInfo="{Binding ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"/>
+        <kevin:InfoTextBox Text="{Binding ElementName=EditCtrl, Path=Value}" 
+                 IsReadOnly="{Binding ElementName=EditCtrl, Path=IsReadOnly}"
+                 TextBoxInfo="{Binding ElementName=EditCtrl, Path=Description}"/>
     </DockPanel>
 </app:PropertyControl >
