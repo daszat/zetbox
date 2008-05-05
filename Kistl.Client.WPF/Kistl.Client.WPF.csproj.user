@@ -17,4 +17,8 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartArguments>configarthur.xml</StartArguments>
+    <StartWorkingDirectory>D:\Programmierung\Kistl\Kistl.Client.WPF\</StartWorkingDirectory>
+  </PropertyGroup>
 </Project>

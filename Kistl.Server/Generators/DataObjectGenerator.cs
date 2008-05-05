@@ -18,6 +18,7 @@ namespace Kistl.Server.Generators
     {
         private string codeBasePath = "";
 
+        #region Current Metadata
         public abstract class CurrentBase : ICloneable
         {
             public Kistl.API.IKistlContext ctx { get; set; }
@@ -103,8 +104,9 @@ namespace Kistl.Server.Generators
                 ((CurrentEnumeration)result).enumeration = this.enumeration;
             }
         }
+        #endregion
 
-
+        #region Generate
         public virtual void Generate(Kistl.API.IKistlContext ctx, string codeBasePath)
         {
             this.codeBasePath = codeBasePath + (codeBasePath.EndsWith("\\") ? "" : "\\");
@@ -143,6 +145,7 @@ namespace Kistl.Server.Generators
             GenerateAssemblyInfo(ClientServerEnum.Server);
             GenerateAssemblyInfo(ClientServerEnum.Client);
         }
+        #endregion
 
         #region Save / Helper
         protected virtual void SaveFile(CodeCompileUnit code, string fileName)
@@ -346,7 +349,7 @@ namespace Kistl.Server.Generators
             return CreateClass(ns, name, TypeAttributes.Public | TypeAttributes.Sealed, baseClassesList.ToArray());
         }
 
-        protected virtual CodeTypeDeclaration CreateClass(CodeNamespace ns, string name, 
+        protected virtual CodeTypeDeclaration CreateClass(CodeNamespace ns, string name,
             TypeAttributes typeAttributes, params CodeTypeReference[] baseClasses)
         {
             CodeTypeDeclaration c = new CodeTypeDeclaration(name);
@@ -488,7 +491,7 @@ namespace Kistl.Server.Generators
 
             // Create Namespace
             CodeNamespace ns = CreateNamespace(code, "Kistl.API");
-            
+
 
             // XMLObjectCollection
             CodeTypeDeclaration c = CreateSealedClass(ns, "XMLObjectCollection", "IXmlObjectCollection");
@@ -512,7 +515,7 @@ namespace Kistl.Server.Generators
             CodeTypeParameter ct = new CodeTypeParameter("T");
             ct.Constraints.Add("IDataObject");
             m.TypeParameters.Add(ct);
-            
+
             m.Statements.Add(new CodeSnippetExpression(@"return new List<T>(Objects.OfType<T>())"));
 
             // XMLObject
@@ -618,7 +621,7 @@ namespace Kistl.Server.Generators
             foreach (Method method in current.@interface.Methods)
             {
                 BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
-                CodeMemberMethod m = CreateMethod(current.code_class, method.MethodName, 
+                CodeMemberMethod m = CreateMethod(current.code_class, method.MethodName,
                     returnParam != null ? new CodeTypeReference(returnParam.GetDataType()) : new CodeTypeReference(typeof(void)));
 
                 foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
@@ -689,7 +692,7 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateProperties
-        
+
         #region GenerateValueTypeProperty
         protected virtual void GenerateProperties_ValueTypeProperty(CurrentObjectClass current)
         {
@@ -725,7 +728,7 @@ namespace Kistl.Server.Generators
             current.code_property.SetStatements.Add(new CodeSnippetExpression(
                 string.Format(@"NotifyPropertyChanging(""{0}""); 
                 {1} = value; 
-                NotifyPropertyChanged(""{0}"");", 
+                NotifyPropertyChanged(""{0}"");",
                 current.property.PropertyName, current.code_field.Name)));
 
             GenerateProperties_ValueTypeProperty(current);
@@ -753,7 +756,7 @@ namespace Kistl.Server.Generators
 
             collectionClass.code_class = CreateClass(collectionClass.code_namespace, Generator.GetPropertyCollectionObjectType((Property)current.property).Classname,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.clientServer));
-            
+
             // Create ID
             GenerateDefaultProperty_IDInternal((CurrentObjectClass)collectionClass.Clone());
 
@@ -816,7 +819,7 @@ namespace Kistl.Server.Generators
         }
 
         #region GenerateProperties_ValueTypeProperty_Collection_StreamMethods
-        private void GenerateProperties_ValueTypeProperty_Collection_StreamMethods(CurrentObjectClass current, 
+        private void GenerateProperties_ValueTypeProperty_Collection_StreamMethods(CurrentObjectClass current,
             CurrentObjectClass parent, CurrentObjectClass serializerParent)
         {
             // Create ToStream Method
@@ -990,7 +993,7 @@ namespace Kistl.Server.Generators
         }
 
         #region GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods
-        private void GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(CurrentObjectClass current, 
+        private void GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(CurrentObjectClass current,
             CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent)
         {
             // Create ToStream Method
@@ -1057,6 +1060,7 @@ namespace Kistl.Server.Generators
         }
         #endregion
 
+        #region GeneratePropertiesInternal
         private void GeneratePropertiesInternal(CurrentObjectClass current)
         {
             foreach (BaseProperty baseProp in current.objClass.Properties)
@@ -1095,6 +1099,8 @@ namespace Kistl.Server.Generators
                 }
             }
         }
+        #endregion
+
         #endregion
 
         #region GenerateDefaultMethods
@@ -1315,8 +1321,8 @@ namespace Kistl.Server.Generators
 
                     if (objClass != baseObjClass)
                     {
-                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"{2}base.{0}({1})", 
-                            method.MethodName, 
+                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"{2}base.{0}({1})",
+                            method.MethodName,
                             methodCallParameter.ToString(),
                             returnParam != null ? "e.Result = " : "")));
                     }
@@ -1324,9 +1330,9 @@ namespace Kistl.Server.Generators
                     m.Statements.Add(new CodeSnippetExpression(string.Format(@"if (On{1}_{0} != null)
             {{
                 On{1}_{0}(this{2}{3});
-            }}", 
-               baseObjClass.ClassName, 
-               method.MethodName, 
+            }}",
+               baseObjClass.ClassName,
+               method.MethodName,
                returnParam != null ? ", e" : "",
                methodCallParameter.ToString())));
 
@@ -1430,6 +1436,7 @@ namespace Kistl.Server.Generators
         #endregion
     }
 
+    #region DataObjectGeneratorFactory
     public static class DataObjectGeneratorFactory
     {
         public static BaseDataObjectGenerator GetGenerator()
@@ -1437,4 +1444,5 @@ namespace Kistl.Server.Generators
             return new SQLServer.SQLServerDataObjectGenerator();
         }
     }
+    #endregion
 }
