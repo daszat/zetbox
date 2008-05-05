@@ -32,7 +32,7 @@ namespace Kistl.GUI.DB
                 Description = "top level visual to display a object",
                 Children = new List<Visual>()
             };
-            ObjectClass klass = Kistl.Client.Helper.ObjectClasses[result.Type];
+            ObjectClass klass = ClientHelper.ObjectClasses[result.Type];
             foreach (var p in klass.Properties)
             {
                 result.VisualTree.Children.Add(CreateDefaultVisual(p));
@@ -212,7 +212,7 @@ namespace Kistl.GUI.DB
         public static Template Create()
         {
             Kistl.API.ObjectType taskObjectType = new Kistl.API.ObjectType("Kistl.App.Projekte", "Task");
-            ObjectClass tTask = Kistl.Client.Helper.ObjectClasses[taskObjectType];
+            ObjectClass tTask = ClientHelper.ObjectClasses[taskObjectType];
             // var visuals = (from p in tTask.Properties select new Visual()).ToList();
             List<Visual> visuals = new List<Visual>();
 

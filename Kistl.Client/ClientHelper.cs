@@ -11,7 +11,7 @@ namespace Kistl.Client
     /// <summary>
     /// Client Helper Methods
     /// </summary>
-    internal class Helper
+    public class ClientHelper
     {
         /// <summary>
         /// Auch das könnte man besser implementieren
@@ -120,7 +120,7 @@ namespace Kistl.Client
                 }
                 else
                 {
-                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
+                    objClass = ClientHelper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
                 }
             }
 
@@ -142,7 +142,7 @@ namespace Kistl.Client
                 }
                 else
                 {
-                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
+                    objClass = ClientHelper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
                 }
             }
 

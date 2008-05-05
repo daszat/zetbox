@@ -76,7 +76,7 @@
     <Compile Include="GUI\Renderer.BasicRenderer.cs" />
     <Compile Include="GUI.DB\Template.cs" />
     <Compile Include="GUI.DB\Visual.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="ClientHelper.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

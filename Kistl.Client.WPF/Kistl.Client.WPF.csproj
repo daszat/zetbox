@@ -142,7 +142,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Helper.cs" />
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Dialogs\ChooseObjectClass.xaml.cs">

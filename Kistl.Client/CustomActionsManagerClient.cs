@@ -76,10 +76,10 @@ namespace Kistl.Client
 
                         StringBuilder warnings = new StringBuilder();
 
-                        foreach (ObjectClass baseObjClass in Helper.ObjectClasses.Values)
+                        foreach (ObjectClass baseObjClass in ClientHelper.ObjectClasses.Values)
                         {
                             ObjectType objType = new ObjectType(baseObjClass.Module.Namespace, baseObjClass.ClassName);
-                            foreach (ObjectClass objClass in Helper.GetObjectHierarchie(baseObjClass))
+                            foreach (ObjectClass objClass in ClientHelper.GetObjectHierarchie(baseObjClass))
                             {
                                 foreach (MethodInvocation mi in objClass.MethodIvokations)
                                 {
@@ -123,7 +123,7 @@ namespace Kistl.Client
                                     }
                                     catch (Exception ex)
                                     {
-                                        Helper.HandleError(ex);
+                                        ClientHelper.HandleError(ex);
                                         return;
                                     }
                                 }
@@ -141,7 +141,7 @@ namespace Kistl.Client
             {
                 initialized = true;
                 // Clean up Helper Caches
-                Helper.CleanCaches();
+                ClientHelper.CleanCaches();
             }
         }
     }
