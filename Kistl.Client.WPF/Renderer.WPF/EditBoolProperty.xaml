@@ -1,0 +1,19 @@
+﻿<app:PropertyControl 
+    x:Class="Kistl.GUI.Renderer.WPF.EditBoolProperty"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
+    MinWidth="400"
+    x:Name="EditCtrl"
+    ShortLabel="Label"
+    >
+    <DockPanel
+        x:Name="Panel"
+        >
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
+        <CheckBox IsChecked="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                  IsEnabled="{Binding  ElementName=EditCtrl, Path=IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                  Content="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                  VerticalAlignment="Center" VerticalContentAlignment="Center" IsThreeState="True" />
+    </DockPanel>
+</app:PropertyControl>
