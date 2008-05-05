@@ -22,7 +22,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = "list",
+                Control = VisualType.ObjectList,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestBackReferenceControl"
@@ -66,7 +66,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = "bool",
+                Control = VisualType.Boolean,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestBoolControl"
@@ -111,7 +111,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = "date",
+                Control = VisualType.DateTime,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestDateTimeControl"
@@ -157,7 +157,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = "int",
+                Control = VisualType.Integer,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestIntControl"
@@ -202,7 +202,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = "double",
+                Control = VisualType.Double,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestDoubleControl"
@@ -247,7 +247,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = "string",
+                Control = VisualType.String,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestStringControl"
