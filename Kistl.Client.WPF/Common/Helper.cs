@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.API.Client;
 using System.ServiceModel;
 
-namespace Kistl.Client
+using Kistl.API;
+using Kistl.API.Client;
+
+namespace Kistl.Client.WPF
 {
     /// <summary>
     /// Client Helper Methods
     /// </summary>
-    internal class Helper
+    internal class ClientHelper
     {
         /// <summary>
         /// Auch das könnte man besser implementieren
@@ -21,15 +22,15 @@ namespace Kistl.Client
         {
             if (ex is FaultException<ApplicationException>)
             {
-                //TODO: System.Windows.MessageBox.Show((ex as ApplicationException).Message);
+                System.Windows.MessageBox.Show((ex as ApplicationException).Message);
             }
             else if (ex is FaultException)
             {
-                //TODO: System.Windows.MessageBox.Show((ex as FaultException).Message);
+                System.Windows.MessageBox.Show((ex as FaultException).Message);
             }
             else
             {
-                //TODO: System.Windows.MessageBox.Show(ex.ToString());
+                System.Windows.MessageBox.Show(ex.ToString());
             }
         }
 
@@ -38,7 +39,7 @@ namespace Kistl.Client
 
         public static void CleanCaches()
         {
-            lock (typeof(Helper))
+            lock (typeof(ClientHelper))
             {
                 _ObjectClasses = null;
                 _Modules = null;
@@ -47,7 +48,7 @@ namespace Kistl.Client
 
         private static void FetchObjectClasses()
         {
-            lock (typeof(Helper))
+            lock (typeof(ClientHelper))
             {
                 if (_ObjectClasses == null)
                 {
@@ -76,7 +77,7 @@ namespace Kistl.Client
 
         private static void FetchModules()
         {
-            lock (typeof(Helper))
+            lock (typeof(ClientHelper))
             {
                 if (_Modules == null)
                 {
@@ -119,7 +120,7 @@ namespace Kistl.Client
                 }
                 else
                 {
-                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
+                    objClass = ClientHelper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
                 }
             }
 
@@ -141,7 +142,7 @@ namespace Kistl.Client
                 }
                 else
                 {
-                    objClass = Helper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
+                    objClass = ClientHelper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
                 }
             }
 

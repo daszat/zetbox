@@ -1,8 +1,11 @@
-﻿<Application x:Class="Kistl.Client.App"
+﻿<Application
+    x:Class="Kistl.Client.WPF.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="clr-namespace:Kistl.Client.Converter"
-    StartupUri="MainWindow.xaml">
+    xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter"
+    StartupUri="MainWindow.xaml"
+    Startup="Application_Startup"
+    >
     <Application.Resources>
         <converter:IconConverter x:Key="IconConverter" />
     </Application.Resources>

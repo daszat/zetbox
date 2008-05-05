@@ -42,22 +42,22 @@ namespace Kistl.Client
                         AppDomain.CurrentDomain.Evidence, 
                         AppDomain.CurrentDomain.SetupInformation);
 
-                    SplashScreen.SetInfo("Setting up Server");
+//                    SplashScreen.SetInfo("Setting up Server");
                     Kistl.API.APIInit initServer = (Kistl.API.APIInit)serverDomain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
                     initServer.Init(Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
 
-                    SplashScreen.SetInfo("Starting Server");
+                    //                    SplashScreen.SetInfo("Starting Server");
                     server = (Kistl.API.IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
 
                     clientSponsor = new ClientSponsor();
                     clientSponsor.RenewalTime = TimeSpan.FromMinutes(2);
                     clientSponsor.Register(server as MarshalByRefObject);
 
-                    SplashScreen.SetInfo("Starting WCF Server");
+                    //                   SplashScreen.SetInfo("Starting WCF Server");
                     server.Start();
                 }
 
-                SplashScreen.SetInfo("Setting up Client");
+                //       SplashScreen.SetInfo("Setting up Client");
                 API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
             }
         }

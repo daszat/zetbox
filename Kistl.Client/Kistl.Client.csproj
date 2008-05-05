@@ -6,7 +6,7 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kistl.Client</RootNamespace>
     <AssemblyName>Kistl.Client</AssemblyName>
@@ -66,147 +66,16 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="Renderer.WPF\EditDoubleProperty.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\EditPointerPropertyList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\DesktopTreeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\EditDateTimeProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditBoolProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditPointerProperty.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\EditSimpleProperty.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\EditSimplePropertyList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\ChooseObjectClass.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainWindowCtrl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ObjectControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\ObjectList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditIntProperty.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\WPFWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SplashScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Client.cs" />
-    <Compile Include="Converter\Converters.cs" />
-    <Compile Include="Renderer.WPF\EditDoubleProperty.xaml.cs">
-      <DependentUpon>EditDoubleProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditPointerPropertyList.xaml.cs">
-      <DependentUpon>EditPointerPropertyList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\DesktopTreeView.xaml.cs">
-      <DependentUpon>DesktopTreeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditSimplePropertyList.xaml.cs">
-      <DependentUpon>EditSimplePropertyList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\GroupBoxWrapper.cs" />
-    <Compile Include="Renderer.WPF\PropertyControl.cs" />
-    <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GUI.DB\KistlGUIContext.cs" />
     <Compile Include="GUI\ApplicationPresenter.cs" />
     <Compile Include="GUI\Presenter.cs" />
     <Compile Include="GUI\Renderer.BasicRenderer.cs" />
-    <Compile Include="MainWindowCtrl.xaml.cs">
-      <DependentUpon>MainWindowCtrl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ObjectControl.xaml.cs">
-      <DependentUpon>ObjectControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GUI.DB\Template.cs" />
     <Compile Include="GUI.DB\Visual.cs" />
-    <Compile Include="Renderer.WPF\ObjectList.xaml.cs">
-      <DependentUpon>ObjectList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\Renderer.cs" />
-    <Compile Include="Renderer.WPF\EditIntProperty.xaml.cs">
-      <DependentUpon>EditIntProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\WPFWindow.xaml.cs">
-      <DependentUpon>WPFWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UndoRedo.cs" />
-    <Compile Include="Renderer.WPF\EditDateTimeProperty.xaml.cs">
-      <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditBoolProperty.xaml.cs">
-      <DependentUpon>EditBoolProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditPointerProperty.xaml.cs">
-      <DependentUpon>EditPointerProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditSimpleProperty.xaml.cs">
-      <DependentUpon>EditSimpleProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ChooseObjectClass.xaml.cs">
-      <DependentUpon>ChooseObjectClass.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -221,9 +90,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -235,9 +101,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
@@ -253,16 +116,15 @@
       <Name>Kistl.Objects.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
-      <Project>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</Project>
-      <Name>WPFSamplesLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ConfigArthur.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ConfigDavid.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DefaultConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

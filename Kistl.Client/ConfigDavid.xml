@@ -2,7 +2,7 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <Address></Address>
   <ConfigName>David's Configuration</ConfigName>
-  <Server StartServer="true">
+  <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>E:\Projekte\Kistl\DocumentStore\Server\</DocumentStore>

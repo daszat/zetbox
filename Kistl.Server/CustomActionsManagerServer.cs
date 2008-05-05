@@ -47,6 +47,7 @@ namespace Kistl.Server
             {
                 foreach (InvokeInfo ii in customAction[obj.Type])
                 {
+                    // TODO: Fix Case 316
                     ii.CLREvent.AddEventHandler(obj, Delegate.CreateDelegate(
                         ii.CLREvent.EventHandlerType, ii.Instance, ii.CLRMethod));
                 }
@@ -55,7 +56,8 @@ namespace Kistl.Server
 
         public void Init()
         {
-            try{
+            try
+            {
                 using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
                     foreach (ObjectClass baseObjClass in ctx.GetQuery<ObjectClass>())
@@ -70,7 +72,7 @@ namespace Kistl.Server
                                     if (mi.Assembly.IsClientAssembly) continue;
 
                                     Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
-                                    System.Diagnostics.Debug.Assert(t != null, string.Format("Type '{0}, {1}' not found", mi.FullTypeName , mi.Assembly.AssemblyName));
+                                    System.Diagnostics.Debug.Assert(t != null, string.Format("Type '{0}, {1}' not found", mi.FullTypeName, mi.Assembly.AssemblyName));
                                     if (t == null) continue;
 
                                     MethodInfo clrMethod = t.GetMethod(mi.MemberName);
