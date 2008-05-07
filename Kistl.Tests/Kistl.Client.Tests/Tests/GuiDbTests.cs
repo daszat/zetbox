@@ -18,7 +18,7 @@ namespace Kistl.Client.Tests
     {
         protected virtual void Init()
         {
-            Init(TestStringControl.Info, TestObject.TestStringProperty);
+            Init(TestStringControl.Info, TestObject.TestStringDescriptor);
         }
 
         [Test]

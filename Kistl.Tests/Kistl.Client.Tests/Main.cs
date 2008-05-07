@@ -13,7 +13,7 @@ namespace Kistl.Client.Tests
             new SetUp().Init();
             var orpt = new ObjectReferencePresenterTests();
             orpt.SetUp();
-            orpt.HandleInvalidUserInput();
+            orpt.HandleProgrammaticChange();
         }
     }
 }

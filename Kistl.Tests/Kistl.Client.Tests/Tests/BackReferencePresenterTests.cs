@@ -22,7 +22,7 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleNoUserInput()
         {
-            Init(TestBackReferenceControl.Info, TestObject.TestBackReferenceProperty);
+            Init(TestBackReferenceControl.Info, TestObject.TestBackReferenceDescriptor);
             Assert.That(obj.TestBackReference, Is.Empty, "BackReferenceProperty should default to empty");
             AssertWidgetHasValidValue();
         }

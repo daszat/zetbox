@@ -130,6 +130,7 @@ namespace Kistl.Client.Tests
         protected abstract TYPE GetWidgetValue();
         protected abstract void SetObjectValue(TYPE v);
         protected abstract void UserInput(TYPE v);
+        protected abstract IList<TYPE> SomeValues();
 
         [Test]
         public void HandleNoUserInput()
@@ -146,6 +147,19 @@ namespace Kistl.Client.Tests
             UserInput(null);
             Assert.IsNull(GetObjectValue());
             AssertWidgetHasValidValue();
+        }
+
+        [Test]
+        public void HandleProgrammaticChange()
+        {
+            AssertWidgetHasValidValue();
+            foreach (var v in SomeValues())
+            {
+                SetObjectValue(v);
+                Assert.AreEqual(v, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(v, GetWidgetValue(), "Widget should display new value");
+                AssertWidgetHasValidValue();
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Kistl.Client.Tests
         [SetUp]
         public void InitControls()
         {
-            Init(TestBoolControl.Info, TestObject.TestBoolProperty);
+            Init(TestBoolControl.Info, TestObject.TestBoolDescriptor);
         }
 
         protected override bool? GetObjectValue() { return obj.TestBool; }

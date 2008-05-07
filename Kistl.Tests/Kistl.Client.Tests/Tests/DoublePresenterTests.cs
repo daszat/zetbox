@@ -16,7 +16,7 @@ namespace Kistl.Client.Tests
         [SetUp]
         public void InitControls()
         {
-            Init(TestDoubleControl.Info, TestObject.TestDoubleProperty);
+            Init(TestDoubleControl.Info, TestObject.TestDoubleDescriptor);
         }
 
         protected override double? GetObjectValue() { return obj.TestDouble; }

@@ -16,7 +16,7 @@ namespace Kistl.Client.Tests
         [SetUp]
         public void InitControls()
         {
-            Init(TestIntControl.Info, TestObject.TestIntProperty);
+            Init(TestIntControl.Info, TestObject.TestIntDescriptor);
         }
 
         protected override int? GetObjectValue() { return obj.TestInt; }

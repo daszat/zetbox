@@ -35,7 +35,7 @@ namespace Kistl.Client.Tests
                 Method("GetEnumerator").
                 Will(Return.Value(ItemsSource.GetEnumerator()));
 
-            Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceProperty);
+            Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
         }
 
         private void AssertWidgetValidity(bool widgetValid)
@@ -67,7 +67,8 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleNoUserInput()
         {
-            Assert.AreEqual(obj.TestObjectReference, null, "ObjectReferenceProperty should default to null");
+            Assert.IsNull(obj.TestObjectReference, "ObjectReferenceProperty should default to null");
+            Assert.IsNull(widget.Value, "widget should be initialised to correct value");
 
             FinalAssert(true);
         }
@@ -81,6 +82,20 @@ namespace Kistl.Client.Tests
             ExpectFind(new ObjectType(typeof(TestObject)), expectedID, ItemsSource.Single(i => i.ID == expectedID));
 
             widget.SimulateUserInput(expectedObject);
+
+            Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
+            Assert.AreEqual(expectedObject, widget.Value, "widget should display correct value");
+
+            FinalAssert(true);
+        }
+
+        [Test]
+        public void HandleProgrammaticChange()
+        {
+            int expectedID = 3;
+            IDataObject expectedObject = ItemsSource.Single(i => i.ID == expectedID);
+
+            obj.TestObjectReference = expectedObject;
 
             Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
             Assert.AreEqual(expectedObject, widget.Value, "widget should display correct value");

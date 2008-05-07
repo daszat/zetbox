@@ -16,14 +16,18 @@ namespace Kistl.Client.Tests
         [SetUp]
         public void InitControls()
         {
-            Init(TestStringControl.Info, TestObject.TestStringProperty);
+            Init(TestStringControl.Info, TestObject.TestStringDescriptor);
         }
 
         protected override string GetObjectValue() { return obj.TestString; }
         protected override string GetWidgetValue() { return widget.Value; }
         protected override void SetObjectValue(string v) { obj.TestString = v; }
         protected override void UserInput(string v) { widget.SimulateUserInput(v); }
-
+        protected override IList<string> SomeValues()
+        {
+            return new List<string>(new[] { "foo", "<xss>", "'!\"§!$%!%`id`$(id)§&''''''''#%$/\\\"$%!°\"§!/%()( -- blah /* blubb */ // hallo", "", });
+        }
+        
         protected void HandleUserInput(string newStringValue)
         {
             AssertWidgetHasValidValue();

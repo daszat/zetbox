@@ -16,7 +16,7 @@ namespace Kistl.Client.Tests
         [SetUp]
         public void InitControls()
         {
-            Init(TestDateTimeControl.Info, TestObject.TestDateTimeProperty);
+            Init(TestDateTimeControl.Info, TestObject.TestDateTimeDescriptor);
         }
 
         protected override DateTime? GetObjectValue() { return obj.TestDateTime; }
