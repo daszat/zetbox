@@ -22,38 +22,11 @@ namespace Kistl.Client
     /// <summary>
     /// Hauptfenster der KistlApplikation
     /// </summary>
-    public partial class MainWindow : Window, IMainUI
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        #region IMainUI Members
-
-        void IMainUI.Show()
-        {
-            Show();
-        }
-
-        void IMainUI.Close()
-        {
-            Close();
-        }
-
-        #endregion
-
-        #region IBasicControl Members
-
-        string IBasicControl.ShortLabel
-        {
-            get { return Title; }
-            set { Title = value; }
-        }
-
-        string IBasicControl.Description { get; set; }
-        FieldSize IBasicControl.Size { get; set; }
-
-        #endregion
     }
 }

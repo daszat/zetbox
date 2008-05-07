@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.GUI.DB;
 
+using NMock2;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.Client.Tests
 {
     public abstract class PresenterTest<CONTROL, PRESENTER>
         where CONTROL : IBasicControl
-        where PRESENTER : Presenter
+        where PRESENTER : IPresenter
     {
         protected TestObject obj { get; set; }
         protected Visual visual { get; set; }
@@ -23,27 +24,42 @@ namespace Kistl.Client.Tests
         protected PresenterInfo pInfo { get; set; }
         protected CONTROL widget { get; set; }
         protected PRESENTER presenter { get; set; }
+        protected static Mockery mocks { get; set; }
+        protected IKistlContext MockContext { get; set; }
 
         protected void Init(ControlInfo ci, BaseProperty bp)
         {
-            obj = new TestObject();
+            if (mocks == null)
+            {
+                mocks = new Mockery();
+            }
+            MockContext = mocks.NewMock<IKistlContext>();
+            obj = new TestObject(MockContext);
+
             visual = new Visual() { Name = ci.Control, Property = bp };
             cInfo = KistlGUIContext.FindControlInfo(Toolkit.TEST, visual);
             pInfo = KistlGUIContext.FindPresenterInfo(visual);
             widget = (CONTROL)KistlGUIContext.CreateControl(cInfo);
             presenter = (PRESENTER)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
         }
+
+        [Test]
+        [ExpectedException(ExceptionType = typeof(InvalidOperationException))]
+        public void ReInit()
+        {
+            presenter.InitializeComponent(obj, visual, widget);
+        }
     }
 
     public abstract class NullablePresenterTests<TYPE, CONTROL, PRESENTER> : PresenterTest<CONTROL, PRESENTER>
         where TYPE : struct
         where CONTROL : IValueControl<TYPE?>
-        where PRESENTER : Presenter
+        where PRESENTER : IPresenter
     {
         protected virtual void AssertWidgetHasValidValue()
         {
-            Assert.That(widget.IsValidValue, Is.True, "the widget should be in a valid state after this operation");
-            Assert.That(GetWidgetValue(), Is.EqualTo(GetObjectValue()), "the widget should have the same value as the object");
+            Assert.That(widget.IsValidValue, "the widget should be in a valid state after this operation");
+            Assert.AreEqual(GetWidgetValue(), GetObjectValue(), "the widget should have the same value as the object");
         }
 
         protected abstract TYPE? GetObjectValue();
@@ -54,7 +70,7 @@ namespace Kistl.Client.Tests
         [Test]
         public void HandleNoUserInput()
         {
-            Assert.That(GetObjectValue(), Is.Null, String.Format("{0} should default to null", visual.Property));
+            Assert.IsNull(GetObjectValue(), String.Format("{0} should default to null", visual.Property));
             AssertWidgetHasValidValue();
         }
 
@@ -63,7 +79,7 @@ namespace Kistl.Client.Tests
         {
             AssertWidgetHasValidValue();
             UserInput(null);
-            Assert.That(obj.TestBool, Is.Null);
+            Assert.IsNull(GetObjectValue());
             AssertWidgetHasValidValue();
         }
     }
@@ -71,19 +87,19 @@ namespace Kistl.Client.Tests
     public abstract class ReferencePresenterTests<TYPE, CONTROL, PRESENTER> : PresenterTest<CONTROL, PRESENTER>
         where TYPE : class
         where CONTROL : IValueControl<TYPE>
-        where PRESENTER : Presenter
+        where PRESENTER : IPresenter
     {
 
         protected virtual void AssertWidgetHasValidValue()
         {
-            Assert.That(widget.IsValidValue, Is.True, "the widget should be in a valid state after this operation");
-            Assert.That(GetWidgetValue(), Is.EqualTo(GetObjectValue()), "the widget should have the same value as the object");
+            Assert.That(widget.IsValidValue, "the widget should be in a valid state after this operation");
+            Assert.AreEqual(GetWidgetValue(), GetObjectValue(), "the widget should have the same value as the object");
         }
 
         protected virtual void AssertWidgetHasInvalidValue()
         {
-            Assert.That(widget.IsValidValue, Is.False, "the widget should be in a invalid state after this operation");
-            Assert.That(GetWidgetValue(), Is.Not.EqualTo(GetObjectValue()), "the widget should not have the same value as the object, because it is invalid");
+            Assert.That(!widget.IsValidValue, "the widget should be in a invalid state after this operation");
+            Assert.AreNotEqual(GetWidgetValue(), GetObjectValue(), "the widget should not have the same value as the object, because it is invalid");
         }
 
         protected abstract TYPE GetObjectValue();
@@ -104,7 +120,7 @@ namespace Kistl.Client.Tests
         {
             AssertWidgetHasValidValue();
             UserInput(null);
-            Assert.That(obj.TestBool, Is.Null);
+            Assert.IsNull(GetObjectValue());
             AssertWidgetHasValidValue();
         }
     }

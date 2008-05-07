@@ -278,4 +278,56 @@ namespace Kistl.Client.Mocks
         }
     }
 
+    public class TestObjectReferenceControl : IPointerControl
+    {
+        public TestObjectReferenceControl()
+        {
+            Description = "TestObjectReferenceControl Description";
+            ShortLabel = "TORC ShortLabel";
+            Size = FieldSize.Full;
+            IsValidValue = true;
+        }
+
+        public readonly static ControlInfo Info
+            = new ControlInfo()
+            {
+                Platform = Toolkit.TEST,
+                Control = VisualType.ObjectReference,
+                Container = false,
+                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Mocks.TestObjectReferenceControl"
+            };
+
+
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+        #region IValueControl Members
+
+        public event EventHandler UserInput;
+        public int Value { get; set; }
+        public bool IsValidValue { get; set; }
+
+        #endregion
+
+        internal void SimulateUserInput(int newValue)
+        {
+            Value = newValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
+
+        #region IPointerControl Members
+
+        public System.Collections.IEnumerable ItemsSource { get; set; }
+        public ObjectType ObjectType { get; set; }
+
+        #endregion
+    }
+
 }

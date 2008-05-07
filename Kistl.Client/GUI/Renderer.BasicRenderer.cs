@@ -51,6 +51,8 @@ namespace Kistl.GUI.Renderer
             var pInfo = KistlGUIContext.FindPresenterInfo(visual);
 
             var widget = KistlGUIContext.CreateControl(cInfo);
+            
+            // TODO: call presenter.Dispose() when window is closed
             var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
 
             if (cInfo.Container)

@@ -12,6 +12,8 @@
     <AssemblyName>Kistl.Client.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,17 +67,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Main.cs" />
     <Compile Include="Mocks\TestControl.cs" />
     <Compile Include="CustomActionsManagerAPITest.cs" />
     <Compile Include="Mocks\TestObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUp.cs" />
+    <Compile Include="Tests\SetUp.cs" />
     <Compile Include="Tests\BackReferencePresenterTests.cs" />
     <Compile Include="Tests\BoolPresenterTests.cs" />
     <Compile Include="Tests\DateTimePresenterTests.cs" />
     <Compile Include="Tests\DoublePresenterTests.cs" />
     <Compile Include="Tests\GuiDbTests.cs" />
     <Compile Include="Tests\IntPresenterTests.cs" />
+    <Compile Include="Tests\ObjectReferencePresenterTests.cs" />
     <Compile Include="Tests\PresenterTest.cs" />
     <Compile Include="Tests\StringPresenterTests.cs" />
   </ItemGroup>
@@ -84,10 +88,17 @@
     <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Kistl.Client.Tests.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Kistl.Client.Tests.nunit" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NMock2\NMock2.csproj">
+      <Project>{CEE959FE-C3AF-4B51-8F1A-CCB32BAA1E98}</Project>
+      <Name>NMock2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

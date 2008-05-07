@@ -9,9 +9,10 @@ namespace Kistl.Client.Mocks
 {
     public class TestObject : IDataObject
     {
-        public TestObject()
+        public TestObject(IKistlContext ctx)
         {
             TestBackReference = new List<IDataObject>();
+            Context = ctx;
         }
 
         #region BackReference Properties
@@ -79,6 +80,17 @@ namespace Kistl.Client.Mocks
             {
                 PropertyName = "TestString",
                 IsNullable = true
+            };
+
+        #endregion
+
+        #region ObjectReference Properties
+
+        public int TestObjectReference { get; set; }
+        public readonly static ObjectReferenceProperty TestObjectReferenceProperty
+            = new MockObjectReferenceProperty()
+            {
+                PropertyName = "TestObjectReference",
             };
 
         #endregion
@@ -162,4 +174,99 @@ namespace Kistl.Client.Mocks
 
         #endregion
     }
+
+    internal class MockObjectReferenceProperty : ObjectReferenceProperty
+    {
+        public override string GetDataType()
+        {
+            return "Kistl.Client.Mocks.MockObjectReferenceProperty";
+        }
+    }
+
+    public class MockContext : IKistlContext
+    {
+        #region IKistlContext Members
+
+        public void Attach(ICollectionEntry e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Attach(IDataObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Create<T>() where T : IDataObject, new()
+        {
+            return default(T);
+        }
+
+        public IDataObject Create(ObjectType type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataObject Create(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(ICollectionEntry e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(IDataObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Detach(ICollectionEntry e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Detach(IDataObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<IDataObject> GetQuery(ObjectType type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<T> GetQuery<T>() where T : IDataObject
+        {
+            return null;
+        }
+
+        public int SubmitChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
 }

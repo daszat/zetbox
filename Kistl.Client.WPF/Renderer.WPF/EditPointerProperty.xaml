@@ -5,7 +5,6 @@
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
     MinWidth="400" 
     x:Name="PointerCtrl" 
-    ShortLabel="Label"
     >
     <DockPanel >
         <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=PointerCtrl, Path=ShortLabel}" Visibility="{Binding ElementName=PointerCtrl, Path=ShowLabel}" />

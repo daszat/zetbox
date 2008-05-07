@@ -50,13 +50,13 @@ namespace Kistl.GUI.DB
             return (IRenderer)Activator.CreateInstance(controlType);
         }
 
-        public static Presenter CreatePresenter(PresenterInfo info, Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
+        public static IPresenter CreatePresenter(PresenterInfo info, Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
         {
             if (info == null)
                 throw new ArgumentNullException("info");
 
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
-            Presenter result = (Presenter)Activator.CreateInstance(controlType);
+            IPresenter result = (IPresenter)Activator.CreateInstance(controlType);
             result.InitializeComponent(obj, v, ctrl);
             return result;
         }
@@ -66,7 +66,6 @@ namespace Kistl.GUI.DB
             return Template.DefaultTemplate(obj.Type);
         }
     }
-
 
     public class ControlInfo
     {
@@ -103,14 +102,14 @@ namespace Kistl.GUI.DB
                 ClassName = "Kistl.GUI.Renderer.WPF.GroupBoxWrapper" },
 
             // other WPF Controls, properties
-            new ControlInfo() { Platform = Toolkit.WPF, Control = VisualType.ObjectList,
-                Container = false,
-                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
-                ClassName = "Kistl.GUI.Renderer.WPF.ObjectList" },
             new ControlInfo() { Platform = Toolkit.WPF, Control = VisualType.ObjectReference,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditPointerProperty" },
+            new ControlInfo() { Platform = Toolkit.WPF, Control = VisualType.ObjectList,
+                Container = false,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.ObjectList" },
 
             new ControlInfo() { Platform = Toolkit.WPF, Control = VisualType.Boolean,
                 Container = false,

@@ -100,10 +100,8 @@ namespace Kistl.GUI.Renderer.WPF
 
         }
 
-
         #region IPointerControl Members
 
-        // these two already exist correctly:
         public ObjectType ObjectType
         {
             get { return (ObjectType)GetValue(ObjectTypeProperty); }
@@ -115,13 +113,6 @@ namespace Kistl.GUI.Renderer.WPF
             DependencyProperty.Register("ObjectType",
                 typeof(ObjectType), typeof(EditPointerProperty),
                 new PropertyMetadata(null));
-
-
-        public int TargetID
-        {
-            get { return (int)Value; }
-            set { Value = value; }
-        }
 
         /// <summary>
         /// The actual Value of this Property
@@ -142,24 +133,19 @@ namespace Kistl.GUI.Renderer.WPF
             base.OnPropertyChanged(e);
             if (e.Property == ValueProperty)
             {
-                OnTargetIDChanged(e);
+                OnUserInput(e);
             }
         }
 
-        protected virtual void OnTargetIDChanged(DependencyPropertyChangedEventArgs e)
+        protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (_TargetIDChanged != null)
+            if (UserInput != null)
             {
-                _TargetIDChanged(this, new EventArgs());
+                UserInput(this, new EventArgs());
             }
         }
 
-        private event EventHandler _TargetIDChanged;
-        public event EventHandler UserInput
-        {
-            add { _TargetIDChanged += value; }
-            remove { _TargetIDChanged -= value; }
-        }
+        public event EventHandler UserInput;
 
         #endregion
     }

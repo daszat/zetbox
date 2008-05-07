@@ -7,18 +7,38 @@ using Kistl.API;
 using Kistl.API.Client;
 using System.Collections;
 using Kistl.GUI.DB;
+using System.ComponentModel;
 
 namespace Kistl.GUI
 {
-
-    public abstract class Presenter
+    public interface IPresenter
     {
+        void InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl);
+    }
+
+    public abstract class Presenter<CONTROL> : IPresenter, IDisposable
+        where CONTROL : IBasicControl
+    {
+        /// <summary>
+        /// Implement IPresenter. Fails fast if given IBasicControl doesn't match the Presenter's expectations.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="v"></param>
+        /// <param name="ctrl"></param>
+        public void InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
+        {
+            InitializeComponent(obj, v, (CONTROL)ctrl);
+        }
+
         /// <summary>
         /// This method initializes the PropertyPresenter.
         /// MUST be called before any other operation
         /// </summary>
-        public void InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
+        public void InitializeComponent(Kistl.API.IDataObject obj, Visual v, CONTROL ctrl)
         {
+            if (_IsInitialised)
+                throw new InvalidOperationException("Presenter was already initialised!");
+
             if (obj == null)
                 throw new ArgumentNullException("obj", "obj==null cannot be presented");
 
@@ -28,43 +48,126 @@ namespace Kistl.GUI
             if (ctrl == null)
                 throw new ArgumentNullException("ctrl", "visual without control cannot be presented");
 
-            _Object = obj;
-            _Preferences = v;
-            _Control = ctrl;
+            _IsInitialised = true;
+
+            Object = obj;
+            Preferences = v;
+            Control = ctrl;
 
             InitializeComponent();
+
         }
+
+        private bool _IsInitialised = false;
 
         /// <summary>
         /// internal setup routine, linking the UI Elements with the object
         /// </summary>
         protected abstract void InitializeComponent();
 
-        private Kistl.API.IDataObject _Object;
-        public Kistl.API.IDataObject Object { get { return _Object; } }
+        public Kistl.API.IDataObject Object { get; private set; }
 
-        private Visual _Preferences;
-        public Visual Preferences { get { return _Preferences; } }
+        public Visual Preferences { get; private set; }
 
-        private IBasicControl _Control;
-        public IBasicControl Control { get { return _Control; } }
+        public CONTROL Control { get; private set; }
+
+        #region IDisposable Members
+
+        // as suggested on http://msdn.microsoft.com/en-us/system.idisposable.aspx
+        // adapted for easier usage when inheriting
+        private bool disposed = false;
+        private void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    // dispose managed resources
+                    // must not be done when running from the finalizer
+                    DisposeManagedResources();
+                }
+                // free native resources
+                DisposeNativeResources();
+
+                this.disposed = true;
+            }
+        }
+
+        protected virtual void DisposeManagedResources() { }
+        protected virtual void DisposeNativeResources() { }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~Presenter()
+        {
+            Dispose(false);
+        }
+
+        #endregion
 
     }
 
-    public class DefaultPresenter<TYPE, PROPERTY> : Presenter
+    public class DefaultPresenter<TYPE, PROPERTY> : DefaultPresenter<TYPE, PROPERTY, IValueControl<TYPE>>
         where PROPERTY : Property
+    {
+    }
+
+    /// <summary>
+    /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
+    /// Additionally basic change handling is implemented.
+    /// </summary>
+    /// <typeparam name="TYPE"></typeparam>
+    /// <typeparam name="PROPERTY"></typeparam>
+    /// <typeparam name="CONTROL"></typeparam>
+    public class DefaultPresenter<TYPE, PROPERTY, CONTROL> : Presenter<CONTROL>
+        where PROPERTY : Property
+        where CONTROL : IValueControl<TYPE>
     {
         public DefaultPresenter() { }
 
+        // localize type-unsafety
+        public PROPERTY Property { get { return (PROPERTY)Preferences.Property; } }
+
+        #region Initialisation
+
         protected override void InitializeComponent()
         {
+
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
+
+            _Object_PropertyChanged = new System.ComponentModel.PropertyChangedEventHandler(Object_PropertyChanged);
+            Object.PropertyChanged += _Object_PropertyChanged;
+
+            _Control_UserInput = new EventHandler(Control_UserInput);
+            Control.UserInput += _Control_UserInput;
+
             Control.Value = Object.GetPropertyValue<TYPE>(Property.PropertyName);
+
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
 
-            Control.UserInput += new EventHandler(Control_UserInput);
+        }
+
+        #endregion
+
+        #region Change Management
+
+        private PropertyChangedEventHandler _Object_PropertyChanged = null;
+        private EventHandler _Control_UserInput = null;
+
+        private void Object_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (sender != Object)
+                throw new InvalidOperationException(String.Format("Resource Leak: _Object_PropertyChanged in '{0}' was called by '{1}', but should be attached to '{2}'",
+                    this, sender, Object));
+
+            if (e.PropertyName == Property.PropertyName)
+                Control.Value = Object.GetPropertyValue<TYPE>(Property.PropertyName);
         }
 
         private void Control_UserInput(object sender, EventArgs e)
@@ -76,11 +179,21 @@ namespace Kistl.GUI
             }
         }
 
-        // localize type-unsafety
-        public PROPERTY Property { get { return (PROPERTY)Preferences.Property; } }
-        // fixup locally used types
-        public new IValueControl<TYPE> Control { get { return (IValueControl<TYPE>)base.Control; } }
+        #endregion
 
+        #region Disposal
+
+        protected override void DisposeManagedResources()
+        {
+            base.DisposeManagedResources();
+            if (Object != null)
+                Object.PropertyChanged -= _Object_PropertyChanged;
+
+            if (Control != null)
+                Control.UserInput -= _Control_UserInput;
+        }
+
+        #endregion
     }
 
     public class BoolPresenter : DefaultPresenter<bool?, BoolProperty> { }
@@ -92,7 +205,7 @@ namespace Kistl.GUI
     /// <summary>
     /// Handles a widget for a group of property
     /// </summary>
-    public class GroupPresenter : Presenter
+    public class GroupPresenter : Presenter<IBasicControl>
     {
         public GroupPresenter() { }
 
@@ -105,53 +218,45 @@ namespace Kistl.GUI
     /// <summary>
     /// Handles the top-level widget for an object
     /// </summary>
-    public class ObjectPresenter : Presenter
+    public class ObjectPresenter : Presenter<IObjectControl>
     {
         public ObjectPresenter() { }
 
         protected override void InitializeComponent()
         {
             Control.ShortLabel = Object.Type.Classname;
-            Control.Description = Object.Type.Classname;
+            Control.Description = String.Format("{0}: {1}", Object.Type.Classname, Object.ToString());
             Control.Value = Object;
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
         }
 
-        // fixup locally used types
-        public new IObjectControl Control { get { return (IObjectControl)base.Control; } }
     }
 
-    public class PointerPresenter : Presenter
+    public class ObjectReferencePresenter : DefaultPresenter<int, ObjectReferenceProperty>
+    {
+        protected override void InitializeComponent()
+        {
+            base.InitializeComponent();
+
+
+        }
+    }
+
+    public class PointerPresenter : DefaultPresenter<int, ObjectReferenceProperty, IPointerControl>
     {
         public PointerPresenter() { }
 
         protected override void InitializeComponent()
         {
-            Control.ShortLabel = Property.PropertyName;
-            Control.Description = Property.AltText;
             Control.ObjectType = new Kistl.API.ObjectType(Property.GetDataType());
             Control.ItemsSource = Object.Context.GetQuery(Control.ObjectType).ToList();
-            Control.TargetID = Object.GetPropertyValue(Property);
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
 
-            Control.UserInput += new EventHandler(Control_TargetIDChanged);
+            base.InitializeComponent();
         }
-
-        private void Control_TargetIDChanged(object sender, EventArgs e)
-        {
-            Object.SetPropertyValue(Property, Control.TargetID);
-        }
-
-        // localize type-unsafety
-        public ObjectReferenceProperty Property { get { return (ObjectReferenceProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IPointerControl Control { get { return (IPointerControl)base.Control; } }
-
     }
 
-    public class ObjectListPresenter : Presenter
+    public class ObjectListPresenter : Presenter<IObjectListControl>
     {
         public ObjectListPresenter() { }
 
@@ -179,11 +284,9 @@ namespace Kistl.GUI
 
         // localize type-unsafety
         public ObjectReferenceProperty Property { get { return (ObjectReferenceProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IObjectListControl Control { get { return (IObjectListControl)base.Control; } }
     }
 
-    public class BackReferencePresenter : Presenter
+    public class BackReferencePresenter : Presenter<IObjectListControl>
     {
         public BackReferencePresenter() { }
 
@@ -198,9 +301,6 @@ namespace Kistl.GUI
 
         // localize type-unsafety
         public BackReferenceProperty Property { get { return (BackReferenceProperty)Preferences.Property; } }
-        // fixup locally used types
-        public new IObjectListControl Control { get { return (IObjectListControl)base.Control; } }
-
     }
 
     public enum FieldSize
@@ -239,19 +339,27 @@ namespace Kistl.GUI
         event /*UserInput<TYPE>*/EventHandler UserInput;
     }
 
+    /// <summary>
+    /// This control displays a List of Values and allows the user to select zero, one or more Items of type TYPE.
+    /// </summary>
+    /// <typeparam name="TYPE">The type of the selectable items</typeparam>
+    public interface ISelectControl<TYPE> : IValueControl<IList<TYPE>>
+    {
+        ICollection<TYPE> ItemsSource { get; set; }
+    }
+
     public interface ISelectControl : IBasicControl
     {
         IEnumerable ItemsSource { get; set; }
     }
 
-    public interface IPointerControl : ISelectControl
+    public interface IPointerControl : IValueControl<int>
     {
         /// <summary>
         /// The ObjectType of the listed Objects
         /// </summary>
         ObjectType ObjectType { get; set; }
-        int TargetID { get; set; }
-        event /*UserInput<int>*/EventHandler UserInput;
+        IEnumerable ItemsSource { get; set; }
     }
 
     public interface IObjectControl : IBasicControl
