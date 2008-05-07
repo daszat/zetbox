@@ -23,35 +23,15 @@ namespace Kistl.Client.Tests
         protected override DateTime? GetWidgetValue() { return widget.Value; }
         protected override void SetObjectValue(DateTime? v) { obj.TestDateTime = v; }
         protected override void UserInput(DateTime? v) { widget.SimulateUserInput(v); }
-
-        protected void HandleUserInput(DateTime newDateTimeValue)
+        protected override IEnumerable<DateTime> SomeValues()
         {
-            AssertWidgetHasValidValue();
-
-            widget.SimulateUserInput(newDateTimeValue);
-
-            Assert.That(obj.TestDateTime, Is.EqualTo(newDateTimeValue));
-            AssertWidgetHasValidValue();
-        }
-
-        [Test]
-        public void HandleExtrema()
-        {
-            foreach (DateTime d in new[] { DateTime.MinValue, DateTime.MaxValue, DateTime.Now, DateTime.Today })
-            {
-                HandleUserInput(d);
-            }
-        }
-
-        [Test]
-        public void HandleConstant()
-        {
+            List<DateTime> result = new List<DateTime>();
+            result.AddRange(new [] { DateTime.MinValue, DateTime.MaxValue, DateTime.Now, DateTime.Today });
             foreach (string s in new[] { "2008-01-01 11:11", "11:11", "2008-01-01" })
             {
-                HandleUserInput(DateTime.Parse(s, System.Globalization.CultureInfo.InvariantCulture));
+                result.Add(DateTime.Parse(s, System.Globalization.CultureInfo.InvariantCulture));
             }
+            return result;
         }
-
-
     }
 }

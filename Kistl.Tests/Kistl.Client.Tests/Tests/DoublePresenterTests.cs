@@ -23,29 +23,14 @@ namespace Kistl.Client.Tests
         protected override double? GetWidgetValue() { return widget.Value; }
         protected override void SetObjectValue(double? v) { obj.TestDouble = v; }
         protected override void UserInput(double? v) { widget.SimulateUserInput(v); }
-
-        protected void HandleUserInput(double newDoubleValue)
+        protected override IEnumerable<double> SomeValues()
         {
-            AssertWidgetHasValidValue();
-
-            widget.SimulateUserInput(newDoubleValue);
-
-            Assert.That(obj.TestDouble, Is.EqualTo(newDoubleValue));
-            AssertWidgetHasValidValue();
-        }
-
-
-        [Test]
-        public void HandleValues()
-        {
-            foreach (double i in new[] {
-                Double.Epsilon, Double.MaxValue, Double.MinValue, Double.NaN, Double.NegativeInfinity, Double.PositiveInfinity,
+            return new List<double>(new double[] {
                 0.0, 0.1, 0.2, 1.1, 123.123e12,
                 -0.0, -0.1, -0.2, -1.1, -123.123e12,
-            })
-            {
-                HandleUserInput(i);
-            }
+                Double.Epsilon, Double.MaxValue, Double.MinValue, Double.NaN, Double.NegativeInfinity, Double.PositiveInfinity,
+            });
         }
+
     }
 }

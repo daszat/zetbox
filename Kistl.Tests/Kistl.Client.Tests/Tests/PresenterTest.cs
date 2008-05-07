@@ -86,10 +86,26 @@ namespace Kistl.Client.Tests
             Assert.AreEqual(GetWidgetValue(), GetObjectValue(), "the widget should have the same value as the object");
         }
 
+        /// <summary>
+        /// return the current Value of the tested Property from the Object
+        /// </summary>
         protected abstract TYPE? GetObjectValue();
+        /// <summary>
+        /// return the current Value which is displayed by the widget
+        /// </summary>
         protected abstract TYPE? GetWidgetValue();
+        /// <summary>
+        /// set the Value of the tested Property on the Object
+        /// </summary>
         protected abstract void SetObjectValue(TYPE? v);
+        /// <summary>
+        /// Simulate user input on the widget
+        /// </summary>
         protected abstract void UserInput(TYPE? v);
+        /// <summary>
+        /// return a list of valid values for the property
+        /// </summary>
+        protected abstract IEnumerable<TYPE> SomeValues();
 
         [Test]
         public void HandleNoUserInput()
@@ -106,6 +122,34 @@ namespace Kistl.Client.Tests
             Assert.IsNull(GetObjectValue());
             AssertWidgetHasValidValue();
         }
+
+        [Test]
+        public void HandleUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            foreach (TYPE? value in SomeValues())
+            {
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
+        [Test]
+        public void HandleProgrammaticChange()
+        {
+            AssertWidgetHasValidValue();
+            foreach (var value in SomeValues())
+            {
+                SetObjectValue(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
     }
 
     public abstract class ReferencePresenterTests<TYPE, CONTROL, PRESENTER> : PresenterTest<CONTROL, PRESENTER>
@@ -126,11 +170,26 @@ namespace Kistl.Client.Tests
             Assert.AreNotEqual(GetWidgetValue(), GetObjectValue(), "the widget should not have the same value as the object, because it is invalid");
         }
 
+        /// <summary>
+        /// return the current Value of the tested Property from the Object
+        /// </summary>
         protected abstract TYPE GetObjectValue();
+        /// <summary>
+        /// return the current Value which is displayed by the widget
+        /// </summary>
         protected abstract TYPE GetWidgetValue();
+        /// <summary>
+        /// set the Value of the tested Property on the Object
+        /// </summary>
         protected abstract void SetObjectValue(TYPE v);
+        /// <summary>
+        /// Simulate user input on the widget
+        /// </summary>
         protected abstract void UserInput(TYPE v);
-        protected abstract IList<TYPE> SomeValues();
+        /// <summary>
+        /// return a list of valid values for the property
+        /// </summary>
+        protected abstract IEnumerable<TYPE> SomeValues();
 
         [Test]
         public void HandleNoUserInput()

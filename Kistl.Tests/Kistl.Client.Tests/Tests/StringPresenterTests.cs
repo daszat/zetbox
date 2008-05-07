@@ -23,48 +23,17 @@ namespace Kistl.Client.Tests
         protected override string GetWidgetValue() { return widget.Value; }
         protected override void SetObjectValue(string v) { obj.TestString = v; }
         protected override void UserInput(string v) { widget.SimulateUserInput(v); }
-        protected override IList<string> SomeValues()
+        protected override IEnumerable<string> SomeValues()
         {
-            return new List<string>(new[] { "foo", "<xss>", "'!\"§!$%!%`id`$(id)§&''''''''#%$/\\\"$%!°\"§!/%()( -- blah /* blubb */ // hallo", "", });
-        }
-        
-        protected void HandleUserInput(string newStringValue)
-        {
-            AssertWidgetHasValidValue();
-
-            widget.SimulateUserInput(newStringValue);
-
-            Assert.That(obj.TestString, Is.EqualTo(newStringValue));
-            AssertWidgetHasValidValue();
-        }
-
-        [Test]
-        public void HandleEmptyString()
-        {
-            HandleUserInput("");
-        }
-
-        [Test]
-        public void HandleNumbers()
-        {
-            foreach (string s in new[] { "00012346789", "0", "0.0", "0.1", "0.002", "10.0e100", "0x120" })
-            {
-                HandleUserInput(s);
-            }
-        }
-
-        [Test]
-        public void HandleStrings()
-        {
-            foreach (string s in new[] { "...", "<xss>", "!'\"§!$§%&/(){}&amp;", "normal string",
+            return new List<string>(new[] { 
+                "foo", "<xss>", "'!\"§!$%!%`id`$(id)§&''''''''#%$/\\\"$%!°\"§!/%()( -- blah /* blubb */ // hallo", "", 
+                "00012346789", "0", "0.0", "0.1", "0.002", "10.0e100", "0x120",
+                "...", "<xss>", "!'\"§!$§%&/(){}&amp;", "normal string",
                 "very long string: very long string: very long string: very long string: very long string: very long string: " +
                 "very long string: very long string: very long string: very long string: very long string: very long string: " +
                 "very long string: very long string: very long string: very long string: very long string: very long string: " +
                 "very long string: very long string: very long string: very long string: very long string: very long string"
-            })
-            {
-                HandleUserInput(s);
-            }
+            });
         }
     }
 }

@@ -24,29 +24,9 @@ namespace Kistl.Client.Tests
         protected override bool? GetWidgetValue() { return widget.Value; }
         protected override void SetObjectValue(bool? v) { obj.TestBool = v; }
         protected override void UserInput(bool? v) { widget.SimulateUserInput(v); }
-
-        protected void HandleUserInput(bool newBoolValue)
+        protected override IEnumerable<bool> SomeValues()
         {
-            AssertWidgetHasValidValue();
-
-            widget.SimulateUserInput(newBoolValue);
-
-            Assert.That(obj.TestBool, Is.EqualTo(newBoolValue));
-            AssertWidgetHasValidValue();
-
+            return new List<bool>(new [] { true, false });
         }
-
-        [Test]
-        public void HandleTrueUserInput()
-        {
-            HandleUserInput(true);
-        }
-
-        [Test]
-        public void HandleFalseUserInput()
-        {
-            HandleUserInput(false);
-        }
-
     }
 }
