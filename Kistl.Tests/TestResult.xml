@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests.nunit" total="1" failures="1" not-run="0" date="2008-05-07" time="09:51:21">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 6.0.6000.0" platform="Win32NT" cwd="E:\Program Files\NUnit 2.4.7\bin" machine-name="KISTL" user="david" user-domain="kistl" />
+  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
+  <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests.nunit" success="False" time="1.591" asserts="0">
+    <results>
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\Integration.Tests\bin\Debug\Integration.Tests.dll" success="False" time="1.560" asserts="0">
+        <results>
+          <test-suite name="Integration" success="False" time="1.560" asserts="0">
+            <results>
+              <test-suite name="Tests" success="False" time="1.560" asserts="0">
+                <failure>
+                  <message><![CDATA[System.IO.FileNotFoundException : Die Datei oder Assembly Kistl.Server oder eine Abhängigkeit davon wurde nicht gefunden. Das System kann die angegebene Datei nicht finden.]]></message>
+                  <stack-trace><![CDATA[bei System.Reflection.Assembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, Assembly locationHint, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, Boolean forIntrospection)
+bei System.Reflection.Assembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, Assembly locationHint, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, Boolean forIntrospection)
+bei System.Reflection.Assembly.InternalLoad(AssemblyName assemblyRef, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+bei System.Reflection.Assembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+bei System.Activator.CreateInstance(String assemblyName, String typeName, Boolean ignoreCase, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, Evidence securityInfo, StackCrawlMark& stackMark)
+bei System.Activator.CreateInstance(String assemblyName, String typeName)
+bei System.AppDomain.CreateInstance(String assemblyName, String typeName)
+bei System.AppDomain.CreateInstanceAndUnwrap(String assemblyName, String typeName)
+bei System.AppDomain.CreateInstanceAndUnwrap(String assemblyName, String typeName)
+bei Kistl.Client.Client.Start() in E:\Projekte\Kistl\Kistl.Client\Client.cs:Zeile 50.
+bei Integration.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Integration.Tests\SetUp.cs:Zeile 26.
+]]></stack-trace>
+                </failure>
+                <results>
+                  <test-case name="Integration.Tests.Tests.GeneratorTests.Generate" executed="True" success="False" time="0.000" asserts="0">
+                    <failure>
+                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+                      <stack-trace />
+                    </failure>
+                  </test-case>
+                  <test-suite name="Integration.Tests.Tests.GeneratorTests" success="False" time="0.000" asserts="0">
+                    <results />
+                  </test-suite>
+                  <test-suite name="Integration.Tests.Tests" success="False" time="0.000" asserts="0">
+                    <results />
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]E:\Projekte\Kistl\Kistl.Tests\CompleteTests.nunit</TopNode>
+  <SelectedNode>[0-1233]E:\Projekte\Kistl\Kistl.Tests\Integration.Tests\bin\Debug\Integration.Tests.dll</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]E:\Projekte\Kistl\Kistl.Tests\CompleteTests.nunit" Expanded="true">
+      <Nodes>
+        <Node UniqueName="[0-1047]E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.dll">
+          <Nodes>
+            <Node UniqueName="[0-1048]Kistl" Expanded="true">
+              <Nodes>
+                <Node UniqueName="[0-1049]Kistl.Client" Expanded="true">
+                  <Nodes>
+                    <Node UniqueName="[0-1016]Kistl.Client.Tests.SetUp" Expanded="true">
+                      <Nodes>
+                        <Node UniqueName="[0-1027]Kistl.Client.Tests.BackReferencePresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1028]Kistl.Client.Tests.BackReferencePresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1029]Kistl.Client.Tests.BackReferencePresenterTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1041]Kistl.Client.Tests.BoolPresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1043]Kistl.Client.Tests.BoolPresenterTests.HandleFalseUserInput" />
+                            <Node UniqueName="[0-1044]Kistl.Client.Tests.BoolPresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1045]Kistl.Client.Tests.BoolPresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1042]Kistl.Client.Tests.BoolPresenterTests.HandleTrueUserInput" />
+                            <Node UniqueName="[0-1046]Kistl.Client.Tests.BoolPresenterTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1030]Kistl.Client.Tests.DateTimePresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1032]Kistl.Client.Tests.DateTimePresenterTests.HandleConstant" />
+                            <Node UniqueName="[0-1031]Kistl.Client.Tests.DateTimePresenterTests.HandleExtrema" />
+                            <Node UniqueName="[0-1033]Kistl.Client.Tests.DateTimePresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1034]Kistl.Client.Tests.DateTimePresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1035]Kistl.Client.Tests.DateTimePresenterTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1011]Kistl.Client.Tests.DoublePresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1013]Kistl.Client.Tests.DoublePresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1014]Kistl.Client.Tests.DoublePresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1012]Kistl.Client.Tests.DoublePresenterTests.HandleValues" />
+                            <Node UniqueName="[0-1015]Kistl.Client.Tests.DoublePresenterTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1017]Kistl.Client.Tests.GuiDbTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1020]Kistl.Client.Tests.GuiDbTests.CreateControl" />
+                            <Node UniqueName="[0-1021]Kistl.Client.Tests.GuiDbTests.CreatePresenter" />
+                            <Node UniqueName="[0-1022]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoInfo" />
+                            <Node UniqueName="[0-1023]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoObject" />
+                            <Node UniqueName="[0-1024]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoVisual" />
+                            <Node UniqueName="[0-1025]Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoWidget" />
+                            <Node UniqueName="[0-1018]Kistl.Client.Tests.GuiDbTests.FindControlInfo" />
+                            <Node UniqueName="[0-1019]Kistl.Client.Tests.GuiDbTests.FindPresenterInfo" />
+                            <Node UniqueName="[0-1026]Kistl.Client.Tests.GuiDbTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1036]Kistl.Client.Tests.IntPresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1038]Kistl.Client.Tests.IntPresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1039]Kistl.Client.Tests.IntPresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1037]Kistl.Client.Tests.IntPresenterTests.HandleValues" />
+                            <Node UniqueName="[0-1040]Kistl.Client.Tests.IntPresenterTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1001]Kistl.Client.Tests.ObjectReferencePresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1002]Kistl.Client.Tests.ObjectReferencePresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1003]Kistl.Client.Tests.ObjectReferencePresenterTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1004]Kistl.Client.Tests.StringPresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1005]Kistl.Client.Tests.StringPresenterTests.HandleEmptyString" />
+                            <Node UniqueName="[0-1008]Kistl.Client.Tests.StringPresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1009]Kistl.Client.Tests.StringPresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1006]Kistl.Client.Tests.StringPresenterTests.HandleNumbers" />
+                            <Node UniqueName="[0-1007]Kistl.Client.Tests.StringPresenterTests.HandleStrings" />
+                            <Node UniqueName="[0-1010]Kistl.Client.Tests.StringPresenterTests.ReInit" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+        <Node UniqueName="[0-1107]E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\bin\Debug\API.Server.Tests.dll">
+          <Nodes>
+            <Node UniqueName="[0-1108]API">
+              <Nodes>
+                <Node UniqueName="[0-1109]API.Server">
+                  <Nodes>
+                    <Node UniqueName="[0-1106]API.Server.Tests.SetUp">
+                      <Nodes>
+                        <Node UniqueName="[0-1111]API.Server.Tests.Tests">
+                          <Nodes>
+                            <Node UniqueName="[0-1077]API.Server.Tests.Tests.BaseServerCollectionEntryTests">
+                              <Nodes>
+                                <Node UniqueName="[0-1080]API.Server.Tests.Tests.BaseServerCollectionEntryTests.Clone" />
+                                <Node UniqueName="[0-1078]API.Server.Tests.Tests.BaseServerCollectionEntryTests.CopyTo" />
+                                <Node UniqueName="[0-1079]API.Server.Tests.Tests.BaseServerCollectionEntryTests.CopyTo_Null" />
+                                <Node UniqueName="[0-1083]API.Server.Tests.Tests.BaseServerCollectionEntryTests.FromStream_Null_Context" />
+                                <Node UniqueName="[0-1084]API.Server.Tests.Tests.BaseServerCollectionEntryTests.FromStream_Null_StreamReader" />
+                                <Node UniqueName="[0-1085]API.Server.Tests.Tests.BaseServerCollectionEntryTests.NotifyPropertyChanged_ing" />
+                                <Node UniqueName="[0-1082]API.Server.Tests.Tests.BaseServerCollectionEntryTests.Stream" />
+                                <Node UniqueName="[0-1081]API.Server.Tests.Tests.BaseServerCollectionEntryTests.ToStream_Null" />
+                              </Nodes>
+                            </Node>
+                            <Node UniqueName="[0-1086]API.Server.Tests.Tests.BaseServerDataObjectTests">
+                              <Nodes>
+                                <Node UniqueName="[0-1104]API.Server.Tests.Tests.BaseServerDataObjectTests.AttachToContext" />
+                                <Node UniqueName="[0-1098]API.Server.Tests.Tests.BaseServerDataObjectTests.Clone" />
+                                <Node UniqueName="[0-1096]API.Server.Tests.Tests.BaseServerDataObjectTests.CopyTo" />
+                                <Node UniqueName="[0-1097]API.Server.Tests.Tests.BaseServerDataObjectTests.CopyTo_Null" />
+                                <Node UniqueName="[0-1105]API.Server.Tests.Tests.BaseServerDataObjectTests.DetachFromContext" />
+                                <Node UniqueName="[0-1088]API.Server.Tests.Tests.BaseServerDataObjectTests.EventAttached" />
+                                <Node UniqueName="[0-1101]API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_Null_Context" />
+                                <Node UniqueName="[0-1102]API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_Null_StreamReader" />
+                                <Node UniqueName="[0-1103]API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_WrongType" />
+                                <Node UniqueName="[0-1094]API.Server.Tests.Tests.BaseServerDataObjectTests.NotifyChange" />
+                                <Node UniqueName="[0-1095]API.Server.Tests.Tests.BaseServerDataObjectTests.NotifyPropertyChanged_ing" />
+                                <Node UniqueName="[0-1089]API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject" />
+                                <Node UniqueName="[0-1091]API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject_Modified" />
+                                <Node UniqueName="[0-1093]API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_New_then_UnModified" />
+                                <Node UniqueName="[0-1090]API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID" />
+                                <Node UniqueName="[0-1092]API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID_Modified" />
+                                <Node UniqueName="[0-1100]API.Server.Tests.Tests.BaseServerDataObjectTests.Stream" />
+                                <Node UniqueName="[0-1099]API.Server.Tests.Tests.BaseServerDataObjectTests.ToStream_Null" />
+                                <Node UniqueName="[0-1087]API.Server.Tests.Tests.BaseServerDataObjectTests.Type" />
+                              </Nodes>
+                            </Node>
+                            <Node UniqueName="[0-1051]API.Server.Tests.Tests.KistlDataContextTests">
+                              <Nodes>
+                                <Node UniqueName="[0-1068]API.Server.Tests.Tests.KistlDataContextTests.Attach_ICollectionEntry" />
+                                <Node UniqueName="[0-1067]API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_Existing" />
+                                <Node UniqueName="[0-1066]API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_New" />
+                                <Node UniqueName="[0-1056]API.Server.Tests.Tests.KistlDataContextTests.CleanUpSession" />
+                                <Node UniqueName="[0-1069]API.Server.Tests.Tests.KistlDataContextTests.Create_Generic" />
+                                <Node UniqueName="[0-1071]API.Server.Tests.Tests.KistlDataContextTests.Create_ObjectType" />
+                                <Node UniqueName="[0-1070]API.Server.Tests.Tests.KistlDataContextTests.Create_Type" />
+                                <Node UniqueName="[0-1073]API.Server.Tests.Tests.KistlDataContextTests.Delete_ICollectionEntry" />
+                                <Node UniqueName="[0-1072]API.Server.Tests.Tests.KistlDataContextTests.Delete_IDataObject" />
+                                <Node UniqueName="[0-1076]API.Server.Tests.Tests.KistlDataContextTests.Detach_ICollectionEntry" />
+                                <Node UniqueName="[0-1075]API.Server.Tests.Tests.KistlDataContextTests.Detach_IDataObject" />
+                                <Node UniqueName="[0-1074]API.Server.Tests.Tests.KistlDataContextTests.Detach_IDataObject_Failed" />
+                                <Node UniqueName="[0-1052]API.Server.Tests.Tests.KistlDataContextTests.GetContext" />
+                                <Node UniqueName="[0-1059]API.Server.Tests.Tests.KistlDataContextTests.GetListOf" />
+                                <Node UniqueName="[0-1060]API.Server.Tests.Tests.KistlDataContextTests.GetListOf_ObjType" />
+                                <Node UniqueName="[0-1061]API.Server.Tests.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" />
+                                <Node UniqueName="[0-1057]API.Server.Tests.Tests.KistlDataContextTests.GetQuery" />
+                                <Node UniqueName="[0-1058]API.Server.Tests.Tests.KistlDataContextTests.GetQuery_ObjType" />
+                                <Node UniqueName="[0-1053]API.Server.Tests.Tests.KistlDataContextTests.InitSession" />
+                                <Node UniqueName="[0-1054]API.Server.Tests.Tests.KistlDataContextTests.InitSessionTwice" />
+                                <Node UniqueName="[0-1055]API.Server.Tests.Tests.KistlDataContextTests.NoSession" />
+                                <Node UniqueName="[0-1062]API.Server.Tests.Tests.KistlDataContextTests.SelectSomeData" />
+                                <Node UniqueName="[0-1063]API.Server.Tests.Tests.KistlDataContextTests.SelectSomeData_Collection" />
+                                <Node UniqueName="[0-1065]API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SaveChanges" />
+                                <Node UniqueName="[0-1064]API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" />
+                              </Nodes>
+                            </Node>
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+        <Node UniqueName="[0-1207]E:\Projekte\Kistl\Kistl.Tests\API.Tests\bin\Debug\API.Tests.dll">
+          <Nodes>
+            <Node UniqueName="[0-1208]API">
+              <Nodes>
+                <Node UniqueName="[0-1148]API.Tests.SetUp">
+                  <Nodes>
+                    <Node UniqueName="[0-1210]API.Tests.Tests">
+                      <Nodes>
+                        <Node UniqueName="[0-1140]API.Tests.Tests.APIInitTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1141]API.Tests.Tests.APIInitTest.SecondInitFail" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1203]API.Tests.Tests.AssemblyLoaderTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1206]API.Tests.Tests.AssemblyLoaderTests.AssemblyResolve" />
+                            <Node UniqueName="[0-1204]API.Tests.Tests.AssemblyLoaderTests.Load" />
+                            <Node UniqueName="[0-1205]API.Tests.Tests.AssemblyLoaderTests.ReflectionOnlyLoadFrom" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1116]API.Tests.Tests.BinarySerializerTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1117]API.Tests.Tests.BinarySerializerTests.Bool" />
+                            <Node UniqueName="[0-1118]API.Tests.Tests.BinarySerializerTests.BoolNull" />
+                            <Node UniqueName="[0-1119]API.Tests.Tests.BinarySerializerTests.BoolNullValue" />
+                            <Node UniqueName="[0-1120]API.Tests.Tests.BinarySerializerTests.DateTime" />
+                            <Node UniqueName="[0-1121]API.Tests.Tests.BinarySerializerTests.DateTimeNull" />
+                            <Node UniqueName="[0-1129]API.Tests.Tests.BinarySerializerTests.Double" />
+                            <Node UniqueName="[0-1130]API.Tests.Tests.BinarySerializerTests.DoubleNull" />
+                            <Node UniqueName="[0-1131]API.Tests.Tests.BinarySerializerTests.DoubleNullValue" />
+                            <Node UniqueName="[0-1125]API.Tests.Tests.BinarySerializerTests.Enum" />
+                            <Node UniqueName="[0-1126]API.Tests.Tests.BinarySerializerTests.Float" />
+                            <Node UniqueName="[0-1127]API.Tests.Tests.BinarySerializerTests.FloatNull" />
+                            <Node UniqueName="[0-1128]API.Tests.Tests.BinarySerializerTests.FloatNullValue" />
+                            <Node UniqueName="[0-1137]API.Tests.Tests.BinarySerializerTests.ICollection_ICollectionEntry" />
+                            <Node UniqueName="[0-1138]API.Tests.Tests.BinarySerializerTests.ICollection_ObservableCollection_ICollectionEntry" />
+                            <Node UniqueName="[0-1136]API.Tests.Tests.BinarySerializerTests.IEnumerable_IDataObject" />
+                            <Node UniqueName="[0-1122]API.Tests.Tests.BinarySerializerTests.Int" />
+                            <Node UniqueName="[0-1123]API.Tests.Tests.BinarySerializerTests.IntNull" />
+                            <Node UniqueName="[0-1124]API.Tests.Tests.BinarySerializerTests.IntNullValue" />
+                            <Node UniqueName="[0-1134]API.Tests.Tests.BinarySerializerTests.ObjectType" />
+                            <Node UniqueName="[0-1135]API.Tests.Tests.BinarySerializerTests.ObjectTypeNull" />
+                            <Node UniqueName="[0-1139]API.Tests.Tests.BinarySerializerTests.SerializableExpression" />
+                            <Node UniqueName="[0-1132]API.Tests.Tests.BinarySerializerTests.String" />
+                            <Node UniqueName="[0-1133]API.Tests.Tests.BinarySerializerTests.StringNull" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1201]API.Tests.Tests.CustomActionsManagerFactoryTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1202]API.Tests.Tests.CustomActionsManagerFactoryTests.Init_Fail" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1112]API.Tests.Tests.ExpressionFilterTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1114]API.Tests.Tests.ExpressionFilterTest.IllegalExpression" />
+                            <Node UniqueName="[0-1115]API.Tests.Tests.ExpressionFilterTest.IllegalExpressionClass_UnknownToString" />
+                            <Node UniqueName="[0-1113]API.Tests.Tests.ExpressionFilterTest.LegalExpression" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1199]API.Tests.Tests.ExpressionTreeVisitorTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1200]API.Tests.Tests.ExpressionTreeVisitorTests.Visit" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1184]API.Tests.Tests.ExtensionHelpersTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1194]API.Tests.Tests.ExtensionHelpersTest.Clone_List" />
+                            <Node UniqueName="[0-1196]API.Tests.Tests.ExtensionHelpersTest.Clone_NotifyingObservableCollection" />
+                            <Node UniqueName="[0-1195]API.Tests.Tests.ExtensionHelpersTest.Clone_ObservableCollection" />
+                            <Node UniqueName="[0-1192]API.Tests.Tests.ExtensionHelpersTest.ForEach_IEnumerable" />
+                            <Node UniqueName="[0-1193]API.Tests.Tests.ExtensionHelpersTest.ForEach_ObservableCollection" />
+                            <Node UniqueName="[0-1188]API.Tests.Tests.ExtensionHelpersTest.GetPropertyValue" />
+                            <Node UniqueName="[0-1190]API.Tests.Tests.ExtensionHelpersTest.GetPropertyValue_InvalidPropertyName" />
+                            <Node UniqueName="[0-1186]API.Tests.Tests.ExtensionHelpersTest.In" />
+                            <Node UniqueName="[0-1187]API.Tests.Tests.ExtensionHelpersTest.InFalse" />
+                            <Node UniqueName="[0-1189]API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue" />
+                            <Node UniqueName="[0-1191]API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue_InvalidPropertyName" />
+                            <Node UniqueName="[0-1185]API.Tests.Tests.ExtensionHelpersTest.XmlString" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1142]API.Tests.Tests.KistlConfigTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1143]API.Tests.Tests.KistlConfigTests.Current" />
+                            <Node UniqueName="[0-1144]API.Tests.Tests.KistlConfigTests.FromStream" />
+                            <Node UniqueName="[0-1145]API.Tests.Tests.KistlConfigTests.FromTextReader" />
+                            <Node UniqueName="[0-1146]API.Tests.Tests.KistlConfigTests.ToFile" />
+                            <Node UniqueName="[0-1147]API.Tests.Tests.KistlConfigTests.ToStream" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1197]API.Tests.Tests.KistlServiceStreamsMessageTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1198]API.Tests.Tests.KistlServiceStreamsMessageTests.Stream" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1149]API.Tests.Tests.LinqExtensionsTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1150]API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition" />
+                            <Node UniqueName="[0-1151]API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidProperty" />
+                            <Node UniqueName="[0-1152]API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidType" />
+                            <Node UniqueName="[0-1153]API.Tests.Tests.LinqExtensionsTests.AddFilter" />
+                            <Node UniqueName="[0-1154]API.Tests.Tests.LinqExtensionsTests.AddFilter_IllegalExpression" />
+                            <Node UniqueName="[0-1155]API.Tests.Tests.LinqExtensionsTests.AddOrderBy" />
+                            <Node UniqueName="[0-1156]API.Tests.Tests.LinqExtensionsTests.AddOrderBy_WithQuote" />
+                            <Node UniqueName="[0-1157]API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_Constant" />
+                            <Node UniqueName="[0-1160]API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_LambdaExpression" />
+                            <Node UniqueName="[0-1159]API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Field" />
+                            <Node UniqueName="[0-1158]API.Tests.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Property" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1180]API.Tests.Tests.NotifyingObservableCollectionTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1182]API.Tests.Tests.NotifyingObservableCollectionTests.Event" />
+                            <Node UniqueName="[0-1181]API.Tests.Tests.NotifyingObservableCollectionTests.List" />
+                            <Node UniqueName="[0-1183]API.Tests.Tests.NotifyingObservableCollectionTests.SetItem" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1166]API.Tests.Tests.ObjectTypeTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1170]API.Tests.Tests.ObjectTypeTests.Constructor_Empty" />
+                            <Node UniqueName="[0-1171]API.Tests.Tests.ObjectTypeTests.Constructor_IDataObject" />
+                            <Node UniqueName="[0-1174]API.Tests.Tests.ObjectTypeTests.Constructor_Namespace_Classname" />
+                            <Node UniqueName="[0-1173]API.Tests.Tests.ObjectTypeTests.Constructor_String" />
+                            <Node UniqueName="[0-1172]API.Tests.Tests.ObjectTypeTests.Constructor_Type" />
+                            <Node UniqueName="[0-1179]API.Tests.Tests.ObjectTypeTests.HashCode" />
+                            <Node UniqueName="[0-1168]API.Tests.Tests.ObjectTypeTests.InitAssembly" />
+                            <Node UniqueName="[0-1169]API.Tests.Tests.ObjectTypeTests.InitFail" />
+                            <Node UniqueName="[0-1167]API.Tests.Tests.ObjectTypeTests.InitString" />
+                            <Node UniqueName="[0-1175]API.Tests.Tests.ObjectTypeTests.NewDataObject" />
+                            <Node UniqueName="[0-1176]API.Tests.Tests.ObjectTypeTests.NewDataObject_Empty" />
+                            <Node UniqueName="[0-1177]API.Tests.Tests.ObjectTypeTests.NewDataObject_TypeNotFound" />
+                            <Node UniqueName="[0-1178]API.Tests.Tests.ObjectTypeTests.NewDataObject_TypeNotIDataObject" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1161]API.Tests.Tests.SerializableExpressionTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1162]API.Tests.Tests.SerializableExpressionTests.FromExpression_Null" />
+                            <Node UniqueName="[0-1164]API.Tests.Tests.SerializableExpressionTests.SerializableType_InvalidType" />
+                            <Node UniqueName="[0-1165]API.Tests.Tests.SerializableExpressionTests.SerializableType_InvalidType_Generic" />
+                            <Node UniqueName="[0-1163]API.Tests.Tests.SerializableExpressionTests.SerializableType_Valid" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+        <Node UniqueName="[0-1233]E:\Projekte\Kistl\Kistl.Tests\Integration.Tests\bin\Debug\Integration.Tests.dll">
+          <Nodes>
+            <Node UniqueName="[0-1234]Integration" Expanded="true">
+              <Nodes>
+                <Node UniqueName="[0-1211]Integration.Tests.SetUp" Expanded="true">
+                  <Nodes>
+                    <Node UniqueName="[0-1236]Integration.Tests.Tests" Expanded="true">
+                      <Nodes>
+                        <Node UniqueName="[0-1225]Integration.Tests.Tests.GeneratorTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[0-1226]Integration.Tests.Tests.GeneratorTests.Generate" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1227]Integration.Tests.Tests.GetListTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1228]Integration.Tests.Tests.GetListTests.GetList" />
+                            <Node UniqueName="[0-1230]Integration.Tests.Tests.GetListTests.GetListWithOrderBy" />
+                            <Node UniqueName="[0-1232]Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" />
+                            <Node UniqueName="[0-1231]Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" />
+                            <Node UniqueName="[0-1229]Integration.Tests.Tests.GetListTests.GetListWithTop10" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1212]Integration.Tests.Tests.InheritanceTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1213]Integration.Tests.Tests.InheritanceTests.GetListOfInheritedObjects" />
+                            <Node UniqueName="[0-1214]Integration.Tests.Tests.InheritanceTests.UpdateInheritedObject" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1221]Integration.Tests.Tests.ListPropetiesTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1224]Integration.Tests.Tests.ListPropetiesTests.AddStringListPropertyContent" />
+                            <Node UniqueName="[0-1223]Integration.Tests.Tests.ListPropetiesTests.GetPointerListPropertyContent" />
+                            <Node UniqueName="[0-1222]Integration.Tests.Tests.ListPropetiesTests.GetStringListPropertyContent" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1215]Integration.Tests.Tests.ObjectTests">
+                          <Nodes>
+                            <Node UniqueName="[0-1217]Integration.Tests.Tests.ObjectTests.GetListOf" />
+                            <Node UniqueName="[0-1218]Integration.Tests.Tests.ObjectTests.GetListOf_List" />
+                            <Node UniqueName="[0-1216]Integration.Tests.Tests.ObjectTests.GetObject" />
+                            <Node UniqueName="[0-1220]Integration.Tests.Tests.ObjectTests.NewObject" />
+                            <Node UniqueName="[0-1219]Integration.Tests.Tests.ObjectTests.SetObject" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+        <Node UniqueName="[0-1324]E:\Projekte\Kistl\Kistl.Tests\NMock2.AcceptanceTests\obj\Debug\NMock2.AcceptanceTests.dll">
+          <Nodes>
+            <Node UniqueName="[0-1325]NMock2">
+              <Nodes>
+                <Node UniqueName="[0-1326]NMock2.AcceptanceTests">
+                  <Nodes>
+                    <Node UniqueName="[0-1239]NMock2.AcceptanceTests.ArgumentMatchingAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1240]NMock2.AcceptanceTests.ArgumentMatchingAcceptanceTest.CanMixMatcherAndNonMatcherExpectedArguments" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1294]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1302]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAddToNonexistentEvent" />
+                        <Node UniqueName="[0-1295]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodOnAnRealObject" />
+                        <Node UniqueName="[0-1296]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodThatDoesNotExistInTheMockedType" />
+                        <Node UniqueName="[0-1297]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodWithAnInvalidName" />
+                        <Node UniqueName="[0-1298]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfAnInvalidProperty" />
+                        <Node UniqueName="[0-1300]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfIndexerIfNoIndexerInMockedType" />
+                        <Node UniqueName="[0-1303]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectRemoveFromNonexistentEvent" />
+                        <Node UniqueName="[0-1299]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfAnInvalidProperty" />
+                        <Node UniqueName="[0-1301]NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfIndexerIfNoIndexerInMockedType" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1289]NMock2.AcceptanceTests.ErrorMessageDemo">
+                      <Nodes>
+                        <Node UniqueName="[0-1293]NMock2.AcceptanceTests.ErrorMessageDemo.EventAdd" />
+                        <Node UniqueName="[0-1292]NMock2.AcceptanceTests.ErrorMessageDemo.IndexerSet" />
+                        <Node UniqueName="[0-1291]NMock2.AcceptanceTests.ErrorMessageDemo.UnexpectedInvocation" />
+                        <Node UniqueName="[0-1290]NMock2.AcceptanceTests.ErrorMessageDemo.VerifyFailure" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1245]NMock2.AcceptanceTests.EventsAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1246]NMock2.AcceptanceTests.EventsAcceptanceTest.CanExpectEventAdd" />
+                        <Node UniqueName="[0-1247]NMock2.AcceptanceTests.EventsAcceptanceTest.CanExpectEventRemove" />
+                        <Node UniqueName="[0-1248]NMock2.AcceptanceTests.EventsAcceptanceTest.DelegatesCanBeComparedToEquality" />
+                        <Node UniqueName="[0-1251]NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlersCanBeRemovedDuringEventHandling" />
+                        <Node UniqueName="[0-1250]NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlingByMocksRespectsAdditionAndRemovalOfListeners" />
+                        <Node UniqueName="[0-1249]NMock2.AcceptanceTests.EventsAcceptanceTest.EventsCanBeRaisedDuringTests" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1237]NMock2.AcceptanceTests.Example">
+                      <Nodes>
+                        <Node UniqueName="[0-1238]NMock2.AcceptanceTests.Example.KnockKnockJoke" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1254]NMock2.AcceptanceTests.ExpectationsAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1273]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.ExpectationsCanOverrideStubs" />
+                        <Node UniqueName="[0-1261]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtLeastNTimesButCalledLessThanNTimes" />
+                        <Node UniqueName="[0-1266]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtMostNTimesAndCalledMoreThanNTimes" />
+                        <Node UniqueName="[0-1268]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedBetweenNAndMTimesAndCalledMoreThanMTimes" />
+                        <Node UniqueName="[0-1267]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedBetweenNAndMTimesButCalledLessThanNTimes" />
+                        <Node UniqueName="[0-1257]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedOnceButCalledTwice" />
+                        <Node UniqueName="[0-1255]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedOnceButNotCalled" />
+                        <Node UniqueName="[0-1272]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsActuallyCalled" />
+                        <Node UniqueName="[0-1270]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsCalled" />
+                        <Node UniqueName="[0-1263]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledMoreThanNTimes" />
+                        <Node UniqueName="[0-1262]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledNTimes" />
+                        <Node UniqueName="[0-1264]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtMostNTimesAndCalledLessThanNTimes" />
+                        <Node UniqueName="[0-1265]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtMostNTimesAndCalledNTimes" />
+                        <Node UniqueName="[0-1269]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedBetweenNAndMTimesAndCalledBetweenNAndMTimes" />
+                        <Node UniqueName="[0-1256]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedOnceAndCalled" />
+                        <Node UniqueName="[0-1271]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodNeverExpectedIsNeverCalled" />
+                        <Node UniqueName="[0-1260]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldFailIfExpectedExactlyNTimesAndCalledLessThanNTimes" />
+                        <Node UniqueName="[0-1259]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldFailIfExpectedExactlyNTimesAndCalledMoreThanNTimes" />
+                        <Node UniqueName="[0-1258]NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldPassIfExpectedExactlyNTimesAndCalledNTimes" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1284]NMock2.AcceptanceTests.IndexersAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1285]NMock2.AcceptanceTests.IndexersAcceptanceTest.CanExpectIndexedGetter" />
+                        <Node UniqueName="[0-1286]NMock2.AcceptanceTests.IndexersAcceptanceTest.CanExpectIndexedSetter" />
+                        <Node UniqueName="[0-1287]NMock2.AcceptanceTests.IndexersAcceptanceTest.ErrorMessagesContainNameOfIndexedGetterNotHiddenMethod" />
+                        <Node UniqueName="[0-1288]NMock2.AcceptanceTests.IndexersAcceptanceTest.ErrorMessagesContainNameOfPropertySetterNotHiddenMethod" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1309]NMock2.AcceptanceTests.MockeryAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1310]NMock2.AcceptanceTests.MockeryAcceptanceTest.CallingVerifyOnMockeryShouldEnableMockeryToBeUsedSuccessfullyForOtherTests" />
+                        <Node UniqueName="[0-1312]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockEmptyInterface" />
+                        <Node UniqueName="[0-1317]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs1" />
+                        <Node UniqueName="[0-1318]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs2" />
+                        <Node UniqueName="[0-1319]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs3" />
+                        <Node UniqueName="[0-1320]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs4" />
+                        <Node UniqueName="[0-1321]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs5" />
+                        <Node UniqueName="[0-1322]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs6" />
+                        <Node UniqueName="[0-1323]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockMixedInterface" />
+                        <Node UniqueName="[0-1311]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockObjectsMayBePlacedIntoServiceContainers" />
+                        <Node UniqueName="[0-1314]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterface" />
+                        <Node UniqueName="[0-1316]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterfaceWithArgs" />
+                        <Node UniqueName="[0-1313]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterface" />
+                        <Node UniqueName="[0-1315]NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterfaceWithArgs" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1274]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1278]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.AllowsCallsIfCalledInSameOrderAsExpectedWithinAnInOrderBlock" />
+                        <Node UniqueName="[0-1283]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CallsInOrderedBlocksThatAreNotMatchedFailVerification" />
+                        <Node UniqueName="[0-1282]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CallsWithinAnInOrderedBlockCanBeExpectedMoreThanOnce" />
+                        <Node UniqueName="[0-1279]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CanExpectUnorderedCallsWithinAnOrderedSequence" />
+                        <Node UniqueName="[0-1275]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.DoesNotEnforceTheOrderOfCallsByDefault" />
+                        <Node UniqueName="[0-1277]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.EnforcesTheOrderOfCallsWithinAnInOrderBlock" />
+                        <Node UniqueName="[0-1281]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledAfterTheEndOfTheUnorderedExpectations" />
+                        <Node UniqueName="[0-1280]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledBeforeTheStartOfTheUnorderedExpectations" />
+                        <Node UniqueName="[0-1276]NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedExpectationsMatchInOrderOfSpecification" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1304]NMock2.AcceptanceTests.PropertiesAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1305]NMock2.AcceptanceTests.PropertiesAcceptanceTest.CanExpectPropertyGetter" />
+                        <Node UniqueName="[0-1306]NMock2.AcceptanceTests.PropertiesAcceptanceTest.CanExpectPropertySetter" />
+                        <Node UniqueName="[0-1307]NMock2.AcceptanceTests.PropertiesAcceptanceTest.ErrorMessagesContainNameOfPropertyGetterNotHiddenMethod" />
+                        <Node UniqueName="[0-1308]NMock2.AcceptanceTests.PropertiesAcceptanceTest.ErrorMessagesContainNameOfPropertySetterNotHiddenMethod" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1241]NMock2.AcceptanceTests.StubAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1243]NMock2.AcceptanceTests.StubAcceptanceTest.StubsCanBeCalledAnyNumberOfTimes" />
+                        <Node UniqueName="[0-1242]NMock2.AcceptanceTests.StubAcceptanceTest.StubsDoNotHaveToBeCalled" />
+                        <Node UniqueName="[0-1244]NMock2.AcceptanceTests.StubAcceptanceTest.StubsMatchArgumentsAndPerformActionsJustLikeAnExpectation" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1252]NMock2.AcceptanceTests.UsingBlockAcceptanceTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1253]NMock2.AcceptanceTests.UsingBlockAcceptanceTest.AssertsExpectationsAreMetAtEndOfUsingBlock" />
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+        <Node UniqueName="[0-1523]E:\Projekte\Kistl\Kistl.Tests\NMock2.Test\obj\Debug\NMock2.Test.dll">
+          <Nodes>
+            <Node UniqueName="[0-1524]NMock2">
+              <Nodes>
+                <Node UniqueName="[0-1529]NMock2.Internal">
+                  <Nodes>
+                    <Node UniqueName="[0-1530]NMock2.Internal.Test">
+                      <Nodes>
+                        <Node UniqueName="[0-1499]NMock2.Internal.Test.BuildableExpectationTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1504]NMock2.Internal.Test.BuildableExpectationTest.ChecksCallCountToAssertThatItHasBeenMet" />
+                            <Node UniqueName="[0-1501]NMock2.Internal.Test.BuildableExpectationTest.DoesNotMatchIfAnyMatcherDoesNotMatch" />
+                            <Node UniqueName="[0-1505]NMock2.Internal.Test.BuildableExpectationTest.HasReadableDescription" />
+                            <Node UniqueName="[0-1502]NMock2.Internal.Test.BuildableExpectationTest.InvokesAListOfActionsToPerformAnInvocation" />
+                            <Node UniqueName="[0-1503]NMock2.Internal.Test.BuildableExpectationTest.MatchesCallCountWhenMatchingInvocation" />
+                            <Node UniqueName="[0-1500]NMock2.Internal.Test.BuildableExpectationTest.MatchesIfAllMatchersMatch" />
+                            <Node UniqueName="[0-1506]NMock2.Internal.Test.BuildableExpectationTest.WillNotPrintAPeriodBetweenReceiverAndMethodIfToldToDescribeItselfAsAnIndexer" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1460]NMock2.Internal.Test.DescriptionWriterTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1462]NMock2.Internal.Test.DescriptionWriterTest.FormatsNullAsNull" />
+                            <Node UniqueName="[0-1461]NMock2.Internal.Test.DescriptionWriterTest.FormatsStringsInCSharpSyntaxWhenWrittenAsObject" />
+                            <Node UniqueName="[0-1463]NMock2.Internal.Test.DescriptionWriterTest.HighlightsOtherValuesWhenWrittenAsObject" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+                <Node UniqueName="[0-1525]NMock2.Test">
+                  <Nodes>
+                    <Node UniqueName="[0-1527]NMock2.Test.Actions">
+                      <Nodes>
+                        <Node UniqueName="[0-1367]NMock2.Test.Actions.CollectActionTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1368]NMock2.Test.Actions.CollectActionTest.CollectsParameterValueAtSpecifiedIndex" />
+                            <Node UniqueName="[0-1370]NMock2.Test.Actions.CollectActionTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1369]NMock2.Test.Actions.CollectActionTest.ReturnsParameterValueFromMostRecentOfMultipleCalls" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1374]NMock2.Test.Actions.FireActionTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1375]NMock2.Test.Actions.FireActionTest.FiresEventOnInvocationReceiver" />
+                            <Node UniqueName="[0-1376]NMock2.Test.Actions.FireActionTest.HasAReadableDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1336]NMock2.Test.Actions.ResultSynthesizerTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1339]NMock2.Test.Actions.ResultSynthesizerTest.CanOverrideDefaultResultForType" />
+                            <Node UniqueName="[0-1343]NMock2.Test.Actions.ResultSynthesizerTest.CanSpecifyResultForOtherType" />
+                            <Node UniqueName="[0-1337]NMock2.Test.Actions.ResultSynthesizerTest.CreatesDefaultValuesForBasicTypes" />
+                            <Node UniqueName="[0-1338]NMock2.Test.Actions.ResultSynthesizerTest.DoesNotTryToSetResultForVoidReturnType" />
+                            <Node UniqueName="[0-1346]NMock2.Test.Actions.ResultSynthesizerTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1342]NMock2.Test.Actions.ResultSynthesizerTest.ReturnsADifferentCollectionOnEachInvocation" />
+                            <Node UniqueName="[0-1344]NMock2.Test.Actions.ResultSynthesizerTest.ReturnsDefaultValueOfValueTypes" />
+                            <Node UniqueName="[0-1341]NMock2.Test.Actions.ResultSynthesizerTest.ReturnsEmptyCollections" />
+                            <Node UniqueName="[0-1340]NMock2.Test.Actions.ResultSynthesizerTest.ReturnsZeroLengthArrays" />
+                            <Node UniqueName="[0-1345]NMock2.Test.Actions.ResultSynthesizerTest.ThrowsExceptionIfTriesToReturnValueForUnsupportedResultType" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1467]NMock2.Test.Actions.ReturnActionTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1469]NMock2.Test.Actions.ReturnActionTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1468]NMock2.Test.Actions.ReturnActionTest.SetsReturnValueOfInvocation" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1464]NMock2.Test.Actions.ReturnCloneActionTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1466]NMock2.Test.Actions.ReturnCloneActionTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1465]NMock2.Test.Actions.ReturnCloneActionTest.ReturnsCloneOfPrototypeObject" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1414]NMock2.Test.Actions.SetIndexedParameterActionTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1416]NMock2.Test.Actions.SetIndexedParameterActionTest.HasReadableDescription" />
+                            <Node UniqueName="[0-1415]NMock2.Test.Actions.SetIndexedParameterActionTest.SetsIndexedParameterOnInvocation" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1364]NMock2.Test.Actions.SetNamedParameterActionTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1366]NMock2.Test.Actions.SetNamedParameterActionTest.HasReadableDescription" />
+                            <Node UniqueName="[0-1365]NMock2.Test.Actions.SetNamedParameterActionTest.SetsNamedParameterOnInvocation" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1511]NMock2.Test.Actions.ThrowActionTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1513]NMock2.Test.Actions.ThrowActionTest.HasReadableDescription" />
+                            <Node UniqueName="[0-1512]NMock2.Test.Actions.ThrowActionTest.SetsExceptionOfInvocation" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1526]NMock2.Test.Matchers">
+                      <Nodes>
+                        <Node UniqueName="[0-1487]NMock2.Test.Matchers.AlwaysMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1488]NMock2.Test.Matchers.AlwaysMatcherTest.AlwaysReturnsFixedBooleanValueFromMatchesMethod" />
+                            <Node UniqueName="[0-1489]NMock2.Test.Matchers.AlwaysMatcherTest.IsGivenADescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1495]NMock2.Test.Matchers.AndMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1496]NMock2.Test.Matchers.AndMatcherTest.CalculatesLogicalConjunctionOfTwoMatchers" />
+                            <Node UniqueName="[0-1497]NMock2.Test.Matchers.AndMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" />
+                            <Node UniqueName="[0-1498]NMock2.Test.Matchers.AndMatcherTest.HasAReadableDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1420]NMock2.Test.Matchers.ArgumentsMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1429]NMock2.Test.Matchers.ArgumentsMatcherTest.DescribesAsIndexGetterArguments" />
+                            <Node UniqueName="[0-1430]NMock2.Test.Matchers.ArgumentsMatcherTest.DescribesAsIndexSetterArguments" />
+                            <Node UniqueName="[0-1424]NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchAndDoesNotThrowExceptionIfValueSpecifiedForOutputParameter" />
+                            <Node UniqueName="[0-1426]NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchAnObjectThatIsNotAnInvocation" />
+                            <Node UniqueName="[0-1423]NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchIfValueMatchersDoNotMatchArgumentValues" />
+                            <Node UniqueName="[0-1422]NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchInvocationWithDifferentNumberOfArguments" />
+                            <Node UniqueName="[0-1427]NMock2.Test.Matchers.ArgumentsMatcherTest.FormatsDescriptionToLookSimilarToAnArgumentList" />
+                            <Node UniqueName="[0-1421]NMock2.Test.Matchers.ArgumentsMatcherTest.MatchesInvocationWithSameNumberOfArgumentsAsMatcherHasValueMatchersAndValueMatchersMatch" />
+                            <Node UniqueName="[0-1425]NMock2.Test.Matchers.ArgumentsMatcherTest.MatchesOutputParametersWithSpecialMatcherClass" />
+                            <Node UniqueName="[0-1428]NMock2.Test.Matchers.ArgumentsMatcherTest.ShowsOutputParametersInDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1347]NMock2.Test.Matchers.ComparisonMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1350]NMock2.Test.Matchers.ComparisonMatcherTest.CannotCreateComparisonThatMatchesAnything" />
+                            <Node UniqueName="[0-1351]NMock2.Test.Matchers.ComparisonMatcherTest.CanSpecifyMinAndMaxComparisonResultInAnyOrder" />
+                            <Node UniqueName="[0-1349]NMock2.Test.Matchers.ComparisonMatcherTest.DoesNotMatchObjectOfDifferentType" />
+                            <Node UniqueName="[0-1352]NMock2.Test.Matchers.ComparisonMatcherTest.HasReadableDescription" />
+                            <Node UniqueName="[0-1348]NMock2.Test.Matchers.ComparisonMatcherTest.MatchesAComparisonOfAComparableValue" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1457]NMock2.Test.Matchers.DescriptionOverrideTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1458]NMock2.Test.Matchers.DescriptionOverrideTest.DelegatesMatchingToAnotherMatcher" />
+                            <Node UniqueName="[0-1459]NMock2.Test.Matchers.DescriptionOverrideTest.OverridesDescriptionOfOtherMatcherWithThatPassedToConstructor" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1410]NMock2.Test.Matchers.ElementMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1413]NMock2.Test.Matchers.ElementMatcherTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1412]NMock2.Test.Matchers.ElementMatcherTest.IsNullSafe" />
+                            <Node UniqueName="[0-1411]NMock2.Test.Matchers.ElementMatcherTest.MatchesIfArgumentInCollection" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1327]NMock2.Test.Matchers.EqualMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1334]NMock2.Test.Matchers.EqualMatcherTest.CanCompareAutoboxedValues" />
+                            <Node UniqueName="[0-1328]NMock2.Test.Matchers.EqualMatcherTest.ComparesArgumentForEqualityToExpectedObject" />
+                            <Node UniqueName="[0-1330]NMock2.Test.Matchers.EqualMatcherTest.ComparesArraysForEqualityByContents" />
+                            <Node UniqueName="[0-1331]NMock2.Test.Matchers.EqualMatcherTest.ComparesMultidimensionalArraysForEquality" />
+                            <Node UniqueName="[0-1335]NMock2.Test.Matchers.EqualMatcherTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1329]NMock2.Test.Matchers.EqualMatcherTest.IsNullSafe" />
+                            <Node UniqueName="[0-1332]NMock2.Test.Matchers.EqualMatcherTest.RecursivelyComparesArrayContentsOfNestedArrays" />
+                            <Node UniqueName="[0-1333]NMock2.Test.Matchers.EqualMatcherTest.RecursivelyComparesContentsOfNestedLists" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1403]NMock2.Test.Matchers.FieldMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1407]NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchNonPublicField" />
+                            <Node UniqueName="[0-1406]NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchObjectIfItDoesNotHaveNamedField" />
+                            <Node UniqueName="[0-1405]NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchObjectIfValueMatcherDoesNotMatch" />
+                            <Node UniqueName="[0-1408]NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchStaticField" />
+                            <Node UniqueName="[0-1409]NMock2.Test.Matchers.FieldMatcherTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1404]NMock2.Test.Matchers.FieldMatcherTest.MatchesObjectWithMatchingField" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1507]NMock2.Test.Matchers.MethodNameMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1509]NMock2.Test.Matchers.MethodNameMatcherTest.DoesNotMatchObjectsThatAreNotMethodInfo" />
+                            <Node UniqueName="[0-1508]NMock2.Test.Matchers.MethodNameMatcherTest.MatchesMethodsWithAGivenName" />
+                            <Node UniqueName="[0-1510]NMock2.Test.Matchers.MethodNameMatcherTest.UsesMethodNameAsDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1483]NMock2.Test.Matchers.NotMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1484]NMock2.Test.Matchers.NotMatcherTest.CalculatesTheLogicalNegationOfAMatcher" />
+                            <Node UniqueName="[0-1485]NMock2.Test.Matchers.NotMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" />
+                            <Node UniqueName="[0-1486]NMock2.Test.Matchers.NotMatcherTest.HasAReadableDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1371]NMock2.Test.Matchers.NullMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1372]NMock2.Test.Matchers.NullMatcherTest.MatchesNullReferences" />
+                            <Node UniqueName="[0-1373]NMock2.Test.Matchers.NullMatcherTest.ProvidesAReadableDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1399]NMock2.Test.Matchers.OrMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1400]NMock2.Test.Matchers.OrMatcherTest.CalculatesLogicalDisjunctionOfTwoMatchers" />
+                            <Node UniqueName="[0-1401]NMock2.Test.Matchers.OrMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" />
+                            <Node UniqueName="[0-1402]NMock2.Test.Matchers.OrMatcherTest.HasAReadableDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1357]NMock2.Test.Matchers.PropertyMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1360]NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchObjectIfItDoesNotHaveNamedProperty" />
+                            <Node UniqueName="[0-1359]NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchObjectIfPropertyMatcherDoesNotMatch" />
+                            <Node UniqueName="[0-1362]NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchPrivateProperty" />
+                            <Node UniqueName="[0-1361]NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchWriteOnlyProperty" />
+                            <Node UniqueName="[0-1363]NMock2.Test.Matchers.PropertyMatcherTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1358]NMock2.Test.Matchers.PropertyMatcherTest.MatchesObjectWithNamedPropertyAndMatchingPropertyValue" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1453]NMock2.Test.Matchers.SameMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1456]NMock2.Test.Matchers.SameMatcherTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1455]NMock2.Test.Matchers.SameMatcherTest.IsNullSafe" />
+                            <Node UniqueName="[0-1454]NMock2.Test.Matchers.SameMatcherTest.MatchesSameObject" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1417]NMock2.Test.Matchers.StringContainsMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1419]NMock2.Test.Matchers.StringContainsMatcherTest.HasAReadableDescription" />
+                            <Node UniqueName="[0-1418]NMock2.Test.Matchers.StringContainsMatcherTest.MatchesIfStringArgumentContainsGivenSubstring" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1520]NMock2.Test.Matchers.ToStringMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1521]NMock2.Test.Matchers.ToStringMatcherTest.PassesResultOfToStringToOtherMatcher" />
+                            <Node UniqueName="[0-1522]NMock2.Test.Matchers.ToStringMatcherTest.ReturnsAReadableDescription" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1450]NMock2.Test.Matchers.TypeMatcherTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1452]NMock2.Test.Matchers.TypeMatcherTest.DoesNotMatchValueOfNonAssignableType" />
+                            <Node UniqueName="[0-1451]NMock2.Test.Matchers.TypeMatcherTest.MatchesValueOfAssignableType" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1431]NMock2.Test.MockeryTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1447]NMock2.Test.MockeryTest.AssertionExceptionThrownWhenNoExpectationsMatchContainsDescriptionOfActiveExpectations" />
+                        <Node UniqueName="[0-1446]NMock2.Test.MockeryTest.AssertionExceptionThrownWhenSomeExpectationsHaveNotBeenMetContainsDescriptionOfUnMetExpectations" />
+                        <Node UniqueName="[0-1433]NMock2.Test.MockeryTest.CanCreateMockWithoutCastingBySpecifingTypeAsGenericParameter" />
+                        <Node UniqueName="[0-1438]NMock2.Test.MockeryTest.CreatedMockComparesReferenceIdentityWithEqualsMethod" />
+                        <Node UniqueName="[0-1439]NMock2.Test.MockeryTest.CreatedMockReturnsNameFromToString" />
+                        <Node UniqueName="[0-1435]NMock2.Test.MockeryTest.CreatesMocksThatCanBeCastToIMockObject" />
+                        <Node UniqueName="[0-1432]NMock2.Test.MockeryTest.CreatesMocksThatCanBeCastToMockedType" />
+                        <Node UniqueName="[0-1445]NMock2.Test.MockeryTest.DetectsWhenFirstExpectationHasNotBeenMet" />
+                        <Node UniqueName="[0-1444]NMock2.Test.MockeryTest.DetectsWhenSecondExpectationHasNotBeenMet" />
+                        <Node UniqueName="[0-1440]NMock2.Test.MockeryTest.DispatchesInvocationBySearchingForMatchingExpectationInOrderOfAddition" />
+                        <Node UniqueName="[0-1442]NMock2.Test.MockeryTest.FailsTestIfNoExpectationsMatch" />
+                        <Node UniqueName="[0-1434]NMock2.Test.MockeryTest.GenericMockCanSpecifyName" />
+                        <Node UniqueName="[0-1437]NMock2.Test.MockeryTest.GivesMocksDefaultNameIfNoNameSpecified" />
+                        <Node UniqueName="[0-1436]NMock2.Test.MockeryTest.MockReturnsNameFromToString" />
+                        <Node UniqueName="[0-1449]NMock2.Test.MockeryTest.ShouldBeAbleToInvokeMethodOnInheritedInterface" />
+                        <Node UniqueName="[0-1441]NMock2.Test.MockeryTest.StopsSearchingForMatchingExpectationAsSoonAsOneMatches" />
+                        <Node UniqueName="[0-1443]NMock2.Test.MockeryTest.VerifiesWhenAllExpectationsHaveBeenMet" />
+                        <Node UniqueName="[0-1448]NMock2.Test.MockeryTest.VerifyExpectationsReportsOnUnexpectedInvocationsWhoseExceptionsWereCaughtElsewhere" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1528]NMock2.Test.Monitoring">
+                      <Nodes>
+                        <Node UniqueName="[0-1481]NMock2.Test.Monitoring.InvocationSemanticsTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1482]NMock2.Test.Monitoring.InvocationSemanticsTest.OutParametersAreSetAfterExceptionThrown" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1377]NMock2.Test.Monitoring.InvocationTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1386]NMock2.Test.Monitoring.InvocationTest.AllowsNullResultForMethodThatReturnsANullableType" />
+                            <Node UniqueName="[0-1384]NMock2.Test.Monitoring.InvocationTest.AllowsSettingNullResultOfVoidMethod" />
+                            <Node UniqueName="[0-1388]NMock2.Test.Monitoring.InvocationTest.CanBeInvokedOnAnotherObject" />
+                            <Node UniqueName="[0-1394]NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventAdderDoesNotShowSugaredMethod" />
+                            <Node UniqueName="[0-1395]NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventRemoverDoesNotShowSugaredMethod" />
+                            <Node UniqueName="[0-1392]NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfIndexerGetterDoesNotShowSugaredMethod" />
+                            <Node UniqueName="[0-1393]NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfIndexerSetterDoesNotShowSugaredMethod" />
+                            <Node UniqueName="[0-1390]NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfPropertyGetterDoesNotShowSugaredMethod" />
+                            <Node UniqueName="[0-1391]NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfPropertySetterDoesNotShowSugaredMethod" />
+                            <Node UniqueName="[0-1382]NMock2.Test.Monitoring.InvocationTest.DoesNotAllowNullException" />
+                            <Node UniqueName="[0-1385]NMock2.Test.Monitoring.InvocationTest.DoesNotAllowNullResultForMethodThatReturnsAValueType" />
+                            <Node UniqueName="[0-1387]NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingIncompatibleResultType" />
+                            <Node UniqueName="[0-1383]NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingNonNullResultOfVoidMethod" />
+                            <Node UniqueName="[0-1381]NMock2.Test.Monitoring.InvocationTest.SettingExceptionClearsResult" />
+                            <Node UniqueName="[0-1380]NMock2.Test.Monitoring.InvocationTest.SettingResultClearsException" />
+                            <Node UniqueName="[0-1379]NMock2.Test.Monitoring.InvocationTest.StoresExceptionToThrow" />
+                            <Node UniqueName="[0-1378]NMock2.Test.Monitoring.InvocationTest.StoresResultToReturn" />
+                            <Node UniqueName="[0-1389]NMock2.Test.Monitoring.InvocationTest.TrapsExceptionsWhenInvokedOnAnotherObject" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1396]NMock2.Test.Monitoring.InvokerTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1398]NMock2.Test.Monitoring.InvokerTest.ForwardsInvocationsToNextIfMethodIsNotDeclaredInSpecifiedType" />
+                            <Node UniqueName="[0-1397]NMock2.Test.Monitoring.InvokerTest.InvokesMethodOnObjectIfMethodIsDeclaredInSpecifiedType" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1470]NMock2.Test.Monitoring.MultiInterfaceFactoryTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1474]NMock2.Test.Monitoring.MultiInterfaceFactoryTest.AvoidsNameClash" />
+                            <Node UniqueName="[0-1471]NMock2.Test.Monitoring.MultiInterfaceFactoryTest.CreatesTypeInfoObjectsThatRepresentAnInterfaceThatExtendsAllParameterInterfaces" />
+                            <Node UniqueName="[0-1472]NMock2.Test.Monitoring.MultiInterfaceFactoryTest.ReturnsTheSameTypeWhenPassedTheSameArguments" />
+                            <Node UniqueName="[0-1473]NMock2.Test.Monitoring.MultiInterfaceFactoryTest.ReturnsTheSameTypeWhenPassedTheSameArgumentsInDifferentOrder" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1514]NMock2.Test.Monitoring.ParameterListTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1518]NMock2.Test.Monitoring.ParameterListTest.CanSetValuesOfOutAndRefParameters" />
+                            <Node UniqueName="[0-1517]NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowAccessToValuesOfUnsetOutParameters" />
+                            <Node UniqueName="[0-1519]NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowValuesOfInputParametersToBeChanged" />
+                            <Node UniqueName="[0-1515]NMock2.Test.Monitoring.ParameterListTest.ReturnsNumberOfParameters" />
+                            <Node UniqueName="[0-1516]NMock2.Test.Monitoring.ParameterListTest.ReturnsValuesOfInParameters" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1490]NMock2.Test.Monitoring.ProxiedObjectIdentityTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1493]NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ForwardsGetHashCodeToIdentityProvider" />
+                            <Node UniqueName="[0-1494]NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ForwardsInvocationsOfOtherMethodsToNextInChain" />
+                            <Node UniqueName="[0-1492]NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ForwardsToStringToIdentityProvider" />
+                            <Node UniqueName="[0-1491]NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ImplementsEqualsByComparingInvocationReceiversForIdentity" />
+                          </Nodes>
+                        </Node>
+                        <Node UniqueName="[0-1475]NMock2.Test.Monitoring.ProxyInvokableAdapterTest">
+                          <Nodes>
+                            <Node UniqueName="[0-1476]NMock2.Test.Monitoring.ProxyInvokableAdapterTest.CapturesInvocationsOnTransparentProxyAndForwardsToInvokableObject" />
+                            <Node UniqueName="[0-1480]NMock2.Test.Monitoring.ProxyInvokableAdapterTest.PassesExceptionThrownByInvokableToCallerOfProxy" />
+                            <Node UniqueName="[0-1479]NMock2.Test.Monitoring.ProxyInvokableAdapterTest.ReturnsOutAndRefParametersFromInvocationToCallerOfProxy" />
+                            <Node UniqueName="[0-1477]NMock2.Test.Monitoring.ProxyInvokableAdapterTest.ReturnsResultFromInvocationToCallerOfProxy" />
+                            <Node UniqueName="[0-1478]NMock2.Test.Monitoring.ProxyInvokableAdapterTest.ThrowsExceptionFromInvocationToCallerOfProxy" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1353]NMock2.Test.VerifyTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1356]NMock2.Test.VerifyTest.CanPrependCustomMessageToDescriptionOfFailure" />
+                        <Node UniqueName="[0-1355]NMock2.Test.VerifyTest.VerifyThatFailsIfMatcherDoesNotMatchValue" />
+                        <Node UniqueName="[0-1354]NMock2.Test.VerifyTest.VerifyThatPassesIfMatcherMatchesValue" />
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+      </Nodes>
+    </Node>
+  </Nodes>
+</VisualState>

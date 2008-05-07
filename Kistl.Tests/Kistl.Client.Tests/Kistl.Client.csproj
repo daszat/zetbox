@@ -88,7 +88,6 @@
     <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Kistl.Client.Tests.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
