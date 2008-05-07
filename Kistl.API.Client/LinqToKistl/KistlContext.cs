@@ -143,6 +143,19 @@ namespace Kistl.API.Client
             return objectsSubmittedCount;
         }
 
+        // TODO: This is quite redundant here as it only uses other IKistlContext Methods.
+        // This could be moved to a common abstract IKistlContextBase
+        public IDataObject Find(ObjectType type, int ID)
+        {
+            return GetQuery(type).Single(o => o.ID == ID);
+        }
+
+        public T Find<T>(int ID)
+            where T: IDataObject
+        {
+            return GetQuery<T>().Single(o => o.ID == ID);
+        }
+
         #region IDisposable Members
 
         public void Dispose()

@@ -8,14 +8,12 @@ namespace Kistl.Client.Tests
 {
     public class MainProgram
     {
-        public interface ITest
-        {
-            T RetT<T>();
-        }
         public static void Main(string[] args)
         {
-            Mockery mocks = new Mockery();
-            ITest t = mocks.NewMock<ITest>();
+            new SetUp().Init();
+            var orpt = new ObjectReferencePresenterTests();
+            orpt.SetUp();
+            orpt.HandleInvalidUserInput();
         }
     }
 }

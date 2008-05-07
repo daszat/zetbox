@@ -868,7 +868,7 @@ namespace Kistl.Server.Generators
             {
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_{1})", current.property.GetDataType(), current.property.PropertyName)));
+                        string.Format(@"return Context.Find<{0}>(fk_{1})", current.property.GetDataType(), current.property.PropertyName)));
 
                 current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(

@@ -166,11 +166,28 @@ namespace Kistl.GUI
                 throw new InvalidOperationException(String.Format("Resource Leak: _Object_PropertyChanged in '{0}' was called by '{1}', but should be attached to '{2}'",
                     this, sender, Object));
 
+            // if the object has changed, unconditionally overwrite the value in the GUI
+            // intelligent controls might want to show the user both the "real" and the user's value
             if (e.PropertyName == Property.PropertyName)
                 Control.Value = Object.GetPropertyValue<TYPE>(Property.PropertyName);
         }
 
         private void Control_UserInput(object sender, EventArgs e)
+        {
+            OnUserInput();
+        }
+
+        /// <summary>
+        /// this method is called when the control submits userinput back to the presenter.
+        /// the default implementation checks whether the value conforms to the nullability
+        /// criteria of the Property and sets the validness of the control's value and the 
+        /// property value as appropriate.
+        /// 
+        /// override the method to gain fine-grained control over the presenter's reaction 
+        /// to user input.
+        /// </summary>
+        // TODO: hook up Validation here and re-check all overrider.
+        protected virtual void OnUserInput()
         {
             Control.IsValidValue = (Property.IsNullable || Control.Value != null);
             if (Control.IsValidValue)
@@ -243,16 +260,34 @@ namespace Kistl.GUI
         }
     }
 
-    public class PointerPresenter : DefaultPresenter<int, ObjectReferenceProperty, IPointerControl>
+    public class PointerPresenter : DefaultPresenter<IDataObject, ObjectReferenceProperty, IPointerControl>
     {
         public PointerPresenter() { }
 
         protected override void InitializeComponent()
         {
-            Control.ObjectType = new Kistl.API.ObjectType(Property.GetDataType());
+            Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceObjectClass.Module.Namespace, Property.ReferenceObjectClass.ClassName);
             Control.ItemsSource = Object.Context.GetQuery(Control.ObjectType).ToList();
 
             base.InitializeComponent();
+        }
+
+        protected override void OnUserInput()
+        {
+            if (Control.Value == null)
+            {
+                Control.IsValidValue = !Property.IsNullable;
+            }
+            else
+            {
+                // if object exists, value is valid
+                Control.IsValidValue = Object.Context.Find(Control.ObjectType, Control.Value.ID) != null;
+            }
+ 
+            if (Control.IsValidValue)
+            {
+                Object.SetPropertyValue(Property.PropertyName, Control.Value);
+            }
         }
     }
 
@@ -353,7 +388,7 @@ namespace Kistl.GUI
         IEnumerable ItemsSource { get; set; }
     }
 
-    public interface IPointerControl : IValueControl<int>
+    public interface IPointerControl : IValueControl<IDataObject>
     {
         /// <summary>
         /// The ObjectType of the listed Objects

@@ -9,12 +9,43 @@ namespace Kistl.Client.Mocks
 {
     public class TestObject : IDataObject
     {
-        public TestObject(IKistlContext ctx)
+
+        public TestObject()
         {
             TestBackReference = new List<IDataObject>();
-            TestObjectReference = Helper.INVALIDID;
+            Context = GlobalContext;
+            TestObjectReferenceProperty.AttachToContext(GlobalContext);
+        }
 
-            Context = ctx;
+        public static IKistlContext GlobalContext { get; set; }
+
+        public static ObjectClass ObjectClass
+        {
+            get
+            {
+                var oc = new ObjectClass()
+                {
+                    ID = 99,
+                    ClassName = "TestObject",
+                    Module = TestObject.Module
+                };
+                oc.AttachToContext(GlobalContext);
+                return oc;
+            }
+        }
+
+        public static Module Module
+        {
+            get
+            {
+                var mod = new Module()
+                {
+                    ID = 88,
+                    Namespace = "Kistl.Client.Mocks"
+                };
+                mod.AttachToContext(GlobalContext);
+                return mod;
+            }
         }
 
         #region BackReference Properties
@@ -88,11 +119,12 @@ namespace Kistl.Client.Mocks
 
         #region ObjectReference Properties
 
-        public int TestObjectReference { get; set; }
+        public IDataObject TestObjectReference { get; set; }
         public readonly static ObjectReferenceProperty TestObjectReferenceProperty
             = new MockObjectReferenceProperty()
             {
                 PropertyName = "TestObjectReference",
+                ReferenceObjectClass = TestObject.ObjectClass,
             };
 
         #endregion
@@ -101,6 +133,7 @@ namespace Kistl.Client.Mocks
 
         public void AttachToContext(IKistlContext ctx)
         {
+            Context = ctx;
         }
 
         public IKistlContext Context { get; set; }
@@ -112,6 +145,7 @@ namespace Kistl.Client.Mocks
 
         public void DetachFromContext(IKistlContext ctx)
         {
+            throw new NotImplementedException();
         }
 
         public void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
@@ -175,6 +209,25 @@ namespace Kistl.Client.Mocks
         }
 
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            TestObject other = obj as TestObject;
+            if (other == null)
+                return false;
+
+            else return other.ID == ID;
+        }
+
+        public override int GetHashCode()
+        {
+            return ID;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("TestObject<ID = {0}>", ID);
+        }
     }
 
     internal class MockObjectReferenceProperty : ObjectReferenceProperty
@@ -183,92 +236,12 @@ namespace Kistl.Client.Mocks
         {
             return "Kistl.Client.Mocks.MockObjectReferenceProperty";
         }
-    }
 
-    public class MockContext : IKistlContext
-    {
-        #region IKistlContext Members
-
-        public void Attach(ICollectionEntry e)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return "This is a MockObjectReferenceProperty";
         }
 
-        public void Attach(IDataObject obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Create<T>() where T : IDataObject, new()
-        {
-            return default(T);
-        }
-
-        public IDataObject Create(ObjectType type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataObject Create(Type type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(ICollectionEntry e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(IDataObject obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Detach(ICollectionEntry e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Detach(IDataObject obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<T> GetListOf<T>(IDataObject obj, string propertyName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<IDataObject> GetQuery(ObjectType type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<T> GetQuery<T>() where T : IDataObject
-        {
-            return null;
-        }
-
-        public int SubmitChanges()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 
 }

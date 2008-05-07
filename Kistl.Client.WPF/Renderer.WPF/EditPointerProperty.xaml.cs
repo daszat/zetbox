@@ -117,15 +117,15 @@ namespace Kistl.GUI.Renderer.WPF
         /// <summary>
         /// The actual Value of this Property
         /// </summary>
-        public int Value
+        public Kistl.API.IDataObject Value
         {
-            get { return (int)GetValue(ValueProperty); }
+            get { return (Kistl.API.IDataObject)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(int), typeof(EditPointerProperty));
+            DependencyProperty.Register("Value", typeof(Kistl.API.IDataObject), typeof(EditPointerProperty));
 
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

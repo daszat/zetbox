@@ -20,11 +20,31 @@ namespace Kistl.Client.Tests
     {
         protected Mockery mocks { get; set; }
         protected IKistlContext MockContext { get; set; }
+
+        /// <summary>
+        /// Override this method to add setup code after the Mockery and the MockContext have been setup.
+        /// </summary>
+        protected virtual void CustomSetUp() { }
+
         [SetUp]
         public void SetUp()
         {
             mocks = new Mockery();
             MockContext = mocks.NewMock<IKistlContext>("MockContext");
+            TestObject.GlobalContext = MockContext;
+
+            Stub.On(MockContext).
+                Method("Find").
+                With(TestObject.ObjectClass.ID).
+                Will(Return.Value(TestObject.ObjectClass));
+
+            Stub.On(MockContext).
+                Method("Find").
+                With(TestObject.Module.ID).
+                Will(Return.Value(TestObject.Module));
+
+            CustomSetUp();
+
         }
 
         protected TestObject obj { get; set; }
@@ -36,7 +56,7 @@ namespace Kistl.Client.Tests
 
         protected void Init(ControlInfo ci, BaseProperty bp)
         {
-            obj = new TestObject(MockContext);
+            obj = new TestObject() { ID = 1 };
 
             visual = new Visual() { Name = ci.Control, Property = bp };
             cInfo = KistlGUIContext.FindControlInfo(Toolkit.TEST, visual);
@@ -45,6 +65,8 @@ namespace Kistl.Client.Tests
             presenter = (PRESENTER)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
         }
 
+        // This test depends a bit on any other test being run before and having already 
+        // initialised the presenter once
         [Test]
         [ExpectedException(ExceptionType = typeof(InvalidOperationException))]
         public void ReInit()

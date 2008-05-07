@@ -50,8 +50,17 @@ namespace Kistl.API
 
         int SubmitChanges();
 
-        Kistl.API.IDataObject Create(Type type);
-        Kistl.API.IDataObject Create(ObjectType type);
+        IDataObject Create(Type type);
+        IDataObject Create(ObjectType type);
         T Create<T>() where T : IDataObject, new();
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// </summary>
+        IDataObject Find(ObjectType type, int ID);
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// </summary>
+        T Find<T>(int ID) where T : IDataObject;
     }
 }

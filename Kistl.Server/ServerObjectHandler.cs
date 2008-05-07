@@ -136,7 +136,9 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// Implementiert den GetListOf Befehl.
+        /// Since IsList properties are not automatically transferred,
+        /// GetListOf can be used to get the list of values in the property 
+        /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
