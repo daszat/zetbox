@@ -42,9 +42,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("ReferenceObjectClass"); 
-                _fk_ReferenceObjectClass = value.ID;
-                NotifyPropertyChanged("ReferenceObjectClass"); ;
+                fk_ReferenceObjectClass = value.ID;
             }
         }
         
@@ -56,9 +54,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("ReferenceObjectClass"); 
-                _fk_ReferenceObjectClass = value;
-                NotifyPropertyChanged("ReferenceObjectClass"); ;
+                if (fk_ReferenceObjectClass != value)
+                {
+                    NotifyPropertyChanging("ReferenceObjectClass"); 
+                    _fk_ReferenceObjectClass = value;
+                    NotifyPropertyChanged("ReferenceObjectClass");
+                }
             }
         }
         

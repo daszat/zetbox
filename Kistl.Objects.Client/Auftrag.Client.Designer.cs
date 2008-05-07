@@ -64,9 +64,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Projekt"); 
-                _fk_Projekt = value.ID;
-                NotifyPropertyChanged("Projekt"); ;
+                fk_Projekt = value.ID;
             }
         }
         
@@ -78,9 +76,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Projekt"); 
-                _fk_Projekt = value;
-                NotifyPropertyChanged("Projekt"); ;
+                if (fk_Projekt != value)
+                {
+                    NotifyPropertyChanging("Projekt"); 
+                    _fk_Projekt = value;
+                    NotifyPropertyChanged("Projekt");
+                }
             }
         }
         
@@ -93,9 +94,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Mitarbeiter"); 
-                _fk_Mitarbeiter = value.ID;
-                NotifyPropertyChanged("Mitarbeiter"); ;
+                fk_Mitarbeiter = value.ID;
             }
         }
         
@@ -107,9 +106,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Mitarbeiter"); 
-                _fk_Mitarbeiter = value;
-                NotifyPropertyChanged("Mitarbeiter"); ;
+                if (fk_Mitarbeiter != value)
+                {
+                    NotifyPropertyChanging("Mitarbeiter"); 
+                    _fk_Mitarbeiter = value;
+                    NotifyPropertyChanged("Mitarbeiter");
+                }
             }
         }
         
@@ -136,9 +138,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Kunde"); 
-                _fk_Kunde = value.ID;
-                NotifyPropertyChanged("Kunde"); ;
+                fk_Kunde = value.ID;
             }
         }
         
@@ -150,9 +150,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Kunde"); 
-                _fk_Kunde = value;
-                NotifyPropertyChanged("Kunde"); ;
+                if (fk_Kunde != value)
+                {
+                    NotifyPropertyChanging("Kunde"); 
+                    _fk_Kunde = value;
+                    NotifyPropertyChanged("Kunde");
+                }
             }
         }
         

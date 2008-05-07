@@ -42,9 +42,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("DataType"); 
-                _fk_DataType = value.ID;
-                NotifyPropertyChanged("DataType"); ;
+                fk_DataType = value.ID;
             }
         }
         
@@ -56,9 +54,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("DataType"); 
-                _fk_DataType = value;
-                NotifyPropertyChanged("DataType"); ;
+                if (fk_DataType != value)
+                {
+                    NotifyPropertyChanging("DataType"); 
+                    _fk_DataType = value;
+                    NotifyPropertyChanged("DataType");
+                }
             }
         }
         

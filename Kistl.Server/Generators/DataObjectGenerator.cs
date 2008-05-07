@@ -298,6 +298,37 @@ namespace Kistl.Server.Generators
             p.HasSet = hasSet;
             return p;
         }
+
+        /// <summary>
+        /// Creates a property which calls the appropriate NotifyPropertyChang* Methods.
+        /// </summary>
+        /// <param name="c">Class, where the Property will be added</param>
+        /// <param name="type">Type of the Property</param>
+        /// <param name="name">Name of the Property</param>
+        /// <param name="getExpression">a string containing the expression to return on Get</param>
+        /// <param name="setLValue">a string containing the LValue where the Set should assign to</param>
+        /// <param name="notifier">the Property for which notifications should be sent out, usually the same as <code>name</code></param>
+        /// <returns>Returns a CodeMemberProperty Type</returns>
+        protected virtual CodeMemberProperty CreateNotifyingProperty(CodeTypeDeclaration c, Type type, string name,
+            string getExpression, string setLValue, string notifier
+            )
+        {
+            CodeMemberProperty result = CreateProperty(c, new CodeTypeReference(type), name, true);
+            result.GetStatements.Add(
+                    new CodeSnippetExpression(
+                        string.Format(@"return {0}", getExpression)));
+
+            // create a condition to not trigger events if the value doesn't change.
+            CodeConditionStatement ccs = new CodeConditionStatement(new CodeSnippetExpression(string.Format("{0} != value", name)));
+            ccs.TrueStatements.Add(new CodeSnippetExpression(
+                string.Format(@"NotifyPropertyChanging(""{1}""); 
+                    {0} = value;
+                    NotifyPropertyChanged(""{1}"")", setLValue, notifier)));
+
+            result.SetStatements.Add(ccs);
+
+            return result;
+        }
         #endregion
 
         #region CreateInterface
@@ -872,27 +903,24 @@ namespace Kistl.Server.Generators
 
                 current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"NotifyPropertyChanging(""{0}""); 
-                _fk_{0} = value.ID;
-                NotifyPropertyChanged(""{0}""); ", current.property.PropertyName)));
+                        string.Format(@"fk_{0} = value.ID", current.property.PropertyName)));
             }
 
             CurrentObjectClass serializer = (CurrentObjectClass)current.Clone();
 
             // Serializer fk_ Field und Property
-            serializer.code_field = CreateField(current.code_class, typeof(int), "_fk_" + current.property.PropertyName, "Helper.INVALIDID");
-            serializer.code_property = CreateProperty(current.code_class, typeof(int), "fk_" + current.property.PropertyName);
+            string fieldName = "_fk_" + current.property.PropertyName;
+            serializer.code_field = CreateField(current.code_class, typeof(int), fieldName, "Helper.INVALIDID");
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                serializer.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"return _fk_{0}", current.property.PropertyName)));
-                serializer.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"NotifyPropertyChanging(""{0}""); 
-                _fk_{0} = value;
-                NotifyPropertyChanged(""{0}""); ", current.property.PropertyName)));
+                serializer.code_property = CreateNotifyingProperty(current.code_class, typeof(int), "fk_" + current.property.PropertyName,
+                    fieldName, fieldName, current.property.PropertyName
+                    );
+            }
+            else
+            {
+                serializer.code_property = CreateProperty(current.code_class, typeof(int), "fk_" + current.property.PropertyName);
             }
 
             GenerateProperties_ObjectReferenceProperty(current, serializer);

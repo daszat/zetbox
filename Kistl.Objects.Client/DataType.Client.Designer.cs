@@ -66,9 +66,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value.ID;
-                NotifyPropertyChanged("Module"); ;
+                fk_Module = value.ID;
             }
         }
         
@@ -80,9 +78,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value;
-                NotifyPropertyChanged("Module"); ;
+                if (fk_Module != value)
+                {
+                    NotifyPropertyChanging("Module"); 
+                    _fk_Module = value;
+                    NotifyPropertyChanged("Module");
+                }
             }
         }
         
@@ -129,9 +130,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("DefaultIcon"); 
-                _fk_DefaultIcon = value.ID;
-                NotifyPropertyChanged("DefaultIcon"); ;
+                fk_DefaultIcon = value.ID;
             }
         }
         
@@ -143,9 +142,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("DefaultIcon"); 
-                _fk_DefaultIcon = value;
-                NotifyPropertyChanged("DefaultIcon"); ;
+                if (fk_DefaultIcon != value)
+                {
+                    NotifyPropertyChanging("DefaultIcon"); 
+                    _fk_DefaultIcon = value;
+                    NotifyPropertyChanged("DefaultIcon");
+                }
             }
         }
         

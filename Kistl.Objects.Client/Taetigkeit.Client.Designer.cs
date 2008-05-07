@@ -64,9 +64,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                NotifyPropertyChanging("Zeitkonto"); 
-                _fk_Zeitkonto = value.ID;
-                NotifyPropertyChanged("Zeitkonto"); ;
+                fk_Zeitkonto = value.ID;
             }
         }
         
@@ -78,9 +76,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                NotifyPropertyChanging("Zeitkonto"); 
-                _fk_Zeitkonto = value;
-                NotifyPropertyChanged("Zeitkonto"); ;
+                if (fk_Zeitkonto != value)
+                {
+                    NotifyPropertyChanging("Zeitkonto"); 
+                    _fk_Zeitkonto = value;
+                    NotifyPropertyChanged("Zeitkonto");
+                }
             }
         }
         
@@ -93,9 +94,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                NotifyPropertyChanging("Mitarbeiter"); 
-                _fk_Mitarbeiter = value.ID;
-                NotifyPropertyChanged("Mitarbeiter"); ;
+                fk_Mitarbeiter = value.ID;
             }
         }
         
@@ -107,9 +106,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                NotifyPropertyChanging("Mitarbeiter"); 
-                _fk_Mitarbeiter = value;
-                NotifyPropertyChanged("Mitarbeiter"); ;
+                if (fk_Mitarbeiter != value)
+                {
+                    NotifyPropertyChanging("Mitarbeiter"); 
+                    _fk_Mitarbeiter = value;
+                    NotifyPropertyChanged("Mitarbeiter");
+                }
             }
         }
         
@@ -150,9 +152,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                NotifyPropertyChanging("TaetigkeitsArt"); 
-                _fk_TaetigkeitsArt = value.ID;
-                NotifyPropertyChanged("TaetigkeitsArt"); ;
+                fk_TaetigkeitsArt = value.ID;
             }
         }
         
@@ -164,9 +164,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                NotifyPropertyChanging("TaetigkeitsArt"); 
-                _fk_TaetigkeitsArt = value;
-                NotifyPropertyChanged("TaetigkeitsArt"); ;
+                if (fk_TaetigkeitsArt != value)
+                {
+                    NotifyPropertyChanging("TaetigkeitsArt"); 
+                    _fk_TaetigkeitsArt = value;
+                    NotifyPropertyChanged("TaetigkeitsArt");
+                }
             }
         }
         

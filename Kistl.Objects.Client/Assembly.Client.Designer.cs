@@ -60,9 +60,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value.ID;
-                NotifyPropertyChanged("Module"); ;
+                fk_Module = value.ID;
             }
         }
         
@@ -74,9 +72,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value;
-                NotifyPropertyChanged("Module"); ;
+                if (fk_Module != value)
+                {
+                    NotifyPropertyChanging("Module"); 
+                    _fk_Module = value;
+                    NotifyPropertyChanged("Module");
+                }
             }
         }
         

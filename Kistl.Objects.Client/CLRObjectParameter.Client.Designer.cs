@@ -44,9 +44,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Assembly"); 
-                _fk_Assembly = value.ID;
-                NotifyPropertyChanged("Assembly"); ;
+                fk_Assembly = value.ID;
             }
         }
         
@@ -58,9 +56,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Assembly"); 
-                _fk_Assembly = value;
-                NotifyPropertyChanged("Assembly"); ;
+                if (fk_Assembly != value)
+                {
+                    NotifyPropertyChanging("Assembly"); 
+                    _fk_Assembly = value;
+                    NotifyPropertyChanged("Assembly");
+                }
             }
         }
         

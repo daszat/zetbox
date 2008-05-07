@@ -66,9 +66,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value.ID;
-                NotifyPropertyChanged("Module"); ;
+                fk_Module = value.ID;
             }
         }
         
@@ -80,9 +78,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value;
-                NotifyPropertyChanged("Module"); ;
+                if (fk_Module != value)
+                {
+                    NotifyPropertyChanging("Module"); 
+                    _fk_Module = value;
+                    NotifyPropertyChanged("Module");
+                }
             }
         }
         
@@ -95,9 +96,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Method"); 
-                _fk_Method = value.ID;
-                NotifyPropertyChanged("Method"); ;
+                fk_Method = value.ID;
             }
         }
         
@@ -109,9 +108,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Method"); 
-                _fk_Method = value;
-                NotifyPropertyChanged("Method"); ;
+                if (fk_Method != value)
+                {
+                    NotifyPropertyChanging("Method"); 
+                    _fk_Method = value;
+                    NotifyPropertyChanged("Method");
+                }
             }
         }
         
@@ -124,9 +126,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Assembly"); 
-                _fk_Assembly = value.ID;
-                NotifyPropertyChanged("Assembly"); ;
+                fk_Assembly = value.ID;
             }
         }
         
@@ -138,9 +138,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Assembly"); 
-                _fk_Assembly = value;
-                NotifyPropertyChanged("Assembly"); ;
+                if (fk_Assembly != value)
+                {
+                    NotifyPropertyChanging("Assembly"); 
+                    _fk_Assembly = value;
+                    NotifyPropertyChanged("Assembly");
+                }
             }
         }
         
@@ -181,9 +184,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("InvokeOnObjectClass"); 
-                _fk_InvokeOnObjectClass = value.ID;
-                NotifyPropertyChanged("InvokeOnObjectClass"); ;
+                fk_InvokeOnObjectClass = value.ID;
             }
         }
         
@@ -195,9 +196,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("InvokeOnObjectClass"); 
-                _fk_InvokeOnObjectClass = value;
-                NotifyPropertyChanged("InvokeOnObjectClass"); ;
+                if (fk_InvokeOnObjectClass != value)
+                {
+                    NotifyPropertyChanging("InvokeOnObjectClass"); 
+                    _fk_InvokeOnObjectClass = value;
+                    NotifyPropertyChanged("InvokeOnObjectClass");
+                }
             }
         }
         

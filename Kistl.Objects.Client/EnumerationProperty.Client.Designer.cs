@@ -42,9 +42,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Enumeration"); 
-                _fk_Enumeration = value.ID;
-                NotifyPropertyChanged("Enumeration"); ;
+                fk_Enumeration = value.ID;
             }
         }
         
@@ -56,9 +54,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Enumeration"); 
-                _fk_Enumeration = value;
-                NotifyPropertyChanged("Enumeration"); ;
+                if (fk_Enumeration != value)
+                {
+                    NotifyPropertyChanging("Enumeration"); 
+                    _fk_Enumeration = value;
+                    NotifyPropertyChanged("Enumeration");
+                }
             }
         }
         

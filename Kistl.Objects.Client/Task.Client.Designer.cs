@@ -64,9 +64,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Projekt"); 
-                _fk_Projekt = value.ID;
-                NotifyPropertyChanged("Projekt"); ;
+                fk_Projekt = value.ID;
             }
         }
         
@@ -78,9 +76,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                NotifyPropertyChanging("Projekt"); 
-                _fk_Projekt = value;
-                NotifyPropertyChanged("Projekt"); ;
+                if (fk_Projekt != value)
+                {
+                    NotifyPropertyChanging("Projekt"); 
+                    _fk_Projekt = value;
+                    NotifyPropertyChanged("Projekt");
+                }
             }
         }
         

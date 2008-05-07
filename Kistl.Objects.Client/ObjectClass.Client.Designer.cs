@@ -63,9 +63,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("BaseObjectClass"); 
-                _fk_BaseObjectClass = value.ID;
-                NotifyPropertyChanged("BaseObjectClass"); ;
+                fk_BaseObjectClass = value.ID;
             }
         }
         
@@ -77,9 +75,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("BaseObjectClass"); 
-                _fk_BaseObjectClass = value;
-                NotifyPropertyChanged("BaseObjectClass"); ;
+                if (fk_BaseObjectClass != value)
+                {
+                    NotifyPropertyChanging("BaseObjectClass"); 
+                    _fk_BaseObjectClass = value;
+                    NotifyPropertyChanged("BaseObjectClass");
+                }
             }
         }
         

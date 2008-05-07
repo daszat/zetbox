@@ -62,9 +62,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("ObjectClass"); 
-                _fk_ObjectClass = value.ID;
-                NotifyPropertyChanged("ObjectClass"); ;
+                fk_ObjectClass = value.ID;
             }
         }
         
@@ -76,9 +74,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("ObjectClass"); 
-                _fk_ObjectClass = value;
-                NotifyPropertyChanged("ObjectClass"); ;
+                if (fk_ObjectClass != value)
+                {
+                    NotifyPropertyChanging("ObjectClass"); 
+                    _fk_ObjectClass = value;
+                    NotifyPropertyChanged("ObjectClass");
+                }
             }
         }
         
@@ -119,9 +120,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value.ID;
-                NotifyPropertyChanged("Module"); ;
+                fk_Module = value.ID;
             }
         }
         
@@ -133,9 +132,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("Module"); 
-                _fk_Module = value;
-                NotifyPropertyChanged("Module"); ;
+                if (fk_Module != value)
+                {
+                    NotifyPropertyChanging("Module"); 
+                    _fk_Module = value;
+                    NotifyPropertyChanged("Module");
+                }
             }
         }
         

@@ -88,9 +88,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                NotifyPropertyChanging("ObjectProp"); 
-                _fk_ObjectProp = value.ID;
-                NotifyPropertyChanged("ObjectProp"); ;
+                fk_ObjectProp = value.ID;
             }
         }
         
@@ -102,9 +100,12 @@ namespace Kistl.App.Test
             }
             set
             {
-                NotifyPropertyChanging("ObjectProp"); 
-                _fk_ObjectProp = value;
-                NotifyPropertyChanged("ObjectProp"); ;
+                if (fk_ObjectProp != value)
+                {
+                    NotifyPropertyChanging("ObjectProp"); 
+                    _fk_ObjectProp = value;
+                    NotifyPropertyChanged("ObjectProp");
+                }
             }
         }
         

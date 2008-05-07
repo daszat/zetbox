@@ -44,9 +44,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("ReferenceProperty"); 
-                _fk_ReferenceProperty = value.ID;
-                NotifyPropertyChanged("ReferenceProperty"); ;
+                fk_ReferenceProperty = value.ID;
             }
         }
         
@@ -58,9 +56,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                NotifyPropertyChanging("ReferenceProperty"); 
-                _fk_ReferenceProperty = value;
-                NotifyPropertyChanged("ReferenceProperty"); ;
+                if (fk_ReferenceProperty != value)
+                {
+                    NotifyPropertyChanging("ReferenceProperty"); 
+                    _fk_ReferenceProperty = value;
+                    NotifyPropertyChanged("ReferenceProperty");
+                }
             }
         }
         
