@@ -41,7 +41,7 @@
     </Reference>
     <Reference Include="Kistl.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.Client\bin\Debug\Kistl.Client.exe</HintPath>
+      <HintPath>..\..\Kistl.Client\obj\Debug\Kistl.Client.dll</HintPath>
     </Reference>
     <Reference Include="Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

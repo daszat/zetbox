@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\CompleteTests.nunit" total="421" failures="110" not-run="0" date="2008-05-07" time="09:58:40">
-  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 6.0.6000.0" platform="Win32NT" cwd="E:\Program Files\NUnit 2.4.7\bin" machine-name="KISTL" user="david" user-domain="kistl" />
+<test-results name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\CompleteTests.nunit" total="421" failures="50" not-run="0" date="2008-05-07" time="10:04:34">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 6.0.6000.0" platform="Win32NT" cwd="E:\Projekte\Kistl\Kistl.Tests\CompleteTests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\CompleteTests.nunit" success="False" time="3.370" asserts="0">
+  <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\CompleteTests.nunit" success="False" time="12.589" asserts="0">
     <results>
-      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\API.Tests.dll" success="False" time="1.622" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\API.Tests.dll" success="False" time="1.716" asserts="0">
         <results>
-          <test-suite name="API" success="False" time="1.622" asserts="0">
+          <test-suite name="API" success="False" time="1.716" asserts="0">
             <results>
-              <test-suite name="Tests" success="False" time="1.591" asserts="0">
+              <test-suite name="Tests" success="False" time="1.685" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="False" time="0.936" asserts="0">
+                  <test-suite name="Tests" success="False" time="1.045" asserts="0">
                     <results>
                       <test-suite name="APIInitTest" success="False" time="0.000" asserts="0">
                         <results>
@@ -23,10 +23,10 @@
                           </test-case>
                         </results>
                       </test-suite>
-                      <test-suite name="AssemblyLoaderTests" success="False" time="0.047" asserts="0">
+                      <test-suite name="AssemblyLoaderTests" success="False" time="0.062" asserts="0">
                         <results>
-                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.AssemblyResolve" executed="True" success="True" time="0.016" asserts="0" />
-                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.Load" executed="True" success="False" time="0.016" asserts="1">
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.AssemblyResolve" executed="True" success="True" time="0.031" asserts="0" />
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.Load" executed="True" success="False" time="0.031" asserts="1">
                             <failure>
                               <message><![CDATA[  Expected: not null
   But was:  null
@@ -35,7 +35,7 @@
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.ReflectionOnlyLoadFrom" executed="True" success="False" time="0.016" asserts="1">
+                          <test-case name="API.Tests.Tests.AssemblyLoaderTests.ReflectionOnlyLoadFrom" executed="True" success="False" time="0.000" asserts="1">
                             <failure>
                               <message><![CDATA[  Expected: not null
   But was:  null
@@ -46,14 +46,14 @@
                           </test-case>
                         </results>
                       </test-suite>
-                      <test-suite name="BinarySerializerTests" success="False" time="0.187" asserts="0">
+                      <test-suite name="BinarySerializerTests" success="False" time="0.218" asserts="0">
                         <results>
                           <test-case name="API.Tests.Tests.BinarySerializerTests.Bool" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.BoolNull" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.BoolNullValue" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.DateTime" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.DateTimeNull" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.Double" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.Double" executed="True" success="True" time="0.016" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.DoubleNull" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.DoubleNullValue" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.Enum" executed="True" success="False" time="0.016" asserts="0">
@@ -69,13 +69,13 @@ bei API.Tests.Tests.BinarySerializerTests.Enum() in E:\Projekte\Kistl\Kistl.Test
                           <test-case name="API.Tests.Tests.BinarySerializerTests.FloatNullValue" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ICollectionEntry" executed="True" success="True" time="0.016" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.ICollection_ObservableCollection_ICollectionEntry" executed="True" success="True" time="0.016" asserts="1" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.IEnumerable_IDataObject" executed="True" success="True" time="0.016" asserts="1" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.IEnumerable_IDataObject" executed="True" success="True" time="0.031" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.Int" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.IntNull" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.IntNullValue" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.ObjectType" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.ObjectTypeNull" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="API.Tests.Tests.BinarySerializerTests.SerializableExpression" executed="True" success="True" time="0.094" asserts="2" />
+                          <test-case name="API.Tests.Tests.BinarySerializerTests.SerializableExpression" executed="True" success="True" time="0.109" asserts="2" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.String" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.BinarySerializerTests.StringNull" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
@@ -87,7 +87,7 @@ bei API.Tests.Tests.BinarySerializerTests.Enum() in E:\Projekte\Kistl\Kistl.Test
                       </test-suite>
                       <test-suite name="ExpressionFilterTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="API.Tests.Tests.ExpressionFilterTest.IllegalExpression" executed="True" success="True" time="0.016" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExpressionFilterTest.IllegalExpression" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.ExpressionFilterTest.IllegalExpressionClass_UnknownToString" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="API.Tests.Tests.ExpressionFilterTest.LegalExpression" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
@@ -99,8 +99,8 @@ bei API.Tests.Tests.BinarySerializerTests.Enum() in E:\Projekte\Kistl\Kistl.Test
                       </test-suite>
                       <test-suite name="ExtensionHelpersTest" success="True" time="0.390" asserts="0">
                         <results>
-                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_List" executed="True" success="True" time="0.016" asserts="1" />
-                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_NotifyingObservableCollection" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_List" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_NotifyingObservableCollection" executed="True" success="True" time="0.016" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.Clone_ObservableCollection" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.ForEach_IEnumerable" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.ForEach_ObservableCollection" executed="True" success="True" time="0.000" asserts="1" />
@@ -109,16 +109,16 @@ bei API.Tests.Tests.BinarySerializerTests.Enum() in E:\Projekte\Kistl\Kistl.Test
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.In" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.InFalse" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue" executed="True" success="True" time="0.000" asserts="3" />
-                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="API.Tests.Tests.ExtensionHelpersTest.SetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="API.Tests.Tests.ExtensionHelpersTest.XmlString" executed="True" success="True" time="0.343" asserts="1" />
                         </results>
                       </test-suite>
                       <test-suite name="KistlConfigTests" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="API.Tests.Tests.KistlConfigTests.Current" executed="True" success="True" time="0.000" asserts="3" />
-                          <test-case name="API.Tests.Tests.KistlConfigTests.FromStream" executed="True" success="True" time="0.000" asserts="9" />
+                          <test-case name="API.Tests.Tests.KistlConfigTests.FromStream" executed="True" success="True" time="0.016" asserts="9" />
                           <test-case name="API.Tests.Tests.KistlConfigTests.FromTextReader" executed="True" success="True" time="0.000" asserts="9" />
-                          <test-case name="API.Tests.Tests.KistlConfigTests.ToFile" executed="True" success="True" time="0.016" asserts="2" />
+                          <test-case name="API.Tests.Tests.KistlConfigTests.ToFile" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="API.Tests.Tests.KistlConfigTests.ToStream" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
@@ -127,14 +127,14 @@ bei API.Tests.Tests.BinarySerializerTests.Enum() in E:\Projekte\Kistl\Kistl.Test
                           <test-case name="API.Tests.Tests.KistlServiceStreamsMessageTests.Stream" executed="True" success="True" time="0.000" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="LinqExtensionsTests" success="False" time="0.125" asserts="0">
+                      <test-suite name="LinqExtensionsTests" success="False" time="0.140" asserts="0">
                         <results>
                           <test-case name="API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition" executed="True" success="True" time="0.047" asserts="1" />
                           <test-case name="API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidProperty" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="API.Tests.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidType" executed="True" success="True" time="0.031" asserts="0" />
                           <test-case name="API.Tests.Tests.LinqExtensionsTests.AddFilter" executed="True" success="True" time="0.016" asserts="1" />
                           <test-case name="API.Tests.Tests.LinqExtensionsTests.AddFilter_IllegalExpression" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddOrderBy" executed="True" success="False" time="0.016" asserts="0">
+                          <test-case name="API.Tests.Tests.LinqExtensionsTests.AddOrderBy" executed="True" success="False" time="0.000" asserts="0">
                             <failure>
                               <message><![CDATA[System.InvalidOperationException : Der Index war außerhalb des Arraybereichs.
 NodeType: Lambda
@@ -159,7 +159,7 @@ bei API.Tests.Tests.LinqExtensionsTests.AddOrderBy() in E:\Projekte\Kistl\Kistl.
                           <test-case name="API.Tests.Tests.NotifyingObservableCollectionTests.SetItem" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectTypeTests" success="True" time="0.016" asserts="0">
+                      <test-suite name="ObjectTypeTests" success="True" time="0.047" asserts="0">
                         <results>
                           <test-case name="API.Tests.Tests.ObjectTypeTests.Constructor_Empty" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="API.Tests.Tests.ObjectTypeTests.Constructor_IDataObject" executed="True" success="True" time="0.000" asserts="2" />
@@ -192,343 +192,806 @@ bei API.Tests.Tests.LinqExtensionsTests.AddOrderBy() in E:\Projekte\Kistl\Kistl.
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\API.Server.Tests.dll" success="False" time="0.094" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\API.Server.Tests.dll" success="False" time="6.833" asserts="0">
         <results>
-          <test-suite name="API" success="False" time="0.094" asserts="0">
+          <test-suite name="API" success="False" time="6.833" asserts="0">
             <results>
-              <test-suite name="Server" success="False" time="0.094" asserts="0">
+              <test-suite name="Server" success="False" time="6.817" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="False" time="0.078" asserts="0">
-                    <failure>
-                      <message><![CDATA[System.InvalidOperationException : ICustomActionsManager.Init() was called twice]]></message>
-                      <stack-trace><![CDATA[bei Kistl.API.CustomActionsManagerFactory.Init(ICustomActionsManager manager) in E:\Projekte\Kistl\Kistl.API\ICustomActions.cs:Zeile 44.
-bei API.Server.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\SetUp.cs:Zeile 24.
-]]></stack-trace>
-                    </failure>
+                  <test-suite name="Tests" success="False" time="6.817" asserts="0">
                     <results>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.Clone" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.CopyTo" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.CopyTo_Null" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.FromStream_Null_Context" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.FromStream_Null_StreamReader" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.NotifyPropertyChanged_ing" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.Stream" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.ToStream_Null" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="API.Server.Tests.Tests.BaseServerCollectionEntryTests" success="False" time="0.000" asserts="0">
-                        <results />
-                      </test-suite>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.AttachToContext" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.Clone" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.CopyTo" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.CopyTo_Null" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.DetachFromContext" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.EventAttached" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_Null_Context" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_Null_StreamReader" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_WrongType" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.NotifyChange" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_New_then_UnModified" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.Stream" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ToStream_Null" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.Type" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="API.Server.Tests.Tests.BaseServerDataObjectTests" success="False" time="0.000" asserts="0">
-                        <results />
-                      </test-suite>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_ICollectionEntry" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.CleanUpSession" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Create_Generic" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Create_ObjectType" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Create_Type" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Delete_ICollectionEntry" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Delete_IDataObject" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_ICollectionEntry" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_IDataObject_Failed" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetContext" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetListOf" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetListOf_ObjType" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetQuery" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetQuery_ObjType" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.InitSession" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.InitSessionTwice" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.NoSession" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.SelectSomeData" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.SelectSomeData_Collection" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SaveChanges" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="API.Server.Tests.Tests.KistlDataContextTests" success="False" time="0.000" asserts="0">
-                        <results />
-                      </test-suite>
-                      <test-suite name="API.Server.Tests.Tests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="Tests" success="False" time="6.162" asserts="0">
+                        <results>
+                          <test-suite name="BaseServerCollectionEntryTests" success="True" time="1.404" asserts="0">
+                            <results>
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.Clone" executed="True" success="True" time="0.016" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.CopyTo" executed="True" success="True" time="0.016" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.CopyTo_Null" executed="True" success="True" time="0.016" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.FromStream_Null_Context" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.FromStream_Null_StreamReader" executed="True" success="True" time="1.342" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.Stream" executed="True" success="True" time="0.016" asserts="2" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerCollectionEntryTests.ToStream_Null" executed="True" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="BaseServerDataObjectTests" success="True" time="0.281" asserts="0">
+                            <results>
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.AttachToContext" executed="True" success="True" time="0.000" asserts="3" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.Clone" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.CopyTo" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.CopyTo_Null" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.DetachFromContext" executed="True" success="True" time="0.203" asserts="4" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.EventAttached" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_Null_Context" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.FromStream_WrongType" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.NotifyChange" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_New_then_UnModified" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.Stream" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.ToStream_Null" executed="True" success="True" time="0.016" asserts="0" />
+                              <test-case name="API.Server.Tests.Tests.BaseServerDataObjectTests.Type" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="KistlDataContextTests" success="False" time="4.477" asserts="0">
+                            <results>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_ICollectionEntry" executed="True" success="False" time="4.243" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="False" time="0.047" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.CleanUpSession" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Create_Generic" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Create_ObjectType" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Create_Type" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Delete_ICollectionEntry" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Delete_IDataObject" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_ICollectionEntry" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.Detach_IDataObject_Failed" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetContext" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetListOf" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetListOf_ObjType" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetQuery" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.GetQuery_ObjType" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.InitSession" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.InitSessionTwice" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.NoSession" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.SelectSomeData" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.SelectSomeData_Collection" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SaveChanges" executed="True" success="False" time="0.016" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Server.Tests.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.Data.CommandExecutionException : An error occurred while executing the command definition, see the inner exception for details.
+  ----> System.Data.SqlClient.SqlException : Invalid object name 'App.TestObjClass'.]]></message>
+                                  <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.MaterializeResults(ObjectQueryExecutionInfo execInfo, MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults(MergeOption mergeOption)
+bei System.Data.Objects.Internal.ObjectQueryImplementation`1.GetResults()
+bei System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+bei System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+bei System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+bei API.Server.Tests.Tests.KistlDataContextTests.SetUp() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Tests\Tests\KistlDataContextTests.cs:Zeile 22.
+--SqlException
+bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+bei System.Data.SqlClient.SqlDataReader.get_MetaData()
+bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                        </results>
                       </test-suite>
                     </results>
                   </test-suite>
@@ -538,11 +1001,11 @@ bei API.Server.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\API.Server.Te
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\Integration.Tests.dll" success="False" time="0.874" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\Integration.Tests.dll" success="False" time="1.825" asserts="0">
         <results>
-          <test-suite name="Integration" success="False" time="0.874" asserts="0">
+          <test-suite name="Integration" success="False" time="1.778" asserts="0">
             <results>
-              <test-suite name="Tests" success="False" time="0.858" asserts="0">
+              <test-suite name="Tests" success="False" time="1.747" asserts="0">
                 <failure>
                   <message><![CDATA[System.IO.FileNotFoundException : Die Datei oder Assembly Kistl.Server oder eine Abhängigkeit davon wurde nicht gefunden. Das System kann die angegebene Datei nicht finden.]]></message>
                   <stack-trace><![CDATA[bei System.Reflection.Assembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, Assembly locationHint, StackCrawlMark& stackMark, Boolean throwOnFileNotFound, Boolean forIntrospection)
@@ -679,265 +1142,131 @@ bei Integration.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Integration.
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\Kistl.Client.Tests.dll" success="False" time="0.094" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\Kistl.Client.Tests.dll" success="False" time="1.092" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="0.078" asserts="0">
+          <test-suite name="Kistl" success="False" time="1.076" asserts="0">
             <results>
-              <test-suite name="Client" success="False" time="0.078" asserts="0">
+              <test-suite name="Client" success="False" time="1.061" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="False" time="0.078" asserts="0">
-                    <failure>
-                      <message><![CDATA[System.InvalidOperationException : ICustomActionsManager.Init() was called twice]]></message>
-                      <stack-trace><![CDATA[bei Kistl.API.CustomActionsManagerFactory.Init(ICustomActionsManager manager) in E:\Projekte\Kistl\Kistl.API\ICustomActions.cs:Zeile 44.
-bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Tests\SetUp.cs:Zeile 26.
-]]></stack-trace>
-                    </failure>
+                  <test-suite name="Tests" success="False" time="1.061" asserts="0">
                     <results>
-                      <test-case name="Kistl.Client.Tests.BackReferencePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.BackReferencePresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.BackReferencePresenterTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="BackReferencePresenterTests" success="False" time="0.187" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.BackReferencePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.187" asserts="0">
+                            <failure>
+                              <message><![CDATA[System.InvalidCastException : Das Objekt des Typs Kistl.App.Base.BackReferenceProperty kann nicht in Typ Kistl.App.Base.ObjectReferenceProperty umgewandelt werden.]]></message>
+                              <stack-trace><![CDATA[bei Kistl.GUI.ObjectListPresenter.get_Property() in E:\Projekte\Kistl\Kistl.Client\GUI\Presenter.cs:Zeile 286.
+bei Kistl.GUI.ObjectListPresenter.InitializeComponent() in E:\Projekte\Kistl\Kistl.Client\GUI\Presenter.cs:Zeile 265.
+bei Kistl.GUI.Presenter`1.InitializeComponent(IDataObject obj, Visual v, CONTROL ctrl) in E:\Projekte\Kistl\Kistl.Client\GUI\Presenter.cs:Zeile 57.
+bei Kistl.GUI.Presenter`1.InitializeComponent(IDataObject obj, Visual v, IBasicControl ctrl) in E:\Projekte\Kistl\Kistl.Client\GUI\Presenter.cs:Zeile 30.
+bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in E:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 60.
+bei Kistl.Client.Tests.PresenterTest`2.Init(ControlInfo ci, BaseProperty bp) in E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Tests\PresenterTest.cs:Zeile 43.
+bei Kistl.Client.Tests.BackReferencePresenterTests.HandleNoUserInput() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Tests\BackReferencePresenterTests.cs:Zeile 25.
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Kistl.Client.Tests.BackReferencePresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
+                            <failure>
+                              <message><![CDATA[An unexpected exception type was thrown
+Expected: System.InvalidOperationException
+ but was: System.NullReferenceException : Der Objektverweis wurde nicht auf eine Objektinstanz festgelegt.]]></message>
+                              <stack-trace><![CDATA[bei Kistl.Client.Tests.PresenterTest`2.ReInit() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Tests\PresenterTest.cs:Zeile 50.
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                        </results>
                       </test-suite>
-                      <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleFalseUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleNoUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleNullUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleTrueUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.BoolPresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.BoolPresenterTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="BoolPresenterTests" success="True" time="0.031" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleFalseUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.016" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.HandleTrueUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.BoolPresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
                       </test-suite>
-                      <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleConstant" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleExtrema" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleNullUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.DateTimePresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.DateTimePresenterTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="DateTimePresenterTests" success="True" time="0.016" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleConstant" executed="True" success="True" time="0.016" asserts="15" />
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleExtrema" executed="True" success="True" time="0.000" asserts="20" />
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.DateTimePresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
                       </test-suite>
-                      <test-case name="Kistl.Client.Tests.DoublePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.DoublePresenterTests.HandleNullUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.DoublePresenterTests.HandleValues" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.DoublePresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.DoublePresenterTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="DoublePresenterTests" success="True" time="0.016" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.DoublePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.016" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.DoublePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.DoublePresenterTests.HandleValues" executed="True" success="True" time="0.000" asserts="80" />
+                          <test-case name="Kistl.Client.Tests.DoublePresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
                       </test-suite>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.CreateControl" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenter" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoInfo" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoObject" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoVisual" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoWidget" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.FindControlInfo" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.FindPresenterInfo" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.GuiDbTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.GuiDbTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="GuiDbTests" success="True" time="0.031" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreateControl" executed="True" success="True" time="0.016" asserts="2" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenter" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoInfo" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoObject" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoVisual" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.CreatePresenterFailNoWidget" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.FindControlInfo" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.FindPresenterInfo" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.Client.Tests.GuiDbTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
                       </test-suite>
-                      <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNoUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNullUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleValues" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.IntPresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.IntPresenterTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="IntPresenterTests" success="True" time="0.000" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.IntPresenterTests.HandleValues" executed="True" success="True" time="0.000" asserts="85" />
+                          <test-case name="Kistl.Client.Tests.IntPresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
                       </test-suite>
-                      <test-case name="Kistl.Client.Tests.ObjectReferencePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.ObjectReferencePresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.ObjectReferencePresenterTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="ObjectReferencePresenterTests" success="False" time="0.062" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.ObjectReferencePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.062" asserts="0">
+                            <failure>
+                              <message><![CDATA[NMock2.Internal.ExpectationException : unexpected invocation of kistlContext.GetQuery(<Kistl.Client.Mocks.MockObjectReferenceProperty>)
+Expected:
+]]></message>
+                              <stack-trace><![CDATA[bei NMock2.Mockery.FailUnexpectedInvocation(Invocation invocation) in E:\Projekte\Kistl\Kistl.Tests\NMock2\Mockery.cs:Zeile 184.
+bei NMock2.Mockery.Dispatch(Invocation invocation) in E:\Projekte\Kistl\Kistl.Tests\NMock2\Mockery.cs:Zeile 88.
+bei NMock2.Internal.MockObject.Invoke(Invocation invocation) in E:\Projekte\Kistl\Kistl.Tests\NMock2\Internal\MockObject.cs:Zeile 30.
+bei NMock2.Monitoring.Invoker.Invoke(Invocation invocation) in E:\Projekte\Kistl\Kistl.Tests\NMock2\Monitoring\Invoker.cs:Zeile 26.
+bei NMock2.Monitoring.ProxiedObjectIdentity.Invoke(Invocation invocation) in E:\Projekte\Kistl\Kistl.Tests\NMock2\Monitoring\ProxiedObjectIdentity.cs:Zeile 35.
+bei NMock2.Monitoring.ProxyInvokableAdapter.Invoke(IMessage msg) in E:\Projekte\Kistl\Kistl.Tests\NMock2\Monitoring\ProxyInvokableAdapter.cs:Zeile 27.
+bei System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+bei Kistl.API.IKistlContext.GetQuery(ObjectType type)
+bei Kistl.GUI.PointerPresenter.InitializeComponent() in E:\Projekte\Kistl\Kistl.Client\GUI\Presenter.cs:Zeile 253.
+bei Kistl.GUI.Presenter`1.InitializeComponent(IDataObject obj, Visual v, CONTROL ctrl) in E:\Projekte\Kistl\Kistl.Client\GUI\Presenter.cs:Zeile 57.
+bei Kistl.GUI.Presenter`1.InitializeComponent(IDataObject obj, Visual v, IBasicControl ctrl) in E:\Projekte\Kistl\Kistl.Client\GUI\Presenter.cs:Zeile 30.
+bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in E:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 60.
+bei Kistl.Client.Tests.PresenterTest`2.Init(ControlInfo ci, BaseProperty bp) in E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Tests\PresenterTest.cs:Zeile 43.
+bei Kistl.Client.Tests.ObjectReferencePresenterTests.HandleNoUserInput() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Tests\ObjectReferencePresenterTests.cs:Zeile 25.
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Kistl.Client.Tests.ObjectReferencePresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
+                            <failure>
+                              <message><![CDATA[An unexpected exception type was thrown
+Expected: System.InvalidOperationException
+ but was: System.NullReferenceException : Der Objektverweis wurde nicht auf eine Objektinstanz festgelegt.]]></message>
+                              <stack-trace><![CDATA[bei Kistl.Client.Tests.PresenterTest`2.ReInit() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Tests\PresenterTest.cs:Zeile 50.
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                        </results>
                       </test-suite>
-                      <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleEmptyString" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNoUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNullUserInput" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNumbers" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleStrings" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-case name="Kistl.Client.Tests.StringPresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
-                        <failure>
-                          <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                          <stack-trace />
-                        </failure>
-                      </test-case>
-                      <test-suite name="Kistl.Client.Tests.StringPresenterTests" success="False" time="0.000" asserts="0">
-                        <results />
+                      <test-suite name="StringPresenterTests" success="True" time="0.016" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleEmptyString" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="2" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleNumbers" executed="True" success="True" time="0.000" asserts="35" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.HandleStrings" executed="True" success="True" time="0.000" asserts="25" />
+                          <test-case name="Kistl.Client.Tests.StringPresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
                       </test-suite>
                     </results>
                   </test-suite>
@@ -947,26 +1276,26 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\NMock2.AcceptanceTests.dll" success="True" time="0.218" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\NMock2.AcceptanceTests.dll" success="True" time="0.250" asserts="0">
         <results>
-          <test-suite name="NMock2" success="True" time="0.218" asserts="0">
+          <test-suite name="NMock2" success="True" time="0.250" asserts="0">
             <results>
-              <test-suite name="AcceptanceTests" success="True" time="0.218" asserts="0">
+              <test-suite name="AcceptanceTests" success="True" time="0.250" asserts="0">
                 <results>
-                  <test-suite name="ArgumentMatchingAcceptanceTest" success="True" time="0.016" asserts="0">
+                  <test-suite name="ArgumentMatchingAcceptanceTest" success="True" time="0.031" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.ArgumentMatchingAcceptanceTest.CanMixMatcherAndNonMatcherExpectedArguments" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ArgumentMatchingAcceptanceTest.CanMixMatcherAndNonMatcherExpectedArguments" executed="True" success="True" time="0.031" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="ErrorCheckingAcceptanceTest" success="True" time="0.047" asserts="0">
+                  <test-suite name="ErrorCheckingAcceptanceTest" success="True" time="0.016" asserts="0">
                     <results>
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAddToNonexistentEvent" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodOnAnRealObject" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodThatDoesNotExistInTheMockedType" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodThatDoesNotExistInTheMockedType" executed="True" success="True" time="0.016" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodWithAnInvalidName" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfAnInvalidProperty" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfIndexerIfNoIndexerInMockedType" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectRemoveFromNonexistentEvent" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectRemoveFromNonexistentEvent" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfAnInvalidProperty" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfIndexerIfNoIndexerInMockedType" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
@@ -983,27 +1312,27 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                     <results>
                       <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.CanExpectEventAdd" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.CanExpectEventRemove" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.DelegatesCanBeComparedToEquality" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.DelegatesCanBeComparedToEquality" executed="True" success="True" time="0.016" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlersCanBeRemovedDuringEventHandling" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlingByMocksRespectsAdditionAndRemovalOfListeners" executed="True" success="True" time="0.000" asserts="3" />
                       <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventsCanBeRaisedDuringTests" executed="True" success="True" time="0.000" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="Example" success="True" time="0.000" asserts="0">
+                  <test-suite name="Example" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.Example.KnockKnockJoke" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.Example.KnockKnockJoke" executed="True" success="True" time="0.016" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="ExpectationsAcceptanceTest" success="True" time="0.047" asserts="0">
+                  <test-suite name="ExpectationsAcceptanceTest" success="True" time="0.031" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.ExpectationsCanOverrideStubs" executed="True" success="True" time="0.016" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.ExpectationsCanOverrideStubs" executed="True" success="True" time="0.000" asserts="2" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtLeastNTimesButCalledLessThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtMostNTimesAndCalledMoreThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedBetweenNAndMTimesAndCalledMoreThanMTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedBetweenNAndMTimesButCalledLessThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedOnceButCalledTwice" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedOnceButNotCalled" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsActuallyCalled" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsActuallyCalled" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsCalled" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledMoreThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledNTimes" executed="True" success="True" time="0.000" asserts="0" />
@@ -1012,12 +1341,12 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedBetweenNAndMTimesAndCalledBetweenNAndMTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedOnceAndCalled" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodNeverExpectedIsNeverCalled" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldFailIfExpectedExactlyNTimesAndCalledLessThanNTimes" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldFailIfExpectedExactlyNTimesAndCalledLessThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldFailIfExpectedExactlyNTimesAndCalledMoreThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldPassIfExpectedExactlyNTimesAndCalledNTimes" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="IndexersAcceptanceTest" success="True" time="0.000" asserts="0">
+                  <test-suite name="IndexersAcceptanceTest" success="True" time="0.016" asserts="0">
                     <results>
                       <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.CanExpectIndexedGetter" executed="True" success="True" time="0.000" asserts="2" />
                       <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.CanExpectIndexedSetter" executed="True" success="True" time="0.000" asserts="0" />
@@ -1025,20 +1354,20 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                       <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.ErrorMessagesContainNameOfPropertySetterNotHiddenMethod" executed="True" success="True" time="0.000" asserts="3" />
                     </results>
                   </test-suite>
-                  <test-suite name="MockeryAcceptanceTest" success="True" time="0.016" asserts="0">
+                  <test-suite name="MockeryAcceptanceTest" success="True" time="0.031" asserts="0">
                     <results>
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.CallingVerifyOnMockeryShouldEnableMockeryToBeUsedSuccessfullyForOtherTests" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockEmptyInterface" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs1" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs2" executed="True" success="True" time="0.000" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs3" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs3" executed="True" success="True" time="0.016" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs4" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs5" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs6" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockMixedInterface" executed="True" success="True" time="0.000" asserts="2" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockObjectsMayBePlacedIntoServiceContainers" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterface" executed="True" success="True" time="0.000" asserts="2" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterfaceWithArgs" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterfaceWithArgs" executed="True" success="True" time="0.016" asserts="2" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterface" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterfaceWithArgs" executed="True" success="True" time="0.000" asserts="1" />
                     </results>
@@ -1051,7 +1380,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                       <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CanExpectUnorderedCallsWithinAnOrderedSequence" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.DoesNotEnforceTheOrderOfCallsByDefault" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.EnforcesTheOrderOfCallsWithinAnInOrderBlock" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledAfterTheEndOfTheUnorderedExpectations" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledAfterTheEndOfTheUnorderedExpectations" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledBeforeTheStartOfTheUnorderedExpectations" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedExpectationsMatchInOrderOfSpecification" executed="True" success="True" time="0.000" asserts="2" />
                     </results>
@@ -1082,21 +1411,21 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\NMock2.Test.dll" success="True" time="0.359" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Kistl.Tests\CompleteTests\bin\Debug\NMock2.Test.dll" success="True" time="0.406" asserts="0">
         <results>
-          <test-suite name="NMock2" success="True" time="0.328" asserts="0">
+          <test-suite name="NMock2" success="True" time="0.406" asserts="0">
             <results>
-              <test-suite name="Internal" success="True" time="0.016" asserts="0">
+              <test-suite name="Internal" success="True" time="0.031" asserts="0">
                 <results>
-                  <test-suite name="Test" success="True" time="0.016" asserts="0">
+                  <test-suite name="Test" success="True" time="0.031" asserts="0">
                     <results>
-                      <test-suite name="BuildableExpectationTest" success="True" time="0.016" asserts="0">
+                      <test-suite name="BuildableExpectationTest" success="True" time="0.031" asserts="0">
                         <results>
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.ChecksCallCountToAssertThatItHasBeenMet" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.ChecksCallCountToAssertThatItHasBeenMet" executed="True" success="True" time="0.016" asserts="5" />
                           <test-case name="NMock2.Internal.Test.BuildableExpectationTest.DoesNotMatchIfAnyMatcherDoesNotMatch" executed="True" success="True" time="0.000" asserts="63" />
                           <test-case name="NMock2.Internal.Test.BuildableExpectationTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.InvokesAListOfActionsToPerformAnInvocation" executed="True" success="True" time="0.000" asserts="2" />
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.MatchesCallCountWhenMatchingInvocation" executed="True" success="True" time="0.016" asserts="10" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.InvokesAListOfActionsToPerformAnInvocation" executed="True" success="True" time="0.016" asserts="2" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.MatchesCallCountWhenMatchingInvocation" executed="True" success="True" time="0.000" asserts="10" />
                           <test-case name="NMock2.Internal.Test.BuildableExpectationTest.MatchesIfAllMatchersMatch" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Internal.Test.BuildableExpectationTest.WillNotPrintAPeriodBetweenReceiverAndMethodIfToldToDescribeItselfAsAnIndexer" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
@@ -1112,9 +1441,9 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                   </test-suite>
                 </results>
               </test-suite>
-              <test-suite name="Test" success="True" time="0.296" asserts="0">
+              <test-suite name="Test" success="True" time="0.359" asserts="0">
                 <results>
-                  <test-suite name="Actions" success="True" time="0.047" asserts="0">
+                  <test-suite name="Actions" success="True" time="0.062" asserts="0">
                     <results>
                       <test-suite name="CollectActionTest" success="True" time="0.000" asserts="0">
                         <results>
@@ -1123,15 +1452,15 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Actions.CollectActionTest.ReturnsParameterValueFromMostRecentOfMultipleCalls" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="FireActionTest" success="True" time="0.000" asserts="0">
+                      <test-suite name="FireActionTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Actions.FireActionTest.FiresEventOnInvocationReceiver" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.FireActionTest.FiresEventOnInvocationReceiver" executed="True" success="True" time="0.016" asserts="1" />
                           <test-case name="NMock2.Test.Actions.FireActionTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
                       <test-suite name="ResultSynthesizerTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CanOverrideDefaultResultForType" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CanOverrideDefaultResultForType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CanSpecifyResultForOtherType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CreatesDefaultValuesForBasicTypes" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.DoesNotTryToSetResultForVoidReturnType" executed="True" success="True" time="0.000" asserts="0" />
@@ -1139,7 +1468,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsADifferentCollectionOnEachInvocation" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsDefaultValueOfValueTypes" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsEmptyCollections" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsZeroLengthArrays" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsZeroLengthArrays" executed="True" success="True" time="0.016" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ThrowsExceptionIfTriesToReturnValueForUnsupportedResultType" executed="True" success="True" time="0.000" asserts="0" />
                         </results>
                       </test-suite>
@@ -1155,13 +1484,13 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Actions.ReturnCloneActionTest.ReturnsCloneOfPrototypeObject" executed="True" success="True" time="0.000" asserts="0" />
                         </results>
                       </test-suite>
-                      <test-suite name="SetIndexedParameterActionTest" success="True" time="0.000" asserts="0">
+                      <test-suite name="SetIndexedParameterActionTest" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Actions.SetIndexedParameterActionTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Actions.SetIndexedParameterActionTest.SetsIndexedParameterOnInvocation" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="SetNamedParameterActionTest" success="True" time="0.016" asserts="0">
+                      <test-suite name="SetNamedParameterActionTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Actions.SetNamedParameterActionTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Actions.SetNamedParameterActionTest.SetsNamedParameterOnInvocation" executed="True" success="True" time="0.000" asserts="1" />
@@ -1175,19 +1504,19 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="Matchers" success="True" time="0.125" asserts="0">
+                  <test-suite name="Matchers" success="True" time="0.140" asserts="0">
                     <results>
-                      <test-suite name="AlwaysMatcherTest" success="True" time="0.016" asserts="0">
+                      <test-suite name="AlwaysMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.AlwaysMatcherTest.AlwaysReturnsFixedBooleanValueFromMatchesMethod" executed="True" success="True" time="0.000" asserts="12" />
                           <test-case name="NMock2.Test.Matchers.AlwaysMatcherTest.IsGivenADescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="AndMatcherTest" success="True" time="0.000" asserts="0">
+                      <test-suite name="AndMatcherTest" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.AndMatcherTest.CalculatesLogicalConjunctionOfTwoMatchers" executed="True" success="True" time="0.000" asserts="4" />
                           <test-case name="NMock2.Test.Matchers.AndMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" executed="True" success="True" time="0.000" asserts="4" />
-                          <test-case name="NMock2.Test.Matchers.AndMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.AndMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.016" asserts="1" />
                         </results>
                       </test-suite>
                       <test-suite name="ArgumentsMatcherTest" success="True" time="0.016" asserts="0">
@@ -1213,7 +1542,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.MatchesAComparisonOfAComparableValue" executed="True" success="True" time="0.000" asserts="9" />
                         </results>
                       </test-suite>
-                      <test-suite name="DescriptionOverrideTest" success="True" time="0.000" asserts="0">
+                      <test-suite name="DescriptionOverrideTest" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.DescriptionOverrideTest.DelegatesMatchingToAnotherMatcher" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.DescriptionOverrideTest.OverridesDescriptionOfOtherMatcherWithThatPassedToConstructor" executed="True" success="True" time="0.000" asserts="2" />
@@ -1255,7 +1584,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Matchers.MethodNameMatcherTest.UsesMethodNameAsDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="NotMatcherTest" success="True" time="0.000" asserts="0">
+                      <test-suite name="NotMatcherTest" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.NotMatcherTest.CalculatesTheLogicalNegationOfAMatcher" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.NotMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" executed="True" success="True" time="0.000" asserts="2" />
@@ -1298,13 +1627,13 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Matchers.StringContainsMatcherTest.MatchesIfStringArgumentContainsGivenSubstring" executed="True" success="True" time="0.000" asserts="7" />
                         </results>
                       </test-suite>
-                      <test-suite name="ToStringMatcherTest" success="True" time="0.016" asserts="0">
+                      <test-suite name="ToStringMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.ToStringMatcherTest.PassesResultOfToStringToOtherMatcher" executed="True" success="True" time="0.016" asserts="3" />
+                          <test-case name="NMock2.Test.Matchers.ToStringMatcherTest.PassesResultOfToStringToOtherMatcher" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Matchers.ToStringMatcherTest.ReturnsAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="TypeMatcherTest" success="True" time="0.000" asserts="0">
+                      <test-suite name="TypeMatcherTest" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.TypeMatcherTest.DoesNotMatchValueOfNonAssignableType" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Matchers.TypeMatcherTest.MatchesValueOfAssignableType" executed="True" success="True" time="0.000" asserts="2" />
@@ -1312,9 +1641,9 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="MockeryTest" success="True" time="0.031" asserts="0">
+                  <test-suite name="MockeryTest" success="True" time="0.047" asserts="0">
                     <results>
-                      <test-case name="NMock2.Test.MockeryTest.AssertionExceptionThrownWhenNoExpectationsMatchContainsDescriptionOfActiveExpectations" executed="True" success="True" time="0.000" asserts="10" />
+                      <test-case name="NMock2.Test.MockeryTest.AssertionExceptionThrownWhenNoExpectationsMatchContainsDescriptionOfActiveExpectations" executed="True" success="True" time="0.016" asserts="10" />
                       <test-case name="NMock2.Test.MockeryTest.AssertionExceptionThrownWhenSomeExpectationsHaveNotBeenMetContainsDescriptionOfUnMetExpectations" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.Test.MockeryTest.CanCreateMockWithoutCastingBySpecifingTypeAsGenericParameter" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.Test.MockeryTest.CreatedMockComparesReferenceIdentityWithEqualsMethod" executed="True" success="True" time="0.000" asserts="2" />
@@ -1322,7 +1651,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                       <test-case name="NMock2.Test.MockeryTest.CreatesMocksThatCanBeCastToIMockObject" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.Test.MockeryTest.CreatesMocksThatCanBeCastToMockedType" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.Test.MockeryTest.DetectsWhenFirstExpectationHasNotBeenMet" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.Test.MockeryTest.DetectsWhenSecondExpectationHasNotBeenMet" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.Test.MockeryTest.DetectsWhenSecondExpectationHasNotBeenMet" executed="True" success="True" time="0.016" asserts="0" />
                       <test-case name="NMock2.Test.MockeryTest.DispatchesInvocationBySearchingForMatchingExpectationInOrderOfAddition" executed="True" success="True" time="0.000" asserts="19" />
                       <test-case name="NMock2.Test.MockeryTest.FailsTestIfNoExpectationsMatch" executed="True" success="True" time="0.000" asserts="6" />
                       <test-case name="NMock2.Test.MockeryTest.GenericMockCanSpecifyName" executed="True" success="True" time="0.000" asserts="1" />
@@ -1331,10 +1660,10 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                       <test-case name="NMock2.Test.MockeryTest.ShouldBeAbleToInvokeMethodOnInheritedInterface" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.Test.MockeryTest.StopsSearchingForMatchingExpectationAsSoonAsOneMatches" executed="True" success="True" time="0.000" asserts="13" />
                       <test-case name="NMock2.Test.MockeryTest.VerifiesWhenAllExpectationsHaveBeenMet" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.Test.MockeryTest.VerifyExpectationsReportsOnUnexpectedInvocationsWhoseExceptionsWereCaughtElsewhere" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.Test.MockeryTest.VerifyExpectationsReportsOnUnexpectedInvocationsWhoseExceptionsWereCaughtElsewhere" executed="True" success="True" time="0.016" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="Monitoring" success="True" time="0.078" asserts="0">
+                  <test-suite name="Monitoring" success="True" time="0.094" asserts="0">
                     <results>
                       <test-suite name="InvocationSemanticsTest" success="True" time="0.000" asserts="0">
                         <results>
@@ -1346,7 +1675,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.AllowsNullResultForMethodThatReturnsANullableType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.AllowsSettingNullResultOfVoidMethod" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.CanBeInvokedOnAnotherObject" executed="True" success="True" time="0.000" asserts="4" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventAdderDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventAdderDoesNotShowSugaredMethod" executed="True" success="True" time="0.016" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventRemoverDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfIndexerGetterDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfIndexerSetterDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
@@ -1355,7 +1684,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowNullException" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowNullResultForMethodThatReturnsAValueType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingIncompatibleResultType" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingNonNullResultOfVoidMethod" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingNonNullResultOfVoidMethod" executed="True" success="True" time="0.016" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.SettingExceptionClearsResult" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.SettingResultClearsException" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.StoresExceptionToThrow" executed="True" success="True" time="0.000" asserts="3" />
@@ -1381,7 +1710,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                         <results>
                           <test-case name="NMock2.Test.Monitoring.ParameterListTest.CanSetValuesOfOutAndRefParameters" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowAccessToValuesOfUnsetOutParameters" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowValuesOfInputParametersToBeChanged" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowValuesOfInputParametersToBeChanged" executed="True" success="True" time="0.016" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.ParameterListTest.ReturnsNumberOfParameters" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.ParameterListTest.ReturnsValuesOfInParameters" executed="True" success="True" time="0.000" asserts="4" />
                         </results>
@@ -1394,7 +1723,7 @@ bei Kistl.Client.Tests.SetUp.Init() in E:\Projekte\Kistl\Kistl.Tests\Kistl.Clien
                           <test-case name="NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ImplementsEqualsByComparingInvocationReceiversForIdentity" executed="True" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite name="ProxyInvokableAdapterTest" success="True" time="0.016" asserts="0">
+                      <test-suite name="ProxyInvokableAdapterTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.CapturesInvocationsOnTransparentProxyAndForwardsToInvokableObject" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.PassesExceptionThrownByInvokableToCallerOfProxy" executed="True" success="True" time="0.000" asserts="1" />
