@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using NMock2;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Kistl.API;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
@@ -16,15 +16,28 @@ namespace Kistl.Client.Tests
     {
         protected void AssertWidgetHasValidValue()
         {
-            Assert.That(widget.IsValidValue, Is.True, "the widget should be in a valid state after this operation");
+            Assert.That(widget.IsValidValue, "the widget should be in a valid state after this operation");
         }
 
         [Test]
         public void HandleNoUserInput()
         {
+            IQueryable<IDataObject> idoq = mocks.NewMock<IQueryable<IDataObject>>("IDataObjectQueryable");
+
+            Expect.Once.On(MockContext).
+                Method("GetQuery").
+                Will(Return.Value(idoq));
+
+            Expect.Once.On(idoq).
+                Method("GetEnumerator").
+                Will(Return.Value(new List<IDataObject>(new [] { null, new TestObject(MockContext) }).GetEnumerator() ));
+
             Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceProperty);
-            Assert.That(obj.TestObjectReference, Is.Empty, "ObjectReferenceProperty should default to empty");
+
+            Assert.AreEqual(obj.TestObjectReference, Helper.INVALIDID, "ObjectReferenceProperty should default to INVALIDID");
             AssertWidgetHasValidValue();
+
+            mocks.VerifyAllExpectationsHaveBeenMet();
         }
     }
 }

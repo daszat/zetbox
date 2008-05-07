@@ -12,6 +12,8 @@ namespace Kistl.Client.Mocks
         public TestObject(IKistlContext ctx)
         {
             TestBackReference = new List<IDataObject>();
+            TestObjectReference = Helper.INVALIDID;
+
             Context = ctx;
         }
 

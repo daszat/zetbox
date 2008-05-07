@@ -18,22 +18,24 @@ namespace Kistl.Client.Tests
         where CONTROL : IBasicControl
         where PRESENTER : IPresenter
     {
+        protected Mockery mocks { get; set; }
+        protected IKistlContext MockContext { get; set; }
+        [SetUp]
+        public void SetUp()
+        {
+            mocks = new Mockery();
+            MockContext = mocks.NewMock<IKistlContext>("MockContext");
+        }
+
         protected TestObject obj { get; set; }
         protected Visual visual { get; set; }
         protected ControlInfo cInfo { get; set; }
         protected PresenterInfo pInfo { get; set; }
         protected CONTROL widget { get; set; }
         protected PRESENTER presenter { get; set; }
-        protected static Mockery mocks { get; set; }
-        protected IKistlContext MockContext { get; set; }
 
         protected void Init(ControlInfo ci, BaseProperty bp)
         {
-            if (mocks == null)
-            {
-                mocks = new Mockery();
-            }
-            MockContext = mocks.NewMock<IKistlContext>();
             obj = new TestObject(MockContext);
 
             visual = new Visual() { Name = ci.Control, Property = bp };
