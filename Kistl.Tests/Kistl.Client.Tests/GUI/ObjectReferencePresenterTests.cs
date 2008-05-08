@@ -77,8 +77,7 @@ namespace Kistl.GUI.Tests
         public void HandleValidUserInput()
         {
             int expectedID = 3;
-            // Clone object to exercise all parts of the Presenter
-            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID).Clone();
+            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID);
             int expectedIndex = Items.IndexOf(expectedObject);
 
             // users select index of item
@@ -95,7 +94,7 @@ namespace Kistl.GUI.Tests
         {
             int expectedID = 3;
             // Clone object to exercise all parts of the Presenter
-            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID).Clone();
+            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID);
             int expectedIndex = Items.IndexOf(expectedObject);
 
             obj.TestObjectReference = expectedObject;
@@ -110,8 +109,7 @@ namespace Kistl.GUI.Tests
         public void HandleInvalidUserInput()
         {
             int expectedID = 3;
-            // Clone object to exercise all parts of the Presenter
-            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID).Clone();
+            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID);
             int expectedIndex = Items.IndexOf(expectedObject);
 
             int unexpectedID = 66;

@@ -138,7 +138,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
             Assert.AreEqual(Items[1], obj.TestObjectReference, "TestObjectReference was not set correctly");
 
             _UserInputCalled = false;
-            IDataObject expectedClone = (IDataObject)Items[2].Clone();
+            IDataObject expectedClone = (IDataObject)Items[2];
             obj.TestObjectReference = expectedClone;
             Assert.AreEqual(expectedClone, obj.TestObjectReference, "TestObjectReference was not set correctly");
             Assert.AreEqual(2, widget.Value, "widget's index was not set correctly");
