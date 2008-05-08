@@ -84,8 +84,14 @@ namespace Kistl.GUI.Tests
     {
         protected virtual void AssertWidgetHasValidValue()
         {
-            Assert.That(widget.IsValidValue, "the widget should be in a valid state after this operation");
+            Assert.IsTrue(widget.IsValidValue, "the widget should be in a valid state after this operation");
             Assert.AreEqual(GetWidgetValue(), GetObjectValue(), "the widget should have the same value as the object");
+        }
+
+        protected virtual void AssertWidgetHasInvalidValue()
+        {
+            Assert.IsFalse(widget.IsValidValue, "the widget should be in an invalid state after this operation");
+            Assert.AreNotEqual(GetWidgetValue(), GetObjectValue(), "the invalid widget should not have the same value as the object");
         }
 
         /// <summary>
@@ -108,6 +114,11 @@ namespace Kistl.GUI.Tests
         /// return a list of valid values for the property
         /// </summary>
         protected abstract IEnumerable<TYPE> SomeValues();
+        /// <summary>
+        /// return a list of invalid values for the property.
+        /// the default implementation returns the empty list.
+        /// </summary>
+        protected virtual IEnumerable<TYPE> SomeInvalidValues() { return new List<TYPE>(); }
 
         [Test]
         public void HandleNoUserInput()
@@ -132,6 +143,35 @@ namespace Kistl.GUI.Tests
 
             foreach (TYPE? value in SomeValues())
             {
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
+        [Test]
+        public void HandleInvalidUserInput()
+        {
+            AssertWidgetHasValidValue();
+            
+            TYPE? original = GetObjectValue();
+
+            foreach (TYPE? value in SomeInvalidValues())
+            {
+                UserInput(value);
+                AssertWidgetHasInvalidValue();
+                Assert.AreEqual(original, GetObjectValue(), "Object should retain original value");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+
+            // After having invalid values set, 
+            // choosing a valid value again, should 
+            // clear all flags and set to the object
+            IEnumerator<TYPE> validValues = SomeValues().GetEnumerator();
+            if (validValues.MoveNext())
+            {
+                TYPE value = validValues.Current;
                 UserInput(value);
                 AssertWidgetHasValidValue();
                 Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
