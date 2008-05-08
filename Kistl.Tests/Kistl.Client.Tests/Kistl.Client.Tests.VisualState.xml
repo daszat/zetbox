@@ -6,11 +6,11 @@
   <Nodes>
     <Node UniqueName="[0-1000]E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" Expanded="true">
       <Nodes>
-        <Node UniqueName="[0-1049]E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\bin\debug\..\Debug\Kistl.Client.Tests.dll" Expanded="true">
+        <Node UniqueName="[0-1050]E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests\bin\debug\..\Debug\Kistl.Client.Tests.dll" Expanded="true">
           <Nodes>
-            <Node UniqueName="[0-1050]Kistl" Expanded="true">
+            <Node UniqueName="[0-1051]Kistl" Expanded="true">
               <Nodes>
-                <Node UniqueName="[0-1051]Kistl.Client" Expanded="true">
+                <Node UniqueName="[0-1052]Kistl.Client" Expanded="true">
                   <Nodes>
                     <Node UniqueName="[0-1018]Kistl.Client.Tests.SetUp" Expanded="true">
                       <Nodes>
@@ -20,29 +20,30 @@
                             <Node UniqueName="[0-1031]Kistl.Client.Tests.BackReferencePresenterTests.ReInit" />
                           </Nodes>
                         </Node>
-                        <Node UniqueName="[0-1043]Kistl.Client.Tests.BoolPresenterTests" Expanded="true">
+                        <Node UniqueName="[0-1044]Kistl.Client.Tests.BoolPresenterTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1045]Kistl.Client.Tests.BoolPresenterTests.HandleFalseUserInput" />
-                            <Node UniqueName="[0-1046]Kistl.Client.Tests.BoolPresenterTests.HandleNoUserInput" />
-                            <Node UniqueName="[0-1047]Kistl.Client.Tests.BoolPresenterTests.HandleNullUserInput" />
-                            <Node UniqueName="[0-1044]Kistl.Client.Tests.BoolPresenterTests.HandleTrueUserInput" />
-                            <Node UniqueName="[0-1048]Kistl.Client.Tests.BoolPresenterTests.ReInit" />
+                            <Node UniqueName="[0-1045]Kistl.Client.Tests.BoolPresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1046]Kistl.Client.Tests.BoolPresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1048]Kistl.Client.Tests.BoolPresenterTests.HandleProgrammaticChange" />
+                            <Node UniqueName="[0-1047]Kistl.Client.Tests.BoolPresenterTests.HandleUserInput" />
+                            <Node UniqueName="[0-1049]Kistl.Client.Tests.BoolPresenterTests.ReInit" />
                           </Nodes>
                         </Node>
                         <Node UniqueName="[0-1032]Kistl.Client.Tests.DateTimePresenterTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1034]Kistl.Client.Tests.DateTimePresenterTests.HandleConstant" />
-                            <Node UniqueName="[0-1033]Kistl.Client.Tests.DateTimePresenterTests.HandleExtrema" />
-                            <Node UniqueName="[0-1035]Kistl.Client.Tests.DateTimePresenterTests.HandleNoUserInput" />
-                            <Node UniqueName="[0-1036]Kistl.Client.Tests.DateTimePresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1033]Kistl.Client.Tests.DateTimePresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1034]Kistl.Client.Tests.DateTimePresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1036]Kistl.Client.Tests.DateTimePresenterTests.HandleProgrammaticChange" />
+                            <Node UniqueName="[0-1035]Kistl.Client.Tests.DateTimePresenterTests.HandleUserInput" />
                             <Node UniqueName="[0-1037]Kistl.Client.Tests.DateTimePresenterTests.ReInit" />
                           </Nodes>
                         </Node>
-                        <Node UniqueName="[0-1013]Kistl.Client.Tests.DoublePresenterTests" Expanded="true">
+                        <Node UniqueName="[0-1012]Kistl.Client.Tests.DoublePresenterTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1015]Kistl.Client.Tests.DoublePresenterTests.HandleNoUserInput" />
-                            <Node UniqueName="[0-1016]Kistl.Client.Tests.DoublePresenterTests.HandleNullUserInput" />
-                            <Node UniqueName="[0-1014]Kistl.Client.Tests.DoublePresenterTests.HandleValues" />
+                            <Node UniqueName="[0-1013]Kistl.Client.Tests.DoublePresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1014]Kistl.Client.Tests.DoublePresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1016]Kistl.Client.Tests.DoublePresenterTests.HandleProgrammaticChange" />
+                            <Node UniqueName="[0-1015]Kistl.Client.Tests.DoublePresenterTests.HandleUserInput" />
                             <Node UniqueName="[0-1017]Kistl.Client.Tests.DoublePresenterTests.ReInit" />
                           </Nodes>
                         </Node>
@@ -61,28 +62,28 @@
                         </Node>
                         <Node UniqueName="[0-1038]Kistl.Client.Tests.IntPresenterTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1040]Kistl.Client.Tests.IntPresenterTests.HandleNoUserInput" />
-                            <Node UniqueName="[0-1041]Kistl.Client.Tests.IntPresenterTests.HandleNullUserInput" />
-                            <Node UniqueName="[0-1039]Kistl.Client.Tests.IntPresenterTests.HandleValues" />
-                            <Node UniqueName="[0-1042]Kistl.Client.Tests.IntPresenterTests.ReInit" />
+                            <Node UniqueName="[0-1039]Kistl.Client.Tests.IntPresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1040]Kistl.Client.Tests.IntPresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1042]Kistl.Client.Tests.IntPresenterTests.HandleProgrammaticChange" />
+                            <Node UniqueName="[0-1041]Kistl.Client.Tests.IntPresenterTests.HandleUserInput" />
+                            <Node UniqueName="[0-1043]Kistl.Client.Tests.IntPresenterTests.ReInit" />
                           </Nodes>
                         </Node>
                         <Node UniqueName="[0-1001]Kistl.Client.Tests.ObjectReferencePresenterTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1004]Kistl.Client.Tests.ObjectReferencePresenterTests.HandleInvalidUserInput" />
+                            <Node UniqueName="[0-1005]Kistl.Client.Tests.ObjectReferencePresenterTests.HandleInvalidUserInput" />
                             <Node UniqueName="[0-1002]Kistl.Client.Tests.ObjectReferencePresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1004]Kistl.Client.Tests.ObjectReferencePresenterTests.HandleProgrammaticChange" />
                             <Node UniqueName="[0-1003]Kistl.Client.Tests.ObjectReferencePresenterTests.HandleValidUserInput" />
-                            <Node UniqueName="[0-1005]Kistl.Client.Tests.ObjectReferencePresenterTests.ReInit" />
+                            <Node UniqueName="[0-1006]Kistl.Client.Tests.ObjectReferencePresenterTests.ReInit" />
                           </Nodes>
                         </Node>
-                        <Node UniqueName="[0-1006]Kistl.Client.Tests.StringPresenterTests" Expanded="true">
+                        <Node UniqueName="[0-1007]Kistl.Client.Tests.StringPresenterTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1007]Kistl.Client.Tests.StringPresenterTests.HandleEmptyString" />
-                            <Node UniqueName="[0-1010]Kistl.Client.Tests.StringPresenterTests.HandleNoUserInput" />
-                            <Node UniqueName="[0-1011]Kistl.Client.Tests.StringPresenterTests.HandleNullUserInput" />
-                            <Node UniqueName="[0-1008]Kistl.Client.Tests.StringPresenterTests.HandleNumbers" />
-                            <Node UniqueName="[0-1009]Kistl.Client.Tests.StringPresenterTests.HandleStrings" />
-                            <Node UniqueName="[0-1012]Kistl.Client.Tests.StringPresenterTests.ReInit" />
+                            <Node UniqueName="[0-1008]Kistl.Client.Tests.StringPresenterTests.HandleNoUserInput" />
+                            <Node UniqueName="[0-1009]Kistl.Client.Tests.StringPresenterTests.HandleNullUserInput" />
+                            <Node UniqueName="[0-1010]Kistl.Client.Tests.StringPresenterTests.HandleProgrammaticChange" />
+                            <Node UniqueName="[0-1011]Kistl.Client.Tests.StringPresenterTests.ReInit" />
                           </Nodes>
                         </Node>
                       </Nodes>

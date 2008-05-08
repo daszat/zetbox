@@ -31,15 +31,15 @@ namespace Kistl.GUI.Renderer.WPF
             InitializeComponent();
         }
 
-        public IEnumerable ItemsSource
+        public IList<string> ItemsSource
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            get { return (IList<string>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(EditPointerProperty));
+            DependencyProperty.Register("ItemsSource", typeof(IList<string>), typeof(EditPointerProperty));
 
 
 
@@ -95,11 +95,6 @@ namespace Kistl.GUI.Renderer.WPF
 #endif
         }
 
-        private void cbValues_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         #region IPointerControl Members
 
         public ObjectType ObjectType
@@ -114,24 +109,42 @@ namespace Kistl.GUI.Renderer.WPF
                 typeof(ObjectType), typeof(EditPointerProperty),
                 new PropertyMetadata(null));
 
+        private bool _IsUserInput = true;
+        int IValueControl<int>.Value
+        {
+            get { return (int)GetValue(ValueProperty); }
+            set
+            {
+                _IsUserInput = false;
+                try
+                {
+                    SetValue(ValueProperty, value);
+                }
+                finally
+                {
+                    _IsUserInput = true;
+                }
+            }
+        }
+
         /// <summary>
         /// The actual Value of this Property
         /// </summary>
-        public Kistl.API.IDataObject Value
+        public int Value
         {
-            get { return (Kistl.API.IDataObject)GetValue(ValueProperty); }
+            get { return (int)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(Kistl.API.IDataObject), typeof(EditPointerProperty));
+            DependencyProperty.Register("Value", typeof(int), typeof(EditPointerProperty));
 
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.Property == ValueProperty)
+            if (_IsUserInput && e.Property == ValueProperty)
             {
                 OnUserInput(e);
             }
@@ -148,5 +161,10 @@ namespace Kistl.GUI.Renderer.WPF
         public event EventHandler UserInput;
 
         #endregion
+
+        private void cbValues_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

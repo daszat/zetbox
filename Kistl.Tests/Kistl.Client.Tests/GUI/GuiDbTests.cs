@@ -11,7 +11,7 @@ using Kistl.GUI.DB;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace Kistl.Client.Tests
+namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class GuiDbTests : PresenterTest<TestStringControl, StringPresenter>

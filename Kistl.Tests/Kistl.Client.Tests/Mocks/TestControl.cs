@@ -310,12 +310,12 @@ namespace Kistl.Client.Mocks
         #region IValueControl Members
 
         public event EventHandler UserInput;
-        public IDataObject Value { get; set; }
+        public int Value { get; set; }
         public bool IsValidValue { get; set; }
 
         #endregion
 
-        internal void SimulateUserInput(IDataObject newValue)
+        internal void SimulateUserInput(int newValue)
         {
             Value = newValue;
             if (UserInput != null)
@@ -324,7 +324,7 @@ namespace Kistl.Client.Mocks
 
         #region IPointerControl Members
 
-        public System.Collections.IEnumerable ItemsSource { get; set; }
+        public IList<string> ItemsSource { get; set; }
         public ObjectType ObjectType { get; set; }
 
         #endregion

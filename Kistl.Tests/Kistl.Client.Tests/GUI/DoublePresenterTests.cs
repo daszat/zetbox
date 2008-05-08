@@ -8,7 +8,7 @@ using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 
-namespace Kistl.Client.Tests
+namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class DoublePresenterTests : NullablePresenterTests<double, TestDoubleControl, DoublePresenter>

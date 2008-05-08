@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
 
 using Kistl.API;
 using Kistl.App.Base;
 
 namespace Kistl.Client.Mocks
 {
-    public class TestObject : DependencyObject, IDataObject
+    public class TestObject : System.Windows.DependencyObject, IDataObject, ICloneable
     {
 
         public TestObject()
@@ -59,8 +58,8 @@ namespace Kistl.Client.Mocks
         }
 
         // Using a DependencyProperty as the backing store for TestBackReference.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TestBackReferenceProperty =
-            DependencyProperty.Register("TestBackReference", typeof(List<IDataObject>), typeof(TestObject), new PropertyMetadata(new List<IDataObject>()));
+        public static readonly System.Windows.DependencyProperty TestBackReferenceProperty =
+            System.Windows.DependencyProperty.Register("TestBackReference", typeof(List<IDataObject>), typeof(TestObject), new System.Windows.PropertyMetadata(new List<IDataObject>()));
 
         public readonly static BackReferenceProperty TestBackReferenceDescriptor
             = new BackReferenceProperty()
@@ -79,8 +78,8 @@ namespace Kistl.Client.Mocks
         }
 
         // Using a DependencyProperty as the backing store for TestBool.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TestBoolProperty =
-            DependencyProperty.Register("TestBool", typeof(bool?), typeof(TestObject), new PropertyMetadata(null));
+        public static readonly System.Windows.DependencyProperty TestBoolProperty =
+            System.Windows.DependencyProperty.Register("TestBool", typeof(bool?), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static BoolProperty TestBoolDescriptor
             = new BoolProperty()
@@ -99,8 +98,8 @@ namespace Kistl.Client.Mocks
         }
 
         // Using a DependencyProperty as the backing store for TestDateTime.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TestDateTimeProperty =
-            DependencyProperty.Register("TestDateTime", typeof(DateTime?), typeof(TestObject), new PropertyMetadata(null));
+        public static readonly System.Windows.DependencyProperty TestDateTimeProperty =
+            System.Windows.DependencyProperty.Register("TestDateTime", typeof(DateTime?), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static DateTimeProperty TestDateTimeDescriptor
             = new DateTimeProperty()
@@ -119,8 +118,8 @@ namespace Kistl.Client.Mocks
         }
 
         // Using a DependencyProperty as the backing store for TestDouble.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TestDoubleProperty =
-            DependencyProperty.Register("TestDouble", typeof(double?), typeof(TestObject), new PropertyMetadata(null));
+        public static readonly System.Windows.DependencyProperty TestDoubleProperty =
+            System.Windows.DependencyProperty.Register("TestDouble", typeof(double?), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static DoubleProperty TestDoubleDescriptor
             = new DoubleProperty()
@@ -140,8 +139,8 @@ namespace Kistl.Client.Mocks
         }
 
         // Using a DependencyProperty as the backing store for TestInt.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TestIntProperty =
-            DependencyProperty.Register("TestInt", typeof(int?), typeof(TestObject), new PropertyMetadata(null));
+        public static readonly System.Windows.DependencyProperty TestIntProperty =
+            System.Windows.DependencyProperty.Register("TestInt", typeof(int?), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static IntProperty TestIntDescriptor
             = new IntProperty()
@@ -161,8 +160,8 @@ namespace Kistl.Client.Mocks
         }
 
         // Using a DependencyProperty as the backing store for TestString.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TestStringProperty =
-            DependencyProperty.Register("TestString", typeof(string), typeof(TestObject), new PropertyMetadata(null));
+        public static readonly System.Windows.DependencyProperty TestStringProperty =
+            System.Windows.DependencyProperty.Register("TestString", typeof(string), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static StringProperty TestStringDescriptor
             = new StringProperty()
@@ -182,8 +181,8 @@ namespace Kistl.Client.Mocks
         }
 
         // Using a DependencyProperty as the backing store for TestObjectReference.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TestObjectReferenceProperty =
-            DependencyProperty.Register("TestObjectReference", typeof(IDataObject), typeof(TestObject), new PropertyMetadata(null));
+        public static readonly System.Windows.DependencyProperty TestObjectReferenceProperty =
+            System.Windows.DependencyProperty.Register("TestObjectReference", typeof(IDataObject), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static ObjectReferenceProperty TestObjectReferenceDescriptor
             = new MockObjectReferenceProperty()
@@ -262,7 +261,7 @@ namespace Kistl.Client.Mocks
 
         #region INotifyPropertyChanged Members
 
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
             if (PropertyChanged != null)
@@ -276,7 +275,7 @@ namespace Kistl.Client.Mocks
 
         public object Clone()
         {
-            throw new NotImplementedException();
+            return this.MemberwiseClone();
         }
 
         #endregion
@@ -301,6 +300,7 @@ namespace Kistl.Client.Mocks
         {
             return String.Format("TestObject<ID = {0}>", ID);
         }
+
     }
 
     internal class MockObjectReferenceProperty : ObjectReferenceProperty

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Client.Tests
+namespace Kistl.Client.Mocks
 {
     public class CustomActionsManagerAPITest : Kistl.API.ICustomActionsManager
     {

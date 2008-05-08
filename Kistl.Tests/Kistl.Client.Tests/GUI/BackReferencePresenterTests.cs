@@ -9,7 +9,7 @@ using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.API;
 
-namespace Kistl.Client.Tests
+namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class BackReferencePresenterTests : PresenterTest<TestBackReferenceControl, BackReferencePresenter>

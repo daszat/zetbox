@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.App.Base;
 using Kistl.API;
 using Kistl.API.Client;
@@ -132,6 +133,15 @@ namespace Kistl.GUI
         // localize type-unsafety
         public PROPERTY Property { get { return (PROPERTY)Preferences.Property; } }
 
+        /// <summary>
+        /// Override this to specify a conversion from the object's property to the value for the widget
+        /// </summary>
+        /// <returns>the value of the handled property in the right type for the widget</returns>
+        protected virtual TYPE GetPropertyValue()
+        {
+            return Object.GetPropertyValue<TYPE>(Property.PropertyName);
+        }
+
         #region Initialisation
 
         protected override void InitializeComponent()
@@ -146,7 +156,7 @@ namespace Kistl.GUI
             _Control_UserInput = new EventHandler(Control_UserInput);
             Control.UserInput += _Control_UserInput;
 
-            Control.Value = Object.GetPropertyValue<TYPE>(Property.PropertyName);
+            Control.Value = GetPropertyValue();
 
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
@@ -162,14 +172,17 @@ namespace Kistl.GUI
 
         private void Object_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (sender != Object)
-                throw new InvalidOperationException(String.Format("Resource Leak: _Object_PropertyChanged in '{0}' was called by '{1}', but should be attached to '{2}'",
-                    this, sender, Object));
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                if (sender != Object)
+                    throw new InvalidOperationException(String.Format("Resource Leak: _Object_PropertyChanged in '{0}' was called by '{1}', but should be attached to '{2}'",
+                        this, sender, Object));
 
-            // if the object has changed, unconditionally overwrite the value in the GUI
-            // intelligent controls might want to show the user both the "real" and the user's value
-            if (e.PropertyName == Property.PropertyName)
-                Control.Value = Object.GetPropertyValue<TYPE>(Property.PropertyName);
+                // if the object has changed, unconditionally overwrite the value in the GUI
+                // intelligent controls might want to show the user both the "real" and the user's value
+                if (e.PropertyName == Property.PropertyName)
+                    Control.Value = GetPropertyValue();
+            }
         }
 
         private void Control_UserInput(object sender, EventArgs e)
@@ -260,33 +273,48 @@ namespace Kistl.GUI
         }
     }
 
-    public class PointerPresenter : DefaultPresenter<IDataObject, ObjectReferenceProperty, IPointerControl>
+    public class PointerPresenter : DefaultPresenter<int, ObjectReferenceProperty, IPointerControl>
     {
         public PointerPresenter() { }
+
+        private List<IDataObject> _Items;
+
+        protected override int GetPropertyValue()
+        {
+            IDataObject item = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
+            int result = _Items.IndexOf(item);
+            return result;
+        }
 
         protected override void InitializeComponent()
         {
             Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceObjectClass.Module.Namespace, Property.ReferenceObjectClass.ClassName);
-            Control.ItemsSource = Object.Context.GetQuery(Control.ObjectType).ToList();
+
+            // remember the objects that are sent to the object
+            // to facilitate the lookup by index afterwards
+            _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
+            Control.ItemsSource = (from obj in _Items select obj.ToString()).ToList();
 
             base.InitializeComponent();
         }
 
         protected override void OnUserInput()
         {
-            if (Control.Value == null)
+            if (Control.Value < 0)
             {
                 Control.IsValidValue = !Property.IsNullable;
             }
             else
             {
-                // if object exists, value is valid
-                Control.IsValidValue = Object.Context.Find(Control.ObjectType, Control.Value.ID) != null;
+                // if index is in range, selction is valid
+                Control.IsValidValue = Control.Value < _Items.Count;
             }
- 
+
             if (Control.IsValidValue)
             {
-                Object.SetPropertyValue(Property.PropertyName, Control.Value);
+                int index = Control.Value;
+                IDataObject item = _Items[index];
+                Object.SetPropertyValue(Property.PropertyName, item);
             }
         }
     }
@@ -388,13 +416,13 @@ namespace Kistl.GUI
         IEnumerable ItemsSource { get; set; }
     }
 
-    public interface IPointerControl : IValueControl<IDataObject>
+    public interface IPointerControl : IValueControl<int>
     {
         /// <summary>
         /// The ObjectType of the listed Objects
         /// </summary>
         ObjectType ObjectType { get; set; }
-        IEnumerable ItemsSource { get; set; }
+        IList<string> ItemsSource { get; set; }
     }
 
     public interface IObjectControl : IBasicControl

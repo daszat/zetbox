@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using NMock2;
 
 namespace Kistl.Client.Tests
@@ -11,7 +12,7 @@ namespace Kistl.Client.Tests
         public static void Main(string[] args)
         {
             new SetUp().Init();
-            var orpt = new ObjectReferencePresenterTests();
+            var orpt = new Kistl.GUI.Tests.ObjectReferencePresenterTests();
             orpt.SetUp();
             orpt.HandleProgrammaticChange();
         }

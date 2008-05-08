@@ -12,7 +12,7 @@ using Kistl.GUI.DB;
 using NMock2;
 using NUnit.Framework;
 
-namespace Kistl.Client.Tests
+namespace Kistl.GUI.Tests
 {
     public abstract class PresenterTest<CONTROL, PRESENTER>
         where CONTROL : IBasicControl
@@ -36,11 +36,13 @@ namespace Kistl.Client.Tests
             Stub.On(MockContext).
                 Method("Find").
                 With(TestObject.ObjectClass.ID).
+                // Will(Return.Value(TestObject.ObjectClass.Clone()));
                 Will(Return.Value(TestObject.ObjectClass));
 
             Stub.On(MockContext).
                 Method("Find").
                 With(TestObject.Module.ID).
+                // Will(Return.Value(TestObject.Module.Clone()));
                 Will(Return.Value(TestObject.Module));
 
             CustomSetUp();

@@ -7,18 +7,22 @@
     x:Name="PointerCtrl" 
     >
     <DockPanel >
-        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=PointerCtrl, Path=ShortLabel}" Visibility="{Binding ElementName=PointerCtrl, Path=ShowLabel}" />
+        <Label
+            DockPanel.Dock="Left" Width="150"
+            Content="{Binding ElementName=PointerCtrl, Path=ShortLabel}"
+            Visibility="{Binding ElementName=PointerCtrl, Path=ShowLabel}"
+            />
         <Button Name="btnNew" Click="btnNew_Click">New</Button>
         <Button Name="btnOpen" Click="btnOpen_Click">Open</Button>
         <ComboBox Name="cbValues" 
                   ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource}"
-                  SelectedValue="{Binding ElementName=PointerCtrl, Path=Value}"
-                  SelectedValuePath="ID"
+                  SelectedIndex="{Binding ElementName=PointerCtrl, Path=Value}"
                   SelectionChanged="cbValues_SelectionChanged"
+                  IsSynchronizedWithCurrentItem="True"
                   >
+            <!--
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <!-- TODO: use object's ListItemDisplayTemplate here -->
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding Converter={StaticResource IconConverter}}" Width="16" Height="16" />
                         <TextBlock Margin="2,0,0,0" Text="{Binding ID}" />                        
@@ -26,6 +30,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
+            -->
         </ComboBox>
     </DockPanel>
 </app:PropertyControl>

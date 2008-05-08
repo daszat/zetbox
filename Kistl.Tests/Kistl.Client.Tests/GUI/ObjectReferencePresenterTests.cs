@@ -11,12 +11,12 @@ using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 
-namespace Kistl.Client.Tests
+namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class ObjectReferencePresenterTests : PresenterTest<TestObjectReferenceControl, PointerPresenter>
     {
-        private List<IDataObject> ItemsSource = new List<IDataObject>(new[] {
+        private List<IDataObject> Items = new List<IDataObject>(new[] {
                     new TestObject() { ID = 2 },
                     new TestObject() { ID = 3 },
                     new TestObject() { ID = 4 },
@@ -33,7 +33,7 @@ namespace Kistl.Client.Tests
 
             Expect.Once.On(idoq).
                 Method("GetEnumerator").
-                Will(Return.Value(ItemsSource.GetEnumerator()));
+                Will(Return.Value(Items.GetEnumerator()));
 
             Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
         }
@@ -41,11 +41,11 @@ namespace Kistl.Client.Tests
         private void AssertWidgetValidity(bool widgetValid)
         {
             Assert.AreEqual(widgetValid, widget.IsValidValue, String.Format("the widget should be in a {0}valid state after this operation", widgetValid ? "" : "in"));
-            System.Collections.ArrayList items = new System.Collections.ArrayList();
-            widget.ItemsSource.ForEach<object>(i => items.Add(i));
-            foreach (IDataObject ido in ItemsSource)
+            Assert.AreEqual(Items.Count, widget.ItemsSource.Count, "the widget's ItemSource should contain exactly one entry for each item");
+
+            foreach (string ido in Items.Select(i => i.ToString()))
             {
-                Assert.Contains(ido, items, "Missing IDataObject in ItemsSource");
+                Assert.That(widget.ItemsSource.Contains(ido), string.Format("cannot find entry '{0}' in ItemsSource", ido));
             }
         }
 
@@ -68,7 +68,7 @@ namespace Kistl.Client.Tests
         public void HandleNoUserInput()
         {
             Assert.IsNull(obj.TestObjectReference, "ObjectReferenceProperty should default to null");
-            Assert.IsNull(widget.Value, "widget should be initialised to correct value");
+            Assert.AreEqual(Helper.INVALIDID, widget.Value, "widget should be initialised to correct value");
 
             FinalAssert(true);
         }
@@ -77,14 +77,15 @@ namespace Kistl.Client.Tests
         public void HandleValidUserInput()
         {
             int expectedID = 3;
-            IDataObject expectedObject = ItemsSource.Single(i => i.ID == expectedID);
+            // Clone object to exercise all parts of the Presenter
+            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID).Clone();
+            int expectedIndex = Items.IndexOf(expectedObject);
 
-            ExpectFind(new ObjectType(typeof(TestObject)), expectedID, ItemsSource.Single(i => i.ID == expectedID));
-
-            widget.SimulateUserInput(expectedObject);
+            // users select index of item
+            widget.SimulateUserInput(expectedIndex);
 
             Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
-            Assert.AreEqual(expectedObject, widget.Value, "widget should display correct value");
+            Assert.AreEqual(expectedIndex, widget.Value, "widget should display correct value");
 
             FinalAssert(true);
         }
@@ -93,12 +94,14 @@ namespace Kistl.Client.Tests
         public void HandleProgrammaticChange()
         {
             int expectedID = 3;
-            IDataObject expectedObject = ItemsSource.Single(i => i.ID == expectedID);
+            // Clone object to exercise all parts of the Presenter
+            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID).Clone();
+            int expectedIndex = Items.IndexOf(expectedObject);
 
             obj.TestObjectReference = expectedObject;
 
             Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
-            Assert.AreEqual(expectedObject, widget.Value, "widget should display correct value");
+            Assert.AreEqual(expectedIndex, widget.Value, "widget should display correct value");
 
             FinalAssert(true);
         }
@@ -107,27 +110,26 @@ namespace Kistl.Client.Tests
         public void HandleInvalidUserInput()
         {
             int expectedID = 3;
-            IDataObject expectedObject = ItemsSource.Single(i => i.ID == expectedID);
+            // Clone object to exercise all parts of the Presenter
+            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID).Clone();
+            int expectedIndex = Items.IndexOf(expectedObject);
+
             int unexpectedID = 66;
             IDataObject unexpectedObject = new TestObject() { ID = unexpectedID };
+            // highest valid index is Count - 1
+            int unexpectedIndex = Items.Count; 
 
-            ExpectFind(new ObjectType(typeof(TestObject)), expectedID, expectedObject);
-            // TODO: This Exepectation has to change as soon as better validation mechanisms are in place
-            ExpectFind(new ObjectType(typeof(TestObject)), unexpectedID, null);
-            // ExpectFind(new ObjectType(typeof(TestObject)), unexpectedID, unexpectedObject);
-
-
-            widget.SimulateUserInput(expectedObject);
+            widget.SimulateUserInput(expectedIndex);
 
             Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
-            Assert.AreEqual(expectedObject, widget.Value, "widget should display correct value");
+            Assert.AreEqual(expectedIndex, widget.Value, "widget should display correct value");
 
             AssertWidgetValidity(true);
 
-            widget.SimulateUserInput(unexpectedObject);
+            widget.SimulateUserInput(unexpectedIndex);
 
             Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReferenceProperty should not have changed");
-            Assert.AreEqual(unexpectedObject, widget.Value, "widget should display user's value");
+            Assert.AreEqual(unexpectedIndex, widget.Value, "widget should display user's value");
 
             FinalAssert(false);
         }
