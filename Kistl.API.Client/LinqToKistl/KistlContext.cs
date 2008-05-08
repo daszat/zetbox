@@ -25,11 +25,6 @@ namespace Kistl.API.Client
             return new KistlContextQuery<IDataObject>(this, type);
         }
 
-        public IQueryable<T> GetTable<T>() where T : IDataObject
-        {
-            return GetQuery<T>();
-        }
-
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
             return new KistlContextQuery<T>(this, new ObjectType(typeof(T)));

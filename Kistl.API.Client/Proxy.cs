@@ -10,7 +10,45 @@ using System.Linq.Expressions;
 
 namespace Kistl.API.Client
 {
-    public class Proxy: IDisposable
+    public interface IProxy : IDisposable
+    {
+        IEnumerable GetList(IKistlContext ctx, ObjectType type, int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable GetListOf(IKistlContext ctx, ObjectType type, int ID, string property);
+        Kistl.API.IDataObject GetObject(IKistlContext ctx, ObjectType type, int ID);
+        Kistl.API.IDataObject SetObject(IKistlContext ctx, ObjectType type, Kistl.API.IDataObject obj);
+        void Generate();
+        string HelloWorld(string name);
+    }
+
+    public class Proxy
+    {
+        /// <summary>
+        /// Singelton
+        /// </summary>
+        private static IProxy current;
+
+        public static void SetProxy(IProxy p)
+        {
+            current = p;
+        }
+
+        /// <summary>
+        /// WCF Proxy für das KistlService
+        /// </summary>
+        public static IProxy Current
+        {
+            get
+            {
+                if (current == null)
+                {
+                    SetProxy(new ProxyImplementation());
+                }
+                return current;
+            }
+        }
+    }
+
+    internal class ProxyImplementation : IProxy
     {
         #region XmlSerializer
         private interface IXmlSerializer
@@ -76,10 +114,6 @@ namespace Kistl.API.Client
         }
         #endregion
 
-        private Proxy()
-        {
-        }
-
         /// <summary>
         /// WCF Proxy für das KistlService instanzieren.
         /// Konfiguration lt. app.config File
@@ -92,22 +126,6 @@ namespace Kistl.API.Client
         /// </summary>
         private KistlServiceStreams.KistlServiceStreamsClient serviceStreams = new KistlServiceStreams.KistlServiceStreamsClient();
         
-        /// <summary>
-        /// Singelton
-        /// </summary>
-        private static Proxy current = new Proxy();
-
-        /// <summary>
-        /// WCF Proxy für das KistlService
-        /// </summary>
-        public static Proxy Current
-        {
-            get
-            {
-                return current;
-            }
-        }
-
         public IEnumerable GetList(IKistlContext ctx, ObjectType type, int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
