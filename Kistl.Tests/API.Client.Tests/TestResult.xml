@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\API.Client.Tests.nunit" total="27" failures="14" not-run="0" date="2008-05-08" time="18:47:59">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\API.Client.Tests.nunit" success="False" time="1.169" asserts="0">
+    <results>
+      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\bin\debug\..\Debug\API.Client.Tests.exe" success="False" time="1.165" asserts="0">
+        <results>
+          <test-suite name="API" success="False" time="1.164" asserts="0">
+            <results>
+              <test-suite name="Client" success="False" time="1.164" asserts="0">
+                <results>
+                  <test-suite name="Tests" success="False" time="1.154" asserts="0">
+                    <results>
+                      <test-suite name="Tests" success="False" time="0.439" asserts="0">
+                        <results>
+                          <test-suite name="KistlContextTests" success="False" time="0.428" asserts="0">
+                            <results>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach" executed="True" success="True" time="0.029" asserts="1" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_Null" executed="True" success="True" time="0.004" asserts="0" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_Twice" executed="True" success="True" time="0.002" asserts="1" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_Twice_But_Different" executed="True" success="False" time="0.002" asserts="1">
+                                <failure>
+                                  <message><![CDATA[System.InvalidOperationException was expected]]></message>
+                                  <stack-trace />
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_ObjectType" executed="True" success="True" time="0.008" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_T" executed="True" success="True" time="0.002" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_T_Twice" executed="True" success="True" time="0.001" asserts="7" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_Type" executed="True" success="True" time="0.002" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete" executed="True" success="False" time="0.086" asserts="1">
+                                <failure>
+                                  <message><![CDATA[System.ArgumentException : The Object does not belong to the current Context
+Parameter name: obj]]></message>
+                                  <stack-trace><![CDATA[at Kistl.API.Client.KistlContextImpl.Delete(IDataObject obj) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:line 81
+at API.Client.Tests.Tests.KistlContextTests.Delete() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 262
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete_Not_Attached" executed="True" success="False" time="0.003" asserts="0">
+                                <failure>
+                                  <message><![CDATA[An unexpected exception type was thrown
+Expected: System.InvalidOperationException
+ but was: System.ArgumentException : The Object does not belong to the current Context
+Parameter name: obj]]></message>
+                                  <stack-trace><![CDATA[at Kistl.API.Client.KistlContextImpl.Delete(IDataObject obj) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:line 81
+at API.Client.Tests.Tests.KistlContextTests.Delete_Not_Attached() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 278
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete_Null" executed="True" success="False" time="0.004" asserts="0">
+                                <failure>
+                                  <message><![CDATA[An unexpected exception type was thrown
+Expected: System.ArgumentNullException
+ but was: System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
+                                  <stack-trace><![CDATA[at Kistl.API.Client.KistlContextImpl.Delete(IDataObject obj) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:line 81
+at API.Client.Tests.Tests.KistlContextTests.Delete_Null() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 270
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete_Wrong_Context" executed="True" success="False" time="0.003" asserts="0">
+                                <failure>
+                                  <message><![CDATA[An unexpected exception type was thrown
+Expected: System.InvalidOperationException
+ but was: System.ArgumentException : The Object does not belong to the current Context
+Parameter name: obj]]></message>
+                                  <stack-trace><![CDATA[at Kistl.API.Client.KistlContextImpl.Delete(IDataObject obj) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:line 81
+at API.Client.Tests.Tests.KistlContextTests.Delete_Wrong_Context() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 287
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Detach" executed="True" success="True" time="0.003" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Detach_NotAttached" executed="True" success="True" time="0.002" asserts="0" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Detach_Null" executed="True" success="True" time="0.005" asserts="0" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Detach_Twice" executed="True" success="True" time="0.001" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetList" executed="True" success="False" time="0.026" asserts="13">
+                                <failure>
+                                  <message><![CDATA[  Expected: <Kistl.API.Client.KistlContextImpl>
+  But was:  null
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.<GetList>b__2(TestObjClass obj) in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 78
+at System.Collections.Generic.List`1.ForEach(Action`1 action)
+at API.Client.Tests.Tests.KistlContextTests.GetList() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 78
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetList_Twice" executed="True" success="False" time="0.008" asserts="15">
+                                <failure>
+                                  <message><![CDATA[  Expected: <API.Client.Tests.TestObjClass>
+  But was:  <API.Client.Tests.TestObjClass>
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.GetList_Twice() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 96
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetListOf" executed="True" success="False" time="0.011" asserts="7">
+                                <failure>
+                                  <message><![CDATA[  Expected: <Kistl.API.Client.KistlContextImpl>
+  But was:  null
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.<GetListOf>b__b(TestObjClass obj) in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 108
+at System.Collections.Generic.List`1.ForEach(Action`1 action)
+at API.Client.Tests.Tests.KistlContextTests.GetListOf() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 108
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetListOf_Twice" executed="True" success="False" time="0.005" asserts="9">
+                                <failure>
+                                  <message><![CDATA[  Expected: <API.Client.Tests.TestObjClass>
+  But was:  <API.Client.Tests.TestObjClass>
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.GetListOf_Twice() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 126
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetObject" executed="True" success="False" time="0.004" asserts="4">
+                                <failure>
+                                  <message><![CDATA[  Expected: <Kistl.API.Client.KistlContextImpl>
+  But was:  null
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.GetObject() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 54
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetObject_Twice" executed="True" success="False" time="0.004" asserts="5">
+                                <failure>
+                                  <message><![CDATA[  Obj1 & Obj2 are different Objects
+  Expected: True
+  But was:  False
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.GetObject_Twice() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 67
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetQuery_ObjectType" executed="True" success="True" time="0.003" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetQuery_T" executed="True" success="True" time="0.002" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges" executed="True" success="False" time="0.005" asserts="2">
+                                <failure>
+                                  <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.SubmitChanges() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 299
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges_Delete" executed="True" success="False" time="0.009" asserts="1">
+                                <failure>
+                                  <message><![CDATA[System.ArgumentException : The Object does not belong to the current Context
+Parameter name: obj]]></message>
+                                  <stack-trace><![CDATA[at Kistl.API.Client.KistlContextImpl.Delete(IDataObject obj) in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:line 81
+at API.Client.Tests.Tests.KistlContextTests.SubmitChanges_Delete() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 321
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges_Nothing" executed="True" success="False" time="0.003" asserts="4">
+                                <failure>
+                                  <message><![CDATA[  Expected: <Kistl.API.Client.KistlContextImpl>
+  But was:  null
+]]></message>
+                                  <stack-trace><![CDATA[at API.Client.Tests.Tests.KistlContextTests.SubmitChanges_Nothing() in D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\Tests\KistlContextTests.cs:line 313
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
