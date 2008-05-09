@@ -7,17 +7,16 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class BoolPresenterTests : NullablePresenterTests<bool, TestBoolControl, BoolPresenter>
     {
-
-        [SetUp]
-        public void InitControls()
+        protected override void CustomSetUp()
         {
-            Init(TestBoolControl.Info, TestObject.TestBoolDescriptor);
+            Init(TestBoolControl.Info, TestObject.TestBoolDescriptor, Toolkit.TEST);
         }
 
         protected override bool? GetObjectValue() { return obj.TestBool; }

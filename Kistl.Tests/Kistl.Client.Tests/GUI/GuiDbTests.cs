@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
+
 using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.GUI.DB;
 
-using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class GuiDbTests : PresenterTest<TestStringControl, StringPresenter>
+    public class GuiDbTests : PresenterTests<TestStringControl, StringPresenter>
     {
         protected virtual void Init()
         {
-            Init(TestStringControl.Info, TestObject.TestStringDescriptor);
+            Init(TestStringControl.Info, TestObject.TestStringDescriptor, Toolkit.TEST);
         }
 
         [Test]

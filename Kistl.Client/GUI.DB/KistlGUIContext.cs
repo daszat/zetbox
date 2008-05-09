@@ -105,7 +105,7 @@ namespace Kistl.GUI.DB
             new ControlInfo() { Platform = Toolkit.WPF, Control = VisualType.ObjectReference,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
-                ClassName = "Kistl.GUI.Renderer.WPF.EditPointerProperty" },
+                ClassName = "Kistl.GUI.Renderer.WPF.ObjectReferenceControl" },
             new ControlInfo() { Platform = Toolkit.WPF, Control = VisualType.ObjectList,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
@@ -150,7 +150,7 @@ namespace Kistl.GUI.DB
 
             // property presenters
             new PresenterInfo() { Control = VisualType.ObjectReference,
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.PointerPresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectReferencePresenter" },
             new PresenterInfo() { Control = VisualType.ObjectList,
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectListPresenter" },
 

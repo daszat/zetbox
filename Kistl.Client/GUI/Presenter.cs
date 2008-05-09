@@ -263,28 +263,11 @@ namespace Kistl.GUI
 
     }
 
-    public class ObjectReferencePresenter : DefaultPresenter<int, ObjectReferenceProperty>
+    public class ObjectReferencePresenter : DefaultPresenter<IDataObject, ObjectReferenceProperty, IObjectReferenceControl>
     {
-        protected override void InitializeComponent()
-        {
-            base.InitializeComponent();
-
-
-        }
-    }
-
-    public class PointerPresenter : DefaultPresenter<int, ObjectReferenceProperty, IPointerControl>
-    {
-        public PointerPresenter() { }
+        public ObjectReferencePresenter() { }
 
         private List<IDataObject> _Items;
-
-        protected override int GetPropertyValue()
-        {
-            IDataObject item = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
-            int result = _Items.IndexOf(item);
-            return result;
-        }
 
         protected override void InitializeComponent()
         {
@@ -292,29 +275,26 @@ namespace Kistl.GUI
 
             // remember the objects that are sent to the object
             // to facilitate the lookup by index afterwards
-            _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
-            Control.ItemsSource = (from obj in _Items select obj.ToString()).ToList();
+            Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
 
             base.InitializeComponent();
         }
 
         protected override void OnUserInput()
         {
-            if (Control.Value < 0)
+            if (Control.Value == null)
             {
-                Control.IsValidValue = !Property.IsNullable;
+                Control.IsValidValue = Property.IsNullable;
             }
             else
             {
-                // if index is in range, selction is valid
-                Control.IsValidValue = Control.Value < _Items.Count;
+                Control.IsValidValue = _Items.Contains(Control.Value);
             }
+
 
             if (Control.IsValidValue)
             {
-                int index = Control.Value;
-                IDataObject item = _Items[index];
-                Object.SetPropertyValue(Property.PropertyName, item);
+                Object.SetPropertyValue<IDataObject>(Property.PropertyName, Control.Value);
             }
         }
     }
@@ -416,13 +396,13 @@ namespace Kistl.GUI
         IEnumerable ItemsSource { get; set; }
     }
 
-    public interface IPointerControl : IValueControl<int>
+    public interface IObjectReferenceControl : IValueControl<IDataObject>
     {
         /// <summary>
         /// The ObjectType of the listed Objects
         /// </summary>
         ObjectType ObjectType { get; set; }
-        IList<string> ItemsSource { get; set; }
+        IList<IDataObject> ItemsSource { get; set; }
     }
 
     public interface IObjectControl : IBasicControl

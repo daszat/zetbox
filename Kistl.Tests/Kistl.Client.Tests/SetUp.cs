@@ -8,6 +8,9 @@ using NUnit.Framework.SyntaxHelpers;
 using Kistl.GUI.DB;
 using Kistl.Client.Mocks;
 
+/// <summary>
+/// Assembly-global setup class which initialises the Kistl.API and primes the KistlGUIContext with test data
+/// </summary>
 [SetUpFixture]
 public class SetUp
 {

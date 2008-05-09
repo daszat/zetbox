@@ -11,10 +11,12 @@ namespace Kistl.Client.Tests
     {
         public static void Main(string[] args)
         {
+            /*
             new SetUp().Init();
             var orpt = new Kistl.GUI.Tests.ObjectReferencePresenterTests();
             orpt.SetUp();
             orpt.HandleProgrammaticChange();
+             */
         }
     }
 }

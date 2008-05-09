@@ -11,8 +11,9 @@ using Kistl.API;
 
 namespace Kistl.GUI.Tests
 {
+#if false
     [TestFixture]
-    public class BackReferencePresenterTests : PresenterTest<TestBackReferenceControl, BackReferencePresenter>
+    public class BackReferencePresenterTests : ReferencePresenterTests<IDataObject, TestBackReferenceControl, BackReferencePresenter>
     {
         protected void AssertWidgetHasValidValue()
         {
@@ -27,4 +28,5 @@ namespace Kistl.GUI.Tests
             AssertWidgetHasValidValue();
         }
     }
+#endif
 }

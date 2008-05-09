@@ -1,5 +1,5 @@
 ﻿<app:PropertyControl 
-    x:Class="Kistl.GUI.Renderer.WPF.EditPointerProperty"
+    x:Class="Kistl.GUI.Renderer.WPF.ObjectReferenceControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
@@ -14,13 +14,13 @@
             />
         <Button Name="btnNew" Click="btnNew_Click">New</Button>
         <Button Name="btnOpen" Click="btnOpen_Click">Open</Button>
-        <ComboBox Name="cbValues" 
-                  ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource}"
-                  SelectedIndex="{Binding ElementName=PointerCtrl, Path=Value}"
-                  SelectionChanged="cbValues_SelectionChanged"
-                  IsSynchronizedWithCurrentItem="True"
-                  >
-            <!--
+        <ComboBox
+            Name="cbValues" 
+            ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource}"
+            SelectedIndex="{Binding ElementName=PointerCtrl, Path=Value}"
+            SelectionChanged="cbValues_SelectionChanged"
+            IsSynchronizedWithCurrentItem="True"
+            >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -30,7 +30,6 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            -->
         </ComboBox>
     </DockPanel>
 </app:PropertyControl>

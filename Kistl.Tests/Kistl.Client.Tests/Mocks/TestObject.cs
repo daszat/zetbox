@@ -189,6 +189,7 @@ namespace Kistl.Client.Mocks
             {
                 PropertyName = "TestObjectReference",
                 ReferenceObjectClass = TestObject.ObjectClass,
+                IsNullable = true
             };
 
         #endregion

@@ -278,7 +278,7 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestObjectReferenceControl : IPointerControl
+    public class TestObjectReferenceControl : IObjectReferenceControl
     {
         public TestObjectReferenceControl()
         {
@@ -310,21 +310,21 @@ namespace Kistl.Client.Mocks
         #region IValueControl Members
 
         public event EventHandler UserInput;
-        public int Value { get; set; }
+        public IDataObject Value { get; set; }
         public bool IsValidValue { get; set; }
 
         #endregion
 
-        internal void SimulateUserInput(int newValue)
+        internal void SimulateUserInput(IDataObject newValue)
         {
             Value = newValue;
             if (UserInput != null)
                 UserInput(this, new EventArgs());
         }
 
-        #region IPointerControl Members
+        #region IObjectReferenceControl Members
 
-        public IList<string> ItemsSource { get; set; }
+        public IList<IDataObject> ItemsSource { get; set; }
         public ObjectType ObjectType { get; set; }
 
         #endregion

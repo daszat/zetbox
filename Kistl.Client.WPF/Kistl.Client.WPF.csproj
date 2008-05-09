@@ -108,7 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Renderer.WPF\EditPointerProperty.xaml">
+    <Page Include="Renderer.WPF\ObjectReferenceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -181,8 +181,8 @@
     <Compile Include="Renderer.WPF\EditIntProperty.xaml.cs">
       <DependentUpon>EditIntProperty.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Renderer.WPF\EditPointerProperty.xaml.cs">
-      <DependentUpon>EditPointerProperty.xaml</DependentUpon>
+    <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
+      <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\EditPointerPropertyList.xaml.cs">
       <DependentUpon>EditPointerPropertyList.xaml</DependentUpon>

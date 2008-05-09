@@ -7,16 +7,16 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class DoublePresenterTests : NullablePresenterTests<double, TestDoubleControl, DoublePresenter>
     {
-        [SetUp]
-        public void InitControls()
+        protected override void CustomSetUp()
         {
-            Init(TestDoubleControl.Info, TestObject.TestDoubleDescriptor);
+            Init(TestDoubleControl.Info, TestObject.TestDoubleDescriptor, Toolkit.TEST);
         }
 
         protected override double? GetObjectValue() { return obj.TestDouble; }

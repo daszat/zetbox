@@ -11,11 +11,12 @@ using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.GUI.DB;
+using Kistl.GUI.Tests;
 
 namespace Kistl.GUI.Renderer.WPF.Tests
 {
     [TestFixture]
-    public class EditPointerControlTests
+    public class ObjectReferenceControlTests
     {
         private List<IDataObject> Items = new List<IDataObject>(new[] {
                     new TestObject() { ID = 20 },
@@ -43,8 +44,8 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         protected Visual visual { get; set; }
         protected ControlInfo cInfo { get; set; }
         protected PresenterInfo pInfo { get; set; }
-        protected IPointerControl widget { get; set; }
-        protected PointerPresenter presenter { get; set; }
+        protected IObjectReferenceControl widget { get; set; }
+        protected ObjectReferencePresenter presenter { get; set; }
 
         protected void Init(ControlInfo ci, BaseProperty bp)
         {
@@ -53,7 +54,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
             visual = new Visual() { Name = ci.Control, Property = bp };
             cInfo = KistlGUIContext.FindControlInfo(Toolkit.WPF, visual);
             pInfo = KistlGUIContext.FindPresenterInfo(visual);
-            widget = (IPointerControl)KistlGUIContext.CreateControl(cInfo);
+            widget = (IObjectReferenceControl)KistlGUIContext.CreateControl(cInfo);
             // presenter = (PointerPresenter)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
         }
 
@@ -61,7 +62,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         public void TestLoadedType()
         {
             Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
-            Assert.IsAssignableFrom(typeof(EditPointerProperty), widget);
+            Assert.IsAssignableFrom(typeof(ObjectReferenceControl), widget);
         }
 
         private bool _UserInputCalled = false;
@@ -71,12 +72,31 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         {
             Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
 
+            List<IDataObject> items = CreateItems();
+
             _UserInputCalled = false;
             widget.UserInput += new EventHandler(widget_UserInput);
-            widget.ItemsSource = new List<string>(new[] { "foo", "bar" });
+            widget.ItemsSource = items;
             Assert.IsFalse(_UserInputCalled, "UserInput was called on Set_ItemsSource");
-            widget.Value = 1;
+            widget.Value = items[3];
             Assert.IsFalse(_UserInputCalled, "UserInput was called on Set_Value");
+        }
+
+        private List<IDataObject> CreateItems()
+        {
+            List<IDataObject> items = new List<IDataObject>();
+            foreach (int i in new[] { 1, 2, 3, 4, 5 })
+            {
+                IDataObject ido = mocks.NewMock<IDataObject>();
+                Stub.On(ido).Method("ToString")
+                    .With()
+                    .Will(Return.Value(
+                        String.Format("MockDataObject ID={0}", i)));
+                Stub.On(ido).GetProperty("ID")
+                    .Will(Return.Value(i));
+                items.Add(ido);
+            }
+            return items;
         }
 
         void widget_UserInput(object sender, EventArgs e)
@@ -88,13 +108,16 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         public void TestUserInput()
         {
             Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
-
+            List<IDataObject> items = CreateItems();
             _UserInputCalled = false;
             widget.UserInput += new EventHandler(widget_UserInput);
-            widget.ItemsSource = new List<string>(new[] { "foo", "bar" });
+            widget.ItemsSource = items;
+
             Assert.IsFalse(_UserInputCalled, "UserInput was called on Set_ItemsSource");
 
-            ((System.Windows.DependencyObject)widget).SetValue(EditPointerProperty.ValueProperty, 1);
+            ((System.Windows.DependencyObject)widget).SetValue(ObjectReferenceControl.ValueProperty, items[3]);
+            // AssertWidgetIsValid();
+            // AssertThatWidget.Value==items[3];
             Assert.IsTrue(_UserInputCalled, "UserInput was not called on simulated user input");
         }
 
@@ -115,7 +138,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
                 Will(Return.Value(TestObject.Module));
 
             IQueryable<IDataObject> idoq = mocks.NewMock<IQueryable<IDataObject>>("IDataObjectQueryable");
- 
+
             Stub.On(MockContext).
                 Method("GetQuery").
                 With(new ObjectType(typeof(TestObject))).
@@ -127,21 +150,21 @@ namespace Kistl.GUI.Renderer.WPF.Tests
 
             Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
 
-            presenter = (PointerPresenter)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
+            presenter = (ObjectReferencePresenter)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
 
 
             _UserInputCalled = false;
             widget.UserInput += new EventHandler(widget_UserInput);
 
-            ((System.Windows.DependencyObject)widget).SetValue(EditPointerProperty.ValueProperty, 1);
+            ((System.Windows.DependencyObject)widget).SetValue(ObjectReferenceControl.ValueProperty, 1);
             Assert.IsTrue(_UserInputCalled, "UserInput was not called on simulated user input");
             Assert.AreEqual(Items[1], obj.TestObjectReference, "TestObjectReference was not set correctly");
 
             _UserInputCalled = false;
-            IDataObject expectedClone = (IDataObject)Items[2];
-            obj.TestObjectReference = expectedClone;
-            Assert.AreEqual(expectedClone, obj.TestObjectReference, "TestObjectReference was not set correctly");
-            Assert.AreEqual(2, widget.Value, "widget's index was not set correctly");
+            IDataObject expectedItem = (IDataObject)Items[2];
+            obj.TestObjectReference = expectedItem;
+            Assert.AreEqual(expectedItem, obj.TestObjectReference, "TestObjectReference was not set correctly");
+            Assert.AreEqual(Items[1], widget.Value, "widget's index was not set correctly");
             Assert.IsFalse(_UserInputCalled, "UserInput was called when changing the object");
 
         }

@@ -7,22 +7,23 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class StringPresenterTests : ReferencePresenterTests<string, TestStringControl, StringPresenter>
     {
-        [SetUp]
-        public void InitControls()
+        protected override void CustomSetUp()
         {
-            Init(TestStringControl.Info, TestObject.TestStringDescriptor);
+            Init(TestStringControl.Info, TestObject.TestStringDescriptor, Toolkit.TEST);
         }
 
         protected override string GetObjectValue() { return obj.TestString; }
         protected override string GetWidgetValue() { return widget.Value; }
         protected override void SetObjectValue(string v) { obj.TestString = v; }
         protected override void UserInput(string v) { widget.SimulateUserInput(v); }
+        protected override string DefaultValue() { return null; }
         protected override IEnumerable<string> SomeValues()
         {
             return new List<string>(new[] { 

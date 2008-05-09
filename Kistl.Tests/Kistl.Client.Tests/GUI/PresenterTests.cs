@@ -14,11 +14,11 @@ using NUnit.Framework;
 
 namespace Kistl.GUI.Tests
 {
-    public abstract class PresenterTest<CONTROL, PRESENTER>
+    public abstract class PresenterTests<CONTROL, PRESENTER>
         where CONTROL : IBasicControl
         where PRESENTER : IPresenter
     {
-        protected Mockery mocks { get; set; }
+        protected Mockery Mockery { get; set; }
         protected IKistlContext MockContext { get; set; }
 
         /// <summary>
@@ -29,8 +29,8 @@ namespace Kistl.GUI.Tests
         [SetUp]
         public void SetUp()
         {
-            mocks = new Mockery();
-            MockContext = mocks.NewMock<IKistlContext>("MockContext");
+            Mockery = new Mockery();
+            MockContext = Mockery.NewMock<IKistlContext>("MockContext");
             TestObject.GlobalContext = MockContext;
 
             Stub.On(MockContext).
@@ -46,7 +46,12 @@ namespace Kistl.GUI.Tests
                 Will(Return.Value(TestObject.Module));
 
             CustomSetUp();
+        }
 
+        [TearDown]
+        public void Finish()
+        {
+            Mockery.VerifyAllExpectationsHaveBeenMet();
         }
 
         protected TestObject obj { get; set; }
@@ -56,12 +61,16 @@ namespace Kistl.GUI.Tests
         protected CONTROL widget { get; set; }
         protected PRESENTER presenter { get; set; }
 
-        protected void Init(ControlInfo ci, BaseProperty bp)
+        /// <summary>
+        /// Initialises the GUI infrastructure for a test.
+        /// should be called from CustomSetup()
+        /// </summary>
+        protected void Init(ControlInfo ci, BaseProperty bp, Toolkit tk)
         {
             obj = new TestObject() { ID = 1 };
 
             visual = new Visual() { Name = ci.Control, Property = bp };
-            cInfo = KistlGUIContext.FindControlInfo(Toolkit.TEST, visual);
+            cInfo = KistlGUIContext.FindControlInfo(tk, visual);
             pInfo = KistlGUIContext.FindPresenterInfo(visual);
             widget = (CONTROL)KistlGUIContext.CreateControl(cInfo);
             presenter = (PRESENTER)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
@@ -75,9 +84,17 @@ namespace Kistl.GUI.Tests
         {
             presenter.InitializeComponent(obj, visual, widget);
         }
+
+        [Test]
+        public void TestSetupCorrect()
+        {
+            Assert.IsNotNull(Mockery, "Mockery should have been initialised");
+            Assert.IsNotNull(MockContext, "MockContext should have been initialised");
+        }
     }
 
-    public abstract class NullablePresenterTests<TYPE, CONTROL, PRESENTER> : PresenterTest<CONTROL, PRESENTER>
+    public abstract class NullablePresenterTests<TYPE, CONTROL, PRESENTER>
+        : PresenterTests<CONTROL, PRESENTER>
         where TYPE : struct
         where CONTROL : IValueControl<TYPE?>
         where PRESENTER : IPresenter
@@ -137,7 +154,7 @@ namespace Kistl.GUI.Tests
         }
 
         [Test]
-        public void HandleUserInput()
+        public void HandleValidUserInput()
         {
             AssertWidgetHasValidValue();
 
@@ -194,7 +211,8 @@ namespace Kistl.GUI.Tests
 
     }
 
-    public abstract class ReferencePresenterTests<TYPE, CONTROL, PRESENTER> : PresenterTest<CONTROL, PRESENTER>
+    public abstract class ReferencePresenterTests<TYPE, CONTROL, PRESENTER>
+        : PresenterTests<CONTROL, PRESENTER>
         where TYPE : class
         where CONTROL : IValueControl<TYPE>
         where PRESENTER : IPresenter
@@ -229,15 +247,24 @@ namespace Kistl.GUI.Tests
         /// </summary>
         protected abstract void UserInput(TYPE v);
         /// <summary>
+        /// return the expected Default Value at creation time
+        /// </summary>
+        protected abstract TYPE DefaultValue();
+        /// <summary>
         /// return a list of valid values for the property
         /// </summary>
         protected abstract IEnumerable<TYPE> SomeValues();
+        /// <summary>
+        /// return a list of invalid values for the property.
+        /// the default implementation returns the empty list.
+        /// </summary>
+        protected virtual IEnumerable<TYPE> SomeInvalidValues() { return new List<TYPE>(); }
 
         [Test]
         public void HandleNoUserInput()
         {
-            // different properties can default to null or not null.
-            // Assert.That(GetObjectValue(), Is.Not.Null, String.Format("{0} should default to a value", visual.Property));
+            Assert.AreEqual(DefaultValue(), GetObjectValue(), String.Format("property {0} should have proper default", visual.Property));
+            Assert.AreEqual(DefaultValue(), GetWidgetValue(), String.Format("widget should show default value", visual.Property, DefaultValue()));
             AssertWidgetHasValidValue();
         }
 
@@ -248,6 +275,49 @@ namespace Kistl.GUI.Tests
             UserInput(null);
             Assert.IsNull(GetObjectValue());
             AssertWidgetHasValidValue();
+        }
+
+        [Test]
+        public void HandleValidUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            foreach (TYPE value in SomeValues())
+            {
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
+        [Test]
+        public void HandleInvalidUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            TYPE original = GetObjectValue();
+
+            foreach (TYPE value in SomeInvalidValues())
+            {
+                UserInput(value);
+                AssertWidgetHasInvalidValue();
+                Assert.AreEqual(original, GetObjectValue(), "Object should retain original value");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+
+            // After having invalid values set, 
+            // choosing a valid value again, should 
+            // clear all flags and set to the object
+            IEnumerator<TYPE> validValues = SomeValues().GetEnumerator();
+            if (validValues.MoveNext())
+            {
+                TYPE value = validValues.Current;
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
         }
 
         [Test]

@@ -22,24 +22,24 @@ using Kistl.Client;
 namespace Kistl.GUI.Renderer.WPF
 {
     /// <summary>
-    /// Interaction logic for EditPointerProperty.xaml
+    /// Interaction logic for ObjectReferenceControl.xaml
     /// </summary>
-    public partial class EditPointerProperty : PropertyControl, IPointerControl
+    public partial class ObjectReferenceControl : PropertyControl, IObjectReferenceControl
     {
-        public EditPointerProperty()
+        public ObjectReferenceControl()
         {
             InitializeComponent();
         }
 
-        public IList<string> ItemsSource
+        public IList<Kistl.API.IDataObject> ItemsSource
         {
-            get { return (IList<string>)GetValue(ItemsSourceProperty); }
+            get { return (IList<Kistl.API.IDataObject>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IList<string>), typeof(EditPointerProperty));
+            DependencyProperty.Register("ItemsSource", typeof(IList<Kistl.API.IDataObject>), typeof(ObjectReferenceControl));
 
 
 
@@ -51,7 +51,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for ShowLabel.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowLabelProperty =
-            DependencyProperty.Register("ShowLabel", typeof(Visibility), typeof(EditPointerProperty), new UIPropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register("ShowLabel", typeof(Visibility), typeof(ObjectReferenceControl), new UIPropertyMetadata(Visibility.Visible));
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
@@ -106,13 +106,13 @@ namespace Kistl.GUI.Renderer.WPF
         // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
             DependencyProperty.Register("ObjectType",
-                typeof(ObjectType), typeof(EditPointerProperty),
+                typeof(ObjectType), typeof(ObjectReferenceControl),
                 new PropertyMetadata(null));
 
         private bool _IsUserInput = true;
-        int IValueControl<int>.Value
+        Kistl.API.IDataObject IValueControl<Kistl.API.IDataObject>.Value
         {
-            get { return (int)GetValue(ValueProperty); }
+            get { return (Kistl.API.IDataObject)GetValue(ValueProperty); }
             set
             {
                 _IsUserInput = false;
@@ -130,15 +130,15 @@ namespace Kistl.GUI.Renderer.WPF
         /// <summary>
         /// The actual Value of this Property
         /// </summary>
-        public int Value
+        public Kistl.API.IDataObject Value
         {
-            get { return (int)GetValue(ValueProperty); }
+            get { return (Kistl.API.IDataObject)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(int), typeof(EditPointerProperty));
+            DependencyProperty.Register("Value", typeof(Kistl.API.IDataObject), typeof(ObjectReferenceControl));
 
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -166,5 +166,6 @@ namespace Kistl.GUI.Renderer.WPF
         {
 
         }
+
     }
 }

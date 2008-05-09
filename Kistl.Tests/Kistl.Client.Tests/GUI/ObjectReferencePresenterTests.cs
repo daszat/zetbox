@@ -10,11 +10,20 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI.Tests
 {
+
     [TestFixture]
-    public class ObjectReferencePresenterTests : PresenterTest<TestObjectReferenceControl, PointerPresenter>
+    public class ObjectReferencePresenterTests : ObjectReferencePresenterInfrastructure<TestObjectReferenceControl>
+    {
+        protected override Toolkit Toolkit { get { return Toolkit.TEST; } }
+        protected override void UserInput(IDataObject v) { widget.SimulateUserInput(v); }
+    }
+
+    public abstract class ObjectReferencePresenterInfrastructure<CONTROL> : ReferencePresenterTests<IDataObject, CONTROL, ObjectReferencePresenter>
+        where CONTROL : IObjectReferenceControl
     {
         private List<IDataObject> Items = new List<IDataObject>(new[] {
                     new TestObject() { ID = 2 },
@@ -22,9 +31,18 @@ namespace Kistl.GUI.Tests
                     new TestObject() { ID = 4 },
                 });
 
+        protected abstract Toolkit Toolkit { get;  }
+
+        protected override IDataObject GetObjectValue() { return obj.TestObjectReference; }
+        protected override IDataObject GetWidgetValue() { return widget.Value; }
+        protected override void SetObjectValue(IDataObject v) { obj.TestObjectReference = v; }
+        protected override IDataObject DefaultValue() { return null; }
+        protected override IEnumerable<IDataObject> SomeValues() { return Items; }
+
+
         protected override void CustomSetUp()
         {
-            IQueryable<IDataObject> idoq = mocks.NewMock<IQueryable<IDataObject>>("IDataObjectQueryable");
+            IQueryable<IDataObject> idoq = Mockery.NewMock<IQueryable<IDataObject>>("IDataObjectQueryable");
 
             Expect.Once.On(MockContext).
                 Method("GetQuery").
@@ -35,24 +53,22 @@ namespace Kistl.GUI.Tests
                 Method("GetEnumerator").
                 Will(Return.Value(Items.GetEnumerator()));
 
-            Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
+            Visual orv = new Visual() { Name = VisualType.ObjectReference, Property = TestObject.TestObjectReferenceDescriptor };
+            Init(
+                KistlGUIContext.FindControlInfo(Toolkit.WPF, orv),
+                TestObject.TestObjectReferenceDescriptor, 
+                Toolkit);
         }
 
-        private void AssertWidgetValidity(bool widgetValid)
+        protected override void AssertWidgetHasValidValue()
         {
-            Assert.AreEqual(widgetValid, widget.IsValidValue, String.Format("the widget should be in a {0}valid state after this operation", widgetValid ? "" : "in"));
+            Assert.IsTrue(widget.IsValidValue, "the widget should be in a valid state after this operation");
             Assert.AreEqual(Items.Count, widget.ItemsSource.Count, "the widget's ItemSource should contain exactly one entry for each item");
 
-            foreach (string ido in Items.Select(i => i.ToString()))
+            foreach (IDataObject ido in Items)
             {
                 Assert.That(widget.ItemsSource.Contains(ido), string.Format("cannot find entry '{0}' in ItemsSource", ido));
             }
-        }
-
-        private void FinalAssert(bool widgetValid)
-        {
-            AssertWidgetValidity(widgetValid);
-            mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         private void ExpectFind(ObjectType type, int ID, object result)
@@ -63,73 +79,5 @@ namespace Kistl.GUI.Tests
                 Will(Return.Value(result));
         }
 
-
-        [Test]
-        public void HandleNoUserInput()
-        {
-            Assert.IsNull(obj.TestObjectReference, "ObjectReferenceProperty should default to null");
-            Assert.AreEqual(Helper.INVALIDID, widget.Value, "widget should be initialised to correct value");
-
-            FinalAssert(true);
-        }
-
-        [Test]
-        public void HandleValidUserInput()
-        {
-            int expectedID = 3;
-            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID);
-            int expectedIndex = Items.IndexOf(expectedObject);
-
-            // users select index of item
-            widget.SimulateUserInput(expectedIndex);
-
-            Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
-            Assert.AreEqual(expectedIndex, widget.Value, "widget should display correct value");
-
-            FinalAssert(true);
-        }
-
-        [Test]
-        public void HandleProgrammaticChange()
-        {
-            int expectedID = 3;
-            // Clone object to exercise all parts of the Presenter
-            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID);
-            int expectedIndex = Items.IndexOf(expectedObject);
-
-            obj.TestObjectReference = expectedObject;
-
-            Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
-            Assert.AreEqual(expectedIndex, widget.Value, "widget should display correct value");
-
-            FinalAssert(true);
-        }
-
-        [Test]
-        public void HandleInvalidUserInput()
-        {
-            int expectedID = 3;
-            IDataObject expectedObject = (IDataObject)Items.Single(i => i.ID == expectedID);
-            int expectedIndex = Items.IndexOf(expectedObject);
-
-            int unexpectedID = 66;
-            IDataObject unexpectedObject = new TestObject() { ID = unexpectedID };
-            // highest valid index is Count - 1
-            int unexpectedIndex = Items.Count; 
-
-            widget.SimulateUserInput(expectedIndex);
-
-            Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReference should have been updated");
-            Assert.AreEqual(expectedIndex, widget.Value, "widget should display correct value");
-
-            AssertWidgetValidity(true);
-
-            widget.SimulateUserInput(unexpectedIndex);
-
-            Assert.AreEqual(expectedObject, obj.TestObjectReference, "ObjectReferenceProperty should not have changed");
-            Assert.AreEqual(unexpectedIndex, widget.Value, "widget should display user's value");
-
-            FinalAssert(false);
-        }
     }
 }

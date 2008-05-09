@@ -7,16 +7,16 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
     public class DateTimePresenterTests : NullablePresenterTests<DateTime, TestDateTimeControl, DateTimePresenter>
     {
-        [SetUp]
-        public void InitControls()
+        protected override void CustomSetUp()
         {
-            Init(TestDateTimeControl.Info, TestObject.TestDateTimeDescriptor);
+            Init(TestDateTimeControl.Info, TestObject.TestDateTimeDescriptor, Toolkit.TEST);
         }
 
         protected override DateTime? GetObjectValue() { return obj.TestDateTime; }
