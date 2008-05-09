@@ -17,13 +17,16 @@ using Kistl.GUI.Renderer.WPF;
 namespace Kistl.GUI.Integration.WPF
 {
     [TestFixture]
-    public class ObjectReferenceControlIntegration : ObjectReferencePresenterInfrastructure<ObjectReferenceControl>
+    public class ObjectReferenceControlIntegrationTests : ObjectReferencePresenterInfrastructure<ObjectReferenceControl>
     {
-        protected override Toolkit Toolkit { get { return Toolkit.WPF; } }
+        public ObjectReferenceControlIntegrationTests()
+            : base(Toolkit.WPF)
+        {
+        }
 
         protected override void UserInput(IDataObject v)
         {
-            ((System.Windows.DependencyObject)widget).SetValue(ObjectReferenceControl.ValueProperty, v);
+            ((System.Windows.DependencyObject)Widget).SetValue(ObjectReferenceControl.ValueProperty, v);
         }
 
     }
@@ -34,9 +37,13 @@ namespace Kistl.GUI.Integration.ASPNET
 
     // TODO: re-enable when ASPNET is implemented
     // [TestFixture]
-    public class ObjectReferenceControlIntegration : ObjectReferencePresenterInfrastructure<ObjectReferenceControl>
+    public class ObjectReferenceControlIntegrationTests : ObjectReferencePresenterInfrastructure<ObjectReferenceControl>
     {
-        protected override Toolkit Toolkit { get { return Toolkit.ASPNET; } }
+        public ObjectReferenceControlIntegrationTests()
+            : base(Toolkit.ASPNET)
+        {
+        }
+
 
         protected override void UserInput(IDataObject v)
         {

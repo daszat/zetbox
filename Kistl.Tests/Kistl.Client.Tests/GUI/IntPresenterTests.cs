@@ -4,25 +4,27 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Kistl.Client.Mocks;
-using Kistl.GUI;
 using Kistl.GUI.DB;
+using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class IntPresenterTests : NullablePresenterTests<int, TestIntControl, IntPresenter>
+    public class IntPresenterTests : NullablePresenterTests<TestObject, int, TestIntControl, IntPresenter>
     {
-        protected override void CustomSetUp()
-        {
-            Init(TestIntControl.Info, TestObject.TestIntDescriptor, Toolkit.TEST);
-        }
+        public IntPresenterTests()
+            : base(
+                new PresenterHarness<TestObject, TestIntControl, IntPresenter>(
+                    new TestObjectHarness(),
+                    new ControlHarness<TestIntControl>(TestObject.TestIntVisual, Toolkit.TEST)))
+        { }
 
-        protected override int? GetObjectValue() { return obj.TestInt; }
-        protected override int? GetWidgetValue() { return widget.Value; }
-        protected override void SetObjectValue(int? v) { obj.TestInt = v; }
-        protected override void UserInput(int? v) { widget.SimulateUserInput(v); }
+        protected override int? GetObjectValue() { return Object.TestInt; }
+        protected override int? GetWidgetValue() { return Widget.Value; }
+        protected override void SetObjectValue(int? v) { Object.TestInt = v; }
+        protected override void UserInput(int? v) { Widget.SimulateUserInput(v); }
         protected override IEnumerable<int> SomeValues()
         {
             return new List<int>(new[] {

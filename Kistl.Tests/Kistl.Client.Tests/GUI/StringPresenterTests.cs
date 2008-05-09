@@ -4,25 +4,27 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Kistl.Client.Mocks;
-using Kistl.GUI;
 using Kistl.GUI.DB;
+using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class StringPresenterTests : ReferencePresenterTests<string, TestStringControl, StringPresenter>
+    public class StringPresenterTests : ReferencePresenterTests<TestObject, string, TestStringControl, StringPresenter>
     {
-        protected override void CustomSetUp()
-        {
-            Init(TestStringControl.Info, TestObject.TestStringDescriptor, Toolkit.TEST);
-        }
+        public StringPresenterTests()
+            : base(
+                new PresenterHarness<TestObject, TestStringControl, StringPresenter>(
+                    new TestObjectHarness(),
+                    new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)))
+        { }
 
-        protected override string GetObjectValue() { return obj.TestString; }
-        protected override string GetWidgetValue() { return widget.Value; }
-        protected override void SetObjectValue(string v) { obj.TestString = v; }
-        protected override void UserInput(string v) { widget.SimulateUserInput(v); }
+        protected override string GetObjectValue() { return Object.TestString; }
+        protected override string GetWidgetValue() { return Widget.Value; }
+        protected override void SetObjectValue(string v) { Object.TestString = v; }
+        protected override void UserInput(string v) { Widget.SimulateUserInput(v); }
         protected override string DefaultValue() { return null; }
         protected override IEnumerable<string> SomeValues()
         {

@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.GUI.DB;
 
 namespace Kistl.Client.Mocks
 {
@@ -34,7 +35,6 @@ namespace Kistl.Client.Mocks
                 return oc;
             }
         }
-
         public static Module Module
         {
             get
@@ -67,6 +67,14 @@ namespace Kistl.Client.Mocks
                 PropertyName = "TestBackReference",
             };
 
+        public readonly static Visual TestBackReferenceVisual
+            = new Visual()
+            {
+                Name = TestBackReferenceControl.Info.Control,
+                Property = TestBackReferenceDescriptor,
+                Description = "TestBackReference Visual",
+            };
+
         #endregion
 
         #region Bool Properties
@@ -87,6 +95,15 @@ namespace Kistl.Client.Mocks
                 PropertyName = "TestBool",
                 IsNullable = true
             };
+
+        public readonly static Visual TestBoolVisual
+            = new Visual()
+            {
+                Name = TestBoolControl.Info.Control,
+                Property = TestBoolDescriptor,
+                Description = "TestBool Visual",
+            };
+
         #endregion
 
         #region DateTime Properties
@@ -107,6 +124,15 @@ namespace Kistl.Client.Mocks
                 PropertyName = "TestDateTime",
                 IsNullable = true
             };
+
+        public readonly static Visual TestDateTimeVisual
+            = new Visual()
+            {
+                Name = TestDateTimeControl.Info.Control,
+                Property = TestDateTimeDescriptor,
+                Description = "TestDateTime Visual",
+            };
+
         #endregion
 
         #region Double Properties
@@ -126,6 +152,14 @@ namespace Kistl.Client.Mocks
             {
                 PropertyName = "TestDouble",
                 IsNullable = true
+            };
+
+        public readonly static Visual TestDoubleVisual
+            = new Visual()
+            {
+                Name = TestDoubleControl.Info.Control,
+                Property = TestDoubleDescriptor,
+                Description = "TestDouble Visual",
             };
 
         #endregion
@@ -149,6 +183,14 @@ namespace Kistl.Client.Mocks
                 IsNullable = true
             };
 
+        public readonly static Visual TestIntVisual
+            = new Visual()
+            {
+                Name = TestIntControl.Info.Control,
+                Property = TestIntDescriptor,
+                Description = "TestInt Visual",
+            };
+
         #endregion
 
         #region String Properties
@@ -168,6 +210,14 @@ namespace Kistl.Client.Mocks
             {
                 PropertyName = "TestString",
                 IsNullable = true
+            };
+
+        public readonly static Visual TestStringVisual
+            = new Visual()
+            {
+                Name = TestStringControl.Info.Control,
+                Property = TestStringDescriptor,
+                Description = "TestString Visual",
             };
 
         #endregion
@@ -190,6 +240,14 @@ namespace Kistl.Client.Mocks
                 PropertyName = "TestObjectReference",
                 ReferenceObjectClass = TestObject.ObjectClass,
                 IsNullable = true
+            };
+
+        public readonly static Visual TestObjectReferenceVisual
+            = new Visual()
+            {
+                Name = TestObjectReferenceControl.Info.Control,
+                Property = TestObjectReferenceDescriptor,
+                Description = "TestObjectReference Visual",
             };
 
         #endregion

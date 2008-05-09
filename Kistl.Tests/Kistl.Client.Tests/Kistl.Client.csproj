@@ -6,7 +6,7 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DB3D33DD-F5A0-4589-9033-D1193909EE97}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kistl.Client</RootNamespace>
     <AssemblyName>Kistl.Client.Tests</AssemblyName>
@@ -80,8 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\ControlTests.cs" />
     <Compile Include="Integration\ObjectReferenceControlIntegration.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Mocks\ControlHarness.cs" />
+    <Compile Include="Mocks\ObjectHarness.cs" />
+    <Compile Include="Mocks\PresenterHarness.cs" />
     <Compile Include="Mocks\TestControl.cs" />
     <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
     <Compile Include="Mocks\TestObject.cs" />
@@ -104,7 +108,7 @@
     <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.Client.Tests.dll.config">
+    <None Include="Kistl.Client.Tests.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Kistl.Client.Tests.nunit" />

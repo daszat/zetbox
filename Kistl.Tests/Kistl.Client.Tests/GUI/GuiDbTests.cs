@@ -10,72 +10,47 @@ using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.GUI.DB;
+using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class GuiDbTests : PresenterTests<TestStringControl, StringPresenter>
+    public class GuiDbTests : PresenterTests<TestObject, TestStringControl, StringPresenter>
     {
-        protected virtual void Init()
-        {
-            Init(TestStringControl.Info, TestObject.TestStringDescriptor, Toolkit.TEST);
-        }
 
-        [Test]
-        public void FindControlInfo()
-        {
-            Init();
-            Assert.That(cInfo.Equals(TestStringControl.Info));
-        }
-
-        [Test]
-        public void FindPresenterInfo()
-        {
-            Init();
-            Assert.That(pInfo.Control == TestStringControl.Info.Control);
-        }
-
-        [Test]
-        public void CreateControl()
-        {
-            Init();
-            Assert.That(widget, Is.Not.Null);
-            Assert.That(widget.IsValidValue, Is.True);
-        }
-
-        [Test]
-        public void CreatePresenter()
-        {
-            Init();
-            Assert.That(presenter, Is.Not.Null);
-        }
+        public GuiDbTests()
+            : base(
+                new PresenterHarness<TestObject, TestStringControl, StringPresenter>(
+                    new TestObjectHarness(),
+                    new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)))
+        { }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoInfo()
         {
-            KistlGUIContext.CreatePresenter(null, obj, visual, widget);
+            KistlGUIContext.CreatePresenter(null, Object, Visual, Widget);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoObject()
         {
-            KistlGUIContext.CreatePresenter(pInfo, null, visual, widget);
+            KistlGUIContext.CreatePresenter(KistlGUIContext.FindPresenterInfo(Visual), null, Visual, Widget);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoVisual()
         {
-            KistlGUIContext.CreatePresenter(pInfo, obj, null, widget);
+            KistlGUIContext.CreatePresenter(KistlGUIContext.FindPresenterInfo(Visual), Object, null, Widget);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreatePresenterFailNoWidget()
         {
-            KistlGUIContext.CreatePresenter(pInfo, obj, visual, null);
+            KistlGUIContext.CreatePresenter(KistlGUIContext.FindPresenterInfo(Visual), Object, Visual, null);
         }
 
     }

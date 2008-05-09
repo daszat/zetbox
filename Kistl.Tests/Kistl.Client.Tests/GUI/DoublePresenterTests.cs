@@ -4,25 +4,27 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Kistl.Client.Mocks;
-using Kistl.GUI;
 using Kistl.GUI.DB;
+using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class DoublePresenterTests : NullablePresenterTests<double, TestDoubleControl, DoublePresenter>
+    public class DoublePresenterTests : NullablePresenterTests<TestObject, double, TestDoubleControl, DoublePresenter>
     {
-        protected override void CustomSetUp()
-        {
-            Init(TestDoubleControl.Info, TestObject.TestDoubleDescriptor, Toolkit.TEST);
-        }
+        public DoublePresenterTests()
+            : base(
+                new PresenterHarness<TestObject, TestDoubleControl, DoublePresenter>(
+                    new TestObjectHarness(),
+                    new ControlHarness<TestDoubleControl>(TestObject.TestDoubleVisual, Toolkit.TEST)))
+        { }
 
-        protected override double? GetObjectValue() { return obj.TestDouble; }
-        protected override double? GetWidgetValue() { return widget.Value; }
-        protected override void SetObjectValue(double? v) { obj.TestDouble = v; }
-        protected override void UserInput(double? v) { widget.SimulateUserInput(v); }
+        protected override double? GetObjectValue() { return Object.TestDouble; }
+        protected override double? GetWidgetValue() { return Widget.Value; }
+        protected override void SetObjectValue(double? v) { Object.TestDouble = v; }
+        protected override void UserInput(double? v) { Widget.SimulateUserInput(v); }
         protected override IEnumerable<double> SomeValues()
         {
             return new List<double>(new double[] {

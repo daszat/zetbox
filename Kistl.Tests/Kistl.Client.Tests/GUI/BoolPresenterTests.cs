@@ -4,28 +4,30 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Kistl.Client.Mocks;
-using Kistl.GUI;
 using Kistl.GUI.DB;
+using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class BoolPresenterTests : NullablePresenterTests<bool, TestBoolControl, BoolPresenter>
+    public class BoolPresenterTests : NullablePresenterTests<TestObject, bool, TestBoolControl, BoolPresenter>
     {
-        protected override void CustomSetUp()
-        {
-            Init(TestBoolControl.Info, TestObject.TestBoolDescriptor, Toolkit.TEST);
-        }
+        public BoolPresenterTests()
+            : base(
+                new PresenterHarness<TestObject, TestBoolControl, BoolPresenter>(
+                    new TestObjectHarness(),
+                    new ControlHarness<TestBoolControl>(TestObject.TestBoolVisual, Toolkit.TEST)))
+        { }
 
-        protected override bool? GetObjectValue() { return obj.TestBool; }
-        protected override bool? GetWidgetValue() { return widget.Value; }
-        protected override void SetObjectValue(bool? v) { obj.TestBool = v; }
-        protected override void UserInput(bool? v) { widget.SimulateUserInput(v); }
+        protected override bool? GetObjectValue() { return Object.TestBool; }
+        protected override bool? GetWidgetValue() { return Widget.Value; }
+        protected override void SetObjectValue(bool? v) { Object.TestBool = v; }
+        protected override void UserInput(bool? v) { Widget.SimulateUserInput(v); }
         protected override IEnumerable<bool> SomeValues()
         {
-            return new List<bool>(new [] { true, false });
+            return new List<bool>(new[] { true, false });
         }
     }
 }
