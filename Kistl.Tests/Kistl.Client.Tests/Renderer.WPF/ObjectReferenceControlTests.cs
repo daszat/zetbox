@@ -18,12 +18,6 @@ namespace Kistl.GUI.Renderer.WPF.Tests
     [TestFixture]
     public class ObjectReferenceControlTests
     {
-        private List<IDataObject> Items = new List<IDataObject>(new[] {
-                    new TestObject() { ID = 20 },
-                    new TestObject() { ID = 30 },
-                    new TestObject() { ID = 40 },
-                });
-
 
         protected Mockery mocks { get; set; }
         protected IKistlContext MockContext { get; set; }
@@ -88,10 +82,6 @@ namespace Kistl.GUI.Renderer.WPF.Tests
             foreach (int i in new[] { 1, 2, 3, 4, 5 })
             {
                 IDataObject ido = mocks.NewMock<IDataObject>();
-                Stub.On(ido).Method("ToString")
-                    .With()
-                    .Will(Return.Value(
-                        String.Format("MockDataObject ID={0}", i)));
                 Stub.On(ido).GetProperty("ID")
                     .Will(Return.Value(i));
                 items.Add(ido);
@@ -126,6 +116,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         {
             MockContext = mocks.NewMock<IKistlContext>("MockContext");
             TestObject.GlobalContext = MockContext;
+            List<IDataObject> items = CreateItems();
 
             Stub.On(MockContext).
                 Method("Find").
@@ -146,25 +137,30 @@ namespace Kistl.GUI.Renderer.WPF.Tests
 
             Stub.On(idoq).
                 Method("GetEnumerator").
-                Will(Return.Value(Items.GetEnumerator()));
+                Will(Return.Value(items.GetEnumerator()));
 
             Init(TestObjectReferenceControl.Info, TestObject.TestObjectReferenceDescriptor);
 
             presenter = (ObjectReferencePresenter)KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
 
+            IDataObject expectedItem = items[2];
 
             _UserInputCalled = false;
             widget.UserInput += new EventHandler(widget_UserInput);
 
-            ((System.Windows.DependencyObject)widget).SetValue(ObjectReferenceControl.ValueProperty, 1);
+            // Simulate user input directly
+            ((System.Windows.DependencyObject)widget).SetValue(ObjectReferenceControl.ValueProperty, expectedItem);
+            Assert.AreEqual(expectedItem, widget.Value, "widget's value was not set correctly");
             Assert.IsTrue(_UserInputCalled, "UserInput was not called on simulated user input");
-            Assert.AreEqual(Items[1], obj.TestObjectReference, "TestObjectReference was not set correctly");
+            Assert.AreEqual(expectedItem, obj.TestObjectReference, "TestObjectReference was not set correctly");
 
             _UserInputCalled = false;
-            IDataObject expectedItem = (IDataObject)Items[2];
+
+            // set other item via object
+            expectedItem = items[3];
             obj.TestObjectReference = expectedItem;
             Assert.AreEqual(expectedItem, obj.TestObjectReference, "TestObjectReference was not set correctly");
-            Assert.AreEqual(Items[1], widget.Value, "widget's index was not set correctly");
+            Assert.AreEqual(expectedItem, widget.Value, "widget's value was not set correctly");
             Assert.IsFalse(_UserInputCalled, "UserInput was called when changing the object");
 
         }
