@@ -166,7 +166,7 @@ namespace Kistl.App.Zeiterfassung
         {
             base.AttachToContext(ctx);
             _Mitarbeiter.ToList().ForEach(i => ctx.Attach(i));
-            if(_Taetigkeiten != null) _Taetigkeiten.ToList().ForEach(i => ctx.Attach(i));
+            if(_Taetigkeiten != null) _Taetigkeiten = _Taetigkeiten.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Taetigkeit>().ToList();
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

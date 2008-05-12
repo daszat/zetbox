@@ -88,7 +88,7 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_EnumerationEntries != null) _EnumerationEntries.ToList().ForEach(i => ctx.Attach(i));
+            if(_EnumerationEntries != null) _EnumerationEntries = _EnumerationEntries.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.EnumerationEntry>().ToList();
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

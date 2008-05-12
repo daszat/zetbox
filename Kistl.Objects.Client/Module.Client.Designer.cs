@@ -148,8 +148,8 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_DataTypes != null) _DataTypes.ToList().ForEach(i => ctx.Attach(i));
-            if(_Assemblies != null) _Assemblies.ToList().ForEach(i => ctx.Attach(i));
+            if(_DataTypes != null) _DataTypes = _DataTypes.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.DataType>().ToList();
+            if(_Assemblies != null) _Assemblies = _Assemblies.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.Assembly>().ToList();
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

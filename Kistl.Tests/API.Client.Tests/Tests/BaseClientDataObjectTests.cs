@@ -15,6 +15,7 @@ namespace API.Client.Tests.Tests
     {
         private TestObjClass obj;
         private CustomActionsManagerAPITest currentCustomActionsManager;
+        private bool PropertyChangedCalled = false;
 
         [SetUp]
         public void SetUp()
@@ -22,7 +23,15 @@ namespace API.Client.Tests.Tests
             currentCustomActionsManager = (CustomActionsManagerAPITest)CustomActionsManagerFactory.Current;
             currentCustomActionsManager.Reset();
 
+            PropertyChangedCalled = false;
+
             obj = new TestObjClass();
+            obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(obj_PropertyChanged);
+        }
+
+        void obj_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            PropertyChangedCalled = true;
         }
 
         [Test]
@@ -77,6 +86,7 @@ namespace API.Client.Tests.Tests
         public void NotifyChange()
         {
             obj.NotifyChange();
+            Assert.That(PropertyChangedCalled, Is.True);
         }
 
         [Test]
@@ -85,6 +95,7 @@ namespace API.Client.Tests.Tests
             obj.NotifyPropertyChanging("StringProp");
             obj.StringProp = "test";
             obj.NotifyPropertyChanged("StringProp");
+            Assert.That(PropertyChangedCalled, Is.True);
         }
 
         [Test]
@@ -96,6 +107,7 @@ namespace API.Client.Tests.Tests
 
             obj.CopyTo(result);
             Assert.That(result.ID, Is.EqualTo(obj.ID));
+            Assert.That(PropertyChangedCalled, Is.False);
         }
 
         [Test]
@@ -110,6 +122,7 @@ namespace API.Client.Tests.Tests
         public void Clone()
         {
             Assert.That(obj.Clone(), Is.Not.Null);
+            Assert.That(PropertyChangedCalled, Is.False);
         }
 
         [Test]
@@ -140,6 +153,7 @@ namespace API.Client.Tests.Tests
                 Assert.That(result.Type, Is.EqualTo(obj.Type));
                 Assert.That(result.ID, Is.EqualTo(obj.ID));
                 Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
+                Assert.That(PropertyChangedCalled, Is.False);
             }
         }
 
@@ -183,6 +197,7 @@ namespace API.Client.Tests.Tests
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+                Assert.That(PropertyChangedCalled, Is.False);
             }
         }
 
@@ -195,6 +210,7 @@ namespace API.Client.Tests.Tests
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
+                Assert.That(PropertyChangedCalled, Is.False);
             }
         }
 
@@ -224,6 +240,21 @@ namespace API.Client.Tests.Tests
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
 
+                obj.DetachFromContext(ctx);
+                Assert.That(obj.Context, Is.Null);
+                Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+                Assert.That(PropertyChangedCalled, Is.False);
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DetachFromContext_NotAttached()
+        {
+            Assert.That(obj.Context, Is.Null);
+            obj.ID = 10;
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
                 obj.DetachFromContext(ctx);
                 Assert.That(obj.Context, Is.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));

@@ -24,7 +24,7 @@ namespace Kistl.Server
         /// <summary>
         /// List of Custom Actions
         /// </summary>
-        private Dictionary<ObjectType, List<InvokeInfo>> customAction = new Dictionary<ObjectType, List<InvokeInfo>>();
+        private Dictionary<Type, List<InvokeInfo>> customAction = new Dictionary<Type, List<InvokeInfo>>();
 
         /// <summary>
         /// Indicates that initializing is done
@@ -43,9 +43,9 @@ namespace Kistl.Server
             if (!initialized) return;
 
             // New Method
-            if (customAction.ContainsKey(obj.Type))
+            if (customAction.ContainsKey(obj.GetType()))
             {
-                foreach (InvokeInfo ii in customAction[obj.Type])
+                foreach (InvokeInfo ii in customAction[obj.GetType()])
                 {
                     // TODO: Fix Case 316
                     ii.CLREvent.AddEventHandler(obj, Delegate.CreateDelegate(
@@ -62,7 +62,8 @@ namespace Kistl.Server
                 {
                     foreach (ObjectClass baseObjClass in ctx.GetQuery<ObjectClass>())
                     {
-                        ObjectType objType = baseObjClass.GetObjectType();
+                        // ObjectType objType = baseObjClass.GetObjectType();
+                        Type objType = baseObjClass.GetObjectType().GetCLRType();
                         foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie(ctx))
                         {
                             foreach (MethodInvocation mi in objClass.MethodIvokations)
@@ -79,7 +80,7 @@ namespace Kistl.Server
                                     System.Diagnostics.Debug.Assert(clrMethod != null, string.Format("CLR Method '{0}' not found", mi.MemberName));
                                     if (clrMethod == null) continue;
 
-                                    EventInfo ei = Type.GetType(objType.FullNameDataObject).GetEvent(
+                                    EventInfo ei = objType.GetEvent(
                                         "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
                                     System.Diagnostics.Debug.Assert(ei != null, string.Format("Event 'On{0}_{1}' not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
                                     if (ei == null) continue;

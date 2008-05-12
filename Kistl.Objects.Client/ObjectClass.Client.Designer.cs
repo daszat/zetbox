@@ -151,7 +151,7 @@ namespace Kistl.App.Base
         {
             base.AttachToContext(ctx);
             _ImplementsInterfaces.ToList().ForEach(i => ctx.Attach(i));
-            if(_SubClasses != null) _SubClasses.ToList().ForEach(i => ctx.Attach(i));
+            if(_SubClasses != null) _SubClasses = _SubClasses.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.ObjectClass>().ToList();
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

@@ -30,6 +30,46 @@ namespace Integration.Tests.Tests
         }
 
         [Test]
+        public void GetObject_GetList()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var prop = ctx.Find<Kistl.App.Base.Property>(1);
+                Assert.That(prop, Is.Not.Null);
+                Assert.That(prop.Context, Is.EqualTo(ctx));
+
+                var list_objclass = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+                Assert.That(list_objclass.Count, Is.GreaterThan(0));
+
+                var objclass = list_objclass.Single(o => o.ID == prop.fk_ObjectClass);
+                Assert.That(objclass.Context, Is.EqualTo(ctx));
+                var prop_test = objclass.Properties.Single(p => p.ID == prop.ID);
+                Assert.That(prop_test.Context, Is.EqualTo(ctx));
+
+                Assert.That(object.ReferenceEquals(prop, prop_test), "prop & prop_test are different Objects");
+            }
+        }
+
+        [Test]
+        public void GetList_GetObject()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var list_objclass = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+                Assert.That(list_objclass.Count, Is.GreaterThan(0));
+
+                var prop = ctx.Find<Kistl.App.Base.Property>(1);
+                Assert.That(prop, Is.Not.Null);
+
+                var objclass = list_objclass.Single(o => o.ID == prop.fk_ObjectClass);
+                var prop_test = objclass.Properties.Single(p => p.ID == prop.ID);
+
+                Assert.That(object.ReferenceEquals(prop, prop_test), "prop & prop_test are different Objects");
+            }
+        }
+
+
+        [Test]
         public void GetListWithTop10()
         {
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())

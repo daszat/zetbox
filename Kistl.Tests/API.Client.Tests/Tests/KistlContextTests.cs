@@ -283,7 +283,6 @@ namespace API.Client.Tests.Tests
 
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void Attach_IDataObject_Existing_Twice_But_Different()
         {
             TestObjClass obj1 = new TestObjClass() { ID = 1 };
@@ -291,7 +290,9 @@ namespace API.Client.Tests.Tests
             Assert.That(obj1.Context, Is.EqualTo(ctx));
 
             TestObjClass obj2 = new TestObjClass() { ID = 1 };
-            ctx.Attach(obj2);
+            TestObjClass obj3 = (TestObjClass)ctx.Attach(obj2);
+            Assert.That(object.ReferenceEquals(obj1, obj3), "obj1 & obj3 are different Objects");
+            Assert.That(!object.ReferenceEquals(obj2, obj3), "obj1 & obj3 are the same Objects");
         }
 
         [Test]

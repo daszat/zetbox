@@ -115,7 +115,12 @@ namespace Kistl.API.Server
             return result;
         }
 
-        public void Attach(IPersistenceObject obj)
+        /// <summary>
+        /// The EntityFramework guarantees the all Objects are unique. No check requiered.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public IPersistenceObject Attach(IPersistenceObject obj)
         {
             // Attach/Detach then Attach item
             string entityName = GetEntityName(obj.GetType());
@@ -147,6 +152,8 @@ namespace Kistl.API.Server
 
             // Then call Attach on Subitems
             obj.AttachToContext(this);
+
+            return obj;
         }
 
         public void Detach(IPersistenceObject obj)

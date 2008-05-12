@@ -11,10 +11,12 @@ namespace Kistl.API
     public interface IKistlContext : IDisposable
     {
         /// <summary>
-        /// Attach an IPersistenceObject.
+        /// Attach an IPersistenceObject. This Method checks, if the Object is already in that Context. 
+        /// If so, it returns the Object in that Context.
         /// </summary>
         /// <param name="obj">IDataObject</param>
-        void Attach(IPersistenceObject obj);
+        /// <returns>The Object in already Context or obj if not</returns>
+        IPersistenceObject Attach(IPersistenceObject obj);
         /// <summary>
         /// Detach an IPersistenceObject.
         /// </summary>

@@ -1254,8 +1254,8 @@ namespace Kistl.Server.Generators
                 }
                 foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
                 {
-                    // Use ToList before using foreach - the collection could change
-                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0}.ToList().ForEach(i => ctx.Attach(i))", p.PropertyName)));
+                    // Create a new List after Attach - Object Reference will change, if Object is alredy in tha Context
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = _{0}.Select(i => ctx.Attach(i)).OfType<{1}>().ToList()", p.PropertyName, p.GetDataType())));
                 }
             }
             else

@@ -13,6 +13,22 @@ namespace Integration.Tests.Tests
     [TestFixture]
     public class GeneratorTests
     {
+        [SetUp]
+        public void SetUp()
+        {
+            System.IO.Directory.CreateDirectory(@"C:\temp\KistlCodeGen\bin\");
+            System.IO.Directory.GetFiles(@"C:\temp\KistlCodeGen\bin\", "Kistl.Objects.*")
+                .ToList().ForEach(f => System.IO.File.Delete(f));
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            System.IO.Directory.GetFiles(@"C:\temp\KistlCodeGen\bin\", "Kistl.Objects.*")
+                .ToList().ForEach(f => System.IO.File.Delete(f));
+        }
+
+
         [Test]
         public void Generate()
         {

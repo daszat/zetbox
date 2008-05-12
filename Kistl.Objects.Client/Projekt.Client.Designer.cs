@@ -190,9 +190,9 @@ namespace Kistl.App.Projekte
         {
             base.AttachToContext(ctx);
             _Mitarbeiter.ToList().ForEach(i => ctx.Attach(i));
-            if(_Tasks != null) _Tasks.ToList().ForEach(i => ctx.Attach(i));
-            if(_Kostentraeger != null) _Kostentraeger.ToList().ForEach(i => ctx.Attach(i));
-            if(_Auftraege != null) _Auftraege.ToList().ForEach(i => ctx.Attach(i));
+            if(_Tasks != null) _Tasks = _Tasks.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Task>().ToList();
+            if(_Kostentraeger != null) _Kostentraeger = _Kostentraeger.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Kostentraeger>().ToList();
+            if(_Auftraege != null) _Auftraege = _Auftraege.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Auftrag>().ToList();
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

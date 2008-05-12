@@ -38,6 +38,7 @@ namespace Kistl.API.Client
 
         public IPersistenceObject IsObjectInContext(Type type, int ID)
         {
+            if (ID == Helper.INVALIDID) return null;
             Type rootType = GetRootType(type);
             return _objects.SingleOrDefault(o => GetRootType(o.GetType()) == rootType && o.ID == ID);
         }
@@ -82,14 +83,16 @@ namespace Kistl.API.Client
             return obj;
         }
 
-        public void Attach(IPersistenceObject obj)
+        public IPersistenceObject Attach(IPersistenceObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
-            if (obj.ObjectState != DataObjectState.New && IsObjectInContext(obj.GetType(), obj.ID) != null && !_objects.Contains(obj))
+            /*if (obj.ObjectState != DataObjectState.New && IsObjectInContext(obj.GetType(), obj.ID) != null && !_objects.Contains(obj))
             {
                 throw new InvalidOperationException("Try to add same Object twice but with different references!");
             }
+             * */
+            obj = IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
 
             obj.AttachToContext(this);
             if (!_objects.Contains(obj))
@@ -97,6 +100,8 @@ namespace Kistl.API.Client
                 _objects.Add(obj);
                 obj.ObjectState = DataObjectState.Unmodified;
             }
+
+            return obj;
         }
 
         public void Detach(IPersistenceObject obj)

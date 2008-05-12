@@ -209,9 +209,9 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_Properties != null) _Properties.ToList().ForEach(i => ctx.Attach(i));
-            if(_Methods != null) _Methods.ToList().ForEach(i => ctx.Attach(i));
-            if(_MethodIvokations != null) _MethodIvokations.ToList().ForEach(i => ctx.Attach(i));
+            if(_Properties != null) _Properties = _Properties.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.BaseProperty>().ToList();
+            if(_Methods != null) _Methods = _Methods.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.Method>().ToList();
+            if(_MethodIvokations != null) _MethodIvokations = _MethodIvokations.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.MethodInvocation>().ToList();
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

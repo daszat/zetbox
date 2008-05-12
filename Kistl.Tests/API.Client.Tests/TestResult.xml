@@ -1,56 +1,57 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\API.Client.Tests.nunit" total="49" failures="0" not-run="0" date="2008-05-09" time="12:37:02">
-  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
+<test-results name="d:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\API.Client.Tests.nunit" total="55" failures="0" not-run="0" date="2008-05-12" time="12:35:57">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="d:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
   <culture-info current-culture="de-AT" current-uiculture="en-US" />
-  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\API.Client.Tests.nunit" success="True" time="1.030" asserts="0">
+  <test-suite name="d:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\API.Client.Tests.nunit" success="True" time="0.952" asserts="0">
     <results>
-      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\bin\debug\..\Debug\API.Client.Tests.exe" success="True" time="1.030" asserts="0">
+      <test-suite name="d:\Programmierung\Kistl\Kistl.Tests\API.Client.Tests\bin\debug\..\Debug\API.Client.Tests.exe" success="True" time="0.952" asserts="0">
         <results>
-          <test-suite name="API" success="True" time="1.030" asserts="0">
+          <test-suite name="API" success="True" time="0.936" asserts="0">
             <results>
-              <test-suite name="Client" success="True" time="1.030" asserts="0">
+              <test-suite name="Client" success="True" time="0.920" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="True" time="1.014" asserts="0">
+                  <test-suite name="Tests" success="True" time="0.905" asserts="0">
                     <results>
-                      <test-suite name="Tests" success="True" time="0.328" asserts="0">
+                      <test-suite name="Tests" success="True" time="0.296" asserts="0">
                         <results>
-                          <test-suite name="BaseClientDataObjectTests" success="True" time="0.109" asserts="0">
+                          <test-suite name="BaseClientDataObjectTests" success="True" time="0.094" asserts="0">
                             <results>
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.AttachToContext" executed="True" success="True" time="0.016" asserts="3" />
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.AttachToContext_New" executed="True" success="True" time="0.016" asserts="3" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.AttachToContext" executed="True" success="True" time="0.047" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.AttachToContext_New" executed="True" success="True" time="0.000" asserts="4" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.AttachToContext_Twice" executed="True" success="True" time="0.000" asserts="4" />
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.Clone" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.CopyTo" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.Clone" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.CopyTo" executed="True" success="True" time="0.000" asserts="2" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.CopyTo_Null" executed="True" success="True" time="0.016" asserts="0" />
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.DetachFromContext" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.DetachFromContext" executed="True" success="True" time="0.000" asserts="5" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.DetachFromContext_NotAttached" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.EventAttached" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.FromStream_WrongType" executed="True" success="True" time="0.016" asserts="0" />
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.NotifyChange" executed="True" success="True" time="0.000" asserts="0" />
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.NotifyChange" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.ObjectState_New_then_UnModified" executed="True" success="True" time="0.000" asserts="2" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.Stream" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.Stream" executed="True" success="True" time="0.000" asserts="5" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.ToStream_Null" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="API.Client.Tests.Tests.BaseClientDataObjectTests.Type" executed="True" success="True" time="0.000" asserts="1" />
                             </results>
                           </test-suite>
                           <test-suite name="KistlContextTests" success="True" time="0.203" asserts="0">
                             <results>
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_Null" executed="True" success="True" time="0.000" asserts="0" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_Twice" executed="True" success="True" time="0.000" asserts="2" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_Twice_But_Different" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_Twice_Modified" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.016" asserts="1" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_IDataObject_Null" executed="True" success="True" time="0.016" asserts="0" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_IDataObject_Twice" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Attach_IDataObject_Twice_Modified" executed="True" success="True" time="0.000" asserts="4" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_ObjectType" executed="True" success="True" time="0.000" asserts="4" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_T" executed="True" success="True" time="0.016" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_T" executed="True" success="True" time="0.000" asserts="4" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_T_Twice" executed="True" success="True" time="0.000" asserts="7" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Create_Type" executed="True" success="True" time="0.000" asserts="4" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete" executed="True" success="True" time="0.062" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete" executed="True" success="True" time="0.094" asserts="2" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete_Not_Attached" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete_Null" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Delete_Wrong_Context" executed="True" success="True" time="0.000" asserts="0" />
@@ -58,15 +59,20 @@
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Detach_NotAttached" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Detach_Null" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.Detach_Twice" executed="True" success="True" time="0.000" asserts="2" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetList" executed="True" success="True" time="0.031" asserts="17" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Find_ObjectType" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.Find_T" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetList" executed="True" success="True" time="0.016" asserts="17" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetList_GetListOf" executed="True" success="True" time="0.016" asserts="9" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.GetList_Twice" executed="True" success="True" time="0.000" asserts="19" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.GetListOf" executed="True" success="True" time="0.016" asserts="8" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.GetListOf_Twice" executed="True" success="True" time="0.000" asserts="10" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.GetObject" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetObject_GetList" executed="True" success="True" time="0.000" asserts="7" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetObject_GetListOf" executed="True" success="True" time="0.000" asserts="7" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.GetObject_Twice" executed="True" success="True" time="0.000" asserts="5" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetQuery_ObjectType" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.GetQuery_ObjectType" executed="True" success="True" time="0.016" asserts="2" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.GetQuery_T" executed="True" success="True" time="0.000" asserts="2" />
-                              <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges" executed="True" success="True" time="0.016" asserts="4" />
+                              <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges" executed="True" success="True" time="0.000" asserts="4" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges_Delete" executed="True" success="True" time="0.000" asserts="5" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges_New" executed="True" success="True" time="0.000" asserts="4" />
                               <test-case name="API.Client.Tests.Tests.KistlContextTests.SubmitChanges_Nothing" executed="True" success="True" time="0.000" asserts="4" />
