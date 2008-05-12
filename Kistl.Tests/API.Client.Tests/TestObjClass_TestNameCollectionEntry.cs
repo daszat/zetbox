@@ -74,9 +74,9 @@ namespace API.Client.Tests
             BinarySerializer.ToBinary(this.fk_Parent, sw);
         }
 
-        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        public override void FromStream(System.IO.BinaryReader sr)
         {
-            base.FromStream(ctx, sr);
+            base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Value, sr);
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
         }

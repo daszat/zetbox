@@ -68,7 +68,7 @@ namespace API.Tests.Tests
         public void AddOrderBy()
         {
             Expression<Func<TestDataObject, string>> e = (o) => o.StringProperty;
-            list = list.AddOrderBy(e); //TODO: Das geht nicht!!! Ausbessern
+            list = list.AddOrderBy(e);
             Assert.That(list.ToList().Count, Is.EqualTo(9));
             Assert.That(list.ToList()[0].ID, Is.EqualTo(8)); // Eighth
         }

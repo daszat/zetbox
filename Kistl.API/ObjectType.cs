@@ -123,13 +123,19 @@ namespace Kistl.API
         {
             if (string.IsNullOrEmpty(this.NameDataObject)) throw new ArgumentException("Type is empty");
 
-            Type t = Type.GetType(this.FullNameDataObject);
-            if (t == null) throw new TypeLoadException("Invalid Type " + this.ToString());
+            Type t = GetCLRType();
 
             IDataObject obj = Activator.CreateInstance(t) as IDataObject;
             if (obj == null) throw new InvalidOperationException("Cannot create instance");
 
             return obj;
+        }
+
+        public Type GetCLRType()
+        {
+            Type t = Type.GetType(this.FullNameDataObject);
+            if (t == null) throw new TypeLoadException("Invalid Type " + this.ToString());
+            return t;
         }
     }
 }

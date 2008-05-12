@@ -132,10 +132,10 @@ namespace API.Tests.Tests
         {
             TestEnum toval, fromval;
             toval = TestEnum.First;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToBinary((int)toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            Enum tmp;
+            int tmp;
             BinarySerializer.FromBinary(out tmp, sr);
             fromval = (TestEnum)tmp;
             Assert.That(fromval, Is.EqualTo(toval));
@@ -270,7 +270,7 @@ namespace API.Tests.Tests
             BinarySerializer.ToBinary(toval.OfType<IDataObject>(), sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr, null);
+            BinarySerializer.FromBinary(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -284,7 +284,7 @@ namespace API.Tests.Tests
             BinarySerializer.ToBinary(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinaryCollectionEntries(out fromval, sr, null);
+            BinarySerializer.FromBinaryCollectionEntries(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -299,7 +299,7 @@ namespace API.Tests.Tests
             ms.Seek(0, SeekOrigin.Begin);
 
             ObservableCollection<TestCollectionEntry> fromvalobserbable;
-            BinarySerializer.FromBinaryCollectionEntries(out fromvalobserbable, sr, null);
+            BinarySerializer.FromBinaryCollectionEntries(out fromvalobserbable, sr);
             Assert.That(fromvalobserbable[0].ID, Is.EqualTo(toval[0].ID));
         }
 

@@ -13,6 +13,9 @@ namespace API.Client.Tests
             Tests.KistlContextTests test = new API.Client.Tests.Tests.KistlContextTests();
 
             test.SetUp();
+            test.Delete();
+
+            test.SetUp();
             test.GetList();
 
             test.SetUp();

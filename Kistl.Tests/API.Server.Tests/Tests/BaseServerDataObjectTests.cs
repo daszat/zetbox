@@ -139,7 +139,7 @@ namespace API.Server.Tests.Tests
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
                 TestObjClass result = new TestObjClass();
-                result.FromStream(ctx, sr);
+                result.FromStream(sr);
 
                 Assert.That(result.Type, Is.EqualTo(obj.Type));
                 Assert.That(result.ID, Is.EqualTo(obj.ID));
@@ -149,23 +149,12 @@ namespace API.Server.Tests.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void FromStream_Null_Context()
-        {
-            MemoryStream ms = new MemoryStream();
-            BinaryReader sr = new BinaryReader(ms);
-
-            TestObjClass result = new TestObjClass();
-            result.FromStream(null, sr);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
                 TestObjClass result = new TestObjClass();
-                result.FromStream(ctx, null);
+                result.FromStream(null);
             }
         }
 
@@ -184,7 +173,7 @@ namespace API.Server.Tests.Tests
             {
                 ms.Seek(0, SeekOrigin.Begin);
                 TestObjClass result = new TestObjClass();
-                result.FromStream(ctx, sr);
+                result.FromStream(sr);
             }
         }
 

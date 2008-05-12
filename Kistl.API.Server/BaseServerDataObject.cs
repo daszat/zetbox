@@ -8,19 +8,9 @@ using System.Globalization;
 
 namespace Kistl.API.Server
 {
-    /// <summary>
-    /// Basis Datenobjekt. Attached sich automatisch an den CustomActionsManager zur Verteilung der Events
-    /// </summary>
-    public abstract class BaseServerDataObject : System.Data.Objects.DataClasses.EntityObject, IDataObject, ICloneable
+    public abstract class BaseServerPersistenceObject : System.Data.Objects.DataClasses.EntityObject, IPersistenceObject
     {
-        /// <summary>
-        /// Attach to Events
-        /// </summary>
-        protected BaseServerDataObject()
-        {
-            _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
-            API.CustomActionsManagerFactory.Current.AttachEvents(this);
-        }
+        public abstract int ID { get; set; }
 
         private DataObjectState _ObjectState = DataObjectState.Unmodified;
         public DataObjectState ObjectState
@@ -48,6 +38,40 @@ namespace Kistl.API.Server
             }
         }
 
+        private IKistlContext _context;
+        public IKistlContext Context { get { return _context; } }
+        public virtual void AttachToContext(IKistlContext ctx)
+        {
+            _context = ctx;
+        }
+
+        public virtual void DetachFromContext(IKistlContext ctx)
+        {
+            _context = null;
+        }
+
+        public abstract void ToStream(System.IO.BinaryWriter sw);
+        public abstract void FromStream(System.IO.BinaryReader sr);
+
+        public abstract void NotifyPropertyChanging(string property);
+        public abstract void NotifyPropertyChanged(string property);
+    }
+
+    /// <summary>
+    /// Basis Datenobjekt. Attached sich automatisch an den CustomActionsManager zur Verteilung der Events
+    /// </summary>
+    public abstract class BaseServerDataObject : BaseServerPersistenceObject, IDataObject, ICloneable
+    {
+        /// <summary>
+        /// Attach to Events
+        /// </summary>
+        protected BaseServerDataObject()
+        {
+            _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
+            API.CustomActionsManagerFactory.Current.AttachEvents(this);
+        }
+
+
         private ObjectType _type = null;
         public ObjectType Type
         {
@@ -57,16 +81,8 @@ namespace Kistl.API.Server
             }
         }
 
-        #region IDataObject Members
-        /// <summary>
-        /// Jeder hat eine ID
-        /// </summary>
-        public abstract int ID { get; set; }
-
         public virtual void NotifyPreSave() { }
         public virtual void NotifyPostSave() { }
-
-        #endregion
 
         /// <summary>
         /// Zum Melden, dass sich das Datenobjekt geändert hat.
@@ -76,12 +92,12 @@ namespace Kistl.API.Server
             throw new NotImplementedException();
         }
 
-        public virtual void NotifyPropertyChanging(string property)
+        public override void NotifyPropertyChanging(string property)
         {
             base.ReportPropertyChanging(property);
         }
 
-        public virtual void NotifyPropertyChanged(string property)
+        public override void NotifyPropertyChanged(string property)
         {
             base.ReportPropertyChanged(property);
         }
@@ -97,7 +113,7 @@ namespace Kistl.API.Server
             return null;
         }
 
-        public virtual void ToStream(System.IO.BinaryWriter sw)
+        public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
 
@@ -106,9 +122,8 @@ namespace Kistl.API.Server
             BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 
-        public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        public override void FromStream(System.IO.BinaryReader sr)
         {
-            if (ctx == null) throw new ArgumentNullException("ctx");
             if (sr == null) throw new ArgumentNullException("sr");
 
             ObjectType t;
@@ -124,42 +139,28 @@ namespace Kistl.API.Server
 
             BinarySerializer.FromBinary(out tmp, sr);
             ObjectState = (DataObjectState)tmp;
-
-            ctx.Attach(this);
-        }
-
-        private IKistlContext _context;
-        public IKistlContext Context { get { return _context; } }
-        public virtual void AttachToContext(IKistlContext ctx)
-        {
-            _context = ctx;
-        }
-
-        public virtual void DetachFromContext(IKistlContext ctx)
-        {
-            if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
-            _context = null;
         }
     }
 
-    public abstract class BaseServerCollectionEntry : System.Data.Objects.DataClasses.EntityObject, ICollectionEntry, ICloneable
+    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry, ICloneable
     {
-        public abstract int ID { get; set; }
-
-        public virtual void ToStream(System.IO.BinaryWriter sw)
+        public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw", "No BinaryWriter specified");
             BinarySerializer.ToBinary(ID, sw);
+            BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 
-        public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        public override void FromStream(System.IO.BinaryReader sr)
         {
-            if (ctx == null) throw new ArgumentNullException("ctx");
             if (sr == null) throw new ArgumentNullException("sr");
 
-            int tmpID;
-            BinarySerializer.FromBinary(out tmpID, sr);
-            ID = tmpID;
+            int tmp;
+            BinarySerializer.FromBinary(out tmp, sr);
+            ID = tmp;
+
+            BinarySerializer.FromBinary(out tmp, sr);
+            ObjectState = (DataObjectState)tmp;
         }
 
         public object Clone()
@@ -176,12 +177,12 @@ namespace Kistl.API.Server
             NotifyPropertyChanged("ID");
         }
 
-        public virtual void NotifyPropertyChanging(string property)
+        public override void NotifyPropertyChanging(string property)
         {
             base.ReportPropertyChanging(property);
         }
 
-        public virtual void NotifyPropertyChanged(string property)
+        public override void NotifyPropertyChanged(string property)
         {
             base.ReportPropertyChanged(property);
         }

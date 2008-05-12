@@ -862,10 +862,10 @@ namespace Kistl.Server.Generators
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)"));
 
             m = CreateOverrideMethod(current.code_class, "FromStream", typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
+            //m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
 
-            m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._Value, sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)"));
 
@@ -1033,10 +1033,10 @@ namespace Kistl.Server.Generators
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)"));
 
             m = CreateOverrideMethod(current.code_class, "FromStream", typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
+            //m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
 
-            m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Value, sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)"));
 
@@ -1239,17 +1239,32 @@ namespace Kistl.Server.Generators
                 }
             }
 
+            // Create AttachToContext Method
+            m = CreateOverrideMethod(current.code_class, "AttachToContext", typeof(void));
+            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference("IKistlContext"), "ctx"));
+
+            m.Statements.Add(new CodeSnippetExpression("base.AttachToContext(ctx)"));
+
             if (current.clientServer == ClientServerEnum.Client)
             {
-                // Create AttachToContext Method
-                m = CreateOverrideMethod(current.code_class, "AttachToContext", typeof(void));
-                m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference("IKistlContext"), "ctx"));
-
-                m.Statements.Add(new CodeSnippetExpression("base.AttachToContext(ctx)"));
-
                 foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"_{0}.ForEach(i => i.AttachToContext(ctx));", p.PropertyName)));
+                    // Use ToList before using foreach - the collection could change
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"_{0}.ToList().ForEach(i => ctx.Attach(i))", p.PropertyName)));
+                }
+                foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
+                {
+                    // Use ToList before using foreach - the collection could change
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0}.ToList().ForEach(i => ctx.Attach(i))", p.PropertyName)));
+                }
+            }
+            else
+            {
+                foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
+                {
+                    // Use ToList before using foreach - the collection will change in the KistContext.Attach() Method
+                    // because EntityFramework will need a Trick to attach CollectionEntries correctly
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"{0}.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i))", p.PropertyName)));
                 }
             }
         }
@@ -1419,18 +1434,18 @@ namespace Kistl.Server.Generators
             m.Name = "FromStream";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
+            // m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
-            m.Statements.Add(new CodeSnippetExpression("base.FromStream(ctx, sr)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));// TODO: Das ist C# spezifisch
 
             foreach (BaseProperty p in current.objClass.Properties)
             {
                 if (p is Property && ((Property)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx, this, \"{0}\")", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, this, \"{0}\")", p.PropertyName)));
                     else
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr, ctx)", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
                 }
                 /* TODO: Reimplement when Interfaces for DataTypes are implemented to wrap this whole damm shit thing!
                  * else if (p is EnumerationProperty)
@@ -1449,15 +1464,15 @@ namespace Kistl.Server.Generators
                 else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, ctx, this, \"{0}\")", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, this, \"{0}\")", p.PropertyName)));
                     else
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr, ctx)", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
                 }
                 else if (p is BackReferenceProperty
                     && current.clientServer == ClientServerEnum.Client
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr, ctx)", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));
                 }
             }
         }

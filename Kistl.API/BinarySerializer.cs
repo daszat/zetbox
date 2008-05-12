@@ -44,7 +44,7 @@ namespace Kistl.API
             sw.Write(val);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Serialize a Enum
         /// </summary>
         /// <param name="val">Value to serialize,</param>
@@ -52,7 +52,7 @@ namespace Kistl.API
         public static void ToBinary(Enum val, System.IO.BinaryWriter sw)
         {
             if (val != null) { sw.Write(true); sw.Write(Convert.ToInt32(val)); } else sw.Write(false);
-        }
+        }*/
 
         /// <summary>
         /// Serialize a float
@@ -224,7 +224,7 @@ namespace Kistl.API
             val = sr.ReadInt32();
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Deserialize a Enum
         /// </summary>
         /// <param name="val">Destination Value.</param>
@@ -232,7 +232,7 @@ namespace Kistl.API
         public static void FromBinary(out Enum val, System.IO.BinaryReader sr)
         {
             val = sr.ReadBoolean() ? (Enum)(object)sr.ReadInt32() : null;
-        }
+        }*/
 
 
         /// <summary>
@@ -338,7 +338,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinary<T>(out List<T> val, System.IO.BinaryReader sr, IKistlContext ctx) where T : IDataObject
+        public static void FromBinary<T>(out List<T> val, System.IO.BinaryReader sr) where T : IDataObject
         {
             val = new List<T>();
             while (sr.ReadBoolean())
@@ -350,7 +350,7 @@ namespace Kistl.API
                 sr.BaseStream.Seek(pos, System.IO.SeekOrigin.Begin);
 
                 IDataObject obj = objType.NewDataObject();
-                obj.FromStream(ctx, sr);
+                obj.FromStream(sr);
 
                 val.Add((T)obj);
             }
@@ -361,10 +361,10 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinaryCollectionEntries<T>(out List<T> val, System.IO.BinaryReader sr, IKistlContext ctx) where T : ICollectionEntry, new()
+        public static void FromBinaryCollectionEntries<T>(out List<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
         {
             val = new List<T>();
-            FromBinaryCollectionEntries<T>(val, sr, ctx);
+            FromBinaryCollectionEntries<T>(val, sr);
         }
 
         /// <summary>
@@ -372,10 +372,10 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinaryCollectionEntries<T>(out ObservableCollection<T> val, System.IO.BinaryReader sr, IKistlContext ctx) where T : ICollectionEntry, new()
+        public static void FromBinaryCollectionEntries<T>(out ObservableCollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
         {
             val = new ObservableCollection<T>();
-            FromBinaryCollectionEntries<T>(val, sr, ctx);
+            FromBinaryCollectionEntries<T>(val, sr);
         }
 
         /// <summary>
@@ -383,10 +383,10 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinaryCollectionEntries<T>(out NotifyingObservableCollection<T> val, System.IO.BinaryReader sr, IKistlContext ctx, IDataObject parent, string propertyName) where T : ICollectionEntry, INotifyPropertyChanged, new()
+        public static void FromBinaryCollectionEntries<T>(out NotifyingObservableCollection<T> val, System.IO.BinaryReader sr, IDataObject parent, string propertyName) where T : ICollectionEntry, INotifyPropertyChanged, new()
         {
             val = new NotifyingObservableCollection<T>(parent, propertyName);
-            FromBinaryCollectionEntries<T>(val, sr, ctx);
+            FromBinaryCollectionEntries<T>(val, sr);
         }
 
         /// <summary>
@@ -394,7 +394,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinaryCollectionEntries<T>(ICollection<T> val, System.IO.BinaryReader sr, IKistlContext ctx) where T : ICollectionEntry, new()
+        public static void FromBinaryCollectionEntries<T>(ICollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
         {
             if (val == null) throw new ArgumentNullException("val");
 
@@ -402,7 +402,7 @@ namespace Kistl.API
             while (sr.ReadBoolean())
             {
                 T obj = new T();
-                obj.FromStream(ctx, sr);
+                obj.FromStream(sr);
 
                 tmpList.Add(obj);
 
@@ -417,13 +417,15 @@ namespace Kistl.API
                 }
             }
 
-            foreach (T obj in val.ToArray())
+            /* TODO: das muss wo anders passieren
+             * foreach (T obj in val.ToArray())
             {
                 if (tmpList.FirstOrDefault(i => i.ID == obj.ID) == null)
                 {
                     ctx.Delete(obj);
                 }
             }
+             * */
         }
 
         public static void FromBinary(out SerializableExpression e, System.IO.BinaryReader sr)

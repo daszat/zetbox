@@ -6,7 +6,9 @@ using System.ComponentModel;
 using Kistl.API;
 using Kistl.API.Server;
 using System.Data.Objects.DataClasses;
+using System.Xml.Serialization;
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(API.Server.Tests.TestObjClass), "B_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(API.Server.Tests.TestObjClass))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(API.Server.Tests.TestObjClass), "B_TestObjClass_TestNameCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(API.Server.Tests.TestObjClass_TestNameCollectionEntry))]
 
 namespace API.Server.Tests
@@ -20,6 +22,8 @@ namespace API.Server.Tests
         private string _StringProp;
 
         private int _TestEnumProp;
+
+        private int _fk_BaseTestObjClass = Helper.INVALIDID;
 
         public TestObjClass()
         {
@@ -74,6 +78,52 @@ namespace API.Server.Tests
             get
             {
                 EntityCollection<TestObjClass_TestNameCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<TestObjClass_TestNameCollectionEntry>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "B_TestObjClass_TestNameCollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load();
+                return c;
+            }
+        }
+
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestObjClass", "A_TestObjClass")]
+        public TestObjClass BaseTestObjClass
+        {
+            get
+            {
+                EntityReference<TestObjClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass>("Model.FK_TestObjClass_TestObjClass", "A_TestObjClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<TestObjClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass>("Model.FK_TestObjClass_TestObjClass", "A_TestObjClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
+                r.Value = value;
+            }
+        }
+
+        public int fk_BaseTestObjClass
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_BaseTestObjClass == Helper.INVALIDID && BaseTestObjClass != null)
+                {
+                    _fk_BaseTestObjClass = BaseTestObjClass.ID;
+                }
+                return _fk_BaseTestObjClass;
+            }
+            set
+            {
+                _fk_BaseTestObjClass = value;
+            }
+        }
+
+        [XmlIgnore()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestObjClass", "B_TestObjClass")]
+        public EntityCollection<TestObjClass> SubClasses
+        {
+            get
+            {
+                EntityCollection<TestObjClass> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<TestObjClass>("Model.FK_TestObjClass_TestObjClass", "B_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load();
                 return c;
             }
@@ -140,9 +190,9 @@ namespace API.Server.Tests
             BinarySerializer.ToBinary(this._TestEnumProp, sw);
         }
 
-        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        public override void FromStream(System.IO.BinaryReader sr)
         {
-            base.FromStream(ctx, sr);
+            base.FromStream(sr);
             BinarySerializer.FromBinary(out this._StringProp, sr);
             BinarySerializer.FromBinary(out this._TestEnumProp, sr);
         }

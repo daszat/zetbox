@@ -6,12 +6,14 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{26C035B1-A53D-44E0-BEED-CB97EC56B38E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CompleteTests</RootNamespace>
     <AssemblyName>CompleteTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,9 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API.Client.Tests\API.Client.Tests.csproj">
+      <Project>{382F1331-A177-4B38-A3E7-6D1B9A0F812B}</Project>
+      <Name>API.Client.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\API.Server.Tests\API.Server.Tests.csproj">
       <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666E}</Project>
       <Name>API.Server.Tests</Name>
@@ -78,9 +85,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DefaultConfig.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DefaultConfig_API.Client.Tests.xml" />
+    <Content Include="DefaultConfig_API.Server.Tests.xml" />
+    <Content Include="DefaultConfig_API.Tests.xml" />
+    <Content Include="DefaultConfig_Integration.Tests.xml" />
+    <Content Include="DefaultConfig_Kistl.Client.Tests.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

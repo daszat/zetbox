@@ -7,6 +7,10 @@
       <End Role="A_TestObjClass" EntitySet="TestObjClass" />
       <End Role="B_TestObjClass_TestNameCollectionEntry" EntitySet="TestObjClass_TestNameCollectionEntry" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestObjClass_TestObjClass" Association="Model.Store.FK_TestObjClass_TestObjClass">
+      <End Role="A_TestObjClass" EntitySet="TestObjClass" />
+      <End Role="B_TestObjClass" EntitySet="TestObjClass" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TestObjClass">
     <Key>
@@ -15,6 +19,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="TestEnumProp" Type="int" Nullable="true" />
+    <Property Name="fk_BaseTestObjClass" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="TestObjClass_TestNameCollectionEntry">
     <Key>
@@ -33,6 +38,18 @@
       </Principal>
       <Dependent Role="B_TestObjClass_TestNameCollectionEntry">
         <PropertyRef Name="fk_Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestObjClass_TestObjClass">
+    <End Role="A_TestObjClass" Type="Model.Store.TestObjClass" Multiplicity="0..1" />
+    <End Role="B_TestObjClass" Type="Model.Store.TestObjClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TestObjClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_TestObjClass">
+        <PropertyRef Name="fk_BaseTestObjClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

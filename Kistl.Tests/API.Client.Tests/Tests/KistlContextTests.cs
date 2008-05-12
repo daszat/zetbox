@@ -45,6 +45,20 @@ namespace API.Client.Tests.Tests
         }
 
         [Test]
+        public void Find_T()
+        {
+            TestObjClass obj = ctx.Find<TestObjClass>(1);
+            Assert.That(obj, Is.Not.Null);
+        }
+
+        [Test]
+        public void Find_ObjectType()
+        {
+            TestObjClass obj = (TestObjClass)ctx.Find(new ObjectType(typeof(TestObjClass)), 1);
+            Assert.That(obj, Is.Not.Null);
+        }
+
+        [Test]
         public void GetObject()
         {
             TestObjClass obj = ctx.Find<TestObjClass>(1);
@@ -128,6 +142,65 @@ namespace API.Client.Tests.Tests
         }
 
         [Test]
+        public void GetObject_GetList()
+        {
+            TestObjClass obj = ctx.Find<TestObjClass>(1);
+            Assert.That(obj, Is.Not.Null);
+            Assert.That(obj.ID, Is.EqualTo(1));
+
+            List<TestObjClass> list = ctx.GetQuery<TestObjClass>().ToList();
+            Assert.That(list, Is.Not.Null);
+            Assert.That(list.Count, Is.AtLeast(2));
+
+            TestObjClass obj_list = list.Single(o => o.ID == 1);
+            Assert.That(obj_list, Is.Not.Null);
+            Assert.That(obj_list.ID, Is.EqualTo(1));
+
+            Assert.That(object.ReferenceEquals(obj, obj_list), "obj & obj_list are different Objects");                        
+        }
+
+        [Test]
+        public void GetObject_GetListOf()
+        {
+            TestObjClass obj = ctx.Find<TestObjClass>(3);
+            Assert.That(obj, Is.Not.Null);
+            Assert.That(obj.ID, Is.EqualTo(3));
+
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "Children");
+            Assert.That(list, Is.Not.Null);
+            Assert.That(list.Count, Is.AtLeast(2));
+
+            TestObjClass obj_list = list.Single(o => o.ID == 3);
+            Assert.That(obj_list, Is.Not.Null);
+            Assert.That(obj_list.ID, Is.EqualTo(3));
+
+            Assert.That(object.ReferenceEquals(obj, obj_list), "obj & obj_list are different Objects");
+        }
+
+        [Test]
+        public void GetList_GetListOf()
+        {
+            List<TestObjClass> list = ctx.GetQuery<TestObjClass>().ToList();
+            Assert.That(list, Is.Not.Null);
+            Assert.That(list.Count, Is.AtLeast(2));
+
+            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "Children");
+            Assert.That(listOf, Is.Not.Null);
+            Assert.That(listOf.Count, Is.AtLeast(2));
+
+            TestObjClass obj_list = list.Single(o => o.ID == 3);
+            Assert.That(obj_list, Is.Not.Null);
+            Assert.That(obj_list.ID, Is.EqualTo(3));
+
+            TestObjClass obj_listOf = listOf.Single(o => o.ID == 3);
+            Assert.That(obj_listOf, Is.Not.Null);
+            Assert.That(obj_listOf.ID, Is.EqualTo(3));
+
+            Assert.That(object.ReferenceEquals(obj_list, obj_listOf), "obj_list & obj_listOf are different Objects");
+        }
+
+
+        [Test]
         public void Create_T()
         {
             TestObjClass obj = ctx.Create<TestObjClass>();
@@ -174,28 +247,44 @@ namespace API.Client.Tests.Tests
         }
 
         [Test]
-        public void Attach()
+        public void Attach_IDataObject_New()
         {
             TestObjClass obj = new TestObjClass();
+            ctx.Attach(obj);
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
+        }
+
+        [Test]
+        public void Attach_IDataObject_Twice()
+        {
+            TestObjClass obj = new TestObjClass();
+            ctx.Attach(obj);
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+
             ctx.Attach(obj);
             Assert.That(obj.Context, Is.EqualTo(ctx));
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void Attach_Twice()
+        public void Attach_IDataObject_Twice_Modified()
         {
-            TestObjClass obj = new TestObjClass();
+            TestObjClass obj = new TestObjClass() { ID = 10 };
             ctx.Attach(obj);
             Assert.That(obj.Context, Is.EqualTo(ctx));
 
+            obj.StringProp = "Test";
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
+
             ctx.Attach(obj);
             Assert.That(obj.Context, Is.EqualTo(ctx));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
+
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void Attach_Twice_But_Different()
+        public void Attach_IDataObject_Existing_Twice_But_Different()
         {
             TestObjClass obj1 = new TestObjClass() { ID = 1 };
             ctx.Attach(obj1);
@@ -207,7 +296,7 @@ namespace API.Client.Tests.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Attach_Null()
+        public void Attach_IDataObject_Null()
         {
             ctx.Attach((IDataObject)null);
         }
@@ -294,6 +383,19 @@ namespace API.Client.Tests.Tests
             TestObjClass obj = ctx.Find<TestObjClass>(1);
             obj.StringProp = "Test";
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
+
+            int result = ctx.SubmitChanges();
+            Assert.That(result, Is.EqualTo(1));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+        }
+
+        [Test]
+        public void SubmitChanges_New()
+        {
+            TestObjClass obj = ctx.Create<TestObjClass>();
+            obj.StringProp = "Test";
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
 
             int result = ctx.SubmitChanges();
             Assert.That(result, Is.EqualTo(1));

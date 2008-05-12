@@ -211,17 +211,12 @@ namespace Kistl.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                if (obj.ObjectState == DataObjectState.Deleted)
-                {
-                    KistlDataContext.Current.Delete(obj);
-                }
-                else
-                {
-                    if (obj.ObjectState != DataObjectState.New)
-                    {
-                        MarkEveryPropertyAsModified(obj as EntityObject);
-                    }
+                // Fist of all, Attach Object
+                KistlDataContext.Current.Attach(obj);
 
+                if (obj.ObjectState != DataObjectState.Deleted)
+                {
+                    MarkEveryPropertyAsModified(obj as EntityObject);
                     UpdateRelationships(obj as T);
                 }
 
@@ -281,13 +276,16 @@ namespace Kistl.Server
         private static void MarkEveryPropertyAsModified(EntityObject obj)
         {
             // TODO: Bad Hack!!
-            ObjectStateEntry stateEntry = ((KistlDataContextEntityFramework)KistlDataContext.Current).ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
-            MetadataWorkspace workspace = ((KistlDataContextEntityFramework)KistlDataContext.Current).MetadataWorkspace;
-            EntityType entityType = workspace.GetItem<EntityType>("Model." + obj.GetType().Name, DataSpace.CSpace);
-
-            foreach (EdmProperty property in entityType.Properties)
+            if (obj.EntityState.In(EntityState.Modified, EntityState.Unchanged))
             {
-                stateEntry.SetModifiedProperty(property.Name);
+                ObjectStateEntry stateEntry = ((KistlDataContextEntityFramework)KistlDataContext.Current).ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
+                MetadataWorkspace workspace = ((KistlDataContextEntityFramework)KistlDataContext.Current).MetadataWorkspace;
+                EntityType entityType = workspace.GetItem<EntityType>("Model." + obj.GetType().Name, DataSpace.CSpace);
+
+                foreach (EdmProperty property in entityType.Properties)
+                {
+                    stateEntry.SetModifiedProperty(property.Name);
+                }
             }
 
             if (obj is IDataObject)
@@ -301,7 +299,8 @@ namespace Kistl.Server
                         {
                             foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
                             {
-                                MarkEveryPropertyAsModified(ce as EntityObject);
+                                EntityObject ce_eo = (EntityObject)ce;
+                                MarkEveryPropertyAsModified(ce_eo);
                             }
                         }
                         objClass = objClass.BaseObjectClass;

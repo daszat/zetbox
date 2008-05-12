@@ -104,7 +104,7 @@
     <Compile Include="GUI\StringPresenterTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig.xml" />
+    <Content Include="DefaultConfig_Kistl.Client.Tests.xml" />
     <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>

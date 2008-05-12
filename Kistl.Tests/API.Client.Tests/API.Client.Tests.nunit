@@ -1,6 +1,6 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
-  <Config name="Debug" appbase="bin\debug" configfile="API.Client.Tests.dll.config" binpathtype="Auto">
+  <Config name="Debug" appbase="bin\debug" configfile="API.Client.Tests.exe.config" binpathtype="Auto">
     <assembly path="..\Debug\API.Client.Tests.exe" />
   </Config>
   <Config name="Release" binpathtype="Auto" />

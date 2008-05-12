@@ -10,7 +10,7 @@ namespace API.Tests
         public static void Main(string[] args)
         {
             new SetUp().Init();
-            new Tests.ExpressionTreeVisitorTests().Visit();
+            new Tests.APIInitTest().SecondInitFail();
         }
     }
 }

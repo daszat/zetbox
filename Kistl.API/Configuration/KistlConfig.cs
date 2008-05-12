@@ -45,6 +45,7 @@ namespace Kistl.API.Configuration
         /// <param name="config">Path to the Config File. May be null or empty. Then DefaultConfig.xml is loaded</param>
         internal static void Init(string file)
         {
+            if (Configuration.KistlConfig.IsInitialized) throw new InvalidOperationException("Configuration already setuped");
             if (!string.IsNullOrEmpty(file))
             {
                 _Current = FromFile(file);
@@ -93,6 +94,9 @@ namespace Kistl.API.Configuration
         {
             [XmlAttribute]
             public bool StartClient { get; set; }
+
+            [XmlAttribute]
+            public bool ThrowErrors { get; set; }
 
             [XmlElement(IsNullable = false)]
             public string DocumentStore { get; set; }

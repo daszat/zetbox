@@ -53,6 +53,11 @@ namespace Kistl.API
 
             Type type = null;
 
+            if (orderBy.NodeType != ExpressionType.Quote)
+            {
+                orderBy = Expression.Quote(orderBy);
+            }
+
             try
             {
                 type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];

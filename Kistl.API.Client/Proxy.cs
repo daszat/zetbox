@@ -12,10 +12,10 @@ namespace Kistl.API.Client
 {
     public interface IProxy : IDisposable
     {
-        IEnumerable GetList(IKistlContext ctx, ObjectType type, int maxListCount, Expression filter, Expression orderBy);
-        IEnumerable GetListOf(IKistlContext ctx, ObjectType type, int ID, string property);
-        Kistl.API.IDataObject GetObject(IKistlContext ctx, ObjectType type, int ID);
-        Kistl.API.IDataObject SetObject(IKistlContext ctx, ObjectType type, Kistl.API.IDataObject obj);
+        IEnumerable GetList(ObjectType type, int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable GetListOf(ObjectType type, int ID, string property);
+        Kistl.API.IDataObject GetObject(ObjectType type, int ID);
+        Kistl.API.IDataObject SetObject(ObjectType type, Kistl.API.IDataObject obj);
         void Generate();
         string HelloWorld(string name);
     }
@@ -126,7 +126,7 @@ namespace Kistl.API.Client
         /// </summary>
         private KistlServiceStreams.KistlServiceStreamsClient serviceStreams = new KistlServiceStreams.KistlServiceStreamsClient();
         
-        public IEnumerable GetList(IKistlContext ctx, ObjectType type, int maxListCount, Expression filter, Expression orderBy)
+        public IEnumerable GetList(ObjectType type, int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
@@ -151,7 +151,7 @@ namespace Kistl.API.Client
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
                     IDataObject obj = objType.NewDataObject();
-                    obj.FromStream(ctx, sr);
+                    obj.FromStream(sr);
 
                     result.Add((Kistl.API.IDataObject)obj);
                 }
@@ -164,7 +164,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable GetListOf(IKistlContext ctx, ObjectType type, int ID, string property)
+        public IEnumerable GetListOf(ObjectType type, int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
             {
@@ -187,7 +187,7 @@ namespace Kistl.API.Client
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
                     IDataObject obj = objType.NewDataObject();
-                    obj.FromStream(ctx, sr);
+                    obj.FromStream(sr);
 
                     result.Add((Kistl.API.IDataObject)obj);
                 }
@@ -200,7 +200,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public Kistl.API.IDataObject GetObject(IKistlContext ctx, ObjectType type, int ID)
+        public Kistl.API.IDataObject GetObject(ObjectType type, int ID)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
             {
@@ -217,7 +217,7 @@ namespace Kistl.API.Client
                 s.Seek(0, System.IO.SeekOrigin.Begin);
 
                 IDataObject obj = objType.NewDataObject();
-                obj.FromStream(ctx, sr);
+                obj.FromStream(sr);
 
                 return (Kistl.API.IDataObject)obj;
 #else
@@ -227,7 +227,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public Kistl.API.IDataObject SetObject(IKistlContext ctx, ObjectType type, Kistl.API.IDataObject obj)
+        public Kistl.API.IDataObject SetObject(ObjectType type, Kistl.API.IDataObject obj)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
             {
@@ -254,7 +254,7 @@ namespace Kistl.API.Client
                 s.Seek(0, System.IO.SeekOrigin.Begin);
 
                 obj = objType.NewDataObject();
-                obj.FromStream(ctx, sr);
+                obj.FromStream(sr);
 
                 return obj;
 

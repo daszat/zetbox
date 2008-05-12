@@ -18,7 +18,7 @@ namespace API.Tests.Tests
         public void SecondInitFail()
         {
             Kistl.API.APIInit init = new Kistl.API.APIInit();
-            init.Init();
+            init.Init(@"..\..\DefaultConfig_API.Tests.xml");
         }
     }
 }

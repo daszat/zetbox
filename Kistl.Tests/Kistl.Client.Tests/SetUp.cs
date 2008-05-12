@@ -20,7 +20,7 @@ public class SetUp
         System.Diagnostics.Trace.WriteLine("Setting up Kistl");
 
         Kistl.API.APIInit init = new Kistl.API.APIInit();
-        init.Init(@"..\..\DefaultConfig.xml");
+        init.Init(@"..\..\DefaultConfig_Kistl.Client.Tests.xml");
 
         Kistl.API.ObjectType.Init("API.Client.Tests");
 

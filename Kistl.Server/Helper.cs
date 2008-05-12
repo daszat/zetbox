@@ -26,6 +26,7 @@ namespace Kistl.Server
         public static void HandleError(Exception ex, bool throwFault)
         {
             System.Diagnostics.Trace.TraceError(ex.ToString());
+            System.Console.WriteLine(ex.ToString());
             if (throwFault)
             {
                 if (ex is ApplicationException)

@@ -7,6 +7,10 @@
       <End Role="A_TestObjClass" EntitySet="TestObjClass" />
       <End Role="B_TestObjClass_TestNameCollectionEntry" EntitySet="TestObjClass_TestNameCollectionEntry" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestObjClass_TestObjClass" Association="Model.FK_TestObjClass_TestObjClass">
+      <End Role="A_TestObjClass" EntitySet="TestObjClass" />
+      <End Role="B_TestObjClass" EntitySet="TestObjClass" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TestObjClass">
     <Key>
@@ -16,6 +20,8 @@
     <Property Name="StringProp" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="TestEnumProp" Type="Int32" Nullable="true" />
     <NavigationProperty Name="TestNames" Relationship="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" FromRole="A_TestObjClass" ToRole="B_TestObjClass_TestNameCollectionEntry" />
+    <NavigationProperty Name="BaseTestObjClass" Relationship="Model.FK_TestObjClass_TestObjClass" FromRole="B_TestObjClass" ToRole="A_TestObjClass" />
+    <NavigationProperty Name="SubClasses" Relationship="Model.FK_TestObjClass_TestObjClass" FromRole="A_TestObjClass" ToRole="B_TestObjClass" />
   </EntityType>
   <EntityType Name="TestObjClass_TestNameCollectionEntry">
     <Key>
@@ -28,5 +34,9 @@
   <Association Name="FK_TestObjClass_TestNameCollectionEntry_TestObjClass">
     <End Role="A_TestObjClass" Type="Model.TestObjClass" Multiplicity="0..1" />
     <End Role="B_TestObjClass_TestNameCollectionEntry" Type="Model.TestObjClass_TestNameCollectionEntry" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_TestObjClass_TestObjClass">
+    <End Role="A_TestObjClass" Type="Model.TestObjClass" Multiplicity="0..1" />
+    <End Role="B_TestObjClass" Type="Model.TestObjClass" Multiplicity="*" />
   </Association>
 </Schema>

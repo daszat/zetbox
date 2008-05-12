@@ -32,6 +32,11 @@ namespace Kistl.Client
             {
                 Manager.Renderer.ShowMessage(ex.ToString());
             }
+
+            if (Kistl.API.Configuration.KistlConfig.Current.Client.ThrowErrors)
+            {
+                throw ex;
+            }
         }
 
         private static Dictionary<ObjectType, Kistl.App.Base.ObjectClass> _ObjectClasses = null;

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <Address></Address>
+  <ConfigName>Client.API's Test Configuration</ConfigName>
+  <Server StartServer="false">
+  </Server>
+  <Client StartClient="false" ThrowErrors="true">
+    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
+  </Client>
+  <SourceFileLocation>
+  </SourceFileLocation>
+</KistlConfig>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1000]D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit</TopNode>
-  <SelectedNode>[0-1026]Integration.Tests.Tests</SelectedNode>
+  <SelectedNode>[0-1000]D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" Expanded="true">
       <Nodes>
-        <Node UniqueName="[0-1023]D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\bin\debug\..\Debug\Integration.Tests.dll" Expanded="true">
+        <Node UniqueName="[0-1023]D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\bin\debug\..\Debug\Integration.Tests.exe" Expanded="true">
           <Nodes>
             <Node UniqueName="[0-1024]Integration" Expanded="true">
               <Nodes>
@@ -14,24 +14,24 @@
                   <Nodes>
                     <Node UniqueName="[0-1026]Integration.Tests.Tests" Expanded="true">
                       <Nodes>
-                        <Node UniqueName="[0-1014]Integration.Tests.Tests.GeneratorTests" Expanded="true">
+                        <Node UniqueName="[0-1017]Integration.Tests.Tests.GeneratorTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1015]Integration.Tests.Tests.GeneratorTests.Generate" />
+                            <Node UniqueName="[0-1018]Integration.Tests.Tests.GeneratorTests.Generate" />
                           </Nodes>
                         </Node>
-                        <Node UniqueName="[0-1008]Integration.Tests.Tests.GetListTests" Expanded="true">
+                        <Node UniqueName="[0-1011]Integration.Tests.Tests.GetListTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1009]Integration.Tests.Tests.GetListTests.GetList" />
-                            <Node UniqueName="[0-1011]Integration.Tests.Tests.GetListTests.GetListWithOrderBy" />
-                            <Node UniqueName="[0-1013]Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" />
-                            <Node UniqueName="[0-1012]Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" />
-                            <Node UniqueName="[0-1010]Integration.Tests.Tests.GetListTests.GetListWithTop10" />
+                            <Node UniqueName="[0-1012]Integration.Tests.Tests.GetListTests.GetList" />
+                            <Node UniqueName="[0-1014]Integration.Tests.Tests.GetListTests.GetListWithOrderBy" />
+                            <Node UniqueName="[0-1016]Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" />
+                            <Node UniqueName="[0-1015]Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" />
+                            <Node UniqueName="[0-1013]Integration.Tests.Tests.GetListTests.GetListWithTop10" />
                           </Nodes>
                         </Node>
-                        <Node UniqueName="[0-1016]Integration.Tests.Tests.InheritanceTests" Expanded="true">
+                        <Node UniqueName="[0-1002]Integration.Tests.Tests.InheritanceTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1017]Integration.Tests.Tests.InheritanceTests.GetListOfInheritedObjects" />
-                            <Node UniqueName="[0-1018]Integration.Tests.Tests.InheritanceTests.UpdateInheritedObject" />
+                            <Node UniqueName="[0-1003]Integration.Tests.Tests.InheritanceTests.GetListOfInheritedObjects" />
+                            <Node UniqueName="[0-1004]Integration.Tests.Tests.InheritanceTests.UpdateInheritedObject" />
                           </Nodes>
                         </Node>
                         <Node UniqueName="[0-1019]Integration.Tests.Tests.ListPropetiesTests" Expanded="true">
@@ -41,13 +41,13 @@
                             <Node UniqueName="[0-1020]Integration.Tests.Tests.ListPropetiesTests.GetStringListPropertyContent" />
                           </Nodes>
                         </Node>
-                        <Node UniqueName="[0-1002]Integration.Tests.Tests.ObjectTests" Expanded="true">
+                        <Node UniqueName="[0-1005]Integration.Tests.Tests.ObjectTests" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1004]Integration.Tests.Tests.ObjectTests.GetListOf" />
-                            <Node UniqueName="[0-1005]Integration.Tests.Tests.ObjectTests.GetListOf_List" />
-                            <Node UniqueName="[0-1003]Integration.Tests.Tests.ObjectTests.GetObject" />
-                            <Node UniqueName="[0-1007]Integration.Tests.Tests.ObjectTests.NewObject" />
-                            <Node UniqueName="[0-1006]Integration.Tests.Tests.ObjectTests.SetObject" />
+                            <Node UniqueName="[0-1007]Integration.Tests.Tests.ObjectTests.GetListOf" />
+                            <Node UniqueName="[0-1008]Integration.Tests.Tests.ObjectTests.GetListOf_List" />
+                            <Node UniqueName="[0-1006]Integration.Tests.Tests.ObjectTests.GetObject" />
+                            <Node UniqueName="[0-1010]Integration.Tests.Tests.ObjectTests.NewObject" />
+                            <Node UniqueName="[0-1009]Integration.Tests.Tests.ObjectTests.SetObject" />
                           </Nodes>
                         </Node>
                       </Nodes>

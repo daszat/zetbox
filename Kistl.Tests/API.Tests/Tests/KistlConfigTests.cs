@@ -42,7 +42,7 @@ namespace API.Tests.Tests
         [Test]
         public void FromStream()
         {
-            using (FileStream s = File.OpenRead(@"..\..\DefaultConfig.xml"))
+            using (FileStream s = File.OpenRead(@"..\..\DefaultConfig_API.Tests.xml"))
             {
                 KistlConfig cfg = KistlConfig.FromStream(s);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
@@ -53,7 +53,7 @@ namespace API.Tests.Tests
         [Test]
         public void FromTextReader()
         {
-            using (FileStream s = File.OpenRead(@"..\..\DefaultConfig.xml"))
+            using (FileStream s = File.OpenRead(@"..\..\DefaultConfig_API.Tests.xml"))
             {
                 TextReader rd = new StreamReader(s);
                 KistlConfig cfg = KistlConfig.FromStream(rd);

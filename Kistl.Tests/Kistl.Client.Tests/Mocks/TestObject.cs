@@ -271,7 +271,7 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        public void FromStream(System.IO.BinaryReader sr)
         {
             throw new NotImplementedException();
         }

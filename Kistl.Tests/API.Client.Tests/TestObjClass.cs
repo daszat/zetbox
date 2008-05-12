@@ -174,9 +174,9 @@ namespace API.Client.Tests
             BinarySerializer.ToBinary(this._TestEnumProp, sw);
         }
 
-        public override void FromStream(Kistl.API.IKistlContext ctx, System.IO.BinaryReader sr)
+        public override void FromStream(System.IO.BinaryReader sr)
         {
-            base.FromStream(ctx, sr);
+            base.FromStream(sr);
             BinarySerializer.FromBinary(out this._StringProp, sr);
             BinarySerializer.FromBinary(out this._TestEnumProp, sr);
         }

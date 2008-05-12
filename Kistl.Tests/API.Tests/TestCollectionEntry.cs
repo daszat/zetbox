@@ -40,7 +40,7 @@ namespace API.Tests
             ((TestCollectionEntry)obj).TestName = this.TestName;
         }
 
-        public void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        public void FromStream(System.IO.BinaryReader sr)
         {
             BinarySerializer.FromBinary(out _ID, sr);
             BinarySerializer.FromBinary(out _TestName, sr);
@@ -60,6 +60,33 @@ namespace API.Tests
         public void NotifyPropertyChanging(string property)
         {
             throw new NotImplementedException();
+        }
+
+        public void AttachToContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IKistlContext Context
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void DetachFromContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataObjectState ObjectState
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

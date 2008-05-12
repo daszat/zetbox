@@ -27,5 +27,14 @@
       </EndProperty>
       <Condition ColumnName="fk_Parent" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_TestObjClass_TestObjClass" TypeName="Model.FK_TestObjClass_TestObjClass" StoreEntitySet="TestObjClass">
+      <EndProperty Name="A_TestObjClass">
+        <ScalarProperty Name="ID" ColumnName="fk_BaseTestObjClass" />
+      </EndProperty>
+      <EndProperty Name="B_TestObjClass">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_BaseTestObjClass" IsNull="false" />
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -18,7 +18,29 @@ namespace Kistl.API.Client
 
     internal class KistlContextImpl : IKistlContext, IDisposable
     {
-        private List<Kistl.API.IDataObject> _objects = new List<Kistl.API.IDataObject>();
+        private List<IPersistenceObject> _objects = new List<IPersistenceObject>();
+
+        private Type GetRootType(ObjectType t)
+        {
+            Type type = Type.GetType(t.FullNameDataObject);
+            return GetRootType(type);
+        }
+
+        private Type GetRootType(Type t)
+        {
+            while (t != null && t.BaseType != typeof(BaseClientDataObject) && t.BaseType != typeof(BaseClientCollectionEntry))
+            {
+                t = t.BaseType;
+            }
+
+            return t;
+        }
+
+        public IPersistenceObject IsObjectInContext(Type type, int ID)
+        {
+            Type rootType = GetRootType(type);
+            return _objects.SingleOrDefault(o => GetRootType(o.GetType()) == rootType && o.ID == ID);
+        }
 
         public IQueryable<IDataObject> GetQuery(ObjectType type)
         {
@@ -30,12 +52,12 @@ namespace Kistl.API.Client
             return new KistlContextQuery<T>(this, new ObjectType(typeof(T)));
         }
 
-        public List<T> GetListOf<T>(IDataObject obj, string propertyName)
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
         {
             return this.GetListOf<T>(obj.Type, obj.ID, propertyName);
         }
 
-        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName)
+        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName) where T : IDataObject
         {
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
             return ((KistlContextProvider<T>)query.Provider).GetListOf(ID, propertyName);
@@ -60,45 +82,37 @@ namespace Kistl.API.Client
             return obj;
         }
 
-        public void Attach(IDataObject obj)
+        public void Attach(IPersistenceObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            if (_objects.Contains(obj)) throw new InvalidOperationException("Object is already attached to this context");
-            _objects.Add(obj);
+
+            if (obj.ObjectState != DataObjectState.New && IsObjectInContext(obj.GetType(), obj.ID) != null && !_objects.Contains(obj))
+            {
+                throw new InvalidOperationException("Try to add same Object twice but with different references!");
+            }
+
             obj.AttachToContext(this);
+            if (!_objects.Contains(obj))
+            {
+                _objects.Add(obj);
+                obj.ObjectState = DataObjectState.Unmodified;
+            }
         }
 
-        public void Detach(IDataObject obj)
+        public void Detach(IPersistenceObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
+
             _objects.Remove(obj);
             obj.DetachFromContext(this);
         }
 
-        public void Delete(IDataObject obj)
+        public void Delete(IPersistenceObject obj)
         {
-            if (obj.Context != this) throw new ArgumentException("The Object does not belong to the current Context", "obj");
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
             obj.ObjectState = DataObjectState.Deleted;
-        }
-
-        public void Attach(ICollectionEntry e)
-        {
-            if (e == null) throw new ArgumentNullException("obj");
-            BaseClientCollectionEntry entryObj = (BaseClientCollectionEntry)e;
-            entryObj.AttachToContext(this);
-        }
-
-        public void Detach(ICollectionEntry e)
-        {
-            if (e == null) throw new ArgumentNullException("obj");
-            BaseClientCollectionEntry entryObj = (BaseClientCollectionEntry)e;
-            entryObj.DetachFromContext(this);
-        }
-
-        public void Delete(ICollectionEntry e)
-        {
-            throw new NotSupportedException();
         }
 
         public int SubmitChanges()
@@ -108,22 +122,20 @@ namespace Kistl.API.Client
 
             List<Kistl.API.IDataObject> objectsToDetach = new List<Kistl.API.IDataObject>();
             int objectsSubmittedCount = 0;
-            foreach (Kistl.API.IDataObject obj in _objects)
+            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>())
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
                     objectsSubmittedCount++;
-                    // Do not attach to context -> first Param is null
-                    // Object was deleted, even remove that Object
-                    Proxy.Current.SetObject(null, obj.Type, obj);
+                    // Object was deleted
+                    Proxy.Current.SetObject(obj.Type, obj);
                     objectsToDetach.Add(obj);
                 }
                 else if (obj.ObjectState.In(DataObjectState.Modified, DataObjectState.New))
                 {
                     objectsSubmittedCount++;
-                    // Do not attach to context -> first Param is null
                     // Object is temporary and will bie copied
-                    Kistl.API.IDataObject newobj = Proxy.Current.SetObject(null, obj.Type, obj);
+                    Kistl.API.IDataObject newobj = Proxy.Current.SetObject(obj.Type, obj);
                     newobj.CopyTo(obj);
 
                     // Set to unmodified

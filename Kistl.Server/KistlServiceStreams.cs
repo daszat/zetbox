@@ -65,7 +65,7 @@ namespace Kistl.Server
                         msg.Seek(pos, System.IO.SeekOrigin.Begin);
 
                         IDataObject obj = objType.NewDataObject();
-                        obj.FromStream(ctx, sr);
+                        obj.FromStream(sr);
 
                         // Set Operation
                         obj = ServerObjectHandlerFactory.GetServerObjectHandler(objType).SetObject(obj);

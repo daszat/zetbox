@@ -30,10 +30,7 @@ namespace Kistl.API
         Deleted,
     }
 
-    /// <summary>
-    /// DataObject Interface
-    /// </summary>
-    public interface IDataObject : INotifyPropertyChanged, ICloneable
+    public interface IPersistenceObject
     {
         /// <summary>
         /// Every Object has at least an ID
@@ -41,14 +38,47 @@ namespace Kistl.API
         int ID { get; set; }
 
         /// <summary>
-        /// Type of this Object
-        /// </summary>
-        ObjectType Type { get; }
-
-        /// <summary>
         /// State of this Object.
         /// </summary>
         DataObjectState ObjectState { get; set; }
+
+        /// <summary>
+        /// Serialize this Object to a BinaryWriter
+        /// </summary>
+        /// <param name="sw">BinaryWriter to serialize to</param>
+        void ToStream(System.IO.BinaryWriter sw);
+        /// <summary>
+        /// Deserialize this Object from a BinaryReader
+        /// </summary>
+        /// <param name="sw">BinaryReader to deserialize to.</param>
+        void FromStream(System.IO.BinaryReader sr);
+
+        /// <summary>
+        /// Fires an Event before an Property is changed.
+        /// </summary>
+        /// <param name="property">Propertyname</param>
+        void NotifyPropertyChanging(string property);
+        /// <summary>
+        /// Fires an Event after an Property is changed.
+        /// </summary>
+        /// <param name="property">Propertyname</param>
+        void NotifyPropertyChanged(string property);
+
+        IKistlContext Context { get; }
+        void AttachToContext(IKistlContext ctx);
+
+        void DetachFromContext(IKistlContext ctx);
+    }
+
+    /// <summary>
+    /// DataObject Interface
+    /// </summary>
+    public interface IDataObject : IPersistenceObject, INotifyPropertyChanged, ICloneable
+    {
+        /// <summary>
+        /// Type of this Object
+        /// </summary>
+        ObjectType Type { get; }
 
         /// <summary>
         /// Not implemented yet.
@@ -65,79 +95,23 @@ namespace Kistl.API
         void NotifyPostSave();
 
         /// <summary>
-        /// Fires an Event before an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        void NotifyPropertyChanging(string property);
-        /// <summary>
-        /// Fires an Event after an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        void NotifyPropertyChanged(string property);
-
-        /// <summary>
-        /// Serialize this Object to a BinaryWriter
-        /// </summary>
-        /// <param name="sw">BinaryWriter to serialize to</param>
-        void ToStream(System.IO.BinaryWriter sw);
-        /// <summary>
-        /// Deserialize this Object from a BinaryReader
-        /// </summary>
-        /// <param name="ctx">Context to attach this Object to.</param>
-        /// <param name="sw">BinaryReader to deserialize to.</param>
-        void FromStream(IKistlContext ctx, System.IO.BinaryReader sr);
-
-        /// <summary>
         /// Copies the current content to a other Object. Used by clone.
         /// </summary>
         /// <param name="obj">Object to copy Content to.</param>
         void CopyTo(IDataObject obj);
-
-        IKistlContext Context { get; }
-        void AttachToContext(IKistlContext ctx);
-
-        void DetachFromContext(IKistlContext ctx);
     }
 
     /// <summary>
     /// Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
-    public interface ICollectionEntry
+    public interface ICollectionEntry : IPersistenceObject
     {
-        /// <summary>
-        /// Every Object has at least an ID
-        /// </summary>
-        int ID { get; set; }
-
-        /// <summary>
-        /// Serialize this Object to a BinaryWriter
-        /// </summary>
-        /// <param name="sw">BinaryWriter to serialize to</param>
-        void ToStream(System.IO.BinaryWriter sw);
-        /// <summary>
-        /// Deserialize this Object from a BinaryReader
-        /// </summary>
-        /// <param name="ctx">Context to attach this Object to.</param>
-        /// <param name="sw">BinaryReader to deserialize to.</param>
-        void FromStream(IKistlContext ctx, System.IO.BinaryReader sr);
-
         /// <summary>
         /// Copies the current content to a other Object. Used by clone.
         /// </summary>
         /// <param name="obj">Object to copy Content to.</param>
         void CopyTo(ICollectionEntry obj);
-
-        /// <summary>
-        /// Fires an Event before an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        void NotifyPropertyChanging(string property);
-        /// <summary>
-        /// Fires an Event after an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        void NotifyPropertyChanged(string property);
     }
 
     /// <summary>

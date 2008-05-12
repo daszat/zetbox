@@ -66,13 +66,16 @@ namespace Kistl.API.Client
 
         internal List<T> GetListOf(int ID, string propertyName)
         {
-            List<T> result = Proxy.Current.GetListOf(_context, _type, ID, propertyName).OfType<T>().ToList();
-            foreach (Kistl.API.IDataObject obj in result.OfType<Kistl.API.IDataObject>())
+            List<T> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
+            List<T> result = new List<T>();
+            foreach (Kistl.API.IDataObject obj in serviceResult.OfType<Kistl.API.IDataObject>())
             {
                 CacheController<Kistl.API.IDataObject>.Current.Set(obj.Type, obj.ID,
                     (Kistl.API.IDataObject)(obj).Clone());
-                // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
-                obj.ObjectState = DataObjectState.Unmodified;
+
+                IDataObject resultObj = (IDataObject)_context.IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
+                result.Add((T)resultObj);
+                _context.Attach(resultObj);
             }
 
             return result;
@@ -117,13 +120,15 @@ namespace Kistl.API.Client
 
         private object GetListCall(Expression e)
         {
-            List<T> result = Proxy.Current.GetList(_context, _type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
-            foreach (Kistl.API.IDataObject obj in result.OfType<Kistl.API.IDataObject>())
+            List<T> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
+            List<T> result = new List<T>();
+            foreach (IDataObject obj in serviceResult.OfType<IDataObject>())
             {
-                CacheController<Kistl.API.IDataObject>.Current.Set(obj.Type, obj.ID,
-                    (Kistl.API.IDataObject)(obj).Clone());
-                // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
-                obj.ObjectState = DataObjectState.Unmodified;
+                CacheController<IDataObject>.Current.Set(obj.Type, obj.ID, (IDataObject)obj.Clone());
+
+                IDataObject resultObj = (IDataObject)_context.IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
+                result.Add((T)resultObj);
+                _context.Attach(resultObj);
             }
             return result;
         }
@@ -137,22 +142,23 @@ namespace Kistl.API.Client
         {
             if (ID == Helper.INVALIDID) return null;
 
-            T result = (T)(IDataObject)CacheController<Kistl.API.IDataObject>.Current.Get(_type, ID);
+            IDataObject result = (IDataObject)_context.IsObjectInContext(_type.GetCLRType(), ID);
+            if (result != null) return result;
+
+            result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)
             {
-                result = (T)(IDataObject)Proxy.Current.GetObject(_context, _type, ID);
+                result = Proxy.Current.GetObject(_type, ID);
                 if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
-                CacheController<Kistl.API.IDataObject>.Current.Set(_type, ID,
-                    (Kistl.API.IDataObject)(result as Kistl.API.IDataObject).Clone());
+                
+                CacheController<IDataObject>.Current.Set(_type, ID, (IDataObject)result.Clone());
             }
             else
             {
-                result = (T)(result as Kistl.API.IDataObject).Clone();
-                _context.Attach(result as Kistl.API.IDataObject);
+                result = (IDataObject)result.Clone();
             }
-            // TODO: Da hats was, wenn ich das setzen muss. Leider geht das nicht beim Attach zum Context, da der zu früh passiert
-            (result as Kistl.API.IDataObject).ObjectState = DataObjectState.Unmodified;
-            return result;
+            _context.Attach(result);
+            return (T)result;
         }
 
         private object GetObjectOrNewCall(Expression e)
@@ -163,7 +169,7 @@ namespace Kistl.API.Client
             }
             else
             {
-                return (T)(IDataObject)_context.Create(_type);
+                return (T)_context.Create(_type);
             }
         }
 
@@ -178,7 +184,7 @@ namespace Kistl.API.Client
             if (b.Left is MemberExpression)
             {
                 MemberExpression m = (MemberExpression)b.Left;
-                if (typeof(Kistl.API.IDataObject).IsAssignableFrom(m.Member.DeclaringType) && m.Member.Name == "ID")
+                if (typeof(Kistl.API.IPersistenceObject).IsAssignableFrom(m.Member.DeclaringType) && m.Member.Name == "ID")
                 {
                     ID = b.Right.GetExpressionValue<int>();
                 }

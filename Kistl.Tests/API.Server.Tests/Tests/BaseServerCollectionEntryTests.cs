@@ -69,21 +69,10 @@ namespace API.Server.Tests.Tests
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
                 TestObjClass_TestNameCollectionEntry result = new TestObjClass_TestNameCollectionEntry();
-                result.FromStream(ctx, sr);
+                result.FromStream(sr);
 
                 Assert.That(result.ID, Is.EqualTo(obj.ID));
             }
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FromStream_Null_Context()
-        {
-            MemoryStream ms = new MemoryStream();
-            BinaryReader sr = new BinaryReader(ms);
-
-            TestObjClass_TestNameCollectionEntry result = new TestObjClass_TestNameCollectionEntry();
-            result.FromStream(null, sr);
         }
 
         [Test]
@@ -93,7 +82,7 @@ namespace API.Server.Tests.Tests
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
                 TestObjClass_TestNameCollectionEntry result = new TestObjClass_TestNameCollectionEntry();
-                result.FromStream(ctx, null);
+                result.FromStream(null);
             }
         }
 

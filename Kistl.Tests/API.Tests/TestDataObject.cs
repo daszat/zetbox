@@ -56,7 +56,7 @@ namespace API.Tests
             BinarySerializer.ToBinary(BoolProperty, sw);
         }
 
-        public void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        public void FromStream(System.IO.BinaryReader sr)
         {
             BinarySerializer.FromBinary(out _Type, sr);
             BinarySerializer.FromBinary(out _ID, sr);

@@ -49,7 +49,7 @@ namespace Kistl.API.Server
 
         private Type GetRootType(Type t)
         {
-            while (t != null && t.BaseType != typeof(BaseServerDataObject))
+            while (t != null && t.BaseType != typeof(BaseServerDataObject) && t.BaseType != typeof(BaseServerCollectionEntry))
             {
                 t = t.BaseType;
             }
@@ -81,18 +81,20 @@ namespace Kistl.API.Server
 
         public IQueryable<IDataObject> GetQuery(ObjectType objType)
         {
-            Type type = Type.GetType(objType.FullNameDataObject);
-            return this.CreateQuery<IDataObject>("[" + GetEntityName(type) + "]");
+            throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
+            /*Type type = Type.GetType(objType.FullNameDataObject);
+            return this.CreateQuery<IDataObject>("[" + GetEntityName(type) + "]");*/
         }
 
-        public List<T> GetListOf<T>(IDataObject obj, string propertyName)
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
         {
             return obj.GetPropertyValue<IEnumerable>(propertyName).OfType<T>().ToList();
         }
 
-        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName)
+        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName) where T : IDataObject
         {
-            return GetListOf<T>((IDataObject)this.GetQuery(type).First(o => ((BaseServerDataObject)o).ID == ID), propertyName);
+            IDataObject obj = (IDataObject)this.GetQuery(type).First(o => ((BaseServerDataObject)o).ID == ID);
+            return GetListOf<T>(obj, propertyName);
         }
 
         public int SubmitChanges()
@@ -113,45 +115,54 @@ namespace Kistl.API.Server
             return result;
         }
 
-        public void Attach(IDataObject obj)
+        public void Attach(IPersistenceObject obj)
         {
+            // Attach/Detach then Attach item
             string entityName = GetEntityName(obj.GetType());
             if (obj.ObjectState == DataObjectState.New)
             {
+                /// http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=2232129&SiteID=1
+                /// Another way to solve your dilemma would be to go with your second approach 
+                /// where you attach the whole graph, then detach the added things, 
+                /// *set the key to null*, and then add them back.  
+                /// Technically this would work, but it's less efficient than avoiding attaching 
+                /// the things which are new in the first place.
+                EntityObject entityObj = (EntityObject)obj;
+                if (entityObj.EntityState != System.Data.EntityState.Detached)
+                {
+                    base.Detach(entityObj);
+                    entityObj.EntityKey = null;
+                }
+
                 base.AddObject(entityName, obj);
+            }
+            else if (obj.ObjectState == DataObjectState.Deleted)
+            {
+                base.DeleteObject(obj);
             }
             else
             {
                 base.AttachTo(entityName, obj);
             }
 
+            // Then call Attach on Subitems
             obj.AttachToContext(this);
         }
 
-        public void Detach(IDataObject obj)
+        public void Detach(IPersistenceObject obj)
         {
             base.Detach(obj);
             obj.DetachFromContext(this);
         }
 
-        public void Delete(IDataObject obj)
+        public void Delete(IPersistenceObject obj)
         {
             base.DeleteObject(obj);
         }
 
-        public void Attach(ICollectionEntry e)
+        public IPersistenceObject IsObjectInContext(Type type, int ID)
         {
-            throw new NotSupportedException("Attaching and Detaching an ICollectionEntry is done automatically by the Context through attaching/detaching an IDataObject");
-        }
-
-        public void Detach(ICollectionEntry e)
-        {
-            throw new NotSupportedException("Attaching and Detaching an ICollectionEntry is done automatically by the Context through attaching/detaching an IDataObject");
-        }
-
-        public void Delete(ICollectionEntry e)
-        {
-            base.DeleteObject(e);
+            throw new NotSupportedException("Context is managed by EntityFramework");
         }
 
         public Kistl.API.IDataObject Create(Type type)
@@ -177,13 +188,15 @@ namespace Kistl.API.Server
         // This could be moved to a common abstract IKistlContextBase
         public IDataObject Find(ObjectType type, int ID)
         {
-            return GetQuery(type).Single(o => o.ID == ID);
+            throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
+            // return GetQuery(type).First(o => o.ID == ID);
         }
 
         public T Find<T>(int ID)
             where T : IDataObject
         {
-            return GetQuery<T>().Single(o => o.ID == ID);
+            throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
+            // return GetQuery<T>().First(o => o.ID == ID);
         }
 
     }

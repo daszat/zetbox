@@ -8,25 +8,12 @@ using System.Reflection;
 
 namespace Kistl.API.Client
 {
-    public abstract class BaseClientDataObject : IDataObject, ICloneable, INotifyPropertyChanged
+    public abstract class BaseClientPersistenceObject : IPersistenceObject, INotifyPropertyChanged
     {
-        protected BaseClientDataObject()
-        {
-            _type = new ObjectType(this.GetType());
-            API.CustomActionsManagerFactory.Current.AttachEvents(this);
-        }
-
-        private ObjectType _type = null;
-        public ObjectType Type
-        {
-            get
-            {
-                return _type;
-            }
-        }
+        public abstract int ID { get; set; }
 
         private DataObjectState _ObjectState = DataObjectState.Unmodified;
-        public DataObjectState ObjectState 
+        public DataObjectState ObjectState
         {
             get
             {
@@ -47,7 +34,12 @@ namespace Kistl.API.Client
             set
             {
                 // Objectstate from Serializer oder Methodcall
-                _ObjectState = value;
+                if (_ObjectState != value)
+                {
+                    _ObjectState = value;
+                    if (PropertyChanged != null)
+                        PropertyChanged(this, new PropertyChangedEventArgs("ObjectState"));
+                }
             }
         }
 
@@ -64,26 +56,8 @@ namespace Kistl.API.Client
             _context = null;
         }
 
-        #region IDataObject Members
-
-        public abstract int ID { get; set; }
-
-        public virtual void NotifyPreSave() { }
-        public virtual void NotifyPostSave() { }
-
-        #endregion
-
-        public virtual void CopyTo(IDataObject obj)
-        {
-            obj.ID = this.ID;
-        }
-
-        public virtual object Clone()
-        {
-            return null;
-        }
-
-        #region NotifyPropertyChanged
+        public abstract void ToStream(System.IO.BinaryWriter sw);
+        public abstract void FromStream(System.IO.BinaryReader sr);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -116,17 +90,53 @@ namespace Kistl.API.Client
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-        #endregion
+    }
 
-        public virtual void ToStream(System.IO.BinaryWriter sw)
+    public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject, ICloneable
+    {
+        protected BaseClientDataObject()
         {
+            _type = new ObjectType(this.GetType());
+            API.CustomActionsManagerFactory.Current.AttachEvents(this);
+        }
+
+        private ObjectType _type = null;
+        public ObjectType Type
+        {
+            get
+            {
+                return _type;
+            }
+        }
+
+        public virtual void NotifyPreSave() { }
+        public virtual void NotifyPostSave() { }
+
+        public virtual void CopyTo(IDataObject obj)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            obj.ID = this.ID;
+        }
+
+        public virtual object Clone()
+        {
+            return null;
+        }
+
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            if (sw == null) throw new ArgumentNullException("sw");
+
             BinarySerializer.ToBinary(Type, sw);
             BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 
-        public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        public override void FromStream(System.IO.BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
+
+            // TODO: ObjectType zurück drängen & dann die To/FromStream Methoden zusammenfassen
             ObjectType t;
             BinarySerializer.FromBinary(out t, sr);
 
@@ -139,31 +149,30 @@ namespace Kistl.API.Client
 
             BinarySerializer.FromBinary(out tmp, sr);
             ObjectState = (DataObjectState)tmp;
-
-            if (ctx != null) ctx.Attach(this);
         }
 
     }
 
-    public abstract class BaseClientCollectionEntry : ICollectionEntry, ICloneable, INotifyPropertyChanged
+    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry, ICloneable
     {
-        public abstract int ID { get; set; }
-
-        public virtual void ToStream(System.IO.BinaryWriter sw)
+        public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
+
             BinarySerializer.ToBinary(ID, sw);
+            BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 
-        public virtual void FromStream(IKistlContext ctx, System.IO.BinaryReader sr)
+        public override void FromStream(System.IO.BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
 
-            int tmpID;
-            BinarySerializer.FromBinary(out tmpID, sr);
-            ID = tmpID;
+            int tmp;
+            BinarySerializer.FromBinary(out tmp, sr);
+            ID = tmp;
 
-            if (ctx != null) ctx.Attach(this);
+            BinarySerializer.FromBinary(out tmp, sr);
+            ObjectState = (DataObjectState)tmp;
         }
 
         public object Clone()
@@ -175,51 +184,6 @@ namespace Kistl.API.Client
         {
             obj.ID = this.ID;
         }
-
-        private IKistlContext _context;
-        public IKistlContext Context { get { return _context; } }
-        public virtual void AttachToContext(IKistlContext ctx)
-        {
-            _context = ctx;
-        }
-
-        public virtual void DetachFromContext(IKistlContext ctx)
-        {
-            if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
-            _context = null;
-        }
-
-        #region NotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Object has been changed
-        /// </summary>
-        public virtual void NotifyChange()
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
-        }
-
-        /// <summary>
-        /// Property is beeing changing
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanging(string property)
-        {
-        }
-
-        /// <summary>
-        /// Property has been changed
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-        #endregion
     }
 
 }

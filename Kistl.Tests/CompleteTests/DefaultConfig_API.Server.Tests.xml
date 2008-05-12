@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <Address></Address>
+  <ConfigName>Server.API's Test Configuration</ConfigName>
+  <Server StartServer="true">
+    <DatabaseProvider>System.Data.SqlServerCe.3.5</DatabaseProvider>
+    <ConnectionString>Data Source=.\Database1.sdf;</ConnectionString>
+    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Server\</DocumentStore>
+  </Server>
+  <Client StartClient="false" ThrowErrors="true">
+    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
+  </Client>
+  <SourceFileLocation>
+  </SourceFileLocation>
+</KistlConfig>
