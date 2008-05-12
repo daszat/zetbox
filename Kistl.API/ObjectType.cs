@@ -8,6 +8,7 @@ using System.Reflection;
 namespace Kistl.API
 {
     /// TODO: DllIndependentType ???
+    /// ODER: gleich durch Type ersetzen
     [Serializable]
     public class ObjectType
     {

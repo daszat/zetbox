@@ -30,6 +30,22 @@ namespace Integration.Tests.Tests
         }
 
         [Test]
+        public void GetObject_Twice()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var obj1 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == 2);
+                Assert.That(obj1.ID, Is.EqualTo(2));
+
+                var obj2 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == 2);
+                Assert.That(obj2.ID, Is.EqualTo(2));
+
+                Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
+            }
+        }
+
+
+        [Test]
         public void GetListOf()
         {
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())

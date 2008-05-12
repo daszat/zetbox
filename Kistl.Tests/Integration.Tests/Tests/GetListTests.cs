@@ -30,6 +30,28 @@ namespace Integration.Tests.Tests
         }
 
         [Test]
+        public void GetList_Twice()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                List<Kistl.App.Base.ObjectClass> list1 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+                Assert.That(list1, Is.Not.Null);
+                Assert.That(list1.Count, Is.AtLeast(2));
+                list1.ForEach(obj => Assert.That(obj, Is.Not.Null));
+
+                List<Kistl.App.Base.ObjectClass> list2 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+                Assert.That(list2, Is.Not.Null);
+                Assert.That(list2.Count, Is.EqualTo(list1.Count));
+                list2.ForEach(obj => Assert.That(obj, Is.Not.Null));
+
+                for (int i = 0; i < list1.Count; i++)
+                {
+                    Assert.That(object.ReferenceEquals(list1[i], list2[i]), "list1[i] & list2[i] are different Objects");
+                }
+            }
+        }
+        
+        [Test]
         public void GetObject_GetList()
         {
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())

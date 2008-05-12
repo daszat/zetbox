@@ -81,6 +81,66 @@ namespace Kistl.API.Client
             return result;
         }
 
+        /// <summary>
+        /// Performs a GetListCall
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private object GetListCall(Expression e)
+        {
+            List<T> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
+            List<T> result = new List<T>();
+            foreach (IDataObject obj in serviceResult.OfType<IDataObject>())
+            {
+                CacheController<IDataObject>.Current.Set(obj.Type, obj.ID, (IDataObject)obj.Clone());
+
+                IDataObject resultObj = (IDataObject)_context.IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
+                result.Add((T)resultObj);
+                _context.Attach(resultObj);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Performs a GetObjectCall. if ID is -1 null will be returned.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>A Object or null, if ID is -1 or an Expeption, if the Object was not found.</returns>
+        private object GetObjectCall(Expression e)
+        {
+            if (ID == Helper.INVALIDID) return null;
+
+            IDataObject result = (IDataObject)_context.IsObjectInContext(_type.GetCLRType(), ID);
+            if (result != null) return result;
+
+            result = CacheController<IDataObject>.Current.Get(_type, ID);
+            if (result == null)
+            {
+                result = Proxy.Current.GetObject(_type, ID);
+                if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
+
+                CacheController<IDataObject>.Current.Set(_type, ID, (IDataObject)result.Clone());
+            }
+            else
+            {
+                result = (IDataObject)result.Clone();
+            }
+            _context.Attach(result);
+            return (T)result;
+        }
+
+        private object GetObjectOrNewCall(Expression e)
+        {
+            if (ID != API.Helper.INVALIDID)
+            {
+                return GetObjectCall(e);
+            }
+            else
+            {
+                return (T)_context.Create(_type);
+            }
+        }
+
         #region IQueryProvider Members
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression e)
@@ -117,62 +177,6 @@ namespace Kistl.API.Client
                     throw new InvalidOperationException("Search Type could not be determinated");
             }
         }
-
-        private object GetListCall(Expression e)
-        {
-            List<T> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
-            List<T> result = new List<T>();
-            foreach (IDataObject obj in serviceResult.OfType<IDataObject>())
-            {
-                CacheController<IDataObject>.Current.Set(obj.Type, obj.ID, (IDataObject)obj.Clone());
-
-                IDataObject resultObj = (IDataObject)_context.IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
-                result.Add((T)resultObj);
-                _context.Attach(resultObj);
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// Performs a GetObjectCall. if ID is -1 null will be returned.
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns>A Object or null, if ID is -1 or an Expeption, if the Object was not found.</returns>
-        private object GetObjectCall(Expression e)
-        {
-            if (ID == Helper.INVALIDID) return null;
-
-            IDataObject result = (IDataObject)_context.IsObjectInContext(_type.GetCLRType(), ID);
-            if (result != null) return result;
-
-            result = CacheController<IDataObject>.Current.Get(_type, ID);
-            if (result == null)
-            {
-                result = Proxy.Current.GetObject(_type, ID);
-                if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
-                
-                CacheController<IDataObject>.Current.Set(_type, ID, (IDataObject)result.Clone());
-            }
-            else
-            {
-                result = (IDataObject)result.Clone();
-            }
-            _context.Attach(result);
-            return (T)result;
-        }
-
-        private object GetObjectOrNewCall(Expression e)
-        {
-            if (ID != API.Helper.INVALIDID)
-            {
-                return GetObjectCall(e);
-            }
-            else
-            {
-                return (T)_context.Create(_type);
-            }
-        }
-
         #endregion
 
         #region Visits

@@ -107,7 +107,7 @@ namespace API.Client.Tests.Tests
 
             for (int i = 0; i < list1.Count; i++)
             {
-                Assert.That(list1[i], Is.EqualTo(list2[i]));
+                Assert.That(object.ReferenceEquals(list1[i], list2[i]), "list1[i] & list2[i] are different Objects");
             }
         }
 
