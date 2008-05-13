@@ -167,11 +167,6 @@ namespace Kistl.API.Server
             base.DeleteObject(obj);
         }
 
-        public IPersistenceObject IsObjectInContext(Type type, int ID)
-        {
-            throw new NotSupportedException("Context is managed by EntityFramework");
-        }
-
         public Kistl.API.IDataObject Create(Type type)
         {
             return Create(new ObjectType(type));

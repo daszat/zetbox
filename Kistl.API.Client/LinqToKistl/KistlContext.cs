@@ -68,7 +68,7 @@ namespace Kistl.API.Client
         /// <returns>If ID is InvalidID (New Object) then null is returned.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
-        public IPersistenceObject IsObjectInContext(Type type, int ID)
+        private IPersistenceObject IsObjectInContext(Type type, int ID)
         {
             if (ID == Helper.INVALIDID) return null;
             Type rootType = GetRootType(type);

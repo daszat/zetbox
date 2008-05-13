@@ -29,16 +29,6 @@ namespace Kistl.API
         void Delete(IPersistenceObject obj);
 
         /// <summary>
-        /// Checks if the given Object is already in that Context.
-        /// </summary>
-        /// <param name="type">Type of Object</param>
-        /// <param name="ID">ID</param>
-        /// <returns>If ID is InvalidID (New Object) then null is returned.
-        /// If the Object is already in that Context, the Object Instace is returned.
-        /// If the Object is not in that Context, null is returned.</returns>
-        IPersistenceObject IsObjectInContext(Type type, int ID);
-
-        /// <summary>
         /// Returns a Query by T
         /// </summary>
         /// <typeparam name="T">Type</typeparam>

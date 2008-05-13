@@ -73,9 +73,7 @@ namespace Kistl.API.Client
                 CacheController<Kistl.API.IDataObject>.Current.Set(obj.Type, obj.ID,
                     (Kistl.API.IDataObject)(obj).Clone());
 
-                IDataObject resultObj = (IDataObject)_context.IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
-                result.Add((T)resultObj);
-                _context.Attach(resultObj);
+                result.Add((T)_context.Attach(obj));
             }
 
             return result;
@@ -94,9 +92,7 @@ namespace Kistl.API.Client
             {
                 CacheController<IDataObject>.Current.Set(obj.Type, obj.ID, (IDataObject)obj.Clone());
 
-                IDataObject resultObj = (IDataObject)_context.IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
-                result.Add((T)resultObj);
-                _context.Attach(resultObj);
+                result.Add((T)_context.Attach(obj));
             }
             return result;
         }
@@ -110,10 +106,7 @@ namespace Kistl.API.Client
         {
             if (ID == Helper.INVALIDID) return null;
 
-            IDataObject result = (IDataObject)_context.IsObjectInContext(_type.GetCLRType(), ID);
-            if (result != null) return result;
-
-            result = CacheController<IDataObject>.Current.Get(_type, ID);
+            IDataObject result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)
             {
                 result = Proxy.Current.GetObject(_type, ID);
@@ -125,8 +118,7 @@ namespace Kistl.API.Client
             {
                 result = (IDataObject)result.Clone();
             }
-            _context.Attach(result);
-            return (T)result;
+            return (T)_context.Attach(result);
         }
 
         private object GetObjectOrNewCall(Expression e)
