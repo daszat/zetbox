@@ -47,7 +47,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// Returns the Root Type of a given ObjectType.
         /// </summary>
-        /// <param name="t">ObjectType</param>
+        /// <param name="t">Type</param>
         /// <returns>Root Type of the given Type</returns>
         private Type GetRootType(Type t)
         {
@@ -193,7 +193,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// Delete an IPersistenceObject.
         /// </summary>
-        /// <param name="obj">IDataObject</param>
+        /// <param name="obj">IPersistenceObject</param>
         public void Delete(IPersistenceObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -202,7 +202,7 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
-        /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counded.
+        /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
         /// </summary>
         /// <returns>Number of affected Objects</returns>
         public int SubmitChanges()

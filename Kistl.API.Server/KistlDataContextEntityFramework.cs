@@ -11,10 +11,21 @@ using System.Collections;
 
 namespace Kistl.API.Server
 {
+    /// <summary>
+    /// Entityframework IKistlContext implementation
+    /// </summary>
     public class KistlDataContextEntityFramework : ObjectContext, IKistlContext, IDisposable
     {
+        /// <summary>
+        /// Private Connectionstring
+        /// </summary>
         private static string connectionString = "";
 
+        /// <summary>
+        /// Creates the Connectionstring.
+        /// <remarks>Format is: metadata=res://*;provider={provider};provider connection string='{Provider Connectionstring}'</remarks>
+        /// </summary>
+        /// <returns></returns>
         private static string GetConnectionString()
         {
             // Build connectionString
@@ -31,7 +42,9 @@ namespace Kistl.API.Server
             return connectionString;
         }
 
+        /// <summary>
         /// For Clean Up Session
+        /// </summary>
         void IDisposable.Dispose()
         {
             base.Dispose();
@@ -40,13 +53,24 @@ namespace Kistl.API.Server
         }
 
 
+        /// <summary>
+        /// Internal Constructor
+        /// </summary>
         internal KistlDataContextEntityFramework() :
             base(GetConnectionString(), "Entities")
         {
         }
 
+        /// <summary>
+        /// Type/Query cache
+        /// </summary>
         private Dictionary<Type, object> _table = new Dictionary<Type, object>();
 
+        /// <summary>
+        /// Returns the Root Type of a given ObjectType.
+        /// </summary>
+        /// <param name="t">Type</param>
+        /// <returns>Root Type of the given Type</returns>
         private Type GetRootType(Type t)
         {
             while (t != null && t.BaseType != typeof(BaseServerDataObject) && t.BaseType != typeof(BaseServerCollectionEntry))
@@ -57,6 +81,11 @@ namespace Kistl.API.Server
             return t;
         }
 
+        /// <summary>
+        /// Returns the EntiySet Name of the given Type.
+        /// </summary>
+        /// <param name="type">Type</param>
+        /// <returns>EntitySet Name</returns>
         private string GetEntityName(Type type)
         {
             Type rootType = GetRootType(type);
@@ -64,10 +93,10 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Return IQueryable to make it possible to use alternative LINQ Provider
+        /// Returns a Query by T
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">Type</typeparam>
+        /// <returns>IQueryable</returns>
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
             Type type = typeof(T);
@@ -79,6 +108,12 @@ namespace Kistl.API.Server
             return ((ObjectQuery<T>)_table[type]).OfType<T>();
         }
 
+        /// <summary>
+        /// Returns a Query by ObjectType.
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().</remarks>
+        /// </summary>
+        /// <param name="type">ObjectType</param>
+        /// <returns>IQueryable</returns>
         public IQueryable<IDataObject> GetQuery(ObjectType objType)
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
@@ -86,17 +121,36 @@ namespace Kistl.API.Server
             return this.CreateQuery<IDataObject>("[" + GetEntityName(type) + "]");*/
         }
 
+        /// <summary>
+        /// Returns the List of a BackReferenceProperty by the given PropertyName.
+        /// </summary>
+        /// <typeparam name="T">List Type of the BackReferenceProperty</typeparam>
+        /// <param name="obj">Object which holds the BackReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
+        /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
         {
             return obj.GetPropertyValue<IEnumerable>(propertyName).OfType<T>().ToList();
         }
 
+        /// <summary>
+        /// Returns the List of a BackReferenceProperty by the given Type, ID and PropertyName.
+        /// </summary>
+        /// <typeparam name="T">List Type of the BackReferenceProperty</typeparam>
+        /// <param name="type">Type of the Object which holds the BackReferenceProperty</param>
+        /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
+        /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName) where T : IDataObject
         {
             IDataObject obj = (IDataObject)this.GetQuery(type).First(o => ((BaseServerDataObject)o).ID == ID);
             return GetListOf<T>(obj, propertyName);
         }
 
+        /// <summary>
+        /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
+        /// </summary>
+        /// <returns>Number of affected Objects</returns>
         public int SubmitChanges()
         {
             List<IDataObject> saveList = new List<IDataObject>();
@@ -116,13 +170,13 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// The EntityFramework guarantees the all Objects are unique. No check requiered.
+        /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check requiered.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">Object to Attach</param>
+        /// <returns>Object Attached</returns>
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
-            // Attach/Detach then Attach item
+            // Fist Attach/Detach
             string entityName = GetEntityName(obj.GetType());
             if (obj.ObjectState == DataObjectState.New)
             {
@@ -150,28 +204,46 @@ namespace Kistl.API.Server
                 base.AttachTo(entityName, obj);
             }
 
-            // Then call Attach on Subitems
+            // then call Attach on Subitems
             obj.AttachToContext(this);
 
             return obj;
         }
 
+        /// <summary>
+        /// Detach an IPersistenceObject.
+        /// </summary>
+        /// <param name="obj">IDataObject</param>
         public void Detach(IPersistenceObject obj)
         {
             base.Detach(obj);
             obj.DetachFromContext(this);
         }
 
+        /// <summary>
+        /// Delete an IPersistenceObject.
+        /// </summary>
+        /// <param name="obj">IPersistenceObject</param>
         public void Delete(IPersistenceObject obj)
         {
             base.DeleteObject(obj);
         }
 
+        /// <summary>
+        /// Creates a new IDataObject by Type
+        /// </summary>
+        /// <param name="type">Type of the new IDataObject</param>
+        /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(Type type)
         {
             return Create(new ObjectType(type));
         }
 
+        /// <summary>
+        /// Creates a new IDataObject by ObjectType. Note - this Method is depricated!
+        /// </summary>
+        /// <param name="type">ObjectType of the new IDataObject</param>
+        /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(ObjectType type)
         {
             Kistl.API.IDataObject obj = type.NewDataObject();
@@ -179,6 +251,11 @@ namespace Kistl.API.Server
             return obj;
         }
 
+        /// <summary>
+        /// Creates a new IDataObject.
+        /// </summary>
+        /// <typeparam name="T">Type of the new IDataObject</typeparam>
+        /// <returns>A new IDataObject</returns>
         public T Create<T>() where T : Kistl.API.IDataObject, new()
         {
             T obj = new T();
@@ -186,14 +263,31 @@ namespace Kistl.API.Server
             return obj;
         }
 
-        // TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        // This could be moved to a common abstract IKistlContextBase
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
+        /// This could be moved to a common abstract IKistlContextBase
+        /// <remarks>Note: This Method is depricated.</remarks>
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()</remarks>
+        /// </summary>
+        /// <param name="type">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public IDataObject Find(ObjectType type, int ID)
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
             // return GetQuery(type).First(o => o.ID == ID);
         }
 
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
+        /// This could be moved to a common abstract IKistlContextBase
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()</remarks>
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public T Find<T>(int ID)
             where T : IDataObject
         {
