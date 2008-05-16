@@ -1,75 +1,160 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" total="16" failures="1" not-run="0" date="2008-05-09" time="11:39:58">
-  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1434" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests" machine-name="KISTL" user="Douglas" user-domain="KISTL" />
-  <culture-info current-culture="de-AT" current-uiculture="en-US" />
-  <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Kistl.IntegrationTests.nunit" success="False" time="32.414" asserts="0">
+<test-results name="E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" total="22" failures="6" not-run="0" date="2008-05-16" time="14:16:09">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 6.0.6000.0" platform="Win32NT" cwd="E:\Projekte\Kistl\Tests\Kistl.IntegrationTests" machine-name="KISTL" user="david" user-domain="kistl" />
+  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
+  <test-suite name="E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" success="False" time="28.330" asserts="0">
     <results>
-      <test-suite name="D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\bin\debug\..\Debug\Integration.Tests.exe" success="False" time="32.401" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\bin\Debug\Kistl.IntegrationTests.exe" success="False" time="28.323" asserts="0">
         <results>
-          <test-suite name="Integration" success="False" time="32.391" asserts="0">
+          <test-suite name="Kistl" success="False" time="28.318" asserts="0">
             <results>
-              <test-suite name="Tests" success="False" time="32.377" asserts="0">
+              <test-suite name="IntegrationTests" success="False" time="28.310" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="False" time="9.081" asserts="0">
+                  <test-suite name="GeneratorTests" success="True" time="4.707" asserts="0">
                     <results>
-                      <test-suite name="GeneratorTests" success="True" time="4.281" asserts="0">
-                        <results>
-                          <test-case name="Integration.Tests.Tests.GeneratorTests.Generate" executed="True" success="True" time="4.275" asserts="0" />
-                        </results>
-                      </test-suite>
-                      <test-suite name="GetListTests" success="True" time="1.344" asserts="0">
-                        <results>
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetList" executed="True" success="True" time="0.472" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.447" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.212" asserts="0" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.090" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.GetListTests.GetListWithTop10" executed="True" success="True" time="0.112" asserts="1" />
-                        </results>
-                      </test-suite>
-                      <test-suite name="InheritanceTests" success="True" time="1.929" asserts="0">
-                        <results>
-                          <test-case name="Integration.Tests.Tests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="0.677" asserts="3" />
-                          <test-case name="Integration.Tests.Tests.InheritanceTests.UpdateInheritedObject" executed="True" success="True" time="1.250" asserts="4" />
-                        </results>
-                      </test-suite>
-                      <test-suite name="ListPropetiesTests" success="False" time="0.460" asserts="0">
-                        <results>
-                          <test-case name="Integration.Tests.Tests.ListPropetiesTests.AddStringListPropertyContent" executed="True" success="False" time="0.299" asserts="1">
-                            <failure>
-                              <message><![CDATA[System.ServiceModel.FaultException : Store update, insert or delete statement affected unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh given ObjectStateManager entries.]]></message>
-                              <stack-trace><![CDATA[
+                      <test-case name="Kistl.IntegrationTests.GeneratorTests.Generate" executed="True" success="True" time="4.703" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="GetListTests" success="True" time="1.766" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList" executed="True" success="True" time="0.268" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList_GetObject" executed="True" success="True" time="0.256" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList_Twice" executed="True" success="True" time="0.339" asserts="124" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.256" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.280" asserts="0" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.071" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithTop10" executed="True" success="True" time="0.061" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetObject_GetList" executed="True" success="True" time="0.226" asserts="6" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="InheritanceTests" success="False" time="1.349" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="0.411" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.InheritanceTests.UpdateInheritedObject" executed="True" success="False" time="0.937" asserts="1">
+                        <failure>
+                          <message><![CDATA[System.ServiceModel.FaultException : Cannot insert the value NULL into column 'Kontoname', table 'kistl.dbo.Zeitkonten'; column does not allow nulls. UPDATE fails.
+The statement has been terminated.]]></message>
+                          <stack-trace><![CDATA[
 Server stack trace:
-at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
-at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
-at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
-at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
-at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+bei System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+bei System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+bei System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
 
 Exception rethrown at [0]:
-at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
-at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
-at Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams.SetObject(MemoryStream msg)
-at Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient.SetObject(MemoryStream msg) in D:\Programmierung\Kistl\Kistl.API.Client\Service References\KistlServiceStreams\Reference.cs:line 63
-at Kistl.API.Client.ProxyImplementation.SetObject(ObjectType type, IDataObject obj) in D:\Programmierung\Kistl\Kistl.API.Client\Proxy.cs:line 246
-at Kistl.API.Client.KistlContextImpl.SubmitChanges() in D:\Programmierung\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:line 129
-at Integration.Tests.Tests.ListPropetiesTests.AddStringListPropertyContent() in D:\Programmierung\Kistl\Kistl.Tests\Integration.Tests\Tests\ListPropetiesTests.cs:line 77
+bei System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+bei System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+bei Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams.SetObject(MemoryStream msg)
+bei Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient.SetObject(MemoryStream msg) in E:\Projekte\Kistl\Kistl.API.Client\Service References\KistlServiceStreams\Reference.cs:Zeile 63.
+bei Kistl.API.Client.ProxyImplementation.SetObject(ObjectType type, IDataObject obj) in E:\Projekte\Kistl\Kistl.API.Client\Proxy.cs:Zeile 246.
+bei Kistl.API.Client.KistlContextImpl.SubmitChanges() in E:\Projekte\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:Zeile 228.
+bei Kistl.IntegrationTests.InheritanceTests.UpdateInheritedObject() in E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Tests\InheritanceTests.cs:Zeile 65.
 ]]></stack-trace>
-                            </failure>
-                          </test-case>
-                          <test-case name="Integration.Tests.Tests.ListPropetiesTests.GetPointerListPropertyContent" executed="True" success="True" time="0.120" asserts="17" />
-                          <test-case name="Integration.Tests.Tests.ListPropetiesTests.GetStringListPropertyContent" executed="True" success="True" time="0.013" asserts="5" />
-                        </results>
-                      </test-suite>
-                      <test-suite name="ObjectTests" success="True" time="1.038" asserts="0">
-                        <results>
-                          <test-case name="Integration.Tests.Tests.ObjectTests.GetListOf" executed="True" success="True" time="0.373" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.192" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.033" asserts="1" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.NewObject" executed="True" success="True" time="0.323" asserts="4" />
-                          <test-case name="Integration.Tests.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.108" asserts="3" />
-                        </results>
-                      </test-suite>
+                        </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite name="ListPropetiesTests" success="False" time="0.330" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.AddStringListPropertyContent" executed="True" success="False" time="0.136" asserts="1">
+                        <failure>
+                          <message><![CDATA[System.ServiceModel.FaultException : Cannot insert the value NULL into column 'Kundenname', table 'kistl.dbo.Kunden'; column does not allow nulls. UPDATE fails.
+The statement has been terminated.]]></message>
+                          <stack-trace><![CDATA[
+Server stack trace:
+bei System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+bei System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+bei System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]:
+bei System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+bei System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+bei Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams.SetObject(MemoryStream msg)
+bei Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient.SetObject(MemoryStream msg) in E:\Projekte\Kistl\Kistl.API.Client\Service References\KistlServiceStreams\Reference.cs:Zeile 63.
+bei Kistl.API.Client.ProxyImplementation.SetObject(ObjectType type, IDataObject obj) in E:\Projekte\Kistl\Kistl.API.Client\Proxy.cs:Zeile 246.
+bei Kistl.API.Client.KistlContextImpl.SubmitChanges() in E:\Projekte\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:Zeile 228.
+bei Kistl.IntegrationTests.ListPropetiesTests.AddStringListPropertyContent() in E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Tests\ListPropetiesTests.cs:Zeile 77.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.DeleteStringListPropertyContent" executed="True" success="False" time="0.057" asserts="1">
+                        <failure>
+                          <message><![CDATA[System.ServiceModel.FaultException : Cannot insert the value NULL into column 'Kundenname', table 'kistl.dbo.Kunden'; column does not allow nulls. UPDATE fails.
+The statement has been terminated.]]></message>
+                          <stack-trace><![CDATA[
+Server stack trace:
+bei System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+bei System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+bei System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]:
+bei System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+bei System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+bei Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams.SetObject(MemoryStream msg)
+bei Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient.SetObject(MemoryStream msg) in E:\Projekte\Kistl\Kistl.API.Client\Service References\KistlServiceStreams\Reference.cs:Zeile 63.
+bei Kistl.API.Client.ProxyImplementation.SetObject(ObjectType type, IDataObject obj) in E:\Projekte\Kistl\Kistl.API.Client\Proxy.cs:Zeile 246.
+bei Kistl.API.Client.KistlContextImpl.SubmitChanges() in E:\Projekte\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:Zeile 228.
+bei Kistl.IntegrationTests.ListPropetiesTests.DeleteStringListPropertyContent() in E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Tests\ListPropetiesTests.cs:Zeile 155.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.GetPointerListPropertyContent" executed="True" success="True" time="0.071" asserts="17" />
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.GetStringListPropertyContent" executed="True" success="True" time="0.009" asserts="5" />
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.UpdateStringListPropertyContent" executed="True" success="False" time="0.044" asserts="2">
+                        <failure>
+                          <message><![CDATA[System.ServiceModel.FaultException : Cannot insert the value NULL into column 'Kundenname', table 'kistl.dbo.Kunden'; column does not allow nulls. UPDATE fails.
+The statement has been terminated.]]></message>
+                          <stack-trace><![CDATA[
+Server stack trace:
+bei System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+bei System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+bei System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]:
+bei System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+bei System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+bei Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams.SetObject(MemoryStream msg)
+bei Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient.SetObject(MemoryStream msg) in E:\Projekte\Kistl\Kistl.API.Client\Service References\KistlServiceStreams\Reference.cs:Zeile 63.
+bei Kistl.API.Client.ProxyImplementation.SetObject(ObjectType type, IDataObject obj) in E:\Projekte\Kistl\Kistl.API.Client\Proxy.cs:Zeile 246.
+bei Kistl.API.Client.KistlContextImpl.SubmitChanges() in E:\Projekte\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:Zeile 228.
+bei Kistl.IntegrationTests.ListPropetiesTests.UpdateStringListPropertyContent() in E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Tests\ListPropetiesTests.cs:Zeile 116.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite name="ObjectTests" success="False" time="0.604" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf" executed="True" success="True" time="0.216" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.110" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject" executed="True" success="True" time="0.020" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject_Twice" executed="True" success="True" time="0.020" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.NewObject" executed="True" success="False" time="0.166" asserts="3">
+                        <failure>
+                          <message><![CDATA[  Expected: 1.0d
+  But was:  null
+]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.ObjectTests.NewObject() in E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Tests\ObjectTests.cs:Zeile 136.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.SetObject" executed="True" success="False" time="0.063" asserts="3">
+                        <failure>
+                          <message><![CDATA[  Expected: 15.0d
+  But was:  null
+]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.ObjectTests.SetObject() in E:\Projekte\Kistl\Tests\Kistl.IntegrationTests\Tests\ObjectTests.cs:Zeile 103.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
                     </results>
                   </test-suite>
                 </results>

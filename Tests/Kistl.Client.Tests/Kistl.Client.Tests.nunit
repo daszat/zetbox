@@ -3,7 +3,7 @@
   <Config name="Debug" appbase="bin\Debug" configfile="Kistl.Client.Tests.exe.config" binpathtype="Auto">
     <assembly path="Kistl.Client.Tests.exe" />
   </Config>
-  <Config name="Release" appbase="bin\Debug" configfile="Kistl.Client.Tests.exe.config" binpathtype="Auto">
+  <Config name="Release" appbase="bin\Release" configfile="Kistl.Client.Tests.exe.config" binpathtype="Auto">
     <assembly path="Kistl.Client.Tests.exe" />
   </Config>
 </NUnitProject>
