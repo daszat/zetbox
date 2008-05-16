@@ -91,7 +91,9 @@
     <Content Include="Database1.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DefaultConfig_API.Server.Tests.xml" />
+    <None Include="DefaultConfig_API.Server.Tests.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Kistl.API.ServerTests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
