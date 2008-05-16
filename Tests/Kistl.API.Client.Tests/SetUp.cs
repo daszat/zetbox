@@ -19,7 +19,7 @@ namespace Kistl.API.Client.Tests
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             init.Init(@"..\..\DefaultConfig_API.Client.Tests.xml");
 
-            Kistl.API.ObjectType.Init("API.Client.Tests");
+            Kistl.API.ObjectType.Init("Kistl.API.Client.Tests");
 
             Kistl.API.CustomActionsManagerFactory.Init(new CustomActionsManagerAPITest());
 

@@ -37,7 +37,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Type()
         {
-            Assert.That(obj.Type.NameDataObject, Is.EqualTo("API.Client.Tests.TestObjClass"));
+            Assert.That(obj.Type.NameDataObject, Is.EqualTo("Kistl.API.Client.Tests.TestObjClass"));
         }
 
         [Test]
