@@ -127,7 +127,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Loads an Assembly for Reflection only. This MEthod does not cache the requested Assemblies.
+        /// Loads an Assembly for Reflection only. This method does not cache the requested Assemblies.
         /// </summary>
         /// <param name="name">Assemblyname, passed to a AssemblyName Consructor.</param>
         /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1</returns>
