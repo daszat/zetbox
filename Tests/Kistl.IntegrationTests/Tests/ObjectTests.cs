@@ -8,7 +8,7 @@ using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client;
 using Kistl.API.Client;
 
-namespace Integration.Tests.Tests
+namespace Kistl.IntegrationTests
 {
     [TestFixture]
     public class ObjectTests

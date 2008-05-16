@@ -6,7 +6,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace API.Client.Tests
+namespace Kistl.API.Client.Tests
 {
     [SetUpFixture]
     public class SetUp

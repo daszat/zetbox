@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Collections;
 
-namespace API.Tests
+namespace Kistl.API.Tests
 {
     [Serializable]
     public class TestQuery<T> : IOrderedQueryable<T>

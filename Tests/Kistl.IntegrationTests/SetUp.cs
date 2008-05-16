@@ -7,12 +7,12 @@ using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client;
 
-namespace Integration.Tests
+namespace Kistl.IntegrationTests
 {
     [SetUpFixture]
     public class SetUp
     {
-        private Client client;
+        private Kistl.Client.Client client;
 
         [SetUp]
         public void Init()
@@ -22,7 +22,7 @@ namespace Integration.Tests
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             init.Init(@"..\..\DefaultConfig_Integration.Tests.xml");
 
-            client = new Client();
+            client = new Kistl.Client.Client();
             client.Start();
 
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 
-namespace API.Tests
+namespace Kistl.API.Tests
 {
     public class TestCollectionEntry : ICollectionEntry
     {

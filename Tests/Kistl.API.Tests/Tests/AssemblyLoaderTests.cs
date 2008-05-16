@@ -9,7 +9,7 @@ using Kistl.API;
 using System.Reflection;
 using System.IO;
 
-namespace API.Tests.Tests
+namespace Kistl.API.Tests
 {
     [TestFixture]
     public class AssemblyLoaderTests

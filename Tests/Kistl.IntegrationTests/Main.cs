@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Integration.Tests
+namespace Kistl.IntegrationTests
 {
     public class MainProgram
     {
@@ -20,7 +20,7 @@ namespace Integration.Tests
 
         private static void ListPropetiesTests()
         {
-            Tests.ListPropetiesTests test = new Integration.Tests.Tests.ListPropetiesTests();
+            ListPropetiesTests test = new ListPropetiesTests();
 
             test.SetUp();
             test.DeleteStringListPropertyContent();
@@ -37,7 +37,7 @@ namespace Integration.Tests
 
         private static void ObjectTests()
         {
-            Tests.ObjectTests test = new Integration.Tests.Tests.ObjectTests();
+            ObjectTests test = new ObjectTests();
 
             test.SetUp();
             test.GetListOf();

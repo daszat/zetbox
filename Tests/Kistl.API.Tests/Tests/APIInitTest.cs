@@ -8,7 +8,7 @@ using NUnit.Framework.SyntaxHelpers;
 using Kistl.API;
 using System.Reflection;
 
-namespace API.Tests.Tests
+namespace Kistl.API.Tests
 {
     [TestFixture]
     public class APIInitTest

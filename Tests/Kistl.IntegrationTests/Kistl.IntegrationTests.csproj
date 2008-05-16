@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DB3D33DD-F5A0-4589-9033-D1193909EE97}</ProjectGuid>
+    <ProjectGuid>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Client</RootNamespace>
-    <AssemblyName>Kistl.Client.Tests</AssemblyName>
+    <RootNamespace>Kistl.IntegrationTests</RootNamespace>
+    <AssemblyName>Kistl.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>
@@ -35,37 +35,27 @@
   <ItemGroup>
     <Reference Include="Kistl.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.API\bin\Debug\Kistl.API.dll</HintPath>
+      <HintPath>..\..\Kistl.Client\bin\Debug\Kistl.API.dll</HintPath>
     </Reference>
     <Reference Include="Kistl.API.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.Objects.Client\bin\Debug\Kistl.API.Client.dll</HintPath>
+      <HintPath>..\..\Kistl.Client\bin\Debug\Kistl.API.Client.dll</HintPath>
     </Reference>
     <Reference Include="Kistl.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Kistl.Client\obj\Debug\Kistl.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.Client.WPF\bin\Debug\Kistl.Client.WPF.exe</HintPath>
-    </Reference>
     <Reference Include="Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Kistl.Objects.Client\bin\Debug\Kistl.Objects.Client.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.core, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
-    <Reference Include="nunit.core.extensions, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
-    <Reference Include="nunit.fixtures, Version=2.4.7.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="nunit.framework, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
-    <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="nunit.framework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -80,44 +70,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\ControlTests.cs" />
-    <Compile Include="Integration\ObjectReferenceControlIntegration.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Mocks\ControlHarness.cs" />
-    <Compile Include="Mocks\ObjectHarness.cs" />
-    <Compile Include="Mocks\PresenterHarness.cs" />
-    <Compile Include="Mocks\TestControl.cs" />
-    <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
-    <Compile Include="Mocks\TestObject.cs" />
-    <Compile Include="Objects\BasicTests.cs" />
+    <Compile Include="Tests\GeneratorTests.cs" />
+    <Compile Include="Tests\GetListTests.cs" />
+    <Compile Include="Tests\InheritanceTests.cs" />
+    <Compile Include="Tests\ListPropetiesTests.cs" />
+    <Compile Include="Tests\ObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderer.WPF\ObjectReferenceControlTests.cs" />
     <Compile Include="SetUp.cs" />
-    <Compile Include="GUI\BackReferencePresenterTests.cs" />
-    <Compile Include="GUI\BoolPresenterTests.cs" />
-    <Compile Include="GUI\DateTimePresenterTests.cs" />
-    <Compile Include="GUI\DoublePresenterTests.cs" />
-    <Compile Include="GUI\GuiDbTests.cs" />
-    <Compile Include="GUI\IntPresenterTests.cs" />
-    <Compile Include="GUI\ObjectReferencePresenterTests.cs" />
-    <Compile Include="GUI\PresenterTests.cs" />
-    <Compile Include="GUI\StringPresenterTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig_Kistl.Client.Tests.xml" />
-    <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
+    <None Include="App.config" />
+    <None Include="Kistl.IntegrationTests.nunit" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.Client.Tests.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Kistl.Client.Tests.nunit" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NMock2\NMock2.csproj">
-      <Project>{CEE959FE-C3AF-4B51-8F1A-CCB32BAA1E98}</Project>
-      <Name>NMock2</Name>
-    </ProjectReference>
+    <Content Include="DefaultConfig_Integration.Tests.xml" />
+    <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />
+    <Content Include="Kistl.IntegrationTests.VisualState.xml" />
+    <Content Include="TestResult.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

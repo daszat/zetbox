@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 using System.Collections.ObjectModel;
 
 
-namespace API.Tests.Tests
+namespace Kistl.API.Tests
 {
     [TestFixture]
     public class ObjectTypeTests

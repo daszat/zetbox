@@ -5,7 +5,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
 
-namespace API.Client.Tests
+namespace Kistl.API.Client.Tests
 {
     public class TestProxy : Kistl.API.Client.IProxy
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 
-namespace API.Server.Tests
+namespace Kistl.API.Server.Tests
 {
     public class CustomActionsManagerAPITest : Kistl.API.ICustomActionsManager
     {

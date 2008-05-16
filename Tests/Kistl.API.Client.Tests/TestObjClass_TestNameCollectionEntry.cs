@@ -6,7 +6,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using System.Xml.Serialization;
 
-namespace API.Client.Tests
+namespace Kistl.API.Client.Tests
 {
     public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry
     {

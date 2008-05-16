@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Linq.Expressions;
 using System.IO;
 
-namespace API.Tests.Tests
+namespace Kistl.API.Tests
 {
     [TestFixture]
     public class KistlConfigTests

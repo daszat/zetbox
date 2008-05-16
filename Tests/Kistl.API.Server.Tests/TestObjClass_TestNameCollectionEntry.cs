@@ -7,7 +7,7 @@ using System.Data.Objects.DataClasses;
 using Kistl.API.Server;
 using System.Xml.Serialization;
 
-namespace API.Server.Tests
+namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass_TestNameCollectionEntry")]
     public class TestObjClass_TestNameCollectionEntry : BaseServerCollectionEntry

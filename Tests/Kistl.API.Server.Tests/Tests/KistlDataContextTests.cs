@@ -9,7 +9,7 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using System.Data;
 
-namespace API.Server.Tests.Tests
+namespace Kistl.API.Server.Tests
 {
     [TestFixture]
     public class KistlDataContextTests

@@ -8,7 +8,7 @@ using Kistl.API.Client;
 using NUnit.Framework.SyntaxHelpers;
 using System.IO;
 
-namespace API.Client.Tests.Tests
+namespace Kistl.API.Client.Tests
 {
     [TestFixture]
     public class BaseClientDataObjectTests

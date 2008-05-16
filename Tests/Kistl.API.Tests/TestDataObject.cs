@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using Kistl.API;
 
-namespace API.Tests
+namespace Kistl.API.Tests
 {
     [Serializable]
     public class TestDataObject : IDataObject, ICloneable, INotifyPropertyChanged

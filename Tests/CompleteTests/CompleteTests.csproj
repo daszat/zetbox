@@ -51,25 +51,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\API.Client.Tests\API.Client.Tests.csproj">
+    <ProjectReference Include="..\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj">
       <Project>{382F1331-A177-4B38-A3E7-6D1B9A0F812B}</Project>
-      <Name>API.Client.Tests</Name>
+      <Name>Kistl.API.Client.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\API.Server.Tests\API.Server.Tests.csproj">
+    <ProjectReference Include="..\Kistl.API.Server.Tests\Kistl.API.Server.Tests.csproj">
       <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666E}</Project>
-      <Name>API.Server.Tests</Name>
+      <Name>Kistl.API.Server.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\API.Tests\API.Tests.csproj">
+    <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
-      <Name>API.Tests</Name>
+      <Name>Kistl.API.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Integration.Tests\Integration.Tests.csproj">
-      <Project>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</Project>
-      <Name>Integration.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.Client.Tests\Kistl.Client.csproj">
+    <ProjectReference Include="..\Kistl.Client.Tests\Kistl.Client.Tests.csproj">
       <Project>{DB3D33DD-F5A0-4589-9033-D1193909EE97}</Project>
-      <Name>Kistl.Client</Name>
+      <Name>Kistl.Client.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\NMock2.AcceptanceTests\NMock2.AcceptanceTests.csproj">
       <Project>{B4EED566-0F75-443F-9990-FBD7E489B9BD}</Project>

@@ -7,7 +7,7 @@ using NUnit.Framework.SyntaxHelpers;
 using Kistl.API;
 using Kistl.API.Client;
 
-namespace API.Client.Tests.Tests
+namespace Kistl.API.Client.Tests
 {
     [TestFixture]
     public class KistlContextTests
