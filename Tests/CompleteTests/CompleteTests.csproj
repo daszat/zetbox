@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CompleteTests.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CompleteTests.nunit" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultConfig_API.Client.Tests.xml" />

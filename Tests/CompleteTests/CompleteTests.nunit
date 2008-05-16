@@ -1,18 +1,20 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
   <Config name="Debug" appbase="bin\Debug" configfile="CompleteTests.exe.config" binpathtype="Auto">
-    <assembly path="API.Tests.exe" />
-    <assembly path="API.Server.Tests.exe" />
-    <assembly path="API.Client.Tests.exe" />
-    <assembly path="Integration.Tests.exe" />
+    <assembly path="Kistl.API.Client.Tests.exe" />
+    <assembly path="Kistl.API.Server.Tests.exe" />
+    <assembly path="Kistl.API.Tests.exe" />
+    <assembly path="Kistl.Client.Tests.exe" />
+    <assembly path="Kistl.IntegrationTests.exe" />
     <assembly path="NMock2.AcceptanceTests.dll" />
     <assembly path="NMock2.Test.dll" />
   </Config>
-  <Config name="Release" appbase="bin\Release" binpathtype="Auto">
-    <assembly path="API.Tests.dll" />
-    <assembly path="API.Server.Tests.dll" />
-    <assembly path="Integration.Tests.dll" />
-    <assembly path="Kistl.Client.Tests.dll" />
+  <Config name="Release" appbase="bin\Release" configfile="CompleteTests.exe.config" binpathtype="Auto">
+    <assembly path="Kistl.API.Client.Tests.exe" />
+    <assembly path="Kistl.API.Server.Tests.exe" />
+    <assembly path="Kistl.API.Tests.exe" />
+    <assembly path="Kistl.Client.Tests.exe" />
+    <assembly path="Kistl.IntegrationTests.exe" />
     <assembly path="NMock2.AcceptanceTests.dll" />
     <assembly path="NMock2.Test.dll" />
   </Config>
