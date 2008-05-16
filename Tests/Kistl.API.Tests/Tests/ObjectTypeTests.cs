@@ -25,7 +25,7 @@ namespace Kistl.API.Tests
         [TearDown]
         public void TearDown()
         {
-            ObjectType.Init("API.Tests");
+            ObjectType.Init("Kistl.API.Tests");
         }
 
         [Test]
@@ -57,42 +57,43 @@ namespace Kistl.API.Tests
             Assert.That(t.FullNameDataObject, Is.Empty);
         }
 
+        private void AssertExpectedType(ObjectType t)
+        {
+            Assert.That(t.NameDataObject, Is.EqualTo("Kistl.API.Tests.TestDataObject"));
+            Assert.That(t.FullNameDataObject, Is.EqualTo("Kistl.API.Tests.TestDataObject, Kistl.API.Tests"));
+        }
+
         [Test]
         public void Constructor_IDataObject()
         {
             ObjectType t = new ObjectType(new TestDataObject());
-            Assert.That(t.NameDataObject, Is.EqualTo("API.Tests.TestDataObject"));
-            Assert.That(t.FullNameDataObject, Is.EqualTo("API.Tests.TestDataObject, API.Tests"));
         }
 
         [Test]
         public void Constructor_Type()
         {
             ObjectType t = new ObjectType(typeof(TestDataObject));
-            Assert.That(t.NameDataObject, Is.EqualTo("API.Tests.TestDataObject"));
-            Assert.That(t.FullNameDataObject, Is.EqualTo("API.Tests.TestDataObject, API.Tests"));
+            AssertExpectedType(t);
         }
 
         [Test]
         public void Constructor_String()
         {
-            ObjectType t = new ObjectType("API.Tests.TestDataObject");
-            Assert.That(t.NameDataObject, Is.EqualTo("API.Tests.TestDataObject"));
-            Assert.That(t.FullNameDataObject, Is.EqualTo("API.Tests.TestDataObject, API.Tests"));
+            ObjectType t = new ObjectType("Kistl.API.Tests.TestDataObject");
+            AssertExpectedType(t);
         }
 
         [Test]
         public void Constructor_Namespace_Classname()
         {
-            ObjectType t = new ObjectType("API.Tests", "TestDataObject");
-            Assert.That(t.NameDataObject, Is.EqualTo("API.Tests.TestDataObject"));
-            Assert.That(t.FullNameDataObject, Is.EqualTo("API.Tests.TestDataObject, API.Tests"));
+            ObjectType t = new ObjectType("Kistl.API.Tests", "TestDataObject");
+            AssertExpectedType(t);
         }
 
         [Test]
         public void NewDataObject()
         {
-            ObjectType t = new ObjectType("API.Tests", "TestDataObject");
+            ObjectType t = new ObjectType("Kistl.API.Tests", "TestDataObject");
             IDataObject result = t.NewDataObject();
             Assert.That(result.GetType(), Is.EqualTo(typeof(TestDataObject)));
         }
@@ -117,7 +118,7 @@ namespace Kistl.API.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void NewDataObject_TypeNotIDataObject()
         {
-            ObjectType t = new ObjectType("API.Tests", "TestCollectionEntry");
+            ObjectType t = new ObjectType("Kistl.API.Tests", "TestCollectionEntry");
             IDataObject result = t.NewDataObject();
         }
 

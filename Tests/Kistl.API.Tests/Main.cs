@@ -10,7 +10,7 @@ namespace Kistl.API.Tests
         public static void Main(string[] args)
         {
             new SetUp().Init();
-            new Tests.APIInitTest().SecondInitFail();
+            new APIInitTest().SecondInitFail();
         }
     }
 }
