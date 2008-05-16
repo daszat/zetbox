@@ -1,0 +1,12 @@
+<PartCoverSettings>
+  <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
+  <TargetWorkDir>E:\Projekte\Kistl\Tests\CompleteTests</TargetWorkDir>
+  <TargetArgs>CompleteTests.nunit</TargetArgs>
+  <Rule>+[Kistl.API]*</Rule>
+  <Rule>+[Kistl.API.Client]*</Rule>
+  <Rule>+[Kistl.API.Server]*</Rule>
+  <Rule>+[Kistl.Client]*</Rule>
+  <Rule>+[Kistl.Objects.Client]*</Rule>
+  <Rule>+[Kistl.Server]*</Rule>
+  <Rule>+[Kistl.Objects.Server]*</Rule>
+</PartCoverSettings>
