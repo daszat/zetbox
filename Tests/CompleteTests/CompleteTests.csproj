@@ -51,6 +51,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DefaultConfig_API.Client.Tests.xml" />
+    <Content Include="DefaultConfig_API.Server.Tests.xml" />
+    <Content Include="DefaultConfig_API.Tests.xml" />
+    <Content Include="DefaultConfig_Integration.Tests.xml" />
+    <Content Include="DefaultConfig_Kistl.Client.Tests.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj">
       <Project>{382F1331-A177-4B38-A3E7-6D1B9A0F812B}</Project>
       <Name>Kistl.API.Client.Tests</Name>
@@ -67,6 +77,10 @@
       <Project>{DB3D33DD-F5A0-4589-9033-D1193909EE97}</Project>
       <Name>Kistl.Client.Tests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.IntegrationTests\Kistl.IntegrationTests.csproj">
+      <Project>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</Project>
+      <Name>Kistl.IntegrationTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NMock2.AcceptanceTests\NMock2.AcceptanceTests.csproj">
       <Project>{B4EED566-0F75-443F-9990-FBD7E489B9BD}</Project>
       <Name>NMock2.AcceptanceTests</Name>
@@ -75,20 +89,6 @@
       <Project>{CC6D39F7-1387-401D-9303-088D39459F36}</Project>
       <Name>NMock2.Test</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NMock2\NMock2.csproj">
-      <Project>{CEE959FE-C3AF-4B51-8F1A-CCB32BAA1E98}</Project>
-      <Name>NMock2</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DefaultConfig_API.Client.Tests.xml" />
-    <Content Include="DefaultConfig_API.Server.Tests.xml" />
-    <Content Include="DefaultConfig_API.Tests.xml" />
-    <Content Include="DefaultConfig_Integration.Tests.xml" />
-    <Content Include="DefaultConfig_Kistl.Client.Tests.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -33,26 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kistl.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.API\bin\Debug\Kistl.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Kistl.API.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.Objects.Client\bin\Debug\Kistl.API.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Kistl.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.Client\obj\Debug\Kistl.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.Client.WPF\bin\Debug\Kistl.Client.WPF.exe</HintPath>
-    </Reference>
-    <Reference Include="Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.Objects.Client\bin\Debug\Kistl.Objects.Client.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework" />
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -111,6 +91,26 @@
     <None Include="Kistl.Client.Tests.nunit" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Kistl.API.Client\Kistl.API.Client.csproj">
+      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
+      <Name>Kistl.API.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Client.WPF\Kistl.Client.WPF.csproj">
+      <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
+      <Name>Kistl.Client.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Client\Kistl.Client.csproj">
+      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
+      <Name>Kistl.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.Client\Kistl.Objects.Client.csproj">
+      <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
+      <Name>Kistl.Objects.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NMock2\NMock2.csproj">
       <Project>{CEE959FE-C3AF-4B51-8F1A-CCB32BAA1E98}</Project>
       <Name>NMock2</Name>

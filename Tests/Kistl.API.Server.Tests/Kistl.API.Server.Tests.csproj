@@ -48,14 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kistl.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.API.Server\bin\Debug\Kistl.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Kistl.API.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kistl.API.Server\bin\Debug\Kistl.API.Server.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -128,6 +120,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Kistl.API.Server\Kistl.API.Server.csproj">
+      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
+      <Name>Kistl.API.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
