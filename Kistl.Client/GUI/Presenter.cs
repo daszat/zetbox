@@ -1,14 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-using Kistl.App.Base;
 using Kistl.API;
 using Kistl.API.Client;
-using System.Collections;
+using Kistl.App.Base;
 using Kistl.GUI.DB;
-using System.ComponentModel;
 
 namespace Kistl.GUI
 {
@@ -17,19 +17,14 @@ namespace Kistl.GUI
         void InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl);
     }
 
+    /// <summary>
+    /// This abstract class implements IPresenter and IDisposable in a typs-safe, minimalist way. 
+    /// Override the various provided hooks to actually implement functionality.
+    /// </summary>
+    /// <typeparam name="CONTROL">The type of the actual control which is used for display.</typeparam>
     public abstract class Presenter<CONTROL> : IPresenter, IDisposable
         where CONTROL : IBasicControl
     {
-        /// <summary>
-        /// Implement IPresenter. Fails fast if given IBasicControl doesn't match the Presenter's expectations.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="v"></param>
-        /// <param name="ctrl"></param>
-        public void InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
-        {
-            InitializeComponent(obj, v, (CONTROL)ctrl);
-        }
 
         /// <summary>
         /// This method initializes the PropertyPresenter.
@@ -72,6 +67,18 @@ namespace Kistl.GUI
 
         public CONTROL Control { get; private set; }
 
+        #region IPresenter Members
+
+        /// <summary>
+        /// Implement IPresenter. Fails fast if given IBasicControl doesn't match the Presenter's expectations.
+        /// </summary>
+        void IPresenter.InitializeComponent(Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
+        {
+            InitializeComponent(obj, v, (CONTROL)ctrl);
+        }
+
+        #endregion
+
         #region IDisposable Members
 
         // as suggested on http://msdn.microsoft.com/en-us/system.idisposable.aspx
@@ -94,7 +101,13 @@ namespace Kistl.GUI
             }
         }
 
+        /// <summary>
+        /// Override this to be called when Managed Resources should be disposed
+        /// </summary>
         protected virtual void DisposeManagedResources() { }
+        /// <summary>
+        /// Override this to be called when Native Resources should be disposed
+        /// </summary>
         protected virtual void DisposeNativeResources() { }
 
         public void Dispose()
@@ -112,25 +125,21 @@ namespace Kistl.GUI
 
     }
 
-    public class DefaultPresenter<TYPE, PROPERTY> : DefaultPresenter<TYPE, PROPERTY, IValueControl<TYPE>>
-        where PROPERTY : Property
-    {
-    }
-
     /// <summary>
     /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
     /// Additionally basic change handling is implemented.
     /// </summary>
-    /// <typeparam name="TYPE"></typeparam>
-    /// <typeparam name="PROPERTY"></typeparam>
-    /// <typeparam name="CONTROL"></typeparam>
+    /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
+    /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
+    /// <typeparam name="CONTROL">The type of the actual control which is used for display.</typeparam>
     public class DefaultPresenter<TYPE, PROPERTY, CONTROL> : Presenter<CONTROL>
         where PROPERTY : Property
         where CONTROL : IValueControl<TYPE>
     {
-        public DefaultPresenter() { }
-
         // localize type-unsafety
+        /// <summary>
+        /// The Property this Presenter presents.
+        /// </summary>
         public PROPERTY Property { get { return (PROPERTY)Preferences.Property; } }
 
         /// <summary>
@@ -144,23 +153,29 @@ namespace Kistl.GUI
 
         #region Initialisation
 
+        /// <summary>
+        /// Setup the Control with default values from the Property. 
+        /// Install EventHandlers for UserInput and PropertyChanged.
+        /// </summary>
         protected override void InitializeComponent()
         {
-
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
 
-            _Object_PropertyChanged = new System.ComponentModel.PropertyChangedEventHandler(Object_PropertyChanged);
-            Object.PropertyChanged += _Object_PropertyChanged;
+            // To prevent resource leaks, all event handlers have to be removed
+            // See DisposeManagedResources()
+            {
+                _Object_PropertyChanged = new System.ComponentModel.PropertyChangedEventHandler(Object_PropertyChanged);
+                Object.PropertyChanged += _Object_PropertyChanged;
 
-            _Control_UserInput = new EventHandler(Control_UserInput);
-            Control.UserInput += _Control_UserInput;
+                _Control_UserInput = new EventHandler(Control_UserInput);
+                Control.UserInput += _Control_UserInput;
+            }
 
             Control.Value = GetPropertyValue();
 
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
-
         }
 
         #endregion
@@ -216,6 +231,8 @@ namespace Kistl.GUI
         protected override void DisposeManagedResources()
         {
             base.DisposeManagedResources();
+
+            // To prevent resource leaks, all event handlers have to be removed
             if (Object != null)
                 Object.PropertyChanged -= _Object_PropertyChanged;
 
@@ -226,14 +243,31 @@ namespace Kistl.GUI
         #endregion
     }
 
-    public class BoolPresenter : DefaultPresenter<bool?, BoolProperty> { }
-    public class DateTimePresenter : DefaultPresenter<DateTime?, DateTimeProperty> { }
-    public class DoublePresenter : DefaultPresenter<double?, DoubleProperty> { }
-    public class IntPresenter : DefaultPresenter<int?, IntProperty> { }
-    public class StringPresenter : DefaultPresenter<string, StringProperty> { }
+    #region Default Value Presenters
 
     /// <summary>
-    /// Handles a widget for a group of property
+    /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
+    /// Additionally basic change handling is implemented.
+    /// 
+    /// This derivation is only a shortcut to always specifying IValueControl&lt;TYPE&gt; as CONTROL.
+    /// </summary>
+    /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
+    /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
+    public class DefaultValuePresenter<TYPE, PROPERTY> : DefaultPresenter<TYPE, PROPERTY, IValueControl<TYPE>>
+        where PROPERTY : Property
+    {
+    }
+
+    public class BoolPresenter : DefaultValuePresenter<bool?, BoolProperty> { }
+    public class DateTimePresenter : DefaultValuePresenter<DateTime?, DateTimeProperty> { }
+    public class DoublePresenter : DefaultValuePresenter<double?, DoubleProperty> { }
+    public class IntPresenter : DefaultValuePresenter<int?, IntProperty> { }
+    public class StringPresenter : DefaultValuePresenter<string, StringProperty> { }
+
+    #endregion
+
+    /// <summary>
+    /// Handles a widget for a group of properties
     /// </summary>
     public class GroupPresenter : Presenter<IBasicControl>
     {
@@ -242,6 +276,8 @@ namespace Kistl.GUI
         protected override void InitializeComponent()
         {
             Control.ShortLabel = String.Format("{0} {1}", Object.Type.Classname, Object.ID);
+
+            //TODO: Set Control.Size
         }
     }
 
@@ -263,7 +299,13 @@ namespace Kistl.GUI
 
     }
 
-    public class ObjectReferencePresenter : DefaultPresenter<IDataObject, ObjectReferenceProperty, IObjectReferenceControl>
+    /// <summary>
+    /// Presents a reference to another IDataObject of a given Type.
+    /// The list of selectable Items is set from the list of available objects.
+    /// Different controls may implement the selection differently: Comboboxes, Lists, etc.
+    /// </summary>
+    public class ObjectReferencePresenter 
+        : DefaultPresenter<IDataObject, ObjectReferenceProperty, IObjectReferenceControl>
     {
         public ObjectReferencePresenter() { }
 
@@ -274,12 +316,16 @@ namespace Kistl.GUI
             Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceObjectClass.Module.Namespace, Property.ReferenceObjectClass.ClassName);
 
             // remember the objects that are sent to the object
-            // to facilitate the lookup by index afterwards
+            // to facilitate validity checking
             Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
 
             base.InitializeComponent();
         }
 
+        /// <summary>
+        /// Checks whether the returned value matches the Properties nullability 
+        /// criteria and is one of the originally selectable items.
+        /// </summary>
         protected override void OnUserInput()
         {
             if (Control.Value == null)
@@ -299,7 +345,8 @@ namespace Kistl.GUI
         }
     }
 
-    public class ObjectListPresenter : Presenter<IObjectListControl>
+    public class ObjectListPresenter 
+        : Presenter<IObjectListControl>
     {
         public ObjectListPresenter() { }
 
@@ -329,7 +376,8 @@ namespace Kistl.GUI
         public ObjectReferenceProperty Property { get { return (ObjectReferenceProperty)Preferences.Property; } }
     }
 
-    public class BackReferencePresenter : Presenter<IObjectListControl>
+    public class BackReferencePresenter 
+        : Presenter<IObjectListControl>
     {
         public BackReferencePresenter() { }
 
@@ -346,6 +394,11 @@ namespace Kistl.GUI
         public BackReferenceProperty Property { get { return (BackReferenceProperty)Preferences.Property; } }
     }
 
+    /// <summary>
+    /// Possible sizes for controls. These are measured realtively 
+    /// to total horizontal space up to a useful (renderer-, medium- 
+    /// and user-dependant maximum)
+    /// </summary>
     public enum FieldSize
     {
         OneThird,
@@ -355,11 +408,31 @@ namespace Kistl.GUI
         FitContent
     }
 
+    /// <summary>
+    /// This interfaces contains properties that each Control has to provide.
+    /// </summary>
     public interface IBasicControl
     {
+        /// <summary>
+        /// A short label describing the contents of this control.
+        /// </summary>
         string ShortLabel { get; set; }
+        /// <summary>
+        /// A longer description of the contents of this control. 
+        /// This is a suitable text for tooltips.
+        /// </summary>
         string Description { get; set; }
+
+        /// <summary>
+        /// The preferred display size of this control.
+        /// </summary>
         FieldSize Size { get; set; }
+    }
+
+    public interface IObjectControl : IBasicControl
+    {
+        Kistl.API.IDataObject Value { get; set; }
+        event /*UserInput<Kistl.API.IDataObject>*/EventHandler UserInput;
     }
 
     public interface IValueControl<TYPE> : IBasicControl
@@ -382,33 +455,13 @@ namespace Kistl.GUI
         event /*UserInput<TYPE>*/EventHandler UserInput;
     }
 
-    /// <summary>
-    /// This control displays a List of Values and allows the user to select zero, one or more Items of type TYPE.
-    /// </summary>
-    /// <typeparam name="TYPE">The type of the selectable items</typeparam>
-    public interface ISelectControl<TYPE> : IValueControl<IList<TYPE>>
-    {
-        ICollection<TYPE> ItemsSource { get; set; }
-    }
-
-    public interface ISelectControl : IBasicControl
-    {
-        IEnumerable ItemsSource { get; set; }
-    }
-
     public interface IObjectReferenceControl : IValueControl<IDataObject>
     {
         /// <summary>
-        /// The ObjectType of the listed Objects
+        /// The ObjectType of the listed objects
         /// </summary>
         ObjectType ObjectType { get; set; }
         IList<IDataObject> ItemsSource { get; set; }
-    }
-
-    public interface IObjectControl : IBasicControl
-    {
-        Kistl.API.IDataObject Value { get; set; }
-        event /*UserInput<Kistl.API.IDataObject>*/EventHandler UserInput;
     }
 
     public interface IObjectListControl : IBasicControl
