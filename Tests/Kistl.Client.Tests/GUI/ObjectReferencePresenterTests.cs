@@ -15,9 +15,21 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
+    public sealed class IDataObjectValues : IValues<IDataObject>
+    {
+        public IDataObject[] Valids { get { return (IDataObject[])_Items.Clone(); } }
+        public IDataObject[] Invalids { get { return new IDataObject[] { }; } }
+
+        private IDataObject[] _Items = new[] {
+            new TestObject() { ID = 2 },
+            new TestObject() { ID = 3 },
+            new TestObject() { ID = 4 },
+        };
+    }
 
     [TestFixture]
-    public class ObjectReferencePresenterTests : ObjectReferencePresenterInfrastructure<TestObjectReferenceControl>
+    public class ObjectReferencePresenterTests
+        : ObjectReferencePresenterInfrastructure<TestObjectReferenceControl>
     {
         public ObjectReferencePresenterTests()
             : base(Toolkit.TEST)
@@ -27,24 +39,20 @@ namespace Kistl.GUI.Tests
         protected override void UserInput(IDataObject v) { Widget.SimulateUserInput(v); }
     }
 
-    public abstract class ObjectReferencePresenterInfrastructure<CONTROL> : ReferencePresenterTests<TestObject, IDataObject, CONTROL, ObjectReferencePresenter>
+    public abstract class ObjectReferencePresenterInfrastructure<CONTROL>
+        : ReferencePresenterTests<TestObject, IDataObject, CONTROL, ObjectReferencePresenter>
         where CONTROL : IObjectReferenceControl
     {
         public ObjectReferencePresenterInfrastructure(Toolkit toolkit)
             : base(
                 new PresenterHarness<TestObject, CONTROL, ObjectReferencePresenter>(
                     new TestObjectHarness(),
-                    new ControlHarness<CONTROL>(TestObject.TestObjectReferenceVisual, toolkit)))
+                    new ControlHarness<CONTROL>(TestObject.TestObjectReferenceVisual, toolkit)),
+                new IDataObjectValues())
         {
             Toolkit = toolkit;
         }
 
-
-        private List<IDataObject> Items = new List<IDataObject>(new[] {
-                    new TestObject() { ID = 2 },
-                    new TestObject() { ID = 3 },
-                    new TestObject() { ID = 4 },
-                });
 
         protected Toolkit Toolkit { get; private set; }
 
@@ -52,8 +60,6 @@ namespace Kistl.GUI.Tests
         protected override IDataObject GetWidgetValue() { return Widget.Value; }
         protected override void SetObjectValue(IDataObject v) { Object.TestObjectReference = v; }
         protected override IDataObject DefaultValue() { return null; }
-        protected override IEnumerable<IDataObject> SomeValues() { return Items; }
-
 
         [SetUp]
         public new void SetUp()
@@ -68,7 +74,7 @@ namespace Kistl.GUI.Tests
 
             Expect.Once.On(idoq).
                 Method("GetEnumerator").
-                Will(Return.Value(Items.GetEnumerator()));
+                Will(Return.Value(new List<IDataObject>(Values.Valids).GetEnumerator()));
 
             ControlHarness.SetUp();
             PresenterHarness.SetUp();
@@ -77,9 +83,9 @@ namespace Kistl.GUI.Tests
         protected override void AssertWidgetHasValidValue()
         {
             Assert.IsTrue(Widget.IsValidValue, "the widget should be in a valid state after this operation");
-            Assert.AreEqual(Items.Count, Widget.ItemsSource.Count, "the widget's ItemSource should contain exactly one entry for each item");
+            Assert.AreEqual(Values.Valids.Length, Widget.ItemsSource.Count, "the widget's ItemSource should contain exactly one entry for each item");
 
-            foreach (IDataObject ido in Items)
+            foreach (IDataObject ido in Values.Valids)
             {
                 Assert.That(Widget.ItemsSource.Contains(ido), string.Format("cannot find entry '{0}' in ItemsSource", ido));
             }

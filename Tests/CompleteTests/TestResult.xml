@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="E:\Projekte\Kistl\Tests\CompleteTests\CompleteTests.nunit" total="511" failures="221" not-run="0" date="2008-05-16" time="15:00:01">
+<test-results name="E:\Projekte\Kistl\Tests\CompleteTests\CompleteTests.nunit" total="531" failures="241" not-run="0" date="2008-05-25" time="14:33:16">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 6.0.6000.0" platform="Win32NT" cwd="E:\Projekte\Kistl\Tests\CompleteTests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\CompleteTests.nunit" success="False" time="1.467" asserts="0">
+  <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\CompleteTests.nunit" success="False" time="1.466" asserts="0">
     <results>
-      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.API.Client.Tests.exe" success="True" time="0.799" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.API.Client.Tests.exe" success="True" time="0.780" asserts="0">
         <results>
-          <test-suite name="Kistl" success="True" time="0.792" asserts="0">
+          <test-suite name="Kistl" success="True" time="0.780" asserts="0">
             <results>
-              <test-suite name="API" success="True" time="0.778" asserts="0">
+              <test-suite name="API" success="True" time="0.780" asserts="0">
                 <results>
-                  <test-suite name="Client" success="True" time="0.772" asserts="0">
+                  <test-suite name="Client" success="True" time="0.764" asserts="0">
                     <results>
-                      <test-suite name="Tests" success="True" time="0.761" asserts="0">
+                      <test-suite name="Tests" success="True" time="0.749" asserts="0">
                         <results>
-                          <test-suite name="BaseClientDataObjectTests" success="True" time="0.060" asserts="0">
+                          <test-suite name="BaseClientDataObjectTests" success="True" time="0.062" asserts="0">
                             <results>
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext" executed="True" success="True" time="0.023" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_New" executed="True" success="True" time="0.001" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext" executed="True" success="True" time="0.031" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_New" executed="True" success="True" time="0.000" asserts="4" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_Twice" executed="True" success="True" time="0.000" asserts="4" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.Clone" executed="True" success="True" time="0.000" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.CopyTo" executed="True" success="True" time="0.001" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.CopyTo_Null" executed="True" success="True" time="0.002" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.DetachFromContext" executed="True" success="True" time="0.004" asserts="5" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.CopyTo" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.CopyTo_Null" executed="True" success="True" time="0.016" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.DetachFromContext" executed="True" success="True" time="0.000" asserts="5" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.DetachFromContext_NotAttached" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.EventAttached" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.003" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_WrongType" executed="True" success="True" time="0.003" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.NotifyChange" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_WrongType" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.NotifyChange" executed="True" success="True" time="0.016" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_New_then_UnModified" executed="True" success="True" time="0.000" asserts="2" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.Stream" executed="True" success="True" time="0.002" asserts="5" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.Stream" executed="True" success="True" time="0.000" asserts="5" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ToStream_Null" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.Type" executed="True" success="True" time="0.000" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite name="KistlContextTests" success="True" time="0.133" asserts="0">
+                          <test-suite name="KistlContextTests" success="True" time="0.140" asserts="0">
                             <results>
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.010" asserts="3" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.001" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Null" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice" executed="True" success="True" time="0.001" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice_Modified" executed="True" success="True" time="0.001" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_ObjectType" executed="True" success="True" time="0.003" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_T" executed="True" success="True" time="0.001" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_T_Twice" executed="True" success="True" time="0.001" asserts="7" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_Type" executed="True" success="True" time="0.001" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete" executed="True" success="True" time="0.057" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Not_Attached" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Null" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Wrong_Context" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach" executed="True" success="True" time="0.001" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.016" asserts="3" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Null" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice" executed="True" success="True" time="0.000" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice_Modified" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_ObjectType" executed="True" success="True" time="0.016" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_T" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_T_Twice" executed="True" success="True" time="0.000" asserts="7" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_Type" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete" executed="True" success="True" time="0.047" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Not_Attached" executed="True" success="True" time="0.016" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Null" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Wrong_Context" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach" executed="True" success="True" time="0.000" asserts="2" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_NotAttached" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_Null" executed="True" success="True" time="0.000" asserts="0" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_Twice" executed="True" success="True" time="0.000" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_ObjectType" executed="True" success="True" time="0.002" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_T" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList" executed="True" success="True" time="0.013" asserts="17" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_GetListOf" executed="True" success="True" time="0.008" asserts="9" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_Twice" executed="True" success="True" time="0.003" asserts="19" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf" executed="True" success="True" time="0.001" asserts="8" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf_Twice" executed="True" success="True" time="0.002" asserts="10" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject" executed="True" success="True" time="0.001" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetList" executed="True" success="True" time="0.001" asserts="7" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetListOf" executed="True" success="True" time="0.001" asserts="7" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_ObjectType" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_T" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList" executed="True" success="True" time="0.016" asserts="17" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_GetListOf" executed="True" success="True" time="0.016" asserts="9" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_Twice" executed="True" success="True" time="0.000" asserts="19" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf" executed="True" success="True" time="0.000" asserts="8" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf_Twice" executed="True" success="True" time="0.000" asserts="10" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetList" executed="True" success="True" time="0.000" asserts="7" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetListOf" executed="True" success="True" time="0.000" asserts="7" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_Twice" executed="True" success="True" time="0.000" asserts="5" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetQuery_ObjectType" executed="True" success="True" time="0.001" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetQuery_ObjectType" executed="True" success="True" time="0.000" asserts="2" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetQuery_T" executed="True" success="True" time="0.000" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges" executed="True" success="True" time="0.003" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Delete" executed="True" success="True" time="0.001" asserts="5" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_New" executed="True" success="True" time="0.001" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Nothing" executed="True" success="True" time="0.001" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Delete" executed="True" success="True" time="0.000" asserts="5" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_New" executed="True" success="True" time="0.000" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Nothing" executed="True" success="True" time="0.000" asserts="4" />
                             </results>
                           </test-suite>
                         </results>
@@ -88,15 +88,15 @@
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.API.Server.Tests.exe" success="False" time="0.060" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.API.Server.Tests.exe" success="False" time="0.047" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="0.052" asserts="0">
+          <test-suite name="Kistl" success="False" time="0.047" asserts="0">
             <results>
-              <test-suite name="API" success="False" time="0.044" asserts="0">
+              <test-suite name="API" success="False" time="0.031" asserts="0">
                 <results>
-                  <test-suite name="Server" success="False" time="0.038" asserts="0">
+                  <test-suite name="Server" success="False" time="0.031" asserts="0">
                     <results>
-                      <test-suite name="Tests" success="False" time="0.036" asserts="0">
+                      <test-suite name="Tests" success="False" time="0.031" asserts="0">
                         <failure>
                           <message><![CDATA[System.InvalidOperationException : Configuration already setuped]]></message>
                           <stack-trace><![CDATA[bei Kistl.API.Configuration.KistlConfig.Init(String file) in E:\Projekte\Kistl\Kistl.API\Configuration\KistlConfig.cs:Zeile 58.
@@ -478,13 +478,13 @@ bei Kistl.API.Server.Tests.SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.API.Ser
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.API.Tests.exe" success="False" time="0.070" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.API.Tests.exe" success="False" time="0.078" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="0.061" asserts="0">
+          <test-suite name="Kistl" success="False" time="0.062" asserts="0">
             <results>
-              <test-suite name="API" success="False" time="0.052" asserts="0">
+              <test-suite name="API" success="False" time="0.047" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="False" time="0.050" asserts="0">
+                  <test-suite name="Tests" success="False" time="0.047" asserts="0">
                     <failure>
                       <message><![CDATA[System.InvalidOperationException : Configuration already setuped]]></message>
                       <stack-trace><![CDATA[bei Kistl.API.Configuration.KistlConfig.Init(String file) in E:\Projekte\Kistl\Kistl.API\Configuration\KistlConfig.cs:Zeile 58.
@@ -1026,7 +1026,7 @@ bei Kistl.API.Tests.SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.API.Tests\SetU
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.Client.Tests.exe" success="False" time="0.044" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.Client.Tests.exe" success="False" time="0.047" asserts="0">
         <failure>
           <message><![CDATA[System.InvalidOperationException : Configuration already setuped]]></message>
           <stack-trace><![CDATA[bei Kistl.API.Configuration.KistlConfig.Init(String file) in E:\Projekte\Kistl\Kistl.API\Configuration\KistlConfig.cs:Zeile 58.
@@ -1086,6 +1086,114 @@ bei SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.Client.Tests\SetUp.cs:Zeile 23
           <test-suite name="Kistl.GUI.Integration" success="False" time="0.000" asserts="0">
             <results />
           </test-suite>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestDescription" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestFieldSize" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestSetUpCorrect" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestShortLabel" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-suite name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests" success="False" time="0.000" asserts="0">
+            <results />
+          </test-suite>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestDescription" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestFieldSize" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestSetUpCorrect" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestShortLabel" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-suite name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests" success="False" time="0.000" asserts="0">
+            <results />
+          </test-suite>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestDescription" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestFieldSize" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestSetUpCorrect" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestShortLabel" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-suite name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests" success="False" time="0.000" asserts="0">
+            <results />
+          </test-suite>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestDescription" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestFieldSize" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestSetUpCorrect" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestShortLabel" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-suite name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests" success="False" time="0.000" asserts="0">
+            <results />
+          </test-suite>
           <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestLoadedType" executed="True" success="False" time="0.000" asserts="0">
             <failure>
               <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
@@ -1111,6 +1219,33 @@ bei SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.Client.Tests\SetUp.cs:Zeile 23
             </failure>
           </test-case>
           <test-suite name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests" success="False" time="0.000" asserts="0">
+            <results />
+          </test-suite>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestDescription" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestFieldSize" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestSetUpCorrect" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestShortLabel" executed="True" success="False" time="0.000" asserts="0">
+            <failure>
+              <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
+              <stack-trace />
+            </failure>
+          </test-case>
+          <test-suite name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests" success="False" time="0.000" asserts="0">
             <results />
           </test-suite>
           <test-suite name="Kistl.GUI.Renderer.WPF.Tests" success="False" time="0.000" asserts="0">
@@ -1442,11 +1577,11 @@ bei SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.Client.Tests\SetUp.cs:Zeile 23
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.IntegrationTests.exe" success="False" time="0.019" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\Kistl.IntegrationTests.exe" success="False" time="0.016" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="0.017" asserts="0">
+          <test-suite name="Kistl" success="False" time="0.016" asserts="0">
             <results>
-              <test-suite name="IntegrationTests" success="False" time="0.014" asserts="0">
+              <test-suite name="IntegrationTests" success="False" time="0.016" asserts="0">
                 <failure>
                   <message><![CDATA[System.InvalidOperationException : Configuration already setuped]]></message>
                   <stack-trace><![CDATA[bei Kistl.API.Configuration.KistlConfig.Init(String file) in E:\Projekte\Kistl\Kistl.API\Configuration\KistlConfig.cs:Zeile 58.
@@ -1610,67 +1745,67 @@ bei Kistl.IntegrationTests.SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.Integra
       </test-suite>
       <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\NMock2.AcceptanceTests.dll" success="True" time="0.156" asserts="0">
         <results>
-          <test-suite name="NMock2" success="True" time="0.147" asserts="0">
+          <test-suite name="NMock2" success="True" time="0.140" asserts="0">
             <results>
-              <test-suite name="AcceptanceTests" success="True" time="0.147" asserts="0">
+              <test-suite name="AcceptanceTests" success="True" time="0.140" asserts="0">
                 <results>
-                  <test-suite name="ArgumentMatchingAcceptanceTest" success="True" time="0.024" asserts="0">
+                  <test-suite name="ArgumentMatchingAcceptanceTest" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.ArgumentMatchingAcceptanceTest.CanMixMatcherAndNonMatcherExpectedArguments" executed="True" success="True" time="0.024" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ArgumentMatchingAcceptanceTest.CanMixMatcherAndNonMatcherExpectedArguments" executed="True" success="True" time="0.016" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="ErrorCheckingAcceptanceTest" success="True" time="0.014" asserts="0">
+                  <test-suite name="ErrorCheckingAcceptanceTest" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAddToNonexistentEvent" executed="True" success="True" time="0.002" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodOnAnRealObject" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodThatDoesNotExistInTheMockedType" executed="True" success="True" time="0.002" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAddToNonexistentEvent" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodOnAnRealObject" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodThatDoesNotExistInTheMockedType" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectAMethodWithAnInvalidName" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfAnInvalidProperty" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfIndexerIfNoIndexerInMockedType" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectRemoveFromNonexistentEvent" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfAnInvalidProperty" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfIndexerIfNoIndexerInMockedType" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfAnInvalidProperty" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectGetOfIndexerIfNoIndexerInMockedType" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectRemoveFromNonexistentEvent" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfAnInvalidProperty" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorCheckingAcceptanceTest.CannotExpectSetOfIndexerIfNoIndexerInMockedType" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="ErrorMessageDemo" success="True" time="0.014" asserts="0">
+                  <test-suite name="ErrorMessageDemo" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.EventAdd" executed="True" success="True" time="0.005" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.IndexerSet" executed="True" success="True" time="0.002" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.UnexpectedInvocation" executed="True" success="True" time="0.003" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.VerifyFailure" executed="True" success="True" time="0.002" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.EventAdd" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.IndexerSet" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.UnexpectedInvocation" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ErrorMessageDemo.VerifyFailure" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="EventsAcceptanceTest" success="True" time="0.009" asserts="0">
+                  <test-suite name="EventsAcceptanceTest" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.CanExpectEventAdd" executed="True" success="True" time="0.002" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.CanExpectEventAdd" executed="True" success="True" time="0.016" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.CanExpectEventRemove" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.DelegatesCanBeComparedToEquality" executed="True" success="True" time="0.000" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlersCanBeRemovedDuringEventHandling" executed="True" success="True" time="0.002" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlingByMocksRespectsAdditionAndRemovalOfListeners" executed="True" success="True" time="0.001" asserts="3" />
-                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventsCanBeRaisedDuringTests" executed="True" success="True" time="0.001" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlersCanBeRemovedDuringEventHandling" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventHandlingByMocksRespectsAdditionAndRemovalOfListeners" executed="True" success="True" time="0.000" asserts="3" />
+                      <test-case name="NMock2.AcceptanceTests.EventsAcceptanceTest.EventsCanBeRaisedDuringTests" executed="True" success="True" time="0.000" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="Example" success="True" time="0.005" asserts="0">
+                  <test-suite name="Example" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.Example.KnockKnockJoke" executed="True" success="True" time="0.005" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.Example.KnockKnockJoke" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="ExpectationsAcceptanceTest" success="True" time="0.019" asserts="0">
+                  <test-suite name="ExpectationsAcceptanceTest" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.ExpectationsCanOverrideStubs" executed="True" success="True" time="0.002" asserts="2" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtLeastNTimesButCalledLessThanNTimes" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtMostNTimesAndCalledMoreThanNTimes" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.ExpectationsCanOverrideStubs" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtLeastNTimesButCalledLessThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedAtMostNTimesAndCalledMoreThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedBetweenNAndMTimesAndCalledMoreThanMTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedBetweenNAndMTimesButCalledLessThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedOnceButCalledTwice" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodExpectedOnceButNotCalled" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsActuallyCalled" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsActuallyCalled" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.FailsTestIfMethodNeverExpectedIsCalled" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledMoreThanNTimes" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledNTimes" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledMoreThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtLeastNTimesAndCalledNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtMostNTimesAndCalledLessThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedAtMostNTimesAndCalledNTimes" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedBetweenNAndMTimesAndCalledBetweenNAndMTimes" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedBetweenNAndMTimesAndCalledBetweenNAndMTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodExpectedOnceAndCalled" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.PassesTestIfMethodNeverExpectedIsNeverCalled" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldFailIfExpectedExactlyNTimesAndCalledLessThanNTimes" executed="True" success="True" time="0.000" asserts="0" />
@@ -1678,63 +1813,63 @@ bei Kistl.IntegrationTests.SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.Integra
                       <test-case name="NMock2.AcceptanceTests.ExpectationsAcceptanceTest.TestShouldPassIfExpectedExactlyNTimesAndCalledNTimes" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="IndexersAcceptanceTest" success="True" time="0.005" asserts="0">
+                  <test-suite name="IndexersAcceptanceTest" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.CanExpectIndexedGetter" executed="True" success="True" time="0.002" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.CanExpectIndexedGetter" executed="True" success="True" time="0.000" asserts="2" />
                       <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.CanExpectIndexedSetter" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.ErrorMessagesContainNameOfIndexedGetterNotHiddenMethod" executed="True" success="True" time="0.001" asserts="3" />
-                      <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.ErrorMessagesContainNameOfPropertySetterNotHiddenMethod" executed="True" success="True" time="0.001" asserts="3" />
+                      <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.ErrorMessagesContainNameOfIndexedGetterNotHiddenMethod" executed="True" success="True" time="0.000" asserts="3" />
+                      <test-case name="NMock2.AcceptanceTests.IndexersAcceptanceTest.ErrorMessagesContainNameOfPropertySetterNotHiddenMethod" executed="True" success="True" time="0.000" asserts="3" />
                     </results>
                   </test-suite>
-                  <test-suite name="MockeryAcceptanceTest" success="True" time="0.021" asserts="0">
+                  <test-suite name="MockeryAcceptanceTest" success="True" time="0.031" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.CallingVerifyOnMockeryShouldEnableMockeryToBeUsedSuccessfullyForOtherTests" executed="True" success="True" time="0.002" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockEmptyInterface" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs1" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs2" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs3" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs4" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs5" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs6" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockMixedInterface" executed="True" success="True" time="0.003" asserts="2" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockObjectsMayBePlacedIntoServiceContainers" executed="True" success="True" time="0.003" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterface" executed="True" success="True" time="0.002" asserts="2" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterfaceWithArgs" executed="True" success="True" time="0.001" asserts="2" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterface" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterfaceWithArgs" executed="True" success="True" time="0.001" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.CallingVerifyOnMockeryShouldEnableMockeryToBeUsedSuccessfullyForOtherTests" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockEmptyInterface" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs1" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs2" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs3" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs4" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs5" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockGenericInterfaceWithArgs6" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockMixedInterface" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockObjectsMayBePlacedIntoServiceContainers" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterface" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleGenericInterfaceWithArgs" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterface" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="NMock2.AcceptanceTests.MockeryAcceptanceTest.MockSimpleInterfaceWithArgs" executed="True" success="True" time="0.000" asserts="1" />
                     </results>
                   </test-suite>
-                  <test-suite name="OrderedCallsAcceptanceTest" success="True" time="0.011" asserts="0">
+                  <test-suite name="OrderedCallsAcceptanceTest" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.AllowsCallsIfCalledInSameOrderAsExpectedWithinAnInOrderBlock" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CallsInOrderedBlocksThatAreNotMatchedFailVerification" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CallsWithinAnInOrderedBlockCanBeExpectedMoreThanOnce" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CanExpectUnorderedCallsWithinAnOrderedSequence" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.DoesNotEnforceTheOrderOfCallsByDefault" executed="True" success="True" time="0.002" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.EnforcesTheOrderOfCallsWithinAnInOrderBlock" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledAfterTheEndOfTheUnorderedExpectations" executed="True" success="True" time="0.002" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledBeforeTheStartOfTheUnorderedExpectations" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedExpectationsMatchInOrderOfSpecification" executed="True" success="True" time="0.001" asserts="2" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.AllowsCallsIfCalledInSameOrderAsExpectedWithinAnInOrderBlock" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CallsInOrderedBlocksThatAreNotMatchedFailVerification" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CallsWithinAnInOrderedBlockCanBeExpectedMoreThanOnce" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.CanExpectUnorderedCallsWithinAnOrderedSequence" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.DoesNotEnforceTheOrderOfCallsByDefault" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.EnforcesTheOrderOfCallsWithinAnInOrderBlock" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledAfterTheEndOfTheUnorderedExpectations" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedCallsWithinAnInOrderedBlockCannotBeCalledBeforeTheStartOfTheUnorderedExpectations" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.OrderedCallsAcceptanceTest.UnorderedExpectationsMatchInOrderOfSpecification" executed="True" success="True" time="0.016" asserts="2" />
                     </results>
                   </test-suite>
-                  <test-suite name="PropertiesAcceptanceTest" success="True" time="0.005" asserts="0">
+                  <test-suite name="PropertiesAcceptanceTest" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.CanExpectPropertyGetter" executed="True" success="True" time="0.002" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.CanExpectPropertySetter" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.ErrorMessagesContainNameOfPropertyGetterNotHiddenMethod" executed="True" success="True" time="0.001" asserts="4" />
-                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.ErrorMessagesContainNameOfPropertySetterNotHiddenMethod" executed="True" success="True" time="0.001" asserts="4" />
+                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.CanExpectPropertyGetter" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.CanExpectPropertySetter" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.ErrorMessagesContainNameOfPropertyGetterNotHiddenMethod" executed="True" success="True" time="0.000" asserts="4" />
+                      <test-case name="NMock2.AcceptanceTests.PropertiesAcceptanceTest.ErrorMessagesContainNameOfPropertySetterNotHiddenMethod" executed="True" success="True" time="0.000" asserts="4" />
                     </results>
                   </test-suite>
-                  <test-suite name="StubAcceptanceTest" success="True" time="0.003" asserts="0">
+                  <test-suite name="StubAcceptanceTest" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.StubAcceptanceTest.StubsCanBeCalledAnyNumberOfTimes" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.StubAcceptanceTest.StubsCanBeCalledAnyNumberOfTimes" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.AcceptanceTests.StubAcceptanceTest.StubsDoNotHaveToBeCalled" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.AcceptanceTests.StubAcceptanceTest.StubsMatchArgumentsAndPerformActionsJustLikeAnExpectation" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.StubAcceptanceTest.StubsMatchArgumentsAndPerformActionsJustLikeAnExpectation" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="UsingBlockAcceptanceTest" success="True" time="0.001" asserts="0">
+                  <test-suite name="UsingBlockAcceptanceTest" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.AcceptanceTests.UsingBlockAcceptanceTest.AssertsExpectationsAreMetAtEndOfUsingBlock" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.AcceptanceTests.UsingBlockAcceptanceTest.AssertsExpectationsAreMetAtEndOfUsingBlock" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
                 </results>
@@ -1743,332 +1878,332 @@ bei Kistl.IntegrationTests.SetUp.Init() in E:\Projekte\Kistl\Tests\Kistl.Integra
           </test-suite>
         </results>
       </test-suite>
-      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\NMock2.Test.dll" success="True" time="0.219" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\CompleteTests\bin\Debug\NMock2.Test.dll" success="True" time="0.218" asserts="0">
         <results>
-          <test-suite name="NMock2" success="True" time="0.199" asserts="0">
+          <test-suite name="NMock2" success="True" time="0.203" asserts="0">
             <results>
-              <test-suite name="Internal" success="True" time="0.012" asserts="0">
+              <test-suite name="Internal" success="True" time="0.016" asserts="0">
                 <results>
-                  <test-suite name="Test" success="True" time="0.011" asserts="0">
+                  <test-suite name="Test" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-suite name="BuildableExpectationTest" success="True" time="0.008" asserts="0">
+                      <test-suite name="BuildableExpectationTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.ChecksCallCountToAssertThatItHasBeenMet" executed="True" success="True" time="0.001" asserts="5" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.ChecksCallCountToAssertThatItHasBeenMet" executed="True" success="True" time="0.000" asserts="5" />
                           <test-case name="NMock2.Internal.Test.BuildableExpectationTest.DoesNotMatchIfAnyMatcherDoesNotMatch" executed="True" success="True" time="0.000" asserts="63" />
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.HasReadableDescription" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.InvokesAListOfActionsToPerformAnInvocation" executed="True" success="True" time="0.001" asserts="2" />
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.MatchesCallCountWhenMatchingInvocation" executed="True" success="True" time="0.001" asserts="10" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.InvokesAListOfActionsToPerformAnInvocation" executed="True" success="True" time="0.000" asserts="2" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.MatchesCallCountWhenMatchingInvocation" executed="True" success="True" time="0.000" asserts="10" />
                           <test-case name="NMock2.Internal.Test.BuildableExpectationTest.MatchesIfAllMatchersMatch" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.WillNotPrintAPeriodBetweenReceiverAndMethodIfToldToDescribeItselfAsAnIndexer" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Internal.Test.BuildableExpectationTest.WillNotPrintAPeriodBetweenReceiverAndMethodIfToldToDescribeItselfAsAnIndexer" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="DescriptionWriterTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="DescriptionWriterTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Internal.Test.DescriptionWriterTest.FormatsNullAsNull" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Internal.Test.DescriptionWriterTest.FormatsStringsInCSharpSyntaxWhenWrittenAsObject" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Internal.Test.DescriptionWriterTest.HighlightsOtherValuesWhenWrittenAsObject" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Internal.Test.DescriptionWriterTest.HighlightsOtherValuesWhenWrittenAsObject" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
                     </results>
                   </test-suite>
                 </results>
               </test-suite>
-              <test-suite name="Test" success="True" time="0.183" asserts="0">
+              <test-suite name="Test" success="True" time="0.187" asserts="0">
                 <results>
-                  <test-suite name="Actions" success="True" time="0.034" asserts="0">
+                  <test-suite name="Actions" success="True" time="0.031" asserts="0">
                     <results>
-                      <test-suite name="CollectActionTest" success="True" time="0.003" asserts="0">
+                      <test-suite name="CollectActionTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Actions.CollectActionTest.CollectsParameterValueAtSpecifiedIndex" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Actions.CollectActionTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Actions.CollectActionTest.ReturnsParameterValueFromMostRecentOfMultipleCalls" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.CollectActionTest.ReturnsParameterValueFromMostRecentOfMultipleCalls" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="FireActionTest" success="True" time="0.003" asserts="0">
+                      <test-suite name="FireActionTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Actions.FireActionTest.FiresEventOnInvocationReceiver" executed="True" success="True" time="0.002" asserts="1" />
-                          <test-case name="NMock2.Test.Actions.FireActionTest.HasAReadableDescription" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.FireActionTest.FiresEventOnInvocationReceiver" executed="True" success="True" time="0.016" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.FireActionTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ResultSynthesizerTest" success="True" time="0.013" asserts="0">
+                      <test-suite name="ResultSynthesizerTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CanOverrideDefaultResultForType" executed="True" success="True" time="0.003" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CanOverrideDefaultResultForType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CanSpecifyResultForOtherType" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CreatesDefaultValuesForBasicTypes" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.CreatesDefaultValuesForBasicTypes" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.DoesNotTryToSetResultForVoidReturnType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsADifferentCollectionOnEachInvocation" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsDefaultValueOfValueTypes" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsADifferentCollectionOnEachInvocation" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsDefaultValueOfValueTypes" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsEmptyCollections" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsZeroLengthArrays" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ThrowsExceptionIfTriesToReturnValueForUnsupportedResultType" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ReturnsZeroLengthArrays" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="NMock2.Test.Actions.ResultSynthesizerTest.ThrowsExceptionIfTriesToReturnValueForUnsupportedResultType" executed="True" success="True" time="0.000" asserts="0" />
                         </results>
                       </test-suite>
-                      <test-suite name="ReturnActionTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="ReturnActionTest" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Actions.ReturnActionTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Actions.ReturnActionTest.SetsReturnValueOfInvocation" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.ReturnActionTest.SetsReturnValueOfInvocation" executed="True" success="True" time="0.016" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ReturnCloneActionTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="ReturnCloneActionTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Actions.ReturnCloneActionTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Actions.ReturnCloneActionTest.ReturnsCloneOfPrototypeObject" executed="True" success="True" time="0.000" asserts="0" />
                         </results>
                       </test-suite>
-                      <test-suite name="SetIndexedParameterActionTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="SetIndexedParameterActionTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Actions.SetIndexedParameterActionTest.HasReadableDescription" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="NMock2.Test.Actions.SetIndexedParameterActionTest.SetsIndexedParameterOnInvocation" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.SetIndexedParameterActionTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.SetIndexedParameterActionTest.SetsIndexedParameterOnInvocation" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="SetNamedParameterActionTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="SetNamedParameterActionTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Actions.SetNamedParameterActionTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Actions.SetNamedParameterActionTest.SetsNamedParameterOnInvocation" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ThrowActionTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="ThrowActionTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Actions.ThrowActionTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Actions.ThrowActionTest.SetsExceptionOfInvocation" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Actions.ThrowActionTest.SetsExceptionOfInvocation" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="Matchers" success="True" time="0.067" asserts="0">
+                  <test-suite name="Matchers" success="True" time="0.078" asserts="0">
                     <results>
-                      <test-suite name="AlwaysMatcherTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="AlwaysMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.AlwaysMatcherTest.AlwaysReturnsFixedBooleanValueFromMatchesMethod" executed="True" success="True" time="0.001" asserts="12" />
+                          <test-case name="NMock2.Test.Matchers.AlwaysMatcherTest.AlwaysReturnsFixedBooleanValueFromMatchesMethod" executed="True" success="True" time="0.000" asserts="12" />
                           <test-case name="NMock2.Test.Matchers.AlwaysMatcherTest.IsGivenADescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="AndMatcherTest" success="True" time="0.003" asserts="0">
+                      <test-suite name="AndMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.AndMatcherTest.CalculatesLogicalConjunctionOfTwoMatchers" executed="True" success="True" time="0.000" asserts="4" />
-                          <test-case name="NMock2.Test.Matchers.AndMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" executed="True" success="True" time="0.001" asserts="4" />
-                          <test-case name="NMock2.Test.Matchers.AndMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.AndMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" executed="True" success="True" time="0.000" asserts="4" />
+                          <test-case name="NMock2.Test.Matchers.AndMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ArgumentsMatcherTest" success="True" time="0.007" asserts="0">
+                      <test-suite name="ArgumentsMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DescribesAsIndexGetterArguments" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DescribesAsIndexSetterArguments" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DescribesAsIndexSetterArguments" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchAndDoesNotThrowExceptionIfValueSpecifiedForOutputParameter" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchAnObjectThatIsNotAnInvocation" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchIfValueMatchersDoNotMatchArgumentValues" executed="True" success="True" time="0.001" asserts="2" />
-                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchInvocationWithDifferentNumberOfArguments" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchIfValueMatchersDoNotMatchArgumentValues" executed="True" success="True" time="0.000" asserts="2" />
+                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.DoesNotMatchInvocationWithDifferentNumberOfArguments" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.FormatsDescriptionToLookSimilarToAnArgumentList" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.MatchesInvocationWithSameNumberOfArgumentsAsMatcherHasValueMatchersAndValueMatchersMatch" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.MatchesOutputParametersWithSpecialMatcherClass" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.MatchesOutputParametersWithSpecialMatcherClass" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.ArgumentsMatcherTest.ShowsOutputParametersInDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ComparisonMatcherTest" success="True" time="0.004" asserts="0">
+                      <test-suite name="ComparisonMatcherTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.CannotCreateComparisonThatMatchesAnything" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.CanSpecifyMinAndMaxComparisonResultInAnyOrder" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.CannotCreateComparisonThatMatchesAnything" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.CanSpecifyMinAndMaxComparisonResultInAnyOrder" executed="True" success="True" time="0.016" asserts="3" />
                           <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.DoesNotMatchObjectOfDifferentType" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.HasReadableDescription" executed="True" success="True" time="0.001" asserts="5" />
-                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.MatchesAComparisonOfAComparableValue" executed="True" success="True" time="0.001" asserts="9" />
+                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.HasReadableDescription" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="NMock2.Test.Matchers.ComparisonMatcherTest.MatchesAComparisonOfAComparableValue" executed="True" success="True" time="0.000" asserts="9" />
                         </results>
                       </test-suite>
-                      <test-suite name="DescriptionOverrideTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="DescriptionOverrideTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.DescriptionOverrideTest.DelegatesMatchingToAnotherMatcher" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.DescriptionOverrideTest.OverridesDescriptionOfOtherMatcherWithThatPassedToConstructor" executed="True" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite name="ElementMatcherTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="ElementMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.ElementMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.001" asserts="2" />
-                          <test-case name="NMock2.Test.Matchers.ElementMatcherTest.IsNullSafe" executed="True" success="True" time="0.001" asserts="5" />
+                          <test-case name="NMock2.Test.Matchers.ElementMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="2" />
+                          <test-case name="NMock2.Test.Matchers.ElementMatcherTest.IsNullSafe" executed="True" success="True" time="0.000" asserts="5" />
                           <test-case name="NMock2.Test.Matchers.ElementMatcherTest.MatchesIfArgumentInCollection" executed="True" success="True" time="0.000" asserts="5" />
                         </results>
                       </test-suite>
-                      <test-suite name="EqualMatcherTest" success="True" time="0.006" asserts="0">
+                      <test-suite name="EqualMatcherTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.CanCompareAutoboxedValues" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.CanCompareAutoboxedValues" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.EqualMatcherTest.ComparesArgumentForEqualityToExpectedObject" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Matchers.EqualMatcherTest.ComparesArraysForEqualityByContents" executed="True" success="True" time="0.000" asserts="7" />
-                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.ComparesMultidimensionalArraysForEquality" executed="True" success="True" time="0.001" asserts="5" />
+                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.ComparesMultidimensionalArraysForEquality" executed="True" success="True" time="0.000" asserts="5" />
                           <test-case name="NMock2.Test.Matchers.EqualMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.EqualMatcherTest.IsNullSafe" executed="True" success="True" time="0.000" asserts="3" />
-                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.RecursivelyComparesArrayContentsOfNestedArrays" executed="True" success="True" time="0.001" asserts="3" />
-                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.RecursivelyComparesContentsOfNestedLists" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.RecursivelyComparesArrayContentsOfNestedArrays" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="NMock2.Test.Matchers.EqualMatcherTest.RecursivelyComparesContentsOfNestedLists" executed="True" success="True" time="0.016" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="FieldMatcherTest" success="True" time="0.004" asserts="0">
+                      <test-suite name="FieldMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchNonPublicField" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchObjectIfItDoesNotHaveNamedField" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchObjectIfValueMatcherDoesNotMatch" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchObjectIfValueMatcherDoesNotMatch" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.FieldMatcherTest.DoesNotMatchStaticField" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.FieldMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.FieldMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.FieldMatcherTest.MatchesObjectWithMatchingField" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="MethodNameMatcherTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="MethodNameMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.MethodNameMatcherTest.DoesNotMatchObjectsThatAreNotMethodInfo" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.MethodNameMatcherTest.MatchesMethodsWithAGivenName" executed="True" success="True" time="0.001" asserts="4" />
+                          <test-case name="NMock2.Test.Matchers.MethodNameMatcherTest.MatchesMethodsWithAGivenName" executed="True" success="True" time="0.000" asserts="4" />
                           <test-case name="NMock2.Test.Matchers.MethodNameMatcherTest.UsesMethodNameAsDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="NotMatcherTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="NotMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.NotMatcherTest.CalculatesTheLogicalNegationOfAMatcher" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.NotMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.NotMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="NullMatcherTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="NullMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.NullMatcherTest.MatchesNullReferences" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="NMock2.Test.Matchers.NullMatcherTest.MatchesNullReferences" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Matchers.NullMatcherTest.ProvidesAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="OrMatcherTest" success="True" time="0.003" asserts="0">
+                      <test-suite name="OrMatcherTest" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.OrMatcherTest.CalculatesLogicalDisjunctionOfTwoMatchers" executed="True" success="True" time="0.001" asserts="4" />
+                          <test-case name="NMock2.Test.Matchers.OrMatcherTest.CalculatesLogicalDisjunctionOfTwoMatchers" executed="True" success="True" time="0.016" asserts="4" />
                           <test-case name="NMock2.Test.Matchers.OrMatcherTest.CanUseOperatorOverloadingAsSyntacticSugar" executed="True" success="True" time="0.000" asserts="4" />
-                          <test-case name="NMock2.Test.Matchers.OrMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.OrMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="PropertyMatcherTest" success="True" time="0.004" asserts="0">
+                      <test-suite name="PropertyMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchObjectIfItDoesNotHaveNamedProperty" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchObjectIfPropertyMatcherDoesNotMatch" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchObjectIfItDoesNotHaveNamedProperty" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchObjectIfPropertyMatcherDoesNotMatch" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchPrivateProperty" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.DoesNotMatchWriteOnlyProperty" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.PropertyMatcherTest.MatchesObjectWithNamedPropertyAndMatchingPropertyValue" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="SameMatcherTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="SameMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.SameMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.SameMatcherTest.IsNullSafe" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Matchers.SameMatcherTest.MatchesSameObject" executed="True" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite name="StringContainsMatcherTest" success="True" time="0.001" asserts="0">
+                      <test-suite name="StringContainsMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Matchers.StringContainsMatcherTest.HasAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Matchers.StringContainsMatcherTest.MatchesIfStringArgumentContainsGivenSubstring" executed="True" success="True" time="0.000" asserts="7" />
                         </results>
                       </test-suite>
-                      <test-suite name="ToStringMatcherTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="ToStringMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.ToStringMatcherTest.PassesResultOfToStringToOtherMatcher" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="NMock2.Test.Matchers.ToStringMatcherTest.PassesResultOfToStringToOtherMatcher" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Matchers.ToStringMatcherTest.ReturnsAReadableDescription" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="TypeMatcherTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="TypeMatcherTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Matchers.TypeMatcherTest.DoesNotMatchValueOfNonAssignableType" executed="True" success="True" time="0.001" asserts="3" />
-                          <test-case name="NMock2.Test.Matchers.TypeMatcherTest.MatchesValueOfAssignableType" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="NMock2.Test.Matchers.TypeMatcherTest.DoesNotMatchValueOfNonAssignableType" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="NMock2.Test.Matchers.TypeMatcherTest.MatchesValueOfAssignableType" executed="True" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="MockeryTest" success="True" time="0.019" asserts="0">
+                  <test-suite name="MockeryTest" success="True" time="0.016" asserts="0">
                     <results>
-                      <test-case name="NMock2.Test.MockeryTest.AssertionExceptionThrownWhenNoExpectationsMatchContainsDescriptionOfActiveExpectations" executed="True" success="True" time="0.002" asserts="10" />
-                      <test-case name="NMock2.Test.MockeryTest.AssertionExceptionThrownWhenSomeExpectationsHaveNotBeenMetContainsDescriptionOfUnMetExpectations" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.Test.MockeryTest.CanCreateMockWithoutCastingBySpecifingTypeAsGenericParameter" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.Test.MockeryTest.AssertionExceptionThrownWhenNoExpectationsMatchContainsDescriptionOfActiveExpectations" executed="True" success="True" time="0.000" asserts="10" />
+                      <test-case name="NMock2.Test.MockeryTest.AssertionExceptionThrownWhenSomeExpectationsHaveNotBeenMetContainsDescriptionOfUnMetExpectations" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.Test.MockeryTest.CanCreateMockWithoutCastingBySpecifingTypeAsGenericParameter" executed="True" success="True" time="0.016" asserts="0" />
                       <test-case name="NMock2.Test.MockeryTest.CreatedMockComparesReferenceIdentityWithEqualsMethod" executed="True" success="True" time="0.000" asserts="2" />
                       <test-case name="NMock2.Test.MockeryTest.CreatedMockReturnsNameFromToString" executed="True" success="True" time="0.000" asserts="2" />
-                      <test-case name="NMock2.Test.MockeryTest.CreatesMocksThatCanBeCastToIMockObject" executed="True" success="True" time="0.001" asserts="1" />
+                      <test-case name="NMock2.Test.MockeryTest.CreatesMocksThatCanBeCastToIMockObject" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.Test.MockeryTest.CreatesMocksThatCanBeCastToMockedType" executed="True" success="True" time="0.000" asserts="1" />
-                      <test-case name="NMock2.Test.MockeryTest.DetectsWhenFirstExpectationHasNotBeenMet" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.Test.MockeryTest.DetectsWhenSecondExpectationHasNotBeenMet" executed="True" success="True" time="0.001" asserts="0" />
-                      <test-case name="NMock2.Test.MockeryTest.DispatchesInvocationBySearchingForMatchingExpectationInOrderOfAddition" executed="True" success="True" time="0.001" asserts="19" />
-                      <test-case name="NMock2.Test.MockeryTest.FailsTestIfNoExpectationsMatch" executed="True" success="True" time="0.001" asserts="6" />
-                      <test-case name="NMock2.Test.MockeryTest.GenericMockCanSpecifyName" executed="True" success="True" time="0.001" asserts="1" />
-                      <test-case name="NMock2.Test.MockeryTest.GivesMocksDefaultNameIfNoNameSpecified" executed="True" success="True" time="0.002" asserts="4" />
+                      <test-case name="NMock2.Test.MockeryTest.DetectsWhenFirstExpectationHasNotBeenMet" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.Test.MockeryTest.DetectsWhenSecondExpectationHasNotBeenMet" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="NMock2.Test.MockeryTest.DispatchesInvocationBySearchingForMatchingExpectationInOrderOfAddition" executed="True" success="True" time="0.000" asserts="19" />
+                      <test-case name="NMock2.Test.MockeryTest.FailsTestIfNoExpectationsMatch" executed="True" success="True" time="0.000" asserts="6" />
+                      <test-case name="NMock2.Test.MockeryTest.GenericMockCanSpecifyName" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="NMock2.Test.MockeryTest.GivesMocksDefaultNameIfNoNameSpecified" executed="True" success="True" time="0.000" asserts="4" />
                       <test-case name="NMock2.Test.MockeryTest.MockReturnsNameFromToString" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.Test.MockeryTest.ShouldBeAbleToInvokeMethodOnInheritedInterface" executed="True" success="True" time="0.000" asserts="0" />
                       <test-case name="NMock2.Test.MockeryTest.StopsSearchingForMatchingExpectationAsSoonAsOneMatches" executed="True" success="True" time="0.000" asserts="13" />
                       <test-case name="NMock2.Test.MockeryTest.VerifiesWhenAllExpectationsHaveBeenMet" executed="True" success="True" time="0.000" asserts="0" />
-                      <test-case name="NMock2.Test.MockeryTest.VerifyExpectationsReportsOnUnexpectedInvocationsWhoseExceptionsWereCaughtElsewhere" executed="True" success="True" time="0.001" asserts="0" />
+                      <test-case name="NMock2.Test.MockeryTest.VerifyExpectationsReportsOnUnexpectedInvocationsWhoseExceptionsWereCaughtElsewhere" executed="True" success="True" time="0.000" asserts="0" />
                     </results>
                   </test-suite>
-                  <test-suite name="Monitoring" success="True" time="0.040" asserts="0">
+                  <test-suite name="Monitoring" success="True" time="0.031" asserts="0">
                     <results>
                       <test-suite name="InvocationSemanticsTest" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Monitoring.InvocationSemanticsTest.OutParametersAreSetAfterExceptionThrown" executed="True" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite name="InvocationTest" success="True" time="0.013" asserts="0">
+                      <test-suite name="InvocationTest" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.AllowsNullResultForMethodThatReturnsANullableType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.AllowsSettingNullResultOfVoidMethod" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.CanBeInvokedOnAnotherObject" executed="True" success="True" time="0.001" asserts="4" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.CanBeInvokedOnAnotherObject" executed="True" success="True" time="0.000" asserts="4" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventAdderDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventRemoverDoesNotShowSugaredMethod" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfIndexerGetterDoesNotShowSugaredMethod" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfEventRemoverDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfIndexerGetterDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfIndexerSetterDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfPropertyGetterDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DescriptionOfInvocationOfPropertySetterDoesNotShowSugaredMethod" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowNullException" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowNullResultForMethodThatReturnsAValueType" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingIncompatibleResultType" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingNonNullResultOfVoidMethod" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingIncompatibleResultType" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.DoesNotAllowSettingNonNullResultOfVoidMethod" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.SettingExceptionClearsResult" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.SettingResultClearsException" executed="True" success="True" time="0.000" asserts="3" />
                           <test-case name="NMock2.Test.Monitoring.InvocationTest.StoresExceptionToThrow" executed="True" success="True" time="0.000" asserts="3" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.StoresResultToReturn" executed="True" success="True" time="0.000" asserts="3" />
-                          <test-case name="NMock2.Test.Monitoring.InvocationTest.TrapsExceptionsWhenInvokedOnAnotherObject" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.StoresResultToReturn" executed="True" success="True" time="0.016" asserts="3" />
+                          <test-case name="NMock2.Test.Monitoring.InvocationTest.TrapsExceptionsWhenInvokedOnAnotherObject" executed="True" success="True" time="0.000" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="InvokerTest" success="True" time="0.002" asserts="0">
+                      <test-suite name="InvokerTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Monitoring.InvokerTest.ForwardsInvocationsToNextIfMethodIsNotDeclaredInSpecifiedType" executed="True" success="True" time="0.001" asserts="4" />
+                          <test-case name="NMock2.Test.Monitoring.InvokerTest.ForwardsInvocationsToNextIfMethodIsNotDeclaredInSpecifiedType" executed="True" success="True" time="0.000" asserts="4" />
                           <test-case name="NMock2.Test.Monitoring.InvokerTest.InvokesMethodOnObjectIfMethodIsDeclaredInSpecifiedType" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="MultiInterfaceFactoryTest" success="True" time="0.005" asserts="0">
+                      <test-suite name="MultiInterfaceFactoryTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Monitoring.MultiInterfaceFactoryTest.AvoidsNameClash" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="NMock2.Test.Monitoring.MultiInterfaceFactoryTest.CreatesTypeInfoObjectsThatRepresentAnInterfaceThatExtendsAllParameterInterfaces" executed="True" success="True" time="0.001" asserts="3" />
-                          <test-case name="NMock2.Test.Monitoring.MultiInterfaceFactoryTest.ReturnsTheSameTypeWhenPassedTheSameArguments" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="NMock2.Test.Monitoring.MultiInterfaceFactoryTest.AvoidsNameClash" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.MultiInterfaceFactoryTest.CreatesTypeInfoObjectsThatRepresentAnInterfaceThatExtendsAllParameterInterfaces" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="NMock2.Test.Monitoring.MultiInterfaceFactoryTest.ReturnsTheSameTypeWhenPassedTheSameArguments" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Monitoring.MultiInterfaceFactoryTest.ReturnsTheSameTypeWhenPassedTheSameArgumentsInDifferentOrder" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ParameterListTest" success="True" time="0.004" asserts="0">
+                      <test-suite name="ParameterListTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.CanSetValuesOfOutAndRefParameters" executed="True" success="True" time="0.001" asserts="3" />
-                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowAccessToValuesOfUnsetOutParameters" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowValuesOfInputParametersToBeChanged" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.CanSetValuesOfOutAndRefParameters" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowAccessToValuesOfUnsetOutParameters" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.ParameterListTest.DoesNotAllowValuesOfInputParametersToBeChanged" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="NMock2.Test.Monitoring.ParameterListTest.ReturnsNumberOfParameters" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.ParameterListTest.ReturnsValuesOfInParameters" executed="True" success="True" time="0.000" asserts="4" />
                         </results>
                       </test-suite>
-                      <test-suite name="ProxiedObjectIdentityTest" success="True" time="0.003" asserts="0">
+                      <test-suite name="ProxiedObjectIdentityTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ForwardsGetHashCodeToIdentityProvider" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ForwardsGetHashCodeToIdentityProvider" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ForwardsInvocationsOfOtherMethodsToNextInChain" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ForwardsToStringToIdentityProvider" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ImplementsEqualsByComparingInvocationReceiversForIdentity" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="NMock2.Test.Monitoring.ProxiedObjectIdentityTest.ImplementsEqualsByComparingInvocationReceiversForIdentity" executed="True" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite name="ProxyInvokableAdapterTest" success="True" time="0.004" asserts="0">
+                      <test-suite name="ProxyInvokableAdapterTest" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.CapturesInvocationsOnTransparentProxyAndForwardsToInvokableObject" executed="True" success="True" time="0.001" asserts="3" />
-                          <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.PassesExceptionThrownByInvokableToCallerOfProxy" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.CapturesInvocationsOnTransparentProxyAndForwardsToInvokableObject" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.PassesExceptionThrownByInvokableToCallerOfProxy" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.ReturnsOutAndRefParametersFromInvocationToCallerOfProxy" executed="True" success="True" time="0.000" asserts="4" />
                           <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.ReturnsResultFromInvocationToCallerOfProxy" executed="True" success="True" time="0.000" asserts="2" />
-                          <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.ThrowsExceptionFromInvocationToCallerOfProxy" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="NMock2.Test.Monitoring.ProxyInvokableAdapterTest.ThrowsExceptionFromInvocationToCallerOfProxy" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="VerifyTest" success="True" time="0.002" asserts="0">
+                  <test-suite name="VerifyTest" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-case name="NMock2.Test.VerifyTest.CanPrependCustomMessageToDescriptionOfFailure" executed="True" success="True" time="0.001" asserts="1" />
+                      <test-case name="NMock2.Test.VerifyTest.CanPrependCustomMessageToDescriptionOfFailure" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.Test.VerifyTest.VerifyThatFailsIfMatcherDoesNotMatchValue" executed="True" success="True" time="0.000" asserts="1" />
                       <test-case name="NMock2.Test.VerifyTest.VerifyThatPassesIfMatcherMatchesValue" executed="True" success="True" time="0.000" asserts="0" />
                     </results>

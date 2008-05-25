@@ -11,6 +11,12 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
+    public sealed class BoolValues : IValues<bool?>
+    {
+        public bool?[] Valids { get { return new bool?[] { true, false }; } }
+        public bool?[] Invalids { get { return new bool?[] { }; } }
+    }
+
     [TestFixture]
     public class BoolPresenterTests : NullablePresenterTests<TestObject, bool, TestBoolControl, BoolPresenter>
     {
@@ -18,16 +24,13 @@ namespace Kistl.GUI.Tests
             : base(
                 new PresenterHarness<TestObject, TestBoolControl, BoolPresenter>(
                     new TestObjectHarness(),
-                    new ControlHarness<TestBoolControl>(TestObject.TestBoolVisual, Toolkit.TEST)))
+                    new ControlHarness<TestBoolControl>(TestObject.TestBoolVisual, Toolkit.TEST)),
+                new BoolValues())
         { }
 
         protected override bool? GetObjectValue() { return Object.TestBool; }
         protected override bool? GetWidgetValue() { return Widget.Value; }
         protected override void SetObjectValue(bool? v) { Object.TestBool = v; }
         protected override void UserInput(bool? v) { Widget.SimulateUserInput(v); }
-        protected override IEnumerable<bool> SomeValues()
-        {
-            return new List<bool>(new[] { true, false });
-        }
     }
 }

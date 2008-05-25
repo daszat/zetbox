@@ -26,6 +26,24 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IBoolControl Members
 
+        private bool _SupressUserInputEvent = false;
+        bool? IValueControl<bool?>.Value
+        {
+            get { return (bool?)GetValue(ValueProperty); }
+            set
+            {
+                try
+                {
+                    _SupressUserInputEvent = true;
+                    SetValue(ValueProperty, value);
+                }
+                finally
+                {
+                    _SupressUserInputEvent = false;
+                }
+            }
+        }
+
         /// <summary>
         /// The actual Value of this Property
         /// </summary>
@@ -51,7 +69,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (UserInput != null)
+            if (UserInput != null && !_SupressUserInputEvent)
             {
                 UserInput(this, new EventArgs());
             }

@@ -17,30 +17,47 @@ namespace Kistl.GUI.Tests
 {
 
     /// <summary>
+    /// a structure to hold possible valid and invalid data to test the various parts of the framework
+    /// </summary>
+    public interface IValues<TYPE>
+    {
+        TYPE[] Valids { get; }
+        TYPE[] Invalids { get; }
+    }
+
+    public sealed class Values<TYPE> : IValues<TYPE>
+    {
+        #region IValues<TYPE> Members
+        public TYPE[] Valids { get; set; }
+        public TYPE[] Invalids { get; set; }
+        #endregion
+    }
+
+    /// <summary>
     /// This class adds a presenter to the ControlTests. 
     /// </summary>
     /// <typeparam name="CONTROL"></typeparam>
     /// <typeparam name="PRESENTER"></typeparam>
-    public abstract class PresenterTests<OBJECT, CONTROL, PRESENTER>
+    public abstract class PresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
         where OBJECT : IDataObject
         where CONTROL : IBasicControl
         where PRESENTER : IPresenter
     {
         protected PresenterTests(
-            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness)
+            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
+            IValues<TYPE> values)
         {
             Assert.IsNotNull(presenterHarness, "presenterHarness cannot be null");
-            /*
-            ObjectHarness = new ObjectHarness<OBJECT>();
-            ControlHarness = new ControlHarness<CONTROL>(visualType, toolkit);
-            PresenterHarness = new PresenterHarness<OBJECT, CONTROL, PRESENTER>(ObjectHarness, ControlHarness);
-             */
+            Assert.IsNotNull(values, "values cannot be null");
             PresenterHarness = presenterHarness;
+            Values = values;
         }
 
         protected ObjectHarness<OBJECT> ObjectHarness { get { return PresenterHarness.ObjectHarness; } }
         protected ControlHarness<CONTROL> ControlHarness { get { return PresenterHarness.ControlHarness; } }
         protected PresenterHarness<OBJECT, CONTROL, PRESENTER> PresenterHarness { get; private set; }
+        protected IValues<TYPE> Values { get; private set; }
+
 
         protected PRESENTER Presenter { get { return PresenterHarness.Presenter; } }
         protected CONTROL Widget { get { return ControlHarness.Widget; } }
@@ -74,8 +91,15 @@ namespace Kistl.GUI.Tests
 
     }
 
+    /// <summary>
+    /// Basic tests for a Presenter presenting struct-based types.
+    /// </summary>
+    /// <typeparam name="OBJECT"></typeparam>
+    /// <typeparam name="TYPE"></typeparam>
+    /// <typeparam name="CONTROL"></typeparam>
+    /// <typeparam name="PRESENTER"></typeparam>
     public abstract class NullablePresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
-        : PresenterTests<OBJECT, CONTROL, PRESENTER>
+        : PresenterTests<OBJECT, TYPE?, CONTROL, PRESENTER>
         where OBJECT : IDataObject
         where TYPE : struct
         where CONTROL : IValueControl<TYPE?>
@@ -83,8 +107,9 @@ namespace Kistl.GUI.Tests
     {
 
         protected NullablePresenterTests(
-            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness)
-            : base(presenterHarness)
+            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
+            IValues<TYPE?> values)
+            : base(presenterHarness, values)
         {
         }
 
@@ -116,15 +141,6 @@ namespace Kistl.GUI.Tests
         /// Simulate user input on the widget
         /// </summary>
         protected abstract void UserInput(TYPE? v);
-        /// <summary>
-        /// return a list of valid values for the property
-        /// </summary>
-        protected abstract IEnumerable<TYPE> SomeValues();
-        /// <summary>
-        /// return a list of invalid values for the property.
-        /// the default implementation returns the empty list.
-        /// </summary>
-        protected virtual IEnumerable<TYPE> SomeInvalidValues() { return new List<TYPE>(); }
 
         [Test]
         public void HandleNoUserInput()
@@ -147,7 +163,7 @@ namespace Kistl.GUI.Tests
         {
             AssertWidgetHasValidValue();
 
-            foreach (TYPE? value in SomeValues())
+            foreach (TYPE? value in Values.Valids)
             {
                 UserInput(value);
                 AssertWidgetHasValidValue();
@@ -163,7 +179,7 @@ namespace Kistl.GUI.Tests
 
             TYPE? original = GetObjectValue();
 
-            foreach (TYPE? value in SomeInvalidValues())
+            foreach (TYPE? value in Values.Invalids)
             {
                 UserInput(value);
                 AssertWidgetHasInvalidValue();
@@ -174,10 +190,10 @@ namespace Kistl.GUI.Tests
             // After having invalid values set, 
             // choosing a valid value again, should 
             // clear all flags and set to the object
-            IEnumerator<TYPE> validValues = SomeValues().GetEnumerator();
-            if (validValues.MoveNext())
+            TYPE?[] values = Values.Valids;
+            if (values.Length > 0)
             {
-                TYPE value = validValues.Current;
+                TYPE? value = values[0];
                 UserInput(value);
                 AssertWidgetHasValidValue();
                 Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
@@ -189,7 +205,7 @@ namespace Kistl.GUI.Tests
         public void HandleProgrammaticChange()
         {
             AssertWidgetHasValidValue();
-            foreach (var value in SomeValues())
+            foreach (var value in Values.Valids)
             {
                 SetObjectValue(value);
                 AssertWidgetHasValidValue();
@@ -200,8 +216,15 @@ namespace Kistl.GUI.Tests
 
     }
 
+    /// <summary>
+    /// Basic tests for a Presenter presenting class-based types.
+    /// </summary>
+    /// <typeparam name="OBJECT"></typeparam>
+    /// <typeparam name="TYPE"></typeparam>
+    /// <typeparam name="CONTROL"></typeparam>
+    /// <typeparam name="PRESENTER"></typeparam>
     public abstract class ReferencePresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
-        : PresenterTests<OBJECT, CONTROL, PRESENTER>
+        : PresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
         where OBJECT : IDataObject
         where TYPE : class
         where CONTROL : IValueControl<TYPE>
@@ -209,8 +232,9 @@ namespace Kistl.GUI.Tests
     {
 
         protected ReferencePresenterTests(
-            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness)
-            : base(presenterHarness)
+            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
+            IValues<TYPE> values)
+            : base(presenterHarness, values)
         {
         }
 
@@ -246,15 +270,6 @@ namespace Kistl.GUI.Tests
         /// return the expected Default Value at creation time
         /// </summary>
         protected abstract TYPE DefaultValue();
-        /// <summary>
-        /// return a list of valid values for the property
-        /// </summary>
-        protected abstract IEnumerable<TYPE> SomeValues();
-        /// <summary>
-        /// return a list of invalid values for the property.
-        /// the default implementation returns the empty list.
-        /// </summary>
-        protected virtual IEnumerable<TYPE> SomeInvalidValues() { return new List<TYPE>(); }
 
         [Test]
         public void HandleNoUserInput()
@@ -278,7 +293,7 @@ namespace Kistl.GUI.Tests
         {
             AssertWidgetHasValidValue();
 
-            foreach (TYPE value in SomeValues())
+            foreach (TYPE value in Values.Valids)
             {
                 UserInput(value);
                 AssertWidgetHasValidValue();
@@ -294,7 +309,7 @@ namespace Kistl.GUI.Tests
 
             TYPE original = GetObjectValue();
 
-            foreach (TYPE value in SomeInvalidValues())
+            foreach (TYPE value in Values.Invalids)
             {
                 UserInput(value);
                 AssertWidgetHasInvalidValue();
@@ -305,10 +320,10 @@ namespace Kistl.GUI.Tests
             // After having invalid values set, 
             // choosing a valid value again, should 
             // clear all flags and set to the object
-            IEnumerator<TYPE> validValues = SomeValues().GetEnumerator();
-            if (validValues.MoveNext())
+            TYPE[] values = Values.Valids;
+            if (values.Length > 0)
             {
-                TYPE value = validValues.Current;
+                TYPE value = values[0];
                 UserInput(value);
                 AssertWidgetHasValidValue();
                 Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
@@ -320,7 +335,7 @@ namespace Kistl.GUI.Tests
         public void HandleProgrammaticChange()
         {
             AssertWidgetHasValidValue();
-            foreach (var v in SomeValues())
+            foreach (var v in Values.Valids)
             {
                 SetObjectValue(v);
                 Assert.AreEqual(v, GetObjectValue(), "Object should have value set");

@@ -36,7 +36,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (UserInput != null)
+            if (UserInput != null && !_SupressUserInputEvent)
             {
                 UserInput(this, new EventArgs());
             }
@@ -44,6 +44,24 @@ namespace Kistl.GUI.Renderer.WPF
 
 
         #region IDateTimeControl Members
+
+        private bool _SupressUserInputEvent = false;
+        DateTime? IValueControl<DateTime?>.Value
+        {
+            get { return (DateTime?)GetValue(ValueProperty); }
+            set
+            {
+                try
+                {
+                    _SupressUserInputEvent = true;
+                    SetValue(ValueProperty, value);
+                }
+                finally
+                {
+                    _SupressUserInputEvent = false;
+                }
+            }
+        }
 
         /// <summary>
         /// The actual Value of this Property

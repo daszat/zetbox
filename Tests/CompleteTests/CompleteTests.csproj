@@ -58,6 +58,7 @@
     <None Include="CompleteTests.nunit" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CompleteTests.PartCoverSettings.xml" />
     <Content Include="DefaultConfig_API.Client.Tests.xml" />
     <Content Include="DefaultConfig_API.Server.Tests.xml" />
     <Content Include="DefaultConfig_API.Tests.xml" />

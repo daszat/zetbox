@@ -27,6 +27,24 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IDoubleControl Members
 
+        private bool _SupressUserInputEvent = false;
+        double? IValueControl<double?>.Value
+        {
+            get { return (double?)GetValue(ValueProperty); }
+            set
+            {
+                try
+                {
+                    _SupressUserInputEvent = true;
+                    SetValue(ValueProperty, value);
+                }
+                finally
+                {
+                    _SupressUserInputEvent = false;
+                }
+            }
+        }
+
         /// <summary>
         /// The actual Value of this Property
         /// </summary>
@@ -51,7 +69,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (UserInput != null)
+            if (UserInput != null && !_SupressUserInputEvent)
             {
                 UserInput(this, new EventArgs());
             }

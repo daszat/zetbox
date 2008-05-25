@@ -19,13 +19,30 @@ namespace Kistl.GUI.Renderer.WPF
     /// </summary>
     public partial class EditIntProperty : PropertyControl, IValueControl<int?>
     {
-
         public EditIntProperty()
         {
             InitializeComponent();
         }
 
-        #region IIntControl Members
+        #region IValueControl<int?> Members
+
+        private bool _SupressUserInputEvent = false;
+        int? IValueControl<int?>.Value
+        {
+            get { return (int?)GetValue(ValueProperty); }
+            set
+            {
+                try
+                {
+                    _SupressUserInputEvent = true;
+                    SetValue(ValueProperty, value);
+                }
+                finally
+                {
+                    _SupressUserInputEvent = false;
+                }
+            }
+        }
 
         /// <summary>
         /// The actual Value of this Property
@@ -51,7 +68,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (UserInput != null)
+            if (UserInput != null && !_SupressUserInputEvent)
             {
                 UserInput(this, new EventArgs());
             }

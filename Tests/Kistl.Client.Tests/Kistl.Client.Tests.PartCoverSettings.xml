@@ -1,6 +1,7 @@
 <PartCoverSettings>
   <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>E:\Projekte\Kistl\Kistl.Tests\Kistl.Client.Tests</TargetWorkDir>
+  <TargetWorkDir>E:\Projekte\Kistl\Tests\Kistl.Client.Tests</TargetWorkDir>
   <TargetArgs>Kistl.Client.Tests.nunit</TargetArgs>
   <Rule>+[Kistl.Client]*</Rule>
+  <Rule>+[Kistl.Client.WPF]*</Rule>
 </PartCoverSettings>

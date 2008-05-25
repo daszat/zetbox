@@ -6,6 +6,7 @@
   <Rule>+[Kistl.API.Client]*</Rule>
   <Rule>+[Kistl.API.Server]*</Rule>
   <Rule>+[Kistl.Client]*</Rule>
+  <Rule>+[Kistl.Client.WPF]*</Rule>
   <Rule>+[Kistl.Objects.Client]*</Rule>
   <Rule>+[Kistl.Server]*</Rule>
   <Rule>+[Kistl.Objects.Server]*</Rule>

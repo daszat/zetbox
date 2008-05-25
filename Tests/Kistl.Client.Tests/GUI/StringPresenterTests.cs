@@ -11,6 +11,26 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
+    public sealed class StringValues : IValues<string>
+    {
+        public string[] Valids
+        {
+            get
+            {
+                return new[] { "foo", "xss: <xss>", 
+                    "'!\"§!$%!%`id`$(id)§&''''''''#%$/\\\"$%!°\"§!/%()( -- blah /* blubb */ // hallo",
+                    "", "00012346789", "0", "0.0", "0.1", "0.002", "10.0e100", "0x120",
+                    "...", "<xss>", "!'\"§!$§%&/(){}&amp;", "normal string",
+                    "very long string: very long string: very long string: very long string: very long string: very long string: " +
+                    "very long string: very long string: very long string: very long string: very long string: very long string: " +
+                    "very long string: very long string: very long string: very long string: very long string: very long string: " +
+                    "very long string: very long string: very long string: very long string: very long string: very long string" 
+                };
+            }
+        }
+        public string[] Invalids { get { return new string[] { }; } }
+    }
+
     [TestFixture]
     public class StringPresenterTests : ReferencePresenterTests<TestObject, string, TestStringControl, StringPresenter>
     {
@@ -18,7 +38,8 @@ namespace Kistl.GUI.Tests
             : base(
                 new PresenterHarness<TestObject, TestStringControl, StringPresenter>(
                     new TestObjectHarness(),
-                    new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)))
+                    new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)),
+                new StringValues())
         { }
 
         protected override string GetObjectValue() { return Object.TestString; }
@@ -26,17 +47,5 @@ namespace Kistl.GUI.Tests
         protected override void SetObjectValue(string v) { Object.TestString = v; }
         protected override void UserInput(string v) { Widget.SimulateUserInput(v); }
         protected override string DefaultValue() { return null; }
-        protected override IEnumerable<string> SomeValues()
-        {
-            return new List<string>(new[] { 
-                "foo", "<xss>", "'!\"§!$%!%`id`$(id)§&''''''''#%$/\\\"$%!°\"§!/%()( -- blah /* blubb */ // hallo", "", 
-                "00012346789", "0", "0.0", "0.1", "0.002", "10.0e100", "0x120",
-                "...", "<xss>", "!'\"§!$§%&/(){}&amp;", "normal string",
-                "very long string: very long string: very long string: very long string: very long string: very long string: " +
-                "very long string: very long string: very long string: very long string: very long string: very long string: " +
-                "very long string: very long string: very long string: very long string: very long string: very long string: " +
-                "very long string: very long string: very long string: very long string: very long string: very long string"
-            });
-        }
     }
 }

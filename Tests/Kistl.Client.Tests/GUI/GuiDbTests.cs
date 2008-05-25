@@ -15,14 +15,15 @@ using Kistl.GUI.Mocks;
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class GuiDbTests : PresenterTests<TestObject, TestStringControl, StringPresenter>
+    public class GuiDbTests : PresenterTests<TestObject, string, TestStringControl, StringPresenter>
     {
 
         public GuiDbTests()
             : base(
                 new PresenterHarness<TestObject, TestStringControl, StringPresenter>(
                     new TestObjectHarness(),
-                    new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)))
+                    new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)),
+                new StringValues())
         { }
 
         [Test]
