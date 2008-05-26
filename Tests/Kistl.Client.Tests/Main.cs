@@ -9,12 +9,13 @@ namespace Kistl.Client.Tests
 {
     public class MainProgram
     {
+        [STAThread]
         public static void Main(string[] args)
         {
             new SetUp().Init();
-            var orpt = new Kistl.GUI.Tests.ObjectReferencePresenterTests();
-            orpt.SetUp();
-            orpt.HandleProgrammaticChange();
+            var test = new Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests();
+            test.SetItemSource();
+            test.TestCombobox();
         }
     }
 }

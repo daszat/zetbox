@@ -17,7 +17,6 @@
         <ComboBox
             Name="cbValues" 
             ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource}"
-            SelectedIndex="{Binding ElementName=PointerCtrl, Path=Value}"
             SelectionChanged="cbValues_SelectionChanged"
             IsSynchronizedWithCurrentItem="True"
             >

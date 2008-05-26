@@ -24,24 +24,40 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Interaction logic for ObjectReferenceControl.xaml
     /// </summary>
-    public partial class ObjectReferenceControl : PropertyControl, IObjectReferenceControl
+    public partial class ObjectReferenceControl : PropertyControl, IObjectReferenceControl, ITestObjectReferenceControl
     {
         public ObjectReferenceControl()
         {
             InitializeComponent();
         }
 
+        public void SetValueNoUserInput(DependencyProperty dp, object value)
+        {
+            try
+            {
+                _SupressUserInputEvent = true;
+                SetValue(dp, value);
+            }
+            finally
+            {
+                _SupressUserInputEvent = false;
+            }
+        }
+
         public IList<Kistl.API.IDataObject> ItemsSource
         {
             get { return (IList<Kistl.API.IDataObject>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            set
+            {
+                // This can cause a unrelated change to the Value
+                SetValueNoUserInput(ItemsSourceProperty, value);
+            }
         }
 
-        // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for ItemsSource.
+        // This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IList<Kistl.API.IDataObject>), typeof(ObjectReferenceControl));
-
-
 
         public Visibility ShowLabel
         {
@@ -49,7 +65,8 @@ namespace Kistl.GUI.Renderer.WPF
             set { SetValue(ShowLabelProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ShowLabel.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for ShowLabel.
+        // This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowLabelProperty =
             DependencyProperty.Register("ShowLabel", typeof(Visibility), typeof(ObjectReferenceControl), new UIPropertyMetadata(Visibility.Visible));
 
@@ -103,28 +120,18 @@ namespace Kistl.GUI.Renderer.WPF
             set { SetValue(ObjectTypeProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for ObjectType.
+        // This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
             DependencyProperty.Register("ObjectType",
                 typeof(ObjectType), typeof(ObjectReferenceControl),
                 new PropertyMetadata(null));
 
-        private bool _IsUserInput = true;
+        private bool _SupressUserInputEvent = false;
         Kistl.API.IDataObject IValueControl<Kistl.API.IDataObject>.Value
         {
             get { return (Kistl.API.IDataObject)GetValue(ValueProperty); }
-            set
-            {
-                _IsUserInput = false;
-                try
-                {
-                    SetValue(ValueProperty, value);
-                }
-                finally
-                {
-                    _IsUserInput = true;
-                }
-            }
+            set { SetValueNoUserInput(ValueProperty, value); }
         }
 
         /// <summary>
@@ -136,15 +143,22 @@ namespace Kistl.GUI.Renderer.WPF
             set { SetValue(ValueProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for Value.
+        // This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(Kistl.API.IDataObject), typeof(ObjectReferenceControl));
+            DependencyProperty.Register("Value",
+                typeof(Kistl.API.IDataObject), typeof(ObjectReferenceControl));
 
+        public int ValueIndex
+        {
+            get { return ItemsSource.IndexOf(Value); }
+            set { Value = ItemsSource[value]; }
+        }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (_IsUserInput && e.Property == ValueProperty)
+            if (e.Property == ValueProperty)
             {
                 OnUserInput(e);
             }
@@ -152,7 +166,8 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            if (UserInput != null)
+            cbValues.SelectedIndex = ValueIndex;
+            if (UserInput != null && !_SupressUserInputEvent)
             {
                 UserInput(this, new EventArgs());
             }
@@ -164,8 +179,22 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void cbValues_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ValueIndex = cbValues.SelectedIndex;
         }
 
+        #region ITestObjectReferenceControl Members
+
+        object ITestObjectReferenceControl.ComboboxValue
+        {
+            get { return ItemsSource[cbValues.SelectedIndex]; }
+        }
+
+        #endregion
+
+    }
+
+    public interface ITestObjectReferenceControl
+    {
+        object ComboboxValue { get; }
     }
 }

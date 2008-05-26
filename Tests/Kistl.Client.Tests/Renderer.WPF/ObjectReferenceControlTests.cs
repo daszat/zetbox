@@ -29,10 +29,32 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         {
         }
 
+        [SetUp]
+        public void SetItemSource()
+        {
+            base.AddEvents();
+            Widget.ItemsSource = Values.Valids;
+        }
 
         public override void TestUserInput()
         {
             TestUserInput((w, v) => w.SetValue(ObjectReferenceControl.ValueProperty, v));
+        }
+
+        [Test]
+        public void TestCombobox()
+        {
+            TestProperty<IDataObject>(
+                w => w.Value,
+                delegate(ObjectReferenceControl w, IDataObject v)
+                {
+                    w.SetValue(ObjectReferenceControl.ValueProperty, v);
+                    Assert.AreEqual(v, ((ITestObjectReferenceControl)w).ComboboxValue, "Combobox didn't receive correct value");
+                },
+                Values,
+                AssertThatOnlyUserInputEventFired
+                );
+
         }
     }
 

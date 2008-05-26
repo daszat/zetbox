@@ -58,7 +58,7 @@ namespace Kistl.GUI.Tests
         }
 
         // override and add AssertFired(false)s
-        protected virtual void AssertOnlyUserInputEventFired()
+        protected virtual void AssertThatOnlyUserInputEventFired()
         {
             base.AssertThatNoEventsFired();
             AssertUserInputEventFired(true);
@@ -68,7 +68,7 @@ namespace Kistl.GUI.Tests
         {
             Assert.AreEqual(shouldFire, _widget_UserInputHasFired,
                 shouldFire ? "UserInput should have fired"
-                    : "UserInput should have not fired"
+                    : "UserInput should not have fired"
                 );
         }
 
@@ -88,7 +88,7 @@ namespace Kistl.GUI.Tests
                 w => w.Value,
                 simulateUserInput,
                 Values,
-                AssertOnlyUserInputEventFired
+                AssertThatOnlyUserInputEventFired
                 );
         }
 

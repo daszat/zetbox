@@ -110,7 +110,18 @@ namespace Kistl.GUI.Tests
             Func<CONTROL, PTYPE> getProperty, Action<CONTROL, PTYPE> setProperty,
             IValues<PTYPE> values, Action assertThatNoEventsFired)
         {
-            foreach (var test in values.Valids)
+            PTYPE[] valids = values.Valids;
+
+            // Ensure that every setProperty in the loop will actually change the property
+            {
+                var selectDifferent = (from v in valids where !v.Equals(valids[0]) select v);
+                if (selectDifferent.Count() >= 1)
+                {
+                    setProperty(Widget, selectDifferent.Last());
+                }
+            }
+
+            foreach (var test in valids)
             {
                 setProperty(Widget, test);
                 Assert.AreEqual(test, getProperty(Widget), "widget should return the new value");
