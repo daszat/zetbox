@@ -1,4 +1,4 @@
-﻿<app:PropertyControl x:Class="Kistl.GUI.Renderer.WPF.ObjectList"
+﻿<app:PropertyControl x:Class="Kistl.GUI.Renderer.WPF.ObjectListControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"

@@ -50,7 +50,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <my:ObjectList x:Name="lst" SelectionChanged="lst_SelectionChanged" />
+                        <my:ObjectListControl x:Name="lst" SelectionChanged="lst_SelectionChanged" />
                     </DockPanel>
                 </TabItem>
             </TabControl>

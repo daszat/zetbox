@@ -173,6 +173,7 @@ namespace Kistl.GUI
             }
 
             Control.Value = GetPropertyValue();
+            Control.IsValidValue = true;
 
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
@@ -304,7 +305,7 @@ namespace Kistl.GUI
     /// The list of selectable Items is set from the list of available objects.
     /// Different controls may implement the selection differently: Comboboxes, Lists, etc.
     /// </summary>
-    public class ObjectReferencePresenter 
+    public class ObjectReferencePresenter
         : DefaultPresenter<IDataObject, ObjectReferenceProperty, IObjectReferenceControl>
     {
         public ObjectReferencePresenter() { }
@@ -340,43 +341,53 @@ namespace Kistl.GUI
 
             if (Control.IsValidValue)
             {
-                Object.SetPropertyValue<IDataObject>(Property.PropertyName, Control.Value);
+                Object.SetPropertyValue(Property.PropertyName, Control.Value);
             }
         }
     }
 
-    public class ObjectListPresenter 
-        : Presenter<IObjectListControl>
+    public class ObjectListPresenter
+        : DefaultPresenter<IList<IDataObject>, ObjectReferenceProperty, IObjectListControl>
     {
         public ObjectListPresenter() { }
 
+        private List<IDataObject> _Items;
+
         protected override void InitializeComponent()
         {
-            Control.ShortLabel = Property.PropertyName;
-            Control.Description = Property.AltText;
-            // Control.ObjectType = new Kistl.API.ObjectType(Property.GetDataType());
-            Control.Value = Object.GetList(Property);
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
+            Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceObjectClass.Module.Namespace, Property.ReferenceObjectClass.ClassName);
 
-            Control.UserInput += new EventHandler(Control_UserInput);
+            // remember the objects that are sent to the object
+            // to facilitate validity checking
+            Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
+
+            base.InitializeComponent();
         }
 
-        private void Control_UserInput(object sender, EventArgs e)
+        /// <summary>
+        /// Checks whether the returned value matches the Properties nullability 
+        /// criteria and is one of the originally selectable items.
+        /// </summary>
+        protected override void OnUserInput()
         {
-            IList<Kistl.API.IDataObject> list = Object.GetList(Property);
-            list.Clear();
-            foreach (var i in Control.Value)
+            if (Control.Value == null)
             {
-                list.Add(i);
+                Control.IsValidValue = Property.IsNullable;
+            }
+            else
+            {
+                Control.IsValidValue = Control.Value.All(v => _Items.Contains(v));
+            }
+
+
+            if (Control.IsValidValue)
+            {
+                Object.SetPropertyValue(Property.PropertyName, Control.Value);
             }
         }
-
-        // localize type-unsafety
-        public ObjectReferenceProperty Property { get { return (ObjectReferenceProperty)Preferences.Property; } }
     }
 
-    public class BackReferencePresenter 
+    public class BackReferencePresenter
         : Presenter<IObjectListControl>
     {
         public BackReferencePresenter() { }
@@ -459,7 +470,7 @@ namespace Kistl.GUI
         event /*UserInput<TYPE>*/EventHandler UserInput;
     }
 
-    public interface IObjectReferenceControl : IValueControl<IDataObject>
+    public interface IReferenceControl<TYPE> : IValueControl<TYPE>
     {
         /// <summary>
         /// The ObjectType of the listed objects
@@ -468,10 +479,12 @@ namespace Kistl.GUI
         IList<IDataObject> ItemsSource { get; set; }
     }
 
-    public interface IObjectListControl : IBasicControl
+    public interface IObjectReferenceControl : IReferenceControl<IDataObject>
     {
-        IList<Kistl.API.IDataObject> Value { get; set; }
-        event /*UserInput<IList<Kistl.API.IDataObject>>*/EventHandler UserInput;
+    }
+
+    public interface IObjectListControl : IReferenceControl<IList<IDataObject>>
+    {
     }
 
     /// <summary>

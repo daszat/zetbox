@@ -28,7 +28,7 @@ namespace Kistl.GUI.DB
             };
             result.VisualTree = new Visual()
             {
-                Name = VisualType.Object,
+                ControlType = VisualType.Object,
                 Description = "top level visual to display a object",
                 Children = new List<Visual>()
             };
@@ -62,7 +62,7 @@ namespace Kistl.GUI.DB
             return new Visual()
             {
                 Property = property,
-                Name = visualType,
+                ControlType = visualType,
                 Description = controlDescription
             };
         }
@@ -99,7 +99,7 @@ namespace Kistl.GUI.DB
                 Type = taskObjectType,
                 VisualTree = new Visual()
                 {
-                    Name = VisualType.PropertyGroup,
+                    ControlType = VisualType.PropertyGroup,
                     Description = "a simple list of the contained visuals",
                     // Property = ID ???
                     Children = visuals

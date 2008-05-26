@@ -257,7 +257,7 @@ namespace Kistl.GUI.Tests
         /// <summary>
         /// return the current Value which is displayed by the widget
         /// </summary>
-        protected abstract TYPE GetWidgetValue();
+        protected TYPE GetWidgetValue() { return Widget.Value; }
         /// <summary>
         /// set the Value of the tested Property on the Object
         /// </summary>

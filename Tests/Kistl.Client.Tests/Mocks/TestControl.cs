@@ -8,6 +8,7 @@ using Kistl.API;
 
 namespace Kistl.Client.Mocks
 {
+#if false
     public class TestBackReferenceControl : IObjectListControl
     {
         public TestBackReferenceControl()
@@ -22,22 +23,22 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = VisualType.ObjectList,
+                ControlType = VisualType.ObjectList,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestBackReferenceControl"
             };
 
 
-        #region IBasicControl Members
+    #region IBasicControl Members
 
         public string Description { get; set; }
         public string ShortLabel { get; set; }
         public FieldSize Size { get; set; }
 
-        #endregion
+    #endregion
 
-        #region IBackReferenceControl Members
+    #region IBackReferenceControl Members
 
         public event EventHandler UserInput;
         public IList<IDataObject> Value { get; set; }
@@ -48,9 +49,10 @@ namespace Kistl.Client.Mocks
             HasValidValue = valid;
         }
 
-        #endregion
+    #endregion
 
     }
+#endif
 
     public class TestBoolControl : IValueControl<bool?>
     {
@@ -66,7 +68,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = VisualType.Boolean,
+                ControlType = VisualType.Boolean,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestBoolControl"
@@ -111,7 +113,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = VisualType.DateTime,
+                ControlType = VisualType.DateTime,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestDateTimeControl"
@@ -157,7 +159,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = VisualType.Integer,
+                ControlType = VisualType.Integer,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestIntControl"
@@ -202,7 +204,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = VisualType.Double,
+                ControlType = VisualType.Double,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestDoubleControl"
@@ -247,7 +249,7 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = VisualType.String,
+                ControlType = VisualType.String,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestStringControl"
@@ -292,11 +294,18 @@ namespace Kistl.Client.Mocks
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                Control = VisualType.ObjectReference,
+                ControlType = VisualType.ObjectReference,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestObjectReferenceControl"
             };
+
+        internal void SimulateUserInput(IDataObject newValue)
+        {
+            Value = newValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
 
 
         #region IBasicControl Members
@@ -315,13 +324,6 @@ namespace Kistl.Client.Mocks
 
         #endregion
 
-        internal void SimulateUserInput(IDataObject newValue)
-        {
-            Value = newValue;
-            if (UserInput != null)
-                UserInput(this, new EventArgs());
-        }
-
         #region IObjectReferenceControl Members
 
         public IList<IDataObject> ItemsSource { get; set; }
@@ -330,4 +332,65 @@ namespace Kistl.Client.Mocks
         #endregion
     }
 
+    public class TestObjectListControl : IObjectListControl
+    {
+        public TestObjectListControl()
+        {
+            Description = "TestObjectListControl Description";
+            ShortLabel = "TOLC ShortLabel";
+            Size = FieldSize.Full;
+            // IsValidValue = true;
+        }
+
+        public readonly static ControlInfo Info
+            = new ControlInfo()
+            {
+                Platform = Toolkit.TEST,
+                ControlType = VisualType.ObjectList,
+                Container = false,
+                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                ClassName = "Kistl.Client.Mocks.TestObjectListControl"
+            };
+
+        internal void SimulateUserInput(IDataObject newValue)
+        {
+            // Value = newValue;
+            if (UserInput != null)
+                UserInput(this, new EventArgs());
+        }
+
+        #region IReferenceControl<IList<IDataObject>> Members
+
+        public ObjectType ObjectType { get; set; }
+
+        public IList<IDataObject> ItemsSource { get; set; }
+
+        #endregion
+
+        #region IValueControl<IList<IDataObject>> Members
+
+        public IList<IDataObject> Value { get; set; }
+
+        public bool IsValidValue { get; set; }
+
+        public event EventHandler UserInput;
+
+        #endregion
+
+        #region IBasicControl Members
+
+        public string ShortLabel { get; set; }
+
+        public string Description { get; set; }
+
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+
+        internal void SimulateUserInput(IList<IDataObject> v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

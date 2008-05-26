@@ -124,7 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Renderer.WPF\ObjectList.xaml">
+    <Page Include="Renderer.WPF\ObjectListControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -194,8 +194,8 @@
       <DependentUpon>EditSimplePropertyList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\GroupBoxWrapper.cs" />
-    <Compile Include="Renderer.WPF\ObjectList.xaml.cs">
-      <DependentUpon>ObjectList.xaml</DependentUpon>
+    <Compile Include="Renderer.WPF\ObjectListControl.xaml.cs">
+      <DependentUpon>ObjectListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\PropertyControl.cs" />
     <Compile Include="Renderer.WPF\Renderer.cs" />

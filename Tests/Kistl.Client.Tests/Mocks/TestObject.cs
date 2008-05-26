@@ -14,8 +14,11 @@ namespace Kistl.Client.Mocks
 
         public TestObject()
         {
-            TestBackReference = new List<IDataObject>();
             Context = GlobalContext;
+
+            // TestBackReference = new List<IDataObject>();
+            TestObjectList = new List<IDataObject>();
+            TestObjectListDescriptor.AttachToContext(GlobalContext);
             TestObjectReferenceDescriptor.AttachToContext(GlobalContext);
         }
 
@@ -50,6 +53,7 @@ namespace Kistl.Client.Mocks
         }
 
         #region BackReference Properties
+#if false
 
         public List<IDataObject> TestBackReference
         {
@@ -70,11 +74,12 @@ namespace Kistl.Client.Mocks
         public readonly static Visual TestBackReferenceVisual
             = new Visual()
             {
-                Name = TestBackReferenceControl.Info.Control,
+                ControlType = TestBackReferenceControl.Info.ControlType,
                 Property = TestBackReferenceDescriptor,
                 Description = "TestBackReference Visual",
             };
 
+#endif
         #endregion
 
         #region Bool Properties
@@ -99,7 +104,7 @@ namespace Kistl.Client.Mocks
         public readonly static Visual TestBoolVisual
             = new Visual()
             {
-                Name = TestBoolControl.Info.Control,
+                ControlType = TestBoolControl.Info.ControlType,
                 Property = TestBoolDescriptor,
                 Description = "TestBool Visual",
             };
@@ -128,7 +133,7 @@ namespace Kistl.Client.Mocks
         public readonly static Visual TestDateTimeVisual
             = new Visual()
             {
-                Name = TestDateTimeControl.Info.Control,
+                ControlType = TestDateTimeControl.Info.ControlType,
                 Property = TestDateTimeDescriptor,
                 Description = "TestDateTime Visual",
             };
@@ -157,7 +162,7 @@ namespace Kistl.Client.Mocks
         public readonly static Visual TestDoubleVisual
             = new Visual()
             {
-                Name = TestDoubleControl.Info.Control,
+                ControlType = TestDoubleControl.Info.ControlType,
                 Property = TestDoubleDescriptor,
                 Description = "TestDouble Visual",
             };
@@ -186,7 +191,7 @@ namespace Kistl.Client.Mocks
         public readonly static Visual TestIntVisual
             = new Visual()
             {
-                Name = TestIntControl.Info.Control,
+                ControlType = TestIntControl.Info.ControlType,
                 Property = TestIntDescriptor,
                 Description = "TestInt Visual",
             };
@@ -215,7 +220,7 @@ namespace Kistl.Client.Mocks
         public readonly static Visual TestStringVisual
             = new Visual()
             {
-                Name = TestStringControl.Info.Control,
+                ControlType = TestStringControl.Info.ControlType,
                 Property = TestStringDescriptor,
                 Description = "TestString Visual",
             };
@@ -245,9 +250,43 @@ namespace Kistl.Client.Mocks
         public readonly static Visual TestObjectReferenceVisual
             = new Visual()
             {
-                Name = TestObjectReferenceControl.Info.Control,
+                ControlType = TestObjectReferenceControl.Info.ControlType,
                 Property = TestObjectReferenceDescriptor,
                 Description = "TestObjectReference Visual",
+            };
+
+        #endregion
+
+        #region ObjectList Properties
+
+        public IList<IDataObject> TestObjectList
+        {
+            get { return (IList<IDataObject>)GetValue(TestObjectListProperty); }
+            set { SetValue(TestObjectListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TestObjectList.
+        // This enables animation, styling, binding, etc...
+        public static readonly System.Windows.DependencyProperty TestObjectListProperty =
+            System.Windows.DependencyProperty.Register(
+                "TestObjectList", typeof(IList<IDataObject>),
+                typeof(TestObject), new System.Windows.PropertyMetadata(null));
+
+        public readonly static ObjectReferenceProperty TestObjectListDescriptor
+            = new MockObjectReferenceProperty()
+            {
+                PropertyName = "TestObjectList",
+                ReferenceObjectClass = TestObject.ObjectClass,
+                IsNullable = true,
+                IsList = true,
+            };
+
+        public readonly static Visual TestObjectListVisual
+            = new Visual()
+            {
+                ControlType = TestObjectListControl.Info.ControlType,
+                Property = TestObjectListDescriptor,
+                Description = "TestObjectList Visual",
             };
 
         #endregion
@@ -364,6 +403,7 @@ namespace Kistl.Client.Mocks
 
     internal class MockObjectReferenceProperty : ObjectReferenceProperty
     {
+
         public override string GetDataType()
         {
             return "Kistl.Client.Mocks.MockObjectReferenceProperty";

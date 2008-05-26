@@ -22,13 +22,14 @@ namespace Kistl.GUI.Renderer.WPF
     /// Sie kann _alle_ Instanzen einer Klasse anzeigen &
     /// alle Instanzen einer Eigenschaft eines Objektes.
     /// </summary>
-    public partial class ObjectList : PropertyControl, IObjectListControl
+    public partial class ObjectListControl
+        : PropertyControl, IObjectListControl
     {
 
-        static ObjectList()
+        static ObjectListControl()
         {
             SelectionChangedEvent = EventManager.RegisterRoutedEvent("SelectionChanged", RoutingStrategy.Bubble,
-                            typeof(SelectionChangedEventHandler), typeof(ObjectList));
+                            typeof(SelectionChangedEventHandler), typeof(ObjectListControl));
         }
 
         public static RoutedEvent SelectionChangedEvent;
@@ -38,7 +39,7 @@ namespace Kistl.GUI.Renderer.WPF
             remove { RemoveHandler(SelectionChangedEvent, value); }
         }
 
-        public ObjectList()
+        public ObjectListControl()
         {
             InitializeComponent();
         }
@@ -60,37 +61,48 @@ namespace Kistl.GUI.Renderer.WPF
             RaiseEvent(args);
         }
 
-        #region IObjectListControl Members
+        #region IReferenceControl<IList<IDataObject>> Members
 
-        IList<Kistl.API.IDataObject> IObjectListControl.Value
+        public Kistl.API.ObjectType ObjectType
         {
             get
             {
-                return (IList<Kistl.API.IDataObject>)lst.ItemsSource;
+                throw new NotImplementedException();
             }
             set
             {
-                lst.ItemsSource = value;
+                throw new NotImplementedException();
             }
         }
 
-        // TODO: has to be called when editing lst.ItemsSource
-        protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
+        public IList<Kistl.API.IDataObject> ItemsSource
         {
-            if (_UserInput != null)
-            {
-                _UserInput(this, new EventArgs());
-            }
+            get { return (IList<Kistl.API.IDataObject>)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
         }
 
-        private event EventHandler _UserInput;
-        event EventHandler IObjectListControl.UserInput
-        {
-            add { _UserInput += value; }
-            remove { _UserInput -= value; }
-        }
+        // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register("ItemsSource", typeof(IList<Kistl.API.IDataObject>), typeof(ObjectListControl), new PropertyMetadata(null));
 
         #endregion
 
+        #region IValueControl<IList<IDataObject>> Members
+
+        public IList<Kistl.API.IDataObject> Value
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public event EventHandler UserInput;
+
+        #endregion
     }
 }

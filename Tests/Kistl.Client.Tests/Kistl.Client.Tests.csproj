@@ -69,7 +69,7 @@
     <Compile Include="Mocks\TestObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer.WPF\ControlTests.cs" />
-    <Compile Include="Renderer.WPF\ObjectReferenceControlTests.cs" />
+    <Compile Include="Renderer.WPF\ObjectControlTests.cs" />
     <Compile Include="Renderer.WPF\TestInSTAThread.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="GUI\BackReferencePresenterTests.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="GUI\DoublePresenterTests.cs" />
     <Compile Include="GUI\GuiDbTests.cs" />
     <Compile Include="GUI\IntPresenterTests.cs" />
-    <Compile Include="GUI\ObjectReferencePresenterTests.cs" />
+    <Compile Include="GUI\ObjectPresenterTests.cs" />
     <Compile Include="GUI\PresenterTests.cs" />
     <Compile Include="GUI\StringPresenterTests.cs" />
   </ItemGroup>

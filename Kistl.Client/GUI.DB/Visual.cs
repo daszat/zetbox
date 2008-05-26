@@ -21,7 +21,7 @@ namespace Kistl.GUI.DB
         /// Which visual is represented here
         /// TODO: should become a enum or similar
         /// </summary>
-        public VisualType Name { get; set; }
+        public VisualType ControlType { get; set; }
 
         /// <summary>
         /// A short description of the utility of this visual
@@ -29,7 +29,7 @@ namespace Kistl.GUI.DB
         public string Description { get; set; }
 
         /// <summary>
-        /// if this is a container, here are the visually contianed/controlled children of this Visual
+        /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
         public IList<Visual> Children { get; set; }
 
@@ -94,7 +94,7 @@ namespace Kistl.GUI.DB
         {
             return new Visual()
             {
-                Name = VisualType.String,
+                ControlType = VisualType.String,
                 Description = "this control displays a string",
                 Property = stringProperty
             };
@@ -106,7 +106,7 @@ namespace Kistl.GUI.DB
             {
                 return new Visual()
                 {
-                    Name = VisualType.ObjectList,
+                    ControlType = VisualType.ObjectList,
                     Description = "display a list of objects",
                     Property = objectReferenceProperty
                 };
@@ -115,7 +115,7 @@ namespace Kistl.GUI.DB
             {
                 return new Visual()
                 {
-                    Name = VisualType.ObjectReference,
+                    ControlType = VisualType.ObjectReference,
                     Description = "this control displays a foreign key reference",
                     Property = objectReferenceProperty
                 };
@@ -126,7 +126,7 @@ namespace Kistl.GUI.DB
         {
             return new Visual()
             {
-                Name = VisualType.Integer,
+                ControlType = VisualType.Integer,
                 Description = "this control displays a integer",
                 Property = intProperty
             };
@@ -141,7 +141,7 @@ namespace Kistl.GUI.DB
         {
             return new Visual()
             {
-                Name = VisualType.Double,
+                ControlType = VisualType.Double,
                 Description = "this control displays a double",
                 Property = doubleProperty
             };
@@ -151,7 +151,7 @@ namespace Kistl.GUI.DB
         {
             return new Visual()
             {
-                Name = VisualType.DateTime,
+                ControlType = VisualType.DateTime,
                 Description = "this control displays a date and time",
                 Property = dateTimeProperty
             };
@@ -161,7 +161,7 @@ namespace Kistl.GUI.DB
         {
             return new Visual()
             {
-                Name = VisualType.Boolean,
+                ControlType = VisualType.Boolean,
                 Description = "this control displays a boolean",
                 Property = boolProperty
             };
@@ -171,7 +171,7 @@ namespace Kistl.GUI.DB
         {
             return new Visual()
             {
-                Name = VisualType.ObjectList,
+                ControlType = VisualType.ObjectList,
                 Description = "this control displays a list of objects referencing this via a given relation",
                 Property = backReferenceProperty
             };

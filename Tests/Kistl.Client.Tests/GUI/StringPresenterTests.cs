@@ -43,7 +43,6 @@ namespace Kistl.GUI.Tests
         { }
 
         protected override string GetObjectValue() { return Object.TestString; }
-        protected override string GetWidgetValue() { return Widget.Value; }
         protected override void SetObjectValue(string v) { Object.TestString = v; }
         protected override void UserInput(string v) { Widget.SimulateUserInput(v); }
         protected override string DefaultValue() { return null; }

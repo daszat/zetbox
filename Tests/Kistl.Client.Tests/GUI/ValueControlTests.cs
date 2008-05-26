@@ -44,7 +44,8 @@ namespace Kistl.GUI.Tests
         public void RemoveEvents()
         {
             // important to not leak widgets when testing
-            Widget.UserInput -= _widget_UserInputHandler;
+            if (Widget != null)
+                Widget.UserInput -= _widget_UserInputHandler;
             _widget_UserInputHasFired = false;
             // have to chain a call to the base TearDown() here
             base.Finish();
