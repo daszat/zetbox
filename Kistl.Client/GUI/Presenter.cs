@@ -438,7 +438,11 @@ namespace Kistl.GUI
     public interface IValueControl<TYPE> : IBasicControl
     {
         /// <summary>
-        /// The actually displayed value
+        /// The actually displayed value. Setting the Value here does not count 
+        /// as user-input.
+        /// 
+        /// If you want to be notified of all changes of the value, use the 
+        /// appropriate events on the model.
         /// </summary>
         TYPE Value { get; set; }
 
