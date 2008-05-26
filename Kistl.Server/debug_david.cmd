@@ -1,2 +1,4 @@
 @echo off
-bin\debug\Kistl.Server.exe ConfigDavid.xml
+cd bin\debug
+
+Kistl.Server.exe ConfigDavid.xml

@@ -140,8 +140,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ConfigArthur.xml" />
-    <Content Include="ConfigDavid.xml" />
+    <None Include="ConfigArthur.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ConfigDavid.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
