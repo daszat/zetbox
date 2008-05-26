@@ -149,12 +149,6 @@ namespace Kistl.GUI.Renderer.WPF
             DependencyProperty.Register("Value",
                 typeof(Kistl.API.IDataObject), typeof(ObjectReferenceControl));
 
-        public int ValueIndex
-        {
-            get { return ItemsSource.IndexOf(Value); }
-            set { Value = ItemsSource[value]; }
-        }
-
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
@@ -166,7 +160,11 @@ namespace Kistl.GUI.Renderer.WPF
 
         protected virtual void OnUserInput(DependencyPropertyChangedEventArgs e)
         {
-            cbValues.SelectedIndex = ValueIndex;
+            // this is not always a noop. it happens if the Value is set 
+            // programmatically, e.g. by the Presenter on initialisation
+            // or when the Model's Value changes.
+            cbValues.SelectedIndex = ItemsSource.IndexOf(Value);
+
             if (UserInput != null && !_SupressUserInputEvent)
             {
                 UserInput(this, new EventArgs());
@@ -179,14 +177,31 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void cbValues_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ValueIndex = cbValues.SelectedIndex;
+            if (cbValues.SelectedIndex < 0)
+            {
+                Value = null;
+            }
+            else
+            {
+                Value = ItemsSource[cbValues.SelectedIndex];
+            }
         }
 
         #region ITestObjectReferenceControl Members
 
         object ITestObjectReferenceControl.ComboboxValue
         {
-            get { return ItemsSource[cbValues.SelectedIndex]; }
+            get
+            {
+                if (cbValues.SelectedIndex < 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return ItemsSource[cbValues.SelectedIndex];
+                }
+            }
         }
 
         #endregion

@@ -22,6 +22,7 @@ namespace Kistl.GUI.Tests
 
         private IDataObject[] _Items = new[] {
             new TestObject() { ID = 2 },
+            null,
             new TestObject() { ID = 3 },
             new TestObject() { ID = 4 },
         };

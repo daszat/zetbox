@@ -54,8 +54,6 @@ namespace Kistl.GUI.Renderer.WPF.Tests
                 Values,
                 AssertThatOnlyUserInputEventFired
                 );
-
         }
     }
-
 }

@@ -114,7 +114,7 @@ namespace Kistl.GUI.Tests
 
             // Ensure that every setProperty in the loop will actually change the property
             {
-                var selectDifferent = (from v in valids where !v.Equals(valids[0]) select v);
+                var selectDifferent = (from v in valids where (v == null || !v.Equals(valids[0])) select v);
                 if (selectDifferent.Count() >= 1)
                 {
                     setProperty(Widget, selectDifferent.Last());
@@ -140,7 +140,8 @@ namespace Kistl.GUI.Tests
                 }
                 catch (ArgumentException argEx)
                 {
-                    catched = true;
+                    // use argEx here to silence "declared but never used" warning
+                    catched = (argEx != null);
                 }
                 Assert.IsTrue(
                     catched,
