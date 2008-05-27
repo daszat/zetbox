@@ -352,9 +352,9 @@ namespace Kistl.Client.Mocks
                 ClassName = "Kistl.Client.Mocks.TestObjectListControl"
             };
 
-        internal void SimulateUserInput(IDataObject newValue)
+        internal void SimulateUserInput(IList<IDataObject> newValue)
         {
-            // Value = newValue;
+            Value = newValue;
             if (UserInput != null)
                 UserInput(this, new EventArgs());
         }
@@ -387,10 +387,5 @@ namespace Kistl.Client.Mocks
 
         #endregion
 
-
-        internal void SimulateUserInput(IList<IDataObject> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

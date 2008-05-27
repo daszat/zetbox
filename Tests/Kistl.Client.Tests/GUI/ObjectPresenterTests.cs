@@ -135,6 +135,10 @@ namespace Kistl.GUI.Tests
 
         protected override IList<IDataObject> GetObjectValue() { return Object.TestObjectList; }
         protected override void SetObjectValue(IList<IDataObject> v) { Object.TestObjectList = v; }
+        protected override IList<IDataObject> DefaultValue()
+        {
+            return new List<IDataObject>();
+        }
 
         protected override void UserInput(IList<IDataObject> v) { Widget.SimulateUserInput(v); }
 
