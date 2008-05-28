@@ -283,9 +283,17 @@ namespace Kistl.GUI.Tests
         public void HandleNullUserInput()
         {
             AssertWidgetHasValidValue();
+
             UserInput(null);
-            Assert.IsNull(GetObjectValue());
-            AssertWidgetHasValidValue();
+            if (Values.Valids.Contains(null))
+            {
+                Assert.IsNull(GetObjectValue());
+                AssertWidgetHasValidValue();
+            }
+            else {
+                Assert.IsNotNull(GetObjectValue());
+                AssertWidgetHasInvalidValue();
+            }
         }
 
         [Test]

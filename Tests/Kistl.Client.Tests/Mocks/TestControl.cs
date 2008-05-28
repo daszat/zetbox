@@ -354,7 +354,7 @@ namespace Kistl.Client.Mocks
 
         internal void SimulateUserInput(IList<IDataObject> newValue)
         {
-            Value = newValue;
+            Value = newValue ?? new List<IDataObject>(0);
             if (UserInput != null)
                 UserInput(this, new EventArgs());
         }

@@ -370,7 +370,7 @@ namespace Kistl.GUI
         /// </summary>
         protected override void OnUserInput()
         {
-            if (Control.Value == null)
+            if (Control.Value.Count == 0)
             {
                 Control.IsValidValue = Property.IsNullable;
             }
@@ -378,7 +378,6 @@ namespace Kistl.GUI
             {
                 Control.IsValidValue = Control.Value.All(v => _Items.Contains(v));
             }
-
 
             if (Control.IsValidValue)
             {

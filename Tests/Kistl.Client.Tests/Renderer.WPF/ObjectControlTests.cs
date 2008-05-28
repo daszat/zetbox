@@ -5,6 +5,7 @@ using System.Text;
 
 using NMock2;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 using Kistl.API;
 using Kistl.App.Base;
@@ -34,15 +35,17 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         {
             base.AddEvents();
             Widget.ItemsSource = Values.Valids;
+            AssertThatNoEventsFired();
         }
 
+        [Test]
         public override void TestUserInput()
         {
             TestUserInput((w, v) => w.SetValue(ObjectReferenceControl.ValueProperty, v));
         }
 
         [Test]
-        public void TestCombobox()
+        public void TestComboboxUserInput()
         {
             TestProperty<IDataObject>(
                 w => w.Value,
@@ -56,7 +59,28 @@ namespace Kistl.GUI.Renderer.WPF.Tests
                 );
         }
 
-        // TODO: Test changeing ItemsSource
+        [Test]
+        public void TestComboboxProgrammatically()
+        {
+            TestProperty<IDataObject>(
+                w => w.Value,
+                delegate(ObjectReferenceControl w, IDataObject v)
+                {
+                    ((IValueControl<IDataObject>)w).Value = v;
+                    Assert.AreEqual(v, ((ITestObjectReferenceControl)w).ComboboxValue, "Combobox didn't receive correct value");
+                },
+                Values,
+                AssertThatNoEventsFired
+                );
+        }
+
+        [Test]
+        [Ignore("unimplemented")]
+        public void TestItemsSource() { }
+
+        [Test]
+        [Ignore("unimplemented, needs IValues<ObjectType>, should go to Reference*Tests base class")]
+        public void TestObjectType() { }
     }
 
     [TestFixture]
@@ -66,7 +90,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         public ObjectListControlTests()
             : base(
                 new ControlHarness<ObjectListControl>(TestObject.TestObjectListVisual, Toolkit.WPF),
-                new ListValues<IDataObject>(IDataObjectValues.TestValues) { IsUnique = true, IsEmptyValid = true }
+                new ListValues<IDataObject>(IDataObjectValues.TestValues, true, true)
             )
         {
         }
@@ -78,80 +102,60 @@ namespace Kistl.GUI.Renderer.WPF.Tests
             Widget.ItemsSource = IDataObjectValues.TestValues.Valids;
         }
 
-        public override void TestUserInput()
+        [Test]
+        public void TestNullValue()
         {
-            TestUserInput((w, v) => w.SetValue(ObjectReferenceControl.ValueProperty, v));
+            Widget.Value = null;
+            Assert.That(
+                Widget.Value, new EmptyCollectionConstraint(),
+                "ListControls should mutate NULLs into empty lists");
         }
 
         [Test]
-        public void TestCombobox()
+        public override void TestUserInput()
         {
-            /*
+            TestUserInput((w, v) => w.SetValue(ObjectListControl.ValueProperty, v));
+        }
+
+        [Test]
+        public void TestListboxUserInput()
+        {
             TestProperty<IList<IDataObject>>(
                 w => w.Value,
-                delegate(ObjectReferenceControl w, IDataObject v)
+                delegate(ObjectListControl w, IList<IDataObject> v)
                 {
-                    w.SetValue(ObjectReferenceControl.ValueProperty, v);
-                    Assert.AreEqual(v, ((ITestObjectReferenceControl)w).ComboboxValue, "Combobox didn't receive correct value");
+                    w.SetValue(ObjectListControl.ValueProperty, v);
+                    Assert.AreEqual(v, ((ITestObjectListControl)w).ListboxValue, "Listbox didn't receive correct value");
                 },
                 Values,
                 AssertThatOnlyUserInputEventFired
                 );
-             */
-            Assert.IsTrue(false, "The control should be tested whether it displays the right values to the user");
         }
-        // TODO: Test changeing ItemsSource
+
+        [Test]
+        public void TestListboxProgrammatically()
+        {
+            TestProperty<IList<IDataObject>>(
+                w => w.Value,
+                delegate(ObjectListControl w, IList<IDataObject> v)
+                {
+                    ((IValueControl<IList<IDataObject>>)w).Value = v;
+                    Assert.AreEqual(v, ((ITestObjectListControl)w).ListboxValue, "Listbox didn't receive correct value");
+                },
+                Values,
+                AssertThatNoEventsFired
+                );
+        }
+
+        [Test]
+        [Ignore("unimplemented")]
+        public void TestItemsSource() { }
+
+        [Test]
+        [Ignore("unimplemented, needs IValues<ObjectType>, should go to Reference*Tests base class")]
+        public void TestObjectType() { }
     }
 
-    public sealed class ListValues<TYPE> : IValues<IList<TYPE>>
-    {
-        public bool IsUnique { get; set; }
-        public bool IsEmptyValid { get; set; }
 
-        public IValues<TYPE> BaseValues { get; private set; }
-
-        public ListValues(IValues<TYPE> baseValues)
-        {
-            BaseValues = baseValues;
-            Valids = GenerateLists(BaseValues.Valids, IsEmptyValid);
-
-            IList<IList<TYPE>> invalidResult = new List<IList<TYPE>>();
-
-            IList<TYPE> invalidValues = new List<TYPE>(BaseValues.Invalids);
-            if (invalidValues.Count == 0)
-            {
-                // call GenerateLists on empty Invalids array to pass IsEmptyValid
-                Invalids = GenerateLists(BaseValues.Invalids, !IsEmptyValid);
-            }
-            else
-            {
-                IEnumerator<TYPE> invalidEnumeration = invalidValues.GetEnumerator();
-
-                Invalids = GenerateLists(BaseValues.Valids, !IsEmptyValid).Select(
-                    delegate(IList<TYPE> l)
-                    {
-                        l.Add(invalidEnumeration.Current);
-                        if (!invalidEnumeration.MoveNext())
-                        {
-                            // start over
-                            invalidEnumeration = invalidValues.GetEnumerator();
-                        }
-                        return l;
-                    }).ToArray();
-            }
-        }
-
-        private static IList<TYPE>[] GenerateLists(TYPE[] items, bool includeEmptyList)
-        {
-            return new IList<TYPE>[0];
-        }
-
-        #region IValues<IList<TYPE>> Members
-
-        public IList<TYPE>[] Valids { get; private set; }
-        public IList<TYPE>[] Invalids { get; private set; }
-
-        #endregion
-    }
 
 }

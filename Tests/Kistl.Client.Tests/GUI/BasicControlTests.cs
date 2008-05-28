@@ -111,8 +111,9 @@ namespace Kistl.GUI.Tests
             IValues<PTYPE> values, Action assertThatNoEventsFired)
         {
             PTYPE[] valids = values.Valids;
+            Assert.Greater(valids.Length, 0, "need valid data to test");
 
-            // Ensure that every setProperty in the loop will actually change the property
+            // Ensure that the first setProperty in the loop will actually change the property
             {
                 var selectDifferent = (from v in valids where (v == null || !v.Equals(valids[0])) select v);
                 if (selectDifferent.Count() >= 1)
@@ -125,30 +126,6 @@ namespace Kistl.GUI.Tests
             {
                 setProperty(Widget, test);
                 Assert.AreEqual(test, getProperty(Widget), "widget should return the new value");
-                assertThatNoEventsFired();
-            }
-
-            foreach (var test in values.Invalids)
-            {
-                var original = getProperty(Widget);
-                Assert.AreNotEqual(test, original, "widget should not have invalid values");
-
-                bool catched = false;
-                try
-                {
-                    setProperty(Widget, test);
-                }
-                catch (ArgumentException argEx)
-                {
-                    // use argEx here to silence "declared but never used" warning
-                    catched = (argEx != null);
-                }
-                Assert.IsTrue(
-                    catched,
-                    "widget should signal illegal value '{0}' with ArgumentException",
-                    test);
-
-                Assert.AreEqual(original, getProperty(Widget), "widget should not accept invalid values");
                 assertThatNoEventsFired();
             }
         }

@@ -79,6 +79,7 @@ namespace Kistl.GUI.Tests
 
         /// <summary>
         /// Use TestUserInput with a appropriate Action to simulateUserInput to implement this test.
+        /// Don't forget to add the TestAttribute to the override, else NUnit won't find the Test.
         /// </summary>
         [Test]
         public abstract void TestUserInput();

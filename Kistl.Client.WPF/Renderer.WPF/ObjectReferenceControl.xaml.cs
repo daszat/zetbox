@@ -32,6 +32,7 @@ namespace Kistl.GUI.Renderer.WPF
             InitializeComponent();
         }
 
+        private bool _SupressUserInputEvent = false;
         public void SetValueNoUserInput(DependencyProperty dp, object value)
         {
             try
@@ -45,12 +46,14 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
+        #region ItemsSource property 
+
         public IList<Kistl.API.IDataObject> ItemsSource
         {
             get { return (IList<Kistl.API.IDataObject>)GetValue(ItemsSourceProperty); }
             set
             {
-                // This can cause a unrelated change to the Value
+                // setting the ItemsSource can cause a spurious changes to the Value
                 SetValueNoUserInput(ItemsSourceProperty, value);
             }
         }
@@ -59,6 +62,10 @@ namespace Kistl.GUI.Renderer.WPF
         // This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IList<Kistl.API.IDataObject>), typeof(ObjectReferenceControl));
+
+        #endregion
+
+        #region ShowLabel property
 
         public Visibility ShowLabel
         {
@@ -70,6 +77,8 @@ namespace Kistl.GUI.Renderer.WPF
         // This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowLabelProperty =
             DependencyProperty.Register("ShowLabel", typeof(Visibility), typeof(ObjectReferenceControl), new UIPropertyMetadata(Visibility.Visible));
+
+        #endregion
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
@@ -128,7 +137,10 @@ namespace Kistl.GUI.Renderer.WPF
                 typeof(ObjectType), typeof(ObjectReferenceControl),
                 new PropertyMetadata(null));
 
-        private bool _SupressUserInputEvent = false;
+        /// <summary>
+        /// explicitly implement this for the framework and suppress the UserInput Event 
+        /// when using this.
+        /// </summary>
         Kistl.API.IDataObject IValueControl<Kistl.API.IDataObject>.Value
         {
             get { return (Kistl.API.IDataObject)GetValue(ValueProperty); }

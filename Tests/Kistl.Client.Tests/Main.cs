@@ -13,9 +13,9 @@ namespace Kistl.Client.Tests
         public static void Main(string[] args)
         {
             new SetUp().Init();
-            var test = new Kistl.GUI.Tests.ObjectListPresenterTests();
-            test.SetUp();
-            test.HandleValidUserInput();
+            var test = new Kistl.GUI.Renderer.WPF.Tests.ListValuesTests();
+            // test.SetUp();
+            test.TestInvalids();
         }
     }
 }

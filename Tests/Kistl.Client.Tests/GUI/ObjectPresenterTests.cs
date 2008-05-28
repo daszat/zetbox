@@ -84,7 +84,7 @@ namespace Kistl.GUI.Tests
             // TODO: recode this after arrival of Validation stuff
             Assert.AreEqual(IDataObjectValues.TestValues.Valids.Length, Widget.ItemsSource.Count, "the widget's ItemSource should contain exactly one entry for each item");
 
-            foreach (IDataObject ido in Values.Valids)
+            foreach (IDataObject ido in IDataObjectValues.TestValues.Valids)
             {
                 Assert.That(Widget.ItemsSource.Contains(ido), string.Format("cannot find entry '{0}' in ItemsSource", ido));
             }
@@ -128,7 +128,7 @@ namespace Kistl.GUI.Tests
                         TestObject.TestObjectListVisual,
                         Toolkit.TEST)),
                 Toolkit.TEST,
-                new ListValues<IDataObject>(IDataObjectValues.TestValues) { IsUnique = true, IsEmptyValid = true }
+                new ListValues<IDataObject>(IDataObjectValues.TestValues, true, true )
             )
         {
         }

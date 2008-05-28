@@ -17,7 +17,7 @@ namespace Kistl.GUI.Tests
         {
             get
             {
-                return new[] { "foo", "xss: <xss>", 
+                return new[] { null, "foo", "xss: <xss>", 
                     "'!\"§!$%!%`id`$(id)§&''''''''#%$/\\\"$%!°\"§!/%()( -- blah /* blubb */ // hallo",
                     "", "00012346789", "0", "0.0", "0.1", "0.002", "10.0e100", "0x120",
                     "...", "<xss>", "!'\"§!$§%&/(){}&amp;", "normal string",

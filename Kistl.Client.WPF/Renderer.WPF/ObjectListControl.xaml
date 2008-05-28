@@ -17,12 +17,10 @@
             </ToolBar>
             <ListView
                 x:Name="lst"
-                MinHeight="150">
-                <!-- 
-                ItemsSource="{Binding ElementName=ListCtrl, Path=ItemsSource}"
-                      MouseDoubleClick="lst_MouseDoubleClick"  
-                      SelectionChanged="lst_SelectionChanged"
-                      -->
+                MinHeight="150"
+                ItemsSource="{Binding ElementName=ListCtrl, Path=Value}"
+                SelectionChanged="lst_SelectionChanged"
+                >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
