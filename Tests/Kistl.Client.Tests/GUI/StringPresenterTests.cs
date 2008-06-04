@@ -11,9 +11,9 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
-    public sealed class StringValues : IValues<string>
+    public sealed class StringValues : ValuesAdapter<string>
     {
-        public string[] Valids
+        public override string[] Valids
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Kistl.GUI.Tests
                 };
             }
         }
-        public string[] Invalids { get { return new string[] { }; } }
+        public override string[] Invalids { get { return new string[] { }; } }
     }
 
     [TestFixture]

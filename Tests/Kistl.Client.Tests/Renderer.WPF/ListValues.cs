@@ -28,10 +28,10 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         public ListValues(IValues<TYPE> baseValues, bool isUnique, bool isEmptyValid)
         {
             IsUnique = isUnique;
-            IsEmptyValid = IsEmptyValid;
+            IsEmptyValid = isEmptyValid;
 
             BaseValues = baseValues;
-            Valids = GenerateLists(BaseValues.Valids, IsEmptyValid, IsUnique);
+            Valids = GenerateLists(BaseValues.Valids, IsUnique, IsEmptyValid);
 
             IList<IList<TYPE>> invalidResult = new List<IList<TYPE>>();
 
@@ -39,7 +39,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
             if (invalidValues.Count == 0)
             {
                 // call GenerateLists on empty Invalids array to pass IsEmptyValid
-                Invalids = GenerateLists(BaseValues.Invalids, !IsEmptyValid, IsUnique);
+                Invalids = GenerateLists(BaseValues.Invalids, IsUnique, !IsEmptyValid);
             }
             else
             {
@@ -47,7 +47,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
                 invalidEnumeration.MoveNext();
 
                 // generate valid Lists with one additional invalid item
-                Invalids = GenerateLists(BaseValues.Valids, true, IsUnique).Select(
+                Invalids = GenerateLists(BaseValues.Valids, IsUnique, true).Select(
                     delegate(IList<TYPE> l)
                     {
                         l.Add(invalidEnumeration.Current);
@@ -64,7 +64,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
 
         private static readonly int FIXED_SEMI_RANDOM_SEED = 23 * 42;
 
-        internal static IList<TYPE>[] GenerateLists(TYPE[] items, bool includeEmptyList, bool createUniqueListItems)
+        internal static IList<TYPE>[] GenerateLists(TYPE[] items, bool createUniqueListItems, bool includeEmptyList)
         {
             List<IList<TYPE>> result = new List<IList<TYPE>>();
 
@@ -109,6 +109,17 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         public IList<TYPE>[] Valids { get; private set; }
         public IList<TYPE>[] Invalids { get; private set; }
 
+        public bool IsValid(IList<TYPE> list)
+        {
+            if (list == null || list.Count == 0)
+                return IsEmptyValid;
+
+            if (IsUnique && list.Count != list.Distinct().Count())
+                return false;
+
+            return list.All(i => BaseValues.Valids.Contains(i));
+        }
+
         #endregion
 
     }
@@ -116,10 +127,13 @@ namespace Kistl.GUI.Renderer.WPF.Tests
     [TestFixture]
     public class ListValuesTests
     {
-        private ListValues<int> CreateListValues(bool isUnique, bool IsEmptyValid)
+        private ListValues<int> CreateListValues(bool isUnique, bool isEmptyValid)
         {
             var basic = new Values<int>() { Valids = new[] { 1, 2, 3, 4, 5 }, Invalids = new[] { -1, -2, -3, -4, -5 } };
-            return new ListValues<int>(basic, isUnique, IsEmptyValid);
+            ListValues<int> result = new ListValues<int>(basic, isUnique, isEmptyValid);
+            Assert.AreEqual(isUnique, result.IsUnique, "result should know right 'isUnique' Value");
+            Assert.AreEqual(isEmptyValid, result.IsEmptyValid, "result should know right 'IsEmptyValid' Value");
+            return result;
         }
 
         private class FakeRandom : Random
@@ -177,7 +191,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         private void TestListGeneration(bool isUnique, bool isEmptyValid)
         {
             int[] items = new[] { 10, 20, 30, 40 };
-            var lists = ListValues<int>.GenerateLists(items, isEmptyValid, isUnique);
+            var lists = ListValues<int>.GenerateLists(items, isUnique, isEmptyValid);
 
             if (isEmptyValid)
             {
@@ -277,6 +291,21 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         }
 
         [Test]
+        public void TestIsValid()
+        {
+            var test = CreateListValues(false, true);
+
+            foreach (var list in test.Valids)
+            {
+                Assert.That(test.IsValid(list), "ListValues should recognize valid values");
+            }
+            foreach (var list in test.Invalids)
+            {
+                Assert.That(!test.IsValid(list), "ListValues should recognize invalid values");
+            }
+        }
+
+        [Test]
         public void TestInvalids()
         {
             var test = CreateListValues(false, true);
@@ -285,6 +314,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
                 Assert.That(list.Any(item => test.BaseValues.Invalids.Contains(item)), "invalid entry X should contain at least one invalid item");
             }
         }
+
 
     }
 }

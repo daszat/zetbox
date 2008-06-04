@@ -16,14 +16,14 @@ using Kistl.GUI.Renderer.WPF.Tests;
 
 namespace Kistl.GUI.Tests
 {
-    public sealed class IDataObjectValues : IValues<IDataObject>
+    public sealed class IDataObjectValues : ValuesAdapter<IDataObject>
     {
         private IDataObjectValues() { }
         private static IDataObjectValues _Values = new IDataObjectValues();
         public static IDataObjectValues TestValues { get { return _Values; } }
 
-        public IDataObject[] Valids { get { return (IDataObject[])_Items.Clone(); } }
-        public IDataObject[] Invalids { get { return new IDataObject[] { }; } }
+        public override IDataObject[] Valids { get { return (IDataObject[])_Items.Clone(); } }
+        public override IDataObject[] Invalids { get { return new IDataObject[] { }; } }
 
         private IDataObject[] _Items = new[] {
             new TestObject() { ID = 2 },

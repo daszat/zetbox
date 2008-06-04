@@ -11,10 +11,10 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
-    public sealed class BoolValues : IValues<bool?>
+    public sealed class BoolValues : ValuesAdapter<bool?>
     {
-        public bool?[] Valids { get { return new bool?[] { true, false }; } }
-        public bool?[] Invalids { get { return new bool?[] { }; } }
+        public override bool?[] Valids { get { return new bool?[] { true, false }; } }
+        public override bool?[] Invalids { get { return new bool?[] { }; } }
     }
 
     [TestFixture]

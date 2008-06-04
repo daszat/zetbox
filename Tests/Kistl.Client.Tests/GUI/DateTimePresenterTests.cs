@@ -11,9 +11,9 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
-    public sealed class DateTimeValues : IValues<DateTime?>
+    public sealed class DateTimeValues : ValuesAdapter<DateTime?>
     {
-        public DateTime?[] Valids
+        public override DateTime?[] Valids
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Kistl.GUI.Tests
                 return result.ToArray();
             }
         }
-        public DateTime?[] Invalids { get { return new DateTime?[] { }; } }
+        public override DateTime?[] Invalids { get { return new DateTime?[] { }; } }
     }
 
     [TestFixture]

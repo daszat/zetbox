@@ -11,9 +11,9 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
-    public sealed class IntValues : IValues<int?>
+    public sealed class IntValues : ValuesAdapter<int?>
     {
-        public int?[] Valids
+        public override int?[] Valids
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Kistl.GUI.Tests
                 };
             }
         }
-        public int?[] Invalids { get { return new int?[] { }; } }
+        public override int?[] Invalids { get { return new int?[] { }; } }
     }
 
     [TestFixture]

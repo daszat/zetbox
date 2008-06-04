@@ -11,9 +11,9 @@ using Kistl.GUI.Mocks;
 
 namespace Kistl.GUI.Tests
 {
-    public sealed class DoubleValues : IValues<double?>
+    public sealed class DoubleValues : ValuesAdapter<double?>
     {
-        public double?[] Valids
+        public override double?[] Valids
         {
             get
             {
@@ -25,7 +25,7 @@ namespace Kistl.GUI.Tests
                 };
             }
         }
-        public double?[] Invalids { get { return new double?[] { }; } }
+        public override double?[] Invalids { get { return new double?[] { }; } }
     }
 
     [TestFixture]

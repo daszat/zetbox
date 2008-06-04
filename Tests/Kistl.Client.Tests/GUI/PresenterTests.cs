@@ -23,6 +23,20 @@ namespace Kistl.GUI.Tests
     {
         TYPE[] Valids { get; }
         TYPE[] Invalids { get; }
+        bool IsValid(TYPE item);
+    }
+
+    public class ValuesAdapter<TYPE> : IValues<TYPE>
+    {
+        #region IValues<TYPE> Members
+        public virtual TYPE[] Valids { get; protected set; }
+        public virtual TYPE[] Invalids { get; protected set; }
+
+        public virtual bool IsValid(TYPE item)
+        {
+            return Valids.Contains(item);
+        }
+        #endregion
     }
 
     public sealed class Values<TYPE> : IValues<TYPE>
@@ -30,6 +44,11 @@ namespace Kistl.GUI.Tests
         #region IValues<TYPE> Members
         public TYPE[] Valids { get; set; }
         public TYPE[] Invalids { get; set; }
+
+        public bool IsValid(TYPE item)
+        {
+            return Valids.Contains(item);
+        }
         #endregion
     }
 
@@ -285,12 +304,21 @@ namespace Kistl.GUI.Tests
             AssertWidgetHasValidValue();
 
             UserInput(null);
-            if (Values.Valids.Contains(null))
+            if (Values.IsValid(null))
             {
-                Assert.IsNull(GetObjectValue());
+                TYPE v = GetObjectValue();
+                if (v is System.Collections.ICollection)
+                {
+                    Assert.IsEmpty((System.Collections.ICollection)v, "valid null userinput should set an empty collection on the object");
+                }
+                else
+                {
+                    Assert.IsNull(v, "valid null userinput should set null value on the object");
+                }
                 AssertWidgetHasValidValue();
             }
-            else {
+            else
+            {
                 Assert.IsNotNull(GetObjectValue());
                 AssertWidgetHasInvalidValue();
             }
@@ -319,10 +347,21 @@ namespace Kistl.GUI.Tests
 
             foreach (TYPE value in Values.Invalids)
             {
+                if (value is IList<IDataObject>)
+                {
+                    IList<IDataObject> idol = (IList<IDataObject>)value;
+                    System.Console.Out.Write("{0}.HIUI: Testing List <", this.GetType());
+                    foreach (IDataObject ido in idol)
+                    {
+                        System.Console.Out.Write("{0},", ido);
+                    }
+                    System.Console.Out.WriteLine(">");
+
+                }
                 UserInput(value);
-                AssertWidgetHasInvalidValue();
-                Assert.AreEqual(original, GetObjectValue(), "Object should retain original value");
                 Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+                Assert.AreEqual(original, GetObjectValue(), "Object should retain original value");
+                AssertWidgetHasInvalidValue();
             }
 
             // After having invalid values set, 
