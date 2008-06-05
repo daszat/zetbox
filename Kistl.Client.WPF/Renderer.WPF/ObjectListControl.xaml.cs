@@ -155,7 +155,7 @@ namespace Kistl.GUI.Renderer.WPF
         /// <summary>
         /// exports the list's SelectionChanged Event for usage in the client
         /// </summary>
-        internal event SelectionChangedEventHandler SelectionChanged
+        public event SelectionChangedEventHandler SelectionChanged
         {
             add { lst.SelectionChanged += value; }
             remove { lst.SelectionChanged -= value; }
