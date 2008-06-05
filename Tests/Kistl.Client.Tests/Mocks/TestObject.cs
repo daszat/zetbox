@@ -20,6 +20,7 @@ namespace Kistl.Client.Mocks
             TestObjectList = new List<IDataObject>();
             TestObjectListDescriptor.AttachToContext(GlobalContext);
             TestObjectReferenceDescriptor.AttachToContext(GlobalContext);
+            TestBackReferenceDescriptor.AttachToContext(GlobalContext);
         }
 
         public static IKistlContext GlobalContext { get; set; }
@@ -287,6 +288,40 @@ namespace Kistl.Client.Mocks
                 ControlType = TestObjectListControl.Info.ControlType,
                 Property = TestObjectListDescriptor,
                 Description = "TestObjectList Visual",
+            };
+
+        #endregion
+
+        #region BackReference Properties
+
+        public IList<IDataObject> TestBackReference
+        {
+            get { return (IList<IDataObject>)GetValue(TestBackReferenceProperty); }
+            set { SetValue(TestBackReferenceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TestBackReference.
+        // This enables animation, styling, binding, etc...
+        public static readonly System.Windows.DependencyProperty TestBackReferenceProperty =
+            System.Windows.DependencyProperty.Register(
+                "TestBackReference", typeof(IList<IDataObject>),
+                typeof(TestObject), new System.Windows.PropertyMetadata(null));
+
+        public readonly static ObjectReferenceProperty TestBackReferenceDescriptor
+            = new MockObjectReferenceProperty()
+            {
+                PropertyName = "TestBackReference",
+                ReferenceObjectClass = TestObject.ObjectClass,
+                IsNullable = true,
+                IsList = true,
+            };
+
+        public readonly static Visual TestBackReferenceVisual
+            = new Visual()
+            {
+                ControlType = TestObjectListControl.Info.ControlType,
+                Property = TestBackReferenceDescriptor,
+                Description = "TestBackReference Visual",
             };
 
         #endregion
