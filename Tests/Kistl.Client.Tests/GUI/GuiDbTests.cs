@@ -100,6 +100,7 @@ namespace Kistl.GUI.Tests
         {
             IRenderer r = KistlGUIContext.CreateRenderer(Toolkit.TEST);
             Assert.IsInstanceOfType(typeof(TestRenderer), r, "KistlGUIContext.CreateRenderer(Toolkit.TEST) should return the TestRenderer");
+            Assert.AreEqual(Toolkit.TEST, r.Platform, "Renderer should know his Platform");
         }
 
     }

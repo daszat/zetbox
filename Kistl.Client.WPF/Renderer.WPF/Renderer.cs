@@ -13,6 +13,7 @@ namespace Kistl.GUI.Renderer.WPF
 {
     public class Renderer : BasicRenderer<Control, Control, ContentControl>
     {
+        public override Toolkit Platform { get { return Toolkit.WPF; } }
 
         protected override Control Setup(Control control)
         {

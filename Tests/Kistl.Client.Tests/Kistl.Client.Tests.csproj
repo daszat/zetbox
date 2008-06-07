@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\BasicControlTests.cs" />
+    <Compile Include="GUI\RendererTests.cs" />
     <Compile Include="GUI\ValueControlTests.cs" />
     <Compile Include="Integration\ObjectReferenceControlIntegration.cs" />
     <Compile Include="Main.cs" />

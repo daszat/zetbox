@@ -30,6 +30,11 @@ namespace Kistl.GUI.Renderer
         /// <param name="visual"></param>
         /// <returns></returns>
         object CreateControl(IDataObject obj, Visual visual);
+
+        /// <summary>
+        /// The platform of this Renderer
+        /// </summary>
+        Toolkit Platform { get; }
     }
 
     public abstract class BasicRenderer<CONTROL, PROPERTY, CONTAINER> : IRenderer
@@ -47,7 +52,7 @@ namespace Kistl.GUI.Renderer
         /// <returns></returns>
         public object CreateControl(IDataObject obj, Visual visual)
         {
-            var cInfo = KistlGUIContext.FindControlInfo(Toolkit.WPF, visual);
+            var cInfo = KistlGUIContext.FindControlInfo(Platform, visual);
             var pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
 
             var widget = KistlGUIContext.CreateControl(cInfo);
@@ -69,5 +74,7 @@ namespace Kistl.GUI.Renderer
 
         protected abstract CONTROL Setup(PROPERTY control);
         protected abstract CONTAINER Setup(CONTAINER widget, IList<CONTROL> list);
+
+        public abstract Toolkit Platform { get; }
     }
 }

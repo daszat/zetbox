@@ -10,7 +10,7 @@ using Kistl.GUI.Renderer;
 namespace Kistl.Client.Mocks
 {
 
-    public class TestRenderer : IRenderer
+    public class TestRenderer : BasicRenderer<object, object, object>
     {
         public readonly static ControlInfo Info
             = new ControlInfo()
@@ -22,26 +22,28 @@ namespace Kistl.Client.Mocks
                 ClassName = "Kistl.Client.Mocks.TestRenderer"
             };
 
-        #region IRenderer Members
+        public override Toolkit Platform { get { return Toolkit.TEST; } }
 
-        public void ShowMessage(string message)
+        public override void ShowMessage(string msg)
         {
             throw new NotImplementedException();
         }
 
-        public void ShowObject(IDataObject obj)
+        public override void ShowObject(IDataObject obj)
         {
             throw new NotImplementedException();
         }
 
-        public object CreateControl(IDataObject obj, Visual visual)
+        protected override object Setup(object control)
         {
-            throw new NotImplementedException();
+            return control;
         }
 
-        #endregion
+        protected override object Setup(object widget, IList<object> list)
+        {
+            return widget;
+        }
     }
-
 
     public class TestBoolControl : IValueControl<bool?>
     {
