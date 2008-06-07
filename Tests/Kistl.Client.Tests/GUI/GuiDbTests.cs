@@ -11,6 +11,7 @@ using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
+using Kistl.API;
 
 namespace Kistl.GUI.Tests
 {
@@ -130,5 +131,81 @@ namespace Kistl.GUI.Tests
                 Assert.AreEqual(d.VisualType, v.ControlType, "{0} should be displayed in a VisualType.{1}", d.Property, d.VisualType);
             }
         }
+
+        [Test]
+        [ExpectedException(ExceptionType = typeof(NotImplementedException))]
+        public void TestEnumeration()
+        {
+            Visual v = Visual.CreateDefaultVisual(new EnumerationProperty());
+        }
+
+        [Test]
+        [ExpectedException(ExceptionType = typeof(NotImplementedException))]
+        public void TestValueType()
+        {
+            Visual v = Visual.CreateDefaultVisual(new ValueTypeProperty());
+        }
+
+        [Test]
+        [ExpectedException(ExceptionType = typeof(InvalidCastException))]
+        public void TestFailure()
+        {
+            Visual v = Visual.CreateDefaultVisual(new BaseProperty());
+        }
+    }
+
+    [TestFixture]
+    public class TemplateTests
+    {
+        private Template t;
+
+        [SetUp]
+        public void SetUp()
+        {
+            t = new Template();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Assert.IsNotNull(t, "Tests should not remove 'v'");
+            t = null;
+        }
+
+        [Test]
+        public void TestProperties()
+        {
+            string name = "some display name";
+            t.DisplayName = name;
+            Assert.AreEqual(name, t.DisplayName, "Template.DisplayName should not munge its value");
+
+            ObjectType type = new ObjectType();
+            t.Type = type;
+            Assert.AreEqual(type, t.Type, "Template.Type should not munge its value");
+
+            TemplateUsage usage = TemplateUsage.EditControl;
+            t.Usage = usage;
+            Assert.AreEqual(usage, t.Usage, "Template.Usage should not munge its value");
+
+            Visual tree = new Visual();
+            t.VisualTree = tree;
+            Assert.AreEqual(tree, t.VisualTree, "Template.VisualTree should not munge its value");
+        }
+
+        [Test]
+        [Ignore("unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked")]
+        public void TestDefaultUnknownObjectType()
+        {
+            t = Template.DefaultTemplate(new ObjectType());
+        }
+
+
+        [Test]
+        [Ignore("unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked")]
+        public void TestDefaultsOther()
+        {
+            t = Template.DefaultTemplate(new ObjectType());
+        }
+
     }
 }

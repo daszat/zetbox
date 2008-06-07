@@ -20,6 +20,9 @@ namespace Kistl.GUI.DB
 
         public static Template DefaultTemplate(ObjectType objectType)
         {
+            if (objectType == null)
+                throw new ArgumentNullException("objectType", "Template.DefaultTemplate(objectType): need objectType to create Template");
+
             Template result = new Template()
             {
                 DisplayName = objectType.Classname,
