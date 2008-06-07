@@ -1,91 +1,91 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="E:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="143" failures="0" not-run="6" date="2008-06-07" time="12:08:45">
+<test-results name="E:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="144" failures="0" not-run="6" date="2008-06-07" time="12:16:46">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 6.0.6000.0" platform="Win32NT" cwd="E:\Projekte\Kistl\Tests\Kistl.Client.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="E:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="True" time="3.959" asserts="0">
+  <test-suite name="E:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="True" time="3.986" asserts="0">
     <results>
-      <test-suite name="E:\Projekte\Kistl\Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.exe" success="True" time="3.930" asserts="0">
+      <test-suite name="E:\Projekte\Kistl\Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.exe" success="True" time="3.959" asserts="0">
         <results>
-          <test-suite name="Kistl" success="True" time="3.312" asserts="0">
+          <test-suite name="Kistl" success="True" time="3.382" asserts="0">
             <results>
-              <test-suite name="GUI" success="True" time="3.311" asserts="0">
+              <test-suite name="GUI" success="True" time="3.382" asserts="0">
                 <results>
-                  <test-suite name="Integration" success="True" time="2.274" asserts="0">
+                  <test-suite name="Integration" success="True" time="2.351" asserts="0">
                     <results>
-                      <test-suite name="WPF" success="True" time="2.272" asserts="0">
+                      <test-suite name="WPF" success="True" time="2.347" asserts="0">
                         <results>
-                          <test-suite name="ObjectReferenceControlIntegrationTests" success="True" time="2.271" asserts="2">
+                          <test-suite name="ObjectReferenceControlIntegrationTests" success="True" time="2.347" asserts="2">
                             <results>
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleInvalidUserInput" executed="True" success="True" time="2.108" asserts="18" />
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNoUserInput" executed="True" success="True" time="0.006" asserts="10" />
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNullUserInput" executed="True" success="True" time="0.004" asserts="17" />
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleProgrammaticChange" executed="True" success="True" time="0.004" asserts="68" />
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleValidUserInput" executed="True" success="True" time="0.003" asserts="68" />
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleInvalidUserInput" executed="True" success="True" time="2.168" asserts="18" />
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNoUserInput" executed="True" success="True" time="0.008" asserts="10" />
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNullUserInput" executed="True" success="True" time="0.005" asserts="17" />
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleProgrammaticChange" executed="True" success="True" time="0.010" asserts="68" />
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleValidUserInput" executed="True" success="True" time="0.004" asserts="68" />
                               <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.ReInit" executed="True" success="True" time="0.004" asserts="0" />
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.004" asserts="11" />
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.007" asserts="11" />
                             </results>
                           </test-suite>
                         </results>
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="Renderer" success="True" time="0.783" asserts="0">
+                  <test-suite name="Renderer" success="True" time="0.843" asserts="0">
                     <results>
-                      <test-suite name="WPF" success="True" time="0.776" asserts="0">
+                      <test-suite name="WPF" success="True" time="0.836" asserts="0">
                         <results>
-                          <test-suite name="Tests" success="True" time="0.774" asserts="0">
+                          <test-suite name="Tests" success="True" time="0.835" asserts="0">
                             <results>
-                              <test-suite name="BoolControlTests" success="True" time="0.066" asserts="2">
+                              <test-suite name="BoolControlTests" success="True" time="0.072" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestDescription" executed="True" success="True" time="0.023" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestFieldSize" executed="True" success="True" time="0.015" asserts="11" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestIsValidValue" executed="True" success="True" time="0.007" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestDescription" executed="True" success="True" time="0.026" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestFieldSize" executed="True" success="True" time="0.016" asserts="11" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestIsValidValue" executed="True" success="True" time="0.008" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestSetUpCorrect" executed="True" success="True" time="0.001" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestShortLabel" executed="True" success="True" time="0.003" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestUserInput" executed="True" success="True" time="0.008" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestValueProgrammatically" executed="True" success="True" time="0.002" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestUserInput" executed="True" success="True" time="0.010" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestValueProgrammatically" executed="True" success="True" time="0.003" asserts="5" />
                                 </results>
                               </test-suite>
-                              <test-suite name="DateTimeControlTests" success="True" time="0.177" asserts="2">
+                              <test-suite name="DateTimeControlTests" success="True" time="0.235" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestDescription" executed="True" success="True" time="0.150" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestDescription" executed="True" success="True" time="0.207" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestFieldSize" executed="True" success="True" time="0.002" asserts="11" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestIsValidValue" executed="True" success="True" time="0.003" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestSetUpCorrect" executed="True" success="True" time="0.001" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestShortLabel" executed="True" success="True" time="0.001" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestUserInput" executed="True" success="True" time="0.012" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestUserInput" executed="True" success="True" time="0.016" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestValueProgrammatically" executed="True" success="True" time="0.002" asserts="15" />
                                 </results>
                               </test-suite>
-                              <test-suite name="DoubleControlTests" success="True" time="0.305" asserts="2">
+                              <test-suite name="DoubleControlTests" success="True" time="0.309" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestDescription" executed="True" success="True" time="0.211" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestFieldSize" executed="True" success="True" time="0.002" asserts="11" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestIsValidValue" executed="True" success="True" time="0.002" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestDescription" executed="True" success="True" time="0.221" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestFieldSize" executed="True" success="True" time="0.001" asserts="11" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestIsValidValue" executed="True" success="True" time="0.003" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestSetUpCorrect" executed="True" success="True" time="0.001" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestShortLabel" executed="True" success="True" time="0.001" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestUserInput" executed="True" success="True" time="0.078" asserts="33" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestUserInput" executed="True" success="True" time="0.073" asserts="33" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestValueProgrammatically" executed="True" success="True" time="0.004" asserts="33" />
                                 </results>
                               </test-suite>
-                              <test-suite name="IntControlTests" success="True" time="0.026" asserts="2">
+                              <test-suite name="IntControlTests" success="True" time="0.029" asserts="2">
                                 <results>
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestDescription" executed="True" success="True" time="0.003" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestFieldSize" executed="True" success="True" time="0.001" asserts="11" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestIsValidValue" executed="True" success="True" time="0.002" asserts="15" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestSetUpCorrect" executed="True" success="True" time="0.000" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestSetUpCorrect" executed="True" success="True" time="0.001" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestShortLabel" executed="True" success="True" time="0.001" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestUserInput" executed="True" success="True" time="0.009" asserts="35" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestValueProgrammatically" executed="True" success="True" time="0.003" asserts="35" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestUserInput" executed="True" success="True" time="0.011" asserts="35" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestValueProgrammatically" executed="True" success="True" time="0.004" asserts="35" />
                                 </results>
                               </test-suite>
-                              <test-suite name="ListValuesTests" success="True" time="0.050" asserts="0">
+                              <test-suite name="ListValuesTests" success="True" time="0.049" asserts="0">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestInvalids" executed="True" success="True" time="0.021" asserts="8" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestInvalids" executed="True" success="True" time="0.024" asserts="8" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestIsValid" executed="True" success="True" time="0.003" asserts="14" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationCore" executed="True" success="True" time="0.014" asserts="7" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationWithEmpty" executed="True" success="True" time="0.001" asserts="37" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationWithEmpty" executed="True" success="True" time="0.002" asserts="37" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationWithoutEmpty" executed="True" success="True" time="0.001" asserts="37" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestUniqueListGenerationCore" executed="True" success="True" time="0.001" asserts="6" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestUniqueListGenerationWithEmpty" executed="True" success="True" time="0.000" asserts="22" />
@@ -93,17 +93,17 @@
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestValids" executed="True" success="True" time="0.001" asserts="48" />
                                 </results>
                               </test-suite>
-                              <test-suite name="ObjectListControlTests" success="True" time="0.082" asserts="2">
+                              <test-suite name="ObjectListControlTests" success="True" time="0.076" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestDescription" executed="True" success="True" time="0.033" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestFieldSize" executed="True" success="True" time="0.001" asserts="11" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestIsValidValue" executed="True" success="True" time="0.002" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestDescription" executed="True" success="True" time="0.029" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestFieldSize" executed="True" success="True" time="0.002" asserts="11" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestIsValidValue" executed="True" success="True" time="0.003" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestItemsSource" executed="False">
                                     <reason>
                                       <message><![CDATA[unimplemented]]></message>
                                     </reason>
                                   </test-case>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestListboxProgrammatically" executed="True" success="True" time="0.012" asserts="23" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestListboxProgrammatically" executed="True" success="True" time="0.011" asserts="23" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestListboxUserInput" executed="True" success="True" time="0.003" asserts="23" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestNullValue" executed="True" success="True" time="0.001" asserts="1" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestObjectType" executed="False">
@@ -111,19 +111,19 @@
                                       <message><![CDATA[unimplemented, needs IValues<ObjectType>, should go to Reference*Tests base class]]></message>
                                     </reason>
                                   </test-case>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestSetUpCorrect" executed="True" success="True" time="0.001" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestSetUpCorrect" executed="True" success="True" time="0.002" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestShortLabel" executed="True" success="True" time="0.001" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestUserInput" executed="True" success="True" time="0.003" asserts="15" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestValueProgrammatically" executed="True" success="True" time="0.003" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestValueProgrammatically" executed="True" success="True" time="0.004" asserts="15" />
                                 </results>
                               </test-suite>
-                              <test-suite name="ObjectReferenceControlTests" success="True" time="0.027" asserts="2">
+                              <test-suite name="ObjectReferenceControlTests" success="True" time="0.037" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestComboboxProgrammatically" executed="True" success="True" time="0.003" asserts="21" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestComboboxProgrammatically" executed="True" success="True" time="0.004" asserts="21" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestComboboxUserInput" executed="True" success="True" time="0.003" asserts="21" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestDescription" executed="True" success="True" time="0.002" asserts="6" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestFieldSize" executed="True" success="True" time="0.002" asserts="12" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestIsValidValue" executed="True" success="True" time="0.001" asserts="16" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestIsValidValue" executed="True" success="True" time="0.002" asserts="16" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestItemsSource" executed="False">
                                     <reason>
                                       <message><![CDATA[unimplemented]]></message>
@@ -136,18 +136,18 @@
                                   </test-case>
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestSetUpCorrect" executed="True" success="True" time="0.002" asserts="6" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestShortLabel" executed="True" success="True" time="0.002" asserts="6" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestUserInput" executed="True" success="True" time="0.002" asserts="14" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestUserInput" executed="True" success="True" time="0.003" asserts="14" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestValueProgrammatically" executed="True" success="True" time="0.002" asserts="14" />
                                 </results>
                               </test-suite>
-                              <test-suite name="StringControlTests" success="True" time="0.017" asserts="2">
+                              <test-suite name="StringControlTests" success="True" time="0.016" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestDescription" executed="True" success="True" time="0.002" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestDescription" executed="True" success="True" time="0.003" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestFieldSize" executed="True" success="True" time="0.001" asserts="11" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestIsValidValue" executed="True" success="True" time="0.001" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestSetUpCorrect" executed="True" success="True" time="0.001" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestShortLabel" executed="True" success="True" time="0.001" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestUserInput" executed="True" success="True" time="0.002" asserts="35" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestUserInput" executed="True" success="True" time="0.003" asserts="35" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestValueProgrammatically" executed="True" success="True" time="0.002" asserts="35" />
                                 </results>
                               </test-suite>
@@ -157,9 +157,9 @@
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="Tests" success="True" time="0.217" asserts="0">
+                  <test-suite name="Tests" success="True" time="0.169" asserts="0">
                     <results>
-                      <test-suite name="BackReferencePresenterTests" success="True" time="0.022" asserts="2">
+                      <test-suite name="BackReferencePresenterTests" success="True" time="0.018" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.008" asserts="18" />
                           <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="10" />
@@ -167,61 +167,62 @@
                           <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.001" asserts="78" />
                           <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.HandleValidUserInput" executed="True" success="True" time="0.001" asserts="78" />
                           <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.ReInit" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.001" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="BoolPresenterTests" success="True" time="0.025" asserts="2">
+                      <test-suite name="BoolPresenterTests" success="True" time="0.024" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.010" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.003" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.011" asserts="6" />
+                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.004" asserts="3" />
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.002" asserts="10" />
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.002" asserts="10" />
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.ReInit" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.001" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="DateTimePresenterTests" success="True" time="0.020" asserts="2">
+                      <test-suite name="DateTimePresenterTests" success="True" time="0.018" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.008" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.002" asserts="3" />
-                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="5" />
+                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.009" asserts="6" />
+                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.001" asserts="30" />
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleValidUserInput" executed="True" success="True" time="0.001" asserts="30" />
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.ReInit" executed="True" success="True" time="0.001" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.001" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="DoublePresenterTests" success="True" time="0.024" asserts="2">
+                      <test-suite name="DoublePresenterTests" success="True" time="0.017" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.012" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.002" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.008" asserts="6" />
+                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="3" />
                           <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="5" />
-                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.001" asserts="66" />
+                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.002" asserts="66" />
                           <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleValidUserInput" executed="True" success="True" time="0.001" asserts="66" />
                           <test-case name="Kistl.GUI.Tests.DoublePresenterTests.ReInit" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.001" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="GuiDbTests" success="True" time="0.021" asserts="2">
+                      <test-suite name="GuiDbTests" success="True" time="0.015" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoInfo" executed="True" success="True" time="0.002" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoObject" executed="True" success="True" time="0.001" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoVisual" executed="True" success="True" time="0.001" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoWidget" executed="True" success="True" time="0.001" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.FindControlFailNoVisualType" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.FindPresenterFailNoProperty" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.FindPresenterFailNoVisual" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.ReInit" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestFindControlByVisual" executed="True" success="True" time="0.001" asserts="2" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestFindPresenter" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.FindPresenterFailNoProperty" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.FindPresenterFailNoVisual" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestCreateRenderer" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestFindControlByVisual" executed="True" success="True" time="0.000" asserts="2" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestFindPresenter" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="IntPresenterTests" success="True" time="0.019" asserts="2">
+                      <test-suite name="IntPresenterTests" success="True" time="0.017" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.008" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.002" asserts="3" />
                           <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.001" asserts="70" />
                           <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.001" asserts="70" />
@@ -229,21 +230,21 @@
                           <test-case name="Kistl.GUI.Tests.IntPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.001" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectListPresenterTests" success="True" time="0.017" asserts="2">
+                      <test-suite name="ObjectListPresenterTests" success="True" time="0.016" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.003" asserts="18" />
                           <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="10" />
-                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.003" asserts="17" />
-                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.000" asserts="78" />
+                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="17" />
+                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.005" asserts="78" />
                           <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.001" asserts="78" />
                           <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.ReInit" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.001" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectReferencePresenterTests" success="True" time="0.012" asserts="2">
+                      <test-suite name="ObjectReferencePresenterTests" success="True" time="0.009" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.002" asserts="18" />
-                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="10" />
+                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="10" />
                           <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="17" />
                           <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.001" asserts="68" />
                           <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleValidUserInput" executed="True" success="True" time="0.001" asserts="68" />
@@ -251,18 +252,18 @@
                           <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="StringPresenterTests" success="True" time="0.012" asserts="2">
+                      <test-suite name="StringPresenterTests" success="True" time="0.008" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.003" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="4" />
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.001" asserts="5" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.002" asserts="6" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.001" asserts="4" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.000" asserts="70" />
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.001" asserts="70" />
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.000" asserts="70" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.ReInit" executed="True" success="True" time="0.001" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.StringPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.001" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="TemplateTests" success="True" time="0.004" asserts="0">
+                      <test-suite name="TemplateTests" success="True" time="0.003" asserts="0">
                         <results>
                           <test-case name="Kistl.GUI.Tests.TemplateTests.TestDefaultsOther" executed="False">
                             <reason>
@@ -274,14 +275,14 @@
                               <message><![CDATA[unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.TemplateTests.TestProperties" executed="True" success="True" time="0.001" asserts="5" />
+                          <test-case name="Kistl.GUI.Tests.TemplateTests.TestProperties" executed="True" success="True" time="0.002" asserts="5" />
                         </results>
                       </test-suite>
-                      <test-suite name="VisualTests" success="True" time="0.015" asserts="0">
+                      <test-suite name="VisualTests" success="True" time="0.009" asserts="0">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.VisualTests.TestDefaults" executed="True" success="True" time="0.003" asserts="9" />
+                          <test-case name="Kistl.GUI.Tests.VisualTests.TestDefaults" executed="True" success="True" time="0.004" asserts="9" />
                           <test-case name="Kistl.GUI.Tests.VisualTests.TestEnumeration" executed="True" success="True" time="0.001" asserts="1" />
-                          <test-case name="Kistl.GUI.Tests.VisualTests.TestFailure" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="Kistl.GUI.Tests.VisualTests.TestFailure" executed="True" success="True" time="0.001" asserts="1" />
                           <test-case name="Kistl.GUI.Tests.VisualTests.TestProperties" executed="True" success="True" time="0.001" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.VisualTests.TestValueType" executed="True" success="True" time="0.001" asserts="1" />
                         </results>

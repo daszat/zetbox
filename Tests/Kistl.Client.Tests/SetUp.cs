@@ -35,6 +35,7 @@ public class SetUp
         ControlInfo.Implementations.Add(TestDoubleControl.Info);
         ControlInfo.Implementations.Add(TestIntControl.Info);
         ControlInfo.Implementations.Add(TestStringControl.Info);
+        ControlInfo.Implementations.Add(TestRenderer.Info);
 
     }
 }

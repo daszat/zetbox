@@ -12,6 +12,7 @@ using Kistl.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
 using Kistl.API;
+using Kistl.GUI.Renderer;
 
 namespace Kistl.GUI.Tests
 {
@@ -92,6 +93,13 @@ namespace Kistl.GUI.Tests
             var ci = KistlGUIContext.FindControlInfo(tk, Visual);
             Assert.AreEqual(tk, ci.Platform, "FindControlInfo should return matching ControlInfo: Platform");
             Assert.AreEqual(Visual.ControlType, ci.ControlType, "FindControlInfo should return matching ControlInfo: ControlType");
+        }
+
+        [Test]
+        public void TestCreateRenderer()
+        {
+            IRenderer r = KistlGUIContext.CreateRenderer(Toolkit.TEST);
+            Assert.IsInstanceOfType(typeof(TestRenderer), r, "KistlGUIContext.CreateRenderer(Toolkit.TEST) should return the TestRenderer");
         }
 
     }
@@ -183,6 +191,7 @@ namespace Kistl.GUI.Tests
         {
             Visual v = Visual.CreateDefaultVisual(new BaseProperty());
         }
+
     }
 
     [TestFixture]

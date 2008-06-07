@@ -5,54 +5,43 @@ using System.Text;
 using Kistl.GUI.DB;
 using Kistl.GUI;
 using Kistl.API;
+using Kistl.GUI.Renderer;
 
 namespace Kistl.Client.Mocks
 {
-#if false
-    public class TestBackReferenceControl : IObjectListControl
-    {
-        public TestBackReferenceControl()
-        {
-            Description = "TestBackReferenceControl Description";
-            ShortLabel = "TBRC ShortLabel";
-            Size = FieldSize.Full;
-            HasValidValue = true;
-        }
 
+    public class TestRenderer : IRenderer
+    {
         public readonly static ControlInfo Info
             = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
-                ControlType = VisualType.ObjectList,
+                ControlType = VisualType.Renderer,
                 Container = false,
                 AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
-                ClassName = "Kistl.Client.Mocks.TestBackReferenceControl"
+                ClassName = "Kistl.Client.Mocks.TestRenderer"
             };
 
+        #region IRenderer Members
 
-    #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-
-    #endregion
-
-    #region IBackReferenceControl Members
-
-        public event EventHandler UserInput;
-        public IList<IDataObject> Value { get; set; }
-
-        public bool HasValidValue { get; set; }
-        public void FlagValidity(bool valid)
+        public void ShowMessage(string message)
         {
-            HasValidValue = valid;
+            throw new NotImplementedException();
         }
 
-    #endregion
+        public void ShowObject(IDataObject obj)
+        {
+            throw new NotImplementedException();
+        }
 
+        public object CreateControl(IDataObject obj, Visual visual)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
-#endif
+
 
     public class TestBoolControl : IValueControl<bool?>
     {
