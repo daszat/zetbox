@@ -60,7 +60,7 @@ namespace Kistl.GUI.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindPresenterFailNoVisual()
         {
-            KistlGUIContext.FindPresenterInfo(null, typeof(IDataObject));
+            KistlGUIContext.FindPresenterInfo(null, typeof(StringProperty));
         }
 
         [Test]
@@ -68,6 +68,30 @@ namespace Kistl.GUI.Tests
         public void FindPresenterFailNoProperty()
         {
             KistlGUIContext.FindPresenterInfo(Visual, null);
+        }
+
+        [Test]
+        public void TestFindPresenter()
+        {
+            var pi = KistlGUIContext.FindPresenterInfo(Visual, typeof(StringProperty));
+            Assert.AreEqual(Visual.ControlType, pi.Control, "FindPresenterInfo should return matching PresenterInfo: ControlType");
+            Assert.AreEqual(typeof(StringProperty), pi.SourceType, "FindPresenterInfo should return matching PresenterInfo: SourceType");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindControlFailNoVisualType()
+        {
+            KistlGUIContext.FindControlInfo(Toolkit.TEST, null);
+        }
+
+        [Test]
+        public void TestFindControlByVisual()
+        {
+            Toolkit tk = Toolkit.TEST;
+            var ci = KistlGUIContext.FindControlInfo(tk, Visual);
+            Assert.AreEqual(tk, ci.Platform, "FindControlInfo should return matching ControlInfo: Platform");
+            Assert.AreEqual(Visual.ControlType, ci.ControlType, "FindControlInfo should return matching ControlInfo: ControlType");
         }
 
     }

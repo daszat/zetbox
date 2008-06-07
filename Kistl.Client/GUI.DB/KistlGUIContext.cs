@@ -15,13 +15,16 @@ namespace Kistl.GUI.DB
 
         public static ControlInfo FindControlInfo(Toolkit platform, Visual visual)
         {
+            if (visual == null)
+                throw new ArgumentNullException("visual", "KistlGUIContext.FindControlInfo(platform, visual): visual must not be null");
+
             return FindControlInfo(platform, visual.ControlType);
         }
 
-        private static ControlInfo FindControlInfo(Toolkit platform, VisualType name)
+        private static ControlInfo FindControlInfo(Toolkit platform, VisualType type)
         {
             return (from ci in ControlInfo.Implementations
-                    where ci.ControlType == name
+                    where ci.ControlType == type
                         && ci.Platform == platform
                     select ci).Single();
         }
