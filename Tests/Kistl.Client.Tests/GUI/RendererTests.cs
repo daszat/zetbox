@@ -13,7 +13,7 @@ namespace Kistl.GUI.Tests
     public class RendererTests
     {
         [Test]
-        public void TestCreateObject()
+        public void TestCreateControl()
         {
             TestRenderer r = new TestRenderer();
             Assert.AreEqual(Toolkit.TEST, r.Platform, "TestRenderer.Platform should be Toolkit.TEST");
@@ -21,6 +21,16 @@ namespace Kistl.GUI.Tests
             object c = r.CreateControl(o, TestObject.TestStringVisual);
             Assert.IsInstanceOfType(typeof(IValueControl<String>), c, "TestStringVisual control should be of type IValueControl<String>");
             Assert.IsInstanceOfType(typeof(TestStringControl), c, "TestStringVisual control should be of type TestStringControl");
+        }
+
+        [Test]
+        public void TestCreateObjectControl()
+        {
+            TestRenderer r = new TestRenderer();
+            TestObject o = new TestObject();
+            object c = r.CreateControl(o, new Visual() { ControlType = VisualType.Object, Description = "The whole Object" });
+            Assert.IsInstanceOfType(typeof(IObjectControl), c, "TestStringVisual control should be of type IObjectControl");
+            // Assert.IsInstanceOfType(typeof(TestObjectControl), c, "TestStringVisual control should be of type TestObjectControl");
         }
     }
 }

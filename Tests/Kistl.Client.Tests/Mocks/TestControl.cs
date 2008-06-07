@@ -45,6 +45,36 @@ namespace Kistl.Client.Mocks
         }
     }
 
+    public class TestObjectControl : IObjectControl
+    {
+        public readonly static ControlInfo Info
+          = new ControlInfo()
+          {
+              Platform = Toolkit.TEST,
+              ControlType = VisualType.Object,
+              Container = false,
+              AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+              ClassName = "Kistl.Client.Mocks.TestObjectControl"
+          };
+
+        #region IObjectControl Members
+
+        public IDataObject Value { get; set; }
+
+        public event EventHandler UserInput;
+
+        #endregion
+
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+
+        #endregion
+
+    }
+
     public class TestBoolControl : IValueControl<bool?>
     {
         public TestBoolControl()

@@ -53,7 +53,15 @@ namespace Kistl.GUI.Renderer
         public object CreateControl(IDataObject obj, Visual visual)
         {
             var cInfo = KistlGUIContext.FindControlInfo(Platform, visual);
-            var pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
+            PresenterInfo pInfo = null;
+            if (visual.Property == null && visual.ControlType == VisualType.Object)
+            {
+                pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IDataObject));
+            }
+            else
+            {
+                pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
+            }
 
             var widget = KistlGUIContext.CreateControl(cInfo);
             

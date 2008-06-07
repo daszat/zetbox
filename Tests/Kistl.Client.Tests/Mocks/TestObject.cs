@@ -383,10 +383,7 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public ObjectType Type
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public ObjectType Type { get { return new ObjectType(this.GetType()); } }
 
         #endregion
 
