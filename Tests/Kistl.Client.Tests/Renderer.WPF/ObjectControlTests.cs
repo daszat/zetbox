@@ -79,8 +79,21 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         public void TestItemsSource() { }
 
         [Test]
-        [Ignore("unimplemented, needs IValues<ObjectType>, should go to Reference*Tests base class")]
-        public void TestObjectType() { }
+        public void TestObjectType()
+        {
+            TestProperty<ObjectType>(
+                w => w.ObjectType, (w, v) => w.ObjectType = v,
+                new Values<ObjectType>()
+                {
+                    Valids = new[] {
+                        new ObjectType(typeof(String)), 
+                        new ObjectType(typeof(TestStringControl)),
+                        new ObjectType(typeof(StringProperty)) 
+                    }
+                },
+                AssertThatNoEventsFired
+                );
+        }
     }
 
     [TestFixture]
@@ -152,8 +165,21 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         public void TestItemsSource() { }
 
         [Test]
-        [Ignore("unimplemented, needs IValues<ObjectType>, should go to Reference*Tests base class")]
-        public void TestObjectType() { }
+        public void TestObjectType()
+        {
+            TestProperty<ObjectType>(
+                w => w.ObjectType, (w, v) => w.ObjectType = v,
+                new Values<ObjectType>()
+                {
+                    Valids = new[] {
+                        new ObjectType(typeof(String)), 
+                        new ObjectType(typeof(TestStringControl)),
+                        new ObjectType(typeof(StringProperty)) 
+                    }
+                },
+                AssertThatNoEventsFired
+                );
+        }
     }
 
 

@@ -44,17 +44,19 @@ namespace Kistl.GUI.Renderer.WPF
 
         #region IReferenceControl<IList<IDataObject>> Members
 
+
+
         public Kistl.API.ObjectType ObjectType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return (Kistl.API.ObjectType )GetValue(ObjectTypeProperty); }
+            set { SetValue(ObjectTypeProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ObjectTypeProperty =
+            DependencyProperty.Register("ObjectType", typeof(Kistl.API.ObjectType ), typeof(ObjectListControl), new PropertyMetadata(null));
+
+
 
         public IList<Kistl.API.IDataObject> ItemsSource
         {
