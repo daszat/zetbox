@@ -73,7 +73,6 @@
     <Compile Include="Renderer.WPF\ObjectControlTests.cs" />
     <Compile Include="Renderer.WPF\TestInSTAThread.cs" />
     <Compile Include="SetUp.cs" />
-    <Compile Include="GUI\BackReferencePresenterTests.cs" />
     <Compile Include="GUI\BoolPresenterTests.cs" />
     <Compile Include="GUI\DateTimePresenterTests.cs" />
     <Compile Include="GUI\DoublePresenterTests.cs" />

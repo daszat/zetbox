@@ -30,7 +30,6 @@ public class SetUp
 
         ControlInfo.Implementations.Add(TestObjectReferenceControl.Info);
         ControlInfo.Implementations.Add(TestObjectListControl.Info);
-        // ControlInfo.Implementations.Add(TestBackReferenceControl.Info);
         ControlInfo.Implementations.Add(TestBoolControl.Info);
         ControlInfo.Implementations.Add(TestDateTimeControl.Info);
         ControlInfo.Implementations.Add(TestDoubleControl.Info);

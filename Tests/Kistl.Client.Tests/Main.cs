@@ -13,7 +13,7 @@ namespace Kistl.Client.Tests
         public static void Main(string[] args)
         {
             new SetUp().Init();
-            var test = new Kistl.GUI.Tests.ObjectListPresenterTests();
+            var test = new Kistl.GUI.Tests.BackReferencePresenterTests();
             test.SetUp();
             test.HandleNullUserInput();
         }

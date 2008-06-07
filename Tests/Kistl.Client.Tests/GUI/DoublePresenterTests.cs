@@ -5,6 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
+using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
@@ -35,6 +36,7 @@ namespace Kistl.GUI.Tests
             : base(
                 new PresenterHarness<TestObject, TestDoubleControl, DoublePresenter>(
                     new TestObjectHarness(),
+                    typeof(DoubleProperty),
                     new ControlHarness<TestDoubleControl>(TestObject.TestDoubleVisual, Toolkit.TEST)),
                 new DoubleValues())
         { }

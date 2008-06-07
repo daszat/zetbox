@@ -30,10 +30,12 @@ namespace Kistl.GUI.DB
                     select ci).Single();
         }
 
-        public static PresenterInfo FindPresenterInfo(Visual visual)
+        public static PresenterInfo FindPresenterInfo(Visual visual, Type sourceType)
         {
             return (from pi in PresenterInfo.Implementations
-                    where pi.Control == visual.ControlType
+                    where 
+                        pi.Control == visual.ControlType
+                        && pi.SourceType == sourceType
                     select pi).Single();
         }
 
@@ -140,29 +142,35 @@ namespace Kistl.GUI.DB
         public VisualType Control { get; set; }
         public string AssemblyName { get; set; }
         public string ClassName { get; set; }
+        /// <summary>
+        /// The Type of the object that is presented
+        /// </summary>
+        public Type SourceType { get; set; }
 
         public static IList<PresenterInfo> Implementations = new List<PresenterInfo>(new[] {
             // non-property presenters
-            new PresenterInfo() { Control = VisualType.Object,
+            new PresenterInfo() { Control = VisualType.Object, SourceType = typeof(IDataObject),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectPresenter" },
-            new PresenterInfo() { Control = VisualType.PropertyGroup,
+            new PresenterInfo() { Control = VisualType.PropertyGroup, // SourceType = typeof(GroupProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.GroupPresenter" },
 
             // property presenters
-            new PresenterInfo() { Control = VisualType.ObjectReference,
+            new PresenterInfo() { Control = VisualType.ObjectReference, SourceType = typeof(ObjectReferenceProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectReferencePresenter" },
-            new PresenterInfo() { Control = VisualType.ObjectList,
+            new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(ObjectReferenceProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectListPresenter" },
+            new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(BackReferenceProperty),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BackReferencePresenter" },
 
-            new PresenterInfo() { Control = VisualType.Boolean,
+            new PresenterInfo() { Control = VisualType.Boolean, SourceType = typeof(BoolProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BoolPresenter" },
-            new PresenterInfo() { Control = VisualType.DateTime,
+            new PresenterInfo() { Control = VisualType.DateTime, SourceType = typeof(DateTimeProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DateTimePresenter" },
-            new PresenterInfo() { Control = VisualType.Double,
+            new PresenterInfo() { Control = VisualType.Double, SourceType = typeof(DoubleProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DoublePresenter" },
-            new PresenterInfo() { Control = VisualType.Integer,
+            new PresenterInfo() { Control = VisualType.Integer, SourceType = typeof(IntProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.IntPresenter" },
-            new PresenterInfo() { Control = VisualType.String,
+            new PresenterInfo() { Control = VisualType.String, SourceType = typeof(StringProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.StringPresenter" },
         });
 

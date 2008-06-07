@@ -16,8 +16,9 @@ namespace Kistl.Client.Mocks
         {
             Context = GlobalContext;
 
-            // TestBackReference = new List<IDataObject>();
+            TestBackReference = new List<IDataObject>();
             TestObjectList = new List<IDataObject>();
+
             TestObjectListDescriptor.AttachToContext(GlobalContext);
             TestObjectReferenceDescriptor.AttachToContext(GlobalContext);
             TestBackReferenceDescriptor.AttachToContext(GlobalContext);
@@ -307,13 +308,10 @@ namespace Kistl.Client.Mocks
                 "TestBackReference", typeof(IList<IDataObject>),
                 typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
-        public readonly static ObjectReferenceProperty TestBackReferenceDescriptor
-            = new MockObjectReferenceProperty()
+        public readonly static BackReferenceProperty TestBackReferenceDescriptor
+            = new MockBackReferenceProperty()
             {
                 PropertyName = "TestBackReference",
-                ReferenceObjectClass = TestObject.ObjectClass,
-                IsNullable = true,
-                IsList = true,
             };
 
         public readonly static Visual TestBackReferenceVisual
@@ -447,6 +445,21 @@ namespace Kistl.Client.Mocks
         public override string ToString()
         {
             return "This is a MockObjectReferenceProperty";
+        }
+
+    }
+
+    internal class MockBackReferenceProperty : BackReferenceProperty
+    {
+
+        public override string GetDataType()
+        {
+            return "Kistl.Client.Mocks.MockBackReferenceProperty";
+        }
+
+        public override string ToString()
+        {
+            return "This is a MockBackReferenceProperty";
         }
 
     }

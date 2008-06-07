@@ -5,6 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
+using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
@@ -38,6 +39,7 @@ namespace Kistl.GUI.Tests
             : base(
                 new PresenterHarness<TestObject, TestStringControl, StringPresenter>(
                     new TestObjectHarness(),
+                    typeof(StringProperty),
                     new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)),
                 new StringValues())
         { }

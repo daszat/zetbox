@@ -19,20 +19,22 @@ namespace Kistl.GUI.Mocks
         where PRESENTER : IPresenter
     {
 
-        public PresenterHarness(ObjectHarness<OBJECT> objectHarness, ControlHarness<CONTROL> controlHarness)
+        public PresenterHarness(ObjectHarness<OBJECT> objectHarness, Type propertyType, ControlHarness<CONTROL> controlHarness)
         {
             ObjectHarness = objectHarness;
             ControlHarness = controlHarness;
+            PropertyType = propertyType;
         }
 
         public void SetUp()
         {
-            PresenterInfo = KistlGUIContext.FindPresenterInfo(ControlHarness.Visual);
+            PresenterInfo = KistlGUIContext.FindPresenterInfo(ControlHarness.Visual, PropertyType);
             Presenter = (PRESENTER)KistlGUIContext.CreatePresenter(PresenterInfo, ObjectHarness.Instance, ControlHarness.Visual, ControlHarness.Widget);
         }
 
         public ControlHarness<CONTROL> ControlHarness { get; private set; }
         public ObjectHarness<OBJECT> ObjectHarness { get; private set; }
+        public Type PropertyType { get; private set; }
 
         public PresenterInfo PresenterInfo { get; private set; }
         public PRESENTER Presenter { get; private set; }

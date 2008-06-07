@@ -25,6 +25,7 @@ namespace Kistl.GUI.Integration.WPF
             : base(
                 new PresenterHarness<TestObject, ObjectReferenceControl, ObjectReferencePresenter>(
                     new TestObjectHarness(),
+                    typeof(ObjectReferenceProperty),
                     new ControlHarness<ObjectReferenceControl>(
                         TestObject.TestObjectReferenceVisual,
                         Toolkit.WPF)),

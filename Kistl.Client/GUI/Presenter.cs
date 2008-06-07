@@ -386,23 +386,129 @@ namespace Kistl.GUI
         }
     }
 
-    public class BackReferencePresenter
-        : Presenter<IObjectListControl>
+    public class BackReferencePresenter : Presenter<IObjectListControl>
     {
-        public BackReferencePresenter() { }
+        // localize type-unsafety
+        /// <summary>
+        /// The BackReferenceProperty this Presenter presents.
+        /// </summary>
+        public BackReferenceProperty Property { get { return (BackReferenceProperty)Preferences.Property; } }
+
+        /// <summary>
+        /// Override this to specify a conversion from the object's property to the value for the widget
+        /// </summary>
+        /// <returns>the value of the handled property in the right type for the widget</returns>
+        protected virtual IList<IDataObject> GetPropertyValue()
+        {
+            return Object.GetPropertyValue<IList<IDataObject>>(Property.PropertyName);
+        }
+
+        #region Initialisation
+
+        private List<IDataObject> _Items;
 
         protected override void InitializeComponent()
         {
+            Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceProperty.ReferenceObjectClass.Module.Namespace, Property.ReferenceProperty.ReferenceObjectClass.ClassName);
+
+            // remember the objects that are sent to the object
+            // to facilitate validity checking
+            Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
+
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
-            Control.Value = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).OfType<IDataObject>().ToList();
+
+            // To prevent resource leaks, all event handlers have to be removed
+            // See DisposeManagedResources()
+            {
+                _Object_PropertyChanged = new System.ComponentModel.PropertyChangedEventHandler(Object_PropertyChanged);
+                Object.PropertyChanged += _Object_PropertyChanged;
+
+                _Control_UserInput = new EventHandler(Control_UserInput);
+                Control.UserInput += _Control_UserInput;
+            }
+
+            Control.Value = GetPropertyValue();
+            Control.IsValidValue = true;
+
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
         }
 
-        // localize type-unsafety
-        public BackReferenceProperty Property { get { return (BackReferenceProperty)Preferences.Property; } }
+        #endregion
+
+        #region Change Management
+
+        private PropertyChangedEventHandler _Object_PropertyChanged = null;
+        private EventHandler _Control_UserInput = null;
+
+        private void Object_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                if (sender != Object)
+                    throw new InvalidOperationException(String.Format("Resource Leak: _Object_PropertyChanged in '{0}' was called by '{1}', but should be attached to '{2}'",
+                        this, sender, Object));
+
+                // if the object has changed, unconditionally overwrite the value in the GUI
+                // intelligent controls might want to show the user both the "real" and the user's value
+                if (e.PropertyName == Property.PropertyName)
+                    Control.Value = GetPropertyValue();
+            }
+        }
+
+        private void Control_UserInput(object sender, EventArgs e)
+        {
+            OnUserInput();
+        }
+
+        /// <summary>
+        /// this method is called when the control submits userinput back to the presenter.
+        /// the default implementation checks whether the value conforms to the nullability
+        /// criteria of the Property and sets the validness of the control's value and the 
+        /// property value as appropriate.
+        /// 
+        /// override the method to gain fine-grained control over the presenter's reaction 
+        /// to user input.
+        /// </summary>
+        // TODO: hook up Validation here and re-check all overrider.
+        protected virtual void OnUserInput()
+        {
+            if (Control.Value == null)
+            {
+                Control.IsValidValue = true;
+            }
+            else
+            {
+                Control.IsValidValue = Control.Value.All(i => _Items.Contains(i));
+            }
+
+
+            if (Control.IsValidValue)
+            {
+                Object.SetPropertyValue(Property.PropertyName, Control.Value);
+            }
+        }
+
+        #endregion
+
+        #region Disposal
+
+        protected override void DisposeManagedResources()
+        {
+            base.DisposeManagedResources();
+
+            // To prevent resource leaks, all event handlers have to be removed
+            if (Object != null)
+                Object.PropertyChanged -= _Object_PropertyChanged;
+
+            if (Control != null)
+                Control.UserInput -= _Control_UserInput;
+        }
+
+        #endregion
     }
+
 
     /// <summary>
     /// Some extension functions to help with accessing the Objects

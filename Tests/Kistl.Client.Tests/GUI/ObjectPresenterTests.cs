@@ -63,6 +63,11 @@ namespace Kistl.GUI.Tests
             var idoq = Mockery.NewMock<IQueryable<IDataObject>>("IDataObjectQueryable");
 
             Expect.Once.On(MockContext).
+                Method("Find").
+                With(-1).
+                Will(Return.Value(TestObject.TestObjectReferenceDescriptor));
+
+            Expect.Once.On(MockContext).
                 Method("GetQuery").
                 With(new ObjectType(typeof(TestObject))).
                 Will(Return.Value(idoq));
@@ -100,6 +105,7 @@ namespace Kistl.GUI.Tests
             : base(
                 new PresenterHarness<TestObject, TestObjectReferenceControl, ObjectReferencePresenter>(
                     new TestObjectHarness(),
+                    typeof(ObjectReferenceProperty),
                     new ControlHarness<TestObjectReferenceControl>(
                         TestObject.TestObjectReferenceVisual,
                         Toolkit.TEST)),
@@ -124,17 +130,72 @@ namespace Kistl.GUI.Tests
             : base(
                 new PresenterHarness<TestObject, TestObjectListControl, ObjectListPresenter>(
                     new TestObjectHarness(),
+                    typeof(ObjectReferenceProperty),
                     new ControlHarness<TestObjectListControl>(
                         TestObject.TestObjectListVisual,
                         Toolkit.TEST)),
                 Toolkit.TEST,
-                new ListValues<IDataObject>(IDataObjectValues.TestValues, true, true )
+                new ListValues<IDataObject>(IDataObjectValues.TestValues, true, true)
             )
         {
         }
 
         protected override IList<IDataObject> GetObjectValue() { return Object.TestObjectList; }
         protected override void SetObjectValue(IList<IDataObject> v) { Object.TestObjectList = v; }
+        protected override IList<IDataObject> DefaultValue()
+        {
+            return new List<IDataObject>();
+        }
+
+        protected override void UserInput(IList<IDataObject> v) { Widget.SimulateUserInput(v); }
+
+    }
+
+    [TestFixture]
+    public class BackReferencePresenterTests
+        : ObjectReferencePresenterInfrastructure<IList<IDataObject>, TestObjectListControl, BackReferencePresenter>
+    {
+        public BackReferencePresenterTests()
+            : base(
+                new PresenterHarness<TestObject, TestObjectListControl, BackReferencePresenter>(
+                    new TestObjectHarness(),
+                    typeof(BackReferenceProperty),
+                    new ControlHarness<TestObjectListControl>(
+                        TestObject.TestBackReferenceVisual,
+                        Toolkit.TEST)),
+                Toolkit.TEST,
+                new ListValues<IDataObject>(IDataObjectValues.TestValues, true, true)
+            )
+        {
+        }
+
+        // replace PresenterTests.SetUp to inject the MockContext
+        [SetUp]
+        public new void SetUp()
+        {
+            ObjectHarness.SetUp();
+            var idoq = Mockery.NewMock<IQueryable<IDataObject>>("IDataObjectQueryable");
+
+            Stub.On(MockContext).
+                Method("Find").
+                With(-1).
+                Will(Return.Value(TestObject.TestObjectReferenceDescriptor));
+
+            Expect.Once.On(MockContext).
+                Method("GetQuery").
+                With(new ObjectType(typeof(TestObject))).
+                Will(Return.Value(idoq));
+
+            Expect.Once.On(idoq).
+                Method("GetEnumerator").
+                Will(Return.Value(new List<IDataObject>(IDataObjectValues.TestValues.Valids).GetEnumerator()));
+
+            ControlHarness.SetUp();
+            PresenterHarness.SetUp();
+        }
+
+        protected override IList<IDataObject> GetObjectValue() { return Object.TestBackReference; }
+        protected override void SetObjectValue(IList<IDataObject> v) { Object.TestBackReference = v; }
         protected override IList<IDataObject> DefaultValue()
         {
             return new List<IDataObject>();
