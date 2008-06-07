@@ -18,7 +18,7 @@ namespace Kistl.GUI
     }
 
     /// <summary>
-    /// This abstract class implements IPresenter and IDisposable in a typs-safe, minimalist way. 
+    /// This abstract class implements IPresenter and IDisposable in a type-safe, minimalist way. 
     /// Override the various provided hooks to actually implement functionality.
     /// </summary>
     /// <typeparam name="CONTROL">The type of the actual control which is used for display.</typeparam>
@@ -28,7 +28,7 @@ namespace Kistl.GUI
 
         /// <summary>
         /// This method initializes the PropertyPresenter.
-        /// MUST be called before any other operation
+        /// MUST be called exactly once AND before any other operation
         /// </summary>
         public void InitializeComponent(Kistl.API.IDataObject obj, Visual v, CONTROL ctrl)
         {
@@ -82,7 +82,7 @@ namespace Kistl.GUI
         #region IDisposable Members
 
         // as suggested on http://msdn.microsoft.com/en-us/system.idisposable.aspx
-        // adapted for easier usage when inheriting
+        // adapted for easier usage when inheriting, by naming the functions appropriately
         private bool disposed = false;
         private void Dispose(bool disposing)
         {
@@ -402,88 +402,6 @@ namespace Kistl.GUI
 
         // localize type-unsafety
         public BackReferenceProperty Property { get { return (BackReferenceProperty)Preferences.Property; } }
-    }
-
-    /// <summary>
-    /// Possible sizes for controls. These are measured realtively 
-    /// to total horizontal space up to a useful (renderer-, medium- 
-    /// and user-dependant maximum)
-    /// </summary>
-    public enum FieldSize
-    {
-        OneThird,
-        Half,
-        TwoThird,
-        Full,
-        FitContent
-    }
-
-    /// <summary>
-    /// This interfaces contains properties that each Control has to provide.
-    /// </summary>
-    public interface IBasicControl
-    {
-        /// <summary>
-        /// A short label describing the contents of this control.
-        /// </summary>
-        string ShortLabel { get; set; }
-        /// <summary>
-        /// A longer description of the contents of this control. 
-        /// This is a suitable text for tooltips.
-        /// </summary>
-        string Description { get; set; }
-
-        /// <summary>
-        /// The preferred display size of this control.
-        /// </summary>
-        FieldSize Size { get; set; }
-    }
-
-    public interface IObjectControl : IBasicControl
-    {
-        Kistl.API.IDataObject Value { get; set; }
-        event /*UserInput<Kistl.API.IDataObject>*/EventHandler UserInput;
-    }
-
-    public interface IValueControl<TYPE> : IBasicControl
-    {
-        /// <summary>
-        /// The actually displayed value. Setting the Value here does not count 
-        /// as user-input.
-        /// 
-        /// If you want to be notified of all changes of the value, use the 
-        /// appropriate events on the model.
-        /// </summary>
-        TYPE Value { get; set; }
-
-        /// <summary>
-        /// Whether the displayed value is valid. This is set by the Presenter, 
-        /// when Value changes.
-        /// </summary>
-        bool IsValidValue { get; set; }
-
-        /// <summary>
-        /// This event is triggered after UserInput. The Presenter will then 
-        /// fetch the Value and do Validity checks.
-        /// </summary>
-        event /*UserInput<TYPE>*/EventHandler UserInput;
-    }
-
-    public interface IReferenceControl<TYPE> : IValueControl<TYPE>
-    {
-        /// <summary>
-        /// The ObjectType of the listed objects
-        /// </summary>
-        ObjectType ObjectType { get; set; }
-        IList<IDataObject> ItemsSource { get; set; }
-    }
-
-    public interface IObjectReferenceControl : IReferenceControl<IDataObject>
-    {
-    }
-
-    public interface IObjectListControl : IReferenceControl<IList<IDataObject>>
-    {
     }
 
     /// <summary>
