@@ -63,4 +63,72 @@ namespace Kistl.GUI.Tests
         }
 
     }
+
+    [TestFixture]
+    public class VisualTests
+    {
+
+        private Visual v;
+
+        [SetUp]
+        public void SetUp()
+        {
+            v = new Visual();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Assert.IsNotNull(v, "Tests should not remove 'v'");
+            v = null;
+        }
+
+        [Test]
+        public void TestProperties()
+        {
+            IList<Visual> children = new List<Visual>();
+            v.Children = children;
+            Assert.AreEqual(children, v.Children, "Visual.Children should not munge its value");
+
+            VisualType controlType = VisualType.Integer;
+            v.ControlType = controlType;
+            Assert.AreEqual(controlType, v.ControlType, "Visual.ControlType should not munge its value");
+
+            string desc = "some description";
+            v.Description = desc;
+            Assert.AreEqual(desc, v.Description, "Visual.Description should not munge its value");
+
+            BaseProperty bp = new BaseProperty();
+            v.Property = bp;
+            Assert.AreEqual(bp, v.Property, "Visual.Property should not munge its value");
+        }
+
+        internal class Defaults
+        {
+            internal BaseProperty Property { get; set; }
+            internal VisualType VisualType { get; set; }
+        }
+
+        [Test]
+        public void TestDefaults()
+        {
+            var defaults = new[]{
+                new Defaults(){ Property = new BackReferenceProperty(), VisualType = VisualType.ObjectList },
+                new Defaults(){ Property = new BoolProperty(), VisualType = VisualType.Boolean },
+                new Defaults(){ Property = new DateTimeProperty(), VisualType = VisualType.DateTime },
+                new Defaults(){ Property = new DoubleProperty(), VisualType = VisualType.Double },
+                new Defaults(){ Property = new IntProperty(), VisualType = VisualType.Integer },
+                new Defaults(){ Property = new ObjectReferenceProperty() { IsList = true }, VisualType = VisualType.ObjectList },
+                new Defaults(){ Property = new ObjectReferenceProperty() { IsList = false }, VisualType = VisualType.ObjectReference },
+                // TODO: new Defaults(){ Property = new PropertyGroup(), VisualType = VisualType.PropertyGroup },
+                new Defaults(){ Property = new StringProperty(), VisualType = VisualType.String },
+            };
+
+            foreach (var d in defaults)
+            {
+                Visual v = Visual.CreateDefaultVisual(d.Property);
+                Assert.AreEqual(d.VisualType, v.ControlType, "{0} should be displayed in a VisualType.{1}", d.Property, d.VisualType);
+            }
+        }
+    }
 }

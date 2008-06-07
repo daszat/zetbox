@@ -12,10 +12,6 @@ namespace Kistl.GUI.DB
 {
     public static class KistlGUIContext
     {
-        public static Template FindTaskTemplate()
-        {
-            return TaskEditTemplate.Create();
-        }
 
         public static ControlInfo FindControlInfo(Toolkit platform, Visual visual)
         {
