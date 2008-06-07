@@ -9,6 +9,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.GUI.DB;
+using System.Reflection;
 
 namespace Kistl.GUI
 {
@@ -364,6 +365,11 @@ namespace Kistl.GUI
             base.InitializeComponent();
         }
 
+        protected override IList<IDataObject> GetPropertyValue()
+        {
+            return Object.GetList(Property);
+        }
+
         /// <summary>
         /// Checks whether the returned value matches the Properties nullability 
         /// criteria and is one of the originally selectable items.
@@ -381,7 +387,7 @@ namespace Kistl.GUI
 
             if (Control.IsValidValue)
             {
-                Object.SetPropertyValue(Property.PropertyName, Control.Value);
+                Object.SetList(Property, Control.Value);
             }
         }
     }
@@ -400,7 +406,7 @@ namespace Kistl.GUI
         /// <returns>the value of the handled property in the right type for the widget</returns>
         protected virtual IList<IDataObject> GetPropertyValue()
         {
-            return Object.GetPropertyValue<IList<IDataObject>>(Property.PropertyName);
+            return Object.GetList(Property);
         }
 
         #region Initialisation
@@ -486,7 +492,7 @@ namespace Kistl.GUI
 
             if (Control.IsValidValue)
             {
-                Object.SetPropertyValue(Property.PropertyName, Control.Value);
+                Object.SetList(Property, Control.Value.ToList());
             }
         }
 
@@ -577,12 +583,44 @@ namespace Kistl.GUI
 
         public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, ObjectReferenceProperty prop)
         {
-            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).OfType<IDataObject>().ToList();
+            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<IDataObject>().ToList();
         }
 
         public static void SetList(this IDataObject obj, ObjectReferenceProperty prop, IList<Kistl.API.IDataObject> value)
         {
-            obj.SetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName, value);
+            PropertyInfo pi = obj.GetType().GetProperty(prop.PropertyName);
+            if (pi == null)
+                throw new ArgumentOutOfRangeException("prop", string.Format("Property {0} was not found in Type {1}", prop.PropertyName, obj.GetType().FullName));
+
+            // To upcast, we have to get a list of the proper type now
+            IList realValue = (IList)Activator.CreateInstance(pi.PropertyType);
+            foreach (IDataObject i in value)
+            {
+                realValue.Add(i);
+            }
+
+            pi.SetValue(obj, realValue, null);
+        }
+
+        public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, BackReferenceProperty prop)
+        {
+            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<IDataObject>().ToList();
+        }
+
+        public static void SetList(this IDataObject obj, BackReferenceProperty prop, List<Kistl.API.IDataObject> value)
+        {
+            PropertyInfo pi = obj.GetType().GetProperty(prop.PropertyName);
+            if (pi == null)
+                throw new ArgumentOutOfRangeException("prop", string.Format("Property {0} was not found in Type {1}", prop.PropertyName, obj.GetType().FullName));
+
+            // To upcast, we have to get a list of the proper type now
+            IList realValue = (IList)Activator.CreateInstance(pi.PropertyType);
+            foreach (IDataObject i in value)
+            {
+                realValue.Add(i);
+            }
+
+            pi.SetValue(obj, realValue, null);
         }
     }
 

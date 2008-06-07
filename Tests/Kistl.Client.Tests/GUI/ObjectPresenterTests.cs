@@ -140,8 +140,8 @@ namespace Kistl.GUI.Tests
         {
         }
 
-        protected override IList<IDataObject> GetObjectValue() { return Object.TestObjectList; }
-        protected override void SetObjectValue(IList<IDataObject> v) { Object.TestObjectList = v; }
+        protected override IList<IDataObject> GetObjectValue() { return Object.TestObjectList.Select(i => (IDataObject)i).ToList(); }
+        protected override void SetObjectValue(IList<IDataObject> v) { Object.TestObjectList = v.Select(i => (TestObject)i).ToList(); }
         protected override IList<IDataObject> DefaultValue()
         {
             return new List<IDataObject>();
@@ -194,8 +194,8 @@ namespace Kistl.GUI.Tests
             PresenterHarness.SetUp();
         }
 
-        protected override IList<IDataObject> GetObjectValue() { return Object.TestBackReference; }
-        protected override void SetObjectValue(IList<IDataObject> v) { Object.TestBackReference = v; }
+        protected override IList<IDataObject> GetObjectValue() { return Object.TestBackReference.Select(i => (IDataObject)i).ToList(); }
+        protected override void SetObjectValue(IList<IDataObject> v) { Object.TestBackReference = v.Select(i => (TestObject)i).ToList(); }
         protected override IList<IDataObject> DefaultValue()
         {
             return new List<IDataObject>();

@@ -15,7 +15,12 @@ namespace Kistl.Client.Tests
             new SetUp().Init();
             var test = new Kistl.GUI.Tests.BackReferencePresenterTests();
             test.SetUp();
-            test.HandleNullUserInput();
+            test.HandleValidUserInput();
+
+            Type fullySpecifiedIList1 = typeof(IList<SetUp>);
+            Type genericIList = fullySpecifiedIList1.GetGenericTypeDefinition();
+            Type fullySpecifiedIList2 = genericIList.MakeGenericType(typeof(String));
+
         }
     }
 }

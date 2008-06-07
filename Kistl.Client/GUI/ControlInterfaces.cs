@@ -58,7 +58,7 @@ namespace Kistl.GUI
     /// a control that displays a reference to a value.
     /// </summary>
     /// <typeparam name="TYPE"></typeparam>
-    // TODO: perhaps better called "ISelectControl"?
+    // TODO: perhaps better called "ISingleSelectControl"?
     public interface IReferenceControl<TYPE> : IValueControl<TYPE>
     {
         /// <summary>
@@ -72,6 +72,7 @@ namespace Kistl.GUI
     {
     }
 
+    // TODO: perhaps better called "IMultiSelectControl"?
     public interface IObjectListControl : IReferenceControl<IList<IDataObject>>
     {
     }

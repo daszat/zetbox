@@ -16,8 +16,8 @@ namespace Kistl.Client.Mocks
         {
             Context = GlobalContext;
 
-            TestBackReference = new List<IDataObject>();
-            TestObjectList = new List<IDataObject>();
+            TestBackReference = new List<TestObject>();
+            TestObjectList = new List<TestObject>();
 
             TestObjectListDescriptor.AttachToContext(GlobalContext);
             TestObjectReferenceDescriptor.AttachToContext(GlobalContext);
@@ -261,9 +261,9 @@ namespace Kistl.Client.Mocks
 
         #region ObjectList Properties
 
-        public IList<IDataObject> TestObjectList
+        public List<TestObject> TestObjectList
         {
-            get { return (IList<IDataObject>)GetValue(TestObjectListProperty); }
+            get { return (List<TestObject>)GetValue(TestObjectListProperty); }
             set { SetValue(TestObjectListProperty, value); }
         }
 
@@ -271,7 +271,7 @@ namespace Kistl.Client.Mocks
         // This enables animation, styling, binding, etc...
         public static readonly System.Windows.DependencyProperty TestObjectListProperty =
             System.Windows.DependencyProperty.Register(
-                "TestObjectList", typeof(IList<IDataObject>),
+                "TestObjectList", typeof(List<TestObject>),
                 typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static ObjectReferenceProperty TestObjectListDescriptor
@@ -295,9 +295,9 @@ namespace Kistl.Client.Mocks
 
         #region BackReference Properties
 
-        public IList<IDataObject> TestBackReference
+        public List<TestObject> TestBackReference
         {
-            get { return (IList<IDataObject>)GetValue(TestBackReferenceProperty); }
+            get { return (List<TestObject>)GetValue(TestBackReferenceProperty); }
             set { SetValue(TestBackReferenceProperty, value); }
         }
 
@@ -305,7 +305,7 @@ namespace Kistl.Client.Mocks
         // This enables animation, styling, binding, etc...
         public static readonly System.Windows.DependencyProperty TestBackReferenceProperty =
             System.Windows.DependencyProperty.Register(
-                "TestBackReference", typeof(IList<IDataObject>),
+                "TestBackReference", typeof(List<TestObject>),
                 typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static BackReferenceProperty TestBackReferenceDescriptor
