@@ -58,9 +58,16 @@ namespace Kistl.GUI.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void CreatePresenterFailNoProperty()
+        public void FindPresenterFailNoVisual()
         {
-            KistlGUIContext.CreatePresenter(KistlGUIContext.FindPresenterInfo(Visual, null), Object, Visual, Widget);
+            KistlGUIContext.FindPresenterInfo(null, typeof(IDataObject));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindPresenterFailNoProperty()
+        {
+            KistlGUIContext.FindPresenterInfo(Visual, null);
         }
 
     }

@@ -28,6 +28,12 @@ namespace Kistl.GUI.DB
 
         public static PresenterInfo FindPresenterInfo(Visual visual, Type sourceType)
         {
+            if (visual == null)
+                throw new ArgumentNullException("visual", "KistlGUIContext.FindPresenterInfo(visual, sourceType): visual must not be null");
+
+            if (sourceType == null)
+                throw new ArgumentNullException("sourceType", "KistlGUIContext.FindPresenterInfo(visual, sourceType): sourceType must not be null");
+
             return (from pi in PresenterInfo.Implementations
                     where 
                         pi.Control == visual.ControlType
@@ -147,7 +153,7 @@ namespace Kistl.GUI.DB
             // non-property presenters
             new PresenterInfo() { Control = VisualType.Object, SourceType = typeof(IDataObject),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectPresenter" },
-            new PresenterInfo() { Control = VisualType.PropertyGroup, // SourceType = typeof(GroupProperty),
+            new PresenterInfo() { Control = VisualType.PropertyGroup, // TODO: SourceType = typeof(PropertyGroup),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.GroupPresenter" },
 
             // property presenters
