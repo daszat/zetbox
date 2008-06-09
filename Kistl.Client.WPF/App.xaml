@@ -8,5 +8,6 @@
     >
     <Application.Resources>
         <converter:IconConverter x:Key="IconConverter" />
+        <converter:FormattingConverter x:Key="FormattingConverter" />
     </Application.Resources>
 </Application>

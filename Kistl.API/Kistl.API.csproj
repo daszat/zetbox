@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\SampleConfig.xml" />
+    <None Include="ClassDiagram.Kistl.API.cd" />
     <None Include="Configuration\CreateSchema.cmd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

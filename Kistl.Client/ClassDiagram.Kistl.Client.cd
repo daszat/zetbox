@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kistl.GUI.Presenter&lt;CONTROL&gt;" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIIAIAEACCAAAAgAAAAAAACAAAAAAAAABAAAAAAAEA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.GUI.DefaultPresenter&lt;TYPE, PROPERTY, CONTROL&gt;" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABCAAAAAAAAAAAICgAACAABAAACAAQAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.DefaultValuePresenter&lt;TYPE, PROPERTY&gt;" Collapsed="true">
+    <Position X="12.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.BoolPresenter" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.DateTimePresenter" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.DoublePresenter" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.IntPresenter" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.StringPresenter" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.GroupPresenter" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.ObjectPresenter" Collapsed="true">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.ObjectReferencePresenter" Collapsed="true">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAACAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.ObjectListPresenter" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAACAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.BackReferencePresenter" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABCAAAAAAAAAAAICgAACAABAAACAAQAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.ExtensionHelper" Collapsed="true">
+    <Position X="11.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAI=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.Renderer.BasicRenderer&lt;CONTROL, PROPERTY, CONTAINER&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgACAAAAAAAAAAEAAAAAEAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Renderer.BasicRenderer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.GUI.DB.KistlGUIContext" Collapsed="true">
+    <Position X="8" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAIAIEAAgAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>GUI.DB\KistlGUIContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.DB.ControlInfo" Collapsed="true">
+    <Position X="9.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAACAAAAAAAAAAQACAAgAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>GUI.DB\KistlGUIContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.DB.PresenterInfo" Collapsed="true">
+    <Position X="9.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAACAAAAAAAAAAQACAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>GUI.DB\KistlGUIContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.DB.Template" Collapsed="true">
+    <Position X="11.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAACAAAEAAAAAAAAAQAAAAAABAA=</HashCode>
+      <FileName>GUI.DB\Template.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.GUI.DB.Visual" Collapsed="true">
+    <Position X="8" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAACgAAAAAAAEAAAAAAgAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>GUI.DB\Visual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Kistl.GUI.IBasicControl" Collapsed="true">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\ControlInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.GUI.IValueControl&lt;TYPE&gt;" Collapsed="true">
+    <Position X="1.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAgAAQAAAA=</HashCode>
+      <FileName>GUI\ControlInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.GUI.IReferenceControl&lt;TYPE&gt;" Collapsed="true">
+    <Position X="1.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAA=</HashCode>
+      <FileName>GUI\ControlInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.GUI.IObjectReferenceControl" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\ControlInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.GUI.IObjectListControl" Collapsed="true">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\ControlInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.GUI.IObjectControl" Collapsed="true">
+    <Position X="5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>GUI\ControlInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.GUI.IPresenter" Collapsed="true">
+    <Position X="13.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Presenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.GUI.Renderer.IRenderer" Collapsed="true">
+    <Position X="15.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAEAAAAAEAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Renderer.BasicRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Kistl.GUI.FieldSize" Collapsed="true">
+    <Position X="13.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAoAAAAAAAAAAAAAAAAAAAAAABgAIAAAAAAA=</HashCode>
+      <FileName>GUI\ControlInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Kistl.GUI.DB.Toolkit" Collapsed="true">
+    <Position X="17.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAggAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI.DB\KistlGUIContext.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Kistl.GUI.DB.TemplateUsage" Collapsed="true">
+    <Position X="15.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI.DB\Template.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Kistl.GUI.DB.VisualType" Collapsed="true">
+    <Position X="13.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAgQAAAAQAAAAICAgQAQACAAAAAAAA=</HashCode>
+      <FileName>GUI.DB\Visual.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

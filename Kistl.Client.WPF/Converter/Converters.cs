@@ -81,7 +81,7 @@ namespace Kistl.Client.WPF.Converter
             }
             else
             {
-                return value.ToString();
+                return value != null ? value.ToString() : "";
             }
         }
         public object ConvertBack(object value, Type targetType,

@@ -583,7 +583,9 @@ namespace Kistl.GUI
 
         public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, ObjectReferenceProperty prop)
         {
-            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<IDataObject>().ToList();
+            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<ICollectionEntry>()
+                .Select(i => i.GetPropertyValue<IDataObject>("Value")).ToList();
+                
         }
 
         public static void SetList(this IDataObject obj, ObjectReferenceProperty prop, IList<Kistl.API.IDataObject> value)

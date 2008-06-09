@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kistl.API.APIInit" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>APIInit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.AssemblyLoader" Collapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAggAQAAAAAAAAAAAAAAAAABAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>AssemblyLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.BinarySerializer" Collapsed="true">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEAAAAAAAAA=</HashCode>
+      <FileName>BinarySerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.IllegalExpression" Collapsed="true">
+    <Position X="19.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExpressionFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.ExpressionFilter" Collapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExpressionFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.ExpressionTreeVisitor" Collapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEAABACAAAYwBAQAAAAAISDAAAAEAgACAFAAAAgEQAA=</HashCode>
+      <FileName>ExpressionTreeVisitor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.Helper" Collapsed="true">
+    <Position X="24.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACCAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.ExtensionHelpers" Collapsed="true">
+    <Position X="23" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAACAAAABAAAAAAAAAAACAAAAAAAAEAAAAAAAAAADA=</HashCode>
+      <FileName>Helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.CustomActionsManagerFactory" Collapsed="true">
+    <Position X="24.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAQAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>ICustomActions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.MethodReturnEventArgs&lt;T&gt;" Collapsed="true">
+    <Position X="19.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.KistlServiceStreamsMessage" Collapsed="true">
+    <Position X="23" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAgAAAAAAAAAAAABAAIAAAIQBAAQAAAAA=</HashCode>
+      <FileName>IKistlService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.LinqExtensions" Collapsed="true">
+    <Position X="24.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAIAAAAIAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>LinqExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.NotifyingObservableCollection&lt;T&gt;" Collapsed="true">
+    <Position X="21.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABACAAABAAAAAAAAAAAAAAQABAAAAAAAABQAAA=</HashCode>
+      <FileName>NotifyingObservableCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.ObjectType" Collapsed="true">
+    <Position X="23" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAKABAAEgAAAAAACAAAAoIAAgAACAAAAAAA=</HashCode>
+      <FileName>ObjectType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableType" Collapsed="true">
+    <Position X="24.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAQAAAAAAAAAACAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableExpression" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAAAAAAAAAAIAAAAAAAABAAgAQAAAAAABAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableCompoundExpression" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableBinaryExpression" Collapsed="true">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableUnaryExpression" Collapsed="true">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableConstantExpression" Collapsed="true">
+    <Position X="17" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAgAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableMemberExpression" Collapsed="true">
+    <Position X="10.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableMethodCallExpression" Collapsed="true">
+    <Position X="12.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIIAAAAAIAAAAAAAAAAAABAAgAAACAAAAJgA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableLambdaExpression" Collapsed="true">
+    <Position X="1.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableParameterExpression" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEBAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.SerializableNewExpression" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAA=</HashCode>
+      <FileName>SerializableExpression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.API.Configuration.KistlConfig" Collapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAgAAAAAAACAAAAAAgAAIEAGQABCBgAIAAQ=</HashCode>
+      <FileName>Configuration\KistlConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Kistl.API.ICustomActionsManager" Collapsed="true">
+    <Position X="19.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>ICustomActions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IPersistenceObject" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAgoAAAAAAAAAAAAAAIAAAAABAAADAAQA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IDataObject" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAABQAAAAAAIIA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.ICollectionEntry" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IXmlObjectCollection" Collapsed="true">
+    <Position X="23" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IXmlObject" Collapsed="true">
+    <Position X="21.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IKistlAppDomain" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IKistlAppDomain.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IKistlContext" Collapsed="true">
+    <Position X="23" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAIAAAAAIEIAEAAAAEAAAAAACA=</HashCode>
+      <FileName>IKistlContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IKistlServiceStreams" Collapsed="true">
+    <Position X="19.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAAAAAAI=</HashCode>
+      <FileName>IKistlService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.API.IKistlService" Collapsed="true">
+    <Position X="24.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAGAAAAI=</HashCode>
+      <FileName>IKistlService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Kistl.API.DataObjectState" Collapsed="true">
+    <Position X="19.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAACAAABAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="Kistl.API.ToStringHandler&lt;T&gt;" Collapsed="true">
+    <Position X="21.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Kistl.API.ObjectEventHandler&lt;T&gt;" Collapsed="true">
+    <Position X="19.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

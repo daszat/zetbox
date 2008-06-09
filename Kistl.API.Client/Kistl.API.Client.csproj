@@ -127,6 +127,7 @@
     <None Include="Service References\KistlServiceStreams\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.Kistl.API.Client.cd" />
     <None Include="Service References\KistlServiceStreams\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

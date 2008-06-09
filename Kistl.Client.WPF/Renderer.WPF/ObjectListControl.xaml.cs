@@ -106,7 +106,8 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Value = lst.SelectedItems.Cast<Kistl.API.IDataObject>().ToList();
+            // SelectionChanged -> nicht die Liste ändern
+            // Value = lst.SelectedItems.Cast<Kistl.API.IDataObject>().ToList();
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
