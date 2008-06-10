@@ -84,6 +84,7 @@ namespace Kistl.GUI
     {
         Kistl.API.IDataObject Value { get; set; }
         event /* TODO UserInput<Kistl.API.IDataObject>*/EventHandler UserInput;
+        event EventHandler UserSaveRequest;
     }
 
 

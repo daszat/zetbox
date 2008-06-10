@@ -184,6 +184,9 @@ namespace Kistl.GUI.Renderer.WPF
             remove { _UserInput -= value; }
         }
 
+        public event EventHandler UserSaveRequest;
+
+
         #endregion
 
         #region IBasicControl Members

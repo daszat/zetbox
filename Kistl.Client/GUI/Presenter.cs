@@ -297,6 +297,13 @@ namespace Kistl.GUI
             Control.Value = Object;
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
+            Control.UserSaveRequest += new EventHandler(Control_UserSaveRequest);
+        }
+
+        void Control_UserSaveRequest(object sender, EventArgs e)
+        {
+            // TODO: Die Kontextfrage klären
+            this.Object.Context.SubmitChanges();
         }
 
     }

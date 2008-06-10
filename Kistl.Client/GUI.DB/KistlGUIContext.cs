@@ -83,15 +83,60 @@ namespace Kistl.GUI.DB
         public string ClassName { get; set; }
         public bool Container { get; set; }
 
+        // This is just a Mock
         public static IList<ControlInfo> Implementations = new List<ControlInfo>(new[] {
-            // Test Controls
-            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.PropertyGroup,
+#region ASP.NET
+            // The actual Renderer for APS.NET
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Renderer,
                 Container = true,
-                AssemblyName = "blah", ClassName = "foo" },
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.Renderer" },
+
+            // Main "Window" for ASP.NET
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Object,
+                Container = true,
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectPanel" },
+
+            // Controls
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Boolean,
+                Container = false,
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.BoolPropertyControl" },
+
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.DateTime,
+                Container = false,
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.DateTimePropertyControl" },
+
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Double,
+                Container = false,
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.DoublePropertyControl" },
+
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Integer,
+                Container = false,
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.IntPropertyControl" },
+
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.ObjectList,
+                Container = false,
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectListControl" },
+
+            new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.ObjectReference,
+                Container = false,
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectReferencePropertyControl" },
+
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.String,
                 Container = false,
-                AssemblyName = "blah", ClassName = "foo" },
+                AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
+                ClassName = "Kistl.Client.ASPNET.Toolkit.StringPropertyControl" },
 
+#endregion
+
+#region WPF
             // The actual Renderer for WPF
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.Renderer,
                 Container = true,
@@ -138,6 +183,7 @@ namespace Kistl.GUI.DB
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditSimpleProperty" },
+#endregion
         });
     }
 

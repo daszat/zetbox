@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Kistl.App.Base.Assembly" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="19.5" Y="0.5" Width="1.5" />
+    <Position X="8" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAICAgAAEAAAAAAACAAAQIAAAAAhkCgBEIJA=</HashCode>
     </TypeIdentifier>
@@ -92,7 +92,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kistl.App.Base.EnumerationEntry" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="21.25" Y="0.5" Width="1.5" />
+    <Position X="9.75" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABABAAAAAQCAgACFAQAAAAAAAAAAIIACAABCAABEIJA=</HashCode>
     </TypeIdentifier>
@@ -127,21 +127,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kistl.App.Base.Method" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="23" Y="0.5" Width="1.5" />
+    <Position X="11.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAgAAAACAgAEEAAAgRAAAAAAQIAAAAAjCCgBEIJA=</HashCode>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Kistl.App.Base.MethodInvocation" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="19.5" Y="1.5" Width="1.5" />
+    <Position X="8" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAQBAAABAACAgAAEACggAEAAIAAYIIAEAChACgBEIJA=</HashCode>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Kistl.App.Base.Module" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="21.25" Y="1.5" Width="1.5" />
+    <Position X="9.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAKAgAAFAAAAUAAAAACAIAACACBAAABEIJA=</HashCode>
     </TypeIdentifier>
@@ -155,7 +155,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry" Collapsed="true">
-    <Position X="23" Y="1.5" Width="1.5" />
+    <Position X="11.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAgAAAAAAAQABAAAAAIIAAAABgAAAEIgA=</HashCode>
     </TypeIdentifier>
@@ -203,7 +203,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kistl.App.GUI.Icon" Collapsed="true">
-    <Position X="20" Y="5.5" Width="1.5" />
+    <Position X="13.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAECAgAAEAAAAABAAAAAAIAAgAABAAABFIJA=</HashCode>
     </TypeIdentifier>

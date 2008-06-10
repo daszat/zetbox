@@ -46,7 +46,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Kistl.API.Client.KistlContextImpl" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11.25" Y="0.5" Width="1.5" />
+    <Position X="9.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAASAAAAIAAAAIAAAAAIEIAEAAAAEAAAAAQCA=</HashCode>
       <FileName>LinqToKistl\KistlContext.cs</FileName>
@@ -93,7 +93,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11.25" Y="1.5" Width="1.5" />
+    <Position X="9.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAAAAAAI=</HashCode>
       <FileName>Service References\KistlServiceStreams\Reference.cs</FileName>

@@ -140,6 +140,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.Kistl.Server.cd" />
     <None Include="ConfigArthur.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
