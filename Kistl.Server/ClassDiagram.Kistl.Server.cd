@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kistl.Server.CustomActionsManagerServer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAABIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>CustomActionsManagerServer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.Server.Helper" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.ExtensionHelpers" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAACAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.KistlService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAgAAAAIAAAAAAAAAAAEAAGIAAAI=</HashCode>
+      <FileName>KistlService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.Server.KistlServiceStreams" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAAAAAAI=</HashCode>
+      <FileName>KistlServiceStreams.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.Server.Program" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Server" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAIAACAAAAIIAAAAAGQAABAAAAAAIAgAAACAAAA=</HashCode>
+      <FileName>Server.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.Server.ServerObjectHandlerFactory" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ServerObjectHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.ServerObjectHandler&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAABAiAAAAACAAAAAAAAAAEAAAAAAAI=</HashCode>
+      <FileName>ServerObjectHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.Server.Generators.DatabaseGeneratorFactory" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generators\DatabaseGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.BaseDataObjectGenerator" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CEAgAAKAEAAEUA+ICICABIASAgAgBAAQBIACkEAABBo=</HashCode>
+      <FileName>Generators\DataObjectGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.DataObjectGeneratorFactory" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generators\DataObjectGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.DBTypeNotFoundException" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Generators\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.CompilerException" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAgCAAABAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Generators\Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.Generator" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAJAABAAAAAIAAAEAUAAAAFJIAAIgAAAAAAAAEA=</HashCode>
+      <FileName>Generators\Generator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.MappingGeneratorFactory" Collapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generators\MappingGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.SQLServer.SQLServerDatabaseGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAARAAAAAAAAAAAAAIAAAAAAIABAAEAAAAA=</HashCode>
+      <FileName>Generators\SQLServer\SQLServerDatabaseGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.Server.Generators.SQLServer.SQLServerDataObjectGenerator" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAgAAKAAAAAAACAAICAAIAAAAAAAAAAAAAAAAAACBA=</HashCode>
+      <FileName>Generators\SQLServer\SQLServerDataObjectGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Generators.SQLServer.SQLServerEntityFrameworkModelGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YkRAAIAAAAEhBA0AAAQCAAAAAABAIAAAIAQACEAAAIA=</HashCode>
+      <FileName>Generators\SQLServer\SQLServerEntityFrameworkModelGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kistl.Server.Generators.SQLServer.SQLServerHelper" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generators\SQLServer\SQLServerHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Server.Properties.Settings" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Kistl.Server.IServerObjectHandler" Collapsed="true">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAAAAAAI=</HashCode>
+      <FileName>ServerObjectHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Server.Generators.IDatabaseGenerator" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Generators\DatabaseGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Server.Generators.IMappingGenerator" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Generators\MappingGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Kistl.Server.Generators.ClientServerEnum" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQ=</HashCode>
+      <FileName>Generators\Generator.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
