@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="StringPropertyControl.ascx.cs"
     Inherits="Controls_StringPropertyControl" %>
-<div>
-    <strong><label for="txtString">
-        <%= ShortLabel %></label></strong>
-    <asp:TextBox ID="txtString" runat="server" OnTextChanged="txtString_OnTextChanged" />
+<div class="Control">
+    <asp:Label runat="server" AssociatedControlID="txtString"><%= ShortLabel %></asp:Label>
+    <asp:TextBox ID="txtString" runat="server" OnTextChanged="txtString_OnTextChanged"
+        CssClass="Control" />
 </div>

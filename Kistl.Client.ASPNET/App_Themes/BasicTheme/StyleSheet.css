@@ -1,5 +1,59 @@
-﻿body {
+﻿body 
+{
 }
-label {
-	width: 100px;
+
+div.ObjectPanelChildren
+{
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;	
+	border: solid 1px black;
+}
+
+div.Control
+{
+	clear: left;
+	margin-bottom: 10px;
+}
+
+input.Control 
+{
+  display: block;
+  float: left;
+  width: 300px; 
+}
+
+label 
+{ 
+  display: block;
+  float: left;
+  width: 150px; 
+  font-weight: bold;
+}
+
+table.tblList 
+{
+	border-width: 1px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: collapse;
+	background-color: white;	
+	width: 300px;
+}	
+table.tblList td 
+{
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+}
+table.tblList th
+{
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
 }

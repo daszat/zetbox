@@ -17,9 +17,13 @@ namespace Kistl.Client.Tests
             //test.SetUp();
             //test.HandleValidUserInput();
 
-            var test2 = new Kistl.GUI.Tests.ObjectListPresenterTests();
-            test2.SetUp();
-            test2.HandleInvalidUserInput();
+            //var test2 = new Kistl.GUI.Tests.ObjectListPresenterTests();
+            //test2.SetUp();
+            //test2.HandleInvalidUserInput();
+
+            var test3 = new Kistl.GUI.Renderer.ASPNET.Tests.StringControlTests();
+            test3.SetUp();
+            test3.TestShortLabel();
 
             Type fullySpecifiedIList1 = typeof(IList<SetUp>);
             Type genericIList = fullySpecifiedIList1.GetGenericTypeDefinition();

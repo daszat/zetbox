@@ -1,22 +1,28 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ObjectListControl.ascx.cs"
     Inherits="Controls_ObjectListControl" %>
-<div>
-    <strong>
-    <label for="repItems">
-        <%= ShortLabel %></label></strong>
-    <asp:Repeater ID="repItems" runat="server">
-        <HeaderTemplate>
-            <table>
-        </HeaderTemplate>
-        <ItemTemplate>
+<div class="Control">
+    <asp:Label ID="Label1" runat="server" AssociatedControlID="repItems"><%= ShortLabel %></asp:Label>
+    <div style="float:left;">
+        <div>
+            <asp:LinkButton ID="lnkNew" runat="server" Text="New"></asp:LinkButton>
+            <asp:LinkButton ID="lnkAdd" runat="server" Text="Add"></asp:LinkButton>
+        </div>
+        <table class="tblList">
             <tr>
-                <td>
-                    <%# Container.DataItem.ToString() %>
-                </td>
+                <th>
+                    Bezeichnung
+                </th>
             </tr>
-        </ItemTemplate>
-        <FooterTemplate>
-            </table>
-        </FooterTemplate>
-    </asp:Repeater>
+            <asp:Repeater ID="repItems" runat="server">
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <%# Container.DataItem.ToString() %>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+        </table>
+    </div>
+    <div style="clear:left;"></div>
 </div>

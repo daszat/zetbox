@@ -18,7 +18,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         void AddChild(BaseASPNETControl child);
     }
 
-    public abstract class BaseASPNETControl : TemplateControl, IBasicControl
+    public abstract class BaseASPNETControl : TemplateControl, IBasicControl, IASPNETControl
     {
         protected IBasicControl Ctrl { get; private set; }
 
@@ -83,133 +83,67 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
     }
 
-    public class StringPropertyControl : BaseASPNETControl, IValueControl<string>
+    public abstract class BasicPropertyControl<T> : BaseASPNETControl, IValueControl<T>
+    {
+        #region IValueControl<string> Members
+
+        public T Value
+        {
+            get { return ((IValueControl<T>)Ctrl).Value; }
+            set { ((IValueControl<T>)Ctrl).Value = value; }
+        }
+
+        public bool IsValidValue
+        {
+            get { return ((IValueControl<T>)Ctrl).IsValidValue; }
+            set { ((IValueControl<T>)Ctrl).IsValidValue = value; }
+        }
+
+        public event EventHandler UserInput
+        {
+            add { ((IValueControl<T>)Ctrl).UserInput += value; }
+            remove { ((IValueControl<T>)Ctrl).UserInput -= value; }
+        }
+
+        #endregion
+    }
+
+    public class StringPropertyControl : BasicPropertyControl<string> 
     {
         protected override string GetControlPath()
         {
             return "~/Controls/StringPropertyControl.ascx";
         }
-
-        #region IValueControl<string> Members
-
-        public string Value
-        {
-            get { return ((IValueControl<string>)Ctrl).Value; }
-            set { ((IValueControl<string>)Ctrl).Value = value; }
-        }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput
-        {
-            add { ((IValueControl<string>)Ctrl).UserInput += value; }
-            remove { ((IValueControl<string>)Ctrl).UserInput -= value; }
-        }
-
-        #endregion
     }
-    public class IntPropertyControl : BaseASPNETControl, IValueControl<int?>
+
+    public class IntPropertyControl : BasicPropertyControl<int?> 
     {
         protected override string GetControlPath()
         {
-            return "~/Controls/NotImplementedControl.ascx";
+            return "~/Controls/IntPropertyControl.ascx";
         }
-
-        #region IValueControl<int> Members
-
-        public int? Value
-        {
-            get;
-            set;
-        }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput;
-        #endregion
     }
-    public class BoolPropertyControl : BaseASPNETControl, IValueControl<bool?>
+    public class BoolPropertyControl : BasicPropertyControl<bool?> 
     {
         protected override string GetControlPath()
         {
-            return "~/Controls/NotImplementedControl.ascx";
+            return "~/Controls/BoolPropertyControl.ascx";
         }
-
-        #region IValueControl<bool> Members
-
-        public bool? Value
-        {
-            get;
-            set;
-        }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput;
-
-        #endregion
     }
-    public class DoublePropertyControl : BaseASPNETControl, IValueControl<double?>
+
+    public class DoublePropertyControl : BasicPropertyControl<double?> 
     {
         protected override string GetControlPath()
         {
-            return "~/Controls/NotImplementedControl.ascx";
+            return "~/Controls/DoublePropertyControl.ascx";
         }
-
-        #region IValueControl<double> Members
-
-        public double? Value
-        {
-            get;
-            set;
-        }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput;
-
-        #endregion
     }
-    public class DateTimePropertyControl : BaseASPNETControl, IValueControl<DateTime?>
+    public class DateTimePropertyControl : BasicPropertyControl<DateTime?> 
     {
         protected override string GetControlPath()
         {
-            return "~/Controls/NotImplementedControl.ascx";
+            return "~/Controls/DateTimePropertyControl.ascx";
         }
-
-        #region IValueControl<DateTime> Members
-
-        public DateTime? Value
-        {
-            get;
-            set;
-        }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput;
-
-        #endregion
     }
     public class ObjectReferencePropertyControl : BaseASPNETControl, IObjectReferenceControl
     {

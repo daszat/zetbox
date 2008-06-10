@@ -62,6 +62,7 @@ namespace Kistl.Client.Mocks
         public IDataObject Value { get; set; }
 
         public event EventHandler UserInput;
+        public event EventHandler UserSaveRequest;
 
         #endregion
 
