@@ -357,36 +357,25 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Deserialize a ICollectionEntry Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
+        /// Deserialize a IDataObject Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinaryCollectionEntries<T>(out List<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
+        public static void FromBinary<T>(ICollection<T> val, System.IO.BinaryReader sr) where T : IDataObject
         {
-            val = new List<T>();
-            FromBinaryCollectionEntries<T>(val, sr);
-        }
+            while (sr.ReadBoolean())
+            {
+                long pos = sr.BaseStream.Position;
+                ObjectType objType;
+                BinarySerializer.FromBinary(out objType, sr);
 
-        /// <summary>
-        /// Deserialize a ICollectionEntry Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinaryCollectionEntries<T>(out ObservableCollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
-        {
-            val = new ObservableCollection<T>();
-            FromBinaryCollectionEntries<T>(val, sr);
-        }
+                sr.BaseStream.Seek(pos, System.IO.SeekOrigin.Begin);
 
-        /// <summary>
-        /// Deserialize a ICollectionEntry Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinaryCollectionEntries<T>(out NotifyingObservableCollection<T> val, System.IO.BinaryReader sr, IDataObject parent, string propertyName) where T : ICollectionEntry, INotifyPropertyChanged, new()
-        {
-            val = new NotifyingObservableCollection<T>(parent, propertyName);
-            FromBinaryCollectionEntries<T>(val, sr);
+                IDataObject obj = objType.NewDataObject();
+                obj.FromStream(sr);
+
+                val.Add((T)obj);
+            }
         }
 
         /// <summary>
@@ -398,13 +387,10 @@ namespace Kistl.API
         {
             if (val == null) throw new ArgumentNullException("val");
 
-            List<T> tmpList = new List<T>();
             while (sr.ReadBoolean())
             {
                 T obj = new T();
                 obj.FromStream(sr);
-
-                tmpList.Add(obj);
 
                 T objInCollection = val.FirstOrDefault(i => obj.ID != Helper.INVALIDID && i.ID == obj.ID);
                 if (objInCollection != null)
@@ -416,18 +402,13 @@ namespace Kistl.API
                     val.Add((T)obj);
                 }
             }
-
-            /* TODO: das muss wo anders passieren
-             * foreach (T obj in val.ToArray())
-            {
-                if (tmpList.FirstOrDefault(i => i.ID == obj.ID) == null)
-                {
-                    ctx.Delete(obj);
-                }
-            }
-             * */
         }
 
+        /// <summary>
+        /// Deserialize a Linq Expression Tree.
+        /// </summary>
+        /// <param name="e">Expression Tree.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
         public static void FromBinary(out SerializableExpression e, System.IO.BinaryReader sr)
         {
             e = null;

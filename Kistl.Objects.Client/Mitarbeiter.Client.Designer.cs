@@ -31,7 +31,7 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private List<Kistl.App.Projekte.Projekt> _Projekte;
+        private BackReferenceCollection<Kistl.App.Projekte.Projekt> _Projekte;
         
         private System.DateTime? _Geburtstag;
         
@@ -70,11 +70,11 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Projekte.Projekt> Projekte
+        public IList<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {
-                if(_Projekte == null) _Projekte = Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte");
+                if(_Projekte == null) _Projekte = new BackReferenceCollection<Kistl.App.Projekte.Projekt>(Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte"));
                 return _Projekte;
             }
         }
@@ -172,7 +172,7 @@ namespace Kistl.App.Projekte
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_Projekte != null) _Projekte = _Projekte.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Projekt>().ToList();
+            if(_Projekte != null) _Projekte = new BackReferenceCollection<Kistl.App.Projekte.Projekt>(_Projekte.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Projekt>());
         }
         
         public virtual System.DateTime TestMethodForParameter(string TestString, int TestInt, double TestDouble, bool TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter)

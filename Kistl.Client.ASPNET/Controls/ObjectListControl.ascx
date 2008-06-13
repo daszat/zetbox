@@ -24,5 +24,5 @@
             </asp:Repeater>
         </table>
     </div>
-    <div style="clear:left;"></div>
+    <div style="clear:left;height=0px;"></div>
 </div>

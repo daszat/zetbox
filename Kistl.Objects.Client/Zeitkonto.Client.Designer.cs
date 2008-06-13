@@ -31,9 +31,9 @@ namespace Kistl.App.Zeiterfassung
         
         private string _Kontoname;
         
-        private List<Kistl.App.Zeiterfassung.Taetigkeit> _Taetigkeiten;
+        private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _Taetigkeiten;
         
-        private NotifyingObservableCollection<Zeitkonto_MitarbeiterCollectionEntry> _Mitarbeiter;
+        private ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Zeitkonto, Zeitkonto_MitarbeiterCollectionEntry> _Mitarbeiter;
         
         private System.Double? _MaxStunden;
         
@@ -41,7 +41,7 @@ namespace Kistl.App.Zeiterfassung
         
         public Zeitkonto()
         {
-            _Mitarbeiter = new NotifyingObservableCollection<Zeitkonto_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
+            _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Zeitkonto, Zeitkonto_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
         }
         
         public override int ID
@@ -71,16 +71,16 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
+        public IList<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
         {
             get
             {
-                if(_Taetigkeiten == null) _Taetigkeiten = Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten");
+                if(_Taetigkeiten == null) _Taetigkeiten = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>(Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten"));
                 return _Taetigkeiten;
             }
         }
         
-        public NotifyingObservableCollection<Zeitkonto_MitarbeiterCollectionEntry> Mitarbeiter
+        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get
             {
@@ -157,7 +157,7 @@ namespace Kistl.App.Zeiterfassung
         {
             base.CopyTo(obj);
             ((Zeitkonto)obj)._Kontoname = this._Kontoname;
-            ((Zeitkonto)obj)._Mitarbeiter = this._Mitarbeiter.Clone(obj);
+            this._Mitarbeiter.CopyTo(((Zeitkonto)obj)._Mitarbeiter);
             ((Zeitkonto)obj)._MaxStunden = this._MaxStunden;
             ((Zeitkonto)obj)._AktuelleStunden = this._AktuelleStunden;
         }
@@ -165,15 +165,15 @@ namespace Kistl.App.Zeiterfassung
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _Mitarbeiter.ToList().ForEach(i => ctx.Attach(i));
-            if(_Taetigkeiten != null) _Taetigkeiten = _Taetigkeiten.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Taetigkeit>().ToList();
+            _Mitarbeiter.UnderlyingCollection.ForEach(i => ctx.Attach(i));
+            if(_Taetigkeiten != null) _Taetigkeiten = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>(_Taetigkeiten.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Taetigkeit>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Kontoname, sw);
-            BinarySerializer.ToBinary(this.Mitarbeiter, sw);
+            BinarySerializer.ToBinary(this._Mitarbeiter.UnderlyingCollection, sw);
             BinarySerializer.ToBinary(this._MaxStunden, sw);
             BinarySerializer.ToBinary(this._AktuelleStunden, sw);
         }
@@ -182,13 +182,13 @@ namespace Kistl.App.Zeiterfassung
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
-            BinarySerializer.FromBinaryCollectionEntries(out this._Mitarbeiter, sr, this, "Mitarbeiter");
+            BinarySerializer.FromBinaryCollectionEntries(this._Mitarbeiter.UnderlyingCollection, sr);
             BinarySerializer.FromBinary(out this._MaxStunden, sr);
             BinarySerializer.FromBinary(out this._AktuelleStunden, sr);
         }
     }
     
-    public class Zeitkonto_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry
+    internal class Zeitkonto_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Zeitkonto>
     {
         
         private int _ID = Helper.INVALIDID;

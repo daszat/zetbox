@@ -21,6 +21,7 @@ namespace Kistl.Server.Generators
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
+                Console.WriteLine("Generating Code");
                 BaseDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
                 IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
                 using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())

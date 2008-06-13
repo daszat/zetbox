@@ -33,9 +33,9 @@ namespace Kistl.App.Base
         
         private string _ModuleName;
         
-        private List<Kistl.App.Base.DataType> _DataTypes;
+        private BackReferenceCollection<Kistl.App.Base.DataType> _DataTypes;
         
-        private List<Kistl.App.Base.Assembly> _Assemblies;
+        private BackReferenceCollection<Kistl.App.Base.Assembly> _Assemblies;
         
         public Module()
         {
@@ -82,21 +82,21 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Base.DataType> DataTypes
+        public IList<Kistl.App.Base.DataType> DataTypes
         {
             get
             {
-                if(_DataTypes == null) _DataTypes = Context.GetListOf<Kistl.App.Base.DataType>(this, "DataTypes");
+                if(_DataTypes == null) _DataTypes = new BackReferenceCollection<Kistl.App.Base.DataType>(Context.GetListOf<Kistl.App.Base.DataType>(this, "DataTypes"));
                 return _DataTypes;
             }
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Base.Assembly> Assemblies
+        public IList<Kistl.App.Base.Assembly> Assemblies
         {
             get
             {
-                if(_Assemblies == null) _Assemblies = Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
+                if(_Assemblies == null) _Assemblies = new BackReferenceCollection<Kistl.App.Base.Assembly>(Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies"));
                 return _Assemblies;
             }
         }
@@ -148,8 +148,8 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_DataTypes != null) _DataTypes = _DataTypes.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.DataType>().ToList();
-            if(_Assemblies != null) _Assemblies = _Assemblies.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.Assembly>().ToList();
+            if(_DataTypes != null) _DataTypes = new BackReferenceCollection<Kistl.App.Base.DataType>(_DataTypes.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.DataType>());
+            if(_Assemblies != null) _Assemblies = new BackReferenceCollection<Kistl.App.Base.Assembly>(_Assemblies.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.Assembly>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

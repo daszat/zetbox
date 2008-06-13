@@ -39,11 +39,11 @@ namespace Kistl.App.Projekte
         
         private string _Land;
         
-        private NotifyingObservableCollection<Kunde_EMailsCollectionEntry> _EMails;
+        private ListPropertyCollection<System.String, Kunde, Kunde_EMailsCollectionEntry> _EMails;
         
         public Kunde()
         {
-            _EMails = new NotifyingObservableCollection<Kunde_EMailsCollectionEntry>(this, "EMails");
+            _EMails = new ListPropertyCollection<System.String, Kunde, Kunde_EMailsCollectionEntry>(this, "EMails");
         }
         
         public override int ID
@@ -128,7 +128,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public NotifyingObservableCollection<Kunde_EMailsCollectionEntry> EMails
+        public IList<System.String> EMails
         {
             get
             {
@@ -181,13 +181,13 @@ namespace Kistl.App.Projekte
             ((Kunde)obj)._PLZ = this._PLZ;
             ((Kunde)obj)._Ort = this._Ort;
             ((Kunde)obj)._Land = this._Land;
-            ((Kunde)obj)._EMails = this._EMails.Clone(obj);
+            this._EMails.CopyTo(((Kunde)obj)._EMails);
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _EMails.ToList().ForEach(i => ctx.Attach(i));
+            _EMails.UnderlyingCollection.ForEach(i => ctx.Attach(i));
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -198,7 +198,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToBinary(this._PLZ, sw);
             BinarySerializer.ToBinary(this._Ort, sw);
             BinarySerializer.ToBinary(this._Land, sw);
-            BinarySerializer.ToBinary(this.EMails, sw);
+            BinarySerializer.ToBinary(this._EMails.UnderlyingCollection, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -209,11 +209,11 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._PLZ, sr);
             BinarySerializer.FromBinary(out this._Ort, sr);
             BinarySerializer.FromBinary(out this._Land, sr);
-            BinarySerializer.FromBinaryCollectionEntries(out this._EMails, sr, this, "EMails");
+            BinarySerializer.FromBinaryCollectionEntries(this._EMails.UnderlyingCollection, sr);
         }
     }
     
-    public class Kunde_EMailsCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry
+    internal class Kunde_EMailsCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<System.String, Kunde>
     {
         
         private int _ID = Helper.INVALIDID;

@@ -114,6 +114,13 @@ namespace Kistl.API
         void CopyTo(ICollectionEntry obj);
     }
 
+    public interface ICollectionEntry<VALUE, PARENT> : ICollectionEntry
+    {
+        VALUE Value { get; set; }
+        PARENT Parent { get; set; }
+        int fk_Parent { get; set; }
+    }
+
     /// <summary>
     /// XML Collection Interface. Used to serialize collection of Objects to XML. Implemented by the Generator.
     /// </summary>

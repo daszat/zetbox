@@ -183,50 +183,5 @@ namespace Kistl.API
                 action(i);
             }
         }
-
-        /// <summary>
-        /// Clone a List of ICloneable Objects. 
-        /// </summary>
-        /// <typeparam name="T">Type of the Objects in the List.</typeparam>
-        /// <param name="lst">List to clone.</param>
-        /// <returns>A new List with cloned Objects</returns>
-        public static List<T> Clone<T>(this List<T> lst) where T : ICloneable
-        {
-            List<T> result = new List<T>(lst.Capacity);
-
-            lst.ForEach(item => result.Add((T)item.Clone()));
-
-            return result;
-        }
-
-        /// <summary>
-        /// Clone a List of ICloneable Objects. 
-        /// </summary>
-        /// <typeparam name="T">Type of the Objects in the ObservableCollection.</typeparam>
-        /// <param name="lst">List to clone.</param>
-        /// <returns>A new ObservableCollection with cloned Objects</returns>
-        public static ObservableCollection<T> Clone<T>(this ObservableCollection<T> lst) where T : ICloneable
-        {
-            ObservableCollection<T> result = new ObservableCollection<T>();
-
-            lst.ForEach<T>(item => result.Add((T)item.Clone()));
-
-            return result;
-        }
-
-        /// <summary>
-        /// Clone a List of ICloneable Objects. 
-        /// </summary>
-        /// <typeparam name="T">Type of the Objects in the NotifyingObservableCollection.</typeparam>
-        /// <param name="lst">List to clone.</param>
-        /// <returns>A new NotifyingObservableCollection with cloned Objects</returns>
-        public static NotifyingObservableCollection<T> Clone<T>(this NotifyingObservableCollection<T> lst, IDataObject newParent) where T : ICloneable, INotifyPropertyChanged
-        {
-            NotifyingObservableCollection<T> result = new NotifyingObservableCollection<T>(newParent, lst.PropertyName);
-
-            lst.ForEach<T>(item => result.Add((T)item.Clone()));
-
-            return result;
-        }
     }
 }

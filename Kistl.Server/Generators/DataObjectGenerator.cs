@@ -787,6 +787,12 @@ namespace Kistl.Server.Generators
 
             collectionClass.code_class = CreateClass(collectionClass.code_namespace, Generator.GetPropertyCollectionObjectType((Property)current.property).Classname,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.clientServer));
+            if (current.clientServer == ClientServerEnum.Client)
+            {
+                collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
+                    current.property.GetDataType(), current.code_class.Name));
+                collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
+            }
 
             // Create ID
             GenerateDefaultProperty_IDInternal((CurrentObjectClass)collectionClass.Clone());
@@ -833,16 +839,24 @@ namespace Kistl.Server.Generators
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("NotifyingObservableCollection<{0}>", collectionClass.code_class.Name));
+                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetDataType()));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
 
-                current.code_field = CreateField(current.code_class, current.code_property.Type, string.Format(@"_{0}", current.property.PropertyName));
+                current.code_field = CreateField(current.code_class, 
+                    string.Format("ListPropertyCollection<{0}, {1}, {2}>",
+                        current.property.GetDataType(),
+                        current.code_class.Name,
+                        collectionClass.code_class.Name), 
+                    string.Format(@"_{0}", current.property.PropertyName));
 
                 current.code_constructor.Statements.Add(new CodeSnippetExpression(
-                    string.Format(@"_{0} = new NotifyingObservableCollection<{1}>(this, ""{0}"")",
-                        current.property.PropertyName, collectionClass.code_class.Name)));
+                    string.Format(@"_{0} = new ListPropertyCollection<{1}, {2}, {3}>(this, ""{0}"")",
+                        current.property.PropertyName,
+                        current.property.GetDataType(),
+                        current.code_class.Name,
+                        collectionClass.code_class.Name)));
             }
 
             GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent);
@@ -948,6 +962,12 @@ namespace Kistl.Server.Generators
 
             collectionClass.code_class = CreateClass(collectionClass.code_namespace, Generator.GetPropertyCollectionObjectType((Property)current.property).Classname,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.clientServer));
+            if (current.clientServer == ClientServerEnum.Client)
+            {
+                collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
+                    current.property.GetDataType(), current.code_class.Name));
+                collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
+            }
 
             // Create ID
             GenerateDefaultProperty_IDInternal((CurrentObjectClass)collectionClass.Clone());
@@ -980,16 +1000,24 @@ namespace Kistl.Server.Generators
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("NotifyingObservableCollection<{0}>", collectionClass.code_class.Name));
+                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetDataType()));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
 
-                current.code_field = CreateField(current.code_class, current.code_property.Type, string.Format(@"_{0}", current.property.PropertyName));
+                current.code_field = CreateField(current.code_class,
+                    string.Format("ListPropertyCollection<{0}, {1}, {2}>",
+                        current.property.GetDataType(),
+                        current.code_class.Name,
+                        collectionClass.code_class.Name),
+                    string.Format(@"_{0}", current.property.PropertyName));
 
                 current.code_constructor.Statements.Add(new CodeSnippetExpression(
-                    string.Format(@"_{0} = new NotifyingObservableCollection<{1}>(this, ""{0}"")",
-                        current.property.PropertyName, collectionClass.code_class.Name)));
+                    string.Format(@"_{0} = new ListPropertyCollection<{1}, {2}, {3}>(this, ""{0}"")",
+                        current.property.PropertyName,
+                        current.property.GetDataType(),
+                        current.code_class.Name,
+                        collectionClass.code_class.Name)));
             }
 
             // Get/Set for client
@@ -1070,14 +1098,14 @@ namespace Kistl.Server.Generators
             if (current.clientServer == ClientServerEnum.Client)
             {
                 ObjectType childType = new ObjectType(current.property.GetDataType());
-                current.code_property.Type = new CodeTypeReference("List", new CodeTypeReference(childType.NameDataObject));
+                current.code_property.Type = new CodeTypeReference("IList", new CodeTypeReference(childType.NameDataObject));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(
-                        @"if(_{0} == null) _{0} = Context.GetListOf<{1}>(this, ""{0}"");
+                        @"if(_{0} == null) _{0} = new BackReferenceCollection<{1}>(Context.GetListOf<{1}>(this, ""{0}""));
                 return _{0}", current.property.PropertyName, childType.NameDataObject)));
 
-                CodeMemberField f = new CodeMemberField(current.code_property.Type,
+                CodeMemberField f = new CodeMemberField(new CodeTypeReference("BackReferenceCollection", new CodeTypeReference(childType.NameDataObject)),
                     "_" + current.property.PropertyName);
 
                 current.code_class.Members.Add(f);
@@ -1221,7 +1249,8 @@ namespace Kistl.Server.Generators
                 // TODO: Geht z.Z. nur für den Client!!!!
                 else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
                 {
-                    stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone(obj)", p.PropertyName, current.objClass.ClassName);
+                    //stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone(obj)", p.PropertyName, current.objClass.ClassName);
+                    stmt = string.Format("this._{0}.CopyTo((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
                 }
                 else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
                 {
@@ -1230,7 +1259,7 @@ namespace Kistl.Server.Generators
                 // TODO: Geht z.Z. nur für den Client!!!!
                 else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
                 {
-                    stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone(obj)", p.PropertyName, current.objClass.ClassName);
+                    stmt = string.Format("this._{0}.CopyTo((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
                 }
 
                 if (!string.IsNullOrEmpty(stmt))
@@ -1250,12 +1279,12 @@ namespace Kistl.Server.Generators
                 foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
                 {
                     // Use ToList before using foreach - the collection could change
-                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"_{0}.ToList().ForEach(i => ctx.Attach(i))", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"_{0}.UnderlyingCollection.ForEach(i => ctx.Attach(i))", p.PropertyName)));
                 }
                 foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
                 {
                     // Create a new List after Attach - Object Reference will change, if Object is alredy in tha Context
-                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = _{0}.Select(i => ctx.Attach(i)).OfType<{1}>().ToList()", p.PropertyName, p.GetDataType())));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(_{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetDataType())));
                 }
             }
             else
@@ -1411,7 +1440,10 @@ namespace Kistl.Server.Generators
                 }
                 else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
+                    if (current.clientServer == ClientServerEnum.Client)
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}.UnderlyingCollection, sw)", p.PropertyName)));
+                    else
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
                 }
                 else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
                 {
@@ -1419,7 +1451,10 @@ namespace Kistl.Server.Generators
                 }
                 else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
+                    if (current.clientServer == ClientServerEnum.Client)
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}.UnderlyingCollection, sw)", p.PropertyName)));
+                    else
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
                 }
                 else if (p is BackReferenceProperty
                     && current.clientServer == ClientServerEnum.Server
@@ -1443,7 +1478,7 @@ namespace Kistl.Server.Generators
                 if (p is Property && ((Property)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, this, \"{0}\")", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this._{0}.UnderlyingCollection, sr)", p.PropertyName)));
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
                 }
@@ -1464,7 +1499,7 @@ namespace Kistl.Server.Generators
                 else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
-                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(out this._{0}, sr, this, \"{0}\")", p.PropertyName)));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this._{0}.UnderlyingCollection, sr)", p.PropertyName)));
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
                 }
@@ -1472,7 +1507,7 @@ namespace Kistl.Server.Generators
                     && current.clientServer == ClientServerEnum.Client
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("this._{0} = new BackReferenceCollection<{1}>(); BinarySerializer.FromBinary(this._{0}, sr)", p.PropertyName, p.GetDataType())));
                 }
             }
         }

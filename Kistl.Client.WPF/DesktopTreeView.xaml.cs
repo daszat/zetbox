@@ -89,7 +89,7 @@ namespace Kistl.Client.WPF
                     if (_ObjectClassedNodes == null)
                     {
                         _ObjectClassedNodes = new ObservableCollection<ObjectClassNode>();
-                        Module.DataTypes.ForEach(o => _ObjectClassedNodes.Add(new ObjectClassNode(o)));
+                        Module.DataTypes.ForEach<Kistl.App.Base.DataType>(o => _ObjectClassedNodes.Add(new ObjectClassNode(o)));
                     }
 
                     return _ObjectClassedNodes;

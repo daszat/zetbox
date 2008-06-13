@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="BaseClientDataObject.cs" />
     <Compile Include="CacheController.cs" />
+    <Compile Include="Collections.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="LinqToKistl\KistlContext.cs" />
     <Compile Include="LinqToKistl\KistlContextQuery.cs" />

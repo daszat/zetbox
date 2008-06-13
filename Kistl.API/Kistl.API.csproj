@@ -79,6 +79,7 @@
     <Compile Include="IKistlService.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="NotifyingObservableCollection.cs" />
+    <Compile Include="ObjectMoniker.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableExpression.cs" />

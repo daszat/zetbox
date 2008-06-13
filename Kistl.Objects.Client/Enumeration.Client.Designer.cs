@@ -27,18 +27,18 @@ namespace Kistl.App.Base
     public class Enumeration : Kistl.App.Base.DataType, ICloneable
     {
         
-        private List<Kistl.App.Base.EnumerationEntry> _EnumerationEntries;
+        private BackReferenceCollection<Kistl.App.Base.EnumerationEntry> _EnumerationEntries;
         
         public Enumeration()
         {
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Base.EnumerationEntry> EnumerationEntries
+        public IList<Kistl.App.Base.EnumerationEntry> EnumerationEntries
         {
             get
             {
-                if(_EnumerationEntries == null) _EnumerationEntries = Context.GetListOf<Kistl.App.Base.EnumerationEntry>(this, "EnumerationEntries");
+                if(_EnumerationEntries == null) _EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>(Context.GetListOf<Kistl.App.Base.EnumerationEntry>(this, "EnumerationEntries"));
                 return _EnumerationEntries;
             }
         }
@@ -88,7 +88,7 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_EnumerationEntries != null) _EnumerationEntries = _EnumerationEntries.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.EnumerationEntry>().ToList();
+            if(_EnumerationEntries != null) _EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>(_EnumerationEntries.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.EnumerationEntry>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -99,7 +99,7 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._EnumerationEntries, sr);
+            this._EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>(); BinarySerializer.FromBinary(this._EnumerationEntries, sr);
         }
     }
 }

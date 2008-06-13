@@ -337,19 +337,28 @@ namespace Kistl.GUI
         /// </summary>
         protected override void OnUserInput()
         {
-            if (Control.Value == null)
+            IDataObject refobj = Control.Value;
+            // TODO: Arthur: Das hab ich einbauen müssen, weil sich ASP.NET keine Objekte merken kann
+            // Daher hab ich nur eine ID - diese geb ich über den ObjectMoniker zurück
+            // Hier wird er wieder zurück umgewandelt in ein Objekt.
+            if (refobj is ObjectMoniker)
+            {
+                refobj = Object.Context.Find(refobj.Type, refobj.ID);
+            }
+
+            if (refobj == null)
             {
                 Control.IsValidValue = Property.IsNullable;
             }
             else
             {
-                Control.IsValidValue = _Items.Contains(Control.Value);
+                Control.IsValidValue = _Items.Contains(refobj);
             }
 
 
             if (Control.IsValidValue)
             {
-                Object.SetPropertyValue(Property.PropertyName, Control.Value);
+                Object.SetPropertyValue(Property.PropertyName, refobj);
             }
         }
     }
@@ -590,9 +599,7 @@ namespace Kistl.GUI
 
         public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, ObjectReferenceProperty prop)
         {
-            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<ICollectionEntry>()
-                .Select(i => i.GetPropertyValue<IDataObject>("Value")).ToList();
-                
+            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<IDataObject>().ToList();
         }
 
         public static void SetList(this IDataObject obj, ObjectReferenceProperty prop, IList<Kistl.API.IDataObject> value)

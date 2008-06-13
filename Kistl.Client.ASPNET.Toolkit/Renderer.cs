@@ -6,10 +6,11 @@ using Kistl.API;
 using Kistl.GUI.Renderer;
 using System.Web.UI;
 using System.Web;
+using Kistl.GUI;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
-    public class Renderer : BasicRenderer<BaseASPNETControl, BaseASPNETControl, BaseASPNETContainer>
+    public class Renderer : BasicRenderer<IControlLoader, IControlLoader, IContainerLoader>
     {
         public override Kistl.GUI.DB.Toolkit Platform
         {
@@ -28,14 +29,14 @@ namespace Kistl.Client.ASPNET.Toolkit
                     HttpUtility.UrlEncode(obj.GetType().FullName), obj.ID));
         }
 
-        protected override BaseASPNETControl Setup(BaseASPNETControl control)
+        protected override IControlLoader Setup(IControlLoader control)
         {
             return control;
         }
 
-        protected override BaseASPNETContainer Setup(BaseASPNETContainer widget, IList<BaseASPNETControl> list)
+        protected override IContainerLoader Setup(IContainerLoader widget, IList<IControlLoader> list)
         {
-            list.ForEach<BaseASPNETControl>(c => widget.AddChild(c));
+            list.ForEach<IControlLoader>(c => widget.AddChild(c));
             return widget;
         }
     }

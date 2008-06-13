@@ -33,13 +33,13 @@ namespace Kistl.App.Base
         
         private string _ClassName;
         
-        private List<Kistl.App.Base.BaseProperty> _Properties;
+        private BackReferenceCollection<Kistl.App.Base.BaseProperty> _Properties;
         
-        private List<Kistl.App.Base.Method> _Methods;
+        private BackReferenceCollection<Kistl.App.Base.Method> _Methods;
         
         private int _fk_DefaultIcon = Helper.INVALIDID;
         
-        private List<Kistl.App.Base.MethodInvocation> _MethodIvokations;
+        private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodIvokations;
         
         public DataType()
         {
@@ -102,21 +102,21 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Base.BaseProperty> Properties
+        public IList<Kistl.App.Base.BaseProperty> Properties
         {
             get
             {
-                if(_Properties == null) _Properties = Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
+                if(_Properties == null) _Properties = new BackReferenceCollection<Kistl.App.Base.BaseProperty>(Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties"));
                 return _Properties;
             }
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Base.Method> Methods
+        public IList<Kistl.App.Base.Method> Methods
         {
             get
             {
-                if(_Methods == null) _Methods = Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
+                if(_Methods == null) _Methods = new BackReferenceCollection<Kistl.App.Base.Method>(Context.GetListOf<Kistl.App.Base.Method>(this, "Methods"));
                 return _Methods;
             }
         }
@@ -152,11 +152,11 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Base.MethodInvocation> MethodIvokations
+        public IList<Kistl.App.Base.MethodInvocation> MethodIvokations
         {
             get
             {
-                if(_MethodIvokations == null) _MethodIvokations = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+                if(_MethodIvokations == null) _MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations"));
                 return _MethodIvokations;
             }
         }
@@ -209,9 +209,9 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_Properties != null) _Properties = _Properties.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.BaseProperty>().ToList();
-            if(_Methods != null) _Methods = _Methods.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.Method>().ToList();
-            if(_MethodIvokations != null) _MethodIvokations = _MethodIvokations.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.MethodInvocation>().ToList();
+            if(_Properties != null) _Properties = new BackReferenceCollection<Kistl.App.Base.BaseProperty>(_Properties.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.BaseProperty>());
+            if(_Methods != null) _Methods = new BackReferenceCollection<Kistl.App.Base.Method>(_Methods.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.Method>());
+            if(_MethodIvokations != null) _MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(_MethodIvokations.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.MethodInvocation>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -227,10 +227,10 @@ namespace Kistl.App.Base
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._ClassName, sr);
-            BinarySerializer.FromBinary(out this._Properties, sr);
-            BinarySerializer.FromBinary(out this._Methods, sr);
+            this._Properties = new BackReferenceCollection<Kistl.App.Base.BaseProperty>(); BinarySerializer.FromBinary(this._Properties, sr);
+            this._Methods = new BackReferenceCollection<Kistl.App.Base.Method>(); BinarySerializer.FromBinary(this._Methods, sr);
             BinarySerializer.FromBinary(out this._fk_DefaultIcon, sr);
-            BinarySerializer.FromBinary(out this._MethodIvokations, sr);
+            this._MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(); BinarySerializer.FromBinary(this._MethodIvokations, sr);
         }
     }
 }

@@ -13,16 +13,16 @@ using System.Xml.Linq;
 using Kistl.Client.ASPNET.Toolkit;
 using Kistl.GUI;
 
-public partial class Controls_ObjectPanel : System.Web.UI.UserControl, IASPNETContainer, IObjectControl
+public partial class Controls_ObjectPanel : System.Web.UI.UserControl, IContainerLoader, IObjectControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
 
-    public void AddChild(BaseASPNETControl child)
+    public void AddChild(IControlLoader child)
     {
-        divChildren.Controls.Add(child);
+        divChildren.Controls.Add((Control)child);
     }
 
     protected void OnSave(object sender, EventArgs e)

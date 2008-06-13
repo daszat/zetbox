@@ -31,21 +31,21 @@ namespace Kistl.App.Projekte
         
         private string _Name;
         
-        private List<Kistl.App.Projekte.Task> _Tasks;
+        private BackReferenceCollection<Kistl.App.Projekte.Task> _Tasks;
         
-        private NotifyingObservableCollection<Projekt_MitarbeiterCollectionEntry> _Mitarbeiter;
+        private ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Projekt, Projekt_MitarbeiterCollectionEntry> _Mitarbeiter;
         
         private System.Double? _AufwandGes;
         
         private string _Kundenname;
         
-        private List<Kistl.App.Zeiterfassung.Kostentraeger> _Kostentraeger;
+        private BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger> _Kostentraeger;
         
-        private List<Kistl.App.Projekte.Auftrag> _Auftraege;
+        private BackReferenceCollection<Kistl.App.Projekte.Auftrag> _Auftraege;
         
         public Projekt()
         {
-            _Mitarbeiter = new NotifyingObservableCollection<Projekt_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
+            _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Projekt, Projekt_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
         }
         
         public override int ID
@@ -75,16 +75,16 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Projekte.Task> Tasks
+        public IList<Kistl.App.Projekte.Task> Tasks
         {
             get
             {
-                if(_Tasks == null) _Tasks = Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
+                if(_Tasks == null) _Tasks = new BackReferenceCollection<Kistl.App.Projekte.Task>(Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks"));
                 return _Tasks;
             }
         }
         
-        public NotifyingObservableCollection<Projekt_MitarbeiterCollectionEntry> Mitarbeiter
+        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get
             {
@@ -121,21 +121,21 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
+        public IList<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
         {
             get
             {
-                if(_Kostentraeger == null) _Kostentraeger = Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger");
+                if(_Kostentraeger == null) _Kostentraeger = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>(Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger"));
                 return _Kostentraeger;
             }
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Projekte.Auftrag> Auftraege
+        public IList<Kistl.App.Projekte.Auftrag> Auftraege
         {
             get
             {
-                if(_Auftraege == null) _Auftraege = Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
+                if(_Auftraege == null) _Auftraege = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>(Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege"));
                 return _Auftraege;
             }
         }
@@ -181,7 +181,7 @@ namespace Kistl.App.Projekte
         {
             base.CopyTo(obj);
             ((Projekt)obj)._Name = this._Name;
-            ((Projekt)obj)._Mitarbeiter = this._Mitarbeiter.Clone(obj);
+            this._Mitarbeiter.CopyTo(((Projekt)obj)._Mitarbeiter);
             ((Projekt)obj)._AufwandGes = this._AufwandGes;
             ((Projekt)obj)._Kundenname = this._Kundenname;
         }
@@ -189,17 +189,17 @@ namespace Kistl.App.Projekte
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _Mitarbeiter.ToList().ForEach(i => ctx.Attach(i));
-            if(_Tasks != null) _Tasks = _Tasks.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Task>().ToList();
-            if(_Kostentraeger != null) _Kostentraeger = _Kostentraeger.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Kostentraeger>().ToList();
-            if(_Auftraege != null) _Auftraege = _Auftraege.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Auftrag>().ToList();
+            _Mitarbeiter.UnderlyingCollection.ForEach(i => ctx.Attach(i));
+            if(_Tasks != null) _Tasks = new BackReferenceCollection<Kistl.App.Projekte.Task>(_Tasks.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Task>());
+            if(_Kostentraeger != null) _Kostentraeger = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>(_Kostentraeger.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Kostentraeger>());
+            if(_Auftraege != null) _Auftraege = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>(_Auftraege.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Auftrag>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Name, sw);
-            BinarySerializer.ToBinary(this.Mitarbeiter, sw);
+            BinarySerializer.ToBinary(this._Mitarbeiter.UnderlyingCollection, sw);
             BinarySerializer.ToBinary(this._AufwandGes, sw);
             BinarySerializer.ToBinary(this._Kundenname, sw);
         }
@@ -208,13 +208,13 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Name, sr);
-            BinarySerializer.FromBinaryCollectionEntries(out this._Mitarbeiter, sr, this, "Mitarbeiter");
+            BinarySerializer.FromBinaryCollectionEntries(this._Mitarbeiter.UnderlyingCollection, sr);
             BinarySerializer.FromBinary(out this._AufwandGes, sr);
             BinarySerializer.FromBinary(out this._Kundenname, sr);
         }
     }
     
-    public class Projekt_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry
+    internal class Projekt_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Projekt>
     {
         
         private int _ID = Helper.INVALIDID;

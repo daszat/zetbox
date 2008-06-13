@@ -35,10 +35,14 @@ namespace Kistl.GUI.DB
                 Description = "top level visual to display a object",
                 Children = new List<Visual>()
             };
-            ObjectClass klass = ClientHelper.ObjectClasses[result.Type];
-            foreach (var p in klass.Properties)
+            ObjectClass @class = ClientHelper.ObjectClasses[result.Type];
+            while (@class != null)
             {
-                result.VisualTree.Children.Add(Visual.CreateDefaultVisual(p));
+                foreach (var p in @class.Properties)
+                {
+                    result.VisualTree.Children.Add(Visual.CreateDefaultVisual(p));
+                }
+                @class = @class.BaseObjectClass;
             }
             return result;
         }

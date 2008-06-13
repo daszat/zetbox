@@ -8,7 +8,6 @@ div.ObjectPanelChildren
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 10px;	
-	border: solid 1px black;
 }
 
 div.Control
@@ -17,7 +16,7 @@ div.Control
 	margin-bottom: 10px;
 }
 
-input.Control 
+input.Control, select.Control
 {
   display: block;
   float: left;

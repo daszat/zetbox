@@ -31,13 +31,13 @@ namespace Kistl.App.Base
         
         private int _fk_BaseObjectClass = Helper.INVALIDID;
         
-        private List<Kistl.App.Base.ObjectClass> _SubClasses;
+        private BackReferenceCollection<Kistl.App.Base.ObjectClass> _SubClasses;
         
-        private NotifyingObservableCollection<ObjectClass_ImplementsInterfacesCollectionEntry> _ImplementsInterfaces;
+        private ListPropertyCollection<Kistl.App.Base.Interface, ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry> _ImplementsInterfaces;
         
         public ObjectClass()
         {
-            _ImplementsInterfaces = new NotifyingObservableCollection<ObjectClass_ImplementsInterfacesCollectionEntry>(this, "ImplementsInterfaces");
+            _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry>(this, "ImplementsInterfaces");
         }
         
         public string TableName
@@ -85,16 +85,16 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public List<Kistl.App.Base.ObjectClass> SubClasses
+        public IList<Kistl.App.Base.ObjectClass> SubClasses
         {
             get
             {
-                if(_SubClasses == null) _SubClasses = Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses");
+                if(_SubClasses == null) _SubClasses = new BackReferenceCollection<Kistl.App.Base.ObjectClass>(Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses"));
                 return _SubClasses;
             }
         }
         
-        public NotifyingObservableCollection<ObjectClass_ImplementsInterfacesCollectionEntry> ImplementsInterfaces
+        public IList<Kistl.App.Base.Interface> ImplementsInterfaces
         {
             get
             {
@@ -144,14 +144,14 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
             ((ObjectClass)obj)._TableName = this._TableName;
             ((ObjectClass)obj)._fk_BaseObjectClass = this._fk_BaseObjectClass;
-            ((ObjectClass)obj)._ImplementsInterfaces = this._ImplementsInterfaces.Clone(obj);
+            this._ImplementsInterfaces.CopyTo(((ObjectClass)obj)._ImplementsInterfaces);
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _ImplementsInterfaces.ToList().ForEach(i => ctx.Attach(i));
-            if(_SubClasses != null) _SubClasses = _SubClasses.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.ObjectClass>().ToList();
+            _ImplementsInterfaces.UnderlyingCollection.ForEach(i => ctx.Attach(i));
+            if(_SubClasses != null) _SubClasses = new BackReferenceCollection<Kistl.App.Base.ObjectClass>(_SubClasses.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.ObjectClass>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -159,7 +159,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._TableName, sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
-            BinarySerializer.ToBinary(this.ImplementsInterfaces, sw);
+            BinarySerializer.ToBinary(this._ImplementsInterfaces.UnderlyingCollection, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -167,11 +167,11 @@ namespace Kistl.App.Base
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._TableName, sr);
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
-            BinarySerializer.FromBinaryCollectionEntries(out this._ImplementsInterfaces, sr, this, "ImplementsInterfaces");
+            BinarySerializer.FromBinaryCollectionEntries(this._ImplementsInterfaces.UnderlyingCollection, sr);
         }
     }
     
-    public class ObjectClass_ImplementsInterfacesCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry
+    internal class ObjectClass_ImplementsInterfacesCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.Interface, ObjectClass>
     {
         
         private int _ID = Helper.INVALIDID;
