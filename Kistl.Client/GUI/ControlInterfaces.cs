@@ -51,7 +51,7 @@ namespace Kistl.GUI
         /// This event is triggered after UserInput. The Presenter will then 
         /// fetch the Value and do Validity checks.
         /// </summary>
-        event /* TODO UserInput<TYPE>*/EventHandler UserInput;
+        event EventHandler UserInput;
     }
 
     /// <summary>
@@ -83,8 +83,9 @@ namespace Kistl.GUI
     public interface IObjectControl : IBasicControl
     {
         Kistl.API.IDataObject Value { get; set; }
-        event /* TODO UserInput<Kistl.API.IDataObject>*/EventHandler UserInput;
+        event EventHandler UserInput;
         event EventHandler UserSaveRequest;
+        event EventHandler UserDeleteRequest;
     }
 
 

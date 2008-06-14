@@ -82,6 +82,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             add { Ctrl.UserSaveRequest += value; }
             remove { Ctrl.UserSaveRequest -= value; }
         }
+
+        public event EventHandler UserDeleteRequest
+        {
+            add { Ctrl.UserDeleteRequest += value; }
+            remove { Ctrl.UserDeleteRequest -= value; }
+        }
     }
 
     public abstract class BasicPropertyControl<T> : BaseControlLoader<IValueControl<T>>, IValueControl<T>

@@ -64,8 +64,8 @@ public partial class Controls_ObjectPanel : System.Web.UI.UserControl, IContaine
     }
 
     public event EventHandler UserInput;
-
     public event EventHandler UserSaveRequest;
+    public event EventHandler UserDeleteRequest;
 
     #endregion
 }

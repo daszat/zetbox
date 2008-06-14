@@ -19,7 +19,6 @@
                 x:Name="lst"
                 MinHeight="150"
                 ItemsSource="{Binding ElementName=ListCtrl, Path=Value}"
-                SelectionChanged="lst_SelectionChanged"
                 >
                 <ListView.ItemTemplate>
                     <DataTemplate>

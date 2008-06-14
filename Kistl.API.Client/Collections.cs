@@ -42,11 +42,20 @@ namespace Kistl.API.Client
 
         public void CopyTo(ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> other)
         {
-            foreach (COLLECTIONENTRYTYPE e in collection)
+            other.collection.BeginUpdate();
+            try
             {
-                COLLECTIONENTRYTYPE n = new COLLECTIONENTRYTYPE();
-                e.CopyTo(n);
-                other.collection.Add(n);
+                other.Clear();
+                foreach (COLLECTIONENTRYTYPE e in collection)
+                {
+                    COLLECTIONENTRYTYPE n = new COLLECTIONENTRYTYPE();
+                    e.CopyTo(n);
+                    other.collection.Add(n);
+                }
+            }
+            finally
+            {
+                other.collection.EndUpdate();
             }
         }
 

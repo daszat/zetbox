@@ -64,16 +64,12 @@ namespace Kistl.GUI.Renderer.WPF
         {
             try
             {
-                // Objekt zum Server schicken & dann wieder auspacken
-                int count = _obj.Context.SubmitChanges();
-                // ReBind
-                // Das muss sein, weil sich ja Properties geändert haben könnten
-                // außerdem wird beim Kopieren kein Change gefeuert
-                _obj.NotifyChange();
+                if (UserSaveRequest != null)
+                {
+                    UserSaveRequest(this, EventArgs.Empty);
+                }
 
                 SetTitle();
-
-                MessageBox.Show(string.Format("{0} Item(s) submitted", count), "Save", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -93,9 +89,12 @@ namespace Kistl.GUI.Renderer.WPF
                 if (MessageBox.Show("Are you sure that you want to delete this Object?",
                     "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    _obj.Context.Delete(_obj);
-                    _obj.Context.SubmitChanges();
+                    if (UserDeleteRequest != null)
+                    {
+                        UserDeleteRequest(this, EventArgs.Empty);
+                    }
 
+                    // TODO: Frage: Wer mach das Fenster wieder zu?
                     this.Close();
                 }
             }
@@ -177,14 +176,9 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
-        private EventHandler _UserInput;
-        event EventHandler IObjectControl.UserInput
-        {
-            add { _UserInput += value; }
-            remove { _UserInput -= value; }
-        }
-
+        public event EventHandler UserInput;
         public event EventHandler UserSaveRequest;
+        public event EventHandler UserDeleteRequest;
 
 
         #endregion

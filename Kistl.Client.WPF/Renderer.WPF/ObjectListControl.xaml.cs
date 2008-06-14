@@ -43,9 +43,6 @@ namespace Kistl.GUI.Renderer.WPF
         }
 
         #region IReferenceControl<IList<IDataObject>> Members
-
-
-
         public Kistl.API.ObjectType ObjectType
         {
             get { return (Kistl.API.ObjectType )GetValue(ObjectTypeProperty); }
@@ -55,8 +52,6 @@ namespace Kistl.GUI.Renderer.WPF
         // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
             DependencyProperty.Register("ObjectType", typeof(Kistl.API.ObjectType ), typeof(ObjectListControl), new PropertyMetadata(null));
-
-
 
         public IList<Kistl.API.IDataObject> ItemsSource
         {
@@ -96,20 +91,11 @@ namespace Kistl.GUI.Renderer.WPF
             DependencyProperty.Register("Value", typeof(IList<Kistl.API.IDataObject>),
                 typeof(ObjectListControl), new PropertyMetadata(null));
 
-
-
         public event EventHandler UserInput;
 
         #endregion
 
         #region Change Management
-
-        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // SelectionChanged -> nicht die Liste ändern
-            // Value = lst.SelectedItems.Cast<Kistl.API.IDataObject>().ToList();
-        }
-
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
@@ -156,7 +142,8 @@ namespace Kistl.GUI.Renderer.WPF
         }
 
         /// <summary>
-        /// exports the list's SelectionChanged Event for usage in the client
+        /// exports the list's SelectionChanged Event for usage in the client.
+        /// Used by the main window - remove it later!!
         /// </summary>
         public event SelectionChangedEventHandler SelectionChanged
         {

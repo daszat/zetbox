@@ -10,6 +10,8 @@ namespace Kistl.API
     public class NotifyingObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
     {
         private IDataObject _Parent;
+        private int _UpdateCounter = 0;
+
         private string _PropertyName;
         public string PropertyName
         {
@@ -25,10 +27,28 @@ namespace Kistl.API
             _PropertyName = propertyName;
         }
 
+        public void BeginUpdate()
+        {
+            _UpdateCounter++;
+        }
+
+        public void EndUpdate()
+        {
+            _UpdateCounter--;
+        }
+
+        protected void NotifyParent()
+        {
+            if (_UpdateCounter == 0)
+            {
+                _Parent.NotifyPropertyChanged(_PropertyName);
+            }
+        }
+
         protected override void OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             base.OnCollectionChanged(e);
-            _Parent.NotifyPropertyChanged(_PropertyName);
+            NotifyParent();
         }
 
         protected override void InsertItem(int index, T item)
@@ -45,7 +65,7 @@ namespace Kistl.API
 
         void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            _Parent.NotifyPropertyChanged(_PropertyName);
+            NotifyParent();
         }
     }
 }
