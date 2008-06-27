@@ -42,7 +42,7 @@ namespace Kistl.API.Configuration
         /// <summary>
         /// Inits the config
         /// </summary>
-        /// <param name="config">Path to the Config File. May be null or empty. Then DefaultConfig.xml is loaded</param>
+        /// <param name="file">Path to the Config File. May be null or empty. Then DefaultConfig.xml is loaded</param>
         internal static void Init(string file)
         {
             if (Configuration.KistlConfig.IsInitialized) throw new InvalidOperationException("Configuration already setuped");
@@ -57,47 +57,92 @@ namespace Kistl.API.Configuration
             }
         }
 
+        /// <summary>
+        /// Path to the Config File
+        /// </summary>
         [XmlIgnore]
         public string ConfigFilePath { get; set; }
 
+        /// <summary>
+        /// Configuration Name
+        /// </summary>
         [XmlElement(IsNullable = false)]
         public string ConfigName { get; set; }
 
+        /// <summary>
+        /// Server Configuration
+        /// </summary>
         [XmlElement(IsNullable = true)]
         public ServerConfig Server { get; set; }
 
+        /// <summary>
+        /// Client Configuration
+        /// </summary>
         [XmlElement(IsNullable = true)]
         public ClientConfig Client { get; set; }
 
+        /// <summary>
+        /// Location (Path) to Assemblies - TODO: Will be replaced!
+        /// </summary>
         [XmlArray(IsNullable = false)]
         public string[] SourceFileLocation { get; set; }
 
+        /// <summary>
+        /// Address of the WCF Service - not used yet!
+        /// </summary>
         [XmlElement(IsNullable = false)]
         public string Address;
 
+        /// <summary>
+        /// Server Configuration
+        /// </summary>
         public class ServerConfig
         {
+            /// <summary>
+            /// If running in a Client host: Should a Server be started.
+            /// </summary>
             [XmlAttribute]
             public bool StartServer { get; set; }
 
+            /// <summary>
+            /// Database Provider Name
+            /// </summary>
             [XmlElement(IsNullable = false)]
             public string DatabaseProvider { get; set; }
 
+            /// <summary>
+            /// Connectionstring to Database.
+            /// </summary>
             [XmlElement(IsNullable = false)]
             public string ConnectionString {get; set;}
 
+            /// <summary>
+            /// Path of the Document Store
+            /// </summary>
             [XmlElement(IsNullable = false)]
             public string DocumentStore { get; set; }
         }
 
+        /// <summary>
+        /// Client Configuration
+        /// </summary>
         public class ClientConfig
         {
+            /// <summary>
+            /// Should a Client be started.
+            /// </summary>
             [XmlAttribute]
             public bool StartClient { get; set; }
 
+            /// <summary>
+            /// Used in Debug Mode - should Exceptions be thrown.
+            /// </summary>
             [XmlAttribute]
             public bool ThrowErrors { get; set; }
 
+            /// <summary>
+            /// Path to the Document Store - TODO: Will be replaced by a Document Cache
+            /// </summary>
             [XmlElement(IsNullable = false)]
             public string DocumentStore { get; set; }
         }
@@ -119,7 +164,7 @@ namespace Kistl.API.Configuration
         /// <summary>
         /// Serialize this Object to a File
         /// </summary>
-        /// <param name="s">configuration file w/ or w/o path</param>
+        /// <param name="filename">configuration file w/ or w/o path</param>
         public void ToFile(string filename)
         {
             using (XmlTextWriter w = new XmlTextWriter(filename, Encoding.Default))

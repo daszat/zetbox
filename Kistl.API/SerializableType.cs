@@ -6,9 +6,17 @@ using System.Reflection;
 
 namespace Kistl.API
 {
+    /// <summary>
+    /// Serialization Wrapper for a System.Type object
+    /// </summary>
     [Serializable]
     public class SerializableType
     {
+        /// <summary>
+        /// Creates a SerializableType.
+        /// <remarks>This class takes in account of the HostType Property. Strings in AssemblyQualifiedName {.Server, .Client} will be translated.</remarks>
+        /// </summary>
+        /// <param name="type">System.Type to serialize</param>
         public SerializableType(Type type)
         {
             GenericTypeParameter = new List<SerializableType>();
@@ -35,10 +43,14 @@ namespace Kistl.API
             if (string.IsNullOrEmpty(AssemblyQualifiedName)) throw new NotSupportedException("AssemblyQualifiedName must not be null or empty - maybe this Type is a Generic Parameter or something similar.");
         }
 
+        /// <summary>
+        /// Full Type Name
+        /// </summary>
         public string TypeName { get; private set; }
 
         private string _AssemblyQualifiedName;
         /// <summary>
+        /// AssemblyQualifiedName
         /// TODO: This could be more optimal
         /// </summary>
         public string AssemblyQualifiedName 
@@ -49,18 +61,23 @@ namespace Kistl.API
                 {
                     case HostType.Server:
                         return _AssemblyQualifiedName.Replace(".Client", ".Server");
-                        break;
                     case HostType.Client:
                         return _AssemblyQualifiedName.Replace(".Server", ".Client");
-                        break;
                     default:
                         throw new InvalidOperationException("APIInit: Invalid Host Type " + APIInit.HostType);
                 }
             } 
         }
 
+        /// <summary>
+        /// List of Generiy Type Parameter
+        /// </summary>
         public List<SerializableType> GenericTypeParameter { get; private set; }
 
+        /// <summary>
+        /// Returns the serialized System.Type
+        /// </summary>
+        /// <returns></returns>
         public Type GetSerializedType()
         {
             Type result = null;
@@ -83,11 +100,20 @@ namespace Kistl.API
             return result;
         }
 
+        /// <summary>
+        /// Creates a new Object
+        /// </summary>
+        /// <returns></returns>
         public object NewObject()
         {
             return Activator.CreateInstance(GetSerializedType());
         }
 
+        /// <summary>
+        /// Equals....
+        /// </summary>
+        /// <param name="obj">the other object</param>
+        /// <returns>Dont know ;-)</returns>
         public override bool Equals(object obj)
         {
             SerializableType b = obj as SerializableType;
@@ -95,6 +121,10 @@ namespace Kistl.API
             return this.TypeName == b.TypeName && this.AssemblyQualifiedName == b.AssemblyQualifiedName;
         }
 
+        /// <summary>
+        /// HashCode
+        /// </summary>
+        /// <returns>Dont know ;-)</returns>
         public override int GetHashCode()
         {
             return TypeName.GetHashCode();

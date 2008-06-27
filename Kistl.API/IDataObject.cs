@@ -30,6 +30,9 @@ namespace Kistl.API
         Deleted,
     }
 
+    /// <summary>
+    /// Interface for a Persitance Object.
+    /// </summary>
     public interface IPersistenceObject
     {
         /// <summary>
@@ -50,7 +53,7 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize this Object from a BinaryReader
         /// </summary>
-        /// <param name="sw">BinaryReader to deserialize to.</param>
+        /// <param name="sr">BinaryReader to deserialize to.</param>
         void FromStream(System.IO.BinaryReader sr);
 
         /// <summary>
@@ -64,9 +67,20 @@ namespace Kistl.API
         /// <param name="property">Propertyname</param>
         void NotifyPropertyChanged(string property);
 
+        /// <summary>
+        /// Current Context.
+        /// </summary>
         IKistlContext Context { get; }
+        /// <summary>
+        /// Attach this Object to a Context. This Method is called by the Context.
+        /// </summary>
+        /// <param name="ctx">Context to attach this Object to.</param>
         void AttachToContext(IKistlContext ctx);
 
+        /// <summary>
+        /// Detach this Object from a Context. This Method is called by the Context.
+        /// </summary>
+        /// <param name="ctx">Context to detach this Object from.</param>
         void DetachFromContext(IKistlContext ctx);
     }
 
@@ -114,10 +128,23 @@ namespace Kistl.API
         void CopyTo(ICollectionEntry obj);
     }
 
+    /// <summary>
+    /// Typed Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
+    /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
+    /// </summary>
     public interface ICollectionEntry<VALUE, PARENT> : ICollectionEntry
     {
+        /// <summary>
+        /// Value of this Collection Entry
+        /// </summary>
         VALUE Value { get; set; }
+        /// <summary>
+        /// Collection Entries Parent
+        /// </summary>
         PARENT Parent { get; set; }
+        /// <summary>
+        /// fk_ to Parent
+        /// </summary>
         int fk_Parent { get; set; }
     }
 
@@ -148,6 +175,9 @@ namespace Kistl.API
     /// </summary>
     public class MethodReturnEventArgs<T>
     {
+        /// <summary>
+        /// Result of the Method Call
+        /// </summary>
         public T Result { get; set; }
     }
 
@@ -163,7 +193,6 @@ namespace Kistl.API
     /// Handler for Custom Save Events. TODO: Außer SetObject hat's noch niemand implementiert.
     /// </summary>
     /// <typeparam name="T">Type of the implementing Object.</typeparam>
-    /// <param name="ctx">Current IKistlContext</param>
     /// <param name="obj">>Object that has fired this Event.</param>
     public delegate void ObjectEventHandler<T>(T obj) where T : class, IDataObject, new();
 }

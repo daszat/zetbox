@@ -8,7 +8,7 @@ namespace Kistl.API
 {
     /// <summary>
     /// This is the Assembly Loader. Assemblies are obtained by you configurated Assembly sources.
-    /// Assemblies are copied to your <see cref="WorkingFolder"/> \bin directory. 
+    /// Assemblies are copied to your WorkingFolder\bin directory. 
     /// eg. C:\Users\Arthur\AppData\Local\dasz\Kistl\Arthur's Configuration\Kistl.Client.exe\bin.
     /// This does not seams to be the best solution. See http://blogs.msdn.com/suzcook/archive/2003/05/29/57143.aspx.
     /// But it works.
@@ -49,7 +49,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="sender">See MSDN</param>
         /// <param name="args">See MSDN</param>
-        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1</returns>
+        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1</returns>
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (!Configuration.KistlConfig.IsInitialized) return null;
@@ -61,7 +61,7 @@ namespace Kistl.API
         /// Loads an Assembly.
         /// </summary>
         /// <param name="name">Assemblyname, passed to a AssemblyName Consructor.</param>
-        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1</returns>
+        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1</returns>
         public static Assembly Load(string name)
         {
             // Be nice & Thread Save
@@ -130,7 +130,7 @@ namespace Kistl.API
         /// Loads an Assembly for Reflection only. This method does not cache the requested Assemblies.
         /// </summary>
         /// <param name="name">Assemblyname, passed to a AssemblyName Consructor.</param>
-        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1</returns>
+        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1</returns>
         public static Assembly ReflectionOnlyLoadFrom(string name)
         {
             // Be nice & Thread Save

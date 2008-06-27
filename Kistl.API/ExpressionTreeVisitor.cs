@@ -7,9 +7,16 @@ using System.Collections.ObjectModel;
 
 namespace Kistl.API
 {
+    /// <summary>
+    /// Baseclass for a Expressiontree Visitor. This Visitor does _not_ translate the Expression Tree.
+    /// </summary>
     [Serializable]
-    public class ExpressionTreeVisitor
+    public abstract class ExpressionTreeVisitor
     {
+        /// <summary>
+        /// Visits the Expression Tree
+        /// </summary>
+        /// <param name="e">Linq Expression</param>
         public virtual void Visit(Expression e)
         {
             if (e == null) return;
@@ -123,6 +130,10 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Visits a Binding
+        /// </summary>
+        /// <param name="binding">MemberBinding Expression</param>
         protected virtual void VisitBinding(MemberBinding binding)
         {
             switch (binding.BindingType)
@@ -141,16 +152,28 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Visits a Element Initializer
+        /// </summary>
+        /// <param name="initializer">ElementInit Expression</param>
         protected virtual void VisitElementInitializer(ElementInit initializer)
         {
             this.VisitExpressionList(initializer.Arguments);
         }
 
+        /// <summary>
+        /// Visits a Unary Expression
+        /// </summary>
+        /// <param name="u">Unary Expression</param>
         protected virtual void VisitUnary(UnaryExpression u)
         {
             Visit(u.Operand);
         }
 
+        /// <summary>
+        /// Visits a Binary Expression
+        /// </summary>
+        /// <param name="b">Binary Expression</param>
         protected virtual void VisitBinary(BinaryExpression b)
         {
             Visit(b.Left);
@@ -158,15 +181,27 @@ namespace Kistl.API
             Visit(b.Conversion);
         }
 
+        /// <summary>
+        /// Visits a TypeIs Expression
+        /// </summary>
+        /// <param name="b">TypeBinary Expression</param>
         protected virtual void VisitTypeIs(TypeBinaryExpression b)
         {
             Visit(b.Expression);
         }
 
+        /// <summary>
+        /// Visits a Constant Expression
+        /// </summary>
+        /// <param name="c">Constant Expression</param>
         protected virtual void VisitConstant(ConstantExpression c)
         {
         }
 
+        /// <summary>
+        /// Visits a Conditional Expression
+        /// </summary>
+        /// <param name="c">Conditional Expression</param>
         protected virtual void VisitConditional(ConditionalExpression c)
         {
             Visit(c.Test);
@@ -174,78 +209,138 @@ namespace Kistl.API
             Visit(c.IfFalse);
         }
 
+        /// <summary>
+        /// Visits a Parameter Expression
+        /// </summary>
+        /// <param name="p">Parameter Expression</param>
         protected virtual void VisitParameter(ParameterExpression p)
         {
         }
 
+        /// <summary>
+        /// Visits a Member Access Expression
+        /// </summary>
+        /// <param name="m">Member Expression</param>
         protected virtual void VisitMemberAccess(MemberExpression m)
         {
             Visit(m.Expression);
         }
 
+        /// <summary>
+        /// Visits a MethodCall Expression
+        /// </summary>
+        /// <param name="m">MethodCall Expression</param>
         protected virtual void VisitMethodCall(MethodCallExpression m)
         {
             this.Visit(m.Object);
             VisitExpressionList(m.Arguments);
         }
 
+        /// <summary>
+        /// Visits a Expression List
+        /// </summary>
+        /// <param name="list">Expression List</param>
         protected virtual void VisitExpressionList(ReadOnlyCollection<Expression> list)
         {
             list.ForEach<Expression>(e => Visit(e));
         }
 
+        /// <summary>
+        /// Visits a Member Assignment
+        /// </summary>
+        /// <param name="assignment">Member Assignment Expression</param>
         protected virtual void VisitMemberAssignment(MemberAssignment assignment)
         {
             Visit(assignment.Expression);
         }
 
+        /// <summary>
+        /// Visits a MemberMemberBinding 
+        /// </summary>
+        /// <param name="binding">MemberMemberBinding Expression</param>
         protected virtual void VisitMemberMemberBinding(MemberMemberBinding binding)
         {
             VisitBindingList(binding.Bindings);
         }
 
+        /// <summary>
+        /// Visits a MemberListBinding
+        /// </summary>
+        /// <param name="binding">MemberListBinding Expression</param>
         protected virtual void VisitMemberListBinding(MemberListBinding binding)
         {
             VisitElementInitializerList(binding.Initializers);
         }
 
+        /// <summary>
+        /// Visits a BindingList
+        /// </summary>
+        /// <param name="list">MemberBinding List</param>
         protected virtual void VisitBindingList(ReadOnlyCollection<MemberBinding> list)
         {
             list.ForEach<MemberBinding>(e => VisitBinding(e));
         }
 
+        /// <summary>
+        /// Visits a ElementInitializer List
+        /// </summary>
+        /// <param name="list">ElementInit List</param>
         protected virtual void VisitElementInitializerList(ReadOnlyCollection<ElementInit> list)
         {
             list.ForEach<ElementInit>(e => VisitElementInitializer(e));
         }
 
+        /// <summary>
+        /// Visits a Lambda Expression
+        /// </summary>
+        /// <param name="lambda">Lambda Expression</param>
         protected virtual void VisitLambda(LambdaExpression lambda)
         {
             Visit(lambda.Body);
         }
 
+        /// <summary>
+        /// Visits a New Expression
+        /// </summary>
+        /// <param name="newExpression">New Expression</param>
         protected virtual void VisitNew(NewExpression newExpression)
         {
             VisitExpressionList(newExpression.Arguments);
         }
 
+        /// <summary>
+        /// Visits a MemberInit Expression
+        /// </summary>
+        /// <param name="init">MemberInit Expression</param>
         protected virtual void VisitMemberInit(MemberInitExpression init)
         {
             VisitNew(init.NewExpression);
             VisitBindingList(init.Bindings);
         }
 
+        /// <summary>
+        /// Visits a List Init Expression
+        /// </summary>
+        /// <param name="init">List Init Expression</param>
         protected virtual void VisitListInit(ListInitExpression init)
         {
             VisitNew(init.NewExpression);
             VisitElementInitializerList(init.Initializers);
         }
 
+        /// <summary>
+        /// Visits a new Array Expression
+        /// </summary>
+        /// <param name="na">new Array Expression</param>
         protected virtual void VisitNewArray(NewArrayExpression na)
         {
             VisitExpressionList(na.Expressions);
         }
 
+        /// <summary>
+        /// Visits a Invocation Expression
+        /// </summary>
+        /// <param name="iv">Invocation Expression</param>
         protected virtual void VisitInvocation(InvocationExpression iv)
         {
             VisitExpressionList(iv.Arguments);

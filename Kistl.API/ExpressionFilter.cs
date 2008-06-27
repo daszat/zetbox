@@ -6,11 +6,21 @@ using System.Linq.Expressions;
 
 namespace Kistl.API
 {
+    /// <summary>
+    /// This object represents an Illegal Linq Expression which was send to the server.
+    /// </summary>
     [Serializable]
     public class IllegalExpression
     {
+        /// <summary>
+        /// Illegal Method Call name
+        /// </summary>
         public string MethodCall { get; set; }
 
+        /// <summary>
+        /// ToString override
+        /// </summary>
+        /// <returns>Text</returns>
         public override string ToString()
         {
             if (!string.IsNullOrEmpty(MethodCall))
@@ -24,14 +34,29 @@ namespace Kistl.API
         }
     }
 
+    /// <summary>
+    /// Implements an Expression Filter. This class Ensures that only legal Expression are passed to the Server.
+    /// Illegal Expression: Every MethodCall Expression not implemented on System.String
+    /// </summary>
     public static class ExpressionFilter
     {
+        /// <summary>
+        /// Checks if the given Expression is legal.
+        /// </summary>
+        /// <param name="e">Expression</param>
+        /// <returns>true, if the expression is legal. Otherwise false.</returns>
         public static bool IsLegal(this Expression e)
         {
             List<IllegalExpression> tmp;
             return IsLegal(e, out tmp);
         }
 
+        /// <summary>
+        /// Checks if the given Expression is legal.
+        /// </summary>
+        /// <param name="e">Expression</param>
+        /// <param name="list">Out: List of illegal Expressions</param>
+        /// <returns>true, if the expression is legal. Otherwise false.</returns>
         public static bool IsLegal(this Expression e, out List<IllegalExpression> list)
         {
             CheckLegalExpression chk = new CheckLegalExpression();

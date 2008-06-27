@@ -166,6 +166,11 @@ namespace Kistl.API
             ToBinary(false, sw);
         }
 
+        /// <summary>
+        /// Serialize a SerializableExpression
+        /// </summary>
+        /// <param name="e">SerializableExpression to serialize.</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToBinary(SerializableExpression e, System.IO.BinaryWriter sw)
         {
             if (e != null)
@@ -180,6 +185,11 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Serialize a SerializableType
+        /// </summary>
+        /// <param name="type">SerializableType to serialize.</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToBinary(SerializableType type, System.IO.BinaryWriter sw)
         {
             if (type == null) throw new ArgumentNullException("type");
@@ -398,6 +408,11 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Deserialize a SerializableType.
+        /// </summary>
+        /// <param name="type">SerializableType</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
         public static void FromBinary(out SerializableType type, System.IO.BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");

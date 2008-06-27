@@ -110,9 +110,9 @@ namespace Kistl.API.Server
 
         /// <summary>
         /// Returns a Query by ObjectType.
-        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().</remarks>
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;().</remarks>
         /// </summary>
-        /// <param name="type">ObjectType</param>
+        /// <param name="objType">ObjectType</param>
         /// <returns>IQueryable</returns>
         public IQueryable<IDataObject> GetQuery(ObjectType objType)
         {
@@ -178,12 +178,12 @@ namespace Kistl.API.Server
             string entityName = GetEntityName(obj.GetType());
             if (obj.ObjectState == DataObjectState.New)
             {
-                /// http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=2232129&SiteID=1
-                /// Another way to solve your dilemma would be to go with your second approach 
-                /// where you attach the whole graph, then detach the added things, 
-                /// *set the key to null*, and then add them back.  
-                /// Technically this would work, but it's less efficient than avoiding attaching 
-                /// the things which are new in the first place.
+                // http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=2232129&SiteID=1
+                // Another way to solve your dilemma would be to go with your second approach 
+                // where you attach the whole graph, then detach the added things, 
+                // *set the key to null*, and then add them back.  
+                // Technically this would work, but it's less efficient than avoiding attaching 
+                // the things which are new in the first place.
                 EntityObject entityObj = (EntityObject)obj;
                 if (entityObj.EntityState != System.Data.EntityState.Detached)
                 {
@@ -266,7 +266,7 @@ namespace Kistl.API.Server
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
         /// <remarks>Note: This Method is depricated.</remarks>
-        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()</remarks>
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <param name="type">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
@@ -280,7 +280,7 @@ namespace Kistl.API.Server
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
-        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()</remarks>
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>

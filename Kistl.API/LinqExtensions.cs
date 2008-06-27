@@ -12,6 +12,15 @@ namespace Kistl.API
     /// </summary>
     public static class LinqExtensions
     {
+        /// <summary>
+        /// Adds a EqualityCondition to a Linq Expression Tree.
+        /// </summary>
+        /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
+        /// <typeparam name="V">Typeparameter for Equal Value</typeparam>
+        /// <param name="queryable">IQueryable (Expression Tree)</param>
+        /// <param name="propertyName">Propertyname to check</param>
+        /// <param name="propertyValue">Value to check</param>
+        /// <returns>IQueryable with this EqualityCondition</returns>
         public static IQueryable<T> AddEqualityCondition<T, V>(this IQueryable<T> queryable,
             string propertyName, V propertyValue)
         {
@@ -32,6 +41,13 @@ namespace Kistl.API
             return (x);
         }
 
+        /// <summary>
+        /// Appends a Expression Tree to a Linq Expression
+        /// </summary>
+        /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
+        /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
+        /// <param name="filter">Expression Tree</param>
+        /// <returns>IQueryable with this Filter</returns>
         public static IQueryable<T> AddFilter<T>(this IQueryable<T> queryable, Expression filter)
         {
             List<IllegalExpression> illegal;
@@ -46,6 +62,13 @@ namespace Kistl.API
                 new Type[] { queryable.ElementType }, queryable.Expression, filter));
         }
 
+        /// <summary>
+        /// Appends a Expression Tree Order By to a Linq Expression
+        /// </summary>
+        /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
+        /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
+        /// <param name="orderBy">Order By Expression Tree</param>
+        /// <returns>IQueryable with this Order By Expression</returns>
         public static IQueryable<T> AddOrderBy<T>(this IQueryable<T> queryable, Expression orderBy)
         {
             if (queryable == null) throw new ArgumentNullException("queryable");
@@ -73,6 +96,12 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Returns the Value of a Constant or Member Expression
+        /// </summary>
+        /// <typeparam name="TYPE">Values type</typeparam>
+        /// <param name="e">Expression to get Value</param>
+        /// <returns>Value of the given Expression</returns>
         public static TYPE GetExpressionValue<TYPE>(this Expression e)
         {
             if (e is ConstantExpression)

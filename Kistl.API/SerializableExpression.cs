@@ -8,12 +8,21 @@ using System.Reflection;
 namespace Kistl.API
 {
     #region Expression
+    /// <summary>
+    /// Abstract Base Class for a serializable Expression
+    /// </summary>
     [Serializable]
     public abstract class SerializableExpression
     {
+        /// <summary>
+        /// Serialization Context.
+        /// </summary>
         internal class SerializationContext
         {
             private Dictionary<string, Expression> _Parameter = new Dictionary<string, Expression>();
+            /// <summary>
+            /// Collection of LINQ Parameter
+            /// </summary>
             public Dictionary<string, Expression> Parameter
             {
                 get
@@ -23,6 +32,11 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Creates a SerializableExpression from an Expression
+        /// </summary>
+        /// <param name="e">Linq Expression</param>
+        /// <param name="ctx">Serialization Context</param>
         internal SerializableExpression(Expression e, SerializationContext ctx)
         {
             _Type = new SerializableType(e.Type);
@@ -30,6 +44,9 @@ namespace Kistl.API
         }
 
         private ExpressionType _NodeType;
+        /// <summary>
+        /// Expression Node Type
+        /// </summary>
         public ExpressionType NodeType
         {
             get
@@ -39,6 +56,9 @@ namespace Kistl.API
         }
 
         private SerializableType _Type;
+        /// <summary>
+        /// CLR Type of this Expression
+        /// </summary>
         public Type Type
         {
             get
@@ -47,12 +67,22 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Creates a serializable Expression from a Expression
+        /// </summary>
+        /// <param name="e">Linq Expression</param>
+        /// <returns>serializable Expression</returns>
         public static SerializableExpression FromExpression(Expression e)
         {
             SerializationContext ctx = new SerializationContext();
             return FromExpression(e, ctx);
         }
 
+        /// <summary>
+        /// Creates a SerializableExpression from an Expression
+        /// </summary>
+        /// <param name="e">Linq Expression</param>
+        /// <param name="ctx">Serialization Context</param>
         internal static SerializableExpression FromExpression(Expression e, SerializationContext ctx)
         {
             if (e == null) throw new ArgumentNullException("e");
@@ -103,17 +133,29 @@ namespace Kistl.API
             throw new NotSupportedException(string.Format("Nodetype {0} is not supported: {1}", e.NodeType, e.ToString()));
         }
 
+        /// <summary>
+        /// Converts a SerializableExpression to a Linq Expression
+        /// </summary>
+        /// <returns>Linq Expression</returns>
         public virtual Expression ToExpression()
         {
             SerializationContext ctx = new SerializationContext();
             return ToExpressionInternal(ctx);
         }
 
+        /// <summary>
+        /// Converts a SerializableExpression to a Linq Expression
+        /// </summary>
+        /// <param name="ctx">serialization Context</param>
+        /// <returns>Linq Expression</returns>
         internal abstract Expression ToExpressionInternal(SerializationContext ctx);
     }
     #endregion
 
     #region CompoundExpression
+    /// <summary>
+    /// Serializable Compound Expression
+    /// </summary>
     [Serializable]
     public abstract class SerializableCompoundExpression : SerializableExpression
     {
@@ -125,6 +167,9 @@ namespace Kistl.API
 
 
         private List<SerializableExpression> _children;
+        /// <summary>
+        /// Child Expressions
+        /// </summary>
         public List<SerializableExpression> Children
         {
             get
@@ -140,6 +185,9 @@ namespace Kistl.API
     #endregion
 
     #region BinaryExpression
+    /// <summary>
+    /// Serializable Binary Expression
+    /// </summary>
     [Serializable]
     public class SerializableBinaryExpression : SerializableCompoundExpression
     {
@@ -158,6 +206,9 @@ namespace Kistl.API
     #endregion
 
     #region UnaryExpression
+    /// <summary>
+    /// Serializable Unary Expression
+    /// </summary>
     [Serializable]
     public class SerializableUnaryExpression : SerializableCompoundExpression
     {
@@ -175,6 +226,9 @@ namespace Kistl.API
     #endregion
 
     #region ConstantExpression
+    /// <summary>
+    /// Serializable Constant Expression
+    /// </summary>
     [Serializable]
     public class SerializableConstantExpression : SerializableExpression
     {
@@ -189,11 +243,17 @@ namespace Kistl.API
             return Expression.Constant(Value, Type);
         }
 
+        /// <summary>
+        /// Value of this Constant
+        /// </summary>
         public object Value { get; set; }
     }
     #endregion
 
     #region MemberExpression
+    /// <summary>
+    /// Serializable Member Expression
+    /// </summary>
     [Serializable]
     public class SerializableMemberExpression : SerializableCompoundExpression
     {
@@ -209,11 +269,17 @@ namespace Kistl.API
             return MemberExpression.PropertyOrField(Children[0].ToExpressionInternal(ctx), MemberName);
         }
 
+        /// <summary>
+        /// Member Name
+        /// </summary>
         public string MemberName { get; private set; }
     }
     #endregion
 
     #region MethodCallExpression
+    /// <summary>
+    /// Serializable MethodCall Expression
+    /// </summary>
     [Serializable]
     public class SerializableMethodCallExpression : SerializableCompoundExpression
     {
@@ -233,13 +299,25 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Method Name
+        /// </summary>
         public string MethodName {get; private set; }
 
+        /// <summary>
+        /// Parameter Types
+        /// </summary>
         public List<SerializableType> ParameterTypes { get; private set; }
 
+        /// <summary>
+        /// Generic Arguments
+        /// </summary>
         public List<SerializableType> GenericArguments {get; private set; }
 
         private SerializableType _Type;
+        /// <summary>
+        /// Type where this Method is implemented
+        /// </summary>
         public Type MethodType
         {
             get
@@ -289,7 +367,8 @@ namespace Kistl.API
         }
         #endregion
 
-        public MethodInfo GetMethodInfo()
+        #region GetMethodInfo
+        private MethodInfo GetMethodInfo()
         {
             MethodInfo mi;
             if (GenericArguments != null && GenericArguments.Count > 0)
@@ -309,7 +388,11 @@ namespace Kistl.API
             }
             return mi;
         }
+        #endregion
 
+        /// <summary>
+        /// Object Expression
+        /// </summary>
         public SerializableExpression ObjectExpression { get; private set; }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -323,6 +406,9 @@ namespace Kistl.API
     #endregion 
 
     #region LambdaExpression
+    /// <summary>
+    /// Serializable Lambda Expression
+    /// </summary>
     [Serializable]
     public class SerializableLambdaExpression : SerializableCompoundExpression
     {
@@ -345,6 +431,9 @@ namespace Kistl.API
     #endregion
 
     #region ParameterExpression
+    /// <summary>
+    /// Serializable Parameter Expression
+    /// </summary>
     [Serializable]
     public class SerializableParameterExpression : SerializableExpression
     {
@@ -355,6 +444,9 @@ namespace Kistl.API
         }
 
         private string name;
+        /// <summary>
+        /// Parameter Name
+        /// </summary>
         public string Name
         {
             get
@@ -378,6 +470,9 @@ namespace Kistl.API
     #endregion
 
     #region NewExpression
+    /// <summary>
+    /// Serializable New Expression
+    /// </summary>
     [Serializable]
     public class SerializableNewExpression : SerializableCompoundExpression
     {

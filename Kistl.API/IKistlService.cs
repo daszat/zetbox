@@ -17,24 +17,53 @@ namespace Kistl.API
     /// </summary>
     public class KistlServiceStreamsMessage
     {
+        /// <summary>
+        /// Type of the IDataObject
+        /// </summary>
         public SerializableType Type {get; set;}
+        /// <summary>
+        /// ID of the IDataObject
+        /// </summary>
         public int ID { get; set; }
+        /// <summary>
+        /// Propertyname, used in the GetListOf Call
+        /// </summary>
         public string Property { get; set; }
 
+        /// <summary>
+        /// Max. size of a Result Set.
+        /// </summary>
         public int MaxListCount { get; set; }
+        /// <summary>
+        /// Filter of a ResultSet as a Expression Tree
+        /// </summary>
         public SerializableExpression Filter { get; set; }
+        /// <summary>
+        /// OrderBy of a ResultSet as a Expression Tree
+        /// </summary>
         public SerializableExpression OrderBy { get; set; }
 
+        /// <summary>
+        /// Create a new Message
+        /// </summary>
         public KistlServiceStreamsMessage()
         {
             MaxListCount = Helper.MAXLISTCOUNT;
         }
 
+        /// <summary>
+        /// Deserializes a Message from the given Stream.
+        /// </summary>
+        /// <param name="msg">Stream</param>
         public KistlServiceStreamsMessage(System.IO.Stream msg)
         {
             FromStream(msg);
         }
 
+        /// <summary>
+        /// Serializes the Message to a Stream.
+        /// </summary>
+        /// <param name="msg">Stream.</param>
         public void ToStream(System.IO.Stream msg)
         {
             System.IO.BinaryWriter sw = new System.IO.BinaryWriter(msg);
@@ -48,6 +77,10 @@ namespace Kistl.API
             BinarySerializer.ToBinary(OrderBy, sw);
         }
 
+        /// <summary>
+        /// Serializes the Message to a Stream.
+        /// </summary>
+        /// <returns>new MemoryStream</returns>
         public System.IO.MemoryStream ToStream()
         {
             System.IO.MemoryStream s = new System.IO.MemoryStream();
@@ -55,6 +88,10 @@ namespace Kistl.API
             return s;
         }
 
+        /// <summary>
+        /// Deserializes a Message from the given Stream.
+        /// </summary>
+        /// <param name="msg">Stream</param>
         public void FromStream(System.IO.Stream msg)
         {
             System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
@@ -74,18 +111,41 @@ namespace Kistl.API
         }
     }
 
+    /// <summary>
+    /// Kist Stream Service Contract
+    /// </summary>
     [ServiceContract]
     public interface IKistlServiceStreams
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         [OperationContract]
         System.IO.MemoryStream GetObject(System.IO.MemoryStream msg);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         [OperationContract]
         System.IO.MemoryStream SetObject(System.IO.MemoryStream msg);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         [OperationContract]
         System.IO.MemoryStream GetList(System.IO.MemoryStream msg);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         [OperationContract]
         System.IO.MemoryStream GetListOf(System.IO.MemoryStream msg);
     }
@@ -97,10 +157,13 @@ namespace Kistl.API
     public interface IKistlService
     {
         /// <summary>
-        /// Liste aller (später parametrisierter) Objekte
+        /// Gets a List of Objects
         /// </summary>
-        /// <param name="type">ServerBL Typ als AssemblyQualifiedName</param>
-        /// <returns>XML</returns>
+        /// <param name="type">Type of the result Objects</param>
+        /// <param name="maxListCount">Max. size of the resultset</param>
+        /// <param name="filter">Filter as LinqExpression</param>
+        /// <param name="orderBy">ORderBy as LinqExpression</param>
+        /// <returns>A List ob Objects as XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
         string GetList(SerializableType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy);
@@ -130,14 +193,14 @@ namespace Kistl.API
         /// Update/Insert eines Objektes. Gibt das geänderte Objekt wieder zurück.
         /// </summary>
         /// <param name="type">ServerBL Typ als AssemblyQualifiedName</param>
-        /// <param name="obj">Das zu ändernde Objekt als XML</param>
+        /// <param name="xmlObj">Das zu ändernde Objekt als XML</param>
         /// <returns>XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
         string SetObject(SerializableType type, string xmlObj);
 
         /// <summary>
-        /// Generates Objects & Database. Throws a Exception if failed.
+        /// Generates Objects &amp; Database. Throws a Exception if failed.
         /// </summary>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]

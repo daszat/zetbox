@@ -162,7 +162,17 @@ namespace Kistl.API
         /// <summary>
         /// Not supported
         /// </summary>
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged
+        {
+            add
+            {
+                throw new NotSupportedException();
+            }
+            remove
+            {
+                throw new NotSupportedException();
+            }
+        }
 
         /// <summary>
         /// Not supported

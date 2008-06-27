@@ -10,24 +10,70 @@ using System.Linq.Expressions;
 
 namespace Kistl.API.Client
 {
+    /// <summary>
+    /// Proxy Interface for IKistlService
+    /// </summary>
     public interface IProxy : IDisposable
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="maxListCount"></param>
+        /// <param name="filter"></param>
+        /// <param name="orderBy"></param>
+        /// <returns></returns>
         IEnumerable GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="ID"></param>
+        /// <param name="property"></param>
+        /// <returns></returns>
         IEnumerable GetListOf(Type type, int ID, string property);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         Kistl.API.IDataObject GetObject(Type type, int ID);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         Kistl.API.IDataObject SetObject(Type type, Kistl.API.IDataObject obj);
+        /// <summary>
+        /// Generates Objects &amp; Database. Throws a Exception if failed.
+        /// </summary>
         void Generate();
+        /// <summary>
+        /// Hello World.
+        /// </summary>
+        /// <param name="name">A Name</param>
+        /// <returns>"Hello " + name.</returns>
         string HelloWorld(string name);
     }
 
-    public class Proxy
+
+    /// <summary>
+    /// Proxy Singelton
+    /// </summary>
+    public static class Proxy
     {
         /// <summary>
         /// Singelton
         /// </summary>
         private static IProxy current;
 
-        public static void SetProxy(IProxy p)
+        /// <summary>
+        /// Sets the current Proxy
+        /// </summary>
+        /// <param name="p"></param>
+        private static void SetProxy(IProxy p)
         {
             current = p;
         }
@@ -48,6 +94,9 @@ namespace Kistl.API.Client
         }
     }
 
+    /// <summary>
+    /// Proxy Implementation
+    /// </summary>
     internal class ProxyImplementation : IProxy
     {
         #region XmlSerializer
@@ -164,6 +213,13 @@ namespace Kistl.API.Client
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="ID"></param>
+        /// <param name="property"></param>
+        /// <returns></returns>
         public IEnumerable GetListOf(Type type, int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
@@ -200,6 +256,12 @@ namespace Kistl.API.Client
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public Kistl.API.IDataObject GetObject(Type type, int ID)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
@@ -227,6 +289,12 @@ namespace Kistl.API.Client
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public Kistl.API.IDataObject SetObject(Type type, Kistl.API.IDataObject obj)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
@@ -266,6 +334,9 @@ namespace Kistl.API.Client
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Generate()
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
@@ -274,6 +345,11 @@ namespace Kistl.API.Client
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public string HelloWorld(string name)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(name))

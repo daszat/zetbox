@@ -148,6 +148,7 @@ namespace Kistl.API
         /// <typeparam name="T">Type of the Property</typeparam>
         /// <param name="obj">Object from where the Property Value is set</param>
         /// <param name="propName">Propertyname as string.</param>
+        /// <param name="val">Value to set.</param>
         /// <returns>PropertyValue</returns>
         public static void SetPropertyValue<T>(this object obj, string propName, T val)
         {
