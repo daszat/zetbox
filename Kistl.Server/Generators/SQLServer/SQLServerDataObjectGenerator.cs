@@ -57,7 +57,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateEdmRelationshipAttribute
-        private void GenerateEdmRelationshipAttribute(ObjectType parentType, ObjectType childType, CodeCompileUnit code)
+        private void GenerateEdmRelationshipAttribute(TypeMoniker parentType, TypeMoniker childType, CodeCompileUnit code)
         {
             code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
             new CodeAttributeArgument(
@@ -85,8 +85,8 @@ namespace Kistl.Server.Generators.SQLServer
 
             foreach (ObjectReferenceProperty prop in props)
             {
-                ObjectType parentType = new ObjectType(prop.GetDataType());
-                ObjectType childType = Generator.GetAssociationChildType(prop);
+                TypeMoniker parentType = new TypeMoniker(prop.GetDataType());
+                TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
                 GenerateEdmRelationshipAttribute(parentType, childType, code);
             }
@@ -132,8 +132,8 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 // Assembly Code Relation
 
-                GenerateEdmRelationshipAttribute(new ObjectType(current.code_namespace.Name, current.code_class.Name),
-                    new ObjectType(collectionClass.code_namespace.Name, collectionClass.code_class.Name), current.code);
+                GenerateEdmRelationshipAttribute(new TypeMoniker(current.code_namespace.Name, current.code_class.Name),
+                    new TypeMoniker(collectionClass.code_namespace.Name, collectionClass.code_class.Name), current.code);
 
                 // Class
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionClass.code_class.Name));
@@ -229,8 +229,8 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
 
-                GenerateEdmRelationshipAttribute(new ObjectType(current.code_namespace.Name, current.code_class.Name),
-                    new ObjectType(collectionClass.code_namespace.Name, collectionClass.code_class.Name), current.code);
+                GenerateEdmRelationshipAttribute(new TypeMoniker(current.code_namespace.Name, current.code_class.Name),
+                    new TypeMoniker(collectionClass.code_namespace.Name, collectionClass.code_class.Name), current.code);
 
                 collectionClass.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName",
@@ -337,8 +337,8 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.clientServer == ClientServerEnum.Server)
             {
-                ObjectType parentType = current.objClass.GetObjectType();
-                ObjectType childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
+                TypeMoniker parentType = current.objClass.GetObjectType();
+                TypeMoniker childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
 
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));
                 current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(

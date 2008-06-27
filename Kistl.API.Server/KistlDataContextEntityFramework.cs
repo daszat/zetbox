@@ -67,7 +67,7 @@ namespace Kistl.API.Server
         private Dictionary<Type, object> _table = new Dictionary<Type, object>();
 
         /// <summary>
-        /// Returns the Root Type of a given ObjectType.
+        /// Returns the Root Type of a given Type.
         /// </summary>
         /// <param name="t">Type</param>
         /// <returns>Root Type of the given Type</returns>
@@ -117,8 +117,6 @@ namespace Kistl.API.Server
         public IQueryable<IDataObject> GetQuery(ObjectType objType)
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
-            /*Type type = Type.GetType(objType.FullNameDataObject);
-            return this.CreateQuery<IDataObject>("[" + GetEntityName(type) + "]");*/
         }
 
         /// <summary>
@@ -143,7 +141,7 @@ namespace Kistl.API.Server
         /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName) where T : IDataObject
         {
-            IDataObject obj = (IDataObject)this.GetQuery(type).First(o => ((BaseServerDataObject)o).ID == ID);
+            IDataObject obj = (IDataObject)this.GetQuery(type).First(o => o.ID == ID);
             return GetListOf<T>(obj, propertyName);
         }
 
@@ -276,7 +274,6 @@ namespace Kistl.API.Server
         public IDataObject Find(ObjectType type, int ID)
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
-            // return GetQuery(type).First(o => o.ID == ID);
         }
 
         /// <summary>
@@ -292,7 +289,6 @@ namespace Kistl.API.Server
             where T : IDataObject
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
-            // return GetQuery<T>().First(o => o.ID == ID);
         }
 
     }

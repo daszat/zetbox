@@ -17,9 +17,9 @@ namespace Kistl.Server.Generators
 
     public static class GeneratorExtensionHelper
     {
-        public static ObjectType GetObjectType(this DataType objClass)
+        public static TypeMoniker GetObjectType(this DataType objClass)
         {
-            return new ObjectType(objClass.Module.Namespace, objClass.ClassName);
+            return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName);
         }
     }
 
@@ -109,7 +109,7 @@ namespace Kistl.Server.Generators
             return "FK_" + childClass + "_" + parentClass;
         }
 
-        public static string GetAssociationName(ObjectType parentClass, ObjectType childClass)
+        public static string GetAssociationName(TypeMoniker parentClass, TypeMoniker childClass)
         {
             return GetAssociationName(parentClass.Classname, childClass.Classname);
         }
@@ -136,7 +136,7 @@ namespace Kistl.Server.Generators
             return "A_" + obj;
         }
 
-        public static string GetAssociationParentRoleName(ObjectType obj)
+        public static string GetAssociationParentRoleName(TypeMoniker obj)
         {
             return GetAssociationParentRoleName(obj.Classname);
         }
@@ -158,7 +158,7 @@ namespace Kistl.Server.Generators
             return "B_" + obj;
         }
 
-        public static string GetAssociationChildRoleName(ObjectType obj)
+        public static string GetAssociationChildRoleName(TypeMoniker obj)
         {
             return GetAssociationChildRoleName(obj.Classname);
         }
@@ -175,9 +175,9 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GetPropertyCollectionObjectType
-        public static ObjectType GetPropertyCollectionObjectType(Property prop)
+        public static TypeMoniker GetPropertyCollectionObjectType(Property prop)
         {
-            return new ObjectType(prop.ObjectClass.Module.Namespace,
+            return new TypeMoniker(prop.ObjectClass.Module.Namespace,
                         prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
         }
         #endregion
@@ -238,11 +238,11 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GetAssociationChildType
-        public static ObjectType GetAssociationChildType(Property prop)
+        public static TypeMoniker GetAssociationChildType(Property prop)
         {
             if (!prop.IsList)
             {
-                return prop.ObjectClass.GetObjectType(); //new ObjectType(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                return prop.ObjectClass.GetObjectType(); //new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
             }
             else
             {
@@ -250,11 +250,11 @@ namespace Kistl.Server.Generators
             }
         }
 
-        public static ObjectType GetAssociationChildType(BackReferenceProperty prop)
+        public static TypeMoniker GetAssociationChildType(BackReferenceProperty prop)
         {
             if (!prop.ReferenceProperty.IsList)
             {
-                return new ObjectType(prop.GetDataType());
+                return new TypeMoniker(prop.GetDataType());
             }
             else
             {

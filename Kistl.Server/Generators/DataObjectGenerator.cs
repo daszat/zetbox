@@ -1097,7 +1097,7 @@ namespace Kistl.Server.Generators
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                ObjectType childType = new ObjectType(current.property.GetDataType());
+                TypeMoniker childType = new TypeMoniker(current.property.GetDataType());
                 current.code_property.Type = new CodeTypeReference("IList", new CodeTypeReference(childType.NameDataObject));
 
                 current.code_property.GetStatements.Add(

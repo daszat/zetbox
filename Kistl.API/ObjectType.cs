@@ -9,6 +9,7 @@ namespace Kistl.API
 {
     /// TODO: DllIndependentType ???
     /// ODER: gleich durch Type ersetzen
+    /// Ist fast weg - der Server brauchts nicht mehr, der Client ist bald drann
     [Serializable]
     public class ObjectType
     {

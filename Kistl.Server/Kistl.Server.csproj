@@ -80,6 +80,7 @@
     <Compile Include="Generators\SQLServer\SQLServerDataObjectGenerator.cs" />
     <Compile Include="Generators\SQLServer\SQLServerEntityFrameworkModelGenerator.cs" />
     <Compile Include="Generators\SQLServer\SQLServerHelper.cs" />
+    <Compile Include="Generators\TypeMoniker.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ServerObjectHandler.cs" />
     <Compile Include="KistlServiceStreams.cs" />
