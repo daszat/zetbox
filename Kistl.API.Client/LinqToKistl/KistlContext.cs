@@ -218,14 +218,14 @@ namespace Kistl.API.Client
                 {
                     objectsSubmittedCount++;
                     // Object was deleted
-                    Proxy.Current.SetObject(obj.Type, obj);
+                    Proxy.Current.SetObject(obj.GetType(), obj);
                     objectsToDetach.Add(obj);
                 }
                 else if (obj.ObjectState.In(DataObjectState.Modified, DataObjectState.New))
                 {
                     objectsSubmittedCount++;
                     // Object is temporary and will bie copied
-                    Kistl.API.IDataObject newobj = Proxy.Current.SetObject(obj.Type, obj);
+                    Kistl.API.IDataObject newobj = Proxy.Current.SetObject(obj.GetType(), obj);
                     newobj.CopyTo(obj);
 
                     // Set to unmodified

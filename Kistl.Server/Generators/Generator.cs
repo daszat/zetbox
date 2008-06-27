@@ -15,6 +15,14 @@ namespace Kistl.Server.Generators
         Server,
     }
 
+    public static class GeneratorExtensionHelper
+    {
+        public static ObjectType GetObjectType(this DataType objClass)
+        {
+            return new ObjectType(objClass.Module.Namespace, objClass.ClassName);
+        }
+    }
+
     public static class Generator
     {
         public static void GenerateCode()

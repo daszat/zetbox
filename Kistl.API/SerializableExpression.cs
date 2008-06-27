@@ -7,89 +7,12 @@ using System.Reflection;
 
 namespace Kistl.API
 {
-    #region Type
-    [Serializable]
-    public class SerializableType
-    {
-        public enum SerializeDirection
-        {
-            None,
-            ClientToServer,
-            ServerToClient,
-        }
-
-        public SerializableType(Type type, SerializeDirection direction)
-        {
-            GenericTypeParameter = new List<SerializableType>();
-
-            if (type.IsGenericParameter)
-            {
-                throw new NotSupportedException("Generic Parameter cannot be serialized");
-            }
-            if (type.IsGenericType)
-            {
-                Type genericType = type.GetGenericTypeDefinition();
-                TypeName = genericType.FullName;
-                AssemblyQualifiedName = genericType.AssemblyQualifiedName;
-
-                type.GetGenericArguments().ForEach<Type>(t => GenericTypeParameter.Add(new SerializableType(t, direction)));
-            }
-            else
-            {
-                TypeName = type.FullName;
-                AssemblyQualifiedName = type.AssemblyQualifiedName;
-            }
-
-            // This is null if the Typ is e.g. a Generic Parameter - not supported
-            if (string.IsNullOrEmpty(AssemblyQualifiedName)) throw new NotSupportedException("AssemblyQualifiedName must not be null or empty - maybe this Type is a Generic Parameter or something similar.");
-
-            switch (direction)
-            {
-                case SerializeDirection.ClientToServer:
-                    AssemblyQualifiedName = AssemblyQualifiedName.Replace(".Client", ".Server");
-                    break;
-                case SerializeDirection.ServerToClient:
-                    AssemblyQualifiedName = AssemblyQualifiedName.Replace(".Server", ".Client");
-                    break;
-            }
-        }
-
-        public string TypeName { get; set; }
-        public string AssemblyQualifiedName { get; set; }
-
-        public List<SerializableType> GenericTypeParameter {get; private set;}
-
-        public Type GetSerializedType()
-        {
-            Type result = null;
-            if (GenericTypeParameter.Count > 0)
-            {
-                Type type = Type.GetType(AssemblyQualifiedName);
-                if(type != null) result = type.MakeGenericType(GenericTypeParameter.Select(t => t.GetSerializedType()).ToArray());
-            }
-            else
-            {
-                result = Type.GetType(AssemblyQualifiedName);
-            }
-
-            if (result == null)
-            {
-                throw new InvalidOperationException(string.Format("Unable to create Type {0}{1}",
-                    TypeName,
-                    GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : ""));
-            }
-            return result;
-        }
-    }
-    #endregion
-
     #region Expression
     [Serializable]
     public abstract class SerializableExpression
     {
         internal class SerializationContext
         {
-            public SerializableType.SerializeDirection Direction { get; set; }
             private Dictionary<string, Expression> _Parameter = new Dictionary<string, Expression>();
             public Dictionary<string, Expression> Parameter
             {
@@ -102,7 +25,7 @@ namespace Kistl.API
 
         internal SerializableExpression(Expression e, SerializationContext ctx)
         {
-            _Type = new SerializableType(e.Type, ctx.Direction);
+            _Type = new SerializableType(e.Type);
             _NodeType = e.NodeType;
         }
 
@@ -124,11 +47,9 @@ namespace Kistl.API
             }
         }
 
-        public static SerializableExpression FromExpression(Expression e, SerializableType.SerializeDirection direction)
+        public static SerializableExpression FromExpression(Expression e)
         {
             SerializationContext ctx = new SerializationContext();
-            ctx.Direction = direction;
-
             return FromExpression(e, ctx);
         }
 
@@ -185,8 +106,6 @@ namespace Kistl.API
         public virtual Expression ToExpression()
         {
             SerializationContext ctx = new SerializationContext();
-            ctx.Direction = SerializableType.SerializeDirection.None;
-
             return ToExpressionInternal(ctx);
         }
 
@@ -304,9 +223,9 @@ namespace Kistl.API
             if(e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
 
             MethodName = e.Method.Name;
-            _Type = new SerializableType(e.Method.DeclaringType, ctx.Direction);
-            ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(p.ParameterType, ctx.Direction)).ToList();
-            GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(p, ctx.Direction)).ToList();
+            _Type = new SerializableType(e.Method.DeclaringType);
+            ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(p.ParameterType)).ToList();
+            GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(p)).ToList();
 
             if (e.Arguments != null)
             {

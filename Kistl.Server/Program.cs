@@ -18,11 +18,11 @@ namespace Kistl.Server
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             if (args.Length > 0 && !args[0].StartsWith("-"))
             {
-                init.Init(args[0]);
+                init.Init(Kistl.API.HostType.Server, args[0]);
             }
             else
             {
-                init.Init();
+                init.Init(Kistl.API.HostType.Server);
             }
 
             Server server = new Server();

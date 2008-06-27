@@ -12,9 +12,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Kistl.API
 {
+    /// <summary>
+    /// Message for the WCF Stream Interface
+    /// </summary>
     public class KistlServiceStreamsMessage
     {
-        public ObjectType Type {get; set;}
+        public SerializableType Type {get; set;}
         public int ID { get; set; }
         public string Property { get; set; }
 
@@ -36,8 +39,7 @@ namespace Kistl.API
         {
             System.IO.BinaryWriter sw = new System.IO.BinaryWriter(msg);
 
-            sw.Write(Type.Namespace);
-            sw.Write(Type.Classname);
+            BinarySerializer.ToBinary(Type, sw);
             sw.Write(ID);
             sw.Write(Property ?? "");
 
@@ -57,9 +59,8 @@ namespace Kistl.API
         {
             System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
 
-            Type = new ObjectType();
-            Type.Namespace = sr.ReadString();
-            Type.Classname = sr.ReadString();
+            SerializableType tmpType;
+            BinarySerializer.FromBinary(out tmpType, sr); Type = tmpType;
             ID = sr.ReadInt32();
             Property = sr.ReadString();
 
@@ -102,7 +103,7 @@ namespace Kistl.API
         /// <returns>XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
-        string GetList(ObjectType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy);
+        string GetList(SerializableType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy);
 
         /// <summary>
         /// Liste aller Objekte eines Objektes "ID" im Property "property".
@@ -113,7 +114,7 @@ namespace Kistl.API
         /// <returns>XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
-        string GetListOf(ObjectType type, int ID, string property);
+        string GetListOf(SerializableType type, int ID, string property);
 
         /// <summary>
         /// Gibt ein Objekt zurück
@@ -123,7 +124,7 @@ namespace Kistl.API
         /// <returns>XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
-        string GetObject(ObjectType type, int ID);
+        string GetObject(SerializableType type, int ID);
         
         /// <summary>
         /// Update/Insert eines Objektes. Gibt das geänderte Objekt wieder zurück.
@@ -133,7 +134,7 @@ namespace Kistl.API
         /// <returns>XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
-        string SetObject(ObjectType type, string xmlObj);
+        string SetObject(SerializableType type, string xmlObj);
 
         /// <summary>
         /// Generates Objects & Database. Throws a Exception if failed.

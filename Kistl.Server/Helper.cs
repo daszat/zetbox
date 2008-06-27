@@ -65,49 +65,4 @@ namespace Kistl.Server
         /// </summary>
         private Helper() { }
     }
-
-    /// <summary>
-    /// C# Extensions
-    /// </summary>
-    public static class ExtensionHelpers
-    {
-        public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass, Kistl.API.IKistlContext ctx)
-        {
-            List<ObjectClass> result = new List<ObjectClass>();
-            while (objClass != null)
-            {
-                result.Add(objClass);
-                objClass = objClass.BaseObjectClass;
-            }
-
-            result.Reverse();
-            return result;
-        }
-
-        public static ObjectType GetObjectType(this DataType objClass)
-        {
-            return new ObjectType(objClass.Module.Namespace, objClass.ClassName);
-        }
-
-        public static ObjectClass GetObjectClass(this ObjectType objType, Kistl.API.IKistlContext ctx)
-        {
-            return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == objType.Namespace && o.ClassName == objType.Classname);
-        }
-
-        public static BaseProperty GetProperty(this ObjectClass c, Kistl.API.IKistlContext ctx, string property)
-        {
-            ObjectClass objClass = c;
-            while (objClass != null)
-            {
-                BaseProperty prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
-                if (prop != null)
-                {
-                    return prop;
-                }
-                objClass = objClass.BaseObjectClass;
-            }
-
-            return null;
-        }
-    }
 }

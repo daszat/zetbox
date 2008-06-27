@@ -26,7 +26,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
-                        IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetObject(m.ID);
+                        IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSerializedType()).GetObject(m.ID);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
                         
@@ -59,16 +59,16 @@ namespace Kistl.Server
                         // Deserialize
                         long pos = msg.Position;
                         System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
-                        ObjectType objType;
+                        SerializableType objType;
                         BinarySerializer.FromBinary(out objType, sr);
 
                         msg.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                        IDataObject obj = objType.NewDataObject();
+                        IDataObject obj = (IDataObject)objType.NewObject();
                         obj.FromStream(sr);
 
                         // Set Operation
-                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(objType).SetObject(obj);
+                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(objType.GetSerializedType()).SetObject(obj);
 
                         // Serialize back
                         MemoryStream result = new MemoryStream();
@@ -99,7 +99,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type)
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSerializedType())
                             .GetList(m.MaxListCount,
                                 m.Filter != null ? m.Filter.ToExpression() : null,
                                 m.OrderBy != null ? m.OrderBy.ToExpression() : null);
@@ -133,7 +133,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type).GetListOf(m.ID, m.Property);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSerializedType()).GetListOf(m.ID, m.Property);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
                         foreach (IDataObject obj in lst)

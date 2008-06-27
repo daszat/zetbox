@@ -21,16 +21,15 @@ namespace Kistl.Client
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             if (args.Length == 1 && !args[0].StartsWith("-"))
             {
-                init.Init(args[0]);
+                init.Init(Kistl.API.HostType.Client, args[0]);
                 result = new string[] { };
             }
             else
             {
-                init.Init();
+                init.Init(Kistl.API.HostType.Client);
                 result = (string[])args.Clone();
             }
 
-            Kistl.API.ObjectType.Init("Kistl.Objects.Client");
             API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
 
             Renderer = KistlGUIContext.CreateRenderer(tk);

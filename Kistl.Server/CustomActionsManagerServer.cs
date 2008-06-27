@@ -62,7 +62,7 @@ namespace Kistl.Server
                 {
                     foreach (ObjectClass baseObjClass in ctx.GetQuery<ObjectClass>())
                     {
-                        Type objType = baseObjClass.GetObjectType().GetCLRType();
+                        Type objType = baseObjClass.GetDataCLRType();
                         foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie(ctx))
                         {
                             foreach (MethodInvocation mi in objClass.MethodIvokations)

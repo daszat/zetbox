@@ -22,15 +22,12 @@ namespace Kistl.API
             }
         }
 
-        public static void Init(string assemblyName)
+        /// <summary>
+        /// Das ist bald Obsolete
+        /// </summary>
+        static ObjectType()
         {
-            if (string.IsNullOrEmpty(assemblyName)) throw new ArgumentException("assemblyName cannot be null or empty");
-            _AssemblyName = assemblyName;
-        }
-
-        public static void Init(Assembly assembly)
-        {
-            Init(assembly.FullName);
+            _AssemblyName = APIInit.HostType == HostType.Client ? "Kistl.Objects.Client" : "Kistl.Objects.Server";
         }
 
         public ObjectType()

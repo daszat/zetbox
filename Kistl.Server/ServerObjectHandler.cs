@@ -66,18 +66,19 @@ namespace Kistl.Server
         /// <param name="type"></param>
         /// <returns></returns>
         // [System.Diagnostics.DebuggerStepThrough]
-        public static IServerObjectHandler GetServerObjectHandler(ObjectType type)
+        public static IServerObjectHandler GetServerObjectHandler(Type type)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
                 if (type == null) throw new ArgumentException("Type is null");
-                if (string.IsNullOrEmpty(type.FullNameDataObject)) throw new ArgumentNullException("type", "Type is empty");
+                //if (string.IsNullOrEmpty(type.FullNameDataObject)) throw new ArgumentNullException("type", "Type is empty");
 
-                Type objType = Type.GetType(type.FullNameDataObject);
-                if (objType == null) throw new ApplicationException("Invalid Type");
+                //Type objType = Type.GetType(type.FullNameDataObject);
+                //if (objType == null) throw new ApplicationException("Invalid Type");
 
                 Type t = typeof(ServerObjectHandler<>);
-                Type result = t.MakeGenericType(objType);
+                //Type result = t.MakeGenericType(objType);
+                Type result = t.MakeGenericType(type);
 
                 IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
                 if (obj == null) throw new ApplicationException("Cannot create instance");
@@ -157,7 +158,7 @@ namespace Kistl.Server
                 using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
                     // If ObjectReferenc is a List -> convert data
-                    Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.Type.GetObjectClass(ctx)
+                    Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.GetObjectClass(ctx)
                         .GetProperty(ctx, property);
                     if (prop.ReferenceProperty.IsList)
                     {
@@ -236,7 +237,7 @@ namespace Kistl.Server
         {
             using (IKistlContext ctx = KistlDataContext.GetContext())
             {
-                Kistl.App.Base.ObjectClass objClass = obj.Type.GetObjectClass(ctx); 
+                Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(ctx); 
                 while(objClass != null)
                 {
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
@@ -245,7 +246,7 @@ namespace Kistl.Server
                         {
                             int fk = obj.GetPropertyValue<int>("fk_" + p.PropertyName);
 
-                            IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(new ObjectType(p.GetDataType()));
+                            IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
                             IDataObject other = so.GetObject(fk);
                             obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
                         }
@@ -256,7 +257,7 @@ namespace Kistl.Server
                             {
                                 int fk = ce.GetPropertyValue<int>("fk_Value");
 
-                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(new ObjectType(p.GetDataType()));
+                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
                                 IDataObject other = so.GetObject(fk);
                                 ce.SetPropertyValue<IDataObject>("Value", other);
                             }
@@ -292,7 +293,7 @@ namespace Kistl.Server
             {
                 using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
-                    Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).Type.GetObjectClass(ctx);
+                    Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).GetObjectClass(ctx);
                     while (objClass != null)
                     {
                         foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))

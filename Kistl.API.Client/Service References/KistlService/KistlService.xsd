@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Kistl.API" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Kistl.API" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ObjectType">
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" />
+  <xs:complexType name="SerializableType">
     <xs:sequence>
-      <xs:element name="_x003C_Classname_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_Namespace_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_AssemblyQualifiedName" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_GenericTypeParameter_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
+      <xs:element name="_x003C_TypeName_x003E_k__BackingField" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ObjectType" nillable="true" type="tns:ObjectType" />
+  <xs:element name="SerializableType" nillable="true" type="tns:SerializableType" />
+  <xs:complexType name="ArrayOfSerializableType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SerializableType" nillable="true" type="tns:SerializableType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSerializableType" nillable="true" type="tns:ArrayOfSerializableType" />
+  <xs:complexType name="SerializableExpression">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" name="_NodeType" type="q1:ExpressionType" />
+      <xs:element name="_Type" nillable="true" type="tns:SerializableType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SerializableExpression" nillable="true" type="tns:SerializableExpression" />
 </xs:schema>

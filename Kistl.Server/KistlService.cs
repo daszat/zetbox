@@ -80,7 +80,7 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public string GetList(ObjectType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy)
+        public string GetList(SerializableType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         // TODO: Add filter to Interface!!
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type)
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType())
                             .GetList(maxListCount, 
                             filter != null ? filter.ToExpression() : null, 
                             orderBy != null ? orderBy.ToExpression() : null);
@@ -114,7 +114,7 @@ namespace Kistl.Server
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        public string GetListOf(ObjectType type, int ID, string property)
+        public string GetListOf(SerializableType type, int ID, string property)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetListOf(ID, property);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).GetListOf(ID, property);
                         return CurrentSerializer.XmlFromList(lst);
                     }
                 }
@@ -147,7 +147,7 @@ namespace Kistl.Server
         /// <param name="type"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public string GetObject(ObjectType type, int ID)
+        public string GetObject(SerializableType type, int ID)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
-                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).GetObject(ID);
+                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).GetObject(ID);
                         return CurrentSerializer.XmlFromObject(obj);
                     }
                 }
@@ -179,7 +179,7 @@ namespace Kistl.Server
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public string SetObject(ObjectType type, string xmlObj)
+        public string SetObject(SerializableType type, string xmlObj)
         {
             try
             {
@@ -191,7 +191,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
-                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(type).SetObject(obj);
+                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).SetObject(obj);
                         return CurrentSerializer.XmlFromObject(obj);
                     }
                 }

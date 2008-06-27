@@ -36,7 +36,6 @@ namespace Kistl.Server
         /// </summary>
         public Server()
         {
-            Kistl.API.ObjectType.Init("Kistl.Objects.Server");
             // Preload Kistl.Objects.Server.dll so the Mapping Resources will be loaded
             // Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
             Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");

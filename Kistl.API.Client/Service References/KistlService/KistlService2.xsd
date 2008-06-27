@@ -4,7 +4,10 @@
   <xs:element name="GetList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q1:ObjectType" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q1:SerializableType" />
+        <xs:element minOccurs="0" name="maxListCount" type="xs:int" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="filter" nillable="true" type="q2:SerializableExpression" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="orderBy" nillable="true" type="q3:SerializableExpression" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -18,7 +21,7 @@
   <xs:element name="GetListOf">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q2:ObjectType" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q4:SerializableType" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
         <xs:element minOccurs="0" name="property" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -34,7 +37,7 @@
   <xs:element name="GetObject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q3:ObjectType" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q5:SerializableType" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -49,7 +52,7 @@
   <xs:element name="SetObject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q4:ObjectType" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q6:SerializableType" />
         <xs:element minOccurs="0" name="xmlObj" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>

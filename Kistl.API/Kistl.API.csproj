@@ -83,6 +83,7 @@
     <Compile Include="ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableExpression.cs" />
+    <Compile Include="SerializableType.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

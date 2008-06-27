@@ -85,18 +85,6 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Serialize an ObjectType object. Format is: Namespace, Classname.
-        /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToBinary(ObjectType val, System.IO.BinaryWriter sw)
-        {
-            if (val == null) throw new ArgumentNullException("val");
-            ToBinary(val.Namespace, sw);
-            ToBinary(val.Classname, sw);
-        }
-
-        /// <summary>
         /// Serialize a nullable bool. Format is: NULL (true/false), Value (if not null).
         /// </summary>
         /// <param name="val">Value to serialize,</param>
@@ -191,6 +179,15 @@ namespace Kistl.API
                 sw.Write(false);
             }
         }
+
+        public static void ToBinary(SerializableType type, System.IO.BinaryWriter sw)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            if (sw == null) throw new ArgumentNullException("sw");
+
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(sw.BaseStream, type);
+        }
         #endregion
 
         #region FromBinary
@@ -266,24 +263,6 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Deserialize a ObjectType Object, expected format: Namespace, Classname
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromBinary(out ObjectType val, System.IO.BinaryReader sr)
-        {
-            // I HATE THIS!!!! Give me my C## freinds back!
-            // Properties or Indexer are not to be allowed to be used as out Parameter!
-            string tmpN, tmpC;
-            FromBinary(out tmpN, sr);
-            FromBinary(out tmpC, sr);
-
-            val = new ObjectType();
-            val.Namespace = tmpN;
-            val.Classname = tmpC;
-        }
-
-        /// <summary>
         /// Deserialize a nullable bool, expected format: NULL (true/false), Value (if not null).
         /// </summary>
         /// <param name="val">Destination Value.</param>
@@ -344,12 +323,12 @@ namespace Kistl.API
             while (sr.ReadBoolean())
             {
                 long pos = sr.BaseStream.Position;
-                ObjectType objType;
+                SerializableType objType;
                 BinarySerializer.FromBinary(out objType, sr);
 
                 sr.BaseStream.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                IDataObject obj = objType.NewDataObject();
+                IDataObject obj = (IDataObject)objType.NewObject();
                 obj.FromStream(sr);
 
                 val.Add((T)obj);
@@ -366,12 +345,12 @@ namespace Kistl.API
             while (sr.ReadBoolean())
             {
                 long pos = sr.BaseStream.Position;
-                ObjectType objType;
+                SerializableType objType;
                 BinarySerializer.FromBinary(out objType, sr);
 
                 sr.BaseStream.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                IDataObject obj = objType.NewDataObject();
+                IDataObject obj = (IDataObject)objType.NewObject();
                 obj.FromStream(sr);
 
                 val.Add((T)obj);
@@ -417,6 +396,14 @@ namespace Kistl.API
                 BinaryFormatter bf = new BinaryFormatter();
                 e = (SerializableExpression)bf.Deserialize(sr.BaseStream);
             }
+        }
+
+        public static void FromBinary(out SerializableType type, System.IO.BinaryReader sr)
+        {
+            if (sr == null) throw new ArgumentNullException("sr");
+
+            BinaryFormatter bf = new BinaryFormatter();
+            type = (SerializableType)bf.Deserialize(sr.BaseStream);
         }
         #endregion
     }

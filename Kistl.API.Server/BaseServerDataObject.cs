@@ -117,7 +117,7 @@ namespace Kistl.API.Server
         {
             if (sw == null) throw new ArgumentNullException("sw");
 
-            BinarySerializer.ToBinary(Type, sw);
+            BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
             BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary((int)ObjectState, sw);
         }
@@ -126,11 +126,11 @@ namespace Kistl.API.Server
         {
             if (sr == null) throw new ArgumentNullException("sr");
 
-            ObjectType t;
+            SerializableType t;
             BinarySerializer.FromBinary(out t, sr);
 
             // TODO: improve Error reporting
-            if (!Type.Equals(t))
+            if (this.GetType() != t.GetSerializedType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", Type, t));
 
             int tmp;

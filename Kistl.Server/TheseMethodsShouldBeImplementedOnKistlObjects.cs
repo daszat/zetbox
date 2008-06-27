@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
+using System.Linq;
+using Kistl.API.Server;
+using Kistl.App.Base;
+using Kistl.API;
+
+namespace Kistl.Server
+{
+    /// <summary>
+    /// Temp. Kist Objects Extensions
+    /// </summary>
+    public static class TheseMethodsShouldBeImplementedOnKistlObjects
+    {
+        public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass, Kistl.API.IKistlContext ctx)
+        {
+            List<ObjectClass> result = new List<ObjectClass>();
+            while (objClass != null)
+            {
+                result.Add(objClass);
+                objClass = objClass.BaseObjectClass;
+            }
+
+            result.Reverse();
+            return result;
+        }
+
+        public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
+        {
+            Type type = obj.GetType();
+            return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
+        }
+
+        public static BaseProperty GetProperty(this ObjectClass c, Kistl.API.IKistlContext ctx, string property)
+        {
+            ObjectClass objClass = c;
+            while (objClass != null)
+            {
+                BaseProperty prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
+                if (prop != null)
+                {
+                    return prop;
+                }
+                objClass = objClass.BaseObjectClass;
+            }
+
+            return null;
+        }
+
+        public static Type GetDataCLRType(this DataType type)
+        {
+            return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Server", true);
+        }
+
+        public static Type GetDataCLRType(this ObjectReferenceProperty p)
+        {
+            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Server", true);
+        }
+
+        public static Type GetDataCLRType(this BackReferenceProperty p)
+        {
+            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Server", true);
+        }
+    }
+}

@@ -6,19 +6,27 @@ using System.Security.Permissions;
 
 namespace Kistl.API
 {
+    public enum HostType
+    {
+        Client,
+        Server,
+    }
+
     /// <summary>
     /// Loads configuration, Resolves Assemblies and cleans up invalid Assemblies
     /// </summary>
     [Serializable]
     public class APIInit : MarshalByRefObject
     {
+        public static HostType HostType { get; private set; }
+
         /// <summary>
         /// Uses the default configuration DefaultConfig.xml in the current directory
         /// </summary>
         [SecurityPermission(SecurityAction.Demand, ControlAppDomain = true)]
-        public void Init()
+        public void Init(HostType type)
         {
-            Init("");
+            Init(type, "");
         }
 
         /// <summary>
@@ -26,8 +34,10 @@ namespace Kistl.API
         /// </summary>
         /// <param name="configFile">configuration file w/ or w/o path</param>
         [SecurityPermission(SecurityAction.LinkDemand, ControlAppDomain=true)]
-        public void Init(string configFile)
+        public void Init(HostType type, string configFile)
         {
+            HostType = type;
+
             // Load Configuration
             Configuration.KistlConfig.Init(configFile);
 

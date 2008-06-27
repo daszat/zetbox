@@ -66,7 +66,7 @@ namespace Kistl.API.Client
 
         internal List<T> GetListOf(int ID, string propertyName)
         {
-            List<T> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
+            List<T> serviceResult = Proxy.Current.GetListOf(_type.GetCLRType(), ID, propertyName).OfType<T>().ToList();
             List<T> result = new List<T>();
             foreach (Kistl.API.IDataObject obj in serviceResult.OfType<Kistl.API.IDataObject>())
             {
@@ -86,7 +86,7 @@ namespace Kistl.API.Client
         /// <returns></returns>
         private object GetListCall(Expression e)
         {
-            List<T> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
+            List<T> serviceResult = Proxy.Current.GetList(_type.GetCLRType(), _maxListCount, _filter, _orderBy).OfType<T>().ToList();
             List<T> result = new List<T>();
             foreach (IDataObject obj in serviceResult.OfType<IDataObject>())
             {
@@ -109,7 +109,7 @@ namespace Kistl.API.Client
             IDataObject result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)
             {
-                result = Proxy.Current.GetObject(_type, ID);
+                result = Proxy.Current.GetObject(_type.GetCLRType(), ID);
                 if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
 
                 CacheController<IDataObject>.Current.Set(_type, ID, (IDataObject)result.Clone());

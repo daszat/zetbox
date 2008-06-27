@@ -12,7 +12,6 @@ namespace Kistl.Client
     {
         public Client()
         {
-            Kistl.API.ObjectType.Init("Kistl.Objects.Client");
         }
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace Kistl.Client
 
 //                    SplashScreen.SetInfo("Setting up Server");
                     Kistl.API.APIInit initServer = (Kistl.API.APIInit)serverDomain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
-                    initServer.Init(Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
+                    initServer.Init(Kistl.API.HostType.Server, Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
 
                     //                    SplashScreen.SetInfo("Starting Server");
                     server = (Kistl.API.IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");

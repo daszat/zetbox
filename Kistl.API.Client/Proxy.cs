@@ -12,10 +12,10 @@ namespace Kistl.API.Client
 {
     public interface IProxy : IDisposable
     {
-        IEnumerable GetList(ObjectType type, int maxListCount, Expression filter, Expression orderBy);
-        IEnumerable GetListOf(ObjectType type, int ID, string property);
-        Kistl.API.IDataObject GetObject(ObjectType type, int ID);
-        Kistl.API.IDataObject SetObject(ObjectType type, Kistl.API.IDataObject obj);
+        IEnumerable GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable GetListOf(Type type, int ID, string property);
+        Kistl.API.IDataObject GetObject(Type type, int ID);
+        Kistl.API.IDataObject SetObject(Type type, Kistl.API.IDataObject obj);
         void Generate();
         string HelloWorld(string name);
     }
@@ -126,16 +126,16 @@ namespace Kistl.API.Client
         /// </summary>
         private KistlServiceStreams.KistlServiceStreamsClient serviceStreams = new KistlServiceStreams.KistlServiceStreamsClient();
         
-        public IEnumerable GetList(ObjectType type, int maxListCount, Expression filter, Expression orderBy)
+        public IEnumerable GetList(Type type, int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = type;
+                msg.Type = new SerializableType(type);
                 msg.MaxListCount = maxListCount;
-                msg.Filter = filter != null ? SerializableExpression.FromExpression(filter, SerializableType.SerializeDirection.ClientToServer) : null;
-                msg.OrderBy = orderBy != null ? SerializableExpression.FromExpression(orderBy, SerializableType.SerializeDirection.ClientToServer) : null;
+                msg.Filter = filter != null ? SerializableExpression.FromExpression(filter) : null;
+                msg.OrderBy = orderBy != null ? SerializableExpression.FromExpression(orderBy) : null;
 
                 System.IO.MemoryStream s = serviceStreams.GetList(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
@@ -145,12 +145,12 @@ namespace Kistl.API.Client
                 while (s.Position < s.Length)
                 {
                     long pos = s.Position;
-                    ObjectType objType;
+                    SerializableType objType;
                     BinarySerializer.FromBinary(out objType, sr);
 
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                    IDataObject obj = objType.NewDataObject();
+                    IDataObject obj = (IDataObject)objType.NewObject();
                     obj.FromStream(sr);
 
                     result.Add((Kistl.API.IDataObject)obj);
@@ -164,13 +164,13 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable GetListOf(ObjectType type, int ID, string property)
+        public IEnumerable GetListOf(Type type, int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = type;
+                msg.Type = new SerializableType(type);
                 msg.ID = ID;
                 msg.Property = property;
                 System.IO.MemoryStream s = serviceStreams.GetListOf(msg.ToStream());
@@ -181,12 +181,12 @@ namespace Kistl.API.Client
                 while (s.Position < s.Length)
                 {
                     long pos = s.Position;
-                    ObjectType objType;
+                    SerializableType objType;
                     BinarySerializer.FromBinary(out objType, sr);
 
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                    IDataObject obj = objType.NewDataObject();
+                    IDataObject obj = (IDataObject)objType.NewObject();
                     obj.FromStream(sr);
 
                     result.Add((Kistl.API.IDataObject)obj);
@@ -200,23 +200,23 @@ namespace Kistl.API.Client
             }
         }
 
-        public Kistl.API.IDataObject GetObject(ObjectType type, int ID)
+        public Kistl.API.IDataObject GetObject(Type type, int ID)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = type;
+                msg.Type = new SerializableType(type);
                 msg.ID = ID;
                 System.IO.MemoryStream s = serviceStreams.GetObject(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
-                ObjectType objType;
+                SerializableType objType;
                 BinarySerializer.FromBinary(out objType, sr);
 
                 s.Seek(0, System.IO.SeekOrigin.Begin);
 
-                IDataObject obj = objType.NewDataObject();
+                IDataObject obj = (IDataObject)objType.NewObject();
                 obj.FromStream(sr);
 
                 return (Kistl.API.IDataObject)obj;
@@ -227,14 +227,14 @@ namespace Kistl.API.Client
             }
         }
 
-        public Kistl.API.IDataObject SetObject(ObjectType type, Kistl.API.IDataObject obj)
+        public Kistl.API.IDataObject SetObject(Type type, Kistl.API.IDataObject obj)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
             {
 #if USE_STREAMS
                 // Serialize
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = type;
+                msg.Type = new SerializableType(type);
 
                 MemoryStream ms = new MemoryStream();
                 msg.ToStream(ms);
@@ -248,12 +248,12 @@ namespace Kistl.API.Client
                 // Deserialize
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
-                ObjectType objType;
+                SerializableType objType;
                 BinarySerializer.FromBinary(out objType, sr);
 
                 s.Seek(0, System.IO.SeekOrigin.Begin);
 
-                obj = objType.NewDataObject();
+                obj = (IDataObject)objType.NewObject();
                 obj.FromStream(sr);
 
                 return obj;
