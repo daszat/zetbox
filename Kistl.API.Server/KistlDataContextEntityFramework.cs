@@ -109,12 +109,12 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Returns a Query by ObjectType.
+        /// Returns a Query by System.Type.
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;().</remarks>
         /// </summary>
-        /// <param name="objType">ObjectType</param>
+        /// <param name="objType">System.Type</param>
         /// <returns>IQueryable</returns>
-        public IQueryable<IDataObject> GetQuery(ObjectType objType)
+        public IQueryable<IDataObject> GetQuery(Type objType)
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
         }
@@ -139,7 +139,7 @@ namespace Kistl.API.Server
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName) where T : IDataObject
+        public List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject
         {
             IDataObject obj = (IDataObject)this.GetQuery(type).First(o => o.ID == ID);
             return GetListOf<T>(obj, propertyName);
@@ -228,23 +228,13 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Creates a new IDataObject by Type
+        /// Creates a new IDataObject by System.Type. Note - this Method is depricated!
         /// </summary>
-        /// <param name="type">Type of the new IDataObject</param>
+        /// <param name="type">System.Type of the new IDataObject</param>
         /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(Type type)
         {
-            return Create(new ObjectType(type));
-        }
-
-        /// <summary>
-        /// Creates a new IDataObject by ObjectType. Note - this Method is depricated!
-        /// </summary>
-        /// <param name="type">ObjectType of the new IDataObject</param>
-        /// <returns>A new IDataObject</returns>
-        public Kistl.API.IDataObject Create(ObjectType type)
-        {
-            Kistl.API.IDataObject obj = type.NewDataObject();
+            Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
             return obj;
         }
@@ -271,7 +261,7 @@ namespace Kistl.API.Server
         /// <param name="type">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public IDataObject Find(ObjectType type, int ID)
+        public IDataObject Find(Type type, int ID)
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
         }

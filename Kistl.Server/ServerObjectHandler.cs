@@ -159,7 +159,7 @@ namespace Kistl.Server
                 {
                     // If ObjectReferenc is a List -> convert data
                     Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.GetObjectClass(ctx)
-                        .GetProperty(ctx, property);
+                        .GetProperty(property);
                     if (prop.ReferenceProperty.IsList)
                     {
                         List<IDataObject> result = new List<IDataObject>();

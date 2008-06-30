@@ -12,6 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.Client;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -57,7 +58,7 @@ public partial class _Default : System.Web.UI.Page
                 int cID = Convert.ToInt32(n.Value);
                 var @class = ctx.Find<Kistl.App.Base.ObjectClass>(cID);
 
-                repItems.DataSource = ctx.GetQuery(new ObjectType(@class.Module.Namespace, @class.ClassName));
+                repItems.DataSource = ctx.GetQuery(@class.GetDataCLRType());
                 repItems.DataBind();
             }
         }

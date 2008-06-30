@@ -21,7 +21,7 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IOb
 
     #region IReferenceControl<IList<IDataObject>> Members
 
-    public Kistl.API.ObjectType ObjectType
+    public Type ObjectType
     {
         get;
         set;
@@ -79,6 +79,12 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IOb
         get;
         set;
     }
+
+    #endregion
+
+    #region IObjectListControl Members
+
+    public event EventHandler UserAddRequest;
 
     #endregion
 }

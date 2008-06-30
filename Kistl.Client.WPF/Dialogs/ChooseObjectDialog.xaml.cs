@@ -36,15 +36,15 @@ namespace Kistl.Client.WPF.Dialogs
         public static readonly DependencyProperty ContextProperty =
             DependencyProperty.Register("Context", typeof(IKistlContext), typeof(ChooseObjectDialog), new PropertyMetadata());
 
-        public ObjectType ObjectType
+        public Type ObjectType
         {
-            get { return (ObjectType)GetValue(ObjectTypeProperty); }
+            get { return (Type)GetValue(ObjectTypeProperty); }
             set { SetValue(ObjectTypeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
-            DependencyProperty.Register("ObjectType", typeof(ObjectType), typeof(ChooseObjectDialog), new PropertyMetadata());
+            DependencyProperty.Register("ObjectType", typeof(Type), typeof(ChooseObjectDialog), new PropertyMetadata());
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

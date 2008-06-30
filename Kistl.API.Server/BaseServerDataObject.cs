@@ -105,23 +105,9 @@ namespace Kistl.API.Server
         /// </summary>
         protected BaseServerDataObject()
         {
-            _type = new ObjectType(this.GetType().Namespace, this.GetType().Name);
             API.CustomActionsManagerFactory.Current.AttachEvents(this);
         }
 
-
-        private ObjectType _type = null;
-        /// <summary>
-        /// Obsolete - Use Type directly.
-        /// </summary>
-        [Obsolete("Use Type directly")]
-        public ObjectType Type
-        {
-            get
-            {
-                return _type;
-            }
-        }
 
         /// <summary>
         /// Fires an Event before an Object is saved.

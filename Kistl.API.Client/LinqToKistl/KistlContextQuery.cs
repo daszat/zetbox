@@ -13,11 +13,11 @@ namespace Kistl.API.Client
     {
         private Expression _expression = null;
         private KistlContextProvider<T> _provider = null;
-        private ObjectType _type = null;
+        private Type _type = null;
         private IKistlContext _context;
 
         #region Constructor
-        internal KistlContextQuery(IKistlContext ctx, ObjectType type)
+        internal KistlContextQuery(IKistlContext ctx, Type type)
         {
             _type = type;
             _context = ctx;
@@ -25,7 +25,7 @@ namespace Kistl.API.Client
             _provider = new KistlContextProvider<T>(_context, _type);
         }
 
-        internal KistlContextQuery(IKistlContext ctx, ObjectType type, KistlContextProvider<T> provider, Expression expression)
+        internal KistlContextQuery(IKistlContext ctx, Type type, KistlContextProvider<T> provider, Expression expression)
         {
             _type = type;
             _context = ctx;

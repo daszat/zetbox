@@ -27,7 +27,7 @@ namespace Kistl.Client
         /// <summary>
         /// List of Custom Actions
         /// </summary>
-        private Dictionary<ObjectType, List<InvokeInfo>> customAction = new Dictionary<ObjectType, List<InvokeInfo>>();
+        private Dictionary<Type, List<InvokeInfo>> customAction = new Dictionary<Type, List<InvokeInfo>>();
 
         /// <summary>
         /// Indicates that initializing is done
@@ -45,9 +45,9 @@ namespace Kistl.Client
             if (!initialized) return;
 
             // New Method
-            if (customAction.ContainsKey(obj.Type))
+            if (customAction.ContainsKey(obj.GetType()))
             {
-                foreach (InvokeInfo ii in customAction[obj.Type])
+                foreach (InvokeInfo ii in customAction[obj.GetType()])
                 {
                     // TODO: Fix Case 316
                     ii.CLREvent.AddEventHandler(obj, Delegate.CreateDelegate(
@@ -78,8 +78,8 @@ namespace Kistl.Client
 
                         foreach (ObjectClass baseObjClass in ClientHelper.ObjectClasses.Values)
                         {
-                            ObjectType objType = new ObjectType(baseObjClass.Module.Namespace, baseObjClass.ClassName);
-                            foreach (ObjectClass objClass in ClientHelper.GetObjectHierarchie(baseObjClass))
+                            Type objType = baseObjClass.GetDataCLRType();
+                            foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
                             {
                                 foreach (MethodInvocation mi in objClass.MethodIvokations)
                                 {
@@ -101,7 +101,7 @@ namespace Kistl.Client
                                             continue;
                                         }
 
-                                        EventInfo ei = Type.GetType(objType.FullNameDataObject).GetEvent(
+                                        EventInfo ei = objType.GetEvent(
                                             "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
 
                                         if (ei == null)

@@ -96,17 +96,7 @@ namespace Kistl.API.Client
     {
         protected BaseClientDataObject()
         {
-            _type = new ObjectType(this.GetType());
             API.CustomActionsManagerFactory.Current.AttachEvents(this);
-        }
-
-        private ObjectType _type = null;
-        public ObjectType Type
-        {
-            get
-            {
-                return _type;
-            }
         }
 
         public virtual void NotifyPreSave() { }
@@ -141,7 +131,7 @@ namespace Kistl.API.Client
             BinarySerializer.FromBinary(out t, sr);
 
             if (this.GetType() != t.GetSerializedType())
-                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", Type, t));
+                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
 
             int tmp;
             BinarySerializer.FromBinary(out tmp, sr);

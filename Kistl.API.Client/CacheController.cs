@@ -24,13 +24,13 @@ namespace Kistl.API.Client
             {
             }
 
-            public Key(ObjectType t, int id)
+            public Key(Type t, int id)
             {
                 Type = t;
                 ID = id;
             }
 
-            public ObjectType Type { get; set; }
+            public Type Type { get; set; }
             public int ID { get; set; }
 
             public override int GetHashCode()
@@ -51,12 +51,12 @@ namespace Kistl.API.Client
 
         private Dictionary<Key, T> _cache = new Dictionary<Key, T>();
 
-        public void Set(ObjectType type, int ID, T obj)
+        public void Set(Type type, int ID, T obj)
         {
             _cache[new Key(type, ID)] = obj;
         }
 
-        public T Get(ObjectType type, int ID)
+        public T Get(Type type, int ID)
         {
             Key k = new Key(type, ID);
             if (_cache.ContainsKey(k))

@@ -149,7 +149,7 @@ namespace Kistl.Client.WPF
                     _InstancesNodes.Clear();
                     if (ObjectClass is Kistl.App.Base.ObjectClass)
                     {
-                        ObjectClass.Context.GetQuery(new Kistl.API.ObjectType(ObjectClass.Module.Namespace, ObjectClass.ClassName)).ToList()
+                        ObjectClass.Context.GetQuery(ObjectClass.GetDataCLRType()).ToList()
                             .ForEach(i => _InstancesNodes.Add(new InstanceNode(i)));
                     }
                 }
@@ -191,12 +191,12 @@ namespace Kistl.Client.WPF
             {
                 if (treeView.SelectedItem == null) return;
 
-                ObjectType resultObjectType = null;
+                Type resultObjectType = null;
                 INode n = null;
                 if (treeView.SelectedItem is ObjectClassNode)
                 {
                     n = (ObjectClassNode)treeView.SelectedItem;
-                    resultObjectType = new ObjectType(((ObjectClassNode)n).ObjectClass.Module.Namespace, ((ObjectClassNode)n).ObjectClass.ClassName);
+                    resultObjectType = ((ObjectClassNode)n).ObjectClass.GetDataCLRType();
                     Kistl.App.Base.ObjectClass objClass = ClientHelper.ObjectClasses[resultObjectType];
 
                     if (objClass.SubClasses.Count > 0)
@@ -207,7 +207,7 @@ namespace Kistl.Client.WPF
 
                         if (dlg.ShowDialog() == true)
                         {
-                            resultObjectType = new ObjectType(dlg.ResultObjectClass.Module.Namespace, dlg.ResultObjectClass.ClassName);
+                            resultObjectType = dlg.ResultObjectClass.GetDataCLRType();
                         }
                         else
                         {
@@ -219,12 +219,13 @@ namespace Kistl.Client.WPF
                 else if (treeView.SelectedItem is ModuleNode)
                 {
                     n = (ModuleNode)treeView.SelectedItem;
-                    resultObjectType = new ObjectType("Kistl.App.Base", "ObjectClass");
+                    // TODO: Ausbessern!!!
+                    resultObjectType = Type.GetType("Kistl.App.Base.ObjectClass, Kistl.Objects.Client", true);
                 }
 
                 if (resultObjectType != null && n != null)
                 {
-                    Manager.Renderer.ShowObject((Kistl.API.IDataObject)resultObjectType.NewDataObject());
+                    Manager.Renderer.ShowObject((Kistl.API.IDataObject)Activator.CreateInstance(resultObjectType));
                     n.RefreshChildren();
                 }
             }

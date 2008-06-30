@@ -32,7 +32,7 @@ namespace Kistl.GUI.Renderer.WPF
         /// <summary>
         /// Typ des Objektes, welches dieses Objekt geöffnet hat.
         /// </summary>
-        public Kistl.API.ObjectType SourceObjectType { get; set; }
+        public Type SourceObjectType { get; set; }
         /// <summary>
         /// ObjectID jenes Objektes, welches dieses Objekt geöffnet hat.
         /// </summary>
@@ -47,11 +47,11 @@ namespace Kistl.GUI.Renderer.WPF
         {
             if (_obj.ObjectState != Kistl.API.DataObjectState.Unmodified && !this.Title.StartsWith("*"))
             {
-                this.Title = "* " + _obj.Type.ToString();
+                this.Title = "* " + _obj.GetType().FullName;
             }
             else if (_obj.ObjectState == Kistl.API.DataObjectState.Unmodified)
             {
-                this.Title = _obj.Type.ToString();
+                this.Title = _obj.GetType().FullName;
             }
         }
 

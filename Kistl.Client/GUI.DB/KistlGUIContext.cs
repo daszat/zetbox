@@ -70,7 +70,7 @@ namespace Kistl.GUI.DB
 
         public static Template FindTemplate(this IDataObject obj, TemplateUsage templateUsage)
         {
-            return Template.DefaultTemplate(obj.Type);
+            return Template.DefaultTemplate(obj.GetType());
         }
     }
 

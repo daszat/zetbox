@@ -81,7 +81,7 @@ namespace Kistl.GUI.DB
             {
                 throw new InvalidCastException(
                     String.Format("Found unknown Property Type, when trying to create Default Visual: {0}",
-                        p.Type));
+                        p.GetType()));
             }
         }
 

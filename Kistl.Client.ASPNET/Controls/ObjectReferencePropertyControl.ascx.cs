@@ -52,7 +52,7 @@ public partial class Controls_ObjectReferencePropertyControl : System.Web.UI.Use
 
     #region IReferenceControl<IDataObject> Members
 
-    public Kistl.API.ObjectType ObjectType
+    public Type ObjectType
     {
         get;
         set;

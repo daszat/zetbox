@@ -62,9 +62,9 @@ namespace Kistl.GUI
     public interface IReferenceControl<TYPE> : IValueControl<TYPE>
     {
         /// <summary>
-        /// The ObjectType of the listed objects
+        /// The Type of the listed objects
         /// </summary>
-        ObjectType ObjectType { get; set; }
+        Type ObjectType { get; set; }
         IList<IDataObject> ItemsSource { get; set; }
     }
 

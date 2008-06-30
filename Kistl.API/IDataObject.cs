@@ -90,11 +90,6 @@ namespace Kistl.API
     public interface IDataObject : IPersistenceObject, INotifyPropertyChanged, ICloneable
     {
         /// <summary>
-        /// Type of this Object
-        /// </summary>
-        ObjectType Type { get; }
-
-        /// <summary>
         /// Not implemented yet.
         /// </summary>
         void NotifyChange();

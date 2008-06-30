@@ -24,18 +24,18 @@ namespace Kistl.API
         /// </summary>
         /// <param name="ID"></param>
         /// <param name="type"></param>
-        public ObjectMoniker(int ID, ObjectType type)
+        public ObjectMoniker(int ID, Type type)
         {
             this.ID = ID;
             _Type = type;
         }
 
-        private ObjectType _Type;
+        private Type _Type;
 
         /// <summary>
         /// Type of the Object Moniker
         /// </summary>
-        public ObjectType Type
+        public Type Type
         {
             get { return _Type; }
         }

@@ -39,7 +39,7 @@ public partial class ObjectPage : System.Web.UI.Page
 
     private void CreateControls()
     {
-        IDataObject obj = ctx.Find(new ObjectType(Request["Type"]), int.Parse(Request["ID"]));
+        IDataObject obj = ctx.Find(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"), int.Parse(Request["ID"]));
 
         var template = obj.FindTemplate(TemplateUsage.EditControl);
         var widget = (Control)Manager.Renderer.CreateControl(obj, template.VisualTree);

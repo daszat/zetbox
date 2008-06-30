@@ -39,7 +39,7 @@ namespace Kistl.Client
             }
         }
 
-        private static Dictionary<ObjectType, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
+        private static Dictionary<Type, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
         private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
 
         public static void CleanCaches()
@@ -64,14 +64,14 @@ namespace Kistl.Client
                         using (IKistlContext ctx = KistlContext.GetContext())
                         {
                             _ObjectClasses = ctx.GetQuery<Kistl.App.Base.ObjectClass>()
-                                .ToDictionary(o => new ObjectType(o.Module.Namespace, o.ClassName));
+                                .ToDictionary(o => o.GetDataCLRType());
                         }
                     }
                 }
             }
         }
 
-        public static Dictionary<ObjectType, Kistl.App.Base.ObjectClass> ObjectClasses
+        public static Dictionary<Type, Kistl.App.Base.ObjectClass> ObjectClasses
         {
             get
             {
@@ -106,12 +106,13 @@ namespace Kistl.Client
             }
         }
 
+#if DONOTUSE
         public static List<Kistl.App.Base.ObjectClass> GetObjectHierarchie(Kistl.App.Base.ObjectClass objClass)
         {
-            return GetObjectHierarchie(new ObjectType(objClass.Module.Namespace, objClass.ClassName));
+            return GetObjectHierarchie(Type.GetType(objClass.Module.Namespace + "." + objClass.ClassName, true));
         }
 
-        public static List<Kistl.App.Base.ObjectClass> GetObjectHierarchie(ObjectType type)
+        public static List<Kistl.App.Base.ObjectClass> GetObjectHierarchie(Type type)
         {
             Kistl.App.Base.ObjectClass objClass = ObjectClasses[type];
             List<Kistl.App.Base.ObjectClass> result = new List<Kistl.App.Base.ObjectClass>();
@@ -133,13 +134,13 @@ namespace Kistl.Client
             return result;
         }
 
-        public static List<ObjectType> GetTypeHierarchie(ObjectType type)
+        public static List<Type> GetTypeHierarchie(Type type)
         {
             Kistl.App.Base.ObjectClass objClass = ObjectClasses[type];
-            List<ObjectType> result = new List<ObjectType>();
+            List<Type> result = new List<Type>();
             while (objClass != null)
             {
-                result.Add(new ObjectType(objClass.Module.Namespace, objClass.ClassName));
+                result.Add(Type.GetType(objClass.Module.Namespace + "." + objClass.ClassName, true));
 
                 if (objClass.fk_BaseObjectClass == API.Helper.INVALIDID)
                 {
@@ -154,5 +155,6 @@ namespace Kistl.Client
             result.Reverse();
             return result;
         }
+#endif
     }
 }

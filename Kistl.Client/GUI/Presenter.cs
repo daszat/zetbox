@@ -278,7 +278,7 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ShortLabel = String.Format("{0} {1}", Object.Type.Classname, Object.ID);
+            Control.ShortLabel = String.Format("{0} {1}", Object.GetType().Name, Object.ID);
 
             //TODO: Set Control.Size
         }
@@ -293,8 +293,8 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ShortLabel = Object.Type.Classname;
-            Control.Description = String.Format("{0}: {1}", Object.Type.Classname, Object.ToString());
+            Control.ShortLabel = Object.GetType().Name;
+            Control.Description = String.Format("{0}: {1}", Object.GetType().Name, Object.ToString());
             Control.Value = Object;
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
@@ -331,7 +331,7 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceObjectClass.Module.Namespace, Property.ReferenceObjectClass.ClassName);
+            Control.ObjectType = Property.ReferenceObjectClass.GetDataCLRType();
 
             // remember the objects that are sent to the object
             // to facilitate validity checking
@@ -352,7 +352,7 @@ namespace Kistl.GUI
             // Hier wird er wieder zurück umgewandelt in ein Objekt.
             if (refobj is ObjectMoniker)
             {
-                refobj = Object.Context.Find(refobj.Type, refobj.ID);
+                refobj = Object.Context.Find(refobj.GetType(), refobj.ID);
             }
 
             if (refobj == null)
@@ -381,7 +381,7 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceObjectClass.Module.Namespace, Property.ReferenceObjectClass.ClassName);
+            Control.ObjectType = Property.ReferenceObjectClass.GetDataCLRType();
 
             // remember the objects that are sent to the object
             // to facilitate validity checking
@@ -476,7 +476,7 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ObjectType = new Kistl.API.ObjectType(Property.ReferenceProperty.ReferenceObjectClass.Module.Namespace, Property.ReferenceProperty.ReferenceObjectClass.ClassName);
+            Control.ObjectType = Property.ReferenceProperty.ReferenceObjectClass.GetDataCLRType();
 
             // remember the objects that are sent to the object
             // to facilitate validity checking
@@ -515,7 +515,7 @@ namespace Kistl.GUI
 
         private void Control_UserAddRequest(object sender, EventArgs e)
         {
-            IDataObject toAdd = Manager.Renderer.ChooseObject(Object.Context, new ObjectType(Property.GetDataType()));
+            IDataObject toAdd = Manager.Renderer.ChooseObject(Object.Context, Property.GetDataCLRType());
             if (toAdd == null)
                 return;
             toAdd.SetPropertyValue(Property.ReferenceProperty, Object.ID);

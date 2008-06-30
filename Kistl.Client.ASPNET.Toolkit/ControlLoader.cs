@@ -155,7 +155,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         #region IReferenceControl<IDataObject> Members
 
-        public Kistl.API.ObjectType ObjectType
+        public Type ObjectType
         {
             get { return Ctrl.ObjectType; }
             set { Ctrl.ObjectType = value; }
@@ -206,7 +206,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         #region IReferenceControl<IList<IDataObject>> Members
 
-        public Kistl.API.ObjectType ObjectType
+        public Type ObjectType
         {
             get { return Ctrl.ObjectType; }
             set { Ctrl.ObjectType = value; }

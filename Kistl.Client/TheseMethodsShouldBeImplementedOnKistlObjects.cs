@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Linq;
-using Kistl.API.Server;
+using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.API;
 
-namespace Kistl.Server
+namespace Kistl.Client
 {
     /// <summary>
     /// Temp. Kist Objects Extensions
@@ -50,17 +50,17 @@ namespace Kistl.Server
 
         public static Type GetDataCLRType(this DataType type)
         {
-            return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Server", true);
+            return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Client", true);
         }
 
         public static Type GetDataCLRType(this ObjectReferenceProperty p)
         {
-            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Server", true);
+            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Client", true);
         }
 
         public static Type GetDataCLRType(this BackReferenceProperty p)
         {
-            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Server", true);
+            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Client", true);
         }
     }
 }

@@ -16,16 +16,16 @@ namespace Kistl.GUI.DB
         public string DisplayName { get; set; }
         public TemplateUsage Usage { get; set; }
         public Visual VisualTree { get; set; }
-        public ObjectType Type { get; set; }
+        public Type Type { get; set; }
 
-        public static Template DefaultTemplate(ObjectType objectType)
+        public static Template DefaultTemplate(Type objectType)
         {
             if (objectType == null)
                 throw new ArgumentNullException("objectType", "Template.DefaultTemplate(objectType): need objectType to create Template");
 
             Template result = new Template()
             {
-                DisplayName = objectType.Classname,
+                DisplayName = objectType.Name,
                 Usage = TemplateUsage.EditControl,
                 Type = objectType
             };

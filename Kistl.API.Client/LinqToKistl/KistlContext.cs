@@ -34,18 +34,7 @@ namespace Kistl.API.Client
         private List<IPersistenceObject> _objects = new List<IPersistenceObject>();
 
         /// <summary>
-        /// Returns the Root Type of a given ObjectType. Note: This Mehtod is depricated!
-        /// </summary>
-        /// <param name="t">ObjectType</param>
-        /// <returns>Root Type of the given Type</returns>
-        private Type GetRootType(ObjectType t)
-        {
-            Type type = Type.GetType(t.FullNameDataObject);
-            return GetRootType(type);
-        }
-
-        /// <summary>
-        /// Returns the Root Type of a given ObjectType.
+        /// Returns the Root Type of a given System.Type.
         /// </summary>
         /// <param name="t">Type</param>
         /// <returns>Root Type of the given Type</returns>
@@ -76,11 +65,11 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
-        /// Returns a Query by ObjectType
+        /// Returns a Query by System.Type
         /// </summary>
-        /// <param name="type">ObjectType</param>
+        /// <param name="type">System.Type</param>
         /// <returns>IQueryable</returns>
-        public IQueryable<IDataObject> GetQuery(ObjectType type)
+        public IQueryable<IDataObject> GetQuery(Type type)
         {
             return new KistlContextQuery<IDataObject>(this, type);
         }
@@ -92,7 +81,7 @@ namespace Kistl.API.Client
         /// <returns>IQueryable</returns>
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
-            return new KistlContextQuery<T>(this, new ObjectType(typeof(T)));
+            return new KistlContextQuery<T>(this, typeof(T));
         }
 
         /// <summary>
@@ -104,7 +93,7 @@ namespace Kistl.API.Client
         /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
         {
-            return this.GetListOf<T>(obj.Type, obj.ID, propertyName);
+            return this.GetListOf<T>(obj.GetType(), obj.ID, propertyName);
         }
 
         /// <summary>
@@ -115,7 +104,7 @@ namespace Kistl.API.Client
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public List<T> GetListOf<T>(ObjectType type, int ID, string propertyName) where T : IDataObject
+        public List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject
         {
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
             return ((KistlContextProvider<T>)query.Provider).GetListOf(ID, propertyName);
@@ -134,23 +123,13 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
-        /// Creates a new IDataObject by Type
+        /// Creates a new IDataObject by System.Type. Note - this Method is depricated!
         /// </summary>
-        /// <param name="type">Type of the new IDataObject</param>
+        /// <param name="type">System.Type of the new IDataObject</param>
         /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(Type type)
         {
-            return Create(new ObjectType(type));
-        }
-
-        /// <summary>
-        /// Creates a new IDataObject by ObjectType. Note - this Method is depricated!
-        /// </summary>
-        /// <param name="type">ObjectType of the new IDataObject</param>
-        /// <returns>A new IDataObject</returns>
-        public Kistl.API.IDataObject Create(ObjectType type)
-        {
-            Kistl.API.IDataObject obj = type.NewDataObject();
+            Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
             return obj;
         }
@@ -232,7 +211,7 @@ namespace Kistl.API.Client
                     obj.ObjectState = DataObjectState.Unmodified;
                 }
 
-                CacheController<Kistl.API.IDataObject>.Current.Set(obj.Type, obj.ID, obj);
+                CacheController<Kistl.API.IDataObject>.Current.Set(obj.GetType(), obj.ID, obj);
             }
 
             objectsToDetach.ForEach(obj => this.Detach(obj));
@@ -249,7 +228,7 @@ namespace Kistl.API.Client
         /// <param name="type">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public IDataObject Find(ObjectType type, int ID)
+        public IDataObject Find(Type type, int ID)
         {
             return GetQuery(type).Single(o => o.ID == ID);
         }

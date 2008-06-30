@@ -28,7 +28,7 @@ namespace Kistl.GUI.Renderer
         /// </summary>
         /// <param name="objectType"></param>
         /// <returns>null if no Object was chosen or the chosen object</returns>
-        IDataObject ChooseObject(IKistlContext ctx, ObjectType objectType);
+        IDataObject ChooseObject(IKistlContext ctx, Type objectType);
 
         /// <summary>
         /// Create a control corresponding to the visual for this object
@@ -51,7 +51,7 @@ namespace Kistl.GUI.Renderer
     {
         public abstract void ShowMessage(string msg);
         public abstract void ShowObject(IDataObject obj);
-        public abstract IDataObject ChooseObject(IKistlContext ctx, ObjectType klass);
+        public abstract IDataObject ChooseObject(IKistlContext ctx, Type klass);
         public abstract Toolkit Platform { get; }
 
         /// <summary>

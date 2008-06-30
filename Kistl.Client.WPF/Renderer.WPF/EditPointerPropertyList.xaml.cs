@@ -32,15 +32,15 @@ namespace Kistl.GUI.Renderer.WPF
         {
         }
 
-        public ObjectType ObjectType
+        public Type ObjectType
         {
-            get { return (ObjectType)GetValue(ObjectTypeProperty); }
+            get { return (Type)GetValue(ObjectTypeProperty); }
             set { SetValue(ObjectTypeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
-            DependencyProperty.Register("ObjectType", typeof(ObjectType), typeof(EditPointerPropertyList));
+            DependencyProperty.Register("ObjectType", typeof(Type), typeof(EditPointerPropertyList));
 
         /// <summary>
         /// The actual Value of this Property

@@ -40,7 +40,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             return widget;
         }
 
-        public override IDataObject ChooseObject(IKistlContext ctx, ObjectType klass)
+        public override IDataObject ChooseObject(IKistlContext ctx, Type klass)
         {
             throw new NotImplementedException("This runs contrary to ASP.NET's runtime model. Avoid triggering Events that lead to presenters needing this method.");
         }
