@@ -71,12 +71,6 @@ namespace Kistl.Client.ASPNET.Toolkit
             set { Ctrl.Value = value; }
         }
 
-        public event EventHandler UserInput
-        {
-            add { Ctrl.UserInput += value; }
-            remove { Ctrl.UserInput -= value; }
-        }
-
         public event EventHandler UserSaveRequest
         {
             add { Ctrl.UserSaveRequest += value; }
@@ -203,6 +197,12 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             return "~/Controls/ObjectListControl.ascx";
         }
+
+        #region IObjectListControl Member
+
+        public event EventHandler UserAddRequest;
+
+        #endregion
 
         #region IReferenceControl<IList<IDataObject>> Members
 

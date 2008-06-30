@@ -45,6 +45,7 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
         }
 
         [Test]
+        [Ignore()]
         public override void TestUserInput()
         {
             //TestUserInput((w, v) => w.SetValue(EditDateTimeProperty.ValueProperty, v));
@@ -63,6 +64,7 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
         {
         }
         [Test]
+        [Ignore()]
         public override void TestUserInput()
         {
             //TestUserInput((w, v) => w.SetValue(EditDoubleProperty.ValueProperty, v));
@@ -81,6 +83,7 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
         }
 
         [Test]
+        [Ignore()]
         public override void TestUserInput()
         {
             //TestUserInput((w, v) => w.SetValue(EditIntProperty.ValueProperty, v));
@@ -98,9 +101,9 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
         {
         }
         [Test]
+        [Ignore()]
         public override void TestUserInput()
         {
-            System.Web.HttpWorkerRequest.
             //TestUserInput((w, v) => w.SetValue(EditSimpleProperty.ValueProperty, v));
         }
 

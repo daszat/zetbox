@@ -42,6 +42,17 @@ namespace Kistl.GUI.Renderer.WPF
             //TODO: OnUserSelectsObject(sender);
         }
 
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            OnUserAddRequest();
+        }
+
+        #region IObjectListControl Member
+
+        public event EventHandler UserAddRequest;
+
+        #endregion
+
         #region IReferenceControl<IList<IDataObject>> Members
         public Kistl.API.ObjectType ObjectType
         {
@@ -138,6 +149,14 @@ namespace Kistl.GUI.Renderer.WPF
             finally
             {
                 _SupressUserInputEvent = false;
+            }
+        }
+
+        private void OnUserAddRequest()
+        {
+            if (UserAddRequest != null)
+            {
+                UserAddRequest(this, EventArgs.Empty);
             }
         }
 

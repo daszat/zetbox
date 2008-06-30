@@ -7,6 +7,7 @@ using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.GUI.DB;
 using Kistl.Client.Mocks;
+using Kistl.API;
 
 /// <summary>
 /// Assembly-global setup class which initialises the Kistl.API and primes the KistlGUIContext with test data
@@ -20,9 +21,7 @@ public class SetUp
         System.Diagnostics.Trace.WriteLine("Setting up Kistl");
 
         Kistl.API.APIInit init = new Kistl.API.APIInit();
-        init.Init(@"..\..\DefaultConfig_Kistl.Client.Tests.xml");
-
-        Kistl.API.ObjectType.Init("API.Client.Tests");
+        init.Init(HostType.Client, @"..\..\DefaultConfig_Kistl.Client.Tests.xml");
 
         Kistl.API.CustomActionsManagerFactory.Init(new CustomActionsManagerAPITest());
 

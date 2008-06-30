@@ -8,6 +8,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.GUI.DB;
 using Kistl.Client;
+using Kistl.Client.WPF.Dialogs;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -41,6 +42,21 @@ namespace Kistl.GUI.Renderer.WPF
         public override void ShowMessage(string msg)
         {
             System.Windows.MessageBox.Show(msg);
+        }
+
+        public override IDataObject ChooseObject(IKistlContext ctx, ObjectType klass)
+        {
+            ChooseObjectDialog chooseDlg = new ChooseObjectDialog();
+            chooseDlg.ObjectType = klass;
+            chooseDlg.Context = ctx;
+            if (chooseDlg.ShowDialog() == true)
+            {
+                return chooseDlg.Result;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

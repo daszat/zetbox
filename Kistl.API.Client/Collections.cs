@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
 
 namespace Kistl.API.Client
 {
@@ -22,7 +23,7 @@ namespace Kistl.API.Client
         }
     }
 
-    public class ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> : IList<T>
+    public class ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> : IList<T>, INotifyCollectionChanged
         where COLLECTIONENTRYTYPE : class, ICollectionEntry<T, PARENT>, INotifyPropertyChanged, new()
         where PARENT : IDataObject
     {
@@ -58,6 +59,16 @@ namespace Kistl.API.Client
                 other.collection.EndUpdate();
             }
         }
+
+        #region INotifyCollectionChanged Member
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add { UnderlyingCollection.CollectionChanged += value; }
+            remove { UnderlyingCollection.CollectionChanged -= value; }
+        }
+
+        #endregion
 
         #region ICollection<T> Members
 
@@ -148,5 +159,6 @@ namespace Kistl.API.Client
         }
 
         #endregion
+
     }
 }

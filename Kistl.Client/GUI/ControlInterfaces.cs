@@ -75,6 +75,19 @@ namespace Kistl.GUI
     // TODO: perhaps better called "IMultiSelectControl"?
     public interface IObjectListControl : IReferenceControl<IList<IDataObject>>
     {
+        /// <summary>
+        /// [optional]
+        /// Is fired when the user wants to add an object to this list. The presenter
+        /// will query the user for the object to add and perform the addition on the 
+        /// model. The control receives the appropriate change event from the value.
+        /// </summary>
+        /// Highly sophisticated or specialised controls like ASP.NET can avoid firing
+        /// this event and implement the appropriate logic themselves.
+        /// 
+        /// TODO: IList doesn't implement change events, therefore the presenter will 
+        /// just reset the Value. A better implementation would fire fine-grained 
+        /// add/delete Events instead.
+        event EventHandler UserAddRequest;
     }
 
     /// <summary>
@@ -83,8 +96,13 @@ namespace Kistl.GUI
     public interface IObjectControl : IBasicControl
     {
         Kistl.API.IDataObject Value { get; set; }
-        event EventHandler UserInput;
+        /// <summary>
+        /// Is fired when the user requests that the object should be saved
+        /// </summary>
         event EventHandler UserSaveRequest;
+        /// <summary>
+        /// Is fired when the user requests that the object should be deleted
+        /// </summary>
         event EventHandler UserDeleteRequest;
     }
 

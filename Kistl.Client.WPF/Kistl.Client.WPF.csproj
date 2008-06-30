@@ -67,15 +67,28 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Tracing\TraceListener.dll</HintPath>
     </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogs\ChooseObjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\ChooseObjectClass.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -144,6 +157,9 @@
   <ItemGroup>
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="Dialogs\ChooseObjectDialog.xaml.cs">
+      <DependentUpon>ChooseObjectDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ChooseObjectClass.xaml.cs">
       <DependentUpon>ChooseObjectClass.xaml</DependentUpon>
     </Compile>

@@ -39,5 +39,10 @@ namespace Kistl.Client.ASPNET.Toolkit
             list.ForEach<IControlLoader>(c => widget.AddChild(c));
             return widget;
         }
+
+        public override IDataObject ChooseObject(IKistlContext ctx, ObjectType klass)
+        {
+            throw new NotImplementedException("This runs contrary to ASP.NET's runtime model. Avoid triggering Events that lead to presenters needing this method.");
+        }
     }
 }

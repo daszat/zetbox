@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.GUI.DB;
 using Kistl.API.Client;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI.Renderer
 {
@@ -24,6 +24,13 @@ namespace Kistl.GUI.Renderer
         void ShowObject(IDataObject obj);
 
         /// <summary>
+        /// Intructs the Renderer to let the User choose an IDataObject of a given class
+        /// </summary>
+        /// <param name="objectType"></param>
+        /// <returns>null if no Object was chosen or the chosen object</returns>
+        IDataObject ChooseObject(IKistlContext ctx, ObjectType objectType);
+
+        /// <summary>
         /// Create a control corresponding to the visual for this object
         /// </summary>
         /// <param name="obj"></param>
@@ -35,6 +42,7 @@ namespace Kistl.GUI.Renderer
         /// The platform of this Renderer
         /// </summary>
         Toolkit Platform { get; }
+
     }
 
     public abstract class BasicRenderer<CONTROL, PROPERTY, CONTAINER> : IRenderer
@@ -43,6 +51,8 @@ namespace Kistl.GUI.Renderer
     {
         public abstract void ShowMessage(string msg);
         public abstract void ShowObject(IDataObject obj);
+        public abstract IDataObject ChooseObject(IKistlContext ctx, ObjectType klass);
+        public abstract Toolkit Platform { get; }
 
         /// <summary>
         /// Create a Control for the given visual, showing the object
@@ -83,6 +93,5 @@ namespace Kistl.GUI.Renderer
         protected abstract CONTROL Setup(PROPERTY control);
         protected abstract CONTAINER Setup(CONTAINER widget, IList<CONTROL> list);
 
-        public abstract Toolkit Platform { get; }
     }
 }

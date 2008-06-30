@@ -1,9 +1,11 @@
-﻿<app:PropertyControl x:Class="Kistl.GUI.Renderer.WPF.ObjectListControl"
+﻿<app:PropertyControl 
+    x:Class="Kistl.GUI.Renderer.WPF.ObjectListControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
     MinWidth="100"
-    x:Name="ListCtrl">
+    x:Name="ListCtrl"
+    >
     <DockPanel>
         <Label
             DockPanel.Dock="Left" 
@@ -12,7 +14,7 @@
             />
         <DockPanel>
             <ToolBar DockPanel.Dock="Top">
-                <Button Name="btnNew">New</Button>
+                <Button Name="btnAdd" Click="btnAdd_Click">Add ...</Button>
                 <Button Name="btnRefresh">Refresh</Button>
             </ToolBar>
             <ListView

@@ -10,6 +10,7 @@ using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.GUI.DB;
 using System.Reflection;
+using Kistl.Client;
 
 namespace Kistl.GUI
 {
@@ -386,12 +387,31 @@ namespace Kistl.GUI
             // to facilitate validity checking
             Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
 
+            _Control_UserAddRequest = new EventHandler(Control_UserAddRequest);
+            Control.UserAddRequest += _Control_UserAddRequest;
+
             base.InitializeComponent();
         }
 
         protected override IList<IDataObject> GetPropertyValue()
         {
             return Object.GetList(Property);
+        }
+
+        #region Change Management
+
+        private EventHandler _Control_UserAddRequest = null;
+
+        private void Control_UserAddRequest(object sender, EventArgs e)
+        {
+            IDataObject toAdd = Manager.Renderer.ChooseObject(Object.Context, Control.ObjectType);
+
+            if (toAdd != null)
+            {
+                // this will trigger a PropertyChanged Event and set the Control's Value 
+                // via the default EventHandler
+                GetPropertyValue().Add(toAdd);
+            }
         }
 
         /// <summary>
@@ -411,9 +431,26 @@ namespace Kistl.GUI
 
             if (Control.IsValidValue)
             {
-                Object.SetList(Property, Control.Value);
+                // Object.SetList(Property, Control.Value);
+                throw new NotImplementedException("IObjectListControl should have NotifyCollectionChanged Events");
             }
         }
+
+        #endregion
+
+        #region Disposal
+
+        protected override void DisposeManagedResources()
+        {
+            base.DisposeManagedResources();
+
+            // To prevent resource leaks, all event handlers have to be removed
+            if (Control != null)
+                Control.UserAddRequest -= Control_UserAddRequest;
+        }
+
+        #endregion
+
     }
 
     public class BackReferencePresenter : Presenter<IObjectListControl>
@@ -456,6 +493,9 @@ namespace Kistl.GUI
 
                 _Control_UserInput = new EventHandler(Control_UserInput);
                 Control.UserInput += _Control_UserInput;
+
+                _Control_UserAddRequest = new EventHandler(Control_UserAddRequest);
+                Control.UserAddRequest += _Control_UserAddRequest;
             }
 
             Control.Value = GetPropertyValue();
@@ -471,6 +511,15 @@ namespace Kistl.GUI
 
         private PropertyChangedEventHandler _Object_PropertyChanged = null;
         private EventHandler _Control_UserInput = null;
+        private EventHandler _Control_UserAddRequest = null;
+
+        private void Control_UserAddRequest(object sender, EventArgs e)
+        {
+            IDataObject toAdd = Manager.Renderer.ChooseObject(Object.Context, new ObjectType(Property.GetDataType()));
+            if (toAdd == null)
+                return;
+            toAdd.SetPropertyValue(Property.ReferenceProperty, Object.ID);
+        }
 
         private void Object_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -516,7 +565,8 @@ namespace Kistl.GUI
 
             if (Control.IsValidValue)
             {
-                Object.SetList(Property, Control.Value.ToList());
+                //Object.SetList(Property, Control.Value.ToList());
+                throw new NotImplementedException("IObjectListControl should have NotifyCollectionChanged Events");
             }
         }
 
@@ -533,7 +583,10 @@ namespace Kistl.GUI
                 Object.PropertyChanged -= _Object_PropertyChanged;
 
             if (Control != null)
+            {
                 Control.UserInput -= _Control_UserInput;
+                Control.UserAddRequest -= Control_UserAddRequest;
+            }
         }
 
         #endregion
@@ -607,45 +660,12 @@ namespace Kistl.GUI
 
         public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, ObjectReferenceProperty prop)
         {
-            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<IDataObject>().ToList();
-        }
-
-        public static void SetList(this IDataObject obj, ObjectReferenceProperty prop, IList<Kistl.API.IDataObject> value)
-        {
-            PropertyInfo pi = obj.GetType().GetProperty(prop.PropertyName);
-            if (pi == null)
-                throw new ArgumentOutOfRangeException("prop", string.Format("Property {0} was not found in Type {1}", prop.PropertyName, obj.GetType().FullName));
-
-            // To upcast, we have to get a list of the proper type now
-            IList realValue = (IList)Activator.CreateInstance(pi.PropertyType);
-            foreach (IDataObject i in value)
-            {
-                realValue.Add(i);
-            }
-
-            pi.SetValue(obj, realValue, null);
+            return obj.GetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName);
         }
 
         public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, BackReferenceProperty prop)
         {
-            return obj.GetPropertyValue<IEnumerable>(prop.PropertyName).Cast<IDataObject>().ToList();
-        }
-
-        public static void SetList(this IDataObject obj, BackReferenceProperty prop, List<Kistl.API.IDataObject> value)
-        {
-            PropertyInfo pi = obj.GetType().GetProperty(prop.PropertyName);
-            if (pi == null)
-                throw new ArgumentOutOfRangeException("prop", string.Format("Property {0} was not found in Type {1}", prop.PropertyName, obj.GetType().FullName));
-
-            // To upcast, we have to get a list of the proper type now
-            IList realValue = (IList)Activator.CreateInstance(pi.PropertyType);
-            foreach (IDataObject i in value)
-            {
-                realValue.Add(i);
-            }
-
-            pi.SetValue(obj, realValue, null);
+            return obj.GetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName);
         }
     }
-
 }

@@ -43,6 +43,11 @@ namespace Kistl.Client.Mocks
         {
             return widget;
         }
+
+        public override IDataObject ChooseObject(IKistlContext ctx, ObjectType klass)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class TestObjectControl : IObjectControl
@@ -63,6 +68,7 @@ namespace Kistl.Client.Mocks
 
         public event EventHandler UserInput;
         public event EventHandler UserSaveRequest;
+        public event EventHandler UserDeleteRequest;
 
         #endregion
 
@@ -380,6 +386,12 @@ namespace Kistl.Client.Mocks
             if (UserInput != null)
                 UserInput(this, new EventArgs());
         }
+
+        #region IObjectListControl Member
+
+        public event EventHandler UserAddRequest;
+
+        #endregion
 
         #region IReferenceControl<IList<IDataObject>> Members
 
