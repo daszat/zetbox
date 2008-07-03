@@ -375,8 +375,8 @@ namespace Kistl.GUI
     }
 
     public class ObjectListPresenter<T>
-        : Presenter<IObjectListControl>
-        // : DefaultPresenter<IList<T>, ObjectReferenceProperty, IObjectListControl>
+        : Presenter<IReferenceListControl>
+        // : DefaultPresenter<IList<T>, ObjectReferenceProperty, IReferenceListControl>
         where T : IDataObject
     {
 
@@ -529,7 +529,7 @@ namespace Kistl.GUI
     }
 
     public class BackReferencePresenter<T>
-        : Presenter<IObjectListControl>
+        : Presenter<IReferenceListControl>
         where T : IDataObject
     {
         // localize type-unsafety

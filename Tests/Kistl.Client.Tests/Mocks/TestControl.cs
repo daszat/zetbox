@@ -372,7 +372,7 @@ namespace Kistl.Client.Mocks
     }
 
     public class TestObjectListControl
-        : IObjectListControl
+        : IReferenceListControl
     {
         public TestObjectListControl()
         {

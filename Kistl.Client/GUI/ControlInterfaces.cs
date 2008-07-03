@@ -72,7 +72,6 @@ namespace Kistl.GUI
     /// a control that displays a list of references to IDataObjects.
     /// </summary>
     /// <typeparam name="TYPE"></typeparam>
-    // TODO: perhaps better called "ISingleSelectControl"?
     public interface IReferenceListControl : IValueControl<IList<IDataObject>>
     {
         /// <summary>
@@ -80,12 +79,7 @@ namespace Kistl.GUI
         /// </summary>
         Type ObjectType { get; set; }
         IList<IDataObject> ItemsSource { get; set; }
-    }
 
-    // TODO: perhaps better called "IMultiSelectControl"?
-    public interface IObjectListControl 
-        : IReferenceListControl
-    {
         /// <summary>
         /// [optional]
         /// Is fired when the user wants to add an object to this list. The presenter
@@ -99,6 +93,7 @@ namespace Kistl.GUI
         /// just reset the Value. A better implementation would fire fine-grained 
         /// add/delete Events instead.
         event EventHandler UserAddRequest;
+
     }
 
     /// <summary>

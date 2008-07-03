@@ -138,7 +138,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
                 delegate(ObjectListControl w, IList<IDataObject> v)
                 {
                     w.SetValue(ObjectListControl.ValueProperty, v);
-                    Assert.AreEqual(v, ((ITestObjectListControl)w).ListboxValue, "Listbox didn't receive correct value");
+                    Assert.AreEqual(v, ((ITestReferenceListControl)w).ListboxValue, "Listbox didn't receive correct value");
                 },
                 Values,
                 AssertThatOnlyUserInputEventFired
@@ -153,7 +153,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
                 delegate(ObjectListControl w, IList<IDataObject> v)
                 {
                     ((IValueControl<IList<IDataObject>>)w).Value = v;
-                    Assert.AreEqual(v, ((ITestObjectListControl)w).ListboxValue, "Listbox didn't receive correct value");
+                    Assert.AreEqual(v, ((ITestReferenceListControl)w).ListboxValue, "Listbox didn't receive correct value");
                 },
                 Values,
                 AssertThatNoEventsFired

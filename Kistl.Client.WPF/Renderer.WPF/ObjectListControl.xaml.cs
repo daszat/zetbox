@@ -23,7 +23,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// alle Instanzen einer Eigenschaft eines Objektes.
     /// </summary>
     public partial class ObjectListControl
-        : PropertyControl, IObjectListControl, ITestObjectListControl
+        : PropertyControl, IReferenceListControl, ITestReferenceListControl
     {
 
         public ObjectListControl()
@@ -174,9 +174,9 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-        #region ITestObjectListControl Members
+        #region ITestReferenceListControl Members
 
-        object ITestObjectListControl.ListboxValue
+        object ITestReferenceListControl.ListboxValue
         {
             get { return lst.ItemsSource; }
         }
@@ -185,7 +185,7 @@ namespace Kistl.GUI.Renderer.WPF
 
     }
 
-    public interface ITestObjectListControl
+    public interface ITestReferenceListControl
     {
         object ListboxValue { get; }
     }

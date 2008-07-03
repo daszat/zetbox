@@ -192,7 +192,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         #endregion
     }
-    public class ObjectListControl : BaseControlLoader<IObjectListControl>, IObjectListControl
+    public class ObjectListControl : BaseControlLoader<IReferenceListControl>, IReferenceListControl
     {
         protected override string GetControlPath()
         {
