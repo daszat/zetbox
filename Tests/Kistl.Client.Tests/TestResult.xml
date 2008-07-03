@@ -1,75 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="146" failures="26" not-run="41" date="2008-07-03" time="14:19:44">
+<test-results name="C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="146" failures="26" not-run="41" date="2008-07-03" time="16:27:49">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\Projekte\Kistl\Tests\Kistl.Client.Tests" machine-name="MONEY" user="David" user-domain="MONEY" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="False" time="13.125" asserts="0">
+  <test-suite name="C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="False" time="17.391" asserts="0">
     <results>
-      <test-suite name="C:\Projekte\Kistl\Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.exe" success="False" time="13.109" asserts="0">
+      <test-suite name="C:\Projekte\Kistl\Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.exe" success="False" time="17.250" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="11.672" asserts="0">
+          <test-suite name="Kistl" success="False" time="15.063" asserts="0">
             <results>
-              <test-suite name="GUI" success="False" time="11.672" asserts="0">
+              <test-suite name="GUI" success="False" time="14.938" asserts="0">
                 <results>
-                  <test-suite name="Integration" success="False" time="6.688" asserts="0">
+                  <test-suite name="Integration" success="False" time="9.281" asserts="0">
                     <results>
-                      <test-suite name="WPF" success="False" time="6.688" asserts="0">
+                      <test-suite name="WPF" success="False" time="9.281" asserts="0">
                         <results>
-                          <test-suite name="ObjectReferenceControlIntegrationTests" success="False" time="6.672" asserts="2">
+                          <test-suite name="ObjectReferenceControlIntegrationTests" success="False" time="9.281" asserts="2">
                             <results>
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleInvalidUserInput" executed="True" success="False" time="6.125" asserts="0">
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleInvalidUserInput" executed="True" success="False" time="8.672" asserts="0">
                                 <failure>
                                   <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                                   <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                                 </failure>
                               </test-case>
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNoUserInput" executed="True" success="False" time="0.031" asserts="0">
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNoUserInput" executed="True" success="False" time="0.016" asserts="0">
                                 <failure>
                                   <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                                   <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                                 </failure>
                               </test-case>
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNullUserInput" executed="True" success="False" time="0.016" asserts="0">
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleNullUserInput" executed="True" success="False" time="0.000" asserts="0">
                                 <failure>
                                   <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                                   <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                                 </failure>
                               </test-case>
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleProgrammaticChange" executed="True" success="False" time="0.016" asserts="0">
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.HandleProgrammaticChange" executed="True" success="False" time="0.000" asserts="0">
                                 <failure>
                                   <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                                   <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                                 </failure>
                               </test-case>
@@ -80,24 +80,24 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                                 </failure>
                               </test-case>
-                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
+                              <test-case name="Kistl.GUI.Integration.WPF.ObjectReferenceControlIntegrationTests.ReInit" executed="True" success="False" time="0.016" asserts="0">
                                 <failure>
                                   <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                                   <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                                 </failure>
                               </test-case>
@@ -108,10 +108,10 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                                 </failure>
                               </test-case>
@@ -121,13 +121,13 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite name="Renderer" success="True" time="3.734" asserts="0">
+                  <test-suite name="Renderer" success="True" time="4.313" asserts="0">
                     <results>
-                      <test-suite name="ASPNET" success="True" time="0.000" asserts="0">
+                      <test-suite name="ASPNET" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-suite name="Tests" success="True" time="0.000" asserts="0">
+                          <test-suite name="Tests" success="True" time="0.016" asserts="0">
                             <results>
-                              <test-suite name="BoolControlTests" success="True" time="0.000" asserts="0">
+                              <test-suite name="BoolControlTests" success="True" time="0.016" asserts="0">
                                 <results>
                                   <test-case name="Kistl.GUI.Renderer.ASPNET.Tests.BoolControlTests.TestDescription" executed="False">
                                     <reason>
@@ -326,40 +326,40 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
                           </test-suite>
                         </results>
                       </test-suite>
-                      <test-suite name="WPF" success="True" time="3.734" asserts="0">
+                      <test-suite name="WPF" success="True" time="4.266" asserts="0">
                         <results>
-                          <test-suite name="Tests" success="True" time="3.734" asserts="0">
+                          <test-suite name="Tests" success="True" time="4.250" asserts="0">
                             <results>
-                              <test-suite name="BoolControlTests" success="True" time="0.656" asserts="2">
+                              <test-suite name="BoolControlTests" success="True" time="0.797" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestDescription" executed="True" success="True" time="0.453" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestDescription" executed="True" success="True" time="0.594" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestFieldSize" executed="True" success="True" time="0.063" asserts="11" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestIsValidValue" executed="True" success="True" time="0.031" asserts="15" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestSetUpCorrect" executed="True" success="True" time="0.000" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestShortLabel" executed="True" success="True" time="0.047" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestIsValidValue" executed="True" success="True" time="0.047" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestSetUpCorrect" executed="True" success="True" time="0.016" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestShortLabel" executed="True" success="True" time="0.031" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestUserInput" executed="True" success="True" time="0.031" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestValueProgrammatically" executed="True" success="True" time="0.016" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.BoolControlTests.TestValueProgrammatically" executed="True" success="True" time="0.000" asserts="5" />
                                 </results>
                               </test-suite>
-                              <test-suite name="DateTimeControlTests" success="True" time="0.719" asserts="2">
+                              <test-suite name="DateTimeControlTests" success="True" time="0.797" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestDescription" executed="True" success="True" time="0.563" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestFieldSize" executed="True" success="True" time="0.000" asserts="11" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestIsValidValue" executed="True" success="True" time="0.000" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestDescription" executed="True" success="True" time="0.609" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestFieldSize" executed="True" success="True" time="0.016" asserts="11" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestIsValidValue" executed="True" success="True" time="0.016" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestSetUpCorrect" executed="True" success="True" time="0.000" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestShortLabel" executed="True" success="True" time="0.016" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestUserInput" executed="True" success="True" time="0.047" asserts="15" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestValueProgrammatically" executed="True" success="True" time="0.016" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestShortLabel" executed="True" success="True" time="0.000" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestUserInput" executed="True" success="True" time="0.094" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DateTimeControlTests.TestValueProgrammatically" executed="True" success="True" time="0.000" asserts="15" />
                                 </results>
                               </test-suite>
-                              <test-suite name="DoubleControlTests" success="True" time="1.078" asserts="2">
+                              <test-suite name="DoubleControlTests" success="True" time="1.203" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestDescription" executed="True" success="True" time="0.750" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestFieldSize" executed="True" success="True" time="0.016" asserts="11" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestDescription" executed="True" success="True" time="0.875" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestFieldSize" executed="True" success="True" time="0.000" asserts="11" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestIsValidValue" executed="True" success="True" time="0.016" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestSetUpCorrect" executed="True" success="True" time="0.016" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestShortLabel" executed="True" success="True" time="0.000" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestUserInput" executed="True" success="True" time="0.266" asserts="33" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestUserInput" executed="True" success="True" time="0.250" asserts="33" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.DoubleControlTests.TestValueProgrammatically" executed="True" success="True" time="0.016" asserts="33" />
                                 </results>
                               </test-suite>
@@ -368,28 +368,28 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestDescription" executed="True" success="True" time="0.016" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestFieldSize" executed="True" success="True" time="0.000" asserts="11" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestIsValidValue" executed="True" success="True" time="0.016" asserts="15" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestSetUpCorrect" executed="True" success="True" time="0.000" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestSetUpCorrect" executed="True" success="True" time="0.016" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestShortLabel" executed="True" success="True" time="0.000" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestUserInput" executed="True" success="True" time="0.031" asserts="35" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.IntControlTests.TestValueProgrammatically" executed="True" success="True" time="0.016" asserts="35" />
                                 </results>
                               </test-suite>
-                              <test-suite name="ListValuesTests" success="True" time="0.219" asserts="0">
+                              <test-suite name="ListValuesTests" success="True" time="0.281" asserts="0">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestInvalids" executed="True" success="True" time="0.094" asserts="8" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestInvalids" executed="True" success="True" time="0.156" asserts="8" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestIsValid" executed="True" success="True" time="0.016" asserts="14" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationCore" executed="True" success="True" time="0.063" asserts="7" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationCore" executed="True" success="True" time="0.047" asserts="7" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationWithEmpty" executed="True" success="True" time="0.000" asserts="37" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestNonUniqueListGenerationWithoutEmpty" executed="True" success="True" time="0.000" asserts="37" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestUniqueListGenerationCore" executed="True" success="True" time="0.000" asserts="6" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestUniqueListGenerationWithEmpty" executed="True" success="True" time="0.016" asserts="22" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestUniqueListGenerationCore" executed="True" success="True" time="0.016" asserts="6" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestUniqueListGenerationWithEmpty" executed="True" success="True" time="0.000" asserts="22" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestUniqueListGenerationWithoutEmpty" executed="True" success="True" time="0.000" asserts="21" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ListValuesTests.TestValids" executed="True" success="True" time="0.000" asserts="48" />
                                 </results>
                               </test-suite>
                               <test-suite name="ObjectListControlTests" success="True" time="0.563" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestDescription" executed="True" success="True" time="0.313" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestDescription" executed="True" success="True" time="0.328" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestFieldSize" executed="True" success="True" time="0.016" asserts="11" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestIsValidValue" executed="True" success="True" time="0.016" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestItemsSource" executed="False">
@@ -401,39 +401,39 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestListboxUserInput" executed="True" success="True" time="0.016" asserts="23" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestNullValue" executed="True" success="True" time="0.000" asserts="1" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestObjectType" executed="True" success="True" time="0.016" asserts="7" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestSetUpCorrect" executed="True" success="True" time="0.016" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestShortLabel" executed="True" success="True" time="0.000" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestSetUpCorrect" executed="True" success="True" time="0.000" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestShortLabel" executed="True" success="True" time="0.016" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestUserInput" executed="True" success="True" time="0.000" asserts="15" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectListControlTests.TestValueProgrammatically" executed="True" success="True" time="0.016" asserts="15" />
                                 </results>
                               </test-suite>
-                              <test-suite name="ObjectReferenceControlTests" success="True" time="0.219" asserts="2">
+                              <test-suite name="ObjectReferenceControlTests" success="True" time="0.313" asserts="2">
                                 <results>
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestComboboxProgrammatically" executed="True" success="True" time="0.141" asserts="21" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestComboboxUserInput" executed="True" success="True" time="0.016" asserts="21" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestComboboxProgrammatically" executed="True" success="True" time="0.172" asserts="21" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestComboboxUserInput" executed="True" success="True" time="0.000" asserts="21" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestDescription" executed="True" success="True" time="0.000" asserts="6" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestFieldSize" executed="True" success="True" time="0.016" asserts="12" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestIsValidValue" executed="True" success="True" time="0.000" asserts="16" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestIsValidValue" executed="True" success="True" time="0.016" asserts="16" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestItemsSource" executed="False">
                                     <reason>
                                       <message><![CDATA[unimplemented]]></message>
                                     </reason>
                                   </test-case>
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestObjectType" executed="True" success="True" time="0.016" asserts="8" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestSetUpCorrect" executed="True" success="True" time="0.000" asserts="6" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestSetUpCorrect" executed="True" success="True" time="0.016" asserts="6" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestShortLabel" executed="True" success="True" time="0.000" asserts="6" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestUserInput" executed="True" success="True" time="0.016" asserts="14" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestValueProgrammatically" executed="True" success="True" time="0.000" asserts="14" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.ObjectReferenceControlTests.TestValueProgrammatically" executed="True" success="True" time="0.016" asserts="14" />
                                 </results>
                               </test-suite>
-                              <test-suite name="StringControlTests" success="True" time="0.156" asserts="2">
+                              <test-suite name="StringControlTests" success="True" time="0.109" asserts="2">
                                 <results>
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestDescription" executed="True" success="True" time="0.016" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestFieldSize" executed="True" success="True" time="0.000" asserts="11" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestIsValidValue" executed="True" success="True" time="0.078" asserts="15" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestSetUpCorrect" executed="True" success="True" time="0.000" asserts="5" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestIsValidValue" executed="True" success="True" time="0.000" asserts="15" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestSetUpCorrect" executed="True" success="True" time="0.016" asserts="5" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestShortLabel" executed="True" success="True" time="0.031" asserts="5" />
-                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestUserInput" executed="True" success="True" time="0.000" asserts="35" />
+                                  <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestUserInput" executed="True" success="True" time="0.016" asserts="35" />
                                   <test-case name="Kistl.GUI.Renderer.WPF.Tests.StringControlTests.TestValueProgrammatically" executed="True" success="True" time="0.016" asserts="35" />
                                 </results>
                               </test-suite>
@@ -445,7 +445,7 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
                   </test-suite>
                   <test-suite name="Tests" success="False" time="1.234" asserts="0">
                     <results>
-                      <test-suite name="BackReferencePresenterTests" success="False" time="0.266" asserts="2">
+                      <test-suite name="BackReferencePresenterTests" success="False" time="0.078" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.HandleInvalidUserInput" executed="True" success="False" time="0.000" asserts="0">
                             <failure>
@@ -454,24 +454,24 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 279.
+bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 280.
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.156" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.BackReferencePresenterTests.HandleNoUserInput" executed="True" success="False" time="0.016" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockBackReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 279.
+bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 280.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -487,10 +487,10 @@ bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tes
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 279.
+bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 280.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -501,10 +501,10 @@ bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tes
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 279.
+bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 280.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -515,10 +515,10 @@ bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tes
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 279.
+bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 280.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -529,88 +529,88 @@ bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tes
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 279.
+bei Kistl.GUI.Tests.BackReferencePresenterTests.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 280.
 ]]></stack-trace>
                             </failure>
                           </test-case>
                         </results>
                       </test-suite>
-                      <test-suite name="BoolPresenterTests" success="True" time="0.141" asserts="2">
+                      <test-suite name="BoolPresenterTests" success="True" time="0.203" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.047" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.094" asserts="3" />
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.016" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.000" asserts="10" />
                           <test-case name="Kistl.GUI.Tests.BoolPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.000" asserts="10" />
-                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.ReInit" executed="True" success="True" time="0.047" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.ReInit" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.BoolPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.016" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="DateTimePresenterTests" success="True" time="0.094" asserts="2">
+                      <test-suite name="DateTimePresenterTests" success="True" time="0.078" asserts="2">
                         <results>
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.031" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.016" asserts="3" />
-                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.016" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.000" asserts="30" />
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.HandleValidUserInput" executed="True" success="True" time="0.000" asserts="30" />
                           <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.016" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.DateTimePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
                       <test-suite name="DoublePresenterTests" success="True" time="0.063" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.031" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.016" asserts="6" />
+                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleNoUserInput" executed="True" success="True" time="0.016" asserts="3" />
                           <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
-                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.016" asserts="66" />
+                          <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.000" asserts="66" />
                           <test-case name="Kistl.GUI.Tests.DoublePresenterTests.HandleValidUserInput" executed="True" success="True" time="0.000" asserts="66" />
                           <test-case name="Kistl.GUI.Tests.DoublePresenterTests.ReInit" executed="True" success="True" time="0.016" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.DoublePresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="GuiDbTests" success="True" time="0.125" asserts="2">
+                      <test-suite name="GuiDbTests" success="True" time="0.156" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoInfo" executed="True" success="True" time="0.063" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoInfo" executed="True" success="True" time="0.078" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoObject" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoVisual" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoWidget" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoVisual" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.CreatePresenterFailNoWidget" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.FindControlFailNoVisualType" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.FindPresenterFailNoProperty" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.FindPresenterFailNoVisual" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.ReInit" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.FindPresenterFailNoVisual" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.TestCreateRenderer" executed="True" success="True" time="0.000" asserts="2" />
                           <test-case name="Kistl.GUI.Tests.GuiDbTests.TestFindControlByVisual" executed="True" success="True" time="0.000" asserts="2" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestFindPresenter" executed="True" success="True" time="0.000" asserts="2" />
-                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.016" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestFindPresenter" executed="True" success="True" time="0.016" asserts="2" />
+                          <test-case name="Kistl.GUI.Tests.GuiDbTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
                       <test-suite name="IntPresenterTests" success="True" time="0.109" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.016" asserts="6" />
-                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.063" asserts="3" />
-                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.063" asserts="6" />
+                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.016" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.000" asserts="70" />
-                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.000" asserts="70" />
+                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.016" asserts="70" />
                           <test-case name="Kistl.GUI.Tests.IntPresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.016" asserts="11" />
+                          <test-case name="Kistl.GUI.Tests.IntPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectListPresenterTests" success="False" time="0.031" asserts="2">
+                      <test-suite name="ObjectListPresenterTests" success="False" time="0.125" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleInvalidUserInput" executed="True" success="False" time="0.016" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleInvalidUserInput" executed="True" success="False" time="0.031" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 185.
+bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 186.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -621,10 +621,10 @@ bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\P
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 185.
+bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 186.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -633,17 +633,17 @@ bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\P
                               <message><![CDATA[Has to be re-evaluated after List/generic Presenter refactoring]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleProgrammaticChange" executed="True" success="False" time="0.000" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.HandleProgrammaticChange" executed="True" success="False" time="0.016" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 185.
+bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 186.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -654,38 +654,38 @@ bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\P
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 185.
+bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 186.
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.ReInit" executed="True" success="False" time="0.016" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 185.
+bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 186.
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.TestPresenterSetUpCorrect" executed="True" success="False" time="0.000" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.ObjectListPresenterTests.TestPresenterSetUpCorrect" executed="True" success="False" time="0.016" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 185.
+bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 186.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -700,10 +700,10 @@ bei Kistl.GUI.Tests.ObjectReferenceListPresenterInfrastructure`3.SetUp() in C:\P
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -714,24 +714,24 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleNullUserInput" executed="True" success="False" time="0.000" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleNullUserInput" executed="True" success="False" time="0.016" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -742,38 +742,38 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleValidUserInput" executed="True" success="False" time="0.016" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.HandleValidUserInput" executed="True" success="False" time="0.000" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.ReInit" executed="True" success="False" time="0.000" asserts="0">
+                          <test-case name="Kistl.GUI.Tests.ObjectReferencePresenterTests.ReInit" executed="True" success="False" time="0.016" asserts="0">
                             <failure>
                               <message><![CDATA[System.TypeLoadException : Der Typ Kistl.Client.Mocks.MockObjectReferenceProperty in der Assembly Kistl.Objects.Client konnte nicht geladen werden.]]></message>
                               <stack-trace><![CDATA[bei System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                             </failure>
                           </test-case>
@@ -784,33 +784,33 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
 bei System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
 bei System.Type.GetType(String typeName, Boolean throwOnError)
-bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 58.
+bei Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects.GetDataCLRType(BaseProperty p) in C:\Projekte\Kistl\Kistl.Client\TheseMethodsShouldBeImplementedOnKistlObjects.cs:Zeile 59.
 bei Kistl.GUI.DB.KistlGUIContext.CreatePresenter(PresenterInfo info, IDataObject obj, Visual v, IBasicControl ctrl) in C:\Projekte\Kistl\Kistl.Client\GUI.DB\KistlGUIContext.cs:Zeile 68.
 bei Kistl.GUI.Mocks.PresenterHarness`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\Mocks\PresenterHarness.cs:Zeile 32.
-bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 99.
+bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Projekte\Kistl\Tests\Kistl.Client.Tests\GUI\ObjectPresenterTests.cs:Zeile 100.
 ]]></stack-trace>
                             </failure>
                           </test-case>
                         </results>
                       </test-suite>
-                      <test-suite name="RendererTests" success="True" time="0.250" asserts="0">
+                      <test-suite name="RendererTests" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.RendererTests.TestCreateControl" executed="True" success="True" time="0.250" asserts="3" />
+                          <test-case name="Kistl.GUI.Tests.RendererTests.TestCreateControl" executed="True" success="True" time="0.016" asserts="3" />
                           <test-case name="Kistl.GUI.Tests.RendererTests.TestCreateObjectControl" executed="True" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="StringPresenterTests" success="True" time="0.078" asserts="2">
+                      <test-suite name="StringPresenterTests" success="True" time="0.281" asserts="2">
                         <results>
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.016" asserts="6" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleInvalidUserInput" executed="True" success="True" time="0.219" asserts="6" />
                           <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleNoUserInput" executed="True" success="True" time="0.016" asserts="4" />
                           <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleNullUserInput" executed="True" success="True" time="0.016" asserts="5" />
                           <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleProgrammaticChange" executed="True" success="True" time="0.000" asserts="70" />
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.016" asserts="70" />
-                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.ReInit" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.HandleValidUserInput" executed="True" success="True" time="0.000" asserts="70" />
+                          <test-case name="Kistl.GUI.Tests.StringPresenterTests.ReInit" executed="True" success="True" time="0.016" asserts="0" />
                           <test-case name="Kistl.GUI.Tests.StringPresenterTests.TestPresenterSetUpCorrect" executed="True" success="True" time="0.000" asserts="11" />
                         </results>
                       </test-suite>
-                      <test-suite name="TemplateTests" success="True" time="0.000" asserts="0">
+                      <test-suite name="TemplateTests" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="Kistl.GUI.Tests.TemplateTests.TestDefaultsOther" executed="False">
                             <reason>
@@ -822,16 +822,16 @@ bei Kistl.GUI.Tests.ObjectReferencePresenterInfrastructure`3.SetUp() in C:\Proje
                               <message><![CDATA[unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.GUI.Tests.TemplateTests.TestProperties" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.GUI.Tests.TemplateTests.TestProperties" executed="True" success="True" time="0.016" asserts="5" />
                         </results>
                       </test-suite>
-                      <test-suite name="VisualTests" success="True" time="0.031" asserts="0">
+                      <test-suite name="VisualTests" success="True" time="0.078" asserts="0">
                         <results>
                           <test-case name="Kistl.GUI.Tests.VisualTests.TestDefaults" executed="True" success="True" time="0.016" asserts="9" />
                           <test-case name="Kistl.GUI.Tests.VisualTests.TestEnumeration" executed="True" success="True" time="0.000" asserts="1" />
                           <test-case name="Kistl.GUI.Tests.VisualTests.TestFailure" executed="True" success="True" time="0.000" asserts="1" />
-                          <test-case name="Kistl.GUI.Tests.VisualTests.TestProperties" executed="True" success="True" time="0.016" asserts="5" />
-                          <test-case name="Kistl.GUI.Tests.VisualTests.TestValueType" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.GUI.Tests.VisualTests.TestProperties" executed="True" success="True" time="0.000" asserts="5" />
+                          <test-case name="Kistl.GUI.Tests.VisualTests.TestValueType" executed="True" success="True" time="0.016" asserts="1" />
                         </results>
                       </test-suite>
                     </results>

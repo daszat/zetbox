@@ -14,6 +14,7 @@ using Kistl.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
 using Kistl.GUI.Tests;
+using System.Collections.ObjectModel;
 
 namespace Kistl.GUI.Renderer.WPF.Tests
 {
@@ -98,7 +99,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
 
     [TestFixture]
     public class ObjectListControlTests
-        : ValueControlTests<IList<IDataObject>, ObjectListControl>
+        : ValueControlTests<ObservableCollection<IDataObject>, ObjectListControl>
     {
         public ObjectListControlTests()
             : base(
@@ -133,9 +134,9 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         [Test]
         public void TestListboxUserInput()
         {
-            TestProperty<IList<IDataObject>>(
+            TestProperty<ObservableCollection<IDataObject>>(
                 w => w.Value,
-                delegate(ObjectListControl w, IList<IDataObject> v)
+                delegate(ObjectListControl w, ObservableCollection<IDataObject> v)
                 {
                     w.SetValue(ObjectListControl.ValueProperty, v);
                     Assert.AreEqual(v, ((ITestReferenceListControl)w).ListboxValue, "Listbox didn't receive correct value");
@@ -148,11 +149,11 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         [Test]
         public void TestListboxProgrammatically()
         {
-            TestProperty<IList<IDataObject>>(
+            TestProperty<ObservableCollection<IDataObject>>(
                 w => w.Value,
-                delegate(ObjectListControl w, IList<IDataObject> v)
+                delegate(ObjectListControl w, ObservableCollection<IDataObject> v)
                 {
-                    ((IValueControl<IList<IDataObject>>)w).Value = v;
+                    ((IValueControl<ObservableCollection<IDataObject>>)w).Value = v;
                     Assert.AreEqual(v, ((ITestReferenceListControl)w).ListboxValue, "Listbox didn't receive correct value");
                 },
                 Values,

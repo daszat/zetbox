@@ -7,6 +7,7 @@ using Kistl.GUI;
 using System.Web;
 using System.Web.UI.WebControls;
 using Kistl.API;
+using System.Collections.ObjectModel;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -199,13 +200,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             return "~/Controls/ObjectListControl.ascx";
         }
 
-        #region IObjectListControl<IDataObject> Member
-
-        public event EventHandler UserAddRequest;
-
-        #endregion
-
-        #region IReferenceListControl<IDataObject> Member
+        #region IReferenceListControl Member
 
         public Type ObjectType
         {
@@ -219,11 +214,15 @@ namespace Kistl.Client.ASPNET.Toolkit
             set { Ctrl.ItemsSource = value; }
         }
 
+        public event EventHandler UserAddRequest;
+        public event System.Collections.Specialized.NotifyCollectionChangedEventHandler UserChangedListEvent;
+
+
         #endregion
 
-        #region IValueControl<IList<IDataObject>> Member
+        #region IValueControl<ObservableCollection<IDataObject>> Member
 
-        public IList<IDataObject> Value
+        public ObservableCollection<IDataObject> Value
         {
             get { return Ctrl.Value; }
             set { Ctrl.Value = value; }
@@ -242,6 +241,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
 
         #endregion
+
     }
 
 }

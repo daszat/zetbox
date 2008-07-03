@@ -30,7 +30,7 @@ namespace Kistl.API.Server
                 // Calc Objectstate
                 if (_ObjectState != DataObjectState.Deleted)
                 {
-                    if (ID == API.Helper.INVALIDID)
+                    if (ID <= API.Helper.INVALIDID)
                     {
                         _ObjectState = DataObjectState.New;
                     }

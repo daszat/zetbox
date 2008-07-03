@@ -157,4 +157,42 @@ namespace Kistl.Client
         }
 #endif
     }
+
+    public static class ClientExtensions
+    {
+
+        /// <summary>
+        /// joins the string representations of all items in list together, separated by joiner
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="joiner"></param>
+        /// <returns></returns>
+        public static string JoinStrings(this System.Collections.IList list, string joiner)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in list)
+            {
+                sb.Append(item);
+                sb.Append(joiner);
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Insert a range of items into an IList at a specified index
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="index"></param>
+        /// <param name="items"></param>
+        /// This implementation is quite lazy, but IList doesn't have any better methods.
+        /// A more sophisticated implementation could test for specific IList implementations to do better.
+        public static void InsertRange<T>(this IList<T> list, int index, System.Collections.IList items)
+        {
+            foreach (object i in items)
+            {
+                list.Insert(index++, (T)i);
+            }
+        }
+    }
 }

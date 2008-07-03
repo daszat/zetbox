@@ -59,7 +59,7 @@ namespace Kistl.API.Client
         /// If the Object is not in that Context, null is returned.</returns>
         private IPersistenceObject IsObjectInContext(Type type, int ID)
         {
-            if (ID == Helper.INVALIDID) return null;
+            if (ID <= Helper.INVALIDID) return null;
             Type rootType = GetRootType(type);
             return _objects.SingleOrDefault(o => GetRootType(o.GetType()) == rootType && o.ID == ID);
         }

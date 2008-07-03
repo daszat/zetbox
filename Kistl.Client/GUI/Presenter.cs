@@ -11,6 +11,8 @@ using Kistl.App.Base;
 using Kistl.GUI.DB;
 using System.Reflection;
 using Kistl.Client;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 namespace Kistl.GUI
 {
@@ -324,7 +326,7 @@ namespace Kistl.GUI
     /// </summary>
     public class ObjectReferencePresenter<T>
         : DefaultPresenter<IDataObject, ObjectReferenceProperty, IReferenceControl>
-        where T:IDataObject
+        where T : IDataObject
     {
         public ObjectReferencePresenter() { }
 
@@ -414,11 +416,9 @@ namespace Kistl.GUI
             _Items = Object.Context.GetQuery<T>().ToList();
             Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
 
-            _Control_UserAddRequest = new EventHandler(Control_UserAddRequest);
-            Control.UserAddRequest += _Control_UserAddRequest;
-
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
+
 
             // To prevent resource leaks, all event handlers have to be removed
             // See DisposeManagedResources()
@@ -426,15 +426,31 @@ namespace Kistl.GUI
                 _Object_PropertyChanged = new System.ComponentModel.PropertyChangedEventHandler(Object_PropertyChanged);
                 Object.PropertyChanged += _Object_PropertyChanged;
 
-                _Control_UserInput = new EventHandler(Control_UserInput);
-                Control.UserInput += _Control_UserInput;
-            }
+                _Control_UserAddRequest = new EventHandler(Control_UserAddRequest);
+                Control.UserAddRequest += _Control_UserAddRequest;
 
-            Control.Value = GetPropertyValue().Cast<IDataObject>().ToList();
-            Control.IsValidValue = true;
+                SetControlValueFromObject();
+            }
 
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
+        }
+
+        private void SetControlValueFromObject()
+        {
+            if (_Control_UserChangedListEvent == null)
+                _Control_UserChangedListEvent = new NotifyCollectionChangedEventHandler(Control_UserChangedListEvent);
+
+            if (Control.Value != null)
+                Control.Value.CollectionChanged -= _Control_UserChangedListEvent;
+
+            ObservableCollection<IDataObject> controlValue = new ObservableCollection<IDataObject>(GetPropertyValue().Cast<IDataObject>().ToList());
+            controlValue.CollectionChanged += _Control_UserChangedListEvent;
+            Control.Value = controlValue;
+
+            // Value is coming from object => always valid
+            // TODO: validation framework might change this
+            Control.IsValidValue = true;
         }
 
         #endregion
@@ -442,8 +458,8 @@ namespace Kistl.GUI
         #region Change Management
 
         private PropertyChangedEventHandler _Object_PropertyChanged = null;
-        private EventHandler _Control_UserInput = null;
         private EventHandler _Control_UserAddRequest = null;
+        private NotifyCollectionChangedEventHandler _Control_UserChangedListEvent = null;
 
         private void Object_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -456,13 +472,8 @@ namespace Kistl.GUI
                 // if the object has changed, unconditionally overwrite the value in the GUI
                 // intelligent controls might want to show the user both the "real" and the user's value
                 if (e.PropertyName == Property.PropertyName)
-                    Control.Value = GetPropertyValue().Cast<IDataObject>().ToList();
+                    SetControlValueFromObject();
             }
-        }
-
-        private void Control_UserInput(object sender, EventArgs e)
-        {
-            OnUserInput();
         }
 
         private void Control_UserAddRequest(object sender, EventArgs e)
@@ -477,32 +488,45 @@ namespace Kistl.GUI
             }
         }
 
-        /// <summary>
-        /// this method is called when the control submits userinput back to the presenter.
-        /// the default implementation checks whether the value conforms to the nullability
-        /// criteria of the Property and sets the validness of the control's value and the 
-        /// property value as appropriate.
-        /// 
-        /// override the method to gain fine-grained control over the presenter's reaction 
-        /// to user input.
-        /// </summary>
-        // TODO: hook up Validation here and re-check all overrider.
-        protected virtual void OnUserInput()
+        private void Control_UserChangedListEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
-            if (Control.Value.Count == 0)
-            {
-                Control.IsValidValue = Property.IsNullable;
-            }
-            else
-            {
-                Control.IsValidValue = Control.Value.All(v => _Items.Contains((T)v));
-            }
+            Control.IsValidValue = ValidateItems(args.NewItems);
 
             if (Control.IsValidValue)
             {
-                // Object.SetList(Property, Control.Value);
-                throw new NotImplementedException("IObjectListControl should have NotifyCollectionChanged Events");
+                IList<T> property = GetPropertyValue();
+                // Modify the Object's Value according to the changes in the Control
+                switch (args.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        property.InsertRange(args.NewStartingIndex, args.NewItems);
+                        break;
+                    case NotifyCollectionChangedAction.Replace:
+                    case NotifyCollectionChangedAction.Move:
+                        foreach (var i in args.OldItems)
+                            property.RemoveAt(args.OldStartingIndex);
+                        property.InsertRange(args.NewStartingIndex, args.NewItems);
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        foreach (var i in args.OldItems)
+                            property.RemoveAt(args.OldStartingIndex);
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        property.Clear();
+                        Control.Value.Cast<T>().ForEach<T>(i => property.Add(i));
+                        break;
+                    default:
+                        throw new NotImplementedException(
+                            String.Format("Unknown NotifyCollectionChangedAction: {0}", args.Action));
+                }
             }
+        }
+
+        private bool ValidateItems(IList items)
+        {
+            var invalid = items.Cast<T>().Where(i => !_Items.Contains(i));
+            // throw new InvalidOperationException(String.Format("Invalid items: '{0}'", invalid.JoinStrings("', '")));
+            return (invalid.Count() == 0);
         }
 
         #endregion
@@ -518,10 +542,13 @@ namespace Kistl.GUI
                 Object.PropertyChanged -= _Object_PropertyChanged;
 
             if (Control != null)
-                Control.UserInput -= _Control_UserInput;
-
-            if (Control != null)
+            {
                 Control.UserAddRequest -= Control_UserAddRequest;
+                if (Control.Value != null)
+                {
+                    Control.Value.CollectionChanged -= _Control_UserChangedListEvent;
+                }
+            }
         }
 
         #endregion
@@ -569,18 +596,31 @@ namespace Kistl.GUI
                 _Object_PropertyChanged = new System.ComponentModel.PropertyChangedEventHandler(Object_PropertyChanged);
                 Object.PropertyChanged += _Object_PropertyChanged;
 
-                _Control_UserInput = new EventHandler(Control_UserInput);
-                Control.UserInput += _Control_UserInput;
-
                 _Control_UserAddRequest = new EventHandler(Control_UserAddRequest);
                 Control.UserAddRequest += _Control_UserAddRequest;
             }
 
-            Control.Value = GetPropertyValue().Cast<IDataObject>().ToList(); ;
-            Control.IsValidValue = true;
+            SetControlValueFromObject();
 
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
+        }
+
+        private void SetControlValueFromObject()
+        {
+            if (_Control_UserChangedListEvent == null)
+                _Control_UserChangedListEvent = new NotifyCollectionChangedEventHandler(Control_UserChangedListEvent);
+
+            if (Control.Value != null)
+                Control.Value.CollectionChanged -= _Control_UserChangedListEvent;
+
+            ObservableCollection<IDataObject> controlValue = new ObservableCollection<IDataObject>(GetPropertyValue().Cast<IDataObject>().ToList());
+            controlValue.CollectionChanged += _Control_UserChangedListEvent;
+            Control.Value = controlValue;
+
+            // Value is coming from object => always valid
+            // TODO: validation framework might change this
+            Control.IsValidValue = true;
         }
 
         #endregion
@@ -588,7 +628,7 @@ namespace Kistl.GUI
         #region Change Management
 
         private PropertyChangedEventHandler _Object_PropertyChanged = null;
-        private EventHandler _Control_UserInput = null;
+        private NotifyCollectionChangedEventHandler _Control_UserChangedListEvent = null;
         private EventHandler _Control_UserAddRequest = null;
 
         private void Control_UserAddRequest(object sender, EventArgs e)
@@ -610,42 +650,49 @@ namespace Kistl.GUI
                 // if the object has changed, unconditionally overwrite the value in the GUI
                 // intelligent controls might want to show the user both the "real" and the user's value
                 if (e.PropertyName == Property.PropertyName)
-                    Control.Value = GetPropertyValue().Cast<IDataObject>().ToList(); 
+                    SetControlValueFromObject();
             }
         }
 
-        private void Control_UserInput(object sender, EventArgs e)
+        private void Control_UserChangedListEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
-            OnUserInput();
-        }
-
-        /// <summary>
-        /// this method is called when the control submits userinput back to the presenter.
-        /// the default implementation checks whether the value conforms to the nullability
-        /// criteria of the Property and sets the validness of the control's value and the 
-        /// property value as appropriate.
-        /// 
-        /// override the method to gain fine-grained control over the presenter's reaction 
-        /// to user input.
-        /// </summary>
-        // TODO: hook up Validation here and re-check all overrider.
-        protected virtual void OnUserInput()
-        {
-            if (Control.Value == null)
-            {
-                Control.IsValidValue = true;
-            }
-            else
-            {
-                Control.IsValidValue = Control.Value.All(i => _Items.Contains((T)i));
-            }
-
+            Control.IsValidValue = ValidateItems(args.NewItems);
 
             if (Control.IsValidValue)
             {
-                //Object.SetList(Property, Control.Value.ToList());
-                throw new NotImplementedException("IObjectListControl should have NotifyCollectionChanged Events");
+                IList<T> property = GetPropertyValue();
+                // Modify the Object's Value according to the changes in the Control
+                switch (args.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        property.InsertRange(args.NewStartingIndex, args.NewItems);
+                        break;
+                    case NotifyCollectionChangedAction.Replace:
+                    case NotifyCollectionChangedAction.Move:
+                        foreach (var i in args.OldItems)
+                            property.RemoveAt(args.OldStartingIndex);
+                        property.InsertRange(args.NewStartingIndex, args.NewItems);
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        foreach (var i in args.OldItems)
+                            property.RemoveAt(args.OldStartingIndex);
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        property.Clear();
+                        Control.Value.Cast<T>().ForEach<T>(i => property.Add(i));
+                        break;
+                    default:
+                        throw new NotImplementedException(
+                            String.Format("Unknown NotifyCollectionChangedAction: {0}", args.Action));
+                }
             }
+        }
+
+        private bool ValidateItems(IList items)
+        {
+            var invalid = items.Cast<T>().Where(i => !_Items.Contains(i));
+            // throw new InvalidOperationException(String.Format("Invalid items: '{0}'", invalid.JoinStrings("', '")));
+            return (invalid.Count() == 0);
         }
 
         #endregion
@@ -662,8 +709,11 @@ namespace Kistl.GUI
 
             if (Control != null)
             {
-                Control.UserInput -= _Control_UserInput;
                 Control.UserAddRequest -= Control_UserAddRequest;
+                if (Control.Value != null)
+                {
+                    Control.Value.CollectionChanged -= _Control_UserChangedListEvent;
+                }
             }
         }
 

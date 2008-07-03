@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -29,7 +30,7 @@ namespace Kistl.GUI.Renderer.WPF
         public ObjectListControl()
         {
             InitializeComponent();
-            Value = new List<Kistl.API.IDataObject>(0);
+            Value = new ObservableCollection<Kistl.API.IDataObject>();
         }
 
         /// <summary>
@@ -46,12 +47,6 @@ namespace Kistl.GUI.Renderer.WPF
         {
             OnUserAddRequest();
         }
-
-        #region IObjectListControl Member
-
-        public event EventHandler UserAddRequest;
-
-        #endregion
 
         #region IReferenceControl<IList<Kistl.API.IDataObject>> Members
 
@@ -75,32 +70,35 @@ namespace Kistl.GUI.Renderer.WPF
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IList<Kistl.API.IDataObject>), typeof(ObjectListControl), new PropertyMetadata(null));
 
+        public event EventHandler UserAddRequest;
+        public event System.Collections.Specialized.NotifyCollectionChangedEventHandler UserChangedListEvent;
+
         #endregion
 
-        #region IValueControl<IList<Kistl.API.IDataObject>> Members
+        #region IValueControl<ObservableCollection<Kistl.API.IDataObject>> Members
 
         /// <summary>
         /// explicitly implement this for the framework and suppress the UserInput Event 
         /// when using this.
         /// </summary>
-        IList<Kistl.API.IDataObject> IValueControl<IList<Kistl.API.IDataObject>>.Value
+        ObservableCollection<Kistl.API.IDataObject> IValueControl<ObservableCollection<Kistl.API.IDataObject>>.Value
         {
-            get { return (IList<Kistl.API.IDataObject>)GetValue(ValueProperty); }
-            set { SetValueNoUserInput(ValueProperty, value ?? new List<Kistl.API.IDataObject>(0)); }
+            get { return (ObservableCollection<Kistl.API.IDataObject>)GetValue(ValueProperty); }
+            set { SetValueNoUserInput(ValueProperty, value ?? new ObservableCollection<Kistl.API.IDataObject>()); }
         }
 
         /// <summary>
         /// The actual Value of this Widget
         /// </summary>
-        public IList<Kistl.API.IDataObject> Value
+        public ObservableCollection<Kistl.API.IDataObject> Value
         {
-            get { return (IList<Kistl.API.IDataObject>)GetValue(ValueProperty); }
+            get { return (ObservableCollection<Kistl.API.IDataObject>)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(IList<Kistl.API.IDataObject>),
+            DependencyProperty.Register("Value", typeof(ObservableCollection<Kistl.API.IDataObject>),
                 typeof(ObjectListControl), new PropertyMetadata(null));
 
         public event EventHandler UserInput;
@@ -116,7 +114,7 @@ namespace Kistl.GUI.Renderer.WPF
             {
                 if (Value == null)
                 {
-                    Value = new List<Kistl.API.IDataObject>(0);
+                    Value = new ObservableCollection<Kistl.API.IDataObject>();
                 }
                 else
                 {

@@ -90,7 +90,9 @@ namespace Kistl.API.Client
 
         public void Add(T item)
         {
-            collection.Add(new COLLECTIONENTRYTYPE() { Value = item, Parent = this.parent });
+            COLLECTIONENTRYTYPE i = new COLLECTIONENTRYTYPE() { Value = item, Parent = this.parent };
+            i.AttachToContext(parent.Context);
+            collection.Add(i);
         }
 
         public void Clear()

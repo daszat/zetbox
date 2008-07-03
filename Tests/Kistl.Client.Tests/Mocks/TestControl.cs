@@ -6,6 +6,7 @@ using Kistl.GUI.DB;
 using Kistl.GUI;
 using Kistl.API;
 using Kistl.GUI.Renderer;
+using System.Collections.ObjectModel;
 
 namespace Kistl.Client.Mocks
 {
@@ -392,29 +393,26 @@ namespace Kistl.Client.Mocks
                 ClassName = "Kistl.Client.Mocks.TestObjectListControl"
             };
 
-        internal void SimulateUserInput(IList<IDataObject> newValue)
+        internal void SimulateUserInput(ObservableCollection<IDataObject> newValue)
         {
-            Value = newValue ?? new List<IDataObject>(0);
+            Value = newValue ?? new ObservableCollection<IDataObject>();
             if (UserInput != null)
                 UserInput(this, new EventArgs());
         }
 
-        #region IObjectListControl Member
-
-        public event EventHandler UserAddRequest;
-
-        #endregion
-
-        #region IReferenceControl<IList<IDataObject>> Members
+        #region IReferenceControl<ObservableCollection<IDataObject>> Members
 
         public IList<IDataObject> ItemsSource { get; set; }
         public Type ObjectType { get; set; }
 
+        public event EventHandler UserAddRequest;
+        public event System.Collections.Specialized.NotifyCollectionChangedEventHandler UserChangedListEvent;
+
         #endregion
 
-        #region IValueControl<IList<IDataObject>> Members
+        #region IValueControl<ObservableCollection<IDataObject>> Members
 
-        public IList<IDataObject> Value { get; set; }
+        public ObservableCollection<IDataObject> Value { get; set; }
 
         public bool IsValidValue { get; set; }
 

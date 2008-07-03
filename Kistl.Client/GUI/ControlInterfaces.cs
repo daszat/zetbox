@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 
 using Kistl.API;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 namespace Kistl.GUI
 {
@@ -72,7 +74,7 @@ namespace Kistl.GUI
     /// a control that displays a list of references to IDataObjects.
     /// </summary>
     /// <typeparam name="TYPE"></typeparam>
-    public interface IReferenceListControl : IValueControl<IList<IDataObject>>
+    public interface IReferenceListControl : IValueControl<ObservableCollection<IDataObject>>
     {
         /// <summary>
         /// The Type of the listed objects
@@ -93,7 +95,6 @@ namespace Kistl.GUI
         /// just reset the Value. A better implementation would fire fine-grained 
         /// add/delete Events instead.
         event EventHandler UserAddRequest;
-
     }
 
     /// <summary>

@@ -104,7 +104,7 @@ namespace Kistl.API.Client
         /// <returns>A Object or null, if ID is -1 or an Expeption, if the Object was not found.</returns>
         private object GetObjectCall(Expression e)
         {
-            if (ID == Helper.INVALIDID) return null;
+            if (ID <= Helper.INVALIDID) return null;
 
             IDataObject result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)
@@ -123,13 +123,13 @@ namespace Kistl.API.Client
 
         private object GetObjectOrNewCall(Expression e)
         {
-            if (ID != API.Helper.INVALIDID)
+            if (ID <= API.Helper.INVALIDID)
             {
-                return GetObjectCall(e);
+                return (T)_context.Create(_type);
             }
             else
             {
-                return (T)_context.Create(_type);
+                return GetObjectCall(e);
             }
         }
 

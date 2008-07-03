@@ -13,6 +13,7 @@ using Kistl.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
 using Kistl.GUI.Renderer.WPF.Tests;
+using System.Collections.ObjectModel;
 
 namespace Kistl.GUI.Tests
 {
@@ -150,7 +151,7 @@ namespace Kistl.GUI.Tests
         public ObjectReferenceListPresenterInfrastructure(
             PresenterHarness<TestObject, CONTROL, PRESENTER> presenterHarness,
             Toolkit toolkit,
-            IValues<IList<TYPE>> values)
+            IValues<ObservableCollection<TYPE>> values)
             : base(presenterHarness, values)
         {
             Toolkit = toolkit;
@@ -232,7 +233,7 @@ namespace Kistl.GUI.Tests
             return new List<TestObject>();
         }
 
-        protected override void UserInput(IList<TestObject> v) { Widget.SimulateUserInput(v.Cast<IDataObject>().ToList()); }
+        protected override void UserInput(IList<TestObject> v) { Widget.SimulateUserInput(new ObservableCollection<IDataObject>(v.Cast<IDataObject>().ToList())); }
 
     }
 
@@ -290,7 +291,7 @@ namespace Kistl.GUI.Tests
             return new List<TestObject>();
         }
 
-        protected override void UserInput(IList<TestObject> v) { Widget.SimulateUserInput(v.Cast<IDataObject>().ToList()); }
+        protected override void UserInput(IList<TestObject> v) { Widget.SimulateUserInput(new ObservableCollection<IDataObject>(v.Cast<IDataObject>().ToList())); }
 
     }
 }

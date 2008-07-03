@@ -9,10 +9,11 @@ using NUnit.Framework.Constraints;
 
 using Kistl.API;
 using Kistl.GUI.Tests;
+using System.Collections.ObjectModel;
 
 namespace Kistl.GUI.Renderer.WPF.Tests
 {
-    public sealed class ListValues<TYPE> : IValues<IList<TYPE>>
+    public sealed class ListValues<TYPE> : IValues<ObservableCollection<TYPE>>
     {
         /// <summary>
         /// Specify whether one List may contain a specific Item more than once.
@@ -48,7 +49,7 @@ namespace Kistl.GUI.Renderer.WPF.Tests
 
                 // generate valid Lists with one additional invalid item
                 Invalids = GenerateLists(BaseValues.Valids, IsUnique, true).Select(
-                    delegate(IList<TYPE> l)
+                    delegate(ObservableCollection<TYPE> l)
                     {
                         l.Add(invalidEnumeration.Current);
                         if (!invalidEnumeration.MoveNext())
@@ -64,13 +65,13 @@ namespace Kistl.GUI.Renderer.WPF.Tests
 
         private static readonly int FIXED_SEMI_RANDOM_SEED = 23 * 42;
 
-        internal static IList<TYPE>[] GenerateLists(TYPE[] items, bool createUniqueListItems, bool includeEmptyList)
+        internal static ObservableCollection<TYPE>[] GenerateLists(TYPE[] items, bool createUniqueListItems, bool includeEmptyList)
         {
-            List<IList<TYPE>> result = new List<IList<TYPE>>();
+            List<ObservableCollection<TYPE>> result = new List<ObservableCollection<TYPE>>();
 
             if (includeEmptyList)
             {
-                result.Add(new List<TYPE>(0));
+                result.Add(new ObservableCollection<TYPE>());
             }
 
             Random rng = new Random(FIXED_SEMI_RANDOM_SEED);
@@ -80,18 +81,22 @@ namespace Kistl.GUI.Renderer.WPF.Tests
             return result.ToArray();
         }
 
-        internal static IList<TYPE> GenerateList(
+        internal static ObservableCollection<TYPE> GenerateList(
             Random rng,
             TYPE mustItem, TYPE[] otherItems,
             bool createUniqueListItems)
         {
-            List<TYPE> result = new List<TYPE>(otherItems);
+            ObservableCollection<TYPE> result = new ObservableCollection<TYPE>();
+            foreach (TYPE i in otherItems)
+            {
+                result.Add(i);
+            }
             result.Insert(rng.Next(result.Count), mustItem);
 
             // enforce uniqueness constraint
             if (createUniqueListItems)
             {
-                result = result.Distinct().ToList();
+                result = new ObservableCollection<TYPE>(result.Distinct().ToList());
             }
             else
             {
@@ -104,12 +109,12 @@ namespace Kistl.GUI.Renderer.WPF.Tests
             return result;
         }
 
-        #region IValues<IList<TYPE>> Members
+        #region IValues<ObservableCollection<TYPE>> Members
 
-        public IList<TYPE>[] Valids { get; private set; }
-        public IList<TYPE>[] Invalids { get; private set; }
+        public ObservableCollection<TYPE>[] Valids { get; private set; }
+        public ObservableCollection<TYPE>[] Invalids { get; private set; }
 
-        public bool IsValid(IList<TYPE> list)
+        public bool IsValid(ObservableCollection<TYPE> list)
         {
             if (list == null || list.Count == 0)
                 return IsEmptyValid;

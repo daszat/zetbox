@@ -12,6 +12,7 @@ using Kistl.GUI.Mocks;
 
 using NMock2;
 using NUnit.Framework;
+using System.Collections.ObjectModel;
 
 namespace Kistl.GUI.Tests
 {
@@ -559,7 +560,7 @@ namespace Kistl.GUI.Tests
     /// <typeparam name="CONTROL"></typeparam>
     /// <typeparam name="PRESENTER"></typeparam>
     public abstract class ReferenceListPresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
-        : PresenterTests<OBJECT, IList<TYPE>, CONTROL, PRESENTER>
+        : PresenterTests<OBJECT, ObservableCollection<TYPE>, CONTROL, PRESENTER>
         where OBJECT : IDataObject
         where TYPE : class, IDataObject
         where CONTROL : IReferenceListControl
@@ -568,7 +569,7 @@ namespace Kistl.GUI.Tests
 
         protected ReferenceListPresenterTests(
             PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
-            IValues<IList<TYPE>> values)
+            IValues<ObservableCollection<TYPE>> values)
             : base(presenterHarness, values)
         {
         }
