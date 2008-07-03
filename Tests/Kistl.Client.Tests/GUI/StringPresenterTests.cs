@@ -33,7 +33,7 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class StringPresenterTests : ReferencePresenterTests<TestObject, string, TestStringControl, StringPresenter>
+    public class StringPresenterTests : ClassPresenterTests<TestObject, string, TestStringControl, StringPresenter>
     {
         public StringPresenterTests()
             : base(

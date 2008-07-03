@@ -6,6 +6,7 @@ using System.Web.UI;
 using Kistl.GUI;
 using System.Web;
 using System.Web.UI.WebControls;
+using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -109,7 +110,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         #endregion
     }
 
-    public class StringPropertyControl : BasicPropertyControl<string> 
+    public class StringPropertyControl : BasicPropertyControl<string>
     {
         protected override string GetControlPath()
         {
@@ -117,14 +118,14 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
     }
 
-    public class IntPropertyControl : BasicPropertyControl<int?> 
+    public class IntPropertyControl : BasicPropertyControl<int?>
     {
         protected override string GetControlPath()
         {
             return "~/Controls/IntPropertyControl.ascx";
         }
     }
-    public class BoolPropertyControl : BasicPropertyControl<bool?> 
+    public class BoolPropertyControl : BasicPropertyControl<bool?>
     {
         protected override string GetControlPath()
         {
@@ -132,21 +133,21 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
     }
 
-    public class DoublePropertyControl : BasicPropertyControl<double?> 
+    public class DoublePropertyControl : BasicPropertyControl<double?>
     {
         protected override string GetControlPath()
         {
             return "~/Controls/DoublePropertyControl.ascx";
         }
     }
-    public class DateTimePropertyControl : BasicPropertyControl<DateTime?> 
+    public class DateTimePropertyControl : BasicPropertyControl<DateTime?>
     {
         protected override string GetControlPath()
         {
             return "~/Controls/DateTimePropertyControl.ascx";
         }
     }
-    public class ObjectReferencePropertyControl : BaseControlLoader<IObjectReferenceControl>, IObjectReferenceControl
+    public class ObjectReferencePropertyControl : BaseControlLoader<IReferenceControl>, IReferenceControl
     {
         protected override string GetControlPath()
         {
@@ -198,13 +199,13 @@ namespace Kistl.Client.ASPNET.Toolkit
             return "~/Controls/ObjectListControl.ascx";
         }
 
-        #region IObjectListControl Member
+        #region IObjectListControl<IDataObject> Member
 
         public event EventHandler UserAddRequest;
 
         #endregion
 
-        #region IReferenceControl<IList<IDataObject>> Members
+        #region IReferenceListControl<IDataObject> Member
 
         public Type ObjectType
         {
@@ -212,7 +213,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             set { Ctrl.ObjectType = value; }
         }
 
-        public IList<Kistl.API.IDataObject> ItemsSource
+        public IList<IDataObject> ItemsSource
         {
             get { return Ctrl.ItemsSource; }
             set { Ctrl.ItemsSource = value; }
@@ -220,9 +221,9 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         #endregion
 
-        #region IValueControl<IList<IDataObject>> Members
+        #region IValueControl<IList<IDataObject>> Member
 
-        public IList<Kistl.API.IDataObject> Value
+        public IList<IDataObject> Value
         {
             get { return Ctrl.Value; }
             set { Ctrl.Value = value; }

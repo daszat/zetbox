@@ -24,11 +24,17 @@ namespace Kistl.GUI.Renderer
         void ShowObject(IDataObject obj);
 
         /// <summary>
-        /// Intructs the Renderer to let the User choose an IDataObject of a given class
+        /// Intructs the Renderer to let the User choose an IDataObject of a given type
         /// </summary>
         /// <param name="objectType"></param>
         /// <returns>null if no Object was chosen or the chosen object</returns>
         IDataObject ChooseObject(IKistlContext ctx, Type objectType);
+
+        /// <summary>
+        /// Intructs the Renderer to let the User choose an IDataObject of a given type
+        /// </summary>
+        /// <returns>null if no Object was chosen or the chosen object</returns>
+        T ChooseObject<T>(IKistlContext ctx) where T : IDataObject;
 
         /// <summary>
         /// Create a control corresponding to the visual for this object
@@ -52,6 +58,7 @@ namespace Kistl.GUI.Renderer
         public abstract void ShowMessage(string msg);
         public abstract void ShowObject(IDataObject obj);
         public abstract IDataObject ChooseObject(IKistlContext ctx, Type klass);
+        public abstract T ChooseObject<T>(IKistlContext ctx) where T : IDataObject;
         public abstract Toolkit Platform { get; }
 
         /// <summary>
@@ -74,7 +81,7 @@ namespace Kistl.GUI.Renderer
             }
 
             var widget = KistlGUIContext.CreateControl(cInfo);
-            
+
             // TODO: call presenter.Dispose() when window is closed
             var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
 

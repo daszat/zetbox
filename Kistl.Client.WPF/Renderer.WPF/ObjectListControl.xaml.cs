@@ -53,16 +53,17 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-        #region IReferenceControl<IList<IDataObject>> Members
+        #region IReferenceControl<IList<Kistl.API.IDataObject>> Members
+
         public Type ObjectType
         {
-            get { return (Type )GetValue(ObjectTypeProperty); }
+            get { return (Type)GetValue(ObjectTypeProperty); }
             set { SetValue(ObjectTypeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
-            DependencyProperty.Register("ObjectType", typeof(Type ), typeof(ObjectListControl), new PropertyMetadata(null));
+            DependencyProperty.Register("ObjectType", typeof(Type), typeof(ObjectListControl), new PropertyMetadata(null));
 
         public IList<Kistl.API.IDataObject> ItemsSource
         {
@@ -76,7 +77,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-        #region IValueControl<IList<IDataObject>> Members
+        #region IValueControl<IList<Kistl.API.IDataObject>> Members
 
         /// <summary>
         /// explicitly implement this for the framework and suppress the UserInput Event 
@@ -107,6 +108,7 @@ namespace Kistl.GUI.Renderer.WPF
         #endregion
 
         #region Change Management
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);

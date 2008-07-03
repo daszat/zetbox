@@ -55,8 +55,10 @@ namespace Kistl.GUI.Tests
     /// <summary>
     /// This class adds a presenter to the ControlTests. 
     /// </summary>
-    /// <typeparam name="CONTROL"></typeparam>
-    /// <typeparam name="PRESENTER"></typeparam>
+    /// <typeparam name="OBJECT">The IDataObject that will be presented</typeparam>
+    /// <typeparam name="TYPE">The Type of the presented Property</typeparam>
+    /// <typeparam name="CONTROL">The Control used to present the Value</typeparam>
+    /// <typeparam name="PRESENTER">The Presenter under test</typeparam>
     public abstract class PresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
         where OBJECT : IDataObject
         where CONTROL : IBasicControl
@@ -117,7 +119,7 @@ namespace Kistl.GUI.Tests
     /// <typeparam name="TYPE"></typeparam>
     /// <typeparam name="CONTROL"></typeparam>
     /// <typeparam name="PRESENTER"></typeparam>
-    public abstract class NullablePresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
+    public abstract class StructPresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
         : PresenterTests<OBJECT, TYPE?, CONTROL, PRESENTER>
         where OBJECT : IDataObject
         where TYPE : struct
@@ -125,7 +127,7 @@ namespace Kistl.GUI.Tests
         where PRESENTER : IPresenter
     {
 
-        protected NullablePresenterTests(
+        protected StructPresenterTests(
             PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
             IValues<TYPE?> values)
             : base(presenterHarness, values)
@@ -242,7 +244,7 @@ namespace Kistl.GUI.Tests
     /// <typeparam name="TYPE"></typeparam>
     /// <typeparam name="CONTROL"></typeparam>
     /// <typeparam name="PRESENTER"></typeparam>
-    public abstract class ReferencePresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
+    public abstract class ClassPresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
         : PresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
         where OBJECT : IDataObject
         where TYPE : class
@@ -250,7 +252,7 @@ namespace Kistl.GUI.Tests
         where PRESENTER : IPresenter
     {
 
-        protected ReferencePresenterTests(
+        protected ClassPresenterTests(
             PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
             IValues<TYPE> values)
             : base(presenterHarness, values)
@@ -391,4 +393,317 @@ namespace Kistl.GUI.Tests
             }
         }
     }
+
+    /// <summary>
+    /// Basic tests for a Presenter presenting IDataObject-based types.
+    /// </summary>
+    /// <typeparam name="OBJECT"></typeparam>
+    /// <typeparam name="TYPE"></typeparam>
+    /// <typeparam name="CONTROL"></typeparam>
+    /// <typeparam name="PRESENTER"></typeparam>
+    public abstract class ReferencePresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
+        : PresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
+        where OBJECT : IDataObject
+        where TYPE : class, IDataObject
+        where CONTROL : IReferenceControl
+        where PRESENTER : IPresenter
+    {
+
+        protected ReferencePresenterTests(
+            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
+            IValues<TYPE> values)
+            : base(presenterHarness, values)
+        {
+        }
+
+        protected virtual void AssertWidgetHasValidValue()
+        {
+            Assert.That(Widget.IsValidValue, "the widget should be in a valid state after this operation");
+            Assert.AreEqual(GetWidgetValue(), GetObjectValue(), "the widget should have the same value as the object");
+        }
+
+        protected virtual void AssertWidgetHasInvalidValue()
+        {
+            Assert.That(!Widget.IsValidValue, "the widget should be in a invalid state after this operation");
+            Assert.AreNotEqual(GetWidgetValue(), GetObjectValue(), "the widget should not have the same value as the object, because it is invalid");
+        }
+
+        /// <summary>
+        /// return the current Value of the tested Property from the Object
+        /// </summary>
+        protected abstract TYPE GetObjectValue();
+        /// <summary>
+        /// return the current Value which is displayed by the widget
+        /// </summary>
+        protected TYPE GetWidgetValue() { return (TYPE)Widget.Value; }
+        /// <summary>
+        /// set the Value of the tested Property on the Object
+        /// </summary>
+        protected abstract void SetObjectValue(TYPE v);
+        /// <summary>
+        /// Simulate user input on the widget
+        /// </summary>
+        protected abstract void UserInput(TYPE v);
+        /// <summary>
+        /// return the expected Default Value at creation time
+        /// </summary>
+        protected abstract TYPE DefaultValue();
+
+        [Test]
+        public void HandleNoUserInput()
+        {
+            Assert.AreEqual(DefaultValue(), GetObjectValue(), String.Format("property {0} should have proper default", Visual.Property));
+            Assert.AreEqual(DefaultValue(), GetWidgetValue(), String.Format("widget should show default value", Visual.Property, DefaultValue()));
+            AssertWidgetHasValidValue();
+        }
+
+        [Test]
+        public void HandleNullUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            UserInput(null);
+            if (Values.IsValid(null))
+            {
+                TYPE v = GetObjectValue();
+                if (v is System.Collections.ICollection)
+                {
+                    Assert.IsEmpty((System.Collections.ICollection)v, "valid null userinput should set an empty collection on the object");
+                }
+                else
+                {
+                    Assert.IsNull(v, "valid null userinput should set null value on the object");
+                }
+                AssertWidgetHasValidValue();
+            }
+            else
+            {
+                Assert.IsNotNull(GetObjectValue());
+                AssertWidgetHasInvalidValue();
+            }
+        }
+
+        [Test]
+        public void HandleValidUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            foreach (TYPE value in Values.Valids)
+            {
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
+        [Test]
+        public void HandleInvalidUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            TYPE original = GetObjectValue();
+
+            foreach (TYPE value in Values.Invalids)
+            {
+                if (value is IList<IDataObject>)
+                {
+                    IList<IDataObject> idol = (IList<IDataObject>)value;
+                    System.Console.Out.Write("{0}.HIUI: Testing List <", this.GetType());
+                    foreach (IDataObject ido in idol)
+                    {
+                        System.Console.Out.Write("{0},", ido);
+                    }
+                    System.Console.Out.WriteLine(">");
+
+                }
+                UserInput(value);
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+                Assert.AreEqual(original, GetObjectValue(), "Object should retain original value");
+                AssertWidgetHasInvalidValue();
+            }
+
+            // After having invalid values set, 
+            // choosing a valid value again, should 
+            // clear all flags and set to the object
+            TYPE[] values = Values.Valids;
+            if (values.Length > 0)
+            {
+                TYPE value = values[0];
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
+        [Test]
+        public void HandleProgrammaticChange()
+        {
+            AssertWidgetHasValidValue();
+            foreach (var v in Values.Valids)
+            {
+                SetObjectValue(v);
+                Assert.AreEqual(v, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(v, GetWidgetValue(), "Widget should display new value");
+                AssertWidgetHasValidValue();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Basic tests for a Presenter presenting IList&lt;IDataObject&gt;-based types.
+    /// </summary>
+    /// <typeparam name="OBJECT"></typeparam>
+    /// <typeparam name="TYPE"></typeparam>
+    /// <typeparam name="CONTROL"></typeparam>
+    /// <typeparam name="PRESENTER"></typeparam>
+    public abstract class ReferenceListPresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
+        : PresenterTests<OBJECT, IList<TYPE>, CONTROL, PRESENTER>
+        where OBJECT : IDataObject
+        where TYPE : class, IDataObject
+        where CONTROL : IReferenceListControl
+        where PRESENTER : IPresenter
+    {
+
+        protected ReferenceListPresenterTests(
+            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
+            IValues<IList<TYPE>> values)
+            : base(presenterHarness, values)
+        {
+        }
+
+        protected virtual void AssertWidgetHasValidValue()
+        {
+            Assert.That(Widget.IsValidValue, "the widget should be in a valid state after this operation");
+            Assert.AreEqual(GetWidgetValue(), GetObjectValue(), "the widget should have the same value as the object");
+        }
+
+        protected virtual void AssertWidgetHasInvalidValue()
+        {
+            Assert.That(!Widget.IsValidValue, "the widget should be in a invalid state after this operation");
+            Assert.AreNotEqual(GetWidgetValue(), GetObjectValue(), "the widget should not have the same value as the object, because it is invalid");
+        }
+
+        /// <summary>
+        /// return the current Value of the tested Property from the Object
+        /// </summary>
+        protected abstract IList<TYPE> GetObjectValue();
+        /// <summary>
+        /// return the current Value which is displayed by the widget
+        /// </summary>
+        protected IList<TYPE> GetWidgetValue() { return Widget.Value.Cast<TYPE>().ToList(); }
+        /// <summary>
+        /// set the Value of the tested Property on the Object
+        /// </summary>
+        protected abstract void SetObjectValue(IList<TYPE> v);
+        /// <summary>
+        /// Simulate user input on the widget
+        /// </summary>
+        protected abstract void UserInput(IList<TYPE> v);
+        /// <summary>
+        /// return the expected Default Value at creation time
+        /// </summary>
+        protected abstract IList<TYPE> DefaultValue();
+
+        [Test]
+        public void HandleNoUserInput()
+        {
+            Assert.AreEqual(DefaultValue(), GetObjectValue(), String.Format("property {0} should have proper default", Visual.Property));
+            Assert.AreEqual(DefaultValue(), GetWidgetValue(), String.Format("widget should show default value", Visual.Property, DefaultValue()));
+            AssertWidgetHasValidValue();
+        }
+
+        [Test]
+        [Ignore("Has to be re-evaluated after List/generic Presenter refactoring")]
+        public void HandleNullUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            UserInput(null);
+            if (Values.IsValid(null))
+            {
+                IList<TYPE> v = GetObjectValue();
+                if (v is System.Collections.ICollection)
+                {
+                    Assert.IsEmpty((System.Collections.ICollection)v, "valid null userinput should set an empty collection on the object");
+                }
+                else
+                {
+                    Assert.IsNull(v, "valid null userinput should set null value on the object");
+                }
+                AssertWidgetHasValidValue();
+            }
+            else
+            {
+                Assert.IsNotNull(GetObjectValue());
+                AssertWidgetHasInvalidValue();
+            }
+        }
+
+        [Test]
+        public void HandleValidUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            foreach (IList<TYPE> value in Values.Valids)
+            {
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
+        [Test]
+        public void HandleInvalidUserInput()
+        {
+            AssertWidgetHasValidValue();
+
+            IList<TYPE> original = GetObjectValue();
+
+            foreach (IList<TYPE> value in Values.Invalids)
+            {
+                IList<IDataObject> idol = (IList<IDataObject>)value;
+                System.Console.Out.Write("{0}.HIUI: Testing List <", this.GetType());
+                foreach (IDataObject ido in idol)
+                {
+                    System.Console.Out.Write("{0},", ido);
+                }
+                System.Console.Out.WriteLine(">");
+                UserInput(value);
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+                Assert.AreEqual(original, GetObjectValue(), "Object should retain original value");
+                AssertWidgetHasInvalidValue();
+            }
+
+            // After having invalid values set, 
+            // choosing a valid value again, should 
+            // clear all flags and set to the object
+            IList<TYPE>[] values = Values.Valids;
+            if (values.Length > 0)
+            {
+                IList<TYPE> value = values[0];
+                UserInput(value);
+                AssertWidgetHasValidValue();
+                Assert.AreEqual(value, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(value, GetWidgetValue(), "Widget should display new value");
+            }
+        }
+
+        [Test]
+        public void HandleProgrammaticChange()
+        {
+            AssertWidgetHasValidValue();
+            foreach (var v in Values.Valids)
+            {
+                SetObjectValue(v);
+                Assert.AreEqual(v, GetObjectValue(), "Object should have value set");
+                Assert.AreEqual(v, GetWidgetValue(), "Widget should display new value");
+                AssertWidgetHasValidValue();
+            }
+        }
+    }
+
+
 }

@@ -14,6 +14,7 @@ using Kistl.Client.ASPNET.Toolkit;
 namespace Kistl.GUI.Renderer.ASPNET.Tests
 {
     [TestFixture]
+    [Ignore("TODO: ASP.NET Testframework")]
     public class BoolControlTests : ValueControlTests<bool?, BoolPropertyControl>
     {
         public BoolControlTests()
@@ -34,6 +35,7 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
     }
 
     [TestFixture]
+    [Ignore("TODO: ASP.NET Testframework")]
     public class DateTimeControlTests : ValueControlTests<DateTime?, DateTimePropertyControl>
     {
         public DateTimeControlTests()
@@ -54,6 +56,7 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
     }
 
     [TestFixture]
+    [Ignore("TODO: ASP.NET Testframework")]
     public class DoubleControlTests : ValueControlTests<double?, DoublePropertyControl>
     {
         public DoubleControlTests()
@@ -72,6 +75,7 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
     }
 
     [TestFixture]
+    [Ignore("TODO: ASP.NET Testframework")]
     public class IntControlTests : ValueControlTests<int?, IntPropertyControl>
     {
         public IntControlTests()
@@ -91,6 +95,7 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
     }
 
     [TestFixture]
+    [Ignore("TODO: ASP.NET Testframework")]
     public class StringControlTests : ValueControlTests<string, StringPropertyControl>
     {
         public StringControlTests()

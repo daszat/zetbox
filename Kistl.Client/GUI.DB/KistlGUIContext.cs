@@ -7,6 +7,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.GUI.Renderer;
+using Kistl.Client;
 
 namespace Kistl.GUI.DB
 {
@@ -38,7 +39,7 @@ namespace Kistl.GUI.DB
                 throw new ArgumentNullException("sourceType", "KistlGUIContext.FindPresenterInfo(visual, sourceType): sourceType must not be null");
 
             return (from pi in PresenterInfo.Implementations
-                    where 
+                    where
                         pi.Control == visual.ControlType
                         && pi.SourceType == sourceType
                     select pi).Single();
@@ -63,6 +64,9 @@ namespace Kistl.GUI.DB
                 throw new ArgumentNullException("info");
 
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
+            if (controlType.IsGenericTypeDefinition)
+                controlType = controlType.MakeGenericType(new Type[] { v.Property.GetDataCLRType() });
+
             IPresenter result = (IPresenter)Activator.CreateInstance(controlType);
             result.InitializeComponent(obj, v, ctrl);
             return result;
@@ -207,11 +211,11 @@ namespace Kistl.GUI.DB
 
             // property presenters
             new PresenterInfo() { Control = VisualType.ObjectReference, SourceType = typeof(ObjectReferenceProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectReferencePresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectReferencePresenter`1" },
             new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(ObjectReferenceProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectListPresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectListPresenter`1" },
             new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(BackReferenceProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BackReferencePresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BackReferencePresenter`1" },
 
             new PresenterInfo() { Control = VisualType.Boolean, SourceType = typeof(BoolProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BoolPresenter" },

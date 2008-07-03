@@ -53,12 +53,8 @@ namespace Kistl.Client
             return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Client", true);
         }
 
-        public static Type GetDataCLRType(this ObjectReferenceProperty p)
-        {
-            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Client", true);
-        }
-
-        public static Type GetDataCLRType(this BackReferenceProperty p)
+        // TODO: actually, getDataType should return a System.Type Object, making this obsolete
+        public static Type GetDataCLRType(this BaseProperty p)
         {
             return Type.GetType(p.GetDataType() + ", Kistl.Objects.Client", true);
         }

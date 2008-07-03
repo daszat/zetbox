@@ -32,7 +32,7 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class IntPresenterTests : NullablePresenterTests<TestObject, int, TestIntControl, IntPresenter>
+    public class IntPresenterTests : StructPresenterTests<TestObject, int, TestIntControl, IntPresenter>
     {
         public IntPresenterTests()
             : base(

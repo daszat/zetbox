@@ -220,7 +220,7 @@ namespace Kistl.GUI.Tests
             t.DisplayName = name;
             Assert.AreEqual(name, t.DisplayName, "Template.DisplayName should not munge its value");
 
-            ObjectType type = new ObjectType();
+            Type type = typeof(String);
             t.Type = type;
             Assert.AreEqual(type, t.Type, "Template.Type should not munge its value");
 
@@ -237,7 +237,7 @@ namespace Kistl.GUI.Tests
         [Ignore("unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked")]
         public void TestDefaultUnknownObjectType()
         {
-            t = Template.DefaultTemplate(new ObjectType());
+            t = Template.DefaultTemplate(typeof(TestObject));
         }
 
 
@@ -245,7 +245,7 @@ namespace Kistl.GUI.Tests
         [Ignore("unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked")]
         public void TestDefaultsOther()
         {
-            t = Template.DefaultTemplate(new ObjectType());
+            t = Template.DefaultTemplate(typeof(TestObject));
         }
 
     }

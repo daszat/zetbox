@@ -31,7 +31,7 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class DateTimePresenterTests : NullablePresenterTests<TestObject, DateTime, TestDateTimeControl, DateTimePresenter>
+    public class DateTimePresenterTests : StructPresenterTests<TestObject, DateTime, TestDateTimeControl, DateTimePresenter>
     {
 
         public DateTimePresenterTests()

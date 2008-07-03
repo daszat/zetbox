@@ -44,7 +44,12 @@ namespace Kistl.Client.Mocks
             return widget;
         }
 
-        public override IDataObject ChooseObject(IKistlContext ctx, ObjectType klass)
+        public override IDataObject ChooseObject(IKistlContext ctx, Type klass)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override T ChooseObject<T>(IKistlContext ctx)
         {
             throw new NotImplementedException();
         }
@@ -308,7 +313,7 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestObjectReferenceControl : IObjectReferenceControl
+    public class TestObjectReferenceControl : IReferenceControl
     {
         public TestObjectReferenceControl()
         {
@@ -352,15 +357,22 @@ namespace Kistl.Client.Mocks
 
         #endregion
 
+        #region IReferenceControl<IDataObject> Member
+
+        public Type ObjectType { get; set; }
+
+        #endregion
+
         #region IObjectReferenceControl Members
 
         public IList<IDataObject> ItemsSource { get; set; }
-        public ObjectType ObjectType { get; set; }
 
         #endregion
+
     }
 
-    public class TestObjectListControl : IObjectListControl
+    public class TestObjectListControl
+        : IObjectListControl
     {
         public TestObjectListControl()
         {
@@ -395,9 +407,8 @@ namespace Kistl.Client.Mocks
 
         #region IReferenceControl<IList<IDataObject>> Members
 
-        public ObjectType ObjectType { get; set; }
-
         public IList<IDataObject> ItemsSource { get; set; }
+        public Type ObjectType { get; set; }
 
         #endregion
 

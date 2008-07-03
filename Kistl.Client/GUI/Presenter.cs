@@ -322,12 +322,13 @@ namespace Kistl.GUI
     /// The list of selectable Items is set from the list of available objects.
     /// Different controls may implement the selection differently: Comboboxes, Lists, etc.
     /// </summary>
-    public class ObjectReferencePresenter
-        : DefaultPresenter<IDataObject, ObjectReferenceProperty, IObjectReferenceControl>
+    public class ObjectReferencePresenter<T>
+        : DefaultPresenter<IDataObject, ObjectReferenceProperty, IReferenceControl>
+        where T:IDataObject
     {
         public ObjectReferencePresenter() { }
 
-        private List<IDataObject> _Items;
+        private List<T> _Items;
 
         protected override void InitializeComponent()
         {
@@ -335,7 +336,8 @@ namespace Kistl.GUI
 
             // remember the objects that are sent to the object
             // to facilitate validity checking
-            Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
+            _Items = Object.Context.GetQuery<T>().ToList();
+            Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
 
             base.InitializeComponent();
         }
@@ -346,13 +348,13 @@ namespace Kistl.GUI
         /// </summary>
         protected override void OnUserInput()
         {
-            IDataObject refobj = Control.Value;
+            T refobj = (T)Control.Value;
             // TODO: Arthur: Das hab ich einbauen müssen, weil sich ASP.NET keine Objekte merken kann
             // Daher hab ich nur eine ID - diese geb ich über den ObjectMoniker zurück
             // Hier wird er wieder zurück umgewandelt in ein Objekt.
             if (refobj is ObjectMoniker)
             {
-                refobj = Object.Context.Find(refobj.GetType(), refobj.ID);
+                refobj = Object.Context.Find<T>(refobj.ID);
             }
 
             if (refobj == null)
@@ -372,39 +374,100 @@ namespace Kistl.GUI
         }
     }
 
-    public class ObjectListPresenter
-        : DefaultPresenter<IList<IDataObject>, ObjectReferenceProperty, IObjectListControl>
+    public class ObjectListPresenter<T>
+        : Presenter<IObjectListControl>
+        // : DefaultPresenter<IList<T>, ObjectReferenceProperty, IObjectListControl>
+        where T : IDataObject
     {
+
+        #region Utilities
+
+        // localize type-unsafety
+        /// <summary>
+        /// The Property this Presenter presents.
+        /// </summary>
+        public ObjectReferenceProperty Property { get { return (ObjectReferenceProperty)Preferences.Property; } }
+
+        protected virtual IList<T> GetPropertyValue()
+        {
+            return Object.GetList<T>(Property);
+        }
+
+        #endregion
+
+        #region Initialisation
+
         public ObjectListPresenter() { }
 
-        private List<IDataObject> _Items;
+        private List<T> _Items;
 
+        /// <summary>
+        /// Setup the Control with default values from the Property. 
+        /// Install EventHandlers for UserInput and PropertyChanged.
+        /// </summary>
         protected override void InitializeComponent()
         {
             Control.ObjectType = Property.ReferenceObjectClass.GetDataCLRType();
 
             // remember the objects that are sent to the object
             // to facilitate validity checking
-            Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
+            _Items = Object.Context.GetQuery<T>().ToList();
+            Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
 
             _Control_UserAddRequest = new EventHandler(Control_UserAddRequest);
             Control.UserAddRequest += _Control_UserAddRequest;
 
-            base.InitializeComponent();
+            Control.ShortLabel = Property.PropertyName;
+            Control.Description = Property.AltText;
+
+            // To prevent resource leaks, all event handlers have to be removed
+            // See DisposeManagedResources()
+            {
+                _Object_PropertyChanged = new System.ComponentModel.PropertyChangedEventHandler(Object_PropertyChanged);
+                Object.PropertyChanged += _Object_PropertyChanged;
+
+                _Control_UserInput = new EventHandler(Control_UserInput);
+                Control.UserInput += _Control_UserInput;
+            }
+
+            Control.Value = GetPropertyValue().Cast<IDataObject>().ToList();
+            Control.IsValidValue = true;
+
+            // Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
         }
 
-        protected override IList<IDataObject> GetPropertyValue()
-        {
-            return Object.GetList(Property);
-        }
+        #endregion
 
         #region Change Management
 
+        private PropertyChangedEventHandler _Object_PropertyChanged = null;
+        private EventHandler _Control_UserInput = null;
         private EventHandler _Control_UserAddRequest = null;
+
+        private void Object_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                if (sender != Object)
+                    throw new InvalidOperationException(String.Format("Resource Leak: _Object_PropertyChanged in '{0}' was called by '{1}', but should be attached to '{2}'",
+                        this, sender, Object));
+
+                // if the object has changed, unconditionally overwrite the value in the GUI
+                // intelligent controls might want to show the user both the "real" and the user's value
+                if (e.PropertyName == Property.PropertyName)
+                    Control.Value = GetPropertyValue().Cast<IDataObject>().ToList();
+            }
+        }
+
+        private void Control_UserInput(object sender, EventArgs e)
+        {
+            OnUserInput();
+        }
 
         private void Control_UserAddRequest(object sender, EventArgs e)
         {
-            IDataObject toAdd = Manager.Renderer.ChooseObject(Object.Context, Control.ObjectType);
+            T toAdd = Manager.Renderer.ChooseObject<T>(Object.Context);
 
             if (toAdd != null)
             {
@@ -415,10 +478,16 @@ namespace Kistl.GUI
         }
 
         /// <summary>
-        /// Checks whether the returned value matches the Properties nullability 
-        /// criteria and is one of the originally selectable items.
+        /// this method is called when the control submits userinput back to the presenter.
+        /// the default implementation checks whether the value conforms to the nullability
+        /// criteria of the Property and sets the validness of the control's value and the 
+        /// property value as appropriate.
+        /// 
+        /// override the method to gain fine-grained control over the presenter's reaction 
+        /// to user input.
         /// </summary>
-        protected override void OnUserInput()
+        // TODO: hook up Validation here and re-check all overrider.
+        protected virtual void OnUserInput()
         {
             if (Control.Value.Count == 0)
             {
@@ -426,7 +495,7 @@ namespace Kistl.GUI
             }
             else
             {
-                Control.IsValidValue = Control.Value.All(v => _Items.Contains(v));
+                Control.IsValidValue = Control.Value.All(v => _Items.Contains((T)v));
             }
 
             if (Control.IsValidValue)
@@ -445,6 +514,12 @@ namespace Kistl.GUI
             base.DisposeManagedResources();
 
             // To prevent resource leaks, all event handlers have to be removed
+            if (Object != null)
+                Object.PropertyChanged -= _Object_PropertyChanged;
+
+            if (Control != null)
+                Control.UserInput -= _Control_UserInput;
+
             if (Control != null)
                 Control.UserAddRequest -= Control_UserAddRequest;
         }
@@ -453,7 +528,9 @@ namespace Kistl.GUI
 
     }
 
-    public class BackReferencePresenter : Presenter<IObjectListControl>
+    public class BackReferencePresenter<T>
+        : Presenter<IObjectListControl>
+        where T : IDataObject
     {
         // localize type-unsafety
         /// <summary>
@@ -465,14 +542,14 @@ namespace Kistl.GUI
         /// Override this to specify a conversion from the object's property to the value for the widget
         /// </summary>
         /// <returns>the value of the handled property in the right type for the widget</returns>
-        protected virtual IList<IDataObject> GetPropertyValue()
+        protected virtual IList<T> GetPropertyValue()
         {
-            return Object.GetList(Property);
+            return Object.GetList<T>(Property);
         }
 
         #region Initialisation
 
-        private List<IDataObject> _Items;
+        private List<T> _Items;
 
         protected override void InitializeComponent()
         {
@@ -480,7 +557,8 @@ namespace Kistl.GUI
 
             // remember the objects that are sent to the object
             // to facilitate validity checking
-            Control.ItemsSource = _Items = Object.Context.GetQuery(Control.ObjectType).ToList();
+            _Items = Object.Context.GetQuery<T>().ToList();
+            Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
 
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
@@ -498,7 +576,7 @@ namespace Kistl.GUI
                 Control.UserAddRequest += _Control_UserAddRequest;
             }
 
-            Control.Value = GetPropertyValue();
+            Control.Value = GetPropertyValue().Cast<IDataObject>().ToList(); ;
             Control.IsValidValue = true;
 
             // Control.Size = Preferences.PreferredSize;
@@ -532,7 +610,7 @@ namespace Kistl.GUI
                 // if the object has changed, unconditionally overwrite the value in the GUI
                 // intelligent controls might want to show the user both the "real" and the user's value
                 if (e.PropertyName == Property.PropertyName)
-                    Control.Value = GetPropertyValue();
+                    Control.Value = GetPropertyValue().Cast<IDataObject>().ToList(); 
             }
         }
 
@@ -559,7 +637,7 @@ namespace Kistl.GUI
             }
             else
             {
-                Control.IsValidValue = Control.Value.All(i => _Items.Contains(i));
+                Control.IsValidValue = Control.Value.All(i => _Items.Contains((T)i));
             }
 
 
@@ -658,14 +736,16 @@ namespace Kistl.GUI
             obj.SetPropertyValue<int>("fk_" + prop.PropertyName, value);
         }
 
-        public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, ObjectReferenceProperty prop)
+        public static IList<T> GetList<T>(this IDataObject obj, ObjectReferenceProperty prop)
+            where T : IDataObject
         {
-            return obj.GetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName);
+            return obj.GetPropertyValue<IList<T>>(prop.PropertyName);
         }
 
-        public static IList<Kistl.API.IDataObject> GetList(this IDataObject obj, BackReferenceProperty prop)
+        public static IList<T> GetList<T>(this IDataObject obj, BackReferenceProperty prop)
+            where T : IDataObject
         {
-            return obj.GetPropertyValue<IList<Kistl.API.IDataObject>>(prop.PropertyName);
+            return obj.GetPropertyValue<IList<T>>(prop.PropertyName);
         }
     }
 }

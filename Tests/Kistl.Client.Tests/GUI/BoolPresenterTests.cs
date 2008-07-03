@@ -19,7 +19,7 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class BoolPresenterTests : NullablePresenterTests<TestObject, bool, TestBoolControl, BoolPresenter>
+    public class BoolPresenterTests : StructPresenterTests<TestObject, bool, TestBoolControl, BoolPresenter>
     {
         public BoolPresenterTests()
             : base(

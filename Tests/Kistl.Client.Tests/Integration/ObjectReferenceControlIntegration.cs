@@ -19,11 +19,11 @@ namespace Kistl.GUI.Integration.WPF
 {
     [TestFixture]
     public class ObjectReferenceControlIntegrationTests
-        : ObjectReferencePresenterInfrastructure<IDataObject, ObjectReferenceControl, ObjectReferencePresenter>
+        : ObjectReferencePresenterInfrastructure<IDataObject, ObjectReferenceControl, ObjectReferencePresenter<TestObject>>
     {
         public ObjectReferenceControlIntegrationTests()
             : base(
-                new PresenterHarness<TestObject, ObjectReferenceControl, ObjectReferencePresenter>(
+                new PresenterHarness<TestObject, ObjectReferenceControl, ObjectReferencePresenter<TestObject>>(
                     new TestObjectHarness(),
                     typeof(ObjectReferenceProperty),
                     new ControlHarness<ObjectReferenceControl>(

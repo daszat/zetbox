@@ -55,11 +55,11 @@ namespace Kistl.GUI
     }
 
     /// <summary>
-    /// a control that displays a reference to a value.
+    /// a control that displays a reference to a IDataObject.
     /// </summary>
     /// <typeparam name="TYPE"></typeparam>
     // TODO: perhaps better called "ISingleSelectControl"?
-    public interface IReferenceControl<TYPE> : IValueControl<TYPE>
+    public interface IReferenceControl : IValueControl<IDataObject>
     {
         /// <summary>
         /// The Type of the listed objects
@@ -68,12 +68,23 @@ namespace Kistl.GUI
         IList<IDataObject> ItemsSource { get; set; }
     }
 
-    public interface IObjectReferenceControl : IReferenceControl<IDataObject>
+    /// <summary>
+    /// a control that displays a list of references to IDataObjects.
+    /// </summary>
+    /// <typeparam name="TYPE"></typeparam>
+    // TODO: perhaps better called "ISingleSelectControl"?
+    public interface IReferenceListControl : IValueControl<IList<IDataObject>>
     {
+        /// <summary>
+        /// The Type of the listed objects
+        /// </summary>
+        Type ObjectType { get; set; }
+        IList<IDataObject> ItemsSource { get; set; }
     }
 
     // TODO: perhaps better called "IMultiSelectControl"?
-    public interface IObjectListControl : IReferenceControl<IList<IDataObject>>
+    public interface IObjectListControl 
+        : IReferenceListControl
     {
         /// <summary>
         /// [optional]

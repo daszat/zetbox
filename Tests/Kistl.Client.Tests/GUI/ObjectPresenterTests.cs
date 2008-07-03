@@ -35,10 +35,30 @@ namespace Kistl.GUI.Tests
         };
     }
 
+    public sealed class TestObjectValues : ValuesAdapter<TestObject>
+    {
+        private TestObjectValues() { }
+        private static TestObjectValues _Values = new TestObjectValues();
+        public static TestObjectValues TestValues { get { return _Values; } }
+
+        public override TestObject[] Valids { get { return (TestObject[])_Items.Clone(); } }
+        public override TestObject[] Invalids { get { return new TestObject[] { }; } }
+
+        private TestObject[] _Items = new[] {
+            new TestObject() { ID = 2 },
+            null,
+            new TestObject() { ID = 3 },
+            new TestObject() { ID = 4 },
+            new TestObject() { ID = 7 },
+            new TestObject() { ID = Int16.MaxValue+1 },
+        };
+    }
+
+
     public abstract class ObjectReferencePresenterInfrastructure<TYPE, CONTROL, PRESENTER>
         : ReferencePresenterTests<TestObject, TYPE, CONTROL, PRESENTER>
-        where TYPE : class
-        where CONTROL : IReferenceControl<TYPE>
+        where TYPE : class, IDataObject
+        where CONTROL : IReferenceControl
         where PRESENTER : IPresenter
     {
         public ObjectReferencePresenterInfrastructure(
@@ -49,7 +69,6 @@ namespace Kistl.GUI.Tests
         {
             Toolkit = toolkit;
         }
-
 
         protected Toolkit Toolkit { get; private set; }
 
@@ -69,7 +88,7 @@ namespace Kistl.GUI.Tests
 
             Expect.Once.On(MockContext).
                 Method("GetQuery").
-                With(new ObjectType(typeof(TestObject))).
+                With(typeof(TestObject)).
                 Will(Return.Value(idoq));
 
             Expect.Once.On(idoq).
@@ -99,11 +118,11 @@ namespace Kistl.GUI.Tests
 
     [TestFixture]
     public class ObjectReferencePresenterTests
-        : ObjectReferencePresenterInfrastructure<IDataObject, TestObjectReferenceControl, ObjectReferencePresenter>
+        : ObjectReferencePresenterInfrastructure<IDataObject, TestObjectReferenceControl, ObjectReferencePresenter<TestObject>>
     {
         public ObjectReferencePresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestObjectReferenceControl, ObjectReferencePresenter>(
+                new PresenterHarness<TestObject, TestObjectReferenceControl, ObjectReferencePresenter<TestObject>>(
                     new TestObjectHarness(),
                     typeof(ObjectReferenceProperty),
                     new ControlHarness<TestObjectReferenceControl>(
@@ -122,49 +141,115 @@ namespace Kistl.GUI.Tests
 
     }
 
+    public abstract class ObjectReferenceListPresenterInfrastructure<TYPE, CONTROL, PRESENTER>
+        : ReferenceListPresenterTests<TestObject, TYPE, CONTROL, PRESENTER>
+        where TYPE : class, IDataObject
+        where CONTROL : IReferenceListControl
+        where PRESENTER : IPresenter
+    {
+        public ObjectReferenceListPresenterInfrastructure(
+            PresenterHarness<TestObject, CONTROL, PRESENTER> presenterHarness,
+            Toolkit toolkit,
+            IValues<IList<TYPE>> values)
+            : base(presenterHarness, values)
+        {
+            Toolkit = toolkit;
+        }
+
+        protected Toolkit Toolkit { get; private set; }
+
+        protected override IList<TYPE> DefaultValue() { return new List<TYPE>(0); }
+
+        // replace PresenterTests.SetUp to inject the MockContext
+        [SetUp]
+        public new void SetUp()
+        {
+            ObjectHarness.SetUp();
+            var idoq = Mockery.NewMock<IQueryable<IDataObject>>("IDataObjectQueryable");
+
+            Expect.Once.On(MockContext).
+                Method("Find").
+                With(-1).
+                Will(Return.Value(TestObject.TestObjectReferenceDescriptor));
+
+            Expect.Once.On(MockContext).
+                Method("GetQuery").
+                With(typeof(TestObject)).
+                Will(Return.Value(idoq));
+
+            Expect.Once.On(idoq).
+                Method("GetEnumerator").
+                Will(Return.Value(new List<IDataObject>(IDataObjectValues.TestValues.Valids).GetEnumerator()));
+
+            ControlHarness.SetUp();
+            PresenterHarness.SetUp();
+        }
+
+        protected override void AssertWidgetHasValidValue()
+        {
+            Assert.IsTrue(Widget.IsValidValue, "the widget should be in a valid state after this operation");
+
+            // don't use Values.Valids here, as ObjectListPresenter also uses the TestValues
+            // as ItemSource. 
+            // TODO: recode this after arrival of Validation stuff
+            Assert.AreEqual(IDataObjectValues.TestValues.Valids.Length, Widget.ItemsSource.Count, "the widget's ItemSource should contain exactly one entry for each item");
+
+            foreach (IDataObject ido in IDataObjectValues.TestValues.Valids)
+            {
+                Assert.That(Widget.ItemsSource.Contains(ido), string.Format("cannot find entry '{0}' in ItemsSource", ido));
+            }
+        }
+
+    }
+
+
     [TestFixture]
     public class ObjectListPresenterTests
-        : ObjectReferencePresenterInfrastructure<IList<IDataObject>, TestObjectListControl, ObjectListPresenter>
+        : ObjectReferenceListPresenterInfrastructure<TestObject, TestObjectListControl, ObjectListPresenter<TestObject>>
     {
         public ObjectListPresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestObjectListControl, ObjectListPresenter>(
+                new PresenterHarness<TestObject, TestObjectListControl, ObjectListPresenter<TestObject>>(
                     new TestObjectHarness(),
                     typeof(ObjectReferenceProperty),
                     new ControlHarness<TestObjectListControl>(
                         TestObject.TestObjectListVisual,
                         Toolkit.TEST)),
                 Toolkit.TEST,
-                new ListValues<IDataObject>(IDataObjectValues.TestValues, true, true)
+                new ListValues<TestObject>(TestObjectValues.TestValues, true, true)
             )
         {
         }
 
-        protected override IList<IDataObject> GetObjectValue() { return Object.TestObjectList.Select(i => (IDataObject)i).ToList(); }
-        protected override void SetObjectValue(IList<IDataObject> v) { Object.TestObjectList = v.Select(i => (TestObject)i).ToList(); }
-        protected override IList<IDataObject> DefaultValue()
+        protected override IList<TestObject> GetObjectValue() { return Object.TestObjectList; }
+        protected override void SetObjectValue(IList<TestObject> v)
         {
-            return new List<IDataObject>();
+            Object.TestObjectList.Clear();
+            Object.TestObjectList.AddRange(v);
+        }
+        protected override IList<TestObject> DefaultValue()
+        {
+            return new List<TestObject>();
         }
 
-        protected override void UserInput(IList<IDataObject> v) { Widget.SimulateUserInput(v); }
+        protected override void UserInput(IList<TestObject> v) { Widget.SimulateUserInput(v.Cast<IDataObject>().ToList()); }
 
     }
 
     [TestFixture]
     public class BackReferencePresenterTests
-        : ObjectReferencePresenterInfrastructure<IList<IDataObject>, TestObjectListControl, BackReferencePresenter>
+        : ObjectReferenceListPresenterInfrastructure<TestObject, TestObjectListControl, BackReferencePresenter<TestObject>>
     {
         public BackReferencePresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestObjectListControl, BackReferencePresenter>(
+                new PresenterHarness<TestObject, TestObjectListControl, BackReferencePresenter<TestObject>>(
                     new TestObjectHarness(),
                     typeof(BackReferenceProperty),
                     new ControlHarness<TestObjectListControl>(
                         TestObject.TestBackReferenceVisual,
                         Toolkit.TEST)),
                 Toolkit.TEST,
-                new ListValues<IDataObject>(IDataObjectValues.TestValues, true, true)
+                new ListValues<TestObject>(TestObjectValues.TestValues, true, true)
             )
         {
         }
@@ -183,7 +268,7 @@ namespace Kistl.GUI.Tests
 
             Expect.Once.On(MockContext).
                 Method("GetQuery").
-                With(new ObjectType(typeof(TestObject))).
+                With(typeof(TestObject)).
                 Will(Return.Value(idoq));
 
             Expect.Once.On(idoq).
@@ -194,15 +279,18 @@ namespace Kistl.GUI.Tests
             PresenterHarness.SetUp();
         }
 
-        protected override IList<IDataObject> GetObjectValue() { return Object.TestBackReference.Select(i => (IDataObject)i).ToList(); }
-        protected override void SetObjectValue(IList<IDataObject> v) { Object.TestBackReference = v.Select(i => (TestObject)i).ToList(); }
-        protected override IList<IDataObject> DefaultValue()
+        protected override IList<TestObject> GetObjectValue() { return Object.TestBackReference; }
+        protected override void SetObjectValue(IList<TestObject> v)
         {
-            return new List<IDataObject>();
+            Object.TestBackReference.Clear();
+            Object.TestBackReference.AddRange(v);
+        }
+        protected override IList<TestObject> DefaultValue()
+        {
+            return new List<TestObject>();
         }
 
-        protected override void UserInput(IList<IDataObject> v) { Widget.SimulateUserInput(v); }
+        protected override void UserInput(IList<TestObject> v) { Widget.SimulateUserInput(v.Cast<IDataObject>().ToList()); }
 
     }
-
 }

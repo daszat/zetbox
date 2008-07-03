@@ -81,14 +81,14 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         [Test]
         public void TestObjectType()
         {
-            TestProperty<ObjectType>(
+            TestProperty<Type>(
                 w => w.ObjectType, (w, v) => w.ObjectType = v,
-                new Values<ObjectType>()
+                new Values<Type>()
                 {
                     Valids = new[] {
-                        new ObjectType(typeof(String)), 
-                        new ObjectType(typeof(TestStringControl)),
-                        new ObjectType(typeof(StringProperty)) 
+                        typeof(String), 
+                        typeof(TestStringControl),
+                        typeof(StringProperty) 
                     }
                 },
                 AssertThatNoEventsFired
@@ -167,14 +167,14 @@ namespace Kistl.GUI.Renderer.WPF.Tests
         [Test]
         public void TestObjectType()
         {
-            TestProperty<ObjectType>(
+            TestProperty<Type>(
                 w => w.ObjectType, (w, v) => w.ObjectType = v,
-                new Values<ObjectType>()
+                new Values<Type>()
                 {
                     Valids = new[] {
-                        new ObjectType(typeof(String)), 
-                        new ObjectType(typeof(TestStringControl)),
-                        new ObjectType(typeof(StringProperty)) 
+                        typeof(String), 
+                        typeof(TestStringControl),
+                        typeof(StringProperty) 
                     }
                 },
                 AssertThatNoEventsFired

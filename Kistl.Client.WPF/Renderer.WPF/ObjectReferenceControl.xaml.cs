@@ -25,7 +25,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// Interaction logic for ObjectReferenceControl.xaml
     /// </summary>
     public partial class ObjectReferenceControl 
-        : PropertyControl, IObjectReferenceControl, ITestObjectReferenceControl
+        : PropertyControl, IReferenceControl, ITestObjectReferenceControl
     {
         public ObjectReferenceControl()
         {

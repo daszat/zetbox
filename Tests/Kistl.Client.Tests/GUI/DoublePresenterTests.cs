@@ -30,7 +30,7 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class DoublePresenterTests : NullablePresenterTests<TestObject, double, TestDoubleControl, DoublePresenter>
+    public class DoublePresenterTests : StructPresenterTests<TestObject, double, TestDoubleControl, DoublePresenter>
     {
         public DoublePresenterTests()
             : base(
