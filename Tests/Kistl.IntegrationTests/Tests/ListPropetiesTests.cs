@@ -29,10 +29,6 @@ namespace Kistl.IntegrationTests
                 foreach (Kistl.App.Projekte.Kunde k in list)
                 {
                     count += k.EMails.Count;
-                    foreach (var e in k.EMails)
-                    {
-                        Assert.That(e.Parent.ID, Is.EqualTo(k.ID));
-                    }
                 }
                 Assert.That(count, Is.GreaterThan(0));
             }
@@ -50,8 +46,7 @@ namespace Kistl.IntegrationTests
                     count += prj.Mitarbeiter.Count;
                     foreach (var m in prj.Mitarbeiter)
                     {
-                        Assert.That(m.Parent.ID, Is.EqualTo(prj.ID));
-                        Assert.That(m.Value.ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
+                        Assert.That(m.ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
                     }
                 }
                 Assert.That(count, Is.GreaterThan(0));
@@ -70,7 +65,7 @@ namespace Kistl.IntegrationTests
                 {
                     mail = "UnitTest" + DateTime.Now + "@dasz.at";
                     ID = k.ID;
-                    k.EMails.Add(new Kistl.App.Projekte.Kunde_EMailsCollectionEntry() { Value = mail });
+                    k.EMails.Add(mail);
                     break;
                 }
                 Assert.That(mail, Is.Not.EqualTo(""));
@@ -85,7 +80,7 @@ namespace Kistl.IntegrationTests
                 var kunde = ctx.GetQuery<Kistl.App.Projekte.Kunde>().Single(k => k.ID == ID);
                 Assert.That(kunde, Is.Not.Null);
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
-                var result = kunde.EMails.SingleOrDefault(m => m.Value == mail);
+                var result = kunde.EMails.SingleOrDefault(m => m == mail);
                 Assert.That(result, Is.Not.Null);
             }
         }
@@ -95,7 +90,6 @@ namespace Kistl.IntegrationTests
         {
             int ID = Kistl.API.Helper.INVALIDID;
             string mail = "";
-            int mailID = Kistl.API.Helper.INVALIDID;
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Projekte.Kunde>();
@@ -103,15 +97,11 @@ namespace Kistl.IntegrationTests
                 {
                     if (k.EMails.Count > 0)
                     {
-                        Kistl.App.Projekte.Kunde_EMailsCollectionEntry e = k.EMails[0];
                         mail = "UnitTest" + DateTime.Now + "@dasz.at";
-                        ID = k.ID;
-                        mailID = e.ID;
-                        e.Value = mail;
+                        k.EMails[0] = mail;
                         break;
                     }
                 }
-                Assert.That(mailID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
                 Assert.That(mail, Is.Not.EqualTo(""));
                 int submitCount = ctx.SubmitChanges();
                 Assert.That(submitCount, Is.EqualTo(1));
@@ -124,9 +114,8 @@ namespace Kistl.IntegrationTests
                 var kunde = ctx.GetQuery<Kistl.App.Projekte.Kunde>().Single(k => k.ID == ID);
                 Assert.That(kunde, Is.Not.Null);
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
-                var result = kunde.EMails.SingleOrDefault(m => m.ID == mailID);
+                var result = kunde.EMails.SingleOrDefault(m => m == mail);
                 Assert.That(result, Is.Not.Null);
-                Assert.That(result.Value, Is.EqualTo(mail));
             }
         }
 
@@ -134,8 +123,8 @@ namespace Kistl.IntegrationTests
         public void DeleteStringListPropertyContent()
         {
             int ID = Kistl.API.Helper.INVALIDID;
-            int mailID = Kistl.API.Helper.INVALIDID;
             int mailCount = 0;
+            string mail = "";
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Projekte.Kunde>();
@@ -143,15 +132,13 @@ namespace Kistl.IntegrationTests
                 {
                     if (k.EMails.Count > 0)
                     {
-                        Kistl.App.Projekte.Kunde_EMailsCollectionEntry e = k.EMails[0];
-                        ctx.Delete(e);
+                        mail = k.EMails[0];
+                        k.EMails.RemoveAt(0);
                         mailCount = k.EMails.Count;
-                        mailID = e.ID;
                         ID = k.ID;
                         break;
                     }
                 }
-                Assert.That(mailID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
                 int submitCount = ctx.SubmitChanges();
                 Assert.That(submitCount, Is.EqualTo(1));
             }
@@ -164,7 +151,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(kunde, Is.Not.Null);
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
 
-                var result = kunde.EMails.SingleOrDefault(m => m.ID == mailID);
+                var result = kunde.EMails.SingleOrDefault(m => m == mail);
                 Assert.That(kunde.EMails.Count, Is.EqualTo(mailCount-1));
                 Assert.That(result, Is.Null);
             }

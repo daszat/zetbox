@@ -21,33 +21,15 @@ namespace Kistl.API.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromExpression_Null()
         {
-            SerializableExpression.FromExpression(null, SerializableType.SerializeDirection.ClientToServer);
+            SerializableExpression.FromExpression(null);
         }
 
         [Test]
         public void SerializableType_Valid()
         {
-            SerializableType t = new SerializableType(typeof(TestDataObject), SerializableType.SerializeDirection.ClientToServer);
+            SerializableType t = new SerializableType(typeof(TestDataObject));
             Type result = t.GetSerializedType();
             Assert.That(result, Is.EqualTo(typeof(TestDataObject)));
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void SerializableType_InvalidType()
-        {
-            SerializableType t = new SerializableType(typeof(TestDataObject), SerializableType.SerializeDirection.ClientToServer);
-            t.AssemblyQualifiedName = "TestType";
-            Type result = t.GetSerializedType();
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void SerializableType_InvalidType_Generic()
-        {
-            SerializableType t = new SerializableType(typeof(List<int>), SerializableType.SerializeDirection.ClientToServer);
-            t.AssemblyQualifiedName = "TestType";
-            Type result = t.GetSerializedType();
         }
     }
 }

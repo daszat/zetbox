@@ -23,9 +23,9 @@ namespace Kistl.API.Tests
             KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
             msg.ID = 10;
             msg.Property = "TestProperty";
-            msg.Type = new ObjectType(typeof(TestDataObject));
-            msg.Filter = SerializableExpression.FromExpression(Expression.Constant(true), SerializableType.SerializeDirection.ClientToServer);
-            msg.OrderBy = SerializableExpression.FromExpression(Expression.Constant("Test"), SerializableType.SerializeDirection.ClientToServer);
+            msg.Type = new SerializableType(typeof(TestDataObject));
+            msg.Filter = SerializableExpression.FromExpression(Expression.Constant(true));
+            msg.OrderBy = SerializableExpression.FromExpression(Expression.Constant("Test"));
 
             MemoryStream ms = msg.ToStream();
             ms.Seek(0, SeekOrigin.Begin);

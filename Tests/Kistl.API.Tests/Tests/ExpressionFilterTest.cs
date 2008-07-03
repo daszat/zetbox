@@ -35,7 +35,7 @@ namespace Kistl.API.Tests
         {
             var list = from o in ctx
                        where o.ID == 1
-                       && o.Type.Classname.StartsWith("test")
+                       && o.GetType().FullName.StartsWith("test")
                        && o.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified)
                        select o;
 

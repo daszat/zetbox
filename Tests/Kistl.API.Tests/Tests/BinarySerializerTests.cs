@@ -240,10 +240,10 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void ObjectType()
+        public void SerializableType()
         {
-            ObjectType toval, fromval;
-            toval = new ObjectType(typeof(TestDataObject));
+            SerializableType toval, fromval;
+            toval = new SerializableType(typeof(TestDataObject));
             BinarySerializer.ToBinary(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
@@ -253,9 +253,9 @@ namespace Kistl.API.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ObjectTypeNull()
+        public void SerializableTypeNull()
         {
-            ObjectType toval;
+            SerializableType toval;
             toval = null;
             BinarySerializer.ToBinary(toval, sw);
         }
@@ -284,7 +284,8 @@ namespace Kistl.API.Tests
             BinarySerializer.ToBinary(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinaryCollectionEntries(out fromval, sr);
+            fromval = new List<TestCollectionEntry>();
+            BinarySerializer.FromBinaryCollectionEntries(fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -298,8 +299,8 @@ namespace Kistl.API.Tests
             BinarySerializer.ToBinary(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            ObservableCollection<TestCollectionEntry> fromvalobserbable;
-            BinarySerializer.FromBinaryCollectionEntries(out fromvalobserbable, sr);
+            ObservableCollection<TestCollectionEntry> fromvalobserbable = new ObservableCollection<TestCollectionEntry>();
+            BinarySerializer.FromBinaryCollectionEntries(fromvalobserbable, sr);
             Assert.That(fromvalobserbable[0].ID, Is.EqualTo(toval[0].ID));
         }
 
@@ -322,7 +323,7 @@ namespace Kistl.API.Tests
                        select new { o.IntProperty, o.BoolProperty };
 
             SerializableExpression toval, fromval;
-            toval = Kistl.API.SerializableExpression.FromExpression(list.Expression, SerializableType.SerializeDirection.ClientToServer);
+            toval = Kistl.API.SerializableExpression.FromExpression(list.Expression);
             BinarySerializer.ToBinary(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 

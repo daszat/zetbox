@@ -101,7 +101,7 @@ namespace Kistl.API.Server.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                var result = ctx.GetQuery(new ObjectType(typeof(TestObjClass)));
+                var result = ctx.GetQuery(typeof(TestObjClass));
                 Assert.That(result, Is.Not.Null);
             }
         }
@@ -123,7 +123,7 @@ namespace Kistl.API.Server.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                TestObjClass obj = (TestObjClass)ctx.Find(new ObjectType(typeof(TestObjClass)), 1);
+                TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), 1);
                 Assert.That(obj, Is.Not.Null);
             }
         }
@@ -146,7 +146,7 @@ namespace Kistl.API.Server.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                var result = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "SubClasses").ToList();
+                var result = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "SubClasses").ToList();
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Count, Is.EqualTo(2));
             }
@@ -397,7 +397,7 @@ namespace Kistl.API.Server.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                TestObjClass newObj = ctx.Create(new ObjectType(typeof(TestObjClass))) as TestObjClass;
+                TestObjClass newObj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
                 Assert.That(newObj.Context, Is.Not.Null);
             }

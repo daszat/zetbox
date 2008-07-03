@@ -20,7 +20,7 @@ namespace Kistl.IntegrationTests
             System.Diagnostics.Trace.WriteLine("Setting up Kistl");
 
             Kistl.API.APIInit init = new Kistl.API.APIInit();
-            init.Init(@"..\..\DefaultConfig_Integration.Tests.xml");
+            init.Init(Kistl.API.HostType.Client, @"..\..\DefaultConfig_Integration.Tests.xml");
 
             client = new Kistl.Client.Client();
             client.Start();

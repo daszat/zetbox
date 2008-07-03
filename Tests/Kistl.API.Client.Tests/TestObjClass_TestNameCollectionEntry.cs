@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Kistl.API.Client.Tests
 {
-    public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry
+    public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry, ICollectionEntry<string, TestObjClass>
     {
 
         private int _ID = Helper.INVALIDID;

@@ -35,10 +35,26 @@ namespace Kistl.API.Client
             get { return collection; }
         }
 
+        private List<COLLECTIONENTRYTYPE> deletedCollection;
+        public List<COLLECTIONENTRYTYPE> DeletedCollection
+        {
+            get { return deletedCollection; }
+        }
+
+        private void AddToDeletedCollection(COLLECTIONENTRYTYPE e)
+        {
+            if (e.ID == Helper.INVALIDID) return;
+            if (deletedCollection.FirstOrDefault<COLLECTIONENTRYTYPE>(i => i.ID == e.ID) == null)
+            {
+                deletedCollection.Add(e);
+            }
+        }
+
         public ListPropertyCollection(PARENT parent, string propertyName)
         {
             this.parent = parent;
             collection = new NotifyingObservableCollection<COLLECTIONENTRYTYPE>(parent, propertyName);
+            deletedCollection = new List<COLLECTIONENTRYTYPE>();
         }
 
         public void CopyTo(ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> other)
@@ -79,6 +95,7 @@ namespace Kistl.API.Client
 
         public void Clear()
         {
+            collection.ForEach(i => AddToDeletedCollection(i));
             collection.Clear();
         }
 
@@ -105,6 +122,7 @@ namespace Kistl.API.Client
         public bool Remove(T item)
         {
             COLLECTIONENTRYTYPE e = collection.Single(i => i.Value.Equals(item));
+            AddToDeletedCollection(e);
             return collection.Remove(e);
         }
 
@@ -143,6 +161,7 @@ namespace Kistl.API.Client
 
         public void RemoveAt(int index)
         {
+            AddToDeletedCollection(collection[index]);
             collection.RemoveAt(index);
         }
 

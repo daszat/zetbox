@@ -70,10 +70,10 @@ namespace Kistl.API.Client
         private static IProxy current;
 
         /// <summary>
-        /// Sets the current Proxy
+        /// Sets the current Proxy, used in Unit Tests
         /// </summary>
         /// <param name="p"></param>
-        private static void SetProxy(IProxy p)
+        public static void SetProxy(IProxy p)
         {
             current = p;
         }

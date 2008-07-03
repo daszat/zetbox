@@ -14,13 +14,11 @@ namespace Kistl.API.Tests
         private string _StringProperty;
         private int _IntProperty;
         private bool _BoolProperty;
-        private ObjectType _Type = new ObjectType(typeof(TestDataObject));
 
         public int ID { get { return _ID; } set { _ID = value; } }
         public string StringProperty { get { return _StringProperty; } set { _StringProperty = value; } }
         public int IntProperty { get { return _IntProperty; } set { _IntProperty = value; } }
         public bool BoolProperty { get { return _BoolProperty; } set { _BoolProperty = value; } }
-        public ObjectType Type { get { return _Type; } }
         public DataObjectState ObjectState { get; set; }
 
         public string TestField;
@@ -49,7 +47,7 @@ namespace Kistl.API.Tests
 
         public void ToStream(System.IO.BinaryWriter sw)
         {
-            BinarySerializer.ToBinary(Type, sw);
+            BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
             BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary(StringProperty, sw);
             BinarySerializer.ToBinary(IntProperty, sw);
@@ -58,7 +56,8 @@ namespace Kistl.API.Tests
 
         public void FromStream(System.IO.BinaryReader sr)
         {
-            BinarySerializer.FromBinary(out _Type, sr);
+            SerializableType type;
+            BinarySerializer.FromBinary(out type, sr);
             BinarySerializer.FromBinary(out _ID, sr);
             BinarySerializer.FromBinary(out _StringProperty, sr);
             BinarySerializer.FromBinary(out _IntProperty, sr);
@@ -75,7 +74,6 @@ namespace Kistl.API.Tests
         public void CopyTo(IDataObject obj)
         {
             ((TestDataObject)obj).ID = this.ID;
-            ((TestDataObject)obj)._Type = this.Type;
             ((TestDataObject)obj).IntProperty = this.IntProperty;
             ((TestDataObject)obj).StringProperty = this.StringProperty;
             ((TestDataObject)obj).BoolProperty = this.BoolProperty;

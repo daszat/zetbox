@@ -35,12 +35,6 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        public void Type()
-        {
-            Assert.That(obj.Type.NameDataObject, Is.EqualTo("Kistl.API.Client.Tests.TestObjClass"));
-        }
-
-        [Test]
         public void EventAttached()
         {
             Assert.That(currentCustomActionsManager.IsObjectAttached(obj), Is.True);
@@ -150,7 +144,7 @@ namespace Kistl.API.Client.Tests
                 TestObjClass result = new TestObjClass();
                 result.FromStream(sr);
 
-                Assert.That(result.Type, Is.EqualTo(obj.Type));
+                Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
                 Assert.That(result.ID, Is.EqualTo(obj.ID));
                 Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
                 Assert.That(PropertyChangedCalled, Is.False);
@@ -176,7 +170,7 @@ namespace Kistl.API.Client.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            ObjectType wrongType = new ObjectType("test.test.test");
+            SerializableType wrongType = new SerializableType(typeof(string));
             BinarySerializer.ToBinary(wrongType, sw);
 
             using (IKistlContext ctx = KistlContext.GetContext())

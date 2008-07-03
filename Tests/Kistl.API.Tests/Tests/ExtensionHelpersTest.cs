@@ -111,36 +111,5 @@ namespace Kistl.API.Tests
             list.ForEach<int>(i => result += i);
             Assert.That(result, Is.EqualTo(10));
         }
-
-        [Test]
-        public void Clone_List()
-        {
-            List<TestDataObject> list = new List<TestDataObject>();
-            list.Add(new TestDataObject() { IntProperty = 1 });
-            list.Add(new TestDataObject() { IntProperty = 2 });
-            List<TestDataObject> result = list.Clone();
-            Assert.That(result, Is.EqualTo(list));
-        }
-
-        [Test]
-        public void Clone_ObservableCollection()
-        {
-            ObservableCollection<TestDataObject> list = new ObservableCollection<TestDataObject>();
-            list.Add(new TestDataObject() { IntProperty = 1 });
-            list.Add(new TestDataObject() { IntProperty = 2 });
-            ObservableCollection<TestDataObject> result = list.Clone();
-            Assert.That(result, Is.EqualTo(list));
-        }
-
-        [Test]
-        public void Clone_NotifyingObservableCollection()
-        {
-            TestDataObject dataObj = new TestDataObject();
-            NotifyingObservableCollection<TestDataObject> list = new NotifyingObservableCollection<TestDataObject>(dataObj, "");
-            list.Add(new TestDataObject() { IntProperty = 1 });
-            list.Add(new TestDataObject() { IntProperty = 2 });
-            NotifyingObservableCollection<TestDataObject> result = list.Clone(dataObj);
-            Assert.That(result, Is.EqualTo(list));
-        }
     }
 }

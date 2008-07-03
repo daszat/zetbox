@@ -60,7 +60,7 @@ namespace Kistl.API.Tests
         [ExpectedException(typeof(System.Security.SecurityException))]
         public void AddFilter_IllegalExpression()
         {
-            Expression<Func<TestDataObject, bool>> e = (o) => o.Type.ToString() == "";
+            Expression<Func<TestDataObject, bool>> e = (o) => o.GetType().ToString() == "";
             list = list.AddFilter(e);
         }
 

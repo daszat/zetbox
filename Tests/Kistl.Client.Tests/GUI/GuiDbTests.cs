@@ -220,7 +220,7 @@ namespace Kistl.GUI.Tests
             t.DisplayName = name;
             Assert.AreEqual(name, t.DisplayName, "Template.DisplayName should not munge its value");
 
-            Type type = typeof(String);
+            Type type = typeof(string);
             t.Type = type;
             Assert.AreEqual(type, t.Type, "Template.Type should not munge its value");
 

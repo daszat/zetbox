@@ -31,7 +31,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void GetQuery_ObjectType()
         {
-            IQueryable<IDataObject> query = ctx.GetQuery(new ObjectType(typeof(TestObjClass)));
+            IQueryable<IDataObject> query = ctx.GetQuery(typeof(TestObjClass));
             Assert.That(query, Is.Not.Null);
             Assert.That(query.ElementType, Is.EqualTo(typeof(IDataObject)));
         }
@@ -54,7 +54,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Find_ObjectType()
         {
-            TestObjClass obj = (TestObjClass)ctx.Find(new ObjectType(typeof(TestObjClass)), 1);
+            TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), 1);
             Assert.That(obj, Is.Not.Null);
         }
 
@@ -114,7 +114,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void GetListOf()
         {
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
             list.ForEach(obj => Assert.That(obj, Is.Not.Null));
@@ -125,12 +125,12 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void GetListOf_Twice()
         {
-            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
             Assert.That(list1, Is.Not.Null);
             Assert.That(list1.Count, Is.AtLeast(2));
             list1.ForEach(obj => Assert.That(obj, Is.Not.Null));
 
-            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
             Assert.That(list2, Is.Not.Null);
             Assert.That(list2.Count, Is.EqualTo(list1.Count));
             list2.ForEach(obj => Assert.That(obj, Is.Not.Null));
@@ -166,7 +166,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.EqualTo(3));
 
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
@@ -184,7 +184,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
-            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(new ObjectType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
             Assert.That(listOf, Is.Not.Null);
             Assert.That(listOf.Count, Is.AtLeast(2));
 
@@ -223,7 +223,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Create_ObjectType()
         {
-            TestObjClass obj = ctx.Create(new ObjectType(typeof(TestObjClass))) as TestObjClass;
+            TestObjClass obj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.EqualTo(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
