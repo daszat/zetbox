@@ -105,57 +105,6 @@ namespace Kistl.Client
                 return _Modules;
             }
         }
-
-#if DONOTUSE
-        public static List<Kistl.App.Base.ObjectClass> GetObjectHierarchie(Kistl.App.Base.ObjectClass objClass)
-        {
-            return GetObjectHierarchie(Type.GetType(objClass.Module.Namespace + "." + objClass.ClassName, true));
-        }
-
-        public static List<Kistl.App.Base.ObjectClass> GetObjectHierarchie(Type type)
-        {
-            Kistl.App.Base.ObjectClass objClass = ObjectClasses[type];
-            List<Kistl.App.Base.ObjectClass> result = new List<Kistl.App.Base.ObjectClass>();
-            while (objClass != null)
-            {
-                result.Add(objClass);
-
-                if (objClass.fk_BaseObjectClass == API.Helper.INVALIDID)
-                {
-                    objClass = null;
-                }
-                else
-                {
-                    objClass = ClientHelper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
-                }
-            }
-
-            result.Reverse();
-            return result;
-        }
-
-        public static List<Type> GetTypeHierarchie(Type type)
-        {
-            Kistl.App.Base.ObjectClass objClass = ObjectClasses[type];
-            List<Type> result = new List<Type>();
-            while (objClass != null)
-            {
-                result.Add(Type.GetType(objClass.Module.Namespace + "." + objClass.ClassName, true));
-
-                if (objClass.fk_BaseObjectClass == API.Helper.INVALIDID)
-                {
-                    objClass = null;
-                }
-                else
-                {
-                    objClass = ClientHelper.ObjectClasses.Values.First(o => o.ID == objClass.fk_BaseObjectClass);
-                }
-            }
-
-            result.Reverse();
-            return result;
-        }
-#endif
     }
 
     public static class ClientExtensions

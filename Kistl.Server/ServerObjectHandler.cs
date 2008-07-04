@@ -149,7 +149,7 @@ namespace Kistl.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}, Property = {1}", ID, property)))
             {
-                if (ID == API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
+                if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
                 T obj = GetObjectInstance(ID);
                 if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 

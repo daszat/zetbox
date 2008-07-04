@@ -119,7 +119,7 @@ namespace Kistl.Server
             try
             {
                 if (type == null) throw new ArgumentNullException("type");
-                if (ID == API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
+                if (ID <= API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
                 if (string.IsNullOrEmpty(property)) throw new ArgumentNullException("property");
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
@@ -152,7 +152,7 @@ namespace Kistl.Server
             try
             {
                 if (type == null) throw new ArgumentNullException("type");
-                if (ID == API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
+                if (ID <= API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
                 {

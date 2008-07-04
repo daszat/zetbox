@@ -43,7 +43,7 @@ namespace Kistl.API.Client
 
         private void AddToDeletedCollection(COLLECTIONENTRYTYPE e)
         {
-            if (e.ID == Helper.INVALIDID) return;
+            if (e.ID <= Helper.INVALIDID) return;
             if (deletedCollection.FirstOrDefault<COLLECTIONENTRYTYPE>(i => i.ID == e.ID) == null)
             {
                 deletedCollection.Add(e);
@@ -66,6 +66,7 @@ namespace Kistl.API.Client
                 foreach (COLLECTIONENTRYTYPE e in collection)
                 {
                     COLLECTIONENTRYTYPE n = new COLLECTIONENTRYTYPE();
+                    if(other.parent.Context != null) other.parent.Context.Attach(n);
                     e.CopyTo(n);
                     other.collection.Add(n);
                 }
@@ -91,13 +92,13 @@ namespace Kistl.API.Client
         public void Add(T item)
         {
             COLLECTIONENTRYTYPE i = new COLLECTIONENTRYTYPE() { Value = item, Parent = this.parent };
-            i.AttachToContext(parent.Context);
+            if (parent.Context != null) parent.Context.Attach(i);
             collection.Add(i);
         }
 
         public void Clear()
         {
-            collection.ForEach(i => AddToDeletedCollection(i));
+            // Do not mark Objects as deleted. Clear is used to initialize a Collection
             collection.Clear();
         }
 
@@ -158,7 +159,9 @@ namespace Kistl.API.Client
 
         public void Insert(int index, T item)
         {
-            collection.Insert(index, new COLLECTIONENTRYTYPE() { Value = item, Parent = this.parent });
+            COLLECTIONENTRYTYPE i = new COLLECTIONENTRYTYPE() { Value = item, Parent = this.parent };
+            if (parent.Context != null) parent.Context.Attach(i);
+            collection.Insert(index, i);
         }
 
         public void RemoveAt(int index)

@@ -381,7 +381,9 @@ namespace Kistl.API
                 T obj = new T();
                 obj.FromStream(sr);
 
-                T objInCollection = val.FirstOrDefault(i => obj.ID != Helper.INVALIDID && i.ID == obj.ID);
+                // TODO: Arthur: Ich bin mir nicht sicher, ob das überhaupt notwendig ist.
+                // Vielleicht wirds wieder notwendig, wenn die Objekte vorgeladen werden?
+                T objInCollection = val.FirstOrDefault(i => obj.ID > Helper.INVALIDID && i.ID == obj.ID);
                 if (objInCollection != null)
                 {
                     obj.CopyTo(objInCollection);
