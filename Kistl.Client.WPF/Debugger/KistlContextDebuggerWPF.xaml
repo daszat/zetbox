@@ -1,0 +1,30 @@
+﻿<Window x:Class="Kistl.Client.WPF.Debugger.KistlContextDebuggerWPF"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="KistlContext Debugger" Height="364" Width="279">
+    <Grid>
+        <TreeView x:Name="tree" ItemsSource="{Binding}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Objects}">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Context -->
+                        <TextBlock Margin="2,0,0,0" Text="{Binding Path=Text}" />
+                    </StackPanel>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate>
+                            <!-- Objects -->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="2,0,0,0" Text="ID = " />
+                                <TextBlock Text="{Binding Path=ID}" />
+                                <TextBlock Text=", ObjectState = " />
+                                <TextBlock Text="{Binding Path=ObjectState}" />
+                                <TextBlock Text=", Type = " />
+                                <TextBlock Text="{Binding Converter={StaticResource GetTypeConverter}}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</Window>

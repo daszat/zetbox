@@ -106,4 +106,24 @@ namespace Kistl.Client.WPF.Converter
         }
     }
 
+    /// <summary>
+    /// Converts a object to GetType
+    /// </summary>
+    [ValueConversion(typeof(object), typeof(Type))]
+    public class GetTypeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value == null) return Binding.DoNothing;
+            return value.GetType();
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Readonly
+            return Binding.DoNothing;
+        }
+    }
 }

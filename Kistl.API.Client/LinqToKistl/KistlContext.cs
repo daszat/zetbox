@@ -28,6 +28,40 @@ namespace Kistl.API.Client
     /// </summary>
     internal class KistlContextImpl : IKistlContext, IDisposable
     {
+        public KistlContextImpl()
+        {
+            KistlContextDebugger.Created(this);
+        }
+
+        private bool disposed = false;
+        /// <summary>
+        /// Dispose this Context.
+        /// </summary>
+        public void Dispose()
+        {
+            lock (this)
+            {
+                if (!disposed)
+                {
+                    KistlContextDebugger.Disposed(this);
+                }
+                disposed = true;
+            }
+            // TODO: ??? Warum? Wieso? Weshalb?
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Throws an Exception when this Context has been disposed
+        /// </summary>
+        private void CheckDisposed()
+        {
+            if (disposed)
+            {
+                throw new KistlContextDisposedExeption();
+            }
+        }
+
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
         /// </summary>
@@ -71,6 +105,7 @@ namespace Kistl.API.Client
         /// <returns>IQueryable</returns>
         public IQueryable<IDataObject> GetQuery(Type type)
         {
+            CheckDisposed();
             return new KistlContextQuery<IDataObject>(this, type);
         }
 
@@ -81,6 +116,7 @@ namespace Kistl.API.Client
         /// <returns>IQueryable</returns>
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
+            CheckDisposed();
             return new KistlContextQuery<T>(this, typeof(T));
         }
 
@@ -93,6 +129,7 @@ namespace Kistl.API.Client
         /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
         {
+            CheckDisposed();
             return this.GetListOf<T>(obj.GetType(), obj.ID, propertyName);
         }
 
@@ -106,6 +143,7 @@ namespace Kistl.API.Client
         /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject
         {
+            CheckDisposed();
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
             return ((KistlContextProvider<T>)query.Provider).GetListOf(ID, propertyName);
         }
@@ -117,6 +155,7 @@ namespace Kistl.API.Client
         /// <returns>A new IDataObject</returns>
         public T Create<T>() where T : Kistl.API.IDataObject, new()
         {
+            CheckDisposed();
             T obj = new T();
             Attach(obj);
             return obj;
@@ -129,6 +168,7 @@ namespace Kistl.API.Client
         /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(Type type)
         {
+            CheckDisposed();
             Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
             return obj;
@@ -142,6 +182,7 @@ namespace Kistl.API.Client
         /// <returns>The Object in already Context or obj if not</returns>
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
 
             obj = IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
@@ -151,6 +192,7 @@ namespace Kistl.API.Client
             {
                 _objects.Add(obj);
                 obj.ObjectState = DataObjectState.Unmodified;
+                KistlContextDebugger.Changed(this, _objects);
             }
 
             return obj;
@@ -162,11 +204,13 @@ namespace Kistl.API.Client
         /// <param name="obj">IDataObject</param>
         public void Detach(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
             if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
 
             _objects.Remove(obj);
             obj.DetachFromContext(this);
+            KistlContextDebugger.Changed(this, _objects);
         }
 
         /// <summary>
@@ -175,6 +219,7 @@ namespace Kistl.API.Client
         /// <param name="obj">IPersistenceObject</param>
         public void Delete(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
             if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
             obj.ObjectState = DataObjectState.Deleted;
@@ -186,12 +231,19 @@ namespace Kistl.API.Client
         /// <returns>Number of affected Objects</returns>
         public int SubmitChanges()
         {
+            CheckDisposed();
             // TODO: Add a better Cache Refresh Strategie
             CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             List<Kistl.API.IDataObject> objectsToDetach = new List<Kistl.API.IDataObject>();
             int objectsSubmittedCount = 0;
-            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>())
+
+            // Use the ToList() operator! The CopyTo Methods _may_ attach new created Objects
+            // like ICollectionEntries
+            // TODO: Arthur: Da hats was. Das würde ja bedeuten, dass neue Objekte, die im Context
+            // drinnen sind wieder durch neue ersetzt werden & damit rausfliegen!
+            // Vermutlicher Grund: Der Context kann die Objekte nur nach der ID erkennen... hmmmm
+            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>().ToList())
             {
                 if (obj.ObjectState == DataObjectState.Deleted)
                 {
@@ -230,6 +282,7 @@ namespace Kistl.API.Client
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public IDataObject Find(Type type, int ID)
         {
+            CheckDisposed();
             return GetQuery(type).Single(o => o.ID == ID);
         }
 
@@ -244,16 +297,8 @@ namespace Kistl.API.Client
         public T Find<T>(int ID)
             where T: IDataObject
         {
+            CheckDisposed();
             return GetQuery<T>().Single(o => o.ID == ID);
-        }
-
-        /// <summary>
-        /// Dispose this Context.
-        /// </summary>
-        public void Dispose()
-        {
-            // TODO: ??? Warum? Wieso? Weshalb?
-            GC.SuppressFinalize(this);
         }
     }
 }

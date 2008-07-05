@@ -85,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Debugger\KistlContextDebuggerWPF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\ChooseObjectDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +161,9 @@
   <ItemGroup>
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="Debugger\KistlContextDebuggerWPF.xaml.cs">
+      <DependentUpon>KistlContextDebuggerWPF.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ChooseObjectDialog.xaml.cs">
       <DependentUpon>ChooseObjectDialog.xaml</DependentUpon>
     </Compile>

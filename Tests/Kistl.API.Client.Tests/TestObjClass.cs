@@ -18,12 +18,15 @@ namespace Kistl.API.Client.Tests
 
         private int _TestEnumProp;
 
-        private List<TestObjClass> _Children;
+        private BackReferenceCollection<TestObjClass> _Children;
 
         private int _fk_Parent = Helper.INVALIDID;
 
+        private ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> _TestNames;
+
         public TestObjClass()
         {
+            _TestNames = new ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry>(this, "TestNames");
         }
 
         public override int ID
@@ -66,19 +69,27 @@ namespace Kistl.API.Client.Tests
             }
         }
 
-        public List<TestObjClass_TestNameCollectionEntry> TestNames
+        public IList<string> TestNames
         {
             get
             {
-                return null;
+                return _TestNames;
             }
         }
 
-        public List<TestObjClass> Children
+        public ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> UnitTest_TestNames
         {
             get
             {
-                if (_Children == null) _Children = Context.GetListOf<TestObjClass>(this, "Children");
+                return _TestNames;
+            }
+        }
+
+        public IList<TestObjClass> Children
+        {
+            get
+            {
+                if (_Children == null) _Children = new BackReferenceCollection<TestObjClass>(Context.GetListOf<TestObjClass>(this, "Children"));
                 return _Children;
             }
         }
@@ -144,6 +155,14 @@ namespace Kistl.API.Client.Tests
             base.NotifyPostSave();
             if (OnPostSave_TestObjClass != null) OnPostSave_TestObjClass(this);
         }
+
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+            _TestNames.UnderlyingCollection.ForEach(i => ctx.Attach(i));
+            if (_Children != null) _Children = new BackReferenceCollection<TestObjClass>(_Children.Select(i => ctx.Attach(i)).OfType<TestObjClass>());
+        }
+
 
         public override object Clone()
         {

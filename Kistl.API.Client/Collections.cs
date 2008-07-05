@@ -66,8 +66,9 @@ namespace Kistl.API.Client
                 foreach (COLLECTIONENTRYTYPE e in collection)
                 {
                     COLLECTIONENTRYTYPE n = new COLLECTIONENTRYTYPE();
-                    if(other.parent.Context != null) other.parent.Context.Attach(n);
                     e.CopyTo(n);
+
+                    if (other.parent.Context != null) other.parent.Context.Attach(n);
                     other.collection.Add(n);
                 }
             }

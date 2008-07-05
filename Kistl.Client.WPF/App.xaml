@@ -9,5 +9,6 @@
     <Application.Resources>
         <converter:IconConverter x:Key="IconConverter" />
         <converter:FormattingConverter x:Key="FormattingConverter" />
+        <converter:GetTypeConverter x:Key="GetTypeConverter" />        
     </Application.Resources>
 </Application>

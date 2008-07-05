@@ -33,7 +33,7 @@ namespace Kistl.API
     /// <summary>
     /// Interface for a Persitance Object.
     /// </summary>
-    public interface IPersistenceObject
+    public interface IPersistenceObject : INotifyPropertyChanged
     {
         /// <summary>
         /// Every Object has at least an ID
@@ -87,7 +87,7 @@ namespace Kistl.API
     /// <summary>
     /// DataObject Interface
     /// </summary>
-    public interface IDataObject : IPersistenceObject, INotifyPropertyChanged, ICloneable
+    public interface IDataObject : IPersistenceObject, ICloneable
     {
         /// <summary>
         /// Not implemented yet.

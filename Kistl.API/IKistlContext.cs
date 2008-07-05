@@ -5,6 +5,71 @@ using System.Text;
 
 namespace Kistl.API
 {
+    public class KistlContextDisposedExeption : Exception
+    {
+        public KistlContextDisposedExeption()
+            : base("Context has been disposed. Reusing is not allowed.")
+        {
+        }
+    }
+
+    public interface IKistlContextDebugger : IDisposable
+    {
+        void Created(IKistlContext ctx);
+        void Disposed(IKistlContext ctx);
+        void Changed(IKistlContext ctx, IList<IPersistenceObject> objects);
+    }
+
+    public static class KistlContextDebugger
+    {
+        private static IKistlContextDebugger _Current;
+
+        public static void SetDebugger(IKistlContextDebugger debugger)
+        {
+            lock (typeof(KistlContextDebugger))
+            {
+                if (_Current != null)
+                {
+                    _Current.Dispose();
+                }
+                _Current = debugger;
+            }
+        }
+
+        public static void Created(IKistlContext ctx)
+        {
+            lock (typeof(KistlContextDebugger))
+            {
+                if (_Current != null)
+                {
+                    _Current.Created(ctx);
+                }
+            }
+        }
+
+        public static void Disposed(IKistlContext ctx)
+        {
+            lock (typeof(KistlContextDebugger))
+            {
+                if (_Current != null)
+                {
+                    _Current.Disposed(ctx);
+                }
+            }
+        }
+
+        public static void Changed(IKistlContext ctx, IList<IPersistenceObject> objects)
+        {
+            lock (typeof(KistlContextDebugger))
+            {
+                if (_Current != null)
+                {
+                    _Current.Changed(ctx, objects);
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Interface for a LinqToNNN Context.
     /// </summary>

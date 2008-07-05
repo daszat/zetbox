@@ -303,6 +303,72 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
+        public void Attach_IDataObject_WithList_Add()
+        {
+            TestObjClass obj = new TestObjClass() { ID = 1 };
+            obj.TestNames.Add("Arthur");
+            obj.TestNames.Add("David");
+            obj.TestNames.Add("Susi");
+            ctx.Attach(obj);
+
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
+        }
+
+        [Test]
+        public void Attach_IDataObject_WithList_Insert()
+        {
+            TestObjClass obj = new TestObjClass() { ID = 1 };
+            obj.TestNames.Insert(0, "Arthur");
+            obj.TestNames.Insert(1, "David");
+            obj.TestNames.Insert(2, "Susi");
+            ctx.Attach(obj);
+
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
+        }
+
+        [Test]
+        public void Attached_IDataObject_WithList_Add()
+        {
+            TestObjClass obj = new TestObjClass() { ID = 1 };
+            obj.TestNames.Add("Arthur");
+            obj.TestNames.Add("David");
+            ctx.Attach(obj);
+
+            obj.TestNames.Add("Susi");
+
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
+        }
+
+        [Test]
+        public void Attached_IDataObject_WithList_Insert()
+        {
+            TestObjClass obj = new TestObjClass() { ID = 1 };
+            obj.TestNames.Insert(0, "Arthur");
+            obj.TestNames.Insert(1, "David");
+            ctx.Attach(obj);
+            obj.TestNames.Insert(2, "Susi");
+
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
+            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
+        }
+
+
+        [Test]
         public void Detach()
         {
             TestObjClass obj = new TestObjClass() { ID = 1 };

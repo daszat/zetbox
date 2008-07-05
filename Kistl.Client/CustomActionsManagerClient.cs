@@ -132,7 +132,7 @@ namespace Kistl.Client
 
                         if (warnings.Length > 0)
                         {
-                            //TODO: System.Windows.MessageBox.Show(warnings.ToString());
+                            Manager.Renderer.ShowMessage(warnings.ToString());
                         }
                     }
                 }

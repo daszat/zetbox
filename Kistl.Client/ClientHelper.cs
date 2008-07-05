@@ -39,8 +39,12 @@ namespace Kistl.Client
             }
         }
 
+        // TODO: Das muss in "statische" Objekte, oder auch Imutable Objects genannt, umgewandelt werden.
         private static Dictionary<Type, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
         private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
+
+        // TODO: Arthur: Der Context da ist mir ein Dorn im Auge.
+        private static IKistlContext _fetchContext = KistlContext.GetContext();
 
         public static void CleanCaches()
         {
@@ -48,6 +52,11 @@ namespace Kistl.Client
             {
                 _ObjectClasses = null;
                 _Modules = null;
+                if (_fetchContext != null)
+                {
+                    _fetchContext.Dispose();
+                }
+                _fetchContext = KistlContext.GetContext();
             }
         }
 
@@ -61,11 +70,8 @@ namespace Kistl.Client
                     using (TraceClient.TraceHelper.TraceMethodCall("Getting Object Classes"))
                     {
                         // Prefetch Modules
-                        using (IKistlContext ctx = KistlContext.GetContext())
-                        {
-                            _ObjectClasses = ctx.GetQuery<Kistl.App.Base.ObjectClass>()
-                                .ToDictionary(o => o.GetDataCLRType());
-                        }
+                        _ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
+                            .ToDictionary(o => o.GetDataCLRType());
                     }
                 }
             }
@@ -88,10 +94,7 @@ namespace Kistl.Client
                 {
                     using (TraceClient.TraceHelper.TraceMethodCall("Getting Modules"))
                     {
-                        using (IKistlContext ctx = KistlContext.GetContext())
-                        {
-                            _Modules = ctx.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
-                        }
+                        _Modules = _fetchContext.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
                     }
                 }
             }

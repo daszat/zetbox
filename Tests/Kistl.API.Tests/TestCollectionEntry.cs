@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.API;
+using System.ComponentModel;
 
 namespace Kistl.API.Tests
 {
@@ -51,6 +52,8 @@ namespace Kistl.API.Tests
             BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary(TestName, sw);
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string property)
         {

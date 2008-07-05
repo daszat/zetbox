@@ -20,6 +20,18 @@ namespace Kistl.API.Client.Tests
 
             test.SetUp();
             test.GetObject();
+
+            test.SetUp();
+            test.Attach_IDataObject_WithList_Add();
+
+            test.SetUp();
+            test.Attach_IDataObject_WithList_Insert();
+
+            test.SetUp();
+            test.Attached_IDataObject_WithList_Add();
+
+            test.SetUp();
+            test.Attached_IDataObject_WithList_Insert();
         }
     }
 }
