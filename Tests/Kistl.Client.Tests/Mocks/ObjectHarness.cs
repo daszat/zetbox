@@ -27,18 +27,6 @@ namespace Kistl.Client.Mocks
             Mockery = new Mockery();
             MockContext = Mockery.NewMock<IKistlContext>("MockContext");
             TestObject.GlobalContext = MockContext;
-            /*
-            Stub.On(MockContext).
-                Method("Find").
-                With(TestObject.ObjectClass.ID).
-                Will(Return.Value(TestObject.ObjectClass));
-
-            Stub.On(MockContext).
-                Method("Find").
-                With(TestObject.Module.ID).
-                Will(Return.Value(TestObject.Module));
-            */
-            // Instance = new TestObject() { ID = 1 };
             Instance = CreateObject();
         }
 
@@ -65,19 +53,30 @@ namespace Kistl.Client.Mocks
         {
         }
 
+        private void RegisterObject(IDataObject obj)
+        {
+            Stub.On(MockContext).
+                Method("Find").
+                With(obj.ID).
+                Will(Return.Value(obj));
+            obj.AttachToContext(TestObject.GlobalContext);
+        }
         public override void SetUp()
         {
             base.SetUp();
 
-            Stub.On(MockContext).
-                Method("Find").
-                With(TestObject.ObjectClass.ID).
-                Will(Return.Value(TestObject.ObjectClass));
+            RegisterObject(TestObject.ObjectClass);
 
-            Stub.On(MockContext).
-                Method("Find").
-                With(TestObject.Module.ID).
-                Will(Return.Value(TestObject.Module));
+            RegisterObject(TestObject.ObjectReferencePropertyClass);
+
+            RegisterObject(TestObject.Module);
+
+            RegisterObject(TestObject.KistlAppBaseModule);
+
+            RegisterObject(TestObject.TestObjectReferenceDescriptor);
+
+            RegisterObject(TestObject.TestObjectListDescriptor);
+
         }
 
         private int _TestObjectID = 100;

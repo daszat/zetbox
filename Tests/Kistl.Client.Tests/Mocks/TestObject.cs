@@ -11,6 +11,9 @@ namespace Kistl.Client.Mocks
 {
     public class TestObject : System.Windows.DependencyObject, IDataObject, ICloneable
     {
+        // Due to limitations in NMock, IDs have to be globally unique at the moment
+        // TestObject mocks count IDs up starting from 100, so count down from 99 here
+        private static int MaxID = 99;
 
         public TestObject()
         {
@@ -20,38 +23,78 @@ namespace Kistl.Client.Mocks
             TestObjectList = new List<TestObject>();
 
             TestObjectListDescriptor.AttachToContext(GlobalContext);
+            TestObjectListDescriptor.OnGetDataType_BaseProperty += new BaseProperty.GetDataType_Handler<BaseProperty>(OnGetDataType_Mock);
             TestObjectReferenceDescriptor.AttachToContext(GlobalContext);
+            TestObjectReferenceDescriptor.OnGetDataType_BaseProperty += new BaseProperty.GetDataType_Handler<BaseProperty>(OnGetDataType_Mock);
             TestBackReferenceDescriptor.AttachToContext(GlobalContext);
+            TestBackReferenceDescriptor.OnGetDataType_BaseProperty += new BaseProperty.GetDataType_Handler<BaseProperty>(OnGetDataType_Mock);
+        }
+
+        private static void OnGetDataType_Mock(BaseProperty obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.GetType().FullName;
         }
 
         public static IKistlContext GlobalContext { get; set; }
 
-        public static ObjectClass ObjectClass
+        private static Dictionary<string, Module> _moduleMocks = new Dictionary<string, Module>();
+        private static Module MockModule(string modulename)
         {
-            get
+            if (_moduleMocks.ContainsKey(modulename))
+                return _moduleMocks[modulename];
+
+            Module mo = new Module()
             {
-                var oc = new ObjectClass()
+                ID = MaxID--,
+                Namespace = modulename,
+            };
+            mo.AttachToContext(GlobalContext);
+            _moduleMocks[modulename] = mo;
+            return mo;
+        }
+        private static Dictionary<string, ObjectClass> _objectClassMocks = new Dictionary<string, ObjectClass>();
+
+        private static ObjectClass MockObjectClass(string modulename, string classname)
+        {
+            string fullname = modulename + "." + classname;
+
+            ObjectClass oc;
+            if (_objectClassMocks.ContainsKey(fullname))
+            {
+                oc = _objectClassMocks[fullname];
+            }
+            else
+            {
+                oc = new ObjectClass()
                 {
-                    ID = 99,
-                    ClassName = "TestObject",
-                    Module = TestObject.Module
+                    ID = MaxID--,
+                    ClassName = classname,
+                    Module = MockModule(modulename)
                 };
                 oc.AttachToContext(GlobalContext);
-                return oc;
+                _objectClassMocks[fullname] = oc;
             }
+            return oc;
         }
+
+        public static ObjectClass ObjectReferencePropertyClass
+        {
+            get { return MockObjectClass("Kistl.App.Base", "ObjectReferenceProperty"); }
+        }
+
+        public static ObjectClass ObjectClass
+        {
+            get { return MockObjectClass("Kistl.Client.Mocks", "TestObject"); }
+        }
+
         public static Module Module
         {
-            get
-            {
-                var mod = new Module()
-                {
-                    ID = 88,
-                    Namespace = "Kistl.Client.Mocks"
-                };
-                mod.AttachToContext(GlobalContext);
-                return mod;
-            }
+            get { return MockModule("Kistl.Client.Mocks"); }
+        }
+
+        public static Module KistlAppBaseModule
+        {
+            get { return MockModule("Kistl.App.Base"); }
         }
 
         #region BackReference Properties
@@ -242,10 +285,13 @@ namespace Kistl.Client.Mocks
             System.Windows.DependencyProperty.Register("TestObjectReference", typeof(IDataObject), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static ObjectReferenceProperty TestObjectReferenceDescriptor
-            = new MockObjectReferenceProperty()
+            = new ObjectReferenceProperty()
             {
+                ID = MaxID--,
                 PropertyName = "TestObjectReference",
                 ReferenceObjectClass = TestObject.ObjectClass,
+                Module = TestObject.Module,
+                ObjectClass = TestObject.ObjectReferencePropertyClass,
                 IsNullable = true
             };
 
@@ -275,10 +321,13 @@ namespace Kistl.Client.Mocks
                 typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static ObjectReferenceProperty TestObjectListDescriptor
-            = new MockObjectReferenceProperty()
+            = new ObjectReferenceProperty()
             {
+                ID = MaxID--,
                 PropertyName = "TestObjectList",
                 ReferenceObjectClass = TestObject.ObjectClass,
+                Module = TestObject.Module,
+                ObjectClass = TestObject.ObjectReferencePropertyClass,
                 IsNullable = true,
                 IsList = true,
             };
@@ -309,9 +358,10 @@ namespace Kistl.Client.Mocks
                 typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static BackReferenceProperty TestBackReferenceDescriptor
-            = new MockBackReferenceProperty()
+            = new BackReferenceProperty()
             {
                 PropertyName = "TestBackReference",
+                ReferenceProperty = TestObjectReferenceDescriptor
             };
 
         public readonly static Visual TestBackReferenceVisual
