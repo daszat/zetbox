@@ -48,7 +48,12 @@ namespace Kistl.GUI.Renderer.WPF
             OnUserAddRequest();
         }
 
-        #region IReferenceControl<IList<Kistl.API.IDataObject>> Members
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            OnDeleteSelection();
+        }
+
+        #region IReferenceListControl Members
 
         public Type ObjectType
         {
@@ -71,7 +76,6 @@ namespace Kistl.GUI.Renderer.WPF
             DependencyProperty.Register("ItemsSource", typeof(IList<Kistl.API.IDataObject>), typeof(ObjectListControl), new PropertyMetadata(null));
 
         public event EventHandler UserAddRequest;
-        public event System.Collections.Specialized.NotifyCollectionChangedEventHandler UserChangedListEvent;
 
         #endregion
 
@@ -152,11 +156,24 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
-        private void OnUserAddRequest()
+        protected virtual void OnUserAddRequest()
         {
             if (UserAddRequest != null)
             {
                 UserAddRequest(this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void OnDeleteSelection()
+        {
+            // Changing the Value will change 'lst.SelectedItems' because currently (2008-07-07)
+            // the Presenter just re-sets the Items collection. The ToList gives us a detached 
+            // copy to work with, therefore protecting us from these changes while iterating over 
+            // the selected items.
+            IList<Kistl.API.IDataObject> selection = lst.SelectedItems.Cast<Kistl.API.IDataObject>().ToList();
+            foreach (object o in selection)
+            {
+                Value.Remove((Kistl.API.IDataObject)o);
             }
         }
 

@@ -50,13 +50,17 @@ namespace Kistl.Client
 
         public static Type GetDataCLRType(this DataType type)
         {
-            return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Client", true);
+            // TODO: remove this bad test-hack
+            string fullname = type.Module.Namespace + "." + type.ClassName;
+            string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects.Client";
+            return Type.GetType(fullname + ", " + assembly, true);
         }
 
         // TODO: actually, getDataType should return a System.Type Object, making this obsolete
         public static Type GetDataCLRType(this BaseProperty p)
         {
-            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Client", true);
+            string debug = p.GetDataType() +", Kistl.Objects.Client";
+            return Type.GetType(debug, true);
         }
     }
 }

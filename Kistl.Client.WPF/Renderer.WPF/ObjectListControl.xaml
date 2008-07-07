@@ -15,7 +15,7 @@
         <DockPanel>
             <ToolBar DockPanel.Dock="Top">
                 <Button Name="btnAdd" Click="btnAdd_Click">Add ...</Button>
-                <Button Name="btnRefresh">Refresh</Button>
+                <Button Name="btnRemove" Click="btnRemove_Click">Remove</Button>
             </ToolBar>
             <ListView
                 x:Name="lst"

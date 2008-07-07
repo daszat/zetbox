@@ -490,7 +490,8 @@ namespace Kistl.GUI
 
         private void Control_UserChangedListEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
-            Control.IsValidValue = ValidateItems(args.NewItems);
+            if (args.NewItems != null)
+                Control.IsValidValue = ValidateItems(args.NewItems);
 
             if (Control.IsValidValue)
             {

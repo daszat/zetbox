@@ -73,6 +73,8 @@ namespace Kistl.GUI
     /// <summary>
     /// a control that displays a list of references to IDataObjects.
     /// </summary>
+    /// 
+    /// Subscribe to the INotifyCollectionChangedEvent of the Value to receive updates.
     /// <typeparam name="TYPE"></typeparam>
     public interface IReferenceListControl : IValueControl<ObservableCollection<IDataObject>>
     {
@@ -91,10 +93,11 @@ namespace Kistl.GUI
         /// Highly sophisticated or specialised controls like ASP.NET can avoid firing
         /// this event and implement the appropriate logic themselves.
         /// 
-        /// TODO: IList doesn't implement change events, therefore the presenter will 
+        /// TODO: The Object's IList doesn't implement change events, therefore the presenter will 
         /// just reset the Value. A better implementation would fire fine-grained 
         /// add/delete Events instead.
         event EventHandler UserAddRequest;
+
     }
 
     /// <summary>

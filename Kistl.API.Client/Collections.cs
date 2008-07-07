@@ -68,7 +68,8 @@ namespace Kistl.API.Client
                     COLLECTIONENTRYTYPE n = new COLLECTIONENTRYTYPE();
                     e.CopyTo(n);
 
-                    if (other.parent.Context != null) other.parent.Context.Attach(n);
+                    if (other.parent.Context != null) 
+                        n = (COLLECTIONENTRYTYPE)other.parent.Context.Attach(n);
                     other.collection.Add(n);
                 }
             }
@@ -161,7 +162,8 @@ namespace Kistl.API.Client
         public void Insert(int index, T item)
         {
             COLLECTIONENTRYTYPE i = new COLLECTIONENTRYTYPE() { Value = item, Parent = this.parent };
-            if (parent.Context != null) parent.Context.Attach(i);
+            if (parent.Context != null)
+                i = (COLLECTIONENTRYTYPE)parent.Context.Attach(i);
             collection.Insert(index, i);
         }
 

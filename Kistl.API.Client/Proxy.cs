@@ -129,7 +129,8 @@ namespace Kistl.API.Client
             public Kistl.API.IDataObject ObjectFromXml(IKistlContext ctx, string xml)
             {
                 Kistl.API.IDataObject obj = xml.FromXmlString<XMLOBJECT>().Object as Kistl.API.IDataObject;
-                if(ctx != null) ctx.Attach(obj);
+                if(ctx != null)
+                    obj = (Kistl.API.IDataObject)ctx.Attach(obj);
                 return obj;
             }
 
