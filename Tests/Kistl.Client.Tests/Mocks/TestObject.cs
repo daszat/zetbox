@@ -23,16 +23,20 @@ namespace Kistl.Client.Mocks
             TestObjectList = new List<TestObject>();
 
             TestObjectListDescriptor.AttachToContext(GlobalContext);
-            TestObjectListDescriptor.OnGetDataType_BaseProperty += new BaseProperty.GetDataType_Handler<BaseProperty>(OnGetDataType_Mock);
+            TestObjectListDescriptor.OnGetDataType_ObjectReferenceProperty += new BaseProperty.GetDataType_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
             TestObjectReferenceDescriptor.AttachToContext(GlobalContext);
-            TestObjectReferenceDescriptor.OnGetDataType_BaseProperty += new BaseProperty.GetDataType_Handler<BaseProperty>(OnGetDataType_Mock);
+            TestObjectReferenceDescriptor.OnGetDataType_ObjectReferenceProperty += new BaseProperty.GetDataType_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
             TestBackReferenceDescriptor.AttachToContext(GlobalContext);
-            TestBackReferenceDescriptor.OnGetDataType_BaseProperty += new BaseProperty.GetDataType_Handler<BaseProperty>(OnGetDataType_Mock);
+            TestBackReferenceDescriptor.OnGetDataType_BackReferenceProperty += new BaseProperty.GetDataType_Handler<BackReferenceProperty>(OnGetDataType_MockBackReference);
         }
 
-        private static void OnGetDataType_Mock(BaseProperty obj, MethodReturnEventArgs<string> e)
+        private static void OnGetDataType_Mock(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.GetType().FullName;
+            e.Result = obj.ReferenceObjectClass.Module.Namespace + "." + obj.ReferenceObjectClass.ClassName;
+        }
+
+        private static void OnGetDataType_MockBackReference(BackReferenceProperty obj, MethodReturnEventArgs<string> e)
+        {
         }
 
         public static IKistlContext GlobalContext { get; set; }
@@ -274,15 +278,15 @@ namespace Kistl.Client.Mocks
 
         #region ObjectReference Properties
 
-        public IDataObject TestObjectReference
+        public TestObject TestObjectReference
         {
-            get { return (IDataObject)GetValue(TestObjectReferenceProperty); }
+            get { return (TestObject)GetValue(TestObjectReferenceProperty); }
             set { SetValue(TestObjectReferenceProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for TestObjectReference.  This enables animation, styling, binding, etc...
         public static readonly System.Windows.DependencyProperty TestObjectReferenceProperty =
-            System.Windows.DependencyProperty.Register("TestObjectReference", typeof(IDataObject), typeof(TestObject), new System.Windows.PropertyMetadata(null));
+            System.Windows.DependencyProperty.Register("TestObjectReference", typeof(TestObject), typeof(TestObject), new System.Windows.PropertyMetadata(null));
 
         public readonly static ObjectReferenceProperty TestObjectReferenceDescriptor
             = new ObjectReferenceProperty()
@@ -292,7 +296,8 @@ namespace Kistl.Client.Mocks
                 ReferenceObjectClass = TestObject.ObjectClass,
                 Module = TestObject.Module,
                 ObjectClass = TestObject.ObjectReferencePropertyClass,
-                IsNullable = true
+                IsNullable = true,
+                IsList = false
             };
 
         public readonly static Visual TestObjectReferenceVisual
@@ -361,7 +366,7 @@ namespace Kistl.Client.Mocks
             = new BackReferenceProperty()
             {
                 PropertyName = "TestBackReference",
-                ReferenceProperty = TestObjectReferenceDescriptor
+                ReferenceProperty = TestObjectReferenceDescriptor,
             };
 
         public readonly static Visual TestBackReferenceVisual

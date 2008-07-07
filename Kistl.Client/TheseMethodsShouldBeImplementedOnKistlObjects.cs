@@ -59,8 +59,9 @@ namespace Kistl.Client
         // TODO: actually, getDataType should return a System.Type Object, making this obsolete
         public static Type GetDataCLRType(this BaseProperty p)
         {
-            string debug = p.GetDataType() +", Kistl.Objects.Client";
-            return Type.GetType(debug, true);
+            string fullname = p.GetDataType();
+            string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects.Client";
+            return Type.GetType(fullname + ", " + assembly, true);
         }
     }
 }

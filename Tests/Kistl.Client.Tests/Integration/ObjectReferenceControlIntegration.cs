@@ -19,7 +19,7 @@ namespace Kistl.GUI.Integration.WPF
 {
     [TestFixture]
     public class ObjectReferenceControlIntegrationTests
-        : ObjectReferencePresenterInfrastructure<IDataObject, ObjectReferenceControl, ObjectReferencePresenter<TestObject>>
+        : ObjectReferencePresenterInfrastructure<TestObject, ObjectReferenceControl, ObjectReferencePresenter<TestObject>>
     {
         public ObjectReferenceControlIntegrationTests()
             : base(
@@ -30,15 +30,15 @@ namespace Kistl.GUI.Integration.WPF
                         TestObject.TestObjectReferenceVisual,
                         Toolkit.WPF)),
                 Toolkit.WPF,
-                IDataObjectValues.TestValues
+                TestObjectValues.TestValues
             )
         {
         }
 
-        protected override IDataObject GetObjectValue() { return Object.TestObjectReference; }
-        protected override void SetObjectValue(IDataObject v) { Object.TestObjectReference = v; }
+        protected override TestObject GetObjectValue() { return Object.TestObjectReference; }
+        protected override void SetObjectValue(TestObject v) { Object.TestObjectReference = v; }
 
-        protected override void UserInput(IDataObject v)
+        protected override void UserInput(TestObject v)
         {
             ((System.Windows.DependencyObject)Widget).SetValue(ObjectReferenceControl.ValueProperty, v);
         }

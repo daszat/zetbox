@@ -106,6 +106,27 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
+    public class GenericPresenterCreationTests : PresenterTests<TestObject, TestObject, TestObjectListControl, ObjectListPresenter<TestObject>>
+    {
+
+        public GenericPresenterCreationTests()
+            : base(
+                new PresenterHarness<TestObject, TestObjectListControl, ObjectListPresenter<TestObject>>(
+                    new TestObjectHarness(),
+                    typeof(ObjectReferenceProperty),
+                    new ControlHarness<TestObjectListControl>(TestObject.TestObjectListVisual, Toolkit.TEST)),
+                TestObjectValues.TestValues)
+        { }
+
+        [Test]
+        public void CreatePresenter()
+        {
+            Assert.IsNotNull(Presenter);
+            Assert.IsAssignableFrom(typeof(ObjectListPresenter<TestObject>), Presenter);
+        }
+    }
+
+    [TestFixture]
     public class VisualTests
     {
 

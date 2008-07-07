@@ -17,9 +17,9 @@ namespace Kistl.Client.Tests
             System.Console.Out.WriteLine(typeof(Kistl.GUI.BackReferencePresenter<>).AssemblyQualifiedName);
             System.Console.Out.WriteLine(typeof(Kistl.GUI.BackReferencePresenter<Kistl.Client.Mocks.TestObject>).AssemblyQualifiedName);
 
-            var test = new Kistl.GUI.Tests.BackReferencePresenterTests();
+            var test = new Kistl.GUI.Tests.GenericPresenterCreationTests();
             test.SetUp();
-            test.HandleValidUserInput();
+            test.CreatePresenter();
 
             //var test2 = new Kistl.GUI.Tests.ObjectListPresenterTests();
             //test2.SetUp();

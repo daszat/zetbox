@@ -7,6 +7,8 @@ using NMock2;
 using NUnit.Framework;
 
 using Kistl.API;
+using Kistl.App.Base;
+using Kistl.GUI.Tests;
 
 namespace Kistl.Client.Mocks
 {
@@ -61,22 +63,28 @@ namespace Kistl.Client.Mocks
                 Will(Return.Value(obj));
             obj.AttachToContext(TestObject.GlobalContext);
         }
+
         public override void SetUp()
         {
             base.SetUp();
 
             RegisterObject(TestObject.ObjectClass);
-
             RegisterObject(TestObject.ObjectReferencePropertyClass);
-
             RegisterObject(TestObject.Module);
-
             RegisterObject(TestObject.KistlAppBaseModule);
-
             RegisterObject(TestObject.TestObjectReferenceDescriptor);
-
             RegisterObject(TestObject.TestObjectListDescriptor);
 
+            IQueryable<TestObject> queryMock = Mockery.NewMock<IQueryable<TestObject>>();
+
+            Stub.On(MockContext).
+                Method("GetQuery").
+                Will(Return.Value(queryMock));
+
+            Stub.On(queryMock).  
+                Method("GetEnumerator").
+                Will(Return.Value(TestObjectValues.TestValues.Valids.ToList<TestObject>().GetEnumerator()));
+            
         }
 
         private int _TestObjectID = 100;

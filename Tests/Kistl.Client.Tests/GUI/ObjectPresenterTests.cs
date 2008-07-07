@@ -119,7 +119,7 @@ namespace Kistl.GUI.Tests
 
     [TestFixture]
     public class ObjectReferencePresenterTests
-        : ObjectReferencePresenterInfrastructure<IDataObject, TestObjectReferenceControl, ObjectReferencePresenter<TestObject>>
+        : ObjectReferencePresenterInfrastructure<TestObject, TestObjectReferenceControl, ObjectReferencePresenter<TestObject>>
     {
         public ObjectReferencePresenterTests()
             : base(
@@ -130,16 +130,31 @@ namespace Kistl.GUI.Tests
                         TestObject.TestObjectReferenceVisual,
                         Toolkit.TEST)),
                 Toolkit.TEST,
-                IDataObjectValues.TestValues
+                TestObjectValues.TestValues
             )
         {
         }
 
-        protected override IDataObject GetObjectValue() { return Object.TestObjectReference; }
-        protected override void SetObjectValue(IDataObject v) { Object.TestObjectReference = v; }
+        protected override TestObject GetObjectValue() { return Object.TestObjectReference; }
+        protected override void SetObjectValue(TestObject v) { Object.TestObjectReference = v; }
 
-        protected override void UserInput(IDataObject v) { Widget.SimulateUserInput(v); }
+        protected override void UserInput(TestObject v) { Widget.SimulateUserInput(v); }
 
+        /// <summary>
+        /// Test whether everything in the Presenter's type is where it belongs
+        /// </summary>
+        [Test]
+        public void TestGenerics()
+        {
+            Type t = Presenter.GetType();
+
+            // ObjectReferencePresenter is a generic ...
+            Assert.That(t.IsGenericType);
+            // .. with exactly one parameter, ...
+            Assert.AreEqual(1, t.GetGenericArguments().Length);
+            // .. the type of the referenced Object
+            Assert.AreEqual(typeof(TestObject), t.GetGenericArguments()[0]);
+        }
     }
 
     public abstract class ObjectReferenceListPresenterInfrastructure<TYPE, CONTROL, PRESENTER>
