@@ -520,6 +520,22 @@ namespace Kistl.GUI
                         throw new NotImplementedException(
                             String.Format("Unknown NotifyCollectionChangedAction: {0}", args.Action));
                 }
+
+#if DEBUG
+                // Check whether the Presenter has synced the two values correctly
+                if (property.Count != Control.Value.Count)
+                {
+                    throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: number of elements mismatch");
+                }
+                for (int i = 0; i < property.Count; i++)
+                {
+                    if (!property[i].Equals(Control.Value[i]))
+                    {
+                        throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: element mismatch");
+                    }
+                }
+#endif
+
             }
         }
 
