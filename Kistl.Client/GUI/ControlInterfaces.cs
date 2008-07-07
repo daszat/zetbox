@@ -79,9 +79,13 @@ namespace Kistl.GUI
     public interface IReferenceListControl : IValueControl<ObservableCollection<IDataObject>>
     {
         /// <summary>
-        /// The Type of the listed objects
+        /// The Type of the displayed Items
         /// </summary>
         Type ObjectType { get; set; }
+
+        /// <summary>
+        /// A List of valid items
+        /// </summary>
         IList<IDataObject> ItemsSource { get; set; }
 
         /// <summary>
