@@ -218,6 +218,8 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._Ort, sr);
             BinarySerializer.FromBinary(out this._Land, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.EMails, sr);
+            // TODO: Bad Hack, deserialize deleted entries
+            BinarySerializer.FromBinaryCollectionEntries(this.EMails, sr);
         }
     }
     

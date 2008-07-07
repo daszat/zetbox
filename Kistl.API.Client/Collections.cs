@@ -46,6 +46,7 @@ namespace Kistl.API.Client
             if (e.ID <= Helper.INVALIDID) return;
             if (deletedCollection.FirstOrDefault<COLLECTIONENTRYTYPE>(i => i.ID == e.ID) == null)
             {
+                e.Parent.Context.Delete(e);
                 deletedCollection.Add(e);
             }
         }
@@ -102,6 +103,7 @@ namespace Kistl.API.Client
         {
             // Do not mark Objects as deleted. Clear is used to initialize a Collection
             collection.Clear();
+            deletedCollection.Clear();
         }
 
         public bool Contains(T item)

@@ -1441,7 +1441,12 @@ namespace Kistl.Server.Generators
                 else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
+                    {
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}.UnderlyingCollection, sw)", p.PropertyName)));
+                        // TODO: Bad Hack, serialize deleted entries
+                        m.Statements.Add(new CodeCommentStatement("TODO: Bad Hack, serialize deleted entries"));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}.DeletedCollection, sw)", p.PropertyName)));
+                    }
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
                 }
@@ -1452,7 +1457,12 @@ namespace Kistl.Server.Generators
                 else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
                 {
                     if (current.clientServer == ClientServerEnum.Client)
+                    {
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}.UnderlyingCollection, sw)", p.PropertyName)));
+                        // TODO: Bad Hack, serialize deleted entries
+                        m.Statements.Add(new CodeCommentStatement("TODO: Bad Hack, serialize deleted entries"));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}.DeletedCollection, sw)", p.PropertyName)));
+                    }
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
                 }
@@ -1480,7 +1490,12 @@ namespace Kistl.Server.Generators
                     if (current.clientServer == ClientServerEnum.Client)
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this._{0}.UnderlyingCollection, sr)", p.PropertyName)));
                     else
+                    {
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
+                        // TODO: Bad Hack, deserialize deleted entries
+                        m.Statements.Add(new CodeCommentStatement("TODO: Bad Hack, deserialize deleted entries"));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
+                    }
                 }
                 /* TODO: Reimplement when Interfaces for DataTypes are implemented to wrap this whole damm shit thing!
                  * else if (p is EnumerationProperty)
@@ -1501,7 +1516,12 @@ namespace Kistl.Server.Generators
                     if (current.clientServer == ClientServerEnum.Client)
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this._{0}.UnderlyingCollection, sr)", p.PropertyName)));
                     else
+                    {
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
+                        // TODO: Bad Hack, deserialize deleted entries
+                        m.Statements.Add(new CodeCommentStatement("TODO: Bad Hack, deserialize deleted entries"));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
+                    }
                 }
                 else if (p is BackReferenceProperty
                     && current.clientServer == ClientServerEnum.Client

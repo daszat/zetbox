@@ -160,6 +160,8 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._TableName, sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
             BinarySerializer.ToBinary(this._ImplementsInterfaces.UnderlyingCollection, sw);
+            // TODO: Bad Hack, serialize deleted entries
+            BinarySerializer.ToBinary(this._ImplementsInterfaces.DeletedCollection, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)

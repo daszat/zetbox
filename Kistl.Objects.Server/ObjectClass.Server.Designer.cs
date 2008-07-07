@@ -176,6 +176,8 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._TableName, sr);
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.ImplementsInterfaces, sr);
+            // TODO: Bad Hack, deserialize deleted entries
+            BinarySerializer.FromBinaryCollectionEntries(this.ImplementsInterfaces, sr);
         }
     }
     

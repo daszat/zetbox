@@ -199,6 +199,8 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToBinary(this._Ort, sw);
             BinarySerializer.ToBinary(this._Land, sw);
             BinarySerializer.ToBinary(this._EMails.UnderlyingCollection, sw);
+            // TODO: Bad Hack, serialize deleted entries
+            BinarySerializer.ToBinary(this._EMails.DeletedCollection, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)

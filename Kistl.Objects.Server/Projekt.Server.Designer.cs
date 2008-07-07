@@ -213,6 +213,8 @@ namespace Kistl.App.Projekte
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Name, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.Mitarbeiter, sr);
+            // TODO: Bad Hack, deserialize deleted entries
+            BinarySerializer.FromBinaryCollectionEntries(this.Mitarbeiter, sr);
             BinarySerializer.FromBinary(out this._AufwandGes, sr);
             BinarySerializer.FromBinary(out this._Kundenname, sr);
         }
