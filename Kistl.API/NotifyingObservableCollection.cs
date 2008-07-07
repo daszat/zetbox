@@ -62,7 +62,7 @@ namespace Kistl.API
         /// <summary>
         /// Notifies the Parent Object that the Collection or one of it items has changed.
         /// </summary>
-        protected void NotifyParent()
+        public void NotifyParent()
         {
             if (_UpdateCounter == 0)
             {

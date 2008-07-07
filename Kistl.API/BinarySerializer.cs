@@ -390,7 +390,7 @@ namespace Kistl.API
                 }
                 else
                 {
-                    val.Add((T)obj);
+                    val.Add(obj);
                 }
             }
         }

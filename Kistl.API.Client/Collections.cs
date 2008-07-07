@@ -46,7 +46,14 @@ namespace Kistl.API.Client
             if (e.ID <= Helper.INVALIDID) return;
             if (deletedCollection.FirstOrDefault<COLLECTIONENTRYTYPE>(i => i.ID == e.ID) == null)
             {
-                e.Parent.Context.Delete(e);
+                if (parent.Context != null)
+                {
+                    parent.Context.Delete(e);
+                }
+                else
+                {
+                    e.ObjectState = DataObjectState.Deleted;
+                }
                 deletedCollection.Add(e);
             }
         }
@@ -63,7 +70,7 @@ namespace Kistl.API.Client
             other.collection.BeginUpdate();
             try
             {
-                other.Clear();
+                other.ResetInternal();
                 foreach (COLLECTIONENTRYTYPE e in collection)
                 {
                     COLLECTIONENTRYTYPE n = new COLLECTIONENTRYTYPE();
@@ -99,11 +106,41 @@ namespace Kistl.API.Client
             collection.Add(i);
         }
 
+        /// <summary>
+        /// TODO: Das macht mich noch nicht glücklich!
+        /// </summary>
         public void Clear()
         {
-            // Do not mark Objects as deleted. Clear is used to initialize a Collection
-            collection.Clear();
-            deletedCollection.Clear();
+            collection.BeginUpdate();
+            try
+            {
+                collection.ForEach(e => AddToDeletedCollection(e));
+                collection.Clear();
+            }
+            finally
+            {
+                collection.EndUpdate();
+                collection.NotifyParent();
+            }
+        }
+
+        private void ResetInternal()
+        {
+            collection.BeginUpdate();
+            try
+            {
+                if (parent.Context != null)
+                {
+                    collection.ForEach(i => parent.Context.Detach(i));
+                    deletedCollection.ForEach(i => parent.Context.Detach(i));
+                }
+                collection.Clear();
+                deletedCollection.Clear();
+            }
+            finally
+            {
+                collection.EndUpdate();
+            }
         }
 
         public bool Contains(T item)
@@ -187,6 +224,47 @@ namespace Kistl.API.Client
             }
         }
 
+        #endregion
+
+        #region Streaming Methods
+        public void ToStream(System.IO.BinaryWriter sw)
+        {
+            foreach (ICollectionEntry obj in collection)
+            {
+                BinarySerializer.ToBinary(true, sw);
+                obj.ToStream(sw);
+            }
+            foreach (ICollectionEntry obj in deletedCollection)
+            {
+                BinarySerializer.ToBinary(true, sw);
+                obj.ToStream(sw);
+            }
+
+            BinarySerializer.ToBinary(false, sw);
+        }
+
+        public void FromStream(System.IO.BinaryReader sr)
+        {
+            collection.BeginUpdate();
+            try
+            {
+                ResetInternal();
+
+                while (sr.ReadBoolean())
+                {
+                    COLLECTIONENTRYTYPE obj = new COLLECTIONENTRYTYPE();
+                    obj.FromStream(sr);
+                    collection.Add(obj);
+                }
+
+                // deletedCollection is not needed to be deserialized
+                // Server wouldn't send deleted Objects
+            }
+            finally
+            {
+                collection.EndUpdate();
+            }
+        }
         #endregion
 
     }

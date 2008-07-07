@@ -189,8 +189,6 @@ namespace Kistl.App.Zeiterfassung
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.Mitarbeiter, sr);
-            // TODO: Bad Hack, deserialize deleted entries
-            BinarySerializer.FromBinaryCollectionEntries(this.Mitarbeiter, sr);
             BinarySerializer.FromBinary(out this._MaxStunden, sr);
             BinarySerializer.FromBinary(out this._AktuelleStunden, sr);
         }

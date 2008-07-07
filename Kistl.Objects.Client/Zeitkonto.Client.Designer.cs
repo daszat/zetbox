@@ -173,9 +173,7 @@ namespace Kistl.App.Zeiterfassung
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Kontoname, sw);
-            BinarySerializer.ToBinary(this._Mitarbeiter.UnderlyingCollection, sw);
-            // TODO: Bad Hack, serialize deleted entries
-            BinarySerializer.ToBinary(this._Mitarbeiter.DeletedCollection, sw);
+            this._Mitarbeiter.ToStream(sw);
             BinarySerializer.ToBinary(this._MaxStunden, sw);
             BinarySerializer.ToBinary(this._AktuelleStunden, sw);
         }
@@ -184,7 +182,7 @@ namespace Kistl.App.Zeiterfassung
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
-            BinarySerializer.FromBinaryCollectionEntries(this._Mitarbeiter.UnderlyingCollection, sr);
+            this._Mitarbeiter.FromStream(sr);
             BinarySerializer.FromBinary(out this._MaxStunden, sr);
             BinarySerializer.FromBinary(out this._AktuelleStunden, sr);
         }

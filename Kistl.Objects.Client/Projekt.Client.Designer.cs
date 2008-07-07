@@ -199,9 +199,7 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Name, sw);
-            BinarySerializer.ToBinary(this._Mitarbeiter.UnderlyingCollection, sw);
-            // TODO: Bad Hack, serialize deleted entries
-            BinarySerializer.ToBinary(this._Mitarbeiter.DeletedCollection, sw);
+            this._Mitarbeiter.ToStream(sw);
             BinarySerializer.ToBinary(this._AufwandGes, sw);
             BinarySerializer.ToBinary(this._Kundenname, sw);
         }
@@ -210,7 +208,7 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Name, sr);
-            BinarySerializer.FromBinaryCollectionEntries(this._Mitarbeiter.UnderlyingCollection, sr);
+            this._Mitarbeiter.FromStream(sr);
             BinarySerializer.FromBinary(out this._AufwandGes, sr);
             BinarySerializer.FromBinary(out this._Kundenname, sr);
         }
