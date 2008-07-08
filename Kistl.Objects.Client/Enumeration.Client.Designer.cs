@@ -38,7 +38,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if(_EnumerationEntries == null) _EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>(Context.GetListOf<Kistl.App.Base.EnumerationEntry>(this, "EnumerationEntries"));
+                if(_EnumerationEntries == null) _EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>("Enumeration", this, Context.GetListOf<Kistl.App.Base.EnumerationEntry>(this, "EnumerationEntries"));
                 return _EnumerationEntries;
             }
         }
@@ -88,7 +88,7 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_EnumerationEntries != null) _EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>(_EnumerationEntries.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.EnumerationEntry>());
+            if(_EnumerationEntries != null) _EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>("Enumeration", this, _EnumerationEntries.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.EnumerationEntry>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -99,7 +99,7 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            this._EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>(); BinarySerializer.FromBinary(this._EnumerationEntries, sr);
+            this._EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>("Enumeration", this); BinarySerializer.FromBinary(this._EnumerationEntries, sr);
         }
     }
 }

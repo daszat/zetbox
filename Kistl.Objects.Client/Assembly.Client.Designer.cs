@@ -60,7 +60,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Module = value.ID;
+                fk_Module = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

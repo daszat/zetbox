@@ -64,7 +64,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                fk_Zeitkonto = value.ID;
+                fk_Zeitkonto = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -94,7 +94,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                fk_Mitarbeiter = value.ID;
+                fk_Mitarbeiter = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -152,7 +152,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                fk_TaetigkeitsArt = value.ID;
+                fk_TaetigkeitsArt = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

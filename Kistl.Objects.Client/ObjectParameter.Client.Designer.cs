@@ -42,7 +42,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_DataType = value.ID;
+                fk_DataType = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

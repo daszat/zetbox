@@ -64,7 +64,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                fk_Projekt = value.ID;
+                fk_Projekt = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -94,7 +94,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                fk_Mitarbeiter = value.ID;
+                fk_Mitarbeiter = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -138,7 +138,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                fk_Kunde = value.ID;
+                fk_Kunde = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

@@ -44,7 +44,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_ReferenceProperty = value.ID;
+                fk_ReferenceProperty = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

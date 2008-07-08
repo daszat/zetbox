@@ -88,7 +88,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                fk_ObjectProp = value.ID;
+                fk_ObjectProp = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

@@ -257,6 +257,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                // TODO: Damit hab ich noch ein Problem. Wenn die Property not nullable ist, dann sollte das eigentlich nicht möglich sein.
                 _fk_Parent = value.ID;
             }
         }

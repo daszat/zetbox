@@ -60,7 +60,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Enumeration = value.ID;
+                fk_Enumeration = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

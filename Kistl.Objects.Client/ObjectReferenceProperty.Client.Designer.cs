@@ -42,7 +42,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_ReferenceObjectClass = value.ID;
+                fk_ReferenceObjectClass = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

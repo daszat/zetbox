@@ -64,7 +64,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                fk_Projekt = value.ID;
+                fk_Projekt = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

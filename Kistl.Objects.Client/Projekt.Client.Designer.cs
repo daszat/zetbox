@@ -79,7 +79,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if(_Tasks == null) _Tasks = new BackReferenceCollection<Kistl.App.Projekte.Task>(Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks"));
+                if(_Tasks == null) _Tasks = new BackReferenceCollection<Kistl.App.Projekte.Task>("Projekt", this, Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks"));
                 return _Tasks;
             }
         }
@@ -125,7 +125,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if(_Kostentraeger == null) _Kostentraeger = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>(Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger"));
+                if(_Kostentraeger == null) _Kostentraeger = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>("Projekt", this, Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger"));
                 return _Kostentraeger;
             }
         }
@@ -135,7 +135,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if(_Auftraege == null) _Auftraege = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>(Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege"));
+                if(_Auftraege == null) _Auftraege = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>("Projekt", this, Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege"));
                 return _Auftraege;
             }
         }
@@ -190,9 +190,9 @@ namespace Kistl.App.Projekte
         {
             base.AttachToContext(ctx);
             _Mitarbeiter.UnderlyingCollection.ForEach(i => ctx.Attach(i));
-            if(_Tasks != null) _Tasks = new BackReferenceCollection<Kistl.App.Projekte.Task>(_Tasks.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Task>());
-            if(_Kostentraeger != null) _Kostentraeger = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>(_Kostentraeger.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Kostentraeger>());
-            if(_Auftraege != null) _Auftraege = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>(_Auftraege.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Auftrag>());
+            if(_Tasks != null) _Tasks = new BackReferenceCollection<Kistl.App.Projekte.Task>("Projekt", this, _Tasks.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Task>());
+            if(_Kostentraeger != null) _Kostentraeger = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>("Projekt", this, _Kostentraeger.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Kostentraeger>());
+            if(_Auftraege != null) _Auftraege = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>("Projekt", this, _Auftraege.Select(i => ctx.Attach(i)).OfType<Kistl.App.Projekte.Auftrag>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

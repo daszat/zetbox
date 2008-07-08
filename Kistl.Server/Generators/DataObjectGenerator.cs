@@ -818,6 +818,7 @@ namespace Kistl.Server.Generators
                 parent.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName)));
+                parent.code_property.SetStatements.Add(new CodeCommentStatement(@"TODO: Damit hab ich noch ein Problem. Wenn die Property not nullable ist, dann sollte das eigentlich nicht möglich sein."));
                 parent.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Parent = value.ID"));
             }
 
@@ -917,7 +918,7 @@ namespace Kistl.Server.Generators
 
                 current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"fk_{0} = value.ID", current.property.PropertyName)));
+                        string.Format(@"fk_{0} = value != null ? value.ID : Helper.INVALIDID", current.property.PropertyName)));
             }
 
             CurrentObjectClass serializer = (CurrentObjectClass)current.Clone();
@@ -1102,8 +1103,8 @@ namespace Kistl.Server.Generators
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(
-                        @"if(_{0} == null) _{0} = new BackReferenceCollection<{1}>(Context.GetListOf<{1}>(this, ""{0}""));
-                return _{0}", current.property.PropertyName, childType.NameDataObject)));
+                        @"if(_{0} == null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, Context.GetListOf<{1}>(this, ""{0}""));
+                return _{0}", current.property.PropertyName, childType.NameDataObject, ((BackReferenceProperty)current.property).ReferenceProperty.PropertyName)));
 
                 CodeMemberField f = new CodeMemberField(new CodeTypeReference("BackReferenceCollection", new CodeTypeReference(childType.NameDataObject)),
                     "_" + current.property.PropertyName);
@@ -1284,7 +1285,7 @@ namespace Kistl.Server.Generators
                 foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
                 {
                     // Create a new List after Attach - Object Reference will change, if Object is alredy in tha Context
-                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(_{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetDataType())));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, _{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetDataType(), p.ReferenceProperty.PropertyName)));
                 }
             }
             else
@@ -1507,7 +1508,10 @@ namespace Kistl.Server.Generators
                     && current.clientServer == ClientServerEnum.Client
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("this._{0} = new BackReferenceCollection<{1}>(); BinarySerializer.FromBinary(this._{0}, sr)", p.PropertyName, p.GetDataType())));
+                    m.Statements.Add(new CodeSnippetExpression(
+                        string.Format("this._{0} = new BackReferenceCollection<{1}>(\"{2}\", this); BinarySerializer.FromBinary(this._{0}, sr)", 
+                            p.PropertyName, p.GetDataType(), 
+                            ((BackReferenceProperty)p).ReferenceProperty.PropertyName)));
                 }
             }
         }

@@ -89,7 +89,7 @@ namespace Kistl.API.Client.Tests
         {
             get
             {
-                if (_Children == null) _Children = new BackReferenceCollection<TestObjClass>(Context.GetListOf<TestObjClass>(this, "Children"));
+                if (_Children == null) _Children = new BackReferenceCollection<TestObjClass>("Parent", this, Context.GetListOf<TestObjClass>(this, "Children"));
                 return _Children;
             }
         }
@@ -160,7 +160,7 @@ namespace Kistl.API.Client.Tests
         {
             base.AttachToContext(ctx);
             _TestNames.UnderlyingCollection.ForEach(i => ctx.Attach(i));
-            if (_Children != null) _Children = new BackReferenceCollection<TestObjClass>(_Children.Select(i => ctx.Attach(i)).OfType<TestObjClass>());
+            if (_Children != null) _Children = new BackReferenceCollection<TestObjClass>("Parent", this, _Children.Select(i => ctx.Attach(i)).OfType<TestObjClass>());
         }
 
 

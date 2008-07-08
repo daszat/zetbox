@@ -64,7 +64,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_ObjectClass = value.ID;
+                fk_ObjectClass = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -108,7 +108,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Module = value.ID;
+                fk_Module = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -134,7 +134,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if(_MethodIvokations == null) _MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations"));
+                if(_MethodIvokations == null) _MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>("Module", this, Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations"));
                 return _MethodIvokations;
             }
         }
@@ -144,7 +144,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if(_Parameter == null) _Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>(Context.GetListOf<Kistl.App.Base.BaseParameter>(this, "Parameter"));
+                if(_Parameter == null) _Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>("Method", this, Context.GetListOf<Kistl.App.Base.BaseParameter>(this, "Parameter"));
                 return _Parameter;
             }
         }
@@ -197,8 +197,8 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_MethodIvokations != null) _MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(_MethodIvokations.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.MethodInvocation>());
-            if(_Parameter != null) _Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>(_Parameter.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.BaseParameter>());
+            if(_MethodIvokations != null) _MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>("Module", this, _MethodIvokations.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.MethodInvocation>());
+            if(_Parameter != null) _Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>("Method", this, _Parameter.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.BaseParameter>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -215,7 +215,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_ObjectClass, sr);
             BinarySerializer.FromBinary(out this._MethodName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
-            this._Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>(); BinarySerializer.FromBinary(this._Parameter, sr);
+            this._Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>("Method", this); BinarySerializer.FromBinary(this._Parameter, sr);
         }
     }
 }

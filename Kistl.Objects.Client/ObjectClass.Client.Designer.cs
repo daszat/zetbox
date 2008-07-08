@@ -63,7 +63,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_BaseObjectClass = value.ID;
+                fk_BaseObjectClass = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -89,7 +89,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if(_SubClasses == null) _SubClasses = new BackReferenceCollection<Kistl.App.Base.ObjectClass>(Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses"));
+                if(_SubClasses == null) _SubClasses = new BackReferenceCollection<Kistl.App.Base.ObjectClass>("BaseObjectClass", this, Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses"));
                 return _SubClasses;
             }
         }
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
         {
             base.AttachToContext(ctx);
             _ImplementsInterfaces.UnderlyingCollection.ForEach(i => ctx.Attach(i));
-            if(_SubClasses != null) _SubClasses = new BackReferenceCollection<Kistl.App.Base.ObjectClass>(_SubClasses.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.ObjectClass>());
+            if(_SubClasses != null) _SubClasses = new BackReferenceCollection<Kistl.App.Base.ObjectClass>("BaseObjectClass", this, _SubClasses.Select(i => ctx.Attach(i)).OfType<Kistl.App.Base.ObjectClass>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

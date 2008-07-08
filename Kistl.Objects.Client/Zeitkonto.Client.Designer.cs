@@ -75,7 +75,7 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                if(_Taetigkeiten == null) _Taetigkeiten = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>(Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten"));
+                if(_Taetigkeiten == null) _Taetigkeiten = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>("Zeitkonto", this, Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten"));
                 return _Taetigkeiten;
             }
         }
@@ -166,7 +166,7 @@ namespace Kistl.App.Zeiterfassung
         {
             base.AttachToContext(ctx);
             _Mitarbeiter.UnderlyingCollection.ForEach(i => ctx.Attach(i));
-            if(_Taetigkeiten != null) _Taetigkeiten = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>(_Taetigkeiten.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Taetigkeit>());
+            if(_Taetigkeiten != null) _Taetigkeiten = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>("Zeitkonto", this, _Taetigkeiten.Select(i => ctx.Attach(i)).OfType<Kistl.App.Zeiterfassung.Taetigkeit>());
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

@@ -62,7 +62,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_ObjectClass = value.ID;
+                fk_ObjectClass = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
@@ -120,7 +120,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Module = value.ID;
+                fk_Module = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

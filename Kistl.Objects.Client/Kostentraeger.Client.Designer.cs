@@ -42,7 +42,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                fk_Projekt = value.ID;
+                fk_Projekt = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         

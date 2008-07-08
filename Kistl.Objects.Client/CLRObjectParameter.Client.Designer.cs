@@ -44,7 +44,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Assembly = value.ID;
+                fk_Assembly = value != null ? value.ID : Helper.INVALIDID;
             }
         }
         
