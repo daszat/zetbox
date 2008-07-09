@@ -83,7 +83,7 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Zeitkonto == Helper.INVALIDID && Zeitkonto != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Zeitkonto != null)
                 {
                     _fk_Zeitkonto = Zeitkonto.ID;
                 }
@@ -117,7 +117,7 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Mitarbeiter == Helper.INVALIDID && Mitarbeiter != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Mitarbeiter != null)
                 {
                     _fk_Mitarbeiter = Mitarbeiter.ID;
                 }
@@ -181,7 +181,7 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_TaetigkeitsArt == Helper.INVALIDID && TaetigkeitsArt != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && TaetigkeitsArt != null)
                 {
                     _fk_TaetigkeitsArt = TaetigkeitsArt.ID;
                 }

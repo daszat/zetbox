@@ -78,7 +78,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Module == Helper.INVALIDID && Module != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Module != null)
                 {
                     _fk_Module = Module.ID;
                 }
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_DefaultIcon == Helper.INVALIDID && DefaultIcon != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && DefaultIcon != null)
                 {
                     _fk_DefaultIcon = DefaultIcon.ID;
                 }

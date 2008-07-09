@@ -60,7 +60,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_ReferenceProperty == Helper.INVALIDID && ReferenceProperty != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && ReferenceProperty != null)
                 {
                     _fk_ReferenceProperty = ReferenceProperty.ID;
                 }

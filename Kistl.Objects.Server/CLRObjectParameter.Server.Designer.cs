@@ -60,7 +60,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Assembly == Helper.INVALIDID && Assembly != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Assembly != null)
                 {
                     _fk_Assembly = Assembly.ID;
                 }

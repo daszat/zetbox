@@ -58,7 +58,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Enumeration == Helper.INVALIDID && Enumeration != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Enumeration != null)
                 {
                     _fk_Enumeration = Enumeration.ID;
                 }

@@ -181,7 +181,7 @@ namespace Kistl.Server.Generators.SQLServer
                 // Collection.Serializer.Value
                 serializerValue.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Value == Helper.INVALIDID && Value != null)
+                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Value != null)
                 {{
                     _fk_Value = Value.ID;
                 }}
@@ -191,7 +191,7 @@ namespace Kistl.Server.Generators.SQLServer
                 // Collection.Serializer.Parent
                 serializerParent.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Parent == Helper.INVALIDID && Parent != null)
+                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
                 {{
                     _fk_Parent = Parent.ID;
                 }}
@@ -256,7 +256,7 @@ namespace Kistl.Server.Generators.SQLServer
                 // Collection.Serializer.Parent
                 serializerParent.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Parent == Helper.INVALIDID && Parent != null)
+                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
                 {{
                     _fk_Parent = Parent.ID;
                 }}
@@ -316,7 +316,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 serializer.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_{0} == Helper.INVALIDID && {0} != null)
+                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && {0} != null)
                 {{
                     _fk_{0} = {0}.ID;
                 }}

@@ -58,7 +58,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_DataType == Helper.INVALIDID && DataType != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && DataType != null)
                 {
                     _fk_DataType = DataType.ID;
                 }

@@ -107,7 +107,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_ObjectProp == Helper.INVALIDID && ObjectProp != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && ObjectProp != null)
                 {
                     _fk_ObjectProp = ObjectProp.ID;
                 }

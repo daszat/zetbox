@@ -83,7 +83,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Projekt != null)
                 {
                     _fk_Projekt = Projekt.ID;
                 }
@@ -117,7 +117,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Mitarbeiter == Helper.INVALIDID && Mitarbeiter != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Mitarbeiter != null)
                 {
                     _fk_Mitarbeiter = Mitarbeiter.ID;
                 }
@@ -166,7 +166,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Kunde == Helper.INVALIDID && Kunde != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Kunde != null)
                 {
                     _fk_Kunde = Kunde.ID;
                 }

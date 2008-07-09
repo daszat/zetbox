@@ -58,7 +58,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_ReferenceObjectClass == Helper.INVALIDID && ReferenceObjectClass != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && ReferenceObjectClass != null)
                 {
                     _fk_ReferenceObjectClass = ReferenceObjectClass.ID;
                 }

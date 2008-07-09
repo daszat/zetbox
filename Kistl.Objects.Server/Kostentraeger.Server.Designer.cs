@@ -58,7 +58,7 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Projekt != null)
                 {
                     _fk_Projekt = Projekt.ID;
                 }

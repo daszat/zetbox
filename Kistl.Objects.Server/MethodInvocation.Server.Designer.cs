@@ -86,7 +86,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Module == Helper.INVALIDID && Module != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Module != null)
                 {
                     _fk_Module = Module.ID;
                 }
@@ -120,7 +120,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Method == Helper.INVALIDID && Method != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Method != null)
                 {
                     _fk_Method = Method.ID;
                 }
@@ -154,7 +154,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Assembly == Helper.INVALIDID && Assembly != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Assembly != null)
                 {
                     _fk_Assembly = Assembly.ID;
                 }
@@ -218,7 +218,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_InvokeOnObjectClass == Helper.INVALIDID && InvokeOnObjectClass != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && InvokeOnObjectClass != null)
                 {
                     _fk_InvokeOnObjectClass = InvokeOnObjectClass.ID;
                 }

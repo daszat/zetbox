@@ -81,10 +81,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                // TODO: Hier weitermachen, es kracht an der Stelle.
-                // Das Update auf den neuen Pointer geht schief, weil der alte inhalt ausgelesen wird.
-                // evtl. beim Auslesen der Property direkt auf den private key zurückgreifen - mal sehen.
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Projekt == Helper.INVALIDID && Projekt != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Projekt != null)
                 {
                     _fk_Projekt = Projekt.ID;
                 }

@@ -244,7 +244,7 @@ namespace Kistl.Server
                     {
                         if (!p.IsList)
                         {
-                            int fk = obj.GetPropertyValue<int>("fk_" + p.PropertyName);
+                            int fk = obj.GetPrivateFieldValue<int>("_fk_" + p.PropertyName);
 
                             IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
                             IDataObject other = so.GetObject(fk);
@@ -255,7 +255,7 @@ namespace Kistl.Server
                             // Liste
                             foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
                             {
-                                int fk = ce.GetPropertyValue<int>("fk_Value");
+                                int fk = ce.GetPrivateFieldValue<int>("_fk_Value");
 
                                 IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
                                 IDataObject other = so.GetObject(fk);
