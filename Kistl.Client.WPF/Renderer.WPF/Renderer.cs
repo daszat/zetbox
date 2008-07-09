@@ -34,9 +34,20 @@ namespace Kistl.GUI.Renderer.WPF
 
         public override void ShowObject(Kistl.API.IDataObject obj)
         {
+            WorkspaceWindow w = WorkspaceWindow.FindWindow(obj.Context);
+            if (w == null)
+            {
+                w = new WorkspaceWindow();
+                w.SetContext(obj.Context);
+            }
+            w.Objects.Add(obj);
+            w.Show();
+
+            /*
             var template = obj.FindTemplate(TemplateUsage.EditControl);
             var widget = (System.Windows.Window)Manager.Renderer.CreateControl(obj, template.VisualTree);
             widget.Show();
+             */
         }
 
         public override void ShowMessage(string msg)

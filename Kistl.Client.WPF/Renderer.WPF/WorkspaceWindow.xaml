@@ -1,0 +1,27 @@
+﻿<Window
+    x:Class="Kistl.GUI.Renderer.WPF.WorkspaceWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="WorkspaceWindow"
+    Height="300" Width="550"
+    x:Name="Self"
+    >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ToolBar
+            Grid.Row="0" Grid.Column="0"
+            >
+            <Button Click="Save_Click">Save</Button>
+            <Button Click="SaveAndClose_Click">Save and Close</Button>
+            <Button Click="AbortAndClose_Click">Abort and Close</Button>
+        </ToolBar>
+        <TabControl
+            Grid.Row="1" Grid.Column="0"
+            Name="tabObjects"
+            ItemsSource="{Binding ElementName=Self, Path=Objects}"
+            />
+    </Grid>
+</Window>

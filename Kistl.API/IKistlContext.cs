@@ -131,6 +131,11 @@ namespace Kistl.API
         int SubmitChanges();
 
         /// <summary>
+        /// IsDisposed can be used to detect whether this IKistlContext was aborted with Dispose()
+        /// </summary>
+        bool IsDisposed { get; }
+
+        /// <summary>
         /// Creates a new IDataObject by Type
         /// </summary>
         /// <param name="type">Type of the new IDataObject</param>

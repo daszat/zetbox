@@ -50,7 +50,13 @@ namespace Kistl.API.Server
             base.Dispose();
             KistlDataContext.ClearSession(this);
             GC.SuppressFinalize(this);
+            IsDisposed = true;
         }
+
+        /// <summary>
+        /// Is true after Dispose() was called.
+        /// </summary>
+        public bool IsDisposed { get; private set; }
 
 
         /// <summary>
