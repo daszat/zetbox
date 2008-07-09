@@ -51,6 +51,14 @@ namespace Kistl.API.Client
             GC.SuppressFinalize(this);
         }
 
+        public bool IsDisposed
+        {
+            get
+            {
+                return disposed;
+            }
+        }
+
         /// <summary>
         /// Throws an Exception when this Context has been disposed
         /// </summary>
