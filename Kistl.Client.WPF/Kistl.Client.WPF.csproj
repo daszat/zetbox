@@ -145,6 +145,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Renderer.WPF\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Renderer.WPF\ObjectTabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Renderer.WPF\WPFWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -226,6 +234,9 @@
     </Compile>
     <Compile Include="Renderer.WPF\PropertyControl.cs" />
     <Compile Include="Renderer.WPF\Renderer.cs" />
+    <Compile Include="Renderer.WPF\ObjectTabItem.xaml.cs">
+      <DependentUpon>ObjectTabItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Renderer.WPF\WPFWindow.xaml.cs">
       <DependentUpon>WPFWindow.xaml</DependentUpon>
     </Compile>

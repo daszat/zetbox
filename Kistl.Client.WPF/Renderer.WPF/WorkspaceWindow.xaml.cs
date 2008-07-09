@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kistl.API;
 using System.Collections.ObjectModel;
+using Kistl.GUI.DB;
+using Kistl.Client;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -51,7 +53,9 @@ namespace Kistl.GUI.Renderer.WPF
 
             if (obj.Context != Context)
                 throw new ArgumentOutOfRangeException("obj", "Object is not in this window's Context");
-
+            var template = obj.FindTemplate(TemplateUsage.EditControl);
+            ObjectTabItem oti = (ObjectTabItem)Manager.Renderer.CreateControl(obj, template.VisualTree);
+            tabObjects.Items.Add(oti); 
             Objects.Add(obj);
         }
 
@@ -152,4 +156,8 @@ namespace Kistl.GUI.Renderer.WPF
         #endregion
 
     }
+
+    /*
+     */
+
 }

@@ -1,0 +1,11 @@
+﻿<TabItem 
+    x:Class="Kistl.GUI.Renderer.WPF.ObjectTabItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter"
+    xmlns:client="clr-namespace:Kistl.Client.WPF"
+    Background="White"
+    Header="bar"
+    >
+    <TextBlock>muh</TextBlock>
+</TabItem>

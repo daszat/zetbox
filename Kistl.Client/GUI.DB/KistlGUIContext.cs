@@ -151,7 +151,7 @@ namespace Kistl.GUI.DB
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.Object,
                 Container = true,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
-                ClassName = "Kistl.GUI.Renderer.WPF.WPFWindow" },
+                ClassName = "Kistl.GUI.Renderer.WPF.ObjectTabItem" },
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.PropertyGroup,
                 Container = true,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",

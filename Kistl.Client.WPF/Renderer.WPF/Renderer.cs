@@ -40,7 +40,7 @@ namespace Kistl.GUI.Renderer.WPF
                 w = new WorkspaceWindow();
                 w.SetContext(obj.Context);
             }
-            w.Objects.Add(obj);
+            w.ShowObject(obj);
             w.Show();
 
             /*
