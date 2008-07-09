@@ -225,7 +225,10 @@ namespace Kistl.Client.WPF
 
                 if (resultObjectType != null && n != null)
                 {
-                    Manager.Renderer.ShowObject((Kistl.API.IDataObject)Activator.CreateInstance(resultObjectType));
+                    Kistl.API.IDataObject newObject = (Kistl.API.IDataObject)Activator.CreateInstance(resultObjectType);
+                    // Create a new Context for this object
+                    newObject.AttachToContext(KistlContext.GetContext());
+                    Manager.Renderer.ShowObject(newObject);
                     n.RefreshChildren();
                 }
             }
@@ -258,7 +261,10 @@ namespace Kistl.Client.WPF
                 if (treeView.SelectedItem == null) return;
 
                 INode n = treeView.SelectedItem as INode;
-                Manager.Renderer.ShowObject(n.DataObject);
+                // Create new Context for new Window
+                IKistlContext ctx = KistlContext.GetContext();
+                Kistl.API.IDataObject newObject = ctx.Find(n.DataObject.GetType(), n.DataObject.ID);
+                Manager.Renderer.ShowObject(newObject);
             }
             catch (Exception ex)
             {
