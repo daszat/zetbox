@@ -14,7 +14,7 @@ namespace Kistl.API.Client
     public static class KistlContext
     {
         /// <summary>
-        /// Retruns a new KistContext.
+        /// Returns a new KistContext.
         /// </summary>
         /// <returns>A new KistlContext</returns>
         public static IKistlContext GetContext()
