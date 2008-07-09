@@ -57,6 +57,12 @@ namespace Kistl.GUI.Renderer.WPF
             ObjectTabItem oti = (ObjectTabItem)Manager.Renderer.CreateControl(obj, template.VisualTree);
             tabObjects.Items.Add(oti); 
             Objects.Add(obj);
+
+            // TODO: Presenter??
+            if (Objects.Count == 1)
+            {
+                this.Title = obj.ToString();
+            }
         }
 
         public ObservableCollection<Kistl.API.IDataObject> Objects

@@ -12,14 +12,12 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Kistl.GUI;
 
-public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IObjectListControl
+public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IReferenceListControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
-
-    #region IReferenceControl<IList<IDataObject>> Members
 
     public Type ObjectType
     {
@@ -33,23 +31,6 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IOb
         set;
     }
 
-    #endregion
-
-    #region IValueControl<IList<IDataObject>> Members
-
-    public System.Collections.Generic.IList<Kistl.API.IDataObject> Value
-    {
-        get
-        {
-            throw new NotSupportedException();
-        }
-        set
-        {
-            repItems.DataSource = value;
-            repItems.DataBind();
-        }
-    }
-
     public bool IsValidValue
     {
         get;
@@ -57,10 +38,6 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IOb
     }
 
     public event EventHandler UserInput;
-
-    #endregion
-
-    #region IBasicControl Members
 
     public string ShortLabel
     {
@@ -80,11 +57,21 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IOb
         set;
     }
 
-    #endregion
-
-    #region IObjectListControl Members
-
     public event EventHandler UserAddRequest;
 
-    #endregion
+    System.Collections.ObjectModel.ObservableCollection<Kistl.API.IDataObject> _Value;
+
+    System.Collections.ObjectModel.ObservableCollection<Kistl.API.IDataObject> IValueControl<System.Collections.ObjectModel.ObservableCollection<Kistl.API.IDataObject>>.Value
+    {
+        get
+        {
+            return _Value;
+        }
+        set
+        {
+            _Value = value;
+            repItems.DataSource = _Value;
+            repItems.DataBind();
+        }
+    }
 }

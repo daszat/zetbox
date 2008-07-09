@@ -13,7 +13,7 @@ using System.Xml.Linq;
 using Kistl.GUI;
 using Kistl.API;
 
-public partial class Controls_ObjectReferencePropertyControl : System.Web.UI.UserControl, IObjectReferenceControl
+public partial class Controls_ObjectReferencePropertyControl : System.Web.UI.UserControl, IReferenceControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {

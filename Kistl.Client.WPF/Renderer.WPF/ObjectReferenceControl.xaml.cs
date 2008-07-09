@@ -84,19 +84,7 @@ namespace Kistl.GUI.Renderer.WPF
         {
             try
             {
-#if false
-                ObjectWindow wnd = new ObjectWindow();
-                wnd.ObjectType = this.ObjectType;
-                wnd.ObjectID = API.Helper.INVALIDID;
-
-                wnd.ShowDialog();
-
-                if (wnd.ObjectID != API.Helper.INVALIDID)
-                {
-                    LoadList();
-                    this.Value = wnd.ObjectID;
-                }
-#endif
+                // TODO ...
             }
             catch (Exception ex)
             {
@@ -106,20 +94,17 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-#if false
             try
             {
-                ObjectWindow wnd = new ObjectWindow();
-                wnd.ObjectType = this.ObjectType;
-                wnd.ObjectID = this.TargetID;
-
-                wnd.Show();
+                if (Value != null)
+                {
+                    Manager.Renderer.ShowObject(Value);
+                }
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex);
+                ClientHelper.HandleError(ex);
             }
-#endif
         }
 
         #region IPointerControl Members

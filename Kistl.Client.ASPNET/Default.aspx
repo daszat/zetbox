@@ -22,7 +22,7 @@
                         <asp:Literal ID="litName" runat="server" Text='<%# Container.DataItem.ToString() %>' />
                     </td>
                     <td>
-                        <asp:HyperLink ID="lnkShow" runat="server" NavigateUrl='<%# "ObjectPage.aspx?Type=" + Eval("Type") + "&ID=" + Eval("ID") %>'>Show</asp:HyperLink>
+                        <asp:HyperLink ID="lnkShow" runat="server" NavigateUrl='<%# "ObjectPage.aspx?Type=" + Container.DataItem.GetType() + "&ID=" + Eval("ID") %>'>Show</asp:HyperLink>
                     </td>
                 </tr>
             </ItemTemplate>
