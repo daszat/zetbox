@@ -1200,7 +1200,7 @@ namespace Kistl.Server.Generators
             {{
                 OnToString_{0}(this, e);
             }}
-            return e.Result", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
+            return e.Result", current.objClass.ClassName)));
 
             // Create NotifyPreSave Method
             m = new CodeMemberMethod();
@@ -1209,7 +1209,7 @@ namespace Kistl.Server.Generators
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPreSave();
-            if (OnPreSave_{0} != null) OnPreSave_{0}(this)", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
+            if (OnPreSave_{0} != null) OnPreSave_{0}(this)", current.objClass.ClassName)));
 
             // Create NotifyPostSave Method
             m = new CodeMemberMethod();
@@ -1218,7 +1218,7 @@ namespace Kistl.Server.Generators
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPostSave();
-            if (OnPostSave_{0} != null) OnPostSave_{0}(this)", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
+            if (OnPostSave_{0} != null) OnPostSave_{0}(this)", current.objClass.ClassName)));
 
             // Create Clone Method
             m = new CodeMemberMethod();
@@ -1228,7 +1228,7 @@ namespace Kistl.Server.Generators
             m.ReturnType = new CodeTypeReference(typeof(object));
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"{0} obj = new {0}();
             CopyTo(obj);
-            return obj", current.objClass.ClassName)));// TODO: Das ist C# spezifisch
+            return obj", current.objClass.ClassName)));
 
             // Create CopyTo Method
             m = new CodeMemberMethod();
@@ -1237,7 +1237,7 @@ namespace Kistl.Server.Generators
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(IDataObject)), "obj"));
-            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
 
             foreach (Property p in current.objClass.Properties.OfType<Property>())
             {
@@ -1250,7 +1250,6 @@ namespace Kistl.Server.Generators
                 // TODO: Geht z.Z. nur für den Client!!!!
                 else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
                 {
-                    //stmt = string.Format("(({1})obj)._{0} = this._{0}.Clone(obj)", p.PropertyName, current.objClass.ClassName);
                     stmt = string.Format("this._{0}.CopyTo((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
                 }
                 else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
@@ -1431,7 +1430,7 @@ namespace Kistl.Server.Generators
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
-            m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));
 
             foreach (BaseProperty p in current.objClass.Properties)
             {
@@ -1472,7 +1471,7 @@ namespace Kistl.Server.Generators
             m.ReturnType = new CodeTypeReference(typeof(void));
             // m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
-            m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));// TODO: Das ist C# spezifisch
+            m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));
 
             foreach (BaseProperty p in current.objClass.Properties)
             {

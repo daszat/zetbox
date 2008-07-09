@@ -12,8 +12,6 @@ namespace Kistl.Client
 {
     /// <summary>
     /// Implementation of the client-side CustomActionsManager
-    /// TODO: due to interface dependencies, this cannot go to either the App.Base or the API.Client;
-    ///       still, this shouldn't be left to the actual client to be implemented.
     /// </summary>
     internal class CustomActionsManagerClient : API.ICustomActionsManager
     {

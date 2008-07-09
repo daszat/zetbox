@@ -101,7 +101,6 @@ namespace Kistl.GUI
         /// just reset the Value. A better implementation would fire fine-grained 
         /// add/delete Events instead.
         event EventHandler UserAddRequest;
-
     }
 
     /// <summary>

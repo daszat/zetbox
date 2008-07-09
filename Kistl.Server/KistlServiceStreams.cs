@@ -27,10 +27,10 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSerializedType()).GetObject(m.ID);
+                        if (obj == null) throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", m.ID));
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
                         
-                        // TODO: Das kann NULL sein!!!
                         obj.ToStream(sw);
 
                         result.Seek(0, SeekOrigin.Begin);

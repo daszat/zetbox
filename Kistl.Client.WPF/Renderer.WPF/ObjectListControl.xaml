@@ -21,6 +21,7 @@
                 x:Name="lst"
                 MinHeight="150"
                 ItemsSource="{Binding ElementName=ListCtrl, Path=Value}"
+                MouseDoubleClick="lst_MouseDoubleClick"
                 >
                 <ListView.ItemTemplate>
                     <DataTemplate>

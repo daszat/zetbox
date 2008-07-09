@@ -187,7 +187,6 @@ namespace Kistl.API.Server
             SerializableType t;
             BinarySerializer.FromBinary(out t, sr);
 
-            // TODO: improve Error reporting
             if (this.GetType() != t.GetSerializedType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
 

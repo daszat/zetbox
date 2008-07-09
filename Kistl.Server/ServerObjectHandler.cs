@@ -56,28 +56,22 @@ namespace Kistl.Server
     }
 
     /// <summary>
-    /// TODO: Objekte verwaltuen & Serialisierung trennen!!!
+    /// Factory for Server Object Handlers
     /// </summary>
     internal static class ServerObjectHandlerFactory
     {
         /// <summary>
-        /// Helper Method for generic object access
+        /// Returns a Object Handler for the given Type
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        // [System.Diagnostics.DebuggerStepThrough]
         public static IServerObjectHandler GetServerObjectHandler(Type type)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
                 if (type == null) throw new ArgumentException("Type is null");
-                //if (string.IsNullOrEmpty(type.FullNameDataObject)) throw new ArgumentNullException("type", "Type is empty");
-
-                //Type objType = Type.GetType(type.FullNameDataObject);
-                //if (objType == null) throw new ApplicationException("Invalid Type");
 
                 Type t = typeof(ServerObjectHandler<>);
-                //Type result = t.MakeGenericType(objType);
                 Type result = t.MakeGenericType(type);
 
                 IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;

@@ -295,7 +295,7 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ShortLabel = Object.GetType().Name;
+            Control.ShortLabel = Object.ToString(); // Object.GetType().Name;
             Control.Description = String.Format("{0}: {1}", Object.GetType().Name, Object.ToString());
             Control.Value = Object;
             // Control.Size = Preferences.PreferredSize;

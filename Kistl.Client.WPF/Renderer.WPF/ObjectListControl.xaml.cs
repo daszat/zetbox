@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using Kistl.Client;
+using Kistl.API;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -40,7 +42,10 @@ namespace Kistl.GUI.Renderer.WPF
         /// <param name="e"></param>
         private void lst_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //TODO: OnUserSelectsObject(sender);
+            // TODO: Die alte Preisfrage: Wer macht das. Das Control oder der Presenter?
+            // Presenter: Er kennt sich aus, er kann für jeden View benutzt werden
+            // View: Im ASP.NET hätte ich dann die Möglichkeit, den Aufruf gleich in Javascript zu kodieren.
+            lst.SelectedItems.ForEach<Kistl.API.IDataObject>(i => Manager.Renderer.ShowObject(i));
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

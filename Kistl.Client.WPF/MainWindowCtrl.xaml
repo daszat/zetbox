@@ -29,31 +29,7 @@
                 <ColumnDefinition Width="250" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TabControl Grid.Column="0">
-                <TabItem Header="Tree">
-                    <local:DesktopTreeView SelectionChanged="DesktopTreeView_SelectionChanged" />
-                </TabItem>
-                <TabItem Header="List">
-                    <DockPanel>
-                        <ComboBox 
-                            DockPanel.Dock="Top"
-                            HorizontalAlignment="Right"
-                            Name="cbObjectTypes" 
-                            SelectionChanged="ComboBox_SelectionChanged"
-                            ItemsSource="{Binding}" Width="150">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="{Binding Converter={StaticResource IconConverter}}" Width="16" Height="16" />
-                                        <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource FormattingConverter}}" />                        
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <my:ObjectListControl x:Name="lst" SelectionChanged="lst_SelectionChanged" />
-                    </DockPanel>
-                </TabItem>
-            </TabControl>
+            <local:DesktopTreeView Grid.Column="0" SelectionChanged="DesktopTreeView_SelectionChanged" />
             <GridSplitter ResizeDirection="Columns" Width="5" />
             <kevin:Graph Grid.Column="1"
                          x:Name="graph"

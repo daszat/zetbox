@@ -75,45 +75,6 @@ namespace Kistl.Client.WPF
             App.Current.Shutdown();
         }
 
-        /// <summary>
-        /// DropDown Liste hat sich geändert -> Objektliste im unteren Bereich aktualisieren
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // TODO!
-            MessageBox.Show("not yet implemented");
-#if false
-            try
-            {
-                Kistl.App.Base.ObjectClass objClass = cbObjectTypes.SelectedItem as Kistl.App.Base.ObjectClass;
-                if (objClass != null)
-                {
-                    // Neue Objekttypen setzen & neu Binden
-                    // TODO: Man sollte gleich das ObjektClass Objekt übergeben.
-                    lst.SourceObjectType = new ObjectType(objClass.Module.Namespace, objClass.ClassName);
-                    lst.Bind();
-                }
-            }
-            catch(Exception ex)
-            {
-                Helper.HandleError(ex);
-            }
-#endif
-        }
-
-        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            using (TraceClient.TraceHelper.TraceMethodCall())
-            {
-                if (e.AddedItems.Count > 0)
-                {
-                    InstanceChangeCenter(new ObjNode((Kistl.API.IDataObject)e.AddedItems[0], true));
-                }
-            }
-        }
-
         private void DesktopTreeView_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<Kistl.API.IDataObject> e)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
@@ -131,19 +92,6 @@ namespace Kistl.Client.WPF
             {
                 // DesingMode? -> raus
                 if (DesignerProperties.GetIsInDesignMode(this)) return;
-
-                SplashScreen.SetInfo("Loading Objects");
-                try
-                {
-                    // Hole eine Liste aller ObjectClasses Objekte & zeige sie in der DropDown an
-                    // lst.SourceObjectType = new ObjectType(typeof(Kistl.App.Base.ObjectClass));
-                    // this.DataContext = Helper.ObjectClasses.Values;
-                }
-                catch (Exception ex)
-                {
-                    ClientHelper.HandleError(ex);
-                }
-
                 SplashScreen.HideSplashScreen();
             }
             catch (Exception ex)

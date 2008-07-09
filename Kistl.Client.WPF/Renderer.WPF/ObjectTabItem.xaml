@@ -5,7 +5,8 @@
     xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter"
     xmlns:client="clr-namespace:Kistl.Client.WPF"
     Background="White"
-    Header="bar"
+    x:Name="Me"
+    Header="{Binding ElementName=Me, Path=ShortLabel}"
     >
-    <TextBlock>muh</TextBlock>
+    <TextBlock>Hello World</TextBlock>
 </TabItem>

@@ -153,8 +153,11 @@ namespace Kistl.GUI.Renderer.WPF
             this.Close();
         }
 
+        private void Self_Closed(object sender, EventArgs e)
+        {
+            OnAbort(null);
+        }
         #endregion
-
     }
 
     /*

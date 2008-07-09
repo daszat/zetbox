@@ -132,7 +132,6 @@ namespace Kistl.API.Client
         {
             if (sr == null) throw new ArgumentNullException("sr");
 
-            // TODO: ObjectType zurück drängen & dann die To/FromStream Methoden zusammenfassen
             SerializableType t;
             BinarySerializer.FromBinary(out t, sr);
 

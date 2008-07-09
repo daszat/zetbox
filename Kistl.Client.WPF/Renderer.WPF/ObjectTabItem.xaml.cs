@@ -36,11 +36,36 @@ namespace Kistl.GUI.Renderer.WPF
         #endregion
 
         #region IBasicControl Member
+        public string ShortLabel
+        {
+            get { return (string)GetValue(ShortLabelProperty); }
+            set { SetValue(ShortLabelProperty, value); }
+        }
 
-        // TODO: useful implementation missing, use DependencyProperties and bind to XAML
-        string IBasicControl.ShortLabel { get; set; }
-        string IBasicControl.Description { get; set; }
-        FieldSize IBasicControl.Size { get; set; }
+        // Using a DependencyProperty as the backing store for ShortLabel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShortLabelProperty =
+            DependencyProperty.Register("ShortLabel", typeof(string), typeof(ObjectTabItem), new UIPropertyMetadata(""));
+
+        public string Description
+        {
+            get { return (string)GetValue(DescriptionProperty); }
+            set { SetValue(DescriptionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Description.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DescriptionProperty =
+            DependencyProperty.Register("Description", typeof(string), typeof(ObjectTabItem), new UIPropertyMetadata(""));
+
+
+        public FieldSize Size
+        {
+            get { return (FieldSize)GetValue(SizeProperty); }
+            set { SetValue(SizeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SizeProperty =
+            DependencyProperty.Register("Size", typeof(FieldSize), typeof(ObjectTabItem), new UIPropertyMetadata(null));
 
         #endregion
     }
