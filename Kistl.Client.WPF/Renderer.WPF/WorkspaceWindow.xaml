@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:client="clr-namespace:Kistl.Client.WPF"
     Title="WorkspaceWindow"
-    Height="300" Width="550"
+    Height="700" Width="550"
     x:Name="Self"
     Closed="Self_Closed"
     >

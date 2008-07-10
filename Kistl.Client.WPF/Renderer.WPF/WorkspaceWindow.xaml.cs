@@ -53,9 +53,18 @@ namespace Kistl.GUI.Renderer.WPF
 
             if (obj.Context != Context)
                 throw new ArgumentOutOfRangeException("obj", "Object is not in this window's Context");
+
+            {
+                int idx = Objects.IndexOf(obj);
+                if (idx != -1)
+                {
+                    tabObjects.SelectedIndex = idx;
+                    return;
+                }
+            }
             var template = obj.FindTemplate(TemplateUsage.EditControl);
             ObjectTabItem oti = (ObjectTabItem)Manager.Renderer.CreateControl(obj, template.VisualTree);
-            tabObjects.Items.Add(oti); 
+            tabObjects.Items.Add(oti);
             Objects.Add(obj);
 
             // TODO: Presenter??
