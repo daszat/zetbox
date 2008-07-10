@@ -11,12 +11,21 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Kistl.GUI;
+using System.Collections.Generic;
+using Kistl.API;
+using System.Collections.ObjectModel;
+using System.Web.Script.Serialization;
+using Kistl.Client.ASPNET.Toolkit;
 
 public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IReferenceListControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (IsPostBack)
+        {
+            _Value.Clear();
+            hdItems.Value.FromJSONArray().ForEach<IDataObject>(i => _Value.Add(i));
+        }
     }
 
     public Type ObjectType
@@ -59,9 +68,9 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IRe
 
     public event EventHandler UserAddRequest;
 
-    System.Collections.ObjectModel.ObservableCollection<Kistl.API.IDataObject> _Value;
+    ObservableCollection<IDataObject> _Value = new ObservableCollection<IDataObject>();
 
-    System.Collections.ObjectModel.ObservableCollection<Kistl.API.IDataObject> IValueControl<System.Collections.ObjectModel.ObservableCollection<Kistl.API.IDataObject>>.Value
+    ObservableCollection<IDataObject> IValueControl<ObservableCollection<IDataObject>>.Value
     {
         get
         {
@@ -70,8 +79,21 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IRe
         set
         {
             _Value = value;
-            repItems.DataSource = _Value;
-            repItems.DataBind();
         }
+    }
+
+    protected override void OnPreRender(EventArgs e)
+    {
+        base.OnPreRender(e);
+
+        hdItems.Value = _Value.ToJSONArray();
+
+        Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Include_ObjectListControl", ResolveClientUrl("ObjectListControl.js"));
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "Startup_ObjectListControl_" + this.ClientID,
+            string.Format("Sys.Application.add_load(function() {{ objectListControl_DataBind('{0}', '{1}'); }}); \n",
+                lstItems.ClientID, hdItems.ClientID), true);
+        Page.ClientScript.RegisterOnSubmitStatement(this.GetType(), "OnSubmit_ObjectListControl_" + this.ClientID,
+            string.Format("objectListControl_OnSubmit('{0}', '{1}');\n",
+                lstItems.ClientID, hdItems.ClientID));
     }
 }

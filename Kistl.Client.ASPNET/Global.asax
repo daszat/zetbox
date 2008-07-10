@@ -11,7 +11,7 @@
         }, Kistl.GUI.DB.Toolkit.ASPNET);
     }
     
-    void Application_End(object sender, EventArgs e) 
+    void Application_End(object sender, EventArgs e)
     {
         //  Code, der beim Beenden der Anwendung ausgeführt wird.
 

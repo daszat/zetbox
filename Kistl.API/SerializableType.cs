@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Kistl.API
 {
@@ -10,6 +11,7 @@ namespace Kistl.API
     /// Serialization Wrapper for a System.Type object
     /// </summary>
     [Serializable]
+    [DataContract]
     public class SerializableType
     {
         /// <summary>
@@ -46,13 +48,15 @@ namespace Kistl.API
         /// <summary>
         /// Full Type Name
         /// </summary>
-        public string TypeName { get; private set; }
+        [DataMember]
+        public string TypeName { get; set; }
 
         private string _AssemblyQualifiedName;
         /// <summary>
         /// AssemblyQualifiedName
         /// TODO: This could be more optimal
         /// </summary>
+        [DataMember]
         public string AssemblyQualifiedName 
         { 
             get 
@@ -66,13 +70,18 @@ namespace Kistl.API
                     default:
                         throw new InvalidOperationException("APIInit: Invalid Host Type " + APIInit.HostType);
                 }
-            } 
+            }
+            set
+            {
+                _AssemblyQualifiedName = value;
+            }
         }
 
         /// <summary>
         /// List of Generiy Type Parameter
         /// </summary>
-        public List<SerializableType> GenericTypeParameter { get; private set; }
+        [DataMember]
+        public List<SerializableType> GenericTypeParameter { get; set; }
 
         /// <summary>
         /// Returns the serialized System.Type

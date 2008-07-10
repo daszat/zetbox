@@ -28,6 +28,20 @@ namespace Kistl.API
         {
             this.ID = ID;
             _Type = type;
+            Text = "";
+        }
+
+        /// <summary>
+        /// Create a new ObjectMoniker
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="type"></param>
+        /// <param name="text"></param>
+        public ObjectMoniker(int ID, Type type, string text)
+        {
+            this.ID = ID;
+            _Type = type;
+            Text = text;
         }
 
         private Type _Type;
@@ -38,6 +52,16 @@ namespace Kistl.API
         public Type Type
         {
             get { return _Type; }
+        }
+
+        /// <summary>
+        /// Text
+        /// </summary>
+        public string Text { get; set; }
+
+        public override string ToString()
+        {
+            return Text;
         }
 
         /// <summary>
