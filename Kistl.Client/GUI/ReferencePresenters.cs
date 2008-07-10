@@ -303,19 +303,7 @@ namespace Kistl.GUI
         /// </summary>
         protected override void OnUserInput()
         {
-            T refobj;
-            IDataObject testobj = Control.Value;
-            // TODO: Arthur: Das hab ich einbauen müssen, weil sich ASP.NET keine Objekte merken kann
-            // Daher hab ich nur eine ID - diese geb ich über den ObjectMoniker zurück
-            // Hier wird er wieder zurück umgewandelt in ein Objekt.
-            if (testobj is ObjectMoniker)
-            {
-                refobj = Object.Context.Find<T>(testobj.ID);
-            }
-            else
-            {
-                refobj = (T)testobj;
-            }
+            T refobj = (T)Control.Value;
 
             if (refobj == null)
             {

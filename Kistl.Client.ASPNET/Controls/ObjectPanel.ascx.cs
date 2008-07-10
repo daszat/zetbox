@@ -12,6 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Kistl.Client.ASPNET.Toolkit;
 using Kistl.GUI;
+using Kistl.API;
 
 public partial class Controls_ObjectPanel : System.Web.UI.UserControl, IContainerLoader, IObjectControl
 {
@@ -34,6 +35,7 @@ public partial class Controls_ObjectPanel : System.Web.UI.UserControl, IContaine
     }
 
     #region IBasicControl Members
+    IKistlContext IBasicControl.Context { get; set; }
 
     public string ShortLabel
     {

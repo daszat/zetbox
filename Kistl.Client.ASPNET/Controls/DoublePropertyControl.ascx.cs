@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Kistl.GUI;
+using Kistl.API;
 
 public partial class Controls_DoublePropertyControl : System.Web.UI.UserControl, IValueControl<double?>
 {
@@ -29,6 +30,7 @@ public partial class Controls_DoublePropertyControl : System.Web.UI.UserControl,
 
     #region IValueControl<string> Members
 
+    IKistlContext IBasicControl.Context { get; set; }
     public double? Value
     {
         get

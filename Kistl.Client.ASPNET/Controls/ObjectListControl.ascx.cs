@@ -23,10 +23,17 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IRe
     {
         if (IsPostBack)
         {
-            _Value.Clear();
-            hdItems.Value.FromJSONArray().ForEach<IDataObject>(i => _Value.Add(i));
+            var postedData = hdItems.Value.FromJSONArray(((IBasicControl)this).Context).ToList();
+
+            var added = postedData.Except(_Value).ToList();
+            var deleted = _Value.Except(postedData).ToList();
+
+            deleted.ForEach(d => _Value.Remove(d));
+            added.ForEach(a => _Value.Add(a));
         }
     }
+
+    IKistlContext IBasicControl.Context { get; set; }
 
     public Type ObjectType
     {

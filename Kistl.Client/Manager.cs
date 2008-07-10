@@ -16,6 +16,8 @@ namespace Kistl.Client
         /// <returns>a string[] containing all unhandled commandline arguments</returns>
         public static string[] Create(string[] args, Toolkit tk)
         {
+            if (_isInitialized) throw new InvalidOperationException("Cannot initialize twice");
+
             string[] result;
 
             Kistl.API.APIInit init = new Kistl.API.APIInit();
@@ -34,9 +36,20 @@ namespace Kistl.Client
 
             Renderer = KistlGUIContext.CreateRenderer(tk);
 
+            _isInitialized = true;
+
             return result;
         }
 
         public static IRenderer Renderer { get; private set; }
+
+        private static bool _isInitialized = false;
+        public static bool IsInitialized
+        {
+            get
+            {
+                return _isInitialized;
+            }
+        }
     }
 }

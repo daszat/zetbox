@@ -30,6 +30,8 @@ public partial class Controls_ObjectReferencePropertyControl : System.Web.UI.Use
 
     #region IBasicControl Members
 
+    IKistlContext IBasicControl.Context { get; set; }
+
     public string ShortLabel
     {
         get;
@@ -81,7 +83,7 @@ public partial class Controls_ObjectReferencePropertyControl : System.Web.UI.Use
     {
         get
         {
-            return new ObjectMoniker(Convert.ToInt32(cbList.SelectedValue), ObjectType);
+            return ((IBasicControl)this).Context.Find(ObjectType, Convert.ToInt32(cbList.SelectedValue));
         }
         set
         {

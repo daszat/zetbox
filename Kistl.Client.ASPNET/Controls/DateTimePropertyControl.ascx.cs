@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Kistl.GUI;
+using Kistl.API;
 
 public partial class Controls_DateTimePropertyControl : System.Web.UI.UserControl, IValueControl<DateTime?>
 {
@@ -28,6 +29,8 @@ public partial class Controls_DateTimePropertyControl : System.Web.UI.UserContro
     }
 
     #region IValueControl<string> Members
+
+    IKistlContext IBasicControl.Context { get; set; }
 
     public DateTime? Value
     {

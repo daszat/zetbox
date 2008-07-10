@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using Kistl.GUI;
+using Kistl.API;
 
 public partial class Controls_BoolPropertyControl : System.Web.UI.UserControl, IValueControl<bool?>
 {
@@ -29,6 +30,7 @@ public partial class Controls_BoolPropertyControl : System.Web.UI.UserControl, I
 
     #region IValueControl<string> Members
 
+    IKistlContext IBasicControl.Context { get; set; }
     public bool? Value
     {
         get

@@ -33,9 +33,9 @@ namespace Kistl.Client.ASPNET.Toolkit
             Text = obj.ToString();
         }
 
-        public ObjectMoniker GetObjectMoniker()
+        public IDataObject GetDataObject(IKistlContext ctx)
         {
-            return new ObjectMoniker(ID, Type.GetSerializedType(), Text);
+            return ctx.Find(Type.GetSerializedType(), ID);
         }
     }
 
@@ -61,7 +61,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             return GetEncoder().GetString(ms.ToArray());
         }
 
-        public static IEnumerable<IDataObject> FromJSONArray(this string jsonArray)
+        public static IEnumerable<IDataObject> FromJSONArray(this string jsonArray, IKistlContext ctx)
         {
             if (string.IsNullOrEmpty(jsonArray)) return new List<IDataObject>();
  
@@ -74,7 +74,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
             else
             {
-                return result.Select(i => i.GetObjectMoniker()).Cast<IDataObject>();
+                return result.Select(i => i.GetDataObject(ctx));
             }
         }
     }
