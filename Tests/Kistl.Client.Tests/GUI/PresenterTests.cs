@@ -120,16 +120,15 @@ namespace Kistl.GUI.Tests
     /// <typeparam name="TYPE"></typeparam>
     /// <typeparam name="CONTROL"></typeparam>
     /// <typeparam name="PRESENTER"></typeparam>
-    public abstract class StructPresenterTests<OBJECT, TYPE, CONTROL, PRESENTER>
-        : PresenterTests<OBJECT, TYPE?, CONTROL, PRESENTER>
+    public abstract class StructPresenterTests<OBJECT, TYPE, CONTROL>
+        : PresenterTests<OBJECT, TYPE?, CONTROL, DefaultValuePresenter<TYPE>>
         where OBJECT : IDataObject
         where TYPE : struct
         where CONTROL : IValueControl<TYPE?>
-        where PRESENTER : IPresenter
     {
 
         protected StructPresenterTests(
-            PresenterHarness<OBJECT, CONTROL, PRESENTER> presenterHarness,
+            PresenterHarness<OBJECT, CONTROL, DefaultValuePresenter<TYPE>> presenterHarness,
             IValues<TYPE?> values)
             : base(presenterHarness, values)
         {

@@ -248,6 +248,73 @@ namespace Kistl.GUI
         #endregion
     }
 
+    public class StringListPresenter : Presenter<IListControl<string>>
+    {
+        public IList<string> GetPropertyValue()
+        {
+            return Object.GetPropertyValue<IList<string>>(Preferences.Property.PropertyName);
+        }
+        protected override void InitializeComponent()
+        {
+            Object.PropertyChanged += new PropertyChangedEventHandler(Object_PropertyChanged);
+            Control.UserChangedList += new NotifyCollectionChangedEventHandler(Control_UserChangedList);
+        }
+
+        private void Control_UserChangedList(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            IList<string> property = GetPropertyValue();
+            // Modify the Object's Value according to the changes in the Control
+            switch (args.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    property.InsertRange(args.NewStartingIndex, args.NewItems);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                case NotifyCollectionChangedAction.Move:
+                    foreach (var i in args.OldItems)
+                        property.RemoveAt(args.OldStartingIndex);
+                    property.InsertRange(args.NewStartingIndex, args.NewItems);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var i in args.OldItems)
+                        property.RemoveAt(args.OldStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    property.Clear();
+                    Control.Values.Cast<string>().ForEach<string>(i => property.Add(i));
+                    break;
+                default:
+                    throw new NotImplementedException(
+                        String.Format("Unknown NotifyCollectionChangedAction: {0}", args.Action));
+            }
+#if DEBUG
+                    // Check whether the Presenter has synced the two lists correctly
+                    if (property.Count != Control.Values.Count)
+                    {
+                        throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: number of elements mismatch");
+                    }
+                    for (int i = 0; i < property.Count; i++)
+                    {
+                        if (!property[i].Equals(Control.Values[i]))
+                        {
+                            throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: element mismatch");
+                        }
+                    }
+#endif
+
+        }
+
+
+        void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Control.Values.Clear();
+            foreach (string s in GetPropertyValue())
+            {
+                Control.Values.Add(s);
+            }
+        }
+    }
+
     #region Default Value Presenters
 
     /// <summary>
@@ -258,16 +325,9 @@ namespace Kistl.GUI
     /// </summary>
     /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
     /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
-    public class DefaultValuePresenter<TYPE, PROPERTY> : DefaultPresenter<TYPE, PROPERTY, IValueControl<TYPE>>
-        where PROPERTY : Property
+    public class DefaultValuePresenter<TYPE> : DefaultPresenter<TYPE, ValueTypeProperty, IValueControl<TYPE>>
     {
     }
-
-    public class BoolPresenter : DefaultValuePresenter<bool?, BoolProperty> { }
-    public class DateTimePresenter : DefaultValuePresenter<DateTime?, DateTimeProperty> { }
-    public class DoublePresenter : DefaultValuePresenter<double?, DoubleProperty> { }
-    public class IntPresenter : DefaultValuePresenter<int?, IntProperty> { }
-    public class StringPresenter : DefaultValuePresenter<string, StringProperty> { }
 
     #endregion
 

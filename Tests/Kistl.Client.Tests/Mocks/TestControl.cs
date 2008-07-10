@@ -56,7 +56,19 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestObjectControl : IObjectControl
+    public class TestBasicControl : IBasicControl
+    {
+        #region IBasicControl Members
+
+        public string Description { get; set; }
+        public string ShortLabel { get; set; }
+        public FieldSize Size { get; set; }
+        public IKistlContext Context { get; set; }
+
+        #endregion
+    }
+
+    public class TestObjectControl : TestBasicControl, IObjectControl
     {
         public readonly static ControlInfo Info
           = new ControlInfo()
@@ -83,12 +95,13 @@ namespace Kistl.Client.Mocks
         public string Description { get; set; }
         public string ShortLabel { get; set; }
         public FieldSize Size { get; set; }
+        public IKistlContext Context { get; set; }
 
         #endregion
 
     }
 
-    public class TestBoolControl : IValueControl<bool?>
+    public class TestBoolControl : TestBasicControl, IValueControl<bool?>
     {
         public TestBoolControl()
         {
@@ -109,13 +122,6 @@ namespace Kistl.Client.Mocks
             };
 
 
-        #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-
-        #endregion
 
         #region IBoolControl Members
 
@@ -133,7 +139,7 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestDateTimeControl : IValueControl<DateTime?>
+    public class TestDateTimeControl : TestBasicControl, IValueControl<DateTime?>
     {
         public TestDateTimeControl()
         {
@@ -153,15 +159,6 @@ namespace Kistl.Client.Mocks
                 ClassName = "Kistl.Client.Mocks.TestDateTimeControl"
             };
 
-
-        #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-
-        #endregion
-
         #region IDateTimeControl Members
 
         public event EventHandler UserInput;
@@ -179,7 +176,7 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestIntControl : IValueControl<int?>
+    public class TestIntControl : TestBasicControl, IValueControl<int?>
     {
         public TestIntControl()
         {
@@ -199,15 +196,6 @@ namespace Kistl.Client.Mocks
                 ClassName = "Kistl.Client.Mocks.TestIntControl"
             };
 
-
-        #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-
-        #endregion
-
         #region IIntControl Members
 
         public event EventHandler UserInput;
@@ -224,7 +212,7 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestDoubleControl : IValueControl<double?>
+    public class TestDoubleControl : TestBasicControl, IValueControl<double?>
     {
         public TestDoubleControl()
         {
@@ -244,15 +232,6 @@ namespace Kistl.Client.Mocks
                 ClassName = "Kistl.Client.Mocks.TestDoubleControl"
             };
 
-
-        #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-
-        #endregion
-
         #region IDoubleControl Members
 
         public event EventHandler UserInput;
@@ -269,7 +248,7 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestStringControl : IValueControl<string>
+    public class TestStringControl : TestBasicControl, IValueControl<string>
     {
         public TestStringControl()
         {
@@ -289,15 +268,6 @@ namespace Kistl.Client.Mocks
                 ClassName = "Kistl.Client.Mocks.TestStringControl"
             };
 
-
-        #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-
-        #endregion
-
         #region IStringControl Members
 
         public event EventHandler UserInput;
@@ -314,7 +284,7 @@ namespace Kistl.Client.Mocks
         }
     }
 
-    public class TestObjectReferenceControl : IReferenceControl
+    public class TestObjectReferenceControl : TestBasicControl, IReferenceControl
     {
         public TestObjectReferenceControl()
         {
@@ -341,15 +311,6 @@ namespace Kistl.Client.Mocks
                 UserInput(this, new EventArgs());
         }
 
-
-        #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-
-        #endregion
-
         #region IValueControl Members
 
         public event EventHandler UserInput;
@@ -373,7 +334,7 @@ namespace Kistl.Client.Mocks
     }
 
     public class TestObjectListControl
-        : IReferenceListControl
+        : TestBasicControl, IReferenceListControl
     {
         public TestObjectListControl()
         {
@@ -417,16 +378,6 @@ namespace Kistl.Client.Mocks
         public bool IsValidValue { get; set; }
 
         public event EventHandler UserInput;
-
-        #endregion
-
-        #region IBasicControl Members
-
-        public string ShortLabel { get; set; }
-
-        public string Description { get; set; }
-
-        public FieldSize Size { get; set; }
 
         #endregion
 

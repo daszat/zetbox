@@ -187,6 +187,11 @@ namespace Kistl.GUI.DB
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditSimpleProperty" },
+
+            new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.StringList,
+                Container = false,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.StringListControl" },
 #endregion
         });
     }
@@ -218,15 +223,17 @@ namespace Kistl.GUI.DB
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BackReferencePresenter`1" },
 
             new PresenterInfo() { Control = VisualType.Boolean, SourceType = typeof(BoolProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.BoolPresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultValuePresenter`1" },
             new PresenterInfo() { Control = VisualType.DateTime, SourceType = typeof(DateTimeProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DateTimePresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultValuePresenter`1" },
             new PresenterInfo() { Control = VisualType.Double, SourceType = typeof(DoubleProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DoublePresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultValuePresenter`1" },
             new PresenterInfo() { Control = VisualType.Integer, SourceType = typeof(IntProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.IntPresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultValuePresenter`1" },
             new PresenterInfo() { Control = VisualType.String, SourceType = typeof(StringProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.StringPresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultValuePresenter`1" },
+            new PresenterInfo() { Control = VisualType.StringList, SourceType = typeof(StringProperty),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.StringListPresenter" },
         });
 
     }

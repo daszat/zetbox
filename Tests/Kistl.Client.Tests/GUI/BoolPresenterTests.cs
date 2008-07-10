@@ -19,11 +19,11 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class BoolPresenterTests : StructPresenterTests<TestObject, bool, TestBoolControl, BoolPresenter>
+    public class BoolPresenterTests : StructPresenterTests<TestObject, bool, TestBoolControl>
     {
         public BoolPresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestBoolControl, BoolPresenter>(
+                new PresenterHarness<TestObject, TestBoolControl, DefaultValuePresenter<bool>>(
                     new TestObjectHarness(),
                     typeof(BoolProperty),
                     new ControlHarness<TestBoolControl>(TestObject.TestBoolVisual, Toolkit.TEST)),

@@ -17,12 +17,12 @@ using Kistl.GUI.Renderer;
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class GuiDbTests : PresenterTests<TestObject, string, TestStringControl, StringPresenter>
+    public class GuiDbTests : PresenterTests<TestObject, string, TestStringControl, DefaultValuePresenter<String>>
     {
 
         public GuiDbTests()
             : base(
-                new PresenterHarness<TestObject, TestStringControl, StringPresenter>(
+                new PresenterHarness<TestObject, TestStringControl, DefaultValuePresenter<String>>(
                     new TestObjectHarness(),
                     typeof(StringProperty),
                     new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)),

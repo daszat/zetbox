@@ -50,6 +50,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             get { return Ctrl.Size; }
             set { Ctrl.Size = value; }
         }
+
+        IKistlContext IBasicControl.Context
+        {
+            get { return ((IBasicControl)Ctrl).Context; }
+            set { ((IBasicControl)Ctrl).Context = value; }
+        }
     }
 
     public abstract class BaseContainerLoader<T> : BaseControlLoader<T>, IContainerLoader where T : class, IBasicControl
@@ -58,6 +64,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             ((IContainerLoader)Ctrl).AddChild(child);
         }
+
     }
 
     public class ObjectPanel : BaseContainerLoader<IObjectControl>, IObjectControl

@@ -189,6 +189,7 @@ namespace Kistl.GUI.Renderer.WPF
         string IBasicControl.ShortLabel { get; set; }
         string IBasicControl.Description { get; set; }
         FieldSize IBasicControl.Size { get; set; }
+        IKistlContext IBasicControl.Context { get; set; }
 
         #endregion
     }

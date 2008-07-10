@@ -31,12 +31,12 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class DateTimePresenterTests : StructPresenterTests<TestObject, DateTime, TestDateTimeControl, DateTimePresenter>
+    public class DateTimePresenterTests : StructPresenterTests<TestObject, DateTime, TestDateTimeControl>
     {
 
         public DateTimePresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestDateTimeControl, DateTimePresenter>(
+                new PresenterHarness<TestObject, TestDateTimeControl, DefaultValuePresenter<DateTime>>(
                     new TestObjectHarness(),
                     typeof(DateTimeProperty),
                     new ControlHarness<TestDateTimeControl>(TestObject.TestDateTimeVisual, Toolkit.TEST)),

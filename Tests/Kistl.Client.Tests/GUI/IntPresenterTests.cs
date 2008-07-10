@@ -32,11 +32,11 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class IntPresenterTests : StructPresenterTests<TestObject, int, TestIntControl, IntPresenter>
+    public class IntPresenterTests : StructPresenterTests<TestObject, int, TestIntControl>
     {
         public IntPresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestIntControl, IntPresenter>(
+                new PresenterHarness<TestObject, TestIntControl, DefaultValuePresenter<int>>(
                     new TestObjectHarness(),
                     typeof(IntProperty),
                     new ControlHarness<TestIntControl>(TestObject.TestIntVisual, Toolkit.TEST)),

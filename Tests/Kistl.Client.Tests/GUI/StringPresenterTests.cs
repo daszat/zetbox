@@ -33,11 +33,11 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class StringPresenterTests : ClassPresenterTests<TestObject, string, TestStringControl, StringPresenter>
+    public class StringPresenterTests : ClassPresenterTests<TestObject, string, TestStringControl, DefaultValuePresenter<String>>
     {
         public StringPresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestStringControl, StringPresenter>(
+                new PresenterHarness<TestObject, TestStringControl, DefaultValuePresenter<String>>(
                     new TestObjectHarness(),
                     typeof(StringProperty),
                     new ControlHarness<TestStringControl>(TestObject.TestStringVisual, Toolkit.TEST)),

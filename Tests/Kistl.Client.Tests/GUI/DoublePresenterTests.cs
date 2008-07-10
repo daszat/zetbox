@@ -30,11 +30,11 @@ namespace Kistl.GUI.Tests
     }
 
     [TestFixture]
-    public class DoublePresenterTests : StructPresenterTests<TestObject, double, TestDoubleControl, DoublePresenter>
+    public class DoublePresenterTests : StructPresenterTests<TestObject, double, TestDoubleControl>
     {
         public DoublePresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestDoubleControl, DoublePresenter>(
+                new PresenterHarness<TestObject, TestDoubleControl, DefaultValuePresenter<double>>(
                     new TestObjectHarness(),
                     typeof(DoubleProperty),
                     new ControlHarness<TestDoubleControl>(TestObject.TestDoubleVisual, Toolkit.TEST)),

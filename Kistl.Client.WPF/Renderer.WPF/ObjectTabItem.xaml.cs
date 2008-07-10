@@ -1,17 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Kistl.GUI;
-using System.ComponentModel;
+
+using Kistl.API;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -36,6 +27,7 @@ namespace Kistl.GUI.Renderer.WPF
         #endregion
 
         #region IBasicControl Member
+
         public string ShortLabel
         {
             get { return (string)GetValue(ShortLabelProperty); }
@@ -66,6 +58,17 @@ namespace Kistl.GUI.Renderer.WPF
         // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register("Size", typeof(FieldSize), typeof(ObjectTabItem), new UIPropertyMetadata(null));
+
+        public IKistlContext Context
+        {
+            get { return (IKistlContext)GetValue(ContextProperty); }
+            set { SetValue(ContextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Context.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContextProperty =
+            DependencyProperty.Register("Context", typeof(IKistlContext), typeof(ObjectTabItem), new UIPropertyMetadata());
+
 
         #endregion
     }

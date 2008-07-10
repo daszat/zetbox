@@ -30,6 +30,9 @@ namespace Kistl.GUI.Renderer.WPF
             set { }
         }
 
+        // No context needed
+        public Kistl.API.IKistlContext Context { get; set; }
+
         #endregion
     }
 }

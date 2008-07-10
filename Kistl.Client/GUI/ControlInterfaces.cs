@@ -26,6 +26,11 @@ namespace Kistl.GUI
         /// The preferred display size of this control.
         /// </summary>
         FieldSize Size { get; set; }
+
+        /// <summary>
+        /// The Context the Control can use to talk to the DB, if neccessary
+        /// </summary>
+        IKistlContext Context { get; set; }
     }
 
     /// <summary>
@@ -56,6 +61,17 @@ namespace Kistl.GUI
         event EventHandler UserInput;
     }
 
+    // TODO: add validation support
+    public interface IListControl<TYPE> : IBasicControl
+    {
+        /// <summary>
+        /// The actually displayed values.
+        /// </summary>
+        IList<TYPE> Values { get; }
+
+        event NotifyCollectionChangedEventHandler UserChangedList;
+    }
+
     /// <summary>
     /// a control that displays a reference to a IDataObject.
     /// </summary>
@@ -67,6 +83,10 @@ namespace Kistl.GUI
         /// The Type of the listed objects
         /// </summary>
         Type ObjectType { get; set; }
+
+        /// <summary>
+        /// A List of valid items to choose from
+        /// </summary>
         IList<IDataObject> ItemsSource { get; set; }
     }
 

@@ -82,6 +82,9 @@ namespace Kistl.GUI.Renderer
 
             var widget = KistlGUIContext.CreateControl(cInfo);
 
+            // pass on the context of the object to the Controls for advanced usage
+            widget.Context = obj.Context;
+
             // TODO: call presenter.Dispose() when window is closed
             var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
 

@@ -60,6 +60,12 @@ namespace Kistl.Client
         public static Type GetDataCLRType(this BaseProperty p)
         {
             string fullname = p.GetDataType();
+
+            // ValueTypes all use mscorlib types
+            if (p is ValueTypeProperty)
+                return Type.GetType(fullname);
+
+            // other properties not
             string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects.Client";
             return Type.GetType(fullname + ", " + assembly, true);
         }

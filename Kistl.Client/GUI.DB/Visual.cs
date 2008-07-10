@@ -92,12 +92,24 @@ namespace Kistl.GUI.DB
 
         private static Visual CreateVisual(StringProperty stringProperty)
         {
-            return new Visual()
+            if (stringProperty.IsList)
             {
-                ControlType = VisualType.String,
-                Description = "this control displays a string",
-                Property = stringProperty
-            };
+                return new Visual()
+                {
+                    ControlType = VisualType.StringList,
+                    Description = "this control displays a list of strings",
+                    Property = stringProperty,
+                };
+            }
+            else
+            {
+                return new Visual()
+                {
+                    ControlType = VisualType.String,
+                    Description = "this control displays a string",
+                    Property = stringProperty,
+                };
+            }
         }
 
         private static Visual CreateVisual(ObjectReferenceProperty objectReferenceProperty)
@@ -196,5 +208,6 @@ namespace Kistl.GUI.DB
         Double,
         Integer,
         String,
+        StringList,
     }
 }
