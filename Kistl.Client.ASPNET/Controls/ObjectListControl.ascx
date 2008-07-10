@@ -1,11 +1,11 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ObjectListControl.ascx.cs"
-    Inherits="Controls_ObjectListControl" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ObjectListControl.ascx.cs" Inherits="Controls_ObjectListControl" %>
+<%@ Import Namespace="Kistl.Client.ASPNET.Toolkit" %>
 <div class="Control">
     <asp:Label ID="Label1" runat="server" AssociatedControlID="divItems"><%= ShortLabel %></asp:Label>
     <div style="float: left;" id="divItems" runat="server">
         <div>
             <asp:LinkButton ID="lnkNew" runat="server" Text="New"></asp:LinkButton>
-            <asp:LinkButton ID="lnkAdd" runat="server" Text="Add"></asp:LinkButton>
+            <a href="javascript:chooseObjectDialog_ChooseObject('<%= HttpUtility.HtmlEncode(ObjectType.ToJSON()) %>', '<%= lstItems.ClientID %>', objectListControl_OnItemAdd);">Add</a>
         </div>
         <adc:DataList ID="lstItems" runat="server" 
             DataKeyField="ID"

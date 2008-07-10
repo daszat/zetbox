@@ -42,3 +42,11 @@ function objectListControl_OnItemDelete(sender, e)
     data.splice(index, 1);
     sender.dataBind();
 }
+
+function objectListControl_OnItemAdd(dataListID, item)
+{
+    var dataList = $find(dataListID);
+    var data = dataList.get_dataSource();
+    data.push(item);
+    dataList.dataBind();
+}

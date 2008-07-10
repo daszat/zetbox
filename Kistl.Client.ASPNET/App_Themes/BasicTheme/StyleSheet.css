@@ -2,12 +2,25 @@
 {
 }
 
+div.Dialog
+{
+	background: white;
+	border: solid 1px black;
+	padding: 10px;
+}
+
 div.ObjectPanelChildren
 {
 	padding-top: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 10px;	
+}
+
+.ModalBackground {
+	background-color:Gray;
+	filter:alpha(opacity=70);
+	opacity:0.7;
 }
 
 div.Control

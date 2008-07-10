@@ -20,7 +20,9 @@ using Kistl.Client.ASPNET.Toolkit;
 public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IReferenceListControl
 {
     protected void Page_Load(object sender, EventArgs e)
-    {
+    {        
+        Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Include_ObjectListControl", ResolveClientUrl("ObjectListControl.js"));
+
         if (IsPostBack)
         {
             var postedData = hdItems.Value.FromJSONArray(((IBasicControl)this).Context).ToList();
@@ -95,7 +97,6 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IRe
 
         hdItems.Value = _Value.ToJSONArray();
 
-        Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Include_ObjectListControl", ResolveClientUrl("ObjectListControl.js"));
         Page.ClientScript.RegisterStartupScript(this.GetType(), "Startup_ObjectListControl_" + this.ClientID,
             string.Format("Sys.Application.add_load(function() {{ objectListControl_DataBind('{0}', '{1}'); }}); \n",
                 lstItems.ClientID, hdItems.ClientID), true);

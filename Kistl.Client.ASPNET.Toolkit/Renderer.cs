@@ -47,7 +47,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public override T ChooseObject<T>(IKistlContext ctx)
         {
-            throw new NotImplementedException("This runs contrary to ASP.NET's runtime model. Avoid triggering Events that lead to presenters needing this method.");
+            return (T)ChooseObject(ctx, typeof(T));
         }
     }
 }
