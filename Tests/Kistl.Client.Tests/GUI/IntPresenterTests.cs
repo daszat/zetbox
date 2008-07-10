@@ -36,7 +36,7 @@ namespace Kistl.GUI.Tests
     {
         public IntPresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestIntControl, DefaultValuePresenter<int>>(
+                new PresenterHarness<TestObject, TestIntControl, DefaultStructPresenter<int>>(
                     new TestObjectHarness(),
                     typeof(IntProperty),
                     new ControlHarness<TestIntControl>(TestObject.TestIntVisual, Toolkit.TEST)),

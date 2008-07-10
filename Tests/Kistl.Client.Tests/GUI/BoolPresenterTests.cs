@@ -23,7 +23,7 @@ namespace Kistl.GUI.Tests
     {
         public BoolPresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestBoolControl, DefaultValuePresenter<bool>>(
+                new PresenterHarness<TestObject, TestBoolControl, DefaultStructPresenter<bool>>(
                     new TestObjectHarness(),
                     typeof(BoolProperty),
                     new ControlHarness<TestBoolControl>(TestObject.TestBoolVisual, Toolkit.TEST)),

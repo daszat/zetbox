@@ -36,7 +36,7 @@ namespace Kistl.GUI.Tests
 
         public DateTimePresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestDateTimeControl, DefaultValuePresenter<DateTime>>(
+                new PresenterHarness<TestObject, TestDateTimeControl, DefaultStructPresenter<DateTime>>(
                     new TestObjectHarness(),
                     typeof(DateTimeProperty),
                     new ControlHarness<TestDateTimeControl>(TestObject.TestDateTimeVisual, Toolkit.TEST)),

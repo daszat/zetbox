@@ -34,7 +34,7 @@ namespace Kistl.GUI.Tests
     {
         public DoublePresenterTests()
             : base(
-                new PresenterHarness<TestObject, TestDoubleControl, DefaultValuePresenter<double>>(
+                new PresenterHarness<TestObject, TestDoubleControl, DefaultStructPresenter<double>>(
                     new TestObjectHarness(),
                     typeof(DoubleProperty),
                     new ControlHarness<TestDoubleControl>(TestObject.TestDoubleVisual, Toolkit.TEST)),

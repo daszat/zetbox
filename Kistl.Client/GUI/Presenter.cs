@@ -288,18 +288,18 @@ namespace Kistl.GUI
                         String.Format("Unknown NotifyCollectionChangedAction: {0}", args.Action));
             }
 #if DEBUG
-                    // Check whether the Presenter has synced the two lists correctly
-                    if (property.Count != Control.Values.Count)
-                    {
-                        throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: number of elements mismatch");
-                    }
-                    for (int i = 0; i < property.Count; i++)
-                    {
-                        if (!property[i].Equals(Control.Values[i]))
-                        {
-                            throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: element mismatch");
-                        }
-                    }
+            // Check whether the Presenter has synced the two lists correctly
+            if (property.Count != Control.Values.Count)
+            {
+                throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: number of elements mismatch");
+            }
+            for (int i = 0; i < property.Count; i++)
+            {
+                if (!property[i].Equals(Control.Values[i]))
+                {
+                    throw new InvalidOperationException("Error when synchronising Values in ObjectListPresenter: element mismatch");
+                }
+            }
 #endif
 
         }
@@ -321,13 +321,29 @@ namespace Kistl.GUI
     /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
     /// Additionally basic change handling is implemented.
     /// 
+    /// This derivation is only a shortcut to always specifying IValueControl&lt;TYPE?&gt; as CONTROL.
+    /// </summary>
+    /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
+    /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
+    public class DefaultStructPresenter<TYPE> : DefaultPresenter<TYPE?, ValueTypeProperty, IValueControl<TYPE?>>
+        where TYPE : struct
+    {
+    }
+
+    /// <summary>
+    /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
+    /// Additionally basic change handling is implemented.
+    /// 
     /// This derivation is only a shortcut to always specifying IValueControl&lt;TYPE&gt; as CONTROL.
     /// </summary>
     /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
     /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
     public class DefaultValuePresenter<TYPE> : DefaultPresenter<TYPE, ValueTypeProperty, IValueControl<TYPE>>
+        where TYPE : class
     {
     }
+
+
 
     #endregion
 
