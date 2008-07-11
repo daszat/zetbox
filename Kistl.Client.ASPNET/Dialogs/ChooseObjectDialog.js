@@ -5,7 +5,10 @@ var chooseObjectDialog_Callback;
 
 function chooseObjectDialog_OnOK()
 {
-    chooseObjectDialog_Callback(chooseObjectDialog_DataListID, '');
+    var dlg = $find('chooseObjectBehavior');
+    var lst = $get('panelChooseObject_lst', dlg._popupElement);
+    chooseObjectDialog_Callback(chooseObjectDialog_DataListID, 
+        Sys.Serialization.JavaScriptSerializer.deserialize(lst.value));
 }
 
 function chooseObjectDialog_ChooseObject(type, dataListID, callback)
@@ -15,8 +18,25 @@ function chooseObjectDialog_ChooseObject(type, dataListID, callback)
     chooseObjectDialog_Callback = callback;
 
     var dlg = $find('chooseObjectBehavior');
-    var lst = $get('lst', dlg._popupElement);
+    var lst = $get('panelChooseObject_lst', dlg._popupElement);
+    // Clear current list
     lst.options.length = 0;
-    lst.options[0] = new Option(chooseObjectDialog_Type.TypeName);
+    
+    // Call WCF Service
+    Kistl.Client.ASPNET.AJAXService.GetList(chooseObjectDialog_Type, chooseObjectDialog_ServiceCompleted_GetList);
+    
+    // In the meantime, show the dialog
     dlg.show();
+}
+
+function chooseObjectDialog_ServiceCompleted_GetList(result)
+{
+    var dlg = $find('chooseObjectBehavior');
+    var lst = $get('panelChooseObject_lst', dlg._popupElement);
+    lst.options.length = 0;
+
+    for(var i = 0; i < result.length; i++)
+    {
+        lst.options[i] = new Option(result[i].Text, Sys.Serialization.JavaScriptSerializer.serialize(result[i]));
+    }
 }

@@ -13,7 +13,8 @@
     <div class="Dialog">
         <h2>Choose Object</h2>
         <div>
-            <select id="lst" size="5" />
+            <select id="panelChooseObject_lst" size="5" >
+            </select>
         </div>
         <div>
             <asp:Button ID="btnOK" runat="server" Text="OK" />

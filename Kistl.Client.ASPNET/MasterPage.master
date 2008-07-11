@@ -11,6 +11,9 @@
 <body>
     <form id="form1" runat="server">
     <asp:ScriptManager runat="server">
+        <Services>
+            <asp:ServiceReference Path="~/AJAXService/AJAXService.svc" />
+        </Services>
         <Scripts>
             <asp:ScriptReference Path="~/Scripts/KistlCommon.js" />
         </Scripts>
