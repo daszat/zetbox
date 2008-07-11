@@ -1,5 +1,4 @@
 ﻿/// <reference name="MicrosoftAjax.js"/>
-var chooseObjectDialog_Type;
 var chooseObjectDialog_DataListID;
 var chooseObjectDialog_Callback;
 
@@ -11,9 +10,9 @@ function chooseObjectDialog_OnOK()
         Sys.Serialization.JavaScriptSerializer.deserialize(lst.value));
 }
 
-function chooseObjectDialog_ChooseObject(type, dataListID, callback)
+function chooseObjectDialog_ChooseObject(typeString, dataListID, callback)
 {
-    chooseObjectDialog_Type = Sys.Serialization.JavaScriptSerializer.deserialize(type);
+    var type = Sys.Serialization.JavaScriptSerializer.deserialize(typeString);
     chooseObjectDialog_DataListID = dataListID;
     chooseObjectDialog_Callback = callback;
 
@@ -23,7 +22,7 @@ function chooseObjectDialog_ChooseObject(type, dataListID, callback)
     lst.options.length = 0;
     
     // Call WCF Service
-    Kistl.Client.ASPNET.AJAXService.GetList(chooseObjectDialog_Type, chooseObjectDialog_ServiceCompleted_GetList);
+    Kistl.Client.ASPNET.AJAXService.GetList(type, chooseObjectDialog_ServiceCompleted_GetList);
     
     // In the meantime, show the dialog
     dlg.show();
