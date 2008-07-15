@@ -1,4 +1,6 @@
-﻿//----------------------------------------------------------------
+﻿/// <reference name="MicrosoftAjax.js"/>
+
+//----------------------------------------------------------------
 // Javascript Functions for the ObjectListControl
 //----------------------------------------------------------------
 
@@ -43,6 +45,13 @@ function objectListControl_OnItemDelete(sender, e)
     sender.dataBind();
 }
 
+function objectListControl_OnItemCommand(sender, e)
+{
+    var data = sender.get_dataSource();
+    // Call_ClientRenderer.Open(Sys.Serialization.JavaScriptSerializer.serialize(data));    
+}
+
+
 function objectListControl_OnItemAdd(dataListID, item)
 {
     var dataList = $find(dataListID);
@@ -50,3 +59,4 @@ function objectListControl_OnItemAdd(dataListID, item)
     data.push(item);
     dataList.dataBind();
 }
+

@@ -10,8 +10,10 @@
         <adc:DataList ID="lstItems" runat="server" 
             DataKeyField="ID"
             ItemDataBoundEvent="objectListControl_OnItemDataBound"
-            DeleteCommandEvent="objectListControl_OnItemDelete">
+            DeleteCommandEvent="objectListControl_OnItemDelete"
+            ItemCommandEvent="objectListControl_OnItemCommand">
             <ItemTemplate>
+                <a href="#" commandName="item">Open</a>
                 <a href="#" commandName="delete">Remove</a>
                 <span id="text"></span>
             </ItemTemplate>

@@ -3,11 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:HiddenField ID="hdObjects" runat="server" />
     <div>
         <uc:ChooseObjectDialog runat="server" />
     </div>
-    <div id="divMainPanel" runat="server">
-        <%-- Controls goes here --%>
-    </div>
+    <ajaxToolkit:TabContainer ID="tabObjects" runat="server">
+    </ajaxToolkit:TabContainer>
 </asp:Content>
 

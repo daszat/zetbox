@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -60,6 +61,7 @@
   <ItemGroup>
     <Compile Include="ControlLoader.cs" />
     <Compile Include="JavaScriptObjectMoniker.cs" />
+    <Compile Include="JavascriptRenderer.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

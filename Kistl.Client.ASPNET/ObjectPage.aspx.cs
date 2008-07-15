@@ -14,6 +14,8 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.GUI.DB;
 using Kistl.Client;
+using Kistl.Client.ASPNET.Toolkit;
+using System.Collections.Generic;
 
 public partial class ObjectPage : System.Web.UI.Page
 {
@@ -37,13 +39,66 @@ public partial class ObjectPage : System.Web.UI.Page
     {
     }
 
-    private void CreateControls()
+    List<IDataObject> _Objects;
+    public List<IDataObject> Objects
     {
-        IDataObject obj = ctx.Find(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"), int.Parse(Request["ID"]));
+        get
+        {
+            if (_Objects == null)
+            {
+                if (!IsPostBack)
+                {
+                    _Objects = new List<IDataObject>();
+                    // Parse Request
+                    if (string.IsNullOrEmpty(Request["Type"])
+                        || string.IsNullOrEmpty(Request["ID"]))
+                    {
+                        throw new ArgumentNullException("Type, ID", "Type and ID must not be null");
+                    }
+                    IDataObject obj = ctx.Find(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"),
+                                                int.Parse(Request["ID"]));
+                    _Objects.Add(obj);
+                }
+                else
+                {
+                    // We are to early! So we need to parse the Request Variable directly
+                    // If anyone knows a better way -> pls. get in touch with me.
+                    _Objects = Request[hdObjects.UniqueID].FromJSONArray(ctx).ToList();
+                }
+            }
 
+            return _Objects;
+        }
+    }
+
+    protected override void OnPreRender(EventArgs e)
+    {
+        base.OnPreRender(e);
+        hdObjects.Value = Objects.ToJSONArray();
+    }
+
+    public void ShowObject(IDataObject obj)
+    {
         var template = obj.FindTemplate(TemplateUsage.EditControl);
         var widget = (Control)Manager.Renderer.CreateControl(obj, template.VisualTree);
 
-        this.divMainPanel.Controls.Add(widget);
+        AjaxControlToolkit.TabPanel panel = new AjaxControlToolkit.TabPanel();
+        panel.Controls.Add(widget);
+        panel.HeaderText = obj.ToString();
+
+        tabObjects.Tabs.Add(panel);
+    }
+
+    private void CreateControls()
+    {
+        foreach (IDataObject obj in Objects)
+        {
+            ShowObject(obj);
+        }
+
+        if (tabObjects.ActiveTab == null)
+        {
+            tabObjects.ActiveTabIndex = 0;
+        }
     }
 }
