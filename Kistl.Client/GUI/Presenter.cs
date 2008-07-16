@@ -434,12 +434,15 @@ namespace Kistl.GUI
         protected virtual void OnNew()
         {
             ObjectClass klass = Manager.Renderer.ChooseObject<ObjectClass>(Control.Context);
-            Kistl.API.IDataObject newObject = Control.Context.Create(klass.GetDataCLRType());
+            if (klass != null)
+            {
+                Kistl.API.IDataObject newObject = Control.Context.Create(klass.GetDataCLRType());
 
-            var template = newObject.FindTemplate(TemplateUsage.EditControl);
-            IObjectControl ctrl = (IObjectControl)Manager.Renderer.CreateControl(newObject, template.VisualTree);
+                var template = newObject.FindTemplate(TemplateUsage.EditControl);
+                IObjectControl ctrl = (IObjectControl)Manager.Renderer.CreateControl(newObject, template.VisualTree);
 
-            Control.ShowObject(newObject, ctrl);
+                Control.ShowObject(newObject, ctrl);
+            }
         }
 
         #endregion
