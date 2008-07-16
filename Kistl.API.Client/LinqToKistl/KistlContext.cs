@@ -198,26 +198,33 @@ namespace Kistl.API.Client
             CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
 
+            // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
             {
                 obj.ID = --_newIDCounter;
             }
             else
             {
+                // Check if Object is already in this Context
                 obj = ContainsObject(obj.GetType(), obj.ID) ?? obj;
+
+                // Check ID <-> newIDCounter
                 if (obj.ID < _newIDCounter)
                 {
                     _newIDCounter = obj.ID;
                 }
             }
 
-            obj.AttachToContext(this);
+            // Attach & set Objectstate to Unmodified
             if (!_objects.Contains(obj))
             {
                 _objects.Add(obj);
                 obj.ObjectState = DataObjectState.Unmodified;
                 KistlContextDebugger.Changed(this, _objects);
             }
+
+            // Call Objects Attach Method to ensure, that every Child Object is also attached
+            obj.AttachToContext(this);
 
             return obj;
         }

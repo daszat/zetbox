@@ -129,15 +129,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Renderer.WPF\EditPointerPropertyList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Renderer.WPF\EditSimpleProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditSimplePropertyList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -219,14 +211,8 @@
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
       <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Renderer.WPF\EditPointerPropertyList.xaml.cs">
-      <DependentUpon>EditPointerPropertyList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Renderer.WPF\EditSimpleProperty.xaml.cs">
       <DependentUpon>EditSimpleProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditSimplePropertyList.xaml.cs">
-      <DependentUpon>EditSimplePropertyList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\GroupBoxWrapper.cs" />
     <Compile Include="Renderer.WPF\ObjectListControl.xaml.cs">

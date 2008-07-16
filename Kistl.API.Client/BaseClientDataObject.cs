@@ -47,7 +47,17 @@ namespace Kistl.API.Client
         public IKistlContext Context { get { return _context; } }
         public virtual void AttachToContext(IKistlContext ctx)
         {
-            _context = ctx;
+            if (_context != null && _context != ctx) throw new InvalidOperationException("Object cannot be attached to a new Context while attached to another Context.");
+            if (ctx.ContainsObject(this.GetType(), this.ID) == null)
+            {
+                // Object is not in this Context present
+                // -> Attach it. Attach will call this Method again!
+                ctx.Attach(this);
+            }
+            else
+            {
+                _context = ctx;
+            }
         }
 
         public virtual void DetachFromContext(IKistlContext ctx)

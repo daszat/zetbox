@@ -60,6 +60,7 @@ namespace Kistl.API.Server
         /// <param name="ctx">Context to attach this Object to.</param>
         public virtual void AttachToContext(IKistlContext ctx)
         {
+            if (_context != null && _context != ctx) throw new InvalidOperationException("Object cannot be attached to a new Context while attached to another Context.");
             _context = ctx;
         }
 
@@ -69,6 +70,7 @@ namespace Kistl.API.Server
         /// <param name="ctx">Context to detach this Object from.</param>
         public virtual void DetachFromContext(IKistlContext ctx)
         {
+            if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
             _context = null;
         }
 

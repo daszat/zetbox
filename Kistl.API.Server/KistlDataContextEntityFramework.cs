@@ -161,14 +161,7 @@ namespace Kistl.API.Server
         /// If the Object is not in that Context, null is returned.</returns>
         public IPersistenceObject ContainsObject(Type type, int ID)
         {
-            if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
-            ObjectStateEntry entry;
-            if (this.ObjectStateManager.TryGetObjectStateEntry(
-                new System.Data.EntityKey(GetEntityName(type), "ID", ID), out entry))
-            {
-                return (IPersistenceObject)entry.Entity;
-            }
-            return null;
+            throw new NotSupportedException("The Entity Provider does not support this operation");
         }
 
         /// <summary>

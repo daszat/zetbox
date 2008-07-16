@@ -47,6 +47,8 @@ namespace Kistl.Client.WPF
             Bind();
         }
 
+        private IKistlContext context;
+
         private void Bind()
         {
             // Desingmode? -> raus
@@ -54,10 +56,15 @@ namespace Kistl.Client.WPF
 
             try
             {
-                List<ModuleNode> modules = new List<ModuleNode>();
-                ClientHelper.Modules.Values.ToList().ForEach(m => modules.Add(new ModuleNode(m)));
+                if (context != null)
+                {
+                    context.Dispose();
+                }
 
-                this.DataContext = modules;
+                context = KistlContext.GetContext();
+
+                this.DataContext = context.GetQuery<Kistl.App.Base.Module>().ToList()
+                    .Select(m => new ModuleNode(m)).ToList();
             }
             catch (Exception ex)
             {
@@ -225,9 +232,13 @@ namespace Kistl.Client.WPF
 
                 if (resultObjectType != null && n != null)
                 {
-                    Kistl.API.IDataObject newObject = (Kistl.API.IDataObject)Activator.CreateInstance(resultObjectType);
                     // Create a new Context for this object
-                    newObject.AttachToContext(KistlContext.GetContext());
+                    IKistlContext ctx = KistlContext.GetContext();
+                    Kistl.API.IDataObject newObject = ctx.Create(resultObjectType);
+
+                    // (Kistl.API.IDataObject)Activator.CreateInstance(resultObjectType);
+                    // newObject.AttachToContext(ctx);
+                    
                     Manager.Renderer.ShowObject(newObject);
                     n.RefreshChildren();
                 }
