@@ -82,6 +82,7 @@ namespace Kistl.Client.WPF.Dialogs
             // load all available Objects of this type
             // TODO: implement paging/searching in order to reduce server load
             lstObjects.ItemsSource = Context.GetQuery(ObjectType).ToList().OrderBy(i => i.ToString()).ToList();
+            txtFilterString.Focus();
         }
 
         protected virtual void OnSelect()

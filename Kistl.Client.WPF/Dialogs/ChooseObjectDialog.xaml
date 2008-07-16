@@ -12,19 +12,25 @@
             Margin="0,0,0,3"
             >
             <Label DockPanel.Dock="Left">Search:</Label>
-            <TextBox Text="{Binding ElementName=Self,Path=FilterString,UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox
+                x:Name="txtFilterString"
+                Text="{Binding ElementName=Self,Path=FilterString,UpdateSourceTrigger=PropertyChanged}"
+                TabIndex="1"
+                />
         </DockPanel>
         <ToolBar
             DockPanel.Dock="Bottom"
             Margin="0,3,0,0"
             >
-            <Button IsDefault="True" Click="Select_Click">Select</Button>
-            <Button Click="New_Click">New</Button>
-            <Button IsCancel="True">Cancel</Button>
+            <Button IsDefault="True" Click="Select_Click" TabIndex="3">Select</Button>
+            <Button Click="New_Click" TabIndex="4">New</Button>
+            <Button IsCancel="True" TabIndex="5">Cancel</Button>
         </ToolBar>
         <ListView
             x:Name="lstObjects"
             MouseDoubleClick="lstObjects_MouseDoubleClick"
-            SelectionMode="Single" />
+            SelectionMode="Single" 
+            TabIndex="2"
+            />
     </DockPanel>
 </Window>
