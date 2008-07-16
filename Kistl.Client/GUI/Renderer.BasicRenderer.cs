@@ -56,7 +56,6 @@ namespace Kistl.GUI.Renderer
         where CONTAINER : CONTROL
     {
         public abstract void ShowMessage(string msg);
-        public abstract void ShowObject(IDataObject obj);
         public abstract IDataObject ChooseObject(IKistlContext ctx, Type klass);
         public abstract T ChooseObject<T>(IKistlContext ctx) where T : IDataObject;
         public abstract Toolkit Platform { get; }
@@ -100,8 +99,16 @@ namespace Kistl.GUI.Renderer
             }
         }
 
+        public virtual void ShowObject(IDataObject obj)
+        {
+            var template = obj.FindTemplate(TemplateUsage.EditControl);
+            var ctrl = (CONTAINER)CreateControl(obj, template.VisualTree);
+            ShowObject(obj, ctrl);
+        }
+
         protected abstract CONTROL Setup(PROPERTY control);
         protected abstract CONTAINER Setup(CONTAINER widget, IList<CONTROL> list);
+        protected abstract void ShowObject(IDataObject obj, CONTAINER ctrl);
 
     }
 }

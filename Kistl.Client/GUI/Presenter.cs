@@ -395,6 +395,86 @@ namespace Kistl.GUI
 
     }
 
+    public class WorkspacePresenter : IPresenter
+    {
+        private static int _workspaceCount = 0;
+
+        protected IWorkspaceControl Control { get; set; }
+        protected virtual void InitializeComponent(IWorkspaceControl iWorkspaceControl)
+        {
+            Control = iWorkspaceControl;
+
+            Control.ShortLabel = String.Format("Workspace {0}", ++_workspaceCount);
+            Control.Description = "All objects in this Workspace will be saved together";
+
+            Control.UserSaveRequest += new EventHandler(Control_UserSaveRequest);
+            Control.UserAbortRequest += new EventHandler(Control_UserAbortRequest);
+            Control.UserNewObjectRequest += new EventHandler(Control_UserNewObjectRequest);
+        }
+
+        #region Behaviours
+
+        /// <summary>
+        /// Is called when the window wants to save all work.
+        /// </summary>
+        protected virtual void OnSave()
+        {
+            Control.Context.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Is called when the window wants to throwaway all work.
+        /// </summary>
+        protected virtual void OnAbort()
+        {
+            if (Control.Context != null)
+                Control.Context.Dispose();
+        }
+
+        protected virtual void OnNew()
+        {
+            ObjectClass klass = Manager.Renderer.ChooseObject<ObjectClass>(Control.Context);
+            Kistl.API.IDataObject newObject = Control.Context.Create(klass.GetDataCLRType());
+
+            var template = newObject.FindTemplate(TemplateUsage.EditControl);
+            IObjectControl ctrl = (IObjectControl)Manager.Renderer.CreateControl(newObject, template.VisualTree);
+
+            Control.ShowObject(newObject, ctrl);
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        void Control_UserSaveRequest(object sender, EventArgs e)
+        {
+            OnSave();
+        }
+
+        void Control_UserAbortRequest(object sender, EventArgs e)
+        {
+            OnAbort();
+        }
+
+        void Control_UserNewObjectRequest(object sender, EventArgs e)
+        {
+            OnNew();
+        }
+
+        #endregion
+
+        #region IPresenter Member
+
+        public void InitializeComponent(IDataObject obj, Visual v, IBasicControl ctrl)
+        {
+            InitializeComponent((IWorkspaceControl)ctrl);
+        }
+
+        #endregion
+
+    }
+
+
     /// <summary>
     /// Some extension functions to help with accessing the Objects
     /// </summary>

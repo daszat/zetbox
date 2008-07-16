@@ -29,6 +29,12 @@ namespace Kistl.Client.ASPNET.Toolkit
                     HttpUtility.UrlEncode(obj.GetType().FullName), obj.ID));
         }
 
+        // TODO?
+        protected override void ShowObject(IDataObject obj, IContainerLoader ctrl)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override IControlLoader Setup(IControlLoader control)
         {
             return control;

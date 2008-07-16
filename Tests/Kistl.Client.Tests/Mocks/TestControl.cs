@@ -30,7 +30,7 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public override void ShowObject(IDataObject obj)
+        protected override void ShowObject(IDataObject obj, object ctrl)
         {
             throw new NotImplementedException();
         }

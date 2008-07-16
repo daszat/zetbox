@@ -14,13 +14,14 @@ using Kistl.API;
 using System.Collections.ObjectModel;
 using Kistl.GUI.DB;
 using Kistl.Client;
+using Kistl.App.Base;
 
 namespace Kistl.GUI.Renderer.WPF
 {
     /// <summary>
     /// Interaktionslogik für WorkspaceWindow.xaml
     /// </summary>
-    public partial class WorkspaceWindow : Window
+    public partial class WorkspaceWindow : Window, IWorkspaceControl
     {
 
         public WorkspaceWindow()
@@ -36,7 +37,9 @@ namespace Kistl.GUI.Renderer.WPF
         /// </summary>
         protected virtual void OnSave(RoutedEventArgs e)
         {
-            Context.SubmitChanges();
+            CheckContext("Saving");
+            if (UserSaveRequest != null)
+                UserSaveRequest(this, e);
         }
 
         /// <summary>
@@ -44,15 +47,37 @@ namespace Kistl.GUI.Renderer.WPF
         /// </summary>
         protected virtual void OnAbort(RoutedEventArgs e)
         {
-            Context.Dispose();
+            if (UserAbortRequest != null)
+                UserAbortRequest(this, e);
         }
 
-        public void ShowObject(Kistl.API.IDataObject obj)
+        protected virtual void OnNew(RoutedEventArgs e)
+        {
+            CheckContext("OnNew");
+            if (UserNewObjectRequest != null)
+                UserNewObjectRequest(this, e);
+        }
+
+        public void ShowObject(Kistl.API.IDataObject obj, IBasicControl ctrl)
+        {
+            if (ctrl == null)
+                throw new ArgumentNullException("ctrl", "must not be null");
+
+            ObjectTabItem realCtrl = ctrl as ObjectTabItem;
+            if (realCtrl == null)
+                throw new ArgumentOutOfRangeException("ctrl", "must be a ObjectTabItem");
+
+            ShowObject(obj, realCtrl);
+        }
+
+        public void ShowObject(Kistl.API.IDataObject obj, ObjectTabItem ctrl)
         {
             CheckContext("ShowObject");
 
             if (obj.Context != Context)
-                throw new ArgumentOutOfRangeException("obj", "Object is not in this window's Context");
+            {
+                throw new ArgumentOutOfRangeException("obj", "Object is not in this Workspace's Context");
+            }
 
             {
                 int idx = Objects.IndexOf(obj);
@@ -62,16 +87,9 @@ namespace Kistl.GUI.Renderer.WPF
                     return;
                 }
             }
-            var template = obj.FindTemplate(TemplateUsage.EditControl);
-            ObjectTabItem oti = (ObjectTabItem)Manager.Renderer.CreateControl(obj, template.VisualTree);
-            tabObjects.Items.Add(oti);
-            Objects.Add(obj);
 
-            // TODO: Presenter??
-            if (Objects.Count == 1)
-            {
-                this.Title = obj.ToString();
-            }
+            tabObjects.Items.Add(ctrl);
+            Objects.Add(obj);
         }
 
         public ObservableCollection<Kistl.API.IDataObject> Objects
@@ -86,15 +104,44 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-        #region Context
+        #region Event Handlers
 
-        public IKistlContext Context { get; private set; }
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            OnSave(e);
+        }
+
+        private void SaveAndClose_Click(object sender, RoutedEventArgs e)
+        {
+            OnSave(e);
+            this.Close();
+        }
+
+        private void AbortAndClose_Click(object sender, RoutedEventArgs e)
+        {
+            OnAbort(e);
+            this.Close();
+        }
+
+        private void Self_Closed(object sender, EventArgs e)
+        {
+            OnAbort(null);
+        }
+
+        private void New_Click(object sender, RoutedEventArgs e)
+        {
+            OnNew(e);
+        }
+
+        #endregion
+
+        #region Other Context Stuff
 
         /// <summary>
         /// Set the context of this WorkspaceWindow. Can only be used once.
         /// </summary>
         /// <param name="ctx">The Context that shall be handled by this WsW. Must not be null. Must not be used by another WsW.</param>
-        public void SetContext(IKistlContext ctx)
+        protected void SetContext(IKistlContext ctx)
         {
             if (ctx == null)
                 throw new ArgumentNullException("ctx", "SetContext needs a valid parameter");
@@ -109,7 +156,7 @@ namespace Kistl.GUI.Renderer.WPF
             if (_workspaces.ContainsKey(ctx))
                 throw new ArgumentOutOfRangeException("ctx", "Cannot set Context from another WorkspaceWindow");
 
-            Context = ctx;
+            _Context = ctx;
             _workspaces[ctx] = this;
             CheckContext("SetContext");
         }
@@ -139,43 +186,42 @@ namespace Kistl.GUI.Renderer.WPF
         /// <summary>
         /// Returns the WorkspaceWindow that is associated with the given Context or null if there is no association.
         /// </summary>
-        public static WorkspaceWindow FindWindow(IKistlContext ctx)
+        public static WorkspaceWindow FindOrCreateWindow(IKistlContext ctx)
         {
             if (_workspaces.ContainsKey(ctx))
+            {
                 return _workspaces[ctx];
+            }
             else
-                return null;
+            {
+                WorkspaceWindow wc = new WorkspaceWindow();
+                wc.Context = ctx;
+
+                WorkspacePresenter wp = new WorkspacePresenter();
+                wp.InitializeComponent(null, null, wc);
+                return wc;
+            }
         }
 
         #endregion
 
-        #region Event Handlers
+        #region IWorkspaceControl Member
 
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            OnSave(e);
-        }
+        public event EventHandler UserSaveRequest;
+        public event EventHandler UserAbortRequest;
+        public event EventHandler UserNewObjectRequest;
 
-        private void SaveAndClose_Click(object sender, RoutedEventArgs e)
-        {
-            OnSave(e);
-            this.Close();
-        }
+        #endregion
 
-        private void AbortAndClose_Click(object sender, RoutedEventArgs e)
-        {
-            OnAbort(e);
-            this.Close();
-        }
+        #region IBasicControl Member
 
-        private void Self_Closed(object sender, EventArgs e)
-        {
-            OnAbort(null);
-        }
+        public string ShortLabel { get; set; }
+        public string Description { get; set; }
+        public FieldSize Size { get; set; }
+
+        private IKistlContext _Context;
+        public IKistlContext Context { get { return _Context; } set { SetContext(value); } }
+
         #endregion
     }
-
-    /*
-     */
-
 }

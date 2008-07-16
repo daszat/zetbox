@@ -32,22 +32,11 @@ namespace Kistl.GUI.Renderer.WPF
             return widget;
         }
 
-        public override void ShowObject(Kistl.API.IDataObject obj)
+        protected override void ShowObject(Kistl.API.IDataObject obj, ContentControl ctrl)
         {
-            WorkspaceWindow w = WorkspaceWindow.FindWindow(obj.Context);
-            if (w == null)
-            {
-                w = new WorkspaceWindow();
-                w.SetContext(obj.Context);
-            }
-            w.ShowObject(obj);
+            WorkspaceWindow w = WorkspaceWindow.FindOrCreateWindow(obj.Context);
+            w.ShowObject(obj, (ObjectTabItem)ctrl);
             w.Show();
-
-            /*
-            var template = obj.FindTemplate(TemplateUsage.EditControl);
-            var widget = (System.Windows.Window)Manager.Renderer.CreateControl(obj, template.VisualTree);
-            widget.Show();
-             */
         }
 
         public override void ShowMessage(string msg)

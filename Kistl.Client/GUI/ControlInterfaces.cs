@@ -139,6 +139,33 @@ namespace Kistl.GUI
         event EventHandler UserDeleteRequest;
     }
 
+    /// <summary>
+    /// A "Workspace" is the visual representation of a Context.
+    /// </summary>
+    public interface IWorkspaceControl : IBasicControl
+    {
+
+        /// <summary>
+        /// The control should show the Object to the User with a specific Control.
+        /// </summary>
+        void ShowObject(IDataObject obj, IBasicControl ctrl);
+
+        /// <summary>
+        /// Is fired when the user wants to save the Context.
+        /// </summary>
+        event EventHandler UserSaveRequest;
+
+        /// <summary>
+        /// Is fired when then user wants to abort the Workspace without saving.
+        /// </summary>
+        event EventHandler UserAbortRequest;
+
+        /// <summary>
+        /// Is fired when the user wants to create a new object. After choosing the 
+        /// </summary>
+        event EventHandler UserNewObjectRequest;
+
+    }
 
     /// <summary>
     /// Possible sizes for controls. These are measured realtively 
