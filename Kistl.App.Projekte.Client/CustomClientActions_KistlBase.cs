@@ -5,6 +5,7 @@ using System.Text;
 using Kistl.API.Client;
 using System.Xml;
 using System.IO;
+using Kistl.API;
 
 namespace Kistl.App.Base
 {
@@ -19,9 +20,9 @@ namespace Kistl.App.Base
         public void OnToString_DataType(DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             // TODO: if (!IsValid)
-            if (obj.Module == null)
+            if (Helper.IsFloatingObject(obj))
             {
-                e.Result = "new DataType";
+                e.Result = String.Format("new {0}", obj.GetType());
             }
             else
             {
@@ -36,8 +37,16 @@ namespace Kistl.App.Base
         /// <param name="e"></param>
         public void OnToString_MethodInvokation(MethodInvocation obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = (obj.Assembly.IsClientAssembly ? "[Client] " : "[Server] ") 
-                + obj.InvokeOnObjectClass.ClassName + "." + obj.Method.MethodName;
+            // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                e.Result = (obj.Assembly.IsClientAssembly ? "[Client] " : "[Server] ")
+                    + obj.InvokeOnObjectClass.ClassName + "." + obj.Method.MethodName;
+            }
+            else
+            {
+                e.Result = String.Format("MethodInvocation {0}", obj.ID);
+            }
         }
 
         public void OnToString_BaseProperty(Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -50,13 +59,21 @@ namespace Kistl.App.Base
 
         public void OnToString_Property(Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            if(obj.IsList) e.Result += " [0..n]";
+            if (obj.IsList) e.Result += " [0..n]";
         }
 
         public void OnToString_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ObjectClass.Module.Namespace + "." +
-                obj.ObjectClass.ClassName + "." + obj.MethodName;
+                        // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                e.Result = obj.ObjectClass.Module.Namespace + "." +
+                                obj.ObjectClass.ClassName + "." + obj.MethodName;
+            }
+            else
+            {
+                e.Result = String.Format("Method {0}: {1}", obj.ID, obj.MethodName);
+            }
         }
 
         public void OnToString_Assembly(Kistl.App.Base.Assembly obj, Kistl.API.MethodReturnEventArgs<string> e)
