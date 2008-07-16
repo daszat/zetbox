@@ -51,10 +51,18 @@ namespace Kistl.App.Base
 
         public void OnToString_BaseProperty(Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = string.Format("{0} {1}.{2}",
-                obj.GetDataType(),
-                obj.ObjectClass.ClassName,
-                obj.PropertyName);
+            // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                e.Result = string.Format("{0} {1}.{2}",
+                   obj.GetDataType(),
+                   obj.ObjectClass.ClassName,
+                   obj.PropertyName);
+            }
+            else
+            {
+                e.Result = String.Format("BaseProperty {0}", obj.ID);
+            }
         }
 
         public void OnToString_Property(Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -64,7 +72,7 @@ namespace Kistl.App.Base
 
         public void OnToString_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-                        // TODO: IsValid?
+            // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
             {
                 e.Result = obj.ObjectClass.Module.Namespace + "." +
