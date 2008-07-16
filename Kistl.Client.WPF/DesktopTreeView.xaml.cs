@@ -209,12 +209,12 @@ namespace Kistl.Client.WPF
                     if (objClass.SubClasses.Count > 0)
                     {
                         // TODO: Das ist noch nicht ganz konsistent
-                        Kistl.Client.WPF.Dialogs.ChooseObjectClass dlg = new Kistl.Client.WPF.Dialogs.ChooseObjectClass();
-                        dlg.BaseObjectClass = objClass;
+                        Kistl.Client.WPF.Dialogs.ChooseFromSubclassesDialog dlg
+                            = new Kistl.Client.WPF.Dialogs.ChooseFromSubclassesDialog(objClass);
 
                         if (dlg.ShowDialog() == true)
                         {
-                            resultObjectType = dlg.ResultObjectClass.GetDataCLRType();
+                            resultObjectType = ((Kistl.App.Base.ObjectClass)dlg.Result).GetDataCLRType();
                         }
                         else
                         {

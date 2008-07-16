@@ -62,6 +62,11 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            OnRemoveSelection();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
             OnDeleteSelection();
         }
 
@@ -121,7 +126,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-        #region Change Management
+        #region Behaviors
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -176,16 +181,26 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
-        protected virtual void OnDeleteSelection()
+        protected virtual void OnRemoveSelection()
         {
             // Changing the Value will change 'lst.SelectedItems' because currently (2008-07-07)
             // the Presenter just re-sets the Items collection. The ToList gives us a detached 
             // copy to work with, therefore protecting us from these changes while iterating over 
             // the selected items.
             IList<Kistl.API.IDataObject> selection = lst.SelectedItems.Cast<Kistl.API.IDataObject>().ToList();
-            foreach (object o in selection)
+            foreach (Kistl.API.IDataObject o in selection)
             {
-                Value.Remove((Kistl.API.IDataObject)o);
+                Value.Remove(o);
+            }
+        }
+
+        protected virtual void OnDeleteSelection()
+        {
+            IList<Kistl.API.IDataObject> selection = lst.SelectedItems.Cast<Kistl.API.IDataObject>().ToList();
+            foreach (Kistl.API.IDataObject o in selection)
+            {
+                Value.Remove(o);
+                o.Context.Delete(o);
             }
         }
 

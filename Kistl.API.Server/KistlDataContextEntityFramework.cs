@@ -214,6 +214,7 @@ namespace Kistl.API.Server
             }
             else if (obj.ObjectState == DataObjectState.Deleted)
             {
+                base.AttachTo(entityName, obj);
                 base.DeleteObject(obj);
             }
             else

@@ -12,8 +12,8 @@
         x:Name="Panel"
         ToolTip="{Binding ElementName=EditCtrl, Path=Description}"
         >
-        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
-        <kevin:DatePicker Value="{Binding ElementName=EditCtrl, Path=Value}" 
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}" />
+        <kevin:DatePicker Value="{Binding ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
                           IsReadOnly="{Binding ElementName=EditCtrl, Path=IsReadOnly}"
                           CanEdit="True"/>
     </DockPanel>

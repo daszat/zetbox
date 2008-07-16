@@ -21,8 +21,8 @@
                     >
                     <DockPanel.LayoutTransform>
                         <ScaleTransform 
-                            ScaleX="{Binding ElementName=WorkspaceSlider, Path=Value}" 
-                            ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value}"
+                            ScaleX="{Binding ElementName=WorkspaceSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                            ScaleY="{Binding ElementName=WorkspaceSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                             />
                     </DockPanel.LayoutTransform>
                     <ToolBar DockPanel.Dock="Top">

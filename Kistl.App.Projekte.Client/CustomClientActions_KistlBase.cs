@@ -121,14 +121,32 @@ namespace Kistl.App.Base
 
         public void OnGetDataType_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            ObjectClass objClass = obj.ReferenceObjectClass;
-            e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+            // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                ObjectClass objClass = obj.ReferenceObjectClass;
+                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+            }
+            else
+            {
+                e.Result = String.Format("ObjectReferenceProperty {0}: {1}", obj.ID, obj.PropertyName);
+            }
+            
         }
 
         public void OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            DataType objClass = obj.ReferenceProperty.ObjectClass;
-            e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+            // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                DataType objClass = obj.ReferenceProperty.ObjectClass;
+                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+            }
+            else
+            {
+                e.Result = String.Format("BackReferenceProperty {0}: {1}", obj.ID, obj.PropertyName);
+            }
+            
         }
 
         public void OnGetDataType_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -158,7 +176,15 @@ namespace Kistl.App.Base
 
         public void OnGetDataType_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
+            // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
+            }
+            else
+            {
+                e.Result = String.Format("EnumerationProperty {0}: {1}", obj.ID, obj.PropertyName);
+            } 
         }
 
         // Parameter
@@ -189,7 +215,15 @@ namespace Kistl.App.Base
 
         public void OnGetDataType_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.DataType.Module.Namespace + "." + obj.DataType.ClassName;
+            // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                e.Result = obj.DataType.Module.Namespace + "." + obj.DataType.ClassName;
+            }
+            else
+            {
+                e.Result = String.Format("ObjectParameter {0}: {1}", obj.ID, obj.ParameterName);
+            } 
         }
 
         public void OnGetDataType_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)

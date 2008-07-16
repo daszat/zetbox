@@ -5,16 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
     ShortLabel="Label"
-    Height="300" Width="300">
+    MinHeight="300" MinWidth="300">
     <DockPanel 
         x:Name="Panel"
-        ToolTip="{Binding ElementName=Self, Path=Description}"
+        ToolTip="{Binding ElementName=Self, Path=Description, UpdateSourceTrigger=PropertyChanged}"
         >
         <StackPanel
             DockPanel.Dock="Left"
             Width="150"
             >
-            <Label Content="{Binding ElementName=Self, Path=ShortLabel}" />
+            <Label Content="{Binding ElementName=Self, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox
                 x:Name="inputBox"
                 Margin="1"
@@ -47,7 +47,7 @@
         <ListView
                 x:Name="lst"
                 MinHeight="150"
-                ItemsSource="{Binding ElementName=Self, Path=Values}"
+                ItemsSource="{Binding ElementName=Self, Path=Values, UpdateSourceTrigger=PropertyChanged}"
                 MouseDoubleClick="lst_MouseDoubleClick"
                 >
         </ListView>

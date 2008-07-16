@@ -14,11 +14,12 @@ using System.Windows.Shapes;
 using Kistl.API;
 using Kistl.API.Client;
 using System.ComponentModel;
+using Kistl.App.Base;
 
 namespace Kistl.Client.WPF.Dialogs
 {
     /// <summary>
-    /// Interaktionslogik für ChooseObject.xaml
+    /// Interaction logic for ChooseObjectDialog.xaml
     /// </summary>
     public partial class ChooseObjectDialog : Window
     {
@@ -74,15 +75,19 @@ namespace Kistl.Client.WPF.Dialogs
                 view.Filter = (object o) => o.ToString().IndexOf(dlg.FilterString, StringComparison.CurrentCultureIgnoreCase) != -1;
         }
 
-
         #region Behaviours
 
         protected virtual void OnLoad()
         {
             // load all available Objects of this type
             // TODO: implement paging/searching in order to reduce server load
-            lstObjects.ItemsSource = Context.GetQuery(ObjectType).ToList().OrderBy(i => i.ToString()).ToList();
+            lstObjects.ItemsSource = GetChoices();
             txtFilterString.Focus();
+        }
+
+        protected virtual List<Kistl.API.IDataObject> GetChoices()
+        {
+            return Context.GetQuery(ObjectType).ToList().OrderBy(i => i.ToString()).ToList();
         }
 
         protected virtual void OnSelect()
@@ -94,7 +99,15 @@ namespace Kistl.Client.WPF.Dialogs
 
         protected virtual void OnNew()
         {
-            Result = Context.Create(ObjectType);
+            ObjectClass oc = ClientHelper.ObjectClasses[ObjectType];
+            if (oc.SubClasses.Count > 0)
+            {
+                ChooseFromSubclassesDialog coc = new ChooseFromSubclassesDialog(oc);
+                if (coc.ShowDialog() == true)
+                    oc = ((ObjectClass)coc.Result) ?? oc;
+            }
+            
+            Result = Context.Create(oc.GetDataCLRType());
             Manager.Renderer.ShowObject(Result);
             DialogResult = true;
             this.Close();
@@ -125,5 +138,35 @@ namespace Kistl.Client.WPF.Dialogs
         }
 
         #endregion
+    }
+
+    public class ChooseFromSubclassesDialog : ChooseObjectDialog
+    {
+        public ObjectClass BaseClass { get; private set; }
+
+        private ChooseFromSubclassesDialog() { }
+        public ChooseFromSubclassesDialog(ObjectClass baseClass)
+            : this()
+        {
+            BaseClass = baseClass;
+        }
+
+        protected override List<Kistl.API.IDataObject> GetChoices()
+        {
+            List<Kistl.API.IDataObject> classes = new List<Kistl.API.IDataObject>();
+            classes.Add(BaseClass);
+            AddSubclasses(classes, BaseClass.SubClasses);
+            return classes;
+        }
+
+        private static void AddSubclasses(List<Kistl.API.IDataObject> classes, IList<ObjectClass> subClasses)
+        {
+            foreach (ObjectClass sc in subClasses)
+            {
+                classes.Add(sc);
+                AddSubclasses(classes, sc.SubClasses);
+            }
+        }
+
     }
 }

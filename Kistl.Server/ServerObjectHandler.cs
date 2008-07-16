@@ -246,6 +246,10 @@ namespace Kistl.Server
                                 IDataObject other = so.GetObject(fk.Value);
                                 obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
                             }
+                            else
+                            {
+                                obj.SetPropertyValue<IDataObject>(p.PropertyName, null);
+                            }
                         }
                         else
                         {

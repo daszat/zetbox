@@ -11,13 +11,13 @@
     >
     <DockPanel 
         x:Name="Panel"
-        ToolTip="{Binding ElementName=EditCtrl, Path=Description}"
+        ToolTip="{Binding ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"
         >
-        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
+        <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}" />
         <kevin:InfoTextBox 
-            Text="{Binding ElementName=EditCtrl, Path=Value}" 
+            Text="{Binding ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
             IsReadOnly="{Binding ElementName=EditCtrl, Path=IsReadOnly}"
-            TextBoxInfo="{Binding ElementName=EditCtrl, Path=Description}"
+            TextBoxInfo="{Binding ElementName=EditCtrl, Path=Description, UpdateSourceTrigger=PropertyChanged}"
             />
     </DockPanel>
 </app:PropertyControl>

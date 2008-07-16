@@ -56,7 +56,8 @@ namespace Kistl.App.Base
                 throw new ApplicationException(string.Format("ParameterName {0} has some illegal chars", obj.ParameterName));
             }
 
-            if (obj.Method.Parameter.Count(p => p.IsReturnParameter) > 1)
+            // TODO: => ValidationFramework
+            if (obj.Method != null && obj.Method.Parameter.Count(p => p.IsReturnParameter) > 1)
             {
                 throw new ApplicationException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter", 
                     obj.Method.ObjectClass.Module.Namespace,

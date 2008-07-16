@@ -9,14 +9,14 @@
     <DockPanel >
         <Label
             DockPanel.Dock="Left" Width="150"
-            Content="{Binding ElementName=PointerCtrl, Path=ShortLabel}"
+            Content="{Binding ElementName=PointerCtrl, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}"
             Visibility="{Binding ElementName=PointerCtrl, Path=ShowLabel}"
             />
         <Button Name="btnNew" Click="btnNew_Click">New</Button>
         <Button Name="btnOpen" Click="btnOpen_Click">Open</Button>
         <ComboBox
             Name="cbValues" 
-            ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource}"
+            ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource, UpdateSourceTrigger=PropertyChanged}"
             SelectionChanged="cbValues_SelectionChanged"
             IsSynchronizedWithCurrentItem="True"
             >

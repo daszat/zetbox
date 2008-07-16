@@ -11,9 +11,10 @@
         x:Name="Panel"
         >
         <Label DockPanel.Dock="Left" Width="150" Content="{Binding ElementName=EditCtrl, Path=ShortLabel}" />
-        <CheckBox IsChecked="{Binding  ElementName=EditCtrl, Path=Value}" 
+        <CheckBox IsChecked="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
                   IsEnabled="{Binding  ElementName=EditCtrl, Path=IsEnabled}"
-                  Content="{Binding  ElementName=EditCtrl, Path=Value}" 
-                  VerticalAlignment="Center" VerticalContentAlignment="Center" IsThreeState="True" />
+                  Content="{Binding  ElementName=EditCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                  VerticalAlignment="Center" VerticalContentAlignment="Center"
+                  IsThreeState="True" />
     </DockPanel>
 </app:PropertyControl>

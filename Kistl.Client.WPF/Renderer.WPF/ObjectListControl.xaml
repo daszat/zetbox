@@ -10,17 +10,18 @@
         <Label
             DockPanel.Dock="Left" 
             Width="150"
-            Content="{Binding ElementName=ListCtrl, Path=ShortLabel}"
+            Content="{Binding ElementName=ListCtrl, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}"
             />
         <DockPanel>
             <ToolBar DockPanel.Dock="Top">
-                <Button Name="btnAdd" Click="btnAdd_Click">Add ...</Button>
-                <Button Name="btnRemove" Click="btnRemove_Click">Remove</Button>
+                <Button Click="btnAdd_Click">Add ...</Button>
+                <Button Click="btnRemove_Click" ToolTip="Remove the selected objects from this list">Remove</Button>
+                <Button Click="btnDelete_Click" ToolTip="Delete the selected objects from the database">Delete permanently</Button>
             </ToolBar>
             <ListView
                 x:Name="lst"
                 MinHeight="150"
-                ItemsSource="{Binding ElementName=ListCtrl, Path=Value}"
+                ItemsSource="{Binding ElementName=ListCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                 MouseDoubleClick="lst_MouseDoubleClick"
                 >
                 <ListView.ItemTemplate>
