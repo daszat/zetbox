@@ -104,7 +104,7 @@ namespace Kistl.API.Client
         /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
-        private IPersistenceObject IsObjectInContext(Type type, int ID)
+        public IPersistenceObject ContainsObject(Type type, int ID)
         {
             if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
             Type rootType = GetRootType(type);
@@ -204,7 +204,7 @@ namespace Kistl.API.Client
             }
             else
             {
-                obj = IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
+                obj = ContainsObject(obj.GetType(), obj.ID) ?? obj;
                 if (obj.ID < _newIDCounter)
                 {
                     _newIDCounter = obj.ID;

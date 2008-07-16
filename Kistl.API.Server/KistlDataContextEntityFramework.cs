@@ -152,6 +152,26 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
+        /// Checks if the given Object is already in that Context.
+        /// </summary>
+        /// <param name="type">Type of Object</param>
+        /// <param name="ID">ID</param>
+        /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
+        /// If the Object is already in that Context, the Object Instace is returned.
+        /// If the Object is not in that Context, null is returned.</returns>
+        public IPersistenceObject ContainsObject(Type type, int ID)
+        {
+            if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
+            ObjectStateEntry entry;
+            if (this.ObjectStateManager.TryGetObjectStateEntry(
+                new System.Data.EntityKey(GetEntityName(type), "ID", ID), out entry))
+            {
+                return (IPersistenceObject)entry.Entity;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
         /// </summary>
         /// <returns>Number of affected Objects</returns>

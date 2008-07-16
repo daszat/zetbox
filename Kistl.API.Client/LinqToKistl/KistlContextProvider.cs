@@ -104,9 +104,12 @@ namespace Kistl.API.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         private object GetObjectCall(Expression e)
         {
-            if (ID <= Helper.INVALIDID) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} cannot be received from the Server-", ID, _type));
+            if (ID == Helper.INVALIDID) throw new InvalidOperationException("Emtpy Object ID passed");
 
-            IDataObject result = CacheController<IDataObject>.Current.Get(_type, ID);
+            IDataObject result = (IDataObject)_context.ContainsObject(_type, ID);
+            if (result != null) return result;
+
+            result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)
             {
                 result = Proxy.Current.GetObject(_type, ID);
