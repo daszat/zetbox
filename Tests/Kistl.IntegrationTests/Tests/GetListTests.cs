@@ -158,5 +158,19 @@ namespace Kistl.IntegrationTests
                 }
             }
         }
+
+        [Test]
+        public void GetListWithProjection()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
+                           select new { A = z.AktuelleStunden, B = z.MaxStunden};
+                foreach (var t in test)
+                {
+                    System.Diagnostics.Trace.WriteLine(string.Format("GetListWithProjection: {0}", t.A));
+                }
+            }
+        }
     }
 }

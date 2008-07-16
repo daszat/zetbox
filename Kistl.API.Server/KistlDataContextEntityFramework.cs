@@ -15,7 +15,7 @@ namespace Kistl.API.Server
     /// Entityframework IKistlContext implementation
     /// </summary>
     public class KistlDataContextEntityFramework : ObjectContext, IKistlContext, IDisposable
-    {
+    {        
         /// <summary>
         /// Private Connectionstring
         /// </summary>

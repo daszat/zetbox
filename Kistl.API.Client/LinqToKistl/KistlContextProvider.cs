@@ -14,7 +14,7 @@ namespace Kistl.API.Client
     /// Provider for Kistl Linq Provider
     /// </summary>
     /// <typeparam name="T">Type to search</typeparam>
-    internal class KistlContextProvider<T> : ExpressionTreeVisitor, IQueryProvider
+    internal class KistlContextProvider : ExpressionTreeVisitor, IQueryProvider
     {
         /// <summary>
         /// 
@@ -64,16 +64,16 @@ namespace Kistl.API.Client
             _type = type;
         }
 
-        internal List<T> GetListOf(int ID, string propertyName)
+        internal List<IDataObject> GetListOf(int ID, string propertyName)
         {
-            List<T> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName).OfType<T>().ToList();
-            List<T> result = new List<T>();
+            List<IDataObject> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName).OfType<IDataObject>().ToList();
+            List<IDataObject> result = new List<IDataObject>();
             foreach (Kistl.API.IDataObject obj in serviceResult.OfType<Kistl.API.IDataObject>())
             {
                 CacheController<Kistl.API.IDataObject>.Current.Set(obj.GetType(), obj.ID,
                     (Kistl.API.IDataObject)(obj).Clone());
 
-                result.Add((T)_context.Attach(obj));
+                result.Add((IDataObject)_context.Attach(obj));
             }
 
             return result;
@@ -84,17 +84,37 @@ namespace Kistl.API.Client
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        private object GetListCall(Expression e)
+        private T GetListCall<T>(Expression e)
         {
-            List<T> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<T>().ToList();
-            List<T> result = new List<T>();
-            foreach (IDataObject obj in serviceResult.OfType<IDataObject>())
-            {
-                CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
+            List<IDataObject> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<IDataObject>().ToList();
 
-                result.Add((T)_context.Attach(obj));
+            if (e.NodeType == ExpressionType.Call && ((MethodCallExpression)e).Method.Name == "Select")
+            {
+                LambdaExpression selector = (LambdaExpression)((MethodCallExpression)e).Arguments[1].StripQuotes();
+                Type sourceType = selector.Parameters[0].Type;
+
+                // Projection
+                IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
+                foreach (IDataObject obj in serviceResult)
+                {
+                    CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
+                    result.Add(_context.Attach(obj));
+                }
+
+                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, GetElementType(typeof(T)));
+                return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
             }
-            return result;
+            else
+            {
+                T result = Activator.CreateInstance<T>();
+                if (!(result is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
+                foreach (IDataObject obj in serviceResult)
+                {
+                    CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
+                    (result as IList).Add(_context.Attach(obj));
+                }
+                return result;
+            }
         }
 
         /// <summary>
@@ -102,12 +122,12 @@ namespace Kistl.API.Client
         /// </summary>
         /// <param name="e"></param>
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
-        private object GetObjectCall(Expression e)
+        private T GetObjectCall<T>(Expression e)
         {
             if (ID == Helper.INVALIDID) throw new InvalidOperationException("Emtpy Object ID passed");
 
             IDataObject result = (IDataObject)_context.ContainsObject(_type, ID);
-            if (result != null) return result;
+            if (result != null) return (T)result;
 
             result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)
@@ -124,7 +144,7 @@ namespace Kistl.API.Client
             return (T)_context.Attach(result);
         }
 
-        private object GetObjectOrNewCall(Expression e)
+        private T GetObjectOrNewCall<T>(Expression e)
         {
             if (ID <= API.Helper.INVALIDID)
             {
@@ -132,46 +152,107 @@ namespace Kistl.API.Client
             }
             else
             {
-                return GetObjectCall(e);
+                return GetObjectCall<T>(e);
             }
         }
 
         #region IQueryProvider Members
 
-        public IQueryable<TElement> CreateQuery<TElement>(Expression e)
+        public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", e.ToString()));
-            return new KistlContextQuery<TElement>(_context, _type, this as KistlContextProvider<TElement>, e) as IQueryable<TElement>;
+            System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", expression.ToString()));
+            return (IQueryable<TElement>)new KistlContextQuery<TElement>(_context, _type, this, expression);
         }
 
-        public IQueryable CreateQuery(Expression e)
+        public IQueryable CreateQuery(Expression expression)
         {
-            System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", e.ToString()));
-            return new KistlContextQuery<T>(_context, _type, this, e);
+            System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", expression.ToString()));
+            Type elementType = GetElementType(expression.Type);
+            return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
+                .MakeGenericType(elementType), new object[] { _context, _type, this, expression });
         }
+
+        #region TypeHelper
+        private static Type GetElementType(Type seqType)
+        {
+            Type ienum = FindIEnumerable(seqType);
+            if (ienum == null) return seqType;
+            return ienum.GetGenericArguments()[0];
+        }
+
+        private static Type FindIEnumerable(Type seqType)
+        {
+            if (seqType == null || seqType == typeof(string))
+                return null;
+
+            if (seqType.IsArray)
+                return typeof(IEnumerable<>).MakeGenericType(seqType.GetElementType());
+
+            if (seqType.IsGenericType)
+            {
+                foreach (Type arg in seqType.GetGenericArguments())
+                {
+                    Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
+                    if (ienum.IsAssignableFrom(seqType))
+                    {
+                        return ienum;
+                    }
+                }
+            }
+
+            Type[] ifaces = seqType.GetInterfaces();
+            if (ifaces != null && ifaces.Length > 0)
+            {
+                foreach (Type iface in ifaces)
+                {
+                    Type ienum = FindIEnumerable(iface);
+                    if (ienum != null) return ienum;
+                }
+            }
+            if (seqType.BaseType != null && seqType.BaseType != typeof(object))
+            {
+                return FindIEnumerable(seqType.BaseType);
+            }
+
+            return null;
+        }
+
+        #endregion
 
         public TResult Execute<TResult>(Expression e)
         {
-            return (TResult)(this as IQueryProvider).Execute(e);
-        }
-
-        public object Execute(Expression e)
-        {
-            // Find SearchType
             Visit(e);
 
-            switch(SearchType)
+            switch (SearchType)
             {
                 case SearchTypeEnum.GetList:
-                    return GetListCall(e);
+                    return GetListCall<TResult>(e);
                 case SearchTypeEnum.GetObject:
-                    return GetObjectCall(e);
+                    return GetObjectCall<TResult>(e);
                 case SearchTypeEnum.GetObjectOrNew:
-                    return GetObjectOrNewCall(e);
+                    return GetObjectOrNewCall<TResult>(e);
                 default:
                     throw new InvalidOperationException("Search Type could not be determinated");
             }
         }
+
+        public object Execute(Expression e)
+        {
+            Visit(e);
+
+            switch (SearchType)
+            {
+                case SearchTypeEnum.GetList:
+                    return GetListCall<List<IDataObject>>(e);
+                case SearchTypeEnum.GetObject:
+                    return GetObjectCall<IDataObject>(e);
+                case SearchTypeEnum.GetObjectOrNew:
+                    return GetObjectOrNewCall<IDataObject>(e);
+                default:
+                    throw new InvalidOperationException("Search Type could not be determinated");
+            }
+        }
+
         #endregion
 
         #region Visits

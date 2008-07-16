@@ -12,21 +12,29 @@ namespace Kistl.API.Client
     public class KistlContextQuery<T> : IOrderedQueryable<T>
     {
         private Expression _expression = null;
-        private KistlContextProvider<T> _provider = null;
+        private KistlContextProvider _provider = null;
         private Type _type = null;
         private IKistlContext _context;
 
         #region Constructor
         internal KistlContextQuery(IKistlContext ctx, Type type)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (type == null) throw new ArgumentNullException("type");
+
             _type = type;
             _context = ctx;
             _expression = System.Linq.Expressions.Expression.Constant(this);
-            _provider = new KistlContextProvider<T>(_context, _type);
+            _provider = new KistlContextProvider(_context, _type);
         }
 
-        internal KistlContextQuery(IKistlContext ctx, Type type, KistlContextProvider<T> provider, Expression expression)
+        internal KistlContextQuery(IKistlContext ctx, Type type, KistlContextProvider provider, Expression expression)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (type == null) throw new ArgumentNullException("type");
+            if (provider == null) throw new ArgumentNullException("provider");
+            if (expression == null) throw new ArgumentNullException("expression");
+
             _type = type;
             _context = ctx;
             _expression = expression;

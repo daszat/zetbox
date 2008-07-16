@@ -62,6 +62,13 @@ namespace Kistl.API
                 new Type[] { queryable.ElementType }, queryable.Expression, filter));
         }
 
+        public static IQueryable AddSelector(this IQueryable query, LambdaExpression selector, Type sourceType, Type resultType)
+        {
+            return query.Provider.CreateQuery(
+                Expression.Call(typeof(Queryable), "Select",
+                    new Type[] { sourceType, resultType }, query.Expression, selector));
+        }
+
         /// <summary>
         /// Appends a Expression Tree Order By to a Linq Expression
         /// </summary>
@@ -123,6 +130,13 @@ namespace Kistl.API
             {
                 throw new NotSupportedException(string.Format("Unable to get Value, Expression is not supported: {0}", e.ToString()));
             }
+        }
+
+        public static Expression StripQuotes(this Expression e)
+        {
+            while (e.NodeType == ExpressionType.Quote)
+                e = ((UnaryExpression)e).Operand;
+            return e;
         }
     }
 }

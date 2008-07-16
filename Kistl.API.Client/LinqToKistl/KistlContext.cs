@@ -158,7 +158,7 @@ namespace Kistl.API.Client
         {
             CheckDisposed();
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
-            return ((KistlContextProvider<T>)query.Provider).GetListOf(ID, propertyName);
+            return ((KistlContextProvider)query.Provider).GetListOf(ID, propertyName).Cast<T>().ToList();
         }
 
         /// <summary>
