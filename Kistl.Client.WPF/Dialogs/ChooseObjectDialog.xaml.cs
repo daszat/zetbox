@@ -72,8 +72,6 @@ namespace Kistl.Client.WPF.Dialogs
                 view.Filter = null;
             else
                 view.Filter = (object o) => o.ToString().IndexOf(dlg.FilterString, StringComparison.CurrentCultureIgnoreCase) != -1;
-
-            dlg.lstObjects.InvalidateVisual();
         }
 
 
