@@ -371,27 +371,42 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ShortLabel = Object.ToString(); // Object.GetType().Name;
-            Control.Description = String.Format("{0}: {1}", Object.GetType().Name, Object.ToString());
+            SetLabels();
             Control.Value = Object;
-            // Control.Size = Preferences.PreferredSize;
-            Control.Size = FieldSize.Full;
             Control.UserSaveRequest += new EventHandler(Control_UserSaveRequest);
             Control.UserDeleteRequest += new EventHandler(Control_UserDeleteRequest);
+            Object.PropertyChanged += new PropertyChangedEventHandler(Object_PropertyChanged);
         }
 
-        void Control_UserDeleteRequest(object sender, EventArgs e)
+        private void SetLabels()
+        {
+            Control.ShortLabel = Object.ToString(); // Object.GetType().Name;
+            Control.Description = String.Format("{0}: {1}", Object.GetType().Name, Object.ToString());
+            // TODO: Control.Size = Preferences.PreferredSize;
+            Control.Size = FieldSize.Full;
+        }
+
+        #region Event Handler
+
+        private void Control_UserDeleteRequest(object sender, EventArgs e)
         {
             // TODO: Die Kontextfrage klären
             Object.Context.Delete(Object);
             Object.Context.SubmitChanges();
         }
 
-        void Control_UserSaveRequest(object sender, EventArgs e)
+        private void Control_UserSaveRequest(object sender, EventArgs e)
         {
             // TODO: Die Kontextfrage klären
             Object.Context.SubmitChanges();
         }
+
+        private void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            SetLabels();
+        }
+
+        #endregion
 
     }
 
