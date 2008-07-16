@@ -238,11 +238,14 @@ namespace Kistl.Server
                     {
                         if (!p.IsList)
                         {
-                            int fk = obj.GetPrivateFieldValue<int>("_fk_" + p.PropertyName);
+                            int? fk = obj.GetPrivateFieldValue<int?>("_fk_" + p.PropertyName);
 
-                            IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
-                            IDataObject other = so.GetObject(fk);
-                            obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
+                            if (fk != null)
+                            {
+                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
+                                IDataObject other = so.GetObject(fk.Value);
+                                obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
+                            }
                         }
                         else
                         {
