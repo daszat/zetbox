@@ -165,7 +165,10 @@ namespace Kistl.API.Client
 
         private void AddToDeletedCollection(COLLECTIONENTRYTYPE e)
         {
-            if (e.ID <= Helper.INVALIDID) return;
+            // TODO: Call Helper.IsFloatingObject will also check, if Object is detached.
+            // But thats not the point here. We are only interested, if the Object should be send
+            // to the Server to be deleted.
+            if (e.ID <= Helper.INVALIDID) return; 
             if (deletedCollection.FirstOrDefault<COLLECTIONENTRYTYPE>(i => i.ID == e.ID) == null)
             {
                 if (parent.Context != null)

@@ -205,7 +205,7 @@ namespace Kistl.API.Client.Tests
         {
             TestObjClass obj = ctx.Create<TestObjClass>();
             Assert.That(obj, Is.Not.Null);
-            Assert.That(obj.ID, Is.EqualTo(Helper.INVALIDID));
+            Assert.That(obj.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
             Assert.That(obj.Context, Is.EqualTo(ctx));
         }
@@ -215,7 +215,7 @@ namespace Kistl.API.Client.Tests
         {
             TestObjClass obj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
             Assert.That(obj, Is.Not.Null);
-            Assert.That(obj.ID, Is.EqualTo(Helper.INVALIDID));
+            Assert.That(obj.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
             Assert.That(obj.Context, Is.EqualTo(ctx));
         }
@@ -225,7 +225,7 @@ namespace Kistl.API.Client.Tests
         {
             TestObjClass obj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
             Assert.That(obj, Is.Not.Null);
-            Assert.That(obj.ID, Is.EqualTo(Helper.INVALIDID));
+            Assert.That(obj.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
             Assert.That(obj.Context, Is.EqualTo(ctx));
         }
@@ -235,12 +235,12 @@ namespace Kistl.API.Client.Tests
         {
             TestObjClass obj1 = ctx.Create<TestObjClass>();
             Assert.That(obj1, Is.Not.Null);
-            Assert.That(obj1.ID, Is.EqualTo(Helper.INVALIDID));
+            Assert.That(obj1.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj1.Context, Is.EqualTo(ctx));
 
             TestObjClass obj2 = ctx.Create<TestObjClass>();
             Assert.That(obj2, Is.Not.Null);
-            Assert.That(obj2.ID, Is.EqualTo(Helper.INVALIDID));
+            Assert.That(obj2.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj2.Context, Is.EqualTo(ctx));
 
             Assert.That(obj1, Is.Not.EqualTo(obj2));

@@ -98,13 +98,13 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
-        /// Performs a GetObjectCall. if ID is -1 null will be returned.
+        /// Performs a GetObjectCall. if ID is Invalid or indicates a new Object, then an Exception will be thrown.
         /// </summary>
         /// <param name="e"></param>
-        /// <returns>A Object or null, if ID is -1 or an Expeption, if the Object was not found.</returns>
+        /// <returns>A Object an Expeption, if the Object was not found.</returns>
         private object GetObjectCall(Expression e)
         {
-            if (ID <= Helper.INVALIDID) return null;
+            if (ID <= Helper.INVALIDID) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} cannot be received from the Server-", ID, _type));
 
             IDataObject result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)

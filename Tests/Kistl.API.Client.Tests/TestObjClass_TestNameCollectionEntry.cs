@@ -11,11 +11,11 @@ namespace Kistl.API.Client.Tests
     public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry, ICollectionEntry<string, TestObjClass>
     {
 
-        private int _ID = Helper.INVALIDID;
+        private int _ID;
 
         private string _Value;
 
-        private int _fk_Parent = Helper.INVALIDID;
+        private int _fk_Parent;
 
         public override int ID
         {

@@ -12,7 +12,7 @@ namespace Kistl.API.Client.Tests
     public class TestObjClass : BaseClientDataObject, ICloneable
     {
 
-        private int _ID = Helper.INVALIDID;
+        private int _ID;
 
         private string _StringProp;
 
@@ -20,7 +20,7 @@ namespace Kistl.API.Client.Tests
 
         private BackReferenceCollection<TestObjClass> _Children;
 
-        private int _fk_Parent = Helper.INVALIDID;
+        private int? _fk_Parent;
 
         private ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> _TestNames;
 
@@ -99,7 +99,8 @@ namespace Kistl.API.Client.Tests
         {
             get
             {
-                return Context.Find<TestObjClass>(fk_Parent);
+                if (fk_Parent == null) return null;
+                return Context.Find<TestObjClass>(fk_Parent.Value);
             }
             set
             {
@@ -107,7 +108,7 @@ namespace Kistl.API.Client.Tests
             }
         }
 
-        public int fk_Parent
+        public int? fk_Parent
         {
             get
             {

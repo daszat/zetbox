@@ -113,18 +113,12 @@ namespace Kistl.API.Client
             return null;
         }
 
-        private static int BadHackInvalidIdCounter = Helper.INVALIDID;
-
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
 
             BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
-            if (ID == Helper.INVALIDID)
-                BinarySerializer.ToBinary(BadHackInvalidIdCounter--, sw);
-            else
-                BinarySerializer.ToBinary(ID, sw);
-
+            BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 
@@ -151,17 +145,11 @@ namespace Kistl.API.Client
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry, ICloneable
     {
         
-        private static int BadHackInvalidIdCounter = Helper.INVALIDID;
-
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
 
-            if (ID == Helper.INVALIDID)
-                BinarySerializer.ToBinary(BadHackInvalidIdCounter--, sw);
-            else
-                BinarySerializer.ToBinary(ID, sw);
-
+            BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary((int)ObjectState, sw);
         }
 

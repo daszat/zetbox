@@ -18,9 +18,9 @@ namespace Kistl.API
     public sealed class Helper
     {
         /// <summary>
-        /// Constant for a invalid ID. Value is -1.
+        /// Constant for a invalid ID. Value is 0.
         /// </summary>
-        public const int INVALIDID = -1;
+        public const int INVALIDID = 0;
 
         /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
@@ -32,7 +32,7 @@ namespace Kistl.API
             if (obj == null)
                 throw new ArgumentNullException("obj");
 
-            return obj.Context != null && obj.ID > 0;
+            return obj.Context != null && obj.ID > INVALIDID;
         }
 
         /// <summary>

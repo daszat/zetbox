@@ -383,7 +383,7 @@ namespace Kistl.API
 
                 // TODO: Arthur: Ich bin mir nicht sicher, ob das überhaupt notwendig ist.
                 // Vielleicht wirds wieder notwendig, wenn die Objekte vorgeladen werden?
-                T objInCollection = val.FirstOrDefault(i => obj.ID > Helper.INVALIDID && i.ID == obj.ID);
+                T objInCollection = val.FirstOrDefault(i => i.ID == obj.ID);
                 if (objInCollection != null)
                 {
                     obj.CopyTo(objInCollection);

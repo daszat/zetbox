@@ -13,11 +13,11 @@ namespace Kistl.API.Server.Tests
     public class TestObjClass_TestNameCollectionEntry : BaseServerCollectionEntry
     {
 
-        private int _ID = Helper.INVALIDID;
+        private int _ID;
 
         private string _Value;
 
-        private int _fk_Parent = Helper.INVALIDID;
+        private int? _fk_Parent;
 
         [EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
         public override int ID
@@ -65,11 +65,11 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        public int fk_Parent
+        public int? fk_Parent
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_Parent == Helper.INVALIDID && Parent != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
                 {
                     _fk_Parent = Parent.ID;
                 }

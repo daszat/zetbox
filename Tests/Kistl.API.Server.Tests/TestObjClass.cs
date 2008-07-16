@@ -17,13 +17,13 @@ namespace Kistl.API.Server.Tests
     public class TestObjClass : BaseServerDataObject, ICloneable
     {
 
-        private int _ID = Helper.INVALIDID;
+        private int _ID;
 
         private string _StringProp;
 
         private int _TestEnumProp;
 
-        private int _fk_BaseTestObjClass = Helper.INVALIDID;
+        private int? _fk_BaseTestObjClass;
 
         public TestObjClass()
         {
@@ -101,11 +101,11 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        public int fk_BaseTestObjClass
+        public int? fk_BaseTestObjClass
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && _fk_BaseTestObjClass == Helper.INVALIDID && BaseTestObjClass != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && BaseTestObjClass != null)
                 {
                     _fk_BaseTestObjClass = BaseTestObjClass.ID;
                 }

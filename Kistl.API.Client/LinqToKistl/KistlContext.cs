@@ -76,6 +76,11 @@ namespace Kistl.API.Client
         private List<IPersistenceObject> _objects = new List<IPersistenceObject>();
 
         /// <summary>
+        /// Counter for newly created Objects to give them a valid ID
+        /// </summary>
+        private int _newIDCounter = Helper.INVALIDID;
+
+        /// <summary>
         /// Returns the Root Type of a given System.Type.
         /// </summary>
         /// <param name="t">Type</param>
@@ -96,12 +101,12 @@ namespace Kistl.API.Client
         /// </summary>
         /// <param name="type">Type of Object</param>
         /// <param name="ID">ID</param>
-        /// <returns>If ID is InvalidID (New Object) then null is returned.
+        /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
         private IPersistenceObject IsObjectInContext(Type type, int ID)
         {
-            if (ID <= Helper.INVALIDID) return null;
+            if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
             Type rootType = GetRootType(type);
             return _objects.SingleOrDefault(o => GetRootType(o.GetType()) == rootType && o.ID == ID);
         }
@@ -193,7 +198,18 @@ namespace Kistl.API.Client
             CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
 
-            obj = IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
+            if (obj.ID == Helper.INVALIDID)
+            {
+                obj.ID = --_newIDCounter;
+            }
+            else
+            {
+                obj = IsObjectInContext(obj.GetType(), obj.ID) ?? obj;
+                if (obj.ID < _newIDCounter)
+                {
+                    _newIDCounter = obj.ID;
+                }
+            }
 
             obj.AttachToContext(this);
             if (!_objects.Contains(obj))

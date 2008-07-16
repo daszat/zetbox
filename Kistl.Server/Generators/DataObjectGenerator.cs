@@ -706,7 +706,7 @@ namespace Kistl.Server.Generators
         private void GenerateDefaultProperty_IDInternal(CurrentObjectClass current)
         {
             // Create ID member
-            current.code_field = CreateField(current.code_class, typeof(int), "_ID", "Helper.INVALIDID");
+            current.code_field = CreateField(current.code_class, typeof(int), "_ID");
 
             current.code_property = CreateProperty(current.code_class, typeof(int), "ID");
             current.code_property.Attributes = MemberAttributes.Public | MemberAttributes.Override;
@@ -826,7 +826,7 @@ namespace Kistl.Server.Generators
             CurrentObjectClass serializerParent = (CurrentObjectClass)collectionClass.Clone();
 
             // Serializer Parent fk_ Field und Property
-            serializerParent.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Parent", "Helper.INVALIDID");
+            serializerParent.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Parent");
             serializerParent.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Parent");
 
             if (current.clientServer == ClientServerEnum.Client)
@@ -987,14 +987,14 @@ namespace Kistl.Server.Generators
             CurrentObjectClass serializerValue = (CurrentObjectClass)collectionClass.Clone();
 
             // Serializer fk_ Field und Property
-            serializerValue.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Value", "Helper.INVALIDID");
+            serializerValue.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Value");
             serializerValue.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Value");
 
             // Create SerializerParent
             CurrentObjectClass serializerParent = (CurrentObjectClass)collectionClass.Clone();
 
             // Serializer Parent fk_ Field und Property
-            serializerParent.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Parent", "Helper.INVALIDID");
+            serializerParent.code_field = CreateField(collectionClass.code_class, typeof(int), "_fk_Parent");
             serializerParent.code_property = CreateProperty(collectionClass.code_class, typeof(int), "fk_Parent");
 
             // Create NavigationProperty Class -> Collectionclass
