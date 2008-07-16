@@ -64,6 +64,7 @@ namespace Kistl.GUI.Renderer.WPF
                 throw new ArgumentNullException("ctrl", "must not be null");
 
             ObjectTabItem realCtrl = ctrl as ObjectTabItem;
+
             if (realCtrl == null)
                 throw new ArgumentOutOfRangeException("ctrl", "must be a ObjectTabItem");
 
@@ -75,21 +76,20 @@ namespace Kistl.GUI.Renderer.WPF
             CheckContext("ShowObject");
 
             if (obj.Context != Context)
-            {
                 throw new ArgumentOutOfRangeException("obj", "Object is not in this Workspace's Context");
-            }
 
+            int idx = Objects.IndexOf(obj);
+            if (idx != -1)
             {
-                int idx = Objects.IndexOf(obj);
-                if (idx != -1)
-                {
-                    tabObjects.SelectedIndex = idx;
-                    return;
-                }
+                tabObjects.SelectedIndex = idx;
+                return;
             }
 
             tabObjects.Items.Add(ctrl);
             Objects.Add(obj);
+
+            idx = Objects.IndexOf(obj);
+            tabObjects.SelectedIndex = idx;
         }
 
         public ObservableCollection<Kistl.API.IDataObject> Objects
