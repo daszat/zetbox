@@ -75,6 +75,7 @@
     <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />
     <Compile Include="IntProperty.Server.Designer.cs" />
+    <Compile Include="IRenderer.Server.Designer.cs" />
     <Compile Include="ITestInterface.Server.Designer.cs" />
     <Compile Include="Kostenstelle.Server.Designer.cs" />
     <Compile Include="Kostentraeger.Server.Designer.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Task.Server.Designer.cs" />
     <Compile Include="TestEnum.Server.Designer.cs" />
     <Compile Include="TestObjClass.Server.Designer.cs" />
+    <Compile Include="Toolkit.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="Zeitkonto.Server.Designer.cs" />
   </ItemGroup>
