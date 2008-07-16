@@ -845,11 +845,11 @@ namespace Kistl.Server.Generators
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
 
-                current.code_field = CreateField(current.code_class, 
+                current.code_field = CreateField(current.code_class,
                     string.Format("ListPropertyCollection<{0}, {1}, {2}>",
                         current.property.GetDataType(),
                         current.code_class.Name,
-                        collectionClass.code_class.Name), 
+                        collectionClass.code_class.Name),
                     string.Format(@"_{0}", current.property.PropertyName));
 
                 current.code_constructor.Statements.Add(new CodeSnippetExpression(
@@ -914,28 +914,29 @@ namespace Kistl.Server.Generators
             {
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"return Context.Find<{0}>(fk_{1})", current.property.GetDataType(), current.property.PropertyName)));
+                        string.Format(@"if (fk_{1} == null) return null;
+                return Context.Find<{0}>(fk_{1}.Value)", current.property.GetDataType(), current.property.PropertyName)));
 
                 current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"fk_{0} = value != null ? value.ID : Helper.INVALIDID", current.property.PropertyName)));
+                        string.Format(@"fk_{0} = value != null ? (int?)value.ID : null", current.property.PropertyName)));
             }
 
             CurrentObjectClass serializer = (CurrentObjectClass)current.Clone();
 
             // Serializer fk_ Field und Property
             string fieldName = "_fk_" + current.property.PropertyName;
-            serializer.code_field = CreateField(current.code_class, typeof(int), fieldName, "Helper.INVALIDID");
+            serializer.code_field = CreateField(current.code_class, typeof(int?), fieldName, "null");
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                serializer.code_property = CreateNotifyingProperty(current.code_class, typeof(int), "fk_" + current.property.PropertyName,
+                serializer.code_property = CreateNotifyingProperty(current.code_class, typeof(int?), "fk_" + current.property.PropertyName,
                     fieldName, fieldName, current.property.PropertyName
                     );
             }
             else
             {
-                serializer.code_property = CreateProperty(current.code_class, typeof(int), "fk_" + current.property.PropertyName);
+                serializer.code_property = CreateProperty(current.code_class, typeof(int?), "fk_" + current.property.PropertyName);
             }
 
             GenerateProperties_ObjectReferenceProperty(current, serializer);
@@ -1103,8 +1104,21 @@ namespace Kistl.Server.Generators
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(
-                        @"if(_{0} == null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, Context.GetListOf<{1}>(this, ""{0}""));
-                return _{0}", current.property.PropertyName, childType.NameDataObject, ((BackReferenceProperty)current.property).ReferenceProperty.PropertyName)));
+                        @"if (_{0} == null)
+                {{
+                    List<{1}> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<{1}>(this, ""{0}"");
+                    else
+                        serverList = new List<{1}>();
+
+                    _{0} = new BackReferenceCollection<{1}>(
+                         ""{2}"", this, serverList);
+                }}
+                return _{0}",
+                            current.property.PropertyName,
+                            childType.NameDataObject,
+                            ((BackReferenceProperty)current.property).ReferenceProperty.PropertyName)));
 
                 CodeMemberField f = new CodeMemberField(new CodeTypeReference("BackReferenceCollection", new CodeTypeReference(childType.NameDataObject)),
                     "_" + current.property.PropertyName);
@@ -1508,8 +1522,8 @@ namespace Kistl.Server.Generators
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
                     m.Statements.Add(new CodeSnippetExpression(
-                        string.Format("this._{0} = new BackReferenceCollection<{1}>(\"{2}\", this); BinarySerializer.FromBinary(this._{0}, sr)", 
-                            p.PropertyName, p.GetDataType(), 
+                        string.Format("this._{0} = new BackReferenceCollection<{1}>(\"{2}\", this); BinarySerializer.FromBinary(this._{0}, sr)",
+                            p.PropertyName, p.GetDataType(),
                             ((BackReferenceProperty)p).ReferenceProperty.PropertyName)));
                 }
             }

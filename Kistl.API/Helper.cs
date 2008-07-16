@@ -23,7 +23,30 @@ namespace Kistl.API
         public const int INVALIDID = -1;
 
         /// <summary>
-        /// Constant for MAx List Count. Value is 500.
+        /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
+        /// This method can distinguish them from "older" objects that already have a representation on the server.
+        /// </summary>
+        /// <returns>true when the object has a valid context and already exists on server</returns>
+        public static bool IsPersistedObject(IPersistenceObject obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
+            return obj.Context != null && obj.ID > 0;
+        }
+
+        /// <summary>
+        /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
+        /// This method can distinguish them from "older" objects that already have a representation on the server.
+        /// </summary>
+        /// <returns>true when the object is detached and/or doesn't exist on the server yet</returns>
+        public static bool IsFloatingObject(IPersistenceObject obj)
+        {
+            return !IsPersistedObject(obj);
+        }
+
+        /// <summary>
+        /// Constant for Max List Count. Value is 500.
         /// </summary>
         public const int MAXLISTCOUNT = 500;
 

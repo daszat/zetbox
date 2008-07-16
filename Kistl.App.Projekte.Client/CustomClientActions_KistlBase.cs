@@ -18,7 +18,15 @@ namespace Kistl.App.Base
         /// <param name="e"></param>
         public void OnToString_DataType(DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Module.Namespace + "." + obj.ClassName;
+            // TODO: if (!IsValid)
+            if (obj.Module == null)
+            {
+                e.Result = "new DataType";
+            }
+            else
+            {
+                e.Result = obj.Module.Namespace + "." + obj.ClassName;
+            }
         }
 
         /// <summary>
