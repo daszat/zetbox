@@ -6,20 +6,97 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using Kistl.API;
+
+[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js", "text/javascript")] 
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
     [ToolboxData("<{0}:JavascriptRenderer runat=server></{0}:JavascriptRenderer>")]
-    public class JavascriptRenderer : ScriptControl
+    public class JavascriptRenderer : Control, IScriptControl, IPostBackEventHandler
     {
-        protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors()
+        public const string actionShowObject = "ShowObject";
+
+        // HiddenControls
+        string hdAction = "";
+        string hdArgument = "";
+
+        public JavascriptRenderer()
         {
-            return null;
+            this.Init += new EventHandler(JavascriptRenderer_Init);
         }
 
-        protected override IEnumerable<ScriptReference> GetScriptReferences()
+        void JavascriptRenderer_Init(object sender, EventArgs e)
         {
-            return null;
+            hdAction = Page.Request["__JavascriptRenderer_Action"] ?? "";
+            hdArgument = Page.Request["__JavascriptRenderer_Argument"] ?? "";
+        }
+
+        public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
+        {
+            ScriptControlDescriptor desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.JavascriptRenderer", ClientID);
+            yield return desc;
+        }
+
+        public IEnumerable<ScriptReference> GetScriptReferences()
+        {
+            yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
+                this.GetType(), "Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js"));
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+
+            ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
+            if (scriptManager == null)
+            {
+                throw new InvalidOperationException(
+                  "ScriptManager required on the page.");
+            }
+
+            scriptManager.RegisterScriptControl(this);
+            string script = string.Format("function __JavascriptRenderer_PostBack() {{ {0}; }}\n", Page.ClientScript.GetPostBackEventReference(this, ""));
+            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "PostBackScript", script, true);
+        }
+
+        private void RenderHiddenInput(HtmlTextWriter writer, string name, string value)
+        {
+            writer.AddAttribute(HtmlTextWriterAttribute.Id, name);
+            writer.AddAttribute(HtmlTextWriterAttribute.Name, name);
+            writer.AddAttribute(HtmlTextWriterAttribute.Type, "hidden");
+            writer.RenderBeginTag(HtmlTextWriterTag.Input);
+            writer.RenderEndTag();
+        }
+
+        protected override void Render(HtmlTextWriter writer)
+        {
+            base.Render(writer);
+
+            RenderHiddenInput(writer, "__JavascriptRenderer_Action", hdAction);
+            RenderHiddenInput(writer, "__JavascriptRenderer_Argument", hdArgument);           
+
+            // Not needed, I am a "no" Control - just rendering some Javascript
+            //if (!DesignMode)
+            //{
+            //    ScriptManager.GetCurrent(this.Page).RegisterScriptDescriptors(this);
+            //}
+        }
+
+        public void RaisePostBackEvent(string eventArgument)
+        {
+            switch (hdAction)
+            {
+                case actionShowObject:
+                    {
+                        IDataObject obj = hdArgument.FromJSON<IDataObject>(KistlContextManagerModule.KistlContext);
+                        Kistl.Client.Manager.Renderer.ShowObject(obj);
+                        break;
+                    }
+                default:
+                    throw new ArgumentException("Action " + hdAction + " is unknown");
+            }
         }
     }
 }

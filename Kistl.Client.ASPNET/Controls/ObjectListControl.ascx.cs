@@ -103,9 +103,5 @@ public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IRe
         Page.ClientScript.RegisterOnSubmitStatement(this.GetType(), "OnSubmit_ObjectListControl_" + this.ClientID,
             string.Format("objectListControl_OnSubmit('{0}', '{1}');\n",
                 lstItems.ClientID, hdItems.ClientID));
-
-        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "Callback_ObjectListControl",
-            "function objectListControl_CallServer(arg, context) {"
-                + Page.ClientScript.GetCallbackEventReference(this, "arg", "return true;", "") + ";}", true);
     }
 }

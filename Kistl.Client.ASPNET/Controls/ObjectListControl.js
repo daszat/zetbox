@@ -47,8 +47,8 @@ function objectListControl_OnItemDelete(sender, e)
 
 function objectListControl_OnItemCommand(sender, e)
 {
-    var data = sender.get_dataSource();
-    // Call_ClientRenderer.Open(Sys.Serialization.JavaScriptSerializer.serialize(data));    
+    var data = e.get_item().get_dataItem();
+    Kistl.JavascriptRenderer.showObject(data);
 }
 
 

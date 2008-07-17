@@ -18,6 +18,7 @@
             <asp:ScriptReference Path="~/Scripts/KistlCommon.js" />
         </Scripts>
     </asp:ScriptManager>
+    <kistl:JavascriptRenderer ID="myJavascriptRenderer" runat="server" />
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         

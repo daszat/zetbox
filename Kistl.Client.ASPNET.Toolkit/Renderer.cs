@@ -24,9 +24,17 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public override void ShowObject(Kistl.API.IDataObject obj)
         {
-            HttpContext.Current.Response.Redirect(
-                string.Format("~/ObjectPage.aspx?Type={0}&ID={1}", 
-                    HttpUtility.UrlEncode(obj.GetType().FullName), obj.ID));
+            if (HttpContext.Current.CurrentHandler is IWorkspaceControl)
+            {
+                IWorkspaceControl page = (IWorkspaceControl)HttpContext.Current.CurrentHandler;
+                page.ShowObject(obj, null);
+            }
+            else
+            {
+                HttpContext.Current.Response.Redirect(
+                    string.Format("~/ObjectPage.aspx?Type={0}&ID={1}",
+                        HttpUtility.UrlEncode(obj.GetType().FullName), obj.ID));
+            }
         }
 
         // TODO?

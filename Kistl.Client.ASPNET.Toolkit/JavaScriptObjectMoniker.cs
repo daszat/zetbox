@@ -85,5 +85,22 @@ namespace Kistl.Client.ASPNET.Toolkit
                 return result.Select(i => i.GetDataObject(ctx));
             }
         }
+
+        public static T FromJSON<T>(this string json, IKistlContext ctx) where T : IDataObject
+        {
+            if (string.IsNullOrEmpty(json)) return default(T);
+
+            DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(JavaScriptObjectMoniker));
+            MemoryStream ms = new MemoryStream(GetEncoder().GetBytes(json));
+            var result = (JavaScriptObjectMoniker)s.ReadObject(ms);
+            if (result == null)
+            {
+                return default(T);
+            }
+            else
+            {
+                return (T)result.GetDataObject(ctx);
+            }
+        }
     }
 }
