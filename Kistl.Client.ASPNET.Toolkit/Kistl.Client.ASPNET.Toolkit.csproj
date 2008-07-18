@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxDataControls, Version=1.0.3112.29763, Culture=neutral, PublicKeyToken=a78e2b3b94f1c8be, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AjaxDataControls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -60,6 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlLoader.cs" />
+    <Compile Include="Controls\ObjectListControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ChooseObjectDialog.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="JavaScriptObjectMoniker.cs" />
     <Compile Include="JavascriptRenderer.cs" />
     <Compile Include="KistlContextManagerModule.cs" />
@@ -86,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JavascriptRenderer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dialogs\ChooseObjectDialog.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\ObjectListControl.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

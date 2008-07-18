@@ -35,8 +35,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            ScriptControlDescriptor desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.JavascriptRenderer", ClientID);
-            yield return desc;
+            yield return new ScriptControlDescriptor("Kistl.Client.ASPNET.JavascriptRenderer", ClientID);
         }
 
         public IEnumerable<ScriptReference> GetScriptReferences()

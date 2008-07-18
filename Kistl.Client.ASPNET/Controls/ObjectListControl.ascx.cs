@@ -17,91 +17,25 @@ using System.Collections.ObjectModel;
 using System.Web.Script.Serialization;
 using Kistl.Client.ASPNET.Toolkit;
 
-public partial class Controls_ObjectListControl : System.Web.UI.UserControl, IReferenceListControl
+public partial class Controls_ObjectListControl : Kistl.Client.ASPNET.Toolkit.Controls.ObjectListControl
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {        
-        Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "Include_ObjectListControl", ResolveClientUrl("ObjectListControl.js"));
-
-        if (IsPostBack)
-        {
-            var postedData = hdItems.Value.FromJSONArray(((IBasicControl)this).Context).ToList();
-
-            var added = postedData.Except(_Value).ToList();
-            var deleted = _Value.Except(postedData).ToList();
-
-            deleted.ForEach(d => _Value.Remove(d));
-            added.ForEach(a => _Value.Add(a));
-        }
+    protected override HiddenField HdItemsControl
+    {
+        get { return hdItems; }
     }
 
-    IKistlContext IBasicControl.Context { get; set; }
-
-    public Type ObjectType
+    protected override AjaxDataControls.DataList LstItemsControl
     {
-        get;
-        set;
+        get { return lstItems; }
     }
 
-    public System.Collections.Generic.IList<Kistl.API.IDataObject> ItemsSource
+    protected override HtmlGenericControl ContainerControl
     {
-        get;
-        set;
+        get { return container; }
     }
 
-    public bool IsValidValue
+    protected override HtmlAnchor LnkAddControl
     {
-        get;
-        set;
-    }
-
-    public event EventHandler UserInput;
-
-    public string ShortLabel
-    {
-        get;
-        set;
-    }
-
-    public string Description
-    {
-        get;
-        set;
-    }
-
-    public FieldSize Size
-    {
-        get;
-        set;
-    }
-
-    public event EventHandler UserAddRequest;
-
-    ObservableCollection<IDataObject> _Value = new ObservableCollection<IDataObject>();
-
-    ObservableCollection<IDataObject> IValueControl<ObservableCollection<IDataObject>>.Value
-    {
-        get
-        {
-            return _Value;
-        }
-        set
-        {
-            _Value = value;
-        }
-    }
-
-    protected override void OnPreRender(EventArgs e)
-    {
-        base.OnPreRender(e);
-
-        hdItems.Value = _Value.ToJSONArray();
-
-        Page.ClientScript.RegisterStartupScript(this.GetType(), "Startup_ObjectListControl_" + this.ClientID,
-            string.Format("Sys.Application.add_load(function() {{ objectListControl_DataBind('{0}', '{1}'); }}); \n",
-                lstItems.ClientID, hdItems.ClientID), true);
-        Page.ClientScript.RegisterOnSubmitStatement(this.GetType(), "OnSubmit_ObjectListControl_" + this.ClientID,
-            string.Format("objectListControl_OnSubmit('{0}', '{1}');\n",
-                lstItems.ClientID, hdItems.ClientID));
+        get { return lnkAdd; }
     }
 }

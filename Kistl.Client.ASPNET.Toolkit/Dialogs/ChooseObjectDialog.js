@@ -3,26 +3,29 @@
 Type.registerNamespace("Kistl.Client.ASPNET");
 
 Kistl.Client.ASPNET.ChooseObjectDialog = function(element) {
-    this._DataListID = null;
+    // Private Fields
     this._Callback = null;
     this._dlg = null;
     this._lst = null;
-    
+
+    // Event Handler    
     this._onOKHandler = null;
+    this._onServiceCompleted_GetListHandler = null;
     
     Kistl.Client.ASPNET.ChooseObjectDialog.initializeBase(this, [element]);
 }
 
-// Singel instance
+// Singel instance of Choose Object Dialog
 Kistl.Client.ASPNET.ChooseObjectDialog.instance = null;
 
-// Static Methodcall
+// Public static ChooseObject method
 // TODO: do not pass the type a string - convert to object
-Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject = function(typeString, dataListID, callback) {
-    Kistl.Client.ASPNET.ChooseObjectDialog.instance.ChooseObject(typeString, dataListID, callback);
+Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject = function(type, callback) {
+    Kistl.Client.ASPNET.ChooseObjectDialog.instance.ChooseObject(type, callback);
 }
 
 Kistl.Client.ASPNET.ChooseObjectDialog.prototype = {
+    // Inititalize Control
     initialize: function() {
         Kistl.Client.ASPNET.ChooseObjectDialog.callBaseMethod(this, 'initialize');
         
@@ -30,37 +33,37 @@ Kistl.Client.ASPNET.ChooseObjectDialog.prototype = {
         // TODO: Add check for single instance!
         Kistl.Client.ASPNET.ChooseObjectDialog.instance = this;
         
-        // Benutzerdefinierte Initialisierung hier hinzufügen
         this._dlg = $find('chooseObjectBehavior');
         this._lst = $get('panelChooseObject_lst', this._dlg._popupElement);
         
-        this._onOKHandler = Function.createDelegate(this, this.onOK);
+        this._onOKHandler = Function.createDelegate(this, this._onOK);
+        this._onServiceCompleted_GetListHandler = Function.createDelegate(this, this._onServiceCompleted_GetList);
+
         this._dlg.set_OnOkScript(this._onOKHandler);
     },
+    // Dispose
     dispose: function() {        
-        //Benutzerdefinierte Löschaktionen hier einfügen
         Kistl.Client.ASPNET.ChooseObjectDialog.callBaseMethod(this, 'dispose');
     },    
-    onOK : function() {
-        this._Callback(this._DataListID, Sys.Serialization.JavaScriptSerializer.deserialize(this._lst.value));
-    },
-    ChooseObject: function(typeString, dataListID, callback) {
-        var type = Sys.Serialization.JavaScriptSerializer.deserialize(typeString);
-        this._DataListID = dataListID;
+    // Public ChooseObject method
+    ChooseObject: function(type, callback) {
         this._Callback = callback;
 
         // Clear current list
         this._lst.options.length = 0;
         
         // Call WCF Service
-        Kistl.Client.ASPNET.AJAXService.GetList(type, this.ServiceCompleted_GetList);
+        Kistl.Client.ASPNET.AJAXService.GetList(type, this._onServiceCompleted_GetListHandler);
         
         // In the meantime, show the dialog
         this._dlg.show();
     },
-    ServiceCompleted_GetList: function(result) {
-        this._dlg = $find('chooseObjectBehavior');
-        this._lst = $get('panelChooseObject_lst', this._dlg._popupElement);
+    // On OK handler
+    _onOK: function() {
+        this._Callback(Sys.Serialization.JavaScriptSerializer.deserialize(this._lst.value));
+    },
+    // On Service Completed handler
+    _onServiceCompleted_GetList: function(result) {
         this._lst.options.length = 0;
 
         for(var i = 0; i < result.length; i++)

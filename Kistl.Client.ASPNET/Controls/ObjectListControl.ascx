@@ -1,17 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ObjectListControl.ascx.cs" Inherits="Controls_ObjectListControl" %>
 <%@ Import Namespace="Kistl.Client.ASPNET.Toolkit" %>
-<div class="Control">
+<div class="Control" id="container" runat="server">
     <asp:Label ID="Label1" runat="server" AssociatedControlID="divItems"><%= ShortLabel %></asp:Label>
     <div style="float: left;" id="divItems" runat="server">
         <div>
             <asp:LinkButton ID="lnkNew" runat="server" Text="New"></asp:LinkButton>
-            <a href="javascript:Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject('<%= HttpUtility.HtmlEncode(ObjectType.ToJSON()) %>', '<%= lstItems.ClientID %>', objectListControl_OnItemAdd);">Add</a>
+            <a ID="lnkAdd" runat="server">Add</a>
         </div>
-        <adc:DataList ID="lstItems" runat="server" 
-            DataKeyField="ID"
-            ItemDataBoundEvent="objectListControl_OnItemDataBound"
-            DeleteCommandEvent="objectListControl_OnItemDelete"
-            ItemCommandEvent="objectListControl_OnItemCommand">
+        <adc:DataList ID="lstItems" runat="server" DataKeyField="ID">
             <ItemTemplate>
                 <a href="#" commandName="item">Open</a>
                 <a href="#" commandName="delete">Remove</a>
@@ -23,3 +19,10 @@
     <div style="clear: left; height=0px;">
     </div>
 </div>
+
+<!-- 
+            ItemDataBoundEvent="objectListControl_OnItemDataBound"
+            DeleteCommandEvent="objectListControl_OnItemDelete"
+            ItemCommandEvent="objectListControl_OnItemCommand">
+            <a href="javascript:Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject('<%= HttpUtility.HtmlEncode(ObjectType.ToJSON()) %>', '<%= lstItems.ClientID %>', objectListControl_OnItemAdd);">Add</a>
+-->

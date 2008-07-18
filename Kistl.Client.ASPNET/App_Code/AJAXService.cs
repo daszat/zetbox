@@ -20,9 +20,8 @@ namespace Kistl.Client.ASPNET
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery(type.GetSerializedType());
-                // TODO: Bug in projection!!! should be: list.Select(i => ...);
-                return list.ToList().Select(i => new JavaScriptObjectMoniker(i)).ToList();
+                return ctx.GetQuery(type.GetSerializedType())
+                    .Select(i => new JavaScriptObjectMoniker(i)).ToList();
             }
         }
     }
