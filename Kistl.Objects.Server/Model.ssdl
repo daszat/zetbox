@@ -41,6 +41,7 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries" />
     <EntitySet Name="EnumerationProperty" EntityType="Model.Store.EnumerationProperty" Table="EnumerationProperties" />
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses" />
+    <EntitySet Name="ControlInfo" EntityType="Model.Store.ControlInfo" Table="ControlInfos" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -173,6 +174,10 @@
       <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_TestObjClass" EntitySet="TestObjClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_ControlInfo_Assembly" Association="Model.Store.FK_ControlInfo_Assembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_ControlInfo" EntitySet="ControlInfo" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -195,8 +200,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="fk_BaseObjectClass" Type="int" Nullable="true" />
+    <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="fk_BaseObjectClass" Type="int" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -212,7 +217,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Projekt" Type="int" Nullable="true" />
+    <Property Name="fk_Projekt" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="DatumVon" Type="datetime" Nullable="true" />
     <Property Name="DatumBis" Type="datetime" Nullable="true" />
@@ -223,10 +228,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
+    <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="fk_Module" Type="int" Nullable="true" />
+    <Property Name="fk_Module" Type="int" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -243,8 +248,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="IsList" Type="bit" Nullable="true" />
-    <Property Name="IsNullable" Type="bit" Nullable="true" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsNullable" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ValueTypeProperty">
     <Key>
@@ -257,16 +262,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Length" Type="int" Nullable="true" />
+    <Property Name="Length" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Method">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
+    <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="fk_Module" Type="int" Nullable="true" />
+    <Property Name="fk_Module" Type="int" />
   </EntityType>
   <EntityType Name="IntProperty">
     <Key>
@@ -291,7 +296,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_ReferenceObjectClass" Type="int" Nullable="true" />
+    <Property Name="fk_ReferenceObjectClass" Type="int" />
   </EntityType>
   <EntityType Name="DateTimeProperty">
     <Key>
@@ -304,26 +309,26 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_ReferenceProperty" Type="int" Nullable="true" />
-    <Property Name="PreFetchToClient" Type="bit" Nullable="true" />
+    <Property Name="fk_ReferenceProperty" Type="int" />
+    <Property Name="PreFetchToClient" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Module">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="Auftrag">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Projekt" Type="int" Nullable="true" />
-    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+    <Property Name="fk_Projekt" Type="int" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
     <Property Name="Auftragsname" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="fk_Kunde" Type="int" Nullable="true" />
+    <Property Name="fk_Kunde" Type="int" />
     <Property Name="Auftragswert" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="Zeitkonto">
@@ -331,7 +336,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Kontoname" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Kontoname" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="MaxStunden" Type="float" Nullable="true" />
     <Property Name="AktuelleStunden" Type="float" Nullable="true" />
   </EntityType>
@@ -346,27 +351,27 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Projekt" Type="int" Nullable="true" />
+    <Property Name="fk_Projekt" Type="int" />
   </EntityType>
   <EntityType Name="Taetigkeit">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Zeitkonto" Type="int" Nullable="true" />
-    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
-    <Property Name="Datum" Type="datetime" Nullable="true" />
-    <Property Name="Dauer" Type="float" Nullable="true" />
-    <Property Name="fk_TaetigkeitsArt" Type="int" Nullable="true" />
+    <Property Name="fk_Zeitkonto" Type="int" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="Datum" Type="datetime" Nullable="false" />
+    <Property Name="Dauer" Type="float" Nullable="false" />
+    <Property Name="fk_TaetigkeitsArt" Type="int" />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="true" />
+    <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
   </EntityType>
@@ -375,55 +380,55 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="Assembly">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Module" Type="int" Nullable="true" />
-    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="IsClientAssembly" Type="bit" Nullable="true" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsClientAssembly" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="MethodInvocation">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Module" Type="int" Nullable="true" />
-    <Property Name="fk_Method" Type="int" Nullable="true" />
-    <Property Name="fk_Assembly" Type="int" Nullable="true" />
-    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="fk_InvokeOnObjectClass" Type="int" Nullable="true" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_Method" Type="int" />
+    <Property Name="fk_Assembly" Type="int" />
+    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_InvokeOnObjectClass" Type="int" />
   </EntityType>
   <EntityType Name="TaetigkeitsArt">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="DataType">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Module" Type="int" Nullable="true" />
-    <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="true" />
-    <Property Name="fk_DefaultIcon" Type="int" Nullable="true" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="false" />
+    <Property Name="fk_DefaultIcon" Type="int" />
   </EntityType>
   <EntityType Name="BaseParameter">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Method" Type="int" Nullable="true" />
-    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="fk_Module" Type="int" Nullable="true" />
-    <Property Name="IsList" Type="bit" Nullable="true" />
-    <Property Name="IsReturnParameter" Type="bit" Nullable="true" />
+    <Property Name="fk_Method" Type="int" />
+    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="StringParameter">
     <Key>
@@ -460,15 +465,15 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_DataType" Type="int" Nullable="true" />
+    <Property Name="fk_DataType" Type="int" />
   </EntityType>
   <EntityType Name="CLRObjectParameter">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Assembly" Type="int" Nullable="true" />
-    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_Assembly" Type="int" />
+    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="Interface">
     <Key>
@@ -487,25 +492,36 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Enumeration" Type="int" Nullable="true" />
-    <Property Name="EnumerationEntryName" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="EnumValue" Type="int" Nullable="true" />
+    <Property Name="fk_Enumeration" Type="int" />
+    <Property Name="EnumerationEntryName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EnumValue" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="EnumerationProperty">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Enumeration" Type="int" Nullable="true" />
+    <Property Name="fk_Enumeration" Type="int" />
   </EntityType>
   <EntityType Name="TestObjClass">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="TestEnumProp" Type="int" Nullable="true" />
-    <Property Name="fk_ObjectProp" Type="int" Nullable="true" />
+    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="TestEnumProp" Type="int" Nullable="false" />
+    <Property Name="fk_ObjectProp" Type="int" />
+  </EntityType>
+  <EntityType Name="ControlInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Assembly" Type="int" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsContainer" Type="bit" Nullable="false" />
+    <Property Name="Platform" Type="int" Nullable="false" />
+    <Property Name="ControlType" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -920,6 +936,18 @@
       </Principal>
       <Dependent Role="B_TestObjClass">
         <PropertyRef Name="fk_ObjectProp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ControlInfo_Assembly">
+    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
+    <End Role="B_ControlInfo" Type="Model.Store.ControlInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Assembly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ControlInfo">
+        <PropertyRef Name="fk_Assembly" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

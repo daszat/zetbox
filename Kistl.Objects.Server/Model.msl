@@ -285,6 +285,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ControlInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlInfo)">
+        <MappingFragment StoreEntitySet="ControlInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
+          <ScalarProperty Name="Platform" ColumnName="Platform" />
+          <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -601,6 +612,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_ObjectProp" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ControlInfo_Assembly" TypeName="Model.FK_ControlInfo_Assembly" StoreEntitySet="ControlInfo">
+      <EndProperty Name="A_Assembly">
+        <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
+      </EndProperty>
+      <EndProperty Name="B_ControlInfo">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Assembly" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">

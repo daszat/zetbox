@@ -35,6 +35,42 @@ namespace Kistl.App.Base
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
+        public void OnToString_Enumeration(Enumeration obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            // TODO: if (!IsValid)
+            if (Helper.IsFloatingObject(obj))
+            {
+                e.Result = String.Format("new {0}", obj.GetType());
+            }
+            else
+            {
+                e.Result = obj.ClassName;
+            }
+        }
+
+        /// <summary>
+        /// ToString Event überschreiben
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="e"></param>
+        public void OnToString_EnumerationEntry(EnumerationEntry obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            // TODO: if (!IsValid)
+            if (Helper.IsFloatingObject(obj))
+            {
+                e.Result = String.Format("new {0}", obj.GetType());
+            }
+            else
+            {
+                e.Result = obj.Enumeration + "." + obj.EnumerationEntryName;
+            }
+        }
+
+        /// <summary>
+        /// ToString Event überschreiben
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="e"></param>
         public void OnToString_MethodInvokation(MethodInvocation obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
@@ -131,7 +167,7 @@ namespace Kistl.App.Base
             {
                 e.Result = String.Format("ObjectReferenceProperty {0}: {1}", obj.ID, obj.PropertyName);
             }
-            
+
         }
 
         public void OnGetDataType_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -146,7 +182,7 @@ namespace Kistl.App.Base
             {
                 e.Result = String.Format("BackReferenceProperty {0}: {1}", obj.ID, obj.PropertyName);
             }
-            
+
         }
 
         public void OnGetDataType_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -184,7 +220,7 @@ namespace Kistl.App.Base
             else
             {
                 e.Result = String.Format("EnumerationProperty {0}: {1}", obj.ID, obj.PropertyName);
-            } 
+            }
         }
 
         // Parameter
@@ -223,7 +259,7 @@ namespace Kistl.App.Base
             else
             {
                 e.Result = String.Format("ObjectParameter {0}: {1}", obj.ID, obj.ParameterName);
-            } 
+            }
         }
 
         public void OnGetDataType_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)

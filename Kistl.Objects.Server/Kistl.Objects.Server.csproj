@@ -63,6 +63,7 @@
     <Compile Include="BoolParameter.Server.Designer.cs" />
     <Compile Include="BoolProperty.Server.Designer.cs" />
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
+    <Compile Include="ControlInfo.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="Toolkit.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
+    <Compile Include="VisualType.Server.Designer.cs" />
     <Compile Include="Zeitkonto.Server.Designer.cs" />
   </ItemGroup>
   <ItemGroup>

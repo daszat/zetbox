@@ -27,13 +27,13 @@ namespace Kistl.App.Base
     public class StringProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
-        private System.Int32? _Length;
+        private int _Length;
         
         public StringProperty()
         {
         }
         
-        public System.Int32? Length
+        public int Length
         {
             get
             {

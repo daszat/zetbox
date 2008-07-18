@@ -70,6 +70,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.EnumerationEntry), ElementName="EnumerationEntry")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.EnumerationProperty), ElementName="EnumerationProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.Test.TestObjClass), ElementName="TestObjClass")]
+        [XmlArrayItem(Type=typeof(Kistl.App.GUI.ControlInfo), ElementName="ControlInfo")]
         public List<Object> Objects
         {
             get
@@ -132,6 +133,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.EnumerationEntry), ElementName="EnumerationEntry")]
         [XmlElement(Type=typeof(Kistl.App.Base.EnumerationProperty), ElementName="EnumerationProperty")]
         [XmlElement(Type=typeof(Kistl.App.Test.TestObjClass), ElementName="TestObjClass")]
+        [XmlElement(Type=typeof(Kistl.App.GUI.ControlInfo), ElementName="ControlInfo")]
         public Object Object
         {
             get

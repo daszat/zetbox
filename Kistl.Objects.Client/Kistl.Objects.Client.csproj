@@ -67,6 +67,7 @@
     <Compile Include="BoolParameter.Client.Designer.cs" />
     <Compile Include="BoolProperty.Client.Designer.cs" />
     <Compile Include="CLRObjectParameter.Client.Designer.cs" />
+    <Compile Include="ControlInfo.Client.Designer.cs" />
     <Compile Include="DataType.Client.Designer.cs" />
     <Compile Include="DateTimeParameter.Client.Designer.cs" />
     <Compile Include="DateTimeProperty.Client.Designer.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="TestObjClass.Client.Designer.cs" />
     <Compile Include="Toolkit.Client.Designer.cs" />
     <Compile Include="ValueTypeProperty.Client.Designer.cs" />
+    <Compile Include="VisualType.Client.Designer.cs" />
     <Compile Include="Zeitkonto.Client.Designer.cs" />
   </ItemGroup>
   <ItemGroup>

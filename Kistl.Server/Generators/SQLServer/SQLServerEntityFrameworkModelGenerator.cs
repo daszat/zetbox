@@ -203,6 +203,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
                     xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                     xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
+                    // TODO: IsNullable??
                     xml.WriteEndElement(); // </NavigationProperty>
                 }
                 else if (prop is ValueTypeProperty)
@@ -214,7 +215,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         xml.WriteAttributeString("MaxLength", ((StringProperty)prop).Length.ToString());
                     }
-                    xml.WriteAttributeString("Nullable", "true");
+                    xml.WriteAttributeString("Nullable", prop.IsNullable.ToString().ToLowerInvariant());
                     xml.WriteEndElement(); // </Property>
                 }
 
@@ -261,6 +262,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 foreach (BaseProperty p in obj.Properties)
                 {
+                    // TODO: implement IsNullable everywhere
                     if (p is BackReferenceProperty)
                     {
                         // BackReferenceProperty
@@ -307,7 +309,7 @@ namespace Kistl.Server.Generators.SQLServer
                         {
                             xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
                         }
-                        xml.WriteAttributeString("Nullable", "true");
+                        xml.WriteAttributeString("Nullable", ((ValueTypeProperty)p).IsNullable.ToString().ToLowerInvariant());
                         xml.WriteEndElement(); // </Property>
                     }
                     else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList)
@@ -802,7 +804,7 @@ namespace Kistl.Server.Generators.SQLServer
                 {
                     xml.WriteAttributeString("MaxLength", ((StringProperty)prop).Length.ToString());
                 }
-                xml.WriteAttributeString("Nullable", "true");
+                xml.WriteAttributeString("Nullable", prop.IsNullable.ToString().ToLowerInvariant());
                 xml.WriteEndElement(); // </Property>
 
                 xml.WriteEndElement(); // </EntityType>
@@ -850,7 +852,10 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
                     }
-                    xml.WriteAttributeString("Nullable", "true");
+                    if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
+                    {
+                        xml.WriteAttributeString("Nullable", p.IsNullable.ToString().ToLowerInvariant());
+                    }
                     xml.WriteEndElement(); // </Property>
                 }
 

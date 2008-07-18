@@ -62,44 +62,52 @@ namespace Kistl.Server
                 {
                     foreach (ObjectClass baseObjClass in ctx.GetQuery<ObjectClass>())
                     {
-                        Type objType = baseObjClass.GetDataCLRType();
-                        foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
+                        try
                         {
-                            foreach (MethodInvocation mi in objClass.MethodIvokations)
+                            Type objType = baseObjClass.GetDataCLRType();
+                            foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
                             {
-                                try
+                                foreach (MethodInvocation mi in objClass.MethodIvokations)
                                 {
-                                    if (mi.Assembly.IsClientAssembly) continue;
-
-                                    Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
-                                    System.Diagnostics.Debug.Assert(t != null, string.Format("Type '{0}, {1}' not found", mi.FullTypeName, mi.Assembly.AssemblyName));
-                                    if (t == null) continue;
-
-                                    MethodInfo clrMethod = t.GetMethod(mi.MemberName);
-                                    System.Diagnostics.Debug.Assert(clrMethod != null, string.Format("CLR Method '{0}' not found", mi.MemberName));
-                                    if (clrMethod == null) continue;
-
-                                    EventInfo ei = objType.GetEvent(
-                                        "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
-                                    System.Diagnostics.Debug.Assert(ei != null, string.Format("Event 'On{0}_{1}' not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
-                                    if (ei == null) continue;
-
-                                    InvokeInfo ii = new InvokeInfo();
-                                    ii.CLRMethod = clrMethod;
-                                    ii.Instance = Activator.CreateInstance(t);
-                                    ii.CLREvent = ei;
-
-                                    if (!customAction.ContainsKey(objType))
+                                    try
                                     {
-                                        customAction.Add(objType, new List<InvokeInfo>());
+                                        if (mi.Assembly.IsClientAssembly) continue;
+
+                                        Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
+                                        System.Diagnostics.Debug.Assert(t != null, string.Format("Type '{0}, {1}' not found", mi.FullTypeName, mi.Assembly.AssemblyName));
+                                        if (t == null) continue;
+
+                                        MethodInfo clrMethod = t.GetMethod(mi.MemberName);
+                                        System.Diagnostics.Debug.Assert(clrMethod != null, string.Format("CLR Method '{0}' not found", mi.MemberName));
+                                        if (clrMethod == null) continue;
+
+                                        EventInfo ei = objType.GetEvent(
+                                            "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
+                                        System.Diagnostics.Debug.Assert(ei != null, string.Format("Event 'On{0}_{1}' not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
+                                        if (ei == null) continue;
+
+                                        InvokeInfo ii = new InvokeInfo();
+                                        ii.CLRMethod = clrMethod;
+                                        ii.Instance = Activator.CreateInstance(t);
+                                        ii.CLREvent = ei;
+
+                                        if (!customAction.ContainsKey(objType))
+                                        {
+                                            customAction.Add(objType, new List<InvokeInfo>());
+                                        }
+                                        customAction[objType].Add(ii);
                                     }
-                                    customAction[objType].Add(ii);
-                                }
-                                catch (Exception ex)
-                                {
-                                    System.Diagnostics.Debug.Assert(false, ex.ToString());
+                                    catch (Exception ex)
+                                    {
+                                        System.Diagnostics.Debug.Assert(false, ex.ToString());
+                                    }
                                 }
                             }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Can happen if Type is not yet compiled into Assembly
+                            Helper.HandleError(ex);
                         }
                     }
                 }
