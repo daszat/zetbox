@@ -76,12 +76,6 @@ namespace Kistl.Client.ASPNET.Toolkit
 
             RenderHiddenInput(writer, "__JavascriptRenderer_Action", hdAction);
             RenderHiddenInput(writer, "__JavascriptRenderer_Argument", hdArgument);           
-
-            // Not needed, I am a "no" Control - just rendering some Javascript
-            //if (!DesignMode)
-            //{
-            //    ScriptManager.GetCurrent(this.Page).RegisterScriptDescriptors(this);
-            //}
         }
 
         public void RaisePostBackEvent(string eventArgument)

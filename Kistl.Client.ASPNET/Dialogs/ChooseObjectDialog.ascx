@@ -5,7 +5,6 @@
     PopupControlID="panelChooseObject"
     BackgroundCssClass="ModalBackground"
     OkControlID="btnOK"
-    OnOkScript="chooseObjectDialog_OnOK()" 
     CancelControlID="btnCancel" 
     DropShadow="true" />
 <asp:LinkButton ID="lnkOpenPopup" runat="server" Text="Choose Object" style="display:none"/> 

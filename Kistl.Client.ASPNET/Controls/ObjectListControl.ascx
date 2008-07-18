@@ -5,7 +5,7 @@
     <div style="float: left;" id="divItems" runat="server">
         <div>
             <asp:LinkButton ID="lnkNew" runat="server" Text="New"></asp:LinkButton>
-            <a href="javascript:chooseObjectDialog_ChooseObject('<%= HttpUtility.HtmlEncode(ObjectType.ToJSON()) %>', '<%= lstItems.ClientID %>', objectListControl_OnItemAdd);">Add</a>
+            <a href="javascript:Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject('<%= HttpUtility.HtmlEncode(ObjectType.ToJSON()) %>', '<%= lstItems.ClientID %>', objectListControl_OnItemAdd);">Add</a>
         </div>
         <adc:DataList ID="lstItems" runat="server" 
             DataKeyField="ID"
