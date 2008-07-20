@@ -36,7 +36,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_BaseObjectClass = null;
         
-        private System.Boolean? _IsSimpleObject;
+        private bool _IsSimpleObject;
         
         public ObjectClass()
         {
@@ -115,7 +115,7 @@ namespace Kistl.App.Base
         }
         
         [EdmScalarPropertyAttribute()]
-        public System.Boolean? IsSimpleObject
+        public bool IsSimpleObject
         {
             get
             {

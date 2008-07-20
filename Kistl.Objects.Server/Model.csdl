@@ -178,7 +178,7 @@
     <NavigationProperty Name="BaseObjectClass" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="B_ObjectClass" ToRole="A_ObjectClass" />
     <NavigationProperty Name="SubClasses" Relationship="Model.FK_ObjectClass_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
     <NavigationProperty Name="ImplementsInterfaces" Relationship="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass_ImplementsInterfacesCollectionEntry" />
-    <Property Name="IsSimpleObject" Type="Boolean" Nullable="true" />
+    <Property Name="IsSimpleObject" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>

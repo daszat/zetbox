@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         
         private ListPropertyCollection<Kistl.App.Base.Interface, ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry> _ImplementsInterfaces;
         
-        private System.Boolean? _IsSimpleObject;
+        private bool _IsSimpleObject;
         
         public ObjectClass()
         {
@@ -115,7 +115,7 @@ namespace Kistl.App.Base
             }
         }
         
-        public System.Boolean? IsSimpleObject
+        public bool IsSimpleObject
         {
             get
             {
