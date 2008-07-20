@@ -110,10 +110,10 @@ namespace Kistl.API.Client
                 // Get Selector and SourceType
                 // Sourcetype should be of type IDataObject
                 LambdaExpression selector = (LambdaExpression)((MethodCallExpression)e).Arguments[1].StripQuotes();
-                if(selector.Parameters[0].Type != _type) throw new InvalidOperationException("Sourcetype of selector does not match Type of GetListCall");
+                Type sourceType = selector.Parameters[0].Type;
 
                 // Create temporary result list for objects
-                IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(_type));
+                IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
                 foreach (IDataObject obj in serviceResult)
                 {
                     CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
@@ -121,7 +121,7 @@ namespace Kistl.API.Client
                 }
                 AddNewLocalObjects(_type, result);
 
-                IQueryable selectResult = result.AsQueryable().AddSelector(selector, _type, GetElementType(typeof(T)));
+                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, GetElementType(typeof(T)));
                 return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
             }
             else
