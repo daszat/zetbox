@@ -112,6 +112,18 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IPersistenceObject> AttachedObjects
+        {
+            get
+            {
+                return _objects;
+            }
+        }
+
+        /// <summary>
         /// Returns a Query by System.Type
         /// </summary>
         /// <param name="type">System.Type</param>
@@ -220,7 +232,7 @@ namespace Kistl.API.Client
             {
                 _objects.Add(obj);
                 obj.ObjectState = DataObjectState.Unmodified;
-                KistlContextDebugger.Changed(this, _objects);
+                KistlContextDebugger.Changed(this);
             }
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
@@ -241,7 +253,7 @@ namespace Kistl.API.Client
 
             _objects.Remove(obj);
             obj.DetachFromContext(this);
-            KistlContextDebugger.Changed(this, _objects);
+            KistlContextDebugger.Changed(this);
         }
 
         /// <summary>

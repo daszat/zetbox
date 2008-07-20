@@ -17,7 +17,7 @@ namespace Kistl.API
     {
         void Created(IKistlContext ctx);
         void Disposed(IKistlContext ctx);
-        void Changed(IKistlContext ctx, IList<IPersistenceObject> objects);
+        void Changed(IKistlContext ctx);
     }
 
     public static class KistlContextDebugger
@@ -58,13 +58,13 @@ namespace Kistl.API
             }
         }
 
-        public static void Changed(IKistlContext ctx, IList<IPersistenceObject> objects)
+        public static void Changed(IKistlContext ctx)
         {
             lock (typeof(KistlContextDebugger))
             {
                 if (_Current != null)
                 {
-                    _Current.Changed(ctx, objects);
+                    _Current.Changed(ctx);
                 }
             }
         }
@@ -133,6 +133,12 @@ namespace Kistl.API
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
         IPersistenceObject ContainsObject(Type type, int ID);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IPersistenceObject> AttachedObjects { get; }
 
         /// <summary>
         /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counded.

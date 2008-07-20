@@ -190,7 +190,7 @@ namespace Kistl.Server
                     // new object -> look in current context
                     ObjectContext ctx = (ObjectContext)KistlDataContext.Current;
                     return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
-                        .FirstOrDefault(e => ((IDataObject)e.Entity).ID == ID).Entity;
+                        .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
                 }
                 else
                 {

@@ -94,7 +94,7 @@ namespace Kistl.Client.WPF.Debugger
             }
         }
 
-        public void Changed(IKistlContext ctx, IList<IPersistenceObject> objects)
+        public void Changed(IKistlContext ctx)
         {
             ContextNode n = ContainsContext(ctx);
             if (n == null)
@@ -102,8 +102,8 @@ namespace Kistl.Client.WPF.Debugger
                 n = new ContextNode(ctx);
                 _contextList.Add(n);
             }
-            var added = objects.Except(n.Objects).ToList();
-            var deleted = n.Objects.Except(objects).ToList();
+            var added = ctx.AttachedObjects.Except(n.Objects).ToList();
+            var deleted = n.Objects.Except(ctx.AttachedObjects).ToList();
 
             deleted.ForEach(d => n.Objects.Remove(d));
             added.ForEach(a => n.Objects.Add(a));

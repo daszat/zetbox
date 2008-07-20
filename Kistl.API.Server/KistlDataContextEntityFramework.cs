@@ -161,8 +161,23 @@ namespace Kistl.API.Server
         /// If the Object is not in that Context, null is returned.</returns>
         public IPersistenceObject ContainsObject(Type type, int ID)
         {
-            throw new NotSupportedException("The Entity Provider does not support this operation");
+            return AttachedObjects.Where(obj => obj.GetType() == type && obj.ID == ID).SingleOrDefault();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IPersistenceObject> AttachedObjects
+        {
+            get
+            {
+                return this.ObjectStateManager
+                    .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified | System.Data.EntityState.Deleted | System.Data.EntityState.Unchanged)
+                    .Select(e => e.Entity).OfType<IPersistenceObject>();
+            }
+        }
+
 
         /// <summary>
         /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
@@ -170,12 +185,9 @@ namespace Kistl.API.Server
         /// <returns>Number of affected Objects</returns>
         public int SubmitChanges()
         {
-            List<IDataObject> saveList = new List<IDataObject>();
-
-            saveList.AddRange(this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
-                .Select(e => e.Entity).OfType<IDataObject>());
-            saveList.AddRange(this.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified)
-                .Select(e => e.Entity).OfType<IDataObject>());
+            List<IDataObject> saveList = this.ObjectStateManager
+                .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified)
+                .Select(e => e.Entity).OfType<IDataObject>().ToList();
 
             saveList.ForEach(obj => obj.NotifyPreSave());
 

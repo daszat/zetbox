@@ -79,6 +79,14 @@ namespace Kistl.API.Client
             return result;
         }
 
+        private void AddNewLocalObjects(Type type, IList result)
+        {
+            var list = _context.AttachedObjects.AsQueryable()
+                .Where(o => o.ObjectState == DataObjectState.New && o.GetType() == type);
+            if(_filter != null) list = list.AddFilter(_filter);
+            list.ForEach<IDataObject>(i => result.Add(i));
+        }
+
         /// <summary>
         /// Performs a GetListCall
         /// </summary>
@@ -88,20 +96,24 @@ namespace Kistl.API.Client
         {
             List<IDataObject> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<IDataObject>().ToList();
 
+            // Projection
             if (e.NodeType == ExpressionType.Call && ((MethodCallExpression)e).Method.Name == "Select")
             {
+                // Get Selector and SourceType
+                // Sourcetype should be of type IDataObject
                 LambdaExpression selector = (LambdaExpression)((MethodCallExpression)e).Arguments[1].StripQuotes();
-                Type sourceType = selector.Parameters[0].Type;
+                if(selector.Parameters[0].Type != _type) throw new InvalidOperationException("Sourcetype of selector does not match Type of GetListCall");
 
-                // Projection
-                IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
+                // Create temporary result list for objects
+                IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(_type));
                 foreach (IDataObject obj in serviceResult)
                 {
                     CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
                     result.Add(_context.Attach(obj));
                 }
+                AddNewLocalObjects(_type, result);
 
-                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, GetElementType(typeof(T)));
+                IQueryable selectResult = result.AsQueryable().AddSelector(selector, _type, GetElementType(typeof(T)));
                 return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
             }
             else
@@ -111,8 +123,9 @@ namespace Kistl.API.Client
                 foreach (IDataObject obj in serviceResult)
                 {
                     CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
-                    (result as IList).Add(_context.Attach(obj));
+                    ((IList)result).Add(_context.Attach(obj));
                 }
+                AddNewLocalObjects(_type, (IList)result);
                 return result;
             }
         }
