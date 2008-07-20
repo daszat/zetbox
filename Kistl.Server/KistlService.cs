@@ -191,8 +191,9 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
                         IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
-                        obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).SetObject(obj);
-                        return CurrentSerializer.XmlFromObject(obj);
+                        throw new NotImplementedException();
+                        //ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).SetObjects(obj);
+                        // return CurrentSerializer.XmlFromObject(obj);
                     }
                 }
             }

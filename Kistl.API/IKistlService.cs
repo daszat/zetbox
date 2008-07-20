@@ -113,6 +113,7 @@ namespace Kistl.API
 
     /// <summary>
     /// Kist Stream Service Contract
+    /// TODO: Add FaultContracts
     /// </summary>
     [ServiceContract]
     public interface IKistlServiceStreams
@@ -131,7 +132,7 @@ namespace Kistl.API
         /// <param name="msg"></param>
         /// <returns></returns>
         [OperationContract]
-        System.IO.MemoryStream SetObject(System.IO.MemoryStream msg);
+        System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg);
 
         /// <summary>
         /// 
@@ -162,7 +163,7 @@ namespace Kistl.API
         /// <param name="type">Type of the result Objects</param>
         /// <param name="maxListCount">Max. size of the resultset</param>
         /// <param name="filter">Filter as LinqExpression</param>
-        /// <param name="orderBy">ORderBy as LinqExpression</param>
+        /// <param name="orderBy">OrderBy as LinqExpression</param>
         /// <returns>A List ob Objects as XML</returns>
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]

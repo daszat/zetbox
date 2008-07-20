@@ -15,17 +15,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SetObject">
+  <xs:element name="SetObjects">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="msg" nillable="true" type="q3:MemoryStream" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SetObjectResponse">
+  <xs:element name="SetObjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="SetObjectResult" nillable="true" type="q4:MemoryStream" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="SetObjectsResult" nillable="true" type="q4:MemoryStream" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

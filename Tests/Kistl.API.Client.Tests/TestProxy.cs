@@ -18,7 +18,7 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public System.Collections.IEnumerable GetList(Type type, int maxListCount, System.Linq.Expressions.Expression filter, System.Linq.Expressions.Expression orderBy)
+        public IEnumerable<IDataObject> GetList(Type type, int maxListCount, System.Linq.Expressions.Expression filter, System.Linq.Expressions.Expression orderBy)
         {
             if (type == null) throw new ArgumentNullException("type");
             if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
@@ -32,10 +32,10 @@ namespace Kistl.API.Client.Tests
             result.Add(new TestObjClass() { ID = 4, StringProp = "String " + 4 });
             result.Add(new TestObjClass() { ID = 5, StringProp = "String " + 5 });
 
-            return result;
+            return result.Cast<IDataObject>();
         }
 
-        public System.Collections.IEnumerable GetListOf(Type type, int ID, string property)
+        public IEnumerable<IDataObject> GetListOf(Type type, int ID, string property)
         {
             if (type == null) throw new ArgumentNullException("type");
             if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
@@ -47,7 +47,7 @@ namespace Kistl.API.Client.Tests
                 result.Add(new TestObjClass() { ID = 3, StringProp = "String " + 3 });
             }
 
-            return result;
+            return result.Cast<IDataObject>();
         }
 
         public Kistl.API.IDataObject GetObject(Type type, int ID)
@@ -64,16 +64,22 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public Kistl.API.IDataObject SetObject(Type type, Kistl.API.IDataObject obj)
+        public IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
+            List<IDataObject> result = new List<IDataObject>();
+            foreach (IDataObject obj in objects)
+            {
+                Type type = obj.GetType();
+                if (type == null) throw new ArgumentNullException("type");
+                if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
-            TestObjClass newObj = new TestObjClass();
-            obj.CopyTo(newObj);
-            newObj.ID = ++newID;
+                TestObjClass newObj = new TestObjClass();
+                obj.CopyTo(newObj);
+                newObj.ID = ++newID;
+                result.Add(newObj);
+            }
 
-            return newObj;
+            return result;
         }
 
         #endregion

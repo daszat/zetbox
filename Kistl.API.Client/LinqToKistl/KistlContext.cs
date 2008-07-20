@@ -266,40 +266,35 @@ namespace Kistl.API.Client
             // TODO: Add a better Cache Refresh Strategie
             CacheController<Kistl.API.IDataObject>.Current.Clear();
 
+            List<Kistl.API.IDataObject> objectsToSubmit = new List<Kistl.API.IDataObject>();
             List<Kistl.API.IDataObject> objectsToDetach = new List<Kistl.API.IDataObject>();
-            int objectsSubmittedCount = 0;
 
-            // Use the ToList() operator! The CopyTo Methods _may_ attach new created Objects
-            // like ICollectionEntries
-            // TODO: Arthur: Da hats was. Das würde ja bedeuten, dass neue Objekte, die im Context
-            // drinnen sind wieder durch neue ersetzt werden & damit rausfliegen!
-            // Vermutlicher Grund: Der Context kann die Objekte nur nach der ID erkennen... hmmmm
-            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>().ToList())
+            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
+                .Where(o => o.ObjectState.In(DataObjectState.Modified, DataObjectState.New)))
             {
-                if (obj.ObjectState == DataObjectState.Deleted)
-                {
-                    objectsSubmittedCount++;
-                    // Object was deleted
-                    Proxy.Current.SetObject(obj.GetType(), obj);
-                    objectsToDetach.Add(obj);
-                }
-                else if (obj.ObjectState.In(DataObjectState.Modified, DataObjectState.New))
-                {
-                    objectsSubmittedCount++;
-                    // Object is temporary and will bie copied
-                    Kistl.API.IDataObject newobj = Proxy.Current.SetObject(obj.GetType(), obj);
-                    newobj.CopyTo(obj);
+                objectsToSubmit.Add(obj);
+            }
+            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
+                .Where(o => o.ObjectState == DataObjectState.Deleted))
+            {
+                objectsToSubmit.Add(obj);
+                objectsToDetach.Add(obj);
+            }
 
-                    // Set to unmodified
-                    obj.ObjectState = DataObjectState.Unmodified;
-                }
+            int counter = 0;
+            foreach (IDataObject newobj in Proxy.Current.SetObjects(objectsToSubmit))
+            {
+                IDataObject obj = objectsToSubmit[counter++];
 
+                newobj.CopyTo(obj);
+                // Set to unmodified
+                obj.ObjectState = DataObjectState.Unmodified;
                 CacheController<Kistl.API.IDataObject>.Current.Set(obj.GetType(), obj.ID, obj);
             }
 
             objectsToDetach.ForEach(obj => this.Detach(obj));
 
-            return objectsSubmittedCount;
+            return objectsToSubmit.Count;
         }
 
         /// <summary>

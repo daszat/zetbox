@@ -21,11 +21,11 @@
   <wsdl:message name="IKistlServiceStreams_GetObject_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetObjectResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlServiceStreams_SetObject_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetObject" />
+  <wsdl:message name="IKistlServiceStreams_SetObjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetObjects" />
   </wsdl:message>
-  <wsdl:message name="IKistlServiceStreams_SetObject_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetObjectResponse" />
+  <wsdl:message name="IKistlServiceStreams_SetObjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetObjectsResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlServiceStreams_GetList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetList" />
@@ -44,9 +44,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetObject" message="tns:IKistlServiceStreams_GetObject_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetObjectResponse" message="tns:IKistlServiceStreams_GetObject_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SetObject">
-      <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/SetObject" message="tns:IKistlServiceStreams_SetObject_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/SetObjectResponse" message="tns:IKistlServiceStreams_SetObject_OutputMessage" />
+    <wsdl:operation name="SetObjects">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/SetObjects" message="tns:IKistlServiceStreams_SetObjects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/SetObjectsResponse" message="tns:IKistlServiceStreams_SetObjects_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetList">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetList" message="tns:IKistlServiceStreams_GetList_InputMessage" />
@@ -69,8 +69,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetObject">
-      <soap:operation soapAction="http://tempuri.org/IKistlServiceStreams/SetObject" style="document" />
+    <wsdl:operation name="SetObjects">
+      <soap:operation soapAction="http://tempuri.org/IKistlServiceStreams/SetObjects" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

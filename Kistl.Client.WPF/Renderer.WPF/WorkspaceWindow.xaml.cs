@@ -108,29 +108,64 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            OnSave(e);
+            try
+            {
+                OnSave(e);
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         private void SaveAndClose_Click(object sender, RoutedEventArgs e)
         {
-            OnSave(e);
-            this.Close();
+            try
+            {
+                OnSave(e);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         private void AbortAndClose_Click(object sender, RoutedEventArgs e)
         {
-            OnAbort(e);
-            this.Close();
+            try
+            {
+                OnAbort(e);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         private void Self_Closed(object sender, EventArgs e)
         {
-            OnAbort(null);
+            try
+            {
+                OnAbort(null);
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         private void New_Click(object sender, RoutedEventArgs e)
         {
-            OnNew(e);
+            try
+            {
+                OnNew(e);
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         #endregion

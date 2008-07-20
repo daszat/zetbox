@@ -23,7 +23,7 @@ namespace Kistl.API.Client
         /// <param name="filter"></param>
         /// <param name="orderBy"></param>
         /// <returns></returns>
-        IEnumerable GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable<Kistl.API.IDataObject> GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
         /// <summary>
         /// 
         /// </summary>
@@ -31,7 +31,7 @@ namespace Kistl.API.Client
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        IEnumerable GetListOf(Type type, int ID, string property);
+        IEnumerable<Kistl.API.IDataObject> GetListOf(Type type, int ID, string property);
         /// <summary>
         /// 
         /// </summary>
@@ -45,7 +45,7 @@ namespace Kistl.API.Client
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        Kistl.API.IDataObject SetObject(Type type, Kistl.API.IDataObject obj);
+        IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects);
         /// <summary>
         /// Generates Objects &amp; Database. Throws a Exception if failed.
         /// </summary>
@@ -175,8 +175,8 @@ namespace Kistl.API.Client
         /// Konfiguration lt. app.config File
         /// </summary>
         private KistlServiceStreams.KistlServiceStreamsClient serviceStreams = new KistlServiceStreams.KistlServiceStreamsClient();
-        
-        public IEnumerable GetList(Type type, int maxListCount, Expression filter, Expression orderBy)
+
+        public IEnumerable<Kistl.API.IDataObject> GetList(Type type, int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
@@ -221,7 +221,7 @@ namespace Kistl.API.Client
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        public IEnumerable GetListOf(Type type, int ID, string property)
+        public IEnumerable<Kistl.API.IDataObject> GetListOf(Type type, int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
             {
@@ -296,36 +296,45 @@ namespace Kistl.API.Client
         /// <param name="type"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public Kistl.API.IDataObject SetObject(Type type, Kistl.API.IDataObject obj)
+        public IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
+            using (TraceClient.TraceHelper.TraceMethodCall())
             {
 #if USE_STREAMS
                 // Serialize
-                KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = new SerializableType(type);
-
                 MemoryStream ms = new MemoryStream();
-                msg.ToStream(ms);
-
                 BinaryWriter sw = new BinaryWriter(ms);
-                obj.ToStream(sw);
+                foreach (IDataObject obj in objects)
+                {
+                    BinarySerializer.ToBinary(true, sw);
+                    obj.ToStream(sw);
+                }
+                BinarySerializer.ToBinary(false, sw);
 
                 // Set Operation
-                System.IO.MemoryStream s = serviceStreams.SetObject(ms);
+                System.IO.MemoryStream s = serviceStreams.SetObjects(ms);
 
                 // Deserialize
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
-                SerializableType objType;
-                BinarySerializer.FromBinary(out objType, sr);
+                List<IDataObject> result = new List<IDataObject>();
+                bool @continue;
+                BinarySerializer.FromBinary(out @continue, sr);
+                while (@continue)
+                {
+                    long pos = s.Position;
+                    SerializableType objType;
+                    BinarySerializer.FromBinary(out objType, sr);
 
-                s.Seek(0, System.IO.SeekOrigin.Begin);
+                    s.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                obj = (IDataObject)objType.NewObject();
-                obj.FromStream(sr);
+                    IDataObject obj = (IDataObject)objType.NewObject();
+                    obj.FromStream(sr);
+                    result.Add(obj);
+                    BinarySerializer.FromBinary(out @continue, sr);
+                }
 
-                return obj;
+                return result;
 
 #else
                 string xml = CurrentSerializer.XmlFromObject(obj);

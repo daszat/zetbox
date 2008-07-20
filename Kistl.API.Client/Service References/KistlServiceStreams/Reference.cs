@@ -18,8 +18,8 @@ namespace Kistl.API.Client.KistlServiceStreams {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/GetObject", ReplyAction="http://tempuri.org/IKistlServiceStreams/GetObjectResponse")]
         System.IO.MemoryStream GetObject(System.IO.MemoryStream msg);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/SetObject", ReplyAction="http://tempuri.org/IKistlServiceStreams/SetObjectResponse")]
-        System.IO.MemoryStream SetObject(System.IO.MemoryStream msg);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/SetObjects", ReplyAction="http://tempuri.org/IKistlServiceStreams/SetObjectsResponse")]
+        System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlServiceStreams/GetList", ReplyAction="http://tempuri.org/IKistlServiceStreams/GetListResponse")]
         System.IO.MemoryStream GetList(System.IO.MemoryStream msg);
@@ -59,8 +59,8 @@ namespace Kistl.API.Client.KistlServiceStreams {
             return base.Channel.GetObject(msg);
         }
         
-        public System.IO.MemoryStream SetObject(System.IO.MemoryStream msg) {
-            return base.Channel.SetObject(msg);
+        public System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg) {
+            return base.Channel.SetObjects(msg);
         }
         
         public System.IO.MemoryStream GetList(System.IO.MemoryStream msg) {

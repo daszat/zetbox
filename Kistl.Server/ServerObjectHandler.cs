@@ -45,14 +45,17 @@ namespace Kistl.Server
         /// <param name="ID"></param>
         /// <returns></returns>
         IDataObject GetObject(int ID);
+    }
 
+    internal interface IServerObjectSetHandler
+    {
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        IDataObject SetObject(IDataObject xml);
+        void SetObjects(IEnumerable<IDataObject> objects);
     }
 
     /// <summary>
@@ -79,6 +82,11 @@ namespace Kistl.Server
 
                 return obj;
             }
+        }
+
+        public static IServerObjectSetHandler GetServerObjectSetHandler()
+        {
+            return new ServerObjectSetHandler();
         }
     }
 
@@ -113,8 +121,7 @@ namespace Kistl.Server
                     maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
                 }
 
-                var result = from a in KistlDataContext.Current.GetQuery<T>()
-                             select a;
+                var result = KistlDataContext.Current.GetQuery<T>();
 
                 if (filter != null)
                 {
@@ -178,10 +185,17 @@ namespace Kistl.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
             {
-                var result = from a in KistlDataContext.Current.GetQuery<T>()
-                             where a.ID == ID
-                             select a;
-                return result.FirstOrDefault<T>();
+                if (ID < Kistl.API.Helper.INVALIDID)
+                {
+                    // new object -> look in current context
+                    ObjectContext ctx = (ObjectContext)KistlDataContext.Current;
+                    return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
+                        .FirstOrDefault(e => ((IDataObject)e.Entity).ID == ID).Entity;
+                }
+                else
+                {
+                    return KistlDataContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
+                }
             }
         }
 
@@ -195,29 +209,39 @@ namespace Kistl.Server
         {
             return GetObjectInstance(ID);
         }
+    }
 
+    internal class ServerObjectSetHandler : IServerObjectSetHandler
+    {
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public IDataObject SetObject(IDataObject obj)
+        public void SetObjects(IEnumerable<IDataObject> objects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                // Fist of all, Attach Object
-                KistlDataContext.Current.Attach(obj);
-
-                if (obj.ObjectState != DataObjectState.Deleted)
+                foreach (IDataObject obj in objects)
                 {
-                    MarkEveryPropertyAsModified(obj as EntityObject);
-                    UpdateRelationships(obj as T);
+                    // Fist of all, Attach Object
+                    KistlDataContext.Current.Attach(obj);
+
+                    if (obj.ObjectState != DataObjectState.Deleted)
+                    {
+                        MarkEveryPropertyAsModified(obj as EntityObject);
+                    }
+                }
+                foreach (IDataObject obj in objects)
+                {
+                    if (obj.ObjectState != DataObjectState.Deleted)
+                    {
+                        UpdateRelationships(obj);
+                    }
                 }
 
                 KistlDataContext.Current.SubmitChanges();
-
-                return obj;
             }
         }
 
@@ -227,12 +251,12 @@ namespace Kistl.Server
         /// Note: Change Tracking is "enabled" by setting every Reference
         /// </summary>
         /// <param name="obj"></param>
-        private static void UpdateRelationships(T obj)
+        private static void UpdateRelationships(IDataObject obj)
         {
             using (IKistlContext ctx = KistlDataContext.GetContext())
             {
-                Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(ctx); 
-                while(objClass != null)
+                Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(ctx);
+                while (objClass != null)
                 {
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
                     {
@@ -244,6 +268,7 @@ namespace Kistl.Server
                             {
                                 IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
                                 IDataObject other = so.GetObject(fk.Value);
+                                if (other == null) throw new InvalidOperationException(string.Format("UpdateRelationships: Cannot find Object {0}:{1}", p.GetDataCLRType().FullName, fk));
                                 obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
                             }
                             else
