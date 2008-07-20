@@ -16,6 +16,8 @@ Kistl.Client.ASPNET.ObjectListControl = function(element) {
     
     // Handler
     this._onOnItemDataBoundHandler = null;
+    this._onOnDeleteCommandHandler = null;
+    this._onOnItemCommandHandler = null;
     this._onLnkAddClickHandler = null;
     this._onItemAddHandler = null;
    
@@ -26,14 +28,23 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
     // Inititalize Control
     initialize: function() {
         Kistl.Client.ASPNET.ObjectListControl.callBaseMethod(this, 'initialize');
-        
+
+        // List Events        
         this._onOnItemDataBoundHandler = Function.createDelegate(this, this._onItemDataBound);
         this._list.add_itemDataBound(this._onOnItemDataBoundHandler);
+
+        this._onOnDeleteCommandHandler = Function.createDelegate(this, this._onItemDeleteCommand);
+        this._list.add_deleteCommand(this._onOnDeleteCommandHandler);
+
+        this._onOnItemCommandHandler = Function.createDelegate(this, this._onItemCommand);
+        this._list.add_itemCommand(this._onOnItemCommandHandler);
         
+        // Menu Events
         this._onLnkAddClickHandler = Function.createDelegate(this, this._onLnkAddClick);
         $addHandler(this._lnkAdd, "click", this._onLnkAddClickHandler);
         this._lnkAdd.href = '#';
         
+        // Add Callback
         this._onItemAddHandler = Function.createDelegate(this, this._onItemAdd);
         
         this.DataBind();
@@ -74,8 +85,7 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         this._list.dataBind();
     },
     // Events
-    _onItemDataBound: function (sender, e)
-    {
+    _onItemDataBound: function (sender, e) {
         var item = e.get_item();
 
         if (item.get_isDataItemType())
@@ -84,6 +94,16 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
             var txtText = item.findControl('text');
             setText(txtText, data.Text);
         }
+    },
+    _onItemDeleteCommand: function (sender, e) {
+        var index = e.get_item().get_itemIndex();
+        var data = this._list.get_dataSource();
+        Array.removeAt(data, index);
+        this._list.dataBind();
+    },
+    _onItemCommand: function (sender, e) {
+        var data = e.get_item().get_dataItem();
+        Kistl.JavascriptRenderer.showObject(data);
     },
     _onLnkAddClick: function() {
         Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject(this._type, this._onItemAddHandler);
@@ -108,19 +128,4 @@ function objectListControl_OnSubmit(dataListID, dataID)
     
     result.value = Sys.Serialization.JavaScriptSerializer.serialize(data);
 }
-
-function objectListControl_OnItemDelete(sender, e)
-{
-    var index = e.get_item().get_itemIndex();
-    var data = sender.get_dataSource();
-    data.splice(index, 1);
-    sender.dataBind();
-}
-
-function objectListControl_OnItemCommand(sender, e)
-{
-    var data = e.get_item().get_dataItem();
-    Kistl.JavascriptRenderer.showObject(data);
-}
-
 */

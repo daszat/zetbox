@@ -19,10 +19,3 @@
     <div style="clear: left; height=0px;">
     </div>
 </div>
-
-<!-- 
-            ItemDataBoundEvent="objectListControl_OnItemDataBound"
-            DeleteCommandEvent="objectListControl_OnItemDelete"
-            ItemCommandEvent="objectListControl_OnItemCommand">
-            <a href="javascript:Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject('<%= HttpUtility.HtmlEncode(ObjectType.ToJSON()) %>', '<%= lstItems.ClientID %>', objectListControl_OnItemAdd);">Add</a>
--->

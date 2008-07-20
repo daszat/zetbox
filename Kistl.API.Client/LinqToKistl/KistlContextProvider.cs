@@ -81,10 +81,18 @@ namespace Kistl.API.Client
 
         private void AddNewLocalObjects(Type type, IList result)
         {
-            var list = _context.AttachedObjects.AsQueryable()
-                .Where(o => o.ObjectState == DataObjectState.New && o.GetType() == type);
+            MethodInfo mi = typeof(KistlContextProvider).GetMethod("AddNewLocalObjectsGeneric", BindingFlags.Instance | BindingFlags.NonPublic)
+                .MakeGenericMethod(type);
+            mi.Invoke(this, new object[] { result });
+        }
+
+
+        private void AddNewLocalObjectsGeneric<T>(IList result) where T : IDataObject
+        {
+            var list = _context.AttachedObjects.AsQueryable().OfType<T>()
+                .Where(o => o.ObjectState == DataObjectState.New);
             if(_filter != null) list = list.AddFilter(_filter);
-            list.ForEach<IDataObject>(i => result.Add(i));
+            list.ForEach<T>(i => result.Add(i));
         }
 
         /// <summary>
