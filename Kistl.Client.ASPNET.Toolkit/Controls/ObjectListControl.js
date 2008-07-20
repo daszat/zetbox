@@ -20,6 +20,7 @@ Kistl.Client.ASPNET.ObjectListControl = function(element) {
     this._onOnItemCommandHandler = null;
     this._onLnkAddClickHandler = null;
     this._onItemAddHandler = null;
+    this._onUnloadHandler = null;
    
     Kistl.Client.ASPNET.ObjectListControl.initializeBase(this, [element]);
 }
@@ -46,6 +47,11 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         
         // Add Callback
         this._onItemAddHandler = Function.createDelegate(this, this._onItemAdd);
+        
+        // Register on Submit
+        // TODO: Das ist zu spät!
+        this._onUnloadHandler = Function.createDelegate(this, this._onUnload);
+        Sys.Application.add_unload(this._onUnloadHandler);
         
         this.DataBind();
     },
@@ -102,8 +108,11 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         this._list.dataBind();
     },
     _onItemCommand: function (sender, e) {
-        var data = e.get_item().get_dataItem();
-        Kistl.JavascriptRenderer.showObject(data);
+        if(e.get_commandName() == "item") 
+        {
+            var data = e.get_item().get_dataItem();
+            Kistl.JavascriptRenderer.showObject(data);
+        }
     },
     _onLnkAddClick: function() {
         Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject(this._type, this._onItemAddHandler);
@@ -112,20 +121,12 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         var data = this._list.get_dataSource();
         data.push(item);
         this._list.dataBind();
+    },
+    _onUnload: function() {
+        var data = this._list.get_dataSource();
+        this._items.value = Sys.Serialization.JavaScriptSerializer.serialize(data);
     }
 }
 
 Kistl.Client.ASPNET.ObjectListControl.registerClass('Kistl.Client.ASPNET.ObjectListControl', Sys.UI.Control);
 if (typeof(Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();
-
-
-/*
-function objectListControl_OnSubmit(dataListID, dataID)
-{
-    var dataList = $find(dataListID);
-    var result = $get(dataID);
-    var data = dataList.get_dataSource();
-    
-    result.value = Sys.Serialization.JavaScriptSerializer.serialize(data);
-}
-*/

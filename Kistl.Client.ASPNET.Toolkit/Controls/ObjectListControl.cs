@@ -134,14 +134,6 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
             }
 
             scriptManager.RegisterScriptControl(this);
-
-            /*Page.ClientScript.RegisterStartupScript(this.GetType(), "Startup_ObjectListControl_" + this.ClientID,
-                string.Format("Sys.Application.add_load(function() {{ objectListControl_DataBind('{0}', '{1}'); }}); \n",
-                    LstItemsControl.ClientID, HdItemsControl.ClientID), true);
-            Page.ClientScript.RegisterOnSubmitStatement(this.GetType(), "OnSubmit_ObjectListControl_" + this.ClientID,
-                string.Format("objectListControl_OnSubmit('{0}', '{1}');\n",
-                    LstItemsControl.ClientID, HdItemsControl.ClientID));
-             * */
         }
 
         protected override void Render(HtmlTextWriter writer)
