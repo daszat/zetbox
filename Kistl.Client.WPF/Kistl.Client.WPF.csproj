@@ -121,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Renderer.WPF\EnumEntryListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Renderer.WPF\ObjectReferenceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,6 +204,9 @@
     </Compile>
     <Compile Include="Renderer.WPF\EditIntProperty.xaml.cs">
       <DependentUpon>EditIntProperty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\EnumEntryListControl.xaml.cs">
+      <DependentUpon>EnumEntryListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
       <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>

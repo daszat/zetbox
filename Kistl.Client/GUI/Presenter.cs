@@ -248,21 +248,38 @@ namespace Kistl.GUI
         #endregion
     }
 
-    public class StringListPresenter : Presenter<IListControl<string>>
+    public class DefaultListPresenter<T> : Presenter<IListControl<T>>
     {
-        public IList<string> GetPropertyValue()
+        public IList<T> GetPropertyValue()
         {
-            return Object.GetPropertyValue<IList<string>>(Preferences.Property.PropertyName);
+            return Object.GetPropertyValue<IList<T>>(Preferences.Property.PropertyName);
         }
+
         protected override void InitializeComponent()
         {
             Object.PropertyChanged += new PropertyChangedEventHandler(Object_PropertyChanged);
             Control.UserChangedList += new NotifyCollectionChangedEventHandler(Control_UserChangedList);
+            OnResetControlValues();
         }
+
+        #region Behaviours 
+
+        protected virtual void OnResetControlValues()
+        {
+            Control.Values.Clear();
+            foreach (T s in GetPropertyValue())
+            {
+                Control.Values.Add(s);
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers
 
         private void Control_UserChangedList(object sender, NotifyCollectionChangedEventArgs args)
         {
-            IList<string> property = GetPropertyValue();
+            IList<T> property = GetPropertyValue();
             // Modify the Object's Value according to the changes in the Control
             switch (args.Action)
             {
@@ -281,7 +298,7 @@ namespace Kistl.GUI
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     property.Clear();
-                    Control.Values.Cast<string>().ForEach<string>(i => property.Add(i));
+                    Control.Values.ForEach<T>(i => property.Add(i));
                     break;
                 default:
                     throw new NotImplementedException(
@@ -304,15 +321,12 @@ namespace Kistl.GUI
 
         }
 
-
         void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Control.Values.Clear();
-            foreach (string s in GetPropertyValue())
-            {
-                Control.Values.Add(s);
-            }
+            OnResetControlValues();
         }
+
+        #endregion
     }
 
     #region Default Value Presenters

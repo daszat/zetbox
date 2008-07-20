@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.App.Base;
+using Kistl.Client;
 
 namespace Kistl.GUI.DB
 {
@@ -12,14 +14,9 @@ namespace Kistl.GUI.DB
     /// </summary>
     public class Visual
     {
-        /// <summary>
-        /// The Property to display
-        /// </summary>
-        public BaseProperty Property { get; set; }
 
         /// <summary>
         /// Which visual is represented here
-        /// TODO: should become a enum or similar
         /// </summary>
         public VisualType ControlType { get; set; }
 
@@ -28,10 +25,24 @@ namespace Kistl.GUI.DB
         /// </summary>
         public string Description { get; set; }
 
+        #region TODO: refactor into descendents of "Visual"? Or not, since those can be combined? More research neccessary
+
         /// <summary>
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
         public IList<Visual> Children { get; set; }
+
+        /// <summary>
+        /// The Property to display
+        /// </summary>
+        public BaseProperty Property { get; set; }
+
+        /// <summary>
+        /// The template to use for displaying a referenced Simple Object.
+        /// </summary>
+        public Template ItemTemplate { get; set; }
+
+        #endregion
 
         /// <summary>
         /// Create the default Visual for a given BaseProperty
@@ -181,12 +192,32 @@ namespace Kistl.GUI.DB
 
         private static Visual CreateVisual(BackReferenceProperty backReferenceProperty)
         {
-            return new Visual()
+            ObjectClass refClass = ClientHelper.ObjectClasses[backReferenceProperty.GetDataCLRType()];
+            
+            if (refClass != null && refClass.IsSimpleObject)
             {
-                ControlType = VisualType.ObjectList,
-                Description = "this control displays a list of objects referencing this via a given relation",
-                Property = backReferenceProperty
-            };
+                return new Visual()
+                {
+                    ControlType = VisualType.SimpleObjectList,
+                    Description = "Display and edit the referenced Simple Objects in place",
+                    Property = backReferenceProperty,
+                    ItemTemplate = Template.DefaultTemplate(backReferenceProperty.GetDataCLRType())
+                };
+            }
+            else
+            {
+                return new Visual()
+                {
+                    ControlType = VisualType.ObjectList,
+                    Description = "this control displays a list of objects referencing this via a given relation",
+                    Property = backReferenceProperty
+                };
+            }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Visual: {0}: {1}", ControlType, Property.PropertyName);
         }
 
     }
@@ -209,5 +240,6 @@ namespace Kistl.GUI.DB
         Integer,
         String,
         StringList,
+        SimpleObjectList,
     }
 }

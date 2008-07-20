@@ -166,6 +166,10 @@ namespace Kistl.GUI.DB
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.ObjectListControl" },
+            new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.SimpleObjectList,
+                Container = false,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.EnumEntryListControl" },
 
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.Boolean,
                 Container = false,
@@ -233,7 +237,9 @@ namespace Kistl.GUI.DB
             new PresenterInfo() { Control = VisualType.String, SourceType = typeof(StringProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultValuePresenter`1" },
             new PresenterInfo() { Control = VisualType.StringList, SourceType = typeof(StringProperty),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.StringListPresenter" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
+            new PresenterInfo() { Control = VisualType.SimpleObjectList, SourceType = typeof(IList<EnumerationEntry>),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
         });
 
     }

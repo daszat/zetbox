@@ -5,7 +5,9 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.Client;
 using Kistl.GUI.DB;
+using Kistl.App.Base;
 
 namespace Kistl.GUI.Renderer
 {
@@ -70,14 +72,23 @@ namespace Kistl.GUI.Renderer
         {
             var cInfo = KistlGUIContext.FindControlInfo(Platform, visual);
             PresenterInfo pInfo = null;
-            if (visual.Property == null && visual.ControlType == VisualType.Object)
+            switch (visual.ControlType)
             {
-                pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IDataObject));
+                case VisualType.Object:
+                    pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IDataObject));
+                    break;
+                case VisualType.SimpleObjectList:
+                    if (visual.Property.GetType() == typeof(BackReferenceProperty)
+                        && visual.Property.GetDataCLRType() == typeof(EnumerationEntry))
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IList<EnumerationEntry>));
+                    else
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
+                    break;
+                default:
+                    pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
+                    break;
             }
-            else
-            {
-                pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
-            }
+
 
             var widget = KistlGUIContext.CreateControl(cInfo);
 
