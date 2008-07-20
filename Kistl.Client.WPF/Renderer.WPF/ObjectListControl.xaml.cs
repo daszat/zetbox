@@ -57,17 +57,38 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            OnUserAddRequest();
+            try
+            {
+                OnUserAddRequest();
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            OnRemoveSelection();
+            try
+            {
+                OnRemoveSelection();
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            OnDeleteSelection();
+            try
+            {
+                OnDeleteSelection();
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
         }
 
         #region IReferenceListControl Members
