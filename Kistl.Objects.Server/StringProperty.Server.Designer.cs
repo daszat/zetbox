@@ -28,14 +28,14 @@ namespace Kistl.App.Base
     public class StringProperty : Kistl.App.Base.ValueTypeProperty, ICloneable
     {
         
-        private int _Length;
+        private System.Int32? _Length;
         
         public StringProperty()
         {
         }
         
         [EdmScalarPropertyAttribute()]
-        public int Length
+        public System.Int32? Length
         {
             get
             {

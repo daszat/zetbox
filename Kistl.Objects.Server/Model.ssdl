@@ -202,6 +202,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int" />
+    <Property Name="IsSimpleObject" Type="bit" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -262,7 +263,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Length" Type="int" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Method">
     <Key>

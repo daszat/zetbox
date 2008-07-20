@@ -208,6 +208,7 @@
         <MappingFragment StoreEntitySet="ObjectClass">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">

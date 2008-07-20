@@ -35,6 +35,8 @@ namespace Kistl.App.Base
         
         private ListPropertyCollection<Kistl.App.Base.Interface, ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry> _ImplementsInterfaces;
         
+        private System.Boolean? _IsSimpleObject;
+        
         public ObjectClass()
         {
             _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry>(this, "ImplementsInterfaces");
@@ -113,6 +115,20 @@ namespace Kistl.App.Base
             }
         }
         
+        public System.Boolean? IsSimpleObject
+        {
+            get
+            {
+                return _IsSimpleObject;
+            }
+            set
+            {
+                NotifyPropertyChanging("IsSimpleObject"); 
+                _IsSimpleObject = value; 
+                NotifyPropertyChanged("IsSimpleObject");;
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -156,6 +172,7 @@ namespace Kistl.App.Base
             ((ObjectClass)obj)._TableName = this._TableName;
             ((ObjectClass)obj)._fk_BaseObjectClass = this._fk_BaseObjectClass;
             this._ImplementsInterfaces.CopyTo(((ObjectClass)obj)._ImplementsInterfaces);
+            ((ObjectClass)obj)._IsSimpleObject = this._IsSimpleObject;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -171,6 +188,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._TableName, sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
             this._ImplementsInterfaces.ToStream(sw);
+            BinarySerializer.ToBinary(this._IsSimpleObject, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -179,6 +197,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._TableName, sr);
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
             this._ImplementsInterfaces.FromStream(sr);
+            BinarySerializer.FromBinary(out this._IsSimpleObject, sr);
         }
     }
     

@@ -36,6 +36,8 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_BaseObjectClass = null;
         
+        private System.Boolean? _IsSimpleObject;
+        
         public ObjectClass()
         {
         }
@@ -112,6 +114,21 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public System.Boolean? IsSimpleObject
+        {
+            get
+            {
+                return _IsSimpleObject;
+            }
+            set
+            {
+                NotifyPropertyChanging("IsSimpleObject"); 
+                _IsSimpleObject = value; 
+                NotifyPropertyChanged("IsSimpleObject");;
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -154,6 +171,7 @@ namespace Kistl.App.Base
             base.CopyTo(obj);
             ((ObjectClass)obj)._TableName = this._TableName;
             ((ObjectClass)obj)._fk_BaseObjectClass = this._fk_BaseObjectClass;
+            ((ObjectClass)obj)._IsSimpleObject = this._IsSimpleObject;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -168,6 +186,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._TableName, sw);
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
             BinarySerializer.ToBinary(this.ImplementsInterfaces, sw);
+            BinarySerializer.ToBinary(this._IsSimpleObject, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -176,6 +195,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._TableName, sr);
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.ImplementsInterfaces, sr);
+            BinarySerializer.FromBinary(out this._IsSimpleObject, sr);
         }
     }
     
