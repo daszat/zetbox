@@ -21,7 +21,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Interaktionslogik für StringListControl.xaml
     /// </summary>
-    public partial class EnumEntryListControl : PropertyControl, IListControl<EnumerationEntry>
+    public partial class EnumEntryListControl : ListControl, IListControl<EnumerationEntry>
     {
         public EnumEntryListControl()
         {
@@ -52,11 +52,14 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
+
         #endregion
 
         #region Event Handlers
 
-        private void lst_MouseDoubleClick(object sender, MouseEventArgs e) { }
+        private void lst_MouseDoubleClick(object sender, MouseEventArgs e) {
+            OnUserActivatedSelection(UserActivatedSelection, lst.SelectedItems);
+        }
 
         private void New_Click(object sender, RoutedEventArgs e)
         {
@@ -92,12 +95,10 @@ namespace Kistl.GUI.Renderer.WPF
             DependencyProperty.Register("Values", typeof(ObservableCollection<EnumerationEntry>), typeof(EnumEntryListControl), new PropertyMetadata());
 
         public event NotifyCollectionChangedEventHandler UserChangedList;
+        public event EventHandler<GenericEventArgs<IList<EnumerationEntry>>> UserActivatedSelection;
 
         #endregion
 
     }
 
-    public class EnumerationEntryView : ViewBase
-    {
-    }
 }

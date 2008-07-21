@@ -26,7 +26,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// alle Instanzen einer Eigenschaft eines Objektes.
     /// </summary>
     public partial class ObjectListControl
-        : PropertyControl, IReferenceListControl, ITestReferenceListControl
+        : ListControl, IReferenceListControl, ITestReferenceListControl
     {
 
         public ObjectListControl()
@@ -44,9 +44,6 @@ namespace Kistl.GUI.Renderer.WPF
         {
             try
             {
-                // TODO: Die alte Preisfrage: Wer macht das. Das Control oder der Presenter?
-                // Presenter: Er kennt sich aus, er kann für jeden View benutzt werden
-                // View: Im ASP.NET hätte ich dann die Möglichkeit, den Aufruf gleich in Javascript zu kodieren.
                 lst.SelectedItems.ForEach<Kistl.API.IDataObject>(i => Manager.Renderer.ShowObject(i));
             }
             catch (Exception ex)

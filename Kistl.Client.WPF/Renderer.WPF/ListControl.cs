@@ -64,6 +64,16 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
+        protected virtual void OnUserActivatedSelection<TYPE>(
+            EventHandler<GenericEventArgs<IList<TYPE>>> handler,
+            System.Collections.IList selection)
+        {
+            if (handler != null)
+            {
+                handler(this, new GenericEventArgs<IList<TYPE>>() { Data = selection.Cast<TYPE>().ToList() });
+            }
+        }
+
         #endregion
 
     }

@@ -1,4 +1,4 @@
-﻿<app:PropertyControl 
+﻿<app:ListControl 
     x:Name="Self"
     x:Class="Kistl.GUI.Renderer.WPF.ObjectListControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -36,4 +36,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </app:PropertyControl.EditPart>
-</app:PropertyControl>
+</app:ListControl>

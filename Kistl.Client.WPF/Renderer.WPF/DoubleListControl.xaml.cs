@@ -19,11 +19,11 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Interaktionslogik für StringListControl.xaml
     /// </summary>
-    public partial class DoubleListControl : ListControl, IListControl<Double>
+    public partial class DoubleListControl : ListControl, IListControl<double>
     {
         public DoubleListControl()
         {
-            Values = new ObservableCollection<Double>();
+            Values = new ObservableCollection<double>();
             InitializeComponent();
         }
 
@@ -35,21 +35,23 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for SearchboxValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchBoxValueProperty =
-            DependencyProperty.Register("SearchBoxValue", typeof(Double?), typeof(DoubleListControl), new UIPropertyMetadata(null));
+            DependencyProperty.Register("SearchBoxValue", typeof(double?), typeof(DoubleListControl), new UIPropertyMetadata(null));
 
 
-        #region IListControl<Double> Member
+        #region IListControl<double> Member
 
-        IList<Double> IListControl<Double>.Values
+        IList<Double> IListControl<double>.Values
         {
             get { return Values; }
         }
 
-        public new ObservableCollection<Double> Values
+        public new ObservableCollection<double> Values
         {
-            get { return (ObservableCollection<Double>)base.Values; }
+            get { return (ObservableCollection<double>)base.Values; }
             set { base.Values = value; }
         }
+
+        public event EventHandler<GenericEventArgs<IList<double>>> UserActivatedSelection;
 
         #endregion
 
@@ -57,7 +59,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            OnUserActivatedSelection(UserActivatedSelection, lst.SelectedItems);
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)

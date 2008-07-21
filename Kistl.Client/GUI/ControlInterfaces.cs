@@ -64,7 +64,7 @@ namespace Kistl.GUI
     /// <summary>
     /// A control that lets the user choose from a list of pre-defined values.
     /// </summary>
-    public interface IEnumControl<ENUM> : IValueControl<ENUM> 
+    public interface IEnumControl<ENUM> : IValueControl<ENUM>
     {
         /// <summary>
         /// The list of enumeration items the user may select from
@@ -81,6 +81,12 @@ namespace Kistl.GUI
         IList<TYPE> Values { get; }
 
         event NotifyCollectionChangedEventHandler UserChangedList;
+
+        /// <summary>
+        /// Triggered if the user "activates" (e.g. double clicks) the selection.
+        /// The selected element(s) are passed as parameter
+        /// </summary>
+        event EventHandler<GenericEventArgs<IList<TYPE>>> UserActivatedSelection;
     }
 
     /// <summary>
@@ -176,6 +182,15 @@ namespace Kistl.GUI
         /// </summary>
         event EventHandler UserNewObjectRequest;
 
+    }
+
+    /// <summary>
+    /// Provides a generic way to pass Data around in the event of an event.
+    /// </summary>
+    /// <typeparam name="T">The type of data to pass</typeparam>
+    public class GenericEventArgs<T> : EventArgs
+    {
+        public T Data { get; set; }
     }
 
     /// <summary>

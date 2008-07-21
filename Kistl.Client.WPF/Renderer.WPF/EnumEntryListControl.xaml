@@ -1,4 +1,4 @@
-﻿<app:PropertyControl
+﻿<app:ListControl
     x:Class="Kistl.GUI.Renderer.WPF.EnumEntryListControl"
     x:Name="Self"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -76,4 +76,4 @@
             </ListView.View>
         </ListView>
     </DockPanel>
-</app:PropertyControl>
+</app:ListControl>

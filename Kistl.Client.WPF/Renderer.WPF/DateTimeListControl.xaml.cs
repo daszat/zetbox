@@ -51,13 +51,15 @@ namespace Kistl.GUI.Renderer.WPF
             set { base.Values = value; }
         }
 
+        public event EventHandler<GenericEventArgs<IList<DateTime>>> UserActivatedSelection;
+
         #endregion
 
         #region Event Handlers
 
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            OnUserActivatedSelection(UserActivatedSelection, lst.SelectedItems);
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
