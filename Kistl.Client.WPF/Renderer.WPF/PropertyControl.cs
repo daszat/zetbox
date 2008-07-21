@@ -15,14 +15,22 @@ namespace Kistl.GUI.Renderer.WPF
     {
         private Grid _grid = new Grid();
 
+        public static readonly int LabelColumn = 0;
+        public static readonly int EditPartColumn = 2;
+
         public PropertyControl()
         {
             MinWidth = 400;
+            Margin = new Thickness(4);
 
             _grid.ColumnDefinitions.Add(new ColumnDefinition()
             {
                 MinWidth = 150,
-                Width = new GridLength(1, GridUnitType.Auto)
+                Width = new GridLength(1, GridUnitType.Auto),
+            });
+            _grid.ColumnDefinitions.Add(new ColumnDefinition()
+            {
+                Width = new GridLength(5, GridUnitType.Pixel),
             });
             _grid.ColumnDefinitions.Add(new ColumnDefinition()
             {
@@ -124,7 +132,7 @@ namespace Kistl.GUI.Renderer.WPF
         private static void LabelChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PropertyControl p = (PropertyControl)d;
-            p.Label.SetValue(Grid.ColumnProperty, 0);
+            p.Label.SetValue(Grid.ColumnProperty, LabelColumn);
             p._grid.Children.Remove((UIElement)e.OldValue);
             p._grid.Children.Add(p.Label);
         }
@@ -146,7 +154,7 @@ namespace Kistl.GUI.Renderer.WPF
         private static void EditPartChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PropertyControl p = (PropertyControl)d;
-            p.EditPart.SetValue(Grid.ColumnProperty, 1);
+            p.EditPart.SetValue(Grid.ColumnProperty, EditPartColumn);
             p._grid.Children.Remove((UIElement)e.OldValue);
             p._grid.Children.Add(p.EditPart);
         }

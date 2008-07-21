@@ -1,38 +1,39 @@
 ﻿<app:PropertyControl 
+    x:Name="Self"
     x:Class="Kistl.GUI.Renderer.WPF.ObjectListControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
-    MinWidth="100"
-    x:Name="ListCtrl"
+    ShortLabel="Object List"
+    Description="displays and edits a list of Objects"
+    ToolTip="{Binding ElementName=Self, Path=Description, UpdateSourceTrigger=PropertyChanged}"
+    Background="{Binding ElementName=Self, Path=IsValidValue, Converter={StaticResource ValidityToBrushConverter}}"
     >
-    <DockPanel>
-        <Label
-            DockPanel.Dock="Left" 
-            Width="150"
-            Content="{Binding ElementName=ListCtrl, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}"
+    <app:PropertyControl.Label>
+        <StackPanel>
+            <Label
+                DockPanel.Dock="Left" 
+                Content="{Binding ElementName=Self, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}"
             />
-        <DockPanel>
-            <ToolBar DockPanel.Dock="Top">
-                <Button Click="btnAdd_Click">Add ...</Button>
-                <Button Click="btnRemove_Click" ToolTip="Remove the selected objects from this list">Remove</Button>
-                <Button Click="btnDelete_Click" ToolTip="Delete the selected objects from the database">Delete permanently</Button>
-            </ToolBar>
-            <ListView
-                x:Name="lst"
-                MinHeight="150"
-                ItemsSource="{Binding ElementName=ListCtrl, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                MouseDoubleClick="lst_MouseDoubleClick"
-                >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Converter={StaticResource IconConverter}}" Width="16" Height="16" />
-                            <TextBlock Margin="2,0,0,0" Text="{Binding}" />                        
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </DockPanel>
-    </DockPanel>
+            <Button Click="btnAdd_Click">Add ...</Button>
+            <Button Click="btnRemove_Click" ToolTip="Remove the selected objects from this list">Remove</Button>
+            <Button Click="btnDelete_Click" ToolTip="Delete the selected objects from the database">Delete permanently</Button>
+        </StackPanel>
+    </app:PropertyControl.Label>
+    <app:PropertyControl.EditPart>
+        <ListView
+            x:Name="lst"
+            ItemsSource="{Binding ElementName=Self, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+            MouseDoubleClick="lst_MouseDoubleClick"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                        <TextBlock Margin="2,0,0,0" Text="{Binding}" />                        
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </app:PropertyControl.EditPart>
 </app:PropertyControl>

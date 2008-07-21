@@ -1,20 +1,17 @@
 ﻿<app:ListControl
-    x:Class="Kistl.GUI.Renderer.WPF.DateTimeListControl"
     x:Name="Self"
+    x:Class="Kistl.GUI.Renderer.WPF.DateTimeListControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
-    ShortLabel="Label"
-    MinHeight="300" MinWidth="300">
-    <DockPanel 
-        x:Name="Panel"
-        ToolTip="{Binding ElementName=Self, Path=Description, UpdateSourceTrigger=PropertyChanged}"
-        >
-        <StackPanel
-            DockPanel.Dock="Left"
-            Width="150"
-            >
-            <Label Content="{Binding ElementName=Self, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}" />
+    ShortLabel="Double List"
+    Description="This is a list of floating point values."
+    ToolTip="{Binding ElementName=Self, Path=Description}"
+    Background="{Binding ElementName=Self, Path=IsValidValue, Converter={StaticResource ValidityToBrushConverter}}"
+    >
+    <app:PropertyControl.Label>
+        <StackPanel>
+            <Label Content="{Binding ElementName=Self, Path=ShortLabel}" />
             <TextBox
                 x:Name="inputBox"
                 Margin="1"
@@ -45,12 +42,13 @@
             </Grid>
             <StackPanel/>
         </StackPanel>
+    </app:PropertyControl.Label>
+    <app:PropertyControl.EditPart>
         <ListView
-                x:Name="lst"
-                MinHeight="150"
-                ItemsSource="{Binding ElementName=Self, Path=Values, UpdateSourceTrigger=PropertyChanged}"
-                MouseDoubleClick="lst_MouseDoubleClick"
-                >
+            x:Name="lst"
+            ItemsSource="{Binding ElementName=Self, Path=Values, UpdateSourceTrigger=PropertyChanged}"
+            MouseDoubleClick="lst_MouseDoubleClick"
+            >
         </ListView>
-    </DockPanel>
+    </app:PropertyControl.EditPart>
 </app:ListControl>

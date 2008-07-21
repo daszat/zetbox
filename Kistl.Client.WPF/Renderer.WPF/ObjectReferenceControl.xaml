@@ -1,34 +1,58 @@
 ﻿<app:PropertyControl 
+    x:Name="Self" 
     x:Class="Kistl.GUI.Renderer.WPF.ObjectReferenceControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
-    MinWidth="400" 
-    x:Name="PointerCtrl" 
+    ShortLabel="An Object"
+    Description="Please select one of these Objects"
+    ToolTip="{Binding ElementName=Self, Path=Description}"
+    Background="{Binding ElementName=Self, Path=IsValidValue, Converter={StaticResource ValidityToBrushConverter}}"
     >
-    <DockPanel >
+    
+    <app:PropertyControl.Label>
         <Label
-            DockPanel.Dock="Left" Width="150"
-            Content="{Binding ElementName=PointerCtrl, Path=ShortLabel, UpdateSourceTrigger=PropertyChanged}"
-            Visibility="{Binding ElementName=PointerCtrl, Path=ShowLabel}"
+            Content="{Binding ElementName=Self, Path=ShortLabel}"
+            Visibility="{Binding ElementName=Self, Path=ShowLabel}"
             />
-        <Button Name="btnNew" Click="btnNew_Click">New</Button>
-        <Button Name="btnOpen" Click="btnOpen_Click">Open</Button>
-        <ComboBox
-            Name="cbValues" 
-            ItemsSource="{Binding ElementName=PointerCtrl, Path=ItemsSource, UpdateSourceTrigger=PropertyChanged}"
-            SelectionChanged="cbValues_SelectionChanged"
-            IsSynchronizedWithCurrentItem="True"
+    </app:PropertyControl.Label>
+
+    <app:PropertyControl.EditPart>
+        <DockPanel>
+            <Button 
+                DockPanel.Dock="Right" 
+                Margin="1"
+                Name="btnNew" 
+                Click="btnNew_Click"
+                >
+                New
+            </Button>
+            <Button
+                DockPanel.Dock="Right"
+                Margin="1"
+                Name="btnOpen"
+                Click="btnOpen_Click"
+                >
+                Open
+            </Button>
+            <ComboBox
+                Name="cbValues" 
+                ItemsSource="{Binding ElementName=Self, Path=ItemsSource, UpdateSourceTrigger=PropertyChanged}"
+                SelectionChanged="cbValues_SelectionChanged"
+                IsSynchronizedWithCurrentItem="True"
+                Margin="1"
             >
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Converter={StaticResource IconConverter}}" Width="16" Height="16" />
-                        <TextBlock Margin="2,0,0,0" Text="{Binding ID}" />                        
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Converter={StaticResource IconConverter}}" Width="16" Height="16" />
+                            <TextBlock Margin="2,0,0,0" Text="{Binding ID}" />                        
                         <TextBlock Margin="2,0,0,0" Text="{Binding}" />                        
                     </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-    </DockPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
+    </app:PropertyControl.EditPart>
+    
 </app:PropertyControl>

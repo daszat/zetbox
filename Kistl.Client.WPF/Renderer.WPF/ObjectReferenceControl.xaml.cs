@@ -84,7 +84,9 @@ namespace Kistl.GUI.Renderer.WPF
         {
             try
             {
-                // TODO ...
+                Kistl.API.IDataObject newObject = Context.Create(ObjectType);
+                Value = newObject;
+                Manager.Renderer.ShowObject(newObject);
             }
             catch (Exception ex)
             {
