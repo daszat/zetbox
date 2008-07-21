@@ -61,7 +61,8 @@ namespace Kistl.Client
         {
             string fullname = p.GetDataType();
 
-            // ValueTypes all use mscorlib types
+            // ValueTypes all use mscorlib types,
+            // TODO: enumerations fail, because they're ValueTypes but classes and come from other assemblies; see Case 488
             if (p is ValueTypeProperty)
                 return Type.GetType(fullname);
 

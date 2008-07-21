@@ -262,7 +262,7 @@ namespace Kistl.GUI
             OnResetControlValues();
         }
 
-        #region Behaviours 
+        #region Behaviours
 
         protected virtual void OnResetControlValues()
         {
@@ -357,9 +357,31 @@ namespace Kistl.GUI
     {
     }
 
-
-
     #endregion
+
+    /// <summary>
+    /// Handles the specialities around Enumerations
+    /// </summary>
+    /// <typeparam name="ENUM"></typeparam>
+    // TODO: Test when enumeration properties create actual enumeration CLR properties, see Case 478
+    public class EnumerationPresenter<ENUM>
+        : DefaultPresenter<ENUM, EnumerationProperty, IEnumControl<ENUM>>
+        where ENUM : class // actually where ENUM: System.Enum, but see http://bytes.com/forum/post1821322-8.html 
+    {
+
+        public EnumerationPresenter()
+        {
+            if (!typeof(ENUM).IsEnum)
+                throw new ArgumentOutOfRangeException("ENUM", "MUST be an enumeration");
+        }
+
+        protected override void InitializeComponent()
+        {
+            Control.ItemsSource = Enum.GetValues(typeof(ENUM)).Cast<ENUM>().ToList();
+            base.InitializeComponent();
+        }
+
+    }
 
     /// <summary>
     /// Handles a widget for a group of properties
@@ -585,3 +607,4 @@ namespace Kistl.GUI
         }
     }
 }
+

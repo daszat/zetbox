@@ -157,7 +157,12 @@ namespace Kistl.GUI.DB
 
         private static Visual CreateVisual(EnumerationProperty enumerationProperty)
         {
-            throw new NotImplementedException();
+            return new Visual()
+            {
+                ControlType = VisualType.Enumeration,
+                Description = "this control displays an enumeration value",
+                Property = enumerationProperty
+            };
         }
 
         private static Visual CreateVisual(DoubleProperty doubleProperty)
@@ -245,6 +250,7 @@ namespace Kistl.GUI.DB
         String,
         StringList,
 
+        Enumeration,
         SimpleObjectList,
     }
 }

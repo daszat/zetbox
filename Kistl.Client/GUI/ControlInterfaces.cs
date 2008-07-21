@@ -61,6 +61,17 @@ namespace Kistl.GUI
         event EventHandler UserInput;
     }
 
+    /// <summary>
+    /// A control that lets the user choose from a list of pre-defined values.
+    /// </summary>
+    public interface IEnumControl<ENUM> : IValueControl<ENUM> 
+    {
+        /// <summary>
+        /// The list of enumeration items the user may select from
+        /// </summary>
+        IList<ENUM> ItemsSource { get; set; }
+    }
+
     // TODO: add validation support
     public interface IListControl<TYPE> : IBasicControl
     {
