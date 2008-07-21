@@ -13,6 +13,25 @@ namespace Kistl.GUI.Renderer.WPF
     /// </summary>
     public class PropertyControl : UserControl, IBasicControl
     {
+        private Grid _grid = new Grid();
+
+        public PropertyControl()
+        {
+            MinWidth = 400;
+
+            _grid.ColumnDefinitions.Add(new ColumnDefinition()
+            {
+                MinWidth = 150,
+                Width = new GridLength(1, GridUnitType.Auto)
+            });
+            _grid.ColumnDefinitions.Add(new ColumnDefinition()
+            {
+                Width = new GridLength(1, GridUnitType.Star)
+            });
+
+            Content = _grid;
+        }
+
         #region IBasicControl Members
 
         /// <summary>
@@ -87,5 +106,54 @@ namespace Kistl.GUI.Renderer.WPF
             DependencyProperty.Register("Context", typeof(Kistl.API.IKistlContext), typeof(PropertyControl));
 
         #endregion
+
+        #region Design
+
+        #region Label
+
+        public UIElement Label
+        {
+            get { return (UIElement)GetValue(LabelProperty); }
+            set { SetValue(LabelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LabelProperty =
+            DependencyProperty.Register("Label", typeof(UIElement), typeof(PropertyControl), new UIPropertyMetadata(LabelChangedCallback));
+
+        private static void LabelChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PropertyControl p = (PropertyControl)d;
+            p.Label.SetValue(Grid.ColumnProperty, 0);
+            p._grid.Children.Remove((UIElement)e.OldValue);
+            p._grid.Children.Add(p.Label);
+        }
+
+        #endregion
+
+        #region EditPart
+
+        public UIElement EditPart
+        {
+            get { return (UIElement)GetValue(EditPartProperty); }
+            set { SetValue(EditPartProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EditPart.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditPartProperty =
+            DependencyProperty.Register("EditPart", typeof(UIElement), typeof(PropertyControl), new UIPropertyMetadata(EditPartChangedCallback));
+
+        private static void EditPartChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PropertyControl p = (PropertyControl)d;
+            p.EditPart.SetValue(Grid.ColumnProperty, 1);
+            p._grid.Children.Remove((UIElement)e.OldValue);
+            p._grid.Children.Add(p.EditPart);
+        }
+
+        #endregion
+
+        #endregion
+
     }
 }

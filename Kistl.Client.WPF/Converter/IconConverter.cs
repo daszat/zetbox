@@ -56,7 +56,7 @@ namespace Kistl.Client.WPF.Converter
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             // not implemented
-            return null;
+            return Binding.DoNothing;
         }
     }
 }

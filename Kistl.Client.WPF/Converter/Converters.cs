@@ -2,6 +2,8 @@ using System;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Globalization;
+using System.Windows.Media;
+using System.Windows.Controls;
 
 namespace Kistl.Client.WPF.Converter
 {
@@ -126,4 +128,26 @@ namespace Kistl.Client.WPF.Converter
             return Binding.DoNothing;
         }
     }
+
+    /// <summary>
+    /// Converts a boolean value of validity into an appropriate background color
+    /// </summary>
+    [ValueConversion(typeof(object), typeof(Brush))]
+    public class ValidityToBrushConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            if ((bool)value == true) return UserControl.BackgroundProperty.DefaultMetadata.DefaultValue;
+            else return Brushes.Red;
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Readonly
+            return Binding.DoNothing;
+        }
+    }
+
 }

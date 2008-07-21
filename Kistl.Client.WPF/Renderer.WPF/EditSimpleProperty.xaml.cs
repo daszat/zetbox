@@ -62,12 +62,6 @@ namespace Kistl.GUI.Renderer.WPF
 
         public event EventHandler UserInput;
 
-
-        public void FlagValidity(bool valid)
-        {
-            Panel.Background = valid ? Brushes.White : Brushes.Red;
-        }
-
         #endregion
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
