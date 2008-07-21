@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using Kistl.API;
+using System.Configuration;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -38,6 +39,12 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         void context_BeginRequest(object sender, EventArgs e)
         {
+            if (!Kistl.Client.Manager.IsInitialized)
+            {
+                // Code, der beim Starten der Anwendung ausgeführt wird.
+                Kistl.Client.Manager.Create(new string[] { HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]) },
+                    Kistl.GUI.DB.Toolkit.ASPNET);
+            }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();
         }
     }

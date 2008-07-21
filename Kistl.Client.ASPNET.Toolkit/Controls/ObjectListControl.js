@@ -20,7 +20,6 @@ Kistl.Client.ASPNET.ObjectListControl = function(element) {
     this._onOnItemCommandHandler = null;
     this._onLnkAddClickHandler = null;
     this._onItemAddHandler = null;
-    this._onUnloadHandler = null;
    
     Kistl.Client.ASPNET.ObjectListControl.initializeBase(this, [element]);
 }
@@ -47,11 +46,6 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         
         // Add Callback
         this._onItemAddHandler = Function.createDelegate(this, this._onItemAdd);
-        
-        // Register on Submit
-        // TODO: Das ist zu spät!
-        this._onUnloadHandler = Function.createDelegate(this, this._onUnload);
-        Sys.Application.add_unload(this._onUnloadHandler);
         
         this.DataBind();
     },
@@ -98,7 +92,7 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         {
             var data = item.get_dataItem();
             var txtText = item.findControl('text');
-            setText(txtText, data.Text);
+            Kistl.Client.ASPNET.JavascriptRenderer.setText(txtText, data.Text);
         }
     },
     _onItemDeleteCommand: function (sender, e) {
@@ -122,7 +116,7 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         data.push(item);
         this._list.dataBind();
     },
-    _onUnload: function() {
+    onSubmit: function() {
         var data = this._list.get_dataSource();
         this._items.value = Sys.Serialization.JavaScriptSerializer.serialize(data);
     }

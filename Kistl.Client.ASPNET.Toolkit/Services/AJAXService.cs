@@ -9,7 +9,7 @@ using Kistl.Client.ASPNET.Toolkit;
 using Kistl.API;
 using Kistl.API.Client;
 
-namespace Kistl.Client.ASPNET
+namespace Kistl.Client.ASPNET.Toolkit
 {
     [ServiceContract(Namespace = "Kistl.Client.ASPNET")] // Client side namespace
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]

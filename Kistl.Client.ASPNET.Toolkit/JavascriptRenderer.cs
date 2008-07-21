@@ -56,7 +56,8 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
 
             scriptManager.RegisterScriptControl(this);
-            string script = string.Format("function __JavascriptRenderer_PostBack() {{ {0}; }}\n", Page.ClientScript.GetPostBackEventReference(this, ""));
+            string script = string.Format("function __JavascriptRenderer_PostBack() {{ {0}; }}\n", 
+                Page.ClientScript.GetPostBackEventReference(this, ""));
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "PostBackScript", script, true);
         }
 

@@ -13,65 +13,10 @@ using System.Xml.Linq;
 using Kistl.GUI;
 using Kistl.API;
 
-public partial class Controls_StringPropertyControl : System.Web.UI.UserControl, IValueControl<string>
+public partial class Controls_StringPropertyControl : Kistl.Client.ASPNET.Toolkit.Controls.StringPropertyControl
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected override TextBox txtStringControl
     {
-
+        get { return txtString; }
     }
-
-    protected void txtString_OnTextChanged(object sender, EventArgs e)
-    {
-        if (this.UserInput != null)
-        {
-            this.UserInput(this, EventArgs.Empty);
-        }
-    }
-
-    #region IValueControl<string> Members
-
-    IKistlContext IBasicControl.Context { get; set; }
-    public string Value
-    {
-        get
-        {
-            return txtString.Text;
-        }
-        set
-        {
-            txtString.Text = value;
-        }
-    }
-
-    public bool IsValidValue
-    {
-        get;
-        set;
-    }
-
-    public event EventHandler UserInput;
-
-    #endregion
-
-    #region IBasicControl Members
-
-    public string ShortLabel
-    {
-        get;
-        set;
-    }
-
-    public string Description
-    {
-        get;
-        set;
-    }
-
-    public FieldSize Size
-    {
-        get;
-        set;
-    }
-
-    #endregion
 }

@@ -13,67 +13,10 @@ using System.Xml.Linq;
 using Kistl.GUI;
 using Kistl.API;
 
-public partial class Controls_BoolPropertyControl : System.Web.UI.UserControl, IValueControl<bool?>
+public partial class Controls_BoolPropertyControl : Kistl.Client.ASPNET.Toolkit.Controls.BoolPropertyControl
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected override CheckBox cbBoolControl
     {
-
+        get { return cbBool; }
     }
-
-    protected void cbBool_OnCheckedChanged(object sender, EventArgs e)
-    {
-        if (this.UserInput != null)
-        {
-            this.UserInput(this, EventArgs.Empty);
-        }
-    }
-
-    #region IValueControl<string> Members
-
-    IKistlContext IBasicControl.Context { get; set; }
-    public bool? Value
-    {
-        get
-        {
-            return cbBool.Checked;
-        }
-        set
-        {
-            cbBool.Checked = value ?? false;
-        }
-    }
-
-    public bool IsValidValue
-    {
-        get;
-        set;
-    }
-
-    public event EventHandler UserInput;
-
-    #endregion
-
-    #region IBasicControl Members
-
-    public string ShortLabel
-    {
-        get;
-        set;
-    }
-
-    public string Description
-    {
-        get;
-        set;
-    }
-
-    public FieldSize Size
-    {
-        get;
-        set;
-    }
-
-    #endregion
-
-    
 }

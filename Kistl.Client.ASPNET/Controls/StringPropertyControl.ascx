@@ -2,6 +2,5 @@
     Inherits="Controls_StringPropertyControl" %>
 <div class="Control">
     <asp:Label runat="server" AssociatedControlID="txtString"><%= ShortLabel %></asp:Label>
-    <asp:TextBox ID="txtString" runat="server" OnTextChanged="txtString_OnTextChanged"
-        CssClass="Control" />
+    <asp:TextBox ID="txtString" runat="server" CssClass="Control" />
 </div>

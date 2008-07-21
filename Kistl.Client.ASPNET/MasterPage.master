@@ -1,27 +1,29 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Unbenannte Seite</title>
-    <asp:ContentPlaceHolder id="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
+    <asp:UpdateProgress ID="updateProgress" runat="server" DisplayAfter="1">
+        <ProgressTemplate>
+            <div style="position: absolute; padding: 16px; left: 50%; top: 50%;">
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/images/loading.gif" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
     <asp:ScriptManager runat="server">
         <Services>
             <asp:ServiceReference Path="~/AJAXService/AJAXService.svc" />
         </Services>
-        <Scripts>
-            <asp:ScriptReference Path="~/Scripts/KistlCommon.js" />
-        </Scripts>
     </asp:ScriptManager>
     <kistl:JavascriptRenderer ID="myJavascriptRenderer" runat="server" />
     <div>
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </div>
     </form>

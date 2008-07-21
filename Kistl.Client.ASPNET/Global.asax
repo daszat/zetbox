@@ -8,12 +8,6 @@
 
     void Application_BeginRequest(object sender, EventArgs e)
     {
-        if (!Kistl.Client.Manager.IsInitialized)
-        {
-            // Code, der beim Starten der Anwendung ausgeführt wird.
-            Kistl.Client.Manager.Create(new string[] { Server.MapPath(ConfigurationManager.AppSettings["configFile"]) }, 
-                Kistl.GUI.DB.Toolkit.ASPNET);
-        }
     }
     
     void Application_End(object sender, EventArgs e)

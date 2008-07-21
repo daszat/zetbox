@@ -74,6 +74,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Test.TestCustomObject), ElementName="TestCustomObject")]
         [XmlArrayItem(Type=typeof(Kistl.App.Test.Muhblah), ElementName="Muhblah")]
         [XmlArrayItem(Type=typeof(Kistl.App.Test.AnotherTest), ElementName="AnotherTest")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Test.LastTest), ElementName="LastTest")]
         public List<Object> Objects
         {
             get
@@ -140,6 +141,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Test.TestCustomObject), ElementName="TestCustomObject")]
         [XmlElement(Type=typeof(Kistl.App.Test.Muhblah), ElementName="Muhblah")]
         [XmlElement(Type=typeof(Kistl.App.Test.AnotherTest), ElementName="AnotherTest")]
+        [XmlElement(Type=typeof(Kistl.App.Test.LastTest), ElementName="LastTest")]
         public Object Object
         {
             get

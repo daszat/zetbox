@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Kistl.Client.ASPNET.AJAXService" CodeBehind="~/App_Code/AJAXService.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Kistl.Client.ASPNET.Toolkit.AJAXService" %>

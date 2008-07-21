@@ -82,6 +82,7 @@
     <Compile Include="Kostenstelle.Server.Designer.cs" />
     <Compile Include="Kostentraeger.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />
+    <Compile Include="LastTest.Server.Designer.cs" />
     <Compile Include="Method.Server.Designer.cs" />
     <Compile Include="MethodInvocation.Server.Designer.cs" />
     <Compile Include="Mitarbeiter.Server.Designer.cs" />

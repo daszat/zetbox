@@ -33,3 +33,19 @@ Kistl.Client.ASPNET.JavascriptRenderer.registerClass('Kistl.Client.ASPNET.Javasc
 Kistl.JavascriptRenderer = new Kistl.Client.ASPNET.JavascriptRenderer();
 
 if (typeof(Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();
+
+
+//----------------------------------------------------------------
+// Commom Kistl Javascript Functions
+//----------------------------------------------------------------
+Kistl.Client.ASPNET.JavascriptRenderer.setText = function (element, text)
+{
+    if (typeof element.innerText != 'undefined')
+    {
+        element.innerText = text;
+    }
+    else if (typeof element.textContent != 'undefined')
+    {
+        element.textContent = text;
+    }
+}

@@ -28,7 +28,12 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
         protected abstract HtmlGenericControl ContainerControl { get; }
         protected abstract HtmlAnchor LnkAddControl { get; }
 
-        protected void Page_Load(object sender, EventArgs e)
+        public ObjectListControl()
+        {
+            this.Load += new EventHandler(ObjectListControl_Load);
+        }
+
+        void ObjectListControl_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
             {
@@ -134,6 +139,9 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
             }
 
             scriptManager.RegisterScriptControl(this);
+
+            Page.ClientScript.RegisterOnSubmitStatement(this.GetType(), ContainerControl.ClientID,
+                string.Format("$find('{0}').onSubmit();", ContainerControl.ClientID));
         }
 
         protected override void Render(HtmlTextWriter writer)

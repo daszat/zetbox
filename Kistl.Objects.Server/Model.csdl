@@ -23,6 +23,7 @@
     <EntitySet Name="TestCustomObject" EntityType="Model.TestCustomObject" />
     <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
+    <EntitySet Name="LastTest" EntityType="Model.LastTest" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -436,6 +437,12 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="AnotherTest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LastTest">
     <Key>
       <PropertyRef Name="ID" />
     </Key>

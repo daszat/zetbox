@@ -13,65 +13,10 @@ using System.Xml.Linq;
 using Kistl.GUI;
 using Kistl.API;
 
-public partial class Controls_DoublePropertyControl : System.Web.UI.UserControl, IValueControl<double?>
+public partial class Controls_DoublePropertyControl : Kistl.Client.ASPNET.Toolkit.Controls.DoublePropertyControl
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected override TextBox txtDoubleControl
     {
-
+        get { return txtDouble; }
     }
-
-    protected void txtDouble_OnTextChanged(object sender, EventArgs e)
-    {
-        if (this.UserInput != null)
-        {
-            this.UserInput(this, EventArgs.Empty);
-        }
-    }
-
-    #region IValueControl<string> Members
-
-    IKistlContext IBasicControl.Context { get; set; }
-    public double? Value
-    {
-        get
-        {
-            return string.IsNullOrEmpty(txtDouble.Text) ? null : (double?)Convert.ToDouble(txtDouble.Text);
-        }
-        set
-        {
-            txtDouble.Text = value.ToString();
-        }
-    }
-
-    public bool IsValidValue
-    {
-        get;
-        set;
-    }
-
-    public event EventHandler UserInput;
-
-    #endregion
-
-    #region IBasicControl Members
-
-    public string ShortLabel
-    {
-        get;
-        set;
-    }
-
-    public string Description
-    {
-        get;
-        set;
-    }
-
-    public FieldSize Size
-    {
-        get;
-        set;
-    }
-
-    #endregion
 }
