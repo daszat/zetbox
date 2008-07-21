@@ -73,10 +73,11 @@ namespace Kistl.API.Client.Tests
                 if (type == null) throw new ArgumentNullException("type");
                 if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
-                TestObjClass newObj = new TestObjClass();
-                obj.CopyTo(newObj);
-                newObj.ID = ++newID;
-                result.Add(newObj);
+                throw new NotImplementedException();
+                //TestObjClass newObj = new TestObjClass();
+                //obj.ApplyChanges(newObj);
+                //newObj.ID = ++newID;
+                //result.Add(newObj);
             }
 
             return result;

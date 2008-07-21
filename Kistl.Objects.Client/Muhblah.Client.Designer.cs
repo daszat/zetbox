@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Base
+namespace Kistl.App.Test
 {
     using System;
     using System.Collections.Generic;
@@ -21,33 +21,44 @@ namespace Kistl.App.Base
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
-    using Kistl.API.Server;
+    using Kistl.API.Client;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntParameter")]
-    public class IntParameter : Kistl.App.Base.BaseParameter
+    public class Muhblah : BaseClientDataObject
     {
         
-        public IntParameter()
+        private int _ID;
+        
+        public Muhblah()
         {
         }
         
-        public event ToStringHandler<IntParameter> OnToString_IntParameter;
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
         
-        public event ObjectEventHandler<IntParameter> OnPreSave_IntParameter;
+        public event ToStringHandler<Muhblah> OnToString_Muhblah;
         
-        public event ObjectEventHandler<IntParameter> OnPostSave_IntParameter;
+        public event ObjectEventHandler<Muhblah> OnPreSave_Muhblah;
         
-        public event GetDataType_Handler<IntParameter> OnGetDataType_IntParameter;
+        public event ObjectEventHandler<Muhblah> OnPostSave_Muhblah;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_IntParameter != null)
+            if (OnToString_Muhblah != null)
             {
-                OnToString_IntParameter(this, e);
+                OnToString_Muhblah(this, e);
             }
             return e.Result;
         }
@@ -55,29 +66,23 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IntParameter != null) OnPreSave_IntParameter(this);
+            if (OnPreSave_Muhblah != null) OnPreSave_Muhblah(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IntParameter != null) OnPostSave_IntParameter(this);
+            if (OnPostSave_Muhblah != null) OnPostSave_Muhblah(this);
+        }
+        
+        public override void ApplyChanges(Kistl.API.IDataObject obj)
+        {
+            base.ApplyChanges(obj);
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-        }
-        
-        public override string GetDataType()
-        {
-            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_IntParameter != null)
-            {
-                OnGetDataType_IntParameter(this, e);
-            };
-            return e.Result;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

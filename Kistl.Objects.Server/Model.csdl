@@ -20,6 +20,9 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
     <EntitySet Name="TestObjClass" EntityType="Model.TestObjClass" />
     <EntitySet Name="ControlInfo" EntityType="Model.ControlInfo" />
+    <EntitySet Name="TestCustomObject" EntityType="Model.TestCustomObject" />
+    <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
+    <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -419,6 +422,24 @@
     <Property Name="IsContainer" Type="Boolean" Nullable="false" />
     <Property Name="Platform" Type="Int32" Nullable="false" />
     <Property Name="ControlType" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestCustomObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Muhblah">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AnotherTest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>

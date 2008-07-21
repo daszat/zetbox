@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Base
+namespace Kistl.App.Test
 {
     using System;
     using System.Collections.Generic;
@@ -24,30 +24,43 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntParameter")]
-    public class IntParameter : Kistl.App.Base.BaseParameter
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestCustomObject")]
+    public class TestCustomObject : BaseServerDataObject
     {
         
-        public IntParameter()
+        private int _ID;
+        
+        public TestCustomObject()
         {
         }
         
-        public event ToStringHandler<IntParameter> OnToString_IntParameter;
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
         
-        public event ObjectEventHandler<IntParameter> OnPreSave_IntParameter;
+        public event ToStringHandler<TestCustomObject> OnToString_TestCustomObject;
         
-        public event ObjectEventHandler<IntParameter> OnPostSave_IntParameter;
+        public event ObjectEventHandler<TestCustomObject> OnPreSave_TestCustomObject;
         
-        public event GetDataType_Handler<IntParameter> OnGetDataType_IntParameter;
+        public event ObjectEventHandler<TestCustomObject> OnPostSave_TestCustomObject;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_IntParameter != null)
+            if (OnToString_TestCustomObject != null)
             {
-                OnToString_IntParameter(this, e);
+                OnToString_TestCustomObject(this, e);
             }
             return e.Result;
         }
@@ -55,29 +68,18 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IntParameter != null) OnPreSave_IntParameter(this);
+            if (OnPreSave_TestCustomObject != null) OnPreSave_TestCustomObject(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IntParameter != null) OnPostSave_IntParameter(this);
+            if (OnPostSave_TestCustomObject != null) OnPostSave_TestCustomObject(this);
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-        }
-        
-        public override string GetDataType()
-        {
-            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_IntParameter != null)
-            {
-                OnGetDataType_IntParameter(this, e);
-            };
-            return e.Result;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

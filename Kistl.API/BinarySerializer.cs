@@ -380,18 +380,7 @@ namespace Kistl.API
             {
                 T obj = new T();
                 obj.FromStream(sr);
-
-                // TODO: Arthur: Ich bin mir nicht sicher, ob das überhaupt notwendig ist.
-                // Vielleicht wirds wieder notwendig, wenn die Objekte vorgeladen werden?
-                T objInCollection = val.FirstOrDefault(i => i.ID == obj.ID);
-                if (objInCollection != null)
-                {
-                    obj.CopyTo(objInCollection);
-                }
-                else
-                {
-                    val.Add(obj);
-                }
+                val.Add(obj);
             }
         }
 

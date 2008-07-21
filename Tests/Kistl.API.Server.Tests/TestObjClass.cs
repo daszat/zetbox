@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass")]
-    public class TestObjClass : BaseServerDataObject, ICloneable
+    public class TestObjClass : BaseServerDataObject
     {
 
         private int _ID;
@@ -161,19 +161,19 @@ namespace Kistl.API.Server.Tests
             if (OnPostSave_TestObjClass != null) OnPostSave_TestObjClass(this);
         }
 
-        public override object Clone()
-        {
-            TestObjClass obj = new TestObjClass();
-            CopyTo(obj);
-            return obj;
-        }
+        //public override object Clone()
+        //{
+        //    TestObjClass obj = new TestObjClass();
+        //    CopyTo(obj);
+        //    return obj;
+        //}
 
-        public override void CopyTo(Kistl.API.IDataObject obj)
-        {
-            base.CopyTo(obj);
-            ((TestObjClass)obj)._StringProp = this._StringProp;
-            ((TestObjClass)obj)._TestEnumProp = this._TestEnumProp;
-        }
+        //public override void ApplyChanges(Kistl.API.IDataObject obj)
+        //{
+        //    base.ApplyChanges(obj);
+        //    ((TestObjClass)obj)._StringProp = this._StringProp;
+        //    ((TestObjClass)obj)._TestEnumProp = this._TestEnumProp;
+        //}
 
         public virtual void TestMethod(System.DateTime DateTimeParamForTestMethod)
         {

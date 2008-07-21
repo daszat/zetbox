@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnotherTest.Server.Designer.cs" />
     <Compile Include="Assembly.Server.Designer.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Auftrag.Server.Designer.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="MethodInvocation.Server.Designer.cs" />
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="Module.Server.Designer.cs" />
+    <Compile Include="Muhblah.Server.Designer.cs" />
     <Compile Include="ObjectClass.Server.Designer.cs" />
     <Compile Include="ObjectParameter.Server.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Taetigkeit.Server.Designer.cs" />
     <Compile Include="TaetigkeitsArt.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
+    <Compile Include="TestCustomObject.Server.Designer.cs" />
     <Compile Include="TestEnum.Server.Designer.cs" />
     <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="Toolkit.Server.Designer.cs" />

@@ -87,7 +87,7 @@ namespace Kistl.API
     /// <summary>
     /// DataObject Interface
     /// </summary>
-    public interface IDataObject : IPersistenceObject, ICloneable
+    public interface IDataObject : IPersistenceObject
     {
         /// <summary>
         /// Not implemented yet.
@@ -107,7 +107,7 @@ namespace Kistl.API
         /// Copies the current content to a other Object. Used by clone.
         /// </summary>
         /// <param name="obj">Object to copy Content to.</param>
-        void CopyTo(IDataObject obj);
+        // void CopyTo(IDataObject obj);
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ namespace Kistl.API
         /// Copies the current content to a other Object. Used by clone.
         /// </summary>
         /// <param name="obj">Object to copy Content to.</param>
-        void CopyTo(ICollectionEntry obj);
+        // void CopyTo(ICollectionEntry obj);
     }
 
     /// <summary>

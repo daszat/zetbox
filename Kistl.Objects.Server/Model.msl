@@ -297,6 +297,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TestCustomObject">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject)">
+        <MappingFragment StoreEntitySet="TestCustomObject">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Muhblah">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah)">
+        <MappingFragment StoreEntitySet="Muhblah">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnotherTest">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTest)">
+        <MappingFragment StoreEntitySet="AnotherTest">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">

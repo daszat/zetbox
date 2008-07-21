@@ -25,7 +25,7 @@ namespace Kistl.API.Client.Tests
             // Set Proxy
             Proxy.SetProxy(new TestProxy());
             ctx = KistlContext.GetContext();
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
         }
 
         [Test]

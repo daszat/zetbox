@@ -81,9 +81,9 @@ namespace Kistl.API.Client.Tests
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
         }
 
-        public override void CopyTo(Kistl.API.ICollectionEntry obj)
+        public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
-            base.CopyTo(obj);
+            base.ApplyChanges(obj);
             ((TestObjClass_TestNameCollectionEntry)obj)._Value = this._Value;
             ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent = this._fk_Parent;
         }

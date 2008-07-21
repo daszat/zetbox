@@ -16,7 +16,7 @@ namespace Kistl.IntegrationTests
         [SetUp]
         public void SetUp()
         {
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
         }
 
         [Test]

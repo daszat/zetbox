@@ -70,8 +70,20 @@ namespace Kistl.Client
                     using (TraceClient.TraceHelper.TraceMethodCall("Getting Object Classes"))
                     {
                         // Prefetch Modules
-                        _ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
-                            .ToDictionary(o => o.GetDataCLRType());
+                        //_ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
+                        //    .ToDictionary(o => o.GetDataCLRType());
+                        _ObjectClasses = new Dictionary<Type, Kistl.App.Base.ObjectClass>();
+                        foreach (var o in _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>())
+                        {
+                            try
+                            {
+                                _ObjectClasses[o.GetDataCLRType()] = o;
+                            }
+                            catch(Exception ex)
+                            {
+                                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                            }
+                        }
                     }
                 }
             }

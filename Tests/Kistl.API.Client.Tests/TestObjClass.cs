@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace Kistl.API.Client.Tests
 {
-    public class TestObjClass : BaseClientDataObject, ICloneable
+    public class TestObjClass : BaseClientDataObject
     {
 
         private int _ID;
@@ -165,16 +165,16 @@ namespace Kistl.API.Client.Tests
         }
 
 
-        public override object Clone()
-        {
-            TestObjClass obj = new TestObjClass();
-            CopyTo(obj);
-            return obj;
-        }
+        //public override object Clone()
+        //{
+        //    TestObjClass obj = new TestObjClass();
+        //    CopyTo(obj);
+        //    return obj;
+        //}
 
-        public override void CopyTo(Kistl.API.IDataObject obj)
+        public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
-            base.CopyTo(obj);
+            base.ApplyChanges(obj);
             ((TestObjClass)obj)._StringProp = this._StringProp;
             ((TestObjClass)obj)._TestEnumProp = this._TestEnumProp;
         }

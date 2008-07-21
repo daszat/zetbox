@@ -42,6 +42,9 @@
     <EntitySet Name="EnumerationProperty" EntityType="Model.Store.EnumerationProperty" Table="EnumerationProperties" />
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses" />
     <EntitySet Name="ControlInfo" EntityType="Model.Store.ControlInfo" Table="ControlInfos" />
+    <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Table="TestCustomObjects" />
+    <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Table="Muhblas" />
+    <EntitySet Name="AnotherTest" EntityType="Model.Store.AnotherTest" Table="AnotherTests" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -523,6 +526,24 @@
     <Property Name="IsContainer" Type="bit" Nullable="false" />
     <Property Name="Platform" Type="int" Nullable="false" />
     <Property Name="ControlType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestCustomObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Muhblah">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="AnotherTest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>

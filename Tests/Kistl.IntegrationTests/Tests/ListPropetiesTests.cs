@@ -16,7 +16,7 @@ namespace Kistl.IntegrationTests
         [SetUp]
         public void SetUp()
         {
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(submitCount, Is.EqualTo(1));
             }
 
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
@@ -107,7 +107,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(submitCount, Is.EqualTo(1));
             }
 
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
@@ -143,7 +143,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(submitCount, Is.EqualTo(1));
             }
 
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {

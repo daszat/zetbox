@@ -95,11 +95,11 @@ namespace Kistl.API.Server.Tests
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
         }
 
-        public override void CopyTo(Kistl.API.ICollectionEntry obj)
-        {
-            base.CopyTo(obj);
-            ((TestObjClass_TestNameCollectionEntry)obj)._Value = this._Value;
-            ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent = this._fk_Parent;
-        }
+        //public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
+        //{
+        //    base.ApplyChanges(obj);
+        //    ((TestObjClass_TestNameCollectionEntry)obj)._Value = this._Value;
+        //    ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent = this._fk_Parent;
+        //}
     }
 }

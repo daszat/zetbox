@@ -45,6 +45,17 @@ namespace Kistl.API.Client
             item.SetPropertyValue<IDataObject>(_pointerProperty, null);
         }
 
+        public void ApplyChanges(BackReferenceCollection<T> list)
+        {
+            if (list == null) return;
+            list.collection = new List<T>(this.collection);
+        }
+
+        public void AttachToContext(IKistlContext ctx)
+        {
+            collection = new List<T>(collection.Select(i => ctx.Attach(i)).Cast<T>());
+        }
+
         #region IList<T> Members
 
         public int IndexOf(T item)
@@ -146,7 +157,7 @@ namespace Kistl.API.Client
     }
 
     public class ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> : IList<T>, INotifyCollectionChanged
-        where COLLECTIONENTRYTYPE : class, ICollectionEntry<T, PARENT>, INotifyPropertyChanged, new()
+        where COLLECTIONENTRYTYPE : BaseClientCollectionEntry, ICollectionEntry<T, PARENT>, INotifyPropertyChanged, new()
         where PARENT : IDataObject
     {
         private PARENT parent;
@@ -190,25 +201,47 @@ namespace Kistl.API.Client
             deletedCollection = new List<COLLECTIONENTRYTYPE>();
         }
 
-        public void CopyTo(ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> other)
+        public void ApplyChanges(ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> other)
         {
             other.collection.BeginUpdate();
             try
             {
-                other.ResetInternal();
+                // Reset Collection
+                if (other.parent.Context == null) throw new InvalidOperationException("ApplyChanges works only for attached Collections");
+
+                other.collection.ForEach(i => other.parent.Context.Detach(i));
+                other.deletedCollection.ForEach(i => other.parent.Context.Detach(i));
+                other.collection.Clear();
+                other.deletedCollection.Clear();
+
                 foreach (COLLECTIONENTRYTYPE e in collection)
                 {
                     COLLECTIONENTRYTYPE n = new COLLECTIONENTRYTYPE();
-                    e.CopyTo(n);
-
-                    if (other.parent.Context != null) 
-                        n = (COLLECTIONENTRYTYPE)other.parent.Context.Attach(n);
+                    ((BaseClientCollectionEntry)e).ApplyChanges(n);
                     other.collection.Add(n);
                 }
+
+                other.parent.NotifyPropertyChanged(other.collection.PropertyName);
             }
             finally
             {
                 other.collection.EndUpdate();
+            }
+        }
+
+        public void AttachToContext(IKistlContext ctx)
+        {
+            collection.BeginUpdate();
+            try
+            {
+                for (int i = 0; i < collection.Count; i++)
+                {
+                    collection[i] = (COLLECTIONENTRYTYPE)ctx.Attach(collection[i]);
+                }
+            }
+            finally
+            {
+                collection.EndUpdate();
             }
         }
 
@@ -246,25 +279,6 @@ namespace Kistl.API.Client
             {
                 collection.EndUpdate();
                 collection.NotifyParent();
-            }
-        }
-
-        private void ResetInternal()
-        {
-            collection.BeginUpdate();
-            try
-            {
-                if (parent.Context != null)
-                {
-                    collection.ForEach(i => parent.Context.Detach(i));
-                    deletedCollection.ForEach(i => parent.Context.Detach(i));
-                }
-                collection.Clear();
-                deletedCollection.Clear();
-            }
-            finally
-            {
-                collection.EndUpdate();
             }
         }
 
@@ -373,8 +387,6 @@ namespace Kistl.API.Client
             collection.BeginUpdate();
             try
             {
-                ResetInternal();
-
                 while (sr.ReadBoolean())
                 {
                     COLLECTIONENTRYTYPE obj = new COLLECTIONENTRYTYPE();

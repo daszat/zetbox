@@ -100,7 +100,7 @@ namespace Kistl.API.Server
     /// <summary>
     /// Abstract Base Class for Server Objects
     /// </summary>
-    public abstract class BaseServerDataObject : BaseServerPersistenceObject, IDataObject, ICloneable
+    public abstract class BaseServerDataObject : BaseServerPersistenceObject, IDataObject
     {
         /// <summary>
         /// Attach to Events
@@ -150,20 +150,11 @@ namespace Kistl.API.Server
         /// Copies the current content to a other Object. Used by clone.
         /// </summary>
         /// <param name="target">Object to copy Content to.</param>
-        public virtual void CopyTo(IDataObject target)
-        {
-            if (target == null) throw new ArgumentNullException("target");
-            target.ID = this.ID;
-        }
-
-        /// <summary>
-        /// Clones this Object
-        /// </summary>
-        /// <returns>A new Object.</returns>
-        public virtual object Clone()
-        {
-            return null;
-        }
+        //public virtual void CopyTo(IDataObject target)
+        //{
+        //    if (target == null) throw new ArgumentNullException("target");
+        //    target.ID = this.ID;
+        //}
 
         /// <summary>
         /// Serialize this Object to a BinaryWriter
@@ -205,7 +196,7 @@ namespace Kistl.API.Server
     /// Server Collection Entry Implementation. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
-    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry, ICloneable
+    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry
     {
         /// <summary>
         /// Serialize this Object to a BinaryWriter
@@ -235,26 +226,17 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Clones this Object
-        /// </summary>
-        /// <returns>A new Object.</returns>
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
-
-        /// <summary>
         /// Copies the current content to a other Object. Used by clone.
         /// </summary>
         /// <param name="obj">Object to copy Content to.</param>
-        public virtual void CopyTo(ICollectionEntry obj)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
+        //public virtual void CopyTo(ICollectionEntry obj)
+        //{
+        //    if (obj == null) throw new ArgumentNullException("obj");
 
-            NotifyPropertyChanging("ID");
-            obj.ID = this.ID;
-            NotifyPropertyChanged("ID");
-        }
+        //    NotifyPropertyChanging("ID");
+        //    obj.ID = this.ID;
+        //    NotifyPropertyChanged("ID");
+        //}
 
         /// <summary>
         /// Fires an Event before an Property is changed.

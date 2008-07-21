@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Kistl.API.Client
 {
-    public abstract class BaseClientPersistenceObject : IPersistenceObject, INotifyPropertyChanged
+    public abstract class BaseClientPersistenceObject : IPersistenceObject, INotifyPropertyChanged, INotifyPropertyChanging
     {
         public abstract int ID { get; set; }
 
@@ -70,14 +70,18 @@ namespace Kistl.API.Client
         public abstract void FromStream(System.IO.BinaryReader sr);
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
         /// Object has been changed
         /// </summary>
         public virtual void NotifyChange()
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
+            if (notifications == null)
+            {
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
+            }
         }
 
         /// <summary>
@@ -86,6 +90,11 @@ namespace Kistl.API.Client
         /// <param name="property"></param>
         public virtual void NotifyPropertyChanging(string property)
         {
+            if (notifications == null)
+            {
+                if (PropertyChanging != null)
+                    PropertyChanging(this, new PropertyChangingEventArgs(property));
+            }
         }
 
         /// <summary>
@@ -94,15 +103,39 @@ namespace Kistl.API.Client
         /// <param name="property"></param>
         public virtual void NotifyPropertyChanged(string property)
         {
-            if (this.ObjectState == DataObjectState.Unmodified)
-                this.ObjectState = DataObjectState.Modified;
+            if (notifications == null)
+            {
+                if (this.ObjectState == DataObjectState.Unmodified)
+                    this.ObjectState = DataObjectState.Modified;
 
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+            else
+            {
+                if(!notifications.Contains(property))
+                    notifications.Add(property);
+            }
+        }
+
+        private List<string> notifications = null;
+        public void RecordNotifications()
+        {
+            if (notifications != null) throw new InvalidOperationException("Notifications are recording");
+            notifications = new List<string>();
+        }
+
+        public void PlaybackNotifications()
+        {
+            if (notifications == null) throw new InvalidOperationException("No notifications where recorded");
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            {
+                notifications.ForEach(p => PropertyChanged(this, new PropertyChangedEventArgs(p)));
+            }
         }
     }
 
-    public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject, ICloneable
+    public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject
     {
         protected BaseClientDataObject()
         {
@@ -112,15 +145,10 @@ namespace Kistl.API.Client
         public virtual void NotifyPreSave() { }
         public virtual void NotifyPostSave() { }
 
-        public virtual void CopyTo(IDataObject obj)
+        public virtual void ApplyChanges(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             obj.ID = this.ID;
-        }
-
-        public virtual object Clone()
-        {
-            return null;
         }
 
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -152,7 +180,7 @@ namespace Kistl.API.Client
 
     }
 
-    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry, ICloneable
+    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry
     {
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -175,15 +203,9 @@ namespace Kistl.API.Client
             ObjectState = (DataObjectState)tmp;
         }
 
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
-
-        public virtual void CopyTo(ICollectionEntry obj)
+        public virtual void ApplyChanges(ICollectionEntry obj)
         {
             obj.ID = this.ID;
         }
     }
-
 }

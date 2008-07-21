@@ -16,7 +16,7 @@ namespace Kistl.IntegrationTests
         [SetUp]
         public void SetUp()
         {
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace Kistl.IntegrationTests
                 ctx.SubmitChanges();
             }
 
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (Kistl.API.IKistlContext checkctx = Kistl.API.Client.KistlContext.GetContext())
             {
@@ -127,7 +127,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
             }
 
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (Kistl.API.IKistlContext checkctx = Kistl.API.Client.KistlContext.GetContext())
             {

@@ -93,30 +93,23 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        public void CopyTo()
+        public void ApplyChanges()
         {
             TestObjClass result = new TestObjClass();
 
             obj.ID = 10;
 
-            obj.CopyTo(result);
+            obj.ApplyChanges(result);
             Assert.That(result.ID, Is.EqualTo(obj.ID));
             Assert.That(PropertyChangedCalled, Is.False);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void CopyTo_Null()
+        public void ApplyChanges_Null()
         {
             TestObjClass result = null;
-            obj.CopyTo(result);
-        }
-
-        [Test]
-        public void Clone()
-        {
-            Assert.That(obj.Clone(), Is.Not.Null);
-            Assert.That(PropertyChangedCalled, Is.False);
+            obj.ApplyChanges(result);
         }
 
         [Test]

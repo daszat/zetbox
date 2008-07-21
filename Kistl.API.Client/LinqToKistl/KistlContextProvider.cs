@@ -70,8 +70,8 @@ namespace Kistl.API.Client
             List<IDataObject> result = new List<IDataObject>();
             foreach (Kistl.API.IDataObject obj in serviceResult.OfType<Kistl.API.IDataObject>())
             {
-                CacheController<Kistl.API.IDataObject>.Current.Set(obj.GetType(), obj.ID,
-                    (Kistl.API.IDataObject)(obj).Clone());
+                //CacheController<Kistl.API.IDataObject>.Current.Set(obj.GetType(), obj.ID,
+                //    (Kistl.API.IDataObject)(obj).Clone());
 
                 result.Add((IDataObject)_context.Attach(obj));
             }
@@ -116,7 +116,7 @@ namespace Kistl.API.Client
                 IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
                 foreach (IDataObject obj in serviceResult)
                 {
-                    CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
+                    //CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
                     result.Add(_context.Attach(obj));
                 }
                 AddNewLocalObjects(_type, result);
@@ -130,7 +130,7 @@ namespace Kistl.API.Client
                 if (!(result is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
                 foreach (IDataObject obj in serviceResult)
                 {
-                    CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
+                    //CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
                     ((IList)result).Add(_context.Attach(obj));
                 }
                 AddNewLocalObjects(_type, (IList)result);
@@ -150,18 +150,18 @@ namespace Kistl.API.Client
             IDataObject result = (IDataObject)_context.ContainsObject(_type, ID);
             if (result != null) return (T)result;
 
-            result = CacheController<IDataObject>.Current.Get(_type, ID);
+            //result = CacheController<IDataObject>.Current.Get(_type, ID);
             if (result == null)
             {
                 result = Proxy.Current.GetObject(_type, ID);
                 if (result == null) throw new InvalidOperationException(string.Format("Object ID {0} of Type {1} not found", ID, _type));
 
-                CacheController<IDataObject>.Current.Set(_type, ID, (IDataObject)result.Clone());
+                //CacheController<IDataObject>.Current.Set(_type, ID, (IDataObject)result.Clone());
             }
-            else
-            {
-                result = (IDataObject)result.Clone();
-            }
+            //else
+            //{
+            //    result = (IDataObject)result.Clone();
+            //}
             return (T)_context.Attach(result);
         }
 

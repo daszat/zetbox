@@ -276,7 +276,7 @@ namespace Kistl.API.Client
         {
             CheckDisposed();
             // TODO: Add a better Cache Refresh Strategie
-            CacheController<Kistl.API.IDataObject>.Current.Clear();
+            // CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             List<Kistl.API.IDataObject> objectsToSubmit = new List<Kistl.API.IDataObject>();
             List<Kistl.API.IDataObject> objectsToDetach = new List<Kistl.API.IDataObject>();
@@ -294,17 +294,36 @@ namespace Kistl.API.Client
             }
 
             int counter = 0;
+            List<Kistl.API.IDataObject> changedObjects = new List<Kistl.API.IDataObject>();
             foreach (IDataObject newobj in Proxy.Current.SetObjects(objectsToSubmit))
             {
-                IDataObject obj = objectsToSubmit[counter++];
+                IDataObject obj;
 
-                newobj.CopyTo(obj);
+                if (counter < objectsToSubmit.Count)
+                {
+                    obj = objectsToSubmit[counter++];
+                }
+                else
+                {
+                    obj = (IDataObject)this.ContainsObject(newobj.GetType(), newobj.ID) ?? newobj;
+                }
+
+                ((BaseClientDataObject)obj).RecordNotifications();
+                if (obj != newobj)
+                {
+                    ((BaseClientDataObject)newobj).ApplyChanges(obj);
+                }
+
                 // Set to unmodified
                 obj.ObjectState = DataObjectState.Unmodified;
-                CacheController<Kistl.API.IDataObject>.Current.Set(obj.GetType(), obj.ID, obj);
+
+                changedObjects.Add(obj);
             }
 
             objectsToDetach.ForEach(obj => this.Detach(obj));
+            changedObjects.ForEach(obj => this.Attach(obj));
+
+            changedObjects.ForEach<BaseClientDataObject>(obj => obj.PlaybackNotifications());
 
             return objectsToSubmit.Count;
         }

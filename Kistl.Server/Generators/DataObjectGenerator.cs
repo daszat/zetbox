@@ -323,7 +323,7 @@ namespace Kistl.Server.Generators
             ccs.TrueStatements.Add(new CodeSnippetExpression(
                 string.Format(@"NotifyPropertyChanging(""{1}""); 
                     {0} = value;
-                    NotifyPropertyChanged(""{1}"")", setLValue, notifier)));
+                    NotifyPropertyChanged(""{1}"");", setLValue, notifier)));
 
             result.SetStatements.Add(ccs);
 
@@ -590,8 +590,7 @@ namespace Kistl.Server.Generators
             current.code_class = CreateClass(current.code_namespace, current.objClass.ClassName,
                 current.objClass.BaseObjectClass != null
                     ? current.objClass.BaseObjectClass.Module.Namespace + "." + current.objClass.BaseObjectClass.ClassName
-                    : string.Format("Base{0}DataObject", current.clientServer),
-                "ICloneable");
+                    : string.Format("Base{0}DataObject", current.clientServer));
 
             foreach (Interface i in current.objClass.ImplementsInterfaces.Select(i => i.Value))
             {
@@ -757,9 +756,12 @@ namespace Kistl.Server.Generators
 
             current.code_property.GetStatements.Add(new CodeSnippetExpression("return " + current.code_field.Name));
             current.code_property.SetStatements.Add(new CodeSnippetExpression(
-                string.Format(@"NotifyPropertyChanging(""{0}""); 
-                {1} = value; 
-                NotifyPropertyChanged(""{0}"");",
+                string.Format(@"if({1} != value)
+                {{
+                    NotifyPropertyChanging(""{0}""); 
+                    {1} = value; 
+                    NotifyPropertyChanged(""{0}"");
+                }}",
                 current.property.PropertyName, current.code_field.Name)));
 
             GenerateProperties_ValueTypeProperty(current);
@@ -804,9 +806,12 @@ namespace Kistl.Server.Generators
             collectionClass.code_property = CreateProperty(collectionClass.code_class, collectionClass.code_field.Type, "Value");
 
             collectionClass.code_property.GetStatements.Add(new CodeSnippetExpression("return _Value"));
-            collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"base.NotifyPropertyChanging(""Value"");
-                _Value = value;
-                base.NotifyPropertyChanged(""Value"");"));
+            collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"if(_Value != value)
+                {{
+                    base.NotifyPropertyChanging(""Value"");
+                    _Value = value;
+                    base.NotifyPropertyChanged(""Value"");
+                }}"));
 
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
@@ -884,12 +889,15 @@ namespace Kistl.Server.Generators
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._Value, sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)"));
 
-            m = CreateOverrideMethod(current.code_class, "CopyTo", typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
+            if (current.clientServer == ClientServerEnum.Client)
+            {
+                m = CreateOverrideMethod(current.code_class, "ApplyChanges", typeof(void));
+                m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
-            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._Value = this._Value", current.code_class.Name)));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Parent = this._fk_Parent", current.code_class.Name)));
+                m.Statements.Add(new CodeSnippetExpression("base.ApplyChanges(obj)"));
+                m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._Value = this._Value", current.code_class.Name)));
+                m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Parent = this._fk_Parent", current.code_class.Name)));
+            }
         }
         #endregion
 
@@ -1028,9 +1036,7 @@ namespace Kistl.Server.Generators
                 collectionClass.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", current.property.GetDataType())));
-                collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"base.NotifyPropertyChanging(""Value"");
-                _fk_Value = value.ID;
-                base.NotifyPropertyChanged(""Value"")"));
+                collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"fk_Value = value.ID;"));
 
                 parent.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
@@ -1038,9 +1044,12 @@ namespace Kistl.Server.Generators
                 parent.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Parent = value.ID"));
 
                 serializerValue.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Value"));
-                serializerValue.code_property.SetStatements.Add(new CodeSnippetExpression(@"base.NotifyPropertyChanging(""Value"");
-                _fk_Value = value;
-                base.NotifyPropertyChanged(""Value"")"));
+                serializerValue.code_property.SetStatements.Add(new CodeSnippetExpression(@"if(_fk_Value != value)
+                {
+                    base.NotifyPropertyChanging(""Value"");
+                    _fk_Value = value;
+                    base.NotifyPropertyChanged(""Value"");
+                }"));
 
                 serializerParent.code_property.GetStatements.Add(new CodeSnippetExpression(@"return _fk_Parent"));
                 serializerParent.code_property.SetStatements.Add(new CodeSnippetExpression("_fk_Parent = value"));
@@ -1070,12 +1079,15 @@ namespace Kistl.Server.Generators
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Value, sr)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)"));
 
-            m = CreateOverrideMethod(current.code_class, "CopyTo", typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
+            if (current.clientServer == ClientServerEnum.Client)
+            {
+                m = CreateOverrideMethod(current.code_class, "ApplyChanges", typeof(void));
+                m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
-            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Value = this.fk_Value", current.code_class.Name)));
-            m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Parent = this.fk_Parent", current.code_class.Name)));
+                m.Statements.Add(new CodeSnippetExpression("base.ApplyChanges(obj)"));
+                m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Value = this.fk_Value", current.code_class.Name)));
+                m.Statements.Add(new CodeSnippetExpression(string.Format("(({0})obj)._fk_Parent = this.fk_Parent", current.code_class.Name)));
+            }
         }
 
         #endregion
@@ -1234,51 +1246,46 @@ namespace Kistl.Server.Generators
             m.Statements.Add(new CodeSnippetExpression(string.Format(@"base.NotifyPostSave();
             if (OnPostSave_{0} != null) OnPostSave_{0}(this)", current.objClass.ClassName)));
 
-            // Create Clone Method
-            m = new CodeMemberMethod();
-            current.code_class.Members.Add(m);
-            m.Name = "Clone";
-            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            m.ReturnType = new CodeTypeReference(typeof(object));
-            m.Statements.Add(new CodeSnippetExpression(string.Format(@"{0} obj = new {0}();
-            CopyTo(obj);
-            return obj", current.objClass.ClassName)));
-
-            // Create CopyTo Method
-            m = new CodeMemberMethod();
-            current.code_class.Members.Add(m);
-            m.Name = "CopyTo";
-            m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            m.ReturnType = new CodeTypeReference(typeof(void));
-            m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(IDataObject)), "obj"));
-            m.Statements.Add(new CodeSnippetExpression("base.CopyTo(obj)"));
-
-            foreach (Property p in current.objClass.Properties.OfType<Property>())
+            if (current.clientServer == ClientServerEnum.Client)
             {
-                string stmt = "";
+                // Create ApplyChanges Method
+                m = new CodeMemberMethod();
+                current.code_class.Members.Add(m);
+                m.Name = "ApplyChanges";
+                m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+                m.ReturnType = new CodeTypeReference(typeof(void));
+                m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(IDataObject)), "obj"));
+                m.Statements.Add(new CodeSnippetExpression("base.ApplyChanges(obj)"));
 
-                if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
+                foreach (BaseProperty p in current.objClass.Properties.OfType<BaseProperty>())
                 {
-                    stmt = string.Format("(({1})obj)._{0} = this._{0}", p.PropertyName, current.objClass.ClassName);
-                }
-                // TODO: Geht z.Z. nur für den Client!!!!
-                else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
-                {
-                    stmt = string.Format("this._{0}.CopyTo((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
-                }
-                else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
-                {
-                    stmt = string.Format("(({1})obj)._fk_{0} = this._fk_{0}", p.PropertyName, current.objClass.ClassName);
-                }
-                // TODO: Geht z.Z. nur für den Client!!!!
-                else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList && current.clientServer == ClientServerEnum.Client)
-                {
-                    stmt = string.Format("this._{0}.CopyTo((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
-                }
+                    string stmt = "";
 
-                if (!string.IsNullOrEmpty(stmt))
-                {
-                    m.Statements.Add(new CodeSnippetExpression(stmt));
+                    if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
+                    {
+                        stmt = string.Format("(({1})obj).{0} = this.{0}", p.PropertyName, current.objClass.ClassName);
+                    }
+                    else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList)
+                    {
+                        stmt = string.Format("this._{0}.ApplyChanges((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
+                    }
+                    else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
+                    {
+                        stmt = string.Format("(({1})obj).fk_{0} = this.fk_{0}", p.PropertyName, current.objClass.ClassName);
+                    }
+                    else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
+                    {
+                        stmt = string.Format("this._{0}.ApplyChanges((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
+                    }
+                    else if (p is BackReferenceProperty)
+                    {
+                        stmt = string.Format("if(this._{0} != null) this._{0}.ApplyChanges((({1})obj)._{0}); else (({1})obj)._{0} = null; (({1})obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, current.objClass.ClassName);
+                    }
+
+                    if (!string.IsNullOrEmpty(stmt))
+                    {
+                        m.Statements.Add(new CodeSnippetExpression(stmt));
+                    }
                 }
             }
 
@@ -1293,12 +1300,13 @@ namespace Kistl.Server.Generators
                 foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
                 {
                     // Use ToList before using foreach - the collection could change
-                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"_{0}.UnderlyingCollection.ForEach(i => ctx.Attach(i))", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"_{0}.AttachToContext(ctx)", p.PropertyName)));
                 }
                 foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
                 {
                     // Create a new List after Attach - Object Reference will change, if Object is alredy in tha Context
-                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, _{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetDataType(), p.ReferenceProperty.PropertyName)));
+                    //m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, _{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetDataType(), p.ReferenceProperty.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0}.AttachToContext(ctx)", p.PropertyName)));
                 }
             }
             else

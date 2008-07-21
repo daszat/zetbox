@@ -22,31 +22,6 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        public void CopyTo()
-        {
-            TestObjClass_TestNameCollectionEntry result = new TestObjClass_TestNameCollectionEntry();
-
-            obj.ID = 10;
-
-            obj.CopyTo(result);
-            Assert.That(result.ID, Is.EqualTo(obj.ID));
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CopyTo_Null()
-        {
-            TestObjClass_TestNameCollectionEntry result = null;
-            obj.CopyTo(result);
-        }
-
-        [Test]
-        public void Clone()
-        {
-            Assert.That(obj.Clone(), Is.Not.Null);
-        }
-
-        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
