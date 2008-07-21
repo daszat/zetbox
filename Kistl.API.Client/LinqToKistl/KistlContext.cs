@@ -299,6 +299,8 @@ namespace Kistl.API.Client
             {
                 IDataObject obj;
 
+                // TODO: delete Objects have to be handled here correctly
+                // bug: o.create, ctx.save, o.delete, ctx.save  will die with duplicate RecordNotifications
                 if (counter < objectsToSubmit.Count)
                 {
                     obj = objectsToSubmit[counter++];
