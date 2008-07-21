@@ -90,15 +90,6 @@ namespace Kistl.Client.Mocks
 
         #endregion
 
-        #region IBasicControl Members
-
-        public string Description { get; set; }
-        public string ShortLabel { get; set; }
-        public FieldSize Size { get; set; }
-        public IKistlContext Context { get; set; }
-
-        #endregion
-
     }
 
     public class TestBoolControl : TestBasicControl, IValueControl<bool?>
