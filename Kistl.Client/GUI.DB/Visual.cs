@@ -235,11 +235,16 @@ namespace Kistl.GUI.DB
 
         // Normal Properties
         Boolean,
+        BooleanList,
         DateTime,
+        DateTimeList,
         Double,
+        DoubleList,
         Integer,
+        IntegerList,
         String,
         StringList,
+
         SimpleObjectList,
     }
 }

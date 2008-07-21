@@ -175,23 +175,42 @@ namespace Kistl.GUI.DB
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditBoolProperty" },
+            new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.BooleanList,
+                Container = false,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.BooleanListControl" },
+
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.DateTime,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditDateTimeProperty" },
+            new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.DateTimeList,
+                Container = false,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.DateTimeListControl" },
+
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.Double,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditDoubleProperty" },
+            new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.DoubleList,
+                Container = false,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.DoubleListControl" },
+
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.Integer,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditIntProperty" },
+            new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.IntegerList,
+                Container = false,
+                AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
+                ClassName = "Kistl.GUI.Renderer.WPF.IntegerListControl" },
+
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.String,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
                 ClassName = "Kistl.GUI.Renderer.WPF.EditSimpleProperty" },
-
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.StringList,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
@@ -228,16 +247,29 @@ namespace Kistl.GUI.DB
 
             new PresenterInfo() { Control = VisualType.Boolean, SourceType = typeof(BoolProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultStructPresenter`1" },
+            new PresenterInfo() { Control = VisualType.BooleanList, SourceType = typeof(BoolProperty),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
+
             new PresenterInfo() { Control = VisualType.DateTime, SourceType = typeof(DateTimeProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultStructPresenter`1" },
+            new PresenterInfo() { Control = VisualType.DateTimeList, SourceType = typeof(DateTimeProperty),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
+
             new PresenterInfo() { Control = VisualType.Double, SourceType = typeof(DoubleProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultStructPresenter`1" },
+            new PresenterInfo() { Control = VisualType.DoubleList, SourceType = typeof(DoubleProperty),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
+
             new PresenterInfo() { Control = VisualType.Integer, SourceType = typeof(IntProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultStructPresenter`1" },
+            new PresenterInfo() { Control = VisualType.IntegerList, SourceType = typeof(IntProperty),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
+
             new PresenterInfo() { Control = VisualType.String, SourceType = typeof(StringProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultValuePresenter`1" },
             new PresenterInfo() { Control = VisualType.StringList, SourceType = typeof(StringProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
+
             new PresenterInfo() { Control = VisualType.SimpleObjectList, SourceType = typeof(IList<EnumerationEntry>),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
         });
