@@ -125,6 +125,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Renderer.WPF\IntegerListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Renderer.WPF\DoubleListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Renderer.WPF\DateTimeListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Renderer.WPF\BooleanListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Renderer.WPF\ObjectReferenceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -208,6 +224,19 @@
     <Compile Include="Renderer.WPF\EnumEntryListControl.xaml.cs">
       <DependentUpon>EnumEntryListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Renderer.WPF\IntegerListControl.xaml.cs">
+      <DependentUpon>IntegerListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\DoubleListControl.xaml.cs">
+      <DependentUpon>DoubleListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\DateTimeListControl.xaml.cs">
+      <DependentUpon>DateTimeListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\BooleanListControl.xaml.cs">
+      <DependentUpon>BooleanListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.WPF\ListControl.cs" />
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
       <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>
     </Compile>

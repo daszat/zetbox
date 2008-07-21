@@ -19,35 +19,35 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Interaktionslogik für StringListControl.xaml
     /// </summary>
-    public partial class StringListControl : ListControl, IListControl<string>
+    public partial class DateTimeListControl : ListControl, IListControl<DateTime>
     {
-        public StringListControl()
+        public DateTimeListControl()
         {
-            Values = new ObservableCollection<string>();
+            Values = new ObservableCollection<DateTime>();
             InitializeComponent();
         }
 
-        public string SearchBoxValue
+        public DateTime? SearchBoxValue
         {
-            get { return (string)GetValue(SearchBoxValueProperty); }
+            get { return (DateTime?)GetValue(SearchBoxValueProperty); }
             set { SetValue(SearchBoxValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SearchboxValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchBoxValueProperty =
-            DependencyProperty.Register("SearchBoxValue", typeof(string), typeof(StringListControl), new UIPropertyMetadata(null));
+            DependencyProperty.Register("SearchBoxValue", typeof(DateTime?), typeof(DateTimeListControl), new UIPropertyMetadata(null));
 
 
-        #region IListControl<string> Member
+        #region IListControl<DateTime> Member
 
-        IList<string> IListControl<string>.Values
+        IList<DateTime> IListControl<DateTime>.Values
         {
             get { return Values; }
         }
 
-        public new ObservableCollection<string> Values
+        public new ObservableCollection<DateTime> Values
         {
-            get { return (ObservableCollection<string>)base.Values; }
+            get { return (ObservableCollection<DateTime>)base.Values; }
             set { base.Values = value; }
         }
 
@@ -68,8 +68,8 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            IList<string> selection = lst.SelectedItems.Cast<string>().ToList();
-            foreach (string s in selection)
+            IList<DateTime> selection = lst.SelectedItems.Cast<DateTime>().ToList();
+            foreach (DateTime s in selection)
             {
                 RemoveItem(Values.IndexOf(s));
             }

@@ -17,37 +17,36 @@ using System.Collections.Specialized;
 namespace Kistl.GUI.Renderer.WPF
 {
     /// <summary>
-    /// Interaktionslogik für StringListControl.xaml
+    /// Interaktionslogik für IntegerListControl.xaml
     /// </summary>
-    public partial class StringListControl : ListControl, IListControl<string>
+    public partial class IntegerListControl : ListControl, IListControl<int>
     {
-        public StringListControl()
+        public IntegerListControl()
         {
-            Values = new ObservableCollection<string>();
+            Values = new ObservableCollection<int>();
             InitializeComponent();
         }
 
-        public string SearchBoxValue
+        public int? SearchBoxValue
         {
-            get { return (string)GetValue(SearchBoxValueProperty); }
+            get { return (int?)GetValue(SearchBoxValueProperty); }
             set { SetValue(SearchBoxValueProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SearchboxValue.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for SearchBoxValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchBoxValueProperty =
-            DependencyProperty.Register("SearchBoxValue", typeof(string), typeof(StringListControl), new UIPropertyMetadata(null));
+            DependencyProperty.Register("SearchBoxValue", typeof(int?), typeof(IntegerListControl), new UIPropertyMetadata(null));
 
+        #region IListControl<int> Member
 
-        #region IListControl<string> Member
-
-        IList<string> IListControl<string>.Values
+        IList<int> IListControl<int>.Values
         {
             get { return Values; }
         }
 
-        public new ObservableCollection<string> Values
+        public new ObservableCollection<int> Values
         {
-            get { return (ObservableCollection<string>)base.Values; }
+            get { return (ObservableCollection<int>)base.Values; }
             set { base.Values = value; }
         }
 
@@ -62,14 +61,14 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (SearchBoxValue != null)
-                AddItem(SearchBoxValue);
+            if (SearchBoxValue.HasValue)
+                AddItem(SearchBoxValue.Value);
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            IList<string> selection = lst.SelectedItems.Cast<string>().ToList();
-            foreach (string s in selection)
+            IList<int> selection = lst.SelectedItems.Cast<int>().ToList();
+            foreach (int s in selection)
             {
                 RemoveItem(Values.IndexOf(s));
             }

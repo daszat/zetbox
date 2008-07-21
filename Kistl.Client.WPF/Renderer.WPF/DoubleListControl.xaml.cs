@@ -19,35 +19,35 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Interaktionslogik für StringListControl.xaml
     /// </summary>
-    public partial class StringListControl : ListControl, IListControl<string>
+    public partial class DoubleListControl : ListControl, IListControl<Double>
     {
-        public StringListControl()
+        public DoubleListControl()
         {
-            Values = new ObservableCollection<string>();
+            Values = new ObservableCollection<Double>();
             InitializeComponent();
         }
 
-        public string SearchBoxValue
+        public Double? SearchBoxValue
         {
-            get { return (string)GetValue(SearchBoxValueProperty); }
+            get { return (Double?)GetValue(SearchBoxValueProperty); }
             set { SetValue(SearchBoxValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SearchboxValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchBoxValueProperty =
-            DependencyProperty.Register("SearchBoxValue", typeof(string), typeof(StringListControl), new UIPropertyMetadata(null));
+            DependencyProperty.Register("SearchBoxValue", typeof(Double?), typeof(DoubleListControl), new UIPropertyMetadata(null));
 
 
-        #region IListControl<string> Member
+        #region IListControl<Double> Member
 
-        IList<string> IListControl<string>.Values
+        IList<Double> IListControl<Double>.Values
         {
             get { return Values; }
         }
 
-        public new ObservableCollection<string> Values
+        public new ObservableCollection<Double> Values
         {
-            get { return (ObservableCollection<string>)base.Values; }
+            get { return (ObservableCollection<Double>)base.Values; }
             set { base.Values = value; }
         }
 
@@ -68,8 +68,8 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            IList<string> selection = lst.SelectedItems.Cast<string>().ToList();
-            foreach (string s in selection)
+            IList<Double> selection = lst.SelectedItems.Cast<Double>().ToList();
+            foreach (Double s in selection)
             {
                 RemoveItem(Values.IndexOf(s));
             }
