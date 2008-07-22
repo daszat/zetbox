@@ -20,28 +20,23 @@ namespace Kistl.Client.Mocks
         where OBJECT : IDataObject
     {
 
-        public Mockery Mockery { get; private set; }
-        public IKistlContext MockContext { get; private set; }
         public OBJECT Instance { get; private set; }
 
         public virtual void SetUp()
         {
-            Mockery = new Mockery();
-            MockContext = Mockery.NewMock<IKistlContext>("MockContext");
-            TestObject.GlobalContext = MockContext;
             Instance = CreateObject();
         }
 
         public virtual void TestSetUpCorrect()
         {
-            Assert.IsNotNull(Mockery, "Mockery should have been initialised");
-            Assert.IsNotNull(MockContext, "MockContext should have been initialised");
+            Assert.IsNotNull(MainSetUp.Mockery, "Mockery should have been initialised");
+            Assert.IsNotNull(MainSetUp.MockContext, "MockContext should have been initialised");
             Assert.IsNotNull(Instance, "obj should have been initialised");
         }
 
         protected virtual OBJECT CreateObject()
         {
-            return Mockery.NewMock<OBJECT>();
+            return MainSetUp.Mockery.NewMock<OBJECT>();
         }
     }
 
@@ -55,29 +50,20 @@ namespace Kistl.Client.Mocks
         {
         }
 
-        private void RegisterObject(IDataObject obj)
-        {
-            Stub.On(MockContext).
-                Method("Find").
-                With(obj.ID).
-                Will(Return.Value(obj));
-            obj.AttachToContext(TestObject.GlobalContext);
-        }
-
         public override void SetUp()
         {
             base.SetUp();
 
-            RegisterObject(TestObject.ObjectClass);
-            RegisterObject(TestObject.ObjectReferencePropertyClass);
-            RegisterObject(TestObject.Module);
-            RegisterObject(TestObject.KistlAppBaseModule);
-            RegisterObject(TestObject.TestObjectReferenceDescriptor);
-            RegisterObject(TestObject.TestObjectListDescriptor);
+            MainSetUp.RegisterObject(TestObject.ObjectClass);
+            MainSetUp.RegisterObject(TestObject.ObjectReferencePropertyClass);
+            MainSetUp.RegisterObject(TestObject.Module);
+            MainSetUp.RegisterObject(TestObject.KistlAppBaseModule);
+            MainSetUp.RegisterObject(TestObject.TestObjectReferenceDescriptor);
+            MainSetUp.RegisterObject(TestObject.TestObjectListDescriptor);
 
-            IQueryable<TestObject> queryMock = Mockery.NewMock<IQueryable<TestObject>>();
+            IQueryable<TestObject> queryMock = MainSetUp.Mockery.NewMock<IQueryable<TestObject>>();
 
-            Stub.On(MockContext).
+            Stub.On(MainSetUp.MockContext).
                 Method("GetQuery").
                 Will(Return.Value(queryMock));
 

@@ -17,16 +17,16 @@ namespace Kistl.Client.Mocks
 
         public TestObject()
         {
-            Context = GlobalContext;
+            Context = MainSetUp.MockContext;
 
             TestBackReference = new List<TestObject>();
             TestObjectList = new List<TestObject>();
 
-            TestObjectListDescriptor.AttachToContext(GlobalContext);
+            TestObjectListDescriptor.AttachToContext(MainSetUp.MockContext);
             TestObjectListDescriptor.OnGetDataType_ObjectReferenceProperty += new BaseProperty.GetDataType_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
-            TestObjectReferenceDescriptor.AttachToContext(GlobalContext);
+            TestObjectReferenceDescriptor.AttachToContext(MainSetUp.MockContext);
             TestObjectReferenceDescriptor.OnGetDataType_ObjectReferenceProperty += new BaseProperty.GetDataType_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
-            TestBackReferenceDescriptor.AttachToContext(GlobalContext);
+            TestBackReferenceDescriptor.AttachToContext(MainSetUp.MockContext);
             TestBackReferenceDescriptor.OnGetDataType_BackReferenceProperty += new BaseProperty.GetDataType_Handler<BackReferenceProperty>(OnGetDataType_MockBackReference);
         }
 
@@ -39,8 +39,6 @@ namespace Kistl.Client.Mocks
         {
         }
 
-        public static IKistlContext GlobalContext { get; set; }
-
         private static Dictionary<string, Module> _moduleMocks = new Dictionary<string, Module>();
         private static Module MockModule(string modulename)
         {
@@ -52,7 +50,8 @@ namespace Kistl.Client.Mocks
                 ID = MaxID--,
                 Namespace = modulename,
             };
-            mo.AttachToContext(GlobalContext);
+            MainSetUp.RegisterObject(mo);
+            mo.AttachToContext(MainSetUp.MockContext);
             _moduleMocks[modulename] = mo;
             return mo;
         }
@@ -75,7 +74,8 @@ namespace Kistl.Client.Mocks
                     ClassName = classname,
                     Module = MockModule(modulename)
                 };
-                oc.AttachToContext(GlobalContext);
+                MainSetUp.RegisterObject(oc);
+                oc.AttachToContext(MainSetUp.MockContext);
                 _objectClassMocks[fullname] = oc;
             }
             return oc;

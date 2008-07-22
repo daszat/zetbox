@@ -86,8 +86,8 @@ namespace Kistl.GUI.Tests
         protected Visual Visual { get { return ControlHarness.Visual; } }
         protected OBJECT Object { get { return ObjectHarness.Instance; } }
 
-        protected Mockery Mockery { get { return ObjectHarness.Mockery; } }
-        protected IKistlContext MockContext { get { return ObjectHarness.MockContext; } }
+        protected Mockery Mockery { get { return MainSetUp.Mockery; } }
+        protected IKistlContext MockContext { get { return MainSetUp.MockContext; } }
 
         [SetUp]
         public void SetUp()

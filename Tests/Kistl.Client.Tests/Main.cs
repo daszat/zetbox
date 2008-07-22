@@ -12,7 +12,7 @@ namespace Kistl.Client.Tests
         [STAThread]
         public static void Main(string[] args)
         {
-            new SetUp().Init();
+            new MainSetUp().Init();
 
             System.Console.Out.WriteLine(typeof(Kistl.GUI.BackReferencePresenter<>).AssemblyQualifiedName);
             System.Console.Out.WriteLine(typeof(Kistl.GUI.BackReferencePresenter<Kistl.Client.Mocks.TestObject>).AssemblyQualifiedName);

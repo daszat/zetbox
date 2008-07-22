@@ -2,22 +2,44 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Kistl.API;
+using Kistl.Client.Mocks;
+using Kistl.GUI.DB;
+
+using NMock2;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
-using Kistl.GUI.DB;
-using Kistl.Client.Mocks;
-using Kistl.API;
 
 /// <summary>
 /// Assembly-global setup class which initialises the Kistl.API and primes the KistlGUIContext with test data
 /// </summary>
 [SetUpFixture]
-public class SetUp
+public class MainSetUp
 {
+    public static Mockery Mockery { get; private set; }
+    public static IKistlContext MockContext { get; private set; }
+
+    public static void RegisterObject(IDataObject obj)
+    {
+        Stub.On(MainSetUp.MockContext).
+            Method("Find").
+            With(obj.ID).
+            Will(Return.Value(obj));
+        Stub.On(MainSetUp.MockContext).
+            Method("ContainsObject").
+            With(obj.GetType(), obj.ID).
+            Will(Return.Value(obj));
+        obj.AttachToContext(MainSetUp.MockContext);
+    }
+
     [SetUp]
     public void Init()
     {
+        Mockery = new Mockery();
+        MockContext = Mockery.NewMock<IKistlContext>("MockContext");
+
         System.Diagnostics.Trace.WriteLine("Setting up Kistl");
 
         Kistl.API.APIInit init = new Kistl.API.APIInit();
