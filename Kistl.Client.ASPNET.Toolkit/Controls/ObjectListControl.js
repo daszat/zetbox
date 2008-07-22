@@ -12,6 +12,7 @@ Kistl.Client.ASPNET.ObjectListControl = function(element) {
     this._list = null;
     this._items = null;
     this._lnkAdd = null;
+    this._lnkNew = null;
     this._type = null;
     
     // Handler
@@ -19,6 +20,7 @@ Kistl.Client.ASPNET.ObjectListControl = function(element) {
     this._onOnDeleteCommandHandler = null;
     this._onOnItemCommandHandler = null;
     this._onLnkAddClickHandler = null;
+    this._onLnkNewClickHandler = null;
     this._onItemAddHandler = null;
    
     Kistl.Client.ASPNET.ObjectListControl.initializeBase(this, [element]);
@@ -43,6 +45,10 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         this._onLnkAddClickHandler = Function.createDelegate(this, this._onLnkAddClick);
         $addHandler(this._lnkAdd, "click", this._onLnkAddClickHandler);
         this._lnkAdd.href = '#';
+
+        this._onLnkNewClickHandler = Function.createDelegate(this, this._onLnkNewClick);
+        $addHandler(this._lnkNew, "click", this._onLnkNewClickHandler);
+        this._lnkNew.href = '#';
         
         // Add Callback
         this._onItemAddHandler = Function.createDelegate(this, this._onItemAdd);
@@ -71,6 +77,12 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
     },
     set_LnkAdd: function(val) {
         this._lnkAdd = val;
+    },
+    get_LnkNew: function() {
+        return this._lnkNew;
+    },
+    set_LnkNew: function(val) {
+        this._lnkNew = val;
     },
     get_Type: function() {
         return this._type;
@@ -110,6 +122,10 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
     },
     _onLnkAddClick: function() {
         Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject(this._type, this._onItemAddHandler);
+    },
+    _onLnkNewClick: function() {
+        var obj = Kistl.JavascriptRenderer.newObject(this._type);
+        Kistl.JavascriptRenderer.showObject(obj);
     },
     _onItemAdd: function(item) {
         var data = this._list.get_dataSource();

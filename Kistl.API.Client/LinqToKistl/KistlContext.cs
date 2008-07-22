@@ -279,31 +279,47 @@ namespace Kistl.API.Client
             // CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             List<Kistl.API.IDataObject> objectsToSubmit = new List<Kistl.API.IDataObject>();
+            List<Kistl.API.IDataObject> objectsToAdd = new List<Kistl.API.IDataObject>();
             List<Kistl.API.IDataObject> objectsToDetach = new List<Kistl.API.IDataObject>();
 
+            // Added Objects
             foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
-                .Where(o => o.ObjectState.In(DataObjectState.Modified, DataObjectState.New)))
+                .Where(o => o.ObjectState == DataObjectState.New))
+            {
+                objectsToSubmit.Add(obj);
+                objectsToAdd.Add(obj);
+            }
+            // Changed objects
+            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
+                .Where(o => o.ObjectState == DataObjectState.Modified))
             {
                 objectsToSubmit.Add(obj);
             }
+            // Deleted Objects
             foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
                 .Where(o => o.ObjectState == DataObjectState.Deleted))
             {
-                objectsToSubmit.Add(obj);
+                // Submit only persisted objects
+                if (Helper.IsPersistedObject(obj))
+                {
+                    objectsToSubmit.Add(obj);
+                }
                 objectsToDetach.Add(obj);
             }
 
+            // Submit to server
+            var newObjects = Proxy.Current.SetObjects(objectsToSubmit);
+
+            // Apply Changes
             int counter = 0;
             List<Kistl.API.IDataObject> changedObjects = new List<Kistl.API.IDataObject>();
-            foreach (IDataObject newobj in Proxy.Current.SetObjects(objectsToSubmit))
+            foreach (IDataObject newobj in newObjects)
             {
                 IDataObject obj;
 
-                // TODO: delete Objects have to be handled here correctly
-                // bug: o.create, ctx.save, o.delete, ctx.save  will die with duplicate RecordNotifications
-                if (counter < objectsToSubmit.Count)
+                if (counter < objectsToAdd.Count)
                 {
-                    obj = objectsToSubmit[counter++];
+                    obj = objectsToAdd[counter++];
                 }
                 else
                 {

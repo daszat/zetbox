@@ -29,13 +29,18 @@ public partial class Controls_ObjectListControl : Kistl.Client.ASPNET.Toolkit.Co
         get { return lstItems; }
     }
 
-    protected override HtmlGenericControl ContainerControl
+    protected override Control ContainerControl
     {
         get { return container; }
     }
 
-    protected override HtmlAnchor LnkAddControl
+    protected override Control LnkAddControl
     {
         get { return lnkAdd; }
+    }
+
+    protected override Control LnkNewControl
+    {
+        get { return lnkNew; }
     }
 }

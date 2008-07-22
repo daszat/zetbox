@@ -81,6 +81,8 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
                 cbListControl.DataTextField = "Text";
                 cbListControl.DataSource = value.Select(i => new { ID = i.ID, Text = i.ToString() });
                 cbListControl.DataBind();
+
+                cbListControl.Items.Insert(0, new ListItem("", Helper.INVALIDID.ToString()));
             }
         }
 

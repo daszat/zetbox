@@ -26,6 +26,9 @@ Kistl.Client.ASPNET.JavascriptRenderer.prototype = {
     },
     showObject: function(objectMoniker) {
         this.doPostBack('ShowObject', objectMoniker);
+    },
+    newObject: function(type) {
+        return {'ID': 0, 'Text': '', 'Type': type};
     }
 }
 Kistl.Client.ASPNET.JavascriptRenderer.registerClass('Kistl.Client.ASPNET.JavascriptRenderer', Sys.Component);

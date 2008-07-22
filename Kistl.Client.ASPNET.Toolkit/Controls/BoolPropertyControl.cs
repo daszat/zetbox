@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class BoolPropertyControl : System.Web.UI.UserControl, IValueControl<bool?>
+    public abstract class BoolPropertyControl : BasicPropertyControl<bool?>
     {
         protected abstract CheckBox cbBoolControl { get; }
 
@@ -31,16 +31,10 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
 
         protected void cbBool_OnCheckedChanged(object sender, EventArgs e)
         {
-            if (this.UserInput != null)
-            {
-                this.UserInput(this, EventArgs.Empty);
-            }
+            NotifyUserInput();
         }
 
-        #region IValueControl<string> Members
-
-        IKistlContext IBasicControl.Context { get; set; }
-        public bool? Value
+        public override bool? Value
         {
             get
             {
@@ -51,37 +45,5 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
                 cbBoolControl.Checked = value ?? false;
             }
         }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput;
-
-        #endregion
-
-        #region IBasicControl Members
-
-        public string ShortLabel
-        {
-            get;
-            set;
-        }
-
-        public string Description
-        {
-            get;
-            set;
-        }
-
-        public FieldSize Size
-        {
-            get;
-            set;
-        }
-
-        #endregion
     }
 }

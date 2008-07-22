@@ -4,7 +4,7 @@
     <asp:Label ID="Label1" runat="server" AssociatedControlID="divItems"><%= ShortLabel %></asp:Label>
     <div style="float: left;" id="divItems" runat="server">
         <div>
-            <asp:LinkButton ID="lnkNew" runat="server" Text="New"></asp:LinkButton>
+            <a ID="lnkNew" runat="server">New</a>
             <a ID="lnkAdd" runat="server">Add</a>
         </div>
         <adc:DataList ID="lstItems" runat="server" DataKeyField="ID">

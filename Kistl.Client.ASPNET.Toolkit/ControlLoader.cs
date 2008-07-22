@@ -20,11 +20,11 @@ namespace Kistl.Client.ASPNET.Toolkit
         void AddChild(IControlLoader child);
     }
 
-    public abstract class BaseControlLoader<T> : TemplateControl, IBasicControl, IControlLoader where T : class, IBasicControl
+    public abstract class BasicControlLoader<T> : TemplateControl, IBasicControl, IControlLoader where T : class, IBasicControl
     {
         protected T Ctrl { get; private set; }
 
-        public BaseControlLoader()
+        public BasicControlLoader()
         {
             Ctrl = this.LoadControl(GetControlPath()) as T;
             if (Ctrl == null) throw new InvalidOperationException(string.Format("UserControl \"{0}\" could not be loaded or converted to {1}", GetControlPath(), typeof(T).FullName));
@@ -58,7 +58,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
     }
 
-    public abstract class BaseContainerLoader<T> : BaseControlLoader<T>, IContainerLoader where T : class, IBasicControl
+    public abstract class BaseContainerLoader<T> : BasicControlLoader<T>, IContainerLoader where T : class, IBasicControl
     {
         public virtual void AddChild(IControlLoader child)
         {
@@ -67,7 +67,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
     }
 
-    public class ObjectPanel : BaseContainerLoader<IObjectControl>, IObjectControl
+    public class ObjectPanelLoader : BaseContainerLoader<IObjectControl>, IObjectControl
     {
         protected override string GetControlPath()
         {
@@ -93,7 +93,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
     }
 
-    public abstract class BasicPropertyControl<T> : BaseControlLoader<IValueControl<T>>, IValueControl<T>
+    public abstract class BasicPropertyControlLoader<T> : BasicControlLoader<IValueControl<T>>, IValueControl<T>
     {
         #region IValueControl<string> Members
 
@@ -118,7 +118,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         #endregion
     }
 
-    public class StringPropertyControl : BasicPropertyControl<string>
+    public class StringPropertyControlLoader : BasicPropertyControlLoader<string>
     {
         protected override string GetControlPath()
         {
@@ -126,14 +126,14 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
     }
 
-    public class IntPropertyControl : BasicPropertyControl<int?>
+    public class IntPropertyControlLoader : BasicPropertyControlLoader<int?>
     {
         protected override string GetControlPath()
         {
             return "~/Controls/IntPropertyControl.ascx";
         }
     }
-    public class BoolPropertyControl : BasicPropertyControl<bool?>
+    public class BoolPropertyControlLoader : BasicPropertyControlLoader<bool?>
     {
         protected override string GetControlPath()
         {
@@ -141,21 +141,21 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
     }
 
-    public class DoublePropertyControl : BasicPropertyControl<double?>
+    public class DoublePropertyControlLoader : BasicPropertyControlLoader<double?>
     {
         protected override string GetControlPath()
         {
             return "~/Controls/DoublePropertyControl.ascx";
         }
     }
-    public class DateTimePropertyControl : BasicPropertyControl<DateTime?>
+    public class DateTimePropertyControlLoader : BasicPropertyControlLoader<DateTime?>
     {
         protected override string GetControlPath()
         {
             return "~/Controls/DateTimePropertyControl.ascx";
         }
     }
-    public class ObjectReferencePropertyControl : BaseControlLoader<IReferenceControl>, IReferenceControl
+    public class ObjectReferencePropertyControlLoader : BasicControlLoader<IReferenceControl>, IReferenceControl
     {
         protected override string GetControlPath()
         {
@@ -200,7 +200,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         #endregion
     }
-    public class ObjectListControl : BaseControlLoader<IReferenceListControl>, IReferenceListControl
+    public class ObjectListControlLoader : BasicControlLoader<IReferenceListControl>, IReferenceListControl
     {
         protected override string GetControlPath()
         {

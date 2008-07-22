@@ -35,7 +35,16 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public IDataObject GetDataObject(IKistlContext ctx)
         {
-            return ctx.Find(Type.GetSerializedType(), ID);
+            if (ID <= Helper.INVALIDID)
+            {
+                IDataObject obj = ctx.Create(Type.GetSerializedType());
+                ID = obj.ID;
+                return obj;
+            }
+            else
+            {
+                return ctx.Find(Type.GetSerializedType(), ID);
+            }
         }
     }
 

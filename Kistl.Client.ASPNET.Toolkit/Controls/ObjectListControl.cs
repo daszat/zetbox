@@ -25,8 +25,9 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
     {
         protected abstract HiddenField HdItemsControl { get; }
         protected abstract AjaxDataControls.DataList LstItemsControl { get; }
-        protected abstract HtmlGenericControl ContainerControl { get; }
-        protected abstract HtmlAnchor LnkAddControl { get; }
+        protected abstract Control ContainerControl { get; }
+        protected abstract Control LnkAddControl { get; }
+        protected abstract Control LnkNewControl { get; }
 
         public ObjectListControl()
         {
@@ -54,6 +55,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
             desc.AddComponentProperty("List", LstItemsControl.ClientID);
             desc.AddElementProperty("Items", HdItemsControl.ClientID);
             desc.AddElementProperty("LnkAdd", LnkAddControl.ClientID);
+            desc.AddElementProperty("LnkNew", LnkNewControl.ClientID);
             desc.AddProperty("Type", new SerializableType(ObjectType));
             yield return desc;
         }

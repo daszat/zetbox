@@ -71,6 +71,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseControls.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ControlLoader.cs" />
     <Compile Include="Controls\BoolPropertyControl.cs">
       <SubType>ASPXCodeBehind</SubType>

@@ -9,10 +9,6 @@
     <div>
         <uc:ChooseObjectDialog runat="server" />
     </div>
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
-            <ajaxToolkit:TabContainer ID="tabObjects" runat="server">
-            </ajaxToolkit:TabContainer>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+    <ajaxToolkit:TabContainer ID="tabObjects" runat="server">
+    </ajaxToolkit:TabContainer>
 </asp:Content>

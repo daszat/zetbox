@@ -55,7 +55,7 @@ namespace Kistl.Server
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        void SetObjects(IEnumerable<IDataObject> objects);
+        IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects);
     }
 
     /// <summary>
@@ -219,7 +219,7 @@ namespace Kistl.Server
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public void SetObjects(IEnumerable<IDataObject> objects)
+        public IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
@@ -242,6 +242,9 @@ namespace Kistl.Server
                 }
 
                 KistlDataContext.Current.SubmitChanges();
+
+                // TODO: Detect changes made by server nethod calls
+                return objects.Where(o => o.ObjectState != DataObjectState.Deleted);
             }
         }
 

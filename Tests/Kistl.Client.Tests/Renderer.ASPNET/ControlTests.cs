@@ -15,11 +15,11 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
 {
     [TestFixture]
     [Ignore("TODO: ASP.NET Testframework")]
-    public class BoolControlTests : ValueControlTests<bool?, BoolPropertyControl>
+    public class BoolControlTests : ValueControlTests<bool?, BoolPropertyControlLoader>
     {
         public BoolControlTests()
             : base(
-                new ControlHarness<BoolPropertyControl>(TestObject.TestBoolVisual, Toolkit.ASPNET),
+                new ControlHarness<BoolPropertyControlLoader>(TestObject.TestBoolVisual, Toolkit.ASPNET),
                 new BoolValues()
             )
         {
@@ -36,11 +36,11 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
 
     [TestFixture]
     [Ignore("TODO: ASP.NET Testframework")]
-    public class DateTimeControlTests : ValueControlTests<DateTime?, DateTimePropertyControl>
+    public class DateTimeControlTests : ValueControlTests<DateTime?, DateTimePropertyControlLoader>
     {
         public DateTimeControlTests()
             : base(
-                new ControlHarness<DateTimePropertyControl>(TestObject.TestDateTimeVisual, Toolkit.ASPNET),
+                new ControlHarness<DateTimePropertyControlLoader>(TestObject.TestDateTimeVisual, Toolkit.ASPNET),
                 new DateTimeValues()
             )
         {
@@ -57,11 +57,11 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
 
     [TestFixture]
     [Ignore("TODO: ASP.NET Testframework")]
-    public class DoubleControlTests : ValueControlTests<double?, DoublePropertyControl>
+    public class DoubleControlTests : ValueControlTests<double?, DoublePropertyControlLoader>
     {
         public DoubleControlTests()
             : base(
-                new ControlHarness<DoublePropertyControl>(TestObject.TestDoubleVisual, Toolkit.ASPNET),
+                new ControlHarness<DoublePropertyControlLoader>(TestObject.TestDoubleVisual, Toolkit.ASPNET),
                 new DoubleValues()
             )
         {
@@ -76,11 +76,11 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
 
     [TestFixture]
     [Ignore("TODO: ASP.NET Testframework")]
-    public class IntControlTests : ValueControlTests<int?, IntPropertyControl>
+    public class IntControlTests : ValueControlTests<int?, IntPropertyControlLoader>
     {
         public IntControlTests()
             : base(
-                new ControlHarness<IntPropertyControl>(TestObject.TestIntVisual, Toolkit.ASPNET),
+                new ControlHarness<IntPropertyControlLoader>(TestObject.TestIntVisual, Toolkit.ASPNET),
                 new IntValues()
             )
         {
@@ -96,11 +96,11 @@ namespace Kistl.GUI.Renderer.ASPNET.Tests
 
     [TestFixture]
     [Ignore("TODO: ASP.NET Testframework")]
-    public class StringControlTests : ValueControlTests<string, StringPropertyControl>
+    public class StringControlTests : ValueControlTests<string, StringPropertyControlLoader>
     {
         public StringControlTests()
             : base(
-                new ControlHarness<StringPropertyControl>(TestObject.TestStringVisual, Toolkit.ASPNET),
+                new ControlHarness<StringPropertyControlLoader>(TestObject.TestStringVisual, Toolkit.ASPNET),
                 new StringValues()
             )
         {

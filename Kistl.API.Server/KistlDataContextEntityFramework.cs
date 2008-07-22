@@ -216,13 +216,16 @@ namespace Kistl.API.Server
                 // Technically this would work, but it's less efficient than avoiding attaching 
                 // the things which are new in the first place.
                 EntityObject entityObj = (EntityObject)obj;
-                if (entityObj.EntityState != System.Data.EntityState.Detached)
+                if (entityObj.EntityState != System.Data.EntityState.Added)
                 {
-                    base.Detach(entityObj);
-                    entityObj.EntityKey = null;
-                }
+                    if (entityObj.EntityState != System.Data.EntityState.Detached)
+                    {
+                        base.Detach(entityObj);
+                        entityObj.EntityKey = null;
+                    }
 
-                base.AddObject(entityName, obj);
+                    base.AddObject(entityName, obj);
+                }
             }
             else if (obj.ObjectState == DataObjectState.Deleted)
             {

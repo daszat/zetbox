@@ -100,43 +100,43 @@ namespace Kistl.GUI.DB
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Object,
                 Container = true,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectPanel" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectPanelLoader" },
 
             // Controls
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Boolean,
                 Container = false,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.BoolPropertyControl" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.BoolPropertyControlLoader" },
 
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.DateTime,
                 Container = false,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.DateTimePropertyControl" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.DateTimePropertyControlLoader" },
 
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Double,
                 Container = false,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.DoublePropertyControl" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.DoublePropertyControlLoader" },
 
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.Integer,
                 Container = false,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.IntPropertyControl" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.IntPropertyControlLoader" },
 
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.ObjectList,
                 Container = false,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectListControl" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectListControlLoader" },
 
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.ObjectReference,
                 Container = false,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectReferencePropertyControl" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.ObjectReferencePropertyControlLoader" },
 
             new ControlInfo() { Platform = Toolkit.ASPNET, ControlType = VisualType.String,
                 Container = false,
                 AssemblyName = "Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0",
-                ClassName = "Kistl.Client.ASPNET.Toolkit.StringPropertyControl" },
+                ClassName = "Kistl.Client.ASPNET.Toolkit.StringPropertyControlLoader" },
 
 #endregion
 

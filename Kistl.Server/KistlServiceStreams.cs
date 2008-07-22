@@ -75,13 +75,13 @@ namespace Kistl.Server
                         }
 
                         // Set Operation
-                        ServerObjectHandlerFactory.GetServerObjectSetHandler().SetObjects(objects);
+                        var changedObjects = ServerObjectHandlerFactory.GetServerObjectSetHandler().SetObjects(objects);
 
                         // Serialize back
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
 
-                        foreach (IDataObject obj in objects)
+                        foreach (IDataObject obj in changedObjects)
                         {
                             BinarySerializer.ToBinary(true, sw);
                             obj.ToStream(sw);

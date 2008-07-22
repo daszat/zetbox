@@ -89,7 +89,6 @@ namespace Kistl.Client.Mocks
         public event EventHandler UserDeleteRequest;
 
         #endregion
-
     }
 
     public class TestBoolControl : TestBasicControl, IValueControl<bool?>

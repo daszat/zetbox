@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class IntPropertyControl : System.Web.UI.UserControl, IValueControl<int?>
+    public abstract class IntPropertyControl : BasicPropertyControl<int?>
     {
         protected abstract TextBox txtIntControl { get; }
 
@@ -31,17 +31,10 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
 
         protected void txtInt_OnTextChanged(object sender, EventArgs e)
         {
-            if (this.UserInput != null)
-            {
-                this.UserInput(this, EventArgs.Empty);
-            }
+            NotifyUserInput();
         }
 
-        #region IValueControl<string> Members
-
-        IKistlContext IBasicControl.Context { get; set; }
-
-        public int? Value
+        public override int? Value
         {
             get
             {
@@ -52,37 +45,5 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
                 txtIntControl.Text = value.ToString();
             }
         }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput;
-
-        #endregion
-
-        #region IBasicControl Members
-
-        public string ShortLabel
-        {
-            get;
-            set;
-        }
-
-        public string Description
-        {
-            get;
-            set;
-        }
-
-        public FieldSize Size
-        {
-            get;
-            set;
-        }
-
-        #endregion
     }
 }
