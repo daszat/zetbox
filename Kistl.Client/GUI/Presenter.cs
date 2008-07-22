@@ -484,7 +484,7 @@ namespace Kistl.GUI
 
         protected virtual void OnNew()
         {
-            ObjectClass klass = Manager.Renderer.ChooseObject<ObjectClass>(Control.Context);
+            ObjectClass klass = Manager.Renderer.ChooseObject<ObjectClass>(Control.Context, "Choose object class to create");
             if (klass != null)
             {
                 Kistl.API.IDataObject newObject = Control.Context.Create(klass.GetDataCLRType());

@@ -30,13 +30,13 @@ namespace Kistl.GUI.Renderer
         /// </summary>
         /// <param name="objectType"></param>
         /// <returns>null if no Object was chosen or the chosen object</returns>
-        IDataObject ChooseObject(IKistlContext ctx, Type objectType);
+        IDataObject ChooseObject(IKistlContext ctx, Type objectType, string prompt);
 
         /// <summary>
         /// Intructs the Renderer to let the User choose an IDataObject of a given type
         /// </summary>
         /// <returns>null if no Object was chosen or the chosen object</returns>
-        T ChooseObject<T>(IKistlContext ctx) where T : IDataObject;
+        T ChooseObject<T>(IKistlContext ctx, string prompt) where T : IDataObject;
 
         /// <summary>
         /// Create a control corresponding to the visual for this object
@@ -58,8 +58,13 @@ namespace Kistl.GUI.Renderer
         where CONTAINER : CONTROL
     {
         public abstract void ShowMessage(string msg);
-        public abstract IDataObject ChooseObject(IKistlContext ctx, Type klass);
-        public abstract T ChooseObject<T>(IKistlContext ctx) where T : IDataObject;
+        public abstract IDataObject ChooseObject(IKistlContext ctx, Type klass, string prompt);
+        public T ChooseObject<T>(IKistlContext ctx, string prompt)
+            where T : IDataObject
+        {
+            return (T)ChooseObject(ctx, typeof(T), prompt);
+        }    
+        
         public abstract Toolkit Platform { get; }
 
         /// <summary>

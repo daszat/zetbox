@@ -44,16 +44,12 @@ namespace Kistl.GUI.Renderer.WPF
             System.Windows.MessageBox.Show(msg);
         }
 
-        public override T ChooseObject<T>(IKistlContext ctx)
-        {
-            return (T)ChooseObject(ctx, typeof(T));
-        }
-
-        public override IDataObject ChooseObject(IKistlContext ctx, Type klass)
+        public override IDataObject ChooseObject(IKistlContext ctx, Type klass, string prompt)
         {
             ChooseObjectDialog chooseDlg = new ChooseObjectDialog();
             chooseDlg.ObjectType = klass;
             chooseDlg.Context = ctx;
+            chooseDlg.Title = prompt ?? "Choose object";
             if (chooseDlg.ShowDialog() == true)
             {
                 return chooseDlg.Result;

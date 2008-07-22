@@ -45,12 +45,7 @@ namespace Kistl.Client.Mocks
             return widget;
         }
 
-        public override IDataObject ChooseObject(IKistlContext ctx, Type klass)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override T ChooseObject<T>(IKistlContext ctx)
+        public override IDataObject ChooseObject(IKistlContext ctx, Type klass, string prompt)
         {
             throw new NotImplementedException();
         }

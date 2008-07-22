@@ -150,7 +150,7 @@ namespace Kistl.GUI
         /// </summary>
         protected virtual void OnUserAddRequest(EventArgs e)
         {
-            T toAdd = Manager.Renderer.ChooseObject<T>(Object.Context);
+            T toAdd = Manager.Renderer.ChooseObject<T>(Object.Context, "Choose object to add");
 
             if (toAdd != null)
             {
@@ -252,7 +252,7 @@ namespace Kistl.GUI
         // obsolete?
         private void Control_UserAddRequest(object sender, EventArgs e)
         {
-            IDataObject toAdd = Manager.Renderer.ChooseObject(Object.Context, Control.ObjectType);
+            IDataObject toAdd = Manager.Renderer.ChooseObject(Object.Context, Control.ObjectType, String.Format("Choose {0} to add", Control.ObjectType.Name));
             if (toAdd == null)
                 return;
             toAdd.SetPropertyValue(Property.ReferenceProperty, Object.ID);
