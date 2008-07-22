@@ -37,6 +37,10 @@ public class MainSetUp
     [SetUp]
     public void Init()
     {
+
+        Kistl.Client.WPF.App app = new Kistl.Client.WPF.App();
+        app.InitializeComponent();
+
         Mockery = new Mockery();
         MockContext = Mockery.NewMock<IKistlContext>("MockContext");
 
