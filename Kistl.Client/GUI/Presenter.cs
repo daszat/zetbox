@@ -419,7 +419,7 @@ namespace Kistl.GUI
             switch (Object.ObjectState)
             {
                 case DataObjectState.New:
-                    Control.ShortLabel = String.Format("{0} (new)", Object.ToString());
+                    Control.ShortLabel = String.Format("* {0} (new)", Object.ToString());
                     break;
                 case DataObjectState.Modified:
                     Control.ShortLabel = String.Format("* {0}", Object.ToString());
