@@ -27,8 +27,6 @@ namespace Kistl.App.Base
     public class MethodInvocation : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Module = null;
         
         private System.Nullable<int> _fk_Method = null;
@@ -43,18 +41,6 @@ namespace Kistl.App.Base
         
         public MethodInvocation()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

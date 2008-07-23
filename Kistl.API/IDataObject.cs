@@ -38,7 +38,7 @@ namespace Kistl.API
         /// <summary>
         /// Every Object has at least an ID
         /// </summary>
-        int ID { get; set; }
+        int ID { get; }
 
         /// <summary>
         /// State of this Object.

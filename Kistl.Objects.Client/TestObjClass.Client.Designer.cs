@@ -27,8 +27,6 @@ namespace Kistl.App.Test
     public class TestObjClass : BaseClientDataObject, Kistl.App.Test.ITestInterface
     {
         
-        private int _ID;
-        
         private string _StringProp;
         
         private int _TestEnumProp;
@@ -37,18 +35,6 @@ namespace Kistl.App.Test
         
         public TestObjClass()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string StringProp

@@ -26,11 +26,17 @@ namespace Kistl.API.Client.Tests
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
             List<TestObjClass> result = new List<TestObjClass>();
-            result.Add(new TestObjClass() { ID = 1, StringProp = "String " + 1 });
-            result.Add(new TestObjClass() { ID = 2, StringProp = "String " + 2, fk_Parent = 1 });
-            result.Add(new TestObjClass() { ID = 3, StringProp = "String " + 3, fk_Parent = 1 });
-            result.Add(new TestObjClass() { ID = 4, StringProp = "String " + 4 });
-            result.Add(new TestObjClass() { ID = 5, StringProp = "String " + 5 });
+            result.Add(new TestObjClass() { StringProp = "String " + 1 });
+            result.Add(new TestObjClass() { StringProp = "String " + 2, fk_Parent = 1 });
+            result.Add(new TestObjClass() { StringProp = "String " + 3, fk_Parent = 1 });
+            result.Add(new TestObjClass() { StringProp = "String " + 4 });
+            result.Add(new TestObjClass() { StringProp = "String " + 5 });
+
+            result[0].SetPrivatePropertyValue<int>("ID", 1);
+            result[1].SetPrivatePropertyValue<int>("ID", 2);
+            result[2].SetPrivatePropertyValue<int>("ID", 3);
+            result[3].SetPrivatePropertyValue<int>("ID", 4);
+            result[4].SetPrivatePropertyValue<int>("ID", 5);
 
             return result.Cast<IDataObject>();
         }
@@ -43,8 +49,10 @@ namespace Kistl.API.Client.Tests
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
             {
-                result.Add(new TestObjClass() { ID = 2, StringProp = "String " + 2 });
-                result.Add(new TestObjClass() { ID = 3, StringProp = "String " + 3 });
+                result.Add(new TestObjClass() { StringProp = "String " + 2 });
+                result.Add(new TestObjClass() { StringProp = "String " + 3 });
+                result[0].SetPrivatePropertyValue<int>("ID", 2);
+                result[1].SetPrivatePropertyValue<int>("ID", 3);
             }
 
             return result.Cast<IDataObject>();
@@ -55,7 +63,8 @@ namespace Kistl.API.Client.Tests
             if (type == null) throw new ArgumentNullException("type");
             if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
-            TestObjClass obj = new TestObjClass() { ID = ID, StringProp = "String " + ID };
+            TestObjClass obj = new TestObjClass() { StringProp = "String " + ID };
+            obj.SetPrivatePropertyValue<int>("ID", ID);
             return obj;
         }
 
@@ -81,7 +90,7 @@ namespace Kistl.API.Client.Tests
                     ((BaseClientDataObject)obj).ApplyChanges(newObj);
                     if (newObj.ID < Helper.INVALIDID)
                     {
-                        newObj.ID = ++newID;
+                        newObj.SetPrivatePropertyValue<int>("ID", ++newID);
                     }
                     result.Add(newObj);
                     newObj.SetPrivatePropertyValue<DataObjectState>("ObjectState", DataObjectState.Unmodified);

@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Data.Linq.Mapping;
 using System.Globalization;
+using System.Data.Objects.DataClasses;
 
 namespace Kistl.API.Server
 {
@@ -15,6 +16,7 @@ namespace Kistl.API.Server
     {
         /// <summary>
         /// Everyone has an ID
+        /// TODO: Tja, das EF lässt sich nicht dazu überreden, diese ID zu nehmen...
         /// </summary>
         public abstract int ID { get; set; }
 

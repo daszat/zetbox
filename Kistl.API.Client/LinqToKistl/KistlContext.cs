@@ -215,7 +215,7 @@ namespace Kistl.API.Client
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
             {
-                obj.ID = --_newIDCounter;
+                ((BaseClientPersistenceObject)obj).ID = --_newIDCounter;
             }
             else
             {

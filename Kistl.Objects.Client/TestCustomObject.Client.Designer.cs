@@ -27,22 +27,8 @@ namespace Kistl.App.Test
     public class TestCustomObject : BaseClientDataObject
     {
         
-        private int _ID;
-        
         public TestCustomObject()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public event ToStringHandler<TestCustomObject> OnToString_TestCustomObject;

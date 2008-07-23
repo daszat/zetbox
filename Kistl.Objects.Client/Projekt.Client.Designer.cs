@@ -27,8 +27,6 @@ namespace Kistl.App.Projekte
     public class Projekt : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private string _Name;
         
         private BackReferenceCollection<Kistl.App.Projekte.Task> _Tasks;
@@ -46,18 +44,6 @@ namespace Kistl.App.Projekte
         public Projekt()
         {
             _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Projekt, Projekt_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string Name
@@ -252,23 +238,9 @@ namespace Kistl.App.Projekte
     internal class Projekt_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Projekt>
     {
         
-        private int _ID;
-        
         private int _fk_Value;
         
         private int _fk_Parent;
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
         
         [XmlIgnore()]
         public Kistl.App.Projekte.Mitarbeiter Value

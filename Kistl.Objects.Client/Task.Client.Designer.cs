@@ -27,8 +27,6 @@ namespace Kistl.App.Projekte
     public class Task : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Projekt = null;
         
         private string _Name;
@@ -41,18 +39,6 @@ namespace Kistl.App.Projekte
         
         public Task()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

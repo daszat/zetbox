@@ -27,8 +27,6 @@ namespace Kistl.App.Base
     public class DataType : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Module = null;
         
         private string _ClassName;
@@ -43,18 +41,6 @@ namespace Kistl.App.Base
         
         public DataType()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

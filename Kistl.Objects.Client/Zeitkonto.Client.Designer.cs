@@ -27,8 +27,6 @@ namespace Kistl.App.Zeiterfassung
     public class Zeitkonto : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private string _Kontoname;
         
         private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _Taetigkeiten;
@@ -42,18 +40,6 @@ namespace Kistl.App.Zeiterfassung
         public Zeitkonto()
         {
             _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Zeitkonto, Zeitkonto_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string Kontoname
@@ -204,23 +190,9 @@ namespace Kistl.App.Zeiterfassung
     internal class Zeitkonto_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Zeitkonto>
     {
         
-        private int _ID;
-        
         private int _fk_Value;
         
         private int _fk_Parent;
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
         
         [XmlIgnore()]
         public Kistl.App.Projekte.Mitarbeiter Value

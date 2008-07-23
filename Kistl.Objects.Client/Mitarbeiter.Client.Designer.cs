@@ -27,8 +27,6 @@ namespace Kistl.App.Projekte
     public class Mitarbeiter : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private string _Name;
         
         private BackReferenceCollection<Kistl.App.Projekte.Projekt> _Projekte;
@@ -41,18 +39,6 @@ namespace Kistl.App.Projekte
         
         public Mitarbeiter()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string Name

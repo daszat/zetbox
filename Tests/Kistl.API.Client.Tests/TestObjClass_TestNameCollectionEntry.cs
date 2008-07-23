@@ -17,17 +17,7 @@ namespace Kistl.API.Client.Tests
 
         private int _fk_Parent;
 
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
+       
 
         public string Value
         {

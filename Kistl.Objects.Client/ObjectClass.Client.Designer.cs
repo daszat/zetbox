@@ -204,23 +204,9 @@ namespace Kistl.App.Base
     internal class ObjectClass_ImplementsInterfacesCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.Interface, ObjectClass>
     {
         
-        private int _ID;
-        
         private int _fk_Value;
         
         private int _fk_Parent;
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
         
         [XmlIgnore()]
         public Kistl.App.Base.Interface Value

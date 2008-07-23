@@ -47,9 +47,10 @@ namespace Kistl.Client.Mocks
 
             Module mo = new Module()
             {
-                ID = MaxID--,
+                //ID = MaxID--,
                 Namespace = modulename,
             };
+            mo.SetPrivatePropertyValue<int>("ID", MaxID--);
             MainSetUp.RegisterObject(mo);
             mo.AttachToContext(MainSetUp.MockContext);
             _moduleMocks[modulename] = mo;
@@ -70,10 +71,11 @@ namespace Kistl.Client.Mocks
             {
                 oc = new ObjectClass()
                 {
-                    ID = MaxID--,
+                    //ID = MaxID--,
                     ClassName = classname,
                     Module = MockModule(modulename)
                 };
+                oc.SetPrivatePropertyValue<int>("ID", MaxID--);
                 MainSetUp.RegisterObject(oc);
                 oc.AttachToContext(MainSetUp.MockContext);
                 _objectClassMocks[fullname] = oc;
@@ -291,7 +293,7 @@ namespace Kistl.Client.Mocks
         public readonly static ObjectReferenceProperty TestObjectReferenceDescriptor
             = new ObjectReferenceProperty()
             {
-                ID = MaxID--,
+                //ID = MaxID--,
                 PropertyName = "TestObjectReference",
                 ReferenceObjectClass = TestObject.ObjectClass,
                 Module = TestObject.Module,
@@ -328,7 +330,7 @@ namespace Kistl.Client.Mocks
         public readonly static ObjectReferenceProperty TestObjectListDescriptor
             = new ObjectReferenceProperty()
             {
-                ID = MaxID--,
+                //ID = MaxID--,
                 PropertyName = "TestObjectList",
                 ReferenceObjectClass = TestObject.ObjectClass,
                 Module = TestObject.Module,

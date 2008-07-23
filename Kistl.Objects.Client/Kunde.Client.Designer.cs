@@ -27,8 +27,6 @@ namespace Kistl.App.Projekte
     public class Kunde : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private string _Kundenname;
         
         private string _Adresse;
@@ -44,18 +42,6 @@ namespace Kistl.App.Projekte
         public Kunde()
         {
             _EMails = new ListPropertyCollection<System.String, Kunde, Kunde_EMailsCollectionEntry>(this, "EMails");
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string Kundenname
@@ -224,23 +210,9 @@ namespace Kistl.App.Projekte
     internal class Kunde_EMailsCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<System.String, Kunde>
     {
         
-        private int _ID;
-        
         private string _Value;
         
         private int _fk_Parent;
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
         
         public string Value
         {

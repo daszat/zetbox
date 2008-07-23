@@ -27,8 +27,6 @@ namespace Kistl.App.Base
     public class EnumerationEntry : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Enumeration = null;
         
         private string _EnumerationEntryName;
@@ -37,18 +35,6 @@ namespace Kistl.App.Base
         
         public EnumerationEntry()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

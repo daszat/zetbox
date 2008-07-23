@@ -27,8 +27,6 @@ namespace Kistl.App.Zeiterfassung
     public class Taetigkeit : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Zeitkonto = null;
         
         private System.Nullable<int> _fk_Mitarbeiter = null;
@@ -41,18 +39,6 @@ namespace Kistl.App.Zeiterfassung
         
         public Taetigkeit()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

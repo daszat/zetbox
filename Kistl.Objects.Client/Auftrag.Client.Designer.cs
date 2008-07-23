@@ -27,8 +27,6 @@ namespace Kistl.App.Projekte
     public class Auftrag : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Projekt = null;
         
         private System.Nullable<int> _fk_Mitarbeiter = null;
@@ -41,18 +39,6 @@ namespace Kistl.App.Projekte
         
         public Auftrag()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

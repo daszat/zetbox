@@ -27,22 +27,8 @@ namespace Kistl.App.Test
     public class AnotherTest : BaseClientDataObject
     {
         
-        private int _ID;
-        
         public AnotherTest()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public event ToStringHandler<AnotherTest> OnToString_AnotherTest;

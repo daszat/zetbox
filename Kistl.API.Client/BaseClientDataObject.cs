@@ -10,7 +10,7 @@ namespace Kistl.API.Client
 {
     public abstract class BaseClientPersistenceObject : IPersistenceObject, INotifyPropertyChanged, INotifyPropertyChanging
     {
-        public abstract int ID { get; set; }
+        public int ID { get; internal set; }
 
         private DataObjectState _ObjectState = DataObjectState.Unmodified;
         public DataObjectState ObjectState
@@ -149,7 +149,7 @@ namespace Kistl.API.Client
         public virtual void ApplyChanges(IDataObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            obj.ID = this.ID;
+            ((BaseClientPersistenceObject)obj).ID = this.ID;
         }
 
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -206,7 +206,7 @@ namespace Kistl.API.Client
 
         public virtual void ApplyChanges(ICollectionEntry obj)
         {
-            obj.ID = this.ID;
+            ((BaseClientPersistenceObject)obj).ID = this.ID;
         }
     }
 }

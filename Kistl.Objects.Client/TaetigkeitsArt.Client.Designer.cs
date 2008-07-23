@@ -27,24 +27,10 @@ namespace Kistl.App.Zeiterfassung
     public class TaetigkeitsArt : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private string _Name;
         
         public TaetigkeitsArt()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string Name

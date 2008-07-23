@@ -27,8 +27,6 @@ namespace Kistl.App.Base
     public class BaseProperty : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_ObjectClass = null;
         
         private string _PropertyName;
@@ -39,18 +37,6 @@ namespace Kistl.App.Base
         
         public BaseProperty()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

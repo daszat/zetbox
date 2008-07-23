@@ -269,7 +269,8 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Attach_IDataObject_Twice_Modified()
         {
-            TestObjClass obj = new TestObjClass() { ID = 10 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             ctx.Attach(obj);
             Assert.That(obj.Context, Is.EqualTo(ctx));
 
@@ -285,11 +286,13 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Attach_IDataObject_Existing_Twice_But_Different()
         {
-            TestObjClass obj1 = new TestObjClass() { ID = 1 };
+            TestObjClass obj1 = new TestObjClass();
+            obj1.SetPrivatePropertyValue<int>("ID", 1);
             ctx.Attach(obj1);
             Assert.That(obj1.Context, Is.EqualTo(ctx));
 
-            TestObjClass obj2 = new TestObjClass() { ID = 1 };
+            TestObjClass obj2 = new TestObjClass();
+            obj2.SetPrivatePropertyValue<int>("ID", 1);
             TestObjClass obj3 = (TestObjClass)ctx.Attach(obj2);
             Assert.That(object.ReferenceEquals(obj1, obj3), "obj1 & obj3 are different Objects");
             Assert.That(!object.ReferenceEquals(obj2, obj3), "obj1 & obj3 are the same Objects");
@@ -305,7 +308,8 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Attach_IDataObject_WithList_Add()
         {
-            TestObjClass obj = new TestObjClass() { ID = 1 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 1);
             obj.TestNames.Add("Arthur");
             obj.TestNames.Add("David");
             obj.TestNames.Add("Susi");
@@ -321,7 +325,8 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Attach_IDataObject_WithList_Insert()
         {
-            TestObjClass obj = new TestObjClass() { ID = 1 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 1);
             obj.TestNames.Insert(0, "Arthur");
             obj.TestNames.Insert(1, "David");
             obj.TestNames.Insert(2, "Susi");
@@ -337,7 +342,8 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Attached_IDataObject_WithList_Add()
         {
-            TestObjClass obj = new TestObjClass() { ID = 1 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 1);
             obj.TestNames.Add("Arthur");
             obj.TestNames.Add("David");
             ctx.Attach(obj);
@@ -354,7 +360,8 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Attached_IDataObject_WithList_Insert()
         {
-            TestObjClass obj = new TestObjClass() { ID = 1 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 1);
             obj.TestNames.Insert(0, "Arthur");
             obj.TestNames.Insert(1, "David");
             ctx.Attach(obj);
@@ -371,7 +378,8 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Detach()
         {
-            TestObjClass obj = new TestObjClass() { ID = 1 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 1);
             ctx.Attach(obj);
             Assert.That(obj.Context, Is.EqualTo(ctx));
 
@@ -383,7 +391,8 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Detach_NotAttached()
         {
-            TestObjClass obj = new TestObjClass() { ID = 1 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 1);
 
             ctx.Detach(obj);
             Assert.That(obj.Context, Is.Null);
@@ -400,7 +409,8 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Detach_Twice()
         {
-            TestObjClass obj = new TestObjClass() { ID = 1 };
+            TestObjClass obj = new TestObjClass();
+            obj.SetPrivatePropertyValue<int>("ID", 1);
             ctx.Attach(obj);
             Assert.That(obj.Context, Is.EqualTo(ctx));
 

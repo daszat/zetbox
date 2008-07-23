@@ -27,8 +27,6 @@ namespace Kistl.App.Base
     public class BaseParameter : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Method = null;
         
         private string _ParameterName;
@@ -41,18 +39,6 @@ namespace Kistl.App.Base
         
         public BaseParameter()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]

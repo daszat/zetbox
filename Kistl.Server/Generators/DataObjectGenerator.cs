@@ -704,15 +704,19 @@ namespace Kistl.Server.Generators
 
         private void GenerateDefaultProperty_IDInternal(CurrentObjectClass current)
         {
-            // Create ID member
-            current.code_field = CreateField(current.code_class, typeof(int), "_ID");
+            // Client does not need such a stupid thing
+            if (current.clientServer == ClientServerEnum.Server)
+            {
+                // Create _Server_ ID member
+                current.code_field = CreateField(current.code_class, typeof(int), "_ID");
 
-            current.code_property = CreateProperty(current.code_class, typeof(int), "ID");
-            current.code_property.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            current.code_property.GetStatements.Add(new CodeSnippetExpression("return _ID"));
-            current.code_property.SetStatements.Add(new CodeSnippetExpression("_ID = value"));
+                current.code_property = CreateProperty(current.code_class, typeof(int), "ID");
+                current.code_property.Attributes = MemberAttributes.Public | MemberAttributes.Override;
+                current.code_property.GetStatements.Add(new CodeSnippetExpression("return _ID"));
+                current.code_property.SetStatements.Add(new CodeSnippetExpression("_ID = value"));
 
-            GenerateDefaultProperty_ID(current);
+                GenerateDefaultProperty_ID(current);
+            }            
         }
 
         protected virtual void GenerateDefaultPropertiesInternal(CurrentObjectClass current)

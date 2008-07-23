@@ -34,8 +34,11 @@ namespace Kistl.API.Client.Tests
             a = "A-String";
             b = "B-String";
 
-            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { ID = 1, Value = a });
-            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { ID = 2, Value = b });
+            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { /*ID = 1,*/ Value = a });
+            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { /*ID = 2,*/ Value = b });
+
+            list.UnderlyingCollection[0].SetPrivatePropertyValue<int>("ID", 1);
+            list.UnderlyingCollection[1].SetPrivatePropertyValue<int>("ID", 2);
         }
 
         [Test]

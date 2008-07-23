@@ -29,17 +29,7 @@ namespace Kistl.API.Client.Tests
             _TestNames = new ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry>(this, "TestNames");
         }
 
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
+      
 
         public string StringProp
         {

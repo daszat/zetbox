@@ -27,8 +27,6 @@ namespace Kistl.App.Base
     public class Module : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private string _Namespace;
         
         private string _ModuleName;
@@ -39,18 +37,6 @@ namespace Kistl.App.Base
         
         public Module()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string Namespace

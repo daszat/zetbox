@@ -27,22 +27,8 @@ namespace Kistl.App.Test
     public class LastTest : BaseClientDataObject
     {
         
-        private int _ID;
-        
         public LastTest()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public event ToStringHandler<LastTest> OnToString_LastTest;

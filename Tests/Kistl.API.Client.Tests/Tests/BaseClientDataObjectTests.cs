@@ -49,7 +49,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void ObjectState_ObjectWithID()
         {
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
 
@@ -63,7 +63,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void ObjectState_ObjectWithID_Modified()
         {
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             obj.NotifyPropertyChanged("test");
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
@@ -72,7 +72,7 @@ namespace Kistl.API.Client.Tests
         public void ObjectState_New_then_UnModified()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
 
@@ -97,7 +97,7 @@ namespace Kistl.API.Client.Tests
         {
             TestObjClass result = new TestObjClass();
 
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
 
             obj.ApplyChanges(result);
             Assert.That(result.ID, Is.EqualTo(obj.ID));
@@ -178,7 +178,7 @@ namespace Kistl.API.Client.Tests
         public void AttachToContext()
         {
             Assert.That(obj.Context, Is.Null);
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 obj.AttachToContext(ctx);
@@ -194,7 +194,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(obj.Context, Is.Null);
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                obj.ID = -1;
+                obj.SetPrivatePropertyValue<int>("ID", -1);
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -209,7 +209,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(obj.Context, Is.Null);
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                obj.ID = Helper.INVALIDID;
+                obj.SetPrivatePropertyValue<int>("ID", Helper.INVALIDID);
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -221,7 +221,7 @@ namespace Kistl.API.Client.Tests
         public void AttachToContext_Twice()
         {
             Assert.That(obj.Context, Is.Null);
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 obj.AttachToContext(ctx);
@@ -237,7 +237,7 @@ namespace Kistl.API.Client.Tests
         public void DetachFromContext()
         {
             Assert.That(obj.Context, Is.Null);
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ctx.Attach(obj);
@@ -255,7 +255,7 @@ namespace Kistl.API.Client.Tests
         public void DetachFromContext_NotAttached()
         {
             Assert.That(obj.Context, Is.Null);
-            obj.ID = 10;
+            obj.SetPrivatePropertyValue<int>("ID", 10);
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 obj.DetachFromContext(ctx);

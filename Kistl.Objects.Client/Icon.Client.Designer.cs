@@ -27,24 +27,10 @@ namespace Kistl.App.GUI
     public class Icon : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private string _IconFile;
         
         public Icon()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         public string IconFile

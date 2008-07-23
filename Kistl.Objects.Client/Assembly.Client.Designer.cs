@@ -27,8 +27,6 @@ namespace Kistl.App.Base
     public class Assembly : BaseClientDataObject
     {
         
-        private int _ID;
-        
         private System.Nullable<int> _fk_Module = null;
         
         private string _AssemblyName;
@@ -37,18 +35,6 @@ namespace Kistl.App.Base
         
         public Assembly()
         {
-        }
-        
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
         }
         
         [XmlIgnore()]
