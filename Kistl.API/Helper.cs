@@ -217,6 +217,19 @@ namespace Kistl.API
         }
 
         /// <summary>
+        /// Foreach Extension Method for IList<>. This Extension does not check if the Enumeration Entry is NULL!
+        /// </summary>
+        /// <typeparam name="T">Type of the Objects in the Enumeration.</typeparam>
+        /// <param name="lst">Enumeration</param>
+        /// <param name="action">Action to perform on each element.</param>
+        public static void ForEach<T>(this IList<T> lst, Action<T> action)
+        {
+            foreach (T obj in lst)
+            {
+                action(obj);
+            }
+        }
+        /// <summary>
         /// Foreach Extension Method for ObservableCollection. This Extension does not check if the ObservableCollection Entry is NULL!
         /// </summary>
         /// <typeparam name="T">Type of the Objects in the ObservableCollection.</typeparam>
@@ -230,4 +243,15 @@ namespace Kistl.API
             }
         }
     }
+
+    /// <summary>
+    /// Provides a generic way to pass Data around in the event of an event.
+    /// </summary>
+    /// <typeparam name="T">The type of data to pass</typeparam>
+    public class GenericEventArgs<T> : EventArgs
+    {
+        public T Data { get; set; }
+    }
+
+    public delegate void GenericEventHandler<TEventArgs>(object sender, GenericEventArgs<TEventArgs> e);
 }

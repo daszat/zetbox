@@ -105,6 +105,12 @@ namespace Kistl.GUI.Renderer.WPF
             tabObjects.SelectedIndex = idx;
         }
 
+        public void RemoveObject(Kistl.API.IDataObject dataObject)
+        {
+            IList<IObjectControl> toRemove = tabObjects.Items.Cast<IObjectControl>().Where(oc => oc.Value == dataObject).ToList();
+            toRemove.ForEach(oc => tabObjects.Items.Remove(oc));
+        }
+
         public ObservableCollection<Kistl.API.IDataObject> Objects
         {
             get { return (ObservableCollection<Kistl.API.IDataObject>)GetValue(ObjectsProperty); }
@@ -213,11 +219,11 @@ namespace Kistl.GUI.Renderer.WPF
             if (Context != null)
                 throw new InvalidOperationException("Cannot change Context of WorkspaceWindow");
 
-            if (_workspaces.ContainsKey(ctx))
-                throw new ArgumentOutOfRangeException("ctx", "Cannot set Context from another WorkspaceWindow");
+            // artificial barrier to reduce complexity for now
+            if (Renderer.FindWorkspace(ctx) != null)
+                throw new ArgumentOutOfRangeException("ctx", "Cannot set Context that is already handled by another WorkspaceWindow");
 
             _Context = ctx;
-            _workspaces[ctx] = this;
             CheckContext("SetContext");
         }
 
@@ -236,31 +242,6 @@ namespace Kistl.GUI.Renderer.WPF
             // TODO:
             // if (Context.IsDisposed)
             //    throw new InvalidOperationException(String.Format("Cannot perform {0} with disposed Context", action));
-        }
-
-        /// <summary>
-        /// _workspaces[ctx].Context == ctx
-        /// </summary>
-        private static Dictionary<IKistlContext, WorkspaceWindow> _workspaces = new Dictionary<IKistlContext, WorkspaceWindow>();
-
-        /// <summary>
-        /// Returns the WorkspaceWindow that is associated with the given Context or null if there is no association.
-        /// </summary>
-        public static WorkspaceWindow FindOrCreateWindow(IKistlContext ctx)
-        {
-            if (_workspaces.ContainsKey(ctx))
-            {
-                return _workspaces[ctx];
-            }
-            else
-            {
-                WorkspaceWindow wc = new WorkspaceWindow();
-                wc.Context = ctx;
-
-                WorkspacePresenter wp = new WorkspacePresenter();
-                wp.InitializeComponent(null, null, wc);
-                return wc;
-            }
         }
 
         #endregion

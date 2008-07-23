@@ -8,31 +8,6 @@
     Height="550" Width="750"
     Closed="Self_Closed"
     >
-    <!-- 
-    <Window.Resources>
-        <Style TargetType="{x:Type TabControl}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <TabPanel Grid.Row="0" IsItemsHost="True" />
-                            <ScrollViewer Grid.Row="1"
-                                VerticalScrollBarVisibility="Auto" 
-                                Margin="5,5,5,5"
-                                Background="White">
-                                <ContentPresenter ContentSource="SelectedContent" />
-                            </ScrollViewer>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -50,7 +25,9 @@
         <TabControl
             Grid.Row="1" Grid.Column="0"
             Name="tabObjects"
-            TabStripPlacement="Left">
+            TabStripPlacement="Left"
+            IsSynchronizedWithCurrentItem="True"
+            >
         </TabControl>
     </Grid>
 </Window>

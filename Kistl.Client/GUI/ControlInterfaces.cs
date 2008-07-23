@@ -168,6 +168,11 @@ namespace Kistl.GUI
         void ShowObject(IDataObject obj, IBasicControl ctrl);
 
         /// <summary>
+        /// Removes the given object from the display
+        /// </summary>
+        void RemoveObject(IDataObject dataObject);
+
+        /// <summary>
         /// Is fired when the user wants to save the Context.
         /// </summary>
         event EventHandler UserSaveRequest;
@@ -187,15 +192,7 @@ namespace Kistl.GUI
         /// </summary>
         event EventHandler<GenericEventArgs<IDataObject>> UserDeleteObjectRequest;
 
-    }
 
-    /// <summary>
-    /// Provides a generic way to pass Data around in the event of an event.
-    /// </summary>
-    /// <typeparam name="T">The type of data to pass</typeparam>
-    public class GenericEventArgs<T> : EventArgs
-    {
-        public T Data { get; set; }
     }
 
     /// <summary>

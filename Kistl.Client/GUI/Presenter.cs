@@ -463,6 +463,9 @@ namespace Kistl.GUI
 
     public class WorkspacePresenter : IPresenter
     {
+
+        protected IKistlContext Context { get { return Control.Context; } }
+
         private static int _workspaceCount = 0;
 
         protected IWorkspaceControl Control { get; set; }
@@ -477,6 +480,15 @@ namespace Kistl.GUI
             Control.UserAbortRequest += new EventHandler(Control_UserAbortRequest);
             Control.UserNewObjectRequest += new EventHandler(Control_UserNewObjectRequest);
             Control.UserDeleteObjectRequest += new EventHandler<GenericEventArgs<IDataObject>>(Control_UserDeleteObjectRequest);
+
+            Context.ObjectDeleted += new GenericEventHandler<IPersistenceObject>(Context_ObjectDeleted);
+        }
+
+        private void OnObjectDeleted(IPersistenceObject obj)
+        {
+            IDataObject dataObject = obj as IDataObject;
+            if (dataObject != null)
+                Control.RemoveObject(dataObject);
         }
 
         #region Behaviours
@@ -541,10 +553,16 @@ namespace Kistl.GUI
             OnDelete(e.Data);
         }
 
+        private void Context_ObjectDeleted(object sender, GenericEventArgs<IPersistenceObject> e)
+        {
+            OnObjectDeleted(e.Data);
+        }
+
         #endregion
 
         #region IPresenter Member
 
+        // TODO: this smells, the IPresenter needs to be improved for this use case
         public void InitializeComponent(IDataObject obj, Visual v, IBasicControl ctrl)
         {
             InitializeComponent((IWorkspaceControl)ctrl);

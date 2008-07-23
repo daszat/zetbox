@@ -57,6 +57,7 @@ namespace Kistl.GUI.Renderer
         where PROPERTY : CONTROL
         where CONTAINER : CONTROL
     {
+
         public abstract void ShowMessage(string msg);
         public abstract IDataObject ChooseObject(IKistlContext ctx, Type klass, string prompt);
         public T ChooseObject<T>(IKistlContext ctx, string prompt)

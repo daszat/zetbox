@@ -107,6 +107,12 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
             ShowObjectInternal(obj);
         }
 
+        public void RemoveObject(IDataObject dataObject)
+        {
+            // TODO
+            throw new NotImplementedException();
+        }
+
         public event EventHandler UserSaveRequest;
 
         public event EventHandler UserAbortRequest;
@@ -125,5 +131,6 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         IKistlContext IBasicControl.Context { get; set; }
 
         #endregion
+
     }
 }

@@ -183,5 +183,18 @@ namespace Kistl.API
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         T Find<T>(int ID) where T : IDataObject;
+
+        /// <summary>
+        /// Is fired when an object is created in this Context.
+        /// The newly created object is passed as Data.
+        /// </summary>
+        event GenericEventHandler<IPersistenceObject> ObjectCreated;
+
+        /// <summary>
+        /// Is fired when an object is deleted in this Context.
+        /// The delted object is passed as Data.
+        /// </summary>
+        event GenericEventHandler<IPersistenceObject> ObjectDeleted;
+
     }
 }

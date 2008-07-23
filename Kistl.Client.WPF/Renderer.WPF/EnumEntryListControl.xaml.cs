@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Kistl.App.Base;
+using Kistl.API;
 
 namespace Kistl.GUI.Renderer.WPF
 {

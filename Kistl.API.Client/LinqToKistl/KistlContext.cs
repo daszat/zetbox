@@ -183,6 +183,7 @@ namespace Kistl.API.Client
             CheckDisposed();
             T obj = new T();
             Attach(obj);
+            OnObjectCreated(obj);
             return obj;
         }
 
@@ -196,6 +197,7 @@ namespace Kistl.API.Client
             CheckDisposed();
             Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
+            OnObjectCreated(obj);
             return obj;
         }
 
@@ -266,6 +268,7 @@ namespace Kistl.API.Client
             if (obj == null) throw new ArgumentNullException("obj");
             if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
             obj.ObjectState = DataObjectState.Deleted;
+            OnObjectDeleted(obj);
         }
 
         /// <summary>
@@ -375,5 +378,26 @@ namespace Kistl.API.Client
             CheckDisposed();
             return GetQuery<T>().Single(o => o.ID == ID);
         }
+
+        public event GenericEventHandler<IPersistenceObject> ObjectCreated;
+
+        protected virtual void OnObjectCreated(IPersistenceObject obj)
+        {
+            if (ObjectCreated != null)
+            {
+                ObjectCreated(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
+            }
+        }
+
+        public event GenericEventHandler<IPersistenceObject> ObjectDeleted;
+
+        protected virtual void OnObjectDeleted(IPersistenceObject obj)
+        {
+            if (ObjectDeleted != null)
+            {
+                ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
+            }
+        }
+
     }
 }

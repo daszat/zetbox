@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Kistl.API;
 
 namespace Kistl.GUI.Renderer.WPF
 {

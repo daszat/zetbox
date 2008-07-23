@@ -260,6 +260,7 @@ namespace Kistl.API.Server
         public void Delete(IPersistenceObject obj)
         {
             base.DeleteObject(obj);
+            OnObjectDeleted(obj);
         }
 
         /// <summary>
@@ -271,6 +272,7 @@ namespace Kistl.API.Server
         {
             Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
+            OnObjectCreated(obj);
             return obj;
         }
 
@@ -283,6 +285,7 @@ namespace Kistl.API.Server
         {
             T obj = new T();
             Attach(obj);
+            OnObjectCreated(obj);
             return obj;
         }
 
@@ -314,6 +317,26 @@ namespace Kistl.API.Server
             where T : IDataObject
         {
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
+        }
+
+        public event GenericEventHandler<IPersistenceObject> ObjectCreated;
+
+        protected virtual void OnObjectCreated(IPersistenceObject obj)
+        {
+            if (ObjectCreated != null)
+            {
+                ObjectCreated(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
+            }
+        }
+
+        public event GenericEventHandler<IPersistenceObject> ObjectDeleted;
+
+        protected virtual void OnObjectDeleted(IPersistenceObject obj)
+        {
+            if (ObjectDeleted != null)
+            {
+                ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
+            }
         }
 
     }
