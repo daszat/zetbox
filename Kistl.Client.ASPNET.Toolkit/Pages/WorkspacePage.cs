@@ -18,7 +18,7 @@ using Kistl.Client.ASPNET.Toolkit;
 using System.Collections.Generic;
 using Kistl.GUI;
 
-namespace Kistl.Client.ASPNET.Toolkit.Controls
+namespace Kistl.Client.ASPNET.Toolkit.Pages
 {
     public abstract class WorkspacePage : System.Web.UI.Page, IWorkspaceControl
     {

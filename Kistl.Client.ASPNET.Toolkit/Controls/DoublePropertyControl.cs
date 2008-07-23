@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class DoublePropertyControl : BasicPropertyControl<double?>
+    public abstract class DoublePropertyControl : ValueControl<double?>
     {
         protected abstract TextBox txtDoubleControl { get; }
 

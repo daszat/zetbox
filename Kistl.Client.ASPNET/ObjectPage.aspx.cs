@@ -18,7 +18,7 @@ using Kistl.Client.ASPNET.Toolkit;
 using System.Collections.Generic;
 using Kistl.GUI;
 
-public partial class ObjectPage : Kistl.Client.ASPNET.Toolkit.Controls.WorkspacePage
+public partial class ObjectPage : Kistl.Client.ASPNET.Toolkit.Pages.WorkspacePage
 {
     protected override HiddenField hdObjectsControl
     {

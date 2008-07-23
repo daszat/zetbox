@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class IntPropertyControl : BasicPropertyControl<int?>
+    public abstract class IntPropertyControl : ValueControl<int?>
     {
         protected abstract TextBox txtIntControl { get; }
 

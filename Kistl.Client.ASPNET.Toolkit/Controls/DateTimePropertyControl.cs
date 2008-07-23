@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class DateTimePropertyControl : BasicPropertyControl<DateTime?>
+    public abstract class DateTimePropertyControl : ValueControl<DateTime?>
     {
         protected abstract TextBox txtDateTimeControl { get; }
 

@@ -90,7 +90,7 @@
     <Compile Include="Controls\ObjectListControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\WorkspacePage.cs">
+    <Compile Include="Pages\WorkspacePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ObjectPanel.cs">

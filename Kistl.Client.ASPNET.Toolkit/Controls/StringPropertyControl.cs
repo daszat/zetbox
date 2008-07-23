@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class StringPropertyControl : BasicPropertyControl<string>
+    public abstract class StringPropertyControl : ValueControl<string>
     {
         protected abstract TextBox txtStringControl { get; }
 

@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class BoolPropertyControl : BasicPropertyControl<bool?>
+    public abstract class BoolPropertyControl : ValueControl<bool?>
     {
         protected abstract CheckBox cbBoolControl { get; }
 

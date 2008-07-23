@@ -47,7 +47,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         public event EventHandler UserDeleteRequest;
     }
 
-    public abstract class BasicPropertyControl<T> : BasicControl, IValueControl<T>
+    public abstract class ValueControl<T> : BasicControl, IValueControl<T>
     {
         public virtual T Value
         {

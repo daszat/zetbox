@@ -15,7 +15,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class ObjectReferencePropertyControl : System.Web.UI.UserControl, IReferenceControl
+    public abstract class ObjectReferencePropertyControl : ValueControl<IDataObject>, IReferenceControl
     {
         protected abstract DropDownList cbListControl { get; }
 
@@ -31,35 +31,8 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
 
         protected void cbList_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.UserInput != null)
-            {
-                this.UserInput(this, EventArgs.Empty);
-            }
+            NotifyUserInput();
         }
-
-        #region IBasicControl Members
-
-        IKistlContext IBasicControl.Context { get; set; }
-
-        public string ShortLabel
-        {
-            get;
-            set;
-        }
-
-        public string Description
-        {
-            get;
-            set;
-        }
-
-        public FieldSize Size
-        {
-            get;
-            set;
-        }
-
-        #endregion
 
         #region IReferenceControl<IDataObject> Members
 
@@ -88,9 +61,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
 
         #endregion
 
-        #region IValueControl<IDataObject> Members
-
-        public Kistl.API.IDataObject Value
+        public override Kistl.API.IDataObject Value
         {
             get
             {
@@ -104,15 +75,5 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
                 }
             }
         }
-
-        public bool IsValidValue
-        {
-            get;
-            set;
-        }
-
-        public event EventHandler UserInput;
-
-        #endregion
     }
 }
