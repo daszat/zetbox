@@ -41,9 +41,9 @@ namespace Kistl.API.Server
                 }
                 return _ObjectState;
             }
-            set
+            internal set
             {
-                // Objectstate from Serializer oder Methodcall
+                // Objectstate from Serializer
                 _ObjectState = value;
             }
         }

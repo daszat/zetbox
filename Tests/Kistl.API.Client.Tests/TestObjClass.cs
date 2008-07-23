@@ -164,14 +164,6 @@ namespace Kistl.API.Client.Tests
             if (_Children != null) _Children = new BackReferenceCollection<TestObjClass>("Parent", this, _Children.Select(i => ctx.Attach(i)).OfType<TestObjClass>());
         }
 
-
-        //public override object Clone()
-        //{
-        //    TestObjClass obj = new TestObjClass();
-        //    CopyTo(obj);
-        //    return obj;
-        //}
-
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);

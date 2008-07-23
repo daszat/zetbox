@@ -73,11 +73,19 @@ namespace Kistl.API.Client.Tests
                 if (type == null) throw new ArgumentNullException("type");
                 if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
-                throw new NotImplementedException();
-                //TestObjClass newObj = new TestObjClass();
-                //obj.ApplyChanges(newObj);
-                //newObj.ID = ++newID;
-                //result.Add(newObj);
+                if (obj.ObjectState != DataObjectState.Deleted)
+                {
+                    TestObjClass newObj = new TestObjClass();
+
+                    // Copy old object to new object
+                    ((BaseClientDataObject)obj).ApplyChanges(newObj);
+                    if (newObj.ID < Helper.INVALIDID)
+                    {
+                        newObj.ID = ++newID;
+                    }
+                    result.Add(newObj);
+                    newObj.SetPrivatePropertyValue<DataObjectState>("ObjectState", DataObjectState.Unmodified);
+                }
             }
 
             return result;

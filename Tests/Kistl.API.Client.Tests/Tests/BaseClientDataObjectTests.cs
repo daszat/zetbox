@@ -194,6 +194,22 @@ namespace Kistl.API.Client.Tests
             Assert.That(obj.Context, Is.Null);
             using (IKistlContext ctx = KistlContext.GetContext())
             {
+                obj.ID = -1;
+                obj.AttachToContext(ctx);
+                Assert.That(obj.Context, Is.Not.Null);
+                Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
+                Assert.That(PropertyChangedCalled, Is.False);
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AttachToContext_New_InvalidID()
+        {
+            Assert.That(obj.Context, Is.Null);
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                obj.ID = Helper.INVALIDID;
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));

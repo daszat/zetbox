@@ -43,7 +43,7 @@ namespace Kistl.API
         /// <summary>
         /// State of this Object.
         /// </summary>
-        DataObjectState ObjectState { get; set; }
+        DataObjectState ObjectState { get; }
 
         /// <summary>
         /// Serialize this Object to a BinaryWriter

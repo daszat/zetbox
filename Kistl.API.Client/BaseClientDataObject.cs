@@ -31,9 +31,9 @@ namespace Kistl.API.Client
                 }
                 return _ObjectState;
             }
-            set
+            internal set
             {
-                // Objectstate from Serializer oder Methodcall
+                // Objectstate from Serializer or set by KistlContext
                 if (_ObjectState != value)
                 {
                     _ObjectState = value;
@@ -132,6 +132,7 @@ namespace Kistl.API.Client
             {
                 notifications.ForEach(p => PropertyChanged(this, new PropertyChangedEventArgs(p)));
             }
+            notifications = null;
         }
     }
 

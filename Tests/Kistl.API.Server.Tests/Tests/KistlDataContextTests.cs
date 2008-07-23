@@ -444,6 +444,7 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
+        [Ignore("Not supported yet")]
         public void Detach_IDataObject()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())

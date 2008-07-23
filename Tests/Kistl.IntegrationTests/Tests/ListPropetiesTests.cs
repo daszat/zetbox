@@ -99,6 +99,7 @@ namespace Kistl.IntegrationTests
                     {
                         mail = "UnitTest" + DateTime.Now + "@dasz.at";
                         k.EMails[0] = mail;
+                        ID = k.ID;
                         break;
                     }
                 }
@@ -152,7 +153,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
 
                 var result = kunde.EMails.SingleOrDefault(m => m == mail);
-                Assert.That(kunde.EMails.Count, Is.EqualTo(mailCount-1));
+                Assert.That(kunde.EMails.Count, Is.EqualTo(mailCount));
                 Assert.That(result, Is.Null);
             }
         }

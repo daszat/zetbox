@@ -233,7 +233,7 @@ namespace Kistl.API.Client
             if (!_objects.Contains(obj))
             {
                 _objects.Add(obj);
-                obj.ObjectState = DataObjectState.Unmodified;
+                ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
                 KistlContextDebugger.Changed(this);
             }
 
@@ -267,7 +267,7 @@ namespace Kistl.API.Client
             CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
             if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
-            obj.ObjectState = DataObjectState.Deleted;
+            ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Deleted;
             OnObjectDeleted(obj);
         }
 
@@ -336,7 +336,7 @@ namespace Kistl.API.Client
                 }
 
                 // Set to unmodified
-                obj.ObjectState = DataObjectState.Unmodified;
+                ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
 
                 changedObjects.Add(obj);
             }
