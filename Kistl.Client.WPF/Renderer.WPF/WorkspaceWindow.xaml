@@ -40,6 +40,7 @@
             Grid.Row="0" Grid.Column="0"
             >
             <Button Click="New_Click">New ...</Button>
+            <Button Click="Delete_Click">Delete</Button>
             <Button Click="Save_Click">Save</Button>
             <Button Click="SaveAndClose_Click">Save and Close</Button>
             <Button Click="AbortAndClose_Click">Abort and Close</Button>

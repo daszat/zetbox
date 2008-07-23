@@ -416,8 +416,23 @@ namespace Kistl.GUI
 
         private void SetLabels()
         {
-            Control.ShortLabel = Object.ToString(); // Object.GetType().Name;
-            Control.Description = String.Format("{0}: {1}", Object.GetType().Name, Object.ToString());
+            switch (Object.ObjectState)
+            {
+                case DataObjectState.New:
+                    Control.ShortLabel = String.Format("{0} (new)", Object.ToString());
+                    break;
+                case DataObjectState.Modified:
+                    Control.ShortLabel = String.Format("* {0}", Object.ToString());
+                    break;
+                case DataObjectState.Deleted:
+                    Control.ShortLabel = String.Format("// {0}", Object.ToString());
+                    break;
+                case DataObjectState.Unmodified:
+                default:
+                    Control.ShortLabel = String.Format("{0}", Object.ToString());
+                    break;
+            }
+            Control.Description = String.Format("{0}: {1} ({2})", Object.GetType().Name, Object.ToString(), Object.ObjectState);
             // TODO: Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
         }
@@ -461,6 +476,7 @@ namespace Kistl.GUI
             Control.UserSaveRequest += new EventHandler(Control_UserSaveRequest);
             Control.UserAbortRequest += new EventHandler(Control_UserAbortRequest);
             Control.UserNewObjectRequest += new EventHandler(Control_UserNewObjectRequest);
+            Control.UserDeleteObjectRequest += new EventHandler<GenericEventArgs<IDataObject>>(Control_UserDeleteObjectRequest);
         }
 
         #region Behaviours
@@ -496,6 +512,11 @@ namespace Kistl.GUI
             }
         }
 
+        private void OnDelete(IDataObject obj)
+        {
+            obj.Context.Delete(obj);
+        }
+
         #endregion
 
         #region Event Handlers
@@ -513,6 +534,11 @@ namespace Kistl.GUI
         void Control_UserNewObjectRequest(object sender, EventArgs e)
         {
             OnNew();
+        }
+
+        void Control_UserDeleteObjectRequest(object sender, GenericEventArgs<IDataObject> e)
+        {
+            OnDelete(e.Data);
         }
 
         #endregion

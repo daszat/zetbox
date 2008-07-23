@@ -113,6 +113,8 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
 
         public event EventHandler UserNewObjectRequest;
 
+        public event EventHandler<GenericEventArgs<IDataObject>> UserDeleteObjectRequest;
+
         #endregion
 
         #region IBasicControl Members

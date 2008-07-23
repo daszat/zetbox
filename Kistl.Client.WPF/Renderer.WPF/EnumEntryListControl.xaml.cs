@@ -29,32 +29,6 @@ namespace Kistl.GUI.Renderer.WPF
             InitializeComponent();
         }
 
-        #region Behaviours
-
-        protected void AddItem(EnumerationEntry item)
-        {
-            Values.Add(item);
-            OnUserChangedList(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, Values.Count - 1));
-        }
-
-        protected void RemoveItem(int idx)
-        {
-            EnumerationEntry oldItem = Values[idx];
-            Values.RemoveAt(idx);
-            OnUserChangedList(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, oldItem, idx));
-        }
-
-        protected virtual void OnUserChangedList(NotifyCollectionChangedEventArgs e)
-        {
-            if (UserChangedList != null)
-            {
-                UserChangedList(this, e);
-            }
-        }
-
-
-        #endregion
-
         #region Event Handlers
 
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e) {
@@ -84,17 +58,12 @@ namespace Kistl.GUI.Renderer.WPF
             get { return Values; }
         }
 
-        public ObservableCollection<EnumerationEntry> Values
+        public new ObservableCollection<EnumerationEntry> Values
         {
             get { return (ObservableCollection<EnumerationEntry>)GetValue(ValuesProperty); }
             set { SetValue(ValuesProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Values.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValuesProperty =
-            DependencyProperty.Register("Values", typeof(ObservableCollection<EnumerationEntry>), typeof(EnumEntryListControl), new PropertyMetadata());
-
-        public event NotifyCollectionChangedEventHandler UserChangedList;
         public event EventHandler<GenericEventArgs<IList<EnumerationEntry>>> UserActivatedSelection;
 
         #endregion

@@ -178,9 +178,14 @@ namespace Kistl.GUI
         event EventHandler UserAbortRequest;
 
         /// <summary>
-        /// Is fired when the user wants to create a new object. After choosing the 
+        /// Is fired when the user wants to create a new object
         /// </summary>
         event EventHandler UserNewObjectRequest;
+
+        /// <summary>
+        /// Is fired when the user wants to delete a specific object.
+        /// </summary>
+        event EventHandler<GenericEventArgs<IDataObject>> UserDeleteObjectRequest;
 
     }
 

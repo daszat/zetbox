@@ -58,6 +58,19 @@ namespace Kistl.GUI.Renderer.WPF
                 UserNewObjectRequest(this, e);
         }
 
+        protected virtual void OnDelete(RoutedEventArgs e)
+        {
+            CheckContext("OnDelete");
+            if (UserDeleteObjectRequest != null)
+            {
+                UserDeleteObjectRequest(this, new GenericEventArgs<Kistl.API.IDataObject>() { Data = ((IObjectControl)tabObjects.SelectedItem).Value });
+            }
+            else
+            {
+                throw new InvalidOperationException("Delete requested, but nobody is listening.");
+            }
+        }
+
         public void ShowObject(Kistl.API.IDataObject obj, IBasicControl ctrl)
         {
             if (ctrl == null)
@@ -168,6 +181,18 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OnDelete(e);
+            }
+            catch (Exception ex)
+            {
+                ClientHelper.HandleError(ex);
+            }
+        }
+
         #endregion
 
         #region Other Context Stuff
@@ -245,6 +270,7 @@ namespace Kistl.GUI.Renderer.WPF
         public event EventHandler UserSaveRequest;
         public event EventHandler UserAbortRequest;
         public event EventHandler UserNewObjectRequest;
+        public event EventHandler<GenericEventArgs<Kistl.API.IDataObject>> UserDeleteObjectRequest;
 
         #endregion
 
@@ -258,5 +284,8 @@ namespace Kistl.GUI.Renderer.WPF
         public IKistlContext Context { get { return _Context; } set { SetContext(value); } }
 
         #endregion
+
+
+
     }
 }
