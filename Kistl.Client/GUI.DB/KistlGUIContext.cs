@@ -65,7 +65,10 @@ namespace Kistl.GUI.DB
 
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
             if (controlType.IsGenericTypeDefinition)
-                controlType = controlType.MakeGenericType(new Type[] { v.Property.GetPropertyType() });
+                if (v.Property != null)
+                    controlType = controlType.MakeGenericType(new Type[] { v.Property.GetPropertyType() });
+                else if (v.Method != null)
+                    controlType = controlType.MakeGenericType(new Type[] { v.Method.Parameter.Single(p => p.IsReturnParameter).GetParameterType() });
 
             IPresenter result = (IPresenter)Activator.CreateInstance(controlType);
             result.InitializeComponent(obj, v, ctrl);
@@ -240,7 +243,7 @@ namespace Kistl.GUI.DB
             // non-property presenters
             new PresenterInfo() { Control = VisualType.Object, SourceType = typeof(IDataObject),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectPresenter" },
-            new PresenterInfo() { Control = VisualType.PropertyGroup, // TODO: SourceType = typeof(PropertyGroup),
+            new PresenterInfo() { Control = VisualType.PropertyGroup, SourceType = typeof(Kistl.GUI.GroupPresenter), // TODO: SourceType = typeof(PropertyGroup),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.GroupPresenter" },
 
             // property presenters
@@ -280,6 +283,10 @@ namespace Kistl.GUI.DB
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.EnumerationPresenter`1" },
             new PresenterInfo() { Control = VisualType.SimpleObjectList, SourceType = typeof(IList<EnumerationEntry>),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
+
+            new PresenterInfo() { Control = VisualType.String, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+
         });
 
     }

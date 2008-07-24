@@ -27,20 +27,40 @@ namespace Kistl.GUI.DB
 
         #region TODO: refactor into descendents of "Visual"? Or not, since those can be combined? More research neccessary
 
+        #region How data should be displayed
+
         /// <summary>
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
+        /// This needs ControlInfo.Container set
         public IList<Visual> Children { get; set; }
+
+        /////////////////////// -- OR -- ///////////////////////
+
+        /// <summary>
+        /// If there is a runtime-variable number of descendents, a template is needed to be able to 
+        /// create new Controls.
+        /// </summary>
+        /// This is currently unused(??) but should be used for Lists of SimpleObjects ???
+        public Template ItemTemplate { get; set; }
+
+        #endregion
+
+        #region Which data should be displayed
 
         /// <summary>
         /// The Property to display
         /// </summary>
         public BaseProperty Property { get; set; }
 
+        /////////////////////// -- OR -- ///////////////////////
+
         /// <summary>
-        /// The template to use for displaying a referenced Simple Object.
+        /// The Method whose result shall be displayed
         /// </summary>
-        public Template ItemTemplate { get; set; }
+        public Method Method { get; set; }
+
+        #endregion
 
         #endregion
 
@@ -49,7 +69,6 @@ namespace Kistl.GUI.DB
         /// </summary>
         /// Part of a Visitor&lt;BaseProperty&gt; pattern to create a Visual for a given BaseProperty
         /// <param name="p">the property to visualize</param>
-        /// <returns></returns>
         public static Visual CreateDefaultVisual(BaseProperty p)
         {
             if (p is BackReferenceProperty)
@@ -93,6 +112,36 @@ namespace Kistl.GUI.DB
                 throw new InvalidCastException(
                     String.Format("Found unknown Property Type, when trying to create Default Visual: {0}",
                         p.GetType()));
+            }
+        }
+
+        /// <summary>
+        /// Create the default Visual for a given Method
+        /// </summary>
+        /// <param name="p">the method to visualize</param>
+        public static Visual CreateDefaultVisual(Method method)
+        {
+            if (method == null)
+                throw new ArgumentNullException("m", "cannot create Visual for null Method");
+
+            BaseParameter bp = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
+
+            // ignore methods without return value for now
+            if (bp == null)
+                return null;
+
+            if (bp is StringParameter)
+            {
+                return new Visual()
+                {
+                    ControlType = VisualType.String,
+                    Description = "this control displays the results of calling a method a string",
+                    Method = method
+                };
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -198,7 +247,7 @@ namespace Kistl.GUI.DB
         private static Visual CreateVisual(BackReferenceProperty backReferenceProperty)
         {
             ObjectClass refClass = ClientHelper.ObjectClasses[backReferenceProperty.GetPropertyType()];
-            
+
             if (refClass != null && refClass.IsSimpleObject)
             {
                 return new Visual()

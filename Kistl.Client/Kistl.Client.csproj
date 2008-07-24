@@ -72,6 +72,7 @@
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GUI.DB\KistlGUIContext.cs" />
     <Compile Include="GUI\ControlInterfaces.cs" />
+    <Compile Include="GUI\MethodPresenter.cs" />
     <Compile Include="GUI\Presenter.cs" />
     <Compile Include="GUI\ReferencePresenters.cs" />
     <Compile Include="GUI\Renderer.BasicRenderer.cs" />

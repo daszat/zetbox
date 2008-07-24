@@ -74,25 +74,51 @@ namespace Kistl.GUI.Renderer
         /// <param name="obj"></param>
         /// <param name="visual"></param>
         /// <returns></returns>
+        // TODO: all this logic should probably go into the KistlGUIContext
         public object CreateControl(IDataObject obj, Visual visual)
         {
             var cInfo = KistlGUIContext.FindControlInfo(Platform, visual);
             PresenterInfo pInfo = null;
-            switch (visual.ControlType)
+            if (visual.Property != null)
             {
-                case VisualType.Object:
-                    pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IDataObject));
-                    break;
-                case VisualType.SimpleObjectList:
-                    if (visual.Property.GetType() == typeof(BackReferenceProperty)
-                        && visual.Property.GetPropertyType() == typeof(EnumerationEntry))
-                        pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IList<EnumerationEntry>));
-                    else
+                switch (visual.ControlType)
+                {
+                    case VisualType.SimpleObjectList:
+                        if (visual.Property.GetType() == typeof(BackReferenceProperty)
+                            && visual.Property.GetPropertyType() == typeof(EnumerationEntry))
+                            pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IList<EnumerationEntry>));
+                        else
+                            pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
+                        break;
+                    default:
                         pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
-                    break;
-                default:
-                    pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
-                    break;
+                        break;
+                }
+            }
+            else if (visual.Method != null)
+            {
+                switch (visual.ControlType)
+                {
+                    default:
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(Method));
+                        break;
+                }
+            }
+            else
+            {
+                switch (visual.ControlType)
+                {
+                    case VisualType.Object:
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IDataObject));
+                        break;
+                    case VisualType.PropertyGroup:
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(Kistl.GUI.GroupPresenter));
+                        break;
+                    default:
+                        // don't know how to handle this case => FAIL
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, null);
+                        break;
+                }
             }
 
 

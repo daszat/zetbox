@@ -27,23 +27,40 @@ namespace Kistl.GUI.DB
             {
                 DisplayName = objectType.Name,
                 Usage = TemplateUsage.EditControl,
-                Type = objectType
+                Type = objectType,
+                VisualTree = new Visual()
+                {
+                    ControlType = VisualType.Object,
+                    Description = "top level visual to display a object",
+                    Children = new List<Visual>()
+                }
             };
-            result.VisualTree = new Visual()
+
+            Visual methodResults = new Visual()
             {
-                ControlType = VisualType.Object,
-                Description = "top level visual to display a object",
+                ControlType = VisualType.PropertyGroup,
+                Description = "list of calculated results",
                 Children = new List<Visual>()
             };
+
             ObjectClass @class = ClientHelper.ObjectClasses[result.Type];
             while (@class != null)
             {
-                foreach (var p in @class.Properties)
+                foreach (BaseProperty p in @class.Properties)
                 {
                     result.VisualTree.Children.Add(Visual.CreateDefaultVisual(p));
                 }
+                foreach (Method m in @class.Methods)
+                {
+                    Visual v = Visual.CreateDefaultVisual(m);
+                    if (v != null)
+                        methodResults.Children.Add(v);
+                }
                 @class = @class.BaseObjectClass;
             }
+
+            result.VisualTree.Children.Add(methodResults);
+
             return result;
         }
 
