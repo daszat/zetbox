@@ -27,7 +27,7 @@ namespace Kistl.GUI
         private PropertyChangedEventHandler _Object_PropertyChanged = null;
         private EventHandler _Control_UserAddRequest = null;
         private NotifyCollectionChangedEventHandler _Control_UserChangedListEvent = null;
-        
+
         /// <summary>
         /// Override this to specify a conversion from the object's property to the value for the widget
         /// </summary>
@@ -288,13 +288,32 @@ namespace Kistl.GUI
         protected override void InitializeComponent()
         {
             Control.ObjectType = Property.ReferenceObjectClass.GetDataCLRType();
+            Object.Context.ObjectCreated += new GenericEventHandler<IPersistenceObject>(Context_ObjectCreated);
+            Object.Context.ObjectDeleted += new GenericEventHandler<IPersistenceObject>(Context_ObjectDeleted);
 
+            SetItemsSource();
+
+            base.InitializeComponent();
+        }
+
+        private void Context_ObjectDeleted(object sender, GenericEventArgs<IPersistenceObject> e)
+        {
+            if (Control.ObjectType.IsAssignableFrom(e.Data.GetType()))
+                SetItemsSource();
+        }
+
+        private void Context_ObjectCreated(object sender, GenericEventArgs<IPersistenceObject> e)
+        {
+            if (Control.ObjectType.IsAssignableFrom(e.Data.GetType()))
+                SetItemsSource();
+        }
+
+        private void SetItemsSource()
+        {
             // remember the objects that are sent to the object
             // to facilitate validity checking
             _Items = Object.Context.GetQuery<T>().ToList();
             Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
-
-            base.InitializeComponent();
         }
 
         /// <summary>
