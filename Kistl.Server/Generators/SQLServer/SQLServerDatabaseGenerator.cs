@@ -22,32 +22,32 @@ namespace Kistl.Server.Generators.SQLServer
         private SqlTransaction tx = null;
         private Kistl.API.IKistlContext ctx = null;
         private List<ObjectClass> objClassList = new List<ObjectClass>();
-        private List<BaseProperty> propList = new List<BaseProperty>();
 
         public void Generate(Kistl.API.IKistlContext ctx)
         {
             this.ctx = ctx;
 
+            int propCount = 0;
             // Preload all ObjectClasses and Properties to avoid Deadlocks
-            objClassList = (from c in ctx.GetQuery<ObjectClass>()
-                            select c).ToList();
+            objClassList = ctx.GetQuery<ObjectClass>().ToList();
             // Preload Properties
-            objClassList.ForEach(o => propList.AddRange(o.Properties.ToList()));
-            // Preload BaseClasses
+            objClassList.ForEach(o => propCount += o.Properties.Count);
+            // Touch BaseClasses
             objClassList.ForEach(o => { var tmp = o.BaseObjectClass; });
+            // Touch Modules
+            objClassList.ForEach(o => { var tmp = o.Module; });
 
 
             System.Diagnostics.Trace.TraceInformation("Checking {0} Tables with {1} Properties",
-                objClassList.Count(), propList.Count);
+                objClassList.Count, propCount);
 
             using (SqlConnection _db = new SqlConnection(Kistl.API.Configuration.KistlConfig.Current.Server.ConnectionString))
             {
                 db = _db;
                 db.Open();
-                // TODO: Transaktionen können jetzt nicht verwendet werden
-                // weil das EF einen Bug beim Laden von Referenzen hat.
-                // Wenn eine Referenz null ist, dann wird das Flag IsLoaded niemals auf True gesetzt
-                // was zu einem Leseversuch in der Datenbank führt.
+                // TODO: Geht leider doch nicht.
+                // Jetzt meckert er in der Applikation, dass bei einem Update nix geändert wurde oder so...
+                // d.H. r.Load() muss ausgelöst werden...
                 //using (SqlTransaction _tx = db.BeginTransaction())
                 {
                     //tx = _tx;
