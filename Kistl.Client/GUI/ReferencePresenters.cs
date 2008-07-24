@@ -62,10 +62,10 @@ namespace Kistl.GUI
         {
             Control.ObjectType = Property.GetDataCLRType();
 
-            // remember the objects that are sent to the object
-            // to facilitate validity checking
-            _Items = Object.Context.GetQuery<T>().ToList();
-            Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
+            Object.Context.ObjectCreated += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
+            Object.Context.ObjectDeleted += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
+
+            SetItemsSource();
 
             Control.ShortLabel = Property.PropertyName;
             Control.Description = Property.AltText;
@@ -102,6 +102,14 @@ namespace Kistl.GUI
             // Value is coming from object => always valid
             // TODO: validation framework might change this
             Control.IsValidValue = true;
+        }
+
+        private void SetItemsSource()
+        {
+            // remember the objects that are sent to the object
+            // to facilitate validity checking
+            _Items = Object.Context.GetQuery<T>().ToList();
+            Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
         }
 
         #endregion
@@ -214,6 +222,12 @@ namespace Kistl.GUI
             }
         }
 
+        private void Context_ObjectListChanged(object sender, GenericEventArgs<IPersistenceObject> e)
+        {
+            if (Control.ObjectType.IsAssignableFrom(e.Data.GetType()))
+                SetItemsSource();
+        }
+
         #endregion
 
         #region Disposal
@@ -288,21 +302,15 @@ namespace Kistl.GUI
         protected override void InitializeComponent()
         {
             Control.ObjectType = Property.ReferenceObjectClass.GetDataCLRType();
-            Object.Context.ObjectCreated += new GenericEventHandler<IPersistenceObject>(Context_ObjectCreated);
-            Object.Context.ObjectDeleted += new GenericEventHandler<IPersistenceObject>(Context_ObjectDeleted);
+            Object.Context.ObjectCreated += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
+            Object.Context.ObjectDeleted += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
 
             SetItemsSource();
 
             base.InitializeComponent();
         }
 
-        private void Context_ObjectDeleted(object sender, GenericEventArgs<IPersistenceObject> e)
-        {
-            if (Control.ObjectType.IsAssignableFrom(e.Data.GetType()))
-                SetItemsSource();
-        }
-
-        private void Context_ObjectCreated(object sender, GenericEventArgs<IPersistenceObject> e)
+        private void Context_ObjectListChanged(object sender, GenericEventArgs<IPersistenceObject> e)
         {
             if (Control.ObjectType.IsAssignableFrom(e.Data.GetType()))
                 SetItemsSource();
