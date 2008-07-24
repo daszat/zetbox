@@ -58,7 +58,7 @@ public partial class _Default : System.Web.UI.Page
                 int cID = Convert.ToInt32(n.Value);
                 var @class = ctx.Find<Kistl.App.Base.ObjectClass>(cID);
 
-                repItems.DataSource = ctx.GetQuery(@class.GetDataCLRType());
+                repItems.DataSource = ctx.GetQuery(@class.GetDataType());
                 repItems.DataBind();
             }
         }

@@ -48,19 +48,9 @@ namespace Kistl.Server
             return null;
         }
 
-        public static Type GetDataCLRType(this DataType type)
-        {
-            return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Server", true);
-        }
-
-        public static Type GetDataCLRType(this ObjectReferenceProperty p)
-        {
-            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Server", true);
-        }
-
-        public static Type GetDataCLRType(this BackReferenceProperty p)
-        {
-            return Type.GetType(p.GetDataType() + ", Kistl.Objects.Server", true);
-        }
+        //public static Type GetDataCLRType(this DataType type)
+        //{
+        //    return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Server", true);
+        //}
     }
 }

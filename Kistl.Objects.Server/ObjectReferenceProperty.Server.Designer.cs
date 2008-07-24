@@ -76,9 +76,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<ObjectReferenceProperty> OnPostSave_ObjectReferenceProperty;
         
-        public event GetDataType_Handler<ObjectReferenceProperty> OnGetDataType_ObjectReferenceProperty;
+        public event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
         
         public event GetGUIRepresentation_Handler<ObjectReferenceProperty> OnGetGUIRepresentation_ObjectReferenceProperty;
+        
+        public event GetPropertyType_Handler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -109,13 +111,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_ObjectReferenceProperty != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
             {
-                OnGetDataType_ObjectReferenceProperty(this, e);
+                OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
             };
             return e.Result;
         }
@@ -127,6 +129,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_ObjectReferenceProperty != null)
             {
                 OnGetGUIRepresentation_ObjectReferenceProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_ObjectReferenceProperty != null)
+            {
+                OnGetPropertyType_ObjectReferenceProperty(this, e);
             };
             return e.Result;
         }

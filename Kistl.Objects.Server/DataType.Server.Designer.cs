@@ -184,6 +184,10 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<DataType> OnPostSave_DataType;
         
+        public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
+        
+        public event GetDataType_Handler<DataType> OnGetDataType_DataType;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -213,6 +217,26 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
+        public virtual string GetDataTypeString()
+        {
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
+            if (OnGetDataTypeString_DataType != null)
+            {
+                OnGetDataTypeString_DataType(this, e);
+            };
+            return e.Result;
+        }
+        
+        public virtual System.Type GetDataType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            if (OnGetDataType_DataType != null)
+            {
+                OnGetDataType_DataType(this, e);
+            };
+            return e.Result;
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -231,5 +255,9 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._ClassName, sr);
             BinarySerializer.FromBinary(out this._fk_DefaultIcon, sr);
         }
+        
+        public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        
+        public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
     }
 }

@@ -644,7 +644,7 @@ namespace Kistl.Server.Generators
             // Properties
             foreach (BaseProperty p in current.@interface.Properties)
             {
-                CreateProperty(current.code_class, p.GetDataType(), p.PropertyName);
+                CreateProperty(current.code_class, p.GetPropertyTypeString(), p.PropertyName);
             }
 
             // Methods
@@ -652,12 +652,12 @@ namespace Kistl.Server.Generators
             {
                 BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
                 CodeMemberMethod m = CreateMethod(current.code_class, method.MethodName,
-                    returnParam != null ? new CodeTypeReference(returnParam.GetDataType()) : new CodeTypeReference(typeof(void)));
+                    returnParam != null ? new CodeTypeReference(returnParam.GetParameterTypeString()) : new CodeTypeReference(typeof(void)));
 
                 foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
                 {
                     m.Parameters.Add(new CodeParameterDeclarationExpression(
-                        new CodeTypeReference(param.GetDataType()), param.ParameterName));
+                        new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
                 }
             }
 
@@ -734,8 +734,8 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_ValueTypePropertyInternal(CurrentObjectClass current)
         {
-            if (string.IsNullOrEmpty(current.property.GetDataType())) throw new ApplicationException(
-                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
+            if (string.IsNullOrEmpty(current.property.GetPropertyTypeString())) throw new ApplicationException(
+                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetPropertyTypeString()",
                      current.objClass.ClassName, current.property.PropertyName));
 
             bool isValueType;
@@ -745,15 +745,15 @@ namespace Kistl.Server.Generators
             }
             else
             {
-                Type t = Type.GetType(current.property.GetDataType());
+                Type t = Type.GetType(current.property.GetPropertyTypeString());
                 if (t == null) throw new ApplicationException(
                      string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
-                         current.objClass.ClassName, current.property.PropertyName, current.property.GetDataType()));
+                         current.objClass.ClassName, current.property.PropertyName, current.property.GetPropertyTypeString()));
 
                 isValueType = t.IsValueType;
             }
 
-            current.code_field = CreateField(current.code_class, current.property.GetDataType() + ((isValueType && ((ValueTypeProperty)current.property).IsNullable) ? "?" : ""),
+            current.code_field = CreateField(current.code_class, current.property.GetPropertyTypeString() + ((isValueType && ((ValueTypeProperty)current.property).IsNullable) ? "?" : ""),
                 "_" + current.property.PropertyName);
 
             current.code_property = CreateProperty(current.code_class, current.code_field.Type, current.property.PropertyName);
@@ -780,14 +780,14 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_ValueTypeProperty_CollectionInternal(CurrentObjectClass current)
         {
-            if (string.IsNullOrEmpty(current.property.GetDataType())) throw new ApplicationException(
-                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
+            if (string.IsNullOrEmpty(current.property.GetPropertyTypeString())) throw new ApplicationException(
+                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetPropertyTypeString()",
                      current.objClass.ClassName, current.property.PropertyName));
 
-            Type t = Type.GetType(current.property.GetDataType());
+            Type t = Type.GetType(current.property.GetPropertyTypeString());
             if (t == null) throw new ApplicationException(
                  string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
-                     current.objClass.ClassName, current.property.PropertyName, current.property.GetDataType()));
+                     current.objClass.ClassName, current.property.PropertyName, current.property.GetPropertyTypeString()));
 
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
@@ -796,7 +796,7 @@ namespace Kistl.Server.Generators
             if (current.clientServer == ClientServerEnum.Client)
             {
                 collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
-                    current.property.GetDataType(), current.code_class.Name));
+                    current.property.GetPropertyTypeString(), current.code_class.Name));
                 collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
             }
 
@@ -805,7 +805,7 @@ namespace Kistl.Server.Generators
 
             // Create Property
             collectionClass.code_field = CreateField(collectionClass.code_class,
-               current.property.GetDataType() + ((t.IsValueType && ((ValueTypeProperty)current.property).IsNullable) ? "?" : ""), "_Value");
+               current.property.GetPropertyTypeString() + ((t.IsValueType && ((ValueTypeProperty)current.property).IsNullable) ? "?" : ""), "_Value");
 
             collectionClass.code_property = CreateProperty(collectionClass.code_class, collectionClass.code_field.Type, "Value");
 
@@ -849,14 +849,14 @@ namespace Kistl.Server.Generators
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetDataType()));
+                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
 
                 current.code_field = CreateField(current.code_class,
                     string.Format("ListPropertyCollection<{0}, {1}, {2}>",
-                        current.property.GetDataType(),
+                        current.property.GetPropertyTypeString(),
                         current.code_class.Name,
                         collectionClass.code_class.Name),
                     string.Format(@"_{0}", current.property.PropertyName));
@@ -864,7 +864,7 @@ namespace Kistl.Server.Generators
                 current.code_constructor.Statements.Add(new CodeSnippetExpression(
                     string.Format(@"_{0} = new ListPropertyCollection<{1}, {2}, {3}>(this, ""{0}"")",
                         current.property.PropertyName,
-                        current.property.GetDataType(),
+                        current.property.GetPropertyTypeString(),
                         current.code_class.Name,
                         collectionClass.code_class.Name)));
             }
@@ -915,11 +915,11 @@ namespace Kistl.Server.Generators
         private void GenerateProperties_ObjectReferencePropertyInternal(CurrentObjectClass current)
         {
             // Check if Datatype exits
-            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
+            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetPropertyTypeString()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
-                    current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
+                    current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
 
-            current.code_property = CreateProperty(current.code_class, current.property.GetDataType(), current.property.PropertyName);
+            current.code_property = CreateProperty(current.code_class, current.property.GetPropertyTypeString(), current.property.PropertyName);
             current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
             if (current.clientServer == ClientServerEnum.Client)
@@ -927,7 +927,7 @@ namespace Kistl.Server.Generators
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"if (fk_{1} == null) return null;
-                return Context.Find<{0}>(fk_{1}.Value)", current.property.GetDataType(), current.property.PropertyName)));
+                return Context.Find<{0}>(fk_{1}.Value)", current.property.GetPropertyTypeString(), current.property.PropertyName)));
 
                 current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
@@ -963,14 +963,14 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_ObjectReferenceProperty_CollectionInternal(CurrentObjectClass current)
         {
-            if (string.IsNullOrEmpty(current.property.GetDataType())) throw new ApplicationException(
-                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetDataType()",
+            if (string.IsNullOrEmpty(current.property.GetPropertyTypeString())) throw new ApplicationException(
+                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetPropertyTypeString()",
                      current.objClass.ClassName, current.property.PropertyName));
 
             // Check if Datatype exits
-            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
+            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetPropertyTypeString()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
-                    current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
+                    current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
 
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
@@ -979,7 +979,7 @@ namespace Kistl.Server.Generators
             if (current.clientServer == ClientServerEnum.Client)
             {
                 collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
-                    current.property.GetDataType(), current.code_class.Name));
+                    current.property.GetPropertyTypeString(), current.code_class.Name));
                 collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
             }
 
@@ -987,7 +987,7 @@ namespace Kistl.Server.Generators
             GenerateDefaultProperty_IDInternal((CurrentObjectClass)collectionClass.Clone());
 
             // Create Value
-            collectionClass.code_property = CreateProperty(collectionClass.code_class, collectionClass.property.GetDataType(), "Value");
+            collectionClass.code_property = CreateProperty(collectionClass.code_class, collectionClass.property.GetPropertyTypeString(), "Value");
             collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
             // Create Parent
@@ -1014,14 +1014,14 @@ namespace Kistl.Server.Generators
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetDataType()));
+                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
 
                 current.code_property.GetStatements.Add(
                     new CodeSnippetExpression(string.Format(@"return _{0}", current.property.PropertyName)));
 
                 current.code_field = CreateField(current.code_class,
                     string.Format("ListPropertyCollection<{0}, {1}, {2}>",
-                        current.property.GetDataType(),
+                        current.property.GetPropertyTypeString(),
                         current.code_class.Name,
                         collectionClass.code_class.Name),
                     string.Format(@"_{0}", current.property.PropertyName));
@@ -1029,7 +1029,7 @@ namespace Kistl.Server.Generators
                 current.code_constructor.Statements.Add(new CodeSnippetExpression(
                     string.Format(@"_{0} = new ListPropertyCollection<{1}, {2}, {3}>(this, ""{0}"")",
                         current.property.PropertyName,
-                        current.property.GetDataType(),
+                        current.property.GetPropertyTypeString(),
                         current.code_class.Name,
                         collectionClass.code_class.Name)));
             }
@@ -1039,7 +1039,7 @@ namespace Kistl.Server.Generators
             {
                 collectionClass.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
-                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", current.property.GetDataType())));
+                        string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", current.property.GetPropertyTypeString())));
                 collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"fk_Value = value.ID;"));
 
                 parent.code_property.GetStatements.Add(
@@ -1106,16 +1106,16 @@ namespace Kistl.Server.Generators
         private void GenerateProperties_BackReferencePropertyInternal(CurrentObjectClass current)
         {
             // Check if Datatype exits
-            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetDataType()) == null)
+            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetPropertyTypeString()) == null)
                 throw new ApplicationException(string.Format("ObjectReference {0} not found on BackReferenceProperty {1}.{2}",
-                    current.property.GetDataType(), current.objClass.ClassName, current.property.PropertyName));
+                    current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
 
             current.code_property = CreateProperty(current.code_class, (CodeTypeReference)null, current.property.PropertyName, false);
             current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                TypeMoniker childType = new TypeMoniker(current.property.GetDataType());
+                TypeMoniker childType = new TypeMoniker(current.property.GetPropertyTypeString());
                 current.code_property.Type = new CodeTypeReference("IList", new CodeTypeReference(childType.NameDataObject));
 
                 current.code_property.GetStatements.Add(
@@ -1309,7 +1309,7 @@ namespace Kistl.Server.Generators
                 foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
                 {
                     // Create a new List after Attach - Object Reference will change, if Object is alredy in tha Context
-                    //m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, _{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetDataType(), p.ReferenceProperty.PropertyName)));
+                    //m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, _{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetPropertyTypeString(), p.ReferenceProperty.PropertyName)));
                     m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0}.AttachToContext(ctx)", p.PropertyName)));
                 }
             }
@@ -1368,14 +1368,14 @@ namespace Kistl.Server.Generators
                         if (returnParam != null)
                         {
                             d.Parameters.Add(new CodeParameterDeclarationExpression(
-                                new CodeTypeReference("MethodReturnEventArgs", new CodeTypeReference(returnParam.GetDataType())),
+                                new CodeTypeReference("MethodReturnEventArgs", new CodeTypeReference(returnParam.GetParameterTypeString())),
                                 "e"));
                         }
 
                         foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
                         {
                             d.Parameters.Add(new CodeParameterDeclarationExpression(
-                                new CodeTypeReference(param.GetDataType()), param.ParameterName));
+                                new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
                         }
                     }
 
@@ -1396,7 +1396,7 @@ namespace Kistl.Server.Generators
 
                     if (returnParam != null)
                     {
-                        m.ReturnType = new CodeTypeReference(returnParam.GetDataType());
+                        m.ReturnType = new CodeTypeReference(returnParam.GetParameterTypeString());
                     }
                     else
                     {
@@ -1408,13 +1408,13 @@ namespace Kistl.Server.Generators
                     foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
                     {
                         m.Parameters.Add(new CodeParameterDeclarationExpression(
-                            new CodeTypeReference(param.GetDataType()), param.ParameterName));
+                            new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
                         methodCallParameter.AppendFormat(", {0}", param.ParameterName);
                     }
 
                     if (returnParam != null)
                     {
-                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<{0}> e = new MethodReturnEventArgs<{0}>()", returnParam.GetDataType())));
+                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<{0}> e = new MethodReturnEventArgs<{0}>()", returnParam.GetParameterTypeString())));
                     }
 
                     if (objClass != baseObjClass)
@@ -1512,7 +1512,7 @@ namespace Kistl.Server.Generators
                  * else if (p is EnumerationProperty)
                 {
                     m.Statements.Add(new CodeSnippetExpression(string.Format("Enum tmp{0}; BinarySerializer.FromBinary(out tmp{0}, sr); _{0} = ({1})tmp{0}", 
-                        p.PropertyName, p.GetDataType() + (((EnumerationProperty)p).IsNullable ? "?" : ""))));
+                        p.PropertyName, p.GetPropertyTypeString() + (((EnumerationProperty)p).IsNullable ? "?" : ""))));
                 }*/
                 else if (p is ValueTypeProperty)
                 {
@@ -1535,7 +1535,7 @@ namespace Kistl.Server.Generators
                 {
                     m.Statements.Add(new CodeSnippetExpression(
                         string.Format("this._{0} = new BackReferenceCollection<{1}>(\"{2}\", this); BinarySerializer.FromBinary(this._{0}, sr)",
-                            p.PropertyName, p.GetDataType(),
+                            p.PropertyName, p.GetPropertyTypeString(),
                             ((BackReferenceProperty)p).ReferenceProperty.PropertyName)));
                 }
             }

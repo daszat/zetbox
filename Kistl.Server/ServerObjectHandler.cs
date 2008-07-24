@@ -269,9 +269,9 @@ namespace Kistl.Server
 
                             if (fk != null)
                             {
-                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
+                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetPropertyType());
                                 IDataObject other = so.GetObject(fk.Value);
-                                if (other == null) throw new InvalidOperationException(string.Format("UpdateRelationships: Cannot find Object {0}:{1}", p.GetDataCLRType().FullName, fk));
+                                if (other == null) throw new InvalidOperationException(string.Format("UpdateRelationships: Cannot find Object {0}:{1}", p.GetPropertyType().FullName, fk));
                                 obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
                             }
                             else
@@ -286,7 +286,7 @@ namespace Kistl.Server
                             {
                                 int fk = ce.GetPrivateFieldValue<int>("_fk_Value");
 
-                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetDataCLRType());
+                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetPropertyType());
                                 IDataObject other = so.GetObject(fk);
                                 ce.SetPropertyValue<IDataObject>("Value", other);
                             }

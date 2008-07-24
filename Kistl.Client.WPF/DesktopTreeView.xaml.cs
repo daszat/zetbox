@@ -156,7 +156,7 @@ namespace Kistl.Client.WPF
                     _InstancesNodes.Clear();
                     if (ObjectClass is Kistl.App.Base.ObjectClass)
                     {
-                        ObjectClass.Context.GetQuery(ObjectClass.GetDataCLRType()).ToList()
+                        ObjectClass.Context.GetQuery(ObjectClass.GetDataType()).ToList()
                             .ForEach(i => _InstancesNodes.Add(new InstanceNode(i)));
                     }
                 }
@@ -203,7 +203,7 @@ namespace Kistl.Client.WPF
                 if (treeView.SelectedItem is ObjectClassNode)
                 {
                     n = (ObjectClassNode)treeView.SelectedItem;
-                    resultObjectType = ((ObjectClassNode)n).ObjectClass.GetDataCLRType();
+                    resultObjectType = ((ObjectClassNode)n).ObjectClass.GetDataType();
                     Kistl.App.Base.ObjectClass objClass = ClientHelper.ObjectClasses[resultObjectType];
 
                     if (objClass.SubClasses.Count > 0)
@@ -214,7 +214,7 @@ namespace Kistl.Client.WPF
 
                         if (dlg.ShowDialog() == true)
                         {
-                            resultObjectType = ((Kistl.App.Base.ObjectClass)dlg.Result).GetDataCLRType();
+                            resultObjectType = ((Kistl.App.Base.ObjectClass)dlg.Result).GetDataType();
                         }
                         else
                         {

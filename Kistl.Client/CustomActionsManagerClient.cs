@@ -66,71 +66,94 @@ namespace Kistl.Client
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        /// Prepare Methods
+                        // Prepare Modules
+                        List<Kistl.App.Base.Module> moduleList = ctx.GetQuery<Kistl.App.Base.Module>().ToList();
+
+                        // Prepare ObjectClasses
+                        List<Kistl.App.Base.ObjectClass> classList = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+
+                        // Prepare Methods
                         List<Method> mList = ctx.GetQuery<Method>().ToList();
 
-                        /// Prepare Assemblies
+                        // Prepare Assemblies
                         List<Kistl.App.Base.Assembly> aList = ctx.GetQuery<Kistl.App.Base.Assembly>().ToList();
 
                         StringBuilder warnings = new StringBuilder();
 
-                        foreach (ObjectClass baseObjClass in ClientHelper.ObjectClasses.Values)
+                        foreach (ObjectClass baseObjClass in classList)
                         {
-                            Type objType = baseObjClass.GetDataCLRType();
-                            foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
+                            try
                             {
-                                foreach (MethodInvocation mi in objClass.MethodIvokations)
+                                // baseObjClass.GetDataType(); is not possible here, because this
+                                // Method is currently attaching
+                                Type objType = Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + ", Kistl.Objects.Client");
+                                if (objType == null)
                                 {
-                                    try
+                                    warnings.AppendLine(string.Format("DataType '{0}, Kistl.Objects.Client' not found", baseObjClass.Module.Namespace + "." + baseObjClass.ClassName));
+                                    continue;
+                                }
+                                foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
+                                {
+                                    foreach (MethodInvocation mi in objClass.MethodIvokations)
                                     {
-                                        if (!mi.Assembly.IsClientAssembly) continue;
-
-                                        Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
-                                        if (t == null)
+                                        try
                                         {
-                                            warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.FullTypeName, mi.Assembly.AssemblyName));
-                                            continue;
-                                        }
+                                            if (!mi.Assembly.IsClientAssembly) continue;
 
-                                        MethodInfo clrMethod = t.GetMethod(mi.MemberName);
-                                        if (clrMethod == null)
+                                            Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
+                                            if (t == null)
+                                            {
+                                                warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.FullTypeName, mi.Assembly.AssemblyName));
+                                                continue;
+                                            }
+
+                                            MethodInfo clrMethod = t.GetMethod(mi.MemberName);
+                                            if (clrMethod == null)
+                                            {
+                                                warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", mi.MemberName));
+                                                continue;
+                                            }
+
+                                            EventInfo ei = objType.GetEvent(
+                                                "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
+
+                                            if (ei == null)
+                                            {
+                                                warnings.AppendLine(string.Format("Warning: CLR Event On{0}_{1} not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
+                                                continue;
+                                            }
+
+                                            InvokeInfo ii = new InvokeInfo();
+                                            ii.CLRMethod = clrMethod;
+                                            ii.Instance = Activator.CreateInstance(t);
+                                            ii.CLREvent = ei;
+
+                                            if (!customAction.ContainsKey(objType))
+                                            {
+                                                customAction.Add(objType, new List<InvokeInfo>());
+                                            }
+                                            customAction[objType].Add(ii);
+                                        }
+                                        catch (Exception ex)
                                         {
-                                            warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", mi.MemberName));
-                                            continue;
+                                            warnings.AppendLine(ex.Message);
                                         }
-
-                                        EventInfo ei = objType.GetEvent(
-                                            "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
-
-                                        if (ei == null)
-                                        {
-                                            warnings.AppendLine(string.Format("Warning: CLR Event On{0}_{1} not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
-                                            continue;
-                                        }
-
-                                        InvokeInfo ii = new InvokeInfo();
-                                        ii.CLRMethod = clrMethod;
-                                        ii.Instance = Activator.CreateInstance(t);
-                                        ii.CLREvent = ei;
-
-                                        if (!customAction.ContainsKey(objType))
-                                        {
-                                            customAction.Add(objType, new List<InvokeInfo>());
-                                        }
-                                        customAction[objType].Add(ii);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        ClientHelper.HandleError(ex);
-                                        return;
                                     }
                                 }
+                            }
+                            catch (Exception ex)
+                            {
+                                warnings.AppendLine(ex.Message);
                             }
                         }
 
                         if (warnings.Length > 0)
                         {
-                            Manager.Renderer.ShowMessage(warnings.ToString());
+                            System.Diagnostics.Debug.WriteLine(warnings.ToString());
+                            if (Manager.Renderer != null)
+                            {
+                                Manager.Renderer.ShowMessage(warnings.ToString());
+                            }
                         }
                     }
                 }

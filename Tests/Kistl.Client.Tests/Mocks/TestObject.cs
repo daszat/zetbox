@@ -23,11 +23,11 @@ namespace Kistl.Client.Mocks
             TestObjectList = new List<TestObject>();
 
             TestObjectListDescriptor.AttachToContext(MainSetUp.MockContext);
-            TestObjectListDescriptor.OnGetDataType_ObjectReferenceProperty += new BaseProperty.GetDataType_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
+            TestObjectListDescriptor.OnGetPropertyTypeString_ObjectReferenceProperty += new BaseProperty.GetPropertyTypeString_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
             TestObjectReferenceDescriptor.AttachToContext(MainSetUp.MockContext);
-            TestObjectReferenceDescriptor.OnGetDataType_ObjectReferenceProperty += new BaseProperty.GetDataType_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
+            TestObjectReferenceDescriptor.OnGetPropertyTypeString_ObjectReferenceProperty += new BaseProperty.GetPropertyTypeString_Handler<ObjectReferenceProperty>(OnGetDataType_Mock);
             TestBackReferenceDescriptor.AttachToContext(MainSetUp.MockContext);
-            TestBackReferenceDescriptor.OnGetDataType_BackReferenceProperty += new BaseProperty.GetDataType_Handler<BackReferenceProperty>(OnGetDataType_MockBackReference);
+            TestBackReferenceDescriptor.OnGetPropertyTypeString_BackReferenceProperty += new BaseProperty.GetPropertyTypeString_Handler<BackReferenceProperty>(OnGetDataType_MockBackReference);
         }
 
         private static void OnGetDataType_Mock(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
@@ -489,7 +489,7 @@ namespace Kistl.Client.Mocks
     internal class MockObjectReferenceProperty : ObjectReferenceProperty
     {
 
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             return "Kistl.Client.Mocks.MockObjectReferenceProperty";
         }
@@ -504,7 +504,7 @@ namespace Kistl.Client.Mocks
     internal class MockBackReferenceProperty : BackReferenceProperty
     {
 
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             return "Kistl.Client.Mocks.MockBackReferenceProperty";
         }

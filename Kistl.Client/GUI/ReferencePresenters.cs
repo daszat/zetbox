@@ -60,7 +60,7 @@ namespace Kistl.GUI
         /// </summary>
         protected override void InitializeComponent()
         {
-            Control.ObjectType = Property.GetDataCLRType();
+            Control.ObjectType = Property.GetPropertyType(); // GetDataCLRType();
 
             Object.Context.ObjectCreated += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
             Object.Context.ObjectDeleted += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
@@ -301,7 +301,7 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ObjectType = Property.ReferenceObjectClass.GetDataCLRType();
+            Control.ObjectType = Property.ReferenceObjectClass.GetDataType();
             Object.Context.ObjectCreated += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
             Object.Context.ObjectDeleted += new GenericEventHandler<IPersistenceObject>(Context_ObjectListChanged);
 

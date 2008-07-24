@@ -85,7 +85,7 @@ namespace Kistl.GUI.Renderer
                     break;
                 case VisualType.SimpleObjectList:
                     if (visual.Property.GetType() == typeof(BackReferenceProperty)
-                        && visual.Property.GetDataCLRType() == typeof(EnumerationEntry))
+                        && visual.Property.GetPropertyType() == typeof(EnumerationEntry))
                         pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IList<EnumerationEntry>));
                     else
                         pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());

@@ -38,7 +38,9 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<DateTimeParameter> OnPostSave_DateTimeParameter;
         
-        public event GetDataType_Handler<DateTimeParameter> OnGetDataType_DateTimeParameter;
+        public event GetParameterTypeString_Handler<DateTimeParameter> OnGetParameterTypeString_DateTimeParameter;
+        
+        public event GetParameterType_Handler<DateTimeParameter> OnGetParameterType_DateTimeParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -69,13 +71,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetParameterTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_DateTimeParameter != null)
+            e.Result = base.GetParameterTypeString();
+            if (OnGetParameterTypeString_DateTimeParameter != null)
             {
-                OnGetDataType_DateTimeParameter(this, e);
+                OnGetParameterTypeString_DateTimeParameter(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetParameterType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetParameterType();
+            if (OnGetParameterType_DateTimeParameter != null)
+            {
+                OnGetParameterType_DateTimeParameter(this, e);
             };
             return e.Result;
         }

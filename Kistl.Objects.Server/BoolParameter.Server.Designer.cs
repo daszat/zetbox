@@ -38,7 +38,9 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<BoolParameter> OnPostSave_BoolParameter;
         
-        public event GetDataType_Handler<BoolParameter> OnGetDataType_BoolParameter;
+        public event GetParameterTypeString_Handler<BoolParameter> OnGetParameterTypeString_BoolParameter;
+        
+        public event GetParameterType_Handler<BoolParameter> OnGetParameterType_BoolParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -69,13 +71,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetParameterTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_BoolParameter != null)
+            e.Result = base.GetParameterTypeString();
+            if (OnGetParameterTypeString_BoolParameter != null)
             {
-                OnGetDataType_BoolParameter(this, e);
+                OnGetParameterTypeString_BoolParameter(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetParameterType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetParameterType();
+            if (OnGetParameterType_BoolParameter != null)
+            {
+                OnGetParameterType_BoolParameter(this, e);
             };
             return e.Result;
         }

@@ -106,8 +106,8 @@ namespace Kistl.Client.WPF.Dialogs
                 if (coc.ShowDialog() == true)
                     oc = ((ObjectClass)coc.Result) ?? oc;
             }
-            
-            Result = Context.Create(oc.GetDataCLRType());
+
+            Result = Context.Create(oc.GetDataType());
             Manager.Renderer.ShowObject(Result);
             DialogResult = true;
             this.Close();

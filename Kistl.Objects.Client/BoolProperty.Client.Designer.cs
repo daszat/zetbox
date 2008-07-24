@@ -37,9 +37,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<BoolProperty> OnPostSave_BoolProperty;
         
-        public event GetDataType_Handler<BoolProperty> OnGetDataType_BoolProperty;
+        public event GetPropertyTypeString_Handler<BoolProperty> OnGetPropertyTypeString_BoolProperty;
         
         public event GetGUIRepresentation_Handler<BoolProperty> OnGetGUIRepresentation_BoolProperty;
+        
+        public event GetPropertyType_Handler<BoolProperty> OnGetPropertyType_BoolProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -75,13 +77,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_BoolProperty != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_BoolProperty != null)
             {
-                OnGetDataType_BoolProperty(this, e);
+                OnGetPropertyTypeString_BoolProperty(this, e);
             };
             return e.Result;
         }
@@ -93,6 +95,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_BoolProperty != null)
             {
                 OnGetGUIRepresentation_BoolProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_BoolProperty != null)
+            {
+                OnGetPropertyType_BoolProperty(this, e);
             };
             return e.Result;
         }

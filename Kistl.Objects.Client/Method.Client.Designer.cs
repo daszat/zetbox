@@ -37,6 +37,8 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.BaseParameter> _Parameter;
         
+        private bool _IsDisplayable;
+        
         public Method()
         {
         }
@@ -160,6 +162,23 @@ namespace Kistl.App.Base
             }
         }
         
+        public bool IsDisplayable
+        {
+            get
+            {
+                return _IsDisplayable;
+            }
+            set
+            {
+                if(_IsDisplayable != value)
+                {
+                    NotifyPropertyChanging("IsDisplayable"); 
+                    _IsDisplayable = value; 
+                    NotifyPropertyChanged("IsDisplayable");
+                };
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -198,6 +217,7 @@ namespace Kistl.App.Base
             ((Method)obj).fk_Module = this.fk_Module;
             if(this._MethodIvokations != null) this._MethodIvokations.ApplyChanges(((Method)obj)._MethodIvokations); else ((Method)obj)._MethodIvokations = null; ((Method)obj).NotifyPropertyChanged("MethodIvokations");
             if(this._Parameter != null) this._Parameter.ApplyChanges(((Method)obj)._Parameter); else ((Method)obj)._Parameter = null; ((Method)obj).NotifyPropertyChanged("Parameter");
+            ((Method)obj).IsDisplayable = this.IsDisplayable;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -213,6 +233,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_ObjectClass, sw);
             BinarySerializer.ToBinary(this._MethodName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
+            BinarySerializer.ToBinary(this._IsDisplayable, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -222,6 +243,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._MethodName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             this._Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>("Method", this); BinarySerializer.FromBinary(this._Parameter, sr);
+            BinarySerializer.FromBinary(out this._IsDisplayable, sr);
         }
     }
 }

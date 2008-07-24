@@ -141,9 +141,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<BaseProperty> OnPostSave_BaseProperty;
         
-        public event GetDataType_Handler<BaseProperty> OnGetDataType_BaseProperty;
+        public event GetPropertyTypeString_Handler<BaseProperty> OnGetPropertyTypeString_BaseProperty;
         
         public event GetGUIRepresentation_Handler<BaseProperty> OnGetGUIRepresentation_BaseProperty;
+        
+        public event GetPropertyType_Handler<BaseProperty> OnGetPropertyType_BaseProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -183,12 +185,12 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public virtual string GetDataType()
+        public virtual string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            if (OnGetDataType_BaseProperty != null)
+            if (OnGetPropertyTypeString_BaseProperty != null)
             {
-                OnGetDataType_BaseProperty(this, e);
+                OnGetPropertyTypeString_BaseProperty(this, e);
             };
             return e.Result;
         }
@@ -199,6 +201,16 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_BaseProperty != null)
             {
                 OnGetGUIRepresentation_BaseProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public virtual System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            if (OnGetPropertyType_BaseProperty != null)
+            {
+                OnGetPropertyType_BaseProperty(this, e);
             };
             return e.Result;
         }
@@ -221,8 +233,10 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Module, sr);
         }
         
-        public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);
         
         public delegate void GetGUIRepresentation_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        
+        public delegate void GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
     }
 }

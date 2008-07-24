@@ -37,6 +37,10 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<Interface> OnPostSave_Interface;
         
+        public event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;
+        
+        public event GetDataType_Handler<Interface> OnGetDataType_Interface;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -69,6 +73,28 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
+        }
+        
+        public override string GetDataTypeString()
+        {
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
+            e.Result = base.GetDataTypeString();
+            if (OnGetDataTypeString_Interface != null)
+            {
+                OnGetDataTypeString_Interface(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetDataType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_Interface != null)
+            {
+                OnGetDataType_Interface(this, e);
+            };
+            return e.Result;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

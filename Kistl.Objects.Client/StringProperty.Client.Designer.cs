@@ -56,9 +56,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<StringProperty> OnPostSave_StringProperty;
         
-        public event GetDataType_Handler<StringProperty> OnGetDataType_StringProperty;
+        public event GetPropertyTypeString_Handler<StringProperty> OnGetPropertyTypeString_StringProperty;
         
         public event GetGUIRepresentation_Handler<StringProperty> OnGetGUIRepresentation_StringProperty;
+        
+        public event GetPropertyType_Handler<StringProperty> OnGetPropertyType_StringProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -95,13 +97,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_StringProperty != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_StringProperty != null)
             {
-                OnGetDataType_StringProperty(this, e);
+                OnGetPropertyTypeString_StringProperty(this, e);
             };
             return e.Result;
         }
@@ -113,6 +115,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_StringProperty != null)
             {
                 OnGetGUIRepresentation_StringProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_StringProperty != null)
+            {
+                OnGetPropertyType_StringProperty(this, e);
             };
             return e.Result;
         }

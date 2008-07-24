@@ -75,9 +75,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<Property> OnPostSave_Property;
         
-        public event GetDataType_Handler<Property> OnGetDataType_Property;
+        public event GetPropertyTypeString_Handler<Property> OnGetPropertyTypeString_Property;
         
         public event GetGUIRepresentation_Handler<Property> OnGetGUIRepresentation_Property;
+        
+        public event GetPropertyType_Handler<Property> OnGetPropertyType_Property;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -115,13 +117,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_Property != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_Property != null)
             {
-                OnGetDataType_Property(this, e);
+                OnGetPropertyTypeString_Property(this, e);
             };
             return e.Result;
         }
@@ -133,6 +135,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_Property != null)
             {
                 OnGetGUIRepresentation_Property(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_Property != null)
+            {
+                OnGetPropertyType_Property(this, e);
             };
             return e.Result;
         }

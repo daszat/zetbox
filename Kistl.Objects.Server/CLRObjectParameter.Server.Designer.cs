@@ -96,7 +96,9 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
         
-        public event GetDataType_Handler<CLRObjectParameter> OnGetDataType_CLRObjectParameter;
+        public event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;
+        
+        public event GetParameterType_Handler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -127,13 +129,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetParameterTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_CLRObjectParameter != null)
+            e.Result = base.GetParameterTypeString();
+            if (OnGetParameterTypeString_CLRObjectParameter != null)
             {
-                OnGetDataType_CLRObjectParameter(this, e);
+                OnGetParameterTypeString_CLRObjectParameter(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetParameterType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetParameterType();
+            if (OnGetParameterType_CLRObjectParameter != null)
+            {
+                OnGetParameterType_CLRObjectParameter(this, e);
             };
             return e.Result;
         }

@@ -37,9 +37,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<DoubleProperty> OnPostSave_DoubleProperty;
         
-        public event GetDataType_Handler<DoubleProperty> OnGetDataType_DoubleProperty;
+        public event GetPropertyTypeString_Handler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty;
         
         public event GetGUIRepresentation_Handler<DoubleProperty> OnGetGUIRepresentation_DoubleProperty;
+        
+        public event GetPropertyType_Handler<DoubleProperty> OnGetPropertyType_DoubleProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -75,13 +77,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_DoubleProperty != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_DoubleProperty != null)
             {
-                OnGetDataType_DoubleProperty(this, e);
+                OnGetPropertyTypeString_DoubleProperty(this, e);
             };
             return e.Result;
         }
@@ -93,6 +95,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_DoubleProperty != null)
             {
                 OnGetGUIRepresentation_DoubleProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_DoubleProperty != null)
+            {
+                OnGetPropertyType_DoubleProperty(this, e);
             };
             return e.Result;
         }

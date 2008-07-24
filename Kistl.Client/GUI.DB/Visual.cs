@@ -197,7 +197,7 @@ namespace Kistl.GUI.DB
 
         private static Visual CreateVisual(BackReferenceProperty backReferenceProperty)
         {
-            ObjectClass refClass = ClientHelper.ObjectClasses[backReferenceProperty.GetDataCLRType()];
+            ObjectClass refClass = ClientHelper.ObjectClasses[backReferenceProperty.GetPropertyType()];
             
             if (refClass != null && refClass.IsSimpleObject)
             {
@@ -206,7 +206,7 @@ namespace Kistl.GUI.DB
                     ControlType = VisualType.SimpleObjectList,
                     Description = "Display and edit the referenced Simple Objects in place",
                     Property = backReferenceProperty,
-                    ItemTemplate = Template.DefaultTemplate(backReferenceProperty.GetDataCLRType())
+                    ItemTemplate = Template.DefaultTemplate(backReferenceProperty.GetPropertyType())
                 };
             }
             else

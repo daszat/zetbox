@@ -59,6 +59,10 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<Enumeration> OnPostSave_Enumeration;
         
+        public event GetDataTypeString_Handler<Enumeration> OnGetDataTypeString_Enumeration;
+        
+        public event GetDataType_Handler<Enumeration> OnGetDataType_Enumeration;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -93,6 +97,28 @@ namespace Kistl.App.Base
         {
             base.AttachToContext(ctx);
             if(_EnumerationEntries != null) _EnumerationEntries.AttachToContext(ctx);
+        }
+        
+        public override string GetDataTypeString()
+        {
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
+            e.Result = base.GetDataTypeString();
+            if (OnGetDataTypeString_Enumeration != null)
+            {
+                OnGetDataTypeString_Enumeration(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetDataType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_Enumeration != null)
+            {
+                OnGetDataType_Enumeration(this, e);
+            };
+            return e.Result;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

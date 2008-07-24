@@ -45,10 +45,36 @@ namespace Kistl.Client.ASPNET.Toolkit
         public event EventHandler UserSaveRequest;
 
         public event EventHandler UserDeleteRequest;
+
+        public void NotifyUserSaveRequest()
+        {
+            if (UserSaveRequest != null)
+            {
+                UserSaveRequest(this, EventArgs.Empty);
+            }
+        }
+
+        public void NotifyUserDeleteRequest()
+        {
+            if (UserDeleteRequest != null)
+            {
+                UserDeleteRequest(this, EventArgs.Empty);
+            }
+        }
     }
 
     public abstract class ValueControl<T> : BasicControl, IValueControl<T>
     {
+        public ValueControl()
+        {
+            this.Load += new EventHandler(ValueControl_Load);
+        }
+
+        void ValueControl_Load(object sender, EventArgs e)
+        {
+            NotifyUserInput();
+        }
+
         public virtual T Value
         {
             get;

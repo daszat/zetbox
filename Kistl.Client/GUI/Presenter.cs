@@ -515,7 +515,7 @@ namespace Kistl.GUI
             ObjectClass klass = Manager.Renderer.ChooseObject<ObjectClass>(Control.Context, "Choose object class to create");
             if (klass != null)
             {
-                Kistl.API.IDataObject newObject = Control.Context.Create(klass.GetDataCLRType());
+                Kistl.API.IDataObject newObject = Control.Context.Create(klass.GetDataType());
 
                 var template = newObject.FindTemplate(TemplateUsage.EditControl);
                 IObjectControl ctrl = (IObjectControl)Manager.Renderer.CreateControl(newObject, template.VisualTree);

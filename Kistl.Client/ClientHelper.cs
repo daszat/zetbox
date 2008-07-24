@@ -77,7 +77,7 @@ namespace Kistl.Client
                         {
                             try
                             {
-                                _ObjectClasses[o.GetDataCLRType()] = o;
+                                _ObjectClasses[o.GetDataType()] = o;
                             }
                             catch(Exception ex)
                             {

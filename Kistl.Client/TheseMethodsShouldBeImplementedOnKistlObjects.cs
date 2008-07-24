@@ -48,27 +48,12 @@ namespace Kistl.Client
             return null;
         }
 
-        public static Type GetDataCLRType(this DataType type)
-        {
-            // TODO: remove this bad test-hack
-            string fullname = type.Module.Namespace + "." + type.ClassName;
-            string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects.Client";
-            return Type.GetType(fullname + ", " + assembly, true);
-        }
-
-        // TODO: actually, getDataType should return a System.Type Object, making this obsolete
-        public static Type GetDataCLRType(this BaseProperty p)
-        {
-            string fullname = p.GetDataType();
-
-            // ValueTypes all use mscorlib types,
-            // TODO: enumerations fail, because they're ValueTypes but classes and come from other assemblies; see Case 488
-            if (p is ValueTypeProperty)
-                return Type.GetType(fullname);
-
-            // other properties not
-            string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects.Client";
-            return Type.GetType(fullname + ", " + assembly, true);
-        }
+        //public static Type GetDataCLRType(this DataType type)
+        //{
+        //    // TODO: remove this bad test-hack
+        //    string fullname = type.Module.Namespace + "." + type.ClassName;
+        //    string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects.Client";
+        //    return Type.GetType(fullname + ", " + assembly, true);
+        //}
     }
 }

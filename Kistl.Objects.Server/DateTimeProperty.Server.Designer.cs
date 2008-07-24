@@ -38,9 +38,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<DateTimeProperty> OnPostSave_DateTimeProperty;
         
-        public event GetDataType_Handler<DateTimeProperty> OnGetDataType_DateTimeProperty;
+        public event GetPropertyTypeString_Handler<DateTimeProperty> OnGetPropertyTypeString_DateTimeProperty;
         
         public event GetGUIRepresentation_Handler<DateTimeProperty> OnGetGUIRepresentation_DateTimeProperty;
+        
+        public event GetPropertyType_Handler<DateTimeProperty> OnGetPropertyType_DateTimeProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -71,13 +73,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_DateTimeProperty != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_DateTimeProperty != null)
             {
-                OnGetDataType_DateTimeProperty(this, e);
+                OnGetPropertyTypeString_DateTimeProperty(this, e);
             };
             return e.Result;
         }
@@ -89,6 +91,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_DateTimeProperty != null)
             {
                 OnGetGUIRepresentation_DateTimeProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_DateTimeProperty != null)
+            {
+                OnGetPropertyType_DateTimeProperty(this, e);
             };
             return e.Result;
         }

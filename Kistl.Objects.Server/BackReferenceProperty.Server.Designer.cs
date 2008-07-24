@@ -96,9 +96,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<BackReferenceProperty> OnPostSave_BackReferenceProperty;
         
-        public event GetDataType_Handler<BackReferenceProperty> OnGetDataType_BackReferenceProperty;
+        public event GetPropertyTypeString_Handler<BackReferenceProperty> OnGetPropertyTypeString_BackReferenceProperty;
         
         public event GetGUIRepresentation_Handler<BackReferenceProperty> OnGetGUIRepresentation_BackReferenceProperty;
+        
+        public event GetPropertyType_Handler<BackReferenceProperty> OnGetPropertyType_BackReferenceProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -129,13 +131,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_BackReferenceProperty != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_BackReferenceProperty != null)
             {
-                OnGetDataType_BackReferenceProperty(this, e);
+                OnGetPropertyTypeString_BackReferenceProperty(this, e);
             };
             return e.Result;
         }
@@ -147,6 +149,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_BackReferenceProperty != null)
             {
                 OnGetGUIRepresentation_BackReferenceProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_BackReferenceProperty != null)
+            {
+                OnGetPropertyType_BackReferenceProperty(this, e);
             };
             return e.Result;
         }

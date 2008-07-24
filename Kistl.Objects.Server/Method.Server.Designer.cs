@@ -39,6 +39,8 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Module = null;
         
+        private bool _IsDisplayable;
+        
         public Method()
         {
         }
@@ -166,6 +168,24 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public bool IsDisplayable
+        {
+            get
+            {
+                return _IsDisplayable;
+            }
+            set
+            {
+                if(_IsDisplayable != value)
+                {
+                    NotifyPropertyChanging("IsDisplayable"); 
+                    _IsDisplayable = value; 
+                    NotifyPropertyChanged("IsDisplayable");
+                };
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -208,6 +228,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._MethodName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this.Parameter.OfType<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this._IsDisplayable, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -216,6 +237,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_ObjectClass, sr);
             BinarySerializer.FromBinary(out this._MethodName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
+            BinarySerializer.FromBinary(out this._IsDisplayable, sr);
         }
     }
 }

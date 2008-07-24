@@ -160,7 +160,9 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
         
-        public event GetDataType_Handler<BaseParameter> OnGetDataType_BaseParameter;
+        public event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
+        
+        public event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -201,12 +203,22 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public virtual string GetDataType()
+        public virtual string GetParameterTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            if (OnGetDataType_BaseParameter != null)
+            if (OnGetParameterTypeString_BaseParameter != null)
             {
-                OnGetDataType_BaseParameter(this, e);
+                OnGetParameterTypeString_BaseParameter(this, e);
+            };
+            return e.Result;
+        }
+        
+        public virtual System.Type GetParameterType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            if (OnGetParameterType_BaseParameter != null)
+            {
+                OnGetParameterType_BaseParameter(this, e);
             };
             return e.Result;
         }
@@ -231,6 +243,8 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._IsReturnParameter, sr);
         }
         
-        public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        
+        public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
     }
 }

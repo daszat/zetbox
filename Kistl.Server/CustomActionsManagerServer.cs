@@ -60,11 +60,20 @@ namespace Kistl.Server
             {
                 using (IKistlContext ctx = KistlDataContext.GetContext())
                 {
+                    StringBuilder warnings = new StringBuilder();
+
                     foreach (ObjectClass baseObjClass in ctx.GetQuery<ObjectClass>())
                     {
                         try
                         {
-                            Type objType = baseObjClass.GetDataCLRType();
+                            // baseObjClass.GetDataType(); is not possible here, because this
+                            // Method is currently attaching
+                            Type objType = Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + ", Kistl.Objects.Server");
+                            if (objType == null)
+                            {
+                                warnings.AppendLine(string.Format("DataType '{0}, Kistl.Objects.Server' not found", baseObjClass.Module.Namespace + "." + baseObjClass.ClassName));
+                                continue;
+                            }
                             foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
                             {
                                 foreach (MethodInvocation mi in objClass.MethodIvokations)
@@ -74,17 +83,26 @@ namespace Kistl.Server
                                         if (mi.Assembly.IsClientAssembly) continue;
 
                                         Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
-                                        System.Diagnostics.Debug.Assert(t != null, string.Format("Type '{0}, {1}' not found", mi.FullTypeName, mi.Assembly.AssemblyName));
-                                        if (t == null) continue;
+                                        if (t == null)
+                                        {
+                                            warnings.AppendLine(string.Format("Type '{0}, {1}' not found", mi.FullTypeName, mi.Assembly.AssemblyName));
+                                            continue;
+                                        }
 
                                         MethodInfo clrMethod = t.GetMethod(mi.MemberName);
-                                        System.Diagnostics.Debug.Assert(clrMethod != null, string.Format("CLR Method '{0}' not found", mi.MemberName));
-                                        if (clrMethod == null) continue;
+                                        if (clrMethod == null)
+                                        {
+                                            warnings.AppendLine(string.Format("CLR Method '{0}' not found", mi.MemberName));
+                                            continue;
+                                        }
 
                                         EventInfo ei = objType.GetEvent(
                                             "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
-                                        System.Diagnostics.Debug.Assert(ei != null, string.Format("Event 'On{0}_{1}' not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
-                                        if (ei == null) continue;
+                                        if (ei == null)
+                                        {
+                                            warnings.AppendLine(string.Format("Event 'On{0}_{1}' not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
+                                            continue;
+                                        }
 
                                         InvokeInfo ii = new InvokeInfo();
                                         ii.CLRMethod = clrMethod;
@@ -99,7 +117,7 @@ namespace Kistl.Server
                                     }
                                     catch (Exception ex)
                                     {
-                                        System.Diagnostics.Debug.Assert(false, ex.ToString());
+                                        warnings.AppendLine(ex.Message);
                                     }
                                 }
                             }
@@ -107,7 +125,7 @@ namespace Kistl.Server
                         catch (Exception ex)
                         {
                             // Can happen if Type is not yet compiled into Assembly
-                            Helper.HandleError(ex);
+                            warnings.AppendLine(ex.Message);
                         }
                     }
                 }

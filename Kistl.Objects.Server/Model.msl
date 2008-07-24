@@ -101,6 +101,7 @@
         <MappingFragment StoreEntitySet="Method">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+          <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

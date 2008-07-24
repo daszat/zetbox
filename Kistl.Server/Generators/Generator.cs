@@ -17,7 +17,7 @@ namespace Kistl.Server.Generators
 
     public static class GeneratorExtensionHelper
     {
-        public static TypeMoniker GetObjectType(this DataType objClass)
+        public static TypeMoniker GetTypeMoniker(this DataType objClass)
         {
             return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName);
         }
@@ -242,7 +242,7 @@ namespace Kistl.Server.Generators
         {
             if (!prop.IsList)
             {
-                return prop.ObjectClass.GetObjectType(); //new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                return prop.ObjectClass.GetTypeMoniker(); //new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
             }
             else
             {
@@ -254,7 +254,7 @@ namespace Kistl.Server.Generators
         {
             if (!prop.ReferenceProperty.IsList)
             {
-                return new TypeMoniker(prop.GetDataType());
+                return new TypeMoniker(prop.GetPropertyTypeString());
             }
             else
             {

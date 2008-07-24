@@ -26,7 +26,7 @@ namespace Kistl.Server.Generators.SQLServer
             }
             else
             {
-                string clrType = p.GetDataType();
+                string clrType = p.GetPropertyTypeString();
                 // Try to get the CLRType
                 Type t = Type.GetType(clrType, false, false);
 

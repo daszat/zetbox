@@ -141,6 +141,10 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
         
+        public event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
+        
+        public event GetDataType_Handler<ObjectClass> OnGetDataType_ObjectClass;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -169,6 +173,28 @@ namespace Kistl.App.Base
         {
             base.AttachToContext(ctx);
             ImplementsInterfaces.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
+        }
+        
+        public override string GetDataTypeString()
+        {
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
+            e.Result = base.GetDataTypeString();
+            if (OnGetDataTypeString_ObjectClass != null)
+            {
+                OnGetDataTypeString_ObjectClass(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetDataType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetDataType();
+            if (OnGetDataType_ObjectClass != null)
+            {
+                OnGetDataType_ObjectClass(this, e);
+            };
+            return e.Result;
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)

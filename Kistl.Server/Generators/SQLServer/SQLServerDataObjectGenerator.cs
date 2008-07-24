@@ -85,7 +85,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             foreach (ObjectReferenceProperty prop in props)
             {
-                TypeMoniker parentType = new TypeMoniker(prop.GetDataType());
+                TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
                 GenerateEdmRelationshipAttribute(parentType, childType, code);
@@ -170,13 +170,13 @@ namespace Kistl.Server.Generators.SQLServer
                     new CodeSnippetExpression(
                         string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class), objRefProp.ReferenceObjectClass.ClassName)));
+                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class), objRefProp.ReferenceObjectClass.ClassName)));
 
                 collectionClass.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class), objRefProp.ReferenceObjectClass.ClassName)));
+                r.Value = value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class), objRefProp.ReferenceObjectClass.ClassName)));
 
                 // Collection.Serializer.Value
                 serializerValue.code_property.GetStatements.Add(
@@ -306,13 +306,13 @@ namespace Kistl.Server.Generators.SQLServer
                     new CodeSnippetExpression(
                         string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass), objRefProp.ReferenceObjectClass.ClassName)));
+                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass), objRefProp.ReferenceObjectClass.ClassName)));
 
                 current.code_property.SetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", current.property.GetDataType(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass), objRefProp.ReferenceObjectClass.ClassName)));
+                r.Value = value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass), objRefProp.ReferenceObjectClass.ClassName)));
 
                 serializer.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
@@ -337,7 +337,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.clientServer == ClientServerEnum.Server)
             {
-                TypeMoniker parentType = current.objClass.GetObjectType();
+                TypeMoniker parentType = current.objClass.GetTypeMoniker();
                 TypeMoniker childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
 
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));

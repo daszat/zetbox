@@ -70,9 +70,11 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<EnumerationProperty> OnPostSave_EnumerationProperty;
         
-        public event GetDataType_Handler<EnumerationProperty> OnGetDataType_EnumerationProperty;
+        public event GetPropertyTypeString_Handler<EnumerationProperty> OnGetPropertyTypeString_EnumerationProperty;
         
         public event GetGUIRepresentation_Handler<EnumerationProperty> OnGetGUIRepresentation_EnumerationProperty;
+        
+        public event GetPropertyType_Handler<EnumerationProperty> OnGetPropertyType_EnumerationProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -109,13 +111,13 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetPropertyTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_EnumerationProperty != null)
+            e.Result = base.GetPropertyTypeString();
+            if (OnGetPropertyTypeString_EnumerationProperty != null)
             {
-                OnGetDataType_EnumerationProperty(this, e);
+                OnGetPropertyTypeString_EnumerationProperty(this, e);
             };
             return e.Result;
         }
@@ -127,6 +129,17 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_EnumerationProperty != null)
             {
                 OnGetGUIRepresentation_EnumerationProperty(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetPropertyType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetPropertyType();
+            if (OnGetPropertyType_EnumerationProperty != null)
+            {
+                OnGetPropertyType_EnumerationProperty(this, e);
             };
             return e.Result;
         }

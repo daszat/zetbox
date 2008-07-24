@@ -65,7 +65,7 @@ namespace Kistl.GUI.DB
 
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
             if (controlType.IsGenericTypeDefinition)
-                controlType = controlType.MakeGenericType(new Type[] { v.Property.GetDataCLRType() });
+                controlType = controlType.MakeGenericType(new Type[] { v.Property.GetPropertyType() });
 
             IPresenter result = (IPresenter)Activator.CreateInstance(controlType);
             result.InitializeComponent(obj, v, ctrl);

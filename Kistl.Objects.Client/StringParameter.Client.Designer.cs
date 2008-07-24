@@ -37,7 +37,9 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<StringParameter> OnPostSave_StringParameter;
         
-        public event GetDataType_Handler<StringParameter> OnGetDataType_StringParameter;
+        public event GetParameterTypeString_Handler<StringParameter> OnGetParameterTypeString_StringParameter;
+        
+        public event GetParameterType_Handler<StringParameter> OnGetParameterType_StringParameter;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -73,13 +75,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override string GetDataType()
+        public override string GetParameterTypeString()
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetDataType();
-            if (OnGetDataType_StringParameter != null)
+            e.Result = base.GetParameterTypeString();
+            if (OnGetParameterTypeString_StringParameter != null)
             {
-                OnGetDataType_StringParameter(this, e);
+                OnGetParameterTypeString_StringParameter(this, e);
+            };
+            return e.Result;
+        }
+        
+        public override System.Type GetParameterType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            e.Result = base.GetParameterType();
+            if (OnGetParameterType_StringParameter != null)
+            {
+                OnGetParameterType_StringParameter(this, e);
             };
             return e.Result;
         }
