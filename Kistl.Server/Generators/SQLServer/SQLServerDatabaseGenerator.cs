@@ -57,9 +57,90 @@ namespace Kistl.Server.Generators.SQLServer
                         GenerateTable(objClass);
                     }
 
+                    foreach (ObjectClass objClass in objClassList)
+                    {
+                        GenerateFKConstraints(objClass);
+                    }
+
                     //tx.Commit();
                     // tx.Rollback();
                 }
+            }
+        }
+
+        private void GenerateFKConstraints(ObjectClass objClass)
+        {
+            // Create FK to BaseClass
+            if (objClass.BaseObjectClass != null)
+            {
+                CreateFKConstraint(objClass.BaseObjectClass, objClass, "ID");
+            }
+
+            foreach (Property p in objClass.Properties.OfType<Property>())
+            {
+                if (p.IsList)
+                {
+                    CreateFKConstraint(objClass, p, "fk_" + p.ObjectClass.ClassName);
+                }
+
+                if (p is ObjectReferenceProperty)
+                {
+                    ObjectReferenceProperty orp = (ObjectReferenceProperty)p;
+                    if (orp.IsList)
+                    {
+                        CreateFKConstraint(orp.ReferenceObjectClass, orp, "fk_" + orp.PropertyName);
+                    }
+                    else
+                    {
+                        CreateFKConstraint(orp.ReferenceObjectClass, objClass, "fk_" + orp.PropertyName);
+                    }
+                }
+            }
+        }
+
+        private void CreateFKConstraint(ObjectClass parent, Property child, string fk_column)
+        {
+            string fk = Generator.GetAssociationName(parent.GetTypeMoniker(), Generator.GetAssociationChildType(child));
+            SqlCommand cmd = new SqlCommand("select dbo.fn_FKConstraintExists(@fk)", db, tx);
+            cmd.Parameters.AddWithValue("@fk", fk);
+            
+            if (!((bool)cmd.ExecuteScalar()))
+            {
+                cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}]  WITH CHECK 
+                    ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
+                    REFERENCES [{3}] ([ID])", 
+                       Generator.GetDatabaseTableName(child),
+                       fk,
+                       fk_column,
+                       Generator.GetDatabaseTableName(parent)), db, tx); ;
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}] CHECK CONSTRAINT [{1}]",
+                       Generator.GetDatabaseTableName(child),
+                       fk), db, tx); ;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void CreateFKConstraint(ObjectClass parent, ObjectClass child, string fk_column)
+        {
+            string fk = Generator.GetAssociationName(parent, child);
+            SqlCommand cmd = new SqlCommand("select dbo.fn_FKConstraintExists(@fk)", db, tx);
+            cmd.Parameters.AddWithValue("@fk", fk);
+
+            if (!((bool)cmd.ExecuteScalar()))
+            {
+                cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}]  WITH CHECK 
+                    ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
+                    REFERENCES [{3}] ([ID])",
+                       Generator.GetDatabaseTableName(child),
+                       fk,
+                       fk_column,
+                       Generator.GetDatabaseTableName(parent)), db, tx); ;
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}] CHECK CONSTRAINT [{1}]",
+                       Generator.GetDatabaseTableName(child),
+                       fk), db, tx); ;
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -72,10 +153,9 @@ namespace Kistl.Server.Generators.SQLServer
             if ((bool)cmd.ExecuteScalar())
             {
                 System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(objClass));
+                // BackReferenceProperties sind uninteressant, diese ergeben sich
                 foreach (Property p in objClass.Properties.OfType<Property>())
                 {
-                    // BackReferenceProperties sind uninteressant, diese ergeben sich
-
                     if (!p.IsList)
                     {
                         cmd = new SqlCommand("select dbo.fn_ColumnExists(@t, @c)", db, tx);

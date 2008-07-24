@@ -413,6 +413,7 @@
     <Property Name="StringProp" Type="String" MaxLength="200" Nullable="false" />
     <Property Name="TestEnumProp" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectProp" Relationship="Model.FK_TestObjClass_Kunde" FromRole="B_TestObjClass" ToRole="A_Kunde" />
+    <Property Name="MyIntProperty" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="ControlInfo">
     <Key>

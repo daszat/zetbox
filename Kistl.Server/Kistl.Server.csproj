@@ -149,6 +149,13 @@
     <None Include="ConfigDavid.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Database\Database.23.sql" />
+    <None Include="Database\Database.24.sql" />
+    <None Include="Database\Database.25.sql" />
+    <None Include="Database\Database.26.sql" />
+    <None Include="Database\Database.27.sql" />
+    <None Include="Database\Database.28.sql" />
+    <None Include="Database\Database.29.sql" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

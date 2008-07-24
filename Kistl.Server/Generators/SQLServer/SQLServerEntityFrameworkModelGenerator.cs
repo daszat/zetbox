@@ -647,6 +647,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 GenerateSSDL_EntityContainer_ObjectClasses(xml, objClassList);
                 GenerateSSDL_EntityContainer_ListProperties(xml, listProperties);
+                GenerateSSDL_AssociationSet_ObjectClasses(xml, objClassList);
                 GenerateSSDL_AssociationSet_ObjectReferenceProperties(xml, objectReferenceProperties);
                 GenerateSSDL_AssociationSet_ListProperties(xml, listProperties);
 
@@ -654,6 +655,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 GenerateSSDL_EntityTypes_ObjectClasses(xml, objClassList);
                 GenerateSSDL_EntityTypes_ListProperties(xml, listProperties);
+                GenerateSSDL_Associations_ObjectClasses(xml, objClassList);
                 GenerateSSDL_Associations_ObjectReferences(xml, objectReferenceProperties);
                 GenerateSSDL_Associations_ListProperties(xml, listProperties);
 
@@ -760,6 +762,58 @@ namespace Kistl.Server.Generators.SQLServer
             }
         }
         #endregion
+        
+        #region GenerateSSDL_Associations_ObjectClasses
+        private void GenerateSSDL_Associations_ObjectClasses(System.Xml.XmlTextWriter xml, IQueryable<ObjectClass> objClassList)
+        {
+            foreach (ObjectClass objClass in objClassList)
+            {
+                if (objClass.BaseObjectClass == null) continue;
+                
+                xml.WriteStartElement("Association");
+                TypeMoniker parentType = objClass.BaseObjectClass.GetTypeMoniker();
+                TypeMoniker childType = objClass.GetTypeMoniker();
+
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
+
+                // Parent
+                xml.WriteStartElement("End");
+                xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
+                xml.WriteAttributeString("Type", "Model.Store." + parentType.Classname);
+                xml.WriteAttributeString("Multiplicity", "1");
+                xml.WriteEndElement(); // </End>
+
+                // Child
+                xml.WriteStartElement("End");
+                xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
+                xml.WriteAttributeString("Type", "Model.Store." + childType.Classname);
+                xml.WriteAttributeString("Multiplicity", "0..1");
+                xml.WriteEndElement(); // </End>
+
+                xml.WriteStartElement("ReferentialConstraint");
+
+                // Parent
+                xml.WriteStartElement("Principal");
+                xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
+                xml.WriteStartElement("PropertyRef");
+                xml.WriteAttributeString("Name", "ID");
+                xml.WriteEndElement(); // </PropertyRef>
+                xml.WriteEndElement(); // </Principal>
+
+                // Child
+                xml.WriteStartElement("Dependent");
+                xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
+                xml.WriteStartElement("PropertyRef");
+                xml.WriteAttributeString("Name", "ID");
+                xml.WriteEndElement(); // </PropertyRef>
+                xml.WriteEndElement(); // </Dependent>
+
+                xml.WriteEndElement(); // </ReferentialConstraint>
+
+                xml.WriteEndElement(); // </Association>
+            }
+        }
+        #endregion        
 
         #region GenerateSSDL_EntityTypes_ListProperties
         private void GenerateSSDL_EntityTypes_ListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
@@ -900,6 +954,37 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteStartElement("AssociationSet");
                 TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
+
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType));
+
+                // Parent
+                xml.WriteStartElement("End");
+                xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
+                xml.WriteAttributeString("EntitySet", parentType.Classname);
+                xml.WriteEndElement(); // </End>
+
+                // Child
+                xml.WriteStartElement("End");
+                xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
+                xml.WriteAttributeString("EntitySet", childType.Classname); // No baseclass.
+                xml.WriteEndElement(); // </End>
+
+                xml.WriteEndElement(); // </AssociationSet>
+            }
+        }
+        #endregion
+
+        #region GenerateSSDL_AssociationSet_ObjectClasses
+        private void GenerateSSDL_AssociationSet_ObjectClasses(System.Xml.XmlTextWriter xml, IQueryable<ObjectClass> objClassList)
+        {
+            foreach (ObjectClass objClass in objClassList)
+            {
+                if (objClass.BaseObjectClass == null) continue;
+
+                xml.WriteStartElement("AssociationSet");
+                TypeMoniker parentType = objClass.BaseObjectClass.GetTypeMoniker();
+                TypeMoniker childType = objClass.GetTypeMoniker();
 
                 xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
                 xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType));

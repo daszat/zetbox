@@ -38,6 +38,8 @@ namespace Kistl.App.Test
         
         private System.Nullable<int> _fk_ObjectProp = null;
         
+        private System.Int32? _MyIntProperty;
+        
         public TestObjClass()
         {
         }
@@ -125,6 +127,24 @@ namespace Kistl.App.Test
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public System.Int32? MyIntProperty
+        {
+            get
+            {
+                return _MyIntProperty;
+            }
+            set
+            {
+                if(_MyIntProperty != value)
+                {
+                    NotifyPropertyChanging("MyIntProperty"); 
+                    _MyIntProperty = value; 
+                    NotifyPropertyChanged("MyIntProperty");
+                };
+            }
+        }
+        
         public event ToStringHandler<TestObjClass> OnToString_TestObjClass;
         
         public event ObjectEventHandler<TestObjClass> OnPreSave_TestObjClass;
@@ -176,6 +196,7 @@ namespace Kistl.App.Test
             BinarySerializer.ToBinary(this._StringProp, sw);
             BinarySerializer.ToBinary(this._TestEnumProp, sw);
             BinarySerializer.ToBinary(this.fk_ObjectProp, sw);
+            BinarySerializer.ToBinary(this._MyIntProperty, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -184,6 +205,7 @@ namespace Kistl.App.Test
             BinarySerializer.FromBinary(out this._StringProp, sr);
             BinarySerializer.FromBinary(out this._TestEnumProp, sr);
             BinarySerializer.FromBinary(out this._fk_ObjectProp, sr);
+            BinarySerializer.FromBinary(out this._MyIntProperty, sr);
         }
         
         public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);

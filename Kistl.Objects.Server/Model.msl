@@ -284,6 +284,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StringProp" ColumnName="StringProp" />
           <ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
+          <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
