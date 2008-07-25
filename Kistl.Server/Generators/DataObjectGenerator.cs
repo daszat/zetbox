@@ -176,6 +176,51 @@ namespace Kistl.Server.Generators
             ns.Imports.Add(new CodeNamespaceImport("Kistl.API"));
         }
 
+        protected virtual string GetTypeString(BaseProperty p, ClientServerEnum clientServer)
+        {
+            string propType;
+            if (clientServer == ClientServerEnum.Server && p is EnumerationProperty)
+            {
+                // EF does not support Enums
+                // TODO: Change this, when EF Wrapper are implemented
+                propType = "System.Int32";
+            }
+            else
+            {
+                propType = p.GetPropertyTypeString();
+            }
+            
+            if (p is Property)
+            {
+                bool appendNullable = false;
+                if (p is EnumerationProperty)
+                {
+                    appendNullable = true;
+                }
+                else if (p is ObjectReferenceProperty)
+                {
+                    appendNullable = false;
+                }
+                else if (p is BackReferenceProperty)
+                {
+                    appendNullable = false;
+                }
+                else
+                {
+                    Type t = Type.GetType(p.GetPropertyTypeString());
+                    if (t == null) throw new ApplicationException(
+                         string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
+                             p.ObjectClass.ClassName, p.PropertyName, p.GetPropertyTypeString()));
+
+                    appendNullable = t.IsValueType;
+                }
+
+                propType += (appendNullable && ((Property)p).IsNullable) ? "?" : "";
+            }
+
+            return propType;
+        }
+
         #region CreateField
         protected CodeMemberField CreateField(CodeTypeDeclaration c, Type type, string name)
         {
@@ -644,7 +689,7 @@ namespace Kistl.Server.Generators
             // Properties
             foreach (BaseProperty p in current.@interface.Properties)
             {
-                CreateProperty(current.code_class, p.GetPropertyTypeString(), p.PropertyName);
+                CreateProperty(current.code_class, GetTypeString(p, current.clientServer), p.PropertyName);
             }
 
             // Methods
@@ -734,26 +779,7 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_ValueTypePropertyInternal(CurrentObjectClass current)
         {
-            if (string.IsNullOrEmpty(current.property.GetPropertyTypeString())) throw new ApplicationException(
-                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetPropertyTypeString()",
-                     current.objClass.ClassName, current.property.PropertyName));
-
-            bool isValueType;
-            if (current.property is EnumerationProperty)
-            {
-                isValueType = true;
-            }
-            else
-            {
-                Type t = Type.GetType(current.property.GetPropertyTypeString());
-                if (t == null) throw new ApplicationException(
-                     string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
-                         current.objClass.ClassName, current.property.PropertyName, current.property.GetPropertyTypeString()));
-
-                isValueType = t.IsValueType;
-            }
-
-            current.code_field = CreateField(current.code_class, current.property.GetPropertyTypeString() + ((isValueType && ((ValueTypeProperty)current.property).IsNullable) ? "?" : ""),
+            current.code_field = CreateField(current.code_class, GetTypeString(current.property, current.clientServer),
                 "_" + current.property.PropertyName);
 
             current.code_property = CreateProperty(current.code_class, current.code_field.Type, current.property.PropertyName);
@@ -1309,7 +1335,6 @@ namespace Kistl.Server.Generators
                 foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
                 {
                     // Create a new List after Attach - Object Reference will change, if Object is alredy in tha Context
-                    //m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0} = new BackReferenceCollection<{1}>(""{2}"", this, _{0}.Select(i => ctx.Attach(i)).OfType<{1}>())", p.PropertyName, p.GetPropertyTypeString(), p.ReferenceProperty.PropertyName)));
                     m.Statements.Add(new CodeSnippetExpression(string.Format(@"if(_{0} != null) _{0}.AttachToContext(ctx)", p.PropertyName)));
                 }
             }
@@ -1460,7 +1485,11 @@ namespace Kistl.Server.Generators
 
             foreach (BaseProperty p in current.objClass.Properties)
             {
-                if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
+                if (p is EnumerationProperty && !((ValueTypeProperty)p).IsList)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary((int{1})this._{0}, sw)", p.PropertyName, ((Property)p).IsNullable ? "?": "")));
+                }
+                else if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
                 {
                     m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}, sw)", p.PropertyName)));
                 }
@@ -1495,7 +1524,6 @@ namespace Kistl.Server.Generators
             m.Name = "FromStream";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(void));
-            // m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
             m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));
 
@@ -1508,12 +1536,11 @@ namespace Kistl.Server.Generators
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName)));
                 }
-                /* TODO: Reimplement when Interfaces for DataTypes are implemented to wrap this whole damm shit thing!
-                 * else if (p is EnumerationProperty)
+                else if (p is EnumerationProperty)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("Enum tmp{0}; BinarySerializer.FromBinary(out tmp{0}, sr); _{0} = ({1})tmp{0}", 
-                        p.PropertyName, p.GetPropertyTypeString() + (((EnumerationProperty)p).IsNullable ? "?" : ""))));
-                }*/
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("int{2} tmp{0}; BinarySerializer.FromBinary(out tmp{0}, sr); _{0} = ({1})tmp{0}",
+                        p.PropertyName, GetTypeString(p, current.clientServer), ((Property)p).IsNullable ? "?" : "")));
+                }
                 else if (p is ValueTypeProperty)
                 {
                     m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));

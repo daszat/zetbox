@@ -27,7 +27,7 @@ namespace Kistl.App.GUI
     public interface IRenderer
     {
         
-        int Platform
+        Kistl.App.GUI.Toolkit Platform
         {
             get;
             set;

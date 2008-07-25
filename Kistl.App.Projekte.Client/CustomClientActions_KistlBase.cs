@@ -167,9 +167,12 @@ namespace Kistl.App.Base
         {
             string fullname = obj.GetPropertyTypeString();
 
+            if (obj is EnumerationProperty)
+            {
+                e.Result = Type.GetType(fullname + ", Kistl.Objects.Client");
+            }
             // ValueTypes all use mscorlib types,
-            // TODO: enumerations fail, because they're ValueTypes but classes and come from other assemblies; see Case 488
-            if (obj is ValueTypeProperty)
+            else if (obj is ValueTypeProperty)
             {
                 e.Result = Type.GetType(fullname);
             }

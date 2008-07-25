@@ -366,7 +366,7 @@ namespace Kistl.GUI
     // TODO: Test when enumeration properties create actual enumeration CLR properties, see Case 478
     public class EnumerationPresenter<ENUM>
         : DefaultPresenter<ENUM, EnumerationProperty, IEnumControl<ENUM>>
-        where ENUM : class // actually where ENUM: System.Enum, but see http://bytes.com/forum/post1821322-8.html 
+        where ENUM : struct // actually where ENUM: System.Enum, but see http://bytes.com/forum/post1821322-8.html 
     {
 
         public EnumerationPresenter()

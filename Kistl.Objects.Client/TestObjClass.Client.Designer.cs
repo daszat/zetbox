@@ -29,7 +29,7 @@ namespace Kistl.App.Test
         
         private string _StringProp;
         
-        private int _TestEnumProp;
+        private Kistl.App.Test.TestEnum _TestEnumProp;
         
         private System.Nullable<int> _fk_ObjectProp = null;
         
@@ -56,7 +56,7 @@ namespace Kistl.App.Test
             }
         }
         
-        public int TestEnumProp
+        public Kistl.App.Test.TestEnum TestEnumProp
         {
             get
             {
@@ -179,7 +179,7 @@ namespace Kistl.App.Test
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._StringProp, sw);
-            BinarySerializer.ToBinary(this._TestEnumProp, sw);
+            BinarySerializer.ToBinary((int)this._TestEnumProp, sw);
             BinarySerializer.ToBinary(this.fk_ObjectProp, sw);
             BinarySerializer.ToBinary(this._MyIntProperty, sw);
         }
@@ -188,7 +188,7 @@ namespace Kistl.App.Test
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._StringProp, sr);
-            BinarySerializer.FromBinary(out this._TestEnumProp, sr);
+            int tmpTestEnumProp; BinarySerializer.FromBinary(out tmpTestEnumProp, sr); _TestEnumProp = (Kistl.App.Test.TestEnum)tmpTestEnumProp;
             BinarySerializer.FromBinary(out this._fk_ObjectProp, sr);
             BinarySerializer.FromBinary(out this._MyIntProperty, sr);
         }

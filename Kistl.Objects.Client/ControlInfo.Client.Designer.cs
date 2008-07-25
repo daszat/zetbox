@@ -33,9 +33,9 @@ namespace Kistl.App.GUI
         
         private bool _IsContainer;
         
-        private int _Platform;
+        private Kistl.App.GUI.Toolkit _Platform;
         
-        private int _ControlType;
+        private Kistl.App.GUI.VisualType _ControlType;
         
         public ControlInfo()
         {
@@ -106,7 +106,7 @@ namespace Kistl.App.GUI
             }
         }
         
-        public int Platform
+        public Kistl.App.GUI.Toolkit Platform
         {
             get
             {
@@ -123,7 +123,7 @@ namespace Kistl.App.GUI
             }
         }
         
-        public int ControlType
+        public Kistl.App.GUI.VisualType ControlType
         {
             get
             {
@@ -191,8 +191,8 @@ namespace Kistl.App.GUI
             BinarySerializer.ToBinary(this.fk_Assembly, sw);
             BinarySerializer.ToBinary(this._ClassName, sw);
             BinarySerializer.ToBinary(this._IsContainer, sw);
-            BinarySerializer.ToBinary(this._Platform, sw);
-            BinarySerializer.ToBinary(this._ControlType, sw);
+            BinarySerializer.ToBinary((int)this._Platform, sw);
+            BinarySerializer.ToBinary((int)this._ControlType, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -201,8 +201,8 @@ namespace Kistl.App.GUI
             BinarySerializer.FromBinary(out this._fk_Assembly, sr);
             BinarySerializer.FromBinary(out this._ClassName, sr);
             BinarySerializer.FromBinary(out this._IsContainer, sr);
-            BinarySerializer.FromBinary(out this._Platform, sr);
-            BinarySerializer.FromBinary(out this._ControlType, sr);
+            int tmpPlatform; BinarySerializer.FromBinary(out tmpPlatform, sr); _Platform = (Kistl.App.GUI.Toolkit)tmpPlatform;
+            int tmpControlType; BinarySerializer.FromBinary(out tmpControlType, sr); _ControlType = (Kistl.App.GUI.VisualType)tmpControlType;
         }
     }
 }

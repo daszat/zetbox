@@ -39,7 +39,7 @@ namespace Kistl.App.Test
             set;
         }
         
-        int TestEnumProp
+        Kistl.App.Test.TestEnum TestEnumProp
         {
             get;
             set;

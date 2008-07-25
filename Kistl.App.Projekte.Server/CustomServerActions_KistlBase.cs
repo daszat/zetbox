@@ -91,9 +91,12 @@ namespace Kistl.App.Base
         {
             string fullname = obj.GetPropertyTypeString();
 
+            if (obj is EnumerationProperty)
+            {
+                e.Result = Type.GetType(fullname + ", Kistl.Objects.Client");
+            }
             // ValueTypes all use mscorlib types,
-            // TODO: enumerations fail, because they're ValueTypes but classes and come from other assemblies; see Case 488
-            if (obj is ValueTypeProperty)
+            else if (obj is ValueTypeProperty)
             {
                 e.Result = Type.GetType(fullname);
             }
@@ -137,9 +140,8 @@ namespace Kistl.App.Base
 
         public void OnGetPropertyTypeString_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            // TODO: Change this back to Enum, when Interfaces for DataObjects are implemented
-            // e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
-            e.Result = "System.Int32";
+            e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
+            // e.Result = "System.Int32";
         }
 
         public void OnGetPropertyTypeString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
