@@ -490,11 +490,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Module" Type="int" />
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Assembly" Type="int" />
     <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
     <Property Name="fk_InvokeOnObjectClass" Type="int" />
   </EntityType>
   <EntityType Name="TaetigkeitsArt">

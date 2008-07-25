@@ -308,5 +308,10 @@ namespace Kistl.App.Base
             e.Result = obj.FullTypeName;
         }
         #endregion
+
+        public void OnGetReturnParameter_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<BaseParameter> e)
+        {
+            e.Result = obj.Parameter.SingleOrDefault(param => param.IsReturnParameter);
+        }
     }
 }
