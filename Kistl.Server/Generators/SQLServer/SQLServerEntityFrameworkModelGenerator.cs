@@ -111,10 +111,10 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 xml.WriteStartElement("Association");
 
-                TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker(); // new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
                 TypeMoniker childType = Generator.GetPropertyCollectionObjectType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "fk_Parent"));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -146,7 +146,7 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, prop.PropertyName));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -200,7 +200,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteAttributeString("Name", "Value");
                     parentType = new TypeMoniker(prop.GetPropertyTypeString());
                     childType = collectionType;
-                    xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
+                    xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, prop.PropertyName));
                     xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                     xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                     // TODO: IsNullable??
@@ -224,7 +224,7 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteAttributeString("Name", "Parent");
                 parentType = prop.ObjectClass.GetTypeMoniker(); //new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 childType = collectionType;
-                xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
                 xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                 xml.WriteEndElement(); // </NavigationProperty>
@@ -270,7 +270,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("Name", p.PropertyName);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
                         TypeMoniker childType = Generator.GetAssociationChildType((BackReferenceProperty)p);
-                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
+                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, ((BackReferenceProperty)p).ReferenceProperty.PropertyName));
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
@@ -282,7 +282,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("Name", p.PropertyName);
                         TypeMoniker parentType = new TypeMoniker(p.GetPropertyTypeString());
                         TypeMoniker childType = Generator.GetAssociationChildType(p as ObjectReferenceProperty);
-                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
+                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, p.PropertyName));
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteEndElement(); // </NavigationProperty>
@@ -294,7 +294,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("Name", p.PropertyName);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
                         TypeMoniker childType = Generator.GetPropertyCollectionObjectType((ObjectReferenceProperty)p);
-                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
+                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
@@ -319,7 +319,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("Name", p.PropertyName);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
                         TypeMoniker childType = Generator.GetPropertyCollectionObjectType((ValueTypeProperty)p);
-                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType));
+                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
@@ -365,8 +365,8 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
-                xml.WriteAttributeString("Association", "Model." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, prop.PropertyName));
+                xml.WriteAttributeString("Association", "Model." + Generator.GetAssociationName(parentType, childType, prop.PropertyName));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -392,8 +392,8 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker childType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteStartElement("AssociationSet");
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
-                xml.WriteAttributeString("Association", "Model." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "fk_Parent"));
+                xml.WriteAttributeString("Association", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -492,8 +492,8 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker(); // new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 TypeMoniker childType = Generator.GetPropertyCollectionObjectType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
-                xml.WriteAttributeString("TypeName", "Model." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "fk_Parent"));
+                xml.WriteAttributeString("TypeName", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
                 xml.WriteAttributeString("StoreEntitySet", childType.Classname);
 
                 xml.WriteStartElement("EndProperty");
@@ -532,8 +532,8 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
-                xml.WriteAttributeString("TypeName", "Model." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, prop.PropertyName));
+                xml.WriteAttributeString("TypeName", "Model." + Generator.GetAssociationName(parentType, childType, prop.PropertyName));
                 xml.WriteAttributeString("StoreEntitySet", childType.Classname);
 
                 xml.WriteStartElement("EndProperty");
@@ -672,7 +672,7 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker(); // new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
                 TypeMoniker childType = Generator.GetPropertyCollectionObjectType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "fk_Parent"));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -722,7 +722,7 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, prop.PropertyName));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -774,7 +774,7 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = objClass.BaseObjectClass.GetTypeMoniker();
                 TypeMoniker childType = objClass.GetTypeMoniker();
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "ID"));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -928,8 +928,8 @@ namespace Kistl.Server.Generators.SQLServer
 
                 xml.WriteStartElement("AssociationSet");
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
-                xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "fk_Parent"));
+                xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
 
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
@@ -955,8 +955,8 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
-                xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, prop.PropertyName));
+                xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType, prop.PropertyName));
 
                 // Parent
                 xml.WriteStartElement("End");
@@ -986,8 +986,8 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = objClass.BaseObjectClass.GetTypeMoniker();
                 TypeMoniker childType = objClass.GetTypeMoniker();
 
-                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType));
-                xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType));
+                xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "ID"));
+                xml.WriteAttributeString("Association", "Model.Store." + Generator.GetAssociationName(parentType, childType, "ID"));
 
                 // Parent
                 xml.WriteStartElement("End");

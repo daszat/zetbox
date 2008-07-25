@@ -100,7 +100,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         private void CreateFKConstraint(ObjectClass parent, Property child, string fk_column)
         {
-            string fk = Generator.GetAssociationName(parent.GetTypeMoniker(), Generator.GetAssociationChildType(child));
+            string fk = Generator.GetAssociationName(parent.GetTypeMoniker(), Generator.GetAssociationChildType(child), fk_column);
             SqlCommand cmd = new SqlCommand("select dbo.fn_FKConstraintExists(@fk)", db, tx);
             cmd.Parameters.AddWithValue("@fk", fk);
             
@@ -123,7 +123,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         private void CreateFKConstraint(ObjectClass parent, ObjectClass child, string fk_column)
         {
-            string fk = Generator.GetAssociationName(parent, child);
+            string fk = Generator.GetAssociationName(parent, child, fk_column);
             SqlCommand cmd = new SqlCommand("select dbo.fn_FKConstraintExists(@fk)", db, tx);
             cmd.Parameters.AddWithValue("@fk", fk);
 

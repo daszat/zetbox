@@ -104,29 +104,29 @@ namespace Kistl.Server.Generators
         }
 
         #region GetAssociationName
-        private static string GetAssociationName(string parentClass, string childClass)
+        private static string GetAssociationName(string parentClass, string childClass, string propertyName)
         {
-            return "FK_" + childClass + "_" + parentClass;
+            return "FK_" + childClass + "_" + parentClass + "_" + propertyName;
         }
 
-        public static string GetAssociationName(TypeMoniker parentClass, TypeMoniker childClass)
+        public static string GetAssociationName(TypeMoniker parentClass, TypeMoniker childClass, string propertyName)
         {
-            return GetAssociationName(parentClass.Classname, childClass.Classname);
+            return GetAssociationName(parentClass.Classname, childClass.Classname, propertyName);
         }
 
-        public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass)
+        public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass, string propertyName)
         {
-            return GetAssociationName(parentClass.ClassName, childClass.ClassName);
+            return GetAssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
         }
 
-        public static string GetAssociationName(CodeNamespace parentNamespace, CodeTypeDeclaration parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass)
+        public static string GetAssociationName(CodeNamespace parentNamespace, CodeTypeDeclaration parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass, string propertyName)
         {
-            return GetAssociationName(parentClass.Name, childClass.Name);
+            return GetAssociationName(parentClass.Name, childClass.Name, propertyName);
         }
 
-        public static string GetAssociationName(ObjectClass parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass)
+        public static string GetAssociationName(ObjectClass parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass, string propertyName)
         {
-            return GetAssociationName(parentClass.ClassName, childClass.Name);
+            return GetAssociationName(parentClass.ClassName, childClass.Name, propertyName);
         }
         #endregion 
 
