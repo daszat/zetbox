@@ -68,7 +68,7 @@ namespace Kistl.GUI.DB
                 if (v.Property != null)
                     controlType = controlType.MakeGenericType(new Type[] { v.Property.GetPropertyType() });
                 else if (v.Method != null)
-                    controlType = controlType.MakeGenericType(new Type[] { v.Method.Parameter.Single(p => p.IsReturnParameter).GetParameterType() });
+                    controlType = controlType.MakeGenericType(new Type[] { v.Method.GetReturnParameter().GetParameterType() });
 
             IPresenter result = (IPresenter)Activator.CreateInstance(controlType);
             result.InitializeComponent(obj, v, ctrl);
@@ -290,7 +290,7 @@ namespace Kistl.GUI.DB
             #region Method Presenter
 
             new PresenterInfo() { Control = VisualType.ObjectReference, SourceType = typeof(Method),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectMethodPresenter" },
             new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(Method),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
 

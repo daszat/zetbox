@@ -50,6 +50,7 @@ namespace Kistl.GUI.DB
                 {
                     result.VisualTree.Children.Add(Visual.CreateDefaultVisual(p));
                 }
+
                 foreach (Method m in @class.Methods)
                 {
                     Visual v = Visual.CreateDefaultVisual(m);

@@ -5,6 +5,7 @@ using System.Text;
 using Kistl.App.Base;
 using System.Reflection;
 using System.ComponentModel;
+using Kistl.API;
 
 namespace Kistl.GUI
 {
@@ -22,7 +23,7 @@ namespace Kistl.GUI
         protected virtual TYPE ExecuteMethod()
         {
             MethodInfo mi = Object.GetType().GetMethods().Single(info => info.Name == Method.MethodName);
-            return (TYPE)mi.Invoke(Object, new object[]{});
+            return (TYPE)mi.Invoke(Object, new object[] { });
         }
 
         #region Initialisation
@@ -90,6 +91,15 @@ namespace Kistl.GUI
         }
 
         #endregion
+    }
+
+    public class ObjectMethodPresenter : DefaultMethodPresenter<IDataObject> {
+        protected override void InitializeComponent()
+        {
+            ((IReferenceControl)Control).ObjectType = Method.GetReturnParameter().GetType();
+            ((IReferenceControl)Control).ItemsSource = Object.Context.GetQuery(Method.GetReturnParameter().GetType()).ToList();
+            base.InitializeComponent();
+        }
     }
 
 }

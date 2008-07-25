@@ -258,10 +258,12 @@ namespace Kistl.App.Base
             }
         }
 
-        // Parameter
+        #region OnGetParameterTypeString_*
+
         public void OnGetParameterType_BaseParameter(Kistl.App.Base.BaseParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
-            e.Result = Type.GetType(obj.GetParameterTypeString(), true);
+            // TODO: e.Result = Type.GetType(obj.GetParameterTypeString(), true);
+            e.Result = Type.GetType(obj.GetParameterTypeString());
         }
         public void OnGetParameterType_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
@@ -298,7 +300,7 @@ namespace Kistl.App.Base
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
             {
-                e.Result = obj.DataType.Module.Namespace + "." + obj.DataType.ClassName;
+                e.Result = obj.DataType.GetDataTypeString();
             }
             else
             {
@@ -308,8 +310,11 @@ namespace Kistl.App.Base
 
         public void OnGetParameterTypeString_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.FullTypeName;
+            e.Result = String.Format("{0}, {1}", obj.FullTypeName, obj.Assembly);
         }
+
+        #endregion
+
         #endregion
 
         public void OnGetReturnParameter_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<BaseParameter> e)

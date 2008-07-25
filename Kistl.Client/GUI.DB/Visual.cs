@@ -124,7 +124,7 @@ namespace Kistl.GUI.DB
             if (method == null)
                 throw new ArgumentNullException("m", "cannot create Visual for null Method");
 
-            BaseParameter bp = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
+            BaseParameter bp = method.GetReturnParameter();
 
             // ignore methods without return value for now
             if (bp == null)
@@ -152,7 +152,7 @@ namespace Kistl.GUI.DB
             }
             else if (bp is ObjectParameter)
             {
-                return null; // TODO: CreateVisual(method, bp.IsList ? VisualType.ObjectList : VisualType.Object);
+                return CreateVisual(method, bp.IsList ? VisualType.ObjectList : VisualType.ObjectReference);
             }
             else if (bp is CLRObjectParameter)
             {
