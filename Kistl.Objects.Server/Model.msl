@@ -356,7 +356,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="FK_BaseProperty_DataType" TypeName="Model.FK_BaseProperty_DataType" StoreEntitySet="BaseProperty">
+    <AssociationSetMapping Name="FK_BaseProperty_DataType_ObjectClass" TypeName="Model.FK_BaseProperty_DataType_ObjectClass" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_DataType">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
       </EndProperty>
@@ -365,7 +365,7 @@
       </EndProperty>
       <Condition ColumnName="fk_ObjectClass" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Task_Projekt" TypeName="Model.FK_Task_Projekt" StoreEntitySet="Task">
+    <AssociationSetMapping Name="FK_Task_Projekt_Projekt" TypeName="Model.FK_Task_Projekt_Projekt" StoreEntitySet="Task">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
       </EndProperty>
@@ -374,7 +374,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
+    <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
       </EndProperty>
@@ -383,7 +383,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ObjectClass_ObjectClass" TypeName="Model.FK_ObjectClass_ObjectClass" StoreEntitySet="ObjectClass">
+    <AssociationSetMapping Name="FK_ObjectClass_ObjectClass_BaseObjectClass" TypeName="Model.FK_ObjectClass_ObjectClass_BaseObjectClass" StoreEntitySet="ObjectClass">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_BaseObjectClass" />
       </EndProperty>
@@ -392,7 +392,7 @@
       </EndProperty>
       <Condition ColumnName="fk_BaseObjectClass" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Method_DataType" TypeName="Model.FK_Method_DataType" StoreEntitySet="Method">
+    <AssociationSetMapping Name="FK_Method_DataType_ObjectClass" TypeName="Model.FK_Method_DataType_ObjectClass" StoreEntitySet="Method">
       <EndProperty Name="A_DataType">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
       </EndProperty>
@@ -401,7 +401,7 @@
       </EndProperty>
       <Condition ColumnName="fk_ObjectClass" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_DataType_Module" TypeName="Model.FK_DataType_Module" StoreEntitySet="DataType">
+    <AssociationSetMapping Name="FK_DataType_Module_Module" TypeName="Model.FK_DataType_Module_Module" StoreEntitySet="DataType">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
       </EndProperty>
@@ -410,7 +410,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ObjectReferenceProperty_ObjectClass" TypeName="Model.FK_ObjectReferenceProperty_ObjectClass" StoreEntitySet="ObjectReferenceProperty">
+    <AssociationSetMapping Name="FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass" TypeName="Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass" StoreEntitySet="ObjectReferenceProperty">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ReferenceObjectClass" />
       </EndProperty>
@@ -419,7 +419,7 @@
       </EndProperty>
       <Condition ColumnName="fk_ReferenceObjectClass" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_BackReferenceProperty_ObjectReferenceProperty" TypeName="Model.FK_BackReferenceProperty_ObjectReferenceProperty" StoreEntitySet="BackReferenceProperty">
+    <AssociationSetMapping Name="FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty" TypeName="Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty" StoreEntitySet="BackReferenceProperty">
       <EndProperty Name="A_ObjectReferenceProperty">
         <ScalarProperty Name="ID" ColumnName="fk_ReferenceProperty" />
       </EndProperty>
@@ -428,7 +428,7 @@
       </EndProperty>
       <Condition ColumnName="fk_ReferenceProperty" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Auftrag_Mitarbeiter" TypeName="Model.FK_Auftrag_Mitarbeiter" StoreEntitySet="Auftrag">
+    <AssociationSetMapping Name="FK_Auftrag_Mitarbeiter_Mitarbeiter" TypeName="Model.FK_Auftrag_Mitarbeiter_Mitarbeiter" StoreEntitySet="Auftrag">
       <EndProperty Name="A_Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
       </EndProperty>
@@ -437,7 +437,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Auftrag_Projekt" TypeName="Model.FK_Auftrag_Projekt" StoreEntitySet="Auftrag">
+    <AssociationSetMapping Name="FK_Auftrag_Projekt_Projekt" TypeName="Model.FK_Auftrag_Projekt_Projekt" StoreEntitySet="Auftrag">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
       </EndProperty>
@@ -446,7 +446,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Kostentraeger_Projekt" TypeName="Model.FK_Kostentraeger_Projekt" StoreEntitySet="Kostentraeger">
+    <AssociationSetMapping Name="FK_Kostentraeger_Projekt_Projekt" TypeName="Model.FK_Kostentraeger_Projekt_Projekt" StoreEntitySet="Kostentraeger">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
       </EndProperty>
@@ -455,7 +455,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Taetigkeit_Mitarbeiter" TypeName="Model.FK_Taetigkeit_Mitarbeiter" StoreEntitySet="Taetigkeit">
+    <AssociationSetMapping Name="FK_Taetigkeit_Mitarbeiter_Mitarbeiter" TypeName="Model.FK_Taetigkeit_Mitarbeiter_Mitarbeiter" StoreEntitySet="Taetigkeit">
       <EndProperty Name="A_Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
       </EndProperty>
@@ -464,7 +464,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Taetigkeit_Zeitkonto" TypeName="Model.FK_Taetigkeit_Zeitkonto" StoreEntitySet="Taetigkeit">
+    <AssociationSetMapping Name="FK_Taetigkeit_Zeitkonto_Zeitkonto" TypeName="Model.FK_Taetigkeit_Zeitkonto_Zeitkonto" StoreEntitySet="Taetigkeit">
       <EndProperty Name="A_Zeitkonto">
         <ScalarProperty Name="ID" ColumnName="fk_Zeitkonto" />
       </EndProperty>
@@ -473,7 +473,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Zeitkonto" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Auftrag_Kunde" TypeName="Model.FK_Auftrag_Kunde" StoreEntitySet="Auftrag">
+    <AssociationSetMapping Name="FK_Auftrag_Kunde_Kunde" TypeName="Model.FK_Auftrag_Kunde_Kunde" StoreEntitySet="Auftrag">
       <EndProperty Name="A_Kunde">
         <ScalarProperty Name="ID" ColumnName="fk_Kunde" />
       </EndProperty>
@@ -482,7 +482,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_DataType_Icon" TypeName="Model.FK_DataType_Icon" StoreEntitySet="DataType">
+    <AssociationSetMapping Name="FK_DataType_Icon_DefaultIcon" TypeName="Model.FK_DataType_Icon_DefaultIcon" StoreEntitySet="DataType">
       <EndProperty Name="A_Icon">
         <ScalarProperty Name="ID" ColumnName="fk_DefaultIcon" />
       </EndProperty>
@@ -491,7 +491,7 @@
       </EndProperty>
       <Condition ColumnName="fk_DefaultIcon" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Assembly_Module" TypeName="Model.FK_Assembly_Module" StoreEntitySet="Assembly">
+    <AssociationSetMapping Name="FK_Assembly_Module_Module" TypeName="Model.FK_Assembly_Module_Module" StoreEntitySet="Assembly">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
       </EndProperty>
@@ -500,7 +500,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_BaseProperty_Module" TypeName="Model.FK_BaseProperty_Module" StoreEntitySet="BaseProperty">
+    <AssociationSetMapping Name="FK_BaseProperty_Module_Module" TypeName="Model.FK_BaseProperty_Module_Module" StoreEntitySet="BaseProperty">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
       </EndProperty>
@@ -509,7 +509,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Method_Module" TypeName="Model.FK_Method_Module" StoreEntitySet="Method">
+    <AssociationSetMapping Name="FK_Method_Module_Module" TypeName="Model.FK_Method_Module_Module" StoreEntitySet="Method">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
       </EndProperty>
@@ -518,7 +518,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_MethodInvocation_Method" TypeName="Model.FK_MethodInvocation_Method" StoreEntitySet="MethodInvocation">
+    <AssociationSetMapping Name="FK_MethodInvocation_Method_Method" TypeName="Model.FK_MethodInvocation_Method_Method" StoreEntitySet="MethodInvocation">
       <EndProperty Name="A_Method">
         <ScalarProperty Name="ID" ColumnName="fk_Method" />
       </EndProperty>
@@ -527,7 +527,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Method" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_MethodInvocation_Assembly" TypeName="Model.FK_MethodInvocation_Assembly" StoreEntitySet="MethodInvocation">
+    <AssociationSetMapping Name="FK_MethodInvocation_Assembly_Assembly" TypeName="Model.FK_MethodInvocation_Assembly_Assembly" StoreEntitySet="MethodInvocation">
       <EndProperty Name="A_Assembly">
         <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
       </EndProperty>
@@ -536,7 +536,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Assembly" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_MethodInvocation_Module" TypeName="Model.FK_MethodInvocation_Module" StoreEntitySet="MethodInvocation">
+    <AssociationSetMapping Name="FK_MethodInvocation_Module_Module" TypeName="Model.FK_MethodInvocation_Module_Module" StoreEntitySet="MethodInvocation">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
       </EndProperty>
@@ -545,7 +545,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_MethodInvocation_DataType" TypeName="Model.FK_MethodInvocation_DataType" StoreEntitySet="MethodInvocation">
+    <AssociationSetMapping Name="FK_MethodInvocation_DataType_InvokeOnObjectClass" TypeName="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass" StoreEntitySet="MethodInvocation">
       <EndProperty Name="A_DataType">
         <ScalarProperty Name="ID" ColumnName="fk_InvokeOnObjectClass" />
       </EndProperty>
@@ -554,7 +554,7 @@
       </EndProperty>
       <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" TypeName="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
+    <AssociationSetMapping Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" TypeName="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter" />
       </EndProperty>
@@ -563,7 +563,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Taetigkeit_TaetigkeitsArt" TypeName="Model.FK_Taetigkeit_TaetigkeitsArt" StoreEntitySet="Taetigkeit">
+    <AssociationSetMapping Name="FK_Taetigkeit_TaetigkeitsArt_TaetigkeitsArt" TypeName="Model.FK_Taetigkeit_TaetigkeitsArt_TaetigkeitsArt" StoreEntitySet="Taetigkeit">
       <EndProperty Name="A_TaetigkeitsArt">
         <ScalarProperty Name="ID" ColumnName="fk_TaetigkeitsArt" />
       </EndProperty>
@@ -572,7 +572,7 @@
       </EndProperty>
       <Condition ColumnName="fk_TaetigkeitsArt" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_BaseParameter_Method" TypeName="Model.FK_BaseParameter_Method" StoreEntitySet="BaseParameter">
+    <AssociationSetMapping Name="FK_BaseParameter_Method_Method" TypeName="Model.FK_BaseParameter_Method_Method" StoreEntitySet="BaseParameter">
       <EndProperty Name="A_Method">
         <ScalarProperty Name="ID" ColumnName="fk_Method" />
       </EndProperty>
@@ -581,7 +581,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Method" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_BaseParameter_Module" TypeName="Model.FK_BaseParameter_Module" StoreEntitySet="BaseParameter">
+    <AssociationSetMapping Name="FK_BaseParameter_Module_Module" TypeName="Model.FK_BaseParameter_Module_Module" StoreEntitySet="BaseParameter">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
       </EndProperty>
@@ -590,7 +590,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ObjectParameter_DataType" TypeName="Model.FK_ObjectParameter_DataType" StoreEntitySet="ObjectParameter">
+    <AssociationSetMapping Name="FK_ObjectParameter_DataType_DataType" TypeName="Model.FK_ObjectParameter_DataType_DataType" StoreEntitySet="ObjectParameter">
       <EndProperty Name="A_DataType">
         <ScalarProperty Name="ID" ColumnName="fk_DataType" />
       </EndProperty>
@@ -599,7 +599,7 @@
       </EndProperty>
       <Condition ColumnName="fk_DataType" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_CLRObjectParameter_Assembly" TypeName="Model.FK_CLRObjectParameter_Assembly" StoreEntitySet="CLRObjectParameter">
+    <AssociationSetMapping Name="FK_CLRObjectParameter_Assembly_Assembly" TypeName="Model.FK_CLRObjectParameter_Assembly_Assembly" StoreEntitySet="CLRObjectParameter">
       <EndProperty Name="A_Assembly">
         <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
       </EndProperty>
@@ -608,7 +608,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Assembly" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_EnumerationEntry_Enumeration" TypeName="Model.FK_EnumerationEntry_Enumeration" StoreEntitySet="EnumerationEntry">
+    <AssociationSetMapping Name="FK_EnumerationEntry_Enumeration_Enumeration" TypeName="Model.FK_EnumerationEntry_Enumeration_Enumeration" StoreEntitySet="EnumerationEntry">
       <EndProperty Name="A_Enumeration">
         <ScalarProperty Name="ID" ColumnName="fk_Enumeration" />
       </EndProperty>
@@ -617,7 +617,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Enumeration" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_EnumerationProperty_Enumeration" TypeName="Model.FK_EnumerationProperty_Enumeration" StoreEntitySet="EnumerationProperty">
+    <AssociationSetMapping Name="FK_EnumerationProperty_Enumeration_Enumeration" TypeName="Model.FK_EnumerationProperty_Enumeration_Enumeration" StoreEntitySet="EnumerationProperty">
       <EndProperty Name="A_Enumeration">
         <ScalarProperty Name="ID" ColumnName="fk_Enumeration" />
       </EndProperty>
@@ -626,7 +626,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Enumeration" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface" TypeName="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface" StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
+    <AssociationSetMapping Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface_ImplementsInterfaces" TypeName="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface_ImplementsInterfaces" StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
       <EndProperty Name="A_Interface">
         <ScalarProperty Name="ID" ColumnName="fk_ImplementsInterfaces" />
       </EndProperty>
@@ -635,7 +635,7 @@
       </EndProperty>
       <Condition ColumnName="fk_ImplementsInterfaces" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_TestObjClass_Kunde" TypeName="Model.FK_TestObjClass_Kunde" StoreEntitySet="TestObjClass">
+    <AssociationSetMapping Name="FK_TestObjClass_Kunde_ObjectProp" TypeName="Model.FK_TestObjClass_Kunde_ObjectProp" StoreEntitySet="TestObjClass">
       <EndProperty Name="A_Kunde">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectProp" />
       </EndProperty>
@@ -644,7 +644,7 @@
       </EndProperty>
       <Condition ColumnName="fk_ObjectProp" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ControlInfo_Assembly" TypeName="Model.FK_ControlInfo_Assembly" StoreEntitySet="ControlInfo">
+    <AssociationSetMapping Name="FK_ControlInfo_Assembly_Assembly" TypeName="Model.FK_ControlInfo_Assembly_Assembly" StoreEntitySet="ControlInfo">
       <EndProperty Name="A_Assembly">
         <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
       </EndProperty>
@@ -653,7 +653,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Assembly" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
+    <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
       </EndProperty>
@@ -662,7 +662,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Kunde_EMailsCollectionEntry_Kunde" TypeName="Model.FK_Kunde_EMailsCollectionEntry_Kunde" StoreEntitySet="Kunde_EMailsCollectionEntry">
+    <AssociationSetMapping Name="FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent" TypeName="Model.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent" StoreEntitySet="Kunde_EMailsCollectionEntry">
       <EndProperty Name="A_Kunde">
         <ScalarProperty Name="ID" ColumnName="fk_Kunde" />
       </EndProperty>
@@ -671,7 +671,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" TypeName="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
+    <AssociationSetMapping Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent" TypeName="Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent" StoreEntitySet="Zeitkonto_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Zeitkonto">
         <ScalarProperty Name="ID" ColumnName="fk_Zeitkonto" />
       </EndProperty>
@@ -680,7 +680,7 @@
       </EndProperty>
       <Condition ColumnName="fk_Zeitkonto" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass" TypeName="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass" StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
+    <AssociationSetMapping Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent" TypeName="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent" StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
       <EndProperty Name="A_ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass" />
       </EndProperty>

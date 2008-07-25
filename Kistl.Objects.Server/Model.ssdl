@@ -50,239 +50,239 @@
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
     <EntitySet Name="ObjectClass_ImplementsInterfacesCollectionEntry" EntityType="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Table="ObjectClasses_ImplementsInterfacesCollection" />
-    <AssociationSet Name="FK_ObjectClass_DataType" Association="Model.Store.FK_ObjectClass_DataType">
+    <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_Property_BaseProperty" Association="Model.Store.FK_Property_BaseProperty">
+    <AssociationSet Name="FK_Property_BaseProperty_ID" Association="Model.Store.FK_Property_BaseProperty_ID">
       <End Role="A_BaseProperty" EntitySet="BaseProperty" />
       <End Role="B_Property" EntitySet="Property" />
     </AssociationSet>
-    <AssociationSet Name="FK_ValueTypeProperty_Property" Association="Model.Store.FK_ValueTypeProperty_Property">
+    <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID">
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ValueTypeProperty" EntitySet="ValueTypeProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_StringProperty_ValueTypeProperty" Association="Model.Store.FK_StringProperty_ValueTypeProperty">
+    <AssociationSet Name="FK_StringProperty_ValueTypeProperty_ID" Association="Model.Store.FK_StringProperty_ValueTypeProperty_ID">
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_StringProperty" EntitySet="StringProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_IntProperty_ValueTypeProperty" Association="Model.Store.FK_IntProperty_ValueTypeProperty">
+    <AssociationSet Name="FK_IntProperty_ValueTypeProperty_ID" Association="Model.Store.FK_IntProperty_ValueTypeProperty_ID">
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_IntProperty" EntitySet="IntProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_BoolProperty_ValueTypeProperty" Association="Model.Store.FK_BoolProperty_ValueTypeProperty">
+    <AssociationSet Name="FK_BoolProperty_ValueTypeProperty_ID" Association="Model.Store.FK_BoolProperty_ValueTypeProperty_ID">
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_BoolProperty" EntitySet="BoolProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_DoubleProperty_ValueTypeProperty" Association="Model.Store.FK_DoubleProperty_ValueTypeProperty">
+    <AssociationSet Name="FK_DoubleProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DoubleProperty_ValueTypeProperty_ID">
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_DoubleProperty" EntitySet="DoubleProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferenceProperty_Property" Association="Model.Store.FK_ObjectReferenceProperty_Property">
+    <AssociationSet Name="FK_ObjectReferenceProperty_Property_ID" Association="Model.Store.FK_ObjectReferenceProperty_Property_ID">
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_DateTimeProperty_ValueTypeProperty" Association="Model.Store.FK_DateTimeProperty_ValueTypeProperty">
+    <AssociationSet Name="FK_DateTimeProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DateTimeProperty_ValueTypeProperty_ID">
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_DateTimeProperty" EntitySet="DateTimeProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_BackReferenceProperty_BaseProperty" Association="Model.Store.FK_BackReferenceProperty_BaseProperty">
+    <AssociationSet Name="FK_BackReferenceProperty_BaseProperty_ID" Association="Model.Store.FK_BackReferenceProperty_BaseProperty_ID">
       <End Role="A_BaseProperty" EntitySet="BaseProperty" />
       <End Role="B_BackReferenceProperty" EntitySet="BackReferenceProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_Kostenstelle_Zeitkonto" Association="Model.Store.FK_Kostenstelle_Zeitkonto">
+    <AssociationSet Name="FK_Kostenstelle_Zeitkonto_ID" Association="Model.Store.FK_Kostenstelle_Zeitkonto_ID">
       <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
       <End Role="B_Kostenstelle" EntitySet="Kostenstelle" />
     </AssociationSet>
-    <AssociationSet Name="FK_Kostentraeger_Zeitkonto" Association="Model.Store.FK_Kostentraeger_Zeitkonto">
+    <AssociationSet Name="FK_Kostentraeger_Zeitkonto_ID" Association="Model.Store.FK_Kostentraeger_Zeitkonto_ID">
       <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
       <End Role="B_Kostentraeger" EntitySet="Kostentraeger" />
     </AssociationSet>
-    <AssociationSet Name="FK_StringParameter_BaseParameter" Association="Model.Store.FK_StringParameter_BaseParameter">
+    <AssociationSet Name="FK_StringParameter_BaseParameter_ID" Association="Model.Store.FK_StringParameter_BaseParameter_ID">
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_StringParameter" EntitySet="StringParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_IntParameter_BaseParameter" Association="Model.Store.FK_IntParameter_BaseParameter">
+    <AssociationSet Name="FK_IntParameter_BaseParameter_ID" Association="Model.Store.FK_IntParameter_BaseParameter_ID">
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_IntParameter" EntitySet="IntParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_DoubleParameter_BaseParameter" Association="Model.Store.FK_DoubleParameter_BaseParameter">
+    <AssociationSet Name="FK_DoubleParameter_BaseParameter_ID" Association="Model.Store.FK_DoubleParameter_BaseParameter_ID">
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_DoubleParameter" EntitySet="DoubleParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_BoolParameter_BaseParameter" Association="Model.Store.FK_BoolParameter_BaseParameter">
+    <AssociationSet Name="FK_BoolParameter_BaseParameter_ID" Association="Model.Store.FK_BoolParameter_BaseParameter_ID">
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_BoolParameter" EntitySet="BoolParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_DateTimeParameter_BaseParameter" Association="Model.Store.FK_DateTimeParameter_BaseParameter">
+    <AssociationSet Name="FK_DateTimeParameter_BaseParameter_ID" Association="Model.Store.FK_DateTimeParameter_BaseParameter_ID">
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_DateTimeParameter" EntitySet="DateTimeParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectParameter_BaseParameter" Association="Model.Store.FK_ObjectParameter_BaseParameter">
+    <AssociationSet Name="FK_ObjectParameter_BaseParameter_ID" Association="Model.Store.FK_ObjectParameter_BaseParameter_ID">
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_ObjectParameter" EntitySet="ObjectParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_CLRObjectParameter_BaseParameter" Association="Model.Store.FK_CLRObjectParameter_BaseParameter">
+    <AssociationSet Name="FK_CLRObjectParameter_BaseParameter_ID" Association="Model.Store.FK_CLRObjectParameter_BaseParameter_ID">
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_Interface_DataType" Association="Model.Store.FK_Interface_DataType">
+    <AssociationSet Name="FK_Interface_DataType_ID" Association="Model.Store.FK_Interface_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Interface" EntitySet="Interface" />
     </AssociationSet>
-    <AssociationSet Name="FK_Enumeration_DataType" Association="Model.Store.FK_Enumeration_DataType">
+    <AssociationSet Name="FK_Enumeration_DataType_ID" Association="Model.Store.FK_Enumeration_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
-    <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty">
+    <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty_ID" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty_ID">
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_DataType" Association="Model.Store.FK_BaseProperty_DataType">
+    <AssociationSet Name="FK_BaseProperty_DataType_ObjectClass" Association="Model.Store.FK_BaseProperty_DataType_ObjectClass">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_Task_Projekt" Association="Model.Store.FK_Task_Projekt">
+    <AssociationSet Name="FK_Task_Projekt_Projekt" Association="Model.Store.FK_Task_Projekt_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Task" EntitySet="Task" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter">
+    <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_ObjectClass" Association="Model.Store.FK_ObjectClass_ObjectClass">
+    <AssociationSet Name="FK_ObjectClass_ObjectClass_BaseObjectClass" Association="Model.Store.FK_ObjectClass_ObjectClass_BaseObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_DataType" Association="Model.Store.FK_Method_DataType">
+    <AssociationSet Name="FK_Method_DataType_ObjectClass" Association="Model.Store.FK_Method_DataType_ObjectClass">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Method" EntitySet="Method" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_Module" Association="Model.Store.FK_DataType_Module">
+    <AssociationSet Name="FK_DataType_Module_Module" Association="Model.Store.FK_DataType_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_DataType" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass" Association="Model.Store.FK_ObjectReferenceProperty_ObjectClass">
+    <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass" Association="Model.Store.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty" Association="Model.Store.FK_BackReferenceProperty_ObjectReferenceProperty">
+    <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty" Association="Model.Store.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty">
       <End Role="A_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
       <End Role="B_BackReferenceProperty" EntitySet="BackReferenceProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_Mitarbeiter" Association="Model.Store.FK_Auftrag_Mitarbeiter">
+    <AssociationSet Name="FK_Auftrag_Mitarbeiter_Mitarbeiter" Association="Model.Store.FK_Auftrag_Mitarbeiter_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="B_Auftrag" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_Projekt" Association="Model.Store.FK_Auftrag_Projekt">
+    <AssociationSet Name="FK_Auftrag_Projekt_Projekt" Association="Model.Store.FK_Auftrag_Projekt_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Auftrag" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_Kostentraeger_Projekt" Association="Model.Store.FK_Kostentraeger_Projekt">
+    <AssociationSet Name="FK_Kostentraeger_Projekt_Projekt" Association="Model.Store.FK_Kostentraeger_Projekt_Projekt">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Kostentraeger" EntitySet="Kostentraeger" />
     </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_Mitarbeiter" Association="Model.Store.FK_Taetigkeit_Mitarbeiter">
+    <AssociationSet Name="FK_Taetigkeit_Mitarbeiter_Mitarbeiter" Association="Model.Store.FK_Taetigkeit_Mitarbeiter_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
     </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_Zeitkonto" Association="Model.Store.FK_Taetigkeit_Zeitkonto">
+    <AssociationSet Name="FK_Taetigkeit_Zeitkonto_Zeitkonto" Association="Model.Store.FK_Taetigkeit_Zeitkonto_Zeitkonto">
       <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
       <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
     </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_Kunde" Association="Model.Store.FK_Auftrag_Kunde">
+    <AssociationSet Name="FK_Auftrag_Kunde_Kunde" Association="Model.Store.FK_Auftrag_Kunde_Kunde">
       <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_Auftrag" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_Icon" Association="Model.Store.FK_DataType_Icon">
+    <AssociationSet Name="FK_DataType_Icon_DefaultIcon" Association="Model.Store.FK_DataType_Icon_DefaultIcon">
       <End Role="A_Icon" EntitySet="Icon" />
       <End Role="B_DataType" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_Assembly_Module" Association="Model.Store.FK_Assembly_Module">
+    <AssociationSet Name="FK_Assembly_Module_Module" Association="Model.Store.FK_Assembly_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_Module" Association="Model.Store.FK_BaseProperty_Module">
+    <AssociationSet Name="FK_BaseProperty_Module_Module" Association="Model.Store.FK_BaseProperty_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_Module" Association="Model.Store.FK_Method_Module">
+    <AssociationSet Name="FK_Method_Module_Module" Association="Model.Store.FK_Method_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_Method" EntitySet="Method" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_Method" Association="Model.Store.FK_MethodInvocation_Method">
+    <AssociationSet Name="FK_MethodInvocation_Method_Method" Association="Model.Store.FK_MethodInvocation_Method_Method">
       <End Role="A_Method" EntitySet="Method" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_Assembly" Association="Model.Store.FK_MethodInvocation_Assembly">
+    <AssociationSet Name="FK_MethodInvocation_Assembly_Assembly" Association="Model.Store.FK_MethodInvocation_Assembly_Assembly">
       <End Role="A_Assembly" EntitySet="Assembly" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_Module" Association="Model.Store.FK_MethodInvocation_Module">
+    <AssociationSet Name="FK_MethodInvocation_Module_Module" Association="Model.Store.FK_MethodInvocation_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_DataType" Association="Model.Store.FK_MethodInvocation_DataType">
+    <AssociationSet Name="FK_MethodInvocation_DataType_InvokeOnObjectClass" Association="Model.Store.FK_MethodInvocation_DataType_InvokeOnObjectClass">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter" Association="Model.Store.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
+    <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" Association="Model.Store.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter">
       <End Role="A_Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt" Association="Model.Store.FK_Taetigkeit_TaetigkeitsArt">
+    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt_TaetigkeitsArt" Association="Model.Store.FK_Taetigkeit_TaetigkeitsArt_TaetigkeitsArt">
       <End Role="A_TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
       <End Role="B_Taetigkeit" EntitySet="Taetigkeit" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseParameter_Method" Association="Model.Store.FK_BaseParameter_Method">
+    <AssociationSet Name="FK_BaseParameter_Method_Method" Association="Model.Store.FK_BaseParameter_Method_Method">
       <End Role="A_Method" EntitySet="Method" />
       <End Role="B_BaseParameter" EntitySet="BaseParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseParameter_Module" Association="Model.Store.FK_BaseParameter_Module">
+    <AssociationSet Name="FK_BaseParameter_Module_Module" Association="Model.Store.FK_BaseParameter_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_BaseParameter" EntitySet="BaseParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectParameter_DataType" Association="Model.Store.FK_ObjectParameter_DataType">
+    <AssociationSet Name="FK_ObjectParameter_DataType_DataType" Association="Model.Store.FK_ObjectParameter_DataType_DataType">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectParameter" EntitySet="ObjectParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_CLRObjectParameter_Assembly" Association="Model.Store.FK_CLRObjectParameter_Assembly">
+    <AssociationSet Name="FK_CLRObjectParameter_Assembly_Assembly" Association="Model.Store.FK_CLRObjectParameter_Assembly_Assembly">
       <End Role="A_Assembly" EntitySet="Assembly" />
       <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_EnumerationEntry_Enumeration" Association="Model.Store.FK_EnumerationEntry_Enumeration">
+    <AssociationSet Name="FK_EnumerationEntry_Enumeration_Enumeration" Association="Model.Store.FK_EnumerationEntry_Enumeration_Enumeration">
       <End Role="A_Enumeration" EntitySet="Enumeration" />
       <End Role="B_EnumerationEntry" EntitySet="EnumerationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_EnumerationProperty_Enumeration" Association="Model.Store.FK_EnumerationProperty_Enumeration">
+    <AssociationSet Name="FK_EnumerationProperty_Enumeration_Enumeration" Association="Model.Store.FK_EnumerationProperty_Enumeration_Enumeration">
       <End Role="A_Enumeration" EntitySet="Enumeration" />
       <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface" Association="Model.Store.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface">
+    <AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface_ImplementsInterfaces" Association="Model.Store.FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface_ImplementsInterfaces">
       <End Role="A_Interface" EntitySet="Interface" />
       <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" EntitySet="ObjectClass_ImplementsInterfacesCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_TestObjClass_Kunde" Association="Model.Store.FK_TestObjClass_Kunde">
+    <AssociationSet Name="FK_TestObjClass_Kunde_ObjectProp" Association="Model.Store.FK_TestObjClass_Kunde_ObjectProp">
       <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_TestObjClass" EntitySet="TestObjClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_ControlInfo_Assembly" Association="Model.Store.FK_ControlInfo_Assembly">
+    <AssociationSet Name="FK_ControlInfo_Assembly_Assembly" Association="Model.Store.FK_ControlInfo_Assembly_Assembly">
       <End Role="A_Assembly" EntitySet="Assembly" />
       <End Role="B_ControlInfo" EntitySet="ControlInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt">
+    <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Kunde_EMailsCollectionEntry_Kunde" Association="Model.Store.FK_Kunde_EMailsCollectionEntry_Kunde">
+    <AssociationSet Name="FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent" Association="Model.Store.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent">
       <End Role="A_Kunde" EntitySet="Kunde" />
       <End Role="B_Kunde_EMailsCollectionEntry" EntitySet="Kunde_EMailsCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto" Association="Model.Store.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto">
+    <AssociationSet Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent" Association="Model.Store.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent">
       <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
       <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" EntitySet="Zeitkonto_MitarbeiterCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass" Association="Model.Store.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass">
+    <AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent" Association="Model.Store.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" EntitySet="ObjectClass_ImplementsInterfacesCollectionEntry" />
     </AssociationSet>
@@ -674,7 +674,7 @@
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="fk_ImplementsInterfaces" Type="int" Nullable="true" />
   </EntityType>
-  <Association Name="FK_ObjectClass_DataType">
+  <Association Name="FK_ObjectClass_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
     <End Role="B_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -686,7 +686,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Property_BaseProperty">
+  <Association Name="FK_Property_BaseProperty_ID">
     <End Role="A_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="1" />
     <End Role="B_Property" Type="Model.Store.Property" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -698,7 +698,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ValueTypeProperty_Property">
+  <Association Name="FK_ValueTypeProperty_Property_ID">
     <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
     <End Role="B_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -710,7 +710,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StringProperty_ValueTypeProperty">
+  <Association Name="FK_StringProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
     <End Role="B_StringProperty" Type="Model.Store.StringProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -722,7 +722,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_IntProperty_ValueTypeProperty">
+  <Association Name="FK_IntProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
     <End Role="B_IntProperty" Type="Model.Store.IntProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -734,7 +734,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BoolProperty_ValueTypeProperty">
+  <Association Name="FK_BoolProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
     <End Role="B_BoolProperty" Type="Model.Store.BoolProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -746,7 +746,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DoubleProperty_ValueTypeProperty">
+  <Association Name="FK_DoubleProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
     <End Role="B_DoubleProperty" Type="Model.Store.DoubleProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -758,7 +758,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectReferenceProperty_Property">
+  <Association Name="FK_ObjectReferenceProperty_Property_ID">
     <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
     <End Role="B_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -770,7 +770,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DateTimeProperty_ValueTypeProperty">
+  <Association Name="FK_DateTimeProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
     <End Role="B_DateTimeProperty" Type="Model.Store.DateTimeProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -782,7 +782,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BackReferenceProperty_BaseProperty">
+  <Association Name="FK_BackReferenceProperty_BaseProperty_ID">
     <End Role="A_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="1" />
     <End Role="B_BackReferenceProperty" Type="Model.Store.BackReferenceProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -794,7 +794,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Kostenstelle_Zeitkonto">
+  <Association Name="FK_Kostenstelle_Zeitkonto_ID">
     <End Role="A_Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="1" />
     <End Role="B_Kostenstelle" Type="Model.Store.Kostenstelle" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -806,7 +806,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Kostentraeger_Zeitkonto">
+  <Association Name="FK_Kostentraeger_Zeitkonto_ID">
     <End Role="A_Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="1" />
     <End Role="B_Kostentraeger" Type="Model.Store.Kostentraeger" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -818,7 +818,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StringParameter_BaseParameter">
+  <Association Name="FK_StringParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_StringParameter" Type="Model.Store.StringParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -830,7 +830,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_IntParameter_BaseParameter">
+  <Association Name="FK_IntParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_IntParameter" Type="Model.Store.IntParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -842,7 +842,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DoubleParameter_BaseParameter">
+  <Association Name="FK_DoubleParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_DoubleParameter" Type="Model.Store.DoubleParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -854,7 +854,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BoolParameter_BaseParameter">
+  <Association Name="FK_BoolParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_BoolParameter" Type="Model.Store.BoolParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -866,7 +866,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DateTimeParameter_BaseParameter">
+  <Association Name="FK_DateTimeParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_DateTimeParameter" Type="Model.Store.DateTimeParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -878,7 +878,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectParameter_BaseParameter">
+  <Association Name="FK_ObjectParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -890,7 +890,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CLRObjectParameter_BaseParameter">
+  <Association Name="FK_CLRObjectParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -902,7 +902,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Interface_DataType">
+  <Association Name="FK_Interface_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
     <End Role="B_Interface" Type="Model.Store.Interface" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -914,7 +914,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Enumeration_DataType">
+  <Association Name="FK_Enumeration_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
     <End Role="B_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -926,7 +926,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EnumerationProperty_ValueTypeProperty">
+  <Association Name="FK_EnumerationProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
     <End Role="B_EnumerationProperty" Type="Model.Store.EnumerationProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -938,7 +938,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BaseProperty_DataType">
+  <Association Name="FK_BaseProperty_DataType_ObjectClass">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
     <ReferentialConstraint>
@@ -950,7 +950,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Task_Projekt">
+  <Association Name="FK_Task_Projekt_Projekt">
     <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="B_Task" Type="Model.Store.Task" Multiplicity="*" />
     <ReferentialConstraint>
@@ -962,7 +962,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter">
+  <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter">
     <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
     <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Store.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -974,7 +974,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectClass_ObjectClass">
+  <Association Name="FK_ObjectClass_ObjectClass_BaseObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="B_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="*" />
     <ReferentialConstraint>
@@ -986,7 +986,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Method_DataType">
+  <Association Name="FK_Method_DataType_ObjectClass">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_Method" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
@@ -998,7 +998,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DataType_Module">
+  <Association Name="FK_DataType_Module_Module">
     <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="B_DataType" Type="Model.Store.DataType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1010,7 +1010,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectReferenceProperty_ObjectClass">
+  <Association Name="FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="B_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1022,7 +1022,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty">
+  <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty">
     <End Role="A_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
     <End Role="B_BackReferenceProperty" Type="Model.Store.BackReferenceProperty" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1034,7 +1034,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Auftrag_Mitarbeiter">
+  <Association Name="FK_Auftrag_Mitarbeiter_Mitarbeiter">
     <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
     <End Role="B_Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1046,7 +1046,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Auftrag_Projekt">
+  <Association Name="FK_Auftrag_Projekt_Projekt">
     <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="B_Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1058,7 +1058,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Kostentraeger_Projekt">
+  <Association Name="FK_Kostentraeger_Projekt_Projekt">
     <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="B_Kostentraeger" Type="Model.Store.Kostentraeger" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1070,7 +1070,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Taetigkeit_Mitarbeiter">
+  <Association Name="FK_Taetigkeit_Mitarbeiter_Mitarbeiter">
     <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
     <End Role="B_Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1082,7 +1082,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Taetigkeit_Zeitkonto">
+  <Association Name="FK_Taetigkeit_Zeitkonto_Zeitkonto">
     <End Role="A_Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="0..1" />
     <End Role="B_Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1094,7 +1094,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Auftrag_Kunde">
+  <Association Name="FK_Auftrag_Kunde_Kunde">
     <End Role="A_Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
     <End Role="B_Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1106,7 +1106,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DataType_Icon">
+  <Association Name="FK_DataType_Icon_DefaultIcon">
     <End Role="A_Icon" Type="Model.Store.Icon" Multiplicity="0..1" />
     <End Role="B_DataType" Type="Model.Store.DataType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1118,7 +1118,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Assembly_Module">
+  <Association Name="FK_Assembly_Module_Module">
     <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="B_Assembly" Type="Model.Store.Assembly" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1130,7 +1130,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BaseProperty_Module">
+  <Association Name="FK_BaseProperty_Module_Module">
     <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="B_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1142,7 +1142,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Method_Module">
+  <Association Name="FK_Method_Module_Module">
     <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="B_Method" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1154,7 +1154,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MethodInvocation_Method">
+  <Association Name="FK_MethodInvocation_Method_Method">
     <End Role="A_Method" Type="Model.Store.Method" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1166,7 +1166,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MethodInvocation_Assembly">
+  <Association Name="FK_MethodInvocation_Assembly_Assembly">
     <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1178,7 +1178,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MethodInvocation_Module">
+  <Association Name="FK_MethodInvocation_Module_Module">
     <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1190,7 +1190,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MethodInvocation_DataType">
+  <Association Name="FK_MethodInvocation_DataType_InvokeOnObjectClass">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1202,7 +1202,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter">
+  <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter">
     <End Role="A_Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
     <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" Type="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1214,7 +1214,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Taetigkeit_TaetigkeitsArt">
+  <Association Name="FK_Taetigkeit_TaetigkeitsArt_TaetigkeitsArt">
     <End Role="A_TaetigkeitsArt" Type="Model.Store.TaetigkeitsArt" Multiplicity="0..1" />
     <End Role="B_Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1226,7 +1226,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BaseParameter_Method">
+  <Association Name="FK_BaseParameter_Method_Method">
     <End Role="A_Method" Type="Model.Store.Method" Multiplicity="0..1" />
     <End Role="B_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1238,7 +1238,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BaseParameter_Module">
+  <Association Name="FK_BaseParameter_Module_Module">
     <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="B_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1250,7 +1250,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectParameter_DataType">
+  <Association Name="FK_ObjectParameter_DataType_DataType">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1262,7 +1262,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CLRObjectParameter_Assembly">
+  <Association Name="FK_CLRObjectParameter_Assembly_Assembly">
     <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
     <End Role="B_CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1274,7 +1274,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EnumerationEntry_Enumeration">
+  <Association Name="FK_EnumerationEntry_Enumeration_Enumeration">
     <End Role="A_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
     <End Role="B_EnumerationEntry" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1286,7 +1286,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EnumerationProperty_Enumeration">
+  <Association Name="FK_EnumerationProperty_Enumeration_Enumeration">
     <End Role="A_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
     <End Role="B_EnumerationProperty" Type="Model.Store.EnumerationProperty" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1298,7 +1298,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface">
+  <Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface_ImplementsInterfaces">
     <End Role="A_Interface" Type="Model.Store.Interface" Multiplicity="0..1" />
     <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" Type="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1310,7 +1310,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TestObjClass_Kunde">
+  <Association Name="FK_TestObjClass_Kunde_ObjectProp">
     <End Role="A_Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
     <End Role="B_TestObjClass" Type="Model.Store.TestObjClass" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1322,7 +1322,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ControlInfo_Assembly">
+  <Association Name="FK_ControlInfo_Assembly_Assembly">
     <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
     <End Role="B_ControlInfo" Type="Model.Store.ControlInfo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1334,7 +1334,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt">
+  <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Store.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1346,7 +1346,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Kunde_EMailsCollectionEntry_Kunde">
+  <Association Name="FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent">
     <End Role="A_Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
     <End Role="B_Kunde_EMailsCollectionEntry" Type="Model.Store.Kunde_EMailsCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1358,7 +1358,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto">
+  <Association Name="FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent">
     <End Role="A_Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="0..1" />
     <End Role="B_Zeitkonto_MitarbeiterCollectionEntry" Type="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1370,7 +1370,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass">
+  <Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent">
     <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" Type="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
