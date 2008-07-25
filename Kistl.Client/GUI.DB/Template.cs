@@ -59,7 +59,8 @@ namespace Kistl.GUI.DB
                 @class = @class.BaseObjectClass;
             }
 
-            result.VisualTree.Children.Add(methodResults);
+            if (methodResults.Children.Count > 0)
+                result.VisualTree.Children.Add(methodResults);
 
             return result;
         }

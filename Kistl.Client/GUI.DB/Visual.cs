@@ -132,17 +132,46 @@ namespace Kistl.GUI.DB
 
             if (bp is StringParameter)
             {
-                return new Visual()
-                {
-                    ControlType = VisualType.String,
-                    Description = "this control displays the results of calling a method a string",
-                    Method = method
-                };
+                return CreateVisual(method, bp.IsList? VisualType.StringList : VisualType.String);
+            }
+            else if (bp is IntParameter)
+            {
+                return CreateVisual(method, bp.IsList ? VisualType.IntegerList : VisualType.Integer);
+            }
+            else if (bp is DoubleParameter)
+            {
+                return CreateVisual(method, bp.IsList ? VisualType.DoubleList : VisualType.Double);
+            }
+            else if (bp is BoolParameter)
+            {
+                return CreateVisual(method, bp.IsList ? VisualType.BooleanList : VisualType.Boolean);
+            }
+            else if (bp is DateTimeParameter)
+            {
+                return CreateVisual(method, bp.IsList ? VisualType.DateTimeList : VisualType.DateTime);
+            }
+            else if (bp is ObjectParameter)
+            {
+                return null; // TODO: CreateVisual(method, bp.IsList ? VisualType.ObjectList : VisualType.Object);
+            }
+            else if (bp is CLRObjectParameter)
+            {
+                return null; // TODO: CreateVisual(method, bp.IsList ? VisualType. : VisualType.);
             }
             else
             {
                 return null;
             }
+        }
+
+        private static Visual CreateVisual(Method method, VisualType returnType)
+        {
+            return new Visual()
+            {
+                ControlType = returnType,
+                Description = "this control displays the results of calling a method",
+                Method = method
+            };
         }
 
         private static Visual CreateVisual(ValueTypeProperty valueTypeProperty)

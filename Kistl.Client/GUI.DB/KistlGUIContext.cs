@@ -246,7 +246,8 @@ namespace Kistl.GUI.DB
             new PresenterInfo() { Control = VisualType.PropertyGroup, SourceType = typeof(Kistl.GUI.GroupPresenter), // TODO: SourceType = typeof(PropertyGroup),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.GroupPresenter" },
 
-            // property presenters
+            #region property presenters
+
             new PresenterInfo() { Control = VisualType.ObjectReference, SourceType = typeof(ObjectReferenceProperty),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectReferencePresenter`1" },
             new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(ObjectReferenceProperty),
@@ -284,8 +285,42 @@ namespace Kistl.GUI.DB
             new PresenterInfo() { Control = VisualType.SimpleObjectList, SourceType = typeof(IList<EnumerationEntry>),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultListPresenter`1" },
 
+            #endregion 
+
+            #region Method Presenter
+
+            new PresenterInfo() { Control = VisualType.ObjectReference, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+            new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+
+            new PresenterInfo() { Control = VisualType.Boolean, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+            new PresenterInfo() { Control = VisualType.BooleanList, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+
+            new PresenterInfo() { Control = VisualType.DateTime, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+            new PresenterInfo() { Control = VisualType.DateTimeList, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+
+            new PresenterInfo() { Control = VisualType.Double, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+            new PresenterInfo() { Control = VisualType.DoubleList, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+
+            new PresenterInfo() { Control = VisualType.Integer, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+            new PresenterInfo() { Control = VisualType.IntegerList, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+
             new PresenterInfo() { Control = VisualType.String, SourceType = typeof(Method),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+            new PresenterInfo() { Control = VisualType.StringList, SourceType = typeof(Method),
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+
+            #endregion
+
 
         });
 
