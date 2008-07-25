@@ -66,8 +66,13 @@ namespace Kistl.API.Client
             _context = null;
         }
 
-        public abstract void ToStream(System.IO.BinaryWriter sw);
-        public abstract void FromStream(System.IO.BinaryReader sr);
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+        }
+        public virtual void FromStream(System.IO.BinaryReader sr)
+        {
+            if (this.Context != null) throw new InvalidOperationException("Deserializing attached objects is not allowed");
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
@@ -155,6 +160,7 @@ namespace Kistl.API.Client
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
+            base.ToStream(sw);
 
             BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
             BinarySerializer.ToBinary(ID, sw);
@@ -164,6 +170,7 @@ namespace Kistl.API.Client
         public override void FromStream(System.IO.BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
+            base.FromStream(sr);
 
             SerializableType t;
             BinarySerializer.FromBinary(out t, sr);
@@ -187,6 +194,7 @@ namespace Kistl.API.Client
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
+            base.ToStream(sw);
 
             BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary((int)ObjectState, sw);
@@ -195,6 +203,7 @@ namespace Kistl.API.Client
         public override void FromStream(System.IO.BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
+            base.FromStream(sr);
 
             int tmp;
             BinarySerializer.FromBinary(out tmp, sr);

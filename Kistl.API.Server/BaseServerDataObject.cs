@@ -80,12 +80,17 @@ namespace Kistl.API.Server
         /// Abstract Method for Serializing this Object.
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
-        public abstract void ToStream(System.IO.BinaryWriter sw);
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+        }
         /// <summary>
         /// Abstract Method for Deserializing this Object.
         /// </summary>
         /// <param name="sr">Stream to serialize from</param>
-        public abstract void FromStream(System.IO.BinaryReader sr);
+        public virtual void FromStream(System.IO.BinaryReader sr)
+        {
+            if (this.EntityState != System.Data.EntityState.Detached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
+        }
 
         /// <summary>
         /// Notifies that a Property is changing
@@ -149,22 +154,13 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Copies the current content to a other Object. Used by clone.
-        /// </summary>
-        /// <param name="target">Object to copy Content to.</param>
-        //public virtual void CopyTo(IDataObject target)
-        //{
-        //    if (target == null) throw new ArgumentNullException("target");
-        //    target.ID = this.ID;
-        //}
-
-        /// <summary>
         /// Serialize this Object to a BinaryWriter
         /// </summary>
         /// <param name="sw">BinaryWriter to serialize to</param>
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
+            base.ToStream(sw);
 
             BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
             BinarySerializer.ToBinary(ID, sw);
@@ -178,6 +174,7 @@ namespace Kistl.API.Server
         public override void FromStream(System.IO.BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
+            base.FromStream(sr);
 
             SerializableType t;
             BinarySerializer.FromBinary(out t, sr);
@@ -207,6 +204,8 @@ namespace Kistl.API.Server
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw", "No BinaryWriter specified");
+            base.ToStream(sw);
+
             BinarySerializer.ToBinary(ID, sw);
             BinarySerializer.ToBinary((int)ObjectState, sw);
         }
@@ -218,6 +217,7 @@ namespace Kistl.API.Server
         public override void FromStream(System.IO.BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
+            base.FromStream(sr);
 
             int tmp;
             BinarySerializer.FromBinary(out tmp, sr);
@@ -226,19 +226,6 @@ namespace Kistl.API.Server
             BinarySerializer.FromBinary(out tmp, sr);
             ObjectState = (DataObjectState)tmp;
         }
-
-        /// <summary>
-        /// Copies the current content to a other Object. Used by clone.
-        /// </summary>
-        /// <param name="obj">Object to copy Content to.</param>
-        //public virtual void CopyTo(ICollectionEntry obj)
-        //{
-        //    if (obj == null) throw new ArgumentNullException("obj");
-
-        //    NotifyPropertyChanging("ID");
-        //    obj.ID = this.ID;
-        //    NotifyPropertyChanged("ID");
-        //}
 
         /// <summary>
         /// Fires an Event before an Property is changed.
