@@ -6,6 +6,8 @@ using Kistl.App.Base;
 using System.Reflection;
 using System.ComponentModel;
 using Kistl.API;
+using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace Kistl.GUI
 {
@@ -22,8 +24,13 @@ namespace Kistl.GUI
 
         protected virtual TYPE ExecuteMethod()
         {
+            return (TYPE)ExecuteMethodImpl();
+        }
+
+        protected object ExecuteMethodImpl()
+        {
             MethodInfo mi = Object.GetType().GetMethods().Single(info => info.Name == Method.MethodName);
-            return (TYPE)mi.Invoke(Object, new object[] { });
+            return mi.Invoke(Object, new object[] { });
         }
 
         #region Initialisation
@@ -93,12 +100,35 @@ namespace Kistl.GUI
         #endregion
     }
 
-    public class ObjectMethodPresenter : DefaultMethodPresenter<IDataObject> {
+    public class ObjectMethodPresenter : DefaultMethodPresenter<IDataObject>
+    {
         protected override void InitializeComponent()
         {
             ((IReferenceControl)Control).ObjectType = Method.GetReturnParameter().GetType();
             ((IReferenceControl)Control).ItemsSource = Object.Context.GetQuery(Method.GetReturnParameter().GetType()).ToList();
             base.InitializeComponent();
+        }
+    }
+
+    public class ObjectListMethodPresenter : DefaultMethodPresenter<ObservableCollection<IDataObject>>
+    {
+        protected override void InitializeComponent()
+        {
+            ((IReferenceListControl)Control).ObjectType = Method.GetReturnParameter().GetType();
+            ((IReferenceListControl)Control).ItemsSource = Object.Context.GetQuery(Method.GetReturnParameter().GetType()).ToList();
+            base.InitializeComponent();
+        }
+
+        protected override ObservableCollection<IDataObject> ExecuteMethod()
+        {
+            ObservableCollection<IDataObject> result = new ObservableCollection<IDataObject>();
+
+            foreach (object o in (IList)base.ExecuteMethodImpl())
+            {
+                result.Add((IDataObject)o);
+            }
+
+            return result;
         }
     }
 

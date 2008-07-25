@@ -696,8 +696,7 @@ namespace Kistl.Server.Generators
             foreach (Method method in current.@interface.Methods)
             {
                 BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
-                CodeMemberMethod m = CreateMethod(current.code_class, method.MethodName,
-                    returnParam != null ? new CodeTypeReference(returnParam.GetParameterTypeString()) : new CodeTypeReference(typeof(void)));
+                CodeMemberMethod m = CreateMethod(current.code_class, method.MethodName, returnParam.ToCodeTypeReference());
 
                 foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
                 {
@@ -1393,14 +1392,14 @@ namespace Kistl.Server.Generators
                         if (returnParam != null)
                         {
                             d.Parameters.Add(new CodeParameterDeclarationExpression(
-                                new CodeTypeReference("MethodReturnEventArgs", new CodeTypeReference(returnParam.GetParameterTypeString())),
+                                new CodeTypeReference("MethodReturnEventArgs", returnParam.ToCodeTypeReference()),
                                 "e"));
                         }
 
                         foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
                         {
                             d.Parameters.Add(new CodeParameterDeclarationExpression(
-                                new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
+                                param.ToCodeTypeReference(), param.ParameterName));
                         }
                     }
 
@@ -1419,27 +1418,23 @@ namespace Kistl.Server.Generators
                     m.Name = method.MethodName;
                     m.Attributes = (objClass == baseObjClass) ? (MemberAttributes.Public) : (MemberAttributes.Public | MemberAttributes.Override);
 
-                    if (returnParam != null)
-                    {
-                        m.ReturnType = new CodeTypeReference(returnParam.GetParameterTypeString());
-                    }
-                    else
-                    {
-                        m.ReturnType = new CodeTypeReference(typeof(void));
-                    }
+                    m.ReturnType = returnParam.ToCodeTypeReference();
 
                     // Add Parameter
                     StringBuilder methodCallParameter = new StringBuilder();
                     foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
                     {
                         m.Parameters.Add(new CodeParameterDeclarationExpression(
-                            new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
+                            param.ToCodeTypeReference(), param.ParameterName));
                         methodCallParameter.AppendFormat(", {0}", param.ParameterName);
                     }
 
                     if (returnParam != null)
                     {
-                        m.Statements.Add(new CodeSnippetExpression(string.Format(@"MethodReturnEventArgs<{0}> e = new MethodReturnEventArgs<{0}>()", returnParam.GetParameterTypeString())));
+                        m.Statements.Add(new CodeSnippetExpression(
+                            string.Format(@"MethodReturnEventArgs<{0}> e = new MethodReturnEventArgs<{0}>()",
+                            returnParam.ToCodeTypeReference().BaseType)));
+          
                     }
 
                     if (objClass != baseObjClass)

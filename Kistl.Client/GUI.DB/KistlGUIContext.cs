@@ -292,7 +292,7 @@ namespace Kistl.GUI.DB
             new PresenterInfo() { Control = VisualType.ObjectReference, SourceType = typeof(Method),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectMethodPresenter" },
             new PresenterInfo() { Control = VisualType.ObjectList, SourceType = typeof(Method),
-                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },
+                AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.ObjectListMethodPresenter" },
 
             new PresenterInfo() { Control = VisualType.Boolean, SourceType = typeof(Method),
                 AssemblyName = "Kistl.Client, Version=1.0.0.0", ClassName = "Kistl.GUI.DefaultMethodPresenter`1" },

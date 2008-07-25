@@ -321,5 +321,19 @@ namespace Kistl.App.Base
         {
             e.Result = obj.Parameter.SingleOrDefault(param => param.IsReturnParameter);
         }
+
+        public void OnGetInheritedMethods_ObjectClass(Kistl.App.Base.ObjectClass obj, Kistl.API.MethodReturnEventArgs<IList<Method>> e)
+        {
+            ObjectClass baseObjectClass = obj.BaseObjectClass;
+            if (baseObjectClass != null)
+            {
+                e.Result = baseObjectClass.GetInheritedMethods();
+                baseObjectClass.Methods.ForEach(m => e.Result.Add(m));
+            }
+            else
+            {
+                e.Result = new List<Method>();
+            }
+        }
     }
 }

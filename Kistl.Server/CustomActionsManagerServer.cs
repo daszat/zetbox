@@ -48,8 +48,15 @@ namespace Kistl.Server
                 foreach (InvokeInfo ii in customAction[obj.GetType()])
                 {
                     // TODO: Fix Case 316
-                    ii.CLREvent.AddEventHandler(obj, Delegate.CreateDelegate(
-                        ii.CLREvent.EventHandlerType, ii.Instance, ii.CLRMethod));
+                    try
+                    {
+                        Delegate d = Delegate.CreateDelegate(ii.CLREvent.EventHandlerType, ii.Instance, ii.CLRMethod);
+                        ii.CLREvent.AddEventHandler(obj, d);
+                    }
+                    catch (Exception ex) { 
+                        // HACK
+                        // TODO : Fix Case 316 properly!
+                    }
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace Kistl.Server
     /// <summary>
     /// Server Helper
     /// </summary>
-    public sealed class Helper
+    public static class Helper
     {
 
         public static void HandleError(Exception ex)
@@ -59,10 +59,5 @@ namespace Kistl.Server
                 return @"c:\temp\KistlCodeGen";
             }
         }
-
-        /// <summary>
-        /// prevent this class from being instantiated
-        /// </summary>
-        private Helper() { }
     }
 }

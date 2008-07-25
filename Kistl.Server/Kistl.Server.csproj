@@ -74,6 +74,7 @@
     <Compile Include="Generators\DatabaseGenerator.cs" />
     <Compile Include="Generators\Exceptions.cs" />
     <Compile Include="Generators\Generator.cs" />
+    <Compile Include="Generators\GeneratorHelper.cs" />
     <Compile Include="Generators\MappingGenerator.cs" />
     <Compile Include="Generators\DataObjectGenerator.cs" />
     <Compile Include="Generators\SQLServer\SQLServerDatabaseGenerator.cs" />
@@ -162,9 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
