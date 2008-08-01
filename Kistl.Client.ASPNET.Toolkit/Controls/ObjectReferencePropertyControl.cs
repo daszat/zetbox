@@ -18,6 +18,8 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
     public abstract class ObjectReferencePropertyControl : ValueControl<IDataObject>, IReferenceControl
     {
         protected abstract DropDownList cbListControl { get; }
+        protected abstract HtmlControl btnNewControl { get; }
+        protected abstract HtmlControl btnOpenControl { get; }
 
         public ObjectReferencePropertyControl()
         {
@@ -74,6 +76,16 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
                     cbListControl.SelectedValue = value.ID.ToString();
                 }
             }
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+
+            btnNewControl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject(Kistl.JavascriptRenderer.newObject({0}));", 
+                ObjectType.ToJSON()));
+            btnOpenControl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject({0});",
+                Value.ToJSON()));
         }
     }
 }

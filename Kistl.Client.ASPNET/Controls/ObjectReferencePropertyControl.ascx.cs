@@ -19,4 +19,14 @@ public partial class Controls_ObjectReferencePropertyControl : Kistl.Client.ASPN
     {
         get { return cbList; }
     }
+
+    protected override HtmlControl btnNewControl
+    {
+        get { return btnNew; }
+    }
+
+    protected override HtmlControl btnOpenControl
+    {
+        get { return btnOpen; }
+    }
 }

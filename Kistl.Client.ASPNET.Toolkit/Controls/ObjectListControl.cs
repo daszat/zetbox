@@ -36,7 +36,9 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
 
         void ObjectListControl_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
+            // an empty array is posted as []
+            // if the value is empty -> the Object is been displayed the first time
+            if (!string.IsNullOrEmpty(HdItemsControl.Value))
             {
                 var postedData = HdItemsControl.Value.FromJSONArray(((IBasicControl)this).Context).ToList();
 

@@ -70,6 +70,14 @@ namespace Kistl.Client.ASPNET.Toolkit
             return GetEncoder().GetString(ms.ToArray());
         }
 
+        public static string ToJSON(this IDataObject obj)
+        {
+            DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(JavaScriptObjectMoniker));
+            MemoryStream ms = new MemoryStream();
+            s.WriteObject(ms, new JavaScriptObjectMoniker(obj));
+            return GetEncoder().GetString(ms.ToArray());
+        }
+
         public static string ToJSONArray(this IEnumerable<IDataObject> list)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(IEnumerable<JavaScriptObjectMoniker>));
