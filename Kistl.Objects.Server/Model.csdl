@@ -450,6 +450,11 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="Struct" BaseType="Model.DataType" />
+  <ComplexType Name="TestPhoneStruct">
+    <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
+    <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />
+  </ComplexType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />

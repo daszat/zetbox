@@ -222,6 +222,11 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Struct)">
+        <MappingFragment StoreEntitySet="Struct">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BaseParameter">
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">

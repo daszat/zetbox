@@ -54,6 +54,20 @@ namespace Kistl.Server.Generators.SQLServer
                         new CodePrimitiveExpression(current.objClass.ClassName))));
             }
         }
+
+        protected override void GenerateStructs(CurrentStruct current)
+        {
+            base.GenerateStructs(current);
+
+            if (current.clientServer == ClientServerEnum.Server)
+            {
+                current.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmComplexTypeAttribute",
+                    new CodeAttributeArgument("NamespaceName",
+                        new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument("Name",
+                        new CodePrimitiveExpression(current.@struct.ClassName))));
+            }
+        }
         #endregion
 
         #region GenerateEdmRelationshipAttribute
@@ -113,6 +127,15 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateValueTypeProperty
         protected override void GenerateProperties_ValueTypeProperty(CurrentObjectClass current)
+        {
+            base.GenerateProperties_ValueTypeProperty(current);
+
+            if (current.clientServer == ClientServerEnum.Server)
+            {
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
+            }
+        }
+        protected override void GenerateProperties_ValueTypeProperty(CurrentStruct current)
         {
             base.GenerateProperties_ValueTypeProperty(current);
 

@@ -20,7 +20,8 @@ namespace Kistl.Server.Generators.SQLServer
             this.ctx = ctx;
 
             IQueryable<ObjectClass> objClassList = Generator.GetObjectClassList(ctx);
-            GenerateCSDL(objClassList);
+            IQueryable<Struct> structList = Generator.GetStructList(ctx);
+            GenerateCSDL(objClassList, structList);
             GenerateMSL(objClassList);
             GenerateSSDL(objClassList);
 
@@ -75,7 +76,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateCSDL
-        private void GenerateCSDL(IQueryable<ObjectClass> objClassList)
+        private void GenerateCSDL(IQueryable<ObjectClass> objClassList, IQueryable<Struct> structList)
         {
             using (System.Xml.XmlTextWriter xml = new System.Xml.XmlTextWriter(path + @"Kistl.Objects.Server\Model.csdl", Encoding.UTF8))
             {
@@ -96,6 +97,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 GenerateCSDL_EntityContainer(xml, objClassList, listProperties, objectReferenceProperties);
                 GenerateCSDL_EntityTypeObjects(xml, objClassList);
+                GenerateCSDL_ComplexTypeStructs(xml, structList);
                 GenerateCSDL_EntityTypeListProperties(xml, listProperties);
                 GenerateCSDL_AssociationObjectRelations(xml, objectReferenceProperties);
                 GenerateCSDL_AssociationListPropertiesRelations(xml, listProperties);
@@ -228,6 +230,40 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                 xml.WriteEndElement(); // </NavigationProperty>
+
+                xml.WriteEndElement(); // </EntityType>
+            }
+        }
+        #endregion
+
+        #region GenerateCSDL_ComplexTypeStructs
+        private void GenerateCSDL_ComplexTypeStructs(System.Xml.XmlTextWriter xml, IQueryable<Struct> structList)
+        {
+            foreach (Struct obj in structList)
+            {
+                xml.WriteStartElement("ComplexType");
+                xml.WriteAttributeString("Name", obj.ClassName);
+
+                foreach (BaseProperty p in obj.Properties)
+                {
+                    if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
+                    {
+                        // ValueTypeProperty
+                        xml.WriteStartElement("Property");
+                        xml.WriteAttributeString("Name", p.PropertyName);
+                        xml.WriteAttributeString("Type", p is EnumerationProperty ? "Int32" : Type.GetType(p.GetPropertyTypeString()).Name);
+                        if (p is StringProperty)
+                        {
+                            xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
+                        }
+                        xml.WriteAttributeString("Nullable", ((ValueTypeProperty)p).IsNullable.ToString().ToLowerInvariant());
+                        xml.WriteEndElement(); // </Property>
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Propertytype " + p.GetPropertyTypeString() + " is not supported");
+                    }
+                }
 
                 xml.WriteEndElement(); // </EntityType>
             }

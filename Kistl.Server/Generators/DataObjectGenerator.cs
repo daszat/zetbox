@@ -87,6 +87,24 @@ namespace Kistl.Server.Generators
             }
         }
 
+        public class CurrentStruct : CurrentBase
+        {
+            public Struct @struct { get; set; }
+
+            public override object Clone()
+            {
+                CurrentStruct result = new CurrentStruct();
+                CloneInternal(result);
+                return result;
+            }
+
+            protected override void CloneInternal(CurrentBase result)
+            {
+                base.CloneInternal(result);
+                ((CurrentStruct)result).@struct = this.@struct;
+            }
+        }
+
         public class CurrentEnumeration : CurrentBase
         {
             public Enumeration enumeration { get; set; }
@@ -140,6 +158,14 @@ namespace Kistl.Server.Generators
             {
                 GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, clientServer = ClientServerEnum.Client, enumeration = e });
                 GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, clientServer = ClientServerEnum.Server, enumeration = e });
+            }
+
+            var structList = Generator.GetStructList(ctx);
+
+            foreach (Struct s in structList)
+            {
+                GenerateStructsInternal(new CurrentStruct() { ctx = ctx, clientServer = ClientServerEnum.Client, @struct = s });
+                GenerateStructsInternal(new CurrentStruct() { ctx = ctx, clientServer = ClientServerEnum.Server, @struct = s });
             }
 
             GenerateAssemblyInfo(ClientServerEnum.Server);
@@ -712,6 +738,33 @@ namespace Kistl.Server.Generators
         }
         #endregion
 
+        #region GenerateStructs
+        protected virtual void GenerateStructs(CurrentStruct current)
+        {
+        }
+
+        private void GenerateStructsInternal(CurrentStruct current)
+        {
+            current.code = new CodeCompileUnit();
+
+            // Create Namespace
+            current.code_namespace = CreateNamespace(current.code, current.@struct.Module.Namespace);
+            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.clientServer)));
+
+            // Create Struct class
+            current.code_class = CreateClass(current.code_namespace, current.@struct.ClassName, string.Format("Base{0}StructObject", current.clientServer));
+
+            // Create Properties
+            GeneratePropertiesInternal((CurrentStruct)current.Clone());
+
+            // Call derived Classes
+            GenerateStructs(current);
+
+            // Generate the code & save
+            SaveFile(current.code, "Kistl.Objects." + current.clientServer + @"\" + current.@struct.ClassName + "." + current.clientServer + ".Designer.cs");
+        }
+        #endregion
+
         #region GenerateEnumerations
         protected virtual void GenerateEnumerations(CurrentEnumeration current)
         {
@@ -795,6 +848,30 @@ namespace Kistl.Server.Generators
 
             GenerateProperties_ValueTypeProperty(current);
         }
+
+        protected virtual void GenerateProperties_ValueTypeProperty(CurrentStruct current)
+        {
+        }
+
+        private void GenerateProperties_ValueTypePropertyInternal(CurrentStruct current)
+        {
+            current.code_field = CreateField(current.code_class, GetTypeString(current.property, current.clientServer),
+                "_" + current.property.PropertyName);
+
+            current.code_property = CreateProperty(current.code_class, current.code_field.Type, current.property.PropertyName);
+
+            current.code_property.GetStatements.Add(new CodeSnippetExpression("return " + current.code_field.Name));
+            current.code_property.SetStatements.Add(new CodeSnippetExpression(
+                string.Format(@"if({1} != value)
+                {{
+                    NotifyPropertyChanging(""{0}""); 
+                    {1} = value; 
+                    NotifyPropertyChanged(""{0}"");
+                }}",
+                current.property.PropertyName, current.code_field.Name)));
+
+            GenerateProperties_ValueTypeProperty(current);
+        }        
         #endregion
 
         #region GenerateValueTypeProperty_Collection
@@ -1207,7 +1284,26 @@ namespace Kistl.Server.Generators
                 {
                     // not supported yet
                     // just ignore it for now
-                    throw new ApplicationException("Unknonw Propertytype " + baseProp.GetType().Name);
+                    throw new NotSupportedException("Unknown Propertytype " + baseProp.GetType().Name);
+                }
+            }
+        }
+
+        private void GeneratePropertiesInternal(CurrentStruct current)
+        {
+            foreach (BaseProperty baseProp in current.@struct.Properties)
+            {
+                current.property = baseProp;
+                if (baseProp is ValueTypeProperty && !((ValueTypeProperty)baseProp).IsList)
+                {
+                    // Simple Property
+                    GenerateProperties_ValueTypePropertyInternal((CurrentStruct)current.Clone());
+                }
+                else
+                {
+                    // not supported yet
+                    // just ignore it for now
+                    throw new NotSupportedException("Unknonw Propertytype " + baseProp.GetType().Name);
                 }
             }
         }

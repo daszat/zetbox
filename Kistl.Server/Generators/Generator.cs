@@ -214,6 +214,12 @@ namespace Kistl.Server.Generators
                    select e;
         }
 
+        public static IQueryable<Struct> GetStructList(Kistl.API.IKistlContext ctx)
+        {
+            return from s in ctx.GetQuery<Struct>()
+                   select s;
+        }
+
         public static IQueryable<Property> GetCollectionProperties(Kistl.API.IKistlContext ctx)
         {
             // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception

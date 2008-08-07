@@ -24,31 +24,31 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Interface : Kistl.App.Base.DataType
+    public class Struct : Kistl.App.Base.DataType
     {
         
-        public Interface()
+        public Struct()
         {
         }
         
-        public event ToStringHandler<Interface> OnToString_Interface;
+        public event ToStringHandler<Struct> OnToString_Struct;
         
-        public event ObjectEventHandler<Interface> OnPreSave_Interface;
+        public event ObjectEventHandler<Struct> OnPreSave_Struct;
         
-        public event ObjectEventHandler<Interface> OnPostSave_Interface;
+        public event ObjectEventHandler<Struct> OnPostSave_Struct;
         
-        public event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;
+        public event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;
         
-        public event GetDataType_Handler<Interface> OnGetDataType_Interface;
+        public event GetDataType_Handler<Struct> OnGetDataType_Struct;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Interface != null)
+            if (OnToString_Struct != null)
             {
-                OnToString_Interface(this, e);
+                OnToString_Struct(this, e);
             }
             return e.Result;
         }
@@ -56,13 +56,13 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Interface != null) OnPreSave_Interface(this);
+            if (OnPreSave_Struct != null) OnPreSave_Struct(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Interface != null) OnPostSave_Interface(this);
+            if (OnPostSave_Struct != null) OnPostSave_Struct(this);
         }
         
         public override void ApplyChanges(Kistl.API.IDataObject obj)
@@ -79,9 +79,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetDataTypeString();
-            if (OnGetDataTypeString_Interface != null)
+            if (OnGetDataTypeString_Struct != null)
             {
-                OnGetDataTypeString_Interface(this, e);
+                OnGetDataTypeString_Struct(this, e);
             };
             return e.Result;
         }
@@ -90,9 +90,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
             e.Result = base.GetDataType();
-            if (OnGetDataType_Interface != null)
+            if (OnGetDataType_Struct != null)
             {
-                OnGetDataType_Interface(this, e);
+                OnGetDataType_Struct(this, e);
             };
             return e.Result;
         }

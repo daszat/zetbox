@@ -19,7 +19,6 @@ namespace Kistl.App.Base
         /// <param name="e"></param>
         public void OnToString_DataType(DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            // TODO: if (!IsValid)
             if (Helper.IsFloatingObject(obj))
             {
                 e.Result = String.Format("new {0}", obj.GetType());
@@ -160,7 +159,14 @@ namespace Kistl.App.Base
 
         public void OnGetDataTypeString_DataType(Kistl.App.Base.DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Module.Namespace + "." + obj.ClassName;
+            if (Helper.IsFloatingObject(obj))
+            {
+                e.Result = "";
+            }
+            else
+            {
+                e.Result = obj.Module.Namespace + "." + obj.ClassName;
+            }
         }
 
         public void OnGetPropertyType_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<System.Type> e)

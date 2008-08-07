@@ -46,6 +46,7 @@
     <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Table="Muhblas" />
     <EntitySet Name="AnotherTest" EntityType="Model.Store.AnotherTest" Table="AnotherTests" />
     <EntitySet Name="LastTest" EntityType="Model.Store.LastTest" Table="LastTests" />
+    <EntitySet Name="Struct" EntityType="Model.Store.Struct" Table="Structs" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -137,6 +138,10 @@
     <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty_ID" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty_ID">
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Struct_DataType_ID" Association="Model.Store.FK_Struct_DataType_ID">
+      <End Role="A_DataType" EntitySet="DataType" />
+      <End Role="B_Struct" EntitySet="Struct" />
     </AssociationSet>
     <AssociationSet Name="FK_BaseProperty_DataType_ObjectClass" Association="Model.Store.FK_BaseProperty_DataType_ObjectClass">
       <End Role="A_DataType" EntitySet="DataType" />
@@ -642,6 +647,12 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
+  <EntityType Name="Struct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -934,6 +945,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_EnumerationProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Struct_DataType_ID">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
+    <End Role="B_Struct" Type="Model.Store.Struct" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_DataType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Struct">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

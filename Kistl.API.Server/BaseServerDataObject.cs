@@ -245,4 +245,37 @@ namespace Kistl.API.Server
             base.ReportPropertyChanged(property);
         }
     }
+
+    public abstract class BaseServerStructObject : ComplexObject, INotifyPropertyChanged, INotifyPropertyChanging
+    {
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+        }
+        public virtual void FromStream(System.IO.BinaryReader sr)
+        {
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        /// <summary>
+        /// Property is beeing changing
+        /// </summary>
+        /// <param name="property"></param>
+        public virtual void NotifyPropertyChanging(string property)
+        {
+            if (PropertyChanging != null)
+                PropertyChanging(this, new PropertyChangingEventArgs(property));
+        }
+
+        /// <summary>
+        /// Property has been changed
+        /// </summary>
+        /// <param name="property"></param>
+        public virtual void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+    }
 }
