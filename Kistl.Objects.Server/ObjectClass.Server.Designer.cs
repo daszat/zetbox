@@ -52,12 +52,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_TableName != value)
+                if (TableName != value)
                 {
                     NotifyPropertyChanging("TableName"); 
-                    _TableName = value; 
-                    NotifyPropertyChanged("TableName");
-                };
+                    _TableName = value;
+                    NotifyPropertyChanged("TableName");;
+                }
             }
         }
         
@@ -127,12 +127,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_IsSimpleObject != value)
+                if (IsSimpleObject != value)
                 {
                     NotifyPropertyChanging("IsSimpleObject"); 
-                    _IsSimpleObject = value; 
-                    NotifyPropertyChanged("IsSimpleObject");
-                };
+                    _IsSimpleObject = value;
+                    NotifyPropertyChanged("IsSimpleObject");;
+                }
             }
         }
         

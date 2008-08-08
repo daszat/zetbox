@@ -226,6 +226,21 @@ namespace Kistl.App.Base
 
         }
 
+        public void OnGetPropertyTypeString_StructProperty(Kistl.App.Base.StructProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            // TODO: IsValid?
+            if (Helper.IsPersistedObject(obj))
+            {
+                DataType objClass = obj.StructDefinition;
+                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+            }
+            else
+            {
+                e.Result = String.Format("StructProperty {0}: {1}", obj.ID, obj.PropertyName);
+            }
+
+        }
+        
         public void OnGetPropertyTypeString_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "System.String";

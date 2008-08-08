@@ -47,12 +47,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_Namespace != value)
+                if (Namespace != value)
                 {
                     NotifyPropertyChanging("Namespace"); 
-                    _Namespace = value; 
-                    NotifyPropertyChanged("Namespace");
-                };
+                    _Namespace = value;
+                    NotifyPropertyChanged("Namespace");;
+                }
             }
         }
         
@@ -64,12 +64,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_ModuleName != value)
+                if (ModuleName != value)
                 {
                     NotifyPropertyChanging("ModuleName"); 
-                    _ModuleName = value; 
-                    NotifyPropertyChanged("ModuleName");
-                };
+                    _ModuleName = value;
+                    NotifyPropertyChanged("ModuleName");;
+                }
             }
         }
         

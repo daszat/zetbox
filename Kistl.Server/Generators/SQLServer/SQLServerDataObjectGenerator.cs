@@ -126,7 +126,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateValueTypeProperty
-        protected override void GenerateProperties_ValueTypeProperty(CurrentObjectClass current)
+        protected override void GenerateProperties_ValueTypeProperty(CurrentBase current)
         {
             base.GenerateProperties_ValueTypeProperty(current);
 
@@ -135,15 +135,15 @@ namespace Kistl.Server.Generators.SQLServer
                 current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
             }
         }
-        protected override void GenerateProperties_ValueTypeProperty(CurrentStruct current)
-        {
-            base.GenerateProperties_ValueTypeProperty(current);
+        //protected override void GenerateProperties_ValueTypeProperty(CurrentStruct current)
+        //{
+        //    base.GenerateProperties_ValueTypeProperty(current);
 
-            if (current.clientServer == ClientServerEnum.Server)
-            {
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
-            }
-        }
+        //    if (current.clientServer == ClientServerEnum.Server)
+        //    {
+        //        current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
+        //    }
+        //}
         #endregion
 
         #region GenerateProperties_ObjectReferenceProperty_Collection
@@ -382,6 +382,15 @@ namespace Kistl.Server.Generators.SQLServer
         }
 
         #endregion
+        
+        protected override void GenerateProperties_StructProperty(CurrentObjectClass current)
+        {
+            base.GenerateProperties_StructProperty(current);
+            if (current.clientServer == ClientServerEnum.Server)
+            {
+                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmComplexPropertyAttribute"));
+            }
+        }
 
     }
 }

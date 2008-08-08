@@ -39,12 +39,12 @@ namespace Kistl.App.Test
             }
             set
             {
-                if(_Number != value)
+                if (Number != value)
                 {
                     NotifyPropertyChanging("Number"); 
-                    _Number = value; 
-                    NotifyPropertyChanged("Number");
-                };
+                    _Number = value;
+                    NotifyPropertyChanged("Number");;
+                }
             }
         }
         
@@ -56,12 +56,12 @@ namespace Kistl.App.Test
             }
             set
             {
-                if(_AreaCode != value)
+                if (AreaCode != value)
                 {
                     NotifyPropertyChanging("AreaCode"); 
-                    _AreaCode = value; 
-                    NotifyPropertyChanged("AreaCode");
-                };
+                    _AreaCode = value;
+                    NotifyPropertyChanged("AreaCode");;
+                }
             }
         }
     }

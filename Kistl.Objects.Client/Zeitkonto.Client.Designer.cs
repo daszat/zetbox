@@ -50,12 +50,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                if(_Kontoname != value)
+                if (Kontoname != value)
                 {
                     NotifyPropertyChanging("Kontoname"); 
-                    _Kontoname = value; 
-                    NotifyPropertyChanged("Kontoname");
-                };
+                    _Kontoname = value;
+                    NotifyPropertyChanged("Kontoname");;
+                }
             }
         }
         
@@ -95,12 +95,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                if(_MaxStunden != value)
+                if (MaxStunden != value)
                 {
                     NotifyPropertyChanging("MaxStunden"); 
-                    _MaxStunden = value; 
-                    NotifyPropertyChanged("MaxStunden");
-                };
+                    _MaxStunden = value;
+                    NotifyPropertyChanged("MaxStunden");;
+                }
             }
         }
         
@@ -112,12 +112,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                if(_AktuelleStunden != value)
+                if (AktuelleStunden != value)
                 {
                     NotifyPropertyChanging("AktuelleStunden"); 
-                    _AktuelleStunden = value; 
-                    NotifyPropertyChanged("AktuelleStunden");
-                };
+                    _AktuelleStunden = value;
+                    NotifyPropertyChanged("AktuelleStunden");;
+                }
             }
         }
         

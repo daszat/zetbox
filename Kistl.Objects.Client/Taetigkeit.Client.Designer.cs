@@ -111,12 +111,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                if(_Datum != value)
+                if (Datum != value)
                 {
                     NotifyPropertyChanging("Datum"); 
-                    _Datum = value; 
-                    NotifyPropertyChanged("Datum");
-                };
+                    _Datum = value;
+                    NotifyPropertyChanged("Datum");;
+                }
             }
         }
         
@@ -128,12 +128,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                if(_Dauer != value)
+                if (Dauer != value)
                 {
                     NotifyPropertyChanging("Dauer"); 
-                    _Dauer = value; 
-                    NotifyPropertyChanged("Dauer");
-                };
+                    _Dauer = value;
+                    NotifyPropertyChanged("Dauer");;
+                }
             }
         }
         

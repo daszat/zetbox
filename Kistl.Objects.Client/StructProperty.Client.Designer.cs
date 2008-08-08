@@ -21,77 +21,69 @@ namespace Kistl.App.Base
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
-    using Kistl.API.Server;
+    using Kistl.API.Client;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Property")]
-    public class Property : Kistl.App.Base.BaseProperty
+    public class StructProperty : Kistl.App.Base.Property
     {
         
-        private bool _IsList;
+        private System.Nullable<int> _fk_StructDefinition = null;
         
-        private bool _IsNullable;
-        
-        public Property()
+        public StructProperty()
         {
         }
         
-        [EdmScalarPropertyAttribute()]
-        public bool IsList
+        [XmlIgnore()]
+        public Kistl.App.Base.Struct StructDefinition
         {
             get
             {
-                return _IsList;
+                if (fk_StructDefinition == null) return null;
+                return Context.Find<Kistl.App.Base.Struct>(fk_StructDefinition.Value);
             }
             set
             {
-                if (IsList != value)
+                fk_StructDefinition = value != null ? (int?)value.ID : null;
+            }
+        }
+        
+        public System.Nullable<int> fk_StructDefinition
+        {
+            get
+            {
+                return _fk_StructDefinition;
+            }
+            set
+            {
+                if (fk_StructDefinition != value)
                 {
-                    NotifyPropertyChanging("IsList"); 
-                    _IsList = value;
-                    NotifyPropertyChanged("IsList");;
+                    NotifyPropertyChanging("StructDefinition"); 
+                    _fk_StructDefinition = value;
+                    NotifyPropertyChanged("StructDefinition");;
                 }
             }
         }
         
-        [EdmScalarPropertyAttribute()]
-        public bool IsNullable
-        {
-            get
-            {
-                return _IsNullable;
-            }
-            set
-            {
-                if (IsNullable != value)
-                {
-                    NotifyPropertyChanging("IsNullable"); 
-                    _IsNullable = value;
-                    NotifyPropertyChanged("IsNullable");;
-                }
-            }
-        }
+        public event ToStringHandler<StructProperty> OnToString_StructProperty;
         
-        public event ToStringHandler<Property> OnToString_Property;
+        public event ObjectEventHandler<StructProperty> OnPreSave_StructProperty;
         
-        public event ObjectEventHandler<Property> OnPreSave_Property;
+        public event ObjectEventHandler<StructProperty> OnPostSave_StructProperty;
         
-        public event ObjectEventHandler<Property> OnPostSave_Property;
+        public event GetPropertyTypeString_Handler<StructProperty> OnGetPropertyTypeString_StructProperty;
         
-        public event GetPropertyTypeString_Handler<Property> OnGetPropertyTypeString_Property;
+        public event GetGUIRepresentation_Handler<StructProperty> OnGetGUIRepresentation_StructProperty;
         
-        public event GetGUIRepresentation_Handler<Property> OnGetGUIRepresentation_Property;
-        
-        public event GetPropertyType_Handler<Property> OnGetPropertyType_Property;
+        public event GetPropertyType_Handler<StructProperty> OnGetPropertyType_StructProperty;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Property != null)
+            if (OnToString_StructProperty != null)
             {
-                OnToString_Property(this, e);
+                OnToString_StructProperty(this, e);
             }
             return e.Result;
         }
@@ -99,13 +91,19 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Property != null) OnPreSave_Property(this);
+            if (OnPreSave_StructProperty != null) OnPreSave_StructProperty(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Property != null) OnPostSave_Property(this);
+            if (OnPostSave_StructProperty != null) OnPostSave_StructProperty(this);
+        }
+        
+        public override void ApplyChanges(Kistl.API.IDataObject obj)
+        {
+            base.ApplyChanges(obj);
+            ((StructProperty)obj).fk_StructDefinition = this.fk_StructDefinition;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -117,9 +115,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetPropertyTypeString();
-            if (OnGetPropertyTypeString_Property != null)
+            if (OnGetPropertyTypeString_StructProperty != null)
             {
-                OnGetPropertyTypeString_Property(this, e);
+                OnGetPropertyTypeString_StructProperty(this, e);
             };
             return e.Result;
         }
@@ -128,9 +126,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetGUIRepresentation();
-            if (OnGetGUIRepresentation_Property != null)
+            if (OnGetGUIRepresentation_StructProperty != null)
             {
-                OnGetGUIRepresentation_Property(this, e);
+                OnGetGUIRepresentation_StructProperty(this, e);
             };
             return e.Result;
         }
@@ -139,9 +137,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
             e.Result = base.GetPropertyType();
-            if (OnGetPropertyType_Property != null)
+            if (OnGetPropertyType_StructProperty != null)
             {
-                OnGetPropertyType_Property(this, e);
+                OnGetPropertyType_StructProperty(this, e);
             };
             return e.Result;
         }
@@ -149,15 +147,13 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this._IsList, sw);
-            BinarySerializer.ToBinary(this._IsNullable, sw);
+            BinarySerializer.ToBinary(this.fk_StructDefinition, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._IsList, sr);
-            BinarySerializer.FromBinary(out this._IsNullable, sr);
+            BinarySerializer.FromBinary(out this._fk_StructDefinition, sr);
         }
     }
 }

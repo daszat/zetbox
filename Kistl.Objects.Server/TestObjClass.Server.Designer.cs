@@ -66,12 +66,12 @@ namespace Kistl.App.Test
             }
             set
             {
-                if(_StringProp != value)
+                if (StringProp != value)
                 {
                     NotifyPropertyChanging("StringProp"); 
-                    _StringProp = value; 
-                    NotifyPropertyChanged("StringProp");
-                };
+                    _StringProp = value;
+                    NotifyPropertyChanged("StringProp");;
+                }
             }
         }
         
@@ -84,12 +84,12 @@ namespace Kistl.App.Test
             }
             set
             {
-                if(_TestEnumProp != value)
+                if (TestEnumProp != value)
                 {
                     NotifyPropertyChanging("TestEnumProp"); 
-                    _TestEnumProp = value; 
-                    NotifyPropertyChanged("TestEnumProp");
-                };
+                    _TestEnumProp = value;
+                    NotifyPropertyChanged("TestEnumProp");;
+                }
             }
         }
         
@@ -136,12 +136,12 @@ namespace Kistl.App.Test
             }
             set
             {
-                if(_MyIntProperty != value)
+                if (MyIntProperty != value)
                 {
                     NotifyPropertyChanging("MyIntProperty"); 
-                    _MyIntProperty = value; 
-                    NotifyPropertyChanged("MyIntProperty");
-                };
+                    _MyIntProperty = value;
+                    NotifyPropertyChanged("MyIntProperty");;
+                }
             }
         }
         

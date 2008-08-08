@@ -58,12 +58,12 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                if(_Name != value)
+                if (Name != value)
                 {
                     NotifyPropertyChanging("Name"); 
-                    _Name = value; 
-                    NotifyPropertyChanged("Name");
-                };
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
             }
         }
         

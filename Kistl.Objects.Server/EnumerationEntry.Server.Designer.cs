@@ -98,12 +98,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_EnumerationEntryName != value)
+                if (EnumerationEntryName != value)
                 {
                     NotifyPropertyChanging("EnumerationEntryName"); 
-                    _EnumerationEntryName = value; 
-                    NotifyPropertyChanged("EnumerationEntryName");
-                };
+                    _EnumerationEntryName = value;
+                    NotifyPropertyChanged("EnumerationEntryName");;
+                }
             }
         }
         
@@ -116,12 +116,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_EnumValue != value)
+                if (EnumValue != value)
                 {
                     NotifyPropertyChanging("EnumValue"); 
-                    _EnumValue = value; 
-                    NotifyPropertyChanged("EnumValue");
-                };
+                    _EnumValue = value;
+                    NotifyPropertyChanged("EnumValue");;
+                }
             }
         }
         

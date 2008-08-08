@@ -78,12 +78,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_PropertyName != value)
+                if (PropertyName != value)
                 {
                     NotifyPropertyChanging("PropertyName"); 
-                    _PropertyName = value; 
-                    NotifyPropertyChanged("PropertyName");
-                };
+                    _PropertyName = value;
+                    NotifyPropertyChanged("PropertyName");;
+                }
             }
         }
         
@@ -95,12 +95,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_AltText != value)
+                if (AltText != value)
                 {
                     NotifyPropertyChanging("AltText"); 
-                    _AltText = value; 
-                    NotifyPropertyChanged("AltText");
-                };
+                    _AltText = value;
+                    NotifyPropertyChanged("AltText");;
+                }
             }
         }
         

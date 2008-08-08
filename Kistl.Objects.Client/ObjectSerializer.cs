@@ -28,7 +28,7 @@ namespace Kistl.API
     public sealed class XMLObjectCollection : IXmlObjectCollection
     {
         
-        private List<Object> _Objects = new List<Object>();
+        private System.Collections.Generic.List<object> _Objects = new List<Object>();
         
         [XmlArrayItem(Type=typeof(Kistl.App.Base.ObjectClass), ElementName="ObjectClass")]
         [XmlArrayItem(Type=typeof(Kistl.App.Projekte.Projekt), ElementName="Projekt")]
@@ -76,7 +76,8 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Test.AnotherTest), ElementName="AnotherTest")]
         [XmlArrayItem(Type=typeof(Kistl.App.Test.LastTest), ElementName="LastTest")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Struct), ElementName="Struct")]
-        public List<Object> Objects
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.StructProperty), ElementName="StructProperty")]
+        public System.Collections.Generic.List<object> Objects
         {
             get
             {
@@ -96,7 +97,7 @@ namespace Kistl.API
     public sealed class XMLObject : IXmlObject
     {
         
-        private Object _Object;
+        private object _Object;
         
         [XmlElement(Type=typeof(Kistl.App.Base.ObjectClass), ElementName="ObjectClass")]
         [XmlElement(Type=typeof(Kistl.App.Projekte.Projekt), ElementName="Projekt")]
@@ -144,6 +145,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Test.AnotherTest), ElementName="AnotherTest")]
         [XmlElement(Type=typeof(Kistl.App.Test.LastTest), ElementName="LastTest")]
         [XmlElement(Type=typeof(Kistl.App.Base.Struct), ElementName="Struct")]
+        [XmlElement(Type=typeof(Kistl.App.Base.StructProperty), ElementName="StructProperty")]
         public Object Object
         {
             get

@@ -58,12 +58,12 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if(_IconFile != value)
+                if (IconFile != value)
                 {
                     NotifyPropertyChanging("IconFile"); 
-                    _IconFile = value; 
-                    NotifyPropertyChanged("IconFile");
-                };
+                    _IconFile = value;
+                    NotifyPropertyChanged("IconFile");;
+                }
             }
         }
         

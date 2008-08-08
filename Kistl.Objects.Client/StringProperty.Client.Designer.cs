@@ -41,12 +41,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_Length != value)
+                if (Length != value)
                 {
                     NotifyPropertyChanging("Length"); 
-                    _Length = value; 
-                    NotifyPropertyChanged("Length");
-                };
+                    _Length = value;
+                    NotifyPropertyChanged("Length");;
+                }
             }
         }
         

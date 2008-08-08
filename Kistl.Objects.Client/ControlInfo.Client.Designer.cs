@@ -80,12 +80,12 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if(_ClassName != value)
+                if (ClassName != value)
                 {
                     NotifyPropertyChanging("ClassName"); 
-                    _ClassName = value; 
-                    NotifyPropertyChanged("ClassName");
-                };
+                    _ClassName = value;
+                    NotifyPropertyChanged("ClassName");;
+                }
             }
         }
         
@@ -97,12 +97,12 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if(_IsContainer != value)
+                if (IsContainer != value)
                 {
                     NotifyPropertyChanging("IsContainer"); 
-                    _IsContainer = value; 
-                    NotifyPropertyChanged("IsContainer");
-                };
+                    _IsContainer = value;
+                    NotifyPropertyChanged("IsContainer");;
+                }
             }
         }
         
@@ -114,12 +114,12 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if(_Platform != value)
+                if (Platform != value)
                 {
                     NotifyPropertyChanging("Platform"); 
-                    _Platform = value; 
-                    NotifyPropertyChanged("Platform");
-                };
+                    _Platform = value;
+                    NotifyPropertyChanged("Platform");;
+                }
             }
         }
         
@@ -131,12 +131,12 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if(_ControlType != value)
+                if (ControlType != value)
                 {
                     NotifyPropertyChanging("ControlType"); 
-                    _ControlType = value; 
-                    NotifyPropertyChanged("ControlType");
-                };
+                    _ControlType = value;
+                    NotifyPropertyChanged("ControlType");;
+                }
             }
         }
         

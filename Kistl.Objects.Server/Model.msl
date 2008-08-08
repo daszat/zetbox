@@ -78,6 +78,11 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StructProperty)">
+        <MappingFragment StoreEntitySet="StructProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
         <MappingFragment StoreEntitySet="BackReferenceProperty">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -308,6 +313,16 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject)">
         <MappingFragment StoreEntitySet="TestCustomObject">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ComplexProperty Name="PhoneNumberMobile" TypeName="Model.TestPhoneStruct">
+            <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
+            <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
+          </ComplexProperty>
+          <ComplexProperty Name="PhoneNumberOffice" TypeName="Model.TestPhoneStruct">
+            <ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
+            <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
+          </ComplexProperty>
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -657,6 +672,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Assembly" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_StructProperty_Struct_StructDefinition" TypeName="Model.FK_StructProperty_Struct_StructDefinition" StoreEntitySet="StructProperty">
+      <EndProperty Name="A_Struct">
+        <ScalarProperty Name="ID" ColumnName="fk_StructDefinition" />
+      </EndProperty>
+      <EndProperty Name="B_StructProperty">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_StructDefinition" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">

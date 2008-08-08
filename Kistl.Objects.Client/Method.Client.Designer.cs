@@ -82,12 +82,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_MethodName != value)
+                if (MethodName != value)
                 {
                     NotifyPropertyChanging("MethodName"); 
-                    _MethodName = value; 
-                    NotifyPropertyChanged("MethodName");
-                };
+                    _MethodName = value;
+                    NotifyPropertyChanged("MethodName");;
+                }
             }
         }
         
@@ -170,12 +170,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_IsDisplayable != value)
+                if (IsDisplayable != value)
                 {
                     NotifyPropertyChanging("IsDisplayable"); 
-                    _IsDisplayable = value; 
-                    NotifyPropertyChanged("IsDisplayable");
-                };
+                    _IsDisplayable = value;
+                    NotifyPropertyChanged("IsDisplayable");;
+                }
             }
         }
         

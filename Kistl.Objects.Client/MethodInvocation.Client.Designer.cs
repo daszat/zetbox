@@ -113,12 +113,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_FullTypeName != value)
+                if (FullTypeName != value)
                 {
                     NotifyPropertyChanging("FullTypeName"); 
-                    _FullTypeName = value; 
-                    NotifyPropertyChanged("FullTypeName");
-                };
+                    _FullTypeName = value;
+                    NotifyPropertyChanged("FullTypeName");;
+                }
             }
         }
         
@@ -130,12 +130,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_MemberName != value)
+                if (MemberName != value)
                 {
                     NotifyPropertyChanging("MemberName"); 
-                    _MemberName = value; 
-                    NotifyPropertyChanged("MemberName");
-                };
+                    _MemberName = value;
+                    NotifyPropertyChanged("MemberName");;
+                }
             }
         }
         

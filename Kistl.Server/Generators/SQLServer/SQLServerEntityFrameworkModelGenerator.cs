@@ -246,7 +246,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 foreach (BaseProperty p in obj.Properties)
                 {
-                    if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
+                    if (p.IsValueTypePropertySingle())
                     {
                         // ValueTypeProperty
                         xml.WriteStartElement("Property");
@@ -311,7 +311,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
                     }
-                    else if (p is ObjectReferenceProperty && !((ObjectReferenceProperty)p).IsList)
+                    else if (p.IsObjectReferencePropertySingle())
                     {
                         // ObjectReferenceProperty
                         xml.WriteStartElement("NavigationProperty");
@@ -323,7 +323,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteEndElement(); // </NavigationProperty>
                     }
-                    else if (p is ObjectReferenceProperty && ((ObjectReferenceProperty)p).IsList)
+                    else if (p.IsObjectReferencePropertyList())
                     {
                         // ObjectReferenceProperty List
                         xml.WriteStartElement("NavigationProperty");
@@ -335,7 +335,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
                     }
-                    else if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
+                    else if (p.IsValueTypePropertySingle())
                     {
                         // ValueTypeProperty
                         xml.WriteStartElement("Property");
@@ -348,7 +348,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("Nullable", ((ValueTypeProperty)p).IsNullable.ToString().ToLowerInvariant());
                         xml.WriteEndElement(); // </Property>
                     }
-                    else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsList)
+                    else if (p.IsValueTypePropertyList())
                     {
                         // ValueTypeProperty List
                         xml.WriteStartElement("NavigationProperty");
@@ -359,6 +359,15 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
+                    }
+                    else if (p.IsStructPropertySingle())
+                    {
+                        // ValueTypeProperty
+                        xml.WriteStartElement("Property");
+                        xml.WriteAttributeString("Name", p.PropertyName);
+                        xml.WriteAttributeString("Type", "Model." + ((StructProperty)p).StructDefinition.ClassName);
+                        xml.WriteAttributeString("Nullable", "false"); // Nullable Complex types are not supported by EF
+                        xml.WriteEndElement(); // </Property>
                     }
                 }
 
@@ -456,6 +465,29 @@ namespace Kistl.Server.Generators.SQLServer
         #region GenerateMSL
 
         #region AddEntityTypeMapping
+
+        private void AddEntityTypeMapping_Properties(System.Xml.XmlTextWriter xml, DataType obj, string parentPropName)
+        {
+            foreach (ValueTypeProperty p in obj.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList == false))
+            {
+                xml.WriteStartElement("ScalarProperty");
+                xml.WriteAttributeString("Name", p.PropertyName);
+                xml.WriteAttributeString("ColumnName", p.PropertyName.CalcColumnName(parentPropName));
+                xml.WriteEndElement(); // </ScalarProperty>
+            }
+
+            foreach (StructProperty s in obj.Properties.OfType<StructProperty>().Where(p => p.IsList == false))
+            {
+                xml.WriteStartElement("ComplexProperty");
+                xml.WriteAttributeString("Name", s.PropertyName);
+                xml.WriteAttributeString("TypeName", "Model." + s.StructDefinition.ClassName);
+
+                AddEntityTypeMapping_Properties(xml, s.StructDefinition, s.PropertyName.CalcColumnName(parentPropName));
+
+                xml.WriteEndElement(); // </ComplexProperty>
+            }
+        }
+
         private void AddEntityTypeMapping(System.Xml.XmlTextWriter xml, ObjectClass obj)
         {
             xml.WriteStartElement("EntityTypeMapping");
@@ -469,13 +501,7 @@ namespace Kistl.Server.Generators.SQLServer
             xml.WriteAttributeString("ColumnName", "ID");
             xml.WriteEndElement(); // </ScalarProperty>
 
-            foreach (ValueTypeProperty p in obj.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList == false))
-            {
-                xml.WriteStartElement("ScalarProperty");
-                xml.WriteAttributeString("Name", p.PropertyName);
-                xml.WriteAttributeString("ColumnName", p.PropertyName);
-                xml.WriteEndElement(); // </ScalarProperty>
-            }
+            AddEntityTypeMapping_Properties(xml, obj, "");
 
             xml.WriteEndElement(); // </MappingFragment>
 
@@ -903,6 +929,40 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateSSDL_EntityTypes_ObjectClasses
+        private void GenerateSSDL_EntityTypes_ObjectClasses_Properties(System.Xml.XmlTextWriter xml, DataType obj, string parentPropName)
+        {
+            foreach (Property p in obj.Properties.OfType<Property>().Where(p => p.IsList == false))
+            {
+                if (p is StructProperty)
+                {
+                    GenerateSSDL_EntityTypes_ObjectClasses_Properties(xml, ((StructProperty)p).StructDefinition, 
+                        p.PropertyName.CalcColumnName(parentPropName));
+                }
+                else
+                {
+                    xml.WriteStartElement("Property");
+                    if (p is ObjectReferenceProperty)
+                    {
+                        xml.WriteAttributeString("Name", "fk_" + p.PropertyName.CalcColumnName(parentPropName));
+                    }
+                    else
+                    {
+                        xml.WriteAttributeString("Name", p.PropertyName.CalcColumnName(parentPropName));
+                    }
+                    xml.WriteAttributeString("Type", SQLServerHelper.GetDBType(p));
+                    if (p is StringProperty)
+                    {
+                        xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
+                    }
+                    if (p.IsValueTypePropertySingle())
+                    {
+                        xml.WriteAttributeString("Nullable", p.IsNullable.ToString().ToLowerInvariant());
+                    }
+                    xml.WriteEndElement(); // </Property>
+                }
+            }
+        }
+
         private void GenerateSSDL_EntityTypes_ObjectClasses(System.Xml.XmlTextWriter xml, IQueryable<ObjectClass> objClassList)
         {
             foreach (ObjectClass obj in objClassList)
@@ -926,28 +986,7 @@ namespace Kistl.Server.Generators.SQLServer
                 }
                 xml.WriteEndElement(); // </Property>
 
-                foreach (Property p in obj.Properties.OfType<Property>().Where(p => p.IsList == false))
-                {
-                    xml.WriteStartElement("Property");
-                    if (p is ObjectReferenceProperty)
-                    {
-                        xml.WriteAttributeString("Name", "fk_" + p.PropertyName);
-                    }
-                    else
-                    {
-                        xml.WriteAttributeString("Name", p.PropertyName);
-                    }
-                    xml.WriteAttributeString("Type", SQLServerHelper.GetDBType(p));
-                    if (p is StringProperty)
-                    {
-                        xml.WriteAttributeString("MaxLength", ((StringProperty)p).Length.ToString());
-                    }
-                    if (p is ValueTypeProperty && !((ValueTypeProperty)p).IsList)
-                    {
-                        xml.WriteAttributeString("Nullable", p.IsNullable.ToString().ToLowerInvariant());
-                    }
-                    xml.WriteEndElement(); // </Property>
-                }
+                GenerateSSDL_EntityTypes_ObjectClasses_Properties(xml, obj, "");
 
                 xml.WriteEndElement(); // </EntityType>
             }

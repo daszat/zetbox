@@ -80,12 +80,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_ParameterName != value)
+                if (ParameterName != value)
                 {
                     NotifyPropertyChanging("ParameterName"); 
-                    _ParameterName = value; 
-                    NotifyPropertyChanged("ParameterName");
-                };
+                    _ParameterName = value;
+                    NotifyPropertyChanged("ParameterName");;
+                }
             }
         }
         
@@ -128,12 +128,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_IsList != value)
+                if (IsList != value)
                 {
                     NotifyPropertyChanging("IsList"); 
-                    _IsList = value; 
-                    NotifyPropertyChanged("IsList");
-                };
+                    _IsList = value;
+                    NotifyPropertyChanged("IsList");;
+                }
             }
         }
         
@@ -145,12 +145,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_IsReturnParameter != value)
+                if (IsReturnParameter != value)
                 {
                     NotifyPropertyChanging("IsReturnParameter"); 
-                    _IsReturnParameter = value; 
-                    NotifyPropertyChanged("IsReturnParameter");
-                };
+                    _IsReturnParameter = value;
+                    NotifyPropertyChanged("IsReturnParameter");;
+                }
             }
         }
         

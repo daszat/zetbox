@@ -98,12 +98,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_AssemblyName != value)
+                if (AssemblyName != value)
                 {
                     NotifyPropertyChanging("AssemblyName"); 
-                    _AssemblyName = value; 
-                    NotifyPropertyChanged("AssemblyName");
-                };
+                    _AssemblyName = value;
+                    NotifyPropertyChanged("AssemblyName");;
+                }
             }
         }
         
@@ -116,12 +116,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_IsClientAssembly != value)
+                if (IsClientAssembly != value)
                 {
                     NotifyPropertyChanging("IsClientAssembly"); 
-                    _IsClientAssembly = value; 
-                    NotifyPropertyChanged("IsClientAssembly");
-                };
+                    _IsClientAssembly = value;
+                    NotifyPropertyChanged("IsClientAssembly");;
+                }
             }
         }
         

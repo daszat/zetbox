@@ -81,12 +81,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_PreFetchToClient != value)
+                if (PreFetchToClient != value)
                 {
                     NotifyPropertyChanging("PreFetchToClient"); 
-                    _PreFetchToClient = value; 
-                    NotifyPropertyChanged("PreFetchToClient");
-                };
+                    _PreFetchToClient = value;
+                    NotifyPropertyChanged("PreFetchToClient");;
+                }
             }
         }
         

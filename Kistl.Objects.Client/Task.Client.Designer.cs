@@ -80,12 +80,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Name != value)
+                if (Name != value)
                 {
                     NotifyPropertyChanging("Name"); 
-                    _Name = value; 
-                    NotifyPropertyChanged("Name");
-                };
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
             }
         }
         
@@ -97,12 +97,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_DatumVon != value)
+                if (DatumVon != value)
                 {
                     NotifyPropertyChanging("DatumVon"); 
-                    _DatumVon = value; 
-                    NotifyPropertyChanged("DatumVon");
-                };
+                    _DatumVon = value;
+                    NotifyPropertyChanged("DatumVon");;
+                }
             }
         }
         
@@ -114,12 +114,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_DatumBis != value)
+                if (DatumBis != value)
                 {
                     NotifyPropertyChanging("DatumBis"); 
-                    _DatumBis = value; 
-                    NotifyPropertyChanged("DatumBis");
-                };
+                    _DatumBis = value;
+                    NotifyPropertyChanged("DatumBis");;
+                }
             }
         }
         
@@ -131,12 +131,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Aufwand != value)
+                if (Aufwand != value)
                 {
                     NotifyPropertyChanging("Aufwand"); 
-                    _Aufwand = value; 
-                    NotifyPropertyChanged("Aufwand");
-                };
+                    _Aufwand = value;
+                    NotifyPropertyChanged("Aufwand");;
+                }
             }
         }
         

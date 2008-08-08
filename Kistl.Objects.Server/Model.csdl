@@ -160,6 +160,10 @@
       <End Role="A_Assembly" EntitySet="Assembly" />
       <End Role="B_ControlInfo" EntitySet="ControlInfo" />
     </AssociationSet>
+    <AssociationSet Name="FK_StructProperty_Struct_StructDefinition" Association="Model.FK_StructProperty_Struct_StructDefinition">
+      <End Role="A_Struct" EntitySet="DataType" />
+      <End Role="B_StructProperty" EntitySet="BaseProperty" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -431,6 +435,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="PersonName" Type="String" MaxLength="200" Nullable="false" />
+    <Property Name="PhoneNumberMobile" Type="Model.TestPhoneStruct" Nullable="false" />
+    <Property Name="PhoneNumberOffice" Type="Model.TestPhoneStruct" Nullable="false" />
+    <Property Name="Birthday" Type="DateTime" Nullable="true" />
   </EntityType>
   <EntityType Name="Muhblah">
     <Key>
@@ -451,6 +459,9 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Struct" BaseType="Model.DataType" />
+  <EntityType Name="StructProperty" BaseType="Model.Property">
+    <NavigationProperty Name="StructDefinition" Relationship="Model.FK_StructProperty_Struct_StructDefinition" FromRole="B_StructProperty" ToRole="A_Struct" />
+  </EntityType>
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
     <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />
@@ -618,6 +629,10 @@
   <Association Name="FK_ControlInfo_Assembly_Assembly">
     <End Role="A_Assembly" Type="Model.Assembly" Multiplicity="0..1" />
     <End Role="B_ControlInfo" Type="Model.ControlInfo" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_StructProperty_Struct_StructDefinition">
+    <End Role="A_Struct" Type="Model.Struct" Multiplicity="0..1" />
+    <End Role="B_StructProperty" Type="Model.StructProperty" Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />

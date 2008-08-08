@@ -99,12 +99,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_ClassName != value)
+                if (ClassName != value)
                 {
                     NotifyPropertyChanging("ClassName"); 
-                    _ClassName = value; 
-                    NotifyPropertyChanged("ClassName");
-                };
+                    _ClassName = value;
+                    NotifyPropertyChanged("ClassName");;
+                }
             }
         }
         

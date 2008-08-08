@@ -154,6 +154,12 @@ namespace Kistl.App.Base
             e.Result = obj.ReferenceProperty.ObjectClass.Module.Namespace + "." + obj.ReferenceProperty.ObjectClass.ClassName;
         }
 
+        public void OnGetPropertyTypeString_StructProperty(Kistl.App.Base.StructProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            DataType objClass = obj.StructDefinition;
+            e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+        }
+
         // Parameter
         public void OnGetParameterType_BaseParameter(Kistl.App.Base.BaseParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {

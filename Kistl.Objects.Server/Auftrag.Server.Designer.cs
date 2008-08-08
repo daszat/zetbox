@@ -138,12 +138,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Auftragsname != value)
+                if (Auftragsname != value)
                 {
                     NotifyPropertyChanging("Auftragsname"); 
-                    _Auftragsname = value; 
-                    NotifyPropertyChanged("Auftragsname");
-                };
+                    _Auftragsname = value;
+                    NotifyPropertyChanged("Auftragsname");;
+                }
             }
         }
         
@@ -190,12 +190,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Auftragswert != value)
+                if (Auftragswert != value)
                 {
                     NotifyPropertyChanging("Auftragswert"); 
-                    _Auftragswert = value; 
-                    NotifyPropertyChanged("Auftragswert");
-                };
+                    _Auftragswert = value;
+                    NotifyPropertyChanged("Auftragswert");;
+                }
             }
         }
         

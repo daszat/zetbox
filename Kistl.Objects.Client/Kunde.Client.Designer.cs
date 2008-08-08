@@ -52,12 +52,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Kundenname != value)
+                if (Kundenname != value)
                 {
                     NotifyPropertyChanging("Kundenname"); 
-                    _Kundenname = value; 
-                    NotifyPropertyChanged("Kundenname");
-                };
+                    _Kundenname = value;
+                    NotifyPropertyChanged("Kundenname");;
+                }
             }
         }
         
@@ -69,12 +69,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Adresse != value)
+                if (Adresse != value)
                 {
                     NotifyPropertyChanging("Adresse"); 
-                    _Adresse = value; 
-                    NotifyPropertyChanged("Adresse");
-                };
+                    _Adresse = value;
+                    NotifyPropertyChanged("Adresse");;
+                }
             }
         }
         
@@ -86,12 +86,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_PLZ != value)
+                if (PLZ != value)
                 {
                     NotifyPropertyChanging("PLZ"); 
-                    _PLZ = value; 
-                    NotifyPropertyChanged("PLZ");
-                };
+                    _PLZ = value;
+                    NotifyPropertyChanged("PLZ");;
+                }
             }
         }
         
@@ -103,12 +103,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Ort != value)
+                if (Ort != value)
                 {
                     NotifyPropertyChanging("Ort"); 
-                    _Ort = value; 
-                    NotifyPropertyChanged("Ort");
-                };
+                    _Ort = value;
+                    NotifyPropertyChanged("Ort");;
+                }
             }
         }
         
@@ -120,12 +120,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Land != value)
+                if (Land != value)
                 {
                     NotifyPropertyChanging("Land"); 
-                    _Land = value; 
-                    NotifyPropertyChanged("Land");
-                };
+                    _Land = value;
+                    NotifyPropertyChanged("Land");;
+                }
             }
         }
         
@@ -222,12 +222,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Value != value)
-                {{
-                    base.NotifyPropertyChanging("Value");
+                if (Value != value)
+                {
+                    NotifyPropertyChanging("Value"); 
                     _Value = value;
-                    base.NotifyPropertyChanged("Value");
-                }};
+                    NotifyPropertyChanged("Value");;
+                }
             }
         }
         

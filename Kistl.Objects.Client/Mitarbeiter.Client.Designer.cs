@@ -49,12 +49,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Name != value)
+                if (Name != value)
                 {
                     NotifyPropertyChanging("Name"); 
-                    _Name = value; 
-                    NotifyPropertyChanged("Name");
-                };
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
             }
         }
         
@@ -86,12 +86,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_Geburtstag != value)
+                if (Geburtstag != value)
                 {
                     NotifyPropertyChanging("Geburtstag"); 
-                    _Geburtstag = value; 
-                    NotifyPropertyChanged("Geburtstag");
-                };
+                    _Geburtstag = value;
+                    NotifyPropertyChanged("Geburtstag");;
+                }
             }
         }
         
@@ -103,12 +103,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_SVNr != value)
+                if (SVNr != value)
                 {
                     NotifyPropertyChanging("SVNr"); 
-                    _SVNr = value; 
-                    NotifyPropertyChanged("SVNr");
-                };
+                    _SVNr = value;
+                    NotifyPropertyChanged("SVNr");;
+                }
             }
         }
         
@@ -120,12 +120,12 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if(_TelefonNummer != value)
+                if (TelefonNummer != value)
                 {
                     NotifyPropertyChanging("TelefonNummer"); 
-                    _TelefonNummer = value; 
-                    NotifyPropertyChanged("TelefonNummer");
-                };
+                    _TelefonNummer = value;
+                    NotifyPropertyChanged("TelefonNummer");;
+                }
             }
         }
         

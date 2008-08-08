@@ -27,8 +27,84 @@ namespace Kistl.App.Test
     public class TestCustomObject : BaseClientDataObject
     {
         
+        private string _PersonName;
+        
+        private Kistl.App.Test.TestPhoneStruct _PhoneNumberMobile;
+        
+        private Kistl.App.Test.TestPhoneStruct _PhoneNumberOffice;
+        
+        private System.DateTime? _Birthday;
+        
         public TestCustomObject()
         {
+        }
+        
+        public string PersonName
+        {
+            get
+            {
+                return _PersonName;
+            }
+            set
+            {
+                if (PersonName != value)
+                {
+                    NotifyPropertyChanging("PersonName"); 
+                    _PersonName = value;
+                    NotifyPropertyChanged("PersonName");;
+                }
+            }
+        }
+        
+        public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
+        {
+            get
+            {
+                return _PhoneNumberMobile;
+            }
+            set
+            {
+                if (PhoneNumberMobile != value)
+                {
+                    NotifyPropertyChanging("PhoneNumberMobile"); 
+                    _PhoneNumberMobile = value;
+                    NotifyPropertyChanged("PhoneNumberMobile");;
+                }
+            }
+        }
+        
+        public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
+        {
+            get
+            {
+                return _PhoneNumberOffice;
+            }
+            set
+            {
+                if (PhoneNumberOffice != value)
+                {
+                    NotifyPropertyChanging("PhoneNumberOffice"); 
+                    _PhoneNumberOffice = value;
+                    NotifyPropertyChanged("PhoneNumberOffice");;
+                }
+            }
+        }
+        
+        public System.DateTime? Birthday
+        {
+            get
+            {
+                return _Birthday;
+            }
+            set
+            {
+                if (Birthday != value)
+                {
+                    NotifyPropertyChanging("Birthday"); 
+                    _Birthday = value;
+                    NotifyPropertyChanged("Birthday");;
+                }
+            }
         }
         
         public event ToStringHandler<TestCustomObject> OnToString_TestCustomObject;
@@ -64,6 +140,8 @@ namespace Kistl.App.Test
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
+            ((TestCustomObject)obj).PersonName = this.PersonName;
+            ((TestCustomObject)obj).Birthday = this.Birthday;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -74,11 +152,15 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
+            BinarySerializer.ToBinary(this._PersonName, sw);
+            BinarySerializer.ToBinary(this._Birthday, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
+            BinarySerializer.FromBinary(out this._PersonName, sr);
+            BinarySerializer.FromBinary(out this._Birthday, sr);
         }
     }
 }

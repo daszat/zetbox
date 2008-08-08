@@ -68,6 +68,7 @@ namespace Kistl.Server.Generators.SQLServer
             }
         }
 
+        #region GenerateFKConstraints
         private void GenerateFKConstraints(ObjectClass objClass)
         {
             // Create FK to BaseClass
@@ -143,6 +144,63 @@ namespace Kistl.Server.Generators.SQLServer
                 cmd.ExecuteNonQuery();
             }
         }
+        #endregion
+
+        private void CheckTableProperties(ObjectClass classToCheck, DataType obj, string parentPropertyName)
+        {
+            foreach (Property p in obj.Properties.OfType<Property>().Where(p => p.IsList == false))
+            {
+                if (p is StructProperty)
+                {
+                    CheckTableProperties(classToCheck, ((StructProperty)p).StructDefinition, 
+                        p.PropertyName.CalcColumnName(parentPropertyName));
+                }
+                else
+                {
+                    SqlCommand cmd = new SqlCommand("select dbo.fn_ColumnExists(@t, @c)", db, tx);
+                    cmd.Parameters.AddWithValue("@t", Generator.GetDatabaseTableName(classToCheck));
+                    if (p is ObjectReferenceProperty)
+                    {
+                        cmd.Parameters.AddWithValue("@c", "fk_" + p.PropertyName.CalcColumnName(parentPropertyName));
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@c", p.PropertyName.CalcColumnName(parentPropertyName));
+                    }
+
+                    bool columnExists = (bool)cmd.ExecuteScalar();
+                    System.Diagnostics.Trace.TraceInformation("  " + (columnExists ? "Checking" : "Creating") + " Column " + classToCheck.TableName + "." + p.PropertyName.CalcColumnName(parentPropertyName));
+
+                    cmd = new SqlCommand("", db, tx);
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendFormat("alter table [{0}] ", Generator.GetDatabaseTableName(classToCheck));
+                    sb.Append(columnExists ? " alter column " : " add ");
+
+                    sb.Append(GetColumnStmt(p, parentPropertyName));
+
+                    System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
+                    cmd.CommandText = sb.ToString();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void AppendTableProperties(StringBuilder sb, DataType obj, string parentPropertyName)
+        {
+            foreach (Property p in obj.Properties.OfType<Property>().Where(p => p.IsList == false))
+            {
+                if (p is StructProperty)
+                {
+                    AppendTableProperties(sb, ((StructProperty)p).StructDefinition, 
+                        p.PropertyName.CalcColumnName(parentPropertyName));
+                }
+                else
+                {
+                    sb.Append(GetColumnStmt(p, parentPropertyName));
+                    sb.AppendLine(",");
+                }
+            }
+        }
 
         private void GenerateTable(ObjectClass objClass)
         {
@@ -153,37 +211,7 @@ namespace Kistl.Server.Generators.SQLServer
             if ((bool)cmd.ExecuteScalar())
             {
                 System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(objClass));
-                // BackReferenceProperties sind uninteressant, diese ergeben sich
-                foreach (Property p in objClass.Properties.OfType<Property>())
-                {
-                    if (!p.IsList)
-                    {
-                        cmd = new SqlCommand("select dbo.fn_ColumnExists(@t, @c)", db, tx);
-                        cmd.Parameters.AddWithValue("@t", Generator.GetDatabaseTableName(objClass));
-                        if (p is ObjectReferenceProperty)
-                        {
-                            cmd.Parameters.AddWithValue("@c", "fk_" + p.PropertyName);
-                        }
-                        else
-                        {
-                            cmd.Parameters.AddWithValue("@c", p.PropertyName);
-                        }
-
-                        bool columnExists = (bool)cmd.ExecuteScalar();
-                        System.Diagnostics.Trace.TraceInformation("  " + (columnExists ? "Checking" : "Creating") + " Column " + objClass.TableName + "." + p.PropertyName);
-
-                        cmd = new SqlCommand("", db, tx);
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendFormat("alter table [{0}] ", Generator.GetDatabaseTableName(objClass));
-                        sb.Append(columnExists ? " alter column " : " add ");
-
-                        sb.Append(GetColumnStmt(p));
-
-                        System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
-                        cmd.CommandText = sb.ToString();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                CheckTableProperties(objClass, objClass, "");
             }
             else
             {
@@ -201,14 +229,7 @@ namespace Kistl.Server.Generators.SQLServer
                     sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
                 }
 
-                foreach (Property p in objClass.Properties.OfType<Property>())
-                {
-                    if (!p.IsList)
-                    {
-                        sb.Append(GetColumnStmt(p));
-                        sb.AppendLine(",");
-                    }
-                }
+                AppendTableProperties(sb, objClass, "");
 
                 sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", Generator.GetDatabaseTableName(objClass));
                 sb.AppendLine();
@@ -234,7 +255,7 @@ namespace Kistl.Server.Generators.SQLServer
                     StringBuilder sb = new StringBuilder();
                     sb.AppendFormat("alter table [{0}] alter column ", Generator.GetDatabaseTableName(p));
 
-                    sb.Append(GetColumnStmt(p));
+                    sb.Append(GetColumnStmt(p, ""));
 
                     System.Diagnostics.Trace.TraceInformation("    " + sb.ToString());
                     cmd.CommandText = sb.ToString();
@@ -251,7 +272,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                     sb.AppendLine(string.Format("[fk_{0}] [int] NOT NULL, ", p.ObjectClass.ClassName));
 
-                    sb.Append(GetColumnStmt(p));
+                    sb.Append(GetColumnStmt(p, ""));
                     sb.AppendLine(",");
 
                     sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", Generator.GetDatabaseTableName(p));
@@ -273,17 +294,17 @@ namespace Kistl.Server.Generators.SQLServer
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        private string GetColumnStmt(Property p)
+        private string GetColumnStmt(Property p, string parentPropertyName)
         {
             StringBuilder sb = new StringBuilder();
 
             if (p is ObjectReferenceProperty)
             {
-                sb.AppendFormat(" [fk_{0}] ", p.PropertyName);
+                sb.AppendFormat(" [fk_{0}] ", p.PropertyName.CalcColumnName(parentPropertyName));
             }
             else
             {
-                sb.AppendFormat(" [{0}] ", p.PropertyName);
+                sb.AppendFormat(" [{0}] ", p.PropertyName.CalcColumnName(parentPropertyName));
             }
 
             sb.Append(SQLServerHelper.GetDBType(p));

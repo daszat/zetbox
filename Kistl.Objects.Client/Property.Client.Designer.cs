@@ -43,12 +43,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_IsList != value)
+                if (IsList != value)
                 {
                     NotifyPropertyChanging("IsList"); 
-                    _IsList = value; 
-                    NotifyPropertyChanged("IsList");
-                };
+                    _IsList = value;
+                    NotifyPropertyChanged("IsList");;
+                }
             }
         }
         
@@ -60,12 +60,12 @@ namespace Kistl.App.Base
             }
             set
             {
-                if(_IsNullable != value)
+                if (IsNullable != value)
                 {
                     NotifyPropertyChanging("IsNullable"); 
-                    _IsNullable = value; 
-                    NotifyPropertyChanged("IsNullable");
-                };
+                    _IsNullable = value;
+                    NotifyPropertyChanged("IsNullable");;
+                }
             }
         }
         

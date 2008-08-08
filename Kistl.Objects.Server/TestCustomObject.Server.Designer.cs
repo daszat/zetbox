@@ -30,6 +30,14 @@ namespace Kistl.App.Test
         
         private int _ID;
         
+        private string _PersonName;
+        
+        private Kistl.App.Test.TestPhoneStruct _PhoneNumberMobile;
+        
+        private Kistl.App.Test.TestPhoneStruct _PhoneNumberOffice;
+        
+        private System.DateTime? _Birthday;
+        
         public TestCustomObject()
         {
         }
@@ -44,6 +52,78 @@ namespace Kistl.App.Test
             set
             {
                 _ID = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public string PersonName
+        {
+            get
+            {
+                return _PersonName;
+            }
+            set
+            {
+                if (PersonName != value)
+                {
+                    NotifyPropertyChanging("PersonName"); 
+                    _PersonName = value;
+                    NotifyPropertyChanged("PersonName");;
+                }
+            }
+        }
+        
+        [EdmComplexPropertyAttribute()]
+        public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
+        {
+            get
+            {
+                return _PhoneNumberMobile;
+            }
+            set
+            {
+                if (PhoneNumberMobile != value)
+                {
+                    NotifyPropertyChanging("PhoneNumberMobile"); 
+                    _PhoneNumberMobile = value;
+                    NotifyPropertyChanged("PhoneNumberMobile");;
+                }
+            }
+        }
+        
+        [EdmComplexPropertyAttribute()]
+        public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
+        {
+            get
+            {
+                return _PhoneNumberOffice;
+            }
+            set
+            {
+                if (PhoneNumberOffice != value)
+                {
+                    NotifyPropertyChanging("PhoneNumberOffice"); 
+                    _PhoneNumberOffice = value;
+                    NotifyPropertyChanged("PhoneNumberOffice");;
+                }
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.DateTime? Birthday
+        {
+            get
+            {
+                return _Birthday;
+            }
+            set
+            {
+                if (Birthday != value)
+                {
+                    NotifyPropertyChanging("Birthday"); 
+                    _Birthday = value;
+                    NotifyPropertyChanged("Birthday");;
+                }
             }
         }
         
@@ -85,11 +165,15 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
+            BinarySerializer.ToBinary(this._PersonName, sw);
+            BinarySerializer.ToBinary(this._Birthday, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
+            BinarySerializer.FromBinary(out this._PersonName, sr);
+            BinarySerializer.FromBinary(out this._Birthday, sr);
         }
     }
 }
