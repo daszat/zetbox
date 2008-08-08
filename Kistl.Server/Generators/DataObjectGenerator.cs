@@ -489,7 +489,7 @@ namespace Kistl.Server.Generators
             GenerateMethodsInternal((CurrentObjectClass)current.Clone());
 
             // Create DataObject StreamingMethods
-            GenerateStreamMethodsInternal((CurrentObjectClass)current.Clone());
+            GenerateStreamMethodsInternal((CurrentObjectClass)current.Clone(), current.objClass.Properties);
 
             // Generate the code & save
             SaveFile(current.code, "Kistl.Objects." + current.clientServer + @"\" + current.objClass.ClassName + "." + current.clientServer + ".Designer.cs");
@@ -556,6 +556,9 @@ namespace Kistl.Server.Generators
 
             // Create Properties
             GeneratePropertiesInternal((CurrentStruct)current.Clone());
+
+            // Create Structs StreamingMethods
+            GenerateStreamMethodsInternal((CurrentStruct)current.Clone(), current.@struct.Properties);
 
             // Call derived Classes
             GenerateStructs(current);
@@ -636,18 +639,6 @@ namespace Kistl.Server.Generators
 
             GenerateProperties_ValueTypeProperty(current);
         }
-
-        //protected virtual void GenerateProperties_ValueTypeProperty(CurrentStruct current)
-        //{
-        //}
-
-        //private void GenerateProperties_ValueTypePropertyInternal(CurrentStruct current)
-        //{
-        //    current.code_field = current.property.CreateField(current.code_class, current.clientServer);
-        //    current.code_property = current.property.CreateNotifyingProperty(current.code_class, current.clientServer);
-
-        //    GenerateProperties_ValueTypeProperty(current);
-        //}        
         #endregion
 
         #region GenerateValueTypeProperty_Collection
@@ -679,16 +670,6 @@ namespace Kistl.Server.Generators
             collectionClass.code_property = collectionClass.code_class.CreateNotifyingProperty(
                 current.property.ToCodeTypeReference(current.clientServer),
                 "Value", "_Value", "_Value", "Value");
-
-//            collectionClass.code_property = collectionClass.code_class.CreateProperty(collectionClass.code_field.Type, "Value");
-
-//            collectionClass.code_property.GetStatements.Add(new CodeSnippetExpression("return _Value"));
-//            collectionClass.code_property.SetStatements.Add(new CodeSnippetExpression(@"if(_Value != value)
-//                {{
-//                    base.NotifyPropertyChanging(""Value"");
-//                    _Value = value;
-//                    base.NotifyPropertyChanged(""Value"");
-//                }}"));
 
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
@@ -1030,6 +1011,11 @@ namespace Kistl.Server.Generators
             current.code_field = current.property.CreateField(current.code_class, current.clientServer);
             current.code_property = current.property.CreateNotifyingProperty(current.code_class, current.clientServer);
 
+            current.code_property.GetStatements.Clear();
+            current.code_property.GetStatements.Add(
+                new CodeSnippetExpression(string.Format("return _{0} != null ? ({1})_{0}.Clone() : new {1}()", 
+                    current.property.PropertyName, current.property.GetPropertyTypeString())));
+
             GenerateProperties_StructProperty(current);
         }
         #endregion
@@ -1351,7 +1337,7 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateStreamMethods
-        private void GenerateStreamMethodsInternal(CurrentObjectClass current)
+        private void GenerateStreamMethodsInternal(CurrentBase current, IEnumerable<BaseProperty> properties)
         {
             // Create ToStream Method
             CodeMemberMethod m = new CodeMemberMethod();
@@ -1362,7 +1348,7 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
             m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));
 
-            foreach (BaseProperty p in current.objClass.Properties)
+            foreach (BaseProperty p in properties)
             {
                 if (p.IsEnumerationPropertySingle())
                 {
@@ -1378,6 +1364,10 @@ namespace Kistl.Server.Generators
                         m.Statements.Add(new CodeSnippetExpression(string.Format("this._{0}.ToStream(sw)", p.PropertyName)));
                     else
                         m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName)));
+                }
+                else if (p.IsStructPropertySingle())
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this._{0}, sw)", p.PropertyName)));
                 }
                 else if (p.IsObjectReferencePropertySingle())
                 {
@@ -1406,7 +1396,7 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
             m.Statements.Add(new CodeSnippetExpression("base.FromStream(sr)"));
 
-            foreach (BaseProperty p in current.objClass.Properties)
+            foreach (BaseProperty p in properties)
             {
                 if (p.IsListProperty())
                 {
@@ -1421,6 +1411,10 @@ namespace Kistl.Server.Generators
                         p.PropertyName, p.ToCodeTypeReference(current.clientServer).BaseType, ((Property)p).IsNullable ? "?" : "")));
                 }
                 else if (p is ValueTypeProperty)
+                {
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));
+                }
+                else if (p.IsStructPropertySingle())
                 {
                     m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName)));
                 }

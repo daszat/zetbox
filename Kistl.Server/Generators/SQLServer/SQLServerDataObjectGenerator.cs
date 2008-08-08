@@ -389,6 +389,10 @@ namespace Kistl.Server.Generators.SQLServer
             if (current.clientServer == ClientServerEnum.Server)
             {
                 current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmComplexPropertyAttribute"));
+                current.code_constructor.Statements.Add(new CodeSnippetExpression(
+                    string.Format(@"_{0} = new {1}()",
+                        current.property.PropertyName,
+                        current.property.GetPropertyTypeString())));
             }
         }
 

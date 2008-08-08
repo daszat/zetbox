@@ -162,6 +162,7 @@
     <None Include="Database\Database.32.sql" />
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
+    <None Include="Database\Database.35.sql" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

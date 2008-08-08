@@ -12,9 +12,10 @@ namespace Kistl.IntegrationTests
             SetUp setup = new SetUp();
             setup.Init();
 
-            GetListTests();
+            //GetListTests();
             //ListPropetiesTests();
             //ObjectTests();
+            StructTests();
 
             setup.TearDown();
         }
@@ -60,6 +61,26 @@ namespace Kistl.IntegrationTests
 
             test.SetUp();
             test.SetObject();
+        }
+
+        private static void StructTests()
+        {
+            StructTests test = new StructTests();
+
+            test.SetUp();
+            test.CreateObjectWithStruct();
+
+            test.SetUp();
+            test.GetObjectWithStruct();
+
+            test.SetUp();
+            test.SaveObjectWithStruct();
+
+            test.SetUp();
+            test.ChangeObjectWithStruct();
+
+            test.SetUp();
+            test.SetStructNull();
         }
     }
 }

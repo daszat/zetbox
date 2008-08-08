@@ -246,13 +246,18 @@ namespace Kistl.API.Server
         }
     }
 
-    public abstract class BaseServerStructObject : ComplexObject, INotifyPropertyChanged, INotifyPropertyChanging
+    public abstract class BaseServerStructObject : ComplexObject, IStruct, INotifyPropertyChanged, INotifyPropertyChanging
     {
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
         }
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -138,5 +138,10 @@ namespace Kistl.API
                 e = ((UnaryExpression)e).Operand;
             return e;
         }
+
+        public static bool IsMethodCallExpression(this Expression e, string methodName)
+        {
+            return e.NodeType == ExpressionType.Call && ((MethodCallExpression)e).Method.Name == methodName;
+        }
     }
 }

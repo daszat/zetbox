@@ -64,5 +64,19 @@ namespace Kistl.App.Test
                 }
             }
         }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this._Number, sw);
+            BinarySerializer.ToBinary(this._AreaCode, sw);
+        }
+        
+        public override void FromStream(System.IO.BinaryReader sr)
+        {
+            base.FromStream(sr);
+            BinarySerializer.FromBinary(out this._Number, sr);
+            BinarySerializer.FromBinary(out this._AreaCode, sr);
+        }
     }
 }

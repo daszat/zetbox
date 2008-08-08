@@ -105,7 +105,7 @@ namespace Kistl.API.Client
             List<IDataObject> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<IDataObject>().ToList();
 
             // Projection
-            if (e.NodeType == ExpressionType.Call && ((MethodCallExpression)e).Method.Name == "Select")
+            if (e.IsMethodCallExpression("Select"))
             {
                 // Get Selector and SourceType
                 // Sourcetype should be of type IDataObject
@@ -116,7 +116,6 @@ namespace Kistl.API.Client
                 IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
                 foreach (IDataObject obj in serviceResult)
                 {
-                    //CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
                     result.Add(_context.Attach(obj));
                 }
                 AddNewLocalObjects(_type, result);
@@ -124,13 +123,29 @@ namespace Kistl.API.Client
                 IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, GetElementType(typeof(T)));
                 return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
             }
+            else if (e.IsMethodCallExpression("First") || e.IsMethodCallExpression("FirstOrDefault"))
+            {
+                List<T> result = new List<T>();
+                foreach (IDataObject obj in serviceResult)
+                {
+                    result.Add((T)_context.Attach(obj));
+                }
+                AddNewLocalObjects(_type, result);
+                if (e.IsMethodCallExpression("First"))
+                {
+                    return result.First();
+                }
+                else
+                {
+                    return result.FirstOrDefault();
+                }
+            }
             else
             {
                 T result = Activator.CreateInstance<T>();
                 if (!(result is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
                 foreach (IDataObject obj in serviceResult)
                 {
-                    //CacheController<IDataObject>.Current.Set(obj.GetType(), obj.ID, (IDataObject)obj.Clone());
                     ((IList)result).Add(_context.Attach(obj));
                 }
                 AddNewLocalObjects(_type, (IList)result);
@@ -315,6 +330,14 @@ namespace Kistl.API.Client
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Select")
             {
                 // It's OK
+            }
+            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "First")
+            {
+                _maxListCount = 1;
+            }
+            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "FirstOrDefault")
+            {
+                _maxListCount = 1;
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "Take")
             {

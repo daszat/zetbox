@@ -40,6 +40,8 @@ namespace Kistl.App.Test
         
         public TestCustomObject()
         {
+            _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct();
+            _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct();
         }
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
@@ -78,7 +80,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _PhoneNumberMobile;
+                return _PhoneNumberMobile != null ? (Kistl.App.Test.TestPhoneStruct)_PhoneNumberMobile.Clone() : new Kistl.App.Test.TestPhoneStruct();
             }
             set
             {
@@ -96,7 +98,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _PhoneNumberOffice;
+                return _PhoneNumberOffice != null ? (Kistl.App.Test.TestPhoneStruct)_PhoneNumberOffice.Clone() : new Kistl.App.Test.TestPhoneStruct();
             }
             set
             {
@@ -166,6 +168,8 @@ namespace Kistl.App.Test
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._PersonName, sw);
+            BinarySerializer.ToBinary(this._PhoneNumberMobile, sw);
+            BinarySerializer.ToBinary(this._PhoneNumberOffice, sw);
             BinarySerializer.ToBinary(this._Birthday, sw);
         }
         
@@ -173,6 +177,8 @@ namespace Kistl.App.Test
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._PersonName, sr);
+            BinarySerializer.FromBinary(out this._PhoneNumberMobile, sr);
+            BinarySerializer.FromBinary(out this._PhoneNumberOffice, sr);
             BinarySerializer.FromBinary(out this._Birthday, sr);
         }
     }

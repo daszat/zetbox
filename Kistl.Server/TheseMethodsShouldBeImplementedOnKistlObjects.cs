@@ -47,10 +47,5 @@ namespace Kistl.Server
 
             return null;
         }
-
-        //public static Type GetDataCLRType(this DataType type)
-        //{
-        //    return Type.GetType(type.Module.Namespace + "." + type.ClassName + ", Kistl.Objects.Server", true);
-        //}
     }
 }

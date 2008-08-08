@@ -116,11 +116,20 @@ namespace Kistl.API
     /// </summary>
     public interface ICollectionEntry : IPersistenceObject
     {
+    }
+
+    public interface IStruct : ICloneable
+    {
         /// <summary>
-        /// Copies the current content to a other Object. Used by clone.
+        /// Serialize this Object to a BinaryWriter
         /// </summary>
-        /// <param name="obj">Object to copy Content to.</param>
-        // void CopyTo(ICollectionEntry obj);
+        /// <param name="sw">BinaryWriter to serialize to</param>
+        void ToStream(System.IO.BinaryWriter sw);
+        /// <summary>
+        /// Deserialize this Object from a BinaryReader
+        /// </summary>
+        /// <param name="sr">BinaryReader to deserialize to.</param>
+        void FromStream(System.IO.BinaryReader sr);
     }
 
     /// <summary>

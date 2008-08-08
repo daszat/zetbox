@@ -219,13 +219,18 @@ namespace Kistl.API.Client
         }
     }
 
-    public abstract class BaseClientStructObject : INotifyPropertyChanged, INotifyPropertyChanging
+    public abstract class BaseClientStructObject : IStruct, INotifyPropertyChanged, INotifyPropertyChanging
     {
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
         }
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

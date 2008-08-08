@@ -133,7 +133,16 @@ namespace Kistl.API
         {
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
         }
-
+        
+        /// <summary>
+        /// Serialize a nullable double. Format is: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToBinary(IStruct val, System.IO.BinaryWriter sw)
+        {
+            if (val != null) { sw.Write(true); val.ToStream(sw); } else sw.Write(false);
+        }
         /// <summary>
         /// Serialize a IDataObject Collection. Format is: CONTINUE (true/false), IDataObject (if Object is present).
         /// </summary>
@@ -320,6 +329,21 @@ namespace Kistl.API
         public static void FromBinary(out double? val, System.IO.BinaryReader sr)
         {
             val = sr.ReadBoolean() ? (double?)sr.ReadDouble() : null;
+        }
+
+        /// <summary>
+        /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromBinary<T>(out T val, System.IO.BinaryReader sr) where T : class, IStruct, new()
+        {
+            val = null;
+            if(sr.ReadBoolean())
+            {
+                val = new T();
+                val.FromStream(sr);
+            }
         }
 
         /// <summary>
