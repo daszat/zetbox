@@ -28,7 +28,7 @@ namespace Kistl.API.Tests
         public void SetUp()
         {
             parent = new TestDataObject();
-            list = new NotifyingObservableCollection<TestDataObject>(parent, "");
+            list = new NotifyingObservableCollection<TestDataObject>(parent, "ParentProperty");
 
             a = new TestDataObject();
             b = new TestDataObject();
@@ -59,6 +59,29 @@ namespace Kistl.API.Tests
             bool hasChanged = false;
             parent.PropertyChanged += new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e) { hasChanged = true; });
             list[0] = new TestDataObject();
+
+            Assert.That(hasChanged, Is.True);
+        }
+
+        [Test]
+        public void Property()
+        {
+            Assert.That(list.PropertyName, Is.EqualTo("ParentProperty"));
+        }
+
+        [Test]
+        public void SetItem_WithBeginUpdate()
+        {
+            bool hasChanged = false;
+            parent.PropertyChanged += new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e) { hasChanged = true; });
+
+            list.BeginUpdate();
+            list[0] = new TestDataObject();
+            list.EndUpdate();
+
+            Assert.That(hasChanged, Is.False);
+
+            list[1] = new TestDataObject();
 
             Assert.That(hasChanged, Is.True);
         }

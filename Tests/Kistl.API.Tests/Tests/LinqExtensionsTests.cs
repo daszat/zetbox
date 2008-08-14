@@ -83,6 +83,14 @@ namespace Kistl.API.Tests
         }
 
         [Test]
+        public void AddSelector()
+        {
+            Expression<Func<TestDataObject, bool>> e = (o) => o.BoolProperty;
+            var slist = (IEnumerable<bool>)list.AddSelector(e, typeof(TestDataObject), typeof(bool));
+            Assert.That(slist.Count(), Is.EqualTo(9));
+        }
+
+        [Test]
         public void GetExpressionValue_Constant()
         {
             Expression e = Expression.Constant("Hello World");

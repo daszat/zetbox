@@ -50,6 +50,9 @@ namespace Kistl.API
         /// <returns>IQueryable with this Filter</returns>
         public static IQueryable<T> AddFilter<T>(this IQueryable<T> queryable, Expression filter)
         {
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (filter == null) throw new ArgumentNullException("filter");
+
             List<IllegalExpression> illegal;
             if (!filter.IsLegal(out illegal))
             {
@@ -62,11 +65,16 @@ namespace Kistl.API
                 new Type[] { queryable.ElementType }, queryable.Expression, filter));
         }
 
-        public static IQueryable AddSelector(this IQueryable query, LambdaExpression selector, Type sourceType, Type resultType)
+        public static IQueryable AddSelector(this IQueryable queryable, LambdaExpression selector, Type sourceType, Type resultType)
         {
-            return query.Provider.CreateQuery(
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (selector == null) throw new ArgumentNullException("selector");
+            if (sourceType == null) throw new ArgumentNullException("sourceType");
+            if (resultType == null) throw new ArgumentNullException("resultType");
+
+            return queryable.Provider.CreateQuery(
                 Expression.Call(typeof(Queryable), "Select",
-                    new Type[] { sourceType, resultType }, query.Expression, selector));
+                    new Type[] { sourceType, resultType }, queryable.Expression, selector));
         }
 
         /// <summary>
@@ -88,19 +96,11 @@ namespace Kistl.API
                 orderBy = Expression.Quote(orderBy);
             }
 
-            try
-            {
-                type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
-                return queryable.Provider.CreateQuery<T>(
-                    Expression.Call(typeof(Queryable), "OrderBy",
-                    new Type[] { queryable.ElementType, type },
-                    queryable.Expression, orderBy));
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(string.Format("{0}\nNodeType: {1}\nType: {2}\nGenericArgument[0][1]: {3}",
-                    ex.Message, orderBy.NodeType, orderBy.Type, type));
-            }
+            type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
+            return queryable.Provider.CreateQuery<T>(
+                Expression.Call(typeof(Queryable), "OrderBy",
+                new Type[] { queryable.ElementType, type },
+                queryable.Expression, orderBy));
         }
 
         /// <summary>

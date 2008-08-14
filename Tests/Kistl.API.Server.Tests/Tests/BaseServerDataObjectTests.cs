@@ -147,6 +147,31 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FromStream_Attached()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(ms);
+            BinaryReader sr = new BinaryReader(ms);
+
+            obj.ToStream(sw);
+
+            Assert.That(ms.Length, Is.GreaterThan(0));
+
+            ms.Seek(0, SeekOrigin.Begin);
+
+            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            {
+                TestObjClass result = ctx.Create<TestObjClass>();
+                result.FromStream(sr);
+
+                Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
+                Assert.That(result.ID, Is.EqualTo(obj.ID));
+                Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
+            }
+        }
+
+        [Test]
         public void AttachToContext()
         {
             Assert.That(obj.Context, Is.Null);
@@ -155,6 +180,25 @@ namespace Kistl.API.Server.Tests
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AttachToContext_Other()
+        {
+            Assert.That(obj.Context, Is.Null);
+            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            {
+                obj.AttachToContext(ctx);
+                Assert.That(obj.Context, Is.Not.Null);
+                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                using (IKistlContext ctx2 = Kistl.API.Server.KistlDataContext.GetContext())
+                {
+                    obj.AttachToContext(ctx2);
+                    Assert.That(obj.Context, Is.Not.Null);
+                    Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                }
             }
         }
 
@@ -172,6 +216,30 @@ namespace Kistl.API.Server.Tests
                 Assert.That(obj.Context, Is.Null);
 
                 Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DetachFromContext_Other()
+        {
+            Assert.That(obj.Context, Is.Null);
+            obj.ID = 10;
+            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            {
+                ctx.Attach(obj);
+                Assert.That(obj.Context, Is.Not.Null);
+
+                obj.DetachFromContext(ctx);
+                Assert.That(obj.Context, Is.Null);
+                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+
+                using (IKistlContext ctx2 = Kistl.API.Server.KistlDataContext.GetContext())
+                {
+                    obj.DetachFromContext(ctx2);
+                    Assert.That(obj.Context, Is.Null);
+                    Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+                }
             }
         }
     }

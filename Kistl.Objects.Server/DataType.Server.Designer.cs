@@ -242,10 +242,10 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._ClassName, sw);
-            BinarySerializer.ToBinary(this.Properties.OfType<IDataObject>(), sw);
-            BinarySerializer.ToBinary(this.Methods.OfType<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this.Properties.Cast<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this.Methods.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this.fk_DefaultIcon, sw);
-            BinarySerializer.ToBinary(this.MethodIvokations.OfType<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this.MethodIvokations.Cast<IDataObject>(), sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)

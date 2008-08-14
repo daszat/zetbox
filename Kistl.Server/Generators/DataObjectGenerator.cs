@@ -1384,7 +1384,7 @@ namespace Kistl.Server.Generators
                     && current.clientServer == ClientServerEnum.Server
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
-                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}.OfType<IDataObject>(), sw)", p.PropertyName)));
+                    m.Statements.Add(new CodeSnippetExpression(string.Format("BinarySerializer.ToBinary(this.{0}.Cast<IDataObject>(), sw)", p.PropertyName)));
                 }
             }
 

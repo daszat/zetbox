@@ -31,5 +31,22 @@ namespace Kistl.API.Tests
             Type result = t.GetSerializedType();
             Assert.That(result, Is.EqualTo(typeof(TestDataObject)));
         }
+
+        [Test]
+        public void SerializableType_GetHashCode()
+        {
+            SerializableType t = new SerializableType(typeof(TestDataObject));
+            Assert.That(t.GetHashCode(), Is.EqualTo(t.TypeName.GetHashCode()));
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void SerializableType_Invalid()
+        {
+            SerializableType t = new SerializableType(typeof(TestDataObject));
+            t.AssemblyQualifiedName = "Test";
+            Type result = t.GetSerializedType();
+            Assert.That(result, Is.EqualTo(typeof(TestDataObject)));
+        }
     }
 }

@@ -1,7 +1,10 @@
 <PartCoverSettings>
   <Target>C:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>D:\Programmierung\Kistl\Kistl.Tests\API.Tests</TargetWorkDir>
+  <TargetWorkDir>D:\Programmierung\Kistl\Tests\Kistl.API.Tests</TargetWorkDir>
   <TargetArgs>Kistl.APITests.nunit</TargetArgs>
   <Rule>+[Kistl.API]*</Rule>
   <Rule>-[Kistl.API]Kistl.API.MethodReturnEventArgs*</Rule>
+  <Rule>-[Kistl.API]Kistl.API.GenericEventArgs*</Rule>
+  <Rule>-[Kistl.API]Kistl.API.KistlContextDebugger*</Rule>
+  <Rule>-[Kistl.API]Kistl.API.KistlContextDisposedExeption*</Rule>
 </PartCoverSettings>

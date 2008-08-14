@@ -11,7 +11,7 @@ namespace Kistl.API
     /// <summary>
     /// Binary Serializer Helper.
     /// </summary>
-    public class BinarySerializer
+    public static class BinarySerializer
     {
         #region ToBinary
         /// <summary>

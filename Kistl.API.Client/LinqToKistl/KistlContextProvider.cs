@@ -66,9 +66,9 @@ namespace Kistl.API.Client
 
         internal List<IDataObject> GetListOf(int ID, string propertyName)
         {
-            List<IDataObject> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName).OfType<IDataObject>().ToList();
+            List<IDataObject> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName).Cast<IDataObject>().ToList();
             List<IDataObject> result = new List<IDataObject>();
-            foreach (Kistl.API.IDataObject obj in serviceResult.OfType<Kistl.API.IDataObject>())
+            foreach (Kistl.API.IDataObject obj in serviceResult)
             {
                 //CacheController<Kistl.API.IDataObject>.Current.Set(obj.GetType(), obj.ID,
                 //    (Kistl.API.IDataObject)(obj).Clone());
@@ -102,7 +102,7 @@ namespace Kistl.API.Client
         /// <returns></returns>
         private T GetListCall<T>(Expression e)
         {
-            List<IDataObject> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).OfType<IDataObject>().ToList();
+            List<IDataObject> serviceResult = Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).ToList();
 
             // Projection
             if (e.IsMethodCallExpression("Select"))

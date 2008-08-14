@@ -111,6 +111,11 @@ namespace Kistl.API.Server
             {
                 _table[type] = this.CreateQuery<T>("[" + GetEntityName(type) + "]");
             }
+
+            // This doesn't work without "OfType"
+            // The reason is that "GetEntityName" returns a Query to the baseobject 
+            // but maybe a derived object is asked. OfType will filter this.
+            // return (ObjectQuery<T>)_table[type];
             return ((ObjectQuery<T>)_table[type]).OfType<T>();
         }
 
@@ -134,7 +139,7 @@ namespace Kistl.API.Server
         /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
         {
-            return obj.GetPropertyValue<IEnumerable>(propertyName).OfType<T>().ToList();
+            return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
         }
 
         /// <summary>
@@ -174,7 +179,7 @@ namespace Kistl.API.Server
             {
                 return this.ObjectStateManager
                     .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified | System.Data.EntityState.Deleted | System.Data.EntityState.Unchanged)
-                    .Select(e => e.Entity).OfType<IPersistenceObject>();
+                    .Select(e => e.Entity).Cast<IPersistenceObject>();
             }
         }
 

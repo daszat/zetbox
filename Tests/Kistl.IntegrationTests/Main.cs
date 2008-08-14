@@ -12,12 +12,24 @@ namespace Kistl.IntegrationTests
             SetUp setup = new SetUp();
             setup.Init();
 
-            GetListTests();
+            GetListOfTests();
+            //GetListTests();
             //ListPropetiesTests();
             //ObjectTests();
             //StructTests();
 
             setup.TearDown();
+        }
+
+        private static void GetListOfTests()
+        {
+            GetListOfTests test = new GetListOfTests();
+
+            test.SetUp();
+            test.GetListOf_GetObject();
+
+            test.SetUp();
+            test.GetObject_GetListOf();
         }
 
         private static void GetListTests()

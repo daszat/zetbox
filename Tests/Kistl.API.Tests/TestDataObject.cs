@@ -21,6 +21,8 @@ namespace Kistl.API.Tests
         public bool BoolProperty { get { return _BoolProperty; } set { _BoolProperty = value; } }
         public DataObjectState ObjectState { get; set; }
 
+        private int PrivateIntProperty { get; set; }
+
         public string TestField;
 
         public object Clone()
@@ -107,16 +109,17 @@ namespace Kistl.API.Tests
         {
         }
 
+        private IKistlContext _context = null;
         public IKistlContext Context
         {
             get
             {
-                throw new NotImplementedException();
+                return _context;
             }
         }
         public void AttachToContext(IKistlContext ctx)
         {
-            throw new NotImplementedException();
+            _context = ctx;
         }
 
         public void DetachFromContext(IKistlContext ctx)

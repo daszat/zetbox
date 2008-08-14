@@ -75,8 +75,10 @@
     <Compile Include="SetUp.cs" />
     <Compile Include="TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="TestObjClass.cs" />
+    <Compile Include="TestStruct.cs" />
     <Compile Include="Tests\BaseServerCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
+    <Compile Include="Tests\BaseServerStructObjectTests.cs" />
     <Compile Include="Tests\KistlDataContextTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ namespace Kistl.API
     /// <summary>
     /// Global Helpermethods
     /// </summary>
-    public sealed class Helper
+    public static class Helper
     {
         /// <summary>
         /// Constant for a invalid ID. Value is 0.
@@ -90,10 +90,6 @@ namespace Kistl.API
                 return _WorkingFolder;
             }
         }
-        /// <summary>
-        /// prevent this class from being instantiated.
-        /// </summary>
-        private Helper() { }
     }
 
     /// <summary>

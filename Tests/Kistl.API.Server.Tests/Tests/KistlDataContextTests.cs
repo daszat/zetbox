@@ -270,6 +270,21 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
+        public void Attach_IDataObject_New_WithGraph()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass obj = new TestObjClass();
+                obj.TestNames.Add(new TestObjClass_TestNameCollectionEntry() { ID = -1, Value = "Test" });
+                obj.TestNames.Add(new TestObjClass_TestNameCollectionEntry() { ID = -2, Value = "Test2" });
+                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
+                ctx.Attach(obj);
+                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Added));
+                Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(3));
+            }
+        }
+
+        [Test]
         public void Attach_IDataObject_Existing()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
@@ -369,15 +384,61 @@ namespace Kistl.API.Server.Tests
             }
         }
 
+        [Test]
+        public void AttachedObjects()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass obj = new TestObjClass();
+                ctx.Attach(obj);
+                ctx.Create<TestObjClass>();
+
+                Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(2));
+            }
+        }
+
+        [Test]
+        public void ContainsObject()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass obj = new TestObjClass() { ID = 10 };
+                ctx.Attach(obj);
+                ctx.Create<TestObjClass>();
+                Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(2));
+
+                Assert.That(ctx.ContainsObject(obj.GetType(), obj.ID), Is.EqualTo(obj));
+            }
+        }
+
+        [Test]
+        public void ContainsObject_Not()
+        {
+            using (IKistlContext ctx = KistlDataContext.InitSession())
+            {
+                TestObjClass obj = new TestObjClass() { ID = 10 };
+                ctx.Create<TestObjClass>();
+                Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(1));
+
+                Assert.That(ctx.ContainsObject(obj.GetType(), obj.ID), Is.Null);
+            }
+        }
 
         [Test]
         public void Create_Generic()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
+                bool hasCreated = false;
+                GenericEventHandler<IPersistenceObject> createdHandler = new GenericEventHandler<IPersistenceObject>(delegate(object obj, GenericEventArgs<IPersistenceObject> e) { hasCreated = true; });
+                ctx.ObjectCreated += createdHandler;
+
                 TestObjClass newObj = ctx.Create<TestObjClass>();
                 Assert.That(newObj, Is.Not.Null);
                 Assert.That(newObj.Context, Is.Not.Null);
+                Assert.That(hasCreated, Is.True);
+
+                ctx.ObjectCreated -= createdHandler;
             }
         }
 
@@ -409,11 +470,19 @@ namespace Kistl.API.Server.Tests
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
+                bool hasDeleted = false;
+                GenericEventHandler<IPersistenceObject> deletedHandler = new GenericEventHandler<IPersistenceObject>(delegate(object obj, GenericEventArgs<IPersistenceObject> e) { hasDeleted = true; });
+                ctx.ObjectDeleted += deletedHandler;
+
                 var result = ctx.GetQuery<TestObjClass>();
                 Assert.That(result.ToList().Count, Is.EqualTo(4));
 
                 result.ForEach<TestObjClass>(
                     o => ctx.Delete(o));
+
+                Assert.That(hasDeleted, Is.True);
+
+                ctx.ObjectDeleted -= deletedHandler;
             }
         }
 

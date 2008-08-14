@@ -250,9 +250,12 @@ namespace Kistl.API.Server
     {
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw", "No BinaryWriter specified");
         }
+
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
         }
 
         public object Clone()

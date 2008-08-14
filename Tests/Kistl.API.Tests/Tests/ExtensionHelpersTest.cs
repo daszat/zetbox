@@ -9,6 +9,7 @@ using NUnit.Framework.SyntaxHelpers;
 using Kistl.API;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Collections;
 
 namespace Kistl.API.Tests
 {
@@ -95,7 +96,79 @@ namespace Kistl.API.Tests
         }
 
         [Test]
+        public void GetPrivateFieldValue()
+        {
+            Assert.That(obj.GetPrivateFieldValue<int>("_IntProperty"), Is.EqualTo(obj.IntProperty));
+            Assert.That(obj.GetPrivateFieldValue<bool>("_BoolProperty"), Is.EqualTo(obj.BoolProperty));
+            Assert.That(obj.GetPrivateFieldValue<string>("_StringProperty"), Is.EqualTo(obj.StringProperty));
+        }
+
+        [Test]
+        public void SetPrivateFieldValue()
+        {
+            obj.SetPrivateFieldValue<int>("_IntProperty", 2);
+            obj.SetPrivateFieldValue<bool>("_BoolProperty", false);
+            obj.SetPrivateFieldValue<string>("_StringProperty", "Hello");
+
+            Assert.That(obj.IntProperty, Is.EqualTo(2));
+            Assert.That(obj.BoolProperty, Is.EqualTo(false));
+            Assert.That(obj.StringProperty, Is.EqualTo("Hello"));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetPrivateFieldValue_InvalidPropertyName()
+        {
+            obj.GetPrivateFieldValue<int>("_TestProperty");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void SetPrivateFieldValue_InvalidPropertyName()
+        {
+            obj.SetPrivateFieldValue<int>("_TestProperty", 1);
+        }
+
+        /// /////////
+        [Test]
+        public void GetPrivatePropertyValue()
+        {
+            Assert.That(obj.GetPrivatePropertyValue<int>("PrivateIntProperty"), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void SetPrivatePropertyValue()
+        {
+            obj.SetPrivatePropertyValue<int>("PrivateIntProperty", 2);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetPrivatePropertyValue_InvalidPropertyName()
+        {
+            obj.GetPrivatePropertyValue<int>("_TestProperty");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void SetPrivatePropertyValue_InvalidPropertyName()
+        {
+            obj.SetPrivatePropertyValue<int>("_TestProperty", 1);
+        }
+        /// /////////
+
+
+        [Test]
         public void ForEach_IEnumerable()
+        {
+            IEnumerable list = new List<int>(new int[] { 1, 2, 3, 4 });
+            int result = 0;
+            list.ForEach<int>(i => result += i);
+            Assert.That(result, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void ForEach_List()
         {
             List<int> list = new List<int>(new int[] { 1, 2, 3, 4 });
             int result = 0;

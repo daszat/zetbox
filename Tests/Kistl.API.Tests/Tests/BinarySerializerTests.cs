@@ -91,6 +91,18 @@ namespace Kistl.API.Tests
         }
 
         [Test]
+        public void DateTimeNullValue()
+        {
+            DateTime? toval, fromval;
+            toval = System.DateTime.Now;
+            BinarySerializer.ToBinary(toval, sw);
+            ms.Seek(0, SeekOrigin.Begin);
+
+            BinarySerializer.FromBinary(out fromval, sr);
+            Assert.That(fromval, Is.EqualTo(toval));
+        }
+
+        [Test]
         public void Int()
         {
             int toval, fromval;
@@ -261,16 +273,39 @@ namespace Kistl.API.Tests
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SerializableType_FromBinary_NullStream()
+        {
+            SerializableType fromval;
+            BinarySerializer.FromBinary(out fromval, null);
+        }
+
+        [Test]
         public void IEnumerable_IDataObject()
         {
             List<TestDataObject> toval, fromval;
             toval = new List<TestDataObject>();
             toval.Add(new TestDataObject());
 
-            BinarySerializer.ToBinary(toval.OfType<IDataObject>(), sw);
+            BinarySerializer.ToBinary(toval.Cast<IDataObject>(), sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             BinarySerializer.FromBinary(out fromval, sr);
+            Assert.That(fromval, Is.EqualTo(toval));
+        }
+
+        [Test]
+        public void ICollection_IDataObject()
+        {
+            List<TestDataObject> toval, fromval;
+            toval = new List<TestDataObject>();
+            toval.Add(new TestDataObject());
+
+            BinarySerializer.ToBinary(toval.Cast<IDataObject>(), sw);
+            ms.Seek(0, SeekOrigin.Begin);
+
+            fromval = new List<TestDataObject>();
+            BinarySerializer.FromBinary(fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -303,6 +338,33 @@ namespace Kistl.API.Tests
             BinarySerializer.FromBinaryCollectionEntries(fromvalobserbable, sr);
             Assert.That(fromvalobserbable[0].ID, Is.EqualTo(toval[0].ID));
         }
+
+        [Test]
+        public void IStruct()
+        {
+            TestStruct toval = new TestStruct() { ID = 1 };
+
+            BinarySerializer.ToBinary(toval, sw);
+            ms.Seek(0, SeekOrigin.Begin);
+
+            TestStruct fromval;
+            BinarySerializer.FromBinary<TestStruct>(out fromval, sr);
+            Assert.That(fromval.ID, Is.EqualTo(fromval.ID));
+        }
+
+        [Test]
+        public void IStructNull()
+        {
+            TestStruct toval = null;
+
+            BinarySerializer.ToBinary(toval, sw);
+            ms.Seek(0, SeekOrigin.Begin);
+
+            TestStruct fromval;
+            BinarySerializer.FromBinary<TestStruct>(out fromval, sr);
+            Assert.That(fromval, Is.Null);
+        }
+
 
         [Test]
         public void SerializableExpression()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.CodeDom.Compiler;
 using System.Security.Permissions;
+using Kistl.API;
 
 namespace Kistl.Server.Generators
 {
@@ -90,7 +91,7 @@ namespace Kistl.Server.Generators
             StringBuilder msg = new StringBuilder();
             msg.AppendLine("Unable to compile generated code");
             msg.AppendLine();
-            result.Errors.OfType<CompilerError>().ToList().ForEach(e => msg.AppendLine(e.ToString()));
+            result.Errors.ForEach<CompilerError>(e => msg.AppendLine(e.ToString()));
             return msg.ToString();
         }
 

@@ -26,7 +26,7 @@ namespace Kistl.API
     /// <summary>
     /// CustomActionsManager Factory/Singleton. Must be initialised by each of the Server and Client Hosts.
     /// </summary>
-    public sealed class CustomActionsManagerFactory
+    public static class CustomActionsManagerFactory
     {
         /// <summary>
         /// Singelton for ICustomActionsManager.
@@ -58,12 +58,5 @@ namespace Kistl.API
                 return _manager;
             }
         }
-
-        /// <summary>
-        /// prevent this class from being instantiated
-        /// </summary>
-        private CustomActionsManagerFactory() { }
     }
-
-
 }

@@ -57,13 +57,16 @@
     <Compile Include="Main.cs" />
     <Compile Include="TestCollectionEntry.cs" />
     <Compile Include="TestEnum.cs" />
+    <Compile Include="TestKistlContext.cs" />
     <Compile Include="TestQueryProvider.cs" />
+    <Compile Include="TestStruct.cs" />
     <Compile Include="Tests\APIInitTest.cs" />
     <Compile Include="Tests\AssemblyLoaderTests.cs" />
     <Compile Include="Tests\BinarySerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomActionsManagerAPITest.cs" />
     <Compile Include="SetUp.cs" />
+    <Compile Include="Tests\HelperTest.cs" />
     <Compile Include="Tests\CustomActionsManagerFactoryTests.cs" />
     <Compile Include="Tests\ExpressionTreeVisitorTests.cs" />
     <Compile Include="Tests\KistlConfigTests.cs" />

@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.EnumerationEntries.OfType<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this.EnumerationEntries.Cast<IDataObject>(), sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
