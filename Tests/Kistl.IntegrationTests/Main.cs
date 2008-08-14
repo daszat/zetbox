@@ -12,10 +12,10 @@ namespace Kistl.IntegrationTests
             SetUp setup = new SetUp();
             setup.Init();
 
-            //GetListTests();
+            GetListTests();
             //ListPropetiesTests();
             //ObjectTests();
-            StructTests();
+            //StructTests();
 
             setup.TearDown();
         }
@@ -23,6 +23,14 @@ namespace Kistl.IntegrationTests
         private static void GetListTests()
         {
             GetListTests test = new GetListTests();
+
+            test.SetUp();
+            test.GetListWithPropertyAccessor();
+
+            test.SetUp();
+            test.GetListWithSingle();
+
+            test.SetUp();
             test.GetListWithProjection();
         }
 

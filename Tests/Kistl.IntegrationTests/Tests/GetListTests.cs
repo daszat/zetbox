@@ -50,7 +50,7 @@ namespace Kistl.IntegrationTests
                 }
             }
         }
-        
+
         [Test]
         public void GetObject_GetList()
         {
@@ -129,12 +129,12 @@ namespace Kistl.IntegrationTests
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var test = (from m in ctx.GetQuery<Kistl.App.Base.Module>()
-                           where
-                               m.ModuleName.StartsWith("K")
-                               && m.Namespace.Length > 1
-                               && m.ModuleName == "KistlBase"
-                               && m.ModuleName.EndsWith("e")
-                           select m).ToList();
+                            where
+                                m.ModuleName.StartsWith("K")
+                                && m.Namespace.Length > 1
+                                && m.ModuleName == "KistlBase"
+                                && m.ModuleName.EndsWith("e")
+                            select m).ToList();
                 Assert.That(test.Count, Is.EqualTo(1));
                 foreach (var t in test)
                 {
@@ -150,8 +150,8 @@ namespace Kistl.IntegrationTests
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
-                            where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
-                            select z;
+                           where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
+                           select z;
                 foreach (var t in test)
                 {
                     System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Kontoname));
@@ -165,11 +165,44 @@ namespace Kistl.IntegrationTests
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
-                           select new { A = z.AktuelleStunden, B = z.MaxStunden};
+                           select new { A = z.AktuelleStunden, B = z.MaxStunden };
                 foreach (var t in test)
                 {
                     System.Diagnostics.Trace.WriteLine(string.Format("GetListWithProjection: {0}", t.A));
                 }
+            }
+        }
+
+        [Test]
+        public void GetListWithSingle()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.ModuleName == "GUI").Single();
+                Assert.That(guiModule, Is.Not.Null);
+            }
+        }
+
+        public class Test
+        {
+            public string TestProp { get; set; }
+        }
+
+
+        /// <summary>
+        /// Case 472
+        /// </summary>
+        [Test]
+        public void GetListWithPropertyAccessor()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                Test t = new Test();
+                t.TestProp = "foo";
+                var result = ctx.GetQuery<Kistl.App.Base.Assembly>()
+                    .Where(a => a.AssemblyName == t.TestProp).ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.EqualTo(0));
             }
         }
     }

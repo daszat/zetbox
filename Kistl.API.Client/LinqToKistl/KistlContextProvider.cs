@@ -140,6 +140,23 @@ namespace Kistl.API.Client
                     return result.FirstOrDefault();
                 }
             }
+            else if (e.IsMethodCallExpression("Single") || e.IsMethodCallExpression("SingleOrDefault"))
+            {
+                List<T> result = new List<T>();
+                foreach (IDataObject obj in serviceResult)
+                {
+                    result.Add((T)_context.Attach(obj));
+                }
+                AddNewLocalObjects(_type, result);
+                if (e.IsMethodCallExpression("Single"))
+                {
+                    return result.Single();
+                }
+                else
+                {
+                    return result.SingleOrDefault();
+                }
+            }
             else
             {
                 T result = Activator.CreateInstance<T>();
@@ -318,6 +335,8 @@ namespace Kistl.API.Client
                 {
                     _filter = m.Arguments[1];
                 }
+                // Override a GetObjectCall
+                SearchType = SearchTypeEnum.GetList;
             }
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.Name == "OrderBy")
             {
