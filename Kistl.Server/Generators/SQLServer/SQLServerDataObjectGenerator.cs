@@ -32,8 +32,7 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (clientServer == ClientServerEnum.Server)
             {
-                code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                    new CodeTypeReference(typeof(System.Data.Objects.DataClasses.EdmSchemaAttribute))));
+                code.AddAttribute(typeof(System.Data.Objects.DataClasses.EdmSchemaAttribute));
             }
         }
         #endregion
@@ -47,11 +46,9 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 GenerateEdmRelationshipAttribute(current.objClass, current.code);
 
-                current.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
-                    new CodeAttributeArgument("NamespaceName",
-                        new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument("Name",
-                        new CodePrimitiveExpression(current.objClass.ClassName))));
+                current.code_class.AddAttribute("EdmEntityTypeAttribute",
+                    new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(current.objClass.ClassName)));
             }
         }
 
@@ -61,11 +58,9 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.clientServer == ClientServerEnum.Server)
             {
-                current.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmComplexTypeAttribute",
-                    new CodeAttributeArgument("NamespaceName",
-                        new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument("Name",
-                        new CodePrimitiveExpression(current.@struct.ClassName))));
+                current.code_class.AddAttribute("System.Data.Objects.DataClasses.EdmComplexTypeAttribute",
+                    new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(current.@struct.ClassName)));
             }
         }
         #endregion
@@ -73,24 +68,22 @@ namespace Kistl.Server.Generators.SQLServer
         #region GenerateEdmRelationshipAttribute
         private void GenerateEdmRelationshipAttribute(TypeMoniker parentType, TypeMoniker childType, CodeCompileUnit code, string propertyName)
         {
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("System.Data.Objects.DataClasses.EdmRelationshipAttribute",
-            new CodeAttributeArgument(
-                new CodePrimitiveExpression("Model")),
-            new CodeAttributeArgument(
-                new CodePrimitiveExpression(Generator.GetAssociationName(parentType, childType, propertyName))),
-            new CodeAttributeArgument(
-                new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(parentType))),
-            new CodeAttributeArgument(
-                new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
-            new CodeAttributeArgument(
-                new CodeTypeOfExpression(parentType.NameDataObject)),
-            new CodeAttributeArgument(
-                new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType))),
-            new CodeAttributeArgument(
-                new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
-            new CodeAttributeArgument(
-                new CodeTypeOfExpression(childType.NameDataObject))
-                ));
+            code.AddAttribute(typeof(System.Data.Objects.DataClasses.EdmRelationshipAttribute),
+                "Model",
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(Generator.GetAssociationName(parentType, childType, propertyName))),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(parentType))),
+                new CodeAttributeArgument(
+                    new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
+                new CodeAttributeArgument(
+                    new CodeTypeOfExpression(parentType.NameDataObject)),
+                new CodeAttributeArgument(
+                    new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType))),
+                new CodeAttributeArgument(
+                    new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
+                new CodeAttributeArgument(
+                    new CodeTypeOfExpression(childType.NameDataObject)));
         }
 
         private void GenerateEdmRelationshipAttribute(ObjectClass objClass, CodeCompileUnit code)
@@ -115,11 +108,9 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.clientServer == ClientServerEnum.Server)
             {
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute",
-                    new CodeAttributeArgument("EntityKeyProperty",
-                        new CodePrimitiveExpression(true)),
-                    new CodeAttributeArgument("IsNullable",
-                        new CodePrimitiveExpression(false))));
+                current.code_property.AddAttribute("EdmScalarPropertyAttribute",
+                    new CodeAttributeArgument("EntityKeyProperty", new CodePrimitiveExpression(true)),
+                    new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false)));
             }
         }
 
@@ -132,18 +123,9 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.clientServer == ClientServerEnum.Server)
             {
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
+                current.code_property.AddAttribute("EdmScalarPropertyAttribute");
             }
         }
-        //protected override void GenerateProperties_ValueTypeProperty(CurrentStruct current)
-        //{
-        //    base.GenerateProperties_ValueTypeProperty(current);
-
-        //    if (current.clientServer == ClientServerEnum.Server)
-        //    {
-        //        current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
-        //    }
-        //}
         #endregion
 
         #region GenerateProperties_ObjectReferenceProperty_Collection
@@ -161,11 +143,10 @@ namespace Kistl.Server.Generators.SQLServer
                 // Class
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionClass.code_class.Name));
 
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class)))));
+                current.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"),
+                    Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class));
 
 
                 current.code_property.GetStatements.Add(
@@ -175,19 +156,16 @@ namespace Kistl.Server.Generators.SQLServer
                 return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), collectionClass.code_class.Name)));
 
                 // Collection Class
-                collectionClass.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
-                    new CodeAttributeArgument("NamespaceName",
-                        new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument("Name",
-                        new CodePrimitiveExpression(collectionClass.code_class.Name))));
+                collectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
+                    new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionClass.code_class.Name)));
 
                 ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
 
-                collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class, current.property.PropertyName))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass)))));
+                collectionClass.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class, current.property.PropertyName),
+                    Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
                 
                 collectionClass.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
@@ -222,11 +200,10 @@ namespace Kistl.Server.Generators.SQLServer
                 serializerParent.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_Parent"), new CodePropertySetValueReferenceExpression()));
 
                 // Collection.Parent
-                parent.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(current.objClass)))));
+                parent.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"),
+                    Generator.GetAssociationParentRoleName(current.objClass));
 
                 parent.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
@@ -250,24 +227,21 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.clientServer == ClientServerEnum.Server)
             {
-                collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmScalarPropertyAttribute"));
+                collectionClass.code_property.AddAttribute("EdmScalarPropertyAttribute");
 
                 GenerateEdmRelationshipAttribute(new TypeMoniker(current.code_namespace.Name, current.code_class.Name),
                     new TypeMoniker(collectionClass.code_namespace.Name, collectionClass.code_class.Name), current.code, "fk_Parent");
 
-                collectionClass.code_class.CustomAttributes.Add(new CodeAttributeDeclaration("EdmEntityTypeAttribute",
-                    new CodeAttributeArgument("NamespaceName",
-                        new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument("Name",
-                        new CodePrimitiveExpression(collectionClass.code_class.Name))));
+                collectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
+                    new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionClass.code_class.Name)));
 
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionClass.code_class.Name));
 
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class)))));
+                current.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"),
+                    Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class));
 
 
                 current.code_property.GetStatements.Add(
@@ -287,11 +261,10 @@ namespace Kistl.Server.Generators.SQLServer
                 serializerParent.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_Parent"), new CodePropertySetValueReferenceExpression()));
 
                 // Collection.Parent
-                parent.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(current.objClass)))));
+                parent.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"),
+                    Generator.GetAssociationParentRoleName(current.objClass));
 
                 parent.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
@@ -318,11 +291,10 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
 
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass)))));
+                current.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName),
+                    Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
 
 
                 current.code_property.GetStatements.Add(
@@ -364,11 +336,10 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
 
                 current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                    "EdmRelationshipNavigationPropertyAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName))),
-                    new CodeAttributeArgument(new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType)))));
+                current.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName),
+                    Generator.GetAssociationChildRoleName(childType));
 
 
                 current.code_property.GetStatements.Add(
@@ -388,7 +359,7 @@ namespace Kistl.Server.Generators.SQLServer
             base.GenerateProperties_StructProperty(current);
             if (current.clientServer == ClientServerEnum.Server)
             {
-                current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("EdmComplexPropertyAttribute"));
+                current.code_property.AddAttribute("EdmComplexPropertyAttribute");
                 current.code_constructor.Statements.Add(new CodeSnippetExpression(
                     string.Format(@"_{0} = new {1}()",
                         current.property.PropertyName,

@@ -274,53 +274,6 @@ namespace Kistl.Server.Generators
         }
         #endregion
 
-        #region CreateMethod
-        protected CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, string returnType)
-        {
-            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Final);
-        }
-
-        protected CodeMemberMethod CreateVirtualMethod(CodeTypeDeclaration c, string name, string returnType)
-        {
-            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public);
-        }
-
-        protected CodeMemberMethod CreateOverrideMethod(CodeTypeDeclaration c, string name, string returnType)
-        {
-            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Override);
-        }
-
-        protected CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, Type returnType)
-        {
-            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Final);
-        }
-
-        protected CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, CodeTypeReference returnType)
-        {
-            return CreateMethod(c, name, returnType, MemberAttributes.Public | MemberAttributes.Final);
-        }
-
-        protected CodeMemberMethod CreateVirtualMethod(CodeTypeDeclaration c, string name, Type returnType)
-        {
-            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public);
-        }
-
-        protected CodeMemberMethod CreateOverrideMethod(CodeTypeDeclaration c, string name, Type returnType)
-        {
-            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Override);
-        }
-
-        protected virtual CodeMemberMethod CreateMethod(CodeTypeDeclaration c, string name, CodeTypeReference returnType, MemberAttributes memberAttributes)
-        {
-            CodeMemberMethod m = new CodeMemberMethod();
-            c.Members.Add(m);
-            m.Attributes = memberAttributes;
-            m.Name = name;
-            m.ReturnType = returnType;
-            return m;
-        }
-        #endregion
-
         #region CreateNamespace
         protected CodeNamespace CreateNamespace(CodeCompileUnit code, string name)
         {
@@ -342,37 +295,14 @@ namespace Kistl.Server.Generators
         #region GenerateAssemblyInfo
         protected virtual void GenerateAssemblyInfo(CodeCompileUnit code, ClientServerEnum clientServer)
         {
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(System.Reflection.AssemblyTitleAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression(string.Format("Kistl.Objects.{0}", clientServer)))));
-
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(System.Reflection.AssemblyCompanyAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression("dasz.at"))));
-
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(System.Reflection.AssemblyProductAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression("Kistl"))));
-
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(System.Reflection.AssemblyCopyrightAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression("Copyright © dasz.at 2008"))));
-
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(System.Runtime.InteropServices.ComVisibleAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression(false))));
-
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(System.Reflection.AssemblyVersionAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression("1.0.0.0"))));
-
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(System.Reflection.AssemblyFileVersionAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression("1.0.0.0"))));
-
-            code.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(CLSCompliantAttribute)),
-                new CodeAttributeArgument(new CodePrimitiveExpression(true))));
+            code.AddAttribute(typeof(System.Reflection.AssemblyTitleAttribute), string.Format("Kistl.Objects.{0}", clientServer));
+            code.AddAttribute(typeof(System.Reflection.AssemblyCompanyAttribute), "dasz.at");
+            code.AddAttribute(typeof(System.Reflection.AssemblyProductAttribute), "Kistl");
+            code.AddAttribute(typeof(System.Reflection.AssemblyCopyrightAttribute), "Copyright © dasz.at 2008");
+            code.AddAttribute(typeof(System.Runtime.InteropServices.ComVisibleAttribute), false);
+            code.AddAttribute(typeof(System.Reflection.AssemblyVersionAttribute), "1.0.0.0");
+            code.AddAttribute(typeof(System.Reflection.AssemblyFileVersionAttribute),"1.0.0.0");
+            code.AddAttribute(typeof(CLSCompliantAttribute), true);
         }
 
         private void GenerateAssemblyInfo(ClientServerEnum clientServer)
@@ -397,8 +327,8 @@ namespace Kistl.Server.Generators
 
             // XMLObjectCollection
             CodeTypeDeclaration c = CreateSealedClass(ns, "XMLObjectCollection", "IXmlObjectCollection");
-            c.CustomAttributes.Add(new CodeAttributeDeclaration("Serializable"));
-            c.CustomAttributes.Add(new CodeAttributeDeclaration("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("ObjectCollection"))));
+            c.AddAttribute("Serializable");
+            c.AddAttribute("XmlRoot", new CodeAttributeArgument("ElementName", new CodePrimitiveExpression("ObjectCollection")));
 
             CodeMemberField f = c.CreateField(typeof(List<Object>), "_Objects", "new List<Object>()");
 
@@ -413,7 +343,7 @@ namespace Kistl.Server.Generators
                     ));
             }
 
-            CodeMemberMethod m = CreateMethod(c, "ToList", "List<T>");
+            CodeMemberMethod m = c.CreateMethod("ToList", "List<T>");
             CodeTypeParameter ct = new CodeTypeParameter("T");
             ct.Constraints.Add("IDataObject");
             m.TypeParameters.Add(ct);
@@ -522,7 +452,7 @@ namespace Kistl.Server.Generators
             foreach (Method method in current.@interface.Methods)
             {
                 BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
-                CodeMemberMethod m = CreateMethod(current.code_class, method.MethodName, returnParam.ToCodeTypeReference());
+                CodeMemberMethod m = current.code_class.CreateMethod(method.MethodName, returnParam.ToCodeTypeReference());
 
                 foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
                 {
@@ -587,7 +517,7 @@ namespace Kistl.Server.Generators
             foreach (EnumerationEntry e in current.enumeration.EnumerationEntries)
             {
                 CodeMemberField mf = current.code_class.CreateField(typeof(int), e.EnumerationEntryName, e.EnumValue.ToString());
-                mf.Comments.Add(new CodeCommentStatement(e.EnumerationEntryName, true));
+                mf.AddComment(e.EnumerationEntryName);
             }
 
             GenerateEnumerations(current);
@@ -674,14 +604,14 @@ namespace Kistl.Server.Generators
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
             parent.code_property = collectionClass.code_class.CreateProperty(current.code_class.Name, "Parent");
-            parent.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+            parent.code_property.AddAttribute("XmlIgnore");
 
             if (current.clientServer == ClientServerEnum.Client)
             {
                 parent.code_property.GetStatements.Add(
                     new CodeSnippetExpression(
                         string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName)));
-                parent.code_property.SetStatements.Add(new CodeCommentStatement(@"TODO: Damit hab ich noch ein Problem. Wenn die Property not nullable ist, dann sollte das eigentlich nicht möglich sein."));
+                parent.code_property.SetStatements.AddComment(@"TODO: Damit hab ich noch ein Problem. Wenn die Property not nullable ist, dann sollte das eigentlich nicht möglich sein.");
                 parent.code_property.SetStatements.Add(new CodeSnippetExpression(@"_fk_Parent = value.ID"));
             }
 
@@ -732,14 +662,14 @@ namespace Kistl.Server.Generators
             CurrentObjectClass parent, CurrentObjectClass serializerParent)
         {
             // Create ToStream Method
-            CodeMemberMethod m = CreateOverrideMethod(current.code_class, "ToStream", typeof(void));
+            CodeMemberMethod m = current.code_class.CreateOverrideMethod("ToStream", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
 
             m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.Value, sw)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)"));
 
-            m = CreateOverrideMethod(current.code_class, "FromStream", typeof(void));
+            m = current.code_class.CreateOverrideMethod("FromStream", typeof(void));
             //m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
 
@@ -749,7 +679,7 @@ namespace Kistl.Server.Generators
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                m = CreateOverrideMethod(current.code_class, "ApplyChanges", typeof(void));
+                m = current.code_class.CreateOverrideMethod("ApplyChanges", typeof(void));
                 m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
                 m.Statements.Add(new CodeSnippetExpression("base.ApplyChanges(obj)"));
@@ -774,7 +704,7 @@ namespace Kistl.Server.Generators
                     current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
 
             current.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString(), current.property.PropertyName);
-            current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+            current.code_property.AddAttribute("XmlIgnore");
 
             if (current.clientServer == ClientServerEnum.Client)
             {
@@ -842,12 +772,12 @@ namespace Kistl.Server.Generators
 
             // Create Value
             collectionClass.code_property = collectionClass.code_class.CreateProperty(collectionClass.property.GetPropertyTypeString(), "Value");
-            collectionClass.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+            collectionClass.code_property.AddAttribute("XmlIgnore");
 
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
             parent.code_property = collectionClass.code_class.CreateProperty(current.code_class.Name, "Parent");
-            parent.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+            parent.code_property.AddAttribute("XmlIgnore");
 
             // Create SerializerValue
             CurrentObjectClass serializerValue = (CurrentObjectClass)collectionClass.Clone();
@@ -922,14 +852,14 @@ namespace Kistl.Server.Generators
             CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent)
         {
             // Create ToStream Method
-            CodeMemberMethod m = CreateOverrideMethod(current.code_class, "ToStream", typeof(void));
+            CodeMemberMethod m = current.code_class.CreateOverrideMethod("ToStream", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
 
             m.Statements.Add(new CodeSnippetExpression("base.ToStream(sw)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Value, sw)"));
             m.Statements.Add(new CodeSnippetExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)"));
 
-            m = CreateOverrideMethod(current.code_class, "FromStream", typeof(void));
+            m = current.code_class.CreateOverrideMethod("FromStream", typeof(void));
             //m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
 
@@ -939,7 +869,7 @@ namespace Kistl.Server.Generators
 
             if (current.clientServer == ClientServerEnum.Client)
             {
-                m = CreateOverrideMethod(current.code_class, "ApplyChanges", typeof(void));
+                m = current.code_class.CreateOverrideMethod("ApplyChanges", typeof(void));
                 m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
 
                 m.Statements.Add(new CodeSnippetExpression("base.ApplyChanges(obj)"));
@@ -965,7 +895,7 @@ namespace Kistl.Server.Generators
                     current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
 
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
-            current.code_property.CustomAttributes.Add(new CodeAttributeDeclaration("XmlIgnore"));
+            current.code_property.AddAttribute("XmlIgnore");
 
             if (current.clientServer == ClientServerEnum.Client)
             {
@@ -1115,7 +1045,7 @@ namespace Kistl.Server.Generators
             // Create ToString Method
             CodeMemberMethod m = new CodeMemberMethod();
             current.code_class.Members.Add(m);
-            m.CustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Diagnostics.DebuggerHidden")));
+            m.AddAttribute("System.Diagnostics.DebuggerHidden");
             m.Name = "ToString";
             m.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             m.ReturnType = new CodeTypeReference(typeof(string));
@@ -1189,7 +1119,7 @@ namespace Kistl.Server.Generators
             }
 
             // Create AttachToContext Method
-            m = CreateOverrideMethod(current.code_class, "AttachToContext", typeof(void));
+            m = current.code_class.CreateOverrideMethod("AttachToContext", typeof(void));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference("IKistlContext"), "ctx"));
 
             m.Statements.Add(new CodeSnippetExpression("base.AttachToContext(ctx)"));

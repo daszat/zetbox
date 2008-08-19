@@ -273,6 +273,176 @@ namespace Kistl.Server.Generators
         }
         #endregion
 
+        #region CreateMethod
+        public static CodeMemberMethod CreateMethod(this CodeTypeDeclaration c, string name, string returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Final);
+        }
+
+        public static CodeMemberMethod CreateVirtualMethod(this CodeTypeDeclaration c, string name, string returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public);
+        }
+
+        public static CodeMemberMethod CreateOverrideMethod(this CodeTypeDeclaration c, string name, string returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Override);
+        }
+
+        public static CodeMemberMethod CreateMethod(this CodeTypeDeclaration c, string name, Type returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Final);
+        }
+
+        public static CodeMemberMethod CreateMethod(this CodeTypeDeclaration c, string name, CodeTypeReference returnType)
+        {
+            return CreateMethod(c, name, returnType, MemberAttributes.Public | MemberAttributes.Final);
+        }
+
+        public static CodeMemberMethod CreateVirtualMethod(this CodeTypeDeclaration c, string name, Type returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public);
+        }
+
+        public static CodeMemberMethod CreateOverrideMethod(this CodeTypeDeclaration c, string name, Type returnType)
+        {
+            return CreateMethod(c, name, new CodeTypeReference(returnType), MemberAttributes.Public | MemberAttributes.Override);
+        }
+
+        public static CodeMemberMethod CreateMethod(this CodeTypeDeclaration c, string name, CodeTypeReference returnType, MemberAttributes memberAttributes)
+        {
+            CodeMemberMethod m = new CodeMemberMethod();
+            c.Members.Add(m);
+            m.Attributes = memberAttributes;
+            m.Name = name;
+            m.ReturnType = returnType;
+            return m;
+        }
+        #endregion
+
+        #region CreateComments
+        public static CodeCommentStatement AddComment(this CodeMemberField f, string text)
+        {
+            CodeCommentStatement comment = new CodeCommentStatement(text, true);
+            f.Comments.Add(comment);
+            return comment;
+        }
+        public static CodeCommentStatement AddComment(this CodeMemberProperty p, string text)
+        {
+            CodeCommentStatement comment = new CodeCommentStatement(text, true);
+            p.Comments.Add(comment);
+            return comment;
+        }
+        public static CodeCommentStatement AddComment(this CodeStatementCollection statements, string text)
+        {
+            CodeCommentStatement comment = new CodeCommentStatement(text, true);
+            statements.Add(comment);
+            return comment;
+        }
+        #endregion
+
+        #region CreateAttributes
+        /// <summary>
+        /// Add Arguments to CodeAttributeDeclaration. CodeAttributeArgument are added without any further translation. 
+        /// Any other Expression will be converted to a CodePrimitiveExpression!
+        /// </summary>
+        /// <param name="attribute">CodeAttributeDeclaration to add arguments to</param>
+        /// <param name="expressions">CodeAttributeArgument or any expression which will be converted to a CodePrimitiveExpression</param>
+        public static void AddArguments(this CodeAttributeDeclaration attribute, params object[] expressions)
+        {
+            if (expressions != null)
+            {
+                foreach (object e in expressions)
+                {
+                    if (e is CodeAttributeArgument)
+                    {
+                        attribute.Arguments.Add((CodeAttributeArgument)e);
+                    }
+                    else
+                    {
+                        attribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(e)));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add a CodeAttributeDeclaration. 
+        /// <remarks>
+        /// <typeparamref name="expressions"/>: CodeAttributeArgument are added without any further translation. 
+        /// Any other Expression will be converted to a CodePrimitiveExpression!
+        /// </remarks>
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="name"></param>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
+        public static CodeAttributeDeclaration AddAttribute(this CodeMemberProperty prop, string name, params object[] expressions)
+        {
+            CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(name);
+            attribute.AddArguments(expressions);
+            prop.CustomAttributes.Add(attribute);
+            return attribute;
+        }
+
+        /// <summary>
+        /// Add a CodeAttributeDeclaration. 
+        /// <remarks>
+        /// <typeparamref name="expressions"/>: CodeAttributeArgument are added without any further translation. 
+        /// Any other Expression will be converted to a CodePrimitiveExpression!
+        /// </remarks>
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="name"></param>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
+        public static CodeAttributeDeclaration AddAttribute(this CodeMemberMethod method, string name, params object[] expressions)
+        {
+            CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(name);
+            attribute.AddArguments(expressions);
+            method.CustomAttributes.Add(attribute);
+            return attribute;
+        }
+
+        /// <summary>
+        /// Add a CodeAttributeDeclaration. 
+        /// <remarks>
+        /// <typeparamref name="expressions"/>: CodeAttributeArgument are added without any further translation. 
+        /// Any other Expression will be converted to a CodePrimitiveExpression!
+        /// </remarks>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
+        public static CodeAttributeDeclaration AddAttribute(this CodeTypeDeclaration type, string name, params object[] expressions)
+        {
+            CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(name);
+            attribute.AddArguments(expressions);
+            type.CustomAttributes.Add(attribute);
+            return attribute;
+        }
+
+        /// <summary>
+        /// Add a CodeAttributeDeclaration. 
+        /// <remarks>
+        /// <typeparamref name="expressions"/>: CodeAttributeArgument are added without any further translation. 
+        /// Any other Expression will be converted to a CodePrimitiveExpression!
+        /// </remarks>
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="attributeType"></param>
+        /// <param name="expressions"></param>
+        /// <returns></returns>
+        public static CodeAttributeDeclaration AddAttribute(this CodeCompileUnit code, Type attributeType, params object[] expressions)
+        {
+            CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(new CodeTypeReference(attributeType));
+            attribute.AddArguments(expressions);
+            code.AssemblyCustomAttributes.Add(attribute);
+            return attribute;
+        }
+        #endregion
+
         #region CheckPropertyType
         public static bool IsListProperty(this BaseProperty prop)
         {
