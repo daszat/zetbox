@@ -29,11 +29,7 @@ namespace Kistl.Server
             System.Console.WriteLine(ex.ToString());
             if (throwFault)
             {
-                if (ex is ApplicationException)
-                {
-                    throw new FaultException<ApplicationException>(ex as ApplicationException, ex.Message);
-                }
-                else if (ex is System.Data.UpdateException && ex.InnerException != null)
+                if (ex is System.Data.UpdateException && ex.InnerException != null)
                 {
                     throw new FaultException(ex.InnerException.Message);
                 }

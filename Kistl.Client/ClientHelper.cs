@@ -20,11 +20,7 @@ namespace Kistl.Client
         public static void HandleError(Exception ex)
         {
             //TODO: put exception into DB
-            if (ex is FaultException<ApplicationException>)
-            {
-                Manager.Renderer.ShowMessage((ex as ApplicationException).Message);
-            }
-            else if (ex is FaultException)
+            if (ex is FaultException)
             {
                 Manager.Renderer.ShowMessage((ex as FaultException).Message);
             }

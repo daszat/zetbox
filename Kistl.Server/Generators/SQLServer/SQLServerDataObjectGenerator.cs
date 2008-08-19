@@ -149,11 +149,10 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class));
 
 
-                current.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
+                current.code_property.GetStatements.AddStatement(
+              @"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), collectionClass.code_class.Name)));
+                return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), collectionClass.code_class.Name);
 
                 // Collection Class
                 collectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
@@ -166,38 +165,34 @@ namespace Kistl.Server.Generators.SQLServer
                     "Model",
                     Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class, current.property.PropertyName),
                     Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
-                
-                collectionClass.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName)));
 
-                collectionClass.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                collectionClass.code_property.GetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName)));
+                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName);
+
+                collectionClass.code_property.SetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, collectionClass.code_namespace, collectionClass.code_class, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName);
 
                 // Collection.Serializer.Value
-                serializerValue.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Value != null)
+                serializerValue.code_property.GetStatements.AddStatement(
+              @"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Value != null)
                 {{
                     _fk_Value = Value.ID;
                 }}
-                return _fk_Value", current.property.PropertyName)));
-                serializerValue.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_Value"), new CodePropertySetValueReferenceExpression()));
+                return _fk_Value", current.property.PropertyName);
+                serializerValue.code_property.SetStatements.AddStatement("_fk_Value = value");
 
                 // Collection.Serializer.Parent
-                serializerParent.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
+                serializerParent.code_property.GetStatements.AddStatement(
+              @"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
                 {{
                     _fk_Parent = Parent.ID;
                 }}
-                return _fk_Parent", current.property.PropertyName)));
-                serializerParent.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_Parent"), new CodePropertySetValueReferenceExpression()));
+                return _fk_Parent", current.property.PropertyName);
+                serializerParent.code_property.SetStatements.AddStatement("_fk_Parent = value");
 
                 // Collection.Parent
                 parent.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
@@ -205,17 +200,15 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"),
                     Generator.GetAssociationParentRoleName(current.objClass));
 
-                parent.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                parent.code_property.GetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName)));
+                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName);
 
-                parent.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                parent.code_property.SetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName)));
+                r.Value = value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName);
             }
         }
         #endregion
@@ -244,21 +237,19 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationChildRoleName(collectionClass.code_namespace, collectionClass.code_class));
 
 
-                current.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
+                current.code_property.GetStatements.AddStatement(
+              @"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""B_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), collectionClass.code_class.Name)));
+                return c", collectionClass.code_class.Name, Generator.GetAssociationName(current.code_namespace, current.code_class, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), collectionClass.code_class.Name);
 
                 // Collection.Serializer.Parent
-                serializerParent.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
+                serializerParent.code_property.GetStatements.AddStatement(
+              @"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
                 {{
                     _fk_Parent = Parent.ID;
                 }}
-                return _fk_Parent", current.property.PropertyName)));
-                serializerParent.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_Parent"), new CodePropertySetValueReferenceExpression()));
+                return _fk_Parent", current.property.PropertyName);
+                serializerParent.code_property.SetStatements.AddStatement("_fk_Parent = value");
 
                 // Collection.Parent
                 parent.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
@@ -266,17 +257,15 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"),
                     Generator.GetAssociationParentRoleName(current.objClass));
 
-                parent.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                parent.code_property.GetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName)));
+                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName);
 
-                parent.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                parent.code_property.SetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName)));
+                r.Value = value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, collectionClass.code_namespace, collectionClass.code_class, "fk_Parent"), current.objClass.ClassName);
             }
         }
         #endregion
@@ -297,26 +286,23 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
 
 
-                current.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                current.code_property.GetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName)));
+                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName);
 
-                current.code_property.SetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
+                current.code_property.SetStatements.AddStatement(
+              @"EntityReference<{0}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}>(""Model.{1}"", ""A_{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName)));
+                r.Value = value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), objRefProp.ReferenceObjectClass.ClassName);
 
-                serializer.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && {0} != null)
+                serializer.code_property.GetStatements.AddStatement(
+              @"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && {0} != null)
                 {{
                     _fk_{0} = {0}.ID;
                 }}
-                return _fk_{0}", current.property.PropertyName)));
-                serializer.code_property.SetStatements.Add(new CodeAssignStatement(new CodeSnippetExpression("_fk_" + current.property.PropertyName), new CodePropertySetValueReferenceExpression()));
+                return _fk_{0}", current.property.PropertyName);
+                serializer.code_property.SetStatements.AddStatement("_fk_{0} = value", current.property.PropertyName);
             }
         }
 
@@ -342,13 +328,12 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationChildRoleName(childType));
 
 
-                current.code_property.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""{2}"");
+                current.code_property.GetStatements.AddStatement(
+              @"EntityCollection<{0}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", childType.NameDataObject,
                          Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName), 
-                         Generator.GetAssociationChildRoleName(childType))));
+                         Generator.GetAssociationChildRoleName(childType));
             }
         }
 
@@ -360,10 +345,9 @@ namespace Kistl.Server.Generators.SQLServer
             if (current.clientServer == ClientServerEnum.Server)
             {
                 current.code_property.AddAttribute("EdmComplexPropertyAttribute");
-                current.code_constructor.Statements.Add(new CodeSnippetExpression(
-                    string.Format(@"_{0} = new {1}()",
+                current.code_constructor.Statements.AddStatement(@"_{0} = new {1}()",
                         current.property.PropertyName,
-                        current.property.GetPropertyTypeString())));
+                        current.property.GetPropertyTypeString());
             }
         }
 

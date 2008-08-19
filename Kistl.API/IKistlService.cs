@@ -166,7 +166,7 @@ namespace Kistl.API
         /// <param name="orderBy">OrderBy as LinqExpression</param>
         /// <returns>A List ob Objects as XML</returns>
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
+        [FaultContract(typeof(Exception))]
         string GetList(SerializableType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy);
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Kistl.API
         /// <param name="property">Die Eigenschaft, welches die Liste enthält.</param>
         /// <returns>XML</returns>
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
+        [FaultContract(typeof(Exception))]
         string GetListOf(SerializableType type, int ID, string property);
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Kistl.API
         /// <param name="ID">ID des Objektes</param>
         /// <returns>XML</returns>
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
+        [FaultContract(typeof(Exception))]
         string GetObject(SerializableType type, int ID);
         
         /// <summary>
@@ -197,14 +197,14 @@ namespace Kistl.API
         /// <param name="xmlObj">Das zu ändernde Objekt als XML</param>
         /// <returns>XML</returns>
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
+        [FaultContract(typeof(Exception))]
         string SetObject(SerializableType type, string xmlObj);
 
         /// <summary>
         /// Generates Objects &amp; Database. Throws a Exception if failed.
         /// </summary>
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
+        [FaultContract(typeof(Exception))]
         void Generate();
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Kistl.API
         /// <param name="name">Ein Name</param>
         /// <returns>Gibt "Hello " + name zurück.</returns>
         [OperationContract]
-        [FaultContract(typeof(ApplicationException))]
+        [FaultContract(typeof(Exception))]
         string HelloWorld(string name);
     }
 }

@@ -156,7 +156,7 @@ namespace Kistl.API.Client
                     Type result = t.MakeGenericType(xmlCollection, xmlObj);
 
                     _CurrentSerializer = Activator.CreateInstance(result) as IXmlSerializer;
-                    if (_CurrentSerializer == null) throw new ApplicationException("Cannot create instance of KistlService.XmlSerializer");
+                    if (_CurrentSerializer == null) throw new InvalidOperationException("Cannot create instance of KistlService.XmlSerializer");
                 }
 
                 return _CurrentSerializer;

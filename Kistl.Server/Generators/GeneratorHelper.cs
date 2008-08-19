@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.CodeDom;
+using Kistl.API;
 using Kistl.App.Base;
+using System.Reflection;
 
 namespace Kistl.Server.Generators
 {
@@ -77,7 +79,7 @@ namespace Kistl.Server.Generators
                 else
                 {
                     Type t = Type.GetType(p.GetPropertyTypeString());
-                    if (t == null) throw new ApplicationException(
+                    if (t == null) throw new ArgumentOutOfRangeException(
                          string.Format("ValueProperty {0}.{1} has a invalid Datatype of {2}",
                              p.ObjectClass.ClassName, p.PropertyName, p.GetPropertyTypeString()));
 
@@ -256,9 +258,7 @@ namespace Kistl.Server.Generators
             string getExpression, string setLValue, string notifier)
         {
             CodeMemberProperty result = CreateProperty(c, type, name, true);
-            result.GetStatements.Add(
-                    new CodeSnippetExpression(
-                        string.Format(@"return {0}", getExpression)));
+            result.GetStatements.AddStatement(@"return {0}", getExpression);
 
             // create a condition to not trigger events if the value doesn't change.
             CodeConditionStatement ccs = new CodeConditionStatement(new CodeSnippetExpression(string.Format("{0} != value", name)));
@@ -440,6 +440,96 @@ namespace Kistl.Server.Generators
             attribute.AddArguments(expressions);
             code.AssemblyCustomAttributes.Add(attribute);
             return attribute;
+        }
+        #endregion
+
+        #region CreateStatement
+        public static CodeSnippetExpression AddStatement(this CodeStatementCollection statements, string text, params object[] args)
+        {
+            CodeSnippetExpression expression;
+            if (args != null && args.Length > 0)
+            {
+                expression = new CodeSnippetExpression(string.Format(text, args));
+            }
+            else
+            {
+                expression = new CodeSnippetExpression(text);
+            }
+
+            statements.Add(expression);
+            return expression;
+        }
+        #endregion
+
+        #region CreateInterface
+        public static CodeTypeDeclaration CreateInterface(this CodeNamespace ns, string name,
+            TypeAttributes typeAttributes, params CodeTypeReference[] baseInterfaces)
+        {
+            CodeTypeDeclaration c = new CodeTypeDeclaration(name);
+            ns.Types.Add(c);
+            c.IsClass = false;
+            c.IsInterface = true;
+            c.TypeAttributes = typeAttributes | TypeAttributes.Interface;
+            baseInterfaces.ForEach<CodeTypeReference>(b => c.BaseTypes.Add(b));
+            return c;
+        }
+        public static CodeTypeDeclaration CreateInterface(this CodeNamespace ns, string name, params CodeTypeReference[] baseInterfaces)
+        {
+            return CreateInterface(ns, name, TypeAttributes.Public, baseInterfaces);
+        }
+        #endregion
+
+        #region CreateEnum
+        public static CodeTypeDeclaration CreateEnum(this CodeNamespace ns, string name, TypeAttributes typeAttributes)
+        {
+            CodeTypeDeclaration c = new CodeTypeDeclaration(name);
+            ns.Types.Add(c);
+            c.IsClass = false;
+            c.IsEnum = true;
+            c.TypeAttributes = typeAttributes;
+            return c;
+        }
+        public static CodeTypeDeclaration CreateEnum(this CodeNamespace ns, string name)
+        {
+            return CreateEnum(ns, name, TypeAttributes.Public);
+        }
+        #endregion
+
+        #region CreateClass
+        public static CodeTypeDeclaration CreateClass(this CodeNamespace ns, string name, params string[] baseClasses)
+        {
+            List<CodeTypeReference> baseClassesList = new List<CodeTypeReference>();
+            baseClasses.ForEach<string>(b => baseClassesList.Add(new CodeTypeReference(b)));
+            return CreateClass(ns, name, TypeAttributes.Public, baseClassesList.ToArray());
+        }
+
+        public static CodeTypeDeclaration CreateSealedClass(this CodeNamespace ns, string name, params string[] baseClasses)
+        {
+            List<CodeTypeReference> baseClassesList = new List<CodeTypeReference>();
+            baseClasses.ForEach<string>(b => baseClassesList.Add(new CodeTypeReference(b)));
+            return CreateClass(ns, name, TypeAttributes.Public | TypeAttributes.Sealed, baseClassesList.ToArray());
+        }
+
+        public static CodeTypeDeclaration CreateClass(this CodeNamespace ns, string name,
+            TypeAttributes typeAttributes, params CodeTypeReference[] baseClasses)
+        {
+            CodeTypeDeclaration c = new CodeTypeDeclaration(name);
+            ns.Types.Add(c);
+            c.IsClass = true;
+            c.TypeAttributes = typeAttributes;
+            baseClasses.ForEach<CodeTypeReference>(b => c.BaseTypes.Add(b));
+            return c;
+        }
+
+        #endregion
+
+        #region CreateConstructor
+        public static CodeConstructor CreateConstructor(this CodeTypeDeclaration c)
+        {
+            CodeConstructor ctor = new CodeConstructor();
+            c.Members.Add(ctor);
+            ctor.Attributes = MemberAttributes.Public;
+            return ctor;
         }
         #endregion
 

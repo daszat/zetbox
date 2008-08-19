@@ -57,7 +57,7 @@ namespace Kistl.Server
 
                 if (!serverStarted.WaitOne(20 * 1000, false))
                 {
-                    throw new ApplicationException("Server did not started within 20 sec.");
+                    throw new InvalidOperationException("Server did not started within 20 sec.");
                 }
             }
         }

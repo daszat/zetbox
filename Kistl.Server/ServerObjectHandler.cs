@@ -72,13 +72,13 @@ namespace Kistl.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
-                if (type == null) throw new ArgumentException("Type is null");
+                if (type == null) throw new ArgumentNullException("Type is null");
 
                 Type t = typeof(ServerObjectHandler<>);
                 Type result = t.MakeGenericType(type);
 
                 IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
-                if (obj == null) throw new ApplicationException("Cannot create instance");
+                if (obj == null) throw new ArgumentOutOfRangeException("Cannot create instance of Type " + type.FullName);
 
                 return obj;
             }

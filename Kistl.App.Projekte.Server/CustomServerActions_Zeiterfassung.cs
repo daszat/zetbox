@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security;
 
 namespace Kistl.App.Zeiterfassung
 {
@@ -18,14 +19,14 @@ namespace Kistl.App.Zeiterfassung
 
             if (z.Mitarbeiter.FirstOrDefault(m => m.Value.ID == obj.Mitarbeiter.ID) == null)
             {
-                throw new ApplicationException("Sie sind nicht berechtigt auf dieses Zeitkonto zu buchen.");
+                throw new SecurityException("Sie sind nicht berechtigt auf dieses Zeitkonto zu buchen.");
             }
 
             UpdateZeitkontoAggregations(z);
 
             if (z.MaxStunden.HasValue && z.AktuelleStunden > z.MaxStunden)
             {
-                throw new ApplicationException("Die aktuellen Stunden auf dem Zeitkonto überschreiten die max zulässige Anzahl an Stunden.");
+                throw new ArgumentException("Die aktuellen Stunden auf dem Zeitkonto überschreiten die max zulässige Anzahl an Stunden.");
             }
         }
 

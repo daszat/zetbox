@@ -13,7 +13,7 @@ namespace Kistl.App.Base
         {
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.ClassName))
             {
-                throw new ApplicationException(string.Format("ClassName {0} has some illegal chars", obj.ClassName));
+                throw new ArgumentException(string.Format("ClassName {0} has some illegal chars", obj.ClassName));
             }
 
             // Only for BaseClasses
@@ -54,13 +54,13 @@ namespace Kistl.App.Base
         {
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.ParameterName))
             {
-                throw new ApplicationException(string.Format("ParameterName {0} has some illegal chars", obj.ParameterName));
+                throw new ArgumentException(string.Format("ParameterName {0} has some illegal chars", obj.ParameterName));
             }
 
             // TODO: => ValidationFramework
             if (obj.Method != null && obj.Method.Parameter.Count(p => p.IsReturnParameter) > 1)
             {
-                throw new ApplicationException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter", 
+                throw new ArgumentException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter", 
                     obj.Method.ObjectClass.Module.Namespace,
                     obj.Method.ObjectClass.ClassName,
                     obj.Method.MethodName));
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
         {
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.MethodName))
             {
-                throw new ApplicationException(string.Format("MethodName {0} has some illegal chars", obj.MethodName));
+                throw new ArgumentException(string.Format("MethodName {0} has some illegal chars", obj.MethodName));
             }
         }
         #endregion
