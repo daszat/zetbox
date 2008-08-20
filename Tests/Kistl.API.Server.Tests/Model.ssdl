@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model.Store" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+<Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="2005" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
   <EntityContainer Name="App">
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClass" />
     <EntitySet Name="TestObjClass_TestNameCollectionEntry" EntityType="Model.Store.TestObjClass_TestNameCollectionEntry" Table="TestObjClass_TestNameCollectionEntry" />

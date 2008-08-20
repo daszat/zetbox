@@ -701,6 +701,9 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteStartElement("Schema");
                 xml.WriteAttributeString("Namespace", "Model.Store");
                 xml.WriteAttributeString("Alias", "Self");
+                // TODO: Change this for other Provider
+                xml.WriteAttributeString("Provider", "System.Data.SqlClient");
+                xml.WriteAttributeString("ProviderManifestToken", "2005");
                 xml.WriteAttributeString("xmlns", "http://schemas.microsoft.com/ado/2006/04/edm/ssdl");
 
                 // Write EntityContainer

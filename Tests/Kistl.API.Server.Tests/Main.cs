@@ -18,6 +18,9 @@ namespace Kistl.API.Server.Tests
             Tests.KistlDataContextTests tests = new Tests.KistlDataContextTests();
 
             tests.SetUp();
+            tests.Attach_IDataObject_New_WithGraph();
+
+            tests.SetUp();
             tests.SelectSomeData_Parent();
 
             tests.SetUp();

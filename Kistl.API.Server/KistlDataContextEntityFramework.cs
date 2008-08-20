@@ -177,9 +177,10 @@ namespace Kistl.API.Server
         {
             get
             {
+                // Must use OfType -> ObjectStateManager also contains RelationshipEntities
                 return this.ObjectStateManager
                     .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified | System.Data.EntityState.Deleted | System.Data.EntityState.Unchanged)
-                    .Select(e => e.Entity).Cast<IPersistenceObject>();
+                    .Select(e => e.Entity).OfType<IPersistenceObject>();
             }
         }
 

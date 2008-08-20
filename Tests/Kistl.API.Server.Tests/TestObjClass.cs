@@ -129,6 +129,12 @@ namespace Kistl.API.Server.Tests
             }
         }
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+            TestNames.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
+        }
+
         public event ToStringHandler<TestObjClass> OnToString_TestObjClass;
 
         public event ObjectEventHandler<TestObjClass> OnPreSave_TestObjClass;
@@ -160,20 +166,6 @@ namespace Kistl.API.Server.Tests
             base.NotifyPostSave();
             if (OnPostSave_TestObjClass != null) OnPostSave_TestObjClass(this);
         }
-
-        //public override object Clone()
-        //{
-        //    TestObjClass obj = new TestObjClass();
-        //    CopyTo(obj);
-        //    return obj;
-        //}
-
-        //public override void ApplyChanges(Kistl.API.IDataObject obj)
-        //{
-        //    base.ApplyChanges(obj);
-        //    ((TestObjClass)obj)._StringProp = this._StringProp;
-        //    ((TestObjClass)obj)._TestEnumProp = this._TestEnumProp;
-        //}
 
         public virtual void TestMethod(System.DateTime DateTimeParamForTestMethod)
         {
