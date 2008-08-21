@@ -103,8 +103,12 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
 
         public void ShowObject(IDataObject obj, IBasicControl ctrl)
         {
-            Objects.Add(obj);
-            ShowObjectInternal(obj);
+            if (!Objects.Contains(obj))
+            {
+                Objects.Add(obj);
+                ShowObjectInternal(obj);
+            }
+            tabObjectsControl.ActiveTabIndex = Objects.IndexOf(obj);
         }
 
         public void RemoveObject(IDataObject dataObject)

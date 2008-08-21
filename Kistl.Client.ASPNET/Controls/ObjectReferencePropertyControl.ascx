@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ObjectReferencePropertyControl.ascx.cs"
     Inherits="Controls_ObjectReferencePropertyControl" %>
-<div class="Control">
+<div class="Control" id="container" runat="server">
     <asp:Label runat="server" AssociatedControlID="cbList"><%= ShortLabel %></asp:Label>    
     <asp:DropDownList ID="cbList" runat="server" CssClass="Control" />
     <input type="button" ID="btnOpen" runat="server" value="Open" />

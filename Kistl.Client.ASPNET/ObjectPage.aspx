@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="ObjectPage.aspx.cs" Inherits="ObjectPage" Title="Unbenannte Seite" %>
+    CodeFile="ObjectPage.aspx.cs" Inherits="ObjectPage" Title="Kistl ASP.NET Prototype - Object Page" %>
 
 <%@ Register TagPrefix="uc" TagName="ChooseObjectDialog" Src="~/Dialogs/ChooseObjectDialog.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

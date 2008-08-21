@@ -29,4 +29,9 @@ public partial class Controls_ObjectReferencePropertyControl : Kistl.Client.ASPN
     {
         get { return btnOpen; }
     }
+
+    protected override Control ContainerControl
+    {
+        get { return container; }
+    }
 }

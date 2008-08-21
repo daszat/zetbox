@@ -9,29 +9,45 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-            <Services>
-                <asp:ServiceReference Path="~/AJAXService/AJAXService.svc" />
-            </Services>
-        </asp:ScriptManager>
-        <asp:UpdateProgress ID="updateProgress" runat="server" DisplayAfter="1">
-            <ProgressTemplate>
-                <div style="position: absolute; padding: 16px; left: 50%; top: 50%;">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/images/loading.gif" />
-                </div>
-            </ProgressTemplate>
-        </asp:UpdateProgress>
-        <%-- TODO: Das geht mit dem HiddenField hdObjects nicht. Rausfinden warum!
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="~/AJAXService/AJAXService.svc" />
+        </Services>
+    </asp:ScriptManager>
+    <asp:UpdateProgress ID="updateProgress" runat="server" DisplayAfter="1">
+        <ProgressTemplate>
+            <div style="position: absolute; padding: 16px; left: 50%; top: 50%;">
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/images/loading.gif" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+    <%-- TODO: Das geht mit dem HiddenField hdObjects nicht. Rausfinden warum!
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
             </ContentTemplate>
         </asp:UpdatePanel>
         --%>
-        <kistl:JavascriptRenderer ID="myJavascriptRenderer" runat="server" />
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+    <kistl:JavascriptRenderer ID="myJavascriptRenderer" runat="server" />
+    <div id="Header">
+        <div id="Logo">
+            <asp:HyperLink runat="server" NavigateUrl="~/Default.aspx">
+                <asp:Image runat="server" ImageUrl="~/Images/Logo dasz.at - klein.png" AlternateText="dasz.at - Benutzbare Technologie" />
+                <h1 class="hidden">dasz.at - Benutzbare Technologie</h1>
+            </asp:HyperLink>
         </div>
+        <div id="Caption">
+            <h1>
+                Kistl ASP.NET Prototype</h1>
+        </div>
+        <div id="MainMenu">
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx" CssClass="MainMenuItem">Workbench</asp:HyperLink> | 
+            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/About.aspx" CssClass="MainMenuItem">About</asp:HyperLink>
+        </div>
+    </div>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
     </form>
 </body>
 </html>

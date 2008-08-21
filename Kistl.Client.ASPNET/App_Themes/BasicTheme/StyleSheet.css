@@ -1,5 +1,81 @@
 ﻿body 
 {
+	font-family: Verdana, Tahoma, Arial;
+	font-size: 80%;
+}
+
+H1
+{
+	color: #A00;
+	font-size: 1.5em;
+}
+
+H2
+{
+	color: #A00;
+	font-size: 1.3em;
+}
+
+H3
+{
+	color: #A00;
+	font-size: 1.1em;
+}
+
+a, strong, .Label
+{
+	color: #A00;
+}
+
+a :visited
+{
+	color: #A00;
+}
+
+.hidden {
+  display: block;
+  height: 0;
+  left: -999em;
+  position: absolute;
+  overflow: hidden;
+  top: -999em;
+  width: 0;
+}
+
+div#Header
+{
+	border-bottom: solid 2px #A00;
+	margin-bottom: 10px;
+}
+
+div#Logo
+{
+	float: right;
+}
+
+div#MainMenu
+{
+	padding-top: 20px;
+	padding-bottom: 5px;
+	font-weight: bold;
+	color: #A00;
+}
+
+div#Caption
+{
+	height: 40px;
+}
+
+a.MainMenuItem
+{
+	text-decoration: none;
+	font-weight: bold;
+	color: #A00;
+}
+
+a.MainMenuItem :visited
+{
+	color: #A00;
 }
 
 div.Dialog
@@ -44,28 +120,28 @@ label
   font-weight: bold;
 }
 
-table.tblList 
+.ItemTable 
 {
 	border-width: 1px;
 	border-style: outset;
 	border-color: gray;
 	border-collapse: collapse;
-	background-color: white;	
-	width: 300px;
+	background-color: white;
 }	
-table.tblList td 
+.ItemTable td 
 {
 	border-width: 1px;
-	padding: 1px;
+	padding: 2px;
 	border-style: inset;
 	border-color: gray;
 	background-color: white;
 }
-table.tblList th
+.ItemTable th
 {
 	border-width: 1px;
 	padding: 1px;
 	border-style: inset;
 	border-color: gray;
-	background-color: white;
+	background-color: #A00;
+	color: White;
 }

@@ -28,8 +28,8 @@ namespace Kistl.Client.ASPNET.Toolkit.Dialogs
         public System.Collections.Generic.IEnumerable<ScriptReference> GetScriptReferences()
         {
             // typeof(thisclass) is important!
-            // This is a UserControl. ASP.NET will do whatever with this class.
-            // this.GetType() wont return typeof(thisclass)
+            // This is a UserControl. ASP.NET will derive from this class.
+            // this.GetType() wont return a Type, where Assembly is set to this Assembly
             // -> use typeof(thisclass) instead
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
                 typeof(ChooseObjectDialog), "Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog.js"));

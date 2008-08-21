@@ -13,10 +13,14 @@ using System.Xml.Linq;
 using Kistl.GUI;
 using Kistl.API;
 
+[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.Controls.ObjectReferencePropertyControl.js", "text/javascript")] 
+
+
 namespace Kistl.Client.ASPNET.Toolkit.Controls
 {
-    public abstract class ObjectReferencePropertyControl : ValueControl<IDataObject>, IReferenceControl
+    public abstract class ObjectReferencePropertyControl : ValueControl<IDataObject>, IReferenceControl, IScriptControl
     {
+        protected abstract Control ContainerControl { get; }
         protected abstract DropDownList cbListControl { get; }
         protected abstract HtmlControl btnNewControl { get; }
         protected abstract HtmlControl btnOpenControl { get; }
@@ -36,6 +40,26 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
             NotifyUserInput();
         }
 
+        public System.Collections.Generic.IEnumerable<ScriptDescriptor> GetScriptDescriptors()
+        {
+            ScriptControlDescriptor desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.ObjectReferencePropertyControl",
+                ContainerControl.ClientID);
+            desc.AddElementProperty("List", cbListControl.ClientID);
+            desc.AddElementProperty("LnkOpen", btnOpenControl.ClientID);
+            desc.AddProperty("Type", new SerializableType(ObjectType));
+            yield return desc;
+        }
+
+        public System.Collections.Generic.IEnumerable<ScriptReference> GetScriptReferences()
+        {
+            // typeof(thisclass) is important!
+            // This is a UserControl. ASP.NET will derive from this class.
+            // this.GetType() wont return a Type, where Assembly is set to this Assembly
+            // -> use typeof(thisclass) instead
+            yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
+                typeof(ObjectListControl), "Kistl.Client.ASPNET.Toolkit.Controls.ObjectReferencePropertyControl.js"));
+        }
+
         #region IReferenceControl<IDataObject> Members
 
         public Type ObjectType
@@ -52,28 +76,43 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
             }
             set
             {
-                cbListControl.DataValueField = "ID";
+                cbListControl.DataValueField = "Moniker";
                 cbListControl.DataTextField = "Text";
-                cbListControl.DataSource = value.Select(i => new { ID = i.ID, Text = i.ToString() });
+                cbListControl.DataSource = value.Select(i => new { Moniker = i.ToJSON(), Text = i.ToString() });
                 cbListControl.DataBind();
 
-                cbListControl.Items.Insert(0, new ListItem("", Helper.INVALIDID.ToString()));
+                cbListControl.Items.Insert(0, new ListItem("", ""));
             }
         }
 
         #endregion
 
+        /// <summary>
+        /// TODO: Entweder so mit dem Moniker oder wieder mit der ID. Dann muss ich aber clientseitig einen neuen Moniker aufbauen (für ShowObject).
+        /// </summary>
         public override Kistl.API.IDataObject Value
         {
             get
             {
-                return ((IBasicControl)this).Context.Find(ObjectType, Convert.ToInt32(cbListControl.SelectedValue));
+                string moniker = cbListControl.SelectedValue;
+                if (string.IsNullOrEmpty(moniker))
+                {
+                    return null;
+                }
+                else
+                {
+                    return ((IBasicControl)this).Context.Find(ObjectType, moniker.FromJSON<IDataObject>(((IBasicControl)this).Context).ID);
+                }
             }
             set
             {
                 if (value != null)
                 {
-                    cbListControl.SelectedValue = value.ID.ToString();
+                    cbListControl.SelectedValue = value.ToJSON();
+                }
+                else
+                {
+                    cbListControl.SelectedValue = "";
                 }
             }
         }
@@ -84,8 +123,25 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
 
             btnNewControl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject(Kistl.JavascriptRenderer.newObject({0}));", 
                 ObjectType.ToJSON()));
-            btnOpenControl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject({0});",
-                Value.ToJSON()));
+            
+            ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
+            if (scriptManager == null)
+            {
+                throw new InvalidOperationException(
+                  "ScriptManager required on the page.");
+            }
+
+            scriptManager.RegisterScriptControl(this);
+        }
+
+        protected override void Render(HtmlTextWriter writer)
+        {
+            base.Render(writer);
+
+            if (!DesignMode)
+            {
+                ScriptManager.GetCurrent(this.Page).RegisterScriptDescriptors(this);
+            }
         }
     }
 }
