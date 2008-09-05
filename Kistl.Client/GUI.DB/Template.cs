@@ -6,6 +6,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 using Kistl.Client;
+using Kistl.API.Client;
 
 namespace Kistl.GUI.DB
 {
@@ -29,54 +30,67 @@ namespace Kistl.GUI.DB
                     && (tmpl.DisplayedTypeFullName == objectType.FullName)
                     )
                 .SingleOrDefault();
-            
+
             if (result == null)
                 result = CreateDefaultTemplate(objectType);
 
+
             return result;
         }
-        
+
         public static Template CreateDefaultTemplate(Type objectType)
         {
             if (objectType == null)
                 throw new ArgumentNullException("objectType", "Template.CreateDefaultTemplate(objectType): need objectType to create Template");
 
-            Template result = KistlGUIContext.GuiContext.Create<Template>();
-            result.DisplayName = objectType.Name;
-            result.DisplayedTypeAssembly = KistlGUIContext.GuiContext.GetQuery<Assembly>()
-                .Where(ass => ass.AssemblyName == objectType.Assembly.FullName)
-                .SingleOrDefault();
-            result.DisplayedTypeFullName = objectType.FullName;
-            result.VisualTree = KistlGUIContext.GuiContext.CreateVisual(
-                VisualType.Object,
-                "top level visual to display a object"
-                );
+            Template result = null;
 
-            Visual methodResults = KistlGUIContext.GuiContext.CreateVisual(
-                VisualType.PropertyGroup,
-                "list of calculated results"
-                );
-
-            ObjectClass @class = ClientHelper.ObjectClasses[objectType];
-            while (@class != null)
+            // actually this should be done while editing/creating an 
+            // ObjectClass using the editor's Context and comitted together 
+            // with the edits on the class.
+            // using (
+                IKistlContext ctx = KistlGUIContext.GuiContext; // KistlContext.GetContext()
+            //     )
             {
-                foreach (BaseProperty p in @class.Properties)
+
+                result = ctx.Create<Template>();
+                result.DisplayName = objectType.Name;
+                result.DisplayedTypeAssembly = ctx.GetQuery<Assembly>()
+                    .Where(ass => ass.AssemblyName == objectType.Assembly.FullName)
+                    .SingleOrDefault();
+                result.DisplayedTypeFullName = objectType.FullName;
+                result.VisualTree = ctx.CreateVisual(
+                    VisualType.Object,
+                    "top level visual to display a object"
+                    );
+
+                Visual methodResults = ctx.CreateVisual(
+                    VisualType.PropertyGroup,
+                    "list of calculated results"
+                    );
+
+                ObjectClass @class = ClientHelper.ObjectClasses[objectType];
+                while (@class != null)
                 {
-                    result.VisualTree.Children.Add(KistlGUIContext.GuiContext.CreateDefaultVisual(p));
+                    foreach (BaseProperty p in @class.Properties)
+                    {
+                        result.VisualTree.Children.Add(ctx.CreateDefaultVisual(p));
+                    }
+
+                    foreach (Method m in @class.Methods)
+                    {
+                        Visual v = ctx.CreateDefaultVisual(m);
+                        if (v != null)
+                            methodResults.Children.Add(v);
+                    }
+                    @class = @class.BaseObjectClass;
                 }
 
-                foreach (Method m in @class.Methods)
-                {
-                    Visual v = KistlGUIContext.GuiContext.CreateDefaultVisual(m);
-                    if (v != null)
-                        methodResults.Children.Add(v);
-                }
-                @class = @class.BaseObjectClass;
+                if (methodResults.Children.Count > 0)
+                    result.VisualTree.Children.Add(methodResults);
+
+                // ctx.SubmitChanges();
             }
-
-            if (methodResults.Children.Count > 0)
-                result.VisualTree.Children.Add(methodResults);
-
             return result;
         }
 
