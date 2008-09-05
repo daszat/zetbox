@@ -281,12 +281,12 @@ namespace Kistl.API
             }
         }
         /// <summary>
-        /// Foreach Extension Method for ObservableCollection. This Extension does not check if the ObservableCollection Entry is NULL!
+        /// Foreach Extension Method for IQueryable<>. This Extension does not check if the query results contain NULLs!
         /// </summary>
-        /// <typeparam name="T">Type of the Objects in the ObservableCollection.</typeparam>
-        /// <param name="lst">ObservableCollection</param>
+        /// <typeparam name="T">Type of the Objects in the IQueryable.</typeparam>
+        /// <param name="lst">IQueryable</param>
         /// <param name="action">Action to perform on each element.</param>
-        public static void ForEach<T>(this ObservableCollection<T> lst, Action<T> action)
+        public static void ForEach<T>(this IQueryable<T> lst, Action<T> action)
         {
             foreach (T i in lst)
             {
