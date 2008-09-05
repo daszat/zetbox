@@ -102,12 +102,14 @@
     <Compile Include="Taetigkeit.Server.Designer.cs" />
     <Compile Include="TaetigkeitsArt.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
+    <Compile Include="Template.Server.Designer.cs" />
     <Compile Include="TestCustomObject.Server.Designer.cs" />
     <Compile Include="TestEnum.Server.Designer.cs" />
     <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="TestPhoneStruct.Server.Designer.cs" />
     <Compile Include="Toolkit.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
+    <Compile Include="Visual.Server.Designer.cs" />
     <Compile Include="VisualType.Server.Designer.cs" />
     <Compile Include="Zeitkonto.Server.Designer.cs" />
   </ItemGroup>

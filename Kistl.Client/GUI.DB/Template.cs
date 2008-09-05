@@ -12,49 +12,62 @@ namespace Kistl.GUI.DB
     /// <summary>
     /// The abstract entity representing a visualisation of a object
     /// </summary>
-    public class Template
+    public static class TemplateHelper
     {
-        public string DisplayName { get; set; }
-        public TemplateUsage Usage { get; set; }
-        public Visual VisualTree { get; set; }
-        public Type Type { get; set; }
-
         public static Template DefaultTemplate(Type objectType)
         {
             if (objectType == null)
                 throw new ArgumentNullException("objectType", "Template.DefaultTemplate(objectType): need objectType to create Template");
 
-            Template result = new Template()
-            {
-                DisplayName = objectType.Name,
-                Usage = TemplateUsage.EditControl,
-                Type = objectType,
-                VisualTree = new Visual()
-                {
-                    ControlType = VisualType.Object,
-                    Description = "top level visual to display a object",
-                    Children = new List<Visual>()
-                }
-            };
+            Template result = KistlGUIContext.GuiContext.GetQuery<Template>()
+                .ToList() // TODO: remove after implementing ConditionalExpressions in Linq2Kistl
+                .Where(tmpl =>
+                    (tmpl.DisplayedTypeAssembly == null
+                        ? typeof(object).Assembly.FullName == objectType.Assembly.FullName
+                        : tmpl.DisplayedTypeAssembly.AssemblyName == objectType.Assembly.FullName
+                    )
+                    && (tmpl.DisplayedTypeFullName == objectType.FullName)
+                    )
+                .SingleOrDefault();
+            
+            if (result == null)
+                result = CreateDefaultTemplate(objectType);
 
-            Visual methodResults = new Visual()
-            {
-                ControlType = VisualType.PropertyGroup,
-                Description = "list of calculated results",
-                Children = new List<Visual>()
-            };
+            return result;
+        }
+        
+        public static Template CreateDefaultTemplate(Type objectType)
+        {
+            if (objectType == null)
+                throw new ArgumentNullException("objectType", "Template.CreateDefaultTemplate(objectType): need objectType to create Template");
 
-            ObjectClass @class = ClientHelper.ObjectClasses[result.Type];
+            Template result = KistlGUIContext.GuiContext.Create<Template>();
+            result.DisplayName = objectType.Name;
+            result.DisplayedTypeAssembly = KistlGUIContext.GuiContext.GetQuery<Assembly>()
+                .Where(ass => ass.AssemblyName == objectType.Assembly.FullName)
+                .SingleOrDefault();
+            result.DisplayedTypeFullName = objectType.FullName;
+            result.VisualTree = KistlGUIContext.GuiContext.CreateVisual(
+                VisualType.Object,
+                "top level visual to display a object"
+                );
+
+            Visual methodResults = KistlGUIContext.GuiContext.CreateVisual(
+                VisualType.PropertyGroup,
+                "list of calculated results"
+                );
+
+            ObjectClass @class = ClientHelper.ObjectClasses[objectType];
             while (@class != null)
             {
                 foreach (BaseProperty p in @class.Properties)
                 {
-                    result.VisualTree.Children.Add(Visual.CreateDefaultVisual(p));
+                    result.VisualTree.Children.Add(KistlGUIContext.GuiContext.CreateDefaultVisual(p));
                 }
 
                 foreach (Method m in @class.Methods)
                 {
-                    Visual v = Visual.CreateDefaultVisual(m);
+                    Visual v = KistlGUIContext.GuiContext.CreateDefaultVisual(m);
                     if (v != null)
                         methodResults.Children.Add(v);
                 }

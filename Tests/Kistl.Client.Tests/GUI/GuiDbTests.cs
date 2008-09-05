@@ -150,9 +150,7 @@ namespace Kistl.GUI.Tests
         [Test]
         public void TestProperties()
         {
-            IList<Visual> children = new List<Visual>();
-            v.Children = children;
-            Assert.AreEqual(children, v.Children, "Visual.Children should not munge its value");
+            Assert.IsNotNull(v.Children, "Visual.Children must not be null");
 
             VisualType controlType = VisualType.Integer;
             v.ControlType = controlType;
@@ -190,7 +188,7 @@ namespace Kistl.GUI.Tests
 
             foreach (var d in defaults)
             {
-                Visual v = Visual.CreateDefaultVisual(d.Property);
+                Visual v = KistlGUIContext.GuiContext.CreateDefaultVisual(d.Property);
                 Assert.AreEqual(d.VisualType, v.ControlType, "{0} should be displayed in a VisualType.{1}", d.Property, d.VisualType);
             }
         }
@@ -199,21 +197,21 @@ namespace Kistl.GUI.Tests
         [ExpectedException(ExceptionType = typeof(NotImplementedException))]
         public void TestEnumeration()
         {
-            Visual v = Visual.CreateDefaultVisual(new EnumerationProperty());
+            Visual v = KistlGUIContext.GuiContext.CreateDefaultVisual(new EnumerationProperty());
         }
 
         [Test]
         [ExpectedException(ExceptionType = typeof(NotImplementedException))]
         public void TestValueType()
         {
-            Visual v = Visual.CreateDefaultVisual(new ValueTypeProperty());
+            Visual v = KistlGUIContext.GuiContext.CreateDefaultVisual(new ValueTypeProperty());
         }
 
         [Test]
         [ExpectedException(ExceptionType = typeof(InvalidCastException))]
         public void TestFailure()
         {
-            Visual v = Visual.CreateDefaultVisual(new BaseProperty());
+            Visual v = KistlGUIContext.GuiContext.CreateDefaultVisual(new BaseProperty());
         }
 
     }
@@ -243,13 +241,14 @@ namespace Kistl.GUI.Tests
             t.DisplayName = name;
             Assert.AreEqual(name, t.DisplayName, "Template.DisplayName should not munge its value");
 
-            Type type = typeof(string);
-            t.Type = type;
-            Assert.AreEqual(type, t.Type, "Template.Type should not munge its value");
+            throw new NotImplementedException("re-establish this Test");
+            //Type type = typeof(string);
+            //t.Type = type;
+            //Assert.AreEqual(type, t.Type, "Template.Type should not munge its value");
 
-            TemplateUsage usage = TemplateUsage.EditControl;
-            t.Usage = usage;
-            Assert.AreEqual(usage, t.Usage, "Template.Usage should not munge its value");
+            //TemplateUsage usage = TemplateUsage.EditControl;
+            //t.Usage = usage;
+            //Assert.AreEqual(usage, t.Usage, "Template.Usage should not munge its value");
 
             Visual tree = new Visual();
             t.VisualTree = tree;
@@ -260,7 +259,7 @@ namespace Kistl.GUI.Tests
         [Ignore("unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked")]
         public void TestDefaultUnknownObjectType()
         {
-            t = Template.DefaultTemplate(typeof(TestObject));
+            t = TemplateHelper.DefaultTemplate(typeof(TestObject));
         }
 
 
@@ -268,7 +267,7 @@ namespace Kistl.GUI.Tests
         [Ignore("unable to test at the moment, because ClientHelper.Objectclasses cannot be mocked")]
         public void TestDefaultsOther()
         {
-            t = Template.DefaultTemplate(typeof(TestObject));
+            t = TemplateHelper.DefaultTemplate(typeof(TestObject));
         }
 
     }

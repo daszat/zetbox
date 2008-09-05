@@ -106,12 +106,14 @@
     <Compile Include="Taetigkeit.Client.Designer.cs" />
     <Compile Include="TaetigkeitsArt.Client.Designer.cs" />
     <Compile Include="Task.Client.Designer.cs" />
+    <Compile Include="Template.Client.Designer.cs" />
     <Compile Include="TestCustomObject.Client.Designer.cs" />
     <Compile Include="TestEnum.Client.Designer.cs" />
     <Compile Include="TestObjClass.Client.Designer.cs" />
     <Compile Include="TestPhoneStruct.Client.Designer.cs" />
     <Compile Include="Toolkit.Client.Designer.cs" />
     <Compile Include="ValueTypeProperty.Client.Designer.cs" />
+    <Compile Include="Visual.Client.Designer.cs" />
     <Compile Include="VisualType.Client.Designer.cs" />
     <Compile Include="Zeitkonto.Client.Designer.cs" />
   </ItemGroup>

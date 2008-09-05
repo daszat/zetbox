@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.GUI.DB;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.Mocks
 {

@@ -49,10 +49,13 @@
     <EntitySet Name="Struct" EntityType="Model.Store.Struct" Table="Structs" />
     <EntitySet Name="StructProperty" EntityType="Model.Store.StructProperty" Table="StructProperties" />
     <EntitySet Name="PresenterInfo" EntityType="Model.Store.PresenterInfo" Table="PresenterInfos" />
+    <EntitySet Name="Visual" EntityType="Model.Store.Visual" Table="Visuals" />
+    <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
     <EntitySet Name="ObjectClass_ImplementsInterfacesCollectionEntry" EntityType="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Table="ObjectClasses_ImplementsInterfacesCollection" />
+    <EntitySet Name="Visual_ChildrenCollectionEntry" EntityType="Model.Store.Visual_ChildrenCollectionEntry" Table="Visuals_ChildrenCollection" />
     <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
@@ -293,6 +296,26 @@
       <End Role="A_Assembly" EntitySet="Assembly" />
       <End Role="B_PresenterInfo" EntitySet="PresenterInfo" />
     </AssociationSet>
+    <AssociationSet Name="FK_Visual_ChildrenCollectionEntry_Visual_Children" Association="Model.Store.FK_Visual_ChildrenCollectionEntry_Visual_Children">
+      <End Role="A_Visual" EntitySet="Visual" />
+      <End Role="B_Visual_ChildrenCollectionEntry" EntitySet="Visual_ChildrenCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visual_BaseProperty_Property" Association="Model.Store.FK_Visual_BaseProperty_Property">
+      <End Role="A_BaseProperty" EntitySet="BaseProperty" />
+      <End Role="B_Visual" EntitySet="Visual" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visual_Method_Method" Association="Model.Store.FK_Visual_Method_Method">
+      <End Role="A_Method" EntitySet="Method" />
+      <End Role="B_Visual" EntitySet="Visual" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Template_Visual_VisualTree" Association="Model.Store.FK_Template_Visual_VisualTree">
+      <End Role="A_Visual" EntitySet="Visual" />
+      <End Role="B_Template" EntitySet="Template" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Template_Assembly_DisplayedTypeAssembly" Association="Model.Store.FK_Template_Assembly_DisplayedTypeAssembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_Template" EntitySet="Template" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -308,6 +331,10 @@
     <AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent" Association="Model.Store.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent">
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" EntitySet="ObjectClass_ImplementsInterfacesCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent" Association="Model.Store.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent">
+      <End Role="A_Visual" EntitySet="Visual" />
+      <End Role="B_Visual_ChildrenCollectionEntry" EntitySet="Visual_ChildrenCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -695,6 +722,26 @@
     <Property Name="fk_DataAssembly" Type="int" />
     <Property Name="DataTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
+  <EntityType Name="Visual">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ControlType" Type="int" Nullable="false" />
+    <Property Name="fk_Property" Type="int" />
+    <Property Name="fk_Method" Type="int" />
+  </EntityType>
+  <EntityType Name="Template">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_VisualTree" Type="int" />
+    <Property Name="DisplayedTypeFullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_DisplayedTypeAssembly" Type="int" />
+  </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -726,6 +773,14 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="fk_ImplementsInterfaces" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Visual_ChildrenCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Visual" Type="int" Nullable="true" />
+    <Property Name="fk_Children" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_ObjectClass_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
@@ -1447,6 +1502,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Visual_ChildrenCollectionEntry_Visual_Children">
+    <End Role="A_Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
+    <End Role="B_Visual_ChildrenCollectionEntry" Type="Model.Store.Visual_ChildrenCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Visual">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Visual_ChildrenCollectionEntry">
+        <PropertyRef Name="fk_Children" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visual_BaseProperty_Property">
+    <End Role="A_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="0..1" />
+    <End Role="B_Visual" Type="Model.Store.Visual" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_BaseProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Visual">
+        <PropertyRef Name="fk_Property" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visual_Method_Method">
+    <End Role="A_Method" Type="Model.Store.Method" Multiplicity="0..1" />
+    <End Role="B_Visual" Type="Model.Store.Visual" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Method">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Visual">
+        <PropertyRef Name="fk_Method" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Template_Visual_VisualTree">
+    <End Role="A_Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
+    <End Role="B_Template" Type="Model.Store.Template" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Visual">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Template">
+        <PropertyRef Name="fk_VisualTree" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Template_Assembly_DisplayedTypeAssembly">
+    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
+    <End Role="B_Template" Type="Model.Store.Template" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Assembly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Template">
+        <PropertyRef Name="fk_DisplayedTypeAssembly" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Store.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
@@ -1492,6 +1607,18 @@
       </Principal>
       <Dependent Role="B_ObjectClass_ImplementsInterfacesCollectionEntry">
         <PropertyRef Name="fk_ObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent">
+    <End Role="A_Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
+    <End Role="B_Visual_ChildrenCollectionEntry" Type="Model.Store.Visual_ChildrenCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Visual">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Visual_ChildrenCollectionEntry">
+        <PropertyRef Name="fk_Visual" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

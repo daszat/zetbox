@@ -357,6 +357,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Visual">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual)">
+        <MappingFragment StoreEntitySet="Visual">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Template">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Template)">
+        <MappingFragment StoreEntitySet="Template">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="DisplayedTypeFullName" ColumnName="DisplayedTypeFullName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -382,6 +400,13 @@
     <EntitySetMapping Name="ObjectClass_ImplementsInterfacesCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass_ImplementsInterfacesCollectionEntry)">
         <MappingFragment StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visual_ChildrenCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual_ChildrenCollectionEntry)">
+        <MappingFragment StoreEntitySet="Visual_ChildrenCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -710,6 +735,51 @@
       </EndProperty>
       <Condition ColumnName="fk_DataAssembly" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Visual_ChildrenCollectionEntry_Visual_Children" TypeName="Model.FK_Visual_ChildrenCollectionEntry_Visual_Children" StoreEntitySet="Visual_ChildrenCollectionEntry">
+      <EndProperty Name="A_Visual">
+        <ScalarProperty Name="ID" ColumnName="fk_Children" />
+      </EndProperty>
+      <EndProperty Name="B_Visual_ChildrenCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Children" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Visual_BaseProperty_Property" TypeName="Model.FK_Visual_BaseProperty_Property" StoreEntitySet="Visual">
+      <EndProperty Name="A_BaseProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_Property" />
+      </EndProperty>
+      <EndProperty Name="B_Visual">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Property" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Visual_Method_Method" TypeName="Model.FK_Visual_Method_Method" StoreEntitySet="Visual">
+      <EndProperty Name="A_Method">
+        <ScalarProperty Name="ID" ColumnName="fk_Method" />
+      </EndProperty>
+      <EndProperty Name="B_Visual">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Method" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Template_Visual_VisualTree" TypeName="Model.FK_Template_Visual_VisualTree" StoreEntitySet="Template">
+      <EndProperty Name="A_Visual">
+        <ScalarProperty Name="ID" ColumnName="fk_VisualTree" />
+      </EndProperty>
+      <EndProperty Name="B_Template">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_VisualTree" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Template_Assembly_DisplayedTypeAssembly" TypeName="Model.FK_Template_Assembly_DisplayedTypeAssembly" StoreEntitySet="Template">
+      <EndProperty Name="A_Assembly">
+        <ScalarProperty Name="ID" ColumnName="fk_DisplayedTypeAssembly" />
+      </EndProperty>
+      <EndProperty Name="B_Template">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_DisplayedTypeAssembly" IsNull="false" />
+    </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
@@ -745,6 +815,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_ObjectClass" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent" TypeName="Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent" StoreEntitySet="Visual_ChildrenCollectionEntry">
+      <EndProperty Name="A_Visual">
+        <ScalarProperty Name="ID" ColumnName="fk_Visual" />
+      </EndProperty>
+      <EndProperty Name="B_Visual_ChildrenCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Visual" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

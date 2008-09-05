@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 using Kistl.Client;
+using Kistl.API;
 
 namespace Kistl.GUI.DB
 {
@@ -13,100 +14,73 @@ namespace Kistl.GUI.DB
     /// The abstract entity representing an actual visual element in the tree. 
     /// Usually displaying a single Property.
     /// </summary>
-    public class Visual
+    public static class VisualHelper
     {
 
-        /// <summary>
-        /// Which visual is represented here
-        /// </summary>
-        public VisualType ControlType { get; set; }
+        public static Visual CreateVisual(this IKistlContext ctx, VisualType type, string description)
+        {
+            Visual result = ctx.Create<Visual>();
+            result.ControlType = type;
+            result.Description = description;
+            return result;
+        }
 
-        /// <summary>
-        /// A short description of the utility of this visual
-        /// </summary>
-        public string Description { get; set; }
+        public static Visual CreateVisual(this IKistlContext ctx, VisualType type, string description, Method m)
+        {
+            Visual result = ctx.CreateVisual(type, description);
+            result.Method = m;
+            return result;
+        }
 
-        #region TODO: refactor into descendents of "Visual"? Or not, since those can be combined? More research neccessary
-
-        #region How data should be displayed
-
-        /// <summary>
-        /// if this is a container, here are the visually contained/controlled children of this Visual
-        /// </summary>
-        /// This needs ControlInfo.Container set
-        public IList<Visual> Children { get; set; }
-
-        /////////////////////// -- OR -- ///////////////////////
-
-        /// <summary>
-        /// If there is a runtime-variable number of descendents, a template is needed to be able to 
-        /// create new Controls.
-        /// </summary>
-        /// This is currently unused(??) but should be used for Lists of SimpleObjects ???
-        public Template ItemTemplate { get; set; }
-
-        #endregion
-
-        #region Which data should be displayed
-
-        /// <summary>
-        /// The Property to display
-        /// </summary>
-        public BaseProperty Property { get; set; }
-
-        /////////////////////// -- OR -- ///////////////////////
-
-        /// <summary>
-        /// The Method whose result shall be displayed
-        /// </summary>
-        public Method Method { get; set; }
-
-        #endregion
-
-        #endregion
+        public static Visual CreateVisual(this IKistlContext ctx, VisualType type, string description, BaseProperty p)
+        {
+            Visual result = ctx.CreateVisual(type, description);
+            result.Property = p;
+            return result;
+        }
 
         /// <summary>
         /// Create the default Visual for a given BaseProperty
         /// </summary>
         /// Part of a Visitor&lt;BaseProperty&gt; pattern to create a Visual for a given BaseProperty
         /// <param name="p">the property to visualize</param>
-        public static Visual CreateDefaultVisual(BaseProperty p)
+        public static Visual CreateDefaultVisual(this IKistlContext ctx, BaseProperty p)
         {
             if (p is BackReferenceProperty)
             {
-                return CreateVisual((BackReferenceProperty)p);
+                return CreateVisual(ctx, (BackReferenceProperty)p);
             }
             else if (p is BoolProperty)
             {
-                return CreateVisual((BoolProperty)p);
+                return CreateVisual(ctx, (BoolProperty)p);
             }
             else if (p is DateTimeProperty)
             {
-                return CreateVisual((DateTimeProperty)p);
+                return CreateVisual(ctx, (DateTimeProperty)p);
             }
             else if (p is DoubleProperty)
             {
-                return CreateVisual((DoubleProperty)p);
+                return CreateVisual(ctx, (DoubleProperty)p);
             }
             else if (p is EnumerationProperty)
             {
-                return CreateVisual((EnumerationProperty)p);
+                return CreateVisual(ctx, (EnumerationProperty)p);
             }
             else if (p is IntProperty)
             {
-                return CreateVisual((IntProperty)p);
+                return CreateVisual(ctx, (IntProperty)p);
             }
             else if (p is ObjectReferenceProperty)
             {
-                return CreateVisual((ObjectReferenceProperty)p);
+                return CreateVisual(ctx, (ObjectReferenceProperty)p);
             }
             else if (p is StringProperty)
             {
-                return CreateVisual((StringProperty)p);
+                return CreateVisual(ctx, (StringProperty)p);
             }
             else if (p is ValueTypeProperty)
             {
-                return CreateVisual((ValueTypeProperty)p);
+                return CreateVisual(ctx, (ValueTypeProperty)p);
             }
             else
             {
@@ -120,7 +94,7 @@ namespace Kistl.GUI.DB
         /// Create the default Visual for a given Method
         /// </summary>
         /// <param name="p">the method to visualize</param>
-        public static Visual CreateDefaultVisual(Method method)
+        public static Visual CreateDefaultVisual(this IKistlContext ctx, Method method)
         {
             if (method == null)
                 throw new ArgumentNullException("m", "cannot create Visual for null Method");
@@ -131,178 +105,160 @@ namespace Kistl.GUI.DB
             if (bp == null)
                 return null;
 
+            VisualType? vt = null;
+
             if (bp is StringParameter)
             {
-                return CreateVisual(method, bp.IsList? VisualType.StringList : VisualType.String);
+                vt = bp.IsList ? VisualType.StringList : VisualType.String;
             }
             else if (bp is IntParameter)
             {
-                return CreateVisual(method, bp.IsList ? VisualType.IntegerList : VisualType.Integer);
+                vt = bp.IsList ? VisualType.IntegerList : VisualType.Integer;
             }
             else if (bp is DoubleParameter)
             {
-                return CreateVisual(method, bp.IsList ? VisualType.DoubleList : VisualType.Double);
+                vt = bp.IsList ? VisualType.DoubleList : VisualType.Double;
             }
             else if (bp is BoolParameter)
             {
-                return CreateVisual(method, bp.IsList ? VisualType.BooleanList : VisualType.Boolean);
+                vt = bp.IsList ? VisualType.BooleanList : VisualType.Boolean;
             }
             else if (bp is DateTimeParameter)
             {
-                return CreateVisual(method, bp.IsList ? VisualType.DateTimeList : VisualType.DateTime);
+                vt = bp.IsList ? VisualType.DateTimeList : VisualType.DateTime;
             }
             else if (bp is ObjectParameter)
             {
-                return CreateVisual(method, bp.IsList ? VisualType.ObjectList : VisualType.ObjectReference);
+                vt = bp.IsList ? VisualType.ObjectList : VisualType.ObjectReference;
             }
             else if (bp is CLRObjectParameter)
             {
                 return null; // TODO: CreateVisual(method, bp.IsList ? VisualType. : VisualType.);
             }
+
+            if (vt.HasValue)
+                return CreateVisual(ctx, vt.Value, "this control displays the results of calling a method", method);
             else
-            {
                 return null;
-            }
         }
 
-        private static Visual CreateVisual(Method method, VisualType returnType)
-        {
-            return new Visual()
-            {
-                ControlType = returnType,
-                Description = "this control displays the results of calling a method",
-                Method = method
-            };
-        }
-
-        private static Visual CreateVisual(ValueTypeProperty valueTypeProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, ValueTypeProperty valueTypeProperty)
         {
             throw new NotImplementedException();
         }
 
-        private static Visual CreateVisual(StringProperty stringProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, StringProperty stringProperty)
         {
             if (stringProperty.IsList)
             {
-                return new Visual()
-                {
-                    ControlType = VisualType.StringList,
-                    Description = "this control displays a list of strings",
-                    Property = stringProperty,
-                };
+                return ctx.CreateVisual(
+                    VisualType.StringList,
+                    "this control displays a list of strings",
+                    stringProperty
+                    );
             }
             else
             {
-                return new Visual()
-                {
-                    ControlType = VisualType.String,
-                    Description = "this control displays a string",
-                    Property = stringProperty,
-                };
+                return ctx.CreateVisual(
+                    VisualType.String,
+                    "this control displays a string",
+                    stringProperty
+                    );
             }
         }
 
-        private static Visual CreateVisual(ObjectReferenceProperty objectReferenceProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, ObjectReferenceProperty objectReferenceProperty)
         {
             if (objectReferenceProperty.IsList)
             {
-                return new Visual()
-                {
-                    ControlType = VisualType.ObjectList,
-                    Description = "display a list of objects",
-                    Property = objectReferenceProperty
-                };
+                return ctx.CreateVisual(
+                    VisualType.ObjectList,
+                    "display a list of objects",
+                    objectReferenceProperty
+                    );
             }
             else
             {
-                return new Visual()
-                {
-                    ControlType = VisualType.ObjectReference,
-                    Description = "this control displays a foreign key reference",
-                    Property = objectReferenceProperty
-                };
+                return ctx.CreateVisual(
+                    VisualType.ObjectReference,
+                    "this control displays a foreign key reference",
+                    objectReferenceProperty
+                    );
             }
         }
 
-        private static Visual CreateVisual(IntProperty intProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, IntProperty intProperty)
         {
-            return new Visual()
-            {
-                ControlType = VisualType.Integer,
-                Description = "this control displays a integer",
-                Property = intProperty
-            };
+            return ctx.CreateVisual(
+                VisualType.Integer,
+                "this control displays a integer",
+                intProperty
+                );
         }
 
-        private static Visual CreateVisual(EnumerationProperty enumerationProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, EnumerationProperty enumerationProperty)
         {
-            return new Visual()
-            {
-                ControlType = VisualType.Enumeration,
-                Description = "this control displays an enumeration value",
-                Property = enumerationProperty
-            };
+            return ctx.CreateVisual(
+                VisualType.Enumeration,
+                "this control displays an enumeration value",
+                enumerationProperty
+                );
         }
 
-        private static Visual CreateVisual(DoubleProperty doubleProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, DoubleProperty doubleProperty)
         {
-            return new Visual()
-            {
-                ControlType = VisualType.Double,
-                Description = "this control displays a double",
-                Property = doubleProperty
-            };
+            return ctx.CreateVisual(
+                VisualType.Double,
+                "this control displays a double",
+                doubleProperty
+                );
         }
 
-        private static Visual CreateVisual(DateTimeProperty dateTimeProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, DateTimeProperty dateTimeProperty)
         {
-            return new Visual()
-            {
-                ControlType = VisualType.DateTime,
-                Description = "this control displays a date and time",
-                Property = dateTimeProperty
-            };
+            return ctx.CreateVisual(
+                VisualType.DateTime,
+                "this control displays a date and time",
+                dateTimeProperty
+                );
         }
 
-        private static Visual CreateVisual(BoolProperty boolProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, BoolProperty boolProperty)
         {
-            return new Visual()
-            {
-                ControlType = VisualType.Boolean,
-                Description = "this control displays a boolean",
-                Property = boolProperty
-            };
+            return ctx.CreateVisual(
+                VisualType.Boolean,
+                "this control displays a boolean",
+                boolProperty
+                );
         }
 
-        private static Visual CreateVisual(BackReferenceProperty backReferenceProperty)
+        private static Visual CreateVisual(this IKistlContext ctx, BackReferenceProperty backReferenceProperty)
         {
             ObjectClass refClass = ClientHelper.ObjectClasses[backReferenceProperty.GetPropertyType()];
 
             if (refClass != null && refClass.IsSimpleObject)
             {
-                return new Visual()
-                {
-                    ControlType = VisualType.SimpleObjectList,
-                    Description = "Display and edit the referenced Simple Objects in place",
-                    Property = backReferenceProperty,
-                    ItemTemplate = Template.DefaultTemplate(backReferenceProperty.GetPropertyType())
-                };
+                return ctx.CreateVisual(
+                    VisualType.SimpleObjectList,
+                    "Display and edit the referenced Simple Objects in place",
+                    backReferenceProperty
+                    );
             }
             else
             {
-                return new Visual()
-                {
-                    ControlType = VisualType.ObjectList,
-                    Description = "this control displays a list of objects referencing this via a given relation",
-                    Property = backReferenceProperty
-                };
+                return ctx.CreateVisual(
+                    VisualType.ObjectList,
+                    "this control displays a list of objects referencing this via a given relation",
+                    backReferenceProperty
+                    );
             }
         }
 
-        public override string ToString()
-        {
-            return String.Format("Visual: {0}: {1}", ControlType, Property.PropertyName);
-        }
+        // TODO: Move to Kistl.App.GUI.Visual.ToString
+        //public override string ToString()
+        //{
+        //    return String.Format("Visual: {0}: {1}", ControlType, Property.PropertyName);
+        //}
 
     }
 

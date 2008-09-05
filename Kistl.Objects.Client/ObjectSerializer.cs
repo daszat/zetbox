@@ -78,6 +78,8 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Struct), ElementName="Struct")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.StructProperty), ElementName="StructProperty")]
         [XmlArrayItem(Type=typeof(Kistl.App.GUI.PresenterInfo), ElementName="PresenterInfo")]
+        [XmlArrayItem(Type=typeof(Kistl.App.GUI.Visual), ElementName="Visual")]
+        [XmlArrayItem(Type=typeof(Kistl.App.GUI.Template), ElementName="Template")]
         public System.Collections.Generic.List<object> Objects
         {
             get
@@ -148,6 +150,8 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.Struct), ElementName="Struct")]
         [XmlElement(Type=typeof(Kistl.App.Base.StructProperty), ElementName="StructProperty")]
         [XmlElement(Type=typeof(Kistl.App.GUI.PresenterInfo), ElementName="PresenterInfo")]
+        [XmlElement(Type=typeof(Kistl.App.GUI.Visual), ElementName="Visual")]
+        [XmlElement(Type=typeof(Kistl.App.GUI.Template), ElementName="Template")]
         public object Object
         {
             get

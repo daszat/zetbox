@@ -13,6 +13,7 @@ using Kistl.GUI.Mocks;
 using NMock2;
 using NUnit.Framework;
 using System.Collections.ObjectModel;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Tests
 {
