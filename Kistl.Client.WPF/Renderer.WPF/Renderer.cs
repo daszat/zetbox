@@ -9,6 +9,7 @@ using Kistl.API.Client;
 using Kistl.GUI.DB;
 using Kistl.Client;
 using Kistl.Client.WPF.Dialogs;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Renderer.WPF
 {

@@ -2,19 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.GUI.Renderer;
-using System.Web.UI;
 using System.Web;
+using System.Web.UI;
+
+using Kistl.API;
 using Kistl.GUI;
+using Kistl.GUI.Renderer;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
     public class Renderer : BasicRenderer<IControlLoader, IControlLoader, IContainerLoader>
     {
-        public override Kistl.GUI.DB.Toolkit Platform
+        public override Kistl.App.GUI.Toolkit Platform
         {
-            get { return Kistl.GUI.DB.Toolkit.ASPNET; }
+            get { return Kistl.App.GUI.Toolkit.ASPNET; }
         }
 
         public override void ShowMessage(string msg)

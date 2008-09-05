@@ -4,6 +4,7 @@ using System.Linq;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.GUI;
 using Kistl.Client;
 
 namespace Kistl.GUI.DB

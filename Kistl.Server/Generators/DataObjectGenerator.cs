@@ -444,8 +444,8 @@ namespace Kistl.Server.Generators
 
             foreach (EnumerationEntry e in current.enumeration.EnumerationEntries)
             {
-                CodeMemberField mf = current.code_class.CreateField(typeof(int), e.EnumerationEntryName, e.EnumValue.ToString());
-                mf.AddComment(e.EnumerationEntryName);
+                CodeMemberField mf = current.code_class.CreateField(typeof(int), e.Name, e.Value.ToString());
+                mf.AddComment(e.Name);
             }
 
             GenerateEnumerations(current);

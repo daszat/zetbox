@@ -18,7 +18,7 @@ using Kistl.API;
 namespace Kistl.GUI.Renderer.WPF
 {
     /// <summary>
-    /// Interaktionslogik für StringListControl.xaml
+    /// Interaktionslogik für ListControl.xaml
     /// </summary>
     public partial class ListControl : PropertyControl
     {

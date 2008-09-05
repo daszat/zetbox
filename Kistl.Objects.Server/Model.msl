@@ -283,8 +283,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntry)">
         <MappingFragment StoreEntitySet="EnumerationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="EnumerationEntryName" ColumnName="EnumerationEntryName" />
-          <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-
+using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.GUI;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
-using Kistl.API;
 using Kistl.GUI.Renderer;
+
+using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.GUI.Tests
 {
@@ -98,7 +99,7 @@ namespace Kistl.GUI.Tests
         [Test]
         public void TestCreateRenderer()
         {
-            IRenderer r = KistlGUIContext.CreateRenderer(Toolkit.TEST);
+            Kistl.GUI.Renderer.IRenderer r = KistlGUIContext.CreateRenderer(Toolkit.TEST);
             Assert.IsInstanceOfType(typeof(TestRenderer), r, "KistlGUIContext.CreateRenderer(Toolkit.TEST) should return the TestRenderer");
             Assert.AreEqual(Toolkit.TEST, r.Platform, "Renderer should know his Platform");
         }

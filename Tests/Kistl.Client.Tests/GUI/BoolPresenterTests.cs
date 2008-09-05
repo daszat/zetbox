@@ -9,6 +9,7 @@ using Kistl.App.Base;
 using Kistl.Client.Mocks;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Tests
 {

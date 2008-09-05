@@ -403,8 +403,8 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Enumeration" Relationship="Model.FK_EnumerationEntry_Enumeration_Enumeration" FromRole="B_EnumerationEntry" ToRole="A_Enumeration" />
-    <Property Name="EnumerationEntryName" Type="String" MaxLength="200" Nullable="false" />
-    <Property Name="EnumValue" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="EnumerationProperty" BaseType="Model.ValueTypeProperty">
     <NavigationProperty Name="Enumeration" Relationship="Model.FK_EnumerationProperty_Enumeration_Enumeration" FromRole="B_EnumerationProperty" ToRole="A_Enumeration" />

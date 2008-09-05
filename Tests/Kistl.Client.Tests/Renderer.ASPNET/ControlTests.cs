@@ -10,6 +10,7 @@ using Kistl.GUI.Tests;
 
 using NUnit.Framework;
 using Kistl.Client.ASPNET.Toolkit;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Renderer.ASPNET.Tests
 {

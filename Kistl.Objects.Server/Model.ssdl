@@ -601,8 +601,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Enumeration" Type="int" />
-    <Property Name="EnumerationEntryName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="EnumValue" Type="int" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="EnumerationProperty">
     <Key>

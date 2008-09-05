@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Kistl.App.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Renderer;
 
@@ -41,7 +43,7 @@ namespace Kistl.Client
             return result;
         }
 
-        public static IRenderer Renderer { get; private set; }
+        public static Kistl.GUI.Renderer.IRenderer Renderer { get; private set; }
 
         public static bool IsInitialized { get; private set; }
     }

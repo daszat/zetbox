@@ -37,33 +37,40 @@ namespace Kistl.Client.WPF
 
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
-                Manager.Create(e.Args, Toolkit.WPF);
+                Manager.Create(e.Args, Kistl.App.GUI.Toolkit.WPF);
+
 #if false
-                using (IKistlContext ctx = KistlContext.GetContext())
+                using (TraceClient.TraceHelper.TraceMethodCall("Uploading GUI Objects"))
                 {
-
-                    Module guiModule = ctx.GetQuery<Module>().Where(m => m.ModuleName == "GUI").ToList().Single();
-
-                    foreach (ControlInfo info in ControlInfo.Implementations)
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        string aName = info.AssemblyName;
-                        Assembly controlAssembly = ctx.GetQuery<Assembly>().Where(a => a.AssemblyName == aName).ToList().SingleOrDefault();
-                        if (controlAssembly == null)
+                        // The various handles for adding all the new data
+                        Module guiModule = ctx.GetQuery<Module>().Where(m => m.ModuleName == "GUI").Single();
+                        
+                        // delete old data
+                        ctx.GetQuery<Kistl.App.GUI.ControlInfo>().ForEach(ci => ctx.Delete(ci));
+                        
+                        foreach (ControlInfo info in ControlInfo.Implementations)
                         {
-                            controlAssembly = ctx.Create<Assembly>();
-                            controlAssembly.AssemblyName = info.AssemblyName;
-                            controlAssembly.Module = guiModule;
+                            string aName = info.AssemblyName;
+                            Assembly controlAssembly = ctx.GetQuery<Assembly>().Where(a => a.AssemblyName == aName).ToList().SingleOrDefault();
+                            if (controlAssembly == null)
+                            {
+                                controlAssembly = ctx.Create<Assembly>();
+                                controlAssembly.AssemblyName = info.AssemblyName;
+                                controlAssembly.Module = guiModule;
+                            }
+
+                            Kistl.App.GUI.ControlInfo upload = ctx.Create<Kistl.App.GUI.ControlInfo>();
+                            upload.Assembly = controlAssembly;
+                            upload.ClassName = info.ClassName;
+                            upload.ControlType = (Kistl.App.GUI.VisualType)Enum.Parse(typeof(Kistl.App.GUI.VisualType), info.ControlType.ToString());
+                            upload.IsContainer = info.Container;
+                            upload.Platform = (Kistl.App.GUI.Toolkit)Enum.Parse(typeof(Kistl.App.GUI.Toolkit), info.Platform.ToString());
+
                         }
-                        ctx.SubmitChanges();
 
-                        Kistl.App.GUI.ControlInfo upload = ctx.Create<Kistl.App.GUI.ControlInfo>();
-                        upload.Assembly = controlAssembly;
-                        upload.ClassName = info.ClassName;
-                        upload.ControlType = (int)Enum.Parse(typeof(Kistl.App.GUI.VisualType), info.ControlType.ToString());
-                        upload.IsContainer = info.Container;
-                        upload.Platform = (int)Enum.Parse(typeof(Kistl.App.GUI.Toolkit), info.Platform.ToString());
                         ctx.SubmitChanges();
-
                     }
                 }
 #endif

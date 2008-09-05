@@ -61,7 +61,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = obj.Enumeration + "." + obj.EnumerationEntryName;
+                e.Result = obj.Enumeration + "." + obj.Name;
             }
         }
 

@@ -14,6 +14,7 @@ using Kistl.GUI.DB;
 using Kistl.GUI.Tests;
 using Kistl.GUI.Renderer.WPF;
 using Kistl.GUI.Mocks;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Integration.WPF
 {

@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 using Kistl.App.Base;
 using Kistl.GUI.DB;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Mocks
 {
@@ -30,7 +31,7 @@ namespace Kistl.GUI.Mocks
         }
 
         public Visual Visual { get; private set; }
-        public ControlInfo ControlInfo { get; private set; }
+        public Kistl.GUI.DB.ControlInfo ControlInfo { get; private set; }
         public Toolkit Toolkit { get; private set; }
         public CONTROL Widget { get; private set; }
 

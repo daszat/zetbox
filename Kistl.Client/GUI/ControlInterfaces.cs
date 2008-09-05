@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Kistl.API;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using Kistl.App.Base;
 
 namespace Kistl.GUI
 {
@@ -64,12 +65,12 @@ namespace Kistl.GUI
     /// <summary>
     /// A control that lets the user choose from a list of pre-defined values.
     /// </summary>
-    public interface IEnumControl<ENUM> : IValueControl<ENUM>
+    public interface IEnumControl : IValueControl<EnumerationEntry>
     {
         /// <summary>
         /// The list of enumeration items the user may select from
         /// </summary>
-        IList<ENUM> ItemsSource { get; set; }
+        IList<EnumerationEntry> ItemsSource { get; set; }
     }
 
     // TODO: add validation support

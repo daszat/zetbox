@@ -292,7 +292,7 @@ namespace Kistl.GUI
     /// Different controls may implement the selection differently: Comboboxes, Lists, etc.
     /// </summary>
     public class ObjectReferencePresenter<T>
-        : DefaultPresenter<IDataObject, ObjectReferenceProperty, IReferenceControl>
+        : DefaultPresenter<IDataObject, ObjectReferenceProperty, IDataObject, IReferenceControl>
         where T : IDataObject
     {
         public ObjectReferencePresenter() { }
@@ -346,6 +346,16 @@ namespace Kistl.GUI
             {
                 Object.SetPropertyValue(Property.PropertyName, refobj);
             }
+        }
+
+        protected override IDataObject MungeFromControl(IDataObject value)
+        {
+            return value;
+        }
+
+        protected override IDataObject MungeFromObject(IDataObject value)
+        {
+            return value;
         }
     }
 

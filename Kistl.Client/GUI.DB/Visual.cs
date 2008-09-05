@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.App.Base;
+using Kistl.App.GUI;
 using Kistl.Client;
 
 namespace Kistl.GUI.DB
@@ -305,30 +306,4 @@ namespace Kistl.GUI.DB
 
     }
 
-    public enum VisualType
-    {
-        // Non-Properties
-        Renderer,
-        Object,
-        PropertyGroup,
-
-        // Object References
-        ObjectList,
-        ObjectReference,
-
-        // Normal Properties
-        Boolean,
-        BooleanList,
-        DateTime,
-        DateTimeList,
-        Double,
-        DoubleList,
-        Integer,
-        IntegerList,
-        String,
-        StringList,
-
-        Enumeration,
-        SimpleObjectList,
-    }
 }

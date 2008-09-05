@@ -14,6 +14,7 @@ using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
 using Kistl.GUI.Renderer.WPF.Tests;
 using System.Collections.ObjectModel;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Tests
 {

@@ -27,37 +27,55 @@ namespace Kistl.App.GUI
     public enum VisualType
     {
         
-        /// Renderer
-        Renderer = 0,
+        /// SimpleObjectList
+        SimpleObjectList = 16,
         
-        /// Object
-        Object = 1,
+        /// Enumeration
+        Enumeration = 15,
+        
+        /// StringList
+        StringList = 14,
+        
+        /// String
+        String = 13,
+        
+        /// IntegerList
+        IntegerList = 12,
+        
+        /// Integer
+        Integer = 11,
+        
+        /// DoubleList
+        DoubleList = 10,
+        
+        /// Double
+        Double = 9,
+        
+        /// DateTimeList
+        DateTimeList = 8,
+        
+        /// DateTime
+        DateTime = 7,
+        
+        /// BooleanList
+        BooleanList = 6,
+        
+        /// Boolean
+        Boolean = 5,
+        
+        /// ObjectReference
+        ObjectReference = 4,
+        
+        /// ObjectList
+        ObjectList = 3,
         
         /// PropertyGroup
         PropertyGroup = 2,
         
-        /// ObjectList
-        ObjectList = 100,
+        /// Object
+        Object = 1,
         
-        /// ObjectReference
-        ObjectReference = 101,
-        
-        /// Boolean
-        Boolean = 200,
-        
-        /// DateTime
-        DateTime = 201,
-        
-        /// Double
-        Double = 202,
-        
-        /// Integer
-        Integer = 203,
-        
-        /// String
-        String = 204,
-        
-        /// StringList
-        StringList = 304,
+        /// Renderer
+        Renderer = 0,
     }
 }

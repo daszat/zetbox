@@ -29,9 +29,9 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Enumeration = null;
         
-        private string _EnumerationEntryName;
+        private int _Value;
         
-        private int _EnumValue;
+        private string _Name;
         
         public EnumerationEntry()
         {
@@ -68,36 +68,36 @@ namespace Kistl.App.Base
             }
         }
         
-        public string EnumerationEntryName
+        public int Value
         {
             get
             {
-                return _EnumerationEntryName;
+                return _Value;
             }
             set
             {
-                if (EnumerationEntryName != value)
+                if (Value != value)
                 {
-                    NotifyPropertyChanging("EnumerationEntryName"); 
-                    _EnumerationEntryName = value;
-                    NotifyPropertyChanged("EnumerationEntryName");;
+                    NotifyPropertyChanging("Value"); 
+                    _Value = value;
+                    NotifyPropertyChanged("Value");;
                 }
             }
         }
         
-        public int EnumValue
+        public string Name
         {
             get
             {
-                return _EnumValue;
+                return _Name;
             }
             set
             {
-                if (EnumValue != value)
+                if (Name != value)
                 {
-                    NotifyPropertyChanging("EnumValue"); 
-                    _EnumValue = value;
-                    NotifyPropertyChanged("EnumValue");;
+                    NotifyPropertyChanging("Name"); 
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
                 }
             }
         }
@@ -136,8 +136,8 @@ namespace Kistl.App.Base
         {
             base.ApplyChanges(obj);
             ((EnumerationEntry)obj).fk_Enumeration = this.fk_Enumeration;
-            ((EnumerationEntry)obj).EnumerationEntryName = this.EnumerationEntryName;
-            ((EnumerationEntry)obj).EnumValue = this.EnumValue;
+            ((EnumerationEntry)obj).Value = this.Value;
+            ((EnumerationEntry)obj).Name = this.Name;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -149,16 +149,16 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Enumeration, sw);
-            BinarySerializer.ToBinary(this._EnumerationEntryName, sw);
-            BinarySerializer.ToBinary(this._EnumValue, sw);
+            BinarySerializer.ToBinary(this._Value, sw);
+            BinarySerializer.ToBinary(this._Name, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Enumeration, sr);
-            BinarySerializer.FromBinary(out this._EnumerationEntryName, sr);
-            BinarySerializer.FromBinary(out this._EnumValue, sr);
+            BinarySerializer.FromBinary(out this._Value, sr);
+            BinarySerializer.FromBinary(out this._Name, sr);
         }
     }
 }

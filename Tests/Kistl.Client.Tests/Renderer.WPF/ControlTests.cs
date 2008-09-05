@@ -9,6 +9,7 @@ using Kistl.GUI.Mocks;
 using Kistl.GUI.Tests;
 
 using NUnit.Framework;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Renderer.WPF.Tests
 {

@@ -20,7 +20,7 @@ using Kistl.API;
 namespace Kistl.GUI.Renderer.WPF
 {
     /// <summary>
-    /// Interaktionslogik für StringListControl.xaml
+    /// Interaktionslogik für EnumEntryListControl.xaml
     /// </summary>
     public partial class EnumEntryListControl : ListControl, IListControl<EnumerationEntry>
     {
@@ -38,7 +38,9 @@ namespace Kistl.GUI.Renderer.WPF
 
         private void New_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException("AddItem(inputBox.Text);");
+            EnumerationEntry newEntry = Context.Create<EnumerationEntry>();
+            newEntry.Name = inputBox.Text;
+            AddItem(newEntry);
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
@@ -52,7 +54,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-        #region IListControl<string> Member
+        #region IListControl<> Member
 
         IList<EnumerationEntry> IListControl<EnumerationEntry>.Values
         {

@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Kistl.Client.Mocks;
 using Kistl.GUI.DB;
 using Kistl.GUI;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Tests
 {

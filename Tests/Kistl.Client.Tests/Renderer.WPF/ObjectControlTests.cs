@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-using NMock2;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.GUI;
 using Kistl.Client.Mocks;
 using Kistl.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Mocks;
 using Kistl.GUI.Tests;
-using System.Collections.ObjectModel;
+
+using NMock2;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Kistl.GUI.Renderer.WPF.Tests
 {

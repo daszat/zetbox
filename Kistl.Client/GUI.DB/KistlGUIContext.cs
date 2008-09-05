@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
+using Kistl.App.GUI;
 using Kistl.GUI.Renderer;
 using Kistl.Client;
 
@@ -51,11 +52,11 @@ namespace Kistl.GUI.DB
             return (IBasicControl)Activator.CreateInstance(controlType);
         }
 
-        public static IRenderer CreateRenderer(Toolkit platform)
+        public static Kistl.GUI.Renderer.IRenderer CreateRenderer(Toolkit platform)
         {
             var info = FindControlInfo(platform, VisualType.Renderer);
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.AssemblyName), true);
-            return (IRenderer)Activator.CreateInstance(controlType);
+            return (Kistl.GUI.Renderer.IRenderer)Activator.CreateInstance(controlType);
         }
 
         public static IPresenter CreatePresenter(PresenterInfo info, Kistl.API.IDataObject obj, Visual v, IBasicControl ctrl)
@@ -222,7 +223,7 @@ namespace Kistl.GUI.DB
             new ControlInfo() { Platform = Toolkit.WPF, ControlType = VisualType.Enumeration,
                 Container = false,
                 AssemblyName = "Kistl.Client.WPF, Version=1.0.0.0",
-                ClassName = "Kistl.GUI.Renderer.WPF.StringListControl" },
+                ClassName = "Kistl.GUI.Renderer.WPF.EnumBaseControl" },
 
 #endregion
         });
@@ -324,13 +325,6 @@ namespace Kistl.GUI.DB
 
         });
 
-    }
-
-    public enum Toolkit
-    {
-        WPF,
-        ASPNET,
-        TEST
     }
 
 }

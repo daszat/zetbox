@@ -133,12 +133,13 @@ namespace Kistl.GUI
     /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
     /// Additionally basic change handling is implemented.
     /// </summary>
-    /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
+    /// <typeparam name="PROPERTYTYPE">The type of the handled Property's value.</typeparam>
     /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
+    /// <typeparam name="CONTROLTYPE">The type which is handled by the control.</typeparam>
     /// <typeparam name="CONTROL">The type of the actual control which is used for display.</typeparam>
-    public class DefaultPresenter<TYPE, PROPERTY, CONTROL> : Presenter<CONTROL>
+    public abstract class DefaultPresenter<PROPERTYTYPE, PROPERTY, CONTROLTYPE, CONTROL> : Presenter<CONTROL>
         where PROPERTY : Property
-        where CONTROL : IValueControl<TYPE>
+        where CONTROL : IValueControl<CONTROLTYPE>
     {
         // localize type-unsafety
         /// <summary>
@@ -147,13 +148,29 @@ namespace Kistl.GUI
         public PROPERTY Property { get { return (PROPERTY)Preferences.Property; } }
 
         /// <summary>
-        /// Override this to specify a conversion from the object's property to the value for the widget
+        /// 
         /// </summary>
-        /// <returns>the value of the handled property in the right type for the widget</returns>
-        protected virtual TYPE GetPropertyValue()
+        /// <returns>The Property's value</returns>
+        protected PROPERTYTYPE GetPropertyValue()
         {
-            return Object.GetPropertyValue<TYPE>(Property.PropertyName);
+            return Object.GetPropertyValue<PROPERTYTYPE>(Property.PropertyName);
         }
+
+        protected void SetPropertyValue(PROPERTYTYPE value)
+        {
+            Object.SetPropertyValue<PROPERTYTYPE>(Property.PropertyName, value);
+        }
+
+        /// <summary>
+        /// This method converts the Value read from the Control into the type used by the Property
+        /// </summary>
+        protected abstract PROPERTYTYPE MungeFromControl(CONTROLTYPE value);
+
+        /// <summary>
+        /// This method converts the Value read from the Property into the type used by the Control
+        /// </summary>
+        protected abstract CONTROLTYPE MungeFromObject(PROPERTYTYPE value);
+
 
         #region Initialisation
 
@@ -176,7 +193,7 @@ namespace Kistl.GUI
                 Control.UserInput += _Control_UserInput;
             }
 
-            Control.Value = GetPropertyValue();
+            Control.Value = MungeFromObject(GetPropertyValue());
             Control.IsValidValue = true;
 
             // Control.Size = Preferences.PreferredSize;
@@ -201,7 +218,7 @@ namespace Kistl.GUI
                 // if the object has changed, unconditionally overwrite the value in the GUI
                 // intelligent controls might want to show the user both the "real" and the user's value
                 if (e.PropertyName == Property.PropertyName)
-                    Control.Value = GetPropertyValue();
+                    Control.Value = MungeFromObject(GetPropertyValue());
             }
         }
 
@@ -225,7 +242,7 @@ namespace Kistl.GUI
             Control.IsValidValue = (Property.IsNullable || Control.Value != null);
             if (Control.IsValidValue)
             {
-                Object.SetPropertyValue<TYPE>(Property.PropertyName, Control.Value);
+                SetPropertyValue(MungeFromControl(Control.Value));
             }
         }
 
@@ -332,29 +349,51 @@ namespace Kistl.GUI
     #region Default Value Presenters
 
     /// <summary>
-    /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
-    /// Additionally basic change handling is implemented.
-    /// 
-    /// This derivation is only a shortcut to always specifying IValueControl&lt;TYPE?&gt; as CONTROL.
+    /// The default presenter has infrastructure for setting IBasicControl 
+    /// and IValueControl members.
+    /// Additionally basic change handling is implemented. Values are 
+    /// transferred without change between property and control.
     /// </summary>
     /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
     /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
-    public class DefaultStructPresenter<TYPE> : DefaultPresenter<TYPE?, ValueTypeProperty, IValueControl<TYPE?>>
+    public class DefaultStructPresenter<TYPE>
+        : DefaultPresenter<TYPE?, ValueTypeProperty, TYPE?, IValueControl<TYPE?>>
         where TYPE : struct
     {
+        protected override TYPE? MungeFromControl(TYPE? value)
+        {
+            return value;
+        }
+
+        protected override TYPE? MungeFromObject(TYPE? value)
+        {
+            return value;
+        }
     }
 
     /// <summary>
-    /// The default presenter has infrastructure for setting IBasicControl and IValueControl members.
-    /// Additionally basic change handling is implemented.
+    /// The default presenter has infrastructure for setting IBasicControl 
+    /// and IValueControl members.
+    /// Additionally basic change handling is implemented. Values are 
+    /// transferred without change between property and control.
     /// 
     /// This derivation is only a shortcut to always specifying IValueControl&lt;TYPE&gt; as CONTROL.
     /// </summary>
     /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
     /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
-    public class DefaultValuePresenter<TYPE> : DefaultPresenter<TYPE, ValueTypeProperty, IValueControl<TYPE>>
+    public class DefaultValuePresenter<TYPE> 
+        : DefaultPresenter<TYPE, ValueTypeProperty, TYPE, IValueControl<TYPE>>
         where TYPE : class
     {
+        protected override TYPE MungeFromControl(TYPE value)
+        {
+            return value;
+        }
+
+        protected override TYPE MungeFromObject(TYPE value)
+        {
+            return value;
+        }
     }
 
     #endregion
@@ -365,7 +404,7 @@ namespace Kistl.GUI
     /// <typeparam name="ENUM"></typeparam>
     // TODO: Test when enumeration properties create actual enumeration CLR properties, see Case 478
     public class EnumerationPresenter<ENUM>
-        : DefaultPresenter<ENUM, EnumerationProperty, IEnumControl<ENUM>>
+        : DefaultPresenter<ENUM, EnumerationProperty, EnumerationEntry, IEnumControl>
         where ENUM : struct // actually where ENUM: System.Enum, but see http://bytes.com/forum/post1821322-8.html 
     {
 
@@ -373,14 +412,31 @@ namespace Kistl.GUI
         {
             if (!typeof(ENUM).IsEnum)
                 throw new ArgumentOutOfRangeException("ENUM", "MUST be an enumeration");
+
         }
 
         protected override void InitializeComponent()
         {
-            Control.ItemsSource = Enum.GetValues(typeof(ENUM)).Cast<ENUM>().ToList();
+            Enumeration = Object.Context
+                .GetQuery<Enumeration>()
+                .Where(e => e.ClassName == typeof(ENUM).Name)
+                .Single();
+
+            Control.ItemsSource = Enumeration.EnumerationEntries;
             base.InitializeComponent();
         }
 
+        public Enumeration Enumeration { get; private set; }
+
+        protected override ENUM MungeFromControl(EnumerationEntry value)
+        {
+            return (ENUM)Enum.ToObject(Property.GetPropertyType(), value.Value);
+        }
+
+        protected override EnumerationEntry MungeFromObject(ENUM value)
+        {
+            return Enumeration.EnumerationEntries.Where(entry => entry.Name == Enum.GetName(Property.GetPropertyType(), value)).Single();
+        }
     }
 
     /// <summary>

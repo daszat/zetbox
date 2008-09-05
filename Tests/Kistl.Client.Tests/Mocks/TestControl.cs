@@ -7,14 +7,15 @@ using Kistl.GUI;
 using Kistl.API;
 using Kistl.GUI.Renderer;
 using System.Collections.ObjectModel;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.Mocks
 {
 
     public class TestRenderer : BasicRenderer<object, object, object>
     {
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Renderer,
@@ -65,8 +66,8 @@ namespace Kistl.Client.Mocks
 
     public class TestObjectControl : TestBasicControl, IObjectControl
     {
-        public readonly static ControlInfo Info
-          = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+          = new Kistl.GUI.DB.ControlInfo()
           {
               Platform = Toolkit.TEST,
               ControlType = VisualType.Object,
@@ -96,8 +97,8 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Boolean,
@@ -134,8 +135,8 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.DateTime,
@@ -171,8 +172,8 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Integer,
@@ -207,8 +208,8 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Double,
@@ -243,8 +244,8 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.String,
@@ -279,8 +280,8 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.ObjectReference,
@@ -329,8 +330,8 @@ namespace Kistl.Client.Mocks
             // IsValidValue = true;
         }
 
-        public readonly static ControlInfo Info
-            = new ControlInfo()
+        public readonly static Kistl.GUI.DB.ControlInfo Info
+            = new Kistl.GUI.DB.ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.ObjectList,
