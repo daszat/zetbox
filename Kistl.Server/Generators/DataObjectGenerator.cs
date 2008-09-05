@@ -924,8 +924,8 @@ namespace Kistl.Server.Generators
                 }
                 else
                 {
-                    // not supported yet
-                    throw new NotSupportedException("Unknonw Propertytype " + baseProp.GetType().Name);
+                    // objectreferences not supported yet
+                    throw new NotSupportedException("Unknown Propertytype " + baseProp.GetType().Name);
                 }
             }
         }
