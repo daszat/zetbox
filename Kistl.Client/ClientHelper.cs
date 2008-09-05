@@ -122,23 +122,6 @@ namespace Kistl.Client
     {
 
         /// <summary>
-        /// joins the string representations of all items in list together, separated by joiner
-        /// </summary>
-        /// <param name="list"></param>
-        /// <param name="joiner"></param>
-        /// <returns></returns>
-        public static string JoinStrings(this System.Collections.IList list, string joiner)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var item in list)
-            {
-                sb.Append(item);
-                sb.Append(joiner);
-            }
-            return sb.ToString();
-        }
-
-        /// <summary>
         /// Insert a range of items into an IList at a specified index
         /// </summary>
         /// <typeparam name="T"></typeparam>
