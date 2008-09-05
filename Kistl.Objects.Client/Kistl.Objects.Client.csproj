@@ -96,7 +96,6 @@
     <Compile Include="ObjectParameter.Client.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Client.Designer.cs" />
     <Compile Include="ObjectSerializer.cs" />
-    <Compile Include="Platform.Client.Designer.cs" />
     <Compile Include="PresenterInfo.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />
     <Compile Include="Property.Client.Designer.cs" />
