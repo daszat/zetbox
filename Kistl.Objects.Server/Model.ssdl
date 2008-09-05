@@ -48,6 +48,7 @@
     <EntitySet Name="LastTest" EntityType="Model.Store.LastTest" Table="LastTests" />
     <EntitySet Name="Struct" EntityType="Model.Store.Struct" Table="Structs" />
     <EntitySet Name="StructProperty" EntityType="Model.Store.StructProperty" Table="StructProperties" />
+    <EntitySet Name="PresenterInfo" EntityType="Model.Store.PresenterInfo" Table="PresenterInfos" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -283,6 +284,14 @@
     <AssociationSet Name="FK_StructProperty_Struct_StructDefinition" Association="Model.Store.FK_StructProperty_Struct_StructDefinition">
       <End Role="A_Struct" EntitySet="Struct" />
       <End Role="B_StructProperty" EntitySet="StructProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterAssembly" Association="Model.Store.FK_PresenterInfo_Assembly_PresenterAssembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_PresenterInfo" EntitySet="PresenterInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresenterInfo_Assembly_DataAssembly" Association="Model.Store.FK_PresenterInfo_Assembly_DataAssembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_PresenterInfo" EntitySet="PresenterInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -674,6 +683,17 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_StructDefinition" Type="int" />
+  </EntityType>
+  <EntityType Name="PresenterInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ControlType" Type="int" Nullable="false" />
+    <Property Name="fk_PresenterAssembly" Type="int" />
+    <Property Name="PresenterTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_DataAssembly" Type="int" />
+    <Property Name="DataTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -1400,6 +1420,30 @@
       </Principal>
       <Dependent Role="B_StructProperty">
         <PropertyRef Name="fk_StructDefinition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresenterInfo_Assembly_PresenterAssembly">
+    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
+    <End Role="B_PresenterInfo" Type="Model.Store.PresenterInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Assembly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_PresenterInfo">
+        <PropertyRef Name="fk_PresenterAssembly" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresenterInfo_Assembly_DataAssembly">
+    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
+    <End Role="B_PresenterInfo" Type="Model.Store.PresenterInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Assembly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_PresenterInfo">
+        <PropertyRef Name="fk_DataAssembly" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

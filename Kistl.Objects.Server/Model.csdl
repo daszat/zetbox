@@ -24,6 +24,7 @@
     <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
     <EntitySet Name="LastTest" EntityType="Model.LastTest" />
+    <EntitySet Name="PresenterInfo" EntityType="Model.PresenterInfo" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -163,6 +164,14 @@
     <AssociationSet Name="FK_StructProperty_Struct_StructDefinition" Association="Model.FK_StructProperty_Struct_StructDefinition">
       <End Role="A_Struct" EntitySet="DataType" />
       <End Role="B_StructProperty" EntitySet="BaseProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterAssembly" Association="Model.FK_PresenterInfo_Assembly_PresenterAssembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_PresenterInfo" EntitySet="PresenterInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresenterInfo_Assembly_DataAssembly" Association="Model.FK_PresenterInfo_Assembly_DataAssembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_PresenterInfo" EntitySet="PresenterInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -462,6 +471,17 @@
   <EntityType Name="StructProperty" BaseType="Model.Property">
     <NavigationProperty Name="StructDefinition" Relationship="Model.FK_StructProperty_Struct_StructDefinition" FromRole="B_StructProperty" ToRole="A_Struct" />
   </EntityType>
+  <EntityType Name="PresenterInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ControlType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PresenterAssembly" Relationship="Model.FK_PresenterInfo_Assembly_PresenterAssembly" FromRole="B_PresenterInfo" ToRole="A_Assembly" />
+    <Property Name="PresenterTypeName" Type="String" MaxLength="200" Nullable="false" />
+    <NavigationProperty Name="DataAssembly" Relationship="Model.FK_PresenterInfo_Assembly_DataAssembly" FromRole="B_PresenterInfo" ToRole="A_Assembly" />
+    <Property Name="DataTypeName" Type="String" MaxLength="200" Nullable="false" />
+  </EntityType>
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
     <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />
@@ -633,6 +653,14 @@
   <Association Name="FK_StructProperty_Struct_StructDefinition">
     <End Role="A_Struct" Type="Model.Struct" Multiplicity="0..1" />
     <End Role="B_StructProperty" Type="Model.StructProperty" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_PresenterInfo_Assembly_PresenterAssembly">
+    <End Role="A_Assembly" Type="Model.Assembly" Multiplicity="0..1" />
+    <End Role="B_PresenterInfo" Type="Model.PresenterInfo" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_PresenterInfo_Assembly_DataAssembly">
+    <End Role="A_Assembly" Type="Model.Assembly" Multiplicity="0..1" />
+    <End Role="B_PresenterInfo" Type="Model.PresenterInfo" Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />

@@ -14,13 +14,13 @@ namespace Kistl.Client.Mocks
 
     public class TestRenderer : BasicRenderer<object, object, object>
     {
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Renderer,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestRenderer"
             };
 
@@ -66,13 +66,13 @@ namespace Kistl.Client.Mocks
 
     public class TestObjectControl : TestBasicControl, IObjectControl
     {
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-          = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+          = new ControlInfo()
           {
               Platform = Toolkit.TEST,
               ControlType = VisualType.Object,
-              Container = false,
-              AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+              IsContainer = false,
+              // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
               ClassName = "Kistl.Client.Mocks.TestObjectControl"
           };
 
@@ -97,13 +97,13 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Boolean,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestBoolControl"
             };
 
@@ -135,13 +135,13 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.DateTime,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestDateTimeControl"
             };
 
@@ -172,13 +172,13 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Integer,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestIntControl"
             };
 
@@ -208,13 +208,13 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.Double,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestDoubleControl"
             };
 
@@ -244,13 +244,13 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.String,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestStringControl"
             };
 
@@ -280,13 +280,13 @@ namespace Kistl.Client.Mocks
             IsValidValue = true;
         }
 
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.ObjectReference,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestObjectReferenceControl"
             };
 
@@ -330,13 +330,13 @@ namespace Kistl.Client.Mocks
             // IsValidValue = true;
         }
 
-        public readonly static Kistl.GUI.DB.ControlInfo Info
-            = new Kistl.GUI.DB.ControlInfo()
+        public readonly static ControlInfo Info
+            = new ControlInfo()
             {
                 Platform = Toolkit.TEST,
                 ControlType = VisualType.ObjectList,
-                Container = false,
-                AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
+                IsContainer = false,
+                // AssemblyName = "Kistl.Client.Tests, Version=1.0.0.0",
                 ClassName = "Kistl.Client.Mocks.TestObjectListControl"
             };
 

@@ -347,6 +347,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PresenterInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PresenterInfo)">
+        <MappingFragment StoreEntitySet="PresenterInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+          <ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
+          <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -681,6 +691,24 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_StructDefinition" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_PresenterInfo_Assembly_PresenterAssembly" TypeName="Model.FK_PresenterInfo_Assembly_PresenterAssembly" StoreEntitySet="PresenterInfo">
+      <EndProperty Name="A_Assembly">
+        <ScalarProperty Name="ID" ColumnName="fk_PresenterAssembly" />
+      </EndProperty>
+      <EndProperty Name="B_PresenterInfo">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_PresenterAssembly" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_PresenterInfo_Assembly_DataAssembly" TypeName="Model.FK_PresenterInfo_Assembly_DataAssembly" StoreEntitySet="PresenterInfo">
+      <EndProperty Name="A_Assembly">
+        <ScalarProperty Name="ID" ColumnName="fk_DataAssembly" />
+      </EndProperty>
+      <EndProperty Name="B_PresenterInfo">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_DataAssembly" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">

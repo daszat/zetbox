@@ -46,28 +46,26 @@ namespace Kistl.Client.WPF
                     {
                         // The various handles for adding all the new data
                         Module guiModule = ctx.GetQuery<Module>().Where(m => m.ModuleName == "GUI").Single();
-                        
+
                         // delete old data
-                        ctx.GetQuery<Kistl.App.GUI.ControlInfo>().ForEach(ci => ctx.Delete(ci));
-                        
-                        foreach (ControlInfo info in ControlInfo.Implementations)
+                        ctx.GetQuery<Kistl.App.GUI.PresenterInfo>().ForEach(pi => ctx.Delete(pi));
+
+                        foreach (LocalPresenterInfo info in LocalPresenterInfo.Implementations)
                         {
                             string aName = info.AssemblyName;
-                            Assembly controlAssembly = ctx.GetQuery<Assembly>().Where(a => a.AssemblyName == aName).ToList().SingleOrDefault();
-                            if (controlAssembly == null)
-                            {
-                                controlAssembly = ctx.Create<Assembly>();
-                                controlAssembly.AssemblyName = info.AssemblyName;
-                                controlAssembly.Module = guiModule;
-                            }
+                            Assembly presenterAssembly = FetchOrCreateAssembly(ctx, guiModule, info.AssemblyName);
+                            Assembly dataAssembly = null;
+                            if (info.SourceType.Assembly.FullName != typeof(object).Assembly.FullName)
+                                dataAssembly = FetchOrCreateAssembly(ctx, guiModule, info.SourceType.Assembly.FullName);
 
-                            Kistl.App.GUI.ControlInfo upload = ctx.Create<Kistl.App.GUI.ControlInfo>();
-                            upload.Assembly = controlAssembly;
-                            upload.ClassName = info.ClassName;
-                            upload.ControlType = (Kistl.App.GUI.VisualType)Enum.Parse(typeof(Kistl.App.GUI.VisualType), info.ControlType.ToString());
-                            upload.IsContainer = info.Container;
-                            upload.Platform = (Kistl.App.GUI.Toolkit)Enum.Parse(typeof(Kistl.App.GUI.Toolkit), info.Platform.ToString());
+                            Kistl.App.GUI.PresenterInfo upload = ctx.Create<Kistl.App.GUI.PresenterInfo>();
+                            upload.PresenterAssembly = presenterAssembly;
+                            upload.PresenterTypeName = info.ClassName;
 
+                            upload.DataAssembly = dataAssembly;
+                            upload.DataTypeName = info.SourceType.FullName;
+                            
+                            upload.ControlType = info.Control;
                         }
 
                         ctx.SubmitChanges();
@@ -75,6 +73,26 @@ namespace Kistl.Client.WPF
                 }
 #endif
             }
+        }
+
+        private static Assembly FetchOrCreateAssembly(
+            IKistlContext ctx,
+            Module guiModule,
+            string aName)
+        {
+            Assembly result = ctx.GetQuery<Assembly>()
+                .Where(a => a.AssemblyName == aName)
+                .ToList()
+                .SingleOrDefault();
+
+            if (result == null)
+            {
+                result = ctx.Create<Assembly>();
+                result.AssemblyName = aName;
+                result.Module = guiModule;
+            }
+
+            return result;
         }
 
     }

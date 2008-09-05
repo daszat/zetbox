@@ -11,6 +11,7 @@ using NMock2;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
+using Kistl.App.GUI;
 
 /// <summary>
 /// Assembly-global setup class which initialises the Kistl.API and primes the KistlGUIContext with test data
@@ -53,6 +54,8 @@ public class MainSetUp
 
         System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
 
+        throw new NotImplementedException("need to restructure all tests now");
+        /*
         ControlInfo.Implementations.Add(TestObjectControl.Info);
         ControlInfo.Implementations.Add(TestObjectReferenceControl.Info);
         ControlInfo.Implementations.Add(TestObjectListControl.Info);
@@ -63,6 +66,6 @@ public class MainSetUp
         ControlInfo.Implementations.Add(TestIntControl.Info);
         ControlInfo.Implementations.Add(TestStringControl.Info);
         ControlInfo.Implementations.Add(TestRenderer.Info);
-
+        */
     }
 }

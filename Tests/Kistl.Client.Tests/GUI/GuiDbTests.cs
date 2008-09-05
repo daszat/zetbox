@@ -76,8 +76,9 @@ namespace Kistl.GUI.Tests
         public void TestFindPresenter()
         {
             var pi = KistlGUIContext.FindPresenterInfo(Visual, typeof(StringProperty));
-            Assert.AreEqual(Visual.ControlType, pi.Control, "FindPresenterInfo should return matching PresenterInfo: ControlType");
-            Assert.AreEqual(typeof(StringProperty), pi.SourceType, "FindPresenterInfo should return matching PresenterInfo: SourceType");
+            Assert.AreEqual(Visual.ControlType, pi.ControlType, "FindPresenterInfo should return matching PresenterInfo: ControlType");
+            Assert.AreEqual(typeof(StringProperty).Assembly.FullName, pi.DataAssembly.AssemblyName, "FindPresenterInfo should return matching PresenterInfo: DataAssembly.AssemblyName");
+            Assert.AreEqual(typeof(StringProperty).FullName, pi.DataTypeName, "FindPresenterInfo should return matching PresenterInfo: DataTypeName");
         }
 
         [Test]
