@@ -47,7 +47,10 @@ namespace Kistl.GUI.DB
             return (from pi in GuiContext.GetQuery<PresenterInfo>().ToList()
                     where
                         pi.ControlType == visual.ControlType
-                        && pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName
+                        && (pi.DataAssembly == null 
+                            ? sourceType.Assembly == typeof(object).Assembly 
+                            : pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName
+                        )
                         && pi.DataTypeName == sourceType.FullName
                     select pi).Single();
         }
