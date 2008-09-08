@@ -58,22 +58,12 @@ namespace Kistl.API.Server
         /// </summary>
         public bool IsDisposed { get; private set; }
 
-
-        private static bool init = true;
-
         /// <summary>
         /// Internal Constructor
         /// </summary>
         internal KistlDataContextEntityFramework() :
             base(GetConnectionString(), "Entities")
         {
-            if (init)
-            {
-                System.Reflection.Assembly a = Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
-                if (a == null) throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata was loaded");
-                MetadataWorkspace.LoadFromAssembly(a);
-                init = false;
-            }
         }
 
         /// <summary>
@@ -114,7 +104,7 @@ namespace Kistl.API.Server
         /// <returns>IQueryable</returns>
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
-            Type type = QueryTranslatorProvider<T>.TranslateType(typeof(T));
+            Type type = typeof(T).ToImplementationType();
 
             if (!_table.ContainsKey(type))
             {
@@ -285,10 +275,7 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(Type type)
         {
-            if (!type.Name.EndsWith("Impl"))
-            {
-                type = Type.GetType(type.Namespace + "." + type.Name + "Impl, Kistl.Objects.Server", true);
-            }
+            type = type.ToImplementationType();
             Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
             OnObjectCreated(obj);

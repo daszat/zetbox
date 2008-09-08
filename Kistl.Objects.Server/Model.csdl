@@ -451,7 +451,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="StringProp" Type="String" MaxLength="200" Nullable="false" />
-    <Property Name="TestEnumProp" Type="Int32" Nullable="false" />
+    <Property Name="TestEnumPropImpl" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectPropImpl" Relationship="Model.FK_TestObjClass_Kunde_ObjectProp" FromRole="B_TestObjClass" ToRole="A_Kunde" />
     <Property Name="MyIntProperty" Type="Int32" Nullable="true" />
   </EntityType>
@@ -463,8 +463,8 @@
     <NavigationProperty Name="AssemblyImpl" Relationship="Model.FK_ControlInfo_Assembly_Assembly" FromRole="B_ControlInfo" ToRole="A_Assembly" />
     <Property Name="ClassName" Type="String" MaxLength="200" Nullable="false" />
     <Property Name="IsContainer" Type="Boolean" Nullable="false" />
-    <Property Name="Platform" Type="Int32" Nullable="false" />
-    <Property Name="ControlType" Type="Int32" Nullable="false" />
+    <Property Name="PlatformImpl" Type="Int32" Nullable="false" />
+    <Property Name="ControlTypeImpl" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TestCustomObject">
     <Key>
@@ -503,7 +503,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="ControlType" Type="Int32" Nullable="false" />
+    <Property Name="ControlTypeImpl" Type="Int32" Nullable="false" />
     <NavigationProperty Name="PresenterAssemblyImpl" Relationship="Model.FK_PresenterInfo_Assembly_PresenterAssembly" FromRole="B_PresenterInfo" ToRole="A_Assembly" />
     <Property Name="PresenterTypeName" Type="String" MaxLength="200" Nullable="false" />
     <NavigationProperty Name="DataAssemblyImpl" Relationship="Model.FK_PresenterInfo_Assembly_DataAssembly" FromRole="B_PresenterInfo" ToRole="A_Assembly" />
@@ -515,7 +515,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="200" Nullable="false" />
-    <Property Name="ControlType" Type="Int32" Nullable="false" />
+    <Property Name="ControlTypeImpl" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ChildrenImpl" Relationship="Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent" FromRole="A_Visual" ToRole="B_Visual_ChildrenCollectionEntry" />
     <NavigationProperty Name="PropertyImpl" Relationship="Model.FK_Visual_BaseProperty_Property" FromRole="B_Visual" ToRole="A_BaseProperty" />
     <NavigationProperty Name="MethodImpl" Relationship="Model.FK_Visual_Method_Method" FromRole="B_Visual" ToRole="A_Method" />

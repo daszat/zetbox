@@ -293,7 +293,7 @@
         <MappingFragment StoreEntitySet="TestObjClass">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StringProp" ColumnName="StringProp" />
-          <ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
+          <ScalarProperty Name="TestEnumPropImpl" ColumnName="TestEnumProp" />
           <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -304,8 +304,8 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ClassName" ColumnName="ClassName" />
           <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
-          <ScalarProperty Name="Platform" ColumnName="Platform" />
-          <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+          <ScalarProperty Name="PlatformImpl" ColumnName="Platform" />
+          <ScalarProperty Name="ControlTypeImpl" ColumnName="ControlType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -351,7 +351,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.PresenterInfo)">
         <MappingFragment StoreEntitySet="PresenterInfo">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+          <ScalarProperty Name="ControlTypeImpl" ColumnName="ControlType" />
           <ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
           <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
         </MappingFragment>
@@ -362,7 +362,7 @@
         <MappingFragment StoreEntitySet="Visual">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+          <ScalarProperty Name="ControlTypeImpl" ColumnName="ControlType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

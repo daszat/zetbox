@@ -247,7 +247,7 @@ namespace Kistl.API
         protected virtual NewArrayExpression VisitNewArray(NewArrayExpression na)
         {
             var e = VisitExpressionList(na.Expressions);
-            Type type = na.Type.GetElementType();
+            Type type = na.Type.GetCollectionElementType();
             if (na.NodeType == ExpressionType.NewArrayInit)
             {
                 return Expression.NewArrayInit(type, e);

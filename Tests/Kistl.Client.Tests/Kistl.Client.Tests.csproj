@@ -119,6 +119,7 @@
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\NMock2\NMock2.csproj">
       <Project>{CEE959FE-C3AF-4B51-8F1A-CCB32BAA1E98}</Project>

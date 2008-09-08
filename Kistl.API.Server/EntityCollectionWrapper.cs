@@ -34,7 +34,10 @@ namespace Kistl.API.Server
 
         public void CopyTo(INTERFACE[] array, int arrayIndex)
         {
-            _ec.CopyTo(array.Select(i => (IMPL)i).ToArray(), arrayIndex);
+            foreach (INTERFACE i in _ec)
+            {
+                array[arrayIndex++] = i;
+            }
         }
 
         public int Count
@@ -131,7 +134,10 @@ namespace Kistl.API.Server
 
         public void CopyTo(VALUE[] array, int arrayIndex)
         {
-            _ec.CopyTo(array.Select(i => new IMPL() { Value = i, Parent = _parentObject }).ToArray(), arrayIndex);
+            foreach (var i in _ec.Select(i => i.Value))
+            {
+                array[arrayIndex++] = i;
+            }
         }
 
         public int Count
@@ -237,7 +243,10 @@ namespace Kistl.API.Server
 
         public void CopyTo(PARENT[] array, int arrayIndex)
         {
-            _ec.CopyTo(array.Select(i => new IMPL() { Value = _parentObject, Parent = i }).ToArray(), arrayIndex);
+            foreach(var i in _ec.Select(i => i.Parent))
+            {
+                array[arrayIndex++] = i;
+            }
         }
 
         public int Count

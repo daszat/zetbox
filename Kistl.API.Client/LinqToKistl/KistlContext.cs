@@ -87,11 +87,7 @@ namespace Kistl.API.Client
         /// <returns>Root Type of the given Type</returns>
         private Type GetRootType(Type t)
         {
-            // TODO: Implement a Translate Type Function
-            if (!t.Name.EndsWith("Impl"))
-            {
-                t = Type.GetType(t.Namespace + "." + t.Name + "Impl, Kistl.Objects.Client", true);
-            }
+            t = t.ToImplementationType();
             // TODO: Make this better - asking for BaseTypes is not elegant
             while (t != null && t.BaseType != typeof(BaseClientDataObject) && t.BaseType != typeof(BaseClientCollectionEntry))
             {
@@ -196,10 +192,7 @@ namespace Kistl.API.Client
         public Kistl.API.IDataObject Create(Type type)
         {
             CheckDisposed();
-            if (!type.Name.EndsWith("Impl"))
-            {
-                type = Type.GetType(type.Namespace + "." + type.Name + "Impl, Kistl.Objects.Client", true);
-            }
+            type = type.ToImplementationType();
             Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
             OnObjectCreated(obj);

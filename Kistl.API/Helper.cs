@@ -264,20 +264,147 @@ namespace Kistl.API
 
         public static Type ToInterfaceType(this Type type)
         {
-            if (typeof(IPersistenceObject).IsAssignableFrom(type) && type.Name.EndsWith("Impl"))
+            if (type.IsGenericType)
             {
-                type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - 4) + ", Kistl.Objects", true);
+                Type genericType = type.GetGenericTypeDefinition();
+                List<Type> genericArguments = new List<Type>();
+                genericArguments.AddRange(type.GetGenericArguments().Select(t => t.ToInterfaceType()));
+
+                return genericType.MakeGenericType(genericArguments.ToArray());
             }
-            return type;
+            else
+            {
+                if (typeof(IPersistenceObject).IsAssignableFrom(type) && type.Name.EndsWith("Impl"))
+                {
+                    type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - 4) + ", Kistl.Objects", true);
+                }
+                return type;
+            }
         }
 
         public static Type ToImplementationType(this Type type)
         {
-            if (typeof(IPersistenceObject).IsAssignableFrom(type) && !type.Name.EndsWith("Impl"))
+            if (type.IsGenericType)
             {
-                type = Type.GetType(type.FullName + "Impl, Kistl.Objects." + APIInit.HostType, true);
+                Type genericType = type.GetGenericTypeDefinition();
+                List<Type> genericArguments = new List<Type>();
+                genericArguments.AddRange(type.GetGenericArguments().Select(t => t.ToImplementationType()));
+
+                return genericType.MakeGenericType(genericArguments.ToArray());
             }
-            return type;
+            else
+            {
+                if (type == typeof(IDataObject))
+                {
+                    return APIInit.BaseDataObjectType;
+                }
+                else if (type == typeof(IPersistenceObject))
+                {
+                    return APIInit.BasePersistenceObjectType;
+                }
+                else if (type == typeof(IStruct))
+                {
+                    return APIInit.BaseStructObjectType;
+                }
+                else if (type == typeof(ICollectionEntry))
+                {
+                    return APIInit.BaseCollectionEntryType;
+                }
+                else if (typeof(IDataObject).IsAssignableFrom(type) && !APIInit.BaseDataObjectType.IsAssignableFrom(type))
+                {
+                    // add "Impl"
+                    string newType = type.FullName + "Impl, " + APIInit.ImplementationAssembly;
+                    return Type.GetType(newType, true);
+                }
+                else
+                {
+                    return type;
+                }
+            }
+        }
+
+        public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
+        {
+            if (parameterTypes == null)
+            {
+                MethodInfo mi = type.GetMethod(methodName);
+                if (mi == null) return null;
+                return mi.MakeGenericMethod(typeArguments);
+            }
+            else
+            {
+                MethodInfo[] methods = type.GetMethods();
+                foreach (MethodInfo method in methods)
+                {
+                    if (method.Name == methodName && method.GetGenericArguments().Length == typeArguments.Length)
+                    {
+                        MethodInfo mi = method.MakeGenericMethod(typeArguments);
+                        ParameterInfo[] parameters = mi.GetParameters();
+
+                        if (parameters.Length == parameterTypes.Length)
+                        {
+                            bool paramSame = true;
+                            for (int i = 0; i < parameters.Length; i++)
+                            {
+                                if (parameters[i].ParameterType != parameterTypes[i])
+                                {
+                                    paramSame = false;
+                                    break;
+                                }
+                            }
+
+                            if (paramSame) return mi;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public static Type GetCollectionElementType(this Type seqType)
+        {
+            Type ienum = FindIEnumerable(seqType);
+            if (ienum == null) return seqType;
+            return ienum.GetGenericArguments()[0];
+        }
+
+        public static Type FindIEnumerable(this Type seqType)
+        {
+            if (seqType == null || seqType == typeof(string))
+                return null;
+
+            if (seqType.IsArray)
+                return typeof(IEnumerable<>).MakeGenericType(seqType.GetCollectionElementType());
+
+            if (seqType.IsGenericType)
+            {
+                foreach (Type arg in seqType.GetGenericArguments())
+                {
+                    Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
+                    if (ienum.IsAssignableFrom(seqType))
+                    {
+                        return ienum;
+                    }
+                }
+            }
+
+            Type[] ifaces = seqType.GetInterfaces();
+            if (ifaces != null && ifaces.Length > 0)
+            {
+                foreach (Type iface in ifaces)
+                {
+                    Type ienum = FindIEnumerable(iface);
+                    if (ienum != null) return ienum;
+                }
+            }
+
+            if (seqType.BaseType != null && seqType.BaseType != typeof(object))
+            {
+                return FindIEnumerable(seqType.BaseType);
+            }
+
+            return null;
         }
 
         /// <summary>

@@ -120,7 +120,7 @@ namespace Kistl.API.Client
                 }
                 AddNewLocalObjects(_type, result);
 
-                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, GetElementType(typeof(T)));
+                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, typeof(T).GetCollectionElementType());
                 return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
             }
             else if (e.IsMethodCallExpression("First") || e.IsMethodCallExpression("FirstOrDefault"))
@@ -220,57 +220,10 @@ namespace Kistl.API.Client
         public IQueryable CreateQuery(Expression expression)
         {
             System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", expression.ToString()));
-            Type elementType = GetElementType(expression.Type);
+            Type elementType = expression.Type.GetCollectionElementType();
             return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
                 .MakeGenericType(elementType), new object[] { _context, _type, this, expression });
         }
-
-        #region TypeHelper
-        private static Type GetElementType(Type seqType)
-        {
-            Type ienum = FindIEnumerable(seqType);
-            if (ienum == null) return seqType;
-            return ienum.GetGenericArguments()[0];
-        }
-
-        private static Type FindIEnumerable(Type seqType)
-        {
-            if (seqType == null || seqType == typeof(string))
-                return null;
-
-            if (seqType.IsArray)
-                return typeof(IEnumerable<>).MakeGenericType(seqType.GetElementType());
-
-            if (seqType.IsGenericType)
-            {
-                foreach (Type arg in seqType.GetGenericArguments())
-                {
-                    Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
-                    if (ienum.IsAssignableFrom(seqType))
-                    {
-                        return ienum;
-                    }
-                }
-            }
-
-            Type[] ifaces = seqType.GetInterfaces();
-            if (ifaces != null && ifaces.Length > 0)
-            {
-                foreach (Type iface in ifaces)
-                {
-                    Type ienum = FindIEnumerable(iface);
-                    if (ienum != null) return ienum;
-                }
-            }
-            if (seqType.BaseType != null && seqType.BaseType != typeof(object))
-            {
-                return FindIEnumerable(seqType.BaseType);
-            }
-
-            return null;
-        }
-
-        #endregion
 
         public TResult Execute<TResult>(Expression e)
         {

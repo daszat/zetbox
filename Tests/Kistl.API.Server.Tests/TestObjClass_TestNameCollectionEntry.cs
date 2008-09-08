@@ -10,14 +10,14 @@ using System.Xml.Serialization;
 namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass_TestNameCollectionEntry")]
-    public class TestObjClass_TestNameCollectionEntry : BaseServerCollectionEntry
+    public class TestObjClass_TestNameCollectionEntryImpl : BaseServerCollectionEntry, ICollectionEntry<string, TestObjClass>
     {
 
         private int _ID;
 
         private string _Value;
 
-        private int? _fk_Parent;
+        private int _fk_Parent;
 
         [EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
         public override int ID
@@ -49,23 +49,25 @@ namespace Kistl.API.Server.Tests
 
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass")]
-        public TestObjClass Parent
+        public TestObjClassImpl ParentImpl
         {
             get
             {
-                EntityReference<TestObjClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
+                EntityReference<TestObjClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClassImpl>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
                 return r.Value;
             }
             set
             {
-                EntityReference<TestObjClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
+                EntityReference<TestObjClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClassImpl>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
                 r.Value = value;
             }
         }
 
-        public int? fk_Parent
+        public TestObjClass Parent { get { return ParentImpl; } set { ParentImpl = (TestObjClassImpl)value; } }
+
+        public int fk_Parent
         {
             get
             {

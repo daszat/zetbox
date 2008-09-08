@@ -32,6 +32,13 @@ namespace Kistl.API
         /// </summary>
         public static HostType HostType { get; private set; }
 
+        public static string ImplementationAssembly { get; set; }
+
+        public static Type BaseDataObjectType { get; private set; }
+        public static Type BasePersistenceObjectType { get; private set; }
+        public static Type BaseStructObjectType { get; private set; }
+        public static Type BaseCollectionEntryType { get; private set; }
+
         /// <summary>
         /// Uses the default configuration DefaultConfig.xml in the current directory
         /// </summary>
@@ -51,6 +58,7 @@ namespace Kistl.API
         public void Init(HostType type, string configFile)
         {
             HostType = type;
+            ImplementationAssembly = "Kistl.Objects." + HostType;
 
             // Load Configuration
             Configuration.KistlConfig.Init(configFile);
@@ -61,6 +69,12 @@ namespace Kistl.API
             // Start resolving Assemblies
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Kistl.API.AssemblyLoader.AssemblyResolve);
             AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(Kistl.API.AssemblyLoader.AssemblyResolve);
+
+            // Set Base Types
+            BaseDataObjectType = Type.GetType(string.Format("Kistl.API.{0}.Base{0}DataObject, Kistl.API.{0}", HostType), true);
+            BasePersistenceObjectType = Type.GetType(string.Format("Kistl.API.{0}.Base{0}PersistenceObject, Kistl.API.{0}", HostType), true);
+            BaseCollectionEntryType = Type.GetType(string.Format("Kistl.API.{0}.Base{0}CollectionEntry, Kistl.API.{0}", HostType), true);
+            BaseStructObjectType = Type.GetType(string.Format("Kistl.API.{0}.Base{0}StructObject, Kistl.API.{0}", HostType), true);
         }
     }
 }

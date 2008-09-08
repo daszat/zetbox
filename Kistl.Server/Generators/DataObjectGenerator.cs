@@ -1169,9 +1169,8 @@ namespace Kistl.Server.Generators
             {
                 foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
                 {
-                    // Use ToList before using foreach - the collection will change in the KistContext.Attach() Method
-                    // because EntityFramework will need a Trick to attach CollectionEntries correctly
-                    m.Statements.AddStatement(@"{0}.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i))", p.PropertyName);
+                    m.Statements.AddComment(@"Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly");
+                    m.Statements.AddStatement(@"{0}Impl.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i))", p.PropertyName);
                 }
             }
         }

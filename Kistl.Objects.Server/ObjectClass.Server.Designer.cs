@@ -209,7 +209,8 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            ImplementsInterfaces.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
+            /// Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly
+            ImplementsInterfacesImpl.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
         }
         
         public virtual IList<Kistl.App.Base.Method> GetInheritedMethods()

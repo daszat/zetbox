@@ -64,7 +64,6 @@ namespace Kistl.API.Server
     {
         #region Configuration
         private const string ImplementationSuffix = "Impl";
-        private const string DestinationAssembly = "Kistl.Objects.Server";
         #endregion
 
         IQueryable _source;
@@ -75,100 +74,6 @@ namespace Kistl.API.Server
             if (source == null) throw new ArgumentNullException("source");
             _source = source;
         }
-
-        #region TypeSystem
-        private static Type GetElementType(Type seqType)
-        {
-            Type ienum = FindIEnumerable(seqType);
-            if (ienum == null) return seqType;
-            return ienum.GetGenericArguments()[0];
-        }
-
-        private static Type FindIEnumerable(Type seqType)
-        {
-            if (seqType == null || seqType == typeof(string))
-                return null;
-
-            if (seqType.IsArray)
-                return typeof(IEnumerable<>).MakeGenericType(seqType.GetElementType());
-
-            if (seqType.IsGenericType)
-            {
-                foreach (Type arg in seqType.GetGenericArguments())
-                {
-                    Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
-                    if (ienum.IsAssignableFrom(seqType))
-                    {
-                        return ienum;
-                    }
-                }
-            }
-
-            Type[] ifaces = seqType.GetInterfaces();
-            if (ifaces != null && ifaces.Length > 0)
-            {
-                foreach (Type iface in ifaces)
-                {
-                    Type ienum = FindIEnumerable(iface);
-                    if (ienum != null) return ienum;
-                }
-            }
-
-            if (seqType.BaseType != null && seqType.BaseType != typeof(object))
-            {
-                return FindIEnumerable(seqType.BaseType);
-            }
-
-            return null;
-        }
-        #endregion
-
-        #region TranslateType
-        public static Type TranslateType(Type input)
-        {
-            if (input.IsGenericType)
-            {
-                Type genericType = input.GetGenericTypeDefinition();
-                List<Type> genericArguments = new List<Type>();
-                genericArguments.AddRange(input.GetGenericArguments().Select(t => TranslateType(t)));
-
-                return genericType.MakeGenericType(genericArguments.ToArray());
-            }
-            else
-            {
-                if (input == typeof(IDataObject))
-                {
-                    return typeof(BaseServerDataObject);
-                }
-                else if (input == typeof(IPersistenceObject))
-                {
-                    return typeof(BaseServerPersistenceObject);
-                }
-                else if (input == typeof(IStruct))
-                {
-                    return typeof(BaseServerStructObject);
-                }
-                else if (input == typeof(ICollectionEntry))
-                {
-                    return typeof(BaseServerCollectionEntry);
-                }
-                else if (typeof(IDataObject).IsAssignableFrom(input) && !typeof(BaseServerDataObject).IsAssignableFrom(input))
-                {
-                    // add "Impl"
-                    string newType = input.Namespace + "."
-                        + input.Name
-                        + ImplementationSuffix
-                        + ", "
-                        + DestinationAssembly;
-                    return Type.GetType(newType, true);
-                }
-                else
-                {
-                    return input;
-                }
-            }
-        }
-        #endregion
 
         #region IQueryProvider Members
 
@@ -182,7 +87,7 @@ namespace Kistl.API.Server
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
-            Type elementType = GetElementType(expression.Type);
+            Type elementType = expression.Type.GetCollectionElementType();
             IQueryable result = (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType),
                 new object[] { _source, expression });
             return result;
@@ -221,61 +126,22 @@ namespace Kistl.API.Server
         #endregion
 
         #region MethodHelper
-        private static MethodInfo FindGenericMethod(Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
-        {
-            if (parameterTypes == null)
-            {
-                MethodInfo mi = type.GetMethod(methodName);
-                if (mi == null) return null;
-                return mi.MakeGenericMethod(typeArguments);
-            }
-            else
-            {
-                MethodInfo[] methods = type.GetMethods();
-                foreach (MethodInfo method in methods)
-                {
-                    if (method.Name == methodName && method.GetGenericArguments().Length == typeArguments.Length)
-                    {
-                        MethodInfo mi = method.MakeGenericMethod(typeArguments);
-                        ParameterInfo[] parameters = mi.GetParameters();
-
-                        if (parameters.Length == parameterTypes.Length)
-                        {
-                            bool paramSame = true;
-                            for (int i = 0; i < parameters.Length; i++)
-                            {
-                                if (parameters[i].ParameterType != parameterTypes[i])
-                                {
-                                    paramSame = false;
-                                    break;
-                                }
-                            }
-
-                            if (paramSame) return mi;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
         public MethodInfo GetMethodInfo(MethodInfo input)
         {
-            Type MethodType = TranslateType(input.DeclaringType);
+            Type MethodType = input.DeclaringType.ToImplementationType();
             string MethodName = input.Name;
 
             List<Type> ParameterTypes = new List<Type>();
-            ParameterTypes.AddRange(input.GetParameters().Select(p => TranslateType(p.ParameterType)));
+            ParameterTypes.AddRange(input.GetParameters().Select(p => p.ParameterType.ToImplementationType()));
 
             List<Type> GenericArguments = new List<Type>();
-            GenericArguments.AddRange(input.GetGenericArguments().Select(p => TranslateType(p)));
+            GenericArguments.AddRange(input.GetGenericArguments().Select(p => p.ToImplementationType()));
 
 
             MethodInfo mi;
             if (GenericArguments != null && GenericArguments.Count > 0)
             {
-                mi = FindGenericMethod(MethodType, MethodName,
+                mi = MethodType.FindGenericMethod(MethodName,
                         GenericArguments.ToArray(),
                         ParameterTypes.ToArray());
             }
@@ -314,7 +180,7 @@ namespace Kistl.API.Server
             }
             else
             {
-                return Expression.MakeUnary(u.NodeType, base.Visit(u.Operand), TranslateType(u.Type), u.Method);
+                return Expression.MakeUnary(u.NodeType, base.Visit(u.Operand), u.Type.ToImplementationType(), u.Method);
             }
         }
 
@@ -322,7 +188,7 @@ namespace Kistl.API.Server
         {
             try
             {
-                Type t = TranslateType(lambda.Type);
+                Type t = lambda.Type.ToImplementationType();
                 Expression body = base.Visit(lambda.Body);
                 var parameters = base.VisitParameterList(lambda.Parameters);
                 return Expression.Lambda(t, body, parameters);
@@ -336,7 +202,7 @@ namespace Kistl.API.Server
         protected override TypeBinaryExpression VisitTypeIs(TypeBinaryExpression b)
         {
             b = base.VisitTypeIs(b);
-            return Expression.TypeIs(b.Expression, TranslateType(b.TypeOperand));
+            return Expression.TypeIs(b.Expression, b.TypeOperand.ToImplementationType());
         }
 
         protected override ConstantExpression VisitConstant(ConstantExpression c)
@@ -358,7 +224,7 @@ namespace Kistl.API.Server
         {
             if (!_Parameter.ContainsKey(p.Name))
             {
-                _Parameter[p.Name] = Expression.Parameter(TranslateType(p.Type), p.Name);
+                _Parameter[p.Name] = Expression.Parameter(p.Type.ToImplementationType(), p.Name);
             }
             return _Parameter[p.Name];
         }
@@ -367,7 +233,7 @@ namespace Kistl.API.Server
         {
             Expression e = base.Visit(m.Expression);
             string memberName = m.Member.Name;
-            Type declaringType = TranslateType(m.Member.DeclaringType);
+            Type declaringType = m.Member.DeclaringType.ToImplementationType();
             MemberExpression result;
             if (declaringType.GetMember(memberName).Length > 0 && declaringType.GetMember(memberName + ImplementationSuffix).Length > 0)
             {
@@ -383,16 +249,16 @@ namespace Kistl.API.Server
         protected override NewExpression VisitNew(NewExpression newExpression)
         {
             var args = VisitExpressionList(newExpression.Arguments);
-            Type declaringType = TranslateType(newExpression.Constructor.DeclaringType);
+            Type declaringType = newExpression.Constructor.DeclaringType.ToImplementationType();
             ConstructorInfo c = declaringType.GetConstructor(
-                newExpression.Constructor.GetParameters().Select(p => TranslateType(p.ParameterType)).ToArray());
+                newExpression.Constructor.GetParameters().Select(p => p.ParameterType.ToImplementationType()).ToArray());
 
             if (newExpression.Members != null)
             {
                 List<MemberInfo> members = new List<MemberInfo>();
                 foreach(MemberInfo mi in newExpression.Members)
                 {
-                    declaringType = TranslateType(mi.DeclaringType);
+                    declaringType = mi.DeclaringType.ToImplementationType();
                     if (declaringType.GetMember(mi.Name).Length > 0 && declaringType.GetMember(mi.Name + ImplementationSuffix).Length > 0)
                     {
                         members.Add(declaringType.GetMember(mi.Name + ImplementationSuffix)[0]);

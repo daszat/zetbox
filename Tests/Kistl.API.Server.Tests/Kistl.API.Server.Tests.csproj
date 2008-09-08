@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{980874F0-D9C1-4EDB-8143-AD51C1E2666E}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -70,11 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomActionsManagerAPITest.cs" />
+    <Compile Include="TestObjClass.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="TestObjClass_TestNameCollectionEntry.cs" />
-    <Compile Include="TestObjClass.cs" />
+    <Compile Include="TestObjClassImpl.cs" />
     <Compile Include="TestStruct.cs" />
     <Compile Include="Tests\BaseServerCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />

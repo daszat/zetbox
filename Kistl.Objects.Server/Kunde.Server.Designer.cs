@@ -204,7 +204,8 @@ namespace Kistl.App.Projekte
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            EMails.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
+            /// Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly
+            EMailsImpl.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
