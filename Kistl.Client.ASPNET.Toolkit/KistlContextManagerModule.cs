@@ -43,7 +43,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             {
                 // Code, der beim Starten der Anwendung ausgeführt wird.
                 Kistl.Client.Manager.Create(new string[] { HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]) },
-                    Kistl.App.GUI.Toolkit.ASPNET);
+                    "ASPNET");
             }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();
         }

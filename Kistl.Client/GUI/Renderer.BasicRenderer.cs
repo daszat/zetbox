@@ -85,14 +85,14 @@ namespace Kistl.GUI.Renderer
                 switch (visual.ControlType)
                 {
                     case VisualType.SimpleObjectList:
-                        if (visual.Property.GetType() == typeof(BackReferenceProperty)
+                        if (visual.Property.GetInterfaceType() == typeof(BackReferenceProperty)
                             && visual.Property.GetPropertyType() == typeof(EnumerationEntry))
                             pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IList<EnumerationEntry>));
                         else
-                            pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
+                            pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetInterfaceType());
                         break;
                     default:
-                        pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetType());
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, visual.Property.GetInterfaceType());
                         break;
                 }
             }

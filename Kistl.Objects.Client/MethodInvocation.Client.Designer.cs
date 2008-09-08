@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class MethodInvocation : BaseClientDataObject
+    public class MethodInvocationImpl : BaseClientDataObject, MethodInvocation
     {
         
         private System.Nullable<int> _fk_Method = null;
@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_InvokeOnObjectClass = null;
         
-        public MethodInvocation()
+        public MethodInvocationImpl()
         {
         }
         
@@ -234,12 +234,12 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((MethodInvocation)obj).fk_Method = this.fk_Method;
-            ((MethodInvocation)obj).fk_Assembly = this.fk_Assembly;
-            ((MethodInvocation)obj).FullTypeName = this.FullTypeName;
-            ((MethodInvocation)obj).MemberName = this.MemberName;
-            ((MethodInvocation)obj).fk_Module = this.fk_Module;
-            ((MethodInvocation)obj).fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
+            ((MethodInvocationImpl)obj).fk_Method = this.fk_Method;
+            ((MethodInvocationImpl)obj).fk_Assembly = this.fk_Assembly;
+            ((MethodInvocationImpl)obj).FullTypeName = this.FullTypeName;
+            ((MethodInvocationImpl)obj).MemberName = this.MemberName;
+            ((MethodInvocationImpl)obj).fk_Module = this.fk_Module;
+            ((MethodInvocationImpl)obj).fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
         }
         
         public override void AttachToContext(IKistlContext ctx)

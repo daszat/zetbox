@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_DataType_ObjectClass", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType), "B_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module), "B_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_DataType_ObjectClass", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeImpl), "B_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BasePropertyImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleImpl), "B_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BasePropertyImpl))]
 
 namespace Kistl.App.Base
 {
@@ -28,7 +28,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BaseProperty")]
-    public class BaseProperty : BaseServerDataObject
+    public class BasePropertyImpl : BaseServerDataObject, BaseProperty
     {
         
         private int _ID;
@@ -41,7 +41,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Module = null;
         
-        public BaseProperty()
+        public BasePropertyImpl()
         {
         }
         
@@ -59,20 +59,15 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_DataType_ObjectClass", "A_DataType")]
         public Kistl.App.Base.DataType ObjectClass
         {
             get
             {
-                EntityReference<Kistl.App.Base.DataType> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType>("Model.FK_BaseProperty_DataType_ObjectClass", "A_DataType");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ObjectClassImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.DataType> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType>("Model.FK_BaseProperty_DataType_ObjectClass", "A_DataType");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ObjectClassImpl = (Kistl.App.Base.DataTypeImpl)value;
             }
         }
         
@@ -89,6 +84,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_ObjectClass = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_DataType_ObjectClass", "A_DataType")]
+        public Kistl.App.Base.DataTypeImpl ObjectClassImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.DataTypeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeImpl>("Model.FK_BaseProperty_DataType_ObjectClass", "A_DataType");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.DataTypeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeImpl>("Model.FK_BaseProperty_DataType_ObjectClass", "A_DataType");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.DataTypeImpl)value;
             }
         }
         
@@ -129,20 +141,15 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_Module_Module", "A_Module")]
         public Kistl.App.Base.Module Module
         {
             get
             {
-                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_BaseProperty_Module_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ModuleImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_BaseProperty_Module_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ModuleImpl = (Kistl.App.Base.ModuleImpl)value;
             }
         }
         
@@ -159,6 +166,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_Module = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_Module_Module", "A_Module")]
+        public Kistl.App.Base.ModuleImpl ModuleImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.ModuleImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleImpl>("Model.FK_BaseProperty_Module_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.ModuleImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleImpl>("Model.FK_BaseProperty_Module_Module", "A_Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.ModuleImpl)value;
             }
         }
         

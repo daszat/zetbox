@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class DoubleParameter : Kistl.App.Base.BaseParameter
+    public class DoubleParameterImpl : Kistl.App.Base.BaseParameterImpl, DoubleParameter
     {
         
-        public DoubleParameter()
+        public DoubleParameterImpl()
         {
         }
         

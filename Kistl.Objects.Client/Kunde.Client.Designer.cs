@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class Kunde : BaseClientDataObject
+    public class KundeImpl : BaseClientDataObject, Kunde
     {
         
         private string _Kundenname;
@@ -37,11 +37,11 @@ namespace Kistl.App.Projekte
         
         private string _Land;
         
-        private ListPropertyCollection<System.String, Kunde, Kunde_EMailsCollectionEntry> _EMails;
+        private ListPropertyCollection<System.String, Kistl.App.Projekte.Kunde, Kunde_EMailsCollectionEntryImpl> _EMails;
         
-        public Kunde()
+        public KundeImpl()
         {
-            _EMails = new ListPropertyCollection<System.String, Kunde, Kunde_EMailsCollectionEntry>(this, "EMails");
+            _EMails = new ListPropertyCollection<System.String, Kistl.App.Projekte.Kunde, Kunde_EMailsCollectionEntryImpl>(this, "EMails");
         }
         
         public string Kundenname
@@ -170,12 +170,12 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Kunde)obj).Kundenname = this.Kundenname;
-            ((Kunde)obj).Adresse = this.Adresse;
-            ((Kunde)obj).PLZ = this.PLZ;
-            ((Kunde)obj).Ort = this.Ort;
-            ((Kunde)obj).Land = this.Land;
-            this._EMails.ApplyChanges(((Kunde)obj)._EMails);
+            ((KundeImpl)obj).Kundenname = this.Kundenname;
+            ((KundeImpl)obj).Adresse = this.Adresse;
+            ((KundeImpl)obj).PLZ = this.PLZ;
+            ((KundeImpl)obj).Ort = this.Ort;
+            ((KundeImpl)obj).Land = this.Land;
+            this._EMails.ApplyChanges(((KundeImpl)obj)._EMails);
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -207,7 +207,7 @@ namespace Kistl.App.Projekte
         }
     }
     
-    internal class Kunde_EMailsCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<System.String, Kunde>
+    public class Kunde_EMailsCollectionEntryImpl : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<System.String, Kistl.App.Projekte.Kunde>
     {
         
         private string _Value;
@@ -232,7 +232,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public Kunde Parent
+        public Kistl.App.Projekte.Kunde Parent
         {
             get
             {
@@ -274,8 +274,8 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
             base.ApplyChanges(obj);
-            ((Kunde_EMailsCollectionEntry)obj)._Value = this._Value;
-            ((Kunde_EMailsCollectionEntry)obj)._fk_Parent = this._fk_Parent;
+            ((Kunde_EMailsCollectionEntryImpl)obj)._Value = this._Value;
+            ((Kunde_EMailsCollectionEntryImpl)obj)._fk_Parent = this._fk_Parent;
         }
     }
 }

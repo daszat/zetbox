@@ -24,7 +24,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
-    public class TestObjClass : BaseClientDataObject, Kistl.App.Test.ITestInterface
+    public class TestObjClassImpl : BaseClientDataObject, TestObjClass, Kistl.App.Test.ITestInterface
     {
         
         private string _StringProp;
@@ -35,7 +35,7 @@ namespace Kistl.App.Test
         
         private System.Int32? _MyIntProperty;
         
-        public TestObjClass()
+        public TestObjClassImpl()
         {
         }
         
@@ -156,10 +156,10 @@ namespace Kistl.App.Test
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((TestObjClass)obj).StringProp = this.StringProp;
-            ((TestObjClass)obj).TestEnumProp = this.TestEnumProp;
-            ((TestObjClass)obj).fk_ObjectProp = this.fk_ObjectProp;
-            ((TestObjClass)obj).MyIntProperty = this.MyIntProperty;
+            ((TestObjClassImpl)obj).StringProp = this.StringProp;
+            ((TestObjClassImpl)obj).TestEnumProp = this.TestEnumProp;
+            ((TestObjClassImpl)obj).fk_ObjectProp = this.fk_ObjectProp;
+            ((TestObjClassImpl)obj).MyIntProperty = this.MyIntProperty;
         }
         
         public override void AttachToContext(IKistlContext ctx)

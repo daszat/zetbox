@@ -28,7 +28,7 @@ namespace Kistl.Client
 
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
-            Type type = obj.GetType();
+            Type type = obj.GetInterfaceType();
             return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
         }
 
@@ -47,13 +47,5 @@ namespace Kistl.Client
 
             return null;
         }
-
-        //public static Type GetDataCLRType(this DataType type)
-        //{
-        //    // TODO: remove this bad test-hack
-        //    string fullname = type.Module.Namespace + "." + type.ClassName;
-        //    string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects.Client";
-        //    return Type.GetType(fullname + ", " + assembly, true);
-        //}
     }
 }

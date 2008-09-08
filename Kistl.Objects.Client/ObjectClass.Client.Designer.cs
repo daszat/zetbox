@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class ObjectClass : Kistl.App.Base.DataType
+    public class ObjectClassImpl : Kistl.App.Base.DataTypeImpl, ObjectClass
     {
         
         private string _TableName;
@@ -33,13 +33,13 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.ObjectClass> _SubClasses;
         
-        private ListPropertyCollection<Kistl.App.Base.Interface, ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry> _ImplementsInterfaces;
+        private ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntryImpl> _ImplementsInterfaces;
         
         private bool _IsSimpleObject;
         
-        public ObjectClass()
+        public ObjectClassImpl()
         {
-            _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry>(this, "ImplementsInterfaces");
+            _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntryImpl>(this, "ImplementsInterfaces");
         }
         
         public string TableName
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.ObjectClass> SubClasses
+        public ICollection<Kistl.App.Base.ObjectClass> SubClasses
         {
             get
             {
@@ -174,11 +174,11 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((ObjectClass)obj).TableName = this.TableName;
-            ((ObjectClass)obj).fk_BaseObjectClass = this.fk_BaseObjectClass;
-            if(this._SubClasses != null) this._SubClasses.ApplyChanges(((ObjectClass)obj)._SubClasses); else ((ObjectClass)obj)._SubClasses = null; ((ObjectClass)obj).NotifyPropertyChanged("SubClasses");
-            this._ImplementsInterfaces.ApplyChanges(((ObjectClass)obj)._ImplementsInterfaces);
-            ((ObjectClass)obj).IsSimpleObject = this.IsSimpleObject;
+            ((ObjectClassImpl)obj).TableName = this.TableName;
+            ((ObjectClassImpl)obj).fk_BaseObjectClass = this.fk_BaseObjectClass;
+            if(this._SubClasses != null) this._SubClasses.ApplyChanges(((ObjectClassImpl)obj)._SubClasses); else ((ObjectClassImpl)obj)._SubClasses = null; ((ObjectClassImpl)obj).NotifyPropertyChanged("SubClasses");
+            this._ImplementsInterfaces.ApplyChanges(((ObjectClassImpl)obj)._ImplementsInterfaces);
+            ((ObjectClassImpl)obj).IsSimpleObject = this.IsSimpleObject;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -241,7 +241,7 @@ namespace Kistl.App.Base
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> e);
     }
     
-    internal class ObjectClass_ImplementsInterfacesCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.Interface, ObjectClass>
+    public class ObjectClass_ImplementsInterfacesCollectionEntryImpl : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass>
     {
         
         private int _fk_Value;
@@ -262,7 +262,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public ObjectClass Parent
+        public Kistl.App.Base.ObjectClass Parent
         {
             get
             {
@@ -320,8 +320,8 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
             base.ApplyChanges(obj);
-            ((ObjectClass_ImplementsInterfacesCollectionEntry)obj)._fk_Value = this.fk_Value;
-            ((ObjectClass_ImplementsInterfacesCollectionEntry)obj)._fk_Parent = this.fk_Parent;
+            ((ObjectClass_ImplementsInterfacesCollectionEntryImpl)obj)._fk_Value = this.fk_Value;
+            ((ObjectClass_ImplementsInterfacesCollectionEntryImpl)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

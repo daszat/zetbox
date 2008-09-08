@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Module : BaseClientDataObject
+    public class ModuleImpl : BaseClientDataObject, Module
     {
         
         private string _Namespace;
@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.Assembly> _Assemblies;
         
-        public Module()
+        public ModuleImpl()
         {
         }
         
@@ -74,7 +74,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.DataType> DataTypes
+        public ICollection<Kistl.App.Base.DataType> DataTypes
         {
             get
             {
@@ -94,7 +94,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.Assembly> Assemblies
+        public ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get
             {
@@ -146,10 +146,10 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Module)obj).Namespace = this.Namespace;
-            ((Module)obj).ModuleName = this.ModuleName;
-            if(this._DataTypes != null) this._DataTypes.ApplyChanges(((Module)obj)._DataTypes); else ((Module)obj)._DataTypes = null; ((Module)obj).NotifyPropertyChanged("DataTypes");
-            if(this._Assemblies != null) this._Assemblies.ApplyChanges(((Module)obj)._Assemblies); else ((Module)obj)._Assemblies = null; ((Module)obj).NotifyPropertyChanged("Assemblies");
+            ((ModuleImpl)obj).Namespace = this.Namespace;
+            ((ModuleImpl)obj).ModuleName = this.ModuleName;
+            if(this._DataTypes != null) this._DataTypes.ApplyChanges(((ModuleImpl)obj)._DataTypes); else ((ModuleImpl)obj)._DataTypes = null; ((ModuleImpl)obj).NotifyPropertyChanged("DataTypes");
+            if(this._Assemblies != null) this._Assemblies.ApplyChanges(((ModuleImpl)obj)._Assemblies); else ((ModuleImpl)obj)._Assemblies = null; ((ModuleImpl)obj).NotifyPropertyChanged("Assemblies");
         }
         
         public override void AttachToContext(IKistlContext ctx)

@@ -159,7 +159,7 @@ namespace Kistl.Client.WPF.Dialogs
             return classes;
         }
 
-        private static void AddSubclasses(List<Kistl.API.IDataObject> classes, IList<ObjectClass> subClasses)
+        private static void AddSubclasses(List<Kistl.API.IDataObject> classes, IEnumerable<ObjectClass> subClasses)
         {
             foreach (ObjectClass sc in subClasses)
             {

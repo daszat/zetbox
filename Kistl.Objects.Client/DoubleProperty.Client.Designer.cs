@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class DoubleProperty : Kistl.App.Base.ValueTypeProperty
+    public class DoublePropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, DoubleProperty
     {
         
-        public DoubleProperty()
+        public DoublePropertyImpl()
         {
         }
         

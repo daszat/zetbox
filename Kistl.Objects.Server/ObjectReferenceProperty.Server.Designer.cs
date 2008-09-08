@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass), "B_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassImpl), "B_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferencePropertyImpl))]
 
 namespace Kistl.App.Base
 {
@@ -27,30 +27,25 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectReferenceProperty")]
-    public class ObjectReferenceProperty : Kistl.App.Base.Property
+    public class ObjectReferencePropertyImpl : Kistl.App.Base.PropertyImpl, ObjectReferenceProperty
     {
         
         private System.Nullable<int> _fk_ReferenceObjectClass = null;
         
-        public ObjectReferenceProperty()
+        public ObjectReferencePropertyImpl()
         {
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass")]
         public Kistl.App.Base.ObjectClass ReferenceObjectClass
         {
             get
             {
-                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ReferenceObjectClassImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.ObjectClass> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ReferenceObjectClassImpl = (Kistl.App.Base.ObjectClassImpl)value;
             }
         }
         
@@ -67,6 +62,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_ReferenceObjectClass = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass")]
+        public Kistl.App.Base.ObjectClassImpl ReferenceObjectClassImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.ObjectClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassImpl>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.ObjectClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassImpl>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.ObjectClassImpl)value;
             }
         }
         

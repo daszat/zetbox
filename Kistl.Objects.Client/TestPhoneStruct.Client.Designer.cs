@@ -24,7 +24,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
-    public class TestPhoneStruct : BaseClientStructObject
+    public class TestPhoneStructImpl : BaseClientStructObject, TestPhoneStruct
     {
         
         private string _Number;

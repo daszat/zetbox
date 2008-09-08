@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Kunde), "B_Kunde_EMailsCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde_EMailsCollectionEntry))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.KundeImpl), "B_Kunde_EMailsCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde_EMailsCollectionEntryImpl))]
 
 namespace Kistl.App.Projekte
 {
@@ -27,7 +27,7 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kunde")]
-    public class Kunde : BaseServerDataObject
+    public class KundeImpl : BaseServerDataObject, Kunde
     {
         
         private int _ID;
@@ -42,7 +42,9 @@ namespace Kistl.App.Projekte
         
         private string _Land;
         
-        public Kunde()
+        private EntityCollectionEntryValueWrapper<Kistl.App.Projekte.Kunde, string, Kistl.App.Projekte.Kunde_EMailsCollectionEntryImpl> EMailsWrapper;
+        
+        public KundeImpl()
         {
         }
         
@@ -149,12 +151,21 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "B_Kunde_EMailsCollectionEntry")]
-        public EntityCollection<Kunde_EMailsCollectionEntry> EMails
+        public IList<System.String> EMails
         {
             get
             {
-                EntityCollection<Kunde_EMailsCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kunde_EMailsCollectionEntry>("Model.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "B_Kunde_EMailsCollectionEntry");
+                if (EMailsWrapper == null) EMailsWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.Projekte.Kunde, System.String, Kistl.App.Projekte.Kunde_EMailsCollectionEntryImpl>(this, EMailsImpl);
+                return EMailsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "B_Kunde_EMailsCollectionEntry")]
+        public EntityCollection<Kistl.App.Projekte.Kunde_EMailsCollectionEntryImpl> EMailsImpl
+        {
+            get
+            {
+                EntityCollection<Kunde_EMailsCollectionEntryImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kunde_EMailsCollectionEntryImpl>("Model.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "B_Kunde_EMailsCollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
@@ -204,7 +215,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToBinary(this._PLZ, sw);
             BinarySerializer.ToBinary(this._Ort, sw);
             BinarySerializer.ToBinary(this._Land, sw);
-            BinarySerializer.ToBinary(this.EMails, sw);
+            BinarySerializer.ToBinary(this.EMailsImpl, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -215,12 +226,12 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._PLZ, sr);
             BinarySerializer.FromBinary(out this._Ort, sr);
             BinarySerializer.FromBinary(out this._Land, sr);
-            BinarySerializer.FromBinaryCollectionEntries(this.EMails, sr);
+            BinarySerializer.FromBinaryCollectionEntries(this.EMailsImpl, sr);
         }
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kunde_EMailsCollectionEntry")]
-    public class Kunde_EMailsCollectionEntry : Kistl.API.Server.BaseServerCollectionEntry
+    public class Kunde_EMailsCollectionEntryImpl : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<System.String, Kistl.App.Projekte.Kunde>
     {
         
         private int _ID;
@@ -261,20 +272,15 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde")]
-        public Kunde Parent
+        public Kistl.App.Projekte.Kunde Parent
         {
             get
             {
-                EntityReference<Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kunde>("Model.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ParentImpl;
             }
             set
             {
-                EntityReference<Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kunde>("Model.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ParentImpl = (Kistl.App.Projekte.KundeImpl)value;
             }
         }
         
@@ -291,6 +297,23 @@ namespace Kistl.App.Projekte
             set
             {
                 _fk_Parent = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde")]
+        public Kistl.App.Projekte.KundeImpl ParentImpl
+        {
+            get
+            {
+                EntityReference<KundeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<KundeImpl>("Model.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<KundeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<KundeImpl>("Model.FK_Kunde_EMailsCollectionEntry_Kunde_fk_Parent", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (KundeImpl)value;
             }
         }
         

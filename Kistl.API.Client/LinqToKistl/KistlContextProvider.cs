@@ -91,7 +91,7 @@ namespace Kistl.API.Client
         {
             var list = _context.AttachedObjects.AsQueryable().OfType<T>()
                 .Where(o => o.ObjectState == DataObjectState.New);
-            if(_filter != null) list = list.AddFilter(_filter);
+            if(_filter != null) list = (IQueryable<T>)list.AddFilter(_filter);
             list.ForEach<T>(i => result.Add(i));
         }
 

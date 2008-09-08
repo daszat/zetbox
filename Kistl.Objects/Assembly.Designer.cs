@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.GUI
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
@@ -21,19 +21,27 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
-    using Kistl.API.Server;
     
     
-    public enum Toolkit
+    public interface Assembly : IDataObject
     {
         
-        /// WPF
-        WPF = 0,
+        Kistl.App.Base.Module Module
+        {
+            get;
+            set;
+        }
         
-        /// ASPNET
-        ASPNET = 1,
+        string AssemblyName
+        {
+            get;
+            set;
+        }
         
-        /// TEST
-        TEST = 2,
+        bool IsClientAssembly
+        {
+            get;
+            set;
+        }
     }
 }

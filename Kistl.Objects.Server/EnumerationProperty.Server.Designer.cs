@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Enumeration), "B_EnumerationProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationProperty))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.EnumerationImpl), "B_EnumerationProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationPropertyImpl))]
 
 namespace Kistl.App.Base
 {
@@ -27,30 +27,25 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="EnumerationProperty")]
-    public class EnumerationProperty : Kistl.App.Base.ValueTypeProperty
+    public class EnumerationPropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, EnumerationProperty
     {
         
         private System.Nullable<int> _fk_Enumeration = null;
         
-        public EnumerationProperty()
+        public EnumerationPropertyImpl()
         {
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration")]
         public Kistl.App.Base.Enumeration Enumeration
         {
             get
             {
-                EntityReference<Kistl.App.Base.Enumeration> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration>("Model.FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return EnumerationImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Enumeration> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration>("Model.FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                EnumerationImpl = (Kistl.App.Base.EnumerationImpl)value;
             }
         }
         
@@ -67,6 +62,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_Enumeration = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration")]
+        public Kistl.App.Base.EnumerationImpl EnumerationImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.EnumerationImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.EnumerationImpl>("Model.FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.EnumerationImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.EnumerationImpl>("Model.FK_EnumerationProperty_Enumeration_Enumeration", "A_Enumeration");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.EnumerationImpl)value;
             }
         }
         

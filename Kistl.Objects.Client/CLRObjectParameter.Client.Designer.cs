@@ -24,14 +24,14 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class CLRObjectParameter : Kistl.App.Base.BaseParameter
+    public class CLRObjectParameterImpl : Kistl.App.Base.BaseParameterImpl, CLRObjectParameter
     {
         
         private System.Nullable<int> _fk_Assembly = null;
         
         private string _FullTypeName;
         
-        public CLRObjectParameter()
+        public CLRObjectParameterImpl()
         {
         }
         
@@ -120,8 +120,8 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((CLRObjectParameter)obj).fk_Assembly = this.fk_Assembly;
-            ((CLRObjectParameter)obj).FullTypeName = this.FullTypeName;
+            ((CLRObjectParameterImpl)obj).fk_Assembly = this.fk_Assembly;
+            ((CLRObjectParameterImpl)obj).FullTypeName = this.FullTypeName;
         }
         
         public override void AttachToContext(IKistlContext ctx)

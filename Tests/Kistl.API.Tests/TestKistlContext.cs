@@ -69,7 +69,7 @@ namespace Kistl.API
             throw new NotImplementedException();
         }
 
-        public T Create<T>() where T : IDataObject, new()
+        public T Create<T>() where T : IDataObject
         {
             throw new NotImplementedException();
         }

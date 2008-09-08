@@ -40,9 +40,9 @@ namespace Kistl.Client.WPF.Converter
             else if (value is IDataObject)
             {
                 IDataObject obj = (IDataObject)value;
-                if (ClientHelper.ObjectClasses[obj.GetType()].DefaultIcon != null)
+                if (ClientHelper.ObjectClasses[obj.GetInterfaceType()].DefaultIcon != null)
                 {
-                    return GetIconPath(ClientHelper.ObjectClasses[obj.GetType()].DefaultIcon.IconFile);
+                    return GetIconPath(ClientHelper.ObjectClasses[obj.GetInterfaceType()].DefaultIcon.IconFile);
                 }
                 else
                 {

@@ -25,20 +25,31 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Enumeration")]
-    public class Enumeration : Kistl.App.Base.DataType
+    public class EnumerationImpl : Kistl.App.Base.DataTypeImpl, Enumeration
     {
         
-        public Enumeration()
+        private EntityCollectionWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntryImpl> EnumerationEntriesWrapper;
+        
+        public EnumerationImpl()
         {
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EnumerationEntry_Enumeration_Enumeration", "B_EnumerationEntry")]
-        public EntityCollection<Kistl.App.Base.EnumerationEntry> EnumerationEntries
+        public ICollection<Kistl.App.Base.EnumerationEntry> EnumerationEntries
         {
             get
             {
-                EntityCollection<Kistl.App.Base.EnumerationEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.EnumerationEntry>("Model.FK_EnumerationEntry_Enumeration_Enumeration", "B_EnumerationEntry");
+                if (EnumerationEntriesWrapper == null) EnumerationEntriesWrapper = new EntityCollectionWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntryImpl>(EnumerationEntriesImpl);
+                return EnumerationEntriesWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EnumerationEntry_Enumeration_Enumeration", "B_EnumerationEntry")]
+        public EntityCollection<Kistl.App.Base.EnumerationEntryImpl> EnumerationEntriesImpl
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.EnumerationEntryImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.EnumerationEntryImpl>("Model.FK_EnumerationEntry_Enumeration_Enumeration", "B_EnumerationEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }

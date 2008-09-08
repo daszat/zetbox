@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class DateTimeProperty : Kistl.App.Base.ValueTypeProperty
+    public class DateTimePropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, DateTimeProperty
     {
         
-        public DateTimeProperty()
+        public DateTimePropertyImpl()
         {
         }
         

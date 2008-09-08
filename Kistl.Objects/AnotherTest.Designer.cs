@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.GUI
+namespace Kistl.App.Test
 {
     using System;
     using System.Collections.Generic;
@@ -21,19 +21,9 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
-    using Kistl.API.Client;
     
     
-    public enum Toolkit
+    public interface AnotherTest : IDataObject
     {
-        
-        /// WPF
-        WPF = 0,
-        
-        /// ASPNET
-        ASPNET = 1,
-        
-        /// TEST
-        TEST = 2,
     }
 }

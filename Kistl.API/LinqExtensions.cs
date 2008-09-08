@@ -48,6 +48,30 @@ namespace Kistl.API
         /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
         /// <param name="filter">Expression Tree</param>
         /// <returns>IQueryable with this Filter</returns>
+        public static IQueryable AddFilter(this IQueryable queryable, Expression filter)
+        {
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (filter == null) throw new ArgumentNullException("filter");
+
+            List<IllegalExpression> illegal;
+            if (!filter.IsLegal(out illegal))
+            {
+                throw new System.Security.SecurityException("Illegal LINQ Expression found in filter\n" +
+                    string.Join("\n", illegal.Select(i => i.ToString()).ToArray()));
+            }
+
+            return queryable.Provider.CreateQuery(
+                Expression.Call(typeof(Queryable), "Where",
+                new Type[] { queryable.ElementType }, queryable.Expression, filter));
+        }
+
+        /// <summary>
+        /// Appends a Expression Tree to a Linq Expression
+        /// </summary>
+        /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
+        /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
+        /// <param name="filter">Expression Tree</param>
+        /// <returns>IQueryable with this Filter</returns>
         public static IQueryable<T> AddFilter<T>(this IQueryable<T> queryable, Expression filter)
         {
             if (queryable == null) throw new ArgumentNullException("queryable");
@@ -76,6 +100,17 @@ namespace Kistl.API
                 Expression.Call(typeof(Queryable), "Select",
                     new Type[] { sourceType, resultType }, queryable.Expression, selector));
         }
+
+        public static IQueryable AddOfType(this IQueryable queryable, Type t)
+        {
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (t == null) throw new ArgumentNullException("t");
+
+            return queryable.Provider.CreateQuery(
+                Expression.Call(typeof(Queryable), "OfType",
+                new Type[] { t }, queryable.Expression));
+        }
+
 
         /// <summary>
         /// Appends a Expression Tree Order By to a Linq Expression

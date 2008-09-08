@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="DateTimeProperty")]
-    public class DateTimeProperty : Kistl.App.Base.ValueTypeProperty
+    public class DateTimePropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, DateTimeProperty
     {
         
-        public DateTimeProperty()
+        public DateTimePropertyImpl()
         {
         }
         

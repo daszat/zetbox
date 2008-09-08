@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators
         {
             public Kistl.API.IKistlContext ctx { get; set; }
 
-            public ClientServerEnum clientServer { get; set; }
+            public TaskEnum task { get; set; }
             public CodeCompileUnit code { get; set; }
             public CodeNamespace code_namespace { get; set; }
             public CodeTypeDeclaration code_class { get; set; }
@@ -38,7 +38,7 @@ namespace Kistl.Server.Generators
             {
                 result.ctx = this.ctx;
 
-                result.clientServer = this.clientServer;
+                result.task = this.task;
                 result.code = this.code;
                 result.code_namespace = this.code_namespace;
                 result.code_class = this.code_class;
@@ -137,39 +137,44 @@ namespace Kistl.Server.Generators
 
             foreach (ObjectClass objClass in objClassList)
             {
-                GenerateObjectsInternal(new CurrentObjectClass() { ctx = ctx, clientServer = ClientServerEnum.Client, objClass = objClass });
-                GenerateObjectsInternal(new CurrentObjectClass() { ctx = ctx, clientServer = ClientServerEnum.Server, objClass = objClass });
+                GenerateObjectInterfacesInternal(new CurrentObjectClass() { ctx = ctx, task = TaskEnum.Interface, objClass = objClass });
+                GenerateObjectsInternal(new CurrentObjectClass() { ctx = ctx, task = TaskEnum.Client, objClass = objClass });
+                GenerateObjectsInternal(new CurrentObjectClass() { ctx = ctx, task = TaskEnum.Server, objClass = objClass });
             }
 
-            GenerateObjectSerializer(ClientServerEnum.Server, objClassList);
-            GenerateObjectSerializer(ClientServerEnum.Client, objClassList);
+            GenerateObjectSerializer(TaskEnum.Server, objClassList);
+            GenerateObjectSerializer(TaskEnum.Client, objClassList);
 
             var interfaceList = Generator.GetInterfaceList(ctx);
 
             foreach (Interface i in interfaceList)
             {
-                GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, clientServer = ClientServerEnum.Client, @interface = i });
-                GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, clientServer = ClientServerEnum.Server, @interface = i });
+                GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, task = TaskEnum.Interface, @interface = i });
+                //GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, task = TaskEnum.Client, @interface = i });
+                //GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, task = TaskEnum.Server, @interface = i });
             }
 
             var enumList = Generator.GetEnumList(ctx);
 
             foreach (Enumeration e in enumList)
             {
-                GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, clientServer = ClientServerEnum.Client, enumeration = e });
-                GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, clientServer = ClientServerEnum.Server, enumeration = e });
+                GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, task = TaskEnum.Interface, enumeration = e });
+                //GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, task = TaskEnum.Client, enumeration = e });
+                //GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, task = TaskEnum.Server, enumeration = e });
             }
 
             var structList = Generator.GetStructList(ctx);
 
             foreach (Struct s in structList)
             {
-                GenerateStructsInternal(new CurrentStruct() { ctx = ctx, clientServer = ClientServerEnum.Client, @struct = s });
-                GenerateStructsInternal(new CurrentStruct() { ctx = ctx, clientServer = ClientServerEnum.Server, @struct = s });
+                GenerateStructInterfacesInternal(new CurrentStruct() { ctx = ctx, task = TaskEnum.Interface, @struct = s });
+                GenerateStructsInternal(new CurrentStruct() { ctx = ctx, task = TaskEnum.Client, @struct = s });
+                GenerateStructsInternal(new CurrentStruct() { ctx = ctx, task = TaskEnum.Server, @struct = s });
             }
 
-            GenerateAssemblyInfo(ClientServerEnum.Server);
-            GenerateAssemblyInfo(ClientServerEnum.Client);
+            GenerateAssemblyInfo(TaskEnum.Interface);
+            GenerateAssemblyInfo(TaskEnum.Server);
+            GenerateAssemblyInfo(TaskEnum.Client);
         }
         #endregion
 
@@ -221,9 +226,9 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateAssemblyInfo
-        protected virtual void GenerateAssemblyInfo(CodeCompileUnit code, ClientServerEnum clientServer)
+        protected virtual void GenerateAssemblyInfo(CodeCompileUnit code, TaskEnum task)
         {
-            code.AddAttribute(typeof(System.Reflection.AssemblyTitleAttribute), string.Format("Kistl.Objects.{0}", clientServer));
+            code.AddAttribute(typeof(System.Reflection.AssemblyTitleAttribute), task.GetKistObjectsName());
             code.AddAttribute(typeof(System.Reflection.AssemblyCompanyAttribute), "dasz.at");
             code.AddAttribute(typeof(System.Reflection.AssemblyProductAttribute), "Kistl");
             code.AddAttribute(typeof(System.Reflection.AssemblyCopyrightAttribute), "Copyright © dasz.at 2008");
@@ -233,19 +238,19 @@ namespace Kistl.Server.Generators
             code.AddAttribute(typeof(CLSCompliantAttribute), true);
         }
 
-        private void GenerateAssemblyInfo(ClientServerEnum clientServer)
+        private void GenerateAssemblyInfo(TaskEnum task)
         {
             CodeCompileUnit code = new CodeCompileUnit();
 
-            GenerateAssemblyInfo(code, clientServer);
+            GenerateAssemblyInfo(code, task);
 
             // Generate the code & save
-            SaveFile(code, string.Format(@"Kistl.Objects.{0}\AssemblyInfo.cs", clientServer));
+            SaveFile(code, string.Format(@"{0}\AssemblyInfo.cs", task.GetKistObjectsName()));
         }
         #endregion
 
         #region GenerateObjectSerializer
-        protected virtual void GenerateObjectSerializer(ClientServerEnum clientServer, IQueryable<ObjectClass> objClassList)
+        protected virtual void GenerateObjectSerializer(TaskEnum clientServer, IQueryable<ObjectClass> objClassList)
         {
             CodeCompileUnit code = new CodeCompileUnit();
 
@@ -298,7 +303,41 @@ namespace Kistl.Server.Generators
             }
 
             // Generate the code & save
-            SaveFile(code, string.Format(@"Kistl.Objects.{0}\ObjectSerializer.cs", clientServer));
+            SaveFile(code, string.Format(@"{0}\ObjectSerializer.cs", clientServer.GetKistObjectsName()));
+        }
+        #endregion
+
+        #region GenerateObjectInterfacesInternal
+        protected virtual void GenerateObjectInterfaces(CurrentObjectClass current)
+        {
+        }
+
+        private void GenerateObjectInterfacesInternal(CurrentObjectClass current)
+        {
+            current.code = new CodeCompileUnit();
+            // Create Namespace
+            current.code_namespace = CreateNamespace(current.code, current.objClass.Module.Namespace);
+            current.code_namespace.Imports.Add(new CodeNamespaceImport("Kistl.API"));
+
+            // Create Class
+            current.code_class = current.code_namespace.CreateInterface(current.objClass.ClassName,
+                current.objClass.BaseObjectClass != null
+                    ? current.objClass.BaseObjectClass.Module.Namespace + "." + current.objClass.BaseObjectClass.ClassName
+                    : "IDataObject");
+
+            foreach (Interface i in current.objClass.ImplementsInterfaces)
+            {
+                current.code_class.BaseTypes.Add(i.Module.Namespace + "." + i.ClassName);
+            }
+
+            // Properties
+            GenerateInterfaceProperties((CurrentObjectClass)current.Clone(), current.objClass.Properties);
+
+            // Methods
+            GenerateInferfaceMethods((CurrentObjectClass)current.Clone(), current.objClass.Methods);
+
+            // Generate the code & save
+            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.objClass.ClassName + ".Designer.cs");
         }
         #endregion
 
@@ -313,15 +352,19 @@ namespace Kistl.Server.Generators
 
             // Create Namespace
             current.code_namespace = CreateNamespace(current.code, current.objClass.Module.Namespace);
-            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.clientServer)));
+            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
 
             // Create Class
-            current.code_class = current.code_namespace.CreateClass(current.objClass.ClassName,
+            current.code_class = current.code_namespace.CreateClass(current.objClass.ClassName + "Impl",
                 current.objClass.BaseObjectClass != null
-                    ? current.objClass.BaseObjectClass.Module.Namespace + "." + current.objClass.BaseObjectClass.ClassName
-                    : string.Format("Base{0}DataObject", current.clientServer));
+                    ? current.objClass.BaseObjectClass.Module.Namespace + "." + current.objClass.BaseObjectClass.ClassName + "Impl"
+                    : string.Format("Base{0}DataObject", current.task));
 
-            foreach (Interface i in current.objClass.ImplementsInterfaces.Select(i => i.Value))
+            // Related Interface
+            current.code_class.BaseTypes.Add(current.objClass.ClassName);
+
+            // Implementing Interfaces
+            foreach (Interface i in current.objClass.ImplementsInterfaces)
             {
                 current.code_class.BaseTypes.Add(i.Module.Namespace + "." + i.ClassName);
             }
@@ -350,11 +393,57 @@ namespace Kistl.Server.Generators
             GenerateStreamMethodsInternal((CurrentObjectClass)current.Clone(), current.objClass.Properties);
 
             // Generate the code & save
-            SaveFile(current.code, "Kistl.Objects." + current.clientServer + @"\" + current.objClass.ClassName + "." + current.clientServer + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.objClass.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
         #region GenerateInterfaces
+
+        #region GenerateInterfaceProperties/Methods
+        private void GenerateInterfaceProperties(CurrentBase current, IEnumerable<BaseProperty> properties)
+        {
+            foreach (BaseProperty p in properties)
+            {
+                if (p is BackReferenceProperty)
+                {
+                    CodeTypeReference type = new CodeTypeReference("ICollection", p.ToCodeTypeReference(current.task));
+                    current.code_class.CreateProperty(type, p.PropertyName, false);
+                }
+                else if (p.IsListProperty())
+                {
+                    CodeTypeReference type = new CodeTypeReference("IList", p.ToCodeTypeReference(current.task));
+                    current.code_class.CreateProperty(type, p.PropertyName, false);
+                }
+                else
+                {
+                    current.code_class.CreateProperty(p.ToCodeTypeReference(current.task), p.PropertyName);
+                }
+            }
+        }
+
+        private void GenerateInferfaceMethods(CurrentBase current, IEnumerable<Method> methods)
+        {
+            foreach (Method method in methods)
+            {
+                // TODO: I dont know if there's another way
+                // Default Methods, do not generate
+                if (method.IsDefaultMethod())
+                {
+                    continue;
+                }
+
+                BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
+                CodeMemberMethod m = current.code_class.CreateMethod(method.MethodName, returnParam.ToCodeTypeReference());
+
+                foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
+                {
+                    m.Parameters.Add(new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
+                }
+            }
+        }
+        #endregion
+
         protected virtual void GenerateInterfaces(CurrentInterface current)
         {
         }
@@ -365,35 +454,47 @@ namespace Kistl.Server.Generators
 
             // Create Namespace
             current.code_namespace = CreateNamespace(current.code, current.@interface.Module.Namespace);
-            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.clientServer)));
 
             // Create Class
             current.code_class = current.code_namespace.CreateInterface(current.@interface.ClassName);
 
             // Properties
-            foreach (BaseProperty p in current.@interface.Properties)
-            {
-                current.code_class.CreateProperty(p.ToCodeTypeReference(current.clientServer), p.PropertyName);
-            }
+            GenerateInterfaceProperties((CurrentInterface)current.Clone(), current.@interface.Properties);
 
             // Methods
-            foreach (Method method in current.@interface.Methods)
-            {
-                BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
-                CodeMemberMethod m = current.code_class.CreateMethod(method.MethodName, returnParam.ToCodeTypeReference());
-
-                foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
-                {
-                    m.Parameters.Add(new CodeParameterDeclarationExpression(
-                        new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
-                }
-            }
+            GenerateInferfaceMethods((CurrentInterface)current.Clone(), current.@interface.Methods);
 
             GenerateInterfaces(current);
 
             // Generate the code & save
-            SaveFile(current.code, "Kistl.Objects." + current.clientServer + @"\" + current.@interface.ClassName + "." + current.clientServer + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.@interface.ClassName + "." + current.task + ".Designer.cs");
         }
+        #endregion
+
+        #region GenerateStructInterfacesInternal
+        protected virtual void GenerateStructInterfaces(CurrentStruct current)
+        {
+        }
+
+        private void GenerateStructInterfacesInternal(CurrentStruct current)
+        {
+            current.code = new CodeCompileUnit();
+
+            // Create Namespace
+            current.code_namespace = CreateNamespace(current.code, current.@struct.Module.Namespace);
+
+            // Create Struct class
+            current.code_class = current.code_namespace.CreateInterface(current.@struct.ClassName, "IStruct");
+
+            // Create Properties
+             GenerateInterfaceProperties((CurrentStruct)current.Clone(), current.@struct.Properties);
+
+            // Call derived Classes
+            GenerateStructInterfaces(current);
+
+            // Generate the code & save
+            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
+        }        
         #endregion
 
         #region GenerateStructs
@@ -407,10 +508,13 @@ namespace Kistl.Server.Generators
 
             // Create Namespace
             current.code_namespace = CreateNamespace(current.code, current.@struct.Module.Namespace);
-            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.clientServer)));
+            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
 
             // Create Struct class
-            current.code_class = current.code_namespace.CreateClass(current.@struct.ClassName, string.Format("Base{0}StructObject", current.clientServer));
+            current.code_class = current.code_namespace.CreateClass(current.@struct.ClassName + "Impl", string.Format("Base{0}StructObject", current.task));
+
+            // Related Interface
+            current.code_class.BaseTypes.Add(current.@struct.ClassName);
 
             // Create Properties
             GeneratePropertiesInternal((CurrentStruct)current.Clone());
@@ -422,7 +526,7 @@ namespace Kistl.Server.Generators
             GenerateStructs(current);
 
             // Generate the code & save
-            SaveFile(current.code, "Kistl.Objects." + current.clientServer + @"\" + current.@struct.ClassName + "." + current.clientServer + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -437,7 +541,10 @@ namespace Kistl.Server.Generators
 
             // Create Namespace
             current.code_namespace = CreateNamespace(current.code, current.enumeration.Module.Namespace);
-            current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.clientServer)));
+            if (current.task != TaskEnum.Interface)
+            {
+                current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
+            }
 
             // Create Class
             current.code_class = current.code_namespace.CreateEnum(current.enumeration.ClassName);
@@ -451,7 +558,7 @@ namespace Kistl.Server.Generators
             GenerateEnumerations(current);
 
             // Generate the code & save
-            SaveFile(current.code, "Kistl.Objects." + current.clientServer + @"\" + current.enumeration.ClassName + "." + current.clientServer + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.enumeration.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -463,7 +570,7 @@ namespace Kistl.Server.Generators
         private void GenerateDefaultProperty_IDInternal(CurrentObjectClass current)
         {
             // Client does not need such a stupid thing
-            if (current.clientServer == ClientServerEnum.Server)
+            if (current.task == TaskEnum.Server)
             {
                 // Create _Server_ ID member
                 current.code_field = current.code_class.CreateField(typeof(int), "_ID");
@@ -492,8 +599,8 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_ValueTypePropertyInternal(CurrentBase current)
         {
-            current.code_field = current.property.CreateField(current.code_class, current.clientServer);
-            current.code_property = current.property.CreateNotifyingProperty(current.code_class, current.clientServer);
+            current.code_field = current.property.CreateField(current.code_class, current.task);
+            current.code_property = current.property.CreateNotifyingProperty(current.code_class, current.task);
 
             GenerateProperties_ValueTypeProperty(current);
         }
@@ -509,13 +616,13 @@ namespace Kistl.Server.Generators
         {
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
-            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname,
-                string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.clientServer));
-            if (current.clientServer == ClientServerEnum.Client)
+            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + "Impl",
+                string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
+            if (current.task != TaskEnum.Interface)
             {
                 collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
-                    current.property.GetPropertyTypeString(), current.code_class.Name));
-                collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
+                    current.property.GetPropertyTypeString(), current.objClass.GetTypeMoniker().NameDataObject));
+                // collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
             }
 
             // Create ID
@@ -523,18 +630,18 @@ namespace Kistl.Server.Generators
 
             // Create Property
             collectionClass.code_field = collectionClass.code_class.CreateField(
-                current.property.ToCodeTypeReference(current.clientServer), "_Value");
+                current.property.ToCodeTypeReference(current.task), "_Value");
 
             collectionClass.code_property = collectionClass.code_class.CreateNotifyingProperty(
-                current.property.ToCodeTypeReference(current.clientServer),
+                current.property.ToCodeTypeReference(current.task),
                 "Value", "_Value", "_Value", "Value");
 
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
-            parent.code_property = collectionClass.code_class.CreateProperty(current.code_class.Name, "Parent");
+            parent.code_property = collectionClass.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject, "Parent");
             parent.code_property.AddAttribute("XmlIgnore");
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 parent.code_property.GetStatements.AddStatement(
                         string.Format(@"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName));
@@ -549,7 +656,7 @@ namespace Kistl.Server.Generators
             serializerParent.code_field = collectionClass.code_class.CreateField(typeof(int), "_fk_Parent");
             serializerParent.code_property = collectionClass.code_class.CreateProperty(typeof(int), "fk_Parent");
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 serializerParent.code_property.GetStatements.AddStatement(@"return _fk_Parent");
                 serializerParent.code_property.SetStatements.AddStatement("_fk_Parent = value");
@@ -557,24 +664,23 @@ namespace Kistl.Server.Generators
 
             // Create NavigationProperty Class -> Collectionclass
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
+            current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
-
                 current.code_property.GetStatements.AddStatement(@"return _{0}", current.property.PropertyName);
 
                 current.code_field = current.code_class.CreateField(
                     string.Format("ListPropertyCollection<{0}, {1}, {2}>",
                         current.property.GetPropertyTypeString(),
-                        current.code_class.Name,
+                        current.objClass.GetTypeMoniker().NameDataObject,
                         collectionClass.code_class.Name),
                     string.Format(@"_{0}", current.property.PropertyName));
 
                 current.code_constructor.Statements.AddStatement(@"_{0} = new ListPropertyCollection<{1}, {2}, {3}>(this, ""{0}"")",
                         current.property.PropertyName,
                         current.property.GetPropertyTypeString(),
-                        current.code_class.Name,
+                        current.objClass.GetTypeMoniker().NameDataObject,
                         collectionClass.code_class.Name);
             }
 
@@ -602,7 +708,7 @@ namespace Kistl.Server.Generators
             m.Statements.AddStatement("BinarySerializer.FromBinary(out this._Value, sr)");
             m.Statements.AddStatement("BinarySerializer.FromBinary(out this._fk_Parent, sr)");
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 m = current.code_class.CreateOverrideMethod("ApplyChanges", typeof(void));
                 m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
@@ -628,10 +734,10 @@ namespace Kistl.Server.Generators
                 throw new ArgumentOutOfRangeException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
                     current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
 
-            current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.clientServer), current.property.PropertyName);
+            current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
             current.code_property.AddAttribute("XmlIgnore");
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 current.code_property.GetStatements.AddStatement(@"if (fk_{1} == null) return null;
                 return Context.Find<{0}>(fk_{1}.Value)", current.property.GetPropertyTypeString(), current.property.PropertyName);
@@ -646,7 +752,7 @@ namespace Kistl.Server.Generators
             string fieldName = "_fk_" + current.property.PropertyName;
             serializer.code_field = current.code_class.CreateField(typeof(int?), fieldName, "null");
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 serializer.code_property = current.code_class.CreateNotifyingProperty(typeof(int?), "fk_" + current.property.PropertyName,
                     fieldName, fieldName, current.property.PropertyName);
@@ -679,13 +785,13 @@ namespace Kistl.Server.Generators
 
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
-            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname,
-                string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.clientServer));
-            if (current.clientServer == ClientServerEnum.Client)
+            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + "Impl",
+                string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
+            if (current.task != TaskEnum.Interface)
             {
                 collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
-                    current.property.GetPropertyTypeString(), current.code_class.Name));
-                collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
+                    current.property.GetPropertyTypeString(), current.objClass.GetTypeMoniker().NameDataObject));
+                // collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
             }
 
             // Create ID
@@ -693,12 +799,12 @@ namespace Kistl.Server.Generators
 
             // Create Value
             collectionClass.code_property = collectionClass.code_class.CreateProperty(
-                collectionClass.property.ToCodeTypeReference(collectionClass.clientServer), "Value");
+                collectionClass.property.ToCodeTypeReference(collectionClass.task), "Value");
             collectionClass.code_property.AddAttribute("XmlIgnore");
 
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
-            parent.code_property = collectionClass.code_class.CreateProperty(current.code_class.Name, "Parent");
+            parent.code_property = collectionClass.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject, "Parent");
             parent.code_property.AddAttribute("XmlIgnore");
 
             // Create SerializerValue
@@ -717,29 +823,28 @@ namespace Kistl.Server.Generators
 
             // Create NavigationProperty Class -> Collectionclass
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
+            current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
-                current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
-
                 current.code_property.GetStatements.AddStatement(@"return _{0}", current.property.PropertyName);
 
                 current.code_field = current.code_class.CreateField(
                     string.Format("ListPropertyCollection<{0}, {1}, {2}>",
                         current.property.GetPropertyTypeString(),
-                        current.code_class.Name,
+                        current.objClass.GetTypeMoniker().NameDataObject,
                         collectionClass.code_class.Name),
                     string.Format(@"_{0}", current.property.PropertyName));
 
                 current.code_constructor.Statements.AddStatement(@"_{0} = new ListPropertyCollection<{1}, {2}, {3}>(this, ""{0}"")",
                         current.property.PropertyName,
                         current.property.GetPropertyTypeString(),
-                        current.code_class.Name,
+                        current.objClass.GetTypeMoniker().NameDataObject,
                         collectionClass.code_class.Name);
             }
 
             // Get/Set for client
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 collectionClass.code_property.GetStatements.AddStatement(
                     @"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", 
@@ -786,7 +891,7 @@ namespace Kistl.Server.Generators
             m.Statements.AddStatement("BinarySerializer.FromBinary(out this._fk_Value, sr)");
             m.Statements.AddStatement("BinarySerializer.FromBinary(out this._fk_Parent, sr)");
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 m = current.code_class.CreateOverrideMethod("ApplyChanges", typeof(void));
                 m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.ICollectionEntry)), "obj"));
@@ -816,11 +921,11 @@ namespace Kistl.Server.Generators
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
             current.code_property.AddAttribute("XmlIgnore");
 
-            if (current.clientServer == ClientServerEnum.Client)
-            {
-                TypeMoniker childType = new TypeMoniker(current.property.GetPropertyTypeString());
-                current.code_property.Type = new CodeTypeReference("IList", new CodeTypeReference(childType.NameDataObject));
+            TypeMoniker childType = new TypeMoniker(current.property.GetPropertyTypeString());
+            current.code_property.Type = new CodeTypeReference("ICollection", new CodeTypeReference(childType.NameDataObject));
 
+            if (current.task == TaskEnum.Client)
+            {
                 current.code_property.GetStatements.AddStatement(
               @"if (_{0} == null)
                 {{
@@ -856,13 +961,18 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_StructPropertyInternal(CurrentObjectClass current)
         {
-            current.code_field = current.property.CreateField(current.code_class, current.clientServer);
-            current.code_property = current.property.CreateNotifyingProperty(current.code_class, current.clientServer);
+            current.code_field = current.code_class.CreateField(current.property.GetPropertyTypeString() + "Impl", "_" + current.property.PropertyName + "Impl");
+            current.code_property = current.code_class.CreateNotifyingProperty(current.property.GetPropertyTypeString() + "Impl", current.property.PropertyName + "Impl");
 
-            current.code_property.GetStatements.Clear();
-            current.code_property.GetStatements.AddStatement(
-                "return _{0} != null ? ({1})_{0}.Clone() : new {1}()", 
-                current.property.PropertyName, current.property.GetPropertyTypeString());
+            CurrentObjectClass ormProperty = (CurrentObjectClass)current.Clone();
+            ormProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString(), current.property.PropertyName);
+            ormProperty.code_property.GetStatements.AddStatement("return {0}Impl", current.property.PropertyName);
+            ormProperty.code_property.SetStatements.AddStatement("{0}Impl = ({1}Impl)value", current.property.PropertyName, current.property.GetPropertyTypeString());
+
+            //current.code_property.GetStatements.Clear();
+            //current.code_property.GetStatements.AddStatement(
+            //    "return _{0} != null ? ({1})_{0}.Clone() : new {1}()", 
+            //    current.property.PropertyName, current.property.GetPropertyTypeString());
 
             GenerateProperties_StructProperty(current);
         }
@@ -993,7 +1103,7 @@ namespace Kistl.Server.Generators
             m.Statements.AddStatement(@"base.NotifyPostSave();
             if (OnPostSave_{0} != null) OnPostSave_{0}(this)", current.objClass.ClassName);
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 // Create ApplyChanges Method
                 m = new CodeMemberMethod();
@@ -1010,23 +1120,23 @@ namespace Kistl.Server.Generators
 
                     if (p.IsValueTypePropertySingle())
                     {
-                        stmt = string.Format("(({1})obj).{0} = this.{0}", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("(({1}Impl)obj).{0} = this.{0}", p.PropertyName, current.objClass.ClassName);
                     }
                     else if (p.IsValueTypePropertyList())
                     {
-                        stmt = string.Format("this._{0}.ApplyChanges((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("this._{0}.ApplyChanges((({1}Impl)obj)._{0})", p.PropertyName, current.objClass.ClassName);
                     }
                     else if (p.IsObjectReferencePropertySingle())
                     {
-                        stmt = string.Format("(({1})obj).fk_{0} = this.fk_{0}", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("(({1}Impl)obj).fk_{0} = this.fk_{0}", p.PropertyName, current.objClass.ClassName);
                     }
                     else if (p.IsObjectReferencePropertyList())
                     {
-                        stmt = string.Format("this._{0}.ApplyChanges((({1})obj)._{0})", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("this._{0}.ApplyChanges((({1}Impl)obj)._{0})", p.PropertyName, current.objClass.ClassName);
                     }
                     else if (p is BackReferenceProperty)
                     {
-                        stmt = string.Format("if(this._{0} != null) this._{0}.ApplyChanges((({1})obj)._{0}); else (({1})obj)._{0} = null; (({1})obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("if(this._{0} != null) this._{0}.ApplyChanges((({1}Impl)obj)._{0}); else (({1}Impl)obj)._{0} = null; (({1}Impl)obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, current.objClass.ClassName);
                     }
 
                     if (!string.IsNullOrEmpty(stmt))
@@ -1042,7 +1152,7 @@ namespace Kistl.Server.Generators
 
             m.Statements.AddStatement("base.AttachToContext(ctx)");
 
-            if (current.clientServer == ClientServerEnum.Client)
+            if (current.task == TaskEnum.Client)
             {
                 foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
                 {
@@ -1078,13 +1188,9 @@ namespace Kistl.Server.Generators
                 {
                     // TODO: I dont know if there's another way
                     // Default Methods, do not generate
-                    if (method.Module.ModuleName == "KistlBase")
+                    if (method.IsDefaultMethod())
                     {
-                        if (method.MethodName == "ToString"
-                            || method.MethodName == "PreSave"
-                            || method.MethodName == "PostSave"
-                        )
-                            continue;
+                        continue;
                     }
 
                     BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
@@ -1209,14 +1315,14 @@ namespace Kistl.Server.Generators
                 }
                 else if (p.IsValueTypePropertyList())
                 {
-                    if (current.clientServer == ClientServerEnum.Client)
+                    if (current.task == TaskEnum.Client)
                         m.Statements.AddStatement("this._{0}.ToStream(sw)", p.PropertyName);
                     else
-                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName);
+                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}Impl, sw)", p.PropertyName);
                 }
                 else if (p.IsStructPropertySingle())
                 {
-                    m.Statements.AddStatement("BinarySerializer.ToBinary(this._{0}, sw)", p.PropertyName);
+                    m.Statements.AddStatement("BinarySerializer.ToBinary(this._{0}Impl, sw)", p.PropertyName);
                 }
                 else if (p.IsObjectReferencePropertySingle())
                 {
@@ -1224,13 +1330,13 @@ namespace Kistl.Server.Generators
                 }
                 else if (p.IsObjectReferencePropertyList())
                 {
-                    if (current.clientServer == ClientServerEnum.Client)
+                    if (current.task == TaskEnum.Client)
                         m.Statements.AddStatement("this._{0}.ToStream(sw)", p.PropertyName);
                     else
-                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}, sw)", p.PropertyName);
+                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}Impl, sw)", p.PropertyName);
                 }
                 else if (p is BackReferenceProperty
-                    && current.clientServer == ClientServerEnum.Server
+                    && current.task == TaskEnum.Server
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
                     m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}.Cast<IDataObject>(), sw)", p.PropertyName);
@@ -1249,15 +1355,15 @@ namespace Kistl.Server.Generators
             {
                 if (p.IsListProperty())
                 {
-                    if (current.clientServer == ClientServerEnum.Client)
+                    if (current.task == TaskEnum.Client)
                         m.Statements.AddStatement("this._{0}.FromStream(sr)", p.PropertyName);
                     else
-                        m.Statements.AddStatement("BinarySerializer.FromBinaryCollectionEntries(this.{0}, sr)", p.PropertyName);
+                        m.Statements.AddStatement("BinarySerializer.FromBinaryCollectionEntries(this.{0}Impl, sr)", p.PropertyName);
                 }
                 else if (p is EnumerationProperty)
                 {
                     m.Statements.AddStatement("int{2} tmp{0}; BinarySerializer.FromBinary(out tmp{0}, sr); _{0} = ({1})tmp{0}",
-                        p.PropertyName, p.ToCodeTypeReference(current.clientServer).BaseType, ((Property)p).IsNullable ? "?" : "");
+                        p.PropertyName, p.ToCodeTypeReference(current.task).BaseType, ((Property)p).IsNullable ? "?" : "");
                 }
                 else if (p is ValueTypeProperty)
                 {
@@ -1265,14 +1371,14 @@ namespace Kistl.Server.Generators
                 }
                 else if (p.IsStructPropertySingle())
                 {
-                    m.Statements.AddStatement("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName);
+                    m.Statements.AddStatement("BinarySerializer.FromBinary(out this._{0}Impl, sr)", p.PropertyName);
                 }
                 else if (p is ObjectReferenceProperty)
                 {
                     m.Statements.AddStatement("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName);
                 }
                 else if (p is BackReferenceProperty
-                    && current.clientServer == ClientServerEnum.Client
+                    && current.task == TaskEnum.Client
                     && ((BackReferenceProperty)p).PreFetchToClient)
                 {
                     m.Statements.AddStatement(

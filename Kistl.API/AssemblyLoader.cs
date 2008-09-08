@@ -88,7 +88,7 @@ namespace Kistl.API
                     // If found, continue...
                     if (!string.IsNullOrEmpty(fullName))
                     {
-                        // IF found in cache, then return the cached Assembly
+                        // If found in cache, then return the cached Assembly
                         if (_Assemblies.ContainsKey(fullName)) return _Assemblies[fullName];
 
                         n.CodeBase += fullName;
@@ -108,7 +108,8 @@ namespace Kistl.API
                             Console.WriteLine(ex.ToString());
                         }
                         // Finally load the Assembly
-                        Assembly result = Assembly.Load(n);
+                        //Assembly result = Assembly.Load(n);   
+                        Assembly result = Assembly.LoadFrom(n.CodeBase);
 
                         // If the assembly could not be loaded, do nothing! Return null. 
                         // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1

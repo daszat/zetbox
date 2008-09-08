@@ -98,7 +98,7 @@ namespace Kistl.Server
     /// </summary>
     /// <typeparam name="T"></typeparam>
     internal class ServerObjectHandler<T> : IServerObjectHandler
-        where T : class, IDataObject, new()
+        where T : IDataObject
     {
         /// <summary>
         /// Events registrieren
@@ -125,7 +125,7 @@ namespace Kistl.Server
 
                 if (filter != null)
                 {
-                    result = result.AddFilter<T>(filter);
+                    result = (IQueryable<T>)result.AddFilter(filter);
                 }
 
                 if (orderBy != null)
@@ -310,7 +310,8 @@ namespace Kistl.Server
             {
                 ObjectStateEntry stateEntry = ((KistlDataContextEntityFramework)KistlDataContext.Current).ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
                 MetadataWorkspace workspace = ((KistlDataContextEntityFramework)KistlDataContext.Current).MetadataWorkspace;
-                EntityType entityType = workspace.GetItem<EntityType>("Model." + obj.GetType().Name, DataSpace.CSpace);
+                string typename = ((IPersistenceObject)obj).GetInterfaceType().Name;
+                EntityType entityType = workspace.GetItem<EntityType>("Model." + typename, DataSpace.CSpace);
 
                 foreach (EdmProperty property in entityType.Properties)
                 {

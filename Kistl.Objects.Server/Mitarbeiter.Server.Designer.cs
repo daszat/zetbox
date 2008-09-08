@@ -25,12 +25,14 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Mitarbeiter")]
-    public class Mitarbeiter : BaseServerDataObject
+    public class MitarbeiterImpl : BaseServerDataObject, Mitarbeiter
     {
         
         private int _ID;
         
         private string _Name;
+        
+        private EntityCollectionEntryParentWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntryImpl> ProjekteWrapper;
         
         private System.DateTime? _Geburtstag;
         
@@ -38,7 +40,7 @@ namespace Kistl.App.Projekte
         
         private string _TelefonNummer;
         
-        public Mitarbeiter()
+        public MitarbeiterImpl()
         {
         }
         
@@ -74,12 +76,21 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "B_Projekt_MitarbeiterCollectionEntry")]
-        public EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry> Projekte
+        public ICollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {
-                EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry>("Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "B_Projekt_MitarbeiterCollectionEntry");
+                if (ProjekteWrapper == null) ProjekteWrapper = new EntityCollectionEntryParentWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntryImpl>(this, ProjekteImpl);
+                return ProjekteWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "B_Projekt_MitarbeiterCollectionEntry")]
+        public EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntryImpl> ProjekteImpl
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntryImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntryImpl>("Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "B_Projekt_MitarbeiterCollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }

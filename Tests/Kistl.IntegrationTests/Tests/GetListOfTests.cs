@@ -44,11 +44,7 @@ namespace Kistl.IntegrationTests
                 var list2 = prj2.Tasks;
 
                 Assert.That(list2.Count, Is.GreaterThan(0));
-
-                for (int i = 0; i < list1.Count; i++)
-                {
-                    Assert.That(object.ReferenceEquals(list1[i], list2[i]), "list1[i] & list2[i] are different Objects");
-                }
+                Assert.That(list2.Count, Is.EqualTo(list1.Count));
             }
         }
 

@@ -25,10 +25,10 @@ namespace Kistl.App.Zeiterfassung
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kostenstelle")]
-    public class Kostenstelle : Kistl.App.Zeiterfassung.Zeitkonto
+    public class KostenstelleImpl : Kistl.App.Zeiterfassung.ZeitkontoImpl, Kostenstelle
     {
         
-        public Kostenstelle()
+        public KostenstelleImpl()
         {
         }
         

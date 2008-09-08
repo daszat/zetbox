@@ -9,10 +9,11 @@ using Kistl.App.Base;
 
 namespace Kistl.Server.Generators
 {
-    public enum ClientServerEnum
+    public enum TaskEnum
     {
         Client,
         Server,
+        Interface,
     }
 
     public static class GeneratorExtensionHelper
@@ -20,6 +21,11 @@ namespace Kistl.Server.Generators
         public static TypeMoniker GetTypeMoniker(this DataType objClass)
         {
             return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName);
+        }
+
+        public static TypeMoniker GetTypeMonikerImplementation(this DataType objClass)
+        {
+            return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName + "Impl");
         }
     }
 
@@ -38,26 +44,26 @@ namespace Kistl.Server.Generators
                     gMapping.Generate(ctx, Helper.CodeGenPath);
 
                     // Compile Code
-                    Compile(ClientServerEnum.Server);
-                    Compile(ClientServerEnum.Client);
+                    Compile(TaskEnum.Interface);
+                    Compile(TaskEnum.Server);
+                    Compile(TaskEnum.Client);
                 }
             }
         }
 
-        private static void Compile(ClientServerEnum type)
+        private static void Compile(TaskEnum type)
         {
             System.IO.Directory.CreateDirectory(Helper.CodeGenPath + @"\bin\");
 
             Microsoft.CSharp.CSharpCodeProvider p = new Microsoft.CSharp.CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v3.5" } });
             CompilerParameters options = new CompilerParameters();
 
-            options.OutputAssembly = Helper.CodeGenPath + @"\bin\Kistl.Objects." + type + ".dll";
-            options.IncludeDebugInformation = true;
+            options.OutputAssembly = Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll";
+            options.IncludeDebugInformation = true; // false in Production!!!
             options.GenerateExecutable = false;
             options.TreatWarningsAsErrors = false; // true in Production!!!
             options.ReferencedAssemblies.AddRange(new string[] {
                     Helper.CodeGenPath + @"\bin\Kistl.API.dll",
-                    Helper.CodeGenPath + @"\bin\Kistl.API." + type + ".dll",
                     "System.dll",
                     "System.Core.dll",
                     "System.Data.dll",
@@ -68,8 +74,15 @@ namespace Kistl.Server.Generators
                     "System.Xml.Linq.dll",
                     "WindowsBase.dll",
                 });
+
+            if (type != TaskEnum.Interface)
+            {
+                options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.API." + type + ".dll");
+                options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.Objects.dll");
+
+            }
             
-            if (type == ClientServerEnum.Server)
+            if (type == TaskEnum.Server)
             {
                 options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.csdl");
                 options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.msl");
@@ -77,11 +90,16 @@ namespace Kistl.Server.Generators
             }
 
             CompilerResults result = p.CompileAssemblyFromFile(options,
-                System.IO.Directory.GetFiles(Helper.CodeGenPath + @"\Kistl.Objects." + type + @"\", "*.cs"));
+                System.IO.Directory.GetFiles(Helper.CodeGenPath + @"\" + type.GetKistObjectsName() + @"\", "*.cs"));
 
-            if (result.Errors.HasErrors)
+            using (System.IO.StreamWriter file = System.IO.File.CreateText(Helper.CodeGenPath + @"\errors.txt"))
             {
-                throw new CompilerException(result);
+                if (result.Errors.HasErrors)
+                {
+                    CompilerException ex = new CompilerException(result);
+                    file.WriteLine(ex.Message);
+                    throw ex;
+                }
             }
         }
 
@@ -119,15 +137,30 @@ namespace Kistl.Server.Generators
             return GetAssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
         }
 
-        public static string GetAssociationName(CodeNamespace parentNamespace, CodeTypeDeclaration parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass, string propertyName)
+        public static string GetAssociationName(ObjectClass parentClass, Property listProperty)
         {
-            return GetAssociationName(parentClass.Name, childClass.Name, propertyName);
+            return GetAssociationName(
+                parentClass.ClassName, 
+                Generator.GetPropertyCollectionObjectType(listProperty).Classname, 
+                listProperty.PropertyName);
+        }
+        public static string GetAssociationName(ObjectClass parentClass, Property listProperty, string propertyName)
+        {
+            return GetAssociationName(
+                parentClass.ClassName,
+                Generator.GetPropertyCollectionObjectType(listProperty).Classname,
+                propertyName);
         }
 
-        public static string GetAssociationName(ObjectClass parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass, string propertyName)
-        {
-            return GetAssociationName(parentClass.ClassName, childClass.Name, propertyName);
-        }
+        //public static string GetAssociationName(CodeNamespace parentNamespace, CodeTypeDeclaration parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass, string propertyName)
+        //{
+        //    return GetAssociationName(parentClass.Name, childClass.Name, propertyName);
+        //}
+
+        //public static string GetAssociationName(ObjectClass parentClass, CodeNamespace childNamespace, CodeTypeDeclaration childClass, string propertyName)
+        //{
+        //    return GetAssociationName(parentClass.ClassName, childClass.Name, propertyName);
+        //}
         #endregion 
 
         #region GetAssociationParentRoleName
@@ -146,10 +179,10 @@ namespace Kistl.Server.Generators
             return GetAssociationParentRoleName(obj.ClassName);
         }
 
-        public static string GetAssociationParentRoleName(CodeNamespace ns, CodeTypeDeclaration c)
-        {
-            return GetAssociationParentRoleName(c.Name);
-        }
+        //public static string GetAssociationParentRoleName(CodeNamespace ns, CodeTypeDeclaration c)
+        //{
+        //    return GetAssociationParentRoleName(c.Name);
+        //}
         #endregion
 
         #region GetAssociationChildRoleName
@@ -168,10 +201,10 @@ namespace Kistl.Server.Generators
             return GetAssociationChildRoleName(obj.ClassName);
         }
 
-        public static string GetAssociationChildRoleName(CodeNamespace ns, CodeTypeDeclaration c)
-        {
-            return GetAssociationChildRoleName(c.Name);
-        }
+        //public static string GetAssociationChildRoleName(CodeNamespace ns, CodeTypeDeclaration c)
+        //{
+        //    return GetAssociationChildRoleName(c.Name);
+        //}
         #endregion
 
         #region GetPropertyCollectionObjectType
@@ -224,22 +257,28 @@ namespace Kistl.Server.Generators
         {
             // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
             // It's a Beta Version - so what!
-            var objClasses = GetObjectClassList(ctx);
+            //IQueryable<ObjectClass> objClasses = GetObjectClassList(ctx);
             return from p in ctx.GetQuery<Property>()
-                   from o in objClasses
-                   where p.ObjectClass.ID == o.ID && p.IsList && p is Property
+                   where p.ObjectClass is ObjectClass && p.IsList && p is Property
                    select p;
+            //return from p in ctx.GetQuery<Property>()
+            //       from o in objClasses
+            //       where p.ObjectClass.ID == o.ID && p.IsList && p is Property
+            //       select p;
         }
 
         public static IQueryable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.IKistlContext ctx)
         {
             // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
             // It's a Beta Version - so what!
-            var objClasses = GetObjectClassList(ctx);
+            //IQueryable<ObjectClass> objClasses = GetObjectClassList(ctx);
             return from p in ctx.GetQuery<ObjectReferenceProperty>()
-                   from o in objClasses
-                   where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
+                   where p.ObjectClass is ObjectClass && p is ObjectReferenceProperty
                    select p;
+            //return from p in ctx.GetQuery<ObjectReferenceProperty>()
+            //       from o in objClasses
+            //       where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
+            //       select p;
         }
         #endregion
 
@@ -248,7 +287,7 @@ namespace Kistl.Server.Generators
         {
             if (!prop.IsList)
             {
-                return prop.ObjectClass.GetTypeMoniker(); //new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                return prop.ObjectClass.GetTypeMoniker();
             }
             else
             {
@@ -261,6 +300,30 @@ namespace Kistl.Server.Generators
             if (!prop.ReferenceProperty.IsList)
             {
                 return new TypeMoniker(prop.GetPropertyTypeString());
+            }
+            else
+            {
+                return Generator.GetPropertyCollectionObjectType(prop.ReferenceProperty);
+            }
+        }
+
+        public static TypeMoniker GetAssociationChildTypeImplementation(Property prop)
+        {
+            if (!prop.IsList)
+            {
+                return prop.ObjectClass.GetTypeMonikerImplementation();
+            }
+            else
+            {
+                return Generator.GetPropertyCollectionObjectType(prop);
+            }
+        }
+
+        public static TypeMoniker GetAssociationChildTypeImplementation(BackReferenceProperty prop)
+        {
+            if (!prop.ReferenceProperty.IsList)
+            {
+                return new TypeMoniker(prop.GetPropertyTypeString() + "Impl");
             }
             else
             {

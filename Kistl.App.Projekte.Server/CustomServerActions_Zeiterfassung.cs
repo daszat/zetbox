@@ -17,7 +17,7 @@ namespace Kistl.App.Zeiterfassung
         {
             Zeitkonto z = obj.Zeitkonto;
 
-            if (z.Mitarbeiter.FirstOrDefault(m => m.Value.ID == obj.Mitarbeiter.ID) == null)
+            if (z.Mitarbeiter.FirstOrDefault(m => m.ID == obj.Mitarbeiter.ID) == null)
             {
                 throw new SecurityException("Sie sind nicht berechtigt auf dieses Zeitkonto zu buchen.");
             }

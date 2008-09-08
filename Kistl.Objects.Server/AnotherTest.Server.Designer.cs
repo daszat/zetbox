@@ -25,12 +25,12 @@ namespace Kistl.App.Test
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="AnotherTest")]
-    public class AnotherTest : BaseServerDataObject
+    public class AnotherTestImpl : BaseServerDataObject, AnotherTest
     {
         
         private int _ID;
         
-        public AnotherTest()
+        public AnotherTestImpl()
         {
         }
         

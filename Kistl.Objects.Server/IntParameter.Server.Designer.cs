@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntParameter")]
-    public class IntParameter : Kistl.App.Base.BaseParameter
+    public class IntParameterImpl : Kistl.App.Base.BaseParameterImpl, IntParameter
     {
         
-        public IntParameter()
+        public IntParameterImpl()
         {
         }
         

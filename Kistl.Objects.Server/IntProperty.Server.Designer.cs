@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntProperty")]
-    public class IntProperty : Kistl.App.Base.ValueTypeProperty
+    public class IntPropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, IntProperty
     {
         
-        public IntProperty()
+        public IntPropertyImpl()
         {
         }
         

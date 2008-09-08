@@ -224,7 +224,7 @@ namespace Kistl.GUI
 
         private void Context_ObjectListChanged(object sender, GenericEventArgs<IPersistenceObject> e)
         {
-            if (Control.ObjectType.IsAssignableFrom(e.Data.GetType()))
+            if (Control.ObjectType.IsAssignableFrom(e.Data.GetInterfaceType()))
                 SetItemsSource();
         }
 
@@ -312,7 +312,7 @@ namespace Kistl.GUI
 
         private void Context_ObjectListChanged(object sender, GenericEventArgs<IPersistenceObject> e)
         {
-            if (Control.ObjectType.IsAssignableFrom(e.Data.GetType()))
+            if (Control.ObjectType.IsAssignableFrom(e.Data.GetInterfaceType()))
                 SetItemsSource();
         }
 

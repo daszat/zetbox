@@ -423,7 +423,7 @@ namespace Kistl.GUI
                 .Where(e => e.ClassName == typeof(ENUM).Name)
                 .Single();
 
-            Control.ItemsSource = Enumeration.EnumerationEntries;
+            Control.ItemsSource = Enumeration.EnumerationEntries.ToList();
             base.InitializeComponent();
         }
 

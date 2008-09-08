@@ -17,6 +17,18 @@ namespace Kistl.Server.Generators
             if (string.IsNullOrEmpty(parentPropName)) return propName;
             return parentPropName + "_" + propName;
         }
+
+        public static string GetKistObjectsName(this TaskEnum task)
+        {
+            if (task == TaskEnum.Interface)
+            {
+                return "Kistl.Objects";
+            }
+            else
+            {
+                return string.Format(@"Kistl.Objects.{0}", task);
+            }
+        }
         #endregion
 
         #region ToCodeTypeReference
@@ -43,16 +55,16 @@ namespace Kistl.Server.Generators
             return result;
         }
 
-        public static CodeTypeReference ToCodeTypeReference(this BaseProperty p, ClientServerEnum clientServer)
+        public static CodeTypeReference ToCodeTypeReference(this BaseProperty p, TaskEnum clientServer)
         {
             string propType;
-            if (clientServer == ClientServerEnum.Server && p is EnumerationProperty)
-            {
-                // EF does not support Enums
-                // TODO: Change this, when EF Wrapper are implemented
-                propType = "System.Int32";
-            }
-            else
+            //if (clientServer == TaskEnum.Server && p is EnumerationProperty)
+            //{
+            //    // EF does not support Enums
+            //    // TODO: Change this, when EF Wrapper are implemented
+            //    propType = "System.Int32";
+            //}
+            //else
             {
                 propType = p.GetPropertyTypeString();
             }
@@ -119,7 +131,7 @@ namespace Kistl.Server.Generators
             return CreateField(c, new CodeTypeReference(type), name, new CodeSnippetExpression(initExpression));
         }
 
-        public static CodeMemberField CreateField(this BaseProperty prop, CodeTypeDeclaration c, ClientServerEnum clientServer)
+        public static CodeMemberField CreateField(this BaseProperty prop, CodeTypeDeclaration c, TaskEnum clientServer)
         {
             return c.CreateField(prop.ToCodeTypeReference(clientServer), "_" + prop.PropertyName);
         }
@@ -221,7 +233,7 @@ namespace Kistl.Server.Generators
             return p;
         }
 
-        public static CodeMemberProperty CreateNotifyingProperty(this BaseProperty prop, CodeTypeDeclaration c, ClientServerEnum clientServer)
+        public static CodeMemberProperty CreateNotifyingProperty(this BaseProperty prop, CodeTypeDeclaration c, TaskEnum clientServer)
         {
             return c.CreateNotifyingProperty(prop.ToCodeTypeReference(clientServer),
                 prop.PropertyName, "_" + prop.PropertyName, "_" + prop.PropertyName, prop.PropertyName);
@@ -243,6 +255,16 @@ namespace Kistl.Server.Generators
             return CreateNotifyingProperty(c, new CodeTypeReference(type), name, getExpression, setLValue, notifier);
         }
 
+        public static CodeMemberProperty CreateNotifyingProperty(this CodeTypeDeclaration c, string type, string name,
+            string getExpression, string setLValue, string notifier)
+        {
+            return CreateNotifyingProperty(c, new CodeTypeReference(type), name, getExpression, setLValue, notifier);
+        }
+
+        public static CodeMemberProperty CreateNotifyingProperty(this CodeTypeDeclaration c, string type, string name)
+        {
+            return CreateNotifyingProperty(c, new CodeTypeReference(type), name, "_" + name, "_" + name, name);
+        }
 
         /// <summary>
         /// Creates a property which calls the appropriate NotifyPropertyChang* Methods.
@@ -473,9 +495,9 @@ namespace Kistl.Server.Generators
             baseInterfaces.ForEach<CodeTypeReference>(b => c.BaseTypes.Add(b));
             return c;
         }
-        public static CodeTypeDeclaration CreateInterface(this CodeNamespace ns, string name, params CodeTypeReference[] baseInterfaces)
+        public static CodeTypeDeclaration CreateInterface(this CodeNamespace ns, string name, params string[] baseInterfaces)
         {
-            return CreateInterface(ns, name, TypeAttributes.Public, baseInterfaces);
+            return CreateInterface(ns, name, TypeAttributes.Public, baseInterfaces.Select(b => new CodeTypeReference(b)).ToArray());
         }
         #endregion
 
@@ -569,6 +591,24 @@ namespace Kistl.Server.Generators
         public static bool IsStructPropertyPropertyList(this BaseProperty prop)
         {
             return prop is StructProperty && ((Property)prop).IsList;
+        }
+        #endregion
+
+        #region CheckMethod
+        public static bool IsDefaultMethod(this Method method)
+        {
+            if (method.Module.ModuleName == "KistlBase")
+            {
+                if (method.MethodName == "ToString"
+                    || method.MethodName == "PreSave"
+                    || method.MethodName == "PostSave"
+                )
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
         #endregion
     }

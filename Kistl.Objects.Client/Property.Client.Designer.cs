@@ -24,14 +24,14 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Property : Kistl.App.Base.BaseProperty
+    public class PropertyImpl : Kistl.App.Base.BasePropertyImpl, Property
     {
         
         private bool _IsList;
         
         private bool _IsNullable;
         
-        public Property()
+        public PropertyImpl()
         {
         }
         
@@ -108,8 +108,8 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Property)obj).IsList = this.IsList;
-            ((Property)obj).IsNullable = this.IsNullable;
+            ((PropertyImpl)obj).IsList = this.IsList;
+            ((PropertyImpl)obj).IsNullable = this.IsNullable;
         }
         
         public override void AttachToContext(IKistlContext ctx)

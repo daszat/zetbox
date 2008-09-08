@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_StructProperty_Struct_StructDefinition", "A_Struct", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Struct), "B_StructProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.StructProperty))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_StructProperty_Struct_StructDefinition", "A_Struct", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.StructImpl), "B_StructProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.StructPropertyImpl))]
 
 namespace Kistl.App.Base
 {
@@ -27,30 +27,25 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="StructProperty")]
-    public class StructProperty : Kistl.App.Base.Property
+    public class StructPropertyImpl : Kistl.App.Base.PropertyImpl, StructProperty
     {
         
         private System.Nullable<int> _fk_StructDefinition = null;
         
-        public StructProperty()
+        public StructPropertyImpl()
         {
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_StructProperty_Struct_StructDefinition", "A_Struct")]
         public Kistl.App.Base.Struct StructDefinition
         {
             get
             {
-                EntityReference<Kistl.App.Base.Struct> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Struct>("Model.FK_StructProperty_Struct_StructDefinition", "A_Struct");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return StructDefinitionImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Struct> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Struct>("Model.FK_StructProperty_Struct_StructDefinition", "A_Struct");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                StructDefinitionImpl = (Kistl.App.Base.StructImpl)value;
             }
         }
         
@@ -67,6 +62,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_StructDefinition = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_StructProperty_Struct_StructDefinition", "A_Struct")]
+        public Kistl.App.Base.StructImpl StructDefinitionImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.StructImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.StructImpl>("Model.FK_StructProperty_Struct_StructDefinition", "A_Struct");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.StructImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.StructImpl>("Model.FK_StructProperty_Struct_StructDefinition", "A_Struct");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.StructImpl)value;
             }
         }
         

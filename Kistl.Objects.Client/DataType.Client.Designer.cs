@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class DataType : BaseClientDataObject
+    public class DataTypeImpl : BaseClientDataObject, DataType
     {
         
         private System.Nullable<int> _fk_Module = null;
@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodIvokations;
         
-        public DataType()
+        public DataTypeImpl()
         {
         }
         
@@ -92,7 +92,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.BaseProperty> Properties
+        public ICollection<Kistl.App.Base.BaseProperty> Properties
         {
             get
             {
@@ -112,7 +112,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.Method> Methods
+        public ICollection<Kistl.App.Base.Method> Methods
         {
             get
             {
@@ -163,7 +163,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.MethodInvocation> MethodIvokations
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodIvokations
         {
             get
             {
@@ -219,12 +219,12 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((DataType)obj).fk_Module = this.fk_Module;
-            ((DataType)obj).ClassName = this.ClassName;
-            if(this._Properties != null) this._Properties.ApplyChanges(((DataType)obj)._Properties); else ((DataType)obj)._Properties = null; ((DataType)obj).NotifyPropertyChanged("Properties");
-            if(this._Methods != null) this._Methods.ApplyChanges(((DataType)obj)._Methods); else ((DataType)obj)._Methods = null; ((DataType)obj).NotifyPropertyChanged("Methods");
-            ((DataType)obj).fk_DefaultIcon = this.fk_DefaultIcon;
-            if(this._MethodIvokations != null) this._MethodIvokations.ApplyChanges(((DataType)obj)._MethodIvokations); else ((DataType)obj)._MethodIvokations = null; ((DataType)obj).NotifyPropertyChanged("MethodIvokations");
+            ((DataTypeImpl)obj).fk_Module = this.fk_Module;
+            ((DataTypeImpl)obj).ClassName = this.ClassName;
+            if(this._Properties != null) this._Properties.ApplyChanges(((DataTypeImpl)obj)._Properties); else ((DataTypeImpl)obj)._Properties = null; ((DataTypeImpl)obj).NotifyPropertyChanged("Properties");
+            if(this._Methods != null) this._Methods.ApplyChanges(((DataTypeImpl)obj)._Methods); else ((DataTypeImpl)obj)._Methods = null; ((DataTypeImpl)obj).NotifyPropertyChanged("Methods");
+            ((DataTypeImpl)obj).fk_DefaultIcon = this.fk_DefaultIcon;
+            if(this._MethodIvokations != null) this._MethodIvokations.ApplyChanges(((DataTypeImpl)obj)._MethodIvokations); else ((DataTypeImpl)obj)._MethodIvokations = null; ((DataTypeImpl)obj).NotifyPropertyChanged("MethodIvokations");
         }
         
         public override void AttachToContext(IKistlContext ctx)

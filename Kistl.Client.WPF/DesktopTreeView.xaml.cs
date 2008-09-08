@@ -227,7 +227,7 @@ namespace Kistl.Client.WPF
                 {
                     n = (ModuleNode)treeView.SelectedItem;
                     // TODO: Ausbessern!!!
-                    resultObjectType = Type.GetType("Kistl.App.Base.ObjectClass, Kistl.Objects.Client", true);
+                    resultObjectType = Type.GetType("Kistl.App.Base.ObjectClass, Kistl.Objects", true);
                 }
 
                 if (resultObjectType != null && n != null)
@@ -274,7 +274,7 @@ namespace Kistl.Client.WPF
                 INode n = treeView.SelectedItem as INode;
                 // Create new Context for new Window
                 IKistlContext ctx = KistlContext.GetContext();
-                Kistl.API.IDataObject newObject = ctx.Find(n.DataObject.GetType(), n.DataObject.ID);
+                Kistl.API.IDataObject newObject = ctx.Find(n.DataObject.GetInterfaceType(), n.DataObject.ID);
                 Manager.Renderer.ShowObject(newObject);
             }
             catch (Exception ex)

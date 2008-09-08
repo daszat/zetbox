@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="DateTimeParameter")]
-    public class DateTimeParameter : Kistl.App.Base.BaseParameter
+    public class DateTimeParameterImpl : Kistl.App.Base.BaseParameterImpl, DateTimeParameter
     {
         
-        public DateTimeParameter()
+        public DateTimeParameterImpl()
         {
         }
         

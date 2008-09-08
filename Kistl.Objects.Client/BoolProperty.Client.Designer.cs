@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BoolProperty : Kistl.App.Base.ValueTypeProperty
+    public class BoolPropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, BoolProperty
     {
         
-        public BoolProperty()
+        public BoolPropertyImpl()
         {
         }
         

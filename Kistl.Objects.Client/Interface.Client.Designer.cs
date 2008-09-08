@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Interface : Kistl.App.Base.DataType
+    public class InterfaceImpl : Kistl.App.Base.DataTypeImpl, Interface
     {
         
-        public Interface()
+        public InterfaceImpl()
         {
         }
         

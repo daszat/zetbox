@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class EnumerationEntry : BaseClientDataObject
+    public class EnumerationEntryImpl : BaseClientDataObject, EnumerationEntry
     {
         
         private System.Nullable<int> _fk_Enumeration = null;
@@ -33,7 +33,7 @@ namespace Kistl.App.Base
         
         private string _Name;
         
-        public EnumerationEntry()
+        public EnumerationEntryImpl()
         {
         }
         
@@ -135,9 +135,9 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((EnumerationEntry)obj).fk_Enumeration = this.fk_Enumeration;
-            ((EnumerationEntry)obj).Value = this.Value;
-            ((EnumerationEntry)obj).Name = this.Name;
+            ((EnumerationEntryImpl)obj).fk_Enumeration = this.fk_Enumeration;
+            ((EnumerationEntryImpl)obj).Value = this.Value;
+            ((EnumerationEntryImpl)obj).Name = this.Name;
         }
         
         public override void AttachToContext(IKistlContext ctx)

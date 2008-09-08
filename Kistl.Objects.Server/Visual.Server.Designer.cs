@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual), "B_Visual_ChildrenCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ChildrenCollectionEntry))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_BaseProperty_Property", "A_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BaseProperty), "B_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method), "B_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual), "B_Visual_ChildrenCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ChildrenCollectionEntry))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualImpl), "B_Visual_ChildrenCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ChildrenCollectionEntryImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_BaseProperty_Property", "A_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BasePropertyImpl), "B_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.VisualImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodImpl), "B_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.VisualImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualImpl), "B_Visual_ChildrenCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ChildrenCollectionEntryImpl))]
 
 namespace Kistl.App.GUI
 {
@@ -30,20 +30,22 @@ namespace Kistl.App.GUI
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual")]
-    public class Visual : BaseServerDataObject
+    public class VisualImpl : BaseServerDataObject, Visual
     {
         
         private int _ID;
         
         private string _Description;
         
-        private int _ControlType;
+        private Kistl.App.GUI.VisualType _ControlType;
+        
+        private EntityCollectionEntryValueWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ChildrenCollectionEntryImpl> ChildrenWrapper;
         
         private System.Nullable<int> _fk_Property = null;
         
         private System.Nullable<int> _fk_Method = null;
         
-        public Visual()
+        public VisualImpl()
         {
         }
         
@@ -78,8 +80,7 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmScalarPropertyAttribute()]
-        public int ControlType
+        public Kistl.App.GUI.VisualType ControlType
         {
             get
             {
@@ -96,32 +97,49 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "B_Visual_ChildrenCollectionEntry")]
-        public EntityCollection<Visual_ChildrenCollectionEntry> Children
+        [EdmScalarPropertyAttribute()]
+        public int ControlTypeImpl
         {
             get
             {
-                EntityCollection<Visual_ChildrenCollectionEntry> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Visual_ChildrenCollectionEntry>("Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "B_Visual_ChildrenCollectionEntry");
+                return (int)ControlType;
+            }
+            set
+            {
+                ControlType = (Kistl.App.GUI.VisualType)value;
+            }
+        }
+        
+        public IList<Kistl.App.GUI.Visual> Children
+        {
+            get
+            {
+                if (ChildrenWrapper == null) ChildrenWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ChildrenCollectionEntryImpl>(this, ChildrenImpl);
+                return ChildrenWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "B_Visual_ChildrenCollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.Visual_ChildrenCollectionEntryImpl> ChildrenImpl
+        {
+            get
+            {
+                EntityCollection<Visual_ChildrenCollectionEntryImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Visual_ChildrenCollectionEntryImpl>("Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "B_Visual_ChildrenCollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_BaseProperty_Property", "A_BaseProperty")]
         public Kistl.App.Base.BaseProperty Property
         {
             get
             {
-                EntityReference<Kistl.App.Base.BaseProperty> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty>("Model.FK_Visual_BaseProperty_Property", "A_BaseProperty");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return PropertyImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.BaseProperty> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty>("Model.FK_Visual_BaseProperty_Property", "A_BaseProperty");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                PropertyImpl = (Kistl.App.Base.BasePropertyImpl)value;
             }
         }
         
@@ -141,21 +159,33 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_Method_Method", "A_Method")]
-        public Kistl.App.Base.Method Method
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_BaseProperty_Property", "A_BaseProperty")]
+        public Kistl.App.Base.BasePropertyImpl PropertyImpl
         {
             get
             {
-                EntityReference<Kistl.App.Base.Method> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method>("Model.FK_Visual_Method_Method", "A_Method");
+                EntityReference<Kistl.App.Base.BasePropertyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BasePropertyImpl>("Model.FK_Visual_BaseProperty_Property", "A_BaseProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Method> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method>("Model.FK_Visual_Method_Method", "A_Method");
+                EntityReference<Kistl.App.Base.BasePropertyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BasePropertyImpl>("Model.FK_Visual_BaseProperty_Property", "A_BaseProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                r.Value = (Kistl.App.Base.BasePropertyImpl)value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Method Method
+        {
+            get
+            {
+                return MethodImpl;
+            }
+            set
+            {
+                MethodImpl = (Kistl.App.Base.MethodImpl)value;
             }
         }
         
@@ -172,6 +202,23 @@ namespace Kistl.App.GUI
             set
             {
                 _fk_Method = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_Method_Method", "A_Method")]
+        public Kistl.App.Base.MethodImpl MethodImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.MethodImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodImpl>("Model.FK_Visual_Method_Method", "A_Method");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.MethodImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodImpl>("Model.FK_Visual_Method_Method", "A_Method");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.MethodImpl)value;
             }
         }
         
@@ -216,7 +263,7 @@ namespace Kistl.App.GUI
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Description, sw);
             BinarySerializer.ToBinary((int)this._ControlType, sw);
-            BinarySerializer.ToBinary(this.Children, sw);
+            BinarySerializer.ToBinary(this.ChildrenImpl, sw);
             BinarySerializer.ToBinary(this.fk_Property, sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
         }
@@ -225,15 +272,15 @@ namespace Kistl.App.GUI
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Description, sr);
-            int tmpControlType; BinarySerializer.FromBinary(out tmpControlType, sr); _ControlType = (System.Int32)tmpControlType;
-            BinarySerializer.FromBinaryCollectionEntries(this.Children, sr);
+            int tmpControlType; BinarySerializer.FromBinary(out tmpControlType, sr); _ControlType = (Kistl.App.GUI.VisualType)tmpControlType;
+            BinarySerializer.FromBinaryCollectionEntries(this.ChildrenImpl, sr);
             BinarySerializer.FromBinary(out this._fk_Property, sr);
             BinarySerializer.FromBinary(out this._fk_Method, sr);
         }
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual_ChildrenCollectionEntry")]
-    public class Visual_ChildrenCollectionEntry : Kistl.API.Server.BaseServerCollectionEntry
+    public class Visual_ChildrenCollectionEntryImpl : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
         
         private int _ID;
@@ -256,38 +303,28 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual")]
         public Kistl.App.GUI.Visual Value
         {
             get
             {
-                EntityReference<Kistl.App.GUI.Visual> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual>("Model.FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ValueImpl;
             }
             set
             {
-                EntityReference<Kistl.App.GUI.Visual> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual>("Model.FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ValueImpl = (Kistl.App.GUI.VisualImpl)value;
             }
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual")]
-        public Visual Parent
+        public Kistl.App.GUI.Visual Parent
         {
             get
             {
-                EntityReference<Visual> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Visual>("Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ParentImpl;
             }
             set
             {
-                EntityReference<Visual> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Visual>("Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ParentImpl = (Kistl.App.GUI.VisualImpl)value;
             }
         }
         
@@ -320,6 +357,40 @@ namespace Kistl.App.GUI
             set
             {
                 _fk_Parent = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual")]
+        public Kistl.App.GUI.VisualImpl ValueImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.VisualImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualImpl>("Model.FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.VisualImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualImpl>("Model.FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.GUI.VisualImpl)value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual")]
+        public Kistl.App.GUI.VisualImpl ParentImpl
+        {
+            get
+            {
+                EntityReference<VisualImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<VisualImpl>("Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<VisualImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<VisualImpl>("Model.FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (VisualImpl)value;
             }
         }
         

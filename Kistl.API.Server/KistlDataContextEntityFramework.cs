@@ -59,12 +59,21 @@ namespace Kistl.API.Server
         public bool IsDisposed { get; private set; }
 
 
+        private static bool init = true;
+
         /// <summary>
         /// Internal Constructor
         /// </summary>
         internal KistlDataContextEntityFramework() :
             base(GetConnectionString(), "Entities")
         {
+            if (init)
+            {
+                System.Reflection.Assembly a = Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+                if (a == null) throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata was loaded");
+                MetadataWorkspace.LoadFromAssembly(a);
+                init = false;
+            }
         }
 
         /// <summary>
@@ -95,7 +104,7 @@ namespace Kistl.API.Server
         private string GetEntityName(Type type)
         {
             Type rootType = GetRootType(type);
-            return rootType.Name;
+            return rootType.Name.Remove(rootType.Name.Length - 4, 4);// Remove Impl
         }
 
         /// <summary>
@@ -105,18 +114,18 @@ namespace Kistl.API.Server
         /// <returns>IQueryable</returns>
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
-            Type type = typeof(T);
+            Type type = QueryTranslatorProvider<T>.TranslateType(typeof(T));
 
             if (!_table.ContainsKey(type))
             {
-                _table[type] = this.CreateQuery<T>("[" + GetEntityName(type) + "]");
+                _table[type] = new QueryTranslator<T>(this.CreateQuery<BaseServerDataObject>("[" + GetEntityName(type) + "]"));
             }
 
             // This doesn't work without "OfType"
             // The reason is that "GetEntityName" returns a Query to the baseobject 
             // but maybe a derived object is asked. OfType will filter this.
             // return (ObjectQuery<T>)_table[type];
-            return ((ObjectQuery<T>)_table[type]).OfType<T>();
+            return ((IQueryable<T>)_table[type]).OfType<T>();
         }
 
         /// <summary>
@@ -276,6 +285,10 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(Type type)
         {
+            if (!type.Name.EndsWith("Impl"))
+            {
+                type = Type.GetType(type.Namespace + "." + type.Name + "Impl, Kistl.Objects.Server", true);
+            }
             Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
             Attach(obj);
             OnObjectCreated(obj);
@@ -287,12 +300,9 @@ namespace Kistl.API.Server
         /// </summary>
         /// <typeparam name="T">Type of the new IDataObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public T Create<T>() where T : Kistl.API.IDataObject, new()
+        public T Create<T>() where T : Kistl.API.IDataObject
         {
-            T obj = new T();
-            Attach(obj);
-            OnObjectCreated(obj);
-            return obj;
+            return (T)Create(typeof(T));
         }
 
         /// <summary>

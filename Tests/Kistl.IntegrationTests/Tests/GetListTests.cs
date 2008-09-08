@@ -63,7 +63,7 @@ namespace Kistl.IntegrationTests
                 var list_objclass = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
                 Assert.That(list_objclass.Count, Is.GreaterThan(0));
 
-                var objclass = list_objclass.Single(o => o.ID == prop.fk_ObjectClass);
+                var objclass = list_objclass.Single(o => o == prop.ObjectClass);
                 Assert.That(objclass.Context, Is.EqualTo(ctx));
                 var prop_test = objclass.Properties.Single(p => p.ID == prop.ID);
                 Assert.That(prop_test.Context, Is.EqualTo(ctx));
@@ -83,7 +83,7 @@ namespace Kistl.IntegrationTests
                 var prop = ctx.Find<Kistl.App.Base.Property>(1);
                 Assert.That(prop, Is.Not.Null);
 
-                var objclass = list_objclass.Single(o => o.ID == prop.fk_ObjectClass);
+                var objclass = list_objclass.Single(o => o == prop.ObjectClass);
                 var prop_test = objclass.Properties.Single(p => p.ID == prop.ID);
 
                 Assert.That(object.ReferenceEquals(prop, prop_test), "prop & prop_test are different Objects");

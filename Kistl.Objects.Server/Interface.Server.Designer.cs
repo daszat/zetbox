@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Interface")]
-    public class Interface : Kistl.App.Base.DataType
+    public class InterfaceImpl : Kistl.App.Base.DataTypeImpl, Interface
     {
         
-        public Interface()
+        public InterfaceImpl()
         {
         }
         

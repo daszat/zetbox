@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.GUI
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
@@ -21,22 +21,21 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
-    using Kistl.API.Client;
     
     
-    public interface IRenderer
+    public interface BackReferenceProperty : Kistl.App.Base.BaseProperty
     {
         
-        Kistl.App.GUI.Toolkit Platform
+        Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {
             get;
             set;
         }
         
-        void ShowMessage(string message);
-        
-        void ShowObject(Kistl.API.IDataObject obj);
-        
-        Kistl.API.IDataObject ChooseObject(Kistl.API.IKistlContext ctx, System.Type objectType);
+        bool PreFetchToClient
+        {
+            get;
+            set;
+        }
     }
 }

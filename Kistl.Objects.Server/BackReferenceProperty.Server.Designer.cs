@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty), "B_BackReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BackReferenceProperty))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferencePropertyImpl), "B_BackReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BackReferencePropertyImpl))]
 
 namespace Kistl.App.Base
 {
@@ -27,32 +27,27 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BackReferenceProperty")]
-    public class BackReferenceProperty : Kistl.App.Base.BaseProperty
+    public class BackReferencePropertyImpl : Kistl.App.Base.BasePropertyImpl, BackReferenceProperty
     {
         
         private System.Nullable<int> _fk_ReferenceProperty = null;
         
         private bool _PreFetchToClient;
         
-        public BackReferenceProperty()
+        public BackReferencePropertyImpl()
         {
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty")]
         public Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {
             get
             {
-                EntityReference<Kistl.App.Base.ObjectReferenceProperty> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ReferencePropertyImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.ObjectReferenceProperty> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ReferencePropertyImpl = (Kistl.App.Base.ObjectReferencePropertyImpl)value;
             }
         }
         
@@ -69,6 +64,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_ReferenceProperty = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty")]
+        public Kistl.App.Base.ObjectReferencePropertyImpl ReferencePropertyImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.ObjectReferencePropertyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyImpl>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.ObjectReferencePropertyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyImpl>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.ObjectReferencePropertyImpl)value;
             }
         }
         

@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class DateTimeParameter : Kistl.App.Base.BaseParameter
+    public class DateTimeParameterImpl : Kistl.App.Base.BaseParameterImpl, DateTimeParameter
     {
         
-        public DateTimeParameter()
+        public DateTimeParameterImpl()
         {
         }
         

@@ -22,7 +22,7 @@
                     <StackPanel Orientation="Horizontal">
                         <!-- Modules -->
                         <Image Source="{Binding Path=Module, Converter={StaticResource IconConverter}}" Width="16" Height="16" />
-                        <TextBlock Margin="2,0,0,0" Text="{Binding Path=Module}" />
+                        <TextBlock Margin="2,0,0,0" Text="{Binding Path=Module.ModuleName}" />
                     </StackPanel>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=InstancesNodes}">

@@ -25,23 +25,23 @@ namespace Kistl.App.Test
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestCustomObject")]
-    public class TestCustomObject : BaseServerDataObject
+    public class TestCustomObjectImpl : BaseServerDataObject, TestCustomObject
     {
         
         private int _ID;
         
         private string _PersonName;
         
-        private Kistl.App.Test.TestPhoneStruct _PhoneNumberMobile;
+        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberMobileImpl;
         
-        private Kistl.App.Test.TestPhoneStruct _PhoneNumberOffice;
+        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberOfficeImpl;
         
         private System.DateTime? _Birthday;
         
-        public TestCustomObject()
+        public TestCustomObjectImpl()
         {
-            _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct();
-            _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct();
+            _PhoneNumberMobileImpl = new Kistl.App.Test.TestPhoneStructImpl();
+            _PhoneNumberOfficeImpl = new Kistl.App.Test.TestPhoneStructImpl();
         }
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
@@ -76,38 +76,62 @@ namespace Kistl.App.Test
         }
         
         [EdmComplexPropertyAttribute()]
-        public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
+        public Kistl.App.Test.TestPhoneStructImpl PhoneNumberMobileImpl
         {
             get
             {
-                return _PhoneNumberMobile != null ? (Kistl.App.Test.TestPhoneStruct)_PhoneNumberMobile.Clone() : new Kistl.App.Test.TestPhoneStruct();
+                return _PhoneNumberMobileImpl;
             }
             set
             {
-                if (PhoneNumberMobile != value)
+                if (PhoneNumberMobileImpl != value)
                 {
-                    NotifyPropertyChanging("PhoneNumberMobile"); 
-                    _PhoneNumberMobile = value;
-                    NotifyPropertyChanged("PhoneNumberMobile");;
+                    NotifyPropertyChanging("PhoneNumberMobileImpl"); 
+                    _PhoneNumberMobileImpl = value;
+                    NotifyPropertyChanged("PhoneNumberMobileImpl");;
                 }
             }
         }
         
+        public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
+        {
+            get
+            {
+                return PhoneNumberMobileImpl;
+            }
+            set
+            {
+                PhoneNumberMobileImpl = (Kistl.App.Test.TestPhoneStructImpl)value;
+            }
+        }
+        
         [EdmComplexPropertyAttribute()]
+        public Kistl.App.Test.TestPhoneStructImpl PhoneNumberOfficeImpl
+        {
+            get
+            {
+                return _PhoneNumberOfficeImpl;
+            }
+            set
+            {
+                if (PhoneNumberOfficeImpl != value)
+                {
+                    NotifyPropertyChanging("PhoneNumberOfficeImpl"); 
+                    _PhoneNumberOfficeImpl = value;
+                    NotifyPropertyChanged("PhoneNumberOfficeImpl");;
+                }
+            }
+        }
+        
         public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
         {
             get
             {
-                return _PhoneNumberOffice != null ? (Kistl.App.Test.TestPhoneStruct)_PhoneNumberOffice.Clone() : new Kistl.App.Test.TestPhoneStruct();
+                return PhoneNumberOfficeImpl;
             }
             set
             {
-                if (PhoneNumberOffice != value)
-                {
-                    NotifyPropertyChanging("PhoneNumberOffice"); 
-                    _PhoneNumberOffice = value;
-                    NotifyPropertyChanged("PhoneNumberOffice");;
-                }
+                PhoneNumberOfficeImpl = (Kistl.App.Test.TestPhoneStructImpl)value;
             }
         }
         
@@ -168,8 +192,8 @@ namespace Kistl.App.Test
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._PersonName, sw);
-            BinarySerializer.ToBinary(this._PhoneNumberMobile, sw);
-            BinarySerializer.ToBinary(this._PhoneNumberOffice, sw);
+            BinarySerializer.ToBinary(this._PhoneNumberMobileImpl, sw);
+            BinarySerializer.ToBinary(this._PhoneNumberOfficeImpl, sw);
             BinarySerializer.ToBinary(this._Birthday, sw);
         }
         
@@ -177,8 +201,8 @@ namespace Kistl.App.Test
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._PersonName, sr);
-            BinarySerializer.FromBinary(out this._PhoneNumberMobile, sr);
-            BinarySerializer.FromBinary(out this._PhoneNumberOffice, sr);
+            BinarySerializer.FromBinary(out this._PhoneNumberMobileImpl, sr);
+            BinarySerializer.FromBinary(out this._PhoneNumberOfficeImpl, sr);
             BinarySerializer.FromBinary(out this._Birthday, sr);
         }
     }

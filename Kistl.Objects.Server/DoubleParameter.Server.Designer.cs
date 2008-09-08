@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="DoubleParameter")]
-    public class DoubleParameter : Kistl.App.Base.BaseParameter
+    public class DoubleParameterImpl : Kistl.App.Base.BaseParameterImpl, DoubleParameter
     {
         
-        public DoubleParameter()
+        public DoubleParameterImpl()
         {
         }
         

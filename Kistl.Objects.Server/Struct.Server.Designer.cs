@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Struct")]
-    public class Struct : Kistl.App.Base.DataType
+    public class StructImpl : Kistl.App.Base.DataTypeImpl, Struct
     {
         
-        public Struct()
+        public StructImpl()
         {
         }
         

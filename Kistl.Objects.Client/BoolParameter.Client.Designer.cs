@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BoolParameter : Kistl.App.Base.BaseParameter
+    public class BoolParameterImpl : Kistl.App.Base.BaseParameterImpl, BoolParameter
     {
         
-        public BoolParameter()
+        public BoolParameterImpl()
         {
         }
         

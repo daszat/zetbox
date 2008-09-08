@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BoolParameter")]
-    public class BoolParameter : Kistl.App.Base.BaseParameter
+    public class BoolParameterImpl : Kistl.App.Base.BaseParameterImpl, BoolParameter
     {
         
-        public BoolParameter()
+        public BoolParameterImpl()
         {
         }
         

@@ -37,44 +37,16 @@ namespace Kistl.Client.WPF
 
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
-                Manager.Create(e.Args, Kistl.App.GUI.Toolkit.WPF);
-
-#if false
-                using (TraceClient.TraceHelper.TraceMethodCall("Uploading GUI Objects"))
-                {
-                    using (IKistlContext ctx = KistlContext.GetContext())
-                    {
-                        // The various handles for adding all the new data
-                        Module guiModule = ctx.GetQuery<Module>().Where(m => m.ModuleName == "GUI").Single();
-
-                        // delete old data
-                        ctx.GetQuery<Kistl.App.GUI.PresenterInfo>().ForEach(pi => ctx.Delete(pi));
-
-                        foreach (LocalPresenterInfo info in LocalPresenterInfo.Implementations)
-                        {
-                            string aName = info.AssemblyName;
-                            Assembly presenterAssembly = FetchOrCreateAssembly(ctx, guiModule, info.AssemblyName);
-                            Assembly dataAssembly = null;
-                            if (info.SourceType.Assembly.FullName != typeof(object).Assembly.FullName)
-                                dataAssembly = FetchOrCreateAssembly(ctx, guiModule, info.SourceType.Assembly.FullName);
-
-                            Kistl.App.GUI.PresenterInfo upload = ctx.Create<Kistl.App.GUI.PresenterInfo>();
-                            upload.PresenterAssembly = presenterAssembly;
-                            upload.PresenterTypeName = info.ClassName;
-
-                            upload.DataAssembly = dataAssembly;
-                            upload.DataTypeName = info.SourceType.FullName;
-                            
-                            upload.ControlType = info.Control;
-                        }
-
-                        ctx.SubmitChanges();
-                    }
-                }
-#endif
+                // TODO: Leider muss ich das machen, weil hier an dieser Stelle
+                // _darf_ es nichts geben, was eine Referenz auf Kistl.Objects benötigt
+                // weil Kistl.Objects dynamisch geladen wird.
+                // woher Kistl.Objects geladen wird, entscheide der AssemblyLoader,
+                // der gerade initialisiert wird.
+                Manager.Create(e.Args, "WPF");
             }
         }
 
+#if DONOTUSE
         private static Assembly FetchOrCreateAssembly(
             IKistlContext ctx,
             Module guiModule,
@@ -94,6 +66,6 @@ namespace Kistl.Client.WPF
 
             return result;
         }
-
+#endif
     }
 }

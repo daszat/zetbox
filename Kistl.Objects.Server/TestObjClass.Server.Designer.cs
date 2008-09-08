@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_Kunde_ObjectProp", "A_Kunde", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Kunde), "B_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestObjClass))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_Kunde_ObjectProp", "A_Kunde", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.KundeImpl), "B_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestObjClassImpl))]
 
 namespace Kistl.App.Test
 {
@@ -27,20 +27,20 @@ namespace Kistl.App.Test
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestObjClass")]
-    public class TestObjClass : BaseServerDataObject, Kistl.App.Test.ITestInterface
+    public class TestObjClassImpl : BaseServerDataObject, TestObjClass, Kistl.App.Test.ITestInterface
     {
         
         private int _ID;
         
         private string _StringProp;
         
-        private int _TestEnumProp;
+        private Kistl.App.Test.TestEnum _TestEnumProp;
         
         private System.Nullable<int> _fk_ObjectProp = null;
         
         private System.Int32? _MyIntProperty;
         
-        public TestObjClass()
+        public TestObjClassImpl()
         {
         }
         
@@ -75,8 +75,7 @@ namespace Kistl.App.Test
             }
         }
         
-        [EdmScalarPropertyAttribute()]
-        public int TestEnumProp
+        public Kistl.App.Test.TestEnum TestEnumProp
         {
             get
             {
@@ -93,21 +92,29 @@ namespace Kistl.App.Test
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public int TestEnumPropImpl
+        {
+            get
+            {
+                return (int)TestEnumProp;
+            }
+            set
+            {
+                TestEnumProp = (Kistl.App.Test.TestEnum)value;
+            }
+        }
+        
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_Kunde_ObjectProp", "A_Kunde")]
         public Kistl.App.Projekte.Kunde ObjectProp
         {
             get
             {
-                EntityReference<Kistl.App.Projekte.Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde>("Model.FK_TestObjClass_Kunde_ObjectProp", "A_Kunde");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ObjectPropImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Projekte.Kunde> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde>("Model.FK_TestObjClass_Kunde_ObjectProp", "A_Kunde");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ObjectPropImpl = (Kistl.App.Projekte.KundeImpl)value;
             }
         }
         
@@ -124,6 +131,23 @@ namespace Kistl.App.Test
             set
             {
                 _fk_ObjectProp = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_Kunde_ObjectProp", "A_Kunde")]
+        public Kistl.App.Projekte.KundeImpl ObjectPropImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.KundeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeImpl>("Model.FK_TestObjClass_Kunde_ObjectProp", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.KundeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeImpl>("Model.FK_TestObjClass_Kunde_ObjectProp", "A_Kunde");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Projekte.KundeImpl)value;
             }
         }
         
@@ -203,7 +227,7 @@ namespace Kistl.App.Test
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._StringProp, sr);
-            int tmpTestEnumProp; BinarySerializer.FromBinary(out tmpTestEnumProp, sr); _TestEnumProp = (System.Int32)tmpTestEnumProp;
+            int tmpTestEnumProp; BinarySerializer.FromBinary(out tmpTestEnumProp, sr); _TestEnumProp = (Kistl.App.Test.TestEnum)tmpTestEnumProp;
             BinarySerializer.FromBinary(out this._fk_ObjectProp, sr);
             BinarySerializer.FromBinary(out this._MyIntProperty, sr);
         }

@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly), "B_PresenterInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresenterInfo))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly), "B_PresenterInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresenterInfo))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyImpl), "B_PresenterInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresenterInfoImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyImpl), "B_PresenterInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresenterInfoImpl))]
 
 namespace Kistl.App.GUI
 {
@@ -28,12 +28,12 @@ namespace Kistl.App.GUI
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="PresenterInfo")]
-    public class PresenterInfo : BaseServerDataObject
+    public class PresenterInfoImpl : BaseServerDataObject, PresenterInfo
     {
         
         private int _ID;
         
-        private int _ControlType;
+        private Kistl.App.GUI.VisualType _ControlType;
         
         private System.Nullable<int> _fk_PresenterAssembly = null;
         
@@ -43,7 +43,7 @@ namespace Kistl.App.GUI
         
         private string _DataTypeName;
         
-        public PresenterInfo()
+        public PresenterInfoImpl()
         {
         }
         
@@ -60,8 +60,7 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmScalarPropertyAttribute()]
-        public int ControlType
+        public Kistl.App.GUI.VisualType ControlType
         {
             get
             {
@@ -78,21 +77,29 @@ namespace Kistl.App.GUI
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public int ControlTypeImpl
+        {
+            get
+            {
+                return (int)ControlType;
+            }
+            set
+            {
+                ControlType = (Kistl.App.GUI.VisualType)value;
+            }
+        }
+        
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly")]
         public Kistl.App.Base.Assembly PresenterAssembly
         {
             get
             {
-                EntityReference<Kistl.App.Base.Assembly> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly>("Model.FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return PresenterAssemblyImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Assembly> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly>("Model.FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                PresenterAssemblyImpl = (Kistl.App.Base.AssemblyImpl)value;
             }
         }
         
@@ -109,6 +116,23 @@ namespace Kistl.App.GUI
             set
             {
                 _fk_PresenterAssembly = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly")]
+        public Kistl.App.Base.AssemblyImpl PresenterAssemblyImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_PresenterInfo_Assembly_PresenterAssembly", "A_Assembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.AssemblyImpl)value;
             }
         }
         
@@ -131,20 +155,15 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly")]
         public Kistl.App.Base.Assembly DataAssembly
         {
             get
             {
-                EntityReference<Kistl.App.Base.Assembly> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly>("Model.FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return DataAssemblyImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Assembly> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly>("Model.FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                DataAssemblyImpl = (Kistl.App.Base.AssemblyImpl)value;
             }
         }
         
@@ -161,6 +180,23 @@ namespace Kistl.App.GUI
             set
             {
                 _fk_DataAssembly = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly")]
+        public Kistl.App.Base.AssemblyImpl DataAssemblyImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_PresenterInfo_Assembly_DataAssembly", "A_Assembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.AssemblyImpl)value;
             }
         }
         
@@ -230,7 +266,7 @@ namespace Kistl.App.GUI
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            int tmpControlType; BinarySerializer.FromBinary(out tmpControlType, sr); _ControlType = (System.Int32)tmpControlType;
+            int tmpControlType; BinarySerializer.FromBinary(out tmpControlType, sr); _ControlType = (Kistl.App.GUI.VisualType)tmpControlType;
             BinarySerializer.FromBinary(out this._fk_PresenterAssembly, sr);
             BinarySerializer.FromBinary(out this._PresenterTypeName, sr);
             BinarySerializer.FromBinary(out this._fk_DataAssembly, sr);

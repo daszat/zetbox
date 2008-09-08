@@ -191,12 +191,12 @@ namespace Kistl.API
     /// <typeparam name="T">Type of the implementing Object.</typeparam>
     /// <param name="obj">Object that has fired this Event.</param>
     /// <param name="e">Method return Arguments.</param>
-    public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e) where T : class, IDataObject, new();
+    public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e) where T : IDataObject;
 
     /// <summary>
     /// Handler for Custom Save Events. TODO: Außer SetObject hat's noch niemand implementiert.
     /// </summary>
     /// <typeparam name="T">Type of the implementing Object.</typeparam>
     /// <param name="obj">>Object that has fired this Event.</param>
-    public delegate void ObjectEventHandler<T>(T obj) where T : class, IDataObject, new();
+    public delegate void ObjectEventHandler<T>(T obj) where T : IDataObject;
 }

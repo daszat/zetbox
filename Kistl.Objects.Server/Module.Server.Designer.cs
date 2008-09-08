@@ -25,7 +25,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Module")]
-    public class Module : BaseServerDataObject
+    public class ModuleImpl : BaseServerDataObject, Module
     {
         
         private int _ID;
@@ -34,7 +34,11 @@ namespace Kistl.App.Base
         
         private string _ModuleName;
         
-        public Module()
+        private EntityCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.DataTypeImpl> DataTypesWrapper;
+        
+        private EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.AssemblyImpl> AssembliesWrapper;
+        
+        public ModuleImpl()
         {
         }
         
@@ -88,24 +92,42 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DataType_Module_Module", "B_DataType")]
-        public EntityCollection<Kistl.App.Base.DataType> DataTypes
+        public ICollection<Kistl.App.Base.DataType> DataTypes
         {
             get
             {
-                EntityCollection<Kistl.App.Base.DataType> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.DataType>("Model.FK_DataType_Module_Module", "B_DataType");
+                if (DataTypesWrapper == null) DataTypesWrapper = new EntityCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.DataTypeImpl>(DataTypesImpl);
+                return DataTypesWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DataType_Module_Module", "B_DataType")]
+        public EntityCollection<Kistl.App.Base.DataTypeImpl> DataTypesImpl
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.DataTypeImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.DataTypeImpl>("Model.FK_DataType_Module_Module", "B_DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Assembly_Module_Module", "B_Assembly")]
-        public EntityCollection<Kistl.App.Base.Assembly> Assemblies
+        public ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get
             {
-                EntityCollection<Kistl.App.Base.Assembly> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Assembly>("Model.FK_Assembly_Module_Module", "B_Assembly");
+                if (AssembliesWrapper == null) AssembliesWrapper = new EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.AssemblyImpl>(AssembliesImpl);
+                return AssembliesWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Assembly_Module_Module", "B_Assembly")]
+        public EntityCollection<Kistl.App.Base.AssemblyImpl> AssembliesImpl
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.AssemblyImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.AssemblyImpl>("Model.FK_Assembly_Module_Module", "B_Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }

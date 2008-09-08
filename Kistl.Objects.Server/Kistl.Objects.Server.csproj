@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -77,8 +77,6 @@
     <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />
     <Compile Include="IntProperty.Server.Designer.cs" />
-    <Compile Include="IRenderer.Server.Designer.cs" />
-    <Compile Include="ITestInterface.Server.Designer.cs" />
     <Compile Include="Kostenstelle.Server.Designer.cs" />
     <Compile Include="Kostentraeger.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />
@@ -104,13 +102,10 @@
     <Compile Include="Task.Server.Designer.cs" />
     <Compile Include="Template.Server.Designer.cs" />
     <Compile Include="TestCustomObject.Server.Designer.cs" />
-    <Compile Include="TestEnum.Server.Designer.cs" />
     <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="TestPhoneStruct.Server.Designer.cs" />
-    <Compile Include="Toolkit.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="Visual.Server.Designer.cs" />
-    <Compile Include="VisualType.Server.Designer.cs" />
     <Compile Include="Zeitkonto.Server.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +116,10 @@
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

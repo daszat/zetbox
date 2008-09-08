@@ -24,7 +24,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Client;
     
     
-    public class Taetigkeit : BaseClientDataObject
+    public class TaetigkeitImpl : BaseClientDataObject, Taetigkeit
     {
         
         private System.Nullable<int> _fk_Zeitkonto = null;
@@ -37,7 +37,7 @@ namespace Kistl.App.Zeiterfassung
         
         private System.Nullable<int> _fk_TaetigkeitsArt = null;
         
-        public Taetigkeit()
+        public TaetigkeitImpl()
         {
         }
         
@@ -201,11 +201,11 @@ namespace Kistl.App.Zeiterfassung
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Taetigkeit)obj).fk_Zeitkonto = this.fk_Zeitkonto;
-            ((Taetigkeit)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
-            ((Taetigkeit)obj).Datum = this.Datum;
-            ((Taetigkeit)obj).Dauer = this.Dauer;
-            ((Taetigkeit)obj).fk_TaetigkeitsArt = this.fk_TaetigkeitsArt;
+            ((TaetigkeitImpl)obj).fk_Zeitkonto = this.fk_Zeitkonto;
+            ((TaetigkeitImpl)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
+            ((TaetigkeitImpl)obj).Datum = this.Datum;
+            ((TaetigkeitImpl)obj).Dauer = this.Dauer;
+            ((TaetigkeitImpl)obj).fk_TaetigkeitsArt = this.fk_TaetigkeitsArt;
         }
         
         public override void AttachToContext(IKistlContext ctx)

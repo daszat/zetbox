@@ -1,5 +1,13 @@
 @echo off
 
+rem *********** Interface *********** 
+xcopy /y .\Kistl.Objects\*.cs .\Kistl.Objects\Backup
+
+del .\Kistl.Objects\*.cs
+
+xcopy /y C:\temp\KistlCodeGen\Kistl.Objects\*.* .\Kistl.Objects
+
+
 rem *********** Client *********** 
 xcopy /y .\Kistl.Objects.Client\*.Designer.cs .\Kistl.Objects.Client\Backup
 

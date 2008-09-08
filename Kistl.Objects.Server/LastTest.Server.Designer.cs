@@ -25,12 +25,12 @@ namespace Kistl.App.Test
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="LastTest")]
-    public class LastTest : BaseServerDataObject
+    public class LastTestImpl : BaseServerDataObject, LastTest
     {
         
         private int _ID;
         
-        public LastTest()
+        public LastTestImpl()
         {
         }
         

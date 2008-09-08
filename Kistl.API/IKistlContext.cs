@@ -162,7 +162,7 @@ namespace Kistl.API
         /// </summary>
         /// <typeparam name="T">Type of the new IDataObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        T Create<T>() where T : IDataObject, new();
+        T Create<T>() where T : IDataObject;
 
         /// <summary>
         /// Find the Object of the given type by ID

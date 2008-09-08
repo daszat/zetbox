@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{08902397-B9CA-43DA-8C8D-27DCEC097611}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -60,9 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseServerDataObject.cs" />
+    <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="KistlDataContext.cs" />
     <Compile Include="KistlDataContextEntityFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">

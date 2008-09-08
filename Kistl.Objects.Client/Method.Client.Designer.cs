@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class Method : BaseClientDataObject
+    public class MethodImpl : BaseClientDataObject, Method
     {
         
         private System.Nullable<int> _fk_ObjectClass = null;
@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         
         private bool _IsDisplayable;
         
-        public Method()
+        public MethodImpl()
         {
         }
         
@@ -123,7 +123,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.MethodInvocation> MethodInvokations
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations
         {
             get
             {
@@ -143,7 +143,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Base.BaseParameter> Parameter
+        public ICollection<Kistl.App.Base.BaseParameter> Parameter
         {
             get
             {
@@ -214,12 +214,12 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Method)obj).fk_ObjectClass = this.fk_ObjectClass;
-            ((Method)obj).MethodName = this.MethodName;
-            ((Method)obj).fk_Module = this.fk_Module;
-            if(this._MethodInvokations != null) this._MethodInvokations.ApplyChanges(((Method)obj)._MethodInvokations); else ((Method)obj)._MethodInvokations = null; ((Method)obj).NotifyPropertyChanged("MethodInvokations");
-            if(this._Parameter != null) this._Parameter.ApplyChanges(((Method)obj)._Parameter); else ((Method)obj)._Parameter = null; ((Method)obj).NotifyPropertyChanged("Parameter");
-            ((Method)obj).IsDisplayable = this.IsDisplayable;
+            ((MethodImpl)obj).fk_ObjectClass = this.fk_ObjectClass;
+            ((MethodImpl)obj).MethodName = this.MethodName;
+            ((MethodImpl)obj).fk_Module = this.fk_Module;
+            if(this._MethodInvokations != null) this._MethodInvokations.ApplyChanges(((MethodImpl)obj)._MethodInvokations); else ((MethodImpl)obj)._MethodInvokations = null; ((MethodImpl)obj).NotifyPropertyChanged("MethodInvokations");
+            if(this._Parameter != null) this._Parameter.ApplyChanges(((MethodImpl)obj)._Parameter); else ((MethodImpl)obj)._Parameter = null; ((MethodImpl)obj).NotifyPropertyChanged("Parameter");
+            ((MethodImpl)obj).IsDisplayable = this.IsDisplayable;
         }
         
         public override void AttachToContext(IKistlContext ctx)

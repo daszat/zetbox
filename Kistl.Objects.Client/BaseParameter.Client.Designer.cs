@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BaseParameter : BaseClientDataObject
+    public class BaseParameterImpl : BaseClientDataObject, BaseParameter
     {
         
         private System.Nullable<int> _fk_Method = null;
@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         
         private bool _IsReturnParameter;
         
-        public BaseParameter()
+        public BaseParameterImpl()
         {
         }
         
@@ -191,11 +191,11 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((BaseParameter)obj).fk_Method = this.fk_Method;
-            ((BaseParameter)obj).ParameterName = this.ParameterName;
-            ((BaseParameter)obj).fk_Module = this.fk_Module;
-            ((BaseParameter)obj).IsList = this.IsList;
-            ((BaseParameter)obj).IsReturnParameter = this.IsReturnParameter;
+            ((BaseParameterImpl)obj).fk_Method = this.fk_Method;
+            ((BaseParameterImpl)obj).ParameterName = this.ParameterName;
+            ((BaseParameterImpl)obj).fk_Module = this.fk_Module;
+            ((BaseParameterImpl)obj).IsList = this.IsList;
+            ((BaseParameterImpl)obj).IsReturnParameter = this.IsReturnParameter;
         }
         
         public override void AttachToContext(IKistlContext ctx)

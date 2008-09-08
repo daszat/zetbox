@@ -104,8 +104,8 @@ namespace Kistl.GUI
     {
         protected override void InitializeComponent()
         {
-            ((IReferenceControl)Control).ObjectType = Method.GetReturnParameter().GetType();
-            ((IReferenceControl)Control).ItemsSource = Object.Context.GetQuery(Method.GetReturnParameter().GetType()).ToList();
+            ((IReferenceControl)Control).ObjectType = Method.GetReturnParameter().GetInterfaceType();
+            ((IReferenceControl)Control).ItemsSource = Object.Context.GetQuery(Method.GetReturnParameter().GetInterfaceType()).ToList();
             base.InitializeComponent();
         }
     }
@@ -114,8 +114,8 @@ namespace Kistl.GUI
     {
         protected override void InitializeComponent()
         {
-            ((IReferenceListControl)Control).ObjectType = Method.GetReturnParameter().GetType();
-            ((IReferenceListControl)Control).ItemsSource = Object.Context.GetQuery(Method.GetReturnParameter().GetType()).ToList();
+            ((IReferenceListControl)Control).ObjectType = Method.GetReturnParameter().GetInterfaceType();
+            ((IReferenceListControl)Control).ItemsSource = Object.Context.GetQuery(Method.GetReturnParameter().GetInterfaceType()).ToList();
             base.InitializeComponent();
         }
 

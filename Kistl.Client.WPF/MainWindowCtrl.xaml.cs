@@ -150,7 +150,7 @@ namespace Kistl.Client.WPF
 
                 try
                 {
-                    Kistl.App.Base.ObjectClass objClass = ClientHelper.ObjectClasses[Item.GetType()];
+                    Kistl.App.Base.ObjectClass objClass = ClientHelper.ObjectClasses[Item.GetInterfaceType()];
                     List<Kistl.App.Base.BaseProperty> properties = new List<Kistl.App.Base.BaseProperty>();
 
                     while (objClass != null)

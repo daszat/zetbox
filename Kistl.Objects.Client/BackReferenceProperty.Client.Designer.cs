@@ -24,14 +24,14 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BackReferenceProperty : Kistl.App.Base.BaseProperty
+    public class BackReferencePropertyImpl : Kistl.App.Base.BasePropertyImpl, BackReferenceProperty
     {
         
         private System.Nullable<int> _fk_ReferenceProperty = null;
         
         private bool _PreFetchToClient;
         
-        public BackReferenceProperty()
+        public BackReferencePropertyImpl()
         {
         }
         
@@ -122,8 +122,8 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((BackReferenceProperty)obj).fk_ReferenceProperty = this.fk_ReferenceProperty;
-            ((BackReferenceProperty)obj).PreFetchToClient = this.PreFetchToClient;
+            ((BackReferencePropertyImpl)obj).fk_ReferenceProperty = this.fk_ReferenceProperty;
+            ((BackReferencePropertyImpl)obj).PreFetchToClient = this.PreFetchToClient;
         }
         
         public override void AttachToContext(IKistlContext ctx)

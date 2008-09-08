@@ -12,11 +12,12 @@ namespace Kistl.Client
     public class Manager
     {
         /// <summary>
-        /// Initialise the connection to the server
+        /// Initialise the connection to the server,
+        /// TODO: string übergeben ist blöd
         /// </summary>
         /// <param name="args">a string[] containing the commandline arguments</param>
         /// <returns>a string[] containing all unhandled commandline arguments</returns>
-        public static string[] Create(string[] args, Toolkit tk)
+        public static string[] Create(string[] args, string tk)
         {
             if (IsInitialized) throw new InvalidOperationException("Cannot initialize twice");
 

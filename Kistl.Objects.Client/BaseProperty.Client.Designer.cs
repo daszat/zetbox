@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class BaseProperty : BaseClientDataObject
+    public class BasePropertyImpl : BaseClientDataObject, BaseProperty
     {
         
         private System.Nullable<int> _fk_ObjectClass = null;
@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Module = null;
         
-        public BaseProperty()
+        public BasePropertyImpl()
         {
         }
         
@@ -174,10 +174,10 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((BaseProperty)obj).fk_ObjectClass = this.fk_ObjectClass;
-            ((BaseProperty)obj).PropertyName = this.PropertyName;
-            ((BaseProperty)obj).AltText = this.AltText;
-            ((BaseProperty)obj).fk_Module = this.fk_Module;
+            ((BasePropertyImpl)obj).fk_ObjectClass = this.fk_ObjectClass;
+            ((BasePropertyImpl)obj).PropertyName = this.PropertyName;
+            ((BasePropertyImpl)obj).AltText = this.AltText;
+            ((BasePropertyImpl)obj).fk_Module = this.fk_Module;
         }
         
         public override void AttachToContext(IKistlContext ctx)

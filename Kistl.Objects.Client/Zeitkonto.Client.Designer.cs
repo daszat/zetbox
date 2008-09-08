@@ -24,22 +24,22 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Client;
     
     
-    public class Zeitkonto : BaseClientDataObject
+    public class ZeitkontoImpl : BaseClientDataObject, Zeitkonto
     {
         
         private string _Kontoname;
         
         private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _Taetigkeiten;
         
-        private ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Zeitkonto, Zeitkonto_MitarbeiterCollectionEntry> _Mitarbeiter;
+        private ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto, Zeitkonto_MitarbeiterCollectionEntryImpl> _Mitarbeiter;
         
         private System.Double? _MaxStunden;
         
         private System.Double? _AktuelleStunden;
         
-        public Zeitkonto()
+        public ZeitkontoImpl()
         {
-            _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Zeitkonto, Zeitkonto_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
+            _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto, Zeitkonto_MitarbeiterCollectionEntryImpl>(this, "Mitarbeiter");
         }
         
         public string Kontoname
@@ -60,7 +60,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
+        public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
         {
             get
             {
@@ -154,11 +154,11 @@ namespace Kistl.App.Zeiterfassung
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Zeitkonto)obj).Kontoname = this.Kontoname;
-            if(this._Taetigkeiten != null) this._Taetigkeiten.ApplyChanges(((Zeitkonto)obj)._Taetigkeiten); else ((Zeitkonto)obj)._Taetigkeiten = null; ((Zeitkonto)obj).NotifyPropertyChanged("Taetigkeiten");
-            this._Mitarbeiter.ApplyChanges(((Zeitkonto)obj)._Mitarbeiter);
-            ((Zeitkonto)obj).MaxStunden = this.MaxStunden;
-            ((Zeitkonto)obj).AktuelleStunden = this.AktuelleStunden;
+            ((ZeitkontoImpl)obj).Kontoname = this.Kontoname;
+            if(this._Taetigkeiten != null) this._Taetigkeiten.ApplyChanges(((ZeitkontoImpl)obj)._Taetigkeiten); else ((ZeitkontoImpl)obj)._Taetigkeiten = null; ((ZeitkontoImpl)obj).NotifyPropertyChanged("Taetigkeiten");
+            this._Mitarbeiter.ApplyChanges(((ZeitkontoImpl)obj)._Mitarbeiter);
+            ((ZeitkontoImpl)obj).MaxStunden = this.MaxStunden;
+            ((ZeitkontoImpl)obj).AktuelleStunden = this.AktuelleStunden;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -187,7 +187,7 @@ namespace Kistl.App.Zeiterfassung
         }
     }
     
-    internal class Zeitkonto_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Zeitkonto>
+    public class Zeitkonto_MitarbeiterCollectionEntryImpl : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto>
     {
         
         private int _fk_Value;
@@ -208,7 +208,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
-        public Zeitkonto Parent
+        public Kistl.App.Zeiterfassung.Zeitkonto Parent
         {
             get
             {
@@ -266,8 +266,8 @@ namespace Kistl.App.Zeiterfassung
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
             base.ApplyChanges(obj);
-            ((Zeitkonto_MitarbeiterCollectionEntry)obj)._fk_Value = this.fk_Value;
-            ((Zeitkonto_MitarbeiterCollectionEntry)obj)._fk_Parent = this.fk_Parent;
+            ((Zeitkonto_MitarbeiterCollectionEntryImpl)obj)._fk_Value = this.fk_Value;
+            ((Zeitkonto_MitarbeiterCollectionEntryImpl)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Test
+namespace Kistl.App.Projekte
 {
     using System;
     using System.Collections.Generic;
@@ -21,16 +21,41 @@ namespace Kistl.App.Test
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
-    using Kistl.API.Server;
     
     
-    public enum TestEnum
+    public interface Auftrag : IDataObject
     {
         
-        /// First
-        First = 0,
+        Kistl.App.Projekte.Projekt Projekt
+        {
+            get;
+            set;
+        }
         
-        /// Second
-        Second = 1,
+        Kistl.App.Projekte.Mitarbeiter Mitarbeiter
+        {
+            get;
+            set;
+        }
+        
+        string Auftragsname
+        {
+            get;
+            set;
+        }
+        
+        Kistl.App.Projekte.Kunde Kunde
+        {
+            get;
+            set;
+        }
+        
+        System.Double? Auftragswert
+        {
+            get;
+            set;
+        }
+        
+        void RechnungErstellen();
     }
 }

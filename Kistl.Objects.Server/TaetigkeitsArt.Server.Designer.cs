@@ -25,14 +25,14 @@ namespace Kistl.App.Zeiterfassung
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TaetigkeitsArt")]
-    public class TaetigkeitsArt : BaseServerDataObject
+    public class TaetigkeitsArtImpl : BaseServerDataObject, TaetigkeitsArt
     {
         
         private int _ID;
         
         private string _Name;
         
-        public TaetigkeitsArt()
+        public TaetigkeitsArtImpl()
         {
         }
         

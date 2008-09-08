@@ -24,10 +24,10 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
-    public class LastTest : BaseClientDataObject
+    public class LastTestImpl : BaseClientDataObject, LastTest
     {
         
-        public LastTest()
+        public LastTestImpl()
         {
         }
         

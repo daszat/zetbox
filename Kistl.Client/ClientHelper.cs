@@ -11,7 +11,7 @@ namespace Kistl.Client
     /// <summary>
     /// Client Helper Methods
     /// </summary>
-    public class ClientHelper
+    public static class ClientHelper
     {
         /// <summary>
         /// Auch das könnte man besser implementieren

@@ -252,6 +252,33 @@ namespace Kistl.API
             fi.SetValue(obj, val);
         }
 
+        /// <summary>
+        /// TODO: Das passt mir nicht!
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static Type GetInterfaceType(this IPersistenceObject obj)
+        {
+            return ToInterfaceType(obj.GetType());
+        }
+
+        public static Type ToInterfaceType(this Type type)
+        {
+            if (typeof(IPersistenceObject).IsAssignableFrom(type) && type.Name.EndsWith("Impl"))
+            {
+                type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - 4) + ", Kistl.Objects", true);
+            }
+            return type;
+        }
+
+        public static Type ToImplementationType(this Type type)
+        {
+            if (typeof(IPersistenceObject).IsAssignableFrom(type) && !type.Name.EndsWith("Impl"))
+            {
+                type = Type.GetType(type.FullName + "Impl, Kistl.Objects." + APIInit.HostType, true);
+            }
+            return type;
+        }
 
         /// <summary>
         /// Foreach Extension Method for IEnumerable. This Extension does not check if the Enumeration Entry is NULL!

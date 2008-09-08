@@ -26,7 +26,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kistl.Client.ASPNET\", "{CF19E9F6-8DB1-4338-B0D7-C71DA08C5DB5}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
-		ProjectReferences = "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}|Kistl.API.dll;{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}|Kistl.API.Client.dll;{A736E13F-D349-4CE5-A397-8438F58D0B9D}|Kistl.Client.dll;{80F37FB5-66C6-45F2-9E2A-F787B141D66C}|Kistl.Objects.Client.dll;{04656394-60EA-4675-95EE-3DA6D07BAB89}|Kistl.Client.ASPNET.Toolkit.dll;"
+		ProjectReferences = "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}|Kistl.API.dll;{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}|Kistl.API.Client.dll;{A736E13F-D349-4CE5-A397-8438F58D0B9D}|Kistl.Client.dll;{80F37FB5-66C6-45F2-9E2A-F787B141D66C}|Kistl.Objects.Client.dll;{04656394-60EA-4675-95EE-3DA6D07BAB89}|Kistl.Client.ASPNET.Toolkit.dll;{0C9E6E69-309F-46F7-A936-D5762229DEB9}|Kistl.Objects.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Kistl.Client.ASPNET"
 		Debug.AspNetCompiler.PhysicalPath = "Kistl.Client.ASPNET\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Kistl.Client.ASPNET\"
@@ -41,11 +41,13 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kist
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "49281"
+		VWDPort = "50753"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.ASPNET.Toolkit", "Kistl.Client.ASPNET.Toolkit\Kistl.Client.ASPNET.Toolkit.csproj", "{04656394-60EA-4675-95EE-3DA6D07BAB89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects", "Kistl.Objects\Kistl.Objects.csproj", "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -187,6 +189,16 @@ Global
 		{04656394-60EA-4675-95EE-3DA6D07BAB89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04656394-60EA-4675-95EE-3DA6D07BAB89}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04656394-60EA-4675-95EE-3DA6D07BAB89}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Release|.NET.ActiveCfg = Release|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

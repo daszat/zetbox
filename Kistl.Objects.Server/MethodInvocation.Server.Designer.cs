@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Assembly_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodImpl), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocationImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Assembly_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyImpl), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocationImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleImpl), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocationImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeImpl), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocationImpl))]
 
 namespace Kistl.App.Base
 {
@@ -30,7 +30,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="MethodInvocation")]
-    public class MethodInvocation : BaseServerDataObject
+    public class MethodInvocationImpl : BaseServerDataObject, MethodInvocation
     {
         
         private int _ID;
@@ -47,7 +47,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_InvokeOnObjectClass = null;
         
-        public MethodInvocation()
+        public MethodInvocationImpl()
         {
         }
         
@@ -65,20 +65,15 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Method_Method", "A_Method")]
         public Kistl.App.Base.Method Method
         {
             get
             {
-                EntityReference<Kistl.App.Base.Method> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method>("Model.FK_MethodInvocation_Method_Method", "A_Method");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return MethodImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Method> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method>("Model.FK_MethodInvocation_Method_Method", "A_Method");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                MethodImpl = (Kistl.App.Base.MethodImpl)value;
             }
         }
         
@@ -98,21 +93,33 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Assembly_Assembly", "A_Assembly")]
-        public Kistl.App.Base.Assembly Assembly
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Method_Method", "A_Method")]
+        public Kistl.App.Base.MethodImpl MethodImpl
         {
             get
             {
-                EntityReference<Kistl.App.Base.Assembly> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly>("Model.FK_MethodInvocation_Assembly_Assembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.MethodImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodImpl>("Model.FK_MethodInvocation_Method_Method", "A_Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Assembly> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly>("Model.FK_MethodInvocation_Assembly_Assembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.MethodImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodImpl>("Model.FK_MethodInvocation_Method_Method", "A_Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                r.Value = (Kistl.App.Base.MethodImpl)value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Assembly Assembly
+        {
+            get
+            {
+                return AssemblyImpl;
+            }
+            set
+            {
+                AssemblyImpl = (Kistl.App.Base.AssemblyImpl)value;
             }
         }
         
@@ -129,6 +136,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_Assembly = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Assembly_Assembly", "A_Assembly")]
+        public Kistl.App.Base.AssemblyImpl AssemblyImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_MethodInvocation_Assembly_Assembly", "A_Assembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_MethodInvocation_Assembly_Assembly", "A_Assembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.AssemblyImpl)value;
             }
         }
         
@@ -169,20 +193,15 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Module_Module", "A_Module")]
         public Kistl.App.Base.Module Module
         {
             get
             {
-                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_MethodInvocation_Module_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
+                return ModuleImpl;
             }
             set
             {
-                EntityReference<Kistl.App.Base.Module> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module>("Model.FK_MethodInvocation_Module_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                ModuleImpl = (Kistl.App.Base.ModuleImpl)value;
             }
         }
         
@@ -202,21 +221,33 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType")]
-        public Kistl.App.Base.DataType InvokeOnObjectClass
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Module_Module", "A_Module")]
+        public Kistl.App.Base.ModuleImpl ModuleImpl
         {
             get
             {
-                EntityReference<Kistl.App.Base.DataType> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType>("Model.FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType");
+                EntityReference<Kistl.App.Base.ModuleImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleImpl>("Model.FK_MethodInvocation_Module_Module", "A_Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.DataType> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType>("Model.FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType");
+                EntityReference<Kistl.App.Base.ModuleImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleImpl>("Model.FK_MethodInvocation_Module_Module", "A_Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = value;
+                r.Value = (Kistl.App.Base.ModuleImpl)value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.DataType InvokeOnObjectClass
+        {
+            get
+            {
+                return InvokeOnObjectClassImpl;
+            }
+            set
+            {
+                InvokeOnObjectClassImpl = (Kistl.App.Base.DataTypeImpl)value;
             }
         }
         
@@ -233,6 +264,23 @@ namespace Kistl.App.Base
             set
             {
                 _fk_InvokeOnObjectClass = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType")]
+        public Kistl.App.Base.DataTypeImpl InvokeOnObjectClassImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.DataTypeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeImpl>("Model.FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.DataTypeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeImpl>("Model.FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.DataTypeImpl)value;
             }
         }
         

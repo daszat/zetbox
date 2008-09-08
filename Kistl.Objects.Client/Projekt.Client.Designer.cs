@@ -24,14 +24,14 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class Projekt : BaseClientDataObject
+    public class ProjektImpl : BaseClientDataObject, Projekt
     {
         
         private string _Name;
         
         private BackReferenceCollection<Kistl.App.Projekte.Task> _Tasks;
         
-        private ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Projekt, Projekt_MitarbeiterCollectionEntry> _Mitarbeiter;
+        private ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt, Projekt_MitarbeiterCollectionEntryImpl> _Mitarbeiter;
         
         private System.Double? _AufwandGes;
         
@@ -41,9 +41,9 @@ namespace Kistl.App.Projekte
         
         private BackReferenceCollection<Kistl.App.Projekte.Auftrag> _Auftraege;
         
-        public Projekt()
+        public ProjektImpl()
         {
-            _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Projekt, Projekt_MitarbeiterCollectionEntry>(this, "Mitarbeiter");
+            _Mitarbeiter = new ListPropertyCollection<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt, Projekt_MitarbeiterCollectionEntryImpl>(this, "Mitarbeiter");
         }
         
         public string Name
@@ -64,7 +64,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Projekte.Task> Tasks
+        public ICollection<Kistl.App.Projekte.Task> Tasks
         {
             get
             {
@@ -126,7 +126,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
+        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
         {
             get
             {
@@ -146,7 +146,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public IList<Kistl.App.Projekte.Auftrag> Auftraege
+        public ICollection<Kistl.App.Projekte.Auftrag> Auftraege
         {
             get
             {
@@ -198,13 +198,13 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Projekt)obj).Name = this.Name;
-            if(this._Tasks != null) this._Tasks.ApplyChanges(((Projekt)obj)._Tasks); else ((Projekt)obj)._Tasks = null; ((Projekt)obj).NotifyPropertyChanged("Tasks");
-            this._Mitarbeiter.ApplyChanges(((Projekt)obj)._Mitarbeiter);
-            ((Projekt)obj).AufwandGes = this.AufwandGes;
-            ((Projekt)obj).Kundenname = this.Kundenname;
-            if(this._Kostentraeger != null) this._Kostentraeger.ApplyChanges(((Projekt)obj)._Kostentraeger); else ((Projekt)obj)._Kostentraeger = null; ((Projekt)obj).NotifyPropertyChanged("Kostentraeger");
-            if(this._Auftraege != null) this._Auftraege.ApplyChanges(((Projekt)obj)._Auftraege); else ((Projekt)obj)._Auftraege = null; ((Projekt)obj).NotifyPropertyChanged("Auftraege");
+            ((ProjektImpl)obj).Name = this.Name;
+            if(this._Tasks != null) this._Tasks.ApplyChanges(((ProjektImpl)obj)._Tasks); else ((ProjektImpl)obj)._Tasks = null; ((ProjektImpl)obj).NotifyPropertyChanged("Tasks");
+            this._Mitarbeiter.ApplyChanges(((ProjektImpl)obj)._Mitarbeiter);
+            ((ProjektImpl)obj).AufwandGes = this.AufwandGes;
+            ((ProjektImpl)obj).Kundenname = this.Kundenname;
+            if(this._Kostentraeger != null) this._Kostentraeger.ApplyChanges(((ProjektImpl)obj)._Kostentraeger); else ((ProjektImpl)obj)._Kostentraeger = null; ((ProjektImpl)obj).NotifyPropertyChanged("Kostentraeger");
+            if(this._Auftraege != null) this._Auftraege.ApplyChanges(((ProjektImpl)obj)._Auftraege); else ((ProjektImpl)obj)._Auftraege = null; ((ProjektImpl)obj).NotifyPropertyChanged("Auftraege");
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -235,7 +235,7 @@ namespace Kistl.App.Projekte
         }
     }
     
-    internal class Projekt_MitarbeiterCollectionEntry : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Projekt>
+    public class Projekt_MitarbeiterCollectionEntryImpl : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
     {
         
         private int _fk_Value;
@@ -256,7 +256,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
-        public Projekt Parent
+        public Kistl.App.Projekte.Projekt Parent
         {
             get
             {
@@ -314,8 +314,8 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
             base.ApplyChanges(obj);
-            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Value = this.fk_Value;
-            ((Projekt_MitarbeiterCollectionEntry)obj)._fk_Parent = this.fk_Parent;
+            ((Projekt_MitarbeiterCollectionEntryImpl)obj)._fk_Value = this.fk_Value;
+            ((Projekt_MitarbeiterCollectionEntryImpl)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

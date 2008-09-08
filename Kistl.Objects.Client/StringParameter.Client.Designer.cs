@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class StringParameter : Kistl.App.Base.BaseParameter
+    public class StringParameterImpl : Kistl.App.Base.BaseParameterImpl, StringParameter
     {
         
-        public StringParameter()
+        public StringParameterImpl()
         {
         }
         

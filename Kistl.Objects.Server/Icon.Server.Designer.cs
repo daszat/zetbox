@@ -25,14 +25,14 @@ namespace Kistl.App.GUI
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Icon")]
-    public class Icon : BaseServerDataObject
+    public class IconImpl : BaseServerDataObject, Icon
     {
         
         private int _ID;
         
         private string _IconFile;
         
-        public Icon()
+        public IconImpl()
         {
         }
         
