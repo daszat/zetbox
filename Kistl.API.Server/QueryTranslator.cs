@@ -176,6 +176,7 @@ namespace Kistl.API.Server
         {
             if (u.NodeType == ExpressionType.Convert)
             {
+                // TODO: Only for IDataObjects, primitive Types should be allowed
                 return base.Visit(u.Operand);
             }
             else
