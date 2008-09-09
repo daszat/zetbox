@@ -243,7 +243,7 @@ namespace Kistl.API.Server.Tests
                 TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
                 Assert.That(obj.TestNames.Count, Is.EqualTo(2));
 
-                obj.TestNames.ToList()[1] = "MuhBlah";
+                obj.TestNames[1] = "MuhBlah";
 
                 ctx.SubmitChanges();
             }
@@ -253,7 +253,7 @@ namespace Kistl.API.Server.Tests
                 TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
                 Assert.That(obj.TestNames.Count, Is.EqualTo(2));
 
-                Assert.That(obj.TestNames.ToList()[1], Is.EqualTo("MuhBlah"));
+                Assert.That(obj.TestNames[1], Is.EqualTo("MuhBlah"));
             }
         }
 
@@ -496,7 +496,7 @@ namespace Kistl.API.Server.Tests
 
                 foreach (TestObjClass obj in result)
                 {
-                    obj.TestNames.ToList().ForEach<TestObjClass_TestNameCollectionEntryImpl>(c => ctx.Delete(c));
+                    obj.TestNames.Clear();
                     Assert.That(obj.TestNames.Count, Is.EqualTo(0));
                 }
             }
@@ -513,7 +513,6 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        [Ignore("Not supported yet")]
         public void Detach_IDataObject()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())

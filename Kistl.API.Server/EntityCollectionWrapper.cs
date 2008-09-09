@@ -85,28 +85,36 @@ namespace Kistl.API.Server
 
         public int IndexOf(VALUE item)
         {
-            throw new NotImplementedException();
+            int idx = 0;
+            foreach (IMPL v in _ec)
+            {
+                if (object.Equals(v.Value, item)) return idx;
+                idx++;
+            }
+            return -1;
         }
 
         public void Insert(int index, VALUE item)
         {
+            // TODO: Not ready yet
             throw new NotImplementedException();
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            _ec.Remove(_ec.Skip(index).Single());
         }
 
         public VALUE this[int index]
         {
+            // TODO: Not ready yet
             get
             {
-                throw new NotImplementedException();
+                return _ec.Skip(index).Single().Value;
             }
             set
             {
-                throw new NotImplementedException();
+                _ec.Skip(index).Single().Value = value;
             }
         }
 

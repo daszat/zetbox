@@ -18,6 +18,12 @@ namespace Kistl.API.Server.Tests
             Tests.KistlDataContextTests tests = new Tests.KistlDataContextTests();
 
             tests.SetUp();
+            tests.Delete_ICollectionEntry();
+
+            tests.SetUp();
+            tests.UpdateLists_SubmitChanges();
+
+            tests.SetUp();
             tests.Attach_IDataObject_New_WithGraph();
 
             tests.SetUp();

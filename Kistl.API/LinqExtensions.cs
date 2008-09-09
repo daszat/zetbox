@@ -111,6 +111,15 @@ namespace Kistl.API
                 new Type[] { t }, queryable.Expression));
         }
 
+        public static IQueryable<T> AddOfType<T>(this IQueryable queryable, Type t)
+        {
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (t == null) throw new ArgumentNullException("t");
+
+            return queryable.Provider.CreateQuery<T>(
+                Expression.Call(typeof(Queryable), "OfType",
+                new Type[] { t }, queryable.Expression));
+        }
 
         /// <summary>
         /// Appends a Expression Tree Order By to a Linq Expression

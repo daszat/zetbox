@@ -274,7 +274,10 @@ namespace Kistl.API
             }
             else
             {
-                if (typeof(IPersistenceObject).IsAssignableFrom(type) && type.Name.EndsWith("Impl"))
+                if (
+                    (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type)) 
+                    && type.Name.EndsWith("Impl")
+                    )
                 {
                     type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - 4) + ", Kistl.Objects", true);
                 }

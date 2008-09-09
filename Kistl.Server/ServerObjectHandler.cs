@@ -155,23 +155,24 @@ namespace Kistl.Server
                 if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
                 IEnumerable list = (IEnumerable)obj.GetPropertyValue <IEnumerable>(property);
+                return list;
 
-                using (IKistlContext ctx = KistlDataContext.GetContext())
-                {
-                    // If ObjectReferenc is a List -> convert data
-                    Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.GetObjectClass(ctx)
-                        .GetProperty(property);
-                    if (prop.ReferenceProperty.IsList)
-                    {
-                        List<IDataObject> result = new List<IDataObject>();
-                        list.ForEach<ICollectionEntry>(ce => result.Add(ce.GetPropertyValue<IDataObject>("Parent")));
-                        return result;
-                    }
-                    else
-                    {
-                        return list;
-                    }
-                }
+                //using (IKistlContext ctx = KistlDataContext.GetContext())
+                //{
+                //    // If ObjectReferenc is a List -> convert data
+                //    Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.GetObjectClass(ctx)
+                //        .GetProperty(property);
+                //    if (prop.ReferenceProperty.IsList)
+                //    {
+                //        List<IDataObject> result = new List<IDataObject>();
+                //        list.ForEach<ICollectionEntry>(ce => result.Add(ce.GetPropertyValue<IDataObject>("Parent")));
+                //        return result;
+                //    }
+                //    else
+                //    {
+                //        return list;
+                //    }
+                //}
             }
         }
 
@@ -282,7 +283,7 @@ namespace Kistl.Server
                         else
                         {
                             // Liste
-                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
+                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + "Impl"))
                             {
                                 int fk = ce.GetPrivateFieldValue<int>("_fk_Value");
 
@@ -310,7 +311,17 @@ namespace Kistl.Server
             {
                 ObjectStateEntry stateEntry = ((KistlDataContextEntityFramework)KistlDataContext.Current).ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
                 MetadataWorkspace workspace = ((KistlDataContextEntityFramework)KistlDataContext.Current).MetadataWorkspace;
-                string typename = ((IPersistenceObject)obj).GetInterfaceType().Name;
+                string typename;
+                if (obj is ICollectionEntry)
+                {
+                    typename = obj.GetType().Name;
+                    typename = typename.Substring(0, typename.Length - 4);
+                }
+                else
+                {
+                    typename = ((IPersistenceObject)obj).GetInterfaceType().Name;
+                }
+
                 EntityType entityType = workspace.GetItem<EntityType>("Model." + typename, DataSpace.CSpace);
 
                 foreach (EdmProperty property in entityType.Properties)
@@ -328,7 +339,7 @@ namespace Kistl.Server
                     {
                         foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))
                         {
-                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName))
+                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + "Impl"))
                             {
                                 EntityObject ce_eo = (EntityObject)ce;
                                 MarkEveryPropertyAsModified(ce_eo);

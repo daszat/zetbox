@@ -12,13 +12,25 @@ namespace Kistl.IntegrationTests
             SetUp setup = new SetUp();
             setup.Init();
 
-            GetListOfTests();
+            //InheritanceTests();
+            //GetListOfTests();
             //GetListTests();
             //ListPropetiesTests();
-            //ObjectTests();
+            ObjectTests();
             //StructTests();
 
             setup.TearDown();
+        }
+
+        private static void InheritanceTests()
+        {
+            InheritanceTests test = new InheritanceTests();
+
+            test.SetUp();
+            test.GetListOfInheritedObjects();
+
+            test.SetUp();
+            test.UpdateInheritedObject();
         }
 
         private static void GetListOfTests()
@@ -51,10 +63,13 @@ namespace Kistl.IntegrationTests
             ListPropetiesTests test = new ListPropetiesTests();
 
             test.SetUp();
+            test.AddStringListPropertyContent();
+
+            test.SetUp();
             test.DeleteStringListPropertyContent();
 
             test.SetUp();
-            test.AddStringListPropertyContent();
+            test.UpdateStringListPropertyContent();
 
             test.SetUp();
             test.GetPointerListPropertyContent();

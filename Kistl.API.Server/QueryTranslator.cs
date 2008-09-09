@@ -13,23 +13,20 @@ namespace Kistl.API.Server
     #region QueryTranslator
     public class QueryTranslator<T> : IQueryable<T>
     {
-        IQueryable _source;
         private Expression _expression = null;
         private QueryTranslatorProvider<T> _provider = null;
 
-        public QueryTranslator(IQueryable source)
+        public QueryTranslator(IQueryable source, IKistlContext ctx)
         {
-            _source = source;
             _expression = Expression.Constant(this);
-            _provider = new QueryTranslatorProvider<T>(_source);
+            _provider = new QueryTranslatorProvider<T>(source, ctx);
         }
 
-        public QueryTranslator(IQueryable source, Expression e)
+        public QueryTranslator(IQueryable source, IKistlContext ctx, Expression e)
         {
             if (e == null) throw new ArgumentNullException("e");
             _expression = e;
-            _source = source;
-            _provider = new QueryTranslatorProvider<T>(_source);
+            _provider = new QueryTranslatorProvider<T>(source, ctx);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -67,12 +64,15 @@ namespace Kistl.API.Server
         #endregion
 
         IQueryable _source;
+        IKistlContext _ctx = null;
         Expression _filter = null;
 
-        public QueryTranslatorProvider(IQueryable source)
+        public QueryTranslatorProvider(IQueryable source, IKistlContext ctx)
         {
             if (source == null) throw new ArgumentNullException("source");
+            if (ctx == null) throw new ArgumentNullException("ctx");
             _source = source;
+            _ctx = ctx;
         }
 
         #region IQueryProvider Members
@@ -80,7 +80,7 @@ namespace Kistl.API.Server
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
-            return new QueryTranslator<TElement>(_source, expression) as IQueryable<TElement>;
+            return new QueryTranslator<TElement>(_source, _ctx, expression) as IQueryable<TElement>;
         }
 
         public IQueryable CreateQuery(Expression expression)
@@ -89,7 +89,7 @@ namespace Kistl.API.Server
 
             Type elementType = expression.Type.GetCollectionElementType();
             IQueryable result = (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType),
-                new object[] { _source, expression });
+                new object[] { _source, _ctx, expression });
             return result;
         }
 
@@ -109,7 +109,12 @@ namespace Kistl.API.Server
             if (expression.IsMethodCallExpression("First") || expression.IsMethodCallExpression("FirstOrDefault") ||
                 expression.IsMethodCallExpression("Single") || expression.IsMethodCallExpression("SingleOrDefault"))
             {
-                return _source.Provider.Execute(translated);
+                IDataObject result = (IDataObject)_source.Provider.Execute(translated);
+                if (result != null)
+                {
+                    result.AttachToContext(_ctx);
+                }
+                return result;
             }
             else
             {
@@ -117,6 +122,7 @@ namespace Kistl.API.Server
                 List<T> result = new List<T>();
                 foreach (T item in newQuery)
                 {
+                    ((IDataObject)item).AttachToContext(_ctx);
                     result.Add(item);
                 }
                 return result;
