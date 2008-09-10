@@ -165,6 +165,19 @@ namespace Kistl.API
         T Create<T>() where T : IDataObject;
 
         /// <summary>
+        /// Creates a new Struct by Type
+        /// </summary>
+        /// <param name="type">Type of the new IDataObject</param>
+        /// <returns>A new Struct</returns>
+        IStruct CreateStruct(Type type);
+        /// <summary>
+        /// Creates a new Struct.
+        /// </summary>
+        /// <typeparam name="T">Type of the new Struct</typeparam>
+        /// <returns>A new Struct</returns>
+        T CreateStruct<T>() where T : IStruct;
+
+        /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase

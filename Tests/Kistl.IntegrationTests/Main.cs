@@ -16,8 +16,8 @@ namespace Kistl.IntegrationTests
             //GetListOfTests();
             //GetListTests();
             //ListPropetiesTests();
-            ObjectTests();
-            //StructTests();
+            //ObjectTests();
+            StructTests();
 
             setup.TearDown();
         }

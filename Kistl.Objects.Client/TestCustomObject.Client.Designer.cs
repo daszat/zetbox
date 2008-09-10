@@ -29,9 +29,9 @@ namespace Kistl.App.Test
         
         private string _PersonName;
         
-        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberMobileImpl;
+        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberMobile;
         
-        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberOfficeImpl;
+        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberOffice;
         
         private System.DateTime? _Birthday;
         
@@ -56,49 +56,20 @@ namespace Kistl.App.Test
             }
         }
         
-        public Kistl.App.Test.TestPhoneStructImpl PhoneNumberMobileImpl
-        {
-            get
-            {
-                return _PhoneNumberMobileImpl;
-            }
-            set
-            {
-                if (PhoneNumberMobileImpl != value)
-                {
-                    NotifyPropertyChanging("PhoneNumberMobileImpl"); 
-                    _PhoneNumberMobileImpl = value;
-                    NotifyPropertyChanged("PhoneNumberMobileImpl");;
-                }
-            }
-        }
-        
         public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
         {
             get
             {
-                return PhoneNumberMobileImpl;
+                return _PhoneNumberMobile;
             }
             set
             {
-                PhoneNumberMobileImpl = (Kistl.App.Test.TestPhoneStructImpl)value;
-            }
-        }
-        
-        public Kistl.App.Test.TestPhoneStructImpl PhoneNumberOfficeImpl
-        {
-            get
-            {
-                return _PhoneNumberOfficeImpl;
-            }
-            set
-            {
-                if (PhoneNumberOfficeImpl != value)
+                if (PhoneNumberMobile != value)
                 {
-                    NotifyPropertyChanging("PhoneNumberOfficeImpl"); 
-                    _PhoneNumberOfficeImpl = value;
-                    NotifyPropertyChanged("PhoneNumberOfficeImpl");;
-                }
+                    NotifyPropertyChanging("PhoneNumberMobile"); 
+                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    NotifyPropertyChanged("PhoneNumberMobile");
+                };
             }
         }
         
@@ -106,11 +77,16 @@ namespace Kistl.App.Test
         {
             get
             {
-                return PhoneNumberOfficeImpl;
+                return _PhoneNumberOffice;
             }
             set
             {
-                PhoneNumberOfficeImpl = (Kistl.App.Test.TestPhoneStructImpl)value;
+                if (PhoneNumberOffice != value)
+                {
+                    NotifyPropertyChanging("PhoneNumberOffice"); 
+                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    NotifyPropertyChanged("PhoneNumberOffice");
+                };
             }
         }
         
@@ -177,8 +153,8 @@ namespace Kistl.App.Test
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._PersonName, sw);
-            BinarySerializer.ToBinary(this._PhoneNumberMobileImpl, sw);
-            BinarySerializer.ToBinary(this._PhoneNumberOfficeImpl, sw);
+            BinarySerializer.ToBinary(this._PhoneNumberMobile, sw);
+            BinarySerializer.ToBinary(this._PhoneNumberOffice, sw);
             BinarySerializer.ToBinary(this._Birthday, sw);
         }
         
@@ -186,8 +162,8 @@ namespace Kistl.App.Test
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._PersonName, sr);
-            BinarySerializer.FromBinary(out this._PhoneNumberMobileImpl, sr);
-            BinarySerializer.FromBinary(out this._PhoneNumberOfficeImpl, sr);
+            BinarySerializer.FromBinary(out this._PhoneNumberMobile, sr);
+            BinarySerializer.FromBinary(out this._PhoneNumberOffice, sr);
             BinarySerializer.FromBinary(out this._Birthday, sr);
         }
     }

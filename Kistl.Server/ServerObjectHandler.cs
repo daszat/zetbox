@@ -156,23 +156,6 @@ namespace Kistl.Server
 
                 IEnumerable list = (IEnumerable)obj.GetPropertyValue <IEnumerable>(property);
                 return list;
-
-                //using (IKistlContext ctx = KistlDataContext.GetContext())
-                //{
-                //    // If ObjectReferenc is a List -> convert data
-                //    Kistl.App.Base.BackReferenceProperty prop = (Kistl.App.Base.BackReferenceProperty)obj.GetObjectClass(ctx)
-                //        .GetProperty(property);
-                //    if (prop.ReferenceProperty.IsList)
-                //    {
-                //        List<IDataObject> result = new List<IDataObject>();
-                //        list.ForEach<ICollectionEntry>(ce => result.Add(ce.GetPropertyValue<IDataObject>("Parent")));
-                //        return result;
-                //    }
-                //    else
-                //    {
-                //        return list;
-                //    }
-                //}
             }
         }
 

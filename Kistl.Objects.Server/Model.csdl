@@ -472,8 +472,8 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="PersonName" Type="String" MaxLength="200" Nullable="false" />
-    <Property Name="PhoneNumberMobile" Type="Model.TestPhoneStruct" Nullable="false" />
-    <Property Name="PhoneNumberOffice" Type="Model.TestPhoneStruct" Nullable="false" />
+    <Property Name="PhoneNumberMobileImpl" Type="Model.TestPhoneStruct" Nullable="false" />
+    <Property Name="PhoneNumberOfficeImpl" Type="Model.TestPhoneStruct" Nullable="false" />
     <Property Name="Birthday" Type="DateTime" Nullable="true" />
   </EntityType>
   <EntityType Name="Muhblah">

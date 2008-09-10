@@ -275,8 +275,8 @@ namespace Kistl.API
             else
             {
                 if (
-                    (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type)) 
-                    && type.Name.EndsWith("Impl")
+                    (typeof(IDataObject).IsAssignableFrom(type) && APIInit.BaseDataObjectType.IsAssignableFrom(type)) ||
+                    (typeof(IStruct).IsAssignableFrom(type) && APIInit.BaseStructObjectType.IsAssignableFrom(type)) 
                     )
                 {
                     type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - 4) + ", Kistl.Objects", true);
@@ -313,7 +313,10 @@ namespace Kistl.API
                 {
                     return APIInit.BaseCollectionEntryType;
                 }
-                else if (typeof(IDataObject).IsAssignableFrom(type) && !APIInit.BaseDataObjectType.IsAssignableFrom(type))
+                else if (
+                    ( typeof(IDataObject).IsAssignableFrom(type) && !APIInit.BaseDataObjectType.IsAssignableFrom(type)) ||
+                    ( typeof(IStruct).IsAssignableFrom(type) && !APIInit.BaseStructObjectType.IsAssignableFrom(type))
+                    )
                 {
                     // add "Impl"
                     string newType = type.FullName + "Impl, " + APIInit.ImplementationAssembly;

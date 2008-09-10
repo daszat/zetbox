@@ -74,6 +74,16 @@ namespace Kistl.API
             throw new NotImplementedException();
         }
 
+        public IStruct CreateStruct(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CreateStruct<T>() where T : IStruct
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataObject Find(Type type, int ID)
         {
             throw new NotImplementedException();

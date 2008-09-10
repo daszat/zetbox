@@ -23,7 +23,6 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        [Ignore]
         public void CreateObjectWithStruct()
         {
             int ID = Kistl.API.Helper.INVALIDID;
@@ -33,11 +32,17 @@ namespace Kistl.IntegrationTests
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
-                Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
-                Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
+                Assert.That(obj.PhoneNumberMobile, Is.Null);
+                Assert.That(obj.PhoneNumberOffice, Is.Null);
 
-                //obj.PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct() { AreaCode = "1", Number = number };
-                //obj.PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct() { AreaCode = "1", Number = number };
+                obj.PhoneNumberMobile = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
+                obj.PhoneNumberOffice = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
+
+                obj.PhoneNumberMobile.AreaCode = "1";
+                obj.PhoneNumberMobile.Number = number;
+
+                obj.PhoneNumberOffice.AreaCode = "1";
+                obj.PhoneNumberOffice.Number = number;
 
                 Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
 
@@ -69,7 +74,6 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        [Ignore]
         public void SaveObjectWithStruct()
         {
             int ID = Kistl.API.Helper.INVALIDID;
@@ -79,8 +83,14 @@ namespace Kistl.IntegrationTests
                 var obj = objList.First();
                 ID = obj.ID;
 
-                //obj.PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct() { AreaCode = "1", Number = number };
-                //obj.PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct() { AreaCode = "1", Number = number };
+                obj.PhoneNumberMobile = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
+                obj.PhoneNumberOffice = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
+
+                obj.PhoneNumberMobile.AreaCode = "1";
+                obj.PhoneNumberMobile.Number = number;
+
+                obj.PhoneNumberOffice.AreaCode = "1";
+                obj.PhoneNumberOffice.Number = number;
 
                 Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
             }
@@ -125,10 +135,10 @@ namespace Kistl.IntegrationTests
                 testObject.PhoneNumberOffice.Number = number;
                 testObject.PhoneNumberMobile.Number = number;
 
-                Assert.That(testObject.PhoneNumberMobile.Number, Is.EqualTo(oldNumber));
-                Assert.That(testObject.PhoneNumberOffice.Number, Is.EqualTo(oldNumber));
+                Assert.That(testObject.PhoneNumberMobile.Number, Is.EqualTo(number));
+                Assert.That(testObject.PhoneNumberOffice.Number, Is.EqualTo(number));
 
-                Assert.That(ctx.SubmitChanges(), Is.EqualTo(0));
+                Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
 
                 ID = testObject.ID;
             }
@@ -139,8 +149,8 @@ namespace Kistl.IntegrationTests
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
-                Assert.That(obj.PhoneNumberMobile.Number, Is.EqualTo(oldNumber));
-                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(oldNumber));
+                Assert.That(obj.PhoneNumberMobile.Number, Is.EqualTo(number));
+                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(number));
             }
         }
 
@@ -176,8 +186,8 @@ namespace Kistl.IntegrationTests
             {
                 var obj = ctx.Find<Kistl.App.Test.TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
-                Assert.That(obj.PhoneNumberMobile.Number, Is.Null);
-                Assert.That(obj.PhoneNumberOffice.Number, Is.Null);
+                Assert.That(obj.PhoneNumberMobile, Is.Null);
+                Assert.That(obj.PhoneNumberOffice, Is.Null);
             }
         }
     }

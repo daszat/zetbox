@@ -200,6 +200,29 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
+        /// Creates a new Struct by Type
+        /// </summary>
+        /// <param name="type">Type of the new IDataObject</param>
+        /// <returns>A new Struct</returns>
+        public IStruct CreateStruct(Type type)
+        {
+            CheckDisposed();
+            type = type.ToImplementationType();
+            Kistl.API.IStruct obj = (Kistl.API.IStruct)Activator.CreateInstance(type);
+            return obj;
+        }
+        /// <summary>
+        /// Creates a new Struct.
+        /// </summary>
+        /// <typeparam name="T">Type of the new Struct</typeparam>
+        /// <returns>A new Struct</returns>
+        public T CreateStruct<T>() where T : IStruct
+        {
+            return (T)CreateStruct(typeof(T));
+        }
+
+
+        /// <summary>
         /// Attach an IPersistenceObject. This Method checks, if the Object is already in that Context. 
         /// If so, it returns the Object in that Context.
         /// </summary>

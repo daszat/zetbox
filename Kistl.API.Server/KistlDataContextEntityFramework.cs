@@ -306,6 +306,27 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
+        /// Creates a new Struct by Type
+        /// </summary>
+        /// <param name="type">Type of the new IDataObject</param>
+        /// <returns>A new Struct</returns>
+        public IStruct CreateStruct(Type type)
+        {
+            type = type.ToImplementationType();
+            Kistl.API.IStruct obj = (Kistl.API.IStruct)Activator.CreateInstance(type);
+            return obj;
+        }
+        /// <summary>
+        /// Creates a new Struct.
+        /// </summary>
+        /// <typeparam name="T">Type of the new Struct</typeparam>
+        /// <returns>A new Struct</returns>
+        public T CreateStruct<T>() where T : IStruct
+        {
+            return (T)CreateStruct(typeof(T));
+        }
+
+        /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase

@@ -315,11 +315,11 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PersonName" ColumnName="PersonName" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ComplexProperty Name="PhoneNumberMobile" TypeName="Model.TestPhoneStruct">
+          <ComplexProperty Name="PhoneNumberMobileImpl" TypeName="Model.TestPhoneStruct">
             <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
             <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
           </ComplexProperty>
-          <ComplexProperty Name="PhoneNumberOffice" TypeName="Model.TestPhoneStruct">
+          <ComplexProperty Name="PhoneNumberOfficeImpl" TypeName="Model.TestPhoneStruct">
             <ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
             <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
           </ComplexProperty>

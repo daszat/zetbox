@@ -961,18 +961,17 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_StructPropertyInternal(CurrentObjectClass current)
         {
-            current.code_field = current.code_class.CreateField(current.property.GetPropertyTypeString() + "Impl", "_" + current.property.PropertyName + "Impl");
-            current.code_property = current.code_class.CreateNotifyingProperty(current.property.GetPropertyTypeString() + "Impl", current.property.PropertyName + "Impl");
+            //current.code_field = current.property.CreateField(current.code_class, current.task);
+            current.code_field = current.code_class.CreateField(current.property.GetPropertyTypeString() + "Impl", "_" + current.property.PropertyName);
+            current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
 
-            CurrentObjectClass ormProperty = (CurrentObjectClass)current.Clone();
-            ormProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString(), current.property.PropertyName);
-            ormProperty.code_property.GetStatements.AddStatement("return {0}Impl", current.property.PropertyName);
-            ormProperty.code_property.SetStatements.AddStatement("{0}Impl = ({1}Impl)value", current.property.PropertyName, current.property.GetPropertyTypeString());
-
-            //current.code_property.GetStatements.Clear();
-            //current.code_property.GetStatements.AddStatement(
-            //    "return _{0} != null ? ({1})_{0}.Clone() : new {1}()", 
-            //    current.property.PropertyName, current.property.GetPropertyTypeString());
+            current.code_property.GetStatements.AddStatement("return _{0}", current.property.PropertyName);
+            current.code_property.SetStatements.AddStatement(@"if ({0} != value)
+                {{
+                    NotifyPropertyChanging(""{0}""); 
+                    _{0} = ({1}Impl)value;
+                    NotifyPropertyChanged(""{0}"");
+                }}", current.property.PropertyName, current.property.GetPropertyTypeString());
 
             GenerateProperties_StructProperty(current);
         }
@@ -1321,7 +1320,7 @@ namespace Kistl.Server.Generators
                 }
                 else if (p.IsStructPropertySingle())
                 {
-                    m.Statements.AddStatement("BinarySerializer.ToBinary(this._{0}Impl, sw)", p.PropertyName);
+                    m.Statements.AddStatement("BinarySerializer.ToBinary(this._{0}, sw)", p.PropertyName);
                 }
                 else if (p.IsObjectReferencePropertySingle())
                 {
@@ -1370,7 +1369,7 @@ namespace Kistl.Server.Generators
                 }
                 else if (p.IsStructPropertySingle())
                 {
-                    m.Statements.AddStatement("BinarySerializer.FromBinary(out this._{0}Impl, sr)", p.PropertyName);
+                    m.Statements.AddStatement("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName);
                 }
                 else if (p is ObjectReferenceProperty)
                 {

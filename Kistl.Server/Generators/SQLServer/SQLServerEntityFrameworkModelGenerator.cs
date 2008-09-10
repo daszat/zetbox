@@ -339,7 +339,14 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         // ValueTypeProperty
                         xml.WriteStartElement("Property");
-                        xml.WriteAttributeString("Name", p.PropertyName + (p is EnumerationProperty ? "Impl" : ""));
+                        if (p is EnumerationProperty)
+                        {
+                            xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                        }
+                        else
+                        {
+                            xml.WriteAttributeString("Name", p.PropertyName);
+                        }
                         xml.WriteAttributeString("Type", p is EnumerationProperty ? "Int32" : Type.GetType(p.GetPropertyTypeString()).Name);
                         if (p is StringProperty)
                         {
@@ -364,7 +371,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         // ValueTypeProperty
                         xml.WriteStartElement("Property");
-                        xml.WriteAttributeString("Name", p.PropertyName);
+                        xml.WriteAttributeString("Name", p.PropertyName + "Impl");
                         xml.WriteAttributeString("Type", "Model." + ((StructProperty)p).StructDefinition.ClassName);
                         xml.WriteAttributeString("Nullable", "false"); // Nullable Complex types are not supported by EF
                         xml.WriteEndElement(); // </Property>
@@ -471,7 +478,14 @@ namespace Kistl.Server.Generators.SQLServer
             foreach (ValueTypeProperty p in obj.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList == false))
             {
                 xml.WriteStartElement("ScalarProperty");
-                xml.WriteAttributeString("Name", p.PropertyName + (p is EnumerationProperty ? "Impl" : ""));
+                if (p is EnumerationProperty)
+                {
+                    xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                }
+                else
+                {
+                    xml.WriteAttributeString("Name", p.PropertyName);
+                }
                 xml.WriteAttributeString("ColumnName", p.PropertyName.CalcColumnName(parentPropName));
                 xml.WriteEndElement(); // </ScalarProperty>
             }
@@ -479,7 +493,7 @@ namespace Kistl.Server.Generators.SQLServer
             foreach (StructProperty s in obj.Properties.OfType<StructProperty>().Where(p => p.IsList == false))
             {
                 xml.WriteStartElement("ComplexProperty");
-                xml.WriteAttributeString("Name", s.PropertyName);
+                xml.WriteAttributeString("Name", s.PropertyName + "Impl");
                 xml.WriteAttributeString("TypeName", "Model." + s.StructDefinition.ClassName);
 
                 AddEntityTypeMapping_Properties(xml, s.StructDefinition, s.PropertyName.CalcColumnName(parentPropName));

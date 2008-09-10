@@ -467,8 +467,13 @@ namespace Kistl.Server.Generators.SQLServer
             base.GenerateProperties_StructProperty(current);
             if (current.task == TaskEnum.Server)
             {
-                current.code_property.AddAttribute("EdmComplexPropertyAttribute");
-                current.code_constructor.Statements.AddStatement(@"_{0}Impl = new {1}Impl()",
+                CurrentObjectClass ormProperty = (CurrentObjectClass)current.Clone();
+                ormProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString() + "Impl", current.property.PropertyName + "Impl");
+                ormProperty.code_property.AddAttribute("EdmComplexPropertyAttribute");
+                ormProperty.code_property.GetStatements.AddStatement("return ({1}Impl){0}", current.property.PropertyName, current.property.GetPropertyTypeString());
+                ormProperty.code_property.SetStatements.AddStatement("{0} = value", current.property.PropertyName, current.property.GetPropertyTypeString());
+
+                ormProperty.code_constructor.Statements.AddStatement(@"_{0} = new {1}Impl()",
                         current.property.PropertyName,
                         current.property.GetPropertyTypeString());
             }
