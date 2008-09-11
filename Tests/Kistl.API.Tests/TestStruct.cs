@@ -26,5 +26,14 @@ namespace Kistl.API
         {
             return null;
         }
+
+
+        public void AttachToObject(IPersistenceObject obj, string property)
+        {
+        }
+
+        public void DetachFromObject(IPersistenceObject obj, string property)
+        {
+        }
     }
 }

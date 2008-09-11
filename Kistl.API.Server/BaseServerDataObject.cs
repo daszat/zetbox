@@ -274,6 +274,9 @@ namespace Kistl.API.Server
         {
             if (PropertyChanging != null)
                 PropertyChanging(this, new PropertyChangingEventArgs(property));
+
+            if (_attachedObject != null)
+                _attachedObject.NotifyPropertyChanging(_attachedObjectProperty);
         }
 
         /// <summary>
@@ -284,6 +287,25 @@ namespace Kistl.API.Server
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
+
+            if (_attachedObject != null)
+                _attachedObject.NotifyPropertyChanged(_attachedObjectProperty);
+        }
+
+        private IPersistenceObject _attachedObject;
+        private string _attachedObjectProperty;
+        public void AttachToObject(IPersistenceObject obj, string property)
+        {
+            if (_attachedObject != null && _attachedObject != obj) throw new ArgumentException("Struct is already attached to another object");
+
+            _attachedObjectProperty = property;
+            _attachedObject = obj;
+        }
+
+        public void DetachFromObject(IPersistenceObject obj, string property)
+        {
+            _attachedObject = null;
+            _attachedObjectProperty = "";
         }
     }
 }

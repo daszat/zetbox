@@ -105,7 +105,14 @@ namespace Kistl.API.Server
             if (expression == null) throw new ArgumentNullException("expression");
 
             Expression translated = this.Visit(expression);
-
+            // Deshalb brauch ich diese Weiche:
+            // http://msdn.microsoft.com/en-us/library/bb549414.aspx
+            // The Execute method executes queries that return a single value 
+            // (instead of an enumerable sequence of values). Expression trees that represent queries 
+            // that return enumerable results are executed when the IQueryable<(Of <(T>)>) object that 
+            // contains the expression tree is enumerated. 
+            // The Queryable standard query operator methods that return singleton results call Execute. 
+            // They pass it a MethodCallExpression that represents a LINQ query. 
             if (expression.IsMethodCallExpression("First") || expression.IsMethodCallExpression("FirstOrDefault") ||
                 expression.IsMethodCallExpression("Single") || expression.IsMethodCallExpression("SingleOrDefault"))
             {

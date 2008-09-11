@@ -98,11 +98,8 @@ namespace Kistl.API.Client.Tests
 
             #endregion
 
-            #region INotifyPropertyChanged Member
-
             public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-            #endregion
+            public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
             #region ICloneable Member
 

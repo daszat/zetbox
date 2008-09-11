@@ -40,8 +40,6 @@ namespace Kistl.App.Test
         
         public TestCustomObjectImpl()
         {
-            _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStructImpl();
-            _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStructImpl();
         }
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
@@ -79,6 +77,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (_PhoneNumberMobile == null) { _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStructImpl(); _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile"); }
                 return _PhoneNumberMobile;
             }
             set
@@ -86,7 +85,9 @@ namespace Kistl.App.Test
                 if (PhoneNumberMobile != value)
                 {
                     NotifyPropertyChanging("PhoneNumberMobile"); 
+                    if (_PhoneNumberMobile != null) _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
                     _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    if (_PhoneNumberMobile != null) _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
                     NotifyPropertyChanged("PhoneNumberMobile");
                 };
             }
@@ -109,6 +110,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (_PhoneNumberOffice == null) { _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStructImpl(); _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice"); }
                 return _PhoneNumberOffice;
             }
             set
@@ -116,7 +118,9 @@ namespace Kistl.App.Test
                 if (PhoneNumberOffice != value)
                 {
                     NotifyPropertyChanging("PhoneNumberOffice"); 
+                    if (_PhoneNumberOffice != null) _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
                     _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    if (_PhoneNumberOffice != null) _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
                     NotifyPropertyChanged("PhoneNumberOffice");
                 };
             }
@@ -201,8 +205,8 @@ namespace Kistl.App.Test
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._PersonName, sr);
-            BinarySerializer.FromBinary(out this._PhoneNumberMobile, sr);
-            BinarySerializer.FromBinary(out this._PhoneNumberOffice, sr);
+            BinarySerializer.FromBinary(out this._PhoneNumberMobile, sr); if (_PhoneNumberMobile != null) _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+            BinarySerializer.FromBinary(out this._PhoneNumberOffice, sr); if (_PhoneNumberOffice != null) _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
             BinarySerializer.FromBinary(out this._Birthday, sr);
         }
     }

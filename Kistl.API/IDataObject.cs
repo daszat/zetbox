@@ -33,7 +33,7 @@ namespace Kistl.API
     /// <summary>
     /// Interface for a Persitance Object.
     /// </summary>
-    public interface IPersistenceObject : INotifyPropertyChanged
+    public interface IPersistenceObject : INotifyPropertyChanged, INotifyPropertyChanging
     {
         /// <summary>
         /// Every Object has at least an ID
@@ -102,12 +102,6 @@ namespace Kistl.API
         /// Fires an Event after an Object is saved.
         /// </summary>
         void NotifyPostSave();
-
-        /// <summary>
-        /// Copies the current content to a other Object. Used by clone.
-        /// </summary>
-        /// <param name="obj">Object to copy Content to.</param>
-        // void CopyTo(IDataObject obj);
     }
 
     /// <summary>
@@ -130,6 +124,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="sr">BinaryReader to deserialize to.</param>
         void FromStream(System.IO.BinaryReader sr);
+
+        void AttachToObject(IPersistenceObject obj, string property);
+        void DetachFromObject(IPersistenceObject obj, string property);
     }
 
     /// <summary>

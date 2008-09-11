@@ -969,7 +969,9 @@ namespace Kistl.Server.Generators
             current.code_property.SetStatements.AddStatement(@"if ({0} != value)
                 {{
                     NotifyPropertyChanging(""{0}""); 
+                    if (_{0} != null) _{0}.DetachFromObject(this, ""{0}"");
                     _{0} = ({1}Impl)value;
+                    if (_{0} != null) _{0}.AttachToObject(this, ""{0}"");
                     NotifyPropertyChanged(""{0}"");
                 }}", current.property.PropertyName, current.property.GetPropertyTypeString());
 
@@ -1300,6 +1302,7 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryWriter)), "sw"));
             m.Statements.AddStatement("base.ToStream(sw)");
 
+            #region ToStream
             foreach (BaseProperty p in properties)
             {
                 if (p.IsEnumerationPropertySingle())
@@ -1340,6 +1343,7 @@ namespace Kistl.Server.Generators
                     m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}.Cast<IDataObject>(), sw)", p.PropertyName);
                 }
             }
+            #endregion
 
             m = new CodeMemberMethod();
             current.code_class.Members.Add(m);
@@ -1349,6 +1353,7 @@ namespace Kistl.Server.Generators
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
             m.Statements.AddStatement("base.FromStream(sr)");
 
+            #region FromStream
             foreach (BaseProperty p in properties)
             {
                 if (p.IsListProperty())
@@ -1369,7 +1374,7 @@ namespace Kistl.Server.Generators
                 }
                 else if (p.IsStructPropertySingle())
                 {
-                    m.Statements.AddStatement("BinarySerializer.FromBinary(out this._{0}, sr)", p.PropertyName);
+                    m.Statements.AddStatement(@"BinarySerializer.FromBinary(out this._{0}, sr); if (_{0} != null) _{0}.AttachToObject(this, ""{0}"")", p.PropertyName);
                 }
                 else if (p is ObjectReferenceProperty)
                 {
@@ -1385,6 +1390,7 @@ namespace Kistl.Server.Generators
                         ((BackReferenceProperty)p).ReferenceProperty.PropertyName);
                 }
             }
+            #endregion
         }
         #endregion
     }

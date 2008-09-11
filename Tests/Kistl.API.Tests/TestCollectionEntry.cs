@@ -54,6 +54,7 @@ namespace Kistl.API.Tests
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangingEventHandler PropertyChanging;
 
         public void NotifyPropertyChanged(string property)
         {
