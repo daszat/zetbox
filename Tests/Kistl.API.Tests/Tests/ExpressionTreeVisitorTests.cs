@@ -19,22 +19,24 @@ namespace Kistl.API.Tests
         {
             return a * 3;
         }
+
         [Test]
         public void Visit()
         {
             System.Linq.Expressions.Expression<Func<int, int, bool>> largeSumTestExpression = (num1, num2) => (num1 + num2) > 1000;
             Func<int, int, bool> largeSumTest = largeSumTestExpression.Compile();
 
-            TestDataObject obj = new TestDataObject() { StringProperty = "test", TestField = "test2" };
+            TestDataObject obj = new TestDataObject__Implementation__() { StringProperty = "test", TestField = "test2" };
+            TestObj obj2 = new TestObj() { TestField = "Test2" };
             TestQuery<TestDataObject> ctx = new TestQuery<TestDataObject>();
             var list = from o in ctx
                        where o.IntProperty == 1
                            && o.IntProperty != 2
                            && o.IntProperty > 3
                            && o.IntProperty == obj.ID
-                           && o.StringProperty == obj.TestField
+                           && o.StringProperty == obj2.TestField
                            && o.StringProperty == obj.StringProperty
-                           && o.StringProperty.StartsWith(obj.TestField)
+                           && o.StringProperty.StartsWith(obj2.TestField)
                            && (o.StringProperty.StartsWith("test") || o.StringProperty == "test")
                            && !o.BoolProperty
                            && (o.StringProperty is string)
@@ -53,13 +55,13 @@ namespace Kistl.API.Tests
                            TestObj = new { o.ObjectState, o.ID },
                            Date = new DateTime(1000),
                            Test3 = obj.StringProperty,
-                           Test4 = new TestDataObject() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) },
+                           Test4 = new TestDataObject__Implementation__() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) },
                            Test5 = new List<TestDataObject> {
-                                new TestDataObject() { StringProperty = obj.StringProperty, ID = o.IntProperty }, 
-                                new TestDataObject() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) } 
+                                new TestDataObject__Implementation__() { StringProperty = obj.StringProperty, ID = o.IntProperty }, 
+                                new TestDataObject__Implementation__() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) } 
                            },
                            Test6 = MethodCallTest(2),
-                           Test7 = new List<TestDataObject>() { new TestDataObject(), obj }.Max(x => x.ID),
+                           Test7 = new List<TestDataObject>() { new TestDataObject__Implementation__(), obj }.Max(x => x.ID),
                        };
 
             // The TestProvider does not implement Projections

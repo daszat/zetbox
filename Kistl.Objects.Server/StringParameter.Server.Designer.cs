@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="StringParameter")]
-    public class StringParameterImpl : Kistl.App.Base.BaseParameterImpl, StringParameter
+    public class StringParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, StringParameter
     {
         
-        public StringParameterImpl()
+        public StringParameter__Implementation__()
         {
         }
         

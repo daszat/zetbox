@@ -266,7 +266,7 @@ namespace Kistl.Server
                         else
                         {
                             // Liste
-                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + "Impl"))
+                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + Kistl.API.Helper.ImplementationSuffix))
                             {
                                 int fk = ce.GetPrivateFieldValue<int>("_fk_Value");
 
@@ -298,7 +298,7 @@ namespace Kistl.Server
                 if (obj is ICollectionEntry)
                 {
                     typename = obj.GetType().Name;
-                    typename = typename.Substring(0, typename.Length - 4);
+                    typename = typename.Substring(0, typename.Length - Kistl.API.Helper.ImplementationSuffix.Length);
                 }
                 else
                 {
@@ -322,7 +322,7 @@ namespace Kistl.Server
                     {
                         foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))
                         {
-                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + "Impl"))
+                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + Kistl.API.Helper.ImplementationSuffix))
                             {
                                 EntityObject ce_eo = (EntityObject)ce;
                                 MarkEveryPropertyAsModified(ce_eo);

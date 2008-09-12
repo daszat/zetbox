@@ -19,6 +19,7 @@ namespace Kistl.API.Server.Tests
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             init.Init(HostType.Server, @"DefaultConfig_API.Server.Tests.xml");
             Kistl.API.APIInit.ImplementationAssembly = this.GetType().Assembly.FullName;
+            Kistl.API.APIInit.InterfaceAssembly = this.GetType().Assembly.FullName;
 
             Kistl.API.CustomActionsManagerFactory.Init(new CustomActionsManagerAPITest());
 

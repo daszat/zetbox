@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class ValueTypePropertyImpl : Kistl.App.Base.PropertyImpl, ValueTypeProperty
+    public class ValueTypeProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ValueTypeProperty
     {
         
-        public ValueTypePropertyImpl()
+        public ValueTypeProperty__Implementation__()
         {
         }
         

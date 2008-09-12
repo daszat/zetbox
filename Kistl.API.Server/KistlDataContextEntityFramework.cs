@@ -94,7 +94,7 @@ namespace Kistl.API.Server
         private string GetEntityName(Type type)
         {
             Type rootType = GetRootType(type);
-            return rootType.Name.Remove(rootType.Name.Length - 4, 4);// Remove Impl
+            return rootType.Name.Remove(rootType.Name.Length - Kistl.API.Helper.ImplementationSuffix.Length, Kistl.API.Helper.ImplementationSuffix.Length); // ImplementationSuffix
         }
 
         /// <summary>

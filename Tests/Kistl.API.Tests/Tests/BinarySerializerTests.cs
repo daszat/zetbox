@@ -285,7 +285,7 @@ namespace Kistl.API.Tests
         {
             List<TestDataObject> toval, fromval;
             toval = new List<TestDataObject>();
-            toval.Add(new TestDataObject());
+            toval.Add(new TestDataObject__Implementation__());
 
             BinarySerializer.ToBinary(toval.Cast<IDataObject>(), sw);
             ms.Seek(0, SeekOrigin.Begin);
@@ -299,7 +299,7 @@ namespace Kistl.API.Tests
         {
             List<TestDataObject> toval, fromval;
             toval = new List<TestDataObject>();
-            toval.Add(new TestDataObject());
+            toval.Add(new TestDataObject__Implementation__());
 
             BinarySerializer.ToBinary(toval.Cast<IDataObject>(), sw);
             ms.Seek(0, SeekOrigin.Begin);
@@ -365,20 +365,23 @@ namespace Kistl.API.Tests
             Assert.That(fromval, Is.Null);
         }
 
-
+        /// <summary>
+        /// Test just serialization, not handling interfaces!
+        /// </summary>
         [Test]
         public void SerializableExpression()
         {
-            TestDataObject obj = new TestDataObject();
-            TestQuery<TestDataObject> ctx = new TestQuery<TestDataObject>();
+            TestDataObject obj = new TestDataObject__Implementation__();
+            TestObj obj2 = new TestObj();
+            TestQuery<TestDataObject__Implementation__> ctx = new TestQuery<TestDataObject__Implementation__>();
             var list = from o in ctx
                        where o.IntProperty == 1
                        && o.IntProperty != 2
                        && o.IntProperty > 3
                        && o.IntProperty == obj.ID
-                       && o.StringProperty == obj.TestField
+                       && o.StringProperty == obj2.TestField
                        && o.StringProperty == obj.StringProperty
-                       && o.StringProperty.StartsWith(obj.TestField)
+                       && o.StringProperty.StartsWith(obj2.TestField)
                        && (o.StringProperty.StartsWith("test")
                             || o.StringProperty == "test")
                        && !o.BoolProperty

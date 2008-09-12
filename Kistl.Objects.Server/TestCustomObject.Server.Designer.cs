@@ -25,20 +25,20 @@ namespace Kistl.App.Test
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestCustomObject")]
-    public class TestCustomObjectImpl : BaseServerDataObject, TestCustomObject
+    public class TestCustomObject__Implementation__ : BaseServerDataObject, TestCustomObject
     {
         
         private int _ID;
         
         private string _PersonName;
         
-        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberMobile;
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
         
-        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberOffice;
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;
         
         private System.DateTime? _Birthday;
         
-        public TestCustomObjectImpl()
+        public TestCustomObject__Implementation__()
         {
         }
         
@@ -77,7 +77,6 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (_PhoneNumberMobile == null) { _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStructImpl(); _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile"); }
                 return _PhoneNumberMobile;
             }
             set
@@ -86,7 +85,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("PhoneNumberMobile"); 
                     if (_PhoneNumberMobile != null) _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
-                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
                     if (_PhoneNumberMobile != null) _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
                     NotifyPropertyChanged("PhoneNumberMobile");
                 };
@@ -94,11 +93,12 @@ namespace Kistl.App.Test
         }
         
         [EdmComplexPropertyAttribute()]
-        public Kistl.App.Test.TestPhoneStructImpl PhoneNumberMobileImpl
+        public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberMobile__Implementation__
         {
             get
             {
-                return (Kistl.App.Test.TestPhoneStructImpl)PhoneNumberMobile;
+                if (_PhoneNumberMobile == null) { _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(); _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile"); }
+                return (Kistl.App.Test.TestPhoneStruct__Implementation__)PhoneNumberMobile;
             }
             set
             {
@@ -110,7 +110,6 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (_PhoneNumberOffice == null) { _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStructImpl(); _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice"); }
                 return _PhoneNumberOffice;
             }
             set
@@ -119,7 +118,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("PhoneNumberOffice"); 
                     if (_PhoneNumberOffice != null) _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
-                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
                     if (_PhoneNumberOffice != null) _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
                     NotifyPropertyChanged("PhoneNumberOffice");
                 };
@@ -127,11 +126,12 @@ namespace Kistl.App.Test
         }
         
         [EdmComplexPropertyAttribute()]
-        public Kistl.App.Test.TestPhoneStructImpl PhoneNumberOfficeImpl
+        public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberOffice__Implementation__
         {
             get
             {
-                return (Kistl.App.Test.TestPhoneStructImpl)PhoneNumberOffice;
+                if (_PhoneNumberOffice == null) { _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(); _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice"); }
+                return (Kistl.App.Test.TestPhoneStruct__Implementation__)PhoneNumberOffice;
             }
             set
             {

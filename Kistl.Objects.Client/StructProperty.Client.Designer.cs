@@ -24,12 +24,12 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class StructPropertyImpl : Kistl.App.Base.PropertyImpl, StructProperty
+    public class StructProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, StructProperty
     {
         
         private System.Nullable<int> _fk_StructDefinition = null;
         
-        public StructPropertyImpl()
+        public StructProperty__Implementation__()
         {
         }
         
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((StructPropertyImpl)obj).fk_StructDefinition = this.fk_StructDefinition;
+            ((StructProperty__Implementation__)obj).fk_StructDefinition = this.fk_StructDefinition;
         }
         
         public override void AttachToContext(IKistlContext ctx)

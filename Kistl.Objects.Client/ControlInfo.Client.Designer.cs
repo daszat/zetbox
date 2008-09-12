@@ -24,7 +24,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
-    public class ControlInfoImpl : BaseClientDataObject, ControlInfo
+    public class ControlInfo__Implementation__ : BaseClientDataObject, ControlInfo
     {
         
         private System.Nullable<int> _fk_Assembly = null;
@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         
         private Kistl.App.GUI.VisualType _ControlType;
         
-        public ControlInfoImpl()
+        public ControlInfo__Implementation__()
         {
         }
         
@@ -173,11 +173,11 @@ namespace Kistl.App.GUI
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((ControlInfoImpl)obj).fk_Assembly = this.fk_Assembly;
-            ((ControlInfoImpl)obj).ClassName = this.ClassName;
-            ((ControlInfoImpl)obj).IsContainer = this.IsContainer;
-            ((ControlInfoImpl)obj).Platform = this.Platform;
-            ((ControlInfoImpl)obj).ControlType = this.ControlType;
+            ((ControlInfo__Implementation__)obj).fk_Assembly = this.fk_Assembly;
+            ((ControlInfo__Implementation__)obj).ClassName = this.ClassName;
+            ((ControlInfo__Implementation__)obj).IsContainer = this.IsContainer;
+            ((ControlInfo__Implementation__)obj).Platform = this.Platform;
+            ((ControlInfo__Implementation__)obj).ControlType = this.ControlType;
         }
         
         public override void AttachToContext(IKistlContext ctx)

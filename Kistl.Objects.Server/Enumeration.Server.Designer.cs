@@ -25,12 +25,12 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Enumeration")]
-    public class EnumerationImpl : Kistl.App.Base.DataTypeImpl, Enumeration
+    public class Enumeration__Implementation__ : Kistl.App.Base.DataType__Implementation__, Enumeration
     {
         
-        private EntityCollectionWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntryImpl> EnumerationEntriesWrapper;
+        private EntityCollectionWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntry__Implementation__> EnumerationEntriesWrapper;
         
-        public EnumerationImpl()
+        public Enumeration__Implementation__()
         {
         }
         
@@ -39,17 +39,17 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (EnumerationEntriesWrapper == null) EnumerationEntriesWrapper = new EntityCollectionWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntryImpl>(EnumerationEntriesImpl);
+                if (EnumerationEntriesWrapper == null) EnumerationEntriesWrapper = new EntityCollectionWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntry__Implementation__>(EnumerationEntries__Implementation__);
                 return EnumerationEntriesWrapper;
             }
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EnumerationEntry_Enumeration_Enumeration", "B_EnumerationEntry")]
-        public EntityCollection<Kistl.App.Base.EnumerationEntryImpl> EnumerationEntriesImpl
+        public EntityCollection<Kistl.App.Base.EnumerationEntry__Implementation__> EnumerationEntries__Implementation__
         {
             get
             {
-                EntityCollection<Kistl.App.Base.EnumerationEntryImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.EnumerationEntryImpl>("Model.FK_EnumerationEntry_Enumeration_Enumeration", "B_EnumerationEntry");
+                EntityCollection<Kistl.App.Base.EnumerationEntry__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.EnumerationEntry__Implementation__>("Model.FK_EnumerationEntry_Enumeration_Enumeration", "B_EnumerationEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }

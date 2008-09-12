@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Task_Projekt_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.ProjektImpl), "B_Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.TaskImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Task_Projekt_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Projekt__Implementation__), "B_Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Task__Implementation__))]
 
 namespace Kistl.App.Projekte
 {
@@ -27,7 +27,7 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Task")]
-    public class TaskImpl : BaseServerDataObject, Task
+    public class Task__Implementation__ : BaseServerDataObject, Task
     {
         
         private int _ID;
@@ -42,7 +42,7 @@ namespace Kistl.App.Projekte
         
         private System.Double? _Aufwand;
         
-        public TaskImpl()
+        public Task__Implementation__()
         {
         }
         
@@ -64,11 +64,11 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return ProjektImpl;
+                return Projekt__Implementation__;
             }
             set
             {
-                ProjektImpl = (Kistl.App.Projekte.ProjektImpl)value;
+                Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }
         
@@ -89,19 +89,19 @@ namespace Kistl.App.Projekte
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Task_Projekt_Projekt", "A_Projekt")]
-        public Kistl.App.Projekte.ProjektImpl ProjektImpl
+        public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Projekte.ProjektImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektImpl>("Model.FK_Task_Projekt_Projekt", "A_Projekt");
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>("Model.FK_Task_Projekt_Projekt", "A_Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Projekte.ProjektImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektImpl>("Model.FK_Task_Projekt_Projekt", "A_Projekt");
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>("Model.FK_Task_Projekt_Projekt", "A_Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Projekte.ProjektImpl)value;
+                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }
         

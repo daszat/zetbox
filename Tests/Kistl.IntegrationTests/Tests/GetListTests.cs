@@ -191,6 +191,7 @@ namespace Kistl.IntegrationTests
 
         /// <summary>
         /// Case 472
+        /// http://blogs.msdn.com/mattwar/archive/2007/08/01/linq-building-an-iqueryable-provider-part-iii.aspx
         /// </summary>
         [Test]
         public void GetListWithPropertyAccessor()

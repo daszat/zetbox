@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ControlInfo_Assembly_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyImpl), "B_ControlInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlInfoImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ControlInfo_Assembly_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__), "B_ControlInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlInfo__Implementation__))]
 
 namespace Kistl.App.GUI
 {
@@ -27,7 +27,7 @@ namespace Kistl.App.GUI
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ControlInfo")]
-    public class ControlInfoImpl : BaseServerDataObject, ControlInfo
+    public class ControlInfo__Implementation__ : BaseServerDataObject, ControlInfo
     {
         
         private int _ID;
@@ -42,7 +42,7 @@ namespace Kistl.App.GUI
         
         private Kistl.App.GUI.VisualType _ControlType;
         
-        public ControlInfoImpl()
+        public ControlInfo__Implementation__()
         {
         }
         
@@ -64,11 +64,11 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return AssemblyImpl;
+                return Assembly__Implementation__;
             }
             set
             {
-                AssemblyImpl = (Kistl.App.Base.AssemblyImpl)value;
+                Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
         
@@ -89,19 +89,19 @@ namespace Kistl.App.GUI
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ControlInfo_Assembly_Assembly", "A_Assembly")]
-        public Kistl.App.Base.AssemblyImpl AssemblyImpl
+        public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_ControlInfo_Assembly_Assembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_ControlInfo_Assembly_Assembly", "A_Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_ControlInfo_Assembly_Assembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_ControlInfo_Assembly_Assembly", "A_Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.AssemblyImpl)value;
+                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
         
@@ -159,7 +159,7 @@ namespace Kistl.App.GUI
         }
         
         [EdmScalarPropertyAttribute()]
-        public int PlatformImpl
+        public int Platform__Implementation__
         {
             get
             {
@@ -189,7 +189,7 @@ namespace Kistl.App.GUI
         }
         
         [EdmScalarPropertyAttribute()]
-        public int ControlTypeImpl
+        public int ControlType__Implementation__
         {
             get
             {

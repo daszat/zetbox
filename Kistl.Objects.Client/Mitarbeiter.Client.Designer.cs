@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class MitarbeiterImpl : BaseClientDataObject, Mitarbeiter
+    public class Mitarbeiter__Implementation__ : BaseClientDataObject, Mitarbeiter
     {
         
         private string _Name;
@@ -37,7 +37,7 @@ namespace Kistl.App.Projekte
         
         private string _TelefonNummer;
         
-        public MitarbeiterImpl()
+        public Mitarbeiter__Implementation__()
         {
         }
         
@@ -164,11 +164,11 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((MitarbeiterImpl)obj).Name = this.Name;
-            if(this._Projekte != null) this._Projekte.ApplyChanges(((MitarbeiterImpl)obj)._Projekte); else ((MitarbeiterImpl)obj)._Projekte = null; ((MitarbeiterImpl)obj).NotifyPropertyChanged("Projekte");
-            ((MitarbeiterImpl)obj).Geburtstag = this.Geburtstag;
-            ((MitarbeiterImpl)obj).SVNr = this.SVNr;
-            ((MitarbeiterImpl)obj).TelefonNummer = this.TelefonNummer;
+            ((Mitarbeiter__Implementation__)obj).Name = this.Name;
+            if(this._Projekte != null) this._Projekte.ApplyChanges(((Mitarbeiter__Implementation__)obj)._Projekte); else ((Mitarbeiter__Implementation__)obj)._Projekte = null; ((Mitarbeiter__Implementation__)obj).NotifyPropertyChanged("Projekte");
+            ((Mitarbeiter__Implementation__)obj).Geburtstag = this.Geburtstag;
+            ((Mitarbeiter__Implementation__)obj).SVNr = this.SVNr;
+            ((Mitarbeiter__Implementation__)obj).TelefonNummer = this.TelefonNummer;
         }
         
         public override void AttachToContext(IKistlContext ctx)

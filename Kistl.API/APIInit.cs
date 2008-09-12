@@ -33,6 +33,7 @@ namespace Kistl.API
         public static HostType HostType { get; private set; }
 
         public static string ImplementationAssembly { get; set; }
+        public static string InterfaceAssembly { get; set; }
 
         public static Type BaseDataObjectType { get; private set; }
         public static Type BasePersistenceObjectType { get; private set; }
@@ -59,6 +60,7 @@ namespace Kistl.API
         {
             HostType = type;
             ImplementationAssembly = "Kistl.Objects." + HostType;
+            InterfaceAssembly = "Kistl.Objects";
 
             // Load Configuration
             Configuration.KistlConfig.Init(configFile);

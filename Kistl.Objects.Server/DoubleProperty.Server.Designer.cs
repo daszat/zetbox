@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="DoubleProperty")]
-    public class DoublePropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, DoubleProperty
+    public class DoubleProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, DoubleProperty
     {
         
-        public DoublePropertyImpl()
+        public DoubleProperty__Implementation__()
         {
         }
         

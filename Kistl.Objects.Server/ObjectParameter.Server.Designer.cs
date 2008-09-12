@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectParameter_DataType_DataType", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeImpl), "B_ObjectParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectParameterImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectParameter_DataType_DataType", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__), "B_ObjectParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectParameter__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -27,12 +27,12 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectParameter")]
-    public class ObjectParameterImpl : Kistl.App.Base.BaseParameterImpl, ObjectParameter
+    public class ObjectParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, ObjectParameter
     {
         
         private System.Nullable<int> _fk_DataType = null;
         
-        public ObjectParameterImpl()
+        public ObjectParameter__Implementation__()
         {
         }
         
@@ -41,11 +41,11 @@ namespace Kistl.App.Base
         {
             get
             {
-                return DataTypeImpl;
+                return DataType__Implementation__;
             }
             set
             {
-                DataTypeImpl = (Kistl.App.Base.DataTypeImpl)value;
+                DataType__Implementation__ = (Kistl.App.Base.DataType__Implementation__)value;
             }
         }
         
@@ -66,19 +66,19 @@ namespace Kistl.App.Base
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectParameter_DataType_DataType", "A_DataType")]
-        public Kistl.App.Base.DataTypeImpl DataTypeImpl
+        public Kistl.App.Base.DataType__Implementation__ DataType__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.DataTypeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeImpl>("Model.FK_ObjectParameter_DataType_DataType", "A_DataType");
+                EntityReference<Kistl.App.Base.DataType__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>("Model.FK_ObjectParameter_DataType_DataType", "A_DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.DataTypeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeImpl>("Model.FK_ObjectParameter_DataType_DataType", "A_DataType");
+                EntityReference<Kistl.App.Base.DataType__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>("Model.FK_ObjectParameter_DataType_DataType", "A_DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.DataTypeImpl)value;
+                r.Value = (Kistl.App.Base.DataType__Implementation__)value;
             }
         }
         

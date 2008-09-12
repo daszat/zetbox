@@ -9,8 +9,24 @@ namespace Kistl.API.Tests
     {
         public static void Main(string[] args)
         {
-            new SetUp().Init();
-            new APIInitTest().SecondInitFail();
+            SetUp setup = new SetUp();
+            setup.Init();
+
+            BinarySerializerTests();
+        }
+
+        private static void BinarySerializerTests()
+        {
+            BinarySerializerTests test = new BinarySerializerTests();
+            
+            test.SetUp();
+            test.ICollection_ICollectionEntry();
+
+            test.SetUp();
+            test.ICollection_IDataObject();
+
+            test.SetUp();
+            test.SerializableExpression();
         }
     }
 }

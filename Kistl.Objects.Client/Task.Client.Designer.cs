@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class TaskImpl : BaseClientDataObject, Task
+    public class Task__Implementation__ : BaseClientDataObject, Task
     {
         
         private System.Nullable<int> _fk_Projekt = null;
@@ -37,7 +37,7 @@ namespace Kistl.App.Projekte
         
         private System.Double? _Aufwand;
         
-        public TaskImpl()
+        public Task__Implementation__()
         {
         }
         
@@ -173,11 +173,11 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((TaskImpl)obj).fk_Projekt = this.fk_Projekt;
-            ((TaskImpl)obj).Name = this.Name;
-            ((TaskImpl)obj).DatumVon = this.DatumVon;
-            ((TaskImpl)obj).DatumBis = this.DatumBis;
-            ((TaskImpl)obj).Aufwand = this.Aufwand;
+            ((Task__Implementation__)obj).fk_Projekt = this.fk_Projekt;
+            ((Task__Implementation__)obj).Name = this.Name;
+            ((Task__Implementation__)obj).DatumVon = this.DatumVon;
+            ((Task__Implementation__)obj).DatumBis = this.DatumBis;
+            ((Task__Implementation__)obj).Aufwand = this.Aufwand;
         }
         
         public override void AttachToContext(IKistlContext ctx)

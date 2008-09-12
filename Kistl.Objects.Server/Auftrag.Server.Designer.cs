@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Projekt_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.ProjektImpl), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragImpl))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.MitarbeiterImpl), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragImpl))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Kunde_Kunde", "A_Kunde", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.KundeImpl), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Projekt_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Projekt__Implementation__), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftrag_Kunde_Kunde", "A_Kunde", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Kunde__Implementation__), "B_Auftrag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag__Implementation__))]
 
 namespace Kistl.App.Projekte
 {
@@ -29,7 +29,7 @@ namespace Kistl.App.Projekte
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Auftrag")]
-    public class AuftragImpl : BaseServerDataObject, Auftrag
+    public class Auftrag__Implementation__ : BaseServerDataObject, Auftrag
     {
         
         private int _ID;
@@ -44,7 +44,7 @@ namespace Kistl.App.Projekte
         
         private System.Double? _Auftragswert;
         
-        public AuftragImpl()
+        public Auftrag__Implementation__()
         {
         }
         
@@ -66,11 +66,11 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return ProjektImpl;
+                return Projekt__Implementation__;
             }
             set
             {
-                ProjektImpl = (Kistl.App.Projekte.ProjektImpl)value;
+                Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }
         
@@ -91,19 +91,19 @@ namespace Kistl.App.Projekte
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Projekt_Projekt", "A_Projekt")]
-        public Kistl.App.Projekte.ProjektImpl ProjektImpl
+        public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Projekte.ProjektImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektImpl>("Model.FK_Auftrag_Projekt_Projekt", "A_Projekt");
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>("Model.FK_Auftrag_Projekt_Projekt", "A_Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Projekte.ProjektImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektImpl>("Model.FK_Auftrag_Projekt_Projekt", "A_Projekt");
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>("Model.FK_Auftrag_Projekt_Projekt", "A_Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Projekte.ProjektImpl)value;
+                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }
         
@@ -112,11 +112,11 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return MitarbeiterImpl;
+                return Mitarbeiter__Implementation__;
             }
             set
             {
-                MitarbeiterImpl = (Kistl.App.Projekte.MitarbeiterImpl)value;
+                Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
         
@@ -137,19 +137,19 @@ namespace Kistl.App.Projekte
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter")]
-        public Kistl.App.Projekte.MitarbeiterImpl MitarbeiterImpl
+        public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Projekte.MitarbeiterImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterImpl>("Model.FK_Auftrag_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
+                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>("Model.FK_Auftrag_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Projekte.MitarbeiterImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterImpl>("Model.FK_Auftrag_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
+                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>("Model.FK_Auftrag_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Projekte.MitarbeiterImpl)value;
+                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
         
@@ -176,11 +176,11 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return KundeImpl;
+                return Kunde__Implementation__;
             }
             set
             {
-                KundeImpl = (Kistl.App.Projekte.KundeImpl)value;
+                Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)value;
             }
         }
         
@@ -201,19 +201,19 @@ namespace Kistl.App.Projekte
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Auftrag_Kunde_Kunde", "A_Kunde")]
-        public Kistl.App.Projekte.KundeImpl KundeImpl
+        public Kistl.App.Projekte.Kunde__Implementation__ Kunde__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Projekte.KundeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeImpl>("Model.FK_Auftrag_Kunde_Kunde", "A_Kunde");
+                EntityReference<Kistl.App.Projekte.Kunde__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde__Implementation__>("Model.FK_Auftrag_Kunde_Kunde", "A_Kunde");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Projekte.KundeImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeImpl>("Model.FK_Auftrag_Kunde_Kunde", "A_Kunde");
+                EntityReference<Kistl.App.Projekte.Kunde__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde__Implementation__>("Model.FK_Auftrag_Kunde_Kunde", "A_Kunde");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Projekte.KundeImpl)value;
+                r.Value = (Kistl.App.Projekte.Kunde__Implementation__)value;
             }
         }
         

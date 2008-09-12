@@ -24,12 +24,12 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class StringPropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, StringProperty
+    public class StringProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, StringProperty
     {
         
         private System.Int32? _Length;
         
-        public StringPropertyImpl()
+        public StringProperty__Implementation__()
         {
         }
         
@@ -89,7 +89,7 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((StringPropertyImpl)obj).Length = this.Length;
+            ((StringProperty__Implementation__)obj).Length = this.Length;
         }
         
         public override void AttachToContext(IKistlContext ctx)

@@ -24,10 +24,10 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class StructImpl : Kistl.App.Base.DataTypeImpl, Struct
+    public class Struct__Implementation__ : Kistl.App.Base.DataType__Implementation__, Struct
     {
         
-        public StructImpl()
+        public Struct__Implementation__()
         {
         }
         

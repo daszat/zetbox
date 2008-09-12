@@ -9,7 +9,18 @@ using System.Xml.Serialization;
 
 namespace Kistl.API.Client.Tests
 {
-    public class TestObjClass : BaseClientDataObject
+    public interface TestObjClass : IDataObject
+    {
+        System.Collections.Generic.IList<TestObjClass> Children { get; }
+        int? fk_Parent { get; set; }
+        Kistl.API.Client.Tests.TestObjClass Parent { get; set; }
+        string StringProp { get; set; }
+        int TestEnumProp { get; set; }
+        System.Collections.Generic.IList<string> TestNames { get; }
+        ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> UnitTest_TestNames { get; }
+    }
+
+    public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass
     {
 
         private int _ID;
@@ -24,7 +35,7 @@ namespace Kistl.API.Client.Tests
 
         private ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> _TestNames;
 
-        public TestObjClass()
+        public TestObjClass__Implementation__()
         {
             _TestNames = new ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry>(this, "TestNames");
         }
@@ -157,8 +168,8 @@ namespace Kistl.API.Client.Tests
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((TestObjClass)obj)._StringProp = this._StringProp;
-            ((TestObjClass)obj)._TestEnumProp = this._TestEnumProp;
+            ((TestObjClass__Implementation__)obj)._StringProp = this._StringProp;
+            ((TestObjClass__Implementation__)obj)._TestEnumProp = this._TestEnumProp;
         }
 
         public virtual void TestMethod(System.DateTime DateTimeParamForTestMethod)

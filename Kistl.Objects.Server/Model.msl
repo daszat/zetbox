@@ -293,7 +293,7 @@
         <MappingFragment StoreEntitySet="TestObjClass">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StringProp" ColumnName="StringProp" />
-          <ScalarProperty Name="TestEnumPropImpl" ColumnName="TestEnumProp" />
+          <ScalarProperty Name="TestEnumProp__Implementation__" ColumnName="TestEnumProp" />
           <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -304,8 +304,8 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ClassName" ColumnName="ClassName" />
           <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
-          <ScalarProperty Name="PlatformImpl" ColumnName="Platform" />
-          <ScalarProperty Name="ControlTypeImpl" ColumnName="ControlType" />
+          <ScalarProperty Name="Platform__Implementation__" ColumnName="Platform" />
+          <ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -315,11 +315,11 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PersonName" ColumnName="PersonName" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ComplexProperty Name="PhoneNumberMobileImpl" TypeName="Model.TestPhoneStruct">
+          <ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
             <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
             <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
           </ComplexProperty>
-          <ComplexProperty Name="PhoneNumberOfficeImpl" TypeName="Model.TestPhoneStruct">
+          <ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneStruct">
             <ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
             <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
           </ComplexProperty>
@@ -351,7 +351,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.PresenterInfo)">
         <MappingFragment StoreEntitySet="PresenterInfo">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ControlTypeImpl" ColumnName="ControlType" />
+          <ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
           <ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
           <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
         </MappingFragment>
@@ -362,7 +362,7 @@
         <MappingFragment StoreEntitySet="Visual">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ControlTypeImpl" ColumnName="ControlType" />
+          <ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

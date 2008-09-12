@@ -24,12 +24,12 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Client;
     
     
-    public class KostentraegerImpl : Kistl.App.Zeiterfassung.ZeitkontoImpl, Kostentraeger
+    public class Kostentraeger__Implementation__ : Kistl.App.Zeiterfassung.Zeitkonto__Implementation__, Kostentraeger
     {
         
         private System.Nullable<int> _fk_Projekt = null;
         
-        public KostentraegerImpl()
+        public Kostentraeger__Implementation__()
         {
         }
         
@@ -97,7 +97,7 @@ namespace Kistl.App.Zeiterfassung
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((KostentraegerImpl)obj).fk_Projekt = this.fk_Projekt;
+            ((Kostentraeger__Implementation__)obj).fk_Projekt = this.fk_Projekt;
         }
         
         public override void AttachToContext(IKistlContext ctx)

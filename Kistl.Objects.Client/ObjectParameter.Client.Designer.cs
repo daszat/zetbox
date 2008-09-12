@@ -24,12 +24,12 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class ObjectParameterImpl : Kistl.App.Base.BaseParameterImpl, ObjectParameter
+    public class ObjectParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, ObjectParameter
     {
         
         private System.Nullable<int> _fk_DataType = null;
         
-        public ObjectParameterImpl()
+        public ObjectParameter__Implementation__()
         {
         }
         
@@ -101,7 +101,7 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((ObjectParameterImpl)obj).fk_DataType = this.fk_DataType;
+            ((ObjectParameter__Implementation__)obj).fk_DataType = this.fk_DataType;
         }
         
         public override void AttachToContext(IKistlContext ctx)

@@ -24,7 +24,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
-    public class PresenterInfoImpl : BaseClientDataObject, PresenterInfo
+    public class PresenterInfo__Implementation__ : BaseClientDataObject, PresenterInfo
     {
         
         private Kistl.App.GUI.VisualType _ControlType;
@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         
         private string _DataTypeName;
         
-        public PresenterInfoImpl()
+        public PresenterInfo__Implementation__()
         {
         }
         
@@ -187,11 +187,11 @@ namespace Kistl.App.GUI
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((PresenterInfoImpl)obj).ControlType = this.ControlType;
-            ((PresenterInfoImpl)obj).fk_PresenterAssembly = this.fk_PresenterAssembly;
-            ((PresenterInfoImpl)obj).PresenterTypeName = this.PresenterTypeName;
-            ((PresenterInfoImpl)obj).fk_DataAssembly = this.fk_DataAssembly;
-            ((PresenterInfoImpl)obj).DataTypeName = this.DataTypeName;
+            ((PresenterInfo__Implementation__)obj).ControlType = this.ControlType;
+            ((PresenterInfo__Implementation__)obj).fk_PresenterAssembly = this.fk_PresenterAssembly;
+            ((PresenterInfo__Implementation__)obj).PresenterTypeName = this.PresenterTypeName;
+            ((PresenterInfo__Implementation__)obj).fk_DataAssembly = this.fk_DataAssembly;
+            ((PresenterInfo__Implementation__)obj).DataTypeName = this.DataTypeName;
         }
         
         public override void AttachToContext(IKistlContext ctx)

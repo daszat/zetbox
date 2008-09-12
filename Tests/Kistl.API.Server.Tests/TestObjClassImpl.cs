@@ -8,13 +8,13 @@ using Kistl.API.Server;
 using System.Data.Objects.DataClasses;
 using System.Xml.Serialization;
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.API.Server.Tests.TestObjClassImpl), "B_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.API.Server.Tests.TestObjClassImpl))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.API.Server.Tests.TestObjClassImpl), "B_TestObjClass_TestNameCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.API.Server.Tests.TestObjClass_TestNameCollectionEntryImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__), "B_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__), "B_TestObjClass_TestNameCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.API.Server.Tests.TestObjClass_TestNameCollectionEntry__Implementation__))]
 
 namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass")]
-    public class TestObjClassImpl : BaseServerDataObject, Kistl.API.Server.Tests.TestObjClass
+    public class TestObjClass__Implementation__ : BaseServerDataObject, Kistl.API.Server.Tests.TestObjClass
     {
 
         private int _ID;
@@ -25,7 +25,7 @@ namespace Kistl.API.Server.Tests
 
         private int? _fk_BaseTestObjClass;
 
-        public TestObjClassImpl()
+        public TestObjClass__Implementation__()
         {
         }
 
@@ -73,11 +73,11 @@ namespace Kistl.API.Server.Tests
         }
 
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "B_TestObjClass_TestNameCollectionEntry")]
-        public EntityCollection<TestObjClass_TestNameCollectionEntryImpl> TestNamesImpl
+        public EntityCollection<TestObjClass_TestNameCollectionEntry__Implementation__> TestNames__Implementation__
         {
             get
             {
-                EntityCollection<TestObjClass_TestNameCollectionEntryImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<TestObjClass_TestNameCollectionEntryImpl>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "B_TestObjClass_TestNameCollectionEntry");
+                EntityCollection<TestObjClass_TestNameCollectionEntry__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<TestObjClass_TestNameCollectionEntry__Implementation__>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "B_TestObjClass_TestNameCollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load();
                 return c;
             }
@@ -85,17 +85,17 @@ namespace Kistl.API.Server.Tests
 
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestObjClass", "A_TestObjClass")]
-        public TestObjClassImpl BaseTestObjClassImpl
+        public TestObjClass__Implementation__ BaseTestObjClass__Implementation__
         {
             get
             {
-                EntityReference<TestObjClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClassImpl>("Model.FK_TestObjClass_TestObjClass", "A_TestObjClass");
+                EntityReference<TestObjClass__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass__Implementation__>("Model.FK_TestObjClass_TestObjClass", "A_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
                 return r.Value;
             }
             set
             {
-                EntityReference<TestObjClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClassImpl>("Model.FK_TestObjClass_TestObjClass", "A_TestObjClass");
+                EntityReference<TestObjClass__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass__Implementation__>("Model.FK_TestObjClass_TestObjClass", "A_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
                 r.Value = value;
             }
@@ -119,11 +119,11 @@ namespace Kistl.API.Server.Tests
 
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestObjClass", "B_TestObjClass")]
-        public EntityCollection<TestObjClassImpl> SubClassesImpl
+        public EntityCollection<TestObjClass__Implementation__> SubClasses__Implementation__
         {
             get
             {
-                EntityCollection<TestObjClassImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<TestObjClassImpl>("Model.FK_TestObjClass_TestObjClass", "B_TestObjClass");
+                EntityCollection<TestObjClass__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<TestObjClass__Implementation__>("Model.FK_TestObjClass_TestObjClass", "B_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load();
                 return c;
             }
@@ -132,7 +132,7 @@ namespace Kistl.API.Server.Tests
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            TestNamesImpl.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
+            TestNames__Implementation__.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
         }
 
         public event ToStringHandler<TestObjClass> OnToString_TestObjClass;
@@ -197,30 +197,30 @@ namespace Kistl.API.Server.Tests
         {
             get
             {
-                return BaseTestObjClassImpl;
+                return BaseTestObjClass__Implementation__;
             }
             set
             {
-                BaseTestObjClassImpl = (TestObjClassImpl)value;
+                BaseTestObjClass__Implementation__ = (TestObjClass__Implementation__)value;
             }
         }
 
-        private EntityCollectionWrapper<TestObjClass, TestObjClassImpl> _SubClasses;
+        private EntityCollectionWrapper<TestObjClass, TestObjClass__Implementation__> _SubClasses;
         public ICollection<TestObjClass> SubClasses
         {
             get 
             {
-                if (_SubClasses == null) _SubClasses = new EntityCollectionWrapper<TestObjClass, TestObjClassImpl>(SubClassesImpl);
+                if (_SubClasses == null) _SubClasses = new EntityCollectionWrapper<TestObjClass, TestObjClass__Implementation__>(SubClasses__Implementation__);
                 return _SubClasses;
             }
         }
 
-        private EntityCollectionEntryValueWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntryImpl> _TestNames;
+        private EntityCollectionEntryValueWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__> _TestNames;
         public IList<string> TestNames
         {
             get 
             {
-                if (_TestNames == null) _TestNames = new EntityCollectionEntryValueWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntryImpl>(this, TestNamesImpl);
+                if (_TestNames == null) _TestNames = new EntityCollectionEntryValueWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__>(this, TestNames__Implementation__);
                 return _TestNames;
             }
         }

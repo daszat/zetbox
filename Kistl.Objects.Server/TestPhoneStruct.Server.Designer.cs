@@ -25,7 +25,7 @@ namespace Kistl.App.Test
     
     
     [System.Data.Objects.DataClasses.EdmComplexTypeAttribute(NamespaceName="Model", Name="TestPhoneStruct")]
-    public class TestPhoneStructImpl : BaseServerStructObject, TestPhoneStruct
+    public class TestPhoneStruct__Implementation__ : BaseServerStructObject, TestPhoneStruct
     {
         
         private string _Number;

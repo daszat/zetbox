@@ -24,10 +24,10 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Client;
     
     
-    public class KostenstelleImpl : Kistl.App.Zeiterfassung.ZeitkontoImpl, Kostenstelle
+    public class Kostenstelle__Implementation__ : Kistl.App.Zeiterfassung.Zeitkonto__Implementation__, Kostenstelle
     {
         
-        public KostenstelleImpl()
+        public Kostenstelle__Implementation__()
         {
         }
         

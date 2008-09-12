@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Template_Visual_VisualTree", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualImpl), "B_Template", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.TemplateImpl))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Template_Assembly_DisplayedTypeAssembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyImpl), "B_Template", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.TemplateImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Template_Visual_VisualTree", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual__Implementation__), "B_Template", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Template__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Template_Assembly_DisplayedTypeAssembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__), "B_Template", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Template__Implementation__))]
 
 namespace Kistl.App.GUI
 {
@@ -28,7 +28,7 @@ namespace Kistl.App.GUI
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Template")]
-    public class TemplateImpl : BaseServerDataObject, Template
+    public class Template__Implementation__ : BaseServerDataObject, Template
     {
         
         private int _ID;
@@ -41,7 +41,7 @@ namespace Kistl.App.GUI
         
         private System.Nullable<int> _fk_DisplayedTypeAssembly = null;
         
-        public TemplateImpl()
+        public Template__Implementation__()
         {
         }
         
@@ -81,11 +81,11 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return VisualTreeImpl;
+                return VisualTree__Implementation__;
             }
             set
             {
-                VisualTreeImpl = (Kistl.App.GUI.VisualImpl)value;
+                VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)value;
             }
         }
         
@@ -106,19 +106,19 @@ namespace Kistl.App.GUI
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Template_Visual_VisualTree", "A_Visual")]
-        public Kistl.App.GUI.VisualImpl VisualTreeImpl
+        public Kistl.App.GUI.Visual__Implementation__ VisualTree__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.GUI.VisualImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualImpl>("Model.FK_Template_Visual_VisualTree", "A_Visual");
+                EntityReference<Kistl.App.GUI.Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>("Model.FK_Template_Visual_VisualTree", "A_Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.GUI.VisualImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualImpl>("Model.FK_Template_Visual_VisualTree", "A_Visual");
+                EntityReference<Kistl.App.GUI.Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>("Model.FK_Template_Visual_VisualTree", "A_Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.GUI.VisualImpl)value;
+                r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
             }
         }
         
@@ -145,11 +145,11 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return DisplayedTypeAssemblyImpl;
+                return DisplayedTypeAssembly__Implementation__;
             }
             set
             {
-                DisplayedTypeAssemblyImpl = (Kistl.App.Base.AssemblyImpl)value;
+                DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
         
@@ -170,19 +170,19 @@ namespace Kistl.App.GUI
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Template_Assembly_DisplayedTypeAssembly", "A_Assembly")]
-        public Kistl.App.Base.AssemblyImpl DisplayedTypeAssemblyImpl
+        public Kistl.App.Base.Assembly__Implementation__ DisplayedTypeAssembly__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_Template_Assembly_DisplayedTypeAssembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_Template_Assembly_DisplayedTypeAssembly", "A_Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_Template_Assembly_DisplayedTypeAssembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_Template_Assembly_DisplayedTypeAssembly", "A_Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.AssemblyImpl)value;
+                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
         

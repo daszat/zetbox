@@ -25,14 +25,14 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Property")]
-    public class PropertyImpl : Kistl.App.Base.BasePropertyImpl, Property
+    public class Property__Implementation__ : Kistl.App.Base.BaseProperty__Implementation__, Property
     {
         
         private bool _IsList;
         
         private bool _IsNullable;
         
-        public PropertyImpl()
+        public Property__Implementation__()
         {
         }
         

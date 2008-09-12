@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.IO;
 
+// http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
 namespace Kistl.API.Client
 {

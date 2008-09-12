@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassImpl), "B_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferencePropertyImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__), "B_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -27,12 +27,12 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectReferenceProperty")]
-    public class ObjectReferencePropertyImpl : Kistl.App.Base.PropertyImpl, ObjectReferenceProperty
+    public class ObjectReferenceProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ObjectReferenceProperty
     {
         
         private System.Nullable<int> _fk_ReferenceObjectClass = null;
         
-        public ObjectReferencePropertyImpl()
+        public ObjectReferenceProperty__Implementation__()
         {
         }
         
@@ -41,11 +41,11 @@ namespace Kistl.App.Base
         {
             get
             {
-                return ReferenceObjectClassImpl;
+                return ReferenceObjectClass__Implementation__;
             }
             set
             {
-                ReferenceObjectClassImpl = (Kistl.App.Base.ObjectClassImpl)value;
+                ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)value;
             }
         }
         
@@ -66,19 +66,19 @@ namespace Kistl.App.Base
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass")]
-        public Kistl.App.Base.ObjectClassImpl ReferenceObjectClassImpl
+        public Kistl.App.Base.ObjectClass__Implementation__ ReferenceObjectClass__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.ObjectClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassImpl>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
+                EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.ObjectClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassImpl>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
+                EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.ObjectClassImpl)value;
+                r.Value = (Kistl.App.Base.ObjectClass__Implementation__)value;
             }
         }
         

@@ -26,11 +26,11 @@ namespace Kistl.API.Client.Tests
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
             List<TestObjClass> result = new List<TestObjClass>();
-            result.Add(new TestObjClass() { StringProp = "String " + 1 });
-            result.Add(new TestObjClass() { StringProp = "String " + 2, fk_Parent = 1 });
-            result.Add(new TestObjClass() { StringProp = "String " + 3, fk_Parent = 1 });
-            result.Add(new TestObjClass() { StringProp = "String " + 4 });
-            result.Add(new TestObjClass() { StringProp = "String " + 5 });
+            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 1 });
+            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2, fk_Parent = 1 });
+            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3, fk_Parent = 1 });
+            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 4 });
+            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 5 });
 
             result[0].SetPrivatePropertyValue<int>("ID", 1);
             result[1].SetPrivatePropertyValue<int>("ID", 2);
@@ -49,8 +49,8 @@ namespace Kistl.API.Client.Tests
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
             {
-                result.Add(new TestObjClass() { StringProp = "String " + 2 });
-                result.Add(new TestObjClass() { StringProp = "String " + 3 });
+                result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2 });
+                result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3 });
                 result[0].SetPrivatePropertyValue<int>("ID", 2);
                 result[1].SetPrivatePropertyValue<int>("ID", 3);
             }
@@ -63,7 +63,7 @@ namespace Kistl.API.Client.Tests
             if (type == null) throw new ArgumentNullException("type");
             if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
-            TestObjClass obj = new TestObjClass() { StringProp = "String " + ID };
+            TestObjClass obj = new TestObjClass__Implementation__() { StringProp = "String " + ID };
             obj.SetPrivatePropertyValue<int>("ID", ID);
             return obj;
         }
@@ -80,11 +80,11 @@ namespace Kistl.API.Client.Tests
             {
                 Type type = obj.GetType();
                 if (type == null) throw new ArgumentNullException("type");
-                if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
+                if (type != typeof(TestObjClass__Implementation__)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    TestObjClass newObj = new TestObjClass();
+                    TestObjClass newObj = new TestObjClass__Implementation__();
 
                     // Copy old object to new object
                     ((BaseClientDataObject)obj).ApplyChanges(newObj);

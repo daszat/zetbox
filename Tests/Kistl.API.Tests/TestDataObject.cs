@@ -8,7 +8,20 @@ using Kistl.API;
 namespace Kistl.API.Tests
 {
     [Serializable]
-    public class TestDataObject : IDataObject, ICloneable, INotifyPropertyChanged
+    public class TestObj
+    {
+        public string TestField;
+    }
+
+    public interface TestDataObject : IDataObject
+    {
+        bool BoolProperty { get; set; }
+        int IntProperty { get; set; }
+        string StringProperty { get; set; }
+    }
+
+    [Serializable]
+    public class TestDataObject__Implementation__ : IDataObject, ICloneable, INotifyPropertyChanged, TestDataObject
     {
         private int _ID;
         private string _StringProperty;
@@ -76,7 +89,7 @@ namespace Kistl.API.Tests
 
         public void CopyTo(IDataObject obj)
         {
-            ((TestDataObject)obj).ID = this.ID;
+            ((TestDataObject__Implementation__)obj).ID = this.ID;
             ((TestDataObject)obj).IntProperty = this.IntProperty;
             ((TestDataObject)obj).StringProperty = this.StringProperty;
             ((TestDataObject)obj).BoolProperty = this.BoolProperty;

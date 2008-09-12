@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class AssemblyImpl : BaseClientDataObject, Assembly
+    public class Assembly__Implementation__ : BaseClientDataObject, Assembly
     {
         
         private System.Nullable<int> _fk_Module = null;
@@ -33,7 +33,7 @@ namespace Kistl.App.Base
         
         private bool _IsClientAssembly;
         
-        public AssemblyImpl()
+        public Assembly__Implementation__()
         {
         }
         
@@ -135,9 +135,9 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((AssemblyImpl)obj).fk_Module = this.fk_Module;
-            ((AssemblyImpl)obj).AssemblyName = this.AssemblyName;
-            ((AssemblyImpl)obj).IsClientAssembly = this.IsClientAssembly;
+            ((Assembly__Implementation__)obj).fk_Module = this.fk_Module;
+            ((Assembly__Implementation__)obj).AssemblyName = this.AssemblyName;
+            ((Assembly__Implementation__)obj).IsClientAssembly = this.IsClientAssembly;
         }
         
         public override void AttachToContext(IKistlContext ctx)

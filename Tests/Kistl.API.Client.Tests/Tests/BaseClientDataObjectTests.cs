@@ -25,7 +25,7 @@ namespace Kistl.API.Client.Tests
 
             PropertyChangedCalled = false;
 
-            obj = new TestObjClass();
+            obj = new TestObjClass__Implementation__();
             obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(obj_PropertyChanged);
         }
 
@@ -95,11 +95,11 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void ApplyChanges()
         {
-            TestObjClass result = new TestObjClass();
+            TestObjClass result = new TestObjClass__Implementation__();
 
             obj.SetPrivatePropertyValue<int>("ID", 10);
 
-            obj.ApplyChanges(result);
+            ((TestObjClass__Implementation__)obj).ApplyChanges(result);
             Assert.That(result.ID, Is.EqualTo(obj.ID));
             Assert.That(PropertyChangedCalled, Is.False);
         }
@@ -108,8 +108,8 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ApplyChanges_Null()
         {
-            TestObjClass result = null;
-            obj.ApplyChanges(result);
+            TestObjClass__Implementation__ result = null;
+            ((TestObjClass__Implementation__)obj).ApplyChanges(result);
         }
 
         [Test]
@@ -134,7 +134,7 @@ namespace Kistl.API.Client.Tests
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass result = new TestObjClass();
+                TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(sr);
 
                 Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
@@ -150,7 +150,7 @@ namespace Kistl.API.Client.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass result = new TestObjClass();
+                TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(null);
             }
         }
@@ -169,7 +169,7 @@ namespace Kistl.API.Client.Tests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ms.Seek(0, SeekOrigin.Begin);
-                TestObjClass result = new TestObjClass();
+                TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(sr);
             }
         }

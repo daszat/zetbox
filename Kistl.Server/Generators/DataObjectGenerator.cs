@@ -355,9 +355,9 @@ namespace Kistl.Server.Generators
             current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
 
             // Create Class
-            current.code_class = current.code_namespace.CreateClass(current.objClass.ClassName + "Impl",
+            current.code_class = current.code_namespace.CreateClass(current.objClass.ClassName + Kistl.API.Helper.ImplementationSuffix,
                 current.objClass.BaseObjectClass != null
-                    ? current.objClass.BaseObjectClass.Module.Namespace + "." + current.objClass.BaseObjectClass.ClassName + "Impl"
+                    ? current.objClass.BaseObjectClass.Module.Namespace + "." + current.objClass.BaseObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix
                     : string.Format("Base{0}DataObject", current.task));
 
             // Related Interface
@@ -511,7 +511,7 @@ namespace Kistl.Server.Generators
             current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
 
             // Create Struct class
-            current.code_class = current.code_namespace.CreateClass(current.@struct.ClassName + "Impl", string.Format("Base{0}StructObject", current.task));
+            current.code_class = current.code_namespace.CreateClass(current.@struct.ClassName + Kistl.API.Helper.ImplementationSuffix, string.Format("Base{0}StructObject", current.task));
 
             // Related Interface
             current.code_class.BaseTypes.Add(current.@struct.ClassName);
@@ -616,7 +616,7 @@ namespace Kistl.Server.Generators
         {
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
-            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + "Impl",
+            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + Kistl.API.Helper.ImplementationSuffix,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
             if (current.task != TaskEnum.Interface)
             {
@@ -785,7 +785,7 @@ namespace Kistl.Server.Generators
 
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
-            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + "Impl",
+            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + Kistl.API.Helper.ImplementationSuffix,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
             if (current.task != TaskEnum.Interface)
             {
@@ -962,7 +962,7 @@ namespace Kistl.Server.Generators
         private void GenerateProperties_StructPropertyInternal(CurrentObjectClass current)
         {
             //current.code_field = current.property.CreateField(current.code_class, current.task);
-            current.code_field = current.code_class.CreateField(current.property.GetPropertyTypeString() + "Impl", "_" + current.property.PropertyName);
+            current.code_field = current.code_class.CreateField(current.property.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix, "_" + current.property.PropertyName);
             current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
 
             current.code_property.GetStatements.AddStatement("return _{0}", current.property.PropertyName);
@@ -970,10 +970,10 @@ namespace Kistl.Server.Generators
                 {{
                     NotifyPropertyChanging(""{0}""); 
                     if (_{0} != null) _{0}.DetachFromObject(this, ""{0}"");
-                    _{0} = ({1}Impl)value;
+                    _{0} = ({1}{2})value;
                     if (_{0} != null) _{0}.AttachToObject(this, ""{0}"");
                     NotifyPropertyChanged(""{0}"");
-                }}", current.property.PropertyName, current.property.GetPropertyTypeString());
+                }}", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
 
             GenerateProperties_StructProperty(current);
         }
@@ -1121,23 +1121,23 @@ namespace Kistl.Server.Generators
 
                     if (p.IsValueTypePropertySingle())
                     {
-                        stmt = string.Format("(({1}Impl)obj).{0} = this.{0}", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("(({1}{2})obj).{0} = this.{0}", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
                     else if (p.IsValueTypePropertyList())
                     {
-                        stmt = string.Format("this._{0}.ApplyChanges((({1}Impl)obj)._{0})", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("this._{0}.ApplyChanges((({1}{2})obj)._{0})", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
                     else if (p.IsObjectReferencePropertySingle())
                     {
-                        stmt = string.Format("(({1}Impl)obj).fk_{0} = this.fk_{0}", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("(({1}{2})obj).fk_{0} = this.fk_{0}", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
                     else if (p.IsObjectReferencePropertyList())
                     {
-                        stmt = string.Format("this._{0}.ApplyChanges((({1}Impl)obj)._{0})", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("this._{0}.ApplyChanges((({1}{2})obj)._{0})", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
                     else if (p is BackReferenceProperty)
                     {
-                        stmt = string.Format("if(this._{0} != null) this._{0}.ApplyChanges((({1}Impl)obj)._{0}); else (({1}Impl)obj)._{0} = null; (({1}Impl)obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, current.objClass.ClassName);
+                        stmt = string.Format("if(this._{0} != null) this._{0}.ApplyChanges((({1}{2})obj)._{0}); else (({1}{2})obj)._{0} = null; (({1}{2})obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
 
                     if (!string.IsNullOrEmpty(stmt))
@@ -1171,7 +1171,7 @@ namespace Kistl.Server.Generators
                 foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
                 {
                     m.Statements.AddComment(@"Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly");
-                    m.Statements.AddStatement(@"{0}Impl.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i))", p.PropertyName);
+                    m.Statements.AddStatement(@"{0}{1}.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i))", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                 }
             }
         }
@@ -1319,7 +1319,7 @@ namespace Kistl.Server.Generators
                     if (current.task == TaskEnum.Client)
                         m.Statements.AddStatement("this._{0}.ToStream(sw)", p.PropertyName);
                     else
-                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}Impl, sw)", p.PropertyName);
+                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                 }
                 else if (p.IsStructPropertySingle())
                 {
@@ -1334,7 +1334,7 @@ namespace Kistl.Server.Generators
                     if (current.task == TaskEnum.Client)
                         m.Statements.AddStatement("this._{0}.ToStream(sw)", p.PropertyName);
                     else
-                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}Impl, sw)", p.PropertyName);
+                        m.Statements.AddStatement("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                 }
                 else if (p is BackReferenceProperty
                     && current.task == TaskEnum.Server
@@ -1361,7 +1361,7 @@ namespace Kistl.Server.Generators
                     if (current.task == TaskEnum.Client)
                         m.Statements.AddStatement("this._{0}.FromStream(sr)", p.PropertyName);
                     else
-                        m.Statements.AddStatement("BinarySerializer.FromBinaryCollectionEntries(this.{0}Impl, sr)", p.PropertyName);
+                        m.Statements.AddStatement("BinarySerializer.FromBinaryCollectionEntries(this.{0}{1}, sr)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                 }
                 else if (p is EnumerationProperty)
                 {

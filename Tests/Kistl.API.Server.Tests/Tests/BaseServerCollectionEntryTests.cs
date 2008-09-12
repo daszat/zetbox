@@ -13,12 +13,12 @@ namespace Kistl.API.Server.Tests
     [TestFixture]
     public class BaseServerCollectionEntryTests
     {
-        private TestObjClass_TestNameCollectionEntryImpl obj;
+        private TestObjClass_TestNameCollectionEntry__Implementation__ obj;
 
         [SetUp]
         public void SetUp()
         {
-            obj = new TestObjClass_TestNameCollectionEntryImpl();
+            obj = new TestObjClass_TestNameCollectionEntry__Implementation__();
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Kistl.API.Server.Tests
 
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
-                TestObjClass_TestNameCollectionEntryImpl result = new TestObjClass_TestNameCollectionEntryImpl();
+                TestObjClass_TestNameCollectionEntry__Implementation__ result = new TestObjClass_TestNameCollectionEntry__Implementation__();
                 result.FromStream(sr);
 
                 Assert.That(result.ID, Is.EqualTo(obj.ID));
@@ -56,7 +56,7 @@ namespace Kistl.API.Server.Tests
         {
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
-                TestObjClass_TestNameCollectionEntryImpl result = new TestObjClass_TestNameCollectionEntryImpl();
+                TestObjClass_TestNameCollectionEntry__Implementation__ result = new TestObjClass_TestNameCollectionEntry__Implementation__();
                 result.FromStream(null);
             }
         }

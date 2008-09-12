@@ -61,6 +61,9 @@ namespace Kistl.Server.Generators.SQLServer
                 current.code_class.AddAttribute("System.Data.Objects.DataClasses.EdmComplexTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name", new CodePrimitiveExpression(current.@struct.ClassName)));
+
+                CurrentStruct nullStruct = (CurrentStruct)current.Clone();
+                nullStruct.code_class = current.code_namespace.CreateClass(current.@struct.ClassName + Kistl.API.Helper.ImplementationSuffix + "__NULL", current.@struct.ClassName + Kistl.API.Helper.ImplementationSuffix);
             }
         }
         #endregion
@@ -77,13 +80,13 @@ namespace Kistl.Server.Generators.SQLServer
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne")),
                 new CodeAttributeArgument(
-                    new CodeTypeOfExpression(parentType.NameDataObject + "Impl")),
+                    new CodeTypeOfExpression(parentType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                 new CodeAttributeArgument(
                     new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType))),
                 new CodeAttributeArgument(
                     new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
                 new CodeAttributeArgument(
-                    new CodeTypeOfExpression(childType.NameDataObject + "Impl")));
+                    new CodeTypeOfExpression(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)));
         }
 
         private void GenerateEdmRelationshipAttribute(ObjectClass objClass, CodeCompileUnit code)
@@ -126,7 +129,7 @@ namespace Kistl.Server.Generators.SQLServer
                 if (current.property.IsEnumerationPropertySingle())
                 {
                     CurrentObjectClass implProperty = (CurrentObjectClass)current.Clone();
-                    implProperty.code_property = current.code_class.CreateProperty("System.Int32", current.property.PropertyName + "Impl");
+                    implProperty.code_property = current.code_class.CreateProperty("System.Int32", current.property.PropertyName + Kistl.API.Helper.ImplementationSuffix);
 
                     implProperty.code_property.AddAttribute("EdmScalarPropertyAttribute");
                     implProperty.code_property.GetStatements.AddStatement("return (int){0}", current.property.PropertyName);
@@ -164,18 +167,19 @@ namespace Kistl.Server.Generators.SQLServer
                     new CodeTypeReference("EntityCollectionEntryValueWrapper",
                         new CodeTypeReference(parentType.NameDataObject),
                         new CodeTypeReference(valueType.NameDataObject),
-                        new CodeTypeReference(collectionType.NameDataObject + "Impl")),
+                        new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                     current.property.PropertyName + "Wrapper");
-                current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryValueWrapper<{1}, {2}, {3}>(this, {0}Impl);
+                current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryValueWrapper<{1}, {2}, {3}{4}>(this, {0}{4});
                 return {0}Wrapper",
                               current.property.PropertyName,
                               parentType.NameDataObject,
                               valueType.NameDataObject,
-                              collectionType.NameDataObject + "Impl");
+                              collectionType.NameDataObject, 
+                              Kistl.API.Helper.ImplementationSuffix);
 
                 currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
-                    new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionType.NameDataObject + "Impl")),
-                    current.code_property.Name + "Impl", false);
+                    new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
+                    current.code_property.Name + Kistl.API.Helper.ImplementationSuffix, false);
 
                 currentEFProperty.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
                     "Model",
@@ -190,10 +194,10 @@ namespace Kistl.Server.Generators.SQLServer
 
                 // Collection Class
                 collectionClass.code_property.GetStatements.AddStatement("return ValueImpl");
-                collectionClass.code_property.SetStatements.AddStatement("ValueImpl = ({0}Impl)value", current.property.GetPropertyTypeString());
+                collectionClass.code_property.SetStatements.AddStatement("ValueImpl = ({0}{1})value", current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
 
                 CurrentObjectClass implCollectionClass = (CurrentObjectClass)collectionClass.Clone();
-                implCollectionClass.code_property = collectionClass.code_class.CreateProperty(current.property.GetPropertyTypeString() + "Impl", "ValueImpl");
+                implCollectionClass.code_property = collectionClass.code_class.CreateProperty(current.property.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix, "ValueImpl");
 
                 implCollectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
@@ -205,14 +209,14 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
 
                 implCollectionClass.code_property.GetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, (Property)current.property), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
+                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, (Property)current.property), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass), Kistl.API.Helper.ImplementationSuffix);
 
                 implCollectionClass.code_property.SetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = ({0}Impl)value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, (Property)current.property), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
+                r.Value = ({0}{3})value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, (Property)current.property), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass), Kistl.API.Helper.ImplementationSuffix);
 
                 // Collection.Serializer.Value
                 serializerValue.code_property.GetStatements.AddStatement(
@@ -234,10 +238,10 @@ namespace Kistl.Server.Generators.SQLServer
 
                 // Collection.Parent
                 parent.code_property.GetStatements.AddStatement("return ParentImpl");
-                parent.code_property.SetStatements.AddStatement("ParentImpl = ({0}Impl)value", current.objClass.GetTypeMoniker().NameDataObject);
+                parent.code_property.SetStatements.AddStatement("ParentImpl = ({0}{1})value", current.objClass.GetTypeMoniker().NameDataObject, Kistl.API.Helper.ImplementationSuffix);
 
                 CurrentObjectClass implParent = (CurrentObjectClass)parent.Clone();
-                implParent.code_property = parent.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject + "Impl", "ParentImpl");
+                implParent.code_property = parent.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix, "ParentImpl");
 
                 implParent.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
                     "Model",
@@ -245,14 +249,14 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationParentRoleName(current.objClass));
 
                 implParent.code_property.GetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass));
+                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass), Kistl.API.Helper.ImplementationSuffix);
 
                 implParent.code_property.SetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = ({0}Impl)value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass));
+                r.Value = ({0}{3})value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass), Kistl.API.Helper.ImplementationSuffix);
             }
         }
         #endregion
@@ -284,18 +288,19 @@ namespace Kistl.Server.Generators.SQLServer
                     new CodeTypeReference("EntityCollectionEntryValueWrapper",
                         new CodeTypeReference(parentType.NameDataObject),
                         new CodeTypeReference(valueType),
-                        new CodeTypeReference(collectionType.NameDataObject + "Impl")),
+                        new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                     current.property.PropertyName + "Wrapper");
-                current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryValueWrapper<{1}, {2}, {3}>(this, {0}Impl);
+                current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryValueWrapper<{1}, {2}, {3}{4}>(this, {0}{4});
                 return {0}Wrapper",
                               current.property.PropertyName,
                               parentType.NameDataObject,
                               valueType,
-                              collectionType.NameDataObject + "Impl");
+                              collectionType.NameDataObject, 
+                              Kistl.API.Helper.ImplementationSuffix);
 
                 currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
-                    new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionType.NameDataObject + "Impl")),
-                    current.code_property.Name + "Impl", false);
+                    new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
+                    current.code_property.Name + Kistl.API.Helper.ImplementationSuffix, false);
 
                 currentEFProperty.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
                     "Model",
@@ -320,10 +325,10 @@ namespace Kistl.Server.Generators.SQLServer
 
                 // Collection.Parent
                 parent.code_property.GetStatements.AddStatement("return ParentImpl");
-                parent.code_property.SetStatements.AddStatement("ParentImpl = ({0}Impl)value", current.objClass.GetTypeMoniker().NameDataObject);
+                parent.code_property.SetStatements.AddStatement("ParentImpl = ({0}{1})value", current.objClass.GetTypeMoniker().NameDataObject, Kistl.API.Helper.ImplementationSuffix);
 
                 CurrentObjectClass implParent = (CurrentObjectClass)parent.Clone();
-                implParent.code_property = parent.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject + "Impl", "ParentImpl");
+                implParent.code_property = parent.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix, "ParentImpl");
 
                 implParent.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
                     "Model",
@@ -331,14 +336,14 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationParentRoleName(current.objClass));
 
                 implParent.code_property.GetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass));
+                return r.Value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass), Kistl.API.Helper.ImplementationSuffix);
 
                 implParent.code_property.SetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = ({0}Impl)value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass));
+                r.Value = ({0}{3})value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass), Kistl.API.Helper.ImplementationSuffix);
             }
         }
         #endregion
@@ -353,11 +358,11 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
 
-                current.code_property.GetStatements.AddStatement("return {0}Impl", current.property.PropertyName);
-                current.code_property.SetStatements.AddStatement("{0}Impl = ({1}Impl)value", current.property.PropertyName, current.property.GetPropertyTypeString());
+                current.code_property.GetStatements.AddStatement("return {0}" + Kistl.API.Helper.ImplementationSuffix, current.property.PropertyName);
+                current.code_property.SetStatements.AddStatement("{0}{2} = ({1}{2})value", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
 
                 CurrentObjectClass implProperty = (CurrentObjectClass)current.Clone();
-                implProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString() + "Impl", current.property.PropertyName + "Impl");
+                implProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix, current.property.PropertyName + Kistl.API.Helper.ImplementationSuffix);
 
                 implProperty.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
                     "Model",
@@ -365,14 +370,14 @@ namespace Kistl.Server.Generators.SQLServer
                     Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
 
                 implProperty.code_property.GetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
+                return r.Value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass), Kistl.API.Helper.ImplementationSuffix);
 
                 implProperty.code_property.SetStatements.AddStatement(
-              @"EntityReference<{0}Impl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}Impl>(""Model.{1}"", ""{2}"");
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = ({0}Impl)value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass));
+                r.Value = ({0}{3})value", current.property.GetPropertyTypeString(), Generator.GetAssociationName(objRefProp.ReferenceObjectClass, current.objClass, current.property.PropertyName), Generator.GetAssociationParentRoleName(objRefProp.ReferenceObjectClass), Kistl.API.Helper.ImplementationSuffix);
 
                 // Serializer
                 serializer.code_property.GetStatements.AddStatement(
@@ -409,46 +414,47 @@ namespace Kistl.Server.Generators.SQLServer
                         new CodeTypeReference("EntityCollectionEntryParentWrapper",
                             new CodeTypeReference(ownerType.NameDataObject),
                             new CodeTypeReference(parentType.NameDataObject),
-                            new CodeTypeReference(childType.NameDataObject + "Impl")),
+                            new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                         current.property.PropertyName + "Wrapper");
-                    current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryParentWrapper<{1}, {2}, {3}>(this, {0}Impl);
+                    current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryParentWrapper<{1}, {2}, {3}{4}>(this, {0}{4});
                 return {0}Wrapper", 
                                   current.property.PropertyName, 
                                   ownerType.NameDataObject,
                                   parentType.NameDataObject,
-                                  childType.NameDataObject + "Impl");
+                                  childType.NameDataObject,
+                                  Kistl.API.Helper.ImplementationSuffix);
 
                     currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
-                        new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject + "Impl")),
-                        current.code_property.Name + "Impl", false);
+                        new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
+                        current.code_property.Name + Kistl.API.Helper.ImplementationSuffix, false);
 
                     currentEFProperty.code_property.GetStatements.AddStatement(
-                  @"EntityCollection<{0}Impl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}Impl>(""Model.{1}"", ""{2}"");
+                  @"EntityCollection<{0}{3}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", childType.NameDataObject,
                              Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName),
-                             Generator.GetAssociationChildRoleName(childType));
+                             Generator.GetAssociationChildRoleName(childType), Kistl.API.Helper.ImplementationSuffix);
                 }
                 else
                 {
                     current.code_field = current.code_class.CreateField(
                         new CodeTypeReference("EntityCollectionWrapper",
                             new CodeTypeReference(childType.NameDataObject),
-                            new CodeTypeReference(childType.NameDataObject + "Impl")),
+                            new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                         current.property.PropertyName + "Wrapper");
-                    current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionWrapper<{1}, {1}Impl>({0}Impl);
-                return {0}Wrapper", current.property.PropertyName, childType.NameDataObject);
+                    current.code_property.GetStatements.AddStatement(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionWrapper<{1}, {1}{2}>({0}{2});
+                return {0}Wrapper", current.property.PropertyName, childType.NameDataObject, Kistl.API.Helper.ImplementationSuffix);
 
                     currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
-                        new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject + "Impl")),
-                        current.code_property.Name + "Impl", false);
+                        new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
+                        current.code_property.Name + Kistl.API.Helper.ImplementationSuffix, false);
 
                     currentEFProperty.code_property.GetStatements.AddStatement(
-                  @"EntityCollection<{0}Impl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}Impl>(""Model.{1}"", ""{2}"");
+                  @"EntityCollection<{0}{3}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", childType.NameDataObject,
                              Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName),
-                             Generator.GetAssociationChildRoleName(childType));
+                             Generator.GetAssociationChildRoleName(childType), Kistl.API.Helper.ImplementationSuffix);
                 }
 
                 // currentEFProperty.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));
@@ -467,19 +473,17 @@ namespace Kistl.Server.Generators.SQLServer
             base.GenerateProperties_StructProperty(current);
             if (current.task == TaskEnum.Server)
             {
-                current.code_property.GetStatements.Insert(0, new CodeSnippetStatement(
-                    string.Format(@"                if (_{0} == null) {{ _{0} = new {1}Impl(); _{0}.AttachToObject(this, ""{0}""); }}", 
-                        current.property.PropertyName, current.property.GetPropertyTypeString())));
+                //current.code_property.GetStatements.Insert(0, new CodeSnippetStatement(
+                //    string.Format(@"                if (_{0} == null) {{ _{0} = new {1}{2}(); _{0}.AttachToObject(this, ""{0}""); }}",
+                //        current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix)));
 
                 CurrentObjectClass ormProperty = (CurrentObjectClass)current.Clone();
-                ormProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString() + "Impl", current.property.PropertyName + "Impl");
+                ormProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix, current.property.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                 ormProperty.code_property.AddAttribute("EdmComplexPropertyAttribute");
-                ormProperty.code_property.GetStatements.AddStatement("return ({1}Impl){0}", current.property.PropertyName, current.property.GetPropertyTypeString());
-                ormProperty.code_property.SetStatements.AddStatement("{0} = value", current.property.PropertyName, current.property.GetPropertyTypeString());
-
-                //ormProperty.code_constructor.Statements.AddStatement(@"_{0} = new {1}Impl(); _{0}.AttachToObject(this, ""{0}"")",
-                //        current.property.PropertyName,
-                //        current.property.GetPropertyTypeString());
+                
+                ormProperty.code_property.GetStatements.AddStatement(@"if (_{0} == null) return new {1}{2}__NULL();
+                return ({1}{2}){0}", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
+                ormProperty.code_property.SetStatements.AddStatement("if(!(value is {1}{2}__NULL)) {0} = value", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
             }
         }
         #endregion

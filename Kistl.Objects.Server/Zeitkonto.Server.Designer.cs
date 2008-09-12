@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.MitarbeiterImpl), "B_Zeitkonto_MitarbeiterCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntryImpl))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.ZeitkontoImpl), "B_Zeitkonto_MitarbeiterCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntryImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__), "B_Zeitkonto_MitarbeiterCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.Zeitkonto__Implementation__), "B_Zeitkonto_MitarbeiterCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry__Implementation__))]
 
 namespace Kistl.App.Zeiterfassung
 {
@@ -28,22 +28,22 @@ namespace Kistl.App.Zeiterfassung
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Zeitkonto")]
-    public class ZeitkontoImpl : BaseServerDataObject, Zeitkonto
+    public class Zeitkonto__Implementation__ : BaseServerDataObject, Zeitkonto
     {
         
         private int _ID;
         
         private string _Kontoname;
         
-        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.TaetigkeitImpl> TaetigkeitenWrapper;
+        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> TaetigkeitenWrapper;
         
-        private EntityCollectionEntryValueWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntryImpl> MitarbeiterWrapper;
+        private EntityCollectionEntryValueWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry__Implementation__> MitarbeiterWrapper;
         
         private System.Double? _MaxStunden;
         
         private System.Double? _AktuelleStunden;
         
-        public ZeitkontoImpl()
+        public Zeitkonto__Implementation__()
         {
         }
         
@@ -83,17 +83,17 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                if (TaetigkeitenWrapper == null) TaetigkeitenWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.TaetigkeitImpl>(TaetigkeitenImpl);
+                if (TaetigkeitenWrapper == null) TaetigkeitenWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(Taetigkeiten__Implementation__);
                 return TaetigkeitenWrapper;
             }
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Taetigkeit_Zeitkonto_Zeitkonto", "B_Taetigkeit")]
-        public EntityCollection<Kistl.App.Zeiterfassung.TaetigkeitImpl> TaetigkeitenImpl
+        public EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> Taetigkeiten__Implementation__
         {
             get
             {
-                EntityCollection<Kistl.App.Zeiterfassung.TaetigkeitImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Zeiterfassung.TaetigkeitImpl>("Model.FK_Taetigkeit_Zeitkonto_Zeitkonto", "B_Taetigkeit");
+                EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>("Model.FK_Taetigkeit_Zeitkonto_Zeitkonto", "B_Taetigkeit");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
@@ -103,17 +103,17 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntryImpl>(this, MitarbeiterImpl);
+                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry__Implementation__>(this, Mitarbeiter__Implementation__);
                 return MitarbeiterWrapper;
             }
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "B_Zeitkonto_MitarbeiterCollectionEntry")]
-        public EntityCollection<Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntryImpl> MitarbeiterImpl
+        public EntityCollection<Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry__Implementation__> Mitarbeiter__Implementation__
         {
             get
             {
-                EntityCollection<Zeitkonto_MitarbeiterCollectionEntryImpl> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Zeitkonto_MitarbeiterCollectionEntryImpl>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "B_Zeitkonto_MitarbeiterCollectionEntry");
+                EntityCollection<Zeitkonto_MitarbeiterCollectionEntry__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Zeitkonto_MitarbeiterCollectionEntry__Implementation__>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "B_Zeitkonto_MitarbeiterCollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
@@ -189,14 +189,14 @@ namespace Kistl.App.Zeiterfassung
         {
             base.AttachToContext(ctx);
             /// Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly
-            MitarbeiterImpl.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
+            Mitarbeiter__Implementation__.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Kontoname, sw);
-            BinarySerializer.ToBinary(this.MitarbeiterImpl, sw);
+            BinarySerializer.ToBinary(this.Mitarbeiter__Implementation__, sw);
             BinarySerializer.ToBinary(this._MaxStunden, sw);
             BinarySerializer.ToBinary(this._AktuelleStunden, sw);
         }
@@ -205,14 +205,14 @@ namespace Kistl.App.Zeiterfassung
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Kontoname, sr);
-            BinarySerializer.FromBinaryCollectionEntries(this.MitarbeiterImpl, sr);
+            BinarySerializer.FromBinaryCollectionEntries(this.Mitarbeiter__Implementation__, sr);
             BinarySerializer.FromBinary(out this._MaxStunden, sr);
             BinarySerializer.FromBinary(out this._AktuelleStunden, sr);
         }
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Zeitkonto_MitarbeiterCollectionEntry")]
-    public class Zeitkonto_MitarbeiterCollectionEntryImpl : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto>
+    public class Zeitkonto_MitarbeiterCollectionEntry__Implementation__ : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto>
     {
         
         private int _ID;
@@ -243,7 +243,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                ValueImpl = (Kistl.App.Projekte.MitarbeiterImpl)value;
+                ValueImpl = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
         
@@ -256,7 +256,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                ParentImpl = (Kistl.App.Zeiterfassung.ZeitkontoImpl)value;
+                ParentImpl = (Kistl.App.Zeiterfassung.Zeitkonto__Implementation__)value;
             }
         }
         
@@ -293,36 +293,36 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter")]
-        public Kistl.App.Projekte.MitarbeiterImpl ValueImpl
+        public Kistl.App.Projekte.Mitarbeiter__Implementation__ ValueImpl
         {
             get
             {
-                EntityReference<Kistl.App.Projekte.MitarbeiterImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterImpl>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
+                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Projekte.MitarbeiterImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterImpl>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
+                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Projekte.MitarbeiterImpl)value;
+                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto")]
-        public Kistl.App.Zeiterfassung.ZeitkontoImpl ParentImpl
+        public Kistl.App.Zeiterfassung.Zeitkonto__Implementation__ ParentImpl
         {
             get
             {
-                EntityReference<ZeitkontoImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ZeitkontoImpl>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto");
+                EntityReference<Zeitkonto__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zeitkonto__Implementation__>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<ZeitkontoImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ZeitkontoImpl>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto");
+                EntityReference<Zeitkonto__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zeitkonto__Implementation__>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (ZeitkontoImpl)value;
+                r.Value = (Zeitkonto__Implementation__)value;
             }
         }
         

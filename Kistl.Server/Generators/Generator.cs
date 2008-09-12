@@ -25,7 +25,7 @@ namespace Kistl.Server.Generators
 
         public static TypeMoniker GetTypeMonikerImplementation(this DataType objClass)
         {
-            return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName + "Impl");
+            return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName + Kistl.API.Helper.ImplementationSuffix);
         }
     }
 
@@ -323,7 +323,7 @@ namespace Kistl.Server.Generators
         {
             if (!prop.ReferenceProperty.IsList)
             {
-                return new TypeMoniker(prop.GetPropertyTypeString() + "Impl");
+                return new TypeMoniker(prop.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix);
             }
             else
             {

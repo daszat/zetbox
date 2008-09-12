@@ -22,7 +22,7 @@ namespace Kistl.API.Server.Tests
             currentCustomActionsManager = (CustomActionsManagerAPITest)CustomActionsManagerFactory.Current;
             currentCustomActionsManager.Reset();
 
-            obj = new TestObjClassImpl();
+            obj = new TestObjClass__Implementation__();
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace Kistl.API.Server.Tests
         [Test]
         public void ObjectState_ObjectWithID()
         {
-            ((TestObjClassImpl)obj).ID = 10;
+            ((TestObjClass__Implementation__)obj).ID = 10;
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
 
@@ -56,7 +56,7 @@ namespace Kistl.API.Server.Tests
         /// ObjectState is just for serialization....
         public void ObjectState_ObjectWithID_Modified()
         {
-            ((TestObjClassImpl)obj).ID = 10;
+            ((TestObjClass__Implementation__)obj).ID = 10;
             obj.NotifyPropertyChanged("test");
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
@@ -66,7 +66,7 @@ namespace Kistl.API.Server.Tests
         public void ObjectState_New_then_UnModified()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-            ((TestObjClassImpl)obj).ID = 10;
+            ((TestObjClass__Implementation__)obj).ID = 10;
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
 
@@ -107,7 +107,7 @@ namespace Kistl.API.Server.Tests
 
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
-                TestObjClass result = new TestObjClassImpl();
+                TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(sr);
 
                 Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
@@ -122,7 +122,7 @@ namespace Kistl.API.Server.Tests
         {
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
-                TestObjClass result = new TestObjClassImpl();
+                TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(null);
             }
         }
@@ -141,7 +141,7 @@ namespace Kistl.API.Server.Tests
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
                 ms.Seek(0, SeekOrigin.Begin);
-                TestObjClass result = new TestObjClassImpl();
+                TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(sr);
             }
         }
@@ -179,7 +179,7 @@ namespace Kistl.API.Server.Tests
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
-                Assert.That(((TestObjClassImpl)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
             }
         }
 
@@ -192,12 +192,12 @@ namespace Kistl.API.Server.Tests
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
-                Assert.That(((TestObjClassImpl)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
                 using (IKistlContext ctx2 = Kistl.API.Server.KistlDataContext.GetContext())
                 {
                     obj.AttachToContext(ctx2);
                     Assert.That(obj.Context, Is.Not.Null);
-                    Assert.That(((TestObjClassImpl)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                    Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace Kistl.API.Server.Tests
         public void DetachFromContext()
         {
             Assert.That(obj.Context, Is.Null);
-            ((TestObjClassImpl)obj).ID = 10;
+            ((TestObjClass__Implementation__)obj).ID = 10;
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
                 ctx.Attach(obj);
@@ -215,7 +215,7 @@ namespace Kistl.API.Server.Tests
                 obj.DetachFromContext(ctx);
                 Assert.That(obj.Context, Is.Null);
 
-                Assert.That(((TestObjClassImpl)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
             }
         }
 
@@ -224,7 +224,7 @@ namespace Kistl.API.Server.Tests
         public void DetachFromContext_Other()
         {
             Assert.That(obj.Context, Is.Null);
-            ((TestObjClassImpl)obj).ID = 10;
+            ((TestObjClass__Implementation__)obj).ID = 10;
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
             {
                 ctx.Attach(obj);
@@ -232,13 +232,13 @@ namespace Kistl.API.Server.Tests
 
                 obj.DetachFromContext(ctx);
                 Assert.That(obj.Context, Is.Null);
-                Assert.That(((TestObjClassImpl)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
 
                 using (IKistlContext ctx2 = Kistl.API.Server.KistlDataContext.GetContext())
                 {
                     obj.DetachFromContext(ctx2);
                     Assert.That(obj.Context, Is.Null);
-                    Assert.That(((TestObjClassImpl)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+                    Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
                 }
             }
         }

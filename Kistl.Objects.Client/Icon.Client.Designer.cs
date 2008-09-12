@@ -24,12 +24,12 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
-    public class IconImpl : BaseClientDataObject, Icon
+    public class Icon__Implementation__ : BaseClientDataObject, Icon
     {
         
         private string _IconFile;
         
-        public IconImpl()
+        public Icon__Implementation__()
         {
         }
         
@@ -83,7 +83,7 @@ namespace Kistl.App.GUI
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((IconImpl)obj).IconFile = this.IconFile;
+            ((Icon__Implementation__)obj).IconFile = this.IconFile;
         }
         
         public override void AttachToContext(IKistlContext ctx)

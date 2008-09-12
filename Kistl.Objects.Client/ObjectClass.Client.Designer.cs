@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class ObjectClassImpl : Kistl.App.Base.DataTypeImpl, ObjectClass
+    public class ObjectClass__Implementation__ : Kistl.App.Base.DataType__Implementation__, ObjectClass
     {
         
         private string _TableName;
@@ -33,13 +33,13 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.ObjectClass> _SubClasses;
         
-        private ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntryImpl> _ImplementsInterfaces;
+        private ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__> _ImplementsInterfaces;
         
         private bool _IsSimpleObject;
         
-        public ObjectClassImpl()
+        public ObjectClass__Implementation__()
         {
-            _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntryImpl>(this, "ImplementsInterfaces");
+            _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__>(this, "ImplementsInterfaces");
         }
         
         public string TableName
@@ -174,11 +174,11 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((ObjectClassImpl)obj).TableName = this.TableName;
-            ((ObjectClassImpl)obj).fk_BaseObjectClass = this.fk_BaseObjectClass;
-            if(this._SubClasses != null) this._SubClasses.ApplyChanges(((ObjectClassImpl)obj)._SubClasses); else ((ObjectClassImpl)obj)._SubClasses = null; ((ObjectClassImpl)obj).NotifyPropertyChanged("SubClasses");
-            this._ImplementsInterfaces.ApplyChanges(((ObjectClassImpl)obj)._ImplementsInterfaces);
-            ((ObjectClassImpl)obj).IsSimpleObject = this.IsSimpleObject;
+            ((ObjectClass__Implementation__)obj).TableName = this.TableName;
+            ((ObjectClass__Implementation__)obj).fk_BaseObjectClass = this.fk_BaseObjectClass;
+            if(this._SubClasses != null) this._SubClasses.ApplyChanges(((ObjectClass__Implementation__)obj)._SubClasses); else ((ObjectClass__Implementation__)obj)._SubClasses = null; ((ObjectClass__Implementation__)obj).NotifyPropertyChanged("SubClasses");
+            this._ImplementsInterfaces.ApplyChanges(((ObjectClass__Implementation__)obj)._ImplementsInterfaces);
+            ((ObjectClass__Implementation__)obj).IsSimpleObject = this.IsSimpleObject;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -241,7 +241,7 @@ namespace Kistl.App.Base
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> e);
     }
     
-    public class ObjectClass_ImplementsInterfacesCollectionEntryImpl : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass>
+    public class ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass>
     {
         
         private int _fk_Value;
@@ -320,8 +320,8 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
             base.ApplyChanges(obj);
-            ((ObjectClass_ImplementsInterfacesCollectionEntryImpl)obj)._fk_Value = this.fk_Value;
-            ((ObjectClass_ImplementsInterfacesCollectionEntryImpl)obj)._fk_Parent = this.fk_Parent;
+            ((ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__)obj)._fk_Value = this.fk_Value;
+            ((ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

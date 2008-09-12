@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass_TestNameCollectionEntry")]
-    public class TestObjClass_TestNameCollectionEntryImpl : BaseServerCollectionEntry, ICollectionEntry<string, TestObjClass>
+    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry, ICollectionEntry<string, TestObjClass>
     {
 
         private int _ID;
@@ -49,23 +49,23 @@ namespace Kistl.API.Server.Tests
 
         [XmlIgnore()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass")]
-        public TestObjClassImpl ParentImpl
+        public TestObjClass__Implementation__ Parent__Implementation__
         {
             get
             {
-                EntityReference<TestObjClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClassImpl>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
+                EntityReference<TestObjClass__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass__Implementation__>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
                 return r.Value;
             }
             set
             {
-                EntityReference<TestObjClassImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClassImpl>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
+                EntityReference<TestObjClass__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestObjClass__Implementation__>("Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load();
                 r.Value = value;
             }
         }
 
-        public TestObjClass Parent { get { return ParentImpl; } set { ParentImpl = (TestObjClassImpl)value; } }
+        public TestObjClass Parent { get { return Parent__Implementation__; } set { Parent__Implementation__ = (TestObjClass__Implementation__)value; } }
 
         public int fk_Parent
         {
@@ -96,12 +96,5 @@ namespace Kistl.API.Server.Tests
             BinarySerializer.FromBinary(out this._Value, sr);
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
         }
-
-        //public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
-        //{
-        //    base.ApplyChanges(obj);
-        //    ((TestObjClass_TestNameCollectionEntry)obj)._Value = this._Value;
-        //    ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent = this._fk_Parent;
-        //}
     }
 }

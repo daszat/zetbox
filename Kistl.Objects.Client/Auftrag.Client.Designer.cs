@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
-    public class AuftragImpl : BaseClientDataObject, Auftrag
+    public class Auftrag__Implementation__ : BaseClientDataObject, Auftrag
     {
         
         private System.Nullable<int> _fk_Projekt = null;
@@ -37,7 +37,7 @@ namespace Kistl.App.Projekte
         
         private System.Double? _Auftragswert;
         
-        public AuftragImpl()
+        public Auftrag__Implementation__()
         {
         }
         
@@ -203,11 +203,11 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((AuftragImpl)obj).fk_Projekt = this.fk_Projekt;
-            ((AuftragImpl)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
-            ((AuftragImpl)obj).Auftragsname = this.Auftragsname;
-            ((AuftragImpl)obj).fk_Kunde = this.fk_Kunde;
-            ((AuftragImpl)obj).Auftragswert = this.Auftragswert;
+            ((Auftrag__Implementation__)obj).fk_Projekt = this.fk_Projekt;
+            ((Auftrag__Implementation__)obj).fk_Mitarbeiter = this.fk_Mitarbeiter;
+            ((Auftrag__Implementation__)obj).Auftragsname = this.Auftragsname;
+            ((Auftrag__Implementation__)obj).fk_Kunde = this.fk_Kunde;
+            ((Auftrag__Implementation__)obj).Auftragswert = this.Auftragswert;
         }
         
         public override void AttachToContext(IKistlContext ctx)

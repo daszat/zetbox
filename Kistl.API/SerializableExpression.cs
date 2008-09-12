@@ -266,7 +266,8 @@ namespace Kistl.API
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            return MemberExpression.PropertyOrField(Children[0].ToExpressionInternal(ctx), MemberName);
+            Expression e = Children[0].ToExpressionInternal(ctx);
+            return MemberExpression.PropertyOrField(e, MemberName);
         }
 
         /// <summary>

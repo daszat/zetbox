@@ -21,6 +21,8 @@ namespace Kistl.API
         /// <param name="type">System.Type to serialize</param>
         public SerializableType(Type type)
         {
+            type = type.ToInterfaceType();
+
             GenericTypeParameter = new List<SerializableType>();
 
             if (type.IsGenericParameter)
@@ -61,15 +63,17 @@ namespace Kistl.API
         { 
             get 
             {
-                switch (APIInit.HostType)
-                {
-                    case HostType.Server:
-                        return _AssemblyQualifiedName.Replace(".Client", ".Server");
-                    case HostType.Client:
-                        return _AssemblyQualifiedName.Replace(".Server", ".Client");
-                    default:
-                        throw new InvalidOperationException("APIInit: Invalid Host Type " + APIInit.HostType);
-                }
+                return _AssemblyQualifiedName;
+                // Obsolete -> using interfaces now
+                //switch (APIInit.HostType)
+                //{
+                //    case HostType.Server:
+                //        return _AssemblyQualifiedName.Replace(".Client", ".Server");
+                //    case HostType.Client:
+                //        return _AssemblyQualifiedName.Replace(".Server", ".Client");
+                //    default:
+                //        throw new InvalidOperationException("APIInit: Invalid Host Type " + APIInit.HostType);
+                //}
             }
             set
             {
@@ -106,7 +110,9 @@ namespace Kistl.API
                     TypeName,
                     GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : ""));
             }
-            return result;
+
+            // Lets test...
+            return result.ToImplementationType();
         }
 
         /// <summary>

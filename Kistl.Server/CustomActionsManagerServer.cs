@@ -75,7 +75,7 @@ namespace Kistl.Server
                         {
                             // baseObjClass.GetDataType(); is not possible here, because this
                             // Method is currently attaching
-                            Type objType = Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + "Impl, Kistl.Objects.Server");
+                            Type objType = Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + API.Helper.ImplementationSuffix + ", " + APIInit.ImplementationAssembly);
                             if (objType == null)
                             {
                                 warnings.AppendLine(string.Format("DataType '{0}, Kistl.Objects.Server' not found", baseObjClass.Module.Namespace + "." + baseObjClass.ClassName));

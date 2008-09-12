@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseParameter_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodImpl), "B_BaseParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameterImpl))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseParameter_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleImpl), "B_BaseParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameterImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseParameter_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method__Implementation__), "B_BaseParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameter__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseParameter_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__), "B_BaseParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameter__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -28,7 +28,7 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BaseParameter")]
-    public class BaseParameterImpl : BaseServerDataObject, BaseParameter
+    public class BaseParameter__Implementation__ : BaseServerDataObject, BaseParameter
     {
         
         private int _ID;
@@ -43,7 +43,7 @@ namespace Kistl.App.Base
         
         private bool _IsReturnParameter;
         
-        public BaseParameterImpl()
+        public BaseParameter__Implementation__()
         {
         }
         
@@ -65,11 +65,11 @@ namespace Kistl.App.Base
         {
             get
             {
-                return MethodImpl;
+                return Method__Implementation__;
             }
             set
             {
-                MethodImpl = (Kistl.App.Base.MethodImpl)value;
+                Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)value;
             }
         }
         
@@ -90,19 +90,19 @@ namespace Kistl.App.Base
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseParameter_Method_Method", "A_Method")]
-        public Kistl.App.Base.MethodImpl MethodImpl
+        public Kistl.App.Base.Method__Implementation__ Method__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.MethodImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodImpl>("Model.FK_BaseParameter_Method_Method", "A_Method");
+                EntityReference<Kistl.App.Base.Method__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>("Model.FK_BaseParameter_Method_Method", "A_Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.MethodImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodImpl>("Model.FK_BaseParameter_Method_Method", "A_Method");
+                EntityReference<Kistl.App.Base.Method__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>("Model.FK_BaseParameter_Method_Method", "A_Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.MethodImpl)value;
+                r.Value = (Kistl.App.Base.Method__Implementation__)value;
             }
         }
         
@@ -129,11 +129,11 @@ namespace Kistl.App.Base
         {
             get
             {
-                return ModuleImpl;
+                return Module__Implementation__;
             }
             set
             {
-                ModuleImpl = (Kistl.App.Base.ModuleImpl)value;
+                Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
             }
         }
         
@@ -154,19 +154,19 @@ namespace Kistl.App.Base
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseParameter_Module_Module", "A_Module")]
-        public Kistl.App.Base.ModuleImpl ModuleImpl
+        public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.ModuleImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleImpl>("Model.FK_BaseParameter_Module_Module", "A_Module");
+                EntityReference<Kistl.App.Base.Module__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>("Model.FK_BaseParameter_Module_Module", "A_Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.ModuleImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleImpl>("Model.FK_BaseParameter_Module_Module", "A_Module");
+                EntityReference<Kistl.App.Base.Module__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>("Model.FK_BaseParameter_Module_Module", "A_Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.ModuleImpl)value;
+                r.Value = (Kistl.App.Base.Module__Implementation__)value;
             }
         }
         

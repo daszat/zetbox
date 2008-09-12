@@ -25,12 +25,12 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="StringProperty")]
-    public class StringPropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, StringProperty
+    public class StringProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, StringProperty
     {
         
         private System.Int32? _Length;
         
-        public StringPropertyImpl()
+        public StringProperty__Implementation__()
         {
         }
         

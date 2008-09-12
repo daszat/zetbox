@@ -10,6 +10,11 @@ namespace Kistl.API.Client
 {
     public abstract class BaseClientPersistenceObject : IPersistenceObject, INotifyPropertyChanged, INotifyPropertyChanging
     {
+        protected BaseClientPersistenceObject()
+        {
+            if (APIInit.HostType != HostType.Client) throw new InvalidOperationException("A BaseClientPersistenceObject can only be constructed in a Client");
+        }
+
         public int ID { get; internal set; }
 
         private DataObjectState _ObjectState = DataObjectState.Unmodified;

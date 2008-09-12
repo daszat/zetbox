@@ -29,7 +29,7 @@ namespace Kistl.API.Tests
         {
             SerializableType t = new SerializableType(typeof(TestDataObject));
             Type result = t.GetSerializedType();
-            Assert.That(result, Is.EqualTo(typeof(TestDataObject)));
+            Assert.That(result, Is.EqualTo(typeof(TestDataObject__Implementation__)));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Kistl.API.Tests
             SerializableType t = new SerializableType(typeof(TestDataObject));
             t.AssemblyQualifiedName = "Test";
             Type result = t.GetSerializedType();
-            Assert.That(result, Is.EqualTo(typeof(TestDataObject)));
+            Assert.That(result, Is.EqualTo(typeof(TestDataObject__Implementation__)));
         }
     }
 }

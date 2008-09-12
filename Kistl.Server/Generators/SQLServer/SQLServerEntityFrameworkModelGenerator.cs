@@ -303,7 +303,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         // BackReferenceProperty
                         xml.WriteStartElement("NavigationProperty");
-                        xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                        xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
                         TypeMoniker childType = Generator.GetAssociationChildType((BackReferenceProperty)p);
                         xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, ((BackReferenceProperty)p).ReferenceProperty.PropertyName));
@@ -315,7 +315,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         // ObjectReferenceProperty
                         xml.WriteStartElement("NavigationProperty");
-                        xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                        xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         TypeMoniker parentType = new TypeMoniker(p.GetPropertyTypeString());
                         TypeMoniker childType = Generator.GetAssociationChildType(p as ObjectReferenceProperty);
                         xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, p.PropertyName));
@@ -327,7 +327,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         // ObjectReferenceProperty List
                         xml.WriteStartElement("NavigationProperty");
-                        xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                        xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
                         TypeMoniker childType = Generator.GetPropertyCollectionObjectType((ObjectReferenceProperty)p);
                         xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
@@ -341,7 +341,7 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteStartElement("Property");
                         if (p is EnumerationProperty)
                         {
-                            xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                            xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         }
                         else
                         {
@@ -359,7 +359,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         // ValueTypeProperty List
                         xml.WriteStartElement("NavigationProperty");
-                        xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                        xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
                         TypeMoniker childType = Generator.GetPropertyCollectionObjectType((ValueTypeProperty)p);
                         xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
@@ -371,7 +371,7 @@ namespace Kistl.Server.Generators.SQLServer
                     {
                         // ValueTypeProperty
                         xml.WriteStartElement("Property");
-                        xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                        xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         xml.WriteAttributeString("Type", "Model." + ((StructProperty)p).StructDefinition.ClassName);
                         xml.WriteAttributeString("Nullable", "false"); // Nullable Complex types are not supported by EF
                         xml.WriteEndElement(); // </Property>
@@ -480,7 +480,7 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteStartElement("ScalarProperty");
                 if (p is EnumerationProperty)
                 {
-                    xml.WriteAttributeString("Name", p.PropertyName + "Impl");
+                    xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                 }
                 else
                 {
@@ -493,7 +493,7 @@ namespace Kistl.Server.Generators.SQLServer
             foreach (StructProperty s in obj.Properties.OfType<StructProperty>().Where(p => p.IsList == false))
             {
                 xml.WriteStartElement("ComplexProperty");
-                xml.WriteAttributeString("Name", s.PropertyName + "Impl");
+                xml.WriteAttributeString("Name", s.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                 xml.WriteAttributeString("TypeName", "Model." + s.StructDefinition.ClassName);
 
                 AddEntityTypeMapping_Properties(xml, s.StructDefinition, s.PropertyName.CalcColumnName(parentPropName));

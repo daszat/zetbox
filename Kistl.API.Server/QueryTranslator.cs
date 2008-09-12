@@ -10,6 +10,15 @@ using Kistl.API;
 
 namespace Kistl.API.Server
 {
+    // http://msdn.microsoft.com/en-us/library/bb549414.aspx
+    // The Execute method executes queries that return a single value 
+    // (instead of an enumerable sequence of values). Expression trees that represent queries 
+    // that return enumerable results are executed when the IQueryable<(Of <(T>)>) object that 
+    // contains the expression tree is enumerated. 
+    // The Queryable standard query operator methods that return singleton results call Execute. 
+    // They pass it a MethodCallExpression that represents a LINQ query. 
+    // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
+
     #region QueryTranslator
     public class QueryTranslator<T> : IQueryable<T>
     {
@@ -31,12 +40,14 @@ namespace Kistl.API.Server
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)_provider.Execute<IEnumerable<T>>(this._expression)).GetEnumerator();
+            //return ((IEnumerable<T>)_provider.Execute<IEnumerable<T>>(this._expression)).GetEnumerator();
+            return ((IEnumerable<T>)_provider.ExecuteEnumerable(this._expression)).GetEnumerator();
         }
 
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_provider.Execute(this._expression)).GetEnumerator();
+            //return ((IEnumerable)_provider.Execute(this._expression)).GetEnumerator();
+            return _provider.ExecuteEnumerable(this._expression).GetEnumerator();
         }
 
         public Type ElementType
@@ -59,10 +70,6 @@ namespace Kistl.API.Server
     #region QueryTranslatorProvider
     public class QueryTranslatorProvider<T> : ExpressionTreeTranslator, IQueryProvider
     {
-        #region Configuration
-        private const string ImplementationSuffix = "Impl";
-        #endregion
-
         IQueryable _source;
         IKistlContext _ctx = null;
         Expression _filter = null;
@@ -105,35 +112,28 @@ namespace Kistl.API.Server
             if (expression == null) throw new ArgumentNullException("expression");
 
             Expression translated = this.Visit(expression);
-            // Deshalb brauch ich diese Weiche:
-            // http://msdn.microsoft.com/en-us/library/bb549414.aspx
-            // The Execute method executes queries that return a single value 
-            // (instead of an enumerable sequence of values). Expression trees that represent queries 
-            // that return enumerable results are executed when the IQueryable<(Of <(T>)>) object that 
-            // contains the expression tree is enumerated. 
-            // The Queryable standard query operator methods that return singleton results call Execute. 
-            // They pass it a MethodCallExpression that represents a LINQ query. 
-            if (expression.IsMethodCallExpression("First") || expression.IsMethodCallExpression("FirstOrDefault") ||
-                expression.IsMethodCallExpression("Single") || expression.IsMethodCallExpression("SingleOrDefault"))
+
+            IDataObject result = (IDataObject)_source.Provider.Execute(translated);
+            if (result != null)
             {
-                IDataObject result = (IDataObject)_source.Provider.Execute(translated);
-                if (result != null)
-                {
-                    result.AttachToContext(_ctx);
-                }
-                return result;
+                result.AttachToContext(_ctx);
             }
-            else
+            return result;
+        }
+
+        internal IEnumerable ExecuteEnumerable(Expression expression)
+        {
+            if (expression == null) throw new ArgumentNullException("expression");
+            Expression translated = this.Visit(expression);
+
+            IQueryable newQuery = _source.Provider.CreateQuery(translated);
+            List<T> result = new List<T>();
+            foreach (T item in newQuery)
             {
-                IQueryable newQuery = _source.Provider.CreateQuery(translated);
-                List<T> result = new List<T>();
-                foreach (T item in newQuery)
-                {
-                    ((IDataObject)item).AttachToContext(_ctx);
-                    result.Add(item);
-                }
-                return result;
+                ((IDataObject)item).AttachToContext(_ctx);
+                result.Add(item);
             }
+            return result;
         }
 
         #endregion
@@ -249,9 +249,9 @@ namespace Kistl.API.Server
             string memberName = m.Member.Name;
             Type declaringType = m.Member.DeclaringType.ToImplementationType();
             MemberExpression result;
-            if (declaringType.GetMember(memberName).Length > 0 && declaringType.GetMember(memberName + ImplementationSuffix).Length > 0)
+            if (declaringType.GetMember(memberName).Length > 0 && declaringType.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
             {
-                result = Expression.PropertyOrField(e, memberName + ImplementationSuffix);
+                result = Expression.PropertyOrField(e, memberName + Kistl.API.Helper.ImplementationSuffix);
             }
             else
             {
@@ -273,9 +273,9 @@ namespace Kistl.API.Server
                 foreach(MemberInfo mi in newExpression.Members)
                 {
                     declaringType = mi.DeclaringType.ToImplementationType();
-                    if (declaringType.GetMember(mi.Name).Length > 0 && declaringType.GetMember(mi.Name + ImplementationSuffix).Length > 0)
+                    if (declaringType.GetMember(mi.Name).Length > 0 && declaringType.GetMember(mi.Name + Kistl.API.Helper.ImplementationSuffix).Length > 0)
                     {
-                        members.Add(declaringType.GetMember(mi.Name + ImplementationSuffix)[0]);
+                        members.Add(declaringType.GetMember(mi.Name + Kistl.API.Helper.ImplementationSuffix)[0]);
                     }
                     else
                     {

@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class ModuleImpl : BaseClientDataObject, Module
+    public class Module__Implementation__ : BaseClientDataObject, Module
     {
         
         private string _Namespace;
@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.Assembly> _Assemblies;
         
-        public ModuleImpl()
+        public Module__Implementation__()
         {
         }
         
@@ -146,10 +146,10 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((ModuleImpl)obj).Namespace = this.Namespace;
-            ((ModuleImpl)obj).ModuleName = this.ModuleName;
-            if(this._DataTypes != null) this._DataTypes.ApplyChanges(((ModuleImpl)obj)._DataTypes); else ((ModuleImpl)obj)._DataTypes = null; ((ModuleImpl)obj).NotifyPropertyChanged("DataTypes");
-            if(this._Assemblies != null) this._Assemblies.ApplyChanges(((ModuleImpl)obj)._Assemblies); else ((ModuleImpl)obj)._Assemblies = null; ((ModuleImpl)obj).NotifyPropertyChanged("Assemblies");
+            ((Module__Implementation__)obj).Namespace = this.Namespace;
+            ((Module__Implementation__)obj).ModuleName = this.ModuleName;
+            if(this._DataTypes != null) this._DataTypes.ApplyChanges(((Module__Implementation__)obj)._DataTypes); else ((Module__Implementation__)obj)._DataTypes = null; ((Module__Implementation__)obj).NotifyPropertyChanged("DataTypes");
+            if(this._Assemblies != null) this._Assemblies.ApplyChanges(((Module__Implementation__)obj)._Assemblies); else ((Module__Implementation__)obj)._Assemblies = null; ((Module__Implementation__)obj).NotifyPropertyChanged("Assemblies");
         }
         
         public override void AttachToContext(IKistlContext ctx)

@@ -49,6 +49,9 @@ namespace Kistl.IntegrationTests
             GetListTests test = new GetListTests();
 
             test.SetUp();
+            test.GetListWithOrderBy();
+
+            test.SetUp();
             test.GetListWithPropertyAccessor();
 
             test.SetUp();

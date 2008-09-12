@@ -21,14 +21,14 @@ namespace Kistl.API.Tests
         [SetUp]
         public void SetUp()
         {
-            obj = new TestDataObject() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
+            obj = new TestDataObject__Implementation__() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
         }
 
         [Test]
         public void XmlString()
         {
             string xml = obj.ToXmlString();
-            TestDataObject result = xml.FromXmlString<TestDataObject>();
+            TestDataObject result = xml.FromXmlString<TestDataObject__Implementation__>();
 
             Assert.That(result, Is.EqualTo(obj));
         }

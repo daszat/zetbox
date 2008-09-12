@@ -24,22 +24,22 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
-    public class VisualImpl : BaseClientDataObject, Visual
+    public class Visual__Implementation__ : BaseClientDataObject, Visual
     {
         
         private string _Description;
         
         private Kistl.App.GUI.VisualType _ControlType;
         
-        private ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ChildrenCollectionEntryImpl> _Children;
+        private ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ChildrenCollectionEntry__Implementation__> _Children;
         
         private System.Nullable<int> _fk_Property = null;
         
         private System.Nullable<int> _fk_Method = null;
         
-        public VisualImpl()
+        public Visual__Implementation__()
         {
-            _Children = new ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ChildrenCollectionEntryImpl>(this, "Children");
+            _Children = new ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ChildrenCollectionEntry__Implementation__>(this, "Children");
         }
         
         public string Description
@@ -179,11 +179,11 @@ namespace Kistl.App.GUI
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((VisualImpl)obj).Description = this.Description;
-            ((VisualImpl)obj).ControlType = this.ControlType;
-            this._Children.ApplyChanges(((VisualImpl)obj)._Children);
-            ((VisualImpl)obj).fk_Property = this.fk_Property;
-            ((VisualImpl)obj).fk_Method = this.fk_Method;
+            ((Visual__Implementation__)obj).Description = this.Description;
+            ((Visual__Implementation__)obj).ControlType = this.ControlType;
+            this._Children.ApplyChanges(((Visual__Implementation__)obj)._Children);
+            ((Visual__Implementation__)obj).fk_Property = this.fk_Property;
+            ((Visual__Implementation__)obj).fk_Method = this.fk_Method;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -213,7 +213,7 @@ namespace Kistl.App.GUI
         }
     }
     
-    public class Visual_ChildrenCollectionEntryImpl : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
+    public class Visual_ChildrenCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
         
         private int _fk_Value;
@@ -292,8 +292,8 @@ namespace Kistl.App.GUI
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
             base.ApplyChanges(obj);
-            ((Visual_ChildrenCollectionEntryImpl)obj)._fk_Value = this.fk_Value;
-            ((Visual_ChildrenCollectionEntryImpl)obj)._fk_Parent = this.fk_Parent;
+            ((Visual_ChildrenCollectionEntry__Implementation__)obj)._fk_Value = this.fk_Value;
+            ((Visual_ChildrenCollectionEntry__Implementation__)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

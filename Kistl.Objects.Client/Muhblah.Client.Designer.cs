@@ -24,10 +24,10 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
-    public class MuhblahImpl : BaseClientDataObject, Muhblah
+    public class Muhblah__Implementation__ : BaseClientDataObject, Muhblah
     {
         
-        public MuhblahImpl()
+        public Muhblah__Implementation__()
         {
         }
         

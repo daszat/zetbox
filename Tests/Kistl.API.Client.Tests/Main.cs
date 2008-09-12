@@ -10,6 +10,19 @@ namespace Kistl.API.Client.Tests
         public static void Main(string[] args)
         {
             new SetUp().Init();
+            BaseClientDataObjectTests();
+        }
+
+        private static void BaseClientDataObjectTests()
+        {
+            BaseClientDataObjectTests test = new BaseClientDataObjectTests();
+
+            test.SetUp();
+            test.Stream();
+        }
+
+        private static void KistlContextTests()
+        {
             KistlContextTests test = new API.Client.Tests.KistlContextTests();
 
             test.SetUp();

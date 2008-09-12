@@ -24,18 +24,18 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
-    public class TestCustomObjectImpl : BaseClientDataObject, TestCustomObject
+    public class TestCustomObject__Implementation__ : BaseClientDataObject, TestCustomObject
     {
         
         private string _PersonName;
         
-        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberMobile;
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
         
-        private Kistl.App.Test.TestPhoneStructImpl _PhoneNumberOffice;
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;
         
         private System.DateTime? _Birthday;
         
-        public TestCustomObjectImpl()
+        public TestCustomObject__Implementation__()
         {
         }
         
@@ -68,7 +68,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("PhoneNumberMobile"); 
                     if (_PhoneNumberMobile != null) _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
-                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
                     if (_PhoneNumberMobile != null) _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
                     NotifyPropertyChanged("PhoneNumberMobile");
                 };
@@ -87,7 +87,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("PhoneNumberOffice"); 
                     if (_PhoneNumberOffice != null) _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
-                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStructImpl)value;
+                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
                     if (_PhoneNumberOffice != null) _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
                     NotifyPropertyChanged("PhoneNumberOffice");
                 };
@@ -144,8 +144,8 @@ namespace Kistl.App.Test
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((TestCustomObjectImpl)obj).PersonName = this.PersonName;
-            ((TestCustomObjectImpl)obj).Birthday = this.Birthday;
+            ((TestCustomObject__Implementation__)obj).PersonName = this.PersonName;
+            ((TestCustomObject__Implementation__)obj).Birthday = this.Birthday;
         }
         
         public override void AttachToContext(IKistlContext ctx)

@@ -25,10 +25,10 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BoolProperty")]
-    public class BoolPropertyImpl : Kistl.App.Base.ValueTypePropertyImpl, BoolProperty
+    public class BoolProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, BoolProperty
     {
         
-        public BoolPropertyImpl()
+        public BoolProperty__Implementation__()
         {
         }
         

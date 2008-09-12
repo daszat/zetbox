@@ -24,12 +24,12 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class ObjectReferencePropertyImpl : Kistl.App.Base.PropertyImpl, ObjectReferenceProperty
+    public class ObjectReferenceProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ObjectReferenceProperty
     {
         
         private System.Nullable<int> _fk_ReferenceObjectClass = null;
         
-        public ObjectReferencePropertyImpl()
+        public ObjectReferenceProperty__Implementation__()
         {
         }
         
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((ObjectReferencePropertyImpl)obj).fk_ReferenceObjectClass = this.fk_ReferenceObjectClass;
+            ((ObjectReferenceProperty__Implementation__)obj).fk_ReferenceObjectClass = this.fk_ReferenceObjectClass;
         }
         
         public override void AttachToContext(IKistlContext ctx)

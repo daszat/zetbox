@@ -24,12 +24,12 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
-    public class EnumerationImpl : Kistl.App.Base.DataTypeImpl, Enumeration
+    public class Enumeration__Implementation__ : Kistl.App.Base.DataType__Implementation__, Enumeration
     {
         
         private BackReferenceCollection<Kistl.App.Base.EnumerationEntry> _EnumerationEntries;
         
-        public EnumerationImpl()
+        public Enumeration__Implementation__()
         {
         }
         
@@ -90,7 +90,7 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            if(this._EnumerationEntries != null) this._EnumerationEntries.ApplyChanges(((EnumerationImpl)obj)._EnumerationEntries); else ((EnumerationImpl)obj)._EnumerationEntries = null; ((EnumerationImpl)obj).NotifyPropertyChanged("EnumerationEntries");
+            if(this._EnumerationEntries != null) this._EnumerationEntries.ApplyChanges(((Enumeration__Implementation__)obj)._EnumerationEntries); else ((Enumeration__Implementation__)obj)._EnumerationEntries = null; ((Enumeration__Implementation__)obj).NotifyPropertyChanged("EnumerationEntries");
         }
         
         public override void AttachToContext(IKistlContext ctx)

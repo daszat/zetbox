@@ -23,6 +23,11 @@ namespace Kistl.API
         public const int INVALIDID = 0;
 
         /// <summary>
+        /// Suffix for Interface implementations
+        /// </summary>
+        public const string ImplementationSuffix = "__Implementation__";
+
+        /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
         /// This method can distinguish them from "older" objects that already have a representation on the server.
         /// </summary>
@@ -272,17 +277,14 @@ namespace Kistl.API
 
                 return genericType.MakeGenericType(genericArguments.ToArray());
             }
-            else
+            else if(!type.IsInterface)
             {
-                if (
-                    (typeof(IDataObject).IsAssignableFrom(type) && APIInit.BaseDataObjectType.IsAssignableFrom(type)) ||
-                    (typeof(IStruct).IsAssignableFrom(type) && APIInit.BaseStructObjectType.IsAssignableFrom(type)) 
-                    )
+                if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                 {
-                    type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - 4) + ", Kistl.Objects", true);
+                    type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - Kistl.API.Helper.ImplementationSuffix.Length) + ", " + APIInit.InterfaceAssembly, true);
                 }
-                return type;
             }
+            return type;
         }
 
         public static Type ToImplementationType(this Type type)
@@ -313,19 +315,16 @@ namespace Kistl.API
                 {
                     return APIInit.BaseCollectionEntryType;
                 }
-                else if (
-                    ( typeof(IDataObject).IsAssignableFrom(type) && !APIInit.BaseDataObjectType.IsAssignableFrom(type)) ||
-                    ( typeof(IStruct).IsAssignableFrom(type) && !APIInit.BaseStructObjectType.IsAssignableFrom(type))
-                    )
-                {
-                    // add "Impl"
-                    string newType = type.FullName + "Impl, " + APIInit.ImplementationAssembly;
-                    return Type.GetType(newType, true);
+                else if(type.IsInterface)
+                    {
+                    if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
+                    {
+                        // add ImplementationSuffix
+                        string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + APIInit.ImplementationAssembly;
+                        return Type.GetType(newType, true);
+                    }
                 }
-                else
-                {
-                    return type;
-                }
+                return type;
             }
         }
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Kostentraeger_Projekt_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.ProjektImpl), "B_Kostentraeger", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.KostentraegerImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Kostentraeger_Projekt_Projekt", "A_Projekt", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Projekt__Implementation__), "B_Kostentraeger", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Kostentraeger__Implementation__))]
 
 namespace Kistl.App.Zeiterfassung
 {
@@ -27,12 +27,12 @@ namespace Kistl.App.Zeiterfassung
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kostentraeger")]
-    public class KostentraegerImpl : Kistl.App.Zeiterfassung.ZeitkontoImpl, Kostentraeger
+    public class Kostentraeger__Implementation__ : Kistl.App.Zeiterfassung.Zeitkonto__Implementation__, Kostentraeger
     {
         
         private System.Nullable<int> _fk_Projekt = null;
         
-        public KostentraegerImpl()
+        public Kostentraeger__Implementation__()
         {
         }
         
@@ -41,11 +41,11 @@ namespace Kistl.App.Zeiterfassung
         {
             get
             {
-                return ProjektImpl;
+                return Projekt__Implementation__;
             }
             set
             {
-                ProjektImpl = (Kistl.App.Projekte.ProjektImpl)value;
+                Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }
         
@@ -66,19 +66,19 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Kostentraeger_Projekt_Projekt", "A_Projekt")]
-        public Kistl.App.Projekte.ProjektImpl ProjektImpl
+        public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Projekte.ProjektImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektImpl>("Model.FK_Kostentraeger_Projekt_Projekt", "A_Projekt");
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>("Model.FK_Kostentraeger_Projekt_Projekt", "A_Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Projekte.ProjektImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektImpl>("Model.FK_Kostentraeger_Projekt_Projekt", "A_Projekt");
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>("Model.FK_Kostentraeger_Projekt_Projekt", "A_Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Projekte.ProjektImpl)value;
+                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }
         

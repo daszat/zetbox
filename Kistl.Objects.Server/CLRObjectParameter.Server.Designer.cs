@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_CLRObjectParameter_Assembly_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyImpl), "B_CLRObjectParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CLRObjectParameterImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_CLRObjectParameter_Assembly_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__), "B_CLRObjectParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CLRObjectParameter__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -27,14 +27,14 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="CLRObjectParameter")]
-    public class CLRObjectParameterImpl : Kistl.App.Base.BaseParameterImpl, CLRObjectParameter
+    public class CLRObjectParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, CLRObjectParameter
     {
         
         private System.Nullable<int> _fk_Assembly = null;
         
         private string _FullTypeName;
         
-        public CLRObjectParameterImpl()
+        public CLRObjectParameter__Implementation__()
         {
         }
         
@@ -43,11 +43,11 @@ namespace Kistl.App.Base
         {
             get
             {
-                return AssemblyImpl;
+                return Assembly__Implementation__;
             }
             set
             {
-                AssemblyImpl = (Kistl.App.Base.AssemblyImpl)value;
+                Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
         
@@ -68,19 +68,19 @@ namespace Kistl.App.Base
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_CLRObjectParameter_Assembly_Assembly", "A_Assembly")]
-        public Kistl.App.Base.AssemblyImpl AssemblyImpl
+        public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_CLRObjectParameter_Assembly_Assembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_CLRObjectParameter_Assembly_Assembly", "A_Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.AssemblyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyImpl>("Model.FK_CLRObjectParameter_Assembly_Assembly", "A_Assembly");
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_CLRObjectParameter_Assembly_Assembly", "A_Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.AssemblyImpl)value;
+                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
         

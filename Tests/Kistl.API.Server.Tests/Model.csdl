@@ -19,9 +19,9 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="StringProp" Type="String" MaxLength="200" Nullable="true" />
     <Property Name="TestEnumProp" Type="Int32" Nullable="true" />
-    <NavigationProperty Name="TestNamesImpl" Relationship="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" FromRole="A_TestObjClass" ToRole="B_TestObjClass_TestNameCollectionEntry" />
-    <NavigationProperty Name="BaseTestObjClassImpl" Relationship="Model.FK_TestObjClass_TestObjClass" FromRole="B_TestObjClass" ToRole="A_TestObjClass" />
-    <NavigationProperty Name="SubClassesImpl" Relationship="Model.FK_TestObjClass_TestObjClass" FromRole="A_TestObjClass" ToRole="B_TestObjClass" />
+    <NavigationProperty Name="TestNames__Implementation__" Relationship="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" FromRole="A_TestObjClass" ToRole="B_TestObjClass_TestNameCollectionEntry" />
+    <NavigationProperty Name="BaseTestObjClass__Implementation__" Relationship="Model.FK_TestObjClass_TestObjClass" FromRole="B_TestObjClass" ToRole="A_TestObjClass" />
+    <NavigationProperty Name="SubClasses__Implementation__" Relationship="Model.FK_TestObjClass_TestObjClass" FromRole="A_TestObjClass" ToRole="B_TestObjClass" />
   </EntityType>
   <EntityType Name="TestObjClass_TestNameCollectionEntry">
     <Key>
@@ -29,7 +29,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Value" Type="String" MaxLength="200" Nullable="true" />
-    <NavigationProperty Name="ParentImpl" Relationship="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" FromRole="B_TestObjClass_TestNameCollectionEntry" ToRole="A_TestObjClass" />
+    <NavigationProperty Name="Parent__Implementation__" Relationship="Model.FK_TestObjClass_TestNameCollectionEntry_TestObjClass" FromRole="B_TestObjClass_TestNameCollectionEntry" ToRole="A_TestObjClass" />
   </EntityType>
   <Association Name="FK_TestObjClass_TestNameCollectionEntry_TestObjClass">
     <End Role="A_TestObjClass" Type="Model.TestObjClass" Multiplicity="0..1" />

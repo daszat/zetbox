@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferencePropertyImpl), "B_BackReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BackReferencePropertyImpl))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__), "B_BackReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BackReferenceProperty__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -27,14 +27,14 @@ namespace Kistl.App.Base
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BackReferenceProperty")]
-    public class BackReferencePropertyImpl : Kistl.App.Base.BasePropertyImpl, BackReferenceProperty
+    public class BackReferenceProperty__Implementation__ : Kistl.App.Base.BaseProperty__Implementation__, BackReferenceProperty
     {
         
         private System.Nullable<int> _fk_ReferenceProperty = null;
         
         private bool _PreFetchToClient;
         
-        public BackReferencePropertyImpl()
+        public BackReferenceProperty__Implementation__()
         {
         }
         
@@ -43,11 +43,11 @@ namespace Kistl.App.Base
         {
             get
             {
-                return ReferencePropertyImpl;
+                return ReferenceProperty__Implementation__;
             }
             set
             {
-                ReferencePropertyImpl = (Kistl.App.Base.ObjectReferencePropertyImpl)value;
+                ReferenceProperty__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }
         
@@ -68,19 +68,19 @@ namespace Kistl.App.Base
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty")]
-        public Kistl.App.Base.ObjectReferencePropertyImpl ReferencePropertyImpl
+        public Kistl.App.Base.ObjectReferenceProperty__Implementation__ ReferenceProperty__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.ObjectReferencePropertyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyImpl>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
+                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.Base.ObjectReferencePropertyImpl> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyImpl>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
+                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>("Model.FK_BackReferenceProperty_ObjectReferenceProperty_ReferenceProperty", "A_ObjectReferenceProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.ObjectReferencePropertyImpl)value;
+                r.Value = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }
         

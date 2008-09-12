@@ -20,5 +20,13 @@ namespace Kistl.API.Tests
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             init.Init(HostType.Client, @"..\..\DefaultConfig_API.Tests.xml");
         }
+
+        [TearDown]
+        public void TearDown()
+        {
+            // Restore Assemblies
+            Kistl.API.APIInit.ImplementationAssembly = this.GetType().Assembly.FullName;
+            Kistl.API.APIInit.InterfaceAssembly = this.GetType().Assembly.FullName;
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
-    public class TemplateImpl : BaseClientDataObject, Template
+    public class Template__Implementation__ : BaseClientDataObject, Template
     {
         
         private string _DisplayName;
@@ -35,7 +35,7 @@ namespace Kistl.App.GUI
         
         private System.Nullable<int> _fk_DisplayedTypeAssembly = null;
         
-        public TemplateImpl()
+        public Template__Implementation__()
         {
         }
         
@@ -168,10 +168,10 @@ namespace Kistl.App.GUI
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((TemplateImpl)obj).DisplayName = this.DisplayName;
-            ((TemplateImpl)obj).fk_VisualTree = this.fk_VisualTree;
-            ((TemplateImpl)obj).DisplayedTypeFullName = this.DisplayedTypeFullName;
-            ((TemplateImpl)obj).fk_DisplayedTypeAssembly = this.fk_DisplayedTypeAssembly;
+            ((Template__Implementation__)obj).DisplayName = this.DisplayName;
+            ((Template__Implementation__)obj).fk_VisualTree = this.fk_VisualTree;
+            ((Template__Implementation__)obj).DisplayedTypeFullName = this.DisplayedTypeFullName;
+            ((Template__Implementation__)obj).fk_DisplayedTypeAssembly = this.fk_DisplayedTypeAssembly;
         }
         
         public override void AttachToContext(IKistlContext ctx)

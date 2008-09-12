@@ -28,7 +28,7 @@ namespace Kistl.API.Client.Tests
         [SetUp]
         public void SetUp()
         {
-            parent = new TestObjClass();
+            parent = new TestObjClass__Implementation__();
             list = new ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry>(parent, "TestNames");
 
             a = "A-String";

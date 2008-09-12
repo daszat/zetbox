@@ -14,6 +14,11 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerPersistenceObject : System.Data.Objects.DataClasses.EntityObject, IPersistenceObject
     {
+        protected BaseServerPersistenceObject()
+        {
+            if (APIInit.HostType != HostType.Server) throw new InvalidOperationException("A BaseServerPersistenceObject can only be constructed in a Server");
+        }
+
         /// <summary>
         /// Everyone has an ID
         /// TODO: Tja, das EF lässt sich nicht dazu überreden, diese ID zu nehmen...

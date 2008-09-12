@@ -7,6 +7,8 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 
+// http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
+
 
 namespace Kistl.API.Client
 {
@@ -227,7 +229,7 @@ namespace Kistl.API.Client
 
         public TResult Execute<TResult>(Expression e)
         {
-            Visit(e);
+            Visit(ConstantEvaluator.PartialEval(e));
 
             switch (SearchType)
             {
@@ -244,7 +246,7 @@ namespace Kistl.API.Client
 
         public object Execute(Expression e)
         {
-            Visit(e);
+            Visit(ConstantEvaluator.PartialEval(e));
 
             switch (SearchType)
             {
@@ -260,6 +262,105 @@ namespace Kistl.API.Client
         }
 
         #endregion
+
+        #region ConstantEvaluator
+        private static class ConstantEvaluator
+        {
+            public static Expression PartialEval(Expression expression)
+            {
+                Nominator nominator = new Nominator();
+                SubtreeEvaluator evaluator = new SubtreeEvaluator(nominator.Nominate(expression));
+                return evaluator.Eval(expression);
+            }
+
+            class SubtreeEvaluator : ExpressionTreeTranslator
+            {
+                HashSet<Expression> candidates;
+
+                internal SubtreeEvaluator(HashSet<Expression> candidates)
+                {
+                    this.candidates = candidates;
+                }
+
+                internal Expression Eval(Expression exp)
+                {
+                    return this.Visit(exp);
+                }
+
+                public override Expression Visit(Expression exp)
+                {
+                    if (exp == null)
+                    {
+                        return null;
+                    }
+
+                    if (this.candidates.Contains(exp))
+                    {
+                        return this.Evaluate(exp);
+                    }
+                    return base.Visit(exp);
+                }
+
+                private Expression Evaluate(Expression e)
+                {
+                    if (e.NodeType == ExpressionType.Constant)
+                    {
+                        return e;
+                    }
+                    LambdaExpression lambda = Expression.Lambda(e);
+                    Delegate fn = lambda.Compile();
+                    return Expression.Constant(fn.DynamicInvoke(null), e.Type);
+                }
+            }
+
+            class Nominator : ExpressionTreeVisitor
+            {
+                HashSet<Expression> candidates;
+                bool cannotBeEvaluated;
+
+                internal Nominator()
+                {
+                }
+
+                internal HashSet<Expression> Nominate(Expression expression)
+                {
+                    this.candidates = new HashSet<Expression>();
+                    this.Visit(expression);
+                    return this.candidates;
+                }
+
+                public override void Visit(Expression expression)
+                {
+                    if (expression != null)
+                    {
+                        bool saveCannotBeEvaluated = this.cannotBeEvaluated;
+                        this.cannotBeEvaluated = false;
+                        base.Visit(expression);
+                        if (!this.cannotBeEvaluated)
+                        {
+                            if (CanBeEvaluatedLocally(expression))
+                            {
+                                this.candidates.Add(expression);
+                            }
+                            else
+                            {
+                                this.cannotBeEvaluated = true;
+                            }
+                        }
+                        this.cannotBeEvaluated |= saveCannotBeEvaluated;
+                    }
+                }
+
+                private bool CanBeEvaluatedLocally(Expression expression)
+                {
+                    if (expression.NodeType == ExpressionType.Parameter) return false;
+                    if (expression.Type.IsGenericType && expression.Type.GetGenericTypeDefinition() == typeof(KistlContextQuery<>)) return false;
+                    return true;
+                }
+            }
+        }
+
+#endregion
 
         #region Visits
         protected override void VisitBinary(BinaryExpression b)

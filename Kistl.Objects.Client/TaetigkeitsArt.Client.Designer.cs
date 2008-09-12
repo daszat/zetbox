@@ -24,12 +24,12 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Client;
     
     
-    public class TaetigkeitsArtImpl : BaseClientDataObject, TaetigkeitsArt
+    public class TaetigkeitsArt__Implementation__ : BaseClientDataObject, TaetigkeitsArt
     {
         
         private string _Name;
         
-        public TaetigkeitsArtImpl()
+        public TaetigkeitsArt__Implementation__()
         {
         }
         
@@ -83,7 +83,7 @@ namespace Kistl.App.Zeiterfassung
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((TaetigkeitsArtImpl)obj).Name = this.Name;
+            ((TaetigkeitsArt__Implementation__)obj).Name = this.Name;
         }
         
         public override void AttachToContext(IKistlContext ctx)
