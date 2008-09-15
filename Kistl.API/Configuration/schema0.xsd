@@ -12,9 +12,12 @@
   </xs:complexType>
   <xs:complexType name="ServerConfig">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="DatabaseProvider" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="ConnectionString" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DatabaseProvider" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ConnectionString" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DocumentStore" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="KistlDataContextType" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ServerObjectHandlerType" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ServerObjectSetHandlerType" type="xs:string" />      
     </xs:sequence>
     <xs:attribute name="StartServer" type="xs:boolean" use="required" />
   </xs:complexType>

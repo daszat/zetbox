@@ -40,13 +40,11 @@ namespace Kistl.API.Server
 
         public IEnumerator<T> GetEnumerator()
         {
-            //return ((IEnumerable<T>)_provider.Execute<IEnumerable<T>>(this._expression)).GetEnumerator();
             return ((IEnumerable<T>)_provider.ExecuteEnumerable(this._expression)).GetEnumerator();
         }
 
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            //return ((IEnumerable)_provider.Execute(this._expression)).GetEnumerator();
             return _provider.ExecuteEnumerable(this._expression).GetEnumerator();
         }
 

@@ -59,12 +59,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
-    <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="KistlDataContext.cs" />
-    <Compile Include="KistlDataContextEntityFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryTranslator.cs" />
+    <Compile Include="BaseServerObjectHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">

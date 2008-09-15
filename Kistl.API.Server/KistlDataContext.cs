@@ -53,13 +53,31 @@ namespace Kistl.API.Server
             }
         }
 
+        private static Type _KistlDataContextType = null;
+
         /// <summary>
         /// Creates a new Context.
         /// </summary>
         /// <returns>A new Context.</returns>
         public static IKistlContext GetContext()
         {
-            return new KistlDataContextEntityFramework();
+            lock (typeof(KistlDataContext))
+            {
+                if (_KistlDataContextType == null)
+                {
+                    _KistlDataContextType = Type.GetType(API.Configuration.KistlConfig.Current.Server.KistlDataContextType);
+                    if (_KistlDataContextType == null)
+                    {
+                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IKistlObjects. Check your Configuration '/Server/KistlDataContextType'.", API.Configuration.KistlConfig.Current.Server.KistlDataContextType));
+                    }
+                }
+            }
+            object obj = Activator.CreateInstance(_KistlDataContextType);
+            if (!(obj is IKistlContext))
+            {
+                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/KistlDataContextType'.", API.Configuration.KistlConfig.Current.Server.KistlDataContextType));
+            }
+            return (IKistlContext)obj;
         }
     }
 }

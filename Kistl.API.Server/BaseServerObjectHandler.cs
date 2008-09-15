@@ -15,12 +15,12 @@ using System.Data.Metadata.Edm;
 using Kistl.API;
 using Kistl.API.Server;
 
-namespace Kistl.Server
+namespace Kistl.API.Server
 {
     /// <summary>
     /// Interface für das Server BL Objekt.
     /// </summary>
-    internal interface IServerObjectHandler
+    public interface IServerObjectHandler
     {
         /// <summary>
         /// Implementiert den GetList Befehl.
@@ -47,7 +47,7 @@ namespace Kistl.Server
         IDataObject GetObject(int ID);
     }
 
-    internal interface IServerObjectSetHandler
+    public interface IServerObjectSetHandler
     {
         /// <summary>
         /// Implementiert den SetObject Befehl.
@@ -61,8 +61,11 @@ namespace Kistl.Server
     /// <summary>
     /// Factory for Server Object Handlers
     /// </summary>
-    internal static class ServerObjectHandlerFactory
+    public static class ServerObjectHandlerFactory
     {
+        private static Type _ServerObjectHandlerType = null;
+        private static Type _ServerObjectSetHandlerType = null;
+
         /// <summary>
         /// Returns a Object Handler for the given Type
         /// </summary>
@@ -74,8 +77,18 @@ namespace Kistl.Server
             {
                 if (type == null) throw new ArgumentNullException("Type is null");
 
-                Type t = typeof(ServerObjectHandler<>);
-                Type result = t.MakeGenericType(type);
+                lock (typeof(ServerObjectHandlerFactory))
+                {
+                    if (_ServerObjectHandlerType == null)
+                    {
+                        _ServerObjectHandlerType = Type.GetType(Configuration.KistlConfig.Current.Server.ServerObjectHandlerType);
+                        if (_ServerObjectHandlerType == null)
+                        {
+                            throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectHandler. Check your Configuration '/Server/ServerObjectHandlerType'.", API.Configuration.KistlConfig.Current.Server.ServerObjectHandlerType));
+                        }
+                    }
+                }
+                Type result = _ServerObjectHandlerType.MakeGenericType(type);
 
                 IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
                 if (obj == null) throw new ArgumentOutOfRangeException("Cannot create instance of Type " + type.FullName);
@@ -86,7 +99,23 @@ namespace Kistl.Server
 
         public static IServerObjectSetHandler GetServerObjectSetHandler()
         {
-            return new ServerObjectSetHandler();
+            lock (typeof(ServerObjectHandlerFactory))
+            {
+                if (_ServerObjectSetHandlerType == null)
+                {
+                    _ServerObjectSetHandlerType = Type.GetType(API.Configuration.KistlConfig.Current.Server.ServerObjectSetHandlerType);
+                    if (_ServerObjectSetHandlerType == null)
+                    {
+                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectSetHandler. Check your Configuration '/Server/ServerObjectSetHandlerType'.", API.Configuration.KistlConfig.Current.Server.ServerObjectSetHandlerType));
+                    }
+                }
+            }
+            object obj = Activator.CreateInstance(_ServerObjectSetHandlerType);
+            if (!(obj is IServerObjectSetHandler))
+            {
+                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/ServerObjectSetHandlerType'.", API.Configuration.KistlConfig.Current.Server.ServerObjectSetHandlerType));
+            }
+            return (IServerObjectSetHandler)obj;
         }
     }
 
@@ -97,13 +126,13 @@ namespace Kistl.Server
     /// selbst implementiert sind
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class ServerObjectHandler<T> : IServerObjectHandler
+    public class BaseServerObjectHandler<T> : IServerObjectHandler
         where T : IDataObject
     {
         /// <summary>
         /// Events registrieren
         /// </summary>
-        public ServerObjectHandler()
+        public BaseServerObjectHandler()
         {
         }
 
@@ -195,7 +224,7 @@ namespace Kistl.Server
         }
     }
 
-    internal class ServerObjectSetHandler : IServerObjectSetHandler
+    public class BaseServerObjectSetHandler : IServerObjectSetHandler
     {
         /// <summary>
         /// Implementiert den SetObject Befehl.
@@ -203,134 +232,14 @@ namespace Kistl.Server
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects)
+        public virtual IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                foreach (IDataObject obj in objects)
-                {
-                    // Fist of all, Attach Object
-                    KistlDataContext.Current.Attach(obj);
-
-                    if (obj.ObjectState != DataObjectState.Deleted)
-                    {
-                        MarkEveryPropertyAsModified(obj as EntityObject);
-                    }
-                }
-                foreach (IDataObject obj in objects)
-                {
-                    if (obj.ObjectState != DataObjectState.Deleted)
-                    {
-                        UpdateRelationships(obj);
-                    }
-                }
-
                 KistlDataContext.Current.SubmitChanges();
 
                 // TODO: Detect changes made by server nethod calls
                 return objects.Where(o => o.ObjectState != DataObjectState.Deleted);
-            }
-        }
-
-        /// <summary>
-        /// Update Relationships
-        /// TODO: Bad hack, weil EF keine Relationen serialisieren kann
-        /// Note: Change Tracking is "enabled" by setting every Reference
-        /// </summary>
-        /// <param name="obj"></param>
-        private static void UpdateRelationships(IDataObject obj)
-        {
-            using (IKistlContext ctx = KistlDataContext.GetContext())
-            {
-                Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(ctx);
-                while (objClass != null)
-                {
-                    foreach (Kistl.App.Base.ObjectReferenceProperty p in objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
-                    {
-                        if (!p.IsList)
-                        {
-                            int? fk = obj.GetPrivateFieldValue<int?>("_fk_" + p.PropertyName);
-
-                            if (fk != null)
-                            {
-                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetPropertyType());
-                                IDataObject other = so.GetObject(fk.Value);
-                                if (other == null) throw new InvalidOperationException(string.Format("UpdateRelationships: Cannot find Object {0}:{1}", p.GetPropertyType().FullName, fk));
-                                obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
-                            }
-                            else
-                            {
-                                obj.SetPropertyValue<IDataObject>(p.PropertyName, null);
-                            }
-                        }
-                        else
-                        {
-                            // Liste
-                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + Kistl.API.Helper.ImplementationSuffix))
-                            {
-                                int fk = ce.GetPrivateFieldValue<int>("_fk_Value");
-
-                                IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetPropertyType());
-                                IDataObject other = so.GetObject(fk);
-                                ce.SetPropertyValue<IDataObject>("Value", other);
-                            }
-                        }
-                    }
-
-                    objClass = objClass.BaseObjectClass;
-                }
-            }
-        }
-
-        /// <summary>
-        /// TODO: Bad Hack!
-        /// Es gibt angeblich jetzt eine bessere MEthode
-        /// </summary>
-        /// <param name="obj"></param>
-        private static void MarkEveryPropertyAsModified(EntityObject obj)
-        {
-            // TODO: Bad Hack!!
-            if (obj.EntityState.In(EntityState.Modified, EntityState.Unchanged))
-            {
-                ObjectStateEntry stateEntry = ((KistlDataContextEntityFramework)KistlDataContext.Current).ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
-                MetadataWorkspace workspace = ((KistlDataContextEntityFramework)KistlDataContext.Current).MetadataWorkspace;
-                string typename;
-                if (obj is ICollectionEntry)
-                {
-                    typename = obj.GetType().Name;
-                    typename = typename.Substring(0, typename.Length - Kistl.API.Helper.ImplementationSuffix.Length);
-                }
-                else
-                {
-                    typename = ((IPersistenceObject)obj).GetInterfaceType().Name;
-                }
-
-                EntityType entityType = workspace.GetItem<EntityType>("Model." + typename, DataSpace.CSpace);
-
-                foreach (EdmProperty property in entityType.Properties)
-                {
-                    stateEntry.SetModifiedProperty(property.Name);
-                }
-            }
-
-            if (obj is IDataObject)
-            {
-                using (IKistlContext ctx = KistlDataContext.GetContext())
-                {
-                    Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).GetObjectClass(ctx);
-                    while (objClass != null)
-                    {
-                        foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))
-                        {
-                            foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + Kistl.API.Helper.ImplementationSuffix))
-                            {
-                                EntityObject ce_eo = (EntityObject)ce;
-                                MarkEveryPropertyAsModified(ce_eo);
-                            }
-                        }
-                        objClass = objClass.BaseObjectClass;
-                    }
-                }
             }
         }
     }

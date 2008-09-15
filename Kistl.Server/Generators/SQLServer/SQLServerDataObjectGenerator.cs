@@ -17,11 +17,14 @@ namespace Kistl.Server.Generators.SQLServer
     public class SQLServerDataObjectGenerator : BaseDataObjectGenerator
     {
         #region AddDefaultNamespaces
-        protected override void AddDefaultNamespaces(CodeNamespace ns)
+        protected override void AddDefaultNamespaces(CodeNamespace ns, TaskEnum task)
         {
-            base.AddDefaultNamespaces(ns);
-            ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects"));
-            ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects.DataClasses"));
+            base.AddDefaultNamespaces(ns, task);
+            if (task == TaskEnum.Server)
+            {
+                ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects"));
+                ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects.DataClasses"));
+            }
         }
         #endregion
 

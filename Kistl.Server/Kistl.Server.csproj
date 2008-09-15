@@ -83,7 +83,6 @@
     <Compile Include="Generators\SQLServer\SQLServerHelper.cs" />
     <Compile Include="Generators\TypeMoniker.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="ServerObjectHandler.cs" />
     <Compile Include="KistlServiceStreams.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

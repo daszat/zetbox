@@ -40,12 +40,18 @@ namespace Kistl.Server.Generators
                 IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
                 using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
                 {
+                    Console.WriteLine("Generating SouceFiles");
                     gDataObjects.Generate(ctx, Helper.CodeGenPath);
+
+                    Console.WriteLine("Generating Mapping");
                     gMapping.Generate(ctx, Helper.CodeGenPath);
 
                     // Compile Code
+                    Console.WriteLine("Compiling Interfaces");
                     Compile(TaskEnum.Interface);
+                    Console.WriteLine("Compiling Server Assembly");
                     Compile(TaskEnum.Server);
+                    Console.WriteLine("Compiling Client Assembly");
                     Compile(TaskEnum.Client);
                 }
             }
@@ -68,7 +74,6 @@ namespace Kistl.Server.Generators
                     "System.Core.dll",
                     "System.Data.dll",
                     "System.Data.DataSetExtensions.dll",
-                    "System.Data.Entity.dll",
                     "System.Data.Linq.dll",
                     "System.Xml.dll",
                     "System.Xml.Linq.dll",
@@ -79,7 +84,6 @@ namespace Kistl.Server.Generators
             {
                 options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.API." + type + ".dll");
                 options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.Objects.dll");
-
             }
             
             if (type == TaskEnum.Server)
@@ -87,6 +91,9 @@ namespace Kistl.Server.Generators
                 options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.csdl");
                 options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.msl");
                 options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.ssdl");
+
+                options.ReferencedAssemblies.Add("System.Data.Entity.dll");
+                options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.DALProvider.EF.dll");
             }
 
             CompilerResults result = p.CompileAssemblyFromFile(options,

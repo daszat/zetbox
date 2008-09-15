@@ -6,10 +6,14 @@
     <DatabaseProvider>System.Data.SqlServerCe.3.5</DatabaseProvider>
     <ConnectionString>Data Source=.\Database1.sdf;</ConnectionString>
     <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Server\</DocumentStore>
+    <KistlDataContextType>Kistl.DALProvider.EF.KistlDataContext, Kistl.DALProvider.EF</KistlDataContextType>
+    <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler, Kistl.DALProvider.EF</ServerObjectHandlerType>
+    <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
   </Server>
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
+    <string>D:\Programmierung\Kistl\Kistl.DALProvider.EF\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

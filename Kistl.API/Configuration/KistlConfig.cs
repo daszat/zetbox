@@ -8,6 +8,18 @@ using System.IO;
 
 namespace Kistl.API.Configuration
 {
+    public class ConfigurationException : Exception
+    {
+        public ConfigurationException()
+            : base()
+        {
+        }
+        public ConfigurationException(string message)
+            : base(message)
+        {
+        }
+    }
+
     /// <summary>
     /// Configuration of Kistl
     /// </summary>
@@ -121,6 +133,24 @@ namespace Kistl.API.Configuration
             /// </summary>
             [XmlElement(IsNullable = false)]
             public string DocumentStore { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string KistlDataContextType { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string ServerObjectHandlerType { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string ServerObjectSetHandlerType { get; set; }
         }
 
         /// <summary>

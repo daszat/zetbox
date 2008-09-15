@@ -117,6 +117,10 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj">
+      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
+      <Name>Kistl.DALProvider.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>

@@ -135,43 +135,51 @@ namespace Kistl.Server.Generators
 
             var objClassList = Generator.GetObjectClassList(ctx);
 
+            Console.Write("  Object Classes");
             foreach (ObjectClass objClass in objClassList)
             {
+                Console.Write(".");
                 GenerateObjectInterfacesInternal(new CurrentObjectClass() { ctx = ctx, task = TaskEnum.Interface, objClass = objClass });
                 GenerateObjectsInternal(new CurrentObjectClass() { ctx = ctx, task = TaskEnum.Client, objClass = objClass });
                 GenerateObjectsInternal(new CurrentObjectClass() { ctx = ctx, task = TaskEnum.Server, objClass = objClass });
             }
+            Console.WriteLine();
 
+            Console.WriteLine("  Serializer");
             GenerateObjectSerializer(TaskEnum.Server, objClassList);
             GenerateObjectSerializer(TaskEnum.Client, objClassList);
 
-            var interfaceList = Generator.GetInterfaceList(ctx);
 
+            Console.Write("  Interfaces");
+            var interfaceList = Generator.GetInterfaceList(ctx);
             foreach (Interface i in interfaceList)
             {
+                Console.Write(".");
                 GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, task = TaskEnum.Interface, @interface = i });
-                //GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, task = TaskEnum.Client, @interface = i });
-                //GenerateInterfacesInternal(new CurrentInterface() { ctx = ctx, task = TaskEnum.Server, @interface = i });
             }
+            Console.WriteLine();
 
+            Console.Write("  Enums");
             var enumList = Generator.GetEnumList(ctx);
-
             foreach (Enumeration e in enumList)
             {
+                Console.Write(".");
                 GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, task = TaskEnum.Interface, enumeration = e });
-                //GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, task = TaskEnum.Client, enumeration = e });
-                //GenerateEnumerationsInternal(new CurrentEnumeration() { ctx = ctx, task = TaskEnum.Server, enumeration = e });
             }
+            Console.WriteLine();
 
+            Console.Write("  Structs");
             var structList = Generator.GetStructList(ctx);
-
             foreach (Struct s in structList)
             {
+                Console.Write(".");
                 GenerateStructInterfacesInternal(new CurrentStruct() { ctx = ctx, task = TaskEnum.Interface, @struct = s });
                 GenerateStructsInternal(new CurrentStruct() { ctx = ctx, task = TaskEnum.Client, @struct = s });
                 GenerateStructsInternal(new CurrentStruct() { ctx = ctx, task = TaskEnum.Server, @struct = s });
             }
+            Console.WriteLine();
 
+            Console.WriteLine("  Assemblyinfo");
             GenerateAssemblyInfo(TaskEnum.Interface);
             GenerateAssemblyInfo(TaskEnum.Server);
             GenerateAssemblyInfo(TaskEnum.Client);
@@ -194,7 +202,7 @@ namespace Kistl.Server.Generators
             }
         }
 
-        protected virtual void AddDefaultNamespaces(CodeNamespace ns)
+        protected virtual void AddDefaultNamespaces(CodeNamespace ns, TaskEnum task)
         {
             ns.Imports.Add(new CodeNamespaceImport("System"));
             ns.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
@@ -208,16 +216,16 @@ namespace Kistl.Server.Generators
         }
 
         #region CreateNamespace
-        protected CodeNamespace CreateNamespace(CodeCompileUnit code, string name)
+        protected CodeNamespace CreateNamespace(CodeCompileUnit code, string name, TaskEnum task)
         {
-            return CreateNamespace(code, name, true);
+            return CreateNamespace(code, name, true, task);
         }
 
-        protected CodeNamespace CreateNamespace(CodeCompileUnit code, string name, bool addDefaultNamespaces)
+        protected CodeNamespace CreateNamespace(CodeCompileUnit code, string name, bool addDefaultNamespaces, TaskEnum task)
         {
             CodeNamespace ns = new CodeNamespace(name);
             code.Namespaces.Add(ns);
-            if (addDefaultNamespaces) AddDefaultNamespaces(ns);
+            if (addDefaultNamespaces) AddDefaultNamespaces(ns, task);
 
             return ns;
         }
@@ -250,12 +258,12 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateObjectSerializer
-        protected virtual void GenerateObjectSerializer(TaskEnum clientServer, IQueryable<ObjectClass> objClassList)
+        protected virtual void GenerateObjectSerializer(TaskEnum task, IQueryable<ObjectClass> objClassList)
         {
             CodeCompileUnit code = new CodeCompileUnit();
 
             // Create Namespace
-            CodeNamespace ns = CreateNamespace(code, "Kistl.API");
+            CodeNamespace ns = CreateNamespace(code, "Kistl.API", task);
 
 
             // XMLObjectCollection
@@ -303,7 +311,7 @@ namespace Kistl.Server.Generators
             }
 
             // Generate the code & save
-            SaveFile(code, string.Format(@"{0}\ObjectSerializer.cs", clientServer.GetKistObjectsName()));
+            SaveFile(code, string.Format(@"{0}\ObjectSerializer.cs", task.GetKistObjectsName()));
         }
         #endregion
 
@@ -316,7 +324,7 @@ namespace Kistl.Server.Generators
         {
             current.code = new CodeCompileUnit();
             // Create Namespace
-            current.code_namespace = CreateNamespace(current.code, current.objClass.Module.Namespace);
+            current.code_namespace = CreateNamespace(current.code, current.objClass.Module.Namespace, current.task);
             current.code_namespace.Imports.Add(new CodeNamespaceImport("Kistl.API"));
 
             // Create Class
@@ -351,7 +359,7 @@ namespace Kistl.Server.Generators
             current.code = new CodeCompileUnit();
 
             // Create Namespace
-            current.code_namespace = CreateNamespace(current.code, current.objClass.Module.Namespace);
+            current.code_namespace = CreateNamespace(current.code, current.objClass.Module.Namespace, current.task);
             current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
 
             // Create Class
@@ -453,7 +461,7 @@ namespace Kistl.Server.Generators
             current.code = new CodeCompileUnit();
 
             // Create Namespace
-            current.code_namespace = CreateNamespace(current.code, current.@interface.Module.Namespace);
+            current.code_namespace = CreateNamespace(current.code, current.@interface.Module.Namespace, current.task);
 
             // Create Class
             current.code_class = current.code_namespace.CreateInterface(current.@interface.ClassName);
@@ -481,7 +489,7 @@ namespace Kistl.Server.Generators
             current.code = new CodeCompileUnit();
 
             // Create Namespace
-            current.code_namespace = CreateNamespace(current.code, current.@struct.Module.Namespace);
+            current.code_namespace = CreateNamespace(current.code, current.@struct.Module.Namespace, current.task);
 
             // Create Struct class
             current.code_class = current.code_namespace.CreateInterface(current.@struct.ClassName, "IStruct");
@@ -507,7 +515,7 @@ namespace Kistl.Server.Generators
             current.code = new CodeCompileUnit();
 
             // Create Namespace
-            current.code_namespace = CreateNamespace(current.code, current.@struct.Module.Namespace);
+            current.code_namespace = CreateNamespace(current.code, current.@struct.Module.Namespace, current.task);
             current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
 
             // Create Struct class
@@ -540,7 +548,7 @@ namespace Kistl.Server.Generators
             current.code = new CodeCompileUnit();
 
             // Create Namespace
-            current.code_namespace = CreateNamespace(current.code, current.enumeration.Module.Namespace);
+            current.code_namespace = CreateNamespace(current.code, current.enumeration.Module.Namespace, current.task);
             if (current.task != TaskEnum.Interface)
             {
                 current.code_namespace.Imports.Add(new CodeNamespaceImport(string.Format("Kistl.API.{0}", current.task)));
