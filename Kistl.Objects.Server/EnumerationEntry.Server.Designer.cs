@@ -23,11 +23,12 @@ namespace Kistl.App.Base
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="EnumerationEntry")]
-    public class EnumerationEntry__Implementation__ : BaseServerDataObject, EnumerationEntry
+    public class EnumerationEntry__Implementation__ : BaseServerDataObject_EntityFramework, EnumerationEntry
     {
         
         private int _ID;

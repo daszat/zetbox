@@ -24,11 +24,12 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="PresenterInfo")]
-    public class PresenterInfo__Implementation__ : BaseServerDataObject, PresenterInfo
+    public class PresenterInfo__Implementation__ : BaseServerDataObject_EntityFramework, PresenterInfo
     {
         
         private int _ID;

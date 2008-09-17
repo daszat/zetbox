@@ -23,11 +23,12 @@ namespace Kistl.App.Test
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestObjClass")]
-    public class TestObjClass__Implementation__ : BaseServerDataObject, TestObjClass, Kistl.App.Test.ITestInterface
+    public class TestObjClass__Implementation__ : BaseServerDataObject_EntityFramework, TestObjClass, Kistl.App.Test.ITestInterface
     {
         
         private int _ID;

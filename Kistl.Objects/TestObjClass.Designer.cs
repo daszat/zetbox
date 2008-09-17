@@ -19,8 +19,6 @@ namespace Kistl.App.Test
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     
     
     public interface TestObjClass : IDataObject, Kistl.App.Test.ITestInterface

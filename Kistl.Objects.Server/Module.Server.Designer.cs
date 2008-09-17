@@ -21,11 +21,12 @@ namespace Kistl.App.Base
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Module")]
-    public class Module__Implementation__ : BaseServerDataObject, Module
+    public class Module__Implementation__ : BaseServerDataObject_EntityFramework, Module
     {
         
         private int _ID;

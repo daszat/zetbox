@@ -7,6 +7,7 @@ using Kistl.API;
 using Kistl.API.Server;
 using System.Data.Objects.DataClasses;
 using System.Xml.Serialization;
+using Kistl.DALProvider.EF;
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__), "B_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestNameCollectionEntry_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__), "B_TestObjClass_TestNameCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.API.Server.Tests.TestObjClass_TestNameCollectionEntry__Implementation__))]
@@ -14,7 +15,7 @@ using System.Xml.Serialization;
 namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass")]
-    public class TestObjClass__Implementation__ : BaseServerDataObject, Kistl.API.Server.Tests.TestObjClass
+    public class TestObjClass__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.Server.Tests.TestObjClass
     {
 
         private int _ID;

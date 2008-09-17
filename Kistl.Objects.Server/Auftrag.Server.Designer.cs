@@ -25,11 +25,12 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Auftrag")]
-    public class Auftrag__Implementation__ : BaseServerDataObject, Auftrag
+    public class Auftrag__Implementation__ : BaseServerDataObject_EntityFramework, Auftrag
     {
         
         private int _ID;

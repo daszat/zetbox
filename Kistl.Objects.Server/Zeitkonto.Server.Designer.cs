@@ -24,11 +24,12 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Zeitkonto")]
-    public class Zeitkonto__Implementation__ : BaseServerDataObject, Zeitkonto
+    public class Zeitkonto__Implementation__ : BaseServerDataObject_EntityFramework, Zeitkonto
     {
         
         private int _ID;
@@ -212,7 +213,7 @@ namespace Kistl.App.Zeiterfassung
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Zeitkonto_MitarbeiterCollectionEntry")]
-    public class Zeitkonto_MitarbeiterCollectionEntry__Implementation__ : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto>
+    public class Zeitkonto_MitarbeiterCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto>
     {
         
         private int _ID;

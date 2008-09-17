@@ -6,12 +6,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Data;
 using System.Data.Linq;
-using System.Data.Objects;
-using System.Data.Objects.DataClasses;
 using System.Xml;
 using System.Reflection;
 using System.ComponentModel;
-using System.Data.Metadata.Edm;
 using Kistl.API;
 using Kistl.API.Server;
 
@@ -126,7 +123,7 @@ namespace Kistl.API.Server
     /// selbst implementiert sind
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BaseServerObjectHandler<T> : IServerObjectHandler
+    public abstract class BaseServerObjectHandler<T> : IServerObjectHandler
         where T : IDataObject
     {
         /// <summary>
@@ -194,23 +191,23 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        private static T GetObjectInstance(int ID)
-        {
-            using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
-            {
-                if (ID < Kistl.API.Helper.INVALIDID)
-                {
-                    // new object -> look in current context
-                    ObjectContext ctx = (ObjectContext)KistlDataContext.Current;
-                    return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
-                        .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
-                }
-                else
-                {
-                    return KistlDataContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
-                }
-            }
-        }
+        protected abstract T GetObjectInstance(int ID);
+        //{
+        //    using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
+        //    {
+        //        if (ID < Kistl.API.Helper.INVALIDID)
+        //        {
+        //             new object -> look in current context
+        //            ObjectContext ctx = (ObjectContext)KistlDataContext.Current;
+        //            return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
+        //                .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
+        //        }
+        //        else
+        //        {
+        //            return KistlDataContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Implementiert den GetObject Befehl.

@@ -23,11 +23,12 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ControlInfo")]
-    public class ControlInfo__Implementation__ : BaseServerDataObject, ControlInfo
+    public class ControlInfo__Implementation__ : BaseServerDataObject_EntityFramework, ControlInfo
     {
         
         private int _ID;

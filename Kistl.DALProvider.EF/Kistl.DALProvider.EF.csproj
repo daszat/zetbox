@@ -46,8 +46,12 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseServerDataObject_EntityFramework.cs" />
     <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="KistlDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +70,7 @@
     <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

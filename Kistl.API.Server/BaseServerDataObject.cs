@@ -5,14 +5,13 @@ using System.Text;
 using System.ComponentModel;
 using System.Data.Linq.Mapping;
 using System.Globalization;
-using System.Data.Objects.DataClasses;
 
 namespace Kistl.API.Server
 {
     /// <summary>
     /// Abstract Base Class for a PersistenceObject on the Server Side
     /// </summary>
-    public abstract class BaseServerPersistenceObject : System.Data.Objects.DataClasses.EntityObject, IPersistenceObject
+    public abstract class BaseServerPersistenceObject : IPersistenceObject
     {
         protected BaseServerPersistenceObject()
         {
@@ -21,7 +20,6 @@ namespace Kistl.API.Server
 
         /// <summary>
         /// Everyone has an ID
-        /// TODO: Tja, das EF lässt sich nicht dazu überreden, diese ID zu nehmen...
         /// </summary>
         public abstract int ID { get; set; }
 
@@ -81,6 +79,8 @@ namespace Kistl.API.Server
             _context = null;
         }
 
+        public abstract bool IsAttached { get; }
+
         /// <summary>
         /// Abstract Method for Serializing this Object.
         /// </summary>
@@ -94,7 +94,8 @@ namespace Kistl.API.Server
         /// <param name="sr">Stream to serialize from</param>
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
-            if (this.EntityState != System.Data.EntityState.Detached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
+            // TODO: ....
+            if (this.IsAttached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
         }
 
         /// <summary>
@@ -107,6 +108,10 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="property">Property that has changed or empty, if the Object has changed</param>
         public abstract void NotifyPropertyChanged(string property);
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public event PropertyChangingEventHandler PropertyChanging;
     }
 
     /// <summary>
@@ -146,7 +151,7 @@ namespace Kistl.API.Server
         /// <param name="property">Propertyname</param>
         public override void NotifyPropertyChanging(string property)
         {
-            base.ReportPropertyChanging(property);
+            // base.ReportPropertyChanging(property);
         }
 
         /// <summary>
@@ -155,7 +160,7 @@ namespace Kistl.API.Server
         /// <param name="property">Propertyname</param>
         public override void NotifyPropertyChanged(string property)
         {
-            base.ReportPropertyChanged(property);
+            // base.ReportPropertyChanged(property);
         }
 
         /// <summary>
@@ -238,7 +243,7 @@ namespace Kistl.API.Server
         /// <param name="property">Propertyname</param>
         public override void NotifyPropertyChanging(string property)
         {
-            base.ReportPropertyChanging(property);
+            // base.ReportPropertyChanging(property);
         }
 
         /// <summary>
@@ -247,11 +252,11 @@ namespace Kistl.API.Server
         /// <param name="property">Propertyname</param>
         public override void NotifyPropertyChanged(string property)
         {
-            base.ReportPropertyChanged(property);
+            // base.ReportPropertyChanged(property);
         }
     }
 
-    public abstract class BaseServerStructObject : ComplexObject, IStruct, INotifyPropertyChanged, INotifyPropertyChanging
+    public abstract class BaseServerStructObject : /*ComplexObject, */ IStruct, INotifyPropertyChanged, INotifyPropertyChanging
     {
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {

@@ -34,3 +34,8 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// The Common Language Specification (CLS) defines naming restrictions, data types,
+// and rules to which assemblies must conform if they are to be used across programming
+// languages. This assembly should be compatible.
+[assembly: System.CLSCompliant(true)]

@@ -21,11 +21,12 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Mitarbeiter")]
-    public class Mitarbeiter__Implementation__ : BaseServerDataObject, Mitarbeiter
+    public class Mitarbeiter__Implementation__ : BaseServerDataObject_EntityFramework, Mitarbeiter
     {
         
         private int _ID;

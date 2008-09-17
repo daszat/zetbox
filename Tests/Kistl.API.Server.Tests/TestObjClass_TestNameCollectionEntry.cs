@@ -6,11 +6,12 @@ using Kistl.API;
 using System.Data.Objects.DataClasses;
 using Kistl.API.Server;
 using System.Xml.Serialization;
+using Kistl.DALProvider.EF;
 
 namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass_TestNameCollectionEntry")]
-    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry, ICollectionEntry<string, TestObjClass>
+    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<string, TestObjClass>
     {
 
         private int _ID;

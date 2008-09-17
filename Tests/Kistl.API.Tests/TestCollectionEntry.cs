@@ -92,5 +92,15 @@ namespace Kistl.API.Tests
                 throw new NotImplementedException();
             }
         }
+
+        #region IPersistenceObject Members
+
+
+        public bool IsAttached
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
     }
 }

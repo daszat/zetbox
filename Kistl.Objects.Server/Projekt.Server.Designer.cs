@@ -24,11 +24,12 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Projekt")]
-    public class Projekt__Implementation__ : BaseServerDataObject, Projekt
+    public class Projekt__Implementation__ : BaseServerDataObject_EntityFramework, Projekt
     {
         
         private int _ID;
@@ -258,7 +259,7 @@ namespace Kistl.App.Projekte
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Projekt_MitarbeiterCollectionEntry")]
-    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
+    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
     {
         
         private int _ID;

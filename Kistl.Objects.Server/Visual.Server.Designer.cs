@@ -26,11 +26,12 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual")]
-    public class Visual__Implementation__ : BaseServerDataObject, Visual
+    public class Visual__Implementation__ : BaseServerDataObject_EntityFramework, Visual
     {
         
         private int _ID;
@@ -281,7 +282,7 @@ namespace Kistl.App.GUI
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual_ChildrenCollectionEntry")]
-    public class Visual_ChildrenCollectionEntry__Implementation__ : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
+    public class Visual_ChildrenCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
         
         private int _ID;

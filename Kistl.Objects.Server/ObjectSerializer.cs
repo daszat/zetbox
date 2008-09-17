@@ -21,6 +21,7 @@ namespace Kistl.API
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     
     
     [Serializable()]

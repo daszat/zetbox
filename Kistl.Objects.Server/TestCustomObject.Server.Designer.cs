@@ -21,11 +21,12 @@ namespace Kistl.App.Test
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestCustomObject")]
-    public class TestCustomObject__Implementation__ : BaseServerDataObject, TestCustomObject
+    public class TestCustomObject__Implementation__ : BaseServerDataObject_EntityFramework, TestCustomObject
     {
         
         private int _ID;
@@ -97,12 +98,12 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (_PhoneNumberMobile == null) { _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(); _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile"); }
+                if (_PhoneNumberMobile == null) return new Kistl.App.Test.TestPhoneStruct__Implementation____NULL();
                 return (Kistl.App.Test.TestPhoneStruct__Implementation__)PhoneNumberMobile;
             }
             set
             {
-                PhoneNumberMobile = value;
+                if(!(value is Kistl.App.Test.TestPhoneStruct__Implementation____NULL)) PhoneNumberMobile = value;
             }
         }
         
@@ -130,12 +131,12 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (_PhoneNumberOffice == null) { _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(); _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice"); }
+                if (_PhoneNumberOffice == null) return new Kistl.App.Test.TestPhoneStruct__Implementation____NULL();
                 return (Kistl.App.Test.TestPhoneStruct__Implementation__)PhoneNumberOffice;
             }
             set
             {
-                PhoneNumberOffice = value;
+                if(!(value is Kistl.App.Test.TestPhoneStruct__Implementation____NULL)) PhoneNumberOffice = value;
             }
         }
         

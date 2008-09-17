@@ -21,11 +21,12 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TaetigkeitsArt")]
-    public class TaetigkeitsArt__Implementation__ : BaseServerDataObject, TaetigkeitsArt
+    public class TaetigkeitsArt__Implementation__ : BaseServerDataObject_EntityFramework, TaetigkeitsArt
     {
         
         private int _ID;

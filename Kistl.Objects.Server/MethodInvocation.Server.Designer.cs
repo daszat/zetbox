@@ -26,11 +26,12 @@ namespace Kistl.App.Base
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="MethodInvocation")]
-    public class MethodInvocation__Implementation__ : BaseServerDataObject, MethodInvocation
+    public class MethodInvocation__Implementation__ : BaseServerDataObject_EntityFramework, MethodInvocation
     {
         
         private int _ID;

@@ -23,11 +23,12 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kunde")]
-    public class Kunde__Implementation__ : BaseServerDataObject, Kunde
+    public class Kunde__Implementation__ : BaseServerDataObject_EntityFramework, Kunde
     {
         
         private int _ID;
@@ -232,7 +233,7 @@ namespace Kistl.App.Projekte
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kunde_EMailsCollectionEntry")]
-    public class Kunde_EMailsCollectionEntry__Implementation__ : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<System.String, Kistl.App.Projekte.Kunde>
+    public class Kunde_EMailsCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<System.String, Kistl.App.Projekte.Kunde>
     {
         
         private int _ID;

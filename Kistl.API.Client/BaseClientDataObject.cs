@@ -71,6 +71,14 @@ namespace Kistl.API.Client
             _context = null;
         }
 
+        public bool IsAttached
+        {
+            get
+            {
+                return _context != null;
+            }
+        }
+
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
         }

@@ -82,6 +82,11 @@ namespace Kistl.API
         /// </summary>
         /// <param name="ctx">Context to detach this Object from.</param>
         void DetachFromContext(IKistlContext ctx);
+
+        /// <summary>
+        /// Returns true if this Object is attached to a Context
+        /// </summary>
+        bool IsAttached { get; }
     }
 
     /// <summary>

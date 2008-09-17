@@ -21,11 +21,12 @@ namespace Kistl.App.Test
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [System.Data.Objects.DataClasses.EdmComplexTypeAttribute(NamespaceName="Model", Name="TestPhoneStruct")]
-    public class TestPhoneStruct__Implementation__ : BaseServerStructObject, TestPhoneStruct
+    public class TestPhoneStruct__Implementation__ : BaseServerStructObject_EntityFramework, TestPhoneStruct
     {
         
         private string _Number;
@@ -81,5 +82,9 @@ namespace Kistl.App.Test
             BinarySerializer.FromBinary(out this._Number, sr);
             BinarySerializer.FromBinary(out this._AreaCode, sr);
         }
+    }
+    
+    public class TestPhoneStruct__Implementation____NULL : TestPhoneStruct__Implementation__
+    {
     }
 }

@@ -26,6 +26,7 @@ namespace Kistl.App.Base
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
@@ -267,7 +268,7 @@ namespace Kistl.App.Base
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectClass_ImplementsInterfacesCollectionEntry")]
-    public class ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__ : Kistl.API.Server.BaseServerCollectionEntry, ICollectionEntry<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass>
+    public class ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass>
     {
         
         private int _ID;

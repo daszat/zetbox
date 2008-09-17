@@ -24,6 +24,7 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects"));
                 ns.Imports.Add(new CodeNamespaceImport("System.Data.Objects.DataClasses"));
+                ns.Imports.Add(new CodeNamespaceImport("Kistl.DALProvider.EF"));
             }
         }
         #endregion
@@ -49,6 +50,11 @@ namespace Kistl.Server.Generators.SQLServer
             {
                 GenerateEdmRelationshipAttribute(current.objClass, current.code);
 
+                if (current.code_class.BaseTypes[0].BaseType == typeof(Kistl.API.Server.BaseServerDataObject).Name)
+                {
+                    current.code_class.BaseTypes[0].BaseType = "BaseServerDataObject_EntityFramework";
+                }
+
                 current.code_class.AddAttribute("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name", new CodePrimitiveExpression(current.objClass.ClassName)));
@@ -61,6 +67,8 @@ namespace Kistl.Server.Generators.SQLServer
 
             if (current.task == TaskEnum.Server)
             {
+                current.code_class.BaseTypes[0].BaseType = "BaseServerStructObject_EntityFramework";
+
                 current.code_class.AddAttribute("System.Data.Objects.DataClasses.EdmComplexTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name", new CodePrimitiveExpression(current.@struct.ClassName)));
@@ -202,6 +210,7 @@ namespace Kistl.Server.Generators.SQLServer
                 CurrentObjectClass implCollectionClass = (CurrentObjectClass)collectionClass.Clone();
                 implCollectionClass.code_property = collectionClass.code_class.CreateProperty(current.property.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix, "ValueImpl");
 
+                implCollectionClass.code_class.BaseTypes[0].BaseType = "BaseServerCollectionEntry_EntityFramework";
                 implCollectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionType.Classname)));
@@ -279,6 +288,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 GenerateEdmRelationshipAttribute(parentType, collectionType, current.code, "fk_Parent");
 
+                collectionClass.code_class.BaseTypes[0].BaseType = "BaseServerCollectionEntry_EntityFramework";
                 collectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionType.Classname)));

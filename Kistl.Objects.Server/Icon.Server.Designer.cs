@@ -21,11 +21,12 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Icon")]
-    public class Icon__Implementation__ : BaseServerDataObject, Icon
+    public class Icon__Implementation__ : BaseServerDataObject_EntityFramework, Icon
     {
         
         private int _ID;

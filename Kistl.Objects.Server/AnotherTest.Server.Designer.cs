@@ -21,11 +21,12 @@ namespace Kistl.App.Test
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="AnotherTest")]
-    public class AnotherTest__Implementation__ : BaseServerDataObject, AnotherTest
+    public class AnotherTest__Implementation__ : BaseServerDataObject_EntityFramework, AnotherTest
     {
         
         private int _ID;

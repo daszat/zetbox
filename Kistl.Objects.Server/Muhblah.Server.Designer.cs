@@ -21,11 +21,12 @@ namespace Kistl.App.Test
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Muhblah")]
-    public class Muhblah__Implementation__ : BaseServerDataObject, Muhblah
+    public class Muhblah__Implementation__ : BaseServerDataObject_EntityFramework, Muhblah
     {
         
         private int _ID;

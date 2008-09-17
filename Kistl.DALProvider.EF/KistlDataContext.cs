@@ -86,7 +86,12 @@ namespace Kistl.DALProvider.EF
         /// <returns>Root Type of the given Type</returns>
         private Type GetRootType(Type t)
         {
-            while (t != null && t.BaseType != typeof(BaseServerDataObject) && t.BaseType != typeof(BaseServerCollectionEntry))
+            while (t != null &&
+                t.BaseType != typeof(BaseServerDataObject) &&
+                t.BaseType != typeof(BaseServerDataObject_EntityFramework) && 
+                t.BaseType != typeof(BaseServerCollectionEntry) &&
+                t.BaseType != typeof(BaseServerCollectionEntry_EntityFramework)
+                )
             {
                 t = t.BaseType;
             }
@@ -215,7 +220,7 @@ namespace Kistl.DALProvider.EF
                 // *set the key to null*, and then add them back.  
                 // Technically this would work, but it's less efficient than avoiding attaching 
                 // the things which are new in the first place.
-                EntityObject entityObj = (EntityObject)obj;
+                IEntityStateObject entityObj = (IEntityStateObject)obj;
                 if (entityObj.EntityState != System.Data.EntityState.Added)
                 {
                     if (entityObj.EntityState != System.Data.EntityState.Detached)

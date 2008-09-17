@@ -14,6 +14,27 @@ namespace Kistl.DALProvider.EF
 {
     public class ServerObjectHandler<T> : BaseServerObjectHandler<T> where T : IDataObject
     {
+        /// <summary>
+        /// Gibt eine typisierte Objektinstanz zurück.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        protected override T GetObjectInstance(int ID)
+        {
+            if (ID < Kistl.API.Helper.INVALIDID)
+            {
+                // new object -> look in current context
+                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)Kistl.API.Server.KistlDataContext.Current;
+                ObjectContext ctx = efCtx.ObjectContext;
+                return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
+                    .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
+            }
+            else
+            {
+                return Kistl.API.Server.KistlDataContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
+            }
+        }
     }
 
     public class ServerObjectSetHandler : BaseServerObjectSetHandler
@@ -102,7 +123,7 @@ namespace Kistl.DALProvider.EF
         /// <param name="obj"></param>
         private static void MarkEveryPropertyAsModified(IPersistenceObject o)
         {
-            EntityObject obj = (EntityObject)o;
+            IEntityStateObject obj = (IEntityStateObject)o;
             // TODO: Bad Hack!!
             if (obj.EntityState.In(EntityState.Modified, EntityState.Unchanged))
             {

@@ -19,8 +19,6 @@ namespace Kistl.App.GUI
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     
     
     public interface Template : IDataObject

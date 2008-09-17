@@ -24,11 +24,12 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     using Kistl.API.Server;
     
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Template")]
-    public class Template__Implementation__ : BaseServerDataObject, Template
+    public class Template__Implementation__ : BaseServerDataObject_EntityFramework, Template
     {
         
         private int _ID;
