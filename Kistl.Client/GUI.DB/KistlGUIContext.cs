@@ -47,10 +47,10 @@ namespace Kistl.GUI.DB
             return (from pi in GuiContext.GetQuery<PresenterInfo>().ToList()
                     where
                         pi.ControlType == visual.ControlType
-                        //&& (pi.DataAssembly == null // means mscorlib
-                        //    ? sourceType.Assembly == typeof(object).Assembly // confirm mscorlib
-                        //    : pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName // compare assembly
-                        //)
+                        && (pi.DataAssembly == null // means mscorlib
+                            ? sourceType.Assembly == typeof(object).Assembly // confirm mscorlib
+                            : pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName // compare assembly
+                        )
                         && pi.DataTypeName == sourceType.FullName
                     select pi).Single();
         }
