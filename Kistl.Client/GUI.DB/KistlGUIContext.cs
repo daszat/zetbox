@@ -47,10 +47,9 @@ namespace Kistl.GUI.DB
             return (from pi in GuiContext.GetQuery<PresenterInfo>().ToList()
                     where
                         pi.ControlType == visual.ControlType
-                        // TODO: Bitte ausbessern!
-                        //&& (pi.DataAssembly == null 
-                        //    ? sourceType.Assembly == typeof(object).Assembly 
-                        //    : pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName
+                        //&& (pi.DataAssembly == null // means mscorlib
+                        //    ? sourceType.Assembly == typeof(object).Assembly // confirm mscorlib
+                        //    : pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName // compare assembly
                         //)
                         && pi.DataTypeName == sourceType.FullName
                     select pi).Single();
@@ -62,9 +61,8 @@ namespace Kistl.GUI.DB
             return (IBasicControl)Activator.CreateInstance(controlType);
         }
 
-        public static Kistl.GUI.Renderer.IRenderer CreateRenderer(string tk)
+        public static Kistl.GUI.Renderer.IRenderer CreateRenderer(Toolkit platform)
         {
-            Toolkit platform = (Toolkit)Enum.Parse(typeof(Toolkit), tk, true);
             var info = FindControlInfo(platform, VisualType.Renderer);
             Type controlType = Type.GetType(String.Format("{0}, {1}", info.ClassName, info.Assembly.AssemblyName), true);
             return (Kistl.GUI.Renderer.IRenderer)Activator.CreateInstance(controlType);

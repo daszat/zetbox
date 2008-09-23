@@ -196,6 +196,11 @@ namespace Kistl.GUI
 
     }
 
+    public interface IActionControl: IBasicControl
+    {
+        event EventHandler ActionActivatedEvent;
+    }
+
     /// <summary>
     /// Possible sizes for controls. These are measured realtively 
     /// to total horizontal space up to a useful (renderer-, medium- 

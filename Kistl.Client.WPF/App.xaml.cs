@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Markup;
-using System.Globalization;
-using Kistl.GUI.DB;
+
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
+using Kistl.App.GUI;
+using Kistl.GUI.DB;
 
 namespace Kistl.Client.WPF
 {
@@ -42,7 +44,7 @@ namespace Kistl.Client.WPF
                 // weil Kistl.Objects dynamisch geladen wird.
                 // woher Kistl.Objects geladen wird, entscheide der AssemblyLoader,
                 // der gerade initialisiert wird.
-                Manager.Create(e.Args, "WPF");
+                Manager.Create(e.Args, Toolkit.WPF);
             }
         }
 

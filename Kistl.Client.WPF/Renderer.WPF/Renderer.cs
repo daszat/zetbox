@@ -24,14 +24,26 @@ namespace Kistl.GUI.Renderer.WPF
             Current = this;
         }
 
-        protected override Control Setup(Control control)
+        protected override Control Setup(Control control, Control menu)
         {
-            return (Control)control;
+            if (menu != null)
+            {
+                ContextMenu cm = new ContextMenu();
+                cm.Items.Add(menu);
+                control.ContextMenu = cm;
+            }
+                
+            return control;
         }
 
-        protected override ContentControl Setup(ContentControl widget, IList<Control> list)
+        protected override ContentControl Setup(ContentControl widget, IList<Control> list, Control menu)
         {
             StackPanel p = new StackPanel();
+            if (menu != null)
+            {
+                p.Children.Add(menu);
+            }
+
             foreach (var c in list)
             {
                 p.Children.Add(c);

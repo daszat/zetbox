@@ -485,36 +485,417 @@ namespace Kistl.Client.Mocks
             return String.Format("TestObject<ID = {0}>", ID);
         }
 
+        #region IPersistenceObject Members
+
+        public bool IsAttached
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanging Members
+
+        public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
+
+        #endregion
     }
 
     internal class MockObjectReferenceProperty : ObjectReferenceProperty
     {
 
-        public override string GetPropertyTypeString()
+        public string GetPropertyTypeString()
         {
             return "Kistl.Client.Mocks.MockObjectReferenceProperty";
         }
 
-        public override string ToString()
+        public string ToString()
         {
             return "This is a MockObjectReferenceProperty";
         }
 
+        // TODO: Use NMock instead
+        #region ObjectReferenceProperty Members
+
+        public ObjectClass ReferenceObjectClass
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
+
+        #region Property Members
+
+        public bool IsList
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool IsNullable
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
+
+        #region BaseProperty Members
+
+        public DataType ObjectClass
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string PropertyName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string AltText
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Module Module
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string GetGUIRepresentation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Type GetPropertyType()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IDataObject Members
+
+        public void NotifyChange()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPreSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPostSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IPersistenceObject Members
+
+        public int ID
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public DataObjectState ObjectState
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void ToStream(System.IO.BinaryWriter sw)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FromStream(System.IO.BinaryReader sr)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPropertyChanging(string property)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPropertyChanged(string property)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IKistlContext Context
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void AttachToContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DetachFromContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsAttached
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region INotifyPropertyChanging Members
+
+        public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
+
+        #endregion
     }
 
     internal class MockBackReferenceProperty : BackReferenceProperty
     {
 
-        public override string GetPropertyTypeString()
+        public string GetPropertyTypeString()
         {
             return "Kistl.Client.Mocks.MockBackReferenceProperty";
         }
 
-        public override string ToString()
+        public string ToString()
         {
             return "This is a MockBackReferenceProperty";
         }
 
+        //TODO: use NMock instead
+
+        #region BackReferenceProperty Members
+
+        public ObjectReferenceProperty ReferenceProperty
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool PreFetchToClient
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
+
+        #region BaseProperty Members
+
+        public DataType ObjectClass
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string PropertyName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string AltText
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Module Module
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string GetGUIRepresentation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Type GetPropertyType()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IDataObject Members
+
+        public void NotifyChange()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPreSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPostSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IPersistenceObject Members
+
+        public int ID
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public DataObjectState ObjectState
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void ToStream(System.IO.BinaryWriter sw)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FromStream(System.IO.BinaryReader sr)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPropertyChanging(string property)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPropertyChanged(string property)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IKistlContext Context
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void AttachToContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DetachFromContext(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsAttached
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region INotifyPropertyChanging Members
+
+        public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
+
+        #endregion
     }
 
 }

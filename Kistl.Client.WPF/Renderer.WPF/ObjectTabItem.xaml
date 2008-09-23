@@ -14,14 +14,21 @@
     </TabItem.Header>
     <TabItem.ContentTemplate>
         <DataTemplate>
-            <ScrollViewer>
-                <!--
-                Binding the Content here inhibits the ContentPresenter to bind its ContentTemplate
-                to the TabItem's ContentTemplate. This massively reduces the amount of template that
-                has to be replaced to get the ScrollViewer around the Content.
-                -->
-                <ContentPresenter Content="{TemplateBinding Content}"/>
-            </ScrollViewer>
+            <DockPanel>
+                <ToolBar
+                    x:Name="actionToolbar"
+                    DockPanel.Dock="Top"
+                    Visibility="Collapsed"
+                    />
+                <ScrollViewer>
+                    <!--
+                    Binding the Content here inhibits the ContentPresenter to bind its ContentTemplate
+                    to the TabItem's ContentTemplate. This massively reduces the amount of template that
+                    has to be replaced to get the ScrollViewer around the Content.
+                    -->
+                    <ContentPresenter Content="{TemplateBinding Content}"/>
+                </ScrollViewer>
+            </DockPanel>
         </DataTemplate>
     </TabItem.ContentTemplate>
 </TabItem>

@@ -15,13 +15,11 @@
   </Client>
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin</string>
-    <string>C:\Projekte\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
-    <string>C:\Projekte\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
-    <string>C:\Projekte\Kistl\Kistl.Server\bin\Debug</string>
-    <string>C:\Projekte\Kistl\Kistl.DALProvider.EF\bin\Debug</string>
     <string>E:\Projekte\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
     <string>E:\Projekte\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
-    <string>E:\Projekte\Kistl\Kistl.Server\bin\Debug</string>
+    <string>E:\Projekte\Kistl\Kistl.Objects\bin\Debug</string>
+    <string>E:\Projekte\Kistl\Kistl.Objects.Server\bin\Debug</string>
+    <string>E:\Projekte\Kistl\Kistl.Objects.Client\bin\Debug</string>
     <string>E:\Projekte\Kistl\Kistl.DALProvider.EF\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

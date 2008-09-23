@@ -55,6 +55,7 @@ namespace Kistl.GUI.Renderer
     }
 
     public abstract class BasicRenderer<CONTROL, PROPERTY, CONTAINER> : IRenderer
+        where CONTROL : class
         where PROPERTY : CONTROL
         where CONTAINER : CONTROL
     {
@@ -80,6 +81,9 @@ namespace Kistl.GUI.Renderer
         {
             var cInfo = KistlGUIContext.FindControlInfo(Platform, visual);
             PresenterInfo pInfo = null;
+
+            // TODO: finding PresenterInfos has to be regularized,
+            // this is currently too messy
             if (visual.Property != null)
             {
                 switch (visual.ControlType)
@@ -115,6 +119,10 @@ namespace Kistl.GUI.Renderer
                     case VisualType.PropertyGroup:
                         pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(Kistl.GUI.GroupPresenter));
                         break;
+                    // TODO: enable Menu
+                    //case VisualType.Toolbar:
+                    //    pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(Kistl.GUI.ToolBarPresenter));
+                    //    break;
                     default:
                         // don't know how to handle this case => FAIL
                         pInfo = KistlGUIContext.FindPresenterInfo(visual, null);
@@ -131,15 +139,22 @@ namespace Kistl.GUI.Renderer
             // TODO: call presenter.Dispose() when window is closed
             var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
 
+            // TODO: create Menu here
+            CONTROL menuWidget = null;
+            //if (visual.Menu != null)
+            //{
+            //    menuWidget = (CONTROL)CreateControl(obj, visual.Menu);
+            //}
+
             if (cInfo.IsContainer)
             {
                 var childWidgets = from c in visual.Children select (CONTROL)CreateControl(obj, c);
-                return Setup((CONTAINER)widget, childWidgets.ToList());
+                return Setup((CONTAINER)widget, childWidgets.ToList(), menuWidget);
             }
             else
             {
                 // TODO: Assert(visual.Children == null || visual.Children.Count == 0);
-                return Setup((PROPERTY)widget);
+                return Setup((PROPERTY)widget, menuWidget);
             }
         }
 
@@ -150,8 +165,8 @@ namespace Kistl.GUI.Renderer
             ShowObject(obj, ctrl);
         }
 
-        protected abstract CONTROL Setup(PROPERTY control);
-        protected abstract CONTAINER Setup(CONTAINER widget, IList<CONTROL> list);
+        protected abstract CONTROL Setup(PROPERTY control, CONTROL menu);
+        protected abstract CONTAINER Setup(CONTAINER widget, IList<CONTROL> list, CONTROL menu);
         protected abstract void ShowObject(IDataObject obj, CONTAINER ctrl);
 
     }

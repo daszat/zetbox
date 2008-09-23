@@ -213,6 +213,7 @@
     <Compile Include="DesktopTreeView.xaml.cs">
       <DependentUpon>DesktopTreeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Renderer.WPF\ActionControl.cs" />
     <Compile Include="Renderer.WPF\EditBoolProperty.xaml.cs">
       <DependentUpon>EditBoolProperty.xaml</DependentUpon>
     </Compile>
@@ -262,6 +263,7 @@
     <Compile Include="Renderer.WPF\StringListControl.xaml.cs">
       <DependentUpon>StringListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Renderer.WPF\ToolBarWrapper.cs" />
     <Compile Include="Renderer.WPF\WPFWindow.xaml.cs">
       <DependentUpon>WPFWindow.xaml</DependentUpon>
     </Compile>
@@ -299,7 +301,6 @@
     <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
       <Project>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</Project>

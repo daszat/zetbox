@@ -441,6 +441,21 @@ namespace Kistl.GUI
     }
 
     /// <summary>
+    /// Handles a widget for a tool bar
+    /// </summary>
+    public class ToolBarPresenter : Presenter<IBasicControl>
+    {
+        public ToolBarPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = String.Format("{0} {1}", Object.GetType().Name, Object.ID);
+
+            //TODO: Set Control.Size
+        }
+    }
+
+    /// <summary>
     /// Handles a widget for a group of properties
     /// </summary>
     public class GroupPresenter : Presenter<IBasicControl>
@@ -452,6 +467,27 @@ namespace Kistl.GUI
             Control.ShortLabel = String.Format("{0} {1}", Object.GetType().Name, Object.ID);
 
             //TODO: Set Control.Size
+        }
+    }
+
+
+    /// <summary>
+    /// Handles a widget for a group of properties
+    /// </summary>
+    public class ActionPresenter : Presenter<IActionControl>
+    {
+        public ActionPresenter() { }
+
+        protected override void InitializeComponent()
+        {
+            Control.ShortLabel = "Action X";
+            Control.ActionActivatedEvent += new EventHandler(Control_ActionActivatedEvent);
+            //TODO: Set Control.Size
+        }
+
+        void Control_ActionActivatedEvent(object sender, EventArgs e)
+        {
+            Manager.Renderer.ShowMessage("Button clicked");
         }
     }
 

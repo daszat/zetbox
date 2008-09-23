@@ -44,13 +44,18 @@ namespace Kistl.Client.ASPNET.Toolkit
             throw new NotImplementedException();
         }
 
-        protected override IControlLoader Setup(IControlLoader control)
+        protected override IControlLoader Setup(IControlLoader control, IControlLoader menu)
         {
+            if (menu != null)
+                throw new NotImplementedException("Cannot handle menus");
             return control;
         }
 
-        protected override IContainerLoader Setup(IContainerLoader widget, IList<IControlLoader> list)
+        protected override IContainerLoader Setup(IContainerLoader widget, IList<IControlLoader> list, IControlLoader menu)
         {
+            if (menu != null)
+                throw new NotImplementedException("Cannot handle menus");
+
             list.ForEach<IControlLoader>(c => widget.AddChild(c));
             return widget;
         }

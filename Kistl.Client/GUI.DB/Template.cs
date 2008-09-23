@@ -18,7 +18,7 @@ namespace Kistl.GUI.DB
         public static Template DefaultTemplate(Type objectType)
         {
             if (objectType == null)
-                throw new ArgumentNullException("objectType", "Template.DefaultTemplate(objectType): need objectType to create Template");
+                throw new ArgumentNullException("objectType", "Template.DefaultTemplate(objectType): needs objectType to create Template");
 
             Template result = KistlGUIContext.GuiContext.GetQuery<Template>()
                 .ToList() // TODO: remove after implementing ConditionalExpressions in Linq2Kistl
@@ -34,7 +34,6 @@ namespace Kistl.GUI.DB
             if (result == null)
                 result = CreateDefaultTemplate(objectType);
 
-
             return result;
         }
 
@@ -49,7 +48,7 @@ namespace Kistl.GUI.DB
             // ObjectClass using the editor's Context and comitted together 
             // with the edits on the class.
             // using (
-                IKistlContext ctx = KistlGUIContext.GuiContext; // KistlContext.GetContext()
+            IKistlContext ctx = KistlGUIContext.GuiContext; // KistlContext.GetContext()
             //     )
             {
 
@@ -69,27 +68,63 @@ namespace Kistl.GUI.DB
                     "list of calculated results"
                     );
 
-                ObjectClass @class = ClientHelper.ObjectClasses[objectType];
-                while (@class != null)
-                {
-                    foreach (BaseProperty p in @class.Properties)
-                    {
-                        result.VisualTree.Children.Add(ctx.CreateDefaultVisual(p));
-                    }
+                IList<BaseProperty> properties = GetAllProperties(objectType);
 
-                    foreach (Method m in @class.Methods)
-                    {
-                        Visual v = ctx.CreateDefaultVisual(m);
-                        if (v != null)
-                            methodResults.Children.Add(v);
-                    }
-                    @class = @class.BaseObjectClass;
+                // Copy visuals to tree (base properties first)
+                // TODO: later, group by implementing class and use property group
+                foreach (BaseProperty bp in GetAllProperties(objectType).Reverse())
+                {
+                    result.VisualTree.Children.Add(ctx.CreateDefaultVisual(bp));
                 }
 
-                if (methodResults.Children.Count > 0)
-                    result.VisualTree.Children.Add(methodResults);
+                #region walk methods for Menu Actions and "calculated Properties"
 
-                // ctx.SubmitChanges();
+                ObjectClass @class = ClientHelper.ObjectClasses[objectType];
+                foreach (Method m in @class.GetInheritedMethods().Concat(@class.Methods))
+                {
+
+                    Visual v = ctx.CreateDefaultVisual(m);
+                    if (v != null)
+                    {
+                        if (m.GetReturnParameter() != null)
+                        {
+                            methodResults.Children.Add(v);
+                        }
+                        else
+                        {
+                            // TODO: result.VisualTree.Menu.Children.Add(ctx.CreateDefaultVisual(m));
+                        }
+                    }
+                }
+
+                #endregion
+
+                foreach (Method m in @class.Methods)
+                {
+                    Visual v = ctx.CreateDefaultVisual(m);
+                    if (v != null)
+                        methodResults.Children.Add(v);
+                }
+                @class = @class.BaseObjectClass;
+            }
+
+            // ctx.SubmitChanges();
+            return result;
+        }
+
+        /// <returns>the list of all Properties of objectType</returns>
+        private static IList<BaseProperty> GetAllProperties(Type objectType)
+        {
+            List<BaseProperty> result = new List<BaseProperty>();
+
+            ObjectClass @class = ClientHelper.ObjectClasses[objectType];
+            while (@class != null)
+            {
+                foreach (BaseProperty p in @class.Properties)
+                {
+                    result.Add(p);
+                }
+                @class = @class.BaseObjectClass;
             }
             return result;
         }
@@ -104,6 +139,6 @@ namespace Kistl.GUI.DB
         /// <summary>
         /// Use this Template as Control to edit a instance
         /// </summary>
-        EditControl = 0
+        EditControl = 0,
     }
 }

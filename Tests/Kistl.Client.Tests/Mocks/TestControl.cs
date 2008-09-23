@@ -36,12 +36,12 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        protected override object Setup(object control)
+        protected override object Setup(object control, object menu)
         {
             return control;
         }
 
-        protected override object Setup(object widget, IList<object> list)
+        protected override object Setup(object widget, IList<object> list, object menu)
         {
             return widget;
         }
