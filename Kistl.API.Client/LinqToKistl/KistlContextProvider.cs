@@ -308,6 +308,7 @@ namespace Kistl.API.Client
                         return e;
                     }
                     LambdaExpression lambda = Expression.Lambda(e);
+                    // TODO: The following line is _the_only_ (85% of KistlContext.Find()) performance Hotspot for Linq2Kistl
                     Delegate fn = lambda.Compile();
                     return Expression.Constant(fn.DynamicInvoke(null), e.Type);
                 }
