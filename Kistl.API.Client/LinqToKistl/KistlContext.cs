@@ -357,7 +357,7 @@ namespace Kistl.API.Client
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
-        /// Note: This Method is depricated.
+        /// Note: This Method is deprecated.
         /// </summary>
         /// <param name="type">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
@@ -380,7 +380,11 @@ namespace Kistl.API.Client
             where T : IDataObject
         {
             CheckDisposed();
-            return GetQuery<T>().Single(o => o.ID == ID);
+            IPersistenceObject cacheHit = _objects.Lookup(typeof(T), ID);
+            if (cacheHit != null)
+                return (T)cacheHit;
+            else
+                return GetQuery<T>().Single(o => o.ID == ID);
         }
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
