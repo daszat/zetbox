@@ -5,6 +5,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
 using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace Kistl.API.Client
 {
@@ -73,29 +74,12 @@ namespace Kistl.API.Client
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
         /// </summary>
-        private List<IPersistenceObject> _objects = new List<IPersistenceObject>();
+        private ContextCache _objects = new ContextCache();
 
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID
         /// </summary>
         private int _newIDCounter = Helper.INVALIDID;
-
-        /// <summary>
-        /// Returns the Root Type of a given System.Type.
-        /// </summary>
-        /// <param name="t">Type</param>
-        /// <returns>Root Type of the given Type</returns>
-        private Type GetRootType(Type t)
-        {
-            t = t.ToImplementationType();
-            // TODO: Make this better - asking for BaseTypes is not elegant
-            while (t != null && t.BaseType != typeof(BaseClientDataObject) && t.BaseType != typeof(BaseClientCollectionEntry))
-            {
-                t = t.BaseType;
-            }
-
-            return t;
-        }
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -108,8 +92,7 @@ namespace Kistl.API.Client
         public IPersistenceObject ContainsObject(Type type, int ID)
         {
             if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
-            Type rootType = GetRootType(type);
-            return _objects.SingleOrDefault(o => GetRootType(o.GetType()) == rootType && o.ID == ID);
+            return _objects.Lookup(type, ID);
         }
 
         /// <summary>
@@ -394,7 +377,7 @@ namespace Kistl.API.Client
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public T Find<T>(int ID)
-            where T: IDataObject
+            where T : IDataObject
         {
             CheckDisposed();
             return GetQuery<T>().Single(o => o.ID == ID);
@@ -421,4 +404,136 @@ namespace Kistl.API.Client
         }
 
     }
+
+    /// <summary>
+    /// Store IPersistenceObjects ordered by (root-)Type and ID for fast access within the KistlContextImpl
+    /// </summary>
+    internal class ContextCache : ICollection<IPersistenceObject>
+    {
+
+        private IDictionary<Type, IDictionary<int, IPersistenceObject>> _objects = new Dictionary<Type, IDictionary<int, IPersistenceObject>>();
+
+        /// <summary>
+        /// Returns the root implementation Type of a given IPersistenceObject.
+        /// This corresponds to the ID namespace of the object
+        /// </summary>
+        /// <param name="obj">IPersistenceObject to inspect</param>
+        /// <returns>Root Type of the given Type</returns>
+        private static Type GetRootImplType(IPersistenceObject obj)
+        {
+            return GetRootImplType(obj.GetType());
+        }
+
+        /// <summary>
+        /// Returns the root implementation Type of a given System.Type.
+        /// This corresponds to the ID namespace of the object
+        /// </summary>
+        /// <param name="t">Type to inspect</param>
+        /// <returns>Root Type of the given Type</returns>
+        private static Type GetRootImplType(Type t)
+        {
+            Type result = t.ToImplementationType();
+            // TODO: Make this better - asking for BaseTypes is not elegant
+            while (result != null && result.BaseType != typeof(BaseClientDataObject) && result.BaseType != typeof(BaseClientCollectionEntry))
+            {
+                result = result.BaseType;
+            }
+
+            return result;
+        }
+
+        public IPersistenceObject Lookup(Type t, int id)
+        {
+            Type rootT = GetRootImplType(t);
+
+            if (!_objects.ContainsKey(rootT))
+                return null;
+
+            IDictionary<int, IPersistenceObject> typeList = _objects[rootT];
+            if (!typeList.ContainsKey(id))
+                return null;
+
+            return typeList[id];
+        }
+
+        #region ICollection<IPersistenceObject> Members
+
+        public void Add(IPersistenceObject item)
+        {
+            Type rootT = GetRootImplType(item);
+
+            // create per-Type dictionary on-demand
+            if (!_objects.ContainsKey(rootT))
+                _objects[rootT] = new Dictionary<int, IPersistenceObject>();
+
+            _objects[rootT][item.ID] = item;
+        }
+
+        public void Clear()
+        {
+            _objects.Clear();
+        }
+
+        public bool Contains(IPersistenceObject item)
+        {
+            Type rootT = GetRootImplType(item);
+            return _objects.ContainsKey(rootT) && _objects[rootT].ContainsKey(item.ID);
+        }
+
+        public void CopyTo(IPersistenceObject[] array, int arrayIndex)
+        {
+            foreach (IPersistenceObject item in this)
+            {
+                array[arrayIndex++] = item;
+            }
+        }
+
+        public int Count
+        {
+            get { return _objects.Values.Sum(list => list.Count); }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public bool Remove(IPersistenceObject item)
+        {
+            if (Contains(item))
+                // should always return true
+                return _objects[GetRootImplType(item)].Remove(item.ID);
+            else
+                return false;
+        }
+
+        #endregion
+
+        #region IEnumerable<IPersistenceObject> Members
+
+        public IEnumerator<IPersistenceObject> GetEnumerator()
+        {
+            foreach (var typeList in _objects.Values)
+            {
+                foreach (IPersistenceObject obj in typeList.Values)
+                {
+                    yield return obj;
+                }
+            }
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            // reuse strongly typed enumerator
+            return GetEnumerator();
+        }
+
+        #endregion
+
+    }
+
 }
