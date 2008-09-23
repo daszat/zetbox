@@ -63,11 +63,6 @@ namespace Kistl.GUI.DB
                     "top level visual to display a object"
                     );
 
-                Visual methodResults = ctx.CreateVisual(
-                    VisualType.PropertyGroup,
-                    "list of calculated results"
-                    );
-
                 IList<BaseProperty> properties = GetAllProperties(objectType);
 
                 // Copy visuals to tree (base properties first)
@@ -80,6 +75,12 @@ namespace Kistl.GUI.DB
                 #region walk methods for Menu Actions and "calculated Properties"
 
                 ObjectClass @class = ClientHelper.ObjectClasses[objectType];
+                
+                Visual methodResults = ctx.CreateVisual(
+                    VisualType.PropertyGroup,
+                    "list of calculated results"
+                    );
+
                 foreach (Method m in @class.GetInheritedMethods().Concat(@class.Methods))
                 {
 
@@ -92,20 +93,15 @@ namespace Kistl.GUI.DB
                         }
                         else
                         {
-                            // TODO: result.VisualTree.Menu.Children.Add(ctx.CreateDefaultVisual(m));
+                            result.VisualTree.MenuTree.Add(ctx.CreateDefaultVisual(m));
                         }
                     }
                 }
+                
+                result.VisualTree.Children.Add(methodResults);
 
                 #endregion
 
-                foreach (Method m in @class.Methods)
-                {
-                    Visual v = ctx.CreateDefaultVisual(m);
-                    if (v != null)
-                        methodResults.Children.Add(v);
-                }
-                @class = @class.BaseObjectClass;
             }
 
             // ctx.SubmitChanges();
