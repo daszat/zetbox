@@ -87,15 +87,15 @@ namespace Kistl.GUI.DB
                     Visual v = ctx.CreateDefaultVisual(m);
                     if (v != null)
                     {
-                        if (m.GetReturnParameter() != null)
+                        if (m.GetReturnParameter() == null)
                         {
-                            // Display result
-                            methodResults.Children.Add(v);
+                            // Add Action to local menu
+                            result.Menu.Add(v);
                         }
                         else
                         {
-                            // Add Action to local menu
-                            result.Menu.Add(ctx.CreateDefaultVisual(m));
+                            // Display result
+                            methodResults.Children.Add(v);
                         }
                     }
                 }
@@ -124,6 +124,7 @@ namespace Kistl.GUI.DB
                 }
                 @class = @class.BaseObjectClass;
             }
+            result.Reverse();
             return result;
         }
 

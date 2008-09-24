@@ -22,6 +22,10 @@ namespace Kistl.GUI
     {
         protected Method Method { get { return Preferences.Method; } }
 
+        /// <summary>
+        /// Calls ExecuteMethodImpl to call the configured Method.
+        /// </summary>
+        /// <returns></returns>
         protected virtual TYPE ExecuteMethod()
         {
             return (TYPE)ExecuteMethodImpl();

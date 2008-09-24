@@ -422,7 +422,7 @@
     <NavigationProperty Name="Properties__Implementation__" Relationship="Model.FK_BaseProperty_DataType_ObjectClass" FromRole="A_DataType" ToRole="B_BaseProperty" />
     <NavigationProperty Name="Methods__Implementation__" Relationship="Model.FK_Method_DataType_ObjectClass" FromRole="A_DataType" ToRole="B_Method" />
     <NavigationProperty Name="DefaultIcon__Implementation__" Relationship="Model.FK_DataType_Icon_DefaultIcon" FromRole="B_DataType" ToRole="A_Icon" />
-    <NavigationProperty Name="MethodIvokations__Implementation__" Relationship="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass" FromRole="A_DataType" ToRole="B_MethodInvocation" />
+    <NavigationProperty Name="MethodInvocations__Implementation__" Relationship="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass" FromRole="A_DataType" ToRole="B_MethodInvocation" />
   </EntityType>
   <EntityType Name="BaseParameter">
     <Key>

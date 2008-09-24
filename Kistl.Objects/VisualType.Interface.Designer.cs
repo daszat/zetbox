@@ -74,5 +74,11 @@ namespace Kistl.App.GUI
         
         /// Renderer
         Renderer = 0,
+        
+        /// MenuGroup
+        MenuGroup = 18,
+        
+        /// MenuItem
+        MenuItem = 17,
     }
 }

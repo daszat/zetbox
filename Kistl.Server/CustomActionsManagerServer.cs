@@ -83,7 +83,7 @@ namespace Kistl.Server
                             }
                             foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
                             {
-                                foreach (MethodInvocation mi in objClass.MethodIvokations)
+                                foreach (MethodInvocation mi in objClass.MethodInvocations)
                                 {
                                     try
                                     {

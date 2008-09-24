@@ -101,13 +101,14 @@ namespace Kistl.GUI.DB
 
             BaseParameter bp = method.GetReturnParameter();
 
-            // ignore methods without return value for now
-            if (bp == null)
-                return null;
-
             VisualType? vt = null;
 
-            if (bp is StringParameter)
+            if (bp == null)
+            {
+                // Method without return parameter becomes MenuItem
+                vt = VisualType.MenuItem;
+            }
+            else if (bp is StringParameter)
             {
                 vt = bp.IsList ? VisualType.StringList : VisualType.String;
             }
@@ -133,7 +134,7 @@ namespace Kistl.GUI.DB
             }
             else if (bp is CLRObjectParameter)
             {
-                return null; // TODO: CreateVisual(method, bp.IsList ? VisualType. : VisualType.);
+                return null; // TODO: CreateVisual(method, bp.IsList ? VisualType.??? : VisualType.??? );
             }
 
             if (vt.HasValue)

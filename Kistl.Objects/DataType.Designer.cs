@@ -52,7 +52,7 @@ namespace Kistl.App.Base
             set;
         }
         
-        ICollection<Kistl.App.Base.MethodInvocation> MethodIvokations
+        ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get;
         }

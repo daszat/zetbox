@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_DefaultIcon = null;
         
-        private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodIvokations;
+        private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvocations;
         
         public DataType__Implementation__()
         {
@@ -161,22 +161,22 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodIvokations
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get
             {
-                if (_MethodIvokations == null)
+                if (_MethodInvocations == null)
                 {
                     List<Kistl.App.Base.MethodInvocation> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodIvokations");
+                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvocations");
                     else
                         serverList = new List<Kistl.App.Base.MethodInvocation>();
 
-                    _MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
+                    _MethodInvocations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
                          "InvokeOnObjectClass", this, serverList);
                 }
-                return _MethodIvokations;
+                return _MethodInvocations;
             }
         }
         
@@ -222,7 +222,7 @@ namespace Kistl.App.Base
             if(this._Properties != null) this._Properties.ApplyChanges(((DataType__Implementation__)obj)._Properties); else ((DataType__Implementation__)obj)._Properties = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("Properties");
             if(this._Methods != null) this._Methods.ApplyChanges(((DataType__Implementation__)obj)._Methods); else ((DataType__Implementation__)obj)._Methods = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("Methods");
             ((DataType__Implementation__)obj).fk_DefaultIcon = this.fk_DefaultIcon;
-            if(this._MethodIvokations != null) this._MethodIvokations.ApplyChanges(((DataType__Implementation__)obj)._MethodIvokations); else ((DataType__Implementation__)obj)._MethodIvokations = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("MethodIvokations");
+            if(this._MethodInvocations != null) this._MethodInvocations.ApplyChanges(((DataType__Implementation__)obj)._MethodInvocations); else ((DataType__Implementation__)obj)._MethodInvocations = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("MethodInvocations");
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -230,7 +230,7 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
             if(_Properties != null) _Properties.AttachToContext(ctx);
             if(_Methods != null) _Methods.AttachToContext(ctx);
-            if(_MethodIvokations != null) _MethodIvokations.AttachToContext(ctx);
+            if(_MethodInvocations != null) _MethodInvocations.AttachToContext(ctx);
         }
         
         public virtual string GetDataTypeString()
@@ -269,7 +269,7 @@ namespace Kistl.App.Base
             this._Properties = new BackReferenceCollection<Kistl.App.Base.BaseProperty>("ObjectClass", this); BinarySerializer.FromBinary(this._Properties, sr);
             this._Methods = new BackReferenceCollection<Kistl.App.Base.Method>("ObjectClass", this); BinarySerializer.FromBinary(this._Methods, sr);
             BinarySerializer.FromBinary(out this._fk_DefaultIcon, sr);
-            this._MethodIvokations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>("InvokeOnObjectClass", this); BinarySerializer.FromBinary(this._MethodIvokations, sr);
+            this._MethodInvocations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>("InvokeOnObjectClass", this); BinarySerializer.FromBinary(this._MethodInvocations, sr);
         }
         
         public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);

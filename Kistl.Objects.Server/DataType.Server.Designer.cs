@@ -44,7 +44,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_DefaultIcon = null;
         
-        private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> MethodIvokationsWrapper;
+        private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocationsWrapper;
         
         public DataType__Implementation__()
         {
@@ -216,17 +216,17 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodIvokations
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get
             {
-                if (MethodIvokationsWrapper == null) MethodIvokationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(MethodIvokations__Implementation__);
-                return MethodIvokationsWrapper;
+                if (MethodInvocationsWrapper == null) MethodInvocationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(MethodInvocations__Implementation__);
+                return MethodInvocationsWrapper;
             }
         }
         
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "B_MethodInvocation")]
-        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodIvokations__Implementation__
+        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
         {
             get
             {
@@ -303,7 +303,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.Properties.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this.Methods.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this.fk_DefaultIcon, sw);
-            BinarySerializer.ToBinary(this.MethodIvokations.Cast<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this.MethodInvocations.Cast<IDataObject>(), sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
