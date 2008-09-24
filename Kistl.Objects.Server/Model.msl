@@ -411,9 +411,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Visual_MenuTreeCollectionEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual_MenuTreeCollectionEntry)">
-        <MappingFragment StoreEntitySet="Visual_MenuTreeCollectionEntry">
+    <EntitySetMapping Name="Visual_ContextMenuCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual_ContextMenuCollectionEntry)">
+        <MappingFragment StoreEntitySet="Visual_ContextMenuCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Template_MenuCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Template_MenuCollectionEntry)">
+        <MappingFragment StoreEntitySet="Template_MenuCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -787,14 +794,23 @@
       </EndProperty>
       <Condition ColumnName="fk_DisplayedTypeAssembly" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree" TypeName="Model.FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree" StoreEntitySet="Visual_MenuTreeCollectionEntry">
+    <AssociationSetMapping Name="FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu" TypeName="Model.FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu" StoreEntitySet="Visual_ContextMenuCollectionEntry">
       <EndProperty Name="A_Visual">
-        <ScalarProperty Name="ID" ColumnName="fk_MenuTree" />
+        <ScalarProperty Name="ID" ColumnName="fk_ContextMenu" />
       </EndProperty>
-      <EndProperty Name="B_Visual_MenuTreeCollectionEntry">
+      <EndProperty Name="B_Visual_ContextMenuCollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
-      <Condition ColumnName="fk_MenuTree" IsNull="false" />
+      <Condition ColumnName="fk_ContextMenu" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Template_MenuCollectionEntry_Visual_Menu" TypeName="Model.FK_Template_MenuCollectionEntry_Visual_Menu" StoreEntitySet="Template_MenuCollectionEntry">
+      <EndProperty Name="A_Visual">
+        <ScalarProperty Name="ID" ColumnName="fk_Menu" />
+      </EndProperty>
+      <EndProperty Name="B_Template_MenuCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Menu" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
@@ -841,14 +857,23 @@
       </EndProperty>
       <Condition ColumnName="fk_Visual" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent" TypeName="Model.FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent" StoreEntitySet="Visual_MenuTreeCollectionEntry">
+    <AssociationSetMapping Name="FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent" TypeName="Model.FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent" StoreEntitySet="Visual_ContextMenuCollectionEntry">
       <EndProperty Name="A_Visual">
         <ScalarProperty Name="ID" ColumnName="fk_Visual" />
       </EndProperty>
-      <EndProperty Name="B_Visual_MenuTreeCollectionEntry">
+      <EndProperty Name="B_Visual_ContextMenuCollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Visual" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Template_MenuCollectionEntry_Template_fk_Parent" TypeName="Model.FK_Template_MenuCollectionEntry_Template_fk_Parent" StoreEntitySet="Template_MenuCollectionEntry">
+      <EndProperty Name="A_Template">
+        <ScalarProperty Name="ID" ColumnName="fk_Template" />
+      </EndProperty>
+      <EndProperty Name="B_Template_MenuCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Template" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -56,7 +56,8 @@
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
     <EntitySet Name="ObjectClass_ImplementsInterfacesCollectionEntry" EntityType="Model.Store.ObjectClass_ImplementsInterfacesCollectionEntry" Table="ObjectClasses_ImplementsInterfacesCollection" />
     <EntitySet Name="Visual_ChildrenCollectionEntry" EntityType="Model.Store.Visual_ChildrenCollectionEntry" Table="Visuals_ChildrenCollection" />
-    <EntitySet Name="Visual_MenuTreeCollectionEntry" EntityType="Model.Store.Visual_MenuTreeCollectionEntry" Table="Visuals_MenuTreeCollection" />
+    <EntitySet Name="Visual_ContextMenuCollectionEntry" EntityType="Model.Store.Visual_ContextMenuCollectionEntry" Table="Visuals_ContextMenuCollection" />
+    <EntitySet Name="Template_MenuCollectionEntry" EntityType="Model.Store.Template_MenuCollectionEntry" Table="Templates_MenuCollection" />
     <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
@@ -317,9 +318,13 @@
       <End Role="A_Assembly" EntitySet="Assembly" />
       <End Role="B_Template" EntitySet="Template" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree" Association="Model.Store.FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree">
+    <AssociationSet Name="FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu" Association="Model.Store.FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu">
       <End Role="A_Visual" EntitySet="Visual" />
-      <End Role="B_Visual_MenuTreeCollectionEntry" EntitySet="Visual_MenuTreeCollectionEntry" />
+      <End Role="B_Visual_ContextMenuCollectionEntry" EntitySet="Visual_ContextMenuCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Template_MenuCollectionEntry_Visual_Menu" Association="Model.Store.FK_Template_MenuCollectionEntry_Visual_Menu">
+      <End Role="A_Visual" EntitySet="Visual" />
+      <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -341,9 +346,13 @@
       <End Role="A_Visual" EntitySet="Visual" />
       <End Role="B_Visual_ChildrenCollectionEntry" EntitySet="Visual_ChildrenCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent" Association="Model.Store.FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent">
+    <AssociationSet Name="FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent" Association="Model.Store.FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent">
       <End Role="A_Visual" EntitySet="Visual" />
-      <End Role="B_Visual_MenuTreeCollectionEntry" EntitySet="Visual_MenuTreeCollectionEntry" />
+      <End Role="B_Visual_ContextMenuCollectionEntry" EntitySet="Visual_ContextMenuCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Template_MenuCollectionEntry_Template_fk_Parent" Association="Model.Store.FK_Template_MenuCollectionEntry_Template_fk_Parent">
+      <End Role="A_Template" EntitySet="Template" />
+      <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -791,13 +800,21 @@
     <Property Name="fk_Visual" Type="int" Nullable="true" />
     <Property Name="fk_Children" Type="int" Nullable="true" />
   </EntityType>
-  <EntityType Name="Visual_MenuTreeCollectionEntry">
+  <EntityType Name="Visual_ContextMenuCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Visual" Type="int" Nullable="true" />
-    <Property Name="fk_MenuTree" Type="int" Nullable="true" />
+    <Property Name="fk_ContextMenu" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Template_MenuCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Template" Type="int" Nullable="true" />
+    <Property Name="fk_Menu" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_ObjectClass_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
@@ -1579,15 +1596,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree">
+  <Association Name="FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu">
     <End Role="A_Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="B_Visual_MenuTreeCollectionEntry" Type="Model.Store.Visual_MenuTreeCollectionEntry" Multiplicity="*" />
+    <End Role="B_Visual_ContextMenuCollectionEntry" Type="Model.Store.Visual_ContextMenuCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="A_Visual">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_Visual_MenuTreeCollectionEntry">
-        <PropertyRef Name="fk_MenuTree" />
+      <Dependent Role="B_Visual_ContextMenuCollectionEntry">
+        <PropertyRef Name="fk_ContextMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Template_MenuCollectionEntry_Visual_Menu">
+    <End Role="A_Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
+    <End Role="B_Template_MenuCollectionEntry" Type="Model.Store.Template_MenuCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Visual">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Template_MenuCollectionEntry">
+        <PropertyRef Name="fk_Menu" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1651,15 +1680,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent">
+  <Association Name="FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent">
     <End Role="A_Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="B_Visual_MenuTreeCollectionEntry" Type="Model.Store.Visual_MenuTreeCollectionEntry" Multiplicity="*" />
+    <End Role="B_Visual_ContextMenuCollectionEntry" Type="Model.Store.Visual_ContextMenuCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="A_Visual">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_Visual_MenuTreeCollectionEntry">
+      <Dependent Role="B_Visual_ContextMenuCollectionEntry">
         <PropertyRef Name="fk_Visual" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Template_MenuCollectionEntry_Template_fk_Parent">
+    <End Role="A_Template" Type="Model.Store.Template" Multiplicity="0..1" />
+    <End Role="B_Template_MenuCollectionEntry" Type="Model.Store.Template_MenuCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Template">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Template_MenuCollectionEntry">
+        <PropertyRef Name="fk_Template" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

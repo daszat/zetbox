@@ -53,7 +53,7 @@ namespace Kistl.App.GUI
             set;
         }
         
-        IList<Kistl.App.GUI.Visual> MenuTree
+        IList<Kistl.App.GUI.Visual> ContextMenu
         {
             get;
         }

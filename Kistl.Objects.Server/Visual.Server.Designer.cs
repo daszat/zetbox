@@ -11,9 +11,9 @@
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_Children", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual__Implementation__), "B_Visual_ChildrenCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ChildrenCollectionEntry__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_BaseProperty_Property", "A_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BaseProperty__Implementation__), "B_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method__Implementation__), "B_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual__Implementation__))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual__Implementation__), "B_Visual_MenuTreeCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_MenuTreeCollectionEntry__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual__Implementation__), "B_Visual_ContextMenuCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ContextMenuCollectionEntry__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ChildrenCollectionEntry_Visual_fk_Parent", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual__Implementation__), "B_Visual_ChildrenCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ChildrenCollectionEntry__Implementation__))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual__Implementation__), "B_Visual_MenuTreeCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_MenuTreeCollectionEntry__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent", "A_Visual", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.Visual__Implementation__), "B_Visual_ContextMenuCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_ContextMenuCollectionEntry__Implementation__))]
 
 namespace Kistl.App.GUI
 {
@@ -48,7 +48,7 @@ namespace Kistl.App.GUI
         
         private System.Nullable<int> _fk_Method = null;
         
-        private EntityCollectionEntryValueWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_MenuTreeCollectionEntry__Implementation__> MenuTreeWrapper;
+        private EntityCollectionEntryValueWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenuCollectionEntry__Implementation__> ContextMenuWrapper;
         
         public Visual__Implementation__()
         {
@@ -227,21 +227,21 @@ namespace Kistl.App.GUI
             }
         }
         
-        public IList<Kistl.App.GUI.Visual> MenuTree
+        public IList<Kistl.App.GUI.Visual> ContextMenu
         {
             get
             {
-                if (MenuTreeWrapper == null) MenuTreeWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_MenuTreeCollectionEntry__Implementation__>(this, MenuTree__Implementation__);
-                return MenuTreeWrapper;
+                if (ContextMenuWrapper == null) ContextMenuWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenuCollectionEntry__Implementation__>(this, ContextMenu__Implementation__);
+                return ContextMenuWrapper;
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent", "B_Visual_MenuTreeCollectionEntry")]
-        public EntityCollection<Kistl.App.GUI.Visual_MenuTreeCollectionEntry__Implementation__> MenuTree__Implementation__
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent", "B_Visual_ContextMenuCollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.Visual_ContextMenuCollectionEntry__Implementation__> ContextMenu__Implementation__
         {
             get
             {
-                EntityCollection<Visual_MenuTreeCollectionEntry__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Visual_MenuTreeCollectionEntry__Implementation__>("Model.FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent", "B_Visual_MenuTreeCollectionEntry");
+                EntityCollection<Visual_ContextMenuCollectionEntry__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Visual_ContextMenuCollectionEntry__Implementation__>("Model.FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent", "B_Visual_ContextMenuCollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
             }
@@ -283,7 +283,7 @@ namespace Kistl.App.GUI
             /// Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly
             Children__Implementation__.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
             /// Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly
-            MenuTree__Implementation__.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
+            ContextMenu__Implementation__.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -294,7 +294,7 @@ namespace Kistl.App.GUI
             BinarySerializer.ToBinary(this.Children__Implementation__, sw);
             BinarySerializer.ToBinary(this.fk_Property, sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
-            BinarySerializer.ToBinary(this.MenuTree__Implementation__, sw);
+            BinarySerializer.ToBinary(this.ContextMenu__Implementation__, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -305,7 +305,7 @@ namespace Kistl.App.GUI
             BinarySerializer.FromBinaryCollectionEntries(this.Children__Implementation__, sr);
             BinarySerializer.FromBinary(out this._fk_Property, sr);
             BinarySerializer.FromBinary(out this._fk_Method, sr);
-            BinarySerializer.FromBinaryCollectionEntries(this.MenuTree__Implementation__, sr);
+            BinarySerializer.FromBinaryCollectionEntries(this.ContextMenu__Implementation__, sr);
         }
     }
     
@@ -439,8 +439,8 @@ namespace Kistl.App.GUI
         }
     }
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual_MenuTreeCollectionEntry")]
-    public class Visual_MenuTreeCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual_ContextMenuCollectionEntry")]
+    public class Visual_ContextMenuCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
         
         private int _ID;
@@ -520,35 +520,35 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree", "A_Visual")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu", "A_Visual")]
         public Kistl.App.GUI.Visual__Implementation__ ValueImpl
         {
             get
             {
-                EntityReference<Kistl.App.GUI.Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>("Model.FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree", "A_Visual");
+                EntityReference<Kistl.App.GUI.Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>("Model.FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu", "A_Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Kistl.App.GUI.Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>("Model.FK_Visual_MenuTreeCollectionEntry_Visual_MenuTree", "A_Visual");
+                EntityReference<Kistl.App.GUI.Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>("Model.FK_Visual_ContextMenuCollectionEntry_Visual_ContextMenu", "A_Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent", "A_Visual")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent", "A_Visual")]
         public Kistl.App.GUI.Visual__Implementation__ ParentImpl
         {
             get
             {
-                EntityReference<Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Visual__Implementation__>("Model.FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent", "A_Visual");
+                EntityReference<Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Visual__Implementation__>("Model.FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent", "A_Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Visual__Implementation__>("Model.FK_Visual_MenuTreeCollectionEntry_Visual_fk_Parent", "A_Visual");
+                EntityReference<Visual__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Visual__Implementation__>("Model.FK_Visual_ContextMenuCollectionEntry_Visual_fk_Parent", "A_Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = (Visual__Implementation__)value;
             }

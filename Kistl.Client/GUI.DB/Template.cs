@@ -89,11 +89,13 @@ namespace Kistl.GUI.DB
                     {
                         if (m.GetReturnParameter() != null)
                         {
+                            // Display result
                             methodResults.Children.Add(v);
                         }
                         else
                         {
-                            result.VisualTree.MenuTree.Add(ctx.CreateDefaultVisual(m));
+                            // Add Action to local menu
+                            result.Menu.Add(ctx.CreateDefaultVisual(m));
                         }
                     }
                 }

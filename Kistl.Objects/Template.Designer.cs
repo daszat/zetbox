@@ -47,5 +47,10 @@ namespace Kistl.App.GUI
             get;
             set;
         }
+        
+        IList<Kistl.App.GUI.Visual> Menu
+        {
+            get;
+        }
     }
 }

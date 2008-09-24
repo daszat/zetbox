@@ -35,12 +35,12 @@ namespace Kistl.App.GUI
         
         private System.Nullable<int> _fk_Method = null;
         
-        private ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_MenuTreeCollectionEntry__Implementation__> _MenuTree;
+        private ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenuCollectionEntry__Implementation__> _ContextMenu;
         
         public Visual__Implementation__()
         {
             _Children = new ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ChildrenCollectionEntry__Implementation__>(this, "Children");
-            _MenuTree = new ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_MenuTreeCollectionEntry__Implementation__>(this, "MenuTree");
+            _ContextMenu = new ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenuCollectionEntry__Implementation__>(this, "ContextMenu");
         }
         
         public string Description
@@ -147,11 +147,11 @@ namespace Kistl.App.GUI
             }
         }
         
-        public IList<Kistl.App.GUI.Visual> MenuTree
+        public IList<Kistl.App.GUI.Visual> ContextMenu
         {
             get
             {
-                return _MenuTree;
+                return _ContextMenu;
             }
         }
         
@@ -193,14 +193,14 @@ namespace Kistl.App.GUI
             this._Children.ApplyChanges(((Visual__Implementation__)obj)._Children);
             ((Visual__Implementation__)obj).fk_Property = this.fk_Property;
             ((Visual__Implementation__)obj).fk_Method = this.fk_Method;
-            this._MenuTree.ApplyChanges(((Visual__Implementation__)obj)._MenuTree);
+            this._ContextMenu.ApplyChanges(((Visual__Implementation__)obj)._ContextMenu);
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
             _Children.AttachToContext(ctx);
-            _MenuTree.AttachToContext(ctx);
+            _ContextMenu.AttachToContext(ctx);
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -211,7 +211,7 @@ namespace Kistl.App.GUI
             this._Children.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Property, sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
-            this._MenuTree.ToStream(sw);
+            this._ContextMenu.ToStream(sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -222,7 +222,7 @@ namespace Kistl.App.GUI
             this._Children.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Property, sr);
             BinarySerializer.FromBinary(out this._fk_Method, sr);
-            this._MenuTree.FromStream(sr);
+            this._ContextMenu.FromStream(sr);
         }
     }
     
@@ -310,7 +310,7 @@ namespace Kistl.App.GUI
         }
     }
     
-    public class Visual_MenuTreeCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
+    public class Visual_ContextMenuCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
         
         private int _fk_Value;
@@ -389,8 +389,8 @@ namespace Kistl.App.GUI
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
         {
             base.ApplyChanges(obj);
-            ((Visual_MenuTreeCollectionEntry__Implementation__)obj)._fk_Value = this.fk_Value;
-            ((Visual_MenuTreeCollectionEntry__Implementation__)obj)._fk_Parent = this.fk_Parent;
+            ((Visual_ContextMenuCollectionEntry__Implementation__)obj)._fk_Value = this.fk_Value;
+            ((Visual_ContextMenuCollectionEntry__Implementation__)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }

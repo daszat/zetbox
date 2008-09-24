@@ -33,8 +33,11 @@ namespace Kistl.App.GUI
         
         private System.Nullable<int> _fk_DisplayedTypeAssembly = null;
         
+        private ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Template, Template_MenuCollectionEntry__Implementation__> _Menu;
+        
         public Template__Implementation__()
         {
+            _Menu = new ListPropertyCollection<Kistl.App.GUI.Visual, Kistl.App.GUI.Template, Template_MenuCollectionEntry__Implementation__>(this, "Menu");
         }
         
         public string DisplayName
@@ -133,6 +136,14 @@ namespace Kistl.App.GUI
             }
         }
         
+        public IList<Kistl.App.GUI.Visual> Menu
+        {
+            get
+            {
+                return _Menu;
+            }
+        }
+        
         public event ToStringHandler<Template> OnToString_Template;
         
         public event ObjectEventHandler<Template> OnPreSave_Template;
@@ -170,11 +181,13 @@ namespace Kistl.App.GUI
             ((Template__Implementation__)obj).fk_VisualTree = this.fk_VisualTree;
             ((Template__Implementation__)obj).DisplayedTypeFullName = this.DisplayedTypeFullName;
             ((Template__Implementation__)obj).fk_DisplayedTypeAssembly = this.fk_DisplayedTypeAssembly;
+            this._Menu.ApplyChanges(((Template__Implementation__)obj)._Menu);
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
+            _Menu.AttachToContext(ctx);
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
@@ -184,6 +197,7 @@ namespace Kistl.App.GUI
             BinarySerializer.ToBinary(this.fk_VisualTree, sw);
             BinarySerializer.ToBinary(this._DisplayedTypeFullName, sw);
             BinarySerializer.ToBinary(this.fk_DisplayedTypeAssembly, sw);
+            this._Menu.ToStream(sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -193,6 +207,91 @@ namespace Kistl.App.GUI
             BinarySerializer.FromBinary(out this._fk_VisualTree, sr);
             BinarySerializer.FromBinary(out this._DisplayedTypeFullName, sr);
             BinarySerializer.FromBinary(out this._fk_DisplayedTypeAssembly, sr);
+            this._Menu.FromStream(sr);
+        }
+    }
+    
+    public class Template_MenuCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Template>
+    {
+        
+        private int _fk_Value;
+        
+        private int _fk_Parent;
+        
+        [XmlIgnore()]
+        public Kistl.App.GUI.Visual Value
+        {
+            get
+            {
+                return Context.GetQuery<Kistl.App.GUI.Visual>().Single(o => o.ID == fk_Value);
+            }
+            set
+            {
+                fk_Value = value.ID;;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.GUI.Template Parent
+        {
+            get
+            {
+                return Context.GetQuery<Template>().Single(o => o.ID == fk_Parent);
+            }
+            set
+            {
+                _fk_Parent = value.ID;
+            }
+        }
+        
+        public int fk_Value
+        {
+            get
+            {
+                return _fk_Value;
+            }
+            set
+            {
+                if(_fk_Value != value)
+                {
+                    base.NotifyPropertyChanging("Value");
+                    _fk_Value = value;
+                    base.NotifyPropertyChanged("Value");
+                };
+            }
+        }
+        
+        public int fk_Parent
+        {
+            get
+            {
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
+        }
+        
+        public override void FromStream(System.IO.BinaryReader sr)
+        {
+            base.FromStream(sr);
+            BinarySerializer.FromBinary(out this._fk_Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+        }
+        
+        public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
+        {
+            base.ApplyChanges(obj);
+            ((Template_MenuCollectionEntry__Implementation__)obj)._fk_Value = this.fk_Value;
+            ((Template_MenuCollectionEntry__Implementation__)obj)._fk_Parent = this.fk_Parent;
         }
     }
 }
