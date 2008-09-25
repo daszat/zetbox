@@ -34,6 +34,8 @@ namespace Kistl.GUI
         IKistlContext Context { get; set; }
     }
 
+    #region Value Interfaces
+
     /// <summary>
     /// A control that displays a specific value
     /// </summary>
@@ -90,6 +92,10 @@ namespace Kistl.GUI
         event EventHandler<GenericEventArgs<IList<TYPE>>> UserActivatedSelection;
     }
 
+    #endregion
+
+    #region Reference Interfaces
+
     /// <summary>
     /// a control that displays a reference to a IDataObject.
     /// </summary>
@@ -140,6 +146,10 @@ namespace Kistl.GUI
         /// add/delete Events instead.
         event EventHandler UserAddRequest;
     }
+
+    #endregion
+
+    #region Other Interfaces
 
     /// <summary>
     /// The "master" control handling a complete Object
@@ -193,13 +203,14 @@ namespace Kistl.GUI
         /// </summary>
         event EventHandler<GenericEventArgs<IDataObject>> UserDeleteObjectRequest;
 
-
     }
 
     public interface IActionControl: IBasicControl
     {
         event EventHandler ActionActivatedEvent;
     }
+
+    #endregion
 
     /// <summary>
     /// Possible sizes for controls. These are measured realtively 
