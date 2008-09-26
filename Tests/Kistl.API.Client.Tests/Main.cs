@@ -27,6 +27,9 @@ namespace Kistl.API.Client.Tests
             KistlContextTests test = new API.Client.Tests.KistlContextTests();
 
             test.SetUp();
+            test.Find_ObjectType();
+
+            test.SetUp();
             test.Delete();
 
             test.SetUp();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
+using System.Linq.Expressions;
 
 namespace Kistl.API.Client.Tests
 {
@@ -39,7 +40,15 @@ namespace Kistl.API.Client.Tests
 
             if (filter != null)
             {
-                result = result.AsQueryable<TestObjClass>().AddFilter(filter).ToList();
+                filter = filter.StripQuotes();
+                if (filter is LambdaExpression && ((LambdaExpression)filter).Parameters[0].Type == typeof(IDataObject))
+                {
+                    return result.Cast<IDataObject>().AsQueryable<IDataObject>().AddFilter(filter).ToList();
+                }
+                else
+                {
+                    result = result.AsQueryable<TestObjClass>().AddFilter(filter).ToList();
+                }
             }
             return result.Cast<IDataObject>();
         }
