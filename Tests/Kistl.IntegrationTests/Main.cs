@@ -14,10 +14,10 @@ namespace Kistl.IntegrationTests
 
             //InheritanceTests();
             //GetListOfTests();
-            //GetListTests();
+            GetListTests();
             //ListPropetiesTests();
             //ObjectTests();
-            StructTests();
+            //StructTests();
 
             setup.TearDown();
         }
@@ -52,13 +52,35 @@ namespace Kistl.IntegrationTests
             test.GetListWithOrderBy();
 
             test.SetUp();
+            test.GetListWithOrderByAndWhere();
+
+            test.SetUp();
+            test.GetListWithOrderByThenOrderBy();
+
+            test.SetUp();
+            test.GetListWithTake();
+
+            test.SetUp();
+            test.GetListWithTakeAndWhere();
+
+            test.SetUp();
             test.GetListWithPropertyAccessor();
+
+            test.SetUp();
+            test.GetListWithProjection();
 
             test.SetUp();
             test.GetListWithSingle();
 
             test.SetUp();
-            test.GetListWithProjection();
+            test.GetListSingle();
+
+            test.SetUp();
+            test.GetListWithFirst();
+
+            test.SetUp();
+            test.GetListFirst();
+
         }
 
         private static void ListPropetiesTests()

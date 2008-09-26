@@ -92,11 +92,21 @@ namespace Kistl.IntegrationTests
 
 
         [Test]
-        public void GetListWithTop10()
+        public void GetListWithTake()
         {
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Take(10).ToList();
+                Assert.That(list.Count, Is.EqualTo(10));
+            }
+        }
+
+        [Test]
+        public void GetListWithTakeAndWhere()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").Take(10).ToList();
                 Assert.That(list.Count, Is.EqualTo(10));
             }
         }
@@ -121,7 +131,47 @@ namespace Kistl.IntegrationTests
                 }
             }
         }
+        [Test]
+        public void GetListWithOrderByAndWhere()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").OrderBy(o => o.ClassName).ToList();
+                Assert.That(list.Count, Is.GreaterThan(0));
+                List<Kistl.App.Base.ObjectClass> result = list.ToList();
+                List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.ClassName).ToList();
 
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i].ID != sorted[i].ID)
+                    {
+                        Assert.Fail("List was not sorted");
+                        break;
+                    }
+                }
+            }
+        }
+
+        [Test]
+        public void GetListWithOrderByThenOrderBy()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Module.ModuleName).ThenBy(o => o.ClassName).ToList();
+                Assert.That(list.Count, Is.GreaterThan(0));
+                List<Kistl.App.Base.ObjectClass> result = list.ToList();
+                List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Module.ModuleName).ThenBy(o => o.ClassName).ToList();
+
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i].ID != sorted[i].ID)
+                    {
+                        Assert.Fail("List was not sorted");
+                        break;
+                    }
+                }
+            }
+        }
 
         [Test]
         public void GetListWithParameterLegal()
@@ -182,6 +232,37 @@ namespace Kistl.IntegrationTests
                 Assert.That(guiModule, Is.Not.Null);
             }
         }
+
+        [Test]
+        public void GetListSingle()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Single(m => m.ModuleName == "GUI");
+                Assert.That(guiModule, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void GetListWithFirst()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.ModuleName == "GUI").First();
+                Assert.That(guiModule, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void GetListFirst()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.ModuleName == "GUI");
+                Assert.That(guiModule, Is.Not.Null);
+            }
+        }
+
 
         public class Test
         {

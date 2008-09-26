@@ -185,7 +185,16 @@ namespace Kistl.API
 
         public static bool IsMethodCallExpression(this Expression e, string methodName)
         {
-            return e.NodeType == ExpressionType.Call && ((MethodCallExpression)e).Method.Name == methodName;
+            return e.NodeType == ExpressionType.Call && 
+                ((MethodCallExpression)e).Method.Name == methodName && 
+                ((MethodCallExpression)e).Method.DeclaringType == typeof(Queryable);
+        }
+
+        public static bool IsMethodCallExpression(this Expression e, string methodName, Type type)
+        {
+            return e.NodeType == ExpressionType.Call &&
+                ((MethodCallExpression)e).Method.Name == methodName &&
+                ((MethodCallExpression)e).Method.DeclaringType == type;
         }
     }
 }

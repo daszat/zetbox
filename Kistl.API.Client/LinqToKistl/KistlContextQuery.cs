@@ -46,12 +46,12 @@ namespace Kistl.API.Client
         #region IEnumerable Members
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)_provider.Execute<List<T>>(this._expression)).GetEnumerator();
+            return ((IEnumerable<T>)_provider.GetListCall<List<T>>(this._expression)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_provider.Execute(this._expression)).GetEnumerator();
+            return ((IEnumerable<T>)_provider.GetListCall<List<IDataObject>>(this._expression)).GetEnumerator();
         }
         #endregion
 

@@ -22,7 +22,6 @@ namespace Kistl.API.Client.Tests
         {
             if (type == null) throw new ArgumentNullException("type");
             if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
-            if (filter != null) throw new ArgumentException("Filter is not supported yet");
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
             List<TestObjClass> result = new List<TestObjClass>();
@@ -38,6 +37,10 @@ namespace Kistl.API.Client.Tests
             result[3].SetPrivatePropertyValue<int>("ID", 4);
             result[4].SetPrivatePropertyValue<int>("ID", 5);
 
+            if (filter != null)
+            {
+                result = result.AsQueryable<TestObjClass>().AddFilter(filter).ToList();
+            }
             return result.Cast<IDataObject>();
         }
 
