@@ -364,8 +364,14 @@ namespace Kistl.API.Client
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public IDataObject Find(Type type, int ID)
         {
+            // TODO: check "type" for being a IDataObject
             CheckDisposed();
-            return GetQuery(type).Single(o => o.ID == ID);
+
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            //return GetQuery(type).Single(o => o.ID == ID);
+
+            return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
         }
 
         /// <summary>
