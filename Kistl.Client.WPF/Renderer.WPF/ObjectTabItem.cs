@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,12 +10,26 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Interaktionslogik für Window1.xaml
     /// </summary>
-    public partial class ObjectTabItem : TabItem, IObjectControl
+    public partial class ObjectTabItem : ContentControl, IObjectControl
     {
         public ObjectTabItem()
         {
-            InitializeComponent();
+            Menus = new List<UIElement>();
         }
+
+        #region Property: Menus
+
+        public List<UIElement> Menus
+        {
+            get { return (List<UIElement>)GetValue(MenusKey.DependencyProperty); }
+            private set { SetValue(MenusKey, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Menus.  This enables animation, styling, binding, etc...
+        private static readonly DependencyPropertyKey MenusKey =
+            DependencyProperty.RegisterReadOnly("Menus", typeof(List<UIElement>), typeof(ObjectTabItem), new UIPropertyMetadata());
+
+        #endregion
 
         #region IObjectControl Member
 

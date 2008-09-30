@@ -24,24 +24,30 @@ namespace Kistl.GUI.Renderer.WPF
             Current = this;
         }
 
-        protected override Control Setup(Control control, Control menu)
+        protected override Control Setup(Control control, IList<Control> menus)
         {
-            if (menu != null)
+            if (menus != null && menus.Count > 0)
             {
                 ContextMenu cm = new ContextMenu();
-                cm.Items.Add(menu);
+                foreach (var m in menus)
+                {
+                    cm.Items.Add(menus);
+                }
                 control.ContextMenu = cm;
             }
-                
+
             return control;
         }
 
-        protected override ContentControl Setup(ContentControl widget, IList<Control> list, Control menu)
+        protected override ContentControl Setup(ContentControl widget, IList<Control> list, IList<Control> menus)
         {
             StackPanel p = new StackPanel();
-            if (menu != null)
+            if (menus != null && menus.Count > 0)
             {
-                p.Children.Add(menu);
+                foreach (var m in menus)
+                {
+                    p.Children.Add(m);
+                }
             }
 
             foreach (var c in list)
@@ -52,10 +58,15 @@ namespace Kistl.GUI.Renderer.WPF
             return widget;
         }
 
-        protected override void ShowObject(Kistl.API.IDataObject obj, ContentControl ctrl)
+        protected override void ShowObject(Kistl.API.IDataObject obj, ContentControl ctrl, IList<Control> menus)
         {
             WorkspaceWindow w = FindOrCreateWorkspace(obj.Context);
-            w.ShowObject(obj, (ObjectTabItem)ctrl);
+            ObjectTabItem tab = (ObjectTabItem)ctrl;
+            foreach (var m in menus)
+            {
+                tab.Menus.Add(m);
+            }
+            w.ShowObject(obj, tab);
             w.Show();
         }
 
@@ -108,7 +119,7 @@ namespace Kistl.GUI.Renderer.WPF
         public static WorkspaceWindow FindOrCreateWorkspace(IKistlContext ctx)
         {
             WorkspaceWindow result = FindWorkspace(ctx);
-            
+
             if (result == null)
             {
                 result = new WorkspaceWindow();

@@ -145,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Renderer.WPF\KistlMenuItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Renderer.WPF\ObjectReferenceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,10 +160,6 @@
     <Page Include="Renderer.WPF\ObjectListControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\ObjectTabItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Renderer.WPF\StringListControl.xaml">
       <SubType>Designer</SubType>
@@ -245,6 +245,9 @@
       <DependentUpon>BooleanListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\ListControl.cs" />
+    <Compile Include="Renderer.WPF\KistlMenuItem.xaml.cs">
+      <DependentUpon>KistlMenuItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
       <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>
     </Compile>
@@ -255,11 +258,9 @@
     <Compile Include="Renderer.WPF\ObjectListControl.xaml.cs">
       <DependentUpon>ObjectListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Renderer.WPF\ObjectTabItem.cs" />
     <Compile Include="Renderer.WPF\PropertyControl.cs" />
     <Compile Include="Renderer.WPF\Renderer.cs" />
-    <Compile Include="Renderer.WPF\ObjectTabItem.xaml.cs">
-      <DependentUpon>ObjectTabItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Renderer.WPF\StringListControl.xaml.cs">
       <DependentUpon>StringListControl.xaml</DependentUpon>
     </Compile>

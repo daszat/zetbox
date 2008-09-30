@@ -54,6 +54,13 @@ namespace Kistl.GUI.Renderer
 
     }
 
+    /// <summary>
+    /// Basic rendering functionality. The BasicRenderer walks the VisualTree and call the implementation to setup the controls.
+    /// The Typeparameters are mostly for convinience of the implementation.
+    /// </summary>
+    /// <typeparam name="CONTROL">The Baseclass of all Controls of this Renderer</typeparam>
+    /// <typeparam name="PROPERTY">The Baseclass of all Controls to display a Property of this Renderer</typeparam>
+    /// <typeparam name="CONTAINER">The Baseclass of all Containers of this Renderer</typeparam>
     public abstract class BasicRenderer<CONTROL, PROPERTY, CONTAINER> : IRenderer
         where CONTROL : class
         where PROPERTY : CONTROL
@@ -140,21 +147,22 @@ namespace Kistl.GUI.Renderer
             var presenter = KistlGUIContext.CreatePresenter(pInfo, obj, visual, widget);
 
             // TODO: create Menu here
-            CONTROL menuWidget = null;
-            //if (visual.Menu != null)
-            //{
-            //    menuWidget = (CONTROL)CreateControl(obj, visual.Menu);
-            //}
+            List<CONTROL> menus = new List<CONTROL>();
+            if (visual.ContextMenu != null)
+            {
+                var menuItems = from c in visual.ContextMenu select (CONTROL)CreateControl(obj, c);
+                menus.AddRange(menuItems);
+            }
 
             if (cInfo.IsContainer)
             {
                 var childWidgets = from c in visual.Children select (CONTROL)CreateControl(obj, c);
-                return Setup((CONTAINER)widget, childWidgets.ToList(), menuWidget);
+                return Setup((CONTAINER)widget, childWidgets.ToList(), menus);
             }
             else
             {
                 // TODO: Assert(visual.Children == null || visual.Children.Count == 0);
-                return Setup((PROPERTY)widget, menuWidget);
+                return Setup((PROPERTY)widget, menus);
             }
         }
 
@@ -162,12 +170,32 @@ namespace Kistl.GUI.Renderer
         {
             var template = obj.FindTemplate(TemplateUsage.EditControl);
             var ctrl = (CONTAINER)CreateControl(obj, template.VisualTree);
-            ShowObject(obj, ctrl);
+            var menus = from m in template.Menu select (CONTROL)CreateControl(obj, m);
+            ShowObject(obj, ctrl, menus.ToList());
         }
 
-        protected abstract CONTROL Setup(PROPERTY control, CONTROL menu);
-        protected abstract CONTAINER Setup(CONTAINER widget, IList<CONTROL> list, CONTROL menu);
-        protected abstract void ShowObject(IDataObject obj, CONTAINER ctrl);
+        /// <summary>
+        /// Set the given property control up. Add the given menus.
+        /// </summary>
+        /// <param name="widget"></param>
+        /// <param name="menus"></param>
+        /// <returns>A correctly configured control, not neccesarily the original control.</returns>
+        protected abstract PROPERTY Setup(PROPERTY widget, IList<CONTROL> menus);
+        /// <summary>
+        /// Set the given container control up. Add the given children and menus.
+        /// </summary>
+        /// <param name="widget"></param>
+        /// <param name="list"></param>
+        /// <param name="menus"></param>
+        /// <returns>A correctly configured control, not neccesarily the original control.</returns>
+        protected abstract CONTAINER Setup(CONTAINER widget, IList<CONTROL> list, IList<CONTROL> menus);
+
+        /// <summary>
+        /// Show the given object in this container.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="ctrl"></param>
+        protected abstract void ShowObject(IDataObject obj, CONTAINER ctrl, IList<CONTROL> menus);
 
     }
 }

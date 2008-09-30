@@ -46,6 +46,13 @@ namespace Kistl.Client.WPF
                 // der gerade initialisiert wird.
                 Manager.Create(e.Args, Toolkit.WPF);
             }
+
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+
+                ctx.SubmitChanges();
+            }
+
         }
 
 #if DONOTUSE

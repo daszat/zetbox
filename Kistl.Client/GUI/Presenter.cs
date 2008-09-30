@@ -480,7 +480,7 @@ namespace Kistl.GUI
 
         protected override void InitializeComponent()
         {
-            Control.ShortLabel = "Action X";
+            Control.ShortLabel = Preferences.Method.MethodName;
             Control.ActionActivatedEvent += new EventHandler(Control_ActionActivatedEvent);
             //TODO: Set Control.Size
         }

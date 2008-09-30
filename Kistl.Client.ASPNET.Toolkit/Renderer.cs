@@ -39,21 +39,21 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
 
         // TODO?
-        protected override void ShowObject(IDataObject obj, IContainerLoader ctrl)
+        protected override void ShowObject(IDataObject obj, IContainerLoader ctrl, IList<IControlLoader> menus)
         {
             throw new NotImplementedException();
         }
 
-        protected override IControlLoader Setup(IControlLoader control, IControlLoader menu)
+        protected override IControlLoader Setup(IControlLoader control, IList<IControlLoader> menus)
         {
-            if (menu != null)
+            if (menus != null && menus.Count>0)
                 throw new NotImplementedException("Cannot handle menus");
             return control;
         }
 
-        protected override IContainerLoader Setup(IContainerLoader widget, IList<IControlLoader> list, IControlLoader menu)
+        protected override IContainerLoader Setup(IContainerLoader widget, IList<IControlLoader> list, IList<IControlLoader> menus)
         {
-            if (menu != null)
+            if (menus != null && menus.Count > 0)
                 throw new NotImplementedException("Cannot handle menus");
 
             list.ForEach<IControlLoader>(c => widget.AddChild(c));
