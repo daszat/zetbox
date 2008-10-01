@@ -75,32 +75,35 @@ namespace Kistl.GUI.DB
                 #region walk methods for Menu Actions and "calculated Properties"
 
                 ObjectClass @class = ClientHelper.ObjectClasses[objectType];
-                
+
                 Visual methodResults = ctx.CreateVisual(
                     VisualType.PropertyGroup,
                     "list of calculated results"
                     );
 
-                foreach (Method m in @class.GetInheritedMethods().Concat(@class.Methods))
-                {
+                // a list of all displayable methods
+                var allMethods = @class.GetInheritedMethods().Concat(@class.Methods).Where(method => method.IsDisplayable);
 
-                    Visual v = ctx.CreateDefaultVisual(m);
-                    if (v != null)
-                    {
-                        if (m.GetReturnParameter() == null)
-                        {
-                            // Add Action to local menu
-                            result.Menu.Add(v);
-                        }
-                        else
-                        {
-                            // Display result
-                            methodResults.Children.Add(v);
-                        }
-                    }
+                // all parameter-less Methods which return a value are displayed as "calculated properties"
+                foreach (Method m in allMethods.Where(
+                    method => method.Parameter.Count == 1
+                        && method.GetReturnParameter() != null))
+                {
+                    methodResults.Children.Add(ctx.CreateDefaultVisual(m));
                 }
-                
-                result.VisualTree.Children.Add(methodResults);
+
+                // only add method results if there are any
+                if (methodResults.Children.Count > 0)
+                {
+                    result.VisualTree.Children.Add(methodResults);
+                }
+
+                // Methods without any parameters are added to the Menu.
+                foreach (Method m in allMethods.Where(method => method.Parameter.Count == 0))
+                {
+                    result.Menu.Add(ctx.CreateDefaultVisual(m));
+                }
+
 
                 #endregion
 
