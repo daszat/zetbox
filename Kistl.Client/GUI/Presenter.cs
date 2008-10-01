@@ -488,6 +488,7 @@ namespace Kistl.GUI
         void Control_ActionActivatedEvent(object sender, EventArgs e)
         {
             Manager.Renderer.ShowMessage("Button clicked");
+            Object.GetType().InvokeMember(Preferences.Method.MethodName, BindingFlags.InvokeMethod, null, Object, new object[] { });
         }
     }
 
