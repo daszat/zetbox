@@ -30,7 +30,8 @@
                     <Setter Property="HeaderTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <TextBlock Text="{Binding ElementName=tabObjects, Path=SelectedItem.ShortLabel}"
+                                <TextBlock x:Name="ObjectTabHeader"
+                                           Text="{Binding ElementName=tabObjects, Path=SelectedItem.ShortLabel}"
                                            ToolTip="{Binding ElementName=tabObjects, Path=SelectedItem.ShortLabel}"
                                            TextWrapping="Wrap"
                                            MaxWidth="100" />
@@ -41,10 +42,15 @@
             </TabControl.Resources>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <ToolBar ItemsSource="{Binding SelectedItem.Menus,ElementName=tabObjects}" />
-                        <ScrollContentPresenter Content="{Binding SelectedItem.Content,ElementName=tabObjects}" />
-                    </StackPanel>
+                    <DockPanel x:Name="TcContentPanel">
+                        <ToolBar DockPanel.Dock="Top" ItemsSource="{Binding SelectedItem.Menus,ElementName=tabObjects}" />
+                        <ScrollViewer x:Name="TcContentScroller"
+                                      Content="{Binding SelectedItem.Content,ElementName=tabObjects}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalContentAlignment="Stretch"
+                                      VerticalContentAlignment="Stretch" />
+                    </DockPanel>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
