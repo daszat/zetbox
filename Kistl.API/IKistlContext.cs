@@ -36,6 +36,12 @@ namespace Kistl.API
             }
         }
 
+        // TODO: Replace by central ServiceDiscoveryService
+        public static IKistlContextDebugger GetDebugger()
+        {
+            return _Current;
+        }
+
         public static void Created(IKistlContext ctx)
         {
             lock (typeof(KistlContextDebugger))

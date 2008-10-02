@@ -4,7 +4,8 @@
         xmlns:local="clr-namespace:Kistl.Client.WPF"
         Title="Kistl Main Window"
         MinHeight="550"
-        MinWidth="780">
+        MinWidth="780"
+        Loaded="Window_Loaded">
     <DockPanel>
         <local:MainWindowCtrl />
     </DockPanel>
