@@ -1258,7 +1258,14 @@ namespace Kistl.Server.Generators
                     {
                         m.Parameters.Add(new CodeParameterDeclarationExpression(
                             param.ToCodeTypeReference(), param.ParameterName));
-                        methodCallParameter.AppendFormat(", {0}", param.ParameterName);
+                        if (methodCallParameter.Length > 0)
+                        {
+                            methodCallParameter.AppendFormat(", {0}", param.ParameterName);
+                        }
+                        else
+                        {
+                            methodCallParameter.AppendFormat(param.ParameterName);
+                        }
                     }
 
                     if (returnParam != null)
@@ -1279,11 +1286,12 @@ namespace Kistl.Server.Generators
 
                     m.Statements.AddStatement(@"if (On{1}_{0} != null)
             {{
-                On{1}_{0}(this{2}{3});
+                On{1}_{0}(this{2}{3}{4});
             }}",
                baseObjClass.ClassName,
                method.MethodName,
                returnParam != null ? ", e" : "",
+               methodCallParameter.Length == 0 ? "" : ", ",
                methodCallParameter.ToString());
 
                     if (returnParam != null)
