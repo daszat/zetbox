@@ -356,5 +356,17 @@ namespace Kistl.App.Base
                 e.Result = new List<Method>();
             }
         }
+
+        public void OnIsValid_Constraint(Kistl.App.Base.Constraint obj, Kistl.API.MethodReturnEventArgs<bool> e, object value)
+        {
+            // the base constraint accepts all values
+            e.Result = true;
+        }
+    
+        public void OnIsValid_NotNullableConstraint(Kistl.App.Base.Constraint obj, Kistl.API.MethodReturnEventArgs<bool> e, object value)
+        {
+            e.Result = value != null;
+        }
+    
     }
 }

@@ -205,5 +205,11 @@ namespace Kistl.App.Base
             e.Result = obj.FullTypeName;
         }
         #endregion
+
+        //public void OnIsValid_Constraint(Kistl.App.Base.Constraint obj, Kistl.API.MethodReturnEventArgs<bool> e, object value)
+        //{
+        //    // the base constraint accepts all values
+        //    e.Result = true;
+        //}
     }
 }

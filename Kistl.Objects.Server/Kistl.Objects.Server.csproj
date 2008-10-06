@@ -64,6 +64,7 @@
     <Compile Include="BoolParameter.Server.Designer.cs" />
     <Compile Include="BoolProperty.Server.Designer.cs" />
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
+    <Compile Include="Constraint.Server.Designer.cs" />
     <Compile Include="ControlInfo.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="Module.Server.Designer.cs" />
     <Compile Include="Muhblah.Server.Designer.cs" />
+    <Compile Include="NotNullableConstraint.Server.Designer.cs" />
     <Compile Include="ObjectClass.Server.Designer.cs" />
     <Compile Include="ObjectParameter.Server.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />

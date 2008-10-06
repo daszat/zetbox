@@ -78,6 +78,8 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.GUI.PresenterInfo), ElementName="PresenterInfo")]
         [XmlArrayItem(Type=typeof(Kistl.App.GUI.Visual), ElementName="Visual")]
         [XmlArrayItem(Type=typeof(Kistl.App.GUI.Template), ElementName="Template")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.Constraint), ElementName="Constraint")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.NotNullableConstraint), ElementName="NotNullableConstraint")]
         public System.Collections.Generic.List<object> Objects
         {
             get
@@ -150,6 +152,8 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.GUI.PresenterInfo), ElementName="PresenterInfo")]
         [XmlElement(Type=typeof(Kistl.App.GUI.Visual), ElementName="Visual")]
         [XmlElement(Type=typeof(Kistl.App.GUI.Template), ElementName="Template")]
+        [XmlElement(Type=typeof(Kistl.App.Base.Constraint), ElementName="Constraint")]
+        [XmlElement(Type=typeof(Kistl.App.Base.NotNullableConstraint), ElementName="NotNullableConstraint")]
         public object Object
         {
             get

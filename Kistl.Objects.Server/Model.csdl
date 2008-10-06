@@ -27,6 +27,7 @@
     <EntitySet Name="PresenterInfo" EntityType="Model.PresenterInfo" />
     <EntitySet Name="Visual" EntityType="Model.Visual" />
     <EntitySet Name="Template" EntityType="Model.Template" />
+    <EntitySet Name="Constraint" EntityType="Model.Constraint" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -550,6 +551,13 @@
     <NavigationProperty Name="DisplayedTypeAssembly__Implementation__" Relationship="Model.FK_Template_Assembly_DisplayedTypeAssembly" FromRole="B_Template" ToRole="A_Assembly" />
     <NavigationProperty Name="Menu__Implementation__" Relationship="Model.FK_Template_MenuCollectionEntry_Template_fk_Parent" FromRole="A_Template" ToRole="B_Template_MenuCollectionEntry" />
   </EntityType>
+  <EntityType Name="Constraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint" />
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
     <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />
