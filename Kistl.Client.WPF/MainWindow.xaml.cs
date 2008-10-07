@@ -27,6 +27,13 @@ namespace Kistl.Client
         public MainWindow()
         {
             InitializeComponent();
+            Primary = this;
+        }
+
+        public static MainWindow Primary
+        {
+            get;
+            private set;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

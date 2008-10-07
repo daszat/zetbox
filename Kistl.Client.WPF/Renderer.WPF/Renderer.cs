@@ -130,6 +130,8 @@ namespace Kistl.GUI.Renderer.WPF
                 wp.InitializeComponent(null, null, result);
             }
 
+            result.Owner = MainWindow.Primary;
+
             return result;
         }
 
