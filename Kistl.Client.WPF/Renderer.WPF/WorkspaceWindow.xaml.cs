@@ -26,7 +26,8 @@ namespace Kistl.GUI.Renderer.WPF
 
         public WorkspaceWindow()
         {
-            Objects = new ObservableCollection<Kistl.API.IDataObject>();
+            Objects = new ObservableCollection<ObjectTabItem>();
+            DataContext = this;
             InitializeComponent();
         }
 
@@ -91,35 +92,32 @@ namespace Kistl.GUI.Renderer.WPF
             if (obj.Context != Context)
                 throw new ArgumentOutOfRangeException("obj", "Object is not in this Workspace's Context");
 
-            int idx = Objects.IndexOf(obj);
+            int idx = Objects.IndexOf(ctrl);
             if (idx != -1)
             {
                 tabObjects.SelectedIndex = idx;
                 return;
             }
 
-            tabObjects.Items.Add(ctrl);
-            Objects.Add(obj);
+            Objects.Add(ctrl);
 
-            idx = Objects.IndexOf(obj);
-            tabObjects.SelectedIndex = idx;
+            tabObjects.SelectedIndex = Objects.IndexOf(ctrl);
         }
 
         public void RemoveObject(Kistl.API.IDataObject dataObject)
         {
-            IList<IObjectControl> toRemove = tabObjects.Items.Cast<IObjectControl>().Where(oc => oc.Value == dataObject).ToList();
-            toRemove.ForEach(oc => tabObjects.Items.Remove(oc));
+           // TODO: Objects.Remove(dataObject);
         }
 
-        public ObservableCollection<Kistl.API.IDataObject> Objects
+        public ObservableCollection<ObjectTabItem> Objects
         {
-            get { return (ObservableCollection<Kistl.API.IDataObject>)GetValue(ObjectsProperty); }
+            get { return (ObservableCollection<ObjectTabItem>)GetValue(ObjectsProperty); }
             set { SetValue(ObjectsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Objects.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectsProperty =
-            DependencyProperty.Register("Objects", typeof(ObservableCollection<Kistl.API.IDataObject>), typeof(WorkspaceWindow), new UIPropertyMetadata());
+            DependencyProperty.Register("Objects", typeof(ObservableCollection<ObjectTabItem>), typeof(WorkspaceWindow), new UIPropertyMetadata());
 
         #endregion
 
