@@ -61,6 +61,10 @@ namespace Kistl.Client.WPF.Debugger
         {
             InitializeComponent();
             this.DataContext = _contextList;
+
+            // Move debugger out of the way
+            this.Top = 80;
+            this.Left = System.Windows.SystemParameters.MaximizedPrimaryScreenWidth - 380;
         }
 
         public static void ShowDebugger()
