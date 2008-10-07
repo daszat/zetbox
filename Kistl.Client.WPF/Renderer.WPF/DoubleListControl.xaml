@@ -1,54 +1,42 @@
-﻿<app:ListControl
-    x:Name="Self"
-    x:Class="Kistl.GUI.Renderer.WPF.DoubleListControl"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
-    ShortLabel="Double List"
-    Description="This is a list of floating point values."
-    ToolTip="{Binding ElementName=Self, Path=Description}"
-    Background="{Binding ElementName=Self, Path=IsValidValue, Converter={StaticResource ValidityToBrushConverter}}"
-    >
+﻿<app:ListControl x:Name="Self"
+                 x:Class="Kistl.GUI.Renderer.WPF.DoubleListControl"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
+                 ShortLabel="Double List"
+                 Description="This is a list of floating point values."
+                 ToolTip="{Binding ElementName=Self, Path=Description}"
+                 Background="{Binding ElementName=Self, Path=IsValidValue, Converter={StaticResource ValidityToBrushConverter}}">
     <app:PropertyControl.Label>
         <StackPanel>
             <Label Content="{Binding ElementName=Self, Path=ShortLabel}" />
-            <TextBox
-                x:Name="inputBox"
-                Margin="1"
-                Text="{Binding ElementName=Self, Path=SearchBoxValue, UpdateSourceTrigger=PropertyChanged}"
-                />
-            <Grid
-                >
+            <TextBox x:Name="inputBox"
+                     Margin="1"
+                     Text="{Binding ElementName=Self, Path=SearchBoxValue, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button
-                    Grid.Column="0"
-                    Click="Add_Click"
-                    Margin="1"
-                    >Add</Button>
-                <Button
-                    Grid.Column="1"
-                    Click="Remove_Click"
-                    Margin="1"
-                    >Remove</Button>
-                <Button
-                    Grid.Column="2"
-                    IsEnabled="False"
-                    Margin="1"
-                    >Search</Button>
+                <Button Grid.Column="0"
+                        Click="Add_Click"
+                        Margin="1">Add</Button>
+                <Button Grid.Column="1"
+                        Click="Remove_Click"
+                        Margin="1">Remove</Button>
+                <Button Grid.Column="2"
+                        IsEnabled="False"
+                        Margin="1">Search</Button>
             </Grid>
-            <StackPanel/>
+            <StackPanel />
         </StackPanel>
     </app:PropertyControl.Label>
     <app:PropertyControl.EditPart>
-        <ListView
-            x:Name="lst"
-            ItemsSource="{Binding ElementName=Self, Path=Values, UpdateSourceTrigger=PropertyChanged}"
-            MouseDoubleClick="lst_MouseDoubleClick"
-            >
+        <ListView x:Name="lst"
+                  ItemsSource="{Binding ElementName=Self, Path=Values, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  MouseDoubleClick="lst_MouseDoubleClick"
+                  Validation.ErrorTemplate="{StaticResource ValidationAdorner}">
         </ListView>
     </app:PropertyControl.EditPart>
 </app:ListControl>

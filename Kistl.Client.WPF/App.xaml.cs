@@ -47,12 +47,30 @@ namespace Kistl.Client.WPF
                 Manager.Create(e.Args, Toolkit.WPF);
             }
 
-            using (IKistlContext ctx = KistlContext.GetContext())
+
+            using (TraceClient.TraceHelper.TraceMethodCall("Fixing NotNullableConstraints"))
             {
-
-                ctx.SubmitChanges();
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    // Apply a NotNullableConstraint as appropriate
+                    foreach (var prop in ctx.GetQuery<Property>())
+                    {
+                        var currentNotNullableConstraint = prop.Constraints.Where(c => c is NotNullableConstraint).SingleOrDefault();
+                        bool hasNullableConstraint = (currentNotNullableConstraint != null);
+                        if (prop.IsNullable && hasNullableConstraint)
+                        {
+                            prop.Constraints.Remove(currentNotNullableConstraint);
+                            System.Console.Out.WriteLine("Removed obsolete NotNullableConstraint");
+                        }
+                        else if (!prop.IsNullable && !hasNullableConstraint)
+                        {
+                            prop.Constraints.Add(ctx.Create<NotNullableConstraint>());
+                            System.Console.Out.WriteLine("Added missing NotNullableConstraint");
+                        }
+                    }
+                    ctx.SubmitChanges();
+                }
             }
-
         }
 
 #if DONOTUSE

@@ -95,7 +95,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
     public abstract class BasicPropertyControlLoader<T> : BasicControlLoader<IValueControl<T>>, IValueControl<T>
     {
-        #region IValueControl<string> Members
+        #region IValueControl<T> Members
 
         public T Value
         {
@@ -107,6 +107,12 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             get { return Ctrl.IsValidValue; }
             set { Ctrl.IsValidValue = value; }
+        }
+
+        public new string Error
+        {
+            get { return Ctrl.Error; }
+            set { Ctrl.Error = value; }
         }
 
         public event EventHandler UserInput
@@ -192,6 +198,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             set { Ctrl.IsValidValue = value; }
         }
 
+        public new string Error
+        {
+            get { return Ctrl.Error; }
+            set { Ctrl.Error = value; }
+        }
+
         public event EventHandler UserInput
         {
             add { Ctrl.UserInput += value; }
@@ -239,6 +251,12 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             get { return Ctrl.IsValidValue; }
             set { Ctrl.IsValidValue = value; }
+        }
+
+        public new string Error
+        {
+            get { return Ctrl.Error; }
+            set { Ctrl.Error = value; }
         }
 
         public event EventHandler UserInput

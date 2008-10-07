@@ -10,6 +10,8 @@
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_DataType_ObjectClass", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__), "B_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__), "B_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints", "A_Constraint", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Constraint__Implementation__), "B_BaseProperty_ConstraintsCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty_ConstraintsCollectionEntry__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent", "A_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BaseProperty__Implementation__), "B_BaseProperty_ConstraintsCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty_ConstraintsCollectionEntry__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -41,6 +43,8 @@ namespace Kistl.App.Base
         private string _AltText;
         
         private System.Nullable<int> _fk_Module = null;
+        
+        private EntityCollectionEntryValueWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.Constraint, Kistl.App.Base.BaseProperty_ConstraintsCollectionEntry__Implementation__> ConstraintsWrapper;
         
         public BaseProperty__Implementation__()
         {
@@ -187,6 +191,26 @@ namespace Kistl.App.Base
             }
         }
         
+        public IList<Kistl.App.Base.Constraint> Constraints
+        {
+            get
+            {
+                if (ConstraintsWrapper == null) ConstraintsWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.Constraint, Kistl.App.Base.BaseProperty_ConstraintsCollectionEntry__Implementation__>(this, Constraints__Implementation__);
+                return ConstraintsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent", "B_BaseProperty_ConstraintsCollectionEntry")]
+        public EntityCollection<Kistl.App.Base.BaseProperty_ConstraintsCollectionEntry__Implementation__> Constraints__Implementation__
+        {
+            get
+            {
+                EntityCollection<BaseProperty_ConstraintsCollectionEntry__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<BaseProperty_ConstraintsCollectionEntry__Implementation__>("Model.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent", "B_BaseProperty_ConstraintsCollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
         public event ToStringHandler<BaseProperty> OnToString_BaseProperty;
         
         public event ObjectEventHandler<BaseProperty> OnPreSave_BaseProperty;
@@ -226,6 +250,8 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
+            /// Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly
+            Constraints__Implementation__.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
         }
         
         public virtual string GetPropertyTypeString()
@@ -265,6 +291,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._PropertyName, sw);
             BinarySerializer.ToBinary(this._AltText, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
+            BinarySerializer.ToBinary(this.Constraints__Implementation__, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -274,6 +301,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._PropertyName, sr);
             BinarySerializer.FromBinary(out this._AltText, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
+            BinarySerializer.FromBinaryCollectionEntries(this.Constraints__Implementation__, sr);
         }
         
         public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);
@@ -281,5 +309,135 @@ namespace Kistl.App.Base
         public delegate void GetGUIRepresentation_Handler<T>(T obj, MethodReturnEventArgs<string> e);
         
         public delegate void GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
+    }
+    
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="BaseProperty_ConstraintsCollectionEntry")]
+    public class BaseProperty_ConstraintsCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Base.Constraint, Kistl.App.Base.BaseProperty>
+    {
+        
+        private int _ID;
+        
+        private int _fk_Value;
+        
+        private int _fk_Parent;
+        
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Constraint Value
+        {
+            get
+            {
+                return ValueImpl;
+            }
+            set
+            {
+                ValueImpl = (Kistl.App.Base.Constraint__Implementation__)value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.BaseProperty Parent
+        {
+            get
+            {
+                return ParentImpl;
+            }
+            set
+            {
+                ParentImpl = (Kistl.App.Base.BaseProperty__Implementation__)value;
+            }
+        }
+        
+        public int fk_Value
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Value != null)
+                {
+                    _fk_Value = Value.ID;
+                }
+                return _fk_Value;
+            }
+            set
+            {
+                _fk_Value = value;
+            }
+        }
+        
+        public int fk_Parent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
+                {
+                    _fk_Parent = Parent.ID;
+                }
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints", "A_Constraint")]
+        public Kistl.App.Base.Constraint__Implementation__ ValueImpl
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Constraint__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Constraint__Implementation__>("Model.FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints", "A_Constraint");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Constraint__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Constraint__Implementation__>("Model.FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints", "A_Constraint");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.Constraint__Implementation__)value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent", "A_BaseProperty")]
+        public Kistl.App.Base.BaseProperty__Implementation__ ParentImpl
+        {
+            get
+            {
+                EntityReference<BaseProperty__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<BaseProperty__Implementation__>("Model.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent", "A_BaseProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<BaseProperty__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<BaseProperty__Implementation__>("Model.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent", "A_BaseProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (BaseProperty__Implementation__)value;
+            }
+        }
+        
+        public override void ToStream(System.IO.BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_Value, sw);
+            BinarySerializer.ToBinary(this.fk_Parent, sw);
+        }
+        
+        public override void FromStream(System.IO.BinaryReader sr)
+        {
+            base.FromStream(sr);
+            BinarySerializer.FromBinary(out this._fk_Value, sr);
+            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+        }
     }
 }

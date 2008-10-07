@@ -25,5 +25,7 @@ namespace Kistl.App.Base
     {
         
         bool IsValid(object value);
+        
+        string GetErrorText();
     }
 }

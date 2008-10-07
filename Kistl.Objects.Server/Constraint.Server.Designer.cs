@@ -56,6 +56,8 @@ namespace Kistl.App.Base
         
         public event IsValid_Handler<Constraint> OnIsValid_Constraint;
         
+        public event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -95,6 +97,16 @@ namespace Kistl.App.Base
             return e.Result;
         }
         
+        public virtual string GetErrorText()
+        {
+            MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
+            if (OnGetErrorText_Constraint != null)
+            {
+                OnGetErrorText_Constraint(this, e);
+            };
+            return e.Result;
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -106,5 +118,7 @@ namespace Kistl.App.Base
         }
         
         public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> e, object value);
+        
+        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> e);
     }
 }

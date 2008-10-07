@@ -5,17 +5,18 @@
                      xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
                      ShortLabel="Yes/No Property"
                      Description="Please enter a value."
-                     ToolTip="{Binding ElementName=Self, Path=Description}"
-                     Background="{Binding ElementName=Self, Path=IsValidValue, Converter={StaticResource ValidityToBrushConverter}}">
+                     ToolTip="{Binding ElementName=Self, Path=Description}">
     <app:PropertyControl.Label>
         <Label Content="{Binding ElementName=Self, Path=ShortLabel}" />
     </app:PropertyControl.Label>
     <app:PropertyControl.EditPart>
-        <CheckBox IsChecked="{Binding ElementName=Self, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+        <CheckBox IsChecked="{Binding ElementName=Self, Path=Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                   Content="{Binding ElementName=Self, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                   IsEnabled="{Binding ElementName=Self, Path=IsEnabled}"
                   VerticalAlignment="Center"
                   VerticalContentAlignment="Center"
-                  IsThreeState="True" />
+                  IsThreeState="True"
+                  Validation.ErrorTemplate="{StaticResource ValidationAdorner}">
+        </CheckBox>
     </app:PropertyControl.EditPart>
 </app:PropertyControl>

@@ -102,6 +102,7 @@ namespace Kistl.GUI
             // Value is coming from object => always valid
             // TODO: validation framework might change this
             Control.IsValidValue = true;
+            Control.Error = null;
         }
 
         private void SetItemsSource()
@@ -332,19 +333,12 @@ namespace Kistl.GUI
         {
             T refobj = (T)Control.Value;
 
-            if (refobj == null)
-            {
-                Control.IsValidValue = Property.IsNullable;
-            }
-            else
-            {
-                Control.IsValidValue = _Items.Contains(refobj);
-            }
-
+            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(refobj));
 
             if (Control.IsValidValue)
             {
                 Object.SetPropertyValue(Property.PropertyName, refobj);
+                Control.Error = null;
             }
         }
 

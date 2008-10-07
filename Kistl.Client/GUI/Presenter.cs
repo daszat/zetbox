@@ -196,6 +196,7 @@ namespace Kistl.GUI
 
             Control.Value = MungeFromObject(GetPropertyValue());
             Control.IsValidValue = true;
+            Control.Error = null;
 
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
@@ -240,10 +241,16 @@ namespace Kistl.GUI
         // TODO: hook up Validation here and re-check all overrider.
         protected virtual void OnUserInput()
         {
-            Control.IsValidValue = (Property.IsNullable || Control.Value != null);
+            var mungedValue = MungeFromControl(Control.Value);
+            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(mungedValue));
             if (Control.IsValidValue)
             {
-                SetPropertyValue(MungeFromControl(Control.Value));
+                SetPropertyValue(mungedValue);
+                Control.Error = null;
+            }
+            else
+            {
+                Control.Error = String.Join("\n", Property.Constraints.Where(c => !c.IsValid(mungedValue)).Select(c => c.GetErrorText()).ToArray());
             }
         }
 
@@ -382,7 +389,7 @@ namespace Kistl.GUI
     /// </summary>
     /// <typeparam name="TYPE">The type of the handled Property's value.</typeparam>
     /// <typeparam name="PROPERTY">The type of the handled Property.</typeparam>
-    public class DefaultValuePresenter<TYPE> 
+    public class DefaultValuePresenter<TYPE>
         : DefaultPresenter<TYPE, ValueTypeProperty, TYPE, IValueControl<TYPE>>
         where TYPE : class
     {

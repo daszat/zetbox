@@ -58,6 +58,11 @@ namespace Kistl.GUI
         bool IsValidValue { get; set; }
 
         /// <summary>
+        /// The (validation) error message to display if !IsValidValue 
+        /// </summary>
+        string Error { get; set; }
+
+        /// <summary>
         /// This event is triggered after UserInput. The Presenter will then 
         /// fetch the Value and do Validity checks.
         /// </summary>
@@ -205,7 +210,7 @@ namespace Kistl.GUI
 
     }
 
-    public interface IActionControl: IBasicControl
+    public interface IActionControl : IBasicControl
     {
         event EventHandler ActionActivatedEvent;
     }

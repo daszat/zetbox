@@ -89,6 +89,15 @@ namespace Kistl.GUI.Renderer.WPF
         public static readonly DependencyProperty IsValidValueProperty =
             DependencyProperty.Register("IsValidValue", typeof(bool), typeof(PropertyControl), new PropertyMetadata(true));
 
+        public string Error
+        {
+            get { return (string)GetValue(ErrorProperty); }
+            set { SetValue(ErrorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Error.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ErrorProperty =
+            DependencyProperty.Register("Error", typeof(string), typeof(PropertyControl), new UIPropertyMetadata(null));
 
         /// <summary>
         /// Only display the Value, but do not allow to modify it

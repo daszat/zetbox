@@ -48,6 +48,11 @@ namespace Kistl.App.Base
             set;
         }
         
+        IList<Kistl.App.Base.Constraint> Constraints
+        {
+            get;
+        }
+        
         string GetPropertyTypeString();
         
         string GetGUIRepresentation();

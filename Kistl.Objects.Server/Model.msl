@@ -384,6 +384,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.NotNullableConstraint)">
         <MappingFragment StoreEntitySet="NotNullableConstraint">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -433,6 +434,13 @@
     <EntitySetMapping Name="Template_MenuCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Template_MenuCollectionEntry)">
         <MappingFragment StoreEntitySet="Template_MenuCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BaseProperty_ConstraintsCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseProperty_ConstraintsCollectionEntry)">
+        <MappingFragment StoreEntitySet="BaseProperty_ConstraintsCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -824,6 +832,15 @@
       </EndProperty>
       <Condition ColumnName="fk_Menu" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints" TypeName="Model.FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints" StoreEntitySet="BaseProperty_ConstraintsCollectionEntry">
+      <EndProperty Name="A_Constraint">
+        <ScalarProperty Name="ID" ColumnName="fk_Constraints" />
+      </EndProperty>
+      <EndProperty Name="B_BaseProperty_ConstraintsCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Constraints" IsNull="false" />
+    </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt" />
@@ -886,6 +903,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Template" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent" TypeName="Model.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent" StoreEntitySet="BaseProperty_ConstraintsCollectionEntry">
+      <EndProperty Name="A_BaseProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_BaseProperty" />
+      </EndProperty>
+      <EndProperty Name="B_BaseProperty_ConstraintsCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_BaseProperty" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

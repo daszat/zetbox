@@ -87,6 +87,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             set;
         }
 
+        public new virtual string Error
+        {
+            get;
+            set;
+        }
+
         public event EventHandler UserInput;
 
         public void NotifyUserInput()

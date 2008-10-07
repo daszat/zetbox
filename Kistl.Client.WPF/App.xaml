@@ -1,15 +1,27 @@
-﻿<Application
-    x:Class="Kistl.Client.WPF.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter"
-    StartupUri="MainWindow.xaml"
-    Startup="Application_Startup"
-    >
+﻿<Application x:Class="Kistl.Client.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter"
+             StartupUri="MainWindow.xaml"
+             Startup="Application_Startup">
     <Application.Resources>
         <converter:IconConverter x:Key="IconConverter" />
         <converter:FormattingConverter x:Key="FormattingConverter" />
         <converter:GetTypeConverter x:Key="GetTypeConverter" />
-        <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />        
+        <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
+        <converter:DebugConverter x:Key="debug" />
+        <converter:ErrorInfoConverter x:Key="ErrorInfoConverter" />
+        <ControlTemplate x:Key="ValidationAdorner">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Right"
+                           Foreground="Orange"
+                           Text="{Binding ElementName=adornedElement, Path=AdornedElement.(Validation.Errors), Converter={StaticResource ErrorInfoConverter}}" />
+                <Border BorderBrush="Red"
+                        BorderThickness="4"
+                        MaxWidth="150">
+                    <AdornedElementPlaceholder x:Name="adornedElement" />
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
     </Application.Resources>
 </Application>

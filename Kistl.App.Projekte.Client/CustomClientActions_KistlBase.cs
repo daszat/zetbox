@@ -240,7 +240,7 @@ namespace Kistl.App.Base
             }
 
         }
-        
+
         public void OnGetPropertyTypeString_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "System.String";
@@ -362,11 +362,16 @@ namespace Kistl.App.Base
             // the base constraint accepts all values
             e.Result = true;
         }
-    
+
         public void OnIsValid_NotNullableConstraint(Kistl.App.Base.Constraint obj, Kistl.API.MethodReturnEventArgs<bool> e, object value)
         {
-            e.Result = value != null;
+            e.Result &= value != null;
         }
-    
+
+        public void OnGetErrorText_NotNullableConstraint(Kistl.App.Base.NotNullableConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = String.IsNullOrEmpty(obj.Reason) ? "Value must be set" : String.Format("Value must be set: {0}", obj.Reason);
+        }
+
     }
 }

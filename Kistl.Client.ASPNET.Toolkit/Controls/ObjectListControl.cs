@@ -157,5 +157,22 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
                 ScriptManager.GetCurrent(this.Page).RegisterScriptDescriptors(this);
             }
         }
+
+        #region IValueControl<ObservableCollection<IDataObject>> Members
+
+
+        public new string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
     }
 }
