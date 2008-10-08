@@ -1,18 +1,17 @@
-﻿<app:ListControl x:Name="Self"
-                 x:Class="Kistl.GUI.Renderer.WPF.DateTimeListControl"
+﻿<app:ListControl x:Class="Kistl.GUI.Renderer.WPF.DateTimeListControl"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
                  ShortLabel="Double List"
                  Description="This is a list of floating point values."
-                 ToolTip="{Binding ElementName=Self, Path=Description}"
-                 Background="{Binding ElementName=Self, Path=IsValidValue, Converter={StaticResource ValidityToBrushConverter}}">
+                 ToolTip="{Binding Description}">
+
     <app:PropertyControl.Label>
         <StackPanel>
-            <Label Content="{Binding ElementName=Self, Path=ShortLabel}" />
+            <Label Content="{Binding ShortLabel}" />
             <TextBox x:Name="inputBox"
                      Margin="1"
-                     Text="{Binding ElementName=Self, Path=SearchBoxValue, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding SearchBoxValue, UpdateSourceTrigger=PropertyChanged}" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -32,11 +31,12 @@
             <StackPanel />
         </StackPanel>
     </app:PropertyControl.Label>
+    
     <app:PropertyControl.EditPart>
         <ListView x:Name="lst"
-                  ItemsSource="{Binding ElementName=Self, Path=Values, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                  MouseDoubleClick="lst_MouseDoubleClick"
-                  Validation.ErrorTemplate="{StaticResource ValidationAdorner}">
+                  ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  MouseDoubleClick="lst_MouseDoubleClick">
         </ListView>
     </app:PropertyControl.EditPart>
+    
 </app:ListControl>

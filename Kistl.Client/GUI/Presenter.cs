@@ -194,9 +194,7 @@ namespace Kistl.GUI
                 Control.UserInput += _Control_UserInput;
             }
 
-            Control.Value = MungeFromObject(GetPropertyValue());
-            Control.IsValidValue = true;
-            Control.Error = null;
+            SetControlValueFromObject();
 
             // Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;
@@ -220,7 +218,44 @@ namespace Kistl.GUI
                 // if the object has changed, unconditionally overwrite the value in the GUI
                 // intelligent controls might want to show the user both the "real" and the user's value
                 if (e.PropertyName == Property.PropertyName)
-                    Control.Value = MungeFromObject(GetPropertyValue());
+                    SetControlValueFromObject();
+            }
+        }
+
+        private void SetControlValueFromObject()
+        {
+            var objValue = GetPropertyValue();
+
+            // Always set value from object to reflect "reality", even if the 
+            // value is currently not valid. This is needed to show 
+            // intermediate results.
+            Control.Value = MungeFromObject(objValue);
+
+            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(objValue));
+            if (Control.IsValidValue)
+            {
+                Control.Error = null;
+            }
+            else
+            {
+                Control.Error = String.Join("\n",
+                    Property.Constraints.Where(c => !c.IsValid(objValue)).Select(c => c.GetErrorText()).ToArray());
+            }
+        }
+
+        private void SetPropertyFromControl()
+        {
+            var mungedValue = MungeFromControl(Control.Value);
+            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(mungedValue));
+            if (Control.IsValidValue)
+            {
+                SetPropertyValue( mungedValue);
+                Control.Error = null;
+            }
+            else
+            {
+                Control.Error = String.Join("\n",
+                    Property.Constraints.Where(c => !c.IsValid(mungedValue)).Select(c => c.GetErrorText()).ToArray());
             }
         }
 
@@ -238,20 +273,9 @@ namespace Kistl.GUI
         /// override the method to gain fine-grained control over the presenter's reaction 
         /// to user input.
         /// </summary>
-        // TODO: hook up Validation here and re-check all overrider.
         protected virtual void OnUserInput()
         {
-            var mungedValue = MungeFromControl(Control.Value);
-            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(mungedValue));
-            if (Control.IsValidValue)
-            {
-                SetPropertyValue(mungedValue);
-                Control.Error = null;
-            }
-            else
-            {
-                Control.Error = String.Join("\n", Property.Constraints.Where(c => !c.IsValid(mungedValue)).Select(c => c.GetErrorText()).ToArray());
-            }
+            SetPropertyFromControl();
         }
 
         #endregion

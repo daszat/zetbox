@@ -1,19 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+
 using Kistl.GUI;
+using Kistl.GUI.Renderer.WPF.Controls;
+using System.Windows.Data;
 
 namespace Kistl.GUI.Renderer.WPF
 {
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
     /// </summary>
-    public class PropertyControl : UserControl, IBasicControl
+    public class PropertyControl : UserControl, IBasicControl, IDataErrorInfo
     {
         private Grid _grid = new Grid();
+        private ErrorReporter _errorReporter = new ErrorReporter();
 
         public static readonly int LabelColumn = 0;
         public static readonly int EditPartColumn = 2;
@@ -37,7 +42,37 @@ namespace Kistl.GUI.Renderer.WPF
                 Width = new GridLength(1, GridUnitType.Star)
             });
 
+            _errorReporter.SetValue(Grid.ColumnProperty, EditPartColumn);
+            _grid.Children.Add(_errorReporter);
             Content = _grid;
+
+            // to simplify binding for everyone
+            DataContext = this;
+
+            this.Loaded += LoadedHandler;
+        }
+
+        private void LoadedHandler(object sender, RoutedEventArgs e)
+        {
+            // march through all bindings and update the source once to trigger pending validation checks after initialisation
+            foreach (var values in this.WalkTree().Select(child => new { Child = child, Enumerator = child.GetLocalValueEnumerator() }))
+            {
+                // evaluate child.GetLocalValueEnumerator() only once.
+                LocalValueEnumerator enumerator = values.Enumerator;
+                while (enumerator.MoveNext())
+                {
+                    DependencyProperty dp = enumerator.Current.Property;
+                    if (!dp.ReadOnly)
+                    {
+                        BindingExpressionBase bindingInfo = BindingOperations.GetBindingExpressionBase(values.Child, dp);
+
+                        // don't try to update if no binding is there
+                        if (bindingInfo != null)
+                            bindingInfo.UpdateSource();
+                    }
+                }
+
+            }
         }
 
         #region IBasicControl Members
@@ -97,7 +132,14 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for Error.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ErrorProperty =
-            DependencyProperty.Register("Error", typeof(string), typeof(PropertyControl), new UIPropertyMetadata(null));
+            DependencyProperty.Register("Error", typeof(string), typeof(PropertyControl), new UIPropertyMetadata(null, ErrorChangedCallback));
+
+        private static void ErrorChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var self = (PropertyControl)d;
+            self._errorReporter.Severity = String.IsNullOrEmpty((string)e.NewValue) ? 0 : 2;
+            self._errorReporter.Text = (string)e.NewValue;
+        }
 
         /// <summary>
         /// Only display the Value, but do not allow to modify it
@@ -163,14 +205,41 @@ namespace Kistl.GUI.Renderer.WPF
         private static void EditPartChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PropertyControl p = (PropertyControl)d;
-            p.EditPart.SetValue(Grid.ColumnProperty, EditPartColumn);
-            p._grid.Children.Remove((UIElement)e.OldValue);
-            p._grid.Children.Add(p.EditPart);
+            p._errorReporter.Content = p.EditPart;
         }
 
         #endregion
 
         #endregion
 
+        #region IDataErrorInfo Members
+
+        public string this[string columnName]
+        {
+            get
+            {
+                return Error;
+            }
+        }
+
+        #endregion
+    }
+
+    public static class NavigationHelpers
+    {
+        public static IEnumerable<DependencyObject> WalkTree(this DependencyObject d)
+        {
+            yield return d;
+            int childrenCount = System.Windows.Media.VisualTreeHelper.GetChildrenCount(d);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                DependencyObject child = System.Windows.Media.VisualTreeHelper.GetChild(d, i);
+                yield return child;
+                foreach (var c in WalkTree(child))
+                {
+                    yield return c;
+                }
+            }
+        }
     }
 }

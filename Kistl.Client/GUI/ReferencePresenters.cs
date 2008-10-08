@@ -325,23 +325,6 @@ namespace Kistl.GUI
             Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
         }
 
-        /// <summary>
-        /// Checks whether the returned value matches the Properties nullability 
-        /// criteria and is one of the originally selectable items.
-        /// </summary>
-        protected override void OnUserInput()
-        {
-            T refobj = (T)Control.Value;
-
-            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(refobj));
-
-            if (Control.IsValidValue)
-            {
-                Object.SetPropertyValue(Property.PropertyName, refobj);
-                Control.Error = null;
-            }
-        }
-
         protected override IDataObject MungeFromControl(IDataObject value)
         {
             return value;

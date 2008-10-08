@@ -1,22 +1,23 @@
-﻿<app:PropertyControl x:Name="Self"
-                     x:Class="Kistl.GUI.Renderer.WPF.EditBoolProperty"
+﻿<app:PropertyControl x:Class="Kistl.GUI.Renderer.WPF.EditBoolProperty"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
                      ShortLabel="Yes/No Property"
                      Description="Please enter a value."
-                     ToolTip="{Binding ElementName=Self, Path=Description}">
+                     ToolTip="{Binding Description}">
+
     <app:PropertyControl.Label>
-        <Label Content="{Binding ElementName=Self, Path=ShortLabel}" />
+        <Label Content="{Binding ShortLabel}" />
     </app:PropertyControl.Label>
+
     <app:PropertyControl.EditPart>
-        <CheckBox IsChecked="{Binding ElementName=Self, Path=Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                  Content="{Binding ElementName=Self, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                  IsEnabled="{Binding ElementName=Self, Path=IsEnabled}"
+        <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  Content="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                  IsEnabled="{Binding IsEnabled}"
                   VerticalAlignment="Center"
                   VerticalContentAlignment="Center"
-                  IsThreeState="True"
-                  Validation.ErrorTemplate="{StaticResource ValidationAdorner}">
+                  IsThreeState="True">
         </CheckBox>
     </app:PropertyControl.EditPart>
+
 </app:PropertyControl>

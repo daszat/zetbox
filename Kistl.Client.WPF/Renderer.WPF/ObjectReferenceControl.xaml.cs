@@ -30,6 +30,7 @@ namespace Kistl.GUI.Renderer.WPF
         public ObjectReferenceControl()
         {
             InitializeComponent();
+
         }
 
         private bool _SupressUserInputEvent = false;
@@ -175,18 +176,6 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-        private void cbValues_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbValues.SelectedIndex < 0)
-            {
-                Value = null;
-            }
-            else
-            {
-                Value = ItemsSource[cbValues.SelectedIndex];
-            }
-        }
-
         #region ITestObjectReferenceControl Members
 
         object ITestObjectReferenceControl.ComboboxValue
@@ -205,6 +194,12 @@ namespace Kistl.GUI.Renderer.WPF
         }
 
         #endregion
+
+        //private void PropertyControl_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    var beb = BindingOperations.GetBindingExpressionBase(cbValues, ComboBox.SelectedItemProperty);
+        //    beb.UpdateSource();
+        //}
 
     }
 

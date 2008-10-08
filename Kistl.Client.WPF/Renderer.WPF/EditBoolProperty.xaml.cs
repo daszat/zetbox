@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -18,7 +17,7 @@ namespace Kistl.GUI.Renderer.WPF
     /// <summary>
     /// Zeigt eine Bool Eigenschaft zum Bearbeiten an
     /// </summary>
-    public partial class EditBoolProperty : PropertyControl, IValueControl<bool?>, IDataErrorInfo
+    public partial class EditBoolProperty : PropertyControl, IValueControl<bool?>
     {
         public EditBoolProperty()
         {
@@ -80,17 +79,5 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
-
-        #region IDataErrorInfo Members
-
-
-        public string this[string columnName]
-        {
-            get {
-                return Error;
-            }
-        }
-
-        #endregion
     }
 }

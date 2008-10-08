@@ -152,23 +152,6 @@ namespace Kistl.Client.WPF.Converter
         }
     }
 
-    [ValueConversion(typeof(ReadOnlyObservableCollection<ValidationError>), typeof(string))]
-    public class ErrorInfoConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType,
-                            object parameter, System.Globalization.CultureInfo culture)
-        {
-            var input = (ReadOnlyObservableCollection<ValidationError>)value;
-            return String.Join("\n", input.Select(error => error.ErrorContent.ToString()).ToArray());
-        }
-
-        public object ConvertBack(object value, Type targetType,
-                            object parameter, System.Globalization.CultureInfo culture)
-        {
-            return Binding.DoNothing;
-        }
-    }
-
     [ValueConversion(typeof(object), typeof(object))]
     public class DebugConverter : IValueConverter
     {

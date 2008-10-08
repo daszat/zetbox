@@ -85,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CustomControls\ErrorReporter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Debugger\KistlContextDebuggerWPF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +189,9 @@
   <ItemGroup>
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="CustomControls\ErrorReporter.xaml.cs">
+      <DependentUpon>ErrorReporter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Debugger\KistlContextDebuggerWPF.xaml.cs">
       <DependentUpon>KistlContextDebuggerWPF.xaml</DependentUpon>
     </Compile>

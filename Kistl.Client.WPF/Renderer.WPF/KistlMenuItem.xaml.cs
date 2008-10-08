@@ -21,6 +21,7 @@ namespace Kistl.GUI.Renderer.WPF
     {
         public KistlMenuItem()
         {
+            DataContext = this;
             InitializeComponent();
         }
 

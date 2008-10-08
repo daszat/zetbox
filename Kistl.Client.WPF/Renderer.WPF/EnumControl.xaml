@@ -1,14 +1,14 @@
-﻿<app:PropertyControl x:Name="Self"
-                     x:Class="Kistl.GUI.Renderer.WPF.EnumControl"
+﻿<app:PropertyControl x:Class="Kistl.GUI.Renderer.WPF.EnumControl"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
-                     ToolTip="{Binding ElementName=Self, Path=Description}">
+                     ToolTip="{Binding Description}">
+
     <app:PropertyControl.EditPart>
         <ComboBox x:Name="lst"
-                  ItemsSource="{Binding ElementName=Self, Path=ItemsSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  ItemsSource="{Binding ItemsSource, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                   IsSynchronizedWithCurrentItem="True"
-                  SelectedItem="{Binding ElementName=Self, Path=Value}"
-                  Validation.ErrorTemplate="{StaticResource ValidationAdorner}" />
+                  SelectedItem="{Binding Value}" />
     </app:PropertyControl.EditPart>
+
 </app:PropertyControl>
