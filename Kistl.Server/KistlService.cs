@@ -88,7 +88,6 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlDataContext.InitSession())
                     {
-                        // TODO: Add filter to Interface!!
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType())
                             .GetList(maxListCount, 
                             filter != null ? filter.ToExpression() : null, 

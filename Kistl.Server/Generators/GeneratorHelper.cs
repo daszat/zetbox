@@ -57,17 +57,7 @@ namespace Kistl.Server.Generators
 
         public static CodeTypeReference ToCodeTypeReference(this BaseProperty p, TaskEnum clientServer)
         {
-            string propType;
-            //if (clientServer == TaskEnum.Server && p is EnumerationProperty)
-            //{
-            //    // EF does not support Enums
-            //    // TODO: Change this, when EF Wrapper are implemented
-            //    propType = "System.Int32";
-            //}
-            //else
-            {
-                propType = p.GetPropertyTypeString();
-            }
+            string propType = p.GetPropertyTypeString();
 
             if (p is Property)
             {

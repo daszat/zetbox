@@ -269,7 +269,6 @@ namespace Kistl.DALProvider.EF
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
-        /// <remarks>Note: This Method is depricated.</remarks>
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <param name="type">Object Type of the Object to find.</param>
@@ -277,7 +276,8 @@ namespace Kistl.DALProvider.EF
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override IDataObject Find(Type type, int ID)
         {
-            throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
+            // See Case 552
+            return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
         }
 
         /// <summary>
@@ -291,7 +291,7 @@ namespace Kistl.DALProvider.EF
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override T Find<T>(int ID)
         {
-            throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>()");
+            return GetQuery<T>().First(o => o.ID == ID);
         }
     }
 }

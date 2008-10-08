@@ -357,7 +357,6 @@ namespace Kistl.API.Client
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
-        /// Note: This Method is deprecated.
         /// </summary>
         /// <param name="type">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>

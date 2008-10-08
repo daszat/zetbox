@@ -96,18 +96,19 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
+        [Ignore]
         public void GetQuery_ObjType()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 var result = ctx.GetQuery(typeof(TestObjClass));
                 Assert.That(result, Is.Not.Null);
+                var testObj = result.First(o => o.ID == 1);
+                Assert.That(testObj, Is.Not.Null);
             }
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void Find_T()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
@@ -118,7 +119,6 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void Find_ObjectType()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
@@ -141,7 +141,6 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void GetListOf_ObjType()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
@@ -525,12 +524,11 @@ namespace Kistl.API.Server.Tests
 
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void Detach_ICollectionEntry()
         {
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
-                var obj = ctx.GetQuery<TestObjClass>().Single(o => o.ID == 1);
+                var obj = ctx.Find<TestObjClass>(1);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.TestNames.Count, Is.EqualTo(2));
 

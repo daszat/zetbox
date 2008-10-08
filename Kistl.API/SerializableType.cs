@@ -33,14 +33,14 @@ namespace Kistl.API
             {
                 Type genericType = type.GetGenericTypeDefinition();
                 TypeName = genericType.FullName;
-                _AssemblyQualifiedName = genericType.AssemblyQualifiedName;
+                AssemblyQualifiedName = genericType.AssemblyQualifiedName;
 
                 type.GetGenericArguments().ForEach<Type>(t => GenericTypeParameter.Add(new SerializableType(t)));
             }
             else
             {
                 TypeName = type.FullName;
-                _AssemblyQualifiedName = type.AssemblyQualifiedName;
+                AssemblyQualifiedName = type.AssemblyQualifiedName;
             }
 
             // This is null if the Typ is e.g. a Generic Parameter - not supported
@@ -53,33 +53,11 @@ namespace Kistl.API
         [DataMember]
         public string TypeName { get; set; }
 
-        private string _AssemblyQualifiedName;
         /// <summary>
         /// AssemblyQualifiedName
-        /// TODO: This could be more optimal
         /// </summary>
         [DataMember]
-        public string AssemblyQualifiedName 
-        { 
-            get 
-            {
-                return _AssemblyQualifiedName;
-                // Obsolete -> using interfaces now
-                //switch (APIInit.HostType)
-                //{
-                //    case HostType.Server:
-                //        return _AssemblyQualifiedName.Replace(".Client", ".Server");
-                //    case HostType.Client:
-                //        return _AssemblyQualifiedName.Replace(".Server", ".Client");
-                //    default:
-                //        throw new InvalidOperationException("APIInit: Invalid Host Type " + APIInit.HostType);
-                //}
-            }
-            set
-            {
-                _AssemblyQualifiedName = value;
-            }
-        }
+        public string AssemblyQualifiedName { get; set; }
 
         /// <summary>
         /// List of Generiy Type Parameter

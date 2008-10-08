@@ -130,6 +130,9 @@ namespace Kistl.API
             if (e is NewExpression)
                 return new SerializableNewExpression((NewExpression)e, ctx);
 
+            if (e is ConditionalExpression)
+                return new SerializableConditionalExpression((ConditionalExpression)e, ctx);
+
             throw new NotSupportedException(string.Format("Nodetype {0} is not supported: {1}", e.NodeType, e.ToString()));
         }
 
@@ -518,4 +521,29 @@ namespace Kistl.API
     }
     #endregion
 
+    /// <summary>
+    /// Serializable ConditionalExpression
+    /// </summary>
+    [Serializable]
+    public class SerializableConditionalExpression : SerializableExpression
+    {
+        SerializableExpression test;
+        SerializableExpression ifTrue;
+        SerializableExpression ifFalse;
+
+        internal SerializableConditionalExpression(ConditionalExpression source, SerializationContext ctx)
+            : base(source, ctx)
+        {
+            test = SerializableExpression.FromExpression(source.Test, ctx);
+            ifTrue = SerializableExpression.FromExpression(source.IfTrue, ctx);
+            ifFalse = SerializableExpression.FromExpression(source.IfFalse, ctx);
+        }
+
+        internal override Expression ToExpressionInternal(SerializableExpression.SerializationContext ctx)
+        {
+            return Expression.Condition(test.ToExpressionInternal(ctx),
+                ifTrue.ToExpressionInternal(ctx),
+                ifFalse.ToExpressionInternal(ctx));
+        }
+    }
 }

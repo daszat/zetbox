@@ -28,8 +28,7 @@ namespace Kistl.GUI.DB
 
         private static ControlInfo FindControlInfo(Toolkit platform, VisualType type)
         {
-            // TODO: Remove superfluous ToList()
-            return (from ci in GuiContext.GetQuery<ControlInfo>().ToList()
+            return (from ci in GuiContext.GetQuery<ControlInfo>()
                     where ci.ControlType == type
                         && ci.Platform == platform
                     select ci).Single();
@@ -43,13 +42,12 @@ namespace Kistl.GUI.DB
             if (sourceType == null)
                 throw new ArgumentNullException("sourceType", "KistlGUIContext.FindPresenterInfo(visual, sourceType): sourceType must not be null");
 
-            // TODO: Remove superfluous ToList()
-            return (from pi in GuiContext.GetQuery<PresenterInfo>().ToList()
+            return (from pi in GuiContext.GetQuery<PresenterInfo>()
                     where
                         pi.ControlType == visual.ControlType
                         && (pi.DataAssembly == null // means mscorlib
                             ? sourceType.Assembly == typeof(object).Assembly // confirm mscorlib
-                            : pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName // compare assembly
+                            : pi.DataAssembly.AssemblyName == sourceType.Assembly.FullName // else compare assembly
                         )
                         && pi.DataTypeName == sourceType.FullName
                     select pi).Single();

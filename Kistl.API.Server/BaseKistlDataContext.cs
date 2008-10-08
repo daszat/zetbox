@@ -87,7 +87,7 @@ namespace Kistl.API.Server
         /// <returns>A List of Objects</returns>
         public virtual List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject
         {
-            IDataObject obj = (IDataObject)this.GetQuery(type).First(o => o.ID == ID);
+            IDataObject obj = (IDataObject)this.Find(type, ID);
             return GetListOf<T>(obj, propertyName);
         }
 
@@ -166,7 +166,6 @@ namespace Kistl.API.Server
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
-        /// <remarks>Note: This Method is depricated.</remarks>
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <param name="type">Object Type of the Object to find.</param>
@@ -178,7 +177,6 @@ namespace Kistl.API.Server
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
-        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>

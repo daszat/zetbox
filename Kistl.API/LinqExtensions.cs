@@ -149,6 +149,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Returns the Value of a Constant or Member Expression
+        /// TODO: Wer benutzt das? Ich glaub nur der ClientContext beim Auswerten von Take. Das könnte man vielleicht mit dem Constant Evaluatoer machen
         /// </summary>
         /// <typeparam name="TYPE">Values type</typeparam>
         /// <param name="e">Expression to get Value</param>
