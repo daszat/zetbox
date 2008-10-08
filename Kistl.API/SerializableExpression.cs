@@ -267,7 +267,17 @@ namespace Kistl.API
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
             Expression e = Children[0].ToExpressionInternal(ctx);
-            return MemberExpression.PropertyOrField(e, MemberName);
+
+            // See if the MemberAccess Expression has an implementation type
+            Type declaringType = e.Type.ToImplementationType();
+            if (declaringType.GetMember(MemberName).Length > 0 && declaringType.GetMember(MemberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
+            {
+                return Expression.PropertyOrField(e, MemberName + Kistl.API.Helper.ImplementationSuffix);
+            }
+            else
+            {
+                return Expression.PropertyOrField(e, MemberName);
+            }
         }
 
         /// <summary>

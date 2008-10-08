@@ -109,7 +109,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             set { Ctrl.IsValidValue = value; }
         }
 
-        public new string Error
+        string IValueControl<T>.Error
         {
             get { return Ctrl.Error; }
             set { Ctrl.Error = value; }
@@ -184,7 +184,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         #endregion
 
-        #region IValueControl<int> Members
+        #region IValueControl<IDataObject> Members
 
         public Kistl.API.IDataObject Value
         {
@@ -198,7 +198,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             set { Ctrl.IsValidValue = value; }
         }
 
-        public new string Error
+        string IValueControl<IDataObject>.Error
         {
             get { return Ctrl.Error; }
             set { Ctrl.Error = value; }
@@ -253,7 +253,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             set { Ctrl.IsValidValue = value; }
         }
 
-        public new string Error
+        string IValueControl<ObservableCollection<IDataObject>>.Error
         {
             get { return Ctrl.Error; }
             set { Ctrl.Error = value; }

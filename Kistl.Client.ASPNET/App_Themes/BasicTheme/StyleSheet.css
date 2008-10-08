@@ -85,6 +85,12 @@ div.Dialog
 	padding: 10px;
 }
 
+.ObjectPanelTitle
+{	
+	height: 1.6em; /* This must be, otherwise headertext is hidden in IE7. Peekaboo Bug?? */
+	margin-bottom: 20px;
+}
+
 div.ObjectPanelChildren
 {
 	padding-top: 10px;

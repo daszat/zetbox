@@ -20,6 +20,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
     {
         public abstract HtmlGenericControl divChildrenControl { get; }
         public abstract IButtonControl btnSaveControl { get; }
+        public abstract Literal litTitleControl { get; }
 
         public ObjectPanelControl()
         {
@@ -42,6 +43,13 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
         public void AddChild(IControlLoader child)
         {
             divChildrenControl.Controls.Add((Control)child);
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+
+            litTitleControl.Text = Value.ToString();
         }
 
         #region IObjectControl Members

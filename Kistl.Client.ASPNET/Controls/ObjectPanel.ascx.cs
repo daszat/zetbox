@@ -21,6 +21,13 @@ public partial class Controls_ObjectPanel : Kistl.Client.ASPNET.Toolkit.Controls
         get { return divChildren; }
     }
 
-    public override IButtonControl btnSaveControl { get { return btnSave; } }
+    public override IButtonControl btnSaveControl 
+    { 
+        get { return btnSave; } 
+    }
 
+    public override Literal litTitleControl
+    {
+        get { return litTitle; }
+    }
 }

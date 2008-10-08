@@ -160,17 +160,10 @@ namespace Kistl.Client.ASPNET.Toolkit.Controls
 
         #region IValueControl<ObservableCollection<IDataObject>> Members
 
-
-        public new string Error
+        string IValueControl<ObservableCollection<IDataObject>>.Error
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         #endregion

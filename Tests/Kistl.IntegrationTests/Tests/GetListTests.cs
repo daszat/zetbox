@@ -287,5 +287,19 @@ namespace Kistl.IntegrationTests
                 Assert.That(result.Count, Is.EqualTo(0));
             }
         }
+
+        /// <summary>
+        /// </summary>
+        [Test]
+        public void GetListWithPropertyObjectAccessor()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                int mID = 1;
+                var result = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(c => c.Module.ID == mID).ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
     }
 }

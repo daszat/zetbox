@@ -5,15 +5,15 @@
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Server\</DocumentStore>
+    <DocumentStore>c:\Projects\Kistl\DocumentStore\Server\</DocumentStore>
   </Server>
   <Client StartClient="true">
-    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
+    <DocumentStore>c:\Projects\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin</string>
-    <string>D:\Programmierung\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
-    <string>D:\Programmierung\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
-    <string>D:\Programmierung\Kistl\Kistl.Server\bin\Debug</string>
+    <string>c:\Projects\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
+    <string>c:\Projects\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
+    <string>c:\Projects\Kistl\Kistl.Server\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>
