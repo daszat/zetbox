@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Constraint_BaseProperty_ConstrainedProperty", "A_BaseProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BaseProperty__Implementation__), "B_Constraint", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Constraint__Implementation__))]
+
 namespace Kistl.App.Base
 {
     using System;
@@ -31,6 +33,10 @@ namespace Kistl.App.Base
         
         private int _ID;
         
+        private System.Nullable<int> _fk_ConstrainedProperty = null;
+        
+        private string _Reason;
+        
         public Constraint__Implementation__()
         {
         }
@@ -45,6 +51,70 @@ namespace Kistl.App.Base
             set
             {
                 _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.BaseProperty ConstrainedProperty
+        {
+            get
+            {
+                return ConstrainedProperty__Implementation__;
+            }
+            set
+            {
+                ConstrainedProperty__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)value;
+            }
+        }
+        
+        public System.Nullable<int> fk_ConstrainedProperty
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && ConstrainedProperty != null)
+                {
+                    _fk_ConstrainedProperty = ConstrainedProperty.ID;
+                }
+                return _fk_ConstrainedProperty;
+            }
+            set
+            {
+                _fk_ConstrainedProperty = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Constraint_BaseProperty_ConstrainedProperty", "A_BaseProperty")]
+        public Kistl.App.Base.BaseProperty__Implementation__ ConstrainedProperty__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>("Model.FK_Constraint_BaseProperty_ConstrainedProperty", "A_BaseProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>("Model.FK_Constraint_BaseProperty_ConstrainedProperty", "A_BaseProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.BaseProperty__Implementation__)value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public string Reason
+        {
+            get
+            {
+                return _Reason;
+            }
+            set
+            {
+                if (Reason != value)
+                {
+                    NotifyPropertyChanging("Reason"); 
+                    _Reason = value;
+                    NotifyPropertyChanged("Reason");;
+                }
             }
         }
         
@@ -97,12 +167,12 @@ namespace Kistl.App.Base
             return e.Result;
         }
         
-        public virtual string GetErrorText()
+        public virtual string GetErrorText(object value)
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             if (OnGetErrorText_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e);
+                OnGetErrorText_Constraint(this, e, value);
             };
             return e.Result;
         }
@@ -110,15 +180,19 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_ConstrainedProperty, sw);
+            BinarySerializer.ToBinary(this._Reason, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
+            BinarySerializer.FromBinary(out this._fk_ConstrainedProperty, sr);
+            BinarySerializer.FromBinary(out this._Reason, sr);
         }
         
         public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> e, object value);
         
-        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> e, object value);
     }
 }

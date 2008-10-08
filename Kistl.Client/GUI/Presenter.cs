@@ -239,7 +239,7 @@ namespace Kistl.GUI
             else
             {
                 Control.Error = String.Join("\n",
-                    Property.Constraints.Where(c => !c.IsValid(objValue)).Select(c => c.GetErrorText()).ToArray());
+                    Property.Constraints.Where(c => !c.IsValid(objValue)).Select(c => c.GetErrorText(objValue)).ToArray());
             }
         }
 
@@ -255,7 +255,7 @@ namespace Kistl.GUI
             else
             {
                 Control.Error = String.Join("\n",
-                    Property.Constraints.Where(c => !c.IsValid(mungedValue)).Select(c => c.GetErrorText()).ToArray());
+                    Property.Constraints.Where(c => !c.IsValid(mungedValue)).Select(c => c.GetErrorText(mungedValue)).ToArray());
             }
         }
 

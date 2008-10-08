@@ -23,11 +23,5 @@ namespace Kistl.App.Base
     
     public interface NotNullableConstraint : Kistl.App.Base.Constraint
     {
-        
-        string Reason
-        {
-            get;
-            set;
-        }
     }
 }

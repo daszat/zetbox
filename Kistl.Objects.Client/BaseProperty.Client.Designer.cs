@@ -33,11 +33,10 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Module = null;
         
-        private ListPropertyCollection<Kistl.App.Base.Constraint, Kistl.App.Base.BaseProperty, BaseProperty_ConstraintsCollectionEntry__Implementation__> _Constraints;
+        private BackReferenceCollection<Kistl.App.Base.Constraint> _Constraints;
         
         public BaseProperty__Implementation__()
         {
-            _Constraints = new ListPropertyCollection<Kistl.App.Base.Constraint, Kistl.App.Base.BaseProperty, BaseProperty_ConstraintsCollectionEntry__Implementation__>(this, "Constraints");
         }
         
         [XmlIgnore()]
@@ -136,10 +135,22 @@ namespace Kistl.App.Base
             }
         }
         
-        public IList<Kistl.App.Base.Constraint> Constraints
+        [XmlIgnore()]
+        public ICollection<Kistl.App.Base.Constraint> Constraints
         {
             get
             {
+                if (_Constraints == null)
+                {
+                    List<Kistl.App.Base.Constraint> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Base.Constraint>(this, "Constraints");
+                    else
+                        serverList = new List<Kistl.App.Base.Constraint>();
+
+                    _Constraints = new BackReferenceCollection<Kistl.App.Base.Constraint>(
+                         "ConstrainedProperty", this, serverList);
+                }
                 return _Constraints;
             }
         }
@@ -187,13 +198,13 @@ namespace Kistl.App.Base
             ((BaseProperty__Implementation__)obj).PropertyName = this.PropertyName;
             ((BaseProperty__Implementation__)obj).AltText = this.AltText;
             ((BaseProperty__Implementation__)obj).fk_Module = this.fk_Module;
-            this._Constraints.ApplyChanges(((BaseProperty__Implementation__)obj)._Constraints);
+            if(this._Constraints != null) this._Constraints.ApplyChanges(((BaseProperty__Implementation__)obj)._Constraints); else ((BaseProperty__Implementation__)obj)._Constraints = null; ((BaseProperty__Implementation__)obj).NotifyPropertyChanged("Constraints");
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _Constraints.AttachToContext(ctx);
+            if(_Constraints != null) _Constraints.AttachToContext(ctx);
         }
         
         public virtual string GetPropertyTypeString()
@@ -233,7 +244,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._PropertyName, sw);
             BinarySerializer.ToBinary(this._AltText, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
-            this._Constraints.ToStream(sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -243,7 +253,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._PropertyName, sr);
             BinarySerializer.FromBinary(out this._AltText, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
-            this._Constraints.FromStream(sr);
+            this._Constraints = new BackReferenceCollection<Kistl.App.Base.Constraint>("ConstrainedProperty", this); BinarySerializer.FromBinary(this._Constraints, sr);
         }
         
         public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);
@@ -251,89 +261,5 @@ namespace Kistl.App.Base
         public delegate void GetGUIRepresentation_Handler<T>(T obj, MethodReturnEventArgs<string> e);
         
         public delegate void GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
-    }
-    
-    public class BaseProperty_ConstraintsCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.Constraint, Kistl.App.Base.BaseProperty>
-    {
-        
-        private int _fk_Value;
-        
-        private int _fk_Parent;
-        
-        [XmlIgnore()]
-        public Kistl.App.Base.Constraint Value
-        {
-            get
-            {
-                return Context.GetQuery<Kistl.App.Base.Constraint>().Single(o => o.ID == fk_Value);
-            }
-            set
-            {
-                fk_Value = value.ID;;
-            }
-        }
-        
-        [XmlIgnore()]
-        public Kistl.App.Base.BaseProperty Parent
-        {
-            get
-            {
-                return Context.GetQuery<BaseProperty>().Single(o => o.ID == fk_Parent);
-            }
-            set
-            {
-                _fk_Parent = value.ID;
-            }
-        }
-        
-        public int fk_Value
-        {
-            get
-            {
-                return _fk_Value;
-            }
-            set
-            {
-                if(_fk_Value != value)
-                {
-                    base.NotifyPropertyChanging("Value");
-                    _fk_Value = value;
-                    base.NotifyPropertyChanged("Value");
-                };
-            }
-        }
-        
-        public int fk_Parent
-        {
-            get
-            {
-                return _fk_Parent;
-            }
-            set
-            {
-                _fk_Parent = value;
-            }
-        }
-        
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            base.ToStream(sw);
-            BinarySerializer.ToBinary(this.fk_Value, sw);
-            BinarySerializer.ToBinary(this.fk_Parent, sw);
-        }
-        
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._fk_Value, sr);
-            BinarySerializer.FromBinary(out this._fk_Parent, sr);
-        }
-        
-        public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
-        {
-            base.ApplyChanges(obj);
-            ((BaseProperty_ConstraintsCollectionEntry__Implementation__)obj)._fk_Value = this.fk_Value;
-            ((BaseProperty_ConstraintsCollectionEntry__Implementation__)obj)._fk_Parent = this.fk_Parent;
-        }
     }
 }

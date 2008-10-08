@@ -69,6 +69,7 @@
     <Compile Include="EnumerationEntry.Designer.cs" />
     <Compile Include="EnumerationProperty.Designer.cs" />
     <Compile Include="Icon.Designer.cs" />
+    <Compile Include="IntegerRangeConstraint.Designer.cs" />
     <Compile Include="Interface.Designer.cs" />
     <Compile Include="IntParameter.Designer.cs" />
     <Compile Include="IntProperty.Designer.cs" />

@@ -21,42 +21,19 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
-    public interface BaseProperty : IDataObject
+    public interface IntegerRangeConstraint : Kistl.App.Base.Constraint
     {
         
-        Kistl.App.Base.DataType ObjectClass
+        int Max
         {
             get;
             set;
         }
         
-        string PropertyName
+        int Min
         {
             get;
             set;
         }
-        
-        string AltText
-        {
-            get;
-            set;
-        }
-        
-        Kistl.App.Base.Module Module
-        {
-            get;
-            set;
-        }
-        
-        ICollection<Kistl.App.Base.Constraint> Constraints
-        {
-            get;
-        }
-        
-        string GetPropertyTypeString();
-        
-        string GetGUIRepresentation();
-        
-        System.Type GetPropertyType();
     }
 }

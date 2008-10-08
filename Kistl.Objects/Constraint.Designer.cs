@@ -24,8 +24,20 @@ namespace Kistl.App.Base
     public interface Constraint : IDataObject
     {
         
+        Kistl.App.Base.BaseProperty ConstrainedProperty
+        {
+            get;
+            set;
+        }
+        
+        string Reason
+        {
+            get;
+            set;
+        }
+        
         bool IsValid(object value);
         
-        string GetErrorText();
+        string GetErrorText(object value);
     }
 }

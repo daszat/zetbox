@@ -35,7 +35,6 @@
     <EntitySet Name="Visual_ChildrenCollectionEntry" EntityType="Model.Visual_ChildrenCollectionEntry" />
     <EntitySet Name="Visual_ContextMenuCollectionEntry" EntityType="Model.Visual_ContextMenuCollectionEntry" />
     <EntitySet Name="Template_MenuCollectionEntry" EntityType="Model.Template_MenuCollectionEntry" />
-    <EntitySet Name="BaseProperty_ConstraintsCollectionEntry" EntityType="Model.BaseProperty_ConstraintsCollectionEntry" />
     <AssociationSet Name="FK_BaseProperty_DataType_ObjectClass" Association="Model.FK_BaseProperty_DataType_ObjectClass">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_BaseProperty" EntitySet="BaseProperty" />
@@ -208,9 +207,9 @@
       <End Role="A_Visual" EntitySet="Visual" />
       <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints" Association="Model.FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints">
-      <End Role="A_Constraint" EntitySet="Constraint" />
-      <End Role="B_BaseProperty_ConstraintsCollectionEntry" EntitySet="BaseProperty_ConstraintsCollectionEntry" />
+    <AssociationSet Name="FK_Constraint_BaseProperty_ConstrainedProperty" Association="Model.FK_Constraint_BaseProperty_ConstrainedProperty">
+      <End Role="A_BaseProperty" EntitySet="BaseProperty" />
+      <End Role="B_Constraint" EntitySet="Constraint" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -239,10 +238,6 @@
     <AssociationSet Name="FK_Template_MenuCollectionEntry_Template_fk_Parent" Association="Model.FK_Template_MenuCollectionEntry_Template_fk_Parent">
       <End Role="A_Template" EntitySet="Template" />
       <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent" Association="Model.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent">
-      <End Role="A_BaseProperty" EntitySet="BaseProperty" />
-      <End Role="B_BaseProperty_ConstraintsCollectionEntry" EntitySet="BaseProperty_ConstraintsCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass" BaseType="Model.DataType">
@@ -285,7 +280,7 @@
     <Property Name="PropertyName" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_BaseProperty_Module_Module" FromRole="B_BaseProperty" ToRole="A_Module" />
-    <NavigationProperty Name="Constraints__Implementation__" Relationship="Model.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent" FromRole="A_BaseProperty" ToRole="B_BaseProperty_ConstraintsCollectionEntry" />
+    <NavigationProperty Name="Constraints__Implementation__" Relationship="Model.FK_Constraint_BaseProperty_ConstrainedProperty" FromRole="A_BaseProperty" ToRole="B_Constraint" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -566,9 +561,13 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint">
+    <NavigationProperty Name="ConstrainedProperty__Implementation__" Relationship="Model.FK_Constraint_BaseProperty_ConstrainedProperty" FromRole="B_Constraint" ToRole="A_BaseProperty" />
     <Property Name="Reason" Type="String" MaxLength="400" Nullable="true" />
+  </EntityType>
+  <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint" />
+  <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint">
+    <Property Name="Max" Type="Int32" Nullable="false" />
+    <Property Name="Min" Type="Int32" Nullable="false" />
   </EntityType>
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
@@ -629,14 +628,6 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ValueImpl" Relationship="Model.FK_Template_MenuCollectionEntry_Visual_Menu" FromRole="B_Template_MenuCollectionEntry" ToRole="A_Visual" />
     <NavigationProperty Name="ParentImpl" Relationship="Model.FK_Template_MenuCollectionEntry_Template_fk_Parent" FromRole="B_Template_MenuCollectionEntry" ToRole="A_Template" />
-  </EntityType>
-  <EntityType Name="BaseProperty_ConstraintsCollectionEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ValueImpl" Relationship="Model.FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints" FromRole="B_BaseProperty_ConstraintsCollectionEntry" ToRole="A_Constraint" />
-    <NavigationProperty Name="ParentImpl" Relationship="Model.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent" FromRole="B_BaseProperty_ConstraintsCollectionEntry" ToRole="A_BaseProperty" />
   </EntityType>
   <Association Name="FK_BaseProperty_DataType_ObjectClass">
     <End Role="A_DataType" Type="Model.DataType" Multiplicity="0..1" />
@@ -810,9 +801,9 @@
     <End Role="A_Visual" Type="Model.Visual" Multiplicity="0..1" />
     <End Role="B_Template_MenuCollectionEntry" Type="Model.Template_MenuCollectionEntry" Multiplicity="*" />
   </Association>
-  <Association Name="FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints">
-    <End Role="A_Constraint" Type="Model.Constraint" Multiplicity="0..1" />
-    <End Role="B_BaseProperty_ConstraintsCollectionEntry" Type="Model.BaseProperty_ConstraintsCollectionEntry" Multiplicity="*" />
+  <Association Name="FK_Constraint_BaseProperty_ConstrainedProperty">
+    <End Role="A_BaseProperty" Type="Model.BaseProperty" Multiplicity="0..1" />
+    <End Role="B_Constraint" Type="Model.Constraint" Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />
@@ -841,9 +832,5 @@
   <Association Name="FK_Template_MenuCollectionEntry_Template_fk_Parent">
     <End Role="A_Template" Type="Model.Template" Multiplicity="0..1" />
     <End Role="B_Template_MenuCollectionEntry" Type="Model.Template_MenuCollectionEntry" Multiplicity="*" />
-  </Association>
-  <Association Name="FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent">
-    <End Role="A_BaseProperty" Type="Model.BaseProperty" Multiplicity="0..1" />
-    <End Role="B_BaseProperty_ConstraintsCollectionEntry" Type="Model.BaseProperty_ConstraintsCollectionEntry" Multiplicity="*" />
   </Association>
 </Schema>

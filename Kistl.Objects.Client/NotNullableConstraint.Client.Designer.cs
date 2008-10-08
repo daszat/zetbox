@@ -25,27 +25,8 @@ namespace Kistl.App.Base
     public class NotNullableConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, NotNullableConstraint
     {
         
-        private string _Reason;
-        
         public NotNullableConstraint__Implementation__()
         {
-        }
-        
-        public string Reason
-        {
-            get
-            {
-                return _Reason;
-            }
-            set
-            {
-                if (Reason != value)
-                {
-                    NotifyPropertyChanging("Reason"); 
-                    _Reason = value;
-                    NotifyPropertyChanged("Reason");;
-                }
-            }
         }
         
         public event ToStringHandler<NotNullableConstraint> OnToString_NotNullableConstraint;
@@ -85,7 +66,6 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((NotNullableConstraint__Implementation__)obj).Reason = this.Reason;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -104,13 +84,13 @@ namespace Kistl.App.Base
             return e.Result;
         }
         
-        public override string GetErrorText()
+        public override string GetErrorText(object value)
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetErrorText();
+            e.Result = base.GetErrorText(value);
             if (OnGetErrorText_NotNullableConstraint != null)
             {
-                OnGetErrorText_NotNullableConstraint(this, e);
+                OnGetErrorText_NotNullableConstraint(this, e, value);
             };
             return e.Result;
         }
@@ -118,13 +98,11 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this._Reason, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._Reason, sr);
         }
     }
 }

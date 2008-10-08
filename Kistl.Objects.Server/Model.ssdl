@@ -53,6 +53,7 @@
     <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates" />
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints" />
     <EntitySet Name="NotNullableConstraint" EntityType="Model.Store.NotNullableConstraint" Table="NotNullableConstraints" />
+    <EntitySet Name="IntegerRangeConstraint" EntityType="Model.Store.IntegerRangeConstraint" Table="IntegerRangeConstraints" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -60,7 +61,6 @@
     <EntitySet Name="Visual_ChildrenCollectionEntry" EntityType="Model.Store.Visual_ChildrenCollectionEntry" Table="Visuals_ChildrenCollection" />
     <EntitySet Name="Visual_ContextMenuCollectionEntry" EntityType="Model.Store.Visual_ContextMenuCollectionEntry" Table="Visuals_ContextMenuCollection" />
     <EntitySet Name="Template_MenuCollectionEntry" EntityType="Model.Store.Template_MenuCollectionEntry" Table="Templates_MenuCollection" />
-    <EntitySet Name="BaseProperty_ConstraintsCollectionEntry" EntityType="Model.Store.BaseProperty_ConstraintsCollectionEntry" Table="BaseProperties_ConstraintsCollection" />
     <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
@@ -160,6 +160,10 @@
     <AssociationSet Name="FK_NotNullableConstraint_Constraint_ID" Association="Model.Store.FK_NotNullableConstraint_Constraint_ID">
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_NotNullableConstraint" EntitySet="NotNullableConstraint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntegerRangeConstraint_Constraint_ID" Association="Model.Store.FK_IntegerRangeConstraint_Constraint_ID">
+      <End Role="A_Constraint" EntitySet="Constraint" />
+      <End Role="B_IntegerRangeConstraint" EntitySet="IntegerRangeConstraint" />
     </AssociationSet>
     <AssociationSet Name="FK_BaseProperty_DataType_ObjectClass" Association="Model.Store.FK_BaseProperty_DataType_ObjectClass">
       <End Role="A_DataType" EntitySet="DataType" />
@@ -333,9 +337,9 @@
       <End Role="A_Visual" EntitySet="Visual" />
       <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints" Association="Model.Store.FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints">
-      <End Role="A_Constraint" EntitySet="Constraint" />
-      <End Role="B_BaseProperty_ConstraintsCollectionEntry" EntitySet="BaseProperty_ConstraintsCollectionEntry" />
+    <AssociationSet Name="FK_Constraint_BaseProperty_ConstrainedProperty" Association="Model.Store.FK_Constraint_BaseProperty_ConstrainedProperty">
+      <End Role="A_BaseProperty" EntitySet="BaseProperty" />
+      <End Role="B_Constraint" EntitySet="Constraint" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -364,10 +368,6 @@
     <AssociationSet Name="FK_Template_MenuCollectionEntry_Template_fk_Parent" Association="Model.Store.FK_Template_MenuCollectionEntry_Template_fk_Parent">
       <End Role="A_Template" EntitySet="Template" />
       <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent" Association="Model.Store.FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent">
-      <End Role="A_BaseProperty" EntitySet="BaseProperty" />
-      <End Role="B_BaseProperty_ConstraintsCollectionEntry" EntitySet="BaseProperty_ConstraintsCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -780,13 +780,22 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ConstrainedProperty" Type="int" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
   </EntityType>
   <EntityType Name="NotNullableConstraint">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
+  </EntityType>
+  <EntityType Name="IntegerRangeConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Max" Type="int" Nullable="false" />
+    <Property Name="Min" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -843,14 +852,6 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Template" Type="int" Nullable="true" />
     <Property Name="fk_Menu" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="BaseProperty_ConstraintsCollectionEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_BaseProperty" Type="int" Nullable="true" />
-    <Property Name="fk_Constraints" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_ObjectClass_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
@@ -1148,6 +1149,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_NotNullableConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntegerRangeConstraint_Constraint_ID">
+    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
+    <End Role="B_IntegerRangeConstraint" Type="Model.Store.IntegerRangeConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Constraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_IntegerRangeConstraint">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -1668,15 +1681,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BaseProperty_ConstraintsCollectionEntry_Constraint_Constraints">
-    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="0..1" />
-    <End Role="B_BaseProperty_ConstraintsCollectionEntry" Type="Model.Store.BaseProperty_ConstraintsCollectionEntry" Multiplicity="*" />
+  <Association Name="FK_Constraint_BaseProperty_ConstrainedProperty">
+    <End Role="A_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="0..1" />
+    <End Role="B_Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="A_Constraint">
+      <Principal Role="A_BaseProperty">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_BaseProperty_ConstraintsCollectionEntry">
-        <PropertyRef Name="fk_Constraints" />
+      <Dependent Role="B_Constraint">
+        <PropertyRef Name="fk_ConstrainedProperty" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1761,18 +1774,6 @@
       </Principal>
       <Dependent Role="B_Template_MenuCollectionEntry">
         <PropertyRef Name="fk_Template" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BaseProperty_ConstraintsCollectionEntry_BaseProperty_fk_Parent">
-    <End Role="A_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="0..1" />
-    <End Role="B_BaseProperty_ConstraintsCollectionEntry" Type="Model.Store.BaseProperty_ConstraintsCollectionEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_BaseProperty_ConstraintsCollectionEntry">
-        <PropertyRef Name="fk_BaseProperty" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -9,7 +9,7 @@ using Kistl.API;
 
 namespace Kistl.App.Base
 {
-    public class CustomClientActions_KistlBase
+    public partial class CustomClientActions_KistlBase
     {
         #region ToString
         /// <summary>
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
             {
                 e.Result = string.Format("{0} {1}.{2}",
                    obj.GetPropertyTypeString(),
-                   obj.ObjectClass.ClassName,
+                   (obj.ObjectClass == null) ? "unattached" : obj.ObjectClass.ClassName,
                    obj.PropertyName);
             }
             else
@@ -355,22 +355,6 @@ namespace Kistl.App.Base
             {
                 e.Result = new List<Method>();
             }
-        }
-
-        public void OnIsValid_Constraint(Kistl.App.Base.Constraint obj, Kistl.API.MethodReturnEventArgs<bool> e, object value)
-        {
-            // the base constraint accepts all values
-            e.Result = true;
-        }
-
-        public void OnIsValid_NotNullableConstraint(Kistl.App.Base.Constraint obj, Kistl.API.MethodReturnEventArgs<bool> e, object value)
-        {
-            e.Result &= value != null;
-        }
-
-        public void OnGetErrorText_NotNullableConstraint(Kistl.App.Base.NotNullableConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = String.IsNullOrEmpty(obj.Reason) ? "Value must be set" : String.Format("Value must be set: {0}", obj.Reason);
         }
 
     }

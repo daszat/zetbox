@@ -25,8 +25,60 @@ namespace Kistl.App.Base
     public class Constraint__Implementation__ : BaseClientDataObject, Constraint
     {
         
+        private System.Nullable<int> _fk_ConstrainedProperty = null;
+        
+        private string _Reason;
+        
         public Constraint__Implementation__()
         {
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.BaseProperty ConstrainedProperty
+        {
+            get
+            {
+                if (fk_ConstrainedProperty == null) return null;
+                return Context.Find<Kistl.App.Base.BaseProperty>(fk_ConstrainedProperty.Value);
+            }
+            set
+            {
+                fk_ConstrainedProperty = value != null ? (int?)value.ID : null;
+            }
+        }
+        
+        public System.Nullable<int> fk_ConstrainedProperty
+        {
+            get
+            {
+                return _fk_ConstrainedProperty;
+            }
+            set
+            {
+                if (fk_ConstrainedProperty != value)
+                {
+                    NotifyPropertyChanging("ConstrainedProperty"); 
+                    _fk_ConstrainedProperty = value;
+                    NotifyPropertyChanged("ConstrainedProperty");;
+                }
+            }
+        }
+        
+        public string Reason
+        {
+            get
+            {
+                return _Reason;
+            }
+            set
+            {
+                if (Reason != value)
+                {
+                    NotifyPropertyChanging("Reason"); 
+                    _Reason = value;
+                    NotifyPropertyChanged("Reason");;
+                }
+            }
         }
         
         public event ToStringHandler<Constraint> OnToString_Constraint;
@@ -66,6 +118,8 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
+            ((Constraint__Implementation__)obj).fk_ConstrainedProperty = this.fk_ConstrainedProperty;
+            ((Constraint__Implementation__)obj).Reason = this.Reason;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -83,12 +137,12 @@ namespace Kistl.App.Base
             return e.Result;
         }
         
-        public virtual string GetErrorText()
+        public virtual string GetErrorText(object value)
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             if (OnGetErrorText_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e);
+                OnGetErrorText_Constraint(this, e, value);
             };
             return e.Result;
         }
@@ -96,15 +150,19 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
+            BinarySerializer.ToBinary(this.fk_ConstrainedProperty, sw);
+            BinarySerializer.ToBinary(this._Reason, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
+            BinarySerializer.FromBinary(out this._fk_ConstrainedProperty, sr);
+            BinarySerializer.FromBinary(out this._Reason, sr);
         }
         
         public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> e, object value);
         
-        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> e);
+        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> e, object value);
     }
 }
