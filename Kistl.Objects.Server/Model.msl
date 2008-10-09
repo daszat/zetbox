@@ -394,6 +394,13 @@
           <ScalarProperty Name="Min" ColumnName="Min" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringRangeConstraint)">
+        <MappingFragment StoreEntitySet="StringRangeConstraint">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MaxLength" ColumnName="MaxLength" />
+          <ScalarProperty Name="MinLength" ColumnName="MinLength" />
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">

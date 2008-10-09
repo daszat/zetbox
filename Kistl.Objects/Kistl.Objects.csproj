@@ -93,6 +93,7 @@
     <Compile Include="Property.Designer.cs" />
     <Compile Include="StringParameter.Designer.cs" />
     <Compile Include="StringProperty.Designer.cs" />
+    <Compile Include="StringRangeConstraint.Designer.cs" />
     <Compile Include="Struct.Designer.cs" />
     <Compile Include="StructProperty.Designer.cs" />
     <Compile Include="Taetigkeit.Designer.cs" />

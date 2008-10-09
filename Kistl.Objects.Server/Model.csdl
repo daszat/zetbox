@@ -569,6 +569,10 @@
     <Property Name="Max" Type="Int32" Nullable="false" />
     <Property Name="Min" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint">
+    <Property Name="MaxLength" Type="Int32" Nullable="false" />
+    <Property Name="MinLength" Type="Int32" Nullable="false" />
+  </EntityType>
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
     <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />

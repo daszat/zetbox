@@ -81,6 +81,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Constraint), ElementName="Constraint")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.NotNullableConstraint), ElementName="NotNullableConstraint")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.IntegerRangeConstraint), ElementName="IntegerRangeConstraint")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.StringRangeConstraint), ElementName="StringRangeConstraint")]
         public System.Collections.Generic.List<object> Objects
         {
             get
@@ -156,6 +157,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.Constraint), ElementName="Constraint")]
         [XmlElement(Type=typeof(Kistl.App.Base.NotNullableConstraint), ElementName="NotNullableConstraint")]
         [XmlElement(Type=typeof(Kistl.App.Base.IntegerRangeConstraint), ElementName="IntegerRangeConstraint")]
+        [XmlElement(Type=typeof(Kistl.App.Base.StringRangeConstraint), ElementName="StringRangeConstraint")]
         public object Object
         {
             get

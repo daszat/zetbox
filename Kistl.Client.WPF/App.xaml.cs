@@ -55,7 +55,7 @@ namespace Kistl.Client.WPF
                     // Apply a NotNullableConstraint as appropriate
                     foreach (var prop in ctx.GetQuery<Property>())
                     {
-                        var currentNotNullableConstraint = prop.Constraints.Where(c => c is NotNullableConstraint).SingleOrDefault();
+                        var currentNotNullableConstraint = prop.Constraints.OfType<NotNullableConstraint>().SingleOrDefault();
                         bool hasNullableConstraint = (currentNotNullableConstraint != null);
                         if (prop.IsNullable && hasNullableConstraint)
                         {
@@ -67,6 +67,21 @@ namespace Kistl.Client.WPF
                             prop.Constraints.Add(ctx.Create<NotNullableConstraint>());
                             System.Console.Out.WriteLine("Added missing NotNullableConstraint");
                         }
+                    }
+                
+                    // synchronize Stringproperty's Length
+                    foreach (var prop in ctx.GetQuery<StringProperty>())
+                    {
+                        var currentStringRangeConstraint = prop.Constraints.OfType<StringRangeConstraint>().SingleOrDefault();
+
+                        if (currentStringRangeConstraint == null)
+                        {
+                            currentStringRangeConstraint = ctx.Create<StringRangeConstraint>();
+                            currentStringRangeConstraint.MinLength = 0;
+                            prop.Constraints.Add(currentStringRangeConstraint);
+                        }
+
+                        currentStringRangeConstraint.MaxLength = prop.Length.Value;
                     }
                     ctx.SubmitChanges();
                 }

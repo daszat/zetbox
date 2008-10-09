@@ -102,6 +102,7 @@
     <Compile Include="Property.Client.Designer.cs" />
     <Compile Include="StringParameter.Client.Designer.cs" />
     <Compile Include="StringProperty.Client.Designer.cs" />
+    <Compile Include="StringRangeConstraint.Client.Designer.cs" />
     <Compile Include="Struct.Client.Designer.cs" />
     <Compile Include="StructProperty.Client.Designer.cs" />
     <Compile Include="Taetigkeit.Client.Designer.cs" />
