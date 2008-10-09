@@ -15,17 +15,16 @@
                     BorderThickness="{TemplateBinding BorderThickness}"
                     Padding="{TemplateBinding Padding}">
                 <DockPanel LastChildFill="True">
-                    <TextBlock DockPanel.Dock="Right"
-                               Foreground="Orange"
-                               Text="{TemplateBinding Text}"
-                               Visibility="Visible">
+                    <TextBlock DockPanel.Dock="Bottom"
+                               Foreground="Red"
+                               Text="{TemplateBinding Text}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsReportingError, ElementName=CurrentErrorReporter}"
-                                             Value="True">
+                                             Value="False">
                                     <Setter Property="Visibility"
-                                            Value="Visible" />
+                                            Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
