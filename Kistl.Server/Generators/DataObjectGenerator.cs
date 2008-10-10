@@ -443,7 +443,9 @@ namespace Kistl.Server.Generators
                 BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
                 CodeMemberMethod m = current.code_class.CreateMethod(method.MethodName, returnParam.ToCodeTypeReference());
 
-                foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
+                // added inverse sort by ID to stabilise order of parameters
+                // TODO: implement orderable lists and backrefs instead!
+                foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter).OrderBy(p => -p.ID))
                 {
                     m.Parameters.Add(new CodeParameterDeclarationExpression(
                         new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
@@ -1228,7 +1230,9 @@ namespace Kistl.Server.Generators
                                 "e"));
                         }
 
-                        foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
+                        // added inverse sort by ID to stabilise order of parameters
+                        // TODO: implement orderable lists and backrefs instead!
+                        foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter).OrderBy(p => -p.ID))
                         {
                             d.Parameters.Add(new CodeParameterDeclarationExpression(
                                 param.ToCodeTypeReference(), param.ParameterName));
@@ -1254,7 +1258,9 @@ namespace Kistl.Server.Generators
 
                     // Add Parameter
                     StringBuilder methodCallParameter = new StringBuilder();
-                    foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter))
+                    // added inverse sort by ID to stabilise order of parameters
+                    // TODO: implement orderable lists and backrefs instead!
+                    foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter).OrderBy(p=>-p.ID))
                     {
                         m.Parameters.Add(new CodeParameterDeclarationExpression(
                             param.ToCodeTypeReference(), param.ParameterName));
