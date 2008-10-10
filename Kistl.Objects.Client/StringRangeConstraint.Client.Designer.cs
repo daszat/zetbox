@@ -113,24 +113,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public override bool IsValid(object value)
+        public override bool IsValid(object constrainedObj, object constrainedValue)
         {
             MethodReturnEventArgs<System.Boolean> e = new MethodReturnEventArgs<System.Boolean>();
-            e.Result = base.IsValid(value);
+            e.Result = base.IsValid(constrainedObj, constrainedValue);
             if (OnIsValid_StringRangeConstraint != null)
             {
-                OnIsValid_StringRangeConstraint(this, e, value);
+                OnIsValid_StringRangeConstraint(this, e, constrainedObj, constrainedValue);
             };
             return e.Result;
         }
         
-        public override string GetErrorText(object value)
+        public override string GetErrorText(object constrainedObject, object constrainedValue)
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
-            e.Result = base.GetErrorText(value);
+            e.Result = base.GetErrorText(constrainedObject, constrainedValue);
             if (OnGetErrorText_StringRangeConstraint != null)
             {
-                OnGetErrorText_StringRangeConstraint(this, e, value);
+                OnGetErrorText_StringRangeConstraint(this, e, constrainedObject, constrainedValue);
             };
             return e.Result;
         }

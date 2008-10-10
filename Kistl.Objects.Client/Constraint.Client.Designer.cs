@@ -127,22 +127,22 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
         
-        public virtual bool IsValid(object value)
+        public virtual bool IsValid(object constrainedObj, object constrainedValue)
         {
             MethodReturnEventArgs<System.Boolean> e = new MethodReturnEventArgs<System.Boolean>();
             if (OnIsValid_Constraint != null)
             {
-                OnIsValid_Constraint(this, e, value);
+                OnIsValid_Constraint(this, e, constrainedObj, constrainedValue);
             };
             return e.Result;
         }
         
-        public virtual string GetErrorText(object value)
+        public virtual string GetErrorText(object constrainedObject, object constrainedValue)
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             if (OnGetErrorText_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e, value);
+                OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
             };
             return e.Result;
         }
@@ -161,8 +161,8 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._Reason, sr);
         }
         
-        public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> e, object value);
+        public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> e, object constrainedObj, object constrainedValue);
         
-        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> e, object value);
+        public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> e, object constrainedObject, object constrainedValue);
     }
 }

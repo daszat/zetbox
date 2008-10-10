@@ -55,6 +55,7 @@
     <EntitySet Name="NotNullableConstraint" EntityType="Model.Store.NotNullableConstraint" Table="NotNullableConstraints" />
     <EntitySet Name="IntegerRangeConstraint" EntityType="Model.Store.IntegerRangeConstraint" Table="IntegerRangeConstraints" />
     <EntitySet Name="StringRangeConstraint" EntityType="Model.Store.StringRangeConstraint" Table="StringRangeConstraints" />
+    <EntitySet Name="MethodInvocationConstraint" EntityType="Model.Store.MethodInvocationConstraint" Table="MethodInvocationConstraints" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -169,6 +170,10 @@
     <AssociationSet Name="FK_StringRangeConstraint_Constraint_ID" Association="Model.Store.FK_StringRangeConstraint_Constraint_ID">
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_StringRangeConstraint" EntitySet="StringRangeConstraint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocationConstraint_Constraint_ID" Association="Model.Store.FK_MethodInvocationConstraint_Constraint_ID">
+      <End Role="A_Constraint" EntitySet="Constraint" />
+      <End Role="B_MethodInvocationConstraint" EntitySet="MethodInvocationConstraint" />
     </AssociationSet>
     <AssociationSet Name="FK_BaseProperty_DataType_ObjectClass" Association="Model.Store.FK_BaseProperty_DataType_ObjectClass">
       <End Role="A_DataType" EntitySet="DataType" />
@@ -810,6 +815,12 @@
     <Property Name="MaxLength" Type="int" Nullable="false" />
     <Property Name="MinLength" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="MethodInvocationConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -1186,6 +1197,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_StringRangeConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MethodInvocationConstraint_Constraint_ID">
+    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
+    <End Role="B_MethodInvocationConstraint" Type="Model.Store.MethodInvocationConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Constraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_MethodInvocationConstraint">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

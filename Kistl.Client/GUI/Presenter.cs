@@ -231,7 +231,7 @@ namespace Kistl.GUI
             // intermediate results.
             Control.Value = MungeFromObject(objValue);
 
-            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(objValue));
+            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(Object, objValue));
             if (Control.IsValidValue)
             {
                 Control.Error = null;
@@ -239,14 +239,14 @@ namespace Kistl.GUI
             else
             {
                 Control.Error = String.Join("\n",
-                    Property.Constraints.Where(c => !c.IsValid(objValue)).Select(c => c.GetErrorText(objValue)).ToArray());
+                    Property.Constraints.Where(c => !c.IsValid(Object, objValue)).Select(c => c.GetErrorText(Object, objValue)).ToArray());
             }
         }
 
         private void SetPropertyFromControl()
         {
             var mungedValue = MungeFromControl(Control.Value);
-            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(mungedValue));
+            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(Object, mungedValue));
             if (Control.IsValidValue)
             {
                 SetPropertyValue( mungedValue);
@@ -255,7 +255,7 @@ namespace Kistl.GUI
             else
             {
                 Control.Error = String.Join("\n",
-                    Property.Constraints.Where(c => !c.IsValid(mungedValue)).Select(c => c.GetErrorText(mungedValue)).ToArray());
+                    Property.Constraints.Where(c => !c.IsValid(Object, mungedValue)).Select(c => c.GetErrorText(Object, mungedValue)).ToArray());
             }
         }
 

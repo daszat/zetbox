@@ -81,6 +81,7 @@
     <Compile Include="LastTest.Designer.cs" />
     <Compile Include="Method.Designer.cs" />
     <Compile Include="MethodInvocation.Designer.cs" />
+    <Compile Include="MethodInvocationConstraint.Designer.cs" />
     <Compile Include="Mitarbeiter.Designer.cs" />
     <Compile Include="Module.Designer.cs" />
     <Compile Include="Muhblah.Designer.cs" />

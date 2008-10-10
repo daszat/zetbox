@@ -25,32 +25,32 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="NotNullableConstraint")]
-    public class NotNullableConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, NotNullableConstraint
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="MethodInvocationConstraint")]
+    public class MethodInvocationConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, MethodInvocationConstraint
     {
         
-        public NotNullableConstraint__Implementation__()
+        public MethodInvocationConstraint__Implementation__()
         {
         }
         
-        public event ToStringHandler<NotNullableConstraint> OnToString_NotNullableConstraint;
+        public event ToStringHandler<MethodInvocationConstraint> OnToString_MethodInvocationConstraint;
         
-        public event ObjectEventHandler<NotNullableConstraint> OnPreSave_NotNullableConstraint;
+        public event ObjectEventHandler<MethodInvocationConstraint> OnPreSave_MethodInvocationConstraint;
         
-        public event ObjectEventHandler<NotNullableConstraint> OnPostSave_NotNullableConstraint;
+        public event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
         
-        public event IsValid_Handler<NotNullableConstraint> OnIsValid_NotNullableConstraint;
+        public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
         
-        public event GetErrorText_Handler<NotNullableConstraint> OnGetErrorText_NotNullableConstraint;
+        public event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_NotNullableConstraint != null)
+            if (OnToString_MethodInvocationConstraint != null)
             {
-                OnToString_NotNullableConstraint(this, e);
+                OnToString_MethodInvocationConstraint(this, e);
             }
             return e.Result;
         }
@@ -58,13 +58,13 @@ namespace Kistl.App.Base
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_NotNullableConstraint != null) OnPreSave_NotNullableConstraint(this);
+            if (OnPreSave_MethodInvocationConstraint != null) OnPreSave_MethodInvocationConstraint(this);
         }
         
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_NotNullableConstraint != null) OnPostSave_NotNullableConstraint(this);
+            if (OnPostSave_MethodInvocationConstraint != null) OnPostSave_MethodInvocationConstraint(this);
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -76,9 +76,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.Boolean> e = new MethodReturnEventArgs<System.Boolean>();
             e.Result = base.IsValid(constrainedObj, constrainedValue);
-            if (OnIsValid_NotNullableConstraint != null)
+            if (OnIsValid_MethodInvocationConstraint != null)
             {
-                OnIsValid_NotNullableConstraint(this, e, constrainedObj, constrainedValue);
+                OnIsValid_MethodInvocationConstraint(this, e, constrainedObj, constrainedValue);
             };
             return e.Result;
         }
@@ -87,9 +87,9 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<System.String> e = new MethodReturnEventArgs<System.String>();
             e.Result = base.GetErrorText(constrainedObject, constrainedValue);
-            if (OnGetErrorText_NotNullableConstraint != null)
+            if (OnGetErrorText_MethodInvocationConstraint != null)
             {
-                OnGetErrorText_NotNullableConstraint(this, e, constrainedObject, constrainedValue);
+                OnGetErrorText_MethodInvocationConstraint(this, e, constrainedObject, constrainedValue);
             };
             return e.Result;
         }

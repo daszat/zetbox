@@ -53,6 +53,6 @@ namespace Kistl.App.Projekte
             set;
         }
         
-        System.DateTime TestMethodForParameter(string TestString, int TestInt, double TestDouble, bool TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter);
+        System.DateTime TestMethodForParameter(System.Guid TestCLRObjectParameter, Kistl.App.Projekte.Auftrag TestObjectParameter, System.DateTime TestDateTime, bool TestBool, double TestDouble, int TestInt, string TestString);
     }
 }

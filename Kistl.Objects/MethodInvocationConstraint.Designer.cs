@@ -21,23 +21,7 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
-    public interface Constraint : IDataObject
+    public interface MethodInvocationConstraint : Kistl.App.Base.Constraint
     {
-        
-        Kistl.App.Base.BaseProperty ConstrainedProperty
-        {
-            get;
-            set;
-        }
-        
-        string Reason
-        {
-            get;
-            set;
-        }
-        
-        bool IsValid(object constrainedObj, object constrainedValue);
-        
-        string GetErrorText(object constrainedObject, object constrainedValue);
     }
 }

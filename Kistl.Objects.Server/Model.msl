@@ -401,6 +401,11 @@
           <ScalarProperty Name="MinLength" ColumnName="MinLength" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocationConstraint)">
+        <MappingFragment StoreEntitySet="MethodInvocationConstraint">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">

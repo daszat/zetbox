@@ -188,12 +188,12 @@ namespace Kistl.App.Projekte
             base.AttachToContext(ctx);
         }
         
-        public virtual System.DateTime TestMethodForParameter(string TestString, int TestInt, double TestDouble, bool TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter)
+        public virtual System.DateTime TestMethodForParameter(System.Guid TestCLRObjectParameter, Kistl.App.Projekte.Auftrag TestObjectParameter, System.DateTime TestDateTime, bool TestBool, double TestDouble, int TestInt, string TestString)
         {
             MethodReturnEventArgs<System.DateTime> e = new MethodReturnEventArgs<System.DateTime>();
             if (OnTestMethodForParameter_Mitarbeiter != null)
             {
-                OnTestMethodForParameter_Mitarbeiter(this, e, TestString, TestInt, TestDouble, TestBool, TestDateTime, TestObjectParameter, TestCLRObjectParameter);
+                OnTestMethodForParameter_Mitarbeiter(this, e, TestCLRObjectParameter, TestObjectParameter, TestDateTime, TestBool, TestDouble, TestInt, TestString);
             };
             return e.Result;
         }
@@ -216,6 +216,6 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._TelefonNummer, sr);
         }
         
-        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<System.DateTime> e, string TestString, int TestInt, double TestDouble, bool TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter);
+        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<System.DateTime> e, System.Guid TestCLRObjectParameter, Kistl.App.Projekte.Auftrag TestObjectParameter, System.DateTime TestDateTime, bool TestBool, double TestDouble, int TestInt, string TestString);
     }
 }

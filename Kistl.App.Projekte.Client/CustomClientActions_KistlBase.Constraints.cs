@@ -18,7 +18,8 @@ namespace Kistl.App.Base
         public void OnIsValid_Constraint(
             Constraint obj,
             MethodReturnEventArgs<bool> e,
-            object value)
+            object constrainedObjectParam,
+            object constrainedValueParam)
         {
             // the base constraint accepts all values
             e.Result = true;
@@ -31,15 +32,17 @@ namespace Kistl.App.Base
         public void OnIsValid_NotNullableConstraint(
             NotNullableConstraint obj,
             MethodReturnEventArgs<bool> e,
-            object value)
+            object constrainedObjectParam,
+            object constrainedValueParam)
         {
-            e.Result &= value != null;
+            e.Result &= constrainedValueParam != null;
         }
 
         public void OnGetErrorText_NotNullableConstraint(
             NotNullableConstraint obj,
             MethodReturnEventArgs<string> e,
-            object value)
+            object constrainedObjectParam,
+            object constrainedValueParam)
         {
             e.Result = String.IsNullOrEmpty(obj.Reason) ? "Value must be set" : String.Format("Value must be set: {0}", obj.Reason);
         }
@@ -56,19 +59,21 @@ namespace Kistl.App.Base
         public void OnIsValid_IntegerRangeConstraint(
             IntegerRangeConstraint obj,
             MethodReturnEventArgs<bool> e,
-            object value)
+            object constrainedObjectParam,
+            object constrainedValueParam)
         {
-            int v = (int)value;
+            int v = (int)constrainedValueParam;
             e.Result &= (obj.Min <= v) && (v <= obj.Max);
         }
 
         public void OnGetErrorText_IntegerRangeConstraint(
             IntegerRangeConstraint obj,
             MethodReturnEventArgs<string> e,
-            object value)
+            object constrainedObjectParam,
+            object constrainedValueParam)
         {
-            int v = (int)value;
-            if (obj.IsValid(value))
+            int v = (int)constrainedValueParam;
+            if (obj.IsValid(constrainedObjectParam, constrainedValueParam))
             {
                 e.Result = null;
             }
@@ -102,19 +107,21 @@ namespace Kistl.App.Base
         public void OnIsValid_StringRangeConstraint(
             StringRangeConstraint obj,
             MethodReturnEventArgs<bool> e,
-            object value)
+            object constrainedObjectParam,
+            object constrainedValueParam)
         {
-            int length = value.ToString().Length;
+            int length = constrainedValueParam.ToString().Length;
             e.Result &= (obj.MinLength <= length) && (length <= obj.MaxLength);
         }
 
         public void OnGetErrorText_StringRangeConstraint(
             StringRangeConstraint obj,
             MethodReturnEventArgs<string> e,
-            object value)
+            object constrainedObjectParam,
+            object constrainedValueParam)
         {
-            int length = value.ToString().Length;
-            if (obj.IsValid(value))
+            int length = constrainedValueParam.ToString().Length;
+            if (obj.IsValid(constrainedObjectParam, constrainedValueParam))
             {
                 e.Result = null;
             }
@@ -152,6 +159,57 @@ namespace Kistl.App.Base
                     obj.ConstrainedProperty.PropertyName,
                     obj.MaxLength);
             }
+        }
+
+        #endregion
+
+        #region MethodInvocationConstraint
+
+        public void OnIsValid_MethodInvocationConstraint(
+            MethodInvocationConstraint obj,
+            MethodReturnEventArgs<bool> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+            var constrainedObject = (MethodInvocation)constrainedObjectParam;
+            var method = (Method)constrainedValueParam;
+            e.Result &= IsAssignableFrom(method.ObjectClass,constrainedObject.InvokeOnObjectClass);
+        }
+
+        // TODO: Move to DataType ?
+        public static bool IsAssignableFrom(DataType self, DataType other)
+        {
+            // if one or both parameters are null, it never can be assignable
+            // also, this is a nice stop condition for the recursion for ObjectClasses
+            if (self == null || other == null)
+                return false;
+
+            if (self == other)
+                return true;
+
+            if (!(self is ObjectClass && other is ObjectClass))
+                return false;
+
+            // self might be an ancestor of other, check here
+            return IsAssignableFrom(self, (other as ObjectClass).BaseObjectClass);
+        }
+
+        public void OnGetErrorText_MethodInvocationConstraint(
+            MethodInvocationConstraint obj,
+            MethodReturnEventArgs<string> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+            var constrainedObject = (MethodInvocation)constrainedObjectParam;
+            var method = (Method)constrainedValueParam;
+            e.Result = String.Format("This Invocation's  InvokeOnObjectClass ('{1}') should be a descendent of (or equal to) the Method's class ('{0}'), but isn't",
+                method.ObjectClass,
+                constrainedObject.InvokeOnObjectClass);
+        }
+
+        public void OnToString_MethodInvocationConstraint(MethodInvocationConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "MethodIvocation's Method.ObjectClass should be assignable from InvokeOnObjectClass";
         }
 
         #endregion

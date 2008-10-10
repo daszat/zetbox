@@ -321,6 +321,8 @@ namespace Kistl.GUI
         {
             // remember the objects that are sent to the object
             // to facilitate validity checking
+
+            // TODO: constrain query on property constraints to only get valid items
             _Items = Object.Context.GetQuery<T>().ToList();
             Control.ItemsSource = _Items.Cast<IDataObject>().ToList();
         }

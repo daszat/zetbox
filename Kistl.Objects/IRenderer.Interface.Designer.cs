@@ -34,6 +34,6 @@ namespace Kistl.App.GUI
         
         void ShowObject(Kistl.API.IDataObject obj);
         
-        Kistl.API.IDataObject ChooseObject(Kistl.API.IKistlContext ctx, System.Type objectType);
+        Kistl.API.IDataObject ChooseObject(System.Type objectType, Kistl.API.IKistlContext ctx);
     }
 }
