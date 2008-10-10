@@ -1,7 +1,7 @@
 ﻿<!--
     Contrary to other controls, the ErrorReporter may not touch the DataContext,
     because this would trip up the children's bindings. Therefore we bind to 
-    x:Name=CurrentErrorReporter here.
+    x:Name=CurrentErrorReporter here or use TemplateBindings where possible.
 -->
 <UserControl x:Name="CurrentErrorReporter"
              x:Class="Kistl.GUI.Renderer.WPF.Controls.ErrorReporter"
@@ -17,6 +17,7 @@
                 <DockPanel LastChildFill="True">
                     <TextBlock DockPanel.Dock="Bottom"
                                Foreground="Red"
+                               TextWrapping="Wrap"
                                Text="{TemplateBinding Text}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
