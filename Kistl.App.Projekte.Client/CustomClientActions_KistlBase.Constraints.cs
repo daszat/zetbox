@@ -197,4 +197,25 @@ namespace Kistl.App.Base
 
         #endregion
     }
+
+    public static class Helpers
+    {
+        // copied from TheseMethodsShouldBeImplementedOnKistlObjects
+        public static bool IsAssignableFrom(this DataType self, DataType other)
+        {
+            // if one or both parameters are null, it never can be assignable
+            // also, this is a nice stop condition for the recursion for ObjectClasses
+            if (self == null || other == null)
+                return false;
+
+            if (self == other)
+                return true;
+
+            if (!(self is ObjectClass && other is ObjectClass))
+                return false;
+
+            // self might be an ancestor of other, check here
+            return IsAssignableFrom(self, (other as ObjectClass).BaseObjectClass);
+        }
+    }
 }
