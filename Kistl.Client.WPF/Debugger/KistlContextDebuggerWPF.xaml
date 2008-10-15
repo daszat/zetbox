@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="KistlContext Debugger"
         Height="360"
-        Width="300">
+        Width="300"
+        WindowStyle="ToolWindow"
+        ShowInTaskbar="False">
     <Grid>
         <TreeView x:Name="tree"
                   ItemsSource="{Binding}">
