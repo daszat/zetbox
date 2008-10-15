@@ -27,11 +27,13 @@
             </Grid.LayoutTransform>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <local:DesktopTreeView Grid.Column="0" SelectionChanged="DesktopTreeView_SelectionChanged" />
-            <GridSplitter ResizeDirection="Columns" Width="5" />
-            <kevin:Graph Grid.Column="1"
+            <GridSplitter Grid.Column="1"
+                ResizeDirection="Columns" Width="5" HorizontalAlignment="Stretch" />
+            <kevin:Graph Grid.Column="2"
                          x:Name="graph"
                          CoefficientOfDampening="0.7"                         FrameRate="0.3"
                          NodesBindingPath="SubItems"
