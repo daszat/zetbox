@@ -85,7 +85,6 @@
     <Content Include="DefaultConfig_API.Tests.xml" />
     <Content Include="Kistl.APITests.PartCoverReport.xml" />
     <Content Include="Kistl.APITests.PartCoverSettings.xml" />
-    <Content Include="Kistl.APITests.VisualState.xml" />
     <Content Include="TestResult.xml" />
   </ItemGroup>
   <ItemGroup>
