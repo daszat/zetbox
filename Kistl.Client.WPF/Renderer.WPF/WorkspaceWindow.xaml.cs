@@ -72,6 +72,23 @@ namespace Kistl.GUI.Renderer.WPF
             }
         }
 
+        /// <summary>
+        /// select the tab of the given IDataObject
+        /// </summary>
+        /// <param name="obj"></param>
+        public void ShowObject(Kistl.API.IDataObject obj)
+        {
+            var tabItem = Objects.Single(tab => ((IObjectControl)tab).Value.Equals(obj));
+            ShowObject(obj, tabItem);
+        }
+
+        public bool IsDisplayingObjects(params Kistl.API.IDataObject[] objs)
+        {
+            return objs.All(obj => 
+                Objects.SingleOrDefault(tab => ((IObjectControl)tab).Value.Equals(obj))
+                != null);
+        }
+
         public void ShowObject(Kistl.API.IDataObject obj, IBasicControl ctrl)
         {
             if (ctrl == null)

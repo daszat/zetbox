@@ -22,14 +22,15 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den GetList Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
+        /// <param name="maxListCount"></param>
+        /// <param name="filter"></param>
+        /// <param name="orderBy"></param>
         /// <returns></returns>
         IEnumerable GetList(int maxListCount, Expression filter, Expression orderBy);
 
         /// <summary>
         /// Implementiert den GetListOf Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
@@ -38,7 +39,6 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
         IDataObject GetObject(int ID);
@@ -49,8 +49,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="xml"></param>
+        /// <param name="objects"></param>
         /// <returns></returns>
         IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects);
     }
@@ -226,8 +225,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="xml"></param>
+        /// <param name="objects"></param>
         /// <returns></returns>
         public virtual IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects)
         {

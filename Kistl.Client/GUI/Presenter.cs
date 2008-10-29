@@ -219,6 +219,8 @@ namespace Kistl.GUI
                 // intelligent controls might want to show the user both the "real" and the user's value
                 if (e.PropertyName == Property.PropertyName)
                     SetControlValueFromObject();
+
+                SetIsValid(MungeFromControl(Control.Value));
             }
         }
 
@@ -231,25 +233,22 @@ namespace Kistl.GUI
             // intermediate results.
             Control.Value = MungeFromObject(objValue);
 
-            Control.IsValidValue = Property.Constraints.All(c => c.IsValid(Object, objValue));
-            if (Control.IsValidValue)
-            {
-                Control.Error = null;
-            }
-            else
-            {
-                Control.Error = String.Join("\n",
-                    Property.Constraints.Where(c => !c.IsValid(Object, objValue)).Select(c => c.GetErrorText(Object, objValue)).ToArray());
-            }
+            SetIsValid(objValue);
+            
         }
 
         private void SetPropertyFromControl()
         {
             var mungedValue = MungeFromControl(Control.Value);
+            SetPropertyValue(mungedValue);
+            SetIsValid(mungedValue);
+        }
+
+        protected void SetIsValid(PROPERTYTYPE mungedValue)
+        {
             Control.IsValidValue = Property.Constraints.All(c => c.IsValid(Object, mungedValue));
             if (Control.IsValidValue)
             {
-                SetPropertyValue( mungedValue);
                 Control.Error = null;
             }
             else

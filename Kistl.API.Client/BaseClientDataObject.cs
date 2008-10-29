@@ -126,8 +126,7 @@ namespace Kistl.API.Client
                 if (this.ObjectState == DataObjectState.Unmodified)
                     this.ObjectState = DataObjectState.Modified;
 
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs(property));
+                OnPropertyChanged(property);
             }
             else
             {
@@ -136,21 +135,32 @@ namespace Kistl.API.Client
             }
         }
 
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
         private List<string> notifications = null;
         public void RecordNotifications()
         {
-            if (notifications != null) throw new InvalidOperationException("Notifications are recording");
+            if (notifications != null) throw new InvalidOperationException("Notifications are already recording");
             notifications = new List<string>();
         }
 
         public void PlaybackNotifications()
         {
-            if (notifications == null) throw new InvalidOperationException("No notifications where recorded");
+            if (notifications == null) throw new InvalidOperationException("Notification recording was not enabled");
+
+            // enable normal notifications before playing back the old
+            // this is neccessary to allow handlers to cause normal events
+            var localCopy = notifications;
+            notifications = null;
+
             if (PropertyChanged != null)
             {
-                notifications.ForEach(p => PropertyChanged(this, new PropertyChangedEventArgs(p)));
+                localCopy.ForEach(p => OnPropertyChanged(p));
             }
-            notifications = null;
         }
     }
 

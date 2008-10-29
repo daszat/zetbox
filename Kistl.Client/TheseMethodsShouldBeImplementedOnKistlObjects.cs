@@ -66,5 +66,12 @@ namespace Kistl.Client
             return IsAssignableFrom(self, (other as ObjectClass).BaseObjectClass);
         }
 
+        public static bool IsValid(this IDataObject self)
+        {
+            ObjectClass oc = self.GetObjectClass(self.Context);
+            return oc.Properties.Aggregate(true, (acc, prop) =>
+                acc && prop.Constraints.All(c => 
+                    c.IsValid(self, self.GetPropertyValue<object>(prop.PropertyName))));
+        }
     }
 }

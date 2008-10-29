@@ -58,6 +58,18 @@ namespace Kistl.GUI.Renderer.WPF
             return widget;
         }
 
+        public override void ShowObject(IDataObject obj)
+        {
+            WorkspaceWindow w = FindWorkspace(obj.Context);
+            if (w == null || !w.IsDisplayingObjects(obj))
+            {
+                base.ShowObject(obj);
+            }
+            else
+            {
+                w.ShowObject(obj);
+            }
+        }
         protected override void ShowObject(Kistl.API.IDataObject obj, ContentControl ctrl, IList<Control> menus)
         {
             WorkspaceWindow w = FindOrCreateWorkspace(obj.Context);

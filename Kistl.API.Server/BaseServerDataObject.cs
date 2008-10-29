@@ -277,7 +277,7 @@ namespace Kistl.API.Server
         public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
-        /// Property is beeing changing
+        /// Property is about to be changed
         /// </summary>
         /// <param name="property"></param>
         public virtual void NotifyPropertyChanging(string property)

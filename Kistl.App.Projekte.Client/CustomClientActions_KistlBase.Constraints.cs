@@ -49,7 +49,14 @@ namespace Kistl.App.Base
 
         public void OnToString_NotNullableConstraint(NotNullableConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0} should not be NULL", obj.ConstrainedProperty.PropertyName);
+            if (obj.ConstrainedProperty == null)
+            {
+                e.Result = String.Format("The ConstrainedProperty should not be NULL");
+            }
+            else
+            {
+                e.Result = String.Format("{0} should not be NULL", obj.ConstrainedProperty.PropertyName);
+            }
         }
 
         #endregion

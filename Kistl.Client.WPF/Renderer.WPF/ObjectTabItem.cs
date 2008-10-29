@@ -7,9 +7,6 @@ using Kistl.API;
 
 namespace Kistl.GUI.Renderer.WPF
 {
-    /// <summary>
-    /// Interaktionslogik für Window1.xaml
-    /// </summary>
     public partial class ObjectTabItem : ContentControl, IObjectControl
     {
         public ObjectTabItem()
