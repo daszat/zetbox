@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{26C035B1-A53D-44E0-BEED-CB97EC56B38E}</ProjectGuid>
+    <ProjectGuid>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CompleteTests</RootNamespace>
-    <AssemblyName>CompleteTests</AssemblyName>
+    <RootNamespace>Kistl.Client.Tests</RootNamespace>
+    <AssemblyName>Kistl.Client.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,55 +31,53 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NMock2, Version=1.1.3164.34013, Culture=neutral, PublicKeyToken=cf53a760d95f4c33, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NMock2\bin\Debug\NMock2.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Kistl.Client.Mocks\CustomActionsManagerClientTests.cs" />
+    <Compile Include="Kistl.Client.Mocks\MockFactory.cs" />
+    <Compile Include="Kistl.Client.Mocks\TestObject.cs" />
+    <Compile Include="Kistl.GUI.Tests\PresenterTests.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetUp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="CompleteTests.exe.config">
+    <ProjectReference Include="..\..\Kistl.API.Client\Kistl.API.Client.csproj">
+      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
+      <Name>Kistl.API.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Client\Kistl.Client.csproj">
+      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
+      <Name>Kistl.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.Client.Tests.nunit" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DefaultConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="CompleteTests.nunit" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CompleteTests.PartCoverSettings.xml" />
-    <Content Include="DefaultConfig_API.Client.Tests.xml" />
-    <Content Include="DefaultConfig_API.Server.Tests.xml" />
-    <Content Include="DefaultConfig_API.Tests.xml" />
-    <Content Include="DefaultConfig_Integration.Tests.xml" />
-    <Content Include="DefaultConfig_Kistl.Client.Tests.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj">
-      <Project>{382F1331-A177-4B38-A3E7-6D1B9A0F812B}</Project>
-      <Name>Kistl.API.Client.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Server.Tests\Kistl.API.Server.Tests.csproj">
-      <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666E}</Project>
-      <Name>Kistl.API.Server.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
-      <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
-      <Name>Kistl.API.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.IntegrationTests\Kistl.IntegrationTests.csproj">
-      <Project>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</Project>
-      <Name>Kistl.IntegrationTests</Name>
-    </ProjectReference>
+    </Content>
+    <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

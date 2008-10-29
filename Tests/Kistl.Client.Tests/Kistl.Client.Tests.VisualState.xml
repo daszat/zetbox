@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]P:\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit</TopNode>
+  <SelectedNode>[0-1000]P:\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]P:\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" Expanded="true">
+      <Nodes>
+        <Node UniqueName="[1-1011]P:\Kistl\Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.exe" Expanded="true">
+          <Nodes>
+            <Node UniqueName="[1-1012]Kistl" Expanded="true">
+              <Nodes>
+                <Node UniqueName="[1-1013]Kistl.Client" Expanded="true">
+                  <Nodes>
+                    <Node UniqueName="[1-1000]Kistl.Client.Tests.SetUp" />
+                  </Nodes>
+                </Node>
+                <Node UniqueName="[1-1015]Kistl.GUI" Expanded="true">
+                  <Nodes>
+                    <Node UniqueName="[1-1016]Kistl.GUI.Tests" Expanded="true">
+                      <Nodes>
+                        <Node UniqueName="[1-1001]Kistl.GUI.Tests.PresenterTests" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[1-1009]Kistl.GUI.Tests.PresenterTests.IDisposable_Dispose" />
+                            <Node UniqueName="[1-1010]Kistl.GUI.Tests.PresenterTests.IDisposable_Finalizer" />
+                            <Node UniqueName="[1-1005]Kistl.GUI.Tests.PresenterTests.InitializeComponent" />
+                            <Node UniqueName="[1-1006]Kistl.GUI.Tests.PresenterTests.InitializeComponentOnlyOnce" />
+                            <Node UniqueName="[1-1002]Kistl.GUI.Tests.PresenterTests.InitializeFirstArgNull" />
+                            <Node UniqueName="[1-1003]Kistl.GUI.Tests.PresenterTests.InitializeSecondArgNull" />
+                            <Node UniqueName="[1-1004]Kistl.GUI.Tests.PresenterTests.InitializeThirdArgNull" />
+                            <Node UniqueName="[1-1008]Kistl.GUI.Tests.PresenterTests.IPresenter_InitializeComponent" />
+                            <Node UniqueName="[1-1007]Kistl.GUI.Tests.PresenterTests.IPresenter_InitializeComponentFailFast" />
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+      </Nodes>
+    </Node>
+  </Nodes>
+</VisualState>
