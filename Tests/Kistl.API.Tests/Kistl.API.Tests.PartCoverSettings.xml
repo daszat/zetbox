@@ -1,6 +1,6 @@
 <PartCoverSettings>
   <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
   <TargetWorkDir>P:\Kistl\Tests\Kistl.API.Tests</TargetWorkDir>
-  <TargetArgs>Kistl.APITests.nunit</TargetArgs>
+  <TargetArgs>Kistl.API.Tests.nunit</TargetArgs>
   <Rule>+[Kistl.API]*</Rule>
 </PartCoverSettings>

@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NMock2, Version=1.1.3164.34013, Culture=neutral, PublicKeyToken=cf53a760d95f4c33, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NMock2\bin\Debug\NMock2.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -80,14 +84,13 @@
     <Compile Include="Tests\SerializableExpressionTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.APITests.nunit" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DefaultConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Kistl.APITests.PartCoverReport.xml" />
-    <Content Include="Kistl.APITests.PartCoverSettings.xml" />
+    <Content Include="Kistl.API.Tests.PartCoverSettings.xml" />
+    <Content Include="TestConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestResult.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +98,9 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.API.Tests.nunit" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

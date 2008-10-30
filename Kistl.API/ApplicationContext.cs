@@ -44,7 +44,7 @@ namespace Kistl.API
 
         public ICustomActionsManager CustomActionsManager { get; private set; }
 
-        public void SetCustomActionsManager(ICustomActionsManager manager)
+        protected void SetCustomActionsManager(ICustomActionsManager manager)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("CustomActionsManagerFactory of {0}", manager.GetType().Name))
             {

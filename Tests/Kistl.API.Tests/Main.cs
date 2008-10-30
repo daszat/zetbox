@@ -13,9 +13,7 @@ namespace Kistl.API.Tests
             setup.Init();
 
             var test = new ApplicationContextTests();
-            test.IDisposable_Finalizer();
-            test.IDisposable_Dispose();
-            test.InitServer();
+            test.SetCustomActionsManagerNull();
         }
 
         private static void BinarySerializerTests()
