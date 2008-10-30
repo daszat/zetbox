@@ -77,10 +77,10 @@ namespace Kistl.API.Server
                 {
                     if (_ServerObjectHandlerType == null)
                     {
-                        _ServerObjectHandlerType = Type.GetType(Configuration.KistlConfig.Current.Server.ServerObjectHandlerType);
+                        _ServerObjectHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType);
                         if (_ServerObjectHandlerType == null)
                         {
-                            throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectHandler. Check your Configuration '/Server/ServerObjectHandlerType'.", API.Configuration.KistlConfig.Current.Server.ServerObjectHandlerType));
+                            throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectHandler. Check your Configuration '/Server/ServerObjectHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType));
                         }
                     }
                 }
@@ -99,17 +99,17 @@ namespace Kistl.API.Server
             {
                 if (_ServerObjectSetHandlerType == null)
                 {
-                    _ServerObjectSetHandlerType = Type.GetType(API.Configuration.KistlConfig.Current.Server.ServerObjectSetHandlerType);
+                    _ServerObjectSetHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType);
                     if (_ServerObjectSetHandlerType == null)
                     {
-                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectSetHandler. Check your Configuration '/Server/ServerObjectSetHandlerType'.", API.Configuration.KistlConfig.Current.Server.ServerObjectSetHandlerType));
+                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectSetHandler. Check your Configuration '/Server/ServerObjectSetHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType));
                     }
                 }
             }
             object obj = Activator.CreateInstance(_ServerObjectSetHandlerType);
             if (!(obj is IServerObjectSetHandler))
             {
-                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/ServerObjectSetHandlerType'.", API.Configuration.KistlConfig.Current.Server.ServerObjectSetHandlerType));
+                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/ServerObjectSetHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType));
             }
             return (IServerObjectSetHandler)obj;
         }
@@ -118,7 +118,7 @@ namespace Kistl.API.Server
     /// <summary>
     /// Basis Objekt für die generische Server BL. Implementiert Linq
     /// Das ist nur für den generischen Teil gedacht, alle anderen Custom Actions
-    /// können mit Linq auf den Context direkt zugreifen, da die Actions am Objekt & am Context
+    /// können mit Linq auf den Context direkt zugreifen, da die Actions am Objekt &amp; am Context
     /// selbst implementiert sind
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -132,11 +132,6 @@ namespace Kistl.API.Server
         {
         }
 
-        /// <summary>
-        /// Implementiert den GetList Befehl.
-        /// </summary>
-        /// <param name="ctx"></param>
-        /// <returns></returns>
         public IEnumerable GetList(int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
@@ -167,10 +162,9 @@ namespace Kistl.API.Server
         /// GetListOf can be used to get the list of values in the property 
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
-        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <param name="property"></param>
-        /// <returns></returns>
+        /// <returns>the list of values in the property</returns>
         public IEnumerable GetListOf(int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}, Property = {1}", ID, property)))
@@ -187,9 +181,8 @@ namespace Kistl.API.Server
         /// <summary>
         /// Gibt eine typisierte Objektinstanz zurück.
         /// </summary>
-        /// <param name="ctx"></param>
         /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <returns>a typed object</returns>
         protected abstract T GetObjectInstance(int ID);
         //{
         //    using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
@@ -211,7 +204,6 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
         public IDataObject GetObject(int ID)

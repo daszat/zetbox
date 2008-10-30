@@ -44,7 +44,6 @@ namespace Kistl.API
         /// <summary>
         /// Appends a Expression Tree to a Linq Expression
         /// </summary>
-        /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
         /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
         /// <param name="filter">Expression Tree</param>
         /// <returns>IQueryable with this Filter</returns>

@@ -155,7 +155,7 @@ namespace Kistl.GUI.Renderer.WPF
             var template = obj.FindTemplate(TemplateUsage.EditControl);
 
             // the Meat
-            this.Content = Manager.Renderer.CreateControl(obj, template.VisualTree);
+            this.Content = GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
 
             this.Show();
         }

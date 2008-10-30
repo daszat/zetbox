@@ -39,10 +39,10 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         void context_BeginRequest(object sender, EventArgs e)
         {
-            if (!Kistl.Client.Manager.IsInitialized)
+            if (GuiApplicationContext.Current == null)
             {
                 // Code, der beim Starten der Anwendung ausgeführt wird.
-                Kistl.Client.Manager.Create(new string[] { HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]) },
+                var appCtx = new GuiApplicationContext(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]),
                     Kistl.App.GUI.Toolkit.ASPNET);
             }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();

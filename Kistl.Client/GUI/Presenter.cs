@@ -517,7 +517,7 @@ namespace Kistl.GUI
 
         void Control_ActionActivatedEvent(object sender, EventArgs e)
         {
-            Manager.Renderer.ShowMessage("Button clicked");
+            GuiApplicationContext.Current.Renderer.ShowMessage("Button clicked");
             Object.GetType().InvokeMember(Preferences.Method.MethodName, BindingFlags.InvokeMethod, null, Object, new object[] { });
         }
     }
@@ -636,13 +636,13 @@ namespace Kistl.GUI
 
         protected virtual void OnNew()
         {
-            ObjectClass klass = Manager.Renderer.ChooseObject<ObjectClass>(Control.Context, "Choose object class to create");
+            ObjectClass klass = GuiApplicationContext.Current.Renderer.ChooseObject<ObjectClass>(Control.Context, "Choose object class to create");
             if (klass != null)
             {
                 Kistl.API.IDataObject newObject = Control.Context.Create(klass.GetDataType());
 
                 var template = newObject.FindTemplate(TemplateUsage.EditControl);
-                IObjectControl ctrl = (IObjectControl)Manager.Renderer.CreateControl(newObject, template.VisualTree);
+                IObjectControl ctrl = (IObjectControl)GuiApplicationContext.Current.Renderer.CreateControl(newObject, template.VisualTree);
 
                 Control.ShowObject(newObject, ctrl);
             }

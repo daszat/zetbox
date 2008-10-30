@@ -20,7 +20,7 @@ namespace Kistl.API.Client.Tests
         [SetUp]
         public void SetUp()
         {
-            currentCustomActionsManager = (CustomActionsManagerAPITest)CustomActionsManagerFactory.Current;
+            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
             PropertyChangedCalled = false;

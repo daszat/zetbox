@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
+
+using Kistl.API;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
-using Kistl.API;
-using System.Reflection;
-using System.Linq.Expressions;
 
 namespace Kistl.API.Tests
 {
@@ -18,8 +20,7 @@ namespace Kistl.API.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Init_Fail()
         {
-            Assert.That(CustomActionsManagerFactory.Current, Is.Not.Null);
-            CustomActionsManagerFactory.Init(new CustomActionsManagerAPITest());
+            Assert.That(ApplicationContext.Current.CustomActionsManager, Is.Not.Null);
         }
     }
 }

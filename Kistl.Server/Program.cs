@@ -6,6 +6,8 @@ using System.ServiceModel;
 using System.Threading;
 using System.Diagnostics;
 
+using Kistl.API.Server;
+
 namespace Kistl.Server
 {
     /// <summary>
@@ -15,15 +17,17 @@ namespace Kistl.Server
     {
         static void Main(string[] args)
         {
-            Kistl.API.APIInit init = new Kistl.API.APIInit();
+            string configFilePath;
             if (args.Length > 0 && !args[0].StartsWith("-"))
             {
-                init.Init(Kistl.API.HostType.Server, args[0]);
+                configFilePath = args[0];
             }
             else
             {
-                init.Init(Kistl.API.HostType.Server);
+                configFilePath = "";
             }
+
+            var appCtx = new ServerApplicationContext(configFilePath);
 
             Server server = new Server();
 

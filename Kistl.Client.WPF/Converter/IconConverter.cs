@@ -13,7 +13,7 @@ namespace Kistl.Client.WPF.Converter
     {
         private string GetIconPath(string name)
         {
-            string result = Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore
+            string result = ApplicationContext.Current.Configuration.Client.DocumentStore
                 + @"\GUI.Icons\"
                 + name;
             result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;

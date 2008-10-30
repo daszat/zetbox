@@ -108,7 +108,7 @@ namespace Kistl.Client.WPF.Dialogs
             }
 
             Result = Context.Create(oc.GetDataType());
-            Manager.Renderer.ShowObject(Result);
+            GuiApplicationContext.Current.Renderer.ShowObject(Result);
             DialogResult = true;
             this.Close();
         }

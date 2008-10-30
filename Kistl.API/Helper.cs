@@ -85,7 +85,7 @@ namespace Kistl.API
                     _WorkingFolder += _WorkingFolder.EndsWith(@"\") ? "" : @"\";
 
                     _WorkingFolder += @"dasz\Kistl\"
-                        + Helper.GetLegalPathName(Configuration.KistlConfig.Current.ConfigName)
+                        + Helper.GetLegalPathName(ApplicationContext.Current.Configuration.ConfigName)
                         + @"\"
                         + Helper.GetLegalPathName(AppDomain.CurrentDomain.FriendlyName)
                         + @"\";
@@ -236,13 +236,13 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Returns a private Property Value from a given Object. Uses Reflection.
+        /// Set a private Property Value on a given Object. Uses Reflection.
         /// Throws a ArgumentOutOfRangeException if the Property is not found.
         /// </summary>
         /// <typeparam name="T">Type of the Property</typeparam>
         /// <param name="obj">Object from where the Property Value is returned</param>
         /// <param name="propName">Propertyname as string.</param>
-        /// <returns>PropertyValue</returns>
+        /// <param name="val">the value to set</param>
         public static void SetPrivateFieldValue<T>(this object obj, string propName, T val)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -281,7 +281,7 @@ namespace Kistl.API
             {
                 if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                 {
-                    type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - Kistl.API.Helper.ImplementationSuffix.Length) + ", " + APIInit.InterfaceAssembly, true);
+                    type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - Helper.ImplementationSuffix.Length) + ", " + ApplicationContext.Current.InterfaceAssembly, true);
                 }
             }
             return type;
@@ -301,26 +301,26 @@ namespace Kistl.API
             {
                 if (type == typeof(IDataObject))
                 {
-                    return APIInit.BaseDataObjectType;
+                    return ApplicationContext.Current.BaseDataObjectType;
                 }
                 else if (type == typeof(IPersistenceObject))
                 {
-                    return APIInit.BasePersistenceObjectType;
+                    return ApplicationContext.Current.BasePersistenceObjectType;
                 }
                 else if (type == typeof(IStruct))
                 {
-                    return APIInit.BaseStructObjectType;
+                    return ApplicationContext.Current.BaseStructObjectType;
                 }
                 else if (type == typeof(ICollectionEntry))
                 {
-                    return APIInit.BaseCollectionEntryType;
+                    return ApplicationContext.Current.BaseCollectionEntryType;
                 }
                 else if(type.IsInterface)
                     {
                     if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                     {
                         // add ImplementationSuffix
-                        string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + APIInit.ImplementationAssembly;
+                        string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly;
                         return Type.GetType(newType, true);
                     }
                 }
@@ -427,7 +427,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Foreach Extension Method for IList<>. This Extension does not check if the Enumeration Entry is NULL!
+        /// Foreach Extension Method for IList&lt;>. This Extension does not check if the Enumeration Entry is NULL!
         /// </summary>
         /// <typeparam name="T">Type of the Objects in the Enumeration.</typeparam>
         /// <param name="lst">Enumeration</param>
@@ -440,7 +440,7 @@ namespace Kistl.API
             }
         }
         /// <summary>
-        /// Foreach Extension Method for IQueryable<>. This Extension does not check if the query results contain NULLs!
+        /// Foreach Extension Method for IQueryable&lt;>. This Extension does not check if the query results contain NULLs!
         /// </summary>
         /// <typeparam name="T">Type of the Objects in the IQueryable.</typeparam>
         /// <param name="lst">IQueryable</param>

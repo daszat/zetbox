@@ -19,7 +19,7 @@ namespace Kistl.API.Server.Tests
         [SetUp]
         public void SetUp()
         {
-            currentCustomActionsManager = (CustomActionsManagerAPITest)CustomActionsManagerFactory.Current;
+            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
             obj = new TestObjClass__Implementation__();

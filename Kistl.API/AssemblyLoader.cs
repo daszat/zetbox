@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Reflection;
+using System.Text;
 
 namespace Kistl.API
 {
@@ -10,11 +11,31 @@ namespace Kistl.API
     /// This is the Assembly Loader. Assemblies are obtained by you configurated Assembly sources.
     /// Assemblies are copied to your WorkingFolder\bin directory. 
     /// eg. C:\Users\Arthur\AppData\Local\dasz\Kistl\Arthur's Configuration\Kistl.Client.exe\bin.
-    /// This does not seams to be the best solution. See http://blogs.msdn.com/suzcook/archive/2003/05/29/57143.aspx.
-    /// But it works.
     /// </summary>
-    public class AssemblyLoader
+    // This does not seem to be the best solution. But it works.
+    // See http://blogs.msdn.com/suzcook/archive/2003/05/29/57143.aspx
+    // In the long term, we want to either use a framework like MEF (http://www.codeplex.com/MEF);
+    // or Mono.Addins; or push all Assemblies to the GAC to avoid this global state.
+    public static class AssemblyLoader
     {
+
+        private static bool _isInitialised = false;
+        public static void InitOnce()
+        {
+            lock (typeof(AssemblyLoader))
+            {
+                if (_isInitialised) return;
+                _isInitialised = true;
+
+                // Delete stale Assemblies
+                Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+
+                // Start resolving Assemblies
+                AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
+                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += AssemblyLoader.AssemblyResolve;
+            }
+        }
+
         /// <summary>
         /// Private Field for TargetAssemblyFolder
         /// </summary>
@@ -43,16 +64,19 @@ namespace Kistl.API
         private static Dictionary<string, Assembly> _Assemblies = new Dictionary<string, Assembly>();
 
         /// <summary>
-        /// Called by the Framework to resolve an Assembly. Initialized by <see cref="APIInit"/>.
-        /// Do not call Trace.WriteLine!!!! A Tracelistener might want to load XML Serializers.dll! 
-        /// This would lead to a StackOverflow due to a recursion.
+        /// Called by the Framework to resolve an Assembly. Initialized in the <see cref="ApplicationContext"/>.
         /// </summary>
         /// <param name="sender">See MSDN</param>
         /// <param name="args">See MSDN</param>
-        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1</returns>
+        /// <returns>Returns the requested Assembly or null if not found. 
+        /// See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1
+        /// </returns>
+        /// 
+        /// Do not call Trace.WriteLine! A Tracelistener might want to load XML Serializers.dll and
+        /// this would lead to a StackOverflow due to recursion.
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            if (!Configuration.KistlConfig.IsInitialized) return null;
+            if (ApplicationContext.Current == null) return null;
             Console.WriteLine("Resolving Assembly {0}", args.Name);
             return Load(args.Name);
         }
@@ -60,14 +84,16 @@ namespace Kistl.API
         /// <summary>
         /// Loads an Assembly.
         /// </summary>
-        /// <param name="name">Assemblyname, passed to a AssemblyName Consructor.</param>
-        /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1</returns>
+        /// <param name="name">Assemblyname, passed to a AssemblyName Constructor.</param>
+        /// <returns>Returns the requested Assembly or null if not found. 
+        /// See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1
+        /// </returns>
         public static Assembly Load(string name)
         {
             // Be nice & Thread Save
             lock (typeof(AssemblyLoader))
             {
-                foreach (string path in Configuration.KistlConfig.Current.SourceFileLocation)
+                foreach (string path in ApplicationContext.Current.Configuration.SourceFileLocation)
                 {
                     // Create a AssemblyName Object & set the CodeBase.
                     AssemblyName n = new AssemblyName(name);
@@ -137,7 +163,7 @@ namespace Kistl.API
             // Be nice & Thread Save
             lock (typeof(AssemblyLoader))
             {
-                foreach (string path in Configuration.KistlConfig.Current.SourceFileLocation)
+                foreach (string path in ApplicationContext.Current.Configuration.SourceFileLocation)
                 {
                     string fullName = "";
 

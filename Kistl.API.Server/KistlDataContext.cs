@@ -65,17 +65,17 @@ namespace Kistl.API.Server
             {
                 if (_KistlDataContextType == null)
                 {
-                    _KistlDataContextType = Type.GetType(API.Configuration.KistlConfig.Current.Server.KistlDataContextType);
+                    _KistlDataContextType = Type.GetType(ApplicationContext.Current.Configuration.Server.KistlDataContextType);
                     if (_KistlDataContextType == null)
                     {
-                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IKistlObjects. Check your Configuration '/Server/KistlDataContextType'.", API.Configuration.KistlConfig.Current.Server.KistlDataContextType));
+                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IKistlObjects. Check your Configuration '/Server/KistlDataContextType'.", ApplicationContext.Current.Configuration.Server.KistlDataContextType));
                     }
                 }
             }
             object obj = Activator.CreateInstance(_KistlDataContextType);
             if (!(obj is IKistlContext))
             {
-                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/KistlDataContextType'.", API.Configuration.KistlConfig.Current.Server.KistlDataContextType));
+                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/KistlDataContextType'.", ApplicationContext.Current.Configuration.Server.KistlDataContextType));
             }
             return (IKistlContext)obj;
         }

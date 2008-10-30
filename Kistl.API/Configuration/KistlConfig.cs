@@ -11,7 +11,7 @@ namespace Kistl.API.Configuration
     public class ConfigurationException : Exception
     {
         public ConfigurationException()
-            : base()
+            : base("There was a problem with the configuration")
         {
         }
         public ConfigurationException(string message)
@@ -23,51 +23,14 @@ namespace Kistl.API.Configuration
     /// <summary>
     /// Configuration of Kistl
     /// </summary>
-    [XmlRoot("KistlConfig", Namespace="http://dasz.at/Kistl/")]
+    [XmlRoot("KistlConfig", Namespace = "http://dasz.at/Kistl/")]
     public class KistlConfig : MarshalByRefObject
     {
-        private static KistlConfig _Current = null;
 
         /// <summary>
-        /// Current Configuration
+        /// Create an empty configuration
         /// </summary>
-        public static KistlConfig Current
-        {
-            get
-            {
-                if (_Current == null) throw new InvalidOperationException("Configuration was not setuped yet");
-                return _Current;
-            }
-        }
-
-        /// <summary>
-        /// Checks, if config is initialized yet
-        /// </summary>
-        internal static bool IsInitialized
-        {
-            get
-            {
-                return _Current != null;
-            }
-        }
-
-        /// <summary>
-        /// Inits the config
-        /// </summary>
-        /// <param name="file">Path to the Config File. May be null or empty. Then DefaultConfig.xml is loaded</param>
-        internal static void Init(string file)
-        {
-            if (Configuration.KistlConfig.IsInitialized) throw new InvalidOperationException("Configuration already setuped");
-            if (!string.IsNullOrEmpty(file))
-            {
-                _Current = FromFile(file);
-            }
-            else
-            {
-                // Try to load default config
-                _Current = FromFile("DefaultConfig.xml");
-            }
-        }
+        public KistlConfig() { }
 
         /// <summary>
         /// Path to the Config File
@@ -126,7 +89,7 @@ namespace Kistl.API.Configuration
             /// Connectionstring to Database.
             /// </summary>
             [XmlElement(IsNullable = false)]
-            public string ConnectionString {get; set;}
+            public string ConnectionString { get; set; }
 
             /// <summary>
             /// Path of the Document Store

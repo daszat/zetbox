@@ -61,7 +61,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Returns a Query by System.Type.
         /// </summary>
-        /// <param name="objType">System.Type</param>
+        /// <param name="type">the requested type of objects</param>
         /// <returns>IQueryable</returns>
         public abstract IQueryable<IDataObject> GetQuery(Type type);
 

@@ -34,9 +34,9 @@ namespace Kistl.API.Tests
         [Test]
         public void Current()
         {
-            Assert.That(KistlConfig.Current, Is.Not.Null);
-            Assert.That(KistlConfig.Current.ConfigFilePath, Is.Not.Empty);
-            Assert.That(KistlConfig.Current.ConfigName, Is.Not.Empty);
+            Assert.That(ApplicationContext.Current.Configuration, Is.Not.Null);
+            Assert.That(ApplicationContext.Current.Configuration.ConfigFilePath, Is.Not.Empty);
+            Assert.That(ApplicationContext.Current.Configuration.ConfigName, Is.Not.Empty);
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace Kistl.API.Tests
             {
                 File.Delete(filename);
             }
-            KistlConfig.Current.ToFile(filename);
+            ApplicationContext.Current.Configuration.ToFile(filename);
             Assert.That(File.Exists(filename), Is.True);
             Assert.That(new FileInfo(filename).Length, Is.GreaterThan(0));
             File.Delete(filename);
@@ -80,7 +80,7 @@ namespace Kistl.API.Tests
         public void ToStream()
         {
             MemoryStream ms = new MemoryStream();
-            KistlConfig.Current.ToStream(ms);
+            ApplicationContext.Current.Configuration.ToStream(ms);
             Assert.That(ms.Length, Is.GreaterThan(0));
         }
 

@@ -1,22 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <Address></Address>
-  <ConfigName>Arthur's Configuration</ConfigName>
-  <Server StartServer="true">
+  <ConfigName>Default Test Configuration</ConfigName>
+  <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Server\</DocumentStore>
+    <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
+    <KistlDataContextType>Kistl.API.Tests.NoKistlDataContext, Kistl.API.Tests</KistlDataContextType>
+    <ServerObjectHandlerType>Kistl.API.Tests.NoServerObjectHandler, Kistl.API.Tests</ServerObjectHandlerType>
+    <ServerObjectSetHandlerType>Kistl.API.Tests.NoServerObjectSetHandler, Kistl.API.Tests</ServerObjectSetHandlerType>
   </Server>
-  <Client StartClient="true">
-    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
+  <Client StartClient="false">
+    <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>C:\temp\KistlCodeGen\bin</string>
-    <string>D:\Programmierung\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
-    <string>D:\Programmierung\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
-    <string>D:\Programmierung\Kistl\Kistl.Server\bin\Debug</string>
-    <string>C:\Projekte\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
-    <string>C:\Projekte\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
-    <string>C:\Projekte\Kistl\Kistl.Server\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

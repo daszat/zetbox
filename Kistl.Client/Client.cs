@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Windows;
-using Kistl.API.Client;
 using System.Runtime.Remoting.Lifetime;
+using System.Text;
+
+using Kistl.API;
+using Kistl.API.Client;
 
 namespace Kistl.Client
 {
@@ -32,8 +33,9 @@ namespace Kistl.Client
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
-                if (Kistl.API.Configuration.KistlConfig.Current.Server.StartServer)
+                if (ApplicationContext.Current.Configuration.Server.StartServer)
                 {
+                /*
                     // Create a new AppDomain for the Server!
                     // Damit trennt man den Server schön brav vom Client & kann 
                     // CustomActionsManagerFactory.Init zwei mal aufrufen :-)
@@ -43,7 +45,7 @@ namespace Kistl.Client
 
 //                    SplashScreen.SetInfo("Setting up Server");
                     Kistl.API.APIInit initServer = (Kistl.API.APIInit)serverDomain.CreateInstanceAndUnwrap("Kistl.API", "Kistl.API.APIInit");
-                    initServer.Init(Kistl.API.HostType.Server, Kistl.API.Configuration.KistlConfig.Current.ConfigFilePath);
+                    initServer.Init(Kistl.API.HostType.Server, ApplicationContext.Current.Configuration.ConfigFilePath);
 
                     //                    SplashScreen.SetInfo("Starting Server");
                     server = (Kistl.API.IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap("Kistl.Server", "Kistl.Server.Server");
@@ -54,10 +56,9 @@ namespace Kistl.Client
 
                     //                   SplashScreen.SetInfo("Starting WCF Server");
                     server.Start();
+                 */
+                    throw new NotImplementedException("TODO: re-enable integrated Server");
                 }
-
-                //       SplashScreen.SetInfo("Setting up Client");
-                API.CustomActionsManagerFactory.Init(new CustomActionsManagerClient());
             }
         }
 

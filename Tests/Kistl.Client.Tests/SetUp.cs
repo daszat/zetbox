@@ -14,17 +14,17 @@ namespace Kistl.Client.Tests
         public void Init()
         {
             System.Diagnostics.Trace.WriteLine("Setting up Kistl.Client.Tests");
-
+            /*
             Kistl.API.APIInit init = new Kistl.API.APIInit();
             init.Init(HostType.Client, @"DefaultConfig.xml");
             Kistl.API.APIInit.ImplementationAssembly = this.GetType().Assembly.FullName;
             Kistl.API.APIInit.InterfaceAssembly = this.GetType().Assembly.FullName;
 
             Kistl.API.CustomActionsManagerFactory.Init(new Mocks.CustomActionsManagerClientTests());
-
             System.Diagnostics.Trace.WriteLine("ImplementationAssembly = " + Kistl.API.APIInit.ImplementationAssembly);
             System.Diagnostics.Trace.WriteLine("InterfaceAssembly = " + Kistl.API.APIInit.InterfaceAssembly);
             System.Diagnostics.Trace.WriteLine("Setting up Kistl.Client.Tests finished");
+             */
         }
     }
 }

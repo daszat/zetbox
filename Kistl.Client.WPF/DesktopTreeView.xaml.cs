@@ -238,8 +238,8 @@ namespace Kistl.Client.WPF
 
                     // (Kistl.API.IDataObject)Activator.CreateInstance(resultObjectType);
                     // newObject.AttachToContext(ctx);
-                    
-                    Manager.Renderer.ShowObject(newObject);
+
+                    GuiApplicationContext.Current.Renderer.ShowObject(newObject);
                     n.RefreshChildren();
                 }
             }
@@ -275,7 +275,7 @@ namespace Kistl.Client.WPF
                 // Create new Context for new Window
                 IKistlContext ctx = KistlContext.GetContext();
                 Kistl.API.IDataObject newObject = ctx.Find(n.DataObject.GetInterfaceType(), n.DataObject.ID);
-                Manager.Renderer.ShowObject(newObject);
+                GuiApplicationContext.Current.Renderer.ShowObject(newObject);
             }
             catch (Exception ex)
             {

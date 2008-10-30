@@ -77,7 +77,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         private void ShowObjectInternal(IDataObject obj)
         {
             var template = obj.FindTemplate(TemplateUsage.EditControl);
-            var widget = (Control)Manager.Renderer.CreateControl(obj, template.VisualTree);
+            var widget = (Control)GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
 
             AjaxControlToolkit.TabPanel panel = new AjaxControlToolkit.TabPanel();
             panel.Controls.Add(widget);

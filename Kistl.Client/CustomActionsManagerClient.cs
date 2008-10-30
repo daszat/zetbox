@@ -86,7 +86,7 @@ namespace Kistl.Client
                             {
                                 // baseObjClass.GetDataType(); is not possible here, because this
                                 // Method is currently attaching
-                                Type objType = Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + Kistl.API.Helper.ImplementationSuffix + ", " + APIInit.ImplementationAssembly);
+                                Type objType = Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly);
                                 if (objType == null)
                                 {
                                     warnings.AppendLine(string.Format("DataType '{0}, Kistl.Objects.Client' not found", baseObjClass.Module.Namespace + "." + baseObjClass.ClassName));
@@ -147,12 +147,13 @@ namespace Kistl.Client
                             }
                         }
 
+                        // TODO create and use Logging API to invert control here
                         if (warnings.Length > 0)
                         {
                             System.Diagnostics.Debug.WriteLine(warnings.ToString());
-                            if (Manager.Renderer != null)
+                            if (GuiApplicationContext.Current.Renderer != null)
                             {
-                                Manager.Renderer.ShowMessage(warnings.ToString());
+                                GuiApplicationContext.Current.Renderer.ShowMessage(warnings.ToString());
                             }
                         }
                     }

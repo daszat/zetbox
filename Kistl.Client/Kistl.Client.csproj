@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -68,6 +69,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GUI.DB\KistlGUIContext.cs" />
+    <Compile Include="GuiApplicationContext.cs" />
     <Compile Include="GUI\ControlInterfaces.cs" />
     <Compile Include="GUI\MethodPresenter.cs" />
     <Compile Include="GUI\Presenter.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="GUI.DB\Template.cs" />
     <Compile Include="GUI.DB\Visual.cs" />
     <Compile Include="ClientHelper.cs" />
-    <Compile Include="Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

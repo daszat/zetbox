@@ -48,6 +48,7 @@
     <Compile Include="Kistl.Client.Mocks\MockFactory.cs" />
     <Compile Include="Kistl.Client.Mocks\TestObject.cs" />
     <Compile Include="Kistl.GUI.Tests\PresenterTests.cs" />
+    <Compile Include="Kistl.GUI.Tests\PresenterTests.IDisposable.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />

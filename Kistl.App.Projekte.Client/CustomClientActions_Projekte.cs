@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using Kistl.App.Base;
-using Kistl.API.Client;
 using System.Xml;
-using System.IO;
+
+using Kistl.API;
+using Kistl.API.Client;
+using Kistl.App.Base;
 
 namespace Kistl.App.Projekte
 {
@@ -95,7 +97,7 @@ namespace Kistl.App.Projekte
             xml.ToFile(@"c:\temp\Rechnung.xml");
 
             string tmpFile = Path.GetTempFileName().Replace(".tmp", ".docx");
-            File.Copy(Kistl.API.Configuration.KistlConfig.Current.Client.DocumentStore + @"\Rechnung.docx", tmpFile, true);
+            File.Copy(ApplicationContext.Current.Configuration.Client.DocumentStore + @"\Rechnung.docx", tmpFile, true);
 
             using (WordHelper word = new WordHelper(tmpFile))
             {

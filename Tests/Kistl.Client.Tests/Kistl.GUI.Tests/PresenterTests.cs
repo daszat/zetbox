@@ -11,39 +11,8 @@ using Kistl.Client.Mocks;
 namespace Kistl.GUI.Tests
 {
     [TestFixture]
-    public class PresenterTests
+    public partial class PresenterTests
     {
-        class PresenterMock : Presenter<IValueControl<int>>
-        {
-
-            Action init;
-            Action disposeManaged;
-            Action disposeUnmanaged;
-
-            public PresenterMock(Action initAction, Action disposeManagedAction, Action disposeUnmanagedAction)
-            {
-                this.init = initAction ?? new Action(() => Assert.Fail());
-                this.disposeManaged = disposeManagedAction ?? delegate { };
-                this.disposeUnmanaged = disposeUnmanagedAction ?? delegate { };
-            }
-
-            protected override void InitializeComponent()
-            {
-                init();
-            }
-
-            protected override void DisposeManagedResources()
-            {
-                base.DisposeManagedResources();
-                disposeManaged();
-            }
-
-            protected override void DisposeNativeResources()
-            {
-                base.DisposeNativeResources();
-                disposeUnmanaged();
-            }
-        }
 
         // TODO: refactor using something like XunitAssert.Throws<> from 
         // http://jamesnewkirk.typepad.com/posts/2008/06/replacing-expec.html
@@ -169,46 +138,5 @@ namespace Kistl.GUI.Tests
             }
         }
 
-        [Test]
-        public void IDisposable_Dispose()
-        {
-            using (Mockery m = new Mockery())
-            {
-                TestObject ido = MockFactory.CreateTestObject(m);
-                Visual v = m.NewMock<Visual>();
-                IValueControl<int> ivc = m.NewMock<IValueControl<int>>();
-
-                int managedCalls = 0;
-                int unmanagedCalls = 0;
-                var presenter = new PresenterMock(null, () => managedCalls++, () => unmanagedCalls++);
-
-                presenter.Dispose();
-
-                Assert.AreEqual(1, managedCalls, "DisposeManagedResources should have been called exactly once");
-                Assert.AreEqual(1, unmanagedCalls, "DisposeUnmanagedResources should have been called exactly once");
-            }
-        }
-
-        [Test]
-        public void IDisposable_Finalizer()
-        {
-            using (Mockery m = new Mockery())
-            {
-                TestObject ido = MockFactory.CreateTestObject(m);
-                Visual v = m.NewMock<Visual>();
-                IValueControl<int> ivc = m.NewMock<IValueControl<int>>();
-
-                int unmanagedCalls = 0;
-                var presenter = new PresenterMock(null, 
-                    () => Assert.Fail("DisposeManagedResources MUST not be called from finalizer"), 
-                    () => unmanagedCalls++);
-
-                presenter = null;
-                System.GC.Collect();
-                System.GC.WaitForPendingFinalizers();
-
-                Assert.AreEqual(1, unmanagedCalls, "DisposeUnmanagedResources should have been called exactly once");
-            }
-        }
     }
 }

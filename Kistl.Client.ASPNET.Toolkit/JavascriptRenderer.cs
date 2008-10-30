@@ -85,7 +85,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 case actionShowObject:
                     {
                         IDataObject obj = hdArgument.FromJSON<IDataObject>(KistlContextManagerModule.KistlContext);
-                        Kistl.Client.Manager.Renderer.ShowObject(obj);
+                        GuiApplicationContext.Current.Renderer.ShowObject(obj);
                         break;
                     }
                 default:

@@ -15,7 +15,6 @@ namespace Kistl.API.Client
     /// <summary>
     /// Provider for Kistl Linq Provider
     /// </summary>
-    /// <typeparam name="T">Type to search</typeparam>
     internal class KistlContextProvider : ExpressionTreeVisitor, IQueryProvider
     {
         /// <summary>

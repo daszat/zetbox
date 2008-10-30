@@ -60,12 +60,13 @@
     <Compile Include="TestKistlContext.cs" />
     <Compile Include="TestQueryProvider.cs" />
     <Compile Include="TestStruct.cs" />
-    <Compile Include="Tests\APIInitTest.cs" />
+    <Compile Include="Tests\ApplicationContextTests.cs" />
     <Compile Include="Tests\AssemblyLoaderTests.cs" />
     <Compile Include="Tests\BinarySerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomActionsManagerAPITest.cs" />
     <Compile Include="SetUp.cs" />
+    <Compile Include="Tests\ApplicationContextTests.IDisposable.cs" />
     <Compile Include="Tests\HelperTest.cs" />
     <Compile Include="Tests\CustomActionsManagerFactoryTests.cs" />
     <Compile Include="Tests\ExpressionTreeVisitorTests.cs" />
@@ -82,7 +83,9 @@
     <None Include="Kistl.APITests.nunit" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig_API.Tests.xml" />
+    <Content Include="DefaultConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Kistl.APITests.PartCoverReport.xml" />
     <Content Include="Kistl.APITests.PartCoverSettings.xml" />
     <Content Include="TestResult.xml" />

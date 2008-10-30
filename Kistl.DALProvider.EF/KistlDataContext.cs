@@ -38,8 +38,8 @@ namespace Kistl.DALProvider.EF
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("metadata=res://*;");
-                sb.AppendFormat("provider={0};", KistlConfig.Current.Server.DatabaseProvider);
-                sb.AppendFormat("provider connection string='{0}'", KistlConfig.Current.Server.ConnectionString);
+                sb.AppendFormat("provider={0};", ApplicationContext.Current.Configuration.Server.DatabaseProvider);
+                sb.AppendFormat("provider connection string='{0}'", ApplicationContext.Current.Configuration.Server.ConnectionString);
 
                 connectionString = sb.ToString();
             }

@@ -19,23 +19,23 @@ namespace Kistl.Client
         /// <param name="ex"></param>
         public static void HandleError(Exception ex)
         {
-            //TODO: put exception into DB
+            //TODO: put exception into DB/Logfile
             if (ex is FaultException)
             {
-                Manager.Renderer.ShowMessage((ex as FaultException).Message);
+                GuiApplicationContext.Current.Renderer.ShowMessage((ex as FaultException).Message);
             }
             else
             {
-                Manager.Renderer.ShowMessage(ex.ToString());
+                GuiApplicationContext.Current.Renderer.ShowMessage(ex.ToString());
             }
 
-            if (Kistl.API.Configuration.KistlConfig.Current.Client.ThrowErrors)
+            if (GuiApplicationContext.Current.Configuration.Client.ThrowErrors)
             {
                 throw ex;
             }
         }
 
-        // TODO: Das muss in "statische" Objekte, oder auch Imutable Objects genannt, umgewandelt werden.
+        // TODO: Das muss in "statische" Objekte, oder auch Immutable Objects genannt, umgewandelt werden.
         private static Dictionary<Type, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
         private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
 

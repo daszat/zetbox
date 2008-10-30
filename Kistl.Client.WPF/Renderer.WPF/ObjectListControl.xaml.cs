@@ -44,7 +44,7 @@ namespace Kistl.GUI.Renderer.WPF
         {
             try
             {
-                lst.SelectedItems.ForEach<Kistl.API.IDataObject>(i => Manager.Renderer.ShowObject(i));
+                lst.SelectedItems.ForEach<Kistl.API.IDataObject>(i => GuiApplicationContext.Current.Renderer.ShowObject(i));
             }
             catch (Exception ex)
             {

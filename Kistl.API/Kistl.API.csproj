@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Kistl.API.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -62,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIInit.cs" />
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="BinarySerializer.cs" />
     <Compile Include="Configuration\KistlConfig.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="ExpressionTreeTranslator.cs" />
     <Compile Include="ExpressionTreeVisitor.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="ApplicationContext.cs" />
     <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
     <Compile Include="IKistlAppDomain.cs" />

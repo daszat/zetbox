@@ -14,6 +14,7 @@ namespace Kistl.API.Tests
         [SetUp]
         public void Init()
         {
+            /*
             System.Diagnostics.Trace.WriteLine("Setting up Kistl.API.Tests");
 
             Kistl.API.APIInit init = new Kistl.API.APIInit();
@@ -26,6 +27,7 @@ namespace Kistl.API.Tests
             System.Diagnostics.Trace.WriteLine("ImplementationAssembly = " + Kistl.API.APIInit.ImplementationAssembly);
             System.Diagnostics.Trace.WriteLine("InterfaceAssembly = " + Kistl.API.APIInit.InterfaceAssembly);
             System.Diagnostics.Trace.WriteLine("Setting up Kistl.API.Tests finished");
+             */
         }
     }
 }

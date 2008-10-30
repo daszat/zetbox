@@ -57,6 +57,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.ASPNET.Toolkit", "Kistl.Client.ASPNET.Toolkit\Kistl.Client.ASPNET.Toolkit.csproj", "{04656394-60EA-4675-95EE-3DA6D07BAB89}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
+	ProjectSection(SolutionItems) = preProject
+		DisposableMockTemplate.cs = DisposableMockTemplate.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NET", "ASP.NET", "{ACDAC04D-0C0C-4FDF-BF8A-DDB0205C7A51}"
 EndProject

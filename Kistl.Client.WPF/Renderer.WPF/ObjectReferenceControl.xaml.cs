@@ -87,7 +87,7 @@ namespace Kistl.GUI.Renderer.WPF
             {
                 Kistl.API.IDataObject newObject = Context.Create(ObjectType);
                 Value = newObject;
-                Manager.Renderer.ShowObject(newObject);
+                GuiApplicationContext.Current.Renderer.ShowObject(newObject);
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace Kistl.GUI.Renderer.WPF
             {
                 if (Value != null)
                 {
-                    Manager.Renderer.ShowObject(Value);
+                    GuiApplicationContext.Current.Renderer.ShowObject(Value);
                 }
             }
             catch (Exception ex)

@@ -19,7 +19,7 @@ namespace Kistl.API.Client.Tests
         public void SetUp()
         {
             System.Diagnostics.Trace.WriteLine("KistlContextTests.SetUp() is called");
-            currentCustomActionsManager = (CustomActionsManagerAPITest)CustomActionsManagerFactory.Current;
+            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
             // Set Proxy

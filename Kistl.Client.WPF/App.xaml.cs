@@ -31,6 +31,28 @@ namespace Kistl.Client.WPF
                     XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
 
+        private static string[] Init(string[] args)
+        {
+            string configFilePath;
+            string[] result;
+
+            if (args.Length == 1 && !args[0].StartsWith("-"))
+            {
+                configFilePath = args[0];
+                result = new string[] { };
+            }
+            else
+            {
+                configFilePath = "";
+                result = (string[])args.Clone();
+            }
+
+            // Configure the ApplicationContext
+            var appCtx = new GuiApplicationContext(configFilePath, Toolkit.WPF);
+
+            return result;
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Debugger.KistlContextDebuggerWPF.ShowDebugger();
@@ -39,14 +61,8 @@ namespace Kistl.Client.WPF
 
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
-                // TODO: Leider muss ich das machen, weil hier an dieser Stelle
-                // _darf_ es nichts geben, was eine Referenz auf Kistl.Objects benötigt
-                // weil Kistl.Objects dynamisch geladen wird.
-                // woher Kistl.Objects geladen wird, entscheide der AssemblyLoader,
-                // der gerade initialisiert wird.
-                Manager.Create(e.Args, Toolkit.WPF);
+                Init(e.Args);
             }
-
 
             using (TraceClient.TraceHelper.TraceMethodCall("Fixing NotNullableConstraints"))
             {
@@ -68,7 +84,7 @@ namespace Kistl.Client.WPF
                             System.Console.Out.WriteLine("Added missing NotNullableConstraint");
                         }
                     }
-                
+
                     // synchronize Stringproperty's Length
                     foreach (var prop in ctx.GetQuery<StringProperty>())
                     {

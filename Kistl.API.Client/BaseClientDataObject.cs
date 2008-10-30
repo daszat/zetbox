@@ -12,7 +12,7 @@ namespace Kistl.API.Client
     {
         protected BaseClientPersistenceObject()
         {
-            if (APIInit.HostType != HostType.Client) throw new InvalidOperationException("A BaseClientPersistenceObject can only be constructed in a Client");
+            if (ApplicationContext.Current.HostType != HostType.Client) throw new InvalidOperationException("A BaseClientPersistenceObject can exist only on a client");
         }
 
         public int ID { get; internal set; }
@@ -168,7 +168,7 @@ namespace Kistl.API.Client
     {
         protected BaseClientDataObject()
         {
-            API.CustomActionsManagerFactory.Current.AttachEvents(this);
+            ApplicationContext.Current.CustomActionsManager.AttachEvents(this);
         }
 
         public virtual void NotifyPreSave() { }

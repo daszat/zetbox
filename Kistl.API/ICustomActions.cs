@@ -23,40 +23,4 @@ namespace Kistl.API
         void Init();
     }
 
-    /// <summary>
-    /// CustomActionsManager Factory/Singleton. Must be initialised by each of the Server and Client Hosts.
-    /// </summary>
-    public static class CustomActionsManagerFactory
-    {
-        /// <summary>
-        /// Singelton for ICustomActionsManager.
-        /// </summary>
-        private static ICustomActionsManager _manager = null;
-
-        /// <summary>
-        /// Initializes a Custom Actions Manager. Throws a InvalidOperationException if invoked twice.
-        /// </summary>
-        /// <param name="manager">A Custom Actions Manager Implementation</param>
-        public static void Init(ICustomActionsManager manager)
-        {
-            using (TraceClient.TraceHelper.TraceMethodCall("CustomActionsManagerFactory of {0}", manager.GetType().Name))
-            {
-                if (_manager != null) throw new InvalidOperationException("ICustomActionsManager.Init() was called twice");
-                _manager = manager;
-                _manager.Init();
-            }
-        }
-
-        /// <summary>
-        /// Current CustomActionsManager. Throws a InvalidOperationException if Init() was not called.
-        /// </summary>
-        public static ICustomActionsManager Current
-        {
-            get
-            {
-                if (_manager == null) throw new InvalidOperationException("ICustomActionsManager.Init() was not called");
-                return _manager;
-            }
-        }
-    }
 }

@@ -15,46 +15,23 @@ namespace Kistl.API.Client
     /// </summary>
     public interface IProxy : IDisposable
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="maxListCount"></param>
-        /// <param name="filter"></param>
-        /// <param name="orderBy"></param>
-        /// <returns></returns>
         IEnumerable<Kistl.API.IDataObject> GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="ID"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
         IEnumerable<Kistl.API.IDataObject> GetListOf(Type type, int ID, string property);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="ID"></param>
-        /// <returns></returns>
         Kistl.API.IDataObject GetObject(Type type, int ID);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        
         IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects);
+
         /// <summary>
         /// Generates Objects &amp; Database. Throws a Exception if failed.
         /// </summary>
         void Generate();
+        
         /// <summary>
         /// Hello World.
         /// </summary>
         /// <param name="name">A Name</param>
         /// <returns>"Hello " + name.</returns>
+        // TODO: WTF?
         string HelloWorld(string name);
     }
 
@@ -65,7 +42,7 @@ namespace Kistl.API.Client
     public static class Proxy
     {
         /// <summary>
-        /// Singelton
+        /// Singleton
         /// </summary>
         private static IProxy current;
 
@@ -290,12 +267,6 @@ namespace Kistl.API.Client
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
         public IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())

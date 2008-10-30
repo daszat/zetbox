@@ -15,7 +15,7 @@ namespace Kistl.API.Server
     {
         protected BaseServerPersistenceObject()
         {
-            if (APIInit.HostType != HostType.Server) throw new InvalidOperationException("A BaseServerPersistenceObject can only be constructed in a Server");
+            if (ApplicationContext.Current.HostType != HostType.Server) throw new InvalidOperationException("A BaseServerPersistenceObject can only exist on a server");
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Kistl.API.Server
         /// </summary>
         protected BaseServerDataObject()
         {
-            API.CustomActionsManagerFactory.Current.AttachEvents(this);
+            ApplicationContext.Current.CustomActionsManager.AttachEvents(this);
         }
 
 

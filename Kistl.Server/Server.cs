@@ -32,25 +32,6 @@ namespace Kistl.Server
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
         /// <summary>
-        /// Constructor
-        /// </summary>
-        public Server()
-        {
-            // Preload Kistl.Objects.Server.dll so the Mapping Resources will be loaded
-            // Console.WriteLine(typeof(Kistl.App.Base.ObjectClass).FullName);
-
-            Assembly a = Kistl.API.AssemblyLoader.Load("Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
-            if (a == null) throw new InvalidOperationException("Unable to load Kistl.Objects Assembly, no Entity Framework Metadata will be loaded");
-            Kistl.API.AssemblyLoader.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
-            if (a == null) throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata will be loaded");
-
-            Kistl.API.AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects");
-            Kistl.API.AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects.Server");
-
-            API.CustomActionsManagerFactory.Init(new CustomActionsManagerServer());
-        }
-
-        /// <summary>
         /// Server starten, Methode blockiert bis zum Serverstart. 
         /// Nach 20 sec. wird der start jedoch beendet.
         /// </summary>
