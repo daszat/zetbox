@@ -12,8 +12,9 @@ namespace Kistl.API.Tests
             SetUp setup = new SetUp();
             setup.Init();
 
-            var test = new ApplicationContextTests();
-            test.SetCustomActionsManagerNull();
+            var test = new AssemblyLoaderTests();
+            test.SetUp();
+            test.AssemblyResolve();
         }
 
         private static void BinarySerializerTests()

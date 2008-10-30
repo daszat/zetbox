@@ -11,7 +11,7 @@ namespace Kistl.API.Tests
     public class ConfigTestApplicationContext : ApplicationContext
     {
         public ConfigTestApplicationContext(string configFilePath)
-            : base(HostType.Server, configFilePath)
+            : base(HostType.None, configFilePath)
         {
 
         }
@@ -20,7 +20,7 @@ namespace Kistl.API.Tests
     public class CustomActionsTestApplicationContext : ApplicationContext
     {
         public CustomActionsTestApplicationContext()
-            : base(HostType.Server, "")
+            : base(HostType.None, "")
         { }
 
         // export protected function for tests
@@ -33,7 +33,7 @@ namespace Kistl.API.Tests
     public class TypesTestApplicationContext : ApplicationContext
     {
         public TypesTestApplicationContext()
-            : base(HostType.Server, "")
+            : base(HostType.None, "")
         { }
 
         // public Type BasePersistenceObjectType { get; protected set; }

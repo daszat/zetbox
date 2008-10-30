@@ -15,6 +15,10 @@ namespace Kistl.API
     {
         Client,
         Server,
+        /// <summary>
+        /// no predefined personality. This is used only in very rare cases.
+        /// </summary>
+        None
     }
 
     /// <summary>

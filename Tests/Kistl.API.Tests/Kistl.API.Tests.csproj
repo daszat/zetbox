@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
+    <Compile Include="Mocks\TestApplicationContext.cs" />
     <Compile Include="TestCollectionEntry.cs" />
     <Compile Include="TestEnum.cs" />
     <Compile Include="TestKistlContext.cs" />
