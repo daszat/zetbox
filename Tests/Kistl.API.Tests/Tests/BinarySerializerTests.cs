@@ -71,6 +71,14 @@ namespace Kistl.API.Tests
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [Ignore("This needs quite a bit of these tests yet")]
+        public void BoolNullStream()
+        {
+            BinarySerializer.ToBinary(true, null);
+        }
+
+        [Test]
         public void DateTime()
         {
             DateTime toval, fromval;
