@@ -58,6 +58,15 @@ namespace Kistl.API
             }
         }
 
+        static AssemblyLoader()
+        {
+            SearchPath = new List<string>();
+        }
+        /// <summary>
+        /// A list of paths to search for assemblies
+        /// </summary>
+        public static IList<string> SearchPath { get; private set; }
+
         /// <summary>
         /// Assembly Cache
         /// </summary>
@@ -71,12 +80,11 @@ namespace Kistl.API
         /// <returns>Returns the requested Assembly or null if not found. 
         /// See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1
         /// </returns>
-        /// 
-        /// Do not call Trace.WriteLine! A Tracelistener might want to load XML Serializers.dll and
-        /// this would lead to a StackOverflow due to recursion.
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            if (ApplicationContext.Current == null) return null;
+            if (AssemblyLoader.SearchPath.Count <= 0) return null;
+            // Do not call Trace.WriteLine! A TraceListener might want to load XML Serializers.dll and
+            // this would lead to a StackOverflow due to recursion.
             Console.WriteLine("Resolving Assembly {0}", args.Name);
             return Load(args.Name);
         }
@@ -93,7 +101,7 @@ namespace Kistl.API
             // Be nice & Thread Save
             lock (typeof(AssemblyLoader))
             {
-                foreach (string path in ApplicationContext.Current.Configuration.SourceFileLocation)
+                foreach (string path in AssemblyLoader.SearchPath)
                 {
                     // Create a AssemblyName Object & set the CodeBase.
                     AssemblyName n = new AssemblyName(name);
@@ -163,7 +171,7 @@ namespace Kistl.API
             // Be nice & Thread Save
             lock (typeof(AssemblyLoader))
             {
-                foreach (string path in ApplicationContext.Current.Configuration.SourceFileLocation)
+                foreach (string path in AssemblyLoader.SearchPath)
                 {
                     string fullName = "";
 

@@ -58,6 +58,7 @@ namespace Kistl.API.Configuration
 
         /// <summary>
         /// Location (Path) to Assemblies - TODO: Will be replaced!
+        /// Deprecated: <see cref="AssemblyLoader.SearchPath"/>
         /// </summary>
         [XmlArray(IsNullable = false)]
         public string[] SourceFileLocation { get; set; }

@@ -68,6 +68,17 @@ namespace Kistl.API.Tests
 
             Assert.IsNotNull(ApplicationContext.Current);
             Assert.AreEqual("Test Configuration", ApplicationContext.Current.Configuration.ConfigName);
+
+            // TestConfig.xml should contain at least one SourceFileLocation
+            Assert.Greater(ApplicationContext.Current.Configuration.SourceFileLocation.Count(), 0,
+                "ApplicationContext didn't load configuration" );
+            Assert.AreEqual(ApplicationContext.Current.Configuration.SourceFileLocation.Count(), AssemblyLoader.SearchPath.Count,
+                "ApplicationContext didn't correctly configure AssemblyLoader.SearchPath");
+            for (int i = 0; i < ApplicationContext.Current.Configuration.SourceFileLocation.Count(); i++)
+            {
+                Assert.AreEqual(ApplicationContext.Current.Configuration.SourceFileLocation[i],
+                    AssemblyLoader.SearchPath[i], "ApplicationContext didn't correctly configure AssemblyLoader.SearchPath");
+            }
         }
 
         [Test]

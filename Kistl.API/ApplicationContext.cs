@@ -94,6 +94,12 @@ namespace Kistl.API
             {
                 Configuration = KistlConfig.FromFile(configFile);
             }
+
+            foreach (var path in Configuration.SourceFileLocation)
+            {
+                AssemblyLoader.SearchPath.Add(path);
+            }
+
         }
 
         #region IDisposable Members

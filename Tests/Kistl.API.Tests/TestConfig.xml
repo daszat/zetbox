@@ -15,5 +15,6 @@
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
+    <string>X:\somepath\</string>
   </SourceFileLocation>
 </KistlConfig>
