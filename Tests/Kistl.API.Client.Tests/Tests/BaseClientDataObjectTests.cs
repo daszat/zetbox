@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
+
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.API.Client.Mocks;
+
+using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
-using System.IO;
 
 namespace Kistl.API.Client.Tests
 {
@@ -20,7 +23,9 @@ namespace Kistl.API.Client.Tests
         [SetUp]
         public void SetUp()
         {
-            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
+            var testCtx = new ClientApplicationContextMock();
+
+            currentCustomActionsManager = (CustomActionsManagerAPITest)testCtx.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
             PropertyChangedCalled = false;

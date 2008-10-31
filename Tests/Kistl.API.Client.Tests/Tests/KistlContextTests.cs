@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.API.Client.Mocks;
+
+using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.API.Client.Tests
 {
@@ -19,7 +22,10 @@ namespace Kistl.API.Client.Tests
         public void SetUp()
         {
             System.Diagnostics.Trace.WriteLine("KistlContextTests.SetUp() is called");
-            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
+
+            var testCtx = new ClientApplicationContextMock();
+
+            currentCustomActionsManager = (CustomActionsManagerAPITest)testCtx.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
             // Set Proxy
@@ -156,7 +162,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(obj_list, Is.Not.Null);
             Assert.That(obj_list.ID, Is.EqualTo(1));
 
-            Assert.That(object.ReferenceEquals(obj, obj_list), "obj & obj_list are different Objects");                        
+            Assert.That(object.ReferenceEquals(obj, obj_list), "obj & obj_list are different Objects");
         }
 
         [Test]
