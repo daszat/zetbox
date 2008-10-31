@@ -11,9 +11,12 @@
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
   </Server>
   <Client StartClient="false">
-    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
+    <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>D:\Programmierung\Kistl\Kistl.DALProvider.EF\bin\Debug</string>
+    <string>P:\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
+    <string>P:\Kistl\Kistl.DALProvider.EF\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

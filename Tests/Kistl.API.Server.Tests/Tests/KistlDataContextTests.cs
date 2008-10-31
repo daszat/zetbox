@@ -17,6 +17,8 @@ namespace Kistl.API.Server.Tests
         [SetUp]
         public void SetUp()
         {
+            var testCtx = new ServerApiContext("DefaultConfig_API.Server.Tests.xml");
+
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {
                 var result = ctx.GetQuery<TestObjClass>();
