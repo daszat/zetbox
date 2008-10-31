@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
 using Kistl.API.Server;
+using Kistl.API.Server.Mocks;
+
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
-using System.Data;
 
 namespace Kistl.API.Server.Tests
 {
@@ -17,7 +19,7 @@ namespace Kistl.API.Server.Tests
         [SetUp]
         public void SetUp()
         {
-            var testCtx = new ServerApiContext("DefaultConfig_API.Server.Tests.xml");
+            var testCtx = new ServerApiContextMock();
 
             using (IKistlContext ctx = KistlDataContext.InitSession())
             {

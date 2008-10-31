@@ -69,7 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomActionsManagerAPITest.cs" />
+    <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
+    <Compile Include="Mocks\ServerApiContextMock.cs" />
     <Compile Include="TestObjClass.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

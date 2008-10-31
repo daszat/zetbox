@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
+
 using Kistl.API;
 using Kistl.API.Server;
+using Kistl.API.Server.Mocks;
+
+using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
-using System.IO;
-using System.ComponentModel;
 
 namespace Kistl.API.Server.Tests
 {
@@ -19,6 +22,8 @@ namespace Kistl.API.Server.Tests
         [SetUp]
         public void SetUp()
         {
+            var testCtx = new ServerApiContextMock();
+
             obj = new TestStruct() { TestInt = 1, TestString = "Hello World" };
         }
 
