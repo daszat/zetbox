@@ -33,11 +33,11 @@ namespace Kistl.API
         /// <summary>
         /// The assembly containing the object implementations
         /// </summary>
-        public string ImplementationAssembly { get; private set; }
+        public string ImplementationAssembly { get; protected set; }
         /// <summary>
         /// The assembly containing the object interfaces
         /// </summary>
-        public string InterfaceAssembly { get; private set; }
+        public string InterfaceAssembly { get; protected set; }
 
         public Type BasePersistenceObjectType { get; protected set; }
         public Type BaseDataObjectType { get; protected set; }

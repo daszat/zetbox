@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
+
+using Kistl.API;
+using Kistl.API.Mocks;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
-using Kistl.API;
-using System.Reflection;
-using System.IO;
-using System.Linq.Expressions;
-using System.Collections.ObjectModel;
 
 
 namespace Kistl.API.Tests
@@ -27,6 +30,7 @@ namespace Kistl.API.Tests
             ms = new MemoryStream();
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);
+            var testCtx = new TestApplicationContext();
         }
 
         [Test]
@@ -322,6 +326,13 @@ namespace Kistl.API.Tests
             fromval = new List<TestCollectionEntry>();
             BinarySerializer.FromBinaryCollectionEntries(fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ICollection_ICollectionEntryNull()
+        {
+            BinarySerializer.FromBinaryCollectionEntries<TestCollectionEntry>(null, sr);
         }
 
         [Test]
