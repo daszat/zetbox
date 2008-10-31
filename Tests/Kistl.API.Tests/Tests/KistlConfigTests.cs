@@ -19,16 +19,16 @@ namespace Kistl.API.Tests
     {
         private void CheckConfig(KistlConfig cfg)
         {
-            Assert.That(cfg.ConfigName, Is.Not.Empty);
-            Assert.That(cfg.SourceFileLocation, Is.Not.Empty);
+            Assert.That(cfg.ConfigName, Is.Not.Empty, "ConfigName");
+            Assert.That(cfg.SourceFileLocation, Is.Not.Empty, "SourceFileLocation");
 
-            Assert.That(cfg.Client, Is.Not.Null);
-            Assert.That(cfg.Client.DocumentStore, Is.Not.Empty);
+            Assert.That(cfg.Client, Is.Not.Null, "Client");
+            Assert.That(cfg.Client.DocumentStore, Is.Not.Empty, "DocumentStore");
 
-            Assert.That(cfg.Server, Is.Not.Null);
-            Assert.That(cfg.Server.ConnectionString, Is.Not.Empty);
-            Assert.That(cfg.Server.DatabaseProvider, Is.Not.Empty);
-            Assert.That(cfg.Server.DocumentStore, Is.Not.Empty);
+            Assert.That(cfg.Server, Is.Not.Null, "Server");
+            Assert.That(cfg.Server.ConnectionString, Is.Not.Empty, "ConnectionString");
+            Assert.That(cfg.Server.DatabaseProvider, Is.Not.Empty, "DatabaseProvider");
+            Assert.That(cfg.Server.DocumentStore, Is.Not.Empty, "DocumentStore");
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace Kistl.API.Tests
         [Test]
         public void FromStream()
         {
-            using (FileStream s = File.OpenRead(@"..\..\DefaultConfig_API.Tests.xml"))
+            using (FileStream s = File.OpenRead(@"TestConfig.xml"))
             {
                 KistlConfig cfg = KistlConfig.FromStream(s);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
@@ -53,7 +53,7 @@ namespace Kistl.API.Tests
         [Test]
         public void FromTextReader()
         {
-            using (FileStream s = File.OpenRead(@"..\..\DefaultConfig_API.Tests.xml"))
+            using (FileStream s = File.OpenRead(@"TestConfig.xml"))
             {
                 TextReader rd = new StreamReader(s);
                 KistlConfig cfg = KistlConfig.FromStream(rd);

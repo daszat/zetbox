@@ -73,7 +73,6 @@
     <Compile Include="SetUp.cs" />
     <Compile Include="Tests\ApplicationContextTests.IDisposable.cs" />
     <Compile Include="Tests\HelperTest.cs" />
-    <Compile Include="Tests\CustomActionsManagerFactoryTests.cs" />
     <Compile Include="Tests\ExpressionTreeVisitorTests.cs" />
     <Compile Include="Tests\KistlConfigTests.cs" />
     <Compile Include="Tests\KistlServiceStreamsMessageTests.cs" />
