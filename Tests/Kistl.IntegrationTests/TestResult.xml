@@ -1,297 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" total="41" failures="41" not-run="0" date="2008-10-31" time="16:57:42">
+<test-results name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" total="41" failures="3" not-run="0" date="2008-10-31" time="17:53:13">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3053" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.IntegrationTests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" success="False" time="1.279" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" success="False" time="36.660" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\bin\Debug\Kistl.IntegrationTests.exe" success="False" time="1.264" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\bin\Debug\Kistl.IntegrationTests.exe" success="False" time="36.613" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="1.248" asserts="0">
+          <test-suite name="Kistl" success="False" time="36.598" asserts="0">
             <results>
-              <test-suite name="IntegrationTests" success="False" time="1.248" asserts="0">
-                <failure>
-                  <message><![CDATA[System.UnauthorizedAccessException : Der Zugriff auf den Pfad C:\Users\david\AppData\Local\dasz\Kistl\Integration Test Configuration\ServerAppDomain\bin\Kistl.App.Projekte.Server.dll wurde verweigert.]]></message>
-                  <stack-trace><![CDATA[bei System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-bei System.IO.File.Delete(String path)
-bei Kistl.API.AssemblyLoader.<InitialiseTargetAssemblyFolder>b__0(String f) in P:\Kistl\Kistl.API\AssemblyLoader.cs:Zeile 68.
-bei Kistl.API.ExtensionHelpers.ForEach[T](IList`1 lst, Action`1 action) in P:\Kistl\Kistl.API\Helper.cs:Zeile 410.
-bei Kistl.API.AssemblyLoader.InitialiseTargetAssemblyFolder(KistlConfig config) in P:\Kistl\Kistl.API\AssemblyLoader.cs:Zeile 68.
-bei Kistl.API.AssemblyLoader.EnsureInitialisation(KistlConfig config) in P:\Kistl\Kistl.API\AssemblyLoader.cs:Zeile 45.
-bei Kistl.API.AssemblyLoaderInitializer.Init(KistlConfig config) in P:\Kistl\Kistl.API\AssemblyLoader.cs:Zeile 234.
-bei Kistl.API.AssemblyLoaderInitializer.Init(KistlConfig config)
-bei Kistl.API.AssemblyLoader.Bootstrap(AppDomain domain, KistlConfig config) in P:\Kistl\Kistl.API\AssemblyLoader.cs:Zeile 34.
-bei Kistl.Client.ServerDomainManager.Start(KistlConfig config) in P:\Kistl\Kistl.Client\ServerDomainManager.cs:Zeile 28.
-bei Kistl.IntegrationTests.SetUp.Init() in P:\Kistl\Tests\Kistl.IntegrationTests\SetUp.cs:Zeile 29.
-]]></stack-trace>
-                </failure>
+              <test-suite name="IntegrationTests" success="False" time="36.598" asserts="0">
                 <results>
-                  <test-case name="Kistl.IntegrationTests.GeneratorTests.Generate" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-suite name="Kistl.IntegrationTests.GeneratorTests" success="False" time="0.000" asserts="0">
-                    <results />
+                  <test-suite name="GeneratorTests" success="True" time="8.752" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.GeneratorTests.Generate" executed="True" success="True" time="8.736" asserts="0" />
+                    </results>
                   </test-suite>
-                  <test-case name="Kistl.IntegrationTests.GetListOfTests.GetListOf" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListOfTests.GetListOf_GetObject" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListOfTests.GetListOf_Twice" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListOfTests.GetObject_GetListOf" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-suite name="Kistl.IntegrationTests.GetListOfTests" success="False" time="0.000" asserts="0">
-                    <results />
+                  <test-suite name="GetListOfTests" success="True" time="0.312" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.GetListOfTests.GetListOf" executed="True" success="True" time="0.156" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListOfTests.GetListOf_GetObject" executed="True" success="True" time="0.047" asserts="2" />
+                      <test-case name="Kistl.IntegrationTests.GetListOfTests.GetListOf_Twice" executed="True" success="True" time="0.047" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.GetListOfTests.GetObject_GetListOf" executed="True" success="True" time="0.062" asserts="3" />
+                    </results>
                   </test-suite>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetList" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetList_GetObject" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetList_Twice" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListFirst" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListSingle" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithFirst" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderBy" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderByAndWhere" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderByThenOrderBy" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterIllegal" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterLegal" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithProjection" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithPropertyAccessor" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithPropertyObjectAccessor" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithSingle" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithTake" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithTakeAndWhere" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.GetListTests.GetObject_GetList" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-suite name="Kistl.IntegrationTests.GetListTests" success="False" time="0.000" asserts="0">
-                    <results />
+                  <test-suite name="GetListTests" success="False" time="5.663" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList" executed="True" success="True" time="0.640" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList_GetObject" executed="True" success="True" time="0.530" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList_Twice" executed="True" success="True" time="1.045" asserts="169" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListFirst" executed="True" success="True" time="0.031" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListSingle" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithFirst" executed="True" success="True" time="0.031" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.562" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderByAndWhere" executed="True" success="True" time="0.359" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderByThenOrderBy" executed="True" success="False" time="0.640" asserts="1">
+                        <failure>
+                          <message><![CDATA[List was not sorted]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.GetListTests.GetListWithOrderByThenOrderBy() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\GetListTests.cs:Zeile 169.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.156" asserts="0" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.062" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithProjection" executed="True" success="True" time="0.187" asserts="0" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithPropertyAccessor" executed="True" success="True" time="0.016" asserts="2" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithPropertyObjectAccessor" executed="True" success="True" time="0.312" asserts="2" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithSingle" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithTake" executed="True" success="True" time="0.203" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithTakeAndWhere" executed="True" success="True" time="0.125" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetObject_GetList" executed="True" success="True" time="0.702" asserts="6" />
+                    </results>
                   </test-suite>
-                  <test-case name="Kistl.IntegrationTests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.InheritanceTests.UpdateInheritedObject" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-suite name="Kistl.IntegrationTests.InheritanceTests" success="False" time="0.000" asserts="0">
-                    <results />
+                  <test-suite name="InheritanceTests" success="True" time="2.714" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="0.608" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.InheritanceTests.UpdateInheritedObject" executed="True" success="True" time="2.090" asserts="4" />
+                    </results>
                   </test-suite>
-                  <test-case name="Kistl.IntegrationTests.ListPropetiesTests.AddStringListPropertyContent" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ListPropetiesTests.DeleteStringListPropertyContent" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ListPropetiesTests.GetPointerListPropertyContent" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ListPropetiesTests.GetStringListPropertyContent" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ListPropetiesTests.UpdateStringListPropertyContent" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-suite name="Kistl.IntegrationTests.ListPropetiesTests" success="False" time="0.000" asserts="0">
-                    <results />
+                  <test-suite name="ListPropetiesTests" success="False" time="0.749" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.AddStringListPropertyContent" executed="True" success="True" time="0.296" asserts="5" />
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.DeleteStringListPropertyContent" executed="True" success="False" time="0.140" asserts="5">
+                        <failure>
+                          <message><![CDATA[  Expected: null
+  But was:  "UnitTest31.10.2008 16:50:09@dasz.at"
+]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.ListPropetiesTests.DeleteStringListPropertyContent() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\ListPropetiesTests.cs:Zeile 157.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.GetPointerListPropertyContent" executed="True" success="True" time="0.172" asserts="9" />
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.GetStringListPropertyContent" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ListPropetiesTests.UpdateStringListPropertyContent" executed="True" success="True" time="0.125" asserts="5" />
+                    </results>
                   </test-suite>
-                  <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf_List" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject_Twice" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ObjectTests.NewObject" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.ObjectTests.SetObject" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-suite name="Kistl.IntegrationTests.ObjectTests" success="False" time="0.000" asserts="0">
-                    <results />
+                  <test-suite name="ObjectTests" success="True" time="0.749" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf" executed="True" success="True" time="0.172" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.094" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject" executed="True" success="True" time="0.047" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject_Twice" executed="True" success="True" time="0.109" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.NewObject" executed="True" success="True" time="0.172" asserts="4" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.SetObject" executed="True" success="True" time="0.140" asserts="3" />
+                    </results>
                   </test-suite>
-                  <test-case name="Kistl.IntegrationTests.StructTests.ChangeObjectWithStruct" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.StructTests.CreateObjectWithStruct" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.StructTests.GetObjectWithStruct" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.StructTests.SaveObjectWithStruct" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-case name="Kistl.IntegrationTests.StructTests.SetStructNull" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[TestFixtureSetUp failed in SetUp]]></message>
-                      <stack-trace />
-                    </failure>
-                  </test-case>
-                  <test-suite name="Kistl.IntegrationTests.StructTests" success="False" time="0.000" asserts="0">
-                    <results />
+                  <test-suite name="StructTests" success="False" time="0.562" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.StructTests.ChangeObjectWithStruct" executed="True" success="True" time="0.172" asserts="9" />
+                      <test-case name="Kistl.IntegrationTests.StructTests.CreateObjectWithStruct" executed="True" success="True" time="0.094" asserts="8" />
+                      <test-case name="Kistl.IntegrationTests.StructTests.GetObjectWithStruct" executed="True" success="True" time="0.031" asserts="14" />
+                      <test-case name="Kistl.IntegrationTests.StructTests.SaveObjectWithStruct" executed="True" success="True" time="0.109" asserts="6" />
+                      <test-case name="Kistl.IntegrationTests.StructTests.SetStructNull" executed="True" success="False" time="0.140" asserts="4">
+                        <failure>
+                          <message><![CDATA[  Expected: null
+  But was:  <Kistl.App.Test.TestPhoneStruct__Implementation__>
+]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.StructTests.SetStructNull() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\StructTests.cs:Zeile 189.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                    </results>
                   </test-suite>
                 </results>
               </test-suite>
