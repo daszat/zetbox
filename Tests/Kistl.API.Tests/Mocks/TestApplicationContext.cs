@@ -4,12 +4,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+using Kistl.API.Configuration;
+
 namespace Kistl.API.Mocks
 {
     public class TestApplicationContext : ApplicationContext
     {
         public TestApplicationContext()
-            : base(HostType.None, "")
+            : base(HostType.None, KistlConfig.FromFile(""))
         {
             this.SetAssemblies(Assembly.GetAssembly(this.GetType()).FullName);
         }

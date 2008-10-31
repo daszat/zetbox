@@ -2,22 +2,28 @@
 <xs:schema xmlns:tns="http://dasz.at/Kistl/" elementFormDefault="qualified" targetNamespace="http://dasz.at/Kistl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="KistlConfig" nillable="true" type="tns:KistlConfig" />
   <xs:complexType name="KistlConfig">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="Address" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="ConfigName" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="Server" nillable="true" type="tns:ServerConfig" />
-      <xs:element minOccurs="1" maxOccurs="1" name="Client" nillable="true" type="tns:ClientConfig" />
-      <xs:element minOccurs="0" maxOccurs="1" name="SourceFileLocation" type="tns:ArrayOfString" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarshalByRefObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="ServiceUrl" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="StreamsUrl" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ConfigName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Server" nillable="true" type="tns:ServerConfig" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Client" nillable="true" type="tns:ClientConfig" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SourceFileLocation" type="tns:ArrayOfString" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="MarshalByRefObject" abstract="true" />
   <xs:complexType name="ServerConfig">
     <xs:sequence>
-      <xs:element minOccurs="1" maxOccurs="1" name="DatabaseProvider" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="ConnectionString" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="DocumentStore" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="KistlDataContextType" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="ServerObjectHandlerType" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="ServerObjectSetHandlerType" type="xs:string" />      
+      <xs:element minOccurs="0" maxOccurs="1" name="DatabaseProvider" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConnectionString" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="KistlDataContextType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectHandlerType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectSetHandlerType" type="xs:string" />
     </xs:sequence>
     <xs:attribute name="StartServer" type="xs:boolean" use="required" />
   </xs:complexType>
@@ -26,7 +32,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
     </xs:sequence>
     <xs:attribute name="StartClient" type="xs:boolean" use="required" />
-    <xs:attribute name="ThrowErrors" type="xs:boolean" default="false" />
+    <xs:attribute name="ThrowErrors" type="xs:boolean" use="required" />
   </xs:complexType>
   <xs:complexType name="ArrayOfString">
     <xs:sequence>

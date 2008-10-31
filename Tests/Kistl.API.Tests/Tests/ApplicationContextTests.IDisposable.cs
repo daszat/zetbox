@@ -1,4 +1,7 @@
 using System;
+
+using Kistl.API.Configuration;
+
 using NUnit.Framework;
 
 // This is a ApplicationContext to test the recommended default IDisposable implementation
@@ -15,7 +18,7 @@ namespace Kistl.API.Tests
             Action disposeUnmanaged;
 
             public ApplicationContextMock(Action disposeManagedAction, Action disposeUnmanagedAction)
-                : base(HostType.Server, "")
+                : base(HostType.Server, KistlConfig.FromFile(""))
             {
                 this.disposeManaged = disposeManagedAction ?? delegate { };
                 this.disposeUnmanaged = disposeUnmanagedAction ?? delegate { };

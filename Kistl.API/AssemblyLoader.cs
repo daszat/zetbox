@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Kistl.API.Configuration;
 
 namespace Kistl.API
 {
@@ -15,20 +16,34 @@ namespace Kistl.API
     // This does not seem to be the best solution. But it works.
     // See http://blogs.msdn.com/suzcook/archive/2003/05/29/57143.aspx
     // In the long term, we want to either use a framework like MEF (http://www.codeplex.com/MEF);
-    // or Mono.Addins; or push all Assemblies to the GAC to avoid this global state.
+    // or Mono.Addins; or push all Assemblies to the GAC to avoid this mess.
     public static class AssemblyLoader
     {
 
+        /// <summary>
+        /// Initialises the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path
+        /// </summary>
+        /// <param name="domain"></param>
+        /// <param name="config"></param>
+        public static void Bootstrap(AppDomain domain, KistlConfig config)
+        {
+            var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
+                "Kistl.API",
+                "Kistl.API.AssemblyLoaderInitializer");
+
+            init.Init(config);
+        }
+
         private static bool _isInitialised = false;
-        public static void InitOnce()
+        public static void EnsureInitialisation(KistlConfig config)
         {
             lock (typeof(AssemblyLoader))
             {
                 if (_isInitialised) return;
                 _isInitialised = true;
 
-                // Delete stale Assemblies
-                Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+                InitialiseTargetAssemblyFolder(config);
+                InitialiseSearchPath(config);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -36,27 +51,27 @@ namespace Kistl.API
             }
         }
 
-        /// <summary>
-        /// Private Field for TargetAssemblyFolder
-        /// </summary>
-        private static string _TargetAssemblyFolder;
+        private static void InitialiseSearchPath(KistlConfig config)
+        {
+            foreach (var path in config.SourceFileLocation)
+            {
+                AssemblyLoader.SearchPath.Add(path);
+            }
+        }
+
+        private static void InitialiseTargetAssemblyFolder(KistlConfig config)
+        {
+            TargetAssemblyFolder = config.WorkingFolder + @"bin\";
+            System.IO.Directory.CreateDirectory(TargetAssemblyFolder);
+
+            // Delete stale Assemblies
+            Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+        }
 
         /// <summary>
         /// Gets the Target Assembly Folder. Directory is created if it does not exist.
         /// </summary>
-        public static string TargetAssemblyFolder
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_TargetAssemblyFolder))
-                {
-                    _TargetAssemblyFolder = Helper.WorkingFolder + @"bin\";
-                    System.IO.Directory.CreateDirectory(_TargetAssemblyFolder);
-                }
-
-                return _TargetAssemblyFolder;
-            }
-        }
+        public static string TargetAssemblyFolder { get; private set; }
 
         static AssemblyLoader()
         {
@@ -209,6 +224,14 @@ namespace Kistl.API
 
                 return null;
             }
+        }
+    }
+
+    public class AssemblyLoaderInitializer : MarshalByRefObject
+    {
+        public void Init(KistlConfig config)
+        {
+            AssemblyLoader.EnsureInitialisation(config);
         }
     }
 }

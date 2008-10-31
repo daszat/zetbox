@@ -70,7 +70,9 @@
     <None Include="Kistl.IntegrationTests.nunit" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig_Integration.Tests.xml" />
+    <Content Include="DefaultConfig_Integration.Tests.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />
     <Content Include="TestResult.xml" />
   </ItemGroup>
@@ -83,6 +85,10 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Client.WPF\Kistl.Client.WPF.csproj">
+      <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
+      <Name>Kistl.Client.WPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Client\Kistl.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
@@ -90,7 +96,6 @@
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

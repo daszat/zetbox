@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API.Configuration;
+
 namespace Kistl.API
 {
     /// <summary>
@@ -13,7 +15,7 @@ namespace Kistl.API
         /// <summary>
         /// Start the Host.
         /// </summary>
-        void Start();
+        void Start(KistlConfig config);
         /// <summary>
         /// Stop the Host.
         /// </summary>

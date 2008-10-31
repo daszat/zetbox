@@ -9,6 +9,7 @@ using System.Windows.Markup;
 
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.API.Configuration;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 using Kistl.GUI.DB;
@@ -31,6 +32,8 @@ namespace Kistl.Client.WPF
                     XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
 
+        private static ServerDomainManager serverDomain;
+
         private static string[] Init(string[] args)
         {
             string configFilePath;
@@ -47,8 +50,15 @@ namespace Kistl.Client.WPF
                 result = (string[])args.Clone();
             }
 
-            // Configure the ApplicationContext
-            var appCtx = new GuiApplicationContext(configFilePath, Toolkit.WPF);
+            var config = KistlConfig.FromFile(configFilePath);
+
+            if (config.Server.StartServer)
+            {
+                serverDomain = new ServerDomainManager();
+                serverDomain.Start(config);
+            }
+
+            var appCtx = new GuiApplicationContext(config, Toolkit.WPF);
 
             return result;
         }
@@ -102,6 +112,12 @@ namespace Kistl.Client.WPF
                     ctx.SubmitChanges();
                 }
             }
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            if (serverDomain != null)
+                serverDomain.Stop();
         }
 
 #if DONOTUSE

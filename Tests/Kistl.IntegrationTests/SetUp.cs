@@ -2,28 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Kistl.API.Configuration;
+using Kistl.App.GUI;
+using Kistl.Client;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
-using Kistl.Client;
 
 namespace Kistl.IntegrationTests
 {
     [SetUpFixture]
-    public class SetUp
+    public class SetUp : IDisposable
     {
-        private Kistl.Client.Client client;
+        private ServerDomainManager manager;
 
         [SetUp]
         public void Init()
         {
             System.Diagnostics.Trace.WriteLine("Setting up Kistl");
-            /*
-            Kistl.API.APIInit init = new Kistl.API.APIInit();
-            init.Init(Kistl.API.HostType.Client, @"..\..\DefaultConfig_Integration.Tests.xml");
-            */
-            client = new Kistl.Client.Client();
-            client.Start();
+
+            var config = KistlConfig.FromFile("DefaultConfig_Integration.Tests.xml");
+
+            manager = new ServerDomainManager();
+            manager.Start(config);
+
+            var testCtx = new GuiApplicationContext(config, Toolkit.WPF);
 
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
         }
@@ -32,17 +37,17 @@ namespace Kistl.IntegrationTests
         public void TearDown()
         {
             System.Diagnostics.Trace.WriteLine("Shutting down Kistl");
-            try
-            {
-                // Das geht immer noch nicht
-                client.Stop();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Trace.WriteLine(ex.ToString());
-            }
-            client = null;
+            manager.Stop();
             System.Diagnostics.Trace.WriteLine("Shutting down Kistl finished");
         }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            TearDown();
+        }
+
+        #endregion
     }
 }

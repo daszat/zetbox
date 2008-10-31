@@ -10,8 +10,8 @@ namespace Kistl.API.Client
 
         public static new ClientApiContext Current { get; private set; }
 
-        public ClientApiContext(string configFile) :
-            base(HostType.Client, configFile)
+        public ClientApiContext(Configuration.KistlConfig config) :
+            base(HostType.Client, config)
         {
             ClientApiContext.Current = this;
 

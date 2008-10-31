@@ -24,7 +24,8 @@ namespace Kistl.API.Configuration
     /// Configuration of Kistl
     /// </summary>
     [XmlRoot("KistlConfig", Namespace = "http://dasz.at/Kistl/")]
-    public class KistlConfig : MarshalByRefObject
+    [Serializable]
+    public class KistlConfig
     {
 
         /// <summary>
@@ -64,14 +65,23 @@ namespace Kistl.API.Configuration
         public string[] SourceFileLocation { get; set; }
 
         /// <summary>
-        /// Address of the WCF Service - not used yet!
+        /// Address of the WCF Service
         /// </summary>
-        [XmlElement(IsNullable = false)]
-        public string Address;
+        [XmlElement]
+        public string ServiceUrl;
+
+        /// <summary>
+        /// Address of the WCF Streams Service
+        /// </summary>
+        [XmlElement]
+        public string StreamsUrl;
+
+
 
         /// <summary>
         /// Server Configuration
         /// </summary>
+        [Serializable]
         public class ServerConfig
         {
             /// <summary>
@@ -98,21 +108,12 @@ namespace Kistl.API.Configuration
             [XmlElement(IsNullable = false)]
             public string DocumentStore { get; set; }
 
-            /// <summary>
-            /// 
-            /// </summary>
             [XmlElement(IsNullable = false)]
             public string KistlDataContextType { get; set; }
 
-            /// <summary>
-            /// 
-            /// </summary>
             [XmlElement(IsNullable = false)]
             public string ServerObjectHandlerType { get; set; }
 
-            /// <summary>
-            /// 
-            /// </summary>
             [XmlElement(IsNullable = false)]
             public string ServerObjectSetHandlerType { get; set; }
         }
@@ -120,6 +121,7 @@ namespace Kistl.API.Configuration
         /// <summary>
         /// Client Configuration
         /// </summary>
+        [Serializable]
         public class ClientConfig
         {
             /// <summary>
@@ -194,11 +196,36 @@ namespace Kistl.API.Configuration
         /// <returns>Current Configuration</returns>
         public static KistlConfig FromFile(string filename)
         {
-            using (XmlTextReader r = new XmlTextReader(filename))
+            using (XmlTextReader r = new XmlTextReader(String.IsNullOrEmpty(filename) ? "DefaultConfiguration.xml" : filename))
             {
                 KistlConfig result = (KistlConfig)xml.Deserialize(r);
                 result.ConfigFilePath = filename;
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// The WorkingFolder of this application contains all local state of the app.
+        /// The Path is [LocalApplicationData]\dasz\Kistl\[Current Configuration Name]\[AppDomain.FriendlyName]\
+        /// </summary>
+        /// eg.: C:\Users\Arthur\AppData\Local\dasz\Kistl\Arthur's Configuration\Kistl.Client.exe\
+        [XmlIgnore]
+        public string WorkingFolder
+        {
+            get
+            {
+                string _WorkingFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                _WorkingFolder += _WorkingFolder.EndsWith(@"\") ? "" : @"\";
+
+                // TODO: very bad idea because this may change when passing the config between AppDomains
+                _WorkingFolder += @"dasz\Kistl\"
+                    + Helper.GetLegalPathName(this.ConfigName)
+                    + @"\"
+                    + Helper.GetLegalPathName(AppDomain.CurrentDomain.FriendlyName)
+                    + @"\";
+
+                System.IO.Directory.CreateDirectory(_WorkingFolder);
+                return _WorkingFolder;
             }
         }
     }

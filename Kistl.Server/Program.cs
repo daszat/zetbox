@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Threading;
 using System.Diagnostics;
 
+using Kistl.API.Configuration;
 using Kistl.API.Server;
 
 namespace Kistl.Server
@@ -26,8 +27,7 @@ namespace Kistl.Server
             {
                 configFilePath = "";
             }
-
-            var appCtx = new ServerApplicationContext(configFilePath);
+            var config = KistlConfig.FromFile(configFilePath);
 
             Server server = new Server();
 
@@ -61,7 +61,7 @@ namespace Kistl.Server
                 }
             }
 
-            server.Start();
+            server.Start(config);
             Console.WriteLine("Server started, press the anykey to exit");
             Console.ReadKey();
 

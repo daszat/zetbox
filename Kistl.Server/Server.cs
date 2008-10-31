@@ -7,6 +7,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Reflection;
 using Kistl.API.Server;
+using Kistl.API.Configuration;
 
 namespace Kistl.Server
 {
@@ -31,14 +32,17 @@ namespace Kistl.Server
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
+        private ServerApplicationContext appCtx;
         /// <summary>
         /// Server starten, Methode blockiert bis zum Serverstart. 
         /// Nach 20 sec. wird der start jedoch beendet.
         /// </summary>
-        public void Start()
+        public void Start(KistlConfig config)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Server"))
             {
+                appCtx = new ServerApplicationContext(config);
+
                 serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
                 serviceThread.Start();
 
@@ -50,7 +54,7 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// Stopped den Server
+        /// Stops the Server
         /// </summary>
         public void Stop()
         {
@@ -60,6 +64,8 @@ namespace Kistl.Server
             Trace.TraceInformation("Server stopped");
         }
 
+        public const string DefaultServiceUrl = "http://localhost:6666/KistlService";
+        public const string DefaultStreamsUrl = "http://localhost:6666/KistlServiceStreams";
         /// <summary>
         /// Führt den eigentlichen WCF Host start asynchron durch und 
         /// wartet bis er wieder gestopped wird.
@@ -68,13 +74,15 @@ namespace Kistl.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Starting WCF Server"))
             {
-                host = new ServiceHost(typeof(Kistl.Server.KistlService), new Uri("http://localhost:6666/KistlService"));
+                host = new ServiceHost(typeof(Kistl.Server.KistlService),
+                    new Uri(String.IsNullOrEmpty(appCtx.Configuration.ServiceUrl) ? DefaultServiceUrl : appCtx.Configuration.ServiceUrl));
                 host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
                 host.Faulted += new EventHandler(host_Faulted);
 
                 host.Open();
 
-                hostStreams = new ServiceHost(typeof(Kistl.Server.KistlServiceStreams), new Uri("http://localhost:6666/KistlServiceStreams"));
+                hostStreams = new ServiceHost(typeof(Kistl.Server.KistlServiceStreams),
+                    new Uri(String.IsNullOrEmpty(appCtx.Configuration.StreamsUrl) ? DefaultStreamsUrl : appCtx.Configuration.StreamsUrl));
                 hostStreams.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
                 hostStreams.Faulted += new EventHandler(host_Faulted);
 

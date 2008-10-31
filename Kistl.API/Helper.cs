@@ -66,35 +66,6 @@ namespace Kistl.API
 
             return path;
         }
-
-        /// <summary>
-        /// Private Field for the Working Folder
-        /// </summary>
-        private static string _WorkingFolder;
-        /// <summary>
-        /// Gets the Working Folder. Path is [LocalApplicationData]\dasz\Kistl\[Current Configuration Name]\[AppDomain.FriendlyName]
-        /// eg.: C:\Users\Arthur\AppData\Local\dasz\Kistl\Arthur's Configuration\Kistl.Client.exe
-        /// </summary>
-        public static string WorkingFolder
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_WorkingFolder))
-                {
-                    _WorkingFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    _WorkingFolder += _WorkingFolder.EndsWith(@"\") ? "" : @"\";
-
-                    _WorkingFolder += @"dasz\Kistl\"
-                        + Helper.GetLegalPathName(ApplicationContext.Current.Configuration.ConfigName)
-                        + @"\"
-                        + Helper.GetLegalPathName(AppDomain.CurrentDomain.FriendlyName)
-                        + @"\";
-
-                    System.IO.Directory.CreateDirectory(_WorkingFolder);
-                }
-                return _WorkingFolder;
-            }
-        }
     }
 
     /// <summary>

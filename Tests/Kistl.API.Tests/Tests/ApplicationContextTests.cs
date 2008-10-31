@@ -5,13 +5,14 @@ using System.Text;
 
 using NMock2;
 using NUnit.Framework;
+using Kistl.API.Configuration;
 
 namespace Kistl.API.Tests
 {
     public class ConfigTestApplicationContext : ApplicationContext
     {
-        public ConfigTestApplicationContext(string configFilePath)
-            : base(HostType.None, configFilePath)
+        public ConfigTestApplicationContext(KistlConfig config)
+            : base(HostType.None, config)
         {
 
         }
@@ -20,7 +21,7 @@ namespace Kistl.API.Tests
     public class CustomActionsTestApplicationContext : ApplicationContext
     {
         public CustomActionsTestApplicationContext()
-            : base(HostType.None, "")
+            : base(HostType.None, KistlConfig.FromFile(""))
         { }
 
         // export protected function for tests
@@ -33,7 +34,7 @@ namespace Kistl.API.Tests
     public class TypesTestApplicationContext : ApplicationContext
     {
         public TypesTestApplicationContext()
-            : base(HostType.None, "")
+            : base(HostType.None, KistlConfig.FromFile(""))
         { }
 
         // public Type BasePersistenceObjectType { get; protected set; }
@@ -55,21 +56,23 @@ namespace Kistl.API.Tests
         [Test]
         public void InitDefaultConfig()
         {
-            var testCtx = new ConfigTestApplicationContext("");
+            var config = KistlConfig.FromFile("");
+            var testCtx = new ConfigTestApplicationContext(config);
 
             Assert.IsNotNull(ApplicationContext.Current);
-            Assert.AreEqual("Default Test Configuration", ApplicationContext.Current.Configuration.ConfigName);
+            Assert.AreSame(config, ApplicationContext.Current.Configuration);
         }
 
         [Test]
         public void InitConfigFile()
         {
-            var testCtx = new ConfigTestApplicationContext("TestConfig.xml");
+            var config = KistlConfig.FromFile("TestConfig.xml");
+            var testCtx = new ConfigTestApplicationContext(config);
 
             Assert.IsNotNull(ApplicationContext.Current);
-            Assert.AreEqual("Test Configuration", ApplicationContext.Current.Configuration.ConfigName);
+            Assert.AreSame(config, ApplicationContext.Current.Configuration.ConfigName);
 
-            // TestConfig.xml should contain at least one SourceFileLocation
+            // TestConfig.xml MUST contain at least one SourceFileLocation for this to work
             Assert.Greater(ApplicationContext.Current.Configuration.SourceFileLocation.Count(), 0,
                 "ApplicationContext didn't load configuration" );
             Assert.AreEqual(ApplicationContext.Current.Configuration.SourceFileLocation.Count(), AssemblyLoader.SearchPath.Count,
@@ -79,13 +82,6 @@ namespace Kistl.API.Tests
                 Assert.AreEqual(ApplicationContext.Current.Configuration.SourceFileLocation[i],
                     AssemblyLoader.SearchPath[i], "ApplicationContext didn't correctly configure AssemblyLoader.SearchPath");
             }
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void InitMissingConfigFile()
-        {
-            var testCtx = new ConfigTestApplicationContext("MissingTestConfig.xml");
         }
 
         [Test]

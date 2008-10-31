@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Lifetime;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Configuration;
 using Kistl.API.Server;
 
 namespace Kistl.Server
@@ -13,8 +15,8 @@ namespace Kistl.Server
     {
         public static new ServerApplicationContext Current { get; private set; }
 
-        public ServerApplicationContext(string configFile)
-            : base(configFile)
+        public ServerApplicationContext(KistlConfig config)
+            : base(config)
         {
             ServerApplicationContext.Current = this;
 

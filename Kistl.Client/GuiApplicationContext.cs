@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API.Client;
+using Kistl.API.Configuration;
 using Kistl.App.GUI;
 using Kistl.GUI.DB;
 using Kistl.GUI.Renderer;
@@ -14,8 +15,8 @@ namespace Kistl.Client
     {
         public static new GuiApplicationContext Current { get; private set; }
 
-        public GuiApplicationContext(string configFile, Toolkit tk)
-            : base(configFile)
+        public GuiApplicationContext(KistlConfig config, Toolkit tk)
+            : base(config)
         {
             GuiApplicationContext.Current = this;
             SetCustomActionsManager(new CustomActionsManagerClient());

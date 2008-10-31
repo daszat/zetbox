@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Remoting.Lifetime;
 
 namespace Kistl.API.Server
 {
@@ -9,8 +10,8 @@ namespace Kistl.API.Server
     {
         public static new ServerApiContext Current { get; private set; }
 
-        public ServerApiContext(string configFile) :
-            base(HostType.Server, configFile)
+        public ServerApiContext(Configuration.KistlConfig config)
+            : base(HostType.Server, config)
         {
             ServerApiContext.Current = this;
 
@@ -20,5 +21,8 @@ namespace Kistl.API.Server
             BaseStructObjectType = typeof(BaseServerStructObject);
         }
 
+        
     }
+
+
 }

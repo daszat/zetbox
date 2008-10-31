@@ -67,38 +67,21 @@ namespace Kistl.API
         /// </summary>
         /// <param name="type"></param>
         /// <param name="configFile">load configuration from here. uses DefaultConfig.xml if empty</param>
-        protected ApplicationContext(HostType type, string configFile)
+        protected ApplicationContext(HostType type, Configuration.KistlConfig config)
         {
             HostType = type;
 
-            LoadConfiguration(configFile);
+            Configuration = config;
 
             // now the basic configuration is finished, therefore "publish" the appCtx
             ApplicationContext.Current = this;
 
-            AssemblyLoader.InitOnce();
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, Configuration);
+            // AssemblyLoader.EnsureInitialisation(Configuration);
 
             // Hardcode Interface and Implementation assemblies
             InterfaceAssembly = "Kistl.Objects";
             ImplementationAssembly = "Kistl.Objects." + HostType;
-
-        }
-
-        private void LoadConfiguration(string configFile)
-        {
-            if (String.IsNullOrEmpty(configFile))
-            {
-                Configuration = KistlConfig.FromFile("DefaultConfig.xml");
-            }
-            else
-            {
-                Configuration = KistlConfig.FromFile(configFile);
-            }
-
-            foreach (var path in Configuration.SourceFileLocation)
-            {
-                AssemblyLoader.SearchPath.Add(path);
-            }
 
         }
 

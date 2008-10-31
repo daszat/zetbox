@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web;
+
 using Kistl.API;
-using System.Configuration;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -41,9 +43,8 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             if (GuiApplicationContext.Current == null)
             {
-                // Code, der beim Starten der Anwendung ausgeführt wird.
-                var appCtx = new GuiApplicationContext(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]),
-                    Kistl.App.GUI.Toolkit.ASPNET);
+                var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]));
+                var appCtx = new GuiApplicationContext(config, Kistl.App.GUI.Toolkit.ASPNET);
             }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();
         }

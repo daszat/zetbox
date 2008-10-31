@@ -9,17 +9,27 @@ namespace Kistl.IntegrationTests
     {
         public static void Main(string[] args)
         {
-            SetUp setup = new SetUp();
-            setup.Init();
+            using (SetUp setup = new SetUp())
+            {
+                setup.Init();
 
-            //InheritanceTests();
-            //GetListOfTests();
-            GetListTests();
-            //ListPropetiesTests();
-            //ObjectTests();
-            //StructTests();
+                GeneratorTests();
+                GetListOfTests();
+                InheritanceTests();
+                GetListTests();
+                ListPropetiesTests();
+                ObjectTests();
+                StructTests();
+            }
+        }
 
-            setup.TearDown();
+        private static void GeneratorTests()
+        {
+
+            var generatorTests = new GeneratorTests();
+            generatorTests.SetUp();
+            generatorTests.Generate();
+            generatorTests.TearDown();
         }
 
         private static void InheritanceTests()
