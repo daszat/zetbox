@@ -11,12 +11,19 @@ using Kistl.API.Configuration;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.IO;
+using Kistl.API.Mocks;
 
 namespace Kistl.API.Tests
 {
     [TestFixture]
     public class KistlConfigTests
     {
+        [SetUp]
+        public void SetUp()
+        {
+            var textCtx = new TestApplicationContext();
+        }
+
         private void CheckConfig(KistlConfig cfg)
         {
             Assert.That(cfg.ConfigName, Is.Not.Empty, "ConfigName");
@@ -65,7 +72,7 @@ namespace Kistl.API.Tests
         [Test]
         public void ToFile()
         {
-            string filename = @"testconfig.xml";
+            string filename = @"testconfig_to_see_if_saving_works.xml";
             if (File.Exists(filename))
             {
                 File.Delete(filename);
