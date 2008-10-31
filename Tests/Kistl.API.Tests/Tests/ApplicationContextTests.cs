@@ -64,27 +64,6 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void InitConfigFile()
-        {
-            var config = KistlConfig.FromFile("TestConfig.xml");
-            var testCtx = new ConfigTestApplicationContext(config);
-
-            Assert.IsNotNull(ApplicationContext.Current);
-            Assert.AreSame(config, ApplicationContext.Current.Configuration.ConfigName);
-
-            // TestConfig.xml MUST contain at least one SourceFileLocation for this to work
-            Assert.Greater(ApplicationContext.Current.Configuration.SourceFileLocation.Count(), 0,
-                "ApplicationContext didn't load configuration" );
-            Assert.AreEqual(ApplicationContext.Current.Configuration.SourceFileLocation.Count(), AssemblyLoader.SearchPath.Count,
-                "ApplicationContext didn't correctly configure AssemblyLoader.SearchPath");
-            for (int i = 0; i < ApplicationContext.Current.Configuration.SourceFileLocation.Count(); i++)
-            {
-                Assert.AreEqual(ApplicationContext.Current.Configuration.SourceFileLocation[i],
-                    AssemblyLoader.SearchPath[i], "ApplicationContext didn't correctly configure AssemblyLoader.SearchPath");
-            }
-        }
-
-        [Test]
         [ExpectedException(typeof(NullReferenceException))]
         public void SetCustomActionsManagerNull()
         {

@@ -196,7 +196,8 @@ namespace Kistl.API.Configuration
         /// <returns>Current Configuration</returns>
         public static KistlConfig FromFile(string filename)
         {
-            using (XmlTextReader r = new XmlTextReader(String.IsNullOrEmpty(filename) ? "DefaultConfig.xml" : filename))
+            filename = String.IsNullOrEmpty(filename) ? "DefaultConfig.xml" : filename;
+            using (XmlTextReader r = new XmlTextReader(filename))
             {
                 KistlConfig result = (KistlConfig)xml.Deserialize(r);
                 result.ConfigFilePath = filename;

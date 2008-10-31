@@ -18,11 +18,6 @@ namespace Kistl.API.Tests
     [TestFixture]
     public class KistlConfigTests
     {
-        [SetUp]
-        public void SetUp()
-        {
-            var textCtx = new TestApplicationContext();
-        }
 
         private void CheckConfig(KistlConfig cfg)
         {
@@ -39,11 +34,24 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void Current()
+        public void DefaultLoading()
         {
-            Assert.That(ApplicationContext.Current.Configuration, Is.Not.Null);
-            Assert.That(ApplicationContext.Current.Configuration.ConfigFilePath, Is.Not.Empty);
-            Assert.That(ApplicationContext.Current.Configuration.ConfigName, Is.Not.Empty);
+            var config = KistlConfig.FromFile("");
+
+            Assert.That(config, Is.Not.Null, "Configuration");
+            Assert.That(config.ConfigFilePath, Is.Not.Empty, "ConfigFilePath");
+            Assert.That(config.ConfigName, Is.Not.Empty, "ConfigName");
+        }
+
+        [Test]
+        public void LoadFile()
+        {
+            var filename = "TestConfig.xml";
+            var config = KistlConfig.FromFile(filename);
+
+            Assert.That(config, Is.Not.Null, "Configuration");
+            Assert.That(config.ConfigFilePath, Is.EqualTo(filename), "ConfigFilePath");
+            Assert.That(config.ConfigName, Is.Not.Empty, "ConfigName");
         }
 
         [Test]
@@ -77,7 +85,8 @@ namespace Kistl.API.Tests
             {
                 File.Delete(filename);
             }
-            ApplicationContext.Current.Configuration.ToFile(filename);
+            var config = KistlConfig.FromFile("");
+            config.ToFile(filename);
             Assert.That(File.Exists(filename), Is.True);
             Assert.That(new FileInfo(filename).Length, Is.GreaterThan(0));
             File.Delete(filename);
@@ -87,9 +96,24 @@ namespace Kistl.API.Tests
         public void ToStream()
         {
             MemoryStream ms = new MemoryStream();
-            ApplicationContext.Current.Configuration.ToStream(ms);
+            var config = new KistlConfig();
+            config.ToStream(ms);
             Assert.That(ms.Length, Is.GreaterThan(0));
         }
 
+        [Test]
+        public void ConfigurationExceptionWithMessage()
+        {
+            var message = "message";
+            var ex = new ConfigurationException(message);
+            Assert.That(ex.Message, Is.EqualTo(message));
+        }
+
+        [Test]
+        public void ConfigurationExceptionWithoutMessage()
+        {
+            var ex = new ConfigurationException();
+            Assert.That(ex.Message, Is.Not.Empty);
+        }
     }
 }

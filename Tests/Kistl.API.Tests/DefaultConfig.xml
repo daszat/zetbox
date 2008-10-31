@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <Address></Address>
   <ConfigName>Default Test Configuration</ConfigName>
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
@@ -10,7 +9,7 @@
     <ServerObjectHandlerType>Kistl.API.Tests.NoServerObjectHandler, Kistl.API.Tests</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.API.Tests.NoServerObjectSetHandler, Kistl.API.Tests</ServerObjectSetHandlerType>
   </Server>
-  <Client StartClient="false">
+  <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
