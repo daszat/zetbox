@@ -7,7 +7,7 @@ namespace Kistl.API.Server
 {
     public class ServerApiContext : ApplicationContext
     {
-        public static ServerApiContext Current { get; private set; }
+        public static new ServerApiContext Current { get; private set; }
 
         public ServerApiContext(string configFile) :
             base(HostType.Server, configFile)
