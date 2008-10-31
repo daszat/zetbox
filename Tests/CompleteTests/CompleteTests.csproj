@@ -59,11 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CompleteTests.PartCoverSettings.xml" />
-    <Content Include="DefaultConfig_API.Client.Tests.xml" />
-    <Content Include="DefaultConfig_API.Server.Tests.xml" />
-    <Content Include="DefaultConfig_API.Tests.xml" />
-    <Content Include="DefaultConfig_Integration.Tests.xml" />
-    <Content Include="DefaultConfig_Kistl.Client.Tests.xml" />
+    <Content Include="DefaultConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj">
