@@ -76,6 +76,10 @@
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
       <Name>Kistl.API.Tests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.Client.Tests\Kistl.Client.Tests.csproj">
+      <Project>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</Project>
+      <Name>Kistl.Client.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.IntegrationTests\Kistl.IntegrationTests.csproj">
       <Project>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</Project>
       <Name>Kistl.IntegrationTests</Name>
