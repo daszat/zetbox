@@ -27,8 +27,15 @@
                     ItemsSource="{Binding Objects}">
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="Header"
-                            Value="{Binding ShortLabel}" />
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock MaxWidth="150"
+                                           Text="{Binding Header}"
+                                           TextWrapping="Wrap" />
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </TabControl.ItemContainerStyle>
             <TabControl.ContentTemplate>

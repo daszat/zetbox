@@ -126,6 +126,9 @@ namespace Kistl.GUI.Renderer
                     case VisualType.PropertyGroup:
                         pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(Kistl.GUI.GroupPresenter));
                         break;
+                    case VisualType.TemplateEditor:
+                        pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(IDataObject));
+                        break;
                     // TODO: enable Menu
                     //case VisualType.Toolbar:
                     //    pInfo = KistlGUIContext.FindPresenterInfo(visual, typeof(Kistl.GUI.ToolBarPresenter));

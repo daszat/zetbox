@@ -1,37 +1,57 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 using Kistl.API;
-using System.ComponentModel;
+using Kistl.GUI;
+using Kistl.App.GUI;
 
 namespace Kistl.GUI.Renderer.WPF
 {
-    public class ObjectTabItem : ContentControl, IObjectControl, INotifyPropertyChanged
+
+    /// <summary>
+    /// a non-modifying proxy to simplify PresenterInfo handling in the DB
+    /// </summary>
+    public class TemplateEditorPresenter : ObjectPresenter { }
+
+    /// <summary>
+    /// Interaction logic for TemplateEditor.xaml
+    /// </summary>
+    public partial class TemplateEditor : ObjectTabItem, IObjectControl
     {
-        public ObjectTabItem()
+        public TemplateEditor()
         {
-            Menus = new List<UIElement>();
+            InitializeComponent();
         }
 
-        #region Property: Menus
+        #region IObjectControl Members
 
-        public List<UIElement> Menus
+        public Kistl.API.IDataObject Value
         {
-            get { return (List<UIElement>)GetValue(MenusKey.DependencyProperty); }
-            private set { SetValue(MenusKey, value); }
+            get
+            {
+                return (Kistl.API.IDataObject)DataContext;
+            }
+            set
+            {
+                if (!(value is Template))
+                    throw new ArgumentOutOfRangeException("value",
+                        String.Format("TemplateEditor.Value can only handle a Template, not '{0}' of type '{1}'",
+                            value,
+                            value.GetType()));
+                DataContext = value;
+            }
         }
-
-        // Using a DependencyProperty as the backing store for Menus.  This enables animation, styling, binding, etc...
-        private static readonly DependencyPropertyKey MenusKey =
-            DependencyProperty.RegisterReadOnly("Menus", typeof(List<UIElement>), typeof(ObjectTabItem), new UIPropertyMetadata());
-
-        #endregion
-
-        #region IObjectControl Member
-
-        Kistl.API.IDataObject IObjectControl.Value { get; set; }
 
         public event EventHandler UserSaveRequest;
 
@@ -49,7 +69,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for ShortLabel.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShortLabelProperty =
-            DependencyProperty.Register("ShortLabel", typeof(string), typeof(ObjectTabItem), new UIPropertyMetadata(""));
+            DependencyProperty.Register("ShortLabel", typeof(string), typeof(TemplateEditor), new UIPropertyMetadata(""));
 
         public string Description
         {
@@ -59,7 +79,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for Description.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register("Description", typeof(string), typeof(ObjectTabItem), new UIPropertyMetadata(""));
+            DependencyProperty.Register("Description", typeof(string), typeof(TemplateEditor), new UIPropertyMetadata(""));
 
 
         public FieldSize Size
@@ -70,7 +90,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for Size.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SizeProperty =
-            DependencyProperty.Register("Size", typeof(FieldSize), typeof(ObjectTabItem), new UIPropertyMetadata(null));
+            DependencyProperty.Register("Size", typeof(FieldSize), typeof(TemplateEditor), new UIPropertyMetadata(null));
 
         public IKistlContext Context
         {
@@ -80,26 +100,8 @@ namespace Kistl.GUI.Renderer.WPF
 
         // Using a DependencyProperty as the backing store for Context.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ContextProperty =
-            DependencyProperty.Register("Context", typeof(IKistlContext), typeof(ObjectTabItem), new UIPropertyMetadata());
+            DependencyProperty.Register("Context", typeof(IKistlContext), typeof(TemplateEditor), new UIPropertyMetadata());
 
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-            OnPropertyChanged(e.Property.Name);
-        }
 
         #endregion
     }

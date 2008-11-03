@@ -80,5 +80,8 @@ namespace Kistl.App.GUI
         
         /// MenuItem
         MenuItem = 17,
+        
+        /// TemplateEditor
+        TemplateEditor = 19,
     }
 }

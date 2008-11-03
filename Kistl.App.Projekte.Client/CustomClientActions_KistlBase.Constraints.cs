@@ -180,7 +180,7 @@ namespace Kistl.App.Base
         {
             var constrainedObject = (MethodInvocation)constrainedObjectParam;
             var method = (Method)constrainedValueParam;
-            e.Result &= method.ObjectClass.IsAssignableFrom(constrainedObject.InvokeOnObjectClass);
+            e.Result &= (method != null) && method.ObjectClass.IsAssignableFrom(constrainedObject.InvokeOnObjectClass);
         }
 
 
@@ -193,7 +193,7 @@ namespace Kistl.App.Base
             var constrainedObject = (MethodInvocation)constrainedObjectParam;
             var method = (Method)constrainedValueParam;
             e.Result = String.Format("This Invocation's  InvokeOnObjectClass ('{1}') should be a descendent of (or equal to) the Method's class ('{0}'), but isn't",
-                method.ObjectClass,
+                (method != null) ? method.ObjectClass.ToString() : "(no Method yet)",
                 constrainedObject.InvokeOnObjectClass);
         }
 

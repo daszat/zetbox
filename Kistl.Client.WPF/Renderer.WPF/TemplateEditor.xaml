@@ -1,0 +1,10 @@
+﻿<app:ObjectTabItem x:Class="Kistl.GUI.Renderer.WPF.TemplateEditor"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
+               Height="300"
+               Width="300">
+    <Grid>
+        <TextBlock>New Template Editor</TextBlock>
+    </Grid>
+</app:ObjectTabItem>

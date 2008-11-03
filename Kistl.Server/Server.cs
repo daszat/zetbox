@@ -41,7 +41,8 @@ namespace Kistl.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Server"))
             {
-                appCtx = new ServerApplicationContext(config);
+                // re-use application context if available
+                appCtx = ServerApplicationContext.Current ?? new ServerApplicationContext(config);
 
                 serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
                 serviceThread.Start();

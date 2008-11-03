@@ -45,5 +45,10 @@ namespace Kistl.App.GUI
             e.Result = String.Format("{0}: {1} implemented by {2} from {3}", obj.Platform, obj.ControlType, obj.ClassName, obj.Assembly);
         }
 
+        public void OnToString_PresenterInfo(PresenterInfo obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = String.Format("{0} implemented by {1} from {2}", obj.ControlType, obj.PresenterTypeName, obj.PresenterAssembly);
+        }
+
     }
 }

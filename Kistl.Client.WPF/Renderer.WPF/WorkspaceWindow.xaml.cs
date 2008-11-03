@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -10,11 +12,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 using Kistl.API;
-using System.Collections.ObjectModel;
-using Kistl.GUI.DB;
-using Kistl.Client;
 using Kistl.App.Base;
+using Kistl.Client;
+using Kistl.GUI.DB;
 
 namespace Kistl.GUI.Renderer.WPF
 {
@@ -26,7 +28,7 @@ namespace Kistl.GUI.Renderer.WPF
 
         public WorkspaceWindow()
         {
-            Objects = new ObservableCollection<ObjectTabItem>();
+            Objects = new ObservableCollection<ObjectTabItemView>();
             DataContext = this;
             InitializeComponent();
         }
@@ -78,14 +80,14 @@ namespace Kistl.GUI.Renderer.WPF
         /// <param name="obj"></param>
         public void ShowObject(Kistl.API.IDataObject obj)
         {
-            var tabItem = Objects.Single(tab => ((IObjectControl)tab).Value.Equals(obj));
+            var tabItem = Objects.Single(tab => ((IObjectControl)tab.Item).Value.Equals(obj));
             ShowObject(obj, tabItem);
         }
 
         public bool IsDisplayingObjects(params Kistl.API.IDataObject[] objs)
         {
-            return objs.All(obj => 
-                Objects.SingleOrDefault(tab => ((IObjectControl)tab).Value.Equals(obj))
+            return objs.All(obj =>
+                Objects.SingleOrDefault(tab => ((IObjectControl)tab.Item).Value.Equals(obj))
                 != null);
         }
 
@@ -109,32 +111,38 @@ namespace Kistl.GUI.Renderer.WPF
             if (obj.Context != Context)
                 throw new ArgumentOutOfRangeException("obj", "Object is not in this Workspace's Context");
 
-            int idx = Objects.IndexOf(ctrl);
+            var view = ObjectTabItemView.GetView(ctrl);
+            ShowObject(obj, view);
+        }
+
+        protected void ShowObject(Kistl.API.IDataObject obj, ObjectTabItemView view)
+        {
+            int idx = Objects.IndexOf(view);
             if (idx != -1)
             {
                 tabObjects.SelectedIndex = idx;
                 return;
             }
 
-            Objects.Add(ctrl);
+            Objects.Add(view);
 
-            tabObjects.SelectedIndex = Objects.IndexOf(ctrl);
+            tabObjects.SelectedIndex = Objects.IndexOf(view);
         }
 
         public void RemoveObject(Kistl.API.IDataObject dataObject)
         {
-           // TODO: Objects.Remove(dataObject);
+            // TODO: Objects.Remove(dataObject);
         }
 
-        public ObservableCollection<ObjectTabItem> Objects
+        public ObservableCollection<ObjectTabItemView> Objects
         {
-            get { return (ObservableCollection<ObjectTabItem>)GetValue(ObjectsProperty); }
+            get { return (ObservableCollection<ObjectTabItemView>)GetValue(ObjectsProperty); }
             set { SetValue(ObjectsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Objects.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectsProperty =
-            DependencyProperty.Register("Objects", typeof(ObservableCollection<ObjectTabItem>), typeof(WorkspaceWindow), new UIPropertyMetadata());
+            DependencyProperty.Register("Objects", typeof(ObservableCollection<ObjectTabItemView>), typeof(WorkspaceWindow), new UIPropertyMetadata());
 
         #endregion
 
@@ -283,5 +291,78 @@ namespace Kistl.GUI.Renderer.WPF
 
 
 
+    }
+
+    public class ObjectTabItemView : INotifyPropertyChanged
+    {
+        // Optimizable: forget references here to save memory!
+        private static Dictionary<ObjectTabItem, ObjectTabItemView>
+            Mapping = new Dictionary<ObjectTabItem, ObjectTabItemView>();
+
+        public static ObjectTabItemView GetView(ObjectTabItem oti)
+        {
+            if (Mapping.ContainsKey(oti))
+            {
+                return Mapping[oti];
+            }
+            else
+            {
+                var otiv = new ObjectTabItemView(oti);
+                Mapping[oti] = otiv;
+                return otiv;
+            }
+        }
+
+        public ObjectTabItem Item { get; private set; }
+
+        public string Header { get { return Item.ShortLabel; } }
+        public List<UIElement> Menus { get { return Item.Menus; } }
+        public object Content { get { return Item.Content; } }
+
+        /// <summary>
+        /// Forbidden!
+        /// </summary>
+        private ObjectTabItemView() { throw new NotImplementedException(); }
+
+        protected ObjectTabItemView(ObjectTabItem oti)
+        {
+            if (oti == null)
+                throw new NullReferenceException();
+            Item = oti;
+            Item.PropertyChanged += Item_PropertyChanged;
+        }
+
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged("Header");
+            OnPropertyChanged("Menus");
+            OnPropertyChanged("Content");
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as ObjectTabItemView;
+            if (other != null)
+                return other.Item == this.Item;
+            else
+                return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Item.GetHashCode();
+        }
     }
 }

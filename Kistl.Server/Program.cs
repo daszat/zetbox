@@ -28,6 +28,7 @@ namespace Kistl.Server
                 configFilePath = "";
             }
             var config = KistlConfig.FromFile(configFilePath);
+            var appCtx = new ServerApplicationContext(config);
 
             Server server = new Server();
 

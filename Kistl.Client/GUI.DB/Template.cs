@@ -63,15 +63,26 @@ namespace Kistl.GUI.DB
                     "top level visual to display a object"
                     );
 
-                IList<BaseProperty> properties = GetAllProperties(objectType);
-
-                // Copy visuals to tree (base properties first)
-                // TODO: later, group by implementing class and use property group
-                foreach (BaseProperty bp in GetAllProperties(objectType).Reverse())
+                if (objectType == typeof(Template))
                 {
-                    result.VisualTree.Children.Add(ctx.CreateDefaultVisual(bp));
+                    result.VisualTree = ctx.CreateVisual(
+                        VisualType.TemplateEditor,
+                        "a template editor"
+                        );
                 }
+                else
+                {
 
+                    IList<BaseProperty> properties = GetAllProperties(objectType);
+
+                    // Copy visuals to tree (base properties first)
+                    // TODO: later, group by implementing class and use property group
+                    foreach (BaseProperty bp in GetAllProperties(objectType).Reverse())
+                    {
+                        result.VisualTree.Children.Add(ctx.CreateDefaultVisual(bp));
+                    }
+
+                }
                 #region walk methods for Menu Actions and "calculated Properties"
 
                 ObjectClass @class = ClientHelper.ObjectClasses[objectType];
@@ -104,6 +115,7 @@ namespace Kistl.GUI.DB
                     result.Menu.Add(ctx.CreateDefaultVisual(m));
                 }
 
+                // TODO: Add methods with a single matching parameter to the context menu of properties
 
                 #endregion
 
