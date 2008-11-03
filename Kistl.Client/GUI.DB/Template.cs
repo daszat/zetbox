@@ -32,12 +32,12 @@ namespace Kistl.GUI.DB
                 .SingleOrDefault();
 
             if (result == null)
-                result = CreateDefaultTemplate(objectType);
+                result = CreateDefaultTemplate(KistlGUIContext.GuiContext, objectType);
 
             return result;
         }
 
-        public static Template CreateDefaultTemplate(Type objectType)
+        public static Template CreateDefaultTemplate(IKistlContext ctx, Type objectType)
         {
             if (objectType == null)
                 throw new ArgumentNullException("objectType", "Template.CreateDefaultTemplate(objectType): need objectType to create Template");
@@ -48,7 +48,7 @@ namespace Kistl.GUI.DB
             // ObjectClass using the editor's Context and comitted together 
             // with the edits on the class.
             // using (
-            IKistlContext ctx = KistlGUIContext.GuiContext; // KistlContext.GetContext()
+            //IKistlContext ctx = KistlGUIContext.GuiContext; // KistlContext.GetContext()
             //     )
             {
 

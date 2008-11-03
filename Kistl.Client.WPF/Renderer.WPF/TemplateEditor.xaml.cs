@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,16 +14,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Kistl.API;
-using Kistl.GUI;
+using Kistl.App.Base;
 using Kistl.App.GUI;
+using Kistl.Client;
+using Kistl.GUI;
+using Kistl.GUI.DB;
+using System.ComponentModel;
 
 namespace Kistl.GUI.Renderer.WPF
 {
-
-    /// <summary>
-    /// a non-modifying proxy to simplify PresenterInfo handling in the DB
-    /// </summary>
-    public class TemplateEditorPresenter : ObjectPresenter { }
 
     /// <summary>
     /// Interaction logic for TemplateEditor.xaml
@@ -40,7 +40,7 @@ namespace Kistl.GUI.Renderer.WPF
         {
             get
             {
-                return (Kistl.API.IDataObject)DataContext;
+                return ((TemplateView)DataContext).Model;
             }
             set
             {
@@ -49,7 +49,7 @@ namespace Kistl.GUI.Renderer.WPF
                         String.Format("TemplateEditor.Value can only handle a Template, not '{0}' of type '{1}'",
                             value,
                             value.GetType()));
-                DataContext = value;
+                DataContext = new TemplateView((Template)value);
             }
         }
 
@@ -104,5 +104,86 @@ namespace Kistl.GUI.Renderer.WPF
 
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ObjectClass cls = GuiApplicationContext.Current.Renderer.ChooseObject<ObjectClass>(Context, "Which class to template?");
+            if (cls == null) return;
+
+            // HACK: rework TemplateHelper.CreateDefaultTemplate to correctly fill a given Template
+            Template tmpl = TemplateHelper.CreateDefaultTemplate(Context, cls.GetDataType());
+            Template thisTemplate = (Template)Value;
+            thisTemplate.DisplayedTypeAssembly = tmpl.DisplayedTypeAssembly;
+            thisTemplate.DisplayedTypeFullName = tmpl.DisplayedTypeFullName;
+            thisTemplate.DisplayName = tmpl.DisplayName;
+            foreach (var m in tmpl.Menu)
+            {
+                thisTemplate.Menu.Add(m);
+            }
+            thisTemplate.VisualTree = tmpl.VisualTree;
+            Context.Delete(tmpl);
+        }
+
     }
+
+    /// <summary>
+    /// A ViewModel class for <see cref="Kistl.App.GUI.Visual"/>
+    /// </summary>
+    public class VisualProxy
+    {
+        public Kistl.App.GUI.Visual Model { get; private set; }
+        public ObservableCollection<VisualProxy> Children { get; private set; }
+
+        public VisualProxy(Kistl.App.GUI.Visual v)
+        {
+            this.Children = new ObservableCollection<VisualProxy>();
+            this.Model = v;
+            this.Model.PropertyChanged += Visual_PropertyChanged;
+            UpdateChildrenCollection();
+        }
+
+        void Visual_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Children")
+                UpdateChildrenCollection();
+        }
+
+        private void UpdateChildrenCollection()
+        {
+            this.Children.Clear();
+            foreach (var v in this.Model.Children)
+            {
+                this.Children.Add(new VisualProxy(v));
+            }
+        }
+    }
+
+    public class TemplateView
+    {
+        public Template Model { get; private set; }
+        public ObservableCollection<VisualProxy> VisualTree { get; private set; }
+
+        public TemplateView(Template t)
+        {
+            this.VisualTree = new ObservableCollection<VisualProxy>();
+            this.Model = t;
+            this.Model.PropertyChanged += new PropertyChangedEventHandler(Model_PropertyChanged);
+        }
+
+        void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "VisualTree")
+            {
+                this.VisualTree.Clear();
+                if (this.Model.VisualTree != null)
+                    this.VisualTree.Add(new VisualProxy(this.Model.VisualTree));
+            }
+        }
+    }
+
+    /// <summary>
+    /// a non-modifying proxy to simplify PresenterInfo handling in the DB
+    /// </summary>
+    public class TemplateEditorPresenter : ObjectPresenter { }
+
 }
