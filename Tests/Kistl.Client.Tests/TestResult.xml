@@ -1,42 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="9" failures="0" not-run="0" date="2008-10-31" time="11:11:06">
+<test-results name="P:\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" total="9" failures="0" not-run="0" date="2008-11-03" time="09:13:06">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3053" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.Client.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="True" time="0.150" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.Client.Tests\Kistl.Client.Tests.nunit" success="True" time="0.172" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.exe" success="True" time="0.146" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.Client.Tests\bin\Debug\Kistl.Client.Tests.exe" success="True" time="0.125" asserts="0">
         <results>
-          <test-suite name="Kistl" success="True" time="0.143" asserts="0">
+          <test-suite name="Tests" success="True" time="0.000" asserts="0">
+            <results />
+          </test-suite>
+          <test-suite name="PresenterTests" success="True" time="0.125" asserts="0">
             <results>
-              <test-suite name="Client" success="True" time="0.016" asserts="0">
-                <results>
-                  <test-suite name="Tests" success="True" time="0.005" asserts="0">
-                    <results />
-                  </test-suite>
-                </results>
-              </test-suite>
-              <test-suite name="GUI" success="True" time="0.121" asserts="0">
-                <results>
-                  <test-suite name="Tests" success="True" time="0.119" asserts="0">
-                    <results>
-                      <test-suite name="PresenterTests" success="True" time="0.117" asserts="0">
-                        <results>
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.IDisposable_Dispose" executed="True" success="True" time="0.013" asserts="2" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.IDisposable_Finalizer" executed="True" success="True" time="0.006" asserts="1" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeComponent" executed="True" success="True" time="0.075" asserts="4" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeComponentOnlyOnce" executed="True" success="True" time="0.003" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeFirstArgNull" executed="True" success="True" time="0.002" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeSecondArgNull" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeThirdArgNull" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.IPresenter_InitializeComponent" executed="True" success="True" time="0.001" asserts="0" />
-                          <test-case name="Kistl.GUI.Tests.PresenterTests.IPresenter_InitializeComponentFailFast" executed="True" success="True" time="0.002" asserts="0" />
-                        </results>
-                      </test-suite>
-                    </results>
-                  </test-suite>
-                </results>
-              </test-suite>
+              <test-case name="Kistl.GUI.Tests.PresenterTests.IDisposable_Dispose" executed="True" success="True" time="0.031" asserts="2" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.IDisposable_Finalizer" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeComponent" executed="True" success="True" time="0.047" asserts="4" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeComponentOnlyOnce" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeFirstArgNull" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeSecondArgNull" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.InitializeThirdArgNull" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.IPresenter_InitializeComponent" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.GUI.Tests.PresenterTests.IPresenter_InitializeComponentFailFast" executed="True" success="True" time="0.000" asserts="0" />
             </results>
           </test-suite>
         </results>

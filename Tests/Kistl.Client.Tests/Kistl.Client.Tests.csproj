@@ -47,6 +47,7 @@
     <Compile Include="Kistl.Client.Mocks\CustomActionsManagerClientTests.cs" />
     <Compile Include="Kistl.Client.Mocks\MockFactory.cs" />
     <Compile Include="Kistl.Client.Mocks\TestObject.cs" />
+    <Compile Include="MockeryTestFixture.cs" />
     <Compile Include="Kistl.GUI.Tests\PresenterTests.cs" />
     <Compile Include="Kistl.GUI.Tests\PresenterTests.IDisposable.cs" />
     <Compile Include="Main.cs" />
