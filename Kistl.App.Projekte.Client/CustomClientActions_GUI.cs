@@ -17,6 +17,22 @@ namespace Kistl.App.GUI
             e.Result = obj.IconFile;
         }
 
+        public void OnToString_Visual(Visual obj, MethodReturnEventArgs<string> e)
+        {
+            if (obj.Method != null)
+            {
+                e.Result = String.Format("Method Visual: {0} for {1}", obj.ControlType, obj.Method);
+            }
+            else if (obj.Property != null)
+            {
+                e.Result = String.Format("Property Visual: {0} for {1}", obj.ControlType, obj.Property);
+            }
+            else
+            {
+                e.Result = String.Format("Other Visual: {0}, ", obj.ControlType, obj.Description);
+            }
+        }
+
         public void OnGetGUIRepresentation_BaseProperty(BaseProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "<app:EditSimpleProperty xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" xmlns:app=\"clr-namespace:Kistl.Client.Controls;assembly=Kistl.Client\"/>";

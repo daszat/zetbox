@@ -114,14 +114,25 @@ namespace Kistl.GUI.Renderer.WPF
         }
 
         #endregion
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var obj = ((VisualView)this.VisualTree.SelectedItem).Model;
+
+            // TODO: should come from DataType
+            var template = obj.FindTemplate(TemplateUsage.EditControl);
+            // the Meat
+            this.SelectedVisual.Content = GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
+        }
     }
 
     /// <summary>
     /// A ViewModel class for <see cref="Kistl.App.GUI.Visual"/>
     /// </summary>
-    public class VisualView
+    public class VisualView : INotifyPropertyChanged
     {
         public Kistl.App.GUI.Visual Model { get; private set; }
+        public string ModelToString { get { return Model.ToString(); } }
         public ObservableCollection<VisualView> Children { get; private set; }
 
         public VisualView(Kistl.App.GUI.Visual v)
@@ -139,6 +150,8 @@ namespace Kistl.GUI.Renderer.WPF
         {
             if (e.PropertyName == "Children")
                 UpdateChildrenCollection();
+
+            OnPropertyChanged("ModelToString");
         }
 
         private void UpdateChildrenCollection()
@@ -149,6 +162,17 @@ namespace Kistl.GUI.Renderer.WPF
                 this.Children.Add(new VisualView(v));
             }
         }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 
     public class TemplateView

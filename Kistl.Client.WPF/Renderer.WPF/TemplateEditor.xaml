@@ -12,15 +12,25 @@
         <Label Content="{Binding ShortLabel}" />
     </app:PropertyControl.Label>
 
-    <StackPanel>
-        <TreeView MinHeight="150"
-                  ItemsSource="{Binding ValueView}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TreeView Grid.Column="0"
+                  x:Name="VisualTree"
+                  MinHeight="150"
+                  ItemsSource="{Binding ValueView}"
+                  SelectedItemChanged="TreeView_SelectedItemChanged">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type app:VisualView}"
                                           ItemsSource="{Binding Children}">
-                    <TextBlock Text="{Binding Model.Description}" />
+                    <TextBlock Text="{Binding ModelToString}" />
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
-    </StackPanel>
+
+        <ContentPresenter Grid.Column="1"
+                          x:Name="SelectedVisual" />
+    </Grid>
 </app:PropertyControl>
