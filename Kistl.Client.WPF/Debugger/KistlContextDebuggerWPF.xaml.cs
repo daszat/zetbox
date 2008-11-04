@@ -62,8 +62,9 @@ namespace Kistl.Client.WPF.Debugger
             InitializeComponent();
             this.DataContext = _contextList;
 
-            // Move debugger out of the way
-            this.Top = 80;
+            // Move debugger to the center of the right WorkArea border
+            // there it doesn't occlude the DesktopTreeView nor the MainWindow's glass
+            this.Top = (System.Windows.SystemParameters.WorkArea.Height - (160 + this.Height)) / 2;
             this.Left = System.Windows.SystemParameters.WorkArea.Right - 380;
         }
 
