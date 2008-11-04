@@ -5,6 +5,8 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.GUI.Hacks;
+using Kistl.API.Client;
 
 namespace Kistl.App.GUI
 {
@@ -50,5 +52,13 @@ namespace Kistl.App.GUI
             e.Result = String.Format("{0} implemented by {1} from {2}", obj.ControlType, obj.PresenterTypeName, obj.PresenterAssembly);
         }
 
+        public void OnPrepareDefault_Template(Template obj, ObjectClass cls)
+        {
+            var displayedType = cls.GetDataType();
+            obj.DisplayedTypeAssembly = obj.Context.GetQuery<Assembly>().Where(assembly => assembly.AssemblyName == displayedType.Assembly.FullName).SingleOrDefault();
+            obj.DisplayedTypeFullName = displayedType.FullName;
+            obj.DisplayName = String.Format("Default Template for {0}", displayedType.Name);
+            obj.VisualTree = TemplateHelper.CreateDefaultVisualTree(obj.Context, cls);
+        }
     }
 }

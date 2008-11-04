@@ -63,26 +63,15 @@ namespace Kistl.GUI.DB
                     "top level visual to display a object"
                     );
 
-                if (objectType == typeof(Template))
+                IList<BaseProperty> properties = GetAllProperties(objectType);
+
+                // Copy visuals to tree (base properties first)
+                // TODO: later, group by implementing class and use property group
+                foreach (BaseProperty bp in GetAllProperties(objectType).Reverse())
                 {
-                    result.VisualTree = ctx.CreateVisual(
-                        VisualType.TemplateEditor,
-                        "a template editor"
-                        );
+                    result.VisualTree.Children.Add(ctx.CreateDefaultVisual(bp));
                 }
-                else
-                {
 
-                    IList<BaseProperty> properties = GetAllProperties(objectType);
-
-                    // Copy visuals to tree (base properties first)
-                    // TODO: later, group by implementing class and use property group
-                    foreach (BaseProperty bp in GetAllProperties(objectType).Reverse())
-                    {
-                        result.VisualTree.Children.Add(ctx.CreateDefaultVisual(bp));
-                    }
-
-                }
                 #region walk methods for Menu Actions and "calculated Properties"
 
                 ObjectClass @class = ClientHelper.ObjectClasses[objectType];
@@ -109,8 +98,12 @@ namespace Kistl.GUI.DB
                     result.VisualTree.Children.Add(methodResults);
                 }
 
-                // Methods without any parameters are added to the Menu.
-                foreach (Method m in allMethods.Where(method => method.Parameter.Count == 0))
+                // Methods without any parameters or with one IDataObject (In-)Parameter are added to the Menu.
+                foreach (Method m in allMethods.Where(
+                    method => method.Parameter.Count == 0 
+                        || (method.Parameter.Count == 1 
+                            && method.Parameter.Single() is ObjectParameter
+                            && !method.Parameter.Single().IsReturnParameter )))
                 {
                     result.Menu.Add(ctx.CreateDefaultVisual(m));
                 }

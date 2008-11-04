@@ -217,6 +217,8 @@ namespace Kistl.App.GUI
         
         public event ObjectEventHandler<Template> OnPostSave_Template;
         
+        public event PrepareDefault_Handler<Template> OnPrepareDefault_Template;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -248,6 +250,14 @@ namespace Kistl.App.GUI
             Menu__Implementation__.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i));
         }
         
+        public virtual void PrepareDefault(Kistl.App.Base.ObjectClass cls)
+        {
+            if (OnPrepareDefault_Template != null)
+            {
+                OnPrepareDefault_Template(this, cls);
+            };
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -267,6 +277,8 @@ namespace Kistl.App.GUI
             BinarySerializer.FromBinary(out this._fk_DisplayedTypeAssembly, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.Menu__Implementation__, sr);
         }
+        
+        public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
     }
     
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Template_MenuCollectionEntry")]

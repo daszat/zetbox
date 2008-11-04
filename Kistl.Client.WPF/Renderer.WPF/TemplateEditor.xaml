@@ -1,23 +1,26 @@
-﻿<app:ObjectTabItem x:Class="Kistl.GUI.Renderer.WPF.TemplateEditor"
-                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
-                   xmlns:gui="clr-namespace:Kistl.App.GUI;assembly=Kistl.Objects"
-                   xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                   Height="300"
-                   Width="300">
-    <app:ObjectTabItem.Resources>
-        <HierarchicalDataTemplate DataType="{x:Type app:VisualProxy}"
-                                  ItemsSource="{Binding Children}">
-            <TextBlock Text="{Binding Model.Description}" />
-        </HierarchicalDataTemplate>
-    </app:ObjectTabItem.Resources>
-    <StackPanel>
-        <Button Click="Button_Click">Create Default Template for ...</Button>
-        <kevin:InfoTextBox Text="{Binding Model.DisplayName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                           TextBoxInfo="a name for this Template" />
+﻿<app:PropertyControl x:Class="Kistl.GUI.Renderer.WPF.TemplateEditor"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:app="clr-namespace:Kistl.GUI.Renderer.WPF"
+                     xmlns:gui="clr-namespace:Kistl.App.GUI;assembly=Kistl.Objects"
+                     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                     ShortLabel="VisualTree Property"
+                     Description="This is the visual tree"
+                     ToolTip="{Binding Description}">
 
+    <app:PropertyControl.Label>
+        <Label Content="{Binding ShortLabel}" />
+    </app:PropertyControl.Label>
+
+    <StackPanel>
         <TreeView MinHeight="150"
-                  ItemsSource="{Binding VisualTree}" />
+                  ItemsSource="{Binding ValueView}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type app:VisualView}"
+                                          ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Model.Description}" />
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
     </StackPanel>
-</app:ObjectTabItem>
+</app:PropertyControl>

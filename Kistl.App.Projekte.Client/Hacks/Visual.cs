@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Kistl.App.Base;
-using Kistl.App.GUI;
-using Kistl.Client;
 using Kistl.API;
 
-namespace Kistl.GUI.DB
+namespace Kistl.App.GUI.Hacks
 {
     /// <summary>
     /// The abstract entity representing an actual visual element in the tree. 
@@ -246,7 +244,9 @@ namespace Kistl.GUI.DB
 
         private static Visual CreateVisual(this IKistlContext ctx, BackReferenceProperty backReferenceProperty)
         {
-            ObjectClass refClass = ClientHelper.ObjectClasses[backReferenceProperty.GetPropertyType()];
+            Type refType = backReferenceProperty.GetPropertyType();
+            // TODO: optimize this ToList()
+            ObjectClass refClass = ctx.GetQuery<ObjectClass>().ToList().Where(oc => oc.GetDataType() == refType).Single();
 
             if (refClass != null && refClass.IsSimpleObject)
             {

@@ -517,8 +517,22 @@ namespace Kistl.GUI
 
         void Control_ActionActivatedEvent(object sender, EventArgs e)
         {
-            GuiApplicationContext.Current.Renderer.ShowMessage("Button clicked");
-            Object.GetType().InvokeMember(Preferences.Method.MethodName, BindingFlags.InvokeMethod, null, Object, new object[] { });
+            object[] paramArray;
+            if (this.Preferences.Method.Parameter.Count == 0)
+            {
+                paramArray = new object[] { };
+            }
+            else if (this.Preferences.Method.Parameter.Count == 1)
+            {
+                var paramDescriptor = (ObjectParameter)this.Preferences.Method.Parameter.Single();
+                var param = GuiApplicationContext.Current.Renderer.ChooseObject(this.Control.Context, paramDescriptor.GetParameterType(), "Choose object");
+                paramArray = new object[] { param };
+            }
+            else
+            {
+                throw new InvalidOperationException("Action with more than one parameter");
+            }
+            Object.GetType().InvokeMember(Preferences.Method.MethodName, BindingFlags.InvokeMethod, null, Object, paramArray);
         }
     }
 

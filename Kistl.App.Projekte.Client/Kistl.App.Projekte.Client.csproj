@@ -55,6 +55,8 @@
     <Compile Include="CustomClientActions_GUI.cs" />
     <Compile Include="CustomClientActions_Projekte.cs" />
     <Compile Include="CustomClientActions_Zeiterfassung.cs" />
+    <Compile Include="Hacks\Template.cs" />
+    <Compile Include="Hacks\Visual.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RechnungXML.cs" />
     <Compile Include="WordHelper.cs" />

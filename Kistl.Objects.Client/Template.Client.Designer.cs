@@ -150,6 +150,8 @@ namespace Kistl.App.GUI
         
         public event ObjectEventHandler<Template> OnPostSave_Template;
         
+        public event PrepareDefault_Handler<Template> OnPrepareDefault_Template;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -190,6 +192,14 @@ namespace Kistl.App.GUI
             _Menu.AttachToContext(ctx);
         }
         
+        public virtual void PrepareDefault(Kistl.App.Base.ObjectClass cls)
+        {
+            if (OnPrepareDefault_Template != null)
+            {
+                OnPrepareDefault_Template(this, cls);
+            };
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -209,6 +219,8 @@ namespace Kistl.App.GUI
             BinarySerializer.FromBinary(out this._fk_DisplayedTypeAssembly, sr);
             this._Menu.FromStream(sr);
         }
+        
+        public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
     }
     
     public class Template_MenuCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Template>

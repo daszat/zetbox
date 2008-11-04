@@ -5,23 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Markup;
 
 using Kistl.GUI;
 using Kistl.GUI.Renderer.WPF.Controls;
-using System.Windows.Data;
 
 namespace Kistl.GUI.Renderer.WPF
 {
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
     /// </summary>
+    [ContentProperty("EditPart")]
     public class PropertyControl : UserControl, IBasicControl, IDataErrorInfo
     {
         private Grid _grid = new Grid();
         private ErrorReporter _errorReporter = new ErrorReporter();
 
-        public static readonly int LabelColumn = 0;
-        public static readonly int EditPartColumn = 2;
+        public const int LabelColumn = 0;
+        public const int EditPartColumn = 2;
 
         public PropertyControl()
         {
