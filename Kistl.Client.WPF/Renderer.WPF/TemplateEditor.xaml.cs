@@ -35,26 +35,6 @@ namespace Kistl.GUI.Renderer.WPF
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ObjectClass cls = GuiApplicationContext.Current.Renderer.ChooseObject<ObjectClass>(Context, "Which class to template?");
-            if (cls == null) return;
-
-            // HACK: rework TemplateHelper.CreateDefaultTemplate to correctly fill a given Template
-            Template tmpl = TemplateHelper.CreateDefaultTemplate(Context, cls.GetDataType());
-            Template thisTemplate = (Template)Value;
-            thisTemplate.DisplayedTypeAssembly = tmpl.DisplayedTypeAssembly;
-            thisTemplate.DisplayedTypeFullName = tmpl.DisplayedTypeFullName;
-            thisTemplate.DisplayName = tmpl.DisplayName;
-            foreach (var m in tmpl.Menu)
-            {
-                thisTemplate.Menu.Add(m);
-            }
-            thisTemplate.VisualTree = tmpl.VisualTree;
-            Context.Delete(tmpl);
-        }
-
-
         #region IValueControl<Template> Members
 
         public Kistl.App.GUI.Visual Value
@@ -115,14 +95,20 @@ namespace Kistl.GUI.Renderer.WPF
 
         #endregion
 
+        private Dictionary<Kistl.App.GUI.Visual, object> _Controls = new Dictionary<Kistl.App.GUI.Visual, object>();
+
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var obj = ((VisualView)this.VisualTree.SelectedItem).Model;
 
-            // TODO: should come from DataType
-            var template = obj.FindTemplate(TemplateUsage.EditControl);
-            // the Meat
-            this.SelectedVisual.Content = GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
+            if (!_Controls.ContainsKey(obj))
+            {
+                // TODO: should come from DataType or database
+                var template = obj.FindTemplate(TemplateUsage.EditControl);
+                // the Meat
+                _Controls[obj] = GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
+            }
+            this.SelectedVisual.Content = _Controls[obj];
         }
     }
 
