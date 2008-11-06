@@ -20,62 +20,6 @@ namespace Kistl.API
         void Changed(IKistlContext ctx);
     }
 
-    public static class KistlContextDebugger
-    {
-        private static IKistlContextDebugger _Current;
-
-        public static void SetDebugger(IKistlContextDebugger debugger)
-        {
-            lock (typeof(KistlContextDebugger))
-            {
-                if (_Current != null)
-                {
-                    _Current.Dispose();
-                }
-                _Current = debugger;
-            }
-        }
-
-        // TODO: Replace by central ServiceDiscoveryService
-        public static IKistlContextDebugger GetDebugger()
-        {
-            return _Current;
-        }
-
-        public static void Created(IKistlContext ctx)
-        {
-            lock (typeof(KistlContextDebugger))
-            {
-                if (_Current != null)
-                {
-                    _Current.Created(ctx);
-                }
-            }
-        }
-
-        public static void Disposed(IKistlContext ctx)
-        {
-            lock (typeof(KistlContextDebugger))
-            {
-                if (_Current != null)
-                {
-                    _Current.Disposed(ctx);
-                }
-            }
-        }
-
-        public static void Changed(IKistlContext ctx)
-        {
-            lock (typeof(KistlContextDebugger))
-            {
-                if (_Current != null)
-                {
-                    _Current.Changed(ctx);
-                }
-            }
-        }
-    }
-
     /// <summary>
     /// Interface for a LinqToNNN Context.
     /// </summary>
@@ -140,10 +84,6 @@ namespace Kistl.API
         /// If the Object is not in that Context, null is returned.</returns>
         IPersistenceObject ContainsObject(Type type, int ID);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         IEnumerable<IPersistenceObject> AttachedObjects { get; }
 
         /// <summary>
@@ -201,6 +141,18 @@ namespace Kistl.API
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         T Find<T>(int ID) where T : IDataObject;
+
+
+        /// <summary>
+        /// Creates a read-only context connected to the same data source as this IKistlContext.
+        /// </summary>
+        /// <returns>a read-only context of the same source as this context</returns>
+        /// 
+        /// Objects fetched from this context cannot be modfied. 
+        /// 
+        /// Implementations are explicitly allowed to re-use one read-only context for all calls
+        /// to this function for performance reasons.
+        IKistlContext GetReadonlyContext();
 
         /// <summary>
         /// Is fired when an object is created in this Context.

@@ -76,6 +76,7 @@
     <Compile Include="IKistlAppDomain.cs" />
     <Compile Include="IKistlContext.cs" />
     <Compile Include="IKistlService.cs" />
+    <Compile Include="KistlContextDebugger.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

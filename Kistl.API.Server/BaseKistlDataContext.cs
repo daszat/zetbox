@@ -173,6 +173,12 @@ namespace Kistl.API.Server
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public abstract IDataObject Find(Type type, int ID);
 
+        public IKistlContext GetReadonlyContext()
+        {
+            // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
+            return this;
+        }
+
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.

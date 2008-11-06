@@ -16,12 +16,12 @@ namespace Kistl.API
 
         public void Detach(IPersistenceObject obj)
         {
-            
+
         }
 
         public void Delete(IPersistenceObject obj)
         {
-            
+
         }
 
         public IQueryable<T> GetQuery<T>() where T : IDataObject
@@ -90,6 +90,11 @@ namespace Kistl.API
         }
 
         public T Find<T>(int ID) where T : IDataObject
+        {
+            throw new NotImplementedException();
+        }
+
+        public IKistlContext GetReadonlyContext()
         {
             throw new NotImplementedException();
         }

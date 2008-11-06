@@ -412,6 +412,11 @@ namespace Kistl.API.Client
             }
         }
 
+        public IKistlContext GetReadonlyContext()
+        {
+            // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
+            return this;
+        }
     }
 
     /// <summary>
