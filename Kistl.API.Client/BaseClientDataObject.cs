@@ -209,6 +209,27 @@ namespace Kistl.API.Client
             ObjectState = (DataObjectState)tmp;
         }
 
+        #region IDataErrorInfo Members
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                return GetPropertyError(columnName);
+            }
+        }
+
+        protected virtual string GetPropertyError(string prop)
+        {
+            throw new ArgumentOutOfRangeException("columnName", "unknown property " + prop);
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
     }
 
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry

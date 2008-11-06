@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
+using System.ComponentModel;
 
 namespace Kistl.API.Client.Tests
 {
@@ -119,6 +120,24 @@ namespace Kistl.API.Client.Tests
             }
 
             #endregion
+
+            #region IDataErrorInfo Members
+
+            string IDataErrorInfo.this[string columnName]
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            string IDataErrorInfo.Error
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            #endregion
+
         }
 
         [Test]

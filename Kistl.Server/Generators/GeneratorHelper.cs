@@ -270,7 +270,7 @@ namespace Kistl.Server.Generators
             string getExpression, string setLValue, string notifier)
         {
             CodeMemberProperty result = CreateProperty(c, type, name, true);
-            result.GetStatements.AddStatement(@"return {0}", getExpression);
+            result.GetStatements.AddExpression(@"return {0}", getExpression);
 
             // create a condition to not trigger events if the value doesn't change.
             CodeConditionStatement ccs = new CodeConditionStatement(new CodeSnippetExpression(string.Format("{0} != value", name)));
@@ -456,7 +456,7 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region CreateStatement
-        public static CodeSnippetExpression AddStatement(this CodeStatementCollection statements, string text, params object[] args)
+        public static CodeSnippetExpression AddExpression(this CodeStatementCollection statements, string text, params object[] args)
         {
             CodeSnippetExpression expression;
             if (args != null && args.Length > 0)
@@ -466,6 +466,21 @@ namespace Kistl.Server.Generators
             else
             {
                 expression = new CodeSnippetExpression(text);
+            }
+
+            statements.Add(expression);
+            return expression;
+        }
+        public static CodeSnippetStatement AddStatement(this CodeStatementCollection statements, string text, params object[] args)
+        {
+            CodeSnippetStatement expression;
+            if (args != null && args.Length > 0)
+            {
+                expression = new CodeSnippetStatement(string.Format(text, args));
+            }
+            else
+            {
+                expression = new CodeSnippetStatement(text);
             }
 
             statements.Add(expression);

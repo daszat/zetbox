@@ -151,5 +151,22 @@ namespace Kistl.API.Tests
         }
 
         #endregion
+
+        #region IDataErrorInfo Members
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
     }
 }

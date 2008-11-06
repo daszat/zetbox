@@ -92,7 +92,7 @@ namespace Kistl.API
     /// <summary>
     /// DataObject Interface
     /// </summary>
-    public interface IDataObject : IPersistenceObject
+    public interface IDataObject : IPersistenceObject, IDataErrorInfo
     {
         /// <summary>
         /// Not implemented yet.
