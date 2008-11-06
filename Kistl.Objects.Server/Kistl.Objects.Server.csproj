@@ -80,6 +80,8 @@
     <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />
     <Compile Include="IntProperty.Server.Designer.cs" />
+    <Compile Include="IsValidIdentifierConstraint.Server.Designer.cs" />
+    <Compile Include="IsValidNamespaceConstraint.Server.Designer.cs" />
     <Compile Include="Kostenstelle.Server.Designer.cs" />
     <Compile Include="Kostentraeger.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />

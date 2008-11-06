@@ -574,6 +574,8 @@
     <Property Name="MinLength" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" />
+  <EntityType Name="IsValidIdentifierConstraint" BaseType="Model.Constraint" />
+  <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint" />
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
     <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />

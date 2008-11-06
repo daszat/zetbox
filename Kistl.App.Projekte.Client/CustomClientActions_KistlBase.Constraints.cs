@@ -203,6 +203,52 @@ namespace Kistl.App.Base
         }
 
         #endregion
+
+        #region IsValidIdentifierConstraint
+        public void OnIsValid_IsValidIdentifierConstraint(
+                    IsValidIdentifierConstraint obj,
+                    MethodReturnEventArgs<bool> e,
+                    object constrainedObjectParam,
+                    object constrainedValueParam)
+        {
+            e.Result &= (constrainedValueParam != null) && 
+                System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier((string)constrainedValueParam);
+        }
+
+        public void OnIsValid_IsValidNamespaceConstraint(
+                    IsValidNamespaceConstraint obj,
+                    MethodReturnEventArgs<bool> e,
+                    object constrainedObjectParam,
+                    object constrainedValueParam)
+        {
+            if (constrainedValueParam != null)
+            {
+                string @namespace = (string)constrainedValueParam;
+
+                // Override baseclass's Result
+                e.Result = true;
+                foreach (string ns in @namespace.Split('.'))
+                {
+                    e.Result &= System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(ns);
+                }                
+            }
+        }
+
+
+        public void OnGetErrorText_IsValidIdentifierConstraint(
+            IsValidIdentifierConstraint obj,
+            MethodReturnEventArgs<string> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+            e.Result = string.Format("'{0}' is not a valid identifier", constrainedValueParam);
+        }
+
+        public void OnToString_IsValidIdentifierConstraint(IsValidIdentifierConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "Method names, property names, enum names etc. must be valid names.";
+        }
+        #endregion
     }
 
     public static class Helpers

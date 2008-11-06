@@ -84,6 +84,8 @@
     <Compile Include="Interface.Client.Designer.cs" />
     <Compile Include="IntParameter.Client.Designer.cs" />
     <Compile Include="IntProperty.Client.Designer.cs" />
+    <Compile Include="IsValidIdentifierConstraint.Client.Designer.cs" />
+    <Compile Include="IsValidNamespaceConstraint.Client.Designer.cs" />
     <Compile Include="Kostenstelle.Client.Designer.cs" />
     <Compile Include="Kostentraeger.Client.Designer.cs" />
     <Compile Include="Kunde.Client.Designer.cs" />

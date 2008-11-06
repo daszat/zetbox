@@ -75,6 +75,8 @@
     <Compile Include="IntParameter.Designer.cs" />
     <Compile Include="IntProperty.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
+    <Compile Include="IsValidIdentifierConstraint.Designer.cs" />
+    <Compile Include="IsValidNamespaceConstraint.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
     <Compile Include="Kostenstelle.Designer.cs" />
     <Compile Include="Kostentraeger.Designer.cs" />

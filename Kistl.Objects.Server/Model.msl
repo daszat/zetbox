@@ -406,6 +406,16 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidIdentifierConstraint)">
+        <MappingFragment StoreEntitySet="IsValidIdentifierConstraint">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidNamespaceConstraint)">
+        <MappingFragment StoreEntitySet="IsValidNamespaceConstraint">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
