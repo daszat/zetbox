@@ -8,7 +8,7 @@
     <ProjectGuid>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Client.Tests</RootNamespace>
+    <RootNamespace>Kistl</RootNamespace>
     <AssemblyName>Kistl.Client.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -47,6 +47,9 @@
     <Compile Include="Kistl.Client.Mocks\CustomActionsManagerClientTests.cs" />
     <Compile Include="Kistl.Client.Mocks\MockFactory.cs" />
     <Compile Include="Kistl.Client.Mocks\TestObject.cs" />
+    <Compile Include="Kistl.Client.Mocks\ThreadManagerMock.cs" />
+    <Compile Include="Kistl.Client.Tests\PresenterModelTests.cs" />
+    <Compile Include="Kistl.Client.Tests\SynchronousThreadManagerTests.cs" />
     <Compile Include="MockeryTestFixture.cs" />
     <Compile Include="Kistl.GUI.Tests\PresenterTests.cs" />
     <Compile Include="Kistl.GUI.Tests\PresenterTests.IDisposable.cs" />
