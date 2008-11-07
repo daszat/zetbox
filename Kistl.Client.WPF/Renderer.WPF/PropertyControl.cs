@@ -220,6 +220,7 @@ namespace Kistl.GUI.Renderer.WPF
         {
             get
             {
+                Console.Out.WriteLine("Error checked for {0} on {1}", columnName, this);
                 return Error;
             }
         }

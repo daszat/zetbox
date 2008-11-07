@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 using Kistl.API;
-using System.Collections.Specialized;
-using System.Collections.ObjectModel;
 using Kistl.App.Base;
 
 namespace Kistl.GUI

@@ -20,6 +20,7 @@
                                TextWrapping="Wrap"
                                Text="{TemplateBinding Text}">
                     <TextBlock.Style>
+                        <!-- hide the textblock, if no error is flagged -->
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsReportingError, ElementName=CurrentErrorReporter}"

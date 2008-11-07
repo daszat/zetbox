@@ -152,6 +152,8 @@ namespace Kistl.API
         /// 
         /// Implementations are explicitly allowed to re-use one read-only context for all calls
         /// to this function for performance reasons.
+        /// Implementations are required to return the same read-only context on successive calls 
+        /// of GetReadonlyContext() on a single IKistlContext.
         IKistlContext GetReadonlyContext();
 
         /// <summary>
