@@ -11,6 +11,7 @@ using System.IO;
 using System.Reflection;
 using System.Collections;
 using Kistl.API;
+using System.Globalization;
 
 namespace Kistl.Server.Generators
 {
@@ -183,6 +184,9 @@ namespace Kistl.Server.Generators
             GenerateAssemblyInfo(TaskEnum.Interface);
             GenerateAssemblyInfo(TaskEnum.Server);
             GenerateAssemblyInfo(TaskEnum.Client);
+
+            Console.WriteLine("  FrozenContext");
+            GenerateFrozenContext(TaskEnum.Client, objClassList);
         }
         #endregion
 
@@ -256,6 +260,116 @@ namespace Kistl.Server.Generators
             SaveFile(code, string.Format(@"{0}\AssemblyInfo.cs", task.GetKistObjectsName()));
         }
         #endregion
+
+        #region GenerateFrozenContext
+
+        public virtual void GenerateFrozenContext_ObjectInitializer<T>(CodeConstructor constructor, ObjectClass objClass) 
+            where T : IDataObject
+        {
+            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.GetContext())
+            {
+                foreach (object obj in ctx.GetQuery<T>())
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(string.Format("_{0}.Add(new {1}{2}() {{",
+                        objClass.GetDataTypeString().Replace('.', '_'),
+                        objClass.GetDataTypeString(),
+                        API.Helper.ImplementationSuffix));
+
+                    foreach (Property prop in objClass.Properties.OfType<Property>())
+                    {
+                        object val = obj.GetPropertyValue<object>(prop.PropertyName);
+                        if (val == null) continue;
+
+                        if (prop is StringProperty)
+                        {
+                            sb.AppendFormat("                {0} = @\"{1}\"", prop.PropertyName, 
+                                ((string)val).Replace("\"", "\"\""));
+                        }
+                        else if (prop is ObjectReferenceProperty)
+                        {
+                            sb.AppendFormat("                fk_{0} = {1}", 
+                                prop.PropertyName,
+                                obj.GetPropertyValue<int>("fk_" + prop.PropertyName));
+                        }
+                        else if (prop is BoolProperty)
+                        {
+                            sb.Append(string.Format(CultureInfo.InvariantCulture,
+                                "                {0} = {1}",
+                                prop.PropertyName, ((bool)val) ? "true" : "false"));
+                        }
+                        else
+                        {
+                            sb.Append(string.Format(CultureInfo.InvariantCulture,
+                                "                {0} = {1}",
+                                prop.PropertyName, val));
+                        }
+
+                        sb.AppendLine(",");
+                    }
+
+                    sb.AppendFormat("                ID = {0}", 
+                        obj.GetPropertyValue<int>("ID"));
+
+                    sb.Append("})");
+
+                    constructor.Statements.AddExpression(sb.ToString());
+                }
+            }
+        }
+
+        private void GenerateFrozenContext(TaskEnum task, IQueryable<ObjectClass> objClassList)
+        {
+            if (task == TaskEnum.Client)
+            {
+                CodeCompileUnit code = new CodeCompileUnit();
+
+                // Create Namespace
+                CodeNamespace ns = CreateNamespace(code, "Kistl.Objects.Client", task);
+
+                CodeTypeDeclaration c = ns.CreateClass("FrozenContextImplementaion", "Kistl.API.Client.FrozenContext");
+
+                // Create structure
+                CodeConstructor constructor = c.CreateConstructor();
+                CodeMemberMethod getQuery = c.CreateOverrideMethod("GetQuery", typeof(IQueryable<IDataObject>));
+                getQuery.Parameters.Add(new CodeParameterDeclarationExpression(typeof(Type), "type"));
+
+                var baseClassList = objClassList.Where(i => i.BaseObjectClass == null && i.IsFrozenObject);
+
+                // Create Fields and GetQueryMethod
+                foreach (ObjectClass objClass in baseClassList)
+                {
+                    CodeMemberField f = c.CreateField(
+                        string.Format("List<{0}>", objClass.GetDataTypeString()), 
+                        "_" + objClass.GetDataTypeString().Replace('.', '_'),
+                        string.Format("new List<{0}>()", objClass.GetDataTypeString()));
+
+                    getQuery.Statements.AddExpression(string.Format("if (type == typeof({0})) return _{1}.Cast<IDataObject>().AsQueryable<IDataObject>()",
+                        objClass.GetDataTypeString(), objClass.GetDataTypeString().Replace('.', '_')));
+                }
+
+                getQuery.Statements.AddExpression("return base.GetQuery(type)");
+
+                // Create Objects
+                foreach (ObjectClass objClass in baseClassList)
+                {
+                    Type type = Type.GetType(objClass.Module.Namespace + "." + objClass.ClassName + API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly);
+                    if (type == null) continue; // Not created yet
+
+                    MethodInfo mi = this.GetType().FindGenericMethod("GenerateFrozenContext_ObjectInitializer", 
+                        new Type[] { type }, // Generic Parameter
+                        new Type[] { typeof(CodeConstructor), typeof(ObjectClass) }); // Parameter
+                    mi.Invoke(this, new object[] { constructor, objClass });
+
+                    constructor.Statements.AddExpression("_{0}.ForEach<IDataObject>(obj => this.Attach(obj))", objClass.GetDataTypeString().Replace('.', '_'));
+                }
+
+                // Generate the code & save
+                SaveFile(code, string.Format(@"{0}\FrozenContext.cs", task.GetKistObjectsName()));
+            }
+        }
+        #endregion
+
 
         #region GenerateObjectSerializer
         protected virtual void GenerateObjectSerializer(TaskEnum task, IQueryable<ObjectClass> objClassList)

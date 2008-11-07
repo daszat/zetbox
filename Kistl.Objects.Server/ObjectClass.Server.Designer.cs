@@ -44,6 +44,8 @@ namespace Kistl.App.Base
         
         private bool _IsSimpleObject;
         
+        private bool _IsFrozenObject;
+        
         public ObjectClass__Implementation__()
         {
         }
@@ -171,6 +173,24 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public bool IsFrozenObject
+        {
+            get
+            {
+                return _IsFrozenObject;
+            }
+            set
+            {
+                if (IsFrozenObject != value)
+                {
+                    NotifyPropertyChanging("IsFrozenObject"); 
+                    _IsFrozenObject = value;
+                    NotifyPropertyChanged("IsFrozenObject");;
+                }
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -248,6 +268,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.IsSimpleObject))
                             .Select(c => c.GetErrorText(this, this.IsSimpleObject))
                             .ToArray());
+                case "IsFrozenObject":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(174).Constraints
+                            .Where(c => !c.IsValid(this, this.IsFrozenObject))
+                            .Select(c => c.GetErrorText(this, this.IsFrozenObject))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -291,6 +317,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
             BinarySerializer.ToBinary(this.ImplementsInterfaces__Implementation__, sw);
             BinarySerializer.ToBinary(this._IsSimpleObject, sw);
+            BinarySerializer.ToBinary(this._IsFrozenObject, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -300,6 +327,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.ImplementsInterfaces__Implementation__, sr);
             BinarySerializer.FromBinary(out this._IsSimpleObject, sr);
+            BinarySerializer.FromBinary(out this._IsFrozenObject, sr);
         }
         
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> e);

@@ -9,7 +9,7 @@ xcopy /y C:\temp\KistlCodeGen\Kistl.Objects\*.* .\Kistl.Objects
 
 
 rem *********** Client *********** 
-xcopy /y .\Kistl.Objects.Client\*.Designer.cs .\Kistl.Objects.Client\Backup
+xcopy /y .\Kistl.Objects.Client\*.cs .\Kistl.Objects.Client\Backup
 
 del .\Kistl.Objects.Client\*.Designer.cs
 

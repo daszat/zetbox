@@ -41,3 +41,6 @@ using System;
 // and rules to which assemblies must conform if they are to be used across programming
 // languages. This assembly should be compatible.
 [assembly: CLSCompliant(true)]
+
+// TODO: Assign strong name
+[assembly: InternalsVisibleTo("Kistl.Objects.Client")]

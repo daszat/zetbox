@@ -215,6 +215,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TableName" ColumnName="TableName" />
           <ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
+          <ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">

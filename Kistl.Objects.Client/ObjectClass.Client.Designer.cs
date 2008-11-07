@@ -35,6 +35,8 @@ namespace Kistl.App.Base
         
         private bool _IsSimpleObject;
         
+        private bool _IsFrozenObject;
+        
         public ObjectClass__Implementation__()
         {
             _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__>(this, "ImplementsInterfaces");
@@ -133,6 +135,23 @@ namespace Kistl.App.Base
             }
         }
         
+        public bool IsFrozenObject
+        {
+            get
+            {
+                return _IsFrozenObject;
+            }
+            set
+            {
+                if (IsFrozenObject != value)
+                {
+                    NotifyPropertyChanging("IsFrozenObject"); 
+                    _IsFrozenObject = value;
+                    NotifyPropertyChanged("IsFrozenObject");;
+                }
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -177,6 +196,7 @@ namespace Kistl.App.Base
             if(this._SubClasses != null) this._SubClasses.ApplyChanges(((ObjectClass__Implementation__)obj)._SubClasses); else ((ObjectClass__Implementation__)obj)._SubClasses = null; ((ObjectClass__Implementation__)obj).NotifyPropertyChanged("SubClasses");
             this._ImplementsInterfaces.ApplyChanges(((ObjectClass__Implementation__)obj)._ImplementsInterfaces);
             ((ObjectClass__Implementation__)obj).IsSimpleObject = this.IsSimpleObject;
+            ((ObjectClass__Implementation__)obj).IsFrozenObject = this.IsFrozenObject;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -219,6 +239,12 @@ namespace Kistl.App.Base
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(119).Constraints
                             .Where(c => !c.IsValid(this, this.IsSimpleObject))
                             .Select(c => c.GetErrorText(this, this.IsSimpleObject))
+                            .ToArray());
+                case "IsFrozenObject":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(174).Constraints
+                            .Where(c => !c.IsValid(this, this.IsFrozenObject))
+                            .Select(c => c.GetErrorText(this, this.IsFrozenObject))
                             .ToArray());
             }
             return base.GetPropertyError(prop);
@@ -263,6 +289,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_BaseObjectClass, sw);
             this._ImplementsInterfaces.ToStream(sw);
             BinarySerializer.ToBinary(this._IsSimpleObject, sw);
+            BinarySerializer.ToBinary(this._IsFrozenObject, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -272,6 +299,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_BaseObjectClass, sr);
             this._ImplementsInterfaces.FromStream(sr);
             BinarySerializer.FromBinary(out this._IsSimpleObject, sr);
+            BinarySerializer.FromBinary(out this._IsFrozenObject, sr);
         }
         
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> e);

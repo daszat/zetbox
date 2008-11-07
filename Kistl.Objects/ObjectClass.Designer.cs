@@ -52,6 +52,12 @@ namespace Kistl.App.Base
             set;
         }
         
+        bool IsFrozenObject
+        {
+            get;
+            set;
+        }
+        
         IList<Kistl.App.Base.Method> GetInheritedMethods();
     }
 }

@@ -8,6 +8,7 @@ using System.Data.Objects.DataClasses;
 using System.Collections;
 using Kistl.API;
 using Kistl.API.Server;
+using System.Reflection;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
@@ -140,6 +141,12 @@ namespace Kistl.DALProvider.EF
         /// <returns>IQueryable</returns>
         public override IQueryable<IDataObject> GetQuery(Type objType)
         {
+            //Type type = objType.ToImplementationType();
+            //MethodInfo mi = this.GetType().FindGenericMethod("GetQuery", new Type[] { type }, new Type[] { });
+            //// See Case 552
+            //IQueryable result = (IQueryable)mi.Invoke(this, new object[] { });
+            //return result;
+
             throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
             
             // Des geht a net...

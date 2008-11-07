@@ -246,6 +246,7 @@
     <NavigationProperty Name="SubClasses__Implementation__" Relationship="Model.FK_ObjectClass_ObjectClass_BaseObjectClass" FromRole="A_ObjectClass" ToRole="B_ObjectClass" />
     <NavigationProperty Name="ImplementsInterfaces__Implementation__" Relationship="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent" FromRole="A_ObjectClass" ToRole="B_ObjectClass_ImplementsInterfacesCollectionEntry" />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false" />
+    <Property Name="IsFrozenObject" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
