@@ -13,6 +13,17 @@ namespace Kistl.Client.PresenterModel
     /// </summary>
     public class DataObjectModel : PresentableModel
     {
+        public DataObjectModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj)
+            : base(uiManager, asyncManager)
+        {
+            _propertyModels = new ObservableCollection<PresentableModel>();
+            _object = obj;
+            _roContext = obj.Context.GetReadonlyContext();
+            Async.Queue(() => { FetchObjectClass(); UI.Queue(() => this.State = ModelState.Active); });
+        }
+
+        #region Public Interface
+
         private ObservableCollection<PresentableModel> _propertyModels;
         public ObservableCollection<PresentableModel> PropertyModels
         {
@@ -32,14 +43,9 @@ namespace Kistl.Client.PresenterModel
             }
         }
 
-        public DataObjectModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj)
-            : base(uiManager, asyncManager)
-        {
-            _propertyModels = new ObservableCollection<PresentableModel>();
-            _object = obj;
-            _roContext = obj.Context.GetReadonlyContext();
-            Async.Queue(FetchObjectClass);
-        }
+        #endregion
+
+        #region Async handlers and UI callbacks
 
         private void FetchObjectClass()
         {
@@ -61,6 +67,8 @@ namespace Kistl.Client.PresenterModel
                 }
             }
         }
+
+        #endregion
 
         private IDataObject _object;
         private IKistlContext _roContext;
