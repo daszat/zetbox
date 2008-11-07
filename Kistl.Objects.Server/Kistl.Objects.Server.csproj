@@ -75,6 +75,7 @@
     <Compile Include="Enumeration.Server.Designer.cs" />
     <Compile Include="EnumerationEntry.Server.Designer.cs" />
     <Compile Include="EnumerationProperty.Server.Designer.cs" />
+    <Compile Include="FrozenContext.cs" />
     <Compile Include="Icon.Server.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Server.Designer.cs" />
     <Compile Include="Interface.Server.Designer.cs" />

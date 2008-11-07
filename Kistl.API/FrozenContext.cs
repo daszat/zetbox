@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API.Client
+namespace Kistl.API
 {
     public class ReadOnlyContextException : NotSupportedException
     {
@@ -23,7 +23,7 @@ namespace Kistl.API.Client
             {
                 if (_Single == null)
                 {
-                    Type t = Type.GetType("Kistl.Objects.Client.FrozenContextImplementaion, Kistl.Objects.Client", true);
+                    Type t = Type.GetType(ApplicationContext.Current.ImplementationAssembly + "FrozenContextImplementation, " + ApplicationContext.Current.ImplementationAssembly, true);
                     _Single = (FrozenContext)Activator.CreateInstance(t);
 
                     if (_Single == null) throw new InvalidOperationException("Unable to create frozen context");
@@ -35,7 +35,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
         /// </summary>
-        private ContextCache _objects = new ContextCache();
+        private HashSet<IPersistenceObject> _objects = new HashSet<IPersistenceObject>();
 
         /// <summary>
         /// Returns a Query by T
@@ -87,7 +87,6 @@ namespace Kistl.API.Client
             if (!_objects.Contains(obj))
             {
                 _objects.Add(obj);
-                ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
             }
 
             obj.AttachToContext(this);
@@ -120,7 +119,7 @@ namespace Kistl.API.Client
         public IPersistenceObject ContainsObject(Type type, int ID)
         {
             if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
-            return _objects.Lookup(type, ID);
+            return _objects.FirstOrDefault<IPersistenceObject>(obj => obj.GetType() == type && obj.ID == ID);
         }
 
         public IEnumerable<IPersistenceObject> AttachedObjects

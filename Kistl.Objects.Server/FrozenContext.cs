@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Objects.Client
+namespace Kistl.Objects.Server
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,9 @@ namespace Kistl.Objects.Client
     using System.Xml;
     using System.Xml.Serialization;
     using Kistl.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using Kistl.DALProvider.EF;
     
     
     public class FrozenContextImplementation : Kistl.API.FrozenContext

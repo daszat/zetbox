@@ -69,6 +69,7 @@
     <Compile Include="ExpressionFilter.cs" />
     <Compile Include="ExpressionTreeTranslator.cs" />
     <Compile Include="ExpressionTreeVisitor.cs" />
+    <Compile Include="FrozenContext.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="ICustomActions.cs" />

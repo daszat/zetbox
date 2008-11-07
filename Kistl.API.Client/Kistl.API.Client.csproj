@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClientDataObject.cs" />
-    <Compile Include="FrozenContext.cs" />
     <Compile Include="CacheController.cs" />
     <Compile Include="ClientApiContext.cs" />
     <Compile Include="Collections.cs" />

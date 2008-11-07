@@ -26,6 +26,15 @@ namespace Kistl.Server
             return result;
         }
 
+        public static ObjectClass GetRootClass(this ObjectClass objClass)
+        {
+            while (objClass.BaseObjectClass != null)
+            {
+                objClass = objClass.BaseObjectClass;
+            }
+            return objClass;
+        }
+
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
             // TODO: GetType() makes troubles -> returns Implementation and not the Interface
