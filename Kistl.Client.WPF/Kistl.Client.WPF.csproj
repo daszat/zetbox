@@ -90,6 +90,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\LoadingIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Debugger\KistlContextDebuggerWPF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +190,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DataObjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DesktopView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,6 +208,9 @@
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomControls\ErrorReporter.xaml.cs">
       <DependentUpon>ErrorReporter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\LoadingIndicator.xaml.cs">
+      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Debugger\KistlContextDebuggerWPF.xaml.cs">
       <DependentUpon>KistlContextDebuggerWPF.xaml</DependentUpon>
@@ -293,6 +304,9 @@
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Renderer.WPF\WorkspaceWindow.xaml.cs">
       <DependentUpon>WorkspaceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DataObjectView.xaml.cs">
+      <DependentUpon>DataObjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DesktopView.xaml.cs">
       <DependentUpon>DesktopView.xaml</DependentUpon>

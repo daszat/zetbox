@@ -15,13 +15,13 @@ namespace Kistl.Client.PresenterModel
             : base(uiManager, asyncManager)
         {
             _ctx = ctx;
-            Modules = new ObservableCollection<DataObjectModel>();
+            Modules = new ObservableCollection<ModuleModel>();
             Async.Queue(() => { LoadModules(); UI.Queue(() => this.State = ModelState.Active); });
         }
 
         #region public interface
 
-        public ObservableCollection<DataObjectModel> Modules { get; private set; }
+        public ObservableCollection<ModuleModel> Modules { get; private set; }
 
         #endregion
 
@@ -30,14 +30,18 @@ namespace Kistl.Client.PresenterModel
         private void LoadModules()
         {
             Async.Verify();
-            var _modules = _ctx.GetQuery<Module>().ToList();
-            UI.Queue(() => {
-                foreach (var m in _modules)
+            lock (_ctx)
+            {
+                var modules = _ctx.GetQuery<Module>().ToList();
+                UI.Queue(() =>
                 {
-                    Modules.Add(new DataObjectModel(UI, Async, m));
-                }
-                State = ModelState.Active;
-            });
+                    foreach (var m in modules)
+                    {
+                        Modules.Add(new ModuleModel(UI, Async, m));
+                    }
+                    State = ModelState.Active;
+                });
+            }
         }
 
         #endregion

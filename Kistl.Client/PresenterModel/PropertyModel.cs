@@ -41,10 +41,12 @@ namespace Kistl.Client.PresenterModel
                 {
                     _valueCache = value;
                     State = ModelState.Loading;
-                    Async.Queue(() => {
+                    Async.Queue(() =>
+                    {
                         _object.SetPropertyValue<TValue>(_property.PropertyName, value);
                         CheckConstraints();
-                        UI.Queue(() => this.State = ModelState.Active); });
+                        UI.Queue(() => this.State = ModelState.Active);
+                    });
                     OnPropertyChanged("Value");
                 }
             }
@@ -57,8 +59,11 @@ namespace Kistl.Client.PresenterModel
         private void CheckConstraints()
         {
             Async.Verify();
-            string newError = _object[_property.PropertyName];
-            UI.Queue(() => this.ValueError = newError);
+            lock (_object.Context)
+            {
+                string newError = _object[_property.PropertyName];
+                UI.Queue(() => this.ValueError = newError);
+            }
         }
 
         #endregion
@@ -68,17 +73,19 @@ namespace Kistl.Client.PresenterModel
         private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Async.Verify();
-            // flag to the user that something's happening
-            UI.Queue(() => this.State = ModelState.Loading);
-
-            if (e.PropertyName == _property.PropertyName)
+            lock (_object.Context)
             {
-                TValue newValue = _object.GetPropertyValue<TValue>(_property.PropertyName);
-                UI.Queue(() => Value = newValue);
-            }
-            // TODO: ask constraints about dependencies and reduce check frequency
-            CheckConstraints();
+                // flag to the user that something's happening
+                UI.Queue(() => this.State = ModelState.Loading);
 
+                if (e.PropertyName == _property.PropertyName)
+                {
+                    TValue newValue = _object.GetPropertyValue<TValue>(_property.PropertyName);
+                    UI.Queue(() => Value = newValue);
+                }
+                // TODO: ask constraints about dependencies and reduce check frequency
+                CheckConstraints();
+            }
             // all updates done
             UI.Queue(() => this.State = ModelState.Active);
         }

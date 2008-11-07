@@ -4,8 +4,8 @@
              xmlns:my="clr-namespace:Kistl.GUI.Renderer.WPF"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.Graph;assembly=WPFSamplesLib"
              xmlns:local="clr-namespace:Kistl.Client.WPF"
-             MinHeight="480"
-             MinWidth="640"
+             MinHeight="48"
+             MinWidth="64"
              Loaded="Window_Loaded">
     <UserControl.Resources>
         <local:NodeTemplateSelector x:Key="nodeTemplateSelector" />

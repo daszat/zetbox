@@ -19,8 +19,14 @@ namespace Kistl.Client.PresenterModel
         {
             _propertyModels = new ObservableCollection<PresentableModel>();
             _object = obj;
-            _roContext = obj.Context.GetReadonlyContext();
-            Async.Queue(() => { FetchObjectClass(); UI.Queue(() => this.State = ModelState.Active); });
+            Async.Queue(() => { 
+                _toStringCache = _object.ToString();
+                InvokePropertyChanged("Name");
+
+                FetchProperties();
+
+                UI.Queue(() => this.State = ModelState.Active); 
+            });
         }
 
         #region Public Interface
@@ -44,22 +50,43 @@ namespace Kistl.Client.PresenterModel
             }
         }
 
+        private string _toStringCache;
+        public string Name
+        {
+            get
+            {
+                UI.Verify();
+                return _toStringCache;
+            }
+            set
+            {
+                UI.Verify();
+                if (value != _toStringCache)
+                {
+                    _toStringCache = value;
+                    OnPropertyChanged("Name");
+                }
+            }
+        }
+
         #endregion
 
         #region Async handlers and UI callbacks
 
-        private void FetchObjectClass()
+        private void FetchProperties()
         {
             Async.Verify();
-            ObjectClass cls = _object.GetObjectClass(_roContext);
-            var props = cls.Properties;
-            UI.Queue(() => SetClassPropertyModels(cls, props));
+            lock (_object.Context)
+            {
+                ObjectClass cls = _object.GetObjectClass(_object.Context);
+                var props = cls.Properties;
+                UI.Queue(() => SetClassPropertyModels(cls, props));
+            }
         }
 
         private void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
         {
             UI.Verify();
-            _class = cls;
             foreach (var pm in props)
             {
                 if (pm is StringProperty)
@@ -72,7 +99,5 @@ namespace Kistl.Client.PresenterModel
         #endregion
 
         private IDataObject _object;
-        private IKistlContext _roContext;
-        private ObjectClass _class;
     }
 }

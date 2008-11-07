@@ -1,6 +1,9 @@
 ﻿<Window x:Class="Kistl.Client.WPF.View.DesktopView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+        xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+        xmlns:client="clr-namespace:Kistl.Client.PresenterModel;assembly=Kistl.Client"
         Title="DesktopView"
         Height="600"
         Width="800">
@@ -38,24 +41,31 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <TextBlock x:Name="LoadingNotifier"
-                       Background="Red"
-                       Style="{StaticResource ShowState}" />
-            <ListView ItemsSource="{Binding Modules}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
+        <DockPanel Grid.Column="0">
+            <TreeView x:Name="ModuleTree"
+                      ItemsSource="{Binding Modules}">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
+                                              ItemsSource="{Binding ObjectClasses}">
+                        <StackPanel Orientation="Horizontal">
                             <TextBlock Style="{StaticResource ShowState}" />
-                            <TextBlock Text="{Binding PropertyModels.Count}" />
+                            <TextBlock Text="{Binding Name}" />
                         </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type client:DataObjectModel}">
+                        <view:DataObjectView />
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+                </TreeView.Resources>
+            </TreeView>
+        </DockPanel>
+
+        <!-- overlay on the tree -->
+        <ctrls:LoadingIndicator Grid.Column="0" />
 
         <GridSplitter Grid.Column="1"
                       HorizontalAlignment="Stretch" />
 
+        <view:DataObjectView Grid.Column="2"
+                             DataContext="{Binding SelectedItem, ElementName=ModuleTree}" />
     </Grid>
 </Window>
