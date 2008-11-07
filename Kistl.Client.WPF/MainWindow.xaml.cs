@@ -40,8 +40,9 @@ namespace Kistl.Client
         {
             // Get the debugger and re-parent him to the mainwindow
             // TODO: Use ServiceDiscoveryService to get to the debugger instance
-            var debugger = (Kistl.Client.WPF.Debugger.KistlContextDebuggerWPF)KistlContextDebugger.GetDebugger();
-            debugger.Owner = this;
+            var debugger = KistlContextDebugger.GetDebugger() as Kistl.Client.WPF.Debugger.KistlContextDebuggerWPF;
+            if (debugger != null)
+                debugger.Owner = this;
             // Register as MainWindow for correctness.
             Application.Current.MainWindow = this;
         }

@@ -13,6 +13,9 @@ using Kistl.API.Configuration;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 using Kistl.GUI.DB;
+using Kistl.Client.WPF.View;
+using Kistl.Client.PresenterModel;
+using Kistl.Client.PresenterModel.WPF;
 
 namespace Kistl.Client.WPF
 {
@@ -65,7 +68,7 @@ namespace Kistl.Client.WPF
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Debugger.KistlContextDebuggerWPF.ShowDebugger();
+            // Debugger.KistlContextDebuggerWPF.ShowDebugger();
 
             SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 
@@ -112,6 +115,10 @@ namespace Kistl.Client.WPF
                     ctx.SubmitChanges();
                 }
             }
+
+            var desktop = new DesktopView();
+            desktop.DataContext = new DesktopModel(new UiThreadManager(), new AsyncThreadManager(), KistlContext.GetContext());
+            desktop.Show();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

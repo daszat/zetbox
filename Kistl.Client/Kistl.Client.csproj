@@ -67,9 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PresenterModel\DataObjectModel.cs" />
+    <Compile Include="PresenterModel\DesktopModel.cs" />
     <Compile Include="PresenterModel\IAsyncUiManager.cs" />
     <Compile Include="PresenterModel\PresenterModel.cs" />
     <Compile Include="PresenterModel\PropertyModel.cs" />
+    <Compile Include="PresenterModel\WorkspaceModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GUI.DB\KistlGUIContext.cs" />
