@@ -37,24 +37,24 @@ namespace Kistl.Client
 
         // TODO: Das muss in "statische" Objekte, oder auch Immutable Objects genannt, umgewandelt werden.
         private static Dictionary<Type, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
-        private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
+        //private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
 
         // TODO: Arthur: Der Context da ist mir ein Dorn im Auge.
-        private static IKistlContext _fetchContext = KistlContext.GetContext();
+        //private static IKistlContext _fetchContext = KistlContext.GetContext();
 
-        public static void CleanCaches()
-        {
-            lock (typeof(Helper))
-            {
-                _ObjectClasses = null;
-                _Modules = null;
-                if (_fetchContext != null)
-                {
-                    _fetchContext.Dispose();
-                }
-                _fetchContext = KistlContext.GetContext();
-            }
-        }
+        //public static void CleanCaches()
+        //{
+        //    lock (typeof(Helper))
+        //    {
+        //        _ObjectClasses = null;
+        //        _Modules = null;
+        //        if (_fetchContext != null)
+        //        {
+        //            _fetchContext.Dispose();
+        //        }
+        //        _fetchContext = KistlContext.GetContext();
+        //    }
+        //}
 
         private static void FetchObjectClasses()
         {
@@ -62,20 +62,19 @@ namespace Kistl.Client
             {
                 if (_ObjectClasses == null)
                 {
-                    FetchModules();
                     using (TraceClient.TraceHelper.TraceMethodCall("Getting Object Classes"))
                     {
                         // Prefetch Modules
                         //_ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
                         //    .ToDictionary(o => o.GetDataCLRType());
                         _ObjectClasses = new Dictionary<Type, Kistl.App.Base.ObjectClass>();
-                        foreach (var o in _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>())
+                        foreach (var o in Kistl.API.FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>())
                         {
                             try
                             {
                                 _ObjectClasses[o.GetDataType()] = o;
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                             }
@@ -94,28 +93,28 @@ namespace Kistl.Client
             }
         }
 
-        private static void FetchModules()
-        {
-            lock (typeof(Helper))
-            {
-                if (_Modules == null)
-                {
-                    using (TraceClient.TraceHelper.TraceMethodCall("Getting Modules"))
-                    {
-                        _Modules = _fetchContext.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
-                    }
-                }
-            }
-        }
+        //private static void FetchModules()
+        //{
+        //    lock (typeof(Helper))
+        //    {
+        //        if (_Modules == null)
+        //        {
+        //            using (TraceClient.TraceHelper.TraceMethodCall("Getting Modules"))
+        //            {
+        //                _Modules = _fetchContext.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
+        //            }
+        //        }
+        //    }
+        //}
 
-        public static Dictionary<string, Kistl.App.Base.Module> Modules
-        {
-            get
-            {
-                FetchModules();
-                return _Modules;
-            }
-        }
+        //public static Dictionary<string, Kistl.App.Base.Module> Modules
+        //{
+        //    get
+        //    {
+        //        FetchModules();
+        //        return _Modules;
+        //    }
+        //}
     }
 
     public static class ClientExtensions

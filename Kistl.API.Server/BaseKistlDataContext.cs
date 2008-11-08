@@ -176,7 +176,8 @@ namespace Kistl.API.Server
         public IKistlContext GetReadonlyContext()
         {
             // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
-            return this;
+            //return this;
+            return Kistl.API.FrozenContext.Single;
         }
 
         /// <summary>

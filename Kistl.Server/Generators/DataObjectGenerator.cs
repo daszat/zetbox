@@ -181,8 +181,7 @@ namespace Kistl.Server.Generators
             Console.WriteLine();
 
             Console.Write("  FrozenContext");
-            GenerateFrozenContext(TaskEnum.Client, objClassList);
-            GenerateFrozenContext(TaskEnum.Server, objClassList);
+            GenerateFrozenContext(objClassList);
 
             Console.WriteLine();
 
@@ -250,7 +249,7 @@ namespace Kistl.Server.Generators
             code.AddAttribute(typeof(System.Reflection.AssemblyCopyrightAttribute), "Copyright © dasz.at 2008");
             code.AddAttribute(typeof(System.Runtime.InteropServices.ComVisibleAttribute), false);
             code.AddAttribute(typeof(System.Reflection.AssemblyVersionAttribute), "1.0.0.0");
-            code.AddAttribute(typeof(System.Reflection.AssemblyFileVersionAttribute),"1.0.0.0");
+            code.AddAttribute(typeof(System.Reflection.AssemblyFileVersionAttribute), "1.0.0.0");
             code.AddAttribute(typeof(CLSCompliantAttribute), true);
         }
 
@@ -267,50 +266,120 @@ namespace Kistl.Server.Generators
 
         #region GenerateFrozenContext
 
-        public virtual void GenerateFrozenContext_ObjectInitializer<T>(CodeConstructor constructor) 
+
+        public virtual void GenerateFrozenContext_LinkObjectReferences<T>(CodeConstructor constructor)
             where T : IDataObject
         {
+            char[] progress = new char[] { '-', '\\', '|', '/' };
+            int progressIdx = 0;
             using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.GetContext())
             {
                 foreach (IDataObject obj in ctx.GetQuery<T>())
                 {
-                    ObjectClass objClass = obj.GetObjectClass(ctx);
+                    Console.Write(progress[progressIdx++ % progress.Length]);
+                    if (Console.CursorLeft > 0) Console.CursorLeft -= 1;
+
+                    ObjectClass origObjClass = obj.GetObjectClass(ctx);
+                    ObjectClass objClass = origObjClass;
+                    ObjectClass rootClass = origObjClass.GetRootClass();
+
+                    string objClassTypeString = objClass.GetDataTypeString();
+                    string rootClassTypeString = rootClass.GetDataTypeString();
+
+                    constructor.Statements.AddExpression("{{var obj = this.Find<{0}>({1})", objClassTypeString, obj.ID);
+                    while (objClass != null)
+                    {
+                        foreach (ObjectReferenceProperty prop in objClass.Properties.OfType<ObjectReferenceProperty>())
+                        {
+                            object val = obj.GetPropertyValue<object>(prop.PropertyName);
+                            if (val == null) continue;
+
+                            string refTypeString = prop.GetPropertyTypeString();
+                            if (prop.IsList)
+                            {
+                                foreach (IDataObject v in (IEnumerable)val)
+                                {
+                                    constructor.Statements.AddExpression("obj.{0}.Add(this.Find<{1}>({2}))",
+                                        prop.PropertyName, refTypeString, v.ID);
+                                }
+                            }
+                            else
+                            {
+                                constructor.Statements.AddExpression("obj.{0} = this.Find<{1}>({2})",
+                                    prop.PropertyName, refTypeString, ((IDataObject)val).ID);
+                            }
+                        }
+
+                        foreach (BackReferenceProperty prop in objClass.Properties.OfType<BackReferenceProperty>())
+                        {
+                            IEnumerable val = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
+                            if (val == null) continue;
+
+                            string refTypeString = prop.GetPropertyTypeString();
+
+                            foreach (IDataObject v in val)
+                            {
+                                constructor.Statements.AddExpression("obj.{0}.Add(this.Find<{1}>({2}))",
+                                    prop.PropertyName, refTypeString, v.ID);
+                            }
+                        }
+                        objClass = objClass.BaseObjectClass;
+                    }
+                    constructor.Statements.AddExpression("}");
+                }
+            }
+        }
+
+        public virtual void GenerateFrozenContext_ObjectInitializer<T>(CodeConstructor constructor)
+            where T : IDataObject
+        {
+            char[] progress = new char[] { '-', '\\', '|', '/' };
+            int progressIdx = 0;
+            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.GetContext())
+            {
+                foreach (IDataObject obj in ctx.GetQuery<T>())
+                {
+                    Console.Write(progress[progressIdx++ % progress.Length]);
+                    if (Console.CursorLeft > 0) Console.CursorLeft -= 1;
+
+                    ObjectClass origObjClass = obj.GetObjectClass(ctx);
+                    ObjectClass objClass = origObjClass;
+                    ObjectClass rootClass = origObjClass.GetRootClass();
+
+                    string objClassTypeString = objClass.GetDataTypeString();
+                    string rootClassTypeString = rootClass.GetDataTypeString();
+
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine(string.Format("_{0}.Add(new {1}{2}() {{",
-                        objClass.GetRootClass().GetDataTypeString().Replace('.', '_'),
-                        objClass.GetDataTypeString(),
+                    sb.AppendLine(string.Format("{{ var _{0}_obj = new {1}{2}() {{",
+                        rootClassTypeString.Replace('.', '_'),
+                        objClassTypeString,
                         API.Helper.ImplementationSuffix));
 
                     while (objClass != null)
                     {
                         foreach (Property prop in objClass.Properties.OfType<Property>().Where(p => p.IsList == false))
                         {
+                            if (prop is ObjectReferenceProperty) continue;
+
                             object val = obj.GetPropertyValue<object>(prop.PropertyName);
                             if (val == null) continue;
 
+                            sb.AppendFormat("                {0} = ", prop.PropertyName);
+
+                            #region Generate Propertyinitializer
                             if (prop is StringProperty)
                             {
-                                sb.AppendFormat("                {0} = @\"{1}\"", prop.PropertyName,
-                                    ((string)val).Replace("\"", "\"\""));
-                            }
-                            else if (prop is ObjectReferenceProperty)
-                            {
-                                sb.AppendFormat("                fk_{0} = {1}",
-                                    prop.PropertyName,
-                                    obj.GetPropertyValue<int>("fk_" + prop.PropertyName));
+                                sb.AppendFormat("@\"{0}\"", ((string)val).Replace("\"", "\"\""));
                             }
                             else if (prop is BoolProperty)
                             {
-                                sb.Append(string.Format(CultureInfo.InvariantCulture,
-                                    "                {0} = {1}",
-                                    prop.PropertyName, ((bool)val) ? "true" : "false"));
+                                sb.AppendFormat("{0}", ((bool)val) ? "true" : "false");
                             }
                             else
                             {
-                                sb.Append(string.Format(CultureInfo.InvariantCulture,
-                                    "                {0} = {1}",
-                                    prop.PropertyName, val));
+                                sb.Append(string.Format(CultureInfo.InvariantCulture, "{0}", val));
                             }
+                            #endregion
 
                             sb.AppendLine(",");
                         }
@@ -318,22 +387,65 @@ namespace Kistl.Server.Generators
                         objClass = objClass.BaseObjectClass;
                     }
 
-                    sb.AppendFormat("                ID = {0}", 
+                    sb.AppendFormat("                ID = {0}",
                         obj.GetPropertyValue<int>("ID"));
 
-                    sb.Append("})");
-
+                    sb.Append("}");
                     constructor.Statements.AddExpression(sb.ToString());
+
+                    objClass = origObjClass;
+
+                    //// Lists
+                    while (objClass != null)
+                    {
+                        foreach (Property prop in objClass.Properties.OfType<Property>().Where(p => p.IsList == true))
+                        {
+                            if (prop is ObjectReferenceProperty) continue;
+
+                            IEnumerable valList = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
+                            if (valList == null) continue;
+
+                            foreach (object val in valList)
+                            {
+                                if (val == null) continue;
+                                sb = new StringBuilder();
+                                sb.AppendFormat("_{0}_obj.{0}.Add(", rootClassTypeString.Replace('.', '_'), prop.PropertyName);
+
+                                #region Generate Propertyinitializer
+                                if (prop is StringProperty)
+                                {
+                                    sb.AppendFormat("@\"{0}\"", ((string)val).Replace("\"", "\"\""));
+                                }
+                                else if (prop is BoolProperty)
+                                {
+                                    sb.AppendFormat("{0}", ((bool)val) ? "true" : "false");
+                                }
+                                else
+                                {
+                                    sb.Append(string.Format(CultureInfo.InvariantCulture, "{0}", val));
+                                }
+                                #endregion
+
+                                sb.Append(")");
+                                constructor.Statements.AddExpression(sb.ToString());
+                            }
+                        }
+                        objClass = objClass.BaseObjectClass;
+                    }
+
+                    constructor.Statements.AddExpression("_{0}.Add(_{0}_obj); }}",
+                        rootClassTypeString.Replace('.', '_'));
+
                 }
             }
         }
 
-        private void GenerateFrozenContext(TaskEnum task, IQueryable<ObjectClass> objClassList)
+        private void GenerateFrozenContext(IQueryable<ObjectClass> objClassList)
         {
             CodeCompileUnit code = new CodeCompileUnit();
 
             // Create Namespace
-            CodeNamespace ns = CreateNamespace(code, task.GetKistObjectsName(), task);
+            CodeNamespace ns = CreateNamespace(code, "temp", TaskEnum.Interface);
 
             CodeTypeDeclaration c = ns.CreateClass("FrozenContextImplementation", "Kistl.API.FrozenContext");
 
@@ -349,7 +461,7 @@ namespace Kistl.Server.Generators
             {
                 Console.Write(".");
                 CodeMemberField f = c.CreateField(
-                    string.Format("List<{0}>", objClass.GetDataTypeString()), 
+                    string.Format("List<{0}>", objClass.GetDataTypeString()),
                     "_" + objClass.GetDataTypeString().Replace('.', '_'),
                     string.Format("new List<{0}>()", objClass.GetDataTypeString()));
 
@@ -366,7 +478,7 @@ namespace Kistl.Server.Generators
                 Type type = Type.GetType(objClass.Module.Namespace + "." + objClass.ClassName + API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly);
                 if (type == null) continue; // Not created yet
 
-                MethodInfo mi = this.GetType().FindGenericMethod("GenerateFrozenContext_ObjectInitializer", 
+                MethodInfo mi = this.GetType().FindGenericMethod("GenerateFrozenContext_ObjectInitializer",
                     new Type[] { type }, // Generic Parameter
                     new Type[] { typeof(CodeConstructor) }); // Parameter
                 mi.Invoke(this, new object[] { constructor });
@@ -374,8 +486,30 @@ namespace Kistl.Server.Generators
                 constructor.Statements.AddExpression("_{0}.ForEach<IDataObject>(obj => this.Attach(obj))", objClass.GetDataTypeString().Replace('.', '_'));
             }
 
-            // Generate the code & save
-            SaveFile(code, string.Format(@"{0}\FrozenContext.cs", task.GetKistObjectsName()));
+            // Link Objects
+            foreach (ObjectClass objClass in baseClassList)
+            {
+                Console.Write(".");
+
+                Type type = Type.GetType(objClass.Module.Namespace + "." + objClass.ClassName + API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly);
+                if (type == null) continue; // Not created yet
+
+                MethodInfo mi = this.GetType().FindGenericMethod("GenerateFrozenContext_LinkObjectReferences",
+                    new Type[] { type }, // Generic Parameter
+                    new Type[] { typeof(CodeConstructor) }); // Parameter
+                mi.Invoke(this, new object[] { constructor });
+            }
+
+            foreach (TaskEnum task in new TaskEnum[] { TaskEnum.Client, TaskEnum.Server })
+            {
+                code = new CodeCompileUnit();
+                ns = CreateNamespace(code, task.GetKistObjectsName(), task);
+
+                ns.Types.Add(c);
+
+                // Generate the code & save
+                SaveFile(code, string.Format(@"{0}\FrozenContext.cs", task.GetKistObjectsName()));
+            }
         }
         #endregion
 
@@ -620,14 +754,14 @@ namespace Kistl.Server.Generators
             current.code_class = current.code_namespace.CreateInterface(current.@struct.ClassName, "IStruct");
 
             // Create Properties
-             GenerateInterfaceProperties((CurrentStruct)current.Clone(), current.@struct.Properties);
+            GenerateInterfaceProperties((CurrentStruct)current.Clone(), current.@struct.Properties);
 
             // Call derived Classes
             GenerateStructInterfaces(current);
 
             // Generate the code & save
             SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
-        }        
+        }
         #endregion
 
         #region GenerateStructs
@@ -714,7 +848,7 @@ namespace Kistl.Server.Generators
                 current.code_property.SetStatements.AddExpression("_ID = value");
 
                 GenerateDefaultProperty_ID(current);
-            }            
+            }
         }
 
         protected virtual void GenerateDefaultPropertiesInternal(CurrentObjectClass current)
@@ -875,7 +1009,7 @@ namespace Kistl.Server.Generators
                 current.code_property.GetStatements.AddExpression(@"if (fk_{1} == null) return null;
                 return Context.Find<{0}>(fk_{1}.Value)", current.property.GetPropertyTypeString(), current.property.PropertyName);
 
-                current.code_property.SetStatements.AddExpression(@"fk_{0} = value != null ? (int?)value.ID : null", 
+                current.code_property.SetStatements.AddExpression(@"fk_{0} = value != null ? (int?)value.ID : null",
                     current.property.PropertyName);
             }
 
@@ -980,7 +1114,7 @@ namespace Kistl.Server.Generators
             if (current.task == TaskEnum.Client)
             {
                 collectionClass.code_property.GetStatements.AddExpression(
-                    @"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)", 
+                    @"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)",
                     current.property.GetPropertyTypeString());
                 collectionClass.code_property.SetStatements.AddExpression(@"fk_Value = value.ID;");
 
@@ -1409,7 +1543,7 @@ namespace Kistl.Server.Generators
                     StringBuilder methodCallParameter = new StringBuilder();
                     // added inverse sort by ID to stabilise order of parameters
                     // TODO: implement orderable lists and backrefs instead!
-                    foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter).OrderBy(p=>-p.ID))
+                    foreach (BaseParameter param in method.Parameter.Where(p => !p.IsReturnParameter).OrderBy(p => -p.ID))
                     {
                         m.Parameters.Add(new CodeParameterDeclarationExpression(
                             param.ToCodeTypeReference(), param.ParameterName));
@@ -1428,7 +1562,7 @@ namespace Kistl.Server.Generators
                         m.Statements.AddExpression(
                             @"MethodReturnEventArgs<{0}> e = new MethodReturnEventArgs<{0}>()",
                             returnParam.ToCodeTypeReference().BaseType);
-          
+
                     }
 
                     if (objClass != baseObjClass)
@@ -1478,7 +1612,7 @@ namespace Kistl.Server.Generators
             {
                 if (p.IsEnumerationPropertySingle())
                 {
-                    m.Statements.AddExpression("BinarySerializer.ToBinary((int{1})this._{0}, sw)", 
+                    m.Statements.AddExpression("BinarySerializer.ToBinary((int{1})this._{0}, sw)",
                         p.PropertyName, ((Property)p).IsNullable ? "?" : "");
                 }
                 else if (p.IsValueTypePropertySingle())

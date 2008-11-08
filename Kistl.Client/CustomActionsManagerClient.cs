@@ -64,7 +64,7 @@ namespace Kistl.Client
             {
                 using (TraceClient.TraceHelper.TraceMethodCall())
                 {
-                    using (IKistlContext ctx = KistlContext.GetContext())
+                    using (IKistlContext ctx = Kistl.API.FrozenContext.Single) //KistlContext.GetContext())
                     {
                         // Prepare Modules
                         List<Kistl.App.Base.Module> moduleList = ctx.GetQuery<Kistl.App.Base.Module>().ToList();
@@ -163,7 +163,13 @@ namespace Kistl.Client
             {
                 initialized = true;
                 // Clean up Helper Caches
-                ClientHelper.CleanCaches();
+                //ClientHelper.CleanCaches();
+            }
+
+            // Attach Methods to objects in FrozenContext
+            foreach (IDataObject obj in FrozenContext.Single.AttachedObjects.OfType<IDataObject>())
+            {
+                AttachEvents(obj);
             }
         }
     }

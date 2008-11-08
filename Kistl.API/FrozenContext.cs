@@ -23,7 +23,7 @@ namespace Kistl.API
             {
                 if (_Single == null)
                 {
-                    Type t = Type.GetType(ApplicationContext.Current.ImplementationAssembly + "FrozenContextImplementation, " + ApplicationContext.Current.ImplementationAssembly, true);
+                    Type t = Type.GetType(ApplicationContext.Current.ImplementationAssembly + ".FrozenContextImplementation, " + ApplicationContext.Current.ImplementationAssembly, true);
                     _Single = (FrozenContext)Activator.CreateInstance(t);
 
                     if (_Single == null) throw new InvalidOperationException("Unable to create frozen context");
@@ -38,13 +38,19 @@ namespace Kistl.API
         private HashSet<IPersistenceObject> _objects = new HashSet<IPersistenceObject>();
 
         /// <summary>
+        /// Counter for newly created Objects to give them a valid ID
+        /// </summary>
+        private int _newIDCounter = Helper.INVALIDID;
+
+        /// <summary>
         /// Returns a Query by T
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <returns>IQueryable</returns>
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
-            return GetQuery(typeof(T)).Cast<T>();
+            // OfType -> Filter Class hierarchy
+            return GetQuery(typeof(T)).OfType<T>();
         }
         /// <summary>
         /// Returns a Query by Type
@@ -83,10 +89,27 @@ namespace Kistl.API
 
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            // Handle created Objects
+            if (obj.ID == Helper.INVALIDID)
+            {
+                obj.SetPrivatePropertyValue<int>("ID", --_newIDCounter);
+            }
+            else if (obj.ID < _newIDCounter)
+            {
+                // Check ID <-> newIDCounter
+                _newIDCounter = obj.ID;
+            }
+            
             // Attach & set Objectstate to Unmodified
             if (!_objects.Contains(obj))
             {
                 _objects.Add(obj);
+            }
+            else
+            {
+                throw new InvalidOperationException("Object is already attached to this context");
             }
 
             obj.AttachToContext(this);
@@ -95,7 +118,7 @@ namespace Kistl.API
 
         public void Detach(IPersistenceObject obj)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public void Delete(IPersistenceObject obj)
@@ -107,7 +130,8 @@ namespace Kistl.API
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (string.IsNullOrEmpty(propertyName)) throw new ArgumentNullException("propertyName");
-            return obj.GetPropertyValue<List<T>>(propertyName);
+            // Return empty list - Object Initializer will fill the Collection
+            return new List<T>();
         }
 
         public List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject
