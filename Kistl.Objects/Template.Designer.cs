@@ -21,10 +21,6 @@ namespace Kistl.App.GUI
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: Templates
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface Template : IDataObject
     {
         
@@ -72,12 +68,6 @@ namespace Kistl.App.GUI
             get;
         }
         
-        /// <summary>
-        /// TODO: Add Description to Methods
-        /// </summary>
-        /// <param name="cls">
-        /// TODO: Add Description to Parameter
-        /// </param>
         void PrepareDefault(Kistl.App.Base.ObjectClass cls);
     }
 }

@@ -44,6 +44,8 @@ namespace Kistl.App.Base
         
         private EntityCollectionWrapper<Kistl.App.Base.Constraint, Kistl.App.Base.Constraint__Implementation__> ConstraintsWrapper;
         
+        private string _Description;
+        
         public BaseProperty__Implementation__()
         {
         }
@@ -212,6 +214,25 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<BaseProperty> OnToString_BaseProperty;
         
         public event ObjectEventHandler<BaseProperty> OnPreSave_BaseProperty;
@@ -287,6 +308,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Constraints))
                             .Select(c => c.GetErrorText(this, this.Constraints))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(176).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -329,6 +356,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._AltText, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this.Constraints.Cast<IDataObject>(), sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -338,6 +366,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._PropertyName, sr);
             BinarySerializer.FromBinary(out this._AltText, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
         
         public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);

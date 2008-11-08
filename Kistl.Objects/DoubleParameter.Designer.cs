@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: DoubleParameters
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Double Parameter.
     /// </summary>
     public interface DoubleParameter : Kistl.App.Base.BaseParameter
     {

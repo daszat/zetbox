@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: ObjectParameters
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Object Parameter.
     /// </summary>
     public interface ObjectParameter : Kistl.App.Base.BaseParameter
     {

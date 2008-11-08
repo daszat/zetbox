@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: MethodInvocations
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for a MethodInvocation on a Method of a DataType.
     /// </summary>
     public interface MethodInvocation : IDataObject
     {

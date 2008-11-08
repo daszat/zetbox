@@ -21,10 +21,6 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: Muhblas
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface Muhblah : IDataObject
     {
     }

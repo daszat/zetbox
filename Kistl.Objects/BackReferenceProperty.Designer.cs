@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: BackReferenceProperties
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for BackReference Properties.
     /// </summary>
     public interface BackReferenceProperty : Kistl.App.Base.BaseProperty
     {

@@ -21,10 +21,6 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: StringRangeConstraints
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface StringRangeConstraint : Kistl.App.Base.Constraint
     {
         

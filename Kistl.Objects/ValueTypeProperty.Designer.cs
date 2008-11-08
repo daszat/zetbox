@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: ValueTypeProperties
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for ValueType Properties. This class is abstract.
     /// </summary>
     public interface ValueTypeProperty : Kistl.App.Base.Property
     {

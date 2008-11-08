@@ -21,10 +21,6 @@ namespace Kistl.App.GUI
     using Kistl.API;
     
     
-    /// <summary>
-    /// 
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface IRenderer
     {
         
@@ -37,34 +33,10 @@ namespace Kistl.App.GUI
             set;
         }
         
-        /// <summary>
-        /// TODO: Add Description to Methods
-        /// </summary>
-        /// <param name="message">
-        /// TODO: Add Description to Parameter
-        /// </param>
         void ShowMessage(string message);
         
-        /// <summary>
-        /// TODO: Add Description to Methods
-        /// </summary>
-        /// <param name="obj">
-        /// TODO: Add Description to Parameter
-        /// </param>
         void ShowObject(Kistl.API.IDataObject obj);
         
-        /// <summary>
-        /// TODO: Add Description to Methods
-        /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
-        /// <param name="objectType">
-        /// TODO: Add Description to Parameter
-        /// </param>
-        /// <param name="ctx">
-        /// TODO: Add Description to Parameter
-        /// </param>
         Kistl.API.IDataObject ChooseObject(System.Type objectType, Kistl.API.IKistlContext ctx);
     }
 }

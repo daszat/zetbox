@@ -53,6 +53,7 @@ namespace Kistl.Objects.Server
                 Length = 51,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Der Name der Objektklasse",
                 AltText = @"Der Name der Objektklasse",
                 PropertyName = @"ClassName",
                 ID = 1};
@@ -61,12 +62,14 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Tabellenname in der Datenbank",
                 AltText = @"Tabellenname in der Datenbank",
                 PropertyName = @"TableName",
                 ID = 3};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = true,
+                Description = @"Eigenschaften der Objektklasse",
                 AltText = @"Eigenschaften der Objektklasse",
                 PropertyName = @"Properties",
                 ID = 7};
@@ -94,6 +97,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Projektname",
                 AltText = @"Projektname",
                 PropertyName = @"Name",
                 ID = 13};
@@ -107,6 +111,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Taskname",
                 AltText = @"Taskname",
                 PropertyName = @"Name",
                 ID = 15};
@@ -114,6 +119,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Start Datum",
                 AltText = @"Start Datum",
                 PropertyName = @"DatumVon",
                 ID = 16};
@@ -121,6 +127,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Enddatum",
                 AltText = @"Enddatum",
                 PropertyName = @"DatumBis",
                 ID = 17};
@@ -128,6 +135,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Aufwand in Stunden",
                 AltText = @"Aufwand in Stunden",
                 PropertyName = @"Aufwand",
                 ID = 18};
@@ -135,6 +143,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Verknüpfung zum Projekt",
                 AltText = @"Verknüpfung zum Projekt",
                 PropertyName = @"Projekt",
                 ID = 19};
@@ -143,12 +152,14 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Vorname Nachname",
                 AltText = @"Vorname Nachname",
                 PropertyName = @"Name",
                 ID = 20};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
                 AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
                 PropertyName = @"Projekte",
                 ID = 21};
@@ -168,6 +179,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Pointer auf die Basisklasse",
                 AltText = @"Pointer auf die Basisklasse",
                 PropertyName = @"BaseObjectClass",
                 ID = 25};
@@ -180,6 +192,7 @@ namespace Kistl.Objects.Server
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Liste der vererbten Klassen",
                 AltText = @"Liste der vererbten Klassen",
                 PropertyName = @"SubClasses",
                 ID = 27};
@@ -205,6 +218,7 @@ namespace Kistl.Objects.Server
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = true,
+                Description = @"Liste aller Methoden der Objektklasse.",
                 AltText = @"Liste aller Methoden der Objektklasse.",
                 PropertyName = @"Methods",
                 ID = 31};
@@ -212,6 +226,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Herzlichen Glückwunsch zum Geburtstag",
                 AltText = @"Herzlichen Glückwunsch zum Geburtstag",
                 PropertyName = @"Geburtstag",
                 ID = 38};
@@ -220,6 +235,7 @@ namespace Kistl.Objects.Server
                 Length = 20,
                 IsNullable = true,
                 IsList = false,
+                Description = @"NNNN TTMMYY",
                 AltText = @"NNNN TTMMYY",
                 PropertyName = @"SVNr",
                 ID = 39};
@@ -228,6 +244,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsNullable = true,
                 IsList = false,
+                Description = @"+43 123 12345678",
                 AltText = @"+43 123 12345678",
                 PropertyName = @"TelefonNummer",
                 ID = 40};
@@ -243,6 +260,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"CLR Namespace des Moduls",
                 AltText = @"CLR Namespace des Moduls",
                 PropertyName = @"Namespace",
                 ID = 42};
@@ -251,12 +269,14 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Name des Moduls",
                 AltText = @"Name des Moduls",
                 PropertyName = @"ModuleName",
                 ID = 43};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Datentypendes Modules",
                 AltText = @"Datentypendes Modules",
                 PropertyName = @"DataTypes",
                 ID = 44};
@@ -264,6 +284,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Modul der Objektklasse",
                 AltText = @"Modul der Objektklasse",
                 PropertyName = @"Module",
                 ID = 45};
@@ -271,6 +292,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Pointer zur Objektklasse",
                 AltText = @"Pointer zur Objektklasse",
                 PropertyName = @"ReferenceObjectClass",
                 ID = 46};
@@ -278,6 +300,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Das Property, welches auf diese Klasse zeigt",
                 AltText = @"Das Property, welches auf diese Klasse zeigt",
                 PropertyName = @"ReferenceProperty",
                 ID = 47};
@@ -286,6 +309,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Bitte geben Sie den Kundennamen ein",
                 AltText = @"Bitte geben Sie den Kundennamen ein",
                 PropertyName = @"Kundenname",
                 ID = 48};
@@ -300,6 +324,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
                 AltText = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
                 PropertyName = @"Auftragsname",
                 ID = 50};
@@ -307,6 +332,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Projekt zum Auftrag",
                 AltText = @"Projekt zum Auftrag",
                 PropertyName = @"Projekt",
                 ID = 51};
@@ -315,6 +341,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Name des Zeiterfassungskontos",
                 AltText = @"Name des Zeiterfassungskontos",
                 PropertyName = @"Kontoname",
                 ID = 52};
@@ -322,6 +349,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Projekt des Kostenträgers",
                 AltText = @"Projekt des Kostenträgers",
                 PropertyName = @"Projekt",
                 ID = 53};
@@ -329,6 +357,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Mitarbeiter",
                 AltText = @"Mitarbeiter",
                 PropertyName = @"Mitarbeiter",
                 ID = 54};
@@ -336,6 +365,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Zeitkonto",
                 AltText = @"Zeitkonto",
                 PropertyName = @"Zeitkonto",
                 ID = 55};
@@ -343,6 +373,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Datum",
                 AltText = @"Datum",
                 PropertyName = @"Datum",
                 ID = 56};
@@ -350,12 +381,14 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Dauer in Stunden",
                 AltText = @"Dauer in Stunden",
                 PropertyName = @"Dauer",
                 ID = 57};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Tätigkeiten",
                 AltText = @"Tätigkeiten",
                 PropertyName = @"Taetigkeiten",
                 ID = 58};
@@ -364,6 +397,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Name des Kunden",
                 AltText = @"Name des Kunden",
                 PropertyName = @"Kundenname",
                 ID = 59};
@@ -372,6 +406,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Adresse & Hausnummer",
                 AltText = @"Adresse & Hausnummer",
                 PropertyName = @"Adresse",
                 ID = 60};
@@ -380,6 +415,7 @@ namespace Kistl.Objects.Server
                 Length = 10,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Postleitzahl",
                 AltText = @"Postleitzahl",
                 PropertyName = @"PLZ",
                 ID = 61};
@@ -388,6 +424,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Ort",
                 AltText = @"Ort",
                 PropertyName = @"Ort",
                 ID = 62};
@@ -396,6 +433,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Land",
                 AltText = @"Land",
                 PropertyName = @"Land",
                 ID = 63};
@@ -403,6 +441,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Kunde des Projektes",
                 AltText = @"Kunde des Projektes",
                 PropertyName = @"Kunde",
                 ID = 64};
@@ -410,18 +449,21 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Wert in EUR des Auftrages",
                 AltText = @"Wert in EUR des Auftrages",
                 PropertyName = @"Auftragswert",
                 ID = 65};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Kostenträger",
                 AltText = @"Kostenträger",
                 PropertyName = @"Kostentraeger",
                 ID = 66};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Aufträge",
                 AltText = @"Aufträge",
                 PropertyName = @"Auftraege",
                 ID = 67};
@@ -430,6 +472,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Filename of the Icon",
                 AltText = @"Filename of the Icon",
                 PropertyName = @"IconFile",
                 ID = 68};
@@ -437,6 +480,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Standard Icon wenn IIcon nicht implementiert ist",
                 AltText = @"Standard Icon wenn IIcon nicht implementiert ist",
                 PropertyName = @"DefaultIcon",
                 ID = 69};
@@ -444,6 +488,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Module",
                 AltText = @"Module",
                 PropertyName = @"Module",
                 ID = 70};
@@ -452,6 +497,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
                 AltText = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
                 PropertyName = @"AssemblyName",
                 ID = 71};
@@ -459,6 +505,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Zugehörig zum Modul",
                 AltText = @"Zugehörig zum Modul",
                 PropertyName = @"Module",
                 ID = 72};
@@ -466,6 +513,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Zugehörig zum Modul",
                 AltText = @"Zugehörig zum Modul",
                 PropertyName = @"Module",
                 ID = 73};
@@ -473,6 +521,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Methode, die Aufgerufen wird",
                 AltText = @"Methode, die Aufgerufen wird",
                 PropertyName = @"Method",
                 ID = 74};
@@ -480,6 +529,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Assembly, dass die Methode beinhaltet",
                 AltText = @"Assembly, dass die Methode beinhaltet",
                 PropertyName = @"Assembly",
                 ID = 75};
@@ -488,6 +538,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Voller Name des .NET Types des implementierenden Members",
                 AltText = @"Voller Name des .NET Types des implementierenden Members",
                 PropertyName = @"FullTypeName",
                 ID = 76};
@@ -496,6 +547,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Name des implementierenden Members",
                 AltText = @"Name des implementierenden Members",
                 PropertyName = @"MemberName",
                 ID = 77};
@@ -503,6 +555,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Zugehörig zum Modul",
                 AltText = @"Zugehörig zum Modul",
                 PropertyName = @"Module",
                 ID = 78};
@@ -510,24 +563,28 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"In dieser Objektklasse implementieren",
                 AltText = @"In dieser Objektklasse implementieren",
                 PropertyName = @"InvokeOnObjectClass",
                 ID = 79};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = true,
+                Description = @"all implemented Methods in this DataType",
                 AltText = @"all implemented Methods in this DataType",
                 PropertyName = @"MethodInvocations",
                 ID = 80};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
                 AltText = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
                 PropertyName = @"MethodInvokations",
                 ID = 81};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = false,
+                Description = @"Assemblies des Moduls",
                 AltText = @"Assemblies des Moduls",
                 PropertyName = @"Assemblies",
                 ID = 82};
@@ -535,6 +592,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
                 AltText = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
                 PropertyName = @"IsClientAssembly",
                 ID = 83};
@@ -542,6 +600,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Serialisierung der Liste zum Client",
                 AltText = @"Serialisierung der Liste zum Client",
                 PropertyName = @"PreFetchToClient",
                 ID = 84};
@@ -550,6 +609,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = true,
                 IsList = true,
+                Description = @"EMails des Kunden - können mehrere sein",
                 AltText = @"EMails des Kunden - können mehrere sein",
                 PropertyName = @"EMails",
                 ID = 85};
@@ -557,6 +617,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = true,
+                Description = @"Zugeordnete Mitarbeiter",
                 AltText = @"Zugeordnete Mitarbeiter",
                 PropertyName = @"Mitarbeiter",
                 ID = 86};
@@ -565,6 +626,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Name der Tätigkeitsart",
                 AltText = @"Name der Tätigkeitsart",
                 PropertyName = @"Name",
                 ID = 87};
@@ -572,6 +634,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Art der Tätigkeit",
                 AltText = @"Art der Tätigkeit",
                 PropertyName = @"TaetigkeitsArt",
                 ID = 88};
@@ -579,6 +642,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Maximal erlaubte Stundenanzahl",
                 AltText = @"Maximal erlaubte Stundenanzahl",
                 PropertyName = @"MaxStunden",
                 ID = 89};
@@ -586,6 +650,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Aktuell gebuchte Stunden",
                 AltText = @"Aktuell gebuchte Stunden",
                 PropertyName = @"AktuelleStunden",
                 ID = 90};
@@ -594,6 +659,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Name des Parameter",
                 AltText = @"Name des Parameter",
                 PropertyName = @"ParameterName",
                 ID = 91};
@@ -601,6 +667,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Methode des Parameters",
                 AltText = @"Methode des Parameters",
                 PropertyName = @"Method",
                 ID = 92};
@@ -608,6 +675,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Module",
                 AltText = @"Module",
                 PropertyName = @"Module",
                 ID = 93};
@@ -615,6 +683,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Parameter wird als List<> generiert",
                 AltText = @"Parameter wird als List<> generiert",
                 PropertyName = @"IsList",
                 ID = 94};
@@ -622,12 +691,14 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Es darf nur ein Return Parameter angegeben werden",
                 AltText = @"Es darf nur ein Return Parameter angegeben werden",
                 PropertyName = @"IsReturnParameter",
                 ID = 95};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = true,
+                Description = @"Parameter der Methode",
                 AltText = @"Parameter der Methode",
                 PropertyName = @"Parameter",
                 ID = 96};
@@ -635,6 +706,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Kistl-Typ des Parameters",
                 AltText = @"Kistl-Typ des Parameters",
                 PropertyName = @"DataType",
                 ID = 97};
@@ -642,6 +714,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Assembly des CLR Objektes, NULL für Default Assemblies",
                 AltText = @"Assembly des CLR Objektes, NULL für Default Assemblies",
                 PropertyName = @"Assembly",
                 ID = 98};
@@ -650,6 +723,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Name des CLR Datentypen",
                 AltText = @"Name des CLR Datentypen",
                 PropertyName = @"FullTypeName",
                 ID = 99};
@@ -657,12 +731,14 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Übergeordnete Enumeration",
                 AltText = @"Übergeordnete Enumeration",
                 PropertyName = @"Enumeration",
                 ID = 100};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = true,
+                Description = @"Einträge der Enumeration",
                 AltText = @"Einträge der Enumeration",
                 PropertyName = @"EnumerationEntries",
                 ID = 103};
@@ -670,6 +746,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Enumeration der Eigenschaft",
                 AltText = @"Enumeration der Eigenschaft",
                 PropertyName = @"Enumeration",
                 ID = 104};
@@ -677,6 +754,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = true,
+                Description = @"Interfaces der Objektklasse",
                 AltText = @"Interfaces der Objektklasse",
                 PropertyName = @"ImplementsInterfaces",
                 ID = 105};
@@ -685,6 +763,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"String Property für das Testinterface",
                 AltText = @"String Property für das Testinterface",
                 PropertyName = @"StringProp",
                 ID = 107};
@@ -692,6 +771,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Objektpointer für das Testinterface",
                 AltText = @"Objektpointer für das Testinterface",
                 PropertyName = @"ObjectProp",
                 ID = 108};
@@ -700,6 +780,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"String Property",
                 AltText = @"String Property",
                 PropertyName = @"StringProp",
                 ID = 109};
@@ -707,6 +788,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Test Enumeration Property",
                 AltText = @"Test Enumeration Property",
                 PropertyName = @"TestEnumProp",
                 ID = 110};
@@ -714,6 +796,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Test Enum Property",
                 AltText = @"Test Enum Property",
                 PropertyName = @"TestEnumProp",
                 ID = 111};
@@ -721,6 +804,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"testtest",
                 AltText = @"testtest",
                 PropertyName = @"ObjectProp",
                 ID = 112};
@@ -728,6 +812,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The Toolkit used by this Renderer",
                 AltText = @"The Toolkit used by this Renderer",
                 PropertyName = @"Platform",
                 ID = 113};
@@ -735,6 +820,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The assembly containing the Control",
                 AltText = @"The assembly containing the Control",
                 PropertyName = @"Assembly",
                 ID = 114};
@@ -743,6 +829,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"The name of the class implementing this Control",
                 AltText = @"The name of the class implementing this Control",
                 PropertyName = @"ClassName",
                 ID = 115};
@@ -750,6 +837,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Whether or not this Control can contain other Controls",
                 AltText = @"Whether or not this Control can contain other Controls",
                 PropertyName = @"IsContainer",
                 ID = 116};
@@ -757,6 +845,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The toolkit of this Control.",
                 AltText = @"The toolkit of this Control.",
                 PropertyName = @"Platform",
                 ID = 117};
@@ -764,6 +853,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The type of Control of this implementation",
                 AltText = @"The type of Control of this implementation",
                 PropertyName = @"ControlType",
                 ID = 118};
@@ -771,6 +861,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
                 AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
                 PropertyName = @"IsSimpleObject",
                 ID = 119};
@@ -778,6 +869,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Shows this Method in th GUI",
                 AltText = @"Shows this Method in th GUI",
                 PropertyName = @"IsDisplayable",
                 ID = 124};
@@ -785,6 +877,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"test",
                 AltText = @"test",
                 PropertyName = @"MyIntProperty",
                 ID = 126};
@@ -793,6 +886,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Enter a Number",
                 AltText = @"Enter a Number",
                 PropertyName = @"Number",
                 ID = 127};
@@ -801,6 +895,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsNullable = true,
                 IsList = false,
+                Description = @"Enter Area Code",
                 AltText = @"Enter Area Code",
                 PropertyName = @"AreaCode",
                 ID = 128};
@@ -808,6 +903,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Definition of this Struct",
                 AltText = @"Definition of this Struct",
                 PropertyName = @"StructDefinition",
                 ID = 129};
@@ -816,6 +912,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"Persons Name",
                 AltText = @"Persons Name",
                 PropertyName = @"PersonName",
                 ID = 130};
@@ -823,6 +920,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StructProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Mobile Phone Number",
                 AltText = @"Mobile Phone Number",
                 PropertyName = @"PhoneNumberMobile",
                 ID = 131};
@@ -830,6 +928,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StructProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Office Phone Number",
                 AltText = @"Office Phone Number",
                 PropertyName = @"PhoneNumberOffice",
                 ID = 132};
@@ -837,6 +936,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"Happy Birthday!",
                 AltText = @"Happy Birthday!",
                 PropertyName = @"Birthday",
                 ID = 133};
@@ -844,6 +944,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The CLR value of this entry",
                 AltText = @"The CLR value of this entry",
                 PropertyName = @"Value",
                 ID = 135};
@@ -852,6 +953,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"CLR name of this entry",
                 AltText = @"CLR name of this entry",
                 PropertyName = @"Name",
                 ID = 136};
@@ -859,6 +961,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"which controls are handled by this Presenter",
                 AltText = @"which controls are handled by this Presenter",
                 PropertyName = @"ControlType",
                 ID = 137};
@@ -866,6 +969,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Where to find the implementation of the Presenter",
                 AltText = @"Where to find the implementation of the Presenter",
                 PropertyName = @"PresenterAssembly",
                 ID = 138};
@@ -874,6 +978,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"The CLR namespace and class name of the Presenter",
                 AltText = @"The CLR namespace and class name of the Presenter",
                 PropertyName = @"PresenterTypeName",
                 ID = 139};
@@ -881,6 +986,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"The Assembly of the Data Type",
                 AltText = @"The Assembly of the Data Type",
                 PropertyName = @"DataAssembly",
                 ID = 147};
@@ -889,6 +995,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"The CLR namespace and class name of the Data Type",
                 AltText = @"The CLR namespace and class name of the Data Type",
                 PropertyName = @"DataTypeName",
                 ID = 148};
@@ -897,6 +1004,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"A short description of the utility of this visual",
                 AltText = @"A short description of the utility of this visual",
                 PropertyName = @"Description",
                 ID = 149};
@@ -904,6 +1012,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Which visual is represented here",
                 AltText = @"Which visual is represented here",
                 PropertyName = @"ControlType",
                 ID = 150};
@@ -911,6 +1020,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = true,
+                Description = @"if this is a container, here are the visually contained/controlled children of this Visual",
                 AltText = @"if this is a container, here are the visually contained/controlled children of this Visual",
                 PropertyName = @"Children",
                 ID = 151};
@@ -918,6 +1028,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = false,
+                Description = @"The Property to display",
                 AltText = @"The Property to display",
                 PropertyName = @"Property",
                 ID = 152};
@@ -925,6 +1036,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The Method whose return value shoud be displayed",
                 AltText = @"The Method whose return value shoud be displayed",
                 PropertyName = @"Method",
                 ID = 153};
@@ -933,6 +1045,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"a short name to identify this Template to the user",
                 AltText = @"a short name to identify this Template to the user",
                 PropertyName = @"DisplayName",
                 ID = 154};
@@ -940,6 +1053,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The visual representation of this Template",
                 AltText = @"The visual representation of this Template",
                 PropertyName = @"VisualTree",
                 ID = 155};
@@ -948,6 +1062,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsNullable = false,
                 IsList = false,
+                Description = @"FullName of the Type that is displayed with this Template",
                 AltText = @"FullName of the Type that is displayed with this Template",
                 PropertyName = @"DisplayedTypeFullName",
                 ID = 162};
@@ -955,6 +1070,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"Assembly of the Type that is displayed with this Template",
                 AltText = @"Assembly of the Type that is displayed with this Template",
                 PropertyName = @"DisplayedTypeAssembly",
                 ID = 163};
@@ -962,6 +1078,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = true,
+                Description = @"The context menu for this Visual",
                 AltText = @"The context menu for this Visual",
                 PropertyName = @"ContextMenu",
                 ID = 164};
@@ -969,6 +1086,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = true,
                 IsList = true,
+                Description = @"The main menu for this Template",
                 AltText = @"The main menu for this Template",
                 PropertyName = @"Menu",
                 ID = 165};
@@ -977,6 +1095,7 @@ namespace Kistl.Objects.Server
                 Length = 400,
                 IsNullable = true,
                 IsList = false,
+                Description = @"The reason of this constraint",
                 AltText = @"The reason of this constraint",
                 PropertyName = @"Reason",
                 ID = 167};
@@ -984,6 +1103,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The biggest value accepted by this constraint",
                 AltText = @"The biggest value accepted by this constraint",
                 PropertyName = @"Max",
                 ID = 168};
@@ -991,12 +1111,14 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The smallest value accepted by this constraint",
                 AltText = @"The smallest value accepted by this constraint",
                 PropertyName = @"Min",
                 ID = 169};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
                 PreFetchToClient = true,
+                Description = @"The list of constraints applying to this Property",
                 AltText = @"The list of constraints applying to this Property",
                 PropertyName = @"Constraints",
                 ID = 170};
@@ -1004,6 +1126,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The property to be constrained",
                 AltText = @"The property to be constrained",
                 PropertyName = @"ConstrainedProperty",
                 ID = 171};
@@ -1011,6 +1134,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The maximal length of this StringProperty",
                 AltText = @"The maximal length of this StringProperty",
                 PropertyName = @"MaxLength",
                 ID = 172};
@@ -1018,6 +1142,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"The minimal length of this StringProperty",
                 AltText = @"The minimal length of this StringProperty",
                 PropertyName = @"MinLength",
                 ID = 173};
@@ -1025,229 +1150,328 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsNullable = false,
                 IsList = false,
+                Description = @"if true then all Instances appear in FozenContext.",
                 AltText = @"if true then all Instances appear in FozenContext.",
                 PropertyName = @"IsFrozenObject",
                 ID = 174};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
+                Length = 200,
+                IsNullable = true,
+                IsList = false,
+                Description = @"Description of this DataType",
+                AltText = @"Description of this DataType",
+                PropertyName = @"Description",
+                ID = 175};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
+                Length = 200,
+                IsNullable = true,
+                IsList = false,
+                Description = @"Description of this Property",
+                AltText = @"Description of this Property",
+                PropertyName = @"Description",
+                ID = 176};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
+                Length = 200,
+                IsNullable = true,
+                IsList = false,
+                Description = @"Description of this Parameter",
+                AltText = @"Description of this Parameter",
+                PropertyName = @"Description",
+                ID = 177};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
+                Length = 200,
+                IsNullable = true,
+                IsList = false,
+                Description = @"Description of this Enumeration Entry",
+                AltText = @"Description of this Enumeration Entry",
+                PropertyName = @"Description",
+                ID = 178};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
+                Length = 200,
+                IsNullable = true,
+                IsList = false,
+                Description = @"Description of this Module",
+                AltText = @"Description of this Module",
+                PropertyName = @"Description",
+                ID = 179};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
+                Length = 200,
+                IsNullable = true,
+                IsList = false,
+                Description = @"Description of this Method",
+                AltText = @"Description of this Method",
+                PropertyName = @"Description",
+                ID = 180};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             _Kistl_App_Base_BaseProperty.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetPropertyTypeString",
                 IsDisplayable = true,
+                Description = @"Returns the String representation of this Property Meta Object.",
                 ID = 1};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"RechnungErstellen",
                 IsDisplayable = true,
+                Description = @"Testmethode zum Erstellen von Rechnungen mit Word",
                 ID = 3};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 4};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 5};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 6};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 7};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 8};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 9};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 10};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 11};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 12};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 13};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 14};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 15};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 16};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 17};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 18};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 19};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 20};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 21};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 22};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 23};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 24};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 25};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 26};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 27};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 28};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 29};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 30};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 31};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 32};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 33};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 34};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 35};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 36};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 37};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 38};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 39};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 40};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 41};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 42};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 43};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 44};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 45};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1258,51 +1482,61 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 71};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 72};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 73};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 74};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 75};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 76};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 79};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 80};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 81};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetParameterTypeString",
                 IsDisplayable = false,
+                Description = @"Returns the String representation of this Method-Parameter Meta Object.",
                 ID = 82};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1313,31 +1547,37 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 84};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 85};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 86};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 87};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 88};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 89};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1348,21 +1588,25 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 91};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 92};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 93};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"TestMethod",
                 IsDisplayable = true,
+                Description = @"testmethod",
                 ID = 95};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1383,86 +1627,103 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 106};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 107};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 108};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 109};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 110};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 111};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 112};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 113};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 114};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 115};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 116};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 117};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetPropertyType",
                 IsDisplayable = false,
+                Description = @"Returns the resulting Type of this Property Meta Object.",
                 ID = 118};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetDataTypeString",
                 IsDisplayable = false,
+                Description = @"Returns the String representation of this Datatype Meta Object.",
                 ID = 120};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetDataType",
                 IsDisplayable = false,
+                Description = @"Returns the resulting Type of this Datatype Meta Object.",
                 ID = 121};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetParameterType",
                 IsDisplayable = false,
+                Description = @"Returns the resulting Type of this Method-Parameter Meta Object.",
                 ID = 123};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetReturnParameter",
                 IsDisplayable = true,
+                Description = @"Returns the Return Parameter Meta Object of this Method Meta Object.",
                 ID = 124};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1473,46 +1734,55 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 126};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 127};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 128};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 129};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 130};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 131};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 132};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 133};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 134};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1523,16 +1793,19 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 136};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 137};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 138};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1543,16 +1816,19 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"ToString",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Returns a String that represents the current Object.",
                 ID = 141};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PreSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context before a commit occurs.",
                 ID = 142};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"PostSave",
                 IsDisplayable = false,
+                Description = @"Autogenerated! Method is called by the Context after a commit occurs.",
                 ID = 143};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -2172,35 +2448,12 @@ namespace Kistl.Objects.Server
                 ID = 107};
             _Kistl_App_Base_MethodInvocation.Add(_Kistl_App_Base_MethodInvocation_obj); };
             _Kistl_App_Base_MethodInvocation.ForEach<IDataObject>(obj => this.Attach(obj));
-            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Enumeration__Implementation__() {
-                ClassName = @"TestEnum",
-                ID = 50};
-            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
-            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Enumeration__Implementation__() {
-                ClassName = @"Toolkit",
-                ID = 53};
-            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
-            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Enumeration__Implementation__() {
-                ClassName = @"VisualType",
-                ID = 55};
-            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
-            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Struct__Implementation__() {
-                ClassName = @"TestPhoneStruct",
-                ID = 63};
-            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
-            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Interface__Implementation__() {
-                ClassName = @"ITestInterface",
-                ID = 48};
-            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
-            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Interface__Implementation__() {
-                ClassName = @"IRenderer",
-                ID = 52};
-            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
                 TableName = @"ObjectClasses",
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"ObjectClass",
+                Description = @"Metadefinition Object for ObjectClasses.",
                 ID = 2};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2222,6 +2475,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = true,
                 ClassName = @"BaseProperty",
+                Description = @"Metadefinition Object for Properties. This class is abstract.",
                 ID = 5};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2236,6 +2490,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"Property",
+                Description = @"Metadefinition Object for Properties. This class is abstract.",
                 ID = 7};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2243,6 +2498,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"ValueTypeProperty",
+                Description = @"Metadefinition Object for ValueType Properties. This class is abstract.",
                 ID = 8};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2250,6 +2506,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"StringProperty",
+                Description = @"Metadefinition Object for String Properties.",
                 ID = 9};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2257,6 +2514,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = true,
                 ClassName = @"Method",
+                Description = @"Metadefinition Object for Methods.",
                 ID = 10};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2264,6 +2522,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"IntProperty",
+                Description = @"Metadefinition Object for Int Properties.",
                 ID = 11};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2271,6 +2530,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"BoolProperty",
+                Description = @"Metadefinition Object for Bool Properties.",
                 ID = 12};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2278,6 +2538,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"DoubleProperty",
+                Description = @"Metadefinition Object for Double Properties.",
                 ID = 13};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2285,6 +2546,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"ObjectReferenceProperty",
+                Description = @"Metadefinition Object for ObjectReference Properties.",
                 ID = 14};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2292,6 +2554,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"DateTimeProperty",
+                Description = @"Metadefinition Object for DateTime Properties.",
                 ID = 15};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2299,6 +2562,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"BackReferenceProperty",
+                Description = @"Metadefinition Object for BackReference Properties.",
                 ID = 16};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2306,6 +2570,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = true,
                 ClassName = @"Module",
+                Description = @"Metadefinition Object for Modules.",
                 ID = 18};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2369,6 +2634,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = true,
                 ClassName = @"MethodInvocation",
+                Description = @"Metadefinition Object for a MethodInvocation on a Method of a DataType.",
                 ID = 30};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2383,6 +2649,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = true,
                 ClassName = @"DataType",
+                Description = @"Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.",
                 ID = 33};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2390,6 +2657,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = true,
                 ClassName = @"BaseParameter",
+                Description = @"Metadefinition Object for Parameter. This class is abstract.",
                 ID = 36};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2397,6 +2665,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"StringParameter",
+                Description = @"Metadefinition Object for String Parameter.",
                 ID = 37};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2404,6 +2673,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"IntParameter",
+                Description = @"Metadefinition Object for Int Parameter.",
                 ID = 38};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2411,6 +2681,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"DoubleParameter",
+                Description = @"Metadefinition Object for Double Parameter.",
                 ID = 39};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2418,6 +2689,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"BoolParameter",
+                Description = @"Metadefinition Object for Bool Parameter.",
                 ID = 40};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2425,6 +2697,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"DateTimeParameter",
+                Description = @"Metadefinition Object for DateTime Parameter.",
                 ID = 41};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2432,6 +2705,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"ObjectParameter",
+                Description = @"Metadefinition Object for Object Parameter.",
                 ID = 42};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2439,6 +2713,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"CLRObjectParameter",
+                Description = @"Metadefinition Object for CLR Object Parameter.",
                 ID = 43};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2446,6 +2721,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"Interface",
+                Description = @"Metadefinition Object for Interfaces.",
                 ID = 44};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2453,6 +2729,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"Enumeration",
+                Description = @"Metadefinition Object for Enumerations.",
                 ID = 45};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2460,6 +2737,7 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = true,
                 IsFrozenObject = true,
                 ClassName = @"EnumerationEntry",
+                Description = @"Metadefinition Object for an Enumeration Entry.",
                 ID = 46};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2467,7 +2745,18 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"EnumerationProperty",
+                Description = @"Metadefinition Object for Enumeration Properties.",
                 ID = 47};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Interface__Implementation__() {
+                ClassName = @"ITestInterface",
+                Description = @"A Test Interface",
+                ID = 48};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Enumeration__Implementation__() {
+                ClassName = @"TestEnum",
+                Description = @"A TestEnum",
+                ID = 50};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
                 TableName = @"TestObjClasses",
@@ -2476,12 +2765,24 @@ namespace Kistl.Objects.Server
                 ClassName = @"TestObjClass",
                 ID = 51};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Interface__Implementation__() {
+                ClassName = @"IRenderer",
+                ID = 52};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Enumeration__Implementation__() {
+                ClassName = @"Toolkit",
+                ID = 53};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
                 TableName = @"ControlInfos",
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"ControlInfo",
                 ID = 54};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Enumeration__Implementation__() {
+                ClassName = @"VisualType",
+                ID = 55};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
                 TableName = @"TestCustomObjects",
@@ -2516,13 +2817,19 @@ namespace Kistl.Objects.Server
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"Struct",
+                Description = @"Metadefinition Object for Structs.",
                 ID = 62};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Struct__Implementation__() {
+                ClassName = @"TestPhoneStruct",
+                ID = 63};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
                 TableName = @"StructProperties",
                 IsSimpleObject = false,
                 IsFrozenObject = false,
                 ClassName = @"StructProperty",
+                Description = @"Metadefinition Object for Struct Properties.",
                 ID = 64};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
@@ -2804,26 +3111,31 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
                 Value = 0,
                 Name = @"First",
+                Description = @"First Test Entry",
                 ID = 2};
             _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
             { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
                 Value = 1,
                 Name = @"Second",
+                Description = @"Second Test Entry",
                 ID = 3};
             _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
             { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
                 Value = 0,
                 Name = @"WPF",
+                Description = @"WPF Toolkit",
                 ID = 5};
             _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
             { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
                 Value = 1,
                 Name = @"ASPNET",
+                Description = @"ASPNET Toolkit",
                 ID = 6};
             _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
             { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
                 Value = 2,
                 Name = @"TEST",
+                Description = @"TEST Toolkit",
                 ID = 7};
             _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
             { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
@@ -3403,6 +3715,36 @@ namespace Kistl.Objects.Server
             _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
             { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.NotNullableConstraint__Implementation__() {
                 ID = 202};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.StringRangeConstraint__Implementation__() {
+                MaxLength = 200,
+                MinLength = 0,
+                ID = 203};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.StringRangeConstraint__Implementation__() {
+                MaxLength = 200,
+                MinLength = 0,
+                ID = 204};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.StringRangeConstraint__Implementation__() {
+                MaxLength = 200,
+                MinLength = 0,
+                ID = 205};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.StringRangeConstraint__Implementation__() {
+                MaxLength = 200,
+                MinLength = 0,
+                ID = 206};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.StringRangeConstraint__Implementation__() {
+                MaxLength = 200,
+                MinLength = 0,
+                ID = 207};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.StringRangeConstraint__Implementation__() {
+                MaxLength = 200,
+                MinLength = 0,
+                ID = 208};
             _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
             _Kistl_App_Base_Constraint.ForEach<IDataObject>(obj => this.Attach(obj));
             {var obj = this.Find<Kistl.App.Base.StringProperty>(1);
@@ -4154,6 +4496,36 @@ namespace Kistl.Objects.Server
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(202));
             };
+            {var obj = this.Find<Kistl.App.Base.StringProperty>(175);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(207));
+            };
+            {var obj = this.Find<Kistl.App.Base.StringProperty>(176);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(206));
+            };
+            {var obj = this.Find<Kistl.App.Base.StringProperty>(177);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(36);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(205));
+            };
+            {var obj = this.Find<Kistl.App.Base.StringProperty>(178);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(46);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(204));
+            };
+            {var obj = this.Find<Kistl.App.Base.StringProperty>(179);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(18);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(203));
+            };
+            {var obj = this.Find<Kistl.App.Base.StringProperty>(180);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(208));
+            };
             {var obj = this.Find<Kistl.App.Base.Method>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
@@ -4765,11 +5137,11 @@ namespace Kistl.Objects.Server
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(31));
             };
             {var obj = this.Find<Kistl.App.Base.Module>(4);
-            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(53));
-            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(55));
-            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(52));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(27));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(52));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(53));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(54));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(55));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(66));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(67));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(68));
@@ -4780,14 +5152,14 @@ namespace Kistl.Objects.Server
             obj.Assemblies.Add(this.Find<Kistl.App.Base.Assembly>(15));
             };
             {var obj = this.Find<Kistl.App.Base.Module>(5);
-            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(50));
-            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(63));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(48));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(50));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(51));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(58));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(59));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(60));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(61));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(63));
             };
             {var obj = this.Find<Kistl.App.GUI.Icon>(1);
             };
@@ -5430,62 +5802,6 @@ namespace Kistl.Objects.Server
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.InvokeOnObjectClass = this.Find<Kistl.App.Base.DataType>(76);
             };
-            {var obj = this.Find<Kistl.App.Base.Enumeration>(50);
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(2));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(3));
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
-            };
-            {var obj = this.Find<Kistl.App.Base.Enumeration>(53);
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(5));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(6));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(7));
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(4);
-            };
-            {var obj = this.Find<Kistl.App.Base.Enumeration>(55);
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(40));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(41));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(42));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(43));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(44));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(45));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(46));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(47));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(48));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(49));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(50));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(51));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(52));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(53));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(54));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(55));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(56));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(57));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(58));
-            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(59));
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
-            };
-            {var obj = this.Find<Kistl.App.Base.Struct>(63);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(127));
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(128));
-            };
-            {var obj = this.Find<Kistl.App.Base.Interface>(48);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(1);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(107));
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(108));
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(111));
-            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(90));
-            };
-            {var obj = this.Find<Kistl.App.Base.Interface>(52);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(113));
-            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(96));
-            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(97));
-            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(98));
-            };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(2);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
@@ -5543,6 +5859,7 @@ namespace Kistl.Objects.Server
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(41));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(72));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(170));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(176));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(1));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(13));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(14));
@@ -5608,6 +5925,7 @@ namespace Kistl.Objects.Server
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(81));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(96));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(124));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(180));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(19));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(20));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(21));
@@ -5673,6 +5991,7 @@ namespace Kistl.Objects.Server
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(43));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(44));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(82));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(179));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(22));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(23));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(24));
@@ -5804,6 +6123,7 @@ namespace Kistl.Objects.Server
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(45));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(69));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(80));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(175));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(74));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(75));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(76));
@@ -5830,6 +6150,7 @@ namespace Kistl.Objects.Server
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(93));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(94));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(95));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(177));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(79));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(80));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(81));
@@ -5915,6 +6236,7 @@ namespace Kistl.Objects.Server
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(100));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(135));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(136));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(178));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(87));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(88));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(89));
@@ -5927,6 +6249,19 @@ namespace Kistl.Objects.Server
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(104));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(64));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(65));
+            };
+            {var obj = this.Find<Kistl.App.Base.Interface>(48);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(1);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(107));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(108));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(111));
+            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(90));
+            };
+            {var obj = this.Find<Kistl.App.Base.Enumeration>(50);
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(2));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(3));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(51);
             obj.ImplementsInterfaces.Add(this.Find<Kistl.App.Base.Interface>(48));
@@ -5941,6 +6276,21 @@ namespace Kistl.Objects.Server
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(93));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(95));
             };
+            {var obj = this.Find<Kistl.App.Base.Interface>(52);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(113));
+            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(96));
+            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(97));
+            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(98));
+            };
+            {var obj = this.Find<Kistl.App.Base.Enumeration>(53);
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(5));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(6));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(7));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(4);
+            };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(54);
             obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(114));
@@ -5952,6 +6302,29 @@ namespace Kistl.Objects.Server
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(142));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(143));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(94));
+            };
+            {var obj = this.Find<Kistl.App.Base.Enumeration>(55);
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(40));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(41));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(42));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(43));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(44));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(45));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(46));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(47));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(48));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(49));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(50));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(51));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(52));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(53));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(54));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(55));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(56));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(57));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(58));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(59));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(58);
             obj.Module = this.Find<Kistl.App.Base.Module>(5);
@@ -5985,6 +6358,11 @@ namespace Kistl.Objects.Server
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(11);
+            };
+            {var obj = this.Find<Kistl.App.Base.Struct>(63);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(127));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(128));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(64);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(7);
@@ -6683,6 +7061,24 @@ namespace Kistl.Objects.Server
             };
             {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(202);
             obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(174);
+            };
+            {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(203);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(179);
+            };
+            {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(204);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(178);
+            };
+            {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(205);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(177);
+            };
+            {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(206);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(176);
+            };
+            {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(207);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(175);
+            };
+            {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(208);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(180);
             };
             _initialized = true;
         }

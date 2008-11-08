@@ -1,3 +1,5 @@
+#define HACK_FOR_DAVIDS_GUI
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -177,7 +179,11 @@ namespace Kistl.API
 
         public bool IsReadonly
         {
+#if HACK_FOR_DAVIDS_GUI
+            get { return false; }
+#else
             get { return _initialized; }
+#endif
         }
 
         public IDataObject Create(Type type)

@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: DateTimeProperties
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for DateTime Properties.
     /// </summary>
     public interface DateTimeProperty : Kistl.App.Base.ValueTypeProperty
     {

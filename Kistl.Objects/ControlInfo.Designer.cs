@@ -21,10 +21,6 @@ namespace Kistl.App.GUI
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: ControlInfos
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface ControlInfo : IDataObject
     {
         

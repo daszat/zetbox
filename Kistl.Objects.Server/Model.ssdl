@@ -429,6 +429,7 @@
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="fk_Module" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -470,6 +471,7 @@
     <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="IsDisplayable" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="IntProperty">
     <Key>
@@ -517,6 +519,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Auftrag">
     <Key>
@@ -616,6 +619,7 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="false" />
     <Property Name="fk_DefaultIcon" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="BaseParameter">
     <Key>
@@ -627,6 +631,7 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="StringParameter">
     <Key>
@@ -693,6 +698,7 @@
     <Property Name="fk_Enumeration" Type="int" />
     <Property Name="Value" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="EnumerationProperty">
     <Key>

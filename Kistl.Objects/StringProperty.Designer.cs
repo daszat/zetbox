@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: StringProperties
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for String Properties.
     /// </summary>
     public interface StringProperty : Kistl.App.Base.ValueTypeProperty
     {

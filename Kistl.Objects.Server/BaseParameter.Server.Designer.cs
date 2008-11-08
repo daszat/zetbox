@@ -44,6 +44,8 @@ namespace Kistl.App.Base
         
         private bool _IsReturnParameter;
         
+        private string _Description;
+        
         public BaseParameter__Implementation__()
         {
         }
@@ -210,6 +212,25 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<BaseParameter> OnToString_BaseParameter;
         
         public event ObjectEventHandler<BaseParameter> OnPreSave_BaseParameter;
@@ -283,6 +304,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.IsReturnParameter))
                             .Select(c => c.GetErrorText(this, this.IsReturnParameter))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(177).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -315,6 +342,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._IsList, sw);
             BinarySerializer.ToBinary(this._IsReturnParameter, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -325,6 +353,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._IsList, sr);
             BinarySerializer.FromBinary(out this._IsReturnParameter, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
         
         public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);

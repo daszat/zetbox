@@ -35,6 +35,8 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.Constraint> _Constraints;
         
+        private string _Description;
+        
         public BaseProperty__Implementation__()
         {
         }
@@ -159,6 +161,24 @@ namespace Kistl.App.Base
             }
         }
         
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<BaseProperty> OnToString_BaseProperty;
         
         public event ObjectEventHandler<BaseProperty> OnPreSave_BaseProperty;
@@ -203,6 +223,7 @@ namespace Kistl.App.Base
             ((BaseProperty__Implementation__)obj).AltText = this.AltText;
             ((BaseProperty__Implementation__)obj).fk_Module = this.fk_Module;
             if(this._Constraints != null) this._Constraints.ApplyChanges(((BaseProperty__Implementation__)obj)._Constraints); else ((BaseProperty__Implementation__)obj)._Constraints = null; ((BaseProperty__Implementation__)obj).NotifyPropertyChanged("Constraints");
+            ((BaseProperty__Implementation__)obj).Description = this.Description;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -245,6 +266,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Constraints))
                             .Select(c => c.GetErrorText(this, this.Constraints))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(176).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -286,6 +313,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._PropertyName, sw);
             BinarySerializer.ToBinary(this._AltText, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -296,6 +324,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._AltText, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             this._Constraints = new BackReferenceCollection<Kistl.App.Base.Constraint>("ConstrainedProperty", this); BinarySerializer.FromBinary(this._Constraints, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
         
         public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);

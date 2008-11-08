@@ -69,8 +69,16 @@ namespace Kistl.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
-            int v = (int)constrainedValueParam;
-            e.Result &= (obj.Min <= v) && (v <= obj.Max);
+            // TODO: David: da hab ich NULL reinbekommen - kann/soll das sein?
+            if (constrainedValueParam != null)
+            {
+                int v = (int)constrainedValueParam;
+                e.Result &= (obj.Min <= v) && (v <= obj.Max);
+            }
+            else
+            {
+                e.Result &= true;
+            }
         }
 
         public void OnGetErrorText_IntegerRangeConstraint(

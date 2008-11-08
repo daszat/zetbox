@@ -21,10 +21,6 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: Tasks
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface Task : IDataObject
     {
         

@@ -46,6 +46,8 @@ namespace Kistl.App.Base
         
         private bool _IsDisplayable;
         
+        private string _Description;
+        
         public Method__Implementation__()
         {
         }
@@ -235,6 +237,25 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -312,6 +333,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.IsDisplayable))
                             .Select(c => c.GetErrorText(this, this.IsDisplayable))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(180).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -334,6 +361,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this.Parameter.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this._IsDisplayable, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -343,6 +371,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._MethodName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._IsDisplayable, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
         
         public delegate void GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.BaseParameter> e);

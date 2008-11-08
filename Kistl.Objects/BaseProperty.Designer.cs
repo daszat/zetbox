@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: BaseProperties
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
     public interface BaseProperty : IDataObject
     {
@@ -64,27 +63,24 @@ namespace Kistl.App.Base
         }
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Description of this Property
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
-        string GetPropertyTypeString();
+        string Description
+        {
+            get;
+            set;
+        }
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Returns the String representation of this Property Meta Object.
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
+        string GetPropertyTypeString();
+        
         string GetGUIRepresentation();
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
         System.Type GetPropertyType();
     }
 }

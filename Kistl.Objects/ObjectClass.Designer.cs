@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: ObjectClasses
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for ObjectClasses.
     /// </summary>
     public interface ObjectClass : Kistl.App.Base.DataType
     {
@@ -80,12 +79,6 @@ namespace Kistl.App.Base
             set;
         }
         
-        /// <summary>
-        /// TODO: Add Description to Methods
-        /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
         IList<Kistl.App.Base.Method> GetInheritedMethods();
     }
 }

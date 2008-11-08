@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: Properties
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
     public interface Property : Kistl.App.Base.BaseProperty
     {

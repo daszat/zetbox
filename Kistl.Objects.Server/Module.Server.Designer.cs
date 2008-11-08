@@ -39,6 +39,8 @@ namespace Kistl.App.Base
         
         private EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.Assembly__Implementation__> AssembliesWrapper;
         
+        private string _Description;
+        
         public Module__Implementation__()
         {
         }
@@ -136,6 +138,25 @@ namespace Kistl.App.Base
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<Module> OnToString_Module;
         
         public event ObjectEventHandler<Module> OnPreSave_Module;
@@ -199,6 +220,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Assemblies))
                             .Select(c => c.GetErrorText(this, this.Assemblies))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(179).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -208,6 +235,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Namespace, sw);
             BinarySerializer.ToBinary(this._ModuleName, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -215,6 +243,7 @@ namespace Kistl.App.Base
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Namespace, sr);
             BinarySerializer.FromBinary(out this._ModuleName, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
     }
 }

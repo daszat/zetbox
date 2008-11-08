@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: IntParameters
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Int Parameter.
     /// </summary>
     public interface IntParameter : Kistl.App.Base.BaseParameter
     {

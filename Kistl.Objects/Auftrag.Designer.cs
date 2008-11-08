@@ -21,10 +21,6 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: Auftraege
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface Auftrag : IDataObject
     {
         
@@ -71,7 +67,7 @@ namespace Kistl.App.Projekte
         }
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Testmethode zum Erstellen von Rechnungen mit Word
         /// </summary>
         void RechnungErstellen();
     }

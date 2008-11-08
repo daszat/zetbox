@@ -31,6 +31,8 @@ namespace Kistl.App.Base
         
         private string _Name;
         
+        private string _Description;
+        
         public EnumerationEntry__Implementation__()
         {
         }
@@ -103,6 +105,24 @@ namespace Kistl.App.Base
             }
         }
         
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<EnumerationEntry> OnToString_EnumerationEntry;
         
         public event ObjectEventHandler<EnumerationEntry> OnPreSave_EnumerationEntry;
@@ -139,6 +159,7 @@ namespace Kistl.App.Base
             ((EnumerationEntry__Implementation__)obj).fk_Enumeration = this.fk_Enumeration;
             ((EnumerationEntry__Implementation__)obj).Value = this.Value;
             ((EnumerationEntry__Implementation__)obj).Name = this.Name;
+            ((EnumerationEntry__Implementation__)obj).Description = this.Description;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -168,6 +189,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Name))
                             .Select(c => c.GetErrorText(this, this.Name))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(178).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -178,6 +205,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_Enumeration, sw);
             BinarySerializer.ToBinary(this._Value, sw);
             BinarySerializer.ToBinary(this._Name, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -186,6 +214,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Enumeration, sr);
             BinarySerializer.FromBinary(out this._Value, sr);
             BinarySerializer.FromBinary(out this._Name, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
     }
 }

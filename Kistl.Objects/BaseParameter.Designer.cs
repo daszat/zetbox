@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: BaseParameters
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Parameter. This class is abstract.
     /// </summary>
     public interface BaseParameter : IDataObject
     {
@@ -74,19 +73,22 @@ namespace Kistl.App.Base
         }
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Description of this Parameter
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
+        string Description
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
         string GetParameterTypeString();
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
         System.Type GetParameterType();
     }
 }

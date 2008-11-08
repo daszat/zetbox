@@ -37,6 +37,8 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvocations;
         
+        private string _Description;
+        
         public DataType__Implementation__()
         {
         }
@@ -183,6 +185,24 @@ namespace Kistl.App.Base
             }
         }
         
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<DataType> OnToString_DataType;
         
         public event ObjectEventHandler<DataType> OnPreSave_DataType;
@@ -226,6 +246,7 @@ namespace Kistl.App.Base
             if(this._Methods != null) this._Methods.ApplyChanges(((DataType__Implementation__)obj)._Methods); else ((DataType__Implementation__)obj)._Methods = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("Methods");
             ((DataType__Implementation__)obj).fk_DefaultIcon = this.fk_DefaultIcon;
             if(this._MethodInvocations != null) this._MethodInvocations.ApplyChanges(((DataType__Implementation__)obj)._MethodInvocations); else ((DataType__Implementation__)obj)._MethodInvocations = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("MethodInvocations");
+            ((DataType__Implementation__)obj).Description = this.Description;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -276,6 +297,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.MethodInvocations))
                             .Select(c => c.GetErrorText(this, this.MethodInvocations))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(175).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -306,6 +333,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._ClassName, sw);
             BinarySerializer.ToBinary(this.fk_DefaultIcon, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -317,6 +345,7 @@ namespace Kistl.App.Base
             this._Methods = new BackReferenceCollection<Kistl.App.Base.Method>("ObjectClass", this); BinarySerializer.FromBinary(this._Methods, sr);
             BinarySerializer.FromBinary(out this._fk_DefaultIcon, sr);
             this._MethodInvocations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>("InvokeOnObjectClass", this); BinarySerializer.FromBinary(this._MethodInvocations, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
         
         public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> e);

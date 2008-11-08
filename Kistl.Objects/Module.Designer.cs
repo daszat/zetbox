@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: Modules
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Modules.
     /// </summary>
     public interface Module : IDataObject
     {
@@ -60,6 +59,15 @@ namespace Kistl.App.Base
         ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get;
+        }
+        
+        /// <summary>
+        /// Description of this Module
+        /// </summary>
+        string Description
+        {
+            get;
+            set;
         }
     }
 }

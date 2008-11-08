@@ -21,9 +21,6 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
-    /// <summary>
-    /// TODO: Add Description to DataType
-    /// </summary>
     public interface TestPhoneStruct : IStruct
     {
         

@@ -291,7 +291,16 @@ namespace Kistl.Server.Generators
                     {
                         foreach (ObjectReferenceProperty prop in objClass.Properties.OfType<ObjectReferenceProperty>())
                         {
-                            object val = obj.GetPropertyValue<object>(prop.PropertyName);
+                            object val;
+                            try
+                            {
+                                val = obj.GetPropertyValue<object>(prop.PropertyName);
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // TODO: Hack!
+                                continue;
+                            }
                             if (val == null) continue;
 
                             string refTypeString = prop.GetPropertyTypeString();
@@ -312,7 +321,17 @@ namespace Kistl.Server.Generators
 
                         foreach (BackReferenceProperty prop in objClass.Properties.OfType<BackReferenceProperty>())
                         {
-                            IEnumerable val = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
+                            IEnumerable val;
+                            try
+                            {
+                                val = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // TODO: Hack!
+                                continue;
+                            }
+
                             if (val == null) continue;
 
                             string refTypeString = prop.GetPropertyTypeString();
@@ -361,7 +380,16 @@ namespace Kistl.Server.Generators
                         {
                             if (prop is ObjectReferenceProperty) continue;
 
-                            object val = obj.GetPropertyValue<object>(prop.PropertyName);
+                            object val;
+                            try
+                            {
+                                val = obj.GetPropertyValue<object>(prop.PropertyName);
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // TODO: Hack!
+                                continue;
+                            }
                             if (val == null) continue;
 
                             sb.AppendFormat("                {0} = ", prop.PropertyName);
@@ -402,7 +430,16 @@ namespace Kistl.Server.Generators
                         {
                             if (prop is ObjectReferenceProperty) continue;
 
-                            IEnumerable valList = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
+                            IEnumerable valList;
+                            try
+                            {
+                                valList = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // TODO: Hack!
+                                continue;
+                            }
                             if (valList == null) continue;
 
                             foreach (object val in valList)
@@ -596,7 +633,7 @@ namespace Kistl.Server.Generators
                 current.code_class.BaseTypes.Add(i.Module.Namespace + "." + i.ClassName);
             }
 
-            current.code_class.AddSummaryComment("Mapped to: " + current.objClass.TableName + "\nTODO: Add description to a DataType");
+            current.code_class.AddSummaryComment(current.objClass.Description);
 
             // Properties
             GenerateInterfaceProperties((CurrentObjectClass)current.Clone(), current.objClass.Properties);
@@ -688,7 +725,7 @@ namespace Kistl.Server.Generators
                     codeProp = current.code_class.CreateProperty(p.ToCodeTypeReference(current.task), p.PropertyName);
                 }
 
-                codeProp.AddSummaryComment(p.AltText);
+                codeProp.AddSummaryComment(p.Description);
             }
         }
 
@@ -705,10 +742,10 @@ namespace Kistl.Server.Generators
 
                 BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
                 CodeMemberMethod m = current.code_class.CreateMethod(method.MethodName, returnParam.ToCodeTypeReference());
-                m.AddSummaryComment("TODO: Add Description to Methods");
+                m.AddSummaryComment(method.Description);
                 if (returnParam != null)
                 {
-                    m.AddReturnsComment("TODO: Add Description to Parameter");
+                    m.AddReturnsComment(returnParam.Description);
                 }
 
                 // added inverse sort by ID to stabilise order of parameters
@@ -717,7 +754,7 @@ namespace Kistl.Server.Generators
                 {
                     m.Parameters.Add(new CodeParameterDeclarationExpression(
                         new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
-                    m.AddParamComment(param.ParameterName, "TODO: Add Description to Parameter");
+                    m.AddParamComment(param.ParameterName, param.Description);
                 }
             }
         }
@@ -736,7 +773,7 @@ namespace Kistl.Server.Generators
 
             // Create Class
             current.code_class = current.code_namespace.CreateInterface(current.@interface.ClassName);
-            current.code_class.AddSummaryComment("\nTODO: Add description to a DataType");
+            current.code_class.AddSummaryComment(current.@interface.Description);
 
             // Properties
             GenerateInterfaceProperties((CurrentInterface)current.Clone(), current.@interface.Properties);
@@ -765,7 +802,7 @@ namespace Kistl.Server.Generators
 
             // Create Struct class
             current.code_class = current.code_namespace.CreateInterface(current.@struct.ClassName, "IStruct");
-            current.code_class.AddSummaryComment("TODO: Add Description to DataType");
+            current.code_class.AddSummaryComment(current.@struct.Description);
 
             // Create Properties
             GenerateInterfaceProperties((CurrentStruct)current.Clone(), current.@struct.Properties);
@@ -829,12 +866,12 @@ namespace Kistl.Server.Generators
 
             // Create Class
             current.code_class = current.code_namespace.CreateEnum(current.enumeration.ClassName);
-            current.code_class.AddSummaryComment("TODO: Add Description to DataType");
+            current.code_class.AddSummaryComment(current.enumeration.Description);
 
             foreach (EnumerationEntry e in current.enumeration.EnumerationEntries)
             {
                 CodeMemberField mf = current.code_class.CreateField(typeof(int), e.Name, e.Value.ToString());
-                mf.AddSummaryComment(e.Name + "\nTODO: Add Description to EnumerationEntry");
+                mf.AddSummaryComment(e.Description);
             }
 
             GenerateEnumerations(current);

@@ -37,6 +37,8 @@ namespace Kistl.App.Base
         
         private bool _IsDisplayable;
         
+        private string _Description;
+        
         public Method__Implementation__()
         {
         }
@@ -181,6 +183,24 @@ namespace Kistl.App.Base
             }
         }
         
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<Method> OnToString_Method;
         
         public event ObjectEventHandler<Method> OnPreSave_Method;
@@ -222,6 +242,7 @@ namespace Kistl.App.Base
             if(this._MethodInvokations != null) this._MethodInvokations.ApplyChanges(((Method__Implementation__)obj)._MethodInvokations); else ((Method__Implementation__)obj)._MethodInvokations = null; ((Method__Implementation__)obj).NotifyPropertyChanged("MethodInvokations");
             if(this._Parameter != null) this._Parameter.ApplyChanges(((Method__Implementation__)obj)._Parameter); else ((Method__Implementation__)obj)._Parameter = null; ((Method__Implementation__)obj).NotifyPropertyChanged("Parameter");
             ((Method__Implementation__)obj).IsDisplayable = this.IsDisplayable;
+            ((Method__Implementation__)obj).Description = this.Description;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -271,6 +292,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.IsDisplayable))
                             .Select(c => c.GetErrorText(this, this.IsDisplayable))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(180).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -292,6 +319,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._MethodName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._IsDisplayable, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -302,6 +330,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             this._Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>("Method", this); BinarySerializer.FromBinary(this._Parameter, sr);
             BinarySerializer.FromBinary(out this._IsDisplayable, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
         
         public delegate void GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.BaseParameter> e);

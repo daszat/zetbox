@@ -22,8 +22,7 @@ namespace Kistl.App.Test
     
     
     /// <summary>
-    /// 
-    /// TODO: Add description to a DataType
+    /// A Test Interface
     /// </summary>
     public interface ITestInterface
     {
@@ -55,12 +54,6 @@ namespace Kistl.App.Test
             set;
         }
         
-        /// <summary>
-        /// TODO: Add Description to Methods
-        /// </summary>
-        /// <param name="DateTimeParam">
-        /// TODO: Add Description to Parameter
-        /// </param>
         void TestMethod(System.DateTime DateTimeParam);
     }
 }

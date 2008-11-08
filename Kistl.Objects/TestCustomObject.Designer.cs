@@ -21,10 +21,6 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: TestCustomObjects
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface TestCustomObject : IDataObject
     {
         

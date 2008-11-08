@@ -282,6 +282,7 @@
     <Property Name="AltText" Type="String" MaxLength="200" Nullable="true" />
     <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_BaseProperty_Module_Module" FromRole="B_BaseProperty" ToRole="A_Module" />
     <NavigationProperty Name="Constraints__Implementation__" Relationship="Model.FK_Constraint_BaseProperty_ConstrainedProperty" FromRole="A_BaseProperty" ToRole="B_Constraint" />
+    <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -313,6 +314,7 @@
     <NavigationProperty Name="MethodInvokations__Implementation__" Relationship="Model.FK_MethodInvocation_Method_Method" FromRole="A_Method" ToRole="B_MethodInvocation" />
     <NavigationProperty Name="Parameter__Implementation__" Relationship="Model.FK_BaseParameter_Method_Method" FromRole="A_Method" ToRole="B_BaseParameter" />
     <Property Name="IsDisplayable" Type="Boolean" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
@@ -334,6 +336,7 @@
     <Property Name="ModuleName" Type="String" MaxLength="200" Nullable="false" />
     <NavigationProperty Name="DataTypes__Implementation__" Relationship="Model.FK_DataType_Module_Module" FromRole="A_Module" ToRole="B_DataType" />
     <NavigationProperty Name="Assemblies__Implementation__" Relationship="Model.FK_Assembly_Module_Module" FromRole="A_Module" ToRole="B_Assembly" />
+    <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Auftrag">
     <Key>
@@ -430,6 +433,7 @@
     <NavigationProperty Name="Methods__Implementation__" Relationship="Model.FK_Method_DataType_ObjectClass" FromRole="A_DataType" ToRole="B_Method" />
     <NavigationProperty Name="DefaultIcon__Implementation__" Relationship="Model.FK_DataType_Icon_DefaultIcon" FromRole="B_DataType" ToRole="A_Icon" />
     <NavigationProperty Name="MethodInvocations__Implementation__" Relationship="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass" FromRole="A_DataType" ToRole="B_MethodInvocation" />
+    <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="BaseParameter">
     <Key>
@@ -441,6 +445,7 @@
     <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_BaseParameter_Module_Module" FromRole="B_BaseParameter" ToRole="A_Module" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsReturnParameter" Type="Boolean" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter" />
   <EntityType Name="IntParameter" BaseType="Model.BaseParameter" />
@@ -466,6 +471,7 @@
     <NavigationProperty Name="Enumeration__Implementation__" Relationship="Model.FK_EnumerationEntry_Enumeration_Enumeration" FromRole="B_EnumerationEntry" ToRole="A_Enumeration" />
     <Property Name="Value" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="EnumerationProperty" BaseType="Model.ValueTypeProperty">
     <NavigationProperty Name="Enumeration__Implementation__" Relationship="Model.FK_EnumerationProperty_Enumeration_Enumeration" FromRole="B_EnumerationProperty" ToRole="A_Enumeration" />

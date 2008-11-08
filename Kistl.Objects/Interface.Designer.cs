@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: Interfaces
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Interfaces.
     /// </summary>
     public interface Interface : Kistl.App.Base.DataType
     {

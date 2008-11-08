@@ -21,10 +21,6 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: Taetigkeiten
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface Taetigkeit : IDataObject
     {
         

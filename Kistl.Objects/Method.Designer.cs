@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: Methods
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for Methods.
     /// </summary>
     public interface Method : IDataObject
     {
@@ -75,11 +74,17 @@ namespace Kistl.App.Base
         }
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Description of this Method
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
+        string Description
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// Returns the Return Parameter Meta Object of this Method Meta Object.
+        /// </summary>
         Kistl.App.Base.BaseParameter GetReturnParameter();
     }
 }

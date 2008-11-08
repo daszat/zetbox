@@ -33,6 +33,8 @@ namespace Kistl.App.Base
         
         private BackReferenceCollection<Kistl.App.Base.Assembly> _Assemblies;
         
+        private string _Description;
+        
         public Module__Implementation__()
         {
         }
@@ -113,6 +115,24 @@ namespace Kistl.App.Base
             }
         }
         
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Description != value)
+                {
+                    NotifyPropertyChanging("Description"); 
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        
         public event ToStringHandler<Module> OnToString_Module;
         
         public event ObjectEventHandler<Module> OnPreSave_Module;
@@ -150,6 +170,7 @@ namespace Kistl.App.Base
             ((Module__Implementation__)obj).ModuleName = this.ModuleName;
             if(this._DataTypes != null) this._DataTypes.ApplyChanges(((Module__Implementation__)obj)._DataTypes); else ((Module__Implementation__)obj)._DataTypes = null; ((Module__Implementation__)obj).NotifyPropertyChanged("DataTypes");
             if(this._Assemblies != null) this._Assemblies.ApplyChanges(((Module__Implementation__)obj)._Assemblies); else ((Module__Implementation__)obj)._Assemblies = null; ((Module__Implementation__)obj).NotifyPropertyChanged("Assemblies");
+            ((Module__Implementation__)obj).Description = this.Description;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -187,6 +208,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Assemblies))
                             .Select(c => c.GetErrorText(this, this.Assemblies))
                             .ToArray());
+                case "Description":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(179).Constraints
+                            .Where(c => !c.IsValid(this, this.Description))
+                            .Select(c => c.GetErrorText(this, this.Description))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -196,6 +223,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Namespace, sw);
             BinarySerializer.ToBinary(this._ModuleName, sw);
+            BinarySerializer.ToBinary(this._Description, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -203,6 +231,7 @@ namespace Kistl.App.Base
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._Namespace, sr);
             BinarySerializer.FromBinary(out this._ModuleName, sr);
+            BinarySerializer.FromBinary(out this._Description, sr);
         }
     }
 }

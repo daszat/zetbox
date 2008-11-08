@@ -21,10 +21,6 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: Kunden
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface Kunde : IDataObject
     {
         

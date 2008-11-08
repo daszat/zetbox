@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: CLRObjectParameters
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for CLR Object Parameter.
     /// </summary>
     public interface CLRObjectParameter : Kistl.App.Base.BaseParameter
     {

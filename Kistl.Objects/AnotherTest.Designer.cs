@@ -21,10 +21,6 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: AnotherTests
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface AnotherTest : IDataObject
     {
     }

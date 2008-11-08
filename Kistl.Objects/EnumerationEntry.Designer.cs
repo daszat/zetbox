@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: EnumerationEntries
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for an Enumeration Entry.
     /// </summary>
     public interface EnumerationEntry : IDataObject
     {
@@ -50,6 +49,15 @@ namespace Kistl.App.Base
         /// CLR name of this entry
         /// </summary>
         string Name
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// Description of this Enumeration Entry
+        /// </summary>
+        string Description
         {
             get;
             set;

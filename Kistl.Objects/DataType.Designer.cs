@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: DataTypes
-    /// TODO: Add description to a DataType
+    /// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
     /// </summary>
     public interface DataType : IDataObject
     {
@@ -80,19 +79,22 @@ namespace Kistl.App.Base
         }
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Description of this DataType
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
+        string Description
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
         string GetDataTypeString();
         
         /// <summary>
-        /// TODO: Add Description to Methods
+        /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
-        /// <returns>
-        /// TODO: Add Description to Parameter
-        /// </returns>
         System.Type GetDataType();
     }
 }

@@ -28,6 +28,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
           <ScalarProperty Name="AltText" ColumnName="AltText" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
@@ -107,6 +108,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="MethodName" ColumnName="MethodName" />
           <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,6 +118,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Namespace" ColumnName="Namespace" />
           <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -208,6 +211,7 @@
         <MappingFragment StoreEntitySet="DataType">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
@@ -241,6 +245,7 @@
           <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameter)">
@@ -286,6 +291,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Value" ColumnName="Value" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

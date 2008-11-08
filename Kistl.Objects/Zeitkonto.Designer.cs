@@ -21,10 +21,6 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     
     
-    /// <summary>
-    /// Mapped to: Zeitkonten
-    /// TODO: Add description to a DataType
-    /// </summary>
     public interface Zeitkonto : IDataObject
     {
         

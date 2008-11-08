@@ -22,8 +22,7 @@ namespace Kistl.App.Base
     
     
     /// <summary>
-    /// Mapped to: StringParameters
-    /// TODO: Add description to a DataType
+    /// Metadefinition Object for String Parameter.
     /// </summary>
     public interface StringParameter : Kistl.App.Base.BaseParameter
     {
