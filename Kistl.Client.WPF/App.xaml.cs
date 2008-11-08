@@ -117,7 +117,7 @@ namespace Kistl.Client.WPF
             }
 
             var desktop = new DesktopView();
-            desktop.DataContext = new DesktopModel(new UiThreadManager(), new AsyncThreadManager(), KistlContext.GetContext());
+            desktop.DataContext = new DesktopModel(new UiThreadManager(), new AsyncThreadManager(), FrozenContext.Single);
             desktop.Show();
         }
 

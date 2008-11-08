@@ -8,10 +8,10 @@ using System.ComponentModel;
 
 namespace Kistl.Client.PresenterModel
 {
-    public class ModuleModel : PresentableModel
+    public class ModuleModel : DataObjectModel
     {
         public ModuleModel(IThreadManager uiManager, IThreadManager asyncManager, Module mdl)
-            : base(uiManager, asyncManager)
+            : base(uiManager, asyncManager, mdl)
         {
             ObjectClasses = new ObservableCollection<DataObjectModel>();
             _module = mdl;
@@ -23,9 +23,6 @@ namespace Kistl.Client.PresenterModel
 
         public ObservableCollection<DataObjectModel> ObjectClasses { get; private set; }
 
-        // TODO: proxying implementations might block on simple property accesses too.
-        public string Name { get { UI.Verify(); return _module.ModuleName; } }
-
         #endregion
 
         #region Async handlers and UI callbacks
@@ -35,7 +32,7 @@ namespace Kistl.Client.PresenterModel
             Async.Verify();
             lock (_module.Context)
             {
-                var classes = _module.Context.GetQuery<DataType>().Where(oc => oc.Module.ID == _module.ID).ToList();
+                var classes = _module.Context.GetQuery<DataType>().Where(oc => oc.Module.ID == _module.ID).OrderBy(oc => oc.ClassName).ToList();
                 UI.Queue(() =>
                 {
                     foreach (var oc in classes)

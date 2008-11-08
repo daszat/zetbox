@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.PresenterModel
 {
@@ -19,10 +21,10 @@ namespace Kistl.Client.PresenterModel
         {
             _propertyModels = new ObservableCollection<PresentableModel>();
             _object = obj;
+            _object.PropertyChanged += ObjectPropertyChanged;
             Async.Queue(() =>
             {
-                _toStringCache = _object.ToString();
-                InvokePropertyChanged("Name");
+                UpdateViewCache();
 
                 FetchProperties();
 
@@ -70,6 +72,25 @@ namespace Kistl.Client.PresenterModel
             }
         }
 
+        private string _iconPathCache;
+        public string IconPath
+        {
+            get
+            {
+                UI.Verify();
+                return _iconPathCache;
+            }
+            set
+            {
+                UI.Verify();
+                if (value != _iconPathCache)
+                {
+                    _iconPathCache = value;
+                    OnPropertyChanged("IconPath");
+                }
+            }
+        }
+
         #endregion
 
         #region Async handlers and UI callbacks
@@ -82,6 +103,48 @@ namespace Kistl.Client.PresenterModel
                 ObjectClass cls = _object.GetObjectClass(_object.Context);
                 var props = cls.Properties;
                 UI.Queue(() => SetClassPropertyModels(cls, props));
+            }
+        }
+
+        private static string GetIconPath(string name)
+        {
+            string result = ApplicationContext.Current.Configuration.Client.DocumentStore
+                + @"\GUI.Icons\"
+                + name;
+            result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
+            return result;
+        }
+
+        private void UpdateViewCache()
+        {
+            Async.Verify();
+            lock (_object.Context)
+            {
+                _toStringCache = _object.ToString();
+                InvokePropertyChanged("Name");
+
+                Icon icon = null;
+                if (_object is Icon)
+                {
+                    icon = (Icon)_object;
+                }
+                else if (_object is ObjectClass)
+                {
+                    icon = ((ObjectClass)_object).DefaultIcon;
+                }
+                else
+                {
+                    icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
+                }
+                if (icon != null)
+                {
+                    string newIconPath = GetIconPath(icon.IconFile);
+                    UI.Queue(() => IconPath = newIconPath);
+                }
+                else
+                {
+                    UI.Queue(() => IconPath = "");
+                }
             }
         }
 
@@ -117,6 +180,23 @@ namespace Kistl.Client.PresenterModel
                         PropertyModels.Add(new ReferencePropertyModel(UI, Async, _object, orp));
                 }
             }
+        }
+
+        #endregion
+
+        #region PropertyChanged event handlers
+
+        private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Async.Verify();
+            lock (_object.Context)
+            {
+                // flag to the user that something's happening
+                UI.Queue(() => this.State = ModelState.Loading);
+                UpdateViewCache();
+            }
+            // all updates done
+            UI.Queue(() => this.State = ModelState.Active);
         }
 
         #endregion

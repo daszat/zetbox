@@ -183,7 +183,7 @@ namespace Kistl.API
 
         public IKistlContext GetReadonlyContext()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         /// <summary>
