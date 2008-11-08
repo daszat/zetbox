@@ -19,13 +19,14 @@ namespace Kistl.Client.PresenterModel
         {
             _propertyModels = new ObservableCollection<PresentableModel>();
             _object = obj;
-            Async.Queue(() => { 
+            Async.Queue(() =>
+            {
                 _toStringCache = _object.ToString();
                 InvokePropertyChanged("Name");
 
                 FetchProperties();
 
-                UI.Queue(() => this.State = ModelState.Active); 
+                UI.Queue(() => this.State = ModelState.Active);
             });
         }
 
@@ -89,9 +90,31 @@ namespace Kistl.Client.PresenterModel
             UI.Verify();
             foreach (var pm in props)
             {
-                if (pm is StringProperty)
+                if (pm is BoolProperty)
                 {
-                    PropertyModels.Add(new ValuePropertyModel<string>(UI, Async, _object, pm));
+                    PropertyModels.Add(new BoolPropertyModel(UI, Async, _object, (BoolProperty)pm));
+                }
+                else if (pm is DateTimeProperty)
+                {
+                    PropertyModels.Add(new DateTimePropertyModel(UI, Async, _object, (DateTimeProperty)pm));
+                }
+                else if (pm is DoubleProperty)
+                {
+                    PropertyModels.Add(new DoublePropertyModel(UI, Async, _object, (DoubleProperty)pm));
+                }
+                else if (pm is IntProperty)
+                {
+                    PropertyModels.Add(new IntPropertyModel(UI, Async, _object, (IntProperty)pm));
+                }
+                else if (pm is StringProperty)
+                {
+                    PropertyModels.Add(new StringPropertyModel(UI, Async, _object, (StringProperty)pm));
+                }
+                else if (pm is ObjectReferenceProperty)
+                {
+                    var orp = (ObjectReferenceProperty)pm;
+                    if (!orp.IsList)
+                        PropertyModels.Add(new ReferencePropertyModel(UI, Async, _object, orp));
                 }
             }
         }

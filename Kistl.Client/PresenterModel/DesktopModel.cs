@@ -16,11 +16,21 @@ namespace Kistl.Client.PresenterModel
         {
             _ctx = ctx;
             Modules = new ObservableCollection<ModuleModel>();
+            OpenObjects = new ObservableCollection<DataObjectModel>();
             Async.Queue(() => { LoadModules(); UI.Queue(() => this.State = ModelState.Active); });
         }
 
         #region public interface
 
+        /// <summary>
+        /// A list of "active" <see cref="IDataObjects"/>
+        /// </summary>
+        public ObservableCollection<DataObjectModel> OpenObjects { get; private set; }
+
+        /// <summary>
+        /// A collection of all <see cref="Module"/>s, to display as entry 
+        /// point into the object hierarchy
+        /// </summary>
         public ObservableCollection<ModuleModel> Modules { get; private set; }
 
         #endregion

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.DataObjectFullView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+             xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+             xmlns:client="clr-namespace:Kistl.Client.PresenterModel;assembly=Kistl.Client">
+    <DockPanel>
+        <ctrls:LoadingIndicator DockPanel.Dock="Top" />
+        <TextBlock Text="{Binding Name}"
+                   DockPanel.Dock="Top"
+                   HorizontalAlignment="Center" />
+        <ListView ItemsSource="{Binding PropertyModels}"
+                  BorderThickness="0" />
+    </DockPanel>
+</UserControl>

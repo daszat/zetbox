@@ -9,8 +9,8 @@ using Kistl.App.Base;
 
 namespace Kistl.Client.PresenterModel
 {
+
     public class ValuePropertyModel<TValue> : PresentableModel, IDataErrorInfo
-        where TValue : class
     {
         public ValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, BaseProperty bp)
             : base(uiManager, asyncManager)
@@ -19,13 +19,18 @@ namespace Kistl.Client.PresenterModel
             _property = bp;
             _property.PropertyChanged += PropertyPropertyChanged;
             _object.PropertyChanged += ObjectPropertyChanged;
-            Async.Queue(() => { this.CheckConstraints(); UI.Queue(() => { this.State = ModelState.Active; }); });
+            Async.Queue(() =>
+            {
+                this.GetPropertyValue();
+                this.CheckConstraints();
+                UI.Queue(() => { this.State = ModelState.Active; });
+            });
         }
 
         #region Public Interface
 
         public string Label { get { return _property.PropertyName; } }
-        public string Tooltip { get { return _property.AltText; } }
+        public string ToolTip { get { return _property.AltText; } }
 
         private TValue _valueCache;
         /// <summary>
@@ -37,7 +42,11 @@ namespace Kistl.Client.PresenterModel
             set
             {
                 UI.Verify();
-                if (_valueCache != value)
+                // more complex than usual to compare non-reference TValue types too
+                if (!(
+                        (_valueCache == null && value == null)
+                        || (_valueCache != null && _valueCache.Equals(value))
+                        ))
                 {
                     _valueCache = value;
                     State = ModelState.Loading;
@@ -66,6 +75,13 @@ namespace Kistl.Client.PresenterModel
             }
         }
 
+        private void GetPropertyValue()
+        {
+            Async.Verify();
+            TValue newValue = _object.GetPropertyValue<TValue>(_property.PropertyName);
+            UI.Queue(() => Value = newValue);
+        }
+
         #endregion
 
         #region PropertyChanged event handlers
@@ -80,8 +96,7 @@ namespace Kistl.Client.PresenterModel
 
                 if (e.PropertyName == _property.PropertyName)
                 {
-                    TValue newValue = _object.GetPropertyValue<TValue>(_property.PropertyName);
-                    UI.Queue(() => Value = newValue);
+                    GetPropertyValue();
                 }
                 // TODO: ask constraints about dependencies and reduce check frequency
                 CheckConstraints();
@@ -90,13 +105,14 @@ namespace Kistl.Client.PresenterModel
             UI.Queue(() => this.State = ModelState.Active);
         }
 
+
         private void PropertyPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Async.Verify();
             switch (e.PropertyName)
             {
                 case "PropertyName": InvokePropertyChanged("Label"); break;
-                case "AltText": InvokePropertyChanged("Tooltip"); break;
+                case "AltText": InvokePropertyChanged("ToolTip"); break;
             }
         }
 
@@ -139,4 +155,43 @@ namespace Kistl.Client.PresenterModel
         private IDataObject _object;
         private BaseProperty _property;
     }
+
+    #region specific implementations
+
+    public class BoolPropertyModel : ValuePropertyModel<bool>
+    {
+        public BoolPropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, BoolProperty prop)
+            : base(uiManager, asyncManager, obj, prop)
+        { }
+    }
+
+    public class DateTimePropertyModel : ValuePropertyModel<DateTime>
+    {
+        public DateTimePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, DateTimeProperty prop)
+            : base(uiManager, asyncManager, obj, prop)
+        { }
+    }
+
+    public class DoublePropertyModel : ValuePropertyModel<double>
+    {
+        public DoublePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, DoubleProperty prop)
+            : base(uiManager, asyncManager, obj, prop)
+        { }
+    }
+
+    public class IntPropertyModel : ValuePropertyModel<int>
+    {
+        public IntPropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, IntProperty prop)
+            : base(uiManager, asyncManager, obj, prop)
+        { }
+    }
+
+    public class StringPropertyModel : ValuePropertyModel<string>
+    {
+        public StringPropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, StringProperty prop)
+            : base(uiManager, asyncManager, obj, prop)
+        { }
+    }
+
+    #endregion
 }

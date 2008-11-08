@@ -45,6 +45,7 @@ namespace Kistl.Client
                 debugger.Owner = this;
             // Register as MainWindow for correctness.
             Application.Current.MainWindow = this;
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

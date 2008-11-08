@@ -7,65 +7,53 @@
         Title="DesktopView"
         Height="600"
         Width="800">
-    <Window.Resources>
-        <Style x:Key="ShowState"
-               TargetType="TextBlock">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding State}"
-                             Value="Active">
-                    <Setter Property="Visibility"
-                            Value="Collapsed" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding State}"
-                             Value="Loading">
-                    <Setter Property="Text"
-                            Value="LOADING" />
-                    <Setter Property="Visibility"
-                            Value="Visible" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding State}"
-                             Value="Invalid">
-                    <Setter Property="Text"
-                            Value="INVALID" />
-                    <Setter Property="Visibility"
-                            Value="Visible" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Column="0">
-            <TreeView x:Name="ModuleTree"
-                      ItemsSource="{Binding Modules}">
-                <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
-                                              ItemsSource="{Binding ObjectClasses}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource ShowState}" />
-                            <TextBlock Text="{Binding Name}" />
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                    <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                        <view:DataObjectView />
-                    </DataTemplate>
-                </TreeView.Resources>
-            </TreeView>
-        </DockPanel>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
 
-        <!-- overlay on the tree -->
-        <ctrls:LoadingIndicator Grid.Column="0" />
+            <ListView Grid.Row="0"
+                      ItemsSource="{Binding OpenObjects}" />
 
+            <DockPanel Grid.Row="2">
+                <TreeView x:Name="ModuleTree"
+                          ItemsSource="{Binding Modules}">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
+                                                  ItemsSource="{Binding ObjectClasses}">
+                            <StackPanel Orientation="Horizontal">
+                                <ctrls:LoadingIndicator />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type client:DataObjectModel}">
+                            <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+                
+            </DockPanel>
+
+            <!-- overlay on the tree -->
+            <ctrls:LoadingIndicator Grid.Row="2" />
+            
+            <GridSplitter Grid.Row="1"
+                          HorizontalAlignment="Stretch" />
+        </Grid>
         <GridSplitter Grid.Column="1"
                       HorizontalAlignment="Stretch" />
 
-        <view:DataObjectView Grid.Column="2"
-                             DataContext="{Binding SelectedItem, ElementName=ModuleTree}" />
+        <view:DataObjectFullView Grid.Column="2"
+                                 Grid.IsSharedSizeScope="True"
+                                 DataContext="{Binding SelectedItem, ElementName=ModuleTree}" />
     </Grid>
 </Window>

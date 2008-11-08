@@ -71,7 +71,8 @@
     <Compile Include="PresenterModel\IAsyncUiManager.cs" />
     <Compile Include="PresenterModel\ModuleModel.cs" />
     <Compile Include="PresenterModel\PresenterModel.cs" />
-    <Compile Include="PresenterModel\PropertyModel.cs" />
+    <Compile Include="PresenterModel\ReferencePropertyModels.cs" />
+    <Compile Include="PresenterModel\ValuePropertyModels.cs" />
     <Compile Include="PresenterModel\WorkspaceModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />

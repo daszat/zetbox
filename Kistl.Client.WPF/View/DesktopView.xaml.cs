@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using Kistl.Client.PresenterModel;
+
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
@@ -21,6 +23,16 @@ namespace Kistl.Client.WPF.View
         public DesktopView()
         {
             InitializeComponent();
+        }
+
+        private void DataObjectActivated(object sender, MouseButtonEventArgs e)
+        {
+            var view = (FrameworkElement)sender;
+            var dataModel = (DataObjectModel)view.DataContext;
+            var desktopModel = (DesktopModel)this.DataContext;
+
+            if (!desktopModel.OpenObjects.Contains(dataModel))
+                desktopModel.OpenObjects.Add(dataModel);
         }
 
     }
