@@ -21,33 +21,52 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Tasks
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Task : IDataObject
     {
         
+        /// <summary>
+        /// Verknüpfung zum Projekt
+        /// </summary>
         Kistl.App.Projekte.Projekt Projekt
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Taskname
+        /// </summary>
         string Name
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Start Datum
+        /// </summary>
         System.DateTime? DatumVon
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Enddatum
+        /// </summary>
         System.DateTime? DatumBis
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Aufwand in Stunden
+        /// </summary>
         System.Double? Aufwand
         {
             get;

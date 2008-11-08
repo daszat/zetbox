@@ -21,44 +21,78 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: DataTypes
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface DataType : IDataObject
     {
         
+        /// <summary>
+        /// Modul der Objektklasse
+        /// </summary>
         Kistl.App.Base.Module Module
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Der Name der Objektklasse
+        /// </summary>
         string ClassName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Eigenschaften der Objektklasse
+        /// </summary>
         ICollection<Kistl.App.Base.BaseProperty> Properties
         {
             get;
         }
         
+        /// <summary>
+        /// Liste aller Methoden der Objektklasse.
+        /// </summary>
         ICollection<Kistl.App.Base.Method> Methods
         {
             get;
         }
         
+        /// <summary>
+        /// Standard Icon wenn IIcon nicht implementiert ist
+        /// </summary>
         Kistl.App.GUI.Icon DefaultIcon
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// all implemented Methods in this DataType
+        /// </summary>
         ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         string GetDataTypeString();
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         System.Type GetDataType();
     }
 }

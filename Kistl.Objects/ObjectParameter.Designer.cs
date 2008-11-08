@@ -21,9 +21,16 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: ObjectParameters
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface ObjectParameter : Kistl.App.Base.BaseParameter
     {
         
+        /// <summary>
+        /// Kistl-Typ des Parameters
+        /// </summary>
         Kistl.App.Base.DataType DataType
         {
             get;

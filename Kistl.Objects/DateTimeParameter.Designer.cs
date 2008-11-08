@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: DateTimeParameters
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface DateTimeParameter : Kistl.App.Base.BaseParameter
     {
     }

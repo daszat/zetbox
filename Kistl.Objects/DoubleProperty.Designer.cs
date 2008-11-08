@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: DoubleProperties
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface DoubleProperty : Kistl.App.Base.ValueTypeProperty
     {
     }

@@ -21,33 +21,52 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Taetigkeiten
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Taetigkeit : IDataObject
     {
         
+        /// <summary>
+        /// Zeitkonto
+        /// </summary>
         Kistl.App.Zeiterfassung.Zeitkonto Zeitkonto
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Mitarbeiter
+        /// </summary>
         Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Datum
+        /// </summary>
         System.DateTime Datum
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Dauer in Stunden
+        /// </summary>
         double Dauer
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Art der Tätigkeit
+        /// </summary>
         Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
         {
             get;

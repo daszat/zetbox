@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: MethodInvocationConstraints
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface MethodInvocationConstraint : Kistl.App.Base.Constraint
     {
     }

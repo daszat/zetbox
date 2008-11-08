@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: NotNullableConstraints
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface NotNullableConstraint : Kistl.App.Base.Constraint
     {
     }

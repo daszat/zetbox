@@ -21,38 +21,60 @@ namespace Kistl.App.GUI
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Visuals
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Visual : IDataObject
     {
         
+        /// <summary>
+        /// A short description of the utility of this visual
+        /// </summary>
         string Description
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Which visual is represented here
+        /// </summary>
         Kistl.App.GUI.VisualType ControlType
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// if this is a container, here are the visually contained/controlled children of this Visual
+        /// </summary>
         IList<Kistl.App.GUI.Visual> Children
         {
             get;
         }
         
+        /// <summary>
+        /// The Property to display
+        /// </summary>
         Kistl.App.Base.BaseProperty Property
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The Method whose return value shoud be displayed
+        /// </summary>
         Kistl.App.Base.Method Method
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The context menu for this Visual
+        /// </summary>
         IList<Kistl.App.GUI.Visual> ContextMenu
         {
             get;

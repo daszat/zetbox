@@ -21,9 +21,16 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Auftraege
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Auftrag : IDataObject
     {
         
+        /// <summary>
+        /// Projekt zum Auftrag
+        /// </summary>
         Kistl.App.Projekte.Projekt Projekt
         {
             get;
@@ -36,24 +43,36 @@ namespace Kistl.App.Projekte
             set;
         }
         
+        /// <summary>
+        /// Bitte füllen Sie einen sprechenden Auftragsnamen aus
+        /// </summary>
         string Auftragsname
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Kunde des Projektes
+        /// </summary>
         Kistl.App.Projekte.Kunde Kunde
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Wert in EUR des Auftrages
+        /// </summary>
         System.Double? Auftragswert
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
         void RechnungErstellen();
     }
 }

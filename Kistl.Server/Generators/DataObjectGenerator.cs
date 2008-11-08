@@ -596,6 +596,8 @@ namespace Kistl.Server.Generators
                 current.code_class.BaseTypes.Add(i.Module.Namespace + "." + i.ClassName);
             }
 
+            current.code_class.AddSummaryComment("Mapped to: " + current.objClass.TableName + "\nTODO: Add description to a DataType");
+
             // Properties
             GenerateInterfaceProperties((CurrentObjectClass)current.Clone(), current.objClass.Properties);
 
@@ -670,20 +672,23 @@ namespace Kistl.Server.Generators
         {
             foreach (BaseProperty p in properties)
             {
+                CodeMemberProperty codeProp;
                 if (p is BackReferenceProperty)
                 {
                     CodeTypeReference type = new CodeTypeReference("ICollection", p.ToCodeTypeReference(current.task));
-                    current.code_class.CreateProperty(type, p.PropertyName, false);
+                    codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
                 }
                 else if (p.IsListProperty())
                 {
                     CodeTypeReference type = new CodeTypeReference("IList", p.ToCodeTypeReference(current.task));
-                    current.code_class.CreateProperty(type, p.PropertyName, false);
+                    codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
                 }
                 else
                 {
-                    current.code_class.CreateProperty(p.ToCodeTypeReference(current.task), p.PropertyName);
+                    codeProp = current.code_class.CreateProperty(p.ToCodeTypeReference(current.task), p.PropertyName);
                 }
+
+                codeProp.AddSummaryComment(p.AltText);
             }
         }
 
@@ -700,6 +705,11 @@ namespace Kistl.Server.Generators
 
                 BaseParameter returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
                 CodeMemberMethod m = current.code_class.CreateMethod(method.MethodName, returnParam.ToCodeTypeReference());
+                m.AddSummaryComment("TODO: Add Description to Methods");
+                if (returnParam != null)
+                {
+                    m.AddReturnsComment("TODO: Add Description to Parameter");
+                }
 
                 // added inverse sort by ID to stabilise order of parameters
                 // TODO: implement orderable lists and backrefs instead!
@@ -707,6 +717,7 @@ namespace Kistl.Server.Generators
                 {
                     m.Parameters.Add(new CodeParameterDeclarationExpression(
                         new CodeTypeReference(param.GetParameterTypeString()), param.ParameterName));
+                    m.AddParamComment(param.ParameterName, "TODO: Add Description to Parameter");
                 }
             }
         }
@@ -725,6 +736,7 @@ namespace Kistl.Server.Generators
 
             // Create Class
             current.code_class = current.code_namespace.CreateInterface(current.@interface.ClassName);
+            current.code_class.AddSummaryComment("\nTODO: Add description to a DataType");
 
             // Properties
             GenerateInterfaceProperties((CurrentInterface)current.Clone(), current.@interface.Properties);
@@ -753,6 +765,7 @@ namespace Kistl.Server.Generators
 
             // Create Struct class
             current.code_class = current.code_namespace.CreateInterface(current.@struct.ClassName, "IStruct");
+            current.code_class.AddSummaryComment("TODO: Add Description to DataType");
 
             // Create Properties
             GenerateInterfaceProperties((CurrentStruct)current.Clone(), current.@struct.Properties);
@@ -816,11 +829,12 @@ namespace Kistl.Server.Generators
 
             // Create Class
             current.code_class = current.code_namespace.CreateEnum(current.enumeration.ClassName);
+            current.code_class.AddSummaryComment("TODO: Add Description to DataType");
 
             foreach (EnumerationEntry e in current.enumeration.EnumerationEntries)
             {
                 CodeMemberField mf = current.code_class.CreateField(typeof(int), e.Name, e.Value.ToString());
-                mf.AddComment(e.Name);
+                mf.AddSummaryComment(e.Name + "\nTODO: Add Description to EnumerationEntry");
             }
 
             GenerateEnumerations(current);
@@ -1253,35 +1267,36 @@ namespace Kistl.Server.Generators
             foreach (BaseProperty baseProp in current.objClass.Properties)
             {
                 current.property = baseProp;
+                CurrentObjectClass currentProperty = (CurrentObjectClass)current.Clone();
                 if (baseProp.IsValueTypePropertyList())
                 {
                     // Simple Property Collection
-                    GenerateProperties_ValueTypeProperty_CollectionInternal((CurrentObjectClass)current.Clone());
+                    GenerateProperties_ValueTypeProperty_CollectionInternal(currentProperty);
                 }
                 else if (baseProp.IsValueTypePropertySingle())
                 {
                     // Simple Property
-                    GenerateProperties_ValueTypePropertyInternal((CurrentObjectClass)current.Clone());
+                    GenerateProperties_ValueTypePropertyInternal(currentProperty);
                 }
                 else if (baseProp.IsObjectReferencePropertyList())
                 {
                     // "pointer" Object Collection
-                    GenerateProperties_ObjectReferenceProperty_CollectionInternal((CurrentObjectClass)current.Clone());
+                    GenerateProperties_ObjectReferenceProperty_CollectionInternal(currentProperty);
                 }
                 else if (baseProp.IsObjectReferencePropertySingle())
                 {
                     // "pointer" Object
-                    GenerateProperties_ObjectReferencePropertyInternal((CurrentObjectClass)current.Clone());
+                    GenerateProperties_ObjectReferencePropertyInternal(currentProperty);
                 }
                 else if (baseProp is BackReferenceProperty)
                 {
                     // "Backpointer" Object
-                    GenerateProperties_BackReferencePropertyInternal((CurrentObjectClass)current.Clone());
+                    GenerateProperties_BackReferencePropertyInternal(currentProperty);
                 }
                 else if (baseProp.IsStructPropertySingle())
                 {
                     // Struct Property
-                    GenerateProperties_StructPropertyInternal((CurrentObjectClass)current.Clone());
+                    GenerateProperties_StructPropertyInternal(currentProperty);
                 }
                 else
                 {

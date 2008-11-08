@@ -21,27 +21,43 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: TestCustomObjects
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface TestCustomObject : IDataObject
     {
         
+        /// <summary>
+        /// Persons Name
+        /// </summary>
         string PersonName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Mobile Phone Number
+        /// </summary>
         Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Office Phone Number
+        /// </summary>
         Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Happy Birthday!
+        /// </summary>
         System.DateTime? Birthday
         {
             get;

@@ -21,23 +21,57 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Constraints
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Constraint : IDataObject
     {
         
+        /// <summary>
+        /// The property to be constrained
+        /// </summary>
         Kistl.App.Base.BaseProperty ConstrainedProperty
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The reason of this constraint
+        /// </summary>
         string Reason
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
+        /// <param name="constrainedObj">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="constrainedValue">
+        /// TODO: Add Description to Parameter
+        /// </param>
         bool IsValid(object constrainedObj, object constrainedValue);
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
+        /// <param name="constrainedObject">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="constrainedValue">
+        /// TODO: Add Description to Parameter
+        /// </param>
         string GetErrorText(object constrainedObject, object constrainedValue);
     }
 }

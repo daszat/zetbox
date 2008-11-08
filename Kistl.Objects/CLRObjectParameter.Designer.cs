@@ -21,15 +21,25 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: CLRObjectParameters
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface CLRObjectParameter : Kistl.App.Base.BaseParameter
     {
         
+        /// <summary>
+        /// Assembly des CLR Objektes, NULL für Default Assemblies
+        /// </summary>
         Kistl.App.Base.Assembly Assembly
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Name des CLR Datentypen
+        /// </summary>
         string FullTypeName
         {
             get;

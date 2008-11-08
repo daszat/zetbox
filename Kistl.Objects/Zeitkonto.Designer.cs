@@ -21,31 +21,50 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Zeitkonten
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Zeitkonto : IDataObject
     {
         
+        /// <summary>
+        /// Name des Zeiterfassungskontos
+        /// </summary>
         string Kontoname
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Tätigkeiten
+        /// </summary>
         ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
         {
             get;
         }
         
+        /// <summary>
+        /// Zugeordnete Mitarbeiter
+        /// </summary>
         IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get;
         }
         
+        /// <summary>
+        /// Maximal erlaubte Stundenanzahl
+        /// </summary>
         System.Double? MaxStunden
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Aktuell gebuchte Stunden
+        /// </summary>
         System.Double? AktuelleStunden
         {
             get;

@@ -21,15 +21,25 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: IntegerRangeConstraints
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface IntegerRangeConstraint : Kistl.App.Base.Constraint
     {
         
+        /// <summary>
+        /// The biggest value accepted by this constraint
+        /// </summary>
         int Max
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The smallest value accepted by this constraint
+        /// </summary>
         int Min
         {
             get;

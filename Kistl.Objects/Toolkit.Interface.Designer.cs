@@ -21,16 +21,28 @@ namespace Kistl.App.GUI
     using Kistl.API;
     
     
+    /// <summary>
+    /// TODO: Add Description to DataType
+    /// </summary>
     public enum Toolkit
     {
         
+        /// <summary>
         /// WPF
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         WPF = 0,
         
+        /// <summary>
         /// ASPNET
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         ASPNET = 1,
         
+        /// <summary>
         /// TEST
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         TEST = 2,
     }
 }

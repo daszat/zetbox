@@ -21,9 +21,16 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Kostentraeger
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Kostentraeger : Kistl.App.Zeiterfassung.Zeitkonto
     {
         
+        /// <summary>
+        /// Projekt des Kostenträgers
+        /// </summary>
         Kistl.App.Projekte.Projekt Projekt
         {
             get;

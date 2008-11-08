@@ -21,21 +21,34 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Assemblies
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Assembly : IDataObject
     {
         
+        /// <summary>
+        /// Module
+        /// </summary>
         Kistl.App.Base.Module Module
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Full Assemblyname eg. MyActions, Version=1.0.0.0
+        /// </summary>
         string AssemblyName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Legt fest, ob es sich um ein Client-Assembly handelt.
+        /// </summary>
         bool IsClientAssembly
         {
             get;

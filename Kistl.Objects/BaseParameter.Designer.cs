@@ -21,41 +21,72 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: BaseParameters
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface BaseParameter : IDataObject
     {
         
+        /// <summary>
+        /// Methode des Parameters
+        /// </summary>
         Kistl.App.Base.Method Method
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Name des Parameter
+        /// </summary>
         string ParameterName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Module
+        /// </summary>
         Kistl.App.Base.Module Module
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Parameter wird als List<> generiert
+        /// </summary>
         bool IsList
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Es darf nur ein Return Parameter angegeben werden
+        /// </summary>
         bool IsReturnParameter
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         string GetParameterTypeString();
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         System.Type GetParameterType();
     }
 }

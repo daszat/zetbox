@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: IntParameters
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface IntParameter : Kistl.App.Base.BaseParameter
     {
     }

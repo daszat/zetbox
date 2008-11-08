@@ -7,6 +7,7 @@
     <div style="float: left; width: 300px;">
         <asp:LinkButton ID="lnkRefresh" runat="server" OnClick="lnkRefresh_OnRefresh" Text="Refresh" />
         <asp:TreeView ID="tree" runat="server" ShowExpandCollapse="true" ShowLines="true" EnableClientScript="true" 
+            ExpandDepth="0"
             OnTreeNodeExpanded="tree_OnTreeNodeExpanded"
             OnSelectedNodeChanged="tree_OnSelectedNodeChanged">
         </asp:TreeView>

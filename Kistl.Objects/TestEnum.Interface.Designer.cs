@@ -21,13 +21,22 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
+    /// <summary>
+    /// TODO: Add Description to DataType
+    /// </summary>
     public enum TestEnum
     {
         
+        /// <summary>
         /// First
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         First = 0,
         
+        /// <summary>
         /// Second
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         Second = 1,
     }
 }

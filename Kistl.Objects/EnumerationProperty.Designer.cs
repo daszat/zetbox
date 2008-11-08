@@ -21,9 +21,16 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: EnumerationProperties
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface EnumerationProperty : Kistl.App.Base.ValueTypeProperty
     {
         
+        /// <summary>
+        /// Enumeration der Eigenschaft
+        /// </summary>
         Kistl.App.Base.Enumeration Enumeration
         {
             get;

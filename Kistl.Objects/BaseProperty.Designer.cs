@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: BaseProperties
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface BaseProperty : IDataObject
     {
         
@@ -42,21 +46,45 @@ namespace Kistl.App.Base
             set;
         }
         
+        /// <summary>
+        /// Zugehörig zum Modul
+        /// </summary>
         Kistl.App.Base.Module Module
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The list of constraints applying to this Property
+        /// </summary>
         ICollection<Kistl.App.Base.Constraint> Constraints
         {
             get;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         string GetPropertyTypeString();
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         string GetGUIRepresentation();
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         System.Type GetPropertyType();
     }
 }

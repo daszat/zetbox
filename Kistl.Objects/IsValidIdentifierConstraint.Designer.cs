@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: IsValidIdentifierConstraints
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface IsValidIdentifierConstraint : Kistl.App.Base.Constraint
     {
     }

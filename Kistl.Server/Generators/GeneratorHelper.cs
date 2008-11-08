@@ -335,6 +335,61 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region CreateComments
+
+        public static void AddParamComment(this CodeMemberMethod m, string name, string text)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            AddComment(m, string.Format("<param name=\"{0}\">", name));
+            text.Split('\n').ForEach<string>(s => AddComment(m, s));
+            AddComment(m, "</param>");
+        }
+
+        public static void AddReturnsComment(this CodeMemberMethod m, string text)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            AddComment(m, "<returns>");
+            text.Split('\n').ForEach<string>(s => AddComment(m, s));
+            AddComment(m, "</returns>");
+        }
+
+        public static void AddSummaryComment(this CodeTypeDeclaration t, string text)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            AddComment(t, "<summary>");
+            text.Split('\n').ForEach<string>(s => AddComment(t, s));
+            AddComment(t, "</summary>");
+        }
+
+        public static void AddSummaryComment(this CodeMemberProperty p, string text)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            AddComment(p, "<summary>");
+            text.Split('\n').ForEach<string>(s => AddComment(p, s));
+            AddComment(p, "</summary>");
+        }
+
+        public static void AddSummaryComment(this CodeMemberField f, string text)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            AddComment(f, "<summary>");
+            text.Split('\n').ForEach<string>(s => AddComment(f, s));
+            AddComment(f, "</summary>");
+        }
+
+        public static void AddSummaryComment(this CodeMemberMethod m, string text)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            AddComment(m, "<summary>");
+            text.Split('\n').ForEach<string>(s => AddComment(m, s));
+            AddComment(m, "</summary>");
+        }
+
+        public static CodeCommentStatement AddComment(this CodeTypeDeclaration t, string text)
+        {
+            CodeCommentStatement comment = new CodeCommentStatement(text, true);
+            t.Comments.Add(comment);
+            return comment;
+        }
         public static CodeCommentStatement AddComment(this CodeMemberField f, string text)
         {
             CodeCommentStatement comment = new CodeCommentStatement(text, true);
@@ -345,6 +400,12 @@ namespace Kistl.Server.Generators
         {
             CodeCommentStatement comment = new CodeCommentStatement(text, true);
             p.Comments.Add(comment);
+            return comment;
+        }
+        public static CodeCommentStatement AddComment(this CodeMemberMethod m, string text)
+        {
+            CodeCommentStatement comment = new CodeCommentStatement(text, true);
+            m.Comments.Add(comment);
             return comment;
         }
         public static CodeCommentStatement AddComment(this CodeStatementCollection statements, string text)

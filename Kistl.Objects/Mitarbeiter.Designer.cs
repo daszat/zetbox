@@ -21,38 +21,84 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Mitarbeiter
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Mitarbeiter : IDataObject
     {
         
+        /// <summary>
+        /// Vorname Nachname
+        /// </summary>
         string Name
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Projekte des Mitarbeiters für die er Verantwortlich ist
+        /// </summary>
         ICollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get;
         }
         
+        /// <summary>
+        /// Herzlichen Glückwunsch zum Geburtstag
+        /// </summary>
         System.DateTime? Geburtstag
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// NNNN TTMMYY
+        /// </summary>
         string SVNr
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// +43 123 12345678
+        /// </summary>
         string TelefonNummer
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
+        /// <param name="TestCLRObjectParameter">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="TestObjectParameter">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="TestDateTime">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="TestBool">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="TestDouble">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="TestInt">
+        /// TODO: Add Description to Parameter
+        /// </param>
+        /// <param name="TestString">
+        /// TODO: Add Description to Parameter
+        /// </param>
         System.DateTime TestMethodForParameter(System.Guid TestCLRObjectParameter, Kistl.App.Projekte.Auftrag TestObjectParameter, System.DateTime TestDateTime, bool TestBool, double TestDouble, int TestInt, string TestString);
     }
 }

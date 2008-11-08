@@ -21,21 +21,34 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: EnumerationEntries
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface EnumerationEntry : IDataObject
     {
         
+        /// <summary>
+        /// Übergeordnete Enumeration
+        /// </summary>
         Kistl.App.Base.Enumeration Enumeration
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The CLR value of this entry
+        /// </summary>
         int Value
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// CLR name of this entry
+        /// </summary>
         string Name
         {
             get;

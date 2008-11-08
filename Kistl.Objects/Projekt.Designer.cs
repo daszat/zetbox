@@ -21,9 +21,16 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Projekte
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Projekt : IDataObject
     {
         
+        /// <summary>
+        /// Projektname
+        /// </summary>
         string Name
         {
             get;
@@ -46,17 +53,26 @@ namespace Kistl.App.Projekte
             set;
         }
         
+        /// <summary>
+        /// Bitte geben Sie den Kundennamen ein
+        /// </summary>
         string Kundenname
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Kostenträger
+        /// </summary>
         ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
         {
             get;
         }
         
+        /// <summary>
+        /// Aufträge
+        /// </summary>
         ICollection<Kistl.App.Projekte.Auftrag> Auftraege
         {
             get;

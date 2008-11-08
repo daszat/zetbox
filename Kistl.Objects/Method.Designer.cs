@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Methods
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Method : IDataObject
     {
         
@@ -36,28 +40,46 @@ namespace Kistl.App.Base
             set;
         }
         
+        /// <summary>
+        /// Zugehörig zum Modul
+        /// </summary>
         Kistl.App.Base.Module Module
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Methodenaufrufe implementiert in dieser Objekt Klasse
+        /// </summary>
         ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations
         {
             get;
         }
         
+        /// <summary>
+        /// Parameter der Methode
+        /// </summary>
         ICollection<Kistl.App.Base.BaseParameter> Parameter
         {
             get;
         }
         
+        /// <summary>
+        /// Shows this Method in th GUI
+        /// </summary>
         bool IsDisplayable
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         Kistl.App.Base.BaseParameter GetReturnParameter();
     }
 }

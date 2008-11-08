@@ -21,15 +21,24 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
+    /// <summary>
+    /// TODO: Add Description to DataType
+    /// </summary>
     public interface TestPhoneStruct : IStruct
     {
         
+        /// <summary>
+        /// Enter a Number
+        /// </summary>
         string Number
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Enter Area Code
+        /// </summary>
         string AreaCode
         {
             get;

@@ -21,43 +21,71 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: ObjectClasses
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface ObjectClass : Kistl.App.Base.DataType
     {
         
+        /// <summary>
+        /// Tabellenname in der Datenbank
+        /// </summary>
         string TableName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Pointer auf die Basisklasse
+        /// </summary>
         Kistl.App.Base.ObjectClass BaseObjectClass
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Liste der vererbten Klassen
+        /// </summary>
         ICollection<Kistl.App.Base.ObjectClass> SubClasses
         {
             get;
         }
         
+        /// <summary>
+        /// Interfaces der Objektklasse
+        /// </summary>
         IList<Kistl.App.Base.Interface> ImplementsInterfaces
         {
             get;
         }
         
+        /// <summary>
+        /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
+        /// </summary>
         bool IsSimpleObject
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// if true then all Instances appear in FozenContext.
+        /// </summary>
         bool IsFrozenObject
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <returns>
+        /// TODO: Add Description to Parameter
+        /// </returns>
         IList<Kistl.App.Base.Method> GetInheritedMethods();
     }
 }

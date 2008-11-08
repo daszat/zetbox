@@ -21,6 +21,10 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: BoolParameters
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface BoolParameter : Kistl.App.Base.BaseParameter
     {
     }

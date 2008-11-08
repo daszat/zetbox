@@ -21,67 +21,130 @@ namespace Kistl.App.GUI
     using Kistl.API;
     
     
+    /// <summary>
+    /// TODO: Add Description to DataType
+    /// </summary>
     public enum VisualType
     {
         
+        /// <summary>
         /// SimpleObjectList
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         SimpleObjectList = 16,
         
+        /// <summary>
         /// Enumeration
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         Enumeration = 15,
         
+        /// <summary>
         /// StringList
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         StringList = 14,
         
+        /// <summary>
         /// String
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         String = 13,
         
+        /// <summary>
         /// IntegerList
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         IntegerList = 12,
         
+        /// <summary>
         /// Integer
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         Integer = 11,
         
+        /// <summary>
         /// DoubleList
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         DoubleList = 10,
         
+        /// <summary>
         /// Double
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         Double = 9,
         
+        /// <summary>
         /// DateTimeList
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         DateTimeList = 8,
         
+        /// <summary>
         /// DateTime
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         DateTime = 7,
         
+        /// <summary>
         /// BooleanList
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         BooleanList = 6,
         
+        /// <summary>
         /// Boolean
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         Boolean = 5,
         
+        /// <summary>
         /// ObjectReference
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         ObjectReference = 4,
         
+        /// <summary>
         /// ObjectList
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         ObjectList = 3,
         
+        /// <summary>
         /// PropertyGroup
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         PropertyGroup = 2,
         
+        /// <summary>
         /// Object
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         Object = 1,
         
+        /// <summary>
         /// Renderer
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         Renderer = 0,
         
+        /// <summary>
         /// MenuGroup
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         MenuGroup = 18,
         
+        /// <summary>
         /// MenuItem
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         MenuItem = 17,
         
+        /// <summary>
         /// TemplateEditor
+        /// TODO: Add Description to EnumerationEntry
+        /// </summary>
         TemplateEditor = 19,
     }
 }

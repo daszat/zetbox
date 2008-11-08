@@ -21,38 +21,63 @@ namespace Kistl.App.GUI
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Templates
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Template : IDataObject
     {
         
+        /// <summary>
+        /// a short name to identify this Template to the user
+        /// </summary>
         string DisplayName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The visual representation of this Template
+        /// </summary>
         Kistl.App.GUI.Visual VisualTree
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// FullName of the Type that is displayed with this Template
+        /// </summary>
         string DisplayedTypeFullName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Assembly of the Type that is displayed with this Template
+        /// </summary>
         Kistl.App.Base.Assembly DisplayedTypeAssembly
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The main menu for this Template
+        /// </summary>
         IList<Kistl.App.GUI.Visual> Menu
         {
             get;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <param name="cls">
+        /// TODO: Add Description to Parameter
+        /// </param>
         void PrepareDefault(Kistl.App.Base.ObjectClass cls);
     }
 }

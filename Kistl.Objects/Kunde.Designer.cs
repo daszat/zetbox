@@ -21,39 +21,61 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Kunden
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Kunde : IDataObject
     {
         
+        /// <summary>
+        /// Name des Kunden
+        /// </summary>
         string Kundenname
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Adresse & Hausnummer
+        /// </summary>
         string Adresse
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Postleitzahl
+        /// </summary>
         string PLZ
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Ort
+        /// </summary>
         string Ort
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Land
+        /// </summary>
         string Land
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// EMails des Kunden - können mehrere sein
+        /// </summary>
         IList<string> EMails
         {
             get;

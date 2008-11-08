@@ -21,9 +21,16 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: StructProperties
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface StructProperty : Kistl.App.Base.Property
     {
         
+        /// <summary>
+        /// Definition of this Struct
+        /// </summary>
         Kistl.App.Base.Struct StructDefinition
         {
             get;

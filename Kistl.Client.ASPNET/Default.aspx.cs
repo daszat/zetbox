@@ -33,31 +33,28 @@ public partial class _Default : System.Web.UI.Page
     {
         if (e.Node.Depth == 0 && e.Node.ChildNodes.Count == 1 && string.IsNullOrEmpty(e.Node.ChildNodes[0].Value))
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                e.Node.ChildNodes.Clear();
-                int mID = Convert.ToInt32(e.Node.Value);
+            e.Node.ChildNodes.Clear();
+            int mID = Convert.ToInt32(e.Node.Value);
 
-                foreach (var @class in ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(c => c.Module.ID == mID))
-                {
-                    TreeNode tn = new TreeNode(@class.ClassName, @class.ID.ToString());
-                    e.Node.ChildNodes.Add(tn);
-                }
+            foreach (var @class in FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().Where(c => c.Module.ID == mID))
+            {
+                TreeNode tn = new TreeNode(@class.ClassName, @class.ID.ToString());
+                e.Node.ChildNodes.Add(tn);
             }
         }
     }
 
     protected void tree_OnSelectedNodeChanged(object sender, EventArgs e)
     {
-        using (IKistlContext ctx = KistlContext.GetContext())
+        TreeNode n = tree.SelectedNode;
+        if (n == null) return;
+        if (n.Depth == 1)
         {
-            TreeNode n = tree.SelectedNode;
-            if (n == null) return;
-            if (n.Depth == 1)
-            {
-                int cID = Convert.ToInt32(n.Value);
-                var @class = ctx.Find<Kistl.App.Base.ObjectClass>(cID);
+            int cID = Convert.ToInt32(n.Value);
+            var @class = FrozenContext.Single.Find<Kistl.App.Base.ObjectClass>(cID);
 
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
                 repItems.DataSource = ctx.GetQuery(@class.GetDataType());
                 repItems.DataBind();
             }
@@ -66,16 +63,13 @@ public partial class _Default : System.Web.UI.Page
 
     private void BindTree()
     {
-        using (IKistlContext ctx = KistlContext.GetContext())
+        tree.Nodes.Clear();
+        foreach (var module in FrozenContext.Single.GetQuery<Kistl.App.Base.Module>())
         {
-            tree.Nodes.Clear();
-            foreach (var module in ctx.GetQuery<Kistl.App.Base.Module>())
-            {
-                TreeNode tn = new TreeNode(module.ModuleName, module.ID.ToString());
-                tree.Nodes.Add(tn);
+            TreeNode tn = new TreeNode(module.ModuleName, module.ID.ToString());
+            tree.Nodes.Add(tn);
 
-                tn.ChildNodes.Add(new TreeNode());
-            }
+            tn.ChildNodes.Add(new TreeNode());
         }
     }
 }

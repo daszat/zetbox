@@ -21,39 +21,61 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: MethodInvocations
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface MethodInvocation : IDataObject
     {
         
+        /// <summary>
+        /// Methode, die Aufgerufen wird
+        /// </summary>
         Kistl.App.Base.Method Method
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Assembly, dass die Methode beinhaltet
+        /// </summary>
         Kistl.App.Base.Assembly Assembly
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Voller Name des .NET Types des implementierenden Members
+        /// </summary>
         string FullTypeName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Name des implementierenden Members
+        /// </summary>
         string MemberName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Zugehörig zum Modul
+        /// </summary>
         Kistl.App.Base.Module Module
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// In dieser Objektklasse implementieren
+        /// </summary>
         Kistl.App.Base.DataType InvokeOnObjectClass
         {
             get;

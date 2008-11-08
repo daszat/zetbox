@@ -21,15 +21,25 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: StringRangeConstraints
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface StringRangeConstraint : Kistl.App.Base.Constraint
     {
         
+        /// <summary>
+        /// The maximal length of this StringProperty
+        /// </summary>
         int MaxLength
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// The minimal length of this StringProperty
+        /// </summary>
         int MinLength
         {
             get;

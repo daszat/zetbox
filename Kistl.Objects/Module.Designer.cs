@@ -21,26 +21,42 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: Modules
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface Module : IDataObject
     {
         
+        /// <summary>
+        /// CLR Namespace des Moduls
+        /// </summary>
         string Namespace
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Name des Moduls
+        /// </summary>
         string ModuleName
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Datentypendes Modules
+        /// </summary>
         ICollection<Kistl.App.Base.DataType> DataTypes
         {
             get;
         }
         
+        /// <summary>
+        /// Assemblies des Moduls
+        /// </summary>
         ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get;

@@ -21,9 +21,16 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: TaetigkeitsArten
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface TaetigkeitsArt : IDataObject
     {
         
+        /// <summary>
+        /// Name der Tätigkeitsart
+        /// </summary>
         string Name
         {
             get;

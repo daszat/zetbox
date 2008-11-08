@@ -21,33 +21,55 @@ namespace Kistl.App.Test
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: TestObjClasses
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface TestObjClass : IDataObject, Kistl.App.Test.ITestInterface
     {
         
+        /// <summary>
+        /// String Property
+        /// </summary>
         string StringProp
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Test Enumeration Property
+        /// </summary>
         Kistl.App.Test.TestEnum TestEnumProp
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// testtest
+        /// </summary>
         Kistl.App.Projekte.Kunde ObjectProp
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// test
+        /// </summary>
         System.Int32? MyIntProperty
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// TODO: Add Description to Methods
+        /// </summary>
+        /// <param name="DateTimeParamForTestMethod">
+        /// TODO: Add Description to Parameter
+        /// </param>
         void TestMethod(System.DateTime DateTimeParamForTestMethod);
     }
 }

@@ -21,15 +21,25 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// Mapped to: BackReferenceProperties
+    /// TODO: Add description to a DataType
+    /// </summary>
     public interface BackReferenceProperty : Kistl.App.Base.BaseProperty
     {
         
+        /// <summary>
+        /// Das Property, welches auf diese Klasse zeigt
+        /// </summary>
         Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {
             get;
             set;
         }
         
+        /// <summary>
+        /// Serialisierung der Liste zum Client
+        /// </summary>
         bool PreFetchToClient
         {
             get;
