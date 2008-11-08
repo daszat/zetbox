@@ -80,7 +80,7 @@ namespace Kistl.Client.PresenterModel
         /// <param name="propertyName">the changed property</param>
         protected void InvokePropertyChanged(string propertyName)
         {
-            UI.Queue(() => OnPropertyChanged(propertyName));
+            UI.Queue(UI, () => OnPropertyChanged(propertyName));
         }
 
         /// <summary>

@@ -22,13 +22,12 @@ namespace Kistl.Client.PresenterModel
             _propertyModels = new ObservableCollection<PresentableModel>();
             _object = obj;
             _object.PropertyChanged += ObjectPropertyChanged;
-            Async.Queue(() =>
+            Async.Queue(_object.Context, () =>
             {
                 UpdateViewCache();
-
                 FetchProperties();
 
-                UI.Queue(() => this.State = ModelState.Active);
+                UI.Queue(UI, () => this.State = ModelState.Active);
             });
         }
 
@@ -61,7 +60,7 @@ namespace Kistl.Client.PresenterModel
                 UI.Verify();
                 return _toStringCache;
             }
-            set
+            private set
             {
                 UI.Verify();
                 if (value != _toStringCache)
@@ -98,12 +97,9 @@ namespace Kistl.Client.PresenterModel
         private void FetchProperties()
         {
             Async.Verify();
-            lock (_object.Context)
-            {
-                ObjectClass cls = _object.GetObjectClass(_object.Context);
-                var props = cls.Properties;
-                UI.Queue(() => SetClassPropertyModels(cls, props));
-            }
+            ObjectClass cls = _object.GetObjectClass(_object.Context);
+            var props = cls.Properties;
+            UI.Queue(UI, () => SetClassPropertyModels(cls, props));
         }
 
         private static string GetIconPath(string name)
@@ -118,33 +114,30 @@ namespace Kistl.Client.PresenterModel
         private void UpdateViewCache()
         {
             Async.Verify();
-            lock (_object.Context)
-            {
-                _toStringCache = _object.ToString();
-                InvokePropertyChanged("Name");
+            _toStringCache = _object.ToString();
+            InvokePropertyChanged("Name");
 
-                Icon icon = null;
-                if (_object is Icon)
-                {
-                    icon = (Icon)_object;
-                }
-                else if (_object is ObjectClass)
-                {
-                    icon = ((ObjectClass)_object).DefaultIcon;
-                }
-                else
-                {
-                    icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
-                }
-                if (icon != null)
-                {
-                    string newIconPath = GetIconPath(icon.IconFile);
-                    UI.Queue(() => IconPath = newIconPath);
-                }
-                else
-                {
-                    UI.Queue(() => IconPath = "");
-                }
+            Icon icon = null;
+            if (_object is Icon)
+            {
+                icon = (Icon)_object;
+            }
+            else if (_object is ObjectClass)
+            {
+                icon = ((ObjectClass)_object).DefaultIcon;
+            }
+            else
+            {
+                icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
+            }
+            if (icon != null)
+            {
+                string newIconPath = GetIconPath(icon.IconFile);
+                UI.Queue(UI, () => IconPath = newIconPath);
+            }
+            else
+            {
+                UI.Queue(UI, () => IconPath = "");
             }
         }
 
@@ -153,31 +146,45 @@ namespace Kistl.Client.PresenterModel
             UI.Verify();
             foreach (var pm in props)
             {
+                var prop = pm as Property;
+
                 if (pm is BoolProperty)
                 {
-                    PropertyModels.Add(new BoolPropertyModel(UI, Async, _object, (BoolProperty)pm));
+                    if (prop.IsNullable)
+                        PropertyModels.Add(new NullableBoolModel(UI, Async, _object, (BoolProperty)pm));
+                    else
+                        PropertyModels.Add(new BoolModel(UI, Async, _object, (BoolProperty)pm));
                 }
                 else if (pm is DateTimeProperty)
                 {
-                    PropertyModels.Add(new DateTimePropertyModel(UI, Async, _object, (DateTimeProperty)pm));
+                    if (prop.IsNullable)
+                        PropertyModels.Add(new NullableDateTimeModel(UI, Async, _object, (DateTimeProperty)pm));
+                    else
+                        PropertyModels.Add(new DateTimeModel(UI, Async, _object, (DateTimeProperty)pm));
                 }
                 else if (pm is DoubleProperty)
                 {
-                    PropertyModels.Add(new DoublePropertyModel(UI, Async, _object, (DoubleProperty)pm));
+                    if (prop.IsNullable)
+                        PropertyModels.Add(new NullableDoubleModel(UI, Async, _object, (DoubleProperty)pm));
+                    else
+                        PropertyModels.Add(new DoubleModel(UI, Async, _object, (DoubleProperty)pm));
                 }
                 else if (pm is IntProperty)
                 {
-                    PropertyModels.Add(new IntPropertyModel(UI, Async, _object, (IntProperty)pm));
+                    if (prop.IsNullable)
+                        PropertyModels.Add(new NullableIntModel(UI, Async, _object, (IntProperty)pm));
+                    else
+                        PropertyModels.Add(new IntModel(UI, Async, _object, (IntProperty)pm));
                 }
                 else if (pm is StringProperty)
                 {
-                    PropertyModels.Add(new StringPropertyModel(UI, Async, _object, (StringProperty)pm));
+                        PropertyModels.Add(new StringModel(UI, Async, _object, (StringProperty)pm));
                 }
                 else if (pm is ObjectReferenceProperty)
                 {
                     var orp = (ObjectReferenceProperty)pm;
                     if (!orp.IsList)
-                        PropertyModels.Add(new ReferencePropertyModel(UI, Async, _object, orp));
+                        PropertyModels.Add(new ObjectReferenceModel<IDataObject>(UI, Async, _object, orp));
                 }
             }
         }
@@ -188,15 +195,14 @@ namespace Kistl.Client.PresenterModel
 
         private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
-            lock (_object.Context)
+            Async.Queue(_object.Context, () =>
             {
                 // flag to the user that something's happening
-                UI.Queue(() => this.State = ModelState.Loading);
+                UI.Queue(UI, () => this.State = ModelState.Loading);
                 UpdateViewCache();
-            }
-            // all updates done
-            UI.Queue(() => this.State = ModelState.Active);
+                // all updates done
+                UI.Queue(UI, () => this.State = ModelState.Active);
+            });
         }
 
         #endregion

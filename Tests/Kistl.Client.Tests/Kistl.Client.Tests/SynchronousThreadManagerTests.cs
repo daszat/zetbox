@@ -43,7 +43,7 @@ namespace Kistl.Client.Tests
         public void TestQueue()
         {
             bool run = false;
-            _m.Queue(() => { Thread.Sleep(100); run = true; });
+            _m.Queue(null, () => { Thread.Sleep(100); run = true; });
             Assert.IsTrue(run, "Task didn't run");
         }
         
@@ -52,7 +52,7 @@ namespace Kistl.Client.Tests
         {
             bool run = false;
             string param = "test";
-            _m.Queue(passed => { Thread.Sleep(100); run = true; Assert.AreEqual(param, passed, "Wrong data passed into action"); }, param);
+            _m.Queue(null, passed => { Thread.Sleep(100); run = true; Assert.AreEqual(param, passed, "Wrong data passed into action"); }, param);
             Assert.IsTrue(run, "Task didn't run");
         }
 

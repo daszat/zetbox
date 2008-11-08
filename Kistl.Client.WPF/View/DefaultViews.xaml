@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
                     xmlns:view="clr-namespace:Kistl.Client.WPF.View"
                     xmlns:client="clr-namespace:Kistl.Client.PresenterModel;assembly=Kistl.Client">
@@ -7,23 +8,37 @@
     <DataTemplate DataType="{x:Type client:DataObjectModel}">
         <view:DataObjectView />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:BoolModel}">
+        <view:PropertyTextBoxView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type client:NullableBoolModel}">
+        <view:NullablePropertyTextBoxView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:DateTimeModel}">
+        <view:PropertyTextBoxView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type client:NullableDateTimeModel}">
+        <view:NullablePropertyTextBoxView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:DoubleModel}">
+        <view:PropertyTextBoxView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type client:NullableDoubleModel}">
+        <view:NullablePropertyTextBoxView />
+    </DataTemplate>
     
-    <DataTemplate DataType="{x:Type client:BoolPropertyModel}">
+    <DataTemplate DataType="{x:Type client:IntModel}">
         <view:PropertyTextBoxView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type client:DateTimePropertyModel}">
-        <view:PropertyTextBoxView />
+    <DataTemplate DataType="{x:Type client:NullableIntModel}">
+        <view:NullablePropertyTextBoxView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type client:DoublePropertyModel}">
-        <view:PropertyTextBoxView />
+    
+    <DataTemplate DataType="{x:Type client:StringModel}">
+        <view:NullablePropertyTextBoxView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type client:IntPropertyModel}">
-        <view:PropertyTextBoxView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type client:StringPropertyModel}">
-        <view:PropertyTextBoxView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type client:ReferencePropertyModel}">
-        <view:PropertyTextBoxView />
-    </DataTemplate>
+
 </ResourceDictionary>

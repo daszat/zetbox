@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace Kistl.Client.PresenterModel
 {
@@ -27,16 +28,18 @@ namespace Kistl.Client.PresenterModel
         /// <summary>
         /// Tries to queue a task to execute on this Thread.
         /// </summary>
+        /// <param name="lck">the object to synchronize on, pass <value>null</value> for free threading</param>
         /// <param name="asyncTask">the task to execute</param>
         /// <returns>true if the task was queued</returns>
-        void Queue(Action asyncTask);
+        void Queue(object lck, Action asyncTask);
         /// <summary>
         /// Tries to queue a task to execute on this Thread.
         /// </summary>
+        /// <param name="lck">the object to synchronize on, pass <value>null</value> for free threading</param>
         /// <param name="asyncTask">the task to execute</param>
         /// <param name="data">the data to pass to the task</param>
         /// <returns>true if the task was queued</returns>
-        void Queue(Action<object> asyncTask, object data);
+        void Queue(object lck, Action<object> asyncTask, object data);
 
     }
 
@@ -65,13 +68,15 @@ namespace Kistl.Client.PresenterModel
 #endif
             }
 
-            public void Queue(Action uiTask)
+            public void Queue(object lck, Action uiTask)
             {
+                Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
                 _dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(uiTask));
             }
 
-            public void Queue(Action<object> uiTask, object data)
+            public void Queue(object lck, Action<object> uiTask, object data)
             {
+                Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
                 _dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(() => uiTask(data)));
             }
 
@@ -92,15 +97,41 @@ namespace Kistl.Client.PresenterModel
             // ( http://blogs.msdn.com/dancre/archive/2006/07/26/679851.aspx )
             // I'll go with the simple implementation until we hit this scenario 
 
-            public void Queue(Action asyncTask)
+            public void Queue(object lck, Action asyncTask)
             {
-                if (!ThreadPool.QueueUserWorkItem(new WaitCallback((data) => asyncTask()), null))
+                if (!ThreadPool.QueueUserWorkItem(new WaitCallback((data) =>
+                {
+                    if (lck == null)
+                    {
+                        asyncTask();
+                    }
+                    else
+                    {
+                        lock (lck)
+                        {
+                            asyncTask();
+                        }
+                    }
+                }), null))
                     throw new InvalidOperationException("Cannot queue task in background");
             }
 
-            public void Queue(Action<object> asyncTask, object data)
+            public void Queue(object lck, Action<object> asyncTask, object data)
             {
-                if (!ThreadPool.QueueUserWorkItem(new WaitCallback(asyncTask), data))
+                if (!ThreadPool.QueueUserWorkItem(new WaitCallback((passed_data) =>
+                {
+                    if (lck == null)
+                    {
+                        asyncTask(passed_data);
+                    }
+                    else
+                    {
+                        lock (lck)
+                        {
+                            asyncTask(passed_data);
+                        }
+                    }
+                }), data))
                     throw new InvalidOperationException("Cannot queue task in background");
             }
 
@@ -117,12 +148,12 @@ namespace Kistl.Client.PresenterModel
 
         public void Verify() { }
 
-        public void Queue(Action asyncTask)
+        public void Queue(object ignored, Action asyncTask)
         {
             asyncTask();
         }
 
-        public void Queue(Action<object> asyncTask, object data)
+        public void Queue(object ignored, Action<object> asyncTask, object data)
         {
             asyncTask(data);
         }

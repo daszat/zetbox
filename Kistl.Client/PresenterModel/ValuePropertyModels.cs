@@ -6,80 +6,59 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using System.Diagnostics;
 
 namespace Kistl.Client.PresenterModel
 {
 
-    public class ValuePropertyModel<TValue> : PresentableModel, IDataErrorInfo
+    public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
     {
-        public ValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, BaseProperty bp)
+        public PropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, BaseProperty bp)
             : base(uiManager, asyncManager)
         {
-            _object = obj;
-            _property = bp;
-            _property.PropertyChanged += PropertyPropertyChanged;
-            _object.PropertyChanged += ObjectPropertyChanged;
-            Async.Queue(() =>
+            Object = obj;
+            Property = bp;
+            Property.PropertyChanged += PropertyPropertyChanged;
+            Object.PropertyChanged += ObjectPropertyChanged;
+            Async.Queue(Object.Context, () =>
             {
                 this.GetPropertyValue();
                 this.CheckConstraints();
-                UI.Queue(() => { this.State = ModelState.Active; });
+                UI.Queue(UI, () => { this.State = ModelState.Active; });
             });
         }
 
         #region Public Interface
 
-        public string Label { get { return _property.PropertyName; } }
-        public string ToolTip { get { return _property.AltText; } }
+        // TODO: proxying implementations might block on that
+        public string Label { get { return Property.PropertyName; } }
+        // TODO: proxying implementations might block on that
+        public string ToolTip { get { return Property.AltText; } }
 
-        private TValue _valueCache;
         /// <summary>
         /// The value of the property presented by this model
         /// </summary>
-        public TValue Value
-        {
-            get { UI.Verify(); return _valueCache; }
-            set
-            {
-                UI.Verify();
-                // more complex than usual to compare non-reference TValue types too
-                if (!(
-                        (_valueCache == null && value == null)
-                        || (_valueCache != null && _valueCache.Equals(value))
-                        ))
-                {
-                    _valueCache = value;
-                    State = ModelState.Loading;
-                    Async.Queue(() =>
-                    {
-                        _object.SetPropertyValue<TValue>(_property.PropertyName, value);
-                        CheckConstraints();
-                        UI.Queue(() => this.State = ModelState.Active);
-                    });
-                    OnPropertyChanged("Value");
-                }
-            }
-        }
+        public abstract TValue Value { get; set; }
 
         #endregion
 
         #region Async handlers and UI callbacks
 
-        private void CheckConstraints()
-        {
-            Async.Verify();
-            lock (_object.Context)
-            {
-                string newError = _object[_property.PropertyName];
-                UI.Queue(() => this.ValueError = newError);
-            }
-        }
+        /// <summary>
+        /// Loads the Value from the object into the cache.
+        /// Called on the Async Thread.
+        /// </summary>
+        protected abstract void GetPropertyValue();
 
-        private void GetPropertyValue()
+        /// <summary>
+        /// Checks constraints on the object and puts the results into the cache.
+        /// Called on the Async Thread.
+        /// </summary> 
+        protected void CheckConstraints()
         {
             Async.Verify();
-            TValue newValue = _object.GetPropertyValue<TValue>(_property.PropertyName);
-            UI.Queue(() => Value = newValue);
+            string newError = Object[Property.PropertyName];
+            UI.Queue(UI, () => this.ValueError = newError);
         }
 
         #endregion
@@ -88,21 +67,20 @@ namespace Kistl.Client.PresenterModel
 
         private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
-            lock (_object.Context)
+            Async.Queue(Object.Context, () =>
             {
                 // flag to the user that something's happening
-                UI.Queue(() => this.State = ModelState.Loading);
+                UI.Queue(UI, () => this.State = ModelState.Loading);
 
-                if (e.PropertyName == _property.PropertyName)
+                if (e.PropertyName == Property.PropertyName)
                 {
                     GetPropertyValue();
                 }
                 // TODO: ask constraints about dependencies and reduce check frequency
                 CheckConstraints();
-            }
-            // all updates done
-            UI.Queue(() => this.State = ModelState.Active);
+                // all updates done
+                UI.Queue(UI, () => this.State = ModelState.Active);
+            });
         }
 
 
@@ -152,46 +130,225 @@ namespace Kistl.Client.PresenterModel
 
         #endregion
 
-        private IDataObject _object;
-        private BaseProperty _property;
+        protected IDataObject Object { get; private set; }
+        protected BaseProperty Property { get; private set; }
     }
 
-    #region specific implementations
-
-    public class BoolPropertyModel : ValuePropertyModel<bool>
+    public abstract class ValuePropertyModel<TValue>
+        : PropertyModel<TValue>
+        where TValue : struct
     {
-        public BoolPropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, BoolProperty prop)
+        public ValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
             : base(uiManager, asyncManager, obj, prop)
-        { }
+        {
+        }
+
+        #region Public Interface
+
+        public bool IsNull { get { UI.Verify(); return false; } }
+
+        private TValue _valueCache;
+        /// <summary>
+        /// The value of the property presented by this model
+        /// </summary>
+        public override TValue Value
+        {
+            get { UI.Verify(); return _valueCache; }
+            set
+            {
+                UI.Verify();
+
+                _valueCache = value;
+                State = ModelState.Loading;
+                Async.Queue(Object.Context, () =>
+                {
+                    Object.SetPropertyValue<TValue>(Property.PropertyName, value);
+                    CheckConstraints();
+                    UI.Queue(UI, () => this.State = ModelState.Active);
+                });
+                OnPropertyChanged("Value");
+            }
+        }
+
+        #endregion
+
+        #region Async handlers and UI callbacks
+
+        protected override void GetPropertyValue()
+        {
+            Async.Verify();
+            TValue newValue = Object.GetPropertyValue<TValue>(Property.PropertyName);
+            UI.Queue(UI, () => Value = newValue);
+        }
+
+        #endregion
+
     }
 
-    public class DateTimePropertyModel : ValuePropertyModel<DateTime>
+
+    public abstract class NullableValuePropertyModel<TValue>
+        : PropertyModel<Nullable<TValue>>
+        where TValue : struct
     {
-        public DateTimePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, DateTimeProperty prop)
+        public NullableValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
             : base(uiManager, asyncManager, obj, prop)
-        { }
+        {
+        }
+
+        #region Public Interface
+
+        public bool HasValue
+        {
+            get
+            {
+                UI.Verify();
+                return _valueCache != null;
+            }
+            set
+            {
+                UI.Verify();
+                if (!value)
+                    Value = null;
+            }
+        }
+
+        public bool IsNull
+        {
+            get
+            {
+                UI.Verify();
+                return _valueCache == null;
+            }
+            set
+            {
+                UI.Verify();
+                if (value)
+                    Value = null;
+            }
+        }
+
+
+        private Nullable<TValue> _valueCache;
+        /// <summary>
+        /// The value of the property presented by this model
+        /// </summary>
+        public override Nullable<TValue> Value
+        {
+            get { UI.Verify(); return _valueCache; }
+            set
+            {
+                UI.Verify();
+                if (!_valueCache.HasValue && !value.HasValue)
+                    return;
+
+                _valueCache = value;
+                State = ModelState.Loading;
+                Async.Queue(Object.Context, () =>
+                {
+                    Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
+                    CheckConstraints();
+                    UI.Queue(UI, () => this.State = ModelState.Active);
+                });
+                OnPropertyChanged("Value");
+                OnPropertyChanged("IsNull");
+                OnPropertyChanged("HasValue");
+            }
+        }
+
+        #endregion
+
+        #region Async handlers and UI callbacks
+
+        protected override void GetPropertyValue()
+        {
+            Async.Verify();
+            Nullable<TValue> newValue = Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
+            UI.Queue(UI, () => Value = newValue);
+        }
+
+        #endregion
+
     }
 
-    public class DoublePropertyModel : ValuePropertyModel<double>
+    public abstract class ReferencePropertyModel<TValue>
+        : PropertyModel<TValue>
+        where TValue : class
     {
-        public DoublePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, DoubleProperty prop)
+        public ReferencePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
             : base(uiManager, asyncManager, obj, prop)
-        { }
+        {
+        }
+
+        #region Public Interface
+
+        public bool HasValue
+        {
+            get
+            {
+                UI.Verify();
+                return _valueCache != null;
+            }
+            set
+            {
+                UI.Verify();
+                if (!value)
+                    Value = null;
+            }
+        }
+
+        public bool IsNull
+        {
+            get
+            {
+                UI.Verify();
+                return _valueCache == null;
+            }
+            set
+            {
+                UI.Verify();
+                if (value)
+                    Value = null;
+            }
+        }
+
+        private TValue _valueCache;
+        /// <summary>
+        /// The value of the property presented by this model
+        /// </summary>
+        public override TValue Value
+        {
+            get { UI.Verify(); return _valueCache; }
+            set
+            {
+                UI.Verify();
+
+                _valueCache = value;
+                State = ModelState.Loading;
+                Async.Queue(Object.Context, () =>
+                {
+                    Object.SetPropertyValue<TValue>(Property.PropertyName, value);
+                    CheckConstraints();
+                    UI.Queue(UI, () => this.State = ModelState.Active);
+                });
+                OnPropertyChanged("Value");
+                OnPropertyChanged("IsNull");
+                OnPropertyChanged("HasValue");
+            }
+        }
+
+        #endregion
+
+        #region Async handlers and UI callbacks
+
+        protected override void GetPropertyValue()
+        {
+            Async.Verify();
+            TValue newValue = Object.GetPropertyValue<TValue>(Property.PropertyName);
+            UI.Queue(UI, () => Value = newValue);
+        }
+
+        #endregion
+
     }
 
-    public class IntPropertyModel : ValuePropertyModel<int>
-    {
-        public IntPropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, IntProperty prop)
-            : base(uiManager, asyncManager, obj, prop)
-        { }
-    }
-
-    public class StringPropertyModel : ValuePropertyModel<string>
-    {
-        public StringPropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, StringProperty prop)
-            : base(uiManager, asyncManager, obj, prop)
-        { }
-    }
-
-    #endregion
 }

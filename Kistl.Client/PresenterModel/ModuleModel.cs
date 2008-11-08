@@ -16,7 +16,7 @@ namespace Kistl.Client.PresenterModel
             ObjectClasses = new ObservableCollection<DataObjectModel>();
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;
-            Async.Queue(() => { LoadObjectClasses(); UI.Queue(() => this.State = ModelState.Active); });
+            Async.Queue(_module.Context, () => { LoadObjectClasses(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
         #region public interface
@@ -30,18 +30,23 @@ namespace Kistl.Client.PresenterModel
         private void LoadObjectClasses()
         {
             Async.Verify();
-            lock (_module.Context)
+            UI.Queue(UI, () => State = ModelState.Loading);
+            var datatypes = _module.Context.GetQuery<DataType>().Where(dt => dt.Module.ID == _module.ID).OrderBy(dt => dt.ClassName).ToList();
+            UI.Queue(UI, () =>
             {
-                var classes = _module.Context.GetQuery<DataType>().Where(oc => oc.Module.ID == _module.ID).OrderBy(oc => oc.ClassName).ToList();
-                UI.Queue(() =>
+                foreach (var dt in datatypes)
                 {
-                    foreach (var oc in classes)
+                    if (dt is ObjectClass)
                     {
-                        ObjectClasses.Add(new DataObjectModel(UI, Async, oc));
+                        ObjectClasses.Add(new ObjectClassModel(UI, Async, (ObjectClass)dt));
                     }
-                    State = ModelState.Active;
-                });
-            }
+                    else
+                    {
+                        ObjectClasses.Add(new DataTypeModel(UI, Async, dt));
+                    }
+                }
+                State = ModelState.Active;
+            });
         }
 
         #endregion

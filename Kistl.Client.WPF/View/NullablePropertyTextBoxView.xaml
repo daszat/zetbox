@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.NullablePropertyTextBoxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+             xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+             xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+             ToolTip="{Binding ToolTip}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="100"
+                              MaxWidth="300"
+                              SharedSizeGroup="Label" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0"
+                   Text="{Binding Label}" />
+
+        <DockPanel Grid.Column="1">
+            <CheckBox DockPanel.Dock="Left"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding HasValue}" />
+            <kevin:InfoTextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                               TextBoxInfo="{Binding ToolTip}" />
+        </DockPanel>
+    </Grid>
+</UserControl>

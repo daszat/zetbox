@@ -18,11 +18,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="5" />
-                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <ListView Grid.Row="0"
-                      ItemsSource="{Binding OpenObjects}" />
+            <ListBox Grid.Row="0"
+                     ItemsSource="{Binding OpenObjects}" />
+
+            <GridSplitter Grid.Row="1"
+                          HorizontalAlignment="Stretch" />
 
             <DockPanel Grid.Row="2">
                 <TreeView x:Name="ModuleTree"
@@ -35,25 +40,37 @@
                                 <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                         </HierarchicalDataTemplate>
-                        <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                            <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
+                        <DataTemplate DataType="{x:Type client:DataTypeModel}">
+                            <StackPanel Orientation="Horizontal">
+                                <ctrls:LoadingIndicator />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
                         </DataTemplate>
                     </TreeView.Resources>
                 </TreeView>
-                
             </DockPanel>
 
             <!-- overlay on the tree -->
             <ctrls:LoadingIndicator Grid.Row="2" />
-            
-            <GridSplitter Grid.Row="1"
+
+            <GridSplitter Grid.Row="3"
                           HorizontalAlignment="Stretch" />
+
+            <ListBox Grid.Row="4"
+                     x:Name="ObjectList"
+                     ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type client:DataObjectModel}">
+                        <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
         <GridSplitter Grid.Column="1"
                       HorizontalAlignment="Stretch" />
 
         <view:DataObjectFullView Grid.Column="2"
                                  Grid.IsSharedSizeScope="True"
-                                 DataContext="{Binding SelectedItem, ElementName=ModuleTree}" />
+                                 DataContext="{Binding SelectedItem, ElementName=ObjectList}" />
     </Grid>
 </Window>

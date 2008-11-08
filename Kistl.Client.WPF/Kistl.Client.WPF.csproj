@@ -206,6 +206,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\NullablePropertyTextBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PropertyTextBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -325,6 +329,9 @@
     </Compile>
     <Compile Include="View\DesktopView.xaml.cs">
       <DependentUpon>DesktopView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NullablePropertyTextBoxView.xaml.cs">
+      <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PropertyTextBoxView.xaml.cs">
       <DependentUpon>PropertyTextBoxView.xaml</DependentUpon>

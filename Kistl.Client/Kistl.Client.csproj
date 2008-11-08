@@ -70,8 +70,10 @@
     <Compile Include="PresenterModel\DesktopModel.cs" />
     <Compile Include="PresenterModel\IAsyncUiManager.cs" />
     <Compile Include="PresenterModel\ModuleModel.cs" />
+    <Compile Include="PresenterModel\DataTypeModel.cs" />
+    <Compile Include="PresenterModel\ObjectClassModel.cs" />
+    <Compile Include="PresenterModel\ObjectReferenceModel.cs" />
     <Compile Include="PresenterModel\PresenterModel.cs" />
-    <Compile Include="PresenterModel\ReferencePropertyModels.cs" />
     <Compile Include="PresenterModel\ValuePropertyModels.cs" />
     <Compile Include="PresenterModel\WorkspaceModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
@@ -107,6 +109,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram.Kistl.Client.cd" />
+    <Compile Include="PresenterModel\ValuePropertyModels.Specifics.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

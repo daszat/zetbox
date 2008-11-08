@@ -28,8 +28,10 @@ namespace Kistl.Client.Mocks
 
         public void Verify() { Assert.AreEqual(_currentThreadName, _threadName, "should be on right thread"); }
 
-        public void Queue(Action asyncTask)
+        public void Queue(object lck, Action asyncTask)
         {
+            if (_currentThreadName == _threadName)
+                Assert.AreEqual(this, lck, "when queueing on the default thread, the default thread manager must be passed in");
             string oldThreadName = _currentThreadName;
             _currentThreadName = _threadName;
             try
@@ -42,8 +44,10 @@ namespace Kistl.Client.Mocks
             }
         }
 
-        public void Queue(Action<object> asyncTask, object data)
+        public void Queue(object lck, Action<object> asyncTask, object data)
         {
+            if (_currentThreadName == _threadName)
+                Assert.AreEqual(this, lck, "when queueing on the default thread, the default thread manager must be passed in");
             string oldThreadName = _currentThreadName;
             _currentThreadName = _threadName;
             try
