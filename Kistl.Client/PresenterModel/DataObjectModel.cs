@@ -98,7 +98,15 @@ namespace Kistl.Client.PresenterModel
         {
             Async.Verify();
             ObjectClass cls = _object.GetObjectClass(_object.Context);
-            var props = cls.Properties;
+            List<BaseProperty> props = new List<BaseProperty>();
+            while (cls != null)
+            {
+                foreach (BaseProperty p in cls.Properties)
+                {
+                    props.Add(p);
+                }
+                cls = cls.BaseObjectClass;
+            }
             UI.Queue(UI, () => SetClassPropertyModels(cls, props));
         }
 
