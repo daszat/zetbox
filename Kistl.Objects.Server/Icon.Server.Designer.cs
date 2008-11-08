@@ -59,6 +59,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IconFile != value)
                 {
                     NotifyPropertyChanging("IconFile"); 

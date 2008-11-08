@@ -111,6 +111,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (AssemblyName != value)
                 {
                     NotifyPropertyChanging("AssemblyName"); 
@@ -129,6 +130,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsClientAssembly != value)
                 {
                     NotifyPropertyChanging("IsClientAssembly"); 

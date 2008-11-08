@@ -45,6 +45,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Namespace != value)
                 {
                     NotifyPropertyChanging("Namespace"); 
@@ -62,6 +63,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (ModuleName != value)
                 {
                     NotifyPropertyChanging("ModuleName"); 

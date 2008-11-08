@@ -97,6 +97,8 @@ namespace Kistl.API
         /// </summary>
         bool IsDisposed { get; }
 
+        bool IsReadonly { get; }
+
         /// <summary>
         /// Creates a new IDataObject by Type
         /// </summary>

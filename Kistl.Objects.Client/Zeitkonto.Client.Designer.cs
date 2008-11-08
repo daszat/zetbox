@@ -48,6 +48,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Kontoname != value)
                 {
                     NotifyPropertyChanging("Kontoname"); 
@@ -93,6 +94,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (MaxStunden != value)
                 {
                     NotifyPropertyChanging("MaxStunden"); 
@@ -110,6 +112,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (AktuelleStunden != value)
                 {
                     NotifyPropertyChanging("AktuelleStunden"); 

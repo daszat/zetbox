@@ -11,6 +11,7 @@ namespace Kistl.API.Tests
     {
         private int _ID  = -1;
         public int ID { get { return _ID; } set { _ID = value; } }
+        public bool IsReadonly { get; private set; }
 
         private string _TestName;
         public string TestName { get { return _TestName; } set { _TestName = value; } }

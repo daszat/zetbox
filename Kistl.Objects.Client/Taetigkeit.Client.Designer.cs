@@ -61,6 +61,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Zeitkonto != value)
                 {
                     NotifyPropertyChanging("Zeitkonto"); 
@@ -92,6 +93,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Mitarbeiter != value)
                 {
                     NotifyPropertyChanging("Mitarbeiter"); 
@@ -109,6 +111,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Datum != value)
                 {
                     NotifyPropertyChanging("Datum"); 
@@ -126,6 +129,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Dauer != value)
                 {
                     NotifyPropertyChanging("Dauer"); 
@@ -157,6 +161,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_TaetigkeitsArt != value)
                 {
                     NotifyPropertyChanging("TaetigkeitsArt"); 

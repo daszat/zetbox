@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.API;
 
 namespace Kistl.IntegrationTests
 {
@@ -13,14 +14,56 @@ namespace Kistl.IntegrationTests
             {
                 setup.Init();
 
+                FrozenContextTests();
+                GetListTests();
+
                 GeneratorTests();
                 GetListOfTests();
                 InheritanceTests();
-                GetListTests();
                 ListPropetiesTests();
                 ObjectTests();
                 StructTests();
             }
+        }
+
+        private static void FrozenContextTests()
+        {
+            var test = new FrozenContextTests();
+
+            test.SetUp();
+            test.IsReadonlyFlag();
+
+            test.SetUp();
+            test.IsReadonlyObject();
+
+            test.SetUp();
+            try
+            {
+                test.IsReadonly_Create();
+            }
+            catch (ReadOnlyContextException)
+            {
+            }
+
+
+            test.SetUp();
+            try
+            {
+                test.IsReadonlyObject_String();
+            }
+            catch (ReadOnlyObjectException)
+            {
+            }
+
+            test.SetUp();
+            try
+            {
+                test.IsReadonlyObject_Reference();
+            }
+            catch (ReadOnlyObjectException)
+            {
+            }
+
         }
 
         private static void GeneratorTests()
@@ -57,6 +100,10 @@ namespace Kistl.IntegrationTests
         private static void GetListTests()
         {
             GetListTests test = new GetListTests();
+
+            // doesnt work yet
+            //test.SetUp();
+            //test.GetListByTypeWithOrderBy();
 
             test.SetUp();
             test.GetListWithOrderBy();

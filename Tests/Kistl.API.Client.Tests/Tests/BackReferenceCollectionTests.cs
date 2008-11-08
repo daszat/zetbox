@@ -49,6 +49,7 @@ namespace Kistl.API.Client.Tests
             #region IPersistenceObject Member
 
             public int ID { get; set; }
+            public bool IsReadonly { get; private set; }
 
             public DataObjectState ObjectState
             {

@@ -37,6 +37,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Number != value)
                 {
                     NotifyPropertyChanging("Number"); 
@@ -54,6 +55,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (AreaCode != value)
                 {
                     NotifyPropertyChanging("AreaCode"); 

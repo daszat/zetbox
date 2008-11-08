@@ -74,6 +74,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Name != value)
                 {
                     NotifyPropertyChanging("Name"); 
@@ -133,6 +134,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (AufwandGes != value)
                 {
                     NotifyPropertyChanging("AufwandGes"); 
@@ -151,6 +153,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Kundenname != value)
                 {
                     NotifyPropertyChanging("Kundenname"); 

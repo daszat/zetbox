@@ -17,6 +17,9 @@ namespace Kistl.API.Client
 
         public int ID { get; internal set; }
 
+        private bool _IsReadonly = false;
+        public bool IsReadonly { get { return _context != null ? _context.IsReadonly : false; ; } }
+
         private DataObjectState _ObjectState = DataObjectState.Unmodified;
         public DataObjectState ObjectState
         {
@@ -50,6 +53,12 @@ namespace Kistl.API.Client
 
         private IKistlContext _context;
         public IKistlContext Context { get { return _context; } }
+        public void AttachToContext(IKistlContext ctx, bool asReadonly)
+        {
+            _IsReadonly = asReadonly;
+            AttachToContext(ctx);
+        }
+
         public virtual void AttachToContext(IKistlContext ctx)
         {
             if (_context != null && _context != ctx) throw new InvalidOperationException("Object cannot be attached to a new Context while attached to another Context.");
@@ -276,6 +285,8 @@ namespace Kistl.API.Client
         {
             return this.MemberwiseClone();
         }
+
+        public bool IsReadonly { get { return _attachedObject != null ? _attachedObject.IsReadonly : false; } }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;

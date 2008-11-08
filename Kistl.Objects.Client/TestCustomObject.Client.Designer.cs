@@ -45,6 +45,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (PersonName != value)
                 {
                     NotifyPropertyChanging("PersonName"); 
@@ -100,6 +101,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Birthday != value)
                 {
                     NotifyPropertyChanging("Birthday"); 

@@ -41,6 +41,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (MaxLength != value)
                 {
                     NotifyPropertyChanging("MaxLength"); 
@@ -58,6 +59,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (MinLength != value)
                 {
                     NotifyPropertyChanging("MinLength"); 

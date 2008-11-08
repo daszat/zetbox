@@ -116,6 +116,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (PropertyName != value)
                 {
                     NotifyPropertyChanging("PropertyName"); 
@@ -134,6 +135,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (AltText != value)
                 {
                     NotifyPropertyChanging("AltText"); 

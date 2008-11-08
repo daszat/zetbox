@@ -150,6 +150,8 @@ namespace Kistl.API.Tests
             get { throw new NotImplementedException(); }
         }
 
+        public bool IsReadonly { get; private set; }
+
         #endregion
 
         #region IDataErrorInfo Members

@@ -63,6 +63,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Module != value)
                 {
                     NotifyPropertyChanging("Module"); 
@@ -80,6 +81,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (ClassName != value)
                 {
                     NotifyPropertyChanging("ClassName"); 
@@ -151,6 +153,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_DefaultIcon != value)
                 {
                     NotifyPropertyChanging("DefaultIcon"); 

@@ -272,6 +272,8 @@ namespace Kistl.Server.Generators
             CodeMemberProperty result = CreateProperty(c, type, name, true);
             result.GetStatements.AddExpression(@"return {0}", getExpression);
 
+            result.SetStatements.AddExpression("if (IsReadonly) throw new ReadOnlyObjectException()");
+
             // create a condition to not trigger events if the value doesn't change.
             CodeConditionStatement ccs = new CodeConditionStatement(new CodeSnippetExpression(string.Format("{0} != value", name)));
             ccs.TrueStatements.Add(new CodeSnippetExpression(

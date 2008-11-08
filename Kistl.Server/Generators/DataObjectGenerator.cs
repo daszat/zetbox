@@ -500,6 +500,8 @@ namespace Kistl.Server.Generators
                 mi.Invoke(this, new object[] { constructor });
             }
 
+            constructor.Statements.AddExpression("_initialized = true");
+
             foreach (TaskEnum task in new TaskEnum[] { TaskEnum.Client, TaskEnum.Server })
             {
                 code = new CodeCompileUnit();
@@ -512,7 +514,6 @@ namespace Kistl.Server.Generators
             }
         }
         #endregion
-
 
         #region GenerateObjectSerializer
         protected virtual void GenerateObjectSerializer(TaskEnum task, IQueryable<ObjectClass> objClassList)

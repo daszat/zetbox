@@ -94,6 +94,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (PreFetchToClient != value)
                 {
                     NotifyPropertyChanging("PreFetchToClient"); 

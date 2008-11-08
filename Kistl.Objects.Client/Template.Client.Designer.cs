@@ -48,6 +48,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (DisplayName != value)
                 {
                     NotifyPropertyChanging("DisplayName"); 
@@ -79,6 +80,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_VisualTree != value)
                 {
                     NotifyPropertyChanging("VisualTree"); 
@@ -96,6 +98,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (DisplayedTypeFullName != value)
                 {
                     NotifyPropertyChanging("DisplayedTypeFullName"); 
@@ -127,6 +130,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_DisplayedTypeAssembly != value)
                 {
                     NotifyPropertyChanging("DisplayedTypeAssembly"); 

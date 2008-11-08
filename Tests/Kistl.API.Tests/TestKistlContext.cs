@@ -99,6 +99,9 @@ namespace Kistl.API
             throw new NotImplementedException();
         }
 
+        public bool IsReadonly { get { return false; } }
+
+
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 
         public event GenericEventHandler<IPersistenceObject> ObjectDeleted;

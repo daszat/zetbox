@@ -60,6 +60,8 @@ namespace Kistl.API.Client
             }
         }
 
+        public bool IsReadonly { get { return false; } }
+
         /// <summary>
         /// Throws an Exception when this Context has been disposed
         /// </summary>

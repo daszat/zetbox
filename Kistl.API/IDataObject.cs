@@ -87,6 +87,11 @@ namespace Kistl.API
         /// Returns true if this Object is attached to a Context
         /// </summary>
         bool IsAttached { get; }
+
+        /// <summary>
+        /// Returns true if this Object is readonly
+        /// </summary>
+        bool IsReadonly { get; }
     }
 
     /// <summary>
@@ -132,6 +137,11 @@ namespace Kistl.API
 
         void AttachToObject(IPersistenceObject obj, string property);
         void DetachFromObject(IPersistenceObject obj, string property);
+
+        /// <summary>
+        /// Returns true if this Object is readonly
+        /// </summary>
+        bool IsReadonly { get; }
     }
 
     /// <summary>

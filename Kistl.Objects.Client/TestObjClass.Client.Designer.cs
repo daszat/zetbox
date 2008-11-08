@@ -45,6 +45,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (StringProp != value)
                 {
                     NotifyPropertyChanging("StringProp"); 
@@ -62,6 +63,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (TestEnumProp != value)
                 {
                     NotifyPropertyChanging("TestEnumProp"); 
@@ -93,6 +95,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_ObjectProp != value)
                 {
                     NotifyPropertyChanging("ObjectProp"); 
@@ -110,6 +113,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (MyIntProperty != value)
                 {
                     NotifyPropertyChanging("MyIntProperty"); 

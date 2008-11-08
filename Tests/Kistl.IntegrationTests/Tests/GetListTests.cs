@@ -7,6 +7,7 @@ using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 using Kistl.Client;
 using Kistl.API.Client;
+using Kistl.API;
 
 namespace Kistl.IntegrationTests
 {
@@ -131,6 +132,31 @@ namespace Kistl.IntegrationTests
                 }
             }
         }
+
+        [Test]
+        [Ignore("Case 617")]
+        public void GetListByTypeWithOrderBy()
+        {
+            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            {
+                var list = ctx.GetQuery(typeof(Kistl.App.Base.ObjectClass))
+                    .OrderBy<IDataObject, string>(o => ((Kistl.App.Base.ObjectClass)o).ClassName)
+                    .ToList().Cast<Kistl.App.Base.ObjectClass>();
+                Assert.That(list.Count(), Is.GreaterThan(0));
+                List<Kistl.App.Base.ObjectClass> result = list.ToList();
+                List<Kistl.App.Base.ObjectClass> sorted = list.ToList().OrderBy(o => o.ClassName).ToList();
+
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i].ID != sorted[i].ID)
+                    {
+                        Assert.Fail("List was not sorted");
+                        break;
+                    }
+                }
+            }
+        }
+
         [Test]
         public void GetListWithOrderByAndWhere()
         {

@@ -53,6 +53,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Projekt != value)
                 {
                     NotifyPropertyChanging("Projekt"); 

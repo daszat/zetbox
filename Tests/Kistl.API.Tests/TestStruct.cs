@@ -8,6 +8,7 @@ namespace Kistl.API
     public class TestStruct : IStruct
     {
         public int ID { get; set; }
+        public bool IsReadonly { get; private set; }
 
         public void ToStream(System.IO.BinaryWriter sw)
         {

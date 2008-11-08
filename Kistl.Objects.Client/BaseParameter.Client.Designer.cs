@@ -61,6 +61,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Method != value)
                 {
                     NotifyPropertyChanging("Method"); 
@@ -78,6 +79,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (ParameterName != value)
                 {
                     NotifyPropertyChanging("ParameterName"); 
@@ -109,6 +111,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Module != value)
                 {
                     NotifyPropertyChanging("Module"); 
@@ -126,6 +129,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsList != value)
                 {
                     NotifyPropertyChanging("IsList"); 
@@ -143,6 +147,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsReturnParameter != value)
                 {
                     NotifyPropertyChanging("IsReturnParameter"); 

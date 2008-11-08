@@ -23,6 +23,9 @@ namespace Kistl.API.Server
         /// </summary>
         public abstract int ID { get; set; }
 
+        private bool _IsReadonly = false;
+        public bool IsReadonly { get { return _IsReadonly; } }
+
         private DataObjectState _ObjectState = DataObjectState.Unmodified;
 
         /// <summary>
@@ -58,6 +61,12 @@ namespace Kistl.API.Server
         /// Current Context.
         /// </summary>
         public IKistlContext Context { get { return _context; } }
+
+        public void AttachToContext(IKistlContext ctx, bool asReadonly)
+        {
+            _IsReadonly = asReadonly;
+            AttachToContext(ctx);
+        }
 
         /// <summary>
         /// Attach this Object to a Context. This Method is called by the Context.
@@ -295,6 +304,8 @@ namespace Kistl.API.Server
             return this.MemberwiseClone();
         }
 
+        public bool IsReadonly { get { return _attachedObject != null ? _attachedObject.IsReadonly : false; } }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
 
@@ -326,6 +337,7 @@ namespace Kistl.API.Server
 
         private IPersistenceObject _attachedObject;
         private string _attachedObjectProperty;
+
         public void AttachToObject(IPersistenceObject obj, string property)
         {
             if (_attachedObject != null && _attachedObject != obj) throw new ArgumentException("Struct is already attached to another object");

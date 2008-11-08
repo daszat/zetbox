@@ -13,8 +13,21 @@ namespace Kistl.API
         }
     }
 
+    public class ReadOnlyObjectException : NotSupportedException
+    {
+        public ReadOnlyObjectException()
+            : base("This object is readonly")
+        {
+        }
+    }
+
     public abstract class FrozenContext : IKistlContext
     {
+        public FrozenContext()
+        {
+        }
+
+        protected bool _initialized = false;
 
         private static FrozenContext _Single = null;
         public static FrozenContext Single 
@@ -89,6 +102,7 @@ namespace Kistl.API
 
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
+            if (_initialized) throw new ReadOnlyContextException();
             if (obj == null) throw new ArgumentNullException("obj");
 
             // Handle created Objects
@@ -161,6 +175,11 @@ namespace Kistl.API
             get { return false; }
         }
 
+        public bool IsReadonly
+        {
+            get { return _initialized; }
+        }
+
         public IDataObject Create(Type type)
         {
             throw new ReadOnlyContextException();
@@ -198,6 +217,7 @@ namespace Kistl.API
 
         public void Dispose()
         {
+            // Do nothing
         }
     }
 }

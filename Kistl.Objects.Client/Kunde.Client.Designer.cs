@@ -50,6 +50,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Kundenname != value)
                 {
                     NotifyPropertyChanging("Kundenname"); 
@@ -67,6 +68,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Adresse != value)
                 {
                     NotifyPropertyChanging("Adresse"); 
@@ -84,6 +86,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (PLZ != value)
                 {
                     NotifyPropertyChanging("PLZ"); 
@@ -101,6 +104,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Ort != value)
                 {
                     NotifyPropertyChanging("Ort"); 
@@ -118,6 +122,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Land != value)
                 {
                     NotifyPropertyChanging("Land"); 
@@ -264,6 +269,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Value != value)
                 {
                     NotifyPropertyChanging("Value"); 

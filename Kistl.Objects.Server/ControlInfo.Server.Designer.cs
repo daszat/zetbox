@@ -115,6 +115,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (ClassName != value)
                 {
                     NotifyPropertyChanging("ClassName"); 
@@ -133,6 +134,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsContainer != value)
                 {
                     NotifyPropertyChanging("IsContainer"); 
@@ -150,6 +152,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Platform != value)
                 {
                     NotifyPropertyChanging("Platform"); 
@@ -180,6 +183,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (ControlType != value)
                 {
                     NotifyPropertyChanging("ControlType"); 

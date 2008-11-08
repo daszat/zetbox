@@ -53,6 +53,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Enumeration != value)
                 {
                     NotifyPropertyChanging("Enumeration"); 

@@ -166,6 +166,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (FullTypeName != value)
                 {
                     NotifyPropertyChanging("FullTypeName"); 
@@ -184,6 +185,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (MemberName != value)
                 {
                     NotifyPropertyChanging("MemberName"); 

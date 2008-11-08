@@ -6684,6 +6684,7 @@ namespace Kistl.Objects.Server
             {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(202);
             obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(174);
             };
+            _initialized = true;
         }
         
         public override System.Linq.IQueryable<Kistl.API.IDataObject> GetQuery(System.Type type)

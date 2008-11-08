@@ -51,6 +51,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Description != value)
                 {
                     NotifyPropertyChanging("Description"); 
@@ -68,6 +69,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (ControlType != value)
                 {
                     NotifyPropertyChanging("ControlType"); 
@@ -107,6 +109,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Property != value)
                 {
                     NotifyPropertyChanging("Property"); 
@@ -138,6 +141,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Method != value)
                 {
                     NotifyPropertyChanging("Method"); 

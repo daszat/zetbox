@@ -50,6 +50,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (TableName != value)
                 {
                     NotifyPropertyChanging("TableName"); 
@@ -81,6 +82,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_BaseObjectClass != value)
                 {
                     NotifyPropertyChanging("BaseObjectClass"); 
@@ -126,6 +128,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsSimpleObject != value)
                 {
                     NotifyPropertyChanging("IsSimpleObject"); 
@@ -143,6 +146,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsFrozenObject != value)
                 {
                     NotifyPropertyChanging("IsFrozenObject"); 

@@ -20,6 +20,8 @@ namespace Kistl.API.Server
         /// </summary>
         public bool IsDisposed { get; private set; }
 
+        public bool IsReadonly { get { return false; } }
+
         /// <summary>
         /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check requiered.
         /// </summary>

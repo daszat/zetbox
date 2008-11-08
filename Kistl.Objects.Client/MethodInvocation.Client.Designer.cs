@@ -63,6 +63,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Method != value)
                 {
                     NotifyPropertyChanging("Method"); 
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Assembly != value)
                 {
                     NotifyPropertyChanging("Assembly"); 
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (FullTypeName != value)
                 {
                     NotifyPropertyChanging("FullTypeName"); 
@@ -128,6 +131,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (MemberName != value)
                 {
                     NotifyPropertyChanging("MemberName"); 
@@ -159,6 +163,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_Module != value)
                 {
                     NotifyPropertyChanging("Module"); 
@@ -190,6 +195,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (fk_InvokeOnObjectClass != value)
                 {
                     NotifyPropertyChanging("InvokeOnObjectClass"); 

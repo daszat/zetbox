@@ -59,6 +59,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Name != value)
                 {
                     NotifyPropertyChanging("Name"); 

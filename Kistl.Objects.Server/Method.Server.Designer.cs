@@ -118,6 +118,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (MethodName != value)
                 {
                     NotifyPropertyChanging("MethodName"); 
@@ -224,6 +225,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsDisplayable != value)
                 {
                     NotifyPropertyChanging("IsDisplayable"); 

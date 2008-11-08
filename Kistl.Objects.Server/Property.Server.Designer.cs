@@ -46,6 +46,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsList != value)
                 {
                     NotifyPropertyChanging("IsList"); 
@@ -64,6 +65,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (IsNullable != value)
                 {
                     NotifyPropertyChanging("IsNullable"); 

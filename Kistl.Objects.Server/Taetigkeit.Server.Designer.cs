@@ -163,6 +163,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Datum != value)
                 {
                     NotifyPropertyChanging("Datum"); 
@@ -181,6 +182,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 if (Dauer != value)
                 {
                     NotifyPropertyChanging("Dauer"); 
