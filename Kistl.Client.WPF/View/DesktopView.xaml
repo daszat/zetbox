@@ -41,10 +41,7 @@
                             </StackPanel>
                         </HierarchicalDataTemplate>
                         <DataTemplate DataType="{x:Type client:DataTypeModel}">
-                            <StackPanel Orientation="Horizontal">
-                                <ctrls:LoadingIndicator />
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
+                            <view:DataObjectView />
                         </DataTemplate>
                     </TreeView.Resources>
                 </TreeView>
