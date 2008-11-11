@@ -13,19 +13,19 @@ namespace Kistl.Client.PresenterModel
             : base(uiManager, asyncManager, cls)
         {
             _class = cls;
-            Async.Queue(AsyncContext, QueryHasInstances);
+            Async.Queue(AsyncContext, AsyncQueryHasInstances);
         }
 
         #region Async handlers and UI callbacks
 
-        protected override void QueryHasInstances()
+        protected override void AsyncQueryHasInstances()
         {
             Async.Verify();
             var obj = AsyncContext.GetQuery(_class.GetDataType()).FirstOrDefault();
             UI.Queue(UI, () => { HasInstances = (obj != null); State = ModelState.Active; });
         }
 
-        protected override void LoadInstances()
+        protected override void AsyncLoadInstances()
         {
             Async.Verify();
             UI.Queue(UI, () => State = ModelState.Loading);
@@ -42,7 +42,6 @@ namespace Kistl.Client.PresenterModel
         }
 
         #endregion
-
 
         private ObjectClass _class;
     }

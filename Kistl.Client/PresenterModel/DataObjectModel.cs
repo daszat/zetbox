@@ -22,10 +22,10 @@ namespace Kistl.Client.PresenterModel
         {
 
             _object = obj;
-            _object.PropertyChanged += ObjectPropertyChanged;
+            _object.PropertyChanged += AsyncObjectPropertyChanged;
             Async.Queue(_object.Context, () =>
             {
-                UpdateViewCache();
+                AsyncUpdateViewCache();
                 UI.Queue(UI, () => this.State = ModelState.Active);
             });
         }
@@ -46,21 +46,11 @@ namespace Kistl.Client.PresenterModel
                     State = ModelState.Loading;
                     Async.Queue(_object.Context, () =>
                     {
-                        FetchProperties();
+                        AsyncFetchProperties();
                         UI.Queue(UI, () => this.State = ModelState.Active);
                     });
                 }
                 return _propertyModels;
-            }
-            private set
-            {
-                UI.Verify();
-
-                if (value != _propertyModels)
-                {
-                    _propertyModels = value;
-                    OnPropertyChanged("PropertyModels");
-                }
             }
         }
 
@@ -106,7 +96,7 @@ namespace Kistl.Client.PresenterModel
 
         #region Async handlers and UI callbacks
 
-        private void FetchProperties()
+        private void AsyncFetchProperties()
         {
             Async.Verify();
             ObjectClass cls = _object.GetObjectClass(_object.Context);
@@ -131,11 +121,11 @@ namespace Kistl.Client.PresenterModel
             return result;
         }
 
-        private void UpdateViewCache()
+        private void AsyncUpdateViewCache()
         {
             Async.Verify();
             _toStringCache = _object.ToString();
-            InvokePropertyChanged("Name");
+            AsyncOnPropertyChanged("Name");
 
             Icon icon = AsyncGetIcon();
             if (icon != null)
@@ -155,6 +145,7 @@ namespace Kistl.Client.PresenterModel
         /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
         protected virtual Icon AsyncGetIcon()
         {
+            Async.Verify();
             Icon icon = null;
             if (_object is Icon)
             {
@@ -223,16 +214,21 @@ namespace Kistl.Client.PresenterModel
 
         #region PropertyChanged event handlers
 
-        private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void AsyncObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            Async.Verify();
+
+            // defer updating the cache into another work item
             Async.Queue(_object.Context, () =>
             {
                 // flag to the user that something's happening
                 UI.Queue(UI, () => this.State = ModelState.Loading);
-                UpdateViewCache();
+                AsyncUpdateViewCache();
                 // all updates done
                 UI.Queue(UI, () => this.State = ModelState.Active);
             });
+
+            // notify consumers if ID has changed
             if (e.PropertyName == "ID")
                 OnPropertyChanged("ID");
         }
@@ -240,7 +236,8 @@ namespace Kistl.Client.PresenterModel
         #endregion
 
         private IDataObject _object;
-        // other models might need access here
+
+        // other models need access here
         internal IDataObject Object { get { return _object; } }
     }
 }

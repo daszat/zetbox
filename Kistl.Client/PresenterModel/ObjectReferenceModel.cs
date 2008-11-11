@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
 using Kistl.App.Base;
+using System.Collections.ObjectModel;
 
 namespace Kistl.Client.PresenterModel
 {
@@ -18,12 +20,21 @@ namespace Kistl.Client.PresenterModel
 
         #region Public Interface
 
+        public bool HasValue
+        {
+            get
+            {
+                UI.Verify();
+                return _valueCache.Object != null;
+            }
+        }
+
         public bool IsNull
         {
             get
             {
                 UI.Verify();
-                return _valueCache == null;
+                return _valueCache.Object == null;
             }
         }
 
@@ -43,10 +54,11 @@ namespace Kistl.Client.PresenterModel
                 Async.Queue(Object.Context, () =>
                 {
                     Object.SetPropertyValue<IDataObject>(Property.PropertyName, _valueCache.Object);
-                    CheckConstraints();
+                    AsyncCheckConstraints();
                     UI.Queue(UI, () => this.State = ModelState.Active);
                 });
                 OnPropertyChanged("Value");
+                OnPropertyChanged("HasValue");
                 OnPropertyChanged("IsNull");
             }
         }
@@ -55,7 +67,7 @@ namespace Kistl.Client.PresenterModel
 
         #region Async handlers and UI callbacks
 
-        protected override void GetPropertyValue()
+        protected override void AsyncGetPropertyValue()
         {
             Async.Verify();
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);

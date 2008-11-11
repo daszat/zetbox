@@ -17,6 +17,7 @@ namespace Kistl.Client.PresenterModel
             _type = type;
             // wtf am I doing here?
             // TODO: split usage of this P-Model from usage elsewhere?!
+            // TODO: reconsider frozen context usage!
             if (AsyncContext == null)
                 AsyncContext = _type.Context is FrozenContext ? KistlContext.GetContext() : _type.Context;
         }
@@ -51,7 +52,7 @@ namespace Kistl.Client.PresenterModel
                 if (_instances == null)
                 {
                     _instances = new ObservableCollection<DataObjectModel>();
-                    Async.Queue(AsyncContext, LoadInstances);
+                    Async.Queue(AsyncContext, AsyncLoadInstances);
                 }
                 return _instances;
             }
@@ -61,13 +62,19 @@ namespace Kistl.Client.PresenterModel
 
         #region Async handlers and UI callbacks
 
-        protected virtual void QueryHasInstances()
+        /// <summary>
+        /// Sets the HasInstances property to the appropriate value
+        /// </summary>
+        protected virtual void AsyncQueryHasInstances()
         {
             Async.Verify();
             UI.Queue(UI, () => { HasInstances = false; State = ModelState.Active; });
         }
 
-        protected virtual void LoadInstances()
+        /// <summary>
+        /// Loads the instances of this DataType and adds them to the Instances collection
+        /// </summary>
+        protected virtual void AsyncLoadInstances()
         {
             Async.Verify();
             UI.Queue(UI, () => { State = ModelState.Active; });
@@ -77,6 +84,7 @@ namespace Kistl.Client.PresenterModel
         /// <returns>the default icon of this <see cref="DataType"/></returns>
         protected override Kistl.App.GUI.Icon AsyncGetIcon()
         {
+            Async.Verify();
             return _type.DefaultIcon;
         }
 

@@ -15,8 +15,8 @@ namespace Kistl.Client.PresenterModel
         {
             ObjectClasses = new ObservableCollection<DataObjectModel>();
             _module = mdl;
-            _module.PropertyChanged += ModulePropertyChanged;
-            Async.Queue(_module.Context, () => { LoadObjectClasses(); UI.Queue(UI, () => this.State = ModelState.Active); });
+            _module.PropertyChanged += AsyncModulePropertyChanged;
+            Async.Queue(_module.Context, () => { AsyncLoadObjectClasses(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
         #region public interface
@@ -27,7 +27,7 @@ namespace Kistl.Client.PresenterModel
 
         #region Async handlers and UI callbacks
 
-        private void LoadObjectClasses()
+        private void AsyncLoadObjectClasses()
         {
             Async.Verify();
             UI.Queue(UI, () => State = ModelState.Loading);
@@ -53,12 +53,12 @@ namespace Kistl.Client.PresenterModel
 
         #region PropertyChanged event handlers
 
-        private void ModulePropertyChanged(object sender, PropertyChangedEventArgs args)
+        private void AsyncModulePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
             Async.Verify();
             switch (args.PropertyName)
             {
-                case "ModuleName": InvokePropertyChanged("Name"); break;
+                case "ModuleName": AsyncOnPropertyChanged("Name"); break;
             }
         }
 

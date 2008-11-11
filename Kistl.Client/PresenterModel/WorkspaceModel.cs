@@ -13,6 +13,9 @@ namespace Kistl.Client.PresenterModel
         {
         }
 
+        /// <summary>
+        /// A collection of currently "active" models
+        /// </summary>
         public ObservableCollection<DataObjectModel> Objects { get; private set; }
     }
 }

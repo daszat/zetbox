@@ -78,8 +78,9 @@ namespace Kistl.Client.PresenterModel
         /// Delegate a property change notification to the UI thread.
         /// </summary>
         /// <param name="propertyName">the changed property</param>
-        protected void InvokePropertyChanged(string propertyName)
+        protected void AsyncOnPropertyChanged(string propertyName)
         {
+            Async.Verify();
             UI.Queue(UI, () => OnPropertyChanged(propertyName));
         }
 
@@ -95,5 +96,6 @@ namespace Kistl.Client.PresenterModel
         }
 
         #endregion
+
     }
 }

@@ -17,7 +17,7 @@ namespace Kistl.Client.PresenterModel
             _ctx = ctx;
             Modules = new ObservableCollection<ModuleModel>();
             OpenObjects = new ObservableCollection<DataObjectModel>();
-            Async.Queue(_ctx, () => { LoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
+            Async.Queue(_ctx, () => { AsyncLoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
         #region public interface
@@ -37,7 +37,7 @@ namespace Kistl.Client.PresenterModel
 
         #region Async handlers and UI callbacks
 
-        private void LoadModules()
+        private void AsyncLoadModules()
         {
             Async.Verify();
             var modules = _ctx.GetQuery<Module>().ToList();
