@@ -39,7 +39,6 @@ namespace Kistl.Client.PresenterModel
                 }
                 State = ModelState.Active;
             });
-
         }
 
         #endregion

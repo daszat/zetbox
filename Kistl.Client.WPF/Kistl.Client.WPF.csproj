@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2C899579-BF78-442B-8810-8C7E7A2CA212}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -210,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ObjectReferenceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PropertyTextBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -332,6 +336,9 @@
     </Compile>
     <Compile Include="View\NullablePropertyTextBoxView.xaml.cs">
       <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ObjectReferenceView.xaml.cs">
+      <DependentUpon>ObjectReferenceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PropertyTextBoxView.xaml.cs">
       <DependentUpon>PropertyTextBoxView.xaml</DependentUpon>

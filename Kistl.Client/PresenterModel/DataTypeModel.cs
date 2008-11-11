@@ -74,6 +74,12 @@ namespace Kistl.Client.PresenterModel
 
         }
 
+        /// <returns>the default icon of this <see cref="DataType"/></returns>
+        protected override Kistl.App.GUI.Icon AsyncGetIcon()
+        {
+            return _type.DefaultIcon;
+        }
+
         #endregion
 
         private DataType _type;

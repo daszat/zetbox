@@ -41,4 +41,8 @@
         <view:NullablePropertyTextBoxView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type client:ObjectReferenceModel}">
+        <view:ObjectReferenceView />
+    </DataTemplate>
+    
 </ResourceDictionary>

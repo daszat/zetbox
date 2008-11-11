@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls">
     <DockPanel>
-        <ctrls:LoadingIndicator DockPanel.Dock="Left" />
         <Image Source="{Binding IconPath}"
-               Width="16"
-               Height="16" />
-        <TextBlock Text="{Binding Name}" />
+               Width="14"
+               Height="14" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="("
+                       Margin="3,0,0,0" />
+            <TextBlock Text="{Binding ID}" />
+            <TextBlock Text=")" />
+            <TextBlock Text="{Binding Name}"
+                       Margin="3,0,0,0" />
+        </StackPanel>
+        <ctrls:LoadingIndicator DockPanel.Dock="Left" />
     </DockPanel>
 </UserControl>

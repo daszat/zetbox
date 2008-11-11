@@ -7,12 +7,12 @@ using Kistl.App.Base;
 
 namespace Kistl.Client.PresenterModel
 {
-    public class ObjectReferenceModel<TValue>
-        : PropertyModel<TValue>
-        where TValue : IDataObject
+
+    public class ObjectReferenceModel
+        : PropertyModel<DataObjectModel>
     {
-        public ObjectReferenceModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ObjectReferenceProperty prop)
-            : base(uiManager, asyncManager, obj, prop)
+        public ObjectReferenceModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject referenceHolder, ObjectReferenceProperty prop)
+            : base(uiManager, asyncManager, referenceHolder, prop)
         { }
 
 
@@ -27,11 +27,11 @@ namespace Kistl.Client.PresenterModel
             }
         }
 
-        private TValue _valueCache;
+        private DataObjectModel _valueCache;
         /// <summary>
         /// The value of the property presented by this model
         /// </summary>
-        public override TValue Value
+        public override DataObjectModel Value
         {
             get { UI.Verify(); return _valueCache; }
             set
@@ -42,7 +42,7 @@ namespace Kistl.Client.PresenterModel
                 State = ModelState.Loading;
                 Async.Queue(Object.Context, () =>
                 {
-                    Object.SetPropertyValue<TValue>(Property.PropertyName, value);
+                    Object.SetPropertyValue<IDataObject>(Property.PropertyName, _valueCache.Object);
                     CheckConstraints();
                     UI.Queue(UI, () => this.State = ModelState.Active);
                 });
@@ -58,8 +58,8 @@ namespace Kistl.Client.PresenterModel
         protected override void GetPropertyValue()
         {
             Async.Verify();
-            TValue newValue = Object.GetPropertyValue<TValue>(Property.PropertyName);
-            UI.Queue(UI, () => Value = newValue);
+            IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
+            UI.Queue(UI, () => Value = newValue == null ? null : new DataObjectModel(UI, Async, newValue));
         }
 
         #endregion

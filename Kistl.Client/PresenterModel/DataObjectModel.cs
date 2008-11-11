@@ -8,6 +8,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.GUI;
+using System.Diagnostics;
 
 namespace Kistl.Client.PresenterModel
 {
@@ -19,19 +20,19 @@ namespace Kistl.Client.PresenterModel
         public DataObjectModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj)
             : base(uiManager, asyncManager)
         {
-            _propertyModels = new ObservableCollection<PresentableModel>();
+
             _object = obj;
             _object.PropertyChanged += ObjectPropertyChanged;
             Async.Queue(_object.Context, () =>
             {
                 UpdateViewCache();
-                FetchProperties();
-
                 UI.Queue(UI, () => this.State = ModelState.Active);
             });
         }
 
         #region Public Interface
+
+        public int ID { get { UI.Verify(); return _object.ID; } }
 
         private ObservableCollection<PresentableModel> _propertyModels;
         public ObservableCollection<PresentableModel> PropertyModels
@@ -39,11 +40,22 @@ namespace Kistl.Client.PresenterModel
             get
             {
                 UI.Verify();
+                if (_propertyModels == null)
+                {
+                    _propertyModels = new ObservableCollection<PresentableModel>();
+                    State = ModelState.Loading;
+                    Async.Queue(_object.Context, () =>
+                    {
+                        FetchProperties();
+                        UI.Queue(UI, () => this.State = ModelState.Active);
+                    });
+                }
                 return _propertyModels;
             }
             private set
             {
                 UI.Verify();
+
                 if (value != _propertyModels)
                 {
                     _propertyModels = value;
@@ -125,19 +137,7 @@ namespace Kistl.Client.PresenterModel
             _toStringCache = _object.ToString();
             InvokePropertyChanged("Name");
 
-            Icon icon = null;
-            if (_object is Icon)
-            {
-                icon = (Icon)_object;
-            }
-            else if (_object is ObjectClass)
-            {
-                icon = ((ObjectClass)_object).DefaultIcon;
-            }
-            else
-            {
-                icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
-            }
+            Icon icon = AsyncGetIcon();
             if (icon != null)
             {
                 string newIconPath = GetIconPath(icon.IconFile);
@@ -149,6 +149,24 @@ namespace Kistl.Client.PresenterModel
             }
         }
 
+        /// <summary>
+        /// Override this to present a custom icon
+        /// </summary>
+        /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
+        protected virtual Icon AsyncGetIcon()
+        {
+            Icon icon = null;
+            if (_object is Icon)
+            {
+                icon = (Icon)_object;
+            }
+            else
+            {
+                icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
+            }
+            return icon;
+        }
+
         private void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
         {
             UI.Verify();
@@ -156,43 +174,47 @@ namespace Kistl.Client.PresenterModel
             {
                 var prop = pm as Property;
 
-                if (pm is BoolProperty)
+                if (pm is BoolProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
                         PropertyModels.Add(new NullableBoolModel(UI, Async, _object, (BoolProperty)pm));
                     else
                         PropertyModels.Add(new BoolModel(UI, Async, _object, (BoolProperty)pm));
                 }
-                else if (pm is DateTimeProperty)
+                else if (pm is DateTimeProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
                         PropertyModels.Add(new NullableDateTimeModel(UI, Async, _object, (DateTimeProperty)pm));
                     else
                         PropertyModels.Add(new DateTimeModel(UI, Async, _object, (DateTimeProperty)pm));
                 }
-                else if (pm is DoubleProperty)
+                else if (pm is DoubleProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
                         PropertyModels.Add(new NullableDoubleModel(UI, Async, _object, (DoubleProperty)pm));
                     else
                         PropertyModels.Add(new DoubleModel(UI, Async, _object, (DoubleProperty)pm));
                 }
-                else if (pm is IntProperty)
+                else if (pm is IntProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
                         PropertyModels.Add(new NullableIntModel(UI, Async, _object, (IntProperty)pm));
                     else
                         PropertyModels.Add(new IntModel(UI, Async, _object, (IntProperty)pm));
                 }
-                else if (pm is StringProperty)
+                else if (pm is StringProperty && !prop.IsList)
                 {
-                        PropertyModels.Add(new StringModel(UI, Async, _object, (StringProperty)pm));
+                    PropertyModels.Add(new StringModel(UI, Async, _object, (StringProperty)pm));
                 }
-                else if (pm is ObjectReferenceProperty)
+                else if (pm is ObjectReferenceProperty && !prop.IsList)
                 {
                     var orp = (ObjectReferenceProperty)pm;
                     if (!orp.IsList)
-                        PropertyModels.Add(new ObjectReferenceModel<IDataObject>(UI, Async, _object, orp));
+                        PropertyModels.Add(new ObjectReferenceModel(UI, Async, _object, orp));
+                }
+                else
+                {
+                    Trace.TraceWarning("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
                 }
             }
         }
@@ -211,10 +233,14 @@ namespace Kistl.Client.PresenterModel
                 // all updates done
                 UI.Queue(UI, () => this.State = ModelState.Active);
             });
+            if (e.PropertyName == "ID")
+                OnPropertyChanged("ID");
         }
 
         #endregion
 
         private IDataObject _object;
+        // other models might need access here
+        internal IDataObject Object { get { return _object; } }
     }
 }
