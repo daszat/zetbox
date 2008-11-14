@@ -11,17 +11,15 @@ namespace Kistl.Client.PresenterModel
 {
     public class DataTypeModel : DataObjectModel
     {
-        public DataTypeModel(IThreadManager uiManager, IThreadManager asyncManager, DataType type)
-            : base(uiManager, asyncManager, type)
+        public DataTypeModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            DataType type)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, type)
         {
             _type = type;
-            // wtf am I doing here?
-            // TODO: split usage of this P-Model from usage elsewhere?!
-            // TODO: reconsider frozen context usage!
-            if (AsyncContext == null)
-                AsyncContext = _type.Context is FrozenContext ? KistlContext.GetContext() : _type.Context;
 
-            Async.Queue(AsyncContext, AsyncUpdateViewCache);
+            Async.Queue(DataContext, AsyncUpdateViewCache);
         }
 
         #region Public interface
@@ -54,7 +52,7 @@ namespace Kistl.Client.PresenterModel
                 if (_instances == null)
                 {
                     _instances = new ObservableCollection<DataObjectModel>();
-                    Async.Queue(AsyncContext, AsyncLoadInstances);
+                    Async.Queue(DataContext, AsyncLoadInstances);
                 }
                 return _instances;
             }
@@ -89,13 +87,12 @@ namespace Kistl.Client.PresenterModel
             Async.Verify();
             if (_type != null)
                 return _type.DefaultIcon;
-            else 
+            else
                 return null;
         }
 
         #endregion
 
         private DataType _type;
-        protected static IKistlContext AsyncContext { get; private set; }
     }
 }

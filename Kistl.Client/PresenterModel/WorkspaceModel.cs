@@ -11,13 +11,14 @@ namespace Kistl.Client.PresenterModel
 {
     public class WorkspaceModel : PresentableModel
     {
-        public WorkspaceModel(IThreadManager uiManager, IThreadManager asyncManager, IKistlContext ctx)
-            : base(uiManager, asyncManager)
+        public WorkspaceModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx)
+            : base(uiManager, asyncManager, guiCtx, dataCtx)
         {
-            _ctx = ctx;
             Modules = new ObservableCollection<ModuleModel>();
             OpenObjects = new ObservableCollection<DataObjectModel>();
-            Async.Queue(_ctx, () => { AsyncLoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
+            Async.Queue(DataContext, () => { AsyncLoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
         #region public interface
@@ -40,12 +41,12 @@ namespace Kistl.Client.PresenterModel
         private void AsyncLoadModules()
         {
             Async.Verify();
-            var modules = _ctx.GetQuery<Module>().ToList();
+            var modules = DataContext.GetQuery<Module>().ToList();
             UI.Queue(UI, () =>
             {
                 foreach (var m in modules)
                 {
-                    Modules.Add(new ModuleModel(UI, Async, m));
+                    Modules.Add(new ModuleModel(UI, Async, GuiContext, DataContext, m));
                 }
                 State = ModelState.Active;
             });
@@ -53,6 +54,5 @@ namespace Kistl.Client.PresenterModel
 
         #endregion
 
-        private IKistlContext _ctx;
     }
 }

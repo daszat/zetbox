@@ -1,19 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+
+using Kistl.API;
 using Kistl.App.Base;
-using System.Collections.ObjectModel;
 
 namespace Kistl.Client.PresenterModel
 {
     public class ObjectClassModel : DataTypeModel
     {
-        public ObjectClassModel(IThreadManager uiManager, IThreadManager asyncManager, ObjectClass cls)
-            : base(uiManager, asyncManager, cls)
+        public ObjectClassModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ObjectClass cls)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, cls)
         {
             _class = cls;
-            Async.Queue(AsyncContext, AsyncQueryHasInstances);
+            Async.Queue(DataContext, AsyncQueryHasInstances);
         }
 
         #region Async handlers and UI callbacks
@@ -21,7 +26,7 @@ namespace Kistl.Client.PresenterModel
         protected override void AsyncQueryHasInstances()
         {
             Async.Verify();
-            var obj = AsyncContext.GetQuery(_class.GetDataType()).FirstOrDefault();
+            var obj = DataContext.GetQuery(_class.GetDataType()).FirstOrDefault();
             UI.Queue(UI, () => { HasInstances = (obj != null); State = ModelState.Active; });
         }
 
@@ -29,14 +34,14 @@ namespace Kistl.Client.PresenterModel
         {
             Async.Verify();
             UI.Queue(UI, () => State = ModelState.Loading);
-            var objs = AsyncContext.GetQuery(_class.GetDataType()).ToList().OrderBy(obj => obj.ToString()).ToList();
+            var objs = DataContext.GetQuery(_class.GetDataType()).ToList().OrderBy(obj => obj.ToString()).ToList();
 
             UI.Queue(UI, () =>
             {
                 foreach (var obj in objs)
                 {
                     // TODO: search for existing DOModel
-                    Instances.Add(new DataObjectModel(UI, Async, obj));
+                    Instances.Add(new DataObjectModel(UI, Async, GuiContext, DataContext, obj));
                 }
                 State = ModelState.Active;
             });

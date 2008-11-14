@@ -1,22 +1,27 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.App.Base;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+
+using Kistl.API;
+using Kistl.App.Base;
 
 namespace Kistl.Client.PresenterModel
 {
     public class ModuleModel : DataObjectModel
     {
-        public ModuleModel(IThreadManager uiManager, IThreadManager asyncManager, Module mdl)
-            : base(uiManager, asyncManager, mdl)
+        public ModuleModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            Module mdl)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, mdl)
         {
             ObjectClasses = new ObservableCollection<DataObjectModel>();
             _module = mdl;
             _module.PropertyChanged += AsyncModulePropertyChanged;
-            Async.Queue(_module.Context, () => { AsyncLoadObjectClasses(); UI.Queue(UI, () => this.State = ModelState.Active); });
+            Async.Queue(DataContext, () => { AsyncLoadObjectClasses(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
         #region public interface
@@ -31,18 +36,18 @@ namespace Kistl.Client.PresenterModel
         {
             Async.Verify();
             UI.Queue(UI, () => State = ModelState.Loading);
-            var datatypes = _module.Context.GetQuery<DataType>().Where(dt => dt.Module.ID == _module.ID).OrderBy(dt => dt.ClassName).ToList();
+            var datatypes = DataContext.GetQuery<DataType>().Where(dt => dt.Module.ID == _module.ID).OrderBy(dt => dt.ClassName).ToList();
             UI.Queue(UI, () =>
             {
                 foreach (var dt in datatypes)
                 {
                     if (dt is ObjectClass)
                     {
-                        ObjectClasses.Add(new ObjectClassModel(UI, Async, (ObjectClass)dt));
+                        ObjectClasses.Add(new ObjectClassModel(UI, Async, GuiContext, DataContext, (ObjectClass)dt));
                     }
                     else
                     {
-                        ObjectClasses.Add(new DataTypeModel(UI, Async, dt));
+                        ObjectClasses.Add(new DataTypeModel(UI, Async, GuiContext, DataContext, dt));
                     }
                 }
                 State = ModelState.Active;

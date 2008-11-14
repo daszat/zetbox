@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.GUI;
-using System.Diagnostics;
 
 namespace Kistl.Client.PresenterModel
 {
@@ -17,13 +17,15 @@ namespace Kistl.Client.PresenterModel
     /// </summary>
     public class DataObjectModel : PresentableModel
     {
-        public DataObjectModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj)
-            : base(uiManager, asyncManager)
+        public DataObjectModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj)
+            : base(uiManager, asyncManager, guiCtx, dataCtx)
         {
-
             _object = obj;
             _object.PropertyChanged += AsyncObjectPropertyChanged;
-            Async.Queue(_object.Context, () =>
+            Async.Queue(DataContext, () =>
             {
                 AsyncUpdateViewCache();
                 UI.Queue(UI, () => this.State = ModelState.Active);
@@ -44,7 +46,7 @@ namespace Kistl.Client.PresenterModel
                 {
                     _propertyModels = new ObservableCollection<PresentableModel>();
                     State = ModelState.Loading;
-                    Async.Queue(_object.Context, () =>
+                    Async.Queue(DataContext, () =>
                     {
                         AsyncFetchProperties();
                         UI.Queue(UI, () => this.State = ModelState.Active);
@@ -101,7 +103,7 @@ namespace Kistl.Client.PresenterModel
             Async.Verify();
 
             // load properties
-            ObjectClass cls = _object.GetObjectClass(_object.Context);
+            ObjectClass cls = _object.GetObjectClass(GuiContext);
             List<BaseProperty> props = new List<BaseProperty>();
             List<Method> methods = new List<Method>();
             while (cls != null)
@@ -136,40 +138,40 @@ namespace Kistl.Client.PresenterModel
                 if (pm is BoolProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableBoolModel(UI, Async, _object, (BoolProperty)pm));
+                        PropertyModels.Add(new NullableBoolModel(UI, Async, GuiContext, DataContext, _object, (BoolProperty)pm));
                     else
-                        PropertyModels.Add(new BoolModel(UI, Async, _object, (BoolProperty)pm));
+                        PropertyModels.Add(new BoolModel(UI, Async, GuiContext, DataContext, _object, (BoolProperty)pm));
                 }
                 else if (pm is DateTimeProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableDateTimeModel(UI, Async, _object, (DateTimeProperty)pm));
+                        PropertyModels.Add(new NullableDateTimeModel(UI, Async, GuiContext, DataContext, _object, (DateTimeProperty)pm));
                     else
-                        PropertyModels.Add(new DateTimeModel(UI, Async, _object, (DateTimeProperty)pm));
+                        PropertyModels.Add(new DateTimeModel(UI, Async, GuiContext, DataContext, _object, (DateTimeProperty)pm));
                 }
                 else if (pm is DoubleProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableDoubleModel(UI, Async, _object, (DoubleProperty)pm));
+                        PropertyModels.Add(new NullableDoubleModel(UI, Async, GuiContext, DataContext, _object, (DoubleProperty)pm));
                     else
-                        PropertyModels.Add(new DoubleModel(UI, Async, _object, (DoubleProperty)pm));
+                        PropertyModels.Add(new DoubleModel(UI, Async, GuiContext, DataContext, _object, (DoubleProperty)pm));
                 }
                 else if (pm is IntProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableIntModel(UI, Async, _object, (IntProperty)pm));
+                        PropertyModels.Add(new NullableIntModel(UI, Async, GuiContext, DataContext, _object, (IntProperty)pm));
                     else
-                        PropertyModels.Add(new IntModel(UI, Async, _object, (IntProperty)pm));
+                        PropertyModels.Add(new IntModel(UI, Async, GuiContext, DataContext, _object, (IntProperty)pm));
                 }
                 else if (pm is StringProperty && !prop.IsList)
                 {
-                    PropertyModels.Add(new StringModel(UI, Async, _object, (StringProperty)pm));
+                    PropertyModels.Add(new StringModel(UI, Async, GuiContext, DataContext, _object, (StringProperty)pm));
                 }
                 else if (pm is ObjectReferenceProperty && !prop.IsList)
                 {
                     var orp = (ObjectReferenceProperty)pm;
                     if (!orp.IsList)
-                        PropertyModels.Add(new ObjectReferenceModel(UI, Async, _object, orp));
+                        PropertyModels.Add(new ObjectReferenceModel(UI, Async, GuiContext, DataContext, _object, orp));
                 }
                 else
                 {
@@ -188,27 +190,27 @@ namespace Kistl.Client.PresenterModel
 
                 if (retParam is BoolParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new BoolResultModel(UI, Async, _object, pm));
+                    PropertyModels.Add(new BoolResultModel(UI, Async, GuiContext, DataContext, _object, pm));
                 }
                 else if (pm is DateTimeParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new DateTimeResultModel(UI, Async, _object, pm));
+                    PropertyModels.Add(new DateTimeResultModel(UI, Async, GuiContext, DataContext, _object, pm));
                 }
                 else if (pm is DoubleParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new DoubleResultModel(UI, Async, _object, pm));
+                    PropertyModels.Add(new DoubleResultModel(UI, Async, GuiContext, DataContext, _object, pm));
                 }
                 else if (pm is IntParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new IntResultModel(UI, Async, _object, pm));
+                    PropertyModels.Add(new IntResultModel(UI, Async, GuiContext, DataContext, _object, pm));
                 }
                 else if (pm is StringParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new StringResultModel(UI, Async, _object, pm));
+                    PropertyModels.Add(new StringResultModel(UI, Async, GuiContext, DataContext, _object, pm));
                 }
                 else if (pm is ObjectParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new DataObjectResultModel(UI, Async, _object, pm));
+                    PropertyModels.Add(new DataObjectResultModel(UI, Async, GuiContext, DataContext, _object, pm));
                 }
                 else
                 {
@@ -219,7 +221,7 @@ namespace Kistl.Client.PresenterModel
 
         private static string GetIconPath(string name)
         {
-            string result = ApplicationContext.Current.Configuration.Client.DocumentStore
+            string result = GuiApplicationContext.Current.Configuration.Client.DocumentStore
                 + @"\GUI.Icons\"
                 + name;
             result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
@@ -229,9 +231,12 @@ namespace Kistl.Client.PresenterModel
         protected void AsyncUpdateViewCache()
         {
             Async.Verify();
+
+            // update Name
             _toStringCache = _object.ToString();
             AsyncOnPropertyChanged("Name");
 
+            // update IconPath
             Icon icon = AsyncGetIcon();
             if (icon != null)
             {
@@ -258,7 +263,7 @@ namespace Kistl.Client.PresenterModel
             }
             else
             {
-                icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
+                icon = _object.GetObjectClass(GuiContext).DefaultIcon;
             }
             return icon;
         }
@@ -273,7 +278,7 @@ namespace Kistl.Client.PresenterModel
             Async.Verify();
 
             // defer updating the cache into another work item
-            Async.Queue(_object.Context, () =>
+            Async.Queue(DataContext, () =>
             {
                 // flag to the user that something's happening
                 UI.Queue(UI, () => this.State = ModelState.Loading);

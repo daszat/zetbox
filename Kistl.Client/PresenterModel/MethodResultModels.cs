@@ -11,8 +11,11 @@ namespace Kistl.Client.PresenterModel
 
     public abstract class MethodResultModel<TValue> : PresentableModel
     {
-        public MethodResultModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, Method m)
-            : base(uiManager, asyncManager)
+        public MethodResultModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, Method m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx)
         {
             Object = obj;
             Method = m;
@@ -70,7 +73,7 @@ namespace Kistl.Client.PresenterModel
 
             // although we're already Async here, defer actually checking 
             // the object onto another thread
-            Async.Queue(Object.Context, () =>
+            Async.Queue(DataContext, () =>
             {
                 // flag to the user that something's happening
                 UI.Queue(UI, () => this.State = ModelState.Loading);
@@ -104,8 +107,11 @@ namespace Kistl.Client.PresenterModel
         : MethodResultModel<TValue>, IValueModel<TValue>
         where TValue : struct
     {
-        public StructResultModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, Method m)
-            : base(uiManager, asyncManager, obj, m)
+        public StructResultModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, Method m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
         {
         }
 
@@ -135,7 +141,7 @@ namespace Kistl.Client.PresenterModel
                 if (!_valueCache.Equals(value))
                 {
                     _valueCache = value;
-                    Async.Queue(Object.Context, AsyncOnResultChanged);
+                    Async.Queue(DataContext, AsyncOnResultChanged);
                 }
             }
         }
@@ -145,8 +151,11 @@ namespace Kistl.Client.PresenterModel
         : MethodResultModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>
     where TValue : struct
     {
-        public NullableResultModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, Method m)
-            : base(uiManager, asyncManager, obj, m)
+        public NullableResultModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, Method m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
         {
         }
 
@@ -175,7 +184,7 @@ namespace Kistl.Client.PresenterModel
                     return;
 
                 _valueCache = value;
-                Async.Queue(Object.Context, AsyncOnResultChanged);
+                Async.Queue(DataContext, AsyncOnResultChanged);
             }
         }
     }
@@ -184,8 +193,11 @@ namespace Kistl.Client.PresenterModel
         : MethodResultModel<TValue>, IValueModel<TValue>
         where TValue : class
     {
-        public ObjectResultModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, Method m)
-            : base(uiManager, asyncManager, obj, m)
+        public ObjectResultModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, Method m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
         {
         }
 
@@ -213,7 +225,7 @@ namespace Kistl.Client.PresenterModel
                 if (_valueCache != value)
                 {
                     _valueCache = value;
-                    Async.Queue(Object.Context, AsyncOnResultChanged);
+                    Async.Queue(DataContext, AsyncOnResultChanged);
                 }
             }
         }

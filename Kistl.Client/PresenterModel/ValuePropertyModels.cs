@@ -40,15 +40,18 @@ namespace Kistl.Client.PresenterModel
 
     public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
     {
-        public PropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, BaseProperty bp)
-            : base(uiManager, asyncManager)
+        public PropertyModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, BaseProperty bp)
+            : base(uiManager, asyncManager, guiCtx, dataCtx)
         {
             Object = obj;
             Property = bp;
 
             Property.PropertyChanged += AsyncPropertyPropertyChanged;
             Object.PropertyChanged += AsyncObjectPropertyChanged;
-            Async.Queue(Object.Context, () =>
+            Async.Queue(DataContext, () =>
             {
                 this.AsyncGetPropertyValue();
                 this.AsyncCheckConstraints();
@@ -94,7 +97,7 @@ namespace Kistl.Client.PresenterModel
 
             // although we're already Async here, defer actually checking 
             // the object onto another thread
-            Async.Queue(Object.Context, () =>
+            Async.Queue(DataContext, () =>
             {
                 // flag to the user that something's happening
                 UI.Queue(UI, () => this.State = ModelState.Loading);
@@ -165,8 +168,11 @@ namespace Kistl.Client.PresenterModel
         : PropertyModel<TValue>, IValueModel<TValue>
         where TValue : struct
     {
-        public ValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, obj, prop)
+        public ValuePropertyModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, ValueTypeProperty prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
         {
         }
 
@@ -188,7 +194,7 @@ namespace Kistl.Client.PresenterModel
 
                 _valueCache = value;
                 State = ModelState.Loading;
-                Async.Queue(Object.Context, () =>
+                Async.Queue(DataContext, () =>
                 {
                     Object.SetPropertyValue<TValue>(Property.PropertyName, value);
                     AsyncCheckConstraints();
@@ -217,8 +223,11 @@ namespace Kistl.Client.PresenterModel
         : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>
         where TValue : struct
     {
-        public NullableValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, obj, prop)
+        public NullableValuePropertyModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, ValueTypeProperty prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
         {
         }
 
@@ -270,7 +279,7 @@ namespace Kistl.Client.PresenterModel
 
                 _valueCache = value;
                 State = ModelState.Loading;
-                Async.Queue(Object.Context, () =>
+                Async.Queue(DataContext, () =>
                 {
                     Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
                     AsyncCheckConstraints();
@@ -301,8 +310,11 @@ namespace Kistl.Client.PresenterModel
         : PropertyModel<TValue>, IValueModel<TValue>
         where TValue : class
     {
-        public ReferencePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, obj, prop)
+        public ReferencePropertyModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject obj, ValueTypeProperty prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
         {
         }
 
@@ -351,7 +363,7 @@ namespace Kistl.Client.PresenterModel
 
                 _valueCache = value;
                 State = ModelState.Loading;
-                Async.Queue(Object.Context, () =>
+                Async.Queue(DataContext, () =>
                 {
                     Object.SetPropertyValue<TValue>(Property.PropertyName, value);
                     AsyncCheckConstraints();

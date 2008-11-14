@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
+
 namespace Kistl.Client.PresenterModel
 {
     public enum ModelState
@@ -32,11 +34,26 @@ namespace Kistl.Client.PresenterModel
         /// </summary>
         protected IThreadManager Async { get; private set; }
 
-        public PresentableModel(IThreadManager uiManager, IThreadManager asyncManager)
+        /// <summary>
+        /// A read-only <see cref="IKistlContext"/> to access meta data
+        /// </summary>
+        protected IKistlContext GuiContext { get; private set; }
+        /// <summary>
+        /// A <see cref="IKistlContext"/> to access the current user's data
+        /// </summary>
+        protected IKistlContext DataContext { get; private set; }
+
+        public PresentableModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx)
         {
-            Async = asyncManager;
             UI = uiManager;
             UI.Verify();
+
+            Async = asyncManager;
+
+            GuiContext = guiCtx;
+            DataContext = dataCtx;
         }
 
         public ModelState State

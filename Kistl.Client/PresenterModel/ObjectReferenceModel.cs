@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace Kistl.Client.PresenterModel
 {
@@ -14,8 +14,11 @@ namespace Kistl.Client.PresenterModel
     public class ObjectReferenceModel
         : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
     {
-        public ObjectReferenceModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject referenceHolder, ObjectReferenceProperty prop)
-            : base(uiManager, asyncManager, referenceHolder, prop)
+        public ObjectReferenceModel(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            IDataObject referenceHolder, ObjectReferenceProperty prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, referenceHolder, prop)
         { }
 
 
@@ -64,7 +67,7 @@ namespace Kistl.Client.PresenterModel
 
                 _valueCache = value;
                 State = ModelState.Loading;
-                Async.Queue(Object.Context, () =>
+                Async.Queue(DataContext, () =>
                 {
                     Object.SetPropertyValue<IDataObject>(Property.PropertyName, _valueCache == null ? null : _valueCache.Object);
                     AsyncCheckConstraints();
@@ -85,7 +88,7 @@ namespace Kistl.Client.PresenterModel
                 if (_domain == null)
                 {
                     _domain = new ObservableCollection<DataObjectModel>();
-                    Async.Queue(Object.Context, AsyncFetchDomain);
+                    Async.Queue(DataContext, AsyncFetchDomain);
                 }
                 return _domain;
             }
@@ -99,7 +102,7 @@ namespace Kistl.Client.PresenterModel
         {
             Async.Verify();
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
-            UI.Queue(UI, () => Value = newValue == null ? null : new DataObjectModel(UI, Async, newValue));
+            UI.Queue(UI, () => Value = newValue == null ? null : new DataObjectModel(UI, Async, GuiContext, DataContext, newValue));
         }
 
         private void AsyncFetchDomain()
@@ -109,7 +112,7 @@ namespace Kistl.Client.PresenterModel
 
             UI.Queue(UI, () => State = ModelState.Loading);
 
-            var objs = Object.Context.GetQuery(Object.GetObjectClass(Object.Context).GetDataType())
+            var objs = DataContext.GetQuery(Object.GetObjectClass(Object.Context).GetDataType())
                 .ToList().OrderBy(obj => obj.ToString()).ToList();
 
             UI.Queue(UI, () =>
@@ -117,7 +120,7 @@ namespace Kistl.Client.PresenterModel
                 foreach (var obj in objs)
                 {
                     // TODO: search for existing DOModel
-                    _domain.Add(new DataObjectModel(UI, Async, obj));
+                    _domain.Add(new DataObjectModel(UI, Async, GuiContext, DataContext, obj));
                 }
                 State = ModelState.Active;
             });
