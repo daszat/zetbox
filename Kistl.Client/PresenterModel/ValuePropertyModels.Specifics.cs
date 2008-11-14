@@ -15,8 +15,9 @@ namespace Kistl.Client.PresenterModel
         public BoolModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, BoolProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
@@ -28,8 +29,9 @@ namespace Kistl.Client.PresenterModel
         public NullableBoolModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, BoolProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
@@ -43,8 +45,9 @@ namespace Kistl.Client.PresenterModel
         public DateTimeModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, DateTimeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
@@ -56,8 +59,9 @@ namespace Kistl.Client.PresenterModel
         public NullableDateTimeModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, DateTimeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
@@ -71,8 +75,9 @@ namespace Kistl.Client.PresenterModel
         public DoubleModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, DoubleProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
@@ -84,8 +89,9 @@ namespace Kistl.Client.PresenterModel
         public NullableDoubleModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, DoubleProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
@@ -99,8 +105,9 @@ namespace Kistl.Client.PresenterModel
         public IntModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, IntProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
@@ -112,8 +119,9 @@ namespace Kistl.Client.PresenterModel
         public NullableIntModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, IntProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
@@ -127,8 +135,9 @@ namespace Kistl.Client.PresenterModel
         public StringModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, StringProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
         }
     }

@@ -14,8 +14,9 @@ namespace Kistl.Client.PresenterModel
         public DataTypeModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             DataType type)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, type)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, type)
         {
             _type = type;
 

@@ -43,8 +43,9 @@ namespace Kistl.Client.PresenterModel
         public PropertyModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, BaseProperty bp)
-            : base(uiManager, asyncManager, guiCtx, dataCtx)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
         {
             Object = obj;
             Property = bp;
@@ -171,8 +172,9 @@ namespace Kistl.Client.PresenterModel
         public ValuePropertyModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
         }
 
@@ -226,8 +228,9 @@ namespace Kistl.Client.PresenterModel
         public NullableValuePropertyModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
         }
 
@@ -313,8 +316,9 @@ namespace Kistl.Client.PresenterModel
         public ReferencePropertyModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, prop)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
         {
         }
 

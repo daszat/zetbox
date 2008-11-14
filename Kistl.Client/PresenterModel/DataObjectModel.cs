@@ -20,8 +20,9 @@ namespace Kistl.Client.PresenterModel
         public DataObjectModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj)
-            : base(uiManager, asyncManager, guiCtx, dataCtx)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
         {
             _object = obj;
             _object.PropertyChanged += AsyncObjectPropertyChanged;
@@ -138,40 +139,40 @@ namespace Kistl.Client.PresenterModel
                 if (pm is BoolProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableBoolModel(UI, Async, GuiContext, DataContext, _object, (BoolProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<NullableBoolModel>(_object, (BoolProperty)pm));
                     else
-                        PropertyModels.Add(new BoolModel(UI, Async, GuiContext, DataContext, _object, (BoolProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<BoolModel>(_object, (BoolProperty)pm));
                 }
                 else if (pm is DateTimeProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableDateTimeModel(UI, Async, GuiContext, DataContext, _object, (DateTimeProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<NullableDateTimeModel>(_object, (DateTimeProperty)pm));
                     else
-                        PropertyModels.Add(new DateTimeModel(UI, Async, GuiContext, DataContext, _object, (DateTimeProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<DateTimeModel>(_object, (DateTimeProperty)pm));
                 }
                 else if (pm is DoubleProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableDoubleModel(UI, Async, GuiContext, DataContext, _object, (DoubleProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<NullableDoubleModel>(_object, (DoubleProperty)pm));
                     else
-                        PropertyModels.Add(new DoubleModel(UI, Async, GuiContext, DataContext, _object, (DoubleProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<DoubleModel>(_object, (DoubleProperty)pm));
                 }
                 else if (pm is IntProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(new NullableIntModel(UI, Async, GuiContext, DataContext, _object, (IntProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<NullableIntModel>(_object, (IntProperty)pm));
                     else
-                        PropertyModels.Add(new IntModel(UI, Async, GuiContext, DataContext, _object, (IntProperty)pm));
+                        PropertyModels.Add(Factory.CreateModel<IntModel>(_object, (IntProperty)pm));
                 }
                 else if (pm is StringProperty && !prop.IsList)
                 {
-                    PropertyModels.Add(new StringModel(UI, Async, GuiContext, DataContext, _object, (StringProperty)pm));
+                    PropertyModels.Add(Factory.CreateModel<StringModel>(_object, (StringProperty)pm));
                 }
                 else if (pm is ObjectReferenceProperty && !prop.IsList)
                 {
                     var orp = (ObjectReferenceProperty)pm;
                     if (!orp.IsList)
-                        PropertyModels.Add(new ObjectReferenceModel(UI, Async, GuiContext, DataContext, _object, orp));
+                        PropertyModels.Add(Factory.CreateModel<ObjectReferenceModel>(_object, orp));
                 }
                 else
                 {
@@ -190,27 +191,27 @@ namespace Kistl.Client.PresenterModel
 
                 if (retParam is BoolParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new BoolResultModel(UI, Async, GuiContext, DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateModel<BoolResultModel>(_object, pm));
                 }
                 else if (pm is DateTimeParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new DateTimeResultModel(UI, Async, GuiContext, DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateModel<DateTimeResultModel>(_object, pm));
                 }
                 else if (pm is DoubleParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new DoubleResultModel(UI, Async, GuiContext, DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateModel<DoubleResultModel>(_object, pm));
                 }
                 else if (pm is IntParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new IntResultModel(UI, Async, GuiContext, DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateModel<IntResultModel>(_object, pm));
                 }
                 else if (pm is StringParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new StringResultModel(UI, Async, GuiContext, DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateModel<StringResultModel>(_object, pm));
                 }
                 else if (pm is ObjectParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(new DataObjectResultModel(UI, Async, GuiContext, DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateModel<DataObjectResultModel>(_object, pm));
                 }
                 else
                 {

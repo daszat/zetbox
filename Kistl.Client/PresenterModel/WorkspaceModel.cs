@@ -13,8 +13,9 @@ namespace Kistl.Client.PresenterModel
     {
         public WorkspaceModel(
             IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx)
-            : base(uiManager, asyncManager, guiCtx, dataCtx)
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
         {
             Modules = new ObservableCollection<ModuleModel>();
             OpenObjects = new ObservableCollection<DataObjectModel>();
@@ -46,7 +47,7 @@ namespace Kistl.Client.PresenterModel
             {
                 foreach (var m in modules)
                 {
-                    Modules.Add(new ModuleModel(UI, Async, GuiContext, DataContext, m));
+                    Modules.Add(Factory.CreateModel<ModuleModel>(m));
                 }
                 State = ModelState.Active;
             });

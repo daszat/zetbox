@@ -18,7 +18,7 @@ namespace Kistl.Client.Tests
         internal class PresentableModelInspector : PresentableModel
         {
             internal PresentableModelInspector(ThreadManagerMock uiThreadMock, ThreadManagerMock backgroundThreadMock)
-                : base(uiThreadMock, backgroundThreadMock, null, null)
+                : base(uiThreadMock, backgroundThreadMock, null, null, null)
             {
             }
 

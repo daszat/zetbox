@@ -70,6 +70,7 @@
     <Compile Include="PresenterModel\IAsyncUiManager.cs" />
     <Compile Include="PresenterModel\MethodResultModels.cs" />
     <Compile Include="PresenterModel\MethodResultModels.Specifics.cs" />
+    <Compile Include="PresenterModel\ModelFactory.cs" />
     <Compile Include="PresenterModel\ModuleModel.cs" />
     <Compile Include="PresenterModel\DataTypeModel.cs" />
     <Compile Include="PresenterModel\ObjectClassModel.cs" />

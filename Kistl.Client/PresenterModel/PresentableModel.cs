@@ -24,7 +24,6 @@ namespace Kistl.Client.PresenterModel
     /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx
     public abstract class PresentableModel : INotifyPropertyChanged
     {
-        private ModelState _State = ModelState.Loading;
         /// <summary>
         /// A <see cref="IThreadManager"/> for the UI Thread
         /// </summary>
@@ -43,9 +42,15 @@ namespace Kistl.Client.PresenterModel
         /// </summary>
         protected IKistlContext DataContext { get; private set; }
 
+        /// <summary>
+        /// The factory from where new models should be created
+        /// </summary>
+        protected ModelFactory Factory { get; private set; }
+
         public PresentableModel(
             IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx)
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory)
         {
             UI = uiManager;
             UI.Verify();
@@ -54,8 +59,11 @@ namespace Kistl.Client.PresenterModel
 
             GuiContext = guiCtx;
             DataContext = dataCtx;
+
+            Factory = factory;
         }
 
+        private ModelState _State = ModelState.Loading;
         public ModelState State
         {
             get

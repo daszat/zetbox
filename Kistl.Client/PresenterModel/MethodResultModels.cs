@@ -14,8 +14,9 @@ namespace Kistl.Client.PresenterModel
         public MethodResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
         {
             Object = obj;
             Method = m;
@@ -110,8 +111,9 @@ namespace Kistl.Client.PresenterModel
         public StructResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
         }
 
@@ -149,13 +151,14 @@ namespace Kistl.Client.PresenterModel
 
     public abstract class NullableResultModel<TValue>
         : MethodResultModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>
-    where TValue : struct
+        where TValue : struct
     {
         public NullableResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
         }
 
@@ -196,8 +199,9 @@ namespace Kistl.Client.PresenterModel
         public ObjectResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
         }
 

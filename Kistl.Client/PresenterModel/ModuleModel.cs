@@ -15,8 +15,9 @@ namespace Kistl.Client.PresenterModel
         public ModuleModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             Module mdl)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, mdl)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, mdl)
         {
             ObjectClasses = new ObservableCollection<DataObjectModel>();
             _module = mdl;
@@ -36,18 +37,21 @@ namespace Kistl.Client.PresenterModel
         {
             Async.Verify();
             UI.Queue(UI, () => State = ModelState.Loading);
-            var datatypes = DataContext.GetQuery<DataType>().Where(dt => dt.Module.ID == _module.ID).OrderBy(dt => dt.ClassName).ToList();
+            var datatypes = DataContext.GetQuery<DataType>()
+                .Where(dt => dt.Module.ID == _module.ID)
+                .OrderBy(dt => dt.ClassName)
+                .ToList();
             UI.Queue(UI, () =>
             {
                 foreach (var dt in datatypes)
                 {
                     if (dt is ObjectClass)
                     {
-                        ObjectClasses.Add(new ObjectClassModel(UI, Async, GuiContext, DataContext, (ObjectClass)dt));
+                        ObjectClasses.Add(Factory.CreateModel<ObjectClassModel>((ObjectClass)dt));
                     }
                     else
                     {
-                        ObjectClasses.Add(new DataTypeModel(UI, Async, GuiContext, DataContext, dt));
+                        ObjectClasses.Add(Factory.CreateModel<DataTypeModel>(dt));
                     }
                 }
                 State = ModelState.Active;

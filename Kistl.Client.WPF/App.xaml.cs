@@ -116,9 +116,10 @@ namespace Kistl.Client.WPF
                 }
             }
 
+            //var factory = new ModelFactory(new UiThreadManager(), new AsyncThreadManager(), FrozenContext.Single, KistlContext.GetContext());
+            var factory = new ModelFactory(new SynchronousThreadManager(), new SynchronousThreadManager(), FrozenContext.Single, KistlContext.GetContext());
             var workspace = new WorkspaceView();
-            // workspace.DataContext = new WorkspaceModel(new UiThreadManager(), new AsyncThreadManager(), FrozenContext.Single, KistlContext.GetContext());
-            workspace.DataContext = new WorkspaceModel(new SynchronousThreadManager(), new SynchronousThreadManager(), FrozenContext.Single, KistlContext.GetContext());
+            workspace.DataContext = factory.CreateModel<WorkspaceModel>();
             workspace.Show();
         }
 

@@ -14,8 +14,9 @@ namespace Kistl.Client.PresenterModel
         public ObjectClassModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             ObjectClass cls)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, cls)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, cls)
         {
             _class = cls;
             Async.Queue(DataContext, AsyncQueryHasInstances);
@@ -41,7 +42,7 @@ namespace Kistl.Client.PresenterModel
                 foreach (var obj in objs)
                 {
                     // TODO: search for existing DOModel
-                    Instances.Add(new DataObjectModel(UI, Async, GuiContext, DataContext, obj));
+                    Instances.Add(Factory.CreateModel<DataObjectModel>(obj));
                 }
                 State = ModelState.Active;
             });

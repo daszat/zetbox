@@ -14,9 +14,10 @@ namespace Kistl.Client.PresenterModel
     {
         public BoolResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx, 
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             // Debug.Assert(!m.Parameter.Single().IsNullable, "cannot handle nullable parameter");
         }
@@ -27,24 +28,24 @@ namespace Kistl.Client.PresenterModel
     {
         public NullableBoolResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx, 
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             // Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
     }
-
-
 
     public class DateTimeResultModel
         : StructResultModel<DateTime>
     {
         public DateTimeResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx, 
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             // Debug.Assert(!m.IsNullable, "cannot handle nullable parameter");
         }
@@ -55,15 +56,14 @@ namespace Kistl.Client.PresenterModel
     {
         public NullableDateTimeResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx, 
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             // Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
     }
-
-
 
     public class DoubleResultModel
         : StructResultModel<Double>
@@ -71,8 +71,9 @@ namespace Kistl.Client.PresenterModel
         public DoubleResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             // Debug.Assert(!m.IsNullable, "cannot handle nullable parameter");
         }
@@ -84,14 +85,13 @@ namespace Kistl.Client.PresenterModel
         public NullableDoubleResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             // Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
     }
-
-
 
     public class IntResultModel
         : StructResultModel<int>
@@ -99,8 +99,9 @@ namespace Kistl.Client.PresenterModel
         public IntResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             // Debug.Assert(!m.IsNullable, "cannot handle nullable parameter");
         }
@@ -112,8 +113,9 @@ namespace Kistl.Client.PresenterModel
         public NullableIntResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
             //  Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
@@ -125,8 +127,9 @@ namespace Kistl.Client.PresenterModel
         public StringResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
         }
     }
@@ -137,8 +140,9 @@ namespace Kistl.Client.PresenterModel
         public DataObjectResultModel(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, obj, m)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
         {
         }
     }
