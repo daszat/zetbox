@@ -35,6 +35,7 @@ namespace Kistl.Client.PresenterModel
             {
                 foreach (var obj in objs)
                 {
+                    // TODO: search for existing DOModel
                     Instances.Add(new DataObjectModel(UI, Async, obj));
                 }
                 State = ModelState.Active;

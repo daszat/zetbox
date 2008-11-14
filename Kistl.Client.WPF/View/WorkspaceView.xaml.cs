@@ -18,9 +18,9 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
-    public partial class DesktopView : Window
+    public partial class WorkspaceView : Window
     {
-        public DesktopView()
+        public WorkspaceView()
         {
             InitializeComponent();
         }
@@ -29,10 +29,10 @@ namespace Kistl.Client.WPF.View
         {
             var view = (FrameworkElement)sender;
             var dataModel = (DataObjectModel)view.DataContext;
-            var desktopModel = (DesktopModel)this.DataContext;
+            var workspaceModel = (WorkspaceModel)this.DataContext;
 
-            if (!desktopModel.OpenObjects.Contains(dataModel))
-                desktopModel.OpenObjects.Add(dataModel);
+            if (!workspaceModel.OpenObjects.Contains(dataModel))
+                workspaceModel.OpenObjects.Add(dataModel);
         }
 
     }

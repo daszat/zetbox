@@ -66,7 +66,7 @@ namespace Kistl.API
         /// working directory is used.
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="configFile">load configuration from here. uses DefaultConfig.xml if empty</param>
+        /// <param name="config">use this configuration</param>
         protected ApplicationContext(HostType type, Configuration.KistlConfig config)
         {
             HostType = type;

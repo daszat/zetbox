@@ -198,7 +198,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DesktopView.xaml">
+    <Page Include="View\WorkspaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -331,8 +331,8 @@
     <Compile Include="View\DataObjectView.xaml.cs">
       <DependentUpon>DataObjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DesktopView.xaml.cs">
-      <DependentUpon>DesktopView.xaml</DependentUpon>
+    <Compile Include="View\WorkspaceView.xaml.cs">
+      <DependentUpon>WorkspaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\NullablePropertyTextBoxView.xaml.cs">
       <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>

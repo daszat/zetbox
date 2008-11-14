@@ -116,10 +116,10 @@ namespace Kistl.Client.WPF
                 }
             }
 
-            var desktop = new DesktopView();
-            desktop.DataContext = new DesktopModel(new UiThreadManager(), new AsyncThreadManager(), FrozenContext.Single);
-            // desktop.DataContext = new DesktopModel(new SynchronousThreadManager(), new SynchronousThreadManager(), FrozenContext.Single);
-            desktop.Show();
+            var workspace = new WorkspaceView();
+            // workspace.DataContext = new WorkspaceModel(new UiThreadManager(), new AsyncThreadManager(), FrozenContext.Single);
+            workspace.DataContext = new WorkspaceModel(new SynchronousThreadManager(), new SynchronousThreadManager(), FrozenContext.Single);
+            workspace.Show();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

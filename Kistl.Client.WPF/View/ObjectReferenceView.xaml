@@ -4,7 +4,7 @@
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
              xmlns:view="clr-namespace:Kistl.Client.WPF.View"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-             ToolTip="{Binding ToolTip}">
+             ToolTip="{Binding ToolTip, Mode=OneWay}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="100"
@@ -14,13 +14,15 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0"
-                   Text="{Binding Label}" />
+                   Text="{Binding Label, Mode=OneWay}" />
 
         <DockPanel Grid.Column="1">
             <CheckBox DockPanel.Dock="Left"
                       VerticalAlignment="Center"
-                      IsChecked="{Binding HasValue}" />
-            <view:DataObjectView DataContext="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                      IsChecked="{Binding HasValue, Mode=TwoWay}" />
+            
+            <ComboBox ItemsSource="{Binding Domain, Mode=OneWay}"
+                      SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
         </DockPanel>
     </Grid>
 </UserControl>

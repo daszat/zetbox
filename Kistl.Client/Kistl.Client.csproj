@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -67,13 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PresenterModel\DataObjectModel.cs" />
-    <Compile Include="PresenterModel\DesktopModel.cs" />
     <Compile Include="PresenterModel\IAsyncUiManager.cs" />
+    <Compile Include="PresenterModel\MethodResultModels.cs" />
+    <Compile Include="PresenterModel\MethodResultModels.Specifics.cs" />
     <Compile Include="PresenterModel\ModuleModel.cs" />
     <Compile Include="PresenterModel\DataTypeModel.cs" />
     <Compile Include="PresenterModel\ObjectClassModel.cs" />
     <Compile Include="PresenterModel\ObjectReferenceModel.cs" />
-    <Compile Include="PresenterModel\PresenterModel.cs" />
+    <Compile Include="PresenterModel\PresentableModel.cs" />
     <Compile Include="PresenterModel\ValuePropertyModels.cs" />
     <Compile Include="PresenterModel\WorkspaceModel.cs" />
     <Compile Include="ServerDomainManager.cs" />

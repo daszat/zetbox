@@ -10,6 +10,33 @@ using System.Diagnostics;
 
 namespace Kistl.Client.PresenterModel
 {
+    public interface IValueModel<TValue>
+    {
+        /// <summary>
+        /// Whether or not the property has a value. <seealso cref="IsNull"/>
+        /// </summary>
+        bool HasValue { get; }
+        /// <summary>
+        /// Whether or not the property is null. <seealso cref="HasValue"/>
+        /// </summary>
+        bool IsNull { get; }
+
+        /// <summary>
+        /// A label to display with the Value
+        /// </summary>
+        string Label { get; }
+
+        /// <summary>
+        /// A tooltip to display with the Value
+        /// </summary>
+        string ToolTip { get; }
+
+        /// <summary>
+        /// The value of this model
+        /// </summary>
+        TValue Value { get; }
+
+    }
 
     public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
     {
@@ -35,11 +62,6 @@ namespace Kistl.Client.PresenterModel
         public string Label { get { return Property.PropertyName; } }
         // TODO: proxying implementations might block on that
         public string ToolTip { get { return Property.AltText; } }
-
-        /// <summary>
-        /// The value of the property presented by this model
-        /// </summary>
-        public abstract TValue Value { get; set; }
 
         #endregion
 
@@ -136,10 +158,11 @@ namespace Kistl.Client.PresenterModel
 
         protected IDataObject Object { get; private set; }
         protected BaseProperty Property { get; private set; }
+
     }
 
     public abstract class ValuePropertyModel<TValue>
-        : PropertyModel<TValue>
+        : PropertyModel<TValue>, IValueModel<TValue>
         where TValue : struct
     {
         public ValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
@@ -149,13 +172,14 @@ namespace Kistl.Client.PresenterModel
 
         #region Public Interface
 
+        public bool HasValue { get { UI.Verify(); return true; } }
         public bool IsNull { get { UI.Verify(); return false; } }
 
         private TValue _valueCache;
         /// <summary>
         /// The value of the property presented by this model
         /// </summary>
-        public override TValue Value
+        public TValue Value
         {
             get { UI.Verify(); return _valueCache; }
             set
@@ -189,9 +213,8 @@ namespace Kistl.Client.PresenterModel
 
     }
 
-
     public abstract class NullableValuePropertyModel<TValue>
-        : PropertyModel<Nullable<TValue>>
+        : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>
         where TValue : struct
     {
         public NullableValuePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
@@ -236,7 +259,7 @@ namespace Kistl.Client.PresenterModel
         /// <summary>
         /// The value of the property presented by this model
         /// </summary>
-        public override Nullable<TValue> Value
+        public Nullable<TValue> Value
         {
             get { UI.Verify(); return _valueCache; }
             set
@@ -275,7 +298,7 @@ namespace Kistl.Client.PresenterModel
     }
 
     public abstract class ReferencePropertyModel<TValue>
-        : PropertyModel<TValue>
+        : PropertyModel<TValue>, IValueModel<TValue>
         where TValue : class
     {
         public ReferencePropertyModel(IThreadManager uiManager, IThreadManager asyncManager, IDataObject obj, ValueTypeProperty prop)
@@ -319,7 +342,7 @@ namespace Kistl.Client.PresenterModel
         /// <summary>
         /// The value of the property presented by this model
         /// </summary>
-        public override TValue Value
+        public TValue Value
         {
             get { UI.Verify(); return _valueCache; }
             set

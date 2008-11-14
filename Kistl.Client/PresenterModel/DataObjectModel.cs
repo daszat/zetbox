@@ -99,63 +99,31 @@ namespace Kistl.Client.PresenterModel
         private void AsyncFetchProperties()
         {
             Async.Verify();
+
+            // load properties
             ObjectClass cls = _object.GetObjectClass(_object.Context);
             List<BaseProperty> props = new List<BaseProperty>();
+            List<Method> methods = new List<Method>();
             while (cls != null)
             {
                 foreach (BaseProperty p in cls.Properties)
                 {
                     props.Add(p);
                 }
+                foreach (Method m
+                    in cls.Methods.Where(m => m.Parameter.Count == 1
+                        && m.Parameter.Single().IsReturnParameter
+                        && m.IsDisplayable))
+                {
+                    methods.Add(m);
+                }
                 cls = cls.BaseObjectClass;
             }
-            UI.Queue(UI, () => SetClassPropertyModels(cls, props));
-        }
-
-        private static string GetIconPath(string name)
-        {
-            string result = ApplicationContext.Current.Configuration.Client.DocumentStore
-                + @"\GUI.Icons\"
-                + name;
-            result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
-            return result;
-        }
-
-        private void AsyncUpdateViewCache()
-        {
-            Async.Verify();
-            _toStringCache = _object.ToString();
-            AsyncOnPropertyChanged("Name");
-
-            Icon icon = AsyncGetIcon();
-            if (icon != null)
+            UI.Queue(UI, () =>
             {
-                string newIconPath = GetIconPath(icon.IconFile);
-                UI.Queue(UI, () => IconPath = newIconPath);
-            }
-            else
-            {
-                UI.Queue(UI, () => IconPath = "");
-            }
-        }
-
-        /// <summary>
-        /// Override this to present a custom icon
-        /// </summary>
-        /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
-        protected virtual Icon AsyncGetIcon()
-        {
-            Async.Verify();
-            Icon icon = null;
-            if (_object is Icon)
-            {
-                icon = (Icon)_object;
-            }
-            else
-            {
-                icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
-            }
-            return icon;
+                SetClassPropertyModels(cls, props);
+                SetClassMethodModels(cls, methods);
+            });
         }
 
         private void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
@@ -209,6 +177,92 @@ namespace Kistl.Client.PresenterModel
                 }
             }
         }
+
+        private void SetClassMethodModels(ObjectClass cls, IEnumerable<Method> methods)
+        {
+            UI.Verify();
+            foreach (var pm in methods)
+            {
+                Debug.Assert(pm.Parameter.Single().IsReturnParameter);
+                var retParam = pm.GetReturnParameter();
+
+                if (retParam is BoolParameter && !retParam.IsList)
+                {
+                    PropertyModels.Add(new BoolResultModel(UI, Async, _object, pm));
+                }
+                else if (pm is DateTimeParameter && !retParam.IsList)
+                {
+                    PropertyModels.Add(new DateTimeResultModel(UI, Async, _object, pm));
+                }
+                else if (pm is DoubleParameter && !retParam.IsList)
+                {
+                    PropertyModels.Add(new DoubleResultModel(UI, Async, _object, pm));
+                }
+                else if (pm is IntParameter && !retParam.IsList)
+                {
+                    PropertyModels.Add(new IntResultModel(UI, Async, _object, pm));
+                }
+                else if (pm is StringParameter && !retParam.IsList)
+                {
+                    PropertyModels.Add(new StringResultModel(UI, Async, _object, pm));
+                }
+                else if (pm is ObjectParameter && !retParam.IsList)
+                {
+                    PropertyModels.Add(new DataObjectResultModel(UI, Async, _object, pm));
+                }
+                else
+                {
+                    Trace.TraceWarning("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
+                }
+            }
+        }
+
+        private static string GetIconPath(string name)
+        {
+            string result = ApplicationContext.Current.Configuration.Client.DocumentStore
+                + @"\GUI.Icons\"
+                + name;
+            result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
+            return result;
+        }
+
+        protected void AsyncUpdateViewCache()
+        {
+            Async.Verify();
+            _toStringCache = _object.ToString();
+            AsyncOnPropertyChanged("Name");
+
+            Icon icon = AsyncGetIcon();
+            if (icon != null)
+            {
+                string newIconPath = GetIconPath(icon.IconFile);
+                UI.Queue(UI, () => IconPath = newIconPath);
+            }
+            else
+            {
+                UI.Queue(UI, () => IconPath = "");
+            }
+        }
+
+        /// <summary>
+        /// Override this to present a custom icon
+        /// </summary>
+        /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
+        protected virtual Icon AsyncGetIcon()
+        {
+            Async.Verify();
+            Icon icon = null;
+            if (_object is Icon)
+            {
+                icon = (Icon)_object;
+            }
+            else
+            {
+                icon = _object.GetObjectClass(_object.Context.GetReadonlyContext()).DefaultIcon;
+            }
+            return icon;
+        }
+
 
         #endregion
 

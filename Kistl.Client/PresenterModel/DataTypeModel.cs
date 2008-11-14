@@ -20,6 +20,8 @@ namespace Kistl.Client.PresenterModel
             // TODO: reconsider frozen context usage!
             if (AsyncContext == null)
                 AsyncContext = _type.Context is FrozenContext ? KistlContext.GetContext() : _type.Context;
+
+            Async.Queue(AsyncContext, AsyncUpdateViewCache);
         }
 
         #region Public interface
@@ -85,7 +87,10 @@ namespace Kistl.Client.PresenterModel
         protected override Kistl.App.GUI.Icon AsyncGetIcon()
         {
             Async.Verify();
-            return _type.DefaultIcon;
+            if (_type != null)
+                return _type.DefaultIcon;
+            else 
+                return null;
         }
 
         #endregion

@@ -208,12 +208,12 @@ namespace Kistl.API
 
         /// <summary>
         /// Set a private Property Value on a given Object. Uses Reflection.
-        /// Throws a ArgumentOutOfRangeException if the Property is not found.
         /// </summary>
         /// <typeparam name="T">Type of the Property</typeparam>
         /// <param name="obj">Object from where the Property Value is returned</param>
         /// <param name="propName">Propertyname as string.</param>
         /// <param name="val">the value to set</param>
+        /// <exception cref="ArgumentOutOfRangeException">if the Property is not found</exception>
         public static void SetPrivateFieldValue<T>(this object obj, string propName, T val)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -226,6 +226,28 @@ namespace Kistl.API
             }
             if (fi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Field {0} was not found in Type {1}", propName, obj.GetType().FullName));
             fi.SetValue(obj, val);
+        }
+
+        /// <summary>
+        /// Calls a public method on the given object. Uses Reflection.
+        /// </summary>
+        /// <typeparam name="TReturn">expected return type</typeparam>
+        /// <param name="obj">the object on which to call the method</param>
+        /// <param name="methodName">which method to call</param>
+        /// <returns>the return value of the method</returns>
+        /// <exception cref="ArgumentOutOfRangeException">if the method is not found</exception>
+        public static TReturn CallMethod<TReturn>(this object obj, string methodName)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            Type t = obj.GetType();
+            MethodInfo mi = null;
+            while (mi == null && t != null)
+            {
+                mi = t.GetMethod(methodName, new Type[] { });
+                t = t.BaseType;
+            }
+            if (mi == null) throw new ArgumentOutOfRangeException("methodName", string.Format("Method {0} was not found in Type {1}", methodName, obj.GetType().FullName));
+            return (TReturn)mi.Invoke(obj, new object[] { });
         }
 
         /// <summary>
@@ -248,7 +270,7 @@ namespace Kistl.API
 
                 return genericType.MakeGenericType(genericArguments.ToArray());
             }
-            else if(!type.IsInterface)
+            else if (!type.IsInterface)
             {
                 if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                 {
@@ -286,8 +308,8 @@ namespace Kistl.API
                 {
                     return ApplicationContext.Current.BaseCollectionEntryType;
                 }
-                else if(type.IsInterface)
-                    {
+                else if (type.IsInterface)
+                {
                     if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                     {
                         // add ImplementationSuffix
@@ -391,7 +413,7 @@ namespace Kistl.API
         /// <param name="action">Action to perform on each element.</param>
         public static void ForEach<T>(this IEnumerable lst, Action<T> action)
         {
-            foreach(T obj in lst)
+            foreach (T obj in lst)
             {
                 action(obj);
             }
