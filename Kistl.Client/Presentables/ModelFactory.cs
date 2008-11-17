@@ -50,7 +50,7 @@ namespace Kistl.Client.Presentables
             where TModel : PresentableModel
         {
             Type requestedType = typeof(TModel);
-
+       
             Dictionary<object[], PresentableModel> modelCache;
             if (!_models.TryGetValue(requestedType, out modelCache))
             {
@@ -62,7 +62,7 @@ namespace Kistl.Client.Presentables
             PresentableModel result;
             if (!modelCache.TryGetValue(parameters, out result))
             {
-                result = (TModel)Activator.CreateInstance(typeof(TModel), parameters);
+                result = (PresentableModel)Activator.CreateInstance(requestedType, parameters);
                 modelCache[parameters] = result;
             }
             else
@@ -71,6 +71,7 @@ namespace Kistl.Client.Presentables
             }
             return (TModel)result;
         }
+
     }
 
     /// <summary>

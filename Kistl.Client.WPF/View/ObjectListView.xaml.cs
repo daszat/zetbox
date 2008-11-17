@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
 {
@@ -22,6 +23,12 @@ namespace Kistl.Client.WPF.View
         public ObjectListView()
         {
             InitializeComponent();
+        }
+
+        private void AddNewHandler(object sender, RoutedEventArgs e)
+        {
+            var model = DataContext as ObjectListModel;
+            model.CreateNewElement(newitem => model.Value.Add(newitem));
         }
     }
 }

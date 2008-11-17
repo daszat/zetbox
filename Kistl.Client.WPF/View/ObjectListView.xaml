@@ -13,11 +13,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0"
-                   Text="{Binding Label, Mode=OneWay}" />
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="{Binding Label, Mode=OneWay}" />
+            <Button Margin="0,2,0,0" Click="AddNewHandler">Add new ...</Button>
+        </StackPanel>
 
-        <DockPanel Grid.Column="1">
-            <ListView ItemsSource="{Binding Value, Mode=OneWay}"/>
-        </DockPanel>
+        <ListView Grid.Column="1"
+                  ItemsSource="{Binding Value, Mode=OneWay}" />
     </Grid>
 </UserControl>

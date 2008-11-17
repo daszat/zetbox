@@ -265,6 +265,7 @@
     <Compile Include="DesktopTreeView.xaml.cs">
       <DependentUpon>DesktopTreeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Renderer.cs" />
     <Compile Include="Renderer.WPF\ActionControl.cs" />
     <Compile Include="Renderer.WPF\EditBoolProperty.xaml.cs">
       <DependentUpon>EditBoolProperty.xaml</DependentUpon>

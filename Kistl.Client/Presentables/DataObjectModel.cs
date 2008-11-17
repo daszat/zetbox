@@ -180,7 +180,7 @@ namespace Kistl.Client.Presentables
                 else if (pm is BackReferenceProperty)
                 {
                     var brp = (BackReferenceProperty)pm;
-                    PropertyModels.Add(Factory.CreateModel<ObjectBackListModel>(_object, brp));
+                    PropertyModels.Add(Factory.CreateModel<ObjectListModel>(_object, brp));
                 }
                 else
                 {
