@@ -8,7 +8,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using System.Diagnostics;
 
-namespace Kistl.Client.PresenterModel
+namespace Kistl.Client.Presentables
 {
     public interface IValueModel<TValue>
     {

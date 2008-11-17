@@ -10,7 +10,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 
-namespace Kistl.Client.PresenterModel
+namespace Kistl.Client.Presentables
 {
     /// <summary>
     /// Proxies a whole IDataObject

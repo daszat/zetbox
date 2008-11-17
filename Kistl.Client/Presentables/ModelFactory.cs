@@ -5,7 +5,7 @@ using System.Text;
 
 using Kistl.API;
 
-namespace Kistl.Client.PresenterModel
+namespace Kistl.Client.Presentables
 {
     public class ModelFactory
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.Client.Mocks;
-using Kistl.Client.PresenterModel;
+using Kistl.Client.Presentables;
 using Kistl.Tests;
 
 using NUnit.Framework;

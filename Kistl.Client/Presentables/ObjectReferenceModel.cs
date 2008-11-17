@@ -8,7 +8,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 
-namespace Kistl.Client.PresenterModel
+namespace Kistl.Client.Presentables
 {
 
     public class ObjectReferenceModel

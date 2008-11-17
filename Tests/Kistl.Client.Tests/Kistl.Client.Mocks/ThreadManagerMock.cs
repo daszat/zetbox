@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.Client.PresenterModel;
+using Kistl.Client.Presentables;
 
 using NUnit.Framework;
 

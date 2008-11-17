@@ -66,18 +66,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PresenterModel\DataObjectModel.cs" />
-    <Compile Include="PresenterModel\IAsyncUiManager.cs" />
-    <Compile Include="PresenterModel\MethodResultModels.cs" />
-    <Compile Include="PresenterModel\MethodResultModels.Specifics.cs" />
-    <Compile Include="PresenterModel\ModelFactory.cs" />
-    <Compile Include="PresenterModel\ModuleModel.cs" />
-    <Compile Include="PresenterModel\DataTypeModel.cs" />
-    <Compile Include="PresenterModel\ObjectClassModel.cs" />
-    <Compile Include="PresenterModel\ObjectReferenceModel.cs" />
-    <Compile Include="PresenterModel\PresentableModel.cs" />
-    <Compile Include="PresenterModel\ValuePropertyModels.cs" />
-    <Compile Include="PresenterModel\WorkspaceModel.cs" />
+    <Compile Include="Presentables\DataObjectModel.cs" />
+    <Compile Include="Presentables\DataTypeModel.cs" />
+    <Compile Include="Presentables\IAsyncUiManager.cs" />
+    <Compile Include="Presentables\MethodResultModels.cs" />
+    <Compile Include="Presentables\MethodResultModels.Specifics.cs" />
+    <Compile Include="Presentables\ModelFactory.cs" />
+    <Compile Include="Presentables\ModuleModel.cs" />
+    <Compile Include="Presentables\ObjectClassModel.cs" />
+    <Compile Include="Presentables\ObjectReferenceModel.cs" />
+    <Compile Include="Presentables\PresentableModel.cs" />
+    <Compile Include="Presentables\ValuePropertyModels.cs" />
+    <Compile Include="Presentables\ValuePropertyModels.Specifics.cs" />
+    <Compile Include="Presentables\WorkspaceModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GUI.DB\KistlGUIContext.cs" />
@@ -111,7 +112,6 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram.Kistl.Client.cd" />
-    <Compile Include="PresenterModel\ValuePropertyModels.Specifics.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

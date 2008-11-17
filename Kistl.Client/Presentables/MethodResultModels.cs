@@ -6,7 +6,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using System.ComponentModel;
 
-namespace Kistl.Client.PresenterModel
+namespace Kistl.Client.Presentables
 {
 
     public abstract class MethodResultModel<TValue> : PresentableModel

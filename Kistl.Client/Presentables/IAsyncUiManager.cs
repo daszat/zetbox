@@ -6,7 +6,7 @@ using System.Threading;
 using System.Windows.Threading;
 using System.Diagnostics;
 
-namespace Kistl.Client.PresenterModel
+namespace Kistl.Client.Presentables
 {
 
     /// <summary>

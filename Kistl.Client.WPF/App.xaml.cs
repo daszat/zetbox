@@ -14,8 +14,8 @@ using Kistl.App.Base;
 using Kistl.App.GUI;
 using Kistl.GUI.DB;
 using Kistl.Client.WPF.View;
-using Kistl.Client.PresenterModel;
-using Kistl.Client.PresenterModel.WPF;
+using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.WPF;
 
 namespace Kistl.Client.WPF
 {

@@ -7,7 +7,7 @@ using Kistl.App.Base;
 using Kistl.API;
 using Kistl.API.Client;
 
-namespace Kistl.Client.PresenterModel
+namespace Kistl.Client.Presentables
 {
     public class DataTypeModel : DataObjectModel
     {

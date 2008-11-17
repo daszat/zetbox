@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using Kistl.Client.PresenterModel;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
 {
