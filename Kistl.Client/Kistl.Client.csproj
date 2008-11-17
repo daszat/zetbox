@@ -75,6 +75,7 @@
     <Compile Include="Presentables\ModelFactory.cs" />
     <Compile Include="Presentables\ModuleModel.cs" />
     <Compile Include="Presentables\ObjectClassModel.cs" />
+    <Compile Include="Presentables\ObjectListModel.cs" />
     <Compile Include="Presentables\ObjectReferenceModel.cs" />
     <Compile Include="Presentables\PresentableModel.cs" />
     <Compile Include="Presentables\ValuePropertyModels.cs" />

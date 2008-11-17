@@ -44,5 +44,13 @@
     <DataTemplate DataType="{x:Type client:ObjectReferenceModel}">
         <view:ObjectReferenceView />
     </DataTemplate>
-    
+
+    <DataTemplate DataType="{x:Type client:ObjectListModel}">
+        <view:ObjectListView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:ObjectBackListModel}">
+        <view:ObjectListView />
+    </DataTemplate>
+
 </ResourceDictionary>

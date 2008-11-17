@@ -129,6 +129,7 @@ namespace Kistl.Client.Presentables
             });
         }
 
+        // TODO: should go to renderer and use database backed decision tables
         private void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
         {
             UI.Verify();
@@ -168,19 +169,27 @@ namespace Kistl.Client.Presentables
                 {
                     PropertyModels.Add(Factory.CreateModel<StringModel>(_object, (StringProperty)pm));
                 }
-                else if (pm is ObjectReferenceProperty && !prop.IsList)
+                else if (pm is ObjectReferenceProperty)
                 {
                     var orp = (ObjectReferenceProperty)pm;
-                    if (!orp.IsList)
+                    if (orp.IsList)
+                        PropertyModels.Add(Factory.CreateModel<ObjectListModel>(_object, orp));
+                    else
                         PropertyModels.Add(Factory.CreateModel<ObjectReferenceModel>(_object, orp));
+                }
+                else if (pm is BackReferenceProperty)
+                {
+                    var brp = (BackReferenceProperty)pm;
+                    PropertyModels.Add(Factory.CreateModel<ObjectBackListModel>(_object, brp));
                 }
                 else
                 {
-                    Trace.TraceWarning("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
+                    Console.Error.WriteLine("==>> No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
                 }
             }
         }
 
+        // TODO: should go to renderer and use database backed decision tables
         private void SetClassMethodModels(ObjectClass cls, IEnumerable<Method> methods)
         {
             UI.Verify();

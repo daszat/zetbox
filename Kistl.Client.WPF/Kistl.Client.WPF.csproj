@@ -158,6 +158,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ObjectListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Renderer.WPF\ObjectReferenceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -295,6 +299,9 @@
     <Compile Include="Renderer.WPF\ListControl.cs" />
     <Compile Include="Renderer.WPF\KistlMenuItem.xaml.cs">
       <DependentUpon>KistlMenuItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ObjectListView.xaml.cs">
+      <DependentUpon>ObjectListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
       <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>

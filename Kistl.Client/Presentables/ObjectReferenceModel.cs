@@ -22,7 +22,6 @@ namespace Kistl.Client.Presentables
             : base(uiManager, asyncManager, guiCtx, dataCtx, factory, referenceHolder, prop)
         { }
 
-
         #region Public Interface
 
         public bool HasValue
