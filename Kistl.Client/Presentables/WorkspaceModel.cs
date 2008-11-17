@@ -19,6 +19,8 @@ namespace Kistl.Client.Presentables
         {
             Modules = new ObservableCollection<ModuleModel>();
             OpenObjects = new ObservableCollection<DataObjectModel>();
+
+
             Async.Queue(DataContext, () => { AsyncLoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
@@ -34,6 +36,19 @@ namespace Kistl.Client.Presentables
         /// point into the object hierarchy
         /// </summary>
         public ObservableCollection<ModuleModel> Modules { get; private set; }
+
+        private SaveContextCommand _saveCommand;
+        public ICommand SaveCommand
+        {
+            get
+            {
+                UI.Verify();
+                if (_saveCommand == null)
+                    _saveCommand = Factory.CreateModel<SaveContextCommand>();
+
+                return _saveCommand;
+            }
+        }
 
         #endregion
 
@@ -56,4 +71,36 @@ namespace Kistl.Client.Presentables
         #endregion
 
     }
+
+    public class SaveContextCommand : CommandModel
+    {
+        public SaveContextCommand(
+            IThreadManager uiManager, IThreadManager asyncManager,
+            IKistlContext guiCtx, IKistlContext dataCtx,
+            ModelFactory factory)
+            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+        {
+            Label = "Save";
+            ToolTip = "Commits outstanding changes to the data store.";
+        }
+
+        public override bool CanExecute(object data)
+        {
+            UI.Verify();
+            return true;
+        }
+
+        public override void Execute(object data)
+        {
+            UI.Verify();
+            Executing = true;
+            Async.Queue(DataContext, () =>
+            {
+                DataContext.SubmitChanges();
+                UI.Queue(UI, () => Executing = false);
+            });
+        }
+
+    }
+
 }

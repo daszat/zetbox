@@ -7,67 +7,77 @@
         Title="DesktopView"
         Height="600"
         Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="2*" />
-        </Grid.ColumnDefinitions>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        CanExecute="CommandBinding_CanExecute"
+                        Executed="CommandBinding_Executed" />
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Command="ApplicationCommands.Save" />
+        </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="5" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="5" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
 
-            <ListBox Grid.Row="0"
-                     ItemsSource="{Binding OpenObjects}" />
+                <ListBox Grid.Row="0"
+                         ItemsSource="{Binding OpenObjects}" />
 
-            <GridSplitter Grid.Row="1"
-                          HorizontalAlignment="Stretch" />
+                <GridSplitter Grid.Row="1"
+                              HorizontalAlignment="Stretch" />
 
-            <DockPanel Grid.Row="2">
-                <TreeView x:Name="ModuleTree"
-                          ItemsSource="{Binding Modules}">
-                    <TreeView.Resources>
-                        <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
-                                                  ItemsSource="{Binding ObjectClasses}">
-                            <StackPanel Orientation="Horizontal">
-                                <ctrls:LoadingIndicator />
-                                <TextBlock Text="{Binding Name}" />
+                <DockPanel Grid.Row="2">
+                    <TreeView x:Name="ModuleTree"
+                              ItemsSource="{Binding Modules}">
+                        <TreeView.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
+                                                      ItemsSource="{Binding ObjectClasses}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ctrls:LoadingIndicator />
+                                    <TextBlock Text="{Binding Name}" />
                             </StackPanel>
-                        </HierarchicalDataTemplate>
-                        <DataTemplate DataType="{x:Type client:DataTypeModel}">
-                            <view:DataObjectView />
+                            </HierarchicalDataTemplate>
+                            <DataTemplate DataType="{x:Type client:DataTypeModel}">
+                                <view:DataObjectView />
+                            </DataTemplate>
+                        </TreeView.Resources>
+                    </TreeView>
+                </DockPanel>
+
+                <!-- overlay on the tree -->
+                <ctrls:LoadingIndicator Grid.Row="2" />
+
+                <GridSplitter Grid.Row="3"
+                              HorizontalAlignment="Stretch" />
+
+                <ListBox Grid.Row="4"
+                         x:Name="ObjectList"
+                         ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type client:DataObjectModel}">
+                            <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
                         </DataTemplate>
-                    </TreeView.Resources>
-                </TreeView>
-            </DockPanel>
-
-            <!-- overlay on the tree -->
-            <ctrls:LoadingIndicator Grid.Row="2" />
-
-            <GridSplitter Grid.Row="3"
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
 
-            <ListBox Grid.Row="4"
-                     x:Name="ObjectList"
-                     ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                        <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <view:DataObjectFullView Grid.Column="2"
+                                     Grid.IsSharedSizeScope="True"
+                                     DataContext="{Binding SelectedItem, ElementName=ObjectList}" />
         </Grid>
-        <GridSplitter Grid.Column="1"
-                      HorizontalAlignment="Stretch" />
-
-        <view:DataObjectFullView Grid.Column="2"
-                                 Grid.IsSharedSizeScope="True"
-                                 DataContext="{Binding SelectedItem, ElementName=ObjectList}" />
-    </Grid>
+    </DockPanel>
 </Window>

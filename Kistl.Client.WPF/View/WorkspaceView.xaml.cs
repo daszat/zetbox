@@ -35,5 +35,20 @@ namespace Kistl.Client.WPF.View
                 workspaceModel.OpenObjects.Add(dataModel);
         }
 
+        // TODO: implement some bridging code to reduce code duplication on multiple commands
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var workspaceModel = (WorkspaceModel)this.DataContext;
+            e.CanExecute =
+                workspaceModel != null
+                && workspaceModel.SaveCommand.CanExecute(e.Parameter);
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var workspaceModel = (WorkspaceModel)this.DataContext;
+            workspaceModel.SaveCommand.Execute(e.Parameter);
+        }
+
     }
 }

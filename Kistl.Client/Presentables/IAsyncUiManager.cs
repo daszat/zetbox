@@ -68,12 +68,14 @@ namespace Kistl.Client.Presentables
 #endif
             }
 
+            [System.Diagnostics.DebuggerHidden()]
             public void Queue(object lck, Action uiTask)
             {
                 Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
                 _dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(uiTask));
             }
 
+            [System.Diagnostics.DebuggerHidden()]
             public void Queue(object lck, Action<object> uiTask, object data)
             {
                 Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
@@ -97,6 +99,7 @@ namespace Kistl.Client.Presentables
             // ( http://blogs.msdn.com/dancre/archive/2006/07/26/679851.aspx )
             // I'll go with the simple implementation until we hit this scenario 
 
+            [System.Diagnostics.DebuggerHidden()]
             public void Queue(object lck, Action asyncTask)
             {
                 if (!ThreadPool.QueueUserWorkItem(new WaitCallback((data) =>
@@ -116,6 +119,7 @@ namespace Kistl.Client.Presentables
                     throw new InvalidOperationException("Cannot queue task in background");
             }
 
+            [System.Diagnostics.DebuggerHidden()]
             public void Queue(object lck, Action<object> asyncTask, object data)
             {
                 if (!ThreadPool.QueueUserWorkItem(new WaitCallback((passed_data) =>
@@ -148,11 +152,13 @@ namespace Kistl.Client.Presentables
 
         public void Verify() { }
 
+        [System.Diagnostics.DebuggerHidden()]
         public void Queue(object ignored, Action asyncTask)
         {
             asyncTask();
         }
 
+        [System.Diagnostics.DebuggerHidden()]
         public void Queue(object ignored, Action<object> asyncTask, object data)
         {
             asyncTask(data);
