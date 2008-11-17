@@ -26,12 +26,42 @@ namespace Kistl.Client.WPF
 
         public void CreateWorkspace()
         {
-            //var factory = new ModelFactory(new UiThreadManager(), new AsyncThreadManager(), FrozenContext.Single, KistlContext.GetContext());
-            var factory = new ModelFactory(new SynchronousThreadManager(), new SynchronousThreadManager(), FrozenContext.Single, KistlContext.GetContext());
+            //var factory = new ModelFactory(
+            //    new UiThreadManager(),
+            //    new AsyncThreadManager(),
+            //    FrozenContext.Single,
+            //    KistlContext.GetContext());
+
+            var factory = new WpfModelFactory(KistlContext.GetContext());
+
             var workspace = new WorkspaceView();
             workspace.DataContext = factory.CreateModel<WorkspaceModel>();
             workspace.Show();
         }
-
     }
+
+    internal class WpfModelFactory : ModelFactory
+    {
+        internal WpfModelFactory(IKistlContext dataContext)
+            : base(
+                new SynchronousThreadManager(), new SynchronousThreadManager(),
+                FrozenContext.Single, dataContext)
+        {
+        }
+
+        protected override void CreateWorkspace(WorkspaceModel mdl)
+        {
+            var workspace = new WorkspaceView();
+            workspace.DataContext = mdl;
+            workspace.Show();
+        }
+
+        protected override void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel)
+        {
+            var selectionDialog = new SelectionDialog();
+            selectionDialog.DataContext = selectionTaskModel;
+            selectionDialog.Show();
+        }
+    }
+
 }

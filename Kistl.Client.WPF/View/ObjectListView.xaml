@@ -4,6 +4,7 @@
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
              xmlns:view="clr-namespace:Kistl.Client.WPF.View"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+             xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
              ToolTip="{Binding ToolTip, Mode=OneWay}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,10 +16,17 @@
 
         <StackPanel Grid.Column="0">
             <TextBlock Text="{Binding Label, Mode=OneWay}" />
-            <Button Margin="0,2,0,0" Click="AddNewHandler">Add new ...</Button>
+            <Button Margin="0,2,0,0"
+                    Click="AddNewHandler">Add new ...</Button>
         </StackPanel>
 
         <ListView Grid.Column="1"
-                  ItemsSource="{Binding Value, Mode=OneWay}" />
+                  ItemsSource="{Binding Value, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type client:DataObjectModel}">
+                    <view:DataObjectView />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

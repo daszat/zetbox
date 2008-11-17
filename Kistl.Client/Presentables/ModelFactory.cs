@@ -7,9 +7,9 @@ using Kistl.API;
 
 namespace Kistl.Client.Presentables
 {
-    public class ModelFactory
+    public abstract class ModelFactory
     {
-        public ModelFactory(
+        protected ModelFactory(
             IThreadManager uiManager, IThreadManager asyncManager,
             IKistlContext guiCtx, IKistlContext dataCtx)
         {
@@ -44,13 +44,11 @@ namespace Kistl.Client.Presentables
         private Dictionary<Type, Dictionary<object[], PresentableModel>> _models
                 = new Dictionary<Type, Dictionary<object[], PresentableModel>>();
 
-        private static int _reuseCount = 0;
-
         public TModel CreateModel<TModel>(params object[] data)
             where TModel : PresentableModel
         {
             Type requestedType = typeof(TModel);
-       
+
             Dictionary<object[], PresentableModel> modelCache;
             if (!_models.TryGetValue(requestedType, out modelCache))
             {
@@ -65,13 +63,23 @@ namespace Kistl.Client.Presentables
                 result = (PresentableModel)Activator.CreateInstance(requestedType, parameters);
                 modelCache[parameters] = result;
             }
-            else
-            {
-                _reuseCount += 1;
-            }
             return (TModel)result;
         }
 
+        public void ShowModel(PresentableModel mdl)
+        {
+            if (mdl is WorkspaceModel)
+            {
+                CreateWorkspace((WorkspaceModel)mdl);
+            }
+            else if (mdl is DataObjectSelectionTaskModel)
+            {
+                CreateSelectionDialog((DataObjectSelectionTaskModel)mdl);
+            }
+        }
+
+        protected abstract void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel);
+        protected abstract void CreateWorkspace(WorkspaceModel workspace);
     }
 
     /// <summary>

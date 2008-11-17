@@ -62,12 +62,59 @@ namespace Kistl.Client.Presentables
 
         public void CreateNewElement(Action<DataObjectModel> onCreated)
         {
-            Type targetType = Property.GetPropertyType();
+            UI.Verify();
+
             Async.Queue(DataContext, () =>
             {
-                var item = this.DataContext.Create(targetType);
-                UI.Queue(UI, () => onCreated(Factory.CreateModel<DataObjectModel>(item)));
+                DataType baseclass;
+                if (this.Property is BackReferenceProperty)
+                {
+                    baseclass = ((BackReferenceProperty)this.Property).ReferenceProperty.ObjectClass;
+                }
+                else
+                {
+                    baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
+                }
+                var children = new List<ObjectClass>();
+
+                CollectChildClasses(baseclass.ID, children);
+
+                UI.Queue(UI, () =>
+                {
+
+                    var childModels = children
+                        .OrderBy(oc => oc.ClassName)
+                        .Select(oc => (DataObjectModel)Factory.CreateModel<ObjectClassModel>(oc))
+                        .ToList();
+
+                    Factory.ShowModel(
+                        Factory.CreateModel<DataObjectSelectionTaskModel>(
+                            childModels,
+                            new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                            {
+                                UI.Verify();
+                                Async.Queue(DataContext, () =>
+                                {
+                                    Type targetType = ((ObjectClass)chosen.Object).GetDataType();
+                                    var item = this.DataContext.Create(targetType);
+                                    UI.Queue(UI, () => onCreated(Factory.CreateModel<DataObjectModel>(item)));
+                                });
+                            })));
+                });
             });
+        }
+
+        private void CollectChildClasses(int id, List<ObjectClass> children)
+        {
+            var nextChildren = GuiContext.GetQuery<ObjectClass>().Where(oc =>
+                oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id);
+
+            if (nextChildren.Count() > 0)
+                foreach (ObjectClass oc in nextChildren)
+                {
+                    children.Add(oc);
+                    CollectChildClasses(oc.ID, children);
+                };
         }
 
         #endregion
