@@ -113,7 +113,7 @@ namespace Kistl.Client.PresenterModel
 
             UI.Queue(UI, () => State = ModelState.Loading);
 
-            var objs = DataContext.GetQuery(Object.GetObjectClass(Object.Context).GetDataType())
+            var objs = DataContext.GetQuery(Property.GetPropertyType())
                 .ToList().OrderBy(obj => obj.ToString()).ToList();
 
             UI.Queue(UI, () =>

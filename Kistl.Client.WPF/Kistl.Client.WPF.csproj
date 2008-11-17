@@ -225,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter\Converters.cs" />
+    <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomControls\ErrorReporter.xaml.cs">
       <DependentUpon>ErrorReporter.xaml</DependentUpon>
