@@ -32,5 +32,12 @@ namespace Kistl.Client.WPF.View
             model.Choose(choosen);
             this.Close();
         }
+
+        private void CancelClickHandler(object sender, RoutedEventArgs e)
+        {
+            var model = (DataObjectSelectionTaskModel)DataContext;
+            model.Choose(null);
+            this.Close();            
+        }
     }
 }

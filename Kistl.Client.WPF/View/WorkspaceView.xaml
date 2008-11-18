@@ -34,7 +34,7 @@
 
                 <ListBox Grid.Row="0"
                          ItemsSource="{Binding OpenObjects}"
-                         SelectedItem="{Binding SelectedItem}"/>
+                         SelectedItem="{Binding SelectedItem}" />
 
                 <GridSplitter Grid.Row="1"
                               HorizontalAlignment="Stretch" />
@@ -71,7 +71,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
-            
+
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
 
