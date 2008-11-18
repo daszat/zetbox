@@ -33,10 +33,8 @@ namespace Kistl.Client.WPF
             //    KistlContext.GetContext());
 
             var factory = new WpfModelFactory(KistlContext.GetContext());
-
-            var workspace = new WorkspaceView();
-            workspace.DataContext = factory.CreateModel<WorkspaceModel>();
-            workspace.Show();
+            factory.ShowModel(
+                factory.CreateModel<WorkspaceModel>());
         }
     }
 
@@ -49,19 +47,25 @@ namespace Kistl.Client.WPF
         {
         }
 
+        public override ModelFactory CreateNewFactory(IKistlContext newDataCtx)
+        {
+            return new WpfModelFactory(newDataCtx);
+        }
+
         protected override void CreateWorkspace(WorkspaceModel mdl)
         {
-            var workspace = new WorkspaceView();
+            var workspace = new WorkspaceView(); // TODO: delegate to data store / TypeDescriptor
             workspace.DataContext = mdl;
             workspace.Show();
         }
 
         protected override void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel)
         {
-            var selectionDialog = new SelectionDialog();
+            var selectionDialog = new SelectionDialog(); // TODO: delegate to data store / TypeDescriptor
             selectionDialog.DataContext = selectionTaskModel;
             selectionDialog.Show();
         }
+
     }
 
 }

@@ -40,7 +40,19 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public IKistlContext DataContext { get; private set; }
 
-        // use Type as outer parameter to keep number of second level dictionaries small
+        /// <summary>
+        /// Creates a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/>.
+        /// </summary>
+        /// <param name="newDataCtx">the new <see cref="DataContext"/></param>
+        /// <returns>a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/></returns>
+        public abstract ModelFactory CreateNewFactory(IKistlContext newDataCtx);
+
+        /// <summary>
+        /// a map of all models created from this factory.
+        /// </summary>
+        /// uses Type as outer parameter to keep number of second level dictionaries small
+        // TODO: memory: investigate using a weakly referencing proxy to object[] as 2nd level key,
+        //               but probably all data params are rooted elsewhere too.
         private Dictionary<Type, Dictionary<object[], PresentableModel>> _models
                 = new Dictionary<Type, Dictionary<object[], PresentableModel>>();
 

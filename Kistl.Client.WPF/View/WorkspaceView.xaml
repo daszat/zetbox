@@ -33,7 +33,8 @@
                 </Grid.RowDefinitions>
 
                 <ListBox Grid.Row="0"
-                         ItemsSource="{Binding OpenObjects}" />
+                         ItemsSource="{Binding OpenObjects}"
+                         SelectedItem="{Binding SelectedItem}"/>
 
                 <GridSplitter Grid.Row="1"
                               HorizontalAlignment="Stretch" />
@@ -44,10 +45,7 @@
                         <TreeView.Resources>
                             <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
                                                       ItemsSource="{Binding ObjectClasses}">
-                                <StackPanel Orientation="Horizontal">
-                                    <ctrls:LoadingIndicator />
-                                    <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
+                                <view:DataObjectView />
                             </HierarchicalDataTemplate>
                             <DataTemplate DataType="{x:Type client:DataTypeModel}">
                                 <view:DataObjectView />
@@ -64,7 +62,8 @@
 
                 <ListBox Grid.Row="4"
                          x:Name="ObjectList"
-                         ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}">
+                         ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
+                         SelectedItem="{Binding SelectedItem}">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type client:DataObjectModel}">
                             <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
@@ -72,12 +71,13 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
+            
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
 
             <view:DataObjectFullView Grid.Column="2"
                                      Grid.IsSharedSizeScope="True"
-                                     DataContext="{Binding SelectedItem, ElementName=ObjectList}" />
+                                     DataContext="{Binding SelectedItem}" />
         </Grid>
     </DockPanel>
 </Window>

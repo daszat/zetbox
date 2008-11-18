@@ -116,11 +116,9 @@ namespace Kistl.Client.WPF
                 }
             }
 
-            //var factory = new ModelFactory(new UiThreadManager(), new AsyncThreadManager(), FrozenContext.Single, KistlContext.GetContext());
             var factory = new WpfModelFactory(KistlContext.GetContext());
-            var workspace = new WorkspaceView();
-            workspace.DataContext = factory.CreateModel<WorkspaceModel>();
-            workspace.Show();
+            factory.ShowModel(
+                factory.CreateModel<WorkspaceModel>());
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

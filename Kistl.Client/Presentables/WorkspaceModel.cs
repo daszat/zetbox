@@ -38,6 +38,10 @@ namespace Kistl.Client.Presentables
         public ObservableCollection<ModuleModel> Modules { get; private set; }
 
         private SaveContextCommand _saveCommand;
+        /// <summary>
+        /// This command submits all outstanding changes of this Workspace to the data store.
+        /// The parameter has to be <value>null</value>.
+        /// </summary>
         public ICommand SaveCommand
         {
             get
@@ -50,6 +54,24 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private DataObjectModel _selectedItem;
+        public DataObjectModel SelectedItem
+        {
+            get
+            {
+                UI.Verify();
+                return _selectedItem;
+            }
+            set
+            {
+                UI.Verify();
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+            }
+        }
         #endregion
 
         #region Async handlers and UI callbacks
@@ -87,7 +109,7 @@ namespace Kistl.Client.Presentables
         public override bool CanExecute(object data)
         {
             UI.Verify();
-            return true;
+            return data == null;
         }
 
         public override void Execute(object data)
