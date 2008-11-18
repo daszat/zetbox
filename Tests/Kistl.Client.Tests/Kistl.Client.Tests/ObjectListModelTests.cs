@@ -61,14 +61,23 @@ namespace Kistl.Client.Tests
 
             TestObject obj = MockFactory.CreateTestObject(m);
             ObjectReferenceProperty orp = MockFactory.CreateObjectReferenceProperty(m, "TestCollection");
+            
             Expect.Once
                 .On(obj)
                 .EventAdd("PropertyChanged", new TypeMatcher(typeof(PropertyChangedEventHandler)));
+            
             Expect.Once
                 .On(orp)
                 .EventAdd("PropertyChanged", new TypeMatcher(typeof(PropertyChangedEventHandler)));
 
-            // TODO: gah: reflection seems to die on the RemotingProxy used by NMock2
+            Expect.AtLeastOnce
+                .On(obj)
+                .GetProperty("TestCollection")
+                .Will(Return.Value(new List<TestObject>()));
+
+            Assert.AreEqual(0, obj.TestCollection.Count);
+
+            // TODO: Test fails because NMock2 doesn't support reflecting on the mocked interface
             // var olm = new ObjectListModel(uiThreadMock, backgroundThreadMock, ctx, ctx, factory, obj, orp);
         }
     }
