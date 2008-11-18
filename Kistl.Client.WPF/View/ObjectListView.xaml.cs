@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
@@ -20,6 +21,7 @@ namespace Kistl.Client.WPF.View
     /// </summary>
     public partial class ObjectListView : UserControl
     {
+
         public ObjectListView()
         {
             InitializeComponent();
@@ -28,18 +30,19 @@ namespace Kistl.Client.WPF.View
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
             var model = DataContext as ObjectListModel;
-            model.CreateNewElement(newitem => { if (newitem != null) model.Value.Add(newitem); });
+            model.CreateNewElement(newitem => { if (newitem != null) model.AddItem(newitem); });
         }
 
         private void RemoveHandler(object sender, RoutedEventArgs e)
         {
             var model = DataContext as ObjectListModel;
-            model.Value.Remove(model.SelectedItem);
+            model.RemoveItem(model.SelectedItem);
         }
 
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
-
+            var model = DataContext as ObjectListModel;
+            model.ActivateItem(model.SelectedItem, true);
         }
     }
 }

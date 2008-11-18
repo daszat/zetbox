@@ -118,7 +118,7 @@ namespace Kistl.Client.WPF
 
             var factory = new WpfModelFactory(KistlContext.GetContext());
             factory.ShowModel(
-                factory.CreateModel<WorkspaceModel>());
+                factory.CreateModel<WorkspaceModel>(), true);
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

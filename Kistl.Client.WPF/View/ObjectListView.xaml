@@ -11,7 +11,10 @@
             <ColumnDefinition MinWidth="100"
                               MaxWidth="300"
                               SharedSizeGroup="Label" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"
+                              MinWidth="100"
+                              MaxWidth="400"
+                              SharedSizeGroup="Content" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">

@@ -10,10 +10,14 @@
             <ColumnDefinition MinWidth="100"
                               MaxWidth="300"
                               SharedSizeGroup="Label" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"
+                              MinWidth="100"
+                              MaxWidth="400"
+                              SharedSizeGroup="Content" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Text="{Binding Label}" />
+        <TextBlock Grid.Column="0"
+                   Text="{Binding Label}" />
 
         <kevin:InfoTextBox Grid.Column="1"
                            Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"

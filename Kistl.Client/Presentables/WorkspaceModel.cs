@@ -32,6 +32,22 @@ namespace Kistl.Client.Presentables
         public ObservableCollection<DataObjectModel> OpenObjects { get; private set; }
 
         /// <summary>
+        /// registers a user contact with the mdl in this <see cref="WorkspaceModel"/>'s history
+        /// </summary>
+        /// <param name="mdl"></param>
+        public void HistoryTouch(DataObjectModel mdl)
+        {
+            UI.Verify();
+            var item = SelectedItem;
+            if (OpenObjects.Contains(mdl))
+            {
+                OpenObjects.Remove(mdl);
+            }
+            OpenObjects.Add(mdl);
+            SelectedItem = item;
+        }
+
+        /// <summary>
         /// A collection of all <see cref="Module"/>s, to display as entry 
         /// point into the object hierarchy
         /// </summary>
@@ -68,6 +84,8 @@ namespace Kistl.Client.Presentables
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
+                    if (_selectedItem != null)
+                        HistoryTouch(_selectedItem);
                     OnPropertyChanged("SelectedItem");
                 }
             }

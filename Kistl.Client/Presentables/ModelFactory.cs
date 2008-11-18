@@ -59,6 +59,7 @@ namespace Kistl.Client.Presentables
         public TModel CreateModel<TModel>(params object[] data)
             where TModel : PresentableModel
         {
+            // TODO: use data store to select proper type
             Type requestedType = typeof(TModel);
 
             Dictionary<object[], PresentableModel> modelCache;
@@ -78,20 +79,29 @@ namespace Kistl.Client.Presentables
             return (TModel)result;
         }
 
-        public void ShowModel(PresentableModel mdl)
+        public void ShowModel(PresentableModel mdl, bool activate)
         {
             if (mdl is WorkspaceModel)
             {
-                CreateWorkspace((WorkspaceModel)mdl);
+                CreateWorkspace((WorkspaceModel)mdl, activate);
             }
             else if (mdl is DataObjectSelectionTaskModel)
             {
-                CreateSelectionDialog((DataObjectSelectionTaskModel)mdl);
+                CreateSelectionDialog((DataObjectSelectionTaskModel)mdl, activate);
+            }
+            else if (mdl is DataObjectModel)
+            {
+                ShowDataObject((DataObjectModel)mdl, activate);
+            }
+            else
+            {
+                throw new InvalidOperationException(String.Format("Cannot show object '{0}' of Type '{1}'", mdl, mdl.GetType()));
             }
         }
 
-        protected abstract void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel);
-        protected abstract void CreateWorkspace(WorkspaceModel workspace);
+        protected abstract void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel, bool activate);
+        protected abstract void CreateWorkspace(WorkspaceModel workspace, bool activate);
+        protected abstract void ShowDataObject(DataObjectModel dataObject, bool activate);
     }
 
     /// <summary>

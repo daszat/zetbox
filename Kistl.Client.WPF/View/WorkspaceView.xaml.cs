@@ -20,37 +20,6 @@ namespace Kistl.Client.WPF.View
     /// </summary>
     public partial class WorkspaceView : Window
     {
-        #region Commanding
-
-        // TODO: retrieve strings from DB
-        // TODO: implement some bridging code to reduce code duplication on multiple commands
-        public static readonly RoutedUICommand Save = new RoutedUICommand("Save", "save", typeof(WorkspaceView));
-
-        static WorkspaceView()
-        {
-            CommandManager.RegisterClassCommandBinding(
-                typeof(WorkspaceView),
-                new CommandBinding(
-                    Save,
-                    SaveExecuted,
-                    SaveCanExecute));
-        }
-
-        private static void SaveCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            var workspaceModel = (WorkspaceModel)e.Parameter;
-            e.CanExecute =
-                workspaceModel != null
-                && workspaceModel.SaveCommand.CanExecute(null);
-        }
-
-        private static void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            var workspaceModel = (WorkspaceModel)e.Parameter;
-            workspaceModel.SaveCommand.Execute(null);
-        } 
-
-        #endregion
 
         public WorkspaceView()
         {
@@ -63,8 +32,8 @@ namespace Kistl.Client.WPF.View
             var dataModel = (DataObjectModel)view.DataContext;
             var workspaceModel = (WorkspaceModel)this.DataContext;
 
-            if (!workspaceModel.OpenObjects.Contains(dataModel))
-                workspaceModel.OpenObjects.Add(dataModel);
+            workspaceModel.HistoryTouch(dataModel);
         }
+
     }
 }

@@ -34,7 +34,7 @@ namespace Kistl.Client.WPF
 
             var factory = new WpfModelFactory(KistlContext.GetContext());
             factory.ShowModel(
-                factory.CreateModel<WorkspaceModel>());
+                factory.CreateModel<WorkspaceModel>(), true);
         }
     }
 
@@ -52,20 +52,31 @@ namespace Kistl.Client.WPF
             return new WpfModelFactory(newDataCtx);
         }
 
-        protected override void CreateWorkspace(WorkspaceModel mdl)
+        private static WorkspaceModel _mdl;
+        protected override void CreateWorkspace(WorkspaceModel mdl, bool activate)
         {
+            _mdl = mdl;
             var workspace = new WorkspaceView(); // TODO: delegate to data store / TypeDescriptor
             workspace.DataContext = mdl;
+            workspace.ShowActivated = activate;
             workspace.Show();
         }
 
-        protected override void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel)
+        protected override void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel, bool activate)
         {
             var selectionDialog = new SelectionDialog(); // TODO: delegate to data store / TypeDescriptor
             selectionDialog.DataContext = selectionTaskModel;
+            selectionDialog.ShowActivated = activate;
             selectionDialog.Show();
         }
 
+
+        protected override void ShowDataObject(DataObjectModel dataObject, bool activate)
+        {
+            _mdl.HistoryTouch(dataObject);
+            if (activate)
+                _mdl.SelectedItem = dataObject;
+        }
     }
 
 }

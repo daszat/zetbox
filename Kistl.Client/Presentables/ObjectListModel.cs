@@ -11,7 +11,7 @@ using Kistl.App.Base;
 namespace Kistl.Client.Presentables
 {
     public class ObjectListModel
-        : PropertyModel<ICollection<DataObjectModel>>, IValueModel<ObservableCollection<DataObjectModel>>
+        : PropertyModel<ICollection<DataObjectModel>>, IValueModel<ReadOnlyObservableCollection<DataObjectModel>>
     {
 
         public ObjectListModel(
@@ -39,27 +39,18 @@ namespace Kistl.Client.Presentables
         public bool HasValue { get { UI.Verify(); return true; } }
         public bool IsNull { get { UI.Verify(); return false; } }
 
-        private ObservableCollection<DataObjectModel> _value;
-        public ObservableCollection<DataObjectModel> Value
+        private ObservableCollection<DataObjectModel> _valueCache = new ObservableCollection<DataObjectModel>();
+        private ReadOnlyObservableCollection<DataObjectModel> _valueView;
+        public ReadOnlyObservableCollection<DataObjectModel> Value
         {
             get
             {
                 UI.Verify();
-                if (_value == null)
+                if (_valueView == null)
                 {
-                    _value = new ObservableCollection<DataObjectModel>();
-                    _value.CollectionChanged += _value_CollectionChanged;
+                    _valueView = new ReadOnlyObservableCollection<DataObjectModel>(_valueCache);
                 }
-                return _value;
-            }
-            private set
-            {
-                UI.Verify();
-                if (_value != value)
-                {
-                    _value = value;
-                    OnPropertyChanged("Value");
-                }
+                return _valueView;
             }
         }
 
@@ -67,7 +58,7 @@ namespace Kistl.Client.Presentables
         {
             UI.Verify();
 
-            // uarg!
+            // uarg! update source too!
 
             throw new NotImplementedException();
         }
@@ -113,6 +104,8 @@ namespace Kistl.Client.Presentables
                 UI.Queue(UI, () =>
                 {
 
+                    // sort by name, create models
+                    // TODO: filter non-instantiable classes
                     var childModels = children
                         .OrderBy(oc => oc.ClassName)
                         .Select(oc => (DataObjectModel)Factory.CreateModel<ObjectClassModel>(oc))
@@ -137,9 +130,30 @@ namespace Kistl.Client.Presentables
                                         UI.Queue(UI, () => onCreated(null));
                                     }
                                 });
-                            })));
+                            })), true);
                 });
             });
+        }
+
+        public void AddItem(DataObjectModel item)
+        {
+            UI.Verify();
+            _valueCache.Add(item);
+            // TODO: add item to actual value
+            //Object.GetPropertyValue<ICollection<??>>(Property.PropertyName).Add(item.Object);
+        }
+
+        public void RemoveItem(DataObjectModel item)
+        {
+            UI.Verify();
+            _valueCache.Remove(item);
+            // TODO: remove item from actual value
+            //Object.GetPropertyValue<ICollection<??>>(Property.PropertyName).Remove(item.Object);
+        }
+
+        public void ActivateItem(DataObjectModel item, bool activate)
+        {
+            Factory.ShowModel(item, activate);
         }
 
         #endregion
@@ -162,7 +176,9 @@ namespace Kistl.Client.Presentables
                 newValue.Add(Factory.CreateModel<DataObjectModel>(obj));
             }
             // almost optimal atomic update
-            Value = newValue;
+            _valueCache = newValue;
+            _valueView = new ReadOnlyObservableCollection<DataObjectModel>(_valueCache);
+            OnPropertyChanged("Value");
         }
 
         private void AsyncCollectChildClasses(int id, List<ObjectClass> children)
