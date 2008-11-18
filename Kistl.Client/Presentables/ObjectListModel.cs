@@ -169,15 +169,11 @@ namespace Kistl.Client.Presentables
         protected override void AsyncGetPropertyValue()
         {
             Async.Verify();
-            var newValue = new System.Collections.ArrayList();
-            foreach (object v in Object.GetPropertyValue<IEnumerable>(Property.PropertyName))
-            {
-                newValue.Add(v);
-            }
+            var newValue = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).AsQueryable().Cast<IDataObject>().ToList();
             UI.Queue(UI, () => SyncValues(newValue));
         }
 
-        private void SyncValues(ArrayList elements)
+        private void SyncValues(IList<IDataObject> elements)
         {
             UI.Verify();
             ObservableCollection<DataObjectModel> newValue = new ObservableCollection<DataObjectModel>();
