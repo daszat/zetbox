@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables
             Async.Queue(DataContext, () => { AsyncLoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
-        #region public interface
+        #region Public interface
 
         /// <summary>
         /// A list of "active" <see cref="IDataObjects"/>
@@ -38,12 +38,14 @@ namespace Kistl.Client.Presentables
         public void HistoryTouch(DataObjectModel mdl)
         {
             UI.Verify();
+            // fetch old SelectedItem to reestablish selection after modifying RecentObjects
             var item = SelectedItem;
             if (RecentObjects.Contains(mdl))
             {
                 RecentObjects.Remove(mdl);
             }
             RecentObjects.Add(mdl);
+            // reestablish selection 
             SelectedItem = item;
         }
 
@@ -90,6 +92,7 @@ namespace Kistl.Client.Presentables
                 }
             }
         }
+
         #endregion
 
         #region Async handlers and UI callbacks

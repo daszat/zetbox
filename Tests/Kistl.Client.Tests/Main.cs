@@ -8,6 +8,9 @@ namespace Kistl.Client.Tests
     {
         static void Main(string[] args)
         {
+            var test = new ObjectListModelTests();
+            test.SetUp();
+            test.TestCreation();
         }
     }
 }

@@ -47,6 +47,11 @@ namespace Kistl.Client.Presentables
             IDataObject obj, BaseProperty bp)
             : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
         {
+            if (obj == null)
+                new ArgumentNullException("obj");
+            if (bp == null)
+                new ArgumentNullException("bp");
+
             Object = obj;
             Property = bp;
 

@@ -554,22 +554,7 @@ namespace Kistl.GUI
 
         private void SetLabels()
         {
-            switch (Object.ObjectState)
-            {
-                case DataObjectState.New:
-                    Control.ShortLabel = String.Format("* {0} (new)", Object.ToString());
-                    break;
-                case DataObjectState.Modified:
-                    Control.ShortLabel = String.Format("* {0}", Object.ToString());
-                    break;
-                case DataObjectState.Deleted:
-                    Control.ShortLabel = String.Format("// {0}", Object.ToString());
-                    break;
-                case DataObjectState.Unmodified:
-                default:
-                    Control.ShortLabel = String.Format("{0}", Object.ToString());
-                    break;
-            }
+            Control.ShortLabel = String.Format("{0} {1}", Object.ObjectState.ToUserString(), Object.ToString());
             Control.Description = String.Format("{0}: {1} ({2})", Object.GetType().Name, Object.ToString(), Object.ObjectState);
             // TODO: Control.Size = Preferences.PreferredSize;
             Control.Size = FieldSize.Full;

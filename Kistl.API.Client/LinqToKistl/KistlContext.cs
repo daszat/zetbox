@@ -221,12 +221,22 @@ namespace Kistl.API.Client
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
             {
+                // TODO: security: check for overflow
                 ((BaseClientPersistenceObject)obj).ID = --_newIDCounter;
             }
             else
             {
                 // Check if Object is already in this Context
-                obj = ContainsObject(obj.GetType(), obj.ID) ?? obj;
+                var attachedObj = ContainsObject(obj.GetType(), obj.ID) ?? obj;
+
+                if (attachedObj != obj)
+                {
+                    // already attached, nothing to do
+                    return attachedObj;
+                }
+
+                // proceed processing with cached object
+                obj = attachedObj;
 
                 // Check ID <-> newIDCounter
                 if (obj.ID < _newIDCounter)
@@ -236,12 +246,9 @@ namespace Kistl.API.Client
             }
 
             // Attach & set Objectstate to Unmodified
-            if (!_objects.Contains(obj))
-            {
-                _objects.Add(obj);
-                ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
-                KistlContextDebugger.Changed(this);
-            }
+            _objects.Add(obj);
+            ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
+            KistlContextDebugger.Changed(this);
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this);

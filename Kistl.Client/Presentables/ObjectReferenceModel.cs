@@ -94,6 +94,13 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public void OpenReference()
+        {
+            UI.Verify();
+            if (Value != null)
+                Factory.ShowModel(Value, true);
+        }
+
         #endregion
 
         #region Async handlers and UI callbacks

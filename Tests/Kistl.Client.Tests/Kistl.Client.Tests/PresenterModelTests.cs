@@ -25,7 +25,7 @@ namespace Kistl.Client.Tests
             internal IThreadManager GetUitm() { return UI; }
             internal IThreadManager GetBgtm() { return Async; }
 
-            internal void SetState(ModelState s) { State = s;}
+            internal void SetState(ModelState s) { State = s; }
         }
 
         [Test]
@@ -43,7 +43,11 @@ namespace Kistl.Client.Tests
             pm.SetState(ModelState.Active);
 
             int stateChangeCount = 0;
-            PropertyChangedEventHandler expectStateChanged = delegate(object sender, PropertyChangedEventArgs args) { Assert.AreEqual("State", args.PropertyName); stateChangeCount += 1; };
+            PropertyChangedEventHandler expectStateChanged = delegate(object sender, PropertyChangedEventArgs args)
+            {
+                Assert.AreEqual("State", args.PropertyName);
+                stateChangeCount += 1;
+            };
 
             pm.PropertyChanged += expectStateChanged;
             pm.SetState(ModelState.Loading);
@@ -52,6 +56,7 @@ namespace Kistl.Client.Tests
             pm.SetState(ModelState.Invalid);
             pm.SetState(ModelState.Active);
             pm.SetState(ModelState.Active);
+            // test whether removing works too
             pm.PropertyChanged -= expectStateChanged;
             pm.SetState(ModelState.Loading);
             pm.SetState(ModelState.Invalid);

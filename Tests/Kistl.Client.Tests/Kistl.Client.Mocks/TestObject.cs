@@ -9,5 +9,6 @@ namespace Kistl.Client.Mocks
     public interface TestObject : IDataObject
     {
         string TestString { get; set; }
+        ICollection<TestObject> TestCollection { get; set; }
     }
 }

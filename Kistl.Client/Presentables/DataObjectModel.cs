@@ -95,6 +95,20 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// Schedules the underlying object for deletion.
+        /// </summary>
+        public void Delete()
+        {
+            UI.Verify();
+            State = ModelState.Loading;
+            Async.Queue(DataContext, () =>
+            {
+                DataContext.Delete(Object);
+                UI.Queue(UI, () => State = ModelState.Active);
+            });
+        }
+
         #endregion
 
         #region Async handlers and UI callbacks
@@ -243,7 +257,7 @@ namespace Kistl.Client.Presentables
             Async.Verify();
 
             // update Name
-            _toStringCache = _object.ToString();
+            _toStringCache = String.Format("{0} {1}", _object.ObjectState.ToUserString(), _object.ToString());
             AsyncOnPropertyChanged("Name");
 
             // update IconPath
@@ -277,7 +291,6 @@ namespace Kistl.Client.Presentables
             }
             return icon;
         }
-
 
         #endregion
 

@@ -35,5 +35,15 @@ namespace Kistl.Client.WPF.View
             workspaceModel.HistoryTouch(dataModel);
         }
 
+        private void DeleteHandler(object sender, RoutedEventArgs e)
+        {
+            var workspaceModel = (WorkspaceModel)this.DataContext;
+            var item = workspaceModel.SelectedItem;
+            if (item != null)
+            {
+                item.Delete();
+                workspaceModel.HistoryTouch(item);
+            }
+        }
     }
 }

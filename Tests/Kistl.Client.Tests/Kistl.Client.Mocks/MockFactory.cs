@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 
@@ -35,7 +36,10 @@ namespace Kistl.Client.Mocks
             return result;
         }
 
-        public static ObjectReferenceProperty CreateObjectReferenceProperty(Mockery m)
+        public static ObjectReferenceProperty CreateObjectReferenceProperty(
+            Mockery m,
+            string propertyName
+            )
         {
             var result = m.NewMock<ObjectReferenceProperty>();
 
@@ -43,6 +47,10 @@ namespace Kistl.Client.Mocks
                 .Method("GetPropertyTypeString")
                 .WithNoArguments()
                 .Will(Return.Value(result.GetType().FullName));
+
+            Stub.On(result)
+                .GetProperty("PropertyName")
+                .Will(Return.Value(propertyName));
 
             return result;
         }
@@ -61,13 +69,19 @@ namespace Kistl.Client.Mocks
 
         public static TestObject CreateTestObject(Mockery m)
         {
-            var result = m.NewMock<TestObject>();
+            var result = m.NewMock<TestObject>("Some TestObject");
 
             // TODO: Stub IDataObject here.
 
             return result;
         }
 
+        public static IKistlContext CreateContext(Mockery m)
+        {
+            var result = m.NewMock<IKistlContext>();
+
+            return result;
+        }
     }
 
 }

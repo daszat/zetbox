@@ -11,6 +11,8 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Command="view:WorkspaceView.Save"
                       CommandParameter="{Binding}" />
+            <MenuItem Click="DeleteHandler"
+                      Header="Delete" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -30,7 +32,8 @@
 
                 <DockPanel Grid.Row="0">
                     <TreeView x:Name="ModuleTree"
-                              ItemsSource="{Binding Modules}">
+                              ItemsSource="{Binding Modules}"
+                              BorderThickness="0">
                         <TreeView.Resources>
                             <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
                                                       ItemsSource="{Binding ObjectClasses}">
@@ -52,14 +55,15 @@
                 <ListBox Grid.Row="2"
                          x:Name="ObjectList"
                          ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
-                         SelectedItem="{Binding SelectedItem}">
+                         SelectedItem="{Binding SelectedItem}"
+                         BorderThickness="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type client:DataObjectModel}">
                             <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                
+
                 <GridSplitter Grid.Row="3"
                               HorizontalAlignment="Stretch" />
 
@@ -67,7 +71,8 @@
                     <TextBlock DockPanel.Dock="Top"
                                HorizontalAlignment="Center">Recent Objects:</TextBlock>
                     <ListBox ItemsSource="{Binding RecentObjects}"
-                             SelectedItem="{Binding SelectedItem}" />
+                             SelectedItem="{Binding SelectedItem}"
+                             BorderThickness="0" />
                 </DockPanel>
 
             </Grid>

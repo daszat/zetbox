@@ -51,6 +51,7 @@
     <Compile Include="Kistl.Client.Mocks\MockFactory.cs" />
     <Compile Include="Kistl.Client.Mocks\TestObject.cs" />
     <Compile Include="Kistl.Client.Mocks\ThreadManagerMock.cs" />
+    <Compile Include="Kistl.Client.Tests\ObjectListModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\PresenterModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\SynchronousThreadManagerTests.cs" />
     <Compile Include="MockeryTestFixture.cs" />

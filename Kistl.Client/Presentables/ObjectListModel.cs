@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables
         {
         }
 
-        #region Public interface: IValueModel<ObservableCollection<DataObjectModel>> Members
+        #region Public interface and IValueModel<ObservableCollection<DataObjectModel>> Members
 
         public bool HasValue { get { UI.Verify(); return true; } }
         public bool IsNull { get { UI.Verify(); return false; } }
@@ -138,9 +138,15 @@ namespace Kistl.Client.Presentables
         public void AddItem(DataObjectModel item)
         {
             UI.Verify();
+            State = ModelState.Loading;
+            // TODO: replace this
             _valueCache.Add(item);
             // TODO: add item to actual value
-            //Object.GetPropertyValue<ICollection<??>>(Property.PropertyName).Add(item.Object);
+            //Async.Queue(DataContext, () =>
+            //{
+            //    Object.GetPropertyValue<ICollection<??>>(Property.PropertyName).Add(item.Object);
+            //    UI.Queue(UI, () => State = ModelState.Active);
+            //});
         }
 
         public void RemoveItem(DataObjectModel item)
@@ -163,11 +169,15 @@ namespace Kistl.Client.Presentables
         protected override void AsyncGetPropertyValue()
         {
             Async.Verify();
-            IEnumerable newValue = Object.GetPropertyValue<IEnumerable>(Property.PropertyName);
+            var newValue = new System.Collections.ArrayList();
+            foreach (object v in Object.GetPropertyValue<IEnumerable>(Property.PropertyName))
+            {
+                newValue.Add(v);
+            }
             UI.Queue(UI, () => SyncValues(newValue));
         }
 
-        private void SyncValues(IEnumerable elements)
+        private void SyncValues(ArrayList elements)
         {
             UI.Verify();
             ObservableCollection<DataObjectModel> newValue = new ObservableCollection<DataObjectModel>();

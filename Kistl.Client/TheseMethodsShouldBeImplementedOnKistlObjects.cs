@@ -73,5 +73,21 @@ namespace Kistl.Client
                 acc && prop.Constraints.All(c => 
                     c.IsValid(self, self.GetPropertyValue<object>(prop.PropertyName))));
         }
+
+        public static string ToUserString(this DataObjectState state)
+        {
+            switch (state)
+            {
+                case DataObjectState.New:
+                case DataObjectState.Modified:
+                    return "+";
+                case DataObjectState.Deleted:
+                    return "//";
+                case DataObjectState.Unmodified:
+                default:
+                    return "";
+            }
+        }
+
     }
 }

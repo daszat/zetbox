@@ -24,6 +24,10 @@
                       VerticalAlignment="Center"
                       IsChecked="{Binding HasValue, Mode=TwoWay}" />
             
+            <Button DockPanel.Dock="Right"
+                    Click="OpenSelection"
+                    IsEnabled="{Binding HasValue}">Open</Button>
+            
             <ComboBox ItemsSource="{Binding Domain, Mode=OneWay}"
                       SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
         </DockPanel>
