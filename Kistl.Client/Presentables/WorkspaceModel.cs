@@ -18,7 +18,7 @@ namespace Kistl.Client.Presentables
             : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
         {
             Modules = new ObservableCollection<ModuleModel>();
-            OpenObjects = new ObservableCollection<DataObjectModel>();
+            RecentObjects = new ObservableCollection<DataObjectModel>();
 
 
             Async.Queue(DataContext, () => { AsyncLoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// A list of "active" <see cref="IDataObjects"/>
         /// </summary>
-        public ObservableCollection<DataObjectModel> OpenObjects { get; private set; }
+        public ObservableCollection<DataObjectModel> RecentObjects { get; private set; }
 
         /// <summary>
         /// registers a user contact with the mdl in this <see cref="WorkspaceModel"/>'s history
@@ -39,11 +39,11 @@ namespace Kistl.Client.Presentables
         {
             UI.Verify();
             var item = SelectedItem;
-            if (OpenObjects.Contains(mdl))
+            if (RecentObjects.Contains(mdl))
             {
-                OpenObjects.Remove(mdl);
+                RecentObjects.Remove(mdl);
             }
-            OpenObjects.Add(mdl);
+            RecentObjects.Add(mdl);
             SelectedItem = item;
         }
 

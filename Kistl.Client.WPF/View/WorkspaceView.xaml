@@ -21,21 +21,14 @@
 
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="3*" />
                     <RowDefinition Height="5" />
                     <RowDefinition Height="2*" />
                     <RowDefinition Height="5" />
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
 
-                <ListBox Grid.Row="0"
-                         ItemsSource="{Binding OpenObjects}"
-                         SelectedItem="{Binding SelectedItem}" />
-
-                <GridSplitter Grid.Row="1"
-                              HorizontalAlignment="Stretch" />
-
-                <DockPanel Grid.Row="2">
+                <DockPanel Grid.Row="0">
                     <TreeView x:Name="ModuleTree"
                               ItemsSource="{Binding Modules}">
                         <TreeView.Resources>
@@ -51,12 +44,12 @@
                 </DockPanel>
 
                 <!-- overlay on the tree -->
-                <ctrls:LoadingIndicator Grid.Row="2" />
+                <ctrls:LoadingIndicator Grid.Row="0" />
 
-                <GridSplitter Grid.Row="3"
+                <GridSplitter Grid.Row="1"
                               HorizontalAlignment="Stretch" />
 
-                <ListBox Grid.Row="4"
+                <ListBox Grid.Row="2"
                          x:Name="ObjectList"
                          ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
                          SelectedItem="{Binding SelectedItem}">
@@ -66,6 +59,17 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                
+                <GridSplitter Grid.Row="3"
+                              HorizontalAlignment="Stretch" />
+
+                <DockPanel Grid.Row="4">
+                    <TextBlock DockPanel.Dock="Top"
+                               HorizontalAlignment="Center">Recent Objects:</TextBlock>
+                    <ListBox ItemsSource="{Binding RecentObjects}"
+                             SelectedItem="{Binding SelectedItem}" />
+                </DockPanel>
+
             </Grid>
 
             <GridSplitter Grid.Column="1"

@@ -305,7 +305,6 @@
     <Compile Include="Renderer.WPF\KistlMenuItem.xaml.cs">
       <DependentUpon>KistlMenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ObjectListView.xaml.Commands.cs" />
     <Compile Include="View\ObjectListView.xaml.cs">
       <DependentUpon>ObjectListView.xaml</DependentUpon>
     </Compile>
