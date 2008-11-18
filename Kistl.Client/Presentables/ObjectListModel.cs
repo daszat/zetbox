@@ -95,9 +95,16 @@ namespace Kistl.Client.Presentables
                                 UI.Verify();
                                 Async.Queue(DataContext, () =>
                                 {
-                                    Type targetType = ((ObjectClass)chosen.Object).GetDataType();
-                                    var item = this.DataContext.Create(targetType);
-                                    UI.Queue(UI, () => onCreated(Factory.CreateModel<DataObjectModel>(item)));
+                                    if (chosen != null)
+                                    {
+                                        Type targetType = ((ObjectClass)chosen.Object).GetDataType();
+                                        var item = this.DataContext.Create(targetType);
+                                        UI.Queue(UI, () => onCreated(Factory.CreateModel<DataObjectModel>(item)));
+                                    }
+                                    else
+                                    {
+                                        UI.Queue(UI, () => onCreated(null));
+                                    }
                                 });
                             })));
                 });
