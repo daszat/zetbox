@@ -30,5 +30,16 @@ namespace Kistl.Client.WPF.View
             var model = DataContext as ObjectListModel;
             model.CreateNewElement(newitem => { if (newitem != null) model.Value.Add(newitem); });
         }
+
+        private void RemoveHandler(object sender, RoutedEventArgs e)
+        {
+            var model = DataContext as ObjectListModel;
+            model.Value.Remove(model.SelectedItem);
+        }
+
+        private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

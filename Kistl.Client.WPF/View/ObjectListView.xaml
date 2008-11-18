@@ -16,15 +16,19 @@
 
         <StackPanel Grid.Column="0">
             <TextBlock Text="{Binding Label, Mode=OneWay}" />
-            <Button Margin="0,2,0,0"
+            <Button Margin="1,4,1,1"
                     Click="AddNewHandler">Add new ...</Button>
+            <Button Margin="1"
+                    Click="RemoveHandler">Remove selection</Button>
         </StackPanel>
 
         <ListView Grid.Column="1"
-                  ItemsSource="{Binding Value, Mode=OneWay}">
+                  ItemsSource="{Binding Value, Mode=OneWay}"
+                  SelectedItem="{Binding SelectedItem}"
+                  MaxHeight="300">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                    <view:DataObjectView />
+                    <view:DataObjectView MouseDoubleClick="ItemActivatedHandler" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

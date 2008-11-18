@@ -20,6 +20,38 @@ namespace Kistl.Client.WPF.View
     /// </summary>
     public partial class WorkspaceView : Window
     {
+        #region Commanding
+
+        // TODO: retrieve strings from DB
+        // TODO: implement some bridging code to reduce code duplication on multiple commands
+        public static readonly RoutedUICommand Save = new RoutedUICommand("Save", "save", typeof(WorkspaceView));
+
+        static WorkspaceView()
+        {
+            CommandManager.RegisterClassCommandBinding(
+                typeof(WorkspaceView),
+                new CommandBinding(
+                    Save,
+                    SaveExecuted,
+                    SaveCanExecute));
+        }
+
+        private static void SaveCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var workspaceModel = (WorkspaceModel)e.Parameter;
+            e.CanExecute =
+                workspaceModel != null
+                && workspaceModel.SaveCommand.CanExecute(null);
+        }
+
+        private static void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var workspaceModel = (WorkspaceModel)e.Parameter;
+            workspaceModel.SaveCommand.Execute(null);
+        } 
+
+        #endregion
+
         public WorkspaceView()
         {
             InitializeComponent();
@@ -34,21 +66,5 @@ namespace Kistl.Client.WPF.View
             if (!workspaceModel.OpenObjects.Contains(dataModel))
                 workspaceModel.OpenObjects.Add(dataModel);
         }
-
-        // TODO: implement some bridging code to reduce code duplication on multiple commands
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            var workspaceModel = (WorkspaceModel)this.DataContext;
-            e.CanExecute =
-                workspaceModel != null
-                && workspaceModel.SaveCommand.CanExecute(e.Parameter);
-        }
-
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var workspaceModel = (WorkspaceModel)this.DataContext;
-            workspaceModel.SaveCommand.Execute(e.Parameter);
-        }
-
     }
 }

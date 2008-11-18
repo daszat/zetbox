@@ -7,14 +7,10 @@
         Title="DesktopView"
         Height="600"
         Width="800">
-    <Window.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Save"
-                        CanExecute="CommandBinding_CanExecute"
-                        Executed="CommandBinding_Executed" />
-    </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Command="ApplicationCommands.Save" />
+            <MenuItem Command="view:WorkspaceView.Save"
+                      CommandParameter="{Binding}" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>

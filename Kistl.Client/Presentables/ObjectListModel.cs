@@ -46,7 +46,10 @@ namespace Kistl.Client.Presentables
             {
                 UI.Verify();
                 if (_value == null)
+                {
                     _value = new ObservableCollection<DataObjectModel>();
+                    _value.CollectionChanged += _value_CollectionChanged;
+                }
                 return _value;
             }
             private set
@@ -56,6 +59,34 @@ namespace Kistl.Client.Presentables
                 {
                     _value = value;
                     OnPropertyChanged("Value");
+                }
+            }
+        }
+
+        private void _value_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            UI.Verify();
+
+            // uarg!
+
+            throw new NotImplementedException();
+        }
+
+        private DataObjectModel _selectedItem;
+        public DataObjectModel SelectedItem
+        {
+            get
+            {
+                UI.Verify();
+                return _selectedItem;
+            }
+            set
+            {
+                UI.Verify();
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
                 }
             }
         }
@@ -77,7 +108,7 @@ namespace Kistl.Client.Presentables
                 }
                 var children = new List<ObjectClass>();
 
-                CollectChildClasses(baseclass.ID, children);
+                AsyncCollectChildClasses(baseclass.ID, children);
 
                 UI.Queue(UI, () =>
                 {
@@ -111,19 +142,6 @@ namespace Kistl.Client.Presentables
             });
         }
 
-        private void CollectChildClasses(int id, List<ObjectClass> children)
-        {
-            var nextChildren = GuiContext.GetQuery<ObjectClass>().Where(oc =>
-                oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id);
-
-            if (nextChildren.Count() > 0)
-                foreach (ObjectClass oc in nextChildren)
-                {
-                    children.Add(oc);
-                    CollectChildClasses(oc.ID, children);
-                };
-        }
-
         #endregion
 
         #region Async handlers and UI callbacks
@@ -145,6 +163,21 @@ namespace Kistl.Client.Presentables
             }
             // almost optimal atomic update
             Value = newValue;
+        }
+
+        private void AsyncCollectChildClasses(int id, List<ObjectClass> children)
+        {
+            Async.Verify();
+
+            var nextChildren = GuiContext.GetQuery<ObjectClass>().Where(oc =>
+                oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id);
+
+            if (nextChildren.Count() > 0)
+                foreach (ObjectClass oc in nextChildren)
+                {
+                    children.Add(oc);
+                    AsyncCollectChildClasses(oc.ID, children);
+                };
         }
 
         #endregion
