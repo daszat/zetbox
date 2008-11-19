@@ -20,21 +20,7 @@ namespace Kistl.Client.Presentables
             AppContext.UiThread.Verify();
         }
 
-        ///// <summary>
-        ///// Creates a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/>.
-        ///// </summary>
-        ///// <param name="newDataCtx">the new <see cref="DataContext"/></param>
-        ///// <returns>a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/></returns>
-        //public abstract ModelFactory CreateNewFactory(IKistlContext newDataCtx);
-
-        /// <summary>
-        /// a map of all models created from this factory.
-        /// </summary>
-        /// uses Type as outer parameter to keep number of second level dictionaries small
-        // TODO: memory: investigate using a weakly referencing proxy to object[] as 2nd level key,
-        //               but probably all data params are rooted elsewhere too.
-        private Dictionary<Type, Dictionary<object[], PresentableModel>> _models
-                = new Dictionary<Type, Dictionary<object[], PresentableModel>>();
+        private ModelCache _cache = new ModelCache();
 
         public TModel CreateSpecificModel<TModel>(IKistlContext ctx, params object[] data)
             where TModel : PresentableModel
@@ -42,22 +28,18 @@ namespace Kistl.Client.Presentables
             // TODO: use data store to select proper type
             Type requestedType = typeof(TModel);
 
-            Dictionary<object[], PresentableModel> modelCache;
-            if (!_models.TryGetValue(requestedType, out modelCache))
-            {
-                modelCache = new Dictionary<object[], PresentableModel>(new ObjectArrayComparer());
-                _models[requestedType] = modelCache;
-            }
-
             // by convention, all presentable models take the IGuiApplicationContext
             // and a IKistlContext as first parameters
             object[] parameters = new object[] { AppContext, ctx }.Concat(data).ToArray();
-            PresentableModel result;
-            if (!modelCache.TryGetValue(parameters, out result))
+
+            PresentableModel result = _cache.LookupModel(requestedType, parameters);
+
+            if (result == null)
             {
                 result = (PresentableModel)Activator.CreateInstance(requestedType, parameters);
-                modelCache[parameters] = result;
+                _cache.StoreModel(parameters, result);
             }
+
             return (TModel)result;
         }
 
@@ -86,11 +68,55 @@ namespace Kistl.Client.Presentables
         protected abstract void ShowDataObject(DataObjectModel dataObject, bool activate);
     }
 
+    internal sealed class ModelCache
+    {
+        /// <summary>
+        /// a map of all models created from this factory.
+        /// </summary>
+        /// uses Type as outer parameter to keep number of second level dictionaries small
+        // TODO: memory: investigate using a weakly referencing proxy to object[] as 2nd level key,
+        //               but probably all data params are rooted elsewhere too.
+        private Dictionary<Type, Dictionary<object[], PresentableModel>> _models
+                = new Dictionary<Type, Dictionary<object[], PresentableModel>>();
+
+        internal PresentableModel LookupModel(Type requestedType, object[] parameters)
+        {
+            Dictionary<object[], PresentableModel> modelCache;
+            if (!_models.TryGetValue(requestedType, out modelCache))
+            {
+                // top level entry doesn't exist
+                return null;
+            }
+
+            PresentableModel result = null;
+            if (!modelCache.TryGetValue(parameters, out result))
+            {
+                return null;
+            }
+            return result;
+        }
+
+        internal void StoreModel(object[] parameters, PresentableModel mdl)
+        {
+            Type requestedType = mdl.GetType();
+
+            Dictionary<object[], PresentableModel> modelCache;
+            if (!_models.TryGetValue(requestedType, out modelCache))
+            {
+                // create new top-level entry
+                modelCache = new Dictionary<object[], PresentableModel>(new ObjectArrayComparer());
+                _models[requestedType] = modelCache;
+            }
+
+            modelCache[parameters] = mdl;
+        }
+    }
+
     /// <summary>
     /// an <see cref="IEqualityComparer<>"/> which compares object arrays for memberwise 
     /// equality and calculates an appropriate hashcode
     /// </summary>
-    internal class ObjectArrayComparer : IEqualityComparer<object[]>
+    internal sealed class ObjectArrayComparer : IEqualityComparer<object[]>
     {
         #region IEqualityComparer<object[]> Members
 
