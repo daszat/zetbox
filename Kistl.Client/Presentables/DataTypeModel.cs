@@ -12,11 +12,9 @@ namespace Kistl.Client.Presentables
     public class DataTypeModel : DataObjectModel
     {
         public DataTypeModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             DataType type)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, type)
+            : base(appCtx, dataCtx, type)
         {
             _type = type;
 

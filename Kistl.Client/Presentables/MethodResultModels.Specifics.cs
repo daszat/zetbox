@@ -13,11 +13,9 @@ namespace Kistl.Client.Presentables
         : StructResultModel<Boolean>
     {
         public BoolResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             // Debug.Assert(!m.Parameter.Single().IsNullable, "cannot handle nullable parameter");
         }
@@ -27,11 +25,9 @@ namespace Kistl.Client.Presentables
         : NullableResultModel<Boolean>
     {
         public NullableBoolResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             // Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
@@ -41,11 +37,9 @@ namespace Kistl.Client.Presentables
         : StructResultModel<DateTime>
     {
         public DateTimeResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             // Debug.Assert(!m.IsNullable, "cannot handle nullable parameter");
         }
@@ -55,11 +49,9 @@ namespace Kistl.Client.Presentables
         : NullableResultModel<DateTime>
     {
         public NullableDateTimeResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             // Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
@@ -69,11 +61,9 @@ namespace Kistl.Client.Presentables
         : StructResultModel<Double>
     {
         public DoubleResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             // Debug.Assert(!m.IsNullable, "cannot handle nullable parameter");
         }
@@ -83,11 +73,9 @@ namespace Kistl.Client.Presentables
         : NullableResultModel<Double>
     {
         public NullableDoubleResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             // Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
@@ -97,11 +85,9 @@ namespace Kistl.Client.Presentables
         : StructResultModel<int>
     {
         public IntResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             // Debug.Assert(!m.IsNullable, "cannot handle nullable parameter");
         }
@@ -111,11 +97,9 @@ namespace Kistl.Client.Presentables
         : NullableResultModel<int>
     {
         public NullableIntResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
             //  Debug.Assert(m.IsNullable, "can only handle nullable parameter");
         }
@@ -125,11 +109,9 @@ namespace Kistl.Client.Presentables
         : ObjectResultModel<String>
     {
         public StringResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
         }
     }
@@ -138,11 +120,9 @@ namespace Kistl.Client.Presentables
         : ObjectResultModel<IDataObject>
     {
         public DataObjectResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
         }
     }

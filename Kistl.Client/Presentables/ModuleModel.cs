@@ -13,11 +13,9 @@ namespace Kistl.Client.Presentables
     public class ModuleModel : DataObjectModel
     {
         public ModuleModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             Module mdl)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, mdl)
+            : base(appCtx, dataCtx, mdl)
         {
             ObjectClasses = new ObservableCollection<DataObjectModel>();
             _module = mdl;
@@ -47,11 +45,11 @@ namespace Kistl.Client.Presentables
                 {
                     if (dt is ObjectClass)
                     {
-                        ObjectClasses.Add(Factory.CreateModel<ObjectClassModel>((ObjectClass)dt));
+                        ObjectClasses.Add(Factory.CreateSpecificModel<ObjectClassModel>(DataContext, (ObjectClass)dt));
                     }
                     else
                     {
-                        ObjectClasses.Add(Factory.CreateModel<DataTypeModel>(dt));
+                        ObjectClasses.Add(Factory.CreateSpecificModel<DataTypeModel>(DataContext, dt));
                     }
                 }
                 State = ModelState.Active;

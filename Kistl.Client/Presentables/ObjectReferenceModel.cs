@@ -15,11 +15,9 @@ namespace Kistl.Client.Presentables
         : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
     {
         public ObjectReferenceModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, ObjectReferenceProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, referenceHolder, prop)
+            : base(appCtx, dataCtx, referenceHolder, prop)
         { }
 
         #region Public Interface
@@ -109,7 +107,7 @@ namespace Kistl.Client.Presentables
         {
             Async.Verify();
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
-            UI.Queue(UI, () => Value = newValue == null ? null : Factory.CreateModel<DataObjectModel>(newValue));
+            UI.Queue(UI, () => Value = newValue == null ? null : Factory.CreateSpecificModel<DataObjectModel>(DataContext, newValue));
         }
 
         private void AsyncFetchDomain()
@@ -127,7 +125,7 @@ namespace Kistl.Client.Presentables
                 foreach (var obj in objs)
                 {
                     // TODO: search for existing DOModel
-                    _domain.Add(Factory.CreateModel<DataObjectModel>(obj));
+                    _domain.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
                 }
                 State = ModelState.Active;
             });

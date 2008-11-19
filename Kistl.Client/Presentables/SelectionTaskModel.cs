@@ -13,12 +13,10 @@ namespace Kistl.Client.Presentables
         where TModel : PresentableModel
     {
         public SelectionTaskModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IList<TModel> choices,
             Action<TModel> callback)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+            : base(appCtx, dataCtx)
         {
             _choices = new ReadOnlyCollection<TModel>(choices);
             _callback = callback;
@@ -56,12 +54,10 @@ namespace Kistl.Client.Presentables
     public class DataObjectSelectionTaskModel : SelectionTaskModel<DataObjectModel>
     {
         public DataObjectSelectionTaskModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IList<DataObjectModel> choices,
             Action<DataObjectModel> callback)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, choices, callback)
+            : base(appCtx, dataCtx, choices, callback)
         {
         }
     }

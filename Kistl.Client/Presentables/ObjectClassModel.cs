@@ -12,11 +12,9 @@ namespace Kistl.Client.Presentables
     public class ObjectClassModel : DataTypeModel
     {
         public ObjectClassModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             ObjectClass cls)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, cls)
+            : base(appCtx, dataCtx, cls)
         {
             _class = cls;
             Async.Queue(DataContext, AsyncQueryHasInstances);
@@ -42,7 +40,7 @@ namespace Kistl.Client.Presentables
                 foreach (var obj in objs)
                 {
                     // TODO: search for existing DOModel
-                    Instances.Add(Factory.CreateModel<DataObjectModel>(obj));
+                    Instances.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
                 }
                 State = ModelState.Active;
             });

@@ -25,42 +25,42 @@ namespace Kistl.Client.Presentables
     public abstract class PresentableModel : INotifyPropertyChanged
     {
         /// <summary>
+        /// This application's global context
+        /// </summary>
+        protected IGuiApplicationContext AppContext { get; private set; }
+
+        /// <summary>
         /// A <see cref="IThreadManager"/> for the UI Thread
         /// </summary>
-        protected IThreadManager UI { get; private set; }
+        protected IThreadManager UI { get { return AppContext.UiThread; } }
         /// <summary>
         /// A <see cref="IThreadManager"/> for asynchronous Tasks
         /// </summary>
-        protected IThreadManager Async { get; private set; }
+        protected IThreadManager Async { get { return AppContext.AsyncThread; } }
 
         /// <summary>
         /// A read-only <see cref="IKistlContext"/> to access meta data
         /// </summary>
-        protected IKistlContext GuiContext { get; private set; }
+        protected IKistlContext GuiContext { get { return AppContext.FrozenContext; } }
+
+        /// <summary>
+        /// The factory from where new models should be created
+        /// </summary>
+        protected ModelFactory Factory { get { return AppContext.Factory; } }
+
         /// <summary>
         /// A <see cref="IKistlContext"/> to access the current user's data
         /// </summary>
         protected IKistlContext DataContext { get; private set; }
 
-        /// <summary>
-        /// The factory from where new models should be created
-        /// </summary>
-        protected ModelFactory Factory { get; private set; }
-
-        public PresentableModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory)
+        /// <param name="dataCtx">The <see cref="IKistlContext"/> to use to access the current user's data session</param>
+        public PresentableModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
         {
-            UI = uiManager;
+            AppContext = appCtx;
+
             UI.Verify();
 
-            Async = asyncManager;
-
-            GuiContext = guiCtx;
             DataContext = dataCtx;
-
-            Factory = factory;
         }
 
         private ModelState _State = ModelState.Loading;

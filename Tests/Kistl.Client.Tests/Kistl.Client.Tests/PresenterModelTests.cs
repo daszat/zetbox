@@ -15,55 +15,55 @@ namespace Kistl.Client.Tests
     [TestFixture]
     public class PresenterModelTests : MockeryTestFixture
     {
-        internal class PresentableModelInspector : PresentableModel
-        {
-            internal PresentableModelInspector(ThreadManagerMock uiThreadMock, ThreadManagerMock backgroundThreadMock)
-                : base(uiThreadMock, backgroundThreadMock, null, null, null)
-            {
-            }
+        //internal class PresentableModelInspector : PresentableModel
+        //{
+        //    internal PresentableModelInspector(ThreadManagerMock uiThreadMock, ThreadManagerMock backgroundThreadMock)
+        //        : base(uiThreadMock, backgroundThreadMock, null, null, null)
+        //    {
+        //    }
 
-            internal IThreadManager GetUitm() { return UI; }
-            internal IThreadManager GetBgtm() { return Async; }
+        //    internal IThreadManager GetUitm() { return UI; }
+        //    internal IThreadManager GetBgtm() { return Async; }
 
-            internal void SetState(ModelState s) { State = s; }
-        }
+        //    internal void SetState(ModelState s) { State = s; }
+        //}
 
-        [Test]
-        public void CreatePresenterModel()
-        {
-            ThreadManagerMock uiThreadMock = new ThreadManagerMock("UI Thread");
-            ThreadManagerMock backgroundThreadMock = new ThreadManagerMock("Background Thread");
-            ThreadManagerMock.SetDefaultThread(uiThreadMock);
+        //[Test]
+        //public void CreatePresenterModel()
+        //{
+        //    ThreadManagerMock uiThreadMock = new ThreadManagerMock("UI Thread");
+        //    ThreadManagerMock backgroundThreadMock = new ThreadManagerMock("Background Thread");
+        //    ThreadManagerMock.SetDefaultThread(uiThreadMock);
 
-            PresentableModelInspector pm = new PresentableModelInspector(uiThreadMock, backgroundThreadMock);
+        //    PresentableModelInspector pm = new PresentableModelInspector(uiThreadMock, backgroundThreadMock);
 
-            Assert.AreSame(uiThreadMock, pm.GetUitm());
-            Assert.AreSame(backgroundThreadMock, pm.GetBgtm());
+        //    Assert.AreSame(uiThreadMock, pm.GetUitm());
+        //    Assert.AreSame(backgroundThreadMock, pm.GetBgtm());
 
-            pm.SetState(ModelState.Active);
+        //    pm.SetState(ModelState.Active);
 
-            int stateChangeCount = 0;
-            PropertyChangedEventHandler expectStateChanged = delegate(object sender, PropertyChangedEventArgs args)
-            {
-                Assert.AreEqual("State", args.PropertyName);
-                stateChangeCount += 1;
-            };
+        //    int stateChangeCount = 0;
+        //    PropertyChangedEventHandler expectStateChanged = delegate(object sender, PropertyChangedEventArgs args)
+        //    {
+        //        Assert.AreEqual("State", args.PropertyName);
+        //        stateChangeCount += 1;
+        //    };
 
-            pm.PropertyChanged += expectStateChanged;
-            pm.SetState(ModelState.Loading);
-            pm.SetState(ModelState.Loading);
-            pm.SetState(ModelState.Invalid);
-            pm.SetState(ModelState.Invalid);
-            pm.SetState(ModelState.Active);
-            pm.SetState(ModelState.Active);
-            // test whether removing works too
-            pm.PropertyChanged -= expectStateChanged;
-            pm.SetState(ModelState.Loading);
-            pm.SetState(ModelState.Invalid);
+        //    pm.PropertyChanged += expectStateChanged;
+        //    pm.SetState(ModelState.Loading);
+        //    pm.SetState(ModelState.Loading);
+        //    pm.SetState(ModelState.Invalid);
+        //    pm.SetState(ModelState.Invalid);
+        //    pm.SetState(ModelState.Active);
+        //    pm.SetState(ModelState.Active);
+        //    // test whether removing works too
+        //    pm.PropertyChanged -= expectStateChanged;
+        //    pm.SetState(ModelState.Loading);
+        //    pm.SetState(ModelState.Invalid);
 
-            Assert.AreEqual(3, stateChangeCount);
-            Assert.AreEqual(ModelState.Invalid, pm.State);
-        }
+        //    Assert.AreEqual(3, stateChangeCount);
+        //    Assert.AreEqual(ModelState.Invalid, pm.State);
+        //}
 
     }
 }

@@ -11,11 +11,8 @@ namespace Kistl.Client.Presentables
 {
     public class WorkspaceModel : PresentableModel
     {
-        public WorkspaceModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+        public WorkspaceModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx)
         {
             Modules = new ObservableCollection<ModuleModel>();
             RecentObjects = new ObservableCollection<DataObjectModel>();
@@ -66,7 +63,7 @@ namespace Kistl.Client.Presentables
             {
                 UI.Verify();
                 if (_saveCommand == null)
-                    _saveCommand = Factory.CreateModel<SaveContextCommand>();
+                    _saveCommand = Factory.CreateSpecificModel<SaveContextCommand>(DataContext);
 
                 return _saveCommand;
             }
@@ -105,7 +102,7 @@ namespace Kistl.Client.Presentables
             {
                 foreach (var m in modules)
                 {
-                    Modules.Add(Factory.CreateModel<ModuleModel>(m));
+                    Modules.Add(Factory.CreateSpecificModel<ModuleModel>(DataContext, m));
                 }
                 State = ModelState.Active;
             });
@@ -117,11 +114,8 @@ namespace Kistl.Client.Presentables
 
     public class SaveContextCommand : CommandModel
     {
-        public SaveContextCommand(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+        public SaveContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx)
         {
             Label = "Save";
             ToolTip = "Commits outstanding changes to the data store.";

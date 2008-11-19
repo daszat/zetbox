@@ -41,11 +41,9 @@ namespace Kistl.Client.Presentables
     public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
     {
         public PropertyModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, BaseProperty bp)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+            : base(appCtx, dataCtx)
         {
             if (obj == null)
                 new ArgumentNullException("obj");
@@ -175,11 +173,9 @@ namespace Kistl.Client.Presentables
         where TValue : struct
     {
         public ValuePropertyModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
+            : base(appCtx, dataCtx, obj, prop)
         {
         }
 
@@ -231,11 +227,9 @@ namespace Kistl.Client.Presentables
         where TValue : struct
     {
         public NullableValuePropertyModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
+            : base(appCtx, dataCtx, obj, prop)
         {
         }
 
@@ -319,11 +313,9 @@ namespace Kistl.Client.Presentables
         where TValue : class
     {
         public ReferencePropertyModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, prop)
+            : base(appCtx, dataCtx, obj, prop)
         {
         }
 

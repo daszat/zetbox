@@ -49,11 +49,8 @@ namespace Kistl.Client.Presentables
 
     public abstract class CommandModel : PresentableModel, ICommand
     {
-        public CommandModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+        public CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx)
         {
         }
 

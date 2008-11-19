@@ -24,32 +24,14 @@ namespace Kistl.Client.WPF
             }
         }
 
-        public void CreateWorkspace()
-        {
-            //var factory = new ModelFactory(
-            //    new UiThreadManager(),
-            //    new AsyncThreadManager(),
-            //    FrozenContext.Single,
-            //    KistlContext.GetContext());
-
-            var factory = new WpfModelFactory(KistlContext.GetContext());
-            factory.ShowModel(
-                factory.CreateModel<WorkspaceModel>(), true);
-        }
     }
 
-    internal class WpfModelFactory : ModelFactory
-    {
-        internal WpfModelFactory(IKistlContext dataContext)
-            : base(
-                new SynchronousThreadManager(), new SynchronousThreadManager(),
-                FrozenContext.Single, dataContext)
-        {
-        }
 
-        public override ModelFactory CreateNewFactory(IKistlContext newDataCtx)
+    public class WpfModelFactory : ModelFactory
+    {
+        public WpfModelFactory(IGuiApplicationContext appCtx)
+            : base(appCtx)
         {
-            return new WpfModelFactory(newDataCtx);
         }
 
         private static WorkspaceModel _mdl;

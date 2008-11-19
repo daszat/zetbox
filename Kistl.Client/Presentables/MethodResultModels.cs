@@ -12,11 +12,9 @@ namespace Kistl.Client.Presentables
     public abstract class MethodResultModel<TValue> : PresentableModel
     {
         public MethodResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+            : base(appCtx, dataCtx)
         {
             Object = obj;
             Method = m;
@@ -109,11 +107,9 @@ namespace Kistl.Client.Presentables
         where TValue : struct
     {
         public StructResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
         }
 
@@ -154,11 +150,9 @@ namespace Kistl.Client.Presentables
         where TValue : struct
     {
         public NullableResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
         }
 
@@ -197,11 +191,9 @@ namespace Kistl.Client.Presentables
         where TValue : class
     {
         public ObjectResultModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, obj, m)
+            : base(appCtx, dataCtx, obj, m)
         {
         }
 

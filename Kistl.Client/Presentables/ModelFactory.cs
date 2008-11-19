@@ -9,43 +9,23 @@ namespace Kistl.Client.Presentables
 {
     public abstract class ModelFactory
     {
-        protected ModelFactory(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx)
+        /// <summary>
+        /// This application's global context
+        /// </summary>
+        protected IGuiApplicationContext AppContext { get; private set; }
+
+        protected ModelFactory(IGuiApplicationContext appCtx)
         {
-            UI = uiManager;
-            UI.Verify();
-
-            Async = asyncManager;
-
-            GuiContext = guiCtx;
-            DataContext = dataCtx;
+            AppContext = appCtx;
+            AppContext.UiThread.Verify();
         }
 
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for the UI Thread
-        /// </summary>
-        public IThreadManager UI { get; private set; }
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for asynchronous Tasks
-        /// </summary>
-        public IThreadManager Async { get; private set; }
-
-        /// <summary>
-        /// A read-only <see cref="IKistlContext"/> to access meta data
-        /// </summary>
-        public IKistlContext GuiContext { get; private set; }
-        /// <summary>
-        /// A <see cref="IKistlContext"/> to access the current user's data
-        /// </summary>
-        public IKistlContext DataContext { get; private set; }
-
-        /// <summary>
-        /// Creates a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/>.
-        /// </summary>
-        /// <param name="newDataCtx">the new <see cref="DataContext"/></param>
-        /// <returns>a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/></returns>
-        public abstract ModelFactory CreateNewFactory(IKistlContext newDataCtx);
+        ///// <summary>
+        ///// Creates a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/>.
+        ///// </summary>
+        ///// <param name="newDataCtx">the new <see cref="DataContext"/></param>
+        ///// <returns>a new <see cref="ModelFactory"/> with a new <see cref="DataContext"/></returns>
+        //public abstract ModelFactory CreateNewFactory(IKistlContext newDataCtx);
 
         /// <summary>
         /// a map of all models created from this factory.
@@ -56,7 +36,7 @@ namespace Kistl.Client.Presentables
         private Dictionary<Type, Dictionary<object[], PresentableModel>> _models
                 = new Dictionary<Type, Dictionary<object[], PresentableModel>>();
 
-        public TModel CreateModel<TModel>(params object[] data)
+        public TModel CreateSpecificModel<TModel>(IKistlContext ctx, params object[] data)
             where TModel : PresentableModel
         {
             // TODO: use data store to select proper type
@@ -69,7 +49,9 @@ namespace Kistl.Client.Presentables
                 _models[requestedType] = modelCache;
             }
 
-            object[] parameters = new object[] { UI, Async, GuiContext, DataContext, this }.Concat(data).ToArray();
+            // by convention, all presentable models take the IGuiApplicationContext
+            // and a IKistlContext as first parameters
+            object[] parameters = new object[] { AppContext, ctx }.Concat(data).ToArray();
             PresentableModel result;
             if (!modelCache.TryGetValue(parameters, out result))
             {

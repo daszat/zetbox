@@ -15,22 +15,18 @@ namespace Kistl.Client.Presentables
     {
 
         public ObjectListModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, ObjectReferenceProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, referenceHolder, prop)
+            : base(appCtx, dataCtx, referenceHolder, prop)
         {
             if (!prop.IsList)
                 throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list");
         }
 
         public ObjectListModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, BackReferenceProperty prop)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory, referenceHolder, prop)
+            : base(appCtx, dataCtx, referenceHolder, prop)
         {
         }
 
@@ -108,11 +104,12 @@ namespace Kistl.Client.Presentables
                     // TODO: filter non-instantiable classes
                     var childModels = children
                         .OrderBy(oc => oc.ClassName)
-                        .Select(oc => (DataObjectModel)Factory.CreateModel<ObjectClassModel>(oc))
+                        .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
                         .ToList();
 
                     Factory.ShowModel(
-                        Factory.CreateModel<DataObjectSelectionTaskModel>(
+                        Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                            DataContext,
                             childModels,
                             new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                             {
@@ -123,7 +120,7 @@ namespace Kistl.Client.Presentables
                                     {
                                         Type targetType = ((ObjectClass)chosen.Object).GetDataType();
                                         var item = this.DataContext.Create(targetType);
-                                        UI.Queue(UI, () => onCreated(Factory.CreateModel<DataObjectModel>(item)));
+                                        UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
                                     }
                                     else
                                     {
@@ -179,7 +176,7 @@ namespace Kistl.Client.Presentables
             ObservableCollection<DataObjectModel> newValue = new ObservableCollection<DataObjectModel>();
             foreach (IDataObject obj in elements.Cast<IDataObject>())
             {
-                newValue.Add(Factory.CreateModel<DataObjectModel>(obj));
+                newValue.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
             }
             // almost optimal atomic update
             _valueCache = newValue;

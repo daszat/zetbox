@@ -24,6 +24,9 @@ namespace Kistl.Client.WPF
     /// </summary>
     public partial class App : Application
     {
+
+        public GuiApplicationContext AppContext { get; private set; }
+
         /// <summary>
         ///  See http://dasz.at/index.php/2007/12/wpf-datetime-format/
         /// </summary>
@@ -37,7 +40,7 @@ namespace Kistl.Client.WPF
 
         private static ServerDomainManager serverDomain;
 
-        private static string[] Init(string[] args)
+        private string[] HandleCommandline(string[] args)
         {
             string configFilePath;
             string[] result;
@@ -61,7 +64,7 @@ namespace Kistl.Client.WPF
                 serverDomain.Start(config);
             }
 
-            var appCtx = new GuiApplicationContext(config, Toolkit.WPF);
+            AppContext = new GuiApplicationContext(config, Toolkit.WPF);
 
             return result;
         }
@@ -74,9 +77,17 @@ namespace Kistl.Client.WPF
 
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
-                Init(e.Args);
-            }
+                HandleCommandline(e.Args);
 
+                FixNotNullableConstraints();
+                
+                var initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
+                AppContext.Factory.ShowModel(initialWorkspace, true);
+            }
+        }
+
+        private static void FixNotNullableConstraints()
+        {
             using (TraceClient.TraceHelper.TraceMethodCall("Fixing NotNullableConstraints"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
@@ -115,10 +126,6 @@ namespace Kistl.Client.WPF
                     ctx.SubmitChanges();
                 }
             }
-
-            var factory = new WpfModelFactory(KistlContext.GetContext());
-            factory.ShowModel(
-                factory.CreateModel<WorkspaceModel>(), true);
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

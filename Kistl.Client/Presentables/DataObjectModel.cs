@@ -18,11 +18,9 @@ namespace Kistl.Client.Presentables
     public class DataObjectModel : PresentableModel
     {
         public DataObjectModel(
-            IThreadManager uiManager, IThreadManager asyncManager,
-            IKistlContext guiCtx, IKistlContext dataCtx,
-            ModelFactory factory,
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj)
-            : base(uiManager, asyncManager, guiCtx, dataCtx, factory)
+            : base(appCtx, dataCtx)
         {
             _object = obj;
             _object.PropertyChanged += AsyncObjectPropertyChanged;
@@ -154,47 +152,47 @@ namespace Kistl.Client.Presentables
                 if (pm is BoolProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateModel<NullableBoolModel>(_object, (BoolProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<NullableBoolModel>(DataContext, _object, (BoolProperty)pm));
                     else
-                        PropertyModels.Add(Factory.CreateModel<BoolModel>(_object, (BoolProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<BoolModel>(DataContext, _object, (BoolProperty)pm));
                 }
                 else if (pm is DateTimeProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateModel<NullableDateTimeModel>(_object, (DateTimeProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<NullableDateTimeModel>(DataContext, _object, (DateTimeProperty)pm));
                     else
-                        PropertyModels.Add(Factory.CreateModel<DateTimeModel>(_object, (DateTimeProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<DateTimeModel>(DataContext, _object, (DateTimeProperty)pm));
                 }
                 else if (pm is DoubleProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateModel<NullableDoubleModel>(_object, (DoubleProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<NullableDoubleModel>(DataContext, _object, (DoubleProperty)pm));
                     else
-                        PropertyModels.Add(Factory.CreateModel<DoubleModel>(_object, (DoubleProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<DoubleModel>(DataContext, _object, (DoubleProperty)pm));
                 }
                 else if (pm is IntProperty && !prop.IsList)
                 {
                     if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateModel<NullableIntModel>(_object, (IntProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<NullableIntModel>(DataContext, _object, (IntProperty)pm));
                     else
-                        PropertyModels.Add(Factory.CreateModel<IntModel>(_object, (IntProperty)pm));
+                        PropertyModels.Add(Factory.CreateSpecificModel<IntModel>(DataContext, _object, (IntProperty)pm));
                 }
                 else if (pm is StringProperty && !prop.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateModel<StringModel>(_object, (StringProperty)pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<StringModel>(DataContext, _object, (StringProperty)pm));
                 }
                 else if (pm is ObjectReferenceProperty)
                 {
                     var orp = (ObjectReferenceProperty)pm;
                     if (orp.IsList)
-                        PropertyModels.Add(Factory.CreateModel<ObjectListModel>(_object, orp));
+                        PropertyModels.Add(Factory.CreateSpecificModel<ObjectListModel>(DataContext, _object, orp));
                     else
-                        PropertyModels.Add(Factory.CreateModel<ObjectReferenceModel>(_object, orp));
+                        PropertyModels.Add(Factory.CreateSpecificModel<ObjectReferenceModel>(DataContext, _object, orp));
                 }
                 else if (pm is BackReferenceProperty)
                 {
                     var brp = (BackReferenceProperty)pm;
-                    PropertyModels.Add(Factory.CreateModel<ObjectListModel>(_object, brp));
+                    PropertyModels.Add(Factory.CreateSpecificModel<ObjectListModel>(DataContext, _object, brp));
                 }
                 else
                 {
@@ -214,27 +212,27 @@ namespace Kistl.Client.Presentables
 
                 if (retParam is BoolParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateModel<BoolResultModel>(_object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<BoolResultModel>(DataContext, _object, pm));
                 }
                 else if (pm is DateTimeParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateModel<DateTimeResultModel>(_object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<DateTimeResultModel>(DataContext, _object, pm));
                 }
                 else if (pm is DoubleParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateModel<DoubleResultModel>(_object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<DoubleResultModel>(DataContext, _object, pm));
                 }
                 else if (pm is IntParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateModel<IntResultModel>(_object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<IntResultModel>(DataContext, _object, pm));
                 }
                 else if (pm is StringParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateModel<StringResultModel>(_object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<StringResultModel>(DataContext, _object, pm));
                 }
                 else if (pm is ObjectParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateModel<DataObjectResultModel>(_object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<DataObjectResultModel>(DataContext, _object, pm));
                 }
                 else
                 {
@@ -243,9 +241,9 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private static string GetIconPath(string name)
+        private string GetIconPath(string name)
         {
-            string result = GuiApplicationContext.Current.Configuration.Client.DocumentStore
+            string result = AppContext.Configuration.Client.DocumentStore
                 + @"\GUI.Icons\"
                 + name;
             result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
