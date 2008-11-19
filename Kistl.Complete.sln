@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DALProvider.EF", "Kis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Tests", "Tests\Kistl.Client.Tests\Kistl.Client.Tests.csproj", "{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Forms", "Kistl.Client.Forms\Kistl.Client.Forms.csproj", "{C701ED04-08B2-4ABA-B2D3-33502690C8DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -293,6 +295,16 @@ Global
 		{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Release|.NET.ActiveCfg = Release|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C701ED04-08B2-4ABA-B2D3-33502690C8DA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

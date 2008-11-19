@@ -53,7 +53,7 @@ namespace Kistl.Client
             GuiApplicationContext.Current = this;
             SetCustomActionsManager(new CustomActionsManagerClient());
 
-            this.Renderer = KistlGUIContext.CreateRenderer(tk);
+            // this.Renderer = KistlGUIContext.CreateRenderer(tk);
 
             // TODO: replace by fetching TypeDescriptors from the Store
             //       via the GuiDataContext
@@ -64,11 +64,19 @@ namespace Kistl.Client
                     AsyncThread = new SynchronousThreadManager();
 
                     Factory = (ModelFactory)Activator.CreateInstance(
-                        Type.GetType("Kistl.Client.WPF.WpfModelFactory, Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"),
+                        Type.GetType("Kistl.Client.WPF.WpfModelFactory, Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", true),
+                        new object[] { this }
+                      );
+                    break;
+                case Toolkit.TEST:
+                    UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
+                    AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
+
+                    Factory = (ModelFactory)Activator.CreateInstance(
+                        Type.GetType("Kistl.Client.Forms.FormsModelFactory, Kistl.Client.Forms", true),
                         new object[] { this });
                     break;
                 case Toolkit.ASPNET:
-                case Toolkit.TEST:
                 default:
                     throw new NotImplementedException();
             }

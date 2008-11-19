@@ -31,7 +31,6 @@ namespace Kistl.Client.WPF.View
             var view = (FrameworkElement)sender;
             var dataModel = (DataObjectModel)view.DataContext;
             var workspaceModel = (WorkspaceModel)this.DataContext;
-
             workspaceModel.HistoryTouch(dataModel);
         }
 
