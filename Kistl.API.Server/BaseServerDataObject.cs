@@ -211,6 +211,7 @@ namespace Kistl.API.Server
 
         #region IDataErrorInfo Members
 
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         string IDataErrorInfo.this[string columnName]
         {
             get
@@ -224,6 +225,7 @@ namespace Kistl.API.Server
             throw new ArgumentOutOfRangeException("columnName", "unknown property " + prop);
         }
 
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         string IDataErrorInfo.Error
         {
             get { throw new NotImplementedException(); }

@@ -101,6 +101,7 @@ namespace Kistl.API.Client
         /// 
         /// </summary>
         /// <returns></returns>
+        [System.Diagnostics.DebuggerDisplay("Count = {_objects.Count}")]
         public IEnumerable<IPersistenceObject> AttachedObjects
         {
             get

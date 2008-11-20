@@ -160,10 +160,12 @@ namespace Kistl.API
         /// <summary>
         /// Value of this Collection Entry
         /// </summary>
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         VALUE Value { get; set; }
         /// <summary>
         /// Collection Entries Parent
         /// </summary>
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         PARENT Parent { get; set; }
         /// <summary>
         /// fk_ to Parent

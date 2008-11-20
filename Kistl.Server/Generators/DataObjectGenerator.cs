@@ -1077,7 +1077,7 @@ namespace Kistl.Server.Generators
                     current.code_property.SetStatements.AddExpression(@"if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {{
-                    if (fk_{0} != value.ID && fk_{0} != null) value.{1}.Remove(this);
+                    if (fk_{0} != value.ID && fk_{0} != null) {0}.{1}.Remove(this);
                     fk_{0} = value.ID;
                     if (!value.{1}.Contains(this)) value.{1}.Add(this);
                 }}
@@ -1122,15 +1122,7 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_ObjectReferenceProperty_CollectionInternal(CurrentObjectClass current)
         {
-            if (string.IsNullOrEmpty(current.property.GetPropertyTypeString())) throw new ArgumentNullException(
-                 string.Format("ValueProperty {0}.{1} has an empty Datatype! Please implement BaseProperty.GetPropertyTypeString()",
-                     current.objClass.ClassName, current.property.PropertyName));
-
-            // Check if Datatype exits
-            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetPropertyTypeString()) == null)
-                throw new ArgumentOutOfRangeException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
-                    current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
-
+            ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
             collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + Kistl.API.Helper.ImplementationSuffix,
@@ -1139,7 +1131,6 @@ namespace Kistl.Server.Generators
             {
                 collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
                     current.property.GetPropertyTypeString(), current.objClass.GetTypeMoniker().NameDataObject));
-                // collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
             }
 
             // Create ID
@@ -1149,11 +1140,18 @@ namespace Kistl.Server.Generators
             collectionClass.code_property = collectionClass.code_class.CreateProperty(
                 collectionClass.property.ToCodeTypeReference(collectionClass.task), "Value");
             collectionClass.code_property.AddAttribute("XmlIgnore");
+            // collectionClass.code_property.AddAttribute("System.Diagnostics.DebuggerDisplay", "ID = {_fk_Value}");
+            // http://blogs.msdn.com/greggm/archive/2005/11/18/494648.aspx
+            // https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=91772
+            // http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=344925
+            collectionClass.code_property.AddAttribute("System.Diagnostics.DebuggerBrowsable", new CodeAttributeArgument(new CodeSnippetExpression("System.Diagnostics.DebuggerBrowsableState.Never")));
 
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
             parent.code_property = collectionClass.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject, "Parent");
             parent.code_property.AddAttribute("XmlIgnore");
+            // parent.code_property.AddAttribute("System.Diagnostics.DebuggerDisplay", "ID = {_fk_Parent}");
+            parent.code_property.AddAttribute("System.Diagnostics.DebuggerBrowsable", new CodeAttributeArgument(new CodeSnippetExpression("System.Diagnostics.DebuggerBrowsableState.Never")));
 
             // Create SerializerValue
             CurrentObjectClass serializerValue = (CurrentObjectClass)collectionClass.Clone();
@@ -1195,12 +1193,23 @@ namespace Kistl.Server.Generators
             if (current.task == TaskEnum.Client)
             {
                 collectionClass.code_property.GetStatements.AddExpression(
-                    @"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Value)",
+                    @"return Context != null && fk_Value != Kistl.API.Helper.INVALIDID ? Context.GetQuery<{0}>().Single(o => o.ID == fk_Value) : null",
                     current.property.GetPropertyTypeString());
-                collectionClass.code_property.SetStatements.AddExpression(@"fk_Value = value.ID;");
+
+                if (objRefProp.GetOpposite() != null && objRefProp.GetRelationType() == RelationType.n_m)
+                {
+                    collectionClass.code_property.SetStatements.AddExpression(@"if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Context != null && fk_Value != value.ID && fk_Value != Kistl.API.Helper.INVALIDID) Value.{0}.Remove(Parent);
+                fk_Value = value.ID;
+                if (Context != null && !value.{0}.Contains(Parent)) value.{0}.Add(Parent)", objRefProp.GetOpposite().PropertyName);
+                }
+                else
+                {
+                    collectionClass.code_property.SetStatements.AddExpression(@"fk_Value = value.ID");
+                }
 
                 parent.code_property.GetStatements.AddExpression(
-                    @"return Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent)", current.objClass.ClassName);
+                    @"return Context != null && fk_Parent != Kistl.API.Helper.INVALIDID ? Context.GetQuery<{0}>().Single(o => o.ID == fk_Parent) : null", current.objClass.ClassName);
                 parent.code_property.SetStatements.AddExpression(@"_fk_Parent = value.ID");
 
                 serializerValue.code_property.GetStatements.AddExpression(@"return _fk_Value");

@@ -15,8 +15,8 @@ namespace Kistl.IntegrationTests
             {
                 setup.Init();
 
-                //RelationTests();
-                FrozenContextTests();
+                RelationTests();
+                //FrozenContextTests();
                 //GetListTests();
 
                 //GeneratorTests();
