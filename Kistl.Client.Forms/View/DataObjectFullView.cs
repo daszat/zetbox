@@ -49,7 +49,7 @@ namespace Kistl.Client.Forms.View
 
         private void SyncProperties()
         {
-            label1.Text = String.Format("Should display {0} properties", _dataContextCache.PropertyModels.Count);
+            //label1.Text = String.Format("Should display {0} properties", _dataContextCache.PropertyModels.Count);
 
         }
 
