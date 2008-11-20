@@ -27,6 +27,10 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_ReferenceObjectClass = null;
         
+        private System.Nullable<int> _fk_RightOf = null;
+        
+        private System.Nullable<int> _fk_LeftOf = null;
+        
         public ObjectReferenceProperty__Implementation__()
         {
         }
@@ -59,6 +63,70 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ReferenceObjectClass"); 
                     _fk_ReferenceObjectClass = value;
                     NotifyPropertyChanged("ReferenceObjectClass");;
+                }
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Relation RightOf
+        {
+            get
+            {
+                if (fk_RightOf == null) return null;
+                return Context.Find<Kistl.App.Base.Relation>(fk_RightOf.Value);
+            }
+            set
+            {
+                fk_RightOf = value != null ? (int?)value.ID : null;
+            }
+        }
+        
+        public System.Nullable<int> fk_RightOf
+        {
+            get
+            {
+                return _fk_RightOf;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (fk_RightOf != value)
+                {
+                    NotifyPropertyChanging("RightOf"); 
+                    _fk_RightOf = value;
+                    NotifyPropertyChanged("RightOf");;
+                }
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Relation LeftOf
+        {
+            get
+            {
+                if (fk_LeftOf == null) return null;
+                return Context.Find<Kistl.App.Base.Relation>(fk_LeftOf.Value);
+            }
+            set
+            {
+                fk_LeftOf = value != null ? (int?)value.ID : null;
+            }
+        }
+        
+        public System.Nullable<int> fk_LeftOf
+        {
+            get
+            {
+                return _fk_LeftOf;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (fk_LeftOf != value)
+                {
+                    NotifyPropertyChanging("LeftOf"); 
+                    _fk_LeftOf = value;
+                    NotifyPropertyChanged("LeftOf");;
                 }
             }
         }
@@ -119,6 +187,18 @@ namespace Kistl.App.Base
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(46).Constraints
                             .Where(c => !c.IsValid(this, this.ReferenceObjectClass))
                             .Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
+                            .ToArray());
+                case "RightOf":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(185).Constraints
+                            .Where(c => !c.IsValid(this, this.RightOf))
+                            .Select(c => c.GetErrorText(this, this.RightOf))
+                            .ToArray());
+                case "LeftOf":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(186).Constraints
+                            .Where(c => !c.IsValid(this, this.LeftOf))
+                            .Select(c => c.GetErrorText(this, this.LeftOf))
                             .ToArray());
             }
             return base.GetPropertyError(prop);

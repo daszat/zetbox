@@ -34,17 +34,17 @@ namespace Kistl.App.Base
         
         private int _ID;
         
-        private System.Nullable<int> _fk_Module = null;
-        
-        private string _ClassName;
-        
         private EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__> PropertiesWrapper;
         
         private EntityCollectionWrapper<Kistl.App.Base.Method, Kistl.App.Base.Method__Implementation__> MethodsWrapper;
         
-        private System.Nullable<int> _fk_DefaultIcon = null;
+        private System.Nullable<int> _fk_Module = null;
         
         private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocationsWrapper;
+        
+        private string _ClassName;
+        
+        private System.Nullable<int> _fk_DefaultIcon = null;
         
         private string _Description;
         
@@ -62,6 +62,48 @@ namespace Kistl.App.Base
             set
             {
                 _ID = value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public ICollection<Kistl.App.Base.BaseProperty> Properties
+        {
+            get
+            {
+                if (PropertiesWrapper == null) PropertiesWrapper = new EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__>(Properties__Implementation__);
+                return PropertiesWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_DataType_ObjectClass", "B_BaseProperty")]
+        public EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> Properties__Implementation__
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.BaseProperty__Implementation__>("Model.FK_BaseProperty_DataType_ObjectClass", "B_BaseProperty");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
+        [XmlIgnore()]
+        public ICollection<Kistl.App.Base.Method> Methods
+        {
+            get
+            {
+                if (MethodsWrapper == null) MethodsWrapper = new EntityCollectionWrapper<Kistl.App.Base.Method, Kistl.App.Base.Method__Implementation__>(Methods__Implementation__);
+                return MethodsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_DataType_ObjectClass", "B_Method")]
+        public EntityCollection<Kistl.App.Base.Method__Implementation__> Methods__Implementation__
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.Method__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Method__Implementation__>("Model.FK_Method_DataType_ObjectClass", "B_Method");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
             }
         }
         
@@ -111,6 +153,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
+        {
+            get
+            {
+                if (MethodInvocationsWrapper == null) MethodInvocationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(MethodInvocations__Implementation__);
+                return MethodInvocationsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "B_MethodInvocation")]
+        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>("Model.FK_MethodInvocation_DataType_InvokeOnObjectClass", "B_MethodInvocation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
         [EdmScalarPropertyAttribute()]
         public string ClassName
         {
@@ -127,48 +190,6 @@ namespace Kistl.App.Base
                     _ClassName = value;
                     NotifyPropertyChanged("ClassName");;
                 }
-            }
-        }
-        
-        [XmlIgnore()]
-        public ICollection<Kistl.App.Base.BaseProperty> Properties
-        {
-            get
-            {
-                if (PropertiesWrapper == null) PropertiesWrapper = new EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__>(Properties__Implementation__);
-                return PropertiesWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseProperty_DataType_ObjectClass", "B_BaseProperty")]
-        public EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> Properties__Implementation__
-        {
-            get
-            {
-                EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.BaseProperty__Implementation__>("Model.FK_BaseProperty_DataType_ObjectClass", "B_BaseProperty");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c;
-            }
-        }
-        
-        [XmlIgnore()]
-        public ICollection<Kistl.App.Base.Method> Methods
-        {
-            get
-            {
-                if (MethodsWrapper == null) MethodsWrapper = new EntityCollectionWrapper<Kistl.App.Base.Method, Kistl.App.Base.Method__Implementation__>(Methods__Implementation__);
-                return MethodsWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Method_DataType_ObjectClass", "B_Method")]
-        public EntityCollection<Kistl.App.Base.Method__Implementation__> Methods__Implementation__
-        {
-            get
-            {
-                EntityCollection<Kistl.App.Base.Method__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Method__Implementation__>("Model.FK_Method_DataType_ObjectClass", "B_Method");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c;
             }
         }
         
@@ -215,27 +236,6 @@ namespace Kistl.App.Base
                 EntityReference<Kistl.App.GUI.Icon__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>("Model.FK_DataType_Icon_DefaultIcon", "A_Icon");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = (Kistl.App.GUI.Icon__Implementation__)value;
-            }
-        }
-        
-        [XmlIgnore()]
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
-        {
-            get
-            {
-                if (MethodInvocationsWrapper == null) MethodInvocationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(MethodInvocations__Implementation__);
-                return MethodInvocationsWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "B_MethodInvocation")]
-        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
-        {
-            get
-            {
-                EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>("Model.FK_MethodInvocation_DataType_InvokeOnObjectClass", "B_MethodInvocation");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
-                return c;
             }
         }
         
@@ -301,18 +301,6 @@ namespace Kistl.App.Base
         {
             switch(prop)
             {
-                case "Module":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(45).Constraints
-                            .Where(c => !c.IsValid(this, this.Module))
-                            .Select(c => c.GetErrorText(this, this.Module))
-                            .ToArray());
-                case "ClassName":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(1).Constraints
-                            .Where(c => !c.IsValid(this, this.ClassName))
-                            .Select(c => c.GetErrorText(this, this.ClassName))
-                            .ToArray());
                 case "Properties":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(7).Constraints
@@ -325,17 +313,29 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Methods))
                             .Select(c => c.GetErrorText(this, this.Methods))
                             .ToArray());
-                case "DefaultIcon":
+                case "Module":
                     return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(69).Constraints
-                            .Where(c => !c.IsValid(this, this.DefaultIcon))
-                            .Select(c => c.GetErrorText(this, this.DefaultIcon))
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(45).Constraints
+                            .Where(c => !c.IsValid(this, this.Module))
+                            .Select(c => c.GetErrorText(this, this.Module))
                             .ToArray());
                 case "MethodInvocations":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(80).Constraints
                             .Where(c => !c.IsValid(this, this.MethodInvocations))
                             .Select(c => c.GetErrorText(this, this.MethodInvocations))
+                            .ToArray());
+                case "ClassName":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(1).Constraints
+                            .Where(c => !c.IsValid(this, this.ClassName))
+                            .Select(c => c.GetErrorText(this, this.ClassName))
+                            .ToArray());
+                case "DefaultIcon":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(69).Constraints
+                            .Where(c => !c.IsValid(this, this.DefaultIcon))
+                            .Select(c => c.GetErrorText(this, this.DefaultIcon))
                             .ToArray());
                 case "Description":
                     return string.Join("\n", 
@@ -372,10 +372,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._ClassName, sw);
-            BinarySerializer.ToBinary(this.Properties.Cast<IDataObject>(), sw);
-            BinarySerializer.ToBinary(this.Methods.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this.fk_DefaultIcon, sw);
-            BinarySerializer.ToBinary(this.MethodInvocations.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this._Description, sw);
         }
         

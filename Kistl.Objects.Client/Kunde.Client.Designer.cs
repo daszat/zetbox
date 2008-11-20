@@ -184,7 +184,7 @@ namespace Kistl.App.Projekte
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _EMails.AttachToContext(ctx);
+            if(_EMails != null) _EMails.AttachToContext(ctx);
         }
         
         protected override string GetPropertyError(string prop)

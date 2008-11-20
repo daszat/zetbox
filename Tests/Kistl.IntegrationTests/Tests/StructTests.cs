@@ -155,6 +155,7 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
+        [Ignore("Nicht fertig besprochen")]
         public void SetStructNull()
         {
             int ID = Kistl.API.Helper.INVALIDID;

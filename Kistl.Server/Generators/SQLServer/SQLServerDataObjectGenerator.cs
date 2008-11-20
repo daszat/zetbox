@@ -80,7 +80,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateEdmRelationshipAttribute
-        private void GenerateEdmRelationshipAttribute(TypeMoniker parentType, TypeMoniker childType, CodeCompileUnit code, string propertyName)
+        private void GenerateEdmRelationshipAttribute(TypeMoniker parentType, TypeMoniker childType, CodeCompileUnit code, string propertyName, RelationType type)
         {
             code.AddAttribute(typeof(System.Data.Objects.DataClasses.EdmRelationshipAttribute),
                 "Model",
@@ -95,7 +95,7 @@ namespace Kistl.Server.Generators.SQLServer
                 new CodeAttributeArgument(
                     new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType))),
                 new CodeAttributeArgument(
-                    new CodeSnippetExpression("System.Data.Metadata.Edm.RelationshipMultiplicity.Many")),
+                    new CodeSnippetExpression(string.Format("System.Data.Metadata.Edm.RelationshipMultiplicity.{0}", type == RelationType.one_one ? "One" : "Many"))),
                 new CodeAttributeArgument(
                     new CodeTypeOfExpression(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)));
         }
@@ -104,12 +104,12 @@ namespace Kistl.Server.Generators.SQLServer
         {
             var props = objClass.Properties.OfType<ObjectReferenceProperty>();
 
-            foreach (ObjectReferenceProperty prop in props)
+            foreach (ObjectReferenceProperty prop in props.ToList().Where(p => p.HasStorage()))
             {
                 TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
                 TypeMoniker childType = Generator.GetAssociationChildType(prop);
 
-                GenerateEdmRelationshipAttribute(parentType, childType, code, prop.PropertyName);
+                GenerateEdmRelationshipAttribute(parentType, childType, code, prop.PropertyName, prop.GetRelationType());
             }
         }
         #endregion
@@ -169,7 +169,7 @@ namespace Kistl.Server.Generators.SQLServer
                 TypeMoniker parentType = current.objClass.GetTypeMoniker();
 
                 // Assembly Code Relation
-                GenerateEdmRelationshipAttribute(parentType, collectionType, current.code, "fk_Parent");
+                GenerateEdmRelationshipAttribute(parentType, collectionType, current.code, "fk_Parent", RelationType.one_n);
 
 
                 CurrentObjectClass currentEFProperty = (CurrentObjectClass)current.Clone();
@@ -286,7 +286,7 @@ namespace Kistl.Server.Generators.SQLServer
 
                 collectionClass.code_property.AddAttribute("EdmScalarPropertyAttribute");
 
-                GenerateEdmRelationshipAttribute(parentType, collectionType, current.code, "fk_Parent");
+                GenerateEdmRelationshipAttribute(parentType, collectionType, current.code, "fk_Parent", RelationType.one_n);
 
                 collectionClass.code_class.BaseTypes[0].BaseType = "BaseServerCollectionEntry_EntityFramework";
                 collectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
@@ -405,23 +405,71 @@ namespace Kistl.Server.Generators.SQLServer
 
         #endregion
 
+        #region GenerateProperties_BackReferenceSingleProperty
+        protected override void GenerateProperties_BackReferenceSingleProperty(BaseDataObjectGenerator.CurrentObjectClass current, BaseDataObjectGenerator.CurrentObjectClass serializer)
+        {
+            base.GenerateProperties_BackReferenceSingleProperty(current, serializer);
+
+            if (current.task == TaskEnum.Server)
+            {
+                ObjectReferenceProperty backRefProp = (ObjectReferenceProperty)current.property;
+
+                TypeMoniker parentType = current.objClass.GetTypeMoniker();
+                TypeMoniker childType = Generator.GetAssociationChildType(backRefProp);
+                TypeMoniker ownerType = backRefProp.GetOpposite().ObjectClass.GetTypeMoniker();
+
+                string assocName = Generator.GetAssociationName(parentType, childType, backRefProp.GetOpposite().PropertyName);
+
+                current.code_property.GetStatements.AddExpression("return {0}" + Kistl.API.Helper.ImplementationSuffix, current.property.PropertyName);
+                current.code_property.SetStatements.AddExpression("{0}{2} = ({1}{2})value", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
+
+                CurrentObjectClass implProperty = (CurrentObjectClass)current.Clone();
+                implProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix, current.property.PropertyName + Kistl.API.Helper.ImplementationSuffix);
+
+                implProperty.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
+                    "Model",
+                    assocName,
+                    Generator.GetAssociationChildRoleName(childType));
+
+                implProperty.code_property.GetStatements.AddExpression(
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value", current.property.GetPropertyTypeString(), assocName, Generator.GetAssociationChildRoleName(childType), Kistl.API.Helper.ImplementationSuffix);
+
+                implProperty.code_property.SetStatements.AddExpression(
+              @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = ({0}{3})value", current.property.GetPropertyTypeString(), assocName, Generator.GetAssociationChildRoleName(childType), Kistl.API.Helper.ImplementationSuffix);
+
+                // Serializer
+                serializer.code_property.GetStatements.AddExpression(
+              @"if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && {0} != null)
+                {{
+                    _fk_{0} = {0}.ID;
+                }}
+                return _fk_{0}", current.property.PropertyName);
+                serializer.code_property.SetStatements.AddExpression("_fk_{0} = value", current.property.PropertyName);
+            }
+        }
+        #endregion
+
         #region GenerateProperties_BackReferenceProperty
 
         protected override void GenerateProperties_BackReferenceProperty(CurrentObjectClass current)
         {
             base.GenerateProperties_BackReferenceProperty(current);
 
-            BackReferenceProperty backRefProp = (BackReferenceProperty)current.property;
+            ObjectReferenceProperty backRefProp = (ObjectReferenceProperty)current.property;
 
             if (current.task == TaskEnum.Server)
             {
                 TypeMoniker parentType = current.objClass.GetTypeMoniker();
-                TypeMoniker childType = Generator.GetAssociationChildType((BackReferenceProperty)current.property);
-                TypeMoniker ownerType = ((BackReferenceProperty)current.property).ReferenceProperty.ObjectClass.GetTypeMoniker();
+                TypeMoniker childType = Generator.GetAssociationChildType(backRefProp);
+                TypeMoniker ownerType = (backRefProp).GetOpposite().ObjectClass.GetTypeMoniker();
 
                 CurrentObjectClass currentEFProperty = (CurrentObjectClass)current.Clone();
 
-                if (((BackReferenceProperty)current.property).ReferenceProperty.IsList)
+                if (backRefProp.GetOpposite().IsList)
                 {
                     current.code_field = current.code_class.CreateField(
                         new CodeTypeReference("EntityCollectionEntryParentWrapper",
@@ -445,7 +493,7 @@ namespace Kistl.Server.Generators.SQLServer
                   @"EntityCollection<{0}{3}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", childType.NameDataObject,
-                             Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName),
+                             Generator.GetAssociationName(parentType, childType, backRefProp.GetOpposite().PropertyName),
                              Generator.GetAssociationChildRoleName(childType), Kistl.API.Helper.ImplementationSuffix);
                 }
                 else
@@ -466,14 +514,14 @@ namespace Kistl.Server.Generators.SQLServer
                   @"EntityCollection<{0}{3}> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c", childType.NameDataObject,
-                             Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName),
+                             Generator.GetAssociationName(parentType, childType, backRefProp.GetOpposite().PropertyName),
                              Generator.GetAssociationChildRoleName(childType), Kistl.API.Helper.ImplementationSuffix);
                 }
 
                 // currentEFProperty.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject));
                 currentEFProperty.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
                     "Model",
-                    Generator.GetAssociationName(parentType, childType, backRefProp.ReferenceProperty.PropertyName),
+                    Generator.GetAssociationName(parentType, childType, backRefProp.GetOpposite().PropertyName),
                     Generator.GetAssociationChildRoleName(childType));
             }
         }

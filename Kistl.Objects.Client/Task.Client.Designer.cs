@@ -49,7 +49,18 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                fk_Projekt = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_Projekt != value.ID && fk_Projekt != null) value.Tasks.Remove(this);
+                    fk_Projekt = value.ID;
+                    if (!value.Tasks.Contains(this)) value.Tasks.Add(this);
+                }
+                else
+                {
+                    if (Projekt != null && Projekt.Tasks.Contains(this)) Projekt.Tasks.Remove(this);
+                    fk_Projekt = null;
+                };
             }
         }
         

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.App.Projekte
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
@@ -21,53 +21,46 @@ namespace Kistl.App.Projekte
     using Kistl.API;
     
     
-    public interface Mitarbeiter : IDataObject
+    /// <summary>
+    /// Describes a Relation between two Object Classes
+    /// </summary>
+    public interface Relation : IDataObject
     {
         
         /// <summary>
-        /// Projekte des Mitarbeiters für die er Verantwortlich ist
+        /// Right Part of the Relation
         /// </summary>
-        ICollection<Kistl.App.Projekte.Projekt> Projekte
-        {
-            get;
-        }
-        
-        /// <summary>
-        /// Vorname Nachname
-        /// </summary>
-        string Name
+        Kistl.App.Base.ObjectReferenceProperty RightPart
         {
             get;
             set;
         }
         
         /// <summary>
-        /// Herzlichen Glückwunsch zum Geburtstag
+        /// Left Part of the Relation
         /// </summary>
-        System.DateTime? Geburtstag
+        Kistl.App.Base.ObjectReferenceProperty LeftPart
         {
             get;
             set;
         }
         
         /// <summary>
-        /// NNNN TTMMYY
+        /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
-        string SVNr
+        Kistl.App.Base.StorageType? Storage
         {
             get;
             set;
         }
         
         /// <summary>
-        /// +43 123 12345678
+        /// Description of this Relation
         /// </summary>
-        string TelefonNummer
+        string Description
         {
             get;
             set;
         }
-        
-        System.DateTime TestMethodForParameter(System.Guid TestCLRObjectParameter, Kistl.App.Projekte.Auftrag TestObjectParameter, System.DateTime TestDateTime, bool TestBool, double TestDouble, int TestInt, string TestString);
     }
 }

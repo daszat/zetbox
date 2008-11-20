@@ -260,59 +260,61 @@ namespace Kistl.Server.Generators
                    select s;
         }
 
-        public static IQueryable<Property> GetCollectionProperties(Kistl.API.IKistlContext ctx)
+        public static IEnumerable<Property> GetCollectionProperties(Kistl.API.IKistlContext ctx)
         {
-            // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
-            // It's a Beta Version - so what!
-            //IQueryable<ObjectClass> objClasses = GetObjectClassList(ctx);
-            return from p in ctx.GetQuery<Property>()
-                   where p.ObjectClass is ObjectClass && p.IsList && p is Property
-                   select p;
-            //return from p in ctx.GetQuery<Property>()
-            //       from o in objClasses
-            //       where p.ObjectClass.ID == o.ID && p.IsList && p is Property
-            //       select p;
+            return (from p in ctx.GetQuery<Property>()
+                   where p.ObjectClass is ObjectClass && p.IsList
+                   select p).ToList().Where(p => p.HasStorage());
         }
 
-        public static IQueryable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.IKistlContext ctx)
+        public static IEnumerable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.IKistlContext ctx)
         {
-            // I'll have to extract that Query, because otherwise Linq to EF will throw an Exception
-            // It's a Beta Version - so what!
-            //IQueryable<ObjectClass> objClasses = GetObjectClassList(ctx);
-            return from p in ctx.GetQuery<ObjectReferenceProperty>()
-                   where p.ObjectClass is ObjectClass && p is ObjectReferenceProperty
-                   select p;
-            //return from p in ctx.GetQuery<ObjectReferenceProperty>()
-            //       from o in objClasses
-            //       where p.ObjectClass.ID == o.ID && p is ObjectReferenceProperty
-            //       select p;
+            return (from p in ctx.GetQuery<ObjectReferenceProperty>()
+                   where p.ObjectClass is ObjectClass
+                    select p).ToList().Where(p => p.HasStorage());
         }
         #endregion
 
         #region GetAssociationChildType
         public static TypeMoniker GetAssociationChildType(Property prop)
         {
-            if (!prop.IsList)
+            if (prop.HasStorage())
             {
-                return prop.ObjectClass.GetTypeMoniker();
+                if (!prop.IsList)
+                {
+                    return prop.ObjectClass.GetTypeMoniker();
+                }
+                else
+                {
+                    return Generator.GetPropertyCollectionObjectType(prop);
+                }
             }
-            else
+            else if(prop is ObjectReferenceProperty)
             {
-                return Generator.GetPropertyCollectionObjectType(prop);
+                if (!((ObjectReferenceProperty)prop).GetOpposite().IsList)
+                {
+                    return new TypeMoniker(prop.GetPropertyTypeString());
+                }
+                else
+                {
+                    return Generator.GetPropertyCollectionObjectType(((ObjectReferenceProperty)prop).GetOpposite());
+                }
             }
+
+            throw new InvalidOperationException("Unable to find out AssociationChildType");
         }
 
-        public static TypeMoniker GetAssociationChildType(BackReferenceProperty prop)
-        {
-            if (!prop.ReferenceProperty.IsList)
-            {
-                return new TypeMoniker(prop.GetPropertyTypeString());
-            }
-            else
-            {
-                return Generator.GetPropertyCollectionObjectType(prop.ReferenceProperty);
-            }
-        }
+        //public static TypeMoniker GetAssociationChildType(BackReferenceProperty prop)
+        //{
+        //    if (!prop.ReferenceProperty.IsList)
+        //    {
+        //        return new TypeMoniker(prop.GetPropertyTypeString());
+        //    }
+        //    else
+        //    {
+        //        return Generator.GetPropertyCollectionObjectType(prop.ReferenceProperty);
+        //    }
+        //}
 
         public static TypeMoniker GetAssociationChildTypeImplementation(Property prop)
         {
@@ -326,17 +328,17 @@ namespace Kistl.Server.Generators
             }
         }
 
-        public static TypeMoniker GetAssociationChildTypeImplementation(BackReferenceProperty prop)
-        {
-            if (!prop.ReferenceProperty.IsList)
-            {
-                return new TypeMoniker(prop.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix);
-            }
-            else
-            {
-                return Generator.GetPropertyCollectionObjectType(prop.ReferenceProperty);
-            }
-        }
+        //public static TypeMoniker GetAssociationChildTypeImplementation(BackReferenceProperty prop)
+        //{
+        //    if (!prop.ReferenceProperty.IsList)
+        //    {
+        //        return new TypeMoniker(prop.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix);
+        //    }
+        //    else
+        //    {
+        //        return Generator.GetPropertyCollectionObjectType(prop.ReferenceProperty);
+        //    }
+        //}
         #endregion
     }
 

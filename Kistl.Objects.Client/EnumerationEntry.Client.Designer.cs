@@ -47,7 +47,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Enumeration = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_Enumeration != value.ID && fk_Enumeration != null) value.EnumerationEntries.Remove(this);
+                    fk_Enumeration = value.ID;
+                    if (!value.EnumerationEntries.Contains(this)) value.EnumerationEntries.Add(this);
+                }
+                else
+                {
+                    if (Enumeration != null && Enumeration.EnumerationEntries.Contains(this)) Enumeration.EnumerationEntries.Remove(this);
+                    fk_Enumeration = null;
+                };
             }
         }
         

@@ -64,7 +64,8 @@ namespace Kistl.Client.WPF
                 serverDomain.Start(config);
             }
 
-            AppContext = new GuiApplicationContext(config, Toolkit.WPF);
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config); 
+            AppContext = new GuiApplicationContext(config, "WPF");
 
             return result;
         }

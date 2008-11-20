@@ -45,11 +45,12 @@ namespace Kistl.App.GUI.Hacks
         /// <param name="p">the <see cref="BaseProperty"/> to visualize</param>
         public static Visual CreateDefaultVisual(this IKistlContext ctx, BaseProperty p)
         {
-            if (p is BackReferenceProperty)
-            {
-                return CreateVisual(ctx, (BackReferenceProperty)p);
-            }
-            else if (p is BoolProperty)
+            //if (p is BackReferenceProperty)
+            //{
+            //    return CreateVisual(ctx, (BackReferenceProperty)p);
+            //}
+            //else 
+            if (p is BoolProperty)
             {
                 return CreateVisual(ctx, (BoolProperty)p);
             }
@@ -242,29 +243,29 @@ namespace Kistl.App.GUI.Hacks
                 );
         }
 
-        private static Visual CreateVisual(this IKistlContext ctx, BackReferenceProperty backReferenceProperty)
-        {
-            Type refType = backReferenceProperty.GetPropertyType();
-            // TODO: optimize this ToList()
-            ObjectClass refClass = ctx.GetQuery<ObjectClass>().ToList().Where(oc => oc.GetDataType() == refType).Single();
+        //private static Visual CreateVisual(this IKistlContext ctx, BackReferenceProperty backReferenceProperty)
+        //{
+        //    Type refType = backReferenceProperty.GetPropertyType();
+        //    // TODO: optimize this ToList()
+        //    ObjectClass refClass = ctx.GetQuery<ObjectClass>().ToList().Where(oc => oc.GetDataType() == refType).Single();
 
-            if (refClass != null && refClass.IsSimpleObject)
-            {
-                return ctx.CreateVisual(
-                    VisualType.SimpleObjectList,
-                    "Display and edit the referenced Simple Objects in place",
-                    backReferenceProperty
-                    );
-            }
-            else
-            {
-                return ctx.CreateVisual(
-                    VisualType.ObjectList,
-                    "this control displays a list of objects referencing this via a given relation",
-                    backReferenceProperty
-                    );
-            }
-        }
+        //    if (refClass != null && refClass.IsSimpleObject)
+        //    {
+        //        return ctx.CreateVisual(
+        //            VisualType.SimpleObjectList,
+        //            "Display and edit the referenced Simple Objects in place",
+        //            backReferenceProperty
+        //            );
+        //    }
+        //    else
+        //    {
+        //        return ctx.CreateVisual(
+        //            VisualType.ObjectList,
+        //            "this control displays a list of objects referencing this via a given relation",
+        //            backReferenceProperty
+        //            );
+        //    }
+        //}
 
         // TODO: Move to Kistl.App.GUI.Visual.ToString
         //public override string ToString()

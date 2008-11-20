@@ -30,6 +30,13 @@ namespace Kistl.API
         Deleted,
     }
 
+    public enum RelationType
+    {
+        one_n,
+        n_m,
+        one_one,        
+    }
+
     /// <summary>
     /// Interface for a Persitance Object.
     /// </summary>

@@ -51,7 +51,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Method = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_Method != value.ID && fk_Method != null) value.Parameter.Remove(this);
+                    fk_Method = value.ID;
+                    if (!value.Parameter.Contains(this)) value.Parameter.Add(this);
+                }
+                else
+                {
+                    if (Method != null && Method.Parameter.Contains(this)) Method.Parameter.Remove(this);
+                    fk_Method = null;
+                };
             }
         }
         

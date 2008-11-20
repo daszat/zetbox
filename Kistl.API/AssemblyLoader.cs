@@ -100,7 +100,7 @@ namespace Kistl.API
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
             // Do not call Trace.WriteLine! A TraceListener might want to load XML Serializers.dll and
             // this would lead to a StackOverflow due to recursion.
-            Console.WriteLine("Resolving Assembly {0}", args.Name);
+            System.Diagnostics.Trace.TraceInformation("Resolving Assembly {0}", args.Name);
             return Load(args.Name);
         }
 

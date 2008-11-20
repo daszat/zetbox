@@ -50,7 +50,8 @@ namespace Kistl.IntegrationTests
         public void IsReadonlyObject_Reference()
         {
             var obj = FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().First();
-            obj.BaseObjectClass = FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().Skip(2).First();
+            var baseobj = FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().Skip(2).First();
+            obj.BaseObjectClass = baseobj;
         }
     }
 }

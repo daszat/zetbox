@@ -359,7 +359,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_ObjectClass, sw);
             BinarySerializer.ToBinary(this._MethodName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
-            BinarySerializer.ToBinary(this.Parameter.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this._IsDisplayable, sw);
             BinarySerializer.ToBinary(this._Description, sw);
         }

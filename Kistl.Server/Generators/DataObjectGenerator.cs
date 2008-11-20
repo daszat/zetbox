@@ -279,7 +279,7 @@ namespace Kistl.Server.Generators
                     Console.Write(progress[progressIdx++ % progress.Length]);
                     if (Console.CursorLeft > 0) Console.CursorLeft -= 1;
 
-                    ObjectClass origObjClass = obj.GetObjectClass(ctx);
+                    ObjectClass origObjClass = obj.GetObjectClass(FrozenContext.Single);
                     ObjectClass objClass = origObjClass;
                     ObjectClass rootClass = origObjClass.GetRootClass();
 
@@ -319,29 +319,29 @@ namespace Kistl.Server.Generators
                             }
                         }
 
-                        foreach (BackReferenceProperty prop in objClass.Properties.OfType<BackReferenceProperty>())
-                        {
-                            IEnumerable val;
-                            try
-                            {
-                                val = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
-                            }
-                            catch (ArgumentOutOfRangeException)
-                            {
-                                // TODO: Hack!
-                                continue;
-                            }
+                        //foreach (BackReferenceProperty prop in objClass.Properties.OfType<BackReferenceProperty>())
+                        //{
+                        //    IEnumerable val;
+                        //    try
+                        //    {
+                        //        val = obj.GetPropertyValue<IEnumerable>(prop.PropertyName);
+                        //    }
+                        //    catch (ArgumentOutOfRangeException)
+                        //    {
+                        //        // TODO: Hack!
+                        //        continue;
+                        //    }
 
-                            if (val == null) continue;
+                        //    if (val == null) continue;
 
-                            string refTypeString = prop.GetPropertyTypeString();
+                        //    string refTypeString = prop.GetPropertyTypeString();
 
-                            foreach (IDataObject v in val)
-                            {
-                                constructor.Statements.AddExpression("obj.{0}.Add(this.Find<{1}>({2}))",
-                                    prop.PropertyName, refTypeString, v.ID);
-                            }
-                        }
+                        //    foreach (IDataObject v in val)
+                        //    {
+                        //        constructor.Statements.AddExpression("obj.{0}.Add(this.Find<{1}>({2}))",
+                        //            prop.PropertyName, refTypeString, v.ID);
+                        //    }
+                        //}
                         objClass = objClass.BaseObjectClass;
                     }
                     constructor.Statements.AddExpression("}");
@@ -361,7 +361,7 @@ namespace Kistl.Server.Generators
                     Console.Write(progress[progressIdx++ % progress.Length]);
                     if (Console.CursorLeft > 0) Console.CursorLeft -= 1;
 
-                    ObjectClass origObjClass = obj.GetObjectClass(ctx);
+                    ObjectClass origObjClass = obj.GetObjectClass(FrozenContext.Single);
                     ObjectClass objClass = origObjClass;
                     ObjectClass rootClass = origObjClass.GetRootClass();
 
@@ -402,6 +402,11 @@ namespace Kistl.Server.Generators
                             else if (prop is BoolProperty)
                             {
                                 sb.AppendFormat("{0}", ((bool)val) ? "true" : "false");
+                            }
+                            else if (prop is EnumerationProperty)
+                            {
+                                EnumerationProperty eprop = (EnumerationProperty)prop;
+                                sb.Append(string.Format(CultureInfo.InvariantCulture, "{0}.{1}", eprop.GetPropertyTypeString(), val));
                             }
                             else
                             {
@@ -456,6 +461,11 @@ namespace Kistl.Server.Generators
                                 else if (prop is BoolProperty)
                                 {
                                     sb.AppendFormat("{0}", ((bool)val) ? "true" : "false");
+                                }
+                                else if (prop is EnumerationProperty)
+                                {
+                                    EnumerationProperty eprop = (EnumerationProperty)prop;
+                                    sb.Append(string.Format(CultureInfo.InvariantCulture, "{0}.{1}", eprop.GetPropertyTypeString(), val));
                                 }
                                 else
                                 {
@@ -710,7 +720,7 @@ namespace Kistl.Server.Generators
             foreach (BaseProperty p in properties)
             {
                 CodeMemberProperty codeProp;
-                if (p is BackReferenceProperty)
+                if (p.IsObjectReferencePropertyList() && !((ObjectReferenceProperty)p).HasStorage())
                 {
                     CodeTypeReference type = new CodeTypeReference("ICollection", p.ToCodeTypeReference(current.task));
                     codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
@@ -1053,6 +1063,7 @@ namespace Kistl.Server.Generators
                 throw new ArgumentOutOfRangeException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
                     current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
 
+            ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
             current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
             current.code_property.AddAttribute("XmlIgnore");
 
@@ -1061,8 +1072,26 @@ namespace Kistl.Server.Generators
                 current.code_property.GetStatements.AddExpression(@"if (fk_{1} == null) return null;
                 return Context.Find<{0}>(fk_{1}.Value)", current.property.GetPropertyTypeString(), current.property.PropertyName);
 
-                current.code_property.SetStatements.AddExpression(@"fk_{0} = value != null ? (int?)value.ID : null",
-                    current.property.PropertyName);
+                if (objRefProp.GetOpposite() != null && objRefProp.GetRelationType() == RelationType.one_n)
+                {
+                    current.code_property.SetStatements.AddExpression(@"if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {{
+                    if (fk_{0} != value.ID && fk_{0} != null) value.{1}.Remove(this);
+                    fk_{0} = value.ID;
+                    if (!value.{1}.Contains(this)) value.{1}.Add(this);
+                }}
+                else
+                {{
+                    if ({0} != null && {0}.{1}.Contains(this)) {0}.{1}.Remove(this);
+                    fk_{0} = null;
+                }}", objRefProp.PropertyName, objRefProp.GetOpposite().PropertyName);
+                }
+                else
+                {
+                    current.code_property.SetStatements.AddExpression(@"fk_{0} = value != null ? (int?)value.ID : null",
+                        objRefProp.PropertyName);
+                }
             }
 
             CurrentObjectClass serializer = (CurrentObjectClass)current.Clone();
@@ -1225,6 +1254,45 @@ namespace Kistl.Server.Generators
 
         #endregion
 
+        #region GenerateProperties_BackReferenceSingleProperty
+        protected virtual void GenerateProperties_BackReferenceSingleProperty(CurrentObjectClass current, CurrentObjectClass serializer)
+        {
+        }
+
+        private void GenerateProperties_BackReferenceSinglePropertyInternal(CurrentObjectClass current)
+        {
+            current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
+            current.code_property.AddAttribute("XmlIgnore");
+
+            if (current.task == TaskEnum.Client)
+            {
+                current.code_property.GetStatements.AddExpression(@"if (fk_{1} == null) return null;
+                return Context.Find<{0}>(fk_{1}.Value)", current.property.GetPropertyTypeString(), current.property.PropertyName);
+
+                current.code_property.SetStatements.AddExpression(@"fk_{0} = value != null ? (int?)value.ID : null",
+                    current.property.PropertyName);
+            }
+
+            CurrentObjectClass serializer = (CurrentObjectClass)current.Clone();
+
+            // Serializer fk_ Field und Property
+            string fieldName = "_fk_" + current.property.PropertyName;
+            serializer.code_field = current.code_class.CreateField(typeof(int?), fieldName, "null");
+
+            if (current.task == TaskEnum.Client)
+            {
+                serializer.code_property = current.code_class.CreateNotifyingProperty(typeof(int?), "fk_" + current.property.PropertyName,
+                    fieldName, fieldName, current.property.PropertyName);
+            }
+            else
+            {
+                serializer.code_property = current.code_class.CreateProperty(typeof(int?), "fk_" + current.property.PropertyName);
+            }
+
+            GenerateProperties_BackReferenceSingleProperty(current, serializer);
+        }
+        #endregion
+
         #region GenerateProperties_BackReferenceProperty
         protected virtual void GenerateProperties_BackReferenceProperty(CurrentObjectClass current)
         {
@@ -1260,7 +1328,7 @@ namespace Kistl.Server.Generators
                 return _{0}",
                             current.property.PropertyName,
                             childType.NameDataObject,
-                            ((BackReferenceProperty)current.property).ReferenceProperty.PropertyName);
+                            ((ObjectReferenceProperty)current.property).GetOpposite().PropertyName);
 
                 CodeMemberField f = new CodeMemberField(new CodeTypeReference("BackReferenceCollection", new CodeTypeReference(childType.NameDataObject)),
                     "_" + current.property.PropertyName);
@@ -1315,20 +1383,25 @@ namespace Kistl.Server.Generators
                     // Simple Property
                     GenerateProperties_ValueTypePropertyInternal(currentProperty);
                 }
-                else if (baseProp.IsObjectReferencePropertyList())
+                else if (baseProp.IsObjectReferencePropertyList() && baseProp.HasStorage())
                 {
                     // "pointer" Object Collection
                     GenerateProperties_ObjectReferenceProperty_CollectionInternal(currentProperty);
                 }
-                else if (baseProp.IsObjectReferencePropertySingle())
+                else if (baseProp.IsObjectReferencePropertySingle() && baseProp.HasStorage())
                 {
                     // "pointer" Object
                     GenerateProperties_ObjectReferencePropertyInternal(currentProperty);
                 }
-                else if (baseProp is BackReferenceProperty)
+                else if (baseProp.IsObjectReferencePropertyList() && !baseProp.HasStorage())
+                {
+                    // "Backpointer" List
+                    GenerateProperties_BackReferencePropertyInternal(currentProperty);
+                }
+                else if (baseProp.IsObjectReferencePropertySingle() && !baseProp.HasStorage())
                 {
                     // "Backpointer" Object
-                    GenerateProperties_BackReferencePropertyInternal(currentProperty);
+                    GenerateProperties_BackReferenceSinglePropertyInternal(currentProperty);
                 }
                 else if (baseProp.IsStructPropertySingle())
                 {
@@ -1447,15 +1520,15 @@ namespace Kistl.Server.Generators
                     {
                         stmt = string.Format("this._{0}.ApplyChanges((({1}{2})obj)._{0})", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
-                    else if (p.IsObjectReferencePropertySingle())
+                    else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
                     {
                         stmt = string.Format("(({1}{2})obj).fk_{0} = this.fk_{0}", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
-                    else if (p.IsObjectReferencePropertyList())
+                    else if (p.IsObjectReferencePropertyList() && p.HasStorage())
                     {
                         stmt = string.Format("this._{0}.ApplyChanges((({1}{2})obj)._{0})", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
-                    else if (p is BackReferenceProperty)
+                    else if (p.IsObjectReferencePropertyList() && !p.HasStorage())
                     {
                         stmt = string.Format("if(this._{0} != null) this._{0}.ApplyChanges((({1}{2})obj)._{0}); else (({1}{2})obj)._{0} = null; (({1}{2})obj).NotifyPropertyChanged(\"{0}\")", p.PropertyName, current.objClass.ClassName, Kistl.API.Helper.ImplementationSuffix);
                     }
@@ -1477,18 +1550,12 @@ namespace Kistl.Server.Generators
             {
                 foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
                 {
-                    // Use ToList before using foreach - the collection could change
-                    m.Statements.AddExpression(@"_{0}.AttachToContext(ctx)", p.PropertyName);
-                }
-                foreach (BackReferenceProperty p in current.objClass.Properties.OfType<BackReferenceProperty>())
-                {
-                    // Create a new List after Attach - Object Reference will change, if Object is alredy in tha Context
                     m.Statements.AddExpression(@"if(_{0} != null) _{0}.AttachToContext(ctx)", p.PropertyName);
                 }
             }
             else
             {
-                foreach (Property p in current.objClass.Properties.OfType<Property>().Where(p => p.IsList))
+                foreach (Property p in current.objClass.Properties.OfType<Property>().ToList().Where(p => p.IsList && p.HasStorage()))
                 {
                     m.Statements.AddComment(@"Use ToList before using foreach - the collection will change in the KistContext.Attach() Method because EntityFramework will need a Trick to attach CollectionEntries correctly");
                     m.Statements.AddExpression(@"{0}{1}.ToList().ForEach<ICollectionEntry>(i => ctx.Attach(i))", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
@@ -1683,20 +1750,20 @@ namespace Kistl.Server.Generators
                 {
                     m.Statements.AddExpression("BinarySerializer.ToBinary(this._{0}, sw)", p.PropertyName);
                 }
-                else if (p.IsObjectReferencePropertySingle())
+                else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
                 {
                     m.Statements.AddExpression("BinarySerializer.ToBinary(this.fk_{0}, sw)", p.PropertyName);
                 }
-                else if (p.IsObjectReferencePropertyList())
+                else if (p.IsObjectReferencePropertyList() && p.HasStorage())
                 {
                     if (current.task == TaskEnum.Client)
                         m.Statements.AddExpression("this._{0}.ToStream(sw)", p.PropertyName);
                     else
                         m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                 }
-                else if (p is BackReferenceProperty
+                else if (p.IsObjectReferencePropertyList() && !p.HasStorage()
                     && current.task == TaskEnum.Server
-                    && ((BackReferenceProperty)p).PreFetchToClient)
+                    && false /*((ObjectReferenceProperty)p).PreFetchToClient*/ )
                 {
                     m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}.Cast<IDataObject>(), sw)", p.PropertyName);
                 }
@@ -1714,7 +1781,7 @@ namespace Kistl.Server.Generators
             #region FromStream
             foreach (BaseProperty p in properties)
             {
-                if (p.IsListProperty())
+                if (p.IsListProperty() && p.HasStorage())
                 {
                     if (current.task == TaskEnum.Client)
                         m.Statements.AddExpression("this._{0}.FromStream(sr)", p.PropertyName);
@@ -1734,18 +1801,22 @@ namespace Kistl.Server.Generators
                 {
                     m.Statements.AddExpression(@"BinarySerializer.FromBinary(out this._{0}, sr); if (_{0} != null) _{0}.AttachToObject(this, ""{0}"")", p.PropertyName);
                 }
-                else if (p is ObjectReferenceProperty)
+                else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
                 {
                     m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName);
                 }
-                else if (p is BackReferenceProperty
+                else if (p.IsObjectReferencePropertySingle() && !p.HasStorage() && false /*((BackReferenceProperty)p).PreFetchToClient*/)
+                {
+                    m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName);
+                }
+                else if (p.IsObjectReferencePropertyList() && !p.HasStorage()
                     && current.task == TaskEnum.Client
-                    && ((BackReferenceProperty)p).PreFetchToClient)
+                    && false /*((BackReferenceProperty)p).PreFetchToClient*/)
                 {
                     m.Statements.AddExpression(
                         "this._{0} = new BackReferenceCollection<{1}>(\"{2}\", this); BinarySerializer.FromBinary(this._{0}, sr)",
                         p.PropertyName, p.GetPropertyTypeString(),
-                        ((BackReferenceProperty)p).ReferenceProperty.PropertyName);
+                        ((ObjectReferenceProperty)p).GetOpposite().PropertyName);
                 }
             }
             #endregion

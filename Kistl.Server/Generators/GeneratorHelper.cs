@@ -70,10 +70,10 @@ namespace Kistl.Server.Generators
                 {
                     appendNullable = false;
                 }
-                else if (p is BackReferenceProperty)
-                {
-                    appendNullable = false;
-                }
+                //else if (p is BackReferenceProperty)
+                //{
+                //    appendNullable = false;
+                //}
                 else if (p is StructProperty)
                 {
                     appendNullable = false;

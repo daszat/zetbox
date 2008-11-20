@@ -25,72 +25,22 @@ namespace Kistl.App.Base
     public class DataType__Implementation__ : BaseClientDataObject, DataType
     {
         
-        private System.Nullable<int> _fk_Module = null;
-        
-        private string _ClassName;
-        
         private BackReferenceCollection<Kistl.App.Base.BaseProperty> _Properties;
         
         private BackReferenceCollection<Kistl.App.Base.Method> _Methods;
         
-        private System.Nullable<int> _fk_DefaultIcon = null;
+        private System.Nullable<int> _fk_Module = null;
         
         private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvocations;
+        
+        private string _ClassName;
+        
+        private System.Nullable<int> _fk_DefaultIcon = null;
         
         private string _Description;
         
         public DataType__Implementation__()
         {
-        }
-        
-        [XmlIgnore()]
-        public Kistl.App.Base.Module Module
-        {
-            get
-            {
-                if (fk_Module == null) return null;
-                return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
-            }
-            set
-            {
-                fk_Module = value != null ? (int?)value.ID : null;
-            }
-        }
-        
-        public System.Nullable<int> fk_Module
-        {
-            get
-            {
-                return _fk_Module;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (fk_Module != value)
-                {
-                    NotifyPropertyChanging("Module"); 
-                    _fk_Module = value;
-                    NotifyPropertyChanged("Module");;
-                }
-            }
-        }
-        
-        public string ClassName
-        {
-            get
-            {
-                return _ClassName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ClassName != value)
-                {
-                    NotifyPropertyChanging("ClassName"); 
-                    _ClassName = value;
-                    NotifyPropertyChanged("ClassName");;
-                }
-            }
         }
         
         [XmlIgnore()]
@@ -134,6 +84,87 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                if (fk_Module == null) return null;
+                return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_Module != value.ID && fk_Module != null) value.DataTypes.Remove(this);
+                    fk_Module = value.ID;
+                    if (!value.DataTypes.Contains(this)) value.DataTypes.Add(this);
+                }
+                else
+                {
+                    if (Module != null && Module.DataTypes.Contains(this)) Module.DataTypes.Remove(this);
+                    fk_Module = null;
+                };
+            }
+        }
+        
+        public System.Nullable<int> fk_Module
+        {
+            get
+            {
+                return _fk_Module;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (fk_Module != value)
+                {
+                    NotifyPropertyChanging("Module"); 
+                    _fk_Module = value;
+                    NotifyPropertyChanged("Module");;
+                }
+            }
+        }
+        
+        [XmlIgnore()]
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
+        {
+            get
+            {
+                if (_MethodInvocations == null)
+                {
+                    List<Kistl.App.Base.MethodInvocation> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvocations");
+                    else
+                        serverList = new List<Kistl.App.Base.MethodInvocation>();
+
+                    _MethodInvocations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
+                         "InvokeOnObjectClass", this, serverList);
+                }
+                return _MethodInvocations;
+            }
+        }
+        
+        public string ClassName
+        {
+            get
+            {
+                return _ClassName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (ClassName != value)
+                {
+                    NotifyPropertyChanging("ClassName"); 
+                    _ClassName = value;
+                    NotifyPropertyChanged("ClassName");;
+                }
+            }
+        }
+        
+        [XmlIgnore()]
         public Kistl.App.GUI.Icon DefaultIcon
         {
             get
@@ -162,26 +193,6 @@ namespace Kistl.App.Base
                     _fk_DefaultIcon = value;
                     NotifyPropertyChanged("DefaultIcon");;
                 }
-            }
-        }
-        
-        [XmlIgnore()]
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
-        {
-            get
-            {
-                if (_MethodInvocations == null)
-                {
-                    List<Kistl.App.Base.MethodInvocation> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvocations");
-                    else
-                        serverList = new List<Kistl.App.Base.MethodInvocation>();
-
-                    _MethodInvocations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
-                         "InvokeOnObjectClass", this, serverList);
-                }
-                return _MethodInvocations;
             }
         }
         
@@ -240,12 +251,12 @@ namespace Kistl.App.Base
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((DataType__Implementation__)obj).fk_Module = this.fk_Module;
-            ((DataType__Implementation__)obj).ClassName = this.ClassName;
             if(this._Properties != null) this._Properties.ApplyChanges(((DataType__Implementation__)obj)._Properties); else ((DataType__Implementation__)obj)._Properties = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("Properties");
             if(this._Methods != null) this._Methods.ApplyChanges(((DataType__Implementation__)obj)._Methods); else ((DataType__Implementation__)obj)._Methods = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("Methods");
-            ((DataType__Implementation__)obj).fk_DefaultIcon = this.fk_DefaultIcon;
+            ((DataType__Implementation__)obj).fk_Module = this.fk_Module;
             if(this._MethodInvocations != null) this._MethodInvocations.ApplyChanges(((DataType__Implementation__)obj)._MethodInvocations); else ((DataType__Implementation__)obj)._MethodInvocations = null; ((DataType__Implementation__)obj).NotifyPropertyChanged("MethodInvocations");
+            ((DataType__Implementation__)obj).ClassName = this.ClassName;
+            ((DataType__Implementation__)obj).fk_DefaultIcon = this.fk_DefaultIcon;
             ((DataType__Implementation__)obj).Description = this.Description;
         }
         
@@ -261,18 +272,6 @@ namespace Kistl.App.Base
         {
             switch(prop)
             {
-                case "Module":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(45).Constraints
-                            .Where(c => !c.IsValid(this, this.Module))
-                            .Select(c => c.GetErrorText(this, this.Module))
-                            .ToArray());
-                case "ClassName":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(1).Constraints
-                            .Where(c => !c.IsValid(this, this.ClassName))
-                            .Select(c => c.GetErrorText(this, this.ClassName))
-                            .ToArray());
                 case "Properties":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(7).Constraints
@@ -285,17 +284,29 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Methods))
                             .Select(c => c.GetErrorText(this, this.Methods))
                             .ToArray());
-                case "DefaultIcon":
+                case "Module":
                     return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(69).Constraints
-                            .Where(c => !c.IsValid(this, this.DefaultIcon))
-                            .Select(c => c.GetErrorText(this, this.DefaultIcon))
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(45).Constraints
+                            .Where(c => !c.IsValid(this, this.Module))
+                            .Select(c => c.GetErrorText(this, this.Module))
                             .ToArray());
                 case "MethodInvocations":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(80).Constraints
                             .Where(c => !c.IsValid(this, this.MethodInvocations))
                             .Select(c => c.GetErrorText(this, this.MethodInvocations))
+                            .ToArray());
+                case "ClassName":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(1).Constraints
+                            .Where(c => !c.IsValid(this, this.ClassName))
+                            .Select(c => c.GetErrorText(this, this.ClassName))
+                            .ToArray());
+                case "DefaultIcon":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(69).Constraints
+                            .Where(c => !c.IsValid(this, this.DefaultIcon))
+                            .Select(c => c.GetErrorText(this, this.DefaultIcon))
                             .ToArray());
                 case "Description":
                     return string.Join("\n", 
@@ -341,10 +352,7 @@ namespace Kistl.App.Base
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._ClassName, sr);
-            this._Properties = new BackReferenceCollection<Kistl.App.Base.BaseProperty>("ObjectClass", this); BinarySerializer.FromBinary(this._Properties, sr);
-            this._Methods = new BackReferenceCollection<Kistl.App.Base.Method>("ObjectClass", this); BinarySerializer.FromBinary(this._Methods, sr);
             BinarySerializer.FromBinary(out this._fk_DefaultIcon, sr);
-            this._MethodInvocations = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>("InvokeOnObjectClass", this); BinarySerializer.FromBinary(this._MethodInvocations, sr);
             BinarySerializer.FromBinary(out this._Description, sr);
         }
         

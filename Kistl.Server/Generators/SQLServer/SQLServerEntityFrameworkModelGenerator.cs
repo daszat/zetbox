@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.SQLServer
             return c;
         }
 
-        private static string GetAssociationChildEntitySetName(Property prop, IQueryable<ObjectClass> objClassList)
+        private static string GetAssociationChildEntitySetName(Property prop, IEnumerable<ObjectClass> objClassList)
         {
             TypeMoniker childType = Generator.GetAssociationChildType(prop);
             if (!prop.IsList)
@@ -107,7 +107,7 @@ namespace Kistl.Server.Generators.SQLServer
         }
 
         #region GenerateCSDL_AssociationListPropertiesRelations
-        private void GenerateCSDL_AssociationListPropertiesRelations(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateCSDL_AssociationListPropertiesRelations(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {
@@ -139,7 +139,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateCSDL_AssociationObjectRelations
 
-        private void GenerateCSDL_AssociationObjectRelations(System.Xml.XmlTextWriter xml, IQueryable<ObjectReferenceProperty> objectReferenceProperties)
+        private void GenerateCSDL_AssociationObjectRelations(System.Xml.XmlTextWriter xml, IEnumerable<ObjectReferenceProperty> objectReferenceProperties)
         {
             foreach (ObjectReferenceProperty prop in objectReferenceProperties)
             {
@@ -161,7 +161,7 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteAttributeString("Type", GetAssociationChildTypeName(prop));
-                xml.WriteAttributeString("Multiplicity", "*");
+                xml.WriteAttributeString("Multiplicity", prop.GetRelationType() == RelationType.one_one ? "1" :"*");
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteEndElement(); // </AssociationSet>
@@ -170,7 +170,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateCSDL_EntityTypeListProperties
-        private void GenerateCSDL_EntityTypeListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateCSDL_EntityTypeListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {
@@ -299,19 +299,31 @@ namespace Kistl.Server.Generators.SQLServer
                 foreach (BaseProperty p in obj.Properties)
                 {
                     // TODO: implement IsNullable everywhere
-                    if (p is BackReferenceProperty)
+                    if (p.IsObjectReferencePropertyList() && !p.HasStorage())
                     {
                         // BackReferenceProperty
                         xml.WriteStartElement("NavigationProperty");
                         xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
-                        TypeMoniker childType = Generator.GetAssociationChildType((BackReferenceProperty)p);
-                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, ((BackReferenceProperty)p).ReferenceProperty.PropertyName));
+                        TypeMoniker childType = Generator.GetAssociationChildType((Property)p);
+                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, ((ObjectReferenceProperty)p).GetOpposite().PropertyName));
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
                     }
-                    else if (p.IsObjectReferencePropertySingle())
+                    else if (p.IsObjectReferencePropertyList() && p.HasStorage())
+                    {
+                        // ObjectReferenceProperty List
+                        xml.WriteStartElement("NavigationProperty");
+                        xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
+                        TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
+                        TypeMoniker childType = Generator.GetPropertyCollectionObjectType((ObjectReferenceProperty)p);
+                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
+                        xml.WriteAttributeString("FromRole", Generator.GetAssociationParentRoleName(parentType));
+                        xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
+                        xml.WriteEndElement(); // </NavigationProperty>
+                    }
+                    else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
                     {
                         // ObjectReferenceProperty
                         xml.WriteStartElement("NavigationProperty");
@@ -323,14 +335,14 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteEndElement(); // </NavigationProperty>
                     }
-                    else if (p.IsObjectReferencePropertyList())
+                    else if (p.IsObjectReferencePropertySingle() && !p.HasStorage())
                     {
-                        // ObjectReferenceProperty List
+                        // ObjectReferenceProperty
                         xml.WriteStartElement("NavigationProperty");
                         xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                         TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
-                        TypeMoniker childType = Generator.GetPropertyCollectionObjectType((ObjectReferenceProperty)p);
-                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
+                        TypeMoniker childType = new TypeMoniker(p.GetPropertyTypeString());
+                        xml.WriteAttributeString("Relationship", "Model." + Generator.GetAssociationName(parentType, childType, ((ObjectReferenceProperty)p).GetOpposite().PropertyName));
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteEndElement(); // </NavigationProperty>
@@ -384,7 +396,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateCSDL_EntityContainer
-        private void GenerateCSDL_EntityContainer(System.Xml.XmlTextWriter xml, IQueryable<ObjectClass> objClassList, IQueryable<Property> listProperties, IQueryable<ObjectReferenceProperty> objectReferenceProperties)
+        private void GenerateCSDL_EntityContainer(System.Xml.XmlTextWriter xml, IEnumerable<ObjectClass> objClassList, IEnumerable<Property> listProperties, IEnumerable<ObjectReferenceProperty> objectReferenceProperties)
         {
             // Write EntityContainer
             xml.WriteStartElement("EntityContainer");
@@ -562,7 +574,7 @@ namespace Kistl.Server.Generators.SQLServer
         }
 
         #region GenerateMSL_AssociationSetMapping_ListProperties
-        private void GenerateMSL_AssociationSetMapping_ListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateMSL_AssociationSetMapping_ListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {
@@ -602,7 +614,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateMSL_AssociationSetMapping_ObjectReference
-        private void GenerateMSL_AssociationSetMapping_ObjectReference(System.Xml.XmlTextWriter xml, IQueryable<ObjectReferenceProperty> objectReferenceProperties)
+        private void GenerateMSL_AssociationSetMapping_ObjectReference(System.Xml.XmlTextWriter xml, IEnumerable<ObjectReferenceProperty> objectReferenceProperties)
         {
             foreach (ObjectReferenceProperty prop in objectReferenceProperties)
             {
@@ -642,7 +654,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateMSL_EntitySetMapping_ListProperties
-        private void GenerateMSL_EntitySetMapping_ListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateMSL_EntitySetMapping_ListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {
@@ -745,7 +757,7 @@ namespace Kistl.Server.Generators.SQLServer
         }
 
         #region GenerateSSDL_Associations_ListProperties
-        private void GenerateSSDL_Associations_ListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateSSDL_Associations_ListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {
@@ -795,7 +807,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateSSDL_Associations_ObjectReferences
-        private void GenerateSSDL_Associations_ObjectReferences(System.Xml.XmlTextWriter xml, IQueryable<ObjectReferenceProperty> objectReferenceProperties)
+        private void GenerateSSDL_Associations_ObjectReferences(System.Xml.XmlTextWriter xml, IEnumerable<ObjectReferenceProperty> objectReferenceProperties)
         {
             foreach (ObjectReferenceProperty prop in objectReferenceProperties)
             {
@@ -816,7 +828,7 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteAttributeString("Type", "Model.Store." + childType.Classname);
-                xml.WriteAttributeString("Multiplicity", "*");
+                xml.WriteAttributeString("Multiplicity", "*"); // prop.GetRelationType() == RelationType.one_one ? "0..1" : Storage: Always 1:n? Why?
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteStartElement("ReferentialConstraint");
@@ -897,7 +909,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion        
 
         #region GenerateSSDL_EntityTypes_ListProperties
-        private void GenerateSSDL_EntityTypes_ListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateSSDL_EntityTypes_ListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {
@@ -950,7 +962,7 @@ namespace Kistl.Server.Generators.SQLServer
         #region GenerateSSDL_EntityTypes_ObjectClasses
         private void GenerateSSDL_EntityTypes_ObjectClasses_Properties(System.Xml.XmlTextWriter xml, DataType obj, string parentPropName)
         {
-            foreach (Property p in obj.Properties.OfType<Property>().Where(p => p.IsList == false))
+            foreach (Property p in obj.Properties.OfType<Property>().ToList().Where(p => p.IsList == false && p.HasStorage()))
             {
                 if (p is StructProperty)
                 {
@@ -1013,7 +1025,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateSSDL_AssociationSet_ListProperties
-        private void GenerateSSDL_AssociationSet_ListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateSSDL_AssociationSet_ListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {
@@ -1041,7 +1053,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateSSDL_AssociationSet_ObjectReferenceProperties
-        private void GenerateSSDL_AssociationSet_ObjectReferenceProperties(System.Xml.XmlTextWriter xml, IQueryable<ObjectReferenceProperty> objectReferenceProperties)
+        private void GenerateSSDL_AssociationSet_ObjectReferenceProperties(System.Xml.XmlTextWriter xml, IEnumerable<ObjectReferenceProperty> objectReferenceProperties)
         {
             foreach (ObjectReferenceProperty prop in objectReferenceProperties)
             {
@@ -1101,7 +1113,7 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateSSDL_EntityContainer_ListProperties
-        private void GenerateSSDL_EntityContainer_ListProperties(System.Xml.XmlTextWriter xml, IQueryable<Property> listProperties)
+        private void GenerateSSDL_EntityContainer_ListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
         {
             foreach (Property prop in listProperties)
             {

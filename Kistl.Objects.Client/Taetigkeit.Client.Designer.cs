@@ -49,7 +49,18 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                fk_Zeitkonto = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_Zeitkonto != value.ID && fk_Zeitkonto != null) value.Taetigkeiten.Remove(this);
+                    fk_Zeitkonto = value.ID;
+                    if (!value.Taetigkeiten.Contains(this)) value.Taetigkeiten.Add(this);
+                }
+                else
+                {
+                    if (Zeitkonto != null && Zeitkonto.Taetigkeiten.Contains(this)) Zeitkonto.Taetigkeiten.Remove(this);
+                    fk_Zeitkonto = null;
+                };
             }
         }
         

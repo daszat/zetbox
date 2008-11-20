@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.API;
+using System.Collections;
 
 namespace Kistl.IntegrationTests
 {
@@ -14,16 +15,43 @@ namespace Kistl.IntegrationTests
             {
                 setup.Init();
 
+                //RelationTests();
                 FrozenContextTests();
-                GetListTests();
+                //GetListTests();
 
-                GeneratorTests();
-                GetListOfTests();
-                InheritanceTests();
-                ListPropetiesTests();
-                ObjectTests();
-                StructTests();
+                //GeneratorTests();
+                //GetListOfTests();
+                //InheritanceTests();
+                //ListPropetiesTests();
+                //ObjectTests();
+                //StructTests();
             }
+        }
+
+        private static void RelationTests()
+        {
+            var test = new RelationTests();
+
+            test.SetUp();
+            test.Relation_1_n_Set_1();
+
+            test.SetUp();
+            test.Relation_1_n_Set_n();
+
+            test.SetUp();
+            test.Relation_1_n_Set_n();
+        
+            test.SetUp();
+            test.Relation_n_m_Set_n();
+
+            test.SetUp();
+            test.Relation_n_m_Set_m();
+
+            test.SetUp();
+            test.Relation_1_1_Set_Left();
+
+            test.SetUp();
+            test.Relation_1_1_Set_Right();
         }
 
         private static void FrozenContextTests()
@@ -176,6 +204,9 @@ namespace Kistl.IntegrationTests
 
             test.SetUp();
             test.GetObject();
+
+            test.SetUp();
+            test.GetObject_Twice();
 
             test.SetUp();
             test.NewObject();

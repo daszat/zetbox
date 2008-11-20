@@ -41,7 +41,18 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                fk_Projekt = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_Projekt != value.ID && fk_Projekt != null) value.Kostentraeger.Remove(this);
+                    fk_Projekt = value.ID;
+                    if (!value.Kostentraeger.Contains(this)) value.Kostentraeger.Add(this);
+                }
+                else
+                {
+                    if (Projekt != null && Projekt.Kostentraeger.Contains(this)) Projekt.Kostentraeger.Remove(this);
+                    fk_Projekt = null;
+                };
             }
         }
         

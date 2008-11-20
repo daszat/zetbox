@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Kistl.API.Client
 {
+    #region BackReferenceCollection
     /// <summary>
     /// 
     /// </summary>
@@ -71,9 +72,9 @@ namespace Kistl.API.Client
 
         public void RemoveAt(int index)
         {
-            T item = this[index];
-            RemoveFromList(item);
+            T item = collection[index];
             collection.RemoveAt(index);
+            RemoveFromList(item);
         }
 
         public T this[int index]
@@ -85,10 +86,12 @@ namespace Kistl.API.Client
             set
             {
                 if (collection[index].Equals(value)) return;
-                T item = this[index];
+
+                T item = collection[index];
+                collection[index] = value;
+
                 RemoveFromList(item);
                 AddToList(value);
-                collection[index] = value;
             }
         }
 
@@ -98,14 +101,15 @@ namespace Kistl.API.Client
 
         public void Add(T item)
         {
-            AddToList(item);
             collection.Add(item);
+            AddToList(item);
         }
 
         public void Clear()
         {
-            collection.ForEach(i => RemoveFromList(i));
+            var tmpCollection = collection.ToArray();
             collection.Clear();
+            tmpCollection.ForEach(i => RemoveFromList(i));
         }
 
         public bool Contains(T item)
@@ -130,8 +134,9 @@ namespace Kistl.API.Client
 
         public bool Remove(T item)
         {
+            var result = collection.Remove(item);
             RemoveFromList(item);
-            return collection.Remove(item);
+            return result;
         }
 
         #endregion
@@ -155,7 +160,9 @@ namespace Kistl.API.Client
         #endregion
 
     }
+    #endregion
 
+    #region ListPropertyCollection
     public class ListPropertyCollection<T, PARENT, COLLECTIONENTRYTYPE> : IList<T>, INotifyCollectionChanged
         where COLLECTIONENTRYTYPE : BaseClientCollectionEntry, ICollectionEntry<T, PARENT>, INotifyPropertyChanged, new()
         where PARENT : IDataObject
@@ -405,4 +412,5 @@ namespace Kistl.API.Client
         #endregion
 
     }
+    #endregion
 }

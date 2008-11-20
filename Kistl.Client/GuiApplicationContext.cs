@@ -47,7 +47,16 @@ namespace Kistl.Client
     {
         public static new GuiApplicationContext Current { get; private set; }
 
-        public GuiApplicationContext(KistlConfig config, Toolkit tk)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="tk">Das muss leider ein String sein, 
+        /// weil die Enum in Kistl.Objects definiert ist. 
+        /// Zum Zeitpunkt des Aufrufs des Constructors könnte 
+        /// aber der Assembly Resolver noch nicht initialisiert 
+        /// sein (z.B. sie werden in der gleichen Methode ausgeführt).</param>
+        public GuiApplicationContext(KistlConfig config, string tk)
             : base(config)
         {
             GuiApplicationContext.Current = this;
@@ -57,7 +66,7 @@ namespace Kistl.Client
 
             // TODO: replace by fetching TypeDescriptors from the Store
             //       via the GuiDataContext
-            switch (tk)
+            switch ((Toolkit)Enum.Parse(typeof(Toolkit), tk, true))
             {
                 case Toolkit.WPF:
                     UiThread = new SynchronousThreadManager();

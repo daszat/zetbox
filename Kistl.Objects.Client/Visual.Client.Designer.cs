@@ -203,8 +203,8 @@ namespace Kistl.App.GUI
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _Children.AttachToContext(ctx);
-            _ContextMenu.AttachToContext(ctx);
+            if(_Children != null) _Children.AttachToContext(ctx);
+            if(_ContextMenu != null) _ContextMenu.AttachToContext(ctx);
         }
         
         protected override string GetPropertyError(string prop)

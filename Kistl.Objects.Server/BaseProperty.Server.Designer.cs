@@ -355,7 +355,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this._PropertyName, sw);
             BinarySerializer.ToBinary(this._AltText, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
-            BinarySerializer.ToBinary(this.Constraints.Cast<IDataObject>(), sw);
             BinarySerializer.ToBinary(this._Description, sw);
         }
         

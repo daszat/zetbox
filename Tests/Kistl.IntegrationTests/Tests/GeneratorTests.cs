@@ -10,7 +10,7 @@ using Kistl.API.Client;
 
 namespace Kistl.IntegrationTests
 {
-    [TestFixture]
+    //[TestFixture]
     public class GeneratorTests
     {
         [SetUp]

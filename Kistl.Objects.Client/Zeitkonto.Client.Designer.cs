@@ -165,8 +165,8 @@ namespace Kistl.App.Zeiterfassung
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _Mitarbeiter.AttachToContext(ctx);
             if(_Taetigkeiten != null) _Taetigkeiten.AttachToContext(ctx);
+            if(_Mitarbeiter != null) _Mitarbeiter.AttachToContext(ctx);
         }
         
         protected override string GetPropertyError(string prop)

@@ -10,6 +10,7 @@ using Kistl.Client;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
+using Kistl.API;
 
 namespace Kistl.IntegrationTests
 {
@@ -28,7 +29,8 @@ namespace Kistl.IntegrationTests
             manager = new ServerDomainManager();
             manager.Start(config);
 
-            var testCtx = new GuiApplicationContext(config, Toolkit.WPF);
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+            var testCtx = new GuiApplicationContext(config, "WPF");
 
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
         }

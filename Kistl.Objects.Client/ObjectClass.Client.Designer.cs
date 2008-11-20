@@ -70,7 +70,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_BaseObjectClass = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_BaseObjectClass != value.ID && fk_BaseObjectClass != null) value.SubClasses.Remove(this);
+                    fk_BaseObjectClass = value.ID;
+                    if (!value.SubClasses.Contains(this)) value.SubClasses.Add(this);
+                }
+                else
+                {
+                    if (BaseObjectClass != null && BaseObjectClass.SubClasses.Contains(this)) BaseObjectClass.SubClasses.Remove(this);
+                    fk_BaseObjectClass = null;
+                };
             }
         }
         
@@ -206,8 +217,8 @@ namespace Kistl.App.Base
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _ImplementsInterfaces.AttachToContext(ctx);
             if(_SubClasses != null) _SubClasses.AttachToContext(ctx);
+            if(_ImplementsInterfaces != null) _ImplementsInterfaces.AttachToContext(ctx);
         }
         
         protected override string GetPropertyError(string prop)

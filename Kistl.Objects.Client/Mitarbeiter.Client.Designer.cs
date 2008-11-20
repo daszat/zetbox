@@ -25,9 +25,9 @@ namespace Kistl.App.Projekte
     public class Mitarbeiter__Implementation__ : BaseClientDataObject, Mitarbeiter
     {
         
-        private string _Name;
-        
         private BackReferenceCollection<Kistl.App.Projekte.Projekt> _Projekte;
+        
+        private string _Name;
         
         private System.DateTime? _Geburtstag;
         
@@ -37,24 +37,6 @@ namespace Kistl.App.Projekte
         
         public Mitarbeiter__Implementation__()
         {
-        }
-        
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (Name != value)
-                {
-                    NotifyPropertyChanging("Name"); 
-                    _Name = value;
-                    NotifyPropertyChanged("Name");;
-                }
-            }
         }
         
         [XmlIgnore()]
@@ -74,6 +56,24 @@ namespace Kistl.App.Projekte
                          "Mitarbeiter", this, serverList);
                 }
                 return _Projekte;
+            }
+        }
+        
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Name != value)
+                {
+                    NotifyPropertyChanging("Name"); 
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
             }
         }
         
@@ -166,8 +166,8 @@ namespace Kistl.App.Projekte
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            ((Mitarbeiter__Implementation__)obj).Name = this.Name;
             if(this._Projekte != null) this._Projekte.ApplyChanges(((Mitarbeiter__Implementation__)obj)._Projekte); else ((Mitarbeiter__Implementation__)obj)._Projekte = null; ((Mitarbeiter__Implementation__)obj).NotifyPropertyChanged("Projekte");
+            ((Mitarbeiter__Implementation__)obj).Name = this.Name;
             ((Mitarbeiter__Implementation__)obj).Geburtstag = this.Geburtstag;
             ((Mitarbeiter__Implementation__)obj).SVNr = this.SVNr;
             ((Mitarbeiter__Implementation__)obj).TelefonNummer = this.TelefonNummer;
@@ -183,17 +183,17 @@ namespace Kistl.App.Projekte
         {
             switch(prop)
             {
-                case "Name":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(20).Constraints
-                            .Where(c => !c.IsValid(this, this.Name))
-                            .Select(c => c.GetErrorText(this, this.Name))
-                            .ToArray());
                 case "Projekte":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(21).Constraints
                             .Where(c => !c.IsValid(this, this.Projekte))
                             .Select(c => c.GetErrorText(this, this.Projekte))
+                            .ToArray());
+                case "Name":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(20).Constraints
+                            .Where(c => !c.IsValid(this, this.Name))
+                            .Select(c => c.GetErrorText(this, this.Name))
                             .ToArray());
                 case "Geburtstag":
                     return string.Join("\n", 

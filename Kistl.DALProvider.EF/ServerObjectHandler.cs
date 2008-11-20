@@ -79,7 +79,9 @@ namespace Kistl.DALProvider.EF
                 Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(ctx);
                 while (objClass != null)
                 {
-                    foreach (Kistl.App.Base.ObjectReferenceProperty p in objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>())
+                    var listProperties = objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>()
+                        .ToList().Where(p => p.HasStorage());
+                    foreach (Kistl.App.Base.ObjectReferenceProperty p in listProperties)
                     {
                         if (!p.IsList)
                         {

@@ -101,6 +101,7 @@
     <Compile Include="PresenterInfo.Server.Designer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />
     <Compile Include="Property.Server.Designer.cs" />
+    <Compile Include="Relation.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />
     <Compile Include="StringRangeConstraint.Server.Designer.cs" />

@@ -43,7 +43,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_ConstrainedProperty = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_ConstrainedProperty != value.ID && fk_ConstrainedProperty != null) value.Constraints.Remove(this);
+                    fk_ConstrainedProperty = value.ID;
+                    if (!value.Constraints.Contains(this)) value.Constraints.Add(this);
+                }
+                else
+                {
+                    if (ConstrainedProperty != null && ConstrainedProperty.Constraints.Contains(this)) ConstrainedProperty.Constraints.Remove(this);
+                    fk_ConstrainedProperty = null;
+                };
             }
         }
         

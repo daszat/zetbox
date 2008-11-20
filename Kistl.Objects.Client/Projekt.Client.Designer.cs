@@ -211,8 +211,8 @@ namespace Kistl.App.Projekte
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _Mitarbeiter.AttachToContext(ctx);
             if(_Tasks != null) _Tasks.AttachToContext(ctx);
+            if(_Mitarbeiter != null) _Mitarbeiter.AttachToContext(ctx);
             if(_Kostentraeger != null) _Kostentraeger.AttachToContext(ctx);
             if(_Auftraege != null) _Auftraege.AttachToContext(ctx);
         }

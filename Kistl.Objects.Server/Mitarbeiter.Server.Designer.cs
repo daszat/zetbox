@@ -31,9 +31,9 @@ namespace Kistl.App.Projekte
         
         private int _ID;
         
-        private string _Name;
-        
         private EntityCollectionEntryParentWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> ProjekteWrapper;
+        
+        private string _Name;
         
         private System.DateTime? _Geburtstag;
         
@@ -58,25 +58,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmScalarPropertyAttribute()]
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (Name != value)
-                {
-                    NotifyPropertyChanging("Name"); 
-                    _Name = value;
-                    NotifyPropertyChanged("Name");;
-                }
-            }
-        }
-        
         [XmlIgnore()]
         public ICollection<Kistl.App.Projekte.Projekt> Projekte
         {
@@ -95,6 +76,25 @@ namespace Kistl.App.Projekte
                 EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>("Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "B_Projekt_MitarbeiterCollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
                 return c;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Name != value)
+                {
+                    NotifyPropertyChanging("Name"); 
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
             }
         }
         
@@ -196,17 +196,17 @@ namespace Kistl.App.Projekte
         {
             switch(prop)
             {
-                case "Name":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(20).Constraints
-                            .Where(c => !c.IsValid(this, this.Name))
-                            .Select(c => c.GetErrorText(this, this.Name))
-                            .ToArray());
                 case "Projekte":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(21).Constraints
                             .Where(c => !c.IsValid(this, this.Projekte))
                             .Select(c => c.GetErrorText(this, this.Projekte))
+                            .ToArray());
+                case "Name":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(20).Constraints
+                            .Where(c => !c.IsValid(this, this.Name))
+                            .Select(c => c.GetErrorText(this, this.Name))
                             .ToArray());
                 case "Geburtstag":
                     return string.Join("\n", 

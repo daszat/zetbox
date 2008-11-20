@@ -424,6 +424,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Relation">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
+        <MappingFragment StoreEntitySet="Relation">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Storage__Implementation__" ColumnName="Storage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -869,6 +878,24 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_ConstrainedProperty" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Relation_ObjectReferenceProperty_LeftPart" TypeName="Model.FK_Relation_ObjectReferenceProperty_LeftPart" StoreEntitySet="Relation">
+      <EndProperty Name="A_ObjectReferenceProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_LeftPart" />
+      </EndProperty>
+      <EndProperty Name="B_Relation">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_LeftPart" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Relation_ObjectReferenceProperty_RightPart" TypeName="Model.FK_Relation_ObjectReferenceProperty_RightPart" StoreEntitySet="Relation">
+      <EndProperty Name="A_ObjectReferenceProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_RightPart" />
+      </EndProperty>
+      <EndProperty Name="B_Relation">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_RightPart" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">

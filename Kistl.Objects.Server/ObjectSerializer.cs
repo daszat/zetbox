@@ -88,6 +88,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.MethodInvocationConstraint), ElementName="MethodInvocationConstraint")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.IsValidIdentifierConstraint), ElementName="IsValidIdentifierConstraint")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.IsValidNamespaceConstraint), ElementName="IsValidNamespaceConstraint")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.Relation), ElementName="Relation")]
         public System.Collections.Generic.List<object> Objects
         {
             get
@@ -167,6 +168,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.MethodInvocationConstraint), ElementName="MethodInvocationConstraint")]
         [XmlElement(Type=typeof(Kistl.App.Base.IsValidIdentifierConstraint), ElementName="IsValidIdentifierConstraint")]
         [XmlElement(Type=typeof(Kistl.App.Base.IsValidNamespaceConstraint), ElementName="IsValidNamespaceConstraint")]
+        [XmlElement(Type=typeof(Kistl.App.Base.Relation), ElementName="Relation")]
         public object Object
         {
             get

@@ -159,11 +159,11 @@ namespace Kistl.Client.WPF
                         objClass = objClass.BaseObjectClass;
                     }
 
-                    foreach (Kistl.App.Base.BackReferenceProperty p in properties.OfType<Kistl.App.Base.BackReferenceProperty>())
-                    {
-                        Item.GetPropertyValue<IEnumerable>(p.PropertyName)
-                            .ForEach<Kistl.API.IDataObject>(o => result.Add(new ObjNode(o, false)));
-                    }
+                    //foreach (Kistl.App.Base.BackReferenceProperty p in properties.OfType<Kistl.App.Base.BackReferenceProperty>())
+                    //{
+                    //    Item.GetPropertyValue<IEnumerable>(p.PropertyName)
+                    //        .ForEach<Kistl.API.IDataObject>(o => result.Add(new ObjNode(o, false)));
+                    //}
 
                     foreach (Kistl.App.Base.ObjectReferenceProperty p in properties.OfType<Kistl.App.Base.ObjectReferenceProperty>().Where(p => !p.IsList))
                     {

@@ -44,7 +44,8 @@ namespace Kistl.Client.ASPNET.Toolkit
             if (GuiApplicationContext.Current == null)
             {
                 var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]));
-                var appCtx = new GuiApplicationContext(config, Kistl.App.GUI.Toolkit.ASPNET);
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                var appCtx = new GuiApplicationContext(config, "ASPNET");
             }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();
         }

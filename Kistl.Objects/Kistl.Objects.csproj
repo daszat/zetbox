@@ -95,6 +95,8 @@
     <Compile Include="PresenterInfo.Designer.cs" />
     <Compile Include="Projekt.Designer.cs" />
     <Compile Include="Property.Designer.cs" />
+    <Compile Include="Relation.Designer.cs" />
+    <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="StringParameter.Designer.cs" />
     <Compile Include="StringProperty.Designer.cs" />
     <Compile Include="StringRangeConstraint.Designer.cs" />

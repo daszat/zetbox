@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ServiceModel;
 using System.Linq;
 using Kistl.API.Server;
 using Kistl.App.Base;
@@ -56,6 +55,64 @@ namespace Kistl.Server
             }
 
             return null;
+        }
+
+        public static Relation GetRelation(this ObjectReferenceProperty p)
+        {
+            return p.LeftOf ?? p.RightOf;
+        }
+
+        public static ObjectReferenceProperty GetOpposite(this ObjectReferenceProperty p)
+        {
+            Relation rel = GetRelation(p);
+            if (rel == null) return null;
+            if (rel.LeftPart == p) return rel.RightPart;
+            if (rel.RightPart == p) return rel.LeftPart;
+
+            throw new InvalidOperationException("Unable to find Opposite Property");
+        }
+
+        public static RelationType GetRelationType(this Relation rel)
+        {
+            if (rel.LeftPart.IsList == false && rel.RightPart.IsList == true) return RelationType.one_n;
+            if (rel.LeftPart.IsList == true && rel.RightPart.IsList == false) return RelationType.one_n;
+            if (rel.LeftPart.IsList == true && rel.RightPart.IsList == true) return RelationType.n_m;
+            if (rel.LeftPart.IsList == false && rel.RightPart.IsList == false) return RelationType.one_one;
+
+            throw new InvalidOperationException("Unable to find out RelationType");
+        }
+
+        public static RelationType GetRelationType(this ObjectReferenceProperty p)
+        {
+            Relation rel = p.GetRelation();
+            if (rel == null) return p.IsList ? RelationType.n_m : RelationType.one_n;
+            return rel.GetRelationType();
+        }
+
+
+        public static bool HasStorage(this BaseProperty bp)
+        {
+            if (bp is ObjectReferenceProperty)
+            {
+                ObjectReferenceProperty p = (ObjectReferenceProperty)bp;
+                Relation rel = GetRelation(p);
+                if (rel == null) return true;
+
+                if (rel.Storage == StorageType.Replicate) throw new NotImplementedException("StorageType Replicate not implemented yet");
+
+                RelationType type = rel.GetRelationType();
+                return
+                    (type == RelationType.one_n && p.IsList == false) ||
+                    (type == RelationType.one_one && rel.Storage == StorageType.Replicate) ||
+                    (type == RelationType.one_one && rel.Storage == StorageType.Left && rel.LeftPart == p) ||
+                    (type == RelationType.one_one && rel.Storage == StorageType.Right && rel.RightPart == p) ||
+                    // TODO: n:m darf nicht an eine Seite gebunden sein
+                    (type == RelationType.n_m && rel.LeftPart == p);
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

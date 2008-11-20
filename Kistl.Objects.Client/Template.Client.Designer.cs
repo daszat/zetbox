@@ -193,7 +193,7 @@ namespace Kistl.App.GUI
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            _Menu.AttachToContext(ctx);
+            if(_Menu != null) _Menu.AttachToContext(ctx);
         }
         
         protected override string GetPropertyError(string prop)

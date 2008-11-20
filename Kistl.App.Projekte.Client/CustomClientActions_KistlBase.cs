@@ -129,10 +129,10 @@ namespace Kistl.App.Base
             e.Result = obj.ModuleName;
         }
 
-        public void OnToString_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = "* " + e.Result;
-        }
+        //public void OnToString_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        //{
+        //    e.Result = "* " + e.Result;
+        //}
 
         public void OnToString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {

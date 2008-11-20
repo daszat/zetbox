@@ -141,7 +141,6 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            this._EnumerationEntries = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>("Enumeration", this); BinarySerializer.FromBinary(this._EnumerationEntries, sr);
         }
     }
 }

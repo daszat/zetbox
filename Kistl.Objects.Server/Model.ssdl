@@ -58,6 +58,7 @@
     <EntitySet Name="MethodInvocationConstraint" EntityType="Model.Store.MethodInvocationConstraint" Table="MethodInvocationConstraints" />
     <EntitySet Name="IsValidIdentifierConstraint" EntityType="Model.Store.IsValidIdentifierConstraint" Table="IsValidIdentifierConstraints" />
     <EntitySet Name="IsValidNamespaceConstraint" EntityType="Model.Store.IsValidNamespaceConstraint" Table="IsValidNamespaceConstraints" />
+    <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -360,6 +361,14 @@
     <AssociationSet Name="FK_Constraint_BaseProperty_ConstrainedProperty" Association="Model.Store.FK_Constraint_BaseProperty_ConstrainedProperty">
       <End Role="A_BaseProperty" EntitySet="BaseProperty" />
       <End Role="B_Constraint" EntitySet="Constraint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_LeftPart" Association="Model.Store.FK_Relation_ObjectReferenceProperty_LeftPart">
+      <End Role="A_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
+      <End Role="B_Relation" EntitySet="Relation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_RightPart" Association="Model.Store.FK_Relation_ObjectReferenceProperty_RightPart">
+      <End Role="A_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
+      <End Role="B_Relation" EntitySet="Relation" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -849,6 +858,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Relation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_RightPart" Type="int" />
+    <Property Name="fk_LeftPart" Type="int" />
+    <Property Name="Storage" Type="int" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -1791,6 +1810,30 @@
       </Principal>
       <Dependent Role="B_Constraint">
         <PropertyRef Name="fk_ConstrainedProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Relation_ObjectReferenceProperty_LeftPart">
+    <End Role="A_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="B_Relation" Type="Model.Store.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectReferenceProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Relation">
+        <PropertyRef Name="fk_LeftPart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Relation_ObjectReferenceProperty_RightPart">
+    <End Role="A_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="B_Relation" Type="Model.Store.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectReferenceProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Relation">
+        <PropertyRef Name="fk_RightPart" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

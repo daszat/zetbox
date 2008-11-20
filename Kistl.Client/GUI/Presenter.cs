@@ -767,11 +767,11 @@ namespace Kistl.GUI
             return obj.GetPropertyValue<IList<T>>(prop.PropertyName);
         }
 
-        public static IList<T> GetList<T>(this IDataObject obj, BackReferenceProperty prop)
-            where T : IDataObject
-        {
-            return obj.GetPropertyValue<IList<T>>(prop.PropertyName);
-        }
+        //public static IList<T> GetList<T>(this IDataObject obj, BackReferenceProperty prop)
+        //    where T : IDataObject
+        //{
+        //    return obj.GetPropertyValue<IList<T>>(prop.PropertyName);
+        //}
     }
 }
 

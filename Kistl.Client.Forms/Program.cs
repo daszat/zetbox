@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
 using Kistl.Client.Presentables;
+using Kistl.API;
 
 namespace Kistl.Client.Forms
 {
@@ -18,7 +19,9 @@ namespace Kistl.Client.Forms
         [STAThread]
         static void Main()
         {
-            AppContext = new GuiApplicationContext(KistlConfig.FromFile(""), Kistl.App.GUI.Toolkit.TEST);
+            var config = KistlConfig.FromFile("");
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+            AppContext = new GuiApplicationContext(config, "TEST");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -44,1167 +44,1233 @@ namespace Kistl.Objects.Client
         
         private List<Kistl.App.Base.Constraint> _Kistl_App_Base_Constraint = new List<Kistl.App.Base.Constraint>();
         
+        private List<Kistl.App.Base.Relation> _Kistl_App_Base_Relation = new List<Kistl.App.Base.Relation>();
+        
         public FrozenContextImplementation()
         {
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 51,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Der Name der Objektklasse",
-                AltText = @"Der Name der Objektklasse",
+                IsNullable = false,
                 PropertyName = @"ClassName",
+                AltText = @"Der Name der Objektklasse",
+                Description = @"Der Name der Objektklasse",
                 ID = 1};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Tabellenname in der Datenbank",
-                AltText = @"Tabellenname in der Datenbank",
+                IsNullable = false,
                 PropertyName = @"TableName",
+                AltText = @"Tabellenname in der Datenbank",
+                Description = @"Tabellenname in der Datenbank",
                 ID = 3};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = true,
-                Description = @"Eigenschaften der Objektklasse",
-                AltText = @"Eigenschaften der Objektklasse",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Properties",
+                AltText = @"Eigenschaften der Objektklasse",
+                Description = @"Eigenschaften der Objektklasse",
                 ID = 7};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
+                IsNullable = false,
                 PropertyName = @"ObjectClass",
                 ID = 8};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = true,
                 IsList = false,
+                IsNullable = true,
                 PropertyName = @"PropertyName",
                 ID = 9};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
+                IsNullable = false,
                 PropertyName = @"IsList",
                 ID = 11};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Projektname",
-                AltText = @"Projektname",
+                IsNullable = true,
                 PropertyName = @"Name",
+                AltText = @"Projektname",
+                Description = @"Projektname",
                 ID = 13};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Tasks",
                 ID = 14};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Taskname",
-                AltText = @"Taskname",
+                IsNullable = true,
                 PropertyName = @"Name",
+                AltText = @"Taskname",
+                Description = @"Taskname",
                 ID = 15};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Start Datum",
-                AltText = @"Start Datum",
+                IsNullable = true,
                 PropertyName = @"DatumVon",
+                AltText = @"Start Datum",
+                Description = @"Start Datum",
                 ID = 16};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Enddatum",
-                AltText = @"Enddatum",
+                IsNullable = true,
                 PropertyName = @"DatumBis",
+                AltText = @"Enddatum",
+                Description = @"Enddatum",
                 ID = 17};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Aufwand in Stunden",
-                AltText = @"Aufwand in Stunden",
+                IsNullable = true,
                 PropertyName = @"Aufwand",
+                AltText = @"Aufwand in Stunden",
+                Description = @"Aufwand in Stunden",
                 ID = 18};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Verknüpfung zum Projekt",
-                AltText = @"Verknüpfung zum Projekt",
+                IsNullable = true,
                 PropertyName = @"Projekt",
+                AltText = @"Verknüpfung zum Projekt",
+                Description = @"Verknüpfung zum Projekt",
                 ID = 19};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Vorname Nachname",
-                AltText = @"Vorname Nachname",
+                IsNullable = true,
                 PropertyName = @"Name",
+                AltText = @"Vorname Nachname",
+                Description = @"Vorname Nachname",
                 ID = 20};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
-                AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Projekte",
+                AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
+                Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
                 ID = 21};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = true,
+                IsNullable = true,
                 PropertyName = @"Mitarbeiter",
                 ID = 22};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
+                IsNullable = true,
                 PropertyName = @"AufwandGes",
                 ID = 23};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Pointer auf die Basisklasse",
-                AltText = @"Pointer auf die Basisklasse",
+                IsNullable = true,
                 PropertyName = @"BaseObjectClass",
+                AltText = @"Pointer auf die Basisklasse",
+                Description = @"Pointer auf die Basisklasse",
                 ID = 25};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
+                IsNullable = false,
                 PropertyName = @"IsNullable",
                 ID = 26};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Liste der vererbten Klassen",
-                AltText = @"Liste der vererbten Klassen",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"SubClasses",
+                AltText = @"Liste der vererbten Klassen",
+                Description = @"Liste der vererbten Klassen",
                 ID = 27};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
+                IsNullable = true,
                 PropertyName = @"Length",
                 ID = 28};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
+                IsNullable = false,
                 PropertyName = @"ObjectClass",
                 ID = 29};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = false,
                 IsList = false,
+                IsNullable = false,
                 PropertyName = @"MethodName",
                 ID = 30};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = true,
-                Description = @"Liste aller Methoden der Objektklasse.",
-                AltText = @"Liste aller Methoden der Objektklasse.",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Methods",
+                AltText = @"Liste aller Methoden der Objektklasse.",
+                Description = @"Liste aller Methoden der Objektklasse.",
                 ID = 31};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Herzlichen Glückwunsch zum Geburtstag",
-                AltText = @"Herzlichen Glückwunsch zum Geburtstag",
+                IsNullable = true,
                 PropertyName = @"Geburtstag",
+                AltText = @"Herzlichen Glückwunsch zum Geburtstag",
+                Description = @"Herzlichen Glückwunsch zum Geburtstag",
                 ID = 38};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 20,
-                IsNullable = true,
                 IsList = false,
-                Description = @"NNNN TTMMYY",
-                AltText = @"NNNN TTMMYY",
+                IsNullable = true,
                 PropertyName = @"SVNr",
+                AltText = @"NNNN TTMMYY",
+                Description = @"NNNN TTMMYY",
                 ID = 39};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 50,
-                IsNullable = true,
                 IsList = false,
-                Description = @"+43 123 12345678",
-                AltText = @"+43 123 12345678",
+                IsNullable = true,
                 PropertyName = @"TelefonNummer",
+                AltText = @"+43 123 12345678",
+                Description = @"+43 123 12345678",
                 ID = 40};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
+                IsNullable = true,
                 PropertyName = @"AltText",
                 ID = 41};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"CLR Namespace des Moduls",
-                AltText = @"CLR Namespace des Moduls",
+                IsNullable = false,
                 PropertyName = @"Namespace",
+                AltText = @"CLR Namespace des Moduls",
+                Description = @"CLR Namespace des Moduls",
                 ID = 42};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Name des Moduls",
-                AltText = @"Name des Moduls",
+                IsNullable = false,
                 PropertyName = @"ModuleName",
+                AltText = @"Name des Moduls",
+                Description = @"Name des Moduls",
                 ID = 43};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Datentypendes Modules",
-                AltText = @"Datentypendes Modules",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"DataTypes",
+                AltText = @"Datentypendes Modules",
+                Description = @"Datentypendes Modules",
                 ID = 44};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Modul der Objektklasse",
-                AltText = @"Modul der Objektklasse",
+                IsNullable = false,
                 PropertyName = @"Module",
+                AltText = @"Modul der Objektklasse",
+                Description = @"Modul der Objektklasse",
                 ID = 45};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Pointer zur Objektklasse",
-                AltText = @"Pointer zur Objektklasse",
+                IsNullable = true,
                 PropertyName = @"ReferenceObjectClass",
+                AltText = @"Pointer zur Objektklasse",
+                Description = @"Pointer zur Objektklasse",
                 ID = 46};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Das Property, welches auf diese Klasse zeigt",
-                AltText = @"Das Property, welches auf diese Klasse zeigt",
+                IsNullable = true,
                 PropertyName = @"ReferenceProperty",
+                AltText = @"Das Property, welches auf diese Klasse zeigt",
+                Description = @"Das Property, welches auf diese Klasse zeigt",
                 ID = 47};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Bitte geben Sie den Kundennamen ein",
-                AltText = @"Bitte geben Sie den Kundennamen ein",
+                IsNullable = true,
                 PropertyName = @"Kundenname",
+                AltText = @"Bitte geben Sie den Kundennamen ein",
+                Description = @"Bitte geben Sie den Kundennamen ein",
                 ID = 48};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
+                IsNullable = true,
                 PropertyName = @"Mitarbeiter",
                 ID = 49};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
-                AltText = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
+                IsNullable = true,
                 PropertyName = @"Auftragsname",
+                AltText = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
+                Description = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
                 ID = 50};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Projekt zum Auftrag",
-                AltText = @"Projekt zum Auftrag",
+                IsNullable = true,
                 PropertyName = @"Projekt",
+                AltText = @"Projekt zum Auftrag",
+                Description = @"Projekt zum Auftrag",
                 ID = 51};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Name des Zeiterfassungskontos",
-                AltText = @"Name des Zeiterfassungskontos",
+                IsNullable = false,
                 PropertyName = @"Kontoname",
+                AltText = @"Name des Zeiterfassungskontos",
+                Description = @"Name des Zeiterfassungskontos",
                 ID = 52};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Projekt des Kostenträgers",
-                AltText = @"Projekt des Kostenträgers",
+                IsNullable = false,
                 PropertyName = @"Projekt",
+                AltText = @"Projekt des Kostenträgers",
+                Description = @"Projekt des Kostenträgers",
                 ID = 53};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Mitarbeiter",
-                AltText = @"Mitarbeiter",
+                IsNullable = false,
                 PropertyName = @"Mitarbeiter",
+                AltText = @"Mitarbeiter",
+                Description = @"Mitarbeiter",
                 ID = 54};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Zeitkonto",
-                AltText = @"Zeitkonto",
+                IsNullable = false,
                 PropertyName = @"Zeitkonto",
+                AltText = @"Zeitkonto",
+                Description = @"Zeitkonto",
                 ID = 55};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Datum",
-                AltText = @"Datum",
+                IsNullable = false,
                 PropertyName = @"Datum",
+                AltText = @"Datum",
+                Description = @"Datum",
                 ID = 56};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Dauer in Stunden",
-                AltText = @"Dauer in Stunden",
+                IsNullable = false,
                 PropertyName = @"Dauer",
+                AltText = @"Dauer in Stunden",
+                Description = @"Dauer in Stunden",
                 ID = 57};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Tätigkeiten",
-                AltText = @"Tätigkeiten",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Taetigkeiten",
+                AltText = @"Tätigkeiten",
+                Description = @"Tätigkeiten",
                 ID = 58};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Name des Kunden",
-                AltText = @"Name des Kunden",
+                IsNullable = false,
                 PropertyName = @"Kundenname",
+                AltText = @"Name des Kunden",
+                Description = @"Name des Kunden",
                 ID = 59};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Adresse & Hausnummer",
-                AltText = @"Adresse & Hausnummer",
+                IsNullable = true,
                 PropertyName = @"Adresse",
+                AltText = @"Adresse & Hausnummer",
+                Description = @"Adresse & Hausnummer",
                 ID = 60};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 10,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Postleitzahl",
-                AltText = @"Postleitzahl",
+                IsNullable = false,
                 PropertyName = @"PLZ",
+                AltText = @"Postleitzahl",
+                Description = @"Postleitzahl",
                 ID = 61};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Ort",
-                AltText = @"Ort",
+                IsNullable = true,
                 PropertyName = @"Ort",
+                AltText = @"Ort",
+                Description = @"Ort",
                 ID = 62};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 50,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Land",
-                AltText = @"Land",
+                IsNullable = true,
                 PropertyName = @"Land",
+                AltText = @"Land",
+                Description = @"Land",
                 ID = 63};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Kunde des Projektes",
-                AltText = @"Kunde des Projektes",
+                IsNullable = true,
                 PropertyName = @"Kunde",
+                AltText = @"Kunde des Projektes",
+                Description = @"Kunde des Projektes",
                 ID = 64};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Wert in EUR des Auftrages",
-                AltText = @"Wert in EUR des Auftrages",
+                IsNullable = true,
                 PropertyName = @"Auftragswert",
+                AltText = @"Wert in EUR des Auftrages",
+                Description = @"Wert in EUR des Auftrages",
                 ID = 65};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Kostenträger",
-                AltText = @"Kostenträger",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Kostentraeger",
+                AltText = @"Kostenträger",
+                Description = @"Kostenträger",
                 ID = 66};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Aufträge",
-                AltText = @"Aufträge",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Auftraege",
+                AltText = @"Aufträge",
+                Description = @"Aufträge",
                 ID = 67};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Filename of the Icon",
-                AltText = @"Filename of the Icon",
+                IsNullable = false,
                 PropertyName = @"IconFile",
+                AltText = @"Filename of the Icon",
+                Description = @"Filename of the Icon",
                 ID = 68};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Standard Icon wenn IIcon nicht implementiert ist",
-                AltText = @"Standard Icon wenn IIcon nicht implementiert ist",
+                IsNullable = true,
                 PropertyName = @"DefaultIcon",
+                AltText = @"Standard Icon wenn IIcon nicht implementiert ist",
+                Description = @"Standard Icon wenn IIcon nicht implementiert ist",
                 ID = 69};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Module",
-                AltText = @"Module",
+                IsNullable = false,
                 PropertyName = @"Module",
+                AltText = @"Module",
+                Description = @"Module",
                 ID = 70};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
-                AltText = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
+                IsNullable = false,
                 PropertyName = @"AssemblyName",
+                AltText = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
+                Description = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
                 ID = 71};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Zugehörig zum Modul",
-                AltText = @"Zugehörig zum Modul",
+                IsNullable = false,
                 PropertyName = @"Module",
+                AltText = @"Zugehörig zum Modul",
+                Description = @"Zugehörig zum Modul",
                 ID = 72};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Zugehörig zum Modul",
-                AltText = @"Zugehörig zum Modul",
+                IsNullable = false,
                 PropertyName = @"Module",
+                AltText = @"Zugehörig zum Modul",
+                Description = @"Zugehörig zum Modul",
                 ID = 73};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Methode, die Aufgerufen wird",
-                AltText = @"Methode, die Aufgerufen wird",
+                IsNullable = false,
                 PropertyName = @"Method",
+                AltText = @"Methode, die Aufgerufen wird",
+                Description = @"Methode, die Aufgerufen wird",
                 ID = 74};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Assembly, dass die Methode beinhaltet",
-                AltText = @"Assembly, dass die Methode beinhaltet",
+                IsNullable = false,
                 PropertyName = @"Assembly",
+                AltText = @"Assembly, dass die Methode beinhaltet",
+                Description = @"Assembly, dass die Methode beinhaltet",
                 ID = 75};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Voller Name des .NET Types des implementierenden Members",
-                AltText = @"Voller Name des .NET Types des implementierenden Members",
+                IsNullable = false,
                 PropertyName = @"FullTypeName",
+                AltText = @"Voller Name des .NET Types des implementierenden Members",
+                Description = @"Voller Name des .NET Types des implementierenden Members",
                 ID = 76};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Name des implementierenden Members",
-                AltText = @"Name des implementierenden Members",
+                IsNullable = false,
                 PropertyName = @"MemberName",
+                AltText = @"Name des implementierenden Members",
+                Description = @"Name des implementierenden Members",
                 ID = 77};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Zugehörig zum Modul",
-                AltText = @"Zugehörig zum Modul",
+                IsNullable = false,
                 PropertyName = @"Module",
+                AltText = @"Zugehörig zum Modul",
+                Description = @"Zugehörig zum Modul",
                 ID = 78};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"In dieser Objektklasse implementieren",
-                AltText = @"In dieser Objektklasse implementieren",
+                IsNullable = false,
                 PropertyName = @"InvokeOnObjectClass",
+                AltText = @"In dieser Objektklasse implementieren",
+                Description = @"In dieser Objektklasse implementieren",
                 ID = 79};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = true,
-                Description = @"all implemented Methods in this DataType",
-                AltText = @"all implemented Methods in this DataType",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"MethodInvocations",
+                AltText = @"all implemented Methods in this DataType",
+                Description = @"all implemented Methods in this DataType",
                 ID = 80};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
-                AltText = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"MethodInvokations",
+                AltText = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
+                Description = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
                 ID = 81};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = false,
-                Description = @"Assemblies des Moduls",
-                AltText = @"Assemblies des Moduls",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Assemblies",
+                AltText = @"Assemblies des Moduls",
+                Description = @"Assemblies des Moduls",
                 ID = 82};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
-                AltText = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
+                IsNullable = false,
                 PropertyName = @"IsClientAssembly",
+                AltText = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
+                Description = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
                 ID = 83};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Serialisierung der Liste zum Client",
-                AltText = @"Serialisierung der Liste zum Client",
+                IsNullable = false,
                 PropertyName = @"PreFetchToClient",
+                AltText = @"Serialisierung der Liste zum Client",
+                Description = @"Serialisierung der Liste zum Client",
                 ID = 84};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = true,
-                Description = @"EMails des Kunden - können mehrere sein",
-                AltText = @"EMails des Kunden - können mehrere sein",
+                IsNullable = true,
                 PropertyName = @"EMails",
+                AltText = @"EMails des Kunden - können mehrere sein",
+                Description = @"EMails des Kunden - können mehrere sein",
                 ID = 85};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = true,
-                Description = @"Zugeordnete Mitarbeiter",
-                AltText = @"Zugeordnete Mitarbeiter",
+                IsNullable = true,
                 PropertyName = @"Mitarbeiter",
+                AltText = @"Zugeordnete Mitarbeiter",
+                Description = @"Zugeordnete Mitarbeiter",
                 ID = 86};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Name der Tätigkeitsart",
-                AltText = @"Name der Tätigkeitsart",
+                IsNullable = false,
                 PropertyName = @"Name",
+                AltText = @"Name der Tätigkeitsart",
+                Description = @"Name der Tätigkeitsart",
                 ID = 87};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Art der Tätigkeit",
-                AltText = @"Art der Tätigkeit",
+                IsNullable = true,
                 PropertyName = @"TaetigkeitsArt",
+                AltText = @"Art der Tätigkeit",
+                Description = @"Art der Tätigkeit",
                 ID = 88};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Maximal erlaubte Stundenanzahl",
-                AltText = @"Maximal erlaubte Stundenanzahl",
+                IsNullable = true,
                 PropertyName = @"MaxStunden",
+                AltText = @"Maximal erlaubte Stundenanzahl",
+                Description = @"Maximal erlaubte Stundenanzahl",
                 ID = 89};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Aktuell gebuchte Stunden",
-                AltText = @"Aktuell gebuchte Stunden",
+                IsNullable = true,
                 PropertyName = @"AktuelleStunden",
+                AltText = @"Aktuell gebuchte Stunden",
+                Description = @"Aktuell gebuchte Stunden",
                 ID = 90};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 100,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Name des Parameter",
-                AltText = @"Name des Parameter",
+                IsNullable = false,
                 PropertyName = @"ParameterName",
+                AltText = @"Name des Parameter",
+                Description = @"Name des Parameter",
                 ID = 91};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Methode des Parameters",
-                AltText = @"Methode des Parameters",
+                IsNullable = false,
                 PropertyName = @"Method",
+                AltText = @"Methode des Parameters",
+                Description = @"Methode des Parameters",
                 ID = 92};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Module",
-                AltText = @"Module",
+                IsNullable = false,
                 PropertyName = @"Module",
+                AltText = @"Module",
+                Description = @"Module",
                 ID = 93};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Parameter wird als List<> generiert",
-                AltText = @"Parameter wird als List<> generiert",
+                IsNullable = false,
                 PropertyName = @"IsList",
+                AltText = @"Parameter wird als List<> generiert",
+                Description = @"Parameter wird als List<> generiert",
                 ID = 94};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Es darf nur ein Return Parameter angegeben werden",
-                AltText = @"Es darf nur ein Return Parameter angegeben werden",
+                IsNullable = false,
                 PropertyName = @"IsReturnParameter",
+                AltText = @"Es darf nur ein Return Parameter angegeben werden",
+                Description = @"Es darf nur ein Return Parameter angegeben werden",
                 ID = 95};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = true,
-                Description = @"Parameter der Methode",
-                AltText = @"Parameter der Methode",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Parameter",
+                AltText = @"Parameter der Methode",
+                Description = @"Parameter der Methode",
                 ID = 96};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Kistl-Typ des Parameters",
-                AltText = @"Kistl-Typ des Parameters",
+                IsNullable = false,
                 PropertyName = @"DataType",
+                AltText = @"Kistl-Typ des Parameters",
+                Description = @"Kistl-Typ des Parameters",
                 ID = 97};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Assembly des CLR Objektes, NULL für Default Assemblies",
-                AltText = @"Assembly des CLR Objektes, NULL für Default Assemblies",
+                IsNullable = true,
                 PropertyName = @"Assembly",
+                AltText = @"Assembly des CLR Objektes, NULL für Default Assemblies",
+                Description = @"Assembly des CLR Objektes, NULL für Default Assemblies",
                 ID = 98};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Name des CLR Datentypen",
-                AltText = @"Name des CLR Datentypen",
+                IsNullable = false,
                 PropertyName = @"FullTypeName",
+                AltText = @"Name des CLR Datentypen",
+                Description = @"Name des CLR Datentypen",
                 ID = 99};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Übergeordnete Enumeration",
-                AltText = @"Übergeordnete Enumeration",
+                IsNullable = false,
                 PropertyName = @"Enumeration",
+                AltText = @"Übergeordnete Enumeration",
+                Description = @"Übergeordnete Enumeration",
                 ID = 100};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = true,
-                Description = @"Einträge der Enumeration",
-                AltText = @"Einträge der Enumeration",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"EnumerationEntries",
+                AltText = @"Einträge der Enumeration",
+                Description = @"Einträge der Enumeration",
                 ID = 103};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Enumeration der Eigenschaft",
-                AltText = @"Enumeration der Eigenschaft",
+                IsNullable = false,
                 PropertyName = @"Enumeration",
+                AltText = @"Enumeration der Eigenschaft",
+                Description = @"Enumeration der Eigenschaft",
                 ID = 104};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = true,
-                Description = @"Interfaces der Objektklasse",
-                AltText = @"Interfaces der Objektklasse",
+                IsNullable = true,
                 PropertyName = @"ImplementsInterfaces",
+                AltText = @"Interfaces der Objektklasse",
+                Description = @"Interfaces der Objektklasse",
                 ID = 105};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"String Property für das Testinterface",
-                AltText = @"String Property für das Testinterface",
+                IsNullable = false,
                 PropertyName = @"StringProp",
+                AltText = @"String Property für das Testinterface",
+                Description = @"String Property für das Testinterface",
                 ID = 107};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Objektpointer für das Testinterface",
-                AltText = @"Objektpointer für das Testinterface",
+                IsNullable = false,
                 PropertyName = @"ObjectProp",
+                AltText = @"Objektpointer für das Testinterface",
+                Description = @"Objektpointer für das Testinterface",
                 ID = 108};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"String Property",
-                AltText = @"String Property",
+                IsNullable = false,
                 PropertyName = @"StringProp",
+                AltText = @"String Property",
+                Description = @"String Property",
                 ID = 109};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Test Enumeration Property",
-                AltText = @"Test Enumeration Property",
+                IsNullable = false,
                 PropertyName = @"TestEnumProp",
+                AltText = @"Test Enumeration Property",
+                Description = @"Test Enumeration Property",
                 ID = 110};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Test Enum Property",
-                AltText = @"Test Enum Property",
+                IsNullable = false,
                 PropertyName = @"TestEnumProp",
+                AltText = @"Test Enum Property",
+                Description = @"Test Enum Property",
                 ID = 111};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"testtest",
-                AltText = @"testtest",
+                IsNullable = false,
                 PropertyName = @"ObjectProp",
+                AltText = @"testtest",
+                Description = @"testtest",
                 ID = 112};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The Toolkit used by this Renderer",
-                AltText = @"The Toolkit used by this Renderer",
+                IsNullable = false,
                 PropertyName = @"Platform",
+                AltText = @"The Toolkit used by this Renderer",
+                Description = @"The Toolkit used by this Renderer",
                 ID = 113};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The assembly containing the Control",
-                AltText = @"The assembly containing the Control",
+                IsNullable = false,
                 PropertyName = @"Assembly",
+                AltText = @"The assembly containing the Control",
+                Description = @"The assembly containing the Control",
                 ID = 114};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"The name of the class implementing this Control",
-                AltText = @"The name of the class implementing this Control",
+                IsNullable = false,
                 PropertyName = @"ClassName",
+                AltText = @"The name of the class implementing this Control",
+                Description = @"The name of the class implementing this Control",
                 ID = 115};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Whether or not this Control can contain other Controls",
-                AltText = @"Whether or not this Control can contain other Controls",
+                IsNullable = false,
                 PropertyName = @"IsContainer",
+                AltText = @"Whether or not this Control can contain other Controls",
+                Description = @"Whether or not this Control can contain other Controls",
                 ID = 116};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The toolkit of this Control.",
-                AltText = @"The toolkit of this Control.",
+                IsNullable = false,
                 PropertyName = @"Platform",
+                AltText = @"The toolkit of this Control.",
+                Description = @"The toolkit of this Control.",
                 ID = 117};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The type of Control of this implementation",
-                AltText = @"The type of Control of this implementation",
+                IsNullable = false,
                 PropertyName = @"ControlType",
+                AltText = @"The type of Control of this implementation",
+                Description = @"The type of Control of this implementation",
                 ID = 118};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
-                AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
+                IsNullable = false,
                 PropertyName = @"IsSimpleObject",
+                AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
+                Description = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
                 ID = 119};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Shows this Method in th GUI",
-                AltText = @"Shows this Method in th GUI",
+                IsNullable = false,
                 PropertyName = @"IsDisplayable",
+                AltText = @"Shows this Method in th GUI",
+                Description = @"Shows this Method in th GUI",
                 ID = 124};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"test",
-                AltText = @"test",
+                IsNullable = true,
                 PropertyName = @"MyIntProperty",
+                AltText = @"test",
+                Description = @"test",
                 ID = 126};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 50,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Enter a Number",
-                AltText = @"Enter a Number",
+                IsNullable = true,
                 PropertyName = @"Number",
+                AltText = @"Enter a Number",
+                Description = @"Enter a Number",
                 ID = 127};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 50,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Enter Area Code",
-                AltText = @"Enter Area Code",
+                IsNullable = true,
                 PropertyName = @"AreaCode",
+                AltText = @"Enter Area Code",
+                Description = @"Enter Area Code",
                 ID = 128};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Definition of this Struct",
-                AltText = @"Definition of this Struct",
+                IsNullable = false,
                 PropertyName = @"StructDefinition",
+                AltText = @"Definition of this Struct",
+                Description = @"Definition of this Struct",
                 ID = 129};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"Persons Name",
-                AltText = @"Persons Name",
+                IsNullable = false,
                 PropertyName = @"PersonName",
+                AltText = @"Persons Name",
+                Description = @"Persons Name",
                 ID = 130};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StructProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Mobile Phone Number",
-                AltText = @"Mobile Phone Number",
+                IsNullable = true,
                 PropertyName = @"PhoneNumberMobile",
+                AltText = @"Mobile Phone Number",
+                Description = @"Mobile Phone Number",
                 ID = 131};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StructProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Office Phone Number",
-                AltText = @"Office Phone Number",
+                IsNullable = true,
                 PropertyName = @"PhoneNumberOffice",
+                AltText = @"Office Phone Number",
+                Description = @"Office Phone Number",
                 ID = 132};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"Happy Birthday!",
-                AltText = @"Happy Birthday!",
+                IsNullable = true,
                 PropertyName = @"Birthday",
+                AltText = @"Happy Birthday!",
+                Description = @"Happy Birthday!",
                 ID = 133};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The CLR value of this entry",
-                AltText = @"The CLR value of this entry",
+                IsNullable = false,
                 PropertyName = @"Value",
+                AltText = @"The CLR value of this entry",
+                Description = @"The CLR value of this entry",
                 ID = 135};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"CLR name of this entry",
-                AltText = @"CLR name of this entry",
+                IsNullable = false,
                 PropertyName = @"Name",
+                AltText = @"CLR name of this entry",
+                Description = @"CLR name of this entry",
                 ID = 136};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"which controls are handled by this Presenter",
-                AltText = @"which controls are handled by this Presenter",
+                IsNullable = false,
                 PropertyName = @"ControlType",
+                AltText = @"which controls are handled by this Presenter",
+                Description = @"which controls are handled by this Presenter",
                 ID = 137};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Where to find the implementation of the Presenter",
-                AltText = @"Where to find the implementation of the Presenter",
+                IsNullable = false,
                 PropertyName = @"PresenterAssembly",
+                AltText = @"Where to find the implementation of the Presenter",
+                Description = @"Where to find the implementation of the Presenter",
                 ID = 138};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"The CLR namespace and class name of the Presenter",
-                AltText = @"The CLR namespace and class name of the Presenter",
+                IsNullable = false,
                 PropertyName = @"PresenterTypeName",
+                AltText = @"The CLR namespace and class name of the Presenter",
+                Description = @"The CLR namespace and class name of the Presenter",
                 ID = 139};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"The Assembly of the Data Type",
-                AltText = @"The Assembly of the Data Type",
+                IsNullable = true,
                 PropertyName = @"DataAssembly",
+                AltText = @"The Assembly of the Data Type",
+                Description = @"The Assembly of the Data Type",
                 ID = 147};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"The CLR namespace and class name of the Data Type",
-                AltText = @"The CLR namespace and class name of the Data Type",
+                IsNullable = false,
                 PropertyName = @"DataTypeName",
+                AltText = @"The CLR namespace and class name of the Data Type",
+                Description = @"The CLR namespace and class name of the Data Type",
                 ID = 148};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"A short description of the utility of this visual",
-                AltText = @"A short description of the utility of this visual",
+                IsNullable = false,
                 PropertyName = @"Description",
+                AltText = @"A short description of the utility of this visual",
+                Description = @"A short description of the utility of this visual",
                 ID = 149};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Which visual is represented here",
-                AltText = @"Which visual is represented here",
+                IsNullable = false,
                 PropertyName = @"ControlType",
+                AltText = @"Which visual is represented here",
+                Description = @"Which visual is represented here",
                 ID = 150};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = true,
-                Description = @"if this is a container, here are the visually contained/controlled children of this Visual",
-                AltText = @"if this is a container, here are the visually contained/controlled children of this Visual",
+                IsNullable = true,
                 PropertyName = @"Children",
+                AltText = @"if this is a container, here are the visually contained/controlled children of this Visual",
+                Description = @"if this is a container, here are the visually contained/controlled children of this Visual",
                 ID = 151};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = false,
-                Description = @"The Property to display",
-                AltText = @"The Property to display",
+                IsNullable = true,
                 PropertyName = @"Property",
+                AltText = @"The Property to display",
+                Description = @"The Property to display",
                 ID = 152};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The Method whose return value shoud be displayed",
-                AltText = @"The Method whose return value shoud be displayed",
+                IsNullable = false,
                 PropertyName = @"Method",
+                AltText = @"The Method whose return value shoud be displayed",
+                Description = @"The Method whose return value shoud be displayed",
                 ID = 153};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"a short name to identify this Template to the user",
-                AltText = @"a short name to identify this Template to the user",
+                IsNullable = false,
                 PropertyName = @"DisplayName",
+                AltText = @"a short name to identify this Template to the user",
+                Description = @"a short name to identify this Template to the user",
                 ID = 154};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The visual representation of this Template",
-                AltText = @"The visual representation of this Template",
+                IsNullable = false,
                 PropertyName = @"VisualTree",
+                AltText = @"The visual representation of this Template",
+                Description = @"The visual representation of this Template",
                 ID = 155};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = false,
                 IsList = false,
-                Description = @"FullName of the Type that is displayed with this Template",
-                AltText = @"FullName of the Type that is displayed with this Template",
+                IsNullable = false,
                 PropertyName = @"DisplayedTypeFullName",
+                AltText = @"FullName of the Type that is displayed with this Template",
+                Description = @"FullName of the Type that is displayed with this Template",
                 ID = 162};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"Assembly of the Type that is displayed with this Template",
-                AltText = @"Assembly of the Type that is displayed with this Template",
+                IsNullable = false,
                 PropertyName = @"DisplayedTypeAssembly",
+                AltText = @"Assembly of the Type that is displayed with this Template",
+                Description = @"Assembly of the Type that is displayed with this Template",
                 ID = 163};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = true,
-                Description = @"The context menu for this Visual",
-                AltText = @"The context menu for this Visual",
+                IsNullable = true,
                 PropertyName = @"ContextMenu",
+                AltText = @"The context menu for this Visual",
+                Description = @"The context menu for this Visual",
                 ID = 164};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = true,
                 IsList = true,
-                Description = @"The main menu for this Template",
-                AltText = @"The main menu for this Template",
+                IsNullable = true,
                 PropertyName = @"Menu",
+                AltText = @"The main menu for this Template",
+                Description = @"The main menu for this Template",
                 ID = 165};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 400,
-                IsNullable = true,
                 IsList = false,
-                Description = @"The reason of this constraint",
-                AltText = @"The reason of this constraint",
+                IsNullable = true,
                 PropertyName = @"Reason",
+                AltText = @"The reason of this constraint",
+                Description = @"The reason of this constraint",
                 ID = 167};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The biggest value accepted by this constraint",
-                AltText = @"The biggest value accepted by this constraint",
+                IsNullable = false,
                 PropertyName = @"Max",
+                AltText = @"The biggest value accepted by this constraint",
+                Description = @"The biggest value accepted by this constraint",
                 ID = 168};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The smallest value accepted by this constraint",
-                AltText = @"The smallest value accepted by this constraint",
+                IsNullable = false,
                 PropertyName = @"Min",
+                AltText = @"The smallest value accepted by this constraint",
+                Description = @"The smallest value accepted by this constraint",
                 ID = 169};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
-            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BackReferenceProperty__Implementation__() {
-                PreFetchToClient = true,
-                Description = @"The list of constraints applying to this Property",
-                AltText = @"The list of constraints applying to this Property",
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = true,
+                IsNullable = true,
                 PropertyName = @"Constraints",
+                AltText = @"The list of constraints applying to this Property",
+                Description = @"The list of constraints applying to this Property",
                 ID = 170};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The property to be constrained",
-                AltText = @"The property to be constrained",
+                IsNullable = false,
                 PropertyName = @"ConstrainedProperty",
+                AltText = @"The property to be constrained",
+                Description = @"The property to be constrained",
                 ID = 171};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The maximal length of this StringProperty",
-                AltText = @"The maximal length of this StringProperty",
+                IsNullable = false,
                 PropertyName = @"MaxLength",
+                AltText = @"The maximal length of this StringProperty",
+                Description = @"The maximal length of this StringProperty",
                 ID = 172};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"The minimal length of this StringProperty",
-                AltText = @"The minimal length of this StringProperty",
+                IsNullable = false,
                 PropertyName = @"MinLength",
+                AltText = @"The minimal length of this StringProperty",
+                Description = @"The minimal length of this StringProperty",
                 ID = 173};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
-                IsNullable = false,
                 IsList = false,
-                Description = @"if true then all Instances appear in FozenContext.",
-                AltText = @"if true then all Instances appear in FozenContext.",
+                IsNullable = false,
                 PropertyName = @"IsFrozenObject",
+                AltText = @"if true then all Instances appear in FozenContext.",
+                Description = @"if true then all Instances appear in FozenContext.",
                 ID = 174};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Description of this DataType",
-                AltText = @"Description of this DataType",
+                IsNullable = true,
                 PropertyName = @"Description",
+                AltText = @"Description of this DataType",
+                Description = @"Description of this DataType",
                 ID = 175};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Description of this Property",
-                AltText = @"Description of this Property",
+                IsNullable = true,
                 PropertyName = @"Description",
+                AltText = @"Description of this Property",
+                Description = @"Description of this Property",
                 ID = 176};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Description of this Parameter",
-                AltText = @"Description of this Parameter",
+                IsNullable = true,
                 PropertyName = @"Description",
+                AltText = @"Description of this Parameter",
+                Description = @"Description of this Parameter",
                 ID = 177};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Description of this Enumeration Entry",
-                AltText = @"Description of this Enumeration Entry",
+                IsNullable = true,
                 PropertyName = @"Description",
+                AltText = @"Description of this Enumeration Entry",
+                Description = @"Description of this Enumeration Entry",
                 ID = 178};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Description of this Module",
-                AltText = @"Description of this Module",
+                IsNullable = true,
                 PropertyName = @"Description",
+                AltText = @"Description of this Module",
+                Description = @"Description of this Module",
                 ID = 179};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
                 Length = 200,
-                IsNullable = true,
                 IsList = false,
-                Description = @"Description of this Method",
-                AltText = @"Description of this Method",
+                IsNullable = true,
                 PropertyName = @"Description",
+                AltText = @"Description of this Method",
+                Description = @"Description of this Method",
                 ID = 180};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = false,
+                IsNullable = false,
+                PropertyName = @"LeftPart",
+                AltText = @"Left Part of the Relation",
+                Description = @"Left Part of the Relation",
+                ID = 181};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = false,
+                IsNullable = false,
+                PropertyName = @"RightPart",
+                AltText = @"Right Part of the Relation",
+                Description = @"Right Part of the Relation",
+                ID = 182};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
+                IsList = false,
+                IsNullable = true,
+                PropertyName = @"Storage",
+                AltText = @"Storagetype for 1:1 Relations",
+                Description = @"Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.",
+                ID = 183};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
+                Length = 200,
+                IsList = false,
+                IsNullable = true,
+                PropertyName = @"Description",
+                AltText = @"Description of this Relation",
+                Description = @"Description of this Relation",
+                ID = 184};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = false,
+                IsNullable = true,
+                PropertyName = @"RightOf",
+                AltText = @"This Property is the right Part of the selected Relation.",
+                Description = @"This Property is the right Part of the selected Relation.",
+                ID = 185};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = false,
+                IsNullable = true,
+                PropertyName = @"LeftOf",
+                AltText = @"This Property is the left Part of the selected Relation.",
+                Description = @"This Property is the left Part of the selected Relation.",
+                ID = 186};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             _Kistl_App_Base_BaseProperty.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -1832,6 +1898,21 @@ namespace Kistl.Objects.Client
                 MethodName = @"PrepareDefault",
                 IsDisplayable = true,
                 ID = 144};
+            _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
+            { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
+                MethodName = @"PreSave",
+                IsDisplayable = false,
+                ID = 145};
+            _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
+            { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
+                MethodName = @"ToString",
+                IsDisplayable = false,
+                ID = 146};
+            _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
+            { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
+                MethodName = @"PostSave",
+                IsDisplayable = false,
+                ID = 147};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             _Kistl_App_Base_Method.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Module_obj = new Kistl.App.Base.Module__Implementation__() {
@@ -2899,6 +2980,19 @@ namespace Kistl.Objects.Client
                 ClassName = @"IsValidNamespaceConstraint",
                 ID = 76};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
+                TableName = @"Relations",
+                IsSimpleObject = false,
+                IsFrozenObject = true,
+                ClassName = @"Relation",
+                Description = @"Describes a Relation between two Object Classes",
+                ID = 77};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.Enumeration__Implementation__() {
+                ClassName = @"StorageType",
+                Description = @"Storage Type of a 1:1 Releation.",
+                ID = 78};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             _Kistl_App_Base_DataType.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_BaseParameter_obj = new Kistl.App.Base.StringParameter__Implementation__() {
                 ParameterName = @"TestString",
@@ -3234,6 +3328,21 @@ namespace Kistl.Objects.Client
                 Value = 19,
                 Name = @"TemplateEditor",
                 ID = 59};
+            _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
+            { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
+                Value = 3,
+                Name = @"Replicate",
+                ID = 60};
+            _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
+            { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
+                Value = 2,
+                Name = @"Right",
+                ID = 61};
+            _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
+            { var _Kistl_App_Base_EnumerationEntry_obj = new Kistl.App.Base.EnumerationEntry__Implementation__() {
+                Value = 1,
+                Name = @"Left",
+                ID = 62};
             _Kistl_App_Base_EnumerationEntry.Add(_Kistl_App_Base_EnumerationEntry_obj); };
             _Kistl_App_Base_EnumerationEntry.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.NotNullableConstraint__Implementation__() {
@@ -3743,785 +3852,931 @@ namespace Kistl.Objects.Client
                 MinLength = 0,
                 ID = 208};
             _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.StringRangeConstraint__Implementation__() {
+                MaxLength = 200,
+                MinLength = 0,
+                ID = 209};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.NotNullableConstraint__Implementation__() {
+                ID = 210};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.NotNullableConstraint__Implementation__() {
+                ID = 211};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
             _Kistl_App_Base_Constraint.ForEach<IDataObject>(obj => this.Attach(obj));
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 1};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 2};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Right,
+                ID = 3};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 4};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 5};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 6};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 8};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 9};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 10};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 11};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 12};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 13};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 14};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 15};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 16};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 17};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
+                Storage = Kistl.App.Base.StorageType.Left,
+                ID = 18};
+            _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
+            _Kistl_App_Base_Relation.ForEach<IDataObject>(obj => this.Attach(obj));
             {var obj = this.Find<Kistl.App.Base.StringProperty>(1);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(146));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(192));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(195));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(3);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(2);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(145));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(191));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(194));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(7);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(8);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(7);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(5);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(8);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(144));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(9);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(190));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(196));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(11);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(7);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(143));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(13);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(189));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(14);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(19);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(14);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(4);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(15);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(4);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(188));
             };
             {var obj = this.Find<Kistl.App.Base.DateTimeProperty>(16);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(4);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.DateTimeProperty>(17);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(4);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.DoubleProperty>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(4);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(19);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(3);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(4);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(20);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(6);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(187));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(21);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(22);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(21);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(3);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(6);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(22);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(6);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.DoubleProperty>(23);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(25);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(2);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(2);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(26);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(7);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(142));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(27);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(25);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(27);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(2);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(2);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.IntProperty>(28);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(9);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(147));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(29);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(141));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(30);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(140));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(186));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(199));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(31);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(31);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(10);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.DateTimeProperty>(38);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(6);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(39);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(6);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(185));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(40);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(6);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(184));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(41);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(183));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(42);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(18);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(139));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(182));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(198));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(43);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(18);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(138));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(181));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(44);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(45);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(44);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(6);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(18);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(45);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(6);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(137));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(46);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(2);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(14);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(47);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(14);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(16);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(48);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(180));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(49);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(6);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(19);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(50);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(19);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(179));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(51);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(3);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(10);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(19);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(52);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(20);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(136));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(178));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(53);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(3);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(9);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(23);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(135));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(54);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(6);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(25);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(134));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(55);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(20);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(8);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(25);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(133));
             };
             {var obj = this.Find<Kistl.App.Base.DateTimeProperty>(56);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(25);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(132));
             };
             {var obj = this.Find<Kistl.App.Base.DoubleProperty>(57);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(25);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(131));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(58);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(55);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(58);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(25);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(8);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(20);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(59);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(26);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(130));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(177));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(60);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(26);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(176));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(61);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(26);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(129));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(175));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(62);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(26);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(174));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(63);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(26);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(173));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(64);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(26);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(19);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.DoubleProperty>(65);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(19);
-            };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(66);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(53);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
-            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
-            };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(67);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(51);
             obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(66);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(23);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(9);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(67);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(19);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(10);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(3);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(68);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(27);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(128));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(172));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(69);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(27);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(70);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(13);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(29);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(127));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(71);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(29);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(126));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(171));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(72);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(125));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(73);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(124));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(74);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(10);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(12);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(30);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(123));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(193));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(75);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(30);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(122));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(76);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(30);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(121));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(170));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(77);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(30);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(120));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(169));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(78);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(30);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(119));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(79);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(11);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(30);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(118));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(80);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(79);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(80);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(30);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(11);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
-            };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(81);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(74);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(81);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(30);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(12);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
-            };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(82);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(70);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(82);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(29);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(13);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(18);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(83);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(29);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(117));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(84);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(16);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(116));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(85);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(26);
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(168));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(86);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(6);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(20);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(87);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(31);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(115));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(167));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(88);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(31);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(25);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             };
             {var obj = this.Find<Kistl.App.Base.DoubleProperty>(89);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(20);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             };
             {var obj = this.Find<Kistl.App.Base.DoubleProperty>(90);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(20);
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(91);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(36);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(114));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(166));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(200));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(92);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(10);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(14);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(36);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(113));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(93);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(36);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(112));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(94);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(36);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(111));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(95);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(36);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(110));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(96);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(92);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(96);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(36);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(14);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(97);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(42);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(109));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(98);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(43);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(99);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(43);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(108));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(165));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(100);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(45);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(15);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(46);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(107));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(103);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(100);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(103);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(46);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(15);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(45);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(104);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(45);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(47);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(106));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(105);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(44);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(2);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(107);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(48);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(105));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(164));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(108);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(26);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(48);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(104));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(109);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(51);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(103));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(163));
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(110);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(50);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(51);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(102));
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(111);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(50);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(48);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(101));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(112);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(26);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(51);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(100));
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(113);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(53);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(52);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(99));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(114);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(54);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(98));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(115);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(54);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(97));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(162));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(116);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(54);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(96));
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(117);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(53);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(54);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(95));
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(118);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(55);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(54);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(94));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(119);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(2);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(93));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(124);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(92));
             };
             {var obj = this.Find<Kistl.App.Base.IntProperty>(126);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(51);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(127);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(63);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(161));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(128);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(63);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(160));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(129);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(62);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(64);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(91));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(130);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(58);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(90));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(159));
             };
             {var obj = this.Find<Kistl.App.Base.StructProperty>(131);
             obj.StructDefinition = this.Find<Kistl.App.Base.Struct>(63);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(58);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.StructProperty>(132);
             obj.StructDefinition = this.Find<Kistl.App.Base.Struct>(63);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(58);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.DateTimeProperty>(133);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(58);
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.IntProperty>(135);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(46);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(89));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(136);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(46);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(88));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(158));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(201));
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(137);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(55);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(66);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(87));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(138);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(66);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(86));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(139);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(66);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(85));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(157));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(147);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(66);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(148);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(66);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(84));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(156));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(149);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(67);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(83));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(155));
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(150);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(55);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(67);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(82));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(151);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(67);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(67);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(152);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(5);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(67);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(153);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(10);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(67);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(81));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(154);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(68);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(80));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(154));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(155);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(67);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(68);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(79));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(162);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(68);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(78));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(153));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(163);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(68);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(77));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(164);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(67);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(67);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(165);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(67);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(68);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(167);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(69);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(152));
             };
             {var obj = this.Find<Kistl.App.Base.IntProperty>(168);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(71);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(76));
             };
             {var obj = this.Find<Kistl.App.Base.IntProperty>(169);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(71);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(75));
             };
-            {var obj = this.Find<Kistl.App.Base.BackReferenceProperty>(170);
-            obj.ReferenceProperty = this.Find<Kistl.App.Base.ObjectReferenceProperty>(171);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(170);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(69);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(16);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(171);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(5);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(16);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(69);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(74));
             };
             {var obj = this.Find<Kistl.App.Base.IntProperty>(172);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(73);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(148));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(151));
             };
             {var obj = this.Find<Kistl.App.Base.IntProperty>(173);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(73);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(149));
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(150));
             };
             {var obj = this.Find<Kistl.App.Base.BoolProperty>(174);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(2);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(202));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(175);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(207));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(176);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(206));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(177);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(36);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(205));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(178);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(46);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(204));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(179);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(18);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(203));
             };
             {var obj = this.Find<Kistl.App.Base.StringProperty>(180);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(10);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(208));
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(181);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(14);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(17);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(77);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(211));
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(182);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(14);
+            obj.LeftOf = this.Find<Kistl.App.Base.Relation>(18);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(77);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(210));
+            };
+            {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(183);
+            obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(78);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(77);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.StringProperty>(184);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(77);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.Constraints.Add(this.Find<Kistl.App.Base.Constraint>(209));
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(185);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(77);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(18);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(14);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(186);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(77);
+            obj.RightOf = this.Find<Kistl.App.Base.Relation>(17);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(14);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.Method>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
@@ -5078,8 +5333,19 @@ namespace Kistl.Objects.Client
             obj.MethodInvokations.Add(this.Find<Kistl.App.Base.MethodInvocation>(102));
             obj.Parameter.Add(this.Find<Kistl.App.Base.BaseParameter>(36));
             };
+            {var obj = this.Find<Kistl.App.Base.Method>(145);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(77);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.Method>(146);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(77);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.Method>(147);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(77);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
             {var obj = this.Find<Kistl.App.Base.Module>(1);
-            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(18));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(2));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(5));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(7));
@@ -5092,6 +5358,7 @@ namespace Kistl.Objects.Client
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(14));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(15));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(16));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(18));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(29));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(30));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(33));
@@ -5116,6 +5383,8 @@ namespace Kistl.Objects.Client
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(74));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(75));
             obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(76));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(77));
+            obj.DataTypes.Add(this.Find<Kistl.App.Base.DataType>(78));
             obj.Assemblies.Add(this.Find<Kistl.App.Base.Assembly>(1));
             obj.Assemblies.Add(this.Find<Kistl.App.Base.Assembly>(2));
             };
@@ -5801,8 +6070,6 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(2);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(11);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(3));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(25));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(27));
@@ -5813,12 +6080,12 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(5));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(6));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(125));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(11);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(28));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(81));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(3);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(3);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(13));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(14));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(22));
@@ -5829,12 +6096,12 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(7));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(8));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(9));
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(3);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(1));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(29));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(4);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(7);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(15));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(16));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(17));
@@ -5843,14 +6110,14 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(10));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(11));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(12));
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(7);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(4));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(30));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(5);
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(7));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(16));
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(8));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(9));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(41));
@@ -5863,6 +6130,8 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(15));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(46));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(118));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(8));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(25));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(36));
@@ -5871,8 +6140,6 @@ namespace Kistl.Objects.Client
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(71));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(6);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(5);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(20));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(21));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(38));
@@ -5882,6 +6149,8 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(17));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(18));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(83));
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(5);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(2));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(7);
@@ -5889,10 +6158,10 @@ namespace Kistl.Objects.Client
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(8));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(14));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(64));
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(11));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(26));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(8);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(7);
@@ -5907,15 +6176,13 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(9);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(8);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(28));
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(28));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(20));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(31));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(10);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(29));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(30));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(73));
@@ -5927,6 +6194,8 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(20));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(21));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(124));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(9));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(63));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(80));
@@ -5955,9 +6224,11 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(14);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(7);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(46));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(185));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(186));
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(46));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(17));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(26));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(37));
@@ -5973,17 +6244,15 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(16);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(5);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(47));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(84));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(18));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(27));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(38));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(18);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(1);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(42));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(43));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(44));
@@ -5992,11 +6261,11 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(22));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(23));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(24));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(1);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(10));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(19);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(49));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(50));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(51));
@@ -6006,14 +6275,14 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(25));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(26));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(27));
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(11));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(19));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(20);
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(21));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(23));
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(12);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(52));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(58));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(86));
@@ -6022,6 +6291,8 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(28));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(29));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(30));
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(12);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(12));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(45));
             };
@@ -6032,13 +6303,11 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(23);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(20);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(53));
             obj.Module = this.Find<Kistl.App.Base.Module>(3);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(3);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(53));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(25);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(7);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(54));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(55));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(56));
@@ -6047,12 +6316,12 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(31));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(32));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(33));
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(7);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(13));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(46));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(26);
-            obj.Module = this.Find<Kistl.App.Base.Module>(2);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(6);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(59));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(60));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(61));
@@ -6062,49 +6331,51 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(34));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(35));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(36));
+            obj.Module = this.Find<Kistl.App.Base.Module>(2);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(6);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(14));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(27);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(4);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(68));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(37));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(38));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(39));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(4);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(15));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(29);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(13);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(70));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(71));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(83));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(40));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(41));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(42));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(13);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(16));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(30);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(79));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(74));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(75));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(76));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(77));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(78));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(79));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(43));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(44));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(45));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(6));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(31);
-            obj.Module = this.Find<Kistl.App.Base.Module>(3);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(87));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(71));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(72));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(73));
+            obj.Module = this.Find<Kistl.App.Base.Module>(3);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(44));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(33);
@@ -6112,8 +6383,6 @@ namespace Kistl.Objects.Client
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(44));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(45));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(62));
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(11);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(1));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(7));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(31));
@@ -6126,6 +6395,8 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(76));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(120));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(121));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(11);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(5));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(72));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(73));
@@ -6140,8 +6411,6 @@ namespace Kistl.Objects.Client
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(41));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(42));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(43));
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(12);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(91));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(92));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(93));
@@ -6153,6 +6422,8 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(81));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(82));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(123));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(12);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(49));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(62));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(76));
@@ -6195,9 +6466,9 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(42);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(36);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(97));
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(12);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(97));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(58));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(59));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(78));
@@ -6205,10 +6476,10 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(43);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(36);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(12);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(98));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(99));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(12);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(60));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(61));
             };
@@ -6219,17 +6490,15 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(45);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(103));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(84));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(85));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(86));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(66));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(46);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(100));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(135));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(136));
@@ -6237,23 +6506,25 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(87));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(88));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(89));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(8);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(67));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(47);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(8);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(104));
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(104));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(64));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(65));
             };
             {var obj = this.Find<Kistl.App.Base.Interface>(48);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(1);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(107));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(108));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(111));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(90));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(1);
             };
             {var obj = this.Find<Kistl.App.Base.Enumeration>(50);
             obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(2));
@@ -6262,8 +6533,6 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(51);
             obj.ImplementsInterfaces.Add(this.Find<Kistl.App.Base.Interface>(48));
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(5);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(109));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(110));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(112));
@@ -6272,14 +6541,16 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(92));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(93));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(95));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(5);
             };
             {var obj = this.Find<Kistl.App.Base.Interface>(52);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
-            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(113));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(96));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(97));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(98));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
             };
             {var obj = this.Find<Kistl.App.Base.Enumeration>(53);
             obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(5));
@@ -6289,7 +6560,6 @@ namespace Kistl.Objects.Client
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(4);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(54);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(114));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(115));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(116));
@@ -6298,6 +6568,7 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(141));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(142));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(143));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(94));
             };
             {var obj = this.Find<Kistl.App.Base.Enumeration>(55);
@@ -6324,7 +6595,6 @@ namespace Kistl.Objects.Client
             obj.Module = this.Find<Kistl.App.Base.Module>(4);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(58);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(130));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(131));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(132));
@@ -6332,24 +6602,25 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(106));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(107));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(108));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(59);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(109));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(110));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(111));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(60);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(112));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(113));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(114));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(61);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(115));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(116));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(117));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(62);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
@@ -6357,20 +6628,19 @@ namespace Kistl.Objects.Client
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(11);
             };
             {var obj = this.Find<Kistl.App.Base.Struct>(63);
-            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(127));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(128));
+            obj.Module = this.Find<Kistl.App.Base.Module>(5);
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(64);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(7);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(129));
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(9);
-            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(129));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(82));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(83));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(66);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(137));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(138));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(139));
@@ -6379,10 +6649,10 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(126));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(127));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(128));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(101));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(67);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(149));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(150));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(151));
@@ -6392,10 +6662,10 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(129));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(130));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(131));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(103));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(68);
-            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(154));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(155));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(162));
@@ -6405,6 +6675,7 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(133));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(134));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(144));
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(102));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(69);
@@ -6413,7 +6684,6 @@ namespace Kistl.Objects.Client
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(73));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(74));
             obj.SubClasses.Add(this.Find<Kistl.App.Base.ObjectClass>(75));
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(167));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(171));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(135));
@@ -6421,6 +6691,7 @@ namespace Kistl.Objects.Client
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(137));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(138));
             obj.Methods.Add(this.Find<Kistl.App.Base.Method>(139));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(87));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(70);
@@ -6432,18 +6703,18 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(71);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(69);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(168));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(169));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(91));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(92));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(93));
             };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(73);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(69);
-            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(172));
             obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(173));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(95));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(96));
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(97));
@@ -6467,6 +6738,24 @@ namespace Kistl.Objects.Client
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(75);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.MethodInvocations.Add(this.Find<Kistl.App.Base.MethodInvocation>(107));
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectClass>(77);
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(181));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(182));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(183));
+            obj.Properties.Add(this.Find<Kistl.App.Base.BaseProperty>(184));
+            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(145));
+            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(146));
+            obj.Methods.Add(this.Find<Kistl.App.Base.Method>(147));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(11);
+            };
+            {var obj = this.Find<Kistl.App.Base.Enumeration>(78);
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(60));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(61));
+            obj.EnumerationEntries.Add(this.Find<Kistl.App.Base.EnumerationEntry>(62));
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(10);
             };
             {var obj = this.Find<Kistl.App.Base.StringParameter>(1);
             obj.Method = this.Find<Kistl.App.Base.Method>(83);
@@ -6674,6 +6963,15 @@ namespace Kistl.Objects.Client
             };
             {var obj = this.Find<Kistl.App.Base.EnumerationEntry>(59);
             obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(55);
+            };
+            {var obj = this.Find<Kistl.App.Base.EnumerationEntry>(60);
+            obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(78);
+            };
+            {var obj = this.Find<Kistl.App.Base.EnumerationEntry>(61);
+            obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(78);
+            };
+            {var obj = this.Find<Kistl.App.Base.EnumerationEntry>(62);
+            obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(78);
             };
             {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(74);
             obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(171);
@@ -7077,6 +7375,83 @@ namespace Kistl.Objects.Client
             {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(208);
             obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(180);
             };
+            {var obj = this.Find<Kistl.App.Base.StringRangeConstraint>(209);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(184);
+            };
+            {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(210);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(182);
+            };
+            {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(211);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(181);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(1);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(7);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(8);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(2);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(14);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(19);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(3);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(22);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(21);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(4);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(27);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(25);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(5);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(31);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(29);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(6);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(44);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(45);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(8);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(58);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(55);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(9);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(66);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(53);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(10);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(67);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(51);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(11);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(80);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(79);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(12);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(81);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(74);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(13);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(82);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(70);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(14);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(96);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(92);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(15);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(103);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(100);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(16);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(170);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(171);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(17);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(181);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(186);
+            };
+            {var obj = this.Find<Kistl.App.Base.Relation>(18);
+            obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(182);
+            obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(185);
+            };
             _initialized = true;
         }
         
@@ -7092,6 +7467,7 @@ namespace Kistl.Objects.Client
             if (typeof(Kistl.App.Base.BaseParameter).IsAssignableFrom(type)) return _Kistl_App_Base_BaseParameter.Cast<IDataObject>().AsQueryable<IDataObject>();
             if (typeof(Kistl.App.Base.EnumerationEntry).IsAssignableFrom(type)) return _Kistl_App_Base_EnumerationEntry.Cast<IDataObject>().AsQueryable<IDataObject>();
             if (typeof(Kistl.App.Base.Constraint).IsAssignableFrom(type)) return _Kistl_App_Base_Constraint.Cast<IDataObject>().AsQueryable<IDataObject>();
+            if (typeof(Kistl.App.Base.Relation).IsAssignableFrom(type)) return _Kistl_App_Base_Relation.Cast<IDataObject>().AsQueryable<IDataObject>();
             return base.GetQuery(type);
         }
     }

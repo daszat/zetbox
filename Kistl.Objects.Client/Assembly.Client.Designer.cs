@@ -45,7 +45,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_Module = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_Module != value.ID && fk_Module != null) value.Assemblies.Remove(this);
+                    fk_Module = value.ID;
+                    if (!value.Assemblies.Contains(this)) value.Assemblies.Add(this);
+                }
+                else
+                {
+                    if (Module != null && Module.Assemblies.Contains(this)) Module.Assemblies.Remove(this);
+                    fk_Module = null;
+                };
             }
         }
         

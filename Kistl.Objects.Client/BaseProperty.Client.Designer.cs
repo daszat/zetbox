@@ -51,7 +51,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_ObjectClass = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_ObjectClass != value.ID && fk_ObjectClass != null) value.Properties.Remove(this);
+                    fk_ObjectClass = value.ID;
+                    if (!value.Properties.Contains(this)) value.Properties.Add(this);
+                }
+                else
+                {
+                    if (ObjectClass != null && ObjectClass.Properties.Contains(this)) ObjectClass.Properties.Remove(this);
+                    fk_ObjectClass = null;
+                };
             }
         }
         
@@ -323,7 +334,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._PropertyName, sr);
             BinarySerializer.FromBinary(out this._AltText, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
-            this._Constraints = new BackReferenceCollection<Kistl.App.Base.Constraint>("ConstrainedProperty", this); BinarySerializer.FromBinary(this._Constraints, sr);
             BinarySerializer.FromBinary(out this._Description, sr);
         }
         

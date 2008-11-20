@@ -28,6 +28,7 @@
     <EntitySet Name="Visual" EntityType="Model.Visual" />
     <EntitySet Name="Template" EntityType="Model.Template" />
     <EntitySet Name="Constraint" EntityType="Model.Constraint" />
+    <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -211,6 +212,14 @@
       <End Role="A_BaseProperty" EntitySet="BaseProperty" />
       <End Role="B_Constraint" EntitySet="Constraint" />
     </AssociationSet>
+    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_LeftPart" Association="Model.FK_Relation_ObjectReferenceProperty_LeftPart">
+      <End Role="A_ObjectReferenceProperty" EntitySet="BaseProperty" />
+      <End Role="B_Relation" EntitySet="Relation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_RightPart" Association="Model.FK_Relation_ObjectReferenceProperty_RightPart">
+      <End Role="A_ObjectReferenceProperty" EntitySet="BaseProperty" />
+      <End Role="B_Relation" EntitySet="Relation" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -289,8 +298,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
     <NavigationProperty Name="Projekte__Implementation__" Relationship="Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" FromRole="A_Mitarbeiter" ToRole="B_Projekt_MitarbeiterCollectionEntry" />
+    <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="Geburtstag" Type="DateTime" Nullable="true" />
     <Property Name="SVNr" Type="String" MaxLength="20" Nullable="true" />
     <Property Name="TelefonNummer" Type="String" MaxLength="50" Nullable="true" />
@@ -321,6 +330,8 @@
   <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
     <NavigationProperty Name="ReferenceObjectClass__Implementation__" Relationship="Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass" FromRole="B_ObjectReferenceProperty" ToRole="A_ObjectClass" />
+    <NavigationProperty Name="RightOf__Implementation__" Relationship="Model.FK_Relation_ObjectReferenceProperty_RightPart" FromRole="A_ObjectReferenceProperty" ToRole="B_Relation" />
+    <NavigationProperty Name="LeftOf__Implementation__" Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftPart" FromRole="A_ObjectReferenceProperty" ToRole="B_Relation" />
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty">
@@ -427,12 +438,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_DataType_Module_Module" FromRole="B_DataType" ToRole="A_Module" />
-    <Property Name="ClassName" Type="String" MaxLength="51" Nullable="false" />
     <NavigationProperty Name="Properties__Implementation__" Relationship="Model.FK_BaseProperty_DataType_ObjectClass" FromRole="A_DataType" ToRole="B_BaseProperty" />
     <NavigationProperty Name="Methods__Implementation__" Relationship="Model.FK_Method_DataType_ObjectClass" FromRole="A_DataType" ToRole="B_Method" />
-    <NavigationProperty Name="DefaultIcon__Implementation__" Relationship="Model.FK_DataType_Icon_DefaultIcon" FromRole="B_DataType" ToRole="A_Icon" />
+    <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_DataType_Module_Module" FromRole="B_DataType" ToRole="A_Module" />
     <NavigationProperty Name="MethodInvocations__Implementation__" Relationship="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass" FromRole="A_DataType" ToRole="B_MethodInvocation" />
+    <Property Name="ClassName" Type="String" MaxLength="51" Nullable="false" />
+    <NavigationProperty Name="DefaultIcon__Implementation__" Relationship="Model.FK_DataType_Icon_DefaultIcon" FromRole="B_DataType" ToRole="A_Icon" />
     <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="BaseParameter">
@@ -583,6 +594,16 @@
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" />
   <EntityType Name="IsValidIdentifierConstraint" BaseType="Model.Constraint" />
   <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint" />
+  <EntityType Name="Relation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RightPart__Implementation__" Relationship="Model.FK_Relation_ObjectReferenceProperty_RightPart" FromRole="B_Relation" ToRole="A_ObjectReferenceProperty" />
+    <NavigationProperty Name="LeftPart__Implementation__" Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftPart" FromRole="B_Relation" ToRole="A_ObjectReferenceProperty" />
+    <Property Name="Storage__Implementation__" Type="Int32" Nullable="true" />
+    <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
+  </EntityType>
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
     <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />
@@ -818,6 +839,14 @@
   <Association Name="FK_Constraint_BaseProperty_ConstrainedProperty">
     <End Role="A_BaseProperty" Type="Model.BaseProperty" Multiplicity="0..1" />
     <End Role="B_Constraint" Type="Model.Constraint" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Relation_ObjectReferenceProperty_LeftPart">
+    <End Role="A_ObjectReferenceProperty" Type="Model.ObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="B_Relation" Type="Model.Relation" Multiplicity="1" />
+  </Association>
+  <Association Name="FK_Relation_ObjectReferenceProperty_RightPart">
+    <End Role="A_ObjectReferenceProperty" Type="Model.ObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="B_Relation" Type="Model.Relation" Multiplicity="1" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />

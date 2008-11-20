@@ -33,6 +33,10 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_ReferenceObjectClass = null;
         
+        private System.Nullable<int> _fk_RightOf = null;
+        
+        private System.Nullable<int> _fk_LeftOf = null;
+        
         public ObjectReferenceProperty__Implementation__()
         {
         }
@@ -80,6 +84,98 @@ namespace Kistl.App.Base
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>("Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass", "A_ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = (Kistl.App.Base.ObjectClass__Implementation__)value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Relation RightOf
+        {
+            get
+            {
+                return RightOf__Implementation__;
+            }
+            set
+            {
+                RightOf__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        public System.Nullable<int> fk_RightOf
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && RightOf != null)
+                {
+                    _fk_RightOf = RightOf.ID;
+                }
+                return _fk_RightOf;
+            }
+            set
+            {
+                _fk_RightOf = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Relation_ObjectReferenceProperty_RightPart", "B_Relation")]
+        public Kistl.App.Base.Relation__Implementation__ RightOf__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>("Model.FK_Relation_ObjectReferenceProperty_RightPart", "B_Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>("Model.FK_Relation_ObjectReferenceProperty_RightPart", "B_Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        [XmlIgnore()]
+        public Kistl.App.Base.Relation LeftOf
+        {
+            get
+            {
+                return LeftOf__Implementation__;
+            }
+            set
+            {
+                LeftOf__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        public System.Nullable<int> fk_LeftOf
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && LeftOf != null)
+                {
+                    _fk_LeftOf = LeftOf.ID;
+                }
+                return _fk_LeftOf;
+            }
+            set
+            {
+                _fk_LeftOf = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Relation_ObjectReferenceProperty_LeftPart", "B_Relation")]
+        public Kistl.App.Base.Relation__Implementation__ LeftOf__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>("Model.FK_Relation_ObjectReferenceProperty_LeftPart", "B_Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>("Model.FK_Relation_ObjectReferenceProperty_LeftPart", "B_Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.Relation__Implementation__)value;
             }
         }
         
@@ -133,6 +229,18 @@ namespace Kistl.App.Base
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(46).Constraints
                             .Where(c => !c.IsValid(this, this.ReferenceObjectClass))
                             .Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
+                            .ToArray());
+                case "RightOf":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(185).Constraints
+                            .Where(c => !c.IsValid(this, this.RightOf))
+                            .Select(c => c.GetErrorText(this, this.RightOf))
+                            .ToArray());
+                case "LeftOf":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(186).Constraints
+                            .Where(c => !c.IsValid(this, this.LeftOf))
+                            .Select(c => c.GetErrorText(this, this.LeftOf))
                             .ToArray());
             }
             return base.GetPropertyError(prop);

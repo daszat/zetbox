@@ -179,6 +179,7 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
+        [Ignore("Case 634")]
         public void GetListWithOrderByThenOrderBy()
         {
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())

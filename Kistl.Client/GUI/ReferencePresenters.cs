@@ -255,25 +255,25 @@ namespace Kistl.GUI
 
     }
 
-    public class BackReferencePresenter<T>
-        : ListPresenter<T, BackReferenceProperty>
-        where T : IDataObject
-    {
-        protected override IList<T> GetPropertyValue()
-        {
-            return Object.GetList<T>(Property);
-        }
+    //public class BackReferencePresenter<T>
+    //    : ListPresenter<T, BackReferenceProperty>
+    //    where T : IDataObject
+    //{
+    //    protected override IList<T> GetPropertyValue()
+    //    {
+    //        return Object.GetList<T>(Property);
+    //    }
 
-        // obsolete?
-        private void Control_UserAddRequest(object sender, EventArgs e)
-        {
-            IDataObject toAdd = GuiApplicationContext.Current.Renderer.ChooseObject(Object.Context, Control.ObjectType, String.Format("Choose {0} to add", Control.ObjectType.Name));
-            if (toAdd == null)
-                return;
-            toAdd.SetPropertyValue(Property.ReferenceProperty, Object.ID);
-        }
+    //    // obsolete?
+    //    private void Control_UserAddRequest(object sender, EventArgs e)
+    //    {
+    //        IDataObject toAdd = GuiApplicationContext.Current.Renderer.ChooseObject(Object.Context, Control.ObjectType, String.Format("Choose {0} to add", Control.ObjectType.Name));
+    //        if (toAdd == null)
+    //            return;
+    //        toAdd.SetPropertyValue(Property.ReferenceProperty, Object.ID);
+    //    }
 
-    }
+    //}
 
 
     public class ObjectListPresenter<T>

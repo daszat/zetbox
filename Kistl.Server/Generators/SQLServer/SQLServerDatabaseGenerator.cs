@@ -77,7 +77,7 @@ namespace Kistl.Server.Generators.SQLServer
                 CreateFKConstraint(objClass.BaseObjectClass, objClass, "ID");
             }
 
-            foreach (Property p in objClass.Properties.OfType<Property>())
+            foreach (Property p in objClass.Properties.OfType<Property>().ToList().Where(p => p.HasStorage()))
             {
                 if (p.IsList)
                 {
@@ -148,7 +148,7 @@ namespace Kistl.Server.Generators.SQLServer
 
         private void CheckTableProperties(ObjectClass classToCheck, DataType obj, string parentPropertyName)
         {
-            foreach (Property p in obj.Properties.OfType<Property>().Where(p => p.IsList == false))
+            foreach (Property p in obj.Properties.OfType<Property>().ToList().Where(p => p.IsList == false && p.HasStorage()))
             {
                 if (p is StructProperty)
                 {
@@ -242,7 +242,7 @@ namespace Kistl.Server.Generators.SQLServer
             #endregion
 
             #region Create/Update List Properties
-            foreach (Property p in objClass.Properties.OfType<Property>().Where(p => p.IsList))
+            foreach (Property p in objClass.Properties.OfType<Property>().ToList().Where(p => p.IsList && p.HasStorage()))
             {
                 cmd = new SqlCommand("select dbo.fn_TableExists(@t)", db, tx);
                 cmd.Parameters.AddWithValue("@t", Generator.GetDatabaseTableName(p));

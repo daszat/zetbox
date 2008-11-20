@@ -53,7 +53,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_ObjectClass = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_ObjectClass != value.ID && fk_ObjectClass != null) value.Methods.Remove(this);
+                    fk_ObjectClass = value.ID;
+                    if (!value.Methods.Contains(this)) value.Methods.Add(this);
+                }
+                else
+                {
+                    if (ObjectClass != null && ObjectClass.Methods.Contains(this)) ObjectClass.Methods.Remove(this);
+                    fk_ObjectClass = null;
+                };
             }
         }
         
@@ -328,7 +339,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_ObjectClass, sr);
             BinarySerializer.FromBinary(out this._MethodName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
-            this._Parameter = new BackReferenceCollection<Kistl.App.Base.BaseParameter>("Method", this); BinarySerializer.FromBinary(this._Parameter, sr);
             BinarySerializer.FromBinary(out this._IsDisplayable, sr);
             BinarySerializer.FromBinary(out this._Description, sr);
         }

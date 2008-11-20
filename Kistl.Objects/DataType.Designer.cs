@@ -28,24 +28,6 @@ namespace Kistl.App.Base
     {
         
         /// <summary>
-        /// Modul der Objektklasse
-        /// </summary>
-        Kistl.App.Base.Module Module
-        {
-            get;
-            set;
-        }
-        
-        /// <summary>
-        /// Der Name der Objektklasse
-        /// </summary>
-        string ClassName
-        {
-            get;
-            set;
-        }
-        
-        /// <summary>
         /// Eigenschaften der Objektklasse
         /// </summary>
         ICollection<Kistl.App.Base.BaseProperty> Properties
@@ -62,9 +44,9 @@ namespace Kistl.App.Base
         }
         
         /// <summary>
-        /// Standard Icon wenn IIcon nicht implementiert ist
+        /// Modul der Objektklasse
         /// </summary>
-        Kistl.App.GUI.Icon DefaultIcon
+        Kistl.App.Base.Module Module
         {
             get;
             set;
@@ -76,6 +58,24 @@ namespace Kistl.App.Base
         ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get;
+        }
+        
+        /// <summary>
+        /// Der Name der Objektklasse
+        /// </summary>
+        string ClassName
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// Standard Icon wenn IIcon nicht implementiert ist
+        /// </summary>
+        Kistl.App.GUI.Icon DefaultIcon
+        {
+            get;
+            set;
         }
         
         /// <summary>
