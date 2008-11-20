@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_Method != value.ID && fk_Method != null) value.MethodInvokations.Remove(this);
+                    if (fk_Method != value.ID && fk_Method != null) Method.MethodInvokations.Remove(this);
                     fk_Method = value.ID;
                     if (!value.MethodInvokations.Contains(this)) value.MethodInvokations.Add(this);
                 }
@@ -197,7 +197,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_InvokeOnObjectClass != value.ID && fk_InvokeOnObjectClass != null) value.MethodInvocations.Remove(this);
+                    if (fk_InvokeOnObjectClass != value.ID && fk_InvokeOnObjectClass != null) InvokeOnObjectClass.MethodInvocations.Remove(this);
                     fk_InvokeOnObjectClass = value.ID;
                     if (!value.MethodInvocations.Contains(this)) value.MethodInvocations.Add(this);
                 }

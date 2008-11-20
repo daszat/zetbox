@@ -50,7 +50,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_Enumeration != value.ID && fk_Enumeration != null) value.EnumerationEntries.Remove(this);
+                    if (fk_Enumeration != value.ID && fk_Enumeration != null) Enumeration.EnumerationEntries.Remove(this);
                     fk_Enumeration = value.ID;
                     if (!value.EnumerationEntries.Contains(this)) value.EnumerationEntries.Add(this);
                 }

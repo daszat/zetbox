@@ -360,6 +360,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Interface Value
         {
             get
@@ -373,6 +374,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.ObjectClass Parent
         {
             get

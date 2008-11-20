@@ -335,6 +335,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Mitarbeiter Value
         {
             get
@@ -348,6 +349,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Projekt Parent
         {
             get

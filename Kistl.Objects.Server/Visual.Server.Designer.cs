@@ -379,6 +379,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Value
         {
             get
@@ -392,6 +393,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Parent
         {
             get
@@ -509,6 +511,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Value
         {
             get
@@ -522,6 +525,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Parent
         {
             get

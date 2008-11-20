@@ -294,15 +294,19 @@ namespace Kistl.App.Projekte
         private int _fk_Parent;
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Mitarbeiter Value
         {
             get
             {
-                return Context.GetQuery<Kistl.App.Projekte.Mitarbeiter>().Single(o => o.ID == fk_Value);
+                return Context != null && fk_Value != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Kistl.App.Projekte.Mitarbeiter>().Single(o => o.ID == fk_Value) : null;
             }
             set
             {
-                fk_Value = value.ID;;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Context != null && fk_Value != value.ID && fk_Value != Kistl.API.Helper.INVALIDID) Value.Projekte.Remove(Parent);
+                fk_Value = value.ID;
+                if (Context != null && !value.Projekte.Contains(Parent)) value.Projekte.Add(Parent);
             }
         }
         
@@ -312,7 +316,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return Context.GetQuery<Projekt>().Single(o => o.ID == fk_Parent);
+                return Context != null && fk_Parent != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Projekt>().Single(o => o.ID == fk_Parent) : null;
             }
             set
             {

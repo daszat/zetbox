@@ -282,24 +282,26 @@ namespace Kistl.App.GUI
         private int _fk_Parent;
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Value
         {
             get
             {
-                return Context.GetQuery<Kistl.App.GUI.Visual>().Single(o => o.ID == fk_Value);
+                return Context != null && fk_Value != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Kistl.App.GUI.Visual>().Single(o => o.ID == fk_Value) : null;
             }
             set
             {
-                fk_Value = value.ID;;
+                fk_Value = value.ID;
             }
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Parent
         {
             get
             {
-                return Context.GetQuery<Visual>().Single(o => o.ID == fk_Parent);
+                return Context != null && fk_Parent != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Visual>().Single(o => o.ID == fk_Parent) : null;
             }
             set
             {
@@ -366,24 +368,26 @@ namespace Kistl.App.GUI
         private int _fk_Parent;
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Value
         {
             get
             {
-                return Context.GetQuery<Kistl.App.GUI.Visual>().Single(o => o.ID == fk_Value);
+                return Context != null && fk_Value != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Kistl.App.GUI.Visual>().Single(o => o.ID == fk_Value) : null;
             }
             set
             {
-                fk_Value = value.ID;;
+                fk_Value = value.ID;
             }
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual Parent
         {
             get
             {
-                return Context.GetQuery<Visual>().Single(o => o.ID == fk_Parent);
+                return Context != null && fk_Parent != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Visual>().Single(o => o.ID == fk_Parent) : null;
             }
             set
             {

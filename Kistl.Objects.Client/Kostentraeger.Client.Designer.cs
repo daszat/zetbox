@@ -44,7 +44,7 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_Projekt != value.ID && fk_Projekt != null) value.Kostentraeger.Remove(this);
+                    if (fk_Projekt != value.ID && fk_Projekt != null) Projekt.Kostentraeger.Remove(this);
                     fk_Projekt = value.ID;
                     if (!value.Kostentraeger.Contains(this)) value.Kostentraeger.Add(this);
                 }

@@ -96,7 +96,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_Module != value.ID && fk_Module != null) value.DataTypes.Remove(this);
+                    if (fk_Module != value.ID && fk_Module != null) Module.DataTypes.Remove(this);
                     fk_Module = value.ID;
                     if (!value.DataTypes.Contains(this)) value.DataTypes.Add(this);
                 }

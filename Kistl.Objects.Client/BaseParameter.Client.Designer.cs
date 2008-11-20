@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_Method != value.ID && fk_Method != null) value.Parameter.Remove(this);
+                    if (fk_Method != value.ID && fk_Method != null) Method.Parameter.Remove(this);
                     fk_Method = value.ID;
                     if (!value.Parameter.Contains(this)) value.Parameter.Add(this);
                 }

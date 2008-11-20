@@ -52,7 +52,7 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_Projekt != value.ID && fk_Projekt != null) value.Auftraege.Remove(this);
+                    if (fk_Projekt != value.ID && fk_Projekt != null) Projekt.Auftraege.Remove(this);
                     fk_Projekt = value.ID;
                     if (!value.Auftraege.Contains(this)) value.Auftraege.Add(this);
                 }

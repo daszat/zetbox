@@ -277,6 +277,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Mitarbeiter Value
         {
             get
@@ -290,6 +291,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Zeiterfassung.Zeitkonto Parent
         {
             get

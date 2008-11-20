@@ -46,7 +46,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_ConstrainedProperty != value.ID && fk_ConstrainedProperty != null) value.Constraints.Remove(this);
+                    if (fk_ConstrainedProperty != value.ID && fk_ConstrainedProperty != null) ConstrainedProperty.Constraints.Remove(this);
                     fk_ConstrainedProperty = value.ID;
                     if (!value.Constraints.Contains(this)) value.Constraints.Add(this);
                 }

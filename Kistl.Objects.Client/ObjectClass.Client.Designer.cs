@@ -73,7 +73,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_BaseObjectClass != value.ID && fk_BaseObjectClass != null) value.SubClasses.Remove(this);
+                    if (fk_BaseObjectClass != value.ID && fk_BaseObjectClass != null) BaseObjectClass.SubClasses.Remove(this);
                     fk_BaseObjectClass = value.ID;
                     if (!value.SubClasses.Contains(this)) value.SubClasses.Add(this);
                 }
@@ -328,24 +328,26 @@ namespace Kistl.App.Base
         private int _fk_Parent;
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Interface Value
         {
             get
             {
-                return Context.GetQuery<Kistl.App.Base.Interface>().Single(o => o.ID == fk_Value);
+                return Context != null && fk_Value != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Kistl.App.Base.Interface>().Single(o => o.ID == fk_Value) : null;
             }
             set
             {
-                fk_Value = value.ID;;
+                fk_Value = value.ID;
             }
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.ObjectClass Parent
         {
             get
             {
-                return Context.GetQuery<ObjectClass>().Single(o => o.ID == fk_Parent);
+                return Context != null && fk_Parent != Kistl.API.Helper.INVALIDID ? Context.GetQuery<ObjectClass>().Single(o => o.ID == fk_Parent) : null;
             }
             set
             {

@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_ObjectClass != value.ID && fk_ObjectClass != null) value.Properties.Remove(this);
+                    if (fk_ObjectClass != value.ID && fk_ObjectClass != null) ObjectClass.Properties.Remove(this);
                     fk_ObjectClass = value.ID;
                     if (!value.Properties.Contains(this)) value.Properties.Add(this);
                 }

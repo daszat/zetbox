@@ -52,7 +52,7 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null)
                 {
-                    if (fk_Zeitkonto != value.ID && fk_Zeitkonto != null) value.Taetigkeiten.Remove(this);
+                    if (fk_Zeitkonto != value.ID && fk_Zeitkonto != null) Zeitkonto.Taetigkeiten.Remove(this);
                     fk_Zeitkonto = value.ID;
                     if (!value.Taetigkeiten.Contains(this)) value.Taetigkeiten.Add(this);
                 }
