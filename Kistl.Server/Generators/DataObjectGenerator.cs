@@ -289,7 +289,7 @@ namespace Kistl.Server.Generators
                     constructor.Statements.AddExpression("{{var obj = this.Find<{0}>({1})", objClassTypeString, obj.ID);
                     while (objClass != null)
                     {
-                        foreach (ObjectReferenceProperty prop in objClass.Properties.OfType<ObjectReferenceProperty>())
+                        foreach (ObjectReferenceProperty prop in objClass.Properties.OfType<ObjectReferenceProperty>().ToList().Where(p => p.HasStorage()))
                         {
                             object val;
                             try
