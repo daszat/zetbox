@@ -7,6 +7,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.Client.Presentables;
 using Kistl.Client.WPF.View;
+using System.Windows;
 
 namespace Kistl.Client.WPF
 {
@@ -26,7 +27,6 @@ namespace Kistl.Client.WPF
 
     }
 
-
     public class WpfModelFactory : ModelFactory
     {
         public WpfModelFactory(IGuiApplicationContext appCtx)
@@ -35,7 +35,7 @@ namespace Kistl.Client.WPF
         }
 
         private static WorkspaceModel _mdl;
-        protected override void CreateWorkspace(WorkspaceModel mdl, bool activate)
+        protected void CreateWorkspace(WorkspaceModel mdl, bool activate)
         {
             _mdl = mdl;
             var workspace = new WorkspaceView(); // TODO: delegate to data store / TypeDescriptor
@@ -44,7 +44,7 @@ namespace Kistl.Client.WPF
             workspace.Show();
         }
 
-        protected override void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel, bool activate)
+        protected void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel, bool activate)
         {
             var selectionDialog = new SelectionDialog(); // TODO: delegate to data store / TypeDescriptor
             selectionDialog.DataContext = selectionTaskModel;
@@ -53,12 +53,27 @@ namespace Kistl.Client.WPF
         }
 
 
-        protected override void ShowDataObject(DataObjectModel dataObject, bool activate)
+        protected void ShowDataObject(DataObjectModel dataObject, bool activate)
         {
             _mdl.HistoryTouch(dataObject);
             if (activate)
                 _mdl.SelectedItem = dataObject;
         }
+
+        protected override Kistl.App.GUI.Toolkit Toolkit
+        {
+            get { return Kistl.App.GUI.Toolkit.WPF; }
+        }
+
+        protected override void ShowInView(object renderer, PresentableModel mdl, object view, bool activate)
+        {
+            var viewControl = (Window)view;
+            viewControl.DataContext = mdl;
+            viewControl.ShowActivated = activate;
+            viewControl.Show();
+        }
+
+        protected override object Renderer { get { return null; } }
     }
 
 }

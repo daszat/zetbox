@@ -30,6 +30,10 @@ namespace Kistl.Client
         /// </summary>
         ModelFactory Factory { get; }
 
+        ///// <summary>
+        ///// This context's <see cref="Toolkit"/>
+        ///// </summary>
+        //Toolkit Toolkit { get; }
 
         /// <summary>
         /// A <see cref="IThreadManager"/> for the UI Thread
@@ -40,6 +44,9 @@ namespace Kistl.Client
         /// </summary>
         IThreadManager AsyncThread { get; }
 
+        /// <summary>
+        /// The configuration of this context
+        /// </summary>
         KistlConfig Configuration { get; }
     }
 
@@ -56,7 +63,7 @@ namespace Kistl.Client
         /// Zum Zeitpunkt des Aufrufs des Constructors könnte 
         /// aber der Assembly Resolver noch nicht initialisiert 
         /// sein (z.B. sie werden in der gleichen Methode ausgeführt).</param>
-        public GuiApplicationContext(KistlConfig config, string tk)
+        public GuiApplicationContext(KistlConfig config, string tkName)
             : base(config)
         {
             GuiApplicationContext.Current = this;
@@ -64,9 +71,10 @@ namespace Kistl.Client
 
             // this.Renderer = KistlGUIContext.CreateRenderer(tk);
 
+            Toolkit tk = (Toolkit)Enum.Parse(typeof(Toolkit), tkName, true);
             // TODO: replace by fetching TypeDescriptors from the Store
             //       via the GuiDataContext
-            switch ((Toolkit)Enum.Parse(typeof(Toolkit), tk, true))
+            switch (tk)
             {
                 case Toolkit.WPF:
                     UiThread = new SynchronousThreadManager();
@@ -78,8 +86,10 @@ namespace Kistl.Client
                       );
                     break;
                 case Toolkit.TEST:
-                    UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
-                    AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
+                    //UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
+                    //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
+                    UiThread = new SynchronousThreadManager();
+                    AsyncThread = new SynchronousThreadManager();
 
                     Factory = (ModelFactory)Activator.CreateInstance(
                         Type.GetType("Kistl.Client.Forms.FormsModelFactory, Kistl.Client.Forms", true),
@@ -126,5 +136,6 @@ namespace Kistl.Client
         /// A <see cref="IThreadManager"/> for asynchronous Tasks
         /// </summary>
         public IThreadManager AsyncThread { get; private set; }
+
     }
 }

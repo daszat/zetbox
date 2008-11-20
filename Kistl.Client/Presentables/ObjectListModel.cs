@@ -11,7 +11,7 @@ using Kistl.App.Base;
 namespace Kistl.Client.Presentables
 {
     public class ObjectListModel
-        : PropertyModel<ICollection<DataObjectModel>>, IValueModel<ReadOnlyObservableCollection<DataObjectModel>>
+        : PropertyModel<ICollection<DataObjectModel>>, IReadOnlyValueModel<ReadOnlyObservableCollection<DataObjectModel>>
     {
 
         public ObjectListModel(

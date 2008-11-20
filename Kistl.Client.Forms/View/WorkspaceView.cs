@@ -10,7 +10,7 @@ using Kistl.Client.Presentables;
 
 namespace Kistl.Client.Forms.View
 {
-    public partial class WorkspaceView : Form
+    public partial class WorkspaceView : Form, IFormsView
     {
         private WorkspaceModel _dataContextCache;
         public WorkspaceModel DataContext
@@ -46,9 +46,7 @@ namespace Kistl.Client.Forms.View
                     label1.Text = _dataContextCache.SelectedItem.ToString();
                     // TODO: dispose cleared controls
                     _viewPanel.Controls.Clear();
-                    var view = CreateFullView();
-                    view.Dock = DockStyle.Fill;
-                    _viewPanel.Controls.Add(view);
+                    Renderer.ShowModel(DataContext.SelectedItem, _viewPanel);
                 }
             }
         }
@@ -173,5 +171,20 @@ namespace Kistl.Client.Forms.View
                 _dataContextCache.SelectedItem = null;
             }
         }
+
+        #region IFormsView Members
+
+        void IFormsView.SetDataContext(INotifyPropertyChanged mdl)
+        {
+            this.DataContext = (WorkspaceModel)mdl;
+        }
+
+        internal Renderer Renderer { get; private set; }
+        void IFormsView.SetRenderer(Renderer r)
+        {
+            Renderer = r;
+        }
+
+        #endregion
     }
 }

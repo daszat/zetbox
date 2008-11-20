@@ -64,7 +64,7 @@ namespace Kistl.Client.WPF
                 serverDomain.Start(config);
             }
 
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config); 
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
             AppContext = new GuiApplicationContext(config, "WPF");
 
             return result;
@@ -80,8 +80,8 @@ namespace Kistl.Client.WPF
             {
                 HandleCommandline(e.Args);
 
-                FixNotNullableConstraints();
-                
+                //FixNotNullableConstraints();
+
                 var initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
                 AppContext.Factory.ShowModel(initialWorkspace, true);
             }

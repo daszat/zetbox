@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C701ED04-08B2-4ABA-B2D3-33502690C8DA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -64,8 +64,24 @@
       <DependentUpon>DataObjectFullView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\DataObjectReferenceView.resx">
+      <DependentUpon>DataObjectReferenceView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\NullablePropertyTextBoxView.resx">
+      <DependentUpon>NullablePropertyTextBoxView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PropertyTextBoxView.resx">
+      <DependentUpon>PropertyTextBoxView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\WorkspaceView.resx">
       <DependentUpon>WorkspaceView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DataObjectListView.resx">
+      <DependentUpon>DataObjectListView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -82,17 +98,52 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Renderer.cs" />
     <Compile Include="View\DataObjectFullView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\DataObjectFullView.Designer.cs">
       <DependentUpon>DataObjectFullView.cs</DependentUpon>
     </Compile>
+    <Compile Include="IFormsView.cs" />
+    <Compile Include="View\DataObjectReferenceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\DataObjectReferenceView.Designer.cs">
+      <DependentUpon>DataObjectReferenceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\FormsValueControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\FormsValueControl.Designer.cs">
+      <DependentUpon>FormsValueControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\NullablePropertyTextBoxView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\NullablePropertyTextBoxView.Designer.cs">
+      <DependentUpon>NullablePropertyTextBoxView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PropertyTextBoxView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\PropertyTextBoxView.Designer.cs">
+      <DependentUpon>PropertyTextBoxView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\WorkspaceView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\WorkspaceView.Designer.cs">
       <DependentUpon>WorkspaceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DataObjectListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\DataObjectListView.Designer.cs">
+      <DependentUpon>DataObjectListView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

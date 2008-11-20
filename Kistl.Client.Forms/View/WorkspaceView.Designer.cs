@@ -33,8 +33,6 @@ namespace Kistl.Client.Forms.View
             this._instancesList = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
             this._viewPanel = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this._viewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // _moduleList
@@ -83,20 +81,10 @@ namespace Kistl.Client.Forms.View
             this._viewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this._viewPanel.Controls.Add(this.label2);
             this._viewPanel.Location = new System.Drawing.Point(248, 28);
             this._viewPanel.Name = "_viewPanel";
             this._viewPanel.Size = new System.Drawing.Size(392, 445);
             this._viewPanel.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(214, 172);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "label2";
             // 
             // WorkspaceView
             // 
@@ -111,8 +99,6 @@ namespace Kistl.Client.Forms.View
             this.MinimumSize = new System.Drawing.Size(668, 521);
             this.Name = "WorkspaceView";
             this.Text = "WorkspaceView";
-            this._viewPanel.ResumeLayout(false);
-            this._viewPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,6 +111,5 @@ namespace Kistl.Client.Forms.View
         private System.Windows.Forms.ListView _instancesList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel _viewPanel;
-        private System.Windows.Forms.Label label2;
     }
 }

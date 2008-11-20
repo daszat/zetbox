@@ -10,7 +10,8 @@ using System.Diagnostics;
 
 namespace Kistl.Client.Presentables
 {
-    public interface IValueModel<TValue>
+    public interface IReadOnlyValueModel<TValue>
+        : INotifyPropertyChanged
     {
         /// <summary>
         /// Whether or not the property has a value. <seealso cref="IsNull"/>
@@ -36,6 +37,14 @@ namespace Kistl.Client.Presentables
         /// </summary>
         TValue Value { get; }
 
+    }
+    public interface IValueModel<TValue>
+        : IReadOnlyValueModel<TValue>, INotifyPropertyChanged
+    {
+        /// <summary>
+        /// The value of this model
+        /// </summary>
+        new TValue Value { get; set; }
     }
 
     public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.GUI;
+using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {
@@ -14,20 +16,34 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected IGuiApplicationContext AppContext { get; private set; }
 
+        protected abstract Toolkit Toolkit { get; }
+        protected abstract object Renderer { get; }
+
         protected ModelFactory(IGuiApplicationContext appCtx)
         {
             AppContext = appCtx;
             AppContext.UiThread.Verify();
         }
 
+        #region Model Management
+
         private ModelCache _cache = new ModelCache();
 
         public TModel CreateSpecificModel<TModel>(IKistlContext ctx, params object[] data)
             where TModel : PresentableModel
         {
-            // TODO: use data store to select proper type
             Type requestedType = typeof(TModel);
+            return (TModel)CreateModel(requestedType, ctx, data);
+        }
 
+        public PresentableModel CreateModel(ModelDescriptor desc, IKistlContext ctx, params object[] data)
+        {
+            Type requestedType = desc.Presentation.AsType();
+            return CreateModel(requestedType, ctx, data);
+        }
+
+        public PresentableModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
+        {
             // by convention, all presentable models take the IGuiApplicationContext
             // and a IKistlContext as first parameters
             object[] parameters = new object[] { AppContext, ctx }.Concat(data).ToArray();
@@ -40,32 +56,31 @@ namespace Kistl.Client.Presentables
                 _cache.StoreModel(parameters, result);
             }
 
-            return (TModel)result;
+            return result;
         }
+
+        #endregion
+
+        #region Top-Level Views Management
 
         public void ShowModel(PresentableModel mdl, bool activate)
         {
-            if (mdl is WorkspaceModel)
-            {
-                CreateWorkspace((WorkspaceModel)mdl, activate);
-            }
-            else if (mdl is DataObjectSelectionTaskModel)
-            {
-                CreateSelectionDialog((DataObjectSelectionTaskModel)mdl, activate);
-            }
-            else if (mdl is DataObjectModel)
-            {
-                ShowDataObject((DataObjectModel)mdl, activate);
-            }
-            else
-            {
-                throw new InvalidOperationException(String.Format("Cannot show object '{0}' of Type '{1}'", mdl, mdl.GetType()));
-            }
+            Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
+            ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
+            ShowInView(Renderer, mdl, vDesc.ViewRef.Create(),  activate);
         }
 
-        protected abstract void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel, bool activate);
-        protected abstract void CreateWorkspace(WorkspaceModel workspace, bool activate);
-        protected abstract void ShowDataObject(DataObjectModel dataObject, bool activate);
+        protected abstract void ShowInView(object renderer, PresentableModel mdl, object view, bool activate);
+
+        //public void ShowModel(PresentableModel mdl, TContainer parent)
+        //{
+        //    Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
+        //    ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
+        //    ShowInViewInContainer(vDesc.ViewRef.Create(), mdl, parent);
+        //}
+        //protected abstract void ShowInViewInContainer(PresentableModel mdl, TView view, TContainer parent);
+
+        #endregion
     }
 
     internal sealed class ModelCache

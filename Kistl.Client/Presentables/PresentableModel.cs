@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// The factory from where new models should be created
         /// </summary>
-        protected ModelFactory Factory { get { return AppContext.Factory; } }
+        public ModelFactory Factory { get { return AppContext.Factory; } }
 
         /// <summary>
         /// A <see cref="IKistlContext"/> to access the current user's data

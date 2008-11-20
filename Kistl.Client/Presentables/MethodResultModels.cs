@@ -103,7 +103,7 @@ namespace Kistl.Client.Presentables
     }
 
     public abstract class StructResultModel<TValue>
-        : MethodResultModel<TValue>, IValueModel<TValue>
+        : MethodResultModel<TValue>, IReadOnlyValueModel<TValue>
         where TValue : struct
     {
         public StructResultModel(
@@ -146,7 +146,7 @@ namespace Kistl.Client.Presentables
     }
 
     public abstract class NullableResultModel<TValue>
-        : MethodResultModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>
+        : MethodResultModel<Nullable<TValue>>, IReadOnlyValueModel<Nullable<TValue>>
         where TValue : struct
     {
         public NullableResultModel(
@@ -187,7 +187,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class ObjectResultModel<TValue>
-        : MethodResultModel<TValue>, IValueModel<TValue>
+        : MethodResultModel<TValue>, IReadOnlyValueModel<TValue>
         where TValue : class
     {
         public ObjectResultModel(

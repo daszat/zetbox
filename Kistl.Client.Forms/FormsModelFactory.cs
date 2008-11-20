@@ -19,12 +19,12 @@ namespace Kistl.Client.Forms
         {
         }
 
-        protected override void CreateSelectionDialog(DataObjectSelectionTaskModel selectionTaskModel, bool activate)
+        protected override Kistl.App.GUI.Toolkit Toolkit
         {
-            throw new NotImplementedException();
+            get { return Kistl.App.GUI.Toolkit.TEST; }
         }
 
-        protected override void CreateWorkspace(WorkspaceModel mdl, bool activate)
+        protected void CreateWorkspace(WorkspaceModel mdl, bool activate)
         {
             var workspace = new WorkspaceView(); // TODO: delegate to data store / TypeDescriptor
             workspace.DataContext = mdl;
@@ -40,9 +40,17 @@ namespace Kistl.Client.Forms
                 Application.Exit();
         }
 
-        protected override void ShowDataObject(DataObjectModel dataObject, bool activate)
+        protected override void ShowInView(object renderer, PresentableModel mdl, object view, bool activate)
         {
-            throw new NotImplementedException();
+            var control = (IFormsView)view;
+            control.SetRenderer((Renderer)renderer);
+            control.SetDataContext(mdl);
+            control.Show();
+            if (activate)
+                control.Activate();
         }
+
+        private Renderer _renderer = new Renderer();
+        protected override object Renderer { get { return _renderer; } }
     }
 }

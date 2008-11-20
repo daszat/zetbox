@@ -10,7 +10,7 @@ using Kistl.App.Base;
 namespace Kistl.Client.Presentables
 {
     public class BoolModel
-        : ValuePropertyModel<Boolean>
+        : ValuePropertyModel<Boolean>, IValueModel<string>
     {
         public BoolModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -19,10 +19,27 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+        
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = Boolean.Parse(value); }
+        }
+
+        #endregion
+
     }
 
     public class NullableBoolModel
-        : NullableValuePropertyModel<Boolean>
+        : NullableValuePropertyModel<Boolean>, IValueModel<string>
     {
         public NullableBoolModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -31,12 +48,29 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = Boolean.Parse(value); }
+        }
+
+        #endregion
+
     }
 
 
 
     public class DateTimeModel
-        : ValuePropertyModel<DateTime>
+        : ValuePropertyModel<DateTime>, IValueModel<string>
     {
         public DateTimeModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -45,10 +79,27 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = DateTime.Parse(value); }
+        }
+
+        #endregion
+
     }
 
     public class NullableDateTimeModel
-        : NullableValuePropertyModel<DateTime>
+        : NullableValuePropertyModel<DateTime>, IValueModel<string>
     {
         public NullableDateTimeModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -57,12 +108,29 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = DateTime.Parse(value); }
+        }
+
+        #endregion
+
     }
 
 
 
     public class DoubleModel
-              : ValuePropertyModel<Double>
+        : ValuePropertyModel<Double>, IValueModel<string>
     {
         public DoubleModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -71,10 +139,27 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = Double.Parse(value); }
+        }
+
+        #endregion
+
     }
 
     public class NullableDoubleModel
-        : NullableValuePropertyModel<Double>
+        : NullableValuePropertyModel<Double>, IValueModel<string>
     {
         public NullableDoubleModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -83,12 +168,29 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = Double.Parse(value); }
+        }
+
+        #endregion
+
     }
 
 
 
     public class IntModel
-        : ValuePropertyModel<int>
+        : ValuePropertyModel<int>, IValueModel<string>
     {
         public IntModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -97,10 +199,27 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(!prop.IsNullable, "cannot handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = int.Parse(value); }
+        }
+
+        #endregion
+
     }
 
     public class NullableIntModel
-        : NullableValuePropertyModel<int>
+        : NullableValuePropertyModel<int>, IValueModel<string>
     {
         public NullableIntModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -109,6 +228,23 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(prop.IsNullable, "can only handle nullable properties");
         }
+
+        #region IReadOnlyValueModel<string> Members
+
+        string IReadOnlyValueModel<string>.Value { get { return Value.ToString(); } }
+
+        #endregion
+
+        #region IValueModel<string> Members
+
+        string IValueModel<string>.Value
+        {
+            get { return Value.ToString(); }
+            set { Value = int.Parse(value); }
+        }
+
+        #endregion
+
     }
 
 

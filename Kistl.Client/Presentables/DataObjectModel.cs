@@ -9,6 +9,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.GUI;
+using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {
@@ -147,57 +148,11 @@ namespace Kistl.Client.Presentables
             UI.Verify();
             foreach (var pm in props)
             {
-                var prop = pm as Property;
-
-                if (pm is BoolProperty && !prop.IsList)
-                {
-                    if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateSpecificModel<NullableBoolModel>(DataContext, _object, (BoolProperty)pm));
-                    else
-                        PropertyModels.Add(Factory.CreateSpecificModel<BoolModel>(DataContext, _object, (BoolProperty)pm));
-                }
-                else if (pm is DateTimeProperty && !prop.IsList)
-                {
-                    if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateSpecificModel<NullableDateTimeModel>(DataContext, _object, (DateTimeProperty)pm));
-                    else
-                        PropertyModels.Add(Factory.CreateSpecificModel<DateTimeModel>(DataContext, _object, (DateTimeProperty)pm));
-                }
-                else if (pm is DoubleProperty && !prop.IsList)
-                {
-                    if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateSpecificModel<NullableDoubleModel>(DataContext, _object, (DoubleProperty)pm));
-                    else
-                        PropertyModels.Add(Factory.CreateSpecificModel<DoubleModel>(DataContext, _object, (DoubleProperty)pm));
-                }
-                else if (pm is IntProperty && !prop.IsList)
-                {
-                    if (prop.IsNullable)
-                        PropertyModels.Add(Factory.CreateSpecificModel<NullableIntModel>(DataContext, _object, (IntProperty)pm));
-                    else
-                        PropertyModels.Add(Factory.CreateSpecificModel<IntModel>(DataContext, _object, (IntProperty)pm));
-                }
-                else if (pm is StringProperty && !prop.IsList)
-                {
-                    PropertyModels.Add(Factory.CreateSpecificModel<StringModel>(DataContext, _object, (StringProperty)pm));
-                }
-                else if (pm is ObjectReferenceProperty)
-                {
-                    var orp = (ObjectReferenceProperty)pm;
-                    if (orp.IsList)
-                        PropertyModels.Add(Factory.CreateSpecificModel<ObjectListModel>(DataContext, _object, orp));
-                    else
-                        PropertyModels.Add(Factory.CreateSpecificModel<ObjectReferenceModel>(DataContext, _object, orp));
-                }
-                else if (pm is BackReferenceProperty)
-                {
-                    var brp = (BackReferenceProperty)pm;
-                    PropertyModels.Add(Factory.CreateSpecificModel<ObjectListModel>(DataContext, _object, brp));
-                }
-                else
-                {
-                    Console.Error.WriteLine("==>> No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
-                }
+                PropertyModels.Add(Factory
+                    .CreateModel(
+                        DataMocks.LookupDefaultPropertyModelDescriptor(pm),
+                        DataContext, 
+                        _object, pm));
             }
         }
 
