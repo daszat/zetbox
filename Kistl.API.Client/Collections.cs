@@ -50,11 +50,11 @@ namespace Kistl.API.Client
         {
             if (typeof(IEnumerable).IsAssignableFrom(item.GetPropertyType(_pointerProperty)))
             {
-                item.AddToCollection<IDataObject>(_pointerProperty, _parent, true);
+                item.AddToCollection<IDataObject>(_pointerProperty, val, true);
             }
             else
             {
-                item.SetPropertyValue<IDataObject>(_pointerProperty, _parent);
+                item.SetPropertyValue<IDataObject>(_pointerProperty, val);
             }
         }
 

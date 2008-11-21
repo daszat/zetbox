@@ -228,16 +228,12 @@ namespace Kistl.API.Client
             else
             {
                 // Check if Object is already in this Context
-                var attachedObj = ContainsObject(obj.GetType(), obj.ID) ?? obj;
-
-                if (attachedObj != obj)
+                var attachedObj = ContainsObject(obj.GetType(), obj.ID);
+                if (attachedObj != null)
                 {
                     // already attached, nothing to do
                     return attachedObj;
                 }
-
-                // proceed processing with cached object
-                obj = attachedObj;
 
                 // Check ID <-> newIDCounter
                 if (obj.ID < _newIDCounter)

@@ -13,7 +13,7 @@ using NUnit.Framework;
 
 namespace Kistl.GUI.Tests
 {
-    [TestFixture]
+    //[TestFixture]
     public partial class PresenterTests : MockeryTestFixture
     {
 

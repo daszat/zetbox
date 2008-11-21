@@ -230,13 +230,20 @@ namespace Kistl.API.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         internal T GetObjectCall<T>(Expression e)
         {
-            List<IDataObject> serviceResult = VisitAndCallService(e);
             List<T> result = new List<T>();
-            foreach (IDataObject obj in serviceResult)
-            {
-                result.Add((T)_context.Attach(obj));
-            }
             AddNewLocalObjects(_type, result);
+
+            // If nothing found or a List is expected -> goto Server
+            if (    result.Count == 0 ||
+                    e.IsMethodCallExpression("First") || 
+                    e.IsMethodCallExpression("FirstOrDefault"))
+            {
+                List<IDataObject> serviceResult = VisitAndCallService(e);
+                foreach (IDataObject obj in serviceResult)
+                {
+                    result.Add((T)_context.Attach(obj));
+                }
+            }
 
             if (e.IsMethodCallExpression("First"))
             {
