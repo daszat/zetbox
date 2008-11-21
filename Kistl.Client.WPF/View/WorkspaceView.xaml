@@ -43,6 +43,12 @@
                                 <view:DataObjectView />
                             </DataTemplate>
                         </TreeView.Resources>
+                        <!-- TODO: implement template selector which creates appropriate (hierarchical) 
+                                   Templates with appropriate contents (replace DataObjectView with DataObjectLineLayout)
+                        <TreeView.ItemTemplateSelector>
+                            <view:ModuleTreeTemplateSelector />
+                        </TreeView.ItemTemplateSelector>
+                        -->
                     </TreeView>
                 </DockPanel>
 
@@ -56,12 +62,8 @@
                          x:Name="ObjectList"
                          ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
                          SelectedItem="{Binding SelectedItem}"
+                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                          BorderThickness="0">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                            <view:DataObjectView  MouseDoubleClick="DataObjectActivated" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
                 </ListBox>
 
                 <GridSplitter Grid.Row="3"
@@ -72,6 +74,7 @@
                                HorizontalAlignment="Center">Recent Objects:</TextBlock>
                     <ListBox ItemsSource="{Binding RecentObjects}"
                              SelectedItem="{Binding SelectedItem}"
+                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                              BorderThickness="0" />
                 </DockPanel>
 
@@ -80,9 +83,10 @@
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
 
-            <view:DataObjectFullView Grid.Column="2"
-                                     Grid.IsSharedSizeScope="True"
-                                     DataContext="{Binding SelectedItem}" />
+            <ContentPresenter Grid.Column="2"
+                              Grid.IsSharedSizeScope="True"
+                              Content="{Binding SelectedItem}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </Grid>
     </DockPanel>
 </Window>

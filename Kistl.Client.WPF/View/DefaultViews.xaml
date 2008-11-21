@@ -5,48 +5,17 @@
                     xmlns:view="clr-namespace:Kistl.Client.WPF.View"
                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
 
-    <DataTemplate DataType="{x:Type client:DataObjectModel}">
-        <view:DataObjectView />
+    <DataTemplate x:Key="emptyTemplate">
+        <Viewbox Stretch="UniformToFill"
+                 StretchDirection="DownOnly">
+            <Ellipse Height="100"
+                     Width="100"
+                     StrokeThickness="10"
+                     Stroke="Red"
+                     Fill="White" />
+        </Viewbox>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type client:BoolModel}">
-        <view:PropertyTextBoxView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type client:NullableBoolModel}">
-        <view:NullablePropertyTextBoxView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type client:DateTimeModel}">
-        <view:PropertyTextBoxView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type client:NullableDateTimeModel}">
-        <view:NullablePropertyTextBoxView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type client:DoubleModel}">
-        <view:PropertyTextBoxView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type client:NullableDoubleModel}">
-        <view:NullablePropertyTextBoxView />
-    </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type client:IntModel}">
-        <view:PropertyTextBoxView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type client:NullableIntModel}">
-        <view:NullablePropertyTextBoxView />
-    </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type client:StringModel}">
-        <view:NullablePropertyTextBoxView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type client:ObjectReferenceModel}">
-        <view:ObjectReferenceView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type client:ObjectListModel}">
-        <view:ObjectListView />
-    </DataTemplate>
-
+    <view:DefaultTemplateSelector x:Key="defaultTemplateSelector" />
+    <view:ListItemTemplateSelector x:Key="listItemTemplateSelector" />
 </ResourceDictionary>

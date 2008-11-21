@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using Kistl.Client.Presentables;
+using Kistl.Client.GUI.DB;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.WPF.View
 {
@@ -45,4 +47,5 @@ namespace Kistl.Client.WPF.View
             }
         }
     }
+
 }

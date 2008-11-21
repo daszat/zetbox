@@ -17,12 +17,12 @@ using Kistl.Client.Presentables;
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
-    /// Interaction logic for ObjectListView.xaml
+    /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    public partial class ObjectListView : UserControl
+    public partial class DataObjectListView : UserControl
     {
 
-        public ObjectListView()
+        public DataObjectListView()
         {
             InitializeComponent();
         }

@@ -10,6 +10,7 @@
                    DockPanel.Dock="Top"
                    HorizontalAlignment="Center" />
         <ListView ItemsSource="{Binding PropertyModels}"
-                  BorderThickness="0" />
+                  BorderThickness="0" 
+                  ItemTemplateSelector="{StaticResource defaultTemplateSelector}"/>
     </DockPanel>
 </UserControl>

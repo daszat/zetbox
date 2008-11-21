@@ -22,7 +22,7 @@
         <DockPanel Grid.Column="1">
             <CheckBox DockPanel.Dock="Left"
                       VerticalAlignment="Center"
-                      IsChecked="{Binding HasValue}" />
+                      IsChecked="{Binding HasValue, Mode=OneWay}" />
             <kevin:InfoTextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                                TextBoxInfo="{Binding ToolTip}" />
         </DockPanel>

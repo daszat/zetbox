@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.ObjectListView"
+﻿<UserControl x:Class="Kistl.Client.WPF.View.DataObjectListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
@@ -29,12 +29,8 @@
         <ListView Grid.Column="1"
                   ItemsSource="{Binding Value, Mode=OneWay}"
                   SelectedItem="{Binding SelectedItem}"
-                  MaxHeight="300">
-            <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                    <view:DataObjectView MouseDoubleClick="ItemActivatedHandler" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                  MaxHeight="300"
+                  MouseDoubleClick="ItemActivatedHandler" />
     </Grid>
 </UserControl>

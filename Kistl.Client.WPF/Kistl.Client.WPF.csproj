@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2C899579-BF78-442B-8810-8C7E7A2CA212}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -158,9 +158,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ObjectListView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\DataObjectListView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Renderer.WPF\ObjectReferenceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -269,7 +269,6 @@
     <Compile Include="DesktopTreeView.xaml.cs">
       <DependentUpon>DesktopTreeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Renderer.cs" />
     <Compile Include="Renderer.WPF\ActionControl.cs" />
     <Compile Include="Renderer.WPF\EditBoolProperty.xaml.cs">
       <DependentUpon>EditBoolProperty.xaml</DependentUpon>
@@ -305,9 +304,11 @@
     <Compile Include="Renderer.WPF\KistlMenuItem.xaml.cs">
       <DependentUpon>KistlMenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ObjectListView.xaml.cs">
-      <DependentUpon>ObjectListView.xaml</DependentUpon>
+    <Compile Include="View\DataObjectListView.xaml.cs">
+      <DependentUpon>DataObjectListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DefaultTemplateSelector.cs" />
+    <Compile Include="View\ListItemTemplateSelector.cs" />
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
       <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>
     </Compile>
@@ -360,6 +361,7 @@
     <Compile Include="View\PropertyTextBoxView.xaml.cs">
       <DependentUpon>PropertyTextBoxView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WpfModelFactory.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

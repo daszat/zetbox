@@ -317,6 +317,10 @@ namespace Kistl.Client.GUI.DB
             {
                 return LookupDefaultPropertyModelDescriptor((BaseProperty)obj);
             }
+            else if (obj is Module)
+            {
+                return new ModelDescriptor(new TypeRef(typeof(ModuleModel)));
+            }
 
             throw new NotImplementedException(String.Format("==>> No model for object: '{0}' of Type '{1}'", obj, obj.GetType()));
         }

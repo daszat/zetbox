@@ -6,6 +6,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {
@@ -17,8 +18,7 @@ namespace Kistl.Client.Presentables
             Modules = new ObservableCollection<ModuleModel>();
             RecentObjects = new ObservableCollection<DataObjectModel>();
 
-
-            Async.Queue(DataContext, () => { AsyncLoadModules(); UI.Queue(UI, () => this.State = ModelState.Active); });
+            Async.Queue(DataContext, AsyncLoadModules);
         }
 
         #region Public interface
@@ -102,7 +102,10 @@ namespace Kistl.Client.Presentables
             {
                 foreach (var m in modules)
                 {
-                    Modules.Add(Factory.CreateSpecificModel<ModuleModel>(DataContext, m));
+                    Modules.Add((ModuleModel)Factory
+                        .CreateModel(
+                            DataMocks.LookupDefaultModelDescriptor(m),
+                            DataContext, m));
                 }
                 State = ModelState.Active;
             });

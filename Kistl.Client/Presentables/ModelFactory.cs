@@ -19,6 +19,9 @@ namespace Kistl.Client.Presentables
         protected abstract Toolkit Toolkit { get; }
         protected abstract object Renderer { get; }
 
+        protected WorkspaceModel Workspace { get; private set; }
+        protected virtual void OnWorkspaceCreated() { }
+
         protected ModelFactory(IGuiApplicationContext appCtx)
         {
             AppContext = appCtx;
@@ -56,6 +59,13 @@ namespace Kistl.Client.Presentables
                 _cache.StoreModel(parameters, result);
             }
 
+            // save first workspace
+            if (typeof(WorkspaceModel).IsAssignableFrom(requestedType) && this.Workspace == null)
+            {
+                this.Workspace = (WorkspaceModel)result;
+                OnWorkspaceCreated();
+            }
+
             return result;
         }
 
@@ -67,7 +77,14 @@ namespace Kistl.Client.Presentables
         {
             Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
             ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
-            ShowInView(Renderer, mdl, vDesc.ViewRef.Create(),  activate);
+            if (mdl is DataObjectModel)
+            {
+                Workspace.SelectedItem = (DataObjectModel)mdl;
+            }
+            else
+            {
+                ShowInView(Renderer, mdl, vDesc.ViewRef.Create(), activate);
+            }
         }
 
         protected abstract void ShowInView(object renderer, PresentableModel mdl, object view, bool activate);

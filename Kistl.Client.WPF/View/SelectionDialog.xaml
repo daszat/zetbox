@@ -22,6 +22,7 @@
         </UniformGrid>
         <ListBox x:Name="choicesList"
                  ItemsSource="{Binding Choices}"
+                 ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                  Style="{StaticResource addedMargins}" />
     </DockPanel>
 </Window>
