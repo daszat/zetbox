@@ -102,50 +102,7 @@ namespace Kistl.Client.Presentables
 
     }
 
-    public abstract class StructResultModel<TValue>
-        : MethodResultModel<TValue>, IReadOnlyValueModel<TValue>
-        where TValue : struct
-    {
-        public StructResultModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IDataObject obj, Method m)
-            : base(appCtx, dataCtx, obj, m)
-        {
-        }
-
-
-        /// <summary>
-        /// Whether or not the method returned a value. <seealso cref="IsNull"/>
-        /// </summary>
-        public bool HasValue { get { UI.Verify(); return true; } }
-
-        /// <summary>
-        /// Whether or not the method returned null. <seealso cref="HasValue"/>
-        /// </summary>
-        public bool IsNull { get { UI.Verify(); return false; } }
-
-
-        private TValue _valueCache;
-
-        /// <summary>
-        /// The value of the property presented by this model
-        /// </summary>
-        public override TValue Value
-        {
-            get { UI.Verify(); return _valueCache; }
-            protected set
-            {
-                UI.Verify();
-                if (!_valueCache.Equals(value))
-                {
-                    _valueCache = value;
-                    Async.Queue(DataContext, AsyncOnResultChanged);
-                }
-            }
-        }
-    }
-
-    public abstract class NullableResultModel<TValue>
+    public class NullableResultModel<TValue>
         : MethodResultModel<Nullable<TValue>>, IReadOnlyValueModel<Nullable<TValue>>
         where TValue : struct
     {

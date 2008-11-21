@@ -179,20 +179,10 @@ namespace Kistl.Client.GUI.DB
                 {
                     _defaultLayoutsCache = new Dictionary<Type, Layout>();
 
-                    AddLayoutCacheEntry(new SimpleValueLayout<Boolean>() { SourceModelType = typeof(ValuePropertyModel<Boolean>) });
-                    AddLayoutCacheEntry(new SimpleValueLayout<DateTime>() { SourceModelType = typeof(ValuePropertyModel<DateTime>) });
-                    AddLayoutCacheEntry(new SimpleValueLayout<Double>() { SourceModelType = typeof(ValuePropertyModel<Double>) });
-                    AddLayoutCacheEntry(new SimpleValueLayout<int>() { SourceModelType = typeof(ValuePropertyModel<int>) });
-
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<Boolean>() { SourceModelType = typeof(NullableValuePropertyModel<Boolean>), AllowNullInput = true });
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<DateTime>() { SourceModelType = typeof(NullableValuePropertyModel<DateTime>), AllowNullInput = true });
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<Double>() { SourceModelType = typeof(NullableValuePropertyModel<Double>), AllowNullInput = true });
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<int>() { SourceModelType = typeof(NullableValuePropertyModel<int>), AllowNullInput = true });
-
-                    AddLayoutCacheEntry(new SimpleValueLayout<Boolean>() { SourceModelType = typeof(StructResultModel<Boolean>) });
-                    AddLayoutCacheEntry(new SimpleValueLayout<DateTime>() { SourceModelType = typeof(StructResultModel<DateTime>) });
-                    AddLayoutCacheEntry(new SimpleValueLayout<Double>() { SourceModelType = typeof(StructResultModel<Double>) });
-                    AddLayoutCacheEntry(new SimpleValueLayout<int>() { SourceModelType = typeof(StructResultModel<int>) });
 
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<Boolean>() { SourceModelType = typeof(NullableResultModel<Boolean>), AllowNullInput = true });
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<DateTime>() { SourceModelType = typeof(NullableResultModel<DateTime>), AllowNullInput = true });
@@ -332,35 +322,23 @@ namespace Kistl.Client.GUI.DB
 
             if (p is BoolProperty && !prop.IsList)
             {
-                if (prop.IsNullable)
-                    return new ModelDescriptor(new TypeRef(typeof(NullableBoolModel)));
-                else
-                    return new ModelDescriptor(new TypeRef(typeof(BoolModel)));
+                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<Boolean>)));
             }
             else if (p is DateTimeProperty && !prop.IsList)
             {
-                if (prop.IsNullable)
-                    return new ModelDescriptor(new TypeRef(typeof(NullableDateTimeModel)));
-                else
-                    return new ModelDescriptor(new TypeRef(typeof(DateTimeModel)));
+                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<DateTime>)));
             }
             else if (p is DoubleProperty && !prop.IsList)
             {
-                if (prop.IsNullable)
-                    return new ModelDescriptor(new TypeRef(typeof(NullableDoubleModel)));
-                else
-                    return new ModelDescriptor(new TypeRef(typeof(DoubleModel)));
+                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<Double>)));
             }
             else if (p is IntProperty && !prop.IsList)
             {
-                if (prop.IsNullable)
-                    return new ModelDescriptor(new TypeRef(typeof(NullableIntModel)));
-                else
-                    return new ModelDescriptor(new TypeRef(typeof(IntModel)));
+                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<int>)));
             }
             else if (p is StringProperty && !prop.IsList)
             {
-                return new ModelDescriptor(new TypeRef(typeof(StringModel)));
+                return new ModelDescriptor(new TypeRef(typeof(ReferencePropertyModel<string>)));
             }
             else if (p is ObjectReferenceProperty)
             {

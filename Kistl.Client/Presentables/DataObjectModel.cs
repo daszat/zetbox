@@ -167,27 +167,27 @@ namespace Kistl.Client.Presentables
 
                 if (retParam is BoolParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateSpecificModel<BoolResultModel>(DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<NullableResultModel<Boolean>>(DataContext, _object, pm));
                 }
                 else if (pm is DateTimeParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateSpecificModel<DateTimeResultModel>(DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<NullableResultModel<DateTime>>(DataContext, _object, pm));
                 }
                 else if (pm is DoubleParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateSpecificModel<DoubleResultModel>(DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<NullableResultModel<Double>>(DataContext, _object, pm));
                 }
                 else if (pm is IntParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateSpecificModel<IntResultModel>(DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<NullableResultModel<int>>(DataContext, _object, pm));
                 }
                 else if (pm is StringParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateSpecificModel<StringResultModel>(DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<ObjectResultModel<string>>(DataContext, _object, pm));
                 }
                 else if (pm is ObjectParameter && !retParam.IsList)
                 {
-                    PropertyModels.Add(Factory.CreateSpecificModel<DataObjectResultModel>(DataContext, _object, pm));
+                    PropertyModels.Add(Factory.CreateSpecificModel<ObjectResultModel<IDataObject>>(DataContext, _object, pm));
                 }
                 else
                 {

@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Kistl.Client.Presentables;
+
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
@@ -22,6 +24,12 @@ namespace Kistl.Client.WPF.View
         public NullablePropertyTextBoxView()
         {
             InitializeComponent();
+        }
+
+        private void ClearValueHandler(object sender, RoutedEventArgs e)
+        {
+            var mdl = (IClearableValue)DataContext;
+            mdl.ClearValue();
         }
     }
 }

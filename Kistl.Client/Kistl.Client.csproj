@@ -72,7 +72,6 @@
     <Compile Include="Presentables\IAsyncUiManager.cs" />
     <Compile Include="Presentables\ICommand.cs" />
     <Compile Include="Presentables\MethodResultModels.cs" />
-    <Compile Include="Presentables\MethodResultModels.Specifics.cs" />
     <Compile Include="Presentables\ModelFactory.cs" />
     <Compile Include="Presentables\ModuleModel.cs" />
     <Compile Include="Presentables\ObjectClassModel.cs" />
@@ -81,7 +80,6 @@
     <Compile Include="Presentables\PresentableModel.cs" />
     <Compile Include="Presentables\SelectionTaskModel.cs" />
     <Compile Include="Presentables\ValuePropertyModels.cs" />
-    <Compile Include="Presentables\ValuePropertyModels.Specifics.cs" />
     <Compile Include="Presentables\WorkspaceModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />

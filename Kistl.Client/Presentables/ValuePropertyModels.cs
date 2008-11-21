@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 namespace Kistl.Client.Presentables
 {
+
     public interface IReadOnlyValueModel<TValue>
         : INotifyPropertyChanged
     {
@@ -38,14 +39,25 @@ namespace Kistl.Client.Presentables
         TValue Value { get; }
 
     }
+
+    public interface IClearableValue
+    {
+        void ClearValue();
+    }
+
     public interface IValueModel<TValue>
-        : IReadOnlyValueModel<TValue>, INotifyPropertyChanged
+        : IReadOnlyValueModel<TValue>, IClearableValue, INotifyPropertyChanged
     {
         /// <summary>
         /// The value of this model
         /// </summary>
         new TValue Value { get; set; }
-    }
+
+         /// <summary>
+        /// Whether or not to allow <value>null</value> as input
+        /// </summary>
+        bool AllowNullInput { get; }
+   }
 
     public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
     {
@@ -177,61 +189,7 @@ namespace Kistl.Client.Presentables
 
     }
 
-    public abstract class ValuePropertyModel<TValue>
-        : PropertyModel<TValue>, IValueModel<TValue>
-        where TValue : struct
-    {
-        public ValuePropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IDataObject obj, ValueTypeProperty prop)
-            : base(appCtx, dataCtx, obj, prop)
-        {
-        }
-
-        #region Public Interface
-
-        public bool HasValue { get { UI.Verify(); return true; } }
-        public bool IsNull { get { UI.Verify(); return false; } }
-
-        private TValue _valueCache;
-        /// <summary>
-        /// The value of the property presented by this model
-        /// </summary>
-        public TValue Value
-        {
-            get { UI.Verify(); return _valueCache; }
-            set
-            {
-                UI.Verify();
-
-                _valueCache = value;
-                State = ModelState.Loading;
-                Async.Queue(DataContext, () =>
-                {
-                    Object.SetPropertyValue<TValue>(Property.PropertyName, value);
-                    AsyncCheckConstraints();
-                    UI.Queue(UI, () => this.State = ModelState.Active);
-                });
-                OnPropertyChanged("Value");
-            }
-        }
-
-        #endregion
-
-        #region Async handlers and UI callbacks
-
-        protected override void AsyncGetPropertyValue()
-        {
-            Async.Verify();
-            TValue newValue = Object.GetPropertyValue<TValue>(Property.PropertyName);
-            UI.Queue(UI, () => Value = newValue);
-        }
-
-        #endregion
-
-    }
-
-    public abstract class NullableValuePropertyModel<TValue>
+    public class NullableValuePropertyModel<TValue>
         : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>
         where TValue : struct
     {
@@ -240,6 +198,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
+            AllowNullInput = prop.IsNullable;
         }
 
         #region Public Interface
@@ -274,6 +233,13 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public bool AllowNullInput { get; private set; }
+
+        public void ClearValue()
+        {
+            if (AllowNullInput) Value = null;
+            else throw new InvalidOperationException();
+        }
 
         private Nullable<TValue> _valueCache;
         /// <summary>
@@ -317,7 +283,7 @@ namespace Kistl.Client.Presentables
 
     }
 
-    public abstract class ReferencePropertyModel<TValue>
+    public class ReferencePropertyModel<TValue>
         : PropertyModel<TValue>, IValueModel<TValue>
         where TValue : class
     {
@@ -326,6 +292,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
+            AllowNullInput = prop.IsNullable;
         }
 
         #region Public Interface
@@ -358,6 +325,14 @@ namespace Kistl.Client.Presentables
                 if (value)
                     Value = null;
             }
+        }
+
+        public bool AllowNullInput { get; private set; }
+
+        public void ClearValue()
+        {
+            if (AllowNullInput) Value = null;
+            else throw new InvalidOperationException();
         }
 
         private TValue _valueCache;

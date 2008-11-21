@@ -18,7 +18,9 @@ namespace Kistl.Client.Presentables
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
-        { }
+        {
+            AllowNullInput = prop.IsNullable;
+        }
 
         #region Public Interface
 
@@ -50,6 +52,14 @@ namespace Kistl.Client.Presentables
                 if (value)
                     Value = null;
             }
+        }
+
+        public bool AllowNullInput { get; private set; }
+
+        public void ClearValue()
+        {
+            if (AllowNullInput) Value = null;
+            else throw new InvalidOperationException();
         }
 
         private DataObjectModel _valueCache;

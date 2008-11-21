@@ -5,6 +5,9 @@
              xmlns:view="clr-namespace:Kistl.Client.WPF.View"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
              ToolTip="{Binding ToolTip}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="100"
@@ -22,7 +25,11 @@
         <DockPanel Grid.Column="1">
             <CheckBox DockPanel.Dock="Left"
                       VerticalAlignment="Center"
-                      IsChecked="{Binding HasValue, Mode=OneWay}" />
+                      IsChecked="{Binding HasValue, Mode=OneWay}"
+                      IsEnabled="False" />
+            <Button DockPanel.Dock="Right"
+                    Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Click="ClearValueHandler">Clear Value</Button>
             <kevin:InfoTextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                                TextBoxInfo="{Binding ToolTip}" />
         </DockPanel>
