@@ -110,7 +110,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(rel.LeftPart, Is.Null);
 
                 var prop = ctx.Create<Kistl.App.Base.ObjectReferenceProperty>();
-                Assert.That(prop.LeftOf, Is.Not.Null);
+                Assert.That(prop.LeftOf, Is.Null);
 
                 rel.LeftPart = prop;
 
@@ -128,7 +128,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(rel.LeftPart, Is.Null);
 
                 var prop = ctx.Create<Kistl.App.Base.ObjectReferenceProperty>();
-                Assert.That(prop.LeftOf, Is.Not.Null);
+                Assert.That(prop.LeftOf, Is.Null);
 
                 prop.LeftOf = rel;
 

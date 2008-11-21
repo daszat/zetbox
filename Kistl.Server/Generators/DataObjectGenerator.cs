@@ -1058,11 +1058,6 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_ObjectReferencePropertyInternal(CurrentObjectClass current)
         {
-            // Check if Datatype exits
-            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetPropertyTypeString()) == null)
-                throw new ArgumentOutOfRangeException(string.Format("ObjectReference {0} not found on ObjectReferenceProperty {1}.{2}",
-                    current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
-
             ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
             current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
             current.code_property.AddAttribute("XmlIgnore");
@@ -1084,6 +1079,21 @@ namespace Kistl.Server.Generators
                 else
                 {{
                     if ({0} != null && {0}.{1}.Contains(this)) {0}.{1}.Remove(this);
+                    fk_{0} = null;
+                }}", objRefProp.PropertyName, objRefProp.GetOpposite().PropertyName);
+                }
+                else if (objRefProp.GetOpposite() != null && objRefProp.GetRelationType() == RelationType.one_one)
+                {
+                    current.code_property.SetStatements.AddExpression(@"if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {{
+                    if (fk_{0} != value.ID && fk_{0} != null) {0}.{1} = null;
+                    fk_{0} = value.ID;
+                    if (value.{1} != this) value.{1} = this;
+                }}
+                else
+                {{
+                    if ({0} != null && {0}.{1} == this) {0}.{1} = null;
                     fk_{0} = null;
                 }}", objRefProp.PropertyName, objRefProp.GetOpposite().PropertyName);
                 }
@@ -1270,6 +1280,7 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_BackReferenceSinglePropertyInternal(CurrentObjectClass current)
         {
+            ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
             current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
             current.code_property.AddAttribute("XmlIgnore");
 
@@ -1278,8 +1289,18 @@ namespace Kistl.Server.Generators
                 current.code_property.GetStatements.AddExpression(@"if (fk_{1} == null) return null;
                 return Context.Find<{0}>(fk_{1}.Value)", current.property.GetPropertyTypeString(), current.property.PropertyName);
 
-                current.code_property.SetStatements.AddExpression(@"fk_{0} = value != null ? (int?)value.ID : null",
-                    current.property.PropertyName);
+                current.code_property.SetStatements.AddExpression(@"if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {{
+                    if (fk_{0} != value.ID && fk_{0} != null) {0}.{1} = null;
+                    fk_{0} = value.ID;
+                    if (value.{1} != this) value.{1} = this;
+                }}
+                else
+                {{
+                    if ({0} != null && {0}.{1} == this) {0}.{1} = null;
+                    fk_{0} = null;
+                }}", objRefProp.PropertyName, objRefProp.GetOpposite().PropertyName);
             }
 
             CurrentObjectClass serializer = (CurrentObjectClass)current.Clone();

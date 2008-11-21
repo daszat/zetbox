@@ -47,7 +47,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_RightPart = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_RightPart != value.ID && fk_RightPart != null) RightPart.RightOf = null;
+                    fk_RightPart = value.ID;
+                    if (value.RightOf != this) value.RightOf = this;
+                }
+                else
+                {
+                    if (RightPart != null && RightPart.RightOf == this) RightPart.RightOf = null;
+                    fk_RightPart = null;
+                };
             }
         }
         
@@ -79,7 +90,18 @@ namespace Kistl.App.Base
             }
             set
             {
-                fk_LeftPart = value != null ? (int?)value.ID : null;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null)
+                {
+                    if (fk_LeftPart != value.ID && fk_LeftPart != null) LeftPart.LeftOf = null;
+                    fk_LeftPart = value.ID;
+                    if (value.LeftOf != this) value.LeftOf = this;
+                }
+                else
+                {
+                    if (LeftPart != null && LeftPart.LeftOf == this) LeftPart.LeftOf = null;
+                    fk_LeftPart = null;
+                };
             }
         }
         

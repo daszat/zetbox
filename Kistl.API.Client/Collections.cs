@@ -37,13 +37,25 @@ namespace Kistl.API.Client
         private void AddToList(T item)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
-            item.SetPropertyValue<IDataObject>(_pointerProperty, _parent);
+            SetPointerProperty(item, _parent);
         }
 
         private void RemoveFromList(T item)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot remove a NULL Object to this collection");
-            item.SetPropertyValue<IDataObject>(_pointerProperty, null);
+            SetPointerProperty(item, null);
+        }
+
+        private void SetPointerProperty(T item, IDataObject val)
+        {
+            if (typeof(IEnumerable).IsAssignableFrom(item.GetPropertyType(_pointerProperty)))
+            {
+                item.AddToCollection<IDataObject>(_pointerProperty, _parent, true);
+            }
+            else
+            {
+                item.SetPropertyValue<IDataObject>(_pointerProperty, _parent);
+            }
         }
 
         public void ApplyChanges(BackReferenceCollection<T> list)
@@ -186,7 +198,7 @@ namespace Kistl.API.Client
             // TODO: Call Helper.IsFloatingObject will also check, if Object is detached.
             // But thats not the point here. We are only interested, if the Object should be send
             // to the Server to be deleted.
-            if (e.ID <= Helper.INVALIDID) return; 
+            if (e.ID <= Helper.INVALIDID) return;
             if (deletedCollection.FirstOrDefault<COLLECTIONENTRYTYPE>(i => i.ID == e.ID) == null)
             {
                 if (parent.Context != null)
@@ -268,21 +280,24 @@ namespace Kistl.API.Client
         {
             COLLECTIONENTRYTYPE i = new COLLECTIONENTRYTYPE();
             if (parent.Context != null) parent.Context.Attach(i);
+            collection.Add(i);
+
             i.Parent = this.parent;
             i.Value = item;
-            collection.Add(i);
         }
 
-        /// <summary>
-        /// TODO: Das macht mich noch nicht glücklich!
-        /// </summary>
         public void Clear()
         {
             collection.BeginUpdate();
             try
             {
-                collection.ForEach(e => AddToDeletedCollection(e));
+                var collectionTmp = collection.ToArray();
                 collection.Clear();
+                foreach (COLLECTIONENTRYTYPE e in collectionTmp)
+                {
+                    e.Value = default(T);
+                    AddToDeletedCollection(e);
+                }
             }
             finally
             {
@@ -314,8 +329,9 @@ namespace Kistl.API.Client
         public bool Remove(T item)
         {
             COLLECTIONENTRYTYPE e = collection.Single(i => i.Value.Equals(item));
+            bool result = collection.Remove(e);
             AddToDeletedCollection(e);
-            return collection.Remove(e);
+            return result;
         }
 
         #endregion
@@ -350,15 +366,17 @@ namespace Kistl.API.Client
         {
             COLLECTIONENTRYTYPE i = new COLLECTIONENTRYTYPE();
             if (parent.Context != null) i = (COLLECTIONENTRYTYPE)parent.Context.Attach(i);
+            collection.Insert(index, i);
             i.Parent = this.parent;
             i.Value = item;
-            collection.Insert(index, i);
         }
 
         public void RemoveAt(int index)
         {
-            AddToDeletedCollection(collection[index]);
+            COLLECTIONENTRYTYPE item = collection[index];
             collection.RemoveAt(index);
+            item.Value = default(T);
+            AddToDeletedCollection(item);
         }
 
         public T this[int index]

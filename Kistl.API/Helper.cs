@@ -190,6 +190,41 @@ namespace Kistl.API
             pi.SetValue(obj, val, null);
         }
 
+        public static void AddToCollection<T>(this object obj, string propName, T val)
+        {
+            AddToCollection<T>(obj, propName, val, false);
+        }
+
+        public static void AddToCollection<T>(this object obj, string propName, T val, bool unique)
+        {
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            
+            Type collectionType = obj.GetPropertyType(propName);
+            Type collectionItemType = collectionType.GetGenericArguments()[0];
+            object collection = pi.GetValue(obj, null);
+            if (collection == null) throw new ArgumentException("Collection cannot be null");
+
+            if (unique)
+            {
+                MethodInfo contains = collectionType.FindMethod("Contains", new Type[] { collectionItemType });
+                if (contains == null) throw new ArgumentException("Cound not find \"Contains\" method of the given Collection");
+                bool result = (bool)contains.Invoke(collection, new object[] { val });
+                if (result) return;
+            }
+
+            MethodInfo add = collectionType.FindMethod("Add", new Type[] { collectionItemType } );
+            if (add == null) throw new ArgumentException("Cound not find \"Add\" method of the given Collection");
+            add.Invoke(collection, new object[] { val });
+        }
+
+        public static Type GetPropertyType(this object obj, string propName)
+        {
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            return pi.PropertyType;
+        }
+
         /// <summary>
         /// Sets a _private_ Property Value from a given Object. Uses Reflection.
         /// Throws a ArgumentOutOfRangeException if the Property is not found.
@@ -321,13 +356,65 @@ namespace Kistl.API
             }
         }
 
+        public static MethodInfo FindMethod(this Type type, string methodName, Type[] parameterTypes)
+        {
+            if (parameterTypes == null)
+            {
+                MethodInfo mi = type.GetMethod(methodName);
+                if (mi != null) return mi;
+            }
+            else
+            {
+                MethodInfo[] methods = type.GetMethods();
+                foreach (MethodInfo mi in methods)
+                {
+                    if (mi.Name == methodName)
+                    {
+                        ParameterInfo[] parameters = mi.GetParameters();
+                        if (parameters.Length == parameterTypes.Length)
+                        {
+                            bool paramSame = true;
+                            for (int i = 0; i < parameters.Length; i++)
+                            {
+                                if (parameters[i].ParameterType != parameterTypes[i])
+                                {
+                                    paramSame = false;
+                                    break;
+                                }
+                            }
+
+                            if (paramSame) return mi;
+                        }
+                    }
+                }
+            }
+
+            // Look in Basetypes
+            if (type.BaseType != null)
+            {
+                MethodInfo mi = type.BaseType.FindMethod(methodName, parameterTypes);
+                if (mi != null) return mi;
+            }
+
+            // Look in Interfaces
+            foreach (Type i in type.GetInterfaces())
+            {
+                MethodInfo mi = i.FindMethod(methodName, parameterTypes);
+                if (mi != null) return mi;
+            }
+
+            return null;
+        }
+
         public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
         {
             if (parameterTypes == null)
             {
                 MethodInfo mi = type.GetMethod(methodName);
-                if (mi == null) return null;
-                return mi.MakeGenericMethod(typeArguments);
+                if (mi != null)
+                {
+                    return mi.MakeGenericMethod(typeArguments);
+                }
             }
             else
             {
@@ -355,6 +442,20 @@ namespace Kistl.API
                         }
                     }
                 }
+            }
+
+            // Look in Basetypes
+            if (type.BaseType != null)
+            {
+                MethodInfo mi = type.BaseType.FindGenericMethod(methodName, typeArguments, parameterTypes);
+                if (mi != null) return mi;
+            }
+
+            // Look in Interfaces
+            foreach (Type i in type.GetInterfaces())
+            {
+                MethodInfo mi = i.FindGenericMethod(methodName, typeArguments, parameterTypes);
+                if (mi != null) return mi;
             }
 
             return null;
