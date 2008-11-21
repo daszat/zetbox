@@ -37,24 +37,36 @@ namespace Kistl.API.Client
         private void AddToList(T item)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
-            SetPointerProperty(item, _parent);
+            SetPointerProperty(item);
         }
 
         private void RemoveFromList(T item)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot remove a NULL Object to this collection");
-            SetPointerProperty(item, null);
+            ClearPointerProperty(item);
         }
 
-        private void SetPointerProperty(T item, IDataObject val)
+        private void SetPointerProperty(T item)
         {
             if (typeof(IEnumerable).IsAssignableFrom(item.GetPropertyType(_pointerProperty)))
             {
-                item.AddToCollection<IDataObject>(_pointerProperty, val, true);
+                item.AddToCollection<IDataObject>(_pointerProperty, _parent, true);
             }
             else
             {
-                item.SetPropertyValue<IDataObject>(_pointerProperty, val);
+                item.SetPropertyValue<IDataObject>(_pointerProperty, _parent);
+            }
+        }
+
+        private void ClearPointerProperty(T item)
+        {
+            if (typeof(IEnumerable).IsAssignableFrom(item.GetPropertyType(_pointerProperty)))
+            {
+                item.RemoveFromCollection<IDataObject>(_pointerProperty, _parent);
+            }
+            else
+            {
+                item.SetPropertyValue<IDataObject>(_pointerProperty, null);
             }
         }
 
@@ -328,8 +340,12 @@ namespace Kistl.API.Client
 
         public bool Remove(T item)
         {
-            COLLECTIONENTRYTYPE e = collection.Single(i => i.Value.Equals(item));
+            COLLECTIONENTRYTYPE e = collection.SingleOrDefault(i => i.Value.Equals(item));
+            if (e == null) return false;
+
             bool result = collection.Remove(e);
+
+            e.Value = default(T);
             AddToDeletedCollection(e);
             return result;
         }

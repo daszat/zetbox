@@ -28,6 +28,11 @@ namespace Kistl.API
         public const string ImplementationSuffix = "__Implementation__";
 
         /// <summary>
+        /// Suffix for Position Properties in Lists
+        /// </summary>
+        public const string PositonSuffix = "__Position__";
+
+        /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
         /// This method can distinguish them from "older" objects that already have a representation on the server.
         /// </summary>
@@ -217,6 +222,21 @@ namespace Kistl.API
             if (add == null) throw new ArgumentException("Cound not find \"Add\" method of the given Collection");
             add.Invoke(collection, new object[] { val });
         }
+
+        public static void RemoveFromCollection<T>(this object obj, string propName, T val)
+        {
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            
+            Type collectionType = obj.GetPropertyType(propName);
+            Type collectionItemType = collectionType.GetGenericArguments()[0];
+            object collection = pi.GetValue(obj, null);
+            if (collection == null) throw new ArgumentException("Collection cannot be null");
+
+            MethodInfo add = collectionType.FindMethod("Remove", new Type[] { collectionItemType } );
+            if (add == null) throw new ArgumentException("Cound not find \"Remove\" method of the given Collection");
+            add.Invoke(collection, new object[] { val });
+        }        
 
         public static Type GetPropertyType(this object obj, string propName)
         {

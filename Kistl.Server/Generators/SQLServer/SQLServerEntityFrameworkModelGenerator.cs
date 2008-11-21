@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.App.Base;
 using Kistl.API;
+using Kistl.Server;
 
 namespace Kistl.Server.Generators.SQLServer
 {
@@ -296,7 +297,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </Property>
                 }
 
-                foreach (BaseProperty p in obj.Properties)
+                foreach (Property p in obj.Properties)
                 {
                     // TODO: implement IsNullable everywhere
                     if (p.IsObjectReferencePropertyList() && !p.HasStorage())
@@ -334,6 +335,15 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                         xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                         xml.WriteEndElement(); // </NavigationProperty>
+
+                        if (p.NeedsPositionColumn())
+                        {
+                            xml.WriteStartElement("Property");
+                            xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.PositonSuffix);
+                            xml.WriteAttributeString("Type", "Int32");
+                            xml.WriteAttributeString("Nullable", "true");
+                            xml.WriteEndElement(); // </Property>
+                        }
                     }
                     else if (p.IsObjectReferencePropertySingle() && !p.HasStorage())
                     {
@@ -502,6 +512,15 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteEndElement(); // </ScalarProperty>
             }
 
+            // NeedsPositionColumn
+            foreach (ObjectReferenceProperty p in obj.Properties.OfType<ObjectReferenceProperty>().ToList().Where(p => p.IsList == false && p.NeedsPositionColumn()))
+            {
+                xml.WriteStartElement("ScalarProperty");
+                xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.PositonSuffix);
+                xml.WriteAttributeString("ColumnName", p.PropertyName.CalcListPositionColumnName(parentPropName));
+                xml.WriteEndElement(); // </ScalarProperty>
+            }
+
             foreach (StructProperty s in obj.Properties.OfType<StructProperty>().Where(p => p.IsList == false))
             {
                 xml.WriteStartElement("ComplexProperty");
@@ -579,7 +598,7 @@ namespace Kistl.Server.Generators.SQLServer
             foreach (Property prop in listProperties)
             {
                 xml.WriteStartElement("AssociationSetMapping");
-                TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker(); // new TypeMoniker(prop.ObjectClass.Module.Namespace, prop.ObjectClass.ClassName);
+                TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
                 TypeMoniker childType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "fk_Parent"));
@@ -795,7 +814,7 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteStartElement("Dependent");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteStartElement("PropertyRef");
-                xml.WriteAttributeString("Name", "fk_" + prop.ObjectClass.ClassName);
+                xml.WriteAttributeString("Name", prop.ObjectClass.ClassName.CalcForeignKeyColumnName(""));
                 xml.WriteEndElement(); // </PropertyRef>
                 xml.WriteEndElement(); // </Dependent>
 
@@ -932,15 +951,24 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteEndElement(); // </Property>
 
                 xml.WriteStartElement("Property");
-                xml.WriteAttributeString("Name", "fk_" + prop.ObjectClass.ClassName);
+                xml.WriteAttributeString("Name", prop.ObjectClass.ClassName.CalcForeignKeyColumnName(""));
                 xml.WriteAttributeString("Type", "int");
                 xml.WriteAttributeString("Nullable", "true");
                 xml.WriteEndElement(); // </Property>
 
+                if (prop.IsSorted())
+                {
+                    xml.WriteStartElement("Property");
+                    xml.WriteAttributeString("Name", prop.ObjectClass.ClassName.CalcListPositionColumnName(""));
+                    xml.WriteAttributeString("Type", "int");
+                    xml.WriteAttributeString("Nullable", "true");
+                    xml.WriteEndElement(); // </Property>
+                }
+
                 xml.WriteStartElement("Property");
                 if (prop is ObjectReferenceProperty)
                 {
-                    xml.WriteAttributeString("Name", "fk_" + prop.PropertyName);
+                    xml.WriteAttributeString("Name", prop.PropertyName.CalcForeignKeyColumnName(""));
                 }
                 else
                 {
@@ -953,6 +981,15 @@ namespace Kistl.Server.Generators.SQLServer
                 }
                 xml.WriteAttributeString("Nullable", prop.IsNullable.ToString().ToLowerInvariant());
                 xml.WriteEndElement(); // </Property>
+
+                if (prop.NeedsPositionColumn())
+                {
+                    xml.WriteStartElement("Property");
+                    xml.WriteAttributeString("Name", prop.PropertyName.CalcListPositionColumnName(""));
+                    xml.WriteAttributeString("Type", "int");
+                    xml.WriteAttributeString("Nullable", "true");
+                    xml.WriteEndElement(); // </Property>
+                }
 
                 xml.WriteEndElement(); // </EntityType>
             }
@@ -974,7 +1011,7 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteStartElement("Property");
                     if (p is ObjectReferenceProperty)
                     {
-                        xml.WriteAttributeString("Name", "fk_" + p.PropertyName.CalcColumnName(parentPropName));
+                        xml.WriteAttributeString("Name", p.PropertyName.CalcForeignKeyColumnName(parentPropName));
                     }
                     else
                     {
@@ -990,6 +1027,15 @@ namespace Kistl.Server.Generators.SQLServer
                         xml.WriteAttributeString("Nullable", p.IsNullable.ToString().ToLowerInvariant());
                     }
                     xml.WriteEndElement(); // </Property>
+
+                    if (p.NeedsPositionColumn())
+                    {
+                        xml.WriteStartElement("Property");
+                        xml.WriteAttributeString("Name", p.PropertyName.CalcListPositionColumnName(parentPropName));
+                        xml.WriteAttributeString("Type", "int");
+                        xml.WriteAttributeString("Nullable", "true");
+                        xml.WriteEndElement(); // </Property>
+                    }
                 }
             }
         }

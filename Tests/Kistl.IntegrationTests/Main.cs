@@ -15,12 +15,12 @@ namespace Kistl.IntegrationTests
             {
                 setup.Init();
 
-                //RelationTests();
+                RelationTests();
                 //FrozenContextTests();
                 //GetListTests();
 
                 //GeneratorTests();
-                GetListOfTests();
+                //GetListOfTests();
                 //InheritanceTests();
                 //ListPropetiesTests();
                 //ObjectTests();
@@ -52,6 +52,36 @@ namespace Kistl.IntegrationTests
 
             test.SetUp();
             test.Relation_1_1_Set_Right();
+
+            test.SetUp();
+            test.Change_Relation_1_n_Set_1();
+
+            //test.SetUp();
+            //test.Change_Relation_1_n_Set_n_By_Index();
+
+            test.SetUp();
+            test.Change_Relation_1_n_Set_n_With_Clear();
+
+            test.SetUp();
+            test.Change_Relation_1_n_Set_n_With_Remove();
+
+            //test.SetUp();
+            //test.Change_Relation_n_m_Set_m_By_Index();
+
+            test.SetUp();
+            test.Change_Relation_n_m_Set_m_With_Clear();
+
+            test.SetUp();
+            test.Change_Relation_n_m_Set_m_With_Remove();
+
+            //test.SetUp();
+            //test.Change_Relation_n_m_Set_n_By_Index();
+
+            test.SetUp();
+            test.Change_Relation_n_m_Set_n_With_Clear();
+
+            test.SetUp();
+            test.Change_Relation_n_m_Set_n_With_Remove();
         }
 
         private static void FrozenContextTests()

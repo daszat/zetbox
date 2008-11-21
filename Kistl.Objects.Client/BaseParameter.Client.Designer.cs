@@ -27,6 +27,8 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Method = null;
         
+        private System.Nullable<int> _Method__Position__ = null;
+        
         private string _ParameterName;
         
         private System.Nullable<int> _fk_Module = null;
@@ -80,6 +82,24 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Method"); 
                     _fk_Method = value;
                     NotifyPropertyChanged("Method");;
+                }
+            }
+        }
+        
+        public System.Nullable<int> Method__Position__
+        {
+            get
+            {
+                return _Method__Position__;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (Method__Position__ != value)
+                {
+                    NotifyPropertyChanging("Method__Position__"); 
+                    _Method__Position__ = value;
+                    NotifyPropertyChanged("Method__Position__");;
                 }
             }
         }

@@ -18,6 +18,16 @@ namespace Kistl.Server.Generators
             return parentPropName + "_" + propName;
         }
 
+        public static string CalcForeignKeyColumnName(this string propName, string parentPropName)
+        {
+            return "fk_" + propName.CalcColumnName(parentPropName);
+        }
+
+        public static string CalcListPositionColumnName(this string propName, string parentPropName)
+        {
+            return propName.CalcForeignKeyColumnName(parentPropName) + "_pos";
+        }
+
         public static string GetKistObjectsName(this TaskEnum task)
         {
             if (task == TaskEnum.Interface)
@@ -121,7 +131,7 @@ namespace Kistl.Server.Generators
             return CreateField(c, new CodeTypeReference(type), name, new CodeSnippetExpression(initExpression));
         }
 
-        public static CodeMemberField CreateField(this BaseProperty prop, CodeTypeDeclaration c, TaskEnum clientServer)
+        public static CodeMemberField CreateField(this Property prop, CodeTypeDeclaration c, TaskEnum clientServer)
         {
             return c.CreateField(prop.ToCodeTypeReference(clientServer), "_" + prop.PropertyName);
         }
@@ -252,6 +262,11 @@ namespace Kistl.Server.Generators
         }
 
         public static CodeMemberProperty CreateNotifyingProperty(this CodeTypeDeclaration c, string type, string name)
+        {
+            return CreateNotifyingProperty(c, new CodeTypeReference(type), name, "_" + name, "_" + name, name);
+        }
+
+        public static CodeMemberProperty CreateNotifyingProperty(this CodeTypeDeclaration c, Type type, string name)
         {
             return CreateNotifyingProperty(c, new CodeTypeReference(type), name, "_" + name, "_" + name, name);
         }
@@ -676,6 +691,25 @@ namespace Kistl.Server.Generators
                 }
             }
 
+            return false;
+        }
+        #endregion
+
+        #region NeedsPositionColumn
+        public static bool NeedsPositionColumn(this Property p)
+        {
+            if (!p.HasStorage()) return false;
+
+            if (p is ObjectReferenceProperty)
+            {
+                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)p;
+                if (objRefProp.IsList == false &&
+                    objRefProp.GetRelation() != null &&
+                    objRefProp.GetRelationType() == Kistl.API.RelationType.one_n &&
+                    objRefProp.GetOpposite().IsSorted()) return true;
+            }
+            if (p.IsList == true &&
+                p.IsSorted()) return true;
             return false;
         }
         #endregion

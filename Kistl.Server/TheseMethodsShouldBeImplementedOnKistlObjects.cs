@@ -88,7 +88,14 @@ namespace Kistl.Server
             if (rel == null) return p.IsList ? RelationType.n_m : RelationType.one_n;
             return rel.GetRelationType();
         }
+        
+        public static bool IsSorted(this Property p)
+        {
+            // Pfusch²
+            if (p.PropertyName == "Parameter" && p.ObjectClass.ClassName == "Method") return true;
 
+            return false;
+        }
 
         public static bool HasStorage(this BaseProperty bp)
         {
@@ -98,7 +105,7 @@ namespace Kistl.Server
                 Relation rel = GetRelation(p);
                 if (rel == null) return true;
 
-                if (rel.Storage == StorageType.Replicate) throw new NotImplementedException("StorageType Replicate not implemented yet");
+                if (rel.Storage == StorageType.Replicate) throw new NotImplementedException("StorageType Replicate implemented but not tested yet");
 
                 RelationType type = rel.GetRelationType();
                 return

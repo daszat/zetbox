@@ -636,6 +636,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Method" Type="int" />
+    <Property Name="fk_Method_pos" Type="int" Nullable="true" />
     <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="IsList" Type="bit" Nullable="false" />

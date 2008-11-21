@@ -11,6 +11,7 @@ using System.IO;
 using System.Reflection;
 using System.Collections;
 using Kistl.API;
+using Kistl.Server;
 using System.Globalization;
 
 namespace Kistl.Server.Generators
@@ -31,7 +32,7 @@ namespace Kistl.Server.Generators
             public CodeMemberField code_field { get; set; }
             public CodeMemberProperty code_property { get; set; }
 
-            public BaseProperty property { get; set; }
+            public Property property { get; set; }
 
             public abstract object Clone();
 
@@ -717,7 +718,7 @@ namespace Kistl.Server.Generators
         #region GenerateInterfaceProperties/Methods
         private void GenerateInterfaceProperties(CurrentBase current, IEnumerable<BaseProperty> properties)
         {
-            foreach (BaseProperty p in properties)
+            foreach (Property p in properties)
             {
                 CodeMemberProperty codeProp;
                 if (p.IsObjectReferencePropertyList() && !((ObjectReferenceProperty)p).HasStorage())
@@ -1052,7 +1053,7 @@ namespace Kistl.Server.Generators
         #endregion
 
         #region GenerateProperties_ObjectReferenceProperty
-        protected virtual void GenerateProperties_ObjectReferenceProperty(CurrentObjectClass current, CurrentObjectClass serializer)
+        protected virtual void GenerateProperties_ObjectReferenceProperty(CurrentObjectClass current, CurrentObjectClass serializer, CurrentObjectClass position)
         {
         }
 
@@ -1120,7 +1121,16 @@ namespace Kistl.Server.Generators
                 serializer.code_property = current.code_class.CreateProperty(typeof(int?), "fk_" + current.property.PropertyName);
             }
 
-            GenerateProperties_ObjectReferenceProperty(current, serializer);
+            CurrentObjectClass position = null;
+            if (current.property.NeedsPositionColumn())
+            {
+                string posPropName = current.property.PropertyName + Kistl.API.Helper.PositonSuffix;
+                position = (CurrentObjectClass)current.Clone();
+                position.code_field = position.code_class.CreateField(typeof(int?), "_" + posPropName, "null");
+                position.code_property = position.code_class.CreateNotifyingProperty(typeof(int?), posPropName);
+            }
+
+            GenerateProperties_ObjectReferenceProperty(current, serializer, position);
         }
         #endregion
 
@@ -1209,9 +1219,17 @@ namespace Kistl.Server.Generators
                 if (objRefProp.GetOpposite() != null && objRefProp.GetRelationType() == RelationType.n_m)
                 {
                     collectionClass.code_property.SetStatements.AddExpression(@"if (IsReadonly) throw new ReadOnlyObjectException();
-                if (Context != null && fk_Value != value.ID && fk_Value != Kistl.API.Helper.INVALIDID) Value.{0}.Remove(Parent);
-                fk_Value = value.ID;
-                if (Context != null && !value.{0}.Contains(Parent)) value.{0}.Add(Parent)", objRefProp.GetOpposite().PropertyName);
+                if (value != null)
+                {{
+                    if (Context != null && fk_Value != value.ID && fk_Value != Kistl.API.Helper.INVALIDID) Value.{0}.Remove(Parent);
+                    fk_Value = value.ID;
+                    if (Context != null && !value.{0}.Contains(Parent)) value.{0}.Add(Parent);
+                }}
+                else
+                {{
+                    if (Context != null && Value != null && Value.{0}.Contains(Parent)) Value.{0}.Remove(Parent);
+                    fk_Value = Kistl.API.Helper.INVALIDID;
+                }}", objRefProp.GetOpposite().PropertyName);
                 }
                 else
                 {
@@ -1399,7 +1417,7 @@ namespace Kistl.Server.Generators
         #region GeneratePropertiesInternal
         private void GeneratePropertiesInternal(CurrentObjectClass current)
         {
-            foreach (BaseProperty baseProp in current.objClass.Properties)
+            foreach (Property baseProp in current.objClass.Properties)
             {
                 current.property = baseProp;
                 CurrentObjectClass currentProperty = (CurrentObjectClass)current.Clone();
@@ -1448,7 +1466,7 @@ namespace Kistl.Server.Generators
 
         private void GeneratePropertiesInternal(CurrentStruct current)
         {
-            foreach (BaseProperty baseProp in current.@struct.Properties)
+            foreach (Property baseProp in current.@struct.Properties)
             {
                 current.property = baseProp;
                 if (baseProp.IsValueTypePropertySingle())
@@ -1538,7 +1556,7 @@ namespace Kistl.Server.Generators
                 m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(IDataObject)), "obj"));
                 m.Statements.AddExpression("base.ApplyChanges(obj)");
 
-                foreach (BaseProperty p in current.objClass.Properties.OfType<BaseProperty>())
+                foreach (Property p in current.objClass.Properties.OfType<BaseProperty>())
                 {
                     string stmt = "";
 
@@ -1602,7 +1620,7 @@ namespace Kistl.Server.Generators
                 m.Statements.AddStatement("            switch(prop)");
                 m.Statements.AddStatement("            {");
 
-                foreach (BaseProperty p in current.objClass.Properties)
+                foreach (Property p in current.objClass.Properties)
                 {
                     m.Statements.AddStatement(@"                case ""{0}"":", p.PropertyName);
                     m.Statements.AddStatement(

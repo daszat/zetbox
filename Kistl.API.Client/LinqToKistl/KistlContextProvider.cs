@@ -162,6 +162,11 @@ namespace Kistl.API.Client
         {
             e = ConstantEvaluator.PartialEval(e);
             Visit(e);
+            return CallService();
+        }
+
+        private List<IDataObject> CallService()
+        {
             return Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).ToList();
         }
 
@@ -230,6 +235,10 @@ namespace Kistl.API.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         internal T GetObjectCall<T>(Expression e)
         {
+            // Visit
+            e = ConstantEvaluator.PartialEval(e);
+            Visit(e);
+
             List<T> result = new List<T>();
             AddNewLocalObjects(_type, result);
 
@@ -238,7 +247,7 @@ namespace Kistl.API.Client
                     e.IsMethodCallExpression("First") || 
                     e.IsMethodCallExpression("FirstOrDefault"))
             {
-                List<IDataObject> serviceResult = VisitAndCallService(e);
+                List<IDataObject> serviceResult = CallService();
                 foreach (IDataObject obj in serviceResult)
                 {
                     result.Add((T)_context.Attach(obj));

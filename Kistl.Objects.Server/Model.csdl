@@ -452,6 +452,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Method__Implementation__" Relationship="Model.FK_BaseParameter_Method_Method" FromRole="B_BaseParameter" ToRole="A_Method" />
+    <Property Name="Method__Position__" Type="Int32" Nullable="true" />
     <Property Name="ParameterName" Type="String" MaxLength="100" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_BaseParameter_Module_Module" FromRole="B_BaseParameter" ToRole="A_Module" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />

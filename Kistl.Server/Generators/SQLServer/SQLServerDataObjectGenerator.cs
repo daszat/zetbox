@@ -363,9 +363,9 @@ namespace Kistl.Server.Generators.SQLServer
 
         #region GenerateProperties_ObjectReferenceProperty
 
-        protected override void GenerateProperties_ObjectReferenceProperty(CurrentObjectClass current, CurrentObjectClass serializer)
+        protected override void GenerateProperties_ObjectReferenceProperty(CurrentObjectClass current, CurrentObjectClass serializer, CurrentObjectClass position)
         {
-            base.GenerateProperties_ObjectReferenceProperty(current, serializer);
+            base.GenerateProperties_ObjectReferenceProperty(current, serializer, position);
 
             if (current.task == TaskEnum.Server)
             {
@@ -400,6 +400,11 @@ namespace Kistl.Server.Generators.SQLServer
                 }}
                 return _fk_{0}", current.property.PropertyName);
                 serializer.code_property.SetStatements.AddExpression("_fk_{0} = value", current.property.PropertyName);
+
+                if (position != null)
+                {
+                    position.code_property.AddAttribute("EdmScalarPropertyAttribute");
+                }
             }
         }
 

@@ -304,9 +304,17 @@ namespace Kistl.App.Projekte
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (Context != null && fk_Value != value.ID && fk_Value != Kistl.API.Helper.INVALIDID) Value.Projekte.Remove(Parent);
-                fk_Value = value.ID;
-                if (Context != null && !value.Projekte.Contains(Parent)) value.Projekte.Add(Parent);
+                if (value != null)
+                {
+                    if (Context != null && fk_Value != value.ID && fk_Value != Kistl.API.Helper.INVALIDID) Value.Projekte.Remove(Parent);
+                    fk_Value = value.ID;
+                    if (Context != null && !value.Projekte.Contains(Parent)) value.Projekte.Add(Parent);
+                }
+                else
+                {
+                    if (Context != null && Value != null && Value.Projekte.Contains(Parent)) Value.Projekte.Remove(Parent);
+                    fk_Value = Kistl.API.Helper.INVALIDID;
+                };
             }
         }
         

@@ -246,6 +246,7 @@
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Method__Position__" ColumnName="fk_Method_pos" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameter)">
