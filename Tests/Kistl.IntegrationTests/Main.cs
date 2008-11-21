@@ -11,10 +11,10 @@ namespace Kistl.IntegrationTests
     {
         public static void Main(string[] args)
         {
-            using (SetUp setup = new SetUp())
+            SetUp setup = new SetUp();
+            setup.Init();
+            try
             {
-                setup.Init();
-
                 RelationTests();
                 //FrozenContextTests();
                 //GetListTests();
@@ -25,6 +25,10 @@ namespace Kistl.IntegrationTests
                 //ListPropetiesTests();
                 //ObjectTests();
                 //StructTests();
+            }
+            finally
+            {
+                setup.TearDown();
             }
         }
 

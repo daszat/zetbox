@@ -38,9 +38,16 @@ namespace Kistl.IntegrationTests
         [TearDown]
         public void TearDown()
         {
-            System.Diagnostics.Trace.WriteLine("Shutting down Kistl");
-            manager.Stop();
-            System.Diagnostics.Trace.WriteLine("Shutting down Kistl finished");
+            lock (typeof(SetUp))
+            {
+                if (manager != null)
+                {
+                    System.Diagnostics.Trace.WriteLine("Shutting down Kistl");
+                    manager.Stop();
+                    manager = null;
+                    System.Diagnostics.Trace.WriteLine("Shutting down Kistl finished");
+                }
+            }
         }
 
         #region IDisposable Members

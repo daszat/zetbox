@@ -43,23 +43,27 @@ namespace Kistl.Client
 
         public void Stop()
         {
-            if (serverManager != null && !serverDomain.IsFinalizingForUnload())
+            lock (typeof(ServerDomainManager))
             {
-                try
+                if (serverManager != null)
                 {
-                    clientSponsor.Unregister(serverManager as MarshalByRefObject);
-                    serverManager.Stop();
+                    try
+                    {
+                        clientSponsor.Unregister(serverManager as MarshalByRefObject);
+                        serverManager.Stop();
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.TraceError(ex.ToString());
+                    }
+                    serverManager = null;
                 }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Trace.TraceError(ex.ToString());
-                }
-                serverManager = null;
-            }
 
-            if (serverDomain != null && !serverDomain.IsFinalizingForUnload())
-            {
-                AppDomain.Unload(serverDomain);
+                if (serverDomain != null && !serverDomain.IsFinalizingForUnload())
+                {
+                    AppDomain.Unload(serverDomain);
+                    serverDomain = null;
+                }
             }
         }
 
