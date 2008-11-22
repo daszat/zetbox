@@ -18,15 +18,15 @@ using Kistl.Client.ASPNET.Toolkit;
 using System.Collections.Generic;
 using Kistl.GUI;
 
-public partial class ObjectPage : Kistl.Client.ASPNET.Toolkit.Pages.WorkspacePage
+public partial class ObjectPage : Page // Kistl.Client.ASPNET.Toolkit.Pages.WorkspacePage
 {
-    protected override HiddenField hdObjectsControl
-    {
-        get { return hdObjects; }
-    }
+    //protected override HiddenField hdObjectsControl
+    //{
+    //    get { return hdObjects; }
+    //}
 
-    protected override AjaxControlToolkit.TabContainer tabObjectsControl
-    {
-        get { return tabObjects; }
-    }
+    //protected override AjaxControlToolkit.TabContainer tabObjectsControl
+    //{
+    //    get { return tabObjects; }
+    //}
 }

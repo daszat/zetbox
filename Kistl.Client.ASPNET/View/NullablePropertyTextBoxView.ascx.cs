@@ -16,5 +16,16 @@ public partial class View_NullablePropertyTextBoxView : Kistl.Client.ASPNET.Tool
     protected void Page_Load(object sender, EventArgs e)
     {
 
+
+    }
+
+    protected override Label lbCtrl
+    {
+        get { return lbLabel; }
+    }
+
+    protected override TextBox txtCtrl
+    {
+        get { return txtString; }
     }
 }

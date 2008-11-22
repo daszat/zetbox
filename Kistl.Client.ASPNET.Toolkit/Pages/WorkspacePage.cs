@@ -17,13 +17,15 @@ using Kistl.Client;
 using Kistl.Client.ASPNET.Toolkit;
 using System.Collections.Generic;
 using Kistl.GUI;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.ASPNET.Toolkit.Pages
 {
-    public abstract class WorkspacePage : System.Web.UI.Page, IWorkspaceControl
+    public abstract class WorkspacePage : System.Web.UI.Page
     {
         protected abstract HiddenField hdObjectsControl { get; }
-        protected abstract AjaxControlToolkit.TabContainer tabObjectsControl { get; }
+        protected abstract Control ctrlMainContent { get; }
+        protected WorkspaceModel Workspace;
 
         public WorkspacePage()
         {
@@ -32,6 +34,11 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
 
         void WorkspacePage_Init(object sender, EventArgs e)
         {
+            Workspace = GuiApplicationContext.Current.Factory
+                .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
+            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Workspace);
+            ctrlMainContent.Controls.Add(loader.LoadControl(this));
+
             CreateControls();
         }
 
@@ -46,14 +53,13 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
                     {
                         _Objects = new List<IDataObject>();
                         // Parse Request
-                        if (string.IsNullOrEmpty(Request["Type"])
-                            || string.IsNullOrEmpty(Request["ID"]))
+                        if (!string.IsNullOrEmpty(Request["Type"])
+                            && string.IsNullOrEmpty(Request["ID"]))
                         {
-                            throw new ArgumentNullException("Type, ID", "Type and ID must not be null");
+                            IDataObject obj = KistlContextManagerModule.KistlContext
+                                                .Find(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"), int.Parse(Request["ID"]));
+                            _Objects.Add(obj);
                         }
-                        IDataObject obj = KistlContextManagerModule.KistlContext
-                                            .Find(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"), int.Parse(Request["ID"]));
-                        _Objects.Add(obj);
                     }
                     else
                     {
@@ -76,65 +82,67 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
 
         private void ShowObjectInternal(IDataObject obj)
         {
-            var template = obj.FindTemplate(TemplateUsage.EditControl);
-            var widget = (Control)GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
+            //var template = obj.FindTemplate(TemplateUsage.EditControl);
+            //var widget = (Control)GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
 
-            AjaxControlToolkit.TabPanel panel = new AjaxControlToolkit.TabPanel();
-            panel.Controls.Add(widget);
-            panel.HeaderText = obj.ToString();
+            //AjaxControlToolkit.TabPanel panel = new AjaxControlToolkit.TabPanel();
+            //panel.Controls.Add(widget);
+            //panel.HeaderText = obj.ToString();
 
-            tabObjectsControl.Tabs.Add(panel);
+            //tabObjectsControl.Tabs.Add(panel);
         }
 
         private void CreateControls()
         {
             foreach (IDataObject obj in Objects)
             {
-                ShowObjectInternal(obj);
+                DataObjectModel objMdl = (DataObjectModel)Workspace.Factory.CreateModel(
+                    obj.GetInterfaceType(), KistlContextManagerModule.KistlContext, new object[] {});
+                Workspace.RecentObjects.Add(objMdl);
             }
 
-            if (tabObjectsControl.ActiveTab == null)
-            {
-                tabObjectsControl.ActiveTabIndex = 0;
-            }
+            //if (tabObjectsControl.ActiveTab == null)
+            //{
+            //    tabObjectsControl.ActiveTabIndex = 0;
+            //}
         }
 
-        #region IWorkspaceControl Members
+        //#region IWorkspaceControl Members
 
-        public void ShowObject(IDataObject obj, IBasicControl ctrl)
-        {
-            if (!Objects.Contains(obj))
-            {
-                Objects.Add(obj);
-                ShowObjectInternal(obj);
-            }
-            tabObjectsControl.ActiveTabIndex = Objects.IndexOf(obj);
-        }
+        //public void ShowObject(IDataObject obj, IBasicControl ctrl)
+        //{
+        //    if (!Objects.Contains(obj))
+        //    {
+        //        Objects.Add(obj);
+        //        ShowObjectInternal(obj);
+        //    }
+        //    tabObjectsControl.ActiveTabIndex = Objects.IndexOf(obj);
+        //}
 
-        public void RemoveObject(IDataObject dataObject)
-        {
-            // TODO
-            throw new NotImplementedException();
-        }
+        //public void RemoveObject(IDataObject dataObject)
+        //{
+        //    // TODO
+        //    throw new NotImplementedException();
+        //}
 
-        public event EventHandler UserSaveRequest;
+        //public event EventHandler UserSaveRequest;
 
-        public event EventHandler UserAbortRequest;
+        //public event EventHandler UserAbortRequest;
 
-        public event EventHandler UserNewObjectRequest;
+        //public event EventHandler UserNewObjectRequest;
 
-        public event EventHandler<GenericEventArgs<IDataObject>> UserDeleteObjectRequest;
+        //public event EventHandler<GenericEventArgs<IDataObject>> UserDeleteObjectRequest;
 
-        #endregion
+        //#endregion
 
-        #region IBasicControl Members
+        //#region IBasicControl Members
 
-        public string ShortLabel { get; set; }
-        public string Description { get; set; }
-        public FieldSize Size { get; set; }
-        IKistlContext IBasicControl.Context { get; set; }
+        //public string ShortLabel { get; set; }
+        //public string Description { get; set; }
+        //public FieldSize Size { get; set; }
+        //IKistlContext IBasicControl.Context { get; set; }
 
-        #endregion
+        //#endregion
 
     }
 }

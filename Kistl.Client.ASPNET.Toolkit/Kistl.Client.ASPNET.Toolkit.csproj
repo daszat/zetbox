@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{04656394-60EA-4675-95EE-3DA6D07BAB89}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -113,6 +113,7 @@
     <Compile Include="Renderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AJAXService.cs" />
+    <Compile Include="Services\WorkspaceModelService.cs" />
     <Compile Include="View\DataObjectFullView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -159,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\ObjectReferencePropertyControl.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\WorkspaceView.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -41,7 +41,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         public IEnumerable<ScriptReference> GetScriptReferences()
         {
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
-                this.GetType(), "Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js"));
+                typeof(JavascriptRenderer), "Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js"));
         }
 
         protected override void OnPreRender(EventArgs e)

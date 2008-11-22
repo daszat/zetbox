@@ -20,4 +20,25 @@ public partial class View_WorkspaceView : Kistl.Client.ASPNET.Toolkit.View.Works
         var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Model.Modules.First());
         divObjectPlaceholder.Controls.Add(loader.LoadControl(Page));
     }
+
+    protected override AjaxDataControls.DataList listModulesCtrl
+    {
+        get { return listModules; }
+    }
+    protected override AjaxDataControls.DataList listObjectClassesCtrl
+    {
+        get { return listObjectClasses; }
+    }
+    protected override AjaxDataControls.DataList listInstancesCtrl
+    {
+        get { return listInstances; }
+    }
+    protected override AjaxDataControls.DataList listRecentObjectsCtrl
+    {
+        get { return listRecentObjects; }
+    }
+    protected override Control containerCtrl
+    {
+        get { return container; }
+    }
 }

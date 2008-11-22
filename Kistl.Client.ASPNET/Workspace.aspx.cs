@@ -14,13 +14,15 @@ using Kistl.Client;
 using Kistl.Client.ASPNET.Toolkit;
 using Kistl.Client.Presentables;
 
-public partial class Workspace : System.Web.UI.Page
+public partial class Workspace : Kistl.Client.ASPNET.Toolkit.Pages.WorkspacePage
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected override HiddenField hdObjectsControl
     {
-        var initialWorkspace = GuiApplicationContext.Current.Factory
-            .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
-        var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(initialWorkspace);
-        mainContent.Controls.Add(loader.LoadControl(this));
+        get { return hdObjects; }
+    }
+
+    protected override Control ctrlMainContent
+    {
+        get { return divMainContent; }
     }
 }

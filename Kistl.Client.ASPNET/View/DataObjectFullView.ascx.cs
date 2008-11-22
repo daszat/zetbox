@@ -16,14 +16,19 @@ using Kistl.Client;
 
 public partial class View_DataObjectFullView : Kistl.Client.ASPNET.Toolkit.View.DataObjectFullView
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Init(object sender, EventArgs e)
     {
         litTitle.Text = Model.Name;
+        repProperties.DataSource = Model.PropertyModels;
+        repProperties.DataBind();
+    }
 
-        foreach (PresentableModel mdl in Model.PropertyModels)
-        {
-            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl);
-            divPropertiesPlaceholder.Controls.Add(loader.LoadControl(Page));
-        }
+    protected void repProperties_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        PresentableModel mdl = (PresentableModel)e.Item.DataItem;
+        Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
+
+        var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl);
+        divPlaceHolder.Controls.Add(loader.LoadControl(Page));
     }
 }

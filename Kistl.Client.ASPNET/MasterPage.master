@@ -11,7 +11,8 @@
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
         <Services>
-            <asp:ServiceReference Path="~/AJAXService/AJAXService.svc" />
+            <asp:ServiceReference Path="~/AJAXServices/AJAXService.svc" />
+            <asp:ServiceReference Path="~/AJAXServices/WorkspaceModelService.svc" />            
         </Services>
     </asp:ScriptManager>
     <asp:UpdateProgress ID="updateProgress" runat="server" DisplayAfter="1">

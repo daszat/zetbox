@@ -273,6 +273,7 @@ namespace Kistl.Client.Presentables
         private IDataObject _object;
 
         // other models need access here
-        internal IDataObject Object { get { return _object; } }
+        // TODO: Arthur needs that too...
+        public IDataObject Object { get { return _object; } }
     }
 }

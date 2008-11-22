@@ -9,15 +9,72 @@ using System.Web.UI.WebControls;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
+[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")] 
+
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
-    public abstract class WorkspaceView : System.Web.UI.UserControl, IView
+    public abstract class WorkspaceView : System.Web.UI.UserControl, IView, IScriptControl
     {
-        protected WorkspaceModel Model {get; private set;}
+        protected WorkspaceModel Model { get; private set; }
+        protected abstract AjaxDataControls.DataList listModulesCtrl { get; }
+        protected abstract AjaxDataControls.DataList listObjectClassesCtrl { get; }
+        protected abstract AjaxDataControls.DataList listInstancesCtrl { get; }
+        protected abstract AjaxDataControls.DataList listRecentObjectsCtrl { get; }
+        protected abstract Control containerCtrl { get; }
+
+        public WorkspaceView()
+        {
+            this.Load += new EventHandler(WorkspaceView_Load);
+        }
+
+        void WorkspaceView_Load(object sender, EventArgs e)
+        {
+        }
 
         public void SetModel(PresentableModel mdl)
         {
             Model = (WorkspaceModel)mdl;
         }
+
+        #region Render
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+
+            ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
+            if (scriptManager == null) throw new InvalidOperationException("ScriptManager required on the page.");
+            scriptManager.RegisterScriptControl(this);
+        }
+
+        protected override void Render(HtmlTextWriter writer)
+        {
+            base.Render(writer);
+
+            if (!DesignMode)
+            {
+                ScriptManager.GetCurrent(this.Page).RegisterScriptDescriptors(this);
+            }
+        }
+        #endregion
+
+        #region IScriptControl Members
+
+        public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
+        {
+            var desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.View.WorkspaceView", containerCtrl.ClientID);
+            desc.AddComponentProperty("ListModules", listModulesCtrl.ClientID);
+            desc.AddComponentProperty("ListObjectClasses", listObjectClassesCtrl.ClientID);
+            desc.AddComponentProperty("ListInstances", listInstancesCtrl.ClientID);
+            desc.AddComponentProperty("ListRecentObjects", listRecentObjectsCtrl.ClientID);
+            yield return desc; 
+        }
+
+        public IEnumerable<ScriptReference> GetScriptReferences()
+        {
+            yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
+                typeof(WorkspaceView), "Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js"));
+        }
+
+        #endregion
     }
 }

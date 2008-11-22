@@ -4,16 +4,26 @@ using System.Linq;
 using System.Text;
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using System.Web.UI.WebControls;
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
-    public class NullablePropertyTextBoxView : System.Web.UI.UserControl, IView
+    public abstract class NullablePropertyTextBoxView : System.Web.UI.UserControl, IView
     {
-        protected PresentableModel Model { get; private set; }
+        protected IValueModel<String> Model { get; private set; }
+        protected abstract Label lbCtrl { get; }
+        protected abstract TextBox txtCtrl { get; }
 
         public void SetModel(PresentableModel mdl)
         {
-            Model = (PresentableModel)mdl;
+            Model = (IValueModel<String>)mdl;
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            lbCtrl.Text = Model.Label;
+            txtCtrl.Text = Model.Value;
         }
     }
 }
