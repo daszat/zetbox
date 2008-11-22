@@ -40,9 +40,9 @@ namespace Kistl.Client.GUI.DB
             return result;
         }
 
-        public object Create(params object[] parameter)
+        public IView Create(params object[] parameter)
         {
-            return Activator.CreateInstance(this.AsType(), parameter);
+            return (IView)Activator.CreateInstance(this.AsType(), parameter);
         }
 
         public override bool Equals(object obj)
@@ -263,6 +263,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.Forms.View.WorkspaceView", "Kistl.Client.Forms"),
                             Toolkit.TEST, new TypeRef(typeof(WorkspaceLayout))),
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.WorkspaceViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                            Toolkit.ASPNET, new TypeRef(typeof(WorkspaceLayout))),
 
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.DataObjectFullView", "Kistl.Client.WPF"),
@@ -270,6 +273,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.Forms.View.DataObjectFullView", "Kistl.Client.Forms"),
                             Toolkit.TEST, new TypeRef(typeof(DataObjectFullLayout))),
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.DataObjectFullViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                            Toolkit.ASPNET, new TypeRef(typeof(DataObjectFullLayout))),
 
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.ObjectReferenceView", "Kistl.Client.WPF"),
@@ -277,6 +283,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.Forms.View.DataObjectReferenceView", "Kistl.Client.Forms"),
                             Toolkit.TEST, new TypeRef(typeof(DataObjectReferenceLayout))),
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                            Toolkit.ASPNET, new TypeRef(typeof(DataObjectReferenceLayout))),
 
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.DataObjectListView", "Kistl.Client.WPF"),
@@ -284,6 +293,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.Forms.View.DataObjectListView", "Kistl.Client.Forms"),
                             Toolkit.TEST, new TypeRef(typeof(DataObjectListLayout))),
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.DataObjectListViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                            Toolkit.ASPNET, new TypeRef(typeof(DataObjectListLayout))),
 
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.DataObjectView", "Kistl.Client.WPF"),
@@ -295,6 +307,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.Forms.View.NullablePropertyTextBoxView", "Kistl.Client.Forms"),
                             Toolkit.TEST, new TypeRef(typeof(Layout))),
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                            Toolkit.ASPNET, new TypeRef(typeof(Layout))),
                     };
                 }
                 return _viewsCache;

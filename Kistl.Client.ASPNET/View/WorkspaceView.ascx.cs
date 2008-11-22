@@ -10,18 +10,14 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.Client;
-using Kistl.Client.Presentables;
 using Kistl.Client.ASPNET.Toolkit;
+using Kistl.Client;
 
-public partial class _Default : System.Web.UI.Page
+public partial class View_WorkspaceView : Kistl.Client.ASPNET.Toolkit.View.WorkspaceView
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Model.Modules.First());
+        divObjectPlaceholder.Controls.Add(loader.LoadControl(Page));
     }
-
-    
 }

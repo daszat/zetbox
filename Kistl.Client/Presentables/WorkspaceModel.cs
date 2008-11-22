@@ -15,10 +15,7 @@ namespace Kistl.Client.Presentables
         public WorkspaceModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
-            Modules = new ObservableCollection<ModuleModel>();
             RecentObjects = new ObservableCollection<DataObjectModel>();
-
-            Async.Queue(DataContext, AsyncLoadModules);
         }
 
         #region Public interface
@@ -50,7 +47,25 @@ namespace Kistl.Client.Presentables
         /// A collection of all <see cref="Module"/>s, to display as entry 
         /// point into the object hierarchy
         /// </summary>
-        public ObservableCollection<ModuleModel> Modules { get; private set; }
+        public ObservableCollection<ModuleModel> Modules
+        {
+            get
+            {
+                UI.Verify();
+                if (_modulesCache == null)
+                {
+                    _modulesCache = new ObservableCollection<ModuleModel>();
+                    State = ModelState.Loading;
+                    Async.Queue(DataContext, () =>
+                    {
+                        AsyncLoadModules();
+                        UI.Queue(UI, () => this.State = ModelState.Active);
+                    });
+                }
+                return _modulesCache;
+            }
+        }
+        private ObservableCollection<ModuleModel> _modulesCache;
 
         private SaveContextCommand _saveCommand;
         /// <summary>

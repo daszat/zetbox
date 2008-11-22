@@ -72,8 +72,8 @@ namespace Kistl.Client
             // this.Renderer = KistlGUIContext.CreateRenderer(tk);
 
             Toolkit tk = (Toolkit)Enum.Parse(typeof(Toolkit), tkName, true);
-            // TODO: replace by fetching TypeDescriptors from the Store
-            //       via the GuiDataContext
+            // TODO: replace by fetching TypeRefs from the Store
+            //       via the FrozenContext
             switch (tk)
             {
                 case Toolkit.WPF:
@@ -96,6 +96,13 @@ namespace Kistl.Client
                         new object[] { this });
                     break;
                 case Toolkit.ASPNET:
+                    UiThread = new SynchronousThreadManager();
+                    AsyncThread = new SynchronousThreadManager();
+
+                    Factory = (ModelFactory)Activator.CreateInstance(
+                        Type.GetType("Kistl.Client.ASPNET.Toolkit.AspnetModelFactory, Kistl.Client.ASPNET.Toolkit", true),
+                        new object[] { this });
+                    break;
                 default:
                     throw new NotImplementedException();
             }

@@ -8,6 +8,7 @@ using Kistl.API.Client;
 using Kistl.Client.Presentables;
 using Kistl.Client.WPF.View;
 using System.Windows;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.WPF
 {
@@ -39,7 +40,7 @@ namespace Kistl.Client.WPF
             get { return Kistl.App.GUI.Toolkit.WPF; }
         }
 
-        protected override void ShowInView(object renderer, PresentableModel mdl, object view, bool activate)
+        protected override void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate)
         {
             if (view is Window)
             {

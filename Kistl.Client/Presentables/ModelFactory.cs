@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.GUI;
 using Kistl.Client.GUI.DB;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.Presentables
 {
@@ -73,21 +74,29 @@ namespace Kistl.Client.Presentables
 
         #region Top-Level Views Management
 
-        public void ShowModel(PresentableModel mdl, bool activate)
+        public IView CreateDefaultView(PresentableModel mdl)
         {
             Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
             ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
+            IView view = vDesc.ViewRef.Create();
+            view.SetModel(mdl);
+            return view;
+        }
+
+        public void ShowModel(PresentableModel mdl, bool activate)
+        {
             if (mdl is DataObjectModel)
             {
+                // TODO improve multi-workspace facitilities
                 Workspace.SelectedItem = (DataObjectModel)mdl;
             }
             else
             {
-                ShowInView(Renderer, mdl, vDesc.ViewRef.Create(), activate);
+                ShowInView(Renderer, mdl, CreateDefaultView(mdl), activate);
             }
         }
 
-        protected abstract void ShowInView(object renderer, PresentableModel mdl, object view, bool activate);
+        protected abstract void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate);
 
         //public void ShowModel(PresentableModel mdl, TContainer parent)
         //{

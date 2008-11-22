@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 using Kistl.Client.Forms.View;
 using Kistl.Client.Presentables;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.Forms
 {
@@ -40,7 +41,7 @@ namespace Kistl.Client.Forms
                 Application.Exit();
         }
 
-        protected override void ShowInView(object renderer, PresentableModel mdl, object view, bool activate)
+        protected override void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate)
         {
             var control = (IFormsView)view;
             control.SetRenderer((Renderer)renderer);
