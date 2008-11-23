@@ -25,6 +25,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
     {
         protected abstract HiddenField hdObjectsControl { get; }
         protected abstract Control ctrlMainContent { get; }
+
         protected WorkspaceModel Workspace;
 
         public WorkspacePage()

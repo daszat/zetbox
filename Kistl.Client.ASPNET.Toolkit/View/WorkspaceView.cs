@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.API;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")] 
 
@@ -21,6 +22,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         protected abstract AjaxDataControls.DataList listInstancesCtrl { get; }
         protected abstract AjaxDataControls.DataList listRecentObjectsCtrl { get; }
         protected abstract Control containerCtrl { get; }
+        protected abstract AjaxControlToolkit.TabContainer tabObjectsControl { get; }
 
         public WorkspaceView()
         {
@@ -34,6 +36,18 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         public void SetModel(PresentableModel mdl)
         {
             Model = (WorkspaceModel)mdl;
+        }
+
+        private void ShowObjectInternal(IDataObject obj)
+        {
+            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Model.Modules.First());
+            var ctrl = loader.LoadControl(Page);
+
+            AjaxControlToolkit.TabPanel panel = new AjaxControlToolkit.TabPanel();
+            panel.Controls.Add(ctrl);
+            panel.HeaderText = obj.ToString();
+
+            tabObjectsControl.Tabs.Add(panel);
         }
 
         #region Render
