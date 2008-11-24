@@ -34,10 +34,10 @@ namespace Kistl.API.Client
             this.collection = new List<T>(collection);
         }
 
-        private void AddToList(T item)
+        private void AddToList(T item, int index)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
-            SetPointerProperty(item);
+            SetPointerProperty(item, index);
         }
 
         private void RemoveFromList(T item)
@@ -46,7 +46,7 @@ namespace Kistl.API.Client
             ClearPointerProperty(item);
         }
 
-        private void SetPointerProperty(T item)
+        private void SetPointerProperty(T item, int index)
         {
             if (typeof(IEnumerable).IsAssignableFrom(item.GetPropertyType(_pointerProperty)))
             {
@@ -55,6 +55,14 @@ namespace Kistl.API.Client
             else
             {
                 item.SetPropertyValue<IDataObject>(_pointerProperty, _parent);
+                // TODO: Optimize in Generator
+                // Sets the position Property for a 1:n Relation
+                // eg. Method 1-n Parameter
+                // Sets Parameter.Method__Position__
+                if(item.HasProperty(_pointerProperty + Helper.PositonSuffix))
+                {
+                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositonSuffix, index);
+                }
             }
         }
 
@@ -67,6 +75,14 @@ namespace Kistl.API.Client
             else
             {
                 item.SetPropertyValue<IDataObject>(_pointerProperty, null);
+                // TODO: Optimize in Generator
+                // Clears the position Property for a 1:n Relation
+                // eg. Method 1-n Parameter
+                // Clears Parameter.Method__Position__
+                if (item.HasProperty(_pointerProperty + Helper.PositonSuffix))
+                {
+                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositonSuffix, null);
+                }
             }
         }
 
@@ -91,7 +107,7 @@ namespace Kistl.API.Client
         public void Insert(int index, T item)
         {
             collection.Insert(index, item);
-            AddToList(item);
+            AddToList(item, index);
         }
 
         public void RemoveAt(int index)
@@ -115,7 +131,7 @@ namespace Kistl.API.Client
                 collection[index] = value;
 
                 RemoveFromList(item);
-                AddToList(value);
+                AddToList(value, index);
             }
         }
 
@@ -126,7 +142,7 @@ namespace Kistl.API.Client
         public void Add(T item)
         {
             collection.Add(item);
-            AddToList(item);
+            AddToList(item, collection.Count - 1);
         }
 
         public void Clear()

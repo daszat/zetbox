@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.StringRangeConstraint")]
     public class StringRangeConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, StringRangeConstraint
     {
         

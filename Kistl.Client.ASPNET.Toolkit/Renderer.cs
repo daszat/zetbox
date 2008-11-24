@@ -8,6 +8,7 @@ using System.Web.UI;
 using Kistl.API;
 using Kistl.GUI;
 using Kistl.GUI.Renderer;
+using Kistl.Client.ASPNET.Toolkit.Pages;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -25,16 +26,14 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public override void ShowObject(Kistl.API.IDataObject obj)
         {
-            if (HttpContext.Current.CurrentHandler is IWorkspaceControl)
+            if (HttpContext.Current.CurrentHandler is IWorkspaceView)
             {
-                IWorkspaceControl page = (IWorkspaceControl)HttpContext.Current.CurrentHandler;
-                page.ShowObject(obj, null);
+                IWorkspaceView page = (IWorkspaceView)HttpContext.Current.CurrentHandler;
+                page.ShowObject(obj);
             }
             else
             {
-                HttpContext.Current.Response.Redirect(
-                    string.Format("~/ObjectPage.aspx?Type={0}&ID={1}",
-                        HttpUtility.UrlEncode(obj.GetType().FullName), obj.ID));
+                throw new InvalidOperationException("ShowObject is only allowed on a IWorkspacePage");
             }
         }
 

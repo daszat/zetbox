@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.MethodInvocationConstraint")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="MethodInvocationConstraint")]
     public class MethodInvocationConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, MethodInvocationConstraint
     {

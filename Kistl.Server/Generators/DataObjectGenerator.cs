@@ -33,7 +33,6 @@ namespace Kistl.Server.Generators
             public CodeMemberProperty code_property { get; set; }
 
             public Property property { get; set; }
-
             public abstract object Clone();
 
             protected virtual void CloneInternal(CurrentBase result)
@@ -723,7 +722,8 @@ namespace Kistl.Server.Generators
                 CodeMemberProperty codeProp;
                 if (p.IsObjectReferencePropertyList() && !((ObjectReferenceProperty)p).HasStorage())
                 {
-                    CodeTypeReference type = new CodeTypeReference("ICollection", p.ToCodeTypeReference(current.task));
+                    string collectionType = p.IsSorted() ? "IList" : "ICollection";
+                    CodeTypeReference type = new CodeTypeReference(collectionType, p.ToCodeTypeReference(current.task));
                     codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
                 }
                 else if (p.IsListProperty())
@@ -969,7 +969,7 @@ namespace Kistl.Server.Generators
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
             parent.code_property = collectionClass.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject, "Parent");
-            parent.code_property.AddAttribute("XmlIgnore");
+            parent.code_property.SetIgnoreAttributes();
 
             if (current.task == TaskEnum.Client)
             {
@@ -1061,7 +1061,7 @@ namespace Kistl.Server.Generators
         {
             ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
             current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
-            current.code_property.AddAttribute("XmlIgnore");
+            current.code_property.SetIgnoreAttributes();
 
             if (current.task == TaskEnum.Client)
             {
@@ -1159,19 +1159,12 @@ namespace Kistl.Server.Generators
             // Create Value
             collectionClass.code_property = collectionClass.code_class.CreateProperty(
                 collectionClass.property.ToCodeTypeReference(collectionClass.task), "Value");
-            collectionClass.code_property.AddAttribute("XmlIgnore");
-            // collectionClass.code_property.AddAttribute("System.Diagnostics.DebuggerDisplay", "ID = {_fk_Value}");
-            // http://blogs.msdn.com/greggm/archive/2005/11/18/494648.aspx
-            // https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=91772
-            // http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=344925
-            collectionClass.code_property.AddAttribute("System.Diagnostics.DebuggerBrowsable", new CodeAttributeArgument(new CodeSnippetExpression("System.Diagnostics.DebuggerBrowsableState.Never")));
+            collectionClass.code_property.SetIgnoreAttributes();
 
             // Create Parent
             CurrentObjectClass parent = (CurrentObjectClass)collectionClass.Clone();
             parent.code_property = collectionClass.code_class.CreateProperty(current.objClass.GetTypeMoniker().NameDataObject, "Parent");
-            parent.code_property.AddAttribute("XmlIgnore");
-            // parent.code_property.AddAttribute("System.Diagnostics.DebuggerDisplay", "ID = {_fk_Parent}");
-            parent.code_property.AddAttribute("System.Diagnostics.DebuggerBrowsable", new CodeAttributeArgument(new CodeSnippetExpression("System.Diagnostics.DebuggerBrowsableState.Never")));
+            parent.code_property.SetIgnoreAttributes();
 
             // Create SerializerValue
             CurrentObjectClass serializerValue = (CurrentObjectClass)collectionClass.Clone();
@@ -1300,7 +1293,7 @@ namespace Kistl.Server.Generators
         {
             ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
             current.code_property = current.code_class.CreateProperty(current.property.ToCodeTypeReference(current.task), current.property.PropertyName);
-            current.code_property.AddAttribute("XmlIgnore");
+            current.code_property.SetIgnoreAttributes();
 
             if (current.task == TaskEnum.Client)
             {
@@ -1349,15 +1342,12 @@ namespace Kistl.Server.Generators
         private void GenerateProperties_BackReferencePropertyInternal(CurrentObjectClass current)
         {
             // Check if Datatype exits
-            if (current.ctx.GetQuery<ObjectClass>().ToList().First(o => o.Module.Namespace + "." + o.ClassName == current.property.GetPropertyTypeString()) == null)
-                throw new ArgumentOutOfRangeException(string.Format("ObjectReference {0} not found on BackReferenceProperty {1}.{2}",
-                    current.property.GetPropertyTypeString(), current.objClass.ClassName, current.property.PropertyName));
-
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
-            current.code_property.AddAttribute("XmlIgnore");
+            current.code_property.SetIgnoreAttributes();
 
             TypeMoniker childType = new TypeMoniker(current.property.GetPropertyTypeString());
-            current.code_property.Type = new CodeTypeReference("ICollection", new CodeTypeReference(childType.NameDataObject));
+            string collectionType = current.property.IsSorted() ? "IList" : "ICollection";
+            current.code_property.Type = new CodeTypeReference(collectionType, new CodeTypeReference(childType.NameDataObject));
 
             if (current.task == TaskEnum.Client)
             {
@@ -1801,6 +1791,10 @@ namespace Kistl.Server.Generators
                 else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
                 {
                     m.Statements.AddExpression("BinarySerializer.ToBinary(this.fk_{0}, sw)", p.PropertyName);
+                    if (((ObjectReferenceProperty)p).NeedsPositionColumn())
+                    {
+                        m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, API.Helper.PositonSuffix);
+                    }
                 }
                 else if (p.IsObjectReferencePropertyList() && p.HasStorage())
                 {
@@ -1852,6 +1846,10 @@ namespace Kistl.Server.Generators
                 else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
                 {
                     m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName);
+                    if (((ObjectReferenceProperty)p).NeedsPositionColumn())
+                    {
+                        m.Statements.AddExpression("BinarySerializer.FromBinary(out this._{0}{1}, sr)", p.PropertyName, API.Helper.PositonSuffix);
+                    }
                 }
                 else if (p.IsObjectReferencePropertySingle() && !p.HasStorage() && false /*((BackReferenceProperty)p).PreFetchToClient*/)
                 {

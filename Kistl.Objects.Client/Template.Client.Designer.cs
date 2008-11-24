@@ -22,6 +22,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Template")]
     public class Template__Implementation__ : BaseClientDataObject, Template
     {
         
@@ -59,6 +60,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual VisualTree
         {
             get
@@ -109,6 +111,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly DisplayedTypeAssembly
         {
             get
@@ -265,6 +268,7 @@ namespace Kistl.App.GUI
         public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Template_MenuCollectionEntry")]
     public class Template_MenuCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Template>
     {
         

@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.IntParameter")]
     public class IntParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, IntParameter
     {
         

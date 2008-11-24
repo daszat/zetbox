@@ -475,6 +475,28 @@ namespace Kistl.Server.Generators
             return attribute;
         }
 
+        // collectionClass.code_property.AddAttribute("System.Diagnostics.DebuggerDisplay", "ID = {_fk_Value}");
+        // http://blogs.msdn.com/greggm/archive/2005/11/18/494648.aspx
+        // https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=91772
+        // http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=344925
+        public static CodeAttributeDeclaration SetNeverDebuggerBrowsable(this CodeMemberProperty prop)
+        {
+            return AddAttribute(prop, "System.Diagnostics.DebuggerBrowsable", 
+                new CodeAttributeArgument(
+                    new CodeSnippetExpression("System.Diagnostics.DebuggerBrowsableState.Never")));
+        }
+
+        public static CodeAttributeDeclaration SetXmlIgnore(this CodeMemberProperty prop)
+        {
+            return AddAttribute(prop, "XmlIgnore");
+        }
+
+        public static void SetIgnoreAttributes(this CodeMemberProperty prop)
+        {
+            SetXmlIgnore(prop);
+            SetNeverDebuggerBrowsable(prop);
+        }
+
         /// <summary>
         /// Add a CodeAttributeDeclaration. 
         /// <remarks>
@@ -623,6 +645,8 @@ namespace Kistl.Server.Generators
             c.IsClass = true;
             c.TypeAttributes = typeAttributes;
             baseClasses.ForEach<CodeTypeReference>(b => c.BaseTypes.Add(b));
+            // Add a DebuggerDisplay. The Debugger will not call ToString() anymore on this class
+            c.AddAttribute("System.Diagnostics.DebuggerDisplay", ns.Name + "." + name.Replace(API.Helper.ImplementationSuffix, ""));
             return c;
         }
 

@@ -29,6 +29,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.Taetigkeit")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Taetigkeit")]
     public class Taetigkeit__Implementation__ : BaseServerDataObject_EntityFramework, Taetigkeit
     {
@@ -63,6 +64,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Zeiterfassung.Zeitkonto Zeitkonto
         {
             get
@@ -109,6 +111,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get
@@ -193,6 +196,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
         {
             get

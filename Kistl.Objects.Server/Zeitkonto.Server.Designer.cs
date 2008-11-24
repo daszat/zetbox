@@ -28,6 +28,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.Zeitkonto")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Zeitkonto")]
     public class Zeitkonto__Implementation__ : BaseServerDataObject_EntityFramework, Zeitkonto
     {
@@ -81,6 +82,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
         {
             get
@@ -253,6 +255,7 @@ namespace Kistl.App.Zeiterfassung
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Zeitkonto_MitarbeiterCollectionEntry")]
     public class Zeitkonto_MitarbeiterCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto>
     {

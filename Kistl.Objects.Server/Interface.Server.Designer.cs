@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Interface")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Interface")]
     public class Interface__Implementation__ : Kistl.App.Base.DataType__Implementation__, Interface
     {

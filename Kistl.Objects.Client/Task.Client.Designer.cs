@@ -22,6 +22,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Task")]
     public class Task__Implementation__ : BaseClientDataObject, Task
     {
         
@@ -40,6 +41,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Projekt Projekt
         {
             get

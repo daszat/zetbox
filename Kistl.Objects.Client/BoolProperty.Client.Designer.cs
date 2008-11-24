@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.BoolProperty")]
     public class BoolProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, BoolProperty
     {
         

@@ -43,4 +43,9 @@ public partial class View_WorkspaceView : Kistl.Client.ASPNET.Toolkit.View.Works
     {
         get { return tabObjects; }
     }
+    protected override HiddenField hdObjectsControl
+    {
+        get { return hdObjects; }
+    }
+
 }

@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.MethodInvocation")]
     public class MethodInvocation__Implementation__ : BaseClientDataObject, MethodInvocation
     {
         
@@ -42,6 +43,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Method Method
         {
             get
@@ -85,6 +87,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly Assembly
         {
             get
@@ -153,6 +156,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Module Module
         {
             get
@@ -185,6 +189,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.DataType InvokeOnObjectClass
         {
             get

@@ -22,6 +22,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.Zeitkonto")]
     public class Zeitkonto__Implementation__ : BaseClientDataObject, Zeitkonto
     {
         
@@ -59,6 +60,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
         {
             get
@@ -226,6 +228,7 @@ namespace Kistl.App.Zeiterfassung
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.Zeitkonto_MitarbeiterCollectionEntry")]
     public class Zeitkonto_MitarbeiterCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto>
     {
         

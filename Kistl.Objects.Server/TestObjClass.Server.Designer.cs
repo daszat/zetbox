@@ -27,6 +27,7 @@ namespace Kistl.App.Test
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.TestObjClass")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestObjClass")]
     public class TestObjClass__Implementation__ : BaseServerDataObject_EntityFramework, TestObjClass, Kistl.App.Test.ITestInterface
     {
@@ -109,6 +110,7 @@ namespace Kistl.App.Test
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Kunde ObjectProp
         {
             get

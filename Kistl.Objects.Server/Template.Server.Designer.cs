@@ -30,6 +30,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Template")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Template")]
     public class Template__Implementation__ : BaseServerDataObject_EntityFramework, Template
     {
@@ -83,6 +84,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.GUI.Visual VisualTree
         {
             get
@@ -148,6 +150,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly DisplayedTypeAssembly
         {
             get
@@ -321,6 +324,7 @@ namespace Kistl.App.GUI
         public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Template_MenuCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Template_MenuCollectionEntry")]
     public class Template_MenuCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Template>
     {

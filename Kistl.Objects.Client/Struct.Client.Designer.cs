@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Struct")]
     public class Struct__Implementation__ : Kistl.App.Base.DataType__Implementation__, Struct
     {
         

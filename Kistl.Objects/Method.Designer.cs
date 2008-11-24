@@ -59,7 +59,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Parameter der Methode
         /// </summary>
-        ICollection<Kistl.App.Base.BaseParameter> Parameter
+        IList<Kistl.App.Base.BaseParameter> Parameter
         {
             get;
         }

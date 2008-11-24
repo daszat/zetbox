@@ -22,6 +22,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.ControlInfo")]
     public class ControlInfo__Implementation__ : BaseClientDataObject, ControlInfo
     {
         
@@ -40,6 +41,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly Assembly
         {
             get

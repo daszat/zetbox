@@ -22,6 +22,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.TaetigkeitsArt")]
     public class TaetigkeitsArt__Implementation__ : BaseClientDataObject, TaetigkeitsArt
     {
         

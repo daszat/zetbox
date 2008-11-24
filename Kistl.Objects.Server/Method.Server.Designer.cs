@@ -28,6 +28,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Method")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Method")]
     public class Method__Implementation__ : BaseServerDataObject_EntityFramework, Method
     {
@@ -42,7 +43,7 @@ namespace Kistl.App.Base
         
         private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> MethodInvokationsWrapper;
         
-        private EntityCollectionWrapper<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__> ParameterWrapper;
+        private EntityCollectionWrapperSorted<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__> ParameterWrapper;
         
         private bool _IsDisplayable;
         
@@ -66,6 +67,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.DataType ObjectClass
         {
             get
@@ -131,6 +133,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Module Module
         {
             get
@@ -177,6 +180,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations
         {
             get
@@ -198,11 +202,12 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public ICollection<Kistl.App.Base.BaseParameter> Parameter
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public IList<Kistl.App.Base.BaseParameter> Parameter
         {
             get
             {
-                if (ParameterWrapper == null) ParameterWrapper = new EntityCollectionWrapper<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__>(Parameter__Implementation__);
+                if (ParameterWrapper == null) ParameterWrapper = new EntityCollectionWrapperSorted<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__>(Parameter__Implementation__, "Method");
                 return ParameterWrapper;
             }
         }

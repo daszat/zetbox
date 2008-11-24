@@ -27,6 +27,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.EnumerationProperty")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="EnumerationProperty")]
     public class EnumerationProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, EnumerationProperty
     {
@@ -38,6 +39,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Enumeration Enumeration
         {
             get

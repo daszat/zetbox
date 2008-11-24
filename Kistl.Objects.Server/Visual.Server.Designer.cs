@@ -32,6 +32,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Visual")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual")]
     public class Visual__Implementation__ : BaseServerDataObject_EntityFramework, Visual
     {
@@ -138,6 +139,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.BaseProperty Property
         {
             get
@@ -184,6 +186,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Method Method
         {
             get
@@ -355,6 +358,7 @@ namespace Kistl.App.GUI
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Visual_ChildrenCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual_ChildrenCollectionEntry")]
     public class Visual_ChildrenCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
@@ -487,6 +491,7 @@ namespace Kistl.App.GUI
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Visual_ContextMenuCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Visual_ContextMenuCollectionEntry")]
     public class Visual_ContextMenuCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {

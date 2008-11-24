@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Method")]
     public class Method__Implementation__ : BaseClientDataObject, Method
     {
         
@@ -44,6 +45,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.DataType ObjectClass
         {
             get
@@ -105,6 +107,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Module Module
         {
             get
@@ -137,6 +140,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations
         {
             get
@@ -157,7 +161,8 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
-        public ICollection<Kistl.App.Base.BaseParameter> Parameter
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public IList<Kistl.App.Base.BaseParameter> Parameter
         {
             get
             {

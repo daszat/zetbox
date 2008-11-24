@@ -30,6 +30,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.ObjectClass")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectClass")]
     public class ObjectClass__Implementation__ : Kistl.App.Base.DataType__Implementation__, ObjectClass
     {
@@ -70,6 +71,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.ObjectClass BaseObjectClass
         {
             get
@@ -116,6 +118,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Base.ObjectClass> SubClasses
         {
             get
@@ -336,6 +339,7 @@ namespace Kistl.App.Base
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> e);
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ObjectClass_ImplementsInterfacesCollectionEntry")]
     public class ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass>
     {

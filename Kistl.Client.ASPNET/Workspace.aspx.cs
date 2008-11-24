@@ -16,11 +16,6 @@ using Kistl.Client.Presentables;
 
 public partial class Workspace : Kistl.Client.ASPNET.Toolkit.Pages.WorkspacePage
 {
-    protected override HiddenField hdObjectsControl
-    {
-        get { return hdObjects; }
-    }
-
     protected override Control ctrlMainContent
     {
         get { return divMainContent; }

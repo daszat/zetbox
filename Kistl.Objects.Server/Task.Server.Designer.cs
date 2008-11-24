@@ -27,6 +27,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Task")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Task")]
     public class Task__Implementation__ : BaseServerDataObject_EntityFramework, Task
     {
@@ -61,6 +62,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Projekt Projekt
         {
             get

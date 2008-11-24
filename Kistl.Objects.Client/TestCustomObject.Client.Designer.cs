@@ -22,6 +22,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.TestCustomObject")]
     public class TestCustomObject__Implementation__ : BaseClientDataObject, TestCustomObject
     {
         

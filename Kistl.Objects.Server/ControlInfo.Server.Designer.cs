@@ -27,6 +27,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.ControlInfo")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ControlInfo")]
     public class ControlInfo__Implementation__ : BaseServerDataObject_EntityFramework, ControlInfo
     {
@@ -61,6 +62,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly Assembly
         {
             get

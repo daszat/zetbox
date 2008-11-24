@@ -21,6 +21,7 @@ namespace Kistl.API
     using Kistl.API;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.API.XMLObjectCollection")]
     [Serializable()]
     [XmlRoot(ElementName="ObjectCollection")]
     public sealed class XMLObjectCollection : IXmlObjectCollection
@@ -101,6 +102,7 @@ namespace Kistl.API
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.API.XMLObject")]
     [Serializable()]
     [XmlRoot(ElementName="Object")]
     public sealed class XMLObject : IXmlObject

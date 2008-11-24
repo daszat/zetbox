@@ -21,6 +21,7 @@ namespace Kistl.Objects.Client
     using Kistl.API;
     
     
+    [System.Diagnostics.DebuggerDisplay("temp.FrozenContextImplementation")]
     public class FrozenContextImplementation : Kistl.API.FrozenContext
     {
         

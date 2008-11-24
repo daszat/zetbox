@@ -27,6 +27,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.Kostentraeger")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kostentraeger")]
     public class Kostentraeger__Implementation__ : Kistl.App.Zeiterfassung.Zeitkonto__Implementation__, Kostentraeger
     {
@@ -38,6 +39,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Projekt Projekt
         {
             get

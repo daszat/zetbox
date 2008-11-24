@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.IntParameter")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntParameter")]
     public class IntParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, IntParameter
     {

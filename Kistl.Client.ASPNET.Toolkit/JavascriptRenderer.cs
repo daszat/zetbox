@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using Kistl.API;
 using Kistl.GUI;
+using Kistl.Client.ASPNET.Toolkit.Pages;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js", "text/javascript")] 
 
@@ -86,14 +87,14 @@ namespace Kistl.Client.ASPNET.Toolkit
                 case actionShowObject:
                     {
                         IDataObject obj = hdArgument.FromJSON<IDataObject>(KistlContextManagerModule.KistlContext);
-                        if (HttpContext.Current.CurrentHandler is IWorkspaceControl)
+                        if (HttpContext.Current.CurrentHandler is IWorkspaceView)
                         {
-                            IWorkspaceControl page = (IWorkspaceControl)HttpContext.Current.CurrentHandler;
-                            page.ShowObject(obj, null);
+                            IWorkspaceView page = (IWorkspaceView)HttpContext.Current.CurrentHandler;
+                            page.ShowObject(obj);
                         }
                         else
                         {
-                            throw new InvalidOperationException("ShowObject can only be executed on a IWorkspaceControl Page");
+                            throw new InvalidOperationException("ShowObject can only be executed on a IWorkspaceView Page");
                         }
                         break;
                     }

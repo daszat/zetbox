@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Property")]
     public class Property__Implementation__ : Kistl.App.Base.BaseProperty__Implementation__, Property
     {
         

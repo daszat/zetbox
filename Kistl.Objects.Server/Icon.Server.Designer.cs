@@ -25,6 +25,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Icon")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Icon")]
     public class Icon__Implementation__ : BaseServerDataObject_EntityFramework, Icon
     {

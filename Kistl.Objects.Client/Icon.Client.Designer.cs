@@ -22,6 +22,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Icon")]
     public class Icon__Implementation__ : BaseClientDataObject, Icon
     {
         

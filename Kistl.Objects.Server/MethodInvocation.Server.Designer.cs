@@ -30,6 +30,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.MethodInvocation")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="MethodInvocation")]
     public class MethodInvocation__Implementation__ : BaseServerDataObject_EntityFramework, MethodInvocation
     {
@@ -66,6 +67,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Method Method
         {
             get
@@ -112,6 +114,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly Assembly
         {
             get
@@ -196,6 +199,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Module Module
         {
             get
@@ -242,6 +246,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.DataType InvokeOnObjectClass
         {
             get

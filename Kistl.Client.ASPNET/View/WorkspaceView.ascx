@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="WorkspaceView.ascx.cs"
     Inherits="View_WorkspaceView" %>
 <div style="float: left; min-width: 200px; margin-right: 10px;" id="container" runat="server">
+    <asp:HiddenField ID="hdObjects" runat="server" />
     <div id="divLoadingModules" style="display: none;">
         <strong>Modules:</strong>
         <br />

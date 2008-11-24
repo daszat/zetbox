@@ -25,6 +25,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.Kostenstelle")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kostenstelle")]
     public class Kostenstelle__Implementation__ : Kistl.App.Zeiterfassung.Zeitkonto__Implementation__, Kostenstelle
     {

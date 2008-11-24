@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.IntegerRangeConstraint")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="IntegerRangeConstraint")]
     public class IntegerRangeConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, IntegerRangeConstraint
     {

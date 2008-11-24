@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.ValueTypeProperty")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ValueTypeProperty")]
     public class ValueTypeProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ValueTypeProperty
     {

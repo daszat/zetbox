@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.BaseParameter")]
     public class BaseParameter__Implementation__ : BaseClientDataObject, BaseParameter
     {
         
@@ -44,6 +45,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Method Method
         {
             get
@@ -123,6 +125,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Module Module
         {
             get
@@ -326,6 +329,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
+            BinarySerializer.ToBinary(this.Method__Position__, sw);
             BinarySerializer.ToBinary(this._ParameterName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._IsList, sw);
@@ -337,6 +341,7 @@ namespace Kistl.App.Base
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Method, sr);
+            BinarySerializer.FromBinary(out this._Method__Position__, sr);
             BinarySerializer.FromBinary(out this._ParameterName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._IsList, sr);

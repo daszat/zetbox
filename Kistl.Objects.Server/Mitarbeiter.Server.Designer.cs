@@ -25,6 +25,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Mitarbeiter")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Mitarbeiter")]
     public class Mitarbeiter__Implementation__ : BaseServerDataObject_EntityFramework, Mitarbeiter
     {
@@ -59,6 +60,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get

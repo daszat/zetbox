@@ -22,6 +22,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.TestPhoneStruct")]
     public class TestPhoneStruct__Implementation__ : BaseClientStructObject, TestPhoneStruct
     {
         

@@ -22,6 +22,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.TestObjClass")]
     public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass, Kistl.App.Test.ITestInterface
     {
         
@@ -74,6 +75,7 @@ namespace Kistl.App.Test
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Kunde ObjectProp
         {
             get

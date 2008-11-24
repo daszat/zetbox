@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.BackReferenceProperty")]
     public class BackReferenceProperty__Implementation__ : Kistl.App.Base.BaseProperty__Implementation__, BackReferenceProperty
     {
         
@@ -34,6 +35,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {
             get

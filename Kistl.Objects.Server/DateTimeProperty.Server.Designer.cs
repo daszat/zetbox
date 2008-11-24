@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.DateTimeProperty")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="DateTimeProperty")]
     public class DateTimeProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, DateTimeProperty
     {

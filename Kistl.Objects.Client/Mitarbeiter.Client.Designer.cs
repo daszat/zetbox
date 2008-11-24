@@ -22,6 +22,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Mitarbeiter")]
     public class Mitarbeiter__Implementation__ : BaseClientDataObject, Mitarbeiter
     {
         
@@ -40,6 +41,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get

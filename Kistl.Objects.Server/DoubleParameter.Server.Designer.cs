@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.DoubleParameter")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="DoubleParameter")]
     public class DoubleParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, DoubleParameter
     {

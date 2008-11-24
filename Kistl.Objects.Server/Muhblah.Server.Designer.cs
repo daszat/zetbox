@@ -25,6 +25,7 @@ namespace Kistl.App.Test
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.Muhblah")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Muhblah")]
     public class Muhblah__Implementation__ : BaseServerDataObject_EntityFramework, Muhblah
     {

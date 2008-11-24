@@ -22,6 +22,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Projekt")]
     public class Projekt__Implementation__ : BaseClientDataObject, Projekt
     {
         
@@ -63,6 +64,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Projekte.Task> Tasks
         {
             get
@@ -127,6 +129,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
         {
             get
@@ -147,6 +150,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Projekte.Auftrag> Auftraege
         {
             get
@@ -286,6 +290,7 @@ namespace Kistl.App.Projekte
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry")]
     public class Projekt_MitarbeiterCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
     {
         

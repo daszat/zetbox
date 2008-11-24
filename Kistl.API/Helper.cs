@@ -195,6 +195,12 @@ namespace Kistl.API
             pi.SetValue(obj, val, null);
         }
 
+        public static bool HasProperty(this object obj, string propName)
+        {
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            return pi != null;
+        }
+
         public static void AddToCollection<T>(this object obj, string propName, T val)
         {
             AddToCollection<T>(obj, propName, val, false);

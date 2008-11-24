@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.StringParameter")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="StringParameter")]
     public class StringParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, StringParameter
     {

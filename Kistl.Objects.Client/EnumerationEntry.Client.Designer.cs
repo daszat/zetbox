@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.EnumerationEntry")]
     public class EnumerationEntry__Implementation__ : BaseClientDataObject, EnumerationEntry
     {
         
@@ -38,6 +39,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Enumeration Enumeration
         {
             get

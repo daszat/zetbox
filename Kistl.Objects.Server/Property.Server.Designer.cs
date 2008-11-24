@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Property")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Property")]
     public class Property__Implementation__ : Kistl.App.Base.BaseProperty__Implementation__, Property
     {

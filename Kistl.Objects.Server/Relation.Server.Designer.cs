@@ -28,6 +28,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Relation")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Relation")]
     public class Relation__Implementation__ : BaseServerDataObject_EntityFramework, Relation
     {
@@ -60,6 +61,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.ObjectReferenceProperty RightPart
         {
             get
@@ -106,6 +108,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.ObjectReferenceProperty LeftPart
         {
             get

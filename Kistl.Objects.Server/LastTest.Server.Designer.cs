@@ -25,6 +25,7 @@ namespace Kistl.App.Test
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.LastTest")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="LastTest")]
     public class LastTest__Implementation__ : BaseServerDataObject_EntityFramework, LastTest
     {

@@ -27,6 +27,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Constraint")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Constraint")]
     public class Constraint__Implementation__ : BaseServerDataObject_EntityFramework, Constraint
     {
@@ -55,6 +56,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.BaseProperty ConstrainedProperty
         {
             get

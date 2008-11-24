@@ -28,6 +28,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.PresenterInfo")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="PresenterInfo")]
     public class PresenterInfo__Implementation__ : BaseServerDataObject_EntityFramework, PresenterInfo
     {
@@ -93,6 +94,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly PresenterAssembly
         {
             get
@@ -158,6 +160,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly DataAssembly
         {
             get

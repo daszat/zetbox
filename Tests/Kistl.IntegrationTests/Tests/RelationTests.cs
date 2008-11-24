@@ -415,5 +415,42 @@ namespace Kistl.IntegrationTests
 
         #region Clear Relation
         #endregion
+
+        #region Sort Relation
+        public void Sort_Relation_1_n()
+        {
+            int methodID = 0;
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var method = ctx.GetQuery<Kistl.App.Base.Method>().ToList().Where(m => m.Module.ModuleName == "Projekte")
+                    .OrderByDescending(m => m.Parameter.Count).First();
+                methodID = method.ID;
+
+                var tmpParameter = method.Parameter.ToList();
+                method.Parameter.Clear();
+                foreach (Kistl.App.Base.BaseParameter p in tmpParameter
+                    .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.ParameterName))
+                {
+                    method.Parameter.Add(p);
+                }
+
+                ctx.SubmitChanges();
+            }
+
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var method = ctx.Find<Kistl.App.Base.Method>(methodID);
+
+                var tmpParameter = method.Parameter.ToList();
+                int i = 0;
+                foreach (Kistl.App.Base.BaseParameter p in tmpParameter
+                    .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.ParameterName))
+                {
+                    Assert.That(p, Is.EqualTo(tmpParameter[i++]));
+                }
+            }
+        }
+
+        #endregion
     }
 }

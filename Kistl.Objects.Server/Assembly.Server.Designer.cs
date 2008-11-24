@@ -27,6 +27,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Assembly")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Assembly")]
     public class Assembly__Implementation__ : BaseServerDataObject_EntityFramework, Assembly
     {
@@ -57,6 +58,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Module Module
         {
             get

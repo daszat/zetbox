@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.IsValidIdentifierConstraint")]
     public class IsValidIdentifierConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, IsValidIdentifierConstraint
     {
         

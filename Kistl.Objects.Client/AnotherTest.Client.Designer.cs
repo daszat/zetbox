@@ -22,6 +22,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.AnotherTest")]
     public class AnotherTest__Implementation__ : BaseClientDataObject, AnotherTest
     {
         

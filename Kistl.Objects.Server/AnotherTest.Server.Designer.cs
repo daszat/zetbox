@@ -25,6 +25,7 @@ namespace Kistl.App.Test
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.AnotherTest")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="AnotherTest")]
     public class AnotherTest__Implementation__ : BaseServerDataObject_EntityFramework, AnotherTest
     {

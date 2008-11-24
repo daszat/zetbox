@@ -22,6 +22,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Visual")]
     public class Visual__Implementation__ : BaseClientDataObject, Visual
     {
         
@@ -88,6 +89,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.BaseProperty Property
         {
             get
@@ -120,6 +122,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Method Method
         {
             get
@@ -274,6 +277,7 @@ namespace Kistl.App.GUI
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Visual_ChildrenCollectionEntry")]
     public class Visual_ChildrenCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
         
@@ -360,6 +364,7 @@ namespace Kistl.App.GUI
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.Visual_ContextMenuCollectionEntry")]
     public class Visual_ContextMenuCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual>
     {
         

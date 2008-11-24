@@ -25,6 +25,7 @@ namespace Kistl.App.Test
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.TestCustomObject")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TestCustomObject")]
     public class TestCustomObject__Implementation__ : BaseServerDataObject_EntityFramework, TestCustomObject
     {

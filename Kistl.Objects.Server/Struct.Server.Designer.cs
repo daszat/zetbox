@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.Struct")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Struct")]
     public class Struct__Implementation__ : Kistl.App.Base.DataType__Implementation__, Struct
     {

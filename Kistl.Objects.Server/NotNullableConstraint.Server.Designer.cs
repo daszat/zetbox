@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.NotNullableConstraint")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="NotNullableConstraint")]
     public class NotNullableConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, NotNullableConstraint
     {

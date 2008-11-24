@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.IsValidIdentifierConstraint")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="IsValidIdentifierConstraint")]
     public class IsValidIdentifierConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, IsValidIdentifierConstraint
     {

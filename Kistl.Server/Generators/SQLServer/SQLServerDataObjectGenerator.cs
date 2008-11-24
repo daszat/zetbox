@@ -1,16 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Linq;
-using System.Text;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-
-using Kistl.App.Base;
-using System.IO;
-using System.Reflection;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using Kistl.API;
+using Kistl.API.Server;
+using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.SQLServer
 {
@@ -503,13 +503,22 @@ namespace Kistl.Server.Generators.SQLServer
                 }
                 else
                 {
+                    string wrapperType = "EntityCollectionWrapper";
+                    string wrapperSortedParameter = "";
+                    if (current.property.IsSorted())
+                    {
+                        wrapperType = "EntityCollectionWrapperSorted";
+                        wrapperSortedParameter = string.Format(", \"{0}\"", 
+                            ((ObjectReferenceProperty)current.property).GetOpposite().PropertyName);
+                    }
+
                     current.code_field = current.code_class.CreateField(
-                        new CodeTypeReference("EntityCollectionWrapper",
+                        new CodeTypeReference(wrapperType,
                             new CodeTypeReference(childType.NameDataObject),
                             new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                         current.property.PropertyName + "Wrapper");
-                    current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionWrapper<{1}, {1}{2}>({0}{2});
-                return {0}Wrapper", current.property.PropertyName, childType.NameDataObject, Kistl.API.Helper.ImplementationSuffix);
+                    current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new {3}<{1}, {1}{2}>({0}{2}{4});
+                return {0}Wrapper", current.property.PropertyName, childType.NameDataObject, Kistl.API.Helper.ImplementationSuffix, wrapperType, wrapperSortedParameter);
 
                     currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
                         new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),

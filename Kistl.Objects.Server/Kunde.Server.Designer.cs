@@ -27,6 +27,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Kunde")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kunde")]
     public class Kunde__Implementation__ : BaseServerDataObject_EntityFramework, Kunde
     {
@@ -281,6 +282,7 @@ namespace Kistl.App.Projekte
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Kunde_EMailsCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Kunde_EMailsCollectionEntry")]
     public class Kunde_EMailsCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<System.String, Kistl.App.Projekte.Kunde>
     {
@@ -324,6 +326,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Kunde Parent
         {
             get

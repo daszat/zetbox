@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.StructProperty")]
     public class StructProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, StructProperty
     {
         
@@ -32,6 +33,7 @@ namespace Kistl.App.Base
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Struct StructDefinition
         {
             get

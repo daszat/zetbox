@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.BoolParameter")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="BoolParameter")]
     public class BoolParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, BoolParameter
     {

@@ -24,6 +24,7 @@ namespace Kistl.Objects.Server
     using Kistl.DALProvider.EF;
     
     
+    [System.Diagnostics.DebuggerDisplay("temp.FrozenContextImplementation")]
     public class FrozenContextImplementation : Kistl.API.FrozenContext
     {
         

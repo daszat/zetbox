@@ -22,6 +22,7 @@ namespace Kistl.App.Projekte
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Kunde")]
     public class Kunde__Implementation__ : BaseClientDataObject, Kunde
     {
         
@@ -254,6 +255,7 @@ namespace Kistl.App.Projekte
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Kunde_EMailsCollectionEntry")]
     public class Kunde_EMailsCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<System.String, Kistl.App.Projekte.Kunde>
     {
         
@@ -280,6 +282,7 @@ namespace Kistl.App.Projekte
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Kunde Parent
         {
             get

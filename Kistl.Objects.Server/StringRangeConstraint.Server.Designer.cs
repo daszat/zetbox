@@ -25,6 +25,7 @@ namespace Kistl.App.Base
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.StringRangeConstraint")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="StringRangeConstraint")]
     public class StringRangeConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, StringRangeConstraint
     {

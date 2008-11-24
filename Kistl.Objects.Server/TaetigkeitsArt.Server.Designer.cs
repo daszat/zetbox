@@ -25,6 +25,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Zeiterfassung.TaetigkeitsArt")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TaetigkeitsArt")]
     public class TaetigkeitsArt__Implementation__ : BaseServerDataObject_EntityFramework, TaetigkeitsArt
     {

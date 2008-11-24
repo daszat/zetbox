@@ -25,6 +25,7 @@ namespace Kistl.App.Test
     using Kistl.API.Server;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.TestPhoneStruct")]
     [System.Data.Objects.DataClasses.EdmComplexTypeAttribute(NamespaceName="Model", Name="TestPhoneStruct")]
     public class TestPhoneStruct__Implementation__ : BaseServerStructObject_EntityFramework, TestPhoneStruct
     {
@@ -86,6 +87,7 @@ namespace Kistl.App.Test
         }
     }
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.TestPhoneStruct__NULL")]
     public class TestPhoneStruct__Implementation____NULL : TestPhoneStruct__Implementation__
     {
     }

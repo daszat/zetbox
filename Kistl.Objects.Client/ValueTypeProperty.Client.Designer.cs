@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.ValueTypeProperty")]
     public class ValueTypeProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ValueTypeProperty
     {
         

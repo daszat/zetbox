@@ -22,6 +22,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.LastTest")]
     public class LastTest__Implementation__ : BaseClientDataObject, LastTest
     {
         

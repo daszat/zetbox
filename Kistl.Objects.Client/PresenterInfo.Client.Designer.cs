@@ -22,6 +22,7 @@ namespace Kistl.App.GUI
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.GUI.PresenterInfo")]
     public class PresenterInfo__Implementation__ : BaseClientDataObject, PresenterInfo
     {
         
@@ -58,6 +59,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly PresenterAssembly
         {
             get
@@ -108,6 +110,7 @@ namespace Kistl.App.GUI
         }
         
         [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Base.Assembly DataAssembly
         {
             get

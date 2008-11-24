@@ -21,12 +21,18 @@ using Kistl.Client.Presentables;
 
 namespace Kistl.Client.ASPNET.Toolkit.Pages
 {
-    public abstract class WorkspacePage : System.Web.UI.Page
+    // TODO: Move to David
+    public interface IWorkspaceView
     {
-        protected abstract HiddenField hdObjectsControl { get; }
+        void ShowObject(IDataObject obj);
+    }
+
+    public abstract class WorkspacePage : System.Web.UI.Page, IWorkspaceView
+    {
         protected abstract Control ctrlMainContent { get; }
 
         protected WorkspaceModel Workspace;
+        protected IWorkspaceView Ctrl;
 
         public WorkspacePage()
         {
@@ -38,112 +44,13 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
             Workspace = GuiApplicationContext.Current.Factory
                 .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
             var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Workspace);
-            ctrlMainContent.Controls.Add(loader.LoadControl(this));
-
-            CreateControls();
+            Ctrl = (IWorkspaceView)loader.LoadControl(this);
+            ctrlMainContent.Controls.Add((Control)Ctrl);
         }
 
-        List<IDataObject> _Objects;
-        public List<IDataObject> Objects
+        public void ShowObject(IDataObject obj)
         {
-            get
-            {
-                if (_Objects == null)
-                {
-                    if (!IsPostBack)
-                    {
-                        _Objects = new List<IDataObject>();
-                        // Parse Request
-                        if (!string.IsNullOrEmpty(Request["Type"])
-                            && string.IsNullOrEmpty(Request["ID"]))
-                        {
-                            IDataObject obj = KistlContextManagerModule.KistlContext
-                                                .Find(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"), int.Parse(Request["ID"]));
-                            _Objects.Add(obj);
-                        }
-                    }
-                    else
-                    {
-                        // We are to early! So we need to parse the Request Variable directly
-                        // If anyone knows a better way -> pls. get in touch with me.
-                        _Objects = Request[hdObjectsControl.UniqueID].FromJSONArray(KistlContextManagerModule.KistlContext)
-                                        .ToList();
-                    }
-                }
-
-                return _Objects;
-            }
+            Ctrl.ShowObject(obj);
         }
-
-        protected override void OnPreRender(EventArgs e)
-        {
-            base.OnPreRender(e);
-            hdObjectsControl.Value = Objects.ToJSONArray();
-        }
-
-        private void ShowObjectInternal(IDataObject obj)
-        {
-            //var template = obj.FindTemplate(TemplateUsage.EditControl);
-            //var widget = (Control)GuiApplicationContext.Current.Renderer.CreateControl(obj, template.VisualTree);
-
-            //AjaxControlToolkit.TabPanel panel = new AjaxControlToolkit.TabPanel();
-            //panel.Controls.Add(widget);
-            //panel.HeaderText = obj.ToString();
-
-            //tabObjectsControl.Tabs.Add(panel);
-        }
-
-        private void CreateControls()
-        {
-            foreach (IDataObject obj in Objects)
-            {
-                DataObjectModel objMdl = (DataObjectModel)Workspace.Factory.CreateModel(
-                    obj.GetInterfaceType(), KistlContextManagerModule.KistlContext, new object[] {});
-                Workspace.RecentObjects.Add(objMdl);
-            }
-
-            //if (tabObjectsControl.ActiveTab == null)
-            //{
-            //    tabObjectsControl.ActiveTabIndex = 0;
-            //}
-        }
-
-        //#region IWorkspaceControl Members
-
-        //public void ShowObject(IDataObject obj, IBasicControl ctrl)
-        //{
-        //    if (!Objects.Contains(obj))
-        //    {
-        //        Objects.Add(obj);
-        //        ShowObjectInternal(obj);
-        //    }
-        //    tabObjectsControl.ActiveTabIndex = Objects.IndexOf(obj);
-        //}
-
-        //public void RemoveObject(IDataObject dataObject)
-        //{
-        //    // TODO
-        //    throw new NotImplementedException();
-        //}
-
-        //public event EventHandler UserSaveRequest;
-
-        //public event EventHandler UserAbortRequest;
-
-        //public event EventHandler UserNewObjectRequest;
-
-        //public event EventHandler<GenericEventArgs<IDataObject>> UserDeleteObjectRequest;
-
-        //#endregion
-
-        //#region IBasicControl Members
-
-        //public string ShortLabel { get; set; }
-        //public string Description { get; set; }
-        //public FieldSize Size { get; set; }
-        //IKistlContext IBasicControl.Context { get; set; }
-
-        //#endregion
-
     }
 }

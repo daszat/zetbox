@@ -22,6 +22,7 @@ namespace Kistl.App.Base
     using Kistl.API.Client;
     
     
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.DoubleParameter")]
     public class DoubleParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, DoubleParameter
     {
         
