@@ -68,6 +68,15 @@ namespace Kistl.Client.GUI.DB
         {
             return FullName.GetHashCode() + Assembly.GetHashCode() + GenericArguments.Sum(r => r.GetHashCode());
         }
+
+        public override string ToString()
+        {
+            return FullName
+                + (GenericArguments.Length > 0
+                    ? "<" + String.Join(", ", GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
+                    : "")
+                + Assembly;
+        }
     }
 
     public class ViewDescriptor
@@ -82,6 +91,11 @@ namespace Kistl.Client.GUI.DB
         public TypeRef ViewRef { get; private set; }
         public Toolkit Toolkit { get; private set; }
         public TypeRef LayoutRef { get; private set; }
+
+        public override string ToString()
+        {
+            return String.Format("{0}: Display layout {1} with {2}", Toolkit, LayoutRef.AsType().Name, ViewRef.AsType().Name);
+        }
     }
 
     public class ModelDescriptor
@@ -94,6 +108,10 @@ namespace Kistl.Client.GUI.DB
 
         public TypeRef Presentation { get; private set; }
 
+        public override string ToString()
+        {
+            return "Model: " + Presentation.ToString();
+        }
     }
 
     public abstract class Layout
@@ -223,9 +241,17 @@ namespace Kistl.Client.GUI.DB
             }
             return result;
         }
+
         public static ViewDescriptor LookupViewDescriptor(Toolkit tk, Layout l)
         {
             Type layoutType = l.GetType();
+
+            var debug = Views
+                .Where(vd => vd.Toolkit == tk && vd.LayoutRef.AsType().IsAssignableFrom(layoutType))
+                .Select(vd => new { View = vd, Depth = GenerationCount(vd.LayoutRef.AsType(), layoutType)})
+                .OrderBy(p => p.Depth)
+                .ToList();
+
             var result = Views
                 // select matching descriptors
                 .Where(vd => vd.Toolkit == tk && vd.LayoutRef.AsType().IsAssignableFrom(layoutType))
@@ -233,6 +259,7 @@ namespace Kistl.Client.GUI.DB
                 .OrderBy(vd => GenerationCount(vd.LayoutRef.AsType(), layoutType))
                 // use the best match
                 .First();
+
             return result;
         }
 
@@ -310,6 +337,11 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit"),
                             Toolkit.ASPNET, new TypeRef(typeof(Layout))),
+
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF"),
+                            Toolkit.WPF, new TypeRef(typeof(SelectionTaskLayout))),
+
                     };
                 }
                 return _viewsCache;

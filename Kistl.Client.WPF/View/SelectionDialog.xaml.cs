@@ -12,13 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using Kistl.Client.Presentables;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
-    public partial class SelectionDialog : Window
+    public partial class SelectionDialog : Window, IView
     {
         public SelectionDialog()
         {
@@ -39,5 +40,14 @@ namespace Kistl.Client.WPF.View
             model.Choose(null);
             this.Close();            
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            DataContext = (DataObjectSelectionTaskModel)mdl;
+        }
+
+        #endregion
     }
 }

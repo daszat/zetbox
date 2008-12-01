@@ -11,16 +11,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI.DB;
 using Kistl.App.GUI;
+using Kistl.Client.GUI;
+using Kistl.Client.GUI.DB;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
-    public partial class WorkspaceView : Window
+    public partial class WorkspaceView : Window, IView
     {
 
         public WorkspaceView()
@@ -46,6 +47,16 @@ namespace Kistl.Client.WPF.View
                 workspaceModel.HistoryTouch(item);
             }
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            // check data type
+            DataContext = (WorkspaceModel)mdl;
+        }
+
+        #endregion
     }
 
 }

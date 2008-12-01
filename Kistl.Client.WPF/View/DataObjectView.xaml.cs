@@ -12,16 +12,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Kistl.Client.GUI;
+using Kistl.Client.Presentables;
+
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for DataObjectView.xaml
     /// </summary>
-    public partial class DataObjectView : UserControl
+    public partial class DataObjectView : UserControl, IView
     {
         public DataObjectView()
         {
             InitializeComponent();
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            DataContext = (DataObjectModel)mdl;
+        }
+
+        #endregion
     }
 }

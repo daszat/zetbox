@@ -12,16 +12,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Kistl.Client.GUI;
+using Kistl.Client.Presentables;
+
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for PropertyTextBoxView.xaml
     /// </summary>
-    public partial class PropertyTextBoxView : UserControl
+    public partial class PropertyTextBoxView : UserControl, IView
     {
         public PropertyTextBoxView()
         {
             InitializeComponent();
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            DataContext = mdl;
+        }
+
+        #endregion
     }
 }

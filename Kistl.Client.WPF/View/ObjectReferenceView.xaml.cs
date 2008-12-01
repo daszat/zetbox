@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
@@ -19,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for ObjectReferenceView.xaml
     /// </summary>
-    public partial class ObjectReferenceView : UserControl
+    public partial class ObjectReferenceView : UserControl, IView
     {
         public ObjectReferenceView()
         {
@@ -37,5 +38,14 @@ namespace Kistl.Client.WPF.View
             var mdl = (IClearableValue)DataContext;
             mdl.ClearValue();
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            DataContext = (ObjectReferenceModel)mdl;
+        }
+
+        #endregion
     }
 }

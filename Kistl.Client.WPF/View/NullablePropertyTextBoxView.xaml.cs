@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
@@ -19,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : UserControl
+    public partial class NullablePropertyTextBoxView : UserControl, IView
     {
         public NullablePropertyTextBoxView()
         {
@@ -31,5 +32,14 @@ namespace Kistl.Client.WPF.View
             var mdl = (IClearableValue)DataContext;
             mdl.ClearValue();
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            DataContext = mdl;
+        }
+
+        #endregion
     }
 }

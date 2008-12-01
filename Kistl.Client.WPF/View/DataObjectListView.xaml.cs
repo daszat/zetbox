@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
@@ -19,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    public partial class DataObjectListView : UserControl
+    public partial class DataObjectListView : UserControl, IView
     {
 
         public DataObjectListView()
@@ -44,5 +45,14 @@ namespace Kistl.Client.WPF.View
             var model = DataContext as ObjectListModel;
             model.ActivateItem(model.SelectedItem, true);
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            DataContext = (ObjectListModel)mdl;
+        }
+
+        #endregion
     }
 }
