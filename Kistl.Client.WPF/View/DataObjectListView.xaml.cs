@@ -37,13 +37,19 @@ namespace Kistl.Client.WPF.View
         private void RemoveHandler(object sender, RoutedEventArgs e)
         {
             var model = DataContext as ObjectListModel;
-            model.RemoveItem(model.SelectedItem);
+            if (model.SelectedItem != null)
+            {
+                model.RemoveItem(model.SelectedItem);
+            }
         }
 
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
             var model = DataContext as ObjectListModel;
-            model.ActivateItem(model.SelectedItem, true);
+            if (model.SelectedItem != null)
+            {
+                model.ActivateItem(model.SelectedItem, true);
+            }
         }
 
         #region IView Members
