@@ -190,7 +190,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class NullableValuePropertyModel<TValue>
-        : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>
+        : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>, IValueModel<string>
         where TValue : struct
     {
         public NullableValuePropertyModel(
@@ -267,6 +267,27 @@ namespace Kistl.Client.Presentables
                 OnPropertyChanged("HasValue");
             }
         }
+
+        string IValueModel<string>.Value
+        {
+            get
+            {
+                return _valueCache != null ? _valueCache.ToString() : "";
+            }
+            set
+            {
+                this.Value = string.IsNullOrEmpty(value) ? null : (Nullable<TValue>)System.Convert.ChangeType(value, typeof(TValue));
+            }
+        }
+
+        string IReadOnlyValueModel<string>.Value
+        {
+            get
+            {
+                return _valueCache != null ? _valueCache.ToString() : "";
+            }
+        }
+
 
         #endregion
 
