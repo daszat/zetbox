@@ -88,14 +88,6 @@ namespace Kistl.Server
             if (rel == null) return p.IsList ? RelationType.n_m : RelationType.one_n;
             return rel.GetRelationType();
         }
-        
-        public static bool IsSorted(this Property p)
-        {
-            // Pfusch²
-            if (p.PropertyName == "Parameter" && p.ObjectClass.ClassName == "Method") return true;
-
-            return false;
-        }
 
         public static bool HasStorage(this BaseProperty bp)
         {

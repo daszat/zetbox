@@ -505,7 +505,7 @@ namespace Kistl.Server.Generators.SQLServer
                 {
                     string wrapperType = "EntityCollectionWrapper";
                     string wrapperSortedParameter = "";
-                    if (current.property.IsSorted())
+                    if (current.property.IsIndexed)
                     {
                         wrapperType = "EntityCollectionWrapperSorted";
                         wrapperSortedParameter = string.Format(", \"{0}\"", 

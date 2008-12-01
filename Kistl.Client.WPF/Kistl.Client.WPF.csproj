@@ -202,6 +202,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\NullableBoolValueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SelectionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -344,6 +348,9 @@
     </Compile>
     <Compile Include="View\DataObjectView.xaml.cs">
       <DependentUpon>DataObjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NullableBoolValueView.xaml.cs">
+      <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>

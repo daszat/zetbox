@@ -38,5 +38,14 @@ namespace Kistl.App.Base
             get;
             set;
         }
+        
+        /// <summary>
+        /// Whether or not a list-valued property has a index
+        /// </summary>
+        bool IsIndexed
+        {
+            get;
+            set;
+        }
     }
 }

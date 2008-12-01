@@ -722,7 +722,7 @@ namespace Kistl.Server.Generators
                 CodeMemberProperty codeProp;
                 if (p.IsObjectReferencePropertyList() && !((ObjectReferenceProperty)p).HasStorage())
                 {
-                    string collectionType = p.IsSorted() ? "IList" : "ICollection";
+                    string collectionType = p.IsIndexed ? "IList" : "ICollection";
                     CodeTypeReference type = new CodeTypeReference(collectionType, p.ToCodeTypeReference(current.task));
                     codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
                 }
@@ -1346,7 +1346,7 @@ namespace Kistl.Server.Generators
             current.code_property.SetIgnoreAttributes();
 
             TypeMoniker childType = new TypeMoniker(current.property.GetPropertyTypeString());
-            string collectionType = current.property.IsSorted() ? "IList" : "ICollection";
+            string collectionType = current.property.IsIndexed ? "IList" : "ICollection";
             current.code_property.Type = new CodeTypeReference(collectionType, new CodeTypeReference(childType.NameDataObject));
 
             if (current.task == TaskEnum.Client)

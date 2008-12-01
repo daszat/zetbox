@@ -307,6 +307,7 @@
   <EntityType Name="Property" BaseType="Model.BaseProperty">
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsNullable" Type="Boolean" Nullable="false" />
+    <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" />
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty">

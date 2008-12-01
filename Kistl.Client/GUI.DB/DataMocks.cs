@@ -134,13 +134,6 @@ namespace Kistl.Client.GUI.DB
     }
 
     /// <summary>
-    /// layout a value as text
-    /// </summary>
-    public class SimpleValueLayout<TValue> : Layout
-    {
-    }
-
-    /// <summary>
     /// layout a nullable value as text
     /// </summary>
     public class SimpleNullableValueLayout<TValue> : Layout
@@ -337,6 +330,10 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit"),
                             Toolkit.ASPNET, new TypeRef(typeof(Layout))),
+
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.WPF.View.NullableBoolValueView", "Kistl.Client.WPF"),
+                            Toolkit.WPF, new TypeRef(typeof(SimpleNullableValueLayout<Boolean>))),
 
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF"),

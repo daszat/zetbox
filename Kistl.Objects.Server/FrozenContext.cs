@@ -56,6 +56,7 @@ namespace Kistl.Objects.Server
                 Length = 51,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ClassName",
                 AltText = @"Der Name der Objektklasse",
                 Description = @"Der Name der Objektklasse",
@@ -65,6 +66,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"TableName",
                 AltText = @"Tabellenname in der Datenbank",
                 Description = @"Tabellenname in der Datenbank",
@@ -73,6 +75,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Properties",
                 AltText = @"Eigenschaften der Objektklasse",
                 Description = @"Eigenschaften der Objektklasse",
@@ -81,6 +84,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ObjectClass",
                 ID = 8};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
@@ -88,12 +92,14 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"PropertyName",
                 ID = 9};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsList",
                 ID = 11};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
@@ -101,6 +107,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Name",
                 AltText = @"Projektname",
                 Description = @"Projektname",
@@ -109,6 +116,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Tasks",
                 ID = 14};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
@@ -116,6 +124,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Name",
                 AltText = @"Taskname",
                 Description = @"Taskname",
@@ -124,6 +133,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"DatumVon",
                 AltText = @"Start Datum",
                 Description = @"Start Datum",
@@ -132,6 +142,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"DatumBis",
                 AltText = @"Enddatum",
                 Description = @"Enddatum",
@@ -140,6 +151,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Aufwand",
                 AltText = @"Aufwand in Stunden",
                 Description = @"Aufwand in Stunden",
@@ -148,6 +160,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Projekt",
                 AltText = @"Verknüpfung zum Projekt",
                 Description = @"Verknüpfung zum Projekt",
@@ -157,6 +170,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Name",
                 AltText = @"Vorname Nachname",
                 Description = @"Vorname Nachname",
@@ -165,6 +179,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Projekte",
                 AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
                 Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
@@ -173,18 +188,21 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Mitarbeiter",
                 ID = 22};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"AufwandGes",
                 ID = 23};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"BaseObjectClass",
                 AltText = @"Pointer auf die Basisklasse",
                 Description = @"Pointer auf die Basisklasse",
@@ -193,12 +211,14 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsNullable",
                 ID = 26};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"SubClasses",
                 AltText = @"Liste der vererbten Klassen",
                 Description = @"Liste der vererbten Klassen",
@@ -207,12 +227,14 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Length",
                 ID = 28};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ObjectClass",
                 ID = 29};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
@@ -220,12 +242,14 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"MethodName",
                 ID = 30};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Methods",
                 AltText = @"Liste aller Methoden der Objektklasse.",
                 Description = @"Liste aller Methoden der Objektklasse.",
@@ -234,6 +258,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Geburtstag",
                 AltText = @"Herzlichen Glückwunsch zum Geburtstag",
                 Description = @"Herzlichen Glückwunsch zum Geburtstag",
@@ -243,6 +268,7 @@ namespace Kistl.Objects.Server
                 Length = 20,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"SVNr",
                 AltText = @"NNNN TTMMYY",
                 Description = @"NNNN TTMMYY",
@@ -252,6 +278,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"TelefonNummer",
                 AltText = @"+43 123 12345678",
                 Description = @"+43 123 12345678",
@@ -261,6 +288,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"AltText",
                 ID = 41};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
@@ -268,6 +296,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Namespace",
                 AltText = @"CLR Namespace des Moduls",
                 Description = @"CLR Namespace des Moduls",
@@ -277,6 +306,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ModuleName",
                 AltText = @"Name des Moduls",
                 Description = @"Name des Moduls",
@@ -285,6 +315,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"DataTypes",
                 AltText = @"Datentypendes Modules",
                 Description = @"Datentypendes Modules",
@@ -293,6 +324,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Module",
                 AltText = @"Modul der Objektklasse",
                 Description = @"Modul der Objektklasse",
@@ -301,6 +333,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"ReferenceObjectClass",
                 AltText = @"Pointer zur Objektklasse",
                 Description = @"Pointer zur Objektklasse",
@@ -309,6 +342,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"ReferenceProperty",
                 AltText = @"Das Property, welches auf diese Klasse zeigt",
                 Description = @"Das Property, welches auf diese Klasse zeigt",
@@ -318,6 +352,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Kundenname",
                 AltText = @"Bitte geben Sie den Kundennamen ein",
                 Description = @"Bitte geben Sie den Kundennamen ein",
@@ -326,6 +361,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Mitarbeiter",
                 ID = 49};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
@@ -333,6 +369,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Auftragsname",
                 AltText = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
                 Description = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus",
@@ -341,6 +378,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Projekt",
                 AltText = @"Projekt zum Auftrag",
                 Description = @"Projekt zum Auftrag",
@@ -350,6 +388,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Kontoname",
                 AltText = @"Name des Zeiterfassungskontos",
                 Description = @"Name des Zeiterfassungskontos",
@@ -358,6 +397,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Projekt",
                 AltText = @"Projekt des Kostenträgers",
                 Description = @"Projekt des Kostenträgers",
@@ -366,6 +406,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Mitarbeiter",
                 AltText = @"Mitarbeiter",
                 Description = @"Mitarbeiter",
@@ -374,6 +415,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Zeitkonto",
                 AltText = @"Zeitkonto",
                 Description = @"Zeitkonto",
@@ -382,6 +424,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Datum",
                 AltText = @"Datum",
                 Description = @"Datum",
@@ -390,6 +433,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Dauer",
                 AltText = @"Dauer in Stunden",
                 Description = @"Dauer in Stunden",
@@ -398,6 +442,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Taetigkeiten",
                 AltText = @"Tätigkeiten",
                 Description = @"Tätigkeiten",
@@ -407,6 +452,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Kundenname",
                 AltText = @"Name des Kunden",
                 Description = @"Name des Kunden",
@@ -416,6 +462,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Adresse",
                 AltText = @"Adresse & Hausnummer",
                 Description = @"Adresse & Hausnummer",
@@ -425,6 +472,7 @@ namespace Kistl.Objects.Server
                 Length = 10,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"PLZ",
                 AltText = @"Postleitzahl",
                 Description = @"Postleitzahl",
@@ -434,6 +482,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Ort",
                 AltText = @"Ort",
                 Description = @"Ort",
@@ -443,6 +492,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Land",
                 AltText = @"Land",
                 Description = @"Land",
@@ -451,6 +501,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Kunde",
                 AltText = @"Kunde des Projektes",
                 Description = @"Kunde des Projektes",
@@ -459,6 +510,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Auftragswert",
                 AltText = @"Wert in EUR des Auftrages",
                 Description = @"Wert in EUR des Auftrages",
@@ -467,6 +519,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Kostentraeger",
                 AltText = @"Kostenträger",
                 Description = @"Kostenträger",
@@ -475,6 +528,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Auftraege",
                 AltText = @"Aufträge",
                 Description = @"Aufträge",
@@ -484,6 +538,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IconFile",
                 AltText = @"Filename of the Icon",
                 Description = @"Filename of the Icon",
@@ -492,6 +547,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"DefaultIcon",
                 AltText = @"Standard Icon wenn IIcon nicht implementiert ist",
                 Description = @"Standard Icon wenn IIcon nicht implementiert ist",
@@ -500,6 +556,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Module",
                 AltText = @"Module",
                 Description = @"Module",
@@ -509,6 +566,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"AssemblyName",
                 AltText = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
                 Description = @"Full Assemblyname eg. MyActions, Version=1.0.0.0",
@@ -517,6 +575,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Module",
                 AltText = @"Zugehörig zum Modul",
                 Description = @"Zugehörig zum Modul",
@@ -525,6 +584,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Module",
                 AltText = @"Zugehörig zum Modul",
                 Description = @"Zugehörig zum Modul",
@@ -533,6 +593,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Method",
                 AltText = @"Methode, die Aufgerufen wird",
                 Description = @"Methode, die Aufgerufen wird",
@@ -541,6 +602,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Assembly",
                 AltText = @"Assembly, dass die Methode beinhaltet",
                 Description = @"Assembly, dass die Methode beinhaltet",
@@ -550,6 +612,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"FullTypeName",
                 AltText = @"Voller Name des .NET Types des implementierenden Members",
                 Description = @"Voller Name des .NET Types des implementierenden Members",
@@ -559,6 +622,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"MemberName",
                 AltText = @"Name des implementierenden Members",
                 Description = @"Name des implementierenden Members",
@@ -567,6 +631,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Module",
                 AltText = @"Zugehörig zum Modul",
                 Description = @"Zugehörig zum Modul",
@@ -575,6 +640,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"InvokeOnObjectClass",
                 AltText = @"In dieser Objektklasse implementieren",
                 Description = @"In dieser Objektklasse implementieren",
@@ -583,6 +649,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"MethodInvocations",
                 AltText = @"all implemented Methods in this DataType",
                 Description = @"all implemented Methods in this DataType",
@@ -591,6 +658,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"MethodInvokations",
                 AltText = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
                 Description = @"Methodenaufrufe implementiert in dieser Objekt Klasse",
@@ -599,6 +667,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Assemblies",
                 AltText = @"Assemblies des Moduls",
                 Description = @"Assemblies des Moduls",
@@ -607,6 +676,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsClientAssembly",
                 AltText = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
                 Description = @"Legt fest, ob es sich um ein Client-Assembly handelt.",
@@ -615,6 +685,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"PreFetchToClient",
                 AltText = @"Serialisierung der Liste zum Client",
                 Description = @"Serialisierung der Liste zum Client",
@@ -624,6 +695,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"EMails",
                 AltText = @"EMails des Kunden - können mehrere sein",
                 Description = @"EMails des Kunden - können mehrere sein",
@@ -632,6 +704,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Mitarbeiter",
                 AltText = @"Zugeordnete Mitarbeiter",
                 Description = @"Zugeordnete Mitarbeiter",
@@ -641,6 +714,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Name",
                 AltText = @"Name der Tätigkeitsart",
                 Description = @"Name der Tätigkeitsart",
@@ -649,6 +723,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"TaetigkeitsArt",
                 AltText = @"Art der Tätigkeit",
                 Description = @"Art der Tätigkeit",
@@ -657,6 +732,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"MaxStunden",
                 AltText = @"Maximal erlaubte Stundenanzahl",
                 Description = @"Maximal erlaubte Stundenanzahl",
@@ -665,6 +741,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DoubleProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"AktuelleStunden",
                 AltText = @"Aktuell gebuchte Stunden",
                 Description = @"Aktuell gebuchte Stunden",
@@ -674,6 +751,7 @@ namespace Kistl.Objects.Server
                 Length = 100,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ParameterName",
                 AltText = @"Name des Parameter",
                 Description = @"Name des Parameter",
@@ -682,6 +760,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Method",
                 AltText = @"Methode des Parameters",
                 Description = @"Methode des Parameters",
@@ -690,6 +769,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Module",
                 AltText = @"Module",
                 Description = @"Module",
@@ -698,6 +778,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsList",
                 AltText = @"Parameter wird als List<> generiert",
                 Description = @"Parameter wird als List<> generiert",
@@ -706,6 +787,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsReturnParameter",
                 AltText = @"Es darf nur ein Return Parameter angegeben werden",
                 Description = @"Es darf nur ein Return Parameter angegeben werden",
@@ -714,6 +796,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = true,
                 PropertyName = @"Parameter",
                 AltText = @"Parameter der Methode",
                 Description = @"Parameter der Methode",
@@ -722,6 +805,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"DataType",
                 AltText = @"Kistl-Typ des Parameters",
                 Description = @"Kistl-Typ des Parameters",
@@ -730,6 +814,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Assembly",
                 AltText = @"Assembly des CLR Objektes, NULL für Default Assemblies",
                 Description = @"Assembly des CLR Objektes, NULL für Default Assemblies",
@@ -739,6 +824,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"FullTypeName",
                 AltText = @"Name des CLR Datentypen",
                 Description = @"Name des CLR Datentypen",
@@ -747,6 +833,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Enumeration",
                 AltText = @"Übergeordnete Enumeration",
                 Description = @"Übergeordnete Enumeration",
@@ -755,6 +842,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"EnumerationEntries",
                 AltText = @"Einträge der Enumeration",
                 Description = @"Einträge der Enumeration",
@@ -763,6 +851,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Enumeration",
                 AltText = @"Enumeration der Eigenschaft",
                 Description = @"Enumeration der Eigenschaft",
@@ -771,6 +860,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"ImplementsInterfaces",
                 AltText = @"Interfaces der Objektklasse",
                 Description = @"Interfaces der Objektklasse",
@@ -780,6 +870,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"StringProp",
                 AltText = @"String Property für das Testinterface",
                 Description = @"String Property für das Testinterface",
@@ -788,6 +879,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ObjectProp",
                 AltText = @"Objektpointer für das Testinterface",
                 Description = @"Objektpointer für das Testinterface",
@@ -797,6 +889,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"StringProp",
                 AltText = @"String Property",
                 Description = @"String Property",
@@ -805,6 +898,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"TestEnumProp",
                 AltText = @"Test Enumeration Property",
                 Description = @"Test Enumeration Property",
@@ -813,6 +907,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"TestEnumProp",
                 AltText = @"Test Enum Property",
                 Description = @"Test Enum Property",
@@ -821,6 +916,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ObjectProp",
                 AltText = @"testtest",
                 Description = @"testtest",
@@ -829,6 +925,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Platform",
                 AltText = @"The Toolkit used by this Renderer",
                 Description = @"The Toolkit used by this Renderer",
@@ -837,6 +934,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Assembly",
                 AltText = @"The assembly containing the Control",
                 Description = @"The assembly containing the Control",
@@ -846,6 +944,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ClassName",
                 AltText = @"The name of the class implementing this Control",
                 Description = @"The name of the class implementing this Control",
@@ -854,6 +953,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsContainer",
                 AltText = @"Whether or not this Control can contain other Controls",
                 Description = @"Whether or not this Control can contain other Controls",
@@ -862,6 +962,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Platform",
                 AltText = @"The toolkit of this Control.",
                 Description = @"The toolkit of this Control.",
@@ -870,6 +971,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ControlType",
                 AltText = @"The type of Control of this implementation",
                 Description = @"The type of Control of this implementation",
@@ -878,6 +980,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsSimpleObject",
                 AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
                 Description = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.",
@@ -886,6 +989,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsDisplayable",
                 AltText = @"Shows this Method in th GUI",
                 Description = @"Shows this Method in th GUI",
@@ -894,6 +998,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"MyIntProperty",
                 AltText = @"test",
                 Description = @"test",
@@ -903,6 +1008,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Number",
                 AltText = @"Enter a Number",
                 Description = @"Enter a Number",
@@ -912,6 +1018,7 @@ namespace Kistl.Objects.Server
                 Length = 50,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"AreaCode",
                 AltText = @"Enter Area Code",
                 Description = @"Enter Area Code",
@@ -920,6 +1027,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"StructDefinition",
                 AltText = @"Definition of this Struct",
                 Description = @"Definition of this Struct",
@@ -929,6 +1037,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"PersonName",
                 AltText = @"Persons Name",
                 Description = @"Persons Name",
@@ -937,6 +1046,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StructProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"PhoneNumberMobile",
                 AltText = @"Mobile Phone Number",
                 Description = @"Mobile Phone Number",
@@ -945,6 +1055,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StructProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"PhoneNumberOffice",
                 AltText = @"Office Phone Number",
                 Description = @"Office Phone Number",
@@ -953,6 +1064,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.DateTimeProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Birthday",
                 AltText = @"Happy Birthday!",
                 Description = @"Happy Birthday!",
@@ -961,6 +1073,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Value",
                 AltText = @"The CLR value of this entry",
                 Description = @"The CLR value of this entry",
@@ -970,6 +1083,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Name",
                 AltText = @"CLR name of this entry",
                 Description = @"CLR name of this entry",
@@ -978,6 +1092,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ControlType",
                 AltText = @"which controls are handled by this Presenter",
                 Description = @"which controls are handled by this Presenter",
@@ -986,6 +1101,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"PresenterAssembly",
                 AltText = @"Where to find the implementation of the Presenter",
                 Description = @"Where to find the implementation of the Presenter",
@@ -995,6 +1111,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"PresenterTypeName",
                 AltText = @"The CLR namespace and class name of the Presenter",
                 Description = @"The CLR namespace and class name of the Presenter",
@@ -1003,6 +1120,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"DataAssembly",
                 AltText = @"The Assembly of the Data Type",
                 Description = @"The Assembly of the Data Type",
@@ -1012,6 +1130,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"DataTypeName",
                 AltText = @"The CLR namespace and class name of the Data Type",
                 Description = @"The CLR namespace and class name of the Data Type",
@@ -1021,6 +1140,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"A short description of the utility of this visual",
                 Description = @"A short description of the utility of this visual",
@@ -1029,6 +1149,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ControlType",
                 AltText = @"Which visual is represented here",
                 Description = @"Which visual is represented here",
@@ -1037,6 +1158,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Children",
                 AltText = @"if this is a container, here are the visually contained/controlled children of this Visual",
                 Description = @"if this is a container, here are the visually contained/controlled children of this Visual",
@@ -1045,6 +1167,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Property",
                 AltText = @"The Property to display",
                 Description = @"The Property to display",
@@ -1053,6 +1176,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Method",
                 AltText = @"The Method whose return value shoud be displayed",
                 Description = @"The Method whose return value shoud be displayed",
@@ -1062,6 +1186,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"DisplayName",
                 AltText = @"a short name to identify this Template to the user",
                 Description = @"a short name to identify this Template to the user",
@@ -1070,6 +1195,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"VisualTree",
                 AltText = @"The visual representation of this Template",
                 Description = @"The visual representation of this Template",
@@ -1079,6 +1205,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"DisplayedTypeFullName",
                 AltText = @"FullName of the Type that is displayed with this Template",
                 Description = @"FullName of the Type that is displayed with this Template",
@@ -1087,6 +1214,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"DisplayedTypeAssembly",
                 AltText = @"Assembly of the Type that is displayed with this Template",
                 Description = @"Assembly of the Type that is displayed with this Template",
@@ -1095,6 +1223,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"ContextMenu",
                 AltText = @"The context menu for this Visual",
                 Description = @"The context menu for this Visual",
@@ -1103,6 +1232,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Menu",
                 AltText = @"The main menu for this Template",
                 Description = @"The main menu for this Template",
@@ -1112,6 +1242,7 @@ namespace Kistl.Objects.Server
                 Length = 400,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Reason",
                 AltText = @"The reason of this constraint",
                 Description = @"The reason of this constraint",
@@ -1120,6 +1251,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Max",
                 AltText = @"The biggest value accepted by this constraint",
                 Description = @"The biggest value accepted by this constraint",
@@ -1128,6 +1260,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"Min",
                 AltText = @"The smallest value accepted by this constraint",
                 Description = @"The smallest value accepted by this constraint",
@@ -1136,6 +1269,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Constraints",
                 AltText = @"The list of constraints applying to this Property",
                 Description = @"The list of constraints applying to this Property",
@@ -1144,6 +1278,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"ConstrainedProperty",
                 AltText = @"The property to be constrained",
                 Description = @"The property to be constrained",
@@ -1152,6 +1287,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"MaxLength",
                 AltText = @"The maximal length of this StringProperty",
                 Description = @"The maximal length of this StringProperty",
@@ -1160,6 +1296,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.IntProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"MinLength",
                 AltText = @"The minimal length of this StringProperty",
                 Description = @"The minimal length of this StringProperty",
@@ -1168,6 +1305,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"IsFrozenObject",
                 AltText = @"if true then all Instances appear in FozenContext.",
                 Description = @"if true then all Instances appear in FozenContext.",
@@ -1177,6 +1315,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"Description of this DataType",
                 Description = @"Description of this DataType",
@@ -1186,6 +1325,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"Description of this Property",
                 Description = @"Description of this Property",
@@ -1195,6 +1335,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"Description of this Parameter",
                 Description = @"Description of this Parameter",
@@ -1204,6 +1345,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"Description of this Enumeration Entry",
                 Description = @"Description of this Enumeration Entry",
@@ -1213,6 +1355,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"Description of this Module",
                 Description = @"Description of this Module",
@@ -1222,6 +1365,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"Description of this Method",
                 Description = @"Description of this Method",
@@ -1230,6 +1374,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"LeftPart",
                 AltText = @"Left Part of the Relation",
                 Description = @"Left Part of the Relation",
@@ -1238,6 +1383,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = false,
+                IsIndexed = false,
                 PropertyName = @"RightPart",
                 AltText = @"Right Part of the Relation",
                 Description = @"Right Part of the Relation",
@@ -1246,6 +1392,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Storage",
                 AltText = @"Storagetype for 1:1 Relations",
                 Description = @"Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.",
@@ -1255,6 +1402,7 @@ namespace Kistl.Objects.Server
                 Length = 200,
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"Description",
                 AltText = @"Description of this Relation",
                 Description = @"Description of this Relation",
@@ -1263,6 +1411,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"RightOf",
                 AltText = @"This Property is the right Part of the selected Relation.",
                 Description = @"This Property is the right Part of the selected Relation.",
@@ -1271,10 +1420,20 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = false,
                 IsNullable = true,
+                IsIndexed = false,
                 PropertyName = @"LeftOf",
                 AltText = @"This Property is the left Part of the selected Relation.",
                 Description = @"This Property is the left Part of the selected Relation.",
                 ID = 186};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.BoolProperty__Implementation__() {
+                IsList = false,
+                IsNullable = false,
+                IsIndexed = false,
+                PropertyName = @"IsIndexed",
+                AltText = @"Whether or not a list-valued property has a index",
+                Description = @"Whether or not a list-valued property has a index",
+                ID = 204};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             _Kistl_App_Base_BaseProperty.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
@@ -4609,6 +4768,10 @@ namespace Kistl.Objects.Server
             {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(186);
             obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(77);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(14);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.BoolProperty>(204);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(7);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.Method>(1);

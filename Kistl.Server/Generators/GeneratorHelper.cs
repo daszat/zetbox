@@ -730,10 +730,10 @@ namespace Kistl.Server.Generators
                 if (objRefProp.IsList == false &&
                     objRefProp.GetRelation() != null &&
                     objRefProp.GetRelationType() == Kistl.API.RelationType.one_n &&
-                    objRefProp.GetOpposite().IsSorted()) return true;
+                    objRefProp.GetOpposite().IsIndexed) return true;
             }
             if (p.IsList == true &&
-                p.IsSorted()) return true;
+                p.IsIndexed) return true;
             return false;
         }
         #endregion

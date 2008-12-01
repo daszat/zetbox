@@ -34,6 +34,8 @@ namespace Kistl.App.Base
         
         private bool _IsNullable;
         
+        private bool _IsIndexed;
+        
         public Property__Implementation__()
         {
         }
@@ -72,6 +74,25 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsNullable"); 
                     _IsNullable = value;
                     NotifyPropertyChanged("IsNullable");;
+                }
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public bool IsIndexed
+        {
+            get
+            {
+                return _IsIndexed;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (IsIndexed != value)
+                {
+                    NotifyPropertyChanging("IsIndexed"); 
+                    _IsIndexed = value;
+                    NotifyPropertyChanged("IsIndexed");;
                 }
             }
         }
@@ -133,6 +154,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.IsNullable))
                             .Select(c => c.GetErrorText(this, this.IsNullable))
                             .ToArray());
+                case "IsIndexed":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(204).Constraints
+                            .Where(c => !c.IsValid(this, this.IsIndexed))
+                            .Select(c => c.GetErrorText(this, this.IsIndexed))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -175,6 +202,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._IsList, sw);
             BinarySerializer.ToBinary(this._IsNullable, sw);
+            BinarySerializer.ToBinary(this._IsIndexed, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -182,6 +210,7 @@ namespace Kistl.App.Base
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._IsList, sr);
             BinarySerializer.FromBinary(out this._IsNullable, sr);
+            BinarySerializer.FromBinary(out this._IsIndexed, sr);
         }
     }
 }

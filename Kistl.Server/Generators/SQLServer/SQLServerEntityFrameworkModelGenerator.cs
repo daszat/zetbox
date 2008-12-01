@@ -956,7 +956,7 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteAttributeString("Nullable", "true");
                 xml.WriteEndElement(); // </Property>
 
-                if (prop.IsSorted())
+                if (prop.IsIndexed)
                 {
                     xml.WriteStartElement("Property");
                     xml.WriteAttributeString("Name", prop.ObjectClass.ClassName.CalcListPositionColumnName(""));

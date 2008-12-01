@@ -206,7 +206,7 @@ namespace Kistl.Server.Generators.SQLServer
                 if (SQLServerHelper.CheckTableExists(p, db, tx))
                 {
                     System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(p));
-                    if (p.IsSorted() && !SQLServerHelper.CheckColumnExists(tableName, parentPositionColumn, db, tx))
+                    if (p.IsIndexed && !SQLServerHelper.CheckColumnExists(tableName, parentPositionColumn, db, tx))
                     {
                         SQLServerHelper.CreateColumn(tableName, parentPositionColumn, "int", false, db, tx);
                     }
@@ -229,7 +229,7 @@ namespace Kistl.Server.Generators.SQLServer
                     sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
 
                     sb.AppendLine(string.Format("[{0}] [int] NOT NULL, ", parentFKColumn));
-                    if (p.IsSorted())
+                    if (p.IsIndexed)
                     {
                         sb.AppendFormat(",[{0}] int NULL ", p.ObjectClass.ClassName.CalcListPositionColumnName(""));
                     }

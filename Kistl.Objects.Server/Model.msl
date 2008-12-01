@@ -36,6 +36,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypeProperty)">

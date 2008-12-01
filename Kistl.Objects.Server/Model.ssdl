@@ -457,6 +457,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsNullable" Type="bit" Nullable="false" />
+    <Property Name="IsIndexed" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ValueTypeProperty">
     <Key>
