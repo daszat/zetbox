@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using System.Collections.ObjectModel;
 using Kistl.App.Base;
+using System.Collections.Specialized;
 
 namespace Kistl.Client.Presentables
 {
@@ -21,6 +22,7 @@ namespace Kistl.Client.Presentables
         {
             if (!prop.IsList)
                 throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list");
+            RegisterCollectionChanged();
         }
 
         public ObjectListModel(
@@ -28,6 +30,16 @@ namespace Kistl.Client.Presentables
             IDataObject referenceHolder, BackReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
+            RegisterCollectionChanged();
+        }
+
+        private void RegisterCollectionChanged()
+        {
+            Async.Queue(DataContext, () =>
+            {
+                INotifyCollectionChanged collection = Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName);
+                collection.CollectionChanged += AsyncCollectionChanged;
+            });
         }
 
         #region Public interface and IValueModel<ObservableCollection<DataObjectModel>> Members
@@ -48,15 +60,6 @@ namespace Kistl.Client.Presentables
                 }
                 return _valueView;
             }
-        }
-
-        private void _value_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            UI.Verify();
-
-            // uarg! update source too!
-
-            throw new NotImplementedException();
         }
 
         private DataObjectModel _selectedItem;
@@ -136,24 +139,23 @@ namespace Kistl.Client.Presentables
         {
             UI.Verify();
             State = ModelState.Loading;
-            // TODO: replace this
-            _valueCache.Add(item);
-            // TODO: add item to actual value
-            //Async.Queue(DataContext, () =>
-            //{
-            //    Object.GetPropertyValue<ICollection<??>>(Property.PropertyName).Add(item.Object);
-            //    UI.Queue(UI, () => State = ModelState.Active);
-            //});
+            Async.Queue(DataContext, () =>
+            {
+                Object.AddToCollection<IDataObject>(Property.PropertyName, item.Object);
+                UI.Queue(UI, () => State = ModelState.Active);
+            });
         }
 
         public void RemoveItem(DataObjectModel item)
         {
             UI.Verify();
-            _valueCache.Remove(item);
-            // TODO: remove item from actual value
-            //Object.GetPropertyValue<ICollection<??>>(Property.PropertyName).Remove(item.Object);
+            State = ModelState.Loading;
+            Async.Queue(DataContext, () =>
+            {
+                Object.RemoveFromCollection<IDataObject>(Property.PropertyName, item.Object);
+                UI.Queue(UI, () => State = ModelState.Active);
+            });
         }
-
         public void ActivateItem(DataObjectModel item, bool activate)
         {
             Factory.ShowModel(item, activate);
@@ -182,6 +184,14 @@ namespace Kistl.Client.Presentables
             _valueCache = newValue;
             _valueView = new ReadOnlyObservableCollection<DataObjectModel>(_valueCache);
             OnPropertyChanged("Value");
+        }
+
+        private void AsyncCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // TODO: improve implementation
+            Async.Verify();
+            var newValue = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).AsQueryable().Cast<IDataObject>().ToList();
+            UI.Queue(UI, () => SyncValues(newValue));
         }
 
         private void AsyncCollectChildClasses(int id, List<ObjectClass> children)

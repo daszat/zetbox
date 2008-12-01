@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using Kistl.App.Base;
 using Kistl.API;
 using Kistl.API.Client;
+using System.Collections.Specialized;
 
 namespace Kistl.Client.Presentables
 {
@@ -51,6 +52,8 @@ namespace Kistl.Client.Presentables
                 if (_instances == null)
                 {
                     _instances = new ObservableCollection<DataObjectModel>();
+                    // As this is a "calculated" collection, only insider should modify this
+                    //_instances.CollectionChanged += _instances_CollectionChanged;
                     Async.Queue(DataContext, AsyncLoadInstances);
                 }
                 return _instances;

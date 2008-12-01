@@ -13,7 +13,7 @@ namespace Kistl.API.Client
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BackReferenceCollection<T> : IList<T>
+    public class BackReferenceCollection<T> : IList<T>, INotifyCollectionChanged
         where T : class, IDataObject
     {
         private string _pointerProperty;
@@ -38,12 +38,14 @@ namespace Kistl.API.Client
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
             SetPointerProperty(item, index);
+            OnItemAdded(item);
         }
 
         private void RemoveFromList(T item)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot remove a NULL Object to this collection");
             ClearPointerProperty(item);
+            OnItemRemoved(item);
         }
 
         private void SetPointerProperty(T item, int index)
@@ -59,7 +61,7 @@ namespace Kistl.API.Client
                 // Sets the position Property for a 1:n Relation
                 // eg. Method 1-n Parameter
                 // Sets Parameter.Method__Position__
-                if(item.HasProperty(_pointerProperty + Helper.PositonSuffix))
+                if (item.HasProperty(_pointerProperty + Helper.PositonSuffix))
                 {
                     item.SetPropertyValue<int?>(_pointerProperty + Helper.PositonSuffix, index);
                 }
@@ -90,11 +92,13 @@ namespace Kistl.API.Client
         {
             if (list == null) return;
             list.collection = new List<T>(this.collection);
+            list.OnCollectionReset();
         }
 
         public void AttachToContext(IKistlContext ctx)
         {
             collection = new List<T>(collection.Select(i => ctx.Attach(i)).Cast<T>());
+            OnCollectionReset();
         }
 
         #region IList<T> Members
@@ -199,6 +203,28 @@ namespace Kistl.API.Client
 
         #endregion
 
+        #region INotifyCollectionChanged Members
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        protected virtual void OnItemAdded(T newItem)
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new ArrayList(1) { newItem }));
+        }
+
+        protected virtual void OnItemRemoved(T removedItem)
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new ArrayList(1) { removedItem }));
+        }
+
+        protected virtual void OnCollectionReset()
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+        #endregion
     }
     #endregion
 
