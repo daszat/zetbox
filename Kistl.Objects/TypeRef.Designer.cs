@@ -21,16 +21,30 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
-    /// <summary>
-    /// Metadefinition Object for String Properties.
-    /// </summary>
-    public interface StringProperty : Kistl.App.Base.ValueTypeProperty
+    public interface TypeRef : IDataObject
     {
         
-        int Length
+        string FullName
         {
             get;
             set;
+        }
+        
+        /// <summary>
+        /// The assembly containing the referenced Type.
+        /// </summary>
+        Kistl.App.Base.Assembly Assembly
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// list of type arguments
+        /// </summary>
+        IList<Kistl.App.Base.TypeRef> GenericArguments
+        {
+            get;
         }
     }
 }

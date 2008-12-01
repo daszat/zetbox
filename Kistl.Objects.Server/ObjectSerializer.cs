@@ -90,6 +90,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.IsValidIdentifierConstraint), ElementName="IsValidIdentifierConstraint")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.IsValidNamespaceConstraint), ElementName="IsValidNamespaceConstraint")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Relation), ElementName="Relation")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.TypeRef), ElementName="TypeRef")]
         public System.Collections.Generic.List<object> Objects
         {
             get
@@ -171,6 +172,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.IsValidIdentifierConstraint), ElementName="IsValidIdentifierConstraint")]
         [XmlElement(Type=typeof(Kistl.App.Base.IsValidNamespaceConstraint), ElementName="IsValidNamespaceConstraint")]
         [XmlElement(Type=typeof(Kistl.App.Base.Relation), ElementName="Relation")]
+        [XmlElement(Type=typeof(Kistl.App.Base.TypeRef), ElementName="TypeRef")]
         public object Object
         {
             get

@@ -87,51 +87,62 @@ namespace Kistl.Client.Presentables
 
             Async.Queue(DataContext, () =>
             {
-                DataType baseclass;
+                ObjectClass baseclass;
                 if (this.Property is BackReferenceProperty)
                 {
-                    baseclass = ((BackReferenceProperty)this.Property).ReferenceProperty.ObjectClass;
+                    baseclass = ((BackReferenceProperty)this.Property).ReferenceProperty.ObjectClass as ObjectClass;
+                    // TODO: non-ObjectClass references have to be handled properly too
+                    if (baseclass == null)
+                        throw new InvalidOperationException();
                 }
                 else
                 {
                     baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
                 }
-                var children = new List<ObjectClass>();
 
+                var children = new List<ObjectClass>() { baseclass };
                 AsyncCollectChildClasses(baseclass.ID, children);
 
-                UI.Queue(UI, () =>
+                if (children.Count == 1)
                 {
+                    Type targetType = baseclass.GetDataType();
+                    var item = this.DataContext.Create(targetType);
+                    UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
+                }
+                else
+                {
+                    UI.Queue(UI, () =>
+                    {
+                        // sort by name, create models
+                        // TODO: filter non-instantiable classes
+                        var childModels = children
+                            .OrderBy(oc => oc.ClassName)
+                            .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
+                            .ToList();
 
-                    // sort by name, create models
-                    // TODO: filter non-instantiable classes
-                    var childModels = children
-                        .OrderBy(oc => oc.ClassName)
-                        .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
-                        .ToList();
-
-                    Factory.ShowModel(
-                        Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
-                            DataContext,
-                            childModels,
-                            new Action<DataObjectModel>(delegate(DataObjectModel chosen)
-                            {
-                                UI.Verify();
-                                Async.Queue(DataContext, () =>
+                        Factory.ShowModel(
+                            Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                                DataContext,
+                                childModels,
+                                new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                                 {
-                                    if (chosen != null)
+                                    UI.Verify();
+                                    Async.Queue(DataContext, () =>
                                     {
-                                        Type targetType = ((ObjectClass)chosen.Object).GetDataType();
-                                        var item = this.DataContext.Create(targetType);
-                                        UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
-                                    }
-                                    else
-                                    {
-                                        UI.Queue(UI, () => onCreated(null));
-                                    }
-                                });
-                            })), true);
-                });
+                                        if (chosen != null)
+                                        {
+                                            Type targetType = ((ObjectClass)chosen.Object).GetDataType();
+                                            var item = this.DataContext.Create(targetType);
+                                            UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
+                                        }
+                                        else
+                                        {
+                                            UI.Queue(UI, () => onCreated(null));
+                                        }
+                                    });
+                                })), true);
+                    });
+                }
             });
         }
 

@@ -122,7 +122,7 @@ namespace Kistl.Client.WPF
                             prop.Constraints.Add(currentStringRangeConstraint);
                         }
 
-                        currentStringRangeConstraint.MaxLength = prop.Length.Value;
+                        currentStringRangeConstraint.MaxLength = prop.Length;
                     }
                     ctx.SubmitChanges();
                 }

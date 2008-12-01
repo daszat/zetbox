@@ -109,6 +109,21 @@ namespace Kistl.Client.Presentables
                 Factory.ShowModel(Value, true);
         }
 
+        /// <summary>
+        /// creates a new target and references it
+        /// </summary>
+        public void CreateNew()
+        {
+            UI.Verify();
+            State = ModelState.Loading;
+            Async.Queue(DataContext, () =>
+            {
+                IDataObject newObj = DataContext.Create(Property.GetPropertyType());
+                Object.SetPropertyValue<IDataObject>(Property.PropertyName, newObj);
+                // State will be reset by PropertyChanged event
+            });
+        }
+
         #endregion
 
         #region Async handlers and UI callbacks
@@ -134,7 +149,6 @@ namespace Kistl.Client.Presentables
             {
                 foreach (var obj in objs)
                 {
-                    // TODO: search for existing DOModel
                     _domain.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
                 }
                 State = ModelState.Active;

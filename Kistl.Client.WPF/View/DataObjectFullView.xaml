@@ -11,6 +11,13 @@
                    HorizontalAlignment="Center" />
         <ListView ItemsSource="{Binding PropertyModels}"
                   BorderThickness="0" 
-                  ItemTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+                  ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
+            <ListView.ItemContainerStyle>
+                <Style>
+                    <Setter Property="FrameworkElement.Margin"
+                            Value="2" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </DockPanel>
 </UserControl>

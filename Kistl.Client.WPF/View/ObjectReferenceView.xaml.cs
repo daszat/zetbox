@@ -39,6 +39,12 @@ namespace Kistl.Client.WPF.View
             mdl.ClearValue();
         }
 
+        private void CreateNewHandler(object sender, RoutedEventArgs e)
+        {
+            var model = (ObjectReferenceModel)DataContext;
+            model.CreateNew();
+        }
+
         #region IView Members
 
         public void SetModel(PresentableModel mdl)
@@ -47,5 +53,6 @@ namespace Kistl.Client.WPF.View
         }
 
         #endregion
+
     }
 }

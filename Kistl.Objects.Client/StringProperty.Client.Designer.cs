@@ -26,13 +26,13 @@ namespace Kistl.App.Base
     public class StringProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, StringProperty
     {
         
-        private System.Int32? _Length;
+        private int _Length;
         
         public StringProperty__Implementation__()
         {
         }
         
-        public System.Int32? Length
+        public int Length
         {
             get
             {

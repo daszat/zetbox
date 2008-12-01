@@ -35,6 +35,9 @@
                     Click="OpenSelection"
                     IsEnabled="{Binding HasValue}">Open</Button>
             
+            <Button DockPanel.Dock="Right"
+                    Click="CreateNewHandler">New ...</Button>
+            
             <ComboBox ItemsSource="{Binding Domain, Mode=OneWay}"
                       ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                       SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />

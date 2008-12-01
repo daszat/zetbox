@@ -231,7 +231,7 @@ namespace Kistl.Server.Generators.SQLServer
                     sb.AppendLine(string.Format("[{0}] [int] NOT NULL, ", parentFKColumn));
                     if (p.IsIndexed)
                     {
-                        sb.AppendFormat(",[{0}] int NULL ", p.ObjectClass.ClassName.CalcListPositionColumnName(""));
+                        sb.AppendFormat("[{0}] int NULL, ", p.ObjectClass.ClassName.CalcListPositionColumnName(""));
                     }
 
                     sb.Append(SQLServerHelper.GetColumnStmt(p, ""));

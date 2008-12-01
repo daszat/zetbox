@@ -162,7 +162,7 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteAttributeString("Type", GetAssociationChildTypeName(prop));
-                xml.WriteAttributeString("Multiplicity", prop.GetRelationType() == RelationType.one_one ? "1" :"*");
+                xml.WriteAttributeString("Multiplicity", prop.GetRelationType() == RelationType.one_one ? "0..1" :"*");
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteEndElement(); // </AssociationSet>

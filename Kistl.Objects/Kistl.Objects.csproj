@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -111,6 +111,7 @@
     <Compile Include="TestObjClass.Designer.cs" />
     <Compile Include="TestPhoneStruct.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
+    <Compile Include="TypeRef.Designer.cs" />
     <Compile Include="ValueTypeProperty.Designer.cs" />
     <Compile Include="Visual.Designer.cs" />
     <Compile Include="VisualType.Interface.Designer.cs" />

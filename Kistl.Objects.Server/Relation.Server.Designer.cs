@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Relation_ObjectReferenceProperty_RightPart", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__), "B_Relation", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Kistl.App.Base.Relation__Implementation__))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Relation_ObjectReferenceProperty_LeftPart", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__), "B_Relation", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Kistl.App.Base.Relation__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Relation_ObjectReferenceProperty_RightPart", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__), "B_Relation", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Relation_ObjectReferenceProperty_LeftPart", "A_ObjectReferenceProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__), "B_Relation", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__))]
 
 namespace Kistl.App.Base
 {

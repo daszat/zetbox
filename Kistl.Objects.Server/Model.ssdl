@@ -59,6 +59,7 @@
     <EntitySet Name="IsValidIdentifierConstraint" EntityType="Model.Store.IsValidIdentifierConstraint" Table="IsValidIdentifierConstraints" />
     <EntitySet Name="IsValidNamespaceConstraint" EntityType="Model.Store.IsValidNamespaceConstraint" Table="IsValidNamespaceConstraints" />
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations" />
+    <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -66,6 +67,7 @@
     <EntitySet Name="Visual_ChildrenCollectionEntry" EntityType="Model.Store.Visual_ChildrenCollectionEntry" Table="Visuals_ChildrenCollection" />
     <EntitySet Name="Visual_ContextMenuCollectionEntry" EntityType="Model.Store.Visual_ContextMenuCollectionEntry" Table="Visuals_ContextMenuCollection" />
     <EntitySet Name="Template_MenuCollectionEntry" EntityType="Model.Store.Template_MenuCollectionEntry" Table="Templates_MenuCollection" />
+    <EntitySet Name="TypeRef_GenericArgumentsCollectionEntry" EntityType="Model.Store.TypeRef_GenericArgumentsCollectionEntry" Table="TypeRefs_GenericArgumentsCollection" />
     <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
@@ -370,6 +372,14 @@
       <End Role="A_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
       <End Role="B_Relation" EntitySet="Relation" />
     </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_Assembly_Assembly" Association="Model.Store.FK_TypeRef_Assembly_Assembly">
+      <End Role="A_Assembly" EntitySet="Assembly" />
+      <End Role="B_TypeRef" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments" Association="Model.Store.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_TypeRef_GenericArgumentsCollectionEntry" EntitySet="TypeRef_GenericArgumentsCollectionEntry" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -397,6 +407,10 @@
     <AssociationSet Name="FK_Template_MenuCollectionEntry_Template_fk_Parent" Association="Model.Store.FK_Template_MenuCollectionEntry_Template_fk_Parent">
       <End Role="A_Template" EntitySet="Template" />
       <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent" Association="Model.Store.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_TypeRef_GenericArgumentsCollectionEntry" EntitySet="TypeRef_GenericArgumentsCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -470,7 +484,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Length" Type="int" Nullable="true" />
+    <Property Name="Length" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Method">
     <Key>
@@ -871,6 +885,14 @@
     <Property Name="Storage" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
+  <EntityType Name="TypeRef">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Assembly" Type="int" />
+  </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -926,6 +948,16 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Template" Type="int" Nullable="true" />
     <Property Name="fk_Menu" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TypeRef_GenericArgumentsCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_TypeRef" Type="int" Nullable="true" />
+    <Property Name="fk_TypeRef_pos" Type="int" Nullable="true" />
+    <Property Name="fk_GenericArguments" Type="int" Nullable="true" />
+    <Property Name="fk_GenericArguments_pos" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_ObjectClass_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
@@ -1839,6 +1871,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TypeRef_Assembly_Assembly">
+    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
+    <End Role="B_TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_Assembly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_TypeRef">
+        <PropertyRef Name="fk_Assembly" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments">
+    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="B_TypeRef_GenericArgumentsCollectionEntry" Type="Model.Store.TypeRef_GenericArgumentsCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TypeRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_TypeRef_GenericArgumentsCollectionEntry">
+        <PropertyRef Name="fk_GenericArguments" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="B_Projekt_MitarbeiterCollectionEntry" Type="Model.Store.Projekt_MitarbeiterCollectionEntry" Multiplicity="*" />
@@ -1920,6 +1976,18 @@
       </Principal>
       <Dependent Role="B_Template_MenuCollectionEntry">
         <PropertyRef Name="fk_Template" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent">
+    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="B_TypeRef_GenericArgumentsCollectionEntry" Type="Model.Store.TypeRef_GenericArgumentsCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TypeRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_TypeRef_GenericArgumentsCollectionEntry">
+        <PropertyRef Name="fk_TypeRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

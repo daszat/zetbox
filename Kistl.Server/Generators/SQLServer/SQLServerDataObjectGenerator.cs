@@ -95,7 +95,7 @@ namespace Kistl.Server.Generators.SQLServer
                 new CodeAttributeArgument(
                     new CodePrimitiveExpression(Generator.GetAssociationChildRoleName(childType))),
                 new CodeAttributeArgument(
-                    new CodeSnippetExpression(string.Format("System.Data.Metadata.Edm.RelationshipMultiplicity.{0}", type == RelationType.one_one ? "One" : "Many"))),
+                    new CodeSnippetExpression(string.Format("System.Data.Metadata.Edm.RelationshipMultiplicity.{0}", type == RelationType.one_one ? "ZeroOrOne" : "Many"))),
                 new CodeAttributeArgument(
                     new CodeTypeOfExpression(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)));
         }
