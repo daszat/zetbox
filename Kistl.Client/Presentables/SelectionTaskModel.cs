@@ -8,23 +8,23 @@ using Kistl.API;
 
 namespace Kistl.Client.Presentables
 {
-    public class SelectionTaskModel<TModel>
+    public class SelectionTaskModel<TChoosable>
         : PresentableModel
-        where TModel : PresentableModel
+        where TChoosable : PresentableModel
     {
         public SelectionTaskModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IList<TModel> choices,
-            Action<TModel> callback)
+            IList<TChoosable> choices,
+            Action<TChoosable> callback)
             : base(appCtx, dataCtx)
         {
-            _choices = new ReadOnlyCollection<TModel>(choices);
+            _choices = new ReadOnlyCollection<TChoosable>(choices);
             _callback = callback;
         }
 
         #region Public interface
 
-        public ReadOnlyCollection<TModel> Choices
+        public ReadOnlyCollection<TChoosable> Choices
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public void Choose(TModel choosen)
+        public void Choose(TChoosable choosen)
         {
             if (_choices.Contains(choosen))
             {
@@ -47,8 +47,8 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        private ReadOnlyCollection<TModel> _choices;
-        private Action<TModel> _callback;
+        private ReadOnlyCollection<TChoosable> _choices;
+        private Action<TChoosable> _callback;
     }
 
     public class DataObjectSelectionTaskModel : SelectionTaskModel<DataObjectModel>
