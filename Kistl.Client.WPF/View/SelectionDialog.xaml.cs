@@ -41,6 +41,19 @@ namespace Kistl.Client.WPF.View
             this.Close();            
         }
 
+        private void ChoiceActivated(object sender, MouseButtonEventArgs e)
+        {
+            var model = (DataObjectSelectionTaskModel)DataContext;
+            var choosen = (DataObjectModel)choicesList.SelectedItem;
+            
+            // ignore double clicks without selection
+            if (choosen != null)
+            {
+                model.Choose(choosen);
+                this.Close();
+            }
+        }
+
         #region IView Members
 
         public void SetModel(PresentableModel mdl)

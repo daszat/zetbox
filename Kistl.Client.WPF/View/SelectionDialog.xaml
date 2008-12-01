@@ -23,6 +23,7 @@
         <ListBox x:Name="choicesList"
                  ItemsSource="{Binding Choices}"
                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                 MouseDoubleClick="ChoiceActivated"
                  Style="{StaticResource addedMargins}" />
     </DockPanel>
 </Window>
