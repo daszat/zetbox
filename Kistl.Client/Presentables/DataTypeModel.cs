@@ -18,6 +18,8 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, type)
         {
             _type = type;
+            // refresh Icon
+            Async.Queue(DataContext, AsyncUpdateViewCache);
         }
 
         #region Public interface
