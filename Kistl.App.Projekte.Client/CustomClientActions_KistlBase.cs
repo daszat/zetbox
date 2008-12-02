@@ -202,7 +202,14 @@ namespace Kistl.App.Base
             if (Helper.IsPersistedObject(obj))
             {
                 ObjectClass objClass = obj.ReferenceObjectClass;
-                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+                if (objClass == null)
+                {
+                    e.Result = "(null)";
+                }
+                else
+                {
+                    e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+                }
             }
             else
             {
