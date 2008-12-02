@@ -48,17 +48,17 @@ namespace Kistl.Server
                         actiondone = true;
                         server.GenerateDatabase();
                     }
-
-                    if(actiondone)
-                    {
-                        Console.WriteLine("Hit the anykey to exit");
-                        Console.ReadKey();
-                        return;
-                    }
                 }
                 catch (Exception ex)
                 {
                     Helper.HandleError(ex);
+                }
+
+                if (actiondone)
+                {
+                    Console.WriteLine("Hit the anykey to exit");
+                    Console.ReadKey();
+                    return;
                 }
             }
 

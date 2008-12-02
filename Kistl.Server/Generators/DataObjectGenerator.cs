@@ -272,7 +272,7 @@ namespace Kistl.Server.Generators
         {
             char[] progress = new char[] { '-', '\\', '|', '/' };
             int progressIdx = 0;
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.GetContext())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 foreach (IDataObject obj in ctx.GetQuery<T>())
                 {
@@ -354,7 +354,7 @@ namespace Kistl.Server.Generators
         {
             char[] progress = new char[] { '-', '\\', '|', '/' };
             int progressIdx = 0;
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.GetContext())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 foreach (IDataObject obj in ctx.GetQuery<T>())
                 {
@@ -720,15 +720,17 @@ namespace Kistl.Server.Generators
             foreach (Property p in properties)
             {
                 CodeMemberProperty codeProp;
-                if (p.IsObjectReferencePropertyList() && !((ObjectReferenceProperty)p).HasStorage())
+                //if (p.IsObjectReferencePropertyList() && !((ObjectReferenceProperty)p).HasStorage())
+                //{
+                //    string collectionType = p.IsSorted() ? "IList" : "ICollection";
+                //    CodeTypeReference type = new CodeTypeReference(collectionType, p.ToCodeTypeReference(current.task));
+                //    codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
+                //}
+                //else 
+                if (p.IsListProperty())
                 {
                     string collectionType = p.IsIndexed ? "IList" : "ICollection";
                     CodeTypeReference type = new CodeTypeReference(collectionType, p.ToCodeTypeReference(current.task));
-                    codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
-                }
-                else if (p.IsListProperty())
-                {
-                    CodeTypeReference type = new CodeTypeReference("IList", p.ToCodeTypeReference(current.task));
                     codeProp = current.code_class.CreateProperty(type, p.PropertyName, false);
                 }
                 else
@@ -994,7 +996,8 @@ namespace Kistl.Server.Generators
 
             // Create NavigationProperty Class -> Collectionclass
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
-            current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
+            current.code_property.Type = new CodeTypeReference(string.Format("{1}<{0}>", 
+                current.property.GetPropertyTypeString(), current.property.IsIndexed ? "IList" : "ICollection"));
 
             if (current.task == TaskEnum.Client)
             {
@@ -1182,7 +1185,8 @@ namespace Kistl.Server.Generators
 
             // Create NavigationProperty Class -> Collectionclass
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
-            current.code_property.Type = new CodeTypeReference(string.Format("IList<{0}>", current.property.GetPropertyTypeString()));
+            current.code_property.Type = new CodeTypeReference(string.Format("{1}<{0}>",
+                current.property.GetPropertyTypeString(), current.property.IsIndexed ? "IList" : "ICollection"));
 
             if (current.task == TaskEnum.Client)
             {

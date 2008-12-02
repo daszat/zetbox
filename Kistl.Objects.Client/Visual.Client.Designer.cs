@@ -79,8 +79,8 @@ namespace Kistl.App.GUI
                 }
             }
         }
-        
-        public IList<Kistl.App.GUI.Visual> Children
+
+        public ICollection<Kistl.App.GUI.Visual> Children
         {
             get
             {
@@ -153,8 +153,8 @@ namespace Kistl.App.GUI
                 }
             }
         }
-        
-        public IList<Kistl.App.GUI.Visual> ContextMenu
+
+        public ICollection<Kistl.App.GUI.Visual> ContextMenu
         {
             get
             {

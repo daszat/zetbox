@@ -25,6 +25,7 @@ namespace Kistl.Client.Presentables
         {
             _object = obj;
             _object.PropertyChanged += AsyncObjectPropertyChanged;
+            // TODO: Optional machen!
             Async.Queue(DataContext, () =>
             {
                 AsyncUpdateViewCache();

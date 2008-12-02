@@ -110,7 +110,7 @@ namespace Kistl.API.Server.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(sr);
@@ -125,7 +125,7 @@ namespace Kistl.API.Server.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(null);
@@ -143,7 +143,7 @@ namespace Kistl.API.Server.Tests
             SerializableType wrongType = new SerializableType(typeof(string));
             BinarySerializer.ToBinary(wrongType, sw);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 ms.Seek(0, SeekOrigin.Begin);
                 TestObjClass result = new TestObjClass__Implementation__();
@@ -165,7 +165,7 @@ namespace Kistl.API.Server.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 TestObjClass result = ctx.Create<TestObjClass>();
                 result.FromStream(sr);
@@ -180,7 +180,7 @@ namespace Kistl.API.Server.Tests
         public void AttachToContext()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -193,12 +193,12 @@ namespace Kistl.API.Server.Tests
         public void AttachToContext_Other()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-                using (IKistlContext ctx2 = Kistl.API.Server.KistlDataContext.GetContext())
+                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
                 {
                     obj.AttachToContext(ctx2);
                     Assert.That(obj.Context, Is.Not.Null);
@@ -212,7 +212,7 @@ namespace Kistl.API.Server.Tests
         {
             Assert.That(obj.Context, Is.Null);
             ((TestObjClass__Implementation__)obj).ID = 10;
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -230,7 +230,7 @@ namespace Kistl.API.Server.Tests
         {
             Assert.That(obj.Context, Is.Null);
             ((TestObjClass__Implementation__)obj).ID = 10;
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -239,7 +239,7 @@ namespace Kistl.API.Server.Tests
                 Assert.That(obj.Context, Is.Null);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
 
-                using (IKistlContext ctx2 = Kistl.API.Server.KistlDataContext.GetContext())
+                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
                 {
                     obj.DetachFromContext(ctx2);
                     Assert.That(obj.Context, Is.Null);

@@ -25,14 +25,14 @@ namespace Kistl.DALProvider.EF
             if (ID < Kistl.API.Helper.INVALIDID)
             {
                 // new object -> look in current context
-                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)Kistl.API.Server.KistlDataContext.Current;
+                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)Kistl.API.Server.KistlContext.Current;
                 ObjectContext ctx = efCtx.ObjectContext;
                 return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
                     .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
             }
             else
             {
-                return Kistl.API.Server.KistlDataContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
+                return Kistl.API.Server.KistlContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
             }
         }
     }
@@ -50,7 +50,7 @@ namespace Kistl.DALProvider.EF
             foreach (IDataObject obj in objects)
             {
                 // Fist of all, Attach Object
-                Kistl.API.Server.KistlDataContext.Current.Attach(obj);
+                Kistl.API.Server.KistlContext.Current.Attach(obj);
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
@@ -74,7 +74,7 @@ namespace Kistl.DALProvider.EF
         /// <param name="obj"></param>
         protected static void UpdateRelationships(IDataObject obj)
         {
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.GetContext())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(ctx);
                 while (objClass != null)
@@ -129,7 +129,7 @@ namespace Kistl.DALProvider.EF
             // TODO: Bad Hack!!
             if (obj.EntityState.In(EntityState.Modified, EntityState.Unchanged))
             {
-                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)Kistl.API.Server.KistlDataContext.Current;
+                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)Kistl.API.Server.KistlContext.Current;
                 ObjectStateEntry stateEntry = efCtx.ObjectContext.ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
                 MetadataWorkspace workspace = efCtx.ObjectContext.MetadataWorkspace;
                 string typename;
@@ -153,7 +153,7 @@ namespace Kistl.DALProvider.EF
 
             if (obj is IDataObject)
             {
-                using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.GetContext())
+                using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
                 {
                     Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).GetObjectClass(ctx);
                     while (objClass != null)

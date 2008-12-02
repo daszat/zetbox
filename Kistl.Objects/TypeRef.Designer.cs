@@ -42,7 +42,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// list of type arguments
         /// </summary>
-        IList<Kistl.App.Base.TypeRef> GenericArguments
+        ICollection<Kistl.App.Base.TypeRef> GenericArguments
         {
             get;
         }

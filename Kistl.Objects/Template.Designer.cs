@@ -63,7 +63,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The main menu for this Template
         /// </summary>
-        IList<Kistl.App.GUI.Visual> Menu
+        ICollection<Kistl.App.GUI.Visual> Menu
         {
             get;
         }

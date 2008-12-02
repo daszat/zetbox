@@ -979,7 +979,10 @@ namespace Kistl.Server.Generators.SQLServer
                 {
                     xml.WriteAttributeString("MaxLength", ((StringProperty)prop).Length.ToString());
                 }
-                xml.WriteAttributeString("Nullable", prop.IsNullable.ToString().ToLowerInvariant());
+                if (prop.IsValueTypePropertySingle())
+                {
+                    xml.WriteAttributeString("Nullable", prop.IsNullable.ToString().ToLowerInvariant());
+                }
                 xml.WriteEndElement(); // </Property>
 
                 if (prop.NeedsPositionColumn())

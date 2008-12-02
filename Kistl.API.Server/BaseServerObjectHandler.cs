@@ -141,7 +141,7 @@ namespace Kistl.API.Server
                     maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
                 }
 
-                var result = KistlDataContext.Current.GetQuery<T>();
+                var result = KistlContext.Current.GetQuery<T>();
 
                 if (filter != null)
                 {
@@ -223,7 +223,7 @@ namespace Kistl.API.Server
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                KistlDataContext.Current.SubmitChanges();
+                KistlContext.Current.SubmitChanges();
 
                 // TODO: Detect changes made by server nethod calls
                 return objects.Where(o => o.ObjectState != DataObjectState.Deleted);

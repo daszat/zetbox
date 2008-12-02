@@ -142,8 +142,8 @@ namespace Kistl.App.GUI
                 }
             }
         }
-        
-        public IList<Kistl.App.GUI.Visual> Menu
+
+        public ICollection<Kistl.App.GUI.Visual> Menu
         {
             get
             {

@@ -72,7 +72,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// EMails des Kunden - können mehrere sein
         /// </summary>
-        IList<string> EMails
+        ICollection<string> EMails
         {
             get;
         }

@@ -17,7 +17,6 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, cls)
         {
             _class = cls;
-            Async.Queue(DataContext, AsyncQueryHasInstances);
         }
 
         #region Async handlers and UI callbacks

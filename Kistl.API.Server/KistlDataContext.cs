@@ -8,7 +8,7 @@ namespace Kistl.API.Server
     /// <summary>
     /// Factory for Context Objects.
     /// </summary>
-    public static class KistlDataContext
+    public static class KistlContext
     {
         [ThreadStatic]
         private static IKistlContext _Current = null;
@@ -61,7 +61,7 @@ namespace Kistl.API.Server
         /// <returns>A new Context.</returns>
         public static IKistlContext GetContext()
         {
-            lock (typeof(KistlDataContext))
+            lock (typeof(KistlContext))
             {
                 if (_KistlDataContextType == null)
                 {

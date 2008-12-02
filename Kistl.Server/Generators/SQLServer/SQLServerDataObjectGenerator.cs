@@ -507,9 +507,27 @@ namespace Kistl.Server.Generators.SQLServer
                     string wrapperSortedParameter = "";
                     if (current.property.IsIndexed)
                     {
-                        wrapperType = "EntityCollectionWrapperSorted";
-                        wrapperSortedParameter = string.Format(", \"{0}\"", 
-                            ((ObjectReferenceProperty)current.property).GetOpposite().PropertyName);
+                        wrapperType = string.Format("EntityCollectionWrapperSorted_{0}_{1}", current.objClass.ClassName, current.property.PropertyName);
+                        wrapperSortedParameter = string.Format(", \"{0}\"",
+                            backRefProp.GetOpposite().PropertyName);
+
+                        CurrentObjectClass collectionWrapper = (CurrentObjectClass)current.Clone();
+                        collectionWrapper.code_class = collectionWrapper.code_namespace.CreateClass(wrapperType,
+                                new CodeTypeReference("EntityCollectionWrapperSorted",
+                                    new CodeTypeReference(childType.NameDataObject),
+                                    new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)));
+                        collectionWrapper.code_class.TypeParameters.Add("INTERFACE");
+                        collectionWrapper.code_class.TypeParameters.Add("IMPL");
+                        var ctr = collectionWrapper.code_class.CreateConstructor();
+                        ctr.Parameters.Add(new CodeParameterDeclarationExpression(string.Format("EntityCollection<{0}{1}>", childType.NameDataObject, Kistl.API.Helper.ImplementationSuffix), "ec"));
+                        ctr.Parameters.Add(new CodeParameterDeclarationExpression(typeof(string), "pointerProperty"));
+                        ctr.BaseConstructorArgs.Add(new CodeSnippetExpression("ec"));
+                        ctr.BaseConstructorArgs.Add(new CodeSnippetExpression("pointerProperty"));
+
+                        var m = collectionWrapper.code_class.CreateOverrideMethod("GetEnumerable", string.Format("IEnumerable<{0}>", childType.NameDataObject));
+                        m.Attributes = MemberAttributes.Family | MemberAttributes.Override;
+                        m.Statements.AddExpression("return _ec.OrderBy(i => i.{1}{2}).Cast<{0}>()",
+                            childType.NameDataObject, backRefProp.GetOpposite().PropertyName, API.Helper.PositonSuffix);
                     }
 
                     current.code_field = current.code_class.CreateField(

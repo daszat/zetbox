@@ -18,8 +18,6 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, type)
         {
             _type = type;
-
-            Async.Queue(DataContext, AsyncUpdateViewCache);
         }
 
         #region Public interface
@@ -30,6 +28,19 @@ namespace Kistl.Client.Presentables
             get
             {
                 UI.Verify();
+                State = ModelState.Loading;
+                Async.Queue(DataContext, () =>
+                {
+                    AsyncQueryHasInstances();
+                    // TODO: Wird auch in der Ableitung aufgerufen.
+                    // Stateobjekt als IDisposable durchreichen
+                    // aber dann braucht man einen ReferenceCounter - Uaaaaa
+                    // was nochmals eine andere Klasse von Scheiße ist.
+                    // Aber man könnte dem einen String umhängen, was geladen wurde.
+                    // Umpriorisieren & Abbrechen wäre dann auch möglich.
+                    // Case: 661
+                    UI.Queue(UI, () => this.State = ModelState.Active);
+                });
                 return _hasInstances;
             }
             protected set

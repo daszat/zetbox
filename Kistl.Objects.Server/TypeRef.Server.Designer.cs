@@ -125,7 +125,7 @@ namespace Kistl.App.Base
             }
         }
         
-        public IList<Kistl.App.Base.TypeRef> GenericArguments
+        public ICollection<Kistl.App.Base.TypeRef> GenericArguments
         {
             get
             {

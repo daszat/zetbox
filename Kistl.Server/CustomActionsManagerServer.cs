@@ -65,7 +65,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (IKistlContext ctx = KistlDataContext.GetContext())
+                using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     StringBuilder warnings = new StringBuilder();
 

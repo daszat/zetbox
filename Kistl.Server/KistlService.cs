@@ -86,7 +86,7 @@ namespace Kistl.Server
             {
                 using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
                 {
-                    using (IKistlContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.InitSession())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType())
                             .GetList(maxListCount, 
@@ -123,7 +123,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
                 {
-                    using (IKistlContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.InitSession())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).GetListOf(ID, property);
                         return CurrentSerializer.XmlFromList(lst);
@@ -155,7 +155,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
                 {
-                    using (IKistlContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.InitSession())
                     {
                         IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).GetObject(ID);
                         return CurrentSerializer.XmlFromObject(obj);
@@ -187,7 +187,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
                 {
-                    using (IKistlContext ctx = KistlDataContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.InitSession())
                     {
                         IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
                         throw new NotImplementedException();

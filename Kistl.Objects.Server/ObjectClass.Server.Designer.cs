@@ -138,8 +138,8 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        
-        public IList<Kistl.App.Base.Interface> ImplementsInterfaces
+
+        public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
         {
             get
             {

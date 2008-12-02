@@ -17,31 +17,20 @@ namespace Kistl.Client.ASPNET.Toolkit
         [OperationContract]
         public List<JavaScriptObjectMoniker> GetModules()
         {
-            // Das Model ist viel zu langsam
-            //var workspace = GuiApplicationContext.Current.Factory
-            //    .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
+            var workspace = GuiApplicationContext.Current.Factory
+                .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
 
-            //return workspace.Modules.Select(i => new JavaScriptObjectMoniker(i.Object)).ToList();
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                return ctx.GetQuery<Kistl.App.Base.Module>()
-                    .Select(i => new JavaScriptObjectMoniker(i)).ToList();
-            }
+            return workspace.Modules.Select(i => new JavaScriptObjectMoniker(i.Object)).ToList();
         }
 
         [OperationContract]
         public List<JavaScriptObjectMoniker> GetObjectClasses(int moduleID)
         {
-            //var workspace = GuiApplicationContext.Current.Factory
-            //    .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
+            var workspace = GuiApplicationContext.Current.Factory
+                .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
 
-            //return workspace.Modules.Single(m => m.ID == moduleID).ObjectClasses
-            //    .Select(i => new JavaScriptObjectMoniker(i.Object)).ToList();
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                return ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(obj => obj.Module.ID == moduleID)
-                    .Select(i => new JavaScriptObjectMoniker(i)).ToList();
-            }
+            return workspace.Modules.Single(m => m.ID == moduleID).ObjectClasses
+                .Select(i => new JavaScriptObjectMoniker(i.Object)).ToList();
         }
 
         [OperationContract]

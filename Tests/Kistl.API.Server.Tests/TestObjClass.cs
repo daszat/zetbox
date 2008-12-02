@@ -9,6 +9,6 @@ namespace Kistl.API.Server.Tests
         ICollection<TestObjClass> SubClasses { get; }
         int TestEnumProp { get; set; }
         void TestMethod(DateTime DateTimeParamForTestMethod);
-        IList<string> TestNames { get; }
+        ICollection<string> TestNames { get; }
     }
 }

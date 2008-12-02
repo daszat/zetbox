@@ -44,7 +44,7 @@ namespace Kistl.App.Zeiterfassung
         /// <summary>
         /// Zugeordnete Mitarbeiter
         /// </summary>
-        IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+        ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get;
         }

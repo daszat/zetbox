@@ -91,6 +91,10 @@
       <Project>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</Project>
       <Name>Kistl.IntegrationTests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.Server.Tests\Kistl.Server.Tests.csproj">
+      <Project>{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}</Project>
+      <Name>Kistl.Server.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

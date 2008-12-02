@@ -630,6 +630,12 @@ namespace Kistl.Server.Generators
             return CreateClass(ns, name, TypeAttributes.Public, baseClassesList.ToArray());
         }
 
+        public static CodeTypeDeclaration CreateClass(this CodeNamespace ns, string name,
+            params CodeTypeReference[] baseClasses)
+        {
+            return CreateClass(ns, name, TypeAttributes.Public, baseClasses);
+        }
+
         public static CodeTypeDeclaration CreateSealedClass(this CodeNamespace ns, string name, params string[] baseClasses)
         {
             List<CodeTypeReference> baseClassesList = new List<CodeTypeReference>();

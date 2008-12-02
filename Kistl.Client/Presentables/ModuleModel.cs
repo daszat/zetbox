@@ -17,15 +17,31 @@ namespace Kistl.Client.Presentables
             Module mdl)
             : base(appCtx, dataCtx, mdl)
         {
-            ObjectClasses = new ObservableCollection<DataObjectModel>();
             _module = mdl;
             _module.PropertyChanged += AsyncModulePropertyChanged;
-            Async.Queue(DataContext, () => { AsyncLoadObjectClasses(); UI.Queue(UI, () => this.State = ModelState.Active); });
         }
 
         #region public interface
 
-        public ObservableCollection<DataObjectModel> ObjectClasses { get; private set; }
+        private ObservableCollection<DataObjectModel> _objectClassesCache = null;
+        public ObservableCollection<DataObjectModel> ObjectClasses
+        {
+            get
+            {
+                UI.Verify();
+                if (_objectClassesCache == null)
+                {
+                    _objectClassesCache = new ObservableCollection<DataObjectModel>();
+                    State = ModelState.Loading;
+                    Async.Queue(DataContext, () =>
+                    {
+                        AsyncLoadObjectClasses();
+                        UI.Queue(UI, () => this.State = ModelState.Active);
+                    });
+                }
+                return _objectClassesCache;
+            }
+        }
 
         #endregion
 

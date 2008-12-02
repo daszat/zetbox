@@ -7,6 +7,7 @@ using System.Collections;
 
 namespace Kistl.API.Server
 {
+    #region EntityCollectionWrapper
     public class EntityCollectionWrapper<INTERFACE, IMPL> : ICollection<INTERFACE>
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
         where INTERFACE : class, IDataObject
@@ -35,7 +36,7 @@ namespace Kistl.API.Server
 
         public virtual void CopyTo(INTERFACE[] array, int arrayIndex)
         {
-            foreach (INTERFACE i in _ec)
+            foreach (INTERFACE i in GetEnumerable())
             {
                 array[arrayIndex++] = i;
             }
@@ -56,20 +57,26 @@ namespace Kistl.API.Server
             return _ec.Remove(item as IMPL);
         }
 
-        public IEnumerator<INTERFACE> GetEnumerator()
+        public virtual IEnumerator<INTERFACE> GetEnumerator()
         {
-            return ((IEnumerable)_ec).Cast<INTERFACE>().GetEnumerator();
+            return GetEnumerable().GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_ec).Cast<INTERFACE>().GetEnumerator();
+            return GetEnumerable().GetEnumerator();
+        }
+
+        protected virtual IEnumerable<INTERFACE> GetEnumerable()
+        {
+            return _ec.Cast<INTERFACE>();
         }
     }
+    #endregion
 
+    #region EntityCollectionWrapperSorted
     public class EntityCollectionWrapperSorted<INTERFACE, IMPL> : 
         EntityCollectionWrapper<INTERFACE, IMPL>, 
-        ICollection<INTERFACE>, 
         IList<INTERFACE>
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
         where INTERFACE : class, IDataObject
@@ -185,18 +192,20 @@ namespace Kistl.API.Server
                 if (i != value)
                 {
                     RemoveAt(index);
-                    Insert(index, i);
+                    Insert(index, value);
                 }
             }
         }
 
         #endregion
     }
+    #endregion
 
-
-    public class EntityCollectionEntryValueWrapper<PARENT, VALUE, IMPL> : IList<VALUE>
+    #region EntityCollectionEntryValueWrapper
+    // List
+    public class EntityCollectionEntryValueWrapper<PARENT, VALUE, IMPL> : ICollection<VALUE>
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntry<VALUE, PARENT>, new()
-        where PARENT : IDataObject
+        where PARENT : class, IDataObject
     {
         private EntityCollection<IMPL> _ec;
         private PARENT _parentObject;
@@ -207,44 +216,13 @@ namespace Kistl.API.Server
             _parentObject = parentObject;
         }
 
-        #region IList<VALUE> Members
-
-        public int IndexOf(VALUE item)
+        private void Clear(IMPL entry)
         {
-            int idx = 0;
-            foreach (IMPL v in _ec)
-            {
-                if (object.Equals(v.Value, item)) return idx;
-                idx++;
-            }
-            return -1;
+            entry.Value = default(VALUE);
+            entry.Parent = null;
+            // TODO: Warum ist der Context leer?
+            if (entry.Context != null) entry.Context.Delete(entry);
         }
-
-        public void Insert(int index, VALUE item)
-        {
-            // TODO: Not ready yet
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            _ec.Remove(_ec.Skip(index).Single());
-        }
-
-        public VALUE this[int index]
-        {
-            // TODO: Not ready yet
-            get
-            {
-                return _ec.Skip(index).Single().Value;
-            }
-            set
-            {
-                _ec.Skip(index).Single().Value = value;
-            }
-        }
-
-        #endregion
 
         #region ICollection<VALUE> Members
 
@@ -258,6 +236,13 @@ namespace Kistl.API.Server
 
         public void Clear()
         {
+            // Must be cleared by hand
+            // EF will drop the Value on the CollectionEntry - that's right and OK
+            // But we want the CollectionEntry to be deleted in that case
+            foreach (IMPL entry in _ec.ToList())
+            {
+                Clear(entry);
+            }
             _ec.Clear();
         }
 
@@ -287,6 +272,7 @@ namespace Kistl.API.Server
         public bool Remove(VALUE item)
         {
             IMPL e = _ec.Single(i => i.Value.Equals(item));
+            Clear(e);
             return _ec.Remove(e);
         }
 
@@ -310,10 +296,13 @@ namespace Kistl.API.Server
 
         #endregion
     }
+    #endregion
 
-    public class EntityCollectionEntryParentWrapper<PARENT, VALUE, IMPL> : IList<PARENT>
+    #region EntityCollectionEntryParentWrapper
+    // Backreference List
+    public class EntityCollectionEntryParentWrapper<PARENT, VALUE, IMPL> : ICollection<PARENT>
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntry<VALUE, PARENT>, new()
-        where PARENT : IDataObject
+        where PARENT : class, IDataObject
     {
         private EntityCollection<IMPL> _ec;
         private VALUE _parentObject;
@@ -324,36 +313,13 @@ namespace Kistl.API.Server
             _parentObject = parentObject;
         }
 
-        #region IList<PARENT> Members
-
-        public int IndexOf(PARENT item)
+        private void Clear(IMPL entry)
         {
-            throw new NotImplementedException();
+            entry.Value = default(VALUE);
+            entry.Parent = null;
+            // TODO: Warum ist der Context leer?
+            if (entry.Context != null) entry.Context.Delete(entry);
         }
-
-        public void Insert(int index, PARENT item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PARENT this[int index]
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        #endregion
 
         #region ICollection<PARENT> Members
 
@@ -367,6 +333,13 @@ namespace Kistl.API.Server
 
         public void Clear()
         {
+            // Must be cleared by hand
+            // EF will drop the Value on the CollectionEntry - that's right and OK
+            // But we want the CollectionEntry to be deleted in that case
+            foreach (IMPL entry in _ec.ToList())
+            {
+                Clear(entry);
+            }
             _ec.Clear();
         }
 
@@ -396,6 +369,7 @@ namespace Kistl.API.Server
         public bool Remove(PARENT item)
         {
             IMPL e = _ec.Single(i => i.Parent.Equals(item));
+            Clear(e);
             return _ec.Remove(e);
         }
 
@@ -419,4 +393,5 @@ namespace Kistl.API.Server
 
         #endregion
     }
+    #endregion
 }

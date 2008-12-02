@@ -46,7 +46,7 @@ namespace Kistl.API.Server.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 TestObjClass_TestNameCollectionEntry__Implementation__ result = new TestObjClass_TestNameCollectionEntry__Implementation__();
                 result.FromStream(sr);
@@ -59,7 +59,7 @@ namespace Kistl.API.Server.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
-            using (IKistlContext ctx = Kistl.API.Server.KistlDataContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {
                 TestObjClass_TestNameCollectionEntry__Implementation__ result = new TestObjClass_TestNameCollectionEntry__Implementation__();
                 result.FromStream(null);

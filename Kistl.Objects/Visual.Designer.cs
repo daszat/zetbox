@@ -45,7 +45,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
-        IList<Kistl.App.GUI.Visual> Children
+        ICollection<Kistl.App.GUI.Visual> Children
         {
             get;
         }
@@ -71,7 +71,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The context menu for this Visual
         /// </summary>
-        IList<Kistl.App.GUI.Visual> ContextMenu
+        ICollection<Kistl.App.GUI.Visual> ContextMenu
         {
             get;
         }

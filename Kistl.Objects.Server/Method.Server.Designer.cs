@@ -43,7 +43,7 @@ namespace Kistl.App.Base
         
         private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> MethodInvokationsWrapper;
         
-        private EntityCollectionWrapperSorted<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__> ParameterWrapper;
+        private EntityCollectionWrapperSorted_Method_Parameter<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__> ParameterWrapper;
         
         private bool _IsDisplayable;
         
@@ -207,7 +207,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (ParameterWrapper == null) ParameterWrapper = new EntityCollectionWrapperSorted<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__>(Parameter__Implementation__, "Method");
+                if (ParameterWrapper == null) ParameterWrapper = new EntityCollectionWrapperSorted_Method_Parameter<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__>(Parameter__Implementation__, "Method");
                 return ParameterWrapper;
             }
         }
@@ -379,5 +379,22 @@ namespace Kistl.App.Base
         }
         
         public delegate void GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.BaseParameter> e);
+    }
+    
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.EntityCollectionWrapperSorted_Method_Parameter")]
+    public class EntityCollectionWrapperSorted_Method_Parameter<INTERFACE, IMPL> : EntityCollectionWrapperSorted<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__>
+    
+    
+    {
+        
+        public EntityCollectionWrapperSorted_Method_Parameter(EntityCollection<Kistl.App.Base.BaseParameter__Implementation__> ec, string pointerProperty) : 
+                base(ec, pointerProperty)
+        {
+        }
+        
+        protected override IEnumerable<Kistl.App.Base.BaseParameter> GetEnumerable()
+        {
+            return _ec.OrderBy(i => i.Method__Position__).Cast<Kistl.App.Base.BaseParameter>();
+        }
     }
 }

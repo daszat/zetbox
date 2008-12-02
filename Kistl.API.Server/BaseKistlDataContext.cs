@@ -10,7 +10,7 @@ namespace Kistl.API.Server
     {
         public virtual void Dispose()
         {
-            KistlDataContext.ClearSession(this);
+            KistlContext.ClearSession(this);
             GC.SuppressFinalize(this);
             IsDisposed = true;
         }

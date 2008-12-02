@@ -217,7 +217,7 @@ namespace Kistl.API.Server.Tests
         }
 
         private EntityCollectionEntryValueWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__> _TestNames;
-        public IList<string> TestNames
+        public ICollection<string> TestNames
         {
             get 
             {
