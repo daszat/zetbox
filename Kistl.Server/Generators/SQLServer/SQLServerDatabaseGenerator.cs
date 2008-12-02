@@ -208,7 +208,7 @@ namespace Kistl.Server.Generators.SQLServer
                     System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(p));
                     if (p.IsIndexed && !SQLServerHelper.CheckColumnExists(tableName, parentPositionColumn, db, tx))
                     {
-                        SQLServerHelper.CreateColumn(tableName, parentPositionColumn, "int", false, db, tx);
+                        SQLServerHelper.CreateColumn(tableName, parentPositionColumn, "int", true, db, tx);
                     }
 
                     SQLServerHelper.AlterColumn(p, "", db, tx);

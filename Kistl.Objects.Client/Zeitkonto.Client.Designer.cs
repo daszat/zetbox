@@ -79,7 +79,7 @@ namespace Kistl.App.Zeiterfassung
                 return _Taetigkeiten;
             }
         }
-
+        
         public ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get

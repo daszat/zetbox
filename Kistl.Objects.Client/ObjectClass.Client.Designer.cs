@@ -125,7 +125,7 @@ namespace Kistl.App.Base
                 return _SubClasses;
             }
         }
-
+        
         public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
         {
             get

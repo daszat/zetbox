@@ -224,7 +224,6 @@ namespace Kistl.IntegrationTests
             }
         }
         [Test]
-        [Ignore("Sortable Collections mus be implemented. Then IList can be returned")]
         public void Change_Relation_1_n_Set_n_By_Index()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
@@ -239,7 +238,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(m.Parameter.Count, Is.EqualTo(1));
                 Assert.That(m.Parameter.First(), Is.SameAs(p));
 
-                // m.Parameter[0] = p2;
+                m.Parameter[0] = p2;
 
                 Assert.That(p.Method, Is.Null);
                 Assert.That(p2.Method, Is.Not.Null);
@@ -305,7 +304,6 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        [Ignore("Sortable Collections mus be implemented. Then IList can be returned")]
         public void Change_Relation_n_m_Set_n_By_Index()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
@@ -321,7 +319,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(ma.Projekte.Count, Is.EqualTo(1));
                 Assert.That(ma.Projekte.First(), Is.SameAs(prj));
 
-                // prj.Mitarbeiter[0] = ma2;
+                prj.Mitarbeiter[0] = ma2;
 
                 Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
                 Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma2));
@@ -384,7 +382,6 @@ namespace Kistl.IntegrationTests
             }
         }        
         [Test]
-        [Ignore("Sortable Collections mus be implemented. Then IList can be returned")]
         public void Change_Relation_n_m_Set_m_By_Index()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
@@ -400,7 +397,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(ma.Projekte.Count, Is.EqualTo(1));
                 Assert.That(ma.Projekte.First(), Is.SameAs(prj));
 
-                //ma.Projekte[0] = prj2;
+                ma.Projekte[0] = prj2;
 
                 Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
                 Assert.That(prj2.Mitarbeiter.Count, Is.EqualTo(1));

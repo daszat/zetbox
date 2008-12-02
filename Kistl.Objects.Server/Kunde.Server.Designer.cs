@@ -157,7 +157,7 @@ namespace Kistl.App.Projekte
                 }
             }
         }
-
+        
         public ICollection<System.String> EMails
         {
             get

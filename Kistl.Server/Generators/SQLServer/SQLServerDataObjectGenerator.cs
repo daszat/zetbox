@@ -155,14 +155,14 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateProperties_ObjectReferenceProperty_Collection
-        protected override void GenerateProperties_ObjectReferenceProperty_Collection(CurrentObjectClass current, CurrentObjectClass collectionClass, CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent)
+        protected override void GenerateProperties_ObjectReferenceProperty_Collection(CurrentObjectClass current, CurrentObjectClass collectionClass, CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent,
+            CurrentObjectClass valueIndex, CurrentObjectClass parentIndex)
         {
-            base.GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializerValue, parent, serializerParent);
+            base.GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializerValue, parent, serializerParent, valueIndex, parentIndex);
+            ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
 
             if (current.task == TaskEnum.Server)
             {
-                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
-
                 // Class
                 TypeMoniker valueType = objRefProp.ReferenceObjectClass.GetTypeMoniker();
                 TypeMoniker collectionType = Generator.GetAssociationChildType((Property)current.property);
@@ -173,20 +173,22 @@ namespace Kistl.Server.Generators.SQLServer
 
 
                 CurrentObjectClass currentEFProperty = (CurrentObjectClass)current.Clone();
+                string wrapperType = objRefProp.IsIndexed ? "EntityCollectionEntryValueWrapperSorted" : "EntityCollectionEntryValueWrapper";
 
                 current.code_field = current.code_class.CreateField(
-                    new CodeTypeReference("EntityCollectionEntryValueWrapper",
+                    new CodeTypeReference(wrapperType,
                         new CodeTypeReference(parentType.NameDataObject),
                         new CodeTypeReference(valueType.NameDataObject),
                         new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                     current.property.PropertyName + "Wrapper");
-                current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryValueWrapper<{1}, {2}, {3}{4}>(this, {0}{4});
+                current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new {5}<{1}, {2}, {3}{4}>(this, {0}{4});
                 return {0}Wrapper",
                               current.property.PropertyName,
                               parentType.NameDataObject,
                               valueType.NameDataObject,
                               collectionType.NameDataObject, 
-                              Kistl.API.Helper.ImplementationSuffix);
+                              Kistl.API.Helper.ImplementationSuffix,
+                              wrapperType);
 
                 currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
                     new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
@@ -274,9 +276,10 @@ namespace Kistl.Server.Generators.SQLServer
         #endregion
 
         #region GenerateProperties_ValueTypeProperty_Collection
-        protected override void GenerateProperties_ValueTypeProperty_Collection(CurrentObjectClass current, CurrentObjectClass collectionClass, CurrentObjectClass parent, CurrentObjectClass serializerParent)
+        protected override void GenerateProperties_ValueTypeProperty_Collection(CurrentObjectClass current, CurrentObjectClass collectionClass, CurrentObjectClass parent, CurrentObjectClass serializerParent,
+            CurrentObjectClass valueIndex, CurrentObjectClass parentIndex)
         {
-            base.GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent);
+            base.GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent, valueIndex, parentIndex);
 
             if (current.task == TaskEnum.Server)
             {
@@ -293,23 +296,24 @@ namespace Kistl.Server.Generators.SQLServer
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
                     new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionType.Classname)));
 
-                // current.code_property.Type = new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionClass.code_class.Name));
 
                 CurrentObjectClass currentEFProperty = (CurrentObjectClass)current.Clone();
+                string wrapperType = current.property.IsIndexed ? "EntityCollectionEntryValueWrapperSorted" : "EntityCollectionEntryValueWrapper";
 
                 current.code_field = current.code_class.CreateField(
-                    new CodeTypeReference("EntityCollectionEntryValueWrapper",
+                    new CodeTypeReference(wrapperType,
                         new CodeTypeReference(parentType.NameDataObject),
                         new CodeTypeReference(valueType),
                         new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                     current.property.PropertyName + "Wrapper");
-                current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryValueWrapper<{1}, {2}, {3}{4}>(this, {0}{4});
+                current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new {5}<{1}, {2}, {3}{4}>(this, {0}{4});
                 return {0}Wrapper",
                               current.property.PropertyName,
                               parentType.NameDataObject,
                               valueType,
                               collectionType.NameDataObject, 
-                              Kistl.API.Helper.ImplementationSuffix);
+                              Kistl.API.Helper.ImplementationSuffix,
+                              wrapperType);
 
                 currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
                     new CodeTypeReference("EntityCollection", new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
@@ -463,7 +467,6 @@ namespace Kistl.Server.Generators.SQLServer
         protected override void GenerateProperties_BackReferenceProperty(CurrentObjectClass current)
         {
             base.GenerateProperties_BackReferenceProperty(current);
-
             ObjectReferenceProperty backRefProp = (ObjectReferenceProperty)current.property;
 
             if (current.task == TaskEnum.Server)
@@ -476,19 +479,22 @@ namespace Kistl.Server.Generators.SQLServer
 
                 if (backRefProp.GetOpposite().IsList)
                 {
+                    string wrapperType = backRefProp.IsIndexed ? "EntityCollectionEntryParentWrapperSorted" : "EntityCollectionEntryParentWrapper";
+
                     current.code_field = current.code_class.CreateField(
-                        new CodeTypeReference("EntityCollectionEntryParentWrapper",
+                        new CodeTypeReference(wrapperType,
                             new CodeTypeReference(ownerType.NameDataObject),
                             new CodeTypeReference(parentType.NameDataObject),
                             new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                         current.property.PropertyName + "Wrapper");
-                    current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new EntityCollectionEntryParentWrapper<{1}, {2}, {3}{4}>(this, {0}{4});
+                    current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new {5}<{1}, {2}, {3}{4}>(this, {0}{4});
                 return {0}Wrapper", 
                                   current.property.PropertyName, 
                                   ownerType.NameDataObject,
                                   parentType.NameDataObject,
                                   childType.NameDataObject,
-                                  Kistl.API.Helper.ImplementationSuffix);
+                                  Kistl.API.Helper.ImplementationSuffix,
+                                  wrapperType);
 
                     currentEFProperty.code_property = currentEFProperty.code_class.CreateProperty(
                         new CodeTypeReference("EntityCollection", new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),

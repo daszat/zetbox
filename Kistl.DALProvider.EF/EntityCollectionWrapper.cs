@@ -298,6 +298,60 @@ namespace Kistl.API.Server
     }
     #endregion
 
+    #region EntityCollectionEntryValueWrapperSorted
+    // List
+    public class EntityCollectionEntryValueWrapperSorted<PARENT, VALUE, IMPL> 
+        : EntityCollectionEntryValueWrapper<PARENT, VALUE, IMPL>, IList<VALUE>
+        where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntrySorted<VALUE, PARENT>, new()
+        where PARENT : class, IDataObject
+    {
+        public EntityCollectionEntryValueWrapperSorted(PARENT parentObject, EntityCollection<IMPL> ec) 
+            : base(parentObject, ec)
+        {
+        }
+
+        #region IList<VALUE> Members
+
+        public int IndexOf(VALUE item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(int index, VALUE item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public VALUE this[int index]
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        public new IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+    #endregion
+
     #region EntityCollectionEntryParentWrapper
     // Backreference List
     public class EntityCollectionEntryParentWrapper<PARENT, VALUE, IMPL> : ICollection<PARENT>
@@ -389,6 +443,60 @@ namespace Kistl.API.Server
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _ec.Select(i => i.Parent).GetEnumerator();
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region EntityCollectionEntryParentWrapperSorted
+    // Backreference List
+    public class EntityCollectionEntryParentWrapperSorted<PARENT, VALUE, IMPL>
+        : EntityCollectionEntryParentWrapper<PARENT, VALUE, IMPL>, IList<PARENT>
+        where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntry<VALUE, PARENT>, new()
+        where PARENT : class, IDataObject
+    {
+        public EntityCollectionEntryParentWrapperSorted(VALUE parentObject, EntityCollection<IMPL> ec)
+            : base (parentObject, ec)
+        {
+        }
+
+        #region IList<PARENT> Members
+
+        public int IndexOf(PARENT item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(int index, PARENT item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PARENT this[int index]
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        public new IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

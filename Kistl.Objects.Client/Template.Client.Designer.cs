@@ -142,7 +142,7 @@ namespace Kistl.App.GUI
                 }
             }
         }
-
+        
         public ICollection<Kistl.App.GUI.Visual> Menu
         {
             get

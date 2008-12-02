@@ -195,7 +195,7 @@ namespace Kistl.App.GUI
                 r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
-
+        
         public ICollection<Kistl.App.GUI.Visual> Menu
         {
             get

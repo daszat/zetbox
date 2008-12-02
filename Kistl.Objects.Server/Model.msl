@@ -435,14 +435,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TypeRef">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef)">
-        <MappingFragment StoreEntitySet="TypeRef">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -493,10 +485,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TypeRef_GenericArgumentsCollectionEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef_GenericArgumentsCollectionEntry)">
-        <MappingFragment StoreEntitySet="TypeRef_GenericArgumentsCollectionEntry">
+    <EntitySetMapping Name="AnotherTest_ListPropertyCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTest_ListPropertyCollectionEntry)">
+        <MappingFragment StoreEntitySet="AnotherTest_ListPropertyCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnotherTest_StringPropertyCollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTest_StringPropertyCollectionEntry)">
+        <MappingFragment StoreEntitySet="AnotherTest_StringPropertyCollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Value" ColumnName="StringProperty" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -914,23 +914,14 @@
       </EndProperty>
       <Condition ColumnName="fk_RightPart" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_TypeRef_Assembly_Assembly" TypeName="Model.FK_TypeRef_Assembly_Assembly" StoreEntitySet="TypeRef">
-      <EndProperty Name="A_Assembly">
-        <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
+    <AssociationSetMapping Name="FK_AnotherTest_ListPropertyCollectionEntry_Muhblah_ListProperty" TypeName="Model.FK_AnotherTest_ListPropertyCollectionEntry_Muhblah_ListProperty" StoreEntitySet="AnotherTest_ListPropertyCollectionEntry">
+      <EndProperty Name="A_Muhblah">
+        <ScalarProperty Name="ID" ColumnName="fk_ListProperty" />
       </EndProperty>
-      <EndProperty Name="B_TypeRef">
+      <EndProperty Name="B_AnotherTest_ListPropertyCollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
-      <Condition ColumnName="fk_Assembly" IsNull="false" />
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments" TypeName="Model.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments" StoreEntitySet="TypeRef_GenericArgumentsCollectionEntry">
-      <EndProperty Name="A_TypeRef">
-        <ScalarProperty Name="ID" ColumnName="fk_GenericArguments" />
-      </EndProperty>
-      <EndProperty Name="B_TypeRef_GenericArgumentsCollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="fk_GenericArguments" IsNull="false" />
+      <Condition ColumnName="fk_ListProperty" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
@@ -995,14 +986,23 @@
       </EndProperty>
       <Condition ColumnName="fk_Template" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent" TypeName="Model.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent" StoreEntitySet="TypeRef_GenericArgumentsCollectionEntry">
-      <EndProperty Name="A_TypeRef">
-        <ScalarProperty Name="ID" ColumnName="fk_TypeRef" />
+    <AssociationSetMapping Name="FK_AnotherTest_ListPropertyCollectionEntry_AnotherTest_fk_Parent" TypeName="Model.FK_AnotherTest_ListPropertyCollectionEntry_AnotherTest_fk_Parent" StoreEntitySet="AnotherTest_ListPropertyCollectionEntry">
+      <EndProperty Name="A_AnotherTest">
+        <ScalarProperty Name="ID" ColumnName="fk_AnotherTest" />
       </EndProperty>
-      <EndProperty Name="B_TypeRef_GenericArgumentsCollectionEntry">
+      <EndProperty Name="B_AnotherTest_ListPropertyCollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
-      <Condition ColumnName="fk_TypeRef" IsNull="false" />
+      <Condition ColumnName="fk_AnotherTest" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_AnotherTest_StringPropertyCollectionEntry_AnotherTest_fk_Parent" TypeName="Model.FK_AnotherTest_StringPropertyCollectionEntry_AnotherTest_fk_Parent" StoreEntitySet="AnotherTest_StringPropertyCollectionEntry">
+      <EndProperty Name="A_AnotherTest">
+        <ScalarProperty Name="ID" ColumnName="fk_AnotherTest" />
+      </EndProperty>
+      <EndProperty Name="B_AnotherTest_StringPropertyCollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_AnotherTest" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

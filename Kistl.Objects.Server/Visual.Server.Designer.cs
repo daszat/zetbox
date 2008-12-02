@@ -117,7 +117,7 @@ namespace Kistl.App.GUI
                 ControlType = (Kistl.App.GUI.VisualType)value;
             }
         }
-
+        
         public ICollection<Kistl.App.GUI.Visual> Children
         {
             get
@@ -231,7 +231,7 @@ namespace Kistl.App.GUI
                 r.Value = (Kistl.App.Base.Method__Implementation__)value;
             }
         }
-
+        
         public ICollection<Kistl.App.GUI.Visual> ContextMenu
         {
             get

@@ -63,8 +63,8 @@ namespace Kistl.IntegrationTests
             test.SetUp();
             test.Change_Relation_1_n_Set_1();
 
-            //test.SetUp();
-            //test.Change_Relation_1_n_Set_n_By_Index();
+            test.SetUp();
+            test.Change_Relation_1_n_Set_n_By_Index();
 
             test.SetUp();
             test.Change_Relation_1_n_Set_n_With_Clear();
@@ -72,8 +72,8 @@ namespace Kistl.IntegrationTests
             test.SetUp();
             test.Change_Relation_1_n_Set_n_With_Remove();
 
-            //test.SetUp();
-            //test.Change_Relation_n_m_Set_m_By_Index();
+            test.SetUp();
+            test.Change_Relation_n_m_Set_m_By_Index();
 
             test.SetUp();
             test.Change_Relation_n_m_Set_m_With_Clear();
@@ -81,8 +81,8 @@ namespace Kistl.IntegrationTests
             test.SetUp();
             test.Change_Relation_n_m_Set_m_With_Remove();
 
-            //test.SetUp();
-            //test.Change_Relation_n_m_Set_n_By_Index();
+            test.SetUp();
+            test.Change_Relation_n_m_Set_n_By_Index();
 
             test.SetUp();
             test.Change_Relation_n_m_Set_n_With_Clear();

@@ -32,7 +32,7 @@ namespace Kistl.App.Projekte
         
         private int _ID;
         
-        private EntityCollectionEntryParentWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> ProjekteWrapper;
+        private EntityCollectionEntryParentWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> ProjekteWrapper;
         
         private string _Name;
         
@@ -61,11 +61,11 @@ namespace Kistl.App.Projekte
         
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Projekte.Projekt> Projekte
+        public IList<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {
-                if (ProjekteWrapper == null) ProjekteWrapper = new EntityCollectionEntryParentWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Projekte__Implementation__);
+                if (ProjekteWrapper == null) ProjekteWrapper = new EntityCollectionEntryParentWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Projekte__Implementation__);
                 return ProjekteWrapper;
             }
         }

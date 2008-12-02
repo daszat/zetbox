@@ -23,5 +23,15 @@ namespace Kistl.App.Test
     
     public interface AnotherTest : IDataObject
     {
+        
+        IList<Kistl.App.Test.Muhblah> ListProperty
+        {
+            get;
+        }
+        
+        IList<string> StringProperty
+        {
+            get;
+        }
     }
 }

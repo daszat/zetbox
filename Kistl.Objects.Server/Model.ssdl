@@ -59,7 +59,6 @@
     <EntitySet Name="IsValidIdentifierConstraint" EntityType="Model.Store.IsValidIdentifierConstraint" Table="IsValidIdentifierConstraints" />
     <EntitySet Name="IsValidNamespaceConstraint" EntityType="Model.Store.IsValidNamespaceConstraint" Table="IsValidNamespaceConstraints" />
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations" />
-    <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -67,7 +66,8 @@
     <EntitySet Name="Visual_ChildrenCollectionEntry" EntityType="Model.Store.Visual_ChildrenCollectionEntry" Table="Visuals_ChildrenCollection" />
     <EntitySet Name="Visual_ContextMenuCollectionEntry" EntityType="Model.Store.Visual_ContextMenuCollectionEntry" Table="Visuals_ContextMenuCollection" />
     <EntitySet Name="Template_MenuCollectionEntry" EntityType="Model.Store.Template_MenuCollectionEntry" Table="Templates_MenuCollection" />
-    <EntitySet Name="TypeRef_GenericArgumentsCollectionEntry" EntityType="Model.Store.TypeRef_GenericArgumentsCollectionEntry" Table="TypeRefs_GenericArgumentsCollection" />
+    <EntitySet Name="AnotherTest_ListPropertyCollectionEntry" EntityType="Model.Store.AnotherTest_ListPropertyCollectionEntry" Table="AnotherTests_ListPropertyCollection" />
+    <EntitySet Name="AnotherTest_StringPropertyCollectionEntry" EntityType="Model.Store.AnotherTest_StringPropertyCollectionEntry" Table="AnotherTests_StringPropertyCollection" />
     <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
@@ -372,13 +372,9 @@
       <End Role="A_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
       <End Role="B_Relation" EntitySet="Relation" />
     </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_Assembly_Assembly" Association="Model.Store.FK_TypeRef_Assembly_Assembly">
-      <End Role="A_Assembly" EntitySet="Assembly" />
-      <End Role="B_TypeRef" EntitySet="TypeRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments" Association="Model.Store.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments">
-      <End Role="A_TypeRef" EntitySet="TypeRef" />
-      <End Role="B_TypeRef_GenericArgumentsCollectionEntry" EntitySet="TypeRef_GenericArgumentsCollectionEntry" />
+    <AssociationSet Name="FK_AnotherTest_ListPropertyCollectionEntry_Muhblah_ListProperty" Association="Model.Store.FK_AnotherTest_ListPropertyCollectionEntry_Muhblah_ListProperty">
+      <End Role="A_Muhblah" EntitySet="Muhblah" />
+      <End Role="B_AnotherTest_ListPropertyCollectionEntry" EntitySet="AnotherTest_ListPropertyCollectionEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -408,9 +404,13 @@
       <End Role="A_Template" EntitySet="Template" />
       <End Role="B_Template_MenuCollectionEntry" EntitySet="Template_MenuCollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent" Association="Model.Store.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent">
-      <End Role="A_TypeRef" EntitySet="TypeRef" />
-      <End Role="B_TypeRef_GenericArgumentsCollectionEntry" EntitySet="TypeRef_GenericArgumentsCollectionEntry" />
+    <AssociationSet Name="FK_AnotherTest_ListPropertyCollectionEntry_AnotherTest_fk_Parent" Association="Model.Store.FK_AnotherTest_ListPropertyCollectionEntry_AnotherTest_fk_Parent">
+      <End Role="A_AnotherTest" EntitySet="AnotherTest" />
+      <End Role="B_AnotherTest_ListPropertyCollectionEntry" EntitySet="AnotherTest_ListPropertyCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnotherTest_StringPropertyCollectionEntry_AnotherTest_fk_Parent" Association="Model.Store.FK_AnotherTest_StringPropertyCollectionEntry_AnotherTest_fk_Parent">
+      <End Role="A_AnotherTest" EntitySet="AnotherTest" />
+      <End Role="B_AnotherTest_StringPropertyCollectionEntry" EntitySet="AnotherTest_StringPropertyCollectionEntry" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObjectClass">
@@ -885,21 +885,15 @@
     <Property Name="Storage" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
-  <EntityType Name="TypeRef">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Assembly" Type="int" />
-  </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Projekt" Type="int" Nullable="true" />
-    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+    <Property Name="fk_Projekt_pos" Type="int" Nullable="true" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="fk_Mitarbeiter_pos" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Kunde_EMailsCollectionEntry">
     <Key>
@@ -907,7 +901,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Kunde" Type="int" Nullable="true" />
-    <Property Name="EMails" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="EMails" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="Zeitkonto_MitarbeiterCollectionEntry">
     <Key>
@@ -915,7 +909,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Zeitkonto" Type="int" Nullable="true" />
-    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
   </EntityType>
   <EntityType Name="ObjectClass_ImplementsInterfacesCollectionEntry">
     <Key>
@@ -923,7 +917,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
-    <Property Name="fk_ImplementsInterfaces" Type="int" Nullable="true" />
+    <Property Name="fk_ImplementsInterfaces" Type="int" />
   </EntityType>
   <EntityType Name="Visual_ChildrenCollectionEntry">
     <Key>
@@ -931,7 +925,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Visual" Type="int" Nullable="true" />
-    <Property Name="fk_Children" Type="int" Nullable="true" />
+    <Property Name="fk_Children" Type="int" />
   </EntityType>
   <EntityType Name="Visual_ContextMenuCollectionEntry">
     <Key>
@@ -939,7 +933,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Visual" Type="int" Nullable="true" />
-    <Property Name="fk_ContextMenu" Type="int" Nullable="true" />
+    <Property Name="fk_ContextMenu" Type="int" />
   </EntityType>
   <EntityType Name="Template_MenuCollectionEntry">
     <Key>
@@ -947,17 +941,27 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Template" Type="int" Nullable="true" />
-    <Property Name="fk_Menu" Type="int" Nullable="true" />
+    <Property Name="fk_Menu" Type="int" />
   </EntityType>
-  <EntityType Name="TypeRef_GenericArgumentsCollectionEntry">
+  <EntityType Name="AnotherTest_ListPropertyCollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_TypeRef" Type="int" Nullable="true" />
-    <Property Name="fk_TypeRef_pos" Type="int" Nullable="true" />
-    <Property Name="fk_GenericArguments" Type="int" Nullable="true" />
-    <Property Name="fk_GenericArguments_pos" Type="int" Nullable="true" />
+    <Property Name="fk_AnotherTest" Type="int" Nullable="true" />
+    <Property Name="fk_AnotherTest_pos" Type="int" Nullable="true" />
+    <Property Name="fk_ListProperty" Type="int" />
+    <Property Name="fk_ListProperty_pos" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AnotherTest_StringPropertyCollectionEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_AnotherTest" Type="int" Nullable="true" />
+    <Property Name="fk_AnotherTest_pos" Type="int" Nullable="true" />
+    <Property Name="StringProperty" Type="nvarchar" MaxLength="100" />
+    <Property Name="fk_StringProperty_pos" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="FK_ObjectClass_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
@@ -1871,27 +1875,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TypeRef_Assembly_Assembly">
-    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <End Role="B_TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
+  <Association Name="FK_AnotherTest_ListPropertyCollectionEntry_Muhblah_ListProperty">
+    <End Role="A_Muhblah" Type="Model.Store.Muhblah" Multiplicity="0..1" />
+    <End Role="B_AnotherTest_ListPropertyCollectionEntry" Type="Model.Store.AnotherTest_ListPropertyCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="A_Assembly">
+      <Principal Role="A_Muhblah">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_TypeRef">
-        <PropertyRef Name="fk_Assembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments">
-    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="B_TypeRef_GenericArgumentsCollectionEntry" Type="Model.Store.TypeRef_GenericArgumentsCollectionEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="A_TypeRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_TypeRef_GenericArgumentsCollectionEntry">
-        <PropertyRef Name="fk_GenericArguments" />
+      <Dependent Role="B_AnotherTest_ListPropertyCollectionEntry">
+        <PropertyRef Name="fk_ListProperty" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1979,15 +1971,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent">
-    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="B_TypeRef_GenericArgumentsCollectionEntry" Type="Model.Store.TypeRef_GenericArgumentsCollectionEntry" Multiplicity="*" />
+  <Association Name="FK_AnotherTest_ListPropertyCollectionEntry_AnotherTest_fk_Parent">
+    <End Role="A_AnotherTest" Type="Model.Store.AnotherTest" Multiplicity="0..1" />
+    <End Role="B_AnotherTest_ListPropertyCollectionEntry" Type="Model.Store.AnotherTest_ListPropertyCollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="A_TypeRef">
+      <Principal Role="A_AnotherTest">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_TypeRef_GenericArgumentsCollectionEntry">
-        <PropertyRef Name="fk_TypeRef" />
+      <Dependent Role="B_AnotherTest_ListPropertyCollectionEntry">
+        <PropertyRef Name="fk_AnotherTest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnotherTest_StringPropertyCollectionEntry_AnotherTest_fk_Parent">
+    <End Role="A_AnotherTest" Type="Model.Store.AnotherTest" Multiplicity="0..1" />
+    <End Role="B_AnotherTest_StringPropertyCollectionEntry" Type="Model.Store.AnotherTest_StringPropertyCollectionEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_AnotherTest">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_AnotherTest_StringPropertyCollectionEntry">
+        <PropertyRef Name="fk_AnotherTest" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

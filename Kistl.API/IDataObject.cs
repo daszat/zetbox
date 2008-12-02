@@ -173,6 +173,12 @@ namespace Kistl.API
         int fk_Parent { get; set; }
     }
 
+    public interface ICollectionEntrySorted<VALUE, PARENT> : ICollectionEntry<VALUE, PARENT>
+    {
+        int? ValueIndex { get; set; }
+        int? ParentIndex { get; set; }
+    }
+
     /// <summary>
     /// XML Collection Interface. Used to serialize collection of Objects to XML. Implemented by the Generator.
     /// </summary>

@@ -46,15 +46,32 @@ namespace Kistl.Server.Generators
                     Console.WriteLine("Generating Mapping");
                     gMapping.Generate(ctx, Helper.CodeGenPath);
 
-                    // Compile Code
-                    Console.WriteLine("Compiling Interfaces");
-                    Compile(TaskEnum.Interface);
-                    Console.WriteLine("Compiling Server Assembly");
-                    Compile(TaskEnum.Server);
-                    Console.WriteLine("Compiling Client Assembly");
-                    Compile(TaskEnum.Client);
+                    try
+                    {
+                        // Compile Code
+                        Console.WriteLine("Compiling Interfaces");
+                        Compile(TaskEnum.Interface);
+                        Console.WriteLine("Compiling Server Assembly");
+                        Compile(TaskEnum.Server);
+                        Console.WriteLine("Compiling Client Assembly");
+                        Compile(TaskEnum.Client);
+                    }
+                    catch
+                    {
+                        // Delete files
+                        Delete(TaskEnum.Interface);
+                        Delete(TaskEnum.Server);
+                        Delete(TaskEnum.Client);
+                        throw;
+                    }
                 }
             }
+        }
+
+        private static void Delete(TaskEnum type)
+        {
+            System.IO.File.Delete(Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll");
+            System.IO.File.Delete(Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".pdb");
         }
 
         private static void Compile(TaskEnum type)
@@ -106,6 +123,10 @@ namespace Kistl.Server.Generators
                     CompilerException ex = new CompilerException(result);
                     file.WriteLine(ex.Message);
                     throw ex;
+                }
+                else
+                {
+                    file.WriteLine("No errors");
                 }
             }
         }

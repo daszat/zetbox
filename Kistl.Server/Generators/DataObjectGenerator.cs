@@ -940,7 +940,8 @@ namespace Kistl.Server.Generators
 
         #region GenerateValueTypeProperty_Collection
         protected virtual void GenerateProperties_ValueTypeProperty_Collection(CurrentObjectClass current,
-            CurrentObjectClass collectionClass, CurrentObjectClass parent, CurrentObjectClass serializerParent)
+            CurrentObjectClass collectionClass, CurrentObjectClass parent, CurrentObjectClass serializerParent, 
+            CurrentObjectClass valueIndex, CurrentObjectClass parentIndex)
         {
         }
 
@@ -952,9 +953,10 @@ namespace Kistl.Server.Generators
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
             if (current.task != TaskEnum.Interface)
             {
-                collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
-                    current.property.GetPropertyTypeString(), current.objClass.GetTypeMoniker().NameDataObject));
-                // collectionClass.code_class.TypeAttributes = TypeAttributes.NotPublic;
+                collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry{2}<{0}, {1}>",
+                    current.property.GetPropertyTypeString(), 
+                    current.objClass.GetTypeMoniker().NameDataObject,
+                    current.property.IsIndexed ? "Sorted" : ""));
             }
 
             // Create ID
@@ -1017,13 +1019,30 @@ namespace Kistl.Server.Generators
                         collectionClass.code_class.Name);
             }
 
-            GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent);
-            GenerateProperties_ValueTypeProperty_Collection_StreamMethods(collectionClass, parent, serializerParent);
+            CurrentObjectClass valueIndex = null;
+            CurrentObjectClass parentIndex = null;
+
+            // Sorted
+            if (current.property.IsIndexed)
+            {
+                valueIndex = (CurrentObjectClass)collectionClass.Clone();
+                parentIndex = (CurrentObjectClass)collectionClass.Clone();
+
+                valueIndex.code_field = valueIndex.code_class.CreateField(typeof(int?), "_ValueIndex");
+                valueIndex.code_property = valueIndex.code_class.CreateNotifyingProperty(typeof(int?), "ValueIndex");
+
+                parentIndex.code_field = parentIndex.code_class.CreateField(typeof(int?), "_ParentIndex");
+                parentIndex.code_property = parentIndex.code_class.CreateNotifyingProperty(typeof(int?), "ParentIndex");
+            }
+
+            GenerateProperties_ValueTypeProperty_Collection(current, collectionClass, parent, serializerParent, valueIndex, parentIndex);
+            GenerateProperties_ValueTypeProperty_Collection_StreamMethods(collectionClass, parent, serializerParent, valueIndex, parentIndex);
         }
 
         #region GenerateProperties_ValueTypeProperty_Collection_StreamMethods
         private void GenerateProperties_ValueTypeProperty_Collection_StreamMethods(CurrentObjectClass current,
-            CurrentObjectClass parent, CurrentObjectClass serializerParent)
+            CurrentObjectClass parent, CurrentObjectClass serializerParent,
+            CurrentObjectClass valueIndex, CurrentObjectClass parentIndex)
         {
             // Create ToStream Method
             CodeMemberMethod m = current.code_class.CreateOverrideMethod("ToStream", typeof(void));
@@ -1139,7 +1158,8 @@ namespace Kistl.Server.Generators
 
         #region GenerateProperties_ObjectReferenceProperty_Collection
         protected virtual void GenerateProperties_ObjectReferenceProperty_Collection(CurrentObjectClass current, CurrentObjectClass collectionClass,
-            CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent)
+            CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent,
+            CurrentObjectClass valueIndex, CurrentObjectClass parentIndex)
         {
         }
 
@@ -1152,8 +1172,10 @@ namespace Kistl.Server.Generators
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
             if (current.task != TaskEnum.Interface)
             {
-                collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry<{0}, {1}>",
-                    current.property.GetPropertyTypeString(), current.objClass.GetTypeMoniker().NameDataObject));
+                collectionClass.code_class.BaseTypes.Add(string.Format("ICollectionEntry{2}<{0}, {1}>",
+                    current.property.GetPropertyTypeString(), 
+                    current.objClass.GetTypeMoniker().NameDataObject, 
+                    objRefProp.IsIndexed ? "Sorted" : ""));
             }
 
             // Create ID
@@ -1249,13 +1271,30 @@ namespace Kistl.Server.Generators
                 serializerParent.code_property.SetStatements.AddExpression("_fk_Parent = value");
             }
 
-            GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializerValue, parent, serializerParent);
-            GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(collectionClass, serializerValue, parent, serializerParent);
+            CurrentObjectClass valueIndex = null;
+            CurrentObjectClass parentIndex = null;
+
+            // Sorted
+            if (current.property.IsIndexed)
+            {
+                valueIndex = (CurrentObjectClass)collectionClass.Clone();
+                parentIndex = (CurrentObjectClass)collectionClass.Clone();
+
+                valueIndex.code_field = valueIndex.code_class.CreateField(typeof(int?), "_ValueIndex");
+                valueIndex.code_property = valueIndex.code_class.CreateNotifyingProperty(typeof(int?), "ValueIndex");
+
+                parentIndex.code_field = parentIndex.code_class.CreateField(typeof(int?), "_ParentIndex");
+                parentIndex.code_property = parentIndex.code_class.CreateNotifyingProperty(typeof(int?), "ParentIndex");
+            }
+
+            GenerateProperties_ObjectReferenceProperty_Collection(current, collectionClass, serializerValue, parent, serializerParent, valueIndex, parentIndex);
+            GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(collectionClass, serializerValue, parent, serializerParent, valueIndex, parentIndex);
         }
 
         #region GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods
         private void GenerateProperties_ObjectReferenceProperty_Collection_StreamMethods(CurrentObjectClass current,
-            CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent)
+            CurrentObjectClass serializerValue, CurrentObjectClass parent, CurrentObjectClass serializerParent,
+            CurrentObjectClass valueIndex, CurrentObjectClass parentIndex)
         {
             // Create ToStream Method
             CodeMemberMethod m = current.code_class.CreateOverrideMethod("ToStream", typeof(void));
@@ -1345,7 +1384,8 @@ namespace Kistl.Server.Generators
 
         private void GenerateProperties_BackReferencePropertyInternal(CurrentObjectClass current)
         {
-            // Check if Datatype exits
+            ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
+
             current.code_property = current.code_class.CreateProperty((CodeTypeReference)null, current.property.PropertyName, false);
             current.code_property.SetIgnoreAttributes();
 

@@ -138,7 +138,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-
+        
         public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
         {
             get
