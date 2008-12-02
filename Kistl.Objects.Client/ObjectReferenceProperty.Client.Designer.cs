@@ -267,12 +267,16 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_ReferenceObjectClass, sw);
+            BinarySerializer.ToBinary(this.fk_RightOf, sw);
+            BinarySerializer.ToBinary(this.fk_LeftOf, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_ReferenceObjectClass, sr);
+            BinarySerializer.FromBinary(out this._fk_RightOf, sr);
+            BinarySerializer.FromBinary(out this._fk_LeftOf, sr);
         }
     }
 }

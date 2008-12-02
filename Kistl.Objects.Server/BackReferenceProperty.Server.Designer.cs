@@ -50,6 +50,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 ReferenceProperty__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }

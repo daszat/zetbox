@@ -48,6 +48,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 DataType__Implementation__ = (Kistl.App.Base.DataType__Implementation__)value;
             }
         }

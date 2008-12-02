@@ -119,6 +119,7 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)value;
             }
         }

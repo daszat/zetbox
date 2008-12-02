@@ -20,7 +20,7 @@ namespace Kistl.API.Server
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
     #region QueryTranslator
-    public class QueryTranslator<T> : IQueryable<T>
+    public class QueryTranslator<T> : IOrderedQueryable<T>
     {
         private Expression _expression = null;
         private QueryTranslatorProvider<T> _provider = null;
@@ -128,7 +128,7 @@ namespace Kistl.API.Server
             List<T> result = new List<T>();
             foreach (T item in newQuery)
             {
-                ((IDataObject)item).AttachToContext(_ctx);
+                if(item is IDataObject) ((IDataObject)item).AttachToContext(_ctx);
                 result.Add(item);
             }
             return result;

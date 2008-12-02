@@ -93,6 +93,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)value;
             }
         }
@@ -159,6 +160,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }

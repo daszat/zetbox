@@ -65,6 +65,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 ConstrainedProperty__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)value;
             }
         }

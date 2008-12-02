@@ -61,7 +61,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="Tests\FrozenContextTests.cs" />
     <Compile Include="Tests\GetListOfTests.cs" />
-    <Compile Include="Tests\GeneratorTests.cs" />
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropetiesTests.cs" />

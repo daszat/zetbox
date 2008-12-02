@@ -71,6 +71,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }

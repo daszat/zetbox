@@ -17,7 +17,6 @@ namespace Kistl.API.Client
 
         public int ID { get; internal set; }
 
-        private bool _IsReadonly = false;
         public bool IsReadonly { get { return _context != null ? _context.IsReadonly : false; ; } }
 
         private DataObjectState _ObjectState = DataObjectState.Unmodified;
@@ -53,11 +52,6 @@ namespace Kistl.API.Client
 
         private IKistlContext _context;
         public IKistlContext Context { get { return _context; } }
-        public void AttachToContext(IKistlContext ctx, bool asReadonly)
-        {
-            _IsReadonly = asReadonly;
-            AttachToContext(ctx);
-        }
 
         public virtual void AttachToContext(IKistlContext ctx)
         {

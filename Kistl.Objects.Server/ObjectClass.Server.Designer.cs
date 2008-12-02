@@ -80,6 +80,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)value;
             }
         }

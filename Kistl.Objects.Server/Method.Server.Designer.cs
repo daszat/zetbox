@@ -76,6 +76,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)value;
             }
         }
@@ -142,6 +143,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
             }
         }

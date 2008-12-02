@@ -120,6 +120,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
             }
         }
@@ -208,6 +209,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)value;
             }
         }

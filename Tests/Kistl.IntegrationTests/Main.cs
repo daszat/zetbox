@@ -131,15 +131,6 @@ namespace Kistl.IntegrationTests
 
         }
 
-        private static void GeneratorTests()
-        {
-
-            var generatorTests = new GeneratorTests();
-            generatorTests.SetUp();
-            generatorTests.Generate();
-            generatorTests.TearDown();
-        }
-
         private static void InheritanceTests()
         {
             InheritanceTests test = new InheritanceTests();

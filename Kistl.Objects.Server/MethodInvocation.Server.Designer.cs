@@ -74,6 +74,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)value;
             }
         }
@@ -140,6 +141,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
             }
         }
@@ -187,6 +189,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 InvokeOnObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)value;
             }
         }
@@ -234,6 +237,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
             }
         }

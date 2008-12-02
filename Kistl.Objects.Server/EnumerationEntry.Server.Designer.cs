@@ -69,6 +69,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Enumeration__Implementation__ = (Kistl.App.Base.Enumeration__Implementation__)value;
             }
         }

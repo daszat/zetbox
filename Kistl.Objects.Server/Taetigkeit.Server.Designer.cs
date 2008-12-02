@@ -73,6 +73,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Zeitkonto__Implementation__ = (Kistl.App.Zeiterfassung.Zeitkonto__Implementation__)value;
             }
         }
@@ -120,6 +121,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
@@ -205,6 +207,7 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 TaetigkeitsArt__Implementation__ = (Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__)value;
             }
         }

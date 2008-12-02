@@ -23,8 +23,7 @@ namespace Kistl.API.Server
         /// </summary>
         public abstract int ID { get; set; }
 
-        private bool _IsReadonly = false;
-        public bool IsReadonly { get { return _IsReadonly; } }
+        public bool IsReadonly { get { return _context != null ? _context.IsReadonly : false; ; } }
 
         private DataObjectState _ObjectState = DataObjectState.Unmodified;
 
@@ -61,12 +60,6 @@ namespace Kistl.API.Server
         /// Current Context.
         /// </summary>
         public IKistlContext Context { get { return _context; } }
-
-        public void AttachToContext(IKistlContext ctx, bool asReadonly)
-        {
-            _IsReadonly = asReadonly;
-            AttachToContext(ctx);
-        }
 
         /// <summary>
         /// Attach this Object to a Context. This Method is called by the Context.

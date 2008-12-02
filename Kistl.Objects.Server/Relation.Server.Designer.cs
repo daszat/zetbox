@@ -70,6 +70,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 RightPart__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }
@@ -117,6 +118,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 LeftPart__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }

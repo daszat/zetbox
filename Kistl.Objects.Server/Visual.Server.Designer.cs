@@ -148,6 +148,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Property__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)value;
             }
         }
@@ -195,6 +196,7 @@ namespace Kistl.App.GUI
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)value;
             }
         }

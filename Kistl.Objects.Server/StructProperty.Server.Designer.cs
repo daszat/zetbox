@@ -48,6 +48,7 @@ namespace Kistl.App.Base
             }
             set
             {
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 StructDefinition__Implementation__ = (Kistl.App.Base.Struct__Implementation__)value;
             }
         }

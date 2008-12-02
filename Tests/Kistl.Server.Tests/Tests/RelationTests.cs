@@ -307,27 +307,27 @@ namespace Kistl.Server.Tests
         [Ignore]
         public void Change_Relation_n_m_Set_n_By_Index()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-                var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            //using (IKistlContext ctx = KistlContext.GetContext())
+            //{
+            //    var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+            //    var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            //    var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
 
-                prj.Mitarbeiter.Add(ma);
+            //    prj.Mitarbeiter.Add(ma);
 
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
-                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-                Assert.That(ma.Projekte.First(), Is.SameAs(prj));
+            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
+            //    Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
+            //    Assert.That(ma.Projekte.Count, Is.EqualTo(1));
+            //    Assert.That(ma.Projekte.First(), Is.SameAs(prj));
 
-                //prj.Mitarbeiter[0] = ma2;
+            //    //prj.Mitarbeiter[0] = ma2;
 
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma2));
-                Assert.That(ma.Projekte.Count, Is.EqualTo(0));
-                Assert.That(ma2.Projekte.Count, Is.EqualTo(1));
-                Assert.That(ma2.Projekte.First(), Is.SameAs(prj));
-            }
+            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
+            //    Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma2));
+            //    Assert.That(ma.Projekte.Count, Is.EqualTo(0));
+            //    Assert.That(ma2.Projekte.Count, Is.EqualTo(1));
+            //    Assert.That(ma2.Projekte.First(), Is.SameAs(prj));
+            //}
         }
 
         [Test]
@@ -386,27 +386,27 @@ namespace Kistl.Server.Tests
         [Ignore]
         public void Change_Relation_n_m_Set_m_By_Index()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            //using (IKistlContext ctx = KistlContext.GetContext())
+            //{
+            //    var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+            //    var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
+            //    var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
 
-                ma.Projekte.Add(prj);
+            //    ma.Projekte.Add(prj);
 
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
-                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-                Assert.That(ma.Projekte.First(), Is.SameAs(prj));
+            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
+            //    Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
+            //    Assert.That(ma.Projekte.Count, Is.EqualTo(1));
+            //    Assert.That(ma.Projekte.First(), Is.SameAs(prj));
 
-                //ma.Projekte[0] = prj2;
+            //    //ma.Projekte[0] = prj2;
 
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
-                Assert.That(prj2.Mitarbeiter.Count, Is.EqualTo(1));
-                Assert.That(prj2.Mitarbeiter.First(), Is.SameAs(ma));
-                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-                Assert.That(ma.Projekte.First(), Is.SameAs(prj2));
-            }
+            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
+            //    Assert.That(prj2.Mitarbeiter.Count, Is.EqualTo(1));
+            //    Assert.That(prj2.Mitarbeiter.First(), Is.SameAs(ma));
+            //    Assert.That(ma.Projekte.Count, Is.EqualTo(1));
+            //    Assert.That(ma.Projekte.First(), Is.SameAs(prj2));
+            //}
         }               
         #endregion
 

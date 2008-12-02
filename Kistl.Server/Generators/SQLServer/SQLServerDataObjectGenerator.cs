@@ -386,6 +386,7 @@ namespace Kistl.Server.Generators.SQLServer
                 ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
 
                 current.code_property.GetStatements.AddExpression("return {0}" + Kistl.API.Helper.ImplementationSuffix, current.property.PropertyName);
+                current.code_property.SetStatements.AddExpression("if (IsReadonly) throw new ReadOnlyObjectException()");
                 current.code_property.SetStatements.AddExpression("{0}{2} = ({1}{2})value", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
 
                 CurrentObjectClass implProperty = (CurrentObjectClass)current.Clone();

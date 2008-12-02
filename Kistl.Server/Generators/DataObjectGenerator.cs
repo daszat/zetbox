@@ -1832,8 +1832,9 @@ namespace Kistl.Server.Generators
                 {
                     m.Statements.AddExpression("BinarySerializer.ToBinary(this._{0}, sw)", p.PropertyName);
                 }
-                else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
+                else if (p.IsObjectReferencePropertySingle())
                 {
+                    // 1:1 Relations always, 1:n Relations: n Part always
                     m.Statements.AddExpression("BinarySerializer.ToBinary(this.fk_{0}, sw)", p.PropertyName);
                     if (((ObjectReferenceProperty)p).NeedsPositionColumn())
                     {
@@ -1887,8 +1888,9 @@ namespace Kistl.Server.Generators
                 {
                     m.Statements.AddExpression(@"BinarySerializer.FromBinary(out this._{0}, sr); if (_{0} != null) _{0}.AttachToObject(this, ""{0}"")", p.PropertyName);
                 }
-                else if (p.IsObjectReferencePropertySingle() && p.HasStorage())
+                else if (p.IsObjectReferencePropertySingle())
                 {
+                    // 1:1 Relations always, 1:n Relations: n Part always
                     m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName);
                     if (((ObjectReferenceProperty)p).NeedsPositionColumn())
                     {
