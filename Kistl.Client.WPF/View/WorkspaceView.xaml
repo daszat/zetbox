@@ -34,7 +34,8 @@
                 <DockPanel Grid.Row="0">
                     <TreeView x:Name="ModuleTree"
                               ItemsSource="{Binding Modules}"
-                              BorderThickness="0">
+                              BorderThickness="0"
+                              SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
                         <TreeView.Resources>
                             <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
                                                       ItemsSource="{Binding ObjectClasses}">
