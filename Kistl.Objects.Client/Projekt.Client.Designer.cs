@@ -84,7 +84,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+        public ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get
             {
@@ -291,16 +291,12 @@ namespace Kistl.App.Projekte
     }
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry")]
-    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntrySorted<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
+    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
     {
         
         private int _fk_Value;
         
         private int _fk_Parent;
-        
-        private System.Nullable<int> _ValueIndex;
-        
-        private System.Nullable<int> _ParentIndex;
         
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -367,42 +363,6 @@ namespace Kistl.App.Projekte
             set
             {
                 _fk_Parent = value;
-            }
-        }
-        
-        public System.Nullable<int> ValueIndex
-        {
-            get
-            {
-                return _ValueIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ValueIndex != value)
-                {
-                    NotifyPropertyChanging("ValueIndex"); 
-                    _ValueIndex = value;
-                    NotifyPropertyChanged("ValueIndex");;
-                }
-            }
-        }
-        
-        public System.Nullable<int> ParentIndex
-        {
-            get
-            {
-                return _ParentIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ParentIndex != value)
-                {
-                    NotifyPropertyChanging("ParentIndex"); 
-                    _ParentIndex = value;
-                    NotifyPropertyChanged("ParentIndex");;
-                }
             }
         }
         

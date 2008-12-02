@@ -40,7 +40,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Assembly = null;
         
-        private EntityCollectionEntryValueWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__> GenericArgumentsWrapper;
+        private EntityCollectionEntryValueWrapperSorted<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__> GenericArgumentsWrapper;
         
         public TypeRef__Implementation__()
         {
@@ -125,11 +125,11 @@ namespace Kistl.App.Base
             }
         }
         
-        public ICollection<Kistl.App.Base.TypeRef> GenericArguments
+        public IList<Kistl.App.Base.TypeRef> GenericArguments
         {
             get
             {
-                if (GenericArgumentsWrapper == null) GenericArgumentsWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__>(this, GenericArguments__Implementation__);
+                if (GenericArgumentsWrapper == null) GenericArgumentsWrapper = new EntityCollectionEntryValueWrapperSorted<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__>(this, GenericArguments__Implementation__);
                 return GenericArgumentsWrapper;
             }
         }
@@ -150,6 +150,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<TypeRef> OnPreSave_TypeRef;
         
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
+        
+        public event AsType_Handler<TypeRef> OnAsType_TypeRef;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -208,6 +210,16 @@ namespace Kistl.App.Base
             return base.GetPropertyError(prop);
         }
         
+        public virtual System.Type AsType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            if (OnAsType_TypeRef != null)
+            {
+                OnAsType_TypeRef(this, e);
+            };
+            return e.Result;
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -223,11 +235,13 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Assembly, sr);
             BinarySerializer.FromBinaryCollectionEntries(this.GenericArguments__Implementation__, sr);
         }
+        
+        public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
     }
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="TypeRef_GenericArgumentsCollectionEntry")]
-    public class TypeRef_GenericArgumentsCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef>
+    public class TypeRef_GenericArgumentsCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntrySorted<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef>
     {
         
         private int _ID;
@@ -235,6 +249,10 @@ namespace Kistl.App.Base
         private int _fk_Value;
         
         private int _fk_Parent;
+        
+        private System.Nullable<int> _ValueIndex;
+        
+        private System.Nullable<int> _ParentIndex;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -306,6 +324,44 @@ namespace Kistl.App.Base
             set
             {
                 _fk_Parent = value;
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<int> ValueIndex
+        {
+            get
+            {
+                return _ValueIndex;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (ValueIndex != value)
+                {
+                    NotifyPropertyChanging("ValueIndex"); 
+                    _ValueIndex = value;
+                    NotifyPropertyChanged("ValueIndex");;
+                }
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<int> ParentIndex
+        {
+            get
+            {
+                return _ParentIndex;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (ParentIndex != value)
+                {
+                    NotifyPropertyChanging("ParentIndex"); 
+                    _ParentIndex = value;
+                    NotifyPropertyChanged("ParentIndex");;
+                }
             }
         }
         

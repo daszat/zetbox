@@ -88,7 +88,7 @@ namespace Kistl.App.Base
             }
         }
         
-        public ICollection<Kistl.App.Base.TypeRef> GenericArguments
+        public IList<Kistl.App.Base.TypeRef> GenericArguments
         {
             get
             {
@@ -101,6 +101,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<TypeRef> OnPreSave_TypeRef;
         
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
+        
+        public event AsType_Handler<TypeRef> OnAsType_TypeRef;
         
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -166,6 +168,16 @@ namespace Kistl.App.Base
             return base.GetPropertyError(prop);
         }
         
+        public virtual System.Type AsType()
+        {
+            MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
+            if (OnAsType_TypeRef != null)
+            {
+                OnAsType_TypeRef(this, e);
+            };
+            return e.Result;
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -181,15 +193,21 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Assembly, sr);
             this._GenericArguments.FromStream(sr);
         }
+        
+        public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
     }
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry")]
-    public class TypeRef_GenericArgumentsCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntry<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef>
+    public class TypeRef_GenericArgumentsCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntrySorted<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef>
     {
         
         private int _fk_Value;
         
         private int _fk_Parent;
+        
+        private System.Nullable<int> _ValueIndex;
+        
+        private System.Nullable<int> _ParentIndex;
         
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -245,6 +263,42 @@ namespace Kistl.App.Base
             set
             {
                 _fk_Parent = value;
+            }
+        }
+        
+        public System.Nullable<int> ValueIndex
+        {
+            get
+            {
+                return _ValueIndex;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (ValueIndex != value)
+                {
+                    NotifyPropertyChanging("ValueIndex"); 
+                    _ValueIndex = value;
+                    NotifyPropertyChanged("ValueIndex");;
+                }
+            }
+        }
+        
+        public System.Nullable<int> ParentIndex
+        {
+            get
+            {
+                return _ParentIndex;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (ParentIndex != value)
+                {
+                    NotifyPropertyChanging("ParentIndex"); 
+                    _ParentIndex = value;
+                    NotifyPropertyChanged("ParentIndex");;
+                }
             }
         }
         

@@ -21,6 +21,9 @@ namespace Kistl.App.Base
     using Kistl.API;
     
     
+    /// <summary>
+    /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
+    /// </summary>
     public interface TypeRef : IDataObject
     {
         
@@ -42,9 +45,17 @@ namespace Kistl.App.Base
         /// <summary>
         /// list of type arguments
         /// </summary>
-        ICollection<Kistl.App.Base.TypeRef> GenericArguments
+        IList<Kistl.App.Base.TypeRef> GenericArguments
         {
             get;
         }
+        
+        /// <summary>
+        /// get the referenced <see cref="System.Type"/>
+        /// </summary>
+        /// <returns>
+        /// the referenced Type
+        /// </returns>
+        System.Type AsType();
     }
 }

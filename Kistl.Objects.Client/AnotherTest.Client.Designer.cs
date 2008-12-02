@@ -26,30 +26,8 @@ namespace Kistl.App.Test
     public class AnotherTest__Implementation__ : BaseClientDataObject, AnotherTest
     {
         
-        private ListPropertyCollection<Kistl.App.Test.Muhblah, Kistl.App.Test.AnotherTest, AnotherTest_ListPropertyCollectionEntry__Implementation__> _ListProperty;
-        
-        private ListPropertyCollection<System.String, Kistl.App.Test.AnotherTest, AnotherTest_StringPropertyCollectionEntry__Implementation__> _StringProperty;
-        
         public AnotherTest__Implementation__()
         {
-            _ListProperty = new ListPropertyCollection<Kistl.App.Test.Muhblah, Kistl.App.Test.AnotherTest, AnotherTest_ListPropertyCollectionEntry__Implementation__>(this, "ListProperty");
-            _StringProperty = new ListPropertyCollection<System.String, Kistl.App.Test.AnotherTest, AnotherTest_StringPropertyCollectionEntry__Implementation__>(this, "StringProperty");
-        }
-        
-        public IList<Kistl.App.Test.Muhblah> ListProperty
-        {
-            get
-            {
-                return _ListProperty;
-            }
-        }
-        
-        public IList<System.String> StringProperty
-        {
-            get
-            {
-                return _StringProperty;
-            }
         }
         
         public event ToStringHandler<AnotherTest> OnToString_AnotherTest;
@@ -85,291 +63,26 @@ namespace Kistl.App.Test
         public override void ApplyChanges(Kistl.API.IDataObject obj)
         {
             base.ApplyChanges(obj);
-            this._ListProperty.ApplyChanges(((AnotherTest__Implementation__)obj)._ListProperty);
-            this._StringProperty.ApplyChanges(((AnotherTest__Implementation__)obj)._StringProperty);
         }
         
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if(_ListProperty != null) _ListProperty.AttachToContext(ctx);
-            if(_StringProperty != null) _StringProperty.AttachToContext(ctx);
         }
         
         protected override string GetPropertyError(string prop)
         {
-            switch(prop)
-            {
-                case "ListProperty":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(205).Constraints
-                            .Where(c => !c.IsValid(this, this.ListProperty))
-                            .Select(c => c.GetErrorText(this, this.ListProperty))
-                            .ToArray());
-                case "StringProperty":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(206).Constraints
-                            .Where(c => !c.IsValid(this, this.StringProperty))
-                            .Select(c => c.GetErrorText(this, this.StringProperty))
-                            .ToArray());
-            }
             return base.GetPropertyError(prop);
         }
         
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            this._ListProperty.ToStream(sw);
-            this._StringProperty.ToStream(sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            this._ListProperty.FromStream(sr);
-            this._StringProperty.FromStream(sr);
-        }
-    }
-    
-    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.AnotherTest_ListPropertyCollectionEntry")]
-    public class AnotherTest_ListPropertyCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntrySorted<Kistl.App.Test.Muhblah, Kistl.App.Test.AnotherTest>
-    {
-        
-        private int _fk_Value;
-        
-        private int _fk_Parent;
-        
-        private System.Nullable<int> _ValueIndex;
-        
-        private System.Nullable<int> _ParentIndex;
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.Muhblah Value
-        {
-            get
-            {
-                return Context != null && fk_Value != Kistl.API.Helper.INVALIDID ? Context.GetQuery<Kistl.App.Test.Muhblah>().Single(o => o.ID == fk_Value) : null;
-            }
-            set
-            {
-                fk_Value = value.ID;
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.AnotherTest Parent
-        {
-            get
-            {
-                return Context != null && fk_Parent != Kistl.API.Helper.INVALIDID ? Context.GetQuery<AnotherTest>().Single(o => o.ID == fk_Parent) : null;
-            }
-            set
-            {
-                _fk_Parent = value.ID;
-            }
-        }
-        
-        public int fk_Value
-        {
-            get
-            {
-                return _fk_Value;
-            }
-            set
-            {
-                if(_fk_Value != value)
-                {
-                    base.NotifyPropertyChanging("Value");
-                    _fk_Value = value;
-                    base.NotifyPropertyChanged("Value");
-                };
-            }
-        }
-        
-        public int fk_Parent
-        {
-            get
-            {
-                return _fk_Parent;
-            }
-            set
-            {
-                _fk_Parent = value;
-            }
-        }
-        
-        public System.Nullable<int> ValueIndex
-        {
-            get
-            {
-                return _ValueIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ValueIndex != value)
-                {
-                    NotifyPropertyChanging("ValueIndex"); 
-                    _ValueIndex = value;
-                    NotifyPropertyChanged("ValueIndex");;
-                }
-            }
-        }
-        
-        public System.Nullable<int> ParentIndex
-        {
-            get
-            {
-                return _ParentIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ParentIndex != value)
-                {
-                    NotifyPropertyChanging("ParentIndex"); 
-                    _ParentIndex = value;
-                    NotifyPropertyChanged("ParentIndex");;
-                }
-            }
-        }
-        
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            base.ToStream(sw);
-            BinarySerializer.ToBinary(this.fk_Value, sw);
-            BinarySerializer.ToBinary(this.fk_Parent, sw);
-        }
-        
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._fk_Value, sr);
-            BinarySerializer.FromBinary(out this._fk_Parent, sr);
-        }
-        
-        public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
-        {
-            base.ApplyChanges(obj);
-            ((AnotherTest_ListPropertyCollectionEntry__Implementation__)obj)._fk_Value = this.fk_Value;
-            ((AnotherTest_ListPropertyCollectionEntry__Implementation__)obj)._fk_Parent = this.fk_Parent;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerDisplay("Kistl.App.Test.AnotherTest_StringPropertyCollectionEntry")]
-    public class AnotherTest_StringPropertyCollectionEntry__Implementation__ : Kistl.API.Client.BaseClientCollectionEntry, ICollectionEntrySorted<System.String, Kistl.App.Test.AnotherTest>
-    {
-        
-        private string _Value;
-        
-        private int _fk_Parent;
-        
-        private System.Nullable<int> _ValueIndex;
-        
-        private System.Nullable<int> _ParentIndex;
-        
-        public string Value
-        {
-            get
-            {
-                return _Value;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (Value != value)
-                {
-                    NotifyPropertyChanging("Value"); 
-                    _Value = value;
-                    NotifyPropertyChanged("Value");;
-                }
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.AnotherTest Parent
-        {
-            get
-            {
-                return Context.GetQuery<AnotherTest>().Single(o => o.ID == fk_Parent);
-            }
-            set
-            {
-                /// TODO: Damit hab ich noch ein Problem. Wenn die Property not nullable ist, dann sollte das eigentlich nicht möglich sein.
-                _fk_Parent = value.ID;
-            }
-        }
-        
-        public int fk_Parent
-        {
-            get
-            {
-                return _fk_Parent;
-            }
-            set
-            {
-                _fk_Parent = value;
-            }
-        }
-        
-        public System.Nullable<int> ValueIndex
-        {
-            get
-            {
-                return _ValueIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ValueIndex != value)
-                {
-                    NotifyPropertyChanging("ValueIndex"); 
-                    _ValueIndex = value;
-                    NotifyPropertyChanged("ValueIndex");;
-                }
-            }
-        }
-        
-        public System.Nullable<int> ParentIndex
-        {
-            get
-            {
-                return _ParentIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ParentIndex != value)
-                {
-                    NotifyPropertyChanging("ParentIndex"); 
-                    _ParentIndex = value;
-                    NotifyPropertyChanged("ParentIndex");;
-                }
-            }
-        }
-        
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Value, sw);
-            BinarySerializer.ToBinary(this.fk_Parent, sw);
-        }
-        
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._Value, sr);
-            BinarySerializer.FromBinary(out this._fk_Parent, sr);
-        }
-        
-        public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
-        {
-            base.ApplyChanges(obj);
-            ((AnotherTest_StringPropertyCollectionEntry__Implementation__)obj)._Value = this._Value;
-            ((AnotherTest_StringPropertyCollectionEntry__Implementation__)obj)._fk_Parent = this._fk_Parent;
         }
     }
 }

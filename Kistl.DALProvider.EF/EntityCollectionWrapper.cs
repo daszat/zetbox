@@ -87,6 +87,7 @@ namespace Kistl.API.Server
             _pointerProperty = pointerProperty;
         }
 
+        #region Index Management
         protected void UpdateIndex(INTERFACE item, int? index)
         {
             // Sets the position Property for a 1:n Relation
@@ -113,7 +114,9 @@ namespace Kistl.API.Server
             }
             return null;
         }
+        #endregion
 
+        #region ICollection Overrides
         public override void Add(INTERFACE item)
         {
             base.Add(item);
@@ -134,6 +137,7 @@ namespace Kistl.API.Server
             UpdateIndex(item, null);
             return base.Remove(item);
         }
+        #endregion
 
         #region IList<INTERFACE> Members
 
@@ -207,8 +211,8 @@ namespace Kistl.API.Server
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntry<VALUE, PARENT>, new()
         where PARENT : class, IDataObject
     {
-        private EntityCollection<IMPL> _ec;
-        private PARENT _parentObject;
+        protected EntityCollection<IMPL> _ec;
+        protected PARENT _parentObject;
 
         public EntityCollectionEntryValueWrapper(PARENT parentObject, EntityCollection<IMPL> ec)
         {
@@ -226,7 +230,7 @@ namespace Kistl.API.Server
 
         #region ICollection<VALUE> Members
 
-        public void Add(VALUE item)
+        public virtual void Add(VALUE item)
         {
             IMPL entry = new IMPL();
             entry.Parent = _parentObject;
@@ -234,7 +238,7 @@ namespace Kistl.API.Server
             _ec.Add(entry);
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             // Must be cleared by hand
             // EF will drop the Value on the CollectionEntry - that's right and OK
@@ -269,7 +273,7 @@ namespace Kistl.API.Server
             get { return _ec.IsReadOnly; }
         }
 
-        public bool Remove(VALUE item)
+        public virtual bool Remove(VALUE item)
         {
             IMPL e = _ec.Single(i => i.Value.Equals(item));
             Clear(e);
@@ -310,42 +314,133 @@ namespace Kistl.API.Server
         {
         }
 
+        #region Index Management
+        protected void UpdateIndex(IMPL item, int? index)
+        {
+            // Sets the position Property for a n:m Relation
+            item.ValueIndex = index;
+
+            if (item.ParentIndex == null && index != null)
+            {
+                // Add to end
+                item.ParentIndex = -1;
+            }
+        }
+
+        protected int? GetIndex(IMPL item)
+        {
+            if (item.ValueIndex == -1)
+            {
+                item.ValueIndex = _ec.Count() - 1;
+            }
+
+            return item.ValueIndex;
+        }
+
+        protected IMPL GetAt(int index)
+        {
+            foreach (IMPL i in _ec)
+            {
+                int? idx = GetIndex(i);
+                if (idx == null) continue;
+                if (idx.Value == index)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+        #endregion
+
+        #region ICollection Overrides
+        public override void Add(VALUE item)
+        {
+            base.Add(item);
+            UpdateIndex(_ec.Last(), _ec.Count - 1);
+        }
+
+        public override void Clear()
+        {
+            foreach (IMPL i in _ec)
+            {
+                UpdateIndex(i, null);
+            }
+            base.Clear();
+        }
+
+        public override bool Remove(VALUE item)
+        {
+            IMPL e = _ec.Single(i => i.Value.Equals(item));
+            UpdateIndex(e, null);
+            return base.Remove(item);
+        }
+        #endregion
+
         #region IList<VALUE> Members
 
         public int IndexOf(VALUE item)
         {
-            throw new NotImplementedException();
+            IMPL e = _ec.Single(i => i.Value.Equals(item));
+            int? result = GetIndex(e);
+            if (result == null) throw new InvalidOperationException("Collection is not sorted");
+            return result.Value;
         }
 
         public void Insert(int index, VALUE item)
         {
-            throw new NotImplementedException();
+            // TODO: Optimize
+            foreach (IMPL i in _ec)
+            {
+                int idx = GetIndex(i) ?? -1;
+                if (idx >= index)
+                {
+                    UpdateIndex(i, idx + 1);
+                }
+            }
+
+            IMPL entry = new IMPL();
+            entry.Parent = _parentObject;
+            entry.Value = item;
+            UpdateIndex(entry, index);
+            _ec.Add(entry);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            IMPL item = GetAt(index);
+            if (item == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+            base.Remove(item.Value);
+
+            // TODO: Optimize
+            foreach (IMPL i in _ec)
+            {
+                int idx = GetIndex(i) ?? -1;
+                if (idx >= index)
+                {
+                    UpdateIndex(i, idx - 1);
+                }
+            }
         }
 
         public VALUE this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                IMPL i = GetAt(index);
+                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+                return i.Value;
             }
             set
             {
-                throw new NotImplementedException();
+                IMPL i = GetAt(index);
+                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+
+                if (!object.Equals(i.Value, value))
+                {
+                    RemoveAt(index);
+                    Insert(index, value);
+                }
             }
-        }
-
-        #endregion
-
-        #region IEnumerable Members
-
-        public new IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
@@ -358,8 +453,8 @@ namespace Kistl.API.Server
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntry<VALUE, PARENT>, new()
         where PARENT : class, IDataObject
     {
-        private EntityCollection<IMPL> _ec;
-        private VALUE _parentObject;
+        protected EntityCollection<IMPL> _ec;
+        protected VALUE _parentObject;
 
         public EntityCollectionEntryParentWrapper(VALUE parentObject, EntityCollection<IMPL> ec)
         {
@@ -377,7 +472,7 @@ namespace Kistl.API.Server
 
         #region ICollection<PARENT> Members
 
-        public void Add(PARENT item)
+        public virtual void Add(PARENT item)
         {
             IMPL entry = new IMPL();
             entry.Value = _parentObject;
@@ -385,7 +480,7 @@ namespace Kistl.API.Server
             _ec.Add(entry);
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             // Must be cleared by hand
             // EF will drop the Value on the CollectionEntry - that's right and OK
@@ -420,7 +515,7 @@ namespace Kistl.API.Server
             get { return _ec.IsReadOnly; }
         }
 
-        public bool Remove(PARENT item)
+        public virtual bool Remove(PARENT item)
         {
             IMPL e = _ec.Single(i => i.Parent.Equals(item));
             Clear(e);
@@ -453,7 +548,7 @@ namespace Kistl.API.Server
     // Backreference List
     public class EntityCollectionEntryParentWrapperSorted<PARENT, VALUE, IMPL>
         : EntityCollectionEntryParentWrapper<PARENT, VALUE, IMPL>, IList<PARENT>
-        where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntry<VALUE, PARENT>, new()
+        where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntrySorted<VALUE, PARENT>, new()
         where PARENT : class, IDataObject
     {
         public EntityCollectionEntryParentWrapperSorted(VALUE parentObject, EntityCollection<IMPL> ec)
@@ -461,42 +556,131 @@ namespace Kistl.API.Server
         {
         }
 
+        #region Index Management
+        protected void UpdateIndex(IMPL item, int? index)
+        {
+            // Sets the position Property for a n:m Relation
+            item.ParentIndex = index;
+            if (item.ValueIndex == null && index != null)
+            {
+                // Add to end
+                item.ValueIndex = -1;
+            }
+        }
+
+        protected int? GetIndex(IMPL item)
+        {
+            if (item.ParentIndex == -1)
+            {
+                item.ParentIndex = _ec.Count() - 1;
+            }
+            return item.ParentIndex;
+        }
+
+        protected IMPL GetAt(int index)
+        {
+            foreach (IMPL i in _ec)
+            {
+                int? idx = GetIndex(i);
+                if (idx == null) continue;
+                if (idx.Value == index)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+        #endregion
+
+        #region ICollection Overrides
+        public override void Add(PARENT item)
+        {
+            base.Add(item);
+            UpdateIndex(_ec.Last(), _ec.Count - 1);
+        }
+
+        public override void Clear()
+        {
+            foreach (IMPL i in _ec)
+            {
+                UpdateIndex(i, null);
+            }
+            base.Clear();
+        }
+
+        public override bool Remove(PARENT item)
+        {
+            IMPL e = _ec.Single(i => i.Parent.Equals(item));
+            UpdateIndex(e, null);
+            return base.Remove(item);
+        }
+        #endregion
+
         #region IList<PARENT> Members
 
         public int IndexOf(PARENT item)
         {
-            throw new NotImplementedException();
+            IMPL e = _ec.Single(i => i.Parent.Equals(item));
+            int? result = GetIndex(e);
+            if (result == null) throw new InvalidOperationException("Collection is not sorted");
+            return result.Value;
         }
 
         public void Insert(int index, PARENT item)
         {
-            throw new NotImplementedException();
+            // TODO: Optimize
+            foreach (IMPL i in _ec)
+            {
+                int idx = GetIndex(i) ?? -1;
+                if (idx >= index)
+                {
+                    UpdateIndex(i, idx + 1);
+                }
+            }
+
+            IMPL entry = new IMPL();
+            entry.Parent = item;
+            entry.Value = _parentObject;
+            UpdateIndex(entry, index);
+            _ec.Add(entry);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            IMPL item = GetAt(index);
+            if (item == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+            base.Remove(item.Parent);
+
+            // TODO: Optimize
+            foreach (IMPL i in _ec)
+            {
+                int idx = GetIndex(i) ?? -1;
+                if (idx >= index)
+                {
+                    UpdateIndex(i, idx - 1);
+                }
+            }
         }
 
         public PARENT this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                IMPL i = GetAt(index);
+                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+                return i.Parent;
             }
             set
             {
-                throw new NotImplementedException();
+                IMPL i = GetAt(index);
+                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+
+                if (!object.Equals(i.Parent, value))
+                {
+                    RemoveAt(index);
+                    Insert(index, value);
+                }
             }
-        }
-
-        #endregion
-
-        #region IEnumerable Members
-
-        public new IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

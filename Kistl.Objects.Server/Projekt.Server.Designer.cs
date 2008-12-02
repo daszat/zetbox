@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
         
         private EntityCollectionWrapper<Kistl.App.Projekte.Task, Kistl.App.Projekte.Task__Implementation__> TasksWrapper;
         
-        private EntityCollectionEntryValueWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> MitarbeiterWrapper;
+        private EntityCollectionEntryValueWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> MitarbeiterWrapper;
         
         private System.Double? _AufwandGes;
         
@@ -107,11 +107,11 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+        public ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get
             {
-                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Mitarbeiter__Implementation__);
+                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Mitarbeiter__Implementation__);
                 return MitarbeiterWrapper;
             }
         }
@@ -317,7 +317,7 @@ namespace Kistl.App.Projekte
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Projekt_MitarbeiterCollectionEntry")]
-    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntrySorted<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
+    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
     {
         
         private int _ID;
@@ -325,10 +325,6 @@ namespace Kistl.App.Projekte
         private int _fk_Value;
         
         private int _fk_Parent;
-        
-        private System.Nullable<int> _ValueIndex;
-        
-        private System.Nullable<int> _ParentIndex;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -400,42 +396,6 @@ namespace Kistl.App.Projekte
             set
             {
                 _fk_Parent = value;
-            }
-        }
-        
-        public System.Nullable<int> ValueIndex
-        {
-            get
-            {
-                return _ValueIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ValueIndex != value)
-                {
-                    NotifyPropertyChanging("ValueIndex"); 
-                    _ValueIndex = value;
-                    NotifyPropertyChanged("ValueIndex");;
-                }
-            }
-        }
-        
-        public System.Nullable<int> ParentIndex
-        {
-            get
-            {
-                return _ParentIndex;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (ParentIndex != value)
-                {
-                    NotifyPropertyChanging("ParentIndex"); 
-                    _ParentIndex = value;
-                    NotifyPropertyChanged("ParentIndex");;
-                }
             }
         }
         

@@ -42,7 +42,7 @@ namespace Kistl.App.Projekte
         
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public IList<Kistl.App.Projekte.Projekt> Projekte
+        public ICollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get
             {

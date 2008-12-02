@@ -271,6 +271,11 @@ namespace Kistl.Server.Generators.SQLServer
               @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = ({0}{3})value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass), Kistl.API.Helper.ImplementationSuffix);
+
+                if (valueIndex != null)
+                    valueIndex.code_property.AddAttribute("EdmScalarPropertyAttribute");
+                if (parentIndex != null)
+                    parentIndex.code_property.AddAttribute("EdmScalarPropertyAttribute");
             }
         }
         #endregion
@@ -361,6 +366,11 @@ namespace Kistl.Server.Generators.SQLServer
               @"EntityReference<{0}{3}> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<{0}{3}>(""Model.{1}"", ""{2}"");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = ({0}{3})value", current.objClass.ClassName, Generator.GetAssociationName(current.objClass, (Property)current.property, "fk_Parent"), Generator.GetAssociationParentRoleName(current.objClass), Kistl.API.Helper.ImplementationSuffix);
+
+                if (valueIndex != null)
+                    valueIndex.code_property.AddAttribute("EdmScalarPropertyAttribute");
+                if (parentIndex != null)
+                    parentIndex.code_property.AddAttribute("EdmScalarPropertyAttribute");
             }
         }
         #endregion

@@ -27,7 +27,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
-        IList<Kistl.App.Projekte.Projekt> Projekte
+        ICollection<Kistl.App.Projekte.Projekt> Projekte
         {
             get;
         }

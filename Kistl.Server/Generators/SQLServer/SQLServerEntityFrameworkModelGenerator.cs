@@ -222,6 +222,15 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteEndElement(); // </Property>
                 }
 
+                if (prop.NeedsPositionColumn())
+                {
+                    xml.WriteStartElement("Property");
+                    xml.WriteAttributeString("Name", "ValueIndex");
+                    xml.WriteAttributeString("Type", "Int32");
+                    xml.WriteAttributeString("Nullable", "true");
+                    xml.WriteEndElement(); // </Property>
+                }
+
                 // Parent
                 xml.WriteStartElement("NavigationProperty");
                 xml.WriteAttributeString("Name", "ParentImpl");
@@ -231,6 +240,16 @@ namespace Kistl.Server.Generators.SQLServer
                 xml.WriteAttributeString("FromRole", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteAttributeString("ToRole", Generator.GetAssociationParentRoleName(parentType));
                 xml.WriteEndElement(); // </NavigationProperty>
+
+                if (prop.IsIndexed)
+                {
+                    xml.WriteStartElement("Property");
+                    xml.WriteAttributeString("Name", "ParentIndex");
+                    xml.WriteAttributeString("Type", "Int32");
+                    xml.WriteAttributeString("Nullable", "true");
+                    xml.WriteEndElement(); // </Property>
+                }
+
 
                 xml.WriteEndElement(); // </EntityType>
             }
@@ -698,6 +717,21 @@ namespace Kistl.Server.Generators.SQLServer
                     xml.WriteStartElement("ScalarProperty");
                     xml.WriteAttributeString("Name", "Value");
                     xml.WriteAttributeString("ColumnName", prop.PropertyName);
+                    xml.WriteEndElement(); // </ScalarProperty>
+                }
+
+                if (prop.NeedsPositionColumn())
+                {
+                    xml.WriteStartElement("ScalarProperty");
+                    xml.WriteAttributeString("Name", "ValueIndex");
+                    xml.WriteAttributeString("ColumnName", prop.PropertyName.CalcListPositionColumnName(""));
+                    xml.WriteEndElement(); // </ScalarProperty>
+                }
+                if (prop.IsIndexed)
+                {
+                    xml.WriteStartElement("ScalarProperty");
+                    xml.WriteAttributeString("Name", "ParentIndex");
+                    xml.WriteAttributeString("ColumnName", prop.ObjectClass.ClassName.CalcListPositionColumnName(""));
                     xml.WriteEndElement(); // </ScalarProperty>
                 }
 

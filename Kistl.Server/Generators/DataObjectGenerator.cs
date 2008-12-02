@@ -1275,7 +1275,7 @@ namespace Kistl.Server.Generators
             CurrentObjectClass parentIndex = null;
 
             // Sorted
-            if (current.property.IsIndexed)
+            if (current.property.IsIndexed || current.property.NeedsPositionColumn())
             {
                 valueIndex = (CurrentObjectClass)collectionClass.Clone();
                 parentIndex = (CurrentObjectClass)collectionClass.Clone();
