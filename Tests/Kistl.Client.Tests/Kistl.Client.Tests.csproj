@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -51,6 +51,7 @@
     <Compile Include="Kistl.Client.Mocks\MockFactory.cs" />
     <Compile Include="Kistl.Client.Mocks\TestObject.cs" />
     <Compile Include="Kistl.Client.Mocks\ThreadManagerMock.cs" />
+    <Compile Include="Kistl.Client.Tests\DataObjectModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\ObjectListModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\PresenterModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\SynchronousThreadManagerTests.cs" />

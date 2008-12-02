@@ -3,14 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
              xmlns:view="clr-namespace:Kistl.Client.WPF.View"
-             xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
+             xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+             MaxWidth="400">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="DataObjectModelDesignProvider"
+                            ObjectType="{x:Type client:DataObjectModel}"
+                            MethodName="CreateDesignMock">
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource DataObjectModelDesignProvider}" />
+    </UserControl.DataContext>
     <DockPanel>
         <ctrls:LoadingIndicator DockPanel.Dock="Top" />
         <TextBlock Text="{Binding Name}"
                    DockPanel.Dock="Top"
                    HorizontalAlignment="Center" />
         <ListView ItemsSource="{Binding PropertyModels}"
-                  BorderThickness="0" 
+                  BorderThickness="0"
                   ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
             <ListView.ItemContainerStyle>
                 <Style>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace Kistl.Client.WPF.View
     /// </summary>
     public partial class DataObjectFullView : UserControl, IView
     {
+
         public DataObjectFullView()
         {
             InitializeComponent();
@@ -35,5 +37,7 @@ namespace Kistl.Client.WPF.View
         }
 
         #endregion
+
     }
+
 }

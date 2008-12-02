@@ -11,6 +11,8 @@ namespace Kistl.Client.Tests
             //var test = new ObjectListModelTests();
             //test.SetUp();
             //test.TestCreation();
+            var test = new DataObjectModelTests();
+            test.TestDesignMock();
         }
     }
 }

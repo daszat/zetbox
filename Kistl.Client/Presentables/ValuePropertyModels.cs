@@ -53,11 +53,11 @@ namespace Kistl.Client.Presentables
         /// </summary>
         new TValue Value { get; set; }
 
-         /// <summary>
+        /// <summary>
         /// Whether or not to allow <value>null</value> as input
         /// </summary>
         bool AllowNullInput { get; }
-   }
+    }
 
     public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
     {
@@ -87,9 +87,17 @@ namespace Kistl.Client.Presentables
         #region Public Interface
 
         // TODO: proxying implementations might block on that
-        public string Label { get { return Property.PropertyName; } }
-        // TODO: proxying implementations might block on that
-        public string ToolTip { get { return Property.AltText; } }
+        public string Label { get { return IsInDesignMode ? "Some Label" : Property.PropertyName; } }
+        public string ToolTip
+        {
+            get
+            {
+                return IsInDesignMode
+                    ? "[Design Mode ACTIVE] This property has some value that could be edited here."
+                    // TODO: proxying implementations might block on that
+                    : Property.AltText;
+            }
+        }
 
         #endregion
 
@@ -187,6 +195,12 @@ namespace Kistl.Client.Presentables
         protected IDataObject Object { get; private set; }
         protected BaseProperty Property { get; private set; }
 
+        #region Design Mode
+
+        protected PropertyModel(bool designMode) : base(designMode) { }
+
+        #endregion
+
     }
 
     public class NullableValuePropertyModel<TValue>
@@ -238,7 +252,7 @@ namespace Kistl.Client.Presentables
         public void ClearValue()
         {
             if (AllowNullInput) Value = null;
-            else throw new InvalidOperationException();
+            else throw new InvalidOperationException("\"null\" input not allowed");
         }
 
         private Nullable<TValue> _valueCache;
@@ -253,6 +267,9 @@ namespace Kistl.Client.Presentables
                 UI.Verify();
                 if (!_valueCache.HasValue && !value.HasValue)
                     return;
+
+                if (!AllowNullInput && value == null)
+                    throw new InvalidOperationException("\"null\" input not allowed");
 
                 _valueCache = value;
                 State = ModelState.Loading;
@@ -302,6 +319,21 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        #region Design Mode
+
+        public static NullableValuePropertyModel<TValue> CreateDesignMock(TValue value)
+        {
+            return new NullableValuePropertyModel<TValue>(true, value);
+        }
+
+        protected NullableValuePropertyModel(bool designMode, TValue value)
+            : base(designMode)
+        {
+            AllowNullInput = true;
+            _valueCache = value;
+        }
+
+        #endregion
     }
 
     public class ReferencePropertyModel<TValue>

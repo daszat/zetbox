@@ -56,12 +56,16 @@ namespace Kistl.Client.Presentables
         /// <param name="dataCtx">The <see cref="IKistlContext"/> to use to access the current user's data session</param>
         public PresentableModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
         {
+            IsInDesignMode = false;
+
             AppContext = appCtx;
 
             UI.Verify();
 
             DataContext = dataCtx;
         }
+
+        #region Public interface
 
         private ModelState _State = ModelState.Loading;
         public ModelState State
@@ -81,6 +85,9 @@ namespace Kistl.Client.Presentables
                 }
             }
         }
+
+
+        #endregion
 
         #region INotifyPropertyChanged Members
 
@@ -122,5 +129,72 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        #region Design Mode 
+        
+        /// <summary>
+        /// Creates a PresentableModel in "design" mode
+        /// </summary>
+        /// <param name="designMode">always must be true</param>
+        /// <seealso cref="IsInDesignMode"/>
+        protected PresentableModel(bool designMode)
+        {
+            if (!designMode)
+            {
+                throw new ArgumentOutOfRangeException("designMode", "always has to be true");
+            }
+
+            IsInDesignMode = true;
+            AppContext = new DesignApplicationContext();
+            State = ModelState.Active;
+        }
+
+        /// <summary>
+        /// Signifies that a model is in "design" mode or really accessing the data store.
+        /// </summary>
+        /// In design mode, no data store is used and only mock data is shown. 
+        /// No <see cref="IKistlContext"/>s or <see cref="IThreadManager"/>s are available.
+        public bool IsInDesignMode { get; private set; }
+
+        #endregion
+
     }
+
+    internal class DesignApplicationContext : IGuiApplicationContext
+    {
+        #region IGuiApplicationContext Members
+
+        public IKistlContext FrozenContext
+        {
+            get { throw new InvalidOperationException("No data access allowed in Design mode"); }
+        }
+
+        public IKistlContext GuiDataContext
+        {
+            get { throw new InvalidOperationException("No data access operations allowed in Design mode"); }
+        }
+
+        public ModelFactory Factory
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        private IThreadManager _thread = new SynchronousThreadManager();
+        public IThreadManager UiThread
+        {
+            get { return _thread; }
+        }
+
+        public IThreadManager AsyncThread
+        {
+            get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
+        }
+
+        public Kistl.API.Configuration.KistlConfig Configuration
+        {
+            get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
+        }
+
+        #endregion
+    }
+
 }

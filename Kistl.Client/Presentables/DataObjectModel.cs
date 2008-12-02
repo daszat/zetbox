@@ -18,6 +18,12 @@ namespace Kistl.Client.Presentables
     /// </summary>
     public class DataObjectModel : PresentableModel
     {
+
+        public static DataObjectModel CreateDesignMock()
+        {
+            return new DataObjectModel(true);
+        }
+
         public DataObjectModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj)
@@ -33,9 +39,36 @@ namespace Kistl.Client.Presentables
             });
         }
 
+        protected DataObjectModel(bool designMode)
+            : base(designMode)
+        {
+            _propertyModels = new ObservableCollection<PresentableModel>() {
+                NullableValuePropertyModel<bool>.CreateDesignMock(true),
+                NullableValuePropertyModel<int>.CreateDesignMock(42),
+                NullableValuePropertyModel<double>.CreateDesignMock(Math.PI),
+                NullableValuePropertyModel<DateTime>.CreateDesignMock(DateTime.Now),
+                //NullableValuePropertyModel<string>.CreateDesignMock("short test string"),
+                //NullableValuePropertyModel<string>.CreateDesignMock("Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string."),
+            };
+
+            Name = "Some Name";
+            // TODO: ship and link "real" icon here
+            IconPath = "/illegal icon path";
+        }
+
         #region Public Interface
 
-        public int ID { get { UI.Verify(); return _object.ID; } }
+        public int ID
+        {
+            get
+            {
+                UI.Verify();
+                return IsInDesignMode 
+                    ? 42
+                    // this should always be instantaneous
+                    : _object.ID;
+            }
+        }
 
         private ObservableCollection<PresentableModel> _propertyModels;
         public ObservableCollection<PresentableModel> PropertyModels
@@ -152,7 +185,7 @@ namespace Kistl.Client.Presentables
                 PropertyModels.Add(Factory
                     .CreateModel(
                         DataMocks.LookupDefaultPropertyModelDescriptor(pm),
-                        DataContext, 
+                        DataContext,
                         _object, pm));
             }
         }
@@ -273,8 +306,12 @@ namespace Kistl.Client.Presentables
 
         private IDataObject _object;
 
-        // other models need access here
-        // TODO: Arthur needs that too...
+        /// <summary>
+        /// Contrary to all other Properties, this directly exposes the 
+        /// modelled IDataObject and thus may neither be thread-safe nor 
+        /// high-latency.
+        /// </summary>
+        // other models need access to this.
         public IDataObject Object { get { return _object; } }
     }
 }
