@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for PropertyTextBoxView.xaml
     /// </summary>
-    public partial class PropertyTextBoxView : UserControl, IView
+    public partial class PropertyTextBoxView : PropertyView, IView
     {
         public PropertyTextBoxView()
         {

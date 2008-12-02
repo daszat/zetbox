@@ -17,7 +17,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullableBoolValueView.xaml
     /// </summary>
-    public partial class NullableBoolValueView : UserControl
+    public partial class NullableBoolValueView : PropertyView
     {
         public NullableBoolValueView()
         {

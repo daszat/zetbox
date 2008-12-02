@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    public partial class DataObjectListView : UserControl, IView
+    public partial class DataObjectListView : PropertyView, IView
     {
 
         public DataObjectListView()

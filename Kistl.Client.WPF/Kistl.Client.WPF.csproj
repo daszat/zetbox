@@ -352,6 +352,7 @@
     <Compile Include="View\NullableBoolValueView.xaml.cs">
       <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PropertyView.cs" />
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>
     </Compile>

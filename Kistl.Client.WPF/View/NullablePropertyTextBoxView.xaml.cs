@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : UserControl, IView
+    public partial class NullablePropertyTextBoxView : PropertyView, IView
     {
         public NullablePropertyTextBoxView()
         {

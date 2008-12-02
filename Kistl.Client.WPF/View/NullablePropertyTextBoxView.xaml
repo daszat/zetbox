@@ -1,37 +1,29 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.NullablePropertyTextBoxView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
-             xmlns:view="clr-namespace:Kistl.Client.WPF.View"
-             xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-             ToolTip="{Binding ToolTip}">
-    <UserControl.Resources>
+﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.NullablePropertyTextBoxView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+                   xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+                   xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                   ToolTip="{Binding ToolTip}">
+    
+    <view:PropertyView.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="100"
-                              MaxWidth="300"
-                              SharedSizeGroup="Label" />
-            <ColumnDefinition Width="*"
-                              MinWidth="100"
-                              MaxWidth="400"
-                              SharedSizeGroup="Content" />
-        </Grid.ColumnDefinitions>
+    </view:PropertyView.Resources>
 
-        <TextBlock Grid.Column="0"
-                   Text="{Binding Label}" />
+    <view:PropertyView.Label>
+        <TextBlock Text="{Binding Label, Mode=OneWay}" />
+    </view:PropertyView.Label>
 
-        <DockPanel Grid.Column="1">
-            <CheckBox DockPanel.Dock="Left"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding HasValue, Mode=OneWay}"
-                      IsEnabled="False" />
-            <Button DockPanel.Dock="Right"
-                    Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Click="ClearValueHandler">Clear Value</Button>
-            <kevin:InfoTextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                               TextBoxInfo="{Binding ToolTip}" />
-        </DockPanel>
-    </Grid>
-</UserControl>
+    <DockPanel>
+        <CheckBox DockPanel.Dock="Left"
+                  VerticalAlignment="Center"
+                  IsChecked="{Binding HasValue, Mode=OneWay}"
+                  IsEnabled="False" />
+        <Button DockPanel.Dock="Right"
+                Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Click="ClearValueHandler">Clear Value</Button>
+        <kevin:InfoTextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                           TextBoxInfo="{Binding ToolTip}" />
+    </DockPanel>
+
+</view:PropertyView>

@@ -1,22 +1,13 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.DataObjectListView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
-             xmlns:view="clr-namespace:Kistl.Client.WPF.View"
-             xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-             xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-             ToolTip="{Binding ToolTip, Mode=OneWay}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="100"
-                              MaxWidth="300"
-                              SharedSizeGroup="Label" />
-            <ColumnDefinition Width="*"
-                              MinWidth="100"
-                              MaxWidth="400"
-                              SharedSizeGroup="Content" />
-        </Grid.ColumnDefinitions>
+﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.DataObjectListView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+                   xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+                   xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                   ToolTip="{Binding ToolTip, Mode=OneWay}">
 
+    <view:PropertyView.Label>
         <StackPanel Grid.Column="0">
             <TextBlock Text="{Binding Label, Mode=OneWay}" />
             <ctrls:LoadingIndicator />
@@ -25,12 +16,12 @@
             <Button Margin="1"
                     Click="RemoveHandler">Remove selection</Button>
         </StackPanel>
+    </view:PropertyView.Label>
 
-        <ListView Grid.Column="1"
-                  ItemsSource="{Binding Value, Mode=OneWay}"
-                  SelectedItem="{Binding SelectedItem}"
-                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                  MaxHeight="300"
-                  MouseDoubleClick="ItemActivatedHandler" />
-    </Grid>
-</UserControl>
+    <ListView ItemsSource="{Binding Value, Mode=OneWay}"
+              SelectedItem="{Binding SelectedItem}"
+              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+              MaxHeight="300"
+              MouseDoubleClick="ItemActivatedHandler" />
+
+</view:PropertyView>

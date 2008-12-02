@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for ObjectReferenceView.xaml
     /// </summary>
-    public partial class ObjectReferenceView : UserControl, IView
+    public partial class ObjectReferenceView : PropertyView, IView
     {
         public ObjectReferenceView()
         {
