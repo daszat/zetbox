@@ -194,7 +194,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocation)">
         <MappingFragment StoreEntitySet="MethodInvocation">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
           <ScalarProperty Name="MemberName" ColumnName="MemberName" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -673,15 +672,6 @@
       </EndProperty>
       <Condition ColumnName="fk_Method" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_MethodInvocation_Assembly_Assembly" TypeName="Model.FK_MethodInvocation_Assembly_Assembly" StoreEntitySet="MethodInvocation">
-      <EndProperty Name="A_Assembly">
-        <ScalarProperty Name="ID" ColumnName="fk_Assembly" />
-      </EndProperty>
-      <EndProperty Name="B_MethodInvocation">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="fk_Assembly" IsNull="false" />
-    </AssociationSetMapping>
     <AssociationSetMapping Name="FK_MethodInvocation_Module_Module" TypeName="Model.FK_MethodInvocation_Module_Module" StoreEntitySet="MethodInvocation">
       <EndProperty Name="A_Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module" />
@@ -933,6 +923,15 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_GenericArguments" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_MethodInvocation_TypeRef_Implementor" TypeName="Model.FK_MethodInvocation_TypeRef_Implementor" StoreEntitySet="MethodInvocation">
+      <EndProperty Name="A_TypeRef">
+        <ScalarProperty Name="ID" ColumnName="fk_Implementor" />
+      </EndProperty>
+      <EndProperty Name="B_MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_Implementor" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">

@@ -9,9 +9,9 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method__Implementation__), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Assembly_Assembly", "A_Assembly", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_DataType_InvokeOnObjectClass", "A_DataType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_MethodInvocation_TypeRef_Implementor", "A_TypeRef", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__), "B_MethodInvocation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -39,15 +39,13 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Method = null;
         
-        private System.Nullable<int> _fk_Assembly = null;
-        
-        private string _FullTypeName;
-        
         private string _MemberName;
         
         private System.Nullable<int> _fk_Module = null;
         
         private System.Nullable<int> _fk_InvokeOnObjectClass = null;
+        
+        private System.Nullable<int> _fk_Implementor = null;
         
         public MethodInvocation__Implementation__()
         {
@@ -110,72 +108,6 @@ namespace Kistl.App.Base
                 EntityReference<Kistl.App.Base.Method__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>("Model.FK_MethodInvocation_Method_Method", "A_Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
                 r.Value = (Kistl.App.Base.Method__Implementation__)value;
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Assembly Assembly
-        {
-            get
-            {
-                return Assembly__Implementation__;
-            }
-            set
-            {
-                Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
-            }
-        }
-        
-        public System.Nullable<int> fk_Assembly
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Assembly != null)
-                {
-                    _fk_Assembly = Assembly.ID;
-                }
-                return _fk_Assembly;
-            }
-            set
-            {
-                _fk_Assembly = value;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_Assembly_Assembly", "A_Assembly")]
-        public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_MethodInvocation_Assembly_Assembly", "A_Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.Assembly__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>("Model.FK_MethodInvocation_Assembly_Assembly", "A_Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
-            }
-        }
-        
-        [EdmScalarPropertyAttribute()]
-        public string FullTypeName
-        {
-            get
-            {
-                return _FullTypeName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (FullTypeName != value)
-                {
-                    NotifyPropertyChanging("FullTypeName"); 
-                    _FullTypeName = value;
-                    NotifyPropertyChanged("FullTypeName");;
-                }
             }
         }
         
@@ -292,6 +224,53 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef Implementor
+        {
+            get
+            {
+                return Implementor__Implementation__;
+            }
+            set
+            {
+                Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        public System.Nullable<int> fk_Implementor
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Implementor != null)
+                {
+                    _fk_Implementor = Implementor.ID;
+                }
+                return _fk_Implementor;
+            }
+            set
+            {
+                _fk_Implementor = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_MethodInvocation_TypeRef_Implementor", "A_TypeRef")]
+        public Kistl.App.Base.TypeRef__Implementation__ Implementor__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>("Model.FK_MethodInvocation_TypeRef_Implementor", "A_TypeRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>("Model.FK_MethodInvocation_TypeRef_Implementor", "A_TypeRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
         public event ToStringHandler<MethodInvocation> OnToString_MethodInvocation;
         
         public event ObjectEventHandler<MethodInvocation> OnPreSave_MethodInvocation;
@@ -337,18 +316,6 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.Method))
                             .Select(c => c.GetErrorText(this, this.Method))
                             .ToArray());
-                case "Assembly":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(75).Constraints
-                            .Where(c => !c.IsValid(this, this.Assembly))
-                            .Select(c => c.GetErrorText(this, this.Assembly))
-                            .ToArray());
-                case "FullTypeName":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(76).Constraints
-                            .Where(c => !c.IsValid(this, this.FullTypeName))
-                            .Select(c => c.GetErrorText(this, this.FullTypeName))
-                            .ToArray());
                 case "MemberName":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(77).Constraints
@@ -367,6 +334,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.InvokeOnObjectClass))
                             .Select(c => c.GetErrorText(this, this.InvokeOnObjectClass))
                             .ToArray());
+                case "Implementor":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(208).Constraints
+                            .Where(c => !c.IsValid(this, this.Implementor))
+                            .Select(c => c.GetErrorText(this, this.Implementor))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -375,22 +348,20 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
-            BinarySerializer.ToBinary(this.fk_Assembly, sw);
-            BinarySerializer.ToBinary(this._FullTypeName, sw);
             BinarySerializer.ToBinary(this._MemberName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this.fk_InvokeOnObjectClass, sw);
+            BinarySerializer.ToBinary(this.fk_Implementor, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Method, sr);
-            BinarySerializer.FromBinary(out this._fk_Assembly, sr);
-            BinarySerializer.FromBinary(out this._FullTypeName, sr);
             BinarySerializer.FromBinary(out this._MemberName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._fk_InvokeOnObjectClass, sr);
+            BinarySerializer.FromBinary(out this._fk_Implementor, sr);
         }
     }
 }

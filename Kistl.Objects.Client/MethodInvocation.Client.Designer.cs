@@ -28,15 +28,13 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Method = null;
         
-        private System.Nullable<int> _fk_Assembly = null;
-        
-        private string _FullTypeName;
-        
         private string _MemberName;
         
         private System.Nullable<int> _fk_Module = null;
         
         private System.Nullable<int> _fk_InvokeOnObjectClass = null;
+        
+        private System.Nullable<int> _fk_Implementor = null;
         
         public MethodInvocation__Implementation__()
         {
@@ -82,57 +80,6 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Method"); 
                     _fk_Method = value;
                     NotifyPropertyChanged("Method");;
-                }
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Assembly Assembly
-        {
-            get
-            {
-                if (fk_Assembly == null) return null;
-                return Context.Find<Kistl.App.Base.Assembly>(fk_Assembly.Value);
-            }
-            set
-            {
-                fk_Assembly = value != null ? (int?)value.ID : null;
-            }
-        }
-        
-        public System.Nullable<int> fk_Assembly
-        {
-            get
-            {
-                return _fk_Assembly;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (fk_Assembly != value)
-                {
-                    NotifyPropertyChanging("Assembly"); 
-                    _fk_Assembly = value;
-                    NotifyPropertyChanged("Assembly");;
-                }
-            }
-        }
-        
-        public string FullTypeName
-        {
-            get
-            {
-                return _FullTypeName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (FullTypeName != value)
-                {
-                    NotifyPropertyChanging("FullTypeName"); 
-                    _FullTypeName = value;
-                    NotifyPropertyChanged("FullTypeName");;
                 }
             }
         }
@@ -232,6 +179,39 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef Implementor
+        {
+            get
+            {
+                if (fk_Implementor == null) return null;
+                return Context.Find<Kistl.App.Base.TypeRef>(fk_Implementor.Value);
+            }
+            set
+            {
+                fk_Implementor = value != null ? (int?)value.ID : null;
+            }
+        }
+        
+        public System.Nullable<int> fk_Implementor
+        {
+            get
+            {
+                return _fk_Implementor;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (fk_Implementor != value)
+                {
+                    NotifyPropertyChanging("Implementor"); 
+                    _fk_Implementor = value;
+                    NotifyPropertyChanged("Implementor");;
+                }
+            }
+        }
+        
         public event ToStringHandler<MethodInvocation> OnToString_MethodInvocation;
         
         public event ObjectEventHandler<MethodInvocation> OnPreSave_MethodInvocation;
@@ -266,11 +246,10 @@ namespace Kistl.App.Base
         {
             base.ApplyChanges(obj);
             ((MethodInvocation__Implementation__)obj).fk_Method = this.fk_Method;
-            ((MethodInvocation__Implementation__)obj).fk_Assembly = this.fk_Assembly;
-            ((MethodInvocation__Implementation__)obj).FullTypeName = this.FullTypeName;
             ((MethodInvocation__Implementation__)obj).MemberName = this.MemberName;
             ((MethodInvocation__Implementation__)obj).fk_Module = this.fk_Module;
             ((MethodInvocation__Implementation__)obj).fk_InvokeOnObjectClass = this.fk_InvokeOnObjectClass;
+            ((MethodInvocation__Implementation__)obj).fk_Implementor = this.fk_Implementor;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -287,18 +266,6 @@ namespace Kistl.App.Base
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(74).Constraints
                             .Where(c => !c.IsValid(this, this.Method))
                             .Select(c => c.GetErrorText(this, this.Method))
-                            .ToArray());
-                case "Assembly":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(75).Constraints
-                            .Where(c => !c.IsValid(this, this.Assembly))
-                            .Select(c => c.GetErrorText(this, this.Assembly))
-                            .ToArray());
-                case "FullTypeName":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(76).Constraints
-                            .Where(c => !c.IsValid(this, this.FullTypeName))
-                            .Select(c => c.GetErrorText(this, this.FullTypeName))
                             .ToArray());
                 case "MemberName":
                     return string.Join("\n", 
@@ -318,6 +285,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.InvokeOnObjectClass))
                             .Select(c => c.GetErrorText(this, this.InvokeOnObjectClass))
                             .ToArray());
+                case "Implementor":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(208).Constraints
+                            .Where(c => !c.IsValid(this, this.Implementor))
+                            .Select(c => c.GetErrorText(this, this.Implementor))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -326,22 +299,20 @@ namespace Kistl.App.Base
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Method, sw);
-            BinarySerializer.ToBinary(this.fk_Assembly, sw);
-            BinarySerializer.ToBinary(this._FullTypeName, sw);
             BinarySerializer.ToBinary(this._MemberName, sw);
             BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this.fk_InvokeOnObjectClass, sw);
+            BinarySerializer.ToBinary(this.fk_Implementor, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Method, sr);
-            BinarySerializer.FromBinary(out this._fk_Assembly, sr);
-            BinarySerializer.FromBinary(out this._FullTypeName, sr);
             BinarySerializer.FromBinary(out this._MemberName, sr);
             BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._fk_InvokeOnObjectClass, sr);
+            BinarySerializer.FromBinary(out this._fk_Implementor, sr);
         }
     }
 }

@@ -114,10 +114,6 @@
       <End Role="A_Method" EntitySet="Method" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_Assembly_Assembly" Association="Model.FK_MethodInvocation_Assembly_Assembly">
-      <End Role="A_Assembly" EntitySet="Assembly" />
-      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
-    </AssociationSet>
     <AssociationSet Name="FK_MethodInvocation_Module_Module" Association="Model.FK_MethodInvocation_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
@@ -229,6 +225,10 @@
     <AssociationSet Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments" Association="Model.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments">
       <End Role="A_TypeRef" EntitySet="TypeRef" />
       <End Role="B_TypeRef_GenericArgumentsCollectionEntry" EntitySet="TypeRef_GenericArgumentsCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_TypeRef_Implementor" Association="Model.FK_MethodInvocation_TypeRef_Implementor">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -435,11 +435,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Method__Implementation__" Relationship="Model.FK_MethodInvocation_Method_Method" FromRole="B_MethodInvocation" ToRole="A_Method" />
-    <NavigationProperty Name="Assembly__Implementation__" Relationship="Model.FK_MethodInvocation_Assembly_Assembly" FromRole="B_MethodInvocation" ToRole="A_Assembly" />
-    <Property Name="FullTypeName" Type="String" MaxLength="200" Nullable="false" />
     <Property Name="MemberName" Type="String" MaxLength="200" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_MethodInvocation_Module_Module" FromRole="B_MethodInvocation" ToRole="A_Module" />
     <NavigationProperty Name="InvokeOnObjectClass__Implementation__" Relationship="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass" FromRole="B_MethodInvocation" ToRole="A_DataType" />
+    <NavigationProperty Name="Implementor__Implementation__" Relationship="Model.FK_MethodInvocation_TypeRef_Implementor" FromRole="B_MethodInvocation" ToRole="A_TypeRef" />
   </EntityType>
   <EntityType Name="TaetigkeitsArt">
     <Key>
@@ -775,10 +774,6 @@
     <End Role="A_Method" Type="Model.Method" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
   </Association>
-  <Association Name="FK_MethodInvocation_Assembly_Assembly">
-    <End Role="A_Assembly" Type="Model.Assembly" Multiplicity="0..1" />
-    <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
-  </Association>
   <Association Name="FK_MethodInvocation_Module_Module">
     <End Role="A_Module" Type="Model.Module" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
@@ -890,6 +885,10 @@
   <Association Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments">
     <End Role="A_TypeRef" Type="Model.TypeRef" Multiplicity="0..1" />
     <End Role="B_TypeRef_GenericArgumentsCollectionEntry" Type="Model.TypeRef_GenericArgumentsCollectionEntry" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_MethodInvocation_TypeRef_Implementor">
+    <End Role="A_TypeRef" Type="Model.TypeRef" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />

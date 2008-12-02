@@ -37,24 +37,6 @@ namespace Kistl.App.Base
         }
         
         /// <summary>
-        /// Assembly, dass die Methode beinhaltet
-        /// </summary>
-        Kistl.App.Base.Assembly Assembly
-        {
-            get;
-            set;
-        }
-        
-        /// <summary>
-        /// Voller Name des .NET Types des implementierenden Members
-        /// </summary>
-        string FullTypeName
-        {
-            get;
-            set;
-        }
-        
-        /// <summary>
         /// Name des implementierenden Members
         /// </summary>
         string MemberName
@@ -76,6 +58,15 @@ namespace Kistl.App.Base
         /// In dieser Objektklasse implementieren
         /// </summary>
         Kistl.App.Base.DataType InvokeOnObjectClass
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
+        /// The Type implementing this invocation
+        /// </summary>
+        Kistl.App.Base.TypeRef Implementor
         {
             get;
             set;

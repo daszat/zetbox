@@ -98,12 +98,16 @@ namespace Kistl.Client
                                     {
                                         try
                                         {
-                                            if (!mi.Assembly.IsClientAssembly) continue;
+                                            if (!mi.Implementor.Assembly.IsClientAssembly) continue;
 
-                                            Type t = Type.GetType(mi.FullTypeName + ", " + mi.Assembly.AssemblyName);
+                                            // as noted above, no methods are 
+                                            // attached yet, so TypeRef.AsType() 
+                                            // and TypeRef.ToString() would be 
+                                            // nice, but aren't available yet.
+                                            Type t = Type.GetType(mi.Implementor.FullName + ", " + mi.Implementor.Assembly.AssemblyName);
                                             if (t == null)
                                             {
-                                                warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.FullTypeName, mi.Assembly.AssemblyName));
+                                                warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.Implementor.FullName, mi.Implementor.Assembly.AssemblyName));
                                                 continue;
                                             }
 

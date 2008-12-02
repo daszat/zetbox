@@ -167,6 +167,19 @@ namespace Kistl.Client.Presentables
                 UI.Queue(UI, () => State = ModelState.Active);
             });
         }
+
+        public void DeleteItem(DataObjectModel item)
+        {
+            UI.Verify();
+            State = ModelState.Loading;
+            Async.Queue(DataContext, () =>
+            {
+                Object.RemoveFromCollection<IDataObject>(Property.PropertyName, item.Object);
+                item.Delete();
+                UI.Queue(UI, () => State = ModelState.Active);
+            });
+        }
+
         public void ActivateItem(DataObjectModel item, bool activate)
         {
             Factory.ShowModel(item, activate);
@@ -186,15 +199,11 @@ namespace Kistl.Client.Presentables
         private void SyncValues(IList<IDataObject> elements)
         {
             UI.Verify();
-            ObservableCollection<DataObjectModel> newValue = new ObservableCollection<DataObjectModel>();
+            _valueCache.Clear();
             foreach (IDataObject obj in elements.Cast<IDataObject>())
             {
-                newValue.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
+                _valueCache.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
             }
-            // almost optimal atomic update
-            _valueCache = newValue;
-            _valueView = new ReadOnlyObservableCollection<DataObjectModel>(_valueCache);
-            OnPropertyChanged("Value");
         }
 
         private void AsyncCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

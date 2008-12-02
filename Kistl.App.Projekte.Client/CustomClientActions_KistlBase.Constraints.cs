@@ -164,14 +164,18 @@ namespace Kistl.App.Base
             if (obj.MinLength > 0)
             {
                 e.Result = String.Format("{0} should have at least {1} and at most {2} characters",
-                    obj.ConstrainedProperty.PropertyName,
+                    obj.ConstrainedProperty == null
+                        ? "a property"
+                        : obj.ConstrainedProperty.PropertyName,
                     obj.MinLength,
                     obj.MaxLength);
             }
             else
             {
                 e.Result = String.Format("{0} should have at most {1} characters",
-                    obj.ConstrainedProperty.PropertyName,
+                    obj.ConstrainedProperty == null
+                        ? "a property"
+                        : obj.ConstrainedProperty.PropertyName,
                     obj.MaxLength);
             }
         }

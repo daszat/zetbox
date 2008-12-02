@@ -75,7 +75,7 @@ namespace Kistl.App.Base
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
             {
-                e.Result = (obj.Assembly.IsClientAssembly ? "[Client] " : "[Server] ")
+                e.Result = (obj.Implementor.Assembly.IsClientAssembly ? "[Client] " : "[Server] ")
                     + obj.InvokeOnObjectClass.ClassName + "." + obj.Method.MethodName;
             }
             else
@@ -146,6 +146,17 @@ namespace Kistl.App.Base
                 obj.GetParameterTypeString(),
                 obj.ParameterName);
         }
+
+        public void OnToString_TypeRef(Kistl.App.Base.TypeRef obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = String.Format("{0}{1}, {2}",
+                obj.FullName,
+                (obj.GenericArguments.Count > 0
+                    ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
+                    : ""),
+                obj.Assembly);
+        }
+
         #endregion
 
         #region GetTypes
@@ -361,6 +372,15 @@ namespace Kistl.App.Base
             else
             {
                 e.Result = new List<Method>();
+            }
+        }
+
+        public void OnAsType_TypeRef(TypeRef obj, Kistl.API.MethodReturnEventArgs<Type> e, bool throwOnError)
+        {
+            e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.AssemblyName), throwOnError);
+            if (obj.GenericArguments.Count > 0)
+            {
+                e.Result = e.Result.MakeGenericType(obj.GenericArguments.Select(tRef => tRef.AsType(throwOnError)).ToArray());
             }
         }
 

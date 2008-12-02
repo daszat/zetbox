@@ -210,12 +210,12 @@ namespace Kistl.App.Base
             return base.GetPropertyError(prop);
         }
         
-        public virtual System.Type AsType()
+        public virtual System.Type AsType(bool throwOnError)
         {
             MethodReturnEventArgs<System.Type> e = new MethodReturnEventArgs<System.Type>();
             if (OnAsType_TypeRef != null)
             {
-                OnAsType_TypeRef(this, e);
+                OnAsType_TypeRef(this, e, throwOnError);
             };
             return e.Result;
         }
@@ -236,7 +236,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinaryCollectionEntries(this.GenericArguments__Implementation__, sr);
         }
         
-        public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e);
+        public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> e, bool throwOnError);
     }
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry")]

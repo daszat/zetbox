@@ -51,6 +51,15 @@ namespace Kistl.Client.WPF.View
             }
         }
 
+        private void DeleteHandler(object sender, RoutedEventArgs e)
+        {
+            var model = DataContext as ObjectListModel;
+            if (model.SelectedItem != null)
+            {
+                model.DeleteItem(model.SelectedItem);
+            }
+        }
+
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
             var model = DataContext as ObjectListModel;
@@ -68,5 +77,7 @@ namespace Kistl.Client.WPF.View
         }
 
         #endregion
+
+
     }
 }

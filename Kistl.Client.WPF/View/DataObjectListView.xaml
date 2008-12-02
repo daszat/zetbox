@@ -14,7 +14,9 @@
             <Button Margin="1,4,1,1"
                     Click="AddNewHandler">Add new ...</Button>
             <Button Margin="1"
-                    Click="RemoveHandler">Remove selection</Button>
+                    Click="RemoveHandler">Remove selection from list</Button>
+            <Button Margin="1"
+                    Click="DeleteHandler">Delete selection from data store</Button>
         </StackPanel>
     </view:PropertyView.Label>
 

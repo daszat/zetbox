@@ -56,6 +56,9 @@ namespace Kistl.App.Base
         /// <returns>
         /// the referenced Type
         /// </returns>
-        System.Type AsType();
+        /// <param name="throwOnError">
+        /// whether to return null (false) or throw an Exception (true) on error
+        /// </param>
+        System.Type AsType(bool throwOnError);
     }
 }

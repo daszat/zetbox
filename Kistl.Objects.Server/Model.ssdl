@@ -264,10 +264,6 @@
       <End Role="A_Method" EntitySet="Method" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_Assembly_Assembly" Association="Model.Store.FK_MethodInvocation_Assembly_Assembly">
-      <End Role="A_Assembly" EntitySet="Assembly" />
-      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
-    </AssociationSet>
     <AssociationSet Name="FK_MethodInvocation_Module_Module" Association="Model.Store.FK_MethodInvocation_Module_Module">
       <End Role="A_Module" EntitySet="Module" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
@@ -379,6 +375,10 @@
     <AssociationSet Name="FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments" Association="Model.Store.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_GenericArguments">
       <End Role="A_TypeRef" EntitySet="TypeRef" />
       <End Role="B_TypeRef_GenericArgumentsCollectionEntry" EntitySet="TypeRef_GenericArgumentsCollectionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_TypeRef_Implementor" Association="Model.Store.FK_MethodInvocation_TypeRef_Implementor">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -622,11 +622,10 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Assembly" Type="int" />
-    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_InvokeOnObjectClass" Type="int" />
+    <Property Name="fk_Implementor" Type="int" />
   </EntityType>
   <EntityType Name="TaetigkeitsArt">
     <Key>
@@ -1547,18 +1546,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MethodInvocation_Assembly_Assembly">
-    <End Role="A_Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="A_Assembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_MethodInvocation">
-        <PropertyRef Name="fk_Assembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_MethodInvocation_Module_Module">
     <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
@@ -1892,6 +1879,18 @@
       </Principal>
       <Dependent Role="B_TypeRef_GenericArgumentsCollectionEntry">
         <PropertyRef Name="fk_GenericArguments" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MethodInvocation_TypeRef_Implementor">
+    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="B_MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TypeRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_MethodInvocation">
+        <PropertyRef Name="fk_Implementor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -82,9 +82,39 @@ namespace Kistl.Client.WPF
 
                 //FixNotNullableConstraints();
 
+                TranslateMethodInvocations();
+
                 var initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
                 AppContext.Factory.ShowModel(initialWorkspace, true);
             }
+        }
+
+        private void TranslateMethodInvocations()
+        {
+            //using (TraceClient.TraceHelper.TraceMethodCall("Translating to MethodInvocation.Implementor"))
+            //{
+            //    using (IKistlContext ctx = KistlContext.GetContext())
+            //    {
+            //        foreach (var invocation in ctx.GetQuery<MethodInvocation>())
+            //        {
+            //            var implementor = ctx.GetQuery<TypeRef>()
+            //                .Where(tr => tr.Assembly.ID == invocation.Assembly.ID && tr.FullName == invocation.FullTypeName)
+            //                .SingleOrDefault();
+
+            //            if (implementor == null)
+            //            {
+            //                implementor = ctx.Create<TypeRef>();
+
+            //                implementor.Assembly = invocation.Assembly;
+            //                implementor.FullName = invocation.FullTypeName;
+            //            }
+
+            //            invocation.Implementor = implementor;
+            //        }
+
+            //        ctx.SubmitChanges();
+            //    }
+            //}
         }
 
         private static void FixNotNullableConstraints()
