@@ -210,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TextValueSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\WorkspaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -355,6 +359,9 @@
     <Compile Include="View\PropertyView.cs" />
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TextValueSelectionView.xaml.cs">
+      <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WorkspaceView.xaml.Commands.cs" />
     <Compile Include="View\WorkspaceView.xaml.cs">

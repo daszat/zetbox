@@ -4059,7 +4059,7 @@ namespace Kistl.Objects.Client
             _Kistl_App_Base_Relation.Add(_Kistl_App_Base_Relation_obj); };
             _Kistl_App_Base_Relation.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_TypeRef_obj = new Kistl.App.Base.TypeRef__Implementation__() {
-                FullName = @"Kistl.App.Base.CistlClientActions_Base",
+                FullName = @"Kistl.App.Base.CustomClientActions_KistlBase",
                 ID = 1};
             _Kistl_App_Base_TypeRef.Add(_Kistl_App_Base_TypeRef_obj); };
             { var _Kistl_App_Base_TypeRef_obj = new Kistl.App.Base.TypeRef__Implementation__() {

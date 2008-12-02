@@ -15,7 +15,19 @@ namespace Kistl.API.Client
             if (ApplicationContext.Current.HostType != HostType.Client) throw new InvalidOperationException("A BaseClientPersistenceObject can exist only on a client");
         }
 
-        public int ID { get; internal set; }
+        private int _ID;
+        public int ID
+        {
+            get { return _ID; }
+            internal set
+            {
+                if (_ID != value)
+                {
+                    _ID = value;
+                    OnPropertyChanged("ID");
+                }
+            }
+        }
 
         public bool IsReadonly { get { return _context != null ? _context.IsReadonly : false; ; } }
 

@@ -6,6 +6,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {
@@ -38,8 +39,10 @@ namespace Kistl.Client.Presentables
             {
                 foreach (var obj in objs)
                 {
-                    // TODO: search for existing DOModel
-                    Instances.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
+                    Instances.Add((DataObjectModel)Factory.CreateModel(
+                        DataMocks.LookupDefaultModelDescriptor(obj),
+                        DataContext,
+                        obj));
                 }
                 State = ModelState.Active;
             });

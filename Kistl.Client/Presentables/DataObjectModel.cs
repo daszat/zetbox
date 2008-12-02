@@ -42,7 +42,7 @@ namespace Kistl.Client.Presentables
         protected DataObjectModel(bool designMode)
             : base(designMode)
         {
-            _propertyModels = new ObservableCollection<PresentableModel>() {
+            _propertyModelsCache = new ObservableCollection<PresentableModel>() {
                 NullableValuePropertyModel<bool>.CreateDesignMock(true),
                 NullableValuePropertyModel<int>.CreateDesignMock(42),
                 NullableValuePropertyModel<double>.CreateDesignMock(Math.PI),
@@ -70,15 +70,15 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ObservableCollection<PresentableModel> _propertyModels;
+        private ObservableCollection<PresentableModel> _propertyModelsCache;
         public ObservableCollection<PresentableModel> PropertyModels
         {
             get
             {
                 UI.Verify();
-                if (_propertyModels == null)
+                if (_propertyModelsCache == null)
                 {
-                    _propertyModels = new ObservableCollection<PresentableModel>();
+                    _propertyModelsCache = new ObservableCollection<PresentableModel>();
                     State = ModelState.Loading;
                     Async.Queue(DataContext, () =>
                     {
@@ -86,7 +86,7 @@ namespace Kistl.Client.Presentables
                         UI.Queue(UI, () => this.State = ModelState.Active);
                     });
                 }
-                return _propertyModels;
+                return _propertyModelsCache;
             }
         }
 
@@ -177,7 +177,7 @@ namespace Kistl.Client.Presentables
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        private void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
+        protected virtual void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
         {
             UI.Verify();
             foreach (var pm in props)
@@ -191,7 +191,7 @@ namespace Kistl.Client.Presentables
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        private void SetClassMethodModels(ObjectClass cls, IEnumerable<Method> methods)
+        protected virtual void SetClassMethodModels(ObjectClass cls, IEnumerable<Method> methods)
         {
             UI.Verify();
             foreach (var pm in methods)
@@ -287,6 +287,10 @@ namespace Kistl.Client.Presentables
         {
             Async.Verify();
 
+            // notify consumers if ID has changed
+            if (e.PropertyName == "ID")
+                AsyncOnPropertyChanged("ID");
+
             // defer updating the cache into another work item
             Async.Queue(DataContext, () =>
             {
@@ -297,9 +301,7 @@ namespace Kistl.Client.Presentables
                 UI.Queue(UI, () => this.State = ModelState.Active);
             });
 
-            // notify consumers if ID has changed
-            if (e.PropertyName == "ID")
-                OnPropertyChanged("ID");
+
         }
 
         #endregion

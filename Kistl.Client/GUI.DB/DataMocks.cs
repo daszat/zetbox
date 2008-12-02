@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-using Kistl.Client.Presentables;
-using Kistl.App.GUI;
 using Kistl.API;
 using Kistl.App.Base;
-using System.Diagnostics;
+using Kistl.App.GUI;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.GUI.DB
 {
@@ -150,6 +150,13 @@ namespace Kistl.Client.GUI.DB
     }
 
     /// <summary>
+    /// how to layout a selection from multiple text values
+    /// </summary>
+    public class TextValueSelectionLayout : TextValueLayout
+    {
+    }
+
+    /// <summary>
     /// how to layout a data object in a single "line"
     /// </summary>
     public class DataObjectLineLayout : Layout
@@ -209,6 +216,7 @@ namespace Kistl.Client.GUI.DB
 
                     AddLayoutCacheEntry(new WorkspaceLayout() { SourceModelType = typeof(WorkspaceModel) });
 
+                    AddLayoutCacheEntry(new TextValueSelectionLayout() { SourceModelType = typeof(ChooseReferencePropertyModel<String>), IsMultiline = false, AllowNullInput = false });
                     AddLayoutCacheEntry(new TextValueLayout() { SourceModelType = typeof(ReferencePropertyModel<String>), IsMultiline = false, AllowNullInput = false });
                     AddLayoutCacheEntry(new TextValueLayout() { SourceModelType = typeof(ObjectResultModel<String>), IsMultiline = false, AllowNullInput = false });
 
@@ -241,7 +249,7 @@ namespace Kistl.Client.GUI.DB
 
             var debug = Views
                 .Where(vd => vd.Toolkit == tk && vd.LayoutRef.AsType().IsAssignableFrom(layoutType))
-                .Select(vd => new { View = vd, Depth = GenerationCount(vd.LayoutRef.AsType(), layoutType)})
+                .Select(vd => new { View = vd, Depth = GenerationCount(vd.LayoutRef.AsType(), layoutType) })
                 .OrderBy(p => p.Depth)
                 .ToList();
 
@@ -338,7 +346,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF"),
                             Toolkit.WPF, new TypeRef(typeof(SelectionTaskLayout))),
-
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.WPF.View.TextValueSelectionView", "Kistl.Client.WPF"),
+                            Toolkit.WPF, new TypeRef(typeof(TextValueSelectionLayout))),
                     };
                 }
                 return _viewsCache;
@@ -349,11 +359,18 @@ namespace Kistl.Client.GUI.DB
         {
             if (obj is BaseProperty)
             {
+                //if (obj.ID == 100)
+                //    return;
+                //else
                 return LookupDefaultPropertyModelDescriptor((BaseProperty)obj);
             }
             else if (obj is Module)
             {
                 return new ModelDescriptor(new TypeRef(typeof(ModuleModel)));
+            }
+            else if (obj is MethodInvocation)
+            {
+                return new ModelDescriptor(new TypeRef(typeof(MethodInvocationModel)));
             }
 
             throw new NotImplementedException(String.Format("==>> No model for object: '{0}' of Type '{1}'", obj, obj.GetType()));
@@ -382,7 +399,10 @@ namespace Kistl.Client.GUI.DB
             }
             else if (p is StringProperty && !prop.IsList)
             {
-                return new ModelDescriptor(new TypeRef(typeof(ReferencePropertyModel<string>)));
+                if (p.ID == 77) // MethodInvocation.MemberName
+                    return new ModelDescriptor(new TypeRef(typeof(ChooseReferencePropertyModel<string>)));
+                else
+                    return new ModelDescriptor(new TypeRef(typeof(ReferencePropertyModel<string>)));
             }
             else if (p is ObjectReferenceProperty)
             {

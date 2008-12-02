@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace Kistl.Client.Presentables
 {
@@ -426,6 +427,25 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+    }
+
+    public class ChooseReferencePropertyModel<TValue>
+        : ReferencePropertyModel<TValue>
+        where TValue : class
+    {
+        public ChooseReferencePropertyModel(
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IDataObject obj, ValueTypeProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
+        {
+            PossibleValues = new ObservableCollection<TValue>();
+        }
+
+        #region Public Interface
+
+        public ObservableCollection<TValue> PossibleValues { get; private set; }
+
+        #endregion
     }
 
 }
