@@ -638,7 +638,9 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ValueImpl" Relationship="Model.FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter" FromRole="B_Projekt_MitarbeiterCollectionEntry" ToRole="A_Mitarbeiter" />
+    <Property Name="ValueIndex" Type="Int32" Nullable="true" />
     <NavigationProperty Name="ParentImpl" Relationship="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" FromRole="B_Projekt_MitarbeiterCollectionEntry" ToRole="A_Projekt" />
+    <Property Name="ParentIndex" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="Kunde_EMailsCollectionEntry">
     <Key>

@@ -53,7 +53,7 @@ namespace Kistl.Server
                         Delegate d = Delegate.CreateDelegate(ii.CLREvent.EventHandlerType, ii.Instance, ii.CLRMethod);
                         ii.CLREvent.AddEventHandler(obj, d);
                     }
-                    catch (Exception ex) { 
+                    catch { 
                         // HACK
                         // TODO : Fix Case 316 properly!
                     }

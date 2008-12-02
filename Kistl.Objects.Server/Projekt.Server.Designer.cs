@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
         
         private EntityCollectionWrapper<Kistl.App.Projekte.Task, Kistl.App.Projekte.Task__Implementation__> TasksWrapper;
         
-        private EntityCollectionEntryValueWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> MitarbeiterWrapper;
+        private EntityCollectionEntryValueWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> MitarbeiterWrapper;
         
         private System.Double? _AufwandGes;
         
@@ -107,11 +107,11 @@ namespace Kistl.App.Projekte
             }
         }
         
-        public ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get
             {
-                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Mitarbeiter__Implementation__);
+                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Mitarbeiter__Implementation__);
                 return MitarbeiterWrapper;
             }
         }
@@ -317,7 +317,7 @@ namespace Kistl.App.Projekte
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Projekt_MitarbeiterCollectionEntry")]
-    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
+    public class Projekt_MitarbeiterCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntrySorted<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt>
     {
         
         private int _ID;
@@ -325,6 +325,10 @@ namespace Kistl.App.Projekte
         private int _fk_Value;
         
         private int _fk_Parent;
+        
+        private System.Nullable<int> _ValueIndex;
+        
+        private System.Nullable<int> _ParentIndex;
         
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -399,6 +403,44 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<int> ValueIndex
+        {
+            get
+            {
+                return _ValueIndex;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (ValueIndex != value)
+                {
+                    NotifyPropertyChanging("ValueIndex"); 
+                    _ValueIndex = value;
+                    NotifyPropertyChanged("ValueIndex");;
+                }
+            }
+        }
+        
+        [EdmScalarPropertyAttribute()]
+        public System.Nullable<int> ParentIndex
+        {
+            get
+            {
+                return _ParentIndex;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (ParentIndex != value)
+                {
+                    NotifyPropertyChanging("ParentIndex"); 
+                    _ParentIndex = value;
+                    NotifyPropertyChanged("ParentIndex");;
+                }
+            }
+        }
+        
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Projekt_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ ValueImpl
         {
@@ -438,6 +480,8 @@ namespace Kistl.App.Projekte
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Value, sw);
             BinarySerializer.ToBinary(this.fk_Parent, sw);
+            BinarySerializer.ToBinary(this.ValueIndex, sw);
+            BinarySerializer.ToBinary(this.ParentIndex, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -445,6 +489,8 @@ namespace Kistl.App.Projekte
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Value, sr);
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
+            BinarySerializer.FromBinary(out this._ValueIndex, sr);
+            BinarySerializer.FromBinary(out this._ParentIndex, sr);
         }
     }
 }

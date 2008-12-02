@@ -898,7 +898,9 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Projekt" Type="int" Nullable="true" />
+    <Property Name="fk_Projekt_pos" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="fk_Mitarbeiter_pos" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Kunde_EMailsCollectionEntry">
     <Key>

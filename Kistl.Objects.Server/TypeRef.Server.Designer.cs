@@ -405,6 +405,8 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this.fk_Value, sw);
             BinarySerializer.ToBinary(this.fk_Parent, sw);
+            BinarySerializer.ToBinary(this.ValueIndex, sw);
+            BinarySerializer.ToBinary(this.ParentIndex, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -412,6 +414,8 @@ namespace Kistl.App.Base
             base.FromStream(sr);
             BinarySerializer.FromBinary(out this._fk_Value, sr);
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
+            BinarySerializer.FromBinary(out this._ValueIndex, sr);
+            BinarySerializer.FromBinary(out this._ParentIndex, sr);
         }
     }
 }

@@ -40,6 +40,12 @@ namespace Kistl.Server.Tests
             test.Sort_Relation_1_n();
 
             test.SetUp();
+            test.Sort_Relation_n_m_n();
+
+            test.SetUp();
+            test.Sort_Relation_n_m_m();
+
+            test.SetUp();
             test.Relation_1_n_Set_1();
 
             test.SetUp();

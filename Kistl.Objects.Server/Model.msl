@@ -446,6 +446,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ValueIndex" ColumnName="fk_Mitarbeiter_pos" />
+          <ScalarProperty Name="ParentIndex" ColumnName="fk_Projekt_pos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

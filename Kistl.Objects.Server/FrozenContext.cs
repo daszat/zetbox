@@ -181,7 +181,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
-                IsIndexed = false,
+                IsIndexed = true,
                 PropertyName = @"Projekte",
                 AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
                 Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist",
@@ -190,7 +190,7 @@ namespace Kistl.Objects.Server
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
                 IsList = true,
                 IsNullable = true,
-                IsIndexed = false,
+                IsIndexed = true,
                 PropertyName = @"Mitarbeiter",
                 ID = 22};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };

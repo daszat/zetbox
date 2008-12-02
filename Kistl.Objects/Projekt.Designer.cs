@@ -38,7 +38,7 @@ namespace Kistl.App.Projekte
             get;
         }
         
-        ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+        IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
         {
             get;
         }

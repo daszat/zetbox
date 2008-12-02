@@ -265,6 +265,11 @@ namespace Kistl.API.Client
         public virtual void ApplyChanges(ICollectionEntry obj)
         {
             ((BaseClientPersistenceObject)obj).ID = this.ID;
+            if (obj is ICollectionEntrySorted)
+            {
+                ((ICollectionEntrySorted)obj).ValueIndex = ((ICollectionEntrySorted)this).ValueIndex;
+                ((ICollectionEntrySorted)obj).ParentIndex = ((ICollectionEntrySorted)this).ParentIndex;
+            }
         }
     }
 

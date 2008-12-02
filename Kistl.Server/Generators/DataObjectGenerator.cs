@@ -1052,6 +1052,12 @@ namespace Kistl.Server.Generators
             m.Statements.AddExpression("BinarySerializer.ToBinary(this.Value, sw)");
             m.Statements.AddExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)");
 
+            if (current.property.IsIndexed)
+            {
+                m.Statements.AddExpression("BinarySerializer.ToBinary(this.ValueIndex, sw)");
+                m.Statements.AddExpression("BinarySerializer.ToBinary(this.ParentIndex, sw)");
+            }
+
             m = current.code_class.CreateOverrideMethod("FromStream", typeof(void));
             //m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
@@ -1059,6 +1065,11 @@ namespace Kistl.Server.Generators
             m.Statements.AddExpression("base.FromStream(sr)");
             m.Statements.AddExpression("BinarySerializer.FromBinary(out this._Value, sr)");
             m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)");
+            if (current.property.IsIndexed)
+            {
+                m.Statements.AddExpression("BinarySerializer.FromBinary(out this._ValueIndex, sr)");
+                m.Statements.AddExpression("BinarySerializer.FromBinary(out this._ParentIndex, sr)");
+            }
 
             if (current.task == TaskEnum.Client)
             {
@@ -1304,6 +1315,12 @@ namespace Kistl.Server.Generators
             m.Statements.AddExpression("BinarySerializer.ToBinary(this.fk_Value, sw)");
             m.Statements.AddExpression("BinarySerializer.ToBinary(this.fk_Parent, sw)");
 
+            if (current.property.IsIndexed || current.property.NeedsPositionColumn())
+            {
+                m.Statements.AddExpression("BinarySerializer.ToBinary(this.ValueIndex, sw)");
+                m.Statements.AddExpression("BinarySerializer.ToBinary(this.ParentIndex, sw)");
+            }
+
             m = current.code_class.CreateOverrideMethod("FromStream", typeof(void));
             //m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(Kistl.API.IKistlContext)), "ctx"));
             m.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(System.IO.BinaryReader)), "sr"));
@@ -1311,6 +1328,12 @@ namespace Kistl.Server.Generators
             m.Statements.AddExpression("base.FromStream(sr)");
             m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_Value, sr)");
             m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_Parent, sr)");
+
+            if (current.property.IsIndexed || current.property.NeedsPositionColumn())
+            {
+                m.Statements.AddExpression("BinarySerializer.FromBinary(out this._ValueIndex, sr)");
+                m.Statements.AddExpression("BinarySerializer.FromBinary(out this._ParentIndex, sr)");
+            }
 
             if (current.task == TaskEnum.Client)
             {

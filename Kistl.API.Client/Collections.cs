@@ -328,6 +328,24 @@ namespace Kistl.API.Client
 
         #endregion
 
+        #region Index Management
+        protected void UpdateIndex2(COLLECTIONENTRYTYPE i, int? index)
+        {
+            if (i is ICollectionEntrySorted<T, PARENT>)
+            {
+                ICollectionEntrySorted<T, PARENT> item = (ICollectionEntrySorted<T, PARENT>)i;
+                // Sets the position Property for a n:m Relation
+                item.ValueIndex = index;
+
+                if (item.ParentIndex == null && index != null)
+                {
+                    // Add to end
+                    item.ParentIndex = -1;
+                }
+            }
+        }
+        #endregion
+
         #region ICollection<T> Members
 
         public void Add(T item)
@@ -367,7 +385,7 @@ namespace Kistl.API.Client
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotSupportedException();
+            collection.Select(i => i.Value).ToArray().CopyTo(array, arrayIndex);
         }
 
         public int Count
@@ -454,8 +472,18 @@ namespace Kistl.API.Client
         #region Streaming Methods
         public void ToStream(System.IO.BinaryWriter sw)
         {
+            int index = 0;
             foreach (ICollectionEntry obj in collection)
             {
+                if (obj is ICollectionEntrySorted)
+                {
+
+                    ICollectionEntrySorted se = (ICollectionEntrySorted)obj;
+                    se.ValueIndex = index++;
+                    if(se.ParentIndex == null)
+                        se.ParentIndex = -1;
+                }
+
                 BinarySerializer.ToBinary(true, sw);
                 obj.ToStream(sw);
             }

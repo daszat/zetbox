@@ -304,30 +304,29 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        [Ignore]
         public void Change_Relation_n_m_Set_n_By_Index()
         {
-            //using (IKistlContext ctx = KistlContext.GetContext())
-            //{
-            //    var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            //    var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-            //    var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+                var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
 
-            //    prj.Mitarbeiter.Add(ma);
+                prj.Mitarbeiter.Add(ma);
 
-            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-            //    Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
-            //    Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-            //    Assert.That(ma.Projekte.First(), Is.SameAs(prj));
+                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
+                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
+                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
+                Assert.That(ma.Projekte.First(), Is.SameAs(prj));
 
-            //    //prj.Mitarbeiter[0] = ma2;
+                prj.Mitarbeiter[0] = ma2;
 
-            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-            //    Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma2));
-            //    Assert.That(ma.Projekte.Count, Is.EqualTo(0));
-            //    Assert.That(ma2.Projekte.Count, Is.EqualTo(1));
-            //    Assert.That(ma2.Projekte.First(), Is.SameAs(prj));
-            //}
+                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
+                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma2));
+                Assert.That(ma.Projekte.Count, Is.EqualTo(0));
+                Assert.That(ma2.Projekte.Count, Is.EqualTo(1));
+                Assert.That(ma2.Projekte.First(), Is.SameAs(prj));
+            }
         }
 
         [Test]
@@ -383,30 +382,29 @@ namespace Kistl.Server.Tests
             }
         }        
         [Test]
-        [Ignore]
         public void Change_Relation_n_m_Set_m_By_Index()
         {
-            //using (IKistlContext ctx = KistlContext.GetContext())
-            //{
-            //    var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            //    var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-            //    var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+                var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
+                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
 
-            //    ma.Projekte.Add(prj);
+                ma.Projekte.Add(prj);
 
-            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-            //    Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
-            //    Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-            //    Assert.That(ma.Projekte.First(), Is.SameAs(prj));
+                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
+                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
+                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
+                Assert.That(ma.Projekte.First(), Is.SameAs(prj));
 
-            //    //ma.Projekte[0] = prj2;
+                ma.Projekte[0] = prj2;
 
-            //    Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
-            //    Assert.That(prj2.Mitarbeiter.Count, Is.EqualTo(1));
-            //    Assert.That(prj2.Mitarbeiter.First(), Is.SameAs(ma));
-            //    Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-            //    Assert.That(ma.Projekte.First(), Is.SameAs(prj2));
-            //}
+                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
+                Assert.That(prj2.Mitarbeiter.Count, Is.EqualTo(1));
+                Assert.That(prj2.Mitarbeiter.First(), Is.SameAs(ma));
+                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
+                Assert.That(ma.Projekte.First(), Is.SameAs(prj2));
+            }
         }               
         #endregion
 
@@ -416,6 +414,7 @@ namespace Kistl.Server.Tests
         #endregion
 
         #region Sort Relation
+        [Test]
         public void Sort_Relation_1_n()
         {
             int methodID = 0;
@@ -446,6 +445,76 @@ namespace Kistl.Server.Tests
                     .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.ParameterName))
                 {
                     Assert.That(p, Is.EqualTo(tmpParameter[i++]));
+                }
+            }
+        }
+
+        [Test]
+        public void Sort_Relation_n_m_n()
+        {
+            int prjID = 0;
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var prj = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()
+                    .OrderByDescending(p => p.Mitarbeiter.Count).First();
+                prjID = prj.ID;
+
+                var tmpMitarbeiter = prj.Mitarbeiter.ToList();
+                prj.Mitarbeiter.Clear();
+                foreach (Kistl.App.Projekte.Mitarbeiter m in tmpMitarbeiter
+                    .OrderBy(m => m.Name))
+                {
+                    prj.Mitarbeiter.Add(m);
+                }
+
+                ctx.SubmitChanges();
+            }
+
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var prj = ctx.Find<Kistl.App.Projekte.Projekt>(prjID);
+
+                var tmpMitarbeiter = prj.Mitarbeiter.ToList();
+                int i = 0;
+                foreach (Kistl.App.Projekte.Mitarbeiter m in tmpMitarbeiter
+                    .OrderBy(m => m.Name))
+                {
+                    Assert.That(m, Is.EqualTo(tmpMitarbeiter[i++]));
+                }
+            }
+        }
+
+        [Test]
+        public void Sort_Relation_n_m_m()
+        {
+            int maID = 0;
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var ma = ctx.GetQuery<Kistl.App.Projekte.Mitarbeiter>().ToList()
+                    .OrderByDescending(p => p.Projekte.Count).First();
+                maID = ma.ID;
+
+                var tmpProjekte = ma.Projekte.ToList();
+                ma.Projekte.Clear();
+                foreach (Kistl.App.Projekte.Projekt prj in tmpProjekte
+                    .OrderBy(p => p.Name))
+                {
+                    ma.Projekte.Add(prj);
+                }
+
+                ctx.SubmitChanges();
+            }
+
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var ma = ctx.Find<Kistl.App.Projekte.Mitarbeiter>(maID);
+
+                var tmpProjekte = ma.Projekte.ToList();
+                int i = 0;
+                foreach (Kistl.App.Projekte.Projekt prj in tmpProjekte
+                    .OrderBy(p => p.Name))
+                {
+                    Assert.That(prj, Is.EqualTo(tmpProjekte[i++]));
                 }
             }
         }

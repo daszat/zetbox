@@ -121,14 +121,6 @@ namespace Kistl.API
         void NotifyPostSave();
     }
 
-    /// <summary>
-    /// Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
-    /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
-    /// </summary>
-    public interface ICollectionEntry : IPersistenceObject
-    {
-    }
-
     public interface IStruct : ICloneable
     {
         /// <summary>
@@ -152,6 +144,15 @@ namespace Kistl.API
     }
 
     /// <summary>
+    /// Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
+    /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
+    /// </summary>
+    public interface ICollectionEntry : IPersistenceObject
+    {
+    }
+
+
+    /// <summary>
     /// Typed Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
@@ -173,10 +174,14 @@ namespace Kistl.API
         int fk_Parent { get; set; }
     }
 
-    public interface ICollectionEntrySorted<VALUE, PARENT> : ICollectionEntry<VALUE, PARENT>
+    public interface ICollectionEntrySorted : ICollectionEntry
     {
         int? ValueIndex { get; set; }
         int? ParentIndex { get; set; }
+    }
+
+    public interface ICollectionEntrySorted<VALUE, PARENT> : ICollectionEntry<VALUE, PARENT>, ICollectionEntrySorted
+    {
     }
 
     /// <summary>
