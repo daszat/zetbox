@@ -31,7 +31,7 @@ namespace Kistl.Client.WPF.View
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
             var model = DataContext as ObjectListModel;
-            model.CreateNewElement(newitem =>
+            model.CreateNewItem(newitem =>
             {
                 if (newitem != null)
                 {

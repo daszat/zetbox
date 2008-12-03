@@ -1,18 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using System.Collections.ObjectModel;
+using Kistl.API.Utils;
 using Kistl.App.Base;
-using System.Collections.Specialized;
 
 namespace Kistl.Client.Presentables
 {
     public class ObjectListModel
-        : PropertyModel<ICollection<DataObjectModel>>, IReadOnlyValueModel<ReadOnlyObservableCollection<DataObjectModel>>
+        : PropertyModel<ICollection<DataObjectModel>>, IValueListModel<DataObjectModel>
     {
 
         public ObjectListModel(
@@ -25,6 +26,9 @@ namespace Kistl.Client.Presentables
             RegisterCollectionChanged();
         }
 
+        /// <summary>
+        /// deprecated BackReferenceProperty
+        /// </summary>
         public ObjectListModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, BackReferenceProperty prop)
@@ -42,21 +46,21 @@ namespace Kistl.Client.Presentables
             });
         }
 
-        #region Public interface and IValueModel<ObservableCollection<DataObjectModel>> Members
+        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
 
         public bool HasValue { get { UI.Verify(); return true; } }
         public bool IsNull { get { UI.Verify(); return false; } }
 
         private ObservableCollection<DataObjectModel> _valueCache = new ObservableCollection<DataObjectModel>();
-        private ReadOnlyObservableCollection<DataObjectModel> _valueView;
-        public ReadOnlyObservableCollection<DataObjectModel> Value
+        private IReadOnlyObservableCollection<DataObjectModel> _valueView;
+        public IReadOnlyObservableCollection<DataObjectModel> Value
         {
             get
             {
                 UI.Verify();
                 if (_valueView == null)
                 {
-                    _valueView = new ReadOnlyObservableCollection<DataObjectModel>(_valueCache);
+                    _valueView = new ReadOnlyObservableCollectionWrapper<DataObjectModel>(_valueCache);
                 }
                 return _valueView;
             }
@@ -81,7 +85,25 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public void CreateNewElement(Action<DataObjectModel> onCreated)
+        /// <summary>
+        /// Creates a new Item suitable for adding to the list. This may prompt 
+        /// the user to choose a type of item to add or enter an initial value.
+        /// </summary>
+        /// <param name="onCreated">this callback will be called with the newly created item on the UI thread</param>
+        /// 
+        /// This example creates a new item and activates it for the user to edit:
+        /// <example><![CDATA[
+        /// model.CreateNewElement(newitem =>
+        /// {
+        ///     if (newitem != null)
+        ///     {
+        ///         model.AddItem(newitem);
+        ///         model.SelectedItem = newitem;
+        ///         model.ActivateItem(model.SelectedItem, true);
+        ///     }
+        /// });]]>
+        /// </example>
+        public void CreateNewItem(Action<DataObjectModel> onCreated)
         {
             UI.Verify();
 

@@ -1,0 +1,25 @@
+﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.ListValueView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+                   xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+                   xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                   ToolTip="{Binding ToolTip, Mode=OneWay}">
+
+    <view:PropertyView.Label>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="{Binding Label, Mode=OneWay}" />
+            <ctrls:LoadingIndicator />
+            <Button Margin="1,4,1,1"
+                    Click="AddNewHandler">Add new ...</Button>
+            <Button Margin="1"
+                    Click="RemoveHandler">Remove selection from list</Button>
+        </StackPanel>
+    </view:PropertyView.Label>
+
+    <ListView ItemsSource="{Binding Value, Mode=OneWay}"
+              SelectedItem="{Binding SelectedItem}"
+              MaxHeight="300" />
+
+</view:PropertyView>

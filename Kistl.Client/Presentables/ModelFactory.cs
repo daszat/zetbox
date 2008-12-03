@@ -33,11 +33,21 @@ namespace Kistl.Client.Presentables
 
         private ModelCache _cache = new ModelCache();
 
+        /// <summary>
+        /// Should only be used in very "special" situations. Using
+        /// <see cref="CreateDefaultModel"/> is usually much better.
+        /// </summary>
         public TModel CreateSpecificModel<TModel>(IKistlContext ctx, params object[] data)
             where TModel : PresentableModel
         {
             Type requestedType = typeof(TModel);
             return (TModel)CreateModel(requestedType, ctx, data);
+        }
+
+        public PresentableModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
+        {
+            ModelDescriptor desc = DataMocks.LookupDefaultModelDescriptor(obj);
+            return CreateModel(desc, ctx, new object[] { obj }.Concat(data));
         }
 
         public PresentableModel CreateModel(ModelDescriptor desc, IKistlContext ctx, params object[] data)

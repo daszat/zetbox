@@ -164,6 +164,8 @@ namespace Kistl.Client.GUI.DB
     {
     }
 
+    public class ListValueLayout : Layout { }
+
     /// <summary>
     /// how to layout a data object in a single "line"
     /// </summary>
@@ -229,6 +231,7 @@ namespace Kistl.Client.GUI.DB
                     AddLayoutCacheEntry(new TextValueLayout() { SourceModelType = typeof(ObjectResultModel<String>), IsMultiline = false, AllowNullInput = false });
 
                     AddLayoutCacheEntry(new SimpleEnumValueLayout() { SourceModelType = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition(), AllowNullInput = true });
+                    AddLayoutCacheEntry(new ListValueLayout() { SourceModelType = typeof(SimpleReferenceListPropertyModel<string>).GetGenericTypeDefinition() });
                 }
                 return _defaultLayoutsCache;
             }
@@ -380,7 +383,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.EnumSelectionView", "Kistl.Client.WPF"),
                             Toolkit.WPF, new TypeRef(typeof(SimpleEnumValueLayout))),
-                    };
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.WPF.View.ListValueView", "Kistl.Client.WPF"),
+                            Toolkit.WPF, new TypeRef(typeof(ListValueLayout))),                    };
                 }
                 return _viewsCache;
             }
@@ -433,10 +438,12 @@ namespace Kistl.Client.GUI.DB
             {
                 return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<int>)));
             }
-            else if (p is StringProperty && !prop.IsList)
+            else if (p is StringProperty)
             {
                 if (p.ID == 77) // MethodInvocation.MemberName
                     return new ModelDescriptor(new TypeRef(typeof(ChooseReferencePropertyModel<string>)));
+                else if (prop.IsList)
+                    return new ModelDescriptor(new TypeRef(typeof(SimpleReferenceListPropertyModel<string>)));
                 else
                     return new ModelDescriptor(new TypeRef(typeof(ReferencePropertyModel<string>)));
             }
