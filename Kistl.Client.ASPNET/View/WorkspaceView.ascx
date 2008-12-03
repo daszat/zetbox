@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="WorkspaceView.ascx.cs"
     Inherits="View_WorkspaceView" %>
 <div style="float: left; min-width: 200px; margin-right: 10px;" id="container" runat="server">
-    <asp:HiddenField ID="hdObjects" runat="server" />
     <div id="divLoadingModules" style="display: none;">
         <strong>Modules:</strong>
         <br />
@@ -52,7 +51,15 @@
         </adc:DataList>
     </div>
 </div>
-<div style="float: left; width: 600px; border: solid 1px black;">
-    <ajaxToolkit:TabContainer ID="tabObjects" runat="server">
-    </ajaxToolkit:TabContainer>
+<div style="float: left; min-width: 600px; border: solid 1px black;">
+    <asp:UpdatePanel ID="WorkspaceUpdatePanel" runat="server">
+        <ContentTemplate>
+            <asp:HiddenField ID="hdObjects" runat="server" />
+            <ajaxToolkit:TabContainer ID="tabObjects" runat="server" ScrollBars="Auto">
+            </ajaxToolkit:TabContainer>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="JavascriptRenderer" />
+        </Triggers>
+    </asp:UpdatePanel>
 </div>

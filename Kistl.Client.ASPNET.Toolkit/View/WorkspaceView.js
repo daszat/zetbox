@@ -13,6 +13,7 @@ Kistl.Client.ASPNET.View.WorkspaceView = function(element) {
     this._listObjectClasses = null;
     this._listInstances = null;
     this._listRecentObjects = null;
+    this._tabObjectsControl = null;
 
     // Handler
     this._onOnItemDataBoundHandler = null;
@@ -87,7 +88,7 @@ Kistl.Client.ASPNET.View.WorkspaceView.prototype = {
     },
     set_ListRecentObjects: function(val) {
         this._listRecentObjects = val;
-    },
+    },    
     // Methods
     BindModules: function() {
         $get("divLoadingModules").style.display = "block";

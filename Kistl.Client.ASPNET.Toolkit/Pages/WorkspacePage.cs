@@ -28,7 +28,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         void ShowObject(DataObjectModel obj);
     }
 
-    public abstract class WorkspacePage : System.Web.UI.Page, IWorkspaceView
+    public abstract class WorkspacePage : System.Web.UI.Page , IWorkspaceView
     {
         protected abstract Control ctrlMainContent { get; }
 

@@ -26,7 +26,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         protected abstract Control containerCtrl { get; }
 
         protected abstract HiddenField hdObjectsControl { get; }
-        protected abstract AjaxControlToolkit.TabContainer tabObjectsControl { get; }
+        protected abstract AjaxControlToolkit.TabContainer tabObjectsControl { get; }        
 
         public WorkspaceView()
         {

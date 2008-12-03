@@ -12,7 +12,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/AJAXServices/AJAXService.svc" />
-            <asp:ServiceReference Path="~/AJAXServices/WorkspaceModelService.svc" />            
+            <asp:ServiceReference Path="~/AJAXServices/WorkspaceModelService.svc" />
         </Services>
     </asp:ScriptManager>
     <asp:UpdateProgress ID="updateProgress" runat="server" DisplayAfter="1">
@@ -22,13 +22,8 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <%-- TODO: Das geht mit dem HiddenField hdObjects nicht. Rausfinden warum!
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        --%>
-    <kistl:JavascriptRenderer ID="myJavascriptRenderer" runat="server" />
+    <uc:ChooseObjectDialog ID="ChooseObjectDialog1" runat="server" />
+    <kistl:JavascriptRenderer ID="JavascriptRenderer" runat="server" />
     <div id="Header">
         <div id="Logo">
             <asp:HyperLink runat="server" NavigateUrl="~/Default.aspx">
@@ -41,7 +36,8 @@
                 Kistl ASP.NET Prototype</h1>
         </div>
         <div id="MainMenu">
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx" CssClass="MainMenuItem">Workbench</asp:HyperLink> | 
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx" CssClass="MainMenuItem">Workbench</asp:HyperLink>
+            |
             <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/About.aspx" CssClass="MainMenuItem">About</asp:HyperLink>
         </div>
     </div>
