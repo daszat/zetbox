@@ -448,4 +448,30 @@ namespace Kistl.Client.Presentables
         #endregion
     }
 
+    public class EnumerationPropertyModel<TValue>
+        : NullableValuePropertyModel<TValue>
+        where TValue : struct
+    {
+        public EnumerationPropertyModel(
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IDataObject obj, EnumerationProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
+        {
+            PossibleValues = new ReadOnlyCollection<TValue>(Enum.GetValues(typeof(TValue)).Cast<TValue>().ToList());
+            PossibleStringValues = new ReadOnlyCollection<string>(PossibleValues.Select(v => v.ToString()).ToList());
+        }
+
+        #region Public Interface
+
+        public ReadOnlyCollection<TValue> PossibleValues { get; private set; }
+
+        /// <summary>
+        /// When using these values in the UI, please use the value's index to
+        /// lookup the actual Value in <see cref="PossibleValues"/>.
+        /// </summary>
+        public ReadOnlyCollection<string> PossibleStringValues { get; private set; }
+
+        #endregion
+    }
+
 }

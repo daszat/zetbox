@@ -35,7 +35,7 @@ namespace Kistl.Client.GUI.DB
             var result = Type.GetType(String.Format("{0}, {1}", FullName, Assembly), true);
             if (GenericArguments.Length > 0)
             {
-                result.MakeGenericType(GenericArguments.Select(tRef => tRef.AsType()).ToArray());
+                result = result.MakeGenericType(GenericArguments.Select(tRef => tRef.AsType()).ToArray());
             }
             return result;
         }
@@ -142,6 +142,14 @@ namespace Kistl.Client.GUI.DB
     }
 
     /// <summary>
+    /// layout a nullable enum value
+    /// </summary>
+    public class SimpleEnumValueLayout : Layout
+    {
+        public bool AllowNullInput { get; set; }
+    }
+
+    /// <summary>
     /// how to layout a text value
     /// </summary>
     public class TextValueLayout : SimpleNullableValueLayout<string>
@@ -220,6 +228,7 @@ namespace Kistl.Client.GUI.DB
                     AddLayoutCacheEntry(new TextValueLayout() { SourceModelType = typeof(ReferencePropertyModel<String>), IsMultiline = false, AllowNullInput = false });
                     AddLayoutCacheEntry(new TextValueLayout() { SourceModelType = typeof(ObjectResultModel<String>), IsMultiline = false, AllowNullInput = false });
 
+                    AddLayoutCacheEntry(new SimpleEnumValueLayout() { SourceModelType = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition(), AllowNullInput = true });
                 }
                 return _defaultLayoutsCache;
             }
@@ -233,13 +242,32 @@ namespace Kistl.Client.GUI.DB
             _defaultLayoutsCache[layout.SourceModelType] = layout;
         }
 
-        public static Layout LookupDefaultLayout(Type t)
+        public static Layout LookupDefaultLayout(Type requested)
         {
             Layout result = null;
-            while (t != null && !DefaultLayouts.TryGetValue(t, out result))
+            var loop = requested;
+            while (loop != null && !DefaultLayouts.TryGetValue(loop, out result))
             {
-                t = t.BaseType;
+                loop = loop.BaseType;
             }
+
+            if (requested.IsGenericType && !requested.IsGenericTypeDefinition)
+            {
+                // try without generic arguments too, e.g. for EnumerationPropertyModel`1
+                Layout genericLayout = LookupDefaultLayout(requested.GetGenericTypeDefinition());
+
+                // but only return the generic Layout if it is actually more 
+                // specific than the one from the unmodified type
+                if (result == null
+                    || (result != null
+                        && genericLayout != null
+                        && (GenerationCount(typeof(Layout), genericLayout.GetType())
+                            > GenerationCount(typeof(Layout), result.GetType()))))
+                {
+                    result = genericLayout;
+                }
+            }
+
             return result;
         }
 
@@ -349,6 +377,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.TextValueSelectionView", "Kistl.Client.WPF"),
                             Toolkit.WPF, new TypeRef(typeof(TextValueSelectionLayout))),
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.WPF.View.EnumSelectionView", "Kistl.Client.WPF"),
+                            Toolkit.WPF, new TypeRef(typeof(SimpleEnumValueLayout))),
                     };
                 }
                 return _viewsCache;
@@ -357,20 +388,25 @@ namespace Kistl.Client.GUI.DB
 
         public static ModelDescriptor LookupDefaultModelDescriptor(IDataObject obj)
         {
-            if (obj is BaseProperty)
-            {
-                //if (obj.ID == 100)
-                //    return;
-                //else
-                return LookupDefaultPropertyModelDescriptor((BaseProperty)obj);
-            }
-            else if (obj is Module)
+            if (obj is Module)
             {
                 return new ModelDescriptor(new TypeRef(typeof(ModuleModel)));
             }
             else if (obj is MethodInvocation)
             {
                 return new ModelDescriptor(new TypeRef(typeof(MethodInvocationModel)));
+            }
+            else if (obj is ObjectClass)
+            {
+                return new ModelDescriptor(new TypeRef(typeof(ObjectClassModel)));
+            }
+            else if (obj is DataType)
+            {
+                return new ModelDescriptor(new TypeRef(typeof(DataTypeModel)));
+            }
+            else
+            {
+                return new ModelDescriptor(new TypeRef(typeof(DataObjectModel)));
             }
 
             throw new NotImplementedException(String.Format("==>> No model for object: '{0}' of Type '{1}'", obj, obj.GetType()));
@@ -414,6 +450,13 @@ namespace Kistl.Client.GUI.DB
             else if (p is BackReferenceProperty)
             {
                 return new ModelDescriptor(new TypeRef(typeof(ObjectListModel)));
+            }
+            else if (p is EnumerationProperty)
+            {
+                var enumProp = p as EnumerationProperty;
+                return new ModelDescriptor(new TypeRef(
+                    typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition(),
+                    new TypeRef(enumProp.Enumeration.GetDataType())));
             }
             else
             {

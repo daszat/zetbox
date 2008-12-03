@@ -202,6 +202,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EnumSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\NullableBoolValueView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -316,6 +320,9 @@
       <DependentUpon>DataObjectListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DefaultTemplateSelector.cs" />
+    <Compile Include="View\EnumSelectionView.xaml.cs">
+      <DependentUpon>EnumSelectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ListItemTemplateSelector.cs" />
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
       <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>

@@ -39,8 +39,9 @@ namespace Kistl.Client.Presentables
             {
                 foreach (var obj in objs)
                 {
+                    var mdlDesc = DataMocks.LookupDefaultModelDescriptor(obj);
                     Instances.Add((DataObjectModel)Factory.CreateModel(
-                        DataMocks.LookupDefaultModelDescriptor(obj),
+                        mdlDesc,
                         DataContext,
                         obj));
                 }

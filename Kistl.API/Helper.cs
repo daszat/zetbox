@@ -244,6 +244,12 @@ namespace Kistl.API
             add.Invoke(collection, new object[] { val });
         }        
 
+        /// <summary>
+        /// returns the Type of the named property's values
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="propName"></param>
+        /// <returns></returns>
         public static Type GetPropertyType(this object obj, string propName)
         {
             PropertyInfo pi = obj.GetType().GetProperty(propName);
