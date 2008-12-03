@@ -11,6 +11,7 @@
                 <strong>Objects</strong>
             </HeaderTemplate>
             <ItemTemplate>
+                <%-- Attention! Reformating could change the attribute "commandName" to lowercase! --%>
                 <a href="#" commandName="item">Open</a>
                 <a href="#" commandName="delete">Remove</a>
                 <span id="text"></span>

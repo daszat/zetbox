@@ -11,6 +11,7 @@
             <strong>Modules</strong>
         </HeaderTemplate>
         <ItemTemplate>
+            <%-- Attention! Reformating could change the attribute "commandName" to lowercase! --%>
             <a href="#" commandName="item">Select</a> <span id="text"></span>
         </ItemTemplate>
     </adc:DataList>
@@ -24,6 +25,7 @@
             <strong>Object Classes</strong>
         </HeaderTemplate>
         <ItemTemplate>
+            <%-- Attention! Reformating could change the attribute "commandName" to lowercase! --%>
             <a href="#" commandName="item">Select</a> <span id="text"></span>
         </ItemTemplate>
     </adc:DataList>
@@ -37,6 +39,7 @@
             <strong>Instances</strong>
         </HeaderTemplate>
         <ItemTemplate>
+            <%-- Attention! Reformating could change the attribute "commandName" to lowercase! --%>
             <a href="#" commandName="item">Select</a> <span id="text"></span>
         </ItemTemplate>
     </adc:DataList>
@@ -46,6 +49,7 @@
                 <strong>Recent Objects</strong>
             </HeaderTemplate>
             <ItemTemplate>
+                <%-- Attention! Reformating could change the attribute "commandName" to lowercase! --%>
                 <a href="#" commandName="item">Select</a> <span id="text"></span>
             </ItemTemplate>
         </adc:DataList>
