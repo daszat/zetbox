@@ -72,13 +72,14 @@ namespace Kistl.Client.WPF
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // Debugger.KistlContextDebuggerWPF.ShowDebugger();
-
             //SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
                 HandleCommandline(e.Args);
+
+                var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
+                AppContext.Factory.ShowModel(debugger, true);
 
                 //FixNotNullableConstraints();
 

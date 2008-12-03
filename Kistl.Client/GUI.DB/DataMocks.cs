@@ -195,6 +195,10 @@ namespace Kistl.Client.GUI.DB
     {
     }
 
+    public class DebuggerLayout : Layout
+    {
+    }
+
     public static class DataMocks
     {
 
@@ -232,6 +236,9 @@ namespace Kistl.Client.GUI.DB
 
                     AddLayoutCacheEntry(new SimpleEnumValueLayout() { SourceModelType = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition(), AllowNullInput = true });
                     AddLayoutCacheEntry(new ListValueLayout() { SourceModelType = typeof(SimpleReferenceListPropertyModel<string>).GetGenericTypeDefinition() });
+
+                    AddLayoutCacheEntry(new DebuggerLayout() { SourceModelType = typeof(KistlDebuggerAsModel) });
+
                 }
                 return _defaultLayoutsCache;
             }
@@ -385,7 +392,11 @@ namespace Kistl.Client.GUI.DB
                             Toolkit.WPF, new TypeRef(typeof(SimpleEnumValueLayout))),
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.ListValueView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(ListValueLayout))),                    };
+                            Toolkit.WPF, new TypeRef(typeof(ListValueLayout))), 
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.WPF.View.KistlDebuggerView", "Kistl.Client.WPF"),
+                            Toolkit.WPF, new TypeRef(typeof(DebuggerLayout))),
+                    };
                 }
                 return _viewsCache;
             }

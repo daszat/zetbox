@@ -47,7 +47,7 @@ namespace Kistl.Client.Presentables
         public PresentableModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
         {
             ModelDescriptor desc = DataMocks.LookupDefaultModelDescriptor(obj);
-            return CreateModel(desc, ctx, new object[] { obj }.Concat(data));
+            return CreateModel(desc, ctx, new object[] { obj }.Concat(data).ToArray());
         }
 
         public PresentableModel CreateModel(ModelDescriptor desc, IKistlContext ctx, params object[] data)

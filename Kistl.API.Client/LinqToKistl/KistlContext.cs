@@ -245,10 +245,12 @@ namespace Kistl.API.Client
             // Attach & set Objectstate to Unmodified
             _objects.Add(obj);
             ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
-            KistlContextDebugger.Changed(this);
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this);
+
+            // update the debugger last 
+            KistlContextDebugger.Changed(this);
 
             return obj;
         }

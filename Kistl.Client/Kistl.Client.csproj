@@ -72,6 +72,7 @@
     <Compile Include="Presentables\DataTypeModel.cs" />
     <Compile Include="Presentables\IAsyncUiManager.cs" />
     <Compile Include="Presentables\ICommand.cs" />
+    <Compile Include="Presentables\KistlDebuggerAsModel.cs" />
     <Compile Include="Presentables\ListPropertyModels.cs" />
     <Compile Include="Presentables\MethodInvocationModel.cs" />
     <Compile Include="Presentables\MethodResultModels.cs" />

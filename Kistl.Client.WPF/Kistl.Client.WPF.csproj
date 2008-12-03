@@ -206,6 +206,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\KistlDebuggerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ListValueView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,6 +330,9 @@
     <Compile Include="View\DefaultTemplateSelector.cs" />
     <Compile Include="View\EnumSelectionView.xaml.cs">
       <DependentUpon>EnumSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlDebuggerView.xaml.cs">
+      <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListItemTemplateSelector.cs" />
     <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
