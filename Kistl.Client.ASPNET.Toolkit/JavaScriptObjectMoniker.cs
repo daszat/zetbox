@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Web;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -25,26 +26,40 @@ namespace Kistl.Client.ASPNET.Toolkit
         public JavaScriptObjectMoniker()
         {
         }
-
-        public JavaScriptObjectMoniker(IDataObject obj)
+        
+        public JavaScriptObjectMoniker(DataObjectModel m)
         {
-            ID = obj.ID;
-            Type = new SerializableType(obj.GetType());
-            Text = obj.ToString();
+            Init(m);
+        }
+        
+        public JavaScriptObjectMoniker(IKistlContext ctx, IDataObject obj)
+        {
+            DataObjectModel m = GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(ctx, obj);
+            Init(m);
         }
 
-        public IDataObject GetDataObject(IKistlContext ctx)
+        private void Init(DataObjectModel m)
         {
+            ID = m.ID;
+            Type = new SerializableType(m.Object.GetInterfaceType());
+            Text = m.Name;
+        }
+
+        public DataObjectModel GetDataObject(IKistlContext ctx)
+        {
+            IDataObject obj;
+            
             if (ID <= Helper.INVALIDID)
             {
-                IDataObject obj = ctx.Create(Type.GetSerializedType());
+                obj = ctx.Create(Type.GetSerializedType());
                 ID = obj.ID;
-                return obj;
             }
             else
             {
-                return ctx.Find(Type.GetSerializedType(), ID);
+                obj = ctx.Find(Type.GetSerializedType(), ID);
             }
+
+            return GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(ctx, obj);
         }
     }
 
@@ -70,7 +85,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             return GetEncoder().GetString(ms.ToArray());
         }
 
-        public static string ToJSON(this IDataObject obj)
+        public static string ToJSON(this DataObjectModel obj)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(JavaScriptObjectMoniker));
             MemoryStream ms = new MemoryStream();
@@ -78,7 +93,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             return GetEncoder().GetString(ms.ToArray());
         }
 
-        public static string ToJSONArray(this IEnumerable<IDataObject> list)
+        public static string ToJSONArray(this IEnumerable<DataObjectModel> list)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(IEnumerable<JavaScriptObjectMoniker>));
             MemoryStream ms = new MemoryStream();
@@ -86,16 +101,16 @@ namespace Kistl.Client.ASPNET.Toolkit
             return GetEncoder().GetString(ms.ToArray());
         }
 
-        public static IEnumerable<IDataObject> FromJSONArray(this string jsonArray, IKistlContext ctx)
+        public static IEnumerable<DataObjectModel> FromJSONArray(this string jsonArray, IKistlContext ctx)
         {
-            if (string.IsNullOrEmpty(jsonArray)) return new List<IDataObject>();
+            if (string.IsNullOrEmpty(jsonArray)) return new List<DataObjectModel>();
  
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(IEnumerable<JavaScriptObjectMoniker>));
             MemoryStream ms = new MemoryStream(GetEncoder().GetBytes(jsonArray));
             var result = (IEnumerable<JavaScriptObjectMoniker>)s.ReadObject(ms);
             if (result == null)
             {
-                return new List<IDataObject>();
+                return new List<DataObjectModel>();
             }
             else
             {
@@ -103,20 +118,20 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static T FromJSON<T>(this string json, IKistlContext ctx) where T : IDataObject
+        public static DataObjectModel FromJSON(this string json, IKistlContext ctx)
         {
-            if (string.IsNullOrEmpty(json)) return default(T);
+            if (string.IsNullOrEmpty(json)) return null;
 
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(JavaScriptObjectMoniker));
             MemoryStream ms = new MemoryStream(GetEncoder().GetBytes(json));
             var result = (JavaScriptObjectMoniker)s.ReadObject(ms);
             if (result == null)
             {
-                return default(T);
+                return null;
             }
             else
             {
-                return (T)result.GetDataObject(ctx);
+                return result.GetDataObject(ctx);
             }
         }
     }

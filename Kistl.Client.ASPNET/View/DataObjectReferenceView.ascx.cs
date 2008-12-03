@@ -17,4 +17,29 @@ public partial class View_DataObjectReferenceView : Kistl.Client.ASPNET.Toolkit.
     {
 
     }
+
+    protected override Label lbCtrl
+    {
+        get { return lbLabel; }
+    }
+
+    protected override DropDownList cbListControl
+    {
+        get { return cbList; }
+    }
+
+    protected override HtmlControl btnNewControl
+    {
+        get { return btnNew; }
+    }
+
+    protected override HtmlControl btnOpenControl
+    {
+        get { return btnOpen; }
+    }
+
+    protected override Control ContainerControl
+    {
+        get { return container; }
+    }
 }

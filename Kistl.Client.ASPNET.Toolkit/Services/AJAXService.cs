@@ -21,7 +21,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 return ctx.GetQuery(type.GetSerializedType())
-                    .Select(i => new JavaScriptObjectMoniker(i)).ToList();
+                    .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
             }
         }
     }

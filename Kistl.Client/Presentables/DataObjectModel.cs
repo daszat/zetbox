@@ -311,7 +311,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Contrary to all other Properties, this directly exposes the 
         /// modelled IDataObject and thus may neither be thread-safe nor 
-        /// high-latency.
+        /// low-latency.
         /// </summary>
         // other models need access to this.
         public IDataObject Object { get { return _object; } }

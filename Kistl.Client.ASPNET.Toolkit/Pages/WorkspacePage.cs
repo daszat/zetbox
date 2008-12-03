@@ -18,13 +18,14 @@ using Kistl.Client.ASPNET.Toolkit;
 using System.Collections.Generic;
 using Kistl.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.ASPNET.Toolkit.View;
 
 namespace Kistl.Client.ASPNET.Toolkit.Pages
 {
     // TODO: Move to David
     public interface IWorkspaceView
     {
-        void ShowObject(IDataObject obj);
+        void ShowObject(DataObjectModel obj);
     }
 
     public abstract class WorkspacePage : System.Web.UI.Page, IWorkspaceView
@@ -48,7 +49,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
             ctrlMainContent.Controls.Add((Control)Ctrl);
         }
 
-        public void ShowObject(IDataObject obj)
+        public void ShowObject(DataObjectModel obj)
         {
             Ctrl.ShowObject(obj);
         }

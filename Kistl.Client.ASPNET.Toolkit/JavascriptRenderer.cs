@@ -10,6 +10,7 @@ using System.Web.UI.HtmlControls;
 using Kistl.API;
 using Kistl.GUI;
 using Kistl.Client.ASPNET.Toolkit.Pages;
+using Kistl.Client.Presentables;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js", "text/javascript")] 
 
@@ -86,7 +87,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             {
                 case actionShowObject:
                     {
-                        IDataObject obj = hdArgument.FromJSON<IDataObject>(KistlContextManagerModule.KistlContext);
+                        DataObjectModel obj = hdArgument.FromJSON(KistlContextManagerModule.KistlContext);
                         if (HttpContext.Current.CurrentHandler is IWorkspaceView)
                         {
                             IWorkspaceView page = (IWorkspaceView)HttpContext.Current.CurrentHandler;

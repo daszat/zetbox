@@ -20,7 +20,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             var workspace = GuiApplicationContext.Current.Factory
                 .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
 
-            return workspace.Modules.Select(i => new JavaScriptObjectMoniker(i.Object)).ToList();
+            return workspace.Modules.Select(i => new JavaScriptObjectMoniker(i)).ToList();
         }
 
         [OperationContract]
@@ -30,7 +30,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
 
             return workspace.Modules.Single(m => m.ID == moduleID).ObjectClasses
-                .Select(i => new JavaScriptObjectMoniker(i.Object)).ToList();
+                .Select(i => new JavaScriptObjectMoniker(i)).ToList();
         }
 
         [OperationContract]
@@ -42,7 +42,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             {
                 var objClass = ctx.Find<Kistl.App.Base.ObjectClass>(objectClassID);
                 return ctx.GetQuery(objClass.GetDataType())
-                    .Select(i => new JavaScriptObjectMoniker(i)).ToList();
+                    .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
             }
         }
     }

@@ -13,22 +13,10 @@ using System.Xml.Linq;
 using Kistl.Client.Presentables;
 using Kistl.Client.ASPNET.Toolkit;
 using Kistl.Client;
+using Kistl.Client.ASPNET.Toolkit.View;
 
 public partial class View_DataObjectFullView : Kistl.Client.ASPNET.Toolkit.View.DataObjectFullView
 {
-    protected void Page_Init(object sender, EventArgs e)
-    {
-        litTitle.Text = Model.Name;
-        repProperties.DataSource = Model.PropertyModels;
-        repProperties.DataBind();
-    }
-
-    protected void repProperties_OnItemDataBound(object sender, RepeaterItemEventArgs e)
-    {
-        PresentableModel mdl = (PresentableModel)e.Item.DataItem;
-        Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
-
-        var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl);
-        divPlaceHolder.Controls.Add(loader.LoadControl(Page));
-    }
+    protected override Literal litTitleCtrl { get { return litTitle; } }
+    protected override Repeater repPropertiesCtrl { get { return repProperties; } }
 }

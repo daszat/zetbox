@@ -44,7 +44,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         }
 
         #region Object Management
-        public void ShowObject(IDataObject obj)
+        public void ShowObject(DataObjectModel obj)
         {
             this.Objects.Add(obj);
             ShowObjectInternal(obj);
@@ -59,36 +59,33 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             }
         }
 
-        private void ShowObjectInternal(IDataObject obj)
+        private void ShowObjectInternal(DataObjectModel obj)
         {
-            // Load Model
-            DataObjectModel objMdl = (DataObjectModel)Model.Factory
-                .CreateSpecificModel<DataObjectModel>(KistlContextManagerModule.KistlContext, obj);
-            Model.RecentObjects.Add(objMdl);
+            Model.RecentObjects.Add(obj);
 
             // Load View
-            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(objMdl);
+            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(obj);
             var ctrl = loader.LoadControl(Page);
 
             // Add to Tab Page
             AjaxControlToolkit.TabPanel panel = new AjaxControlToolkit.TabPanel();
             panel.Controls.Add(ctrl);
-            panel.HeaderText = obj.ToString();
+            panel.HeaderText = obj.Name;
 
             tabObjectsControl.Tabs.Add(panel);
         }
 
         private void CreateControls()
         {
-            foreach (IDataObject obj in Objects)
+            foreach (DataObjectModel obj in Objects)
             {
                 ShowObjectInternal(obj);
             }
             SetFirstIndex();
         }
 
-        List<IDataObject> _Objects;
-        public List<IDataObject> Objects
+        List<DataObjectModel> _Objects;
+        public List<DataObjectModel> Objects
         {
             get
             {
@@ -96,14 +93,16 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 {
                     if (!IsPostBack)
                     {
-                        _Objects = new List<IDataObject>();
+                        _Objects = new List<DataObjectModel>();
                         // Parse Request
                         if (!string.IsNullOrEmpty(Request["Type"])
                             && string.IsNullOrEmpty(Request["ID"]))
                         {
+                            Type type = Type.GetType(Request["Type"] + ",Kistl.Objects.Client");
                             IDataObject obj = KistlContextManagerModule.KistlContext
-                                                .Find(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"), int.Parse(Request["ID"]));
-                            _Objects.Add(obj);
+                                                .Find(type, int.Parse(Request["ID"]));
+                            _Objects.Add((DataObjectModel)GuiApplicationContext.Current.Factory.CreateModel(
+                                type, KistlContextManagerModule.KistlContext, new object[] { obj }));
                         }
                     }
                     else
