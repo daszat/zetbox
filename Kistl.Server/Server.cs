@@ -115,6 +115,11 @@ namespace Kistl.Server
             Generators.Generator.GenerateCode();
         }
 
+        internal void GenerateCode2()
+        {
+            Generators2.Generator.GenerateCode();
+        }
+
         internal void GenerateDatabase()
         {
             Generators.Generator.GenerateDatabase();

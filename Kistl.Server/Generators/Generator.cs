@@ -68,13 +68,13 @@ namespace Kistl.Server.Generators
             }
         }
 
-        private static void Delete(TaskEnum type)
+        internal static void Delete(TaskEnum type)
         {
             System.IO.File.Delete(Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll");
             System.IO.File.Delete(Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".pdb");
         }
 
-        private static void Compile(TaskEnum type)
+        internal static void Compile(TaskEnum type)
         {
             System.IO.Directory.CreateDirectory(Helper.CodeGenPath + @"\bin\");
 

@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomActionsManagerServer.cs" />
+    <Compile Include="Generators2\Generator.cs" />
     <Compile Include="Generators\DatabaseGenerator.cs" />
     <Compile Include="Generators\Exceptions.cs" />
     <Compile Include="Generators\Generator.cs" />
@@ -98,6 +99,10 @@
     <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Arebis.CodeGenerator\Arebis.CodeGenerator.csproj">
+      <Project>{D2A451FB-809C-4F02-AA7D-5C0589495BE7}</Project>
+      <Name>Arebis.CodeGenerator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
       <Name>Kistl.API.Server</Name>
