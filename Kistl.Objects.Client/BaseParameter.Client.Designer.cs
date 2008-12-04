@@ -32,8 +32,6 @@ namespace Kistl.App.Base
         
         private string _ParameterName;
         
-        private System.Nullable<int> _fk_Module = null;
-        
         private bool _IsList;
         
         private bool _IsReturnParameter;
@@ -120,39 +118,6 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ParameterName"); 
                     _ParameterName = value;
                     NotifyPropertyChanged("ParameterName");;
-                }
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Module Module
-        {
-            get
-            {
-                if (fk_Module == null) return null;
-                return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
-            }
-            set
-            {
-                fk_Module = value != null ? (int?)value.ID : null;
-            }
-        }
-        
-        public System.Nullable<int> fk_Module
-        {
-            get
-            {
-                return _fk_Module;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (fk_Module != value)
-                {
-                    NotifyPropertyChanging("Module"); 
-                    _fk_Module = value;
-                    NotifyPropertyChanged("Module");;
                 }
             }
         }
@@ -250,7 +215,6 @@ namespace Kistl.App.Base
             base.ApplyChanges(obj);
             ((BaseParameter__Implementation__)obj).fk_Method = this.fk_Method;
             ((BaseParameter__Implementation__)obj).ParameterName = this.ParameterName;
-            ((BaseParameter__Implementation__)obj).fk_Module = this.fk_Module;
             ((BaseParameter__Implementation__)obj).IsList = this.IsList;
             ((BaseParameter__Implementation__)obj).IsReturnParameter = this.IsReturnParameter;
             ((BaseParameter__Implementation__)obj).Description = this.Description;
@@ -276,12 +240,6 @@ namespace Kistl.App.Base
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(91).Constraints
                             .Where(c => !c.IsValid(this, this.ParameterName))
                             .Select(c => c.GetErrorText(this, this.ParameterName))
-                            .ToArray());
-                case "Module":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(93).Constraints
-                            .Where(c => !c.IsValid(this, this.Module))
-                            .Select(c => c.GetErrorText(this, this.Module))
                             .ToArray());
                 case "IsList":
                     return string.Join("\n", 
@@ -331,7 +289,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_Method, sw);
             BinarySerializer.ToBinary(this.Method__Position__, sw);
             BinarySerializer.ToBinary(this._ParameterName, sw);
-            BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._IsList, sw);
             BinarySerializer.ToBinary(this._IsReturnParameter, sw);
             BinarySerializer.ToBinary(this._Description, sw);
@@ -343,7 +300,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Method, sr);
             BinarySerializer.FromBinary(out this._Method__Position__, sr);
             BinarySerializer.FromBinary(out this._ParameterName, sr);
-            BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._IsList, sr);
             BinarySerializer.FromBinary(out this._IsReturnParameter, sr);
             BinarySerializer.FromBinary(out this._Description, sr);

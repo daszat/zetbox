@@ -79,6 +79,20 @@ namespace Kistl.App.Base
             set;
         }
         
+        /// <summary>
+        /// The default model to use for the UI
+        /// </summary>
+        Kistl.App.Base.TypeRef DefaultModel
+        {
+            get;
+            set;
+        }
+        
         IList<Kistl.App.Base.Method> GetInheritedMethods();
+        
+        /// <returns>
+        /// returns the TypeRef of the default model for this ObjectClass
+        /// </returns>
+        Kistl.App.Base.TypeRef GetDefaultModelRef();
     }
 }

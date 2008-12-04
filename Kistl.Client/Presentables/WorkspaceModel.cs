@@ -101,8 +101,22 @@ namespace Kistl.Client.Presentables
                     if (_selectedItem != null)
                         HistoryTouch(_selectedItem);
                     OnPropertyChanged("SelectedItem");
+                    OnPropertyChanged("CreateNewInstanceEnabled");
                 }
             }
+        }
+
+        public bool CreateNewInstanceEnabled { get { return SelectedItem != null && SelectedItem.Object is ObjectClass; } }
+        public void CreateNewInstance()
+        {
+            UI.Verify();
+            var obj = SelectedItem;
+            Async.Queue(DataContext, () =>
+            {
+                var objClass = (ObjectClass)obj.Object;
+                var created = DataContext.Create(objClass.GetDataType());
+                UI.Queue(UI, () => SelectedItem = (DataObjectModel)Factory.CreateDefaultModel(DataContext, created));
+            });
         }
 
         #endregion

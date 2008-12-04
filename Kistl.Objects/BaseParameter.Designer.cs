@@ -46,15 +46,6 @@ namespace Kistl.App.Base
         }
         
         /// <summary>
-        /// Module
-        /// </summary>
-        Kistl.App.Base.Module Module
-        {
-            get;
-            set;
-        }
-        
-        /// <summary>
         /// Parameter wird als List<> generiert
         /// </summary>
         bool IsList

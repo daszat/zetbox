@@ -68,6 +68,12 @@ namespace Kistl.Client.WPF.View
             }
 
         }
+
+        private void NewHandler(object sender, RoutedEventArgs e)
+        {
+            var workspaceModel = (WorkspaceModel)this.DataContext;
+            workspaceModel.CreateNewInstance();
+        }
     }
 
 }

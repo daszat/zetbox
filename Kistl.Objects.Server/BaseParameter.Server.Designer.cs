@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseParameter_Method_Method", "A_Method", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method__Implementation__), "B_BaseParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameter__Implementation__))]
-[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_BaseParameter_Module_Module", "A_Module", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__), "B_BaseParameter", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameter__Implementation__))]
 
 namespace Kistl.App.Base
 {
@@ -40,8 +39,6 @@ namespace Kistl.App.Base
         private System.Nullable<int> _Method__Position__ = null;
         
         private string _ParameterName;
-        
-        private System.Nullable<int> _fk_Module = null;
         
         private bool _IsList;
         
@@ -149,54 +146,6 @@ namespace Kistl.App.Base
                     _ParameterName = value;
                     NotifyPropertyChanged("ParameterName");;
                 }
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Module Module
-        {
-            get
-            {
-                return Module__Implementation__;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
-            }
-        }
-        
-        public System.Nullable<int> fk_Module
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Module != null)
-                {
-                    _fk_Module = Module.ID;
-                }
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_BaseParameter_Module_Module", "A_Module")]
-        public Kistl.App.Base.Module__Implementation__ Module__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.Module__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>("Model.FK_BaseParameter_Module_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.Module__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>("Model.FK_BaseParameter_Module_Module", "A_Module");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (Kistl.App.Base.Module__Implementation__)value;
             }
         }
         
@@ -312,12 +261,6 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.ParameterName))
                             .Select(c => c.GetErrorText(this, this.ParameterName))
                             .ToArray());
-                case "Module":
-                    return string.Join("\n", 
-                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(93).Constraints
-                            .Where(c => !c.IsValid(this, this.Module))
-                            .Select(c => c.GetErrorText(this, this.Module))
-                            .ToArray());
                 case "IsList":
                     return string.Join("\n", 
                         Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(94).Constraints
@@ -366,7 +309,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.fk_Method, sw);
             BinarySerializer.ToBinary(this.Method__Position__, sw);
             BinarySerializer.ToBinary(this._ParameterName, sw);
-            BinarySerializer.ToBinary(this.fk_Module, sw);
             BinarySerializer.ToBinary(this._IsList, sw);
             BinarySerializer.ToBinary(this._IsReturnParameter, sw);
             BinarySerializer.ToBinary(this._Description, sw);
@@ -378,7 +320,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Method, sr);
             BinarySerializer.FromBinary(out this._Method__Position__, sr);
             BinarySerializer.FromBinary(out this._ParameterName, sr);
-            BinarySerializer.FromBinary(out this._fk_Module, sr);
             BinarySerializer.FromBinary(out this._IsList, sr);
             BinarySerializer.FromBinary(out this._IsReturnParameter, sr);
             BinarySerializer.FromBinary(out this._Description, sr);

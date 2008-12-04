@@ -285,10 +285,6 @@
       <End Role="A_Method" EntitySet="Method" />
       <End Role="B_BaseParameter" EntitySet="BaseParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseParameter_Module_Module" Association="Model.Store.FK_BaseParameter_Module_Module">
-      <End Role="A_Module" EntitySet="Module" />
-      <End Role="B_BaseParameter" EntitySet="BaseParameter" />
-    </AssociationSet>
     <AssociationSet Name="FK_ObjectParameter_DataType_DataType" Association="Model.Store.FK_ObjectParameter_DataType_DataType">
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectParameter" EntitySet="ObjectParameter" />
@@ -389,6 +385,10 @@
       <End Role="A_TypeRef" EntitySet="TypeRef" />
       <End Role="B_ViewDescriptor" EntitySet="ViewDescriptor" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_TypeRef_DefaultModel" Association="Model.Store.FK_ObjectClass_TypeRef_DefaultModel">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_ObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
       <End Role="B_Projekt_MitarbeiterCollectionEntry" EntitySet="Projekt_MitarbeiterCollectionEntry" />
@@ -431,6 +431,7 @@
     <Property Name="fk_BaseObjectClass" Type="int" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
+    <Property Name="fk_DefaultModel" Type="int" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -661,7 +662,6 @@
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Method_pos" Type="int" Nullable="true" />
     <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
@@ -1626,18 +1626,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BaseParameter_Module_Module">
-    <End Role="A_Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <End Role="B_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="A_Module">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_BaseParameter">
-        <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ObjectParameter_DataType_DataType">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="*" />
@@ -1935,6 +1923,18 @@
       </Principal>
       <Dependent Role="B_ViewDescriptor">
         <PropertyRef Name="fk_ViewRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectClass_TypeRef_DefaultModel">
+    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="B_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TypeRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectClass">
+        <PropertyRef Name="fk_DefaultModel" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

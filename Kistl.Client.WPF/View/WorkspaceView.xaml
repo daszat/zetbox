@@ -13,6 +13,9 @@
                       CommandParameter="{Binding}" />
             <MenuItem Click="DeleteHandler"
                       Header="Delete" />
+            <MenuItem Click="NewHandler"
+                      Header="New"
+                      IsEnabled="{Binding CreateNewInstanceEnabled}" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>

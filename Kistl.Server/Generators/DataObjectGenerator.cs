@@ -281,7 +281,7 @@ namespace Kistl.Server.Generators
                     Console.Write(progress[progressIdx++ % progress.Length]);
                     if (Console.CursorLeft > 0) Console.CursorLeft -= 1;
 
-                    ObjectClass origObjClass = obj.GetObjectClass(FrozenContext.Single);
+                    ObjectClass origObjClass = obj.GetObjectClass(ctx);
                     ObjectClass objClass = origObjClass;
                     ObjectClass rootClass = origObjClass.GetRootClass();
 
@@ -363,7 +363,7 @@ namespace Kistl.Server.Generators
                     Console.Write(progress[progressIdx++ % progress.Length]);
                     if (Console.CursorLeft > 0) Console.CursorLeft -= 1;
 
-                    ObjectClass origObjClass = obj.GetObjectClass(FrozenContext.Single);
+                    ObjectClass origObjClass = obj.GetObjectClass(ctx);
                     ObjectClass objClass = origObjClass;
                     ObjectClass rootClass = origObjClass.GetRootClass();
 

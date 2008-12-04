@@ -38,6 +38,8 @@ namespace Kistl.App.Base
         
         private bool _IsFrozenObject;
         
+        private System.Nullable<int> _fk_DefaultModel = null;
+        
         public ObjectClass__Implementation__()
         {
             _ImplementsInterfaces = new ListPropertyCollection<Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass, ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__>(this, "ImplementsInterfaces");
@@ -170,6 +172,39 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef DefaultModel
+        {
+            get
+            {
+                if (fk_DefaultModel == null) return null;
+                return Context.Find<Kistl.App.Base.TypeRef>(fk_DefaultModel.Value);
+            }
+            set
+            {
+                fk_DefaultModel = value != null ? (int?)value.ID : null;
+            }
+        }
+        
+        public System.Nullable<int> fk_DefaultModel
+        {
+            get
+            {
+                return _fk_DefaultModel;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (fk_DefaultModel != value)
+                {
+                    NotifyPropertyChanging("DefaultModel"); 
+                    _fk_DefaultModel = value;
+                    NotifyPropertyChanged("DefaultModel");;
+                }
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -177,6 +212,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
         
         public event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
+        
+        public event GetDefaultModelRef_Handler<ObjectClass> OnGetDefaultModelRef_ObjectClass;
         
         public event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
         
@@ -215,6 +252,7 @@ namespace Kistl.App.Base
             this._ImplementsInterfaces.ApplyChanges(((ObjectClass__Implementation__)obj)._ImplementsInterfaces);
             ((ObjectClass__Implementation__)obj).IsSimpleObject = this.IsSimpleObject;
             ((ObjectClass__Implementation__)obj).IsFrozenObject = this.IsFrozenObject;
+            ((ObjectClass__Implementation__)obj).fk_DefaultModel = this.fk_DefaultModel;
         }
         
         public override void AttachToContext(IKistlContext ctx)
@@ -264,6 +302,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.IsFrozenObject))
                             .Select(c => c.GetErrorText(this, this.IsFrozenObject))
                             .ToArray());
+                case "DefaultModel":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(212).Constraints
+                            .Where(c => !c.IsValid(this, this.DefaultModel))
+                            .Select(c => c.GetErrorText(this, this.DefaultModel))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -274,6 +318,16 @@ namespace Kistl.App.Base
             if (OnGetInheritedMethods_ObjectClass != null)
             {
                 OnGetInheritedMethods_ObjectClass(this, e);
+            };
+            return e.Result;
+        }
+        
+        public virtual Kistl.App.Base.TypeRef GetDefaultModelRef()
+        {
+            MethodReturnEventArgs<Kistl.App.Base.TypeRef> e = new MethodReturnEventArgs<Kistl.App.Base.TypeRef>();
+            if (OnGetDefaultModelRef_ObjectClass != null)
+            {
+                OnGetDefaultModelRef_ObjectClass(this, e);
             };
             return e.Result;
         }
@@ -308,6 +362,7 @@ namespace Kistl.App.Base
             this._ImplementsInterfaces.ToStream(sw);
             BinarySerializer.ToBinary(this._IsSimpleObject, sw);
             BinarySerializer.ToBinary(this._IsFrozenObject, sw);
+            BinarySerializer.ToBinary(this.fk_DefaultModel, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -318,9 +373,12 @@ namespace Kistl.App.Base
             this._ImplementsInterfaces.FromStream(sr);
             BinarySerializer.FromBinary(out this._IsSimpleObject, sr);
             BinarySerializer.FromBinary(out this._IsFrozenObject, sr);
+            BinarySerializer.FromBinary(out this._fk_DefaultModel, sr);
         }
         
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> e);
+        
+        public delegate void GetDefaultModelRef_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.TypeRef> e);
     }
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry")]

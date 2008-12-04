@@ -84,5 +84,11 @@ namespace Kistl.App.GUI
                 obj.LayoutRef.AsType(true).Name,
                 obj.ViewRef.AsType(true).Name);
         }
+
+        public void OnGetDefaultModelRef_ObjectClass(ObjectClass objClass, MethodReturnEventArgs<TypeRef> e)
+        {
+            // TODO: use configuration for default model
+            e.Result = objClass.DefaultModel ?? objClass.Context.Find<TypeRef>(83);
+        }
     }
 }

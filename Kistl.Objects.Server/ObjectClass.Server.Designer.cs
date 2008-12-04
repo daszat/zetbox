@@ -11,6 +11,7 @@
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface_ImplementsInterfaces" +
     "", "A_Interface", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Interface__Implementation__), "B_ObjectClass_ImplementsInterfacesCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__))]
+[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_TypeRef_DefaultModel", "A_TypeRef", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__), "B_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass__Implementation__))]
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent", "A_ObjectClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__), "B_ObjectClass_ImplementsInterfacesCollectionEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__))]
 
 namespace Kistl.App.Base
@@ -46,6 +47,8 @@ namespace Kistl.App.Base
         private bool _IsSimpleObject;
         
         private bool _IsFrozenObject;
+        
+        private System.Nullable<int> _fk_DefaultModel = null;
         
         public ObjectClass__Implementation__()
         {
@@ -198,6 +201,54 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef DefaultModel
+        {
+            get
+            {
+                return DefaultModel__Implementation__;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                DefaultModel__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        public System.Nullable<int> fk_DefaultModel
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && DefaultModel != null)
+                {
+                    _fk_DefaultModel = DefaultModel.ID;
+                }
+                return _fk_DefaultModel;
+            }
+            set
+            {
+                _fk_DefaultModel = value;
+            }
+        }
+        
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ObjectClass_TypeRef_DefaultModel", "A_TypeRef")]
+        public Kistl.App.Base.TypeRef__Implementation__ DefaultModel__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>("Model.FK_ObjectClass_TypeRef_DefaultModel", "A_TypeRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>("Model.FK_ObjectClass_TypeRef_DefaultModel", "A_TypeRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
         public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
         
         public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
@@ -205,6 +256,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
         
         public event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
+        
+        public event GetDefaultModelRef_Handler<ObjectClass> OnGetDefaultModelRef_ObjectClass;
         
         public event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
         
@@ -281,6 +334,12 @@ namespace Kistl.App.Base
                             .Where(c => !c.IsValid(this, this.IsFrozenObject))
                             .Select(c => c.GetErrorText(this, this.IsFrozenObject))
                             .ToArray());
+                case "DefaultModel":
+                    return string.Join("\n", 
+                        Context.GetReadonlyContext().Find<Kistl.App.Base.BaseProperty>(212).Constraints
+                            .Where(c => !c.IsValid(this, this.DefaultModel))
+                            .Select(c => c.GetErrorText(this, this.DefaultModel))
+                            .ToArray());
             }
             return base.GetPropertyError(prop);
         }
@@ -291,6 +350,16 @@ namespace Kistl.App.Base
             if (OnGetInheritedMethods_ObjectClass != null)
             {
                 OnGetInheritedMethods_ObjectClass(this, e);
+            };
+            return e.Result;
+        }
+        
+        public virtual Kistl.App.Base.TypeRef GetDefaultModelRef()
+        {
+            MethodReturnEventArgs<Kistl.App.Base.TypeRef> e = new MethodReturnEventArgs<Kistl.App.Base.TypeRef>();
+            if (OnGetDefaultModelRef_ObjectClass != null)
+            {
+                OnGetDefaultModelRef_ObjectClass(this, e);
             };
             return e.Result;
         }
@@ -325,6 +394,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToBinary(this.ImplementsInterfaces__Implementation__, sw);
             BinarySerializer.ToBinary(this._IsSimpleObject, sw);
             BinarySerializer.ToBinary(this._IsFrozenObject, sw);
+            BinarySerializer.ToBinary(this.fk_DefaultModel, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -335,9 +405,12 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinaryCollectionEntries(this.ImplementsInterfaces__Implementation__, sr);
             BinarySerializer.FromBinary(out this._IsSimpleObject, sr);
             BinarySerializer.FromBinary(out this._IsFrozenObject, sr);
+            BinarySerializer.FromBinary(out this._fk_DefaultModel, sr);
         }
         
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> e);
+        
+        public delegate void GetDefaultModelRef_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.TypeRef> e);
     }
     
     [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry")]

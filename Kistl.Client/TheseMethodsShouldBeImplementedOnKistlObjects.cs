@@ -70,7 +70,7 @@ namespace Kistl.Client
         {
             ObjectClass oc = self.GetObjectClass(self.Context);
             return oc.Properties.Aggregate(true, (acc, prop) =>
-                acc && prop.Constraints.All(c => 
+                acc && prop.Constraints.All(c =>
                     c.IsValid(self, self.GetPropertyValue<object>(prop.PropertyName))));
         }
 
@@ -89,5 +89,25 @@ namespace Kistl.Client
             }
         }
 
+        /// <returns>a Kistl TypeRef for a given System.Type</returns>
+        public static TypeRef ToRef(this Type t, IKistlContext ctx)
+        {
+            var result = ctx.GetQuery<TypeRef>().SingleOrDefault(tRef => tRef.Assembly.AssemblyName == t.Assembly.FullName && tRef.FullName == t.FullName && tRef.GenericArguments.Count == 0);
+            if (result == null)
+            {
+                result = ctx.Create<TypeRef>();
+                result.FullName = t.FullName;
+                result.Assembly = t.Assembly.ToRefOrDefault(ctx);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// returns a kistl Assembly for a given CLR-Assembly
+        /// </summary>
+        public static Assembly ToRefOrDefault(this System.Reflection.Assembly ass, IKistlContext ctx)
+        {
+            return ctx.GetQuery<Assembly>().SingleOrDefault(a => a.AssemblyName == ass.FullName);
+        }
     }
 }
