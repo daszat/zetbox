@@ -6,6 +6,8 @@ using System.CodeDom.Compiler;
 using Kistl.API;
 using System.CodeDom;
 using Kistl.App.Base;
+using System.Diagnostics;
+using Kistl.Server.Generators.Helper;
 
 namespace Kistl.Server.Generators
 {
@@ -35,25 +37,25 @@ namespace Kistl.Server.Generators
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                Console.WriteLine("Generating Code");
+                Trace.TraceInformation("Generating Code");
                 BaseDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
                 IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
                 using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
                 {
-                    Console.WriteLine("Generating SouceFiles");
-                    gDataObjects.Generate(ctx, Helper.CodeGenPath);
+                    Trace.TraceInformation("Generating SouceFiles");
+                    gDataObjects.Generate(ctx, Kistl.Server.Helper.CodeGenPath);
 
-                    Console.WriteLine("Generating Mapping");
-                    gMapping.Generate(ctx, Helper.CodeGenPath);
+                    Trace.TraceInformation("Generating Mapping");
+                    gMapping.Generate(ctx, Kistl.Server.Helper.CodeGenPath);
 
                     try
                     {
                         // Compile Code
-                        Console.WriteLine("Compiling Interfaces");
+                        Trace.TraceInformation("Compiling Interfaces");
                         Compile(TaskEnum.Interface);
-                        Console.WriteLine("Compiling Server Assembly");
+                        Trace.TraceInformation("Compiling Server Assembly");
                         Compile(TaskEnum.Server);
-                        Console.WriteLine("Compiling Client Assembly");
+                        Trace.TraceInformation("Compiling Client Assembly");
                         Compile(TaskEnum.Client);
                     }
                     catch
@@ -70,23 +72,23 @@ namespace Kistl.Server.Generators
 
         internal static void Delete(TaskEnum type)
         {
-            System.IO.File.Delete(Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll");
-            System.IO.File.Delete(Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".pdb");
+            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll");
+            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".pdb");
         }
 
         internal static void Compile(TaskEnum type)
         {
-            System.IO.Directory.CreateDirectory(Helper.CodeGenPath + @"\bin\");
+            System.IO.Directory.CreateDirectory(Kistl.Server.Helper.CodeGenPath + @"\bin\");
 
             Microsoft.CSharp.CSharpCodeProvider p = new Microsoft.CSharp.CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v3.5" } });
             CompilerParameters options = new CompilerParameters();
 
-            options.OutputAssembly = Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll";
+            options.OutputAssembly = Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll";
             options.IncludeDebugInformation = true; // false in Production!!!
             options.GenerateExecutable = false;
             options.TreatWarningsAsErrors = false; // true in Production!!!
             options.ReferencedAssemblies.AddRange(new string[] {
-                    Helper.CodeGenPath + @"\bin\Kistl.API.dll",
+                    Kistl.Server.Helper.CodeGenPath + @"\bin\Kistl.API.dll",
                     "System.dll",
                     "System.Core.dll",
                     "System.Data.dll",
@@ -99,24 +101,24 @@ namespace Kistl.Server.Generators
 
             if (type != TaskEnum.Interface)
             {
-                options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.API." + type + ".dll");
-                options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.Objects.dll");
+                options.ReferencedAssemblies.Add(Kistl.Server.Helper.CodeGenPath + @"\bin\Kistl.API." + type + ".dll");
+                options.ReferencedAssemblies.Add(Kistl.Server.Helper.CodeGenPath + @"\bin\Kistl.Objects.dll");
             }
             
             if (type == TaskEnum.Server)
             {
-                options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.csdl");
-                options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.msl");
-                options.EmbeddedResources.Add(Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.ssdl");
+                options.EmbeddedResources.Add(Kistl.Server.Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.csdl");
+                options.EmbeddedResources.Add(Kistl.Server.Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.msl");
+                options.EmbeddedResources.Add(Kistl.Server.Helper.CodeGenPath + @"\Kistl.Objects.Server\Model.ssdl");
 
                 options.ReferencedAssemblies.Add("System.Data.Entity.dll");
-                options.ReferencedAssemblies.Add(Helper.CodeGenPath + @"\bin\Kistl.DALProvider.EF.dll");
+                options.ReferencedAssemblies.Add(Kistl.Server.Helper.CodeGenPath + @"\bin\Kistl.DALProvider.EF.dll");
             }
 
             CompilerResults result = p.CompileAssemblyFromFile(options,
-                System.IO.Directory.GetFiles(Helper.CodeGenPath + @"\" + type.GetKistObjectsName() + @"\", "*.cs"));
+                System.IO.Directory.GetFiles(Kistl.Server.Helper.CodeGenPath + @"\" + type.GetKistObjectsName() + @"\", "*.cs"));
 
-            using (System.IO.StreamWriter file = System.IO.File.CreateText(Helper.CodeGenPath + @"\errors.txt"))
+            using (System.IO.StreamWriter file = System.IO.File.CreateText(Kistl.Server.Helper.CodeGenPath + @"\errors.txt"))
             {
                 if (result.Errors.HasErrors)
                 {

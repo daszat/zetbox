@@ -14,7 +14,7 @@ namespace Arebis.CodeGenerator
 	/// A Generator object creates a GenerationHost and executes the initial template on it.
 	/// This implementation will host the GenerationHost in a separate AppDomain to allow unload of assemblies.
 	/// </summary>
-	public class Generator
+    public class TemplateGenerator
 	{
 		private NameValueCollection settings = new NameValueCollection();
 		private object[] templateParameters = new object[0];
@@ -34,6 +34,7 @@ namespace Arebis.CodeGenerator
 		public virtual int ExecuteTemplate()
 		{
 			// Execute the (initial) template by GenerationHost in separate AppDomain:
+#if USE_APP_DOMAIN
 			AppDomain appDomain = null;
 			GenerationHost genHost = null;
 			try
@@ -51,6 +52,13 @@ namespace Arebis.CodeGenerator
 				if (genHost != null) genHost.Dispose();
 				if (appDomain != null) AppDomain.Unload(appDomain);
 			}
+#else
+            using (GenerationHost genHost = new GenerationHost())
+            {
+                genHost.Initialize(this.Settings);
+                return this.ExecuteTemplate(genHost);
+            }
+#endif
 		}
 
 		public virtual int ExecuteTemplate(GenerationHost genHost)
@@ -66,26 +74,20 @@ namespace Arebis.CodeGenerator
 				genHost.CallTemplateToFile(templateFilename, outputFilename, templateParameters);
 				return 0;
 			}
-			catch (CompilationFailedException ex)
-			{
-				Console.WriteLine(String.Format("Compilation failed for file: {0}", ex.Filename));
-				foreach (CompilerError err in ex.Errors)
-				{
-					Console.WriteLine(String.Format("{0} {1}: {2}\r\n  \"{3}\", line #{4}",
-						err.IsWarning ? "Warning" : "Error",
-						err.ErrorNumber,
-						err.ErrorText,
-						err.FileName,
-						err.Line));
-				}
-				return 2;
-			}
-			catch (RuntimeException ex)
-			{
-				Console.WriteLine("Runtime exception: ");
-				Console.WriteLine(ex.InnerException);
-				return 1;
-			}
+            catch (CompilationFailedException ex)
+            {
+                Console.WriteLine(String.Format("Compilation failed for file: {0}", ex.Filename));
+                foreach (CompilerError err in ex.Errors)
+                {
+                    Console.WriteLine(String.Format("{0} {1}: {2}\r\n  \"{3}\", line #{4}",
+                        err.IsWarning ? "Warning" : "Error",
+                        err.ErrorNumber,
+                        err.ErrorText,
+                        err.FileName,
+                        err.Line));
+                }
+                throw;
+            }
 		}
 	}
 }

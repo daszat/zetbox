@@ -5,6 +5,7 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.Server;
 using System.Data.SqlClient;
+using Kistl.Server.Generators.Helper;
 
 namespace Kistl.Server.Generators.SQLServer
 {

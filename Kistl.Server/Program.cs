@@ -43,11 +43,12 @@ namespace Kistl.Server
                         actiondone = true;
                         server.GenerateCode2();
                     }
-                    if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate"))))
+                    else if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate"))))
                     {
                         actiondone = true;
                         server.GenerateCode();
                     }
+
                     if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-database"))))
                     {
                         actiondone = true;

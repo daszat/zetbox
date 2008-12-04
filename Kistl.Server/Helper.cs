@@ -5,6 +5,7 @@ using System.Linq;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.API;
+using System.Diagnostics;
 
 namespace Kistl.Server
 {
@@ -50,6 +51,7 @@ namespace Kistl.Server
         /// </summary>
         public static string CodeGenPath
         {
+            [DebuggerStepThrough]
             get
             {
                 return @"c:\temp\KistlCodeGen";

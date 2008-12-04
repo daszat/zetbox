@@ -29,6 +29,7 @@
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +52,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -66,7 +70,7 @@
     <Compile Include="Extensions\ClassName.cs" />
     <Compile Include="Extensions\FileUtils.cs" />
     <Compile Include="Extensions\StringUtils.cs" />
-    <Compile Include="Generator.cs" />
+    <Compile Include="TemplateGenerator.cs" />
     <Compile Include="Parsing\ContentPart.cs" />
     <Compile Include="Parsing\MixedContentFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

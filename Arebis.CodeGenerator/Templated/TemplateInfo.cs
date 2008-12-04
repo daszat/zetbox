@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using Arebis.CodeGeneration;
+using Arebis.Utils;
 using Arebis.Parsing.MultiContent;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.CodeDom.Compiler;
+using System.Resources;
 
 namespace Arebis.CodeGenerator.Templated
 {
@@ -24,7 +26,7 @@ namespace Arebis.CodeGenerator.Templated
 
 		// Main fields:
 		private GenerationHost host;
-		private FileInfo templatefileinfo;
+		private string templatefile;
 		private MixedContentFile fileContent;
 		private ICodeBuilder codeBuilder = null;
 
@@ -33,22 +35,26 @@ namespace Arebis.CodeGenerator.Templated
 
 		#endregion Instance fields
 
-		public TemplateInfo(string filename, GenerationHost host)
+		public TemplateInfo()
 		{
-			this.templatefileinfo = new FileInfo(filename);
-			this.host = host;
 		}
+
+        public void Initialize(string filename, GenerationHost host)
+        {
+            this.templatefile = filename;
+            this.host = host;
+        }
 		
 		public void Invoke(object[] parameters)
 		{
 			// Create compiled type:
 			if (this.codeBuilder == null)
 			{
-				this.host.Log("Parsing template: \"{0}\".", this.templatefileinfo.FullName);
+				this.host.Log("Parsing template: \"{0}\".", this.templatefile);
 				this.fileContent = this.ReadAndParseFile();
 				this.ReadDirectives(this.fileContent);
 
-				this.host.Log("Compiling template: \"{0}\".", this.templatefileinfo.FullName);
+				this.host.Log("Compiling template: \"{0}\".", this.templatefile);
 				this.codeBuilder = this.CreateCodeBuilder(this.GetCodeTemplateDirective()["Language"] ?? GenerationLanguage.DefaultTemplateLanguage);
 				this.codeBuilder.TemplateInfo = this;
 				bool succeeded = this.codeBuilder.Compile();
@@ -63,7 +69,7 @@ namespace Arebis.CodeGenerator.Templated
 				}
 				if (succeeded == false)
 				{
-					throw new CompilationFailedException(this.templatefileinfo.FullName, this.codeBuilder.CompilerErrors);
+					throw new CompilationFailedException(this.templatefile, this.codeBuilder.CompilerErrors);
 				}
 			}
 
@@ -73,7 +79,7 @@ namespace Arebis.CodeGenerator.Templated
 			allparameters.AddRange(parameters);
 
 			// Create instance and invoke:
-			this.host.Log("Invoking template: \"{0}\".", this.templatefileinfo.FullName);
+			this.host.Log("Invoking template: \"{0}\".", this.templatefile);
 			CodeTemplate instance = (CodeTemplate)Activator.CreateInstance(this.codeBuilder.CompiledType, allparameters.ToArray());
 			try
 			{
@@ -101,7 +107,22 @@ namespace Arebis.CodeGenerator.Templated
 		public string FindFile(string relativeName)
 		{
 		    if (relativeName == null) return null;
-		    return Path.Combine(Path.GetDirectoryName(templatefileinfo.FullName), relativeName);
+            if (!this.templatefile.IsResourceFile())
+            {
+                return Path.Combine(Path.GetDirectoryName(templatefile), relativeName);
+            }
+            else
+            {
+                Assembly a = templatefile.GetResourceAssembly();
+                foreach (string r in a.GetManifestResourceNames())
+                {
+                    if (r.EndsWith(relativeName))
+                    {
+                        return r;
+                    }
+                }
+                throw new ResourceNotFoundException(relativeName, a);
+            }
 		}
 
 		#region ITemplateInfo Members
@@ -116,9 +137,9 @@ namespace Arebis.CodeGenerator.Templated
 			get { return this.host.Settings; }
 		}
 
-		public FileInfo TemplateFileInfo
+		public string TemplateFile
 		{
-			get { return this.templatefileinfo; }
+			get { return this.templatefile; }
 		}
 
 		public MixedContentFile FileContent
@@ -163,7 +184,20 @@ namespace Arebis.CodeGenerator.Templated
 		private MixedContentFile ReadAndParseFile()
 		{
 			// Read the file:
-			MixedContentFile file = new MixedContentFile(this.templatefileinfo.FullName, File.ReadAllText(this.templatefileinfo.FullName), TemplatePartTypes.TemplateBody);
+            string content;
+            if (this.templatefile.IsResourceFile())
+            {
+                using (var s = this.templatefile.GetResourceStream())
+                {
+                    System.IO.StreamReader sr = new StreamReader(s);
+                    content = sr.ReadToEnd();
+                }
+            }
+            else
+            {
+                content = File.ReadAllText(this.templatefile);
+            }
+			MixedContentFile file = new MixedContentFile(this.templatefile, content, TemplatePartTypes.TemplateBody);
 
 			// Process comments:
 			file.ApplyParserRegex(TemplatePartTypes.TemplateBody, TemplatePartTypes.Comment, GenerationLanguage.RxComments);
@@ -177,7 +211,10 @@ namespace Arebis.CodeGenerator.Templated
 					if ((TemplatePartTypes)part.Type == TemplatePartTypes.IncludePragma)
 					{
 						string fn = part.Data["filename"];
-						fn = Path.Combine(Path.GetDirectoryName(part.File.Filename), fn);
+                        if (!fn.StartsWith("res://"))
+                        {
+                            fn = Path.Combine(Path.GetDirectoryName(part.File.Filename), fn);
+                        }
 						part.Substitute(new MixedContentFile(fn, File.ReadAllText(fn), TemplatePartTypes.TemplateBody), TemplatePartTypes.TemplateBody);
 					}
 				}

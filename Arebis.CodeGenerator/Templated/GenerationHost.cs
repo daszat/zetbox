@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Arebis.Utils;
 using Arebis.CodeGeneration;
 using System.Collections.Specialized;
 using System.Reflection;
@@ -11,7 +12,7 @@ namespace Arebis.CodeGenerator.Templated
 {
 	public class GenerationHost : MarshalByRefObject, IGenerationHost, IDisposable
 	{
-		private Dictionary<string, TemplateInfo> templates;
+		private static Dictionary<string, TemplateInfo> templates = new Dictionary<string,TemplateInfo>();
 		private List<IFileWriter> fileWriters;
 		private NameValueCollection settings;
 		private List<string> referencepath;
@@ -25,7 +26,9 @@ namespace Arebis.CodeGenerator.Templated
 		public GenerationHost()
 		{
 			// Install assembly resolver:
+#if USE_APP_DOMAIN
 			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(this.AssemblyResolve);
+#endif
 		}
 
 		public void Initialize(NameValueCollection settings)
@@ -74,7 +77,7 @@ namespace Arebis.CodeGenerator.Templated
 			this.outputDirectory = Path.Combine(Environment.CurrentDirectory, (this.Settings["targetdir"] ?? "."));
 
 			// Initialize compiled templates:
-			this.templates = new Dictionary<string, TemplateInfo>();
+			// this.templates = new Dictionary<string, TemplateInfo>();
 
 			// Initialize filewriters:
 			this.fileWriters = new List<IFileWriter>();
@@ -117,15 +120,16 @@ namespace Arebis.CodeGenerator.Templated
 		/// <summary>
 		/// Returns a writable copy of the base reference path.
 		/// </summary>
-		public List<string> ReferencePath
+        public List<string> ReferencePath
 		{
-			get { return new List<string>(this.referencepath); }
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return new List<string>(this.referencepath); }
 		}
 
 		public void CallTemplate(string templatefile, params object[] parameters)
 		{
 			// Get full template filename:
-			string fulltemplatefile = Path.Combine(this.contextDirectory.Peek(), templatefile);
+            string fulltemplatefile = templatefile.IsResourceFile() ? templatefile : Path.Combine(this.contextDirectory.Peek(), templatefile);
 
 			// Call template:
 			this.CallTemplateToContext(fulltemplatefile, parameters);
@@ -134,7 +138,7 @@ namespace Arebis.CodeGenerator.Templated
 		public void CallTemplateToFile(string templatefile, string outputfile, params object[] parameters)
 		{
 			// Get full template filename:
-			string fulltemplatefile = Path.Combine(this.contextDirectory.Peek(), templatefile);
+            string fulltemplatefile = templatefile.IsResourceFile() ? templatefile : Path.Combine(this.contextDirectory.Peek(), templatefile);
 
 			try
 			{
@@ -159,45 +163,53 @@ namespace Arebis.CodeGenerator.Templated
 			try
 			{
 				// Push template's directory as current directory context:
-				this.contextDirectory.Push(new FileInfo(fulltemplatefile).Directory.FullName);
+                if(!fulltemplatefile.IsResourceFile())
+				    this.contextDirectory.Push(new FileInfo(fulltemplatefile).Directory.FullName);
 
 				// Create & cache template:
-				if (this.templates.ContainsKey(fulltemplatefile) == false)
-				{
-					this.templates[fulltemplatefile] = new TemplateInfo(fulltemplatefile, this);
-				}
+                if (templates.ContainsKey(fulltemplatefile) == false)
+                {
+                    templates[fulltemplatefile] = new TemplateInfo();
+                }
+                templates[fulltemplatefile].Initialize(fulltemplatefile, this);
 
 				// Invoke template:
-				this.templates[fulltemplatefile].Invoke(parameters);
+				templates[fulltemplatefile].Invoke(parameters);
 			}
 			finally
 			{
 				// Restore previous directory context:
-				this.contextDirectory.Pop();
+                if (!fulltemplatefile.IsResourceFile())
+				    this.contextDirectory.Pop();
 			}
 		}
 
-		public virtual void WriteFile(string filename, string content)
+        [System.Diagnostics.DebuggerStepThrough]
+        public virtual void WriteFile(string filename, string content)
 		{
 			this.fileWriters[0].WriteFile(filename, content);
 		}
 
-		public NameValueCollection Settings
+        public NameValueCollection Settings
 		{
-			get { return this.settings; }
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return this.settings; }
 		}
 
-		public void WriteOutput(string str)
+        [System.Diagnostics.DebuggerStepThrough]
+        public void WriteOutput(string str)
 		{
 			this.contextWriter.Peek().Write(str);
 		}
 
-		public string NewLineString
+        public string NewLineString
 		{
-			get { return Environment.NewLine; }
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return Environment.NewLine; }
 		}
 
-		public void Log(string fmt, params object[] args)
+        [System.Diagnostics.DebuggerStepThrough]
+        public void Log(string fmt, params object[] args)
 		{
 			string timestamp = DateTime.Now.ToString();
 			try
@@ -230,19 +242,22 @@ namespace Arebis.CodeGenerator.Templated
 		public void Dispose()
 		{
 			// Uninstall assembly resolver:
+#if USE_APP_DOMAIN
 			AppDomain.CurrentDomain.AssemblyResolve -=new ResolveEventHandler(this.AssemblyResolve);
+#endif
 
 			// Dispose templates:
-			if (this.templates != null)
-			{
-				foreach (TemplateInfo item in this.templates.Values)
-				{
-					item.Dispose();
-				}
-				this.templates = null;
-			}
+            //if (this.templates != null)
+            //{
+            //    foreach (TemplateInfo item in this.templates.Values)
+            //    {
+            //        item.Dispose();
+            //    }
+            //    this.templates = null;
+            //}
 		}
 
+#if USE_APP_DOMAIN
 		/// <summary>
 		/// Attempts to resolve assemblies.
 		/// </summary>
@@ -265,5 +280,6 @@ namespace Arebis.CodeGenerator.Templated
 			}
 			return null;
 		}
+#endif
 	}
 }

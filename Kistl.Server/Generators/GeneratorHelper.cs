@@ -7,7 +7,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using System.Reflection;
 
-namespace Kistl.Server.Generators
+namespace Kistl.Server.Generators.Helper
 {
     public static class GeneratorHelper
     {

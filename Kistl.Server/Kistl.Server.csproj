@@ -72,7 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomActionsManagerServer.cs" />
+    <Compile Include="Generators2\DataObjectGenerator.cs" />
     <Compile Include="Generators2\Generator.cs" />
+    <Compile Include="Generators2\MappingGenerator.cs" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClass.cs" />
     <Compile Include="Generators\DatabaseGenerator.cs" />
     <Compile Include="Generators\Exceptions.cs" />
     <Compile Include="Generators\Generator.cs" />
@@ -166,6 +169,7 @@
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
     <None Include="Database\Database.35.sql" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClass.cst" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

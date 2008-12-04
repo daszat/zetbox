@@ -9,6 +9,7 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.API;
 using Kistl.Server;
+using Kistl.Server.Generators.Helper;
 
 namespace Kistl.Server.Generators.SQLServer
 {

@@ -11,6 +11,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.Server.Generators.Helper;
 
 namespace Kistl.Server.Generators.SQLServer
 {
@@ -569,7 +570,6 @@ namespace Kistl.Server.Generators.SQLServer
                 {
                     string wrapperType = "EntityCollectionWrapper";
                     string wrapperSortedParameter = "";
-                    #warning Implement Same for n:m relations
                     if (current.property.IsIndexed)
                     {
                         wrapperType = string.Format("EntityCollectionWrapperSorted_{0}_{1}", current.objClass.ClassName, current.property.PropertyName);

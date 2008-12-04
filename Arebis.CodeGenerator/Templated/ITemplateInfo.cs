@@ -11,7 +11,7 @@ namespace Arebis.CodeGenerator.Templated
 	{
 		IGenerationHost Host { get; }
 		NameValueCollection Settings { get; }
-		FileInfo TemplateFileInfo { get; }
+		string TemplateFile { get; }
 		MixedContentFile FileContent { get; }
 		IList<NameValueCollection> GetDirectives(string directiveName);
 		NameValueCollection GetCodeTemplateDirective();

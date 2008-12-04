@@ -7,7 +7,6 @@ using Arebis.CodeGeneration;
 
 namespace Arebis.CodeGenerator.Templated
 {
-	[System.Diagnostics.DebuggerStepThrough]
 	public class CSCodeBuilder : BaseCodeBuilder
 	{
 		protected override void AppendConstructorParam(StringBuilder constructorparams, string name, string type)
@@ -58,7 +57,8 @@ namespace Arebis.CodeGenerator.Templated
 		
 		protected override CodeDomProvider GetCodeDomProvider()
 		{
-			return CodeDomProvider.CreateProvider("c#");
+//			return CodeDomProvider.CreateProvider("c#");
+            return new Microsoft.CSharp.CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v3.5" } });
 		}
 
 		protected override string GetCodeTemplate()

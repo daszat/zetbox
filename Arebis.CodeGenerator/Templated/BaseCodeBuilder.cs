@@ -4,6 +4,7 @@ using System.Text;
 using Arebis.Parsing.MultiContent;
 using System.IO;
 using Arebis.Parsing;
+using Arebis.Utils;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.Text.RegularExpressions;
@@ -15,7 +16,6 @@ using Arebis.CodeGeneration;
 
 namespace Arebis.CodeGenerator.Templated
 {
-	[System.Diagnostics.DebuggerStepThrough]
 	public abstract class BaseCodeBuilder : ICodeBuilder
 	{
 		private static Regex RxLinesWithLinebreaks = new Regex("[^\\r\\n]*\\r?\\n?");
@@ -71,7 +71,7 @@ namespace Arebis.CodeGenerator.Templated
 			// Retrieve codeTemplate directive:
 			NameValueCollection ctdir = templateInfo.GetCodeTemplateDirective();
 			// Retrieve class name information:
-			ClassName cnb = new ClassName(ctdir["ClassName"] ?? StringUtils.ToIdentifier(templateInfo.TemplateFileInfo.Name));
+			ClassName cnb = new ClassName(ctdir["ClassName"] ?? StringUtils.ToIdentifier(templateInfo.TemplateFile));
 			if (cnb.NameSpace == String.Empty)
 				cnb.NameSpace = GenerationLanguage.DefaultNameSpace;
 
@@ -79,7 +79,23 @@ namespace Arebis.CodeGenerator.Templated
 			ns = cnb.NameSpace;
 			classname = cnb.Name;
 			baseclassname = ctdir["Inherits"] ?? GenerationLanguage.DefaultBaseClass;
-			codeBehindFile = templateInfo.FindFile(ctdir["CodeFile"]);
+            codeBehindFile = templateInfo.FindFile(ctdir["CodeFile"]);
+            if (codeBehindFile != null && templateInfo.TemplateFile.IsResourceFile())
+            {
+                Assembly a = templateInfo.TemplateFile.GetResourceAssembly();
+                string res = codeBehindFile;
+                codeBehindFile = Path.GetTempFileName() + ".cs";
+                using (Stream s = a.GetManifestResourceStream(res))
+                {
+                    if (s == null) throw new ResourceNotFoundException(res, a);
+                    StreamReader sr = new StreamReader(s);
+
+                    using (StreamWriter sw = new StreamWriter(codeBehindFile, false))
+                    {
+                        sw.Write(sr.ReadToEnd());
+                    }
+                }
+            }
 
 			foreach (NameValueCollection import in templateInfo.GetDirectives("Import"))
 			{
@@ -155,7 +171,7 @@ namespace Arebis.CodeGenerator.Templated
 
 			// Build code:
 			this.code = GetCodeTemplate();
-			this.code = this.code.Replace("<%=templatefilename%>", templateInfo.TemplateFileInfo.FullName);
+			this.code = this.code.Replace("<%=templatefilename%>", templateInfo.TemplateFile);
 			this.code = this.code.Replace("<%=imports%>", imports.ToString());
 			this.code = this.code.Replace("<%=namespace%>", ns);
 			this.code = this.code.Replace("<%=classname%>", classname);
@@ -167,13 +183,13 @@ namespace Arebis.CodeGenerator.Templated
 			this.code = this.code.Replace("<%=scripts%>", scripts.ToString());
 
 			// Save code file:
-			string codeFile = templateInfo.TemplateFileInfo.FullName + ".gen";
+            string codeFile = Path.GetTempFileName() + ".gen.cs"; //templateInfo.TemplateFile + ".gen";
 			File.WriteAllText(codeFile, this.code);
 
 			// Build assembly resolution path:
 			List<string> referencepathlist = ((GenerationHost)templateInfo.Host).ReferencePath;
-			referencepathlist.Add(templateInfo.TemplateFileInfo.Directory.FullName);
-			referencepathlist.Add(templateInfo.TemplateFileInfo.Directory.FullName + "\\bin");
+			//referencepathlist.Add(templateInfo.TemplateFile.Directory.FullName);
+			//referencepathlist.Add(templateInfo.TemplateFile.Directory.FullName + "\\bin");
 			string[] referencepath = referencepathlist.ToArray();
 
 			// Collect references:
@@ -211,9 +227,9 @@ namespace Arebis.CodeGenerator.Templated
 			}
 
 			// Generate assembly filename:
-			string assemblyFile = 
-				ctdir["AssemblyFile"] ??
-				Path.Combine(Path.GetTempPath(), StringUtils.ToIdentifier(templateInfo.TemplateFileInfo.FullName) + ".dll");
+            string assemblyFile =
+                ctdir["AssemblyFile"] ?? Path.GetTempFileName() + ".dll";
+				//Path.Combine(Path.GetTempPath(), StringUtils.ToIdentifier(templateInfo.TemplateFile.FullName) + ".dll");
 
 			// Collect files to compile:
 			List<string> codefiles = new List<string>();
@@ -235,6 +251,9 @@ namespace Arebis.CodeGenerator.Templated
 			this.filesToDelete.Add(assemblyFile.Replace(".dll", ".pdb"));
 			if (Convert.ToBoolean(templateInfo.Settings["deletegeneratedsource"] ?? "True") == true)
 				this.filesToDelete.Add(codeFile);
+
+            if(codeBehindFile != null && templateInfo.TemplateFile.IsResourceFile())
+                this.filesToDelete.Add(codeBehindFile);
 
 			// Check for compile errors & warnings:
 			this.compilerErrors = new List<CompilerError>();
@@ -260,6 +279,7 @@ namespace Arebis.CodeGenerator.Templated
 
 		public void Dispose()
 		{
+#if USE_APP_DOMAIN
 			if (this.filesToDelete != null)
 			{
 				foreach (string filename in this.filesToDelete)
@@ -273,6 +293,7 @@ namespace Arebis.CodeGenerator.Templated
 				}
 				this.filesToDelete = null;
 			}
+#endif
 		}
 
 		protected abstract string GetCodeTemplate();
