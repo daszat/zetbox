@@ -17,12 +17,14 @@ namespace Kistl.Server.Tests
         string number;
 
         [SetUp]
+        [Ignore("To be implemented on server")]
         public void SetUp()
         {
             number = rnd.Next().ToString();
         }
 
         [Test]
+        [Ignore("To be implemented on server")]
         public void CreateObjectWithStruct()
         {
             int ID = Kistl.API.Helper.INVALIDID;
@@ -61,6 +63,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
+        [Ignore("To be implemented on server")]
         public void GetObjectWithStruct()
         {
             using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
@@ -74,6 +77,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
+        [Ignore("To be implemented on server")]
         public void SaveObjectWithStruct()
         {
             int ID = Kistl.API.Helper.INVALIDID;
@@ -110,6 +114,7 @@ namespace Kistl.Server.Tests
         /// Tests if setting a Structmember directy does _not_ change the value.
         /// </summary>
         [Test]
+        [Ignore("To be implemented on server")]
         public void ChangeObjectWithStruct()
         {
             int ID = Kistl.API.Helper.INVALIDID;

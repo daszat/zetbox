@@ -32,7 +32,7 @@ namespace Kistl.App.Projekte
         
         private int _ID;
         
-        private EntityCollectionEntryParentWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> ProjekteWrapper;
+        private EntityCollectionEntryParentWrapperSorted_Mitarbeiter_Projekte<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> ProjekteWrapper;
         
         private string _Name;
         
@@ -65,7 +65,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (ProjekteWrapper == null) ProjekteWrapper = new EntityCollectionEntryParentWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Projekte__Implementation__);
+                if (ProjekteWrapper == null) ProjekteWrapper = new EntityCollectionEntryParentWrapperSorted_Mitarbeiter_Projekte<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Projekte__Implementation__);
                 return ProjekteWrapper;
             }
         }
@@ -261,5 +261,23 @@ namespace Kistl.App.Projekte
         }
         
         public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<System.DateTime> e, System.Guid TestCLRObjectParameter, Kistl.App.Projekte.Auftrag TestObjectParameter, System.DateTime TestDateTime, bool TestBool, double TestDouble, int TestInt, string TestString);
+    }
+    
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.EntityCollectionEntryParentWrapperSorted_Mitarbeiter_Projekte")]
+    public class EntityCollectionEntryParentWrapperSorted_Mitarbeiter_Projekte<PARENT, VALUE, IMPL> : EntityCollectionEntryParentWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>
+    
+    
+    
+    {
+        
+        public EntityCollectionEntryParentWrapperSorted_Mitarbeiter_Projekte(Kistl.App.Projekte.Mitarbeiter parentObject, EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> ec) : 
+                base(parentObject, ec)
+        {
+        }
+        
+        protected override IEnumerable<Kistl.App.Projekte.Projekt> GetEnumerable()
+        {
+            return _ec.OrderBy(i => i.ParentIndex).Select(i => i.Parent);
+        }
     }
 }

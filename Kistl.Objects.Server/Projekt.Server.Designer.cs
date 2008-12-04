@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
         
         private EntityCollectionWrapper<Kistl.App.Projekte.Task, Kistl.App.Projekte.Task__Implementation__> TasksWrapper;
         
-        private EntityCollectionEntryValueWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> MitarbeiterWrapper;
+        private EntityCollectionEntryValueWrapperSorted_Projekt_Mitarbeiter<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> MitarbeiterWrapper;
         
         private System.Double? _AufwandGes;
         
@@ -111,7 +111,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Mitarbeiter__Implementation__);
+                if (MitarbeiterWrapper == null) MitarbeiterWrapper = new EntityCollectionEntryValueWrapperSorted_Projekt_Mitarbeiter<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>(this, Mitarbeiter__Implementation__);
                 return MitarbeiterWrapper;
             }
         }
@@ -300,7 +300,7 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._Name, sw);
-            BinarySerializer.ToBinary(this.Mitarbeiter__Implementation__, sw);
+            BinarySerializer.ToBinary(this.Mitarbeiter__Implementation__.OrderBy(i => i.ValueIndex), sw);
             BinarySerializer.ToBinary(this._AufwandGes, sw);
             BinarySerializer.ToBinary(this._Kundenname, sw);
         }
@@ -491,6 +491,24 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
             BinarySerializer.FromBinary(out this._ValueIndex, sr);
             BinarySerializer.FromBinary(out this._ParentIndex, sr);
+        }
+    }
+    
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Projekte.EntityCollectionEntryValueWrapperSorted_Projekt_Mitarbeiter")]
+    public class EntityCollectionEntryValueWrapperSorted_Projekt_Mitarbeiter<PARENT, VALUE, IMPL> : EntityCollectionEntryValueWrapperSorted<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__>
+    
+    
+    
+    {
+        
+        public EntityCollectionEntryValueWrapperSorted_Projekt_Mitarbeiter(Kistl.App.Projekte.Projekt parentObject, EntityCollection<Kistl.App.Projekte.Projekt_MitarbeiterCollectionEntry__Implementation__> ec) : 
+                base(parentObject, ec)
+        {
+        }
+        
+        protected override IEnumerable<Kistl.App.Projekte.Mitarbeiter> GetEnumerable()
+        {
+            return _ec.OrderBy(i => i.ValueIndex).Select(i => i.Value);
         }
     }
 }

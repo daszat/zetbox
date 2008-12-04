@@ -23,6 +23,11 @@ namespace Kistl.API
         public const int INVALIDID = 0;
 
         /// <summary>
+        /// = int.MaxValue
+        /// </summary>
+        public const int LASTINDEXPOSITION = int.MaxValue;
+
+        /// <summary>
         /// Suffix for Interface implementations
         /// </summary>
         public const string ImplementationSuffix = "__Implementation__";

@@ -40,7 +40,7 @@ namespace Kistl.App.Base
         
         private System.Nullable<int> _fk_Assembly = null;
         
-        private EntityCollectionEntryValueWrapperSorted<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__> GenericArgumentsWrapper;
+        private EntityCollectionEntryValueWrapperSorted_TypeRef_GenericArguments<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__> GenericArgumentsWrapper;
         
         public TypeRef__Implementation__()
         {
@@ -130,7 +130,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (GenericArgumentsWrapper == null) GenericArgumentsWrapper = new EntityCollectionEntryValueWrapperSorted<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__>(this, GenericArguments__Implementation__);
+                if (GenericArgumentsWrapper == null) GenericArgumentsWrapper = new EntityCollectionEntryValueWrapperSorted_TypeRef_GenericArguments<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__>(this, GenericArguments__Implementation__);
                 return GenericArgumentsWrapper;
             }
         }
@@ -226,7 +226,7 @@ namespace Kistl.App.Base
             base.ToStream(sw);
             BinarySerializer.ToBinary(this._FullName, sw);
             BinarySerializer.ToBinary(this.fk_Assembly, sw);
-            BinarySerializer.ToBinary(this.GenericArguments__Implementation__, sw);
+            BinarySerializer.ToBinary(this.GenericArguments__Implementation__.OrderBy(i => i.ValueIndex), sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
@@ -416,6 +416,24 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._fk_Parent, sr);
             BinarySerializer.FromBinary(out this._ValueIndex, sr);
             BinarySerializer.FromBinary(out this._ParentIndex, sr);
+        }
+    }
+    
+    [System.Diagnostics.DebuggerDisplay("Kistl.App.Base.EntityCollectionEntryValueWrapperSorted_TypeRef_GenericArguments")]
+    public class EntityCollectionEntryValueWrapperSorted_TypeRef_GenericArguments<PARENT, VALUE, IMPL> : EntityCollectionEntryValueWrapperSorted<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__>
+    
+    
+    
+    {
+        
+        public EntityCollectionEntryValueWrapperSorted_TypeRef_GenericArguments(Kistl.App.Base.TypeRef parentObject, EntityCollection<Kistl.App.Base.TypeRef_GenericArgumentsCollectionEntry__Implementation__> ec) : 
+                base(parentObject, ec)
+        {
+        }
+        
+        protected override IEnumerable<Kistl.App.Base.TypeRef> GetEnumerable()
+        {
+            return _ec.OrderBy(i => i.ValueIndex).Select(i => i.Value);
         }
     }
 }

@@ -128,7 +128,7 @@ namespace Kistl.API.Server
             List<T> result = new List<T>();
             foreach (T item in newQuery)
             {
-                if(item is IDataObject) ((IDataObject)item).AttachToContext(_ctx);
+                if (item is IPersistenceObject) ((IPersistenceObject)item).AttachToContext(_ctx);
                 result.Add(item);
             }
             return result;

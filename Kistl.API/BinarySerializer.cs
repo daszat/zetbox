@@ -164,7 +164,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Collection to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToBinary<T>(ICollection<T> val, System.IO.BinaryWriter sw) where T : ICollectionEntry
+        public static void ToBinary<T>(IEnumerable<T> val, System.IO.BinaryWriter sw) where T : ICollectionEntry
         {
             foreach (ICollectionEntry obj in val)
             {

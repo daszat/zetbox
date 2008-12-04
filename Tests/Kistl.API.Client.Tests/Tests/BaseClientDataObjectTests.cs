@@ -106,7 +106,7 @@ namespace Kistl.API.Client.Tests
 
             ((TestObjClass__Implementation__)obj).ApplyChanges(result);
             Assert.That(result.ID, Is.EqualTo(obj.ID));
-            Assert.That(PropertyChangedCalled, Is.False);
+            Assert.That(PropertyChangedCalled, Is.True);
         }
 
         [Test]
@@ -189,7 +189,7 @@ namespace Kistl.API.Client.Tests
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-                Assert.That(PropertyChangedCalled, Is.False);
+                Assert.That(PropertyChangedCalled, Is.True);
             }
         }
 
@@ -203,7 +203,7 @@ namespace Kistl.API.Client.Tests
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-                Assert.That(PropertyChangedCalled, Is.False);
+                Assert.That(PropertyChangedCalled, Is.True);
             }
         }
 
@@ -251,7 +251,7 @@ namespace Kistl.API.Client.Tests
                 obj.DetachFromContext(ctx);
                 Assert.That(obj.Context, Is.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-                Assert.That(PropertyChangedCalled, Is.False);
+                Assert.That(PropertyChangedCalled, Is.True);
             }
         }
 

@@ -1833,7 +1833,7 @@ namespace Kistl.Server.Generators
             m.Statements.AddExpression("base.ToStream(sw)");
 
             #region ToStream
-            foreach (BaseProperty p in properties)
+            foreach (Property p in properties)
             {
                 if (p.IsEnumerationPropertySingle())
                 {
@@ -1848,6 +1848,8 @@ namespace Kistl.Server.Generators
                 {
                     if (current.task == TaskEnum.Client)
                         m.Statements.AddExpression("this._{0}.ToStream(sw)", p.PropertyName);
+                    else if (p.IsIndexed)
+                        m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}.OrderBy(i => i.ValueIndex), sw)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                     else
                         m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                 }
@@ -1868,6 +1870,8 @@ namespace Kistl.Server.Generators
                 {
                     if (current.task == TaskEnum.Client)
                         m.Statements.AddExpression("this._{0}.ToStream(sw)", p.PropertyName);
+                    else if (p.IsIndexed)
+                        m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}.OrderBy(i => i.ValueIndex), sw)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                     else
                         m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, Kistl.API.Helper.ImplementationSuffix);
                 }

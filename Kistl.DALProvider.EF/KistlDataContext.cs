@@ -9,6 +9,7 @@ using System.Collections;
 using Kistl.API;
 using Kistl.API.Server;
 using System.Reflection;
+using System.Diagnostics;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
@@ -200,6 +201,28 @@ namespace Kistl.DALProvider.EF
             List<IDataObject> saveList = _ctx.ObjectStateManager
                 .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified)
                 .Select(e => e.Entity).OfType<IDataObject>().ToList();
+
+#if DEBUG
+            Debug.WriteLine("************************* >>>> Submit Changes ******************************");
+
+            var submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added);
+            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
+                .ForEach<object>(i => Debug.WriteLine(string.Format("Insert: {0} -> {1}", i.GetType(), i.ToString())));
+
+            submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified);
+            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
+                .ForEach<object>(i => Debug.WriteLine(string.Format("Update: {0} -> {1}", i.GetType(), i.ToString())));
+
+            submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Deleted);
+            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
+                .ForEach<object>(i => Debug.WriteLine(string.Format("Delete: {0} -> {1}", i.GetType(), i.ToString())));
+
+            submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Unchanged);
+            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
+                .ForEach<object>(i => Debug.WriteLine(string.Format("Unchanged: {0} -> {1}", i.GetType(), i.ToString())));
+
+            Debug.WriteLine("************************* Submit Changes <<<< ******************************");
+#endif
 
             saveList.ForEach(obj => obj.NotifyPreSave());
 

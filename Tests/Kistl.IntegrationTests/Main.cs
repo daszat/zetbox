@@ -37,13 +37,13 @@ namespace Kistl.IntegrationTests
             var test = new RelationTests();
 
             test.SetUp();
-            test.Sort_Relation_1_n();
-
-            test.SetUp();
             test.Sort_Relation_n_m_n();
 
             test.SetUp();
             test.Sort_Relation_n_m_m();
+
+            test.SetUp();
+            test.Sort_Relation_1_n();
 
             test.SetUp();
             test.Sort_Relation_1_n();

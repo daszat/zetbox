@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Objects.DataClasses;
 using System.Collections;
+using Kistl.DALProvider.EF;
 
 namespace Kistl.API.Server
 {
@@ -154,7 +155,7 @@ namespace Kistl.API.Server
             // TODO: Optimize
             foreach (INTERFACE i in _ec)
             {
-                int idx = GetIndex(i) ?? -1;
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     UpdateIndex(i, idx + 1);
@@ -172,7 +173,7 @@ namespace Kistl.API.Server
             // TODO: Optimize
             foreach (INTERFACE i in _ec)
             {
-                int idx = GetIndex(i) ?? -1;
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     UpdateIndex(i, idx - 1);
@@ -224,8 +225,8 @@ namespace Kistl.API.Server
         {
             entry.Value = default(VALUE);
             entry.Parent = null;
-            // TODO: Warum ist der Context leer?
-            if (entry.Context != null) entry.Context.Delete(entry);
+            // Case: 668
+            (entry as BaseServerCollectionEntry_EntityFramework).GetEFContext().DeleteObject(entry);
         }
 
         #region ICollection<VALUE> Members
@@ -236,6 +237,8 @@ namespace Kistl.API.Server
             entry.Parent = _parentObject;
             entry.Value = item;
             _ec.Add(entry);
+            // Case: 668
+            entry.AttachToContext(_parentObject.Context);
         }
 
         public virtual void Clear()
@@ -286,16 +289,17 @@ namespace Kistl.API.Server
 
         public IEnumerator<VALUE> GetEnumerator()
         {
-            return _ec.Select(i => i.Value).GetEnumerator();
+            return GetEnumerable().GetEnumerator();
         }
-
-        #endregion
-
-        #region IEnumerable Members
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _ec.Select(i => i.Value).GetEnumerator();
+            return GetEnumerable().GetEnumerator();
+        }
+
+        protected virtual IEnumerable<VALUE> GetEnumerable()
+        {
+            return _ec.Select(i => i.Value);
         }
 
         #endregion
@@ -319,17 +323,16 @@ namespace Kistl.API.Server
         {
             // Sets the position Property for a n:m Relation
             item.ValueIndex = index;
-
             if (item.ParentIndex == null && index != null)
             {
                 // Add to end
-                item.ParentIndex = -1;
+                item.ParentIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             }
         }
 
         protected int? GetIndex(IMPL item)
         {
-            if (item.ValueIndex == -1)
+            if (item.ValueIndex == Kistl.API.Helper.LASTINDEXPOSITION)
             {
                 item.ValueIndex = _ec.Count() - 1;
             }
@@ -356,7 +359,8 @@ namespace Kistl.API.Server
         public override void Add(VALUE item)
         {
             base.Add(item);
-            UpdateIndex(_ec.Last(), _ec.Count - 1);
+            IMPL e = _ec.Single(i => i.Value.Equals(item));
+            UpdateIndex(e, _ec.Count - 1);
         }
 
         public override void Clear()
@@ -391,7 +395,7 @@ namespace Kistl.API.Server
             // TODO: Optimize
             foreach (IMPL i in _ec)
             {
-                int idx = GetIndex(i) ?? -1;
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     UpdateIndex(i, idx + 1);
@@ -403,6 +407,7 @@ namespace Kistl.API.Server
             entry.Value = item;
             UpdateIndex(entry, index);
             _ec.Add(entry);
+            entry.AttachToContext(_parentObject.Context);
         }
 
         public void RemoveAt(int index)
@@ -414,7 +419,7 @@ namespace Kistl.API.Server
             // TODO: Optimize
             foreach (IMPL i in _ec)
             {
-                int idx = GetIndex(i) ?? -1;
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     UpdateIndex(i, idx - 1);
@@ -466,8 +471,8 @@ namespace Kistl.API.Server
         {
             entry.Value = default(VALUE);
             entry.Parent = null;
-            // TODO: Warum ist der Context leer?
-            if (entry.Context != null) entry.Context.Delete(entry);
+            // Case: 668
+            (entry as BaseServerCollectionEntry_EntityFramework).GetEFContext().DeleteObject(entry);
         }
 
         #region ICollection<PARENT> Members
@@ -478,6 +483,7 @@ namespace Kistl.API.Server
             entry.Value = _parentObject;
             entry.Parent = item;
             _ec.Add(entry);
+            entry.AttachToContext(item.Context);
         }
 
         public virtual void Clear()
@@ -528,16 +534,17 @@ namespace Kistl.API.Server
 
         public IEnumerator<PARENT> GetEnumerator()
         {
-            return _ec.Select(i => i.Parent).GetEnumerator();
+            return GetEnumerable().GetEnumerator();
         }
-
-        #endregion
-
-        #region IEnumerable Members
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _ec.Select(i => i.Parent).GetEnumerator();
+            return GetEnumerable().GetEnumerator();
+        }
+
+        protected virtual IEnumerable<PARENT> GetEnumerable()
+        {
+            return _ec.Select(i => i.Parent);
         }
 
         #endregion
@@ -564,13 +571,13 @@ namespace Kistl.API.Server
             if (item.ValueIndex == null && index != null)
             {
                 // Add to end
-                item.ValueIndex = -1;
+                item.ValueIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             }
         }
 
         protected int? GetIndex(IMPL item)
         {
-            if (item.ParentIndex == -1)
+            if (item.ParentIndex == Kistl.API.Helper.LASTINDEXPOSITION)
             {
                 item.ParentIndex = _ec.Count() - 1;
             }
@@ -596,7 +603,8 @@ namespace Kistl.API.Server
         public override void Add(PARENT item)
         {
             base.Add(item);
-            UpdateIndex(_ec.Last(), _ec.Count - 1);
+            IMPL e = _ec.Single(i => i.Parent.Equals(item));
+            UpdateIndex(e, _ec.Count - 1);
         }
 
         public override void Clear()
@@ -631,7 +639,7 @@ namespace Kistl.API.Server
             // TODO: Optimize
             foreach (IMPL i in _ec)
             {
-                int idx = GetIndex(i) ?? -1;
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     UpdateIndex(i, idx + 1);
@@ -643,6 +651,7 @@ namespace Kistl.API.Server
             entry.Value = _parentObject;
             UpdateIndex(entry, index);
             _ec.Add(entry);
+            entry.AttachToContext(item.Context);
         }
 
         public void RemoveAt(int index)
@@ -654,7 +663,7 @@ namespace Kistl.API.Server
             // TODO: Optimize
             foreach (IMPL i in _ec)
             {
-                int idx = GetIndex(i) ?? -1;
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     UpdateIndex(i, idx - 1);

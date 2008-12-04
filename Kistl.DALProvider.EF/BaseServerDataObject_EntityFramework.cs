@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.API;
 using Kistl.API.Server;
 using System.Data.Objects.DataClasses;
+using System.Data.Objects;
 
 namespace Kistl.DALProvider.EF
 {
@@ -198,6 +200,13 @@ namespace Kistl.DALProvider.EF
             }
         }
         #endregion
+
+        // Case: 668
+        public ObjectContext GetEFContext()
+        {
+            return _relationships.GetPrivatePropertyValue<ObjectContext>("Context");
+        }
+
     }
 
     /// <summary>

@@ -173,7 +173,31 @@ namespace Kistl.Server.Generators.SQLServer
 
 
                 CurrentObjectClass currentEFProperty = (CurrentObjectClass)current.Clone();
-                string wrapperType = objRefProp.IsIndexed ? "EntityCollectionEntryValueWrapperSorted" : "EntityCollectionEntryValueWrapper";
+                string wrapperType = "EntityCollectionEntryValueWrapper";
+                if (objRefProp.IsIndexed)
+                {
+                    wrapperType = string.Format("EntityCollectionEntryValueWrapperSorted_{0}_{1}", current.objClass.ClassName, current.property.PropertyName);
+
+                    CurrentObjectClass collectionWrapper = (CurrentObjectClass)current.Clone();
+                    collectionWrapper.code_class = collectionWrapper.code_namespace.CreateClass(wrapperType,
+                            new CodeTypeReference("EntityCollectionEntryValueWrapperSorted",
+                                new CodeTypeReference(parentType.NameDataObject),
+                                new CodeTypeReference(valueType.NameDataObject),
+                                new CodeTypeReference(collectionType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)));
+                    collectionWrapper.code_class.TypeParameters.Add("PARENT");
+                    collectionWrapper.code_class.TypeParameters.Add("VALUE");
+                    collectionWrapper.code_class.TypeParameters.Add("IMPL");
+                    var ctr = collectionWrapper.code_class.CreateConstructor();
+                    ctr.Parameters.Add(new CodeParameterDeclarationExpression(parentType.NameDataObject, "parentObject"));
+                    ctr.Parameters.Add(new CodeParameterDeclarationExpression(string.Format("EntityCollection<{0}{1}>", collectionType.NameDataObject, Kistl.API.Helper.ImplementationSuffix), "ec"));
+                    ctr.BaseConstructorArgs.Add(new CodeSnippetExpression("parentObject"));
+                    ctr.BaseConstructorArgs.Add(new CodeSnippetExpression("ec"));
+
+                    var m = collectionWrapper.code_class.CreateOverrideMethod("GetEnumerable", string.Format("IEnumerable<{0}>", valueType.NameDataObject));
+                    m.Attributes = MemberAttributes.Family | MemberAttributes.Override;
+                    m.Statements.AddExpression("return _ec.OrderBy(i => i.ValueIndex).Select(i => i.Value)");
+                }
+
 
                 current.code_field = current.code_class.CreateField(
                     new CodeTypeReference(wrapperType,
@@ -490,7 +514,30 @@ namespace Kistl.Server.Generators.SQLServer
 
                 if (backRefProp.GetOpposite().IsList)
                 {
-                    string wrapperType = backRefProp.IsIndexed ? "EntityCollectionEntryParentWrapperSorted" : "EntityCollectionEntryParentWrapper";
+                    string wrapperType = "EntityCollectionEntryParentWrapper";
+                    if (backRefProp.IsIndexed)
+                    {
+                        wrapperType = string.Format("EntityCollectionEntryParentWrapperSorted_{0}_{1}", current.objClass.ClassName, current.property.PropertyName);
+
+                        CurrentObjectClass collectionWrapper = (CurrentObjectClass)current.Clone();
+                        collectionWrapper.code_class = collectionWrapper.code_namespace.CreateClass(wrapperType,
+                                new CodeTypeReference("EntityCollectionEntryParentWrapperSorted",
+                                    new CodeTypeReference(ownerType.NameDataObject),
+                                    new CodeTypeReference(parentType.NameDataObject),
+                                    new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)));
+                        collectionWrapper.code_class.TypeParameters.Add("PARENT");
+                        collectionWrapper.code_class.TypeParameters.Add("VALUE");
+                        collectionWrapper.code_class.TypeParameters.Add("IMPL");
+                        var ctr = collectionWrapper.code_class.CreateConstructor();
+                        ctr.Parameters.Add(new CodeParameterDeclarationExpression(parentType.NameDataObject, "parentObject"));
+                        ctr.Parameters.Add(new CodeParameterDeclarationExpression(string.Format("EntityCollection<{0}{1}>", childType.NameDataObject, Kistl.API.Helper.ImplementationSuffix), "ec"));
+                        ctr.BaseConstructorArgs.Add(new CodeSnippetExpression("parentObject"));
+                        ctr.BaseConstructorArgs.Add(new CodeSnippetExpression("ec"));
+
+                        var m = collectionWrapper.code_class.CreateOverrideMethod("GetEnumerable", string.Format("IEnumerable<{0}>", ownerType.NameDataObject));
+                        m.Attributes = MemberAttributes.Family | MemberAttributes.Override;
+                        m.Statements.AddExpression("return _ec.OrderBy(i => i.ParentIndex).Select(i => i.Parent)");
+                    }
 
                     current.code_field = current.code_class.CreateField(
                         new CodeTypeReference(wrapperType,
