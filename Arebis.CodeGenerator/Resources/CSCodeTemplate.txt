@@ -1,0 +1,24 @@
+<%=imports%>
+
+namespace <%=namespace%>
+{
+	[Arebis.CodeGeneration.TemplateInfo(@"<%=templatefilename%>")]
+	public sealed partial class <%=classname%> : <%=baseclassname%>
+	{
+<%=fields%>
+
+		public <%=classname%>(Arebis.CodeGeneration.IGenerationHost _host<%=constructorparameters%>)
+			: base(_host)
+		{
+<%=fieldinitialisations%>
+		}
+		
+		public override void Generate()
+		{
+<%=generatebody%>
+		}
+
+<%=scripts%>
+
+	}
+}

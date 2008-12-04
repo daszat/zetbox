@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="Arebis.CodeGeneration.CodeTemplate">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>CodeTemplate.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAQAIAAAAAAAAAAAACAAggBAABEEAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Interface Name="Arebis.CodeGeneration.IFileWriter">
+    <Position X="5.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>IFileWriter.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAACAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Arebis.CodeGeneration.IGenerationHost">
+    <Position X="3.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>IGenerationHost.cs</FileName>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAEAAgAAAQAgAAACAAAQAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+</ClassDiagram>

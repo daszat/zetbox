@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Arebis.CodeGenerator.Templated.CSCodeBuilder">
+    <Position X="5" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Templated\CSCodeBuilder.cs</FileName>
+      <HashCode>AAAAAAAEAAAoCAAAAAAAAgAMAAAAEAAAAAAAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="Arebis.CodeGenerator.Templated.VBCodeBuilder">
+    <Position X="7.5" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Templated\VBCodeBuilder.cs</FileName>
+      <HashCode>AAAAAAAEAAAoCAAAAAAAAgAMAAAAEAAAAAAAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Arebis.CodeGenerator.Templated.GenerationHost">
+    <Position X="2.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Templated\GenerationHost.cs</FileName>
+      <HashCode>AQAAAIAAgCAAEQBAgAAASAAUAAiAAAQAgAAACIAAQAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Method Name="CallTemplateToContext" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Arebis.CodeGenerator.Templated.TemplateInfo">
+    <Position X="7.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Templated\TemplateInfo.cs</FileName>
+      <HashCode>IARCAAKAAGCIAAIgAAACIAIAICAACAAAsggAAQCCEAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Method Name="CreateCodeBuilder" Hidden="true" />
+      <Method Name="ReadAndParseFile" Hidden="true" />
+      <Method Name="ReadDirectives" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Arebis.CodeGeneration.CodeTemplate">
+    <Position X="10.75" Y="0.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Arebis.CodeGenerator.Templated.BaseCodeBuilder">
+    <Position X="2.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Templated\BaseCodeBuilder.cs</FileName>
+      <HashCode>AAAABAAECCAoCAAAAAAgAgAMICABEAAgAABABAgAAEQ=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Method Name="LinesWithBreaks" Hidden="true" />
+      <Method Name="ToContent" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Arebis.CodeGenerator.Templated.ICodeBuilder">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Templated\ICodeBuilder.cs</FileName>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAEA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Arebis.CodeGeneration.IGenerationHost">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Arebis.CodeGenerator.Templated.ITemplateInfo">
+    <Position X="5.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>Templated\ITemplateInfo.cs</FileName>
+      <HashCode>IAQAAACAAAAAAAIAAAAAAAAAAAAACAAAgAAAAACAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+</ClassDiagram>
