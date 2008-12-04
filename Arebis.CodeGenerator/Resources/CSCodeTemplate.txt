@@ -3,7 +3,7 @@
 namespace <%=namespace%>
 {
 	[Arebis.CodeGeneration.TemplateInfo(@"<%=templatefilename%>")]
-	public sealed partial class <%=classname%> : <%=baseclassname%>
+	public partial class <%=classname%> : <%=baseclassname%>
 	{
 <%=fields%>
 

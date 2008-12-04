@@ -67,6 +67,8 @@ namespace Arebis.CodeGenerator.Templated
 			StringBuilder generatebody = new StringBuilder();
 			StringBuilder scripts = new StringBuilder();
 			string codeBehindFile = null;
+            string invokeClass = null;
+            string invokeClassFile = null;
 
 			// Retrieve codeTemplate directive:
 			NameValueCollection ctdir = templateInfo.GetCodeTemplateDirective();
@@ -79,21 +81,26 @@ namespace Arebis.CodeGenerator.Templated
 			ns = cnb.NameSpace;
 			classname = cnb.Name;
 			baseclassname = ctdir["Inherits"] ?? GenerationLanguage.DefaultBaseClass;
+
             codeBehindFile = templateInfo.FindFile(ctdir["CodeFile"]);
             if (codeBehindFile != null && templateInfo.TemplateFile.IsResourceFile())
             {
-                Assembly a = templateInfo.TemplateFile.GetResourceAssembly();
                 string res = codeBehindFile;
-                codeBehindFile = Path.GetTempFileName() + ".cs";
-                using (Stream s = a.GetManifestResourceStream(res))
-                {
-                    if (s == null) throw new ResourceNotFoundException(res, a);
-                    StreamReader sr = new StreamReader(s);
+                codeBehindFile = Path.GetTempFileName() + ".CodeBehindFile.cs";
+                res.SaveResourceStream(codeBehindFile);
+            }
 
-                    using (StreamWriter sw = new StreamWriter(codeBehindFile, false))
-                    {
-                        sw.Write(sr.ReadToEnd());
-                    }
+            invokeClass = ns + "." + classname;
+            string invokeclasspath = templateInfo.Settings["invokeclasspath"];
+            if (invokeclasspath != null && templateInfo.TemplateFile.IsResourceFile())
+            {
+                // TODO: Add filesupport
+                string res = invokeclasspath + "." + ctdir["Name"] + ".cs";
+                if (res.ResourceExits())
+                {
+                    invokeClassFile = Path.GetTempFileName() + ".InvokeClassFile.cs";
+                    res.SaveResourceStream(invokeClassFile);
+                    invokeClass = invokeclasspath.GetResourcePath() + "." + ctdir["Name"];
                 }
             }
 
@@ -183,7 +190,7 @@ namespace Arebis.CodeGenerator.Templated
 			this.code = this.code.Replace("<%=scripts%>", scripts.ToString());
 
 			// Save code file:
-            string codeFile = Path.GetTempFileName() + ".gen.cs"; //templateInfo.TemplateFile + ".gen";
+            string codeFile = Path.GetTempFileName() + ".CodeFile.cs"; //templateInfo.TemplateFile + ".gen";
 			File.WriteAllText(codeFile, this.code);
 
 			// Build assembly resolution path:
@@ -235,6 +242,8 @@ namespace Arebis.CodeGenerator.Templated
 			List<string> codefiles = new List<string>();
 			codefiles.Add(codeFile);
 			if (codeBehindFile != null) codefiles.Add(codeBehindFile);
+            if (invokeClassFile != null) codefiles.Add(invokeClassFile);
+
 			foreach (NameValueCollection compileFileAttrs in templateInfo.GetDirectives("CompileFile"))
 				codefiles.Add(templateInfo.FindFile(compileFileAttrs["Path"]));
 
@@ -255,6 +264,9 @@ namespace Arebis.CodeGenerator.Templated
             if(codeBehindFile != null && templateInfo.TemplateFile.IsResourceFile())
                 this.filesToDelete.Add(codeBehindFile);
 
+            if (invokeClassFile != null && templateInfo.TemplateFile.IsResourceFile())
+                this.filesToDelete.Add(invokeClassFile);
+
 			// Check for compile errors & warnings:
 			this.compilerErrors = new List<CompilerError>();
 			foreach (CompilerError error in results.Errors)
@@ -270,7 +282,7 @@ namespace Arebis.CodeGenerator.Templated
 			}
 			else
 			{
-				this.compiledType = results.CompiledAssembly.GetType(ns + "." + classname);
+				this.compiledType = results.CompiledAssembly.GetType(invokeClass);
 				return true;
 			}
 		}

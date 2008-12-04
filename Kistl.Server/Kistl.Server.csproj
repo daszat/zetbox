@@ -74,8 +74,11 @@
     <Compile Include="CustomActionsManagerServer.cs" />
     <Compile Include="Generators2\DataObjectGenerator.cs" />
     <Compile Include="Generators2\Generator.cs" />
+    <EmbeddedResource Include="Generators2\Generator\Interface\ObjectClassTemplate.cs" />
     <Compile Include="Generators2\MappingGenerator.cs" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClass.cs" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClassTemplate.cs" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyTemplate.cs" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyListTemplate.cs" />
     <Compile Include="Generators\DatabaseGenerator.cs" />
     <Compile Include="Generators\Exceptions.cs" />
     <Compile Include="Generators\Generator.cs" />
@@ -169,7 +172,9 @@
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
     <None Include="Database\Database.35.sql" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClass.cst" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyListTemplate.cst" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyTemplate.cst" />
+    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClassTemplate.cst" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

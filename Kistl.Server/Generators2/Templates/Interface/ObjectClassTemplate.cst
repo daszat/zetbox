@@ -1,4 +1,8 @@
-﻿<%@ CodeTemplate Language="C#" Inherits="Kistl.Server.Generators2.KistlCodeTemplate" CodeFile="ObjectClass.cs" ClassName="Kistl.Server.Generators2.Templates.Interface.ObjectClass" %>
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Interface.ObjectClassTemplate"
+	CodeFile="ObjectClassTemplate.cs" 
+	ClassName="Kistl.Server.Generators2.Templates.Interface.ObjectClassTemplate" 
+	Inherits="Kistl.Server.Generators2.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -6,7 +10,7 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Helper" %>
 
-<%@ Parameter Name="objClass" Type="Kistl.App.Base.ObjectClass" %>
+<%@ Parameter Name="objClass" Type="ObjectClass" %>
 namespace <%= objClass.Module.Namespace %>
 {
     using System;
@@ -25,6 +29,10 @@ namespace <%= objClass.Module.Namespace %>
     /// </summary>
     public interface <%= objClass.ClassName %> <%= GetBaseClass() %> 
     {
+		<% foreach(Property p in objClass.Properties) 
+		{
+			ApplyPropertyTemplate(p);
+		}%>
 		
 	}
 }

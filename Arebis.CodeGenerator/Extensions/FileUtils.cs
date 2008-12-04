@@ -35,6 +35,14 @@ namespace Arebis.Utils
         {
             return filename.ToLower().StartsWith("res://");
         }
+
+        public static string GetResourcePath(this string filename)
+        {
+            string res = filename.Substring("res://".Length);
+            int idx = res.IndexOf('/');
+            res = res.Substring(idx + 1);
+            return res;
+        }
     
         public static Assembly GetResourceAssembly(this string filename)
         {
@@ -62,6 +70,24 @@ namespace Arebis.Utils
                 throw new ResourceNotFoundException(res, a);
             }
             return s;
+        }
+
+        public static bool ResourceExits(this string filename)
+        {
+            Assembly a = GetResourceAssembly(filename);
+            return a.GetManifestResourceInfo(GetResourcePath(filename)) != null;
+        }
+
+        public static void SaveResourceStream(this string filename, string target)
+        {
+            using (Stream s = filename.GetResourceStream())
+            {
+                StreamReader sr = new StreamReader(s);
+                using (StreamWriter sw = new StreamWriter(target, false))
+                {
+                    sw.Write(sr.ReadToEnd());
+                }
+            }
         }
     }
 

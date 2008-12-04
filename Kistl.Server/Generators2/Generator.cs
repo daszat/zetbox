@@ -67,6 +67,7 @@ namespace Kistl.Server.Generators2
             string template, string output, string targetdir, params object[] templateParameter)
         {
             Arebis.CodeGenerator.TemplateGenerator gen = new Arebis.CodeGenerator.TemplateGenerator();
+            
             gen.Settings.Add("referencepath", Helper.CodeGenPath + @"\bin");
             ServerApiContext.Current.Configuration.SourceFileLocation.ForEach(l => gen.Settings.Add("referencepath", l));
             gen.Settings.Add("referencepath", System.IO.Path.GetDirectoryName(typeof(Generator).Assembly.Location));
@@ -80,7 +81,8 @@ namespace Kistl.Server.Generators2
             gen.Settings.Add("referenceassembly", "Kistl.API.Server.dll");
             gen.Settings.Add("referenceassembly", "Kistl.Objects.dll");
             gen.Settings.Add("referenceassembly", "Kistl.Server.exe");
-            gen.Settings.Add("template", "res://kistl.server/Kistl.Server.Generators2.Templates." + template);
+            gen.Settings.Add("template", "res://kistl.server/Kistl.Server.Generators2.Templates." + template + ".cst");
+            gen.Settings.Add("invokeclasspath", "res://kistl.server/Kistl.Server.Generators2.EntityFramework");
             gen.Settings.Add("targetdir", Helper.CodeGenPath + @"\" + targetdir);
             gen.Settings.Add("output", output);
             gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
@@ -138,6 +140,11 @@ namespace Kistl.Server.Generators2
 
         public override void Generate()
         {
+        }
+
+        protected string ResolveResourceUrl(string template)
+        {
+            return "res://kistl.server/Kistl.Server.Generators2.Templates." + template;
         }
     }
 }

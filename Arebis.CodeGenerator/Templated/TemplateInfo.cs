@@ -107,6 +107,8 @@ namespace Arebis.CodeGenerator.Templated
 		public string FindFile(string relativeName)
 		{
 		    if (relativeName == null) return null;
+            if (relativeName.IsResourceFile()) return relativeName;
+
             if (!this.templatefile.IsResourceFile())
             {
                 return Path.Combine(Path.GetDirectoryName(templatefile), relativeName);
@@ -118,7 +120,7 @@ namespace Arebis.CodeGenerator.Templated
                 {
                     if (r.EndsWith(relativeName))
                     {
-                        return r;
+                        return string.Format("res://{0}/{1}", a.FullName, r);
                     }
                 }
                 throw new ResourceNotFoundException(relativeName, a);
@@ -211,7 +213,7 @@ namespace Arebis.CodeGenerator.Templated
 					if ((TemplatePartTypes)part.Type == TemplatePartTypes.IncludePragma)
 					{
 						string fn = part.Data["filename"];
-                        if (!fn.StartsWith("res://"))
+                        if (!fn.IsResourceFile())
                         {
                             fn = Path.Combine(Path.GetDirectoryName(part.File.Filename), fn);
                         }
