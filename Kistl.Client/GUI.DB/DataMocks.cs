@@ -195,6 +195,10 @@ namespace Kistl.Client.GUI.DB
     {
     }
 
+    public class ActionLayout : Layout
+    {
+    }
+
     public class DebuggerLayout : Layout
     {
     }
@@ -226,6 +230,7 @@ namespace Kistl.Client.GUI.DB
                     AddLayoutCacheEntry(new DataObjectReferenceLayout() { SourceModelType = typeof(ObjectReferenceModel) });
                     AddLayoutCacheEntry(new DataObjectReferenceLayout() { SourceModelType = typeof(ObjectResultModel<IDataObject>) });
 
+                    AddLayoutCacheEntry(new ActionLayout() { SourceModelType = typeof(ActionModel) });
                     AddLayoutCacheEntry(new SelectionTaskLayout() { SourceModelType = typeof(DataObjectSelectionTaskModel) });
 
                     AddLayoutCacheEntry(new WorkspaceLayout() { SourceModelType = typeof(WorkspaceModel) });
@@ -384,6 +389,9 @@ namespace Kistl.Client.GUI.DB
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF"),
                             Toolkit.WPF, new TypeRef(typeof(SelectionTaskLayout))),
+                        new ViewDescriptor(
+                            new TypeRef("Kistl.Client.WPF.View.ActionView", "Kistl.Client.WPF"),
+                            Toolkit.WPF, new TypeRef(typeof(ActionLayout))),
                         new ViewDescriptor(
                             new TypeRef("Kistl.Client.WPF.View.TextValueSelectionView", "Kistl.Client.WPF"),
                             Toolkit.WPF, new TypeRef(typeof(TextValueSelectionLayout))),

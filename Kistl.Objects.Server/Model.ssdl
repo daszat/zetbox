@@ -60,6 +60,7 @@
     <EntitySet Name="IsValidNamespaceConstraint" EntityType="Model.Store.IsValidNamespaceConstraint" Table="IsValidNamespaceConstraints" />
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations" />
     <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs" />
+    <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Store.Projekt_MitarbeiterCollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Store.Kunde_EMailsCollectionEntry" Table="Kunden_EMailsCollection" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Store.Zeitkonto_MitarbeiterCollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
@@ -379,6 +380,14 @@
     <AssociationSet Name="FK_MethodInvocation_TypeRef_Implementor" Association="Model.Store.FK_MethodInvocation_TypeRef_Implementor">
       <End Role="A_TypeRef" EntitySet="TypeRef" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_LayoutRef" Association="Model.Store.FK_ViewDescriptor_TypeRef_LayoutRef">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_ViewDescriptor" EntitySet="ViewDescriptor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewRef" Association="Model.Store.FK_ViewDescriptor_TypeRef_ViewRef">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_ViewDescriptor" EntitySet="ViewDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.Store.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -891,6 +900,15 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Assembly" Type="int" />
+  </EntityType>
+  <EntityType Name="ViewDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_LayoutRef" Type="int" />
+    <Property Name="Toolkit" Type="int" Nullable="false" />
+    <Property Name="fk_ViewRef" Type="int" />
   </EntityType>
   <EntityType Name="Projekt_MitarbeiterCollectionEntry">
     <Key>
@@ -1893,6 +1911,30 @@
       </Principal>
       <Dependent Role="B_MethodInvocation">
         <PropertyRef Name="fk_Implementor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ViewDescriptor_TypeRef_LayoutRef">
+    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="B_ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TypeRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ViewDescriptor">
+        <PropertyRef Name="fk_LayoutRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ViewDescriptor_TypeRef_ViewRef">
+    <End Role="A_TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="B_ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_TypeRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ViewDescriptor">
+        <PropertyRef Name="fk_ViewRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

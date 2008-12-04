@@ -76,5 +76,13 @@ namespace Kistl.App.GUI
             obj.DisplayName = String.Format("Default Template for {0}", displayedType.Name);
             obj.VisualTree = TemplateHelper.CreateDefaultVisualTree(obj.Context, cls);
         }
+
+        public void OnToString_ViewDescriptor(ViewDescriptor obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = String.Format("{0}: Display layout {1} with {2}",
+                obj.Toolkit,
+                obj.LayoutRef.AsType(true).Name,
+                obj.ViewRef.AsType(true).Name);
+        }
     }
 }

@@ -120,6 +120,7 @@
     <Compile Include="TestPhoneStruct.Client.Designer.cs" />
     <Compile Include="TypeRef.Client.Designer.cs" />
     <Compile Include="ValueTypeProperty.Client.Designer.cs" />
+    <Compile Include="ViewDescriptor.Client.Designer.cs" />
     <Compile Include="Visual.Client.Designer.cs" />
     <Compile Include="Zeitkonto.Client.Designer.cs" />
   </ItemGroup>

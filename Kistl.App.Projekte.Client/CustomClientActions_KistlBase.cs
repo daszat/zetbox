@@ -384,5 +384,32 @@ namespace Kistl.App.Base
             }
         }
 
+        public void OnRegenerateTypeRefs_Assembly(Assembly assembly)
+        {
+            var ctx = assembly.Context;
+
+            // the clr assembly descriptor from System.Reflection
+            var runtimeAssembly = System.Reflection.Assembly.Load(assembly.AssemblyName);
+
+            // a lookup of all TypeRefs currently in the data store
+            var refs = ctx.GetQuery<TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID).ToLookup(tr => tr.FullName);
+            
+            foreach (var t in runtimeAssembly.GetExportedTypes())
+            {
+                // lookup the ref to the generic tpye definition
+                // TODO: there should only be one ref without generic args
+                TypeRef current = refs[t.FullName].FirstOrDefault(tr => tr.GenericArguments.Count == 0);
+
+                if (current == null)
+                {
+                    // create a new one
+                    current = ctx.Create<TypeRef>();
+                    current.FullName = t.FullName;
+                    current.Assembly = assembly;
+                }
+            }
+
+        }
+
     }
 }

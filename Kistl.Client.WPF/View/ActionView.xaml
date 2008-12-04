@@ -1,0 +1,6 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.ActionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ToolTip="{Binding ToolTip}">
+    <Button Content="{Binding Label}" Click="ClickHandler"/>
+</UserControl>

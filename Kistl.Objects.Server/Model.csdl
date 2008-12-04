@@ -30,6 +30,7 @@
     <EntitySet Name="Constraint" EntityType="Model.Constraint" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="TypeRef" EntityType="Model.TypeRef" />
+    <EntitySet Name="ViewDescriptor" EntityType="Model.ViewDescriptor" />
     <EntitySet Name="Projekt_MitarbeiterCollectionEntry" EntityType="Model.Projekt_MitarbeiterCollectionEntry" />
     <EntitySet Name="Kunde_EMailsCollectionEntry" EntityType="Model.Kunde_EMailsCollectionEntry" />
     <EntitySet Name="Zeitkonto_MitarbeiterCollectionEntry" EntityType="Model.Zeitkonto_MitarbeiterCollectionEntry" />
@@ -229,6 +230,14 @@
     <AssociationSet Name="FK_MethodInvocation_TypeRef_Implementor" Association="Model.FK_MethodInvocation_TypeRef_Implementor">
       <End Role="A_TypeRef" EntitySet="TypeRef" />
       <End Role="B_MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_LayoutRef" Association="Model.FK_ViewDescriptor_TypeRef_LayoutRef">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_ViewDescriptor" EntitySet="ViewDescriptor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewRef" Association="Model.FK_ViewDescriptor_TypeRef_ViewRef">
+      <End Role="A_TypeRef" EntitySet="TypeRef" />
+      <End Role="B_ViewDescriptor" EntitySet="ViewDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" Association="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
       <End Role="A_Projekt" EntitySet="Projekt" />
@@ -628,6 +637,15 @@
     <NavigationProperty Name="Assembly__Implementation__" Relationship="Model.FK_TypeRef_Assembly_Assembly" FromRole="B_TypeRef" ToRole="A_Assembly" />
     <NavigationProperty Name="GenericArguments__Implementation__" Relationship="Model.FK_TypeRef_GenericArgumentsCollectionEntry_TypeRef_fk_Parent" FromRole="A_TypeRef" ToRole="B_TypeRef_GenericArgumentsCollectionEntry" />
   </EntityType>
+  <EntityType Name="ViewDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LayoutRef__Implementation__" Relationship="Model.FK_ViewDescriptor_TypeRef_LayoutRef" FromRole="B_ViewDescriptor" ToRole="A_TypeRef" />
+    <Property Name="Toolkit__Implementation__" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ViewRef__Implementation__" Relationship="Model.FK_ViewDescriptor_TypeRef_ViewRef" FromRole="B_ViewDescriptor" ToRole="A_TypeRef" />
+  </EntityType>
   <ComplexType Name="TestPhoneStruct">
     <Property Name="Number" Type="String" MaxLength="50" Nullable="true" />
     <Property Name="AreaCode" Type="String" MaxLength="50" Nullable="true" />
@@ -891,6 +909,14 @@
   <Association Name="FK_MethodInvocation_TypeRef_Implementor">
     <End Role="A_TypeRef" Type="Model.TypeRef" Multiplicity="0..1" />
     <End Role="B_MethodInvocation" Type="Model.MethodInvocation" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ViewDescriptor_TypeRef_LayoutRef">
+    <End Role="A_TypeRef" Type="Model.TypeRef" Multiplicity="0..1" />
+    <End Role="B_ViewDescriptor" Type="Model.ViewDescriptor" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ViewDescriptor_TypeRef_ViewRef">
+    <End Role="A_TypeRef" Type="Model.TypeRef" Multiplicity="0..1" />
+    <End Role="B_ViewDescriptor" Type="Model.ViewDescriptor" Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent">
     <End Role="A_Projekt" Type="Model.Projekt" Multiplicity="0..1" />

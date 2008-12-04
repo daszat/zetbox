@@ -21,20 +21,20 @@ namespace Kistl.Client.Forms.View
         {
             InitializeComponent();
         }
-     
+
         protected override void OnDataContextChanged()
         {
             base.OnDataContextChanged();
             SyncName();
 
-            DataContext.PropertyModels.CollectionChanged += new NotifyCollectionChangedEventHandler(PropertyModels_CollectionChanged);
+            ((INotifyCollectionChanged)DataContext.PropertyModels).CollectionChanged += new NotifyCollectionChangedEventHandler(PropertyModels_CollectionChanged);
             SyncProperties();
         }
 
         protected override void OnModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnModelPropertyChanged(sender, e);
-         
+
             if (e.PropertyName == "Name")
                 SyncName();
         }
@@ -53,8 +53,8 @@ namespace Kistl.Client.Forms.View
                 var containerPanel = new System.Windows.Forms.Panel();
                 containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
                 containerPanel.Name = String.Format("containerPanel{0}", i);
-                
-                _propertyPanel.Controls.Add(containerPanel,0,i);
+
+                _propertyPanel.Controls.Add(containerPanel, 0, i);
 
                 Renderer.ShowModel(DataContext.PropertyModels[i], containerPanel);
             }

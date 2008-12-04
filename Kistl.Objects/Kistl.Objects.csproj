@@ -113,6 +113,7 @@
     <Compile Include="Toolkit.Interface.Designer.cs" />
     <Compile Include="TypeRef.Designer.cs" />
     <Compile Include="ValueTypeProperty.Designer.cs" />
+    <Compile Include="ViewDescriptor.Designer.cs" />
     <Compile Include="Visual.Designer.cs" />
     <Compile Include="VisualType.Interface.Designer.cs" />
     <Compile Include="Zeitkonto.Designer.cs" />

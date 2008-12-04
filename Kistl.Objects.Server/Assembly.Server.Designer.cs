@@ -149,6 +149,8 @@ namespace Kistl.App.Base
         
         public event ObjectEventHandler<Assembly> OnPostSave_Assembly;
         
+        public event RegenerateTypeRefs_Handler<Assembly> OnRegenerateTypeRefs_Assembly;
+        
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
         {
@@ -204,6 +206,14 @@ namespace Kistl.App.Base
             return base.GetPropertyError(prop);
         }
         
+        public virtual void RegenerateTypeRefs()
+        {
+            if (OnRegenerateTypeRefs_Assembly != null)
+            {
+                OnRegenerateTypeRefs_Assembly(this);
+            };
+        }
+        
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
@@ -219,5 +229,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromBinary(out this._AssemblyName, sr);
             BinarySerializer.FromBinary(out this._IsClientAssembly, sr);
         }
+        
+        public delegate void RegenerateTypeRefs_Handler<T>(T obj);
     }
 }

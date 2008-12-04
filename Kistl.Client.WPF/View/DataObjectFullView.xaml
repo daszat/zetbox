@@ -17,11 +17,16 @@
     </UserControl.DataContext> -->
 
     <DockPanel>
-        <ctrls:LoadingIndicator DockPanel.Dock="Top" />
-        <TextBlock Text="{Binding Name}"
-                   DockPanel.Dock="Top"
+        <ToolBar DockPanel.Dock="Top"
+                 ItemsSource="{Binding Actions}"
+                 ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
+
+        <TextBlock DockPanel.Dock="Top"
+                   Text="{Binding Name}"
                    HorizontalAlignment="Center" />
-        
+
+        <ctrls:LoadingIndicator DockPanel.Dock="Top" />
+
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <ListView x:Name="PropertyList"
                       ItemsSource="{Binding PropertyModels}"

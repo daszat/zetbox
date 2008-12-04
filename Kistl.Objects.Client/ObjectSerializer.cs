@@ -88,6 +88,7 @@ namespace Kistl.API
         [XmlArrayItem(Type=typeof(Kistl.App.Base.IsValidNamespaceConstraint), ElementName="IsValidNamespaceConstraint")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.Relation), ElementName="Relation")]
         [XmlArrayItem(Type=typeof(Kistl.App.Base.TypeRef), ElementName="TypeRef")]
+        [XmlArrayItem(Type=typeof(Kistl.App.Base.ViewDescriptor), ElementName="ViewDescriptor")]
         public System.Collections.Generic.List<object> Objects
         {
             get
@@ -170,6 +171,7 @@ namespace Kistl.API
         [XmlElement(Type=typeof(Kistl.App.Base.IsValidNamespaceConstraint), ElementName="IsValidNamespaceConstraint")]
         [XmlElement(Type=typeof(Kistl.App.Base.Relation), ElementName="Relation")]
         [XmlElement(Type=typeof(Kistl.App.Base.TypeRef), ElementName="TypeRef")]
+        [XmlElement(Type=typeof(Kistl.App.Base.ViewDescriptor), ElementName="ViewDescriptor")]
         public object Object
         {
             get

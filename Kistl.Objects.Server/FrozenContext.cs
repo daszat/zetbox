@@ -52,6 +52,8 @@ namespace Kistl.Objects.Server
         
         private List<Kistl.App.Base.TypeRef> _Kistl_App_Base_TypeRef = new List<Kistl.App.Base.TypeRef>();
         
+        private List<Kistl.App.Base.ViewDescriptor> _Kistl_App_Base_ViewDescriptor = new List<Kistl.App.Base.ViewDescriptor>();
+        
         public FrozenContextImplementation()
         {
             { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.StringProperty__Implementation__() {
@@ -1453,6 +1455,30 @@ namespace Kistl.Objects.Server
                 Description = @"The Type implementing this invocation",
                 ID = 208};
             _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = false,
+                IsNullable = false,
+                IsIndexed = false,
+                PropertyName = @"LayoutRef",
+                AltText = @"Which Layout is handled by this View",
+                ID = 209};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.EnumerationProperty__Implementation__() {
+                IsList = false,
+                IsNullable = false,
+                IsIndexed = false,
+                PropertyName = @"Toolkit",
+                AltText = @"",
+                ID = 210};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
+            { var _Kistl_App_Base_BaseProperty_obj = new Kistl.App.Base.ObjectReferenceProperty__Implementation__() {
+                IsList = false,
+                IsNullable = false,
+                IsIndexed = false,
+                PropertyName = @"ViewRef",
+                AltText = @"the Type of a View for this Layout",
+                ID = 211};
+            _Kistl_App_Base_BaseProperty.Add(_Kistl_App_Base_BaseProperty_obj); };
             _Kistl_App_Base_BaseProperty.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
                 MethodName = @"GetPropertyTypeString",
@@ -2116,6 +2142,27 @@ namespace Kistl.Objects.Server
                 Description = @"get the referenced <see cref=""System.Type""/>",
                 ID = 151};
             _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
+            { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
+                MethodName = @"ToString",
+                IsDisplayable = false,
+                ID = 152};
+            _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
+            { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
+                MethodName = @"PostSave",
+                IsDisplayable = false,
+                ID = 153};
+            _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
+            { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
+                MethodName = @"PreSave",
+                IsDisplayable = false,
+                ID = 154};
+            _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
+            { var _Kistl_App_Base_Method_obj = new Kistl.App.Base.Method__Implementation__() {
+                MethodName = @"RegenerateTypeRefs",
+                IsDisplayable = true,
+                Description = @"Regenerates the stored list of TypeRefs from the loaded assembly",
+                ID = 155};
+            _Kistl_App_Base_Method.Add(_Kistl_App_Base_Method_obj); };
             _Kistl_App_Base_Method.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Module_obj = new Kistl.App.Base.Module__Implementation__() {
                 Namespace = @"Kistl.App.Base",
@@ -2636,6 +2683,14 @@ namespace Kistl.Objects.Server
                 MemberName = @"OnToString_TypeRef",
                 ID = 109};
             _Kistl_App_Base_MethodInvocation.Add(_Kistl_App_Base_MethodInvocation_obj); };
+            { var _Kistl_App_Base_MethodInvocation_obj = new Kistl.App.Base.MethodInvocation__Implementation__() {
+                MemberName = @"OnToString_ViewDescriptor",
+                ID = 110};
+            _Kistl_App_Base_MethodInvocation.Add(_Kistl_App_Base_MethodInvocation_obj); };
+            { var _Kistl_App_Base_MethodInvocation_obj = new Kistl.App.Base.MethodInvocation__Implementation__() {
+                MemberName = @"OnRegenerateTypeRefs_Assembly",
+                ID = 111};
+            _Kistl_App_Base_MethodInvocation.Add(_Kistl_App_Base_MethodInvocation_obj); };
             _Kistl_App_Base_MethodInvocation.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
                 TableName = @"ObjectClasses",
@@ -3111,6 +3166,13 @@ namespace Kistl.Objects.Server
                 ClassName = @"TypeRef",
                 Description = @"This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.",
                 ID = 79};
+            _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
+            { var _Kistl_App_Base_DataType_obj = new Kistl.App.Base.ObjectClass__Implementation__() {
+                TableName = @"ViewDescriptors",
+                IsSimpleObject = false,
+                IsFrozenObject = true,
+                ClassName = @"ViewDescriptor",
+                ID = 80};
             _Kistl_App_Base_DataType.Add(_Kistl_App_Base_DataType_obj); };
             _Kistl_App_Base_DataType.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_BaseParameter_obj = new Kistl.App.Base.StringParameter__Implementation__() {
@@ -3991,6 +4053,16 @@ namespace Kistl.Objects.Server
                 Reason = @"Cannot create legal O/R mapping without length",
                 ID = 212};
             _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.NotNullableConstraint__Implementation__() {
+                ID = 213};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.NotNullableConstraint__Implementation__() {
+                ID = 214};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
+            { var _Kistl_App_Base_Constraint_obj = new Kistl.App.Base.NotNullableConstraint__Implementation__() {
+                Reason = @"A ViewDescriptor must reference the described View.",
+                ID = 215};
+            _Kistl_App_Base_Constraint.Add(_Kistl_App_Base_Constraint_obj); };
             _Kistl_App_Base_Constraint.ForEach<IDataObject>(obj => this.Attach(obj));
             { var _Kistl_App_Base_Relation_obj = new Kistl.App.Base.Relation__Implementation__() {
                 Storage = Kistl.App.Base.StorageType.Left,
@@ -4094,6 +4166,7 @@ namespace Kistl.Objects.Server
                 ID = 8};
             _Kistl_App_Base_TypeRef.Add(_Kistl_App_Base_TypeRef_obj); };
             _Kistl_App_Base_TypeRef.ForEach<IDataObject>(obj => this.Attach(obj));
+            _Kistl_App_Base_ViewDescriptor.ForEach<IDataObject>(obj => this.Attach(obj));
             {var obj = this.Find<Kistl.App.Base.StringProperty>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(33);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
@@ -4782,6 +4855,21 @@ namespace Kistl.Objects.Server
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(30);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(209);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(79);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(80);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            };
+            {var obj = this.Find<Kistl.App.Base.EnumerationProperty>(210);
+            obj.Enumeration = this.Find<Kistl.App.Base.Enumeration>(53);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(80);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectReferenceProperty>(211);
+            obj.ReferenceObjectClass = this.Find<Kistl.App.Base.ObjectClass>(79);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(80);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            };
             {var obj = this.Find<Kistl.App.Base.Method>(1);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(5);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
@@ -5232,6 +5320,22 @@ namespace Kistl.Objects.Server
             };
             {var obj = this.Find<Kistl.App.Base.Method>(151);
             obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(79);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.Method>(152);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(80);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.Method>(153);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(80);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.Method>(154);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(80);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            };
+            {var obj = this.Find<Kistl.App.Base.Method>(155);
+            obj.ObjectClass = this.Find<Kistl.App.Base.DataType>(29);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.Module>(1);
@@ -5897,6 +6001,18 @@ namespace Kistl.Objects.Server
             obj.InvokeOnObjectClass = this.Find<Kistl.App.Base.DataType>(79);
             obj.Implementor = this.Find<Kistl.App.Base.TypeRef>(7);
             };
+            {var obj = this.Find<Kistl.App.Base.MethodInvocation>(110);
+            obj.Method = this.Find<Kistl.App.Base.Method>(152);
+            obj.Module = this.Find<Kistl.App.Base.Module>(4);
+            obj.InvokeOnObjectClass = this.Find<Kistl.App.Base.DataType>(80);
+            obj.Implementor = this.Find<Kistl.App.Base.TypeRef>(5);
+            };
+            {var obj = this.Find<Kistl.App.Base.MethodInvocation>(111);
+            obj.Method = this.Find<Kistl.App.Base.Method>(155);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
+            obj.InvokeOnObjectClass = this.Find<Kistl.App.Base.DataType>(29);
+            obj.Implementor = this.Find<Kistl.App.Base.TypeRef>(7);
+            };
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(2);
             obj.BaseObjectClass = this.Find<Kistl.App.Base.ObjectClass>(33);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
@@ -6173,6 +6289,9 @@ namespace Kistl.Objects.Server
             {var obj = this.Find<Kistl.App.Base.ObjectClass>(79);
             obj.Module = this.Find<Kistl.App.Base.Module>(1);
             obj.DefaultIcon = this.Find<Kistl.App.GUI.Icon>(2);
+            };
+            {var obj = this.Find<Kistl.App.Base.ObjectClass>(80);
+            obj.Module = this.Find<Kistl.App.Base.Module>(1);
             };
             {var obj = this.Find<Kistl.App.Base.StringParameter>(1);
             obj.Method = this.Find<Kistl.App.Base.Method>(83);
@@ -6803,6 +6922,15 @@ namespace Kistl.Objects.Server
             {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(212);
             obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(28);
             };
+            {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(213);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(209);
+            };
+            {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(214);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(210);
+            };
+            {var obj = this.Find<Kistl.App.Base.NotNullableConstraint>(215);
+            obj.ConstrainedProperty = this.Find<Kistl.App.Base.BaseProperty>(211);
+            };
             {var obj = this.Find<Kistl.App.Base.Relation>(1);
             obj.LeftPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(7);
             obj.RightPart = this.Find<Kistl.App.Base.ObjectReferenceProperty>(8);
@@ -6912,6 +7040,7 @@ namespace Kistl.Objects.Server
             if (typeof(Kistl.App.Base.Constraint).IsAssignableFrom(type)) return _Kistl_App_Base_Constraint.Cast<IDataObject>().AsQueryable<IDataObject>();
             if (typeof(Kistl.App.Base.Relation).IsAssignableFrom(type)) return _Kistl_App_Base_Relation.Cast<IDataObject>().AsQueryable<IDataObject>();
             if (typeof(Kistl.App.Base.TypeRef).IsAssignableFrom(type)) return _Kistl_App_Base_TypeRef.Cast<IDataObject>().AsQueryable<IDataObject>();
+            if (typeof(Kistl.App.Base.ViewDescriptor).IsAssignableFrom(type)) return _Kistl_App_Base_ViewDescriptor.Cast<IDataObject>().AsQueryable<IDataObject>();
             return base.GetQuery(type);
         }
     }

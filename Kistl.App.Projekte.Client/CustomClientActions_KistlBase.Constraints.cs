@@ -135,13 +135,15 @@ namespace Kistl.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
-            int length = constrainedValueParam.ToString().Length;
+
             if (obj.IsValid(constrainedObjectParam, constrainedValueParam))
             {
                 e.Result = null;
             }
             else
             {
+                constrainedValueParam = (constrainedValueParam ?? "");
+                int length = constrainedValueParam.ToString().Length;
                 StringBuilder result = new StringBuilder();
                 if (length < obj.MinLength)
                     result.AppendFormat("{0} should be at least {1} characters long", obj.ConstrainedProperty.PropertyName, obj.MinLength);
@@ -223,7 +225,7 @@ namespace Kistl.App.Base
                     object constrainedObjectParam,
                     object constrainedValueParam)
         {
-            e.Result &= (constrainedValueParam != null) && 
+            e.Result &= (constrainedValueParam != null) &&
                 System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier((string)constrainedValueParam);
         }
 
@@ -242,7 +244,7 @@ namespace Kistl.App.Base
                 foreach (string ns in @namespace.Split('.'))
                 {
                     e.Result &= System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(ns);
-                }                
+                }
             }
         }
 

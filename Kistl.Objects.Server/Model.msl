@@ -442,6 +442,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ViewDescriptor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
+        <MappingFragment StoreEntitySet="ViewDescriptor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projekt_MitarbeiterCollectionEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_MitarbeiterCollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
@@ -934,6 +942,24 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <Condition ColumnName="fk_Implementor" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ViewDescriptor_TypeRef_LayoutRef" TypeName="Model.FK_ViewDescriptor_TypeRef_LayoutRef" StoreEntitySet="ViewDescriptor">
+      <EndProperty Name="A_TypeRef">
+        <ScalarProperty Name="ID" ColumnName="fk_LayoutRef" />
+      </EndProperty>
+      <EndProperty Name="B_ViewDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_LayoutRef" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_ViewDescriptor_TypeRef_ViewRef" TypeName="Model.FK_ViewDescriptor_TypeRef_ViewRef" StoreEntitySet="ViewDescriptor">
+      <EndProperty Name="A_TypeRef">
+        <ScalarProperty Name="ID" ColumnName="fk_ViewRef" />
+      </EndProperty>
+      <EndProperty Name="B_ViewDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="fk_ViewRef" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" TypeName="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" StoreEntitySet="Projekt_MitarbeiterCollectionEntry">
       <EndProperty Name="A_Projekt">
