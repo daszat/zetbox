@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using Kistl.API;
-using Kistl.Server.Generators;
+using Kistl.Server.GeneratorsOld;
 using Kistl.App.Base;
 using Kistl.API.Server;
 using Arebis.CodeGeneration;
@@ -32,18 +32,18 @@ namespace Kistl.Server.Generators2
                     {
                         // Compile Code
                         Trace.TraceInformation("Compiling Interfaces");
-                        Generators.Generator.Compile(TaskEnum.Interface);
+                        GeneratorsOld.Generator.Compile(TaskEnum.Interface);
                         Trace.TraceInformation("Compiling Server Assembly");
-                        Generators.Generator.Compile(TaskEnum.Server);
+                        GeneratorsOld.Generator.Compile(TaskEnum.Server);
                         Trace.TraceInformation("Compiling Client Assembly");
-                        Generators.Generator.Compile(TaskEnum.Client);
+                        GeneratorsOld.Generator.Compile(TaskEnum.Client);
                     }
                     catch
                     {
                         // Delete files
-                        Generators.Generator.Delete(TaskEnum.Interface);
-                        Generators.Generator.Delete(TaskEnum.Server);
-                        Generators.Generator.Delete(TaskEnum.Client);
+                        GeneratorsOld.Generator.Delete(TaskEnum.Interface);
+                        GeneratorsOld.Generator.Delete(TaskEnum.Server);
+                        GeneratorsOld.Generator.Delete(TaskEnum.Client);
                         throw;
                     }
                 }

@@ -7,9 +7,9 @@ using Kistl.API;
 using System.CodeDom;
 using Kistl.App.Base;
 using System.Diagnostics;
-using Kistl.Server.Generators.Helper;
+using Kistl.Server.GeneratorsOld.Helper;
 
-namespace Kistl.Server.Generators
+namespace Kistl.Server.GeneratorsOld
 {
     public enum TaskEnum
     {
@@ -137,7 +137,7 @@ namespace Kistl.Server.Generators
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                Generators.IDatabaseGenerator gDatabase = Generators.DatabaseGeneratorFactory.GetGenerator();
+                GeneratorsOld.IDatabaseGenerator gDatabase = GeneratorsOld.DatabaseGeneratorFactory.GetGenerator();
                 using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
                 {
                     gDatabase.Generate(ctx);

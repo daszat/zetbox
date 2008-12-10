@@ -13,7 +13,7 @@ using System.Collections;
 using Kistl.API;
 using Kistl.Server;
 using System.Globalization;
-using Kistl.Server.Generators.Helper;
+using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.Generators2
 {
@@ -83,7 +83,7 @@ namespace Kistl.Server.Generators2
             Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
                 @"Interface.ObjectClassTemplate",
                 objClass.ClassName + ".Designer.cs",
-                Kistl.Server.Generators.TaskEnum.Interface.GetKistObjectsName(),
+                Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
                 objClass);
             gen.ExecuteTemplate();
         }

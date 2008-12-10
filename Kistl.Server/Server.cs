@@ -112,7 +112,7 @@ namespace Kistl.Server
 
         internal void GenerateCode()
         {
-            Generators.Generator.GenerateCode();
+            GeneratorsOld.Generator.GenerateCode();
         }
 
         internal void GenerateCode2()
@@ -122,7 +122,7 @@ namespace Kistl.Server
 
         internal void GenerateDatabase()
         {
-            Generators.Generator.GenerateDatabase();
+            GeneratorsOld.Generator.GenerateDatabase();
         }
 
         internal void GenerateAll()

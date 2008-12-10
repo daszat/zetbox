@@ -5,9 +5,9 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.API;
 using Kistl.Server;
-using Kistl.Server.Generators.Helper;
+using Kistl.Server.GeneratorsOld.Helper;
 
-namespace Kistl.Server.Generators.SQLServer
+namespace Kistl.Server.GeneratorsOld.SQLServer
 {
     public class SQLServerEntityFrameworkModelGenerator : IMappingGenerator
     {

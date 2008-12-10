@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 
-namespace Kistl.Server.Generators
+namespace Kistl.Server.GeneratorsOld
 {
     public class TypeMoniker
     {

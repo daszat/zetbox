@@ -6,7 +6,7 @@ using System.CodeDom.Compiler;
 using System.Security.Permissions;
 using Kistl.API;
 
-namespace Kistl.Server.Generators
+namespace Kistl.Server.GeneratorsOld
 {
     [Serializable]
     public class DBTypeNotFoundException : Exception

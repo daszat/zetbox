@@ -5,9 +5,9 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.Server;
 using System.Data.SqlClient;
-using Kistl.Server.Generators.Helper;
+using Kistl.Server.GeneratorsOld.Helper;
 
-namespace Kistl.Server.Generators.SQLServer
+namespace Kistl.Server.GeneratorsOld.SQLServer
 {
     internal static class SQLServerHelper
     {

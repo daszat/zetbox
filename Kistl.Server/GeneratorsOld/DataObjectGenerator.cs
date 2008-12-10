@@ -13,10 +13,10 @@ using System.Collections;
 using Kistl.API;
 using Kistl.Server;
 using System.Globalization;
-using Kistl.Server.Generators.Helper;
+using Kistl.Server.GeneratorsOld.Helper;
 
 
-namespace Kistl.Server.Generators
+namespace Kistl.Server.GeneratorsOld
 {
     public class BaseDataObjectGenerator
     {
