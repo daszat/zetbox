@@ -43,7 +43,7 @@ namespace Kistl.Client.Presentables
                     Instances.Add((DataObjectModel)Factory.CreateModel(
                         mdlDesc,
                         DataContext,
-                        obj));
+                       new object[] { obj }));
                 }
                 State = ModelState.Active;
             });

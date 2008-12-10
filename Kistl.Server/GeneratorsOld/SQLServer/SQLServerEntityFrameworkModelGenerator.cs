@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.App.Base;
+
 using Kistl.API;
+using Kistl.App.Base;
 using Kistl.Server;
+using Kistl.Server.Generators.Extensions;
 using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.GeneratorsOld.SQLServer
@@ -155,7 +157,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("Type", GetAssociationParentTypeName(prop)); 
+                xml.WriteAttributeString("Type", GetAssociationParentTypeName(prop));
                 xml.WriteAttributeString("Multiplicity", "0..1");
                 xml.WriteEndElement(); // </End>
 
@@ -163,7 +165,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
                 xml.WriteAttributeString("Type", GetAssociationChildTypeName(prop));
-                xml.WriteAttributeString("Multiplicity", prop.GetRelationType() == RelationType.one_one ? "0..1" :"*");
+                xml.WriteAttributeString("Multiplicity", prop.GetRelationType() == RelationType.one_one ? "0..1" : "*");
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteEndElement(); // </AssociationSet>
@@ -573,7 +575,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             xml.WriteEndElement(); // </EntityTypeMapping>
 
             // Und rekursiv runter...
-            foreach(var subObj in obj.SubClasses)
+            foreach (var subObj in obj.SubClasses)
             {
                 AddEntityTypeMapping(xml, subObj);
             }
@@ -909,14 +911,14 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             }
         }
         #endregion
-        
+
         #region GenerateSSDL_Associations_ObjectClasses
         private void GenerateSSDL_Associations_ObjectClasses(System.Xml.XmlTextWriter xml, IQueryable<ObjectClass> objClassList)
         {
             foreach (ObjectClass objClass in objClassList)
             {
                 if (objClass.BaseObjectClass == null) continue;
-                
+
                 xml.WriteStartElement("Association");
                 TypeMoniker parentType = objClass.BaseObjectClass.GetTypeMoniker();
                 TypeMoniker childType = objClass.GetTypeMoniker();
@@ -960,7 +962,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 xml.WriteEndElement(); // </Association>
             }
         }
-        #endregion        
+        #endregion
 
         #region GenerateSSDL_EntityTypes_ListProperties
         private void GenerateSSDL_EntityTypes_ListProperties(System.Xml.XmlTextWriter xml, IEnumerable<Property> listProperties)
@@ -1041,7 +1043,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             {
                 if (p is StructProperty)
                 {
-                    GenerateSSDL_EntityTypes_ObjectClasses_Properties(xml, ((StructProperty)p).StructDefinition, 
+                    GenerateSSDL_EntityTypes_ObjectClasses_Properties(xml, ((StructProperty)p).StructDefinition,
                         p.PropertyName.CalcColumnName(parentPropName));
                 }
                 else

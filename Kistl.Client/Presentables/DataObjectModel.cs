@@ -232,7 +232,7 @@ namespace Kistl.Client.Presentables
                     .CreateModel(
                         DataMocks.LookupDefaultPropertyModelDescriptor(pm),
                         DataContext,
-                        _object, pm));
+                        new object[] { _object, pm }));
             }
         }
 

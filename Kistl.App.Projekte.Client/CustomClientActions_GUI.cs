@@ -90,5 +90,29 @@ namespace Kistl.App.GUI
             // TODO: use configuration for default model
             e.Result = objClass.DefaultModel ?? objClass.Context.Find<TypeRef>(83);
         }
+
+        public void OnGetDefaultModelRef_BoolProperty(BoolProperty prop, MethodReturnEventArgs<TypeRef> e)
+        {
+            if (prop.IsList)
+            {
+
+            }
+            else
+            {
+                //e.Result = typeof(NullableValuePropertyModel<Boolean>).ToRef(prop.Context);
+            }
+        }
+
+        public void OnGetDefaultModelRef_DateTimeProperty(DateTimeProperty prop, MethodReturnEventArgs<TypeRef> e)
+        {
+            if (prop.IsList)
+            {
+
+            }
+            else
+            {
+                //e.Result = typeof(NullableValuePropertyModel<Boolean>).ToRef(prop.Context);
+            }
+        }
     }
 }

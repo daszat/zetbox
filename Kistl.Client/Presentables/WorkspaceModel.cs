@@ -134,7 +134,7 @@ namespace Kistl.Client.Presentables
                     Modules.Add((ModuleModel)Factory
                         .CreateModel(
                             DataMocks.LookupDefaultModelDescriptor(m),
-                            DataContext, m));
+                            DataContext, new object[] { m }));
                 }
                 State = ModelState.Active;
             });

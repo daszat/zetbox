@@ -81,8 +81,9 @@ namespace Kistl.Server.Generators
             gen.Settings.Add("referenceassembly", "Kistl.API.Server.dll");
             gen.Settings.Add("referenceassembly", "Kistl.Objects.dll");
             gen.Settings.Add("referenceassembly", "Kistl.Server.exe");
-            gen.Settings.Add("template", "res://kistl.server/Kistl.Server.Generators2.Templates." + template + ".cst");
-            gen.Settings.Add("invokeclasspath", "res://kistl.server/Kistl.Server.Generators2.EntityFramework");
+            gen.Settings.Add("templatepath", "res://kistl.server/Kistl.Server.Generators.Templates");
+            gen.Settings.Add("template", "res://kistl.server/Kistl.Server.Generators.Templates." + template + ".cst");
+            gen.Settings.Add("invokeclasspath", "res://kistl.server/Kistl.Server.Generators.EntityFramework");
             gen.Settings.Add("targetdir", Helper.CodeGenPath + @"\" + targetdir);
             gen.Settings.Add("output", output);
             gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
@@ -144,7 +145,7 @@ namespace Kistl.Server.Generators
 
         protected string ResolveResourceUrl(string template)
         {
-            return "res://kistl.server/Kistl.Server.Generators2.Templates." + template;
+            return "res://kistl.server/Kistl.Server.Generators.Templates." + template;
         }
     }
 }

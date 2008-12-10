@@ -7,6 +7,7 @@ using Kistl.API;
 using Kistl.App.GUI;
 using Kistl.Client.GUI.DB;
 using Kistl.Client.GUI;
+using System.ComponentModel;
 
 namespace Kistl.Client.Presentables
 {
@@ -44,16 +45,23 @@ namespace Kistl.Client.Presentables
             return (TModel)CreateModel(requestedType, ctx, data);
         }
 
+        /// <summary>
+        /// Creates a default model for the object <value>obj</value>.
+        /// </summary>
+        /// <returns>the configured model</returns>
         public PresentableModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
         {
-            ModelDescriptor desc = DataMocks.LookupDefaultModelDescriptor(obj);
-            return CreateModel(desc, ctx, new object[] { obj }.Concat(data).ToArray());
+            Type t = obj.GetObjectClass(AppContext.FrozenContext).GetDefaultModelRef().AsType(true); ;
+            return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
 
-        public PresentableModel CreateModel(ModelDescriptor desc, IKistlContext ctx, params object[] data)
+        /// <summary>
+        /// deprecated helper
+        /// </summary>
+        [Browsable(false)]
+        public PresentableModel CreateModel(Kistl.App.Base.TypeRef modelType, IKistlContext ctx, object[] data)
         {
-            Type requestedType = desc.Presentation.AsType();
-            return CreateModel(requestedType, ctx, data);
+            return CreateModel(modelType.AsType(true), ctx, data);
         }
 
         public PresentableModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)

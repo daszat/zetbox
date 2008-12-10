@@ -8,9 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.Server.Generators.Extensions;
 using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.GeneratorsOld.SQLServer
@@ -211,7 +213,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                               current.property.PropertyName,
                               parentType.NameDataObject,
                               valueType.NameDataObject,
-                              collectionType.NameDataObject, 
+                              collectionType.NameDataObject,
                               Kistl.API.Helper.ImplementationSuffix,
                               wrapperType);
 
@@ -341,7 +343,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                               current.property.PropertyName,
                               parentType.NameDataObject,
                               valueType,
-                              collectionType.NameDataObject, 
+                              collectionType.NameDataObject,
                               Kistl.API.Helper.ImplementationSuffix,
                               wrapperType);
 
@@ -547,8 +549,8 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                             new CodeTypeReference(childType.NameDataObject + Kistl.API.Helper.ImplementationSuffix)),
                         current.property.PropertyName + "Wrapper");
                     current.code_property.GetStatements.AddExpression(@"if ({0}Wrapper == null) {0}Wrapper = new {5}<{1}, {2}, {3}{4}>(this, {0}{4});
-                return {0}Wrapper", 
-                                  current.property.PropertyName, 
+                return {0}Wrapper",
+                                  current.property.PropertyName,
                                   ownerType.NameDataObject,
                                   parentType.NameDataObject,
                                   childType.NameDataObject,
@@ -638,7 +640,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 CurrentObjectClass ormProperty = (CurrentObjectClass)current.Clone();
                 ormProperty.code_property = current.code_class.CreateProperty(current.property.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix, current.property.PropertyName + Kistl.API.Helper.ImplementationSuffix);
                 ormProperty.code_property.AddAttribute("EdmComplexPropertyAttribute");
-                
+
                 ormProperty.code_property.GetStatements.AddExpression(@"if (_{0} == null) return new {1}{2}__NULL();
                 return ({1}{2}){0}", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);
                 ormProperty.code_property.SetStatements.AddExpression("if(!(value is {1}{2}__NULL)) {0} = value", current.property.PropertyName, current.property.GetPropertyTypeString(), Kistl.API.Helper.ImplementationSuffix);

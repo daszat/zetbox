@@ -81,7 +81,7 @@ namespace Kistl.Server.Generators
         private static void Generate_Interface_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {
             Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
-                @"Interface.ObjectClassTemplate",
+                @"Interface.ObjectClass.Template",
                 objClass.ClassName + ".Designer.cs",
                 Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
                 objClass);

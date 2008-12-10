@@ -101,12 +101,12 @@ namespace Kistl.Client.GUI.DB
     public class ModelDescriptor
     {
 
-        public ModelDescriptor(TypeRef presentationType)
+        public ModelDescriptor(Kistl.App.Base.TypeRef presentationType)
         {
             Presentation = presentationType;
         }
 
-        public TypeRef Presentation { get; private set; }
+        public Kistl.App.Base.TypeRef Presentation { get; private set; }
 
         public override string ToString()
         {
@@ -410,88 +410,79 @@ namespace Kistl.Client.GUI.DB
             }
         }
 
-        public static ModelDescriptor LookupDefaultModelDescriptor(IDataObject obj)
+        public static Kistl.App.Base.TypeRef LookupDefaultModelDescriptor(IDataObject obj)
         {
-            if (obj is Module)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(ModuleModel)));
-            }
-            else if (obj is MethodInvocation)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(MethodInvocationModel)));
-            }
-            else if (obj is ObjectClass)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(ObjectClassModel)));
-            }
-            else if (obj is DataType)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(DataTypeModel)));
-            }
-            else
-            {
-                return new ModelDescriptor(new TypeRef(typeof(DataObjectModel)));
-            }
-
-            throw new NotImplementedException(String.Format("==>> No model for object: '{0}' of Type '{1}'", obj, obj.GetType()));
+            return obj.GetObjectClass(FrozenContext.Single).GetDefaultModelRef();
         }
 
-        public static ModelDescriptor LookupDefaultPropertyModelDescriptor(BaseProperty p)
+        public static Kistl.App.Base.TypeRef LookupDefaultPropertyModelDescriptor(BaseProperty p)
         {
-            // TODO: check model-override from instance/ObjectClass
-            var prop = p as Property;
+            var ctx = Kistl.API.Client.KistlContext.GetContext();
+            try
+            {
+                // TODO: check model-override from instance/ObjectClass
+                var prop = p as Property;
 
-            if (p is BoolProperty && !prop.IsList)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<Boolean>)));
-            }
-            else if (p is DateTimeProperty && !prop.IsList)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<DateTime>)));
-            }
-            else if (p is DoubleProperty && !prop.IsList)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<Double>)));
-            }
-            else if (p is IntProperty && !prop.IsList)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(NullableValuePropertyModel<int>)));
-            }
-            else if (p is StringProperty)
-            {
-                if (p.ID == 77) // MethodInvocation.MemberName
-                    return new ModelDescriptor(new TypeRef(typeof(ChooseReferencePropertyModel<string>)));
-                else if (prop.IsList)
-                    return new ModelDescriptor(new TypeRef(typeof(SimpleReferenceListPropertyModel<string>)));
-                else
-                    return new ModelDescriptor(new TypeRef(typeof(ReferencePropertyModel<string>)));
-            }
-            else if (p is ObjectReferenceProperty)
-            {
-                if (prop.IsList)
-                    return new ModelDescriptor(new TypeRef(typeof(ObjectListModel)));
-                else
-                    return new ModelDescriptor(new TypeRef(typeof(ObjectReferenceModel)));
-            }
-            else if (p is BackReferenceProperty)
-            {
-                return new ModelDescriptor(new TypeRef(typeof(ObjectListModel)));
-            }
-            else if (p is EnumerationProperty)
-            {
-                var enumProp = p as EnumerationProperty;
-                return new ModelDescriptor(new TypeRef(
-                    typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition(),
-                    new TypeRef(enumProp.Enumeration.GetDataType())));
-            }
-            else
-            {
-                throw new NotImplementedException(String.Format("==>> No model for property: '{0}' of Type '{1}'", p, p.GetType()));
-            }
+                if (p is BoolProperty && !prop.IsList)
+                {
+                    return (typeof(NullableValuePropertyModel<Boolean>).ToRef(ctx));
+                }
+                else if (p is DateTimeProperty && !prop.IsList)
+                {
+                    return (typeof(NullableValuePropertyModel<DateTime>).ToRef(ctx));
+                }
+                else if (p is DoubleProperty && !prop.IsList)
+                {
+                    return (typeof(NullableValuePropertyModel<Double>).ToRef(ctx));
+                }
+                else if (p is IntProperty && !prop.IsList)
+                {
+                    return (typeof(NullableValuePropertyModel<int>).ToRef(ctx));
+                }
+                else if (p is StringProperty)
+                {
+                    if (p.ID == 77) // MethodInvocation.MemberName
+                        return (typeof(ChooseReferencePropertyModel<string>).ToRef(ctx));
+                    else if (prop.IsList)
+                        return (typeof(SimpleReferenceListPropertyModel<string>).ToRef(ctx));
+                    else
+                        return (typeof(ReferencePropertyModel<string>).ToRef(ctx));
+                }
+                else if (p is ObjectReferenceProperty)
+                {
+                    if (prop.IsList)
+                        return (typeof(ObjectListModel).ToRef(ctx));
+                    else
+                        return (typeof(ObjectReferenceModel).ToRef(ctx));
+                }
+                else if (p is BackReferenceProperty)
+                {
+                    return (typeof(ObjectListModel).ToRef(ctx));
+                }
+                else if (p is EnumerationProperty)
+                {
+                    var enumProp = p as EnumerationProperty;
+                    var enumRef = enumProp.Enumeration.GetDataType().ToRef(ctx);
+                    var genericRef = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition().ToRef(ctx);
+                    var concreteRef = ctx.GetQuery<Kistl.App.Base.TypeRef>()
+                        .SingleOrDefault(r => r.FullName == genericRef.FullName
+                            && r.Assembly == genericRef.Assembly
+                            && r.GenericArguments.Count == 1
+                            && r.GenericArguments[0] == enumRef);
 
+                    return (concreteRef);
+                }
+                else
+                {
+                    throw new NotImplementedException(String.Format("==>> No model for property: '{0}' of Type '{1}'", p, p.GetType()));
+                }
+            }
+            finally
+            {
+                ctx.SubmitChanges();
+            }
         }
 
     }
-
 
 }

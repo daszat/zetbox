@@ -42,7 +42,7 @@ namespace Kistl.Client.Presentables
                 _memberNameModel = (ChooseReferencePropertyModel<string>)Factory.CreateModel(
                     DataMocks.LookupDefaultPropertyModelDescriptor(_memberNameProperty),
                     DataContext,
-                    Object, _memberNameProperty);
+                    new object[] { Object, _memberNameProperty });
 
             var possibleValues = _invocation
                 .Implementor.AsType(true)

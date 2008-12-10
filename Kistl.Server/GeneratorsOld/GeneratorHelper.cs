@@ -668,45 +668,6 @@ namespace Kistl.Server.GeneratorsOld.Helper
         }
         #endregion
 
-        #region CheckPropertyType
-        public static bool IsListProperty(this BaseProperty prop)
-        {
-            return prop is Property && ((Property)prop).IsList;
-        }
-        public static bool IsValueTypePropertySingle(this BaseProperty prop)
-        {
-            return prop is ValueTypeProperty && !((Property)prop).IsList;
-        }
-        public static bool IsValueTypePropertyList(this BaseProperty prop)
-        {
-            return prop is ValueTypeProperty && ((Property)prop).IsList;
-        }
-        public static bool IsEnumerationPropertySingle(this BaseProperty prop)
-        {
-            return prop is EnumerationProperty && !((Property)prop).IsList;
-        }
-        public static bool IsEnumerationPropertyPropertyList(this BaseProperty prop)
-        {
-            return prop is EnumerationProperty && ((Property)prop).IsList;
-        }
-        public static bool IsObjectReferencePropertySingle(this BaseProperty prop)
-        {
-            return prop is ObjectReferenceProperty && !((Property)prop).IsList;
-        }
-        public static bool IsObjectReferencePropertyList(this BaseProperty prop)
-        {
-            return prop is ObjectReferenceProperty && ((Property)prop).IsList;
-        }
-        public static bool IsStructPropertySingle(this BaseProperty prop)
-        {
-            return prop is StructProperty && !((Property)prop).IsList;
-        }
-        public static bool IsStructPropertyPropertyList(this BaseProperty prop)
-        {
-            return prop is StructProperty && ((Property)prop).IsList;
-        }
-        #endregion
-
         #region CheckMethod
         public static bool IsDefaultMethod(this Method method)
         {

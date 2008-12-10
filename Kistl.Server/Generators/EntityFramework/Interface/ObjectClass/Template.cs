@@ -6,13 +6,14 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
+using Kistl.Server.Generators.Extensions;
 
 
-namespace Kistl.Server.Generators.EntityFramework.Interface
+namespace Kistl.Server.Generators.EntityFramework.Interface.ObjectClass
 {
-    public class ObjectClassTemplate : Kistl.Server.Generators.Templates.Interface.ObjectClassTemplate
+    public class Template : Kistl.Server.Generators.Templates.Interface.ObjectClass.Template
     {
-        public ObjectClassTemplate(Arebis.CodeGeneration.IGenerationHost _host, ObjectClass objClass)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.App.Base.ObjectClass objClass)
             : base(_host, objClass)
         {
             System.Diagnostics.Debugger.Launch();

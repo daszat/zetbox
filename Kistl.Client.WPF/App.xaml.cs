@@ -81,41 +81,60 @@ namespace Kistl.Client.WPF
                 var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
                 AppContext.Factory.ShowModel(debugger, true);
 
-                //FixNotNullableConstraints();
-
-                TranslateMethodInvocations();
+                FixupDatabase();
 
                 var initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
                 AppContext.Factory.ShowModel(initialWorkspace, true);
             }
         }
 
-        private void TranslateMethodInvocations()
+        private void FixupDatabase()
         {
-            //using (TraceClient.TraceHelper.TraceMethodCall("Translating to MethodInvocation.Implementor"))
-            //{
-            //    using (IKistlContext ctx = KistlContext.GetContext())
-            //    {
-            //        foreach (var invocation in ctx.GetQuery<MethodInvocation>())
-            //        {
-            //            var implementor = ctx.GetQuery<TypeRef>()
-            //                .Where(tr => tr.Assembly.ID == invocation.Assembly.ID && tr.FullName == invocation.FullTypeName)
-            //                .SingleOrDefault();
+            //FixNotNullableConstraints();
+            CreateTypeRefs();
+        }
 
-            //            if (implementor == null)
-            //            {
-            //                implementor = ctx.Create<TypeRef>();
+        private void CreateTypeRefs()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("Creating TypeRefs for GUI"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    object muh;
+                    muh = (typeof(NullableValuePropertyModel<Boolean>).ToRef(ctx));
+                    muh = (typeof(NullableValuePropertyModel<DateTime>).ToRef(ctx));
+                    muh = (typeof(NullableValuePropertyModel<Double>).ToRef(ctx));
+                    muh = (typeof(NullableValuePropertyModel<int>).ToRef(ctx));
+                    muh = (typeof(ChooseReferencePropertyModel<string>).ToRef(ctx));
+                    muh = (typeof(SimpleReferenceListPropertyModel<string>).ToRef(ctx));
+                    muh = (typeof(ReferencePropertyModel<string>).ToRef(ctx));
+                    muh = (typeof(ObjectListModel).ToRef(ctx));
+                    muh = (typeof(ObjectReferenceModel).ToRef(ctx));
+                    muh = (typeof(ObjectListModel).ToRef(ctx));
 
-            //                implementor.Assembly = invocation.Assembly;
-            //                implementor.FullName = invocation.FullTypeName;
-            //            }
+                    foreach (Enumeration e in ctx.GetQuery<Enumeration>())
+                    {
+                        var enumRef = e.GetDataType().ToRef(ctx);
+                        var genericRef = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition().ToRef(ctx);
+                        var concreteRef = ctx.GetQuery<Kistl.App.Base.TypeRef>()
+                            .SingleOrDefault(r => r.FullName == genericRef.FullName
+                                && r.Assembly.ID == genericRef.Assembly.ID
+                                && r.GenericArguments.Count == 1
+                                && r.GenericArguments[0].ID == enumRef.ID);
 
-            //            invocation.Implementor = implementor;
-            //        }
+                        if (concreteRef == null)
+                        {
+                            concreteRef = ctx.Create<TypeRef>();
+                            concreteRef.FullName = genericRef.FullName;
+                            concreteRef.Assembly = genericRef.Assembly;
+                            concreteRef.GenericArguments.Add(enumRef);
+                        }
+                    }
 
-            //        ctx.SubmitChanges();
-            //    }
-            //}
+                    ctx.SubmitChanges();
+                }
+            }
+
         }
 
         private static void FixNotNullableConstraints()

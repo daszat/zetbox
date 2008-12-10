@@ -43,6 +43,8 @@ namespace Arebis.CodeGenerator.Templated
         {
             this.templatefile = filename;
             this.host = host;
+            if (!this.TemplateFile.StartsWith(Settings["templatepath"]))
+                throw new ArgumentOutOfRangeException("filename", "doesn't start with templatepath");
         }
 		
 		public void Invoke(object[] parameters)
@@ -115,15 +117,7 @@ namespace Arebis.CodeGenerator.Templated
             }
             else
             {
-                Assembly a = templatefile.GetResourceAssembly();
-                foreach (string r in a.GetManifestResourceNames())
-                {
-                    if (r.EndsWith(relativeName))
-                    {
-                        return string.Format("res://{0}/{1}", a.FullName, r);
-                    }
-                }
-                throw new ResourceNotFoundException(relativeName, a);
+                return string.Format("{0}.{1}", Settings["templatepath"], relativeName);
             }
 		}
 
