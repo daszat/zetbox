@@ -38,10 +38,10 @@ namespace Kistl.Server
 
                 try
                 {
-                    if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate2"))))
+                    if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate-old"))))
                     {
                         actiondone = true;
-                        server.GenerateCode2();
+                        server.GenerateOldCode();
                     }
                     else if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate"))))
                     {

@@ -110,12 +110,12 @@ namespace Kistl.Server
             Trace.TraceWarning("UnknownMessageReceived: {0}", e.Message.ToString());
         }
 
-        internal void GenerateCode()
+        internal void GenerateOldCode()
         {
             GeneratorsOld.Generator.GenerateCode();
         }
 
-        internal void GenerateCode2()
+        internal void GenerateCode()
         {
             Generators.Generator.GenerateCode();
         }
