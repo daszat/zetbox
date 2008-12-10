@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Server.Generators2
+namespace Kistl.Server.Generators
 {
     public interface IMappingGenerator
     {

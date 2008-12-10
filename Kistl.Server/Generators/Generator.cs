@@ -9,7 +9,7 @@ using Kistl.App.Base;
 using Kistl.API.Server;
 using Arebis.CodeGeneration;
 
-namespace Kistl.Server.Generators2
+namespace Kistl.Server.Generators
 {
     public static class Generator
     {

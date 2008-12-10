@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -72,24 +72,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomActionsManagerServer.cs" />
-    <Compile Include="Generators2\DataObjectGenerator.cs" />
-    <Compile Include="Generators2\Generator.cs" />
-    <EmbeddedResource Include="Generators2\Generator\Interface\ObjectClassTemplate.cs" />
-    <Compile Include="Generators2\MappingGenerator.cs" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClassTemplate.cs" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyTemplate.cs" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyListTemplate.cs" />
-    <Compile Include="Generators\DatabaseGenerator.cs" />
-    <Compile Include="Generators\Exceptions.cs" />
-    <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\GeneratorHelper.cs" />
-    <Compile Include="Generators\MappingGenerator.cs" />
-    <Compile Include="Generators\DataObjectGenerator.cs" />
-    <Compile Include="Generators\SQLServer\SQLServerDatabaseGenerator.cs" />
-    <Compile Include="Generators\SQLServer\SQLServerDataObjectGenerator.cs" />
-    <Compile Include="Generators\SQLServer\SQLServerEntityFrameworkModelGenerator.cs" />
-    <Compile Include="Generators\SQLServer\SQLServerHelper.cs" />
-    <Compile Include="Generators\TypeMoniker.cs" />
+    <Compile Include="GeneratorsOld\DatabaseGenerator.cs" />
+    <Compile Include="GeneratorsOld\DataObjectGenerator.cs" />
+    <Compile Include="GeneratorsOld\Exceptions.cs" />
+    <Compile Include="GeneratorsOld\Generator.cs" />
+    <Compile Include="GeneratorsOld\GeneratorHelper.cs" />
+    <Compile Include="GeneratorsOld\MappingGenerator.cs" />
+    <Compile Include="GeneratorsOld\SQLServer\SQLServerDatabaseGenerator.cs" />
+    <Compile Include="GeneratorsOld\SQLServer\SQLServerDataObjectGenerator.cs" />
+    <Compile Include="GeneratorsOld\SQLServer\SQLServerEntityFrameworkModelGenerator.cs" />
+    <Compile Include="GeneratorsOld\SQLServer\SQLServerHelper.cs" />
+    <Compile Include="GeneratorsOld\TypeMoniker.cs" />
+    <Compile Include="Generators\DataObjectGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generators\Generator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Generators\Generator\Interface\ObjectClassTemplate.cs" />
+    <Compile Include="Generators\MappingGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClassTemplate.cs" />
+    <EmbeddedResource Include="Generators\Templates\Interface\SimplePropertyListTemplate.cs" />
+    <EmbeddedResource Include="Generators\Templates\Interface\SimplePropertyTemplate.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="KistlServiceStreams.cs" />
     <Compile Include="Program.cs" />
@@ -172,9 +178,9 @@
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
     <None Include="Database\Database.35.sql" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyListTemplate.cst" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\SimplePropertyTemplate.cst" />
-    <EmbeddedResource Include="Generators2\Templates\Interface\ObjectClassTemplate.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClassTemplate.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\SimplePropertyListTemplate.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\SimplePropertyTemplate.cst" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

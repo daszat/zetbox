@@ -6,10 +6,9 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
-using Kistl.Server.Generators.Helper;
 
 
-namespace Kistl.Server.Generators2.Templates.Interface
+namespace Kistl.Server.Generators.Templates.Interface
 {
     public partial class SimplePropertyListTemplate
     {

@@ -117,7 +117,7 @@ namespace Kistl.Server
 
         internal void GenerateCode2()
         {
-            Generators2.Generator.GenerateCode();
+            Generators.Generator.GenerateCode();
         }
 
         internal void GenerateDatabase()

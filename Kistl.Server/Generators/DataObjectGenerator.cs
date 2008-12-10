@@ -15,7 +15,7 @@ using Kistl.Server;
 using System.Globalization;
 using Kistl.Server.GeneratorsOld.Helper;
 
-namespace Kistl.Server.Generators2
+namespace Kistl.Server.Generators
 {
     public class BaseDataObjectGenerator
     {
