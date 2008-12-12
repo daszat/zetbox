@@ -1,0 +1,15 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Interface.DataTypes.Method"
+	CodeFile="Interface.DataTypes.Method.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Interface.DataTypes.Method" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="m" Type="Kistl.App.Base.Method" %>
+		<%= GetReturnType() %> <%= m.MethodName %>(<%= GetParameterDefinitions() %>);   

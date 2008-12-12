@@ -1,0 +1,17 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Interface.DataTypes.ObjectReferencePropertyTemplate"
+	CodeFile="Interface.DataTypes.ObjectReferencePropertyTemplate.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Interface.DataTypes.ObjectReferencePropertyTemplate" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="prop" Type="Property" %>
+        /// <summary>
+        /// <%= prop.Description %>
+        /// </summary>
+		<%= prop.GetPropertyTypeString() %> <%= prop.PropertyName %> { get; set; }

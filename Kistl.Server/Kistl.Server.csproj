@@ -88,7 +88,7 @@
     <Compile Include="Generators\DataObjectGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="Generators\EntityFramework\Interface\ObjectClasses\Template.cs" />
+    <EmbeddedResource Include="Generators\EntityFramework\Interface\DataTypes\Template.cs" />
     <Compile Include="Generators\Generator.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -96,12 +96,11 @@
       <SubType>Code</SubType>
     </Compile>
     <EmbeddedResource Include="Generators\Templates\Interface\Enumerations\Template.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\Structs\Template.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\Method.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\ObjectReferencePropertyTemplate.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\SimplePropertyListTemplate.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\SimplePropertyTemplate.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\Template.cs" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Method.cs" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\ObjectReferencePropertyTemplate.cs" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Template.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="KistlServiceStreams.cs" />
     <Compile Include="Program.cs" />
@@ -184,12 +183,11 @@
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
     <None Include="Database\Database.35.sql" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\Method.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\ObjectReferencePropertyTemplate.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\SimplePropertyListTemplate.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\SimplePropertyTemplate.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\ObjectClasses\Template.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\Structs\Template.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\ObjectReferencePropertyTemplate.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Method.cst" />
+    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Template.cst" />
     <EmbeddedResource Include="Generators\Templates\Interface\Enumerations\Template.cst" />
   </ItemGroup>
   <ItemGroup>

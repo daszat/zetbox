@@ -50,6 +50,7 @@ namespace Kistl.Server.Generators
             foreach (Interface i in interfaceList)
             {
                 Console.Write(".");
+                Generate_Interface_Interfaces(ctx, i);
             }
             Console.WriteLine();
 
@@ -79,13 +80,12 @@ namespace Kistl.Server.Generators
 
         }
 
-
         #endregion
 
         private static void Generate_Interface_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {
             Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
-                @"Interface.ObjectClasses.Template",
+                @"Interface.DataTypes.Template",
                 objClass.ClassName + ".Designer.cs",
                 Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
                 objClass);
@@ -105,12 +105,23 @@ namespace Kistl.Server.Generators
         private void Generate_Interface_Structs(IKistlContext ctx, Struct s)
         {
             Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
-                            @"Interface.Structs.Template",
+                            @"Interface.DataTypes.Template",
                             s.ClassName + ".Designer.cs",
                             Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
                             s);
             gen.ExecuteTemplate();
         }
+
+        private void Generate_Interface_Interfaces(IKistlContext ctx, Interface i)
+        {
+            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+                            @"Interface.DataTypes.Template",
+                            i.ClassName + ".Designer.cs",
+                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
+                            i);
+            gen.ExecuteTemplate();
+        }
+
     }
 
 

@@ -48,29 +48,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Kistl.Server\Generators\EntityFramework\Interface\ObjectClasses\Template.cs">
-      <Link>EF\ObjectClasses\Template.cs</Link>
+    <Compile Include="..\Kistl.Server\Generators\EntityFramework\Interface\DataTypes\Template.cs">
+      <Link>EF\Interface\DataTypes\Template.cs</Link>
     </Compile>
-    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\SimplePropertyListTemplate.cs">
-      <Link>ObjectClasses\SimplePropertyListTemplate.cs</Link>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs">
+      <Link>Interface\DataTypes\SimplePropertyListTemplate.cs</Link>
     </Compile>
-    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\SimplePropertyTemplate.cs">
-      <Link>ObjectClasses\SimplePropertyTemplate.cs</Link>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs">
+      <Link>Interface\DataTypes\SimplePropertyTemplate.cs</Link>
     </Compile>
-    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\Template.cs">
-      <Link>ObjectClasses\Template.cs</Link>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cs">
+      <Link>Interface\DataTypes\Template.cs</Link>
     </Compile>
-    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\ObjectReferencePropertyTemplate.cs">
-      <Link>ObjectClasses\ObjectReferencePropertyTemplate.cs</Link>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\ObjectReferencePropertyTemplate.cs">
+      <Link>Interface\DataTypes\ObjectReferencePropertyTemplate.cs</Link>
     </Compile>
     <Compile Include="..\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cs">
-      <Link>Enumerations\Template.cs</Link>
+      <Link>Interface\Enumerations\Template.cs</Link>
     </Compile>
-    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\Structs\Template.cs">
-      <Link>Structs\Template.cs</Link>
-    </Compile>
-    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\Method.cs">
-      <Link>ObjectClasses\Method.cs</Link>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cs">
+      <Link>Interface\DataTypes\Method.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

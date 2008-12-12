@@ -1,0 +1,53 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Interface.DataTypes.Template"
+	CodeFile="Interface.DataTypes.Template.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Interface.DataTypes.Template" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="dataType" Type="Kistl.App.Base.DataType" %>
+namespace <%= dataType.Module.Namespace %>
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
+    
+    using Kistl.API;
+    
+    
+    /// <summary>
+    /// <%= dataType.Description %>
+    /// </summary>
+    public interface <%= dataType.ClassName %> <%= GetBaseClass() %> 
+    {	<% foreach(Property p in dataType.Properties)
+		{ %>
+		
+		
+		/// <summary>
+        /// <%= p.Description %>
+        /// </summary> <%
+			ApplyPropertyTemplate(p);
+		}
+		
+		foreach(Method m in MethodsToGenerate())
+		{ %>
+		
+		
+		/// <summary>
+        /// <%= m.Description %>
+        /// </summary> <%
+			ApplyMethodTemplate(m);
+		}
+		%>	
+	}
+}
