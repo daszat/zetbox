@@ -9,10 +9,15 @@ using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
 
-namespace Kistl.Server.Generators.Templates.Interface.ObjectClass
+namespace Kistl.Server.Generators.Templates.Interface.ObjectClasses
 {
     public partial class SimplePropertyListTemplate
     {
+
+#if INTELLISENSE
+        protected Property prop;
+#endif
+
         protected virtual string GetPropertyTypeString()
         {
             if (prop.IsIndexed)

@@ -9,19 +9,13 @@ using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
 
-namespace Kistl.Server.Generators.EntityFramework.Interface.ObjectClass
+namespace Kistl.Server.Generators.EntityFramework.Interface.ObjectClasses
 {
-    public class Template : Kistl.Server.Generators.Templates.Interface.ObjectClass.Template
+    public class Template : Kistl.Server.Generators.Templates.Interface.ObjectClasses.Template
     {
         public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.App.Base.ObjectClass objClass)
             : base(_host, objClass)
         {
-            System.Diagnostics.Debugger.Launch();
-        }
-
-        protected override string GetBaseClass()
-        {
-            return base.GetBaseClass();
         }
     }
 }

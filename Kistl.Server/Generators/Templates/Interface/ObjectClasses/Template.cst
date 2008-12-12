@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Interface.ObjectClass.Template"
-	CodeFile="Interface.ObjectClass.Template.cs" 
-	ClassName="Kistl.Server.Generators.Templates.Interface.ObjectClass.Template" 
+	Name="Interface.ObjectClasses.Template"
+	CodeFile="Interface.ObjectClasses.Template.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Interface.ObjectClasses.Template" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -28,11 +28,25 @@ namespace <%= objClass.Module.Namespace %>
     /// <%= objClass.Description %>
     /// </summary>
     public interface <%= objClass.ClassName %> <%= GetBaseClass() %> 
-    {
-		<% foreach(Property p in objClass.Properties) 
-		{
-			ApplyPropertyTemplate(p);
-		}%>
+    {	<% foreach(Property p in objClass.Properties)
+		{ %>
 		
+		
+		/// <summary>
+        /// <%= p.Description %>
+        /// </summary> <%
+			ApplyPropertyTemplate(p);
+		}
+		
+		foreach(Method m in MethodsToGenerate())
+		{ %>
+		
+		
+		/// <summary>
+        /// <%= m.Description %>
+        /// </summary> <%
+			ApplyMethodTemplate(m);
+		}
+		%>	
 	}
 }

@@ -668,24 +668,6 @@ namespace Kistl.Server.GeneratorsOld.Helper
         }
         #endregion
 
-        #region CheckMethod
-        public static bool IsDefaultMethod(this Method method)
-        {
-            if (method.Module.ModuleName == "KistlBase")
-            {
-                if (method.MethodName == "ToString"
-                    || method.MethodName == "PreSave"
-                    || method.MethodName == "PostSave"
-                )
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        #endregion
-
         #region NeedsPositionColumn
         public static bool NeedsPositionColumn(this Property p)
         {

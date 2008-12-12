@@ -14,7 +14,10 @@
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
+    <!-- 
+      temporary disabled for testing the new generator:
     <string>C:\temp\KistlCodeGen\bin</string>
+    -->
     <string>P:\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
     <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
     <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>

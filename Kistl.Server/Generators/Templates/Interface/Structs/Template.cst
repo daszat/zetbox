@@ -1,0 +1,44 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Interface.Structs.Template"
+	CodeFile="Interface.Structs.Template.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Interface.Structs.Template" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="s" Type="Struct" %>
+namespace <%= s.Module.Namespace %>
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
+    
+    using Kistl.API;
+    
+    
+    /// <summary>
+    /// <%= s.Description %>
+    /// </summary>
+    public interface <%= s.ClassName %> : IStruct
+    {
+		<% foreach(Property p in s.Properties)
+		{ %>
+		/// <summary>
+        /// <%= p.Description %>
+        /// </summary>
+		<%
+			ApplyPropertyTemplate(p);
+		}
+		%>
+		
+	}
+}

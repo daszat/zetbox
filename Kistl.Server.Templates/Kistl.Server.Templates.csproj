@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kistl.Server.Templates</RootNamespace>
+    <AssemblyName>Kistl.Server.Templates</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;INTELLISENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Kistl.Server\Generators\EntityFramework\Interface\ObjectClasses\Template.cs">
+      <Link>EF\ObjectClasses\Template.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\SimplePropertyListTemplate.cs">
+      <Link>ObjectClasses\SimplePropertyListTemplate.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\SimplePropertyTemplate.cs">
+      <Link>ObjectClasses\SimplePropertyTemplate.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\Template.cs">
+      <Link>ObjectClasses\Template.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\ObjectReferencePropertyTemplate.cs">
+      <Link>ObjectClasses\ObjectReferencePropertyTemplate.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cs">
+      <Link>Enumerations\Template.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\Structs\Template.cs">
+      <Link>Structs\Template.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\ObjectClasses\Method.cs">
+      <Link>ObjectClasses\Method.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arebis.CodeGenerator\Arebis.CodeGenerator.csproj">
+      <Project>{D2A451FB-809C-4F02-AA7D-5C0589495BE7}</Project>
+      <Name>Arebis.CodeGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
+      <Name>Kistl.API.Server</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
+      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
+      <Name>Kistl.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -58,6 +58,7 @@ namespace Kistl.Server.Generators
             foreach (Enumeration e in enumList)
             {
                 Console.Write(".");
+                Generate_Interface_Enumerations(ctx, e);
             }
             Console.WriteLine();
 
@@ -66,6 +67,7 @@ namespace Kistl.Server.Generators
             foreach (Struct s in structList)
             {
                 Console.Write(".");
+                Generate_Interface_Structs(ctx, s);
             }
             Console.WriteLine();
 
@@ -76,15 +78,37 @@ namespace Kistl.Server.Generators
             Console.WriteLine("  Assemblyinfo");
 
         }
+
+
         #endregion
 
         private static void Generate_Interface_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {
             Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
-                @"Interface.ObjectClass.Template",
+                @"Interface.ObjectClasses.Template",
                 objClass.ClassName + ".Designer.cs",
                 Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
                 objClass);
+            gen.ExecuteTemplate();
+        }
+
+        private void Generate_Interface_Enumerations(IKistlContext ctx, Enumeration e)
+        {
+            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+                            @"Interface.Enumerations.Template",
+                            e.ClassName + ".Designer.cs",
+                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
+                            e);
+            gen.ExecuteTemplate();
+        }
+
+        private void Generate_Interface_Structs(IKistlContext ctx, Struct s)
+        {
+            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+                            @"Interface.Structs.Template",
+                            s.ClassName + ".Designer.cs",
+                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistObjectsName(),
+                            s);
             gen.ExecuteTemplate();
         }
     }

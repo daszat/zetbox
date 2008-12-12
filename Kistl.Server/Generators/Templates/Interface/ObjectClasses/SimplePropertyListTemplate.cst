@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Interface.ObjectClass.SimplePropertyTemplate"
-	CodeFile="Interface.ObjectClass.SimplePropertyTemplate.cs" 
-	ClassName="Kistl.Server.Generators.Templates.Interface.ObjectClass.SimplePropertyTemplate" 
+	Name="Interface.ObjectClasses.SimplePropertyListTemplate"
+	CodeFile="Interface.ObjectClasses.SimplePropertyListTemplate.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Interface.ObjectClasses.SimplePropertyListTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -11,4 +11,4 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 
 <%@ Parameter Name="prop" Type="Property" %>
-		<%= prop.GetPropertyTypeString() %> <%= prop.PropertyName %> {get; set;}
+        <%= GetPropertyTypeString() %> <%= GetPropertyName() %> { get; }
