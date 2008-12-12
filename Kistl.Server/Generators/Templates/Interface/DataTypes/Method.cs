@@ -23,7 +23,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 
         protected virtual string GetReturnType()
         {
-            var ret = m.GetReturnParameter();
+            // TODO: repair after implementing a common (Client&Server) MethodInvocation assembly
+            var ret = m.Parameter.SingleOrDefault(param => param.IsReturnParameter);
             if (ret == null)
             {
                 return "void";

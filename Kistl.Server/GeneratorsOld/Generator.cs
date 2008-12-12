@@ -72,8 +72,8 @@ namespace Kistl.Server.GeneratorsOld
 
         internal static void Delete(TaskEnum type)
         {
-            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll");
-            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".pdb");
+            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistlObjectsName() + ".dll");
+            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistlObjectsName() + ".pdb");
         }
 
         internal static void Compile(TaskEnum type)
@@ -83,7 +83,7 @@ namespace Kistl.Server.GeneratorsOld
             Microsoft.CSharp.CSharpCodeProvider p = new Microsoft.CSharp.CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v3.5" } });
             CompilerParameters options = new CompilerParameters();
 
-            options.OutputAssembly = Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistObjectsName() + ".dll";
+            options.OutputAssembly = Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistlObjectsName() + ".dll";
             options.IncludeDebugInformation = true; // false in Production!!!
             options.GenerateExecutable = false;
             options.TreatWarningsAsErrors = false; // true in Production!!!
@@ -116,7 +116,7 @@ namespace Kistl.Server.GeneratorsOld
             }
 
             CompilerResults result = p.CompileAssemblyFromFile(options,
-                System.IO.Directory.GetFiles(Kistl.Server.Helper.CodeGenPath + @"\" + type.GetKistObjectsName() + @"\", "*.cs"));
+                System.IO.Directory.GetFiles(Kistl.Server.Helper.CodeGenPath + @"\" + type.GetKistlObjectsName() + @"\", "*.cs"));
 
             using (System.IO.StreamWriter file = System.IO.File.CreateText(Kistl.Server.Helper.CodeGenPath + @"\errors.txt"))
             {

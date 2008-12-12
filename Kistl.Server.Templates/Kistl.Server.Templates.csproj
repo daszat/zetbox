@@ -51,6 +51,9 @@
     <Compile Include="..\Kistl.Server\Generators\EntityFramework\Interface\DataTypes\Template.cs">
       <Link>EF\Interface\DataTypes\Template.cs</Link>
     </Compile>
+    <Compile Include="..\Kistl.Server\Generators\EntityFramework\Server\ObjectClasses\Template.cs">
+      <Link>EF\Server\ObjectClasses\Template.cs</Link>
+    </Compile>
     <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs">
       <Link>Interface\DataTypes\SimplePropertyListTemplate.cs</Link>
     </Compile>
@@ -60,14 +63,17 @@
     <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cs">
       <Link>Interface\DataTypes\Template.cs</Link>
     </Compile>
-    <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\ObjectReferencePropertyTemplate.cs">
-      <Link>Interface\DataTypes\ObjectReferencePropertyTemplate.cs</Link>
-    </Compile>
     <Compile Include="..\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cs">
       <Link>Interface\Enumerations\Template.cs</Link>
     </Compile>
     <Compile Include="..\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cs">
       <Link>Interface\DataTypes\Method.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cs">
+      <Link>Server\ObjectClasses\NotifyingValueProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Kistl.Server\Generators\Templates\Server\ObjectClasses\Template.cs">
+      <Link>Server\ObjectClasses\Template.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

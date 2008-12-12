@@ -28,7 +28,7 @@ namespace Kistl.Server.GeneratorsOld.Helper
             return propName.CalcForeignKeyColumnName(parentPropName) + "_pos";
         }
 
-        public static string GetKistObjectsName(this TaskEnum task)
+        public static string GetKistlObjectsName(this TaskEnum task)
         {
             if (task == TaskEnum.Interface)
             {

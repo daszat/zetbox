@@ -89,6 +89,8 @@
       <SubType>Code</SubType>
     </Compile>
     <EmbeddedResource Include="Generators\EntityFramework\Interface\DataTypes\Template.cs" />
+    <EmbeddedResource Include="Generators\EntityFramework\Server\ObjectClasses\Template.cs" />
+    <EmbeddedResource Include="Generators\EntityFramework\Server\ObjectClasses\IdProperty.cs" />
     <Compile Include="Generators\Generator.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,10 +99,11 @@
     </Compile>
     <EmbeddedResource Include="Generators\Templates\Interface\Enumerations\Template.cs" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Method.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\ObjectReferencePropertyTemplate.cs" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Template.cs" />
+    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\Template.cs" />
+    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="KistlServiceStreams.cs" />
     <Compile Include="Program.cs" />
@@ -183,9 +186,11 @@
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
     <None Include="Database\Database.35.sql" />
+    <EmbeddedResource Include="Generators\EntityFramework\Server\ObjectClasses\IdProperty.cst" />
+    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cst" />
+    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\Template.cst" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\ObjectReferencePropertyTemplate.cst" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Method.cst" />
     <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Template.cst" />
     <EmbeddedResource Include="Generators\Templates\Interface\Enumerations\Template.cst" />

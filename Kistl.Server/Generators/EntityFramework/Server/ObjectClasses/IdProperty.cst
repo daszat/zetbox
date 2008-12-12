@@ -1,0 +1,34 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Server.ObjectClasses.IdProperty"
+	CodeFile="Server.ObjectClasses.IdProperty.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Server.ObjectClasses.IdProperty" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="type" Type="Type" %>
+<%@ Parameter Name="name" Type="String" %>
+<% var backingName = MungeNameToBacking(name); %>
+        <% ApplyAttributeTemplate(); %>
+        public <%= type.FullName %> <%= name %>
+        {
+            get
+            {
+                return <%= backingName %>;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (<%= backingName %> != value)
+                {
+                    NotifyPropertyChanging("<%= name %>"); 
+                    <%= backingName %> = value;
+                    NotifyPropertyChanged("<%= name %>");;
+                }
+            }
+        }
+        private <%= type.FullName %> <%= backingName %>;

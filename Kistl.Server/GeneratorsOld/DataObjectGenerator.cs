@@ -246,7 +246,7 @@ namespace Kistl.Server.GeneratorsOld
         #region GenerateAssemblyInfo
         protected virtual void GenerateAssemblyInfo(CodeCompileUnit code, TaskEnum task)
         {
-            code.AddAttribute(typeof(System.Reflection.AssemblyTitleAttribute), task.GetKistObjectsName());
+            code.AddAttribute(typeof(System.Reflection.AssemblyTitleAttribute), task.GetKistlObjectsName());
             code.AddAttribute(typeof(System.Reflection.AssemblyCompanyAttribute), "dasz.at");
             code.AddAttribute(typeof(System.Reflection.AssemblyProductAttribute), "Kistl");
             code.AddAttribute(typeof(System.Reflection.AssemblyCopyrightAttribute), "Copyright © dasz.at 2008");
@@ -263,7 +263,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateAssemblyInfo(code, task);
 
             // Generate the code & save
-            SaveFile(code, string.Format(@"{0}\AssemblyInfo.cs", task.GetKistObjectsName()));
+            SaveFile(code, string.Format(@"{0}\AssemblyInfo.cs", task.GetKistlObjectsName()));
         }
         #endregion
 
@@ -555,12 +555,12 @@ namespace Kistl.Server.GeneratorsOld
             foreach (TaskEnum task in new TaskEnum[] { TaskEnum.Client, TaskEnum.Server })
             {
                 code = new CodeCompileUnit();
-                ns = CreateNamespace(code, task.GetKistObjectsName(), task);
+                ns = CreateNamespace(code, task.GetKistlObjectsName(), task);
 
                 ns.Types.Add(c);
 
                 // Generate the code & save
-                SaveFile(code, string.Format(@"{0}\FrozenContext.cs", task.GetKistObjectsName()));
+                SaveFile(code, string.Format(@"{0}\FrozenContext.cs", task.GetKistlObjectsName()));
             }
         }
         #endregion
@@ -619,7 +619,7 @@ namespace Kistl.Server.GeneratorsOld
             }
 
             // Generate the code & save
-            SaveFile(code, string.Format(@"{0}\ObjectSerializer.cs", task.GetKistObjectsName()));
+            SaveFile(code, string.Format(@"{0}\ObjectSerializer.cs", task.GetKistlObjectsName()));
         }
         #endregion
 
@@ -655,7 +655,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateInferfaceMethods((CurrentObjectClass)current.Clone(), current.objClass.Methods);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.objClass.ClassName + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.objClass.ClassName + ".Designer.cs");
         }
         #endregion
 
@@ -711,7 +711,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateStreamMethodsInternal((CurrentObjectClass)current.Clone(), current.objClass.Properties);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.objClass.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.objClass.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -800,7 +800,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateInterfaces(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.@interface.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.@interface.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -827,7 +827,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateStructInterfaces(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -860,7 +860,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateStructs(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -893,7 +893,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateEnumerations(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistObjectsName() + @"\" + current.enumeration.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.enumeration.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
