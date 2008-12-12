@@ -10,7 +10,7 @@ using System.Globalization;
 
 namespace Arebis.CodeGenerator.Templated
 {
-	public class GenerationHost : MarshalByRefObject, IGenerationHost, IDisposable
+	public class GenerationHost : IGenerationHost, IDisposable
 	{
 		private static Dictionary<string, TemplateInfo> templates = new Dictionary<string,TemplateInfo>();
 		private List<IFileWriter> fileWriters;

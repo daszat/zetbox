@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 
 namespace Arebis.CodeGeneration
 {
-    public abstract class CodeTemplate : ContextBoundObject
+    public abstract class CodeTemplate 
     {
         private IGenerationHost _host;
 

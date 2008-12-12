@@ -49,7 +49,7 @@ namespace Arebis.CodeGenerator.Templated
 
 		protected override void AppendLinePragmaBegin(StringBuilder code, string filename, int line)
 		{
-			code.AppendLine(String.Format("#line {1} \"{0}\"", filename, line));
+            //code.AppendLine(String.Format("#line {1} \"{0}\"", filename, line));
 		}
 
 		protected override void AppendLinePragmaEnd(StringBuilder code)
