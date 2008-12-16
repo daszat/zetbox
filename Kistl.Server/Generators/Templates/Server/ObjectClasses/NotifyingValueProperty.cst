@@ -16,7 +16,7 @@
     var backingName = MungeNameToBacking(name);
 %>
         <% ApplyAttributeTemplate(); %>
-        public <%= type.FullName %> <%= name %>
+        <%= GetModifiers() %> <%= type.FullName %> <%= name %>
         {
             get
             {

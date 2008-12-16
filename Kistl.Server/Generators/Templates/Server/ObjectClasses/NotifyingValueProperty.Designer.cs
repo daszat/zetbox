@@ -35,7 +35,7 @@ this.WriteObjects("        ");
 #line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cst"
 ApplyAttributeTemplate(); 
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cst"
-this.WriteObjects("        public ",  type.FullName , " ",  name , "\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  type.FullName , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");

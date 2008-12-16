@@ -13,6 +13,12 @@ namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
         {
         }
 
+        protected override void ApplyIDPropertyTemplate()
+        {
+            base.ApplyIDPropertyTemplate();
+            Host.CallTemplate("Server.ObjectClasses.IdProperty");
+        }
+
         protected override string GetAdditionalImports()
         {
             return base.GetAdditionalImports() + "\n"

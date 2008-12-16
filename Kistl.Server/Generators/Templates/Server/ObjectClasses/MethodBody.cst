@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Interface.DataTypes.Method"
-	CodeFile="Interface.DataTypes.Method.cs" 
-	ClassName="Kistl.Server.Generators.Templates.Interface.DataTypes.Method" 
+	Name="Server.ObjectClasses.MethodBody"
+	CodeFile="Server.ObjectClasses.MethodBody.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Server.ObjectClasses.MethodBody" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
@@ -12,4 +12,6 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 
 <%@ Parameter Name="m" Type="Kistl.App.Base.Method" %>
-		<%= GetModifiers() %> <%= GetReturnType() %> <%= m.MethodName %>(<%= GetParameterDefinitions() %>) <% ApplyBodyTemplate(); %>
+		{
+		    // blah
+		}

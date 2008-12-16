@@ -1,7 +1,9 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
@@ -12,14 +14,21 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 {
     public partial class Method
     {
-#if INTELLISENSE
-        protected Arebis.CodeGeneration.IGenerationHost Host;
-        protected string ResolveResourceUrl(string template) { return "mock"; }
+        protected Kistl.App.Base.Method MethodDescriptor { get { return m; } }
 
-        protected Kistl.App.Base.Method m;
+        protected string GetModifiers()
+        {
+            MemberAttributes attrs = ModifyMethodAttributes(0);
+            return attrs.ToCsharp();
+        }
 
-        protected Method(Arebis.CodeGeneration.IGenerationHost h, Kistl.App.Base.Method m) { }
-#endif
+        /// <summary>
+        /// Gets a set of <see cref="MethodAttributs"/> and returns an appropriate set for output.
+        /// </summary>
+        protected virtual MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
+        {
+            return methodAttributes;
+        }
 
         protected virtual string GetReturnType()
         {
@@ -49,5 +58,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
                 .ToArray());
         }
 
+        protected virtual void ApplyBodyTemplate() {
+            Host.WriteOutput(";");
+        }
     }
 }

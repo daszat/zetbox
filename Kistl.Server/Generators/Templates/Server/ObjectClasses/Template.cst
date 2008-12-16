@@ -11,7 +11,7 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 
 <%@ Parameter Name="dataType" Type="Kistl.App.Base.ObjectClass" %>
-namespace <%= dataType.Module.Namespace %>
+namespace <%= DataType.Module.Namespace %>
 {
     using System;
     using System.Collections;
@@ -39,7 +39,7 @@ ApplyClassAttributeTemplate();
     public class <%= mungedClassName %> <%= GetInheritance() %>
     {	
     
-        <% ApplyIDPropertyTemplate(); %>
+<% ApplyIDPropertyTemplate(); %>
         
         <% foreach(Property p in dataType.Properties)
 		{ %>
@@ -51,7 +51,7 @@ ApplyClassAttributeTemplate();
 			ApplyPropertyTemplate(p);
 		}
 		
-		foreach(Method m in MethodsToGenerate())
+		foreach(var m in MethodsToGenerate())
 		{ %>
 		
 		

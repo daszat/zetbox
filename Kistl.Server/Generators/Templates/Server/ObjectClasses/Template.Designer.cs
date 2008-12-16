@@ -26,7 +26,7 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
 #line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\Template.cst"
 this.WriteObjects("\r\n");
 #line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\Template.cst"
-this.WriteObjects("namespace ",  dataType.Module.Namespace , "\r\n");
+this.WriteObjects("namespace ",  DataType.Module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("    using System;\r\n");
 this.WriteObjects("    using System.Collections;\r\n");
@@ -54,7 +54,6 @@ ApplyClassAttributeTemplate();
 this.WriteObjects("    public class ",  mungedClassName , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {	\r\n");
 this.WriteObjects("    \r\n");
-this.WriteObjects("        ");
 #line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\Template.cst"
 ApplyIDPropertyTemplate(); 
 #line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\Template.cst"
@@ -73,7 +72,7 @@ this.WriteObjects("        /// </summary> ");
 ApplyPropertyTemplate(p);
 		}
 		
-		foreach(Method m in MethodsToGenerate())
+		foreach(var m in MethodsToGenerate())
 		{ 
 #line 56 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\Template.cst"
 this.WriteObjects("		\r\n");

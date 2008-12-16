@@ -81,9 +81,9 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
             }
         }
 
-        protected virtual void ApplyMethodTemplate(Method m)
+        protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
-            //this.Host.CallTemplate(ResolveResourceUrl("Server.ObjectClasses.Method.cst"), m);
+            this.Host.CallTemplate("Server.ObjectClasses.Method", m);
         }
 
         protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()

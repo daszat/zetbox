@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
     public class IdProperty : Kistl.Server.Generators.Templates.Server.ObjectClasses.NotifyingValueProperty
     {
 
-
-        public IdProperty(Arebis.CodeGeneration.IGenerationHost _host, Type type, String name)
-            : base(_host, type, name)
+        public IdProperty(Arebis.CodeGeneration.IGenerationHost _host)
+            : base(_host, typeof(int), "ID")
         {
 
         }
 
-        /// <summary>
-        /// Is called to apply optional decoration in front of the property declaration, like Attributes.
-        /// </summary>
-        protected override void ApplyAttributeTemplate() { }
+        protected override MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
+        {
+            // add override flag to implement abstract ID member
+            return base.ModifyMethodAttributes(methodAttributes) | MemberAttributes.Override;
+        }
 
         protected override string MungeNameToBacking(string name)
         {

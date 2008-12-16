@@ -82,6 +82,7 @@
     <Compile Include="CustomActionsManagerServer.cs" />
     <Compile Include="Generators.Extensions\MethodChecks.cs" />
     <Compile Include="Generators.Extensions\PropertyChecks.cs" />
+    <Compile Include="Generators.Extensions\Reflection.cs" />
     <Compile Include="GeneratorsOld\DatabaseGenerator.cs" />
     <Compile Include="GeneratorsOld\DataObjectGenerator.cs" />
     <Compile Include="GeneratorsOld\Exceptions.cs" />
@@ -135,6 +136,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Server\ObjectClasses\Method.cs" />
+    <Compile Include="Generators\Templates\Server\ObjectClasses\MethodBody.Designer.cs">
+      <DependentUpon>MethodBody.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\Template.cs" />
     <Compile Include="Generators\TemplateFactory.cs" />
@@ -228,6 +235,10 @@
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
     <None Include="Database\Database.35.sql" />
+    <None Include="Generators\Templates\Server\ObjectClasses\MethodBody.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>MethodBody.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>NotifyingValueProperty.Designer.cs</LastGenOutput>

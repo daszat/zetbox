@@ -27,7 +27,9 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 #line 13 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
 this.WriteObjects("\r\n");
 #line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
-this.WriteObjects("		",  GetReturnType() , " ",  m.MethodName , "(",  GetParameterDefinitions() , ");   \r\n");
+this.WriteObjects("		",  GetModifiers() , " ",  GetReturnType() , " ",  m.MethodName , "(",  GetParameterDefinitions() , ") ");
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
+ApplyBodyTemplate(); 
 
         }
 
