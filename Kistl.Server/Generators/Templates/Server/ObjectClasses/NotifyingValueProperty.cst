@@ -12,7 +12,9 @@
 
 <%@ Parameter Name="type" Type="Type" %>
 <%@ Parameter Name="name" Type="String" %>
-<% var backingName = MungeNameToBacking(name); %>
+<%
+    var backingName = MungeNameToBacking(name);
+%>
         <% ApplyAttributeTemplate(); %>
         public <%= type.FullName %> <%= name %>
         {

@@ -5,24 +5,22 @@ using System.Text;
 
 namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
 {
-    public partial class IdProperty
+    public class IdProperty : Kistl.Server.Generators.Templates.Server.ObjectClasses.NotifyingValueProperty
     {
-#if INTELLISENSE
-        protected Arebis.CodeGeneration.IGenerationHost Host;
-        protected string ResolveResourceUrl(string template) { return "mock";  }
 
-        protected Type type;
-        protected string name;
 
-        protected NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost h, Type type, string name) { }
-#endif
+        public IdProperty(Arebis.CodeGeneration.IGenerationHost _host, Type type, String name)
+            : base(_host, type, name)
+        {
+
+        }
 
         /// <summary>
         /// Is called to apply optional decoration in front of the property declaration, like Attributes.
         /// </summary>
-        protected virtual void ApplyAttributeTemplate() { }
+        protected override void ApplyAttributeTemplate() { }
 
-        protected virtual string MungeNameToBacking(string name)
+        protected override string MungeNameToBacking(string name)
         {
             return "_" + name;
         }

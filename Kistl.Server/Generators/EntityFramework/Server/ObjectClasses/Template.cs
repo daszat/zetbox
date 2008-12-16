@@ -7,12 +7,6 @@ namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
 {
     public class Template : Kistl.Server.Generators.Templates.Server.ObjectClasses.Template
     {
-#if INTELLISENSE
-        protected Arebis.CodeGeneration.IGenerationHost Host;
-        protected string ResolveResourceUrl(string template) { return "mock"; }
-
-        protected Kistl.App.Base.ObjectClass dataType;
-#endif
 
         public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.App.Base.ObjectClass cls)
             : base(_host, cls)
@@ -34,7 +28,7 @@ namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
 
         protected override string GetBaseClass()
         {
-            if (dataType.BaseObjectClass != null)
+            if (DataType.BaseObjectClass != null)
             {
                 return MungeClassName(base.GetBaseClass());
             }
@@ -46,7 +40,7 @@ namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
 
         protected override string[] GetInterfaces()
         {
-            return new string[] { dataType.ClassName }.Concat(base.GetInterfaces()).ToArray();
+            return new string[] { DataType.ClassName }.Concat(base.GetInterfaces()).ToArray();
         }
     }
 }

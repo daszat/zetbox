@@ -12,14 +12,8 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
 {
     public partial class Template
     {
-#if INTELLISENSE
-        protected Arebis.CodeGeneration.IGenerationHost Host;
-        protected string ResolveResourceUrl(string template) { return "mock"; }
 
-        protected Kistl.App.Base.ObjectClass dataType;
-
-        protected Template(Arebis.CodeGeneration.IGenerationHost h, Kistl.App.Base.ObjectClass objClass) { }
-#endif
+        protected ObjectClass DataType { get { return this.dataType; } }
 
         protected virtual string GetAdditionalImports()
         {
@@ -32,6 +26,8 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
         /// Is called to apply optional decoration in front of the class declaration, like Attributes.
         /// </summary>
         protected virtual void ApplyClassAttributeTemplate() { }
+
+        protected virtual void ApplyIDPropertyTemplate() { }
 
         /// <returns>The base class to inherit from.</returns>
         protected virtual string GetBaseClass()
@@ -81,7 +77,7 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
         {
             if (!p.IsListProperty())
             {
-                this.Host.CallTemplate(ResolveResourceUrl("Server.ObjectClasses.NotifyingValueProperty.cst"), p.GetPropertyType(), p.PropertyName);
+                this.Host.CallTemplate("Server.ObjectClasses.NotifyingValueProperty", p.GetPropertyType(), p.PropertyName);
             }
         }
 

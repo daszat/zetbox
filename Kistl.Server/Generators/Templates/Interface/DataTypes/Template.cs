@@ -12,14 +12,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 {
     public partial class Template
     {
-#if INTELLISENSE
-        protected Arebis.CodeGeneration.IGenerationHost Host;
-        protected string ResolveResourceUrl(string template) { return "mock";  }
 
-        protected Kistl.App.Base.DataType dataType;
-
-        protected Template(Arebis.CodeGeneration.IGenerationHost h, Kistl.App.Base.DataType objClass) { }
-#endif
         protected virtual string GetBaseClass()
         {
             if (dataType is Kistl.App.Base.ObjectClass)
@@ -54,17 +47,17 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         {
             if (!p.IsListProperty())
             {
-                this.Host.CallTemplate(ResolveResourceUrl("Interface.DataTypes.SimplePropertyTemplate.cst"), p);
+                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", p);
             }
             else
             {
-                this.Host.CallTemplate(ResolveResourceUrl("Interface.DataTypes.SimplePropertyListTemplate.cst"), p);
+                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyListTemplate", p);
             }
         }
 
-        protected virtual void ApplyMethodTemplate(Method m)
+        protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
-            this.Host.CallTemplate(ResolveResourceUrl("Interface.DataTypes.Method.cst"), m);
+            this.Host.CallTemplate("Interface.DataTypes.Method", m);
         }
 
         protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()

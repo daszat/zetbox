@@ -77,10 +77,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Forms", "Kistl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.Tests", "Tests\Kistl.Server.Tests\Kistl.Server.Tests.csproj", "{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arebis.CodeGenerator", "Arebis.CodeGenerator\Arebis.CodeGenerator.csproj", "{D2A451FB-809C-4F02-AA7D-5C0589495BE7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.Templates", "Kistl.Server.Templates\Kistl.Server.Templates.csproj", "{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -321,26 +317,6 @@ Global
 		{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Release|.NET.ActiveCfg = Release|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D2A451FB-809C-4F02-AA7D-5C0589495BE7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Release|.NET.ActiveCfg = Release|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

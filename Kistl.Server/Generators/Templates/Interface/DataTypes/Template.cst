@@ -39,7 +39,7 @@ namespace <%= dataType.Module.Namespace %>
 			ApplyPropertyTemplate(p);
 		}
 		
-		foreach(Method m in MethodsToGenerate())
+		foreach(var m in MethodsToGenerate())
 		{ %>
 		
 		

@@ -22,6 +22,7 @@ namespace Kistl.Server.Generators
         private string codeBasePath = "";
 
         #region Generate
+
         public virtual void Generate(Kistl.API.IKistlContext ctx, string codeBasePath)
         {
             this.codeBasePath = codeBasePath + (codeBasePath.EndsWith("\\") ? "" : "\\");
@@ -80,12 +81,12 @@ namespace Kistl.Server.Generators
 
         }
 
-
         #endregion
 
         private static void Generate_Interface_ObjectClasses(IKistlContext ctx, ObjectClass objClass)
         {
-            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+
+            var gen = Generator.GetTemplateGenerator(
                 @"Interface.DataTypes.Template",
                 objClass.ClassName + ".Designer.cs",
                 Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),
@@ -95,7 +96,7 @@ namespace Kistl.Server.Generators
 
         private void Generate_Server_ObjectClasses(IKistlContext ctx, ObjectClass objClass)
         {
-            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+            var gen = Generator.GetTemplateGenerator(
                 @"Server.ObjectClasses.Template",
                 objClass.ClassName + ".Server.Designer.cs",
                 Kistl.Server.GeneratorsOld.TaskEnum.Server.GetKistlObjectsName(),
@@ -105,7 +106,7 @@ namespace Kistl.Server.Generators
 
         private void Generate_Interface_Enumerations(IKistlContext ctx, Enumeration e)
         {
-            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+            var gen = Generator.GetTemplateGenerator(
                             @"Interface.Enumerations.Template",
                             e.ClassName + ".Designer.cs",
                             Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),
@@ -115,7 +116,7 @@ namespace Kistl.Server.Generators
 
         private void Generate_Interface_Structs(IKistlContext ctx, Struct s)
         {
-            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+            var gen = Generator.GetTemplateGenerator(
                             @"Interface.DataTypes.Template",
                             s.ClassName + ".Designer.cs",
                             Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),
@@ -125,7 +126,7 @@ namespace Kistl.Server.Generators
 
         private void Generate_Interface_Interfaces(IKistlContext ctx, Interface i)
         {
-            Arebis.CodeGenerator.TemplateGenerator gen = Generator.GetTemplateGenerator(
+            var gen = Generator.GetTemplateGenerator(
                             @"Interface.DataTypes.Template",
                             i.ClassName + ".Designer.cs",
                             Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),

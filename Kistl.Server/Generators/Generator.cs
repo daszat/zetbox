@@ -63,31 +63,22 @@ namespace Kistl.Server.Generators
             GenerateDatabase();
         }
 
-        internal static Arebis.CodeGenerator.TemplateGenerator GetTemplateGenerator(
+        internal static TemplateGenerator GetTemplateGenerator(
             string template, string output, string targetdir, params object[] templateParameter)
         {
-            Arebis.CodeGenerator.TemplateGenerator gen = new Arebis.CodeGenerator.TemplateGenerator();
-            
-            gen.Settings.Add("referencepath", Helper.CodeGenPath + @"\bin");
-            ServerApiContext.Current.Configuration.SourceFileLocation.ForEach(l => gen.Settings.Add("referencepath", l));
-            gen.Settings.Add("referencepath", System.IO.Path.GetDirectoryName(typeof(Generator).Assembly.Location));
+            var gen = new TemplateGenerator();
 
-            gen.Settings.Add("referenceassembly", "System.dll");
-            gen.Settings.Add("referenceassembly", "System.Core.dll");
-            gen.Settings.Add("referenceassembly", "System.Data.dll");
-            gen.Settings.Add("referenceassembly", "System.Data.Linq.dll");
-            gen.Settings.Add("referenceassembly", "WindowsBase.dll");
-            gen.Settings.Add("referenceassembly", "Kistl.API.dll");
-            gen.Settings.Add("referenceassembly", "Kistl.API.Server.dll");
-            gen.Settings.Add("referenceassembly", "Kistl.Objects.dll");
-            gen.Settings.Add("referenceassembly", "Kistl.Server.exe");
-            gen.Settings.Add("templatepath", "res://kistl.server/Kistl.Server.Generators.Templates");
-            gen.Settings.Add("template", "res://kistl.server/Kistl.Server.Generators.Templates." + template + ".cst");
-            gen.Settings.Add("invokeclasspath", "res://kistl.server/Kistl.Server.Generators.EntityFramework");
+            gen.Settings.Add("basetemplatepath", "Kistl.Server.Generators.Templates");
+            gen.Settings.Add("providertemplatepath", "Kistl.Server.Generators.EntityFramework");
+
+            gen.Settings.Add("template", template);
+
             gen.Settings.Add("targetdir", Helper.CodeGenPath + @"\" + targetdir);
             gen.Settings.Add("output", output);
             gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
+
             gen.TemplateParameters = templateParameter;
+
             return gen;
         }
 

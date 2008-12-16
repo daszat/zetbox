@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ArebisCGenSource12\Arebis.CodeGeneration\bin\Debug\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Arebis.CodeGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ArebisCGenSource12\Arebis.CodeGenerator\bin\Debug\Arebis.CodeGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -88,22 +96,60 @@
     <Compile Include="Generators\DataObjectGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="Generators\EntityFramework\Interface\DataTypes\Template.cs" />
-    <EmbeddedResource Include="Generators\EntityFramework\Server\ObjectClasses\Template.cs" />
-    <EmbeddedResource Include="Generators\EntityFramework\Server\ObjectClasses\IdProperty.cs" />
+    <Compile Include="Generators\EntityFramework\Interface\DataTypes\Template.cs" />
+    <Compile Include="Generators\EntityFramework\Server\ObjectClasses\Template.cs" />
+    <Compile Include="Generators\EntityFramework\Server\ObjectClasses\IdProperty.cs" />
+    <Compile Include="Generators\GenerationHost.cs" />
     <Compile Include="Generators\Generator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Generators\MappingGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="Generators\Templates\Interface\Enumerations\Template.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Method.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Template.cs" />
-    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\Template.cs" />
-    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cs" />
+    <Compile Include="Generators\Templates\Interface\Enumerations\Template.cs" />
+    <Compile Include="Generators\Templates\Interface\DataTypes\Method.cs" />
+    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs" />
+    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs" />
+    <Compile Include="Generators\Templates\Interface\DataTypes\Template.cs" />
+    <Compile Include="Generators\Templates\Interface\DataTypes\Method.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Method.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SimplePropertyListTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SimplePropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\DataTypes\Template.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\Enumerations\Template.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Server\ObjectClasses\Template.cs" />
+    <Compile Include="Generators\TemplateFactory.cs" />
+    <Compile Include="Generators\TemplateGenerator.cs" />
+    <Compile Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cs" />
+    <Compile Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotifyingValueProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Server\ObjectClasses\Template.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="KistlServiceStreams.cs" />
     <Compile Include="Program.cs" />
@@ -119,10 +165,6 @@
     <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arebis.CodeGenerator\Arebis.CodeGenerator.csproj">
-      <Project>{D2A451FB-809C-4F02-AA7D-5C0589495BE7}</Project>
-      <Name>Arebis.CodeGenerator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
       <Name>Kistl.API.Server</Name>
@@ -186,14 +228,34 @@
     <None Include="Database\Database.33.sql" />
     <None Include="Database\Database.34.sql" />
     <None Include="Database\Database.35.sql" />
-    <EmbeddedResource Include="Generators\EntityFramework\Server\ObjectClasses\IdProperty.cst" />
-    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cst" />
-    <EmbeddedResource Include="Generators\Templates\Server\ObjectClasses\Template.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Method.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\DataTypes\Template.cst" />
-    <EmbeddedResource Include="Generators\Templates\Interface\Enumerations\Template.cst" />
+    <None Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>NotifyingValueProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Server\ObjectClasses\Template.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimplePropertyTemplate1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimplePropertyListTemplate1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Interface\DataTypes\Method.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Method.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Interface\DataTypes\Template.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Interface\Enumerations\Template.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

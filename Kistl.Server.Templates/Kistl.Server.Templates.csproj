@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EDE8A6BB-6857-4B40-93D6-7F137E1DDF6C}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -77,10 +77,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arebis.CodeGenerator\Arebis.CodeGenerator.csproj">
-      <Project>{D2A451FB-809C-4F02-AA7D-5C0589495BE7}</Project>
-      <Name>Arebis.CodeGenerator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
       <Name>Kistl.API.Server</Name>

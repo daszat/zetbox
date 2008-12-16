@@ -7,15 +7,6 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
 {
     public partial class NotifyingValueProperty
     {
-#if INTELLISENSE
-        protected Arebis.CodeGeneration.IGenerationHost Host;
-        protected string ResolveResourceUrl(string template) { return "mock";  }
-
-        protected Type type;
-        protected string name;
-
-        protected NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost h, Type type, string name) { }
-#endif
 
         /// <summary>
         /// Is called to apply optional decoration in front of the property declaration, like Attributes.

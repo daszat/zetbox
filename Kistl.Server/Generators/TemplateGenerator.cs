@@ -1,39 +1,39 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections.Specialized;
-using Arebis.CodeGenerator.Templated;
 using System.CodeDom.Compiler;
-using System.Reflection;
-using System.IO;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
 
-namespace Arebis.CodeGenerator
+using Arebis.CodeGenerator.Templated;
+
+namespace Kistl.Server.Generators
 {
-	/// <summary>
+    /// <summary>
     /// http://www.codeproject.com/KB/cs/T4BasedCodeGenerator.aspx
-	/// A Generator object creates a GenerationHost and executes the initial template on it.
-	/// This implementation will host the GenerationHost in a separate AppDomain to allow unload of assemblies.
-	/// </summary>
+    /// A Generator object creates a GenerationHost and executes the initial template on it.
+    /// This implementation will host the GenerationHost in a separate AppDomain to allow unload of assemblies.
+    /// </summary>
     public class TemplateGenerator
-	{
-		private NameValueCollection settings = new NameValueCollection();
-		private object[] templateParameters = new object[0];
+    {
+        private NameValueCollection settings = new NameValueCollection();
+        private object[] templateParameters = new object[0];
 
-		public NameValueCollection Settings
-		{
-			get { return this.settings; }
-			set { this.settings = value; }
-		}
+        public NameValueCollection Settings
+        {
+            get { return this.settings; }
+            set { this.settings = value; }
+        }
 
-		public object[] TemplateParameters
-		{
-			get { return this.templateParameters; }
-			set { this.templateParameters = value; }
-		}
+        public object[] TemplateParameters
+        {
+            get { return this.templateParameters; }
+            set { this.templateParameters = value; }
+        }
 
-		public virtual int ExecuteTemplate()
-		{
-			// Execute the (initial) template by GenerationHost in separate AppDomain:
+        public virtual int ExecuteTemplate()
+        {
+            // Execute the (initial) template by GenerationHost in separate AppDomain:
 #if USE_APP_DOMAIN
 			AppDomain appDomain = null;
 			GenerationHost genHost = null;
@@ -59,21 +59,21 @@ namespace Arebis.CodeGenerator
                 return this.ExecuteTemplate(genHost);
             }
 #endif
-		}
+        }
 
-		public virtual int ExecuteTemplate(GenerationHost genHost)
-		{
-			return this.ExecuteTemplate(genHost, this.Settings["template"], this.settings["output"], this.TemplateParameters);
-		}
+        public virtual int ExecuteTemplate(GenerationHost genHost)
+        {
+            return this.ExecuteTemplate(genHost, this.Settings["template"], this.settings["output"], this.TemplateParameters);
+        }
 
-		public virtual int ExecuteTemplate(GenerationHost genHost, string templateFilename, string outputFilename, object[] templateParameters)
-		{
-			try
-			{
-				genHost.Initialize(this.Settings);
-				genHost.CallTemplateToFile(templateFilename, outputFilename, templateParameters);
-				return 0;
-			}
+        public virtual int ExecuteTemplate(GenerationHost genHost, string templateFilename, string outputFilename, object[] templateParameters)
+        {
+            try
+            {
+                genHost.Initialize(this.Settings);
+                genHost.CallTemplateToFile(templateFilename, outputFilename, templateParameters);
+                return 0;
+            }
             catch (CompilationFailedException ex)
             {
                 Console.WriteLine(String.Format("Compilation failed for file: {0}", ex.Filename));
@@ -88,6 +88,7 @@ namespace Arebis.CodeGenerator
                 }
                 throw;
             }
-		}
-	}
+        }
+    }
+
 }
