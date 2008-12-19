@@ -14,8 +14,6 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 {
     public partial class Method
     {
-        protected Kistl.App.Base.Method MethodDescriptor { get { return m; } }
-
         protected string GetModifiers()
         {
             MemberAttributes attrs = ModifyMethodAttributes(0);

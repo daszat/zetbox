@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
 
         protected override void ApplyBodyTemplate()
         {
-            Host.CallTemplate("Server.ObjectClasses.MethodBody", MethodDescriptor);
+            Host.CallTemplate("Server.ObjectClasses.MethodBody", m);
         }
 
     }

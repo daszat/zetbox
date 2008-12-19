@@ -6,6 +6,11 @@ using System.Text;
 
 namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
 {
+    /// <summary>
+    /// Case: 705, Template Override Typesave machen
+    /// Vorschlag: [OverrideTemplate(Kistl.Server.Generators.Templates.Server.ObjectClasses.NotifyingValueProperty)]
+    /// Alternativ: alle Klassen gelten automatisch als Overrider, wenn sie von dem aufgerufenen Template ableiten.
+    /// </summary>
     public class IdProperty : Kistl.Server.Generators.Templates.Server.ObjectClasses.NotifyingValueProperty
     {
 

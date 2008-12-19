@@ -12,11 +12,11 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst")]
     public partial class Method : Kistl.Server.Generators.KistlCodeTemplate
     {
-		private Kistl.App.Base.Method m;
+		protected Kistl.App.Base.Method m;
 
 
-        public Method(Arebis.CodeGeneration.IGenerationHost _host, Kistl.App.Base.Method m)
-            : base(_host)
+        public Method(Arebis.CodeGeneration.IGenerationHost host, Kistl.App.Base.Method m)
+            : base(host)
         {
 			this.m = m;
 
