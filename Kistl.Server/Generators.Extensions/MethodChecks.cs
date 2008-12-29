@@ -19,5 +19,19 @@ namespace Kistl.Server.Generators.Extensions
                     || method.MethodName == "PreSave"
                     || method.MethodName == "PostSave");
         }
+
+        public static string GetParameterDefinitions(this Method method)
+        {
+            return String.Join(", ",
+                method.Parameter
+                .Where(p => !p.IsReturnParameter)
+                .Select(p => GetParameterDefinition(p))
+                .ToArray());
+        }
+
+        public static string GetParameterDefinition(this BaseParameter param)
+        {
+            return String.Format("{0} {1}", param.GetParameterTypeString(), param.ParameterName);
+        }
     }
 }

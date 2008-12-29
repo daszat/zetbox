@@ -15,3 +15,31 @@
 		{
 		    // blah
 		}
+<%
+string delegateName = m.MethodName + "_Handler";
+string eventName = "On" + m.MethodName + "_" + m.ObjectClass.ClassName;
+%>
+		public event <%= delegateName %><<%= m.ObjectClass.ClassName %>> <%= eventName %>;
+<%
+
+string parameterDefs = m.GetParameterDefinitions();
+if (!String.IsNullOrEmpty(parameterDefs))
+{
+    // add leading comma for later usage
+	parameterDefs = ", " + parameterDefs;	
+}
+
+var ret = m.GetReturnParameter();
+if (ret == null)
+{
+%>
+		public delegate void <%= delegateName %><T>(T obj<%= parameterDefs %>);
+<%
+}
+else
+{
+%>
+		public delegate void <%= delegateName %><T>(T obj, MethodReturnArgs<<%= ret.GetParameterType().FullName %>><%= parameterDefs %>);
+<%
+}
+%>

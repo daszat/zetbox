@@ -54,5 +54,17 @@ namespace Kistl.Server.Generators.Extensions
             return prop is StructProperty && ((Property)prop).IsList;
         }
 
+        public static string GetCollectionTypeString(this Property prop)
+        {
+            if (prop.IsIndexed)
+            {
+                return string.Format("IList<{0}>", prop.GetPropertyTypeString());
+            }
+            else
+            {
+                return string.Format("ICollection<{0}>", prop.GetPropertyTypeString());
+            }
+        }
+
     }
 }

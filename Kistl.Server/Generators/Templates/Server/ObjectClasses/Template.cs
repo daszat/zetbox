@@ -79,6 +79,10 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
             {
                 this.Host.CallTemplate("Server.ObjectClasses.NotifyingValueProperty", p.GetPropertyType(), p.PropertyName);
             }
+            else
+            {
+                this.Host.CallTemplate("Server.ObjectClasses.ListProperty", p.GetPropertyType(), p.PropertyName, p);
+            }
         }
 
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)

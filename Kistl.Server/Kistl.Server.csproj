@@ -37,11 +37,11 @@
   <ItemGroup>
     <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ArebisCGenSource12\Arebis.CodeGeneration\bin\Debug\Arebis.CodeGeneration.dll</HintPath>
+      <HintPath>..\..\ArebisCGen\Arebis.CodeGenerator\bin\Release\Arebis.CodeGeneration.dll</HintPath>
     </Reference>
     <Reference Include="Arebis.CodeGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ArebisCGenSource12\Arebis.CodeGenerator\bin\Debug\Arebis.CodeGenerator.dll</HintPath>
+      <HintPath>..\..\ArebisCGen\Arebis.CodeGenerator\bin\Release\Arebis.CodeGenerator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -107,11 +107,21 @@
     <Compile Include="Generators\MappingGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Generators\Templates\Interface\Enumerations\Template.cs" />
-    <Compile Include="Generators\Templates\Interface\DataTypes\Method.cs" />
-    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs" />
-    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs" />
-    <Compile Include="Generators\Templates\Interface\DataTypes\Template.cs" />
+    <Compile Include="Generators\Templates\Interface\Enumerations\Template.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+</Compile>
+<Compile Include="Generators\Templates\Interface\DataTypes\Method.cs" >
+	<DependentUpon>Method.cst</DependentUpon>
+</Compile>
+<Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs">
+	<DependentUpon>SimplePropertyListTemplate.cst</DependentUpon>
+</Compile>
+<Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs">
+	<DependentUpon>SimplePropertyTemplate.cst</DependentUpon>
+</Compile>
+<Compile Include="Generators\Templates\Interface\DataTypes\Template.cs">
+	<DependentUpon>Template.cst</DependentUpon>
+</Compile>
     <Compile Include="Generators\Templates\Interface\DataTypes\Method.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -137,16 +147,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Server\ObjectClasses\Method.cs" />
+    <Compile Include="Generators\Templates\Server\ObjectClasses\ListProperty.cs">
+	    <DependentUpon>ListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Server\ObjectClasses\ListProperty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Server\ObjectClasses\Method.cs" >
+	    <DependentUpon>Method.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Server\ObjectClasses\MethodBody.cs">
+	    <DependentUpon>MethodBody.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\MethodBody.Designer.cs">
       <DependentUpon>MethodBody.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generators\Templates\Server\ObjectClasses\Template.cs" />
+    <Compile Include="Generators\Templates\Server\ObjectClasses\Template.cs">
+	    <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\TemplateFactory.cs" />
     <Compile Include="Generators\TemplateGenerator.cs" />
-    <Compile Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cs" />
+    <Compile Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cs">
+	    <DependentUpon>NotifyingValueProperty.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -270,6 +297,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Generators\Templates\Server\ObjectClasses\ListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ListProperty.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -44,16 +44,12 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 
         protected virtual string GetParameterDefinition(BaseParameter param)
         {
-            return String.Format("{0} {1}", param.GetParameterTypeString(), param.ParameterName);
+            return param.GetParameterDefinition();
         }
 
         protected virtual string GetParameterDefinitions()
         {
-            return String.Join(", ",
-                m.Parameter
-                .Where(p => !p.IsReturnParameter)
-                .Select(p => GetParameterDefinition(p))
-                .ToArray());
+            return m.GetParameterDefinitions();
         }
 
         protected virtual void ApplyBodyTemplate() {
