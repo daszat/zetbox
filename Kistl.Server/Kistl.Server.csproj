@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomActionsManagerServer.cs" />
+    <Compile Include="Generators.Extensions\ContextExtensions.cs" />
     <Compile Include="Generators.Extensions\MethodExtensions.cs" />
     <Compile Include="Generators.Extensions\MiscExtensions.cs" />
     <Compile Include="Generators.Extensions\PropertyChecks.cs" />
@@ -100,7 +101,12 @@
     </Compile>
     <Compile Include="Generators\EntityFramework\Interface\DataTypes\Template.cs" />
     <Compile Include="Generators\EntityFramework\Server\Construct.cs" />
-    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.csdl.cs" />
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.msl.cs">
+      <DependentUpon>Model.msl.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.csdl.cs">
+      <DependentUpon>Model.csdl.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\EntityFramework\Server\EfModel\Model.csdl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,6 +116,27 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.csdl.EntityTypeFields.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.msl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.msl.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.msl.EntityTypeMapping.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.msl.EntityTypeMapping.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.msl.EntityTypeMapping.cs">
+      <DependentUpon>Model.msl.EntityTypeMapping.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.ssdl.cs">
+      <DependentUpon>Model.ssdl.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.ssdl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.ssdl.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\EntityFramework\Server\ObjectClasses\EfListWrapper.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -336,6 +363,21 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Model.csdl.EntityTypeFields.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Generators\EntityFramework\Server\EfModel\Model.msl.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.msl.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\EntityFramework\Server\EfModel\Model.msl.EntityTypeMapping.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.msl.EntityTypeMapping.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\EntityFramework\Server\EfModel\Model.ssdl.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.ssdl.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Generators\EntityFramework\Server\EfModel\TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

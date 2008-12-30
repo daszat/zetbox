@@ -140,5 +140,26 @@ namespace Kistl.Server.Generators.EntityFramework.Server
 
         #endregion
 
+        #region Column Names
+
+        public static string NestedColumnName(Property prop, string parentPropName)
+        {
+            if (String.IsNullOrEmpty(parentPropName))
+                return prop.PropertyName;
+
+            return parentPropName + "_" + prop.PropertyName;
+        }
+
+        public static string ForeignKeyColumnName(Property prop, string parentPropName)
+        {
+            return "fk_" + Construct.NestedColumnName(prop, parentPropName);
+        }
+
+        public static string ListPositionColumnName(Property prop, string parentPropName)
+        {
+            return ForeignKeyColumnName(prop, parentPropName) + "_pos";
+        }
+
+        #endregion
     }
 }

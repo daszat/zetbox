@@ -18,14 +18,14 @@
   <EntityContainer Name="Entities">
 <%	
 	// EntitySets for all Base Classes
-	foreach(var name in GetBaseClasses().Select(cls => cls.ClassName))
+	foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName))
 	{
 %>
     <EntitySet Name="<%= name %>" EntityType="Model.<%= name %>" />
 <%	}
 	
 	// AssociationSets for ObjectReferenceProperties
-	foreach(var prop in GetObjectReferencePropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
 	{
 		TypeMoniker parentType = Construct.AssociationParentType(prop);
 		TypeMoniker childType = Construct.AssociationChildType(prop);
@@ -38,7 +38,7 @@
 <%	}
 
 	// EntitySets for all CollectionEntrys and associated AssociationSets
-	foreach(var prop in GetObjectListPropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
 %>
@@ -57,7 +57,7 @@
   </EntityContainer>
 <%
 	// EntityTypes for all base classes
-	foreach(var cls in GetBaseClasses())
+	foreach(var cls in ctx.GetBaseClasses())
 	{
 %>	
   <EntityType Name="<%= cls.ClassName %>">
@@ -70,7 +70,7 @@
 <%	}
 
 	// EntityTypes for all other classes
-	foreach(var cls in GetDerivedClasses())
+	foreach(var cls in ctx.GetDerivedClasses())
 	{
 %>	
   <EntityType Name="<%= cls.ClassName %>" BaseType="<%= cls.BaseObjectClass.ClassName %>" >
@@ -79,7 +79,7 @@
 <%	}
 
 	// EntityTypes for all CollectionEntrys
-	foreach(var prop in GetObjectListPropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		TypeMoniker collectionType = Construct.PropertyCollectionEntryType(prop);
 		// TypeMoniker parentType;
@@ -153,7 +153,7 @@
 <%	}
 
 	// Associations for ObjectReferences
-	foreach(var prop in GetObjectReferencePropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
 	{
 		TypeMoniker parentType = Construct.AssociationParentType(prop);
 		TypeMoniker childType = Construct.AssociationChildType(prop);
@@ -169,7 +169,7 @@
 <%	}
 
 	// Associations for ObjectLists
-	foreach(var prop in GetObjectListPropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
 		TypeMoniker childType = Construct.PropertyCollectionEntryType(prop);

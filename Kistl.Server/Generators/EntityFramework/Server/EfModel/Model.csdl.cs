@@ -26,33 +26,5 @@ namespace Kistl.Server.Generators.EntityFramework.Server.EfModel
         {
             CallTemplate("Server.EfModel.ModelCsdlEntityTypeFields", properties);
         }
-
-        protected virtual IQueryable<ObjectClass> GetBaseClasses()
-        {
-            return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass == null);
-        }
-
-        protected virtual IQueryable<ObjectClass> GetDerivedClasses()
-        {
-            return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass != null);
-        }
-
-        protected virtual IQueryable<ObjectReferenceProperty> GetObjectReferencePropertiesWithStorage()
-        {
-            return ctx.GetQuery<ObjectReferenceProperty>()
-                .Where(prop => prop.ObjectClass is ObjectClass)
-                .ToList() // TODO: once HasStorage is no extension method anymore, delete this line and combine the WHERE
-                .Where(prop => prop.HasStorage())
-                .AsQueryable();
-        }
-
-        protected virtual IQueryable<Property> GetObjectListPropertiesWithStorage()
-        {
-            return ctx.GetQuery<Property>()
-                .Where(prop => prop.ObjectClass is ObjectClass && prop.IsList)
-                .ToList() // TODO: once HasStorage is no extension method anymore, delete this line and combine the WHERE
-                .Where(prop => prop.HasStorage())
-                .AsQueryable();
-        }
     }
 }

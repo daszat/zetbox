@@ -1,0 +1,29 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Server.EfModel.ModelMsl"
+	CodeFile="Server.EfModel.ModelMsl.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Server.EfModel.ModelMsl" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+  <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
+<%
+	foreach(var cls in ctx.GetBaseClasses())
+	{
+%>
+    <EntitySetMapping Name="<%= cls.ClassName %>">
+<% ApplyEntityTypeMapping(cls); %>
+    </EntitySetMapping>
+<%
+	}
+%>
+  </EntityContainerMapping>
+</Mapping>

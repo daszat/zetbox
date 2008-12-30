@@ -1,0 +1,36 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Server.EfModel.ModelMslEntityTypeMapping"
+	CodeFile="Server.EfModel.ModelMslEntityTypeMapping.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Server.EfModel.ModelMslEntityTypeMapping" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= cls.ClassName %>)">
+	    <MappingFragment StoreEntitySet="<%= cls.ClassName %>">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<%
+		foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList))
+		{
+			ApplyScalarProperty(prop, "");
+		}
+
+		foreach(var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList))
+		{
+			ApplyComplexProperty(prop, "");
+		}
+%>	    
+	    </MappingFragment>
+      </EntityTypeMapping>
+<%
+	foreach(var subCls in cls.SubClasses)
+	{
+		ApplyEntityTypeMapping(subCls);	
+	}
+%>

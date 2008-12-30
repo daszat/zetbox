@@ -32,7 +32,7 @@ this.WriteObjects("<Schema Namespace=\"Model\" Alias=\"Self\" xmlns=\"http://sch
 this.WriteObjects("  <EntityContainer Name=\"Entities\">\r\n");
 #line 20 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.csdl.cst"
 // EntitySets for all Base Classes
-	foreach(var name in GetBaseClasses().Select(cls => cls.ClassName))
+	foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName))
 	{
 
 #line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.csdl.cst"
@@ -41,7 +41,7 @@ this.WriteObjects("    <EntitySet Name=\"",  name , "\" EntityType=\"Model.",  n
 }
 	
 	// AssociationSets for ObjectReferenceProperties
-	foreach(var prop in GetObjectReferencePropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
 	{
 		TypeMoniker parentType = Construct.AssociationParentType(prop);
 		TypeMoniker childType = Construct.AssociationChildType(prop);
@@ -56,7 +56,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 }
 
 	// EntitySets for all CollectionEntrys and associated AssociationSets
-	foreach(var prop in GetObjectListPropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
 
@@ -79,7 +79,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("  </EntityContainer>\r\n");
 #line 59 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.csdl.cst"
 // EntityTypes for all base classes
-	foreach(var cls in GetBaseClasses())
+	foreach(var cls in ctx.GetBaseClasses())
 	{
 
 #line 62 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.csdl.cst"
@@ -97,7 +97,7 @@ this.WriteObjects("  </EntityType>\r\n");
 }
 
 	// EntityTypes for all other classes
-	foreach(var cls in GetDerivedClasses())
+	foreach(var cls in ctx.GetDerivedClasses())
 	{
 
 #line 75 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.csdl.cst"
@@ -111,7 +111,7 @@ this.WriteObjects("  </EntityType>\r\n");
 }
 
 	// EntityTypes for all CollectionEntrys
-	foreach(var prop in GetObjectListPropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		TypeMoniker collectionType = Construct.PropertyCollectionEntryType(prop);
 		// TypeMoniker parentType;
@@ -199,7 +199,7 @@ this.WriteObjects("  </ComplexType>\r\n");
 }
 
 	// Associations for ObjectReferences
-	foreach(var prop in GetObjectReferencePropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
 	{
 		TypeMoniker parentType = Construct.AssociationParentType(prop);
 		TypeMoniker childType = Construct.AssociationChildType(prop);
@@ -217,7 +217,7 @@ this.WriteObjects("    </Association>\r\n");
 }
 
 	// Associations for ObjectLists
-	foreach(var prop in GetObjectListPropertiesWithStorage())
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
 		TypeMoniker childType = Construct.PropertyCollectionEntryType(prop);

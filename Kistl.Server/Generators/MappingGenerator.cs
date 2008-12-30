@@ -24,6 +24,20 @@ namespace Kistl.Server.Generators
                                         Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
                                         ctx);
             gen.ExecuteTemplate();
+
+            gen = Generator.GetTemplateGenerator(
+                                        "Server.EfModel.ModelMsl",
+                                        "Model.msl",
+                                        Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
+                                        ctx);
+            gen.ExecuteTemplate();
+
+            gen = Generator.GetTemplateGenerator(
+                                        "Server.EfModel.ModelSsdl",
+                                        "Model.ssdl",
+                                        Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
+                                        ctx);
+            gen.ExecuteTemplate();
         }
 
         #endregion
