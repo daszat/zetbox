@@ -33,26 +33,17 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
         }
 
         #region Helper
-        private static ObjectClass GetRootClass(ObjectClass c)
-        {
-            while (c.BaseObjectClass != null)
-            {
-                c = c.BaseObjectClass;
-            }
-
-            return c;
-        }
 
         private static string GetAssociationChildEntitySetName(Property prop, IEnumerable<ObjectClass> objClassList)
         {
             TypeMoniker childType = Generator.GetAssociationChildType(prop);
             if (!prop.IsList)
             {
-                return GetRootClass(objClassList.First(c => childType.Classname == c.ClassName)).ClassName;
+                return objClassList.First(c => childType.ClassName == c.ClassName).GetRootClass().ClassName;
             }
             else
             {
-                return childType.Classname;
+                return childType.ClassName;
             }
         }
 
@@ -63,7 +54,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
 
         private static string GetAssociationParentTypeName(TypeMoniker type)
         {
-            return "Model." + type.Classname;
+            return "Model." + type.ClassName;
         }
 
         private static string GetAssociationChildTypeName(Property prop)
@@ -74,7 +65,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             }
             else
             {
-                return "Model." + Generator.GetPropertyCollectionObjectType(prop).Classname;
+                return "Model." + Generator.GetPropertyCollectionObjectType(prop).ClassName;
             }
         }
         #endregion
@@ -183,7 +174,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 TypeMoniker childType;
 
                 xml.WriteStartElement("EntityType");
-                xml.WriteAttributeString("Name", collectionType.Classname);
+                xml.WriteAttributeString("Name", collectionType.ClassName);
 
                 xml.WriteStartElement("Key");
                 xml.WriteStartElement("PropertyRef");
@@ -448,8 +439,8 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 TypeMoniker otherType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteStartElement("EntitySet");
-                xml.WriteAttributeString("Name", otherType.Classname);
-                xml.WriteAttributeString("EntityType", "Model." + otherType.Classname);
+                xml.WriteAttributeString("Name", otherType.ClassName);
+                xml.WriteAttributeString("EntityType", "Model." + otherType.ClassName);
                 xml.WriteEndElement(); // </EntitySet>
             }
 
@@ -467,7 +458,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("EntitySet", GetRootClass(prop.ReferenceObjectClass).ClassName);
+                xml.WriteAttributeString("EntitySet", prop.ReferenceObjectClass.GetRootClass().ClassName);
                 xml.WriteEndElement(); // </End>
 
                 // Child
@@ -494,7 +485,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("EntitySet", GetRootClass((ObjectClass)prop.ObjectClass).ClassName);
+                xml.WriteAttributeString("EntitySet", ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName);
                 xml.WriteEndElement(); // </End>
 
                 // Child
@@ -625,7 +616,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
 
                 xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, "fk_Parent"));
                 xml.WriteAttributeString("TypeName", "Model." + Generator.GetAssociationName(parentType, childType, "fk_Parent"));
-                xml.WriteAttributeString("StoreEntitySet", childType.Classname);
+                xml.WriteAttributeString("StoreEntitySet", childType.ClassName);
 
                 xml.WriteStartElement("EndProperty");
                 xml.WriteAttributeString("Name", Generator.GetAssociationParentRoleName(parentType));
@@ -665,7 +656,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
 
                 xml.WriteAttributeString("Name", Generator.GetAssociationName(parentType, childType, prop.PropertyName));
                 xml.WriteAttributeString("TypeName", "Model." + Generator.GetAssociationName(parentType, childType, prop.PropertyName));
-                xml.WriteAttributeString("StoreEntitySet", childType.Classname);
+                xml.WriteAttributeString("StoreEntitySet", childType.ClassName);
 
                 xml.WriteStartElement("EndProperty");
                 xml.WriteAttributeString("Name", Generator.GetAssociationParentRoleName(parentType));
@@ -702,13 +693,13 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 TypeMoniker otherType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteStartElement("EntitySetMapping");
-                xml.WriteAttributeString("Name", otherType.Classname);
+                xml.WriteAttributeString("Name", otherType.ClassName);
 
                 xml.WriteStartElement("EntityTypeMapping");
-                xml.WriteAttributeString("TypeName", "IsTypeOf(Model." + otherType.Classname + ")");
+                xml.WriteAttributeString("TypeName", "IsTypeOf(Model." + otherType.ClassName + ")");
 
                 xml.WriteStartElement("MappingFragment");
-                xml.WriteAttributeString("StoreEntitySet", otherType.Classname);
+                xml.WriteAttributeString("StoreEntitySet", otherType.ClassName);
 
                 xml.WriteStartElement("ScalarProperty");
                 xml.WriteAttributeString("Name", "ID");
@@ -826,14 +817,14 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("Type", "Model.Store." + parentType.Classname);
+                xml.WriteAttributeString("Type", "Model.Store." + parentType.ClassName);
                 xml.WriteAttributeString("Multiplicity", "0..1");
                 xml.WriteEndElement(); // </End>
 
                 // Child
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
-                xml.WriteAttributeString("Type", "Model.Store." + childType.Classname);
+                xml.WriteAttributeString("Type", "Model.Store." + childType.ClassName);
                 xml.WriteAttributeString("Multiplicity", "*");
                 xml.WriteEndElement(); // </End>
 
@@ -876,14 +867,14 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("Type", "Model.Store." + parentType.Classname);
+                xml.WriteAttributeString("Type", "Model.Store." + parentType.ClassName);
                 xml.WriteAttributeString("Multiplicity", "0..1");
                 xml.WriteEndElement(); // </End>
 
                 // Child
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
-                xml.WriteAttributeString("Type", "Model.Store." + childType.Classname);
+                xml.WriteAttributeString("Type", "Model.Store." + childType.ClassName);
                 xml.WriteAttributeString("Multiplicity", "*"); // prop.GetRelationType() == RelationType.one_one ? "0..1" : Storage: Always 1:n? Why?
                 xml.WriteEndElement(); // </End>
 
@@ -928,14 +919,14 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("Type", "Model.Store." + parentType.Classname);
+                xml.WriteAttributeString("Type", "Model.Store." + parentType.ClassName);
                 xml.WriteAttributeString("Multiplicity", "1");
                 xml.WriteEndElement(); // </End>
 
                 // Child
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
-                xml.WriteAttributeString("Type", "Model.Store." + childType.Classname);
+                xml.WriteAttributeString("Type", "Model.Store." + childType.ClassName);
                 xml.WriteAttributeString("Multiplicity", "0..1");
                 xml.WriteEndElement(); // </End>
 
@@ -972,7 +963,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 TypeMoniker otherType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteStartElement("EntityType");
-                xml.WriteAttributeString("Name", otherType.Classname);
+                xml.WriteAttributeString("Name", otherType.ClassName);
 
                 xml.WriteStartElement("Key");
                 xml.WriteStartElement("PropertyRef");
@@ -1125,12 +1116,12 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
 
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("EntitySet", parentType.Classname);
+                xml.WriteAttributeString("EntitySet", parentType.ClassName);
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
-                xml.WriteAttributeString("EntitySet", childType.Classname);
+                xml.WriteAttributeString("EntitySet", childType.ClassName);
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteEndElement(); // </AssociationSet>
@@ -1153,13 +1144,13 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("EntitySet", parentType.Classname);
+                xml.WriteAttributeString("EntitySet", parentType.ClassName);
                 xml.WriteEndElement(); // </End>
 
                 // Child
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
-                xml.WriteAttributeString("EntitySet", childType.Classname); // No baseclass.
+                xml.WriteAttributeString("EntitySet", childType.ClassName); // No baseclass.
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteEndElement(); // </AssociationSet>
@@ -1184,13 +1175,13 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 // Parent
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationParentRoleName(parentType));
-                xml.WriteAttributeString("EntitySet", parentType.Classname);
+                xml.WriteAttributeString("EntitySet", parentType.ClassName);
                 xml.WriteEndElement(); // </End>
 
                 // Child
                 xml.WriteStartElement("End");
                 xml.WriteAttributeString("Role", Generator.GetAssociationChildRoleName(childType));
-                xml.WriteAttributeString("EntitySet", childType.Classname); // No baseclass.
+                xml.WriteAttributeString("EntitySet", childType.ClassName); // No baseclass.
                 xml.WriteEndElement(); // </End>
 
                 xml.WriteEndElement(); // </AssociationSet>
@@ -1206,8 +1197,8 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 TypeMoniker otherType = Generator.GetPropertyCollectionObjectType(prop);
 
                 xml.WriteStartElement("EntitySet");
-                xml.WriteAttributeString("Name", otherType.Classname);
-                xml.WriteAttributeString("EntityType", "Model.Store." + otherType.Classname);
+                xml.WriteAttributeString("Name", otherType.ClassName);
+                xml.WriteAttributeString("EntityType", "Model.Store." + otherType.ClassName);
                 xml.WriteAttributeString("Table", Generator.GetDatabaseTableName(prop));
                 xml.WriteEndElement(); // </EntitySet>
             }

@@ -1,18 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Linq;
-using System.Text;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-
-using Kistl.App.Base;
-using System.IO;
-using System.Reflection;
 using System.Collections;
-using Kistl.API;
-using Kistl.Server;
+using System.Collections.Generic;
+using System.Data.Linq;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+
+using Kistl.API;
+using Kistl.App.Base;
+using Kistl.Server;
+using Kistl.Server.Generators.Extensions;
 using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.Generators
@@ -89,7 +90,7 @@ namespace Kistl.Server.Generators
             var gen = Generator.GetTemplateGenerator(
                 @"Interface.DataTypes.Template",
                 objClass.ClassName + ".Designer.cs",
-                Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),
+                Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
                 objClass);
             gen.ExecuteTemplate();
         }
@@ -99,7 +100,7 @@ namespace Kistl.Server.Generators
             var gen = Generator.GetTemplateGenerator(
                 @"Server.ObjectClasses.Template",
                 objClass.ClassName + ".Server.Designer.cs",
-                Kistl.Server.GeneratorsOld.TaskEnum.Server.GetKistlObjectsName(),
+                Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
                 objClass);
             gen.ExecuteTemplate();
         }
@@ -109,7 +110,7 @@ namespace Kistl.Server.Generators
             var gen = Generator.GetTemplateGenerator(
                             @"Interface.Enumerations.Template",
                             e.ClassName + ".Designer.cs",
-                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),
+                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
                             e);
             gen.ExecuteTemplate();
         }
@@ -119,7 +120,7 @@ namespace Kistl.Server.Generators
             var gen = Generator.GetTemplateGenerator(
                             @"Interface.DataTypes.Template",
                             s.ClassName + ".Designer.cs",
-                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),
+                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
                             s);
             gen.ExecuteTemplate();
         }
@@ -129,7 +130,7 @@ namespace Kistl.Server.Generators
             var gen = Generator.GetTemplateGenerator(
                             @"Interface.DataTypes.Template",
                             i.ClassName + ".Designer.cs",
-                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.GetKistlObjectsName(),
+                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
                             i);
             gen.ExecuteTemplate();
         }

@@ -80,7 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomActionsManagerServer.cs" />
-    <Compile Include="Generators.Extensions\MethodChecks.cs" />
+    <Compile Include="Generators.Extensions\MethodExtensions.cs" />
+    <Compile Include="Generators.Extensions\MiscExtensions.cs" />
     <Compile Include="Generators.Extensions\PropertyChecks.cs" />
     <Compile Include="Generators.Extensions\Reflection.cs" />
     <Compile Include="GeneratorsOld\DatabaseGenerator.cs" />
@@ -98,6 +99,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Generators\EntityFramework\Interface\DataTypes\Template.cs" />
+    <Compile Include="Generators\EntityFramework\Server\Construct.cs" />
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.csdl.cs" />
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.csdl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.csdl.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.csdl.EntityTypeFields.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.csdl.EntityTypeFields.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\ObjectClasses\EfListWrapper.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EfListWrapper.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\ObjectClasses\ListProperty.cs" />
     <Compile Include="Generators\EntityFramework\Server\ObjectClasses\Template.cs" />
     <Compile Include="Generators\EntityFramework\Server\ObjectClasses\IdProperty.cs" />
     <Compile Include="Generators\GenerationHost.cs" />
@@ -109,19 +128,19 @@
     </Compile>
     <Compile Include="Generators\Templates\Interface\Enumerations\Template.cs">
       <DependentUpon>Template.cst</DependentUpon>
-</Compile>
-<Compile Include="Generators\Templates\Interface\DataTypes\Method.cs" >
-	<DependentUpon>Method.cst</DependentUpon>
-</Compile>
-<Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs">
-	<DependentUpon>SimplePropertyListTemplate.cst</DependentUpon>
-</Compile>
-<Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs">
-	<DependentUpon>SimplePropertyTemplate.cst</DependentUpon>
-</Compile>
-<Compile Include="Generators\Templates\Interface\DataTypes\Template.cs">
-	<DependentUpon>Template.cst</DependentUpon>
-</Compile>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\DataTypes\Method.cs">
+      <DependentUpon>Method.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cs">
+      <DependentUpon>SimplePropertyListTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cs">
+      <DependentUpon>SimplePropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\DataTypes\Template.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Interface\DataTypes\Method.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,18 +167,16 @@
       <DependentUpon>Template.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\ListProperty.cs">
-	    <DependentUpon>ListProperty.cst</DependentUpon>
+      <DependentUpon>ListProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\ListProperty.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListProperty.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Server\ObjectClasses\Method.cs" >
-	    <DependentUpon>Method.cst</DependentUpon>
-    </Compile>
+    <Compile Include="Generators\Templates\Server\ObjectClasses\Method.cs" />
     <Compile Include="Generators\Templates\Server\ObjectClasses\MethodBody.cs">
-	    <DependentUpon>MethodBody.cst</DependentUpon>
+      <DependentUpon>MethodBody.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\MethodBody.Designer.cs">
       <DependentUpon>MethodBody.cst</DependentUpon>
@@ -167,12 +184,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\Template.cs">
-	    <DependentUpon>Template.cst</DependentUpon>
+      <DependentUpon>Template.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\TemplateFactory.cs" />
     <Compile Include="Generators\TemplateGenerator.cs" />
     <Compile Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.cs">
-	    <DependentUpon>NotifyingValueProperty.cst</DependentUpon>
+      <DependentUpon>NotifyingValueProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Server\ObjectClasses\NotifyingValueProperty.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -302,6 +319,22 @@
     <None Include="Generators\Templates\Server\ObjectClasses\ListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ListProperty.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Generators\EntityFramework\Server\ObjectClasses\EfListWrapper.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EfListWrapper.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Generators\EntityFramework\Server\EfModel\Model.csdl.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.csdl.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\EntityFramework\Server\EfModel\Model.csdl.EntityTypeFields.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.csdl.EntityTypeFields.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

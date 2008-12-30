@@ -1,11 +1,12 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using System.CodeDom;
+
 using Kistl.API;
 using Kistl.App.Base;
-using System.Reflection;
 
 namespace Kistl.Server.GeneratorsOld.Helper
 {
@@ -28,17 +29,6 @@ namespace Kistl.Server.GeneratorsOld.Helper
             return propName.CalcForeignKeyColumnName(parentPropName) + "_pos";
         }
 
-        public static string GetKistlObjectsName(this TaskEnum task)
-        {
-            if (task == TaskEnum.Interface)
-            {
-                return "Kistl.Objects";
-            }
-            else
-            {
-                return string.Format(@"Kistl.Objects.{0}", task);
-            }
-        }
         #endregion
 
         #region ToCodeTypeReference
@@ -668,23 +658,5 @@ namespace Kistl.Server.GeneratorsOld.Helper
         }
         #endregion
 
-        #region NeedsPositionColumn
-        public static bool NeedsPositionColumn(this Property p)
-        {
-            if (!p.HasStorage()) return false;
-
-            if (p is ObjectReferenceProperty)
-            {
-                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)p;
-                if (objRefProp.IsList == false &&
-                    objRefProp.GetRelation() != null &&
-                    objRefProp.GetRelationType() == Kistl.API.RelationType.one_n &&
-                    objRefProp.GetOpposite().IsIndexed) return true;
-            }
-            if (p.IsList == true &&
-                p.IsIndexed) return true;
-            return false;
-        }
-        #endregion
     }
 }

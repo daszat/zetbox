@@ -246,7 +246,7 @@ namespace Kistl.Server.GeneratorsOld
         #region GenerateAssemblyInfo
         protected virtual void GenerateAssemblyInfo(CodeCompileUnit code, TaskEnum task)
         {
-            code.AddAttribute(typeof(System.Reflection.AssemblyTitleAttribute), task.GetKistlObjectsName());
+            code.AddAttribute(typeof(System.Reflection.AssemblyTitleAttribute), task.ToNameSpace());
             code.AddAttribute(typeof(System.Reflection.AssemblyCompanyAttribute), "dasz.at");
             code.AddAttribute(typeof(System.Reflection.AssemblyProductAttribute), "Kistl");
             code.AddAttribute(typeof(System.Reflection.AssemblyCopyrightAttribute), "Copyright © dasz.at 2008");
@@ -263,7 +263,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateAssemblyInfo(code, task);
 
             // Generate the code & save
-            SaveFile(code, string.Format(@"{0}\AssemblyInfo.cs", task.GetKistlObjectsName()));
+            SaveFile(code, string.Format(@"{0}\AssemblyInfo.cs", task.ToNameSpace()));
         }
         #endregion
 
@@ -555,12 +555,12 @@ namespace Kistl.Server.GeneratorsOld
             foreach (TaskEnum task in new TaskEnum[] { TaskEnum.Client, TaskEnum.Server })
             {
                 code = new CodeCompileUnit();
-                ns = CreateNamespace(code, task.GetKistlObjectsName(), task);
+                ns = CreateNamespace(code, task.ToNameSpace(), task);
 
                 ns.Types.Add(c);
 
                 // Generate the code & save
-                SaveFile(code, string.Format(@"{0}\FrozenContext.cs", task.GetKistlObjectsName()));
+                SaveFile(code, string.Format(@"{0}\FrozenContext.cs", task.ToNameSpace()));
             }
         }
         #endregion
@@ -619,7 +619,7 @@ namespace Kistl.Server.GeneratorsOld
             }
 
             // Generate the code & save
-            SaveFile(code, string.Format(@"{0}\ObjectSerializer.cs", task.GetKistlObjectsName()));
+            SaveFile(code, string.Format(@"{0}\ObjectSerializer.cs", task.ToNameSpace()));
         }
         #endregion
 
@@ -655,7 +655,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateInferfaceMethods((CurrentObjectClass)current.Clone(), current.objClass.Methods);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.objClass.ClassName + ".Designer.cs");
+            SaveFile(current.code, current.task.ToNameSpace() + @"\" + current.objClass.ClassName + ".Designer.cs");
         }
         #endregion
 
@@ -711,7 +711,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateStreamMethodsInternal((CurrentObjectClass)current.Clone(), current.objClass.Properties);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.objClass.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.ToNameSpace() + @"\" + current.objClass.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -800,7 +800,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateInterfaces(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.@interface.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.ToNameSpace() + @"\" + current.@interface.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -827,7 +827,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateStructInterfaces(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.ToNameSpace() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -860,7 +860,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateStructs(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.ToNameSpace() + @"\" + current.@struct.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -893,7 +893,7 @@ namespace Kistl.Server.GeneratorsOld
             GenerateEnumerations(current);
 
             // Generate the code & save
-            SaveFile(current.code, current.task.GetKistlObjectsName() + @"\" + current.enumeration.ClassName + "." + current.task + ".Designer.cs");
+            SaveFile(current.code, current.task.ToNameSpace() + @"\" + current.enumeration.ClassName + "." + current.task + ".Designer.cs");
         }
         #endregion
 
@@ -952,7 +952,7 @@ namespace Kistl.Server.GeneratorsOld
         {
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
-            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + Kistl.API.Helper.ImplementationSuffix,
+            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).ClassName + Kistl.API.Helper.ImplementationSuffix,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
             if (current.task != TaskEnum.Interface)
             {
@@ -1182,7 +1182,7 @@ namespace Kistl.Server.GeneratorsOld
             ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)current.property;
             CurrentObjectClass collectionClass = (CurrentObjectClass)current.Clone();
 
-            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).Classname + Kistl.API.Helper.ImplementationSuffix,
+            collectionClass.code_class = collectionClass.code_namespace.CreateClass(Generator.GetPropertyCollectionObjectType((Property)current.property).ClassName + Kistl.API.Helper.ImplementationSuffix,
                 string.Format("Kistl.API.{0}.Base{0}CollectionEntry", current.task));
             if (current.task != TaskEnum.Interface)
             {

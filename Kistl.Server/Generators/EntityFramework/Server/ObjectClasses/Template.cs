@@ -22,7 +22,7 @@ namespace Kistl.Server.Generators.EntityFramework.Server.ObjectClasses
         protected override string GetAdditionalImports()
         {
             return base.GetAdditionalImports() + "\n"
-                + String.Join("\n", new string[] { "Kistl.DALProvider.EF" }
+                + String.Join("\n", new string[] { "Kistl.DALProvider.EF", "System.Data.Objects", "System.Data.Objects.DataClasses" }
                     .Select(s => String.Format("\tusing {0};", s))
                     .ToArray());
         }

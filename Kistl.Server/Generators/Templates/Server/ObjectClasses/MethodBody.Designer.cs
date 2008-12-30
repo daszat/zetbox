@@ -9,7 +9,7 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst")]
     public partial class MethodBody : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected Kistl.App.Base.Method m;
@@ -24,19 +24,13 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
         
         public override void Generate()
         {
-#line 13 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
+#line 13 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
 this.WriteObjects("\r\n");
-#line 15 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
-this.WriteObjects("		{\r\n");
-this.WriteObjects("		    // blah\r\n");
-this.WriteObjects("		}\r\n");
-#line 19 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
+#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
 string delegateName = m.MethodName + "_Handler";
 string eventName = "On" + m.MethodName + "_" + m.ObjectClass.ClassName;
+var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
-#line 22 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
-this.WriteObjects("		public event ",  delegateName , "<",  m.ObjectClass.ClassName , "> ",  eventName , ";\r\n");
-#line 25 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
 string parameterDefs = m.GetParameterDefinitions();
 if (!String.IsNullOrEmpty(parameterDefs))
 {
@@ -44,21 +38,46 @@ if (!String.IsNullOrEmpty(parameterDefs))
 	parameterDefs = ", " + parameterDefs;	
 }
 
-var ret = m.GetReturnParameter();
-if (ret == null)
+string argumentDefs = m.GetArguments();
+if (!String.IsNullOrEmpty(argumentDefs))
 {
+    // add leading comma for later usage
+	argumentDefs = ", " + argumentDefs;	
+}
 
-#line 36 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
+if (returnParam == null)
+{
+#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
+this.WriteObjects("		{\r\n");
+this.WriteObjects("            // base.",  m.MethodName , "();\r\n");
+this.WriteObjects("            if (",  eventName , " != null)\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("				",  eventName , "(this",  argumentDefs , ");\r\n");
+this.WriteObjects("			}\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("		public event ",  delegateName , "<",  m.ObjectClass.ClassName , "> ",  eventName , ";\r\n");
 this.WriteObjects("		public delegate void ",  delegateName , "<T>(T obj",  parameterDefs , ");\r\n");
-#line 38 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
 }
 else
 {
 
-#line 42 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
-this.WriteObjects("		public delegate void ",  delegateName , "<T>(T obj, MethodReturnArgs<",  ret.GetParameterType().FullName , ">",  parameterDefs , ");\r\n");
-#line 44 "E:\Projekte\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
+	string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString());
+
+#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
+this.WriteObjects("		{\r\n");
+this.WriteObjects("            var e = new ",  returnArgsType , "();\r\n");
+this.WriteObjects("            if (",  eventName , " != null)\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                ",  eventName , "(this, e",  argumentDefs , ");\r\n");
+this.WriteObjects("            };\r\n");
+this.WriteObjects("            return e.Result;\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("		public event ",  delegateName , "<",  m.ObjectClass.ClassName , "> ",  eventName , ";\r\n");
+this.WriteObjects("		public delegate void ",  delegateName , "<T>(T obj, ",  returnArgsType , " ret",  parameterDefs , ");\r\n");
+#line 63 "P:\Kistl\Kistl.Server\Generators\Templates\Server\ObjectClasses\MethodBody.cst"
 }
+
 
 
         }

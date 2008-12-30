@@ -12,15 +12,10 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 
 <%@ Parameter Name="m" Type="Kistl.App.Base.Method" %>
-		{
-		    // blah
-		}
 <%
 string delegateName = m.MethodName + "_Handler";
 string eventName = "On" + m.MethodName + "_" + m.ObjectClass.ClassName;
-%>
-		public event <%= delegateName %><<%= m.ObjectClass.ClassName %>> <%= eventName %>;
-<%
+var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
 string parameterDefs = m.GetParameterDefinitions();
 if (!String.IsNullOrEmpty(parameterDefs))
@@ -29,17 +24,42 @@ if (!String.IsNullOrEmpty(parameterDefs))
 	parameterDefs = ", " + parameterDefs;	
 }
 
-var ret = m.GetReturnParameter();
-if (ret == null)
+string argumentDefs = m.GetArguments();
+if (!String.IsNullOrEmpty(argumentDefs))
 {
-%>
-		public delegate void <%= delegateName %><T>(T obj<%= parameterDefs %>);
-<%
+    // add leading comma for later usage
+	argumentDefs = ", " + argumentDefs;	
 }
+
+if (returnParam == null)
+{%>
+		{
+            // base.<%= m.MethodName %>();
+            if (<%= eventName %> != null)
+            {
+				<%= eventName %>(this<%= argumentDefs %>);
+			}
+        }
+		public event <%= delegateName %><<%= m.ObjectClass.ClassName %>> <%= eventName %>;
+		public delegate void <%= delegateName %><T>(T obj<%= parameterDefs %>);
+<%}
 else
 {
+
+	string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString());
 %>
-		public delegate void <%= delegateName %><T>(T obj, MethodReturnArgs<<%= ret.GetParameterType().FullName %>><%= parameterDefs %>);
+		{
+            var e = new <%= returnArgsType %>();
+            if (<%= eventName %> != null)
+            {
+                <%= eventName %>(this, e<%= argumentDefs %>);
+            };
+            return e.Result;
+        }
+		public event <%= delegateName %><<%= m.ObjectClass.ClassName %>> <%= eventName %>;
+		public delegate void <%= delegateName %><T>(T obj, <%= returnArgsType %> ret<%= parameterDefs %>);
 <%
+
 }
+
 %>

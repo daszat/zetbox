@@ -54,6 +54,24 @@ namespace Kistl.Server.Generators.Extensions
             return prop is StructProperty && ((Property)prop).IsList;
         }
 
+        public static bool NeedsPositionColumn(this BaseProperty p)
+        {
+            var prop = p as Property;
+            if (prop == null || !prop.HasStorage()) return false;
+
+            if (prop is ObjectReferenceProperty)
+            {
+                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
+                if (objRefProp.IsList == false &&
+                    objRefProp.GetRelation() != null &&
+                    objRefProp.GetRelationType() == Kistl.API.RelationType.one_n &&
+                    objRefProp.GetOpposite().IsIndexed) return true;
+            }
+            if (prop.IsList == true &&
+                prop.IsIndexed) return true;
+            return false;
+        }
+
         public static string GetCollectionTypeString(this Property prop)
         {
             if (prop.IsIndexed)

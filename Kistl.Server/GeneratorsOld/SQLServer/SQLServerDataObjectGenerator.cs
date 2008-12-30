@@ -242,7 +242,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 implCollectionClass.code_class.BaseTypes[0].BaseType = "BaseServerCollectionEntry_EntityFramework";
                 implCollectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionType.Classname)));
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionType.ClassName)));
 
                 implCollectionClass.code_property.AddAttribute("EdmRelationshipNavigationPropertyAttribute",
                     "Model",
@@ -326,7 +326,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 collectionClass.code_class.BaseTypes[0].BaseType = "BaseServerCollectionEntry_EntityFramework";
                 collectionClass.code_class.AddAttribute("EdmEntityTypeAttribute",
                     new CodeAttributeArgument("NamespaceName", new CodePrimitiveExpression("Model")),
-                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionType.Classname)));
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(collectionType.ClassName)));
 
 
                 CurrentObjectClass currentEFProperty = (CurrentObjectClass)current.Clone();

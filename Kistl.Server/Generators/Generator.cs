@@ -26,7 +26,7 @@ namespace Kistl.Server.Generators
                     gDataObjects.Generate(ctx, Helper.CodeGenPath);
 
                     Trace.TraceInformation("Generating Mapping");
-                    // gMapping.Generate(ctx, Helper.CodeGenPath);
+                    gMapping.Generate(ctx, Helper.CodeGenPath);
 
                     try
                     {

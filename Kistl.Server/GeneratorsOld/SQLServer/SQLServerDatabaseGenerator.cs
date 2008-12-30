@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
+using System.Data.Common;
 using System.Data.Linq;
 using System.Data.SqlClient;
-using System.Data.Common;
+using System.Linq;
 using System.Text;
-using Kistl.App.Base;
+
 using Kistl.API;
+using Kistl.App.Base;
 using Kistl.Server;
+using Kistl.Server.Generators.Extensions;
 using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.GeneratorsOld.SQLServer
@@ -111,7 +113,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             {
                 if (p is StructProperty)
                 {
-                    CheckTableProperties(classToCheck, ((StructProperty)p).StructDefinition, 
+                    CheckTableProperties(classToCheck, ((StructProperty)p).StructDefinition,
                         p.PropertyName.CalcColumnName(parentPropertyName));
                 }
                 else
@@ -147,7 +149,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             {
                 if (p is StructProperty)
                 {
-                    AppendTableProperties(sb, ((StructProperty)p).StructDefinition, 
+                    AppendTableProperties(sb, ((StructProperty)p).StructDefinition,
                         p.PropertyName.CalcColumnName(parentPropertyName));
                 }
                 else
@@ -224,7 +226,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 else
                 {
                     System.Diagnostics.Trace.TraceInformation("Creating Table " + Generator.GetDatabaseTableName(p));
-                    
+
                     StringBuilder sb = new StringBuilder();
                     sb.AppendFormat("create table [{0}] ( ", Generator.GetDatabaseTableName(p));
                     sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");

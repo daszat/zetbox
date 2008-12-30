@@ -1,12 +1,14 @@
 using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.CodeDom.Compiler;
+
 using Kistl.API;
-using System.CodeDom;
 using Kistl.App.Base;
-using System.Diagnostics;
+using Kistl.Server.Generators.Extensions;
 using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.GeneratorsOld
@@ -72,8 +74,8 @@ namespace Kistl.Server.GeneratorsOld
 
         internal static void Delete(TaskEnum type)
         {
-            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistlObjectsName() + ".dll");
-            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistlObjectsName() + ".pdb");
+            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.ToNameSpace() + ".dll");
+            System.IO.File.Delete(Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.ToNameSpace() + ".pdb");
         }
 
         internal static void Compile(TaskEnum type)
@@ -83,7 +85,7 @@ namespace Kistl.Server.GeneratorsOld
             Microsoft.CSharp.CSharpCodeProvider p = new Microsoft.CSharp.CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v3.5" } });
             CompilerParameters options = new CompilerParameters();
 
-            options.OutputAssembly = Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.GetKistlObjectsName() + ".dll";
+            options.OutputAssembly = Kistl.Server.Helper.CodeGenPath + @"\bin\" + type.ToNameSpace() + ".dll";
             options.IncludeDebugInformation = true; // false in Production!!!
             options.GenerateExecutable = false;
             options.TreatWarningsAsErrors = false; // true in Production!!!
@@ -116,7 +118,7 @@ namespace Kistl.Server.GeneratorsOld
             }
 
             CompilerResults result = p.CompileAssemblyFromFile(options,
-                System.IO.Directory.GetFiles(Kistl.Server.Helper.CodeGenPath + @"\" + type.GetKistlObjectsName() + @"\", "*.cs"));
+                System.IO.Directory.GetFiles(Kistl.Server.Helper.CodeGenPath + @"\" + type.ToNameSpace() + @"\", "*.cs"));
 
             using (System.IO.StreamWriter file = System.IO.File.CreateText(Kistl.Server.Helper.CodeGenPath + @"\errors.txt"))
             {
@@ -159,7 +161,7 @@ namespace Kistl.Server.GeneratorsOld
 
         public static string GetAssociationName(TypeMoniker parentClass, TypeMoniker childClass, string propertyName)
         {
-            return GetAssociationName(parentClass.Classname, childClass.Classname, propertyName);
+            return GetAssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
         }
 
         public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass, string propertyName)
@@ -171,14 +173,14 @@ namespace Kistl.Server.GeneratorsOld
         {
             return GetAssociationName(
                 parentClass.ClassName, 
-                Generator.GetPropertyCollectionObjectType(listProperty).Classname, 
+                Generator.GetPropertyCollectionObjectType(listProperty).ClassName, 
                 listProperty.PropertyName);
         }
         public static string GetAssociationName(ObjectClass parentClass, Property listProperty, string propertyName)
         {
             return GetAssociationName(
                 parentClass.ClassName,
-                Generator.GetPropertyCollectionObjectType(listProperty).Classname,
+                Generator.GetPropertyCollectionObjectType(listProperty).ClassName,
                 propertyName);
         }
 
@@ -201,7 +203,7 @@ namespace Kistl.Server.GeneratorsOld
 
         public static string GetAssociationParentRoleName(TypeMoniker obj)
         {
-            return GetAssociationParentRoleName(obj.Classname);
+            return GetAssociationParentRoleName(obj.ClassName);
         }
 
         public static string GetAssociationParentRoleName(DataType obj)
@@ -223,7 +225,7 @@ namespace Kistl.Server.GeneratorsOld
 
         public static string GetAssociationChildRoleName(TypeMoniker obj)
         {
-            return GetAssociationChildRoleName(obj.Classname);
+            return GetAssociationChildRoleName(obj.ClassName);
         }
 
         public static string GetAssociationChildRoleName(ObjectClass obj)
@@ -238,6 +240,7 @@ namespace Kistl.Server.GeneratorsOld
         #endregion
 
         #region GetPropertyCollectionObjectType
+        // ==>> Construct.PropertyCollectionEntryType
         public static TypeMoniker GetPropertyCollectionObjectType(Property prop)
         {
             return new TypeMoniker(prop.ObjectClass.Module.Namespace,

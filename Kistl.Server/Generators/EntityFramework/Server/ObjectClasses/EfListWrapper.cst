@@ -1,0 +1,29 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Server.ObjectClasses.EfListWrapper"
+	CodeFile="Server.ObjectClasses.EfListWrapper.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Server.ObjectClasses.EfListWrapper" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.EntityFramework.Server" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="containingClass" Type="ObjectClass" %>
+<%@ Parameter Name="type" Type="Type" %>
+<%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="property" Type="Property" %>
+		[EdmRelationshipNavigationPropertyAttribute("Model", "<%= Construct.AssociationName(containingClass, property) %>", "<%= Construct.AssociationChildRoleName(property) %>")]
+        public EntityCollection<Kistl.App.Base.Constraint__Implementation__> <%= name %>__Implementation__
+        {
+            get
+            {
+                EntityCollection<Kistl.App.Base.Constraint__Implementation__> c = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Kistl.App.Base.Constraint__Implementation__>("Model.FK_Constraint_BaseProperty_ConstrainedProperty", "B_Constraint");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded) c.Load(); 
+                return c;
+            }
+        }
+        
+        

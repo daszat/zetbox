@@ -81,7 +81,7 @@ namespace Kistl.Server.Generators.Templates.Server.ObjectClasses
             }
             else
             {
-                this.Host.CallTemplate("Server.ObjectClasses.ListProperty", p.GetPropertyType(), p.PropertyName, p);
+                this.Host.CallTemplate("Server.ObjectClasses.ListProperty", dataType, p.GetPropertyType(), p.PropertyName, p);
             }
         }
 
