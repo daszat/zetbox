@@ -40,8 +40,7 @@ foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList))
 			ApplyComplexProperty(prop, "");
 		}
 
-#line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.msl.EntityTypeMapping.cst"
-this.WriteObjects("	    \r\n");
+#line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.msl.EntityTypeMapping.cst"
 this.WriteObjects("	    </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 #line 32 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.msl.EntityTypeMapping.cst"
