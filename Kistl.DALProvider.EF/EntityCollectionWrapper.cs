@@ -94,12 +94,12 @@ namespace Kistl.API.Server
             // Sets the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
             // Sets Parameter.Method__Position__
-            item.SetPropertyValue<int?>(_pointerProperty + Helper.PositonSuffix, index);
+            item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
         }
 
         protected int? GetIndex(INTERFACE item)
         {
-            return item.GetPropertyValue<int?>(_pointerProperty + Helper.PositonSuffix);
+            return item.GetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix);
         }
 
         protected INTERFACE GetAt(int index)

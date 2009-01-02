@@ -35,7 +35,7 @@ namespace Kistl.API
         /// <summary>
         /// Suffix for Position Properties in Lists
         /// </summary>
-        public const string PositonSuffix = "__Position__";
+        public const string PositionSuffix = "__Position__";
 
         /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.

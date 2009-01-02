@@ -72,7 +72,7 @@ if (p.NeedsPositionColumn())
 			{
 
 #line 58 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.csdl.EntityTypeFields.cst"
-this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.PositonSuffix , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
+this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
 #line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Server\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}

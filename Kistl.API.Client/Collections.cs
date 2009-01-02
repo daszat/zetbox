@@ -61,9 +61,9 @@ namespace Kistl.API.Client
                 // Sets the position Property for a 1:n Relation
                 // eg. Method 1-n Parameter
                 // Sets Parameter.Method__Position__
-                if (item.HasProperty(_pointerProperty + Helper.PositonSuffix))
+                if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
                 {
-                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositonSuffix, index);
+                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
                 }
             }
         }
@@ -81,9 +81,9 @@ namespace Kistl.API.Client
                 // Clears the position Property for a 1:n Relation
                 // eg. Method 1-n Parameter
                 // Clears Parameter.Method__Position__
-                if (item.HasProperty(_pointerProperty + Helper.PositonSuffix))
+                if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
                 {
-                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositonSuffix, null);
+                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, null);
                 }
             }
         }

@@ -55,7 +55,7 @@
 			if (p.NeedsPositionColumn())
 			{
 %>
-    <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositonSuffix %>" Type="Int32" Nullable="true" />
+    <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />
 <%
 			}
 		}

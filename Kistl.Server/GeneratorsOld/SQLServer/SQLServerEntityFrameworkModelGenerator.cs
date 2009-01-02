@@ -352,7 +352,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                         if (p.NeedsPositionColumn())
                         {
                             xml.WriteStartElement("Property");
-                            xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.PositonSuffix);
+                            xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.PositionSuffix);
                             xml.WriteAttributeString("Type", "Int32");
                             xml.WriteAttributeString("Nullable", "true");
                             xml.WriteEndElement(); // </Property>
@@ -529,7 +529,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             foreach (ObjectReferenceProperty p in obj.Properties.OfType<ObjectReferenceProperty>().ToList().Where(p => p.IsList == false && p.NeedsPositionColumn()))
             {
                 xml.WriteStartElement("ScalarProperty");
-                xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.PositonSuffix);
+                xml.WriteAttributeString("Name", p.PropertyName + Kistl.API.Helper.PositionSuffix);
                 xml.WriteAttributeString("ColumnName", p.PropertyName.CalcListPositionColumnName(parentPropName));
                 xml.WriteEndElement(); // </ScalarProperty>
             }

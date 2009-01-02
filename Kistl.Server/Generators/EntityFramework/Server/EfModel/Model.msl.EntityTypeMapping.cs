@@ -32,7 +32,7 @@ namespace Kistl.Server.Generators.EntityFramework.Server.EfModel
             }
             else if (prop is ObjectReferenceProperty && prop.NeedsPositionColumn())
             {
-                propertyName = prop.PropertyName + Kistl.API.Helper.PositonSuffix;
+                propertyName = prop.PropertyName + Kistl.API.Helper.PositionSuffix;
                 columnName = Construct.ListPositionColumnName(prop, parentName);
             }
             else

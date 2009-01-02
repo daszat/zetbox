@@ -1160,7 +1160,7 @@ namespace Kistl.Server.GeneratorsOld
             CurrentObjectClass position = null;
             if (current.property.NeedsPositionColumn())
             {
-                string posPropName = current.property.PropertyName + Kistl.API.Helper.PositonSuffix;
+                string posPropName = current.property.PropertyName + Kistl.API.Helper.PositionSuffix;
                 position = (CurrentObjectClass)current.Clone();
                 position.code_field = position.code_class.CreateField(typeof(int?), "_" + posPropName, "null");
                 position.code_property = position.code_class.CreateNotifyingProperty(typeof(int?), posPropName);
@@ -1866,7 +1866,7 @@ namespace Kistl.Server.GeneratorsOld
                     m.Statements.AddExpression("BinarySerializer.ToBinary(this.fk_{0}, sw)", p.PropertyName);
                     if (((ObjectReferenceProperty)p).NeedsPositionColumn())
                     {
-                        m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, API.Helper.PositonSuffix);
+                        m.Statements.AddExpression("BinarySerializer.ToBinary(this.{0}{1}, sw)", p.PropertyName, API.Helper.PositionSuffix);
                     }
                 }
                 else if (p.IsObjectReferencePropertyList() && p.HasStorage())
@@ -1924,7 +1924,7 @@ namespace Kistl.Server.GeneratorsOld
                     m.Statements.AddExpression("BinarySerializer.FromBinary(out this._fk_{0}, sr)", p.PropertyName);
                     if (((ObjectReferenceProperty)p).NeedsPositionColumn())
                     {
-                        m.Statements.AddExpression("BinarySerializer.FromBinary(out this._{0}{1}, sr)", p.PropertyName, API.Helper.PositonSuffix);
+                        m.Statements.AddExpression("BinarySerializer.FromBinary(out this._{0}{1}, sr)", p.PropertyName, API.Helper.PositionSuffix);
                     }
                 }
                 else if (p.IsObjectReferencePropertySingle() && !p.HasStorage() && false /*((BackReferenceProperty)p).PreFetchToClient*/)

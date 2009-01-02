@@ -594,7 +594,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                         var m = collectionWrapper.code_class.CreateOverrideMethod("GetEnumerable", string.Format("IEnumerable<{0}>", childType.NameDataObject));
                         m.Attributes = MemberAttributes.Family | MemberAttributes.Override;
                         m.Statements.AddExpression("return _ec.OrderBy(i => i.{1}{2}).Cast<{0}>()",
-                            childType.NameDataObject, backRefProp.GetOpposite().PropertyName, API.Helper.PositonSuffix);
+                            childType.NameDataObject, backRefProp.GetOpposite().PropertyName, API.Helper.PositionSuffix);
                     }
 
                     current.code_field = current.code_class.CreateField(
