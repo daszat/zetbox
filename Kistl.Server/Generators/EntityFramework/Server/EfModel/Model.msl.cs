@@ -13,5 +13,10 @@ namespace Kistl.Server.Generators.EntityFramework.Server.EfModel
         {
             CallTemplate("Server.EfModel.ModelMslEntityTypeMapping", obj);
         }
+
+        protected virtual void ApplyCollectionEntryEntityTypeMapping(Property listProp)
+        {
+            CallTemplate("Server.EfModel.ModelMslCollectionEntryEntityTypeMapping", listProp);
+        }
     }
 }

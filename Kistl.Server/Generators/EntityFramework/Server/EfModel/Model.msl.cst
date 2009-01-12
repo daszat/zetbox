@@ -11,17 +11,66 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.GeneratorsOld" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
   <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
 <%
+	// map entities
 	foreach(var cls in ctx.GetBaseClasses())
 	{
 %>
     <EntitySetMapping Name="<%= cls.ClassName %>">
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
+<%
+	}
+
+	// map collection entries
+	foreach(var listProp in ctx.GetObjectListPropertiesWithStorage())
+	{
+		TypeMoniker parentType = listProp.ObjectClass.GetTypeMoniker();
+		TypeMoniker childType = Construct.PropertyCollectionEntryType(listProp);
+		string associationName = Construct.AssociationName(parentType, childType, "fk_Parent");
+		string fkColumnName = Construct.ForeignKeyColumnNameReferencing(listProp.ObjectClass);
+%>
+    <EntitySetMapping Name="<%= childType.ClassName %>">
+<% ApplyCollectionEntryEntityTypeMapping(listProp); %>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="<%= associationName %>"
+                           TypeName="Model.<%= associationName %>"
+                           StoreEntitySet="<%= childType.ClassName %>" >
+      <EndProperty Name="<%= Construct.AssociationParentRoleName(parentType) %>" >
+        <ScalarProperty Name="ID" ColumnName="<%= fkColumnName %>" />
+      </EndProperty>
+      <EndProperty Name="<%= Construct.AssociationChildRoleName(childType) %>" >
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="<%= fkColumnName %>" IsNull="false" />
+    </AssociationSetMapping>
+<%
+	}
+
+	// map object references
+	foreach(var refProp in ctx.GetObjectReferencePropertiesWithStorage())
+	{
+		TypeMoniker parentType = new TypeMoniker(refProp.GetPropertyTypeString());
+		TypeMoniker childType = Construct.AssociationChildType(refProp);
+		string associationName = Construct.AssociationName(parentType, childType, refProp.PropertyName);
+		string fkColumnName = Construct.ForeignKeyColumnName(refProp);
+%>
+    <AssociationSetMapping Name="<%= associationName %>"
+                           TypeName="Model.<%= associationName %>"
+                           StoreEntitySet="<%= childType.ClassName %>" >
+      <EndProperty Name="<%= Construct.AssociationParentRoleName(parentType) %>" >
+        <ScalarProperty Name="ID" ColumnName="<%= fkColumnName %>" />
+      </EndProperty>
+      <EndProperty Name="<%= Construct.AssociationChildRoleName(childType) %>" >
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="<%= fkColumnName %>" IsNull="false" />
+    </AssociationSetMapping>
 <%
 	}
 %>

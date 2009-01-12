@@ -9,20 +9,7 @@ namespace Kistl.Server.Generators.EntityFramework.Server.EfModel
 {
     public partial class ModelCsdl
     {
-        private static string GetAssociationChildEntitySetName(Property prop)
-        {
-            TypeMoniker childType = Construct.AssociationChildType(prop);
-            if (!prop.IsList)
-            {
-                return prop.Context.GetQuery<ObjectClass>().First(c => childType.ClassName == c.ClassName).GetRootClass().ClassName;
-            }
-            else
-            {
-                return childType.ClassName;
-            }
-        }
-
-        protected virtual void ApplyEntityTypeFieldDefs(IEnumerable<BaseProperty> properties)
+        protected virtual void ApplyEntityTypeFieldDefs(IEnumerable<Property> properties)
         {
             CallTemplate("Server.EfModel.ModelCsdlEntityTypeFields", properties);
         }

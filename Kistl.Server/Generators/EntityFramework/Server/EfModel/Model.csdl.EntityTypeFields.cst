@@ -12,8 +12,13 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Import Namespace="Kistl.Server.GeneratorsOld" %>
-<%@ Parameter Name="properties" Type="IEnumerable<BaseProperty>" %>
+<%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
 <%
+
+	/*
+	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
+	 */
+
 	foreach(var p in properties)
 	{
 		// TODO: implement IsNullable everywhere

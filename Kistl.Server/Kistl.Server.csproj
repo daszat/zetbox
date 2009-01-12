@@ -101,6 +101,19 @@
     </Compile>
     <Compile Include="Generators\EntityFramework\Interface\DataTypes\Template.cs" />
     <Compile Include="Generators\EntityFramework\Server\Construct.cs" />
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.ssdl.EntityTypeColumns.Designer.cs">
+      <DependentUpon>Model.ssdl.EntityTypeColumns.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.msl.CollectionEntryEntityTypeMapping.cs">
+      <DependentUpon>Model.msl.CollectionEntryEntityTypeMapping.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\Model.msl.CollectionEntryEntityTypeMapping.Designer.cs">
+      <DependentUpon>Model.msl.CollectionEntryEntityTypeMapping.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Generators\EntityFramework\Server\EfModel\Model.msl.cs">
       <DependentUpon>Model.msl.cst</DependentUpon>
     </Compile>
@@ -138,6 +151,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.ssdl.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\EntityFramework\Server\EfModel\ModelSsdlEntityTypeColumns.cs" />
     <Compile Include="Generators\EntityFramework\Server\ObjectClasses\EfListWrapper.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -355,6 +369,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Generators\EntityFramework\Server\EfModel\Model.ssdl.EntityTypeColumns.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.ssdl.EntityTypeColumns.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\EntityFramework\Server\EfModel\Model.msl.CollectionEntryEntityTypeMapping.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.msl.CollectionEntryEntityTypeMapping.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Generators\EntityFramework\Server\EfModel\Model.csdl.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Model.csdl.Designer.cs</LastGenOutput>

@@ -9,54 +9,53 @@ namespace Kistl.Server.Generators.Extensions
 {
     public static class PropertyChecks
     {
-        public static bool IsListProperty(this BaseProperty prop)
+        public static bool IsListProperty(this Property prop)
         {
-            return prop is Property && ((Property)prop).IsList;
+            return prop.IsList;
         }
 
-        public static bool IsValueTypePropertySingle(this BaseProperty prop)
+        public static bool IsValueTypePropertySingle(this Property prop)
         {
-            return prop is ValueTypeProperty && !((Property)prop).IsList;
+            return prop is ValueTypeProperty && !prop.IsList;
         }
 
-        public static bool IsValueTypePropertyList(this BaseProperty prop)
+        public static bool IsValueTypePropertyList(this Property prop)
         {
-            return prop is ValueTypeProperty && ((Property)prop).IsList;
+            return prop is ValueTypeProperty && prop.IsList;
         }
 
-        public static bool IsEnumerationPropertySingle(this BaseProperty prop)
+        public static bool IsEnumerationPropertySingle(this Property prop)
         {
-            return prop is EnumerationProperty && !((Property)prop).IsList;
+            return prop is EnumerationProperty && !prop.IsList;
         }
 
-        public static bool IsEnumerationPropertyPropertyList(this BaseProperty prop)
+        public static bool IsEnumerationPropertyPropertyList(this Property prop)
         {
-            return prop is EnumerationProperty && ((Property)prop).IsList;
+            return prop is EnumerationProperty && prop.IsList;
         }
 
-        public static bool IsObjectReferencePropertySingle(this BaseProperty prop)
+        public static bool IsObjectReferencePropertySingle(this Property prop)
         {
-            return prop is ObjectReferenceProperty && !((Property)prop).IsList;
+            return prop is ObjectReferenceProperty && !prop.IsList;
         }
 
-        public static bool IsObjectReferencePropertyList(this BaseProperty prop)
+        public static bool IsObjectReferencePropertyList(this Property prop)
         {
-            return prop is ObjectReferenceProperty && ((Property)prop).IsList;
+            return prop is ObjectReferenceProperty && prop.IsList;
         }
 
-        public static bool IsStructPropertySingle(this BaseProperty prop)
+        public static bool IsStructPropertySingle(this Property prop)
         {
-            return prop is StructProperty && !((Property)prop).IsList;
+            return prop is StructProperty && !prop.IsList;
         }
 
-        public static bool IsStructPropertyPropertyList(this BaseProperty prop)
+        public static bool IsStructPropertyPropertyList(this Property prop)
         {
-            return prop is StructProperty && ((Property)prop).IsList;
+            return prop is StructProperty && prop.IsList;
         }
 
-        public static bool NeedsPositionColumn(this BaseProperty p)
+        public static bool NeedsPositionColumn(this Property prop)
         {
-            var prop = p as Property;
             if (prop == null || !prop.HasStorage()) return false;
 
             if (prop is ObjectReferenceProperty)

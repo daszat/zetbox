@@ -1896,7 +1896,7 @@ namespace Kistl.Server.GeneratorsOld
             m.Statements.AddExpression("base.FromStream(sr)");
 
             #region FromStream
-            foreach (BaseProperty p in properties)
+            foreach (var p in properties.Cast<Property>())
             {
                 if (p.IsListProperty() && p.HasStorage())
                 {

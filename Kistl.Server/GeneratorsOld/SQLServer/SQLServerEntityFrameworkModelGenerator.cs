@@ -258,7 +258,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 xml.WriteStartElement("ComplexType");
                 xml.WriteAttributeString("Name", obj.ClassName);
 
-                foreach (BaseProperty p in obj.Properties)
+                foreach (var p in obj.Properties.Cast<Property>())
                 {
                     if (p.IsValueTypePropertySingle())
                     {
@@ -680,7 +680,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 xml.WriteEndElement(); // </Condition>
 
 
-                xml.WriteEndElement(); // </AssociationSet>
+                xml.WriteEndElement(); // </AssociationSetMapping>
             }
         }
         #endregion

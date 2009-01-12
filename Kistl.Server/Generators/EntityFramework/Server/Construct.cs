@@ -89,6 +89,19 @@ namespace Kistl.Server.Generators.EntityFramework.Server
 
         #endregion
 
+        public static string AssociationChildEntitySetName(Property prop)
+        {
+            TypeMoniker childType = Construct.AssociationChildType(prop);
+            if (!prop.IsList)
+            {
+                return prop.Context.GetQuery<ObjectClass>().First(c => childType.ClassName == c.ClassName).GetRootClass().ClassName;
+            }
+            else
+            {
+                return childType.ClassName;
+            }
+        }
+
         #region AssociationParentType
 
         public static TypeMoniker AssociationParentType(Property prop)
@@ -142,6 +155,32 @@ namespace Kistl.Server.Generators.EntityFramework.Server
 
         #region Column Names
 
+        // internal use only. Implement and use a proper overload in/from this region.
+        private static string ForeignKeyColumnName(string colName)
+        {
+            return "fk_" + colName;
+        }
+
+        public static string ForeignKeyColumnName(ObjectReferenceProperty prop)
+        {
+            return ForeignKeyColumnName(prop.PropertyName);
+        }
+
+        public static string ForeignKeyColumnName(ObjectReferenceProperty prop, string prefix)
+        {
+            return ForeignKeyColumnName(NestedColumnName(prop, prefix));
+        }
+
+        /// <summary>
+        /// Create a name for a foreign key referencing the <see cref="DataType"/> dt.
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string ForeignKeyColumnNameReferencing(DataType dt)
+        {
+            return ForeignKeyColumnName(dt.ClassName);
+        }
+
         public static string NestedColumnName(Property prop, string parentPropName)
         {
             if (String.IsNullOrEmpty(parentPropName))
@@ -150,14 +189,22 @@ namespace Kistl.Server.Generators.EntityFramework.Server
             return parentPropName + "_" + prop.PropertyName;
         }
 
-        public static string ForeignKeyColumnName(Property prop, string parentPropName)
+        public static string ListPositionColumnName(Property prop)
         {
-            return "fk_" + Construct.NestedColumnName(prop, parentPropName);
+            return ListPositionColumnName(prop, "");
         }
 
         public static string ListPositionColumnName(Property prop, string parentPropName)
         {
-            return ForeignKeyColumnName(prop, parentPropName) + "_pos";
+            return ForeignKeyColumnName(Construct.NestedColumnName(prop, parentPropName)) +"_pos";
+        }
+
+        /// <summary>
+        /// This is used for the ParentIndex in CollectionEntrys
+        /// </summary>
+        public static string ListPositionColumnName(DataType cls)
+        {
+            return ForeignKeyColumnName(cls.ClassName) + "_pos";
         }
 
         #endregion

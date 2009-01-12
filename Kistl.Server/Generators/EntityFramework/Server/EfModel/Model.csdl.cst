@@ -24,19 +24,6 @@
     <EntitySet Name="<%= name %>" EntityType="Model.<%= name %>" />
 <%	}
 	
-	// AssociationSets for ObjectReferenceProperties
-	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
-	{
-		TypeMoniker parentType = Construct.AssociationParentType(prop);
-		TypeMoniker childType = Construct.AssociationChildType(prop);
-		string name = Construct.AssociationName(parentType, childType, prop.PropertyName);
-%>
-    <AssociationSet Name="<%= name %>" Association="Model.<%= name %>">
-      <End Role="<%= Construct.AssociationParentRoleName(parentType) %>" EntitySet="<%= prop.ReferenceObjectClass.GetRootClass().ClassName %>" />
-      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= GetAssociationChildEntitySetName(prop) %>" />
-    </AssociationSet>
-<%	}
-
 	// EntitySets for all CollectionEntrys and associated AssociationSets
 	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
@@ -50,7 +37,20 @@
 %>
     <AssociationSet Name="<%= associationName %>" Association="Model.<%= associationName %>" >
       <End Role="<%= Construct.AssociationParentRoleName(parentType) %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
-      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= GetAssociationChildEntitySetName(prop) %>" />
+      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
+    </AssociationSet>
+<%	}
+
+	// AssociationSets for ObjectReferenceProperties
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
+	{
+		TypeMoniker parentType = Construct.AssociationParentType(prop);
+		TypeMoniker childType = Construct.AssociationChildType(prop);
+		string name = Construct.AssociationName(parentType, childType, prop.PropertyName);
+%>
+    <AssociationSet Name="<%= name %>" Association="Model.<%= name %>">
+      <End Role="<%= Construct.AssociationParentRoleName(parentType) %>" EntitySet="<%= prop.ReferenceObjectClass.GetRootClass().ClassName %>" />
+      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
     </AssociationSet>
 <%	}
 %>
@@ -65,7 +65,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-<% ApplyEntityTypeFieldDefs(cls.Properties); %>
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
 <%	}
 
@@ -74,7 +74,7 @@
 	{
 %>	
   <EntityType Name="<%= cls.ClassName %>" BaseType="<%= cls.BaseObjectClass.ClassName %>" >
-<% ApplyEntityTypeFieldDefs(cls.Properties); %>
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
 <%	}
 
@@ -148,7 +148,7 @@
 	{
 %>	
   <ComplexType Name="<%= cls.ClassName %>" >
-<% ApplyEntityTypeFieldDefs(cls.Properties); %>
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </ComplexType>
 <%	}
 
