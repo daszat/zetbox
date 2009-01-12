@@ -7,6 +7,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.Server.Generators;
 
 namespace Kistl.Server.GeneratorsOld.Helper
 {

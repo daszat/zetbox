@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators
             {
                 Console.Write(".");
                 Generate_Interface_ObjectClasses(ctx, objClass);
-                //Generate_Client_ObjectClasses(ctx, objClass);
+                Generate_Client_ObjectClasses(ctx, objClass);
                 Generate_Server_ObjectClasses(ctx, objClass);
             }
             Console.WriteLine();
@@ -79,18 +79,41 @@ namespace Kistl.Server.Generators
             Console.WriteLine();
 
             Console.WriteLine("  Assemblyinfo");
-
+            Generate_AssemblyInfo(ctx, "Kistl.Server.Generators.Templates", "Interface.AssemblyInfoTemplate", TaskEnum.Interface);
+            Generate_AssemblyInfo(ctx, "Kistl.Server.Generators.ClientObjects", "Implementation.AssemblyInfoTemplate", TaskEnum.Client);
+            Generate_AssemblyInfo(ctx, "Kistl.Server.Generators.EntityFramework", "Implementation.AssemblyInfoTemplate", TaskEnum.Server);
         }
 
         #endregion
 
+        private static void Generate_AssemblyInfo(IKistlContext ctx, string templateProviderPath, string templateName, TaskEnum task)
+        {
+            var gen = Generator.GetTemplateGenerator(
+                templateProviderPath,
+                templateName,
+                "AssemblyInfo.cs",
+                task.ToNameSpace());
+            gen.ExecuteTemplate();
+        }
+
         private static void Generate_Interface_ObjectClasses(IKistlContext ctx, ObjectClass objClass)
         {
-
             var gen = Generator.GetTemplateGenerator(
+                "Kistl.Server.Generators.EntityFramework",
                 @"Interface.DataTypes.Template",
                 objClass.ClassName + ".Designer.cs",
-                Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
+                TaskEnum.Interface.ToNameSpace(),
+                objClass);
+            gen.ExecuteTemplate();
+        }
+
+        private void Generate_Client_ObjectClasses(IKistlContext ctx, ObjectClass objClass)
+        {
+            var gen = Generator.GetTemplateGenerator(
+                "Kistl.Server.Generators.ClientObjects",
+                @"Implementation.ObjectClasses.Template",
+                objClass.ClassName + ".Client.Designer.cs",
+                TaskEnum.Client.ToNameSpace(),
                 objClass);
             gen.ExecuteTemplate();
         }
@@ -98,9 +121,10 @@ namespace Kistl.Server.Generators
         private void Generate_Server_ObjectClasses(IKistlContext ctx, ObjectClass objClass)
         {
             var gen = Generator.GetTemplateGenerator(
-                @"Server.ObjectClasses.Template",
+                 "Kistl.Server.Generators.EntityFramework",
+                @"Implementation.ObjectClasses.Template",
                 objClass.ClassName + ".Server.Designer.cs",
-                Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
+                TaskEnum.Server.ToNameSpace(),
                 objClass);
             gen.ExecuteTemplate();
         }
@@ -108,30 +132,33 @@ namespace Kistl.Server.Generators
         private void Generate_Interface_Enumerations(IKistlContext ctx, Enumeration e)
         {
             var gen = Generator.GetTemplateGenerator(
-                            @"Interface.Enumerations.Template",
-                            e.ClassName + ".Designer.cs",
-                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
-                            e);
+                 "Kistl.Server.Generators.EntityFramework",
+                 @"Interface.Enumerations.Template",
+                 e.ClassName + ".Designer.cs",
+                 TaskEnum.Interface.ToNameSpace(),
+                 e);
             gen.ExecuteTemplate();
         }
 
         private void Generate_Interface_Structs(IKistlContext ctx, Struct s)
         {
             var gen = Generator.GetTemplateGenerator(
-                            @"Interface.DataTypes.Template",
-                            s.ClassName + ".Designer.cs",
-                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
-                            s);
+                 "Kistl.Server.Generators.EntityFramework",
+                 @"Interface.DataTypes.Template",
+                 s.ClassName + ".Designer.cs",
+                 TaskEnum.Interface.ToNameSpace(),
+                 s);
             gen.ExecuteTemplate();
         }
 
         private void Generate_Interface_Interfaces(IKistlContext ctx, Interface i)
         {
             var gen = Generator.GetTemplateGenerator(
-                            @"Interface.DataTypes.Template",
-                            i.ClassName + ".Designer.cs",
-                            Kistl.Server.GeneratorsOld.TaskEnum.Interface.ToNameSpace(),
-                            i);
+                 "Kistl.Server.Generators.EntityFramework",
+                 @"Interface.DataTypes.Template",
+                 i.ClassName + ".Designer.cs",
+                 TaskEnum.Interface.ToNameSpace(),
+                 i);
             gen.ExecuteTemplate();
         }
 

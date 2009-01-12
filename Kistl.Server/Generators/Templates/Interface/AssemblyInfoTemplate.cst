@@ -1,0 +1,16 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Interface.AssemblyInfoTemplate"
+	CodeFile="Interface.AssemblyInfoTemplate.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Interface.AssemblyInfoTemplate" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+[assembly: System.Reflection.AssemblyTitleAttribute("<%= GetAssemblyTitle() %>")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("dasz.at")]
+[assembly: System.Reflection.AssemblyProductAttribute("Kistl")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("Copyright © dasz.at 2008-2009")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
+[assembly: System.CLSCompliantAttribute(true)]
+<%
+ApplyAdditionalAssemblyInfo();
+%>

@@ -63,13 +63,13 @@ namespace Kistl.Server.Generators
             GenerateDatabase();
         }
 
-        internal static TemplateGenerator GetTemplateGenerator(
+        internal static TemplateGenerator GetTemplateGenerator(string providerTemplatePath,
             string template, string output, string targetdir, params object[] templateParameter)
         {
             var gen = new TemplateGenerator();
 
             gen.Settings.Add("basetemplatepath", "Kistl.Server.Generators.Templates");
-            gen.Settings.Add("providertemplatepath", "Kistl.Server.Generators.EntityFramework");
+            gen.Settings.Add("providertemplatepath", providerTemplatePath);
 
             gen.Settings.Add("template", template);
 

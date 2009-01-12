@@ -19,24 +19,27 @@ namespace Kistl.Server.Generators
         public void Generate(Kistl.API.IKistlContext ctx, string path)
         {
             var gen = Generator.GetTemplateGenerator(
-                                        "Server.EfModel.ModelCsdl",
-                                        "Model.csdl",
-                                        Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
-                                        ctx);
+                 "Kistl.Server.Generators.EntityFramework",
+                 "Server.EfModel.ModelCsdl",
+                 "Model.csdl",
+                 TaskEnum.Server.ToNameSpace(),
+                 ctx);
             gen.ExecuteTemplate();
 
             gen = Generator.GetTemplateGenerator(
-                                        "Server.EfModel.ModelMsl",
-                                        "Model.msl",
-                                        Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
-                                        ctx);
+                 "Kistl.Server.Generators.EntityFramework",
+                 "Server.EfModel.ModelMsl",
+                 "Model.msl",
+                 TaskEnum.Server.ToNameSpace(),
+                 ctx);
             gen.ExecuteTemplate();
 
             gen = Generator.GetTemplateGenerator(
-                                        "Server.EfModel.ModelSsdl",
-                                        "Model.ssdl",
-                                        Kistl.Server.GeneratorsOld.TaskEnum.Server.ToNameSpace(),
-                                        ctx);
+                 "Kistl.Server.Generators.EntityFramework",
+                 "Server.EfModel.ModelSsdl",
+                 "Model.ssdl",
+                 TaskEnum.Server.ToNameSpace(),
+                 ctx);
             gen.ExecuteTemplate();
         }
 
