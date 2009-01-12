@@ -8,25 +8,12 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 using Kistl.Server.GeneratorsOld.Helper;
-using Kistl.Server.Generators;
 
 namespace Kistl.Server.GeneratorsOld
 {
-
-    public static class GeneratorExtensionHelper
-    {
-        public static TypeMoniker GetTypeMoniker(this DataType objClass)
-        {
-            return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName);
-        }
-
-        public static TypeMoniker GetTypeMonikerImplementation(this DataType objClass)
-        {
-            return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName + Kistl.API.Helper.ImplementationSuffix);
-        }
-    }
 
     public static class Generator
     {

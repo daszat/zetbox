@@ -1,0 +1,166 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.EfModel.ModelCsdl"
+	CodeFile="Implementation.EfModel.ModelCsdl.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.EfModel.ModelCsdl" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="Entities">
+<%	
+	// EntitySets for all Base Classes
+	foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName))
+	{
+%>
+    <EntitySet Name="<%= name %>" EntityType="Model.<%= name %>" />
+<%	}
+	
+	// EntitySets for all CollectionEntrys and associated AssociationSets
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
+	{
+		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
+%>
+    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+<%
+		var info = new AssociationInfo(prop);
+%>
+    <AssociationSet Name="<%= info.AssociationName %>" Association="Model.<%= info.AssociationName %>" >
+      <End Role="<%= info.ParentRoleName %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
+      <End Role="<%= info.ChildRoleName %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
+    </AssociationSet>
+<%	}
+
+	// AssociationSets for ObjectReferenceProperties
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
+	{
+		TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
+		TypeMoniker childType = Construct.AssociationChildType(prop);
+		string name = Construct.AssociationName(parentType, childType, prop.PropertyName);
+%>
+    <AssociationSet Name="<%= name %>" Association="Model.<%= name %>">
+      <End Role="<%= Construct.AssociationParentRoleName(parentType) %>" EntitySet="<%= prop.ReferenceObjectClass.GetRootClass().ClassName %>" />
+      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
+    </AssociationSet>
+<%	}
+%>
+  </EntityContainer>
+<%
+	// EntityTypes for all base classes
+	foreach(var cls in ctx.GetBaseClasses())
+	{
+%>	
+  <EntityType Name="<%= cls.ClassName %>">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
+  </EntityType>
+<%	}
+
+	// EntityTypes for all other classes
+	foreach(var cls in ctx.GetDerivedClasses())
+	{
+%>	
+  <EntityType Name="<%= cls.ClassName %>" BaseType="<%= cls.BaseObjectClass.ClassName %>" >
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
+  </EntityType>
+<%	}
+
+	// EntityTypes for all CollectionEntrys
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
+	{
+		TypeMoniker collectionType = Construct.PropertyCollectionEntryType(prop);
+		// TypeMoniker parentType;
+		// TypeMoniker childType;
+%>	
+  <EntityType Name="<%= collectionType.ClassName %>" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+<%
+		{
+			// Parent
+			TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
+			TypeMoniker childType = collectionType;
+%>
+    <NavigationProperty Name="ParentImpl"
+                        RelationShip="Model.<%= Construct.AssociationName(parentType, childType, "fk_Parent") %>"
+                        FromRole="<%= Construct.AssociationChildRoleName(childType) %>"
+                        ToRole="<%= Construct.AssociationParentRoleName(parentType) %>" />
+<%
+			if (prop.IsIndexed)
+			{
+%>
+    <Property Name="ParentIndex" Type="Int32" Nullable="false" />
+<%
+			}
+		}
+		
+		// Value
+		if (prop is ObjectReferenceProperty)
+		{
+			// ObjectReferenceProperty
+			// TODO: IsNullable??
+			var info = new AssociationInfo(prop);
+%>
+    <NavigationProperty Name="ValueImpl"
+                        RelationShip="Model.<%= info.AssociationName %>"
+                        FromRole="<%= info.ChildRoleName %>"
+                        ToRole="<%= info.ParentRoleName %>" />
+<%
+		}
+		else if (prop is ValueTypeProperty)
+		{
+			string maxlength = "";
+			if (prop is StringProperty)
+				maxlength = String.Format("MaxLength=\"{0}\" ", ((StringProperty)prop).Length.ToString());
+%>
+    <Property Name="Value" Type="<%= Type.GetType(prop.GetPropertyTypeString()).Name %>" <%= maxlength %>Nullable="<%= prop.IsNullable.ToString().ToLowerInvariant() %>" />
+<%
+		}
+
+		if (prop.NeedsPositionColumn())
+		{
+%>
+    <Property Name="ValueIndex" Type="Int32" Nullable="false" />
+<%
+		}
+%>
+  </EntityType>
+<%	}
+
+	// ComplexTypes for all structs
+	foreach(var cls in ctx.GetQuery<Struct>())
+	{
+%>	
+  <ComplexType Name="<%= cls.ClassName %>" >
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
+  </ComplexType>
+<%	}
+
+	// Associations for ObjectReferences
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage().Cast<Property>().Concat(ctx.GetObjectListPropertiesWithStorage().Cast<Property>()))
+	{
+		var info = new AssociationInfo(prop);
+%>
+    <Association Name="<%= info.AssociationName %>" >
+      <End Role="<%= info.ParentRoleName %>"
+           Type="Model.<%= info.ParentClassName %>"
+           Multiplicity="<%= info.ParentMultiplicity %>" />
+      <End Role="<%= info.ChildRoleName %>"
+           Type="Model.<%= info.ChildClassName %>"
+           Multiplicity="<%= info.ChildMultiplicity %>" />
+    </Association>
+<%	}
+%>
+</Schema>

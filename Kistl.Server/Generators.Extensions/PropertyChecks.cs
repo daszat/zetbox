@@ -9,6 +9,11 @@ namespace Kistl.Server.Generators.Extensions
 {
     public static class PropertyChecks
     {
+        public static bool IsAssociation(this Property prop)
+        {
+            return prop.IsObjectReferencePropertyList() || prop.IsObjectReferencePropertySingle() || prop.IsValueTypePropertyList();
+        }
+
         public static bool IsListProperty(this Property prop)
         {
             return prop.IsList;

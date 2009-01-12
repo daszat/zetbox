@@ -1,0 +1,65 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.MethodBody"
+	CodeFile="Implementation.ObjectClasses.MethodBody.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.MethodBody" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="m" Type="Kistl.App.Base.Method" %>
+<%
+string delegateName = m.MethodName + "_Handler";
+string eventName = "On" + m.MethodName + "_" + m.ObjectClass.ClassName;
+var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
+
+string parameterDefs = m.GetParameterDefinitions();
+if (!String.IsNullOrEmpty(parameterDefs))
+{
+    // add leading comma for later usage
+	parameterDefs = ", " + parameterDefs;	
+}
+
+string argumentDefs = m.GetArguments();
+if (!String.IsNullOrEmpty(argumentDefs))
+{
+    // add leading comma for later usage
+	argumentDefs = ", " + argumentDefs;	
+}
+
+if (returnParam == null)
+{%>
+		{
+            // base.<%= m.MethodName %>();
+            if (<%= eventName %> != null)
+            {
+				<%= eventName %>(this<%= argumentDefs %>);
+			}
+        }
+		public event <%= delegateName %><<%= m.ObjectClass.ClassName %>> <%= eventName %>;
+		public delegate void <%= delegateName %><T>(T obj<%= parameterDefs %>);
+<%}
+else
+{
+
+	string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString());
+%>
+		{
+            var e = new <%= returnArgsType %>();
+            if (<%= eventName %> != null)
+            {
+                <%= eventName %>(this, e<%= argumentDefs %>);
+            };
+            return e.Result;
+        }
+		public event <%= delegateName %><<%= m.ObjectClass.ClassName %>> <%= eventName %>;
+		public delegate void <%= delegateName %><T>(T obj, <%= returnArgsType %> ret<%= parameterDefs %>);
+<%
+
+}
+
+%>

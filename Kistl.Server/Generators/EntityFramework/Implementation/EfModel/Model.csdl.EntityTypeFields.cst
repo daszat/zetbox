@@ -1,0 +1,77 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.EfModel.ModelCsdlEntityTypeFields"
+	CodeFile="Implementation.EfModel.ModelCsdlEntityTypeFields.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.EfModel.ModelCsdlEntityTypeFields" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
+<%
+
+	/*
+	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
+	 */
+
+	foreach(var p in properties)
+	{
+		// TODO: implement IsNullable everywhere
+		if (p.IsAssociation())
+		{
+			var info = new AssociationInfo(p);
+%>
+    <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+                        Relationship="Model.<%= info.AssociationName %>"
+                        FromRole="<%= info.ParentRoleName %>"
+                        ToRole="<%= info.ChildRoleName %>" />
+<%
+			if (p.NeedsPositionColumn())
+			{
+%>
+    <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />
+<%
+			}
+		}
+		else if (p.IsValueTypePropertySingle())
+		{
+			// ValueTypeProperty
+			string name = p.PropertyName;
+			string type = p.GetPropertyTypeString();
+			string maxlength = "";
+			
+			if (p is EnumerationProperty)
+			{
+				name += Kistl.API.Helper.ImplementationSuffix;
+				type = "Int32";
+			}
+			else
+			{
+				// translate to short name
+				type = Type.GetType(type).Name;
+			}
+
+			if (p is StringProperty)
+			{
+				maxlength = String.Format("MaxLength=\"{0}\" ",((StringProperty)p).Length.ToString());
+			}
+%>
+    <Property Name="<%= name %>" Type="<%= type %>" Nullable="<%= ((ValueTypeProperty)p).IsNullable.ToString().ToLowerInvariant() %>" <%= maxlength %>/>
+<%
+		}
+		else if (p.IsStructPropertySingle())
+		{
+			// ValueTypeProperty
+			// Nullable Complex types are not supported by EF
+%>
+    <Property Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+              Type="Model.<%= ((StructProperty)p).StructDefinition.ClassName %>"
+              Nullable="false" />
+<%
+		}	
+	}
+%>

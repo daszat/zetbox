@@ -1,0 +1,39 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.NotifyingValueProperty"
+	CodeFile="Implementation.ObjectClasses.NotifyingValueProperty.cs" 
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+
+<%@ Parameter Name="type" Type="Type" %>
+<%@ Parameter Name="name" Type="String" %>
+<%
+	ApplyRequisitesTemplate();
+	
+	ApplyAttributesTemplate();
+	
+	var backingName = MungeNameToBacking(name);
+%>
+        <%= GetModifiers() %> <%= type.FullName %> <%= name %>
+        {
+            get
+            {
+                return <%= backingName %>;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (<%= backingName %> != value)
+                {
+                    NotifyPropertyChanging("<%= name %>"); 
+                    <%= backingName %> = value;
+                    NotifyPropertyChanged("<%= name %>");;
+                }
+            }
+        }
+        private <%= type.FullName %> <%= backingName %>;
