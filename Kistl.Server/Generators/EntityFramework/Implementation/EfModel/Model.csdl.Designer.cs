@@ -202,10 +202,10 @@ this.WriteObjects("  </ComplexType>\r\n");
 #line 156 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <Association Name=\"",  info.AssociationName , "\" >\r\n");
 this.WriteObjects("      <End Role=\"",  info.ParentRoleName , "\"\r\n");
-this.WriteObjects("           Type=\"Model.",  info.ParentClassName , "\"\r\n");
+this.WriteObjects("           Type=\"Model.",  info.Parent.ClassName , "\"\r\n");
 this.WriteObjects("           Multiplicity=\"",  info.ParentMultiplicity , "\" />\r\n");
 this.WriteObjects("      <End Role=\"",  info.ChildRoleName , "\"\r\n");
-this.WriteObjects("           Type=\"Model.",  info.ChildClassName , "\"\r\n");
+this.WriteObjects("           Type=\"Model.",  info.Child.ClassName , "\"\r\n");
 this.WriteObjects("           Multiplicity=\"",  info.ChildMultiplicity , "\" />\r\n");
 this.WriteObjects("    </Association>\r\n");
 #line 164 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"

@@ -155,10 +155,10 @@
 %>
     <Association Name="<%= info.AssociationName %>" >
       <End Role="<%= info.ParentRoleName %>"
-           Type="Model.<%= info.ParentClassName %>"
+           Type="Model.<%= info.Parent.ClassName %>"
            Multiplicity="<%= info.ParentMultiplicity %>" />
       <End Role="<%= info.ChildRoleName %>"
-           Type="Model.<%= info.ChildClassName %>"
+           Type="Model.<%= info.Child.ClassName %>"
            Multiplicity="<%= info.ChildMultiplicity %>" />
     </Association>
 <%	}
