@@ -102,6 +102,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.csdl.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionEntry.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\NotifyingValueProperty.cs" />
     <Compile Include="Generators\TypeMoniker.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\AssemblyInfoTemplate.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\Template.cs" />
@@ -429,6 +435,12 @@
     <None Include="Generators\Templates\Interface\AssemblyInfoTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>AssemblyInfoTemplate.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntry.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

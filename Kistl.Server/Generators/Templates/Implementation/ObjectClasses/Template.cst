@@ -9,8 +9,12 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-
 <%@ Parameter Name="DataType" Type="Kistl.App.Base.ObjectClass" %>
+<%
+
+ApplyGlobalPreambleTemplate();
+
+%>
 namespace <%= DataType.Module.Namespace %>
 {
     using System;
@@ -31,6 +35,8 @@ namespace <%= DataType.Module.Namespace %>
 	using <%= ns %>;
 <%
 	}
+	
+	ApplyNamespacePreambleTemplate();
 %>
 
     /// <summary>
@@ -42,6 +48,7 @@ namespace <%= DataType.Module.Namespace %>
 
 	ApplyClassAttributeTemplate();
 %>
+    [System.Diagnostics.DebuggerDisplay("<%= DataType.ClassName %>")]
     public class <%= mungedClassName %> <%= GetInheritance() %>
     {
 
@@ -72,4 +79,8 @@ namespace <%= DataType.Module.Namespace %>
 %>
 
 	}
+
+<%	
+		ApplyNamespaceTailTemplate();
+%>
 }

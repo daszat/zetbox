@@ -21,6 +21,21 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected virtual string MungeClassName(string name) { return name; }
 
         /// <summary>
+        /// is called to apply a optional preamble in the global scope
+        /// </summary>
+        protected virtual void ApplyGlobalPreambleTemplate() { }
+
+        /// <summary>
+        /// is called to apply a optional preamble within the namespace
+        /// </summary>
+        protected virtual void ApplyNamespacePreambleTemplate() { }
+
+        /// <summary>
+        /// is called to apply a optional tail part within the namespace
+        /// </summary>
+        protected virtual void ApplyNamespaceTailTemplate() { }
+
+        /// <summary>
         /// Is called to apply optional decoration in front of the class declaration, like Attributes.
         /// </summary>
         protected virtual void ApplyClassAttributeTemplate() { }

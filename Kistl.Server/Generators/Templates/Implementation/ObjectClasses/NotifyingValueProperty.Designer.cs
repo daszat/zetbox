@@ -25,16 +25,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
-this.WriteObjects("\r\n");
-#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 ApplyRequisitesTemplate();
 	
 	ApplyAttributesTemplate();
 	
 	var backingName = MungeNameToBacking(name);
 
-#line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  type.FullName , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -46,13 +44,13 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\"); \r\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\");\r\n");
 this.WriteObjects("                    ",  backingName , " = value;\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\");;\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  type.FullName , " ",  backingName , ";");
+this.WriteObjects("        private ",  type.FullName , " ",  backingName , ";\r\n");
 
         }
 

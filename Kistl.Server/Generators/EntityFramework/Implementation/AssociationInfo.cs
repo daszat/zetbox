@@ -74,6 +74,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         public TypeMoniker Parent { get; private set; }
         public TypeMoniker Child { get; private set; }
+        public TypeMoniker CollectionEntry { get { return Construct.PropertyCollectionEntryType(this.Property); } }
+
         public string PropertyName { get; private set; }
 
         public string AssociationName { get { return Construct.AssociationName(Parent, Child, PropertyName); } }
