@@ -287,7 +287,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
-    <NavigationProperty Name="Tasks__Implementation__" Relationship="Model.FK_Task_Projekt_Projekt" FromRole="A_Projekt" ToRole="B_Task" />
+    <NavigationProperty Name="Tasks__Implementation__"
+                        Relationship="Model.FK_Task_Projekt_Projekt"
+                        FromRole="A_Projekt"
+                        ToRole="B_Task" />
     <NavigationProperty Name="Mitarbeiter__Implementation__" Relationship="Model.FK_Projekt_MitarbeiterCollectionEntry_Projekt_fk_Parent" FromRole="A_Projekt" ToRole="B_Projekt_MitarbeiterCollectionEntry" />
     <Property Name="AufwandGes" Type="Double" Nullable="true" />
     <Property Name="Kundenname" Type="String" MaxLength="100" Nullable="true" />
@@ -299,7 +302,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Projekt__Implementation__" Relationship="Model.FK_Task_Projekt_Projekt" FromRole="B_Task" ToRole="A_Projekt" />
+    <NavigationProperty Name="Projekt__Implementation__"
+                        Relationship="Model.FK_Task_Projekt_Projekt"
+                        FromRole="B_Task"
+                        ToRole="A_Projekt" />
     <Property Name="Name" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="DatumVon" Type="DateTime" Nullable="true" />
     <Property Name="DatumBis" Type="DateTime" Nullable="true" />
@@ -310,11 +316,20 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ObjectClass__Implementation__" Relationship="Model.FK_BaseProperty_DataType_ObjectClass" FromRole="B_BaseProperty" ToRole="A_DataType" />
+    <NavigationProperty Name="ObjectClass__Implementation__"
+                        Relationship="Model.FK_BaseProperty_DataType_ObjectClass"
+                        FromRole="B_BaseProperty"
+                        ToRole="A_DataType" />
     <Property Name="PropertyName" Type="String" MaxLength="100" Nullable="true" />
     <Property Name="AltText" Type="String" MaxLength="200" Nullable="true" />
-    <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_BaseProperty_Module_Module" FromRole="B_BaseProperty" ToRole="A_Module" />
-    <NavigationProperty Name="Constraints__Implementation__" Relationship="Model.FK_Constraint_BaseProperty_ConstrainedProperty" FromRole="A_BaseProperty" ToRole="B_Constraint" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_BaseProperty_Module_Module"
+                        FromRole="B_BaseProperty"
+                        ToRole="A_Module" />
+    <NavigationProperty Name="Constraints__Implementation__"
+                        Relationship="Model.FK_Constraint_BaseProperty_ConstrainedProperty"
+                        FromRole="A_BaseProperty"
+                        ToRole="B_Constraint" />
     <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
@@ -354,9 +369,18 @@
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
-    <NavigationProperty Name="ReferenceObjectClass__Implementation__" Relationship="Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass" FromRole="B_ObjectReferenceProperty" ToRole="A_ObjectClass" />
-    <NavigationProperty Name="RightOf__Implementation__" Relationship="Model.FK_Relation_ObjectReferenceProperty_RightPart" FromRole="A_ObjectReferenceProperty" ToRole="B_Relation" />
-    <NavigationProperty Name="LeftOf__Implementation__" Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftPart" FromRole="A_ObjectReferenceProperty" ToRole="B_Relation" />
+    <NavigationProperty Name="ReferenceObjectClass__Implementation__"
+                        Relationship="Model.FK_ObjectReferenceProperty_ObjectClass_ReferenceObjectClass"
+                        FromRole="B_ObjectReferenceProperty"
+                        ToRole="A_ObjectClass" />
+    <NavigationProperty Name="RightOf__Implementation__"
+                        Relationship="Model.FK_Relation_ObjectReferenceProperty_RightPart"
+                        FromRole="A_ObjectReferenceProperty"
+                        ToRole="B_Relation" />
+    <NavigationProperty Name="LeftOf__Implementation__"
+                        Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftPart"
+                        FromRole="A_ObjectReferenceProperty"
+                        ToRole="B_Relation" />
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" />
   <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty">
@@ -462,12 +486,27 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Properties__Implementation__" Relationship="Model.FK_BaseProperty_DataType_ObjectClass" FromRole="A_DataType" ToRole="B_BaseProperty" />
-    <NavigationProperty Name="Methods__Implementation__" Relationship="Model.FK_Method_DataType_ObjectClass" FromRole="A_DataType" ToRole="B_Method" />
-    <NavigationProperty Name="Module__Implementation__" Relationship="Model.FK_DataType_Module_Module" FromRole="B_DataType" ToRole="A_Module" />
-    <NavigationProperty Name="MethodInvocations__Implementation__" Relationship="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass" FromRole="A_DataType" ToRole="B_MethodInvocation" />
+    <NavigationProperty Name="Properties__Implementation__"
+                        Relationship="Model.FK_BaseProperty_DataType_ObjectClass"
+                        FromRole="A_DataType"
+                        ToRole="B_BaseProperty" />
+    <NavigationProperty Name="Methods__Implementation__"
+                        Relationship="Model.FK_Method_DataType_ObjectClass"
+                        FromRole="A_DataType"
+                        ToRole="B_Method" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_DataType_Module_Module"
+                        FromRole="B_DataType"
+                        ToRole="A_Module" />
+    <NavigationProperty Name="MethodInvocations__Implementation__"
+                        Relationship="Model.FK_MethodInvocation_DataType_InvokeOnObjectClass"
+                        FromRole="A_DataType"
+                        ToRole="B_MethodInvocation" />
     <Property Name="ClassName" Type="String" MaxLength="51" Nullable="false" />
-    <NavigationProperty Name="DefaultIcon__Implementation__" Relationship="Model.FK_DataType_Icon_DefaultIcon" FromRole="B_DataType" ToRole="A_Icon" />
+    <NavigationProperty Name="DefaultIcon__Implementation__"
+                        Relationship="Model.FK_DataType_Icon_DefaultIcon"
+                        FromRole="B_DataType"
+                        ToRole="A_Icon" />
     <Property Name="Description" Type="String" MaxLength="200" Nullable="true" />
   </EntityType>
   <EntityType Name="BaseParameter">
@@ -562,7 +601,10 @@
   </EntityType>
   <EntityType Name="Struct" BaseType="Model.DataType" />
   <EntityType Name="StructProperty" BaseType="Model.Property">
-    <NavigationProperty Name="StructDefinition__Implementation__" Relationship="Model.FK_StructProperty_Struct_StructDefinition" FromRole="B_StructProperty" ToRole="A_Struct" />
+    <NavigationProperty Name="StructDefinition__Implementation__"
+                        Relationship="Model.FK_StructProperty_Struct_StructDefinition"
+                        FromRole="B_StructProperty"
+                        ToRole="A_Struct" />
   </EntityType>
   <EntityType Name="PresenterInfo">
     <Key>

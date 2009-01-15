@@ -15,15 +15,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
   <EntityContainer Name="Entities">
-<%	
-	// EntitySets for all Base Classes
+    <!-- EntitySets for all Base Classes -->
+<%
 	foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName))
 	{
 %>
     <EntitySet Name="<%= name %>" EntityType="Model.<%= name %>" />
 <%	}
-	
-	// EntitySets for all CollectionEntrys and associated AssociationSets
+
+%>
+    <!-- EntitySets for all CollectionEntrys and associated AssociationSets -->
+<%
 	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
@@ -38,7 +40,9 @@
     </AssociationSet>
 <%	}
 
-	// AssociationSets for ObjectReferenceProperties
+%>
+    <!-- AssociationSets for ObjectReferenceProperties -->
+<%
 	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
 	{
 		TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
@@ -52,11 +56,12 @@
 <%	}
 %>
   </EntityContainer>
+  
+  <!-- EntityTypes for all base classes -->
 <%
-	// EntityTypes for all base classes
 	foreach(var cls in ctx.GetBaseClasses())
 	{
-%>	
+%>
   <EntityType Name="<%= cls.ClassName %>">
     <Key>
       <PropertyRef Name="ID" />
@@ -66,22 +71,29 @@
   </EntityType>
 <%	}
 
-	// EntityTypes for all other classes
+%>
+
+  <!-- EntityTypes for all other classes -->
+<%
 	foreach(var cls in ctx.GetDerivedClasses())
 	{
-%>	
-  <EntityType Name="<%= cls.ClassName %>" BaseType="<%= cls.BaseObjectClass.ClassName %>" >
+%>
+  <EntityType Name="<%= cls.ClassName %>" BaseType="Model.<%= cls.BaseObjectClass.ClassName %>" >
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
 <%	}
 
-	// EntityTypes for all CollectionEntrys
+%>
+
+  <!-- EntityTypes for all CollectionEntrys -->
+<%
 	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		TypeMoniker collectionType = Construct.PropertyCollectionEntryType(prop);
 		// TypeMoniker parentType;
 		// TypeMoniker childType;
-%>	
+%>
+  <!-- <%= prop.GetType().Name %>: <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
   <EntityType Name="<%= collectionType.ClassName %>" >
     <Key>
       <PropertyRef Name="ID" />
@@ -94,7 +106,7 @@
 			TypeMoniker childType = collectionType;
 %>
     <NavigationProperty Name="ParentImpl"
-                        RelationShip="Model.<%= Construct.AssociationName(parentType, childType, "fk_Parent") %>"
+                        Relationship="Model.<%= Construct.AssociationName(parentType, childType, "fk_Parent") %>"
                         FromRole="<%= Construct.AssociationChildRoleName(childType) %>"
                         ToRole="<%= Construct.AssociationParentRoleName(parentType) %>" />
 <%
@@ -114,7 +126,7 @@
 			var info = new AssociationInfo(prop);
 %>
     <NavigationProperty Name="ValueImpl"
-                        RelationShip="Model.<%= info.AssociationName %>"
+                        Relationship="Model.<%= info.AssociationName %>"
                         FromRole="<%= info.ChildRoleName %>"
                         ToRole="<%= info.ParentRoleName %>" />
 <%
@@ -139,28 +151,56 @@
   </EntityType>
 <%	}
 
-	// ComplexTypes for all structs
+%>
+
+  <!-- ComplexTypes for all structs -->
+<%
 	foreach(var cls in ctx.GetQuery<Struct>())
 	{
-%>	
+%>
   <ComplexType Name="<%= cls.ClassName %>" >
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </ComplexType>
 <%	}
 
-	// Associations for ObjectReferences
-	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage().Cast<Property>().Concat(ctx.GetObjectListPropertiesWithStorage().Cast<Property>()))
+%>
+
+  <!-- Associations -->
+<%
+	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage().Cast<Property>()
+		.Concat(ctx.GetObjectListPropertiesWithStorage().Cast<Property>())
+		.Distinct()
+		.OrderBy(p => p.ObjectClass.ClassName + p.PropertyName))
 	{
 		var info = new AssociationInfo(prop);
 %>
-    <Association Name="<%= info.AssociationName %>" >
-      <End Role="<%= info.ParentRoleName %>"
-           Type="Model.<%= info.Parent.ClassName %>"
-           Multiplicity="<%= info.ParentMultiplicity %>" />
-      <End Role="<%= info.ChildRoleName %>"
-           Type="Model.<%= info.Child.ClassName %>"
-           Multiplicity="<%= info.ChildMultiplicity %>" />
-    </Association>
-<%	}
+  <!-- <%= prop.GetType().Name %>: <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
+  <Association Name="<%= info.AssociationName %>" >
+    <End Role="<%= info.ParentRoleName %>"
+         Type="Model.<%= info.Parent.ClassName %>"
+         Multiplicity="<%= info.ParentMultiplicity %>" />
+    <End Role="<%= info.ChildRoleName %>"
+         Type="Model.<%= info.Child.ClassName %>"
+         Multiplicity="<%= info.ChildMultiplicity %>" />
+  </Association>
+<%
+		// construct reverse mapping
+		if (prop is ObjectReferenceProperty && prop.IsList)
+		{
+			var refClass = ((ObjectReferenceProperty)prop).ReferenceObjectClass;
+			var refType = new TypeMoniker(refClass.GetDataTypeString());
+%>
+  <!-- Reverse of <%= prop.GetType().Name %>: <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
+  <Association Name="<%= Construct.AssociationName(refType, info.CollectionEntry, prop.PropertyName) %>" >
+    <End Role="<%= Construct.AssociationParentRoleName(refClass) %>"
+         Type="Model.<%= refType.ClassName %>"
+         Multiplicity="0..1" />
+    <End Role="<%= info.ChildRoleName %>"
+         Type="Model.<%= info.Child.ClassName %>"
+         Multiplicity="*" />
+  </Association>
+<%
+		}
+	}
 %>
 </Schema>

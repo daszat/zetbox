@@ -268,6 +268,7 @@ namespace Kistl.Server.GeneratorsOld
                    select s;
         }
 
+        // -> GetObjectListPropertiesWithStorage(IKistlContext)
         public static IEnumerable<Property> GetCollectionProperties(Kistl.API.IKistlContext ctx)
         {
             return (from p in ctx.GetQuery<Property>()
@@ -275,6 +276,7 @@ namespace Kistl.Server.GeneratorsOld
                    select p).ToList().Where(p => p.HasStorage());
         }
 
+        // -> GetObjectReferencePropertiesWithStorage(IKistlContext)
         public static IEnumerable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.IKistlContext ctx)
         {
             return (from p in ctx.GetQuery<ObjectReferenceProperty>()
