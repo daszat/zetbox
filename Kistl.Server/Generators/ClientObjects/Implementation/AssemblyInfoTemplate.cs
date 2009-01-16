@@ -8,8 +8,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
     public class AssemblyInfoTemplate : Kistl.Server.Generators.Templates.Implementation.AssemblyInfoTemplate
     {
 
-        public AssemblyInfoTemplate(Arebis.CodeGeneration.IGenerationHost _host)
-            : base(_host)
+        public AssemblyInfoTemplate(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx)
+            : base(_host, ctx)
         {
         }
 

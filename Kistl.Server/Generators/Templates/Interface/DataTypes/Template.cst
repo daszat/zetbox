@@ -10,6 +10,7 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="dataType" Type="Kistl.App.Base.DataType" %>
 namespace <%= dataType.Module.Namespace %>
 {

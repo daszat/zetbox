@@ -90,17 +90,17 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         {
             if (!p.IsListProperty())
             {
-                this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", p.GetPropertyType(), p.PropertyName);
+                this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx, p.GetPropertyType(), p.PropertyName);
             }
             else
             {
-                this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", this.DataType, p.GetPropertyType(), p.PropertyName, p);
+                this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx, this.DataType, p.GetPropertyType(), p.PropertyName, p);
             }
         }
 
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.Method", m);
+            this.Host.CallTemplate("Implementation.ObjectClasses.Method", ctx, m);
         }
 
         protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()

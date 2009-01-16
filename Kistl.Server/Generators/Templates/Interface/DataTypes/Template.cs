@@ -47,17 +47,17 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         {
             if (!p.IsListProperty())
             {
-                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", p);
+                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", ctx, p);
             }
             else
             {
-                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyListTemplate", p);
+                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyListTemplate", ctx, p);
             }
         }
 
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
-            this.Host.CallTemplate("Interface.DataTypes.Method", m);
+            this.Host.CallTemplate("Interface.DataTypes.Method", ctx, m);
         }
 
         protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()

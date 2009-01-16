@@ -42,7 +42,7 @@ ApplyEntityTypeMapping(cls);
 this.WriteObjects("    </EntitySetMapping>\r\n");
 #line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
-
+/*
 	// map collection entries
 	foreach(var listProp in ctx.GetObjectListPropertiesWithStorage())
 	{
@@ -92,7 +92,7 @@ this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"",  fkColumnName , "\" IsNull=\"false\" />\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 #line 74 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-}
+}*/
 
 #line 76 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("  </EntityContainerMapping>\r\n");

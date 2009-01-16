@@ -15,43 +15,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
   <EntityContainer Name="Entities">
-    <!-- EntitySets for all Base Classes -->
+  
+    <!-- EntitySets for all classes -->
 <%
-	foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName))
+	foreach(var name in ctx.GetQuery<ObjectClass>().Select(cls => cls.ClassName))
 	{
 %>
     <EntitySet Name="<%= name %>" EntityType="Model.<%= name %>" />
 <%	}
 
 %>
-    <!-- EntitySets for all CollectionEntrys and associated AssociationSets -->
+    <!-- EntitySets for all CollectionEntrys -->
 <%
 	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
-<%
-		var info = new AssociationInfo(prop);
-%>
-    <AssociationSet Name="<%= info.AssociationName %>" Association="Model.<%= info.AssociationName %>" >
-      <End Role="<%= info.ParentRoleName %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
-      <End Role="<%= info.ChildRoleName %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
-    </AssociationSet>
 <%	}
 
 %>
-    <!-- AssociationSets for ObjectReferenceProperties -->
+    <!-- AssociationSets -->
 <%
-	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
+	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
 	{
-		TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
-		TypeMoniker childType = Construct.AssociationChildType(prop);
-		string name = Construct.AssociationName(parentType, childType, prop.PropertyName);
+		var info = AssociationInfo.CreateInfo(ctx, prop);
 %>
-    <AssociationSet Name="<%= name %>" Association="Model.<%= name %>">
-      <End Role="<%= Construct.AssociationParentRoleName(parentType) %>" EntitySet="<%= prop.ReferenceObjectClass.GetRootClass().ClassName %>" />
-      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
+    <!-- <%= info.GetType().Name %> -->
+    <AssociationSet Name="<%= info.AssociationName %>" Association="Model.<%= info.AssociationName %>" >
+      <End Role="<%= info.ASide.RoleName %>" EntitySet="<%= info.ASide.StorageEntitySet %>" />
+      <End Role="<%= info.BSide.RoleName %>" EntitySet="<%= info.BSide.StorageEntitySet%>" />
     </AssociationSet>
 <%	}
 %>
@@ -123,12 +116,12 @@
 		{
 			// ObjectReferenceProperty
 			// TODO: IsNullable??
-			var info = new AssociationInfo(prop);
+			var info = AssociationInfo.CreateInfo(ctx, prop);
 %>
     <NavigationProperty Name="ValueImpl"
                         Relationship="Model.<%= info.AssociationName %>"
-                        FromRole="<%= info.ChildRoleName %>"
-                        ToRole="<%= info.ParentRoleName %>" />
+                        FromRole="<%= info.Child.RoleName %>"
+                        ToRole="<%= info.Parent.RoleName %>" />
 <%
 		}
 		else if (prop is ValueTypeProperty)
@@ -167,21 +160,18 @@
 
   <!-- Associations -->
 <%
-	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage().Cast<Property>()
-		.Concat(ctx.GetObjectListPropertiesWithStorage().Cast<Property>())
-		.Distinct()
-		.OrderBy(p => p.ObjectClass.ClassName + p.PropertyName))
+	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
 	{
-		var info = new AssociationInfo(prop);
+		var info = AssociationInfo.CreateInfo(ctx, prop);
 %>
   <!-- <%= prop.GetType().Name %>: <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
   <Association Name="<%= info.AssociationName %>" >
-    <End Role="<%= info.ParentRoleName %>"
-         Type="Model.<%= info.Parent.ClassName %>"
-         Multiplicity="<%= info.ParentMultiplicity %>" />
-    <End Role="<%= info.ChildRoleName %>"
-         Type="Model.<%= info.Child.ClassName %>"
-         Multiplicity="<%= info.ChildMultiplicity %>" />
+    <End Role="<%= info.Parent.RoleName %>"
+         Type="Model.<%= info.Parent.Type.ClassName %>"
+         Multiplicity="<%= info.Parent.Multiplicity %>" />
+    <End Role="<%= info.Child.RoleName %>"
+         Type="Model.<%= info.Child.Type.ClassName %>"
+         Multiplicity="<%= info.Child.Multiplicity %>" />
   </Association>
 <%
 		// construct reverse mapping
@@ -195,8 +185,8 @@
     <End Role="<%= Construct.AssociationParentRoleName(refClass) %>"
          Type="Model.<%= refType.ClassName %>"
          Multiplicity="0..1" />
-    <End Role="<%= info.ChildRoleName %>"
-         Type="Model.<%= info.Child.ClassName %>"
+    <End Role="<%= info.Child.RoleName %>"
+         Type="Model.<%= info.Child.Type.ClassName %>"
          Multiplicity="*" />
   </Association>
 <%

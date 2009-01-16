@@ -11,7 +11,7 @@ namespace Kistl.Server.Generators.Extensions
     public static class ContextExtensions
     {
 
-        public static  IQueryable<ObjectClass> GetBaseClasses(this IKistlContext ctx)
+        public static IQueryable<ObjectClass> GetBaseClasses(this IKistlContext ctx)
         {
             return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass == null);
         }
@@ -39,5 +39,13 @@ namespace Kistl.Server.Generators.Extensions
                 .AsQueryable();
         }
 
+        public static IQueryable<Property> GetAssociationPropertiesWithStorage(this IKistlContext ctx)
+        {
+            // convoluted definition to re-use the more specific but overlapping GetObject* sets.
+            return ctx.GetObjectReferencePropertiesWithStorage().Cast<Property>()
+                .Concat(ctx.GetObjectListPropertiesWithStorage())
+                .Distinct()
+                .OrderBy(p => p.ObjectClass.ClassName + p.PropertyName);
+        }
     }
 }

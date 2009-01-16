@@ -12,7 +12,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
     {
         protected virtual void ApplyEntityTypeMapping(ObjectClass obj)
         {
-            CallTemplate("Implementation.EfModel.ModelMslEntityTypeMapping", obj);
+            CallTemplate("Implementation.EfModel.ModelMslEntityTypeMapping", ctx, obj);
         }
 
         protected virtual void ApplyScalarProperty(Property prop, string parentName)

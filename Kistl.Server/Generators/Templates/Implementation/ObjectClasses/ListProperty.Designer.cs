@@ -11,15 +11,17 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst")]
     public partial class ListProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
+		protected IKistlContext ctx;
 		protected DataType containingType;
 		protected Type type;
 		protected String name;
 		protected Property property;
 
 
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, DataType containingType, Type type, String name, Property property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType containingType, Type type, String name, Property property)
             : base(_host)
         {
+			this.ctx = ctx;
 			this.containingType = containingType;
 			this.type = type;
 			this.name = name;
@@ -31,14 +33,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         {
 #line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("\r\n");
-#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 ApplyRequisitesTemplate();
 	
 	ApplyAttributesTemplate();
 
     var backingName = MungeNameToBacking(name);
 
-#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");

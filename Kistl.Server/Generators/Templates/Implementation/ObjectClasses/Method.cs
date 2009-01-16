@@ -15,8 +15,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     public class Method : Kistl.Server.Generators.Templates.Interface.DataTypes.Method
     {
 
-        public Method(Arebis.CodeGeneration.IGenerationHost _host, Kistl.App.Base.Method m)
-            : base(_host, m)
+        public Method(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.Method m)
+            : base(_host, ctx, m)
         {
         }
 
@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
         protected override void ApplyBodyTemplate()
         {
-            Host.CallTemplate("Implementation.ObjectClasses.MethodBody", m);
+            Host.CallTemplate("Implementation.ObjectClasses.MethodBody", ctx, m);
         }
 
     }

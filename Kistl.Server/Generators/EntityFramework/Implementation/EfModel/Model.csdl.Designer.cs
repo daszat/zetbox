@@ -29,129 +29,121 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
 this.WriteObjects("<Schema Namespace=\"Model\" Alias=\"Self\" xmlns=\"http://schemas.microsoft.com/ado/2006/04/edm\">\r\n");
 this.WriteObjects("  <EntityContainer Name=\"Entities\">\r\n");
-this.WriteObjects("    <!-- EntitySets for all Base Classes -->\r\n");
-#line 20 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName))
+this.WriteObjects("  \r\n");
+this.WriteObjects("    <!-- EntitySets for all classes -->\r\n");
+#line 21 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+foreach(var name in ctx.GetQuery<ObjectClass>().Select(cls => cls.ClassName))
 	{
 
-#line 23 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  name , "\" EntityType=\"Model.",  name , "\" />\r\n");
 #line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+this.WriteObjects("    <EntitySet Name=\"",  name , "\" EntityType=\"Model.",  name , "\" />\r\n");
+#line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
 
-#line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <!-- EntitySets for all CollectionEntrys and associated AssociationSets -->\r\n");
-#line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+this.WriteObjects("    <!-- EntitySets for all CollectionEntrys -->\r\n");
+#line 30 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
 
-#line 33 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 34 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  entityName , "\" EntityType=\"Model.",  entityName , "\" />\r\n");
 #line 35 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-var info = new AssociationInfo(prop);
-
-#line 37 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <AssociationSet Name=\"",  info.AssociationName , "\" Association=\"Model.",  info.AssociationName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  info.ParentRoleName , "\" EntitySet=\"",  ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  info.ChildRoleName , "\" EntitySet=\"",  Construct.AssociationChildEntitySetName(prop) , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-#line 41 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
+
+#line 38 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+this.WriteObjects("    <!-- AssociationSets -->\r\n");
+#line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
+	{
+		var info = AssociationInfo.CreateInfo(ctx, prop);
 
 #line 44 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <!-- AssociationSets for ObjectReferenceProperties -->\r\n");
-#line 46 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
-	{
-		TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
-		TypeMoniker childType = Construct.AssociationChildType(prop);
-		string name = Construct.AssociationName(parentType, childType, prop.PropertyName);
-
-#line 52 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <AssociationSet Name=\"",  name , "\" Association=\"Model.",  name , "\">\r\n");
-this.WriteObjects("      <End Role=\"",  Construct.AssociationParentRoleName(parentType) , "\" EntitySet=\"",  prop.ReferenceObjectClass.GetRootClass().ClassName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  Construct.AssociationChildRoleName(childType) , "\" EntitySet=\"",  Construct.AssociationChildEntitySetName(prop) , "\" />\r\n");
+this.WriteObjects("    <!-- ",  info.GetType().Name , " -->\r\n");
+this.WriteObjects("    <AssociationSet Name=\"",  info.AssociationName , "\" Association=\"Model.",  info.AssociationName , "\" >\r\n");
+this.WriteObjects("      <End Role=\"",  info.ASide.RoleName , "\" EntitySet=\"",  info.ASide.StorageEntitySet , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  info.BSide.RoleName , "\" EntitySet=\"",  info.BSide.StorageEntitySet, "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
-#line 56 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 49 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
-#line 58 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 51 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </EntityContainer>\r\n");
 this.WriteObjects("  \r\n");
 this.WriteObjects("  <!-- EntityTypes for all base classes -->\r\n");
-#line 62 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 55 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 foreach(var cls in ctx.GetBaseClasses())
 	{
 
-#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 58 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\">\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"Int32\" Nullable=\"false\" />\r\n");
-#line 70 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 63 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 
-#line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
-#line 72 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
 
-#line 75 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes for all other classes -->\r\n");
-#line 78 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 foreach(var cls in ctx.GetDerivedClasses())
 	{
 
-#line 81 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 74 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\" BaseType=\"Model.",  cls.BaseObjectClass.ClassName , "\" >\r\n");
-#line 82 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 75 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 
-#line 83 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 76 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
-#line 84 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 77 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
 
-#line 87 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 80 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes for all CollectionEntrys -->\r\n");
-#line 90 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 83 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		TypeMoniker collectionType = Construct.PropertyCollectionEntryType(prop);
 		// TypeMoniker parentType;
 		// TypeMoniker childType;
 
-#line 96 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 89 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <!-- ",  prop.GetType().Name , ": ",  prop.ObjectClass.ClassName , ".",  prop.PropertyName , " -->\r\n");
 this.WriteObjects("  <EntityType Name=\"",  collectionType.ClassName , "\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"Int32\" Nullable=\"false\" />\r\n");
-#line 103 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 96 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 {
 			// Parent
 			TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
 			TypeMoniker childType = collectionType;
 
-#line 108 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 101 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <NavigationProperty Name=\"ParentImpl\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  Construct.AssociationName(parentType, childType, "fk_Parent") , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  Construct.AssociationChildRoleName(childType) , "\"\r\n");
 this.WriteObjects("                        ToRole=\"",  Construct.AssociationParentRoleName(parentType) , "\" />\r\n");
-#line 113 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 106 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 if (prop.IsIndexed)
 			{
 
-#line 116 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 109 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <Property Name=\"ParentIndex\" Type=\"Int32\" Nullable=\"false\" />\r\n");
-#line 118 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 111 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 		}
 		
@@ -160,14 +152,14 @@ this.WriteObjects("    <Property Name=\"ParentIndex\" Type=\"Int32\" Nullable=\"
 		{
 			// ObjectReferenceProperty
 			// TODO: IsNullable??
-			var info = new AssociationInfo(prop);
+			var info = AssociationInfo.CreateInfo(ctx, prop);
 
-#line 128 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 121 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <NavigationProperty Name=\"ValueImpl\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  info.AssociationName , "\"\r\n");
-this.WriteObjects("                        FromRole=\"",  info.ChildRoleName , "\"\r\n");
-this.WriteObjects("                        ToRole=\"",  info.ParentRoleName , "\" />\r\n");
-#line 133 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+this.WriteObjects("                        FromRole=\"",  info.Child.RoleName , "\"\r\n");
+this.WriteObjects("                        ToRole=\"",  info.Parent.RoleName , "\" />\r\n");
+#line 126 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 		else if (prop is ValueTypeProperty)
 		{
@@ -175,85 +167,82 @@ this.WriteObjects("                        ToRole=\"",  info.ParentRoleName , "\
 			if (prop is StringProperty)
 				maxlength = String.Format("MaxLength=\"{0}\" ", ((StringProperty)prop).Length.ToString());
 
-#line 140 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 133 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <Property Name=\"Value\" Type=\"",  Type.GetType(prop.GetPropertyTypeString()).Name , "\" ",  maxlength , "Nullable=\"",  prop.IsNullable.ToString().ToLowerInvariant() , "\" />\r\n");
-#line 142 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 135 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
 		if (prop.NeedsPositionColumn())
 		{
 
-#line 147 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 140 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <Property Name=\"ValueIndex\" Type=\"Int32\" Nullable=\"false\" />\r\n");
-#line 149 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 142 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
-#line 151 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 144 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
-#line 152 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 145 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
 
-#line 155 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 148 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- ComplexTypes for all structs -->\r\n");
-#line 158 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 151 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 foreach(var cls in ctx.GetQuery<Struct>())
 	{
 
-#line 161 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 154 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <ComplexType Name=\"",  cls.ClassName , "\" >\r\n");
-#line 162 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 155 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 
-#line 163 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 156 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </ComplexType>\r\n");
-#line 164 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 157 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
 
-#line 167 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 160 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- Associations -->\r\n");
-#line 170 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage().Cast<Property>()
-		.Concat(ctx.GetObjectListPropertiesWithStorage().Cast<Property>())
-		.Distinct()
-		.OrderBy(p => p.ObjectClass.ClassName + p.PropertyName))
+#line 163 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
 	{
-		var info = new AssociationInfo(prop);
+		var info = AssociationInfo.CreateInfo(ctx, prop);
 
-#line 177 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 167 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <!-- ",  prop.GetType().Name , ": ",  prop.ObjectClass.ClassName , ".",  prop.PropertyName , " -->\r\n");
 this.WriteObjects("  <Association Name=\"",  info.AssociationName , "\" >\r\n");
-this.WriteObjects("    <End Role=\"",  info.ParentRoleName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  info.Parent.ClassName , "\"\r\n");
-this.WriteObjects("         Multiplicity=\"",  info.ParentMultiplicity , "\" />\r\n");
-this.WriteObjects("    <End Role=\"",  info.ChildRoleName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  info.Child.ClassName , "\"\r\n");
-this.WriteObjects("         Multiplicity=\"",  info.ChildMultiplicity , "\" />\r\n");
+this.WriteObjects("    <End Role=\"",  info.Parent.RoleName , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  info.Parent.Type.ClassName , "\"\r\n");
+this.WriteObjects("         Multiplicity=\"",  info.Parent.Multiplicity , "\" />\r\n");
+this.WriteObjects("    <End Role=\"",  info.Child.RoleName , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  info.Child.Type.ClassName , "\"\r\n");
+this.WriteObjects("         Multiplicity=\"",  info.Child.Multiplicity , "\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
-#line 187 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 177 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 // construct reverse mapping
 		if (prop is ObjectReferenceProperty && prop.IsList)
 		{
 			var refClass = ((ObjectReferenceProperty)prop).ReferenceObjectClass;
 			var refType = new TypeMoniker(refClass.GetDataTypeString());
 
-#line 193 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 183 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <!-- Reverse of ",  prop.GetType().Name , ": ",  prop.ObjectClass.ClassName , ".",  prop.PropertyName , " -->\r\n");
 this.WriteObjects("  <Association Name=\"",  Construct.AssociationName(refType, info.CollectionEntry, prop.PropertyName) , "\" >\r\n");
 this.WriteObjects("    <End Role=\"",  Construct.AssociationParentRoleName(refClass) , "\"\r\n");
 this.WriteObjects("         Type=\"Model.",  refType.ClassName , "\"\r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
-this.WriteObjects("    <End Role=\"",  info.ChildRoleName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  info.Child.ClassName , "\"\r\n");
+this.WriteObjects("    <End Role=\"",  info.Child.RoleName , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  info.Child.Type.ClassName , "\"\r\n");
 this.WriteObjects("         Multiplicity=\"*\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
-#line 203 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 193 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 	}
 
-#line 206 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
+#line 196 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("</Schema>\r\n");
 
         }

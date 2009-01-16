@@ -11,12 +11,14 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst")]
     public partial class SimplePropertyListTemplate : Kistl.Server.Generators.KistlCodeTemplate
     {
-		private Property prop;
+		protected IKistlContext ctx;
+		protected Property prop;
 
 
-        public SimplePropertyListTemplate(Arebis.CodeGeneration.IGenerationHost _host, Property prop)
+        public SimplePropertyListTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
             : base(_host)
         {
+			this.ctx = ctx;
 			this.prop = prop;
 
         }
@@ -25,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         {
 #line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst"
 this.WriteObjects("\r\n");
-#line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst"
 this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }");
 
         }

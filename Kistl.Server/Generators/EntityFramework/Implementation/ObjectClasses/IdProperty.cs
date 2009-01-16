@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.API;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -14,8 +15,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public class IdProperty : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
     {
 
-        public IdProperty(Arebis.CodeGeneration.IGenerationHost _host)
-            : base(_host, typeof(int), "ID")
+        public IdProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
+            : base(_host, ctx, typeof(int), "ID")
         {
 
         }

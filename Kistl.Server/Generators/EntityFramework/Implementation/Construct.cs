@@ -121,18 +121,25 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             }
             else if (prop is ObjectReferenceProperty)
             {
-                if (!((ObjectReferenceProperty)prop).GetOpposite().IsList)
-                {
-                    return new TypeMoniker(prop.GetPropertyTypeString());
-                }
-                else
-                {
-                    return Construct.PropertyCollectionEntryType(((ObjectReferenceProperty)prop).GetOpposite());
-                }
+                return AssociationChildType((ObjectReferenceProperty)prop);
             }
 
             throw new InvalidOperationException("Unable to find out AssociationChildType");
         }
+
+        public static TypeMoniker AssociationChildType(ObjectReferenceProperty prop)
+        {
+            ObjectReferenceProperty opposite = prop.GetOpposite();
+            if (!opposite.IsList)
+            {
+                return new TypeMoniker(prop.GetPropertyTypeString());
+            }
+            else
+            {
+                return Construct.PropertyCollectionEntryType(opposite);
+            }
+        }
+
 
         #endregion
 
@@ -198,6 +205,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         public static string ListPositionColumnName(DataType cls)
         {
             return ForeignKeyColumnName(cls.ClassName) + "_pos";
+        }
+
+        /// <summary>
+        /// This is used for the ParentIndex in CollectionEntrys
+        /// </summary>
+        public static string ForeignListPositionColumnName(DataType cls)
+        {
+            return ForeignKeyColumnNameReferencing(cls) + "_pos";
         }
 
         #endregion

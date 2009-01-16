@@ -13,19 +13,21 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst")]
     public partial class ModelCsdlEntityTypeFields : Kistl.Server.Generators.KistlCodeTemplate
     {
+		protected IKistlContext ctx;
 		protected IEnumerable<Property> properties;
 
 
-        public ModelCsdlEntityTypeFields(Arebis.CodeGeneration.IGenerationHost _host, IEnumerable<Property> properties)
+        public ModelCsdlEntityTypeFields(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<Property> properties)
             : base(_host)
         {
+			this.ctx = ctx;
 			this.properties = properties;
 
         }
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
 	 */
@@ -35,20 +37,20 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 		// TODO: implement IsNullable everywhere
 		if (p.IsAssociation())
 		{
-			var info = new AssociationInfo(p);
+			var info = AssociationInfo.CreateInfo(ctx, p);
 
-#line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  info.AssociationName , "\"\r\n");
-this.WriteObjects("                        FromRole=\"",  info.ParentRoleName , "\"\r\n");
-this.WriteObjects("                        ToRole=\"",  info.ChildRoleName , "\" />\r\n");
-#line 33 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+this.WriteObjects("                        FromRole=\"",  info.Parent.RoleName , "\"\r\n");
+this.WriteObjects("                        ToRole=\"",  info.Child.RoleName , "\" />\r\n");
+#line 34 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 if (p.NeedsPositionColumn())
 			{
 
-#line 36 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 37 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
-#line 38 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 39 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}
 		else if (p.IsValueTypePropertySingle())
@@ -74,20 +76,20 @@ this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.Po
 				maxlength = String.Format("MaxLength=\"{0}\" ",((StringProperty)p).Length.ToString());
 			}
 
-#line 63 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  name , "\" Type=\"",  type , "\" Nullable=\"",  ((ValueTypeProperty)p).IsNullable.ToString().ToLowerInvariant() , "\" ",  maxlength , "/>\r\n");
-#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 66 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		else if (p.IsStructPropertySingle())
 		{
 			// ValueTypeProperty
 			// Nullable Complex types are not supported by EF
 
-#line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 72 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("              Type=\"Model.",  ((StructProperty)p).StructDefinition.ClassName , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
-#line 75 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 76 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }	
 	}
 

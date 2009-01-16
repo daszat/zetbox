@@ -25,7 +25,7 @@
     </EntitySetMapping>
 <%
 	}
-
+/*
 	// map collection entries
 	foreach(var listProp in ctx.GetObjectListPropertiesWithStorage())
 	{
@@ -71,7 +71,7 @@
       <Condition ColumnName="<%= fkColumnName %>" IsNull="false" />
     </AssociationSetMapping>
 <%
-	}
+	}*/
 %>
   </EntityContainerMapping>
 </Mapping>

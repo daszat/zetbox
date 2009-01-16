@@ -11,7 +11,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
     {
         protected virtual void ApplyEntityTypeColumnDefs(IEnumerable<Property> properties, string prefix)
         {
-            CallTemplate("Implementation.EfModel.ModelSsdlEntityTypeColumns", properties, prefix);
+            CallTemplate("Implementation.EfModel.ModelSsdlEntityTypeColumns", ctx, properties, prefix);
         }
     }
 }

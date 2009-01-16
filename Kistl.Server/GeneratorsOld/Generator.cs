@@ -26,7 +26,7 @@ namespace Kistl.Server.GeneratorsOld
                 IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
                 using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
                 {
-                    Trace.TraceInformation("Generating SouceFiles");
+                    Trace.TraceInformation("Generating SourceFiles");
                     gDataObjects.Generate(ctx, Kistl.Server.Helper.CodeGenPath);
 
                     Trace.TraceInformation("Generating Mapping");

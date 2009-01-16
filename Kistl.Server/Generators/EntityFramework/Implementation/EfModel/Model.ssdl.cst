@@ -19,47 +19,57 @@
         Provider="System.Data.SqlClient"
         ProviderManifestToken="2005" >
   <EntityContainer Name="dbo">
+
+    <!-- EntitySets for all Base Classes -->
 <%	
-	// EntitySets for all Base Classes
 	foreach(var cls in ctx.GetBaseClasses())
 	{
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
 <%	}
+%>
 
-	// EntitySets for all CollectionEntrys and associated AssociationSets
+    <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
+<%	
+	foreach(var cls in ctx.GetDerivedClasses())
+	{
+		var info = new InheritanceStorageAssociationInfo(cls);
+%>
+    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
+    <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
+      <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
+      <End Role="<%= info.ChildRoleName %>" EntitySet="<%= info.ChildEntitySetName %>" />
+    </AssociationSet>
+    
+<%	}
+%>
+
+    <!-- EntitySets for all CollectionEntrys -->
+<%
 	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
 	{
 		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
 %>
-    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
-<%
-		TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
-		TypeMoniker childType = Construct.PropertyCollectionEntryType(prop);
-		string associationName = Construct.AssociationName(parentType, childType, "fk_Parent");
-%>
-    <AssociationSet Name="<%= associationName %>" Association="Model.<%= associationName %>" >
-      <End Role="<%= Construct.AssociationParentRoleName(parentType) %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
-      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
-    </AssociationSet>
+    <EntitySet Name="<%= entityName %>" EntityType="Model.Store.<%= entityName %>" />
 <%	}
-	
-	// AssociationSets for ObjectReferenceProperties
-	foreach(var prop in ctx.GetObjectReferencePropertiesWithStorage())
-	{
-		TypeMoniker parentType = new TypeMoniker(prop.GetPropertyTypeString());
-		TypeMoniker childType = Construct.AssociationChildType(prop);
-		string name = Construct.AssociationName(parentType, childType, prop.PropertyName);
 %>
-    <AssociationSet Name="<%= name %>" Association="Model.<%= name %>">
-      <End Role="<%= Construct.AssociationParentRoleName(parentType) %>" EntitySet="<%= prop.ReferenceObjectClass.GetRootClass().ClassName %>" />
-      <End Role="<%= Construct.AssociationChildRoleName(childType) %>" EntitySet="<%= Construct.AssociationChildEntitySetName(prop) %>" />
+
+    <!-- AssociationSets -->
+<%
+	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
+	{
+		var info = AssociationInfo.CreateInfo(ctx, prop);
+%>
+    <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
+      <End Role="<%= info.ASide.RoleName %>" EntitySet="<%= info.ASide.StorageEntitySet %>" />
+      <End Role="<%= info.BSide.RoleName %>" EntitySet="<%= info.BSide.StorageEntitySet %>" />
     </AssociationSet>
 <%	}
 %>
   </EntityContainer>
+
+  <!-- EntityTypes for all classes -->
 <%
-	// EntityTypes for all classes
 	foreach(var cls in ctx.GetQuery<ObjectClass>())
 	{
 %>	
@@ -73,8 +83,10 @@
 %>
   </EntityType>
 <%	}
+%>
 
-	// EntityTypes for all CollectionEntrys
+  <!-- EntityTypes for all CollectionEntrys -->
+<%
 	foreach(var p in ctx.GetObjectListPropertiesWithStorage())
 	{
 		TypeMoniker otherType = Construct.PropertyCollectionEntryType(p);
@@ -89,7 +101,7 @@
 		if (p.IsIndexed)
 		{
 %>
-    <Property Name="<%= Construct.ListPositionColumnName(p) %>" Type="int" Nullable="true" />
+    <Property Name="<%= Construct.ForeignListPositionColumnName(p.ObjectClass) %>" Type="int" Nullable="true" />
 <%
 		}
 	
@@ -101,7 +113,11 @@
 
 	// define associations between entities
 	
-	// First, all derived->base ObjectClass references
+%>
+
+
+  <!-- First, all derived->base ObjectClass references -->
+<%
 	foreach(var cls in ctx.GetDerivedClasses())
 	{
 		TypeMoniker parentType = cls.BaseObjectClass.GetTypeMoniker();
@@ -123,47 +139,45 @@
     </ReferentialConstraint>
   </Association>
 <%	}
+%>
 
-	// then all 1:n ObjectReferences
+
+  <!-- then all 1:n ObjectReferences -->
+<%
 	foreach(var p in ctx.GetObjectReferencePropertiesWithStorage()) 
 	{
-		TypeMoniker parentType = new TypeMoniker(p.GetPropertyTypeString());
-		TypeMoniker childType = Construct.AssociationChildType(p);
-
-		string parentRoleName = Construct.AssociationParentRoleName(parentType);
-		string childRoleName = Construct.AssociationChildRoleName(childType);
+		var info = AssociationInfo.CreateInfo(ctx, p);
 %>
-  <Association Name="<%= Construct.AssociationName(parentType, childType, p.PropertyName) %>">
-    <End Role="<%= parentRoleName %>" Type="Model.Store.<%= parentType.ClassName %>" Multiplicity="1" />
-    <End Role="<%= childRoleName %>" Type="Model.Store.<%= childType.ClassName %>" Multiplicity="0..1" />
+  <Association Name="<%= info.AssociationName %>">
+    <End Role="<%= info.Parent.RoleName %>" Type="Model.Store.<%= info.Parent.Type.ClassName %>" Multiplicity="1" />
+    <End Role="<%= info.Child.RoleName %>" Type="Model.Store.<%= info.Child.Type.ClassName %>" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="<%= parentRoleName %>">
+      <Principal Role="<%= info.Parent.RoleName %>">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="<%= childRoleName %>">
+      <Dependent Role="<%= info.Child.RoleName %>">
         <PropertyRef Name="<%= Construct.ForeignKeyColumnName(p) %>" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 <%	}
+%>
 
-	// and finally all n:n ObjectReference lists
+
+  <!-- and finally all n:n ObjectReference lists -->
+<%
 	foreach(var p in ctx.GetObjectListPropertiesWithStorage()) 
 	{
-		TypeMoniker parentType = p.ObjectClass.GetTypeMoniker();
-		TypeMoniker childType = Construct.PropertyCollectionEntryType(p);
-
-		string parentRoleName = Construct.AssociationParentRoleName(parentType);
-		string childRoleName = Construct.AssociationChildRoleName(childType);
+		var info = AssociationInfo.CreateInfo(ctx, p);
 %>
-  <Association Name="<%= Construct.AssociationName(parentType, childType, "fk_Parent") %>">
-    <End Role="<%= parentRoleName %>" Type="Model.Store.<%= parentType.ClassName %>" Multiplicity="1" />
-    <End Role="<%= childRoleName %>" Type="Model.Store.<%= childType.ClassName %>" Multiplicity="0..1" />
+  <Association Name="<%= info.AssociationName %>">
+    <End Role="<%= info.Parent.RoleName %>" Type="Model.Store.<%= info.Parent.Type.ClassName %>" Multiplicity="1" />
+    <End Role="<%= info.Child.RoleName %>" Type="Model.Store.<%= info.Child.Type.ClassName %>" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="<%= parentRoleName %>">
+      <Principal Role="<%= info.Parent.RoleName %>">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="<%= childRoleName %>">
+      <Dependent Role="<%= info.Child.RoleName %>">
         <PropertyRef Name="<%= Construct.ForeignKeyColumnNameReferencing(p.ObjectClass) %>" />
       </Dependent>
     </ReferentialConstraint>

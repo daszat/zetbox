@@ -8,8 +8,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
     public class Template : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
     {
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.App.Base.ObjectClass cls)
-            : base(_host, cls)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx,Kistl.App.Base.ObjectClass cls)
+            : base(_host, ctx, cls)
         {
         }
 

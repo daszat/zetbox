@@ -11,15 +11,17 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EfListWrapper.cst")]
     public partial class EfListWrapper : Kistl.Server.Generators.KistlCodeTemplate
     {
+		protected IKistlContext ctx;
 		protected ObjectClass containingClass;
 		protected Type type;
 		protected String name;
 		protected Property property;
 
 
-        public EfListWrapper(Arebis.CodeGeneration.IGenerationHost _host, ObjectClass containingClass, Type type, String name, Property property)
+        public EfListWrapper(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass containingClass, Type type, String name, Property property)
             : base(_host)
         {
+			this.ctx = ctx;
 			this.containingClass = containingClass;
 			this.type = type;
 			this.name = name;
@@ -31,7 +33,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
 #line 12 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EfListWrapper.cst"
 this.WriteObjects("\r\n");
-#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EfListWrapper.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EfListWrapper.cst"
 this.WriteObjects("		[EdmRelationshipNavigationPropertyAttribute(\"Model\", \"",  Construct.AssociationName(containingClass, property) , "\", \"",  Construct.AssociationChildRoleName(property) , "\")]\r\n");
 this.WriteObjects("        public EntityCollection<Kistl.App.Base.Constraint__Implementation__> ",  name , "__Implementation__\r\n");
 this.WriteObjects("        {\r\n");

@@ -3,6 +3,7 @@
 	CodeFile="Interface.AssemblyInfoTemplate.cs" 
 	ClassName="Kistl.Server.Generators.Templates.Interface.AssemblyInfoTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
 [assembly: System.Reflection.AssemblyTitleAttribute("<%= GetAssemblyTitle() %>")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("dasz.at")]
 [assembly: System.Reflection.AssemblyProductAttribute("Kistl")]

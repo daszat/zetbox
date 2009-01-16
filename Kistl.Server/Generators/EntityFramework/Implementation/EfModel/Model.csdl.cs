@@ -11,7 +11,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
     {
         protected virtual void ApplyEntityTypeFieldDefs(IEnumerable<Property> properties)
         {
-            CallTemplate("Implementation.EfModel.ModelCsdlEntityTypeFields", properties);
+            CallTemplate("Implementation.EfModel.ModelCsdlEntityTypeFields", ctx, properties);
         }
     }
 }

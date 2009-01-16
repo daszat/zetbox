@@ -92,7 +92,8 @@ namespace Kistl.Server.Generators
                 templateProviderPath,
                 templateName,
                 "AssemblyInfo.cs",
-                task.ToNameSpace());
+                task.ToNameSpace(),
+                ctx);
             gen.ExecuteTemplate();
         }
 
@@ -103,6 +104,7 @@ namespace Kistl.Server.Generators
                 @"Interface.DataTypes.Template",
                 objClass.ClassName + ".Designer.cs",
                 TaskEnum.Interface.ToNameSpace(),
+                ctx,
                 objClass);
             gen.ExecuteTemplate();
         }
@@ -114,6 +116,7 @@ namespace Kistl.Server.Generators
                 @"Implementation.ObjectClasses.Template",
                 objClass.ClassName + ".Client.Designer.cs",
                 TaskEnum.Client.ToNameSpace(),
+                ctx,
                 objClass);
             gen.ExecuteTemplate();
         }
@@ -125,6 +128,7 @@ namespace Kistl.Server.Generators
                 @"Implementation.ObjectClasses.Template",
                 objClass.ClassName + ".Server.Designer.cs",
                 TaskEnum.Server.ToNameSpace(),
+                ctx,
                 objClass);
             gen.ExecuteTemplate();
         }
@@ -136,6 +140,7 @@ namespace Kistl.Server.Generators
                  @"Interface.Enumerations.Template",
                  e.ClassName + ".Designer.cs",
                  TaskEnum.Interface.ToNameSpace(),
+                 ctx,
                  e);
             gen.ExecuteTemplate();
         }
@@ -147,6 +152,7 @@ namespace Kistl.Server.Generators
                  @"Interface.DataTypes.Template",
                  s.ClassName + ".Designer.cs",
                  TaskEnum.Interface.ToNameSpace(),
+                 ctx,
                  s);
             gen.ExecuteTemplate();
         }
@@ -158,6 +164,7 @@ namespace Kistl.Server.Generators
                  @"Interface.DataTypes.Template",
                  i.ClassName + ".Designer.cs",
                  TaskEnum.Interface.ToNameSpace(),
+                 ctx,
                  i);
             gen.ExecuteTemplate();
         }

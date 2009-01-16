@@ -11,12 +11,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst")]
     public partial class CollectionEntry : Kistl.Server.Generators.KistlCodeTemplate
     {
+		protected IKistlContext ctx;
 		protected ObjectReferenceProperty Property;
 
 
-        public CollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, ObjectReferenceProperty Property)
+        public CollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectReferenceProperty Property)
             : base(_host)
         {
+			this.ctx = ctx;
 			this.Property = Property;
 
         }
@@ -25,14 +27,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
 #line 12 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 this.WriteObjects("\r\n");
-#line 15 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
-var info = new AssociationInfo(this.Property);
+#line 16 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+var info = AssociationInfo.CreateInfo(ctx, this.Property);
 
-#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  info.CollectionEntry.ClassName , "\")]\r\n");
 this.WriteObjects("    [EdmEntityTypeAttribute(NamespaceName=\"Model\", Name=\"",  info.CollectionEntry.ClassName , "\")]\r\n");
 this.WriteObjects("    public class ",  info.CollectionEntry.ClassName , "",  Kistl.API.Helper.ImplementationSuffix , "\r\n");
-this.WriteObjects("        : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<",  Property.ReferenceObjectClass.GetDataTypeString() , ", ",  info.Parent.NameDataObject , ">\r\n");
+this.WriteObjects("        : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<",  Property.ReferenceObjectClass.GetDataTypeString() , ", ",  info.Parent.Type.NameDataObject , ">\r\n");
 this.WriteObjects("    {\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]\r\n");
@@ -65,7 +67,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
-this.WriteObjects("        public ",  info.Parent.NameDataObject , " Parent\r\n");
+this.WriteObjects("        public ",  info.Parent.Type.NameDataObject , " Parent\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
@@ -73,7 +75,7 @@ this.WriteObjects("                return ParentImpl;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                ParentImpl = (",  info.Parent.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ")value;\r\n");
+this.WriteObjects("                ParentImpl = (",  info.Parent.Type.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ")value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
@@ -111,37 +113,53 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private int _fk_Parent;\r\n");
 this.WriteObjects("                \r\n");
-this.WriteObjects("        [EdmRelationshipNavigationPropertyAttribute(\"Model\", \"",  info.AssociationName , "\", \"",  info.ParentRoleName , "\")]\r\n");
+this.WriteObjects("        [EdmRelationshipNavigationPropertyAttribute(\"Model\", \"",  info.AssociationName , "\", \"",  info.Child.RoleName , "\")]\r\n");
 this.WriteObjects("        public ",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , " ValueImpl\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                EntityReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , "> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , ">(\"Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter\", \"A_Mitarbeiter\");\r\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); \r\n");
+this.WriteObjects("                EntityReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , "> r\r\n");
+this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , ">(\r\n");
+this.WriteObjects("                        \"Model.",  info.AssociationName , "\",\r\n");
+this.WriteObjects("                        \"",  info.Child.RoleName , "\");\r\n");
+this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)\r\n");
+this.WriteObjects("                    r.Load(); \r\n");
 this.WriteObjects("                return r.Value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                EntityReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , "> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , ">(\"Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter\", \"A_Mitarbeiter\");\r\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); \r\n");
+this.WriteObjects("                EntityReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , "> r\r\n");
+this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , ">(\r\n");
+this.WriteObjects("                        \"Model.",  info.AssociationName , "\",\r\n");
+this.WriteObjects("                        \"",  info.Child.RoleName , "\");\r\n");
+this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)\r\n");
+this.WriteObjects("                    r.Load(); \r\n");
 this.WriteObjects("                r.Value = (",  Property.ReferenceObjectClass.GetDataTypeString() , "",  Kistl.API.Helper.ImplementationSuffix , ")value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-this.WriteObjects("        [EdmRelationshipNavigationPropertyAttribute(\"Model\", \"FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent\", \"A_Zeitkonto\")]\r\n");
-this.WriteObjects("        public ",  info.Parent.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , " ParentImpl\r\n");
+this.WriteObjects("        [EdmRelationshipNavigationPropertyAttribute(\"Model\", \"",  info.AssociationName , "\", \"",  info.Parent.RoleName , "\")]\r\n");
+this.WriteObjects("        public ",  info.Parent.Type.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , " ParentImpl\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                EntityReference<",  info.Parent.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , "> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  info.Parent.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ">(\"Model.",  info.AssociationName , "\", \"",  info.ParentRoleName , "\");\r\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); \r\n");
+this.WriteObjects("                EntityReference<",  info.Parent.Type.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , "> r\r\n");
+this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  info.Parent.Type.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ">(\r\n");
+this.WriteObjects("                        \"Model.",  info.AssociationName , "\",\r\n");
+this.WriteObjects("                        \"",  info.Parent.RoleName , "\");\r\n");
+this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)\r\n");
+this.WriteObjects("                    r.Load(); \r\n");
 this.WriteObjects("                return r.Value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                EntityReference<",  info.Parent.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , "> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  info.Parent.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ">(\"Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent\", \"A_Zeitkonto\");\r\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); \r\n");
-this.WriteObjects("                r.Value = (",  info.Parent.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ")value;\r\n");
+this.WriteObjects("                EntityReference<",  info.Parent.Type.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , "> r\r\n");
+this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  info.Parent.Type.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ">(\r\n");
+this.WriteObjects("                    \"Model.",  info.AssociationName , "\",\r\n");
+this.WriteObjects("                    \"",  info.Parent.RoleName , "\");\r\n");
+this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)\r\n");
+this.WriteObjects("                    r.Load(); \r\n");
+this.WriteObjects("                r.Value = (",  info.Parent.Type.NameDataObject , "",  Kistl.API.Helper.ImplementationSuffix , ")value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");

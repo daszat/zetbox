@@ -10,14 +10,15 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="Property" Type="ObjectReferenceProperty" %>
 <%
-	var info = new AssociationInfo(this.Property);
+	var info = AssociationInfo.CreateInfo(ctx, this.Property);
 %>
     [System.Diagnostics.DebuggerDisplay("<%= info.CollectionEntry.ClassName %>")]
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="<%= info.CollectionEntry.ClassName %>")]
     public class <%= info.CollectionEntry.ClassName %><%= Kistl.API.Helper.ImplementationSuffix %>
-        : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<<%= Property.ReferenceObjectClass.GetDataTypeString() %>, <%= info.Parent.NameDataObject %>>
+        : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<<%= Property.ReferenceObjectClass.GetDataTypeString() %>, <%= info.Parent.Type.NameDataObject %>>
     {
     
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
@@ -50,7 +51,7 @@
         
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public <%= info.Parent.NameDataObject %> Parent
+        public <%= info.Parent.Type.NameDataObject %> Parent
         {
             get
             {
@@ -58,7 +59,7 @@
             }
             set
             {
-                ParentImpl = (<%= info.Parent.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
+                ParentImpl = (<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
             }
         }
         
@@ -96,37 +97,53 @@
         }
         private int _fk_Parent;
                 
-        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= info.AssociationName %>", "<%= info.ParentRoleName %>")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= info.AssociationName %>", "<%= info.Child.RoleName %>")]
         public <%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %> ValueImpl
         {
             get
             {
-                EntityReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                EntityReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>>(
+                        "Model.<%= info.AssociationName %>",
+                        "<%= info.Child.RoleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
+                    r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Mitarbeiter_Mitarbeiter", "A_Mitarbeiter");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                EntityReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>>(
+                        "Model.<%= info.AssociationName %>",
+                        "<%= info.Child.RoleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
+                    r.Load(); 
                 r.Value = (<%= Property.ReferenceObjectClass.GetDataTypeString() %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
             }
         }
         
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto")]
-        public <%= info.Parent.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %> ParentImpl
+        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= info.AssociationName %>", "<%= info.Parent.RoleName %>")]
+        public <%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %> ParentImpl
         {
             get
             {
-                EntityReference<<%= info.Parent.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= info.Parent.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>>("Model.<%= info.AssociationName %>", "<%= info.ParentRoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
+                EntityReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>>(
+                        "Model.<%= info.AssociationName %>",
+                        "<%= info.Parent.RoleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
+                    r.Load(); 
                 return r.Value;
             }
             set
             {
-                EntityReference<<%= info.Parent.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>> r = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= info.Parent.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>>("Model.FK_Zeitkonto_MitarbeiterCollectionEntry_Zeitkonto_fk_Parent", "A_Zeitkonto");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded) r.Load(); 
-                r.Value = (<%= info.Parent.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
+                EntityReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>>(
+                    "Model.<%= info.AssociationName %>",
+                    "<%= info.Parent.RoleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
+                    r.Load(); 
+                r.Value = (<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
             }
         }
         

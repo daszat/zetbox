@@ -10,8 +10,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public class Template : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
     {
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.App.Base.ObjectClass cls)
-            : base(_host, cls)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.ObjectClass cls)
+            : base(_host, ctx, cls)
         {
         }
 
@@ -20,15 +20,15 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             base.ApplyGlobalPreambleTemplate();
             foreach (ObjectReferenceProperty prop in this.DataType.Properties.OfType<ObjectReferenceProperty>().ToList().Where(p => p.HasStorage()))
             {
-                var info = new AssociationInfo(prop);
+                var info = AssociationInfo.CreateInfo(ctx, prop);
                 this.WriteLine(
                     "[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"{0}\", \"{1}\", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof({2}), \"{3}\", System.Data.Metadata.Edm.RelationshipMultiplicity.{4}, typeof({5}))]",
                     info.AssociationName,
-                    info.ParentRoleName,
-                    info.Parent.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
-                    info.ChildRoleName,
+                    info.Parent.RoleName,
+                    info.Parent.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
+                    info.Child.RoleName,
                     prop.GetRelationType() == RelationType.one_one ? "ZeroOrOne" : "Many",
-                    info.Child.NameDataObject + Kistl.API.Helper.ImplementationSuffix
+                    info.Child.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix
                     );
 
                 // construct reverse mapping
@@ -40,8 +40,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                         Construct.AssociationName(refType, info.CollectionEntry, prop.PropertyName),
                         Construct.AssociationParentRoleName(prop.ReferenceObjectClass),
                         refType.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
-                        info.ChildRoleName,
-                        info.Child.NameDataObject + Kistl.API.Helper.ImplementationSuffix
+                        info.Child.RoleName,
+                        info.Child.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix
                     );
                 }
 
@@ -56,7 +56,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyIDPropertyTemplate()
         {
             base.ApplyIDPropertyTemplate();
-            Host.CallTemplate("Implementation.ObjectClasses.IdProperty");
+            Host.CallTemplate("Implementation.ObjectClasses.IdProperty", ctx);
         }
 
         protected override IEnumerable<string> GetAdditionalImports()
@@ -95,7 +95,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             base.ApplyNamespaceTailTemplate();
             foreach (ObjectReferenceProperty prop in this.DataType.Properties.OfType<ObjectReferenceProperty>().Where(p => p.IsList).ToList().Where(p => p.HasStorage()))
             {
-                CallTemplate("Implementation.ObjectClasses.CollectionEntry", prop);
+                CallTemplate("Implementation.ObjectClasses.CollectionEntry", ctx, prop);
             }
         }
 
