@@ -216,10 +216,10 @@ this.WriteObjects("  <!-- ",  prop.GetType().Name , ": ",  prop.ObjectClass.Clas
 this.WriteObjects("  <Association Name=\"",  info.AssociationName , "\" >\r\n");
 this.WriteObjects("    <End Role=\"",  info.Parent.RoleName , "\"\r\n");
 this.WriteObjects("         Type=\"Model.",  info.Parent.Type.ClassName , "\"\r\n");
-this.WriteObjects("         Multiplicity=\"",  info.Parent.Multiplicity , "\" />\r\n");
+this.WriteObjects("         Multiplicity=\"",  info.Parent.ConceptualMultiplicity , "\" />\r\n");
 this.WriteObjects("    <End Role=\"",  info.Child.RoleName , "\"\r\n");
 this.WriteObjects("         Type=\"Model.",  info.Child.Type.ClassName , "\"\r\n");
-this.WriteObjects("         Multiplicity=\"",  info.Child.Multiplicity , "\" />\r\n");
+this.WriteObjects("         Multiplicity=\"",  info.Child.ConceptualMultiplicity , "\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
 #line 177 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 // construct reverse mapping

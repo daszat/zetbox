@@ -60,6 +60,7 @@
 	{
 		var info = AssociationInfo.CreateInfo(ctx, prop);
 %>
+    <!-- <%= info.GetType().Name %> -->
     <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
       <End Role="<%= info.ASide.RoleName %>" EntitySet="<%= info.ASide.StorageEntitySet %>" />
       <End Role="<%= info.BSide.RoleName %>" EntitySet="<%= info.BSide.StorageEntitySet %>" />
@@ -142,43 +143,22 @@
 %>
 
 
-  <!-- then all 1:n ObjectReferences -->
+  <!-- then all ObjectReferences -->
 <%
-	foreach(var p in ctx.GetObjectReferencePropertiesWithStorage()) 
+	foreach(var p in ctx.GetAssociationPropertiesWithStorage()) 
 	{
 		var info = AssociationInfo.CreateInfo(ctx, p);
 %>
+  <!-- <%= info.GetType().Name %> -->
   <Association Name="<%= info.AssociationName %>">
-    <End Role="<%= info.Parent.RoleName %>" Type="Model.Store.<%= info.Parent.Type.ClassName %>" Multiplicity="1" />
-    <End Role="<%= info.Child.RoleName %>" Type="Model.Store.<%= info.Child.Type.ClassName %>" Multiplicity="0..1" />
+    <End Role="<%= info.ASide.RoleName %>" Type="Model.Store.<%= info.ASide.Type.ClassName %>" Multiplicity="<%= info.ASide.StorageMultiplicity %>" />
+    <End Role="<%= info.BSide.RoleName %>" Type="Model.Store.<%= info.BSide.Type.ClassName %>" Multiplicity="<%= info.BSide.StorageMultiplicity %>" />
     <ReferentialConstraint>
-      <Principal Role="<%= info.Parent.RoleName %>">
+      <Principal Role="<%= info.ASide.RoleName %>">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="<%= info.Child.RoleName %>">
-        <PropertyRef Name="<%= Construct.ForeignKeyColumnName(p) %>" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-<%	}
-%>
-
-
-  <!-- and finally all n:n ObjectReference lists -->
-<%
-	foreach(var p in ctx.GetObjectListPropertiesWithStorage()) 
-	{
-		var info = AssociationInfo.CreateInfo(ctx, p);
-%>
-  <Association Name="<%= info.AssociationName %>">
-    <End Role="<%= info.Parent.RoleName %>" Type="Model.Store.<%= info.Parent.Type.ClassName %>" Multiplicity="1" />
-    <End Role="<%= info.Child.RoleName %>" Type="Model.Store.<%= info.Child.Type.ClassName %>" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="<%= info.Parent.RoleName %>">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="<%= info.Child.RoleName %>">
-        <PropertyRef Name="<%= Construct.ForeignKeyColumnNameReferencing(p.ObjectClass) %>" />
+      <Dependent Role="<%= info.BSide.RoleName %>">
+        <PropertyRef Name="<%= info.ForeignKeyColumnName %>" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

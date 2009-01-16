@@ -23,18 +23,28 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
     /// </summary>
     public class AssociationSideInfo
     {
-        public AssociationSideInfo(TypeMoniker t, Role r, string mult, string storageSet)
+        public AssociationSideInfo(TypeMoniker t, Role r, string cMult, string sMult, string storageSet)
         {
             this.Type = t;
             this.Role = r;
-            this.Multiplicity = mult;
+            this.ConceptualMultiplicity = cMult;
+            this.StorageMultiplicity = sMult;
             this.StorageEntitySet = storageSet;
         }
 
         public TypeMoniker Type { get; private set; }
         public Role Role { get; private set; }
         public string RoleName { get { return DefaultRoleName(this.Role, this.Type.ClassName); } }
-        public string Multiplicity { get; private set; }
+        
+        /// <summary>
+        /// The multiplicity of this association's side in the conceptual schema
+        /// </summary>
+        public string ConceptualMultiplicity { get; private set; }
+
+        /// <summary>
+        /// The multiplicity of this association's side in the storage schema
+        /// </summary>
+        public string StorageMultiplicity { get; private set; }
         public string StorageEntitySet { get; private set; }
 
         public override bool Equals(object obj)
@@ -48,7 +58,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
             return this.Type.Equals(other.Type)
                 && this.Role.Equals(other.Role)
-                && this.Multiplicity.Equals(other.Multiplicity)
+                && this.ConceptualMultiplicity.Equals(other.ConceptualMultiplicity)
+                && this.StorageMultiplicity.Equals(other.StorageMultiplicity)
                 && this.StorageEntitySet.Equals(other.StorageEntitySet);
         }
 
@@ -56,7 +67,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         {
             return this.Type.GetHashCode()
                 ^ this.Role.GetHashCode()
-                ^ this.Multiplicity.GetHashCode()
+                ^ this.ConceptualMultiplicity.GetHashCode()
+                ^ this.StorageMultiplicity.GetHashCode()
                 ^ this.StorageEntitySet.GetHashCode();
         }
 
@@ -89,13 +101,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         {
             Debug.Assert(p.HasStorage() && p.IsList);
 
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", p.ObjectClass.ClassName);
+            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", p.ObjectClass.ClassName);
 
             var bSideType = Construct.PropertyCollectionEntryType(p);
             // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", bSideType.ClassName);
+            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", "*", bSideType.ClassName);
 
             this.PropertyName = "fk_Parent";
+            this.ForeignKeyColumnName = Construct.ForeignKeyColumnNameReferencing(p.ObjectClass);
         }
 
         protected override bool IsStraight { get { return true; } }
@@ -112,11 +125,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         {
             Debug.Assert(!p.HasStorage() && p.IsList);
 
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "none");
+            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", "none");
 
             var bSideType = p.GetOpposite().IsList ? Construct.PropertyCollectionEntryType(p.GetOpposite()) : new TypeMoniker(p.GetPropertyTypeString());
             // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", "none");
+            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", "0..1", "none");
 
             this.PropertyName = p.GetOpposite().PropertyName;
         }
@@ -135,12 +148,13 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         {
             Debug.Assert(p.IsList);
 
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", ((ObjectClass)Property.ObjectClass).GetRootClass().ClassName);
+            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", ((ObjectClass)Property.ObjectClass).GetRootClass().ClassName);
 
             TypeMoniker bSideCollectionEntryType = Construct.PropertyCollectionEntryType(p);
-            this.BSide = new AssociationSideInfo(bSideCollectionEntryType, Role.B, "*", bSideCollectionEntryType.ClassName);
+            this.BSide = new AssociationSideInfo(bSideCollectionEntryType, Role.B, "*", "*", bSideCollectionEntryType.ClassName);
 
             this.PropertyName = "fk_Parent";
+            this.ForeignKeyColumnName = Construct.ForeignKeyColumnNameReferencing(p.ObjectClass);
         }
 
         protected override bool IsStraight { get { return true; } }
@@ -156,13 +170,21 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         {
             Debug.Assert(p.HasStorage() && !p.IsList);
 
-            this.ASide = new AssociationSideInfo(p.ReferenceObjectClass.GetTypeMoniker(), Role.A, "0..1", p.ReferenceObjectClass.GetRootClass().ClassName);
+            this.ASide = new AssociationSideInfo(p.ReferenceObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", p.ReferenceObjectClass.ClassName);
 
             var bSideType = p.ObjectClass.GetTypeMoniker();
             // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", ctx.GetQuery<ObjectClass>().First(c => c.ClassName == bSideType.ClassName).GetRootClass().ClassName);
+            this.BSide = new AssociationSideInfo(
+                bSideType,
+                Role.B,
+                p.GetRelationType() == RelationType.one_one ? "0..1" : "*", 
+                "*", 
+                ctx.GetQuery<ObjectClass>().First(c => c.ClassName == bSideType.ClassName).ClassName
+                );
 
             this.PropertyName = p.PropertyName;
+            this.ForeignKeyColumnName = Construct.ForeignKeyColumnName(p);
+
         }
 
         // TODO: check whether A and B side can be swapped here and IsStraight removed
@@ -180,11 +202,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         {
             Debug.Assert(!p.HasStorage() && !p.IsList);
 
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", p.ReferenceObjectClass.GetRootClass().ClassName);
+            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", p.ReferenceObjectClass.GetRootClass().ClassName);
 
             var bSideType = p.ReferenceObjectClass.GetTypeMoniker();
             // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", p.Context.GetQuery<ObjectClass>().First(c => c.ClassName == bSideType.ClassName).GetRootClass().ClassName);
+            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", "0..1", p.Context.GetQuery<ObjectClass>().First(c => c.ClassName == bSideType.ClassName).GetRootClass().ClassName);
 
             this.PropertyName = p.GetOpposite().PropertyName;
         }
@@ -258,6 +280,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
                 throw new ArgumentOutOfRangeException("p", "Doesn't describe a relation");
 
             this.Property = p;
+            this.ForeignKeyColumnName = "none";
         }
 
         public Property Property { get; private set; }
@@ -279,6 +302,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         public AssociationSideInfo Parent { get { return IsStraight ? ASide : BSide; } }
         public AssociationSideInfo Child { get { return IsStraight ? BSide : ASide; } }
+
+        public string ForeignKeyColumnName { get; protected set; }
 
     }
 
