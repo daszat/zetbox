@@ -15,8 +15,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
   <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
+    
+    <!-- EntitySetMappings for classes -->
 <%
-	// map entities
 	foreach(var cls in ctx.GetBaseClasses())
 	{
 %>
@@ -25,53 +26,65 @@
     </EntitySetMapping>
 <%
 	}
-/*
-	// map collection entries
-	foreach(var listProp in ctx.GetObjectListPropertiesWithStorage())
-	{
-		TypeMoniker parentType = listProp.ObjectClass.GetTypeMoniker();
-		TypeMoniker childType = Construct.PropertyCollectionEntryType(listProp);
-		string associationName = Construct.AssociationName(parentType, childType, "fk_Parent");
-		string fkColumnName = Construct.ForeignKeyColumnNameReferencing(listProp.ObjectClass);
 %>
-    <EntitySetMapping Name="<%= childType.ClassName %>">
-<% ApplyCollectionEntryEntityTypeMapping(listProp); %>
+
+
+    <!-- EntitySetMappings for collections -->
+<%
+	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
+	{
+		var info = AssociationInfo.CreateInfo(ctx, prop);
+%>
+    <EntitySetMapping Name="<%= info.BSide.Type.ClassName %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= info.BSide.Type.ClassName %>)">
+        <MappingFragment StoreEntitySet="<%= info.BSide.Type.ClassName %>">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+<%
+	if (prop is ValueTypeProperty)
+	{
+%>
+          <ScalarProperty Name="Value" ColumnName="<%= prop.PropertyName %>" />
+<%	}
+
+	if (prop.NeedsPositionColumn())
+	{
+%>
+          <ScalarProperty Name="ValueIndex" ColumnName="<%= Construct.ListPositionColumnName(prop, "") %>" />
+<%	}
+
+	if (prop.IsIndexed)
+	{
+%>
+          <ScalarProperty Name="ValueIndex" ColumnName="<%= Construct.ListPositionColumnName(prop.ObjectClass) %>" />
+<%	}
+%>
+        </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="<%= associationName %>"
-                           TypeName="Model.<%= associationName %>"
-                           StoreEntitySet="<%= childType.ClassName %>" >
-      <EndProperty Name="<%= Construct.AssociationParentRoleName(parentType) %>" >
-        <ScalarProperty Name="ID" ColumnName="<%= fkColumnName %>" />
-      </EndProperty>
-      <EndProperty Name="<%= Construct.AssociationChildRoleName(childType) %>" >
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="<%= fkColumnName %>" IsNull="false" />
-    </AssociationSetMapping>
 <%
 	}
-
-	// map object references
-	foreach(var refProp in ctx.GetObjectReferencePropertiesWithStorage())
-	{
-		TypeMoniker parentType = new TypeMoniker(refProp.GetPropertyTypeString());
-		TypeMoniker childType = Construct.AssociationChildType(refProp);
-		string associationName = Construct.AssociationName(parentType, childType, refProp.PropertyName);
-		string fkColumnName = Construct.ForeignKeyColumnName(refProp);
+	
 %>
-    <AssociationSetMapping Name="<%= associationName %>"
-                           TypeName="Model.<%= associationName %>"
-                           StoreEntitySet="<%= childType.ClassName %>" >
-      <EndProperty Name="<%= Construct.AssociationParentRoleName(parentType) %>" >
-        <ScalarProperty Name="ID" ColumnName="<%= fkColumnName %>" />
-      </EndProperty>
-      <EndProperty Name="<%= Construct.AssociationChildRoleName(childType) %>" >
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="<%= fkColumnName %>" IsNull="false" />
-    </AssociationSetMapping>
+
+
+    <!-- AssociationSetMappings -->
 <%
-	}*/
+	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
+	{
+		var info = AssociationInfo.CreateInfo(ctx, prop);
+		var colName = prop.IsList ? prop.ObjectClass.ClassName : prop.PropertyName;
+%>
+    <!-- <%= info.GetType().Name %> -->
+    <AssociationSetMapping Name="<%= info.AssociationName %>" TypeName="Model.<%= info.AssociationName %>" StoreEntitySet="<%= info.BSide.StorageEntitySet %>" >
+      <EndProperty Name="<%= info.ASide.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="fk_<%= colName %>"/>
+      </EndProperty>
+      <EndProperty Name="<%= info.BSide.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_<%= colName %>" IsNull="false"/>
+    </AssociationSetMapping>
+<%	}
 %>
   </EntityContainerMapping>
 </Mapping>

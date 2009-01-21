@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
-using Kistl.Server;
 using Kistl.Server.Generators.Extensions;
-using System.Diagnostics;
 
 
 /*
@@ -23,10 +23,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
     /// </summary>
     public class AssociationSideInfo
     {
-        public AssociationSideInfo(TypeMoniker t, Role r, string cMult, string sMult, string storageSet)
+        public AssociationSideInfo(Role r, TypeMoniker t, RelationshipMultiplicity mult, string cMult, string sMult, string storageSet)
         {
-            this.Type = t;
             this.Role = r;
+            this.Type = t;
+            this.Multiplicity = mult;
             this.ConceptualMultiplicity = cMult;
             this.StorageMultiplicity = sMult;
             this.StorageEntitySet = storageSet;
@@ -35,6 +36,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         public TypeMoniker Type { get; private set; }
         public Role Role { get; private set; }
         public string RoleName { get { return DefaultRoleName(this.Role, this.Type.ClassName); } }
+
+        /// <summary>
+        /// The multiplicity of this association's side in the EF Attributes
+        /// </summary>
+        public RelationshipMultiplicity Multiplicity { get; private set; }
         
         /// <summary>
         /// The multiplicity of this association's side in the conceptual schema
@@ -91,144 +97,18 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
     }
 
-    /// <summary>
-    /// An association from the list items to the parent
-    /// </summary>
-    public class ObjectListAssociationInfo : AssociationInfo
-    {
-        public ObjectListAssociationInfo(IKistlContext ctx, ObjectReferenceProperty p)
-            : base(p)
-        {
-            Debug.Assert(p.HasStorage() && p.IsList);
-
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", p.ObjectClass.ClassName);
-
-            var bSideType = Construct.PropertyCollectionEntryType(p);
-            // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", "*", bSideType.ClassName);
-
-            this.PropertyName = "fk_Parent";
-            this.ForeignKeyColumnName = Construct.ForeignKeyColumnNameReferencing(p.ObjectClass);
-        }
-
-        protected override bool IsStraight { get { return true; } }
-
-    }
-
-    /// <summary>
-    /// An association from the parent to the list items
-    /// </summary>
-    public class ObjectListParentAssociationInfo : AssociationInfo
-    {
-        public ObjectListParentAssociationInfo(IKistlContext ctx, ObjectReferenceProperty p)
-            : base(p)
-        {
-            Debug.Assert(!p.HasStorage() && p.IsList);
-
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", "none");
-
-            var bSideType = p.GetOpposite().IsList ? Construct.PropertyCollectionEntryType(p.GetOpposite()) : new TypeMoniker(p.GetPropertyTypeString());
-            // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", "0..1", "none");
-
-            this.PropertyName = p.GetOpposite().PropertyName;
-        }
-
-        protected override bool IsStraight { get { return true; } }
-
-    }
-
-    /// <summary>
-    /// An association describing a list of values
-    /// </summary>
-    public class ValueTypeAssociationInfo : AssociationInfo
-    {
-        public ValueTypeAssociationInfo(IKistlContext ctx, ValueTypeProperty p)
-            : base(p)
-        {
-            Debug.Assert(p.IsList);
-
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", ((ObjectClass)Property.ObjectClass).GetRootClass().ClassName);
-
-            TypeMoniker bSideCollectionEntryType = Construct.PropertyCollectionEntryType(p);
-            this.BSide = new AssociationSideInfo(bSideCollectionEntryType, Role.B, "*", "*", bSideCollectionEntryType.ClassName);
-
-            this.PropertyName = "fk_Parent";
-            this.ForeignKeyColumnName = Construct.ForeignKeyColumnNameReferencing(p.ObjectClass);
-        }
-
-        protected override bool IsStraight { get { return true; } }
-    }
-
-    /// <summary>
-    /// An association referencing an object
-    /// </summary>
-    public class ObjectReferenceAssociationInfo : AssociationInfo
-    {
-        public ObjectReferenceAssociationInfo(IKistlContext ctx, ObjectReferenceProperty p)
-            : base(p)
-        {
-            Debug.Assert(p.HasStorage() && !p.IsList);
-
-            this.ASide = new AssociationSideInfo(p.ReferenceObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", p.ReferenceObjectClass.ClassName);
-
-            var bSideType = p.ObjectClass.GetTypeMoniker();
-            // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(
-                bSideType,
-                Role.B,
-                p.GetRelationType() == RelationType.one_one ? "0..1" : "*", 
-                "*", 
-                ctx.GetQuery<ObjectClass>().First(c => c.ClassName == bSideType.ClassName).ClassName
-                );
-
-            this.PropertyName = p.PropertyName;
-            this.ForeignKeyColumnName = Construct.ForeignKeyColumnName(p);
-
-        }
-
-        // TODO: check whether A and B side can be swapped here and IsStraight removed
-        protected override bool IsStraight { get { return false; } }
-
-    }
-
-    /// <summary>
-    /// An association of an object being referenced
-    /// </summary>
-    public class ObjectReferenceTargetAssociationInfo : AssociationInfo
-    {
-        public ObjectReferenceTargetAssociationInfo(IKistlContext ctx, ObjectReferenceProperty p)
-            : base(p)
-        {
-            Debug.Assert(!p.HasStorage() && !p.IsList);
-
-            this.ASide = new AssociationSideInfo(p.ObjectClass.GetTypeMoniker(), Role.A, "0..1", "0..1", p.ReferenceObjectClass.GetRootClass().ClassName);
-
-            var bSideType = p.ReferenceObjectClass.GetTypeMoniker();
-            // TODO: redundant data here: IsList <-> RelationType?
-            this.BSide = new AssociationSideInfo(bSideType, Role.B, p.GetRelationType() == RelationType.one_one ? "0..1" : "*", "0..1", p.Context.GetQuery<ObjectClass>().First(c => c.ClassName == bSideType.ClassName).GetRootClass().ClassName);
-
-            this.PropertyName = p.GetOpposite().PropertyName;
-        }
-
-        protected override bool IsStraight { get { return true; } }
-
-    }
-
 
     public abstract class AssociationInfo
     {
 
         public static AssociationInfo CreateInfo(IKistlContext ctx, ObjectReferenceProperty p)
         {
-            if (!p.IsAssociation())
-                throw new ArgumentOutOfRangeException("p", "Doesn't describe a relation");
 
             if (p.IsList && p.HasStorage())
             {
                 return new ObjectListAssociationInfo(ctx, p);
             }
-            else if ( p.IsList && !p.HasStorage())
+            else if (p.IsList && !p.HasStorage())
             {
                 return new ObjectListParentAssociationInfo(ctx, p);
             }
@@ -240,6 +120,9 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             {
                 return new ObjectReferenceTargetAssociationInfo(ctx, p);
             }
+
+            if (!p.IsAssociation())
+                throw new ArgumentOutOfRangeException("p", "Doesn't describe an association");
 
             throw new InvalidOperationException("Mismatch between IsAssociation() and AssociationInfo's knowledge");
         }
@@ -274,15 +157,17 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             throw new InvalidOperationException("Mismatch between IsAssociation() and AssociationInfo's knowledge");
         }
 
-        protected AssociationInfo(Property p)
+        protected AssociationInfo(IKistlContext ctx, Property p)
         {
             if (!p.IsAssociation())
                 throw new ArgumentOutOfRangeException("p", "Doesn't describe a relation");
 
+            this.Context = ctx;
             this.Property = p;
             this.ForeignKeyColumnName = "none";
         }
 
+        protected IKistlContext Context { get; private set; }
         public Property Property { get; private set; }
 
         public AssociationSideInfo ASide { get; protected set; }
@@ -305,40 +190,21 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         public string ForeignKeyColumnName { get; protected set; }
 
+        /// <summary>
+        /// Creates the "other" direction of a bi-directional Association. This 
+        /// function returns an AssociationInfo for the reverse Part when 
+        /// applicable, else null.
+        /// </summary>
+        public virtual AssociationInfo GetReverse() { return null; }
+
+        /// <summary>
+        /// Associations implemented with a ephemeral entity (i.e. 
+        /// CollectionEntry) have actually two underlying EF Relationships: 
+        /// from the referring class to the CollectionEntry and from the 
+        /// CollectionEntry to the referred class. This returns the second 
+        /// part of this Relationship or null if not applicable.
+        /// </summary>
+        public virtual AssociationInfo GetSecondPart() { return null; }
     }
 
-    public class InheritanceStorageAssociationInfo
-    {
-        public InheritanceStorageAssociationInfo(ObjectClass cls)
-        {
-            if (cls.BaseObjectClass == null)
-                throw new ArgumentOutOfRangeException("cls", "should be a derived ObjectClass");
-
-            Class = cls;
-            Parent = Class.BaseObjectClass.GetTypeMoniker();
-            Child = Class.GetTypeMoniker();
-
-            AssociationName = Construct.AssociationName(Parent, Child, "ID");
-
-            ParentRoleName = "A_" + Parent.ClassName;
-            ChildRoleName = "B_" + Child.ClassName;
-
-            ParentEntitySetName = Parent.ClassName;
-            ChildEntitySetName = Child.ClassName;
-        }
-
-        public ObjectClass Class { get; private set; }
-        public TypeMoniker Parent { get; private set; }
-        public TypeMoniker Child { get; private set; }
-
-        public string AssociationName { get; private set; }
-
-        public string ParentRoleName { get; private set; }
-        public string ChildRoleName { get; private set; }
-
-        public string ParentEntitySetName { get; private set; }
-        public string ChildEntitySetName { get; private set; }
-
-
-    }
 }

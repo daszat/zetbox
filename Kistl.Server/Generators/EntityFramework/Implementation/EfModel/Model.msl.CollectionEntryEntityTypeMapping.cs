@@ -45,7 +45,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 
         protected virtual void ApplyComplexProperty(StructProperty prop, string parentName)
         {
-            this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"{2}\">",
+            this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
                 prop.PropertyName,
                 Kistl.API.Helper.ImplementationSuffix,
                 prop.StructDefinition.ClassName

@@ -34,23 +34,24 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 #line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("\r\n");
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
-ApplyRequisitesTemplate();
-	
-	ApplyAttributesTemplate();
+ApplyAttributesTemplate();
 
-    var backingName = MungeNameToBacking(name);
+	var backingName = MungeNameToBacking(name);
 
-#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 23 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("				if (",  backingName , " == null)\r\n");
-this.WriteObjects("					",  backingName , " = ",  GetInitialisationExpression() , ";\r\n");
+this.WriteObjects("                if (",  backingName , " == null)\r\n");
+this.WriteObjects("                    ",  backingName , " = ",  GetInitialisationExpression() , ";\r\n");
 this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";");
+this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\r\n");
+#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+ApplyRequisitesTemplate();
+
 
         }
 

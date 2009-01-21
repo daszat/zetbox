@@ -16,19 +16,20 @@
 <%@ Parameter Name="name" Type="String" %>
 <%@ Parameter Name="property" Type="Property" %>
 <%
-	ApplyRequisitesTemplate();
-	
 	ApplyAttributesTemplate();
 
-    var backingName = MungeNameToBacking(name);
+	var backingName = MungeNameToBacking(name);
 %>
         <%= GetModifiers() %> <%= GetPropertyTypeString() %> <%= name %>
         {
             get
             {
-				if (<%= backingName %> == null)
-					<%= backingName %> = <%= GetInitialisationExpression() %>;
+                if (<%= backingName %> == null)
+                    <%= backingName %> = <%= GetInitialisationExpression() %>;
                 return <%= backingName %>;
             }
         }
         private <%= GetBackingTypeString() %> <%= backingName %>;
+<%
+	ApplyRequisitesTemplate();
+%>

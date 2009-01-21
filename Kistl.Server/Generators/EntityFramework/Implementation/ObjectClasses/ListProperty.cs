@@ -18,7 +18,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyRequisitesTemplate()
         {
             base.ApplyRequisitesTemplate();
-            CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx, containingType, type, name, property);
+            CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx, containingType, property);
         }
 
         protected override void ApplyAttributesTemplate()

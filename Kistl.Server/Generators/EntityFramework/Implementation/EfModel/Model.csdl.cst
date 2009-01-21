@@ -35,18 +35,11 @@
 <%	}
 
 %>
+
+
     <!-- AssociationSets -->
 <%
-	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
-	{
-		var info = AssociationInfo.CreateInfo(ctx, prop);
-%>
-    <!-- <%= info.GetType().Name %> -->
-    <AssociationSet Name="<%= info.AssociationName %>" Association="Model.<%= info.AssociationName %>" >
-      <End Role="<%= info.ASide.RoleName %>" EntitySet="<%= info.ASide.StorageEntitySet %>" />
-      <End Role="<%= info.BSide.RoleName %>" EntitySet="<%= info.BSide.StorageEntitySet%>" />
-    </AssociationSet>
-<%	}
+	ApplyAssociationSets();
 %>
   </EntityContainer>
   
@@ -168,10 +161,10 @@
   <Association Name="<%= info.AssociationName %>" >
     <End Role="<%= info.Parent.RoleName %>"
          Type="Model.<%= info.Parent.Type.ClassName %>"
-         Multiplicity="<%= info.Parent.Multiplicity %>" />
+         Multiplicity="<%= info.Parent.ConceptualMultiplicity %>" />
     <End Role="<%= info.Child.RoleName %>"
          Type="Model.<%= info.Child.Type.ClassName %>"
-         Multiplicity="<%= info.Child.Multiplicity %>" />
+         Multiplicity="<%= info.Child.ConceptualMultiplicity %>" />
   </Association>
 <%
 		// construct reverse mapping

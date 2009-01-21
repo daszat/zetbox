@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.App.Base;
+
 using Kistl.API;
+using Kistl.App.Base;
+using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -18,34 +20,32 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyGlobalPreambleTemplate()
         {
             base.ApplyGlobalPreambleTemplate();
-            foreach (ObjectReferenceProperty prop in this.DataType.Properties.OfType<ObjectReferenceProperty>().ToList().Where(p => p.HasStorage()))
+            foreach (var prop in this.DataType.Properties.OfType<Property>().Where(p => p.HasStorage()).ToList().Where(p => p.IsAssociation()))
             {
                 var info = AssociationInfo.CreateInfo(ctx, prop);
-                this.WriteLine(
-                    "[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"{0}\", \"{1}\", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof({2}), \"{3}\", System.Data.Metadata.Edm.RelationshipMultiplicity.{4}, typeof({5}))]",
-                    info.AssociationName,
-                    info.Parent.RoleName,
-                    info.Parent.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
-                    info.Child.RoleName,
-                    prop.GetRelationType() == RelationType.one_one ? "ZeroOrOne" : "Many",
-                    info.Child.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix
-                    );
+                CreateEdmRelationshipAttribute(info);
 
-                // construct reverse mapping
-                if (prop.IsList)
+                var reverse = info.GetReverse();
+                if (reverse != null)
                 {
-                    var refType = new TypeMoniker(prop.ReferenceObjectClass.GetDataTypeString());
-                    this.WriteLine(
-                        "[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"{0}\", \"{1}\", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof({2}), \"B_ObjectClass_ImplementsInterfacesCollectionEntry\", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_ImplementsInterfacesCollectionEntry__Implementation__))]",
-                        Construct.AssociationName(refType, info.CollectionEntry, prop.PropertyName),
-                        Construct.AssociationParentRoleName(prop.ReferenceObjectClass),
-                        refType.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
-                        info.Child.RoleName,
-                        info.Child.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix
-                    );
+                    this.WriteLine("// reversing:");
+                    CreateEdmRelationshipAttribute(reverse);
                 }
-
             }
+        }
+
+        private void CreateEdmRelationshipAttribute(AssociationInfo info)
+        {
+            this.WriteLine("// {0}", info.GetType().Name);
+            this.WriteLine(
+                "[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"{0}\", \"{1}\", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof({2}), \"{3}\", System.Data.Metadata.Edm.RelationshipMultiplicity.{4}, typeof({5}))]",
+                info.AssociationName,
+                info.ASide.RoleName,
+                info.ASide.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
+                info.BSide.RoleName,
+                info.BSide.Multiplicity,
+                info.BSide.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix
+                );
         }
 
         protected override void ApplyClassAttributeTemplate()
@@ -93,9 +93,25 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyNamespaceTailTemplate()
         {
             base.ApplyNamespaceTailTemplate();
-            foreach (ObjectReferenceProperty prop in this.DataType.Properties.OfType<ObjectReferenceProperty>().Where(p => p.IsList).ToList().Where(p => p.HasStorage()))
+            var dt = this.DataType;
+            foreach (var prop in ctx.GetAssociationPropertiesWithStorage()
+                .Where(p => p.ObjectClass == this.DataType))
             {
-                CallTemplate("Implementation.ObjectClasses.CollectionEntry", ctx, prop);
+                string template;
+                if (prop is ObjectReferenceProperty)
+                {
+                    template = "Implementation.ObjectClasses.CollectionEntry";
+                }
+                else if (prop is ValueTypeProperty)
+                {
+                    template = "Implementation.ObjectClasses.ValueCollectionEntry";
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+                // dynamic dispatch will cast prop for us and find correct constructor
+                CallTemplate(template, ctx, prop);
             }
         }
 
