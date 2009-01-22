@@ -122,6 +122,7 @@ Finally the various parts have to be defined in the EDMX:
 
 	<EntityContainer Name="Entities">
 		<EntitySet Name="ObjectClass" EntityType="Model.ObjectClass" />
+		<EntitySet Name="Interface" EntityType="Model.Interface" />
 		<EntitySet Name="ObjectClass_ImplementsInterfacesCollectionEntry" EntityType="Model.ObjectClass_ImplementsInterfacesCollectionEntry" />
 		<AssociationSet Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent" Association="Model.FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent">
 			<End Role="A_ObjectClass" EntitySet="ObjectClass" />
@@ -165,6 +166,18 @@ Finally the various parts have to be defined in the EDMX:
 		</Key>
 		<Property Name="ID" Type="Int32" Nullable="false" />
 	</EntityType>
+
+	<Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_Interface_ImplementsInterfaces">
+		<End Role="A_Interface" Type="Model.Interface" Multiplicity="0..1" />
+		<End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" Type="Model.ObjectClass_ImplementsInterfacesCollectionEntry" Multiplicity="*" />
+	</Association>
+
+	<Association Name="FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent">
+		<End Role="A_ObjectClass" Type="Model.ObjectClass" Multiplicity="0..1" />
+		<End Role="B_ObjectClass_ImplementsInterfacesCollectionEntry" Type="Model.ObjectClass_ImplementsInterfacesCollectionEntry" Multiplicity="*" />
+	</Association>
+
+
 
 ## SSDL
 
@@ -282,6 +295,11 @@ Finally the various parts have to be defined in the EDMX:
 In some cases the reverse relationship ("Interface.ImplementedBy") should be 
 exposed to the consumer too. In this case, a few modifications have to be 
 made to enable this.
+
+## Metadata
+
+To create the reverse `ImplementedBy` property on the `Interface`, another 
+ObjectReferenceProperty with a Relation to the existing ORP has to be created.
 
 ## Kistl.Objects Interface
 
