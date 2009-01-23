@@ -6,6 +6,8 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Movables;
+using System.Diagnostics;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -17,40 +19,9 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
         }
 
-        protected override void ApplyGlobalPreambleTemplate()
-        {
-            base.ApplyGlobalPreambleTemplate();
-            foreach (var prop in this.DataType.Properties.OfType<Property>().Where(p => p.HasStorage()).ToList().Where(p => p.IsAssociation()))
-            {
-                var info = AssociationInfo.CreateInfo(ctx, prop);
-                CreateEdmRelationshipAttribute(info);
-
-                var reverse = info.GetReverse();
-                if (reverse != null)
-                {
-                    this.WriteLine("// reversing:");
-                    CreateEdmRelationshipAttribute(reverse);
-                }
-            }
-        }
-
-        private void CreateEdmRelationshipAttribute(AssociationInfo info)
-        {
-            this.WriteLine("// {0}", info.GetType().Name);
-            this.WriteLine(
-                "[assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"{0}\", \"{1}\", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof({2}), \"{3}\", System.Data.Metadata.Edm.RelationshipMultiplicity.{4}, typeof({5}))]",
-                info.AssociationName,
-                info.ASide.RoleName,
-                info.ASide.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
-                info.BSide.RoleName,
-                info.BSide.Multiplicity,
-                info.BSide.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix
-                );
-        }
-
         protected override void ApplyClassAttributeTemplate()
         {
-            WriteLine("    [EdmEntityTypeAttribute(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.ClassName);
+            WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.ClassName);
         }
 
         protected override void ApplyIDPropertyTemplate()
@@ -90,6 +61,57 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             return new string[] { this.DataType.ClassName }.Concat(base.GetInterfaces()).ToArray();
         }
 
+        protected override void ApplyPropertyTemplate(Property p)
+        {
+            if (p is ObjectReferenceProperty)
+            {
+                var orp = (ObjectReferenceProperty)p;
+                var rel = FullRelation.Lookup(ctx, orp);
+
+                Debug.Assert(rel.Right.Navigator == orp || rel.Left.Navigator == orp);
+                var isRightEnd = (rel.Right.Navigator == orp);
+                var relEnd = isRightEnd ? rel.Right : rel.Left;
+                var otherEnd = isRightEnd ? rel.Left : rel.Right;
+
+                switch (rel.GetPreferredStorage())
+                {
+                    case StorageHint.MergeLeft:
+                    case StorageHint.MergeRight:
+                    case StorageHint.NoHint:
+                    case StorageHint.Replicate:
+                        // simple and direct reference
+
+                        if (relEnd.Multiplicity.UpperBound() > 1)
+                        {
+                            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx, relEnd.Referenced, p.GetPropertyType(), p.PropertyName, p);
+                        }
+                        else
+                        {
+                            this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+                                orp.PropertyName, rel.GetAssociationName(), relEnd.RoleName, otherEnd.Referenced.GetDataTypeString(), otherEnd.Referenced.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix);
+                        }
+                        break;
+                    case StorageHint.Separate:
+                        // references a CollectionEntry
+                        //this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+                        //    orp.PropertyName, 
+                        //    isRightEnd ? rel.GetRightToCollectionEntryAssociationName() : rel.GetLeftToCollectionEntryAssociationName(),
+                        //    relEnd.RoleName, rel.GetCollectionEntryClassName(), rel.GetCollectionEntryClassName());
+
+                        // TODO: currently delegates to ListProperty but should be replaced by something similar as above, 
+                        // but with a different ED implementation
+                        base.ApplyPropertyTemplate(p);
+                        break;
+                    default:
+                        throw new InvalidOperationException("unknown StorageHint");
+                }
+            }
+            else
+            {
+                base.ApplyPropertyTemplate(p);
+            }
+        }
+
         protected override void ApplyNamespaceTailTemplate()
         {
             base.ApplyNamespaceTailTemplate();
@@ -98,19 +120,15 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 .Where(p => p.ObjectClass == this.DataType))
             {
                 string template;
-                if (prop is ObjectReferenceProperty)
-                {
-                    template = "Implementation.ObjectClasses.CollectionEntry";
-                }
-                else if (prop is ValueTypeProperty)
+                if (prop is ValueTypeProperty)
                 {
                     template = "Implementation.ObjectClasses.ValueCollectionEntry";
                 }
                 else
                 {
-                    throw new InvalidOperationException();
+                    return;
                 }
-                // dynamic dispatch will cast prop for us and find correct constructor
+
                 CallTemplate(template, ctx, prop);
             }
         }

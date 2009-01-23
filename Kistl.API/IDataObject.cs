@@ -151,26 +151,33 @@ namespace Kistl.API
     {
     }
 
-
     /// <summary>
     /// Typed Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
-    public interface ICollectionEntry<VALUE, PARENT> : ICollectionEntry
+    public interface INewCollectionEntry<LEFT, RIGHT> : ICollectionEntry
     {
         /// <summary>
-        /// Value of this Collection Entry
+        /// Left part of this collection entry
         /// </summary>
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        VALUE Value { get; set; }
+        LEFT Left { get; set; }
         /// <summary>
-        /// Collection Entries Parent
+        /// Right part of this collection entry
         /// </summary>
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        PARENT Parent { get; set; }
+        RIGHT Right { get; set; }
         /// <summary>
-        /// fk_ to Parent
+        /// foreign key to the parent
         /// </summary>
+        int fk_Right { get; set; }
+    }
+
+    // TODO: rename INewCollectionEntry to this
+    public interface ICollectionEntry<LEFT, RIGHT> : ICollectionEntry
+    {
+        LEFT Value { get; set; }
+        RIGHT Parent { get; set; }
         int fk_Parent { get; set; }
     }
 

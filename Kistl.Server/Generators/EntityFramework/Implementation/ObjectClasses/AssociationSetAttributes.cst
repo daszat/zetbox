@@ -1,0 +1,77 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.AssociationSetAttributes"
+	CodeFile="Implementation.ObjectClasses.AssociationSetAttributes.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.AssociationSetAttributes" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+using System.Data.Metadata.Edm;
+using System.Data.Objects.DataClasses;
+using System.Xml;
+using System.Xml.Serialization;
+
+using Kistl.API;
+using Kistl.DALProvider.EF;
+
+<%
+	foreach (var rel in FullRelation.GetAll(ctx).OrderBy(rel => rel.GetAssociationName()))
+	{
+%>
+
+
+// FullRelation: <%= rel.GetAssociationName() %> 
+// Right: <%= rel.Right.Referenced.ClassName %>.<%= rel.Right.Navigator != null ? rel.Right.Navigator.PropertyName : "" %>  (<%= rel.Right.Multiplicity %>) (site: <%= rel.Right.DebugCreationSite %>)
+// Left: <%= rel.Left.Referenced.ClassName %>.<%= rel.Left.Navigator != null ? rel.Left.Navigator.PropertyName : "" %> (<%= rel.Left.Multiplicity %>) (site: <%= rel.Left.DebugCreationSite %>)
+// Preferred Storage: <%= rel.GetPreferredStorage() %>
+<%
+		switch (rel.GetPreferredStorage())
+		{
+			case StorageHint.MergeLeft:
+			case StorageHint.MergeRight:
+%>
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "<%= rel.GetAssociationName() %>",
+    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.<%= rel.Right.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Right.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.<%= rel.Left.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Left.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>)
+    )]
+
+<%
+				break;
+			case StorageHint.Separate:
+
+				// Assert that we're in N:M
+				Debug.Assert(rel.Right.Multiplicity == Multiplicity.ZeroOrMore);
+				Debug.Assert(rel.Left.Multiplicity == Multiplicity.ZeroOrMore);
+
+%>
+
+// The association from Right to the CollectionEntry
+[assembly: EdmRelationship("Model", "<%= rel.GetRightToCollectionEntryAssociationName() %>",
+    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Right.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "Right", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+    )]
+
+// The association from Left to the CollectionEntry
+[assembly: EdmRelationship("Model", "<%= rel.GetLeftToCollectionEntryAssociationName() %>",
+    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Left.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "Left", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+    )]
+
+<%
+
+				break;
+		}
+	}
+
+%>

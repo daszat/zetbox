@@ -11,22 +11,22 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="containingClass" Type="ObjectClass" %>
-<%@ Parameter Name="property" Type="Property" %>
-<%
-	var info = AssociationInfo.CreateInfo(ctx, property);
-	string typeName = info.Child.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix;
-%>
-        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= info.AssociationName %>", "<%= info.Child.RoleName %>")]
-        public EntityCollection<<%= typeName %>> <%= property.PropertyName %><%= Kistl.API.Helper.ImplementationSuffix %>
+<%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="associationName" Type="String" %>
+<%@ Parameter Name="roleName" Type="String" %>
+<%@ Parameter Name="referencedCollectionEntry" Type="String" %>
+
+        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= associationName %>", "<%= roleName %>")]
+        public EntityCollection<<%= referencedCollectionEntry %>> <%= name %>
         {
             get
             {
-                EntityCollection<<%= typeName %>> c
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<<%= typeName %>>(
-                        "Model.<%= info.AssociationName %>",
-                        "<%= info.Child.RoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !c.IsLoaded)
+                EntityCollection<<%= referencedCollectionEntry %>> c
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<<%= referencedCollectionEntry %>>(
+                        "Model.<%= associationName %>",
+                        "<%= roleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
                 {
                     c.Load();
                 }

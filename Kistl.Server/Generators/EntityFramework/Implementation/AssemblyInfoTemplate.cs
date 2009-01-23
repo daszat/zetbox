@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.Server.Movables;
+using Kistl.Server.Generators.Extensions;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation
 {
@@ -20,8 +24,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         public override void ApplyAdditionalAssemblyInfo()
         {
-            WriteLine("[assembly: System.Data.Objects.DataClasses.EdmSchemaAttribute()]");
+            WriteLine("[assembly: System.Data.Objects.DataClasses.EdmSchema]");
         }
 
     }
 }
+
+

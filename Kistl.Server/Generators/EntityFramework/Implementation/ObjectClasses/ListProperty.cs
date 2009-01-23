@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -18,7 +19,20 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyRequisitesTemplate()
         {
             base.ApplyRequisitesTemplate();
-            CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx, containingType, property);
+
+            if (this.property is ObjectReferenceProperty)
+            {
+                // here we're doing direct references, without any CollectionEntries
+                // this is 1:N stuff
+
+                var orp = (ObjectReferenceProperty)this.property;
+                var rel = FullRelation.Lookup(ctx, orp);
+                var relEnd = rel.GetEnd(orp);
+
+                CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx,
+                    name + Kistl.API.Helper.ImplementationSuffix,
+                    rel.GetAssociationName(), relEnd.RoleName, relEnd.Referenced.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix);
+            }
         }
 
         protected override void ApplyAttributesTemplate()

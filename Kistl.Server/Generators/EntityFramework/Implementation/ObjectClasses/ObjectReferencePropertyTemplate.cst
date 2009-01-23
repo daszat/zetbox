@@ -1,0 +1,95 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.ObjectReferencePropertyTemplate"
+	CodeFile="Implementation.ObjectClasses.ObjectReferencePropertyTemplate.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="associationName" Type="String" %>
+<%@ Parameter Name="roleName" Type="String" %>
+<%@ Parameter Name="referencedInterface" Type="String" %>
+<%@ Parameter Name="referencedImplementation" Type="String" %>
+
+<%
+
+	string efName = name + "Impl";
+	string fkName = "fk_" + name;
+	string fkBackingName = "_fk_" + name;
+	
+%>
+
+        // implement the default interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public <%= referencedInterface %> <%= name %>
+        {
+            get
+            {
+                return <%= efName %>;
+            }
+            set
+            {
+                // TODO: check ReadOnly status, NotifyPropertyChanged()
+                // only accept EF objects
+                <%= efName %> = (<%= referencedImplementation %>)value;
+            }
+        }
+        
+        public int <%= fkName %>
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && <%= name %> != null)
+                {
+                    <%= fkBackingName %> = <%= name %>.ID;
+                }
+                return <%= fkBackingName %>;
+            }
+            set
+            {
+                <%= fkBackingName %> = value;
+            }
+        }
+        private int <%= fkBackingName %>;
+        
+        [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= roleName %>")]
+        public <%= referencedImplementation %> <%= efName %>
+        {
+            get
+            {
+                EntityReference<<%= referencedImplementation %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(
+                        "Model.<%= associationName %>",
+                        "<%= roleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<<%= referencedImplementation %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(
+                        "Model.<%= associationName %>",
+                        "<%= roleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (<%= referencedImplementation %>)value;
+            }
+        }
+        
+        
+        

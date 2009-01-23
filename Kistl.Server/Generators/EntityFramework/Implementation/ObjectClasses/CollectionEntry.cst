@@ -9,20 +9,25 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
 
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="Property" Type="ObjectReferenceProperty" %>
+<%@ Parameter Name="rel" Type="FullRelation" %>
 <%
-	var info = AssociationInfo.CreateInfo(ctx, this.Property);
-	string valueType = this.Property.GetPropertyTypeString();
+	
+	string leftType = rel.Left.Referenced.ClassName;
+	string rightType = rel.Right.Referenced.ClassName;
+
 %>
-    [System.Diagnostics.DebuggerDisplay("<%= info.CollectionEntry.ClassName %>")]
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="<%= info.CollectionEntry.ClassName %>")]
-    public class <%= info.CollectionEntry.ClassName %><%= Kistl.API.Helper.ImplementationSuffix %>
-        : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<<%= valueType %>, <%= info.Parent.Type.NameDataObject %>>
+
+
+    [System.Diagnostics.DebuggerDisplay("<%= rel.GetCollectionEntryClassName() %>")]
+    [EdmEntityType(NamespaceName="Model", Name="<%= rel.GetCollectionEntryClassName() %>")]
+    public class <%= rel.GetCollectionEntryClassName() %><%= Kistl.API.Helper.ImplementationSuffix %>
+        : BaseServerCollectionEntry_EntityFramework, INewCollectionEntry<<%= leftType %>, <%= rightType %>>
     {
     
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
             get
@@ -35,137 +40,29 @@
             }
         }
         private int _ID;
-
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public <%= valueType %> Value
-        {
-            get
-            {
-                return ValueImpl;
-            }
-            set
-            {
-                ValueImpl = (<%= valueType %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
-            }
-        }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public <%= info.Parent.Type.NameDataObject %> Parent
-        {
-            get
-            {
-                return ParentImpl;
-            }
-            set
-            {
-                ParentImpl = (<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
-            }
-        }
-        
-        public int fk_Value
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Value != null)
-                {
-                    _fk_Value = Value.ID;
-                }
-                return _fk_Value;
-            }
-            set
-            {
-                _fk_Value = value;
-            }
-        }
-        private int _fk_Value;
-                
-        public int fk_Parent
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
-                {
-                    _fk_Parent = Parent.ID;
-                }
-                return _fk_Parent;
-            }
-            set
-            {
-                _fk_Parent = value;
-            }
-        }
-        private int _fk_Parent;
-
 <%
-	// var muh = this.Property;
-	// var oppositeInfo = AssociationInfo.CreateInfo(ctx, this.Property.GetOpposite());
-	string reverseAssociationName = Construct.AssociationName(this.Property.ReferenceObjectClass, this.Property);
-	string reverseRoleName = Construct.AssociationParentRoleName(this.Property.ReferenceObjectClass);
+		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+			"Right", rel.GetRightToCollectionEntryAssociationName(), "Right",
+			rel.Right.Referenced.ClassName, rel.Right.Referenced.ClassName + Kistl.API.Helper.ImplementationSuffix);
+			
+		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+			"Left", rel.GetLeftToCollectionEntryAssociationName(), "Left",
+			rel.Left.Referenced.ClassName, rel.Left.Referenced.ClassName + Kistl.API.Helper.ImplementationSuffix);
 %>
-        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= reverseAssociationName %>", "<%= reverseRoleName %>")]
-        public <%= valueType %><%= Kistl.API.Helper.ImplementationSuffix %> ValueImpl
-        {
-            get
-            {
-                EntityReference<<%= valueType %><%= Kistl.API.Helper.ImplementationSuffix %>> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= valueType %><%= Kistl.API.Helper.ImplementationSuffix %>>(
-                        "Model.<%= reverseAssociationName %>",
-                        "<%= reverseRoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
-                    r.Load(); 
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<<%= valueType %><%= Kistl.API.Helper.ImplementationSuffix %>> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= valueType %><%= Kistl.API.Helper.ImplementationSuffix %>>(
-                        "Model.<%= reverseAssociationName %>",
-                        "<%= reverseRoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
-                    r.Load(); 
-                r.Value = (<%= valueType %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
-            }
-        }
-        
-        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= info.AssociationName %>", "<%= info.Parent.RoleName %>")]
-        public <%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %> ParentImpl
-        {
-            get
-            {
-                EntityReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>>(
-                        "Model.<%= info.AssociationName %>",
-                        "<%= info.Parent.RoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
-                    r.Load(); 
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>>(
-                    "Model.<%= info.AssociationName %>",
-                    "<%= info.Parent.RoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && !r.IsLoaded)
-                    r.Load(); 
-                r.Value = (<%= info.Parent.Type.NameDataObject %><%= Kistl.API.Helper.ImplementationSuffix %>)value;
-            }
-        }
-        
+
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.fk_Value, sw);
-            BinarySerializer.ToBinary(this.fk_Parent, sw);
+            BinarySerializer.ToBinary(this._fk_Left, sw);
+            BinarySerializer.ToBinary(this._fk_Right, sw);
         }
         
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._fk_Value, sr);
-            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+            BinarySerializer.FromBinary(out this._fk_Left, sr);
+            BinarySerializer.FromBinary(out this._fk_Right, sr);
         }
         
     }

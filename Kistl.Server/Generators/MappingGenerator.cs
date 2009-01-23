@@ -41,6 +41,22 @@ namespace Kistl.Server.Generators
                  TaskEnum.Server.ToNameSpace(),
                  ctx);
             gen.ExecuteTemplate();
+
+            gen = Generator.GetTemplateGenerator(
+                 "Kistl.Server.Generators.EntityFramework",
+                 "Implementation.ObjectClasses.CollectionEntries",
+                 "CollectionEntries.cs",
+                 TaskEnum.Server.ToNameSpace(),
+                 ctx);
+            gen.ExecuteTemplate();
+
+            gen = Generator.GetTemplateGenerator(
+                "Kistl.Server.Generators.EntityFramework",
+                "Implementation.ObjectClasses.AssociationSetAttributes",
+                "AssociationSetAttributes.cs",
+                TaskEnum.Server.ToNameSpace(),
+                ctx);
+            gen.ExecuteTemplate();
         }
 
         #endregion
