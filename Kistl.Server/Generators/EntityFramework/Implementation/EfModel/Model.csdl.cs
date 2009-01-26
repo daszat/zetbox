@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 {
@@ -15,23 +16,16 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
             CallTemplate("Implementation.EfModel.ModelCsdlEntityTypeFields", ctx, properties);
         }
 
-        protected virtual void ApplyAssociationSetTemplate(AssociationInfo info)
+        protected virtual void ApplyAssociationSetTemplate(NewRelation rel)
         {
-            CallTemplate("Implementation.EfModel.ModelCsdlAssociationSet", ctx, info);
+            CallTemplate("Implementation.EfModel.ModelCsdlAssociationSet", ctx, rel);
         }
 
         protected virtual void ApplyAssociationSets()
         {
-            foreach (var prop in this.ctx.GetAssociationPropertiesWithStorage())
+            foreach (var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
             {
-                var info = AssociationInfo.CreateInfo(ctx, prop);
-                ApplyAssociationSetTemplate(info);
-
-                var reverse = info.GetReverse();
-                if (reverse != null)
-                {
-                    ApplyAssociationSetTemplate(reverse);
-                }
+                ApplyAssociationSetTemplate(rel);
             }
         }
     }

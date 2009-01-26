@@ -11,6 +11,7 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
@@ -27,13 +28,13 @@
 %>
     <!-- EntitySets for all CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
+	foreach(var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
 	{
-		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
+		string entityName = rel.GetCollectionEntryClassName();
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
-<%	}
-
+<%
+	}
 %>
 
 
@@ -55,8 +56,8 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
-<%	}
-
+<%
+	}
 %>
 
   <!-- EntityTypes for all other classes -->
@@ -67,34 +68,35 @@
   <EntityType Name="<%= cls.ClassName %>" BaseType="Model.<%= cls.BaseObjectClass.ClassName %>" >
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
-<%	}
-
+<%
+	}
 %>
 
   <!-- EntityTypes for all CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
+#if false
+	foreach(var rel in NewRelation.GetAll(ctx).Where(r => r.GetPreferredStorage() == StorageHint.Separate).OrderBy(r => r.GetAssociationName()))
 	{
-		TypeMoniker collectionType = Construct.PropertyCollectionEntryType(prop);
-		// TypeMoniker parentType;
-		// TypeMoniker childType;
+
 %>
-  <!-- <%= prop.GetType().Name %>: <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
-  <EntityType Name="<%= collectionType.ClassName %>" >
+  <!--
+    NewRelation: <%= rel.GetAssociationName() %> 
+    Right: <%= rel.Right.Referenced.ClassName %>.<%= rel.Right.Navigator != null ? rel.Right.Navigator.PropertyName : "" %>  (<%= rel.Right.Multiplicity %>) (site: <%= rel.Right.DebugCreationSite %>)
+    Left: <%= rel.Left.Referenced.ClassName %>.<%= rel.Left.Navigator != null ? rel.Left.Navigator.PropertyName : "" %> (<%= rel.Left.Multiplicity %>) (site: <%= rel.Left.DebugCreationSite %>)
+  -->
+  <EntityType Name="<%= rel.GetCollectionEntryClassName() %>" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
 <%
 		{
-			// Parent
-			TypeMoniker parentType = prop.ObjectClass.GetTypeMoniker();
-			TypeMoniker childType = collectionType;
+			// Right
 %>
-    <NavigationProperty Name="ParentImpl"
-                        Relationship="Model.<%= Construct.AssociationName(parentType, childType, "fk_Parent") %>"
-                        FromRole="<%= Construct.AssociationChildRoleName(childType) %>"
-                        ToRole="<%= Construct.AssociationParentRoleName(parentType) %>" />
+    <NavigationProperty Name="RightImpl"
+                        Relationship="Model.<%= rel.GetRightToCollectionEntryAssociationName() %>"
+                        FromRole="Right"
+                        ToRole="<%= rel.Right.RoleName %>" />
 <%
 			if (prop.IsIndexed)
 			{
@@ -104,7 +106,7 @@
 			}
 		}
 		
-		// Value
+		// Left
 		if (prop is ObjectReferenceProperty)
 		{
 			// ObjectReferenceProperty
@@ -136,7 +138,7 @@
 %>
   </EntityType>
 <%	}
-
+#endif
 %>
 
   <!-- ComplexTypes for all structs -->

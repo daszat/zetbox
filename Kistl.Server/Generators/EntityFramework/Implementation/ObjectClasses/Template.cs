@@ -66,7 +66,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             if (p is ObjectReferenceProperty)
             {
                 var orp = (ObjectReferenceProperty)p;
-                var rel = FullRelation.Lookup(ctx, orp);
+                var rel = NewRelation.Lookup(ctx, orp);
 
                 Debug.Assert(rel.Right.Navigator == orp || rel.Left.Navigator == orp);
                 var isRightEnd = (rel.Right.Navigator == orp);
@@ -83,12 +83,12 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 
                         if (relEnd.Multiplicity.UpperBound() > 1)
                         {
-                            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx, relEnd.Referenced, p.GetPropertyType(), p.PropertyName, p);
+                            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx, relEnd.Referenced.ToObjectClass(ctx), p.GetPropertyType(), p.PropertyName, p);
                         }
                         else
                         {
                             this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-                                orp.PropertyName, rel.GetAssociationName(), relEnd.RoleName, otherEnd.Referenced.GetDataTypeString(), otherEnd.Referenced.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix);
+                                orp.PropertyName, rel.GetAssociationName(), relEnd.RoleName, otherEnd.Referenced.NameDataObject, otherEnd.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
                         }
                         break;
                     case StorageHint.Separate:

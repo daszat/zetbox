@@ -23,12 +23,12 @@ using Kistl.API;
 using Kistl.DALProvider.EF;
 
 <%
-	foreach (var rel in FullRelation.GetAll(ctx).OrderBy(rel => rel.GetAssociationName()))
+	foreach (var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
 	{
 %>
 
 
-// FullRelation: <%= rel.GetAssociationName() %> 
+// NewRelation: <%= rel.GetAssociationName() %> 
 // Right: <%= rel.Right.Referenced.ClassName %>.<%= rel.Right.Navigator != null ? rel.Right.Navigator.PropertyName : "" %>  (<%= rel.Right.Multiplicity %>) (site: <%= rel.Right.DebugCreationSite %>)
 // Left: <%= rel.Left.Referenced.ClassName %>.<%= rel.Left.Navigator != null ? rel.Left.Navigator.PropertyName : "" %> (<%= rel.Left.Multiplicity %>) (site: <%= rel.Left.DebugCreationSite %>)
 // Preferred Storage: <%= rel.GetPreferredStorage() %>
@@ -42,33 +42,31 @@ using Kistl.DALProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "<%= rel.GetAssociationName() %>",
-    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.<%= rel.Right.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Right.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
-    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.<%= rel.Left.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Left.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>)
+    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.<%= rel.Right.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.<%= rel.Left.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>)
     )]
 
 <%
 				break;
 			case StorageHint.Separate:
-
-				// Assert that we're in N:M
-				Debug.Assert(rel.Right.Multiplicity == Multiplicity.ZeroOrMore);
-				Debug.Assert(rel.Left.Multiplicity == Multiplicity.ZeroOrMore);
-
 %>
 
 // The association from Right to the CollectionEntry
 [assembly: EdmRelationship("Model", "<%= rel.GetRightToCollectionEntryAssociationName() %>",
-    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Right.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
     "Right", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
     )]
-
+<%
+				if (rel.IsTwoProngedAssociation(ctx))
+				{
+%>
 // The association from Left to the CollectionEntry
 [assembly: EdmRelationship("Model", "<%= rel.GetLeftToCollectionEntryAssociationName() %>",
-    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Left.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
     "Left", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
     )]
-
 <%
+				}
 
 				break;
 		}

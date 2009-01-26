@@ -5,49 +5,25 @@ using System.Text;
 
 using Kistl.App.Base;
 using Kistl.API;
+using Kistl.Server.Generators;
+using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Movables
 {
 
-    public class ObjectRelationEnd
+    /// <summary>
+    /// Describes a relation between two entities. The Right entity always is a ObjectClass.
+    /// </summary>
+    public class NewRelation 
     {
-        public ObjectRelationEnd()
+
+        public NewRelation(RelationEnd left, RelationEnd right)
         {
-            DebugCreationSite = "unknown";
-        }
+            if (left.Container != null)
+                throw new ArgumentException("left", "cannot re-use RelationEnd");
+            if (right.Container != null)
+                throw new ArgumentException("right", "cannot re-use RelationEnd");
 
-        /// <summary>
-        /// The ORP to navigate FROM this end of the relation. MAY be null.
-        /// </summary>
-        public ObjectReferenceProperty Navigator { get; set; }
-
-        /// <summary>
-        /// The ObjectClass referenced by this end of the relation. MUST NOT be null.
-        /// </summary>
-        public ObjectClass Referenced { get; set; }
-
-        /// <summary>
-        /// The Multiplicity of this end of the relation
-        /// </summary>
-        public Multiplicity Multiplicity { get; set; }
-
-        /// <summary>
-        /// The role of the referenced ObjectClass in this relation
-        /// </summary>
-        public string RoleName { get; set; }
-
-        public FullRelation Container { get; internal set; }
-
-        /// <summary>
-        /// a debug string attached to describe the site where this was FullRelation was created
-        /// </summary>
-        public string DebugCreationSite { get; set; }
-    }
-
-    public class FullRelation
-    {
-        public FullRelation(ObjectRelationEnd left, ObjectRelationEnd right)
-        {
             right.Container = left.Container = this;
             this.Left = left;
             this.Right = right;
@@ -58,10 +34,10 @@ namespace Kistl.Server.Movables
         private static int MaxId = 1;
         public int ID { get; private set; }
 
-        public ObjectRelationEnd Right { get; private set; }
-        public ObjectRelationEnd Left { get; private set; }
+        public RelationEnd Right { get; private set; }
+        public RelationEnd Left { get; private set; }
 
-        public ObjectRelationEnd GetEnd(ObjectReferenceProperty p)
+        public RelationEnd GetEnd(ObjectReferenceProperty p)
         {
             if (Right.Navigator == p)
             {
@@ -122,20 +98,43 @@ namespace Kistl.Server.Movables
 
 
 
-        public static IQueryable<FullRelation> GetAll(IKistlContext ctx)
+        public static IQueryable<NewRelation> GetAll(IKistlContext ctx)
         {
             if (_AllRels == null)
-                _AllRels = CalculateAll(ctx);
+                _AllRels = CalculateAllObjectObjectRelations(ctx).Concat(CalculateAllObjectValueRelations(ctx)).ToList();
 
             // clone list to avoid external changes
             return _AllRels.ToList().AsQueryable();
         }
 
-        private static List<FullRelation> _AllRels = null;
-        private static List<FullRelation> CalculateAll(IKistlContext ctx)
+        private static List<NewRelation> _AllRels = null;
+
+        private static List<NewRelation> CalculateAllObjectValueRelations(IKistlContext ctx)
+        {
+            var result = new List<NewRelation>();
+
+            foreach (var prop in ctx.GetQuery<ValueTypeProperty>().Where(p => p.IsList))
+            {
+                result.Add(new NewRelation(
+                    // value end
+                    new RelationEnd() {
+                        Navigator = null,
+                        Referenced = new TypeMoniker(prop.GetPropertyTypeString()),
+                        Multiplicity = Multiplicity.ZeroOrMore,
+                        RoleName = "B_" + prop.PropertyName,
+                        DebugCreationSite = "Left, value list, prop ID=" + prop.ID
+                    },
+                    prop.ToRelationEnd("A_Parent" , "Right, value list, prop ID=" + prop.ID))
+                    );
+            }
+
+            return result;
+        }
+
+        private static List<NewRelation> CalculateAllObjectObjectRelations(IKistlContext ctx)
         {
             HashSet<Relation> processedRels = new HashSet<Relation>();
-            var result = new List<FullRelation>();
+            var result = new List<NewRelation>();
 
             // ignore non-ObjectClass Properties for now
             foreach (var prop in ctx.GetQuery<ObjectReferenceProperty>().Where(p => p.ObjectClass is ObjectClass))
@@ -144,14 +143,14 @@ namespace Kistl.Server.Movables
                 if (relation == null)
                 {
                     // No "other" property defined 
-                    result.Add(new FullRelation(
+                    result.Add(new NewRelation(
                         // "open" end
-                        new ObjectRelationEnd()
+                        new RelationEnd()
                         {
                             Navigator = null,
-                            Referenced = (ObjectClass)prop.ReferenceObjectClass,
+                            Referenced = ((ObjectClass)prop.ReferenceObjectClass).GetTypeMoniker(),
                             Multiplicity = Multiplicity.ZeroOrMore,
-                            RoleName = "B_" + ((ObjectClass)prop.ObjectClass).ClassName,
+                            RoleName = "B_" + prop.PropertyName,
                             DebugCreationSite = "Left, no Relation, prop ID=" + prop.ID
                         },
                         // IsList or not, but contains the Navigator
@@ -163,7 +162,7 @@ namespace Kistl.Server.Movables
                     if (!processedRels.Contains(relation))
                     {
                         processedRels.Add(relation);
-                        result.Add(relation.ToFullRelation());
+                        result.Add(relation.ToNewRelation());
                     }
                     else
                     {
@@ -176,13 +175,13 @@ namespace Kistl.Server.Movables
             return result;
         }
 
-        private static IDictionary<ObjectReferenceProperty, FullRelation> _PropertyToRelation;
+        private static IDictionary<Property, NewRelation> _PropertyToRelation;
 
-        public static FullRelation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
+        public static NewRelation Lookup(IKistlContext ctx, Property prop)
         {
             if (_PropertyToRelation == null)
             {
-                var result = new Dictionary<ObjectReferenceProperty, FullRelation>();
+                var result = new Dictionary<Property, NewRelation>();
                 foreach (var rel in GetAll(ctx))
                 {
                     result[rel.Right.Navigator] = rel;

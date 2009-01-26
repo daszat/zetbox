@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
@@ -13,10 +14,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public partial class CollectionEntry : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
-		protected FullRelation rel;
+		protected NewRelation rel;
 
 
-        public CollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, FullRelation rel)
+        public CollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, NewRelation rel)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -26,14 +27,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 13 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+#line 14 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 this.WriteObjects("\r\n");
-#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+#line 19 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 string leftType = rel.Left.Referenced.ClassName;
 	string rightType = rel.Right.Referenced.ClassName;
+	List <string> fields = new List<string>();
 
-
-#line 22 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+#line 23 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  rel.GetCollectionEntryClassName() , "\")]\r\n");
@@ -42,44 +43,56 @@ this.WriteObjects("    public class ",  rel.GetCollectionEntryClassName() , "", 
 this.WriteObjects("        : BaseServerCollectionEntry_EntityFramework, INewCollectionEntry<",  leftType , ", ",  rightType , ">\r\n");
 this.WriteObjects("    {\r\n");
 this.WriteObjects("    \r\n");
-this.WriteObjects("        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]\r\n");
-this.WriteObjects("        public override int ID\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                return _ID;\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                _ID = value;\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("        private int _ID;\r\n");
-this.WriteObjects("        \r\n");
-#line 45 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+#line 32 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+CallTemplate("Implementation.ObjectClasses.IdProperty", ctx);
+
+#line 34 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("		/// <summary>\r\n");
+this.WriteObjects("		/// Reference to right part of this relation\r\n");
+this.WriteObjects("		/// </summary>\r\n");
+#line 39 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
 			"Right", rel.GetRightToCollectionEntryAssociationName(), "Right",
-			rel.Right.Referenced.ClassName, rel.Right.Referenced.ClassName + Kistl.API.Helper.ImplementationSuffix);
-			
-		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-			"Left", rel.GetLeftToCollectionEntryAssociationName(), "Left",
-			rel.Left.Referenced.ClassName, rel.Left.Referenced.ClassName + Kistl.API.Helper.ImplementationSuffix);
+			rel.Right.Referenced.NameDataObject, rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+		
+		fields.Add("_fk_Right");
+		
 
-#line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+#line 46 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        public override void ToStream(System.IO.BinaryWriter sw)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            base.ToStream(sw);\r\n");
-this.WriteObjects("            BinarySerializer.ToBinary(this._fk_Left, sw);\r\n");
-this.WriteObjects("            BinarySerializer.ToBinary(this._fk_Right, sw);\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("        \r\n");
-this.WriteObjects("        public override void FromStream(System.IO.BinaryReader sr)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            base.FromStream(sr);\r\n");
-this.WriteObjects("            BinarySerializer.FromBinary(out this._fk_Left, sr);\r\n");
-this.WriteObjects("            BinarySerializer.FromBinary(out this._fk_Right, sr);\r\n");
-this.WriteObjects("        }\r\n");
+this.WriteObjects("		/// <summary>\r\n");
+this.WriteObjects("		/// Reference to left part of this relation\r\n");
+this.WriteObjects("		/// </summary>\r\n");
+#line 51 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+if (rel.IsTwoProngedAssociation(ctx))
+		{
+			CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+				"Left", rel.GetLeftToCollectionEntryAssociationName(), "Left",
+				rel.Left.Referenced.NameDataObject, rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+			fields.Add("_fk_Left");
+		}
+		else
+		{
+			CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+				rel.Left.Referenced.ToSystemType(), "Left");
+			fields.Add("_Left");
+		}
+
+#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("#region Serializer\r\n");
+this.WriteObjects("\r\n");
+#line 69 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.ToStream, fields);
+		
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.FromStream, fields);
+
+#line 75 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("#endregion\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");

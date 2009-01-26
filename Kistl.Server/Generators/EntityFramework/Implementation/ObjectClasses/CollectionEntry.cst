@@ -4,6 +4,7 @@
 	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntry" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
@@ -12,12 +13,12 @@
 <%@ Import Namespace="Kistl.Server.Movables" %>
 
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="rel" Type="FullRelation" %>
+<%@ Parameter Name="rel" Type="NewRelation" %>
 <%
 	
 	string leftType = rel.Left.Referenced.ClassName;
 	string rightType = rel.Right.Referenced.ClassName;
-
+	List <string> fields = new List<string>();
 %>
 
 
@@ -27,43 +28,52 @@
         : BaseServerCollectionEntry_EntityFramework, INewCollectionEntry<<%= leftType %>, <%= rightType %>>
     {
     
-        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-        public override int ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                _ID = value;
-            }
-        }
-        private int _ID;
-        
+<%
+		CallTemplate("Implementation.ObjectClasses.IdProperty", ctx);
+%>
+
+		/// <summary>
+		/// Reference to right part of this relation
+		/// </summary>
 <%
 		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
 			"Right", rel.GetRightToCollectionEntryAssociationName(), "Right",
-			rel.Right.Referenced.ClassName, rel.Right.Referenced.ClassName + Kistl.API.Helper.ImplementationSuffix);
-			
-		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-			"Left", rel.GetLeftToCollectionEntryAssociationName(), "Left",
-			rel.Left.Referenced.ClassName, rel.Left.Referenced.ClassName + Kistl.API.Helper.ImplementationSuffix);
+			rel.Right.Referenced.NameDataObject, rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+		
+		fields.Add("_fk_Right");
+		
 %>
 
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            base.ToStream(sw);
-            BinarySerializer.ToBinary(this._fk_Left, sw);
-            BinarySerializer.ToBinary(this._fk_Right, sw);
-        }
-        
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._fk_Left, sr);
-            BinarySerializer.FromBinary(out this._fk_Right, sr);
-        }
+		/// <summary>
+		/// Reference to left part of this relation
+		/// </summary>
+<%
+		if (rel.IsTwoProngedAssociation(ctx))
+		{
+			CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+				"Left", rel.GetLeftToCollectionEntryAssociationName(), "Left",
+				rel.Left.Referenced.NameDataObject, rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+			fields.Add("_fk_Left");
+		}
+		else
+		{
+			CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+				rel.Left.Referenced.ToSystemType(), "Left");
+			fields.Add("_Left");
+		}
+%>
+
+#region Serializer
+
+<%
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.ToStream, fields);
+		
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.FromStream, fields);
+%>
+
+#endregion
         
     }
 

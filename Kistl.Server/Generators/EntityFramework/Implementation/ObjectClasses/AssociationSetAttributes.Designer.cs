@@ -37,13 +37,13 @@ this.WriteObjects("using Kistl.API;\r\n");
 this.WriteObjects("using Kistl.DALProvider.EF;\r\n");
 this.WriteObjects("\r\n");
 #line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
-foreach (var rel in FullRelation.GetAll(ctx).OrderBy(rel => rel.GetAssociationName()))
+foreach (var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
 	{
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("// FullRelation: ",  rel.GetAssociationName() , " \r\n");
+this.WriteObjects("// NewRelation: ",  rel.GetAssociationName() , " \r\n");
 this.WriteObjects("// Right: ",  rel.Right.Referenced.ClassName , ".",  rel.Right.Navigator != null ? rel.Right.Navigator.PropertyName : "" , "  (",  rel.Right.Multiplicity , ") (site: ",  rel.Right.DebugCreationSite , ")\r\n");
 this.WriteObjects("// Left: ",  rel.Left.Referenced.ClassName , ".",  rel.Left.Navigator != null ? rel.Left.Navigator.PropertyName : "" , " (",  rel.Left.Multiplicity , ") (site: ",  rel.Left.DebugCreationSite , ")\r\n");
 this.WriteObjects("// Preferred Storage: ",  rel.GetPreferredStorage() , "\r\n");
@@ -58,35 +58,35 @@ this.WriteObjects("\r\n");
 this.WriteObjects("// basic association\r\n");
 this.WriteObjects("[assembly: EdmRelationship(\r\n");
 this.WriteObjects("    \"Model\", \"",  rel.GetAssociationName() , "\",\r\n");
-this.WriteObjects("    \"",  rel.Right.RoleName , "\", RelationshipMultiplicity.",  rel.Right.Multiplicity.ToCsdlRelationshipMultiplicity() , ", typeof(",  rel.Right.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
-this.WriteObjects("    \"",  rel.Left.RoleName , "\", RelationshipMultiplicity.",  rel.Left.Multiplicity.ToCsdlRelationshipMultiplicity() , ", typeof(",  rel.Left.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix , ")\r\n");
+this.WriteObjects("    \"",  rel.Right.RoleName , "\", RelationshipMultiplicity.",  rel.Right.Multiplicity.ToCsdlRelationshipMultiplicity() , ", typeof(",  rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
+this.WriteObjects("    \"",  rel.Left.RoleName , "\", RelationshipMultiplicity.",  rel.Left.Multiplicity.ToCsdlRelationshipMultiplicity() , ", typeof(",  rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix , ")\r\n");
 this.WriteObjects("    )]\r\n");
 this.WriteObjects("\r\n");
 #line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 break;
 			case StorageHint.Separate:
 
-				// Assert that we're in N:M
-				Debug.Assert(rel.Right.Multiplicity == Multiplicity.ZeroOrMore);
-				Debug.Assert(rel.Left.Multiplicity == Multiplicity.ZeroOrMore);
-
-
-#line 58 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+#line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("// The association from Right to the CollectionEntry\r\n");
 this.WriteObjects("[assembly: EdmRelationship(\"Model\", \"",  rel.GetRightToCollectionEntryAssociationName() , "\",\r\n");
-this.WriteObjects("    \"",  rel.Right.RoleName , "\", RelationshipMultiplicity.ZeroOrOne, typeof(",  rel.Right.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
+this.WriteObjects("    \"",  rel.Right.RoleName , "\", RelationshipMultiplicity.ZeroOrOne, typeof(",  rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
 this.WriteObjects("    \"Right\", RelationshipMultiplicity.Many, typeof(",  rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix , ")\r\n");
 this.WriteObjects("    )]\r\n");
-this.WriteObjects("\r\n");
+#line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+if (rel.IsTwoProngedAssociation(ctx))
+				{
+
+#line 63 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("// The association from Left to the CollectionEntry\r\n");
 this.WriteObjects("[assembly: EdmRelationship(\"Model\", \"",  rel.GetLeftToCollectionEntryAssociationName() , "\",\r\n");
-this.WriteObjects("    \"",  rel.Left.RoleName , "\", RelationshipMultiplicity.ZeroOrOne, typeof(",  rel.Left.Referenced.GetTypeMoniker().NameDataObject + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
+this.WriteObjects("    \"",  rel.Left.RoleName , "\", RelationshipMultiplicity.ZeroOrOne, typeof(",  rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
 this.WriteObjects("    \"Left\", RelationshipMultiplicity.Many, typeof(",  rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix , ")\r\n");
 this.WriteObjects("    )]\r\n");
-this.WriteObjects("\r\n");
-#line 73 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
-break;
+#line 69 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+}
+
+				break;
 		}
 	}
 

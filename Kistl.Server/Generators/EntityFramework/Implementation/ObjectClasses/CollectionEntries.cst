@@ -24,23 +24,20 @@ using Kistl.DALProvider.EF;
 
 <%
 
-	foreach (var rel in FullRelation.GetAll(ctx)
+	foreach (var rel in NewRelation.GetAll(ctx)
 		.Where(rel => rel.GetPreferredStorage() == StorageHint.Separate)
 		.OrderBy(rel => rel.GetAssociationName()))
 	{
-		// Assert that we're in N:M
-		Debug.Assert(rel.Right.Multiplicity == Multiplicity.ZeroOrMore);
-		Debug.Assert(rel.Left.Multiplicity == Multiplicity.ZeroOrMore);
 
 %>
 
-namespace <%= rel.Right.Referenced.Module.Namespace %>
+namespace <%= rel.Right.Referenced.Namespace %>
 {
 <%
-		if (rel.Left.Referenced.Module.Namespace != rel.Right.Referenced.Module.Namespace)
+		if (rel.Left.Referenced.Namespace != rel.Right.Referenced.Namespace)
 		{
 %>
-	using <%= rel.Left.Referenced.Module.Namespace %>;
+	using <%= rel.Left.Referenced.Namespace %>;
 <%
 		}
 

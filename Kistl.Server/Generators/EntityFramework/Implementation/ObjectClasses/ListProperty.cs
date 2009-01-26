@@ -26,12 +26,12 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 // this is 1:N stuff
 
                 var orp = (ObjectReferenceProperty)this.property;
-                var rel = FullRelation.Lookup(ctx, orp);
+                var rel = NewRelation.Lookup(ctx, orp);
                 var relEnd = rel.GetEnd(orp);
 
                 CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx,
                     name + Kistl.API.Helper.ImplementationSuffix,
-                    rel.GetAssociationName(), relEnd.RoleName, relEnd.Referenced.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix);
+                    rel.GetAssociationName(), relEnd.RoleName, relEnd.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
             }
         }
 

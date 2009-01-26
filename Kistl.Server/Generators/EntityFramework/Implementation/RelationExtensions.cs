@@ -10,7 +10,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
     public static class RelationExtensions
     {
-        public static StorageHint GetPreferredStorage(this FullRelation rel)
+        public static StorageHint GetPreferredStorage(this NewRelation rel)
         {
             if (rel.Right.Multiplicity.UpperBound() == 1 && rel.Left.Multiplicity.UpperBound() == 1)
             {
@@ -34,7 +34,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             throw new NotImplementedException();
         }
 
-        public static string GetAssociationName(this FullRelation rel)
+        public static string GetAssociationName(this NewRelation rel)
         {
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.Right.Referenced.ClassName, rel.Left.Referenced.ClassName, rel.Left.RoleName, rel.ID);
         }
@@ -42,7 +42,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// <summary>
         /// Returns the association name for the association from the given end to the CollectionEntry
         /// </summary>
-        public static string GetCollectionEntryAssociationName(this FullRelation rel, ObjectRelationEnd end)
+        public static string GetCollectionEntryAssociationName(this NewRelation rel, RelationEnd end)
         {
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.Right.Referenced.ClassName, rel.Left.Referenced.ClassName, end.RoleName, rel.ID);
         }
@@ -50,7 +50,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// <summary>
         /// Returns the association name for the association from the Right end to the CollectionEntry
         /// </summary>
-        public static string GetRightToCollectionEntryAssociationName(this FullRelation rel)
+        public static string GetRightToCollectionEntryAssociationName(this NewRelation rel)
         {
             return rel.GetCollectionEntryAssociationName(rel.Right);
         }
@@ -58,19 +58,19 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// <summary>
         /// Returns the association name for the association from the Left end to the CollectionEntry
         /// </summary>
-        public static string GetLeftToCollectionEntryAssociationName(this FullRelation rel)
+        public static string GetLeftToCollectionEntryAssociationName(this NewRelation rel)
         {
             return rel.GetCollectionEntryAssociationName(rel.Left);
         }
 
-        public static string GetCollectionEntryClassName(this FullRelation rel)
+        public static string GetCollectionEntryClassName(this NewRelation rel)
         {
             return String.Format("{0}_{1}{2}CollectionEntry", rel.Right.Referenced.ClassName, rel.Right.Navigator.PropertyName, rel.ID);
         }
 
-        public static string GetCollectionEntryFullName(this FullRelation rel)
+        public static string GetCollectionEntryFullName(this NewRelation rel)
         {
-            return String.Format("{0}.{1}", rel.Right.Referenced.Module.Namespace, rel.GetCollectionEntryClassName());
+            return String.Format("{0}.{1}", rel.Right.Referenced.Namespace, rel.GetCollectionEntryClassName());
         }
 
         public static RelationshipMultiplicity ToCsdlRelationshipMultiplicity(this Multiplicity m)

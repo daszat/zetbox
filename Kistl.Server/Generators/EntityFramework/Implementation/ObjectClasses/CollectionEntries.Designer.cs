@@ -37,33 +37,30 @@ this.WriteObjects("using Kistl.API;\r\n");
 this.WriteObjects("using Kistl.DALProvider.EF;\r\n");
 this.WriteObjects("\r\n");
 #line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
-foreach (var rel in FullRelation.GetAll(ctx)
+foreach (var rel in NewRelation.GetAll(ctx)
 		.Where(rel => rel.GetPreferredStorage() == StorageHint.Separate)
 		.OrderBy(rel => rel.GetAssociationName()))
 	{
-		// Assert that we're in N:M
-		Debug.Assert(rel.Right.Multiplicity == Multiplicity.ZeroOrMore);
-		Debug.Assert(rel.Left.Multiplicity == Multiplicity.ZeroOrMore);
 
 
-#line 36 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 33 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("namespace ",  rel.Right.Referenced.Module.Namespace , "\r\n");
+this.WriteObjects("namespace ",  rel.Right.Referenced.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
-#line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
-if (rel.Left.Referenced.Module.Namespace != rel.Right.Referenced.Module.Namespace)
+#line 37 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+if (rel.Left.Referenced.Namespace != rel.Right.Referenced.Namespace)
 		{
 
-#line 43 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
-this.WriteObjects("	using ",  rel.Left.Referenced.Module.Namespace , ";\r\n");
-#line 45 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+this.WriteObjects("	using ",  rel.Left.Referenced.Namespace , ";\r\n");
+#line 42 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
 }
 
 		this.CallTemplate("Implementation.ObjectClasses.CollectionEntry", ctx, rel);
 
-#line 49 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 46 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("}\r\n");
-#line 52 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 49 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
 }
 
 
