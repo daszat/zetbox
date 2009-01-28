@@ -17,9 +17,9 @@
 	
 	ApplyAttributesTemplate();
 	
-	var backingName = MungeNameToBacking(name);
+	string backingName = MungeNameToBacking(name);
 %>
-        <%= GetModifiers() %> <%= type.FullName %> <%= name %>
+        <%= GetModifiers() %> <%= type.ToCSharpTypeRef() %> <%= name %>
         {
             get
             {
@@ -36,4 +36,4 @@
                 }
             }
         }
-        private <%= type.FullName %> <%= backingName %>;
+        private <%= type.ToCSharpTypeRef() %> <%= backingName %>;

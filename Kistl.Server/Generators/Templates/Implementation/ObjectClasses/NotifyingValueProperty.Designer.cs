@@ -32,10 +32,10 @@ ApplyRequisitesTemplate();
 	
 	ApplyAttributesTemplate();
 	
-	var backingName = MungeNameToBacking(name);
+	string backingName = MungeNameToBacking(name);
 
 #line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
-this.WriteObjects("        ",  GetModifiers() , " ",  type.FullName , " ",  name , "\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  type.ToCSharpTypeRef() , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
@@ -52,7 +52,7 @@ this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\");;
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  type.FullName , " ",  backingName , ";\r\n");
+this.WriteObjects("        private ",  type.ToCSharpTypeRef() , " ",  backingName , ";\r\n");
 
         }
 

@@ -14,32 +14,30 @@
 <%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="rel" Type="NewRelation" %>
-    <!-- <%= rel.Left.Multiplicity %>:<%= rel.Right.Multiplicity %> -->
+    <!-- <%= rel.A.Multiplicity %>:<%= rel.B.Multiplicity %> -->
 <%
 	if (rel.GetPreferredStorage() == StorageHint.Separate)
 	{
+		string assocNameA = rel.GetCollectionEntryAssociationName(rel.GetEnd(RelationEndRole.A));
+		string assocNameB = rel.GetCollectionEntryAssociationName(rel.GetEnd(RelationEndRole.B));
 %>
-    <AssociationSet Name="<%= rel.GetRightToCollectionEntryAssociationName() %>" Association="Model.<%= rel.GetRightToCollectionEntryAssociationName() %>" >
-      <End Role="<%= rel.Right.RoleName %>" EntitySet="<%= rel.Right.Referenced.ClassName %>" />
-      <End Role="Right" EntitySet="<%= rel.GetCollectionEntryClassName() %>" />
+    <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= rel.GetCollectionEntryClassName() %>" />
+    </AssociationSet>
+    <AssociationSet Name="<%= assocNameB %>" Association="Model.<%= assocNameB %>" >
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= rel.GetCollectionEntryClassName() %>" />
     </AssociationSet>
 <%
-		if (rel.IsTwoProngedAssociation(ctx))
-		{
-%>
-    <AssociationSet Name="<%= rel.GetLeftToCollectionEntryAssociationName() %>" Association="Model.<%= rel.GetLeftToCollectionEntryAssociationName() %>" >
-      <End Role="<%= rel.Left.RoleName %>" EntitySet="<%= rel.Left.Referenced.ClassName %>" />
-      <End Role="Left" EntitySet="<%= rel.GetCollectionEntryClassName() %>" />
-    </AssociationSet>
-<%
-		}
 	}
 	else
 	{
+		string assocName = rel.GetAssociationName();
 %>
-    <AssociationSet Name="<%= rel.GetAssociationName() %>" Association="Model.<%= rel.GetAssociationName() %>" >
-      <End Role="<%= rel.Right.RoleName %>" EntitySet="<%= rel.Right.Referenced.ClassName %>" />
-      <End Role="<%= rel.Left.RoleName %>" EntitySet="<%= rel.Left.Referenced.ClassName %>" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
     </AssociationSet>
 <%
 	}

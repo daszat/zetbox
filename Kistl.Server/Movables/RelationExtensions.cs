@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+
+using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
-using Kistl.API;
 
 namespace Kistl.Server.Movables
 {
@@ -13,44 +15,56 @@ namespace Kistl.Server.Movables
         public static NewRelation ToNewRelation(this Relation rel)
         {
             return new NewRelation(
-                rel.LeftPart.ToRelationEnd("B_" + rel.LeftPart.ObjectClass.ClassName, "Left, from relation ID = " + rel.ID),
-                rel.RightPart.ToRelationEnd("A_" + rel.RightPart.ObjectClass.ClassName, "Right, from relation ID = " + rel.ID)
+                ToRelationEnd(RelationEndRole.A, rel.LeftPart, rel.RightPart, "A, from relation ID = " + rel.ID),
+                ToRelationEnd(RelationEndRole.B, rel.RightPart, rel.LeftPart, "B, from relation ID = " + rel.ID)
                 );
         }
 
-        public static RelationEnd ToRelationEnd(this ObjectReferenceProperty prop, string rolename, string site)
+        // for test purposes only
+        public static ObjectReferenceProperty ToProperty(this RelationEnd end, IKistlContext ctx)
         {
-            return new RelationEnd()
+            var result = ctx.Create<ObjectReferenceProperty>();
+            result.ObjectClass = end.Other.Type.ToObjectClass(ctx);
+            // result.Module = missing;
+            result.IsIndexed = end.HasPersistentOrder;
+            result.IsList = end.Multiplicity.UpperBound() > 1;
+            result.IsNullable = true; // always true for objects
+            result.PropertyName = end.Other.RoleName;
+            result.ReferenceObjectClass = end.Type.ToObjectClass(ctx);
+            return result;
+        }
+
+        public static RelationEnd ToRelationEnd(RelationEndRole role, ObjectReferenceProperty prop, ObjectReferenceProperty otherProp, string site)
+        {
+            if (otherProp == null)
+                throw new ArgumentNullException("otherProp");
+
+            // assert that the two references are symmetrical
+            Debug.Assert(prop.ObjectClass.GetTypeMoniker().Equals(otherProp.ReferenceObjectClass.GetTypeMoniker()));
+            Debug.Assert(otherProp.ObjectClass.GetTypeMoniker().Equals(prop.ReferenceObjectClass.GetTypeMoniker()));
+
+            return new RelationEnd(role)
             {
                 Navigator = prop,
-                Referenced = ((ObjectClass)prop.ObjectClass).GetTypeMoniker(),
-                Multiplicity = prop.ToMultiplicity(),
-                RoleName = rolename,
+                Type = ((ObjectClass)prop.ObjectClass).GetTypeMoniker(),
+                Multiplicity = otherProp.ToMultiplicity(),
+                RoleName = otherProp.PropertyName,
+                HasPersistentOrder = otherProp.IsIndexed,
                 DebugCreationSite = site
             };
         }
 
-        public static RelationEnd ToRelationEnd(this ValueTypeProperty prop, string rolename, string site)
-        {
-            return new RelationEnd()
-            {
-                Navigator = prop,
-                Referenced = ((ObjectClass)prop.ObjectClass).GetTypeMoniker(),
-                Multiplicity = prop.ToMultiplicity(),
-                RoleName = rolename,
-                DebugCreationSite = site
-            };
-        }
-
-        /// <summary>
-        /// Whether or not the given relation will result in two association 
-        /// sets. Note that this is true exactly if this is a N:M relation 
-        /// between two Classes
-        /// </summary>
-        public static bool IsTwoProngedAssociation(this NewRelation rel, IKistlContext ctx)
-        {
-            return rel.Left.Referenced.ToObjectClass(ctx) != null;
-        }
+        //public static RelationEnd ToRelationEnd(this ValueTypeProperty prop, string rolename, string site)
+        //{
+        //    return new RelationEnd()
+        //    {
+        //        Navigator = prop,
+        //        Referenced = ((ObjectClass)prop.ObjectClass).GetTypeMoniker(),
+        //        Multiplicity = prop.ToMultiplicity(),
+        //        RoleName = rolename,
+        //        DebugCreationSite = site
+        //    };
+        //}
 
     }
 }

@@ -5,12 +5,14 @@
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
 <%
@@ -22,15 +24,31 @@
 	foreach(var p in properties)
 	{
 		// TODO: implement IsNullable everywhere
-		if (p.IsAssociation())
+		var rel = NewRelation.Lookup(ctx, p);
+		if (rel != null)
 		{
-			var info = AssociationInfo.CreateInfo(ctx, p);
+			RelationEnd end = rel.GetEnd(p);
+			RelationEnd otherEnd = rel.GetOtherEnd(p);
+			if (rel.GetPreferredStorage() == StorageHint.Separate)
+			{
+				Debug.Assert(end != null);
 %>
     <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
-                        Relationship="Model.<%= info.AssociationName %>"
-                        FromRole="<%= info.Parent.RoleName %>"
-                        ToRole="<%= info.Child.RoleName %>" />
+                        Relationship="Model.<%= rel.GetCollectionEntryAssociationName(end) %>"
+                        FromRole="<%= end.RoleName %>"
+                        ToRole="CollectionEntry" />
 <%
+			}
+			else
+			{
+%>
+    <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+                        Relationship="Model.<%= rel.GetAssociationName() %>"
+                        FromRole="<%= end.RoleName %>"
+                        ToRole="<%= otherEnd.RoleName %>" />
+<%
+			}
+
 			if (p.NeedsPositionColumn())
 			{
 %>
@@ -38,7 +56,7 @@
 <%
 			}
 		}
-		else if (p.IsValueTypePropertySingle())
+		else if (p is ValueTypeProperty)
 		{
 			// ValueTypeProperty
 			string name = p.PropertyName;
@@ -64,7 +82,7 @@
     <Property Name="<%= name %>" Type="<%= type %>" Nullable="<%= ((ValueTypeProperty)p).IsNullable.ToString().ToLowerInvariant() %>" <%= maxlength %>/>
 <%
 		}
-		else if (p.IsStructPropertySingle())
+		else if (p is StructProperty)
 		{
 			// ValueTypeProperty
 			// Nullable Complex types are not supported by EF

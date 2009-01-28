@@ -15,17 +15,18 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="rel" Type="NewRelation" %>
 <%
+
+	bool isList = rel.A.HasPersistentOrder || rel.B.HasPersistentOrder;
+	string ceInterface = isList ? "INewListEntry" : "INewCollectionEntry";
+	string ceName = rel.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
 	
-	string leftType = rel.Left.Referenced.ClassName;
-	string rightType = rel.Right.Referenced.ClassName;
 	List <string> fields = new List<string>();
 %>
 
-
     [System.Diagnostics.DebuggerDisplay("<%= rel.GetCollectionEntryClassName() %>")]
     [EdmEntityType(NamespaceName="Model", Name="<%= rel.GetCollectionEntryClassName() %>")]
-    public class <%= rel.GetCollectionEntryClassName() %><%= Kistl.API.Helper.ImplementationSuffix %>
-        : BaseServerCollectionEntry_EntityFramework, INewCollectionEntry<<%= leftType %>, <%= rightType %>>
+    public class <%= ceName %>
+        : BaseServerCollectionEntry_EntityFramework, <%= ceInterface %><<%= rel.A.Type.ClassName %>, <%= rel.B.Type.ClassName %>>
     {
     
 <%
@@ -33,35 +34,47 @@
 %>
 
 		/// <summary>
-		/// Reference to right part of this relation
+		/// Reference to A part of this relation
 		/// </summary>
 <%
 		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-			"Right", rel.GetRightToCollectionEntryAssociationName(), "Right",
-			rel.Right.Referenced.NameDataObject, rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+			"A", rel.GetCollectionEntryAssociationName(rel.A), "CollectionEntry",
+			rel.A.Type.NameDataObject, rel.A.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
 		
-		fields.Add("_fk_Right");
-		
+		fields.Add("_fk_A");
 %>
 
 		/// <summary>
-		/// Reference to left part of this relation
+		/// Index on the A-side list of this relation
 		/// </summary>
 <%
-		if (rel.IsTwoProngedAssociation(ctx))
-		{
-			CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-				"Left", rel.GetLeftToCollectionEntryAssociationName(), "Left",
-				rel.Left.Referenced.NameDataObject, rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
-			fields.Add("_fk_Left");
-		}
-		else
-		{
-			CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-				rel.Left.Referenced.ToSystemType(), "Left");
-			fields.Add("_Left");
-		}
+		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+			typeof(int?), "AIndex");
+		
+		fields.Add("_AIndex");
 %>
+
+		/// <summary>
+		/// Reference to B part of this relation
+		/// </summary>
+<%
+		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+			"B", rel.GetCollectionEntryAssociationName(rel.B), "CollectionEntry",
+			rel.B.Type.NameDataObject, rel.B.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+		
+		fields.Add("_fk_B");
+%>
+
+		/// <summary>
+		/// Index on the B-side list of this relation
+		/// </summary>
+<%
+		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+			typeof(int?), "BIndex");
+		
+		fields.Add("_BIndex");
+%>
+
 
 #region Serializer
 
@@ -76,4 +89,3 @@
 #endregion
         
     }
-

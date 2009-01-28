@@ -53,8 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseServerDataObject_EntityFramework.cs" />
+    <Compile Include="NewEntityCollectionWrapper.Implementations.cs" />
     <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="KistlDataContext.cs" />
+    <Compile Include="NewEntityCollectionWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerObjectHandler.cs" />
     <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />

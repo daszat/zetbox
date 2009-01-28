@@ -28,5 +28,18 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
                 ApplyAssociationSetTemplate(rel);
             }
         }
+
+        protected virtual void ApplyAssociationTemplate(NewRelation rel)
+        {
+            CallTemplate("Implementation.EfModel.ModelCsdlAssociation", ctx, rel);
+        }
+
+        protected virtual void ApplyAssociations()
+        {
+            foreach (var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
+            {
+                ApplyAssociationTemplate(rel);
+            }
+        }
     }
 }

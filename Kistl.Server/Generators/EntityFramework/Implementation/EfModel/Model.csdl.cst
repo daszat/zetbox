@@ -28,7 +28,9 @@
 %>
     <!-- EntitySets for all CollectionEntrys -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
+	foreach(var rel in NewRelation.GetAll(ctx).ToList()
+		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
 	{
 		string entityName = rel.GetCollectionEntryClassName();
 %>
@@ -72,73 +74,55 @@
 	}
 %>
 
-  <!-- EntityTypes for all CollectionEntrys -->
+  <!-- EntityTypes for all CollectionEntrys with separate storage -->
 <%
-#if false
-	foreach(var rel in NewRelation.GetAll(ctx).Where(r => r.GetPreferredStorage() == StorageHint.Separate).OrderBy(r => r.GetAssociationName()))
+	foreach(var rel in NewRelation.GetAll(ctx).ToList()
+		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
 	{
 
 %>
   <!--
-    NewRelation: <%= rel.GetAssociationName() %> 
-    Right: <%= rel.Right.Referenced.ClassName %>.<%= rel.Right.Navigator != null ? rel.Right.Navigator.PropertyName : "" %>  (<%= rel.Right.Multiplicity %>) (site: <%= rel.Right.DebugCreationSite %>)
-    Left: <%= rel.Left.Referenced.ClassName %>.<%= rel.Left.Navigator != null ? rel.Left.Navigator.PropertyName : "" %> (<%= rel.Left.Multiplicity %>) (site: <%= rel.Left.DebugCreationSite %>)
+<%
+	CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+%>
   -->
   <EntityType Name="<%= rel.GetCollectionEntryClassName() %>" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.<%= rel.GetCollectionEntryAssociationName(rel.A) %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= rel.A.RoleName %>" />
 <%
+		if (rel.A.HasPersistentOrder)
 		{
-			// Right
 %>
-    <NavigationProperty Name="RightImpl"
-                        Relationship="Model.<%= rel.GetRightToCollectionEntryAssociationName() %>"
-                        FromRole="Right"
-                        ToRole="<%= rel.Right.RoleName %>" />
-<%
-			if (prop.IsIndexed)
-			{
-%>
-    <Property Name="ParentIndex" Type="Int32" Nullable="false" />
-<%
-			}
-		}
-		
-		// Left
-		if (prop is ObjectReferenceProperty)
-		{
-			// ObjectReferenceProperty
-			// TODO: IsNullable??
-			var info = AssociationInfo.CreateInfo(ctx, prop);
-%>
-    <NavigationProperty Name="ValueImpl"
-                        Relationship="Model.<%= info.AssociationName %>"
-                        FromRole="<%= info.Child.RoleName %>"
-                        ToRole="<%= info.Parent.RoleName %>" />
+    <Property Name="AIndex" Type="Int32" Nullable="false" />
 <%
 		}
-		else if (prop is ValueTypeProperty)
-		{
-			string maxlength = "";
-			if (prop is StringProperty)
-				maxlength = String.Format("MaxLength=\"{0}\" ", ((StringProperty)prop).Length.ToString());
 %>
-    <Property Name="Value" Type="<%= Type.GetType(prop.GetPropertyTypeString()).Name %>" <%= maxlength %>Nullable="<%= prop.IsNullable.ToString().ToLowerInvariant() %>" />
-<%
-		}
 
-		if (prop.NeedsPositionColumn())
+    <!-- B -->
+    <NavigationProperty Name="BImpl"
+                        Relationship="Model.<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= rel.B.RoleName %>" />
+<%
+		if (rel.B.HasPersistentOrder)
 		{
 %>
-    <Property Name="ValueIndex" Type="Int32" Nullable="false" />
+    <Property Name="BIndex" Type="Int32" Nullable="false" />
 <%
 		}
 %>
   </EntityType>
-<%	}
-#endif
+<%
+	}
 %>
 
   <!-- ComplexTypes for all structs -->
@@ -155,37 +139,6 @@
 
   <!-- Associations -->
 <%
-	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
-	{
-		var info = AssociationInfo.CreateInfo(ctx, prop);
-%>
-  <!-- <%= prop.GetType().Name %>: <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
-  <Association Name="<%= info.AssociationName %>" >
-    <End Role="<%= info.Parent.RoleName %>"
-         Type="Model.<%= info.Parent.Type.ClassName %>"
-         Multiplicity="<%= info.Parent.ConceptualMultiplicity %>" />
-    <End Role="<%= info.Child.RoleName %>"
-         Type="Model.<%= info.Child.Type.ClassName %>"
-         Multiplicity="<%= info.Child.ConceptualMultiplicity %>" />
-  </Association>
-<%
-		// construct reverse mapping
-		if (prop is ObjectReferenceProperty && prop.IsList)
-		{
-			var refClass = ((ObjectReferenceProperty)prop).ReferenceObjectClass;
-			var refType = new TypeMoniker(refClass.GetDataTypeString());
-%>
-  <!-- Reverse of <%= prop.GetType().Name %>: <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
-  <Association Name="<%= Construct.AssociationName(refType, info.CollectionEntry, prop.PropertyName) %>" >
-    <End Role="<%= Construct.AssociationParentRoleName(refClass) %>"
-         Type="Model.<%= refType.ClassName %>"
-         Multiplicity="0..1" />
-    <End Role="<%= info.Child.RoleName %>"
-         Type="Model.<%= info.Child.Type.ClassName %>"
-         Multiplicity="*" />
-  </Association>
-<%
-		}
-	}
+	ApplyAssociations();
 %>
 </Schema>

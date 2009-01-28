@@ -21,5 +21,20 @@ namespace Kistl.Server.Generators.Extensions
             }
         }
 
+        public static string ToCSharpTypeRef(this Type t)
+        {
+            if (t.IsGenericType)
+            {
+                return String.Format("{0}<{1}>",
+                    t.FullName.Split('`')[0], // TODO: hack to get to class name
+                    String.Join(", ", t.GetGenericArguments().Select(arg => arg.ToCSharpTypeRef()).ToArray())
+                    );
+            }
+            else
+            {
+                return t.FullName;
+            }
+        }
+
     }
 }

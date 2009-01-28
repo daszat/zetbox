@@ -29,37 +29,34 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
-this.WriteObjects("    <!-- ",  rel.Left.Multiplicity , ":",  rel.Right.Multiplicity , " -->\r\n");
+this.WriteObjects("    <!-- ",  rel.A.Multiplicity , ":",  rel.B.Multiplicity , " -->\r\n");
 #line 19 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
 if (rel.GetPreferredStorage() == StorageHint.Separate)
 	{
+		string assocNameA = rel.GetCollectionEntryAssociationName(rel.GetEnd(RelationEndRole.A));
+		string assocNameB = rel.GetCollectionEntryAssociationName(rel.GetEnd(RelationEndRole.B));
 
-#line 22 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
-this.WriteObjects("    <AssociationSet Name=\"",  rel.GetRightToCollectionEntryAssociationName() , "\" Association=\"Model.",  rel.GetRightToCollectionEntryAssociationName() , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.Right.RoleName , "\" EntitySet=\"",  rel.Right.Referenced.ClassName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"Right\" EntitySet=\"",  rel.GetCollectionEntryClassName() , "\" />\r\n");
+#line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
+this.WriteObjects("    <AssociationSet Name=\"",  assocNameA , "\" Association=\"Model.",  assocNameA , "\" >\r\n");
+this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  rel.GetCollectionEntryClassName() , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
-#line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
-if (rel.IsTwoProngedAssociation(ctx))
-		{
-
-#line 30 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
-this.WriteObjects("    <AssociationSet Name=\"",  rel.GetLeftToCollectionEntryAssociationName() , "\" Association=\"Model.",  rel.GetLeftToCollectionEntryAssociationName() , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.Left.RoleName , "\" EntitySet=\"",  rel.Left.Referenced.ClassName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"Left\" EntitySet=\"",  rel.GetCollectionEntryClassName() , "\" />\r\n");
+this.WriteObjects("    <AssociationSet Name=\"",  assocNameB , "\" Association=\"Model.",  assocNameB , "\" >\r\n");
+this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  rel.GetCollectionEntryClassName() , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
-#line 35 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
+#line 33 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
 }
-	}
 	else
 	{
+		string assocName = rel.GetAssociationName();
 
-#line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
-this.WriteObjects("    <AssociationSet Name=\"",  rel.GetAssociationName() , "\" Association=\"Model.",  rel.GetAssociationName() , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.Right.RoleName , "\" EntitySet=\"",  rel.Right.Referenced.ClassName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  rel.Left.RoleName , "\" EntitySet=\"",  rel.Left.Referenced.ClassName , "\" />\r\n");
+#line 38 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
+this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.",  assocName , "\" >\r\n");
+this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.ClassName , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
-#line 45 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
+#line 43 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.AssociationSet.cst"
 }
 
 

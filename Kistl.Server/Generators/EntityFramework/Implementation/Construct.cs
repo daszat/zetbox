@@ -6,6 +6,7 @@ using Kistl.Server.GeneratorsOld;
 
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation
 {
@@ -196,7 +197,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         public static string ListPositionColumnName(Property prop, string parentPropName)
         {
-            return ForeignKeyColumnName(Construct.NestedColumnName(prop, parentPropName)) +"_pos";
+            return ForeignKeyColumnName(Construct.NestedColumnName(prop, parentPropName)) + "_pos";
         }
 
         /// <summary>
@@ -216,5 +217,16 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         }
 
         #endregion
+
+        /// <summary>
+        /// Chooses the appropriate EntityCollection wrapper for a given RelationEnd
+        /// </summary>
+        /// <param name="relEnd"></param>
+        /// <returns></returns>
+        public static string EntityWrapperClassName(RelationEnd relEnd)
+        {
+            return "Entity" + (relEnd.HasPersistentOrder ? "List" : "Collection") + relEnd.Role + "SideWrapper";
+        }
+
     }
 }

@@ -68,42 +68,50 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 var orp = (ObjectReferenceProperty)p;
                 var rel = NewRelation.Lookup(ctx, orp);
 
-                Debug.Assert(rel.Right.Navigator == orp || rel.Left.Navigator == orp);
-                var isRightEnd = (rel.Right.Navigator == orp);
-                var relEnd = isRightEnd ? rel.Right : rel.Left;
-                var otherEnd = isRightEnd ? rel.Left : rel.Right;
+                Debug.Assert(rel.A.Navigator == orp || rel.B.Navigator == orp);
+                var relEnd = rel.GetEnd(p);
+                var otherEnd = relEnd.Other;
 
+                this.WriteLine("    /*");
+                this.CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+                this.WriteLine("    */");
+                
                 switch (rel.GetPreferredStorage())
                 {
                     case StorageHint.MergeLeft:
                     case StorageHint.MergeRight:
-                    case StorageHint.NoHint:
                     case StorageHint.Replicate:
-                        // simple and direct reference
 
-                        if (relEnd.Multiplicity.UpperBound() > 1)
+                        // simple and direct reference
+                        if (otherEnd.Multiplicity.UpperBound() > 1)
                         {
-                            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx, relEnd.Referenced.ToObjectClass(ctx), p.GetPropertyType(), p.PropertyName, p);
+                            this.WriteLine("        // object list property");
+                            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
+                                relEnd.Type.ToObjectClass(ctx),
+                                p.GetPropertyType(),
+                                p.PropertyName,
+                                p);
+                        }
+                        else if (otherEnd.Multiplicity.UpperBound() == 1)
+                        {
+                            this.WriteLine("        // object reference property");
+                            this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+                                p.PropertyName,
+                                rel.GetAssociationName(), otherEnd.RoleName,
+                                otherEnd.Type.NameDataObject,
+                                otherEnd.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
                         }
                         else
                         {
-                            this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-                                orp.PropertyName, rel.GetAssociationName(), relEnd.RoleName, otherEnd.Referenced.NameDataObject, otherEnd.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+                            throw new NotImplementedException();
                         }
                         break;
                     case StorageHint.Separate:
-                        // references a CollectionEntry
-                        //this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-                        //    orp.PropertyName, 
-                        //    isRightEnd ? rel.GetRightToCollectionEntryAssociationName() : rel.GetLeftToCollectionEntryAssociationName(),
-                        //    relEnd.RoleName, rel.GetCollectionEntryClassName(), rel.GetCollectionEntryClassName());
-
-                        // TODO: currently delegates to ListProperty but should be replaced by something similar as above, 
-                        // but with a different ED implementation
-                        base.ApplyPropertyTemplate(p);
+                        this.WriteLine("        // collection reference property");
+                        this.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty", ctx, relEnd);
                         break;
                     default:
-                        throw new InvalidOperationException("unknown StorageHint");
+                        throw new NotImplementedException("unknown StorageHint");
                 }
             }
             else

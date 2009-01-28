@@ -15,7 +15,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyRequisitesTemplate()
         {
             base.ApplyRequisitesTemplate();
-            //CallTemplate("Implementation.ObjectClasses.NotifyingValuePropertyRequisites", 
         }
 
         protected override void ApplyAttributesTemplate()

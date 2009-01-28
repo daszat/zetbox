@@ -16,16 +16,14 @@
 <%@ Parameter Name="roleName" Type="String" %>
 <%@ Parameter Name="referencedInterface" Type="String" %>
 <%@ Parameter Name="referencedImplementation" Type="String" %>
-
 <%
 
 	string efName = name + "Impl";
 	string fkName = "fk_" + name;
 	string fkBackingName = "_fk_" + name;
-	
-%>
 
-        // implement the default interface
+%>
+        // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public <%= referencedInterface %> <%= name %>
@@ -36,12 +34,14 @@
             }
             set
             {
-                // TODO: check ReadOnly status, NotifyPropertyChanged()
-                // only accept EF objects
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
                 <%= efName %> = (<%= referencedImplementation %>)value;
             }
         }
         
+        // provide a way to directly access the foreign key int
         public int <%= fkName %>
         {
             get
@@ -60,6 +60,7 @@
         }
         private int <%= fkBackingName %>;
         
+        // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= roleName %>")]
         public <%= referencedImplementation %> <%= efName %>
         {

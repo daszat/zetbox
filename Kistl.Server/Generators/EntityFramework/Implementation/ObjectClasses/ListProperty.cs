@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 
                 CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx,
                     name + Kistl.API.Helper.ImplementationSuffix,
-                    rel.GetAssociationName(), relEnd.RoleName, relEnd.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+                    rel.GetAssociationName(), relEnd.RoleName, relEnd.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
             }
         }
 

@@ -10,42 +10,78 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Movables
 {
-
     /// <summary>
-    /// Describes a relation between two entities. The Right entity always is a ObjectClass.
+    /// Describes a relation between two entities. The B entity always is a ObjectClass.
     /// </summary>
-    public class NewRelation 
+    public class NewRelation
     {
 
-        public NewRelation(RelationEnd left, RelationEnd right)
+        public NewRelation(RelationEnd a, RelationEnd b)
         {
-            if (left.Container != null)
-                throw new ArgumentException("left", "cannot re-use RelationEnd");
-            if (right.Container != null)
-                throw new ArgumentException("right", "cannot re-use RelationEnd");
+            if (a.Container != null)
+                throw new ArgumentException("a", "cannot re-use RelationEnd");
+            if (b.Container != null)
+                throw new ArgumentException("b", "cannot re-use RelationEnd");
 
-            right.Container = left.Container = this;
-            this.Left = left;
-            this.Right = right;
+            if (a.Role != RelationEndRole.A)
+                throw new ArgumentException("a", "wrong role");
+            if (b.Role != RelationEndRole.B)
+                throw new ArgumentException("b", "wrong role");
 
             this.ID = MaxId++;
+            b.Container = a.Container = this;
+
+            this.A = a;
+            this.A.Other = b;
+
+            this.B = b;
+            this.B.Other = a;
+
         }
 
         private static int MaxId = 1;
         public int ID { get; private set; }
 
-        public RelationEnd Right { get; private set; }
-        public RelationEnd Left { get; private set; }
+        public RelationEnd A { get; private set; }
+        public RelationEnd B { get; private set; }
 
-        public RelationEnd GetEnd(ObjectReferenceProperty p)
+        public RelationEnd GetEnd(RelationEndRole role)
         {
-            if (Right.Navigator == p)
+            switch (role)
             {
-                return Right;
+                case RelationEndRole.A:
+                    return this.A;
+                case RelationEndRole.B:
+                    return this.B;
+                default:
+                    throw new ArgumentOutOfRangeException("role");
             }
-            else if (Left.Navigator == p)
+        }
+        public RelationEnd GetEnd(Property p)
+        {
+            if (A.Navigator == p)
             {
-                return Left;
+                return A;
+            }
+            else if (B.Navigator == p)
+            {
+                return B;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public RelationEnd GetOtherEnd(Property p)
+        {
+            if (A.Navigator == p)
+            {
+                return B;
+            }
+            else if (B.Navigator == p)
+            {
+                return A;
             }
             else
             {
@@ -58,7 +94,7 @@ namespace Kistl.Server.Movables
         /// </summary>
         public ICollection<StorageHint> GetAllowedStoragePossibilities()
         {
-            if (Right.Multiplicity.UpperBound() == 1 && Left.Multiplicity.UpperBound() == 1)
+            if (B.Multiplicity.UpperBound() == 1 && A.Multiplicity.UpperBound() == 1)
             {
                 // 1:1 relations can be hinted left, right, both or separate
                 return new HashSet<StorageHint>() { 
@@ -68,7 +104,7 @@ namespace Kistl.Server.Movables
                     StorageHint.Separate 
                 };
             }
-            else if (Right.Multiplicity.UpperBound() > 1 && Left.Multiplicity.UpperBound() == 1)
+            else if (B.Multiplicity.UpperBound() > 1 && A.Multiplicity.UpperBound() == 1)
             {
                 // 1:N relations can only be attached to the right end
                 return new HashSet<StorageHint>() { 
@@ -76,7 +112,7 @@ namespace Kistl.Server.Movables
                     StorageHint.Separate 
                 };
             }
-            else if (Right.Multiplicity.UpperBound() == 1 && Left.Multiplicity.UpperBound() > 1)
+            else if (B.Multiplicity.UpperBound() == 1 && A.Multiplicity.UpperBound() > 1)
             {
                 // N:1 relations can only be attached to the left end
                 return new HashSet<StorageHint>() { 
@@ -84,7 +120,7 @@ namespace Kistl.Server.Movables
                     StorageHint.Separate 
                 };
             }
-            else if (Right.Multiplicity.UpperBound() > 1 && Left.Multiplicity.UpperBound() > 1)
+            else if (B.Multiplicity.UpperBound() > 1 && A.Multiplicity.UpperBound() > 1)
             {
                 // N:M relations can only be implemented with a separate relation store
                 return new HashSet<StorageHint>() { 
@@ -113,20 +149,22 @@ namespace Kistl.Server.Movables
         {
             var result = new List<NewRelation>();
 
-            foreach (var prop in ctx.GetQuery<ValueTypeProperty>().Where(p => p.IsList))
-            {
-                result.Add(new NewRelation(
-                    // value end
-                    new RelationEnd() {
-                        Navigator = null,
-                        Referenced = new TypeMoniker(prop.GetPropertyTypeString()),
-                        Multiplicity = Multiplicity.ZeroOrMore,
-                        RoleName = "B_" + prop.PropertyName,
-                        DebugCreationSite = "Left, value list, prop ID=" + prop.ID
-                    },
-                    prop.ToRelationEnd("A_Parent" , "Right, value list, prop ID=" + prop.ID))
-                    );
-            }
+            //foreach (var prop in ctx.GetQuery<ValueTypeProperty>().Where(p => p.IsList))
+            //{
+            //    result.Add(new NewRelation(
+            //        // value end
+            //        new RelationEnd()
+            //        {
+            //            Navigator = null,
+            //            Type = new TypeMoniker(prop.GetPropertyTypeString()),
+            //            Multiplicity = Multiplicity.ZeroOrMore,
+            //            RoleName = prop.PropertyName,
+            //            HasPersistentOrder = prop.IsIndexed,
+            //            DebugCreationSite = "A, value list, prop ID=" + prop.ID
+            //        },
+            //        prop.ToRelationEnd("A_Parent", "B, value list, prop ID=" + prop.ID))
+            //        );
+            //}
 
             return result;
         }
@@ -144,17 +182,26 @@ namespace Kistl.Server.Movables
                 {
                     // No "other" property defined 
                     result.Add(new NewRelation(
+                        // IsList or not, but contains the Navigator
+                        new RelationEnd(RelationEndRole.A)
+                        {
+                            Navigator = prop,
+                            Type = ((ObjectClass)prop.ObjectClass).GetTypeMoniker(),
+                            Multiplicity = Multiplicity.ZeroOrMore,
+                            RoleName = prop.ObjectClass.ClassName,
+                            HasPersistentOrder = false,
+                            DebugCreationSite = "A, no Relation, prop ID=" + prop.ID
+                        },
                         // "open" end
-                        new RelationEnd()
+                        new RelationEnd(RelationEndRole.B)
                         {
                             Navigator = null,
-                            Referenced = ((ObjectClass)prop.ReferenceObjectClass).GetTypeMoniker(),
-                            Multiplicity = Multiplicity.ZeroOrMore,
-                            RoleName = "B_" + prop.PropertyName,
-                            DebugCreationSite = "Left, no Relation, prop ID=" + prop.ID
-                        },
-                        // IsList or not, but contains the Navigator
-                        prop.ToRelationEnd("A_" + prop.ObjectClass.ClassName, "Right, no Relation, prop ID=" + prop.ID)
+                            Type = ((ObjectClass)prop.ReferenceObjectClass).GetTypeMoniker(),
+                            Multiplicity = prop.IsList ? Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne, 
+                            RoleName = prop.PropertyName,
+                            HasPersistentOrder = prop.IsIndexed,
+                            DebugCreationSite = "B, no Relation, prop ID=" + prop.ID
+                        }
                     ));
                 }
                 else
@@ -184,14 +231,22 @@ namespace Kistl.Server.Movables
                 var result = new Dictionary<Property, NewRelation>();
                 foreach (var rel in GetAll(ctx))
                 {
-                    result[rel.Right.Navigator] = rel;
-                    if (rel.Left.Navigator != null)
-                        result[rel.Left.Navigator] = rel;
+                    result[rel.A.Navigator] = rel;
+                    if (rel.B.Navigator != null)
+                        result[rel.B.Navigator] = rel;
 
                 }
                 _PropertyToRelation = result;
             }
-            return _PropertyToRelation[prop];
+
+            if (_PropertyToRelation.ContainsKey(prop))
+            {
+                return _PropertyToRelation[prop];
+            }
+            else
+            {
+                return null;
+            }
         }
 
     }

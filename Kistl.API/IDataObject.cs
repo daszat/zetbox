@@ -151,26 +151,27 @@ namespace Kistl.API
     {
     }
 
+	// TODO: Remove "New" when new Generator works
     /// <summary>
     /// Typed Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
-    public interface INewCollectionEntry<LEFT, RIGHT> : ICollectionEntry
+    public interface INewCollectionEntry<AType, BType> : ICollectionEntry
     {
         /// <summary>
-        /// Left part of this collection entry
+        /// A part of this collection entry
         /// </summary>
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        LEFT Left { get; set; }
+        AType A { get; set; }
         /// <summary>
-        /// Right part of this collection entry
+        /// B part of this collection entry
         /// </summary>
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        RIGHT Right { get; set; }
+        BType B { get; set; }
         /// <summary>
         /// foreign key to the parent
         /// </summary>
-        int fk_Right { get; set; }
+        int fk_A { get; set; }
     }
 
     // TODO: rename INewCollectionEntry to this
@@ -187,7 +188,17 @@ namespace Kistl.API
         int? ParentIndex { get; set; }
     }
 
+    public interface INewCollectionEntrySorted : ICollectionEntry
+    {
+        int? AIndex { get; set; }
+        int? BIndex { get; set; }
+    }
+
     public interface ICollectionEntrySorted<VALUE, PARENT> : ICollectionEntry<VALUE, PARENT>, ICollectionEntrySorted
+    {
+    }
+
+    public interface INewListEntry<AType, BType> : INewCollectionEntry<AType, BType>, INewCollectionEntrySorted
     {
     }
 

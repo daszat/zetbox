@@ -27,23 +27,24 @@ using Kistl.DALProvider.EF;
 	{
 %>
 
-
-// NewRelation: <%= rel.GetAssociationName() %> 
-// Right: <%= rel.Right.Referenced.ClassName %>.<%= rel.Right.Navigator != null ? rel.Right.Navigator.PropertyName : "" %>  (<%= rel.Right.Multiplicity %>) (site: <%= rel.Right.DebugCreationSite %>)
-// Left: <%= rel.Left.Referenced.ClassName %>.<%= rel.Left.Navigator != null ? rel.Left.Navigator.PropertyName : "" %> (<%= rel.Left.Multiplicity %>) (site: <%= rel.Left.DebugCreationSite %>)
-// Preferred Storage: <%= rel.GetPreferredStorage() %>
+	/*
+<%
+	CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+%>
+	*/
 <%
 		switch (rel.GetPreferredStorage())
 		{
 			case StorageHint.MergeLeft:
 			case StorageHint.MergeRight:
+			case StorageHint.Replicate:
 %>
 
 // basic association
 [assembly: EdmRelationship(
     "Model", "<%= rel.GetAssociationName() %>",
-    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.<%= rel.Right.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
-    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.<%= rel.Left.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>)
+    "<%= rel.A.RoleName %>", RelationshipMultiplicity.<%= rel.A.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.A.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "<%= rel.B.RoleName %>", RelationshipMultiplicity.<%= rel.B.Multiplicity.ToCsdlRelationshipMultiplicity() %>, typeof(<%= rel.B.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>)
     )]
 
 <%
@@ -51,24 +52,20 @@ using Kistl.DALProvider.EF;
 			case StorageHint.Separate:
 %>
 
-// The association from Right to the CollectionEntry
-[assembly: EdmRelationship("Model", "<%= rel.GetRightToCollectionEntryAssociationName() %>",
-    "<%= rel.Right.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Right.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
-    "Right", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "<%= rel.GetCollectionEntryAssociationName(rel.A) %>",
+    "<%= rel.A.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.A.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "<%= rel.GetCollectionEntryAssociationName(rel.B) %>",
+    "<%= rel.B.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.B.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
     )]
 <%
-				if (rel.IsTwoProngedAssociation(ctx))
-				{
-%>
-// The association from Left to the CollectionEntry
-[assembly: EdmRelationship("Model", "<%= rel.GetLeftToCollectionEntryAssociationName() %>",
-    "<%= rel.Left.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.Left.Referenced.NameDataObject + Kistl.API.Helper.ImplementationSuffix %>),
-    "Left", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
-    )]
-<%
-				}
-
 				break;
+			default:
+				throw new NotImplementedException(String.Format("Unknown StorageHint.{0} preference", rel.GetPreferredStorage()));
 		}
 	}
 
