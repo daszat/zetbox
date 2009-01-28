@@ -51,8 +51,8 @@ this.WriteObjects("	*/\r\n");
 #line 36 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 switch (rel.GetPreferredStorage())
 		{
-			case StorageHint.MergeLeft:
-			case StorageHint.MergeRight:
+			case StorageHint.MergeA:
+			case StorageHint.MergeB:
 			case StorageHint.Replicate:
 
 #line 42 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"

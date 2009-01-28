@@ -62,7 +62,27 @@ this.WriteObjects("	using ",  rel.B.Type.Namespace , ";\r\n");
 
 #line 48 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("}\r\n");
-#line 51 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+}
+
+
+	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.PropertyName))
+	{
+
+
+#line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("namespace ",  prop.ObjectClass.Module.Namespace , "\r\n");
+this.WriteObjects("{\r\n");
+#line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+this.CallTemplate("Implementation.ObjectClasses.ValueCollectionEntry", ctx, prop);
+
+#line 66 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
+this.WriteObjects("}\r\n");
+#line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cst"
 }
 
 

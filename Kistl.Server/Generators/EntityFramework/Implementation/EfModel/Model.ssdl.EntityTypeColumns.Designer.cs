@@ -54,14 +54,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 			string maxLengthAttr = "";
 			if (p is StringProperty)
 			{
-				// must have space in back
+				// must have one space at the end
 				maxLengthAttr = String.Format("MaxLength=\"{0}\" ", ((StringProperty)p).Length);
 			}
 			
 			string nullableAttr = "";
 			if (p.IsValueTypePropertySingle())
 			{
-				// must have space in back
+				// must have one space at the end
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable.ToString().ToLowerInvariant());
 			}
 

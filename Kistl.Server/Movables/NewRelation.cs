@@ -98,8 +98,8 @@ namespace Kistl.Server.Movables
             {
                 // 1:1 relations can be hinted left, right, both or separate
                 return new HashSet<StorageHint>() { 
-                    StorageHint.MergeLeft, 
-                    StorageHint.MergeRight, 
+                    StorageHint.MergeA, 
+                    StorageHint.MergeB, 
                     StorageHint.Replicate, 
                     StorageHint.Separate 
                 };
@@ -108,7 +108,7 @@ namespace Kistl.Server.Movables
             {
                 // 1:N relations can only be attached to the right end
                 return new HashSet<StorageHint>() { 
-                    StorageHint.MergeRight, 
+                    StorageHint.MergeB, 
                     StorageHint.Separate 
                 };
             }
@@ -116,7 +116,7 @@ namespace Kistl.Server.Movables
             {
                 // N:1 relations can only be attached to the left end
                 return new HashSet<StorageHint>() { 
-                    StorageHint.MergeLeft, 
+                    StorageHint.MergeA, 
                     StorageHint.Separate 
                 };
             }

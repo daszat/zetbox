@@ -15,13 +15,13 @@ namespace Kistl.Server.Movables
     public enum StorageHint
     {
         /// <summary>
-        /// Hints that the relations information should be stored with the left entity.
+        /// Hints that the relations information should be stored with the A-side entity.
         /// </summary>
-        MergeLeft = 1,
+        MergeA = 1,
         /// <summary>
-        /// Hints that the relations information should be stored with the right entity.
+        /// Hints that the relations information should be stored with the B-side entity.
         /// </summary>
-        MergeRight = 2,
+        MergeB = 2,
         /// <summary>
         /// Hints that the relations information should be stored with both entities.
         /// </summary>
@@ -49,9 +49,9 @@ namespace Kistl.Server.Movables
             switch (type.Value)
             {
                 case StorageType.Left:
-                    return StorageHint.MergeLeft;
+                    return StorageHint.MergeA;
                 case StorageType.Right:
-                    return StorageHint.MergeRight;
+                    return StorageHint.MergeB;
                 case StorageType.Replicate:
                     return StorageHint.Replicate;
                 default:

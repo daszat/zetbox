@@ -11,7 +11,6 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Movables" %>
-
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="rel" Type="NewRelation" %>
 <%

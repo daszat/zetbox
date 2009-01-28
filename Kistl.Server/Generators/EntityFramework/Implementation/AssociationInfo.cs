@@ -174,6 +174,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         public AssociationSideInfo BSide { get; protected set; }
 
         public TypeMoniker CollectionEntry { get { return Construct.PropertyCollectionEntryType(this.Property); } }
+        /// <summary>
+        /// Compatability method to NewRelation's vocabulary
+        /// </summary>
+        /// <returns></returns>
+        public string GetCollectionEntryClassName() { return this.CollectionEntry.ClassName; }
 
         public string PropertyName { get; protected set; }
 

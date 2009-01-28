@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.Server.GeneratorsOld;
+using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.Extensions
 {
@@ -36,5 +37,20 @@ namespace Kistl.Server.Generators.Extensions
             }
         }
 
+        public static string ToDbType(this ValueTypeProperty prop)
+        {
+            if (prop is IntProperty)
+                return "int";
+            if (prop is StringProperty)
+                return "nvarchar";
+            if (prop is DoubleProperty)
+                return "float";
+            if (prop is BoolProperty)
+                return "bit";
+            if (prop is DateTimeProperty)
+                return "datetime";
+
+            throw new ArgumentOutOfRangeException("prop", "unknown ValueTypeProperty type: " + prop.GetType().FullName);
+        }
     }
 }

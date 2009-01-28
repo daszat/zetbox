@@ -26,24 +26,64 @@
 <%	}
 
 %>
-    <!-- EntitySets for all CollectionEntrys -->
+    <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
 <%
 	foreach(var rel in NewRelation.GetAll(ctx).ToList()
 		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
 		.OrderBy(r => r.GetAssociationName()))
 	{
 		string entityName = rel.GetCollectionEntryClassName();
+		string assocNameA = rel.GetCollectionEntryAssociationName(rel.GetEnd(RelationEndRole.A));
+		string assocNameB = rel.GetCollectionEntryAssociationName(rel.GetEnd(RelationEndRole.B));
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
+    <AssociationSet Name="<%= assocNameB %>" Association="Model.<%= assocNameB %>" >
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
 <%
 	}
 %>
 
-
-    <!-- AssociationSets -->
+    <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
 <%
-	ApplyAssociationSets();
+	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.PropertyName))
+	{
+		string assocName = prop.GetAssociationName();
+		string entityName = prop.GetCollectionEntryClassName();
 %>
+    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
+      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= prop.ObjectClass.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
+<%
+	}
+%>
+
+    <!-- AssociationSets for all object-object relations without CollectionEntrys -->
+<%
+	foreach(var rel in NewRelation.GetAll(ctx).ToList()
+		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
+	{
+		string assocName = rel.GetAssociationName();
+%>
+    <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+    </AssociationSet>
+<%
+	}
+%>
+
   </EntityContainer>
   
   <!-- EntityTypes for all base classes -->
@@ -74,7 +114,7 @@
 	}
 %>
 
-  <!-- EntityTypes for all CollectionEntrys with separate storage -->
+  <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
 <%
 	foreach(var rel in NewRelation.GetAll(ctx).ToList()
 		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
@@ -121,9 +161,91 @@
 		}
 %>
   </EntityType>
+  <Association Name="<%= rel.GetCollectionEntryAssociationName(rel.A) %>" >
+    <End Role="<%= rel.A.RoleName %>"
+         Type="Model.<%= rel.A.Type.ClassName %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= rel.GetCollectionEntryClassName() %>"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="<%= rel.GetCollectionEntryAssociationName(rel.B) %>" >
+    <End Role="<%= rel.B.RoleName %>"
+         Type="Model.<%= rel.B.Type.ClassName %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= rel.GetCollectionEntryClassName() %>"
+         Multiplicity="*" />
+  </Association>
+  
+<%
+    }
+%>
+
+
+  <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
+<%
+	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.PropertyName))
+	{
+
+%>
+  <!-- <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
+  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= prop.ObjectClass.ClassName %>" />
+    <!-- B -->
+    <%= PlainPropertyDefinitionFromValueType(prop) %>
+<%
+		if (prop.IsIndexed)
+		{
+%>
+    <Property Name="<%= prop.PropertyName %>Index" Type="Int32" Nullable="false" />
+<%
+		}
+%>
+  </EntityType>
+  <Association Name="<%= prop.GetAssociationName() %>" >
+    <End Role="<%= prop.ObjectClass.ClassName %>"
+         Type="Model.<%= prop.ObjectClass.ClassName %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
+         Multiplicity="*" />
+  </Association>
 <%
 	}
 %>
+
+    <!-- Associations for all object-object relations without CollectionEntrys -->
+<%
+	foreach(var rel in NewRelation.GetAll(ctx).ToList()
+		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
+	{
+%>
+    <Association Name="<%= rel.GetAssociationName() %>" >
+      <End Role="<%= rel.A.RoleName %>"
+           Type="Model.<%= rel.A.Type.ClassName %>" 
+           Multiplicity="<%= rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
+      <End Role="<%= rel.B.RoleName %>"
+           Type="Model.<%= rel.B.Type.ClassName %>" 
+           Multiplicity="<%= rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
+    </Association>
+<%
+	}
+%>
+
 
   <!-- ComplexTypes for all structs -->
 <%
@@ -137,8 +259,4 @@
 
 %>
 
-  <!-- Associations -->
-<%
-	ApplyAssociations();
-%>
 </Schema>

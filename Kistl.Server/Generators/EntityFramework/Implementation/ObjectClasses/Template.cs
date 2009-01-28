@@ -78,8 +78,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 
                 switch (rel.GetPreferredStorage())
                 {
-                    case StorageHint.MergeLeft:
-                    case StorageHint.MergeRight:
+                    case StorageHint.MergeA:
+                    case StorageHint.MergeB:
                     case StorageHint.Replicate:
 
                         // simple and direct reference
@@ -117,27 +117,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             else
             {
                 base.ApplyPropertyTemplate(p);
-            }
-        }
-
-        protected override void ApplyNamespaceTailTemplate()
-        {
-            base.ApplyNamespaceTailTemplate();
-            var dt = this.DataType;
-            foreach (var prop in ctx.GetAssociationPropertiesWithStorage()
-                .Where(p => p.ObjectClass == this.DataType))
-            {
-                string template;
-                if (prop is ValueTypeProperty)
-                {
-                    template = "Implementation.ObjectClasses.ValueCollectionEntry";
-                }
-                else
-                {
-                    return;
-                }
-
-                CallTemplate(template, ctx, prop);
             }
         }
 

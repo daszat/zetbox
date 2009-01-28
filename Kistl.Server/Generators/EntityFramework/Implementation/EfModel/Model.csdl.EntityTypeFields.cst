@@ -58,33 +58,25 @@
 		}
 		else if (p is ValueTypeProperty)
 		{
-			// ValueTypeProperty
-			string name = p.PropertyName;
-			string type = p.GetPropertyTypeString();
-			string maxlength = "";
-			
-			if (p is EnumerationProperty)
+			var prop = (ValueTypeProperty)p;
+			if (prop.IsList)
 			{
-				name += Kistl.API.Helper.ImplementationSuffix;
-				type = "Int32";
+%>
+    <NavigationProperty Name="<%= prop.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="<%= prop.ObjectClass.ClassName %>"
+                        ToRole="CollectionEntry" />
+<%
 			}
 			else
 			{
-				// translate to short name
-				type = Type.GetType(type).Name;
-			}
-
-			if (p is StringProperty)
-			{
-				maxlength = String.Format("MaxLength=\"{0}\" ",((StringProperty)p).Length.ToString());
-			}
 %>
-    <Property Name="<%= name %>" Type="<%= type %>" Nullable="<%= ((ValueTypeProperty)p).IsNullable.ToString().ToLowerInvariant() %>" <%= maxlength %>/>
+    <%= ModelCsdl.PlainPropertyDefinitionFromValueType((ValueTypeProperty)p) %>
 <%
+			}
 		}
 		else if (p is StructProperty)
 		{
-			// ValueTypeProperty
 			// Nullable Complex types are not supported by EF
 %>
     <Property Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"

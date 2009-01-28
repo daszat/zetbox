@@ -5,6 +5,7 @@ using System.Text;
 using Kistl.Server.Movables;
 using System.Data.Metadata.Edm;
 using Kistl.API;
+using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation
 {
@@ -17,21 +18,24 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// </summary>
         public static StorageHint GetPreferredStorage(this NewRelation rel)
         {
-            if (rel.B.Multiplicity.UpperBound() == 1 && rel.A.Multiplicity.UpperBound() == 1)
+            if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() == 1)
             {
                 // arbitrary 1:1 relations default 
-                return StorageHint.MergeRight;
+                return StorageHint.MergeA;
             }
-            else if (rel.B.Multiplicity.UpperBound() == 1 && rel.A.Multiplicity.UpperBound() > 1)
+            else if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() > 1)
             {
-                return StorageHint.MergeRight;
+                // if multiple Bs can exist, they get the fk
+                return StorageHint.MergeB;
             }
-            else if (rel.B.Multiplicity.UpperBound() > 1 && rel.A.Multiplicity.UpperBound() == 1)
+            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() == 1)
             {
-                return StorageHint.MergeLeft;
+                // if multiple As ca exist, they get the fk
+                return StorageHint.MergeA;
             }
-            else if (rel.B.Multiplicity.UpperBound() > 1 && rel.A.Multiplicity.UpperBound() > 1)
+            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1)
             {
+                // N:M needs "weak" entity
                 return StorageHint.Separate;
             }
 
@@ -48,27 +52,19 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         }
 
         /// <summary>
+        /// Returns the association name for the given ValueTypeProperty
+        /// </summary>
+        public static string GetAssociationName(this ValueTypeProperty prop)
+        {
+            return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, prop.GetPropertyType().Name, prop.PropertyName);
+        }
+
+        /// <summary>
         /// Returns the association name for the association from the given end to the CollectionEntry
         /// </summary>
         public static string GetCollectionEntryAssociationName(this NewRelation rel, RelationEnd end)
         {
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.B.Type.ClassName, end.RoleName, rel.ID);
-        }
-
-        /// <summary>
-        /// Returns the association name for the association from the A end to the CollectionEntry
-        /// </summary>
-        public static string GetAToCollectionEntryAssociationName(this NewRelation rel)
-        {
-            return rel.GetCollectionEntryAssociationName(rel.A);
-        }
-
-        /// <summary>
-        /// Returns the association name for the association from the B end to the CollectionEntry
-        /// </summary>
-        public static string GetBToCollectionEntryAssociationName(this NewRelation rel)
-        {
-            return rel.GetCollectionEntryAssociationName(rel.B);
         }
 
         public static string GetCollectionEntryClassName(this NewRelation rel)
@@ -79,6 +75,16 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         public static string GetCollectionEntryFullName(this NewRelation rel)
         {
             return String.Format("{0}.{1}", rel.A.Type.Namespace, rel.GetCollectionEntryClassName());
+        }
+
+        public static string GetCollectionEntryClassName(this ValueTypeProperty prop)
+        {
+            return String.Format("{0}_{1}CollectionEntry", prop.ObjectClass.ClassName, prop.PropertyName);
+        }
+
+        public static string GetCollectionEntryFullName(this ValueTypeProperty prop)
+        {
+            return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
         }
 
         /// <summary>
@@ -101,6 +107,24 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             }
         }
 
+        /// <summary>
+        /// maps from a NewRelationship.Multiplicity to EF's RelationshipMultiplicity as used in the SSDL part of EDMX
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public static RelationshipMultiplicity ToSsdlMultiplicity(this Multiplicity m)
+        {
+            switch (m)
+            {
+                case Multiplicity.One:
+                case Multiplicity.ZeroOrOne:
+                    return RelationshipMultiplicity.ZeroOrOne;
+                case Multiplicity.ZeroOrMore:
+                    return RelationshipMultiplicity.Many;
+                default:
+                    throw new ArgumentOutOfRangeException("m");
+            }
+        }
         /// <summary>
         /// Calculate how the RelationshipMultiplicity is written as EDMX attribute value
         /// </summary>

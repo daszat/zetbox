@@ -11,6 +11,7 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
@@ -29,62 +30,102 @@
 %>
 
 
-    <!-- EntitySetMappings for collections -->
+    <!-- EntitySetMappings for relations -->
 <%
-	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
+	foreach(var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
 	{
-		var info = AssociationInfo.CreateInfo(ctx, prop);
 %>
-    <EntitySetMapping Name="<%= info.BSide.Type.ClassName %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= info.BSide.Type.ClassName %>)">
-        <MappingFragment StoreEntitySet="<%= info.BSide.Type.ClassName %>">
+    <!--
+<%
+	CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+%>
+    -->
+    <EntitySetMapping Name="<%= rel.GetCollectionEntryClassName() %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetCollectionEntryClassName() %>)">
+        <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <%
-	if (prop is ValueTypeProperty)
+	if (rel.A.HasPersistentOrder)
 	{
 %>
-          <ScalarProperty Name="Value" ColumnName="<%= prop.PropertyName %>" />
-<%	}
+          <ScalarProperty Name="AIndex" ColumnName="AIndex" />
+<%
+	}
 
-	if (prop.NeedsPositionColumn())
+	if (rel.B.HasPersistentOrder)
 	{
 %>
-          <ScalarProperty Name="ValueIndex" ColumnName="<%= Construct.ListPositionColumnName(prop, "") %>" />
-<%	}
-
-	if (prop.IsIndexed)
-	{
-%>
-          <ScalarProperty Name="ValueIndex" ColumnName="<%= Construct.ListPositionColumnName(prop.ObjectClass) %>" />
-<%	}
+          <ScalarProperty Name="BIndex" ColumnName="BIndex" />
+<%
+	}
 %>
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
+                           TypeName="Model.<%= rel.GetAssociationName() %>"
+                           StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
+      <EndProperty Name="<%= rel.A.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="fk_A"/>
+      </EndProperty>
+      <EndProperty Name="A">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_A" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
+                           TypeName="Model.<%= rel.GetAssociationName() %>"
+                           StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
+      <EndProperty Name="<%= rel.A.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="fk_A"/>
+      </EndProperty>
+      <EndProperty Name="<%= rel.B.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_A" IsNull="false"/>
+    </AssociationSetMapping>
+
 <%
 	}
 	
 %>
 
-
-    <!-- AssociationSetMappings -->
+    <!-- EntitySetMappings for ValueType lists -->
 <%
-	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
+	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+		.Where(p => p.IsList))
+	{ 
+	#if false // TODO
+%>
+    <EntitySetMapping Name="<%= rel.GetCollectionEntryClassName() %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetCollectionEntryClassName() %>)">
+        <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+<%
+	if (rel.A.HasPersistentOrder)
 	{
-		var info = AssociationInfo.CreateInfo(ctx, prop);
-		var colName = prop.IsList ? prop.ObjectClass.ClassName : prop.PropertyName;
 %>
-    <!-- <%= info.GetType().Name %> -->
-    <AssociationSetMapping Name="<%= info.AssociationName %>" TypeName="Model.<%= info.AssociationName %>" StoreEntitySet="<%= info.BSide.StorageEntitySet %>" >
-      <EndProperty Name="<%= info.ASide.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= colName %>"/>
-      </EndProperty>
-      <EndProperty Name="<%= info.BSide.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_<%= colName %>" IsNull="false"/>
-    </AssociationSetMapping>
-<%	}
+          <ScalarProperty Name="AIndex" ColumnName="AIndex" />
+<%
+	}
+
+	if (rel.B.HasPersistentOrder)
+	{
 %>
+          <ScalarProperty Name="BIndex" ColumnName="BIndex" />
+<%
+	}
+%>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+<%
+	#endif
+	}
+	
+%>
+
   </EntityContainerMapping>
 </Mapping>

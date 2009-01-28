@@ -11,6 +11,7 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl"
@@ -36,6 +37,7 @@
 		var info = new InheritanceStorageAssociationInfo(cls);
 %>
     <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
+    <!-- inherits from <%= info.ParentEntitySetName %> -->
     <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
       <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
       <End Role="<%= info.ChildRoleName %>" EntitySet="<%= info.ChildEntitySetName %>" />
@@ -44,29 +46,75 @@
 <%	}
 %>
 
-    <!-- EntitySets for all CollectionEntrys -->
+    <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetObjectListPropertiesWithStorage())
+	foreach(var rel in NewRelation.GetAll(ctx)
+		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
 	{
-		string entityName = Construct.PropertyCollectionEntryType(prop).ClassName;
+		string assocNameA = rel.GetCollectionEntryAssociationName(rel.A);
+		string assocNameB = rel.GetCollectionEntryAssociationName(rel.B);
+		string esName = rel.GetCollectionEntryClassName();
+		
 %>
-    <EntitySet Name="<%= entityName %>" EntityType="Model.Store.<%= entityName %>" />
-<%	}
+    <!-- 
+<%
+    CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+%>
+    -->
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= esName %>" />
+    <AssociationSet Name="<%= assocNameA %>" Association="Model.Store.<%= assocNameA %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= esName %>" />
+    </AssociationSet>
+    <AssociationSet Name="<%= assocNameB %>" Association="Model.Store.<%= assocNameB %>" >
+      <End Role="CollectionEntry" EntitySet="<%= esName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+    </AssociationSet>
+    
+<%
+	}
 %>
 
-    <!-- AssociationSets -->
+
+    <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetAssociationPropertiesWithStorage())
+	foreach(var rel in NewRelation.GetAll(ctx)
+		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
 	{
-		var info = AssociationInfo.CreateInfo(ctx, prop);
+		string assocName = rel.GetAssociationName();
+		
 %>
-    <!-- <%= info.GetType().Name %> -->
-    <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
-      <End Role="<%= info.ASide.RoleName %>" EntitySet="<%= info.ASide.StorageEntitySet %>" />
-      <End Role="<%= info.BSide.RoleName %>" EntitySet="<%= info.BSide.StorageEntitySet %>" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
     </AssociationSet>
-<%	}
+<%
+	}
 %>
+
+    <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->
+<%
+	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.PropertyName))
+	{
+		string assocName = prop.GetAssociationName();
+		string esName = prop.GetCollectionEntryClassName();
+%>
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= ((ObjectClass)prop.ObjectClass).TableName %>_<%= prop.PropertyName %>Collection" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
+      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= prop.ObjectClass.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= esName %>" />
+    </AssociationSet>
+    
+<%
+	}
+%>
+
+
   </EntityContainer>
 
   <!-- EntityTypes for all classes -->
@@ -86,38 +134,115 @@
 <%	}
 %>
 
-  <!-- EntityTypes for all CollectionEntrys -->
+  <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 <%
-	foreach(var p in ctx.GetObjectListPropertiesWithStorage())
+	foreach(var rel in NewRelation.GetAll(ctx)
+		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
 	{
-		TypeMoniker otherType = Construct.PropertyCollectionEntryType(p);
+		string ceName = rel.GetCollectionEntryClassName();
 %>	
-  <EntityType Name="<%= otherType.ClassName %>">
+  <EntityType Name="<%= ceName %>">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="<%= Construct.ForeignKeyColumnNameReferencing(p.ObjectClass) %>" Type="int" Nullable="true" />
+    <Property Name="fk_A" Type="int" Nullable="true" />
 <%
-		if (p.IsIndexed)
+		if (rel.A.HasPersistentOrder)
 		{
 %>
-    <Property Name="<%= Construct.ForeignListPositionColumnName(p.ObjectClass) %>" Type="int" Nullable="true" />
+    <Property Name="AIndex" Type="int" Nullable="true" />
 <%
 		}
-	
-		ApplyEntityTypeColumnDefs(new List<Property>() { p } );
+%>
+    <Property Name="fk_B" Type="int" Nullable="true" />
+<%
+		if (rel.B.HasPersistentOrder)
+		{
+%>
+    <Property Name="BIndex" Type="int" Nullable="true" />
+<%
+		}
 %>
   </EntityType>
-<%	}
 
+  <!-- A to CollectionEntry -->
+  <Association Name="<%= rel.GetCollectionEntryAssociationName(rel.A) %>">
+    <End Role="<%= rel.A.RoleName %>" Type="Model.Store.<%= rel.A.Type.ClassName %>" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="<%= rel.A.RoleName %>">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_A" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 
-	// define associations between entities
-	
+  <!-- B to CollectionEntry -->
+  <Association Name="<%= rel.GetCollectionEntryAssociationName(rel.B) %>">
+    <End Role="<%= rel.B.RoleName %>" Type="Model.Store.<%= rel.B.Type.ClassName %>" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="<%= rel.B.RoleName %>">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_B" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+<%
+	}
 %>
 
 
-  <!-- First, all derived->base ObjectClass references -->
+  <!-- EntityTypes for all object-object relations without CollectionEntry (1:1, 1:N) -->
+<%
+	foreach(var rel in NewRelation.GetAll(ctx)
+		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
+		.OrderBy(r => r.GetAssociationName()))
+	{
+		RelationEnd principal, dependent;
+	
+		switch(rel.GetPreferredStorage())
+		{
+			case StorageHint.MergeA:
+				principal = rel.B;
+				dependent = rel.A;
+				break;
+			case StorageHint.MergeB:
+				principal = rel.A;
+				dependent = rel.B;
+				break;
+			default:
+				throw new NotImplementedException();
+		}
+%>
+
+  <Association Name="<%= rel.GetAssociationName() %>">
+    <End Role="<%= principal.RoleName %>" Type="Model.Store.<%= principal.Type.ClassName %>" Multiplicity="<%= principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() %>" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="<%= dependent.RoleName %>" Type="Model.Store.<%= dependent.Type.ClassName %>" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="<%= principal.RoleName %>">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="<%= dependent.RoleName %>">
+        <PropertyRef Name="fk_<%= principal.RoleName %>" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+<%
+	}
+%>
+
+
+  <!-- derived->base ObjectClass references -->
 <%
 	foreach(var cls in ctx.GetDerivedClasses())
 	{
@@ -143,24 +268,62 @@
 %>
 
 
-  <!-- then all ObjectReferences -->
+    <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
 <%
-	foreach(var p in ctx.GetAssociationPropertiesWithStorage()) 
+	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.PropertyName))
 	{
-		var info = AssociationInfo.CreateInfo(ctx, p);
+		string assocName = prop.GetAssociationName();
+		
+		// the name of the class containing this list
+		string containerTypeName = prop.ObjectClass.ClassName;
+		// the name of the CollectionEntry class
+		string entryTypeName = prop.GetCollectionEntryClassName();
+		// the name of the contained type
+		string itemTypeName = prop.ToDbType();
+		
+		string constraint = "";
+		if (prop is StringProperty) {
+			var sProp = (StringProperty)prop;
+			constraint += String.Format("MaxLength=\"{0}\" ", sProp.Length);
+		}
+
 %>
-  <!-- <%= info.GetType().Name %> -->
-  <Association Name="<%= info.AssociationName %>">
-    <End Role="<%= info.ASide.RoleName %>" Type="Model.Store.<%= info.ASide.Type.ClassName %>" Multiplicity="<%= info.ASide.StorageMultiplicity %>" />
-    <End Role="<%= info.BSide.RoleName %>" Type="Model.Store.<%= info.BSide.Type.ClassName %>" Multiplicity="<%= info.BSide.StorageMultiplicity %>" />
-    <ReferentialConstraint>
-      <Principal Role="<%= info.ASide.RoleName %>">
+    <EntityType Name="<%= entryTypeName %>" >
+      <Key>
         <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="<%= info.BSide.RoleName %>">
-        <PropertyRef Name="<%= info.ForeignKeyColumnName %>" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-<%	} %>
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_<%= containerTypeName %>" Type="int" Nullable="true" />
+      <Property Name="<%= prop.PropertyName %>" Type="<%= itemTypeName %>" <%= constraint %>/>
+<%
+		if (prop.IsIndexed)
+		{
+%>
+    <Property Name="<%= prop.PropertyName %>Index" Type="int" Nullable="true" />
+<%
+		}
+%>
+    </EntityType>
+
+    <Association Name="<%= prop.GetAssociationName() %>">
+      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerTypeName %>" Multiplicity="0..1" />
+      <End Role="CollectionEntry" Type="Model.Store.<%= entryTypeName %>" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="<%= containerTypeName %>">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_<%= containerTypeName %>" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
+<%
+	}
+%>
+
+
 </Schema>

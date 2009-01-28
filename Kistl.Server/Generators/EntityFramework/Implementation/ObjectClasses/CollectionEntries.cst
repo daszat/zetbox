@@ -47,6 +47,23 @@ namespace <%= rel.A.Type.Namespace %>
 %>
 }
 <%
-		
+	}
+
+
+	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.PropertyName))
+	{
+
+%>
+
+namespace <%= prop.ObjectClass.Module.Namespace %>
+{
+<%
+		this.CallTemplate("Implementation.ObjectClasses.ValueCollectionEntry", ctx, prop);
+%>
+}
+<%
 	}
 %>
