@@ -30,9 +30,11 @@
 %>
 
 
-    <!-- EntitySetMappings for relations -->
+    <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx).OrderBy(r => r.GetAssociationName()))
+	foreach(var rel in NewRelation.GetAll(ctx)
+        .Where(r => r.GetPreferredStorage() == StorageHint.Separate)
+        .OrderBy(r => r.GetAssociationName()))
 	{
 %>
     <!--
@@ -63,28 +65,28 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
-                           TypeName="Model.<%= rel.GetAssociationName() %>"
+    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(rel.A) %>"
+                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(rel.A) %>"
                            StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= rel.A.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="fk_A"/>
       </EndProperty>
-      <EndProperty Name="A">
+      <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_A" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
-                           TypeName="Model.<%= rel.GetAssociationName() %>"
+    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
+                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
                            StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
-      <EndProperty Name="<%= rel.A.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_A"/>
-      </EndProperty>
       <EndProperty Name="<%= rel.B.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="fk_B"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_A" IsNull="false"/>
+      <Condition ColumnName="fk_B" IsNull="false"/>
     </AssociationSetMapping>
 
 <%
@@ -92,26 +94,65 @@
 	
 %>
 
-    <!-- EntitySetMappings for ValueType lists -->
+
+    <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
 <%
-	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
-		.Where(p => p.IsList))
-	{ 
-	#if false // TODO
-%>
-    <EntitySetMapping Name="<%= rel.GetCollectionEntryClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetCollectionEntryClassName() %>)">
-        <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-<%
-	if (rel.A.HasPersistentOrder)
+	foreach(var rel in NewRelation.GetAll(ctx)
+        .Where(r => r.GetPreferredStorage() != StorageHint.Separate)
+        .OrderBy(r => r.GetAssociationName()))
 	{
+		RelationEnd principal, dependent;
+	
+		switch(rel.GetPreferredStorage())
+		{
+			case StorageHint.MergeA:
+				principal = rel.B;
+				dependent = rel.A;
+				break;
+			case StorageHint.MergeB:
+				principal = rel.A;
+				dependent = rel.B;
+				break;
+			default:
+				throw new NotImplementedException();
+		}
 %>
-          <ScalarProperty Name="AIndex" ColumnName="AIndex" />
+    <!--
+<%
+	CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+%>
+    -->
+    <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
+                           TypeName="Model.<%= rel.GetAssociationName() %>"
+                           StoreEntitySet="<%= dependent.Type.ClassName %>" >
+      <EndProperty Name="<%= principal.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <EndProperty Name="<%= dependent.RoleName %>">
+        <ScalarProperty Name="ID" ColumnName="fk_<%= principal.RoleName %>"/>
+      </EndProperty>
+      <Condition ColumnName="fk_<%= principal.RoleName %>" IsNull="false"/>
+    </AssociationSetMapping>
 <%
 	}
+	
+%>
 
-	if (rel.B.HasPersistentOrder)
+    <!-- EntitySetMappings and AssociationSetMappings for ValueType lists -->
+<%
+	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.PropertyName))
+	{ 
+%>
+    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
+        <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="<%= prop.PropertyName %>" ColumnName="<%= prop.PropertyName %>" />
+<%
+	if (prop.IsIndexed)
 	{
 %>
           <ScalarProperty Name="BIndex" ColumnName="BIndex" />
@@ -121,8 +162,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="<%= prop.GetAssociationName() %>"
+                           TypeName="Model.<%= prop.GetAssociationName() %>"
+                           StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
+      <EndProperty Name="<%= prop.ObjectClass.ClassName %>">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.ClassName %>"/>
+      </EndProperty>
+      <Condition ColumnName="fk_<%= prop.ObjectClass.ClassName %>" IsNull="false"/>
+    </AssociationSetMapping>
 <%
-	#endif
 	}
 	
 %>

@@ -200,7 +200,7 @@
 %>
 
 
-  <!-- EntityTypes for all object-object relations without CollectionEntry (1:1, 1:N) -->
+  <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
 <%
 	foreach(var rel in NewRelation.GetAll(ctx)
 		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)

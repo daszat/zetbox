@@ -239,7 +239,7 @@ this.WriteObjects("\r\n");
 #line 201 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- EntityTypes for all object-object relations without CollectionEntry (1:1, 1:N) -->\r\n");
+this.WriteObjects("  <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->\r\n");
 #line 205 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
 foreach(var rel in NewRelation.GetAll(ctx)
 		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
