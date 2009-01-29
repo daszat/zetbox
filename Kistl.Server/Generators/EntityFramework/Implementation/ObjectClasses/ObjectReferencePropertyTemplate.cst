@@ -13,7 +13,7 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="name" Type="String" %>
 <%@ Parameter Name="associationName" Type="String" %>
-<%@ Parameter Name="roleName" Type="String" %>
+<%@ Parameter Name="targetRoleName" Type="String" %>
 <%@ Parameter Name="referencedInterface" Type="String" %>
 <%@ Parameter Name="referencedImplementation" Type="String" %>
 <%
@@ -61,7 +61,7 @@
         private int <%= fkBackingName %>;
         
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= roleName %>")]
+        [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= targetRoleName %>")]
         public <%= referencedImplementation %> <%= efName %>
         {
             get
@@ -69,7 +69,7 @@
                 EntityReference<<%= referencedImplementation %>> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(
                         "Model.<%= associationName %>",
-                        "<%= roleName %>");
+                        "<%= targetRoleName %>");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -82,7 +82,7 @@
                 EntityReference<<%= referencedImplementation %>> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(
                         "Model.<%= associationName %>",
-                        "<%= roleName %>");
+                        "<%= targetRoleName %>");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {

@@ -76,14 +76,14 @@ namespace Kistl.API.Server
     #endregion
 
     #region EntityCollectionWrapperSorted
-    public class EntityCollectionWrapperSorted<INTERFACE, IMPL> : 
-        EntityCollectionWrapper<INTERFACE, IMPL>, 
-        IList<INTERFACE>
+    public class EntityCollectionWrapperSorted<INTERFACE, IMPL>
+        : EntityCollectionWrapper<INTERFACE, IMPL>, IList<INTERFACE>
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
         where INTERFACE : class, IDataObject
     {
         private string _pointerProperty = "";
-        public EntityCollectionWrapperSorted(EntityCollection<IMPL> ec, string pointerProperty) : base(ec)
+        public EntityCollectionWrapperSorted(EntityCollection<IMPL> ec, string pointerProperty)
+            : base(ec)
         {
             _pointerProperty = pointerProperty;
         }
@@ -187,7 +187,136 @@ namespace Kistl.API.Server
             {
                 INTERFACE i = GetAt(index);
                 if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
-                return i;                
+                return i;
+            }
+            set
+            {
+                INTERFACE i = GetAt(index);
+                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+
+                if (i != value)
+                {
+                    RemoveAt(index);
+                    Insert(index, value);
+                }
+            }
+        }
+
+        #endregion
+    }
+
+    public class EntityListWrapper<INTERFACE, IMPL>
+        : EntityCollectionWrapper<INTERFACE, IMPL>, IList<INTERFACE>
+        where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
+        where INTERFACE : class, IDataObject
+    {
+        private string _pointerProperty = "";
+        public EntityListWrapper(EntityCollection<IMPL> ec, string pointerProperty)
+            : base(ec)
+        {
+            _pointerProperty = pointerProperty;
+        }
+
+        #region Index Management
+        protected void UpdateIndex(INTERFACE item, int? index)
+        {
+            // Sets the position Property for a 1:n Relation
+            // eg. Method 1-n Parameter
+            // Sets Parameter.Method__Position__
+            item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
+        }
+
+        protected int? GetIndex(INTERFACE item)
+        {
+            return item.GetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix);
+        }
+
+        protected INTERFACE GetAt(int index)
+        {
+            foreach (INTERFACE i in _ec)
+            {
+                int? idx = GetIndex(i);
+                if (idx == null) continue;
+                if (idx.Value == index)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+        #endregion
+
+        #region ICollection Overrides
+        public override void Add(INTERFACE item)
+        {
+            base.Add(item);
+            UpdateIndex(item, _ec.Count - 1);
+        }
+
+        public override void Clear()
+        {
+            foreach (INTERFACE i in _ec)
+            {
+                UpdateIndex(i, null);
+            }
+            base.Clear();
+        }
+
+        public override bool Remove(INTERFACE item)
+        {
+            UpdateIndex(item, null);
+            return base.Remove(item);
+        }
+        #endregion
+
+        #region IList<INTERFACE> Members
+
+        public int IndexOf(INTERFACE item)
+        {
+            int? result = GetIndex(item);
+            if (result == null) throw new InvalidOperationException("Collection is not sorted");
+            return result.Value;
+        }
+
+        public void Insert(int index, INTERFACE item)
+        {
+            UpdateIndex(item, index);
+            // TODO: Optimize
+            foreach (INTERFACE i in _ec)
+            {
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
+                if (idx >= index)
+                {
+                    UpdateIndex(i, idx + 1);
+                }
+            }
+            _ec.Add((IMPL)item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            INTERFACE item = GetAt(index);
+            if (item == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+            base.Remove(item);
+
+            // TODO: Optimize
+            foreach (INTERFACE i in _ec)
+            {
+                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
+                if (idx >= index)
+                {
+                    UpdateIndex(i, idx - 1);
+                }
+            }
+        }
+
+        public INTERFACE this[int index]
+        {
+            get
+            {
+                INTERFACE i = GetAt(index);
+                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+                return i;
             }
             set
             {
@@ -308,12 +437,12 @@ namespace Kistl.API.Server
 
     #region EntityCollectionEntryValueWrapperSorted
     // List
-    public class EntityCollectionEntryValueWrapperSorted<PARENT, VALUE, IMPL> 
+    public class EntityCollectionEntryValueWrapperSorted<PARENT, VALUE, IMPL>
         : EntityCollectionEntryValueWrapper<PARENT, VALUE, IMPL>, IList<VALUE>
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, ICollectionEntrySorted<VALUE, PARENT>, new()
         where PARENT : class, IDataObject
     {
-        public EntityCollectionEntryValueWrapperSorted(PARENT parentObject, EntityCollection<IMPL> ec) 
+        public EntityCollectionEntryValueWrapperSorted(PARENT parentObject, EntityCollection<IMPL> ec)
             : base(parentObject, ec)
         {
         }
@@ -505,7 +634,7 @@ namespace Kistl.API.Server
 
         public void CopyTo(PARENT[] array, int arrayIndex)
         {
-            foreach(var i in _ec.Select(i => i.Parent))
+            foreach (var i in _ec.Select(i => i.Parent))
             {
                 array[arrayIndex++] = i;
             }
@@ -559,7 +688,7 @@ namespace Kistl.API.Server
         where PARENT : class, IDataObject
     {
         public EntityCollectionEntryParentWrapperSorted(VALUE parentObject, EntityCollection<IMPL> ec)
-            : base (parentObject, ec)
+            : base(parentObject, ec)
         {
         }
 

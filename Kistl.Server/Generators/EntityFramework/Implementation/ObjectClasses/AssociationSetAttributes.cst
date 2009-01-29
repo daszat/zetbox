@@ -35,8 +35,8 @@ using Kistl.DALProvider.EF;
 <%
 		switch (rel.GetPreferredStorage())
 		{
-			case StorageHint.MergeLeft:
-			case StorageHint.MergeRight:
+			case StorageHint.MergeA:
+			case StorageHint.MergeB:
 			case StorageHint.Replicate:
 %>
 
@@ -69,4 +69,23 @@ using Kistl.DALProvider.EF;
 		}
 	}
 
+%>
+
+<%
+	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.PropertyName))
+	{
+%>
+
+// object-value association
+[assembly: EdmRelationship(
+    "Model", "<%= prop.GetAssociationName() %>",
+    "<%= prop.ObjectClass.ClassName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix %>),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= prop.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+    )]
+
+<%
+	}
 %>

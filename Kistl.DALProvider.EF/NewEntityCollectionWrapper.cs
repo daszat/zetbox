@@ -11,14 +11,14 @@ namespace Kistl.DALProvider.EF
 {
 
     /// <summary>
-    /// A wrapper around a EntityCollection to present one "side" as normal collection.
+    /// A wrapper around a EntityCollection of CollectionEntrys to present one "side" as normal collection.
     /// </summary>
     /// <typeparam name="ATYPE">the type of the A side</typeparam>
     /// <typeparam name="BTYPE">the type of the B side</typeparam>
     /// <typeparam name="PARENTTYPE">which type contains the list, one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
-    public abstract class EntityCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
+    public abstract class EntityCollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
         : ICollection<ITEMTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
@@ -29,7 +29,7 @@ namespace Kistl.DALProvider.EF
         protected EntityCollection<ENTRYTYPE> Collection { get; private set; }
         protected PARENTTYPE ParentObject { get; private set; }
 
-        public EntityCollectionWrapper(PARENTTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityCollectionEntriesWrapper(PARENTTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
         {
             Collection = ec;
             ParentObject = parentObject;
@@ -168,17 +168,22 @@ namespace Kistl.DALProvider.EF
     }
 
     /// <summary>
-    /// List
+    /// A wrapper around a EntityCollection of CollectionEntrys to present one "side" as normal list.
     /// </summary>
-    public abstract class EntityListWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
-        : EntityCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>, IList<ITEMTYPE>
+    /// <typeparam name="ATYPE">the type of the A side</typeparam>
+    /// <typeparam name="BTYPE">the type of the B side</typeparam>
+    /// <typeparam name="PARENTTYPE">which type contains the list, one of ATYPE or BTYPE</typeparam>
+    /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
+    /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
+    public abstract class EntityListEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
+        : EntityCollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>, IList<ITEMTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
         where ITEMTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
     {
-        public EntityListWrapper(PARENTTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityListEntriesWrapper(PARENTTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }

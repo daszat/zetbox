@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.ObjectClasses.CollectionEntryListProperty"
-	CodeFile="Implementation.ObjectClasses.CollectionEntryListProperty.cs" 
-	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntryListProperty" 
+	Name="Implementation.ObjectClasses.ObjectListProperty"
+	CodeFile="Implementation.ObjectClasses.ObjectListProperty.cs" 
+	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -22,18 +22,12 @@
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
-	// the name of the wrapper class for wrapping the other end
-	string wrapperClass = "Entity" + (relEnd.Other.HasPersistentOrder ? "List" : "Collection") + relEnd.Other.Role + "SideWrapper";
-
-	// the name of the CollectionEntry type
-	string ceName = rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix;
-
-	// the name of the EF association to the CollectionEntry
-	string assocName = rel.GetCollectionEntryAssociationName(relEnd);
-	// this class' role name in this association
-	string roleName = relEnd.RoleName;
-	// this targeted role name 
-	string targetRoleName = "CollectionEntry";
+	// the name of the wrapper class for wrapping the EntityCollection
+	string wrapperClass = "Entity" + (relEnd.Other.HasPersistentOrder ? "List" : "Collection") + "Wrapper";
+	
+	// the name of the EF association
+	string assocName = rel.GetAssociationName();
+	string targetRoleName = relEnd.Other.RoleName;
 
 	// which generic interface to use for the collection
 	string exposedListType = relEnd.Other.HasPersistentOrder ? "IList" : "ICollection";
@@ -56,21 +50,26 @@
             {
                 if (<%= wrapperName %> == null)
                 {
-                    <%= wrapperName %> = new <%= wrapperClass %><<%= rel.A.Type.NameDataObject %>, <%= rel.B.Type.NameDataObject %>, <%= ceName %>>(
-                            this,
-                            <%= efName %>);
+                    <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
+                            <%= efName %><%
+	// TODO: improve this!
+	if (relEnd.Other.HasPersistentOrder)
+	{
+		this.WriteObjects(", \"", relEnd.RoleName, "\"");
+	}
+                            %>);
                 }
                 return <%= wrapperName %>;
             }
         }
         
         [EdmRelationshipNavigationProperty("Model", "<%= assocName %>", "<%= targetRoleName %>")]
-        public EntityCollection<<%= ceName %>> <%= efName %>
+        public EntityCollection<<%= referencedImplementation %>> <%= efName %>
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<<%= ceName %>>(
+                    .GetRelatedCollection<<%= referencedImplementation %>>(
                         "Model.<%= assocName %>",
                         "<%= targetRoleName %>");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -82,6 +81,6 @@
             }
         }
 
-        private <%= wrapperClass %><<%= rel.A.Type.NameDataObject %>, <%= rel.B.Type.NameDataObject %>, <%= ceName %>> <%= wrapperName %>;
+        private <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>> <%= wrapperName %>;
         
 

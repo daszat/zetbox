@@ -57,7 +57,7 @@ this.WriteObjects("		/// Reference to the container of this CollectionEntry\r\n"
 this.WriteObjects("		/// </summary>\r\n");
 #line 44 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionEntry.cst"
 CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-			"A", assocName, "CollectionEntry",
+			"A", assocName, prop.ObjectClass.ClassName,
 			prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix);
 		
 		fields.Add("_fk_A");

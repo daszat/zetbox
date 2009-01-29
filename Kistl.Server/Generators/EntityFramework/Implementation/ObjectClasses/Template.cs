@@ -33,6 +33,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override IEnumerable<string> GetAdditionalImports()
         {
             return base.GetAdditionalImports().Concat(new string[]{
+                "Kistl.API.Server",
                 "Kistl.DALProvider.EF",
                 "System.Data.Objects",
                 "System.Data.Objects.DataClasses" 
@@ -86,11 +87,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                         if (otherEnd.Multiplicity.UpperBound() > 1)
                         {
                             this.WriteLine("        // object list property");
-                            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
-                                relEnd.Type.ToObjectClass(ctx),
-                                p.GetPropertyType(),
-                                p.PropertyName,
-                                p);
+                            this.Host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
+                                relEnd);
                         }
                         else if (otherEnd.Multiplicity.UpperBound() == 1)
                         {

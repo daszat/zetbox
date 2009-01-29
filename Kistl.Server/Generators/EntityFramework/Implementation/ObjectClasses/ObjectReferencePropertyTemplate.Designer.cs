@@ -15,18 +15,18 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 		protected IKistlContext ctx;
 		protected String name;
 		protected String associationName;
-		protected String roleName;
+		protected String targetRoleName;
 		protected String referencedInterface;
 		protected String referencedImplementation;
 
 
-        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String roleName, String referencedInterface, String referencedImplementation)
+        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.name = name;
 			this.associationName = associationName;
-			this.roleName = roleName;
+			this.targetRoleName = targetRoleName;
 			this.referencedInterface = referencedInterface;
 			this.referencedImplementation = referencedImplementation;
 
@@ -79,7 +79,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        private int ",  fkBackingName , ";\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        // EF sees only this property\r\n");
-this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  roleName , "\")]\r\n");
+this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("        public ",  referencedImplementation , " ",  efName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -87,7 +87,7 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\r\n");
 this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\r\n");
 this.WriteObjects("                        \"Model.",  associationName , "\",\r\n");
-this.WriteObjects("                        \"",  roleName , "\");\r\n");
+this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
 this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\r\n");
 this.WriteObjects("                    && !r.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
@@ -100,7 +100,7 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\r\n");
 this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\r\n");
 this.WriteObjects("                        \"Model.",  associationName , "\",\r\n");
-this.WriteObjects("                        \"",  roleName , "\");\r\n");
+this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
 this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\r\n");
 this.WriteObjects("                    && !r.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");

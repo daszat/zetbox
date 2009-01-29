@@ -218,15 +218,5 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         #endregion
 
-        /// <summary>
-        /// Chooses the appropriate EntityCollection wrapper for a given RelationEnd
-        /// </summary>
-        /// <param name="relEnd"></param>
-        /// <returns></returns>
-        public static string EntityWrapperClassName(RelationEnd relEnd)
-        {
-            return "Entity" + (relEnd.HasPersistentOrder ? "List" : "Collection") + relEnd.Role + "SideWrapper";
-        }
-
     }
 }

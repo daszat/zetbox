@@ -88,6 +88,27 @@ break;
 	}
 
 
+#line 73 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+this.WriteObjects("\r\n");
+#line 75 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.PropertyName))
+	{
+
+#line 81 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("// object-value association\r\n");
+this.WriteObjects("[assembly: EdmRelationship(\r\n");
+this.WriteObjects("    \"Model\", \"",  prop.GetAssociationName() , "\",\r\n");
+this.WriteObjects("    \"",  prop.ObjectClass.ClassName , "\", RelationshipMultiplicity.ZeroOrOne, typeof(",  prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
+this.WriteObjects("    \"CollectionEntry\", RelationshipMultiplicity.Many, typeof(",  prop.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix , ")\r\n");
+this.WriteObjects("    )]\r\n");
+this.WriteObjects("\r\n");
+#line 90 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+}
+
 
         }
 

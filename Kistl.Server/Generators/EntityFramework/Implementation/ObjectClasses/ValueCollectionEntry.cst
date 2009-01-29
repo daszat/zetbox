@@ -42,7 +42,7 @@
 		/// </summary>
 <%
 		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-			"A", assocName, "CollectionEntry",
+			"A", assocName, prop.ObjectClass.ClassName,
 			prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix);
 		
 		fields.Add("_fk_A");

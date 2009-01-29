@@ -52,7 +52,7 @@ this.WriteObjects("		/// Reference to A part of this relation\r\n");
 this.WriteObjects("		/// </summary>\r\n");
 #line 39 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-			"A", rel.GetCollectionEntryAssociationName(rel.A), "CollectionEntry",
+			"A", rel.GetCollectionEntryAssociationName(rel.A), rel.A.RoleName,
 			rel.A.Type.NameDataObject, rel.A.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
 		
 		fields.Add("_fk_A");
@@ -75,7 +75,7 @@ this.WriteObjects("		/// Reference to B part of this relation\r\n");
 this.WriteObjects("		/// </summary>\r\n");
 #line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntry.cst"
 CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-			"B", rel.GetCollectionEntryAssociationName(rel.B), "CollectionEntry",
+			"B", rel.GetCollectionEntryAssociationName(rel.B), rel.B.RoleName,
 			rel.B.Type.NameDataObject, rel.B.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
 		
 		fields.Add("_fk_B");

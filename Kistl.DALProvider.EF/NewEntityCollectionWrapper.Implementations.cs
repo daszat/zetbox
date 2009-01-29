@@ -11,7 +11,7 @@ namespace Kistl.DALProvider.EF
 {
 
     public sealed class EntityCollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : EntityCollectionWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE>
+        : EntityCollectionEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
@@ -43,7 +43,7 @@ namespace Kistl.DALProvider.EF
     }
 
     public sealed class EntityListASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : EntityListWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE>
+        : EntityListEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
@@ -111,7 +111,7 @@ namespace Kistl.DALProvider.EF
     }
 
     public sealed class EntityCollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-    : EntityCollectionWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
+    : EntityCollectionEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
@@ -143,7 +143,7 @@ namespace Kistl.DALProvider.EF
     }
 
     public sealed class EntityListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : EntityListWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
+        : EntityListEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
