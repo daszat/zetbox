@@ -71,7 +71,7 @@ if (rel.A.HasPersistentOrder)
 	{
 
 #line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-this.WriteObjects("          <ScalarProperty Name=\"AIndex\" ColumnName=\"AIndex\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"A",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"AIndex\" />\r\n");
 #line 55 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
@@ -79,7 +79,7 @@ this.WriteObjects("          <ScalarProperty Name=\"AIndex\" ColumnName=\"AIndex
 	{
 
 #line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-this.WriteObjects("          <ScalarProperty Name=\"BIndex\" ColumnName=\"BIndex\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
 #line 62 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
@@ -184,7 +184,7 @@ if (prop.IsIndexed)
 	{
 
 #line 158 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-this.WriteObjects("          <ScalarProperty Name=\"BIndex\" ColumnName=\"BIndex\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
 #line 160 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 

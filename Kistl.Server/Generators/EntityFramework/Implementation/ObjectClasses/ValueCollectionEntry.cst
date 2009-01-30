@@ -43,11 +43,10 @@
 <%
 		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
 			"A", assocName, prop.ObjectClass.ClassName,
-			prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix);
+			prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix,
+			false);
 		
 		fields.Add("_fk_A");
-		
-		
 		
 		if (isList)
 		{
@@ -81,9 +80,9 @@
 		/// </summary>
 <%
 			CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-				typeof(int?), prop.PropertyName + "Index");
+				typeof(int?), prop.PropertyName + Kistl.API.Helper.PositionSuffix);
 		
-			fields.Add("_" + prop.PropertyName + "Index");
+			fields.Add("_" + prop.PropertyName + Kistl.API.Helper.PositionSuffix);
 		}
 %>
 
@@ -104,8 +103,8 @@
 		/// Implement interface by forwarding to actual property
 		/// </summary>
 		int? <%= ceInterfaceFullName %>.BIndex {
-			get { return <%= prop.PropertyName %>Index; } 
-			set { <%= prop.PropertyName %>Index = value; }
+			get { return <%= prop.PropertyName %><%= Kistl.API.Helper.PositionSuffix %>; } 
+			set { <%= prop.PropertyName %><%= Kistl.API.Helper.PositionSuffix %> = value; }
 		}
 <%
 		}

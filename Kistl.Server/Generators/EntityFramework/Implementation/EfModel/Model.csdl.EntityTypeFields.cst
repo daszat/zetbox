@@ -29,6 +29,7 @@
 		{
 			RelationEnd end = rel.GetEnd(p);
 			RelationEnd otherEnd = rel.GetOtherEnd(p);
+			
 			if (rel.GetPreferredStorage() == StorageHint.Separate)
 			{
 				Debug.Assert(end != null);
@@ -49,7 +50,12 @@
 <%
 			}
 
-			if (p.NeedsPositionColumn())
+			// Only add position column if one is needed AND this is the preferred storage location
+			if (p.NeedsPositionColumn()
+				&&( (rel.GetPreferredStorage() == StorageHint.MergeA && rel.A == end)
+					||(rel.GetPreferredStorage() == StorageHint.MergeB && rel.B == end)
+					||(rel.GetPreferredStorage() == StorageHint.Replicate))
+				)
 			{
 %>
     <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />

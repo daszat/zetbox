@@ -138,7 +138,9 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                             prop.PropertyName,
                             rel.GetAssociationName(), otherEnd.RoleName,
                             otherEnd.Type.NameDataObject,
-                            otherEnd.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+                            otherEnd.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
+                            (relEnd.Multiplicity.UpperBound() > 1 && relEnd.HasPersistentOrder)
+                            );
                     }
                     else
                     {

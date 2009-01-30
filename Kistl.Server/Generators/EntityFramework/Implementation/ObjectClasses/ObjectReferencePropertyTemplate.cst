@@ -16,9 +16,10 @@
 <%@ Parameter Name="targetRoleName" Type="String" %>
 <%@ Parameter Name="referencedInterface" Type="String" %>
 <%@ Parameter Name="referencedImplementation" Type="String" %>
+<%@ Parameter Name="hasPositionStorage" Type="bool" %>
 <%
 
-	string efName = name + "Impl";
+	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string fkName = "fk_" + name;
 	string fkBackingName = "_fk_" + name;
 
@@ -92,5 +93,13 @@
             }
         }
         
-        
+<%
+	string posStorageName = name + Kistl.API.Helper.PositionSuffix;
+
+	if (hasPositionStorage)
+	{
+		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+			typeof(int?), posStorageName);
+	}
+%>
         

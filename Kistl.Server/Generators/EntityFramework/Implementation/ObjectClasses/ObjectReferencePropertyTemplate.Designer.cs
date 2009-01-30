@@ -18,9 +18,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 		protected String targetRoleName;
 		protected String referencedInterface;
 		protected String referencedImplementation;
+		protected bool hasPositionStorage;
 
 
-        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation)
+        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation, bool hasPositionStorage)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -29,18 +30,19 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 			this.targetRoleName = targetRoleName;
 			this.referencedInterface = referencedInterface;
 			this.referencedImplementation = referencedImplementation;
+			this.hasPositionStorage = hasPositionStorage;
 
         }
         
         public override void Generate()
         {
-#line 21 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-string efName = name + "Impl";
+#line 22 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string fkName = "fk_" + name;
 	string fkBackingName = "_fk_" + name;
 
 
-#line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -110,7 +112,16 @@ this.WriteObjects("                r.Value = (",  referencedImplementation , ")v
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-this.WriteObjects("        \r\n");
+#line 97 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+string posStorageName = name + Kistl.API.Helper.PositionSuffix;
+
+	if (hasPositionStorage)
+	{
+		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+			typeof(int?), posStorageName);
+	}
+
+#line 105 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        \r\n");
 
         }

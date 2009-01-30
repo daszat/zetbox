@@ -24,7 +24,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyAttributesTemplate()
         {
             base.ApplyAttributesTemplate();
-            WriteLine("        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]");
+            WriteLine("        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]");
         }
 
         protected override MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)

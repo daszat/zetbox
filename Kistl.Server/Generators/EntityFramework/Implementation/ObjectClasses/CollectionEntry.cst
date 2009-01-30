@@ -38,19 +38,26 @@
 <%
 		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
 			"A", rel.GetCollectionEntryAssociationName(rel.A), rel.A.RoleName,
-			rel.A.Type.NameDataObject, rel.A.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+			rel.A.Type.NameDataObject, rel.A.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
+			rel.A.HasPersistentOrder);
 		
 		fields.Add("_fk_A");
-%>
 
-		/// <summary>
-		/// Index on the A-side list of this relation
-		/// </summary>
+		if (rel.A.HasPersistentOrder)
+		{
+			fields.Add("_A" + Kistl.API.Helper.PositionSuffix);
+%>
+		public int? AIndex { get { return A<%= Kistl.API.Helper.PositionSuffix %>; } set { A<%= Kistl.API.Helper.PositionSuffix %> = value; } }
 <%
-		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-			typeof(int?), "AIndex");
-		
-		fields.Add("_AIndex");
+		}
+		else if (isList)
+		{
+%>
+		/// <summary>ignored implementation for INewListEntry</summary>
+		public int? AIndex { get { return null; } set { } }
+<%
+		}
+
 %>
 
 		/// <summary>
@@ -59,19 +66,26 @@
 <%
 		CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
 			"B", rel.GetCollectionEntryAssociationName(rel.B), rel.B.RoleName,
-			rel.B.Type.NameDataObject, rel.B.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+			rel.B.Type.NameDataObject, rel.B.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
+			rel.B.HasPersistentOrder);
 		
 		fields.Add("_fk_B");
-%>
 
-		/// <summary>
-		/// Index on the B-side list of this relation
-		/// </summary>
+		if (rel.B.HasPersistentOrder)
+		{
+			fields.Add("_B" + Kistl.API.Helper.PositionSuffix);
+%>
+		public int? BIndex { get { return B<%= Kistl.API.Helper.PositionSuffix %>; } set { B<%= Kistl.API.Helper.PositionSuffix %> = value; } }
 <%
-		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-			typeof(int?), "BIndex");
-		
-		fields.Add("_BIndex");
+		}
+		else if (isList)
+		{
+%>
+		/// <summary>ignored implementation for INewListEntry</summary>
+		public int? BIndex { get { return null; } set { } }
+<%
+		}
+
 %>
 
 

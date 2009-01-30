@@ -24,6 +24,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             base.ApplyAttributesTemplate();
             this.WriteLine("        [XmlIgnore()]");
             this.WriteLine("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]");
+            this.WriteLine("        [EdmScalarProperty()]");
         }
 
     }

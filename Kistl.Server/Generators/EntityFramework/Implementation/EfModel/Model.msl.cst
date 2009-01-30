@@ -50,14 +50,14 @@
 	if (rel.A.HasPersistentOrder)
 	{
 %>
-          <ScalarProperty Name="AIndex" ColumnName="AIndex" />
+          <ScalarProperty Name="A<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="AIndex" />
 <%
 	}
 
 	if (rel.B.HasPersistentOrder)
 	{
 %>
-          <ScalarProperty Name="BIndex" ColumnName="BIndex" />
+          <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
 <%
 	}
 %>
@@ -155,7 +155,7 @@
 	if (prop.IsIndexed)
 	{
 %>
-          <ScalarProperty Name="BIndex" ColumnName="BIndex" />
+          <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
 <%
 	}
 %>

@@ -134,7 +134,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     
     <!-- A -->
-    <NavigationProperty Name="AImpl"
+    <NavigationProperty Name="A<%= Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= rel.GetCollectionEntryAssociationName(rel.A) %>"
                         FromRole="CollectionEntry"
                         ToRole="<%= rel.A.RoleName %>" />
@@ -142,13 +142,13 @@
 		if (rel.A.HasPersistentOrder)
 		{
 %>
-    <Property Name="AIndex" Type="Int32" Nullable="false" />
+    <Property Name="A<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
 <%
 		}
 %>
 
     <!-- B -->
-    <NavigationProperty Name="BImpl"
+    <NavigationProperty Name="B<%= Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
                         FromRole="CollectionEntry"
                         ToRole="<%= rel.B.RoleName %>" />
@@ -156,7 +156,7 @@
 		if (rel.B.HasPersistentOrder)
 		{
 %>
-    <Property Name="BIndex" Type="Int32" Nullable="false" />
+    <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
 <%
 		}
 %>
@@ -200,7 +200,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     
     <!-- A -->
-    <NavigationProperty Name="AImpl"
+    <NavigationProperty Name="A"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
                         FromRole="CollectionEntry"
                         ToRole="<%= prop.ObjectClass.ClassName %>" />
@@ -227,21 +227,21 @@
 	}
 %>
 
-    <!-- Associations for all object-object relations without CollectionEntrys -->
+  <!-- Associations for all object-object relations without CollectionEntrys -->
 <%
 	foreach(var rel in NewRelation.GetAll(ctx).ToList()
 		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
 		.OrderBy(r => r.GetAssociationName()))
 	{
 %>
-    <Association Name="<%= rel.GetAssociationName() %>" >
-      <End Role="<%= rel.A.RoleName %>"
-           Type="Model.<%= rel.A.Type.ClassName %>" 
-           Multiplicity="<%= rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
-      <End Role="<%= rel.B.RoleName %>"
-           Type="Model.<%= rel.B.Type.ClassName %>" 
-           Multiplicity="<%= rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
-    </Association>
+  <Association Name="<%= rel.GetAssociationName() %>" >
+    <End Role="<%= rel.A.RoleName %>"
+         Type="Model.<%= rel.A.Type.ClassName %>" 
+         Multiplicity="<%= rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
+    <End Role="<%= rel.B.RoleName %>"
+         Type="Model.<%= rel.B.Type.ClassName %>" 
+         Multiplicity="<%= rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
+  </Association>
 <%
 	}
 %>

@@ -167,7 +167,7 @@ this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- A -->\r\n");
-this.WriteObjects("    <NavigationProperty Name=\"AImpl\"\r\n");
+this.WriteObjects("    <NavigationProperty Name=\"A",  Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetCollectionEntryAssociationName(rel.A) , "\"\r\n");
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  rel.A.RoleName , "\" />\r\n");
@@ -176,14 +176,14 @@ if (rel.A.HasPersistentOrder)
 		{
 
 #line 145 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <Property Name=\"AIndex\" Type=\"Int32\" Nullable=\"false\" />\r\n");
+this.WriteObjects("    <Property Name=\"A",  Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 #line 147 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
 #line 149 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- B -->\r\n");
-this.WriteObjects("    <NavigationProperty Name=\"BImpl\"\r\n");
+this.WriteObjects("    <NavigationProperty Name=\"B",  Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetCollectionEntryAssociationName(rel.B) , "\"\r\n");
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  rel.B.RoleName , "\" />\r\n");
@@ -192,7 +192,7 @@ if (rel.B.HasPersistentOrder)
 		{
 
 #line 159 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <Property Name=\"BIndex\" Type=\"Int32\" Nullable=\"false\" />\r\n");
+this.WriteObjects("    <Property Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 #line 161 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
@@ -239,7 +239,7 @@ this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- A -->\r\n");
-this.WriteObjects("    <NavigationProperty Name=\"AImpl\"\r\n");
+this.WriteObjects("    <NavigationProperty Name=\"A\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.ClassName , "\" />\r\n");
@@ -269,7 +269,7 @@ this.WriteObjects("  </Association>\r\n");
 
 #line 229 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- Associations for all object-object relations without CollectionEntrys -->\r\n");
+this.WriteObjects("  <!-- Associations for all object-object relations without CollectionEntrys -->\r\n");
 #line 232 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 foreach(var rel in NewRelation.GetAll(ctx).ToList()
 		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
@@ -277,14 +277,14 @@ foreach(var rel in NewRelation.GetAll(ctx).ToList()
 	{
 
 #line 237 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <Association Name=\"",  rel.GetAssociationName() , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\"\r\n");
-this.WriteObjects("           Type=\"Model.",  rel.A.Type.ClassName , "\" \r\n");
-this.WriteObjects("           Multiplicity=\"",  rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\"\r\n");
-this.WriteObjects("           Type=\"Model.",  rel.B.Type.ClassName , "\" \r\n");
-this.WriteObjects("           Multiplicity=\"",  rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() , "\" />\r\n");
-this.WriteObjects("    </Association>\r\n");
+this.WriteObjects("  <Association Name=\"",  rel.GetAssociationName() , "\" >\r\n");
+this.WriteObjects("    <End Role=\"",  rel.A.RoleName , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  rel.A.Type.ClassName , "\" \r\n");
+this.WriteObjects("         Multiplicity=\"",  rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() , "\" />\r\n");
+this.WriteObjects("    <End Role=\"",  rel.B.RoleName , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  rel.B.Type.ClassName , "\" \r\n");
+this.WriteObjects("         Multiplicity=\"",  rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() , "\" />\r\n");
+this.WriteObjects("  </Association>\r\n");
 #line 246 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 
