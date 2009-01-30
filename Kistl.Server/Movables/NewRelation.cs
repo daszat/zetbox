@@ -187,6 +187,7 @@ namespace Kistl.Server.Movables
                         {
                             Navigator = prop,
                             Type = ((ObjectClass)prop.ObjectClass).GetTypeMoniker(),
+                            RootType = ((ObjectClass)prop.ObjectClass).GetRootClass().GetTypeMoniker(),
                             Multiplicity = Multiplicity.ZeroOrMore,
                             RoleName = prop.ObjectClass.ClassName,
                             HasPersistentOrder = false,
@@ -197,6 +198,7 @@ namespace Kistl.Server.Movables
                         {
                             Navigator = null,
                             Type = ((ObjectClass)prop.ReferenceObjectClass).GetTypeMoniker(),
+                            RootType = ((ObjectClass)prop.ReferenceObjectClass).GetRootClass().GetTypeMoniker(),
                             Multiplicity = prop.IsList ? Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne, 
                             RoleName = prop.PropertyName,
                             HasPersistentOrder = prop.IsIndexed,

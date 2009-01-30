@@ -6,16 +6,16 @@ using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
 
-namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
+namespace Kistl.Server.Generators.Templates.Implementation
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst")]
-    public partial class Template : Kistl.Server.Generators.KistlCodeTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst")]
+    public partial class TypeBase : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
-		protected Kistl.App.Base.ObjectClass DataType;
+		protected DataType DataType;
 
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.ObjectClass DataType)
+        public TypeBase(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType DataType)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -25,11 +25,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyGlobalPreambleTemplate();
 
 
-#line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("namespace ",  DataType.Module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("    using System;\r\n");
@@ -43,67 +43,67 @@ this.WriteObjects("    using System.Xml.Serialization;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    using Kistl.API;\r\n");
 this.WriteObjects("\r\n");
-#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 foreach(string ns in GetAdditionalImports())
 	{
 
-#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 35 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("	using ",  ns , ";\r\n");
-#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 }
 	
 	ApplyNamespacePreambleTemplate();
 
-#line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  DataType.Description , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
-#line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 var mungedClassName = MungeClassName(DataType.ClassName);
 
 	ApplyClassAttributeTemplate();
 
-#line 52 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  DataType.ClassName , "\")]\r\n");
 this.WriteObjects("    public class ",  mungedClassName , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {\r\n");
 this.WriteObjects("\r\n");
-#line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 56 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyIDPropertyTemplate();
 
 		foreach(Property p in DataType.Properties)
 		{
 
-#line 62 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 61 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  p.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 67 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 66 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyPropertyTemplate(p);
 		}
 
 		foreach(var m in MethodsToGenerate())
 		{
 
-#line 73 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 72 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  m.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 78 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 77 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyMethodTemplate(m);
 		}
 
-#line 81 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 80 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("	}\r\n");
 this.WriteObjects("\r\n");
-#line 85 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 84 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 87 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Template.cst"
+#line 86 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("}");
 
         }

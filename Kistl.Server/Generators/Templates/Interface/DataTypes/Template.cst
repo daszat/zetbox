@@ -29,7 +29,7 @@ namespace <%= dataType.Module.Namespace %>
     /// <summary>
     /// <%= dataType.Description %>
     /// </summary>
-    public interface <%= dataType.ClassName %> <%= GetBaseClass() %> 
+    public interface <%= dataType.ClassName %> <%= GetInheritance() %> 
     {	<% foreach(Property p in dataType.Properties)
 		{ %>
 		

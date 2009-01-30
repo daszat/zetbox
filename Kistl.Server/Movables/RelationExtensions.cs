@@ -47,6 +47,7 @@ namespace Kistl.Server.Movables
             {
                 Navigator = prop,
                 Type = ((ObjectClass)prop.ObjectClass).GetTypeMoniker(),
+                RootType = ((ObjectClass)prop.ObjectClass).GetRootClass().GetTypeMoniker(),
                 Multiplicity = otherProp.ToMultiplicity(),
                 RoleName = otherProp.PropertyName,
                 HasPersistentOrder = otherProp.IsIndexed,

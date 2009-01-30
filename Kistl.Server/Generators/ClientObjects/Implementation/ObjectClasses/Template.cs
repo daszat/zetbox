@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.App.Base;
+
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
-    public class Template : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
+    public class Template
+        : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
     {
 
         public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx,Kistl.App.Base.ObjectClass cls)
@@ -25,7 +28,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         protected override string GetBaseClass()
         {
-            if (this.DataType.BaseObjectClass != null)
+            if (this.ObjectClass.BaseObjectClass != null)
             {
                 return MungeClassName(base.GetBaseClass());
             }
@@ -35,9 +38,5 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             }
         }
 
-        protected override string[] GetInterfaces()
-        {
-            return new string[] { this.DataType.ClassName }.Concat(base.GetInterfaces()).ToArray();
-        }
     }
 }

@@ -19,7 +19,7 @@
   
     <!-- EntitySets for all classes -->
 <%
-	foreach(var name in ctx.GetQuery<ObjectClass>().Select(cls => cls.ClassName))
+	foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName).OrderBy(s => s))
 	{
 %>
     <EntitySet Name="<%= name %>" EntityType="Model.<%= name %>" />
@@ -38,11 +38,11 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.RootType.ClassName %>" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
     <AssociationSet Name="<%= assocNameB %>" Association="Model.<%= assocNameB %>" >
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.RootType.ClassName %>" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -61,7 +61,7 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= prop.ObjectClass.ClassName %>" />
+      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -77,8 +77,8 @@
 		string assocName = rel.GetAssociationName();
 %>
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.RootType.ClassName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.RootType.ClassName %>" />
     </AssociationSet>
 <%
 	}
@@ -88,7 +88,7 @@
   
   <!-- EntityTypes for all base classes -->
 <%
-	foreach(var cls in ctx.GetBaseClasses())
+	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
 	{
 %>
   <EntityType Name="<%= cls.ClassName %>">
@@ -104,7 +104,7 @@
 
   <!-- EntityTypes for all other classes -->
 <%
-	foreach(var cls in ctx.GetDerivedClasses())
+	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
 	{
 %>
   <EntityType Name="<%= cls.ClassName %>" BaseType="Model.<%= cls.BaseObjectClass.ClassName %>" >
@@ -249,7 +249,7 @@
 
   <!-- ComplexTypes for all structs -->
 <%
-	foreach(var cls in ctx.GetQuery<Struct>())
+	foreach(var cls in ctx.GetQuery<Struct>().OrderBy(s => s.ClassName))
 	{
 %>
   <ComplexType Name="<%= cls.ClassName %>" >

@@ -35,11 +35,11 @@ namespace Kistl.Server.Movables
         /// </summary>
         public TypeMoniker Type { get; set; }
 
-        ///// <summary>
-        ///// The Type referenced by this end of the relation. MUST NOT be null.
-        ///// </summary>
-        ///// == otherEnd.Type
-        //public TypeMoniker Referenced { get; set; }
+        /// <summary>
+        /// the type of the root class of this End. MUST NOT be null.
+        /// </summary>
+        /// == otherend.type
+        public TypeMoniker RootType { get; set; }
 
         /// <summary>
         /// The Multiplicity of this end of the relation.

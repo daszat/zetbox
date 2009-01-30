@@ -126,10 +126,10 @@
                            TypeName="Model.<%= rel.GetAssociationName() %>"
                            StoreEntitySet="<%= dependent.Type.ClassName %>" >
       <EndProperty Name="<%= principal.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
+        <ScalarProperty Name="ID" ColumnName="fk_<%= principal.RoleName %>"/>
       </EndProperty>
       <EndProperty Name="<%= dependent.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= principal.RoleName %>"/>
+        <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_<%= principal.RoleName %>" IsNull="false"/>
     </AssociationSetMapping>
@@ -166,10 +166,10 @@
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= prop.ObjectClass.ClassName %>">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
+        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.ClassName %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.ClassName %>"/>
+        <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_<%= prop.ObjectClass.ClassName %>" IsNull="false"/>
     </AssociationSetMapping>

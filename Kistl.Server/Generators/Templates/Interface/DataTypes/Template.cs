@@ -13,34 +13,48 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     public partial class Template
     {
 
-        protected virtual string GetBaseClass()
+        /// <returns>The interfaces this type implements</returns>
+        protected virtual string[] GetInterfaces()
         {
             if (dataType is Kistl.App.Base.ObjectClass)
             {
                 var baseClass = (dataType as Kistl.App.Base.ObjectClass).BaseObjectClass;
                 if (baseClass != null)
                 {
-                    return ": " + baseClass.Module.Namespace + "." + baseClass.ClassName;
+                    return new string[] { baseClass.Module.Namespace + "." + baseClass.ClassName };
                 }
                 else
                 {
-                    return ": IDataObject";
+                    return new string[] { "IDataObject" };
                 }
             }
             else if (dataType is Struct)
             {
-                return ": IStruct";
+                return new string[] { "IStruct" };
             }
             else if (dataType is Kistl.App.Base.Interface)
             {
                 // no type hierarchy here
-                return "";
+                return new string[] { };
             }
             else
             {
                 throw new ApplicationException(String.Format("Do not know how to handle {0}", dataType));
             }
+        }
 
+        /// <returns>a string defining the inheritance relations of this class</returns>
+        protected virtual string GetInheritance()
+        {
+            string[] interfaces = GetInterfaces();
+            if (interfaces.Length > 0)
+            {
+                return ": " + String.Join(", ", interfaces);
+            }
+            else
+            {
+                return "";
+            }
         }
 
         protected virtual void ApplyPropertyTemplate(Property p)

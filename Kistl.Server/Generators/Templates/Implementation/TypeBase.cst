@@ -1,7 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.ObjectClasses.Template"
-	CodeFile="Implementation.ObjectClasses.Template.cs" 
-	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template" 
+	Name="Implementation.TypeBase"
+	ClassName="Kistl.Server.Generators.Templates.Implementation.TypeBase" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -10,7 +9,7 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="DataType" Type="Kistl.App.Base.ObjectClass" %>
+<%@ Parameter Name="DataType" Type="DataType" %>
 <%
 
 ApplyGlobalPreambleTemplate();
