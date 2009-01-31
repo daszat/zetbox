@@ -94,25 +94,30 @@ namespace Kistl.Server
         {
             if (bp is ObjectReferenceProperty)
             {
-                ObjectReferenceProperty p = (ObjectReferenceProperty)bp;
-                Relation rel = GetRelation(p);
-                if (rel == null) return true;
-
-                if (rel.Storage == StorageType.Replicate) throw new NotImplementedException("StorageType Replicate implemented but not tested yet");
-
-                RelationType type = rel.GetRelationType();
-                return
-                    (type == RelationType.one_n && p.IsList == false) ||
-                    (type == RelationType.one_one && rel.Storage == StorageType.Replicate) ||
-                    (type == RelationType.one_one && rel.Storage == StorageType.Left && rel.LeftPart == p) ||
-                    (type == RelationType.one_one && rel.Storage == StorageType.Right && rel.RightPart == p) ||
-                    // TODO: n:m darf nicht an eine Seite gebunden sein
-                    (type == RelationType.n_m && rel.LeftPart == p);
+                return HasStorage((ObjectReferenceProperty)bp);
             }
             else
             {
                 return true;
             }
+        }
+
+        private static bool HasStorage(this ObjectReferenceProperty p)
+        {
+            Relation rel = GetRelation(p);
+            if (rel == null) return true;
+
+            if (rel.Storage == StorageType.Replicate)
+                throw new NotImplementedException();
+
+            RelationType type = rel.GetRelationType();
+            return
+                (type == RelationType.one_n && p.IsList == false) ||
+                (type == RelationType.one_one && rel.Storage == StorageType.Replicate) ||
+                (type == RelationType.one_one && rel.Storage == StorageType.Left && rel.LeftPart == p) ||
+                (type == RelationType.one_one && rel.Storage == StorageType.Right && rel.RightPart == p) ||
+                // TODO: n:m darf nicht an eine Seite gebunden sein
+                (type == RelationType.n_m && rel.LeftPart == p);
         }
 
     }

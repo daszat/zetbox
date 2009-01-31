@@ -99,7 +99,7 @@
 	if (hasPositionStorage)
 	{
 		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-			typeof(int?), posStorageName);
+			"int?", posStorageName);
 	}
 %>
         

@@ -25,10 +25,14 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         
         public override void Generate()
         {
-#line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
+#line 11 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
 this.WriteObjects("\r\n");
 #line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
-this.WriteObjects("		",  prop.GetPropertyTypeString() , " ",  prop.PropertyName , " { get; set; }");
+string name = prop.PropertyName;
+	string type = prop.ReferencedTypeAsCSharp();
+
+#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
+this.WriteObjects("		",  type , " ",  name , " { get; set; }");
 
         }
 

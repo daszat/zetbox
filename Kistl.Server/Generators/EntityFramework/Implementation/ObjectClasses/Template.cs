@@ -156,5 +156,33 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             }
         }
 
+        protected override void ApplyMethodTemplate(Method m)
+        {
+            base.ApplyMethodTemplate(m);
+        }
+
+        // HACK: workaround the fact this is missing on the server
+        // TODO: remove this and move the client action "OnGetInheritedMethods_ObjectClass" into a common action assembly
+        private static void GetMethods(ObjectClass obj, List<Method> e)
+        {
+            if (obj.BaseObjectClass != null)
+                GetMethods(obj.BaseObjectClass, e);
+            e.AddRange(obj.Methods);
+        }
+
+        protected override IEnumerable<Method> MethodsToGenerate()
+        {
+            var inherited = new List<Method>();
+            GetMethods(this.ObjectClass, inherited);
+            // TODO: fix Default methods in DB, remove the filter here and remove them from TailTemplate
+            return inherited.Where(m => !m.IsDefaultMethod());
+        }
+
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+            this.CallTemplate("Implementation.ObjectClasses.Tail", ctx, this.ObjectClass);
+        }
+
     }
 }

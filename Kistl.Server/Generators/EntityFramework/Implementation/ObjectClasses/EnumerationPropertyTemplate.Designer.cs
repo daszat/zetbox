@@ -31,7 +31,7 @@ string name = prop.PropertyName;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
 
-	string enumType = prop.GetPropertyTypeString();
+	string enumType = prop.ReferencedTypeAsCSharp();
 
 
 #line 23 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"

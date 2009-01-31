@@ -9,7 +9,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
     public class NotifyingValueProperty : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Type type, string name)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string type, string name)
             : base(_host, ctx, type, name)
         {
 

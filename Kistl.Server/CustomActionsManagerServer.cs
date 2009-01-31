@@ -139,6 +139,7 @@ namespace Kistl.Server
                             warnings.AppendLine(ex.Message);
                         }
                     }
+                    System.Console.Error.Write(warnings);
                 }
             }
             finally

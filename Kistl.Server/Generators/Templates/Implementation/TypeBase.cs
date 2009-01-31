@@ -35,6 +35,11 @@ namespace Kistl.Server.Generators.Templates.Implementation
         protected virtual void ApplyNamespaceTailTemplate() { }
 
         /// <summary>
+        /// is called to apply a optional tail part within the class
+        /// </summary>
+        protected virtual void ApplyClassTailTemplate() { }
+
+        /// <summary>
         /// Is called to apply optional decoration in front of the class declaration, like Attributes.
         /// </summary>
         protected virtual void ApplyClassAttributeTemplate() { }
@@ -80,7 +85,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         {
             if (!p.IsListProperty())
             {
-                this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx, p.GetPropertyType(), p.PropertyName);
+                this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx, p.ReferencedTypeAsCSharp(), p.PropertyName);
             }
             else
             {
@@ -90,12 +95,16 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.Method", ctx, m);
+            this.Host.CallTemplate("Implementation.ObjectClasses.Method", ctx, this.DataType, m);
         }
 
-        protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()
+        /// <summary>
+        /// A list of all methods that should be generated for this datatype. By default these are only the methods defined directly on this datatype.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()
         {
-            return this.DataType.Methods.Where(m => !m.IsDefaultMethod());
+            return this.DataType.Methods; //.Where(m => !m.IsDefaultMethod());
         }
     }
 }

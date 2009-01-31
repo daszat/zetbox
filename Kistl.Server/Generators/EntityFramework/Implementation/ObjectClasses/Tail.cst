@@ -1,0 +1,44 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.Tail"
+	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.Tail" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+
+        // tail template
+
+        [System.Diagnostics.DebuggerHidden()]
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_<%= cls.ClassName %> != null)
+            {
+                OnToString_<%= cls.ClassName %>(this, e);
+            }
+            return e.Result;
+        }
+        public event ToStringHandler<<%= cls.ClassName %>> OnToString_<%= cls.ClassName %>;
+
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_<%= cls.ClassName %> != null) OnPreSave_<%= cls.ClassName %>(this);
+        }
+        public event ObjectEventHandler<<%= cls.ClassName %>> OnPreSave_<%= cls.ClassName %>;
+
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_<%= cls.ClassName %> != null) OnPostSave_<%= cls.ClassName %>(this);
+        }
+        public event ObjectEventHandler<<%= cls.ClassName %>> OnPostSave_<%= cls.ClassName %>;
+
+

@@ -83,7 +83,7 @@ this.WriteObjects("		/// the value\r\n");
 this.WriteObjects("		/// </summary>\r\n");
 #line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionEntry.cst"
 CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-			prop.GetPropertyType(), prop.PropertyName);
+			prop.GetPropertyTypeString(), prop.PropertyName);
 		
 		fields.Add("_" + prop.PropertyName);
 
@@ -98,7 +98,7 @@ this.WriteObjects("		/// Index for ordering Values\r\n");
 this.WriteObjects("		/// </summary>\r\n");
 #line 82 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionEntry.cst"
 CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-				typeof(int?), prop.PropertyName + Kistl.API.Helper.PositionSuffix);
+				"int?", prop.PropertyName + Kistl.API.Helper.PositionSuffix);
 		
 			fields.Add("_" + prop.PropertyName + Kistl.API.Helper.PositionSuffix);
 		}
@@ -109,7 +109,7 @@ this.WriteObjects("		// TODO: implement by redirecting with EF instead\r\n");
 this.WriteObjects("		/// <summary>\r\n");
 this.WriteObjects("		/// Implement interface by forwarding to actual property\r\n");
 this.WriteObjects("		/// </summary>\r\n");
-this.WriteObjects("		",  prop.GetPropertyType() , " ",  ceInterfaceFullName , ".B {\r\n");
+this.WriteObjects("		",  prop.ReferencedTypeAsCSharp() , " ",  ceInterfaceFullName , ".B {\r\n");
 this.WriteObjects("			get { return ",  prop.PropertyName , "; } \r\n");
 this.WriteObjects("			set { ",  prop.PropertyName , " = value; }\r\n");
 this.WriteObjects("		}\r\n");

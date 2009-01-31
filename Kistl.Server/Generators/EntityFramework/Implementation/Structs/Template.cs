@@ -17,9 +17,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.Structs
         {
         }
 
-        protected override void ApplyIDPropertyTemplate()
+        protected override void ApplyClassTailTemplate()
         {
-            this.WriteLine("/// <summary>A special value denoting a empty struct</summary>");
+            base.ApplyClassTailTemplate();
+            this.WriteLine("/// <summary>A special value denoting an empty struct</summary>");
             this.WriteObjects("public static ", this.StructType.ClassName, Kistl.API.Helper.ImplementationSuffix, " NoValue { get { return null; } }");
             this.WriteLine();
         }

@@ -118,7 +118,7 @@ string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 	if (hasPositionStorage)
 	{
 		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-			typeof(int?), posStorageName);
+			"int?", posStorageName);
 	}
 
 #line 105 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"

@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.Extensions
 {
@@ -31,16 +32,61 @@ namespace Kistl.Server.Generators.Extensions
                     throw new NotImplementedException();
             }
 
-            if ((attrs & MemberAttributes.Final) == MemberAttributes.Final)
-                modifiers.Add("final");
-
             if ((attrs & MemberAttributes.New) == MemberAttributes.New)
                 modifiers.Add("new");
 
             if ((attrs & MemberAttributes.Override) == MemberAttributes.Override)
+            {
+                if ((attrs & MemberAttributes.Final) == MemberAttributes.Final)
+                {
+                    throw new ArgumentException("attrs", "don't know how to handle Final & Override");
+                }
                 modifiers.Add("override");
+            }
+            else
+            {
+                // need virtual only on non-overriding members
+
+                // "obviously", having _not_ specified Final, yields virtual
+                // see e.g. http://social.msdn.microsoft.com/Forums/en-US/csharpgeneral/thread/61ac4430-fa5a-4cf2-9932-ad3ae193a6bf/
+                if ((attrs & MemberAttributes.Final) != MemberAttributes.Final)
+                    modifiers.Add("virtual");
+            }
 
             return String.Join(" ", modifiers.ToArray());
         }
+
+        public static string ReferencedTypeAsCSharp(this Property prop)
+        {
+            if (prop is BoolProperty)
+            {
+                return "bool" + (prop.IsNullable ? "?" : "");
+            }
+            else if (prop is IntProperty)
+            {
+                return "int" + (prop.IsNullable ? "?" : "");
+            }
+            else if (prop is DoubleProperty)
+            {
+                return "double" + (prop.IsNullable ? "?" : "");
+            }
+            else if (prop is DateTimeProperty)
+            {
+                return "DateTime" + (prop.IsNullable ? "?" : "");
+            }
+            else if (prop is EnumerationProperty)
+            {
+                return prop.GetPropertyTypeString() + (prop.IsNullable ? "?" : "");
+            }
+            else if (prop is StringProperty)
+            {
+                return "string";
+            }
+            else
+            {
+                return prop.GetPropertyTypeString();
+            }
+        }
+
     }
 }

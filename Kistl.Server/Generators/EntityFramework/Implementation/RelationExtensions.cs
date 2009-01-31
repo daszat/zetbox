@@ -56,7 +56,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// </summary>
         public static string GetAssociationName(this ValueTypeProperty prop)
         {
-            return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, prop.GetPropertyType().Name, prop.PropertyName);
+            return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, prop.GetPropertyTypeString().Split('.').Last(), prop.PropertyName);
         }
 
         /// <summary>

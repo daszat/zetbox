@@ -1,6 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.NotifyingValueProperty"
-	CodeFile="Implementation.ObjectClasses.NotifyingValueProperty.cs" 
 	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
@@ -10,7 +9,7 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="type" Type="Type" %>
+<%@ Parameter Name="type" Type="string" %>
 <%@ Parameter Name="name" Type="String" %>
 <%
 	ApplyRequisitesTemplate();
@@ -19,7 +18,7 @@
 	
 	string backingName = MungeNameToBacking(name);
 %>
-        <%= GetModifiers() %> <%= type.ToCSharpTypeRef() %> <%= name %>
+        <%= GetModifiers() %> <%= type %> <%= name %>
         {
             get
             {
@@ -36,4 +35,4 @@
                 }
             }
         }
-        private <%= type.ToCSharpTypeRef() %> <%= backingName %>;
+        private <%= type %> <%= backingName %>;

@@ -95,15 +95,18 @@ this.WriteObjects("        /// </summary>\r\n");
 #line 77 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyMethodTemplate(m);
 		}
+		
+		
+		ApplyClassTailTemplate();
 
-#line 80 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 83 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("	}\r\n");
 this.WriteObjects("\r\n");
-#line 84 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 87 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 86 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("}");
 
         }

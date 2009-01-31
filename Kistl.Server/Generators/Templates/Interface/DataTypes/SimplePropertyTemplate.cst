@@ -1,6 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Interface.DataTypes.SimplePropertyTemplate"
-	CodeFile="Interface.DataTypes.SimplePropertyTemplate.cs" 
 	ClassName="Kistl.Server.Generators.Templates.Interface.DataTypes.SimplePropertyTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
@@ -12,4 +11,8 @@
 
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="prop" Type="Property" %>
-		<%= prop.GetPropertyTypeString() %> <%= prop.PropertyName %> { get; set; }
+<%
+	string name = prop.PropertyName;
+	string type = prop.ReferencedTypeAsCSharp();
+%>
+		<%= type %> <%= name %> { get; set; }

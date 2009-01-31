@@ -16,7 +16,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     {
 
         public IdProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
-            : base(_host, ctx, typeof(int), "ID")
+            : base(_host, ctx, "int", "ID")
         {
 
         }

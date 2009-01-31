@@ -12,11 +12,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     public partial class NotifyingValueProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
-		protected Type type;
+		protected string type;
 		protected String name;
 
 
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Type type, String name)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string type, String name)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -27,15 +27,15 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 ApplyRequisitesTemplate();
 	
 	ApplyAttributesTemplate();
 	
 	string backingName = MungeNameToBacking(name);
 
-#line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
-this.WriteObjects("        ",  GetModifiers() , " ",  type.ToCSharpTypeRef() , " ",  name , "\r\n");
+#line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+this.WriteObjects("        ",  GetModifiers() , " ",  type , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
@@ -52,7 +52,7 @@ this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\");;
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  type.ToCSharpTypeRef() , " ",  backingName , ";\r\n");
+this.WriteObjects("        private ",  type , " ",  backingName , ";\r\n");
 
         }
 

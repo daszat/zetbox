@@ -25,7 +25,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         /// </summary>
         protected virtual MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
         {
-            return methodAttributes;
+            // interface methods cannot be overridden
+            return methodAttributes | MemberAttributes.Final;
         }
 
         protected virtual string GetReturnType()

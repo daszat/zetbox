@@ -17,7 +17,7 @@
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
 
-	string enumType = prop.GetPropertyTypeString();
+	string enumType = prop.ReferencedTypeAsCSharp();
 
 %>
         // implement the user-visible interface
