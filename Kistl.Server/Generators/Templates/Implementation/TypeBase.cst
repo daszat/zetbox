@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.TypeBase"
-	ClassName="Kistl.Server.Generators.Templates.Implementation.TypeBase" 
-	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+    Name="Implementation.TypeBase"
+    ClassName="Kistl.Server.Generators.Templates.Implementation.TypeBase" 
+    Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -15,6 +15,7 @@
 ApplyGlobalPreambleTemplate();
 
 %>
+
 namespace <%= DataType.Module.Namespace %>
 {
     using System;
@@ -29,14 +30,14 @@ namespace <%= DataType.Module.Namespace %>
     using Kistl.API;
 
 <%
-	foreach(string ns in GetAdditionalImports())
-	{
+    foreach(string ns in GetAdditionalImports())
+    {
 %>
-	using <%= ns %>;
+    using <%= ns %>;
 <%
-	}
-	
-	ApplyNamespacePreambleTemplate();
+    }
+    
+    ApplyNamespacePreambleTemplate();
 %>
 
     /// <summary>
@@ -44,46 +45,46 @@ namespace <%= DataType.Module.Namespace %>
     /// </summary>
 <%
 
-	var mungedClassName = MungeClassName(DataType.ClassName);
+    var mungedClassName = MungeClassName(DataType.ClassName);
 
-	ApplyClassAttributeTemplate();
+    ApplyClassAttributeTemplate();
 %>
     [System.Diagnostics.DebuggerDisplay("<%= DataType.ClassName %>")]
     public class <%= mungedClassName %> <%= GetInheritance() %>
     {
 
 <%
-		ApplyIDPropertyTemplate();
+        ApplyIDPropertyTemplate();
 
-		foreach(Property p in DataType.Properties)
-		{
+        foreach(Property p in DataType.Properties)
+        {
 %>
 
         /// <summary>
         /// <%= p.Description %>
         /// </summary>
 <%
-			ApplyPropertyTemplate(p);
-		}
+            ApplyPropertyTemplate(p);
+        }
 
-		foreach(var m in MethodsToGenerate())
-		{
+        foreach(var m in MethodsToGenerate())
+        {
 %>
 
         /// <summary>
         /// <%= m.Description %>
         /// </summary>
 <%
-			ApplyMethodTemplate(m);
-		}
-		
-		
-		ApplyClassTailTemplate();
+            ApplyMethodTemplate(m);
+        }
+
+        ApplyClassTailTemplate();
 %>
 
-	}
+    }
 
-<%	
-		ApplyNamespaceTailTemplate();
+<%    
+        ApplyNamespaceTailTemplate();
 %>
+
 }
