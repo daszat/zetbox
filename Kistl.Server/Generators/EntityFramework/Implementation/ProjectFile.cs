@@ -14,6 +14,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         {
         }
 
+        protected override string GetAssemblyName()
+        {
+            return "Kistl.Objects." + TaskEnum.Server;
+        }
+
         protected override void ApplyAdditionalReferences()
         {
             base.ApplyAdditionalReferences();
@@ -61,12 +66,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             this.WriteLine(@"    <EmbeddedResource Include=""Model.csdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.ssdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.msl"" />");
-            this.WriteLine(@"  </ItemGroup>");
-
-            this.WriteLine(@"  <ItemGroup>");
-            this.WriteLine(@"    <Compile Include=""FrozenContext.cs"" />");
-            this.WriteLine(@"    <Compile Include=""CollectionEntries.cs"" />");
-            this.WriteLine(@"    <Compile Include=""AssociationSetAttributes.cs"" />");
             this.WriteLine(@"  </ItemGroup>");
 
         }

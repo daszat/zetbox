@@ -1,0 +1,5 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.FrozenContext.Template"
+	ClassName="Kistl.Server.Generators.Templates.Implementation.FrozenContext.Template" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>

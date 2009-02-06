@@ -6,12 +6,17 @@ using System.Text;
 namespace Kistl.Server.Generators.ClientObjects.Implementation
 {
     public class ProjectFile
-        : Kistl.Server.Generators.Templates.Implementation.ProjectFile
+        : Templates.Implementation.ProjectFile
     {
 
         public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames)
             : base(_host, ctx, projectGuid, fileNames)
         {
+        }
+
+        protected override string GetAssemblyName()
+        {
+            return "Kistl.Objects." + TaskEnum.Client;
         }
 
         protected override void ApplyAdditionalReferences()
@@ -34,7 +39,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
             // Server API
             this.WriteLine(@"    <ProjectReference Include=""..\Kistl.API.Client\Kistl.API.Client.csproj"">");
             this.WriteLine(@"      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>");
-            this.WriteLine(@"      <Name>Kistl.API.Server</Name>");
+            this.WriteLine(@"      <Name>Kistl.API.Client</Name>");
             this.WriteLine(@"    </ProjectReference>");
         }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Kistl.Server.Generators.Templates.Interface
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst")]
     public partial class ProjectFile : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected Kistl.API.IKistlContext ctx;
@@ -22,7 +22,7 @@ namespace Kistl.Server.Generators.Templates.Interface
         
         public override void Generate()
         {
-#line 9 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 9 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
 this.WriteObjects("<Project ToolsVersion=\"3.5\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
@@ -32,9 +32,8 @@ this.WriteObjects("    <ProductVersion>9.0.21022</ProductVersion>\r\n");
 this.WriteObjects("    <SchemaVersion>2.0</SchemaVersion>\r\n");
 this.WriteObjects("    <ProjectGuid>",  projectGuid , "</ProjectGuid>\r\n");
 this.WriteObjects("    <OutputType>Library</OutputType>\r\n");
-this.WriteObjects("    <AppDesignerFolder>Properties</AppDesignerFolder>\r\n");
-this.WriteObjects("    <RootNamespace>Kistl.Objects</RootNamespace>\r\n");
-this.WriteObjects("    <AssemblyName>Kistl.Objects</AssemblyName>\r\n");
+this.WriteObjects("    <RootNamespace>",  GetAssemblyName() , "</RootNamespace>\r\n");
+this.WriteObjects("    <AssemblyName>",  GetAssemblyName() , "</AssemblyName>\r\n");
 this.WriteObjects("    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>\r\n");
 this.WriteObjects("    <FileAlignment>512</FileAlignment>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -65,27 +64,27 @@ this.WriteObjects("    <ProjectReference Include=\"..\\Kistl.API\\Kistl.API.cspr
 this.WriteObjects("      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>\r\n");
 this.WriteObjects("      <Name>Kistl.API</Name>\r\n");
 this.WriteObjects("    </ProjectReference>\r\n");
-#line 52 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 51 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 ApplyAdditionalReferences();
 
-#line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 53 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 56 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 foreach (var name in fileNames)
 	{
 
-#line 60 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 59 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
-#line 62 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 61 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 }
 
-#line 64 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 63 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 66 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 65 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 ApplyAdditionalItemGroups();
 
-#line 67 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 66 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("  \r\n");
 this.WriteObjects("  <Import Project=\"$(MSBuildToolsPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");

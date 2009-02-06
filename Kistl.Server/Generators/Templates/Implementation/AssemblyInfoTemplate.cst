@@ -1,6 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.AssemblyInfoTemplate"
-	CodeFile="Implementation.AssemblyInfoTemplate.cs" 
 	ClassName="Kistl.Server.Generators.Templates.Implementation.AssemblyInfoTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>

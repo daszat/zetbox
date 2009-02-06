@@ -15,9 +15,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid><%= projectGuid %></ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Objects</RootNamespace>
-    <AssemblyName>Kistl.Objects</AssemblyName>
+    <RootNamespace><%= GetAssemblyName() %></RootNamespace>
+    <AssemblyName><%= GetAssemblyName() %></AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

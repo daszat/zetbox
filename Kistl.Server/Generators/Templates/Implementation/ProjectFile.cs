@@ -6,7 +6,7 @@ using System.Text;
 namespace Kistl.Server.Generators.Templates.Implementation
 {
     public class ProjectFile
-        : Kistl.Server.Generators.Templates.Interface.ProjectFile
+        : Templates.Interface.ProjectFile
     {
 
         public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames)

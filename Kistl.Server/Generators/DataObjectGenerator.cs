@@ -87,6 +87,8 @@ namespace Kistl.Server.Generators
             Console.WriteLine();
 
             Console.Write("  FrozenContext");
+            generatedClientFileNames.Add(Generate_FrozenContext(ctx, TaskEnum.Client));
+            generatedServerFileNames.Add(Generate_FrozenContext(ctx, TaskEnum.Server));
 
             Console.WriteLine();
 
@@ -173,6 +175,11 @@ namespace Kistl.Server.Generators
         private static string Generate_CollectionEntries(IKistlContext ctx, TaskEnum task)
         {
             return RunTemplate(ctx, task, "Implementation.ObjectClasses.CollectionEntries", "CollectionEntries", "Designer.cs");
+        }
+
+        private static string Generate_FrozenContext(IKistlContext ctx, TaskEnum task)
+        {
+            return RunTemplate(ctx, task, "Implementation.FrozenContext.Template", "FrozenContext", "Designer.cs");
         }
 
         private static string Generate_Interface_Enumerations(IKistlContext ctx, Enumeration e)
