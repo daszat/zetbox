@@ -63,6 +63,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
+            this.Host.CallTemplate("Implementation.ObjectClasses.Tail", ctx, this.DataType);
         }
 
     }
