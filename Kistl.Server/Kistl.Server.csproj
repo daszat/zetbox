@@ -236,9 +236,6 @@
       <DependentUpon>ListProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\Method.cs" />
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.cs">
-      <DependentUpon>MethodBody.cst</DependentUpon>
-    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.Designer.cs">
       <DependentUpon>MethodBody.cst</DependentUpon>
       <AutoGen>True</AutoGen>

@@ -88,5 +88,45 @@ namespace Kistl.Server.Generators.Extensions
             }
         }
 
+        public static string ReturnedTypeAsCSharp(this BaseParameter param)
+        {
+            string result;
+            if (param is BoolParameter)
+            {
+                result = "bool"; // +(param.IsNullable ? "?" : "");
+            }
+            else if (param is IntParameter)
+            {
+                result = "int"; // + (param.IsNullable ? "?" : "");
+            }
+            else if (param is DoubleParameter)
+            {
+                result = "double"; // + (param.IsNullable ? "?" : "");
+            }
+            else if (param is DateTimeParameter)
+            {
+                result = "DateTime"; // + (param.IsNullable ? "?" : "");
+            }
+            //else if (param is EnumerationParameter)
+            //{
+            //    result = param.GetPropertyTypeString(); // + (param.IsNullable ? "?" : "");
+            //}
+            else if (param is StringParameter)
+            {
+                result = "string";
+            }
+            else
+            {
+                result = param.GetParameterTypeString();
+            }
+
+            if (param.IsList)
+            {
+                result = "IList<" + result + ">";
+            }
+
+            return result;
+        }
+
     }
 }

@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             }
             else
             {
-                return ret.GetParameterTypeString();
+                return ret.ReturnedTypeAsCSharp();
             }
         }
 
