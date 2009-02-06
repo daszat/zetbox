@@ -7,7 +7,6 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kistl.Objects.Server</RootNamespace>
     <AssemblyName>Kistl.Objects.Server</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -36,28 +35,38 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.Interface.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data.Entity">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
+    <ProjectReference Include="..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj">
+      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
+      <Name>Kistl.DALProvider.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
+      <Name>Kistl.API.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherTest.Server.Designer.cs" />
     <Compile Include="Assembly.Server.Designer.cs" />
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Auftrag.Server.Designer.cs" />
     <Compile Include="BackReferenceProperty.Server.Designer.cs" />
     <Compile Include="BaseParameter.Server.Designer.cs" />
@@ -75,7 +84,6 @@
     <Compile Include="Enumeration.Server.Designer.cs" />
     <Compile Include="EnumerationEntry.Server.Designer.cs" />
     <Compile Include="EnumerationProperty.Server.Designer.cs" />
-    <Compile Include="FrozenContext.cs" />
     <Compile Include="Icon.Server.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Server.Designer.cs" />
     <Compile Include="Interface.Server.Designer.cs" />
@@ -97,7 +105,6 @@
     <Compile Include="ObjectClass.Server.Designer.cs" />
     <Compile Include="ObjectParameter.Server.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
-    <Compile Include="ObjectSerializer.cs" />
     <Compile Include="PresenterInfo.Server.Designer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />
     <Compile Include="Property.Server.Designer.cs" />
@@ -113,41 +120,23 @@
     <Compile Include="Template.Server.Designer.cs" />
     <Compile Include="TestCustomObject.Server.Designer.cs" />
     <Compile Include="TestObjClass.Server.Designer.cs" />
-    <Compile Include="TestPhoneStruct.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="ViewDescriptor.Server.Designer.cs" />
     <Compile Include="Visual.Server.Designer.cs" />
     <Compile Include="Zeitkonto.Server.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
-      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
-      <Name>Kistl.API.Server</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
-      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj">
-      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
-      <Name>Kistl.DALProvider.EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
-      <Private>False</Private>
-    </ProjectReference>
+    <Compile Include="CollectionEntries.Server.Designer.cs" />
+    <Compile Include="TestPhoneStruct.Server.Designer.cs" />
+    <Compile Include="FrozenContext.Server.Designer.cs" />
+    <Compile Include="AssemblyInfo.Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model.csdl" />
-    <EmbeddedResource Include="Model.msl" />
     <EmbeddedResource Include="Model.ssdl" />
+    <EmbeddedResource Include="Model.msl" />
+    <Compile Include="AssociationSetAttributes.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

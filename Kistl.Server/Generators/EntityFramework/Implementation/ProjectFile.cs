@@ -66,6 +66,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             this.WriteLine(@"    <EmbeddedResource Include=""Model.csdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.ssdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.msl"" />");
+            this.WriteLine(@"    <Compile Include=""AssociationSetAttributes.cs"" />");
             this.WriteLine(@"  </ItemGroup>");
 
         }
