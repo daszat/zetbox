@@ -8,7 +8,7 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst")]
     public partial class Template : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
@@ -25,18 +25,12 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         
         public override void Generate()
         {
-#line 13 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 13 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("namespace ",  dataType.Module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("    using System;\r\n");
-this.WriteObjects("    using System.Collections;\r\n");
 this.WriteObjects("    using System.Collections.Generic;\r\n");
-this.WriteObjects("    using System.Collections.ObjectModel;\r\n");
-this.WriteObjects("    using System.Linq;\r\n");
-this.WriteObjects("    using System.Text;\r\n");
-this.WriteObjects("    using System.Xml;\r\n");
-this.WriteObjects("    using System.Xml.Serialization;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    using Kistl.API;\r\n");
 this.WriteObjects("\r\n");
@@ -45,16 +39,16 @@ this.WriteObjects("    /// ",  dataType.Description , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
 this.WriteObjects("    public interface ",  dataType.ClassName , " ",  GetInheritance() , " \r\n");
 this.WriteObjects("    {\r\n");
-#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 27 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 foreach(Property p in dataType.Properties)
     {
 
-#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 30 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  p.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 35 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 ApplyPropertyTemplate(p);
     }
 
@@ -63,16 +57,16 @@ ApplyPropertyTemplate(p);
     foreach(var m in MethodsToGenerate())
     {
 
-#line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 43 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  m.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 48 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 ApplyMethodTemplate(m);
     }
 
-#line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 51 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("}");

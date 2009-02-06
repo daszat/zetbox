@@ -9,32 +9,28 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="e" Type="Enumeration" %>
+
 namespace <%= e.Module.Namespace %>
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Text;
-    using System.Collections;
-    using System.Xml;
-    using System.Xml.Serialization;
-    using Kistl.API;
-    
-    
+
     /// <summary>
     /// <%= e.Description %>
     /// </summary>
     public enum <%= e.ClassName %>
     {
-		<% foreach(EnumerationEntry entry in e.EnumerationEntries) { %>
+<%
+    foreach(EnumerationEntry entry in e.EnumerationEntries)
+    {
+%>
 		/// <summary>
 		/// <%= entry.Description %>
 		/// </summary>
 		<%= entry.Name %> = <%= entry.Value %>,
-		<% } %>
+
+<%
+    }
+%>
 	}
 }
