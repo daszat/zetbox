@@ -68,7 +68,7 @@
         {
 %>
                     <%= fkName %> = value.ID;
-                    value.<%= fkName %> = this.ID;
+                    value.<%= otherName %> = this;
 <%
         }
 %>

@@ -23,7 +23,7 @@
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = "ListPropertyCollection";
+	string wrapperClass = "NewListPropertyCollection";
 
 	// which generic interface to use for the collection
 	string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
@@ -35,7 +35,7 @@
 	// collection entries in this list
 	string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
 
-    AddSerialization(serializationList, name);
+    AddSerialization(serializationList, wrapperName);
 
 %>
         public <%= exposedListType %><<%= referencedType %>> <%= name %>
@@ -44,11 +44,11 @@
             {
                 if (<%= wrapperName %> == null)
                 {
-                    <%= wrapperName %> = new <%= wrapperClass %><<%= referencedType %>, <%= thisInterface %>, <%= referencedCollectionEntry %>>(
+                    <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>>(
                         this,
                         "<%= name %>");
                 }
                 return <%= wrapperName %>;
             }
         }
-        private <%= wrapperClass %><<%= referencedType %>, <%= thisInterface %>, <%= referencedCollectionEntry %>> <%= wrapperName %>;
+        private <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>> <%= wrapperName %>;

@@ -38,7 +38,7 @@ Debug.Assert(prop.IsList);
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = "ListPropertyCollection";
+	string wrapperClass = "NewListPropertyCollection";
 
 	// which generic interface to use for the collection
 	string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
@@ -50,7 +50,7 @@ Debug.Assert(prop.IsList);
 	// collection entries in this list
 	string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
 
-    AddSerialization(serializationList, name);
+    AddSerialization(serializationList, wrapperName);
 
 
 #line 41 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
@@ -60,14 +60,14 @@ this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedType , ", ",  thisInterface , ", ",  referencedCollectionEntry , ">(\r\n");
+this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ">(\r\n");
 this.WriteObjects("                        this,\r\n");
 this.WriteObjects("                        \"",  name , "\");\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  wrapperClass , "<",  referencedType , ", ",  thisInterface , ", ",  referencedCollectionEntry , "> ",  wrapperName , ";\r\n");
+this.WriteObjects("        private ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , "> ",  wrapperName , ";\r\n");
 
         }
 

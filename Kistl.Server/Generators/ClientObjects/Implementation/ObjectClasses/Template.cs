@@ -76,6 +76,14 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 prop);
         }
 
+        protected override void ApplyStructPropertyTemplate(StructProperty prop)
+        {
+            this.WriteLine("        // struct property");
+            this.Host.CallTemplate("Implementation.ObjectClasses.StructPropertyTemplate", ctx,
+                this.MembersToSerialize,
+                prop);
+        }
+
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
         {
             this.WriteLine("        // value list property");

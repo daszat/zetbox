@@ -9,10 +9,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
     public partial class ValueCollectionProperty
     {
-        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string efName)
+        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string wrapperName)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", efName);
+            {
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", wrapperName + ".UnderlyingCollection");
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", wrapperName + ".DeletedCollection");
+            }
         }
     }
 }

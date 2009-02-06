@@ -24,7 +24,21 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         protected virtual void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
         {
             this.WriteLine("        // parent property");
-            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ObjectClass.ClassName, propertyName);
+            ApplyNotifyingValueProperty(null, prop.ObjectClass.ClassName, propertyName);
+            this.WriteLine();
+            this.WriteLine("        // proxy to A.ID");
+            this.WriteLine("        public int fk_A");
+            this.WriteLine("        {");
+            this.WriteLine("            get { return A.ID; }");
+            this.WriteObjects("            set { A = this.Context.Find<", this.prop.ObjectClass.ClassName, ">(value); }");
+            this.WriteLine();
+            this.WriteLine("        }");
+            this.WriteLine();
+            this.WriteLine();
+
+            // shouldn't be serialized
+            //this.MembersToSerialize.Add("fk_A");
+
         }
 
         protected virtual void ApplyValuePropertyTemplate(Property p, string propertyName)
@@ -46,22 +60,22 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         protected virtual void ApplyEnumerationPropertyTemplate(EnumerationProperty prop, string propertyName)
         {
             this.WriteLine("        // enumeration property");
-            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
+            ApplyNotifyingValueProperty(this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
         }
 
         protected virtual void ApplyStructPropertyTemplate(StructProperty prop, string propertyName)
         {
             this.WriteLine("        // struct property");
-            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
+            ApplyNotifyingValueProperty(this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
         }
 
         protected virtual void ApplyValueTypePropertyTemplate(ValueTypeProperty prop, string propertyName)
         {
             this.WriteLine("        // value type property");
-            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
+            ApplyNotifyingValueProperty(this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
         }
 
-        protected virtual void ApplyNotifyingValueProperty(Property prop, SerializationMembersList serList, string typeRef, string propertyName)
+        protected virtual void ApplyNotifyingValueProperty(SerializationMembersList serList, string typeRef, string propertyName)
         {
             this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
                 serList,

@@ -419,11 +419,21 @@
   <ItemGroup>
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionEntries.cs" />
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\IdProperty.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cs">
       <DependentUpon>ObjectListProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.Designer.cs">
       <DependentUpon>ObjectListProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cs">
+      <DependentUpon>StructPropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.Designer.cs">
+      <DependentUpon>StructPropertyTemplate.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -606,6 +616,10 @@
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>StructPropertyTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst">
       <Generator>Arebis Template Processor</Generator>

@@ -1,0 +1,30 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.StructPropertyTemplate"
+	ClassName="Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.StructPropertyTemplate" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
+<%@ Parameter Name="prop" Type="StructProperty" %>
+<%
+
+	string name = prop.PropertyName;
+
+	string structType = prop.GetPropertyTypeString();
+
+%>
+        // implement the user-visible interface
+        public <%= structType %> <%= name %>
+        {
+            get;
+            set;
+        }
+<%
+        // AddSerialization(serializationList, efName);
+%>  

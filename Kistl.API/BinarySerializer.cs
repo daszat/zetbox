@@ -223,6 +223,11 @@ namespace Kistl.API
             val = sr.ReadBoolean();
         }
 
+        //public static void FromStreamConverter(Action<bool> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadBoolean());
+        //}
+
         /// <summary>
         /// Deserialize a DateTime
         /// </summary>
@@ -233,6 +238,11 @@ namespace Kistl.API
             val = DateTime.FromBinary(sr.ReadInt64());
         }
 
+        //public static void FromStreamConverter(Action<DateTime> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(DateTime.FromBinary(sr.ReadInt64()));
+        //}
+
         /// <summary>
         /// Deserialize a int
         /// </summary>
@@ -242,18 +252,11 @@ namespace Kistl.API
         {
             val = sr.ReadInt32();
         }
-
-        /*/// <summary>
-        /// Deserialize a Enum
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out Enum val, System.IO.BinaryReader sr)
+        public static void FromStreamConverter(Action<int> conv, System.IO.BinaryReader sr)
         {
-            val = sr.ReadBoolean() ? (Enum)(object)sr.ReadInt32() : null;
-        }*/
-
-
+            conv(sr.ReadInt32());
+        }
+ 
         /// <summary>
         /// Deserialize a float
         /// </summary>
@@ -263,6 +266,11 @@ namespace Kistl.API
         {
             val = sr.ReadSingle();
         }
+        //public static void FromStreamConverter(Action<float> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadSingle());
+        //}
+
 
         /// <summary>
         /// Deserialize a double
@@ -273,6 +281,10 @@ namespace Kistl.API
         {
             val = sr.ReadDouble();
         }
+        //public static void FromStreamConverter(Action<double> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadDouble());
+        //}
 
         /// <summary>
         /// Deserialize a string, expected format: NULL (true/false), Value (if not null).
@@ -284,6 +296,11 @@ namespace Kistl.API
             val = sr.ReadBoolean() ? sr.ReadString() : null;
         }
 
+        public static void FromStreamConverter(Action<string> conv, System.IO.BinaryReader sr)
+        {
+            conv(sr.ReadBoolean() ? sr.ReadString() : null);
+        }
+
         /// <summary>
         /// Deserialize a nullable bool, expected format: NULL (true/false), Value (if not null).
         /// </summary>
@@ -293,7 +310,10 @@ namespace Kistl.API
         {
             val = sr.ReadBoolean() ? (bool?)sr.ReadBoolean() : null;
         }
-
+        //public static void FromStreamConverter(Action<bool?> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadBoolean() ? (bool?)sr.ReadBoolean() : null);
+        //}
         /// <summary>
         /// Deserialize a nullable DateTime, expected format: NULL (true/false), Value (if not null).
         /// </summary>
@@ -303,7 +323,10 @@ namespace Kistl.API
         {
             val = sr.ReadBoolean() ? (DateTime?)DateTime.FromBinary(sr.ReadInt64()) : null;
         }
-
+        //public static void FromStreamConverter(Action<DateTime?> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadBoolean() ? (DateTime?)DateTime.FromBinary(sr.ReadInt64()) : null);
+        //}
         /// <summary>
         /// Deserialize a nullable int, expected format: NULL (true/false), Value (if not null).
         /// </summary>
@@ -313,7 +336,10 @@ namespace Kistl.API
         {
             val = sr.ReadBoolean() ? (int?)sr.ReadInt32() : null;
         }
-
+        //public static void FromStreamConverter(Action<int?> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadBoolean() ? (int?)sr.ReadInt32() : null);
+        //}
         /// <summary>
         /// Deserialize a nullable float, expected format: NULL (true/false), Value (if not null).
         /// </summary>
@@ -323,7 +349,10 @@ namespace Kistl.API
         {
             val = sr.ReadBoolean() ? (float?)sr.ReadSingle() : null;
         }
-
+        //public static void FromStreamConverter(Action<float?> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadBoolean() ? (float?)sr.ReadSingle() : null);
+        //}
         /// <summary>
         /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
         /// </summary>
@@ -333,13 +362,17 @@ namespace Kistl.API
         {
             val = sr.ReadBoolean() ? (double?)sr.ReadDouble() : null;
         }
-
+        //public static void FromStreamConverter(Action<double?> conv, System.IO.BinaryReader sr)
+        //{
+        //    conv(sr.ReadBoolean() ? (double?)sr.ReadDouble() : null);
+        //}
         /// <summary>
         /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream<T>(out T val, System.IO.BinaryReader sr) where T : class, IStruct, new()
+        public static void FromStream<T>(out T val, System.IO.BinaryReader sr)
+            where T : class, IStruct, new()
         {
             val = null;
             if (sr.ReadBoolean())
@@ -348,7 +381,20 @@ namespace Kistl.API
                 val.FromStream(sr);
             }
         }
-
+        public static void FromStreamConverter<T>(Action<T> conv, System.IO.BinaryReader sr)
+            where T : class, IStruct, new()
+        {
+            if (sr.ReadBoolean())
+            {
+                var val = new T();
+                val.FromStream(sr);
+                conv(val);
+            }
+            else
+            {
+                conv(null);
+            }
+        }
         /// <summary>
         /// Deserialize a IDataObject Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
         /// </summary>
@@ -438,21 +484,6 @@ namespace Kistl.API
             BinaryFormatter bf = new BinaryFormatter();
             type = (SerializableType)bf.Deserialize(sr.BaseStream);
         }
-
-
-        /// <summary>
-        /// Deserialize from int via converter. Used for Enumerations
-        /// </summary>
-        public static void FromStreamConverter(Action<int> converter, System.IO.BinaryReader sr)
-        {
-            if (converter == null) throw new ArgumentNullException("converter");
-            if (sr == null) throw new ArgumentNullException("sr");
-
-            int i;
-            BinarySerializer.FromStream(out i, sr);
-            converter(i);
-        }
-
 
         #endregion
 

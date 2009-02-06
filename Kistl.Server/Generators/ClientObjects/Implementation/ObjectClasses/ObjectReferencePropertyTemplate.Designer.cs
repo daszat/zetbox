@@ -88,7 +88,7 @@ this.WriteObjects("                    value.",  otherName , ".Add(this);\r\n");
 
 #line 70 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    ",  fkName , " = value.ID;\r\n");
-this.WriteObjects("                    value.",  fkName , " = this.ID;\r\n");
+this.WriteObjects("                    value.",  otherName , " = this;\r\n");
 #line 73 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 

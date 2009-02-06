@@ -46,10 +46,13 @@ namespace Kistl.Server.Generators
                 generatedClientFileNames.Add(Generate_ObjectClass(ctx, objClass, TaskEnum.Client));
                 generatedServerFileNames.Add(Generate_ObjectClass(ctx, objClass, TaskEnum.Server));
             }
+            Console.WriteLine();
+
+            
             Console.Write("  Collection Entries");
             generatedClientFileNames.Add(Generate_CollectionEntries(ctx, TaskEnum.Client));
             generatedServerFileNames.Add(Generate_CollectionEntries(ctx, TaskEnum.Server));
-            Console.WriteLine();
+            Console.WriteLine(".");
 
             Console.WriteLine("  Serializer");
 

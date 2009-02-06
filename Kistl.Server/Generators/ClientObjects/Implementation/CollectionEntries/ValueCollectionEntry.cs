@@ -17,11 +17,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
         {
         }
 
-        protected override void ApplyIdPropertyTemplate()
-        {
-            base.ApplyIdPropertyTemplate();
-        }
-
         protected override string GetCeBaseClassName()
         {
             return "BaseClientCollectionEntry";
