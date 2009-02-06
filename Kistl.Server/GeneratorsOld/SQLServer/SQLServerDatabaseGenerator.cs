@@ -169,15 +169,15 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             #region Create/Update Table
             if (SQLServerHelper.CheckTableExists(objClass, db, tx))
             {
-                System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(objClass));
+                System.Diagnostics.Trace.TraceInformation("Checking Table " + GeneratorHelper.GetDatabaseTableName(objClass));
                 CheckTableProperties(objClass, objClass, "");
             }
             else
             {
-                System.Diagnostics.Trace.TraceInformation("Creating Table " + Generator.GetDatabaseTableName(objClass));
+                System.Diagnostics.Trace.TraceInformation("Creating Table " + GeneratorHelper.GetDatabaseTableName(objClass));
 
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("create table [{0}] ( ", Generator.GetDatabaseTableName(objClass));
+                sb.AppendFormat("create table [{0}] ( ", GeneratorHelper.GetDatabaseTableName(objClass));
                 if (objClass.BaseObjectClass != null)
                 {
                     sb.AppendLine("[ID] [int] NOT NULL, ");
@@ -189,7 +189,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
 
                 AppendTableProperties(sb, objClass, "");
 
-                sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", Generator.GetDatabaseTableName(objClass));
+                sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", GeneratorHelper.GetDatabaseTableName(objClass));
                 sb.AppendLine();
                 sb.Append(")");
 
@@ -202,13 +202,13 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             #region Create/Update List Properties
             foreach (Property p in objClass.Properties.OfType<Property>().ToList().Where(p => p.IsList && p.HasStorage()))
             {
-                string tableName = Generator.GetDatabaseTableName(p);
+                string tableName = GeneratorHelper.GetDatabaseTableName(p);
                 string parentFKColumn = p.ObjectClass.ClassName.CalcForeignKeyColumnName("");
                 string parentPositionColumn = p.ObjectClass.ClassName.CalcListPositionColumnName("");
 
                 if (SQLServerHelper.CheckTableExists(p, db, tx))
                 {
-                    System.Diagnostics.Trace.TraceInformation("Checking Table " + Generator.GetDatabaseTableName(p));
+                    System.Diagnostics.Trace.TraceInformation("Checking Table " + GeneratorHelper.GetDatabaseTableName(p));
                     if (p.IsIndexed && !SQLServerHelper.CheckColumnExists(tableName, parentPositionColumn, db, tx))
                     {
                         SQLServerHelper.CreateColumn(tableName, parentPositionColumn, "int", true, db, tx);
@@ -225,10 +225,10 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 }
                 else
                 {
-                    System.Diagnostics.Trace.TraceInformation("Creating Table " + Generator.GetDatabaseTableName(p));
+                    System.Diagnostics.Trace.TraceInformation("Creating Table " + GeneratorHelper.GetDatabaseTableName(p));
 
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendFormat("create table [{0}] ( ", Generator.GetDatabaseTableName(p));
+                    sb.AppendFormat("create table [{0}] ( ", GeneratorHelper.GetDatabaseTableName(p));
                     sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
 
                     sb.AppendLine(string.Format("[{0}] [int] NOT NULL, ", parentFKColumn));
@@ -244,7 +244,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                     }
                     sb.AppendLine(",");
 
-                    sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", Generator.GetDatabaseTableName(p));
+                    sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", GeneratorHelper.GetDatabaseTableName(p));
                     sb.AppendLine();
                     sb.Append(")");
 

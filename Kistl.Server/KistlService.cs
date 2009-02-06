@@ -213,7 +213,7 @@ namespace Kistl.Server
             {
                 using (TraceClient.TraceHelper.TraceMethodCall())
                 {
-                    GeneratorsOld.Generator.GenerateCode();
+                    Generators.Generator.GenerateCode();
                     GeneratorsOld.Generator.GenerateDatabase();
                 }
             }
