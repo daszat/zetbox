@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries
@@ -20,7 +21,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
         protected override void ApplyClassAttributeTemplate()
         {
             base.ApplyClassAttributeTemplate();
-            this.WriteObjects(@"    [EdmEntityType(NamespaceName=""Model"", Name=""", GetCeClassName(), @""")]");
+            this.WriteObjects(@"    [EdmEntityType(NamespaceName=""Model"", Name=""", rel.GetCollectionEntryClassName(), @""")]");
             this.WriteLine();
         }
 
