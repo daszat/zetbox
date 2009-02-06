@@ -10,6 +10,7 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="prop" Type="EnumerationProperty" %>
 <%
 
@@ -57,5 +58,6 @@
             }
         }
         
-        
-        
+<%
+    AddSerialization(serializationList);
+%>

@@ -1,7 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.SerializerTemplate"
-	CodeFile="Implementation.ObjectClasses.SerializerTemplate.cs" 
-	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.SerializerTemplate" 
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.SerializerTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -11,39 +10,33 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Movables" %>
-
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="direction" Type="SerializerDirection" %>
-<%@ Parameter Name="fields" Type="IList<string>" %>
+<%@ Parameter Name="fields" Type="SerializationMembersList" %>
+
 <%
-	string methodName, argType, modifier;
+	string methodName = direction.ToString();
+	string argType;
 	
 	switch(direction){
 		case SerializerDirection.ToStream:
-			methodName = "ToStream";
 			argType = "System.IO.BinaryWriter";
-			modifier = "";
 			break;
 		case SerializerDirection.FromStream:
-			methodName = "FromStream";
 			argType = "System.IO.BinaryReader";
-			modifier = "out ";
 			break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}
 	
 %>
-
         public override void <%= methodName %>(<%= argType %> binStream)
         {
             base.<%= methodName %>(binStream);
 <%
-	foreach(string fieldName in fields)
+	foreach(var serMember in fields)
 	{
-%>
-            BinarySerializer.<%= methodName %>(<%= modifier %>this.<%= fieldName %>, binStream);
-<%
+	    ApplySerializer(direction, serMember, "binStream");
 	}
 %>
         }

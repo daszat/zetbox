@@ -12,13 +12,13 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     /// Vorschlag: [OverrideTemplate(Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty)]
     /// Alternativ: alle Klassen gelten automatisch als Overrider, wenn sie von dem aufgerufenen Template ableiten.
     /// </summary>
-    public class IdProperty : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+    public class IdProperty
+        : Templates.Implementation.ObjectClasses.IdProperty
     {
 
         public IdProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
-            : base(_host, ctx, "int", "ID")
+            : base(_host, ctx)
         {
-
         }
 
         protected override void ApplyAttributesTemplate()
@@ -26,17 +26,5 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             base.ApplyAttributesTemplate();
             WriteLine("        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]");
         }
-
-        protected override MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
-        {
-            // add override flag to implement abstract ID member
-            return base.ModifyMethodAttributes(methodAttributes) | MemberAttributes.Override;
-        }
-
-        protected override string MungeNameToBacking(string name)
-        {
-            return "_" + name;
-        }
-
     }
 }

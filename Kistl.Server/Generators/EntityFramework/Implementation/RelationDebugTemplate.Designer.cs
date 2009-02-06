@@ -2,6 +2,7 @@ using System;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Movables;
 
 
@@ -24,7 +25,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         
         public override void Generate()
         {
-#line 13 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\RelationDebugTemplate.cst"
+#line 14 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\RelationDebugTemplate.cst"
 this.WriteObjects("    NewRelation: ",  rel.GetAssociationName() , " \r\n");
 this.WriteObjects("    A: ",  rel.A.Multiplicity , " ",  rel.A.Type.ClassName , " as ",  rel.A.RoleName , " (site: ",  rel.A.DebugCreationSite , ")\r\n");
 this.WriteObjects("    B: ",  rel.B.Multiplicity , " ",  rel.B.Type.ClassName , " as ",  rel.B.RoleName , " (site: ",  rel.B.DebugCreationSite , ")\r\n");

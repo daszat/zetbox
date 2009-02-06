@@ -12,16 +12,18 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     public partial class ListProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
+		protected SerializationMembersList serializationList;
 		protected DataType containingType;
 		protected Type type;
 		protected String name;
 		protected Property property;
 
 
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType containingType, Type type, String name, Property property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, DataType containingType, Type type, String name, Property property)
             : base(_host)
         {
 			this.ctx = ctx;
+			this.serializationList = serializationList;
 			this.containingType = containingType;
 			this.type = type;
 			this.name = name;
@@ -31,12 +33,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
-this.WriteObjects("\r\n");
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 ApplyAttributesTemplate();
 
-	var backingName = MungeNameToBacking(name);
+	var backingName = BackingMemberFromName(name);
 
 #line 23 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
@@ -50,7 +50,10 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\r\n");
 #line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
-ApplyRequisitesTemplate();
+AddSerialization(serializationList, name);
+
+
+	ApplyRequisitesTemplate();
 
 
         }

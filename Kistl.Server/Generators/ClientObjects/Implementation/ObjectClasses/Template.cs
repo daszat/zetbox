@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 using Kistl.App.Base;
+using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
@@ -11,7 +14,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
     {
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx,Kistl.App.Base.ObjectClass cls)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.ObjectClass cls)
             : base(_host, ctx, cls)
         {
         }
@@ -36,6 +39,49 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             {
                 return "BaseClientDataObject";
             }
+        }
+
+        protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
+        {
+            this.WriteLine("        // enumeration property");
+            this.ApplyNotifyingValueProperty(prop, null);
+            this.MembersToSerialize.Add("Implementation.ObjectClasses.EnumBinarySerialization", prop);
+        }
+
+        protected override void ApplyObjectReferencePropertyTemplate(ObjectReferenceProperty prop)
+        {
+            var rel = NewRelation.Lookup(ctx, prop);
+
+            Debug.Assert(rel.A.Navigator == prop || rel.B.Navigator == prop);
+            var relEnd = rel.GetEnd(prop);
+            var otherEnd = relEnd.Other;
+
+            this.WriteLine("        // object reference property");
+            this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+                this.MembersToSerialize,
+                prop);
+        }
+
+        protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
+        {
+            var rel = NewRelation.Lookup(ctx, prop);
+
+            Debug.Assert(rel.A.Navigator == prop || rel.B.Navigator == prop);
+            var relEnd = rel.GetEnd(prop);
+            var otherEnd = relEnd.Other;
+
+            this.WriteLine("        // object list property");
+            this.Host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
+                this.MembersToSerialize,
+                prop);
+        }
+
+        protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
+        {
+            this.WriteLine("        // value list property");
+            this.Host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty", ctx,
+                this.MembersToSerialize,
+                prop);
         }
 
     }

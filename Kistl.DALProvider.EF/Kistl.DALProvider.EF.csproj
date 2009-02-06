@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseServerDataObject_EntityFramework.cs" />
+    <Compile Include="EfSerializer.cs" />
     <Compile Include="NewEntityCollectionWrapper.Implementations.cs" />
     <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="KistlDataContext.cs" />

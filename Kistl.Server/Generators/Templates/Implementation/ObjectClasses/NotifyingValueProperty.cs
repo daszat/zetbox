@@ -20,9 +20,15 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         /// </summary>
         protected virtual void ApplyAttributesTemplate() { }
 
-        protected virtual string MungeNameToBacking(string name)
+        protected virtual string BackingMemberFromName(string name)
         {
             return "_" + name;
+        }
+
+        protected virtual void AddSerialization(SerializationMembersList list, string name)
+        {
+            if (list != null)
+                list.Add(BackingMemberFromName(name));
         }
 
         protected string GetModifiers()

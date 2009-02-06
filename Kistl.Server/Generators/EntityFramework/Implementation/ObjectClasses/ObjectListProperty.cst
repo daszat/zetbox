@@ -1,6 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.ObjectListProperty"
-	CodeFile="Implementation.ObjectClasses.ObjectListProperty.cs" 
 	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
@@ -11,6 +10,7 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="relEnd" Type="RelationEnd" %>
 <%
 
@@ -23,7 +23,7 @@
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = "Entity" + (relEnd.Other.HasPersistentOrder ? "List" : "Collection") + "Wrapper";
+	string wrapperClass = relEnd.Other.HasPersistentOrder ? "EntityListWrapper" : "EntityCollectionWrapper";
 	
 	// the name of the EF association
 	string assocName = rel.GetAssociationName();
@@ -80,7 +80,6 @@
                 return c;
             }
         }
-
         private <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>> <%= wrapperName %>;
-        
+
 

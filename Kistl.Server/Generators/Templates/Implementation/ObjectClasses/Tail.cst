@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.Tail"
-	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.Tail" 
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>

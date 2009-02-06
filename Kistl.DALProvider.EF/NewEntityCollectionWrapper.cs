@@ -21,9 +21,7 @@ namespace Kistl.DALProvider.EF
     public abstract class EntityCollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
         : ICollection<ITEMTYPE>
         where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
-        where ITEMTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
     {
         protected EntityCollection<ENTRYTYPE> Collection { get; private set; }
@@ -82,7 +80,7 @@ namespace Kistl.DALProvider.EF
         protected void Clear(ENTRYTYPE entry)
         {
             entry.A = null;
-            entry.B = null;
+            entry.B = default(BTYPE);
             // Case: 668
             entry.GetEFContext().DeleteObject(entry);
         }
@@ -178,9 +176,7 @@ namespace Kistl.DALProvider.EF
     public abstract class EntityListEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
         : EntityCollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>, IList<ITEMTYPE>
         where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
-        where ITEMTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
     {
         public EntityListEntriesWrapper(PARENTTYPE parentObject, EntityCollection<ENTRYTYPE> ec)

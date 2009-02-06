@@ -9,10 +9,11 @@ using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
-    public class ListProperty : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.ListProperty
+    public class ListProperty 
+        : Templates.Implementation.ObjectClasses.ListProperty
     {
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, DataType containingType, Type type, String name, Property property)
-            : base(_host, ctx, containingType, type, name, property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Templates.Implementation.SerializationMembersList list, DataType containingType, Type type, String name, Property property)
+            : base(_host, ctx, list, containingType, type, name, property)
         {
         }
 

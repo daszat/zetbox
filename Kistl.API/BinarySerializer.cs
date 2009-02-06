@@ -133,7 +133,7 @@ namespace Kistl.API
         {
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
         }
-        
+
         /// <summary>
         /// Serialize a nullable double. Format is: NULL (true/false), Value (if not null).
         /// </summary>
@@ -143,14 +143,16 @@ namespace Kistl.API
         {
             if (val != null) { sw.Write(true); val.ToStream(sw); } else sw.Write(false);
         }
+
         /// <summary>
         /// Serialize a IDataObject Collection. Format is: CONTINUE (true/false), IDataObject (if Object is present).
         /// </summary>
         /// <param name="val">Collection to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(IEnumerable<IDataObject> val, System.IO.BinaryWriter sw)// where T : IDataObject
+        public static void ToStream<T>(IEnumerable<T> val, System.IO.BinaryWriter sw)// where T : IDataObject
+            where T : IDataObject
         {
-            foreach (IDataObject obj in val)
+            foreach (T obj in val)
             {
                 ToStream(true, sw);
                 obj.ToStream(sw);
@@ -164,7 +166,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Collection to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream<T>(IEnumerable<T> val, System.IO.BinaryWriter sw) where T : ICollectionEntry
+        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, System.IO.BinaryWriter sw) where T : ICollectionEntry
         {
             foreach (ICollectionEntry obj in val)
             {
@@ -207,6 +209,7 @@ namespace Kistl.API
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(sw.BaseStream, type);
         }
+
         #endregion
 
         #region FromStream
@@ -339,7 +342,7 @@ namespace Kistl.API
         public static void FromStream<T>(out T val, System.IO.BinaryReader sr) where T : class, IStruct, new()
         {
             val = null;
-            if(sr.ReadBoolean())
+            if (sr.ReadBoolean())
             {
                 val = new T();
                 val.FromStream(sr);
@@ -435,8 +438,25 @@ namespace Kistl.API
             BinaryFormatter bf = new BinaryFormatter();
             type = (SerializableType)bf.Deserialize(sr.BaseStream);
         }
+
+
+        /// <summary>
+        /// Deserialize from int via converter. Used for Enumerations
+        /// </summary>
+        public static void FromStreamConverter(Action<int> converter, System.IO.BinaryReader sr)
+        {
+            if (converter == null) throw new ArgumentNullException("converter");
+            if (sr == null) throw new ArgumentNullException("sr");
+
+            int i;
+            BinarySerializer.FromStream(out i, sr);
+            converter(i);
+        }
+
+
         #endregion
 
+        // legacy functions
         #region ToBinary
         /// <summary>
         /// Serialize a bool

@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Kistl.API;
+using Kistl.App.Base;
+using Kistl.Server.Generators.Extensions;
+
+namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
+{
+    public partial class ValueCollectionEntry
+    {
+        protected override void ApplyAPropertyTemplate()
+        {
+            ApplyParentReferencePropertyTemplate(this.prop, "A");
+        }
+
+        protected override void ApplyBPropertyTemplate()
+        {
+            ApplyValuePropertyTemplate(this.prop, "B");
+        }
+
+        protected virtual void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
+        {
+            this.WriteLine("        // parent property");
+            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ObjectClass.ClassName, propertyName);
+        }
+
+        protected virtual void ApplyValuePropertyTemplate(Property p, string propertyName)
+        {
+            if (p is EnumerationProperty)
+            {
+                ApplyEnumerationPropertyTemplate((EnumerationProperty)p, propertyName);
+            }
+            else if (p is StructProperty)
+            {
+                ApplyStructPropertyTemplate((StructProperty)p, propertyName);
+            }
+            else if (p is ValueTypeProperty)
+            {
+                ApplyValueTypePropertyTemplate((ValueTypeProperty)p, propertyName);
+            }
+        }
+
+        protected virtual void ApplyEnumerationPropertyTemplate(EnumerationProperty prop, string propertyName)
+        {
+            this.WriteLine("        // enumeration property");
+            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
+        }
+
+        protected virtual void ApplyStructPropertyTemplate(StructProperty prop, string propertyName)
+        {
+            this.WriteLine("        // struct property");
+            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
+        }
+
+        protected virtual void ApplyValueTypePropertyTemplate(ValueTypeProperty prop, string propertyName)
+        {
+            this.WriteLine("        // value type property");
+            ApplyNotifyingValueProperty(prop, this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
+        }
+
+        protected virtual void ApplyNotifyingValueProperty(Property prop, SerializationMembersList serList, string typeRef, string propertyName)
+        {
+            this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+                serList,
+                typeRef,
+                propertyName);
+        }
+
+        protected override void ApplyAIndexPropertyTemplate()
+        {
+            this.WriteLine("/// always ignored because the other side (a value) cannot have a navigator and therefore no order");
+            this.WriteObjects("int? ", GetCeInterface(), ".AIndex { get { return null; } set { } }");
+            this.WriteLine();
+        }
+
+    }
+}

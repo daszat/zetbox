@@ -13,20 +13,22 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public partial class CollectionEntryListProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
+		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected RelationEnd relEnd;
 
 
-        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, RelationEnd relEnd)
+        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, RelationEnd relEnd)
             : base(_host)
         {
 			this.ctx = ctx;
+			this.serializationList = serializationList;
 			this.relEnd = relEnd;
 
         }
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 NewRelation rel = relEnd.Container;
 
 	// the name of the property to create
@@ -60,7 +62,7 @@ NewRelation rel = relEnd.Container;
 
 	
 
-#line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 51 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -95,10 +97,11 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.NameDataObject , ", ",  rel.B.Type.NameDataObject , ", ",  ceName , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("        \r\n");
-this.WriteObjects("\r\n");
+#line 88 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+AddSerialization(serializationList, efName);
+
 
         }
 

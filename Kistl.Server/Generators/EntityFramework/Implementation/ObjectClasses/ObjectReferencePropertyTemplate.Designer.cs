@@ -13,6 +13,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public partial class ObjectReferencePropertyTemplate : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
+		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected String name;
 		protected String associationName;
 		protected String targetRoleName;
@@ -21,10 +22,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 		protected bool hasPositionStorage;
 
 
-        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation, bool hasPositionStorage)
+        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation, bool hasPositionStorage)
             : base(_host)
         {
 			this.ctx = ctx;
+			this.serializationList = serializationList;
 			this.name = name;
 			this.associationName = associationName;
 			this.targetRoleName = targetRoleName;
@@ -79,7 +81,10 @@ this.WriteObjects("                ",  fkBackingName , " = value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private int ",  fkBackingName , ";\r\n");
-this.WriteObjects("        \r\n");
+#line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+AddSerialization(serializationList, fkBackingName);
+
+#line 66 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // EF sees only this property\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("        public ",  referencedImplementation , " ",  efName , "\r\n");
@@ -112,16 +117,17 @@ this.WriteObjects("                r.Value = (",  referencedImplementation , ")v
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 97 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 99 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 
 	if (hasPositionStorage)
 	{
 		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+		    serializationList,
 			"int?", posStorageName);
 	}
 
-#line 105 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 108 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        \r\n");
 
         }

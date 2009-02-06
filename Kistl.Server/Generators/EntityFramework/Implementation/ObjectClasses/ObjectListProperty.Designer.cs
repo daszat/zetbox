@@ -13,13 +13,15 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public partial class ObjectListProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
+		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected RelationEnd relEnd;
 
 
-        public ObjectListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, RelationEnd relEnd)
+        public ObjectListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, RelationEnd relEnd)
             : base(_host)
         {
 			this.ctx = ctx;
+			this.serializationList = serializationList;
 			this.relEnd = relEnd;
 
         }
@@ -36,7 +38,7 @@ NewRelation rel = relEnd.Container;
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = "Entity" + (relEnd.Other.HasPersistentOrder ? "List" : "Collection") + "Wrapper";
+	string wrapperClass = relEnd.Other.HasPersistentOrder ? "EntityListWrapper" : "EntityCollectionWrapper";
 	
 	// the name of the EF association
 	string assocName = rel.GetAssociationName();
@@ -97,9 +99,8 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\r\n");
-this.WriteObjects("        \r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 
         }

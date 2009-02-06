@@ -13,20 +13,22 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public partial class StructPropertyTemplate : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
+		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected StructProperty prop;
 
 
-        public StructPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, StructProperty prop)
+        public StructPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, StructProperty prop)
             : base(_host)
         {
 			this.ctx = ctx;
+			this.serializationList = serializationList;
 			this.prop = prop;
 
         }
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 string name = prop.PropertyName;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
@@ -35,7 +37,7 @@ string name = prop.PropertyName;
 	string structImplementationType = prop.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 
-#line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  structType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -78,7 +80,13 @@ this.WriteObjects("                    ",  name , " = value;\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        ");
+this.WriteObjects("\r\n");
+this.WriteObjects("\r\n");
+#line 70 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+// AddSerialization(serializationList, efName);
+
+#line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+this.WriteObjects("  ");
 
         }
 

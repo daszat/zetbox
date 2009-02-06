@@ -78,8 +78,22 @@ namespace <%= DataType.Module.Namespace %>
             ApplyMethodTemplate(m);
         }
 
+
         ApplyClassTailTemplate();
 %>
+
+
+#region Serializer
+
+<%
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.ToStream, this.MembersToSerialize);
+		
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.FromStream, this.MembersToSerialize);
+%>
+
+#endregion
 
     }
 

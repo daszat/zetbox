@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.CollectionEntries"
 	CodeFile="Implementation.ObjectClasses.CollectionEntries.cs" 
-	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntries" 
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntries" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -16,19 +16,21 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Metadata.Edm;
-using System.Data.Objects.DataClasses;
 using System.Xml;
 using System.Xml.Serialization;
 
 using Kistl.API;
-using Kistl.DALProvider.EF;
-
 <%
+    foreach(string ns in GetAdditionalImports())
+    {
+%>
+    using <%= ns %>;
+<%
+    }
 
 	foreach (var rel in NewRelation.GetAll(ctx)
 		.Where(rel => rel.GetPreferredStorage() == StorageHint.Separate)
-		.OrderBy(rel => rel.GetAssociationName()))
+		.OrderBy(rel => rel.GetCollectionEntryFullName()))
 	{
 
 %>
@@ -43,7 +45,7 @@ namespace <%= rel.A.Type.Namespace %>
 <%
 		}
 
-		this.CallTemplate("Implementation.ObjectClasses.CollectionEntry", ctx, rel);
+		this.CallTemplate("Implementation.CollectionEntries.ObjectCollectionEntry", ctx, rel);
 %>
 }
 <%
@@ -61,7 +63,7 @@ namespace <%= rel.A.Type.Namespace %>
 namespace <%= prop.ObjectClass.Module.Namespace %>
 {
 <%
-		this.CallTemplate("Implementation.ObjectClasses.ValueCollectionEntry", ctx, prop);
+		this.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntry", ctx, prop);
 %>
 }
 <%

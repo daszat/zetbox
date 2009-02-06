@@ -11,15 +11,17 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst")]
     public partial class NotifyingValueProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
-		protected IKistlContext ctx;
-		protected string type;
-		protected String name;
+		private IKistlContext ctx;
+		private SerializationMembersList serializationList;
+		private string type;
+		private String name;
 
 
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string type, String name)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, string type, String name)
             : base(_host)
         {
 			this.ctx = ctx;
+			this.serializationList = serializationList;
 			this.type = type;
 			this.name = name;
 
@@ -27,14 +29,15 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 ApplyRequisitesTemplate();
-	
-	ApplyAttributesTemplate();
-	
-	string backingName = MungeNameToBacking(name);
 
-#line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+	ApplyAttributesTemplate();
+
+	string backingName = BackingMemberFromName(name);
+
+
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  type , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -53,6 +56,9 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  type , " ",  backingName , ";\r\n");
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+AddSerialization(serializationList, name);
+
 
         }
 

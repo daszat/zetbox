@@ -11,8 +11,8 @@ namespace Kistl.Server.Generators.Templates.Implementation
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst")]
     public partial class TypeBase : Kistl.Server.Generators.KistlCodeTemplate
     {
-		private IKistlContext ctx;
-		private DataType DataType;
+		protected IKistlContext ctx;
+		protected DataType DataType;
 
 
         public TypeBase(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType DataType)
@@ -97,16 +97,31 @@ this.WriteObjects("        /// </summary>\r\n");
 ApplyMethodTemplate(m);
         }
 
+
         ApplyClassTailTemplate();
 
-#line 83 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 84 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("#region Serializer\r\n");
+this.WriteObjects("\r\n");
+#line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.ToStream, this.MembersToSerialize);
+		
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.FromStream, this.MembersToSerialize);
+
+#line 95 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-#line 87 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 101 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 103 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("}");
 

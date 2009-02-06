@@ -7,10 +7,11 @@ using Kistl.API;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
-    public class NotifyingValueProperty : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+    public class NotifyingValueProperty
+        : Templates.Implementation.ObjectClasses.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string type, string name)
-            : base(_host, ctx, type, name)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, string type, string name)
+            : base(_host, ctx, list, type, name)
         {
 
         }

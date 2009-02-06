@@ -8,6 +8,7 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
@@ -40,6 +41,28 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected override string[] GetInterfaces()
         {
             return base.GetInterfaces().Concat(new string[] { this.ObjectClass.ClassName }).ToArray();
+        }
+
+        // HACK: workaround the fact this is missing on the server
+        // TODO: remove this and move the client action "OnGetInheritedMethods_ObjectClass" into a common action assembly
+        private static void GetMethods(ObjectClass obj, List<Kistl.App.Base.Method> e)
+        {
+            if (obj.BaseObjectClass != null)
+                GetMethods(obj.BaseObjectClass, e);
+            e.AddRange(obj.Methods);
+        }
+
+        protected override IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()
+        {
+            var inherited = new List<Kistl.App.Base.Method>();
+            GetMethods(this.ObjectClass, inherited);
+            // TODO: fix Default methods in DB, remove the filter here and remove them from TailTemplate
+            return inherited.Where(m => !m.IsDefaultMethod());
+        }
+
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
         }
 
     }

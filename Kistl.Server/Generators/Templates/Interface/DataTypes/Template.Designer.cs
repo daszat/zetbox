@@ -11,8 +11,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst")]
     public partial class Template : Kistl.Server.Generators.KistlCodeTemplate
     {
-		private IKistlContext ctx;
-		private Kistl.App.Base.DataType dataType;
+		protected IKistlContext ctx;
+		protected Kistl.App.Base.DataType dataType;
 
 
         public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dataType)

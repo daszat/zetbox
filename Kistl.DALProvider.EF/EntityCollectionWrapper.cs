@@ -1,12 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
-using System.Data.Objects.DataClasses;
-using System.Collections;
+
+using Kistl.API;
 using Kistl.DALProvider.EF;
 
-namespace Kistl.API.Server
+namespace Kistl.DALProvider.EF
 {
     #region EntityCollectionWrapper
     public class EntityCollectionWrapper<INTERFACE, IMPL> : ICollection<INTERFACE>
@@ -436,6 +438,7 @@ namespace Kistl.API.Server
     #endregion
 
     #region EntityCollectionEntryValueWrapperSorted
+
     // List
     public class EntityCollectionEntryValueWrapperSorted<PARENT, VALUE, IMPL>
         : EntityCollectionEntryValueWrapper<PARENT, VALUE, IMPL>, IList<VALUE>

@@ -111,9 +111,8 @@ namespace Kistl.DALProvider.EF
     }
 
     public sealed class EntityCollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-    : EntityCollectionEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
+        : EntityCollectionEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
         where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
     {
         public EntityCollectionBSideWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
@@ -145,7 +144,6 @@ namespace Kistl.DALProvider.EF
     public sealed class EntityListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
         : EntityListEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
         where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
     {
         public EntityListBSideWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)

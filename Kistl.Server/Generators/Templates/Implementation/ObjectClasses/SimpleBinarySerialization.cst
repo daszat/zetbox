@@ -1,0 +1,33 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.SimpleBinarySerialization"
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.SimpleBinarySerialization" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="memberName" Type="string" %>
+<%
+	string methodName = direction.ToString();
+	string modifier;
+	
+	switch(direction){
+		case SerializerDirection.ToStream:
+			modifier = "";
+			break;
+		case SerializerDirection.FromStream:
+			modifier = "out ";
+			break;
+		default:
+			throw new ArgumentOutOfRangeException("direction");
+	}
+	
+%>
+            BinarySerializer.<%= methodName %>(<%= modifier %>this.<%= memberName %>, <%= streamName %>);

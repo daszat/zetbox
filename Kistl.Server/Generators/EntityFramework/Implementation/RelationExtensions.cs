@@ -14,36 +14,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
     {
 
         /// <summary>
-        /// Calculates EF's preferred storage for a given NewRelation
-        /// </summary>
-        public static StorageHint GetPreferredStorage(this NewRelation rel)
-        {
-            if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() == 1)
-            {
-                // arbitrary 1:1 relations default 
-                return StorageHint.MergeA;
-            }
-            else if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() > 1)
-            {
-                // if multiple Bs can exist, they get the fk
-                return StorageHint.MergeB;
-            }
-            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() == 1)
-            {
-                // if multiple As ca exist, they get the fk
-                return StorageHint.MergeA;
-            }
-            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1)
-            {
-                // N:M needs "weak" entity
-                return StorageHint.Separate;
-            }
-
-            // this means that UpperBound() < 1 for some end
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Returns the association name for the given relation
         /// </summary>
         public static string GetAssociationName(this NewRelation rel)
@@ -65,26 +35,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         public static string GetCollectionEntryAssociationName(this NewRelation rel, RelationEnd end)
         {
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.B.Type.ClassName, end.RoleName, rel.ID);
-        }
-
-        public static string GetCollectionEntryClassName(this NewRelation rel)
-        {
-            return String.Format("{0}_{1}{2}CollectionEntry", rel.A.Type.ClassName, rel.A.Navigator.PropertyName, rel.ID);
-        }
-
-        public static string GetCollectionEntryFullName(this NewRelation rel)
-        {
-            return String.Format("{0}.{1}", rel.A.Type.Namespace, rel.GetCollectionEntryClassName());
-        }
-
-        public static string GetCollectionEntryClassName(this ValueTypeProperty prop)
-        {
-            return String.Format("{0}_{1}CollectionEntry", prop.ObjectClass.ClassName, prop.PropertyName);
-        }
-
-        public static string GetCollectionEntryFullName(this ValueTypeProperty prop)
-        {
-            return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
         }
 
         /// <summary>

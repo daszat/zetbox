@@ -13,20 +13,22 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public partial class EnumerationPropertyTemplate : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
+		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected EnumerationProperty prop;
 
 
-        public EnumerationPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, EnumerationProperty prop)
+        public EnumerationPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, EnumerationProperty prop)
             : base(_host)
         {
 			this.ctx = ctx;
+			this.serializationList = serializationList;
 			this.prop = prop;
 
         }
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
 string name = prop.PropertyName;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
@@ -34,7 +36,7 @@ string name = prop.PropertyName;
 	string enumType = prop.ReferencedTypeAsCSharp();
 
 
-#line 23 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  enumType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -72,8 +74,9 @@ this.WriteObjects("                ",  name , " = (",  enumType , ")value;\r\n")
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-this.WriteObjects("        \r\n");
-this.WriteObjects("        \r\n");
+#line 62 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+AddSerialization(serializationList);
+
 
         }
 

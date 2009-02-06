@@ -9,8 +9,8 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="SerializationMembersList" %>
 <%@ Parameter Name="containingType" Type="DataType" %>
 <%@ Parameter Name="type" Type="Type" %>
 <%@ Parameter Name="name" Type="String" %>
@@ -18,7 +18,7 @@
 <%
 	ApplyAttributesTemplate();
 
-	var backingName = MungeNameToBacking(name);
+	var backingName = BackingMemberFromName(name);
 %>
         <%= GetModifiers() %> <%= GetPropertyTypeString() %> <%= name %>
         {
@@ -31,5 +31,8 @@
         }
         private <%= GetBackingTypeString() %> <%= backingName %>;
 <%
+	AddSerialization(serializationList, name);
+
+
 	ApplyRequisitesTemplate();
 %>

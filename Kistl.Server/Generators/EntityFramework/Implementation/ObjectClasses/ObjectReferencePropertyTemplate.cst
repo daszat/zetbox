@@ -1,6 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.ObjectReferencePropertyTemplate"
-	CodeFile="Implementation.ObjectClasses.ObjectReferencePropertyTemplate.cs" 
 	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
@@ -11,6 +10,7 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="name" Type="String" %>
 <%@ Parameter Name="associationName" Type="String" %>
 <%@ Parameter Name="targetRoleName" Type="String" %>
@@ -60,7 +60,9 @@
             }
         }
         private int <%= fkBackingName %>;
-        
+<%
+        AddSerialization(serializationList, fkBackingName);
+%>
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= targetRoleName %>")]
         public <%= referencedImplementation %> <%= efName %>
@@ -99,6 +101,7 @@
 	if (hasPositionStorage)
 	{
 		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+		    serializationList,
 			"int?", posStorageName);
 	}
 %>

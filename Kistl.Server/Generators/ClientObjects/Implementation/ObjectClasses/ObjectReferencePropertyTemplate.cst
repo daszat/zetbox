@@ -1,0 +1,122 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.ObjectReferencePropertyTemplate"
+	ClassName="Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Movables" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
+<%@ Parameter Name="prop" Type="ObjectReferenceProperty" %>
+<%
+    Debug.Assert(!prop.IsList);
+
+    string name = prop.PropertyName;
+    string efName = name + Kistl.API.Helper.ImplementationSuffix;
+    string fkName = "fk_" + name;
+    string fkBackingName = "_fk_" + name;
+
+    string referencedInterface = prop.ReferenceObjectClass.Module.Namespace + "." + prop.ReferenceObjectClass.ClassName;
+
+    var rel = NewRelation.Lookup(ctx, prop);
+    var relEnd = rel.GetEnd(prop);
+    var otherEnd = relEnd.Other;
+    bool hasInverseNavigator = otherEnd.Navigator != null;
+    
+%>
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public <%= referencedInterface %> <%= name %>
+        {
+            get
+            {
+                if (<%= fkName %>.HasValue)
+                    return Context.Find<<%= referencedInterface %>>(<%= fkName %>.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+<%
+    if (hasInverseNavigator)
+    {
+        var otherProp = otherEnd.Navigator;
+        string otherName = otherProp.PropertyName;
+%>
+                // fix up inverse reference
+                var oldValue = <%= name %>;
+                if (value != null && value.ID != <%= fkName %>)
+                {
+<%
+        if (otherProp.IsList)
+        {
+%>
+                    oldValue.<%= otherName %>.Remove(this);
+                    <%= fkName %> = value.ID;
+                    value.<%= otherName %>.Add(this);
+<%
+        }
+        else
+        {
+%>
+                    <%= fkName %> = value.ID;
+                    value.<%= fkName %> = this.ID;
+<%
+        }
+%>
+                }
+                else
+                {
+<%
+        if (otherProp.IsList)
+        {
+%>
+                    oldValue.<%= otherName %>.Remove(this);
+                    <%= fkName %> = null;
+<%
+        }
+        else
+        {
+%>
+                    <%= fkName %> = null;
+                    value.<%= otherName %> = null;
+<%
+        }
+%>
+                }
+<%
+    }
+%>
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? <%= fkName %>
+        {
+            get
+            {
+                return <%= fkBackingName %>;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (<%= fkBackingName %> != value)
+                {
+                    NotifyPropertyChanging("<%= name %>");
+                    <%= fkBackingName %> = value;
+                    NotifyPropertyChanging("<%= name %>");
+                }
+            }
+        }
+        private int? <%= fkBackingName %>;
+<%
+        AddSerialization(serializationList, fkBackingName);
+%>

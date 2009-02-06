@@ -81,18 +81,6 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
         }
 
-        protected virtual void ApplyPropertyTemplate(Property p)
-        {
-            if (!p.IsListProperty())
-            {
-                this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx, p.ReferencedTypeAsCSharp(), p.PropertyName);
-            }
-            else
-            {
-                this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx, this.DataType, p.GetPropertyType(), p.PropertyName, p);
-            }
-        }
-
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
             this.Host.CallTemplate("Implementation.ObjectClasses.Method", ctx, this.DataType, m);
@@ -106,5 +94,6 @@ namespace Kistl.Server.Generators.Templates.Implementation
         {
             return this.DataType.Methods; //.Where(m => !m.IsDefaultMethod());
         }
+
     }
 }
