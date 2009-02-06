@@ -8,6 +8,11 @@ using System.Text;
 
 namespace Kistl.API.Client
 {
+
+    // TODO: use delegate instead of SetPropertyValue. May be up to 300x faster.
+    // TODO: rename to ...List
+    // TODO: take care of SELECT N+1 problem when modifying collection entries
+
     #region BackReferenceCollection
     /// <summary>
     /// 
