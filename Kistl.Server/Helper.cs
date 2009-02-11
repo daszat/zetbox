@@ -47,7 +47,7 @@ namespace Kistl.Server
 
         /// <summary>
         /// Path to temp. location for Code Generation.
-        /// TODO: Hardcoded yet
+        /// TODO: read from some config store
         /// </summary>
         public static string CodeGenPath
         {
