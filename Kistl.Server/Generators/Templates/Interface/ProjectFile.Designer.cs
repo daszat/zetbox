@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Kistl.Server.Generators.Templates.Interface
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst")]
     public partial class ProjectFile : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected Kistl.API.IKistlContext ctx;
@@ -22,7 +22,7 @@ namespace Kistl.Server.Generators.Templates.Interface
         
         public override void Generate()
         {
-#line 9 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 9 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
 this.WriteObjects("<Project ToolsVersion=\"3.5\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
@@ -41,7 +41,6 @@ this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' 
 this.WriteObjects("    <DebugSymbols>true</DebugSymbols>\r\n");
 this.WriteObjects("    <DebugType>full</DebugType>\r\n");
 this.WriteObjects("    <Optimize>false</Optimize>\r\n");
-this.WriteObjects("    <OutputPath>bin\\Debug\\</OutputPath>\r\n");
 this.WriteObjects("    <DefineConstants>DEBUG;TRACE</DefineConstants>\r\n");
 this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
 this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
@@ -50,7 +49,6 @@ this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">\r\n");
 this.WriteObjects("    <DebugType>pdbonly</DebugType>\r\n");
 this.WriteObjects("    <Optimize>true</Optimize>\r\n");
-this.WriteObjects("    <OutputPath>bin\\Release\\</OutputPath>\r\n");
 this.WriteObjects("    <DefineConstants>TRACE</DefineConstants>\r\n");
 this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
 this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
@@ -60,33 +58,33 @@ this.WriteObjects("    <Reference Include=\"System\" />\r\n");
 this.WriteObjects("    <Reference Include=\"System.Core\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-this.WriteObjects("    <ProjectReference Include=\"..\\Kistl.API\\Kistl.API.csproj\">\r\n");
+this.WriteObjects("    <ProjectReference Include=\"$(SourcePath)\\Kistl.API\\Kistl.API.csproj\">\r\n");
 this.WriteObjects("      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>\r\n");
 this.WriteObjects("      <Name>Kistl.API</Name>\r\n");
 this.WriteObjects("    </ProjectReference>\r\n");
-#line 51 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 ApplyAdditionalReferences();
 
-#line 53 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 56 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 foreach (var name in fileNames)
 	{
 
-#line 59 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
-#line 61 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 59 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 }
 
-#line 63 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 61 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 65 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 63 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 ApplyAdditionalItemGroups();
 
-#line 66 "C:\temp\Kistl2\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+#line 64 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("  \r\n");
-this.WriteObjects("  <Import Project=\"$(MSBuildToolsPath)\\Microsoft.CSharp.targets\" />\r\n");
+this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
 this.WriteObjects("  <Target Name=\"BeforeBuild\">\r\n");

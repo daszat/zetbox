@@ -18,188 +18,156 @@ using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.Generators
 {
-    public class BaseDataObjectGenerator
+    public abstract class BaseDataObjectGenerator
     {
         private string codeBasePath = "";
 
-        #region Generate
-
-        public virtual void Generate(Kistl.API.IKistlContext ctx, string codeBasePath)
+        public string Generate(Kistl.API.IKistlContext ctx, string basePath)
         {
-            this.codeBasePath = codeBasePath + (codeBasePath.EndsWith("\\") ? "" : "\\");
+            codeBasePath = Path.Combine(basePath, TargetNameSpace);
             Directory.CreateDirectory(codeBasePath);
 
-            Directory.GetFiles(this.codeBasePath, "*.cs", SearchOption.AllDirectories).
-                ToList().ForEach(f => File.Delete(f));
+            Directory.GetFiles(codeBasePath, "*.*", SearchOption.AllDirectories)
+                .ToList().ForEach(f => File.Delete(f));
+            Directory.GetDirectories(codeBasePath, "*.*", SearchOption.AllDirectories).OrderByDescending(s => s.Length)
+                .ToList().ForEach(d => Directory.Delete(d));
 
-            var generatedInterfaceFileNames = new List<string>();
-            var generatedClientFileNames = new List<string>();
-            var generatedServerFileNames = new List<string>();
+            Directory.CreateDirectory(codeBasePath);
 
-            var objClassList = Generator.GetObjectClassList(ctx).OrderBy(x => x.ClassName);
+            var generatedFileNames = new List<string>();
 
             Console.Write("  Object Classes");
-            foreach (ObjectClass objClass in objClassList)
+            foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.ClassName))
             {
+                generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
                 Console.Write(".");
-                generatedInterfaceFileNames.Add(Generate_Interface(ctx, objClass));
-                generatedClientFileNames.Add(Generate_ObjectClass(ctx, objClass, TaskEnum.Client));
-                generatedServerFileNames.Add(Generate_ObjectClass(ctx, objClass, TaskEnum.Server));
             }
             Console.WriteLine();
 
-            
-            Console.Write("  Collection Entries");
-            generatedClientFileNames.Add(Generate_CollectionEntries(ctx, TaskEnum.Client));
-            generatedServerFileNames.Add(Generate_CollectionEntries(ctx, TaskEnum.Server));
-            Console.WriteLine(".");
 
-            Console.WriteLine("  Serializer");
+            Console.Write("  Collection Entries");
+            generatedFileNames.Add(Generate_CollectionEntries(ctx));
+            Console.WriteLine(".");
 
 
             Console.Write("  Interfaces");
-            var interfaceList = Generator.GetInterfaceList(ctx).OrderBy(x => x.ClassName);
-            foreach (Interface i in interfaceList)
+            foreach (Interface i in Generator.GetInterfaceList(ctx).OrderBy(x => x.ClassName))
             {
+                generatedFileNames.Add(Generate_Interface(ctx, i));
                 Console.Write(".");
-                generatedInterfaceFileNames.Add(Generate_Interface_Interfaces(ctx, i));
             }
             Console.WriteLine();
 
             Console.Write("  Enums");
-            var enumList = Generator.GetEnumList(ctx).OrderBy(x => x.ClassName);
-            foreach (Enumeration e in enumList)
+            foreach (Enumeration e in Generator.GetEnumList(ctx).OrderBy(x => x.ClassName))
             {
+                generatedFileNames.Add(Generate_Enumeration(ctx, e));
                 Console.Write(".");
-                generatedInterfaceFileNames.Add(Generate_Interface_Enumerations(ctx, e));
             }
             Console.WriteLine();
 
             Console.Write("  Structs");
-            var structList = Generator.GetStructList(ctx).OrderBy(x => x.ClassName);
-            foreach (Struct s in structList)
+            foreach (Struct s in Generator.GetStructList(ctx).OrderBy(x => x.ClassName))
             {
+                generatedFileNames.Add(Generate_Struct(ctx, s));
                 Console.Write(".");
-                generatedInterfaceFileNames.Add(Generate_Interface_Structs(ctx, s));
-                generatedClientFileNames.Add(Generate_Implementation_Structs(ctx, TaskEnum.Client, s));
-                generatedServerFileNames.Add(Generate_Implementation_Structs(ctx, TaskEnum.Server, s));
             }
             Console.WriteLine();
 
-            Console.Write("  FrozenContext");
-            generatedClientFileNames.Add(Generate_FrozenContext(ctx, TaskEnum.Client));
-            generatedServerFileNames.Add(Generate_FrozenContext(ctx, TaskEnum.Server));
+            Console.Write("  Assemblyinfo");
+            generatedFileNames.Add(Generate_AssemblyInfo(ctx));
+            Console.WriteLine(".");
 
-            Console.WriteLine();
+            Console.Write("  Other Files");
+            generatedFileNames.AddRange(Generate_Other(ctx));
+            Console.WriteLine(".");
 
-            Console.WriteLine("  Assemblyinfo");
-            generatedInterfaceFileNames.Add(Generate_AssemblyInfo(ctx, TaskEnum.Interface));
-            generatedClientFileNames.Add(Generate_AssemblyInfo(ctx, TaskEnum.Client));
-            generatedServerFileNames.Add(Generate_AssemblyInfo(ctx, TaskEnum.Server));
+            Console.Write("  Project File");
+            string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames);
+            Console.WriteLine(".");
 
-            Console.WriteLine("  Project File");
-            Generate_ProjectFile(ctx, TaskEnum.Interface, "{0C9E6E69-309F-46F7-A936-D5762229DEB9}", generatedInterfaceFileNames);
-            Generate_ProjectFile(ctx, TaskEnum.Client, "{80F37FB5-66C6-45F2-9E2A-F787B141D66C}", generatedClientFileNames);
-            Generate_ProjectFile(ctx, TaskEnum.Server, "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}", generatedServerFileNames);
-
+            return Path.Combine(this.codeBasePath, projectFileName);
         }
 
-        #endregion
+        /// <summary>
+        /// the namespace where to lookup the templates of this provider
+        /// </summary>
+        public abstract string TemplateProviderPath { get; }
 
-        private static string RunTemplate(IKistlContext ctx, TaskEnum task, string templateName, string baseFilename, string extension, params object[] args)
+        /// <summary>
+        /// The namespace which is generated by this provider
+        /// </summary>
+        public abstract string TargetNameSpace { get; }
+
+        /// <summary>
+        /// A short, descriptive string to put into all generated filenames
+        /// </summary>
+        /// Used as a safety fallback to avoid clashes between files and help orientation
+        public abstract string BaseName { get; }
+
+        /// <summary>
+        /// Kludge to integrate well into the .sln, in "Registry Format"
+        /// </summary>
+        public abstract string ProjectGuid { get; }
+
+        protected virtual string RunTemplate(IKistlContext ctx, string templateName, string baseFilename, string extension, params object[] args)
         {
-            string providerPath;
-            switch (task)
-            {
-                case TaskEnum.Interface:
-                    providerPath = "Kistl.Server.Generators.Templates";
-                    break;
-                case TaskEnum.Server:
-                    providerPath = "Kistl.Server.Generators.EntityFramework";
-                    break;
-                case TaskEnum.Client:
-                    providerPath = "Kistl.Server.Generators.ClientObjects";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("task");
-            }
-            string filename = String.Join(".", new string[] { baseFilename, task.ToString(), extension });
+            string filename = String.Join(".", new string[] { baseFilename, BaseName, extension });
+            return RunTemplate(ctx, templateName, filename, args);
+        }
+
+        protected virtual string RunTemplate(IKistlContext ctx, string templateName, string filename, params object[] args)
+        {
             var gen = Generator.GetTemplateGenerator(
-                providerPath,
+                TemplateProviderPath,
                 templateName,
                 filename,
-                task.ToNameSpace(),
+                this.codeBasePath,
                 new object[] { ctx }.Concat(args).ToArray());
             gen.ExecuteTemplate();
             return filename;
         }
 
-        private static void Generate_ProjectFile(IKistlContext ctx, TaskEnum task, string projectGuid, List<string> generatedFileNames)
+        protected virtual string Generate_AssemblyInfo(IKistlContext ctx)
         {
-            string templateName;
-            if (task == TaskEnum.Interface)
-            {
-                templateName = "Interface.ProjectFile";
-            }
-            else
-            {
-                templateName = "Implementation.ProjectFile";
-            }
-            RunTemplate(ctx, task, templateName, "Kistl.Objects", "csproj", projectGuid, generatedFileNames);
+            return RunTemplate(ctx, "Implementation.AssemblyInfoTemplate", "AssemblyInfo", "cs");
         }
 
-        private static string Generate_AssemblyInfo(IKistlContext ctx, TaskEnum task)
+        protected virtual string Generate_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {
-            string templateName;
-            if (task == TaskEnum.Interface)
-            {
-                templateName = "Interface.AssemblyInfoTemplate";
-            }
-            else
-            {
-                templateName = "Implementation.AssemblyInfoTemplate";
-            }
-            return RunTemplate(ctx, task, templateName, "AssemblyInfo", "cs");
+            return RunTemplate(ctx, "Implementation.ObjectClasses.Template", objClass.ClassName, "Designer.cs", objClass);
         }
 
-        private static string Generate_Interface(IKistlContext ctx, ObjectClass objClass)
+        protected virtual string Generate_CollectionEntries(IKistlContext ctx)
         {
-            return RunTemplate(ctx, TaskEnum.Interface, "Interface.DataTypes.Template", objClass.ClassName, "Designer.cs", objClass);
+            return RunTemplate(ctx, "Implementation.ObjectClasses.CollectionEntries", "CollectionEntries", "Designer.cs");
         }
 
-        private static string Generate_ObjectClass(IKistlContext ctx, ObjectClass objClass, TaskEnum task)
+        protected virtual string Generate_Enumeration(IKistlContext ctx, Enumeration e)
         {
-            return RunTemplate(ctx, task, "Implementation.ObjectClasses.Template", objClass.ClassName, "Designer.cs", objClass);
+            // only used on interface
+            return null;
         }
 
-        private static string Generate_CollectionEntries(IKistlContext ctx, TaskEnum task)
+        protected virtual string Generate_Struct(IKistlContext ctx, Struct s)
         {
-            return RunTemplate(ctx, task, "Implementation.ObjectClasses.CollectionEntries", "CollectionEntries", "Designer.cs");
+            return RunTemplate(ctx, "Implementation.Structs.Template", s.ClassName, "Designer.cs", s);
         }
 
-        private static string Generate_FrozenContext(IKistlContext ctx, TaskEnum task)
+        protected virtual string Generate_Interface(IKistlContext ctx, Interface i)
         {
-            return RunTemplate(ctx, task, "Implementation.FrozenContext.Template", "FrozenContext", "Designer.cs");
+            // only used on interface
+            return null;
         }
 
-        private static string Generate_Interface_Enumerations(IKistlContext ctx, Enumeration e)
+        protected virtual IEnumerable<string> Generate_Other(IKistlContext ctx)
         {
-            return RunTemplate(ctx, TaskEnum.Interface, "Interface.Enumerations.Template", e.ClassName, "Designer.cs", e);
+            return new List<string>();
         }
 
-        private static string Generate_Interface_Structs(IKistlContext ctx, Struct s)
+        protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames)
         {
-            return RunTemplate(ctx, TaskEnum.Interface, "Interface.DataTypes.Template", s.ClassName, "Designer.cs", s);
-        }
-
-        private static string Generate_Implementation_Structs(IKistlContext ctx, TaskEnum task, Struct s)
-        {
-            return RunTemplate(ctx, task, "Implementation.Structs.Template", s.ClassName , "Designer.cs", s);
-        }
-
-        private static string Generate_Interface_Interfaces(IKistlContext ctx, Interface i)
-        {
-            return RunTemplate(ctx, TaskEnum.Interface, "Interface.DataTypes.Template", i.ClassName, "Designer.cs", i);
+            return RunTemplate(ctx, "Implementation.ProjectFile", TargetNameSpace, "csproj", projectGuid, generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList());
         }
 
     }
@@ -208,9 +176,21 @@ namespace Kistl.Server.Generators
     #region DataObjectGeneratorFactory
     public static class DataObjectGeneratorFactory
     {
-        public static BaseDataObjectGenerator GetGenerator()
+        public static BaseDataObjectGenerator GetInterfaceGenerator()
         {
-            return new BaseDataObjectGenerator();
+            return new Interfaces.InterfaceGenerator();
+        }
+        public static BaseDataObjectGenerator GetClientGenerator()
+        {
+            return new ClientObjects.ClientObjectGenerator();
+        }
+        public static BaseDataObjectGenerator GetServerGenerator()
+        {
+            return new EntityFramework.EntityFrameworkGenerator();
+        }
+        public static BaseDataObjectGenerator GetFreezingGenerator()
+        {
+            return new FrozenObjects.FreezingGenerator();
         }
     }
     #endregion

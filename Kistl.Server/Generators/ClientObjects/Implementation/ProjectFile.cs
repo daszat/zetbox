@@ -36,8 +36,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
             // used for XMLSerialization annotations
             this.WriteLine(@"    <Reference Include=""System.Xml"" />");
 
-            // Server API
-            this.WriteLine(@"    <ProjectReference Include=""..\Kistl.API.Client\Kistl.API.Client.csproj"">");
+            // Client API
+            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.API.Client\Kistl.API.Client.csproj"">");
             this.WriteLine(@"      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>");
             this.WriteLine(@"      <Name>Kistl.API.Client</Name>");
             this.WriteLine(@"    </ProjectReference>");

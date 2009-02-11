@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
-using Kistl.API;
-using Kistl.Server.GeneratorsOld;
-using Kistl.App.Base;
-using Kistl.API.Server;
+
 using Arebis.CodeGeneration;
+
+using Kistl.API;
+using Kistl.API.Server;
+using Kistl.App.Base;
+using Kistl.Server.GeneratorsOld;
+using Microsoft.Build.BuildEngine;
+using System.IO;
+using Microsoft.Build.Framework;
 
 namespace Kistl.Server.Generators
 {
@@ -18,33 +23,60 @@ namespace Kistl.Server.Generators
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
                 Trace.TraceInformation("Generating Code");
-                BaseDataObjectGenerator gDataObjects = DataObjectGeneratorFactory.GetGenerator();
-                IMappingGenerator gMapping = MappingGeneratorFactory.GetGenerator();
-                using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+                using (IKistlContext ctx = KistlContext.InitSession())
                 {
-                    Trace.TraceInformation("Generating Source Files");
-                    gDataObjects.Generate(ctx, Helper.CodeGenPath);
+                    var generators = new[]{
+                        new { Caption = "Interface Source Files", Generator = DataObjectGeneratorFactory.GetInterfaceGenerator() },
+                        new { Caption = "Server Source Files", Generator = DataObjectGeneratorFactory.GetServerGenerator() },
+                        new { Caption = "Client Source Files", Generator = DataObjectGeneratorFactory.GetClientGenerator() },
+                        //new { Caption = "Generating Frozen Source Files", Generator = DataObjectGeneratorFactory.GetFreezingGenerator() },
+                    };
 
-                    Trace.TraceInformation("Generating Mapping");
-                    gMapping.Generate(ctx, Helper.CodeGenPath);
+                    Directory.SetCurrentDirectory(Helper.CodeGenPath);
+                    
+                    // doesn't stop growing
+                    if (File.Exists("TemplateCodegenLog.txt"))
+                        File.Delete("TemplateCodegenLog.txt");
+
+                    string binPath = Path.Combine(Helper.CodeGenPath, "bin");
+                    Directory.CreateDirectory(binPath);
+
+                    var engine = new Engine(ToolsetDefinitionLocations.Registry);
+
+                    engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
+
+                    var logger = new FileLogger();
+                    logger.Parameters = String.Format(@"logfile={0}", Path.Combine(Helper.CodeGenPath, "compile.log"));
+                    engine.RegisterLogger(logger);
 
                     try
                     {
-                        // Compile Code
-                        Trace.TraceInformation("Compiling Interfaces");
-                        GeneratorsOld.Generator.Compile(TaskEnum.Interface);
-                        Trace.TraceInformation("Compiling Server Assembly");
-                        GeneratorsOld.Generator.Compile(TaskEnum.Server);
-                        Trace.TraceInformation("Compiling Client Assembly");
-                        GeneratorsOld.Generator.Compile(TaskEnum.Client);
+
+                        foreach (var gen in generators)
+                        {
+                            Trace.TraceInformation(String.Format("Generating: {0}", gen.Caption));
+                            string projectFileName = gen.Generator.Generate(ctx, Helper.CodeGenPath);
+
+                            var proj = new Project(engine);
+                            proj.Load(projectFileName);
+                            var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
+                            defaultPropertyGroup.AddNewProperty("SourcePath", @"P:\Kistl", true);
+                            defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
+
+                            if (!engine.BuildProject(proj))
+                            {
+                                // TODO: fix dll name here
+                                //File.Delete(Path.Combine(binPath, "Kistl.Objects.dll"));
+                                //File.Delete(Path.Combine(binPath, "Kistl.Objects.pdb"));
+                                throw new ApplicationException(String.Format("Failed to compile {0}", gen.Caption));
+                            }
+                        }
+
                     }
-                    catch
+                    finally
                     {
-                        // Delete files
-                        GeneratorsOld.Generator.Delete(TaskEnum.Interface);
-                        GeneratorsOld.Generator.Delete(TaskEnum.Server);
-                        GeneratorsOld.Generator.Delete(TaskEnum.Client);
-                        throw;
+                        // close all logfiles
+                        engine.UnregisterAllLoggers();
                     }
                 }
             }
@@ -73,7 +105,7 @@ namespace Kistl.Server.Generators
 
             gen.Settings.Add("template", template);
 
-            gen.Settings.Add("targetdir", Helper.CodeGenPath + @"\" + targetdir);
+            gen.Settings.Add("targetdir", targetdir);
             gen.Settings.Add("output", output);
             gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
 

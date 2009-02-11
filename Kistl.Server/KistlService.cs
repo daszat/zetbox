@@ -214,7 +214,7 @@ namespace Kistl.Server
                 using (TraceClient.TraceHelper.TraceMethodCall())
                 {
                     Generators.Generator.GenerateCode();
-                    GeneratorsOld.Generator.GenerateDatabase();
+                    Generators.Generator.GenerateDatabase();
                 }
             }
             catch (Exception ex)

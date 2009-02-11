@@ -14,6 +14,21 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +58,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ArebisCGen\Arebis.CodeGenerator\bin\Release\Arebis.CodeGenerator.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Engine" />
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -88,7 +105,6 @@
     <Compile Include="Generators.Extensions\TypeMonikerExtensions.cs" />
     <Compile Include="GeneratorsOld\DatabaseGenerator.cs" />
     <Compile Include="GeneratorsOld\Exceptions.cs" />
-    <Compile Include="GeneratorsOld\Generator.cs" />
     <Compile Include="GeneratorsOld\GeneratorHelper.cs" />
     <Compile Include="GeneratorsOld\SQLServer\SQLServerDatabaseGenerator.cs" />
     <Compile Include="GeneratorsOld\SQLServer\SQLServerHelper.cs" />
@@ -165,9 +181,6 @@
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\IdProperty.cs" />
     <Compile Include="Generators\GenerationHost.cs" />
     <Compile Include="Generators\Generator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generators\MappingGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Generators\TaskEnum.cs" />
@@ -414,6 +427,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generators\ClientObjects\ClientObjectGenerator.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionEntries.cs" />
@@ -444,6 +458,7 @@
     </Compile>
     <Compile Include="Generators\ClientObjects\Implementation\ProjectFile.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\Structs\Template.cs" />
+    <Compile Include="Generators\EntityFramework\EntityFrameworkGenerator.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntries.cs" />
@@ -498,6 +513,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Generators\FrozenObjects\FreezingGenerator.cs" />
+    <Compile Include="Generators\Interfaces\Implementation\AssemblyInfoTemplate.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\Template.Properties.cs" />
@@ -564,6 +581,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="Generators\Templates\Implementation\ProjectFile.cs" />
     <Compile Include="Generators\Templates\Implementation\SerializerDirection.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -573,7 +591,7 @@
     <Compile Include="Generators\EntityFramework\Implementation\RelationExtensions.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\Structs\Template.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\Template.cs" />
-    <Compile Include="Generators\Templates\Implementation\ProjectFile.cs" />
+    <Compile Include="Generators\Interfaces\Implementation\ProjectFile.cs" />
     <Compile Include="Generators\Templates\Implementation\SerializationMembersList.cs" />
     <Compile Include="Generators\Templates\Implementation\Structs\Template.cs" />
     <Compile Include="Generators\Templates\Implementation\TypeBase.cs">
@@ -585,6 +603,7 @@
       <DependentUpon>TypeBase.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\TypeBase.Properties.cs" />
+    <Compile Include="Generators\Interfaces\InterfaceGenerator.cs" />
     <Compile Include="Generators\Templates\Interface\ProjectFile.cs">
       <DependentUpon>ProjectFile.cst</DependentUpon>
     </Compile>
@@ -682,6 +701,7 @@
       <LastGenOutput>RelationDebugTemplate.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Generators\EntityFramework\README.txt" />
+    <Content Include="Generators\Templates\Interface\README.txt" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimpleBinarySerialization.Designer.cs</LastGenOutput>
@@ -698,6 +718,38 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProjectFile.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

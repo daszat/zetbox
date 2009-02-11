@@ -6,7 +6,7 @@ using System.Text;
 namespace Kistl.Server.Generators.EntityFramework.Implementation
 {
     public class ProjectFile
-        : Kistl.Server.Generators.Templates.Implementation.ProjectFile
+        : Templates.Implementation.ProjectFile
     {
 
         public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames)
@@ -46,13 +46,13 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             this.WriteLine(@"    <Reference Include=""System.Xml"" />");
 
             // EF Provider infrastructure
-            this.WriteLine(@"    <ProjectReference Include=""..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj"">");
+            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj"">");
             this.WriteLine(@"      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>");
             this.WriteLine(@"      <Name>Kistl.DALProvider.EF</Name>");
             this.WriteLine(@"    </ProjectReference>");
 
             // Server API
-            this.WriteLine(@"    <ProjectReference Include=""..\Kistl.API.Server\Kistl.API.Server.csproj"">");
+            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.API.Server\Kistl.API.Server.csproj"">");
             this.WriteLine(@"      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>");
             this.WriteLine(@"      <Name>Kistl.API.Server</Name>");
             this.WriteLine(@"    </ProjectReference>");
@@ -66,7 +66,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             this.WriteLine(@"    <EmbeddedResource Include=""Model.csdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.ssdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.msl"" />");
-            this.WriteLine(@"    <Compile Include=""AssociationSetAttributes.cs"" />");
             this.WriteLine(@"  </ItemGroup>");
 
         }

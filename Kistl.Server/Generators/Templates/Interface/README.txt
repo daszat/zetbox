@@ -1,0 +1,1 @@
+﻿Special templates for the interface assembly, some are also used as base for the implementations.

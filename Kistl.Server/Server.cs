@@ -122,7 +122,7 @@ namespace Kistl.Server
 
         internal void GenerateDatabase()
         {
-            GeneratorsOld.Generator.GenerateDatabase();
+            Generators.Generator.GenerateDatabase();
         }
 
         internal void GenerateAll()
