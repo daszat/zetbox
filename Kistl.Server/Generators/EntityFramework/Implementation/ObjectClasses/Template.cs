@@ -88,15 +88,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 prop);
         }
 
-        //protected override void ApplyValueTypePropertyTemplate(ValueTypeProperty prop)
-        //{
-        //    this.WriteLine("        // simple value property");
-        //    this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
-        //        this.MembersToSerialize,
-        //        prop.ReferencedTypeAsCSharp(),
-        //        prop.PropertyName);
-        //}
-
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
         {
             this.WriteLine("        // value list property");

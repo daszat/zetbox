@@ -44,7 +44,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
-            // implement internal constructor
+            // implement internal constructor to allow the FrozenContext to initialize the objects
             this.WriteObjects("        internal ", this.GetTypeName(), "(FrozenContext ctx, int id)");
             this.WriteLine();
             this.WriteObjects("            : base(ctx, id)");

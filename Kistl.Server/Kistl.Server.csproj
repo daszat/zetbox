@@ -532,11 +532,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\FrozenContext\Template.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Template.cst</DependentUpon>
-    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -663,10 +658,6 @@
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\CollectionEntries\Template.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>Template.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Generators\Templates\Implementation\FrozenContext\Template.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
     </None>

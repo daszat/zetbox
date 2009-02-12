@@ -20,7 +20,10 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
         {
             if (direction == SerializerDirection.ToStream)
             {
-                base.Generate();
+                this.WriteLine("        public override void ToStream(System.IO.BinaryWriter binStream)");
+                this.WriteLine("        {");
+                this.WriteLine("            throw new NotImplementedException();");
+                this.WriteLine("        }");
             }
             else
             {

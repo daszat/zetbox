@@ -18,6 +18,11 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
         {
         }
 
+        public override void Generate()
+        {
+            // skip
+        }
+
         protected override string GetCeBaseClassName()
         {
             // TODO: implement full set of extension points on Templates.Implementation.CollectionEntries.ObjectCollectionEntry

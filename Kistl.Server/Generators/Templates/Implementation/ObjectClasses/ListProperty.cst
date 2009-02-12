@@ -1,6 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.ListProperty"
-	CodeFile="Implementation.ObjectClasses.ListProperty.cs" 
 	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.ListProperty" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
