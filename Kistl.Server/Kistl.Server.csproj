@@ -514,6 +514,14 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Generators\FrozenObjects\FreezingGenerator.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\SerializerTemplate.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\Template.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\ProjectFile.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\Structs\Template.cs" />
     <Compile Include="Generators\Interfaces\Implementation\AssemblyInfoTemplate.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />

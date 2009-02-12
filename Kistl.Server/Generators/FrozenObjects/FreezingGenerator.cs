@@ -12,5 +12,6 @@ namespace Kistl.Server.Generators.FrozenObjects
         public override string TargetNameSpace { get { return "Kistl.Objects.Frozen"; } }
         public override string BaseName { get { return "Frozen"; } }
         public override string ProjectGuid { get { return "{CA615374-AEA3-4187-BF73-584CCD082766}"; } }
+
     }
 }

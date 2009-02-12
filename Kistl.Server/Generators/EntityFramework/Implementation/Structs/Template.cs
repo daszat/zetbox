@@ -42,7 +42,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.Structs
 
         protected override string MungeClassName(string name)
         {
-            return base.MungeClassName(name) + "__Implementation__";
+            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix;
         }
 
         /// <returns>The base class to inherit from.</returns>

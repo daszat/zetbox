@@ -28,8 +28,8 @@ namespace Kistl.Server.Generators
                     var generators = new[]{
                         new { Caption = "Interface Source Files", Generator = DataObjectGeneratorFactory.GetInterfaceGenerator() },
                         new { Caption = "Server Source Files", Generator = DataObjectGeneratorFactory.GetServerGenerator() },
+                        new { Caption = "Generating Frozen Source Files", Generator = DataObjectGeneratorFactory.GetFreezingGenerator() },
                         new { Caption = "Client Source Files", Generator = DataObjectGeneratorFactory.GetClientGenerator() },
-                        //new { Caption = "Generating Frozen Source Files", Generator = DataObjectGeneratorFactory.GetFreezingGenerator() },
                     };
 
                     Directory.SetCurrentDirectory(Helper.CodeGenPath);

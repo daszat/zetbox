@@ -216,12 +216,12 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        private EntityCollectionEntryValueWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__> _TestNames;
+        private EntityCollectionBSideWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__> _TestNames;
         public ICollection<string> TestNames
         {
             get 
             {
-                if (_TestNames == null) _TestNames = new EntityCollectionEntryValueWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__>(this, TestNames__Implementation__);
+                if (_TestNames == null) _TestNames = new EntityCollectionBSideWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__>(this, TestNames__Implementation__);
                 return _TestNames;
             }
         }

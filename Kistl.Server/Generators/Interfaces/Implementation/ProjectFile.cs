@@ -12,13 +12,5 @@ namespace Kistl.Server.Generators.Interfaces.Implementation
             : base(_host, ctx, projectGuid, fileNames)
         {
         }
-
-        protected override void ApplyAdditionalReferences()
-        {
-            base.ApplyAdditionalReferences();
-
-            // used for XMLSerialization annotations
-            this.WriteLine(@"    <Reference Include=""System.Xml"" />");
-        }
     }
 }

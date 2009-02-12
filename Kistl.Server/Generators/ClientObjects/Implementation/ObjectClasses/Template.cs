@@ -11,7 +11,7 @@ using Kistl.Server.Movables;
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
     public class Template
-        : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
+        : Templates.Implementation.ObjectClasses.Template
     {
 
         public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.ObjectClass cls)
@@ -26,7 +26,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         protected override string MungeClassName(string name)
         {
-            return base.MungeClassName(name) + "__Implementation__";
+            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix;
         }
 
         protected override string GetBaseClass()
@@ -39,13 +39,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             {
                 return "BaseClientDataObject";
             }
-        }
-
-        protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
-        {
-            this.WriteLine("        // enumeration property");
-            this.ApplyNotifyingValueProperty(prop, null);
-            this.MembersToSerialize.Add("Implementation.ObjectClasses.EnumBinarySerialization", prop);
         }
 
         protected override void ApplyObjectReferencePropertyTemplate(ObjectReferenceProperty prop)

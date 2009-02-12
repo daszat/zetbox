@@ -70,7 +70,7 @@ namespace Kistl.API.Server.Tests
         public void NotifyPropertyChanged_ing()
         {
             obj.NotifyPropertyChanging("Value");
-            obj.Value = "test";
+            obj.B = "test";
             obj.NotifyPropertyChanged("Value");
         }
     }

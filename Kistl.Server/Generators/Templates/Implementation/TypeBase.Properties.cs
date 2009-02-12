@@ -83,7 +83,8 @@ namespace Kistl.Server.Generators.Templates.Implementation
         protected virtual void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             this.WriteLine("        // enumeration property");
-            ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
+            this.ApplyNotifyingValueProperty(prop, null);
+            this.MembersToSerialize.Add("Implementation.ObjectClasses.EnumBinarySerialization", prop);
         }
 
 

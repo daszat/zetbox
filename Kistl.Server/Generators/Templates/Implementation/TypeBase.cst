@@ -45,7 +45,7 @@ namespace <%= DataType.Module.Namespace %>
     /// </summary>
 <%
 
-    var mungedClassName = MungeClassName(DataType.ClassName);
+    var mungedClassName = GetTypeName();
 
     ApplyClassAttributeTemplate();
 %>

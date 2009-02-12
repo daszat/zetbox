@@ -166,7 +166,8 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Collection to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, System.IO.BinaryWriter sw) where T : ICollectionEntry
+        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, System.IO.BinaryWriter sw)
+            where T : ICollectionEntry
         {
             foreach (ICollectionEntry obj in val)
             {
@@ -175,6 +176,17 @@ namespace Kistl.API
             }
 
             ToStream(false, sw);
+        }
+
+        /// <summary>
+        /// Serialize a IDataObject Collection. Format is: WRONG
+        /// </summary>
+        /// <param name="val">Collection to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStreamCollection<T>(ICollection<T> val, System.IO.BinaryWriter sw)
+            where T : IDataObject
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -208,6 +220,14 @@ namespace Kistl.API
 
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(sw.BaseStream, type);
+        }
+
+        public static void ToStream(IPersistenceObject obj, System.IO.BinaryWriter sw)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (sw == null) throw new ArgumentNullException("sw");
+
+            sw.Write(obj.ID);
         }
 
         #endregion

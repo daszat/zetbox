@@ -17,6 +17,11 @@ namespace Kistl.Server.Generators.Templates.Implementation
             return new string[] { };
         }
 
+        protected string GetTypeName()
+        {
+            return MungeClassName(DataType.ClassName);
+        }
+
         protected virtual string MungeClassName(string name) { return name; }
 
         /// <summary>

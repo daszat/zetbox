@@ -1,23 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-
-namespace Kistl.DALProvider.EF
+namespace Kistl.API
 {
 
-    public sealed class EntityCollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : EntityCollectionEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE>
+    public abstract class CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : CollectionEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
+        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public EntityCollectionASideWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
-            : base(parentObject, ec)
+        public CollectionASideWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+            : base(parentObject, baseCollection)
         {
         }
 
@@ -31,25 +29,24 @@ namespace Kistl.DALProvider.EF
             return Collection.SingleOrDefault(i => i.B.Equals(item));
         }
 
-        protected override ENTRYTYPE CreateEntry(ATYPE item)
+        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
         {
-            ENTRYTYPE entry = new ENTRYTYPE()
-            {
-                A = item,
-                B = ParentObject
-            };
+            entry.A = item;
+            entry.B = ParentObject;
             return entry;
         }
+
     }
 
-    public sealed class EntityListASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : EntityListEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE>
+    public abstract class ListASideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : ListEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
+        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public EntityListASideWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
-            : base(parentObject, ec)
+        public ListASideWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+            : base(parentObject, baseCollection)
         {
         }
 
@@ -68,14 +65,11 @@ namespace Kistl.DALProvider.EF
             return Collection.SingleOrDefault(i => i.B.Equals(item));
         }
 
-        protected override ENTRYTYPE CreateEntry(ATYPE item)
+        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
         {
-            ENTRYTYPE entry = new ENTRYTYPE()
-            {
-                A = item,
-                B = ParentObject,
-                BIndex = Kistl.API.Helper.LASTINDEXPOSITION
-            };
+            entry.A = item;
+            entry.B = ParentObject;
+            entry.BIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             return entry;
         }
 
@@ -110,13 +104,14 @@ namespace Kistl.DALProvider.EF
         }
     }
 
-    public sealed class EntityCollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : EntityCollectionEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
+    public abstract class CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : CollectionEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
+        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public EntityCollectionBSideWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
-            : base(parentObject, ec)
+        public CollectionBSideWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+            : base(parentObject, baseCollection)
         {
         }
 
@@ -130,24 +125,25 @@ namespace Kistl.DALProvider.EF
             return Collection.SingleOrDefault(i => i.A.Equals(item));
         }
 
-        protected override ENTRYTYPE CreateEntry(BTYPE item)
+
+        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, BTYPE item)
         {
-            ENTRYTYPE entry = new ENTRYTYPE()
-            {
-                A = ParentObject,
-                B = item
-            };
+            entry.A = ParentObject;
+            entry.B = item;
             return entry;
         }
+
+
     }
 
-    public sealed class EntityListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : EntityListEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE>
+    public abstract class ListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : ListEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
+        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public EntityListBSideWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
-            : base(parentObject, ec)
+        public ListBSideWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+            : base(parentObject, baseCollection)
         {
         }
 
@@ -166,14 +162,11 @@ namespace Kistl.DALProvider.EF
             return Collection.SingleOrDefault(i => i.A.Equals(item));
         }
 
-        protected override ENTRYTYPE CreateEntry(BTYPE item)
+        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, BTYPE item)
         {
-            ENTRYTYPE entry = new ENTRYTYPE()
-            {
-                A = ParentObject,
-                AIndex = Kistl.API.Helper.LASTINDEXPOSITION,
-                B = item
-            };
+            entry.A = ParentObject;
+            entry.B = item;
+            entry.AIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             return entry;
         }
 

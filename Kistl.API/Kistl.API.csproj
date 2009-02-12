@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="BinarySerializer.cs" />
+    <Compile Include="CollectionEntries.cs" />
     <Compile Include="Configuration\KistlConfig.cs" />
     <Compile Include="ExpressionFilter.cs" />
     <Compile Include="ExpressionTreeTranslator.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="IKistlService.cs" />
     <Compile Include="KistlContextDebugger.cs" />
     <Compile Include="LinqExtensions.cs" />
+    <Compile Include="CollectionWrapper.cs" />
+    <Compile Include="CollectionWrapper.Implementations.cs" />
     <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableExpression.cs" />

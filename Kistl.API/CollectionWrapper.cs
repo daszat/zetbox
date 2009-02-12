@@ -1,13 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-
-namespace Kistl.DALProvider.EF
+namespace Kistl.API
 {
 
     /// <summary>
@@ -18,22 +15,24 @@ namespace Kistl.DALProvider.EF
     /// <typeparam name="PARENTTYPE">which type contains the list, one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
-    public abstract class EntityCollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
+    /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
+    public abstract class CollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         : ICollection<ITEMTYPE>
         where ATYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
+        where BASECOLLECTIONTYPE: class, ICollection<ENTRYTYPE>
     {
-        protected EntityCollection<ENTRYTYPE> Collection { get; private set; }
+        protected BASECOLLECTIONTYPE Collection { get; private set; }
         protected PARENTTYPE ParentObject { get; private set; }
 
-        public EntityCollectionEntriesWrapper(PARENTTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public CollectionEntriesWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
         {
-            Collection = ec;
+            Collection = baseCollection;
             ParentObject = parentObject;
         }
 
-        #region end-specific extension points
+        #region provider- and end-specific extension points
 
         /// <summary>
         /// returns all items of this collection without a specific order
@@ -56,9 +55,24 @@ namespace Kistl.DALProvider.EF
         protected abstract ENTRYTYPE GetEntryOrDefault(ITEMTYPE item);
 
         /// <summary>
-        /// creates a new entry for the given item
+        /// Creates a new entry
         /// </summary>
-        protected abstract ENTRYTYPE CreateEntry(ITEMTYPE item);
+        /// <returns></returns>
+        protected abstract ENTRYTYPE CreateEntry();
+
+        /// <summary>
+        /// Initialises an entry for the given item
+        /// </summary>
+        protected abstract ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ITEMTYPE item);
+
+        /// <summary>
+        /// called before an entry is added to the list
+        /// </summary>
+        /// <param name="entry">the new entry</param>
+        protected virtual void OnEntryAdding(ENTRYTYPE entry)
+        {
+            entry.AttachToContext(ParentObject.Context);
+        }
 
         /// <summary>
         /// called after an entry is added to the list
@@ -72,42 +86,41 @@ namespace Kistl.DALProvider.EF
         /// <param name="entry">the removed entry</param>
         protected virtual void OnEntryRemoving(ENTRYTYPE entry) { }
 
-        #endregion
-
         /// <summary>
-        /// removes the given entry from the data store
+        /// called after an entry is removed from the list
         /// </summary>
-        protected void Clear(ENTRYTYPE entry)
+        /// <param name="entry">the removed entry</param>
+        protected virtual void OnEntryRemoved(ENTRYTYPE entry)
         {
-            entry.A = null;
+            entry.A = default(ATYPE);
             entry.B = default(BTYPE);
-            // Case: 668
-            entry.GetEFContext().DeleteObject(entry);
         }
+
+        #endregion
 
         #region ICollection<VALUE> Members
 
         public virtual void Add(ITEMTYPE item)
         {
-            ENTRYTYPE entry = CreateEntry(item);
+            ENTRYTYPE entry = InitialiseEntry(CreateEntry(), item);
+            OnEntryAdding(entry);
             Collection.Add(entry);
-            // Case: 668
-            entry.AttachToContext(ParentObject.Context);
-
             OnEntryAdded(entry);
         }
 
         public virtual void Clear()
         {
-            // Must be cleared by hand
-            // EF will drop the other side on the CollectionEntry - that's right and OK
-            // But we want the CollectionEntry to be deleted completely in that case
-            foreach (ENTRYTYPE entry in Collection.ToList())
+            // need a clone here
+            var entries = Collection.ToList();
+            foreach (ENTRYTYPE entry in entries)
             {
                 OnEntryRemoving(entry);
-                Clear(entry);
             }
             Collection.Clear();
+            foreach (ENTRYTYPE entry in entries)
+            {
+                OnEntryRemoved(entry);
+            }
         }
 
         public bool Contains(ITEMTYPE item)
@@ -138,8 +151,9 @@ namespace Kistl.DALProvider.EF
             ENTRYTYPE e = GetEntryOrDefault(item);
             if (e != null)
             {
-                Clear(e);
+                OnEntryRemoving(e);
                 Collection.Remove(e);
+                OnEntryRemoved(e);
                 return true;
             }
             else
@@ -173,18 +187,20 @@ namespace Kistl.DALProvider.EF
     /// <typeparam name="PARENTTYPE">which type contains the list, one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
-    public abstract class EntityListEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>
-        : EntityCollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE>, IList<ITEMTYPE>
+    /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
+    public abstract class ListEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : CollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>
         where ATYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
+        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public EntityListEntriesWrapper(PARENTTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
-            : base(parentObject, ec)
+        public ListEntriesWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+            : base(parentObject, baseCollection)
         {
         }
 
-        #region end-specific extension points
+        #region provider- and end-specific extension points
 
         /// <summary>
         /// Returns the item referenced by a given entry
@@ -259,11 +275,11 @@ namespace Kistl.DALProvider.EF
                 }
             }
 
-            ENTRYTYPE newEntry = CreateEntry(item);
+            ENTRYTYPE newEntry = InitialiseEntry(CreateEntry(), item);
             SetIndex(newEntry, index);
-            Collection.Add(newEntry);
-            newEntry.AttachToContext(ParentObject.Context);
 
+            OnEntryAdding(newEntry);
+            Collection.Add(newEntry);
             OnEntryAdded(newEntry);
         }
 
@@ -278,7 +294,10 @@ namespace Kistl.DALProvider.EF
             ENTRYTYPE oldEntry = GetAt(index);
             base.Remove(ItemFromEntry(oldEntry));
 
-            // TODO: Optimize
+            // not really needed when removing items.
+            // TODO: Optimize, check whether other parts can live with holes 
+            // in the Position; when inserting exploit holes to shortcut 
+            // Position updating
             foreach (ENTRYTYPE entry in Collection)
             {
                 int idx = IndexFromEntry(entry) ?? Kistl.API.Helper.LASTINDEXPOSITION;

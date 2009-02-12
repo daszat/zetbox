@@ -61,7 +61,7 @@ this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  DataType.Description , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
 #line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
-var mungedClassName = MungeClassName(DataType.ClassName);
+var mungedClassName = GetTypeName();
 
     ApplyClassAttributeTemplate();
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Server.Generators.ClientObjects.Implementation
+namespace Kistl.Server.Generators.FrozenObjects.Implementation
 {
     public class ProjectFile
         : Templates.Implementation.ProjectFile
@@ -16,28 +16,24 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
 
         protected override string GetAssemblyName()
         {
-            return "Kistl.Objects." + TaskEnum.Client;
+            return "Kistl.Objects.Frozen";
         }
 
         protected override void ApplyAdditionalReferences()
         {
             base.ApplyAdditionalReferences();
 
-            // used all over the place
+            // used for indexing 
             this.WriteLine(@"    <Reference Include=""System.Data.Linq"">");
             this.WriteLine(@"      <RequiredTargetFramework>3.5</RequiredTargetFramework>");
             this.WriteLine(@"    </Reference>");
 
-            // used for ObservableCollection?
-            this.WriteLine(@"    <Reference Include=""WindowsBase"">");
-            this.WriteLine(@"      <RequiredTargetFramework>3.0</RequiredTargetFramework>");
-            this.WriteLine(@"    </Reference>");
-
-            // Client API
-            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.API.Client\Kistl.API.Client.csproj"">");
-            this.WriteLine(@"      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>");
-            this.WriteLine(@"      <Name>Kistl.API.Client</Name>");
+            // Frozen Provider infrastructure
+            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj"">");
+            this.WriteLine(@"      <Project>{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}</Project>");
+            this.WriteLine(@"      <Name>Kistl.DalProvider.Frozen</Name>");
             this.WriteLine(@"    </ProjectReference>");
+
         }
 
     }

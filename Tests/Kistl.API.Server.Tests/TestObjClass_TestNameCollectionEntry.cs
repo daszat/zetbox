@@ -11,7 +11,7 @@ using Kistl.DALProvider.EF;
 namespace Kistl.API.Server.Tests
 {
     [EdmEntityTypeAttribute(NamespaceName = "Model", Name = "TestObjClass_TestNameCollectionEntry")]
-    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ICollectionEntry<string, TestObjClass>
+    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, INewCollectionEntry<TestObjClass, string>
     {
 
         private int _ID;
@@ -34,7 +34,7 @@ namespace Kistl.API.Server.Tests
         }
 
         [EdmScalarPropertyAttribute()]
-        public string Value
+        public string B
         {
             get
             {
@@ -66,15 +66,15 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        public TestObjClass Parent { get { return Parent__Implementation__; } set { Parent__Implementation__ = (TestObjClass__Implementation__)value; } }
+        public TestObjClass A { get { return Parent__Implementation__; } set { Parent__Implementation__ = (TestObjClass__Implementation__)value; } }
 
         public int fk_Parent
         {
             get
             {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && Parent != null)
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) && A != null)
                 {
-                    _fk_Parent = Parent.ID;
+                    _fk_Parent = A.ID;
                 }
                 return _fk_Parent;
             }
@@ -87,7 +87,7 @@ namespace Kistl.API.Server.Tests
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Value, sw);
+            BinarySerializer.ToBinary(this.B, sw);
             BinarySerializer.ToBinary(this.fk_Parent, sw);
         }
 

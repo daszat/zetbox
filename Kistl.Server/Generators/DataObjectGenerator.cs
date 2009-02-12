@@ -36,6 +36,7 @@ namespace Kistl.Server.Generators
 
             var generatedFileNames = new List<string>();
 
+
             Console.Write("  Object Classes");
             foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.ClassName))
             {
@@ -58,6 +59,7 @@ namespace Kistl.Server.Generators
             }
             Console.WriteLine();
 
+
             Console.Write("  Enums");
             foreach (Enumeration e in Generator.GetEnumList(ctx).OrderBy(x => x.ClassName))
             {
@@ -65,6 +67,7 @@ namespace Kistl.Server.Generators
                 Console.Write(".");
             }
             Console.WriteLine();
+
 
             Console.Write("  Structs");
             foreach (Struct s in Generator.GetStructList(ctx).OrderBy(x => x.ClassName))
@@ -74,13 +77,16 @@ namespace Kistl.Server.Generators
             }
             Console.WriteLine();
 
+
             Console.Write("  Assemblyinfo");
             generatedFileNames.Add(Generate_AssemblyInfo(ctx));
             Console.WriteLine(".");
 
+
             Console.Write("  Other Files");
             generatedFileNames.AddRange(Generate_Other(ctx));
             Console.WriteLine(".");
+
 
             Console.Write("  Project File");
             string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames);
@@ -172,8 +178,7 @@ namespace Kistl.Server.Generators
 
     }
 
-
-    #region DataObjectGeneratorFactory
+    // TODO: load providers from config file
     public static class DataObjectGeneratorFactory
     {
         public static BaseDataObjectGenerator GetInterfaceGenerator()
@@ -193,5 +198,4 @@ namespace Kistl.Server.Generators
             return new FrozenObjects.FreezingGenerator();
         }
     }
-    #endregion
 }

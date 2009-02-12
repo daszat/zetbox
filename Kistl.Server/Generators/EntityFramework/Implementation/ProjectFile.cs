@@ -42,9 +42,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             //this.WriteLine(@"      <RequiredTargetFramework>3.0</RequiredTargetFramework>");
             //this.WriteLine(@"    </Reference>");
 
-            // used for XMLSerialization annotations
-            this.WriteLine(@"    <Reference Include=""System.Xml"" />");
-
             // EF Provider infrastructure
             this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj"">");
             this.WriteLine(@"      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>");
