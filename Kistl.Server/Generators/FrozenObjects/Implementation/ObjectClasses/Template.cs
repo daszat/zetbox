@@ -53,7 +53,6 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
          
             if (this.ObjectClass.IsFrozenObject)
             {
-
                 this.Host.CallTemplate("Implementation.ObjectClasses.DataStore", ctx, this.ObjectClass);
             }
         }
