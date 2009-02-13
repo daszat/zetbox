@@ -1,0 +1,230 @@
+
+namespace Kistl.App.Base
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
+
+    using Kistl.API;
+
+    using Kistl.DalProvider.Frozen;
+
+    /// <summary>
+    /// Metadefinition Object for Parameter. This class is abstract.
+    /// </summary>
+    [System.Diagnostics.DebuggerDisplay("BaseParameter")]
+    public class BaseParameter__Implementation__ : BaseFrozenDataObject, BaseParameter
+    {
+
+
+        /// <summary>
+        /// Name des Parameter
+        /// </summary>
+        // value type property
+        public virtual string ParameterName
+        {
+            get
+            {
+                return _ParameterName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ParameterName != value)
+                {
+                    NotifyPropertyChanging("ParameterName");
+                    _ParameterName = value;
+                    NotifyPropertyChanged("ParameterName");;
+                }
+            }
+        }
+        private string _ParameterName;
+
+        /// <summary>
+        /// Methode des Parameters
+        /// </summary>
+        // object reference property
+        public virtual Kistl.App.Base.Method Method
+        {
+            get
+            {
+                return _Method;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Method != value)
+                {
+                    NotifyPropertyChanging("Method");
+                    _Method = value;
+                    NotifyPropertyChanged("Method");;
+                }
+            }
+        }
+        private Kistl.App.Base.Method _Method;
+
+        /// <summary>
+        /// Parameter wird als List<> generiert
+        /// </summary>
+        // value type property
+        public virtual bool IsList
+        {
+            get
+            {
+                return _IsList;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsList != value)
+                {
+                    NotifyPropertyChanging("IsList");
+                    _IsList = value;
+                    NotifyPropertyChanged("IsList");;
+                }
+            }
+        }
+        private bool _IsList;
+
+        /// <summary>
+        /// Es darf nur ein Return Parameter angegeben werden
+        /// </summary>
+        // value type property
+        public virtual bool IsReturnParameter
+        {
+            get
+            {
+                return _IsReturnParameter;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsReturnParameter != value)
+                {
+                    NotifyPropertyChanging("IsReturnParameter");
+                    _IsReturnParameter = value;
+                    NotifyPropertyChanged("IsReturnParameter");;
+                }
+            }
+        }
+        private bool _IsReturnParameter;
+
+        /// <summary>
+        /// Description of this Parameter
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public virtual string GetParameterTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetParameterTypeString_BaseParameter != null)
+            {
+                OnGetParameterTypeString_BaseParameter(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
+
+
+
+        /// <summary>
+        /// Returns the resulting Type of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public virtual System.Type GetParameterType() 
+        {
+            var e = new MethodReturnEventArgs<System.Type>();
+            if (OnGetParameterType_BaseParameter != null)
+            {
+                OnGetParameterType_BaseParameter(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
+		public event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
+
+
+
+        // tail template
+
+        [System.Diagnostics.DebuggerHidden()]
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_BaseParameter != null)
+            {
+                OnToString_BaseParameter(this, e);
+            }
+            return e.Result;
+        }
+        public event ToStringHandler<BaseParameter> OnToString_BaseParameter;
+
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_BaseParameter != null) OnPreSave_BaseParameter(this);
+        }
+        public event ObjectEventHandler<BaseParameter> OnPreSave_BaseParameter;
+
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_BaseParameter != null) OnPostSave_BaseParameter(this);
+        }
+        public event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
+
+
+        internal BaseParameter__Implementation__(FrozenContext ctx, int id)
+            : base(ctx, id)
+        { }
+		internal Dictionary<int, BaseParameter> DataStore = new Dictionary<int, BaseParameter>(0);
+		static BaseParameter__Implementation__()
+		{
+		}
+
+#region Serializer
+
+        public override void ToStream(System.IO.BinaryWriter binStream)
+        {
+            throw new NotImplementedException();
+        }
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            throw new NotImplementedException();
+        }
+
+#endregion
+
+    }
+
+
+}

@@ -1,29 +1,33 @@
 @echo off
 
 rem *********** Interface *********** 
-xcopy /y .\Kistl.Objects\*.cs .\Kistl.Objects\Backup
+xcopy /y .\Kistl.Objects\*.* .\Backup\Kistl.Objects\
 
-del .\Kistl.Objects\*.cs
+del .\Kistl.Objects\*.*
 
 xcopy /y C:\temp\KistlCodeGen\Kistl.Objects\*.* .\Kistl.Objects
 
 
 rem *********** Client *********** 
-xcopy /y .\Kistl.Objects.Client\*.cs .\Kistl.Objects.Client\Backup
+xcopy /y .\Kistl.Objects.Client\*.* .\Backup\Kistl.Objects.Client\
 
-del .\Kistl.Objects.Client\*.Designer.cs
+del .\Kistl.Objects.Client\*.*
 
 xcopy /y C:\temp\KistlCodeGen\Kistl.Objects.Client\*.* .\Kistl.Objects.Client
 
 
 rem *********** Server *********** 
-xcopy /y .\Kistl.Objects.Server\*.Designer.cs .\Kistl.Objects.Server\Backup
-xcopy /y .\Kistl.Objects.Server\Model.csdl .\Kistl.Objects.Server\Backup
-xcopy /y .\Kistl.Objects.Server\Model.msl .\Kistl.Objects.Server\Backup
-xcopy /y .\Kistl.Objects.Server\Model.ssdl .\Kistl.Objects.Server\Backup
+xcopy /y .\Kistl.Objects.Server\*.* .\Backup\Kistl.Objects.Server\
 
-del .\Kistl.Objects.Server\*.Designer.cs
+del .\Kistl.Objects.Server\*.*
 
 xcopy /y C:\temp\KistlCodeGen\Kistl.Objects.Server\*.* .\Kistl.Objects.Server
+
+rem *********** FrozenObjects *********** 
+xcopy /y .\Kistl.Objects.Frozen\*.* .\Backup\Kistl.Objects.Frozen\
+
+del .\Kistl.Objects.Frozen\*.*
+
+xcopy /y C:\temp\KistlCodeGen\Kistl.Objects.Frozen\*.* .\Kistl.Objects.Frozen
 
 Pause

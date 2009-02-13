@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA615374-AEA3-4187-BF73-584CCD082766}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Kistl.Objects.Frozen</RootNamespace>
+    <AssemblyName>Kistl.Objects.Frozen</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <OutputPath>..\bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>..\bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Kistl.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(OutputPath)\Kistl.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Kistl.Objects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(OutputPath)\Kistl.Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(OutputPath)\Kistl.DalProvider.Frozen.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnotherTest.Frozen.Designer.cs" />
+    <Compile Include="Assembly.Frozen.Designer.cs" />
+    <Compile Include="Auftrag.Frozen.Designer.cs" />
+    <Compile Include="BackReferenceProperty.Frozen.Designer.cs" />
+    <Compile Include="BaseParameter.Frozen.Designer.cs" />
+    <Compile Include="BaseProperty.Frozen.Designer.cs" />
+    <Compile Include="BoolParameter.Frozen.Designer.cs" />
+    <Compile Include="BoolProperty.Frozen.Designer.cs" />
+    <Compile Include="CLRObjectParameter.Frozen.Designer.cs" />
+    <Compile Include="Constraint.Frozen.Designer.cs" />
+    <Compile Include="ControlInfo.Frozen.Designer.cs" />
+    <Compile Include="DataType.Frozen.Designer.cs" />
+    <Compile Include="DateTimeParameter.Frozen.Designer.cs" />
+    <Compile Include="DateTimeProperty.Frozen.Designer.cs" />
+    <Compile Include="DoubleParameter.Frozen.Designer.cs" />
+    <Compile Include="DoubleProperty.Frozen.Designer.cs" />
+    <Compile Include="Enumeration.Frozen.Designer.cs" />
+    <Compile Include="EnumerationEntry.Frozen.Designer.cs" />
+    <Compile Include="EnumerationProperty.Frozen.Designer.cs" />
+    <Compile Include="Icon.Frozen.Designer.cs" />
+    <Compile Include="IntegerRangeConstraint.Frozen.Designer.cs" />
+    <Compile Include="Interface.Frozen.Designer.cs" />
+    <Compile Include="IntParameter.Frozen.Designer.cs" />
+    <Compile Include="IntProperty.Frozen.Designer.cs" />
+    <Compile Include="IsValidIdentifierConstraint.Frozen.Designer.cs" />
+    <Compile Include="IsValidNamespaceConstraint.Frozen.Designer.cs" />
+    <Compile Include="Kostenstelle.Frozen.Designer.cs" />
+    <Compile Include="Kostentraeger.Frozen.Designer.cs" />
+    <Compile Include="Kunde.Frozen.Designer.cs" />
+    <Compile Include="LastTest.Frozen.Designer.cs" />
+    <Compile Include="Method.Frozen.Designer.cs" />
+    <Compile Include="MethodInvocation.Frozen.Designer.cs" />
+    <Compile Include="MethodInvocationConstraint.Frozen.Designer.cs" />
+    <Compile Include="Mitarbeiter.Frozen.Designer.cs" />
+    <Compile Include="Module.Frozen.Designer.cs" />
+    <Compile Include="Muhblah.Frozen.Designer.cs" />
+    <Compile Include="NotNullableConstraint.Frozen.Designer.cs" />
+    <Compile Include="ObjectClass.Frozen.Designer.cs" />
+    <Compile Include="ObjectParameter.Frozen.Designer.cs" />
+    <Compile Include="ObjectReferenceProperty.Frozen.Designer.cs" />
+    <Compile Include="PresenterInfo.Frozen.Designer.cs" />
+    <Compile Include="Projekt.Frozen.Designer.cs" />
+    <Compile Include="Property.Frozen.Designer.cs" />
+    <Compile Include="Relation.Frozen.Designer.cs" />
+    <Compile Include="StringParameter.Frozen.Designer.cs" />
+    <Compile Include="StringProperty.Frozen.Designer.cs" />
+    <Compile Include="StringRangeConstraint.Frozen.Designer.cs" />
+    <Compile Include="Struct.Frozen.Designer.cs" />
+    <Compile Include="StructProperty.Frozen.Designer.cs" />
+    <Compile Include="Taetigkeit.Frozen.Designer.cs" />
+    <Compile Include="TaetigkeitsArt.Frozen.Designer.cs" />
+    <Compile Include="Task.Frozen.Designer.cs" />
+    <Compile Include="Template.Frozen.Designer.cs" />
+    <Compile Include="TestCustomObject.Frozen.Designer.cs" />
+    <Compile Include="TestObjClass.Frozen.Designer.cs" />
+    <Compile Include="TypeRef.Frozen.Designer.cs" />
+    <Compile Include="ValueTypeProperty.Frozen.Designer.cs" />
+    <Compile Include="ViewDescriptor.Frozen.Designer.cs" />
+    <Compile Include="Visual.Frozen.Designer.cs" />
+    <Compile Include="Zeitkonto.Frozen.Designer.cs" />
+    <Compile Include="CollectionEntries.Frozen.Designer.cs" />
+    <Compile Include="TestPhoneStruct.Frozen.Designer.cs" />
+    <Compile Include="AssemblyInfo.Frozen.cs" />
+    <Compile Include="FrozenModuleRepository.Frozen.Designer.cs" />
+    <Compile Include="FrozenKistlBaseRepository.Frozen.Designer.cs" />
+    <Compile Include="FrozenProjekteRepository.Frozen.Designer.cs" />
+    <Compile Include="FrozenZeiterfassungRepository.Frozen.Designer.cs" />
+    <Compile Include="FrozenGUIRepository.Frozen.Designer.cs" />
+    <Compile Include="FrozenTestModuleRepository.Frozen.Designer.cs" />
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
