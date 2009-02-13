@@ -46,6 +46,32 @@ namespace Kistl.App.Projekte
         private int _ID;
 
         /// <summary>
+        /// Vorname Nachname
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    NotifyPropertyChanging("Name");
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
+            }
+        }
+        private string _Name;
+
+        /// <summary>
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
     /*
@@ -91,32 +117,6 @@ namespace Kistl.App.Projekte
         }
         private EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> _ProjekteWrapper;
         
-
-        /// <summary>
-        /// Vorname Nachname
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
-                {
-                    NotifyPropertyChanging("Name");
-                    _Name = value;
-                    NotifyPropertyChanged("Name");;
-                }
-            }
-        }
-        private string _Name;
 
         /// <summary>
         /// Herzlichen Glückwunsch zum Geburtstag
@@ -252,8 +252,8 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Projekte__Implementation__, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.Projekte__Implementation__, binStream);
             BinarySerializer.ToStream(this._Geburtstag, binStream);
             BinarySerializer.ToStream(this._SVNr, binStream);
             BinarySerializer.ToStream(this._TelefonNummer, binStream);
@@ -262,8 +262,8 @@ namespace Kistl.App.Projekte
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Projekte__Implementation__, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
+            BinarySerializer.FromStreamCollectionEntries(this.Projekte__Implementation__, binStream);
             BinarySerializer.FromStream(out this._Geburtstag, binStream);
             BinarySerializer.FromStream(out this._SVNr, binStream);
             BinarySerializer.FromStream(out this._TelefonNummer, binStream);

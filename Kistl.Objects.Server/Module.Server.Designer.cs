@@ -46,6 +46,58 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
+        /// CLR Namespace des Moduls
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Namespace
+        {
+            get
+            {
+                return _Namespace;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Namespace != value)
+                {
+                    NotifyPropertyChanging("Namespace");
+                    _Namespace = value;
+                    NotifyPropertyChanged("Namespace");;
+                }
+            }
+        }
+        private string _Namespace;
+
+        /// <summary>
+        /// Name des Moduls
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string ModuleName
+        {
+            get
+            {
+                return _ModuleName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ModuleName != value)
+                {
+                    NotifyPropertyChanging("ModuleName");
+                    _ModuleName = value;
+                    NotifyPropertyChanged("ModuleName");;
+                }
+            }
+        }
+        private string _ModuleName;
+
+        /// <summary>
         /// Datentypendes Modules
         /// </summary>
     /*
@@ -138,58 +190,6 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.Assembly__Implementation__> _AssembliesWrapper;
 
 
-
-        /// <summary>
-        /// CLR Namespace des Moduls
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Namespace
-        {
-            get
-            {
-                return _Namespace;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Namespace != value)
-                {
-                    NotifyPropertyChanging("Namespace");
-                    _Namespace = value;
-                    NotifyPropertyChanged("Namespace");;
-                }
-            }
-        }
-        private string _Namespace;
-
-        /// <summary>
-        /// Name des Moduls
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string ModuleName
-        {
-            get
-            {
-                return _ModuleName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ModuleName != value)
-                {
-                    NotifyPropertyChanging("ModuleName");
-                    _ModuleName = value;
-                    NotifyPropertyChanged("ModuleName");;
-                }
-            }
-        }
-        private string _ModuleName;
 
         /// <summary>
         /// Description of this Module

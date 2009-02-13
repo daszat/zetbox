@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -82,6 +82,7 @@
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="CollectionWrapper.cs" />
     <Compile Include="CollectionWrapper.Implementations.cs" />
+    <Compile Include="ModuleRepositoryAttribute.cs" />
     <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableExpression.cs" />
@@ -109,8 +110,10 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>mkdir C:\temp\KistlCodeGen\bin
-copy /y $(TargetDir)$(TargetName).dll C:\temp\KistlCodeGen\bin
-copy /y $(TargetDir)$(TargetName).pdb C:\temp\KistlCodeGen\bin</PostBuildEvent>
+    <PostBuildEvent>mkdir C:\temp\KistlCodeGen\bin\
+mkdir C:\temp\KistlCodeGen\bin\$(OutputPath)
+copy /y $(TargetDir)$(TargetName).dll C:\temp\KistlCodeGen\bin\$(OutputPath)
+copy /y $(TargetDir)$(TargetName).pdb C:\temp\KistlCodeGen\bin\$(OutputPath)
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

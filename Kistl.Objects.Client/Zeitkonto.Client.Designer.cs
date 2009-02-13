@@ -23,6 +23,29 @@ namespace Kistl.App.Zeiterfassung
 
 
         /// <summary>
+        /// Name des Zeiterfassungskontos
+        /// </summary>
+        // value type property
+        public virtual string Kontoname
+        {
+            get
+            {
+                return _Kontoname;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Kontoname != value)
+                {
+                    NotifyPropertyChanging("Kontoname");
+                    _Kontoname = value;
+                    NotifyPropertyChanged("Kontoname");;
+                }
+            }
+        }
+        private string _Kontoname;
+
+        /// <summary>
         /// Tätigkeiten
         /// </summary>
         // object list property
@@ -81,29 +104,6 @@ namespace Kistl.App.Zeiterfassung
         }
         
         private BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter> _MitarbeiterWrapper;
-
-        /// <summary>
-        /// Name des Zeiterfassungskontos
-        /// </summary>
-        // value type property
-        public virtual string Kontoname
-        {
-            get
-            {
-                return _Kontoname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kontoname != value)
-                {
-                    NotifyPropertyChanging("Kontoname");
-                    _Kontoname = value;
-                    NotifyPropertyChanged("Kontoname");;
-                }
-            }
-        }
-        private string _Kontoname;
 
         /// <summary>
         /// Maximal erlaubte Stundenanzahl

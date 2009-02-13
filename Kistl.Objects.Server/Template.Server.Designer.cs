@@ -46,6 +46,32 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// a short name to identify this Template to the user
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string DisplayName
+        {
+            get
+            {
+                return _DisplayName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DisplayName != value)
+                {
+                    NotifyPropertyChanging("DisplayName");
+                    _DisplayName = value;
+                    NotifyPropertyChanged("DisplayName");;
+                }
+            }
+        }
+        private string _DisplayName;
+
+        /// <summary>
         /// The visual representation of this Template
         /// </summary>
     /*
@@ -124,6 +150,32 @@ namespace Kistl.App.GUI
         }
         
         
+
+        /// <summary>
+        /// FullName of the Type that is displayed with this Template
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string DisplayedTypeFullName
+        {
+            get
+            {
+                return _DisplayedTypeFullName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DisplayedTypeFullName != value)
+                {
+                    NotifyPropertyChanging("DisplayedTypeFullName");
+                    _DisplayedTypeFullName = value;
+                    NotifyPropertyChanged("DisplayedTypeFullName");;
+                }
+            }
+        }
+        private string _DisplayedTypeFullName;
 
         /// <summary>
         /// Assembly of the Type that is displayed with this Template
@@ -253,58 +305,6 @@ namespace Kistl.App.GUI
         
 
         /// <summary>
-        /// a short name to identify this Template to the user
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string DisplayName
-        {
-            get
-            {
-                return _DisplayName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DisplayName != value)
-                {
-                    NotifyPropertyChanging("DisplayName");
-                    _DisplayName = value;
-                    NotifyPropertyChanged("DisplayName");;
-                }
-            }
-        }
-        private string _DisplayName;
-
-        /// <summary>
-        /// FullName of the Type that is displayed with this Template
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string DisplayedTypeFullName
-        {
-            get
-            {
-                return _DisplayedTypeFullName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DisplayedTypeFullName != value)
-                {
-                    NotifyPropertyChanging("DisplayedTypeFullName");
-                    _DisplayedTypeFullName = value;
-                    NotifyPropertyChanged("DisplayedTypeFullName");;
-                }
-            }
-        }
-        private string _DisplayedTypeFullName;
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -359,21 +359,21 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._DisplayName, binStream);
             BinarySerializer.ToStream(this._fk_VisualTree, binStream);
+            BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this._fk_DisplayedTypeAssembly, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.Menu__Implementation__, binStream);
-            BinarySerializer.ToStream(this._DisplayName, binStream);
-            BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._DisplayName, binStream);
             BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
+            BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
             BinarySerializer.FromStream(out this._fk_DisplayedTypeAssembly, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.Menu__Implementation__, binStream);
-            BinarySerializer.FromStream(out this._DisplayName, binStream);
-            BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
         }
 
 #endregion

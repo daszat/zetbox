@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.EntityFramework
             this.RunTemplate(ctx, "Implementation.EfModel.ModelMsl", "Model.msl");
             this.RunTemplate(ctx, "Implementation.EfModel.ModelSsdl", "Model.ssdl");
 
-            otherFileNames.Add(this.RunTemplate(ctx, "Implementation.ObjectClasses.AssociationSetAttributes", "AssociationSetAttributes", "cs"));
+            otherFileNames.Add(this.RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.AssociationSetAttributes", "AssociationSetAttributes", "cs"));
 
             return base.Generate_Other(ctx).Concat(otherFileNames);
         }

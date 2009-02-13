@@ -18,16 +18,6 @@ namespace Kistl.App.Base
 
 		Kistl.App.Base.DataType ObjectClass { get; set; }
         /// <summary>
-        /// Zugehörig zum Modul
-        /// </summary>
-
-		Kistl.App.Base.Module Module { get; set; }
-        /// <summary>
-        /// The list of constraints applying to this Property
-        /// </summary>
-
-        ICollection<Kistl.App.Base.Constraint> Constraints { get; }
-        /// <summary>
         /// 
         /// </summary>
 
@@ -37,6 +27,16 @@ namespace Kistl.App.Base
         /// </summary>
 
 		string AltText { get; set; }
+        /// <summary>
+        /// Zugehörig zum Modul
+        /// </summary>
+
+		Kistl.App.Base.Module Module { get; set; }
+        /// <summary>
+        /// The list of constraints applying to this Property
+        /// </summary>
+
+        ICollection<Kistl.App.Base.Constraint> Constraints { get; }
         /// <summary>
         /// Description of this Property
         /// </summary>

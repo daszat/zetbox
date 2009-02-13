@@ -23,6 +23,52 @@ namespace Kistl.App.GUI
 
 
         /// <summary>
+        /// A short description of the utility of this visual
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// Which visual is represented here
+        /// </summary>
+        // enumeration property
+        public virtual Kistl.App.GUI.VisualType ControlType
+        {
+            get
+            {
+                return _ControlType;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ControlType != value)
+                {
+                    NotifyPropertyChanging("ControlType");
+                    _ControlType = value;
+                    NotifyPropertyChanged("ControlType");;
+                }
+            }
+        }
+        private Kistl.App.GUI.VisualType _ControlType;
+
+        /// <summary>
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
         // object list property
@@ -168,52 +214,6 @@ namespace Kistl.App.GUI
         
         private BackReferenceCollection<Kistl.App.GUI.Visual> _ContextMenuWrapper;
 
-        /// <summary>
-        /// A short description of the utility of this visual
-        /// </summary>
-        // value type property
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
-        /// <summary>
-        /// Which visual is represented here
-        /// </summary>
-        // enumeration property
-        public virtual Kistl.App.GUI.VisualType ControlType
-        {
-            get
-            {
-                return _ControlType;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ControlType != value)
-                {
-                    NotifyPropertyChanging("ControlType");
-                    _ControlType = value;
-                    NotifyPropertyChanged("ControlType");;
-                }
-            }
-        }
-        private Kistl.App.GUI.VisualType _ControlType;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -252,19 +252,19 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Property, binStream);
-            BinarySerializer.ToStream(this._fk_Method, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream((int)this.ControlType, binStream);
+            BinarySerializer.ToStream(this._fk_Property, binStream);
+            BinarySerializer.ToStream(this._fk_Method, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Property, binStream);
-            BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
+            BinarySerializer.FromStream(out this._fk_Property, binStream);
+            BinarySerializer.FromStream(out this._fk_Method, binStream);
         }
 
 #endregion

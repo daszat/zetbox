@@ -1,20 +1,11 @@
 using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Linq;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
-using Kistl.Server;
-using Kistl.Server.Generators.Extensions;
-using Kistl.Server.GeneratorsOld.Helper;
 
 namespace Kistl.Server.Generators
 {
@@ -116,7 +107,7 @@ namespace Kistl.Server.Generators
         /// </summary>
         public abstract string ProjectGuid { get; }
 
-        protected virtual string RunTemplate(IKistlContext ctx, string templateName, string baseFilename, string extension, params object[] args)
+        protected virtual string RunTemplateWithExtension(IKistlContext ctx, string templateName, string baseFilename, string extension, params object[] args)
         {
             string filename = String.Join(".", new string[] { baseFilename, BaseName, extension });
             return RunTemplate(ctx, templateName, filename, args);
@@ -136,17 +127,17 @@ namespace Kistl.Server.Generators
 
         protected virtual string Generate_AssemblyInfo(IKistlContext ctx)
         {
-            return RunTemplate(ctx, "Implementation.AssemblyInfoTemplate", "AssemblyInfo", "cs");
+            return RunTemplateWithExtension(ctx, "Implementation.AssemblyInfoTemplate", "AssemblyInfo", "cs");
         }
 
         protected virtual string Generate_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {
-            return RunTemplate(ctx, "Implementation.ObjectClasses.Template", objClass.ClassName, "Designer.cs", objClass);
+            return RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.Template", objClass.ClassName, "Designer.cs", objClass);
         }
 
         protected virtual string Generate_CollectionEntries(IKistlContext ctx)
         {
-            return RunTemplate(ctx, "Implementation.ObjectClasses.CollectionEntries", "CollectionEntries", "Designer.cs");
+            return RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.CollectionEntries", "CollectionEntries", "Designer.cs");
         }
 
         protected virtual string Generate_Enumeration(IKistlContext ctx, Enumeration e)
@@ -157,7 +148,7 @@ namespace Kistl.Server.Generators
 
         protected virtual string Generate_Struct(IKistlContext ctx, Struct s)
         {
-            return RunTemplate(ctx, "Implementation.Structs.Template", s.ClassName, "Designer.cs", s);
+            return RunTemplateWithExtension(ctx, "Implementation.Structs.Template", s.ClassName, "Designer.cs", s);
         }
 
         protected virtual string Generate_Interface(IKistlContext ctx, Interface i)
@@ -173,7 +164,7 @@ namespace Kistl.Server.Generators
 
         protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames)
         {
-            return RunTemplate(ctx, "Implementation.ProjectFile", TargetNameSpace, "csproj", projectGuid, generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList());
+            return RunTemplate(ctx, "Implementation.ProjectFile", TargetNameSpace + ".csproj", projectGuid, generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList());
         }
 
     }

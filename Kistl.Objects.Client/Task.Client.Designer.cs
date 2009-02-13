@@ -23,62 +23,6 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
-        /// Verknüpfung zum Projekt
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Projekt Projekt
-        {
-            get
-            {
-                if (fk_Projekt.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Projekt>(fk_Projekt.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                // fix up inverse reference
-                var oldValue = Projekt;
-                if (value != null && value.ID != fk_Projekt)
-                {
-                    oldValue.Tasks.Remove(this);
-                    fk_Projekt = value.ID;
-                    value.Tasks.Add(this);
-                }
-                else
-                {
-                    oldValue.Tasks.Remove(this);
-                    fk_Projekt = null;
-                }
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_Projekt
-        {
-            get
-            {
-                return _fk_Projekt;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Projekt != value)
-                {
-                    NotifyPropertyChanging("Projekt");
-                    _fk_Projekt = value;
-                    NotifyPropertyChanging("Projekt");
-                }
-            }
-        }
-        private int? _fk_Projekt;
-
-        /// <summary>
         /// Taskname
         /// </summary>
         // value type property
@@ -170,6 +114,62 @@ namespace Kistl.App.Projekte
         }
         private double? _Aufwand;
 
+        /// <summary>
+        /// Verknüpfung zum Projekt
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                if (fk_Projekt.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Projekt>(fk_Projekt.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                // fix up inverse reference
+                var oldValue = Projekt;
+                if (value != null && value.ID != fk_Projekt)
+                {
+                    oldValue.Tasks.Remove(this);
+                    fk_Projekt = value.ID;
+                    value.Tasks.Add(this);
+                }
+                else
+                {
+                    oldValue.Tasks.Remove(this);
+                    fk_Projekt = null;
+                }
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_Projekt
+        {
+            get
+            {
+                return _fk_Projekt;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_Projekt != value)
+                {
+                    NotifyPropertyChanging("Projekt");
+                    _fk_Projekt = value;
+                    NotifyPropertyChanging("Projekt");
+                }
+            }
+        }
+        private int? _fk_Projekt;
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -208,21 +208,21 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Projekt, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._DatumVon, binStream);
             BinarySerializer.ToStream(this._DatumBis, binStream);
             BinarySerializer.ToStream(this._Aufwand, binStream);
+            BinarySerializer.ToStream(this._fk_Projekt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._DatumVon, binStream);
             BinarySerializer.FromStream(out this._DatumBis, binStream);
             BinarySerializer.FromStream(out this._Aufwand, binStream);
+            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 
 #endregion

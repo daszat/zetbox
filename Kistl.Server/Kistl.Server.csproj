@@ -34,7 +34,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -44,7 +44,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -518,10 +518,25 @@
     <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataStore.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\SerializerTemplate.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\Template.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\ProjectFile.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\Structs\Template.cs" />
+    <Compile Include="Generators\FrozenObjects\Repositories\FrozenModuleRepository.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrozenModuleRepository.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\FrozenObjects\Repositories\FrozenRepository.Designer.cs">
+      <DependentUpon>FrozenRepository.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Generators\Interfaces\Implementation\AssemblyInfoTemplate.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
@@ -615,6 +630,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProjectFile.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\Interfaces\Repositories\ModuleRepository.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModuleRepository.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Interfaces\Repositories\Repository.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repository.cst</DependentUpon>
+    </Compile>
     <Compile Include="Movables\RelationEnd.cs" />
     <Compile Include="Movables\RelationExtensions.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\AssociationInfo.Implementation.cs" />
@@ -656,6 +681,19 @@
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\FrozenObjects\Implementation\FrozenContextImplementation.cst" />
+    <None Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DataStore.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>FrozenModuleRepository.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\FrozenObjects\Repositories\FrozenRepository.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>FrozenRepository.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\CollectionEntries\Template.cst">
       <Generator>Arebis Template Processor</Generator>
@@ -700,6 +738,7 @@
       <LastGenOutput>RelationDebugTemplate.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Generators\EntityFramework\README.txt" />
+    <Content Include="Generators\Interfaces\Repositories\README.txt" />
     <Content Include="Generators\Templates\Interface\README.txt" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
@@ -716,6 +755,14 @@
     <None Include="Generators\Templates\Interface\ProjectFile.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProjectFile.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Interfaces\Repositories\ModuleRepository.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ModuleRepository.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Interfaces\Repositories\Repository.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Repository.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

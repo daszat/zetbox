@@ -34,10 +34,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
             this.WriteLine(@"    </Reference>");
 
             // Client API
-            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.API.Client\Kistl.API.Client.csproj"">");
-            this.WriteLine(@"      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>");
-            this.WriteLine(@"      <Name>Kistl.API.Client</Name>");
-            this.WriteLine(@"    </ProjectReference>");
+            this.WriteLine(@"    <Reference Include=""Kistl.API.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(OutputPath)\Kistl.API.Client.dll</HintPath>");
+            this.WriteLine(@"    </Reference>");
         }
 
     }

@@ -23,6 +23,29 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
+        /// Vorname Nachname
+        /// </summary>
+        // value type property
+        public virtual string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    NotifyPropertyChanging("Name");
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
+            }
+        }
+        private string _Name;
+
+        /// <summary>
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
         // object list property
@@ -51,29 +74,6 @@ namespace Kistl.App.Projekte
         }
         
         private BackReferenceCollection<Kistl.App.Projekte.Projekt> _ProjekteWrapper;
-
-        /// <summary>
-        /// Vorname Nachname
-        /// </summary>
-        // value type property
-        public virtual string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
-                {
-                    NotifyPropertyChanging("Name");
-                    _Name = value;
-                    NotifyPropertyChanged("Name");;
-                }
-            }
-        }
-        private string _Name;
 
         /// <summary>
         /// Herzlichen Glückwunsch zum Geburtstag

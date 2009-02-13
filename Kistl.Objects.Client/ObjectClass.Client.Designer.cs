@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Tabellenname in der Datenbank
+        /// </summary>
+        // value type property
+        public virtual string TableName
+        {
+            get
+            {
+                return _TableName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_TableName != value)
+                {
+                    NotifyPropertyChanging("TableName");
+                    _TableName = value;
+                    NotifyPropertyChanged("TableName");;
+                }
+            }
+        }
+        private string _TableName;
+
+        /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
         // object reference property
@@ -139,72 +162,6 @@ namespace Kistl.App.Base
         private BackReferenceCollection<Kistl.App.Base.Interface> _ImplementsInterfacesWrapper;
 
         /// <summary>
-        /// The default model to use for the UI
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef DefaultModel
-        {
-            get
-            {
-                if (fk_DefaultModel.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_DefaultModel.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultModel
-        {
-            get
-            {
-                return _fk_DefaultModel;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DefaultModel != value)
-                {
-                    NotifyPropertyChanging("DefaultModel");
-                    _fk_DefaultModel = value;
-                    NotifyPropertyChanging("DefaultModel");
-                }
-            }
-        }
-        private int? _fk_DefaultModel;
-
-        /// <summary>
-        /// Tabellenname in der Datenbank
-        /// </summary>
-        // value type property
-        public virtual string TableName
-        {
-            get
-            {
-                return _TableName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_TableName != value)
-                {
-                    NotifyPropertyChanging("TableName");
-                    _TableName = value;
-                    NotifyPropertyChanged("TableName");;
-                }
-            }
-        }
-        private string _TableName;
-
-        /// <summary>
         /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
         /// </summary>
         // value type property
@@ -249,6 +206,49 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsFrozenObject;
+
+        /// <summary>
+        /// The default model to use for the UI
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef DefaultModel
+        {
+            get
+            {
+                if (fk_DefaultModel.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(fk_DefaultModel.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_DefaultModel
+        {
+            get
+            {
+                return _fk_DefaultModel;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_DefaultModel != value)
+                {
+                    NotifyPropertyChanging("DefaultModel");
+                    _fk_DefaultModel = value;
+                    NotifyPropertyChanging("DefaultModel");
+                }
+            }
+        }
+        private int? _fk_DefaultModel;
 
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
@@ -358,21 +358,21 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_BaseObjectClass, binStream);
-            BinarySerializer.ToStream(this._fk_DefaultModel, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
+            BinarySerializer.ToStream(this._fk_BaseObjectClass, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
+            BinarySerializer.ToStream(this._fk_DefaultModel, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
             BinarySerializer.FromStream(out this._TableName, binStream);
+            BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
+            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
         }
 
 #endregion

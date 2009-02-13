@@ -126,6 +126,32 @@ namespace Kistl.App.Base
         
 
         /// <summary>
+        /// Name des implementierenden Members
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string MemberName
+        {
+            get
+            {
+                return _MemberName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_MemberName != value)
+                {
+                    NotifyPropertyChanging("MemberName");
+                    _MemberName = value;
+                    NotifyPropertyChanged("MemberName");;
+                }
+            }
+        }
+        private string _MemberName;
+
+        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
     /*
@@ -365,32 +391,6 @@ namespace Kistl.App.Base
         
         
 
-        /// <summary>
-        /// Name des implementierenden Members
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string MemberName
-        {
-            get
-            {
-                return _MemberName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_MemberName != value)
-                {
-                    NotifyPropertyChanging("MemberName");
-                    _MemberName = value;
-                    NotifyPropertyChanged("MemberName");;
-                }
-            }
-        }
-        private string _MemberName;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -430,20 +430,20 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Method, binStream);
+            BinarySerializer.ToStream(this._MemberName, binStream);
             BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._fk_InvokeOnObjectClass, binStream);
             BinarySerializer.ToStream(this._fk_Implementor, binStream);
-            BinarySerializer.ToStream(this._MemberName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
+            BinarySerializer.FromStream(out this._MemberName, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_InvokeOnObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_Implementor, binStream);
-            BinarySerializer.FromStream(out this._MemberName, binStream);
         }
 
 #endregion

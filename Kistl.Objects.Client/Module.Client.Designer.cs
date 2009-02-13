@@ -23,6 +23,52 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// CLR Namespace des Moduls
+        /// </summary>
+        // value type property
+        public virtual string Namespace
+        {
+            get
+            {
+                return _Namespace;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Namespace != value)
+                {
+                    NotifyPropertyChanging("Namespace");
+                    _Namespace = value;
+                    NotifyPropertyChanged("Namespace");;
+                }
+            }
+        }
+        private string _Namespace;
+
+        /// <summary>
+        /// Name des Moduls
+        /// </summary>
+        // value type property
+        public virtual string ModuleName
+        {
+            get
+            {
+                return _ModuleName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ModuleName != value)
+                {
+                    NotifyPropertyChanging("ModuleName");
+                    _ModuleName = value;
+                    NotifyPropertyChanged("ModuleName");;
+                }
+            }
+        }
+        private string _ModuleName;
+
+        /// <summary>
         /// Datentypendes Modules
         /// </summary>
         // object list property
@@ -81,52 +127,6 @@ namespace Kistl.App.Base
         }
         
         private BackReferenceCollection<Kistl.App.Base.Assembly> _AssembliesWrapper;
-
-        /// <summary>
-        /// CLR Namespace des Moduls
-        /// </summary>
-        // value type property
-        public virtual string Namespace
-        {
-            get
-            {
-                return _Namespace;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Namespace != value)
-                {
-                    NotifyPropertyChanging("Namespace");
-                    _Namespace = value;
-                    NotifyPropertyChanged("Namespace");;
-                }
-            }
-        }
-        private string _Namespace;
-
-        /// <summary>
-        /// Name des Moduls
-        /// </summary>
-        // value type property
-        public virtual string ModuleName
-        {
-            get
-            {
-                return _ModuleName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ModuleName != value)
-                {
-                    NotifyPropertyChanging("ModuleName");
-                    _ModuleName = value;
-                    NotifyPropertyChanged("ModuleName");;
-                }
-            }
-        }
-        private string _ModuleName;
 
         /// <summary>
         /// Description of this Module

@@ -13,25 +13,25 @@ namespace Kistl.App.GUI
     {
 
         /// <summary>
-        /// Where to find the implementation of the Presenter
-        /// </summary>
-
-		Kistl.App.Base.Assembly PresenterAssembly { get; set; }
-        /// <summary>
-        /// The Assembly of the Data Type
-        /// </summary>
-
-		Kistl.App.Base.Assembly DataAssembly { get; set; }
-        /// <summary>
         /// which controls are handled by this Presenter
         /// </summary>
 
 		Kistl.App.GUI.VisualType ControlType { get; set; }
         /// <summary>
+        /// Where to find the implementation of the Presenter
+        /// </summary>
+
+		Kistl.App.Base.Assembly PresenterAssembly { get; set; }
+        /// <summary>
         /// The CLR namespace and class name of the Presenter
         /// </summary>
 
 		string PresenterTypeName { get; set; }
+        /// <summary>
+        /// The Assembly of the Data Type
+        /// </summary>
+
+		Kistl.App.Base.Assembly DataAssembly { get; set; }
         /// <summary>
         /// The CLR namespace and class name of the Data Type
         /// </summary>

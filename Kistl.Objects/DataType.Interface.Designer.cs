@@ -13,6 +13,11 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Der Name der Objektklasse
+        /// </summary>
+
+		string ClassName { get; set; }
+        /// <summary>
         /// Eigenschaften der Objektklasse
         /// </summary>
 
@@ -37,11 +42,6 @@ namespace Kistl.App.Base
         /// </summary>
 
         ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations { get; }
-        /// <summary>
-        /// Der Name der Objektklasse
-        /// </summary>
-
-		string ClassName { get; set; }
         /// <summary>
         /// Description of this DataType
         /// </summary>

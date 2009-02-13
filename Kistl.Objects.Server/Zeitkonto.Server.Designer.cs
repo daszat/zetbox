@@ -46,6 +46,32 @@ namespace Kistl.App.Zeiterfassung
         private int _ID;
 
         /// <summary>
+        /// Name des Zeiterfassungskontos
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Kontoname
+        {
+            get
+            {
+                return _Kontoname;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Kontoname != value)
+                {
+                    NotifyPropertyChanging("Kontoname");
+                    _Kontoname = value;
+                    NotifyPropertyChanged("Kontoname");;
+                }
+            }
+        }
+        private string _Kontoname;
+
+        /// <summary>
         /// Tätigkeiten
         /// </summary>
     /*
@@ -140,32 +166,6 @@ namespace Kistl.App.Zeiterfassung
         
 
         /// <summary>
-        /// Name des Zeiterfassungskontos
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Kontoname
-        {
-            get
-            {
-                return _Kontoname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kontoname != value)
-                {
-                    NotifyPropertyChanging("Kontoname");
-                    _Kontoname = value;
-                    NotifyPropertyChanged("Kontoname");;
-                }
-            }
-        }
-        private string _Kontoname;
-
-        /// <summary>
         /// Maximal erlaubte Stundenanzahl
         /// </summary>
         // value type property
@@ -255,8 +255,8 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.ToStream(this._Kontoname, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.ToStream(this._MaxStunden, binStream);
             BinarySerializer.ToStream(this._AktuelleStunden, binStream);
         }
@@ -264,8 +264,8 @@ namespace Kistl.App.Zeiterfassung
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.FromStream(out this._Kontoname, binStream);
+            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.FromStream(out this._MaxStunden, binStream);
             BinarySerializer.FromStream(out this._AktuelleStunden, binStream);
         }

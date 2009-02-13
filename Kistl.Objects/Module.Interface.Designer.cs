@@ -13,16 +13,6 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Datentypendes Modules
-        /// </summary>
-
-        ICollection<Kistl.App.Base.DataType> DataTypes { get; }
-        /// <summary>
-        /// Assemblies des Moduls
-        /// </summary>
-
-        ICollection<Kistl.App.Base.Assembly> Assemblies { get; }
-        /// <summary>
         /// CLR Namespace des Moduls
         /// </summary>
 
@@ -32,6 +22,16 @@ namespace Kistl.App.Base
         /// </summary>
 
 		string ModuleName { get; set; }
+        /// <summary>
+        /// Datentypendes Modules
+        /// </summary>
+
+        ICollection<Kistl.App.Base.DataType> DataTypes { get; }
+        /// <summary>
+        /// Assemblies des Moduls
+        /// </summary>
+
+        ICollection<Kistl.App.Base.Assembly> Assemblies { get; }
         /// <summary>
         /// Description of this Module
         /// </summary>

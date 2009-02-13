@@ -46,6 +46,74 @@ namespace Kistl.App.Test
         private int _ID;
 
         /// <summary>
+        /// String Property
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string StringProp
+        {
+            get
+            {
+                return _StringProp;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_StringProp != value)
+                {
+                    NotifyPropertyChanging("StringProp");
+                    _StringProp = value;
+                    NotifyPropertyChanged("StringProp");;
+                }
+            }
+        }
+        private string _StringProp;
+
+        /// <summary>
+        /// Test Enumeration Property
+        /// </summary>
+        // enumeration property
+        // implement the user-visible interface
+        public Kistl.App.Test.TestEnum TestEnumProp
+        {
+            get
+            {
+                return _TestEnumProp;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_TestEnumProp != value)
+                {
+                    NotifyPropertyChanging("TestEnumProp");
+                    _TestEnumProp = value;
+                    NotifyPropertyChanged("TestEnumProp");
+                }
+            }
+        }
+        
+        /// <summary>backing store for TestEnumProp</summary>
+        private Kistl.App.Test.TestEnum _TestEnumProp;
+        
+        /// <summary>EF sees only this property, for TestEnumProp</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int TestEnumProp__Implementation__
+        {
+            get
+            {
+                return (int)TestEnumProp;
+            }
+            set
+            {
+                TestEnumProp = (Kistl.App.Test.TestEnum)value;
+            }
+        }
+        
+
+        /// <summary>
         /// testtest
         /// </summary>
     /*
@@ -123,74 +191,6 @@ namespace Kistl.App.Test
             }
         }
         
-        
-
-        /// <summary>
-        /// String Property
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string StringProp
-        {
-            get
-            {
-                return _StringProp;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_StringProp != value)
-                {
-                    NotifyPropertyChanging("StringProp");
-                    _StringProp = value;
-                    NotifyPropertyChanged("StringProp");;
-                }
-            }
-        }
-        private string _StringProp;
-
-        /// <summary>
-        /// Test Enumeration Property
-        /// </summary>
-        // enumeration property
-        // implement the user-visible interface
-        public Kistl.App.Test.TestEnum TestEnumProp
-        {
-            get
-            {
-                return _TestEnumProp;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_TestEnumProp != value)
-                {
-                    NotifyPropertyChanging("TestEnumProp");
-                    _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp");
-                }
-            }
-        }
-        
-        /// <summary>backing store for TestEnumProp</summary>
-        private Kistl.App.Test.TestEnum _TestEnumProp;
-        
-        /// <summary>EF sees only this property, for TestEnumProp</summary>
-        [XmlIgnore()]
-        [EdmScalarProperty()]
-        public int TestEnumProp__Implementation__
-        {
-            get
-            {
-                return (int)TestEnumProp;
-            }
-            set
-            {
-                TestEnumProp = (Kistl.App.Test.TestEnum)value;
-            }
-        }
         
 
         /// <summary>
@@ -274,18 +274,18 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
             BinarySerializer.ToStream((int)this.TestEnumProp, binStream);
+            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
             BinarySerializer.FromStreamConverter(v => this.TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
+            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._MyIntProperty, binStream);
         }
 

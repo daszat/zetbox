@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// The reason of this constraint
+        /// </summary>
+        // value type property
+        public virtual string Reason
+        {
+            get
+            {
+                return _Reason;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Reason != value)
+                {
+                    NotifyPropertyChanging("Reason");
+                    _Reason = value;
+                    NotifyPropertyChanged("Reason");;
+                }
+            }
+        }
+        private string _Reason;
+
+        /// <summary>
         /// The property to be constrained
         /// </summary>
         // object reference property
@@ -77,29 +100,6 @@ namespace Kistl.App.Base
             }
         }
         private int? _fk_ConstrainedProperty;
-
-        /// <summary>
-        /// The reason of this constraint
-        /// </summary>
-        // value type property
-        public virtual string Reason
-        {
-            get
-            {
-                return _Reason;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Reason != value)
-                {
-                    NotifyPropertyChanging("Reason");
-                    _Reason = value;
-                    NotifyPropertyChanged("Reason");;
-                }
-            }
-        }
-        private string _Reason;
 
         /// <summary>
         /// 
@@ -175,15 +175,15 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_ConstrainedProperty, binStream);
             BinarySerializer.ToStream(this._Reason, binStream);
+            BinarySerializer.ToStream(this._fk_ConstrainedProperty, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
             BinarySerializer.FromStream(out this._Reason, binStream);
+            BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
         }
 
 #endregion

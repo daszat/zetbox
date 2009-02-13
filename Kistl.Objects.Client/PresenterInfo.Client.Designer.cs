@@ -23,6 +23,29 @@ namespace Kistl.App.GUI
 
 
         /// <summary>
+        /// which controls are handled by this Presenter
+        /// </summary>
+        // enumeration property
+        public virtual Kistl.App.GUI.VisualType ControlType
+        {
+            get
+            {
+                return _ControlType;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ControlType != value)
+                {
+                    NotifyPropertyChanging("ControlType");
+                    _ControlType = value;
+                    NotifyPropertyChanged("ControlType");;
+                }
+            }
+        }
+        private Kistl.App.GUI.VisualType _ControlType;
+
+        /// <summary>
         /// Where to find the implementation of the Presenter
         /// </summary>
         // object reference property
@@ -66,6 +89,29 @@ namespace Kistl.App.GUI
         private int? _fk_PresenterAssembly;
 
         /// <summary>
+        /// The CLR namespace and class name of the Presenter
+        /// </summary>
+        // value type property
+        public virtual string PresenterTypeName
+        {
+            get
+            {
+                return _PresenterTypeName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_PresenterTypeName != value)
+                {
+                    NotifyPropertyChanging("PresenterTypeName");
+                    _PresenterTypeName = value;
+                    NotifyPropertyChanged("PresenterTypeName");;
+                }
+            }
+        }
+        private string _PresenterTypeName;
+
+        /// <summary>
         /// The Assembly of the Data Type
         /// </summary>
         // object reference property
@@ -107,52 +153,6 @@ namespace Kistl.App.GUI
             }
         }
         private int? _fk_DataAssembly;
-
-        /// <summary>
-        /// which controls are handled by this Presenter
-        /// </summary>
-        // enumeration property
-        public virtual Kistl.App.GUI.VisualType ControlType
-        {
-            get
-            {
-                return _ControlType;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ControlType != value)
-                {
-                    NotifyPropertyChanging("ControlType");
-                    _ControlType = value;
-                    NotifyPropertyChanged("ControlType");;
-                }
-            }
-        }
-        private Kistl.App.GUI.VisualType _ControlType;
-
-        /// <summary>
-        /// The CLR namespace and class name of the Presenter
-        /// </summary>
-        // value type property
-        public virtual string PresenterTypeName
-        {
-            get
-            {
-                return _PresenterTypeName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PresenterTypeName != value)
-                {
-                    NotifyPropertyChanging("PresenterTypeName");
-                    _PresenterTypeName = value;
-                    NotifyPropertyChanged("PresenterTypeName");;
-                }
-            }
-        }
-        private string _PresenterTypeName;
 
         /// <summary>
         /// The CLR namespace and class name of the Data Type
@@ -215,20 +215,20 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_PresenterAssembly, binStream);
-            BinarySerializer.ToStream(this._fk_DataAssembly, binStream);
             BinarySerializer.ToStream((int)this.ControlType, binStream);
+            BinarySerializer.ToStream(this._fk_PresenterAssembly, binStream);
             BinarySerializer.ToStream(this._PresenterTypeName, binStream);
+            BinarySerializer.ToStream(this._fk_DataAssembly, binStream);
             BinarySerializer.ToStream(this._DataTypeName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
-            BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
             BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
+            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
             BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
+            BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
             BinarySerializer.FromStream(out this._DataTypeName, binStream);
         }
 

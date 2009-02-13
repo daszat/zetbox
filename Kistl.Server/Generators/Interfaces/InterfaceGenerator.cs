@@ -18,7 +18,7 @@ namespace Kistl.Server.Generators.Interfaces
 
         protected override string Generate_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {
-            return RunTemplate(ctx, "Interface.DataTypes.Template", objClass.ClassName, "Designer.cs", objClass);
+            return RunTemplateWithExtension(ctx, "Interface.DataTypes.Template", objClass.ClassName, "Designer.cs", objClass);
         }
 
         protected override string Generate_CollectionEntries(IKistlContext ctx)
@@ -29,17 +29,31 @@ namespace Kistl.Server.Generators.Interfaces
 
         protected override string Generate_Enumeration(IKistlContext ctx, Enumeration e)
         {
-            return RunTemplate(ctx, "Interface.Enumerations.Template", e.ClassName, "Designer.cs", e);
+            return RunTemplateWithExtension(ctx, "Interface.Enumerations.Template", e.ClassName, "Designer.cs", e);
         }
 
         protected override string Generate_Struct(IKistlContext ctx, Struct s)
         {
-            return RunTemplate(ctx, "Interface.DataTypes.Template", s.ClassName, "Designer.cs", s);
+            return RunTemplateWithExtension(ctx, "Interface.DataTypes.Template", s.ClassName, "Designer.cs", s);
         }
 
-        protected override string Generate_Interface(IKistlContext ctx, Interface i)
+        protected override string Generate_Interface(IKistlContext ctx, Kistl.App.Base.Interface i)
         {
-            return RunTemplate(ctx, "Interface.DataTypes.Template", i.ClassName, "Designer.cs", i);
+            return RunTemplateWithExtension(ctx, "Interface.DataTypes.Template", i.ClassName, "Designer.cs", i);
+        }
+
+        protected override IEnumerable<string> Generate_Other(IKistlContext ctx)
+        {
+            var otherFileNames = new List<string>();
+
+            var modules = ctx.GetQuery<Module>().ToList();
+            otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.ModuleRepository", "ModuleRepository", "Designer.cs", modules));
+            foreach (var m in modules)
+            {
+                otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.Repository", m.ModuleName + "Repository", "Designer.cs", m));
+            }
+
+            return base.Generate_Other(ctx).Concat(otherFileNames);
         }
 
     }

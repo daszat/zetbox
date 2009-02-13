@@ -244,8 +244,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Method__Position__" ColumnName="fk_Method_pos" />
 <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+<ScalarProperty Name="Method__Position__" ColumnName="fk_Method_pos" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
 <ScalarProperty Name="Description" ColumnName="Description" />

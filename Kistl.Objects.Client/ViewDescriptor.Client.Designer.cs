@@ -68,6 +68,29 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        // enumeration property
+        public virtual Kistl.App.GUI.Toolkit Toolkit
+        {
+            get
+            {
+                return _Toolkit;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Toolkit != value)
+                {
+                    NotifyPropertyChanging("Toolkit");
+                    _Toolkit = value;
+                    NotifyPropertyChanged("Toolkit");;
+                }
+            }
+        }
+        private Kistl.App.GUI.Toolkit _Toolkit;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // object reference property
         // implement the user-visible interface
         [XmlIgnore()]
@@ -108,29 +131,6 @@ namespace Kistl.App.Base
         }
         private int? _fk_ViewRef;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // enumeration property
-        public virtual Kistl.App.GUI.Toolkit Toolkit
-        {
-            get
-            {
-                return _Toolkit;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Toolkit != value)
-                {
-                    NotifyPropertyChanging("Toolkit");
-                    _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit");;
-                }
-            }
-        }
-        private Kistl.App.GUI.Toolkit _Toolkit;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -170,16 +170,16 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_LayoutRef, binStream);
-            BinarySerializer.ToStream(this._fk_ViewRef, binStream);
             BinarySerializer.ToStream((int)this.Toolkit, binStream);
+            BinarySerializer.ToStream(this._fk_ViewRef, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_LayoutRef, binStream);
-            BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
             BinarySerializer.FromStreamConverter(v => this.Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
+            BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
         }
 
 #endregion

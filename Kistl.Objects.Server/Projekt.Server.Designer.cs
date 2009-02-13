@@ -46,6 +46,32 @@ namespace Kistl.App.Projekte
         private int _ID;
 
         /// <summary>
+        /// Projektname
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    NotifyPropertyChanging("Name");
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
+            }
+        }
+        private string _Name;
+
+        /// <summary>
         /// 
         /// </summary>
     /*
@@ -138,6 +164,58 @@ namespace Kistl.App.Projekte
         }
         private EntityListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> _MitarbeiterWrapper;
         
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual double? AufwandGes
+        {
+            get
+            {
+                return _AufwandGes;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AufwandGes != value)
+                {
+                    NotifyPropertyChanging("AufwandGes");
+                    _AufwandGes = value;
+                    NotifyPropertyChanged("AufwandGes");;
+                }
+            }
+        }
+        private double? _AufwandGes;
+
+        /// <summary>
+        /// Bitte geben Sie den Kundennamen ein
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Kundenname
+        {
+            get
+            {
+                return _Kundenname;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Kundenname != value)
+                {
+                    NotifyPropertyChanging("Kundenname");
+                    _Kundenname = value;
+                    NotifyPropertyChanged("Kundenname");;
+                }
+            }
+        }
+        private string _Kundenname;
 
         /// <summary>
         /// Kostenträger
@@ -233,84 +311,6 @@ namespace Kistl.App.Projekte
 
 
 
-        /// <summary>
-        /// Projektname
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
-                {
-                    NotifyPropertyChanging("Name");
-                    _Name = value;
-                    NotifyPropertyChanged("Name");;
-                }
-            }
-        }
-        private string _Name;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual double? AufwandGes
-        {
-            get
-            {
-                return _AufwandGes;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AufwandGes != value)
-                {
-                    NotifyPropertyChanging("AufwandGes");
-                    _AufwandGes = value;
-                    NotifyPropertyChanged("AufwandGes");;
-                }
-            }
-        }
-        private double? _AufwandGes;
-
-        /// <summary>
-        /// Bitte geben Sie den Kundennamen ein
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Kundenname
-        {
-            get
-            {
-                return _Kundenname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kundenname != value)
-                {
-                    NotifyPropertyChanging("Kundenname");
-                    _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");;
-                }
-            }
-        }
-        private string _Kundenname;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -349,8 +349,8 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.ToStream(this._AufwandGes, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
         }
@@ -358,8 +358,8 @@ namespace Kistl.App.Projekte
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
+            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.FromStream(out this._AufwandGes, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
         }

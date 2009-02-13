@@ -13,11 +13,6 @@ namespace Kistl.App.Test
     {
 
         /// <summary>
-        /// testtest
-        /// </summary>
-
-		Kistl.App.Projekte.Kunde ObjectProp { get; set; }
-        /// <summary>
         /// String Property
         /// </summary>
 
@@ -27,6 +22,11 @@ namespace Kistl.App.Test
         /// </summary>
 
 		Kistl.App.Test.TestEnum TestEnumProp { get; set; }
+        /// <summary>
+        /// testtest
+        /// </summary>
+
+		Kistl.App.Projekte.Kunde ObjectProp { get; set; }
         /// <summary>
         /// test
         /// </summary>

@@ -13,15 +13,15 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Methode des Parameters
-        /// </summary>
-
-		Kistl.App.Base.Method Method { get; set; }
-        /// <summary>
         /// Name des Parameter
         /// </summary>
 
 		string ParameterName { get; set; }
+        /// <summary>
+        /// Methode des Parameters
+        /// </summary>
+
+		Kistl.App.Base.Method Method { get; set; }
         /// <summary>
         /// Parameter wird als List<> generiert
         /// </summary>

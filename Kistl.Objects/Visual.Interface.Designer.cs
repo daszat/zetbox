@@ -13,6 +13,16 @@ namespace Kistl.App.GUI
     {
 
         /// <summary>
+        /// A short description of the utility of this visual
+        /// </summary>
+
+		string Description { get; set; }
+        /// <summary>
+        /// Which visual is represented here
+        /// </summary>
+
+		Kistl.App.GUI.VisualType ControlType { get; set; }
+        /// <summary>
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
 
@@ -32,15 +42,5 @@ namespace Kistl.App.GUI
         /// </summary>
 
         ICollection<Kistl.App.GUI.Visual> ContextMenu { get; }
-        /// <summary>
-        /// A short description of the utility of this visual
-        /// </summary>
-
-		string Description { get; set; }
-        /// <summary>
-        /// Which visual is represented here
-        /// </summary>
-
-		Kistl.App.GUI.VisualType ControlType { get; set; }
     }
 }

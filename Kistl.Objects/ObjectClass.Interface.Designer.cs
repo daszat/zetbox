@@ -13,6 +13,11 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Tabellenname in der Datenbank
+        /// </summary>
+
+		string TableName { get; set; }
+        /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
 
@@ -28,16 +33,6 @@ namespace Kistl.App.Base
 
         ICollection<Kistl.App.Base.Interface> ImplementsInterfaces { get; }
         /// <summary>
-        /// The default model to use for the UI
-        /// </summary>
-
-		Kistl.App.Base.TypeRef DefaultModel { get; set; }
-        /// <summary>
-        /// Tabellenname in der Datenbank
-        /// </summary>
-
-		string TableName { get; set; }
-        /// <summary>
         /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
         /// </summary>
 
@@ -47,6 +42,11 @@ namespace Kistl.App.Base
         /// </summary>
 
 		bool IsFrozenObject { get; set; }
+        /// <summary>
+        /// The default model to use for the UI
+        /// </summary>
+
+		Kistl.App.Base.TypeRef DefaultModel { get; set; }
         /// <summary>
         /// 
         /// </summary>

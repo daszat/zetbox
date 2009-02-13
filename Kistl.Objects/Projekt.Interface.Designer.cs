@@ -13,6 +13,11 @@ namespace Kistl.App.Projekte
     {
 
         /// <summary>
+        /// Projektname
+        /// </summary>
+
+		string Name { get; set; }
+        /// <summary>
         /// 
         /// </summary>
 
@@ -23,21 +28,6 @@ namespace Kistl.App.Projekte
 
         IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
         /// <summary>
-        /// Kostenträger
-        /// </summary>
-
-        ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger { get; }
-        /// <summary>
-        /// Aufträge
-        /// </summary>
-
-        ICollection<Kistl.App.Projekte.Auftrag> Auftraege { get; }
-        /// <summary>
-        /// Projektname
-        /// </summary>
-
-		string Name { get; set; }
-        /// <summary>
         /// 
         /// </summary>
 
@@ -47,5 +37,15 @@ namespace Kistl.App.Projekte
         /// </summary>
 
 		string Kundenname { get; set; }
+        /// <summary>
+        /// Kostenträger
+        /// </summary>
+
+        ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger { get; }
+        /// <summary>
+        /// Aufträge
+        /// </summary>
+
+        ICollection<Kistl.App.Projekte.Auftrag> Auftraege { get; }
     }
 }

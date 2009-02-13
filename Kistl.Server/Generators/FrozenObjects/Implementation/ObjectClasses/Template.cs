@@ -50,7 +50,12 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             this.WriteObjects("            : base(ctx, id)");
             this.WriteLine();
             this.WriteLine("        { }");
-        }
+         
+            if (this.ObjectClass.IsFrozenObject)
+            {
 
+                this.Host.CallTemplate("Implementation.ObjectClasses.DataStore", ctx, this.ObjectClass);
+            }
+        }
     }
 }

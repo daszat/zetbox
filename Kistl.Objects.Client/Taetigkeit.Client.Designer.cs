@@ -122,49 +122,6 @@ namespace Kistl.App.Zeiterfassung
         private int? _fk_Zeitkonto;
 
         /// <summary>
-        /// Art der Tätigkeit
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
-        {
-            get
-            {
-                if (fk_TaetigkeitsArt.HasValue)
-                    return Context.Find<Kistl.App.Zeiterfassung.TaetigkeitsArt>(fk_TaetigkeitsArt.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_TaetigkeitsArt
-        {
-            get
-            {
-                return _fk_TaetigkeitsArt;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_TaetigkeitsArt != value)
-                {
-                    NotifyPropertyChanging("TaetigkeitsArt");
-                    _fk_TaetigkeitsArt = value;
-                    NotifyPropertyChanging("TaetigkeitsArt");
-                }
-            }
-        }
-        private int? _fk_TaetigkeitsArt;
-
-        /// <summary>
         /// Datum
         /// </summary>
         // value type property
@@ -210,6 +167,49 @@ namespace Kistl.App.Zeiterfassung
         }
         private double _Dauer;
 
+        /// <summary>
+        /// Art der Tätigkeit
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
+        {
+            get
+            {
+                if (fk_TaetigkeitsArt.HasValue)
+                    return Context.Find<Kistl.App.Zeiterfassung.TaetigkeitsArt>(fk_TaetigkeitsArt.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_TaetigkeitsArt
+        {
+            get
+            {
+                return _fk_TaetigkeitsArt;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_TaetigkeitsArt != value)
+                {
+                    NotifyPropertyChanging("TaetigkeitsArt");
+                    _fk_TaetigkeitsArt = value;
+                    NotifyPropertyChanging("TaetigkeitsArt");
+                }
+            }
+        }
+        private int? _fk_TaetigkeitsArt;
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -250,9 +250,9 @@ namespace Kistl.App.Zeiterfassung
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
             BinarySerializer.ToStream(this._fk_Zeitkonto, binStream);
-            BinarySerializer.ToStream(this._fk_TaetigkeitsArt, binStream);
             BinarySerializer.ToStream(this._Datum, binStream);
             BinarySerializer.ToStream(this._Dauer, binStream);
+            BinarySerializer.ToStream(this._fk_TaetigkeitsArt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -260,9 +260,9 @@ namespace Kistl.App.Zeiterfassung
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._fk_Zeitkonto, binStream);
-            BinarySerializer.FromStream(out this._fk_TaetigkeitsArt, binStream);
             BinarySerializer.FromStream(out this._Datum, binStream);
             BinarySerializer.FromStream(out this._Dauer, binStream);
+            BinarySerializer.FromStream(out this._fk_TaetigkeitsArt, binStream);
         }
 
 #endregion

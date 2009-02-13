@@ -46,6 +46,48 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// which controls are handled by this Presenter
+        /// </summary>
+        // enumeration property
+        // implement the user-visible interface
+        public Kistl.App.GUI.VisualType ControlType
+        {
+            get
+            {
+                return _ControlType;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ControlType != value)
+                {
+                    NotifyPropertyChanging("ControlType");
+                    _ControlType = value;
+                    NotifyPropertyChanged("ControlType");
+                }
+            }
+        }
+        
+        /// <summary>backing store for ControlType</summary>
+        private Kistl.App.GUI.VisualType _ControlType;
+        
+        /// <summary>EF sees only this property, for ControlType</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int ControlType__Implementation__
+        {
+            get
+            {
+                return (int)ControlType;
+            }
+            set
+            {
+                ControlType = (Kistl.App.GUI.VisualType)value;
+            }
+        }
+        
+
+        /// <summary>
         /// Where to find the implementation of the Presenter
         /// </summary>
     /*
@@ -124,6 +166,32 @@ namespace Kistl.App.GUI
         }
         
         
+
+        /// <summary>
+        /// The CLR namespace and class name of the Presenter
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string PresenterTypeName
+        {
+            get
+            {
+                return _PresenterTypeName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_PresenterTypeName != value)
+                {
+                    NotifyPropertyChanging("PresenterTypeName");
+                    _PresenterTypeName = value;
+                    NotifyPropertyChanged("PresenterTypeName");;
+                }
+            }
+        }
+        private string _PresenterTypeName;
 
         /// <summary>
         /// The Assembly of the Data Type
@@ -206,74 +274,6 @@ namespace Kistl.App.GUI
         
 
         /// <summary>
-        /// which controls are handled by this Presenter
-        /// </summary>
-        // enumeration property
-        // implement the user-visible interface
-        public Kistl.App.GUI.VisualType ControlType
-        {
-            get
-            {
-                return _ControlType;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ControlType != value)
-                {
-                    NotifyPropertyChanging("ControlType");
-                    _ControlType = value;
-                    NotifyPropertyChanged("ControlType");
-                }
-            }
-        }
-        
-        /// <summary>backing store for ControlType</summary>
-        private Kistl.App.GUI.VisualType _ControlType;
-        
-        /// <summary>EF sees only this property, for ControlType</summary>
-        [XmlIgnore()]
-        [EdmScalarProperty()]
-        public int ControlType__Implementation__
-        {
-            get
-            {
-                return (int)ControlType;
-            }
-            set
-            {
-                ControlType = (Kistl.App.GUI.VisualType)value;
-            }
-        }
-        
-
-        /// <summary>
-        /// The CLR namespace and class name of the Presenter
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string PresenterTypeName
-        {
-            get
-            {
-                return _PresenterTypeName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PresenterTypeName != value)
-                {
-                    NotifyPropertyChanging("PresenterTypeName");
-                    _PresenterTypeName = value;
-                    NotifyPropertyChanged("PresenterTypeName");;
-                }
-            }
-        }
-        private string _PresenterTypeName;
-
-        /// <summary>
         /// The CLR namespace and class name of the Data Type
         /// </summary>
         // value type property
@@ -337,20 +337,20 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_PresenterAssembly, binStream);
-            BinarySerializer.ToStream(this._fk_DataAssembly, binStream);
             BinarySerializer.ToStream((int)this.ControlType, binStream);
+            BinarySerializer.ToStream(this._fk_PresenterAssembly, binStream);
             BinarySerializer.ToStream(this._PresenterTypeName, binStream);
+            BinarySerializer.ToStream(this._fk_DataAssembly, binStream);
             BinarySerializer.ToStream(this._DataTypeName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
-            BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
             BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
+            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
             BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
+            BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
             BinarySerializer.FromStream(out this._DataTypeName, binStream);
         }
 

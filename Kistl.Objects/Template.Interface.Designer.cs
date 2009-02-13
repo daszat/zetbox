@@ -13,10 +13,20 @@ namespace Kistl.App.GUI
     {
 
         /// <summary>
+        /// a short name to identify this Template to the user
+        /// </summary>
+
+		string DisplayName { get; set; }
+        /// <summary>
         /// The visual representation of this Template
         /// </summary>
 
 		Kistl.App.GUI.Visual VisualTree { get; set; }
+        /// <summary>
+        /// FullName of the Type that is displayed with this Template
+        /// </summary>
+
+		string DisplayedTypeFullName { get; set; }
         /// <summary>
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
@@ -27,16 +37,6 @@ namespace Kistl.App.GUI
         /// </summary>
 
         ICollection<Kistl.App.GUI.Visual> Menu { get; }
-        /// <summary>
-        /// a short name to identify this Template to the user
-        /// </summary>
-
-		string DisplayName { get; set; }
-        /// <summary>
-        /// FullName of the Type that is displayed with this Template
-        /// </summary>
-
-		string DisplayedTypeFullName { get; set; }
         /// <summary>
         /// 
         /// </summary>

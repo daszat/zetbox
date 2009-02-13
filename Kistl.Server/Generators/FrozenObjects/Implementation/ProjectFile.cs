@@ -29,10 +29,10 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation
             this.WriteLine(@"    </Reference>");
 
             // Frozen Provider infrastructure
-            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj"">");
-            this.WriteLine(@"      <Project>{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}</Project>");
-            this.WriteLine(@"      <Name>Kistl.DalProvider.Frozen</Name>");
-            this.WriteLine(@"    </ProjectReference>");
+            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(OutputPath)\Kistl.DalProvider.Frozen.dll</HintPath>");
+            this.WriteLine(@"    </Reference>");
 
         }
 

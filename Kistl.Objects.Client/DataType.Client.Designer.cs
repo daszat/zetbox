@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Der Name der Objektklasse
+        /// </summary>
+        // value type property
+        public virtual string ClassName
+        {
+            get
+            {
+                return _ClassName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ClassName != value)
+                {
+                    NotifyPropertyChanging("ClassName");
+                    _ClassName = value;
+                    NotifyPropertyChanged("ClassName");;
+                }
+            }
+        }
+        private string _ClassName;
+
+        /// <summary>
         /// Eigenschaften der Objektklasse
         /// </summary>
         // object list property
@@ -212,29 +235,6 @@ namespace Kistl.App.Base
         private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvocationsWrapper;
 
         /// <summary>
-        /// Der Name der Objektklasse
-        /// </summary>
-        // value type property
-        public virtual string ClassName
-        {
-            get
-            {
-                return _ClassName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ClassName != value)
-                {
-                    NotifyPropertyChanging("ClassName");
-                    _ClassName = value;
-                    NotifyPropertyChanged("ClassName");;
-                }
-            }
-        }
-        private string _ClassName;
-
-        /// <summary>
         /// Description of this DataType
         /// </summary>
         // value type property
@@ -331,18 +331,18 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._fk_DefaultIcon, binStream);
-            BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
-            BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
         }
 

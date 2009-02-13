@@ -79,6 +79,29 @@ namespace Kistl.App.Base
         private int? _fk_ObjectClass;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual string MethodName
+        {
+            get
+            {
+                return _MethodName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_MethodName != value)
+                {
+                    NotifyPropertyChanging("MethodName");
+                    _MethodName = value;
+                    NotifyPropertyChanged("MethodName");;
+                }
+            }
+        }
+        private string _MethodName;
+
+        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
         // object reference property
@@ -180,29 +203,6 @@ namespace Kistl.App.Base
         }
         
         private BackReferenceCollection<Kistl.App.Base.BaseParameter> _ParameterWrapper;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        public virtual string MethodName
-        {
-            get
-            {
-                return _MethodName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_MethodName != value)
-                {
-                    NotifyPropertyChanging("MethodName");
-                    _MethodName = value;
-                    NotifyPropertyChanged("MethodName");;
-                }
-            }
-        }
-        private string _MethodName;
 
         /// <summary>
         /// Shows this Method in th GUI
@@ -307,8 +307,8 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_ObjectClass, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._MethodName, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._IsDisplayable, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
         }
@@ -317,8 +317,8 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._MethodName, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._IsDisplayable, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
         }

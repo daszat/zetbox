@@ -18,6 +18,11 @@ namespace Kistl.App.Projekte
 
 		Kistl.App.Projekte.Mitarbeiter Mitarbeiter { get; set; }
         /// <summary>
+        /// Bitte füllen Sie einen sprechenden Auftragsnamen aus
+        /// </summary>
+
+		string Auftragsname { get; set; }
+        /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
 
@@ -27,11 +32,6 @@ namespace Kistl.App.Projekte
         /// </summary>
 
 		Kistl.App.Projekte.Kunde Kunde { get; set; }
-        /// <summary>
-        /// Bitte füllen Sie einen sprechenden Auftragsnamen aus
-        /// </summary>
-
-		string Auftragsname { get; set; }
         /// <summary>
         /// Wert in EUR des Auftrages
         /// </summary>

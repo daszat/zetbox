@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Name des Parameter
+        /// </summary>
+        // value type property
+        public virtual string ParameterName
+        {
+            get
+            {
+                return _ParameterName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ParameterName != value)
+                {
+                    NotifyPropertyChanging("ParameterName");
+                    _ParameterName = value;
+                    NotifyPropertyChanged("ParameterName");;
+                }
+            }
+        }
+        private string _ParameterName;
+
+        /// <summary>
         /// Methode des Parameters
         /// </summary>
         // object reference property
@@ -77,29 +100,6 @@ namespace Kistl.App.Base
             }
         }
         private int? _fk_Method;
-
-        /// <summary>
-        /// Name des Parameter
-        /// </summary>
-        // value type property
-        public virtual string ParameterName
-        {
-            get
-            {
-                return _ParameterName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ParameterName != value)
-                {
-                    NotifyPropertyChanging("ParameterName");
-                    _ParameterName = value;
-                    NotifyPropertyChanged("ParameterName");;
-                }
-            }
-        }
-        private string _ParameterName;
 
         /// <summary>
         /// Parameter wird als List<> generiert
@@ -244,8 +244,8 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Method, binStream);
             BinarySerializer.ToStream(this._ParameterName, binStream);
+            BinarySerializer.ToStream(this._fk_Method, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsReturnParameter, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
@@ -254,8 +254,8 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._ParameterName, binStream);
+            BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);

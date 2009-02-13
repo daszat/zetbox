@@ -23,11 +23,6 @@ namespace Kistl.App.Zeiterfassung
 
 		Kistl.App.Zeiterfassung.Zeitkonto Zeitkonto { get; set; }
         /// <summary>
-        /// Art der Tätigkeit
-        /// </summary>
-
-		Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt { get; set; }
-        /// <summary>
         /// Datum
         /// </summary>
 
@@ -37,5 +32,10 @@ namespace Kistl.App.Zeiterfassung
         /// </summary>
 
 		double Dauer { get; set; }
+        /// <summary>
+        /// Art der Tätigkeit
+        /// </summary>
+
+		Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt { get; set; }
     }
 }

@@ -79,6 +79,52 @@ namespace Kistl.App.Base
         private int? _fk_ObjectClass;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual string PropertyName
+        {
+            get
+            {
+                return _PropertyName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_PropertyName != value)
+                {
+                    NotifyPropertyChanging("PropertyName");
+                    _PropertyName = value;
+                    NotifyPropertyChanged("PropertyName");;
+                }
+            }
+        }
+        private string _PropertyName;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual string AltText
+        {
+            get
+            {
+                return _AltText;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AltText != value)
+                {
+                    NotifyPropertyChanging("AltText");
+                    _AltText = value;
+                    NotifyPropertyChanged("AltText");;
+                }
+            }
+        }
+        private string _AltText;
+
+        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
         // object reference property
@@ -150,52 +196,6 @@ namespace Kistl.App.Base
         }
         
         private BackReferenceCollection<Kistl.App.Base.Constraint> _ConstraintsWrapper;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        public virtual string PropertyName
-        {
-            get
-            {
-                return _PropertyName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PropertyName != value)
-                {
-                    NotifyPropertyChanging("PropertyName");
-                    _PropertyName = value;
-                    NotifyPropertyChanged("PropertyName");;
-                }
-            }
-        }
-        private string _PropertyName;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        public virtual string AltText
-        {
-            get
-            {
-                return _AltText;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AltText != value)
-                {
-                    NotifyPropertyChanging("AltText");
-                    _AltText = value;
-                    NotifyPropertyChanged("AltText");;
-                }
-            }
-        }
-        private string _AltText;
 
         /// <summary>
         /// Description of this Property
@@ -313,9 +313,9 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_ObjectClass, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
             BinarySerializer.ToStream(this._AltText, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
         }
 
@@ -323,9 +323,9 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
             BinarySerializer.FromStream(out this._AltText, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
         }
 

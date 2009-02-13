@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+
+using Microsoft.Build.BuildEngine;
+using Microsoft.Build.Framework;
 
 using Arebis.CodeGeneration;
 
@@ -10,9 +14,6 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.GeneratorsOld;
-using Microsoft.Build.BuildEngine;
-using System.IO;
-using Microsoft.Build.Framework;
 
 namespace Kistl.Server.Generators
 {
@@ -38,7 +39,7 @@ namespace Kistl.Server.Generators
                     if (File.Exists("TemplateCodegenLog.txt"))
                         File.Delete("TemplateCodegenLog.txt");
 
-                    string binPath = Path.Combine(Helper.CodeGenPath, "bin");
+                    string binPath = Path.Combine(Helper.CodeGenPath, @"bin\Debug");
                     Directory.CreateDirectory(binPath);
 
                     var engine = new Engine(ToolsetDefinitionLocations.Registry);

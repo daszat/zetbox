@@ -66,6 +66,29 @@ namespace Kistl.App.Projekte
         private int? _fk_Mitarbeiter;
 
         /// <summary>
+        /// Bitte füllen Sie einen sprechenden Auftragsnamen aus
+        /// </summary>
+        // value type property
+        public virtual string Auftragsname
+        {
+            get
+            {
+                return _Auftragsname;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Auftragsname != value)
+                {
+                    NotifyPropertyChanging("Auftragsname");
+                    _Auftragsname = value;
+                    NotifyPropertyChanged("Auftragsname");;
+                }
+            }
+        }
+        private string _Auftragsname;
+
+        /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
         // object reference property
@@ -165,29 +188,6 @@ namespace Kistl.App.Projekte
         private int? _fk_Kunde;
 
         /// <summary>
-        /// Bitte füllen Sie einen sprechenden Auftragsnamen aus
-        /// </summary>
-        // value type property
-        public virtual string Auftragsname
-        {
-            get
-            {
-                return _Auftragsname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Auftragsname != value)
-                {
-                    NotifyPropertyChanging("Auftragsname");
-                    _Auftragsname = value;
-                    NotifyPropertyChanged("Auftragsname");;
-                }
-            }
-        }
-        private string _Auftragsname;
-
-        /// <summary>
         /// Wert in EUR des Auftrages
         /// </summary>
         // value type property
@@ -266,9 +266,9 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
+            BinarySerializer.ToStream(this._Auftragsname, binStream);
             BinarySerializer.ToStream(this._fk_Projekt, binStream);
             BinarySerializer.ToStream(this._fk_Kunde, binStream);
-            BinarySerializer.ToStream(this._Auftragsname, binStream);
             BinarySerializer.ToStream(this._Auftragswert, binStream);
         }
 
@@ -276,9 +276,9 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
+            BinarySerializer.FromStream(out this._Auftragsname, binStream);
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
             BinarySerializer.FromStream(out this._fk_Kunde, binStream);
-            BinarySerializer.FromStream(out this._Auftragsname, binStream);
             BinarySerializer.FromStream(out this._Auftragswert, binStream);
         }
 

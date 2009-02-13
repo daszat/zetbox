@@ -21,11 +21,11 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		Kistl.App.Base.TypeRef ViewRef { get; set; }
+		Kistl.App.GUI.Toolkit Toolkit { get; set; }
         /// <summary>
         /// 
         /// </summary>
 
-		Kistl.App.GUI.Toolkit Toolkit { get; set; }
+		Kistl.App.Base.TypeRef ViewRef { get; set; }
     }
 }

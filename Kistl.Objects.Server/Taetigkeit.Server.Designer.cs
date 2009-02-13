@@ -206,6 +206,58 @@ namespace Kistl.App.Zeiterfassung
         
 
         /// <summary>
+        /// Datum
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual DateTime Datum
+        {
+            get
+            {
+                return _Datum;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Datum != value)
+                {
+                    NotifyPropertyChanging("Datum");
+                    _Datum = value;
+                    NotifyPropertyChanged("Datum");;
+                }
+            }
+        }
+        private DateTime _Datum;
+
+        /// <summary>
+        /// Dauer in Stunden
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual double Dauer
+        {
+            get
+            {
+                return _Dauer;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Dauer != value)
+                {
+                    NotifyPropertyChanging("Dauer");
+                    _Dauer = value;
+                    NotifyPropertyChanged("Dauer");;
+                }
+            }
+        }
+        private double _Dauer;
+
+        /// <summary>
         /// Art der Tätigkeit
         /// </summary>
     /*
@@ -285,58 +337,6 @@ namespace Kistl.App.Zeiterfassung
         
         
 
-        /// <summary>
-        /// Datum
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual DateTime Datum
-        {
-            get
-            {
-                return _Datum;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Datum != value)
-                {
-                    NotifyPropertyChanging("Datum");
-                    _Datum = value;
-                    NotifyPropertyChanged("Datum");;
-                }
-            }
-        }
-        private DateTime _Datum;
-
-        /// <summary>
-        /// Dauer in Stunden
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual double Dauer
-        {
-            get
-            {
-                return _Dauer;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Dauer != value)
-                {
-                    NotifyPropertyChanging("Dauer");
-                    _Dauer = value;
-                    NotifyPropertyChanged("Dauer");;
-                }
-            }
-        }
-        private double _Dauer;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -377,9 +377,9 @@ namespace Kistl.App.Zeiterfassung
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
             BinarySerializer.ToStream(this._fk_Zeitkonto, binStream);
-            BinarySerializer.ToStream(this._fk_TaetigkeitsArt, binStream);
             BinarySerializer.ToStream(this._Datum, binStream);
             BinarySerializer.ToStream(this._Dauer, binStream);
+            BinarySerializer.ToStream(this._fk_TaetigkeitsArt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -387,9 +387,9 @@ namespace Kistl.App.Zeiterfassung
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._fk_Zeitkonto, binStream);
-            BinarySerializer.FromStream(out this._fk_TaetigkeitsArt, binStream);
             BinarySerializer.FromStream(out this._Datum, binStream);
             BinarySerializer.FromStream(out this._Dauer, binStream);
+            BinarySerializer.FromStream(out this._fk_TaetigkeitsArt, binStream);
         }
 
 #endregion

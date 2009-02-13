@@ -14,9 +14,7 @@
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>C:\temp\KistlCodeGen\bin</string>
-    <string>P:\Kistl\Kistl.App.Projekte.Client\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects.Client\bin\Debug</string>
+    <string>C:\temp\KistlCodeGen\bin\Debug</string>
+    <string>P:\Kistl\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

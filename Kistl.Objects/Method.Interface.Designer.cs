@@ -18,6 +18,11 @@ namespace Kistl.App.Base
 
 		Kistl.App.Base.DataType ObjectClass { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+
+		string MethodName { get; set; }
+        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
 
@@ -32,11 +37,6 @@ namespace Kistl.App.Base
         /// </summary>
 
         IList<Kistl.App.Base.BaseParameter> Parameter { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-
-		string MethodName { get; set; }
         /// <summary>
         /// Shows this Method in th GUI
         /// </summary>

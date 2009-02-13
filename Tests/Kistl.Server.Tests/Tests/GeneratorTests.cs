@@ -17,6 +17,7 @@ namespace Kistl.Server.Tests
         public void SetUp()
         {
             System.IO.Directory.CreateDirectory(@"C:\temp\KistlCodeGen\bin\");
+            System.IO.Directory.CreateDirectory(@"C:\temp\KistlCodeGen\bin\Debug");
             System.IO.Directory.GetFiles(@"C:\temp\KistlCodeGen\bin\", "Kistl.Objects.*")
                 .ToList().ForEach(f => System.IO.File.Delete(f));
         }
@@ -24,7 +25,7 @@ namespace Kistl.Server.Tests
         [TearDown]
         public void TearDown()
         {
-            System.IO.Directory.GetFiles(@"C:\temp\KistlCodeGen\bin\", "Kistl.Objects.*")
+            System.IO.Directory.GetFiles(@"C:\temp\KistlCodeGen\bin\Debug", "Kistl.Objects.*")
                 .ToList().ForEach(f => System.IO.File.Delete(f));
         }
 

@@ -128,6 +128,48 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        // enumeration property
+        // implement the user-visible interface
+        public Kistl.App.GUI.Toolkit Toolkit
+        {
+            get
+            {
+                return _Toolkit;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Toolkit != value)
+                {
+                    NotifyPropertyChanging("Toolkit");
+                    _Toolkit = value;
+                    NotifyPropertyChanged("Toolkit");
+                }
+            }
+        }
+        
+        /// <summary>backing store for Toolkit</summary>
+        private Kistl.App.GUI.Toolkit _Toolkit;
+        
+        /// <summary>EF sees only this property, for Toolkit</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int Toolkit__Implementation__
+        {
+            get
+            {
+                return (int)Toolkit;
+            }
+            set
+            {
+                Toolkit = (Kistl.App.GUI.Toolkit)value;
+            }
+        }
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
     /*
     NewRelation: FK_ViewDescriptor_TypeRef_ViewDescriptor_49 
     A: ZeroOrMore ViewDescriptor as ViewDescriptor (site: A, no Relation, prop ID=211)
@@ -205,48 +247,6 @@ namespace Kistl.App.Base
         
         
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // enumeration property
-        // implement the user-visible interface
-        public Kistl.App.GUI.Toolkit Toolkit
-        {
-            get
-            {
-                return _Toolkit;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Toolkit != value)
-                {
-                    NotifyPropertyChanging("Toolkit");
-                    _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit");
-                }
-            }
-        }
-        
-        /// <summary>backing store for Toolkit</summary>
-        private Kistl.App.GUI.Toolkit _Toolkit;
-        
-        /// <summary>EF sees only this property, for Toolkit</summary>
-        [XmlIgnore()]
-        [EdmScalarProperty()]
-        public int Toolkit__Implementation__
-        {
-            get
-            {
-                return (int)Toolkit;
-            }
-            set
-            {
-                Toolkit = (Kistl.App.GUI.Toolkit)value;
-            }
-        }
-        
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -286,16 +286,16 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_LayoutRef, binStream);
-            BinarySerializer.ToStream(this._fk_ViewRef, binStream);
             BinarySerializer.ToStream((int)this.Toolkit, binStream);
+            BinarySerializer.ToStream(this._fk_ViewRef, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_LayoutRef, binStream);
-            BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
             BinarySerializer.FromStreamConverter(v => this.Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
+            BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
         }
 
 #endregion

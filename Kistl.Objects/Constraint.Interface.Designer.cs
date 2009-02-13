@@ -13,15 +13,15 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// The property to be constrained
-        /// </summary>
-
-		Kistl.App.Base.BaseProperty ConstrainedProperty { get; set; }
-        /// <summary>
         /// The reason of this constraint
         /// </summary>
 
 		string Reason { get; set; }
+        /// <summary>
+        /// The property to be constrained
+        /// </summary>
+
+		Kistl.App.Base.BaseProperty ConstrainedProperty { get; set; }
         /// <summary>
         /// 
         /// </summary>

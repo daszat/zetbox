@@ -23,6 +23,29 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
+        /// Projektname
+        /// </summary>
+        // value type property
+        public virtual string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    NotifyPropertyChanging("Name");
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
+            }
+        }
+        private string _Name;
+
+        /// <summary>
         /// 
         /// </summary>
         // object list property
@@ -83,6 +106,52 @@ namespace Kistl.App.Projekte
         private BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter> _MitarbeiterWrapper;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual double? AufwandGes
+        {
+            get
+            {
+                return _AufwandGes;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AufwandGes != value)
+                {
+                    NotifyPropertyChanging("AufwandGes");
+                    _AufwandGes = value;
+                    NotifyPropertyChanged("AufwandGes");;
+                }
+            }
+        }
+        private double? _AufwandGes;
+
+        /// <summary>
+        /// Bitte geben Sie den Kundennamen ein
+        /// </summary>
+        // value type property
+        public virtual string Kundenname
+        {
+            get
+            {
+                return _Kundenname;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Kundenname != value)
+                {
+                    NotifyPropertyChanging("Kundenname");
+                    _Kundenname = value;
+                    NotifyPropertyChanged("Kundenname");;
+                }
+            }
+        }
+        private string _Kundenname;
+
+        /// <summary>
         /// Kostenträger
         /// </summary>
         // object list property
@@ -141,75 +210,6 @@ namespace Kistl.App.Projekte
         }
         
         private BackReferenceCollection<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
-
-        /// <summary>
-        /// Projektname
-        /// </summary>
-        // value type property
-        public virtual string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
-                {
-                    NotifyPropertyChanging("Name");
-                    _Name = value;
-                    NotifyPropertyChanged("Name");;
-                }
-            }
-        }
-        private string _Name;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        public virtual double? AufwandGes
-        {
-            get
-            {
-                return _AufwandGes;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AufwandGes != value)
-                {
-                    NotifyPropertyChanging("AufwandGes");
-                    _AufwandGes = value;
-                    NotifyPropertyChanged("AufwandGes");;
-                }
-            }
-        }
-        private double? _AufwandGes;
-
-        /// <summary>
-        /// Bitte geben Sie den Kundennamen ein
-        /// </summary>
-        // value type property
-        public virtual string Kundenname
-        {
-            get
-            {
-                return _Kundenname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kundenname != value)
-                {
-                    NotifyPropertyChanging("Kundenname");
-                    _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");;
-                }
-            }
-        }
-        private string _Kundenname;
 
         // tail template
 

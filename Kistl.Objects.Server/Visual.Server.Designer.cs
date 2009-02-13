@@ -46,6 +46,74 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// A short description of the utility of this visual
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// Which visual is represented here
+        /// </summary>
+        // enumeration property
+        // implement the user-visible interface
+        public Kistl.App.GUI.VisualType ControlType
+        {
+            get
+            {
+                return _ControlType;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ControlType != value)
+                {
+                    NotifyPropertyChanging("ControlType");
+                    _ControlType = value;
+                    NotifyPropertyChanged("ControlType");
+                }
+            }
+        }
+        
+        /// <summary>backing store for ControlType</summary>
+        private Kistl.App.GUI.VisualType _ControlType;
+        
+        /// <summary>EF sees only this property, for ControlType</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int ControlType__Implementation__
+        {
+            get
+            {
+                return (int)ControlType;
+            }
+            set
+            {
+                ControlType = (Kistl.App.GUI.VisualType)value;
+            }
+        }
+        
+
+        /// <summary>
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
     /*
@@ -299,74 +367,6 @@ namespace Kistl.App.GUI
         private EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu40CollectionEntry__Implementation__> _ContextMenuWrapper;
         
 
-        /// <summary>
-        /// A short description of the utility of this visual
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
-        /// <summary>
-        /// Which visual is represented here
-        /// </summary>
-        // enumeration property
-        // implement the user-visible interface
-        public Kistl.App.GUI.VisualType ControlType
-        {
-            get
-            {
-                return _ControlType;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ControlType != value)
-                {
-                    NotifyPropertyChanging("ControlType");
-                    _ControlType = value;
-                    NotifyPropertyChanged("ControlType");
-                }
-            }
-        }
-        
-        /// <summary>backing store for ControlType</summary>
-        private Kistl.App.GUI.VisualType _ControlType;
-        
-        /// <summary>EF sees only this property, for ControlType</summary>
-        [XmlIgnore()]
-        [EdmScalarProperty()]
-        public int ControlType__Implementation__
-        {
-            get
-            {
-                return (int)ControlType;
-            }
-            set
-            {
-                ControlType = (Kistl.App.GUI.VisualType)value;
-            }
-        }
-        
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -405,23 +405,23 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream((int)this.ControlType, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.Children__Implementation__, binStream);
             BinarySerializer.ToStream(this._fk_Property, binStream);
             BinarySerializer.ToStream(this._fk_Method, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
-            BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream((int)this.ControlType, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.Children__Implementation__, binStream);
             BinarySerializer.FromStream(out this._fk_Property, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
         }
 
 #endregion

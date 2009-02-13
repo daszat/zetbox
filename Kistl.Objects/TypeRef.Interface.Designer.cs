@@ -13,6 +13,11 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// 
+        /// </summary>
+
+		string FullName { get; set; }
+        /// <summary>
         /// The assembly containing the referenced Type.
         /// </summary>
 
@@ -22,11 +27,6 @@ namespace Kistl.App.Base
         /// </summary>
 
         IList<Kistl.App.Base.TypeRef> GenericArguments { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-
-		string FullName { get; set; }
         /// <summary>
         /// get the referenced <see cref="System.Type"/>
         /// </summary>

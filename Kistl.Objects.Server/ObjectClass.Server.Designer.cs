@@ -27,6 +27,32 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Tabellenname in der Datenbank
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string TableName
+        {
+            get
+            {
+                return _TableName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_TableName != value)
+                {
+                    NotifyPropertyChanging("TableName");
+                    _TableName = value;
+                    NotifyPropertyChanged("TableName");;
+                }
+            }
+        }
+        private string _TableName;
+
+        /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
     /*
@@ -201,6 +227,58 @@ namespace Kistl.App.Base
         
 
         /// <summary>
+        /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual bool IsSimpleObject
+        {
+            get
+            {
+                return _IsSimpleObject;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsSimpleObject != value)
+                {
+                    NotifyPropertyChanging("IsSimpleObject");
+                    _IsSimpleObject = value;
+                    NotifyPropertyChanged("IsSimpleObject");;
+                }
+            }
+        }
+        private bool _IsSimpleObject;
+
+        /// <summary>
+        /// if true then all Instances appear in FozenContext.
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual bool IsFrozenObject
+        {
+            get
+            {
+                return _IsFrozenObject;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsFrozenObject != value)
+                {
+                    NotifyPropertyChanging("IsFrozenObject");
+                    _IsFrozenObject = value;
+                    NotifyPropertyChanged("IsFrozenObject");;
+                }
+            }
+        }
+        private bool _IsFrozenObject;
+
+        /// <summary>
         /// The default model to use for the UI
         /// </summary>
     /*
@@ -279,84 +357,6 @@ namespace Kistl.App.Base
         }
         
         
-
-        /// <summary>
-        /// Tabellenname in der Datenbank
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string TableName
-        {
-            get
-            {
-                return _TableName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_TableName != value)
-                {
-                    NotifyPropertyChanging("TableName");
-                    _TableName = value;
-                    NotifyPropertyChanged("TableName");;
-                }
-            }
-        }
-        private string _TableName;
-
-        /// <summary>
-        /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual bool IsSimpleObject
-        {
-            get
-            {
-                return _IsSimpleObject;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsSimpleObject != value)
-                {
-                    NotifyPropertyChanging("IsSimpleObject");
-                    _IsSimpleObject = value;
-                    NotifyPropertyChanged("IsSimpleObject");;
-                }
-            }
-        }
-        private bool _IsSimpleObject;
-
-        /// <summary>
-        /// if true then all Instances appear in FozenContext.
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual bool IsFrozenObject
-        {
-            get
-            {
-                return _IsFrozenObject;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsFrozenObject != value)
-                {
-                    NotifyPropertyChanging("IsFrozenObject");
-                    _IsFrozenObject = value;
-                    NotifyPropertyChanged("IsFrozenObject");;
-                }
-            }
-        }
-        private bool _IsFrozenObject;
 
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
@@ -466,23 +466,23 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._TableName, binStream);
             BinarySerializer.ToStream(this._fk_BaseObjectClass, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
-            BinarySerializer.ToStream(this._fk_DefaultModel, binStream);
-            BinarySerializer.ToStream(this._TableName, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
+            BinarySerializer.ToStream(this._fk_DefaultModel, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._TableName, binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
-            BinarySerializer.FromStream(out this._TableName, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
+            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
         }
 
 #endregion

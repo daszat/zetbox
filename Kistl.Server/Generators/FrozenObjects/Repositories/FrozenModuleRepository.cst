@@ -1,0 +1,46 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Repositories.FrozenModuleRepository"
+	ClassName="Kistl.Server.Generators.FrozenObjects.Repositories.FrozenModuleRepository" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
+<%@ Parameter Name="modules" Type="List<Module>" %>
+using Kistl.API;
+
+namespace Kistl.App.Frozen
+{
+
+	public class ModuleRepository
+	{
+		public ModuleRepository(IKistlContext ctx)
+		{
+			this.Context = ctx;
+		}
+		
+		public IKistlContext Context { get; private set; }
+	
+<%
+	// only generate modules with frozen classes
+	foreach(var module in modules.Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject) ))
+	{
+%>
+		/// <summary>Repository for <%= module.ModuleName %></summary>
+		/// <%= module.Description %>
+		public <%= module.Namespace %>.<%= module.ModuleName %>Repository <%= module.ModuleName %>
+		{
+			get
+			{
+				return new <%= module.Namespace %>.<%= module.ModuleName %>Repository(Context);
+			}
+		}
+		
+<%
+	}
+%>
+	
+	}
+	
+}

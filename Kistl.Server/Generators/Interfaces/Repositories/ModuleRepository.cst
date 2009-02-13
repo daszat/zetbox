@@ -1,0 +1,43 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Interface.Repositories.ModuleRepository"
+	ClassName="Kistl.Server.Generators.Interfaces.Interface.Repositories.ModuleRepository" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
+<%@ Parameter Name="modules" Type="List<Module>" %>
+using Kistl.API;
+
+namespace Kistl.App
+{
+
+	public class ModuleRepository
+	{
+		public ModuleRepository(IKistlContext ctx)
+		{
+			this.Context = ctx;
+		}
+		
+		public IKistlContext Context { get; private set; }
+	
+<%
+	foreach(var module in modules)
+	{
+%>
+		/// <summary>Repository for <%= module.ModuleName %></summary>
+		/// <%= module.Description %>
+		public <%= module.Namespace %>.<%= module.ModuleName %>Repository <%= module.ModuleName %>
+		{
+			get
+			{
+				return new <%= module.Namespace %>.<%= module.ModuleName %>Repository(Context);
+			}
+		}
+		
+<%
+	}
+%>
+	
+	}
+	
+}

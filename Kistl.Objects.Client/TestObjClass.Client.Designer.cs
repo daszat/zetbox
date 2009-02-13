@@ -23,49 +23,6 @@ namespace Kistl.App.Test
 
 
         /// <summary>
-        /// testtest
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Kunde ObjectProp
-        {
-            get
-            {
-                if (fk_ObjectProp.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Kunde>(fk_ObjectProp.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_ObjectProp
-        {
-            get
-            {
-                return _fk_ObjectProp;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_ObjectProp != value)
-                {
-                    NotifyPropertyChanging("ObjectProp");
-                    _fk_ObjectProp = value;
-                    NotifyPropertyChanging("ObjectProp");
-                }
-            }
-        }
-        private int? _fk_ObjectProp;
-
-        /// <summary>
         /// String Property
         /// </summary>
         // value type property
@@ -110,6 +67,49 @@ namespace Kistl.App.Test
             }
         }
         private Kistl.App.Test.TestEnum _TestEnumProp;
+
+        /// <summary>
+        /// testtest
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Projekte.Kunde ObjectProp
+        {
+            get
+            {
+                if (fk_ObjectProp.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Kunde>(fk_ObjectProp.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_ObjectProp
+        {
+            get
+            {
+                return _fk_ObjectProp;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_ObjectProp != value)
+                {
+                    NotifyPropertyChanging("ObjectProp");
+                    _fk_ObjectProp = value;
+                    NotifyPropertyChanging("ObjectProp");
+                }
+            }
+        }
+        private int? _fk_ObjectProp;
 
         /// <summary>
         /// test
@@ -189,18 +189,18 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
             BinarySerializer.ToStream((int)this.TestEnumProp, binStream);
+            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
             BinarySerializer.FromStreamConverter(v => this.TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
+            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._MyIntProperty, binStream);
         }
 
