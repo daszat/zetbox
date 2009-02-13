@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for an Enumeration Entry.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
-    public class EnumerationEntry__Implementation__ : BaseFrozenDataObject, EnumerationEntry
+    public class EnumerationEntry__Implementation__Frozen : BaseFrozenDataObject, EnumerationEntry
     {
 
 
@@ -144,13 +144,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<EnumerationEntry> OnPostSave_EnumerationEntry;
 
 
-        internal EnumerationEntry__Implementation__(FrozenContext ctx, int id)
+        internal EnumerationEntry__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: EnumerationEntry
+*/
+
+
 		internal Dictionary<int, EnumerationEntry> DataStore = new Dictionary<int, EnumerationEntry>(0);
-		static EnumerationEntry__Implementation__()
+		static EnumerationEntry__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for Parameter. This class is abstract.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("BaseParameter")]
-    public class BaseParameter__Implementation__ : BaseFrozenDataObject, BaseParameter
+    public class BaseParameter__Implementation__Frozen : BaseFrozenDataObject, BaseParameter
     {
 
 
@@ -203,13 +203,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
 
 
-        internal BaseParameter__Implementation__(FrozenContext ctx, int id)
+        internal BaseParameter__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: BaseParameter
+*/
+
+
 		internal Dictionary<int, BaseParameter> DataStore = new Dictionary<int, BaseParameter>(0);
-		static BaseParameter__Implementation__()
+		static BaseParameter__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

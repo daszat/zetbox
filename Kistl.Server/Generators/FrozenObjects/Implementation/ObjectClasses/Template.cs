@@ -24,9 +24,14 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             });
         }
 
+        public static string GetClassName(ObjectClass cls)
+        {
+            return cls.ClassName + Kistl.API.Helper.ImplementationSuffix + "Frozen";
+        }
+
         protected override string MungeClassName(string name)
         {
-            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix;
+            return Template.GetClassName(this.ObjectClass);
         }
 
         protected override string GetBaseClass()

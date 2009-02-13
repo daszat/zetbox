@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
-    public class ViewDescriptor__Implementation__ : BaseFrozenDataObject, ViewDescriptor
+    public class ViewDescriptor__Implementation__Frozen : BaseFrozenDataObject, ViewDescriptor
     {
 
 
@@ -121,13 +121,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
 
 
-        internal ViewDescriptor__Implementation__(FrozenContext ctx, int id)
+        internal ViewDescriptor__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: ViewDescriptor
+*/
+
+
 		internal Dictionary<int, ViewDescriptor> DataStore = new Dictionary<int, ViewDescriptor>(0);
-		static ViewDescriptor__Implementation__()
+		static ViewDescriptor__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

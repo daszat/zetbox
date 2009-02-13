@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for Methods.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Method")]
-    public class Method__Implementation__ : BaseFrozenDataObject, Method
+    public class Method__Implementation__Frozen : BaseFrozenDataObject, Method
     {
 
 
@@ -215,13 +215,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Method> OnPostSave_Method;
 
 
-        internal Method__Implementation__(FrozenContext ctx, int id)
+        internal Method__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: Method
+*/
+
+
 		internal Dictionary<int, Method> DataStore = new Dictionary<int, Method>(0);
-		static Method__Implementation__()
+		static Method__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

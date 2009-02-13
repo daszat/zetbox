@@ -15,6 +15,18 @@ namespace Kistl.DalProvider.Frozen
         {
             this.Context = ctx;
             this.ID = id;
+            this.IsSealed = false;
+        }
+
+        public bool IsSealed { get; private set; }
+
+        public void Seal()
+        {
+            if (IsSealed)
+            {
+                throw new ReadOnlyObjectException();
+            }
+            IsSealed = true;
         }
 
         #region IPersistenceObject Members
@@ -53,7 +65,7 @@ namespace Kistl.DalProvider.Frozen
 
         public bool IsAttached { get { return true; } }
 
-        public bool IsReadonly { get { return true; } }
+        public bool IsReadonly { get { return IsSealed; } }
 
         #endregion
 

@@ -5,25 +5,53 @@
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%
 
-	// TODO: find a correct incantation here
+	Type t = Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Objects", true);
+	Console.WriteLine("Generating " + t.AssemblyQualifiedName);
+	
+	var testList = ctx.GetQuery(typeof(ObjectClass)).ToList();
+	
 	// list of all instances of exactly this class
-	var instanceList = new List<ObjectClass>(); //ctx.GetQuery(cls.GetDataType()).ToList().Where(o => o.GetObjectClass(ctx) == cls);
+	// var instanceList = new List<ObjectClass>();
+	var instanceList = ctx.GetQuery(t)
+	    .ToList()
+	    .Where(o => o.GetObjectClass(ctx) == cls);
+	/*
+	*/
 %>
-		internal Dictionary<int, <%= cls.ClassName %>> DataStore = new Dictionary<int, <%= cls.ClassName %>>(<%= instanceList.Count() %>);
-		static <%= cls.ClassName %><%= Kistl.API.Helper.ImplementationSuffix %>()
+
+
+		internal static Dictionary<int, <%= cls.ClassName %>> DataStore = new Dictionary<int, <%= cls.ClassName %>>(<%= instanceList.Count() %>);
+		static <%= cls.ClassName %><%= Kistl.API.Helper.ImplementationSuffix %>Frozen()
 		{
 <%
 
+	string classname = Template.GetClassName(cls);
 	foreach(var obj in instanceList) 
 	{
 %>
-			DataStore[<%= obj.ID %>] = new <%= cls.ClassName %>(null, <%= obj.ID %>);
+			DataStore[<%= obj.ID %>] = new <%= classname %>(null, <%= obj.ID %>);
 <%
 	}
 %>
+		}
+
+		internal static void FillDataStore() {
+<%
+	foreach(var obj in instanceList) 
+	{
+		foreach(var prop in cls.Properties)
+		{
+%>
+			DataStore[<%= obj.ID %>].<%= prop.PropertyName %> = <%= "null"/* obj.GetPropertyValue<int>(prop.PropertyName).ToCSharpValue() */ %>;
+<%
+		}
+	}
+%>
+	
 		}

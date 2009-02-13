@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Assembly")]
-    public class Assembly__Implementation__ : BaseFrozenDataObject, Assembly
+    public class Assembly__Implementation__Frozen : BaseFrozenDataObject, Assembly
     {
 
 
@@ -138,13 +138,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Assembly> OnPostSave_Assembly;
 
 
-        internal Assembly__Implementation__(FrozenContext ctx, int id)
+        internal Assembly__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: Assembly
+*/
+
+
 		internal Dictionary<int, Assembly> DataStore = new Dictionary<int, Assembly>(0);
-		static Assembly__Implementation__()
+		static Assembly__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

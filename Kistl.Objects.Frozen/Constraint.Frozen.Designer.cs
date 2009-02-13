@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Constraint")]
-    public class Constraint__Implementation__ : BaseFrozenDataObject, Constraint
+    public class Constraint__Implementation__Frozen : BaseFrozenDataObject, Constraint
     {
 
 
@@ -134,13 +134,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Constraint> OnPostSave_Constraint;
 
 
-        internal Constraint__Implementation__(FrozenContext ctx, int id)
+        internal Constraint__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: Constraint
+*/
+
+
 		internal Dictionary<int, Constraint> DataStore = new Dictionary<int, Constraint>(0);
-		static Constraint__Implementation__()
+		static Constraint__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

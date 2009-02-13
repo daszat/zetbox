@@ -18,7 +18,7 @@ namespace Kistl.App.GUI
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Icon")]
-    public class Icon__Implementation__ : BaseFrozenDataObject, Icon
+    public class Icon__Implementation__Frozen : BaseFrozenDataObject, Icon
     {
 
 
@@ -75,13 +75,25 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<Icon> OnPostSave_Icon;
 
 
-        internal Icon__Implementation__(FrozenContext ctx, int id)
+        internal Icon__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.GUI
+CN: Icon
+*/
+
+
 		internal Dictionary<int, Icon> DataStore = new Dictionary<int, Icon>(0);
-		static Icon__Implementation__()
+		static Icon__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

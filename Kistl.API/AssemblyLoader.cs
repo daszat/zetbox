@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Kistl.API.Configuration;
+using System.Diagnostics;
 
 namespace Kistl.API
 {
@@ -61,8 +62,8 @@ namespace Kistl.API
 
         private static void InitialiseTargetAssemblyFolder(KistlConfig config)
         {
-            TargetAssemblyFolder = config.WorkingFolder + @"bin\";
-            System.IO.Directory.CreateDirectory(TargetAssemblyFolder);
+            TargetAssemblyFolder = Path.Combine(config.WorkingFolder, @"bin\");
+            Directory.CreateDirectory(TargetAssemblyFolder);
 
             // Delete stale Assemblies
             Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
@@ -118,18 +119,20 @@ namespace Kistl.API
             {
                 foreach (string path in AssemblyLoader.SearchPath)
                 {
+                    string targetPath = TargetAssemblyFolder;
+
                     // Create a AssemblyName Object & set the CodeBase.
                     AssemblyName n = new AssemblyName(name);
-                    n.CodeBase = TargetAssemblyFolder;
+                    n.CodeBase = targetPath;
                     string fullName = "";
 
                     // Resolve .dll or .exe
-                    if (System.IO.File.Exists(path + @"\" + n.Name + ".dll"))
+                    if (File.Exists(Path.Combine(path, n.Name) + ".dll"))
                     {
                         fullName = n.Name + ".dll";
 
                     }
-                    else if (System.IO.File.Exists(path + @"\" + n.Name + ".exe"))
+                    else if (File.Exists(Path.Combine(path, n.Name) + ".exe"))
                     {
                         fullName = n.Name + ".exe";
                     }
@@ -144,20 +147,21 @@ namespace Kistl.API
                         // Copy files to destination folder, override existing files
                         try
                         {
-                            System.IO.File.Copy(path + @"\" + fullName, n.CodeBase, true);
+                            File.Copy(Path.Combine(path, fullName), n.CodeBase, true);
                             // Also copy .PDB Files.
-                            string sourcePDBFile = path + @"\" + n.Name + ".pdb";
-                            if (System.IO.File.Exists(sourcePDBFile))
+                            string sourcePDBFile = Path.Combine(path, n.Name) + ".pdb";
+                            if (File.Exists(sourcePDBFile))
                             {
-                                System.IO.File.Copy(sourcePDBFile, TargetAssemblyFolder + n.Name + ".pdb", true);
+                                File.Copy(sourcePDBFile, Path.Combine(targetPath, n.Name) + ".pdb", true);
                             }
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.ToString());
                         }
+
                         // Finally load the Assembly
-                        //Assembly result = Assembly.Load(n);   
+                        Trace.TraceInformation("Loading from {0}", n.CodeBase);
                         Assembly result = Assembly.LoadFrom(n.CodeBase);
 
                         // If the assembly could not be loaded, do nothing! Return null. 
@@ -188,15 +192,17 @@ namespace Kistl.API
             {
                 foreach (string path in AssemblyLoader.SearchPath)
                 {
+                    string targetPath = TargetAssemblyFolder;
+
                     string fullName = "";
 
                     // Resolve .dll or .exe
-                    if (System.IO.File.Exists(path + @"\" + name + ".dll"))
+                    if (System.IO.File.Exists(Path.Combine(path, name) + ".dll"))
                     {
                         fullName = name + ".dll";
 
                     }
-                    else if (System.IO.File.Exists(path + @"\" + name + ".exe"))
+                    else if (System.IO.File.Exists(Path.Combine(path, name) + ".exe"))
                     {
                         fullName = name + ".exe";
                     }
@@ -209,16 +215,16 @@ namespace Kistl.API
                             // Copy files to destination folder, override existing files
                             try
                             {
-                                System.IO.File.Copy(path + @"\" + fullName, TargetAssemblyFolder + fullName, true);
+                                File.Copy(Path.Combine(path, fullName), Path.Combine(targetPath, fullName), true);
                             }
                             catch (Exception ex)
                             {
                                 Console.WriteLine(ex.ToString());
                             }
                         }
-
+                        Trace.TraceInformation("Loading for reflection from {0}", Path.Combine(targetPath, fullName));
                         // Load, but do not cache
-                        return Assembly.ReflectionOnlyLoadFrom(TargetAssemblyFolder + fullName);
+                        return Assembly.ReflectionOnlyLoadFrom(Path.Combine(targetPath, fullName));
                     }
                 }
 

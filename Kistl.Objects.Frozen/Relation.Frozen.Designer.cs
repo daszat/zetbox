@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Describes a Relation between two Object Classes
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Relation")]
-    public class Relation__Implementation__ : BaseFrozenDataObject, Relation
+    public class Relation__Implementation__Frozen : BaseFrozenDataObject, Relation
     {
 
 
@@ -144,13 +144,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Relation> OnPostSave_Relation;
 
 
-        internal Relation__Implementation__(FrozenContext ctx, int id)
+        internal Relation__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: Relation
+*/
+
+
 		internal Dictionary<int, Relation> DataStore = new Dictionary<int, Relation>(0);
-		static Relation__Implementation__()
+		static Relation__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("DataType")]
-    public class DataType__Implementation__ : BaseFrozenDataObject, DataType
+    public class DataType__Implementation__Frozen : BaseFrozenDataObject, DataType
     {
 
 
@@ -225,13 +225,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<DataType> OnPostSave_DataType;
 
 
-        internal DataType__Implementation__(FrozenContext ctx, int id)
+        internal DataType__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: DataType
+*/
+
+
 		internal Dictionary<int, DataType> DataStore = new Dictionary<int, DataType>(0);
-		static DataType__Implementation__()
+		static DataType__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

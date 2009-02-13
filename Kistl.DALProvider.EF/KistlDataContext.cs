@@ -124,7 +124,7 @@ namespace Kistl.DALProvider.EF
             if (!_table.ContainsKey(type))
             {
                 _table[type] = new QueryTranslator<T>(
-                    _ctx.CreateQuery<BaseServerDataObject>("[" + GetEntityName(type) + "]"), this);
+                    _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]"), this);
             }
 
             // This doesn't work without "OfType"
@@ -134,21 +134,40 @@ namespace Kistl.DALProvider.EF
             return ((IQueryable<T>)_table[type]).OfType<T>();
         }
 
+        public System.Collections.IList GetListHack<T>()
+        {
+            Type type = typeof(T).ToImplementationType();
+
+            if (!_table.ContainsKey(type))
+            {
+                _table[type] = new QueryTranslator<T>(
+                    _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]"), this);
+            }
+
+            // This doesn't work without "OfType"
+            // The reason is that "GetEntityName" returns a Query to the baseobject 
+            // but maybe a derived object is asked. OfType will filter this.
+            // return (ObjectQuery<T>)_table[type];
+            return ((IQueryable<T>)_table[type]).OfType<T>().ToList();
+        }
+
         /// <summary>
         /// Returns a Query by System.Type.
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;().</remarks>
         /// </summary>
         /// <param name="objType">System.Type</param>
         /// <returns>IQueryable</returns>
-        public override IQueryable<IDataObject> GetQuery(Type objType)
+        public override IQueryable<IDataObject> GetQuery(Type interfaceType)
         {
-            //Type type = objType.ToImplementationType();
-            //MethodInfo mi = this.GetType().FindGenericMethod("GetQuery", new Type[] { type }, new Type[] { });
-            //// See Case 552
-            //IQueryable result = (IQueryable)mi.Invoke(this, new object[] { });
-            //return result;
+            MethodInfo mi = this.GetType().FindGenericMethod("GetListHack", new Type[] { interfaceType }, new Type[] { });
+            // See Case 552
+            var result = (System.Collections.IList)mi.Invoke(this, new object[] { });
+            return result.AsQueryable().Cast<IDataObject>();
+            // use OfType instead of "safe" cast because of 
+            // http://social.msdn.microsoft.com/Forums/en-US/adodotnetentityframework/thread/b3537995-2441-423d-8485-ee285cf2f4ba/
+            //return result.OfType<IDataObject>();
 
-            throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
+            //throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
             
             // Des geht a net...
             //Type type = objType.ToImplementationType();

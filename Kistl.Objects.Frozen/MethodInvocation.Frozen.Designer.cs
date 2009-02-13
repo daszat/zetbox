@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for a MethodInvocation on a Method of a DataType.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("MethodInvocation")]
-    public class MethodInvocation__Implementation__ : BaseFrozenDataObject, MethodInvocation
+    public class MethodInvocation__Implementation__Frozen : BaseFrozenDataObject, MethodInvocation
     {
 
 
@@ -167,13 +167,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<MethodInvocation> OnPostSave_MethodInvocation;
 
 
-        internal MethodInvocation__Implementation__(FrozenContext ctx, int id)
+        internal MethodInvocation__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: MethodInvocation
+*/
+
+
 		internal Dictionary<int, MethodInvocation> DataStore = new Dictionary<int, MethodInvocation>(0);
-		static MethodInvocation__Implementation__()
+		static MethodInvocation__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

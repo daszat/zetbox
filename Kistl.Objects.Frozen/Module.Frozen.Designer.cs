@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for Modules.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Module")]
-    public class Module__Implementation__ : BaseFrozenDataObject, Module
+    public class Module__Implementation__Frozen : BaseFrozenDataObject, Module
     {
 
 
@@ -151,13 +151,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Module> OnPostSave_Module;
 
 
-        internal Module__Implementation__(FrozenContext ctx, int id)
+        internal Module__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: Module
+*/
+
+
 		internal Dictionary<int, Module> DataStore = new Dictionary<int, Module>(0);
-		static Module__Implementation__()
+		static Module__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

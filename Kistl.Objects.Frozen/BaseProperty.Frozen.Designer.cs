@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("BaseProperty")]
-    public class BaseProperty__Implementation__ : BaseFrozenDataObject, BaseProperty
+    public class BaseProperty__Implementation__Frozen : BaseFrozenDataObject, BaseProperty
     {
 
 
@@ -236,13 +236,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<BaseProperty> OnPostSave_BaseProperty;
 
 
-        internal BaseProperty__Implementation__(FrozenContext ctx, int id)
+        internal BaseProperty__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: BaseProperty
+*/
+
+
 		internal Dictionary<int, BaseProperty> DataStore = new Dictionary<int, BaseProperty>(0);
-		static BaseProperty__Implementation__()
+		static BaseProperty__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 

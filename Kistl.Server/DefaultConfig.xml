@@ -14,7 +14,8 @@
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>C:\temp\KistlCodeGen\bin\Debug</string>
+    <!--<string>C:\Users\david\AppData\Local\dasz\Kistl\Default Configuration\Kistl.Server.vshost.exe\bin\</string>-->
+    <!--<string>C:\temp\KistlCodeGen\bin\Debug</string>-->
     <string>P:\Kistl\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

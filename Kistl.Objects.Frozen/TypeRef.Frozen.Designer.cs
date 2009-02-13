@@ -18,7 +18,7 @@ namespace Kistl.App.Base
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
-    public class TypeRef__Implementation__ : BaseFrozenDataObject, TypeRef
+    public class TypeRef__Implementation__Frozen : BaseFrozenDataObject, TypeRef
     {
 
 
@@ -131,13 +131,25 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
 
 
-        internal TypeRef__Implementation__(FrozenContext ctx, int id)
+        internal TypeRef__Implementation__Frozen(FrozenContext ctx, int id)
             : base(ctx, id)
         { }
+
+
+
+/*
+DTS: 
+NS: Kistl.App.Base
+CN: TypeRef
+*/
+
+
 		internal Dictionary<int, TypeRef> DataStore = new Dictionary<int, TypeRef>(0);
-		static TypeRef__Implementation__()
+		static TypeRef__Implementation__Frozen()
 		{
 		}
+
+
 
 #region Serializer
 
