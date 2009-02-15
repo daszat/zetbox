@@ -172,20 +172,742 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: MethodInvocation
-*/
-
-
-		internal Dictionary<int, MethodInvocation> DataStore = new Dictionary<int, MethodInvocation>(0);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(104);
 		static MethodInvocation__Implementation__Frozen()
 		{
+			DataStore[1] = new MethodInvocation__Implementation__Frozen(null, 1);
+
+			DataStore[2] = new MethodInvocation__Implementation__Frozen(null, 2);
+
+			DataStore[4] = new MethodInvocation__Implementation__Frozen(null, 4);
+
+			DataStore[5] = new MethodInvocation__Implementation__Frozen(null, 5);
+
+			DataStore[6] = new MethodInvocation__Implementation__Frozen(null, 6);
+
+			DataStore[8] = new MethodInvocation__Implementation__Frozen(null, 8);
+
+			DataStore[9] = new MethodInvocation__Implementation__Frozen(null, 9);
+
+			DataStore[10] = new MethodInvocation__Implementation__Frozen(null, 10);
+
+			DataStore[11] = new MethodInvocation__Implementation__Frozen(null, 11);
+
+			DataStore[12] = new MethodInvocation__Implementation__Frozen(null, 12);
+
+			DataStore[13] = new MethodInvocation__Implementation__Frozen(null, 13);
+
+			DataStore[14] = new MethodInvocation__Implementation__Frozen(null, 14);
+
+			DataStore[15] = new MethodInvocation__Implementation__Frozen(null, 15);
+
+			DataStore[16] = new MethodInvocation__Implementation__Frozen(null, 16);
+
+			DataStore[17] = new MethodInvocation__Implementation__Frozen(null, 17);
+
+			DataStore[18] = new MethodInvocation__Implementation__Frozen(null, 18);
+
+			DataStore[19] = new MethodInvocation__Implementation__Frozen(null, 19);
+
+			DataStore[20] = new MethodInvocation__Implementation__Frozen(null, 20);
+
+			DataStore[21] = new MethodInvocation__Implementation__Frozen(null, 21);
+
+			DataStore[22] = new MethodInvocation__Implementation__Frozen(null, 22);
+
+			DataStore[23] = new MethodInvocation__Implementation__Frozen(null, 23);
+
+			DataStore[24] = new MethodInvocation__Implementation__Frozen(null, 24);
+
+			DataStore[25] = new MethodInvocation__Implementation__Frozen(null, 25);
+
+			DataStore[26] = new MethodInvocation__Implementation__Frozen(null, 26);
+
+			DataStore[27] = new MethodInvocation__Implementation__Frozen(null, 27);
+
+			DataStore[28] = new MethodInvocation__Implementation__Frozen(null, 28);
+
+			DataStore[29] = new MethodInvocation__Implementation__Frozen(null, 29);
+
+			DataStore[30] = new MethodInvocation__Implementation__Frozen(null, 30);
+
+			DataStore[31] = new MethodInvocation__Implementation__Frozen(null, 31);
+
+			DataStore[32] = new MethodInvocation__Implementation__Frozen(null, 32);
+
+			DataStore[33] = new MethodInvocation__Implementation__Frozen(null, 33);
+
+			DataStore[34] = new MethodInvocation__Implementation__Frozen(null, 34);
+
+			DataStore[35] = new MethodInvocation__Implementation__Frozen(null, 35);
+
+			DataStore[36] = new MethodInvocation__Implementation__Frozen(null, 36);
+
+			DataStore[37] = new MethodInvocation__Implementation__Frozen(null, 37);
+
+			DataStore[38] = new MethodInvocation__Implementation__Frozen(null, 38);
+
+			DataStore[40] = new MethodInvocation__Implementation__Frozen(null, 40);
+
+			DataStore[41] = new MethodInvocation__Implementation__Frozen(null, 41);
+
+			DataStore[42] = new MethodInvocation__Implementation__Frozen(null, 42);
+
+			DataStore[43] = new MethodInvocation__Implementation__Frozen(null, 43);
+
+			DataStore[44] = new MethodInvocation__Implementation__Frozen(null, 44);
+
+			DataStore[45] = new MethodInvocation__Implementation__Frozen(null, 45);
+
+			DataStore[46] = new MethodInvocation__Implementation__Frozen(null, 46);
+
+			DataStore[47] = new MethodInvocation__Implementation__Frozen(null, 47);
+
+			DataStore[48] = new MethodInvocation__Implementation__Frozen(null, 48);
+
+			DataStore[49] = new MethodInvocation__Implementation__Frozen(null, 49);
+
+			DataStore[50] = new MethodInvocation__Implementation__Frozen(null, 50);
+
+			DataStore[51] = new MethodInvocation__Implementation__Frozen(null, 51);
+
+			DataStore[52] = new MethodInvocation__Implementation__Frozen(null, 52);
+
+			DataStore[53] = new MethodInvocation__Implementation__Frozen(null, 53);
+
+			DataStore[54] = new MethodInvocation__Implementation__Frozen(null, 54);
+
+			DataStore[55] = new MethodInvocation__Implementation__Frozen(null, 55);
+
+			DataStore[56] = new MethodInvocation__Implementation__Frozen(null, 56);
+
+			DataStore[57] = new MethodInvocation__Implementation__Frozen(null, 57);
+
+			DataStore[58] = new MethodInvocation__Implementation__Frozen(null, 58);
+
+			DataStore[59] = new MethodInvocation__Implementation__Frozen(null, 59);
+
+			DataStore[60] = new MethodInvocation__Implementation__Frozen(null, 60);
+
+			DataStore[61] = new MethodInvocation__Implementation__Frozen(null, 61);
+
+			DataStore[62] = new MethodInvocation__Implementation__Frozen(null, 62);
+
+			DataStore[63] = new MethodInvocation__Implementation__Frozen(null, 63);
+
+			DataStore[64] = new MethodInvocation__Implementation__Frozen(null, 64);
+
+			DataStore[65] = new MethodInvocation__Implementation__Frozen(null, 65);
+
+			DataStore[66] = new MethodInvocation__Implementation__Frozen(null, 66);
+
+			DataStore[67] = new MethodInvocation__Implementation__Frozen(null, 67);
+
+			DataStore[70] = new MethodInvocation__Implementation__Frozen(null, 70);
+
+			DataStore[71] = new MethodInvocation__Implementation__Frozen(null, 71);
+
+			DataStore[72] = new MethodInvocation__Implementation__Frozen(null, 72);
+
+			DataStore[73] = new MethodInvocation__Implementation__Frozen(null, 73);
+
+			DataStore[74] = new MethodInvocation__Implementation__Frozen(null, 74);
+
+			DataStore[75] = new MethodInvocation__Implementation__Frozen(null, 75);
+
+			DataStore[76] = new MethodInvocation__Implementation__Frozen(null, 76);
+
+			DataStore[77] = new MethodInvocation__Implementation__Frozen(null, 77);
+
+			DataStore[78] = new MethodInvocation__Implementation__Frozen(null, 78);
+
+			DataStore[79] = new MethodInvocation__Implementation__Frozen(null, 79);
+
+			DataStore[80] = new MethodInvocation__Implementation__Frozen(null, 80);
+
+			DataStore[81] = new MethodInvocation__Implementation__Frozen(null, 81);
+
+			DataStore[82] = new MethodInvocation__Implementation__Frozen(null, 82);
+
+			DataStore[83] = new MethodInvocation__Implementation__Frozen(null, 83);
+
+			DataStore[87] = new MethodInvocation__Implementation__Frozen(null, 87);
+
+			DataStore[88] = new MethodInvocation__Implementation__Frozen(null, 88);
+
+			DataStore[89] = new MethodInvocation__Implementation__Frozen(null, 89);
+
+			DataStore[90] = new MethodInvocation__Implementation__Frozen(null, 90);
+
+			DataStore[91] = new MethodInvocation__Implementation__Frozen(null, 91);
+
+			DataStore[92] = new MethodInvocation__Implementation__Frozen(null, 92);
+
+			DataStore[93] = new MethodInvocation__Implementation__Frozen(null, 93);
+
+			DataStore[94] = new MethodInvocation__Implementation__Frozen(null, 94);
+
+			DataStore[95] = new MethodInvocation__Implementation__Frozen(null, 95);
+
+			DataStore[96] = new MethodInvocation__Implementation__Frozen(null, 96);
+
+			DataStore[97] = new MethodInvocation__Implementation__Frozen(null, 97);
+
+			DataStore[98] = new MethodInvocation__Implementation__Frozen(null, 98);
+
+			DataStore[99] = new MethodInvocation__Implementation__Frozen(null, 99);
+
+			DataStore[100] = new MethodInvocation__Implementation__Frozen(null, 100);
+
+			DataStore[101] = new MethodInvocation__Implementation__Frozen(null, 101);
+
+			DataStore[102] = new MethodInvocation__Implementation__Frozen(null, 102);
+
+			DataStore[103] = new MethodInvocation__Implementation__Frozen(null, 103);
+
+			DataStore[104] = new MethodInvocation__Implementation__Frozen(null, 104);
+
+			DataStore[105] = new MethodInvocation__Implementation__Frozen(null, 105);
+
+			DataStore[106] = new MethodInvocation__Implementation__Frozen(null, 106);
+
+			DataStore[107] = new MethodInvocation__Implementation__Frozen(null, 107);
+
+			DataStore[108] = new MethodInvocation__Implementation__Frozen(null, 108);
+
+			DataStore[109] = new MethodInvocation__Implementation__Frozen(null, 109);
+
+			DataStore[110] = new MethodInvocation__Implementation__Frozen(null, 110);
+
+			DataStore[111] = new MethodInvocation__Implementation__Frozen(null, 111);
+
+			DataStore[112] = new MethodInvocation__Implementation__Frozen(null, 112);
+
 		}
 
-
+		internal static void FillDataStore() {
+			DataStore[1].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[8];
+			DataStore[1].MemberName = @"OnToString_Projekt";
+			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[1].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[1].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[8];
+			DataStore[2].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[17];
+			DataStore[2].MemberName = @"OnToString_Mitarbeiter";
+			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[2].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
+			DataStore[2].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[8];
+			DataStore[4].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[11];
+			DataStore[4].MemberName = @"OnToString_Task";
+			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[4].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
+			DataStore[4].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[8];
+			DataStore[5].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[5];
+			DataStore[5].MemberName = @"OnToString_DataType";
+			DataStore[5].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[5].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
+			DataStore[5].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[6].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[44];
+			DataStore[6].MemberName = @"OnToString_MethodInvokation";
+			DataStore[6].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[6].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[6].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[8].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[14];
+			DataStore[8].MemberName = @"OnToString_BaseProperty";
+			DataStore[8].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[8].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
+			DataStore[8].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[9].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[20];
+			DataStore[9].MemberName = @"OnToString_Method";
+			DataStore[9].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[9].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
+			DataStore[9].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[10].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[23];
+			DataStore[10].MemberName = @"OnToString_Module";
+			DataStore[10].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[10].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[10].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[11].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[26];
+			DataStore[11].MemberName = @"OnToString_Auftrag";
+			DataStore[11].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[11].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
+			DataStore[11].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[8];
+			DataStore[12].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[29];
+			DataStore[12].MemberName = @"OnToString_Zeitkonto";
+			DataStore[12].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[12].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[12].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[6];
+			DataStore[13].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[32];
+			DataStore[13].MemberName = @"OnToString_Taetigkeit";
+			DataStore[13].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[13].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
+			DataStore[13].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[6];
+			DataStore[14].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[35];
+			DataStore[14].MemberName = @"OnToString_Kunde";
+			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[14].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
+			DataStore[14].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[8];
+			DataStore[15].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[38];
+			DataStore[15].MemberName = @"OnToString_Icon";
+			DataStore[15].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[15].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27];
+			DataStore[15].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[16].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[41];
+			DataStore[16].MemberName = @"OnToString_Assembly";
+			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[16].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
+			DataStore[16].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[17].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[14];
+			DataStore[17].MemberName = @"OnToString_ObjectReferenceProperty";
+			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[17].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
+			DataStore[17].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[18].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[14];
+			DataStore[18].MemberName = @"OnToString_BackReferenceProperty";
+			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[18].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
+			DataStore[18].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[19].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[3];
+			DataStore[19].MemberName = @"OnRechnungErstellen_Auftrag";
+			DataStore[19].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[19].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
+			DataStore[19].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[8];
+			DataStore[20].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[20].MemberName = @"OnGetPropertyTypeString_StringProperty";
+			DataStore[20].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[20].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[9];
+			DataStore[20].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[21].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[21].MemberName = @"OnGetPropertyTypeString_IntProperty";
+			DataStore[21].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[21].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[11];
+			DataStore[21].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[22].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[22].MemberName = @"OnGetPropertyTypeString_BoolProperty";
+			DataStore[22].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[22].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12];
+			DataStore[22].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[23].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[23].MemberName = @"OnGetPropertyTypeString_DoubleProperty";
+			DataStore[23].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[23].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[13];
+			DataStore[23].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[24].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[24].MemberName = @"OnGetPropertyTypeString_DateTimeProperty";
+			DataStore[24].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[24].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
+			DataStore[24].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[25].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[25].MemberName = @"OnGetPropertyTypeString_BaseProperty";
+			DataStore[25].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[25].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
+			DataStore[25].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[26].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[26].MemberName = @"OnGetPropertyTypeString_ObjectReferenceProperty";
+			DataStore[26].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[26].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
+			DataStore[26].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[27].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[27].MemberName = @"OnGetPropertyTypeString_BackReferenceProperty";
+			DataStore[27].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[27].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
+			DataStore[27].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[28].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[6];
+			DataStore[28].MemberName = @"OnPreSave_ObjectClass";
+			DataStore[28].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[28].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[28].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[29].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[9];
+			DataStore[29].MemberName = @"OnPreSetObject_Projekt";
+			DataStore[29].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[29].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[29].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[3];
+			DataStore[30].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[12];
+			DataStore[30].MemberName = @"OnPreSetObject_Task";
+			DataStore[30].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[30].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
+			DataStore[30].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[3];
+			DataStore[31].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[31].MemberName = @"OnGetPropertyTypeString_StringProperty";
+			DataStore[31].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[31].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[9];
+			DataStore[31].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[32].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[32].MemberName = @"OnGetPropertyTypeString_IntProperty";
+			DataStore[32].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[32].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[11];
+			DataStore[32].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[33].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[33].MemberName = @"OnGetPropertyTypeString_BoolProperty";
+			DataStore[33].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[33].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12];
+			DataStore[33].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[34].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[34].MemberName = @"OnGetPropertyTypeString_DoubleProperty";
+			DataStore[34].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[34].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[13];
+			DataStore[34].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[35].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[35].MemberName = @"OnGetPropertyTypeString_DateTimeProperty";
+			DataStore[35].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[35].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
+			DataStore[35].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[36].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[36].MemberName = @"OnGetPropertyTypeString_BaseProperty";
+			DataStore[36].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[36].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
+			DataStore[36].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[37].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[37].MemberName = @"OnGetPropertyTypeString_ObjectReferenceProperty";
+			DataStore[37].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[37].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
+			DataStore[37].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[38].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[38].MemberName = @"OnGetPropertyTypeString_BackReferenceProperty";
+			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[38].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
+			DataStore[38].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[40].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
+			DataStore[40].MemberName = @"OnGetGUIRepresentation_BaseProperty";
+			DataStore[40].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[40].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
+			DataStore[40].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[41].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
+			DataStore[41].MemberName = @"OnGetGUIRepresentation_BoolProperty";
+			DataStore[41].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[41].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12];
+			DataStore[41].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[42].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
+			DataStore[42].MemberName = @"OnGetGUIRepresentation_ObjectReferenceProperty";
+			DataStore[42].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[42].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
+			DataStore[42].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[43].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
+			DataStore[43].MemberName = @"OnGetGUIRepresentation_DateTimeProperty";
+			DataStore[43].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[43].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
+			DataStore[43].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[44].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[71];
+			DataStore[44].MemberName = @"OnToString_TaetigkeitsArt";
+			DataStore[44].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[44].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[31];
+			DataStore[44].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[6];
+			DataStore[45].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[30];
+			DataStore[45].MemberName = @"OnPreSave_Zeitkonto";
+			DataStore[45].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[45].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[45].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[2];
+			DataStore[46].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[33];
+			DataStore[46].MemberName = @"OnPreSave_Taetigkeit";
+			DataStore[46].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[46].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
+			DataStore[46].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[2];
+			DataStore[47].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[47].MemberName = @"OnGetParameterTypeString_StringParameter";
+			DataStore[47].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[47].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37];
+			DataStore[47].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[48].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[48].MemberName = @"OnGetParameterTypeString_IntParameter";
+			DataStore[48].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[48].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[38];
+			DataStore[48].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[49].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[80];
+			DataStore[49].MemberName = @"OnToString_BaseParameter";
+			DataStore[49].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[49].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[49].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[50].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[50].MemberName = @"OnGetParameterTypeString_StringParameter";
+			DataStore[50].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[50].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37];
+			DataStore[50].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[51].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[51].MemberName = @"OnGetParameterTypeString_IntParameter";
+			DataStore[51].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[51].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[38];
+			DataStore[51].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[52].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[52].MemberName = @"OnGetParameterTypeString_DoubleParameter";
+			DataStore[52].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[52].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[39];
+			DataStore[52].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[53].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[53].MemberName = @"OnGetParameterTypeString_DoubleParameter";
+			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[53].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[39];
+			DataStore[53].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[54].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[54].MemberName = @"OnGetParameterTypeString_DateTimeParameter";
+			DataStore[54].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[54].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[41];
+			DataStore[54].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[55].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[55].MemberName = @"OnGetParameterTypeString_BoolParameter";
+			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[55].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[40];
+			DataStore[55].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[56].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[56].MemberName = @"OnGetParameterTypeString_BoolParameter";
+			DataStore[56].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[56].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[40];
+			DataStore[56].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[57].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[57].MemberName = @"OnGetParameterTypeString_DateTimeParameter";
+			DataStore[57].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[57].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[41];
+			DataStore[57].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[58].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[58].MemberName = @"OnGetParameterTypeString_ObjectParameter";
+			DataStore[58].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[58].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42];
+			DataStore[58].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[59].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[59].MemberName = @"OnGetParameterTypeString_ObjectParameter";
+			DataStore[59].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[59].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42];
+			DataStore[59].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[60].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[60].MemberName = @"OnGetParameterTypeString_CLRObjectParameter";
+			DataStore[60].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[60].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[43];
+			DataStore[60].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[61].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
+			DataStore[61].MemberName = @"OnGetParameterTypeString_CLRObjectParameter";
+			DataStore[61].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[61].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[43];
+			DataStore[61].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[62].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[79];
+			DataStore[62].MemberName = @"OnPreSave_BaseParameter";
+			DataStore[62].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[62].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[62].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[63].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[21];
+			DataStore[63].MemberName = @"OnPreSave_Method";
+			DataStore[63].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[63].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
+			DataStore[63].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[64].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[64].MemberName = @"OnGetPropertyTypeString_EnumerationProperty";
+			DataStore[64].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[64].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
+			DataStore[64].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[65].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[65].MemberName = @"OnGetPropertyTypeString_EnumerationProperty";
+			DataStore[65].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[65].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
+			DataStore[65].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[66].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[85];
+			DataStore[66].MemberName = @"OnToString_Enumeration";
+			DataStore[66].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[66].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[66].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[67].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[88];
+			DataStore[67].MemberName = @"OnToString_EnumerationEntry";
+			DataStore[67].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[67].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[67].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[70].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[118];
+			DataStore[70].MemberName = @"OnGetPropertyType_BaseProperty";
+			DataStore[70].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[70].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
+			DataStore[70].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[71].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[118];
+			DataStore[71].MemberName = @"OnGetPropertyType_BaseProperty";
+			DataStore[71].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[71].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
+			DataStore[71].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[72].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[121];
+			DataStore[72].MemberName = @"OnGetDataType_DataType";
+			DataStore[72].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[72].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
+			DataStore[72].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[73].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[121];
+			DataStore[73].MemberName = @"OnGetDataType_DataType";
+			DataStore[73].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[73].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
+			DataStore[73].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[74].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[120];
+			DataStore[74].MemberName = @"OnGetDataTypeString_DataType";
+			DataStore[74].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[74].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
+			DataStore[74].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[75].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[120];
+			DataStore[75].MemberName = @"OnGetDataTypeString_DataType";
+			DataStore[75].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[75].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
+			DataStore[75].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[76].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[123];
+			DataStore[76].MemberName = @"OnGetParameterType_BaseParameter";
+			DataStore[76].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[76].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[76].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[77].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[123];
+			DataStore[77].MemberName = @"OnGetParameterType_BaseParameter";
+			DataStore[77].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[77].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[77].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[78].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[123];
+			DataStore[78].MemberName = @"OnGetParameterType_ObjectParameter";
+			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[78].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42];
+			DataStore[78].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[79].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[123];
+			DataStore[79].MemberName = @"OnGetParameterType_ObjectParameter";
+			DataStore[79].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[79].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42];
+			DataStore[79].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[80].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[124];
+			DataStore[80].MemberName = @"OnGetReturnParameter_Method";
+			DataStore[80].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[80].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
+			DataStore[80].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[81].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[125];
+			DataStore[81].MemberName = @"OnGetInheritedMethods_ObjectClass";
+			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[81].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[81].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[82].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[82].MemberName = @"OnGetPropertyTypeString_StructProperty";
+			DataStore[82].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[82].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64];
+			DataStore[82].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[83].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[83].MemberName = @"OnGetPropertyTypeString_StructProperty";
+			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[83].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64];
+			DataStore[83].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[87].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[87].MemberName = @"OnIsValid_Constraint";
+			DataStore[87].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[87].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
+			DataStore[87].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[88].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[88].MemberName = @"OnIsValid_NotNullableConstraint";
+			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[88].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[70];
+			DataStore[88].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[89].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
+			DataStore[89].MemberName = @"OnGetErrorText_NotNullableConstraint";
+			DataStore[89].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[89].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[70];
+			DataStore[89].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[90].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[136];
+			DataStore[90].MemberName = @"OnToString_NotNullableConstraint";
+			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[90].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[70];
+			DataStore[90].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[91].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[136];
+			DataStore[91].MemberName = @"OnToString_IntegerRangeConstraint";
+			DataStore[91].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[91].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[71];
+			DataStore[91].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[92].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
+			DataStore[92].MemberName = @"OnGetErrorText_IntegerRangeConstraint";
+			DataStore[92].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[92].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[71];
+			DataStore[92].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[93].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[93].MemberName = @"OnIsValid_IntegerRangeConstraint";
+			DataStore[93].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[93].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[71];
+			DataStore[93].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[94].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[141];
+			DataStore[94].MemberName = @"OnToString_ControlInfo";
+			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[94].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
+			DataStore[94].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[95].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[136];
+			DataStore[95].MemberName = @"OnToString_StringRangeConstraint";
+			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[95].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73];
+			DataStore[95].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[96].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
+			DataStore[96].MemberName = @"OnGetErrorText_StringRangeConstraint";
+			DataStore[96].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[96].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73];
+			DataStore[96].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[1];
+			DataStore[97].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[97].MemberName = @"OnIsValid_StringRangeConstraint";
+			DataStore[97].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[97].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73];
+			DataStore[97].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[1];
+			DataStore[98].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
+			DataStore[98].MemberName = @"OnGetErrorText_MethodInvocationConstraint";
+			DataStore[98].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[98].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[74];
+			DataStore[98].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[99].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[136];
+			DataStore[99].MemberName = @"OnToString_MethodInvocationConstraint";
+			DataStore[99].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[99].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[74];
+			DataStore[99].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[100].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[100].MemberName = @"OnIsValid_MethodInvocationConstraint";
+			DataStore[100].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[100].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[74];
+			DataStore[100].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[101].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[126];
+			DataStore[101].MemberName = @"OnToString_PresenterInfo";
+			DataStore[101].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[101].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[101].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[102].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[144];
+			DataStore[102].MemberName = @"OnPrepareDefault_Template";
+			DataStore[102].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[102].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
+			DataStore[102].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[103].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[129];
+			DataStore[103].MemberName = @"OnToString_Visual";
+			DataStore[103].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[103].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
+			DataStore[103].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[104].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[104].MemberName = @"OnIsValid_IsValidIdentifierConstraint";
+			DataStore[104].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[104].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[75];
+			DataStore[104].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[105].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
+			DataStore[105].MemberName = @"OnGetErrorText_IsValidIdentifierConstraint";
+			DataStore[105].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[105].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[75];
+			DataStore[105].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[106].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[136];
+			DataStore[106].MemberName = @"OnToString_IsValidIdentifierConstraint";
+			DataStore[106].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[106].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[75];
+			DataStore[106].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[107].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[107].MemberName = @"OnIsValid_IsValidNamespaceConstraint";
+			DataStore[107].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[107].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[76];
+			DataStore[107].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[108].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[151];
+			DataStore[108].MemberName = @"OnAsType_TypeRef";
+			DataStore[108].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[108].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
+			DataStore[108].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[109].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[148];
+			DataStore[109].MemberName = @"OnToString_TypeRef";
+			DataStore[109].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[109].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
+			DataStore[109].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[110].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[152];
+			DataStore[110].MemberName = @"OnToString_ViewDescriptor";
+			DataStore[110].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[110].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
+			DataStore[110].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[111].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[155];
+			DataStore[111].MemberName = @"OnRegenerateTypeRefs_Assembly";
+			DataStore[111].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[111].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
+			DataStore[111].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
+			DataStore[112].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[156];
+			DataStore[112].MemberName = @"OnGetDefaultModelRef_ObjectClass";
+			DataStore[112].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[112].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[112].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+	
+		}
 
 #region Serializer
 

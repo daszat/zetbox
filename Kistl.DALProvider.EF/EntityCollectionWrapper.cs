@@ -11,7 +11,7 @@ using Kistl.DALProvider.EF;
 namespace Kistl.DALProvider.EF
 {
 
-    public class EntityCollectionWrapper<INTERFACE, IMPL> : ICollection<INTERFACE>
+    public class EntityCollectionWrapper<INTERFACE, IMPL> : ICollection<INTERFACE>, ICollection
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
         where INTERFACE : class, IDataObject
     {
@@ -74,6 +74,22 @@ namespace Kistl.DALProvider.EF
         {
             return _ec.Cast<INTERFACE>();
         }
+
+        #region ICollection Members
+
+        public void CopyTo(Array array, int arrayIndex)
+        {
+            foreach (var i in GetEnumerable())
+            {
+                array.SetValue(i, arrayIndex++);
+            }
+        }
+
+        public bool IsSynchronized { get { return false; } }
+
+        public object SyncRoot { get { return this; } }
+
+        #endregion
     }
 
     public class EntityCollectionWrapperSorted<INTERFACE, IMPL>

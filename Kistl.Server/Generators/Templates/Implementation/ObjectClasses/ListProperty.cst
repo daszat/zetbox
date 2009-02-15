@@ -27,6 +27,9 @@
                     <%= backingName %> = <%= GetInitialisationExpression() %>;
                 return <%= backingName %>;
             }
+<%
+			ApplySettor();
+%>
         }
         private <%= GetBackingTypeString() %> <%= backingName %>;
 <%

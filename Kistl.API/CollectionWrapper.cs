@@ -17,11 +17,11 @@ namespace Kistl.API
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
     /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
     public abstract class CollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : ICollection<ITEMTYPE>
+        : ICollection<ITEMTYPE>, ICollection, IEnumerable
         where ATYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
         where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
-        where BASECOLLECTIONTYPE: class, ICollection<ENTRYTYPE>
+        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
         protected BASECOLLECTIONTYPE Collection { get; private set; }
         protected PARENTTYPE ParentObject { get; private set; }
@@ -177,6 +177,22 @@ namespace Kistl.API
         }
 
         #endregion
+
+        #region ICollection Members
+
+        public void CopyTo(Array array, int index)
+        {
+            foreach (var i in GetItems())
+            {
+                array.SetValue(i, index++);
+            }
+        }
+
+        public bool IsSynchronized { get { return false; } }
+
+        public object SyncRoot { get { return Collection; } }
+
+        #endregion
     }
 
     /// <summary>
@@ -189,7 +205,7 @@ namespace Kistl.API
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
     /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
     public abstract class ListEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : CollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>
+        : CollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>, IList
         where ATYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
         where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
@@ -329,5 +345,59 @@ namespace Kistl.API
         }
 
         #endregion
+
+        #region IList Members
+
+        public int Add(object value)
+        {
+            return this.Add((ITEMTYPE)value);
+        }
+
+        public bool Contains(object value)
+        {
+            if (value is ITEMTYPE)
+                return this.Contains((ITEMTYPE)value);
+            else
+                return false;
+        }
+
+        public int IndexOf(object value)
+        {
+            if (value is ITEMTYPE)
+                return this.IndexOf((ITEMTYPE)value);
+            else
+                return -1;
+        }
+
+        public void Insert(int index, object value)
+        {
+            this.Insert(index, (ITEMTYPE)value);
+        }
+
+        public bool IsFixedSize
+        {
+            get { return false; }
+        }
+
+        public void Remove(object value)
+        {
+            if (value is ITEMTYPE)
+                this.Remove((ITEMTYPE)value);
+        }
+
+        object IList.this[int index]
+        {
+            get
+            {
+                return this[index];
+            }
+            set
+            {
+                this[index] = (ITEMTYPE)value;
+            }
+        }
+
+        #endregion
+
     }
 }

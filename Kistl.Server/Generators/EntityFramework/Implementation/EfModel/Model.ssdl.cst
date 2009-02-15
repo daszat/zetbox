@@ -55,6 +55,7 @@
 		string assocNameA = rel.GetCollectionEntryAssociationName(rel.A);
 		string assocNameB = rel.GetCollectionEntryAssociationName(rel.B);
 		string esName = rel.GetCollectionEntryClassName();
+		string esTableName = rel.GetCollectionEntryTableName(ctx);
 		
 %>
     <!-- 
@@ -62,7 +63,7 @@
     CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
 %>
     -->
-    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= esName %>" />
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= esTableName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.Store.<%= assocNameA %>" >
       <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
@@ -141,27 +142,29 @@
 		.OrderBy(r => r.GetAssociationName()))
 	{
 		string ceName = rel.GetCollectionEntryClassName();
+		string fkAName = rel.GetCollectionEntryFkaColumnName();
+		string fkBName = rel.GetCollectionEntryFkbColumnName();
 %>	
   <EntityType Name="<%= ceName %>">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
+    <Property Name="<%= fkAName %>" Type="int" Nullable="true" />
 <%
 		if (rel.A.HasPersistentOrder)
 		{
 %>
-    <Property Name="AIndex" Type="int" Nullable="true" />
+    <Property Name="<%= fkAName %><%= Kistl.API.Helper.PositionSuffix %>" Type="int" Nullable="true" />
 <%
 		}
 %>
-    <Property Name="fk_B" Type="int" Nullable="true" />
+    <Property Name="<%= fkBName %>" Type="int" Nullable="true" />
 <%
 		if (rel.B.HasPersistentOrder)
 		{
 %>
-    <Property Name="BIndex" Type="int" Nullable="true" />
+    <Property Name="<%= fkBName %><%= Kistl.API.Helper.PositionSuffix %>" Type="int" Nullable="true" />
 <%
 		}
 %>
@@ -176,7 +179,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="<%= fkAName %>" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -190,7 +193,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="<%= fkBName %>" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

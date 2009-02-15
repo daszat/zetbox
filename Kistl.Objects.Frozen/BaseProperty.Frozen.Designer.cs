@@ -123,11 +123,12 @@ namespace Kistl.App.Base
             get
             {
                 if (_Constraints == null)
-                    _Constraints = new List<Kistl.App.Base.Constraint>();
+                    _Constraints = new ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0));
                 return _Constraints;
             }
+internal set { _Constraints = (ReadOnlyCollection<Kistl.App.Base.Constraint>)value; }
         }
-        private ICollection<Kistl.App.Base.Constraint> _Constraints;
+        private ReadOnlyCollection<Kistl.App.Base.Constraint> _Constraints;
 
         /// <summary>
         /// Description of this Property
@@ -241,20 +242,14 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: BaseProperty
-*/
-
-
-		internal Dictionary<int, BaseProperty> DataStore = new Dictionary<int, BaseProperty>(0);
+		internal static Dictionary<int, BaseProperty__Implementation__Frozen> DataStore = new Dictionary<int, BaseProperty__Implementation__Frozen>(0);
 		static BaseProperty__Implementation__Frozen()
 		{
 		}
 
-
+		internal static void FillDataStore() {
+	
+		}
 
 #region Serializer
 

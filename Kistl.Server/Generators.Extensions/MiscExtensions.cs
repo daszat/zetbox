@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.Server.GeneratorsOld;
+
+using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Server.Movables;
 
@@ -61,6 +62,14 @@ namespace Kistl.Server.Generators.Extensions
             return String.Format("{0}_{1}{2}CollectionEntry", rel.A.Type.ClassName, rel.A.Navigator.PropertyName, rel.ID);
         }
 
+        /// <summary>
+        /// Support "legacy" non-unique naming scheme
+        /// </summary>
+        public static string GetCollectionEntryTableName(this NewRelation rel, IKistlContext ctx)
+        {
+            return String.Format("{0}_{1}Collection", rel.A.Type.ToObjectClass(ctx).TableName, rel.A.Navigator.PropertyName);
+        }
+
         public static string GetCollectionEntryFullName(this NewRelation rel)
         {
             return String.Format("{0}.{1}", rel.A.Type.Namespace, rel.GetCollectionEntryClassName());
@@ -74,6 +83,16 @@ namespace Kistl.Server.Generators.Extensions
         public static string GetCollectionEntryFullName(this ValueTypeProperty prop)
         {
             return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
+        }
+
+        public static string GetCollectionEntryFkaColumnName(this NewRelation rel)
+        {
+            return "fk_" + rel.A.RoleName;
+        }
+
+        public static string GetCollectionEntryFkbColumnName(this NewRelation rel)
+        {
+            return "fk_" + rel.B.RoleName;
         }
 
         #endregion

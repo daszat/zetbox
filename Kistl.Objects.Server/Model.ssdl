@@ -257,7 +257,7 @@
     B: ZeroOrMore Interface as ImplementsInterfaces (site: B, no Relation, prop ID=105)
     Preferred Storage: Separate
     -->
-    <EntitySet Name="ObjectClass_ImplementsInterfaces29CollectionEntry" EntityType="Model.Store.ObjectClass_ImplementsInterfaces29CollectionEntry" Table="ObjectClass_ImplementsInterfaces29CollectionEntry" />
+    <EntitySet Name="ObjectClass_ImplementsInterfaces29CollectionEntry" EntityType="Model.Store.ObjectClass_ImplementsInterfaces29CollectionEntry" Table="ObjectClasses_ImplementsInterfacesCollection" />
     <AssociationSet Name="FK_ObjectClass_Interface_ObjectClass_29" Association="Model.Store.FK_ObjectClass_Interface_ObjectClass_29" >
       <End Role="ObjectClass" EntitySet="ObjectClass" />
       <End Role="CollectionEntry" EntitySet="ObjectClass_ImplementsInterfaces29CollectionEntry" />
@@ -273,7 +273,7 @@
     B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, from relation ID = 3)
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Projekt_Mitarbeiter3CollectionEntry" EntityType="Model.Store.Projekt_Mitarbeiter3CollectionEntry" Table="Projekt_Mitarbeiter3CollectionEntry" />
+    <EntitySet Name="Projekt_Mitarbeiter3CollectionEntry" EntityType="Model.Store.Projekt_Mitarbeiter3CollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <AssociationSet Name="FK_Projekt_Mitarbeiter_Projekte_3" Association="Model.Store.FK_Projekt_Mitarbeiter_Projekte_3" >
       <End Role="Projekte" EntitySet="Projekt" />
       <End Role="CollectionEntry" EntitySet="Projekt_Mitarbeiter3CollectionEntry" />
@@ -289,7 +289,7 @@
     B: ZeroOrMore Visual as Menu (site: B, no Relation, prop ID=165)
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Template_Menu41CollectionEntry" EntityType="Model.Store.Template_Menu41CollectionEntry" Table="Template_Menu41CollectionEntry" />
+    <EntitySet Name="Template_Menu41CollectionEntry" EntityType="Model.Store.Template_Menu41CollectionEntry" Table="Templates_MenuCollection" />
     <AssociationSet Name="FK_Template_Visual_Template_41" Association="Model.Store.FK_Template_Visual_Template_41" >
       <End Role="Template" EntitySet="Template" />
       <End Role="CollectionEntry" EntitySet="Template_Menu41CollectionEntry" />
@@ -305,7 +305,7 @@
     B: ZeroOrMore TypeRef as GenericArguments (site: B, no Relation, prop ID=207)
     Preferred Storage: Separate
     -->
-    <EntitySet Name="TypeRef_GenericArguments46CollectionEntry" EntityType="Model.Store.TypeRef_GenericArguments46CollectionEntry" Table="TypeRef_GenericArguments46CollectionEntry" />
+    <EntitySet Name="TypeRef_GenericArguments46CollectionEntry" EntityType="Model.Store.TypeRef_GenericArguments46CollectionEntry" Table="TypeRefs_GenericArgumentsCollection" />
     <AssociationSet Name="FK_TypeRef_TypeRef_TypeRef_46" Association="Model.Store.FK_TypeRef_TypeRef_TypeRef_46" >
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="TypeRef_GenericArguments46CollectionEntry" />
@@ -321,7 +321,7 @@
     B: ZeroOrMore Visual as Children (site: B, no Relation, prop ID=151)
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Visual_Children35CollectionEntry" EntityType="Model.Store.Visual_Children35CollectionEntry" Table="Visual_Children35CollectionEntry" />
+    <EntitySet Name="Visual_Children35CollectionEntry" EntityType="Model.Store.Visual_Children35CollectionEntry" Table="Visuals_ChildrenCollection" />
     <AssociationSet Name="FK_Visual_Visual_Visual_35" Association="Model.Store.FK_Visual_Visual_Visual_35" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="CollectionEntry" EntitySet="Visual_Children35CollectionEntry" />
@@ -337,7 +337,7 @@
     B: ZeroOrMore Visual as ContextMenu (site: B, no Relation, prop ID=164)
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Visual_ContextMenu40CollectionEntry" EntityType="Model.Store.Visual_ContextMenu40CollectionEntry" Table="Visual_ContextMenu40CollectionEntry" />
+    <EntitySet Name="Visual_ContextMenu40CollectionEntry" EntityType="Model.Store.Visual_ContextMenu40CollectionEntry" Table="Visuals_ContextMenuCollection" />
     <AssociationSet Name="FK_Visual_Visual_Visual_40" Association="Model.Store.FK_Visual_Visual_Visual_40" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="CollectionEntry" EntitySet="Visual_ContextMenu40CollectionEntry" />
@@ -353,7 +353,7 @@
     B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, no Relation, prop ID=86)
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Zeitkonto_Mitarbeiter22CollectionEntry" EntityType="Model.Store.Zeitkonto_Mitarbeiter22CollectionEntry" Table="Zeitkonto_Mitarbeiter22CollectionEntry" />
+    <EntitySet Name="Zeitkonto_Mitarbeiter22CollectionEntry" EntityType="Model.Store.Zeitkonto_Mitarbeiter22CollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
     <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_22" Association="Model.Store.FK_Zeitkonto_Mitarbeiter_Zeitkonto_22" >
       <End Role="Zeitkonto" EntitySet="Zeitkonto" />
       <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter22CollectionEntry" />
@@ -1107,8 +1107,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
-    <Property Name="fk_B" Type="int" Nullable="true" />
+    <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
+    <Property Name="fk_ImplementsInterfaces" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1120,7 +1120,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1134,7 +1134,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="fk_ImplementsInterfaces" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1145,10 +1145,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
-    <Property Name="AIndex" Type="int" Nullable="true" />
-    <Property Name="fk_B" Type="int" Nullable="true" />
-    <Property Name="BIndex" Type="int" Nullable="true" />
+    <Property Name="fk_Projekte" Type="int" Nullable="true" />
+    <Property Name="fk_Projekte_pos" Type="int" Nullable="true" />
+    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
+    <Property Name="fk_Mitarbeiter_pos" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1160,7 +1160,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="fk_Projekte" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1174,7 +1174,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1185,8 +1185,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
-    <Property Name="fk_B" Type="int" Nullable="true" />
+    <Property Name="fk_Template" Type="int" Nullable="true" />
+    <Property Name="fk_Menu" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1198,7 +1198,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="fk_Template" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1212,7 +1212,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="fk_Menu" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1223,9 +1223,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
-    <Property Name="fk_B" Type="int" Nullable="true" />
-    <Property Name="BIndex" Type="int" Nullable="true" />
+    <Property Name="fk_TypeRef" Type="int" Nullable="true" />
+    <Property Name="fk_GenericArguments" Type="int" Nullable="true" />
+    <Property Name="fk_GenericArguments_pos" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1237,7 +1237,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="fk_TypeRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1251,7 +1251,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="fk_GenericArguments" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1262,8 +1262,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
-    <Property Name="fk_B" Type="int" Nullable="true" />
+    <Property Name="fk_Visual" Type="int" Nullable="true" />
+    <Property Name="fk_Children" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1275,7 +1275,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="fk_Visual" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1289,7 +1289,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="fk_Children" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1300,8 +1300,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
-    <Property Name="fk_B" Type="int" Nullable="true" />
+    <Property Name="fk_Visual" Type="int" Nullable="true" />
+    <Property Name="fk_ContextMenu" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1313,7 +1313,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="fk_Visual" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1327,7 +1327,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="fk_ContextMenu" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1338,8 +1338,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" Nullable="true" />
-    <Property Name="fk_B" Type="int" Nullable="true" />
+    <Property Name="fk_Zeitkonto" Type="int" Nullable="true" />
+    <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1351,7 +1351,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_A" />
+        <PropertyRef Name="fk_Zeitkonto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1365,7 +1365,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_B" />
+        <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

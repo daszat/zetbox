@@ -149,20 +149,82 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: Relation
-*/
-
-
-		internal Dictionary<int, Relation> DataStore = new Dictionary<int, Relation>(0);
+		internal static Dictionary<int, Relation__Implementation__Frozen> DataStore = new Dictionary<int, Relation__Implementation__Frozen>(17);
 		static Relation__Implementation__Frozen()
 		{
+			DataStore[1] = new Relation__Implementation__Frozen(null, 1);
+
+			DataStore[2] = new Relation__Implementation__Frozen(null, 2);
+
+			DataStore[3] = new Relation__Implementation__Frozen(null, 3);
+
+			DataStore[4] = new Relation__Implementation__Frozen(null, 4);
+
+			DataStore[5] = new Relation__Implementation__Frozen(null, 5);
+
+			DataStore[6] = new Relation__Implementation__Frozen(null, 6);
+
+			DataStore[8] = new Relation__Implementation__Frozen(null, 8);
+
+			DataStore[9] = new Relation__Implementation__Frozen(null, 9);
+
+			DataStore[10] = new Relation__Implementation__Frozen(null, 10);
+
+			DataStore[11] = new Relation__Implementation__Frozen(null, 11);
+
+			DataStore[12] = new Relation__Implementation__Frozen(null, 12);
+
+			DataStore[13] = new Relation__Implementation__Frozen(null, 13);
+
+			DataStore[14] = new Relation__Implementation__Frozen(null, 14);
+
+			DataStore[15] = new Relation__Implementation__Frozen(null, 15);
+
+			DataStore[16] = new Relation__Implementation__Frozen(null, 16);
+
+			DataStore[17] = new Relation__Implementation__Frozen(null, 17);
+
+			DataStore[18] = new Relation__Implementation__Frozen(null, 18);
+
 		}
 
-
+		internal static void FillDataStore() {
+			DataStore[1].Storage = StorageType.Left;
+			DataStore[1].Description = null;
+			DataStore[2].Storage = StorageType.Left;
+			DataStore[2].Description = null;
+			DataStore[3].Storage = StorageType.Right;
+			DataStore[3].Description = null;
+			DataStore[4].Storage = StorageType.Left;
+			DataStore[4].Description = null;
+			DataStore[5].Storage = StorageType.Left;
+			DataStore[5].Description = null;
+			DataStore[6].Storage = StorageType.Left;
+			DataStore[6].Description = null;
+			DataStore[8].Storage = StorageType.Left;
+			DataStore[8].Description = null;
+			DataStore[9].Storage = StorageType.Left;
+			DataStore[9].Description = null;
+			DataStore[10].Storage = StorageType.Left;
+			DataStore[10].Description = null;
+			DataStore[11].Storage = StorageType.Left;
+			DataStore[11].Description = null;
+			DataStore[12].Storage = StorageType.Left;
+			DataStore[12].Description = null;
+			DataStore[13].Storage = StorageType.Left;
+			DataStore[13].Description = null;
+			DataStore[14].Storage = StorageType.Left;
+			DataStore[14].Description = null;
+			DataStore[15].Storage = StorageType.Left;
+			DataStore[15].Description = null;
+			DataStore[16].Storage = StorageType.Left;
+			DataStore[16].Description = null;
+			DataStore[17].Storage = StorageType.Left;
+			DataStore[17].Description = null;
+			DataStore[18].Storage = StorageType.Left;
+			DataStore[18].Description = null;
+	
+		}
 
 #region Serializer
 

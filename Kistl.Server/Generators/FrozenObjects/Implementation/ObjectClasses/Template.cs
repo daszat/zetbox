@@ -38,12 +38,22 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
         {
             if (this.ObjectClass.BaseObjectClass != null)
             {
-                return MungeClassName(base.GetBaseClass());
+                return this.ObjectClass.BaseObjectClass.Module.Namespace + "." + Template.GetClassName(this.ObjectClass.BaseObjectClass);
             }
             else
             {
                 return "BaseFrozenDataObject";
             }
+        }
+
+        protected override void ApplyListProperty(Property prop, Templates.Implementation.SerializationMembersList serList)
+        {
+            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
+                 serList,
+                 this.DataType,
+                 prop.GetPropertyType(),
+                 prop.PropertyName,
+                 prop);
         }
 
         protected override void ApplyClassTailTemplate()
@@ -55,8 +65,9 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             this.WriteObjects("            : base(ctx, id)");
             this.WriteLine();
             this.WriteLine("        { }");
-         
-            if (this.ObjectClass.IsFrozenObject)
+
+            // TODO: IsFrozen should be set if BaseClass.IsFrozen is set
+            if (this.ObjectClass.IsFrozenObject || this.ObjectClass.GetRootClass().IsFrozenObject)
             {
                 this.Host.CallTemplate("Implementation.ObjectClasses.DataStore", ctx, this.ObjectClass);
             }

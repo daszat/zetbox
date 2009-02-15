@@ -78,9 +78,9 @@
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.Interface.csproj">
+    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects %28Kistl.Objects\Kistl.Objects%29</Name>
+      <Name>Kistl.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

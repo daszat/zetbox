@@ -17,7 +17,8 @@ namespace Kistl.Server.Generators.FrozenObjects
 
         protected override string Generate_ObjectClass(Kistl.API.IKistlContext ctx, ObjectClass objClass)
         {
-            if (objClass.IsFrozenObject)
+            // TODO: IsFrozen should be set if BaseClass.IsFrozen is set
+            if (objClass.IsFrozenObject || objClass.GetRootClass().IsFrozenObject)
                 return base.Generate_ObjectClass(ctx, objClass);
             else
                 return null;

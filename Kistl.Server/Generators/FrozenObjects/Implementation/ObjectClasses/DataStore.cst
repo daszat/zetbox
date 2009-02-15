@@ -17,39 +17,57 @@
 	var testList = ctx.GetQuery(typeof(ObjectClass)).ToList();
 	
 	// list of all instances of exactly this class
-	// var instanceList = new List<ObjectClass>();
 	var instanceList = ctx.GetQuery(t)
 	    .ToList()
 	    .Where(o => o.GetObjectClass(ctx) == cls);
-	/*
-	*/
 %>
 
 
-		internal static Dictionary<int, <%= cls.ClassName %>> DataStore = new Dictionary<int, <%= cls.ClassName %>>(<%= instanceList.Count() %>);
-		static <%= cls.ClassName %><%= Kistl.API.Helper.ImplementationSuffix %>Frozen()
+		internal <%= cls.BaseObjectClass == null ? "" : "new " %>static Dictionary<int, <%= Template.GetClassName(cls) %>> DataStore = new Dictionary<int, <%= Template.GetClassName(cls) %>>(<%= instanceList.Count() %>);
+		static <%= Template.GetClassName(cls) %>()
 		{
 <%
 
 	string classname = Template.GetClassName(cls);
 	foreach(var obj in instanceList) 
 	{
+		// store inherited objects also in base class' DataStore to short-circuit polymorphic queries.
+		var baseCls = cls.BaseObjectClass;
+		var parents = new List<ObjectClass>();
+		while (baseCls != null)
+		{
+			parents.Add(baseCls);
+			baseCls = baseCls.BaseObjectClass;
+		}
+		// to get "right" type order, the root class has to be the "left-most", i.e. first, assigned one
+		parents.Reverse();
+		foreach(var parent in parents)
+		{
+%>
+			<%= parent.Module.Namespace %>.<%= Template.GetClassName(parent) %>.DataStore[<%= obj.ID %>] = 
+<%
+		}
 %>
 			DataStore[<%= obj.ID %>] = new <%= classname %>(null, <%= obj.ID %>);
+
 <%
 	}
 %>
 		}
 
-		internal static void FillDataStore() {
+		internal <%= cls.BaseObjectClass == null ? "" : "new " %>static void FillDataStore() {
 <%
 	foreach(var obj in instanceList) 
 	{
-		foreach(var prop in cls.Properties)
+		foreach(var prop in cls.Properties.Cast<Property>())
 		{
+			string value = GetPropertyValueAsCSharp(obj, prop);
+			if (!String.IsNullOrEmpty(value))
+			{
 %>
-			DataStore[<%= obj.ID %>].<%= prop.PropertyName %> = <%= "null"/* obj.GetPropertyValue<int>(prop.PropertyName).ToCSharpValue() */ %>;
+			DataStore[<%= obj.ID %>].<%= prop.PropertyName %> = <%= value %>;
 <%
+			}
 		}
 	}
 %>

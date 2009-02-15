@@ -72,16 +72,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public virtual bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+		public virtual bool IsValid(System.Object constrainedObj, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_Constraint != null)
             {
-                OnIsValid_Constraint(this, e, constrainedValue, constrainedObj);
+                OnIsValid_Constraint(this, e, constrainedObj, constrainedValue);
             };
             return e.Result;
         }
-		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedValue, System.Object constrainedObj);
+		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedObj, System.Object constrainedValue);
 		public event IsValid_Handler<Constraint> OnIsValid_Constraint;
 
 
@@ -90,16 +90,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public virtual string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
+		public virtual string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e, constrainedValue, constrainedObject);
+                OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
             };
             return e.Result;
         }
-		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedValue, System.Object constrainedObject);
+		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedObject, System.Object constrainedValue);
 		public event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
 
 
@@ -139,20 +139,14 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: Constraint
-*/
-
-
-		internal Dictionary<int, Constraint> DataStore = new Dictionary<int, Constraint>(0);
+		internal static Dictionary<int, Constraint__Implementation__Frozen> DataStore = new Dictionary<int, Constraint__Implementation__Frozen>(0);
 		static Constraint__Implementation__Frozen()
 		{
 		}
 
-
+		internal static void FillDataStore() {
+	
+		}
 
 #region Serializer
 

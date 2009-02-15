@@ -23,29 +23,6 @@ namespace Kistl.App.Test
 
 
         /// <summary>
-        /// Enter a Number
-        /// </summary>
-        // value type property
-        public virtual string Number
-        {
-            get
-            {
-                return _Number;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Number != value)
-                {
-                    NotifyPropertyChanging("Number");
-                    _Number = value;
-                    NotifyPropertyChanged("Number");;
-                }
-            }
-        }
-        private string _Number;
-
-        /// <summary>
         /// Enter Area Code
         /// </summary>
         // value type property
@@ -67,6 +44,29 @@ namespace Kistl.App.Test
             }
         }
         private string _AreaCode;
+
+        /// <summary>
+        /// Enter a Number
+        /// </summary>
+        // value type property
+        public virtual string Number
+        {
+            get
+            {
+                return _Number;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Number != value)
+                {
+                    NotifyPropertyChanging("Number");
+                    _Number = value;
+                    NotifyPropertyChanged("Number");;
+                }
+            }
+        }
+        private string _Number;
         internal TestPhoneStruct__Implementation__(FrozenContext ctx, int id)
             : base(ctx, id)
         { }

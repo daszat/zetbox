@@ -143,20 +143,49 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: Assembly
-*/
-
-
-		internal Dictionary<int, Assembly> DataStore = new Dictionary<int, Assembly>(0);
+		internal static Dictionary<int, Assembly__Implementation__Frozen> DataStore = new Dictionary<int, Assembly__Implementation__Frozen>(7);
 		static Assembly__Implementation__Frozen()
 		{
+			DataStore[1] = new Assembly__Implementation__Frozen(null, 1);
+
+			DataStore[2] = new Assembly__Implementation__Frozen(null, 2);
+
+			DataStore[3] = new Assembly__Implementation__Frozen(null, 3);
+
+			DataStore[4] = new Assembly__Implementation__Frozen(null, 4);
+
+			DataStore[13] = new Assembly__Implementation__Frozen(null, 13);
+
+			DataStore[14] = new Assembly__Implementation__Frozen(null, 14);
+
+			DataStore[15] = new Assembly__Implementation__Frozen(null, 15);
+
 		}
 
-
+		internal static void FillDataStore() {
+			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[1].AssemblyName = @"Kistl.App.Projekte.Client";
+			DataStore[1].IsClientAssembly = true;
+			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[2].AssemblyName = @"Kistl.App.Projekte.Server";
+			DataStore[2].IsClientAssembly = false;
+			DataStore[3].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[3].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0";
+			DataStore[3].IsClientAssembly = false;
+			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[4].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0";
+			DataStore[4].IsClientAssembly = false;
+			DataStore[13].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[13].AssemblyName = @"Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[13].IsClientAssembly = false;
+			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[14].AssemblyName = @"Kistl.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[14].IsClientAssembly = false;
+			DataStore[15].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[15].AssemblyName = @"Kistl.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[15].IsClientAssembly = false;
+	
+		}
 
 #region Serializer
 

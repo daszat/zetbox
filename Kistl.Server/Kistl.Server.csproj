@@ -289,7 +289,7 @@
       <Name>Kistl.API</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.Interface.csproj">
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
       <Private>False</Private>
@@ -518,11 +518,15 @@
     <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
+    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cs">
+      <DependentUpon>DataStore.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataStore.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\ListProperty.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\SerializerTemplate.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\Template.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\ProjectFile.cs" />

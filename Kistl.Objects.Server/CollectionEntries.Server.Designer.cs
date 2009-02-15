@@ -377,24 +377,24 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public virtual int? B__Position__
+        public virtual int? B_pos
         {
             get
             {
-                return _B__Position__;
+                return _B_pos;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_B__Position__ != value)
+                if (_B_pos != value)
                 {
-                    NotifyPropertyChanging("B__Position__");
-                    _B__Position__ = value;
-                    NotifyPropertyChanged("B__Position__");;
+                    NotifyPropertyChanging("B_pos");
+                    _B_pos = value;
+                    NotifyPropertyChanged("B_pos");;
                 }
             }
         }
-        private int? _B__Position__;
+        private int? _B_pos;
         
 
 
@@ -407,7 +407,7 @@ public int? AIndex { get { return null; } set { } }
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-public int? BIndex { get { return B__Position__; } set { B__Position__ = value; } }
+public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
@@ -416,8 +416,8 @@ public int? BIndex { get { return B__Position__; } set { B__Position__ = value; 
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
-            BinarySerializer.ToStream(this._B__Position__, binStream);
-            BinarySerializer.ToStream(this._B__Position__, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -425,8 +425,8 @@ public int? BIndex { get { return B__Position__; } set { B__Position__ = value; 
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
-            BinarySerializer.FromStream(out this._B__Position__, binStream);
-            BinarySerializer.FromStream(out this._B__Position__, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
 #endregion
@@ -1121,24 +1121,24 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public virtual int? A__Position__
+        public virtual int? A_pos
         {
             get
             {
-                return _A__Position__;
+                return _A_pos;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_A__Position__ != value)
+                if (_A_pos != value)
                 {
-                    NotifyPropertyChanging("A__Position__");
-                    _A__Position__ = value;
-                    NotifyPropertyChanged("A__Position__");;
+                    NotifyPropertyChanging("A_pos");
+                    _A_pos = value;
+                    NotifyPropertyChanged("A_pos");;
                 }
             }
         }
-        private int? _A__Position__;
+        private int? _A_pos;
         
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -1214,24 +1214,24 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public virtual int? B__Position__
+        public virtual int? B_pos
         {
             get
             {
-                return _B__Position__;
+                return _B_pos;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_B__Position__ != value)
+                if (_B_pos != value)
                 {
-                    NotifyPropertyChanging("B__Position__");
-                    _B__Position__ = value;
-                    NotifyPropertyChanged("B__Position__");;
+                    NotifyPropertyChanging("B_pos");
+                    _B_pos = value;
+                    NotifyPropertyChanged("B_pos");;
                 }
             }
         }
-        private int? _B__Position__;
+        private int? _B_pos;
         
 
 
@@ -1239,11 +1239,11 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Index into the A-side list of this relation
         /// </summary>
-public int? AIndex { get { return A__Position__; } set { A__Position__ = value; } }
+public int? AIndex { get { return A_pos; } set { A_pos = value; } }
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-public int? BIndex { get { return B__Position__; } set { B__Position__ = value; } }
+public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
@@ -1251,22 +1251,22 @@ public int? BIndex { get { return B__Position__; } set { B__Position__ = value; 
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_A, binStream);
-            BinarySerializer.ToStream(this._A__Position__, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
-            BinarySerializer.ToStream(this._B__Position__, binStream);
-            BinarySerializer.ToStream(this._A__Position__, binStream);
-            BinarySerializer.ToStream(this._B__Position__, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._A__Position__, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
-            BinarySerializer.FromStream(out this._B__Position__, binStream);
-            BinarySerializer.FromStream(out this._A__Position__, binStream);
-            BinarySerializer.FromStream(out this._B__Position__, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
 #endregion

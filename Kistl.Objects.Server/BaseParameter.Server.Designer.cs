@@ -152,24 +152,24 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public virtual int? Method__Position__
+        public virtual int? Method_pos
         {
             get
             {
-                return _Method__Position__;
+                return _Method_pos;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Method__Position__ != value)
+                if (_Method_pos != value)
                 {
-                    NotifyPropertyChanging("Method__Position__");
-                    _Method__Position__ = value;
-                    NotifyPropertyChanged("Method__Position__");;
+                    NotifyPropertyChanging("Method_pos");
+                    _Method_pos = value;
+                    NotifyPropertyChanged("Method_pos");;
                 }
             }
         }
-        private int? _Method__Position__;
+        private int? _Method_pos;
         
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ParameterName, binStream);
             BinarySerializer.ToStream(this._fk_Method, binStream);
-            BinarySerializer.ToStream(this._Method__Position__, binStream);
+            BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsReturnParameter, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
@@ -337,7 +337,7 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._ParameterName, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
-            BinarySerializer.FromStream(out this._Method__Position__, binStream);
+            BinarySerializer.FromStream(out this._Method_pos, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);

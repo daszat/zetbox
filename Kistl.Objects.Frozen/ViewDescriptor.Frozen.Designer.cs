@@ -126,20 +126,14 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: ViewDescriptor
-*/
-
-
-		internal Dictionary<int, ViewDescriptor> DataStore = new Dictionary<int, ViewDescriptor>(0);
+		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(0);
 		static ViewDescriptor__Implementation__Frozen()
 		{
 		}
 
-
+		internal static void FillDataStore() {
+	
+		}
 
 #region Serializer
 

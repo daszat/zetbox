@@ -36,6 +36,8 @@
         .Where(r => r.GetPreferredStorage() == StorageHint.Separate)
         .OrderBy(r => r.GetAssociationName()))
 	{
+		string fkAName = rel.GetCollectionEntryFkaColumnName();
+		string fkBName = rel.GetCollectionEntryFkbColumnName();
 %>
     <!--
 <%
@@ -50,14 +52,14 @@
 	if (rel.A.HasPersistentOrder)
 	{
 %>
-          <ScalarProperty Name="A<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="AIndex" />
+          <ScalarProperty Name="A<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkAName %><%= Kistl.API.Helper.PositionSuffix %>" />
 <%
 	}
 
 	if (rel.B.HasPersistentOrder)
 	{
 %>
-          <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
+          <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkBName %><%= Kistl.API.Helper.PositionSuffix %>" />
 <%
 	}
 %>
@@ -69,24 +71,24 @@
                            TypeName="Model.<%= rel.GetCollectionEntryAssociationName(rel.A) %>"
                            StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= rel.A.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_A"/>
+        <ScalarProperty Name="ID" ColumnName="<%= fkAName %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_A" IsNull="false"/>
+      <Condition ColumnName="<%= fkAName %>" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
                            TypeName="Model.<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
                            StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= rel.B.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_B"/>
+        <ScalarProperty Name="ID" ColumnName="<%= fkBName %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_B" IsNull="false"/>
+      <Condition ColumnName="<%= fkBName %>" IsNull="false"/>
     </AssociationSetMapping>
 
 <%

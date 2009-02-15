@@ -330,7 +330,7 @@
                         Relationship="Model.FK_Method_BaseParameter_Method_24"
                         FromRole="Parameter"
                         ToRole="Method" />
-    <Property Name="Method__Position__" Type="Int32" Nullable="true" />
+    <Property Name="Method_pos" Type="Int32" Nullable="true" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsReturnParameter" Type="Boolean" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
@@ -943,14 +943,14 @@
                         Relationship="Model.FK_Projekt_Mitarbeiter_Projekte_3"
                         FromRole="CollectionEntry"
                         ToRole="Projekte" />
-    <Property Name="A__Position__" Type="Int32" Nullable="false" />
+    <Property Name="A_pos" Type="Int32" Nullable="false" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
                         Relationship="Model.FK_Projekt_Mitarbeiter_Mitarbeiter_3"
                         FromRole="CollectionEntry"
                         ToRole="Mitarbeiter" />
-    <Property Name="B__Position__" Type="Int32" Nullable="false" />
+    <Property Name="B_pos" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_Projekt_Mitarbeiter_Projekte_3" >
     <End Role="Projekte"
@@ -1033,7 +1033,7 @@
                         Relationship="Model.FK_TypeRef_TypeRef_GenericArguments_46"
                         FromRole="CollectionEntry"
                         ToRole="GenericArguments" />
-    <Property Name="B__Position__" Type="Int32" Nullable="false" />
+    <Property Name="B_pos" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_TypeRef_TypeRef_TypeRef_46" >
     <End Role="TypeRef"

@@ -208,20 +208,14 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: BaseParameter
-*/
-
-
-		internal Dictionary<int, BaseParameter> DataStore = new Dictionary<int, BaseParameter>(0);
+		internal static Dictionary<int, BaseParameter__Implementation__Frozen> DataStore = new Dictionary<int, BaseParameter__Implementation__Frozen>(0);
 		static BaseParameter__Implementation__Frozen()
 		{
 		}
 
-
+		internal static void FillDataStore() {
+	
+		}
 
 #region Serializer
 

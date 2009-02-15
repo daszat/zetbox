@@ -54,11 +54,12 @@ namespace Kistl.App.Base
             get
             {
                 if (_Properties == null)
-                    _Properties = new List<Kistl.App.Base.BaseProperty>();
+                    _Properties = new ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0));
                 return _Properties;
             }
+internal set { _Properties = (ReadOnlyCollection<Kistl.App.Base.BaseProperty>)value; }
         }
-        private ICollection<Kistl.App.Base.BaseProperty> _Properties;
+        private ReadOnlyCollection<Kistl.App.Base.BaseProperty> _Properties;
 
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
@@ -69,11 +70,12 @@ namespace Kistl.App.Base
             get
             {
                 if (_Methods == null)
-                    _Methods = new List<Kistl.App.Base.Method>();
+                    _Methods = new ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0));
                 return _Methods;
             }
+internal set { _Methods = (ReadOnlyCollection<Kistl.App.Base.Method>)value; }
         }
-        private ICollection<Kistl.App.Base.Method> _Methods;
+        private ReadOnlyCollection<Kistl.App.Base.Method> _Methods;
 
         /// <summary>
         /// Modul der Objektklasse
@@ -130,11 +132,12 @@ namespace Kistl.App.Base
             get
             {
                 if (_MethodInvocations == null)
-                    _MethodInvocations = new List<Kistl.App.Base.MethodInvocation>();
+                    _MethodInvocations = new ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0));
                 return _MethodInvocations;
             }
+internal set { _MethodInvocations = (ReadOnlyCollection<Kistl.App.Base.MethodInvocation>)value; }
         }
-        private ICollection<Kistl.App.Base.MethodInvocation> _MethodInvocations;
+        private ReadOnlyCollection<Kistl.App.Base.MethodInvocation> _MethodInvocations;
 
         /// <summary>
         /// Description of this DataType
@@ -230,20 +233,14 @@ namespace Kistl.App.Base
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.Base
-CN: DataType
-*/
-
-
-		internal Dictionary<int, DataType> DataStore = new Dictionary<int, DataType>(0);
+		internal static Dictionary<int, DataType__Implementation__Frozen> DataStore = new Dictionary<int, DataType__Implementation__Frozen>(0);
 		static DataType__Implementation__Frozen()
 		{
 		}
 
-
+		internal static void FillDataStore() {
+	
+		}
 
 #region Serializer
 

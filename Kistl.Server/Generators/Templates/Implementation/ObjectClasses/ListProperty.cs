@@ -1,8 +1,8 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.CodeDom;
 
 using Kistl.Server.Generators.Extensions;
 
@@ -23,6 +23,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected virtual string BackingMemberFromName(string name)
         {
             return "_" + name;
+        }
+
+        protected virtual void ApplySettor()
+        {
         }
 
         protected virtual void AddSerialization(SerializationMembersList list, string name)

@@ -80,20 +80,53 @@ namespace Kistl.App.GUI
         { }
 
 
-
-/*
-DTS: 
-NS: Kistl.App.GUI
-CN: Icon
-*/
-
-
-		internal Dictionary<int, Icon> DataStore = new Dictionary<int, Icon>(0);
+		internal static Dictionary<int, Icon__Implementation__Frozen> DataStore = new Dictionary<int, Icon__Implementation__Frozen>(13);
 		static Icon__Implementation__Frozen()
 		{
+			DataStore[1] = new Icon__Implementation__Frozen(null, 1);
+
+			DataStore[2] = new Icon__Implementation__Frozen(null, 2);
+
+			DataStore[3] = new Icon__Implementation__Frozen(null, 3);
+
+			DataStore[4] = new Icon__Implementation__Frozen(null, 4);
+
+			DataStore[5] = new Icon__Implementation__Frozen(null, 5);
+
+			DataStore[6] = new Icon__Implementation__Frozen(null, 6);
+
+			DataStore[7] = new Icon__Implementation__Frozen(null, 7);
+
+			DataStore[8] = new Icon__Implementation__Frozen(null, 8);
+
+			DataStore[9] = new Icon__Implementation__Frozen(null, 9);
+
+			DataStore[10] = new Icon__Implementation__Frozen(null, 10);
+
+			DataStore[11] = new Icon__Implementation__Frozen(null, 11);
+
+			DataStore[12] = new Icon__Implementation__Frozen(null, 12);
+
+			DataStore[13] = new Icon__Implementation__Frozen(null, 13);
+
 		}
 
-
+		internal static void FillDataStore() {
+			DataStore[1].IconFile = @"app.ico";
+			DataStore[2].IconFile = @"Code_ClassCS.ico";
+			DataStore[3].IconFile = @"VSProject_genericproject.ico";
+			DataStore[4].IconFile = @"Resource_Bitmap.ico";
+			DataStore[5].IconFile = @"user.ico";
+			DataStore[6].IconFile = @"users.ico";
+			DataStore[7].IconFile = @"propertiesORoptions.ico";
+			DataStore[8].IconFile = @"UtilityText.ico";
+			DataStore[9].IconFile = @"otheroptions.ico";
+			DataStore[10].IconFile = @"cab.ico";
+			DataStore[11].IconFile = @"Code_Component.ico";
+			DataStore[12].IconFile = @"document.ico";
+			DataStore[13].IconFile = @"idr_dll.ico";
+	
+		}
 
 #region Serializer
 

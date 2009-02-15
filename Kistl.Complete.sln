@@ -65,9 +65,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NET", "ASP.NET", "{ACDA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{9B65F71F-98A5-4744-B45F-9C5D99F99D23}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kistl.Objects", "Kistl.Objects", "{70BC8B82-94AE-4823-85FF-B3FEDFD60F32}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generated Code", "Generated Code", "{70BC8B82-94AE-4823-85FF-B3FEDFD60F32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Interface", "Kistl.Objects\Kistl.Objects.Interface.csproj", "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects", "Kistl.Objects\Kistl.Objects.csproj", "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DALProvider.EF", "Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
 EndProject
