@@ -188,8 +188,7 @@ namespace Kistl.App.Base
 			DataStore[110].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[110].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
-})
-;
+});
 			DataStore[110].Description = @"Test Enumeration Property";
 			DataStore[110].IsList = false;
 			DataStore[110].IsNullable = false;
@@ -201,8 +200,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
 			DataStore[111].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[111].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
-})
-;
+});
 			DataStore[111].Description = @"Test Enum Property";
 			DataStore[111].IsList = false;
 			DataStore[111].IsNullable = false;
@@ -214,8 +212,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
 			DataStore[113].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[113].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
-})
-;
+});
 			DataStore[113].Description = @"The Toolkit used by this Renderer";
 			DataStore[113].IsList = false;
 			DataStore[113].IsNullable = false;
@@ -227,8 +224,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
 			DataStore[117].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[117].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
-})
-;
+});
 			DataStore[117].Description = @"The toolkit of this Control.";
 			DataStore[117].IsList = false;
 			DataStore[117].IsNullable = false;
@@ -240,8 +236,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
 			DataStore[118].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[118].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
-})
-;
+});
 			DataStore[118].Description = @"The type of Control of this implementation";
 			DataStore[118].IsList = false;
 			DataStore[118].IsNullable = false;
@@ -253,8 +248,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
 			DataStore[137].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[137].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
-})
-;
+});
 			DataStore[137].Description = @"which controls are handled by this Presenter";
 			DataStore[137].IsList = false;
 			DataStore[137].IsNullable = false;
@@ -266,8 +260,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
 			DataStore[150].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[150].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
-})
-;
+});
 			DataStore[150].Description = @"Which visual is represented here";
 			DataStore[150].IsList = false;
 			DataStore[150].IsNullable = false;
@@ -278,8 +271,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[183].AltText = @"Storagetype for 1:1 Relations";
 			DataStore[183].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[183].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[183].Description = @"Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.";
 			DataStore[183].IsList = false;
 			DataStore[183].IsNullable = true;
@@ -291,8 +283,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[210].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[210].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
-})
-;
+});
 			DataStore[210].Description = null;
 			DataStore[210].IsList = false;
 			DataStore[210].IsNullable = false;

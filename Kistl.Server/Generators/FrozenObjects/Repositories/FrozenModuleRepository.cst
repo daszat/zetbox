@@ -7,39 +7,49 @@
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
-<%@ Parameter Name="modules" Type="List<Module>" %>
+<%@ Parameter Name="modulesWithFrozenClasses" Type="List<Module>" %>
 using Kistl.API;
 
-namespace Kistl.App.Frozen
+namespace Kistl.App
 {
 
-	public class ModuleRepository
+	public class FrozenModuleRepository
 	{
-		public ModuleRepository(IKistlContext ctx)
+		public FrozenModuleRepository()
 		{
-			this.Context = ctx;
 		}
 		
-		public IKistlContext Context { get; private set; }
-	
 <%
-	// only generate modules with frozen classes
-	foreach(var module in modules.Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject) ))
+	
+	foreach(var module in modulesWithFrozenClasses)
 	{
 %>
-		/// <summary>Repository for <%= module.ModuleName %></summary>
+		/// <summary>Frozen Repository for <%= module.ModuleName %></summary>
 		/// <%= module.Description %>
-		public <%= module.Namespace %>.<%= module.ModuleName %>Repository <%= module.ModuleName %>
+		public <%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository <%= module.ModuleName %>
 		{
 			get
 			{
-				return new <%= module.Namespace %>.<%= module.ModuleName %>Repository(Context);
+				return new <%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository();
 			}
 		}
 		
 <%
 	}
 %>
+
+		static FrozenModuleRepository()
+		{
+<%
+	// only fill data stores with frozen classes
+	foreach(var module in modulesWithFrozenClasses)
+	{
+%>
+				<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.FillDataStore();
+<%
+	}
+%>
+		}
 	
 	}
 	

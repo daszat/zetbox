@@ -77,7 +77,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                             {
                                 sb.AppendFormat("{0}.DataStore[{1}],\n", referencedType, item.ID);
                             }
-                            sb.AppendLine("})");
+                            sb.Append("})");
                             return sb.ToString();
                         }
                         else

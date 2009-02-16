@@ -24,7 +24,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Repositories
         {
 #line 11 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 string classname = "Frozen" + module.ModuleName + "Repository";
-
+	var frozenClasses = module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject);
 
 #line 14 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("using System;\r\n");
@@ -36,35 +36,44 @@ this.WriteObjects("\r\n");
 this.WriteObjects("namespace ",  module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("	public class ",  classname , "\r\n");
+this.WriteObjects("	public static class ",  classname , "\r\n");
 this.WriteObjects("	{\r\n");
-this.WriteObjects("		public ",  classname , "(IKistlContext ctx)\r\n");
-this.WriteObjects("		{\r\n");
-this.WriteObjects("			this.Context = ctx;\r\n");
-this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
-this.WriteObjects("		public IKistlContext Context { get; private set; }\r\n");
-this.WriteObjects("		\r\n");
-#line 33 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
-foreach(var cls in module.DataTypes.OfType<ObjectClass>())
+#line 27 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+foreach(var cls in frozenClasses)
 	{
+		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 
-#line 36 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
-this.WriteObjects("		/// <summary>List of all ",  cls.ClassName , "</summary>\r\n");
+#line 31 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+this.WriteObjects("		/// <summary>Frozen List of all ",  cls.ClassName , "</summary>\r\n");
 this.WriteObjects("		/// ",  cls.Description , "\r\n");
-this.WriteObjects("		public IQueryable<",  cls.ClassName , "> ",  cls.TableName , "\r\n");
+this.WriteObjects("		public static IQueryable<",  cls.ClassName , "> ",  cls.TableName , "\r\n");
 this.WriteObjects("		{ \r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
-this.WriteObjects("				return Context.GetQuery<",  cls.ClassName , ">();\r\n");
+this.WriteObjects("				return ",  implementationName , ".DataStore.Values.AsQueryable().Cast<",  cls.ClassName , ">();\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
-#line 47 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 42 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 }
 
-#line 49 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
-this.WriteObjects("	\r\n");
+#line 44 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("		internal static void FillDataStore()\r\n");
+this.WriteObjects("		{\r\n");
+#line 48 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+foreach(var cls in frozenClasses)
+	{
+		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
+
+#line 52 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+this.WriteObjects("				",  implementationName , ".FillDataStore();\r\n");
+#line 54 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+}
+
+#line 56 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+this.WriteObjects("		}\r\n");
 this.WriteObjects("	}\r\n");
 this.WriteObjects("	\r\n");
 this.WriteObjects("}");

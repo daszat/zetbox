@@ -149,8 +149,7 @@ namespace Kistl.App.Base
 			DataStore[18].AltText = @"Aufwand in Stunden";
 			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[18].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[18].Description = @"Aufwand in Stunden";
 			DataStore[18].IsList = false;
 			DataStore[18].IsNullable = true;
@@ -161,8 +160,7 @@ namespace Kistl.App.Base
 			DataStore[23].AltText = null;
 			DataStore[23].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[23].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[23].Description = null;
 			DataStore[23].IsList = false;
 			DataStore[23].IsNullable = true;
@@ -174,8 +172,7 @@ namespace Kistl.App.Base
 			DataStore[57].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[57].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
-})
-;
+});
 			DataStore[57].Description = @"Dauer in Stunden";
 			DataStore[57].IsList = false;
 			DataStore[57].IsNullable = false;
@@ -186,8 +183,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
 			DataStore[65].AltText = @"Wert in EUR des Auftrages";
 			DataStore[65].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[65].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[65].Description = @"Wert in EUR des Auftrages";
 			DataStore[65].IsList = false;
 			DataStore[65].IsNullable = true;
@@ -198,8 +194,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
 			DataStore[89].AltText = @"Maximal erlaubte Stundenanzahl";
 			DataStore[89].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[89].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[89].Description = @"Maximal erlaubte Stundenanzahl";
 			DataStore[89].IsList = false;
 			DataStore[89].IsNullable = true;
@@ -210,8 +205,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
 			DataStore[90].AltText = @"Aktuell gebuchte Stunden";
 			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[90].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[90].Description = @"Aktuell gebuchte Stunden";
 			DataStore[90].IsList = false;
 			DataStore[90].IsNullable = true;

@@ -156,8 +156,7 @@ namespace Kistl.App.Base
 			DataStore[28].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
-})
-;
+});
 			DataStore[28].Description = null;
 			DataStore[28].IsList = false;
 			DataStore[28].IsNullable = false;
@@ -168,8 +167,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[126].AltText = @"test";
 			DataStore[126].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[126].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[126].Description = @"test";
 			DataStore[126].IsList = false;
 			DataStore[126].IsNullable = true;
@@ -181,8 +179,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[135].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[135].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
-})
-;
+});
 			DataStore[135].Description = @"The CLR value of this entry";
 			DataStore[135].IsList = false;
 			DataStore[135].IsNullable = false;
@@ -194,8 +191,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
 			DataStore[168].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[168].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
-})
-;
+});
 			DataStore[168].Description = @"The biggest value accepted by this constraint";
 			DataStore[168].IsList = false;
 			DataStore[168].IsNullable = false;
@@ -207,8 +203,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
 			DataStore[169].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[169].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[75],
-})
-;
+});
 			DataStore[169].Description = @"The smallest value accepted by this constraint";
 			DataStore[169].IsList = false;
 			DataStore[169].IsNullable = false;
@@ -221,8 +216,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[75],
 			DataStore[172].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[148],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[151],
-})
-;
+});
 			DataStore[172].Description = @"The maximal length of this StringProperty";
 			DataStore[172].IsList = false;
 			DataStore[172].IsNullable = false;
@@ -235,8 +229,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[151],
 			DataStore[173].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[149],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[150],
-})
-;
+});
 			DataStore[173].Description = @"The minimal length of this StringProperty";
 			DataStore[173].IsList = false;
 			DataStore[173].IsNullable = false;

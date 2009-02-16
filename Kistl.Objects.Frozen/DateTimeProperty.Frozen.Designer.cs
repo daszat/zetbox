@@ -144,8 +144,7 @@ namespace Kistl.App.Base
 			DataStore[16].AltText = @"Start Datum";
 			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[16].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[16].Description = @"Start Datum";
 			DataStore[16].IsList = false;
 			DataStore[16].IsNullable = true;
@@ -156,8 +155,7 @@ namespace Kistl.App.Base
 			DataStore[17].AltText = @"Enddatum";
 			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[17].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[17].Description = @"Enddatum";
 			DataStore[17].IsList = false;
 			DataStore[17].IsNullable = true;
@@ -168,8 +166,7 @@ namespace Kistl.App.Base
 			DataStore[38].AltText = @"Herzlichen Glückwunsch zum Geburtstag";
 			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[38].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[38].Description = @"Herzlichen Glückwunsch zum Geburtstag";
 			DataStore[38].IsList = false;
 			DataStore[38].IsNullable = true;
@@ -181,8 +178,7 @@ namespace Kistl.App.Base
 			DataStore[56].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[56].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
-})
-;
+});
 			DataStore[56].Description = @"Datum";
 			DataStore[56].IsList = false;
 			DataStore[56].IsNullable = false;
@@ -193,8 +189,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
 			DataStore[133].AltText = @"Happy Birthday!";
 			DataStore[133].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[133].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[133].Description = @"Happy Birthday!";
 			DataStore[133].IsList = false;
 			DataStore[133].IsNullable = true;

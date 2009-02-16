@@ -28,9 +28,13 @@ namespace Kistl.Server.Generators.FrozenObjects
         {
             var otherFileNames = new List<string>();
 
-            var modules = ctx.GetQuery<Module>().ToList();
-            otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenModuleRepository", "FrozenModuleRepository", "Designer.cs", modules));
-            foreach (var m in modules)
+            var modulesWithFrozenClasses = ctx.GetQuery<Module>()
+                .Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject))
+                .OrderBy(m => m.ModuleName)
+                .ToList();
+
+            //otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenModuleRepository", "FrozenModuleRepository", "Designer.cs", modulesWithFrozenClasses));
+            foreach (var m in modulesWithFrozenClasses)
             {
                 otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenRepository", "Frozen" + m.ModuleName + "Repository", "Designer.cs", m));
             }

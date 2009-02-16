@@ -10,14 +10,14 @@ namespace Kistl.Server.Generators.FrozenObjects.Repositories
     public partial class FrozenModuleRepository : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected Kistl.API.IKistlContext ctx;
-		protected List<Module> modules;
+		protected List<Module> modulesWithFrozenClasses;
 
 
-        public FrozenModuleRepository(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, List<Module> modules)
+        public FrozenModuleRepository(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, List<Module> modulesWithFrozenClasses)
             : base(_host)
         {
 			this.ctx = ctx;
-			this.modules = modules;
+			this.modulesWithFrozenClasses = modulesWithFrozenClasses;
 
         }
         
@@ -26,38 +26,49 @@ namespace Kistl.Server.Generators.FrozenObjects.Repositories
 #line 11 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
 this.WriteObjects("using Kistl.API;\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("namespace Kistl.App.Frozen\r\n");
+this.WriteObjects("namespace Kistl.App\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("	public class ModuleRepository\r\n");
+this.WriteObjects("	public class FrozenModuleRepository\r\n");
 this.WriteObjects("	{\r\n");
-this.WriteObjects("		public ModuleRepository(IKistlContext ctx)\r\n");
+this.WriteObjects("		public FrozenModuleRepository()\r\n");
 this.WriteObjects("		{\r\n");
-this.WriteObjects("			this.Context = ctx;\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
-this.WriteObjects("		public IKistlContext Context { get; private set; }\r\n");
-this.WriteObjects("	\r\n");
-#line 26 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
-// only generate modules with frozen classes
-	foreach(var module in modules.Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject) ))
+#line 24 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+foreach(var module in modulesWithFrozenClasses)
 	{
 
-#line 30 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
-this.WriteObjects("		/// <summary>Repository for ",  module.ModuleName , "</summary>\r\n");
+#line 27 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+this.WriteObjects("		/// <summary>Frozen Repository for ",  module.ModuleName , "</summary>\r\n");
 this.WriteObjects("		/// ",  module.Description , "\r\n");
-this.WriteObjects("		public ",  module.Namespace , ".",  module.ModuleName , "Repository ",  module.ModuleName , "\r\n");
+this.WriteObjects("		public ",  module.Namespace , ".Frozen",  module.ModuleName , "Repository ",  module.ModuleName , "\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
-this.WriteObjects("				return new ",  module.Namespace , ".",  module.ModuleName , "Repository(Context);\r\n");
+this.WriteObjects("				return new ",  module.Namespace , ".Frozen",  module.ModuleName , "Repository();\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
-#line 41 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+#line 38 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
 }
 
-#line 43 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+#line 40 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("		static FrozenModuleRepository()\r\n");
+this.WriteObjects("		{\r\n");
+#line 44 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+// only fill data stores with frozen classes
+	foreach(var module in modulesWithFrozenClasses)
+	{
+
+#line 48 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+this.WriteObjects("				",  module.Namespace , ".Frozen",  module.ModuleName , "Repository.FillDataStore();\r\n");
+#line 50 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+}
+
+#line 52 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst"
+this.WriteObjects("		}\r\n");
 this.WriteObjects("	\r\n");
 this.WriteObjects("	}\r\n");
 this.WriteObjects("	\r\n");

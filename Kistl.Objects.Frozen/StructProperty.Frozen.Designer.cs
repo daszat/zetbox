@@ -150,8 +150,7 @@ namespace Kistl.App.Base
 			DataStore[131].AltText = @"Mobile Phone Number";
 			DataStore[131].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[131].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[131].Description = @"Mobile Phone Number";
 			DataStore[131].IsList = false;
 			DataStore[131].IsNullable = true;
@@ -162,8 +161,7 @@ namespace Kistl.App.Base
 			DataStore[132].AltText = @"Office Phone Number";
 			DataStore[132].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[132].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[132].Description = @"Office Phone Number";
 			DataStore[132].IsList = false;
 			DataStore[132].IsNullable = true;

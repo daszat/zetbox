@@ -9,7 +9,7 @@
 <%@ Parameter Name="module" Type="Module" %>
 <%
 	string classname = "Frozen" + module.ModuleName + "Repository";
-
+	var frozenClasses = module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject);
 %>
 using System;
 using System.Collections.Generic;
@@ -20,33 +20,40 @@ using Kistl.API;
 namespace <%= module.Namespace %>
 {
 
-	public class <%= classname %>
+	public static class <%= classname %>
 	{
-		public <%= classname %>(IKistlContext ctx)
-		{
-			this.Context = ctx;
-		}
-		
-		public IKistlContext Context { get; private set; }
 		
 <%
-	foreach(var cls in module.DataTypes.OfType<ObjectClass>())
+	foreach(var cls in frozenClasses)
 	{
+		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 %>
-		/// <summary>List of all <%= cls.ClassName %></summary>
+		/// <summary>Frozen List of all <%= cls.ClassName %></summary>
 		/// <%= cls.Description %>
-		public IQueryable<<%= cls.ClassName %>> <%= cls.TableName %>
+		public static IQueryable<<%= cls.ClassName %>> <%= cls.TableName %>
 		{ 
 			get
 			{
-				return Context.GetQuery<<%= cls.ClassName %>>();
+				return <%= implementationName %>.DataStore.Values.AsQueryable().Cast<<%= cls.ClassName %>>();
 			}
 		}
 		
 <%
 	}
 %>
-	
+
+		internal static void FillDataStore()
+		{
+<%
+	foreach(var cls in frozenClasses)
+	{
+		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
+%>
+				<%= implementationName %>.FillDataStore();
+<%
+	}
+%>
+		}
 	}
 	
 }

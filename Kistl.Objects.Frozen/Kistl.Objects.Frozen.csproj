@@ -97,12 +97,8 @@
     <Compile Include="CollectionEntries.Frozen.Designer.cs" />
     <Compile Include="TestPhoneStruct.Frozen.Designer.cs" />
     <Compile Include="AssemblyInfo.Frozen.cs" />
-    <Compile Include="FrozenModuleRepository.Frozen.Designer.cs" />
-    <Compile Include="FrozenKistlBaseRepository.Frozen.Designer.cs" />
-    <Compile Include="FrozenProjekteRepository.Frozen.Designer.cs" />
-    <Compile Include="FrozenZeiterfassungRepository.Frozen.Designer.cs" />
     <Compile Include="FrozenGUIRepository.Frozen.Designer.cs" />
-    <Compile Include="FrozenTestModuleRepository.Frozen.Designer.cs" />
+    <Compile Include="FrozenKistlBaseRepository.Frozen.Designer.cs" />
   </ItemGroup>
   
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

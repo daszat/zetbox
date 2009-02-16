@@ -175,8 +175,7 @@ namespace Kistl.App.Base
 			DataStore[11].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[11].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
-})
-;
+});
 			DataStore[11].Description = null;
 			DataStore[11].IsList = false;
 			DataStore[11].IsNullable = false;
@@ -188,8 +187,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 			DataStore[26].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[26].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
-})
-;
+});
 			DataStore[26].Description = null;
 			DataStore[26].IsList = false;
 			DataStore[26].IsNullable = false;
@@ -201,8 +199,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
 			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[83].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
-})
-;
+});
 			DataStore[83].Description = @"Legt fest, ob es sich um ein Client-Assembly handelt.";
 			DataStore[83].IsList = false;
 			DataStore[83].IsNullable = false;
@@ -214,8 +211,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
 			DataStore[84].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[84].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[116],
-})
-;
+});
 			DataStore[84].Description = @"Serialisierung der Liste zum Client";
 			DataStore[84].IsList = false;
 			DataStore[84].IsNullable = false;
@@ -227,8 +223,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[116],
 			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[94].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],
-})
-;
+});
 			DataStore[94].Description = @"Parameter wird als List<> generiert";
 			DataStore[94].IsList = false;
 			DataStore[94].IsNullable = false;
@@ -240,8 +235,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],
 			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[95].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110],
-})
-;
+});
 			DataStore[95].Description = @"Es darf nur ein Return Parameter angegeben werden";
 			DataStore[95].IsList = false;
 			DataStore[95].IsNullable = false;
@@ -253,8 +247,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110],
 			DataStore[116].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[116].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
-})
-;
+});
 			DataStore[116].Description = @"Whether or not this Control can contain other Controls";
 			DataStore[116].IsList = false;
 			DataStore[116].IsNullable = false;
@@ -266,8 +259,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
 			DataStore[119].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[119].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[93],
-})
-;
+});
 			DataStore[119].Description = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.";
 			DataStore[119].IsList = false;
 			DataStore[119].IsNullable = false;
@@ -279,8 +271,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[93],
 			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[124].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[92],
-})
-;
+});
 			DataStore[124].Description = @"Shows this Method in th GUI";
 			DataStore[124].IsList = false;
 			DataStore[124].IsNullable = false;
@@ -292,8 +283,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[92],
 			DataStore[174].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[174].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
-})
-;
+});
 			DataStore[174].Description = @"if true then all Instances appear in FozenContext.";
 			DataStore[174].IsList = false;
 			DataStore[174].IsNullable = false;
@@ -304,8 +294,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 			DataStore[204].AltText = @"Whether or not a list-valued property has a index";
 			DataStore[204].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[204].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-})
-;
+});
 			DataStore[204].Description = @"Whether or not a list-valued property has a index";
 			DataStore[204].IsList = false;
 			DataStore[204].IsNullable = false;

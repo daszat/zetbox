@@ -12,7 +12,6 @@
 <%
 
 	Type t = Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Objects", true);
-	Console.WriteLine("Generating " + t.AssemblyQualifiedName);
 	
 	var testList = ctx.GetQuery(typeof(ObjectClass)).ToList();
 	

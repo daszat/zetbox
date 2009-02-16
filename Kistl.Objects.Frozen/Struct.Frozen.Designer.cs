@@ -104,16 +104,13 @@ namespace Kistl.App.Base
 			DataStore[63].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(2) {
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[127],
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[128],
-})
-;
+});
 			DataStore[63].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
-})
-;
+});
 			DataStore[63].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[63].DefaultIcon = null;
 			DataStore[63].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-})
-;
+});
 			DataStore[63].Description = null;
 			DataStore[63].Seal();
 	
