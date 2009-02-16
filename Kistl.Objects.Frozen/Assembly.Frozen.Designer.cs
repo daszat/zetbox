@@ -23,29 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Module
-        /// </summary>
-        // object reference property
-        public virtual Kistl.App.Base.Module Module
-        {
-            get
-            {
-                return _Module;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Module != value)
-                {
-                    NotifyPropertyChanging("Module");
-                    _Module = value;
-                    NotifyPropertyChanged("Module");;
-                }
-            }
-        }
-        private Kistl.App.Base.Module _Module;
-
-        /// <summary>
         /// Full Assemblyname eg. MyActions, Version=1.0.0.0
         /// </summary>
         // value type property
@@ -90,6 +67,29 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsClientAssembly;
+
+        /// <summary>
+        /// Module
+        /// </summary>
+        // object reference property
+        public virtual Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return _Module;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Module != value)
+                {
+                    NotifyPropertyChanging("Module");
+                    _Module = value;
+                    NotifyPropertyChanged("Module");;
+                }
+            }
+        }
+        private Kistl.App.Base.Module _Module;
 
         /// <summary>
         /// Regenerates the stored list of TypeRefs from the loaded assembly
@@ -166,24 +166,31 @@ namespace Kistl.App.Base
 			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[1].AssemblyName = @"Kistl.App.Projekte.Client";
 			DataStore[1].IsClientAssembly = true;
+			DataStore[1].Seal();
 			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[2].AssemblyName = @"Kistl.App.Projekte.Server";
 			DataStore[2].IsClientAssembly = false;
+			DataStore[2].Seal();
 			DataStore[3].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[3].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0";
 			DataStore[3].IsClientAssembly = false;
+			DataStore[3].Seal();
 			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[4].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0";
 			DataStore[4].IsClientAssembly = false;
+			DataStore[4].Seal();
 			DataStore[13].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[13].AssemblyName = @"Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[13].IsClientAssembly = false;
+			DataStore[13].Seal();
 			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[14].AssemblyName = @"Kistl.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[14].IsClientAssembly = false;
+			DataStore[14].Seal();
 			DataStore[15].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[15].AssemblyName = @"Kistl.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[15].IsClientAssembly = false;
+			DataStore[15].Seal();
 	
 		}
 

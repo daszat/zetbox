@@ -28,10 +28,18 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
         {
             return String.Format("ReadOnlyCollection<{0}>", property.GetPropertyTypeString());
         }
+
         protected override void ApplySettor()
         {
-            this.WriteObjects("internal set { ", BackingMemberFromName(name), " = (", GetBackingTypeString(), ")value; }");
+            this.WriteLine("            internal set");
+            this.WriteLine("            {");
+            this.WriteLine("                if (IsReadonly)");
+            this.WriteLine("                {");
+            this.WriteLine("                    throw new ReadOnlyObjectException();");
+            this.WriteLine("                }");
+            this.WriteObjects("                ", BackingMemberFromName(name), " = (", GetBackingTypeString(), ")value;");
             this.WriteLine();
+            this.WriteLine("            }");
         }
     }
 }

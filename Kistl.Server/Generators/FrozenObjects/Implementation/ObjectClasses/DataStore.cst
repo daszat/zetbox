@@ -16,10 +16,12 @@
 	
 	var testList = ctx.GetQuery(typeof(ObjectClass)).ToList();
 	
+	var dataType = cls.Module.Namespace + "." + cls.ClassName;
+		
 	// list of all instances of exactly this class
 	var instanceList = ctx.GetQuery(t)
 	    .ToList()
-	    .Where(o => o.GetObjectClass(ctx) == cls);
+	    .Where(o => o.GetInterfaceType().FullName == dataType);
 %>
 
 
@@ -59,16 +61,21 @@
 <%
 	foreach(var obj in instanceList) 
 	{
-		foreach(var prop in cls.Properties.Cast<Property>())
-		{
-			string value = GetPropertyValueAsCSharp(obj, prop);
-			if (!String.IsNullOrEmpty(value))
+		foreach(var baseCls in cls.GetObjectHierarchie()) {
+			foreach(var prop in baseCls.Properties.Cast<Property>())
 			{
+				string value = GetPropertyValueAsCSharp(obj, prop);
+				if (!String.IsNullOrEmpty(value))
+				{
 %>
 			DataStore[<%= obj.ID %>].<%= prop.PropertyName %> = <%= value %>;
 <%
+				}
 			}
 		}
+%>
+			DataStore[<%= obj.ID %>].Seal();
+<%
 	}
 %>
 	

@@ -23,50 +23,27 @@ namespace Kistl.App.Test
 
 
         /// <summary>
-        /// String Property
+        /// test
         /// </summary>
         // value type property
-        public virtual string StringProp
+        public virtual int? MyIntProperty
         {
             get
             {
-                return _StringProp;
+                return _MyIntProperty;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_StringProp != value)
+                if (_MyIntProperty != value)
                 {
-                    NotifyPropertyChanging("StringProp");
-                    _StringProp = value;
-                    NotifyPropertyChanged("StringProp");;
+                    NotifyPropertyChanging("MyIntProperty");
+                    _MyIntProperty = value;
+                    NotifyPropertyChanged("MyIntProperty");;
                 }
             }
         }
-        private string _StringProp;
-
-        /// <summary>
-        /// Test Enumeration Property
-        /// </summary>
-        // enumeration property
-        public virtual Kistl.App.Test.TestEnum TestEnumProp
-        {
-            get
-            {
-                return _TestEnumProp;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_TestEnumProp != value)
-                {
-                    NotifyPropertyChanging("TestEnumProp");
-                    _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp");;
-                }
-            }
-        }
-        private Kistl.App.Test.TestEnum _TestEnumProp;
+        private int? _MyIntProperty;
 
         /// <summary>
         /// testtest
@@ -112,27 +89,50 @@ namespace Kistl.App.Test
         private int? _fk_ObjectProp;
 
         /// <summary>
-        /// test
+        /// String Property
         /// </summary>
         // value type property
-        public virtual int? MyIntProperty
+        public virtual string StringProp
         {
             get
             {
-                return _MyIntProperty;
+                return _StringProp;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_MyIntProperty != value)
+                if (_StringProp != value)
                 {
-                    NotifyPropertyChanging("MyIntProperty");
-                    _MyIntProperty = value;
-                    NotifyPropertyChanged("MyIntProperty");;
+                    NotifyPropertyChanging("StringProp");
+                    _StringProp = value;
+                    NotifyPropertyChanged("StringProp");;
                 }
             }
         }
-        private int? _MyIntProperty;
+        private string _StringProp;
+
+        /// <summary>
+        /// Test Enumeration Property
+        /// </summary>
+        // enumeration property
+        public virtual Kistl.App.Test.TestEnum TestEnumProp
+        {
+            get
+            {
+                return _TestEnumProp;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_TestEnumProp != value)
+                {
+                    NotifyPropertyChanging("TestEnumProp");
+                    _TestEnumProp = value;
+                    NotifyPropertyChanged("TestEnumProp");;
+                }
+            }
+        }
+        private Kistl.App.Test.TestEnum _TestEnumProp;
 
         /// <summary>
         /// testmethod
@@ -189,19 +189,19 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._MyIntProperty, binStream);
+            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
             BinarySerializer.ToStream((int)this.TestEnumProp, binStream);
-            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
-            BinarySerializer.ToStream(this._MyIntProperty, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._MyIntProperty, binStream);
+            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
             BinarySerializer.FromStreamConverter(v => this.TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
-            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
-            BinarySerializer.FromStream(out this._MyIntProperty, binStream);
         }
 
 #endregion

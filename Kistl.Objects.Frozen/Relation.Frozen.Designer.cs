@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Description of this Relation
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
         /// Left Part of the Relation
         /// </summary>
         // object reference property
@@ -90,29 +113,6 @@ namespace Kistl.App.Base
             }
         }
         private Kistl.App.Base.StorageType? _Storage;
-
-        /// <summary>
-        /// Description of this Relation
-        /// </summary>
-        // value type property
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
 
         // tail template
 
@@ -191,38 +191,55 @@ namespace Kistl.App.Base
 		internal static void FillDataStore() {
 			DataStore[1].Storage = StorageType.Left;
 			DataStore[1].Description = null;
+			DataStore[1].Seal();
 			DataStore[2].Storage = StorageType.Left;
 			DataStore[2].Description = null;
+			DataStore[2].Seal();
 			DataStore[3].Storage = StorageType.Right;
 			DataStore[3].Description = null;
+			DataStore[3].Seal();
 			DataStore[4].Storage = StorageType.Left;
 			DataStore[4].Description = null;
+			DataStore[4].Seal();
 			DataStore[5].Storage = StorageType.Left;
 			DataStore[5].Description = null;
+			DataStore[5].Seal();
 			DataStore[6].Storage = StorageType.Left;
 			DataStore[6].Description = null;
+			DataStore[6].Seal();
 			DataStore[8].Storage = StorageType.Left;
 			DataStore[8].Description = null;
+			DataStore[8].Seal();
 			DataStore[9].Storage = StorageType.Left;
 			DataStore[9].Description = null;
+			DataStore[9].Seal();
 			DataStore[10].Storage = StorageType.Left;
 			DataStore[10].Description = null;
+			DataStore[10].Seal();
 			DataStore[11].Storage = StorageType.Left;
 			DataStore[11].Description = null;
+			DataStore[11].Seal();
 			DataStore[12].Storage = StorageType.Left;
 			DataStore[12].Description = null;
+			DataStore[12].Seal();
 			DataStore[13].Storage = StorageType.Left;
 			DataStore[13].Description = null;
+			DataStore[13].Seal();
 			DataStore[14].Storage = StorageType.Left;
 			DataStore[14].Description = null;
+			DataStore[14].Seal();
 			DataStore[15].Storage = StorageType.Left;
 			DataStore[15].Description = null;
+			DataStore[15].Seal();
 			DataStore[16].Storage = StorageType.Left;
 			DataStore[16].Description = null;
+			DataStore[16].Seal();
 			DataStore[17].Storage = StorageType.Left;
 			DataStore[17].Description = null;
+			DataStore[17].Seal();
 			DataStore[18].Storage = StorageType.Left;
 			DataStore[18].Description = null;
+			DataStore[18].Seal();
 	
 		}
 

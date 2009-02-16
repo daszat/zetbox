@@ -53,23 +53,6 @@ namespace Kistl.App.Base
         private BackReferenceCollection<Kistl.App.Base.EnumerationEntry> _EnumerationEntriesWrapper;
 
         /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
-        /// </summary>
-
-		public override string GetDataTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetDataTypeString_Enumeration != null)
-            {
-                OnGetDataTypeString_Enumeration(this, e);
-            };
-            return e.Result;
-        }
-		public event GetDataTypeString_Handler<Enumeration> OnGetDataTypeString_Enumeration;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
 
@@ -83,6 +66,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetDataType_Handler<Enumeration> OnGetDataType_Enumeration;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
+
+		public override string GetDataTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDataTypeString_Enumeration != null)
+            {
+                OnGetDataTypeString_Enumeration(this, e);
+            };
+            return e.Result;
+        }
+		public event GetDataTypeString_Handler<Enumeration> OnGetDataTypeString_Enumeration;
 
 
 

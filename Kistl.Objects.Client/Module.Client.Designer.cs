@@ -23,50 +23,34 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// CLR Namespace des Moduls
+        /// Assemblies des Moduls
         /// </summary>
-        // value type property
-        public virtual string Namespace
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get
             {
-                return _Namespace;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Namespace != value)
+                if (_AssembliesWrapper == null)
                 {
-                    NotifyPropertyChanging("Namespace");
-                    _Namespace = value;
-                    NotifyPropertyChanged("Namespace");;
+                    List<Kistl.App.Base.Assembly> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
+                    else
+                        serverList = new List<Kistl.App.Base.Assembly>();
+                        
+                    _AssembliesWrapper = new BackReferenceCollection<Kistl.App.Base.Assembly>(
+                        "Module",
+                        this,
+                        serverList);
                 }
+                return _AssembliesWrapper;
             }
         }
-        private string _Namespace;
-
-        /// <summary>
-        /// Name des Moduls
-        /// </summary>
-        // value type property
-        public virtual string ModuleName
-        {
-            get
-            {
-                return _ModuleName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ModuleName != value)
-                {
-                    NotifyPropertyChanging("ModuleName");
-                    _ModuleName = value;
-                    NotifyPropertyChanged("ModuleName");;
-                }
-            }
-        }
-        private string _ModuleName;
+        
+        private BackReferenceCollection<Kistl.App.Base.Assembly> _AssembliesWrapper;
 
         /// <summary>
         /// Datentypendes Modules
@@ -99,36 +83,6 @@ namespace Kistl.App.Base
         private BackReferenceCollection<Kistl.App.Base.DataType> _DataTypesWrapper;
 
         /// <summary>
-        /// Assemblies des Moduls
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.Assembly> Assemblies
-        {
-            get
-            {
-                if (_AssembliesWrapper == null)
-                {
-                    List<Kistl.App.Base.Assembly> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
-                    else
-                        serverList = new List<Kistl.App.Base.Assembly>();
-                        
-                    _AssembliesWrapper = new BackReferenceCollection<Kistl.App.Base.Assembly>(
-                        "Module",
-                        this,
-                        serverList);
-                }
-                return _AssembliesWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Base.Assembly> _AssembliesWrapper;
-
-        /// <summary>
         /// Description of this Module
         /// </summary>
         // value type property
@@ -150,6 +104,52 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
+
+        /// <summary>
+        /// Name des Moduls
+        /// </summary>
+        // value type property
+        public virtual string ModuleName
+        {
+            get
+            {
+                return _ModuleName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ModuleName != value)
+                {
+                    NotifyPropertyChanging("ModuleName");
+                    _ModuleName = value;
+                    NotifyPropertyChanged("ModuleName");;
+                }
+            }
+        }
+        private string _ModuleName;
+
+        /// <summary>
+        /// CLR Namespace des Moduls
+        /// </summary>
+        // value type property
+        public virtual string Namespace
+        {
+            get
+            {
+                return _Namespace;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Namespace != value)
+                {
+                    NotifyPropertyChanging("Namespace");
+                    _Namespace = value;
+                    NotifyPropertyChanged("Namespace");;
+                }
+            }
+        }
+        private string _Namespace;
 
         // tail template
 
@@ -189,17 +189,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Namespace, binStream);
-            BinarySerializer.ToStream(this._ModuleName, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._ModuleName, binStream);
+            BinarySerializer.ToStream(this._Namespace, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Namespace, binStream);
-            BinarySerializer.FromStream(out this._ModuleName, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._ModuleName, binStream);
+            BinarySerializer.FromStream(out this._Namespace, binStream);
         }
 
 #endregion

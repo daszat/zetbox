@@ -46,56 +46,51 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
-        /// CLR Namespace des Moduls
+        /// Assemblies des Moduls
         /// </summary>
-        // value type property
+    /*
+    NewRelation: FK_Module_Assembly_Module_16 
+    A: One Module as Module (site: A, from relation ID = 13)
+    B: ZeroOrMore Assembly as Assemblies (site: B, from relation ID = 13)
+    Preferred Storage: MergeB
+    */
+        // object list property
+        // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Namespace
+        public ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get
             {
-                return _Namespace;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Namespace != value)
+                if (_AssembliesWrapper == null)
                 {
-                    NotifyPropertyChanging("Namespace");
-                    _Namespace = value;
-                    NotifyPropertyChanged("Namespace");;
+                    _AssembliesWrapper = new EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.Assembly__Implementation__>(
+                            Assemblies__Implementation__);
                 }
+                return _AssembliesWrapper;
             }
         }
-        private string _Namespace;
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_16", "Assemblies")]
+        public EntityCollection<Kistl.App.Base.Assembly__Implementation__> Assemblies__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Base.Assembly__Implementation__>(
+                        "Model.FK_Module_Assembly_Module_16",
+                        "Assemblies");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.Assembly__Implementation__> _AssembliesWrapper;
 
-        /// <summary>
-        /// Name des Moduls
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string ModuleName
-        {
-            get
-            {
-                return _ModuleName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ModuleName != value)
-                {
-                    NotifyPropertyChanging("ModuleName");
-                    _ModuleName = value;
-                    NotifyPropertyChanged("ModuleName");;
-                }
-            }
-        }
-        private string _ModuleName;
+
 
         /// <summary>
         /// Datentypendes Modules
@@ -145,53 +140,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Assemblies des Moduls
-        /// </summary>
-    /*
-    NewRelation: FK_Module_Assembly_Module_16 
-    A: One Module as Module (site: A, from relation ID = 13)
-    B: ZeroOrMore Assembly as Assemblies (site: B, from relation ID = 13)
-    Preferred Storage: MergeB
-    */
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.Assembly> Assemblies
-        {
-            get
-            {
-                if (_AssembliesWrapper == null)
-                {
-                    _AssembliesWrapper = new EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.Assembly__Implementation__>(
-                            Assemblies__Implementation__);
-                }
-                return _AssembliesWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_16", "Assemblies")]
-        public EntityCollection<Kistl.App.Base.Assembly__Implementation__> Assemblies__Implementation__
-        {
-            get
-            {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Module_Assembly_Module_16",
-                        "Assemblies");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
-            }
-        }
-        private EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.Assembly__Implementation__> _AssembliesWrapper;
-
-
-
-        /// <summary>
         /// Description of this Module
         /// </summary>
         // value type property
@@ -216,6 +164,58 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
+
+        /// <summary>
+        /// Name des Moduls
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string ModuleName
+        {
+            get
+            {
+                return _ModuleName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ModuleName != value)
+                {
+                    NotifyPropertyChanging("ModuleName");
+                    _ModuleName = value;
+                    NotifyPropertyChanged("ModuleName");;
+                }
+            }
+        }
+        private string _ModuleName;
+
+        /// <summary>
+        /// CLR Namespace des Moduls
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Namespace
+        {
+            get
+            {
+                return _Namespace;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Namespace != value)
+                {
+                    NotifyPropertyChanging("Namespace");
+                    _Namespace = value;
+                    NotifyPropertyChanged("Namespace");;
+                }
+            }
+        }
+        private string _Namespace;
 
         // tail template
 
@@ -255,17 +255,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Namespace, binStream);
-            BinarySerializer.ToStream(this._ModuleName, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._ModuleName, binStream);
+            BinarySerializer.ToStream(this._Namespace, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Namespace, binStream);
-            BinarySerializer.FromStream(out this._ModuleName, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._ModuleName, binStream);
+            BinarySerializer.FromStream(out this._Namespace, binStream);
         }
 
 #endregion

@@ -23,6 +23,142 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
+        /// Aufträge
+        /// </summary>
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Projekte.Auftrag> Auftraege
+        {
+            get
+            {
+                if (_AuftraegeWrapper == null)
+                {
+                    List<Kistl.App.Projekte.Auftrag> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
+                    else
+                        serverList = new List<Kistl.App.Projekte.Auftrag>();
+                        
+                    _AuftraegeWrapper = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>(
+                        "Projekt",
+                        this,
+                        serverList);
+                }
+                return _AuftraegeWrapper;
+            }
+        }
+        
+        private BackReferenceCollection<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual double? AufwandGes
+        {
+            get
+            {
+                return _AufwandGes;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AufwandGes != value)
+                {
+                    NotifyPropertyChanging("AufwandGes");
+                    _AufwandGes = value;
+                    NotifyPropertyChanged("AufwandGes");;
+                }
+            }
+        }
+        private double? _AufwandGes;
+
+        /// <summary>
+        /// Kostenträger
+        /// </summary>
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
+        {
+            get
+            {
+                if (_KostentraegerWrapper == null)
+                {
+                    List<Kistl.App.Zeiterfassung.Kostentraeger> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger");
+                    else
+                        serverList = new List<Kistl.App.Zeiterfassung.Kostentraeger>();
+                        
+                    _KostentraegerWrapper = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>(
+                        "Projekt",
+                        this,
+                        serverList);
+                }
+                return _KostentraegerWrapper;
+            }
+        }
+        
+        private BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger> _KostentraegerWrapper;
+
+        /// <summary>
+        /// Bitte geben Sie den Kundennamen ein
+        /// </summary>
+        // value type property
+        public virtual string Kundenname
+        {
+            get
+            {
+                return _Kundenname;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Kundenname != value)
+                {
+                    NotifyPropertyChanging("Kundenname");
+                    _Kundenname = value;
+                    NotifyPropertyChanged("Kundenname");;
+                }
+            }
+        }
+        private string _Kundenname;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+        {
+            get
+            {
+                if (_MitarbeiterWrapper == null)
+                {
+                    List<Kistl.App.Projekte.Mitarbeiter> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Projekte.Mitarbeiter>(this, "Mitarbeiter");
+                    else
+                        serverList = new List<Kistl.App.Projekte.Mitarbeiter>();
+                        
+                    _MitarbeiterWrapper = new BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter>(
+                        "Projekte",
+                        this,
+                        serverList);
+                }
+                return _MitarbeiterWrapper;
+            }
+        }
+        
+        private BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter> _MitarbeiterWrapper;
+
+        /// <summary>
         /// Projektname
         /// </summary>
         // value type property
@@ -75,142 +211,6 @@ namespace Kistl.App.Projekte
         
         private BackReferenceCollection<Kistl.App.Projekte.Task> _TasksWrapper;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
-        {
-            get
-            {
-                if (_MitarbeiterWrapper == null)
-                {
-                    List<Kistl.App.Projekte.Mitarbeiter> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Projekte.Mitarbeiter>(this, "Mitarbeiter");
-                    else
-                        serverList = new List<Kistl.App.Projekte.Mitarbeiter>();
-                        
-                    _MitarbeiterWrapper = new BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter>(
-                        "Projekte",
-                        this,
-                        serverList);
-                }
-                return _MitarbeiterWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter> _MitarbeiterWrapper;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        public virtual double? AufwandGes
-        {
-            get
-            {
-                return _AufwandGes;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AufwandGes != value)
-                {
-                    NotifyPropertyChanging("AufwandGes");
-                    _AufwandGes = value;
-                    NotifyPropertyChanged("AufwandGes");;
-                }
-            }
-        }
-        private double? _AufwandGes;
-
-        /// <summary>
-        /// Bitte geben Sie den Kundennamen ein
-        /// </summary>
-        // value type property
-        public virtual string Kundenname
-        {
-            get
-            {
-                return _Kundenname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kundenname != value)
-                {
-                    NotifyPropertyChanging("Kundenname");
-                    _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");;
-                }
-            }
-        }
-        private string _Kundenname;
-
-        /// <summary>
-        /// Kostenträger
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
-        {
-            get
-            {
-                if (_KostentraegerWrapper == null)
-                {
-                    List<Kistl.App.Zeiterfassung.Kostentraeger> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger");
-                    else
-                        serverList = new List<Kistl.App.Zeiterfassung.Kostentraeger>();
-                        
-                    _KostentraegerWrapper = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>(
-                        "Projekt",
-                        this,
-                        serverList);
-                }
-                return _KostentraegerWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger> _KostentraegerWrapper;
-
-        /// <summary>
-        /// Aufträge
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Projekte.Auftrag> Auftraege
-        {
-            get
-            {
-                if (_AuftraegeWrapper == null)
-                {
-                    List<Kistl.App.Projekte.Auftrag> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
-                    else
-                        serverList = new List<Kistl.App.Projekte.Auftrag>();
-                        
-                    _AuftraegeWrapper = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>(
-                        "Projekt",
-                        this,
-                        serverList);
-                }
-                return _AuftraegeWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -249,17 +249,17 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._AufwandGes, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._AufwandGes, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
         }
 
 #endregion

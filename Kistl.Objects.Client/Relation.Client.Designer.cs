@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Description of this Relation
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
         /// Left Part of the Relation
         /// </summary>
         // object reference property
@@ -155,29 +178,6 @@ namespace Kistl.App.Base
         }
         private Kistl.App.Base.StorageType? _Storage;
 
-        /// <summary>
-        /// Description of this Relation
-        /// </summary>
-        // value type property
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -216,19 +216,19 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._fk_LeftPart, binStream);
             BinarySerializer.ToStream(this._fk_RightPart, binStream);
             BinarySerializer.ToStream((int)this.Storage, binStream);
-            BinarySerializer.ToStream(this._Description, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_LeftPart, binStream);
             BinarySerializer.FromStream(out this._fk_RightPart, binStream);
             BinarySerializer.FromStreamConverter(v => this.Storage = (Kistl.App.Base.StorageType)v, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
         }
 
 #endregion

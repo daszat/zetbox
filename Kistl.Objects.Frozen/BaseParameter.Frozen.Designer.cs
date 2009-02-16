@@ -23,50 +23,27 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Name des Parameter
+        /// Description of this Parameter
         /// </summary>
         // value type property
-        public virtual string ParameterName
+        public virtual string Description
         {
             get
             {
-                return _ParameterName;
+                return _Description;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ParameterName != value)
+                if (_Description != value)
                 {
-                    NotifyPropertyChanging("ParameterName");
-                    _ParameterName = value;
-                    NotifyPropertyChanged("ParameterName");;
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
                 }
             }
         }
-        private string _ParameterName;
-
-        /// <summary>
-        /// Methode des Parameters
-        /// </summary>
-        // object reference property
-        public virtual Kistl.App.Base.Method Method
-        {
-            get
-            {
-                return _Method;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Method != value)
-                {
-                    NotifyPropertyChanging("Method");
-                    _Method = value;
-                    NotifyPropertyChanged("Method");;
-                }
-            }
-        }
-        private Kistl.App.Base.Method _Method;
+        private string _Description;
 
         /// <summary>
         /// Parameter wird als List<> generiert
@@ -115,45 +92,50 @@ namespace Kistl.App.Base
         private bool _IsReturnParameter;
 
         /// <summary>
-        /// Description of this Parameter
+        /// Methode des Parameters
         /// </summary>
-        // value type property
-        public virtual string Description
+        // object reference property
+        public virtual Kistl.App.Base.Method Method
         {
             get
             {
-                return _Description;
+                return _Method;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
+                if (_Method != value)
                 {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanging("Method");
+                    _Method = value;
+                    NotifyPropertyChanged("Method");;
                 }
             }
         }
-        private string _Description;
+        private Kistl.App.Base.Method _Method;
 
         /// <summary>
-        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// Name des Parameter
         /// </summary>
-
-		public virtual string GetParameterTypeString() 
+        // value type property
+        public virtual string ParameterName
         {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetParameterTypeString_BaseParameter != null)
+            get
             {
-                OnGetParameterTypeString_BaseParameter(this, e);
-            };
-            return e.Result;
+                return _ParameterName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ParameterName != value)
+                {
+                    NotifyPropertyChanging("ParameterName");
+                    _ParameterName = value;
+                    NotifyPropertyChanged("ParameterName");;
+                }
+            }
         }
-		public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
-
-
+        private string _ParameterName;
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -170,6 +152,24 @@ namespace Kistl.App.Base
         }
 		public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
 		public event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public virtual string GetParameterTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetParameterTypeString_BaseParameter != null)
+            {
+                OnGetParameterTypeString_BaseParameter(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
 
 
 

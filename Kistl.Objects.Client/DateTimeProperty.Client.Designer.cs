@@ -23,23 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public override string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_DateTimeProperty != null)
-            {
-                OnGetPropertyTypeString_DateTimeProperty(this, e);
-            };
-            return e.Result;
-        }
-		public event GetPropertyTypeString_Handler<DateTimeProperty> OnGetPropertyTypeString_DateTimeProperty;
-
-
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -70,6 +53,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<DateTimeProperty> OnGetPropertyType_DateTimeProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_DateTimeProperty != null)
+            {
+                OnGetPropertyTypeString_DateTimeProperty(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<DateTimeProperty> OnGetPropertyTypeString_DateTimeProperty;
 
 
 

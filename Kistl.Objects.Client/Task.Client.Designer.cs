@@ -23,50 +23,27 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
-        /// Taskname
+        /// Aufwand in Stunden
         /// </summary>
         // value type property
-        public virtual string Name
+        public virtual double? Aufwand
         {
             get
             {
-                return _Name;
+                return _Aufwand;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
+                if (_Aufwand != value)
                 {
-                    NotifyPropertyChanging("Name");
-                    _Name = value;
-                    NotifyPropertyChanged("Name");;
+                    NotifyPropertyChanging("Aufwand");
+                    _Aufwand = value;
+                    NotifyPropertyChanged("Aufwand");;
                 }
             }
         }
-        private string _Name;
-
-        /// <summary>
-        /// Start Datum
-        /// </summary>
-        // value type property
-        public virtual DateTime? DatumVon
-        {
-            get
-            {
-                return _DatumVon;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DatumVon != value)
-                {
-                    NotifyPropertyChanging("DatumVon");
-                    _DatumVon = value;
-                    NotifyPropertyChanged("DatumVon");;
-                }
-            }
-        }
-        private DateTime? _DatumVon;
+        private double? _Aufwand;
 
         /// <summary>
         /// Enddatum
@@ -92,27 +69,50 @@ namespace Kistl.App.Projekte
         private DateTime? _DatumBis;
 
         /// <summary>
-        /// Aufwand in Stunden
+        /// Start Datum
         /// </summary>
         // value type property
-        public virtual double? Aufwand
+        public virtual DateTime? DatumVon
         {
             get
             {
-                return _Aufwand;
+                return _DatumVon;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Aufwand != value)
+                if (_DatumVon != value)
                 {
-                    NotifyPropertyChanging("Aufwand");
-                    _Aufwand = value;
-                    NotifyPropertyChanged("Aufwand");;
+                    NotifyPropertyChanging("DatumVon");
+                    _DatumVon = value;
+                    NotifyPropertyChanged("DatumVon");;
                 }
             }
         }
-        private double? _Aufwand;
+        private DateTime? _DatumVon;
+
+        /// <summary>
+        /// Taskname
+        /// </summary>
+        // value type property
+        public virtual string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    NotifyPropertyChanging("Name");
+                    _Name = value;
+                    NotifyPropertyChanged("Name");;
+                }
+            }
+        }
+        private string _Name;
 
         /// <summary>
         /// Verknüpfung zum Projekt
@@ -208,20 +208,20 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(this._DatumVon, binStream);
-            BinarySerializer.ToStream(this._DatumBis, binStream);
             BinarySerializer.ToStream(this._Aufwand, binStream);
+            BinarySerializer.ToStream(this._DatumBis, binStream);
+            BinarySerializer.ToStream(this._DatumVon, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._fk_Projekt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._DatumVon, binStream);
-            BinarySerializer.FromStream(out this._DatumBis, binStream);
             BinarySerializer.FromStream(out this._Aufwand, binStream);
+            BinarySerializer.FromStream(out this._DatumBis, binStream);
+            BinarySerializer.FromStream(out this._DatumVon, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 

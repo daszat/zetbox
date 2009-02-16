@@ -72,23 +72,6 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
-        {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_StringRangeConstraint != null)
-            {
-                OnIsValid_StringRangeConstraint(this, e, constrainedValue, constrainedObj);
-            };
-            return e.Result;
-        }
-		public event IsValid_Handler<StringRangeConstraint> OnIsValid_StringRangeConstraint;
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-
 		public override string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
         {
             var e = new MethodReturnEventArgs<string>();
@@ -99,6 +82,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetErrorText_Handler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_StringRangeConstraint != null)
+            {
+                OnIsValid_StringRangeConstraint(this, e, constrainedValue, constrainedObj);
+            };
+            return e.Result;
+        }
+		public event IsValid_Handler<StringRangeConstraint> OnIsValid_StringRangeConstraint;
 
 
 

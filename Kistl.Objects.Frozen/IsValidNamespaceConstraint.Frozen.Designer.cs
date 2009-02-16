@@ -26,16 +26,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override bool IsValid(System.Object constrainedObj, System.Object constrainedValue) 
+		public override string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
         {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_IsValidNamespaceConstraint != null)
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetErrorText_IsValidNamespaceConstraint != null)
             {
-                OnIsValid_IsValidNamespaceConstraint(this, e, constrainedObj, constrainedValue);
+                OnGetErrorText_IsValidNamespaceConstraint(this, e, constrainedValue, constrainedObject);
             };
             return e.Result;
         }
-		public event IsValid_Handler<IsValidNamespaceConstraint> OnIsValid_IsValidNamespaceConstraint;
+		public event GetErrorText_Handler<IsValidNamespaceConstraint> OnGetErrorText_IsValidNamespaceConstraint;
 
 
 
@@ -43,16 +43,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
+		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
         {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetErrorText_IsValidNamespaceConstraint != null)
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_IsValidNamespaceConstraint != null)
             {
-                OnGetErrorText_IsValidNamespaceConstraint(this, e, constrainedObject, constrainedValue);
+                OnIsValid_IsValidNamespaceConstraint(this, e, constrainedValue, constrainedObj);
             };
             return e.Result;
         }
-		public event GetErrorText_Handler<IsValidNamespaceConstraint> OnGetErrorText_IsValidNamespaceConstraint;
+		public event IsValid_Handler<IsValidNamespaceConstraint> OnIsValid_IsValidNamespaceConstraint;
 
 
 
@@ -101,6 +101,9 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
+			DataStore[198].Reason = null;
+			DataStore[198].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[42];
+			DataStore[198].Seal();
 	
 		}
 

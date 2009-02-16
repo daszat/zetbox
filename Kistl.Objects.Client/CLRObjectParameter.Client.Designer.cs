@@ -89,23 +89,6 @@ namespace Kistl.App.Base
         private string _FullTypeName;
 
         /// <summary>
-        /// Returns the String representation of this Method-Parameter Meta Object.
-        /// </summary>
-
-		public override string GetParameterTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetParameterTypeString_CLRObjectParameter != null)
-            {
-                OnGetParameterTypeString_CLRObjectParameter(this, e);
-            };
-            return e.Result;
-        }
-		public event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
 
@@ -119,6 +102,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetParameterType_Handler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public override string GetParameterTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetParameterTypeString_CLRObjectParameter != null)
+            {
+                OnGetParameterTypeString_CLRObjectParameter(this, e);
+            };
+            return e.Result;
+        }
+		public event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;
 
 
 

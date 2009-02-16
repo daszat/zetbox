@@ -46,6 +46,32 @@ namespace Kistl.App.Zeiterfassung
         private int _ID;
 
         /// <summary>
+        /// Aktuell gebuchte Stunden
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual double? AktuelleStunden
+        {
+            get
+            {
+                return _AktuelleStunden;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AktuelleStunden != value)
+                {
+                    NotifyPropertyChanging("AktuelleStunden");
+                    _AktuelleStunden = value;
+                    NotifyPropertyChanged("AktuelleStunden");;
+                }
+            }
+        }
+        private double? _AktuelleStunden;
+
+        /// <summary>
         /// Name des Zeiterfassungskontos
         /// </summary>
         // value type property
@@ -72,51 +98,30 @@ namespace Kistl.App.Zeiterfassung
         private string _Kontoname;
 
         /// <summary>
-        /// Tätigkeiten
+        /// Maximal erlaubte Stundenanzahl
         /// </summary>
-    /*
-    NewRelation: FK_Zeitkonto_Taetigkeit_Zeitkonto_13 
-    A: One Zeitkonto as Zeitkonto (site: A, from relation ID = 8)
-    B: ZeroOrMore Taetigkeit as Taetigkeiten (site: B, from relation ID = 8)
-    Preferred Storage: MergeB
-    */
-        // object list property
-        // implement the user-visible interface
+        // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
+        [EdmScalarProperty()]
+        public virtual double? MaxStunden
         {
             get
             {
-                if (_TaetigkeitenWrapper == null)
-                {
-                    _TaetigkeitenWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
-                            Taetigkeiten__Implementation__);
-                }
-                return _TaetigkeitenWrapper;
+                return _MaxStunden;
             }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_13", "Taetigkeiten")]
-        public EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> Taetigkeiten__Implementation__
-        {
-            get
+            set
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
-                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13",
-                        "Taetigkeiten");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_MaxStunden != value)
                 {
-                    c.Load();
+                    NotifyPropertyChanging("MaxStunden");
+                    _MaxStunden = value;
+                    NotifyPropertyChanged("MaxStunden");;
                 }
-                return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> _TaetigkeitenWrapper;
-
-
+        private double? _MaxStunden;
 
         /// <summary>
         /// Zugeordnete Mitarbeiter
@@ -166,56 +171,51 @@ namespace Kistl.App.Zeiterfassung
         
 
         /// <summary>
-        /// Maximal erlaubte Stundenanzahl
+        /// Tätigkeiten
         /// </summary>
-        // value type property
+    /*
+    NewRelation: FK_Zeitkonto_Taetigkeit_Zeitkonto_13 
+    A: One Zeitkonto as Zeitkonto (site: A, from relation ID = 8)
+    B: ZeroOrMore Taetigkeit as Taetigkeiten (site: B, from relation ID = 8)
+    Preferred Storage: MergeB
+    */
+        // object list property
+        // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual double? MaxStunden
+        public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
         {
             get
             {
-                return _MaxStunden;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_MaxStunden != value)
+                if (_TaetigkeitenWrapper == null)
                 {
-                    NotifyPropertyChanging("MaxStunden");
-                    _MaxStunden = value;
-                    NotifyPropertyChanged("MaxStunden");;
+                    _TaetigkeitenWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
+                            Taetigkeiten__Implementation__);
                 }
+                return _TaetigkeitenWrapper;
             }
         }
-        private double? _MaxStunden;
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_13", "Taetigkeiten")]
+        public EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> Taetigkeiten__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
+                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13",
+                        "Taetigkeiten");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> _TaetigkeitenWrapper;
 
-        /// <summary>
-        /// Aktuell gebuchte Stunden
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual double? AktuelleStunden
-        {
-            get
-            {
-                return _AktuelleStunden;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AktuelleStunden != value)
-                {
-                    NotifyPropertyChanging("AktuelleStunden");
-                    _AktuelleStunden = value;
-                    NotifyPropertyChanged("AktuelleStunden");;
-                }
-            }
-        }
-        private double? _AktuelleStunden;
+
 
         // tail template
 
@@ -255,19 +255,19 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Kontoname, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
-            BinarySerializer.ToStream(this._MaxStunden, binStream);
             BinarySerializer.ToStream(this._AktuelleStunden, binStream);
+            BinarySerializer.ToStream(this._Kontoname, binStream);
+            BinarySerializer.ToStream(this._MaxStunden, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Kontoname, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
-            BinarySerializer.FromStream(out this._MaxStunden, binStream);
             BinarySerializer.FromStream(out this._AktuelleStunden, binStream);
+            BinarySerializer.FromStream(out this._Kontoname, binStream);
+            BinarySerializer.FromStream(out this._MaxStunden, binStream);
+            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
         }
 
 #endregion

@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Description of this Enumeration Entry
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
         /// Übergeordnete Enumeration
         /// </summary>
         // object reference property
@@ -44,29 +67,6 @@ namespace Kistl.App.Base
             }
         }
         private Kistl.App.Base.Enumeration _Enumeration;
-
-        /// <summary>
-        /// The CLR value of this entry
-        /// </summary>
-        // value type property
-        public virtual int Value
-        {
-            get
-            {
-                return _Value;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Value != value)
-                {
-                    NotifyPropertyChanging("Value");
-                    _Value = value;
-                    NotifyPropertyChanged("Value");;
-                }
-            }
-        }
-        private int _Value;
 
         /// <summary>
         /// CLR name of this entry
@@ -92,27 +92,27 @@ namespace Kistl.App.Base
         private string _Name;
 
         /// <summary>
-        /// Description of this Enumeration Entry
+        /// The CLR value of this entry
         /// </summary>
         // value type property
-        public virtual string Description
+        public virtual int Value
         {
             get
             {
-                return _Description;
+                return _Value;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
+                if (_Value != value)
                 {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanging("Value");
+                    _Value = value;
+                    NotifyPropertyChanged("Value");;
                 }
             }
         }
-        private string _Description;
+        private int _Value;
 
         // tail template
 
@@ -214,87 +214,115 @@ namespace Kistl.App.Base
 			DataStore[2].Value = 0;
 			DataStore[2].Name = @"First";
 			DataStore[2].Description = @"First Test Entry";
+			DataStore[2].Seal();
 			DataStore[3].Value = 1;
 			DataStore[3].Name = @"Second";
 			DataStore[3].Description = @"Second Test Entry";
+			DataStore[3].Seal();
 			DataStore[5].Value = 0;
 			DataStore[5].Name = @"WPF";
 			DataStore[5].Description = @"WPF Toolkit";
+			DataStore[5].Seal();
 			DataStore[6].Value = 1;
 			DataStore[6].Name = @"ASPNET";
 			DataStore[6].Description = @"ASPNET Toolkit";
+			DataStore[6].Seal();
 			DataStore[7].Value = 2;
 			DataStore[7].Name = @"TEST";
 			DataStore[7].Description = @"TEST Toolkit";
+			DataStore[7].Seal();
 			DataStore[40].Value = 16;
 			DataStore[40].Name = @"SimpleObjectList";
 			DataStore[40].Description = null;
+			DataStore[40].Seal();
 			DataStore[41].Value = 15;
 			DataStore[41].Name = @"Enumeration";
 			DataStore[41].Description = null;
+			DataStore[41].Seal();
 			DataStore[42].Value = 14;
 			DataStore[42].Name = @"StringList";
 			DataStore[42].Description = null;
+			DataStore[42].Seal();
 			DataStore[43].Value = 13;
 			DataStore[43].Name = @"String";
 			DataStore[43].Description = null;
+			DataStore[43].Seal();
 			DataStore[44].Value = 12;
 			DataStore[44].Name = @"IntegerList";
 			DataStore[44].Description = null;
+			DataStore[44].Seal();
 			DataStore[45].Value = 11;
 			DataStore[45].Name = @"Integer";
 			DataStore[45].Description = null;
+			DataStore[45].Seal();
 			DataStore[46].Value = 10;
 			DataStore[46].Name = @"DoubleList";
 			DataStore[46].Description = null;
+			DataStore[46].Seal();
 			DataStore[47].Value = 9;
 			DataStore[47].Name = @"Double";
 			DataStore[47].Description = null;
+			DataStore[47].Seal();
 			DataStore[48].Value = 8;
 			DataStore[48].Name = @"DateTimeList";
 			DataStore[48].Description = null;
+			DataStore[48].Seal();
 			DataStore[49].Value = 7;
 			DataStore[49].Name = @"DateTime";
 			DataStore[49].Description = null;
+			DataStore[49].Seal();
 			DataStore[50].Value = 6;
 			DataStore[50].Name = @"BooleanList";
 			DataStore[50].Description = null;
+			DataStore[50].Seal();
 			DataStore[51].Value = 5;
 			DataStore[51].Name = @"Boolean";
 			DataStore[51].Description = null;
+			DataStore[51].Seal();
 			DataStore[52].Value = 4;
 			DataStore[52].Name = @"ObjectReference";
 			DataStore[52].Description = null;
+			DataStore[52].Seal();
 			DataStore[53].Value = 3;
 			DataStore[53].Name = @"ObjectList";
 			DataStore[53].Description = null;
+			DataStore[53].Seal();
 			DataStore[54].Value = 2;
 			DataStore[54].Name = @"PropertyGroup";
 			DataStore[54].Description = null;
+			DataStore[54].Seal();
 			DataStore[55].Value = 1;
 			DataStore[55].Name = @"Object";
 			DataStore[55].Description = null;
+			DataStore[55].Seal();
 			DataStore[56].Value = 0;
 			DataStore[56].Name = @"Renderer";
 			DataStore[56].Description = null;
+			DataStore[56].Seal();
 			DataStore[57].Value = 18;
 			DataStore[57].Name = @"MenuGroup";
 			DataStore[57].Description = null;
+			DataStore[57].Seal();
 			DataStore[58].Value = 17;
 			DataStore[58].Name = @"MenuItem";
 			DataStore[58].Description = null;
+			DataStore[58].Seal();
 			DataStore[59].Value = 19;
 			DataStore[59].Name = @"TemplateEditor";
 			DataStore[59].Description = null;
+			DataStore[59].Seal();
 			DataStore[60].Value = 3;
 			DataStore[60].Name = @"Replicate";
 			DataStore[60].Description = null;
+			DataStore[60].Seal();
 			DataStore[61].Value = 2;
 			DataStore[61].Name = @"Right";
 			DataStore[61].Description = null;
+			DataStore[61].Seal();
 			DataStore[62].Value = 1;
 			DataStore[62].Name = @"Left";
 			DataStore[62].Description = null;
+			DataStore[62].Seal();
 	
 		}
 

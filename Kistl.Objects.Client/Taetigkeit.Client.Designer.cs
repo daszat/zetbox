@@ -23,6 +23,52 @@ namespace Kistl.App.Zeiterfassung
 
 
         /// <summary>
+        /// Datum
+        /// </summary>
+        // value type property
+        public virtual DateTime Datum
+        {
+            get
+            {
+                return _Datum;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Datum != value)
+                {
+                    NotifyPropertyChanging("Datum");
+                    _Datum = value;
+                    NotifyPropertyChanged("Datum");;
+                }
+            }
+        }
+        private DateTime _Datum;
+
+        /// <summary>
+        /// Dauer in Stunden
+        /// </summary>
+        // value type property
+        public virtual double Dauer
+        {
+            get
+            {
+                return _Dauer;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Dauer != value)
+                {
+                    NotifyPropertyChanging("Dauer");
+                    _Dauer = value;
+                    NotifyPropertyChanged("Dauer");;
+                }
+            }
+        }
+        private double _Dauer;
+
+        /// <summary>
         /// Mitarbeiter
         /// </summary>
         // object reference property
@@ -64,6 +110,49 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         private int? _fk_Mitarbeiter;
+
+        /// <summary>
+        /// Art der Tätigkeit
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
+        {
+            get
+            {
+                if (fk_TaetigkeitsArt.HasValue)
+                    return Context.Find<Kistl.App.Zeiterfassung.TaetigkeitsArt>(fk_TaetigkeitsArt.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_TaetigkeitsArt
+        {
+            get
+            {
+                return _fk_TaetigkeitsArt;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_TaetigkeitsArt != value)
+                {
+                    NotifyPropertyChanging("TaetigkeitsArt");
+                    _fk_TaetigkeitsArt = value;
+                    NotifyPropertyChanging("TaetigkeitsArt");
+                }
+            }
+        }
+        private int? _fk_TaetigkeitsArt;
 
         /// <summary>
         /// Zeitkonto
@@ -121,95 +210,6 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Zeitkonto;
 
-        /// <summary>
-        /// Datum
-        /// </summary>
-        // value type property
-        public virtual DateTime Datum
-        {
-            get
-            {
-                return _Datum;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Datum != value)
-                {
-                    NotifyPropertyChanging("Datum");
-                    _Datum = value;
-                    NotifyPropertyChanged("Datum");;
-                }
-            }
-        }
-        private DateTime _Datum;
-
-        /// <summary>
-        /// Dauer in Stunden
-        /// </summary>
-        // value type property
-        public virtual double Dauer
-        {
-            get
-            {
-                return _Dauer;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Dauer != value)
-                {
-                    NotifyPropertyChanging("Dauer");
-                    _Dauer = value;
-                    NotifyPropertyChanged("Dauer");;
-                }
-            }
-        }
-        private double _Dauer;
-
-        /// <summary>
-        /// Art der Tätigkeit
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
-        {
-            get
-            {
-                if (fk_TaetigkeitsArt.HasValue)
-                    return Context.Find<Kistl.App.Zeiterfassung.TaetigkeitsArt>(fk_TaetigkeitsArt.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_TaetigkeitsArt
-        {
-            get
-            {
-                return _fk_TaetigkeitsArt;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_TaetigkeitsArt != value)
-                {
-                    NotifyPropertyChanging("TaetigkeitsArt");
-                    _fk_TaetigkeitsArt = value;
-                    NotifyPropertyChanging("TaetigkeitsArt");
-                }
-            }
-        }
-        private int? _fk_TaetigkeitsArt;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -248,21 +248,21 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
-            BinarySerializer.ToStream(this._fk_Zeitkonto, binStream);
             BinarySerializer.ToStream(this._Datum, binStream);
             BinarySerializer.ToStream(this._Dauer, binStream);
+            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
             BinarySerializer.ToStream(this._fk_TaetigkeitsArt, binStream);
+            BinarySerializer.ToStream(this._fk_Zeitkonto, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
-            BinarySerializer.FromStream(out this._fk_Zeitkonto, binStream);
             BinarySerializer.FromStream(out this._Datum, binStream);
             BinarySerializer.FromStream(out this._Dauer, binStream);
+            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._fk_TaetigkeitsArt, binStream);
+            BinarySerializer.FromStream(out this._fk_Zeitkonto, binStream);
         }
 
 #endregion

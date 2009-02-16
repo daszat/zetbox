@@ -26,23 +26,6 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
-        {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_IsValidNamespaceConstraint != null)
-            {
-                OnIsValid_IsValidNamespaceConstraint(this, e, constrainedValue, constrainedObj);
-            };
-            return e.Result;
-        }
-		public event IsValid_Handler<IsValidNamespaceConstraint> OnIsValid_IsValidNamespaceConstraint;
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-
 		public override string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
         {
             var e = new MethodReturnEventArgs<string>();
@@ -53,6 +36,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetErrorText_Handler<IsValidNamespaceConstraint> OnGetErrorText_IsValidNamespaceConstraint;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_IsValidNamespaceConstraint != null)
+            {
+                OnIsValid_IsValidNamespaceConstraint(this, e, constrainedValue, constrainedObj);
+            };
+            return e.Result;
+        }
+		public event IsValid_Handler<IsValidNamespaceConstraint> OnIsValid_IsValidNamespaceConstraint;
 
 
 

@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Serialisierung der Liste zum Client
+        /// </summary>
+        // value type property
+        public virtual bool PreFetchToClient
+        {
+            get
+            {
+                return _PreFetchToClient;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_PreFetchToClient != value)
+                {
+                    NotifyPropertyChanging("PreFetchToClient");
+                    _PreFetchToClient = value;
+                    NotifyPropertyChanged("PreFetchToClient");;
+                }
+            }
+        }
+        private bool _PreFetchToClient;
+
+        /// <summary>
         /// Das Property, welches auf diese Klasse zeigt
         /// </summary>
         // object reference property
@@ -66,46 +89,6 @@ namespace Kistl.App.Base
         private int? _fk_ReferenceProperty;
 
         /// <summary>
-        /// Serialisierung der Liste zum Client
-        /// </summary>
-        // value type property
-        public virtual bool PreFetchToClient
-        {
-            get
-            {
-                return _PreFetchToClient;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PreFetchToClient != value)
-                {
-                    NotifyPropertyChanging("PreFetchToClient");
-                    _PreFetchToClient = value;
-                    NotifyPropertyChanged("PreFetchToClient");;
-                }
-            }
-        }
-        private bool _PreFetchToClient;
-
-        /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public override string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_BackReferenceProperty != null)
-            {
-                OnGetPropertyTypeString_BackReferenceProperty(this, e);
-            };
-            return e.Result;
-        }
-		public event GetPropertyTypeString_Handler<BackReferenceProperty> OnGetPropertyTypeString_BackReferenceProperty;
-
-
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -136,6 +119,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<BackReferenceProperty> OnGetPropertyType_BackReferenceProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_BackReferenceProperty != null)
+            {
+                OnGetPropertyTypeString_BackReferenceProperty(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<BackReferenceProperty> OnGetPropertyTypeString_BackReferenceProperty;
 
 
 
@@ -177,15 +177,15 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_ReferenceProperty, binStream);
             BinarySerializer.ToStream(this._PreFetchToClient, binStream);
+            BinarySerializer.ToStream(this._fk_ReferenceProperty, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_ReferenceProperty, binStream);
             BinarySerializer.FromStream(out this._PreFetchToClient, binStream);
+            BinarySerializer.FromStream(out this._fk_ReferenceProperty, binStream);
         }
 
 #endregion

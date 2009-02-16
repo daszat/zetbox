@@ -46,30 +46,82 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
-        /// Name des Parameter
+        /// Description of this Parameter
         /// </summary>
         // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public virtual string ParameterName
+        public virtual string Description
         {
             get
             {
-                return _ParameterName;
+                return _Description;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ParameterName != value)
+                if (_Description != value)
                 {
-                    NotifyPropertyChanging("ParameterName");
-                    _ParameterName = value;
-                    NotifyPropertyChanged("ParameterName");;
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
                 }
             }
         }
-        private string _ParameterName;
+        private string _Description;
+
+        /// <summary>
+        /// Parameter wird als List<> generiert
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual bool IsList
+        {
+            get
+            {
+                return _IsList;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsList != value)
+                {
+                    NotifyPropertyChanging("IsList");
+                    _IsList = value;
+                    NotifyPropertyChanged("IsList");;
+                }
+            }
+        }
+        private bool _IsList;
+
+        /// <summary>
+        /// Es darf nur ein Return Parameter angegeben werden
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual bool IsReturnParameter
+        {
+            get
+            {
+                return _IsReturnParameter;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsReturnParameter != value)
+                {
+                    NotifyPropertyChanging("IsReturnParameter");
+                    _IsReturnParameter = value;
+                    NotifyPropertyChanged("IsReturnParameter");;
+                }
+            }
+        }
+        private bool _IsReturnParameter;
 
         /// <summary>
         /// Methode des Parameters
@@ -173,100 +225,30 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// Parameter wird als List<> generiert
+        /// Name des Parameter
         /// </summary>
         // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public virtual bool IsList
+        public virtual string ParameterName
         {
             get
             {
-                return _IsList;
+                return _ParameterName;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsList != value)
+                if (_ParameterName != value)
                 {
-                    NotifyPropertyChanging("IsList");
-                    _IsList = value;
-                    NotifyPropertyChanged("IsList");;
+                    NotifyPropertyChanging("ParameterName");
+                    _ParameterName = value;
+                    NotifyPropertyChanged("ParameterName");;
                 }
             }
         }
-        private bool _IsList;
-
-        /// <summary>
-        /// Es darf nur ein Return Parameter angegeben werden
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual bool IsReturnParameter
-        {
-            get
-            {
-                return _IsReturnParameter;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsReturnParameter != value)
-                {
-                    NotifyPropertyChanging("IsReturnParameter");
-                    _IsReturnParameter = value;
-                    NotifyPropertyChanged("IsReturnParameter");;
-                }
-            }
-        }
-        private bool _IsReturnParameter;
-
-        /// <summary>
-        /// Description of this Parameter
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
-        /// <summary>
-        /// Returns the String representation of this Method-Parameter Meta Object.
-        /// </summary>
-
-		public virtual string GetParameterTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetParameterTypeString_BaseParameter != null)
-            {
-                OnGetParameterTypeString_BaseParameter(this, e);
-            };
-            return e.Result;
-        }
-		public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
-
-
+        private string _ParameterName;
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -283,6 +265,24 @@ namespace Kistl.App.Base
         }
 		public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
 		public event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public virtual string GetParameterTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetParameterTypeString_BaseParameter != null)
+            {
+                OnGetParameterTypeString_BaseParameter(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
 
 
 
@@ -324,23 +324,23 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._ParameterName, binStream);
-            BinarySerializer.ToStream(this._fk_Method, binStream);
-            BinarySerializer.ToStream(this._Method_pos, binStream);
+            BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsReturnParameter, binStream);
-            BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._fk_Method, binStream);
+            BinarySerializer.ToStream(this._Method_pos, binStream);
+            BinarySerializer.ToStream(this._ParameterName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._ParameterName, binStream);
-            BinarySerializer.FromStream(out this._fk_Method, binStream);
-            BinarySerializer.FromStream(out this._Method_pos, binStream);
+            BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._fk_Method, binStream);
+            BinarySerializer.FromStream(out this._Method_pos, binStream);
+            BinarySerializer.FromStream(out this._ParameterName, binStream);
         }
 
 #endregion

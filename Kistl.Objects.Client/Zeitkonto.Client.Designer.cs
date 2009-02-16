@@ -23,6 +23,29 @@ namespace Kistl.App.Zeiterfassung
 
 
         /// <summary>
+        /// Aktuell gebuchte Stunden
+        /// </summary>
+        // value type property
+        public virtual double? AktuelleStunden
+        {
+            get
+            {
+                return _AktuelleStunden;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AktuelleStunden != value)
+                {
+                    NotifyPropertyChanging("AktuelleStunden");
+                    _AktuelleStunden = value;
+                    NotifyPropertyChanged("AktuelleStunden");;
+                }
+            }
+        }
+        private double? _AktuelleStunden;
+
+        /// <summary>
         /// Name des Zeiterfassungskontos
         /// </summary>
         // value type property
@@ -46,34 +69,27 @@ namespace Kistl.App.Zeiterfassung
         private string _Kontoname;
 
         /// <summary>
-        /// Tätigkeiten
+        /// Maximal erlaubte Stundenanzahl
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
+        // value type property
+        public virtual double? MaxStunden
         {
             get
             {
-                if (_TaetigkeitenWrapper == null)
+                return _MaxStunden;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_MaxStunden != value)
                 {
-                    List<Kistl.App.Zeiterfassung.Taetigkeit> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten");
-                    else
-                        serverList = new List<Kistl.App.Zeiterfassung.Taetigkeit>();
-                        
-                    _TaetigkeitenWrapper = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>(
-                        "Zeitkonto",
-                        this,
-                        serverList);
+                    NotifyPropertyChanging("MaxStunden");
+                    _MaxStunden = value;
+                    NotifyPropertyChanged("MaxStunden");;
                 }
-                return _TaetigkeitenWrapper;
             }
         }
-        
-        private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _TaetigkeitenWrapper;
+        private double? _MaxStunden;
 
         /// <summary>
         /// Zugeordnete Mitarbeiter
@@ -106,50 +122,34 @@ namespace Kistl.App.Zeiterfassung
         private BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter> _MitarbeiterWrapper;
 
         /// <summary>
-        /// Maximal erlaubte Stundenanzahl
+        /// Tätigkeiten
         /// </summary>
-        // value type property
-        public virtual double? MaxStunden
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
         {
             get
             {
-                return _MaxStunden;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_MaxStunden != value)
+                if (_TaetigkeitenWrapper == null)
                 {
-                    NotifyPropertyChanging("MaxStunden");
-                    _MaxStunden = value;
-                    NotifyPropertyChanged("MaxStunden");;
+                    List<Kistl.App.Zeiterfassung.Taetigkeit> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Zeiterfassung.Taetigkeit>(this, "Taetigkeiten");
+                    else
+                        serverList = new List<Kistl.App.Zeiterfassung.Taetigkeit>();
+                        
+                    _TaetigkeitenWrapper = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>(
+                        "Zeitkonto",
+                        this,
+                        serverList);
                 }
+                return _TaetigkeitenWrapper;
             }
         }
-        private double? _MaxStunden;
-
-        /// <summary>
-        /// Aktuell gebuchte Stunden
-        /// </summary>
-        // value type property
-        public virtual double? AktuelleStunden
-        {
-            get
-            {
-                return _AktuelleStunden;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AktuelleStunden != value)
-                {
-                    NotifyPropertyChanging("AktuelleStunden");
-                    _AktuelleStunden = value;
-                    NotifyPropertyChanged("AktuelleStunden");;
-                }
-            }
-        }
-        private double? _AktuelleStunden;
+        
+        private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _TaetigkeitenWrapper;
 
         // tail template
 
@@ -189,17 +189,17 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._AktuelleStunden, binStream);
             BinarySerializer.ToStream(this._Kontoname, binStream);
             BinarySerializer.ToStream(this._MaxStunden, binStream);
-            BinarySerializer.ToStream(this._AktuelleStunden, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._AktuelleStunden, binStream);
             BinarySerializer.FromStream(out this._Kontoname, binStream);
             BinarySerializer.FromStream(out this._MaxStunden, binStream);
-            BinarySerializer.FromStream(out this._AktuelleStunden, binStream);
         }
 
 #endregion

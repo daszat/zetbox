@@ -23,6 +23,52 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Full Assemblyname eg. MyActions, Version=1.0.0.0
+        /// </summary>
+        // value type property
+        public virtual string AssemblyName
+        {
+            get
+            {
+                return _AssemblyName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AssemblyName != value)
+                {
+                    NotifyPropertyChanging("AssemblyName");
+                    _AssemblyName = value;
+                    NotifyPropertyChanged("AssemblyName");;
+                }
+            }
+        }
+        private string _AssemblyName;
+
+        /// <summary>
+        /// Legt fest, ob es sich um ein Client-Assembly handelt.
+        /// </summary>
+        // value type property
+        public virtual bool IsClientAssembly
+        {
+            get
+            {
+                return _IsClientAssembly;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsClientAssembly != value)
+                {
+                    NotifyPropertyChanging("IsClientAssembly");
+                    _IsClientAssembly = value;
+                    NotifyPropertyChanged("IsClientAssembly");;
+                }
+            }
+        }
+        private bool _IsClientAssembly;
+
+        /// <summary>
         /// Module
         /// </summary>
         // object reference property
@@ -79,52 +125,6 @@ namespace Kistl.App.Base
         private int? _fk_Module;
 
         /// <summary>
-        /// Full Assemblyname eg. MyActions, Version=1.0.0.0
-        /// </summary>
-        // value type property
-        public virtual string AssemblyName
-        {
-            get
-            {
-                return _AssemblyName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AssemblyName != value)
-                {
-                    NotifyPropertyChanging("AssemblyName");
-                    _AssemblyName = value;
-                    NotifyPropertyChanged("AssemblyName");;
-                }
-            }
-        }
-        private string _AssemblyName;
-
-        /// <summary>
-        /// Legt fest, ob es sich um ein Client-Assembly handelt.
-        /// </summary>
-        // value type property
-        public virtual bool IsClientAssembly
-        {
-            get
-            {
-                return _IsClientAssembly;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsClientAssembly != value)
-                {
-                    NotifyPropertyChanging("IsClientAssembly");
-                    _IsClientAssembly = value;
-                    NotifyPropertyChanged("IsClientAssembly");;
-                }
-            }
-        }
-        private bool _IsClientAssembly;
-
-        /// <summary>
         /// Regenerates the stored list of TypeRefs from the loaded assembly
         /// </summary>
 
@@ -179,17 +179,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._AssemblyName, binStream);
             BinarySerializer.ToStream(this._IsClientAssembly, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._AssemblyName, binStream);
             BinarySerializer.FromStream(out this._IsClientAssembly, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
 #endregion

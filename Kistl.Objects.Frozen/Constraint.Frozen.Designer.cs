@@ -23,29 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// The reason of this constraint
-        /// </summary>
-        // value type property
-        public virtual string Reason
-        {
-            get
-            {
-                return _Reason;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Reason != value)
-                {
-                    NotifyPropertyChanging("Reason");
-                    _Reason = value;
-                    NotifyPropertyChanged("Reason");;
-                }
-            }
-        }
-        private string _Reason;
-
-        /// <summary>
         /// The property to be constrained
         /// </summary>
         // object reference property
@@ -69,20 +46,43 @@ namespace Kistl.App.Base
         private Kistl.App.Base.BaseProperty _ConstrainedProperty;
 
         /// <summary>
+        /// The reason of this constraint
+        /// </summary>
+        // value type property
+        public virtual string Reason
+        {
+            get
+            {
+                return _Reason;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Reason != value)
+                {
+                    NotifyPropertyChanging("Reason");
+                    _Reason = value;
+                    NotifyPropertyChanged("Reason");;
+                }
+            }
+        }
+        private string _Reason;
+
+        /// <summary>
         /// 
         /// </summary>
 
-		public virtual bool IsValid(System.Object constrainedObj, System.Object constrainedValue) 
+		public virtual string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
         {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_Constraint != null)
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetErrorText_Constraint != null)
             {
-                OnIsValid_Constraint(this, e, constrainedObj, constrainedValue);
+                OnGetErrorText_Constraint(this, e, constrainedValue, constrainedObject);
             };
             return e.Result;
         }
-		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedObj, System.Object constrainedValue);
-		public event IsValid_Handler<Constraint> OnIsValid_Constraint;
+		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedValue, System.Object constrainedObject);
+		public event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
 
 
 
@@ -90,17 +90,17 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public virtual string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
+		public virtual bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
         {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetErrorText_Constraint != null)
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
+                OnIsValid_Constraint(this, e, constrainedValue, constrainedObj);
             };
             return e.Result;
         }
-		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedObject, System.Object constrainedValue);
-		public event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
+		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedValue, System.Object constrainedObj);
+		public event IsValid_Handler<Constraint> OnIsValid_Constraint;
 
 
 

@@ -27,6 +27,86 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// This Property is the left Part of the selected Relation.
+        /// </summary>
+    /*
+    NewRelation: FK_Relation_ObjectReferenceProperty_LeftOf_43 
+    A: ZeroOrOne Relation as LeftOf (site: A, from relation ID = 17)
+    B: One ObjectReferenceProperty as LeftPart (site: B, from relation ID = 17)
+    Preferred Storage: MergeA
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Relation LeftOf
+        {
+            get
+            {
+                return LeftOf__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                LeftOf__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int fk_LeftOf
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && LeftOf != null)
+                {
+                    _fk_LeftOf = LeftOf.ID;
+                }
+                return _fk_LeftOf;
+            }
+            set
+            {
+                _fk_LeftOf = value;
+            }
+        }
+        private int _fk_LeftOf;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_LeftOf_43", "LeftOf")]
+        public Kistl.App.Base.Relation__Implementation__ LeftOf__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
+                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_43",
+                        "LeftOf");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
+                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_43",
+                        "LeftOf");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// Pointer zur Objektklasse
         /// </summary>
     /*
@@ -187,103 +267,6 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// This Property is the left Part of the selected Relation.
-        /// </summary>
-    /*
-    NewRelation: FK_Relation_ObjectReferenceProperty_LeftOf_43 
-    A: ZeroOrOne Relation as LeftOf (site: A, from relation ID = 17)
-    B: One ObjectReferenceProperty as LeftPart (site: B, from relation ID = 17)
-    Preferred Storage: MergeA
-    */
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Relation LeftOf
-        {
-            get
-            {
-                return LeftOf__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                LeftOf__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int fk_LeftOf
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && LeftOf != null)
-                {
-                    _fk_LeftOf = LeftOf.ID;
-                }
-                return _fk_LeftOf;
-            }
-            set
-            {
-                _fk_LeftOf = value;
-            }
-        }
-        private int _fk_LeftOf;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_LeftOf_43", "LeftOf")]
-        public Kistl.App.Base.Relation__Implementation__ LeftOf__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.Relation__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_43",
-                        "LeftOf");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.Relation__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_43",
-                        "LeftOf");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Base.Relation__Implementation__)value;
-            }
-        }
-        
-        
-
-        /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public override string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
-            {
-                OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
-            };
-            return e.Result;
-        }
-		public event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
-
-
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -314,6 +297,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
+            {
+                OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
 
 
 
@@ -355,17 +355,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._fk_LeftOf, binStream);
             BinarySerializer.ToStream(this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.ToStream(this._fk_RightOf, binStream);
-            BinarySerializer.ToStream(this._fk_LeftOf, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_LeftOf, binStream);
             BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_RightOf, binStream);
-            BinarySerializer.FromStream(out this._fk_LeftOf, binStream);
         }
 
 #endregion

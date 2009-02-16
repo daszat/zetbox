@@ -23,23 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Returns the String representation of this Method-Parameter Meta Object.
-        /// </summary>
-
-		public override string GetParameterTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetParameterTypeString_BoolParameter != null)
-            {
-                OnGetParameterTypeString_BoolParameter(this, e);
-            };
-            return e.Result;
-        }
-		public event GetParameterTypeString_Handler<BoolParameter> OnGetParameterTypeString_BoolParameter;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
 
@@ -53,6 +36,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetParameterType_Handler<BoolParameter> OnGetParameterType_BoolParameter;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public override string GetParameterTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetParameterTypeString_BoolParameter != null)
+            {
+                OnGetParameterTypeString_BoolParameter(this, e);
+            };
+            return e.Result;
+        }
+		public event GetParameterTypeString_Handler<BoolParameter> OnGetParameterTypeString_BoolParameter;
 
 
 
@@ -106,6 +106,24 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
+			DataStore[7].ParameterName = @"TestBool";
+			DataStore[7].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[7].IsList = false;
+			DataStore[7].IsReturnParameter = false;
+			DataStore[7].Description = null;
+			DataStore[7].Seal();
+			DataStore[29].ParameterName = @"return";
+			DataStore[29].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
+			DataStore[29].IsList = false;
+			DataStore[29].IsReturnParameter = true;
+			DataStore[29].Description = null;
+			DataStore[29].Seal();
+			DataStore[38].ParameterName = @"throwOnError";
+			DataStore[38].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[151];
+			DataStore[38].IsList = false;
+			DataStore[38].IsReturnParameter = false;
+			DataStore[38].Description = @"whether to return null (false) or throw an Exception (true) on error";
+			DataStore[38].Seal();
 	
 		}
 

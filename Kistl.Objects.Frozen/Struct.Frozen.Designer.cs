@@ -23,23 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
-        /// </summary>
-
-		public override string GetDataTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetDataTypeString_Struct != null)
-            {
-                OnGetDataTypeString_Struct(this, e);
-            };
-            return e.Result;
-        }
-		public event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
 
@@ -53,6 +36,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetDataType_Handler<Struct> OnGetDataType_Struct;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
+
+		public override string GetDataTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDataTypeString_Struct != null)
+            {
+                OnGetDataTypeString_Struct(this, e);
+            };
+            return e.Result;
+        }
+		public event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;
 
 
 
@@ -100,6 +100,22 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
+			DataStore[63].ClassName = @"TestPhoneStruct";
+			DataStore[63].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(2) {
+Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[127],
+Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[128],
+})
+;
+			DataStore[63].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+})
+;
+			DataStore[63].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[63].DefaultIcon = null;
+			DataStore[63].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+})
+;
+			DataStore[63].Description = null;
+			DataStore[63].Seal();
 	
 		}
 

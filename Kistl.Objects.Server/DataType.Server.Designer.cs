@@ -72,40 +72,146 @@ namespace Kistl.App.Base
         private string _ClassName;
 
         /// <summary>
-        /// Eigenschaften der Objektklasse
+        /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
     /*
-    NewRelation: FK_DataType_BaseProperty_ObjectClass_1 
-    A: One DataType as ObjectClass (site: A, from relation ID = 1)
-    B: ZeroOrMore BaseProperty as Properties (site: B, from relation ID = 1)
+    NewRelation: FK_DataType_Icon_DataType_15 
+    A: ZeroOrMore DataType as DataType (site: A, no Relation, prop ID=69)
+    B: ZeroOrOne Icon as DefaultIcon (site: B, no Relation, prop ID=69)
+    Preferred Storage: MergeA
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.Icon DefaultIcon
+        {
+            get
+            {
+                return DefaultIcon__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int fk_DefaultIcon
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && DefaultIcon != null)
+                {
+                    _fk_DefaultIcon = DefaultIcon.ID;
+                }
+                return _fk_DefaultIcon;
+            }
+            set
+            {
+                _fk_DefaultIcon = value;
+            }
+        }
+        private int _fk_DefaultIcon;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_15", "DefaultIcon")]
+        public Kistl.App.GUI.Icon__Implementation__ DefaultIcon__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.Icon__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
+                        "Model.FK_DataType_Icon_DataType_15",
+                        "DefaultIcon");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.Icon__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
+                        "Model.FK_DataType_Icon_DataType_15",
+                        "DefaultIcon");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.GUI.Icon__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
+        /// Description of this DataType
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// all implemented Methods in this DataType
+        /// </summary>
+    /*
+    NewRelation: FK_DataType_MethodInvocation_InvokeOnObjectClass_21 
+    A: One DataType as InvokeOnObjectClass (site: A, from relation ID = 11)
+    B: ZeroOrMore MethodInvocation as MethodInvocations (site: B, from relation ID = 11)
     Preferred Storage: MergeB
     */
         // object list property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.BaseProperty> Properties
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get
             {
-                if (_PropertiesWrapper == null)
+                if (_MethodInvocationsWrapper == null)
                 {
-                    _PropertiesWrapper = new EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__>(
-                            Properties__Implementation__);
+                    _MethodInvocationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(
+                            MethodInvocations__Implementation__);
                 }
-                return _PropertiesWrapper;
+                return _MethodInvocationsWrapper;
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_BaseProperty_ObjectClass_1", "Properties")]
-        public EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> Properties__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_21", "MethodInvocations")]
+        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_DataType_BaseProperty_ObjectClass_1",
-                        "Properties");
+                    .GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>(
+                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21",
+                        "MethodInvocations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -114,7 +220,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__> _PropertiesWrapper;
+        private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> _MethodInvocationsWrapper;
 
 
 
@@ -246,120 +352,40 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// Standard Icon wenn IIcon nicht implementiert ist
+        /// Eigenschaften der Objektklasse
         /// </summary>
     /*
-    NewRelation: FK_DataType_Icon_DataType_15 
-    A: ZeroOrMore DataType as DataType (site: A, no Relation, prop ID=69)
-    B: ZeroOrOne Icon as DefaultIcon (site: B, no Relation, prop ID=69)
-    Preferred Storage: MergeA
-    */
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Icon DefaultIcon
-        {
-            get
-            {
-                return DefaultIcon__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)value;
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int fk_DefaultIcon
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DefaultIcon != null)
-                {
-                    _fk_DefaultIcon = DefaultIcon.ID;
-                }
-                return _fk_DefaultIcon;
-            }
-            set
-            {
-                _fk_DefaultIcon = value;
-            }
-        }
-        private int _fk_DefaultIcon;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_15", "DefaultIcon")]
-        public Kistl.App.GUI.Icon__Implementation__ DefaultIcon__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.GUI.Icon__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
-                        "Model.FK_DataType_Icon_DataType_15",
-                        "DefaultIcon");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.GUI.Icon__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
-                        "Model.FK_DataType_Icon_DataType_15",
-                        "DefaultIcon");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.GUI.Icon__Implementation__)value;
-            }
-        }
-        
-        
-
-        /// <summary>
-        /// all implemented Methods in this DataType
-        /// </summary>
-    /*
-    NewRelation: FK_DataType_MethodInvocation_InvokeOnObjectClass_21 
-    A: One DataType as InvokeOnObjectClass (site: A, from relation ID = 11)
-    B: ZeroOrMore MethodInvocation as MethodInvocations (site: B, from relation ID = 11)
+    NewRelation: FK_DataType_BaseProperty_ObjectClass_1 
+    A: One DataType as ObjectClass (site: A, from relation ID = 1)
+    B: ZeroOrMore BaseProperty as Properties (site: B, from relation ID = 1)
     Preferred Storage: MergeB
     */
         // object list property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
+        public ICollection<Kistl.App.Base.BaseProperty> Properties
         {
             get
             {
-                if (_MethodInvocationsWrapper == null)
+                if (_PropertiesWrapper == null)
                 {
-                    _MethodInvocationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(
-                            MethodInvocations__Implementation__);
+                    _PropertiesWrapper = new EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__>(
+                            Properties__Implementation__);
                 }
-                return _MethodInvocationsWrapper;
+                return _PropertiesWrapper;
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_21", "MethodInvocations")]
-        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_BaseProperty_ObjectClass_1", "Properties")]
+        public EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> Properties__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21",
-                        "MethodInvocations");
+                    .GetRelatedCollection<Kistl.App.Base.BaseProperty__Implementation__>(
+                        "Model.FK_DataType_BaseProperty_ObjectClass_1",
+                        "Properties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -368,51 +394,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> _MethodInvocationsWrapper;
-
-
-
-        /// <summary>
-        /// Description of this DataType
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
-        /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
-        /// </summary>
-
-		public virtual string GetDataTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetDataTypeString_DataType != null)
-            {
-                OnGetDataTypeString_DataType(this, e);
-            };
-            return e.Result;
-        }
-		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
+        private EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__> _PropertiesWrapper;
 
 
 
@@ -431,6 +413,24 @@ namespace Kistl.App.Base
         }
 		public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
 		public event GetDataType_Handler<DataType> OnGetDataType_DataType;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
+
+		public virtual string GetDataTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDataTypeString_DataType != null)
+            {
+                OnGetDataTypeString_DataType(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
 
 
 
@@ -473,18 +473,18 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._fk_DefaultIcon, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
 #endregion

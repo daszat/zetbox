@@ -46,20 +46,73 @@ namespace Kistl.App.Base
         private string _ClassName;
 
         /// <summary>
-        /// Eigenschaften der Objektklasse
+        /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
-        // object reference list property
-        public virtual ICollection<Kistl.App.Base.BaseProperty> Properties
+        // object reference property
+        public virtual Kistl.App.GUI.Icon DefaultIcon
         {
             get
             {
-                if (_Properties == null)
-                    _Properties = new ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0));
-                return _Properties;
+                return _DefaultIcon;
             }
-internal set { _Properties = (ReadOnlyCollection<Kistl.App.Base.BaseProperty>)value; }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DefaultIcon != value)
+                {
+                    NotifyPropertyChanging("DefaultIcon");
+                    _DefaultIcon = value;
+                    NotifyPropertyChanged("DefaultIcon");;
+                }
+            }
         }
-        private ReadOnlyCollection<Kistl.App.Base.BaseProperty> _Properties;
+        private Kistl.App.GUI.Icon _DefaultIcon;
+
+        /// <summary>
+        /// Description of this DataType
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// all implemented Methods in this DataType
+        /// </summary>
+        // object reference list property
+        public virtual ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
+        {
+            get
+            {
+                if (_MethodInvocations == null)
+                    _MethodInvocations = new ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0));
+                return _MethodInvocations;
+            }
+            internal set
+            {
+                if (IsReadonly)
+                {
+                    throw new ReadOnlyObjectException();
+                }
+                _MethodInvocations = (ReadOnlyCollection<Kistl.App.Base.MethodInvocation>)value;
+            }
+        }
+        private ReadOnlyCollection<Kistl.App.Base.MethodInvocation> _MethodInvocations;
 
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
@@ -73,7 +126,14 @@ internal set { _Properties = (ReadOnlyCollection<Kistl.App.Base.BaseProperty>)va
                     _Methods = new ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0));
                 return _Methods;
             }
-internal set { _Methods = (ReadOnlyCollection<Kistl.App.Base.Method>)value; }
+            internal set
+            {
+                if (IsReadonly)
+                {
+                    throw new ReadOnlyObjectException();
+                }
+                _Methods = (ReadOnlyCollection<Kistl.App.Base.Method>)value;
+            }
         }
         private ReadOnlyCollection<Kistl.App.Base.Method> _Methods;
 
@@ -101,84 +161,27 @@ internal set { _Methods = (ReadOnlyCollection<Kistl.App.Base.Method>)value; }
         private Kistl.App.Base.Module _Module;
 
         /// <summary>
-        /// Standard Icon wenn IIcon nicht implementiert ist
-        /// </summary>
-        // object reference property
-        public virtual Kistl.App.GUI.Icon DefaultIcon
-        {
-            get
-            {
-                return _DefaultIcon;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DefaultIcon != value)
-                {
-                    NotifyPropertyChanging("DefaultIcon");
-                    _DefaultIcon = value;
-                    NotifyPropertyChanged("DefaultIcon");;
-                }
-            }
-        }
-        private Kistl.App.GUI.Icon _DefaultIcon;
-
-        /// <summary>
-        /// all implemented Methods in this DataType
+        /// Eigenschaften der Objektklasse
         /// </summary>
         // object reference list property
-        public virtual ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
+        public virtual ICollection<Kistl.App.Base.BaseProperty> Properties
         {
             get
             {
-                if (_MethodInvocations == null)
-                    _MethodInvocations = new ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0));
-                return _MethodInvocations;
+                if (_Properties == null)
+                    _Properties = new ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0));
+                return _Properties;
             }
-internal set { _MethodInvocations = (ReadOnlyCollection<Kistl.App.Base.MethodInvocation>)value; }
-        }
-        private ReadOnlyCollection<Kistl.App.Base.MethodInvocation> _MethodInvocations;
-
-        /// <summary>
-        /// Description of this DataType
-        /// </summary>
-        // value type property
-        public virtual string Description
-        {
-            get
+            internal set
             {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
+                if (IsReadonly)
                 {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    throw new ReadOnlyObjectException();
                 }
+                _Properties = (ReadOnlyCollection<Kistl.App.Base.BaseProperty>)value;
             }
         }
-        private string _Description;
-
-        /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
-        /// </summary>
-
-		public virtual string GetDataTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetDataTypeString_DataType != null)
-            {
-                OnGetDataTypeString_DataType(this, e);
-            };
-            return e.Result;
-        }
-		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
-
-
+        private ReadOnlyCollection<Kistl.App.Base.BaseProperty> _Properties;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -195,6 +198,24 @@ internal set { _MethodInvocations = (ReadOnlyCollection<Kistl.App.Base.MethodInv
         }
 		public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
 		public event GetDataType_Handler<DataType> OnGetDataType_DataType;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
+
+		public virtual string GetDataTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDataTypeString_DataType != null)
+            {
+                OnGetDataTypeString_DataType(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
 
 
 

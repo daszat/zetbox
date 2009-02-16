@@ -26,16 +26,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override bool IsValid(System.Object constrainedObj, System.Object constrainedValue) 
+		public override string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
         {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_MethodInvocationConstraint != null)
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetErrorText_MethodInvocationConstraint != null)
             {
-                OnIsValid_MethodInvocationConstraint(this, e, constrainedObj, constrainedValue);
+                OnGetErrorText_MethodInvocationConstraint(this, e, constrainedValue, constrainedObject);
             };
             return e.Result;
         }
-		public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
+		public event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
 
 
 
@@ -43,16 +43,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
+		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
         {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetErrorText_MethodInvocationConstraint != null)
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_MethodInvocationConstraint != null)
             {
-                OnGetErrorText_MethodInvocationConstraint(this, e, constrainedObject, constrainedValue);
+                OnIsValid_MethodInvocationConstraint(this, e, constrainedValue, constrainedObj);
             };
             return e.Result;
         }
-		public event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
+		public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
 
 
 
@@ -100,6 +100,9 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
+			DataStore[193].Reason = @"Method.ObjectClass and InvokeOnObjectClass have to match.";
+			DataStore[193].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[74];
+			DataStore[193].Seal();
 	
 		}
 

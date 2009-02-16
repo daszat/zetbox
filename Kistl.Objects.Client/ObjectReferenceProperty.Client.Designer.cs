@@ -23,6 +23,61 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// This Property is the left Part of the selected Relation.
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Relation LeftOf
+        {
+            get
+            {
+                if (fk_LeftOf.HasValue)
+                    return Context.Find<Kistl.App.Base.Relation>(fk_LeftOf.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                // fix up inverse reference
+                var oldValue = LeftOf;
+                if (value != null && value.ID != fk_LeftOf)
+                {
+                    fk_LeftOf = value.ID;
+                    value.LeftPart = this;
+                }
+                else
+                {
+                    fk_LeftOf = null;
+                    value.LeftPart = null;
+                }
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_LeftOf
+        {
+            get
+            {
+                return _fk_LeftOf;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_LeftOf != value)
+                {
+                    NotifyPropertyChanging("LeftOf");
+                    _fk_LeftOf = value;
+                    NotifyPropertyChanging("LeftOf");
+                }
+            }
+        }
+        private int? _fk_LeftOf;
+
+        /// <summary>
         /// Pointer zur Objektklasse
         /// </summary>
         // object reference property
@@ -121,78 +176,6 @@ namespace Kistl.App.Base
         private int? _fk_RightOf;
 
         /// <summary>
-        /// This Property is the left Part of the selected Relation.
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Relation LeftOf
-        {
-            get
-            {
-                if (fk_LeftOf.HasValue)
-                    return Context.Find<Kistl.App.Base.Relation>(fk_LeftOf.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                // fix up inverse reference
-                var oldValue = LeftOf;
-                if (value != null && value.ID != fk_LeftOf)
-                {
-                    fk_LeftOf = value.ID;
-                    value.LeftPart = this;
-                }
-                else
-                {
-                    fk_LeftOf = null;
-                    value.LeftPart = null;
-                }
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_LeftOf
-        {
-            get
-            {
-                return _fk_LeftOf;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_LeftOf != value)
-                {
-                    NotifyPropertyChanging("LeftOf");
-                    _fk_LeftOf = value;
-                    NotifyPropertyChanging("LeftOf");
-                }
-            }
-        }
-        private int? _fk_LeftOf;
-
-        /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public override string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
-            {
-                OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
-            };
-            return e.Result;
-        }
-		public event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
-
-
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -223,6 +206,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
+            {
+                OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
 
 
 
@@ -264,17 +264,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._fk_LeftOf, binStream);
             BinarySerializer.ToStream(this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.ToStream(this._fk_RightOf, binStream);
-            BinarySerializer.ToStream(this._fk_LeftOf, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_LeftOf, binStream);
             BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_RightOf, binStream);
-            BinarySerializer.FromStream(out this._fk_LeftOf, binStream);
         }
 
 #endregion

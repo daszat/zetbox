@@ -46,6 +46,112 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// Assembly of the Type that is displayed with this Template
+        /// </summary>
+    /*
+    NewRelation: FK_Template_Assembly_Template_39 
+    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=163)
+    B: ZeroOrOne Assembly as DisplayedTypeAssembly (site: B, no Relation, prop ID=163)
+    Preferred Storage: MergeA
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Assembly DisplayedTypeAssembly
+        {
+            get
+            {
+                return DisplayedTypeAssembly__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int fk_DisplayedTypeAssembly
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && DisplayedTypeAssembly != null)
+                {
+                    _fk_DisplayedTypeAssembly = DisplayedTypeAssembly.ID;
+                }
+                return _fk_DisplayedTypeAssembly;
+            }
+            set
+            {
+                _fk_DisplayedTypeAssembly = value;
+            }
+        }
+        private int _fk_DisplayedTypeAssembly;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_39", "DisplayedTypeAssembly")]
+        public Kistl.App.Base.Assembly__Implementation__ DisplayedTypeAssembly__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
+                        "Model.FK_Template_Assembly_Template_39",
+                        "DisplayedTypeAssembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Assembly__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
+                        "Model.FK_Template_Assembly_Template_39",
+                        "DisplayedTypeAssembly");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
+        /// FullName of the Type that is displayed with this Template
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string DisplayedTypeFullName
+        {
+            get
+            {
+                return _DisplayedTypeFullName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DisplayedTypeFullName != value)
+                {
+                    NotifyPropertyChanging("DisplayedTypeFullName");
+                    _DisplayedTypeFullName = value;
+                    NotifyPropertyChanged("DisplayedTypeFullName");;
+                }
+            }
+        }
+        private string _DisplayedTypeFullName;
+
+        /// <summary>
         /// a short name to identify this Template to the user
         /// </summary>
         // value type property
@@ -70,6 +176,53 @@ namespace Kistl.App.GUI
             }
         }
         private string _DisplayName;
+
+        /// <summary>
+        /// The main menu for this Template
+        /// </summary>
+    /*
+    NewRelation: FK_Template_Visual_Template_41 
+    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=165)
+    B: ZeroOrMore Visual as Menu (site: B, no Relation, prop ID=165)
+    Preferred Storage: Separate
+    */
+        // collection reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.GUI.Visual> Menu
+        {
+            get
+            {
+                if (_MenuWrapper == null)
+                {
+                    _MenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__>(
+                            this,
+                            Menu__Implementation__);
+                }
+                return _MenuWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_41", "CollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__> Menu__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__>(
+                        "Model.FK_Template_Visual_Template_41",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__> _MenuWrapper;
+        
 
         /// <summary>
         /// The visual representation of this Template
@@ -152,159 +305,6 @@ namespace Kistl.App.GUI
         
 
         /// <summary>
-        /// FullName of the Type that is displayed with this Template
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string DisplayedTypeFullName
-        {
-            get
-            {
-                return _DisplayedTypeFullName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DisplayedTypeFullName != value)
-                {
-                    NotifyPropertyChanging("DisplayedTypeFullName");
-                    _DisplayedTypeFullName = value;
-                    NotifyPropertyChanged("DisplayedTypeFullName");;
-                }
-            }
-        }
-        private string _DisplayedTypeFullName;
-
-        /// <summary>
-        /// Assembly of the Type that is displayed with this Template
-        /// </summary>
-    /*
-    NewRelation: FK_Template_Assembly_Template_39 
-    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=163)
-    B: ZeroOrOne Assembly as DisplayedTypeAssembly (site: B, no Relation, prop ID=163)
-    Preferred Storage: MergeA
-    */
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Assembly DisplayedTypeAssembly
-        {
-            get
-            {
-                return DisplayedTypeAssembly__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int fk_DisplayedTypeAssembly
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DisplayedTypeAssembly != null)
-                {
-                    _fk_DisplayedTypeAssembly = DisplayedTypeAssembly.ID;
-                }
-                return _fk_DisplayedTypeAssembly;
-            }
-            set
-            {
-                _fk_DisplayedTypeAssembly = value;
-            }
-        }
-        private int _fk_DisplayedTypeAssembly;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_39", "DisplayedTypeAssembly")]
-        public Kistl.App.Base.Assembly__Implementation__ DisplayedTypeAssembly__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.Assembly__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Template_Assembly_Template_39",
-                        "DisplayedTypeAssembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.Assembly__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Template_Assembly_Template_39",
-                        "DisplayedTypeAssembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
-            }
-        }
-        
-        
-
-        /// <summary>
-        /// The main menu for this Template
-        /// </summary>
-    /*
-    NewRelation: FK_Template_Visual_Template_41 
-    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=165)
-    B: ZeroOrMore Visual as Menu (site: B, no Relation, prop ID=165)
-    Preferred Storage: Separate
-    */
-        // collection reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.GUI.Visual> Menu
-        {
-            get
-            {
-                if (_MenuWrapper == null)
-                {
-                    _MenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__>(
-                            this,
-                            Menu__Implementation__);
-                }
-                return _MenuWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_41", "CollectionEntry")]
-        public EntityCollection<Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__> Menu__Implementation__
-        {
-            get
-            {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__>(
-                        "Model.FK_Template_Visual_Template_41",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
-            }
-        }
-        private EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__> _MenuWrapper;
-        
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -359,21 +359,21 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._DisplayName, binStream);
-            BinarySerializer.ToStream(this._fk_VisualTree, binStream);
-            BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this._fk_DisplayedTypeAssembly, binStream);
+            BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
+            BinarySerializer.ToStream(this._DisplayName, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.Menu__Implementation__, binStream);
+            BinarySerializer.ToStream(this._fk_VisualTree, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._DisplayName, binStream);
-            BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
-            BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
             BinarySerializer.FromStream(out this._fk_DisplayedTypeAssembly, binStream);
+            BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
+            BinarySerializer.FromStream(out this._DisplayName, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.Menu__Implementation__, binStream);
+            BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
         }
 
 #endregion

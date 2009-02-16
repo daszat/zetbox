@@ -23,6 +23,29 @@ namespace Kistl.App.Test
 
 
         /// <summary>
+        /// Happy Birthday!
+        /// </summary>
+        // value type property
+        public virtual DateTime? Birthday
+        {
+            get
+            {
+                return _Birthday;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Birthday != value)
+                {
+                    NotifyPropertyChanging("Birthday");
+                    _Birthday = value;
+                    NotifyPropertyChanged("Birthday");;
+                }
+            }
+        }
+        private DateTime? _Birthday;
+
+        /// <summary>
         /// Persons Name
         /// </summary>
         // value type property
@@ -67,29 +90,6 @@ namespace Kistl.App.Test
             set;
         }
   
-        /// <summary>
-        /// Happy Birthday!
-        /// </summary>
-        // value type property
-        public virtual DateTime? Birthday
-        {
-            get
-            {
-                return _Birthday;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Birthday != value)
-                {
-                    NotifyPropertyChanging("Birthday");
-                    _Birthday = value;
-                    NotifyPropertyChanged("Birthday");;
-                }
-            }
-        }
-        private DateTime? _Birthday;
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -128,15 +128,15 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._PersonName, binStream);
             BinarySerializer.ToStream(this._Birthday, binStream);
+            BinarySerializer.ToStream(this._PersonName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._PersonName, binStream);
             BinarySerializer.FromStream(out this._Birthday, binStream);
+            BinarySerializer.FromStream(out this._PersonName, binStream);
         }
 
 #endregion

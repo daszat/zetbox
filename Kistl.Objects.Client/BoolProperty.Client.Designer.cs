@@ -23,23 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public override string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_BoolProperty != null)
-            {
-                OnGetPropertyTypeString_BoolProperty(this, e);
-            };
-            return e.Result;
-        }
-		public event GetPropertyTypeString_Handler<BoolProperty> OnGetPropertyTypeString_BoolProperty;
-
-
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -70,6 +53,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<BoolProperty> OnGetPropertyType_BoolProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_BoolProperty != null)
+            {
+                OnGetPropertyTypeString_BoolProperty(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<BoolProperty> OnGetPropertyTypeString_BoolProperty;
 
 
 

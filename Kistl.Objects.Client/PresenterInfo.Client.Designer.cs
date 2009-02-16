@@ -46,72 +46,6 @@ namespace Kistl.App.GUI
         private Kistl.App.GUI.VisualType _ControlType;
 
         /// <summary>
-        /// Where to find the implementation of the Presenter
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Assembly PresenterAssembly
-        {
-            get
-            {
-                if (fk_PresenterAssembly.HasValue)
-                    return Context.Find<Kistl.App.Base.Assembly>(fk_PresenterAssembly.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_PresenterAssembly
-        {
-            get
-            {
-                return _fk_PresenterAssembly;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_PresenterAssembly != value)
-                {
-                    NotifyPropertyChanging("PresenterAssembly");
-                    _fk_PresenterAssembly = value;
-                    NotifyPropertyChanging("PresenterAssembly");
-                }
-            }
-        }
-        private int? _fk_PresenterAssembly;
-
-        /// <summary>
-        /// The CLR namespace and class name of the Presenter
-        /// </summary>
-        // value type property
-        public virtual string PresenterTypeName
-        {
-            get
-            {
-                return _PresenterTypeName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PresenterTypeName != value)
-                {
-                    NotifyPropertyChanging("PresenterTypeName");
-                    _PresenterTypeName = value;
-                    NotifyPropertyChanged("PresenterTypeName");;
-                }
-            }
-        }
-        private string _PresenterTypeName;
-
-        /// <summary>
         /// The Assembly of the Data Type
         /// </summary>
         // object reference property
@@ -177,6 +111,72 @@ namespace Kistl.App.GUI
         }
         private string _DataTypeName;
 
+        /// <summary>
+        /// Where to find the implementation of the Presenter
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Assembly PresenterAssembly
+        {
+            get
+            {
+                if (fk_PresenterAssembly.HasValue)
+                    return Context.Find<Kistl.App.Base.Assembly>(fk_PresenterAssembly.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_PresenterAssembly
+        {
+            get
+            {
+                return _fk_PresenterAssembly;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_PresenterAssembly != value)
+                {
+                    NotifyPropertyChanging("PresenterAssembly");
+                    _fk_PresenterAssembly = value;
+                    NotifyPropertyChanging("PresenterAssembly");
+                }
+            }
+        }
+        private int? _fk_PresenterAssembly;
+
+        /// <summary>
+        /// The CLR namespace and class name of the Presenter
+        /// </summary>
+        // value type property
+        public virtual string PresenterTypeName
+        {
+            get
+            {
+                return _PresenterTypeName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_PresenterTypeName != value)
+                {
+                    NotifyPropertyChanging("PresenterTypeName");
+                    _PresenterTypeName = value;
+                    NotifyPropertyChanged("PresenterTypeName");;
+                }
+            }
+        }
+        private string _PresenterTypeName;
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -216,20 +216,20 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)this.ControlType, binStream);
-            BinarySerializer.ToStream(this._fk_PresenterAssembly, binStream);
-            BinarySerializer.ToStream(this._PresenterTypeName, binStream);
             BinarySerializer.ToStream(this._fk_DataAssembly, binStream);
             BinarySerializer.ToStream(this._DataTypeName, binStream);
+            BinarySerializer.ToStream(this._fk_PresenterAssembly, binStream);
+            BinarySerializer.ToStream(this._PresenterTypeName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
-            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
-            BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
             BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
             BinarySerializer.FromStream(out this._DataTypeName, binStream);
+            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
+            BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
         }
 
 #endregion

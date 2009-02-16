@@ -72,16 +72,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override bool IsValid(System.Object constrainedObj, System.Object constrainedValue) 
+		public override string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
         {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_IntegerRangeConstraint != null)
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetErrorText_IntegerRangeConstraint != null)
             {
-                OnIsValid_IntegerRangeConstraint(this, e, constrainedObj, constrainedValue);
+                OnGetErrorText_IntegerRangeConstraint(this, e, constrainedValue, constrainedObject);
             };
             return e.Result;
         }
-		public event IsValid_Handler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint;
+		public event GetErrorText_Handler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint;
 
 
 
@@ -89,16 +89,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
+		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
         {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetErrorText_IntegerRangeConstraint != null)
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_IntegerRangeConstraint != null)
             {
-                OnGetErrorText_IntegerRangeConstraint(this, e, constrainedObject, constrainedValue);
+                OnIsValid_IntegerRangeConstraint(this, e, constrainedValue, constrainedObj);
             };
             return e.Result;
         }
-		public event GetErrorText_Handler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint;
+		public event IsValid_Handler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint;
 
 
 
@@ -152,12 +152,21 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
+			DataStore[147].Reason = @"Strings have to have at least one character.";
+			DataStore[147].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[28];
 			DataStore[147].Max = 4000;
 			DataStore[147].Min = 1;
+			DataStore[147].Seal();
+			DataStore[148].Reason = @"strings in the database should not be longer than 4k";
+			DataStore[148].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[172];
 			DataStore[148].Max = 4000;
 			DataStore[148].Min = 0;
+			DataStore[148].Seal();
+			DataStore[149].Reason = @"strings in the database should not be longer than 4k";
+			DataStore[149].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[173];
 			DataStore[149].Max = 4000;
 			DataStore[149].Min = 0;
+			DataStore[149].Seal();
 	
 		}
 

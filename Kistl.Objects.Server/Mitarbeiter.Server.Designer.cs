@@ -46,6 +46,32 @@ namespace Kistl.App.Projekte
         private int _ID;
 
         /// <summary>
+        /// Herzlichen Glückwunsch zum Geburtstag
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual DateTime? Geburtstag
+        {
+            get
+            {
+                return _Geburtstag;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Geburtstag != value)
+                {
+                    NotifyPropertyChanging("Geburtstag");
+                    _Geburtstag = value;
+                    NotifyPropertyChanged("Geburtstag");;
+                }
+            }
+        }
+        private DateTime? _Geburtstag;
+
+        /// <summary>
         /// Vorname Nachname
         /// </summary>
         // value type property
@@ -117,32 +143,6 @@ namespace Kistl.App.Projekte
         }
         private EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> _ProjekteWrapper;
         
-
-        /// <summary>
-        /// Herzlichen Glückwunsch zum Geburtstag
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual DateTime? Geburtstag
-        {
-            get
-            {
-                return _Geburtstag;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Geburtstag != value)
-                {
-                    NotifyPropertyChanging("Geburtstag");
-                    _Geburtstag = value;
-                    NotifyPropertyChanged("Geburtstag");;
-                }
-            }
-        }
-        private DateTime? _Geburtstag;
 
         /// <summary>
         /// NNNN TTMMYY
@@ -252,9 +252,9 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._Geburtstag, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.Projekte__Implementation__, binStream);
-            BinarySerializer.ToStream(this._Geburtstag, binStream);
             BinarySerializer.ToStream(this._SVNr, binStream);
             BinarySerializer.ToStream(this._TelefonNummer, binStream);
         }
@@ -262,9 +262,9 @@ namespace Kistl.App.Projekte
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._Geburtstag, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.Projekte__Implementation__, binStream);
-            BinarySerializer.FromStream(out this._Geburtstag, binStream);
             BinarySerializer.FromStream(out this._SVNr, binStream);
             BinarySerializer.FromStream(out this._TelefonNummer, binStream);
         }

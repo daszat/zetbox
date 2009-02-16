@@ -25,6 +25,125 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        // value type property
+        public virtual string AltText
+        {
+            get
+            {
+                return _AltText;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AltText != value)
+                {
+                    NotifyPropertyChanging("AltText");
+                    _AltText = value;
+                    NotifyPropertyChanged("AltText");;
+                }
+            }
+        }
+        private string _AltText;
+
+        /// <summary>
+        /// The list of constraints applying to this Property
+        /// </summary>
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.Constraint> Constraints
+        {
+            get
+            {
+                if (_ConstraintsWrapper == null)
+                {
+                    List<Kistl.App.Base.Constraint> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Base.Constraint>(this, "Constraints");
+                    else
+                        serverList = new List<Kistl.App.Base.Constraint>();
+                        
+                    _ConstraintsWrapper = new BackReferenceCollection<Kistl.App.Base.Constraint>(
+                        "ConstrainedProperty",
+                        this,
+                        serverList);
+                }
+                return _ConstraintsWrapper;
+            }
+        }
+        
+        private BackReferenceCollection<Kistl.App.Base.Constraint> _ConstraintsWrapper;
+
+        /// <summary>
+        /// Description of this Property
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// Zugehörig zum Modul
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                if (fk_Module.HasValue)
+                    return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_Module
+        {
+            get
+            {
+                return _fk_Module;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_Module != value)
+                {
+                    NotifyPropertyChanging("Module");
+                    _fk_Module = value;
+                    NotifyPropertyChanging("Module");
+                }
+            }
+        }
+        private int? _fk_Module;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // object reference property
         // implement the user-visible interface
         [XmlIgnore()]
@@ -104,143 +223,6 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // value type property
-        public virtual string AltText
-        {
-            get
-            {
-                return _AltText;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AltText != value)
-                {
-                    NotifyPropertyChanging("AltText");
-                    _AltText = value;
-                    NotifyPropertyChanged("AltText");;
-                }
-            }
-        }
-        private string _AltText;
-
-        /// <summary>
-        /// Zugehörig zum Modul
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Module Module
-        {
-            get
-            {
-                if (fk_Module.HasValue)
-                    return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                return _fk_Module;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Module != value)
-                {
-                    NotifyPropertyChanging("Module");
-                    _fk_Module = value;
-                    NotifyPropertyChanging("Module");
-                }
-            }
-        }
-        private int? _fk_Module;
-
-        /// <summary>
-        /// The list of constraints applying to this Property
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.Constraint> Constraints
-        {
-            get
-            {
-                if (_ConstraintsWrapper == null)
-                {
-                    List<Kistl.App.Base.Constraint> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Constraint>(this, "Constraints");
-                    else
-                        serverList = new List<Kistl.App.Base.Constraint>();
-                        
-                    _ConstraintsWrapper = new BackReferenceCollection<Kistl.App.Base.Constraint>(
-                        "ConstrainedProperty",
-                        this,
-                        serverList);
-                }
-                return _ConstraintsWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Base.Constraint> _ConstraintsWrapper;
-
-        /// <summary>
-        /// Description of this Property
-        /// </summary>
-        // value type property
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
-        /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public virtual string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_BaseProperty != null)
-            {
-                OnGetPropertyTypeString_BaseProperty(this, e);
-            };
-            return e.Result;
-        }
-		public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetPropertyTypeString_Handler<BaseProperty> OnGetPropertyTypeString_BaseProperty;
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
 
 		public virtual string GetGUIRepresentation() 
         {
@@ -271,6 +253,24 @@ namespace Kistl.App.Base
         }
 		public delegate void GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
 		public event GetPropertyType_Handler<BaseProperty> OnGetPropertyType_BaseProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public virtual string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_BaseProperty != null)
+            {
+                OnGetPropertyTypeString_BaseProperty(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetPropertyTypeString_Handler<BaseProperty> OnGetPropertyTypeString_BaseProperty;
 
 
 
@@ -312,21 +312,21 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._AltText, binStream);
+            BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._fk_ObjectClass, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
-            BinarySerializer.ToStream(this._AltText, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
-            BinarySerializer.ToStream(this._Description, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._AltText, binStream);
+            BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
-            BinarySerializer.FromStream(out this._AltText, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
         }
 
 #endregion

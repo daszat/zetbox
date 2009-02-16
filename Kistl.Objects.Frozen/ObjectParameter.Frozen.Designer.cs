@@ -46,23 +46,6 @@ namespace Kistl.App.Base
         private Kistl.App.Base.DataType _DataType;
 
         /// <summary>
-        /// Returns the String representation of this Method-Parameter Meta Object.
-        /// </summary>
-
-		public override string GetParameterTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetParameterTypeString_ObjectParameter != null)
-            {
-                OnGetParameterTypeString_ObjectParameter(this, e);
-            };
-            return e.Result;
-        }
-		public event GetParameterTypeString_Handler<ObjectParameter> OnGetParameterTypeString_ObjectParameter;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
 
@@ -76,6 +59,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetParameterType_Handler<ObjectParameter> OnGetParameterType_ObjectParameter;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public override string GetParameterTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetParameterTypeString_ObjectParameter != null)
+            {
+                OnGetParameterTypeString_ObjectParameter(this, e);
+            };
+            return e.Result;
+        }
+		public event GetParameterTypeString_Handler<ObjectParameter> OnGetParameterTypeString_ObjectParameter;
 
 
 
@@ -135,11 +135,41 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
+			DataStore[10].ParameterName = @"TestObjectParameter";
+			DataStore[10].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[10].IsList = false;
+			DataStore[10].IsReturnParameter = false;
+			DataStore[10].Description = null;
 			DataStore[10].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
+			DataStore[10].Seal();
+			DataStore[26].ParameterName = @"Result";
+			DataStore[26].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[124];
+			DataStore[26].IsList = false;
+			DataStore[26].IsReturnParameter = true;
+			DataStore[26].Description = null;
 			DataStore[26].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[26].Seal();
+			DataStore[27].ParameterName = @"Result";
+			DataStore[27].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[125];
+			DataStore[27].IsList = true;
+			DataStore[27].IsReturnParameter = true;
+			DataStore[27].Description = null;
 			DataStore[27].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
+			DataStore[27].Seal();
+			DataStore[36].ParameterName = @"cls";
+			DataStore[36].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[144];
+			DataStore[36].IsList = false;
+			DataStore[36].IsReturnParameter = false;
+			DataStore[36].Description = null;
 			DataStore[36].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[36].Seal();
+			DataStore[39].ParameterName = @"result";
+			DataStore[39].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[156];
+			DataStore[39].IsList = false;
+			DataStore[39].IsReturnParameter = true;
+			DataStore[39].Description = @"returns the TypeRef of the default model for this ObjectClass";
 			DataStore[39].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
+			DataStore[39].Seal();
 	
 		}
 

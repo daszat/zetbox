@@ -46,32 +46,6 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
-        /// The reason of this constraint
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Reason
-        {
-            get
-            {
-                return _Reason;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Reason != value)
-                {
-                    NotifyPropertyChanging("Reason");
-                    _Reason = value;
-                    NotifyPropertyChanged("Reason");;
-                }
-            }
-        }
-        private string _Reason;
-
-        /// <summary>
         /// The property to be constrained
         /// </summary>
     /*
@@ -152,22 +126,30 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// 
+        /// The reason of this constraint
         /// </summary>
-
-		public virtual bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Reason
         {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_Constraint != null)
+            get
             {
-                OnIsValid_Constraint(this, e, constrainedValue, constrainedObj);
-            };
-            return e.Result;
+                return _Reason;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Reason != value)
+                {
+                    NotifyPropertyChanging("Reason");
+                    _Reason = value;
+                    NotifyPropertyChanged("Reason");;
+                }
+            }
         }
-		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedValue, System.Object constrainedObj);
-		public event IsValid_Handler<Constraint> OnIsValid_Constraint;
-
-
+        private string _Reason;
 
         /// <summary>
         /// 
@@ -184,6 +166,24 @@ namespace Kistl.App.Base
         }
 		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedValue, System.Object constrainedObject);
 		public event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_Constraint != null)
+            {
+                OnIsValid_Constraint(this, e, constrainedValue, constrainedObj);
+            };
+            return e.Result;
+        }
+		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedValue, System.Object constrainedObj);
+		public event IsValid_Handler<Constraint> OnIsValid_Constraint;
 
 
 
@@ -225,15 +225,15 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Reason, binStream);
             BinarySerializer.ToStream(this._fk_ConstrainedProperty, binStream);
+            BinarySerializer.ToStream(this._Reason, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Reason, binStream);
             BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
+            BinarySerializer.FromStream(out this._Reason, binStream);
         }
 
 #endregion

@@ -3,6 +3,8 @@
     ClassName="Kistl.Server.Generators.Templates.Implementation.TypeBase" 
     Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
@@ -56,7 +58,8 @@ namespace <%= DataType.Module.Namespace %>
 <%
         ApplyIDPropertyTemplate();
 
-        foreach(Property p in DataType.Properties)
+		// TODO: decouple serializing format from PropertyName order
+        foreach(Property p in DataType.Properties.OrderBy(p => p.PropertyName))
         {
 %>
 
@@ -67,7 +70,7 @@ namespace <%= DataType.Module.Namespace %>
             ApplyPropertyTemplate(p);
         }
 
-        foreach(var m in MethodsToGenerate())
+        foreach(var m in MethodsToGenerate().OrderBy(m => m.MethodName))
         {
 %>
 

@@ -107,23 +107,6 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// Returns the String representation of this Method-Parameter Meta Object.
-        /// </summary>
-
-		public override string GetParameterTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetParameterTypeString_ObjectParameter != null)
-            {
-                OnGetParameterTypeString_ObjectParameter(this, e);
-            };
-            return e.Result;
-        }
-		public event GetParameterTypeString_Handler<ObjectParameter> OnGetParameterTypeString_ObjectParameter;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
 
@@ -137,6 +120,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetParameterType_Handler<ObjectParameter> OnGetParameterType_ObjectParameter;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		public override string GetParameterTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetParameterTypeString_ObjectParameter != null)
+            {
+                OnGetParameterTypeString_ObjectParameter(this, e);
+            };
+            return e.Result;
+        }
+		public event GetParameterTypeString_Handler<ObjectParameter> OnGetParameterTypeString_ObjectParameter;
 
 
 

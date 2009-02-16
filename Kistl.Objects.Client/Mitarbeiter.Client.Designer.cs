@@ -23,6 +23,29 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
+        /// Herzlichen Glückwunsch zum Geburtstag
+        /// </summary>
+        // value type property
+        public virtual DateTime? Geburtstag
+        {
+            get
+            {
+                return _Geburtstag;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Geburtstag != value)
+                {
+                    NotifyPropertyChanging("Geburtstag");
+                    _Geburtstag = value;
+                    NotifyPropertyChanged("Geburtstag");;
+                }
+            }
+        }
+        private DateTime? _Geburtstag;
+
+        /// <summary>
         /// Vorname Nachname
         /// </summary>
         // value type property
@@ -74,29 +97,6 @@ namespace Kistl.App.Projekte
         }
         
         private BackReferenceCollection<Kistl.App.Projekte.Projekt> _ProjekteWrapper;
-
-        /// <summary>
-        /// Herzlichen Glückwunsch zum Geburtstag
-        /// </summary>
-        // value type property
-        public virtual DateTime? Geburtstag
-        {
-            get
-            {
-                return _Geburtstag;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Geburtstag != value)
-                {
-                    NotifyPropertyChanging("Geburtstag");
-                    _Geburtstag = value;
-                    NotifyPropertyChanged("Geburtstag");;
-                }
-            }
-        }
-        private DateTime? _Geburtstag;
 
         /// <summary>
         /// NNNN TTMMYY
@@ -200,8 +200,8 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._Geburtstag, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._SVNr, binStream);
             BinarySerializer.ToStream(this._TelefonNummer, binStream);
         }
@@ -209,8 +209,8 @@ namespace Kistl.App.Projekte
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._Geburtstag, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._SVNr, binStream);
             BinarySerializer.FromStream(out this._TelefonNummer, binStream);
         }

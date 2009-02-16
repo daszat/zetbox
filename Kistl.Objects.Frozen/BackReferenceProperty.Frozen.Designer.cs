@@ -23,29 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Das Property, welches auf diese Klasse zeigt
-        /// </summary>
-        // object reference property
-        public virtual Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
-        {
-            get
-            {
-                return _ReferenceProperty;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ReferenceProperty != value)
-                {
-                    NotifyPropertyChanging("ReferenceProperty");
-                    _ReferenceProperty = value;
-                    NotifyPropertyChanged("ReferenceProperty");;
-                }
-            }
-        }
-        private Kistl.App.Base.ObjectReferenceProperty _ReferenceProperty;
-
-        /// <summary>
         /// Serialisierung der Liste zum Client
         /// </summary>
         // value type property
@@ -69,21 +46,27 @@ namespace Kistl.App.Base
         private bool _PreFetchToClient;
 
         /// <summary>
-        /// Returns the String representation of this Property Meta Object.
+        /// Das Property, welches auf diese Klasse zeigt
         /// </summary>
-
-		public override string GetPropertyTypeString() 
+        // object reference property
+        public virtual Kistl.App.Base.ObjectReferenceProperty ReferenceProperty
         {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_BackReferenceProperty != null)
+            get
             {
-                OnGetPropertyTypeString_BackReferenceProperty(this, e);
-            };
-            return e.Result;
+                return _ReferenceProperty;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ReferenceProperty != value)
+                {
+                    NotifyPropertyChanging("ReferenceProperty");
+                    _ReferenceProperty = value;
+                    NotifyPropertyChanged("ReferenceProperty");;
+                }
+            }
         }
-		public event GetPropertyTypeString_Handler<BackReferenceProperty> OnGetPropertyTypeString_BackReferenceProperty;
-
-
+        private Kistl.App.Base.ObjectReferenceProperty _ReferenceProperty;
 
         /// <summary>
         /// 
@@ -116,6 +99,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<BackReferenceProperty> OnGetPropertyType_BackReferenceProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_BackReferenceProperty != null)
+            {
+                OnGetPropertyTypeString_BackReferenceProperty(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<BackReferenceProperty> OnGetPropertyTypeString_BackReferenceProperty;
 
 
 

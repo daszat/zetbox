@@ -30,23 +30,6 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
-        {
-            var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_MethodInvocationConstraint != null)
-            {
-                OnIsValid_MethodInvocationConstraint(this, e, constrainedValue, constrainedObj);
-            };
-            return e.Result;
-        }
-		public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-
 		public override string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
         {
             var e = new MethodReturnEventArgs<string>();
@@ -57,6 +40,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_MethodInvocationConstraint != null)
+            {
+                OnIsValid_MethodInvocationConstraint(this, e, constrainedValue, constrainedObj);
+            };
+            return e.Result;
+        }
+		public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
 
 
 

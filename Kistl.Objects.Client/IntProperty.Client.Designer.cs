@@ -23,23 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public override string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_IntProperty != null)
-            {
-                OnGetPropertyTypeString_IntProperty(this, e);
-            };
-            return e.Result;
-        }
-		public event GetPropertyTypeString_Handler<IntProperty> OnGetPropertyTypeString_IntProperty;
-
-
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -70,6 +53,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<IntProperty> OnGetPropertyType_IntProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_IntProperty != null)
+            {
+                OnGetPropertyTypeString_IntProperty(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<IntProperty> OnGetPropertyTypeString_IntProperty;
 
 
 

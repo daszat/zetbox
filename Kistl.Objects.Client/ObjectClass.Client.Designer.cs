@@ -23,29 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Tabellenname in der Datenbank
-        /// </summary>
-        // value type property
-        public virtual string TableName
-        {
-            get
-            {
-                return _TableName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_TableName != value)
-                {
-                    NotifyPropertyChanging("TableName");
-                    _TableName = value;
-                    NotifyPropertyChanged("TableName");;
-                }
-            }
-        }
-        private string _TableName;
-
-        /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
         // object reference property
@@ -102,112 +79,6 @@ namespace Kistl.App.Base
         private int? _fk_BaseObjectClass;
 
         /// <summary>
-        /// Liste der vererbten Klassen
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.ObjectClass> SubClasses
-        {
-            get
-            {
-                if (_SubClassesWrapper == null)
-                {
-                    List<Kistl.App.Base.ObjectClass> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses");
-                    else
-                        serverList = new List<Kistl.App.Base.ObjectClass>();
-                        
-                    _SubClassesWrapper = new BackReferenceCollection<Kistl.App.Base.ObjectClass>(
-                        "BaseObjectClass",
-                        this,
-                        serverList);
-                }
-                return _SubClassesWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Base.ObjectClass> _SubClassesWrapper;
-
-        /// <summary>
-        /// Interfaces der Objektklasse
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
-        {
-            get
-            {
-                if (_ImplementsInterfacesWrapper == null)
-                {
-                    List<Kistl.App.Base.Interface> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Interface>(this, "ImplementsInterfaces");
-                    else
-                        serverList = new List<Kistl.App.Base.Interface>();
-                        
-                    _ImplementsInterfacesWrapper = new BackReferenceCollection<Kistl.App.Base.Interface>(
-                        "ObjectClass",
-                        this,
-                        serverList);
-                }
-                return _ImplementsInterfacesWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Base.Interface> _ImplementsInterfacesWrapper;
-
-        /// <summary>
-        /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
-        /// </summary>
-        // value type property
-        public virtual bool IsSimpleObject
-        {
-            get
-            {
-                return _IsSimpleObject;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsSimpleObject != value)
-                {
-                    NotifyPropertyChanging("IsSimpleObject");
-                    _IsSimpleObject = value;
-                    NotifyPropertyChanged("IsSimpleObject");;
-                }
-            }
-        }
-        private bool _IsSimpleObject;
-
-        /// <summary>
-        /// if true then all Instances appear in FozenContext.
-        /// </summary>
-        // value type property
-        public virtual bool IsFrozenObject
-        {
-            get
-            {
-                return _IsFrozenObject;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsFrozenObject != value)
-                {
-                    NotifyPropertyChanging("IsFrozenObject");
-                    _IsFrozenObject = value;
-                    NotifyPropertyChanged("IsFrozenObject");;
-                }
-            }
-        }
-        private bool _IsFrozenObject;
-
-        /// <summary>
         /// The default model to use for the UI
         /// </summary>
         // object reference property
@@ -251,21 +122,133 @@ namespace Kistl.App.Base
         private int? _fk_DefaultModel;
 
         /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
+        /// Interfaces der Objektklasse
         /// </summary>
-
-		public override string GetDataTypeString() 
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
         {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetDataTypeString_ObjectClass != null)
+            get
             {
-                OnGetDataTypeString_ObjectClass(this, e);
-            };
-            return e.Result;
+                if (_ImplementsInterfacesWrapper == null)
+                {
+                    List<Kistl.App.Base.Interface> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Base.Interface>(this, "ImplementsInterfaces");
+                    else
+                        serverList = new List<Kistl.App.Base.Interface>();
+                        
+                    _ImplementsInterfacesWrapper = new BackReferenceCollection<Kistl.App.Base.Interface>(
+                        "ObjectClass",
+                        this,
+                        serverList);
+                }
+                return _ImplementsInterfacesWrapper;
+            }
         }
-		public event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
+        
+        private BackReferenceCollection<Kistl.App.Base.Interface> _ImplementsInterfacesWrapper;
 
+        /// <summary>
+        /// if true then all Instances appear in FozenContext.
+        /// </summary>
+        // value type property
+        public virtual bool IsFrozenObject
+        {
+            get
+            {
+                return _IsFrozenObject;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsFrozenObject != value)
+                {
+                    NotifyPropertyChanging("IsFrozenObject");
+                    _IsFrozenObject = value;
+                    NotifyPropertyChanged("IsFrozenObject");;
+                }
+            }
+        }
+        private bool _IsFrozenObject;
 
+        /// <summary>
+        /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
+        /// </summary>
+        // value type property
+        public virtual bool IsSimpleObject
+        {
+            get
+            {
+                return _IsSimpleObject;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsSimpleObject != value)
+                {
+                    NotifyPropertyChanging("IsSimpleObject");
+                    _IsSimpleObject = value;
+                    NotifyPropertyChanged("IsSimpleObject");;
+                }
+            }
+        }
+        private bool _IsSimpleObject;
+
+        /// <summary>
+        /// Liste der vererbten Klassen
+        /// </summary>
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.ObjectClass> SubClasses
+        {
+            get
+            {
+                if (_SubClassesWrapper == null)
+                {
+                    List<Kistl.App.Base.ObjectClass> serverList;
+                    if (Helper.IsPersistedObject(this))
+                        serverList = Context.GetListOf<Kistl.App.Base.ObjectClass>(this, "SubClasses");
+                    else
+                        serverList = new List<Kistl.App.Base.ObjectClass>();
+                        
+                    _SubClassesWrapper = new BackReferenceCollection<Kistl.App.Base.ObjectClass>(
+                        "BaseObjectClass",
+                        this,
+                        serverList);
+                }
+                return _SubClassesWrapper;
+            }
+        }
+        
+        private BackReferenceCollection<Kistl.App.Base.ObjectClass> _SubClassesWrapper;
+
+        /// <summary>
+        /// Tabellenname in der Datenbank
+        /// </summary>
+        // value type property
+        public virtual string TableName
+        {
+            get
+            {
+                return _TableName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_TableName != value)
+                {
+                    NotifyPropertyChanging("TableName");
+                    _TableName = value;
+                    NotifyPropertyChanged("TableName");;
+                }
+            }
+        }
+        private string _TableName;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -285,20 +268,19 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// 
+        /// Returns the String representation of this Datatype Meta Object.
         /// </summary>
 
-		public virtual IList<Kistl.App.Base.Method> GetInheritedMethods() 
+		public override string GetDataTypeString() 
         {
-            var e = new MethodReturnEventArgs<IList<Kistl.App.Base.Method>>();
-            if (OnGetInheritedMethods_ObjectClass != null)
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDataTypeString_ObjectClass != null)
             {
-                OnGetInheritedMethods_ObjectClass(this, e);
+                OnGetDataTypeString_ObjectClass(this, e);
             };
             return e.Result;
         }
-		public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> ret);
-		public event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
+		public event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
 
 
 
@@ -317,6 +299,24 @@ namespace Kistl.App.Base
         }
 		public delegate void GetDefaultModelRef_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.TypeRef> ret);
 		public event GetDefaultModelRef_Handler<ObjectClass> OnGetDefaultModelRef_ObjectClass;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual IList<Kistl.App.Base.Method> GetInheritedMethods() 
+        {
+            var e = new MethodReturnEventArgs<IList<Kistl.App.Base.Method>>();
+            if (OnGetInheritedMethods_ObjectClass != null)
+            {
+                OnGetInheritedMethods_ObjectClass(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> ret);
+		public event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
 
 
 
@@ -358,21 +358,21 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._TableName, binStream);
             BinarySerializer.ToStream(this._fk_BaseObjectClass, binStream);
-            BinarySerializer.ToStream(this._IsSimpleObject, binStream);
-            BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._fk_DefaultModel, binStream);
+            BinarySerializer.ToStream(this._IsFrozenObject, binStream);
+            BinarySerializer.ToStream(this._IsSimpleObject, binStream);
+            BinarySerializer.ToStream(this._TableName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._TableName, binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
-            BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
-            BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
+            BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
+            BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
+            BinarySerializer.FromStream(out this._TableName, binStream);
         }
 
 #endregion

@@ -25,6 +25,98 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        // value type property
+        public virtual string AltText
+        {
+            get
+            {
+                return _AltText;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AltText != value)
+                {
+                    NotifyPropertyChanging("AltText");
+                    _AltText = value;
+                    NotifyPropertyChanged("AltText");;
+                }
+            }
+        }
+        private string _AltText;
+
+        /// <summary>
+        /// The list of constraints applying to this Property
+        /// </summary>
+        // object reference list property
+        public virtual ICollection<Kistl.App.Base.Constraint> Constraints
+        {
+            get
+            {
+                if (_Constraints == null)
+                    _Constraints = new ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0));
+                return _Constraints;
+            }
+            internal set
+            {
+                if (IsReadonly)
+                {
+                    throw new ReadOnlyObjectException();
+                }
+                _Constraints = (ReadOnlyCollection<Kistl.App.Base.Constraint>)value;
+            }
+        }
+        private ReadOnlyCollection<Kistl.App.Base.Constraint> _Constraints;
+
+        /// <summary>
+        /// Description of this Property
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// Zugehörig zum Modul
+        /// </summary>
+        // object reference property
+        public virtual Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return _Module;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Module != value)
+                {
+                    NotifyPropertyChanging("Module");
+                    _Module = value;
+                    NotifyPropertyChanged("Module");;
+                }
+            }
+        }
+        private Kistl.App.Base.Module _Module;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // object reference property
         public virtual Kistl.App.Base.DataType ObjectClass
         {
@@ -71,109 +163,6 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // value type property
-        public virtual string AltText
-        {
-            get
-            {
-                return _AltText;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AltText != value)
-                {
-                    NotifyPropertyChanging("AltText");
-                    _AltText = value;
-                    NotifyPropertyChanged("AltText");;
-                }
-            }
-        }
-        private string _AltText;
-
-        /// <summary>
-        /// Zugehörig zum Modul
-        /// </summary>
-        // object reference property
-        public virtual Kistl.App.Base.Module Module
-        {
-            get
-            {
-                return _Module;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Module != value)
-                {
-                    NotifyPropertyChanging("Module");
-                    _Module = value;
-                    NotifyPropertyChanged("Module");;
-                }
-            }
-        }
-        private Kistl.App.Base.Module _Module;
-
-        /// <summary>
-        /// The list of constraints applying to this Property
-        /// </summary>
-        // object reference list property
-        public virtual ICollection<Kistl.App.Base.Constraint> Constraints
-        {
-            get
-            {
-                if (_Constraints == null)
-                    _Constraints = new ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0));
-                return _Constraints;
-            }
-internal set { _Constraints = (ReadOnlyCollection<Kistl.App.Base.Constraint>)value; }
-        }
-        private ReadOnlyCollection<Kistl.App.Base.Constraint> _Constraints;
-
-        /// <summary>
-        /// Description of this Property
-        /// </summary>
-        // value type property
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
-        /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public virtual string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_BaseProperty != null)
-            {
-                OnGetPropertyTypeString_BaseProperty(this, e);
-            };
-            return e.Result;
-        }
-		public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetPropertyTypeString_Handler<BaseProperty> OnGetPropertyTypeString_BaseProperty;
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
 
 		public virtual string GetGUIRepresentation() 
         {
@@ -204,6 +193,24 @@ internal set { _Constraints = (ReadOnlyCollection<Kistl.App.Base.Constraint>)val
         }
 		public delegate void GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
 		public event GetPropertyType_Handler<BaseProperty> OnGetPropertyType_BaseProperty;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public virtual string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_BaseProperty != null)
+            {
+                OnGetPropertyTypeString_BaseProperty(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetPropertyTypeString_Handler<BaseProperty> OnGetPropertyTypeString_BaseProperty;
 
 
 

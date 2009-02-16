@@ -46,34 +46,100 @@ namespace Kistl.App.Base
         private string _ClassName;
 
         /// <summary>
-        /// Eigenschaften der Objektklasse
+        /// Standard Icon wenn IIcon nicht implementiert ist
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.Icon DefaultIcon
+        {
+            get
+            {
+                if (fk_DefaultIcon.HasValue)
+                    return Context.Find<Kistl.App.GUI.Icon>(fk_DefaultIcon.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_DefaultIcon
+        {
+            get
+            {
+                return _fk_DefaultIcon;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_DefaultIcon != value)
+                {
+                    NotifyPropertyChanging("DefaultIcon");
+                    _fk_DefaultIcon = value;
+                    NotifyPropertyChanging("DefaultIcon");
+                }
+            }
+        }
+        private int? _fk_DefaultIcon;
+
+        /// <summary>
+        /// Description of this DataType
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
+        /// all implemented Methods in this DataType
         /// </summary>
         // object list property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.BaseProperty> Properties
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get
             {
-                if (_PropertiesWrapper == null)
+                if (_MethodInvocationsWrapper == null)
                 {
-                    List<Kistl.App.Base.BaseProperty> serverList;
+                    List<Kistl.App.Base.MethodInvocation> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
+                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvocations");
                     else
-                        serverList = new List<Kistl.App.Base.BaseProperty>();
+                        serverList = new List<Kistl.App.Base.MethodInvocation>();
                         
-                    _PropertiesWrapper = new BackReferenceCollection<Kistl.App.Base.BaseProperty>(
-                        "ObjectClass",
+                    _MethodInvocationsWrapper = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
+                        "InvokeOnObjectClass",
                         this,
                         serverList);
                 }
-                return _PropertiesWrapper;
+                return _MethodInvocationsWrapper;
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.BaseProperty> _PropertiesWrapper;
+        private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvocationsWrapper;
 
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
@@ -162,118 +228,34 @@ namespace Kistl.App.Base
         private int? _fk_Module;
 
         /// <summary>
-        /// Standard Icon wenn IIcon nicht implementiert ist
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Icon DefaultIcon
-        {
-            get
-            {
-                if (fk_DefaultIcon.HasValue)
-                    return Context.Find<Kistl.App.GUI.Icon>(fk_DefaultIcon.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultIcon
-        {
-            get
-            {
-                return _fk_DefaultIcon;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DefaultIcon != value)
-                {
-                    NotifyPropertyChanging("DefaultIcon");
-                    _fk_DefaultIcon = value;
-                    NotifyPropertyChanging("DefaultIcon");
-                }
-            }
-        }
-        private int? _fk_DefaultIcon;
-
-        /// <summary>
-        /// all implemented Methods in this DataType
+        /// Eigenschaften der Objektklasse
         /// </summary>
         // object list property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
+        public ICollection<Kistl.App.Base.BaseProperty> Properties
         {
             get
             {
-                if (_MethodInvocationsWrapper == null)
+                if (_PropertiesWrapper == null)
                 {
-                    List<Kistl.App.Base.MethodInvocation> serverList;
+                    List<Kistl.App.Base.BaseProperty> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvocations");
+                        serverList = Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
                     else
-                        serverList = new List<Kistl.App.Base.MethodInvocation>();
+                        serverList = new List<Kistl.App.Base.BaseProperty>();
                         
-                    _MethodInvocationsWrapper = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
-                        "InvokeOnObjectClass",
+                    _PropertiesWrapper = new BackReferenceCollection<Kistl.App.Base.BaseProperty>(
+                        "ObjectClass",
                         this,
                         serverList);
                 }
-                return _MethodInvocationsWrapper;
+                return _PropertiesWrapper;
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvocationsWrapper;
-
-        /// <summary>
-        /// Description of this DataType
-        /// </summary>
-        // value type property
-        public virtual string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
-                {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
-                }
-            }
-        }
-        private string _Description;
-
-        /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
-        /// </summary>
-
-		public virtual string GetDataTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetDataTypeString_DataType != null)
-            {
-                OnGetDataTypeString_DataType(this, e);
-            };
-            return e.Result;
-        }
-		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
-
-
+        private BackReferenceCollection<Kistl.App.Base.BaseProperty> _PropertiesWrapper;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -290,6 +272,24 @@ namespace Kistl.App.Base
         }
 		public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
 		public event GetDataType_Handler<DataType> OnGetDataType_DataType;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
+
+		public virtual string GetDataTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDataTypeString_DataType != null)
+            {
+                OnGetDataTypeString_DataType(this, e);
+            };
+            return e.Result;
+        }
+		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
 
 
 
@@ -332,18 +332,18 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._fk_DefaultIcon, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
 #endregion

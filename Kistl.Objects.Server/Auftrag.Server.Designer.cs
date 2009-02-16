@@ -46,86 +46,6 @@ namespace Kistl.App.Projekte
         private int _ID;
 
         /// <summary>
-        /// 
-        /// </summary>
-    /*
-    NewRelation: FK_Auftrag_Mitarbeiter_Auftrag_9 
-    A: ZeroOrMore Auftrag as Auftrag (site: A, no Relation, prop ID=49)
-    B: ZeroOrOne Mitarbeiter as Mitarbeiter (site: B, no Relation, prop ID=49)
-    Preferred Storage: MergeA
-    */
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
-        {
-            get
-            {
-                return Mitarbeiter__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int fk_Mitarbeiter
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Mitarbeiter != null)
-                {
-                    _fk_Mitarbeiter = Mitarbeiter.ID;
-                }
-                return _fk_Mitarbeiter;
-            }
-            set
-            {
-                _fk_Mitarbeiter = value;
-            }
-        }
-        private int _fk_Mitarbeiter;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Mitarbeiter_Auftrag_9", "Mitarbeiter")]
-        public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Auftrag_Mitarbeiter_Auftrag_9",
-                        "Mitarbeiter");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Auftrag_Mitarbeiter_Auftrag_9",
-                        "Mitarbeiter");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
-            }
-        }
-        
-        
-
-        /// <summary>
         /// Bitte füllen Sie einen sprechenden Auftragsnamen aus
         /// </summary>
         // value type property
@@ -152,84 +72,30 @@ namespace Kistl.App.Projekte
         private string _Auftragsname;
 
         /// <summary>
-        /// Projekt zum Auftrag
+        /// Wert in EUR des Auftrages
         /// </summary>
-    /*
-    NewRelation: FK_Projekt_Auftrag_Projekt_10 
-    A: ZeroOrOne Projekt as Projekt (site: A, from relation ID = 10)
-    B: ZeroOrMore Auftrag as Auftraege (site: B, from relation ID = 10)
-    Preferred Storage: MergeB
-    */
-        // object reference property
-        // implement the user-visible interface
+        // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Projekt Projekt
+        [EdmScalarProperty()]
+        public virtual double? Auftragswert
         {
             get
             {
-                return Projekt__Implementation__;
+                return _Auftragswert;
             }
             set
             {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
+                if (_Auftragswert != value)
+                {
+                    NotifyPropertyChanging("Auftragswert");
+                    _Auftragswert = value;
+                    NotifyPropertyChanged("Auftragswert");;
+                }
             }
         }
-        
-        // provide a way to directly access the foreign key int
-        public int fk_Projekt
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Projekt != null)
-                {
-                    _fk_Projekt = Projekt.ID;
-                }
-                return _fk_Projekt;
-            }
-            set
-            {
-                _fk_Projekt = value;
-            }
-        }
-        private int _fk_Projekt;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_10", "Projekt")]
-        public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Auftrag_Projekt_10",
-                        "Projekt");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Auftrag_Projekt_10",
-                        "Projekt");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
-            }
-        }
-        
-        
+        private double? _Auftragswert;
 
         /// <summary>
         /// Kunde des Projektes
@@ -312,30 +178,164 @@ namespace Kistl.App.Projekte
         
 
         /// <summary>
-        /// Wert in EUR des Auftrages
+        /// 
         /// </summary>
-        // value type property
+    /*
+    NewRelation: FK_Auftrag_Mitarbeiter_Auftrag_9 
+    A: ZeroOrMore Auftrag as Auftrag (site: A, no Relation, prop ID=49)
+    B: ZeroOrOne Mitarbeiter as Mitarbeiter (site: B, no Relation, prop ID=49)
+    Preferred Storage: MergeA
+    */
+        // object reference property
+        // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual double? Auftragswert
+        public Kistl.App.Projekte.Mitarbeiter Mitarbeiter
         {
             get
             {
-                return _Auftragswert;
+                return Mitarbeiter__Implementation__;
             }
             set
             {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Auftragswert != value)
-                {
-                    NotifyPropertyChanging("Auftragswert");
-                    _Auftragswert = value;
-                    NotifyPropertyChanged("Auftragswert");;
-                }
+                Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
-        private double? _Auftragswert;
+        
+        // provide a way to directly access the foreign key int
+        public int fk_Mitarbeiter
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && Mitarbeiter != null)
+                {
+                    _fk_Mitarbeiter = Mitarbeiter.ID;
+                }
+                return _fk_Mitarbeiter;
+            }
+            set
+            {
+                _fk_Mitarbeiter = value;
+            }
+        }
+        private int _fk_Mitarbeiter;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Mitarbeiter_Auftrag_9", "Mitarbeiter")]
+        public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
+                        "Model.FK_Auftrag_Mitarbeiter_Auftrag_9",
+                        "Mitarbeiter");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
+                        "Model.FK_Auftrag_Mitarbeiter_Auftrag_9",
+                        "Mitarbeiter");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
+        /// Projekt zum Auftrag
+        /// </summary>
+    /*
+    NewRelation: FK_Projekt_Auftrag_Projekt_10 
+    A: ZeroOrOne Projekt as Projekt (site: A, from relation ID = 10)
+    B: ZeroOrMore Auftrag as Auftraege (site: B, from relation ID = 10)
+    Preferred Storage: MergeB
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Projekte.Projekt Projekt
+        {
+            get
+            {
+                return Projekt__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int fk_Projekt
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && Projekt != null)
+                {
+                    _fk_Projekt = Projekt.ID;
+                }
+                return _fk_Projekt;
+            }
+            set
+            {
+                _fk_Projekt = value;
+            }
+        }
+        private int _fk_Projekt;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_10", "Projekt")]
+        public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
+                        "Model.FK_Projekt_Auftrag_Projekt_10",
+                        "Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
+                        "Model.FK_Projekt_Auftrag_Projekt_10",
+                        "Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
+            }
+        }
+        
+        
 
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word
@@ -392,21 +392,21 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
             BinarySerializer.ToStream(this._Auftragsname, binStream);
-            BinarySerializer.ToStream(this._fk_Projekt, binStream);
-            BinarySerializer.ToStream(this._fk_Kunde, binStream);
             BinarySerializer.ToStream(this._Auftragswert, binStream);
+            BinarySerializer.ToStream(this._fk_Kunde, binStream);
+            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
+            BinarySerializer.ToStream(this._fk_Projekt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._Auftragsname, binStream);
-            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
-            BinarySerializer.FromStream(out this._fk_Kunde, binStream);
             BinarySerializer.FromStream(out this._Auftragswert, binStream);
+            BinarySerializer.FromStream(out this._fk_Kunde, binStream);
+            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
+            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 
 #endregion

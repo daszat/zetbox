@@ -46,6 +46,58 @@ namespace Kistl.App.Zeiterfassung
         private int _ID;
 
         /// <summary>
+        /// Datum
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual DateTime Datum
+        {
+            get
+            {
+                return _Datum;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Datum != value)
+                {
+                    NotifyPropertyChanging("Datum");
+                    _Datum = value;
+                    NotifyPropertyChanged("Datum");;
+                }
+            }
+        }
+        private DateTime _Datum;
+
+        /// <summary>
+        /// Dauer in Stunden
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual double Dauer
+        {
+            get
+            {
+                return _Dauer;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Dauer != value)
+                {
+                    NotifyPropertyChanging("Dauer");
+                    _Dauer = value;
+                    NotifyPropertyChanged("Dauer");;
+                }
+            }
+        }
+        private double _Dauer;
+
+        /// <summary>
         /// Mitarbeiter
         /// </summary>
     /*
@@ -120,6 +172,86 @@ namespace Kistl.App.Zeiterfassung
                     r.Load(); 
                 }
                 r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
+        /// Art der Tätigkeit
+        /// </summary>
+    /*
+    NewRelation: FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23 
+    A: ZeroOrMore Taetigkeit as Taetigkeit (site: A, no Relation, prop ID=88)
+    B: ZeroOrOne TaetigkeitsArt as TaetigkeitsArt (site: B, no Relation, prop ID=88)
+    Preferred Storage: MergeA
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
+        {
+            get
+            {
+                return TaetigkeitsArt__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                TaetigkeitsArt__Implementation__ = (Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int fk_TaetigkeitsArt
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && TaetigkeitsArt != null)
+                {
+                    _fk_TaetigkeitsArt = TaetigkeitsArt.ID;
+                }
+                return _fk_TaetigkeitsArt;
+            }
+            set
+            {
+                _fk_TaetigkeitsArt = value;
+            }
+        }
+        private int _fk_TaetigkeitsArt;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23", "TaetigkeitsArt")]
+        public Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__ TaetigkeitsArt__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__>(
+                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23",
+                        "TaetigkeitsArt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__>(
+                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23",
+                        "TaetigkeitsArt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__)value;
             }
         }
         
@@ -205,138 +337,6 @@ namespace Kistl.App.Zeiterfassung
         
         
 
-        /// <summary>
-        /// Datum
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual DateTime Datum
-        {
-            get
-            {
-                return _Datum;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Datum != value)
-                {
-                    NotifyPropertyChanging("Datum");
-                    _Datum = value;
-                    NotifyPropertyChanged("Datum");;
-                }
-            }
-        }
-        private DateTime _Datum;
-
-        /// <summary>
-        /// Dauer in Stunden
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual double Dauer
-        {
-            get
-            {
-                return _Dauer;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Dauer != value)
-                {
-                    NotifyPropertyChanging("Dauer");
-                    _Dauer = value;
-                    NotifyPropertyChanged("Dauer");;
-                }
-            }
-        }
-        private double _Dauer;
-
-        /// <summary>
-        /// Art der Tätigkeit
-        /// </summary>
-    /*
-    NewRelation: FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23 
-    A: ZeroOrMore Taetigkeit as Taetigkeit (site: A, no Relation, prop ID=88)
-    B: ZeroOrOne TaetigkeitsArt as TaetigkeitsArt (site: B, no Relation, prop ID=88)
-    Preferred Storage: MergeA
-    */
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Zeiterfassung.TaetigkeitsArt TaetigkeitsArt
-        {
-            get
-            {
-                return TaetigkeitsArt__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                TaetigkeitsArt__Implementation__ = (Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__)value;
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int fk_TaetigkeitsArt
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && TaetigkeitsArt != null)
-                {
-                    _fk_TaetigkeitsArt = TaetigkeitsArt.ID;
-                }
-                return _fk_TaetigkeitsArt;
-            }
-            set
-            {
-                _fk_TaetigkeitsArt = value;
-            }
-        }
-        private int _fk_TaetigkeitsArt;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23", "TaetigkeitsArt")]
-        public Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__ TaetigkeitsArt__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__>(
-                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23",
-                        "TaetigkeitsArt");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__>(
-                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23",
-                        "TaetigkeitsArt");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__)value;
-            }
-        }
-        
-        
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -375,21 +375,21 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
-            BinarySerializer.ToStream(this._fk_Zeitkonto, binStream);
             BinarySerializer.ToStream(this._Datum, binStream);
             BinarySerializer.ToStream(this._Dauer, binStream);
+            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
             BinarySerializer.ToStream(this._fk_TaetigkeitsArt, binStream);
+            BinarySerializer.ToStream(this._fk_Zeitkonto, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
-            BinarySerializer.FromStream(out this._fk_Zeitkonto, binStream);
             BinarySerializer.FromStream(out this._Datum, binStream);
             BinarySerializer.FromStream(out this._Dauer, binStream);
+            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._fk_TaetigkeitsArt, binStream);
+            BinarySerializer.FromStream(out this._fk_Zeitkonto, binStream);
         }
 
 #endregion

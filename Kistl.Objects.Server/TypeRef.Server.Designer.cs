@@ -46,32 +46,6 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string FullName
-        {
-            get
-            {
-                return _FullName;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_FullName != value)
-                {
-                    NotifyPropertyChanging("FullName");
-                    _FullName = value;
-                    NotifyPropertyChanged("FullName");;
-                }
-            }
-        }
-        private string _FullName;
-
-        /// <summary>
         /// The assembly containing the referenced Type.
         /// </summary>
     /*
@@ -150,6 +124,32 @@ namespace Kistl.App.Base
         }
         
         
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string FullName
+        {
+            get
+            {
+                return _FullName;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_FullName != value)
+                {
+                    NotifyPropertyChanging("FullName");
+                    _FullName = value;
+                    NotifyPropertyChanged("FullName");;
+                }
+            }
+        }
+        private string _FullName;
 
         /// <summary>
         /// list of type arguments
@@ -254,16 +254,16 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._FullName, binStream);
             BinarySerializer.ToStream(this._fk_Assembly, binStream);
+            BinarySerializer.ToStream(this._FullName, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.GenericArguments__Implementation__, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._FullName, binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
+            BinarySerializer.FromStream(out this._FullName, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.GenericArguments__Implementation__, binStream);
         }
 

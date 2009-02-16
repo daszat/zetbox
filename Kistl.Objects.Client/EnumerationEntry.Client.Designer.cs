@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Description of this Enumeration Entry
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Description != value)
+                {
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
+                }
+            }
+        }
+        private string _Description;
+
+        /// <summary>
         /// Übergeordnete Enumeration
         /// </summary>
         // object reference property
@@ -79,29 +102,6 @@ namespace Kistl.App.Base
         private int? _fk_Enumeration;
 
         /// <summary>
-        /// The CLR value of this entry
-        /// </summary>
-        // value type property
-        public virtual int Value
-        {
-            get
-            {
-                return _Value;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Value != value)
-                {
-                    NotifyPropertyChanging("Value");
-                    _Value = value;
-                    NotifyPropertyChanged("Value");;
-                }
-            }
-        }
-        private int _Value;
-
-        /// <summary>
         /// CLR name of this entry
         /// </summary>
         // value type property
@@ -125,27 +125,27 @@ namespace Kistl.App.Base
         private string _Name;
 
         /// <summary>
-        /// Description of this Enumeration Entry
+        /// The CLR value of this entry
         /// </summary>
         // value type property
-        public virtual string Description
+        public virtual int Value
         {
             get
             {
-                return _Description;
+                return _Value;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
+                if (_Value != value)
                 {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanging("Value");
+                    _Value = value;
+                    NotifyPropertyChanged("Value");;
                 }
             }
         }
-        private string _Description;
+        private int _Value;
 
         // tail template
 
@@ -185,19 +185,19 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Enumeration, binStream);
-            BinarySerializer.ToStream(this._Value, binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._fk_Enumeration, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
+            BinarySerializer.ToStream(this._Value, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
-            BinarySerializer.FromStream(out this._Value, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
+            BinarySerializer.FromStream(out this._Value, binStream);
         }
 
 #endregion

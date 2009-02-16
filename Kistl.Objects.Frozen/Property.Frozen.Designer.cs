@@ -23,6 +23,29 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Whether or not a list-valued property has a index
+        /// </summary>
+        // value type property
+        public virtual bool IsIndexed
+        {
+            get
+            {
+                return _IsIndexed;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsIndexed != value)
+                {
+                    NotifyPropertyChanging("IsIndexed");
+                    _IsIndexed = value;
+                    NotifyPropertyChanged("IsIndexed");;
+                }
+            }
+        }
+        private bool _IsIndexed;
+
+        /// <summary>
         /// 
         /// </summary>
         // value type property
@@ -69,46 +92,6 @@ namespace Kistl.App.Base
         private bool _IsNullable;
 
         /// <summary>
-        /// Whether or not a list-valued property has a index
-        /// </summary>
-        // value type property
-        public virtual bool IsIndexed
-        {
-            get
-            {
-                return _IsIndexed;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsIndexed != value)
-                {
-                    NotifyPropertyChanging("IsIndexed");
-                    _IsIndexed = value;
-                    NotifyPropertyChanged("IsIndexed");;
-                }
-            }
-        }
-        private bool _IsIndexed;
-
-        /// <summary>
-        /// Returns the String representation of this Property Meta Object.
-        /// </summary>
-
-		public override string GetPropertyTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetPropertyTypeString_Property != null)
-            {
-                OnGetPropertyTypeString_Property(this, e);
-            };
-            return e.Result;
-        }
-		public event GetPropertyTypeString_Handler<Property> OnGetPropertyTypeString_Property;
-
-
-
-        /// <summary>
         /// 
         /// </summary>
 
@@ -139,6 +122,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetPropertyType_Handler<Property> OnGetPropertyType_Property;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		public override string GetPropertyTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetPropertyTypeString_Property != null)
+            {
+                OnGetPropertyTypeString_Property(this, e);
+            };
+            return e.Result;
+        }
+		public event GetPropertyTypeString_Handler<Property> OnGetPropertyTypeString_Property;
 
 
 

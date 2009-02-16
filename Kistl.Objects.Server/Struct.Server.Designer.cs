@@ -27,23 +27,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
-        /// </summary>
-
-		public override string GetDataTypeString() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetDataTypeString_Struct != null)
-            {
-                OnGetDataTypeString_Struct(this, e);
-            };
-            return e.Result;
-        }
-		public event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
 
@@ -57,6 +40,23 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public event GetDataType_Handler<Struct> OnGetDataType_Struct;
+
+
+
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
+
+		public override string GetDataTypeString() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDataTypeString_Struct != null)
+            {
+                OnGetDataTypeString_Struct(this, e);
+            };
+            return e.Result;
+        }
+		public event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;
 
 
 

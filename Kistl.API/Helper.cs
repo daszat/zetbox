@@ -323,7 +323,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// TODO: Das passt mir nicht!
+        /// TODO: move to generated function returning a constant
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>

@@ -23,29 +23,6 @@ namespace Kistl.App.Test
 
 
         /// <summary>
-        /// Enter a Number
-        /// </summary>
-        // value type property
-        public virtual string Number
-        {
-            get
-            {
-                return _Number;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Number != value)
-                {
-                    NotifyPropertyChanging("Number");
-                    _Number = value;
-                    NotifyPropertyChanged("Number");;
-                }
-            }
-        }
-        private string _Number;
-
-        /// <summary>
         /// Enter Area Code
         /// </summary>
         // value type property
@@ -68,6 +45,29 @@ namespace Kistl.App.Test
         }
         private string _AreaCode;
 
+        /// <summary>
+        /// Enter a Number
+        /// </summary>
+        // value type property
+        public virtual string Number
+        {
+            get
+            {
+                return _Number;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Number != value)
+                {
+                    NotifyPropertyChanging("Number");
+                    _Number = value;
+                    NotifyPropertyChanged("Number");;
+                }
+            }
+        }
+        private string _Number;
+
 
 #region Serializer
 
@@ -75,15 +75,15 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Number, binStream);
             BinarySerializer.ToStream(this._AreaCode, binStream);
+            BinarySerializer.ToStream(this._Number, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Number, binStream);
             BinarySerializer.FromStream(out this._AreaCode, binStream);
+            BinarySerializer.FromStream(out this._Number, binStream);
         }
 
 #endregion

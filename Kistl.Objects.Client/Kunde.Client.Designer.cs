@@ -23,29 +23,6 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
-        /// Name des Kunden
-        /// </summary>
-        // value type property
-        public virtual string Kundenname
-        {
-            get
-            {
-                return _Kundenname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kundenname != value)
-                {
-                    NotifyPropertyChanging("Kundenname");
-                    _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");;
-                }
-            }
-        }
-        private string _Kundenname;
-
-        /// <summary>
         /// Adresse & Hausnummer
         /// </summary>
         // value type property
@@ -69,50 +46,46 @@ namespace Kistl.App.Projekte
         private string _Adresse;
 
         /// <summary>
-        /// Postleitzahl
+        /// EMails des Kunden - können mehrere sein
         /// </summary>
-        // value type property
-        public virtual string PLZ
+        // value list property
+        public ICollection<string> EMails
         {
             get
             {
-                return _PLZ;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PLZ != value)
+                if (_EMailsWrapper == null)
                 {
-                    NotifyPropertyChanging("PLZ");
-                    _PLZ = value;
-                    NotifyPropertyChanged("PLZ");;
+                    _EMailsWrapper = new NewListPropertyCollection<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(
+                        this,
+                        "EMails");
                 }
+                return _EMailsWrapper;
             }
         }
-        private string _PLZ;
+        private NewListPropertyCollection<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__> _EMailsWrapper;
 
         /// <summary>
-        /// Ort
+        /// Name des Kunden
         /// </summary>
         // value type property
-        public virtual string Ort
+        public virtual string Kundenname
         {
             get
             {
-                return _Ort;
+                return _Kundenname;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Ort != value)
+                if (_Kundenname != value)
                 {
-                    NotifyPropertyChanging("Ort");
-                    _Ort = value;
-                    NotifyPropertyChanged("Ort");;
+                    NotifyPropertyChanging("Kundenname");
+                    _Kundenname = value;
+                    NotifyPropertyChanged("Kundenname");;
                 }
             }
         }
-        private string _Ort;
+        private string _Kundenname;
 
         /// <summary>
         /// Land
@@ -138,23 +111,50 @@ namespace Kistl.App.Projekte
         private string _Land;
 
         /// <summary>
-        /// EMails des Kunden - können mehrere sein
+        /// Ort
         /// </summary>
-        // value list property
-        public ICollection<string> EMails
+        // value type property
+        public virtual string Ort
         {
             get
             {
-                if (_EMailsWrapper == null)
+                return _Ort;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Ort != value)
                 {
-                    _EMailsWrapper = new NewListPropertyCollection<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(
-                        this,
-                        "EMails");
+                    NotifyPropertyChanging("Ort");
+                    _Ort = value;
+                    NotifyPropertyChanged("Ort");;
                 }
-                return _EMailsWrapper;
             }
         }
-        private NewListPropertyCollection<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__> _EMailsWrapper;
+        private string _Ort;
+
+        /// <summary>
+        /// Postleitzahl
+        /// </summary>
+        // value type property
+        public virtual string PLZ
+        {
+            get
+            {
+                return _PLZ;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_PLZ != value)
+                {
+                    NotifyPropertyChanging("PLZ");
+                    _PLZ = value;
+                    NotifyPropertyChanged("PLZ");;
+                }
+            }
+        }
+        private string _PLZ;
 
         // tail template
 
@@ -194,25 +194,25 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Kundenname, binStream);
             BinarySerializer.ToStream(this._Adresse, binStream);
-            BinarySerializer.ToStream(this._PLZ, binStream);
-            BinarySerializer.ToStream(this._Ort, binStream);
-            BinarySerializer.ToStream(this._Land, binStream);
             BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
             BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
+            BinarySerializer.ToStream(this._Kundenname, binStream);
+            BinarySerializer.ToStream(this._Land, binStream);
+            BinarySerializer.ToStream(this._Ort, binStream);
+            BinarySerializer.ToStream(this._PLZ, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Kundenname, binStream);
             BinarySerializer.FromStream(out this._Adresse, binStream);
-            BinarySerializer.FromStream(out this._PLZ, binStream);
-            BinarySerializer.FromStream(out this._Ort, binStream);
-            BinarySerializer.FromStream(out this._Land, binStream);
             BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
             BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
+            BinarySerializer.FromStream(out this._Kundenname, binStream);
+            BinarySerializer.FromStream(out this._Land, binStream);
+            BinarySerializer.FromStream(out this._Ort, binStream);
+            BinarySerializer.FromStream(out this._PLZ, binStream);
         }
 
 #endregion

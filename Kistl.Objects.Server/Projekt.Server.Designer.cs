@@ -46,6 +46,199 @@ namespace Kistl.App.Projekte
         private int _ID;
 
         /// <summary>
+        /// Aufträge
+        /// </summary>
+    /*
+    NewRelation: FK_Projekt_Auftrag_Projekt_10 
+    A: ZeroOrOne Projekt as Projekt (site: A, from relation ID = 10)
+    B: ZeroOrMore Auftrag as Auftraege (site: B, from relation ID = 10)
+    Preferred Storage: MergeB
+    */
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Projekte.Auftrag> Auftraege
+        {
+            get
+            {
+                if (_AuftraegeWrapper == null)
+                {
+                    _AuftraegeWrapper = new EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Auftrag__Implementation__>(
+                            Auftraege__Implementation__);
+                }
+                return _AuftraegeWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_10", "Auftraege")]
+        public EntityCollection<Kistl.App.Projekte.Auftrag__Implementation__> Auftraege__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Projekte.Auftrag__Implementation__>(
+                        "Model.FK_Projekt_Auftrag_Projekt_10",
+                        "Auftraege");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Auftrag__Implementation__> _AuftraegeWrapper;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual double? AufwandGes
+        {
+            get
+            {
+                return _AufwandGes;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_AufwandGes != value)
+                {
+                    NotifyPropertyChanging("AufwandGes");
+                    _AufwandGes = value;
+                    NotifyPropertyChanged("AufwandGes");;
+                }
+            }
+        }
+        private double? _AufwandGes;
+
+        /// <summary>
+        /// Kostenträger
+        /// </summary>
+    /*
+    NewRelation: FK_Projekt_Kostentraeger_Projekt_11 
+    A: One Projekt as Projekt (site: A, from relation ID = 9)
+    B: ZeroOrMore Kostentraeger as Kostentraeger (site: B, from relation ID = 9)
+    Preferred Storage: MergeB
+    */
+        // object list property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
+        {
+            get
+            {
+                if (_KostentraegerWrapper == null)
+                {
+                    _KostentraegerWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Kostentraeger, Kistl.App.Zeiterfassung.Kostentraeger__Implementation__>(
+                            Kostentraeger__Implementation__);
+                }
+                return _KostentraegerWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Kostentraeger_Projekt_11", "Kostentraeger")]
+        public EntityCollection<Kistl.App.Zeiterfassung.Kostentraeger__Implementation__> Kostentraeger__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Kostentraeger__Implementation__>(
+                        "Model.FK_Projekt_Kostentraeger_Projekt_11",
+                        "Kostentraeger");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Kostentraeger, Kistl.App.Zeiterfassung.Kostentraeger__Implementation__> _KostentraegerWrapper;
+
+
+
+        /// <summary>
+        /// Bitte geben Sie den Kundennamen ein
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string Kundenname
+        {
+            get
+            {
+                return _Kundenname;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Kundenname != value)
+                {
+                    NotifyPropertyChanging("Kundenname");
+                    _Kundenname = value;
+                    NotifyPropertyChanged("Kundenname");;
+                }
+            }
+        }
+        private string _Kundenname;
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    NewRelation: FK_Projekt_Mitarbeiter_Projekte_3 
+    A: ZeroOrMore Projekt as Projekte (site: A, from relation ID = 3)
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, from relation ID = 3)
+    Preferred Storage: Separate
+    */
+        // collection reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+        {
+            get
+            {
+                if (_MitarbeiterWrapper == null)
+                {
+                    _MitarbeiterWrapper = new EntityListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
+                            this,
+                            Mitarbeiter__Implementation__);
+                }
+                return _MitarbeiterWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Projekte_3", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> Mitarbeiter__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
+                        "Model.FK_Projekt_Mitarbeiter_Projekte_3",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> _MitarbeiterWrapper;
+        
+
+        /// <summary>
         /// Projektname
         /// </summary>
         // value type property
@@ -118,199 +311,6 @@ namespace Kistl.App.Projekte
 
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-    /*
-    NewRelation: FK_Projekt_Mitarbeiter_Projekte_3 
-    A: ZeroOrMore Projekt as Projekte (site: A, from relation ID = 3)
-    B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, from relation ID = 3)
-    Preferred Storage: Separate
-    */
-        // collection reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
-        {
-            get
-            {
-                if (_MitarbeiterWrapper == null)
-                {
-                    _MitarbeiterWrapper = new EntityListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
-                            this,
-                            Mitarbeiter__Implementation__);
-                }
-                return _MitarbeiterWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Projekte_3", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> Mitarbeiter__Implementation__
-        {
-            get
-            {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
-                        "Model.FK_Projekt_Mitarbeiter_Projekte_3",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
-            }
-        }
-        private EntityListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> _MitarbeiterWrapper;
-        
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual double? AufwandGes
-        {
-            get
-            {
-                return _AufwandGes;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_AufwandGes != value)
-                {
-                    NotifyPropertyChanging("AufwandGes");
-                    _AufwandGes = value;
-                    NotifyPropertyChanged("AufwandGes");;
-                }
-            }
-        }
-        private double? _AufwandGes;
-
-        /// <summary>
-        /// Bitte geben Sie den Kundennamen ein
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual string Kundenname
-        {
-            get
-            {
-                return _Kundenname;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kundenname != value)
-                {
-                    NotifyPropertyChanging("Kundenname");
-                    _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");;
-                }
-            }
-        }
-        private string _Kundenname;
-
-        /// <summary>
-        /// Kostenträger
-        /// </summary>
-    /*
-    NewRelation: FK_Projekt_Kostentraeger_Projekt_11 
-    A: One Projekt as Projekt (site: A, from relation ID = 9)
-    B: ZeroOrMore Kostentraeger as Kostentraeger (site: B, from relation ID = 9)
-    Preferred Storage: MergeB
-    */
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
-        {
-            get
-            {
-                if (_KostentraegerWrapper == null)
-                {
-                    _KostentraegerWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Kostentraeger, Kistl.App.Zeiterfassung.Kostentraeger__Implementation__>(
-                            Kostentraeger__Implementation__);
-                }
-                return _KostentraegerWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Kostentraeger_Projekt_11", "Kostentraeger")]
-        public EntityCollection<Kistl.App.Zeiterfassung.Kostentraeger__Implementation__> Kostentraeger__Implementation__
-        {
-            get
-            {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Kostentraeger__Implementation__>(
-                        "Model.FK_Projekt_Kostentraeger_Projekt_11",
-                        "Kostentraeger");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
-            }
-        }
-        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Kostentraeger, Kistl.App.Zeiterfassung.Kostentraeger__Implementation__> _KostentraegerWrapper;
-
-
-
-        /// <summary>
-        /// Aufträge
-        /// </summary>
-    /*
-    NewRelation: FK_Projekt_Auftrag_Projekt_10 
-    A: ZeroOrOne Projekt as Projekt (site: A, from relation ID = 10)
-    B: ZeroOrMore Auftrag as Auftraege (site: B, from relation ID = 10)
-    Preferred Storage: MergeB
-    */
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Projekte.Auftrag> Auftraege
-        {
-            get
-            {
-                if (_AuftraegeWrapper == null)
-                {
-                    _AuftraegeWrapper = new EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Auftrag__Implementation__>(
-                            Auftraege__Implementation__);
-                }
-                return _AuftraegeWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_10", "Auftraege")]
-        public EntityCollection<Kistl.App.Projekte.Auftrag__Implementation__> Auftraege__Implementation__
-        {
-            get
-            {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Projekte.Auftrag__Implementation__>(
-                        "Model.FK_Projekt_Auftrag_Projekt_10",
-                        "Auftraege");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
-            }
-        }
-        private EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Auftrag__Implementation__> _AuftraegeWrapper;
-
-
-
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -349,19 +349,19 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.ToStream(this._AufwandGes, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.FromStream(out this._AufwandGes, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
+            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
         }
 
 #endregion

@@ -113,18 +113,31 @@ namespace Kistl.App.GUI
 
 		internal static void FillDataStore() {
 			DataStore[1].IconFile = @"app.ico";
+			DataStore[1].Seal();
 			DataStore[2].IconFile = @"Code_ClassCS.ico";
+			DataStore[2].Seal();
 			DataStore[3].IconFile = @"VSProject_genericproject.ico";
+			DataStore[3].Seal();
 			DataStore[4].IconFile = @"Resource_Bitmap.ico";
+			DataStore[4].Seal();
 			DataStore[5].IconFile = @"user.ico";
+			DataStore[5].Seal();
 			DataStore[6].IconFile = @"users.ico";
+			DataStore[6].Seal();
 			DataStore[7].IconFile = @"propertiesORoptions.ico";
+			DataStore[7].Seal();
 			DataStore[8].IconFile = @"UtilityText.ico";
+			DataStore[8].Seal();
 			DataStore[9].IconFile = @"otheroptions.ico";
+			DataStore[9].Seal();
 			DataStore[10].IconFile = @"cab.ico";
+			DataStore[10].Seal();
 			DataStore[11].IconFile = @"Code_Component.ico";
+			DataStore[11].Seal();
 			DataStore[12].IconFile = @"document.ico";
+			DataStore[12].Seal();
 			DataStore[13].IconFile = @"idr_dll.ico";
+			DataStore[13].Seal();
 	
 		}
 

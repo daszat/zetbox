@@ -23,27 +23,73 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// CLR Namespace des Moduls
+        /// Assemblies des Moduls
         /// </summary>
-        // value type property
-        public virtual string Namespace
+        // object reference list property
+        public virtual ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get
             {
-                return _Namespace;
+                if (_Assemblies == null)
+                    _Assemblies = new ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0));
+                return _Assemblies;
+            }
+            internal set
+            {
+                if (IsReadonly)
+                {
+                    throw new ReadOnlyObjectException();
+                }
+                _Assemblies = (ReadOnlyCollection<Kistl.App.Base.Assembly>)value;
+            }
+        }
+        private ReadOnlyCollection<Kistl.App.Base.Assembly> _Assemblies;
+
+        /// <summary>
+        /// Datentypendes Modules
+        /// </summary>
+        // object reference list property
+        public virtual ICollection<Kistl.App.Base.DataType> DataTypes
+        {
+            get
+            {
+                if (_DataTypes == null)
+                    _DataTypes = new ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(0));
+                return _DataTypes;
+            }
+            internal set
+            {
+                if (IsReadonly)
+                {
+                    throw new ReadOnlyObjectException();
+                }
+                _DataTypes = (ReadOnlyCollection<Kistl.App.Base.DataType>)value;
+            }
+        }
+        private ReadOnlyCollection<Kistl.App.Base.DataType> _DataTypes;
+
+        /// <summary>
+        /// Description of this Module
+        /// </summary>
+        // value type property
+        public virtual string Description
+        {
+            get
+            {
+                return _Description;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Namespace != value)
+                if (_Description != value)
                 {
-                    NotifyPropertyChanging("Namespace");
-                    _Namespace = value;
-                    NotifyPropertyChanged("Namespace");;
+                    NotifyPropertyChanging("Description");
+                    _Description = value;
+                    NotifyPropertyChanged("Description");;
                 }
             }
         }
-        private string _Namespace;
+        private string _Description;
 
         /// <summary>
         /// Name des Moduls
@@ -69,59 +115,27 @@ namespace Kistl.App.Base
         private string _ModuleName;
 
         /// <summary>
-        /// Datentypendes Modules
-        /// </summary>
-        // object reference list property
-        public virtual ICollection<Kistl.App.Base.DataType> DataTypes
-        {
-            get
-            {
-                if (_DataTypes == null)
-                    _DataTypes = new ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(0));
-                return _DataTypes;
-            }
-internal set { _DataTypes = (ReadOnlyCollection<Kistl.App.Base.DataType>)value; }
-        }
-        private ReadOnlyCollection<Kistl.App.Base.DataType> _DataTypes;
-
-        /// <summary>
-        /// Assemblies des Moduls
-        /// </summary>
-        // object reference list property
-        public virtual ICollection<Kistl.App.Base.Assembly> Assemblies
-        {
-            get
-            {
-                if (_Assemblies == null)
-                    _Assemblies = new ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0));
-                return _Assemblies;
-            }
-internal set { _Assemblies = (ReadOnlyCollection<Kistl.App.Base.Assembly>)value; }
-        }
-        private ReadOnlyCollection<Kistl.App.Base.Assembly> _Assemblies;
-
-        /// <summary>
-        /// Description of this Module
+        /// CLR Namespace des Moduls
         /// </summary>
         // value type property
-        public virtual string Description
+        public virtual string Namespace
         {
             get
             {
-                return _Description;
+                return _Namespace;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Description != value)
+                if (_Namespace != value)
                 {
-                    NotifyPropertyChanging("Description");
-                    _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanging("Namespace");
+                    _Namespace = value;
+                    NotifyPropertyChanged("Namespace");;
                 }
             }
         }
-        private string _Description;
+        private string _Namespace;
 
         // tail template
 
@@ -226,6 +240,7 @@ Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2],
 })
 ;
 			DataStore[1].Description = null;
+			DataStore[1].Seal();
 			DataStore[2].Namespace = @"Kistl.App.Projekte";
 			DataStore[2].ModuleName = @"Projekte";
 			DataStore[2].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(5) {
@@ -240,6 +255,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
 })
 ;
 			DataStore[2].Description = null;
+			DataStore[2].Seal();
 			DataStore[3].Namespace = @"Kistl.App.Zeiterfassung";
 			DataStore[3].ModuleName = @"Zeiterfassung";
 			DataStore[3].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(5) {
@@ -254,6 +270,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21],
 })
 ;
 			DataStore[3].Description = null;
+			DataStore[3].Seal();
 			DataStore[4].Namespace = @"Kistl.App.GUI";
 			DataStore[4].ModuleName = @"GUI";
 			DataStore[4].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(8) {
@@ -262,37 +279,39 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
 })
 ;
 			DataStore[4].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(5) {
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[3],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15],
 })
 ;
 			DataStore[4].Description = null;
+			DataStore[4].Seal();
 			DataStore[5].Namespace = @"Kistl.App.Test";
 			DataStore[5].ModuleName = @"TestModule";
 			DataStore[5].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(8) {
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[61],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
 })
 ;
 			DataStore[5].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 })
 ;
 			DataStore[5].Description = null;
+			DataStore[5].Seal();
 	
 		}
 
